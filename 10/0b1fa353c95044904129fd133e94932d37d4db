@@ -1,0 +1,255 @@
+scripts/g2_kinematics.py
+  s_87fdc32a1dcd01::t_865ed1c7cc26c0 16-31
+scripts/plan_g2_functional_open.py
+  s_87fdc32a1dcd01::t_0ecfe6ed5491bf 1-12,14-16,18-29,32-34,37-38,41-43
+  s_87fdc32a1dcd01::t_6db7ff2b8582df 13,17,30-31,35-36,39-40
+scripts/run_g2_tabletop.py
+  s_87fdc32a1dcd01::t_637d60db31e7f4 19,368,441-442,444,448
+  s_87fdc32a1dcd01::t_225846b030dddc 74,98,232-233,365-367,369,586-587
+  s_87fdc32a1dcd01::t_3cf6bc5020048b 349,396
+  s_87fdc32a1dcd01::t_febdbcf4596314 69,207,241,567,570,573
+  s_87fdc32a1dcd01::t_77e352b3cbf5e4 72-73,85,194,382,409,569,571-572
+  s_87fdc32a1dcd01::t_a5f00dfca06734 361
+  s_87fdc32a1dcd01::t_ee4829830de982 662-665,667
+  s_87fdc32a1dcd01::t_9c24ade8d517df 680-682
+  s_87fdc32a1dcd01::t_70731bef4fb5c6 75-76,350,384,393,395,397-399,635
+  s_87fdc32a1dcd01::t_864904a1847456 99-100,306,312-314,336-338,426-429
+  s_87fdc32a1dcd01::t_0f2bff93c8fa9e 70-71,86,355-357,363-364,370-381,383,385,387-392,404
+  s_87fdc32a1dcd01::t_b96a2b3c6adf69 68,83-84,229-231,234-235,353-354,358-359,405,407-408,411-415,585,636
+  s_87fdc32a1dcd01::t_c3d4506388333b 77,87,351
+  s_87fdc32a1dcd01::t_0405fcb29d7d7a 410,576,582,626,632,638,679
+  s_87fdc32a1dcd01::t_1a7494449f4a74 660-661,671-673
+scripts/g2_seating_feedback.py
+  s_87fdc32a1dcd01::t_e1a811d5c16a3b 11,50-57
+  s_87fdc32a1dcd01::t_c1ceebb0f28675 58
+scripts/package_g2_evidence.py
+  s_87fdc32a1dcd01::t_c808516c9525c8 20-22
+scripts/launch_g2_trial.py
+  s_87fdc32a1dcd01::t_dc9ec5fee19b69 24,27
+scripts/retarget_g2_pinch_pressure.py
+  s_87fdc32a1dcd01::t_0b6b062fa5d03a 1-38
+scripts/g2_table_collision.py
+  s_87fdc32a1dcd01::t_33988ccaecea23 1-59
+scripts/g2_tabletop_metrics.py
+  s_87fdc32a1dcd01::t_30d6ec9c945784 7,19-20,27
+scripts/audit_g2_trajectories.py
+  s_87fdc32a1dcd01::t_dbf905a6ef4d57 11-14,16,20,26,42-43,62
+  s_87fdc32a1dcd01::t_e5cc7024f8a127 46-54
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "100b1fa353c95044904129fd133e94932d37d4db",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.input_tokens": "41390557",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.cache_read_tokens": "744421136",
+        "tlab.token_usage.output_tokens": "5257539",
+        "tlab.session_started_at": "2026-09-25T11:07:25Z"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "scripts/g2_table_collision.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 59
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/plan_g2_functional_open.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 43
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/retarget_g2_pinch_pressure.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 38
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 49
+      },
+      "deletions": {
+        "human": 1
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 2
+      }
+    },
+    {
+      "old_path": "research/g2-tabletop-baseline-20260925.md",
+      "new_path": "research/g2-tabletop-baseline-20260925.md",
+      "additions": {
+        "human": 37
+      },
+      "deletions": {
+        "human": 3
+      }
+    },
+    {
+      "old_path": "scripts/audit_g2_trajectories.py",
+      "new_path": "scripts/audit_g2_trajectories.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 19
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 5
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/g2_kinematics.py",
+      "new_path": "scripts/g2_kinematics.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 16
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/g2_seating_feedback.py",
+      "new_path": "scripts/g2_seating_feedback.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 10
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/g2_tabletop_metrics.py",
+      "new_path": "scripts/g2_tabletop_metrics.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 4
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 3
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/launch_g2_trial.py",
+      "new_path": "scripts/launch_g2_trial.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/package_g2_evidence.py",
+      "new_path": "scripts/package_g2_evidence.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 3
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/run_g2_tabletop.py",
+      "new_path": "scripts/run_g2_tabletop.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 131
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 27
+          }
+        ]
+      }
+    }
+  ]
+}

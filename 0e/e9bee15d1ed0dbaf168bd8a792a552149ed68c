@@ -1,0 +1,75 @@
+scripts/g2_local_runtime.py
+  s_87fdc32a1dcd01::t_637b49ec2f07c3 1-7,9-72
+  s_87fdc32a1dcd01::t_98d1195a6e1699 8
+scripts/run_g2_tabletop.py
+  s_87fdc32a1dcd01::t_1a56eb48a42a7b 51-52,106-108,375,427-436,787-805,844-849,855-857
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "0ee9bee15d1ed0dbaf168bd8a792a552149ed68c",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_read_tokens": "935798591",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.session_started_at": "2026-09-27T18:12:56Z",
+        "tlab.token_usage.input_tokens": "47361605",
+        "tlab.token_usage.output_tokens": "6408404"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "scripts/g2_local_runtime.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 72
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "old_path": "research/g2-local-policy-20260928.md",
+      "new_path": "research/g2-local-policy-20260928.md",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "old_path": "scripts/run_g2_tabletop.py",
+      "new_path": "scripts/run_g2_tabletop.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 44
+          }
+        ]
+      }
+    }
+  ]
+}

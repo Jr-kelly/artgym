@@ -1,0 +1,260 @@
+scripts/train_g2_local.py
+  s_87fdc32a1dcd01::t_ddc72d67877acc 69,98,169
+scripts/run_g2_tabletop.py
+  s_87fdc32a1dcd01::t_79ffd4a8ad501d 60,152-153,698-699,714,724-727,741-742
+  s_87fdc32a1dcd01::t_42bcb862d018d9 638,672-693,768,1166-1167
+  s_87fdc32a1dcd01::t_783afd89b2d206 723,734-740
+scripts/g2_v2_grip_env.py
+  s_87fdc32a1dcd01::t_de14016f752a53 9-17,36
+scripts/g2_v2_prefix_grip_env.py
+  s_87fdc32a1dcd01::t_ddc72d67877acc 17-19
+scripts/plan_g2_v2_raise.py
+  s_87fdc32a1dcd01::t_c05f5052f93c6a 1-19
+scripts/plan_g2_v2_flip_candidates.py
+  s_87fdc32a1dcd01::t_66b8395220fa80 1-15
+scripts/audit_g2_v2_grip_replay.py
+  s_87fdc32a1dcd01::t_86e315301e79cf 1-15
+scripts/plan_g2_v2_retention_squeeze.py
+  s_87fdc32a1dcd01::t_783afd89b2d206 12,19,31,37-42
+  s_87fdc32a1dcd01::t_79184ab9b6a52d 1-11,13-18,20-30,32-36,43
+scripts/g2_v2_grip_runtime.py
+  s_87fdc32a1dcd01::t_de14016f752a53 10,17
+  s_87fdc32a1dcd01::t_79ffd4a8ad501d 1-9,11-16,18-47
+scripts/prepare_g2_v2_prefix_training.py
+  s_87fdc32a1dcd01::t_ddc72d67877acc 2,7,12-13
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "f1fc5c0145687a697300096d70f23b5afc913faa",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.input_tokens": "52478319",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.output_tokens": "7345089",
+        "tlab.session_started_at": "2026-09-28T11:00:25Z",
+        "tlab.token_usage.cache_read_tokens": "1065342820"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "configs/g2_functional_v2/three-finger-balanced-postlift-preload8-v5.json",
+      "additions": {
+        "human": 492
+      }
+    },
+    {
+      "new_path": "configs/g2_functional_v2/three-finger-balanced-v3-arm.json",
+      "additions": {
+        "human": 9
+      }
+    },
+    {
+      "new_path": "configs/g2_functional_v2/three-finger-balanced-v3.json",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "configs/g2_functional_v2/three-finger-centered-v2-arm.json",
+      "additions": {
+        "human": 9
+      }
+    },
+    {
+      "new_path": "configs/g2_functional_v2/three-finger-centered-v2.json",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "configs/g2_functional_v2/three-finger-staged-rise-v6.json",
+      "additions": {
+        "human": 502
+      }
+    },
+    {
+      "new_path": "scripts/audit_g2_v2_grip_replay.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 15
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/g2_v2_grip_runtime.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 47
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/plan_g2_v2_flip_candidates.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 15
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/plan_g2_v2_raise.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 19
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/plan_g2_v2_retention_squeeze.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 43
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 5
+      },
+      "deletions": {
+        "human": 4
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 5
+      },
+      "deletions": {
+        "human": 4
+      }
+    },
+    {
+      "old_path": "research/g2-functional-v2-20260928.md",
+      "new_path": "research/g2-functional-v2-20260928.md",
+      "additions": {
+        "human": 11
+      }
+    },
+    {
+      "old_path": "scripts/g2_v2_grip_env.py",
+      "new_path": "scripts/g2_v2_grip_env.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 10
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 8
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/g2_v2_prefix_grip_env.py",
+      "new_path": "scripts/g2_v2_prefix_grip_env.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 3
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/prepare_g2_v2_prefix_training.py",
+      "new_path": "scripts/prepare_g2_v2_prefix_training.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 4
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 5
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/run_g2_tabletop.py",
+      "new_path": "scripts/run_g2_tabletop.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 46
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/train_g2_local.py",
+      "new_path": "scripts/train_g2_local.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 3
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+scripts/plan_g2_supported_wrist.py
+  s_87fdc32a1dcd01::t_0c15adff6987b6 52,74,84
+  s_87fdc32a1dcd01::t_b8f2b7a53b8f2a 1-2,4-31,33-35,54-58,60,66-67,69-71,75-81,85-93
+  s_87fdc32a1dcd01::t_dc15398a121d37 36-51,59,63,68,72-73,82-83
+  s_87fdc32a1dcd01::t_145e08a423103e 3,32,53,61-62,64-65
+scripts/g2_contact_geometry.py
+  s_87fdc32a1dcd01::t_df4cf643fda525 15,28-34
+scripts/screen_g2_thumb_surface.py
+  s_87fdc32a1dcd01::t_f3c7cf95622702 10-12
+  s_87fdc32a1dcd01::t_df4cf643fda525 23,48,51
+scripts/refine_g2_free_digit.py
+  s_87fdc32a1dcd01::t_f3c7cf95622702 10-12
+  s_87fdc32a1dcd01::t_df4cf643fda525 23,58
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "564f3fd57bd796fe998d5282bb35778be44dd06c",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.input_tokens": "44438188",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.output_tokens": "5785236",
+        "tlab.session_started_at": "2026-09-25T19:04:24Z",
+        "tlab.token_usage.cache_read_tokens": "838974570"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "scripts/plan_g2_supported_wrist.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 93
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 18
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 18
+      }
+    },
+    {
+      "old_path": "research/g2-overnight-20260926.md",
+      "new_path": "research/g2-overnight-20260926.md",
+      "additions": {
+        "human": 8
+      }
+    },
+    {
+      "old_path": "scripts/g2_contact_geometry.py",
+      "new_path": "scripts/g2_contact_geometry.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 8
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/refine_g2_free_digit.py",
+      "new_path": "scripts/refine_g2_free_digit.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 5
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/screen_g2_thumb_surface.py",
+      "new_path": "scripts/screen_g2_thumb_surface.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 6
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 3
+          }
+        ]
+      }
+    }
+  ]
+}

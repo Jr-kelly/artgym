@@ -1,0 +1,142 @@
+scripts/summarize_g2_finger_surface.py
+  s_87fdc32a1dcd01::t_d9d5e412065fdd 1-58
+scripts/search_g2_palm_down_pinch.py
+  s_87fdc32a1dcd01::t_284fdd8fd6dc40 22,62,67-68,81,100,104-105,126-128
+scripts/run_g2_tabletop.py
+  s_87fdc32a1dcd01::t_e00a8f17425329 842-845,850-856
+scripts/plan_g2_side_pinch_motion.py
+  s_87fdc32a1dcd01::t_e00a8f17425329 30-32,73,95-97,103-105,138
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "6d4200ce73a6a8263ef2e559332d2b5b888e1b9a",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.output_tokens": "7032568",
+        "tlab.token_usage.input_tokens": "50488028",
+        "tlab.session_started_at": "2026-09-28T07:30:36Z",
+        "tlab.token_usage.cache_read_tokens": "1019733499",
+        "tlab.token_usage.cache_creation_tokens": "0"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "configs/g2_finger_surface/side-pinch-squeeze4.json",
+      "additions": {
+        "human": 292
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/new-five-pad-evidence/F1-01-measured-summary.json",
+      "additions": {
+        "human": 269
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/new-five-pad-evidence/F1-02-measured-summary.json",
+      "additions": {
+        "human": 269
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/new-five-pad-evidence/F1-02-preregister.json",
+      "additions": {
+        "human": 9
+      }
+    },
+    {
+      "new_path": "scripts/summarize_g2_finger_surface.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 58
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "old_path": "research/g2-finger-surface-acquisition-20260928.md",
+      "new_path": "research/g2-finger-surface-acquisition-20260928.md",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "old_path": "scripts/plan_g2_side_pinch_motion.py",
+      "new_path": "scripts/plan_g2_side_pinch_motion.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 11
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/run_g2_tabletop.py",
+      "new_path": "scripts/run_g2_tabletop.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 11
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/search_g2_palm_down_pinch.py",
+      "new_path": "scripts/search_g2_palm_down_pinch.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 11
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      }
+    }
+  ]
+}

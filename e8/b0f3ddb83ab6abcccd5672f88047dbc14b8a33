@@ -1,0 +1,196 @@
+scripts/launch_g2_trial.py
+  s_87fdc32a1dcd01::t_7873be5505f7b5 24,27
+scripts/plan_g2_static_seating.py
+  s_87fdc32a1dcd01::t_f718d8672196c5 1-42,44-84
+  s_87fdc32a1dcd01::t_1cf4bbad8a767b 43
+scripts/g2_tabletop_metrics.py
+  s_87fdc32a1dcd01::t_9ec6c40603ef0f 1-16,18-19,21-27
+  s_87fdc32a1dcd01::t_542df57a391ae5 17,20
+scripts/g2_seating_feedback.py
+  s_87fdc32a1dcd01::t_16b4c5c6230e1f 1-32,34-38,40,48-55,57-58,60-67
+  s_87fdc32a1dcd01::t_e804201af03f15 33,39,41-47,56,59
+scripts/package_g2_evidence.py
+  s_87fdc32a1dcd01::t_e39fa254334c03 18-21,23-24,28,32,53,60,65,73
+scripts/run_g2_tabletop.py
+  s_87fdc32a1dcd01::t_1fe7ac2aedd3cb 62,74
+  s_87fdc32a1dcd01::t_0075463481c738 63,348-352,385-392,433
+  s_87fdc32a1dcd01::t_6a0bd6b1d44b08 21,274,278-280,293,425-426,430,473
+  s_87fdc32a1dcd01::t_b5c4cf264677f6 61,311,315-327,480
+  s_87fdc32a1dcd01::t_531c28f858706a 59,347,356,370-376,432
+scripts/plan_g2_seating.py
+  s_87fdc32a1dcd01::t_31ae248fd0b912 23,43-47
+  s_87fdc32a1dcd01::t_7f16c0ec84356c 21,81-84
+  s_87fdc32a1dcd01::t_7669c5856af0ea 22,37-42,48-54,59-61,70,73-74,85-90,102
+  s_87fdc32a1dcd01::t_51cc53163c2a69 55-58,93,98
+scripts/derive_g2_held_grasp.py
+  s_87fdc32a1dcd01::t_171254ec714f88 1-34
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "e8b0f3ddb83ab6abcccd5672f88047dbc14b8a33",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.cache_read_tokens": "730592485",
+        "tlab.token_usage.output_tokens": "5134972",
+        "tlab.token_usage.input_tokens": "40990629",
+        "tlab.session_started_at": "2026-09-25T10:22:37Z"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "scripts/derive_g2_held_grasp.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 34
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/g2_seating_feedback.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 67
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/g2_tabletop_metrics.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 27
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/plan_g2_static_seating.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 84
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 32
+      },
+      "deletions": {
+        "human": 2
+      }
+    },
+    {
+      "old_path": "research/g2-tabletop-baseline-20260925.md",
+      "new_path": "research/g2-tabletop-baseline-20260925.md",
+      "additions": {
+        "human": 25
+      },
+      "deletions": {
+        "human": 2
+      }
+    },
+    {
+      "old_path": "scripts/launch_g2_trial.py",
+      "new_path": "scripts/launch_g2_trial.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/package_g2_evidence.py",
+      "new_path": "scripts/package_g2_evidence.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 12
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 7
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/plan_g2_seating.py",
+      "new_path": "scripts/plan_g2_seating.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 44
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 13
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/run_g2_tabletop.py",
+      "new_path": "scripts/run_g2_tabletop.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 54
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 7
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+scripts/run_g2_tabletop.py
+  s_87fdc32a1dcd01::t_772b670a9f99c3 861
+  s_87fdc32a1dcd01::t_6d50b94712f953 54,115,913-914
+  s_87fdc32a1dcd01::t_732c889e799f80 57,116,837-849,852-855,862,868,946-949,954
+scripts/g2_local_runtime.py
+  s_87fdc32a1dcd01::t_6d50b94712f953 16,21-24,67-68,80-84,94-97,134,150-156
+scripts/audit_g2_prepared_continuous.py
+  s_87fdc32a1dcd01::t_6d50b94712f953 87-88
+  s_87fdc32a1dcd01::t_a9c2a0325bf9eb 27,55-60,62-63,104,106
+  s_87fdc32a1dcd01::t_732c889e799f80 51-52,112-113
+scripts/audit_g2_static_runtime.py
+  s_87fdc32a1dcd01::t_6d50b94712f953 1-37
+scripts/summarize_g2_matched_controls.py
+  s_87fdc32a1dcd01::t_43a9868cb094dd 1-62
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "0581e85ceb412cedb074089936b5034ae34889f3",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.session_started_at": "2026-09-27T22:25:55Z",
+        "tlab.token_usage.cache_read_tokens": "1004153020",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.output_tokens": "6907717",
+        "tlab.token_usage.input_tokens": "49526994"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/g2-local-policy-matched-controls-20260928.csv",
+      "additions": {
+        "human": 13
+      }
+    },
+    {
+      "new_path": "scripts/audit_g2_static_runtime.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 37
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/summarize_g2_matched_controls.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 62
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 5
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 5
+      }
+    },
+    {
+      "old_path": "research/g2-local-policy-20260928.md",
+      "new_path": "research/g2-local-policy-20260928.md",
+      "additions": {
+        "human": 13
+      }
+    },
+    {
+      "old_path": "research/g2-local-policy-control-results-20260928.csv",
+      "new_path": "research/g2-local-policy-control-results-20260928.csv",
+      "additions": {
+        "human": 10
+      }
+    },
+    {
+      "old_path": "research/g2-local-policy-results-20260928.md",
+      "new_path": "research/g2-local-policy-results-20260928.md",
+      "additions": {
+        "human": 34
+      },
+      "deletions": {
+        "human": 1
+      }
+    },
+    {
+      "old_path": "scripts/audit_g2_prepared_continuous.py",
+      "new_path": "scripts/audit_g2_prepared_continuous.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 17
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 7
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/g2_local_runtime.py",
+      "new_path": "scripts/g2_local_runtime.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 24
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 4
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/run_g2_tabletop.py",
+      "new_path": "scripts/run_g2_tabletop.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 31
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 16
+          }
+        ]
+      }
+    }
+  ]
+}

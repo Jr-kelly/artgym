@@ -1,0 +1,164 @@
+scripts/build_g2_measured_knife.py
+  s_87fdc32a1dcd01::t_c46fab722fd224 61-68,72-73
+scripts/g2_knife_geometry.py
+  s_87fdc32a1dcd01::t_27ccafcaf83acf 3,19-22
+scripts/plan_g2_side_pinch_motion.py
+  s_87fdc32a1dcd01::t_de9117e99b5ea6 39,67-69,123,145,166-175,178,195,205-206,215,219,225
+  s_87fdc32a1dcd01::t_4e7f6ffa0270cb 8,40-41,54-57,71-73,95-96,101-102,120-121,146-147
+scripts/run_g2_tabletop.py
+  s_87fdc32a1dcd01::t_5a973395349538 337-341
+  s_87fdc32a1dcd01::t_27ccafcaf83acf 352-358
+  s_87fdc32a1dcd01::t_56b4ceb7da48bf 172-175
+  s_87fdc32a1dcd01::t_9573e799d952fe 567-588
+scripts/audit_g2_measured_thumb_sweep.py
+  s_87fdc32a1dcd01::t_7024ca9e8cf88b 1-68
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "2c671b3c56249d4b8917eb54ea0707dc5c02f920",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.input_tokens": "51058088",
+        "tlab.token_usage.cache_read_tokens": "1034441235",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.session_started_at": "2026-09-28T08:20:19Z",
+        "tlab.token_usage.output_tokens": "7141068"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "configs/g2_finger_surface/measured-motion-extra-self-pairs.json",
+      "additions": {
+        "human": 14
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/measured-asset-evidence/measured-reference-support-gaps.json",
+      "additions": {
+        "human": 65
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/measured-asset-evidence/measured-thumb-sweep-v1.json",
+      "additions": {
+        "human": 959
+      }
+    },
+    {
+      "new_path": "scripts/audit_g2_measured_thumb_sweep.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 68
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "old_path": "research/g2-finger-surface-acquisition-20260928.md",
+      "new_path": "research/g2-finger-surface-acquisition-20260928.md",
+      "additions": {
+        "human": 2
+      },
+      "deletions": {
+        "human": 1
+      }
+    },
+    {
+      "old_path": "research/g2-measured-knife-20260928.md",
+      "new_path": "research/g2-measured-knife-20260928.md",
+      "additions": {
+        "human": 31
+      }
+    },
+    {
+      "old_path": "scripts/build_g2_measured_knife.py",
+      "new_path": "scripts/build_g2_measured_knife.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 10
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/g2_knife_geometry.py",
+      "new_path": "scripts/g2_knife_geometry.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 5
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/plan_g2_side_pinch_motion.py",
+      "new_path": "scripts/plan_g2_side_pinch_motion.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 41
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 8
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/run_g2_tabletop.py",
+      "new_path": "scripts/run_g2_tabletop.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 38
+          }
+        ]
+      }
+    }
+  ]
+}

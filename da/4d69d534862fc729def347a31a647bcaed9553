@@ -1,0 +1,88 @@
+scripts/plan_g2_body_regrasp.py
+  s_87fdc32a1dcd01::t_1929616806f8ac 20,22,25,59
+scripts/run_g2_small_variations.py
+  s_87fdc32a1dcd01::t_df9e69ca0f67b7 10,53-59,82
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "da4d69d534862fc729def347a31a647bcaed9553",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.input_tokens": "41844734",
+        "tlab.token_usage.cache_read_tokens": "766906922",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.session_started_at": "2026-09-25T13:07:15Z",
+        "tlab.token_usage.output_tokens": "5396198"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "assets/robots/g2_wuji/plans/functional-body-face-axis3-v65.json",
+      "additions": {
+        "human": 200
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 30
+      },
+      "deletions": {
+        "human": 2
+      }
+    },
+    {
+      "old_path": "research/g2-tabletop-baseline-20260925.md",
+      "new_path": "research/g2-tabletop-baseline-20260925.md",
+      "additions": {
+        "human": 29
+      },
+      "deletions": {
+        "human": 1
+      }
+    },
+    {
+      "old_path": "scripts/plan_g2_body_regrasp.py",
+      "new_path": "scripts/plan_g2_body_regrasp.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 4
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/run_g2_small_variations.py",
+      "new_path": "scripts/run_g2_small_variations.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 9
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    }
+  ]
+}

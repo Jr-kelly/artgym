@@ -1,0 +1,111 @@
+scripts/refine_g2_free_digit.py
+  s_87fdc32a1dcd01::t_24a5e61f08f5de 28
+  s_87fdc32a1dcd01::t_0e768c896879a8 1-27,29-67
+scripts/summarize_g2_gait.py
+  s_87fdc32a1dcd01::t_038e108d20b030 87-88
+  s_87fdc32a1dcd01::t_3f554038c10686 82-85
+scripts/screen_g2_thumb_surface.py
+  s_87fdc32a1dcd01::t_9513866f2d0bac 1-57
+scripts/derive_g2_held_grasp.py
+  s_87fdc32a1dcd01::t_8dc1ec7602bc15 16-18,42
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "0e220e8102988ba5f9e24dcc3abae127eaf29c90",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.session_started_at": "2026-09-25T19:00:32Z",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.input_tokens": "44290405",
+        "tlab.token_usage.output_tokens": "5769883",
+        "tlab.token_usage.cache_read_tokens": "836553415"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "scripts/refine_g2_free_digit.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 67
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/screen_g2_thumb_surface.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 57
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "old_path": "research/g2-overnight-20260926.md",
+      "new_path": "research/g2-overnight-20260926.md",
+      "additions": {
+        "human": 10
+      }
+    },
+    {
+      "old_path": "scripts/derive_g2_held_grasp.py",
+      "new_path": "scripts/derive_g2_held_grasp.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 4
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/summarize_g2_gait.py",
+      "new_path": "scripts/summarize_g2_gait.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 6
+          }
+        ]
+      }
+    }
+  ]
+}

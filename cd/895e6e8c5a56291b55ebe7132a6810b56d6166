@@ -1,0 +1,122 @@
+scripts/collect_g2_baseline_results.py
+  s_87fdc32a1dcd01::t_5eeede36358b84 1-30,32-37,40-54
+  s_87fdc32a1dcd01::t_3ee2992a07fed5 31,38-39
+scripts/g2_seating_feedback.py
+  s_87fdc32a1dcd01::t_dd3bafe76cf386 50,56,82,86-88,90-92,94
+  s_87fdc32a1dcd01::t_7d92e855071dde 11,57-81,98
+scripts/run_g2_tabletop.py
+  s_87fdc32a1dcd01::t_5a2cc021d6b6f2 64,71,398,437-442
+  s_87fdc32a1dcd01::t_9513215af5cca0 563-566,568-569
+  s_87fdc32a1dcd01::t_d4a433feb05102 65,72,436,444-445,448-451
+  s_87fdc32a1dcd01::t_e072436bc76494 66-67,73,318-319,322,325-363,540
+scripts/plan_g2_static_seating.py
+  s_87fdc32a1dcd01::t_5fa8e7e4eaf4e6 73
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "cd895e6e8c5a56291b55ebe7132a6810b56d6166",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.session_started_at": "2026-09-25T10:54:09Z",
+        "tlab.token_usage.output_tokens": "5158618",
+        "tlab.token_usage.input_tokens": "41024180",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.cache_read_tokens": "733171046"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "scripts/collect_g2_baseline_results.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 54
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 19
+      },
+      "deletions": {
+        "human": 1
+      }
+    },
+    {
+      "old_path": "research/g2-tabletop-baseline-20260925.md",
+      "new_path": "research/g2-tabletop-baseline-20260925.md",
+      "additions": {
+        "human": 23
+      },
+      "deletions": {
+        "human": 1
+      }
+    },
+    {
+      "old_path": "scripts/g2_seating_feedback.py",
+      "new_path": "scripts/g2_seating_feedback.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 37
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 6
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/plan_g2_static_seating.py",
+      "new_path": "scripts/plan_g2_static_seating.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/run_g2_tabletop.py",
+      "new_path": "scripts/run_g2_tabletop.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 70
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 5
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+scripts/audit_g2_input_ablation.py
+  s_87fdc32a1dcd01::t_4c102d801c2e3c 8,18-21,25,46-51,59-60
+scripts/audit_g2_placement_validation.py
+  s_87fdc32a1dcd01::t_d80bb1afe29dd9 21-22,53
+scripts/retry_g2_validation_cli.py
+  s_87fdc32a1dcd01::t_f8bae2df642d3b 64,67
+  s_87fdc32a1dcd01::t_eb9fb49c97695a 1-63,65-66,68-77
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "0e8de26df6c679bcb2e53298d799a2e792b7bdcf",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.session_started_at": "2026-09-27T21:06:36Z",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.cache_read_tokens": "982212422",
+        "tlab.token_usage.output_tokens": "6755082",
+        "tlab.token_usage.input_tokens": "49023168"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "scripts/retry_g2_validation_cli.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 77
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 4
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 4
+      }
+    },
+    {
+      "old_path": "research/g2-local-policy-20260928.md",
+      "new_path": "research/g2-local-policy-20260928.md",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "old_path": "research/g2-local-policy-reproduction-20260928.md",
+      "new_path": "research/g2-local-policy-reproduction-20260928.md",
+      "additions": {
+        "human": 29
+      },
+      "deletions": {
+        "human": 1
+      }
+    },
+    {
+      "old_path": "scripts/audit_g2_input_ablation.py",
+      "new_path": "scripts/audit_g2_input_ablation.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 14
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/audit_g2_placement_validation.py",
+      "new_path": "scripts/audit_g2_placement_validation.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 3
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    }
+  ]
+}

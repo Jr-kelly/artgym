@@ -1,0 +1,212 @@
+scripts/derive_g2_held_grasp.py
+  s_87fdc32a1dcd01::t_5f38593e56ae62 13,16-18,33-34
+research/g2-air-flip-20260925.md
+  s_87fdc32a1dcd01::t_615c71b4a0cff1 1-13
+  s_87fdc32a1dcd01::t_a3063b8d967249 14-16
+scripts/launch_g2_trial.py
+  s_87fdc32a1dcd01::t_6c8b7ce8a2e5bd 16,18
+scripts/run_g2_tabletop.py
+  s_87fdc32a1dcd01::t_b8c081aebec950 85,107,420
+  s_87fdc32a1dcd01::t_45e79b5f53f817 88-89,126,128,375-387,698
+  s_87fdc32a1dcd01::t_8c3c6ffe4f3868 83
+  s_87fdc32a1dcd01::t_6c8b7ce8a2e5bd 84,86-87,104-106,139,389,405,417-419,421-430,751
+scripts/record_g2_status.py
+  s_87fdc32a1dcd01::t_5f38593e56ae62 3,11-12
+scripts/package_g2_evidence.py
+  s_87fdc32a1dcd01::t_fe0d73490129e4 19-20,25,61,80
+scripts/plan_g2_seating.py
+  s_87fdc32a1dcd01::t_0fe3c8460ba655 21,60-63
+  s_87fdc32a1dcd01::t_5d444cd4f14b90 23-25,85-88,111
+scripts/g2_air_flip.py
+  s_87fdc32a1dcd01::t_b8c081aebec950 28,43
+  s_87fdc32a1dcd01::t_615c71b4a0cff1 1-10,13-14,16-27,29-38,41-42,44-71
+  s_87fdc32a1dcd01::t_8c3c6ffe4f3868 11-12,15,39-40
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "d4b68d89a42c6ea3ee03eaeacdf86a979385d8bd",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.cache_read_tokens": "795725675",
+        "tlab.session_started_at": "2026-09-25T14:58:54Z",
+        "tlab.token_usage.output_tokens": "5513451",
+        "tlab.token_usage.input_tokens": "42598913"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "assets/robots/g2_wuji/plans/edge-pinch8-slider-down.json",
+      "additions": {
+        "human": 167
+      }
+    },
+    {
+      "new_path": "research/g2-air-flip-20260925.md",
+      "additions": {
+        "human": 54,
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 12
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/g2_air_flip.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 71
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 14
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 14
+      }
+    },
+    {
+      "old_path": "scripts/derive_g2_held_grasp.py",
+      "new_path": "scripts/derive_g2_held_grasp.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 6
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 3
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/launch_g2_trial.py",
+      "new_path": "scripts/launch_g2_trial.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/package_g2_evidence.py",
+      "new_path": "scripts/package_g2_evidence.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 5
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 3
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/plan_g2_seating.py",
+      "new_path": "scripts/plan_g2_seating.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 13
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 4
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/record_g2_status.py",
+      "new_path": "scripts/record_g2_status.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 3
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/run_g2_tabletop.py",
+      "new_path": "scripts/run_g2_tabletop.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 45
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 5
+          }
+        ]
+      }
+    }
+  ]
+}

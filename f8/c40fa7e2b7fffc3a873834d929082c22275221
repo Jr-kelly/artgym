@@ -1,0 +1,63 @@
+scripts/summarize_g2_validation.py
+  s_87fdc32a1dcd01::t_04921e1c507e85 89-90
+  s_87fdc32a1dcd01::t_26b24c18bb29fb 106-107,130-135
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "f8c40fa7e2b7fffc3a873834d929082c22275221",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.output_tokens": "5469721",
+        "tlab.session_started_at": "2026-09-25T13:57:47Z",
+        "tlab.token_usage.cache_read_tokens": "785170518",
+        "tlab.token_usage.input_tokens": "42133151",
+        "tlab.token_usage.cache_creation_tokens": "0"
+      }
+    }
+  },
+  "changes": [
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 7
+      }
+    },
+    {
+      "old_path": "research/g2-tabletop-baseline-20260925.md",
+      "new_path": "research/g2-tabletop-baseline-20260925.md",
+      "additions": {
+        "human": 7
+      }
+    },
+    {
+      "old_path": "scripts/summarize_g2_validation.py",
+      "new_path": "scripts/summarize_g2_validation.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 10
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    }
+  ]
+}

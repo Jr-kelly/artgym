@@ -1,0 +1,91 @@
+scripts/g2_local_env.py
+  s_87fdc32a1dcd01::t_52b7a692dfdfbe 174,208-211
+scripts/train_g2_local.py
+  s_87fdc32a1dcd01::t_197a65c0427d9c 42,77-85,96-103,118,157,192,222
+  s_87fdc32a1dcd01::t_3f158e01cbf53b 223
+scripts/g2_local_launch.py
+  s_87fdc32a1dcd01::t_69bd7e2e61c441 1-58
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "fa2e1adab21e7acfb61590faa832d49e923fb14d",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.input_tokens": "47339524",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.session_started_at": "2026-09-27T18:05:42Z",
+        "tlab.token_usage.cache_read_tokens": "934301578",
+        "tlab.token_usage.output_tokens": "6394955"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "scripts/g2_local_launch.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 58
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "research/g2-local-policy-20260928.md",
+      "new_path": "research/g2-local-policy-20260928.md",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "old_path": "scripts/g2_local_env.py",
+      "new_path": "scripts/g2_local_env.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 5
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/train_g2_local.py",
+      "new_path": "scripts/train_g2_local.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 23
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    }
+  ]
+}

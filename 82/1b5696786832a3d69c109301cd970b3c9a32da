@@ -1,0 +1,114 @@
+scripts/plan_g2_held_translation.py
+  s_87fdc32a1dcd01::t_ee53eb56b47520 12,22-24,26-27,31-32,52-53,67-68,80-81,84
+scripts/plan_g2_distal_clear_path.py
+  s_87fdc32a1dcd01::t_70cc55d1dd31b2 14-16,31,37-38,53,58,68
+scripts/plan_g2_pinky_support.py
+  s_87fdc32a1dcd01::t_d50b28b7200512 19,30-31,34,37-40,45-49,51,61,64-68,72-74,76-77
+  s_87fdc32a1dcd01::t_eb5e0fe5a7fd1a 17-18,20,23-27,41-43,60,62,71,75
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "821b5696786832a3d69c109301cd970b3c9a32da",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_read_tokens": "880757518",
+        "tlab.session_started_at": "2026-09-25T21:23:40Z",
+        "tlab.token_usage.input_tokens": "45387945",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.output_tokens": "6050626"
+      }
+    }
+  },
+  "changes": [
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 12
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 12
+      }
+    },
+    {
+      "old_path": "research/g2-overnight-20260926.md",
+      "new_path": "research/g2-overnight-20260926.md",
+      "additions": {
+        "human": 11
+      }
+    },
+    {
+      "old_path": "scripts/plan_g2_distal_clear_path.py",
+      "new_path": "scripts/plan_g2_distal_clear_path.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 9
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 6
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/plan_g2_held_translation.py",
+      "new_path": "scripts/plan_g2_held_translation.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 15
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 6
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/plan_g2_pinky_support.py",
+      "new_path": "scripts/plan_g2_pinky_support.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 40
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 11
+          }
+        ]
+      }
+    }
+  ]
+}

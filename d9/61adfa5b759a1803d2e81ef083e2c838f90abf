@@ -1,0 +1,78 @@
+scripts/run_g2_small_variations.py
+  s_87fdc32a1dcd01::t_c174bbdacc8084 1-171
+scripts/launch_g2_trial.py
+  s_87fdc32a1dcd01::t_e08b144c26a57c 15,18-23,26
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "d961adfa5b759a1803d2e81ef083e2c838f90abf",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.session_started_at": "2026-09-25T12:58:35Z",
+        "tlab.token_usage.input_tokens": "41814182",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.output_tokens": "5376923",
+        "tlab.token_usage.cache_read_tokens": "763454701"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "scripts/run_g2_small_variations.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 171
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 8
+      },
+      "deletions": {
+        "human": 1
+      }
+    },
+    {
+      "old_path": "research/g2-tabletop-baseline-20260925.md",
+      "new_path": "research/g2-tabletop-baseline-20260925.md",
+      "additions": {
+        "human": 7
+      }
+    },
+    {
+      "old_path": "scripts/launch_g2_trial.py",
+      "new_path": "scripts/launch_g2_trial.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 8
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+research/g2-finger-surface-reference-20260928.md
+  s_87fdc32a1dcd01::t_d4f9c0ff954f02 1-62
+scripts/audit_g2_finger_surface_target.py
+  s_87fdc32a1dcd01::t_d83681a953c3c4 93
+  s_87fdc32a1dcd01::t_3e7b7a81af0281 1-87,89-92,94-139
+  s_87fdc32a1dcd01::t_56f3c42ac77db8 88
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "cee4bc00bfafcc9275aa703f49f97ae9fcc8efd9",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.output_tokens": "6973835",
+        "tlab.token_usage.input_tokens": "50027052",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.cache_read_tokens": "1011840807",
+        "tlab.session_started_at": "2026-09-28T06:48:46Z"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "configs/g2_finger_surface/operation-target-v1.json",
+      "additions": {
+        "human": 251
+      }
+    },
+    {
+      "new_path": "configs/g2_finger_surface/preserved-baseline.json",
+      "additions": {
+        "human": 24
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/contact-comparison.json",
+      "additions": {
+        "human": 255
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-reference-20260928.md",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 62
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/audit_g2_finger_surface_target.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 139
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 5
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 5
+      }
+    }
+  ]
+}
