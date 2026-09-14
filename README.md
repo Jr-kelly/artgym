@@ -1,5 +1,9 @@
 # ArtGym
 
+This repository is the official implementation of **ArtManip: Category-Level Articulated In-Hand Manipulation**.
+
+[Paper](https://arxiv.org/abs/2609.12498) · [Project Page](https://artmanip.github.io/)
+
 ArtGym contains Isaac Gym environments and scripts for articulated-object grasping, manipulation, teacher training, student distillation, and simulation evaluation.
 
 ## Clone
@@ -370,3 +374,16 @@ refer to [deploy.md](deploy.md) for details
 ## Acknowledgements
 
 We thank the authors and contributors of [SimToolReal](https://simtoolreal.github.io/), [Lightning Grasp](https://github.com/zhaohengyin/lightning-grasp), and [Hora](https://github.com/HaozhiQi/hora) for sharing their code and research with the community. We appreciate their contributions to open-source robotics research.
+
+## Citation
+
+If you find this work useful in your research, please cite:
+
+```bibtex
+@article{yang2026artmanip,
+  title={{ArtManip}: Category-Level Articulated In-Hand Manipulation},
+  author={Yang, Yang and Liu, Tengyu and Li, Puhao and Chen, Zeyuan and Li, Yuyang and Wang, Xingwan and Wu, Yingying and Cui, Zhaopeng and Huang, Siyuan},
+  journal={arXiv preprint arXiv:2609.12498},
+  year={2026}
+}
+```
