@@ -1,0 +1,546 @@
+wuji_demo.md
+  s_87fdc32a1dcd01::t_2520c408bf39cc 1-14,16-111
+  s_87fdc32a1dcd01::t_3a12f601c2f726 15
+README.md
+  s_87fdc32a1dcd01::t_2520c408bf39cc 3-23
+requirements-wuji-demo.txt
+  s_87fdc32a1dcd01::t_2520c408bf39cc 1-9
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "ba154df743a76a16c9620f4ee0161ee4912221de",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.session_started_at": "2026-09-20T15:12:33Z",
+        "tlab.token_usage.cache_read_tokens": "76458022",
+        "tlab.token_usage.input_tokens": "6466899",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.output_tokens": "446130"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "assets/demo/wuji_knife/README.md",
+      "additions": {
+        "human": 21
+      }
+    },
+    {
+      "new_path": "assets/demo/wuji_knife/fingertip_preset.yaml",
+      "additions": {
+        "human": 1167
+      }
+    },
+    {
+      "new_path": "assets/demo/wuji_knife/grasp_seeds.yaml",
+      "additions": {
+        "human": 269
+      }
+    },
+    {
+      "new_path": "assets/demo/wuji_knife/preset.yaml",
+      "additions": {
+        "human": 688
+      }
+    },
+    {
+      "new_path": "assets/demo/wuji_knife/slim/mobility.urdf",
+      "additions": {
+        "human": 2
+      }
+    },
+    {
+      "new_path": "assets/demo/wuji_knife/slim/parameters.json",
+      "additions": {
+        "human": 34
+      }
+    },
+    {
+      "new_path": "assets/demo/wuji_knife/slim_preset.yaml",
+      "additions": {
+        "human": 389
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/.gitignore",
+      "additions": {
+        "human": 2
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/README.md",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/hand_config.yaml",
+      "additions": {
+        "human": 128
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_base_link.obj",
+      "additions": {
+        "human": 1115
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_index_link1.obj",
+      "additions": {
+        "human": 407
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_index_link2.obj",
+      "additions": {
+        "human": 1757
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_index_link3.obj",
+      "additions": {
+        "human": 2156
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_index_link4.obj",
+      "additions": {
+        "human": 1502
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_index_pad_link.obj",
+      "additions": {
+        "human": 1988
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_middle_link1.obj",
+      "additions": {
+        "human": 410
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_middle_link2.obj",
+      "additions": {
+        "human": 1769
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_middle_link3.obj",
+      "additions": {
+        "human": 2171
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_middle_link4.obj",
+      "additions": {
+        "human": 1502
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_middle_pad_link.obj",
+      "additions": {
+        "human": 2003
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_pinky_link1.obj",
+      "additions": {
+        "human": 404
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_pinky_link2.obj",
+      "additions": {
+        "human": 1712
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_pinky_link3.obj",
+      "additions": {
+        "human": 2081
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_pinky_link4.obj",
+      "additions": {
+        "human": 1502
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_pinky_pad_link.obj",
+      "additions": {
+        "human": 2096
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_ring_link1.obj",
+      "additions": {
+        "human": 398
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_ring_link2.obj",
+      "additions": {
+        "human": 1751
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_ring_link3.obj",
+      "additions": {
+        "human": 2150
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_ring_link4.obj",
+      "additions": {
+        "human": 1490
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_ring_pad_link.obj",
+      "additions": {
+        "human": 1988
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_thumb_link1.obj",
+      "additions": {
+        "human": 995
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_thumb_link2.obj",
+      "additions": {
+        "human": 1730
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_thumb_link3.obj",
+      "additions": {
+        "human": 1592
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_thumb_link4.obj",
+      "additions": {
+        "human": 1583
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/collision/hand_r_thumb_pad_link.obj",
+      "additions": {
+        "human": 2276
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_base_link.obj",
+      "additions": {
+        "human": 69632
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_index_link1.obj",
+      "additions": {
+        "human": 1596
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_index_link2.obj",
+      "additions": {
+        "human": 8613
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_index_link3.obj",
+      "additions": {
+        "human": 5330
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_index_link4.obj",
+      "additions": {
+        "human": 15043
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_index_pad_link.obj",
+      "additions": {
+        "human": 15043
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_middle_link1.obj",
+      "additions": {
+        "human": 1651
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_middle_link2.obj",
+      "additions": {
+        "human": 8809
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_middle_link3.obj",
+      "additions": {
+        "human": 5433
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_middle_link4.obj",
+      "additions": {
+        "human": 15235
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_middle_pad_link.obj",
+      "additions": {
+        "human": 15235
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_pinky_link1.obj",
+      "additions": {
+        "human": 1602
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_pinky_link2.obj",
+      "additions": {
+        "human": 8707
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_pinky_link3.obj",
+      "additions": {
+        "human": 5371
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_pinky_link4.obj",
+      "additions": {
+        "human": 15382
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_pinky_pad_link.obj",
+      "additions": {
+        "human": 15382
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_ring_link1.obj",
+      "additions": {
+        "human": 1604
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_ring_link2.obj",
+      "additions": {
+        "human": 8700
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_ring_link3.obj",
+      "additions": {
+        "human": 5327
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_ring_link4.obj",
+      "additions": {
+        "human": 15097
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_ring_pad_link.obj",
+      "additions": {
+        "human": 15097
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_thumb_link1.obj",
+      "additions": {
+        "human": 8326
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_thumb_link2.obj",
+      "additions": {
+        "human": 8730
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_thumb_link3.obj",
+      "additions": {
+        "human": 8276
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_thumb_link4.obj",
+      "additions": {
+        "human": 15996
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/meshes/visual/hand_r_thumb_pad_link.obj",
+      "additions": {
+        "human": 15996
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/right.urdf",
+      "additions": {
+        "human": 740
+      }
+    },
+    {
+      "new_path": "assets/hands/wuji_artbot/source_hashes.yaml",
+      "additions": {
+        "human": 5
+      }
+    },
+    {
+      "new_path": "knife_reference.md",
+      "additions": {
+        "human": 29
+      }
+    },
+    {
+      "new_path": "media/wuji-knife-demo/manifest.json",
+      "additions": {
+        "human": 97
+      }
+    },
+    {
+      "new_path": "media/wuji-knife-demo/report.json",
+      "additions": {
+        "human": 74
+      }
+    },
+    {
+      "new_path": "media/wuji-knife-demo/verification.json",
+      "additions": {
+        "human": 56
+      }
+    },
+    {
+      "new_path": "requirements-wuji-demo.txt",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 9
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/build_wuji_knife_demo.py",
+      "additions": {
+        "human": 172
+      }
+    },
+    {
+      "new_path": "scripts/import_wuji_artbot.py",
+      "additions": {
+        "human": 199
+      }
+    },
+    {
+      "new_path": "scripts/plan_wuji_knife_motion.py",
+      "additions": {
+        "human": 62
+      }
+    },
+    {
+      "new_path": "scripts/prepare_wuji_slim_demo.py",
+      "additions": {
+        "human": 167
+      }
+    },
+    {
+      "new_path": "scripts/refine_wuji_knife_grasp.py",
+      "additions": {
+        "human": 64
+      }
+    },
+    {
+      "new_path": "scripts/run_wuji_knife_demo.py",
+      "additions": {
+        "human": 291
+      }
+    },
+    {
+      "new_path": "scripts/search_wuji_knife_side_grasp.py",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "scripts/wuji_kinematics.py",
+      "additions": {
+        "human": 91
+      }
+    },
+    {
+      "new_path": "scripts/wuji_knife_demo.py",
+      "additions": {
+        "human": 113
+      }
+    },
+    {
+      "new_path": "wuji_demo.md",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 111
+          }
+        ]
+      }
+    },
+    {
+      "old_path": ".gitignore",
+      "new_path": ".gitignore",
+      "additions": {
+        "human": 8
+      },
+      "deletions": {
+        "human": 1
+      }
+    },
+    {
+      "old_path": "README.md",
+      "new_path": "README.md",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 21
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "isaacgymenvs/cfg/hand/wuji.yaml",
+      "new_path": "isaacgymenvs/cfg/hand/wuji.yaml",
+      "additions": {
+        "human": 128
+      }
+    }
+  ]
+}
