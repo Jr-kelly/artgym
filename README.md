@@ -1,5 +1,26 @@
 # ArtGym
 
+## Wuji fingertip utility-knife demo
+
+This branch adds a **scripted contact simulation** with a 20-DoF Wuji right hand
+and a slim 147 × 19 × 11 mm utility knife. It demonstrates fingertip support and
+thumb-driven slider extension/retraction; it is not a trained-policy or hardware result.
+
+[![Wuji knife demo](media/wuji-knife-demo/demo.png)](https://github.com/Jr-kelly/artgym/releases/download/wuji-knife-demo-v1.0.0/wuji-knife-demo.mp4)
+
+**[Watch/download the video](https://github.com/Jr-kelly/artgym/releases/download/wuji-knife-demo-v1.0.0/wuji-knife-demo.mp4)**
+· **[运行说明 / Reproduction guide](wuji_demo.md)**
+· [Measured results](media/wuji-knife-demo/report.json)
+
+The hand meshes, knife URDF and full reference trajectory are included.
+After installing the simulator and demo dependencies, run:
+
+```bash
+python -m scripts.wuji_knife_demo --no-overlay
+```
+
+The original ArtGym documentation follows.
+
 This repository is the official implementation of **ArtManip: Category-Level Articulated In-Hand Manipulation**.
 
 [Paper](https://arxiv.org/abs/2609.12498) · [Project Page](https://artmanip.github.io/)

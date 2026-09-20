@@ -1,0 +1,75 @@
+{
+  "settings": {
+    "candidates": "tmp/release-no-overlay/initial.npz",
+    "asset": "assets/demo/wuji_knife/slim/mobility.urdf",
+    "output": "tmp/release-no-overlay",
+    "candidate_index": null,
+    "seconds": 12.0,
+    "render": true,
+    "no_overlay": true,
+    "trajectory": "tmp/release-no-overlay/trajectory.npz",
+    "friction": 3.0,
+    "damping": 0.3,
+    "gain": 1.0,
+    "gpu_pipeline": false,
+    "feedback": false,
+    "depth": 0.003,
+    "lead": 0.004,
+    "filtered_self_collisions": true,
+    "dimension_label": "Fingertip grip | 147 x 19 x 11 mm | 35 g",
+    "camera_position": [
+      0.34,
+      0.13,
+      0.02
+    ],
+    "camera_target": [
+      0.035,
+      0.015,
+      0.1
+    ],
+    "record_grip": true,
+    "require_fingertip_grip": true
+  },
+  "ranked": [
+    {
+      "candidate": 0,
+      "final_drift_m": 0.001528297428368083,
+      "max_drift_m": 0.001538457419619069,
+      "final_rotation_rad": 0.16774309257524103,
+      "contact_fraction": [
+        1.0,
+        1.0,
+        1.0,
+        0.8166666666666667,
+        1.0
+      ],
+      "slider_min_m": 0.0,
+      "slider_max_m": 0.035677216947078705,
+      "score": -0.006427604979212839,
+      "max_joint_limit_violation_rad": 2.9802322387695312e-08,
+      "handle_support_fraction_palm_index_middle_ring_pinky": [
+        0.0,
+        1.0,
+        1.0,
+        0.8166666666666667,
+        1.0
+      ],
+      "minimum_blade_direction_toward_thumb": 0.977724052254728,
+      "extension_m": 0.03567713126540184,
+      "retraction_m": 4.0590325056655274e-07,
+      "cycle_pass": true,
+      "cycles": [
+        {
+          "extension_m": 0.03567713126540184,
+          "retraction_m": 4.0590325056655274e-07,
+          "passed": true
+        }
+      ],
+      "all_cycles_pass": true,
+      "fingertip_grip_pass": true
+    }
+  ],
+  "object_fixed_base": false,
+  "slider_drive_stiffness": 0.0,
+  "contact_measurement": "rigid_body_pairs"
+}

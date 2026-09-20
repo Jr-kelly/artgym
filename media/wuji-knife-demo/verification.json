@@ -1,0 +1,56 @@
+{
+  "command": "MAX_JOBS=2 OMP_NUM_THREADS=2 python -m scripts.wuji_knife_demo --no-overlay --output tmp/release-no-overlay",
+  "status": "passed",
+  "isolated_worktree": true,
+  "original_recording_metrics_match": true,
+  "python": "3.8.20",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "packages": {
+    "torch": "2.1.0+cu118",
+    "numpy": "1.23.5",
+    "scipy": "1.10.1",
+    "matplotlib": "3.7.5",
+    "imageio": "2.35.1",
+    "imageio-ffmpeg": "0.5.1",
+    "Pillow": "10.4.0",
+    "PyYAML": "6.0.3"
+  },
+  "result": {
+    "candidate": 0,
+    "final_drift_m": 0.001528297428368083,
+    "max_drift_m": 0.001538457419619069,
+    "final_rotation_rad": 0.16774309257524103,
+    "contact_fraction": [
+      1.0,
+      1.0,
+      1.0,
+      0.8166666666666667,
+      1.0
+    ],
+    "slider_min_m": 0.0,
+    "slider_max_m": 0.035677216947078705,
+    "score": -0.006427604979212839,
+    "max_joint_limit_violation_rad": 2.9802322387695312e-08,
+    "handle_support_fraction_palm_index_middle_ring_pinky": [
+      0.0,
+      1.0,
+      1.0,
+      0.8166666666666667,
+      1.0
+    ],
+    "minimum_blade_direction_toward_thumb": 0.977724052254728,
+    "extension_m": 0.03567713126540184,
+    "retraction_m": 4.0590325056655274e-07,
+    "cycle_pass": true,
+    "cycles": [
+      {
+        "extension_m": 0.03567713126540184,
+        "retraction_m": 4.0590325056655274e-07,
+        "passed": true
+      }
+    ],
+    "all_cycles_pass": true,
+    "fingertip_grip_pass": true
+  },
+  "no_text_overlay": true
+}
