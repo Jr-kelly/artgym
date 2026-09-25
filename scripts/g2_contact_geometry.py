@@ -12,7 +12,7 @@ from scipy.spatial.transform import Rotation
 from scripts.wuji_kinematics import WujiKinematics,ROOT
 
 class DigitGeometry:
-    def __init__(self):
+    def __init__(self,max_face_axes=None):
         self.w=WujiKinematics();self.meshes={}
         path=ROOT/'assets/hands/wuji_artbot/right.urdf';xml=ET.parse(path).getroot()
         for link in xml.findall('link'):
@@ -25,7 +25,13 @@ class DigitGeometry:
                 origin=collision.find('origin')
                 if origin is not None:
                     v=v@Rotation.from_euler('xyz',np.fromstring(origin.get('rpy','0 0 0'),sep=' ')).as_matrix().T+np.fromstring(origin.get('xyz','0 0 0'),sep=' ')
-                hull=ConvexHull(v);self.meshes.setdefault(name,[]).append((v[hull.vertices],hull.equations[:,:3]))
+                hull=ConvexHull(v);normals=hull.equations[:,:3]
+                if max_face_axes is not None and len(normals)>max_face_axes:
+                    # Planning only: fewer separating axes keep positive gaps
+                    # conservative because every original vertex is retained.
+                    # Runtime diagnostics use the default full set.
+                    normals=normals[np.linspace(0,len(normals)-1,max_face_axes,dtype=int)]
+                self.meshes.setdefault(name,[]).append((v[hull.vertices],normals))
 
     def gaps(self,q,wrist_in_object,slider,finger='thumb'):
         frames=self.w.forward(q);results=[]

@@ -7,6 +7,9 @@ at its original planned location. No simulator or physics settings are changed.
 import argparse
 import json
 from pathlib import Path
+import os
+os.environ['OPENBLAS_NUM_THREADS']='1'
+os.environ['OMP_NUM_THREADS']='1'
 import numpy as np
 from scipy.optimize import least_squares
 from scripts.g2_contact_geometry import DigitGeometry
@@ -17,7 +20,7 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--source',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True);a=p.parse_args()
     if a.output.exists():raise ValueError('Preserve previous geometry output')
-    d=json.loads(a.source.read_text());g=DigitGeometry();c=ContactCorrection()
+    d=json.loads(a.source.read_text());g=DigitGeometry(max_face_axes=32);c=ContactCorrection()
     relative=np.array(d['wrist_in_knife']);normals=np.array(d['contact_normals'])
     originals=[np.array(d[key]) for key in ['open_q','touch_q','close_q']]
     desired=[c.contacts(q,relative,normals)[0][2] for q in originals]
@@ -52,7 +55,7 @@ def main():
         errors.extend((x[:4]-seed[:4])*.002)
         return np.asarray(errors)
     result=least_squares(residual,np.clip(seed,lo+1e-6,hi-1e-6),bounds=(lo,hi),max_nfev=120,diff_step=1e-5)
-    rows=[]
+    rows=[];g=DigitGeometry()
     for i,(key,q) in enumerate(zip(['open_q','touch_q','close_q'],poses(result.x))):
         pairs=g.self_gaps(q,'index')+[v for v in g.self_gaps(q,'middle') if '_ring_' in v['other_link']]
         rows.append(dict(stage=key,middle_point_error_m=float(np.linalg.norm(c.contacts(q,relative,normals)[0][2]-desired[i])),

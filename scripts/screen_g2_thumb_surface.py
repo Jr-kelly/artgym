@@ -7,6 +7,9 @@ checked independently. Positive endpoints are still not trajectory evidence.
 import argparse
 import json
 from pathlib import Path
+import os
+os.environ['OPENBLAS_NUM_THREADS']='1'
+os.environ['OMP_NUM_THREADS']='1'
 import numpy as np
 from scipy.optimize import least_squares
 from scipy.spatial import ConvexHull
@@ -17,7 +20,7 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--source',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True);a=p.parse_args()
     if a.output.exists():raise ValueError('Preserve previous screen')
-    d=json.loads(a.source.read_text());g=DigitGeometry();w=g.w
+    d=json.loads(a.source.read_text());g=DigitGeometry(max_face_axes=32);full_geometry=DigitGeometry();w=g.w
     q=np.array(d['touch_q']);relative=np.array(d['wrist_in_knife'])
     vertices=g.meshes['hand_r_thumb_pad_link'][0][0];hull=ConvexHull(vertices)
     cache=np.load(Path(__file__).resolve().parents[1]/'caches/initial_grasp/wuji/knife_wuji_bridge3_20260922/000/train/valid_grasps.npy')[0]
@@ -42,10 +45,10 @@ def main():
                 [min(v['gap_lower_bound_m']-.0003,0)*200 for v in self_gaps],
                 (x[:4]-seed)*.002]
         solved=least_squares(residual,np.clip(x0,lower+1e-7,upper-1e-7),bounds=(lower,upper),max_nfev=120,diff_step=1e-5)
-        proposed,point=evaluate(solved.x);gap=g.minimum_gap(proposed,relative,slider)
+        proposed,point=evaluate(solved.x);gap=full_geometry.minimum_gap(proposed,relative,slider)
         target=np.array([solved.x[7],.0074,solved.x[8]])
         error=float(np.linalg.norm(point-target));hull_error=float(np.maximum(hull.equations[:,:3]@solved.x[4:7]+hull.equations[:,3],0).max())
-        self_gap=min(g.self_gaps(proposed,'thumb'),key=lambda v:v['gap_lower_bound_m'])
+        self_gap=min(full_geometry.self_gaps(proposed,'thumb'),key=lambda v:v['gap_lower_bound_m'])
         rows.append(dict(seed=label,q=solved.x[:4].tolist(),anchor_local=solved.x[4:7].tolist(),target=target.tolist(),
             point_error_m=error,anchor_hull_violation_m=hull_error,whole_thumb_gap_m=gap,minimum_self_pair=self_gap,
             geometric_candidate=bool(error<.001 and hull_error<.0001 and gap>=-.0005 and self_gap['gap_lower_bound_m']>=0),nfev=solved.nfev))
