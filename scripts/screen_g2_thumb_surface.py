@@ -25,7 +25,9 @@ def main():
     q=np.array(d['touch_q']);relative=np.array(d['wrist_in_knife'])
     vertices=np.concatenate([v for v,_ in g.meshes[a.contact_link]]);hull=ConvexHull(vertices)
     cache=np.load(Path(__file__).resolve().parents[1]/'caches/initial_grasp/wuji/knife_wuji_bridge3_20260922/000/train/valid_grasps.npy')[0]
-    slider=-.032674588;z0=.010624586881962734+slider
+    slider=(float(np.load(d['source_trace'])['slider'][d['source_step']]) if d.get('source_trace') else -.032674588)
+    slider_source='actual trace frame' if d.get('source_trace') else 'explicit hypothetical closed-slider geometry'
+    z0=.010624586881962734+slider
     lower=np.r_[w.lower[16:],vertices.min(0),-.0045,z0-.014]
     upper=np.r_[w.upper[16:],vertices.max(0),.0045,z0+.014]
     rows=[]
@@ -53,7 +55,7 @@ def main():
         rows.append(dict(seed=label,q=solved.x[:4].tolist(),anchor_local=solved.x[4:7].tolist(),target=target.tolist(),
             point_error_m=error,anchor_hull_violation_m=hull_error,whole_thumb_gap_m=gap,minimum_self_pair=self_gap,
             geometric_candidate=bool(error<.001 and hull_error<.0001 and gap>=-.0005 and self_gap['gap_lower_bound_m']>=0),nfev=solved.nfev))
-    out=dict(source=str(a.source),contact_link=a.contact_link,slider_position_m=slider,rows=rows,
+    out=dict(source=str(a.source),contact_link=a.contact_link,slider_position_m=slider,slider_source=slider_source,rows=rows,
         limitation='Two local branches, arbitrary point in pad hull; screening only. Not proof of global reachability or physical support.')
     a.output.write_text(json.dumps(out,indent=2)+'\n');print(json.dumps(out))
 

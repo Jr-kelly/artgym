@@ -62,7 +62,7 @@ def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,
         first=len(records)
         if stage['kind']=='align_fixed_goal':
             if normal_feedback is not None:raise ValueError('This comparison does not mix alignment and normal feedback')
-            if world_reference is None or moving or arm_goal is not None:raise ValueError('Alignment requires unchanged external goal and fixed fingers')
+            if moving or arm_goal is not None:raise ValueError('Alignment requires the unchanged original world goal and fixed fingers')
             from scripts.g2_assembly_roll import align_to_fixed_goal
             from scripts.g2_table_collision import ArmTableCollision
             folder=output/stage['name'];folder.mkdir()

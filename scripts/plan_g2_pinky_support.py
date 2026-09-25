@@ -22,6 +22,7 @@ def main():
     a=p.parse_args()
     if a.output.exists():raise ValueError('Preserve previous result')
     d=json.loads(a.source.read_text());g=DigitGeometry(max_face_axes=32);full=DigitGeometry();c=ContactCorrection();w=g.w
+    slider=float(np.load(d['source_trace'])['slider'][d['source_step']])
     q=np.array(d['touch_q']);relative=np.array(d['wrist_in_knife']);normals=np.array([[1,0,0]]*5)
     contact_id=4 if a.finger=='pinky' else 1;indices=np.arange(8,12) if a.finger=='pinky' else np.arange(4)
     if a.surface=='underside':normals[contact_id]=[0,-1,0]
@@ -34,7 +35,7 @@ def main():
     def solve(target,seed,command=False,free=False):
         def residual(v):
             qs,pt=surface(v)
-            return np.r_[(pt-target)*300,[min(s['gap_lower_bound_m']-(-.0011 if command else (.0048 if free else .00005)),0)*600 for s in g.gaps(qs,relative,-.032674588,a.finger)],
+            return np.r_[(pt-target)*300,[min(s['gap_lower_bound_m']-(-.0011 if command else (.0048 if free else .00005)),0)*600 for s in g.gaps(qs,relative,slider,a.finger)],
                 [min(s['gap_lower_bound_m']-.00015,0)*500 for s in g.self_gaps(qs,a.finger)],(v-seed)*.005]
         return least_squares(residual,np.clip(seed,w.lower[indices]+1e-7,w.upper[indices]-1e-7),bounds=(w.lower[indices],w.upper[indices]),max_nfev=150,diff_step=1e-5)
     pre=None;preq=None;prepoint=None;seed=q[indices]
@@ -50,13 +51,13 @@ def main():
     for piece,(begin,end) in enumerate(pieces):
         for alpha in np.linspace(0,1,31):
             test=begin*(1-alpha)+end*alpha;selfgap=min(v['gap_lower_bound_m'] for v in full.self_gaps(test,a.finger))
-            sweep.append(dict(segment=piece,alpha=float(alpha),knife_gap_m=full.minimum_gap(test,relative,-.032674588,a.finger),self_gap_m=selfgap))
+            sweep.append(dict(segment=piece,alpha=float(alpha),knife_gap_m=full.minimum_gap(test,relative,slider,a.finger),self_gap_m=selfgap))
     valid=bool(np.linalg.norm(actual_point-target)<.001 and min(v['knife_gap_m'] for v in sweep)>=-.00015 and min(v['self_gap_m'] for v in sweep)>=0)
-    if preq is not None:valid=valid and full.minimum_gap(preq,relative,-.032674588,a.finger)>=.0041 and np.linalg.norm(surface(pre.x)[1]-prepoint)<.001
+    if preq is not None:valid=valid and full.minimum_gap(preq,relative,slider,a.finger)>=.0041 and np.linalg.norm(surface(pre.x)[1]-prepoint)<.001
     close_sweep=[]
     for alpha in np.linspace(0,1,21):
         test=touchq.copy();test[indices]=touch.x*(1-alpha)+command.x*alpha
-        close_sweep.append(dict(alpha=float(alpha),nominal_knife_gap_m=full.minimum_gap(test,relative,-.032674588,a.finger),
+        close_sweep.append(dict(alpha=float(alpha),nominal_knife_gap_m=full.minimum_gap(test,relative,slider,a.finger),
             self_gap_m=min(v['gap_lower_bound_m'] for v in full.self_gaps(test,a.finger))))
     valid=valid and min(v['self_gap_m'] for v in close_sweep)>=0 and min(v['nominal_knife_gap_m'] for v in close_sweep)>=-.0012
     geometry=dict(source=str(a.source),target_point=target.tolist(),touch_point=actual_point.tolist(),touch_q=touch.x.tolist(),command_q=command.x.tolist(),
@@ -85,7 +86,7 @@ def main():
     if a.finger!='pinky':
         plan.pop('pinky_support_geometry',None);plan['single_support_geometry']=geometry
         for stage in stages:stage['name']=stage['name'].replace('pinky','index')
-    geometry['moving_finger']=a.finger;geometry['retained_supports']=a.retained_supports;geometry['ik_seed']=a.ik_seed
+    geometry['moving_finger']=a.finger;geometry['retained_supports']=a.retained_supports;geometry['ik_seed']=a.ik_seed;geometry['actual_slider_position_m']=slider
     plan['stages']+=stages
     path=a.output if valid else a.output.with_suffix('.rejected.json');path.write_text(json.dumps(plan,indent=2)+'\n')
     print(json.dumps(dict(output=str(path),valid=valid,target=target.tolist(),point=actual_point.tolist(),min_knife_gap_m=min(v['knife_gap_m'] for v in sweep),min_self_gap_m=min(v['self_gap_m'] for v in sweep))))

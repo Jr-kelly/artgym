@@ -66,6 +66,8 @@ def execute_roll(k,targets,arm_idx,current,tick,records,dt,table_check,output,de
 
 def align_to_fixed_goal(k,targets,arm_idx,current,tick,records,dt,table_check,output,goal,max_correction_rad=.08,seconds=1.):
     """One small oracle orientation correction; the declared goal never moves."""
+    from scripts.audit_g2_self_clearance import Clearance
+    self_check=Clearance()
     _,_,_,_,actual,_=current();start=k.forward(targets[arm_idx]);pivot=actual[:3,3]
     correction=Rotation.from_matrix(goal[:3,:3]@actual[:3,:3].T).as_rotvec()
     if not 0<max_correction_rad<=.25 or seconds<1.:raise ValueError('Alignment control bound/duration outside declared range')
@@ -77,7 +79,7 @@ def align_to_fixed_goal(k,targets,arm_idx,current,tick,records,dt,table_check,ou
         r=Rotation.from_rotvec(correction*alpha).as_matrix();w=start.copy()
         w[:3,:3]=r@start[:3,:3];w[:3,3]=pivot+r@(start[:3,3]-pivot)
         q,error=k.solve_near(w,previous,max_step=np.minimum(k.velocity*dt*.8,.15))
-        if error['position_m']>.001 or error['rotation_rad']>.005 or table_check.collisions(q):raise ValueError('Alignment IK rejected')
+        if error['position_m']>.001 or error['rotation_rad']>.005 or table_check.collisions(q) or self_check.collisions(q):raise ValueError('Alignment IK/collision rejected')
         commands.append(q);previous=q
     plan=dict(correction_world_rotvec=correction.tolist(),pivot_world=pivot.tolist(),unchanged_object_goal=goal.tolist(),
         correction_bound_rad=max_correction_rad,move_seconds=seconds,
