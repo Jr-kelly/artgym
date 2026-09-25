@@ -1,0 +1,115 @@
+scripts/run_g2_tabletop.py
+  s_87fdc32a1dcd01::t_c367ee2832683d 398
+  s_87fdc32a1dcd01::t_3c0b0d7fb9e7bf 38,130-136,166-173,181,276-278,441-442,770,780,783,800-802,804,814-817
+  s_87fdc32a1dcd01::t_eb5d46595b6e15 303-306
+scripts/prepare_g2_candidate_preset.py
+  s_87fdc32a1dcd01::t_1c679acfafb774 33,39-49,52-54,62,64
+  s_87fdc32a1dcd01::t_c367ee2832683d 1-32,35-38,50-51,55-61,63,65-72
+  s_87fdc32a1dcd01::t_752f9702f9007c 34
+scripts/launch_g2_trial.py
+  s_87fdc32a1dcd01::t_3c0b0d7fb9e7bf 20
+research/g2-overnight-20260926.md
+  s_87fdc32a1dcd01::t_01f76fe3864aaa 154-161
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "7a014ad8068b58314f23f1bd8bc7a58d4b67abac",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.session_started_at": "2026-09-25T20:35:46Z",
+        "tlab.token_usage.input_tokens": "45236103",
+        "tlab.token_usage.output_tokens": "5965370",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.cache_read_tokens": "867922226"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "scripts/prepare_g2_candidate_preset.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 72
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 18
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 18
+      }
+    },
+    {
+      "old_path": "research/g2-overnight-20260926.md",
+      "new_path": "research/g2-overnight-20260926.md",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 8
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/launch_g2_trial.py",
+      "new_path": "scripts/launch_g2_trial.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/run_g2_tabletop.py",
+      "new_path": "scripts/run_g2_tabletop.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 38
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 10
+          }
+        ]
+      }
+    }
+  ]
+}
