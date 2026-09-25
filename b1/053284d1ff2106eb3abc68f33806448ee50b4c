@@ -1,0 +1,153 @@
+scripts/extract_g2_observed_state.py
+  s_87fdc32a1dcd01::t_873e477686e59c 1-36
+research/g2-overnight-20260926.md
+  s_87fdc32a1dcd01::t_83fc95f1b07f1d 170-187
+scripts/plan_g2_held_translation.py
+  s_87fdc32a1dcd01::t_35610e4decfcb5 1-20,22-69,71-73,77-81
+  s_87fdc32a1dcd01::t_166b28ea3c849d 21,70,74-76
+scripts/audit_g2_wrist_plan.py
+  s_87fdc32a1dcd01::t_467affe7faf61b 32
+scripts/audit_g2_supported_statics.py
+  s_87fdc32a1dcd01::t_2944128366e9ab 1-51,63,66-68
+  s_87fdc32a1dcd01::t_1f65b684c89e71 52-62,64-65
+scripts/plan_g2_distal_clear_path.py
+  s_87fdc32a1dcd01::t_166b28ea3c849d 65
+  s_87fdc32a1dcd01::t_9a2cede807b4ed 1-64,66-70
+scripts/screen_g2_thumb_surface.py
+  s_87fdc32a1dcd01::t_02844c93da01ab 21,26,34,56
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "b1053284d1ff2106eb3abc68f33806448ee50b4c",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.output_tokens": "6030903",
+        "tlab.session_started_at": "2026-09-25T21:00:50Z",
+        "tlab.token_usage.cache_read_tokens": "877779621",
+        "tlab.token_usage.input_tokens": "45359826"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "scripts/audit_g2_supported_statics.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 68
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/extract_g2_observed_state.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 36
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/plan_g2_distal_clear_path.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 70
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/plan_g2_held_translation.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 81
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 18
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 18
+      }
+    },
+    {
+      "old_path": "research/g2-overnight-20260926.md",
+      "new_path": "research/g2-overnight-20260926.md",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 18
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/audit_g2_wrist_plan.py",
+      "new_path": "scripts/audit_g2_wrist_plan.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/screen_g2_thumb_surface.py",
+      "new_path": "scripts/screen_g2_thumb_surface.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 4
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 3
+          }
+        ]
+      }
+    }
+  ]
+}
