@@ -2,7 +2,7 @@
 
 续接入口：[G2_TABLETOP_HANDOFF.md](../G2_TABLETOP_HANDOFF.md)。独立分支 `feat/g2-wuji-tabletop-20260925`，本机工程 `/data/research/artgym-g2-tabletop-20260925`，实验目录 `runs/g2-tabletop-v1`。旧成功版本及训练 PID 88339 保留；本阶段没有训练新策略。
 
-截至2026-09-25 21:12 CST：A成功；B58与B64均已从正常桌面连续获取、端立重抓、被动回闭并接冻结teacher，握持稳定，但回收末0.3秒窗口仍超10mm，尚无完整B成功。B62更改整条搬运/操作位导致翻转；B64保留B58前2490帧完全相同后再上倾5°，保持稳定。正在B65有界比较功能重抓沿刀轴偏移3mm。C新获取路线及20变化尚未开始，没有新训练。
+截至2026-09-25 21:25 CST：A63及固定B65首次完整通过。B65正常桌面连续获取89秒后接冻结teacher20秒，完成两轮，10mm端点及全程稳定通过，2mm严格诊断未全过；这只是开发单案例。C66使用完全相同源码与获取流程，冻结student理想初始化正在运行。20次小变化尚未声明，没有新训练。此前B58/B64回收窗口失败、B62翻转、B60 IK中止均保留。
 
 ## 模型、控制及约束
 
@@ -381,3 +381,21 @@ python3 -m scripts.launch_g2_trial --name B-axis3-reproduce-001 -- \
   --video --camera hand \
   --teacher weights/g2-frozen/wuji-core-teacher-student-20260924-teacher.pth
 ```
+
+
+## 21:15 CST 第五份增量Release已核验
+
+https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-tabletop-operation-20260925-v5 已发布，5附件大小和GitHub SHA256逐项一致。新增5项结束试验（B60/A61/B62/A63/B64），证据11.6MB，排除前四包；B64源码/输入恢复3872文件核验通过。无文字视频分别保留105秒翻转失败与109秒收刀窗口失败。代码已推da4d69d；B65快照时仍在途，未列作结束/成功。B64额外110帧/414链对自身凸包采样也未检出重叠，仍不是连续认证。
+
+
+## 21:22–21:25 CST 固定B首次完整通过，冻结C开始
+
+B-axis3-post-up5-teacher-v65从正常桌面连续109秒（获取89秒+冻结teacher20秒），抓取1/1、抓取后的操作1/1、全段1/1；外部时钟两轮开合，四端点末0.3秒最大误差1.895/7.038/2.038/7.647mm，全部10mm内，无掉落且固定参考世界漂移4.114mm/.1592rad稳定。2mm严格诊断未全部通过。此次为调试中选出的单案例，不能作为泛化成功率。相对原功能抓姿位置差由B64的5.948mm降到3.624mm，旋转0.1285rad；这是改善接管几何后得到的结果，不认定唯一原因。
+
+B64/B65前1080帧直至withdraw完全一致（B64-B65-acquisition-prefix-parity-v66.json）。B65冻结回放600帧观测/动作/电机目标误差0；实际腕FK约1.06微米/2.79e-6rad，命令与实际速度无超源限速。110帧自身凸包采样未检出重叠。
+
+机器人/桌面并非全程零接触：approach有8帧、close有46帧拇指/小指碰桌，碰撞网格在桌面范围内最低0.211mm穿入，源PhysX contact_offset=2mm；没有臂/掌碰桌，抬起及操作阶段没有桌面支撑。这些如实记录在B65-finger-table-contact-clearance-v66.json，不能写成“手指从不碰桌”。仅是仿真接触与网格估计，不能当硬件触觉力标定。
+
+C-axis3-post-up5-student-ideal-v66已在21:22:23 CST启动（PID7325，PID计数回绕后的小编号正常；原训练88339仍活跃）。launcher直接复制B65校验过的源码pin，两者SOURCE_SHA256清单哈希完全相同4b63cd7459d02e73f4d9788ebce5a3d6507fab3f394ce38863a5d73a425dba49，参数仅group B→C。Student冻结权重保持；实际50帧停稳历史、RNN只清零一次、接管初始物体真值明确理想初始化。结果待收，不提前宣布C成功。
+
+若C同样通过，先做实际前2670帧一致性与冻结回放/实时真值不变性审计，再声明10个位置×B/C共20次的既定小变化。使用A-operation-up5-v63 / B-axis3-post-up5-teacher-v65 / C-axis3-post-up5-student-ideal-v66。当前没有声明或抽取验证样本；还没有新训练。B65完整无文字视频已保存continuous.mp4，待和C一起增量发布v6，不覆盖v5失败证据。

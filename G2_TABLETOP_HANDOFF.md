@@ -1,6 +1,6 @@
 # G2＋Wuji 桌面取刀→伸缩（2026-09-25）
 
-分支 feat/g2-wuji-tabletop-20260925；工程 /data/research/artgym-g2-tabletop-20260925；实验 runs/g2-tabletop-v1。当前A成功；B58/B64连续获取与teacher保持稳定但回收末0.3秒超10mm，B62翻转失败。B65仅将功能重抓沿刀轴偏移3mm，保持B64其余配置，正在运行。完整B/C未成功，没有新训练。
+分支 feat/g2-wuji-tabletop-20260925；工程 /data/research/artgym-g2-tabletop-20260925；实验 runs/g2-tabletop-v1。A63及固定B65已完整通过：正常桌面连续取刀到teacher两轮、10mm端点/稳定均过，2mm诊断未全过。C66复制B65完全相同源码/抓取配置，冻结student理想初始化正在运行。未做20变化，没有新训练。
 
 任务：固定刀具、固定正常桌面摆放、一个功能抓姿；G2右臂接近/闭合/抬起/移到操作姿态；同一仿真连续状态接冻结teacher再student。模型源 /data/research/ArtBot/G2_crsB_wuji/robot.usd，禁止套用Franka安装或参数。
 
@@ -12,7 +12,7 @@ A预置→teacher；B实际抓取→teacher；C实际抓取→student。先A定�
 
 交付新分支/新Release、运行命令、完整无文字视频/失败视频、轨迹和分类，不覆盖旧结果或历史备份。原4090训练88339保留，运行前重查显存；仅进行有用仿真，不为占用GPU启动无效计算。
 
-当前下一步：收B-axis3-post-up5-teacher-v65（PID见process.json）。B64最后一帧回收进10mm，但预定末0.3秒窗口最大10.342/12.251mm，仍失败；不能启动20变化。若B65固定B通过，才运行相同获取参数冻结C理想初始化并审计前段与历史。A63为对应5°最终腕姿的成功A。
+当前下一步：收C-axis3-post-up5-student-ideal-v66（PID7325，查process.json及真实进程）。B65已通过两轮与稳定；C若通过，审计B/C前2670帧与实际历史、冷RNN、固定参考/动作映射及实时物体真值不变性，再用run_g2_small_variations.py declare预先声明20次（10共享位置×两策略）。未通过则按B成立C失败排查初始化/历史/观测。B65/C66尚未进Release，最新v5仅含到B64的失败对照。
 
 ## 17:13 CST 进度
 
@@ -302,3 +302,21 @@ python3 -m scripts.launch_g2_trial --name B-axis3-reproduce-001 -- \
   --video --camera hand \
   --teacher weights/g2-frozen/wuji-core-teacher-student-20260924-teacher.pth
 ```
+
+
+## 21:15 CST 第五份增量Release已核验
+
+https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-tabletop-operation-20260925-v5 已发布，5附件大小和GitHub SHA256逐项一致。新增5项结束试验（B60/A61/B62/A63/B64），证据11.6MB，排除前四包；B64源码/输入恢复3872文件核验通过。无文字视频分别保留105秒翻转失败与109秒收刀窗口失败。代码已推da4d69d；B65快照时仍在途，未列作结束/成功。B64额外110帧/414链对自身凸包采样也未检出重叠，仍不是连续认证。
+
+
+## 21:22–21:25 CST 固定B首次完整通过，冻结C开始
+
+B-axis3-post-up5-teacher-v65从正常桌面连续109秒（获取89秒+冻结teacher20秒），抓取1/1、抓取后的操作1/1、全段1/1；外部时钟两轮开合，四端点末0.3秒最大误差1.895/7.038/2.038/7.647mm，全部10mm内，无掉落且固定参考世界漂移4.114mm/.1592rad稳定。2mm严格诊断未全部通过。此次为调试中选出的单案例，不能作为泛化成功率。相对原功能抓姿位置差由B64的5.948mm降到3.624mm，旋转0.1285rad；这是改善接管几何后得到的结果，不认定唯一原因。
+
+B64/B65前1080帧直至withdraw完全一致（B64-B65-acquisition-prefix-parity-v66.json）。B65冻结回放600帧观测/动作/电机目标误差0；实际腕FK约1.06微米/2.79e-6rad，命令与实际速度无超源限速。110帧自身凸包采样未检出重叠。
+
+机器人/桌面并非全程零接触：approach有8帧、close有46帧拇指/小指碰桌，碰撞网格在桌面范围内最低0.211mm穿入，源PhysX contact_offset=2mm；没有臂/掌碰桌，抬起及操作阶段没有桌面支撑。这些如实记录在B65-finger-table-contact-clearance-v66.json，不能写成“手指从不碰桌”。仅是仿真接触与网格估计，不能当硬件触觉力标定。
+
+C-axis3-post-up5-student-ideal-v66已在21:22:23 CST启动（PID7325，PID计数回绕后的小编号正常；原训练88339仍活跃）。launcher直接复制B65校验过的源码pin，两者SOURCE_SHA256清单哈希完全相同4b63cd7459d02e73f4d9788ebce5a3d6507fab3f394ce38863a5d73a425dba49，参数仅group B→C。Student冻结权重保持；实际50帧停稳历史、RNN只清零一次、接管初始物体真值明确理想初始化。结果待收，不提前宣布C成功。
+
+若C同样通过，先做实际前2670帧一致性与冻结回放/实时真值不变性审计，再声明10个位置×B/C共20次的既定小变化。使用A-operation-up5-v63 / B-axis3-post-up5-teacher-v65 / C-axis3-post-up5-student-ideal-v66。当前没有声明或抽取验证样本；还没有新训练。B65完整无文字视频已保存continuous.mp4，待和C一起增量发布v6，不覆盖v5失败证据。

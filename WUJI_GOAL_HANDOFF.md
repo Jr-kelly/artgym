@@ -1,5 +1,10 @@
 > 当前活动目标已转为 **G2＋Wuji 桌面取刀→冻结策略**，请先读 [G2_TABLETOP_HANDOFF.md](G2_TABLETOP_HANDOFF.md)。本文件的 complete 仅指9月24日预置持刀旧目标；新目标仍 active，B/C尚未接通。旧4090训练保留。本独立工作树维护新记录，不覆盖原仓库的旧成功版本。
 
+## 新阶段：G2桌面取刀→伸缩（2026-09-25）
+
+当前G2 goal为active；前一阶段teacher+student预置持刀goal完成不代表桌面新任务完成。用户新任务取代Franka要求。独立工程 `/data/research/artgym-g2-tabletop-20260925`，分支 `feat/g2-wuji-tabletop-20260925`，接续读该工程 `G2_TABLETOP_HANDOFF.md`，实验 `runs/g2-tabletop-v1`。21:27 CST：A63与连续桌面获取→teacher的B65已通过两轮、10mm端点及全程稳定；B65未全部达到2mm。C66冻结student理想初始化按完全相同源码/获取流程运行中，20变化未声明，无新训练。最新增量Release：https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-tabletop-operation-20260925-v5 。保留旧成功与原训练88339。
+
+
 # Wuji 美工刀持续实验：接续入口
 
 Goal工具已实际返回 **complete**（2026-09-24）；下文旧blocked记录仅为历史。用户限定的基本teacher+student滑块开合已验证并发布，后续硬件/精度/长时鲁棒性是后续范围。
