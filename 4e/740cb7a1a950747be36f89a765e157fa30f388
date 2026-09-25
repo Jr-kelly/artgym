@@ -1,0 +1,923 @@
+scripts/plan_g2_edge_grasp.py
+  s_87fdc32a1dcd01::t_bd4fb74e24a8c0 22-23,37,55-62,88
+  s_87fdc32a1dcd01::t_c1d97bae691acc 24-25,50,67,84,87,89
+  s_87fdc32a1dcd01::t_c596b63de0a500 83,85-86
+  s_87fdc32a1dcd01::t_bf5709352bcba7 1-21,26-36,38-49,51-54,63-66,68-82,90-98
+scripts/g2_kinematics.py
+  s_87fdc32a1dcd01::t_c4aef1cb8abdb3 59,75-96,98-102
+  s_87fdc32a1dcd01::t_467c9dbf3212b4 1-58
+  s_87fdc32a1dcd01::t_fcaed275e2dde5 60-74,97
+scripts/audit_g2_policy_interface.py
+  s_87fdc32a1dcd01::t_b6849d3d6356f6 1-24,27-43
+  s_87fdc32a1dcd01::t_8d0e46cc48832a 25-26
+scripts/run_g2_tabletop.py
+  s_87fdc32a1dcd01::t_a9296f7cef0687 370
+  s_87fdc32a1dcd01::t_7d7d9829f76602 57,299-304,306-311,317-319,339-340,343,399-403,419-426,429-430
+  s_87fdc32a1dcd01::t_e57928ebf4e3fb 215-228,363-368,385-386
+  s_87fdc32a1dcd01::t_54cf8e07f911cf 212-214,276,379
+  s_87fdc32a1dcd01::t_c018b7eb6649a3 53-54,76-82,191-193,295-298,454-456
+  s_87fdc32a1dcd01::t_0592896c475797 55,238-241,250,253-258,263-266,272-275,278,287-289
+  s_87fdc32a1dcd01::t_82d4ad38cb3cb6 1-48,59-60,62-67,69-73,75,83-106,113,116-172,184-186,194-197,199-200,202-211,229-231,234-237,242,245-248,251-252,259-262,279-286,290-294,355-362,371-374,376,378,380-382,384,387-398,404,408-415,432-446,448-453,457-460
+  s_87fdc32a1dcd01::t_6e18a3a8a7d119 58,312-314,320-326,334,336-338,341-342,377
+  s_87fdc32a1dcd01::t_5523f4e6d60634 249,267-271,405-407
+  s_87fdc32a1dcd01::t_34c092ad310ff2 173-183,369,375,383,416-418,427-428,431,447
+  s_87fdc32a1dcd01::t_ab8378e9383068 51-52,74,187-190
+  s_87fdc32a1dcd01::t_d42b746c4f6d64 56,344-354
+  s_87fdc32a1dcd01::t_d9ca54a6c63466 232-233,243-244,277
+  s_87fdc32a1dcd01::t_688525c002c28d 49-50,61,68,107-112,114-115,198,201
+  s_87fdc32a1dcd01::t_f9c9010d8bd1cb 315-316,327-333,335
+  s_87fdc32a1dcd01::t_ce42fe1ecad00b 305
+scripts/plan_g2_seating.py
+  s_87fdc32a1dcd01::t_48e46f4180b418 32,39-40,45,51,53-57,60-64
+  s_87fdc32a1dcd01::t_151735465bf140 1-31,33-38,41-44,46-50,52,58-59,65-70
+scripts/g2_frozen_policy.py
+  s_87fdc32a1dcd01::t_8d0e46cc48832a 79-81
+  s_87fdc32a1dcd01::t_6279d94c39b3db 1-71,75-78,82-91
+  s_87fdc32a1dcd01::t_304f66f021a83f 72-74
+scripts/export_g2_tabletop.py
+  s_87fdc32a1dcd01::t_467c9dbf3212b4 1-118
+scripts/audit_g2_geometry.py
+  s_87fdc32a1dcd01::t_a9296f7cef0687 1-37
+scripts/launch_g2_trial.py
+  s_87fdc32a1dcd01::t_8d0e46cc48832a 1-13,15-19,21,23,33-43
+  s_87fdc32a1dcd01::t_2eaeb6317e37dd 22
+  s_87fdc32a1dcd01::t_b69295142dd78e 14,20,24-30
+  s_87fdc32a1dcd01::t_130c8a6056a0a2 31-32
+scripts/audit_g2_trajectories.py
+  s_87fdc32a1dcd01::t_ded39f3b6510b3 1-50
+research/g2-tabletop-baseline-20260925.md
+  s_87fdc32a1dcd01::t_0d61d4357b09be 1-108
+scripts/audit_g2_student_interface.py
+  s_87fdc32a1dcd01::t_304f66f021a83f 1-63
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "4e740cb7a1a950747be36f89a765e157fa30f388",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.session_started_at": "2026-09-25T09:07:04Z",
+        "tlab.token_usage.output_tokens": "5037713",
+        "tlab.token_usage.input_tokens": "40615185",
+        "tlab.token_usage.cache_read_tokens": "717883639",
+        "tlab.token_usage.cache_creation_tokens": "0"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/audit.json",
+      "additions": {
+        "human": 1153
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/g2_wuji.urdf",
+      "additions": {
+        "human": 2209
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/arm_l_link1.obj",
+      "additions": {
+        "human": 791
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/arm_l_link2.obj",
+      "additions": {
+        "human": 1055
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/arm_l_link3.obj",
+      "additions": {
+        "human": 1181
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/arm_l_link4.obj",
+      "additions": {
+        "human": 1400
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/arm_l_link5.obj",
+      "additions": {
+        "human": 2132
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/arm_l_link6.obj",
+      "additions": {
+        "human": 287
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/arm_l_link7.obj",
+      "additions": {
+        "human": 5723
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/arm_r_link1.obj",
+      "additions": {
+        "human": 803
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/arm_r_link2.obj",
+      "additions": {
+        "human": 1055
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/arm_r_link3.obj",
+      "additions": {
+        "human": 1181
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/arm_r_link4.obj",
+      "additions": {
+        "human": 1400
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/arm_r_link5.obj",
+      "additions": {
+        "human": 2132
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/arm_r_link6.obj",
+      "additions": {
+        "human": 287
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/arm_r_link7.obj",
+      "additions": {
+        "human": 5738
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/base_link.obj",
+      "additions": {
+        "human": 3464
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/body_link1.obj",
+      "additions": {
+        "human": 431
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/body_link2.obj",
+      "additions": {
+        "human": 794
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/body_link3.obj",
+      "additions": {
+        "human": 80
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/body_link4.obj",
+      "additions": {
+        "human": 1325
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/body_link5.obj",
+      "additions": {
+        "human": 1064
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/chassis_lwheel_front_link1.obj",
+      "additions": {
+        "human": 95
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/chassis_lwheel_front_link2.obj",
+      "additions": {
+        "human": 428
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/chassis_lwheel_rear_link1.obj",
+      "additions": {
+        "human": 95
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/chassis_lwheel_rear_link2.obj",
+      "additions": {
+        "human": 428
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/chassis_rwheel_front_link1.obj",
+      "additions": {
+        "human": 95
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/chassis_rwheel_front_link2.obj",
+      "additions": {
+        "human": 428
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/chassis_rwheel_rear_link1.obj",
+      "additions": {
+        "human": 95
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/chassis_rwheel_rear_link2.obj",
+      "additions": {
+        "human": 428
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_base_link.obj",
+      "additions": {
+        "human": 1109
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_index_link1.obj",
+      "additions": {
+        "human": 407
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_index_link2.obj",
+      "additions": {
+        "human": 1757
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_index_link3.obj",
+      "additions": {
+        "human": 2156
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_index_link4.obj",
+      "additions": {
+        "human": 2630
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_index_pad_link.obj",
+      "additions": {
+        "human": 2630
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_middle_link1.obj",
+      "additions": {
+        "human": 410
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_middle_link2.obj",
+      "additions": {
+        "human": 1769
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_middle_link3.obj",
+      "additions": {
+        "human": 2171
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_middle_link4.obj",
+      "additions": {
+        "human": 2645
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_middle_pad_link.obj",
+      "additions": {
+        "human": 2645
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_pinky_link1.obj",
+      "additions": {
+        "human": 404
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_pinky_link2.obj",
+      "additions": {
+        "human": 1712
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_pinky_link3.obj",
+      "additions": {
+        "human": 2081
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_pinky_link4.obj",
+      "additions": {
+        "human": 2678
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_pinky_pad_link.obj",
+      "additions": {
+        "human": 2678
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_ring_link1.obj",
+      "additions": {
+        "human": 398
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_ring_link2.obj",
+      "additions": {
+        "human": 1751
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_ring_link3.obj",
+      "additions": {
+        "human": 2150
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_ring_link4.obj",
+      "additions": {
+        "human": 2636
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_ring_pad_link.obj",
+      "additions": {
+        "human": 2636
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_thumb_link1.obj",
+      "additions": {
+        "human": 1001
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_thumb_link2.obj",
+      "additions": {
+        "human": 1730
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_thumb_link3.obj",
+      "additions": {
+        "human": 1592
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_thumb_link4.obj",
+      "additions": {
+        "human": 2975
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/hand_l_thumb_pad_link.obj",
+      "additions": {
+        "human": 2975
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/head_link1.obj",
+      "additions": {
+        "human": 68
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/head_link2.obj",
+      "additions": {
+        "human": 68
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/collision/head_link3.obj",
+      "additions": {
+        "human": 2735
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/arm_l_link1.obj",
+      "additions": {
+        "human": 1823
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/arm_l_link2.obj",
+      "additions": {
+        "human": 3752
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/arm_l_link3.obj",
+      "additions": {
+        "human": 3869
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/arm_l_link4.obj",
+      "additions": {
+        "human": 5609
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/arm_l_link5.obj",
+      "additions": {
+        "human": 4772
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/arm_l_link6.obj",
+      "additions": {
+        "human": 362
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/arm_l_link7.obj",
+      "additions": {
+        "human": 82888
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/arm_r_link1.obj",
+      "additions": {
+        "human": 1823
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/arm_r_link2.obj",
+      "additions": {
+        "human": 3752
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/arm_r_link3.obj",
+      "additions": {
+        "human": 3869
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/arm_r_link4.obj",
+      "additions": {
+        "human": 5609
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/arm_r_link5.obj",
+      "additions": {
+        "human": 4772
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/arm_r_link6.obj",
+      "additions": {
+        "human": 362
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/arm_r_link7.obj",
+      "additions": {
+        "human": 83153
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/base_link.obj",
+      "additions": {
+        "human": 9193
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/body_link1.obj",
+      "additions": {
+        "human": 2563
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/body_link2.obj",
+      "additions": {
+        "human": 3138
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/body_link3.obj",
+      "additions": {
+        "human": 152
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/body_link4.obj",
+      "additions": {
+        "human": 3973
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/body_link5.obj",
+      "additions": {
+        "human": 6764
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/chassis_lwheel_front_link1.obj",
+      "additions": {
+        "human": 149
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/chassis_lwheel_front_link2.obj",
+      "additions": {
+        "human": 572
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/chassis_lwheel_rear_link1.obj",
+      "additions": {
+        "human": 149
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/chassis_lwheel_rear_link2.obj",
+      "additions": {
+        "human": 572
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/chassis_rwheel_front_link1.obj",
+      "additions": {
+        "human": 149
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/chassis_rwheel_front_link2.obj",
+      "additions": {
+        "human": 572
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/chassis_rwheel_rear_link1.obj",
+      "additions": {
+        "human": 149
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/chassis_rwheel_rear_link2.obj",
+      "additions": {
+        "human": 572
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_base_link.obj",
+      "additions": {
+        "human": 69633
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_index_link1.obj",
+      "additions": {
+        "human": 1596
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_index_link2.obj",
+      "additions": {
+        "human": 8613
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_index_link3.obj",
+      "additions": {
+        "human": 5330
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_index_link4.obj",
+      "additions": {
+        "human": 15043
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_index_pad_link.obj",
+      "additions": {
+        "human": 15043
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_middle_link1.obj",
+      "additions": {
+        "human": 1651
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_middle_link2.obj",
+      "additions": {
+        "human": 8809
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_middle_link3.obj",
+      "additions": {
+        "human": 5433
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_middle_link4.obj",
+      "additions": {
+        "human": 15235
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_middle_pad_link.obj",
+      "additions": {
+        "human": 15235
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_pinky_link1.obj",
+      "additions": {
+        "human": 1602
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_pinky_link2.obj",
+      "additions": {
+        "human": 8707
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_pinky_link3.obj",
+      "additions": {
+        "human": 5371
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_pinky_link4.obj",
+      "additions": {
+        "human": 15382
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_pinky_pad_link.obj",
+      "additions": {
+        "human": 15382
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_ring_link1.obj",
+      "additions": {
+        "human": 1604
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_ring_link2.obj",
+      "additions": {
+        "human": 8700
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_ring_link3.obj",
+      "additions": {
+        "human": 5327
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_ring_link4.obj",
+      "additions": {
+        "human": 15097
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_ring_pad_link.obj",
+      "additions": {
+        "human": 15097
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_thumb_link1.obj",
+      "additions": {
+        "human": 8325
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_thumb_link2.obj",
+      "additions": {
+        "human": 8730
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_thumb_link3.obj",
+      "additions": {
+        "human": 8276
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_thumb_link4.obj",
+      "additions": {
+        "human": 15996
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/hand_l_thumb_pad_link.obj",
+      "additions": {
+        "human": 15996
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/head_link1.obj",
+      "additions": {
+        "human": 68
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/head_link2.obj",
+      "additions": {
+        "human": 68
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/meshes/visual/head_link3.obj",
+      "additions": {
+        "human": 6552
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/plans/contact-seating.json",
+      "additions": {
+        "human": 2533
+      }
+    },
+    {
+      "new_path": "assets/robots/g2_wuji/plans/edge-pinch8.json",
+      "additions": {
+        "human": 138
+      }
+    },
+    {
+      "new_path": "research/g2-tabletop-baseline-20260925.md",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 108
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/audit_g2_geometry.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 37
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/audit_g2_policy_interface.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 43
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/audit_g2_student_interface.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 63
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/audit_g2_trajectories.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 50
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/export_g2_tabletop.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 118
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/g2_frozen_policy.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 91
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/g2_kinematics.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 102
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/launch_g2_trial.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 43
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/plan_g2_edge_grasp.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 98
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/plan_g2_seating.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 70
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/run_g2_tabletop.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 460
+          }
+        ]
+      }
+    }
+  ]
+}
