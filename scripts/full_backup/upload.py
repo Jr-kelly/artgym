@@ -107,7 +107,7 @@ def main():
             findings = json.loads(findings_path.read_text()) if findings_path.exists() else []
             resolutions_path = args.folder / 'credential-review.json'
             resolutions = json.loads(resolutions_path.read_text()) if resolutions_path.exists() else {}
-            unresolved = [f for f in findings if resolutions.get(f['value_sha256']) != 'public_fixture_or_nonsecret']
+            unresolved = [f for f in findings if resolutions.get(f["path"] + '|' + str(f["offset"]) + '|' + f["value_sha256"]) != 'public_fixture_or_nonsecret']
             candidates = []
             if not unresolved:
                 for record in sorted((args.folder / 'packs').glob('*.json')):
