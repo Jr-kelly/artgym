@@ -1,0 +1,233 @@
+scripts/g2_finger_gait.py
+  s_87fdc32a1dcd01::t_090c3107cdf798 31,59
+  s_87fdc32a1dcd01::t_be2bca0988069d 57
+  s_87fdc32a1dcd01::t_1d10ef86b0fa34 29,32
+scripts/g2_assembly_roll.py
+  s_87fdc32a1dcd01::t_1d56fead98eba6 65-95
+  s_87fdc32a1dcd01::t_1d10ef86b0fa34 1-64
+scripts/g2_contact_geometry.py
+  s_87fdc32a1dcd01::t_85c5646b29f6a1 50-72
+scripts/launch_g2_trial.py
+  s_87fdc32a1dcd01::t_1d10ef86b0fa34 20
+scripts/summarize_g2_gait.py
+  s_87fdc32a1dcd01::t_be2bca0988069d 50-55,58,73-82
+scripts/screen_g2_thumb_endpoint.py
+  s_87fdc32a1dcd01::t_92430017df10b5 12,19-21,29-36,38-40,59
+scripts/run_g2_tabletop.py
+  s_87fdc32a1dcd01::t_1d56fead98eba6 65,110,484-486
+  s_87fdc32a1dcd01::t_1d10ef86b0fa34 63-64,66,481-483,487-489
+  s_87fdc32a1dcd01::t_090c3107cdf798 108-109
+  s_87fdc32a1dcd01::t_be2bca0988069d 391-392
+scripts/diagnose_g2_support.py
+  s_87fdc32a1dcd01::t_7cc50fbf52b53e 15,43-45,63
+research/g2-overnight-20260926.md
+  s_87fdc32a1dcd01::t_eac0ddd4245938 46-61
+scripts/plan_g2_edge_grasp.py
+  s_87fdc32a1dcd01::t_8ba7b13976bd9f 27,41,95
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "215dddc45a25ac1a895610d73b87e957d931297b",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.session_started_at": "2026-09-25T18:31:27Z",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.output_tokens": "5756293",
+        "tlab.token_usage.cache_read_tokens": "835441784",
+        "tlab.token_usage.input_tokens": "44020703"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "scripts/g2_assembly_roll.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 95
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 30
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 30
+      }
+    },
+    {
+      "old_path": "research/g2-overnight-20260926.md",
+      "new_path": "research/g2-overnight-20260926.md",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 16
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/diagnose_g2_support.py",
+      "new_path": "scripts/diagnose_g2_support.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 5
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/g2_contact_geometry.py",
+      "new_path": "scripts/g2_contact_geometry.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 23
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/g2_finger_gait.py",
+      "new_path": "scripts/g2_finger_gait.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 5
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 4
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/launch_g2_trial.py",
+      "new_path": "scripts/launch_g2_trial.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/plan_g2_edge_grasp.py",
+      "new_path": "scripts/plan_g2_edge_grasp.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 3
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/run_g2_tabletop.py",
+      "new_path": "scripts/run_g2_tabletop.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 18
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/screen_g2_thumb_endpoint.py",
+      "new_path": "scripts/screen_g2_thumb_endpoint.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 16
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 3
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/summarize_g2_gait.py",
+      "new_path": "scripts/summarize_g2_gait.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 17
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 5
+          }
+        ]
+      }
+    }
+  ]
+}
