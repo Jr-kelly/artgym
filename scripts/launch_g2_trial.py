@@ -16,6 +16,12 @@ def main():
     p.add_argument('--run-root',type=Path,help='Independent experiment directory; default preserves the original tabletop runs.')
     p.add_argument('--supervise',action='store_true');p.add_argument('--timeout-seconds',type=float,default=1800)
     p.add_argument('args',nargs=argparse.REMAINDER);a=p.parse_args()
+    args=a.args[1:] if a.args and a.args[0]=='--' else a.args
+    input_flags=['--teacher','--student','--grasp-plan','--seating-plan','--operation-pose','--table-regrasp-plan','--post-acquisition-pose','--gait-plan','--operation-seed']
+    for flag in input_flags:
+        if flag in args:
+            i=args.index(flag)+1
+            if i>=len(args) or not Path(args[i]).is_file():raise ValueError('Missing input before source pin or physics launch: '+flag)
     root=Path(__file__).resolve().parents[1];run=a.run_root.resolve() if a.run_root else root/'runs/g2-tabletop-v1';pin=run/'source-pins'/a.name
     budget=run/'development-budget.json'
     if budget.exists() and len(list(run.glob('*-process.json')))>=json.loads(budget.read_text())['max_launches']:
@@ -24,6 +30,8 @@ def main():
     if task:
         if datetime.now(timezone.utc)>=datetime.fromisoformat(task['development_cutoff_utc']):raise ValueError('Development deadline reached; finalize results')
         prior=[json.loads(f.read_text()) for f in run.glob('*-process.json')]
+        if not 1<=task['round']<=task['budgets']['max_rounds']:raise ValueError('Declared round range exceeded')
+        if len(prior)>=task['budgets']['control_total']:raise ValueError('Total development launch budget reached')
         if sum(r.get('round',1)==task['round'] for r in prior)>=task['budgets']['control_round_limit']:raise ValueError('Round budget reached; record direction review before switching round')
     source_root=a.source_root.resolve() if a.source_root else root
     if a.source_root:
@@ -37,8 +45,7 @@ def main():
     py=str(Path(a.python).resolve())
     env=runtime_environment(dict(project=str(pin),python=py),0)
     env['VK_ICD_FILENAMES']='/etc/vulkan/icd.d/nvidia_icd.json'
-    args=a.args[1:] if a.args and a.args[0]=='--' else a.args
-    for flag in ['--teacher','--student','--grasp-plan','--seating-plan','--operation-pose','--table-regrasp-plan','--post-acquisition-pose','--gait-plan','--operation-seed']:
+    for flag in input_flags:
         if flag in args:
             i=args.index(flag)+1;source=Path(args[i]).resolve()
             if flag in ['--grasp-plan','--seating-plan','--operation-pose','--table-regrasp-plan','--post-acquisition-pose','--gait-plan','--operation-seed']:

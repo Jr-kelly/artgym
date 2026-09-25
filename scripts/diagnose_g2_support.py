@@ -10,7 +10,9 @@ from scripts.g2_contact_geometry import DigitGeometry
 def skew(v):return np.array([[0,-v[2],v[1]],[v[2],0,-v[0]],[-v[1],v[0],0]])
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--trial',type=Path,required=True);p.add_argument('--phase',required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--trial',type=Path,required=True);p.add_argument('--phase',required=True);p.add_argument('--output',type=Path,required=True)
+    p.add_argument('--distributed',action='store_true',help='Retain each actual contact point instead of averaging each digit to one point.')
+    a=p.parse_args()
     trace=a.trial/'trace.npz'
     if not trace.exists():trace=a.trial/'partial-trace.npz'
     t=np.load(trace);idx=int(np.flatnonzero(t['phase']==a.phase)[-1]);geom=DigitGeometry();q=t['q'][idx].astype(float)
@@ -24,10 +26,12 @@ def main():
                 if row['body'+str(s)]=='link_0' and '_'+finger+'_' in row['body'+str(1-s)] and 'localPos'+str(s) in row:
                     normal=np.asarray(row['normal'])*(-1 if s==0 else 1);normal=normal@obj[:3,:3];normal/=np.linalg.norm(normal)
                     contacts.append((np.array(row['localPos'+str(s)]),normal,row['body'+str(1-s)],np.array(row['localPos'+str(1-s)])))
-        if contacts:
+        if contacts and not a.distributed:
             link=contacts[0][2];contacts=[c for c in contacts if c[2]==link]
             point=np.mean([c[0] for c in contacts],axis=0);normal=np.mean([c[1] for c in contacts],axis=0);normal/=np.linalg.norm(normal)
             local=np.mean([c[3] for c in contacts],axis=0)
+            contacts=[(point,normal,link,local)]
+        for point,normal,link,local in contacts:
             J=np.zeros((3,20))
             for j in range(20):
                 qq=q.copy();qq[j]+=1e-5;f=relative@geom.w.forward(qq)[link];g=relative@geom.w.forward(q)[link]
@@ -54,7 +58,8 @@ def main():
                 modeled_per_finger_normal_N={f:float(sum(v for n,v in zip(names,result.x) if n==f)) for f in set(names)} if result.success else None))
     out=dict(trial=str(a.trial),phase=a.phase,frame=idx,points=[{k:(v.tolist() if isinstance(v,np.ndarray) else v) for k,v in p.items() if k!='J'} for p in points],
              gravity_in_object_N=gravity.tolist(),com_in_object_m=com.tolist(),whole_thumb_geometry=geom.gaps(q,relative,t['slider'][idx]),support_tests=tests,
-             assumptions='Mean actual point per contacting digit link; 8-ray inscribed friction cone, mu range0.5..3 (robot/knife inputs1/3; effective combine law not inferred). URDF effort caps from effective physics. Zero hand gravity baseline. Unilateral force balance about knife origin, no soft-finger moment. Static feasibility not proof of control or stable dynamics; model forces never measured.',
+             contact_representation='all actual contact points' if a.distributed else 'mean point per digit',
+             assumptions='Actual contacts at one frame; 8-ray inscribed friction cone, mu range0.5..3 (robot/knife inputs1/3; effective combine law not inferred). URDF effort caps from effective physics. Zero hand gravity baseline. Unilateral force balance about knife origin, no additional soft-finger moment. Static feasibility not proof of control or stable dynamics; model forces never measured.',
              thumb_command_error_rad=(t['targets'][idx,physics['hand_indices']][16:]-q[16:]).tolist())
     a.output.write_text(json.dumps(out,indent=2)+'\n');print(json.dumps(out))
 
