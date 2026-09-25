@@ -79,7 +79,13 @@ def main():
                 roll=json.loads((trial/'assembly-roll-check.json').read_text());row['assembly_roll']=roll
                 if roll['first_instability_time_s'] is not None:times.append(roll['first_instability_time_s'])
                 if not roll['success']:row['g1_passed']=False
+            if (trial/'assembly-alignment-check.json').exists():
+                alignment=json.loads((trial/'assembly-alignment-check.json').read_text());row['assembly_alignment']=alignment
+                if alignment['first_instability_time_s'] is not None:times.append(alignment['first_instability_time_s'])
+                if not alignment['success']:row['g1_passed']=False
             row['first_instability_time_s']=min(times) if times else None
+            if row['g1_passed'] and row.get('operation_steps',0)==0:
+                row['legacy_acquisition_label_note']='Legacy takeover hold requires thumb contact and labels a deliberate thumb-free hold lost_after_lift. Use the independently scored G1 support hold; raw report preserved. This does not establish an operational grasp.'
             # Actual contact locations on the knife surface, in that link's local frame.
             contacts=trial/'knife-contact-pairs.jsonl';at_end=[]
             if contacts.exists():

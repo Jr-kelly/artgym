@@ -13,7 +13,9 @@ def main():
     p.add_argument('--phase',default='lift',help='Executed phase end to use as motor-planning reference; never a simulator reset.')
     p.add_argument('--fallback-normals',type=Path,help='For a deliberately unloaded finger only: earlier planning normals, explicitly NOT measured contact.')
     p.add_argument('--output',type=Path,required=True);a=p.parse_args()
-    data=json.loads((a.trial/'grasp-plan.json').read_text());t=np.load(a.trial/'trace.npz')
+    trace=a.trial/'trace.npz'
+    if not trace.exists():trace=a.trial/'partial-trace.npz'
+    data=json.loads((a.trial/'grasp-plan.json').read_text());t=np.load(trace)
     selected=np.flatnonzero(t['phase']==a.phase)
     if not len(selected):raise ValueError('Phase absent in executed trace: '+a.phase)
     i=int(selected[-1]);physics=json.loads((a.trial/'physics.json').read_text())
@@ -37,7 +39,7 @@ def main():
     data.update(wrist_in_knife=relative.tolist(),touch_q=t['q'][i].tolist(),
         close_q=t['targets'][i,physics['hand_indices']].tolist(),contact_targets=points.tolist(),
         contact_normals=np.asarray(normals).tolist(),contact_normal_sources=normal_sources,source_trial=str(a.trial),source_step=i,
-        source_trace_sha256=hashlib.sha256((a.trial/'trace.npz').read_bytes()).hexdigest(),source_phase=a.phase,
+        source_trace_sha256=hashlib.sha256(trace.read_bytes()).hexdigest(),source_trace=str(trace),source_phase=a.phase,
         validation='Actual executed phase-end geometry for motor planning only. Original tabletop grasp plan remains unchanged; never load as simulator state.')
     a.output.write_text(json.dumps(data,indent=2)+'\n');print(str(a.output))
 
