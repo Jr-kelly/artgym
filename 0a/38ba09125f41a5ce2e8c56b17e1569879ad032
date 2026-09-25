@@ -1,0 +1,83 @@
+scripts/run_g2_tabletop.py
+  s_87fdc32a1dcd01::t_b575761c207916 78,393-412
+  s_87fdc32a1dcd01::t_f4180d14b14e20 638-639,687-689
+  s_87fdc32a1dcd01::t_b870fb8bb9d7e2 238-239,363-365,370,372,415-416,435,486-493,691
+  s_87fdc32a1dcd01::t_691c18cfa139e2 79,90,369,371,436-440,494-500
+scripts/plan_g2_body_regrasp.py
+  s_87fdc32a1dcd01::t_d665503f4d112a 1-17,20-22,24,27,29-44,48,50-54,57-60
+  s_87fdc32a1dcd01::t_2a36b36fc1090d 18,23,25-26,28,45-47
+  s_87fdc32a1dcd01::t_178f82a913726b 19,49,55-56
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "0a38ba09125f41a5ce2e8c56b17e1569879ad032",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.input_tokens": "41443194",
+        "tlab.token_usage.output_tokens": "5285689",
+        "tlab.session_started_at": "2026-09-25T11:53:49Z",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.cache_read_tokens": "748136207"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "scripts/plan_g2_body_regrasp.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 60
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 30
+      },
+      "deletions": {
+        "human": 1
+      }
+    },
+    {
+      "old_path": "research/g2-tabletop-baseline-20260925.md",
+      "new_path": "research/g2-tabletop-baseline-20260925.md",
+      "additions": {
+        "human": 50
+      }
+    },
+    {
+      "old_path": "scripts/run_g2_tabletop.py",
+      "new_path": "scripts/run_g2_tabletop.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 61
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 6
+          }
+        ]
+      }
+    }
+  ]
+}
