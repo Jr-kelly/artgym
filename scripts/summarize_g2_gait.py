@@ -69,6 +69,9 @@ def main():
                     gate=gate and all(fractions[i]>=.9 for i in definition.get('require_contacts',[]))
                     if definition.get('require_thumb_gap_m') is not None:
                         gate=gate and stage.get('thumb_gap_min_m',-1)>=definition['require_thumb_gap_m']
+                    slider_index=definition.get('require_slider_contact')
+                    if slider_index is not None:
+                        gate=gate and stage.get('slider_contact_fraction_thumb_index_middle_ring_pinky',[0]*5)[slider_index]>=.9
                     stage['requested_contact_condition_met']=bool(gate)
                     stage['stage_completed']=bool(stage['stable'] and gate)
                     stage['check_source']=str(folder.relative_to(trial))
@@ -81,6 +84,9 @@ def main():
                     for index in required_contacts:miss|=t['finger_knife_contacts'][samples,index]<=0
                     if definition.get('require_thumb_gap_m') is not None and 'thumb_gap_lower_bound_m' in t:
                         miss|=t['thumb_gap_lower_bound_m'][samples]<definition['require_thumb_gap_m']
+                    if slider_index is not None:
+                        if 'finger_slider_contacts' not in t:raise ValueError('Slider contact gate lacks raw per-link observations')
+                        miss|=t['finger_slider_contacts'][samples,slider_index]<=0
                     stage['first_requested_contact_condition_miss_time_s']=float(t['time'][samples[np.flatnonzero(miss)[0]]]) if miss.any() else None
                     stage['contact_timing_note']='First observed miss, separate from world instability; original >=90% support-contact gate is unchanged.'
                     row['gait_stages'].append(stage)

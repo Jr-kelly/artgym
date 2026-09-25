@@ -380,7 +380,7 @@ def main():
         refresh();q,qa,sl,w,o,l=current()
         executed=np.zeros(20,dtype=np.float32) if action is None else action
         policy.record(q,executed)
-        finger_table=np.zeros(5,dtype=np.int32);finger_knife=np.zeros(5,dtype=np.int32)
+        finger_table=np.zeros(5,dtype=np.int32);finger_knife=np.zeros(5,dtype=np.int32);finger_slider=np.zeros(5,dtype=np.int32)
         knife_table_count=0;robot_table_count=0;robot_table_links=set()
         for c in gym.get_env_rigid_contacts(env):
             if c['lambda']<=1e-6:continue
@@ -406,11 +406,12 @@ def main():
                 digit_contact=any('_'+f+'_' in env_names.get(b,'') for b in pair)
                 if digit_contact and table_env in pair:finger_table[i]+=1
                 if digit_contact and pair & knife_env:finger_knife[i]+=1
+                if digit_contact and any(env_names.get(b)=='link_1' for b in pair):finger_slider[i]+=1
         records.append(dict(time=(global_step+1)*dt,phase=phase,q=q,arm_q=qa,targets=command_targets,reference_targets=reference_targets,action=executed.copy(),
             all_dof_position=dof[:,0].cpu().numpy().copy(),object_rigid_state=rb[obj_id].cpu().numpy().copy(),
             slider_rigid_state=rb[slider_id].cpu().numpy().copy(),arm_integral_state=arm_integral.copy(),
             dof_velocity=dof[:,1].cpu().numpy().copy(),dof_effort=efforts.cpu().numpy().copy() if efforts is not None else np.full(len(names)+1,np.nan),
-            finger_table_contacts=finger_table,finger_knife_contacts=finger_knife,
+            finger_table_contacts=finger_table,finger_knife_contacts=finger_knife,finger_slider_contacts=finger_slider,
             knife_table_contacts=knife_table_count,robot_table_contacts=robot_table_count,
             slider=sl,goal=goal,wrist=pose(w),object=pose(o),slider_pose=pose(l),
             table_force=contact[table_id].cpu().numpy().copy(),hand_force=contact[hand_bodies].cpu().numpy().copy(),

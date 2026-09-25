@@ -97,6 +97,8 @@ def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,
             free=np.array([row['finger_knife_contacts'][0]==0 for row in records[first:]])
             result['thumb_zero_contact_frames']=int(free.sum())
             if free.any():result['thumb_first_no_contact_time_s']=float(records[first+np.flatnonzero(free)[0]]['time'])
+        if 'finger_slider_contacts' in records[first]:
+            result['slider_contact_fraction_thumb_index_middle_ring_pinky']=(np.array([r['finger_slider_contacts'] for r in records[first:]])>0).mean(0).tolist()
         (output/'gait-checks.json').write_text(json.dumps(dict(stages=output_rows,world_reference=world.tolist(),hand_reference=relative.tolist()),indent=2)+'\n')
         if not result['stable']:raise ValueError('Gait fixed-reference stability failed: '+stage['name'])
         if stage['kind']=='hold' and stage.get('require_contact') is not None:
@@ -106,6 +108,10 @@ def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,
             for index in stage.get('require_contacts',[]):
                 if result['contact_fraction_thumb_index_middle_ring_pinky'][index]<.9:
                     raise ValueError('Required support contact not sustained: '+stage['name']+' digit '+str(index))
+        if stage['kind']=='hold' and stage.get('require_slider_contact') is not None:
+            index=stage['require_slider_contact']
+            if result.get('slider_contact_fraction_thumb_index_middle_ring_pinky',[0]*5)[index]<.9:
+                raise ValueError('Required slider contact not sustained: '+stage['name'])
         if stage['kind']=='hold' and stage.get('require_no_contact') is not None:
             index=stage['require_no_contact'];fraction=result['contact_fraction_thumb_index_middle_ring_pinky'][index]
             if fraction!=0.:raise ValueError('Requested digit did not unload for the full hold: '+stage['name'])

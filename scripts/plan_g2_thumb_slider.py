@@ -7,7 +7,7 @@ import argparse,json,os,time
 os.environ['OPENBLAS_NUM_THREADS']='1';os.environ['OMP_NUM_THREADS']='1'
 from pathlib import Path
 import numpy as np
-from scipy.optimize import least_squares
+from scipy.optimize import least_squares, minimize
 from scripts.g2_contact_geometry import DigitGeometry
 from scripts.audit_g2_wrist_plan import intersection_radius
 
@@ -18,6 +18,7 @@ def main():
     p.add_argument('--branch',default='bounded_1');p.add_argument('--seed',type=int,default=2026092605)
     p.add_argument('--seconds',type=float,default=180.);p.add_argument('--iterations',type=int,default=800)
     p.add_argument('--normal-close',type=float,default=.0008)
+    p.add_argument('--free-prepose',action='store_true',help='Find nearest collision-free joint prepose instead of imposing an unreachable straight12mm material-point offset.')
     a=p.parse_args()
     if a.output.exists() or a.output.with_suffix('.rejected.json').exists():raise ValueError('Preserve previous search')
     if not 0<=a.normal_close<=.001:raise ValueError('Bounded motor closing offset only')
@@ -41,13 +42,21 @@ def main():
         return least_squares(residual,np.clip(seed,w.lower[16:]+1e-7,w.upper[16:]-1e-7),bounds=(w.lower[16:],w.upper[16:]),max_nfev=180,diff_step=1e-5)
     touch=solve(target,np.array(branch['q']),-.0003)
     prepoint=target+np.array([0,.012,0]);pre=solve(prepoint,touch.x,.0048)
+    prepose_method='straight12mm material-point offset'
+    if a.free_prepose:
+        def constraints(v):
+            q=proposed(v)
+            return np.r_[[s['gap_lower_bound_m']-.0048 for s in g.gaps(q,relative,slider)],
+                [s['gap_lower_bound_m']-.00015 for s in g.self_gaps(q,'thumb')]]
+        pre=minimize(lambda v:float(np.sum((v-touch.x)**2)),pre.x,method='SLSQP',bounds=list(zip(w.lower[16:],w.upper[16:])),constraints=[dict(type='ineq',fun=constraints)],options=dict(maxiter=120,ftol=1e-10))
+        prepoint=point(pre.x);prepose_method='nearest joint-space prepose constrained to4.8mm clearance; no fixed material-point translation demand'
     closepoint=target-np.array([0,a.normal_close,0]);close=solve(closepoint,touch.x,-.0011)
     endpoints=[]
     for name,result,pt,bound in [('pre',pre,prepoint,.0041),('touch',touch,target,-.0005),('close',close,closepoint,-.0012)]:
         q=proposed(result.x);gap=full.minimum_gap(q,relative,slider);sg=min(s['gap_lower_bound_m'] for s in full.self_gaps(q,'thumb'))
         endpoints.append(dict(name=name,q=result.x.tolist(),target=pt.tolist(),point=point(result.x).tolist(),error_m=float(np.linalg.norm(point(result.x)-pt)),whole_thumb_gap_m=gap,self_gap_m=sg,passed=bool(np.linalg.norm(point(result.x)-pt)<.001 and gap>=bound and sg>=0)))
     report=dict(source=str(a.source),screen=str(a.screen),branch=a.branch,actual_slider_position_m=slider,anchor_local=anchor.tolist(),contact_link=link,endpoints=endpoints,
-        seed=a.seed,seconds_budget=a.seconds,iteration_budget=a.iterations,normal_motor_close_m=a.normal_close,
+        prepose_method=prepose_method,prepose_solver_success=bool(pre.success),seed=a.seed,seconds_budget=a.seconds,iteration_budget=a.iterations,normal_motor_close_m=a.normal_close,
         scope='Only thumb motors move after complete actual table prefix. IK material point on screened pad; free path requires full-thumb4.1mm clearance. Contact commands are finite drive, not measured force or physical penetration. No object state writes.')
     def save_reject(reason):
         report.update(geometric_pass=False,rejection=reason);a.output.with_suffix('.rejected.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(dict(passed=False,reason=reason,endpoints=endpoints)))
@@ -117,7 +126,7 @@ def main():
     stages += [dict(name='thumb_slider_pre_hold',kind='hold',seconds=1.,require_contacts=[1,2,3,4],require_no_contact=0,require_thumb_gap_m=.0041),
         dict(name='thumb_slider_touch',kind='move',moving_indices=list(range(16,20)),target=touch.x.tolist(),seconds=2.),
         dict(name='thumb_slider_close',kind='move',moving_indices=list(range(16,20)),target=close.x.tolist(),seconds=1.),
-        dict(name='thumb_slider_contact_hold',kind='hold',seconds=1.,require_contacts=[0,1,2,3,4])]
+        dict(name='thumb_slider_contact_hold',kind='hold',seconds=1.,require_contacts=[0,1,2,3,4],require_slider_contact=0)]
     report['geometric_pass']=True;plan['thumb_slider_geometry']=report;plan['stages']+=stages
     a.output.write_text(json.dumps(plan,indent=2)+'\n');print(json.dumps(dict(passed=True,output=str(a.output),waypoints=len(path),endpoints=endpoints)))
 
