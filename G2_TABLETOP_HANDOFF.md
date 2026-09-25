@@ -1,6 +1,6 @@
 # G2＋Wuji 桌面取刀→伸缩（2026-09-25）
 
-分支 feat/g2-wuji-tabletop-20260925；工程 /data/research/artgym-g2-tabletop-20260925；实验 runs/g2-tabletop-v1。A63及固定B65已完整通过：正常桌面连续取刀到teacher两轮、10mm端点/稳定均过，2mm诊断未全过。C66复制B65完全相同源码/抓取配置，冻结student理想初始化正在运行。未做20变化，没有新训练。
+分支 feat/g2-wuji-tabletop-20260925；工程 /data/research/artgym-g2-tabletop-20260925；实验 runs/g2-tabletop-v1。固定A63/B65/C66全部通过两轮、10mm及全程稳定，B/C未全过2mm；C是理想初始化及仿真定位对照。20次小变化已声明清单，尚未完成；无新训练，goal仍active。
 
 任务：固定刀具、固定正常桌面摆放、一个功能抓姿；G2右臂接近/闭合/抬起/移到操作姿态；同一仿真连续状态接冻结teacher再student。模型源 /data/research/ArtBot/G2_crsB_wuji/robot.usd，禁止套用Franka安装或参数。
 
@@ -12,7 +12,7 @@ A预置→teacher；B实际抓取→teacher；C实际抓取→student。先A定�
 
 交付新分支/新Release、运行命令、完整无文字视频/失败视频、轨迹和分类，不覆盖旧结果或历史备份。原4090训练88339保留，运行前重查显存；仅进行有用仿真，不为占用GPU启动无效计算。
 
-当前下一步：收C-axis3-post-up5-student-ideal-v66（PID7325，查process.json及真实进程）。B65已通过两轮与稳定；C若通过，审计B/C前2670帧与实际历史、冷RNN、固定参考/动作映射及实时物体真值不变性，再用run_g2_small_variations.py declare预先声明20次（10共享位置×两策略）。未通过则按B成立C失败排查初始化/历史/观测。B65/C66尚未进Release，最新v5仅含到B64的失败对照。
+当前下一步：提交/推送20次预声明清单后，启动且只启动一个run_g2_small_variations driver（状态见g2-small-placement-v1-driver.json/results.json，启动后更新）；必须全量收齐失败和成功，不调参改样本。固定A63/B65/C66已通过并审计B/C前2670帧相同、C实际历史/RNN/实时真值不变性。准备增量Release v6上传B65/C66两条109秒成功视频及证据，排除v1–v5。
 
 ## 17:13 CST 进度
 
@@ -320,3 +320,21 @@ B64/B65前1080帧直至withdraw完全一致（B64-B65-acquisition-prefix-parity-
 C-axis3-post-up5-student-ideal-v66已在21:22:23 CST启动（PID7325，PID计数回绕后的小编号正常；原训练88339仍活跃）。launcher直接复制B65校验过的源码pin，两者SOURCE_SHA256清单哈希完全相同4b63cd7459d02e73f4d9788ebce5a3d6507fab3f394ce38863a5d73a425dba49，参数仅group B→C。Student冻结权重保持；实际50帧停稳历史、RNN只清零一次、接管初始物体真值明确理想初始化。结果待收，不提前宣布C成功。
 
 若C同样通过，先做实际前2670帧一致性与冻结回放/实时真值不变性审计，再声明10个位置×B/C共20次的既定小变化。使用A-operation-up5-v63 / B-axis3-post-up5-teacher-v65 / C-axis3-post-up5-student-ideal-v66。当前没有声明或抽取验证样本；还没有新训练。B65完整无文字视频已保存continuous.mp4，待和C一起增量发布v6，不覆盖v5失败证据。
+
+
+## 21:33 CST 固定A/B/C收齐通过；20次小变化已预先声明
+
+C-axis3-post-up5-student-ideal-v66完成109秒连续桌面流程：抓取1/1、条件操作1/1、全段1/1，两轮10mm基本到位且稳定；四端点4.914/5.413/6.656/4.827mm，行程37.082mm，固定参考漂移5.185mm/.2355rad，无掉落。2mm诊断未通过。这是仿真定位与物体初始真值条件下的单案例，不是可部署或泛化验证。A63同一最终5°腕姿通过2mm及稳定；B65通过10mm及稳定。汇总abc-current-continuous-v67-final.json，旧pending快照保留。
+
+B65/C66前2670帧直至接管完全相同，实际物性physics.json也字节相同；C冻结重放600帧的观测/动作/电机目标及实时物体真值扰动不变性误差均0。实际50帧历史均为settle_history，动作0；RNN接管时清零一次，初始目标/观测固定。依据B65-C66-acquisition-prefix-parity-v67.json、frozen-replay-C66-v67.json。
+
+run_g2_small_variations.py已在固定ABC通过后声明10组共享摆放×两策略，共20次；x/y±5mm、yaw±2°，seed2026092501。文件runs/g2-tabletop-v1/g2-small-placement-v1.json及公开副本research/g2-small-placement-validation-v1.json，SHA256 20f313a7f96681241a71a6d83b8f9a8db057947f888dbaa9caa7b718a8c5b7a1。将先提交/推送声明，再启动；不修改该清单或失败样本，不在本组上调参。每次复制C66经哈希校验的冻结源码pin，保留全部日志、原始轨迹和视频；初始规划失败也保留在整段分母。当前只是已声明，尚未完成验证。
+
+复现并继续已声明验证：
+
+```bash
+python3 -m scripts.run_g2_small_variations run \
+  --manifest runs/g2-tabletop-v1/g2-small-placement-v1.json --concurrency 2
+```
+
+状态/分组结果写g2-small-placement-v1-results.json；不要并发启动多个driver。遇中断先核对driver和子进程，单个driver可恢复未启动项，已失败项不重跑。A/B/C权重及控制无新训练。新成功视频待增量Release v6，v5失败证据保留。

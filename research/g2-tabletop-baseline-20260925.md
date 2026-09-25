@@ -2,7 +2,7 @@
 
 续接入口：[G2_TABLETOP_HANDOFF.md](../G2_TABLETOP_HANDOFF.md)。独立分支 `feat/g2-wuji-tabletop-20260925`，本机工程 `/data/research/artgym-g2-tabletop-20260925`，实验目录 `runs/g2-tabletop-v1`。旧成功版本及训练 PID 88339 保留；本阶段没有训练新策略。
 
-截至2026-09-25 21:25 CST：A63及固定B65首次完整通过。B65正常桌面连续获取89秒后接冻结teacher20秒，完成两轮，10mm端点及全程稳定通过，2mm严格诊断未全过；这只是开发单案例。C66使用完全相同源码与获取流程，冻结student理想初始化正在运行。20次小变化尚未声明，没有新训练。此前B58/B64回收窗口失败、B62翻转、B60 IK中止均保留。
+截至2026-09-25 21:33 CST：固定A63/B65/C66均已通过两轮、10mm基本到位和全程稳定。B/C从正常桌面开始连续109秒，B/C未全过2mm；C使用仿真定位和接管时物体真值，属于理想初始化对照。B/C获取轨迹2670帧完全相同，冻结推理与实际历史审计通过。20次小变化清单已预先声明，尚未完成；没有新训练，旧失败全部保留。
 
 ## 模型、控制及约束
 
@@ -399,3 +399,21 @@ B64/B65前1080帧直至withdraw完全一致（B64-B65-acquisition-prefix-parity-
 C-axis3-post-up5-student-ideal-v66已在21:22:23 CST启动（PID7325，PID计数回绕后的小编号正常；原训练88339仍活跃）。launcher直接复制B65校验过的源码pin，两者SOURCE_SHA256清单哈希完全相同4b63cd7459d02e73f4d9788ebce5a3d6507fab3f394ce38863a5d73a425dba49，参数仅group B→C。Student冻结权重保持；实际50帧停稳历史、RNN只清零一次、接管初始物体真值明确理想初始化。结果待收，不提前宣布C成功。
 
 若C同样通过，先做实际前2670帧一致性与冻结回放/实时真值不变性审计，再声明10个位置×B/C共20次的既定小变化。使用A-operation-up5-v63 / B-axis3-post-up5-teacher-v65 / C-axis3-post-up5-student-ideal-v66。当前没有声明或抽取验证样本；还没有新训练。B65完整无文字视频已保存continuous.mp4，待和C一起增量发布v6，不覆盖v5失败证据。
+
+
+## 21:33 CST 固定A/B/C收齐通过；20次小变化已预先声明
+
+C-axis3-post-up5-student-ideal-v66完成109秒连续桌面流程：抓取1/1、条件操作1/1、全段1/1，两轮10mm基本到位且稳定；四端点4.914/5.413/6.656/4.827mm，行程37.082mm，固定参考漂移5.185mm/.2355rad，无掉落。2mm诊断未通过。这是仿真定位与物体初始真值条件下的单案例，不是可部署或泛化验证。A63同一最终5°腕姿通过2mm及稳定；B65通过10mm及稳定。汇总abc-current-continuous-v67-final.json，旧pending快照保留。
+
+B65/C66前2670帧直至接管完全相同，实际物性physics.json也字节相同；C冻结重放600帧的观测/动作/电机目标及实时物体真值扰动不变性误差均0。实际50帧历史均为settle_history，动作0；RNN接管时清零一次，初始目标/观测固定。依据B65-C66-acquisition-prefix-parity-v67.json、frozen-replay-C66-v67.json。
+
+run_g2_small_variations.py已在固定ABC通过后声明10组共享摆放×两策略，共20次；x/y±5mm、yaw±2°，seed2026092501。文件runs/g2-tabletop-v1/g2-small-placement-v1.json及公开副本research/g2-small-placement-validation-v1.json，SHA256 20f313a7f96681241a71a6d83b8f9a8db057947f888dbaa9caa7b718a8c5b7a1。将先提交/推送声明，再启动；不修改该清单或失败样本，不在本组上调参。每次复制C66经哈希校验的冻结源码pin，保留全部日志、原始轨迹和视频；初始规划失败也保留在整段分母。当前只是已声明，尚未完成验证。
+
+复现并继续已声明验证：
+
+```bash
+python3 -m scripts.run_g2_small_variations run \
+  --manifest runs/g2-tabletop-v1/g2-small-placement-v1.json --concurrency 2
+```
+
+状态/分组结果写g2-small-placement-v1-results.json；不要并发启动多个driver。遇中断先核对driver和子进程，单个driver可恢复未启动项，已失败项不重跑。A/B/C权重及控制无新训练。新成功视频待增量Release v6，v5失败证据保留。

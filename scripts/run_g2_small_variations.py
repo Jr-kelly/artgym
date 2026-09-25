@@ -81,7 +81,7 @@ def declare(args):
         base_arguments={g: reports[g]['args'] for g in ['B', 'C']}, input_sha256=files,
         trials=trials, condition='Normal %sm tabletop; same frozen acquisition, control and policies; C ideal initialization' % reports['B']['args']['table_height'],
         metrics='10mm endpoint criterion, full stability and drop separate; 2mm diagnostic; fixed takeover drift reference',
-        interpretation='20 physical task attempts: ten predeclared placements, paired teacher/student. Keep all planning and physical failures. No tuning on these cases.')
+        interpretation='20 predeclared task attempts: ten placements, paired teacher/student. Keep all planning and physical failures. No tuning on these cases.')
     args.manifest.parent.mkdir(parents=True, exist_ok=True)
     args.manifest.write_text(json.dumps(manifest, indent=2) + '\n')
     print(json.dumps(dict(manifest=str(args.manifest),sha256=sha(args.manifest),trials=len(trials))))
