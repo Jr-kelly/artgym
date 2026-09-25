@@ -3,11 +3,16 @@
 Goal工具已实际返回 **complete**（2026-09-24）；下文旧blocked记录仅为历史。用户限定的基本teacher+student滑块开合已验证并发布，后续硬件/精度/长时鲁棒性是后续范围。
 
 
+## 全量备份本机部分完成（2026-09-25T04:44:30.604777+00:00）
+
+本机3目录192177文件/208190472088字节已完整捕获、全量恢复核验；225分卷及元数据已上传并逐项校验GitHub SHA256，Release https://github.com/Jr-kelly/artgym/releases/tag/wuji-full-backup-20260925-v1 。详细完成记录 `/home/agiuser/artgym-full-backup-20260925-v1/FINAL.json` 与 `runs/wuji-goal/diagnostics/full-backup-20260925-v1-final.json`。远端SSH全部拒绝连接，远端独有文件待补，不能称所有机器全量完成；用户新入口到达后先拉取远端差异继续备份。后续新增CP/日志亦需增量。备份README内含下载、恢复、路径迁移说明。
+
+
 ## 全量备份执行中（2026-09-25）
 
 用户明确要求全量备份到GitHub。备份工作根 `/home/agiuser/artgym-full-backup-20260925-v1`，spec.json 固定三个本机目录：原仓库、实验副本、早期demo工作树，约195GiB/19万文件，包含隐藏文件、.git、所有原始CP/日志/轨迹/失败记录/缓存与项目tmp。内容按64MiB块SHA256去重，封装标准tar+zstd分卷；manifest恢复全部路径。原4090 PID88339仍在训练，保留进程，备份逐文件捕获+第二遍变化核对，活跃日志记录为时间前缀，非原子整盘快照。
 
-远端 .106/.93:30147、.73:30296、.59:31973 本轮全部Connection refused；已向用户请求恢复入口或新SSH地址。远端独有文件待补，不能把本地完成称全部机器完成。GitHub新Release tag拟 `wuji-full-backup-20260925-v1`，先完成可恢复验证再发布；工具在工作根tools/，进度status.json。查实际进度后继续，勿覆盖已封装分卷或冻结源码。
+远端 .106/.93:30147、.73:30296、.59:31973 本轮全部Connection refused；已向用户请求恢复入口或新SSH地址。远端独有文件待补，不能把本地完成称全部机器完成。GitHub新Release tag拟 `wuji-full-backup-20260925-v1`，先完成可恢复验证再发布；工具在工作根tools/，进度status.json。查实际进度后继续，勿覆盖已封装分卷或冻结源码。 已创建Release草稿396269037；代码分支backup/wuji-full-20260925已推送。进程记录分别在备份根snapshot-process.json、upload-process.json、finalization-process.json，实际PID需重查；finalize_local.py会全目录恢复、逐文件SHA校验、上传元数据并发布本地部分。最终以FINAL.json为准，远端未连通前all_hosts_complete仍false。
 
 
 ## GitHub发布覆盖核验（2026-09-25）

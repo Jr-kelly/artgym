@@ -1,0 +1,59 @@
+{
+  "completed": "2026-09-25T04:44:30.604282+00:00",
+  "status": "local_complete_remote_pending",
+  "release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-full-backup-20260925-v1",
+  "release_id": 396269037,
+  "assets": 236,
+  "github_sha256_all_verified": true,
+  "public_metadata_readback_verified": true,
+  "created": "2026-09-25T04:44:03.678688+00:00",
+  "local_complete": true,
+  "all_hosts_complete": false,
+  "roots": {
+    "artgym": "/data/research/artgym",
+    "artgym-experiments-20260921": "/data/research/artgym-experiments-20260921",
+    "artgym-wuji-knife-demo": "/data/research/artgym-wuji-knife-demo"
+  },
+  "files": 192177,
+  "entries": 235768,
+  "logical_bytes": 208190472088,
+  "unique_blob_bytes": 124289086927,
+  "compressed_bytes": 115890298627,
+  "packs": 225,
+  "capture_started": "2026-09-25T03:26:35.821588+00:00",
+  "capture_finished": "2026-09-25T03:59:18.711907+00:00",
+  "restore": {
+    "status": "verified",
+    "packs": 225,
+    "blobs": 65476,
+    "restored_files": 192177,
+    "selected_entries": 235768,
+    "finished": "2026-09-25T04:10:26.133868+00:00",
+    "destination": "/home/agiuser/artgym-full-backup-20260925-v1/restore-audit",
+    "manifest_sha256": "6284f9ee1ae095062cb90149d735d8d713bd548041e78e3a05a02268852d7a98",
+    "scope": "Every manifest file restored and verified by whole-file SHA256; all referenced compressed packs and chunks verified."
+  },
+  "remote_pending": [
+    {
+      "host": "10.14.0.106",
+      "port": 30147,
+      "observed": "Connection refused"
+    },
+    {
+      "host": "10.14.0.93",
+      "port": 30147,
+      "observed": "Connection refused"
+    },
+    {
+      "host": "10.14.0.73",
+      "port": 30296,
+      "observed": "Connection refused"
+    },
+    {
+      "host": "10.14.0.59",
+      "port": 31973,
+      "observed": "Connection refused"
+    }
+  ],
+  "consistency": "Per-file capture plus reconciliation pass; not an atomic cross-file filesystem snapshot. Active logs are captured through their observed length. Training was not paused."
+}
