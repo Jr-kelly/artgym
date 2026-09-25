@@ -1,7 +1,8 @@
 """Whole-digit collision-hull separation from both knife links (metres).
 
 Positive SAT gaps are conservative lower bounds on Euclidean clearance.
-Negative values indicate convex overlap, not a calibrated penetration depth.
+Negative values fail this separation certificate and require an intersection
+check; they are not a calibrated penetration depth.
 Uses collision geometry, measured joint positions and measured wrist/object pose.
 """
 from pathlib import Path

@@ -12,6 +12,7 @@ def main():
     data=json.loads(a.summary.read_text());rows=[]
     for trial in data['trials']:
         cmd=trial.get('command',[]);group=cmd[cmd.index('--group')+1] if '--group' in cmd else trial.get('group')
+        action_mode=cmd[cmd.index('--policy-action-mode')+1] if '--policy-action-mode' in cmd else 'full'
         score=trial.get('score',{});stages=trial.get('gait_stages',[]);end=stages[-1] if stages else {}
         good=[s for s in stages if s['stage_completed']];steps=trial.get('operation_steps',0) or 0
         failure=trial.get('abort',{});first=trial.get('first_instability_time_s')
@@ -31,6 +32,8 @@ def main():
             final_gait_contacts_thumb_index_middle_ring_pinky=json.dumps(end.get('contact_fraction_thumb_index_middle_ring_pinky')) if end else None,
             first_world_instability_s=first,first_low_after_lift_s=trial.get('first_low_object_after_commanded_lift',{}).get('time_s'),
             entered_policy=steps>0,operation_steps=steps,
+            policy_action_mode=action_mode if steps else 'not_executed',
+            unchanged_policy_actions=action_mode=='full' if steps else None,
             basic_10mm=score.get('basic_10mm') if steps else None,strict_2mm=score.get('strict_2mm') if steps else None,
             operation_fixed_world_stable=score.get('stable_world_10mm_025rad') if steps else None,
             slider_travel_mm=mm(score.get('slider_travel_m')) if steps else None,
@@ -44,7 +47,7 @@ def main():
             continuous_whole_success=bool(group in ['B','C'] and steps and score.get('whole_stable_success',False)),
             abort_phase=failure.get('last_phase'),abort_reason=failure.get('message',failure.get('error',failure.get('exception'))),
             raw_failure_class=trial.get('failure_class'),
-            caution=('Independent preset A; no acquisition' if group=='A' else 'No policy evaluation; not a teacher/student failure' if not steps else 'Development run; not independent validation'))
+            caution=('Independent preset A; no acquisition' if group=='A' else 'No policy evaluation; not a teacher/student failure' if not steps else 'Action-component ablation; not unchanged full teacher' if action_mode!='full' else 'Development run; not independent validation'))
         rows.append(row)
     with a.output.open('w',newline='') as f:
         writer=csv.DictWriter(f,fieldnames=list(rows[0]));writer.writeheader();writer.writerows(rows)

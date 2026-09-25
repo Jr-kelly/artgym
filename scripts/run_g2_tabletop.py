@@ -47,6 +47,7 @@ def main():
     parser.add_argument('--close-height',type=float,default=0.)
     parser.add_argument('--settle-seconds',type=float,default=2.)
     parser.add_argument('--only-grasp',action='store_true')
+    parser.add_argument('--policy-action-mode',choices=['full','thumb-only'],default='full',help='Explicit frozen-policy action-component ablation. Thumb-only holds other motor references; raw and executed actions are both recorded.')
     parser.add_argument('--camera',choices=['wide','hand'],default='wide')
     parser.add_argument('--operation-yaw',type=float,default=0.)
     parser.add_argument('--hand-only-diagnostic',action='store_true')
@@ -179,7 +180,7 @@ def main():
               table_top=table_z,knife_pose=pose(table_obj).tolist(),planned_wrist_pose=pose(grasp_pose).tolist())
     (args.output/'plan.json').write_text(json.dumps(plan,indent=2)+'\n')
     if preset_candidate is None:assert max(e['position_m'] for e in [high_error,grasp_error,lift_error])<.001
-    policy=FrozenPolicy(cfg,args.teacher,args.student if args.group=='C' else None)
+    policy=FrozenPolicy(cfg,args.teacher,args.student if args.group=='C' else None,action_mode=args.policy_action_mode)
     gym=gymapi.acquire_gym(); sp=gymapi.SimParams()
     sp.dt=float(cfg.task.sim.dt);sp.substeps=int(cfg.task.sim.substeps);sp.up_axis=gymapi.UP_AXIS_Z
     sp.gravity=gymapi.Vec3(0,0,-9.81);sp.use_gpu_pipeline=False
@@ -408,6 +409,7 @@ def main():
                 if digit_contact and pair & knife_env:finger_knife[i]+=1
                 if digit_contact and any(env_names.get(b)=='link_1' for b in pair):finger_slider[i]+=1
         records.append(dict(time=(global_step+1)*dt,phase=phase,q=q,arm_q=qa,targets=command_targets,reference_targets=reference_targets,action=executed.copy(),
+            raw_policy_action=policy.last_raw_action.copy() if action is not None else np.zeros(20,dtype=np.float32),
             all_dof_position=dof[:,0].cpu().numpy().copy(),object_rigid_state=rb[obj_id].cpu().numpy().copy(),
             slider_rigid_state=rb[slider_id].cpu().numpy().copy(),arm_integral_state=arm_integral.copy(),
             dof_velocity=dof[:,1].cpu().numpy().copy(),dof_effort=efforts.cpu().numpy().copy() if efforts is not None else np.full(len(names)+1,np.nan),
@@ -788,6 +790,8 @@ def main():
             grasp_success=grasp_success if args.group!='A' else None,slider_at_takeover=sl,slider_command_origin=slider_lower,
             acquisition_hold_check=hold_check,
             table_height=table_z,
+            policy_action_mode=args.policy_action_mode,
+            executed_action_provenance='raw actor output' if args.policy_action_mode=='full' else 'thumb actor output; non-thumb components explicitly zeroed before controller, last-action observation and history; raw output saved separately',
             student_initialization='ideal_simulation_truth_at_takeover' if args.group=='C' else None,
             acquisition_localization='live simulation object truth during seating: '+args.seat_feedback if args.seat_feedback!='none' else 'configured table placement and one-time truth for seating planning',
             acquisition_finger_localization=args.seat_finger_feedback,table_supported_regrasp=bool(table_regrasp),

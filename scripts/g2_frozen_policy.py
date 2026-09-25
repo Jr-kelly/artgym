@@ -26,7 +26,9 @@ def pose(t):
 
 
 class FrozenPolicy:
-    def __init__(self,cfg,teacher,student=None):
+    def __init__(self,cfg,teacher,student=None,action_mode='full'):
+        if action_mode not in ['full','thumb-only']:raise ValueError('Unknown explicit action ablation')
+        self.action_mode=action_mode;self.last_raw_action=np.zeros(20,dtype=np.float32)
         self.fk=WujiKinematics(); self.cfg=cfg
         train=preprocess_train_config(cfg,OmegaConf.to_container(cfg.train,resolve=True))
         self.player=build_policy_player(cfg,train,Path(teacher),_infer_expl_num_blocks(Path(teacher)),0)
@@ -87,5 +89,11 @@ class FrozenPolicy:
     def step(self,q,wrist,obj,slider_pose,slider,goal):
         obs=self.observation(q,wrist,obj,slider_pose,slider,goal)
         with torch.no_grad(): action=self.player.get_action(obs,is_deterministic=True)[0].cpu().numpy()
+        self.last_raw_action=action.copy()
+        if self.action_mode=='thumb-only':
+            # Explicit action-component ablation, not the unchanged full policy.
+            # Both actor previous action and actual history use executed values.
+            action=action.copy()
+            action[[i for i,name in enumerate(self.fk.names) if '_thumb_' not in name]]=0.
         self.previous_slider=float(slider); self.last_action=action.copy()
         return self.control.step(action),action,obs[0].detach().cpu().numpy()
