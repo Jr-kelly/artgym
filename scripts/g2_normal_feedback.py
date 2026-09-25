@@ -20,6 +20,8 @@ class NormalFeedback:
         self.target=self.point(q,wrist);self.delta=np.zeros(2)
         self.reference_frame=config.get('reference_frame','world')
         if self.reference_frame not in ['world','knife']:raise ValueError('Unknown support reference frame')
+        self.error_components=config.get('error_components','normal')
+        if self.error_components not in ['normal','position']:raise ValueError('Unknown support error components')
         self.target_in_knife=obj[:3,:3].T@(self.target-obj[:3,3])
         self.normal_in_knife=np.asarray(config['normal_in_knife'],dtype=float)
         self.gain=float(config['integral_gain_per_s']);self.limit=float(config['max_correction_rad'])
@@ -38,11 +40,16 @@ class NormalFeedback:
             if object_pose is None:raise ValueError('Oracle knife-relative controller requires measured object pose')
             self.target=object_pose[:3,:3]@self.target_in_knife+object_pose[:3,3]
             self.normal=object_pose[:3,:3]@self.normal_in_knife;self.normal/=np.linalg.norm(self.normal)
-        point=self.point(q,wrist);error=float(self.normal@(self.target-point));jac=[]
+        point=self.point(q,wrist);error=float(self.normal@(self.target-point));jac=[];position_jac=[]
         for index in self.ids:
             proposed=np.asarray(q,dtype=float).copy();proposed[index]+=1e-5
-            jac.append(float(self.normal@(self.point(proposed,wrist)-point)/1e-5))
-        jac=np.asarray(jac);change=self.gain*self.dt*jac*error/(jac@jac+self.damping)
+            derivative=(self.point(proposed,wrist)-point)/1e-5
+            jac.append(float(self.normal@derivative));position_jac.append(derivative)
+        jac=np.asarray(jac)
+        if self.error_components=='position':
+            matrix=np.asarray(position_jac).T
+            change=self.gain*self.dt*np.linalg.solve(matrix.T@matrix+self.damping*np.eye(2),matrix.T@(self.target-point))
+        else:change=self.gain*self.dt*jac*error/(jac@jac+self.damping)
         change=np.clip(change,-self.rate*self.dt,self.rate*self.dt)
         self.delta=np.clip(self.delta+change,-self.limit,self.limit)
         command=np.asarray(nominal).copy();command[self.ids]+=self.delta
@@ -57,4 +64,6 @@ class NormalFeedback:
             diagnostic['normal_world_from_current_object']=diagnostic.pop('fixed_normal_world')
             diagnostic.update(fixed_material_target_in_knife=self.target_in_knife.tolist(),reference_frame='knife',
                 scope='Live simulation object-pose oracle for robot motor contact control. Scoring world reference remains unchanged; not a deployable policy observation or force measurement.')
+        if self.error_components=='position':diagnostic.update(error_components='position',
+            position_error_world_m=(self.target-point).tolist(),position_jacobian_m_per_rad=np.asarray(position_jac).T.tolist())
         return command,diagnostic

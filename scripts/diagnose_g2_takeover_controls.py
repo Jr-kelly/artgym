@@ -82,9 +82,15 @@ def summarize(path, reference_trial=None):
         baseline = np.load(reference_trial / 'trace.npz')
         keys = ['q','arm_q','object','wrist','slider','targets','reference_targets']
         out['prefix_max_absolute_errors'] = {k:float(np.abs(t[k][:first]-baseline[k][:first]).max()) for k in keys}
+        out['first_raw_actor_output_max_error_vs_full'] = float(np.abs(raw[first]-baseline['action'][first]).max()) if len(operation) else None
+        out['physics_bytes_identical_to_full'] = (path/'physics.json').read_bytes() == (reference_trial/'physics.json').read_bytes()
     if (path/'gait-checks.json').exists():
         checks=json.loads((path/'gait-checks.json').read_text())
-        out['gait_reference_available_keys']=list(checks)
+        matrix=np.asarray(checks['world_reference'])
+        gait_ref=np.r_[matrix[:3,3],Rotation.from_matrix(matrix[:3,:3]).as_quat()]
+        gd,gr=errors(t['object'][selection],gait_ref)
+        out['same_window_original_gait_world_position_max_mm']=float(gd.max()*1000)
+        out['same_window_original_gait_world_rotation_max_rad']=float(gr.max())
     return out
 
 
