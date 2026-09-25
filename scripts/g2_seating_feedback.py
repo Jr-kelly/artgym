@@ -8,6 +8,7 @@ import numpy as np
 import yaml
 from scipy.spatial import ConvexHull
 from scipy.spatial.transform import Rotation
+from scipy.optimize import minimize
 from scripts.wuji_kinematics import WujiKinematics,FINGERS
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -46,22 +47,52 @@ class ContactCorrection:
             points.append(point);jac.append(J);rigid_jac.append(Jrigid)
         return np.array(points),np.array(jac),np.array(rigid_jac)
 
-    def correct(self,row0,row1,fraction,wrist_in_object,previous,alpha,dt):
+    def correct(self,row0,row1,fraction,wrist_in_object,previous,alpha,dt,object_servo=None,residual=False,measured_q=None):
         def mix(key,statics=False):
             a=row0['inverse_statics'] if statics else row0;b=row1['inverse_statics'] if statics else row1
             return np.array(a[key])*(1-fraction)+np.array(b[key])*fraction
         nominal=mix('touch_q');q=nominal.copy();target=mix('support_points',True);normals=mix('outward_normals',True)
         normals/=np.linalg.norm(normals,axis=1)[:,None];forces=mix('planned_forces_N',True)
-        for _ in range(8):
+        baseline_forces=forces.copy()
+        servo_diagnostic=None
+        if object_servo is not None:
+            # A bounded object-pose servo routed entirely through the existing
+            # hand motor drives. The knife remains an unconstrained free body.
+            actual,reference,velocity,angular_velocity=object_servo
+            pos_error=reference[:3,3]-actual[:3,3]
+            rot_error=Rotation.from_matrix(reference[:3,:3]@actual[:3,:3].T).as_rotvec()
+            force=20*pos_error-.3*velocity;torque=.04*rot_error-.001*angular_velocity
+            force*=min(1.,.25/max(np.linalg.norm(force),1e-12))
+            torque*=min(1.,.008/max(np.linalg.norm(torque),1e-12))
+            desired_force=actual[:3,:3].T@(force+np.array([0,0,.035*9.81]))
+            desired_torque=actual[:3,:3].T@torque
+            def wrench(f):
+                f=f.reshape(5,3)
+                return np.r_[f.sum(0)-desired_force,(np.cross(target,f).sum(0)-desired_torque)/.05]
+            def cone(f):
+                f=f.reshape(5,3);pressure=-(f*normals).sum(1);tangent=f+pressure[:,None]*normals
+                return np.r_[pressure-.04,2.5-pressure,pressure-np.linalg.norm(tangent,axis=1)]
+            optimized=minimize(lambda f:((f.reshape(5,3)-forces)**2).sum(),forces.ravel(),method='SLSQP',
+                constraints=[{'type':'eq','fun':wrench},{'type':'ineq','fun':cone}],options={'maxiter':50,'ftol':1e-8})
+            if not optimized.success:raise ValueError('Bounded object wrench infeasible: '+optimized.message)
+            forces=optimized.x.reshape(5,3)
+            servo_diagnostic=dict(position_error_m=pos_error.tolist(),rotation_error_rad=rot_error.tolist(),
+                planned_contact_forces_N=forces.tolist(),wrench_residual=wrench(optimized.x).tolist(),
+                commanded_restoring_force_world_N=force.tolist(),commanded_restoring_torque_world_Nm=torque.tolist())
+        for _ in range(0 if residual else 8):
             pt,J,_=self.contacts(q,wrist_in_object,normals);error=target-pt
             change=sum(j.T@np.linalg.solve(j@j.T+np.eye(3)*1e-6,e) for j,e in zip(J,error))
             q=np.clip(q+np.clip(change,-.04,.04),np.maximum(self.w.lower,nominal-.30),np.minimum(self.w.upper,nominal+.30))
+        if residual:
+            assert object_servo is not None and measured_q is not None
+            q=np.asarray(measured_q)
         pt,_,J=self.contacts(q,wrist_in_object,normals)
-        torque=np.einsum('fij,fi->j',J,forces)
-        command=np.clip(q+torque/self.kp,self.w.lower,self.w.upper)
+        torque=np.einsum('fij,fi->j',J,forces-baseline_forces if residual else forces)
+        base_command=mix('geometric_command_q') if residual else mix('command_q')
+        command=np.clip((base_command if residual else q)+torque/self.kp,self.w.lower,self.w.upper)
         blend=min(alpha/.1,1.)*min((1-alpha)/.1,1.);blend=blend*blend*(3-2*blend)
-        command=mix('command_q')*(1-blend)+command*blend
+        command=base_command*(1-blend)+command*blend
         command=previous+np.clip(command-previous,-2*dt,2*dt)
         error=np.linalg.norm(pt-target,axis=1)
         return command,dict(max_contact_error_m=float(error.max()),contact_errors_m=error.tolist(),
-            correction_max_rad=float(np.max(np.abs(q-nominal))),oracle_wrist_in_object=wrist_in_object.tolist())
+            correction_max_rad=float(np.max(np.abs(q-nominal))),oracle_wrist_in_object=wrist_in_object.tolist(),object_servo=servo_diagnostic)

@@ -70,6 +70,7 @@ def main():
         delta=tau/kp
         command=np.clip(q+delta,w.lower,w.upper)
         old=np.array(row['command_q'])
+        row['geometric_command_q']=old.tolist()
         blend=min(fraction/.1,1.)*min((1-fraction)/.1,1.)
         blend=blend*blend*(3-2*blend)
         row['command_q']=(old*(1-blend)+command*blend).tolist()

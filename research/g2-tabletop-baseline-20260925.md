@@ -2,7 +2,7 @@
 
 续接入口：[G2_TABLETOP_HANDOFF.md](../G2_TABLETOP_HANDOFF.md)。独立分支 `feat/g2-wuji-tabletop-20260925`，本机工程 `/data/research/artgym-g2-tabletop-20260925`，实验目录 `runs/g2-tabletop-v1`。旧成功版本及训练 PID 88339 保留；本阶段没有训练新策略。
 
-截至 2026-09-25 18:49 CST：A 已通过；真实桌面侧夹、抬升、搬运、停稳已通过一个固定案例。该侧夹直接接 teacher 和 student 都会掉刀，B/C 全段尚未成功。不能把抓取子阶段成功写成 teacher＋student 全流程成功。当前重点是从侧夹连续就位到原功能抓姿。20 次扰动验收尚未开始。
+截至 2026-09-25 19:03 CST：A 已通过；真实桌面侧夹、抬升、搬运、停稳已通过一个固定案例。该侧夹直接接 teacher 和 student 都会掉刀，B/C 全段尚未成功。不能把抓取子阶段成功写成 teacher＋student 全流程成功。当前重点是从侧夹连续就位到原功能抓姿。20 次扰动验收尚未开始。
 
 ## 模型、控制及约束
 
@@ -133,3 +133,25 @@ python3 -m scripts.launch_g2_trial --name B-static-reproduce-001 -- \
 ```
 
 更详细逐次参数与完整命令以各试验 `-process.json` 和源码恢复清单为准。下一步仍是解决换握接触过渡；尚无证据需要重训整套teacher。
+
+## 桌面端面支撑换握（v39，在途）
+
+v35按实际持刀重建几何起点仍掉落。v36–v38先后验证接触反馈、完整刀身姿态伺服和只增加纠偏的残差控制，均未成功；不能再把失败只归于起始参考或数值IK精度。
+
+v39尝试由机械臂把已从平放桌面抓起的刀转为竖直、降到同一桌面，使模型平端支撑刀重，再换握并重新抬升。初始仍是正常平放、没有夹具或桌边；此路线依赖现有简化刀具的平端面，实物端部形状尚未验证。手网格几何净空14–17mm，G2连续IK可达但途经腕关节限位。是否形成端面支撑、是否碰桌、是否真实换握成功必须以物理轨迹为准。当前尚无成功结论。
+
+```bash
+python -m scripts.derive_g2_held_grasp \
+  --trial runs/g2-tabletop-v1/B-static-seat-grasp0-v31 \
+  --output /tmp/actual-held-grasp.json
+python -m scripts.plan_g2_seating --grasp-plan /tmp/actual-held-grasp.json \
+  --normal-path radial --squeeze-schedule hold --output /tmp/measured-seating.json
+python3 -m scripts.launch_g2_trial --name B-table-support-reproduce-001 -- \
+  --group B --operation-yaw 90 --yaw 180 --dx -.05 --wrist-posture -.7 \
+  --arm-gain-scale 10 --arm-damping-scale 20 --arm-integral-gain 1 \
+  --grasp-plan assets/robots/g2_wuji/plans/edge-pinch8.json \
+  --seat-seconds 12 --seating-plan /tmp/measured-seating.json \
+  --table-supported-seat --upright-yaw 250 --video --camera hand
+```
+
+上面的`B-static-seat-grasp0-v31`实测规划输入可从增量证据包的trials目录恢复，或者先运行已记录的v31复现命令。它只为规划提供实测数据，绝不用于仿真状态重置。

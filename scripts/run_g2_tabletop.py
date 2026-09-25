@@ -61,9 +61,16 @@ def main():
     parser.add_argument('--seat-at-operation',action='store_true',help='Carry held knife to the trained object attitude before changing grasp contacts.')
     parser.add_argument('--operation-pose',type=Path,help='Explicit wrist 4x4 pose for labeled gravity/interface diagnostics.')
     parser.add_argument('--seat-finger-feedback',choices=['none','object-truth'],default='none',help='Oracle finger contact correction; requires an inverse-statics plan.')
+    parser.add_argument('--seat-object-servo',action='store_true',help='Bounded truth object-pose servo via hand motor targets only, during acquisition.')
+    parser.add_argument('--seat-finger-mode',choices=['contact','residual'],default='contact',help='Residual adds only restoring motor corrections to the geometric holding path.')
+    parser.add_argument('--table-supported-seat',action='store_true',help='After normal flat pickup, stand the knife on its modeled flat end on the same table, regrasp, then relift.')
+    parser.add_argument('--upright-yaw',type=float,default=250.)
     args=parser.parse_args()
     args.output.mkdir(parents=True,exist_ok=False)
     assert not args.hand_only_diagnostic or args.group=='A'
+    assert not args.seat_object_servo or args.seat_finger_feedback=='object-truth'
+    assert args.seat_finger_mode!='residual' or args.seat_object_servo
+    assert not args.table_supported_seat or (args.group!='A' and args.seating_plan and args.seat_seconds>0 and not args.seat_at_operation)
     cfg=configuration('wuji_acquisition_bridge3_hemisphere',1,
         ['hand=wuji_paper_official_actuator','object=knife_wuji_bridge3_20260922','test=True','rl_device=cpu'],train='wujiAcquisitionSAPG')
     (args.output/'frozen-config.yaml').write_text(OmegaConf.to_yaml(cfg,resolve=True))
@@ -308,10 +315,52 @@ def main():
         if args.group!='A':
             for _ in range(60):tick('table_settle')
             phases=[('approach',grasp_q,opened,4),('close',grasp_q,closed,3),('lift',lift_q,closed,4)]
+            if args.table_supported_seat:
+                phases.extend([('stand_orient',None,closed,5),('stand_lower',None,closed,4),('support_settle',None,closed,2)])
             if args.seat_at_operation:phases.append(('preorient',None,closed,5))
             if args.seat_seconds>0:phases.append(('seat',lift_q,functional,args.seat_seconds))
+            if args.table_supported_seat:phases.append(('relift',None,functional,4))
             phases.append(('transport',op_q,functional if args.seat_seconds>0 else closed,5))
             for label,end_arm,end_hand,seconds in phases:
+                if args.table_supported_seat and label in ['stand_orient','stand_lower','support_settle','relift','transport']:
+                    start=k.forward(targets[arm_idx]);start_hand=targets[hand_idx].copy()
+                    if label=='stand_orient':
+                        _,_,_,w,o,_=current();upright_held_relation=np.linalg.inv(o)@w
+                        upright_object=transform([table_obj[0,3],table_obj[1,3],.98],Rotation.from_euler('zy',[args.upright_yaw,180],degrees=True).as_quat())
+                        desired=upright_object@upright_held_relation
+                    elif label=='stand_lower':
+                        upright_object[2,3]=table_z+.0735-.0002
+                        desired=upright_object@upright_held_relation
+                    elif label=='support_settle':desired=start.copy()
+                    elif label=='relift':
+                        desired=start.copy();desired[2,3]+=.20
+                    else:desired=operation.copy()
+                    rotations=Slerp([0,1],Rotation.from_matrix([start[:3,:3],desired[:3,:3]]))
+                    arm_path=[targets[arm_idx].copy()];errors=[]
+                    for alpha in np.linspace(0,1,31)[1:]:
+                        waypoint=np.eye(4);waypoint[:3,:3]=rotations([alpha]).as_matrix()[0]
+                        waypoint[:3,3]=start[:3,3]*(1-alpha)+desired[:3,3]*alpha
+                        motor,error=k.solve_near(waypoint,arm_path[-1])
+                        if error['position_m']>.001 or error['rotation_rad']>.005:
+                            raise ValueError('Table-supported '+label+' IK failed: '+str(error))
+                        arm_path.append(motor);errors.append(error)
+                    (args.output/(label+'-arm-plan.json')).write_text(json.dumps(dict(q=[q.tolist() for q in arm_path],errors=errors,
+                        wrist_target=pose(desired).tolist(),method='continuous Cartesian IK and finite joint drives',
+                        condition='Normal flat initial knife; robot subsequently stands the modeled flat end on the original tabletop. No fixture or pose write.'),indent=2)+'\n')
+                    steps=round(seconds/dt)
+                    for i in range(steps):
+                        alpha=smooth((i+1)/steps);loc=alpha*30;segment=min(int(loc),29);fraction=loc-segment
+                        targets[arm_idx]=arm_path[segment]*(1-fraction)+arm_path[segment+1]*fraction
+                        targets[hand_idx]=start_hand*(1-alpha)+end_hand*alpha
+                        tick(label)
+                    if label=='support_settle':
+                        tail=records[-30:];support_fraction=np.mean([r['knife_table_contacts']>0 for r in tail])
+                        (args.output/'table-support-check.json').write_text(json.dumps(dict(contact_fraction=float(support_fraction),
+                            required_fraction=.8,hand_table_contact_frames=sum(bool(np.any(r['finger_table_contacts'])) for r in tail),
+                            object_world=records[-1]['object'].tolist()),indent=2)+'\n')
+                        if support_fraction<.8:raise ValueError('Knife end support was not physically established for the final second')
+                        if any(np.any(r['finger_table_contacts']) for r in tail):raise ValueError('Finger/table collision during standing support')
+                    continue
                 if label=='preorient':
                     q,qa,sl,w,o,l=current();held_relation=np.linalg.inv(o)@w
                     desired_object=operation@transform(s[40:43],s[43:47])
@@ -346,6 +395,7 @@ def main():
                     last_feedback_target=targets[arm_idx].copy()
                     translation_feedback=np.zeros(3)
                     finger_feedback=None;finger_feedback_records=[]
+                    previous_seating_object=o.copy();filtered_velocity=np.zeros(3);filtered_angular_velocity=np.zeros(3)
                     if args.seat_finger_feedback!='none':
                         from scripts.g2_seating_feedback import ContactCorrection
                         assert 'inverse_statics' in seating
@@ -383,12 +433,22 @@ def main():
                             targets[arm_idx]=motor
                             feedback.append(dict(step=global_step,object_observed=pose(actual_o).tolist(),wrist_target=pose(desired).tolist(),ik=err))
                         if finger_feedback is not None:
-                            _,_,_,actual_w,actual_o,_=current()
+                            measured_hand,_,_,actual_w,actual_o,_=current()
+                            servo=None
+                            if args.seat_object_servo:
+                                filtered_velocity=.5*filtered_velocity+.5*(actual_o[:3,3]-previous_seating_object[:3,3])/dt
+                                filtered_angular_velocity=.5*filtered_angular_velocity+.5*Rotation.from_matrix(actual_o[:3,:3]@previous_seating_object[:3,:3].T).as_rotvec()/dt
+                                servo=(actual_o,fixed_object_reference,filtered_velocity,filtered_angular_velocity)
+                                previous_seating_object=actual_o.copy()
                             targets[hand_idx],diagnostic=finger_feedback.correct(seating['waypoints'][segment],seating['waypoints'][segment+1],
-                                fraction,np.linalg.inv(actual_o)@actual_w,targets[hand_idx],(i+1)/steps,dt)
+                                fraction,np.linalg.inv(actual_o)@actual_w,targets[hand_idx],(i+1)/steps,dt,object_servo=servo,
+                                residual=args.seat_finger_mode=='residual',measured_q=measured_hand)
                             finger_feedback_records.append(dict(step=global_step,**diagnostic))
                             (args.output/'seating-finger-feedback.json').write_text(json.dumps(finger_feedback_records)+'\n')
-                            if diagnostic['max_contact_error_m']>.01:raise ValueError('Oracle finger contact IK error exceeds 10mm: '+str(diagnostic['max_contact_error_m']))
+                            if args.seat_finger_mode=='contact' and diagnostic['max_contact_error_m']>.01:raise ValueError('Oracle finger contact IK error exceeds 10mm: '+str(diagnostic['max_contact_error_m']))
+                            if args.seat_finger_mode=='residual' and (np.linalg.norm(actual_o[:3,3]-fixed_object_reference[:3,3])>.05 or
+                                Rotation.from_matrix(fixed_object_reference[:3,:3].T@actual_o[:3,:3]).magnitude()>.8):
+                                raise ValueError('Residual seating exceeds 50mm / 0.8rad pose bound')
                         else:targets[hand_idx]=hand_path[segment]*(1-fraction)+hand_path[segment+1]*fraction
                         tick(label)
                         if feedback:
@@ -477,7 +537,7 @@ def score(trace,takeover,group):
     out['lift_success']=bool(len(lift) and (trace['object'][lift[-15:],2]>.85).all()) if group!='A' else None
     if group!='A':
         out['acquisition_stage_failure']=None if takeover['grasp_success'] else ('not_lifted' if not out['lift_success'] else 'lost_after_lift')
-        for phase in ['preorient','seat','transport','settle_history']:
+        for phase in ['preorient','stand_orient','stand_lower','support_settle','seat','relift','transport','settle_history']:
             mask=trace['phase']==phase
             if out['lift_success'] and mask.any() and (trace['object'][mask,2]<.80).any():
                 out['acquisition_stage_failure']='dropped_during_'+phase;break
@@ -500,8 +560,13 @@ def score(trace,takeover,group):
         endpoints.append(dict(stage=len(endpoints),max_error_m=float(error.max()),final_error_m=float(error[-1]),
                               within_10mm=bool((error<.01).all()),within_2mm=bool((error<.002).all())))
     basic=all(e['within_10mm'] for e in endpoints)
+    held=(rel_drift<.05)&(rel_rotation<1.57)
+    complete_cycles=sum(endpoints[i]['within_10mm'] and endpoints[i+1]['within_10mm'] and
+        held[i*150:min((i+2)*150,len(held))].all() for i in range(0,len(endpoints)-1,2))
+    stable=bool((drift<.01).all() and (rotation<.25).all())
     out.update(slider_travel_m=float(np.ptp(slider)),endpoints=endpoints,basic_10mm=basic,
-        completed_cycles=sum(endpoints[i]['within_10mm'] and endpoints[i+1]['within_10mm'] for i in range(0,len(endpoints)-1,2)),
+        completed_cycles=int(complete_cycles),
+        failure_class='operation_drop' if not held.all() else ('operation_endpoint_error' if not basic else ('operation_unstable_drift' if not stable else None)),
         strict_2mm=all(e['within_2mm'] for e in endpoints),
         world_drift_max_m=float(drift.max()),world_rotation_max_rad=float(rotation.max()),
         hand_relative_drift_max_m=float(rel_drift.max()),hand_relative_rotation_max_rad=float(rel_rotation.max()),
