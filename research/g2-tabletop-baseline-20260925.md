@@ -2,7 +2,7 @@
 
 续接入口：[G2_TABLETOP_HANDOFF.md](../G2_TABLETOP_HANDOFF.md)。独立分支 `feat/g2-wuji-tabletop-20260925`，本机工程 `/data/research/artgym-g2-tabletop-20260925`，实验目录 `runs/g2-tabletop-v1`。旧成功版本及训练 PID 88339 保留；本阶段没有训练新策略。
 
-截至 2026-09-25 19:50 CST：A 已通过；真实桌面侧夹、抬升、搬运、停稳已通过一个固定案例。该侧夹直接接 teacher 和 student 都会掉刀，B/C 全段尚未成功。不能把抓取子阶段成功写成 teacher＋student 全流程成功。当前重点是从侧夹连续就位到原功能抓姿。20 次扰动验收尚未开始。
+截至 2026-09-25 20:35 CST：A已通过；v58已连续完成正常桌面取刀、支撑换握、重力回闭、返回和冻结teacher操作，全程保持刀具，操作漂移3.56mm。两次回收末段误差10.95/12.33mm未达到既定10mm标准，所以完整B仍未成功。新的操作姿态上倾10°已通过A，v60正在实际B对照；C新流程和20次扰动尚未开始。
 
 ## 模型、控制及约束
 
@@ -267,3 +267,47 @@ B-body-face-regrasp-only-v57完成真实平放取刀→端面支撑→完全松�
 B-face-tray-reclosure-teacher-v58（PID3914214）保留相同抓取段，新增经过G2几何预检的30°倾斜承托、world yaw+30°、仅拇指暂开以允许重力被动回闭。随后用有限驱动在2秒内平滑回到原功能电机目标，再8秒回操作姿态，停稳积累真实历史。恢复的是电机目标，不是写入缓存关节/物体状态。若回闭/握持通过，接冻结teacher外部时钟20秒；任何失败保留且不计学习操作成功。原手刀物性及权重不变。
 
 最新发布仍为v3（到v55）；v56失败和v57抓持成功尚未上传，待下一增量。没有C新成功、未20扰动、未训练。
+
+## 已通过的功能重抓诊断与后续回闭对照
+
+v57完成连续取刀、立刀、释放、正面重抓、再次抬升和搬运停稳，抓取成功1/1。该阶段滑块仍开着，`--only-grasp`明确不评估操作。
+
+```bash
+python -m scripts.plan_g2_body_regrasp --thumb-corner face --gap .008 \
+  --squeeze .002 --grasp 0 --output /tmp/g2-body-face.json
+python3 -m scripts.launch_g2_trial --name B-body-regrasp-reproduce-001 -- \
+  --group B --operation-yaw 90 --yaw 180 --dx -.05 --wrist-posture -.7 \
+  --arm-gain-scale 10 --arm-damping-scale 20 --arm-integral-gain 1 \
+  --grasp-plan assets/robots/g2_wuji/plans/edge-pinch8.json \
+  --table-supported-seat --upright-yaw 250 \
+  --table-regrasp-plan /tmp/g2-body-face.json \
+  --level-standing-knife --standing-level-gate support-projection \
+  --measured-release --only-grasp --video --camera hand \
+  --teacher weights/g2-frozen/wuji-core-teacher-student-20260924-teacher.pth
+```
+
+v58在上述命令中去掉`--only-grasp`，增加`--gravity-close-before-takeover --gravity-close-support tray --gravity-close-yaw 30`。该回闭/teacher流程正在物理验证，尚未作为成功方案。承托阶段只打开拇指电机目标、四指维持支撑，滑块仍完全被动；返回原功能电机目标也是有限驱动的真实过程，不写入缓存物理状态。
+
+
+## 20:23 CST 当前代码A回归通过
+
+A-current-guards-headless-v58完成20秒2轮：四端点<2mm、行程40.0897mm、固定参考世界漂移7.7445mm/0.1498rad，无掉落且稳定。与A-g2-integral-v12逐帧q/arm_q/object/wrist/slider/targets/action完全一致（a-v12-v58-physics-parity.json）；新增碰撞门禁/回闭可选代码未改变原A行为。A已结束，v58实际桌面流程继续。最新远端.106/.93:30147均Connection refused，未更改远端或原训练88339。
+
+
+## 20:27 CST v58被动回闭与返回通过，teacher待收
+
+v58实际承托阶段回闭到slider下限，hold检查误差3.73e-9m；期间拇指接触为0、四支撑指接触保留。原功能电机目标通过2s真实驱动恢复后五指接触，返回操作姿态时slider仍在闭端约0.03mm内、刀身保持。当前已进入settle_history，将以固定接管参考/冷RNN/实际50帧历史开始冻结teacher。尚未收齐20s操作，不能提前宣称B成功。
+
+
+## 20:31 CST 连续B58已接teacher但回收差1–2mm未过线
+
+v58完成从桌面开始105秒连续物理：抓取/真实重抓/承托被动回闭/返回均成功，冻结teacher操作20秒、行程37.994mm、无掉落，固定参考漂移3.558mm/0.1526rad稳定。两次伸出误差1.922/2.016mm；两次回收末段最大误差10.946/12.332mm，最终误差约10.83/10.84mm，超过预定10mm标准，故0完整合格循环、条件操作0/1、全段0/1，不能放宽阈值报成功。
+
+A/B末端审计a-b-retraction-endpoint-audit-v58.json：B手内刀沿初始刀轴偏移约5.61mm，旋转0.125rad；原A刀轴重力分量−0.481m/s²（帮助回收），B实际+0.488m/s²（帮助伸出）。B回收末段thumb仍输出动作，多数关节未达限位，不能直接归为硬关节限位。存在重力方向反转，仍不认定唯一根因。
+
+有界操作姿态对照：固定腕部位置，将名义刀轴上倾10°，其余手刀参数/模型/目标/5秒时钟不变；改变的是G2目标姿态，不是驱动物体或滑块。IK残差<14nm/8.3e-8rad。A-operation-up10-v59先验证新姿态A，PID见process.json；A通过后再发同一B流程。新矩阵operation-knife-up10-v59.json及设计说明保存。B/C仍未完整通过，未20扰动或新训练。
+
+
+## 20:34 CST 上倾10度A通过，B姿态对照启动
+
+A-operation-up10-v59通过20秒两轮、四端点2mm内，世界漂移6.519mm/0.1557rad稳定。B初始接近/抓取/抬升IK与原v58最大差4.6e-9rad，见operation-up10-acquisition-ik-parity-v59.json，非换初始抓法。B-up10-tray-teacher-v60已启动，PID见process.json，除最终操作姿态上倾10度（同时影响前往该姿态/承托往返路径）外保持v58条件。待判断是否修复回收不足；不改10mm阈值，不根据单项对照认定唯一原因。
