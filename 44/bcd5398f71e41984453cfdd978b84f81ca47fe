@@ -1,0 +1,172 @@
+scripts/audit_g2_wrist_plan.py
+  s_87fdc32a1dcd01::t_586f4c88c837a4 14,35,41-42,62-63,69,75,78-81
+scripts/plan_g2_held_translation.py
+  s_87fdc32a1dcd01::t_efb33e6fb40d54 23,27,58-60,75,85,89
+scripts/g2_normal_feedback.py
+  s_87fdc32a1dcd01::t_650c49ed36171c 14-16
+  s_87fdc32a1dcd01::t_d1246e90d0770a 21-24,34-38,49,53-58
+scripts/plan_g2_pinky_support.py
+  s_87fdc32a1dcd01::t_b7352f1b06e5de 20-21,31
+scripts/plan_g2_index_clear_approach.py
+  s_87fdc32a1dcd01::t_b2441382846d94 1-13,16-19,31,33,36-43,45-55
+  s_87fdc32a1dcd01::t_474929a3dadbe9 14-15,20-30,32,34-35,44
+scripts/g2_finger_gait.py
+  s_87fdc32a1dcd01::t_d1246e90d0770a 77-78
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "44bcd5398f71e41984453cfdd978b84f81ca47fe",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.input_tokens": "45774831",
+        "tlab.token_usage.cache_read_tokens": "892705223",
+        "tlab.token_usage.output_tokens": "6125612",
+        "tlab.session_started_at": "2026-09-25T22:00:51Z"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "scripts/plan_g2_index_clear_approach.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 55
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 12
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 12
+      }
+    },
+    {
+      "old_path": "research/g2-overnight-20260926.md",
+      "new_path": "research/g2-overnight-20260926.md",
+      "additions": {
+        "human": 25
+      }
+    },
+    {
+      "old_path": "scripts/audit_g2_wrist_plan.py",
+      "new_path": "scripts/audit_g2_wrist_plan.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 12
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/g2_finger_gait.py",
+      "new_path": "scripts/g2_finger_gait.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/g2_normal_feedback.py",
+      "new_path": "scripts/g2_normal_feedback.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 19
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 3
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/plan_g2_held_translation.py",
+      "new_path": "scripts/plan_g2_held_translation.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 8
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 6
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/plan_g2_pinky_support.py",
+      "new_path": "scripts/plan_g2_pinky_support.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 3
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      }
+    }
+  ]
+}
