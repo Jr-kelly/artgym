@@ -16,11 +16,13 @@ def digest(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True)
+    p.add_argument('--run-root',type=Path,default=ROOT/'runs/g2-tabletop-v1')
+    p.add_argument('--report',type=Path,default=ROOT/'research/g2-tabletop-baseline-20260925.md')
     p.add_argument('--base',default=BASE);p.add_argument('--label',default='v1')
     p.add_argument('--exclude-manifest',type=Path,action='append',default=[]);p.add_argument('--video-trial',action='append',default=[]);a=p.parse_args()
     base=a.base;excluded=set()
     for previous in a.exclude_manifest:excluded.update(json.loads(previous.read_text())['trials'])
-    a.output.mkdir(parents=True,exist_ok=False);run=ROOT/'runs/g2-tabletop-v1';stage=a.output/'evidence';stage.mkdir()
+    a.output.mkdir(parents=True,exist_ok=False);run=a.run_root.resolve();stage=a.output/'evidence';stage.mkdir()
     base_files=set(subprocess.check_output(['git','ls-tree','-r','--name-only',base],cwd=ROOT,text=True).splitlines())
     changed=set(subprocess.check_output(['git','diff',base,'--name-only'],cwd=ROOT,text=True).splitlines());cache={};included=[];pending=[]
     def base_hash(name):
@@ -56,7 +58,7 @@ def main():
     diagnostics=stage/'diagnostics';diagnostics.mkdir()
     for file in run.iterdir():
         if file.is_file() and file.suffix=='.json' and not file.name.endswith('-process.json'):shutil.copyfile(file,diagnostics/file.name)
-    for file in [ROOT/'G2_TABLETOP_HANDOFF.md',ROOT/'research/g2-tabletop-baseline-20260925.md']:
+    for file in [ROOT/'G2_TABLETOP_HANDOFF.md',a.report]:
         shutil.copyfile(file,stage/file.name)
     manifest=dict(created=datetime.now(timezone.utc).isoformat(),base_commit=base,excluded_previous_trials=sorted(excluded),
         current_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
@@ -75,7 +77,7 @@ def main():
     for trial,name in videos.items():
         src=run/trial/'continuous.mp4'
         if src.exists() and trial in included:shutil.copyfile(src,a.output/name)
-    shutil.copyfile(ROOT/'research/g2-tabletop-baseline-20260925.md',a.output/'g2-wuji-tabletop-README.md')
+    shutil.copyfile(a.report,a.output/'g2-wuji-tabletop-README.md')
     files=[f for f in a.output.iterdir() if f.is_file()]
     (a.output/'SHA256SUMS.txt').write_text(''.join(digest(f)+'  '+f.name+'\n' for f in sorted(files)))
     print(json.dumps(dict(output=str(a.output),included=len(included),pending=pending,archive_bytes=archive.stat().st_size)))

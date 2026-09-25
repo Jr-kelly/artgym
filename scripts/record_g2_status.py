@@ -1,5 +1,6 @@
 """Reconcile durable G2 trial events with actual local processes and artifacts."""
 from datetime import datetime,timezone
+import argparse
 import hashlib,json
 from pathlib import Path
 
@@ -7,7 +8,8 @@ ROOT=Path(__file__).resolve().parents[1]
 
 
 def main():
-    run=ROOT/'runs/g2-tabletop-v1';journal=run/'events.jsonl'
+    parser=argparse.ArgumentParser();parser.add_argument('--run-root',type=Path,default=ROOT/'runs/g2-tabletop-v1');args=parser.parse_args()
+    run=args.run_root.resolve();journal=run/'events.jsonl'
     prior=[json.loads(l) for l in journal.read_text().splitlines() if l.strip()] if journal.exists() else []
     finished={r['name'] for r in prior if r.get('event')=='trial_finished'};current=[]
     for file in sorted(run.glob('*-process.json')):

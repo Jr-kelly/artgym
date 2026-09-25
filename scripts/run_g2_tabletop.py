@@ -80,6 +80,13 @@ def main():
     parser.add_argument('--gravity-close-before-takeover',action='store_true',help='After functional regrasp, tilt the held knife axis upward for 3s and return to operation, allowing passive gravity closure. Only arm motor targets are commanded.')
     parser.add_argument('--gravity-close-support',choices=['pinch','tray'],default='pinch',help='Tray tilts the knife axis 30 degrees upward, with gravity pressing its back onto the four fingers, and opens only the thumb during passive closure.')
     parser.add_argument('--gravity-close-yaw',type=float,default=0.,help='Additional world yaw during gravity closure to avoid G2 arm limits; preserves the gravity direction in the knife frame.')
+    parser.add_argument('--air-flip',type=float,default=0.,choices=[-180.,0.,180.],help='After lifting, pronate the held hand by 180 degrees about its horizontal forward direction using G2 motor targets only.')
+    parser.add_argument('--air-flip-seconds',type=float,default=10.)
+    parser.add_argument('--air-flip-shift',type=float,nargs=3,default=[0.,0.,0.],help='Smooth world translation of the planned wrist-flip pivot; robot motion only.')
+    parser.add_argument('--air-flip-only',action='store_true',help='Diagnostic: stop after free-space flip and actual settling, without transport or policy operation.')
+    parser.add_argument('--lift-height',type=float,default=.20,help='Vertical wrist lift in metres; no object state changes.')
+    parser.add_argument('--slider-face',choices=['up','down'],default='up',help='Initial tabletop placement; down starts above the protruding passive slider and settles freely.')
+    parser.add_argument('--table-localization',choices=['configured','settled-truth'],default='configured',help='Acquisition-only ideal localization after natural tabletop settling.')
     args=parser.parse_args()
     args.output.mkdir(parents=True,exist_ok=False)
     assert not args.hand_only_diagnostic or args.group=='A'
@@ -94,6 +101,10 @@ def main():
     assert args.gravity_close_support!='tray' or args.gravity_close_before_takeover
     assert abs(args.gravity_close_yaw)<=30
     assert not args.post_acquisition_pose or (args.group!='A' and args.table_supported_seat)
+    assert not args.air_flip or (args.group!='A' and not args.table_supported_seat and not args.seat_at_operation)
+    assert not args.air_flip_only or (args.air_flip and args.only_grasp and args.seat_seconds==0)
+    assert 5<=args.air_flip_seconds<=20 and .20<=args.lift_height<=.40
+    assert np.linalg.norm(args.air_flip_shift)<=.25
     cfg=configuration('wuji_acquisition_bridge3_hemisphere',1,
         ['hand=wuji_paper_official_actuator','object=knife_wuji_bridge3_20260922','test=True','rl_device=cpu'],train='wujiAcquisitionSAPG')
     (args.output/'frozen-config.yaml').write_text(OmegaConf.to_yaml(cfg,resolve=True))
@@ -112,8 +123,9 @@ def main():
     table_z=args.table_height
     from scripts.g2_table_collision import ArmTableCollision
     arm_table_check=ArmTableCollision(table_z)
-    table_obj=transform([.50+args.dx,-.30+args.dy,table_z+.0041],
+    table_obj=transform([.50+args.dx,-.30+args.dy,table_z+(.0071 if args.slider_face=='down' else .0041)],
         (Rotation.from_euler('z',args.yaw,degrees=True)*Rotation.from_euler('x',90,degrees=True)).as_quat())
+    if args.slider_face=='down':table_obj=table_obj@transform(quaternion=Rotation.from_euler('z',180,degrees=True).as_quat())
     grasp_pose=table_obj@transform(quaternion=Rotation.from_euler('z',args.grasp_roll,degrees=True).as_quat())@np.linalg.inv(transform(s[40:43],s[43:47]))
     grasp_pose[2,3]+=args.close_height
     custom_plan=None
@@ -124,7 +136,7 @@ def main():
         grasp_pose=table_obj@np.asarray(custom_plan['wrist_in_knife'])
         grasp_pose[2,3]+=args.close_height
     above=grasp_pose.copy(); above[2,3]+=.16
-    lifted=grasp_pose.copy(); lifted[2,3]+=.20
+    lifted=grasp_pose.copy(); lifted[2,3]+=args.lift_height
     high_q,high_error=k.solve(above,op_q)
     grasp_q,grasp_error=k.solve(grasp_pose,high_q)
     lift_q,lift_error=k.solve(lifted,grasp_q)
@@ -360,7 +372,21 @@ def main():
         refresh()
         if args.group!='A':
             for _ in range(60):tick('table_settle')
+            if args.table_localization=='settled-truth':
+                assert custom_plan is not None
+                _,_,_,_,actual_table_object,_=current()
+                measured_grasp=actual_table_object@np.asarray(custom_plan['wrist_in_knife'])
+                measured_grasp[2,3]+=args.close_height
+                measured_lift=measured_grasp.copy();measured_lift[2,3]+=args.lift_height
+                grasp_q,grasp_error=k.solve_near(measured_grasp,grasp_q,max_step=.4)
+                lift_q,lift_error=k.solve_near(measured_lift,lift_q,max_step=.4)
+                if max(grasp_error['position_m'],lift_error['position_m'])>.001 or max(grasp_error['rotation_rad'],lift_error['rotation_rad'])>.005:
+                    raise ValueError('Settled-table localization IK failed')
+                (args.output/'settled-table-localization.json').write_text(json.dumps(dict(
+                    object=pose(actual_table_object).tolist(),grasp_q=grasp_q.tolist(),lift_q=lift_q.tolist(),
+                    grasp_ik=grasp_error,lift_ik=lift_error,method='One simulated truth sample after natural tabletop settling; only arm motor targets replanned.'),indent=2)+'\n')
             phases=[('approach',grasp_q,opened,4),('close',grasp_q,closed,3),('lift',lift_q,closed,4)]
+            if args.air_flip:phases.append(('air_flip',None,closed,args.air_flip_seconds))
             if args.table_supported_seat:
                 if args.upright_path=='yaw-then-tip':phases.append(('stand_yaw',None,closed,5))
                 if args.upright_path=='tip-then-yaw':phases.append(('stand_tip',None,closed,5))
@@ -376,7 +402,7 @@ def main():
                 phases.append(('functional_close',None,functional,3))
             elif args.seat_seconds>0:phases.append(('seat',lift_q,functional,args.seat_seconds))
             if args.table_supported_seat:phases.append(('relift',None,functional,4))
-            phases.append(('transport',op_q,functional if args.seat_seconds>0 or table_regrasp else closed,5))
+            if not args.air_flip_only:phases.append(('transport',op_q,functional if args.seat_seconds>0 or table_regrasp else closed,5))
             if args.gravity_close_before_takeover:
                 restored=np.asarray(table_regrasp.get('restore_q',functional))
                 gravity_hold_hand=functional.copy()
@@ -388,6 +414,20 @@ def main():
                                ('gravity_close_restore',None,restored,2),('gravity_close_return',None,restored,8)])
             if post_acquisition_pose is not None:phases.append(('operation_adjust',None,None,4))
             for label,end_arm,end_hand,seconds in phases:
+                if label=='air_flip':
+                    from scripts.g2_air_flip import plan_flip, check_flip
+                    _,_,_,actual_w,actual_o,_=current()
+                    path,diagnostic=plan_flip(k,actual_w,actual_o,targets[arm_idx],args.air_flip,seconds,dt,arm_table_check,args.air_flip_shift)
+                    (args.output/'air-flip-plan.json').write_text(json.dumps(diagnostic,indent=2)+'\n')
+                    if not diagnostic['feasible']:raise ValueError('Air-flip IK/clearance precheck failed: '+str(diagnostic['failure']))
+                    first=len(records)
+                    for motor in path:
+                        targets[arm_idx]=motor;targets[hand_idx]=end_hand
+                        tick(label)
+                    audit=check_flip(records[first:],actual_w,actual_o,table_z)
+                    (args.output/'air-flip-check.json').write_text(json.dumps(audit,indent=2)+'\n')
+                    if not audit['retained']:raise ValueError('Knife not retained throughout free-space flip')
+                    continue
                 if label=='stand_level':
                     _,_,_,initial_w,initial_o,_=current();level_goal=initial_o.copy()
                     # Correct only tilt: loaded pinching may change yaw around
@@ -655,7 +695,7 @@ def main():
             student_initialization='ideal_simulation_truth_at_takeover' if args.group=='C' else None,
             acquisition_localization='live simulation object truth during seating: '+args.seat_feedback if args.seat_feedback!='none' else 'configured table placement and one-time truth for seating planning',
             acquisition_finger_localization=args.seat_finger_feedback,table_supported_regrasp=bool(table_regrasp),
-            additional_acquisition_truth_sources=dict(standing_level_samples=4 if args.level_standing_knife else 0,
+            additional_acquisition_truth_sources=dict(settled_table_pose=args.table_localization=='settled-truth',air_flip_pivot=bool(args.air_flip),standing_level_samples=4 if args.level_standing_knife else 0,
                 measured_release_pose=args.measured_release,functional_reapproach_pose=bool(table_regrasp),
                 gravity_closure_orientation=args.gravity_close_before_takeover),
             history_frames=len(policy.history),rnn='zeroed once at takeover',history='actual settled q and zero hold actions',
@@ -708,7 +748,7 @@ def score(trace,takeover,group):
         relift=np.flatnonzero(trace['phase']=='relift')
         if len(relift) and not (trace['object'][relift[-15:],2]>table_height+.10).all():
             out['acquisition_stage_failure']='functional_regrasp_not_retained'
-        for phase in ['preorient','stand_tip','stand_yaw','stand_orient','stand_lower','support_settle','stand_level','unload_pinch','release_pinch','withdraw','free_reorient',
+        for phase in ['air_flip','preorient','stand_tip','stand_yaw','stand_orient','stand_lower','support_settle','stand_level','unload_pinch','release_pinch','withdraw','free_reorient',
             'functional_approach','functional_touch','functional_close','seat','relift','transport','gravity_close_orient','gravity_close_unload','gravity_close_hold','gravity_close_restore','gravity_close_return','operation_adjust','settle_history']:
             mask=trace['phase']==phase
             if out['lift_success'] and mask.any() and (trace['object'][mask,2]<table_height+.05).any():

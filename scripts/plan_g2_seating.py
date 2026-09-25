@@ -18,9 +18,11 @@ ROOT=Path(__file__).resolve().parents[1]
 def main():
     p=argparse.ArgumentParser();p.add_argument('--grasp-plan',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
     p.add_argument('--knots',type=int,default=24)
-    p.add_argument('--normal-path',choices=['linear','radial'],default='linear')
+    p.add_argument('--normal-path',choices=['linear','radial','measured-endpoints'],default='linear')
     p.add_argument('--squeeze-schedule',choices=['linear','hold'],default='linear')
-    p.add_argument('--motion',choices=['simultaneous','gait','wave'],default='simultaneous');a=p.parse_args()
+    p.add_argument('--motion',choices=['simultaneous','gait','wave'],default='simultaneous')
+    p.add_argument('--anchor-restart',action='store_true',help='Compare the previous solution with a functional-joint interpolation seed; motor planning only.')
+    a=p.parse_args()
     initial=json.loads(a.grasp_plan.read_text());w=WujiKinematics()
     s=np.load(ROOT/'caches/initial_grasp/wuji/knife_wuji_bridge3_20260922/000/train/valid_grasps.npy')[initial['grasp']]
     p0=np.asarray(initial['wrist_in_knife']);p1=np.linalg.inv(transform(s[40:43],s[43:47]));q0=np.array(initial['touch_q']);q1=s[:20].astype(float)
@@ -55,7 +57,10 @@ def main():
             if 'contact_normals' in initial:
                 normal=np.asarray(initial['contact_normals'][j])*(1 if j==0 else -1)
                 initial_angle=np.arctan2(normal[1],normal[0])
-                angle=angle+initial_angle*max(1-value/.5,0)
+                if a.normal_path=='measured-endpoints':
+                    delta=np.arctan2(np.sin(np.pi/2-initial_angle),np.cos(np.pi/2-initial_angle))
+                    angle=initial_angle+delta*value
+                else:angle=angle+initial_angle*max(1-value/.5,0)
             directions.append(np.array([np.cos(angle),np.sin(angle),0]))
         wrist=np.eye(4);wrist[:3,:3]=interpolate([wrist_fraction]).as_matrix()[0];wrist[:3,3]=p0[:3,3]*(1-wrist_fraction)+p1[:3,3]*wrist_fraction
         anchor=q0*(1-wrist_fraction)+q1*wrist_fraction
@@ -77,6 +82,10 @@ def main():
             return np.asarray(errors)
         result=least_squares(residual,np.r_[last_offset,np.clip(q,w.lower+1e-6,w.upper-1e-6)],
             bounds=(np.r_[np.full(3,-.03),w.lower],np.r_[np.full(3,.03),w.upper]),max_nfev=120,diff_step=1e-5)
+        if a.anchor_restart and i>0:
+            retry=least_squares(residual,np.r_[np.zeros(3),np.clip(anchor,w.lower+1e-6,w.upper-1e-6)],
+                bounds=(np.r_[np.full(3,-.03),w.lower],np.r_[np.full(3,.03),w.upper]),max_nfev=120,diff_step=1e-5)
+            if retry.cost<result.cost:result=retry
         offset=result.x[:3].copy();q=result.x[3:].copy();touch=q.copy()
         release=fraction
         if a.squeeze_schedule=='hold':
@@ -99,7 +108,7 @@ def main():
             contact_residual_m=error.tolist(),optimization_cost=float(result.cost)))
         last_offset=offset
         print(json.dumps(dict(knot=i,cost=float(result.cost))),flush=True)
-    a.output.write_text(json.dumps(dict(kind='contact_guided_seating',motion=a.motion,normal_path=a.normal_path,squeeze_schedule=a.squeeze_schedule,source_plan=str(a.grasp_plan),grasp=initial['grasp'],waypoints=rows,
+    a.output.write_text(json.dumps(dict(kind='contact_guided_seating',motion=a.motion,normal_path=a.normal_path,squeeze_schedule=a.squeeze_schedule,anchor_restart=a.anchor_restart,source_plan=str(a.grasp_plan),grasp=initial['grasp'],waypoints=rows,
         validation='Kinematic motor targets only; no physical success claimed; object must remain free.'),indent=2)+'\n')
 
 

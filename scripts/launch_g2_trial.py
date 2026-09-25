@@ -13,8 +13,9 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--name',required=True);p.add_argument('--module',default='scripts.run_g2_tabletop')
     p.add_argument('--python',default='/home/agiuser/miniconda3/envs/artgym/bin/python')
     p.add_argument('--source-root',type=Path,help='Freeze from an existing verified trial pin rather than the current workspace.')
+    p.add_argument('--run-root',type=Path,help='Independent experiment directory; default preserves the original tabletop runs.')
     p.add_argument('args',nargs=argparse.REMAINDER);a=p.parse_args()
-    root=Path(__file__).resolve().parents[1];run=root/'runs/g2-tabletop-v1';pin=run/'source-pins'/a.name
+    root=Path(__file__).resolve().parents[1];run=a.run_root.resolve() if a.run_root else root/'runs/g2-tabletop-v1';pin=run/'source-pins'/a.name
     source_root=a.source_root.resolve() if a.source_root else root
     if a.source_root:
         source_manifest=json.loads((source_root/'SOURCE_SHA256.json').read_text())
