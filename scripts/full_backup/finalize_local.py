@@ -174,7 +174,7 @@ python3 wuji-backup-restore.py --backup . --destination ../wuji-restored --reloc
     for digest, name in checks + [(sha(delivery / 'SHA256SUMS.txt'), 'SHA256SUMS.txt')]:
         assert assets[name]['digest'] == 'sha256:' + digest and assets[name]['state'] == 'uploaded', name
     # Publication is already authorized by the user's explicit full-backup request.
-    body = dict(draft=False, name='Wuji 全量备份 · 本机完整 / 远端待补 · 2026-09-25', body=readme, make_latest='false')
+    body = dict(draft=False, tag_name=json.loads((ROOT / 'spec.json').read_text())['tag'], name='Wuji 全量备份 · 本机完整 / 远端待补 · 2026-09-25', body=readme, make_latest='false')
     request = ROOT / 'publish-request.json'
     atomic(request, body)
     progress('publishing_verified_local_backup', assets=len(assets))
