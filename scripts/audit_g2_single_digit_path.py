@@ -32,7 +32,7 @@ def main():
         if set(moving)!=set(ids) or 'arm_target' in s:raise ValueError('Suffix is not single-digit motor motion')
         goal=command.copy();goal[moving]=s['target']
         speed=float(1.875*np.abs(goal-command).max()/s['seconds']);peak=max(peak,speed)
-        valid=valid and bool(np.all(goal>=w.lower) and np.all(goal<=w.upper) and speed<=2)
+        valid=valid and bool(np.all(goal>=w.lower-1e-6) and np.all(goal<=w.upper+1e-6) and speed<=2)
         q1=q.copy();q1[ids]=goal[ids]
         for alpha in np.linspace(0,1,41):
             v=q*(1-alpha)+q1*alpha;new=[]
@@ -46,7 +46,7 @@ def main():
     if not rows:raise ValueError('No new movement to audit')
     valid=valid and bool(min(v['whole_digit_gap_m'] for v in rows)>=min(base_gap,0)-.0001 and rows[-1]['whole_digit_gap_m']>=a.final_gap and not any(v['new_or_increased_intersections'] for v in rows))
     out=dict(source=str(a.source),plan=str(a.plan),start_stage=a.start_stage,geometric_pass=valid,
-        initial_gap_m=base_gap,final_gap_m=rows[-1]['whole_digit_gap_m'],minimum_gap_m=min(v['whole_digit_gap_m'] for v in rows),
+        motor_limit_roundoff_tolerance_rad=1e-6,initial_gap_m=base_gap,final_gap_m=rows[-1]['whole_digit_gap_m'],minimum_gap_m=min(v['whole_digit_gap_m'] for v in rows),
         peak_command_rad_s=peak,support_nominal_displacement_rad=float(np.abs(q[others]-q0[others]).max()),samples=rows,
         limitation='Observed start q to unloaded motor endpoint with fixed measured wrist/knife. Contact compliance and dynamic tracking are not certified. Initial motor offset retained for speed check; no sensor force estimate or state reset.')
     a.output.write_text(json.dumps(out,indent=2)+'\n');print(json.dumps({k:v for k,v in out.items() if k!='samples'}))
