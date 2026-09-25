@@ -424,3 +424,12 @@ python3 -m scripts.run_g2_small_variations run \
 预声明清单已先提交并推送GitHub 86b191b，随后21:34:47 CST启动唯一driver PID67920，记录g2-small-placement-v1-driver.json；初始B/C子进程为g2-small-placement-v1-00-B/C，2路并行，源C66冻结pin，原训练88339保持、整机GPU约99%。清单及public副本SHA不变，不能改样本或调参；driver/launcher源码SHA也写入driver记录，不要在途中修改或启动第二个driver。
 
 结果进度读g2-small-placement-v1-results.json，完整日志在各试验同名.log；先核实实际PID，不能据旧文档重启。首批尚未结束，不当作20次成功。新简版可复现报告research/g2-tabletop-fixed-baseline.md给出A/B/C数字、普通桌面端立路线、所有student输入来源及原始文件位置；完整开发史仍保留。
+
+
+## 21:41 CST 固定成功Release v6已核验；首对验证失败保留
+
+https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-tabletop-fixed-abc-20260925-v6 已发布并核验5附件大小/SHA256；新增B65/C66两项结束记录，8.15MB证据，排除前五包。C66源码恢复3874文件一致，两条无文字视频各3270帧/109秒。新简版README含ABC数字、数据来源和可执行命令。v7打包需额外排除release-fixed-abc-delta-v6/evidence/MANIFEST.json，不能重复上传v6。
+
+预声明首个共享位置（dx+1.088mm、dy+0.750mm、yaw+0.393°）的B/C均在第720帧support_settle中止：刀桌接触100%但刀轴偏竖直1.605rad、刀心高度0.75655m，已经倒在桌上，不是正常端立。两次均在策略接管之前失败，不能归类为teacher或student操作失败。仅当前2/20结束，获取到接管0/2、条件操作0次，全段0/2，不能外推最终成功率。视频和partial-trace保留，driver已继续第01对；不修改清单或方案。
+
+独立工作分支代码/预声明已推，v6目标c77754a。验证driver PID67920仍运行；后续必须读最新results.json、查实际子进程，全部20次结束后生成分组比率、端点/行程/掉落/漂移和失败分类，并发布v7新增证据/代表性失败。暂不凭首对失败改参数；下一项改进建议应等完整分布再判断。goal仍active，未调用complete。
