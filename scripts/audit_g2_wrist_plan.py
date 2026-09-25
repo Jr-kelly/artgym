@@ -29,7 +29,7 @@ def main():
     p.add_argument('--output',type=Path,required=True);p.add_argument('--samples',type=int,default=5)
     a=p.parse_args()
     if a.output.exists():raise ValueError('Preserve previous audit')
-    plan=json.loads(a.plan.read_text());meta=plan['supported_wrist_geometry'];source=json.loads(Path(meta['source']).read_text())
+    plan=json.loads(a.plan.read_text());meta=plan.get('supported_wrist_geometry',plan.get('held_translation_geometry'));source=json.loads(Path(meta['source']).read_text())
     t=np.load(source['source_trace']);i=source['source_step'];physics=json.loads((Path(source['source_trial'])/'physics.json').read_text())
     g=DigitGeometry(max_face_axes=32);full=DigitGeometry();k=G2Kinematics();table=ArmTableCollision(.75)
     q0=np.array(source['touch_q']);q=q0.copy();qa=t['reference_targets'][i,physics['arm_indices']].astype(float)
