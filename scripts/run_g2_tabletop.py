@@ -35,6 +35,7 @@ def main():
     parser.add_argument('--teacher',type=Path,default=PUBLISHED/(PREFIX+'teacher.pth'))
     parser.add_argument('--student',type=Path,default=PUBLISHED/(PREFIX+'student.pth'))
     parser.add_argument('--grasp',type=int,default=0,choices=[0,1,2])
+    parser.add_argument('--preset-candidate',type=Path,help='A-only explicit70-value candidate state before the first physics step, followed by2s actual settling; never a continuous acquisition result.')
     parser.add_argument('--video',action='store_true')
     parser.add_argument('--seconds',type=float,default=20)
     parser.add_argument('--arm-gain-scale',type=float,default=1.)
@@ -126,6 +127,13 @@ def main():
     assert cfg.task.env.forceScale==0 and cfg.task.env.actionsMovingAverage==1 and not cfg.task.env.useRelativeControl
     k=G2Kinematics(); model=json.loads((ROOT/'assets/robots/g2_wuji/audit.json').read_text())
     s=np.load(ROOT/'caches/initial_grasp/wuji/knife_wuji_bridge3_20260922/000/train/valid_grasps.npy')[args.grasp]
+    preset_candidate=None
+    if args.preset_candidate:
+        assert args.group=='A' and not args.grasp_plan and args.settle_seconds>=2
+        preset_candidate=json.loads(args.preset_candidate.read_text());s=np.asarray(preset_candidate['state'],dtype=np.float32)
+        assert s.shape==(70,) and np.isfinite(s).all()
+        assert all(abs(np.linalg.norm(s[begin:begin+4])-1)<1e-5 for begin in [43,50])
+        (args.output/'preset-candidate.json').write_text(json.dumps(preset_candidate,indent=2)+'\n')
     operation=transform([.40,-.30,1.05],(Rotation.from_euler('z',args.operation_yaw,degrees=True)*Rotation.from_euler('y',-90,degrees=True)*Rotation.from_euler('x',90,degrees=True)).as_quat())
     if args.operation_pose:operation=np.asarray(json.loads(args.operation_pose.read_text()),dtype=float)
     post_acquisition_pose=None
@@ -155,10 +163,14 @@ def main():
     above=grasp_pose.copy(); above[2,3]+=.16
     lifted=grasp_pose.copy(); lifted[2,3]+=args.lift_height
     high_seed=np.asarray(json.loads(args.acquisition_arm_seed.read_text())) if args.acquisition_arm_seed else op_q
-    high_q,high_error=k.solve(above,high_seed)
-    grasp_q,grasp_error=k.solve(grasp_pose,high_q)
-    lift_q,lift_error=k.solve(lifted,grasp_q)
-    if args.wrist_posture is not None:
+    if preset_candidate is None:
+        high_q,high_error=k.solve(above,high_seed)
+        grasp_q,grasp_error=k.solve(grasp_pose,high_q)
+        lift_q,lift_error=k.solve(lifted,grasp_q)
+    else:
+        high_q=grasp_q=lift_q=op_q
+        high_error=grasp_error=lift_error=dict(not_applicable='Independent presetA has no table acquisition IK or trajectory')
+    if args.wrist_posture is not None and preset_candidate is None:
         high_q,high_error=k.solve_wrist_posture(above,high_q,args.wrist_posture)
         grasp_q,grasp_error=k.solve_wrist_posture(grasp_pose,high_q,args.wrist_posture)
         lift_q,lift_error=k.solve_wrist_posture(lifted,grasp_q,args.wrist_posture)
@@ -166,7 +178,7 @@ def main():
               operation_q=op_q.tolist(),approach_q=high_q.tolist(),grasp_q=grasp_q.tolist(),lift_q=lift_q.tolist(),
               table_top=table_z,knife_pose=pose(table_obj).tolist(),planned_wrist_pose=pose(grasp_pose).tolist())
     (args.output/'plan.json').write_text(json.dumps(plan,indent=2)+'\n')
-    assert max(e['position_m'] for e in [high_error,grasp_error,lift_error])<.001
+    if preset_candidate is None:assert max(e['position_m'] for e in [high_error,grasp_error,lift_error])<.001
     policy=FrozenPolicy(cfg,args.teacher,args.student if args.group=='C' else None)
     gym=gymapi.acquire_gym(); sp=gymapi.SimParams()
     sp.dt=float(cfg.task.sim.dt);sp.substeps=int(cfg.task.sim.substeps);sp.up_axis=gymapi.UP_AXIS_Z
@@ -261,6 +273,9 @@ def main():
         source_self_collision='G2 non-hand self-contact disabled per asset; existing Wuji digit filtering retained')
     (args.output/'physics.json').write_text(json.dumps(effective,indent=2)+'\n')
     closed=s[20:40].copy();opened=closed.copy()
+    if preset_candidate is not None:
+        assert np.all(s[:20]>=policy.fk.lower-1e-6) and np.all(s[:20]<=policy.fk.upper+1e-6)
+        assert np.all(closed>=policy.fk.lower-1e-6) and np.all(closed<=policy.fk.upper+1e-6)
     for i,n in enumerate(policy.fk.names):
         if n.endswith(('joint1','joint3','joint4')): opened[i]*=.15
     if args.pregrasp=='support-curled':
@@ -285,6 +300,10 @@ def main():
     states=np.zeros(len(names),dtype=gymapi.DofState.dtype)
     states['pos'][hand_idx]=initial_hand;states['pos'][arm_idx]=arm[:len(arm_idx)]
     obj_states=np.zeros(1,dtype=gymapi.DofState.dtype);obj_states['pos'][0]=slider_lower+args.preset_slider_offset
+    if preset_candidate is not None:
+        assert args.preset_slider_offset==0 and args.preset_object_axis_offset==0
+        assert slider_lower-1e-7<=s[54]<=float(p['upper'][0])+1e-7
+        obj_states['pos'][0]=s[54]
     targets=np.zeros(len(names)+1,dtype=np.float32);targets[hand_idx]=closed if args.group=='A' else opened
     targets[arm_idx]=arm[:len(arm_idx)];targets[-1]=slider_lower
     writer=None;cam=None;close_writer=None;close_cam=None
@@ -376,7 +395,7 @@ def main():
                 normal=[float(v[name]) for name in ('x','y','z')] if getattr(v.dtype,'names',None) else [float(x) for x in v]
                 pair_records.append(dict(step=global_step,phase=phase,body0=env_names.get(int(c['body0']),'ground'),
                     body1=env_names.get(int(c['body1']),'ground'),normal=normal,lambda_value=float(c['lambda'])))
-                if args.gait_plan:
+                if args.gait_plan or preset_candidate is not None:
                     if not (args.output/'contact-schema.json').exists():
                         (args.output/'contact-schema.json').write_text(json.dumps(list(c.dtype.names))+'\n')
                     for key in ['local_pos0','local_pos1','localPos0','localPos1']:
@@ -419,6 +438,8 @@ def main():
         return q,qa,sl,w,o,l
     try:
         refresh()
+        if preset_candidate is not None:
+            for _ in range(round(args.settle_seconds/dt)):tick('settle_history')
         if args.group!='A':
             for _ in range(60):tick('table_settle')
             if args.table_localization=='settled-truth':
@@ -746,7 +767,7 @@ def main():
                     tick(label)
             for _ in range(round(args.settle_seconds/dt)):tick('settle_history')
         q,qa,sl,w,o,l=current()
-        if args.group=='A':
+        if args.group=='A' and preset_candidate is None:
             # RB tensors do not run FK after an initialization write until the
             # first simulate. Use the declared initial state for the first
             # observation, exactly as original ArtManip's at_reset_ids path.
@@ -756,10 +777,10 @@ def main():
         preset_reference=s.copy()
         if args.group=='A' and (args.preset_slider_offset or args.preset_object_axis_offset):
             preset_reference[40:47]=pose(np.linalg.inv(w)@o);preset_reference[47:54]=pose(np.linalg.inv(w)@l)
-        policy.takeover(q,targets[hand_idx],w,o,l,slider_lower,reference_state=preset_reference if args.group=='A' else None)
+        policy.takeover(q,targets[hand_idx],w,o,l,slider_lower,reference_state=preset_reference if args.group=='A' and preset_candidate is None else None)
         policy.previous_slider=sl
         rel=pose(np.linalg.inv(w)@o)
-        hold_check=acquisition_hold({key:[r[key] for r in records] for key in records[0]},s,table_z) if args.group!='A' else None
+        hold_check=acquisition_hold({key:[r[key] for r in records] for key in records[0]},s,table_z) if args.group!='A' or preset_candidate is not None else None
         grasp_success=hold_check['success'] if hold_check is not None else True
         takeover=dict(step=global_step,time=global_step*dt,q=q.tolist(),targets=targets[hand_idx].tolist(),
             arm_q=qa.tolist(),object_world=pose(o).tolist(),wrist_world=pose(w).tolist(),object_hand=rel.tolist(),
@@ -776,8 +797,11 @@ def main():
             force_sensor_enabled=force_sensor_enabled,
             hand_gravity='disabled as frozen training',arm_gravity=args.arm_gravity,
             gravity_in_wrist=(w[:3,:3].T@np.array([0,0,-9.81])).tolist())
+        if preset_candidate is not None:
+            takeover['preset_scope']='Independent geometry candidate initialized before first physics step; actual2s history and actual settled motor reference; not tabletop acquisition.'
+            takeover['preset_hold_success']=bool(grasp_success)
         (args.output/'takeover.json').write_text(json.dumps(takeover,indent=2)+'\n')
-        if not args.only_grasp and (args.group=='A' or grasp_success):
+        if not args.only_grasp and ((args.group=='A' and preset_candidate is None) or grasp_success):
             for step in range(round(args.seconds/dt)):
                 if step>0 or args.group!='A':q,qa,sl,w,o,l=current()
                 offset=.04 if (step//150)%2==0 else 0.
@@ -787,6 +811,10 @@ def main():
         trace={k:np.asarray([r[k] for r in records]) for k in records[0]}
         np.savez_compressed(args.output/'trace.npz',**trace)
         report=score(trace,takeover,args.group)
+        if preset_candidate is not None:
+            report.update(preset_hold_success=bool(grasp_success),preset_scope=takeover['preset_scope'],
+                preset_candidate_sha256=hashlib.sha256(args.preset_candidate.read_bytes()).hexdigest())
+            if not grasp_success:report['failure_class']='preset_candidate_hold_failed_before_policy'
         report.update(group=args.group,args={k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()},
             teacher_sha256=hashlib.sha256(args.teacher.read_bytes()).hexdigest(),
             student_sha256=hashlib.sha256(args.student.read_bytes()).hexdigest() if args.group=='C' else None,
