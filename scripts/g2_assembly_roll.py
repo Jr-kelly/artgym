@@ -64,21 +64,23 @@ def execute_roll(k,targets,arm_idx,current,tick,records,dt,table_check,output,de
     return refs[-1]
 
 
-def align_to_fixed_goal(k,targets,arm_idx,current,tick,records,dt,table_check,output,goal):
+def align_to_fixed_goal(k,targets,arm_idx,current,tick,records,dt,table_check,output,goal,max_correction_rad=.08,seconds=1.):
     """One small oracle orientation correction; the declared goal never moves."""
     _,_,_,_,actual,_=current();start=k.forward(targets[arm_idx]);pivot=actual[:3,3]
     correction=Rotation.from_matrix(goal[:3,:3]@actual[:3,:3].T).as_rotvec()
-    if np.linalg.norm(correction)>.08 or np.linalg.norm(actual[:3,3]-goal[:3,3])>.005:
+    if not 0<max_correction_rad<=.25 or seconds<1.:raise ValueError('Alignment control bound/duration outside declared range')
+    if np.linalg.norm(correction)>max_correction_rad or np.linalg.norm(actual[:3,3]-goal[:3,3])>.005:
         raise ValueError('One-shot alignment outside declared small-error bounds')
     previous=targets[arm_idx].copy();commands=[]
-    for i in range(round(1./dt)):
-        u=(i+1)/round(1./dt);alpha=10*u**3-15*u**4+6*u**5
+    for i in range(round(seconds/dt)):
+        u=(i+1)/round(seconds/dt);alpha=10*u**3-15*u**4+6*u**5
         r=Rotation.from_rotvec(correction*alpha).as_matrix();w=start.copy()
         w[:3,:3]=r@start[:3,:3];w[:3,3]=pivot+r@(start[:3,3]-pivot)
         q,error=k.solve_near(w,previous,max_step=np.minimum(k.velocity*dt*.8,.15))
         if error['position_m']>.001 or error['rotation_rad']>.005 or table_check.collisions(q):raise ValueError('Alignment IK rejected')
         commands.append(q);previous=q
     plan=dict(correction_world_rotvec=correction.tolist(),pivot_world=pivot.tolist(),unchanged_object_goal=goal.tolist(),
+        correction_bound_rad=max_correction_rad,move_seconds=seconds,
         arm_targets=[q.tolist() for q in commands],localization='One measured object orientation, robot motors only; simulation-truth control upper bound.')
     (output/'assembly-alignment-plan.json').write_text(json.dumps(plan,indent=2)+'\n')
     first=len(records)

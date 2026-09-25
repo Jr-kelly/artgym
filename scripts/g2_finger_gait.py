@@ -47,11 +47,19 @@ def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,
         if 1.875*np.max(np.abs(goal-start))/seconds>2.0:raise ValueError('Gait planned joint speed exceeds 2rad/s bound')
         if arm_goal is not None and np.any(1.875*np.abs(arm_goal-arm_start)/seconds>k.velocity):raise ValueError('Gait arm speed above source limit')
         first=len(records)
-        for i in range(steps):
-            u=(i+1)/steps;alpha=10*u**3-15*u**4+6*u**5
-            targets[hand_idx]=start+(goal-start)*alpha
-            if arm_goal is not None:targets[arm_idx]=arm_start+(arm_goal-arm_start)*alpha
-            tick('gait_'+stage['name'])
+        if stage['kind']=='align_fixed_goal':
+            if world_reference is None or moving or arm_goal is not None:raise ValueError('Alignment requires unchanged external goal and fixed fingers')
+            from scripts.g2_assembly_roll import align_to_fixed_goal
+            from scripts.g2_table_collision import ArmTableCollision
+            folder=output/stage['name'];folder.mkdir()
+            align_to_fixed_goal(k,targets,arm_idx,current,tick,records,dt,ArmTableCollision(table_z),folder,world,
+                max_correction_rad=stage['max_correction_rad'],seconds=stage['move_seconds'])
+        else:
+            for i in range(steps):
+                u=(i+1)/steps;alpha=10*u**3-15*u**4+6*u**5
+                targets[hand_idx]=start+(goal-start)*alpha
+                if arm_goal is not None:targets[arm_idx]=arm_start+(arm_goal-arm_start)*alpha
+                tick('gait_'+stage['name'])
         result=stability(records[first:],world,relative,hand_idx,start,moving,table_z)
         result.update(name=stage['name'],kind=stage['kind'],moving_indices=moving,
             first_time_s=float(records[first]['time']),last_time_s=float(records[-1]['time']),

@@ -84,6 +84,11 @@ def main():
                 alignment=json.loads((trial/'assembly-alignment-check.json').read_text());row['assembly_alignment']=alignment
                 if alignment['first_instability_time_s'] is not None:times.append(alignment['first_instability_time_s'])
                 if not alignment['success']:row['g1_passed']=False
+            row['later_fixed_goal_alignments']=[]
+            for file in sorted((trial/'post-roll-gait').glob('*/assembly-alignment-check.json')):
+                check=json.loads(file.read_text());check['source']=str(file.relative_to(trial))
+                row['later_fixed_goal_alignments'].append(check)
+                if check['first_instability_time_s'] is not None:times.append(check['first_instability_time_s'])
             row['first_instability_time_s']=min(times) if times else None
             if row['g1_passed'] and row.get('operation_steps',0)==0:
                 row['legacy_acquisition_label_note']='Legacy takeover hold requires thumb contact and labels a deliberate thumb-free hold lost_after_lift. Use the independently scored G1 support hold; raw report preserved. This does not establish an operational grasp.'
