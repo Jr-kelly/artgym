@@ -25,6 +25,7 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--source',type=Path,required=True)
     p.add_argument('--prefix',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
     p.add_argument('--degrees',type=float,default=-25.);p.add_argument('--seconds',type=float,default=5.)
+    p.add_argument('--rotation-axis',type=float,nargs=3,default=[0,0,1],help='Fixed unit rotation direction in knife coordinates; default preserves original knife-long-axis plan.')
     p.add_argument('--stage-prefix',default='supported_wrist_roll',help='Use a unique prefix when appending another physical wrist segment.')
     p.add_argument('--endpoint-screen',action='store_true',help='Geometry-only extension up to60deg; never emits an executable motor plan.')
     p.add_argument('--thumb-avoidance',action='store_true',help='After the first25deg, allow minimal thumb motor changes to preserve clearance.')
@@ -41,6 +42,9 @@ def main():
     if a.rolling_support_screen and not a.endpoint_screen:raise ValueError('Rolling supports currently geometry only')
     if abs(a.degrees)>(60 if a.endpoint_screen else 30):raise ValueError('Declared geometric range exceeded')
     if a.output.exists():raise ValueError('Preserve previous plan')
+    rotation_axis=np.asarray(a.rotation_axis,dtype=float)
+    if np.linalg.norm(rotation_axis)<1e-8:raise ValueError('Rotation axis is zero')
+    rotation_axis/=np.linalg.norm(rotation_axis)
     d=json.loads(a.source.read_text());c=ContactCorrection();g=DigitGeometry(max_face_axes=32);w=c.w;k=G2Kinematics()
     q0=np.array(d['touch_q']);cmd0=np.array(d['close_q']);offset=cmd0-q0;r0=np.array(d['wrist_in_knife']);normals=np.array(d['contact_normals'])
     nominal_lower=np.maximum(w.lower,w.lower-offset);nominal_upper=np.minimum(w.upper,w.upper-offset)
@@ -90,7 +94,7 @@ def main():
     index_target=(r0@w.forward(q0)['hand_r_index_pad_link'])[:3,3]
     count=max(1,round(abs(a.degrees)/2.5))
     for i in range(1,count+1):
-        rotation=transform(quaternion=Rotation.from_euler('z',a.degrees*i/count,degrees=True).as_quat());relative=rotation@r0
+        rotation=transform(quaternion=Rotation.from_rotvec(rotation_axis*np.deg2rad(a.degrees*i/count)).as_quat());relative=rotation@r0
         def residual(v):
             candidate=q.copy();candidate[ids]=v[:len(ids)]
             local_values=v[len(ids):].reshape(-1,3) if a.rolling_support_screen else None
@@ -155,6 +159,7 @@ def main():
         contact_anchors=[dict(link=link,local_point=point.tolist()) for link,point in anchors],
         inactive_index_pinky_min_clearance_m=other_clearance,
         actual_support_fingers=supports,
+        rotation_axis_in_knife=rotation_axis.tolist(),
         self_clearance_constraint=a.self_clearance,
         rolling_support_geometry_only=a.rolling_support_screen,
         free_thumb_avoidance_commands=a.bounded_thumb_avoidance,
