@@ -16,6 +16,9 @@ def main():
     p.add_argument('--run-root',type=Path,help='Independent experiment directory; default preserves the original tabletop runs.')
     p.add_argument('args',nargs=argparse.REMAINDER);a=p.parse_args()
     root=Path(__file__).resolve().parents[1];run=a.run_root.resolve() if a.run_root else root/'runs/g2-tabletop-v1';pin=run/'source-pins'/a.name
+    budget=run/'development-budget.json'
+    if budget.exists() and len(list(run.glob('*-process.json')))>=json.loads(budget.read_text())['max_launches']:
+        raise ValueError('Declared development launch budget exhausted; retain all trials and report the current stage.')
     source_root=a.source_root.resolve() if a.source_root else root
     if a.source_root:
         source_manifest=json.loads((source_root/'SOURCE_SHA256.json').read_text())
@@ -29,10 +32,10 @@ def main():
     env=runtime_environment(dict(project=str(pin),python=py),0)
     env['VK_ICD_FILENAMES']='/etc/vulkan/icd.d/nvidia_icd.json'
     args=a.args[1:] if a.args and a.args[0]=='--' else a.args
-    for flag in ['--teacher','--student','--grasp-plan','--seating-plan','--operation-pose','--table-regrasp-plan','--post-acquisition-pose']:
+    for flag in ['--teacher','--student','--grasp-plan','--seating-plan','--operation-pose','--table-regrasp-plan','--post-acquisition-pose','--gait-plan','--operation-seed']:
         if flag in args:
             i=args.index(flag)+1;source=Path(args[i]).resolve()
-            if flag in ['--grasp-plan','--seating-plan','--operation-pose','--table-regrasp-plan','--post-acquisition-pose']:
+            if flag in ['--grasp-plan','--seating-plan','--operation-pose','--table-regrasp-plan','--post-acquisition-pose','--gait-plan','--operation-seed']:
                 destination=pin/'inputs'/source.name;destination.parent.mkdir(exist_ok=True);shutil.copyfile(source,destination)
                 args[i]=str(destination)
             else:args[i]=str(source)

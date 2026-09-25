@@ -1,4 +1,88 @@
 
+## G2 分指换握 2026-09-25T16:57:12.248121+00:00
+
+本轮物理已结束：11次启动、10次物理、9条连续B前690帧均与V2逐元素一致；全部11份源码pin共3878至3887项逐文件校验通过。最远D07取刀/翻掌/中指无名指底部换位保持；D09 teacher0.633s失稳、1.133s全失联、1.6s落桌，600帧离线接口回放误差0。D10/D11不同支撑未完成拇指离触，按停止规则收敛。先读research/g2-finger-gait-results-20260926.md；完整命令在research/g2-finger-gait-20260926.md。正在发布独立分支feat/g2-wuji-finger-gait-20260926及Release g2-wuji-finger-gait-20260926-v1；旧训练88339保留，C/新位置验证未运行。
+
+本轮分支feat/g2-wuji-finger-gait-20260926；实验runs/g2-finger-gait-20260926；开发启动11/18（含独立A）。先读research/g2-finger-gait-20260926.md及实验journal.jsonl。旧任务不重启、不覆盖。
+
+## G2 分指换握 2026-09-25T16:54:14.300531+00:00
+
+D11 ended: middle+ring bottom support retained through prefix, but thumb unload first violates0.25rad at44.966669s, max0.27502rad/5.4165mm; abort before unloaded hold, no policy. D10 and D11 are two physically distinct support arrangements that fail the same minimal thumb-release objective; stop expansion per user rule, not budget exhaustion. Total11 launches=10 physical+1 preflight. Teacher D09 failed, C and new placements not run. Preserve all failures. Next priority is a bounded support-force feasibility/preload discriminator before another release attempt, not RL/retraining.
+
+本轮分支feat/g2-wuji-finger-gait-20260926；实验runs/g2-finger-gait-20260926；开发启动11/18（含独立A）。先读research/g2-finger-gait-20260926.md及实验journal.jsonl。旧任务不重启、不覆盖。
+
+## G2 分指换握 2026-09-25T16:48:47.497721+00:00
+
+D09 completed continuous teacher trial: pickup/flip/middle migration/hold pass, teacher operates600frames but drops knife; C gated, not launched. D10 actual-contact-anchor unload still retains thumb contact100%, pinky absent; corrected anchor alone did not solve release, stable but requested action failed. D11 tests physically different support (middle+ring both bottom), same4mm material-point thumb unload and1s full absence gate. If the same minimal action fails without new discriminating evidence, stop expansion rather than consume18 by tuning.
+
+本轮分支feat/g2-wuji-finger-gait-20260926；实验runs/g2-finger-gait-20260926；开发启动11/18（含独立A）。先读research/g2-finger-gait-20260926.md及实验journal.jsonl。旧任务不重启、不覆盖。
+
+## G2 分指换握 2026-09-25T16:43:15.970220+00:00
+
+D07 ring-bottom complete and stable: final hold5.378mm/0.1184rad, actual ring/middle/thumb/pinky contacts; index intermittently absent. D08 retained knife but FAILED requested thumb release: thumb contact100%, pinky0%; do not call unload successful. Actual thumb pad contact y=-1.15mm differed from mesh extreme y=-4.32mm. D10 isolates planning anchor: same D04 support, same4mm/1s, actual material contact point; new full-second no-contact gate. D09 tests frozen teacher from independently validated D04 held endpoint without arbitrary cache regrasp. 10/18 launches.
+
+本轮分支feat/g2-wuji-finger-gait-20260926；实验runs/g2-finger-gait-20260926；开发启动10/18（含独立A）。先读research/g2-finger-gait-20260926.md及实验journal.jsonl。旧任务不重启、不覆盖。
+
+## G2 分指换握 2026-09-25T16:35:39.634903+00:00
+
+D08 starting independent support contrast from verified D04: only thumb unload4mm and hold1s, middle already on bottom, ring/pinky original side support. Determines whether ring migration is actually needed to free thumb. Two local physics jobs within available VRAM; old training preserved.
+
+本轮分支feat/g2-wuji-finger-gait-20260926；实验runs/g2-finger-gait-20260926；开发启动8/18（含独立A）。先读research/g2-finger-gait-20260926.md及实验journal.jsonl。旧任务不重启、不覆盖。
+
+## G2 分指换握 2026-09-25T16:35:10.845041+00:00
+
+D07 starting: same successful D06 prefix, move ring via outside corner to reachable bottom z=-12mm. Twenty-point geometric screen found original z=-22.3mm at joint limit, z=-12mm feasible with residual<0.1um. Only ring motor changes; fixed wrist/other digits and original physics. Geometry does not prove stability.
+
+本轮分支feat/g2-wuji-finger-gait-20260926；实验runs/g2-finger-gait-20260926；开发启动7/18（含独立A）。先读research/g2-finger-gait-20260926.md及实验journal.jsonl。旧任务不重启、不覆盖。
+
+## G2 分指换握 2026-09-25T16:34:11.066319+00:00
+
+D06 finished: middle-bottom then ring unload held 1s, max fixed-world 5.382mm/0.12752rad; ring contact zero, thumb/middle/pinky remain. Budget 6/18 launches (5 physical). Original training88339 verified active; no gait processes remain. Next geometric ring-bottom reachable-point screen; preserve all pins.
+
+本轮分支feat/g2-wuji-finger-gait-20260926；实验runs/g2-finger-gait-20260926；开发启动6/18（含独立A）。先读research/g2-finger-gait-20260926.md及实验journal.jsonl。旧任务不重启、不覆盖。
+
+## G2 分指换握 2026-09-25T16:32:03.566509+00:00
+
+D05第5度失败中止：固定世界平移4.276mm、旋转0.30298rad，前4度未超门禁；不扩大腕转角。D06仅卸载无名指在途；下一优先单指迁移，不加反馈增益。D05接触字段已核对camelCase localPos0/1并采集。
+
+本轮分支feat/g2-wuji-finger-gait-20260926；实验runs/g2-finger-gait-20260926；开发启动6/18（含独立A）。先读research/g2-finger-gait-20260926.md及实验journal.jsonl。旧任务不重启、不覆盖。
+
+## G2 分指换握 2026-09-25T16:30:55.033265+00:00
+
+D05正在逐度接触保持腕运动；第1度仍通过固定阈值。无名指底部迁移几何残差2.27mm，未做物理；D06只做中指已建立支撑后的无名指卸载+1秒保持，用于验证新的四指支撑组合，尚未迁移或转腕。18上限已由launcher按保守启动数强制执行。
+
+本轮分支feat/g2-wuji-finger-gait-20260926；实验runs/g2-finger-gait-20260926；开发启动6/18（含独立A）。先读research/g2-finger-gait-20260926.md及实验journal.jsonl。旧任务不重启、不覆盖。
+
+## G2 分指换握 2026-09-25T16:26:45.666437+00:00
+
+D04终态通过。5度接触保持的固定腕平移插值在4度时中指不可达(1.57mm)，几何排除；允许腕部有界<=10mm平移后5度各指固定接触残差<0.00003mm，D05启动物理。此处只改规划腕路径，不改物性/动力学。D04日志未提供local_pos字段，接触位置仍是网格估计；新代码记录实际dtype并兼容camelCase，不能误报为已有实测接触点。
+
+本轮分支feat/g2-wuji-finger-gait-20260926；实验runs/g2-finger-gait-20260926；开发启动5/18（含独立A）。先读research/g2-finger-gait-20260926.md及实验journal.jsonl。旧任务不重启、不覆盖。
+
+## G2 分指换握 2026-09-25T16:24:47.704231+00:00
+
+D04单中指迁移刀背边缘并保持1秒通过，最大固定世界漂移2.962mm/.07431rad。其余指电机目标不变；真实接触数据local_pos0/1开始记录。准备5度接触保持腕运动，逐度补偿指基座运动，接触目标不迁移。D03 A已通过，暂不增加其他目标A。
+
+本轮分支feat/g2-wuji-finger-gait-20260926；实验runs/g2-finger-gait-20260926；开发启动4/18（含独立A）。先读research/g2-finger-gait-20260926.md及实验journal.jsonl。旧任务不重启、不覆盖。
+
+## G2 分指换握 2026-09-25T16:22:17.196221+00:00
+
+D03独立A当前腕姿20秒通过2mm/两轮/稳定：四端点0.563/0/0.252/0mm，世界7.122mm/.13993rad。不需要默认搬运；只证明终点手物关系有效。当前原侧夹固定腕刀关系下拇指到滑块多初值IK仍残差32.07mm，新近端点不可行。D04中指底部迁移在途。
+
+本轮分支feat/g2-wuji-finger-gait-20260926；实验runs/g2-finger-gait-20260926；开发启动4/18（含独立A）。先读research/g2-finger-gait-20260926.md及实验journal.jsonl。旧任务不重启、不覆盖。
+
+## G2 分指换握 2026-09-25T16:21:00.714980+00:00
+
+D02中指卸载4mm并保持1秒通过：世界1.582mm/.02124rad；中指保持期接触0，其他四指全程接触且电机目标未变。D04开始单中指绕角建立底部支撑，原前缀与卸载复用。D01仅IK预检失败未simulate；同腕实际q用作求解种子的D03 A已进入物理，不更改限位。
+
+本轮分支feat/g2-wuji-finger-gait-20260926；实验runs/g2-finger-gait-20260926；开发启动4/18（含独立A）。先读research/g2-finger-gait-20260926.md及实验journal.jsonl。旧任务不重启、不覆盖。
+
+## G2 分指换握 2026-09-25T16:18:06.764223+00:00
+
+核对本机/远端277efe4一致，独立分支已建立。相对旋转103.6009度核算成立但非因果；保留抓姿0/1旧操作证据。D01 A当前腕姿、D02中指卸载各独立源码已启动，分别PID928290/933348。原训练88339实查活跃。
+
+本轮分支feat/g2-wuji-finger-gait-20260926；实验runs/g2-finger-gait-20260926；开发启动2/18（含独立A）。先读research/g2-finger-gait-20260926.md及实验journal.jsonl。旧任务不重启、不覆盖。
+
 ## 2026-09-25T15:21:44.180461+00:00 取刀翻掌证据已发布核验
 
 https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-sliderdown-air-flip-20260925-v1：9个附件大小/SHA全部验证，4项源码与轨迹（含两次失败）、四段无字视频、完整命令/报告；增量归档4.98MB，16项关键归档内容与本机源文件一致。源码分支feat/g2-wuji-air-flip-20260925已同步，Git HTTPS helper反复无法读取.git/config，改用GitHub Git对象API，校验树完全相同并已对齐本地分支。下一会话先读research/g2-air-flip-results-20260925.md；取刀翻掌通过、手内调整失败、无新策略操作这三点不变。没有在途本轮任务；保留原训练88339。

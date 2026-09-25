@@ -1,0 +1,1690 @@
+{
+  "launches": 11,
+  "physical_executions": 10,
+  "development_budget": 18,
+  "stopped": "two different support arrangements failed thumb release; not budget exhaustion",
+  "new_validation_trials": 0,
+  "student_trials": 0,
+  "full_route_success": false,
+  "trials": [
+    {
+      "name": "D01-A-grasp0-current-wrist",
+      "physical_execution": false,
+      "verified_source_files": 3878,
+      "stage_results": [],
+      "failure": null,
+      "operation": {},
+      "trace_sha256": null,
+      "source_manifest_sha256": "61001fef7df37c80e901f10c0efbe2e737371b6a0c24b65404b35fb835c842fb"
+    },
+    {
+      "name": "D02-B-middle-unload",
+      "physical_execution": true,
+      "prefix_exact": true,
+      "verified_source_files": 3881,
+      "first_instability_time_s": null,
+      "stage_results": [
+        {
+          "name": "baseline_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0003081848301801201,
+          "world_rotation_max_rad": 0.0018702627121310802,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "unload_middle",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0015407928720132182,
+          "world_rotation_max_rad": 0.020536773163455327,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.6333333333333333,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "unloaded_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.001581801193456946,
+          "world_rotation_max_rad": 0.02123577395752464,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "failure": null,
+      "operation": {
+        "operation_steps": 0
+      },
+      "trace_sha256": "dd0d61ef3380714615edc6811e245b397218ef937453080fd5897a9bcd8c32b6",
+      "source_manifest_sha256": "93ede83daea7ab2157f09dbd71023feb425d68a5a09a9da2dc796ba65461dd90"
+    },
+    {
+      "name": "D03-A-grasp0-current-seeded",
+      "physical_execution": true,
+      "verified_source_files": 3882,
+      "operation_first_instability": null,
+      "policy_first_command_delta_rad": 0.028271257877349854,
+      "stage_results": [],
+      "failure": null,
+      "operation": {
+        "operation_steps": 600,
+        "basic_10mm": true,
+        "strict_2mm": true,
+        "completed_cycles": 2,
+        "whole_stable_success": true,
+        "physical_drop_detected": false,
+        "endpoints": [
+          {
+            "stage": 0,
+            "max_error_m": 0.0005625243857502946,
+            "final_error_m": 0.000562207270413638,
+            "within_10mm": true,
+            "within_2mm": true
+          },
+          {
+            "stage": 1,
+            "max_error_m": 0.0,
+            "final_error_m": 0.0,
+            "within_10mm": true,
+            "within_2mm": true
+          },
+          {
+            "stage": 2,
+            "max_error_m": 0.0002523506619036206,
+            "final_error_m": 0.0002523506619036206,
+            "within_10mm": true,
+            "within_2mm": true
+          },
+          {
+            "stage": 3,
+            "max_error_m": 0.0,
+            "final_error_m": 0.0,
+            "within_10mm": true,
+            "within_2mm": true
+          }
+        ],
+        "world_drift_max_m": 0.007121558331337519,
+        "world_rotation_max_rad": 0.13992763728438565
+      },
+      "trace_sha256": "18eaf083e23401ce20f62e8266304ec45e5ebe2daf4d15df883729b70dad6e1b",
+      "source_manifest_sha256": "359607a96658a9ff59d6f9a0b04bd90ca4dca3b67bedb337b2bb74838a844d4d"
+    },
+    {
+      "name": "D04-B-middle-bottom",
+      "physical_execution": true,
+      "prefix_exact": true,
+      "verified_source_files": 3882,
+      "first_instability_time_s": null,
+      "stage_results": [
+        {
+          "name": "baseline_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0003081848301801201,
+          "world_rotation_max_rad": 0.0018702627121310802,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "unload_middle",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0015407928720132182,
+          "world_rotation_max_rad": 0.020536773163455327,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.6333333333333333,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "unloaded_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.001581801193456946,
+          "world_rotation_max_rad": 0.02123577395752464,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "corner_clearance",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0016392364089332374,
+          "world_rotation_max_rad": 0.023584967531828895,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "under_body",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.001685633634115761,
+          "world_rotation_max_rad": 0.02586072720879923,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "establish_bottom",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0025238939195793295,
+          "world_rotation_max_rad": 0.05920359096256397,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.9833333333333333,
+            0.4666666666666667,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "new_support_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.002961732633441398,
+          "world_rotation_max_rad": 0.07430551760959696,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "failure": null,
+      "operation": {
+        "operation_steps": 0
+      },
+      "trace_sha256": "86013b0c89c05483e51ef7a89e76b07f6b082fb5d3aa8dd59631ed5c9b745f08",
+      "source_manifest_sha256": "2409bd21c4d7e15c7964c79c94a59795e31ded8bd6a1bca6060fc02ce7bffb1b"
+    },
+    {
+      "name": "D05-B-middle-contact-roll5",
+      "physical_execution": true,
+      "prefix_exact": true,
+      "verified_source_files": 3883,
+      "first_instability_time_s": 37.56666862592101,
+      "stage_results": [
+        {
+          "name": "baseline_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0003081848301801201,
+          "world_rotation_max_rad": 0.0018702627121310802,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "unload_middle",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0015407928720132182,
+          "world_rotation_max_rad": 0.020536773163455327,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.6333333333333333,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "unloaded_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.001581801193456946,
+          "world_rotation_max_rad": 0.02123577395752464,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "corner_clearance",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0016392364089332374,
+          "world_rotation_max_rad": 0.023584967531828895,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "under_body",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.001685633634115761,
+          "world_rotation_max_rad": 0.02586072720879923,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "establish_bottom",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0025238939195793295,
+          "world_rotation_max_rad": 0.05920359096256397,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.9833333333333333,
+            0.4666666666666667,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "new_support_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.002961732633441398,
+          "world_rotation_max_rad": 0.07430551760959696,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "contact_roll_1",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0029674079347219665,
+          "world_rotation_max_rad": 0.11060256258006833,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.9333333333333333,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "contact_roll_2",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0030168594678605656,
+          "world_rotation_max_rad": 0.13365530073529436,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.9666666666666667,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "contact_roll_3",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.003672569002599757,
+          "world_rotation_max_rad": 0.15195593354564602,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.9666666666666667,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "contact_roll_4",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.004212951966980815,
+          "world_rotation_max_rad": 0.22901563864991614,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.9,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "contact_roll_5",
+          "stable": false,
+          "requested_contact_condition_met": true,
+          "stage_completed": false,
+          "world_position_max_m": 0.004276079026160365,
+          "world_rotation_max_rad": 0.30297773622504376,
+          "first_instability_time_s": 37.56666862592101,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.5666666666666667,
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "Gait fixed-reference stability failed: contact_roll_5",
+        "steps": 1140,
+        "last_phase": "gait_contact_roll_5",
+        "group": "B",
+        "physics_trace_preserved": true
+      },
+      "operation": {},
+      "trace_sha256": "eb83caaea362a2a9925636c67557378e6481504f91afc4e56e51d30ec4e914b2",
+      "source_manifest_sha256": "47dbcae4f807ccf10a0124e5683da9efdd493a823c9198db8c7152e432b866b5"
+    },
+    {
+      "name": "D06-B-middle-ring-unload",
+      "physical_execution": true,
+      "prefix_exact": true,
+      "verified_source_files": 3884,
+      "first_instability_time_s": null,
+      "stage_results": [
+        {
+          "name": "baseline_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0003081848301801201,
+          "world_rotation_max_rad": 0.0018702627121310802,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "unload_middle",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0015407928720132182,
+          "world_rotation_max_rad": 0.020536773163455327,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.6333333333333333,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "unloaded_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.001581801193456946,
+          "world_rotation_max_rad": 0.02123577395752464,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "corner_clearance",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0016392364089332374,
+          "world_rotation_max_rad": 0.023584967531828895,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "under_body",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.001685633634115761,
+          "world_rotation_max_rad": 0.02586072720879923,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "establish_bottom",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0025238939195793295,
+          "world_rotation_max_rad": 0.05920359096256397,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.9833333333333333,
+            0.4666666666666667,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "new_support_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.002961732633441398,
+          "world_rotation_max_rad": 0.07430551760959696,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "ring_baseline_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0031560660311925836,
+          "world_rotation_max_rad": 0.08108723917259021,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "ring_unload_ring",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.005258595604667322,
+          "world_rotation_max_rad": 0.1235927567139844,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.6333333333333333,
+            1.0,
+            0.6666666666666666,
+            1.0
+          ]
+        },
+        {
+          "name": "ring_unloaded_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.005382248331052004,
+          "world_rotation_max_rad": 0.127518960177242,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.8,
+            1.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "failure": null,
+      "operation": {
+        "operation_steps": 0
+      },
+      "trace_sha256": "89714a58b41b05a6c6bbfdf7690ea7a11c66b94d67cf2401fce299ff72544dde",
+      "source_manifest_sha256": "dbc243e4b410157d0ab86cce903c9187a0c372f8d5dcaa0a5631a1e0b50a8631"
+    },
+    {
+      "name": "D07-B-middle-ring-bottom",
+      "physical_execution": true,
+      "prefix_exact": true,
+      "verified_source_files": 3884,
+      "first_instability_time_s": null,
+      "stage_results": [
+        {
+          "name": "baseline_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0003081848301801201,
+          "world_rotation_max_rad": 0.0018702627121310802,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "unload_middle",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0015407928720132182,
+          "world_rotation_max_rad": 0.020536773163455327,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.6333333333333333,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "unloaded_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.001581801193456946,
+          "world_rotation_max_rad": 0.02123577395752464,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "corner_clearance",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0016392364089332374,
+          "world_rotation_max_rad": 0.023584967531828895,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "under_body",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.001685633634115761,
+          "world_rotation_max_rad": 0.02586072720879923,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "establish_bottom",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0025238939195793295,
+          "world_rotation_max_rad": 0.05920359096256397,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.9833333333333333,
+            0.4666666666666667,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "new_support_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.002961732633441398,
+          "world_rotation_max_rad": 0.07430551760959696,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "ring_baseline_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0031560660311925836,
+          "world_rotation_max_rad": 0.08108723917259021,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "ring_unload_ring",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.005258595604667322,
+          "world_rotation_max_rad": 0.1235927567139844,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.6333333333333333,
+            1.0,
+            0.6666666666666666,
+            1.0
+          ]
+        },
+        {
+          "name": "ring_unloaded_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.005382248331052004,
+          "world_rotation_max_rad": 0.127518960177242,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.8,
+            1.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "ring_corner_clearance",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.005510856148948286,
+          "world_rotation_max_rad": 0.13148143593398384,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "ring_under_body",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.005714153152469167,
+          "world_rotation_max_rad": 0.1334094314539837,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.7833333333333333,
+            0.6333333333333333,
+            1.0
+          ]
+        },
+        {
+          "name": "ring_establish_bottom",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.005359863413020243,
+          "world_rotation_max_rad": 0.1185290208844805,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.9833333333333333,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "ring_new_support_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.005377926259941091,
+          "world_rotation_max_rad": 0.11839488233292993,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.3,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "failure": null,
+      "operation": {
+        "operation_steps": 0
+      },
+      "trace_sha256": "c80490fa20989d02e941070ecdbec78afad5eaacb8bb77544b5872a8f47b4b2e",
+      "source_manifest_sha256": "9363b8cb3ac99ecd70f0a3e56148fc781094d849071ae9fb3b33fae2be8633c7"
+    },
+    {
+      "name": "D08-B-middle-thumb-unload",
+      "physical_execution": true,
+      "prefix_exact": true,
+      "verified_source_files": 3884,
+      "first_instability_time_s": null,
+      "stage_results": [
+        {
+          "name": "baseline_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0003081848301801201,
+          "world_rotation_max_rad": 0.0018702627121310802,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "unload_middle",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0015407928720132182,
+          "world_rotation_max_rad": 0.020536773163455327,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.6333333333333333,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "unloaded_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.001581801193456946,
+          "world_rotation_max_rad": 0.02123577395752464,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "corner_clearance",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0016392364089332374,
+          "world_rotation_max_rad": 0.023584967531828895,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "under_body",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.001685633634115761,
+          "world_rotation_max_rad": 0.02586072720879923,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "establish_bottom",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0025238939195793295,
+          "world_rotation_max_rad": 0.05920359096256397,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.9833333333333333,
+            0.4666666666666667,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "new_support_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.002961732633441398,
+          "world_rotation_max_rad": 0.07430551760959696,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "thumb_baseline_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0031560660311925836,
+          "world_rotation_max_rad": 0.08108723917259021,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "thumb_unload_thumb",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0031629238626912515,
+          "world_rotation_max_rad": 0.1614160154057736,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.6
+          ]
+        },
+        {
+          "name": "thumb_unloaded_hold",
+          "stable": true,
+          "requested_contact_condition_met": false,
+          "stage_completed": false,
+          "world_position_max_m": 0.001465128241723712,
+          "world_rotation_max_rad": 0.1665976622535929,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.0
+          ]
+        }
+      ],
+      "failure": null,
+      "operation": {
+        "operation_steps": 0
+      },
+      "trace_sha256": "dfd58be8cc2c747249fdae8635cebf5ccbbc54cd9f6780d1b47dae0a5bed7d56",
+      "source_manifest_sha256": "4f768357bda22b8872dc9553ff153b501dd72ffaef97af8388b081d40e19c975"
+    },
+    {
+      "name": "D09-B-middle-bottom-teacher",
+      "physical_execution": true,
+      "prefix_exact": true,
+      "verified_source_files": 3887,
+      "first_instability_time_s": null,
+      "operation_first_instability": {
+        "time_s": 35.63333519175649,
+        "since_takeover_s": 0.6333333663642406,
+        "position_m": 0.005070064998967791,
+        "rotation_rad": 0.2705283586555487
+      },
+      "policy_first_command_delta_rad": 0.01807224750518799,
+      "stage_results": [
+        {
+          "name": "baseline_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0003081848301801201,
+          "world_rotation_max_rad": 0.0018702627121310802,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "unload_middle",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0015407928720132182,
+          "world_rotation_max_rad": 0.020536773163455327,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.6333333333333333,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "unloaded_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.001581801193456946,
+          "world_rotation_max_rad": 0.02123577395752464,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "corner_clearance",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0016392364089332374,
+          "world_rotation_max_rad": 0.023584967531828895,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "under_body",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.001685633634115761,
+          "world_rotation_max_rad": 0.02586072720879923,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "establish_bottom",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0025238939195793295,
+          "world_rotation_max_rad": 0.05920359096256397,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.9833333333333333,
+            0.4666666666666667,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "new_support_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.002961732633441398,
+          "world_rotation_max_rad": 0.07430551760959696,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "failure": null,
+      "operation": {
+        "operation_steps": 600,
+        "basic_10mm": false,
+        "strict_2mm": false,
+        "completed_cycles": 0,
+        "whole_stable_success": false,
+        "physical_drop_detected": true,
+        "endpoints": [
+          {
+            "stage": 0,
+            "max_error_m": 0.029633755758404733,
+            "final_error_m": 0.029633755758404733,
+            "within_10mm": false,
+            "within_2mm": false
+          },
+          {
+            "stage": 1,
+            "max_error_m": 0.010366244241595268,
+            "final_error_m": 0.010366244241595268,
+            "within_10mm": false,
+            "within_2mm": false
+          },
+          {
+            "stage": 2,
+            "max_error_m": 0.029633755758404733,
+            "final_error_m": 0.029633755758404733,
+            "within_10mm": false,
+            "within_2mm": false
+          },
+          {
+            "stage": 3,
+            "max_error_m": 0.010366244241595268,
+            "final_error_m": 0.010366244241595268,
+            "within_10mm": false,
+            "within_2mm": false
+          }
+        ],
+        "world_drift_max_m": 0.311404139676796,
+        "world_rotation_max_rad": 3.1024852836669705
+      },
+      "trace_sha256": "fa9611efcd5b07ddbf9d3406fd1a515ff56a8f79d39c7fa2fb7a2c4be08a8a9b",
+      "source_manifest_sha256": "9c89f2f9b1deb5793dc959056ee1ce4143c501038642ec2046a34c4366495db8"
+    },
+    {
+      "name": "D10-B-middle-thumb-material-unload",
+      "physical_execution": true,
+      "prefix_exact": true,
+      "verified_source_files": 3887,
+      "first_instability_time_s": null,
+      "stage_results": [
+        {
+          "name": "baseline_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0003081848301801201,
+          "world_rotation_max_rad": 0.0018702627121310802,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "unload_middle",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0015407928720132182,
+          "world_rotation_max_rad": 0.020536773163455327,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.6333333333333333,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "unloaded_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.001581801193456946,
+          "world_rotation_max_rad": 0.02123577395752464,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "corner_clearance",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0016392364089332374,
+          "world_rotation_max_rad": 0.023584967531828895,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "under_body",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.001685633634115761,
+          "world_rotation_max_rad": 0.02586072720879923,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "establish_bottom",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0025238939195793295,
+          "world_rotation_max_rad": 0.05920359096256397,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.9833333333333333,
+            0.4666666666666667,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "new_support_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.002961732633441398,
+          "world_rotation_max_rad": 0.07430551760959696,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "thumb_baseline_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0031560660311925836,
+          "world_rotation_max_rad": 0.08108723917259021,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "thumb_unload_thumb",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0031620818816883653,
+          "world_rotation_max_rad": 0.15799831941083084,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.5666666666666667
+          ]
+        },
+        {
+          "name": "thumb_unloaded_hold",
+          "stable": true,
+          "requested_contact_condition_met": false,
+          "stage_completed": false,
+          "world_position_max_m": 0.0013756529750698831,
+          "world_rotation_max_rad": 0.16222143334524627,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.0
+          ]
+        }
+      ],
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "Requested digit did not unload for the full hold: thumb_unloaded_hold",
+        "steps": 1080,
+        "last_phase": "gait_thumb_unloaded_hold",
+        "group": "B",
+        "physics_trace_preserved": true
+      },
+      "operation": {},
+      "trace_sha256": "e950a791a0cfda15dbc3b853d7c95c49127f18f01cdcfd96c7ecaad7b17a200f",
+      "source_manifest_sha256": "91b83ead846cb86243b4ba41ebd8b349a02ade48d1b984fea93c91443f0643b1"
+    },
+    {
+      "name": "D11-B-middle-ring-thumb-material-unload",
+      "physical_execution": true,
+      "prefix_exact": true,
+      "verified_source_files": 3887,
+      "first_instability_time_s": 44.966669011861086,
+      "stage_results": [
+        {
+          "name": "baseline_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0003081848301801201,
+          "world_rotation_max_rad": 0.0018702627121310802,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "unload_middle",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0015407928720132182,
+          "world_rotation_max_rad": 0.020536773163455327,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.6333333333333333,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "unloaded_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.001581801193456946,
+          "world_rotation_max_rad": 0.02123577395752464,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "corner_clearance",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0016392364089332374,
+          "world_rotation_max_rad": 0.023584967531828895,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "under_body",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.001685633634115761,
+          "world_rotation_max_rad": 0.02586072720879923,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "establish_bottom",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0025238939195793295,
+          "world_rotation_max_rad": 0.05920359096256397,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.9833333333333333,
+            0.4666666666666667,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "new_support_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.002961732633441398,
+          "world_rotation_max_rad": 0.07430551760959696,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "ring_baseline_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.0031560660311925836,
+          "world_rotation_max_rad": 0.08108723917259021,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "ring_unload_ring",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.005258595604667322,
+          "world_rotation_max_rad": 0.1235927567139844,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.6333333333333333,
+            1.0,
+            0.6666666666666666,
+            1.0
+          ]
+        },
+        {
+          "name": "ring_unloaded_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.005382248331052004,
+          "world_rotation_max_rad": 0.127518960177242,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.8,
+            1.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "ring_corner_clearance",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.005510856148948286,
+          "world_rotation_max_rad": 0.13148143593398384,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            1.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "ring_under_body",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.005714153152469167,
+          "world_rotation_max_rad": 0.1334094314539837,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            1.0,
+            0.7833333333333333,
+            0.6333333333333333,
+            1.0
+          ]
+        },
+        {
+          "name": "ring_establish_bottom",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.005359863413020243,
+          "world_rotation_max_rad": 0.1185290208844805,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.9833333333333333,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "ring_new_support_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.005377926259941091,
+          "world_rotation_max_rad": 0.11839488233292993,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.3,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "thumb_baseline_hold",
+          "stable": true,
+          "requested_contact_condition_met": true,
+          "stage_completed": true,
+          "world_position_max_m": 0.005416900942975201,
+          "world_rotation_max_rad": 0.1173091530796622,
+          "first_instability_time_s": null,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            1.0,
+            0.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "name": "thumb_unload_thumb",
+          "stable": false,
+          "requested_contact_condition_met": true,
+          "stage_completed": false,
+          "world_position_max_m": 0.005416539876696444,
+          "world_rotation_max_rad": 0.2750204312731324,
+          "first_instability_time_s": 44.966669011861086,
+          "contact_fraction_thumb_index_middle_ring_pinky": [
+            0.9,
+            0.3,
+            0.7666666666666667,
+            0.8666666666666667,
+            0.7
+          ]
+        }
+      ],
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "Gait fixed-reference stability failed: thumb_unload_thumb",
+        "steps": 1350,
+        "last_phase": "gait_thumb_unload_thumb",
+        "group": "B",
+        "physics_trace_preserved": true
+      },
+      "operation": {},
+      "trace_sha256": "c758ca0b1d30815a98e2401a2177b083c7110f2866c3db51f6802bc2a117d969",
+      "source_manifest_sha256": "6f27492230227ab1c90ff78f319b4286319ae0e16d41ecafea9acc27e2395c37"
+    }
+  ]
+}

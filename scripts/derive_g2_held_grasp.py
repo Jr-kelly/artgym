@@ -11,6 +11,7 @@ from scripts.wuji_kinematics import FINGERS
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--trial',type=Path,required=True)
     p.add_argument('--phase',default='lift',help='Executed phase end to use as motor-planning reference; never a simulator reset.')
+    p.add_argument('--fallback-normals',type=Path,help='For a deliberately unloaded finger only: earlier planning normals, explicitly NOT measured contact.')
     p.add_argument('--output',type=Path,required=True);a=p.parse_args()
     data=json.loads((a.trial/'grasp-plan.json').read_text());t=np.load(a.trial/'trace.npz')
     selected=np.flatnonzero(t['phase']==a.phase)
@@ -19,17 +20,23 @@ def main():
     wrist=transform(t['wrist'][i,:3],t['wrist'][i,3:]);obj=transform(t['object'][i,:3],t['object'][i,3:])
     relative=np.linalg.inv(obj)@wrist
     pairs=[json.loads(l) for l in (a.trial/'knife-contact-pairs.jsonl').read_text().splitlines()]
-    normals=[]
+    normals=[];normal_sources=[]
     for f in FINGERS:
         rows=[v for v in pairs if i-4<=v['step']<=i and (f in v['body1'] or f in v['body0'])]
-        if not rows:raise ValueError('No measured knife contact for '+f)
+        if not rows:
+            if a.fallback_normals is None:raise ValueError('No measured knife contact for '+f)
+            fallback=json.loads(a.fallback_normals.read_text())
+            normals.append(fallback['contact_normals'][FINGERS.index(f)])
+            normal_sources.append('No contact; planning normal from '+str(a.fallback_normals))
+            continue
         normal=sum(np.array(v['normal'])*(-1 if f in v['body1'] else 1)@
                    Rotation.from_quat(t['object'][v['step'],3:]).as_matrix()*v['lambda_value'] for v in rows)
         normal[2]=0;normal/=np.linalg.norm(normal);normals.append(normal)
+        normal_sources.append('Measured collision normal, transverse projection')
     points,_,_=ContactCorrection().contacts(t['q'][i],relative,normals)
     data.update(wrist_in_knife=relative.tolist(),touch_q=t['q'][i].tolist(),
         close_q=t['targets'][i,physics['hand_indices']].tolist(),contact_targets=points.tolist(),
-        contact_normals=np.asarray(normals).tolist(),source_trial=str(a.trial),source_step=i,
+        contact_normals=np.asarray(normals).tolist(),contact_normal_sources=normal_sources,source_trial=str(a.trial),source_step=i,
         source_trace_sha256=hashlib.sha256((a.trial/'trace.npz').read_bytes()).hexdigest(),source_phase=a.phase,
         validation='Actual executed phase-end geometry for motor planning only. Original tabletop grasp plan remains unchanged; never load as simulator state.')
     a.output.write_text(json.dumps(data,indent=2)+'\n');print(str(a.output))

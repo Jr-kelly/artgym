@@ -60,6 +60,7 @@ def main():
     parser.add_argument('--wrist-posture',type=float,help='Redundant arm joint7 target for initial approach/grasp/lift IK only.')
     parser.add_argument('--seat-at-operation',action='store_true',help='Carry held knife to the trained object attitude before changing grasp contacts.')
     parser.add_argument('--operation-pose',type=Path,help='Explicit wrist 4x4 pose for labeled gravity/interface diagnostics.')
+    parser.add_argument('--operation-seed',type=Path,help='A-only measured G2 joint seed for solving an already reached wrist pose; never changes limits.')
     parser.add_argument('--post-acquisition-pose',type=Path,help='B/C-only bounded wrist adjustment after acquisition and before history settling; preserves the preceding acquisition path. Hand motor targets stay fixed.')
     parser.add_argument('--seat-finger-feedback',choices=['none','object-truth'],default='none',help='Oracle finger contact correction; requires an inverse-statics plan.')
     parser.add_argument('--seat-object-servo',action='store_true',help='Bounded truth object-pose servo via hand motor targets only, during acquisition.')
@@ -87,6 +88,8 @@ def main():
     parser.add_argument('--lift-height',type=float,default=.20,help='Vertical wrist lift in metres; no object state changes.')
     parser.add_argument('--slider-face',choices=['up','down'],default='up',help='Initial tabletop placement; down starts above the protruding passive slider and settles freely.')
     parser.add_argument('--table-localization',choices=['configured','settled-truth'],default='configured',help='Acquisition-only ideal localization after natural tabletop settling.')
+    parser.add_argument('--gait-plan',type=Path,help='Sequential single-digit motor plan with fixed-reference one-second hold gates after actual air flip.')
+    parser.add_argument('--stay-after-gait',action='store_true',help='Keep achieved wrist pose for settling and optional policy operation; no transport.')
     args=parser.parse_args()
     args.output.mkdir(parents=True,exist_ok=False)
     assert not args.hand_only_diagnostic or args.group=='A'
@@ -105,6 +108,7 @@ def main():
     assert not args.air_flip_only or (args.air_flip and args.only_grasp and args.seat_seconds==0)
     assert 5<=args.air_flip_seconds<=20 and .20<=args.lift_height<=.40
     assert np.linalg.norm(args.air_flip_shift)<=.25
+    assert not args.gait_plan or (args.air_flip and not args.table_supported_seat and not args.seating_plan and args.seat_seconds==0)
     cfg=configuration('wuji_acquisition_bridge3_hemisphere',1,
         ['hand=wuji_paper_official_actuator','object=knife_wuji_bridge3_20260922','test=True','rl_device=cpu'],train='wujiAcquisitionSAPG')
     (args.output/'frozen-config.yaml').write_text(OmegaConf.to_yaml(cfg,resolve=True))
@@ -118,7 +122,9 @@ def main():
         post_acquisition_pose=np.asarray(json.loads(args.post_acquisition_pose.read_text()),dtype=float)
         assert np.linalg.norm(post_acquisition_pose[:3,3]-operation[:3,3])<=.020
         assert Rotation.from_matrix(operation[:3,:3].T@post_acquisition_pose[:3,:3]).magnitude()<=np.deg2rad(15)+1e-8
-    op_q,op_error=k.solve(operation)
+    assert not args.operation_seed or args.group=='A'
+    op_seed=np.asarray(json.loads(args.operation_seed.read_text())) if args.operation_seed else None
+    op_q,op_error=k.solve(operation,op_seed)
     assert op_error['position_m']<1e-4 and op_error['rotation_rad']<1e-3,op_error
     table_z=args.table_height
     from scripts.g2_table_collision import ArmTableCollision
@@ -345,6 +351,13 @@ def main():
                 normal=[float(v[name]) for name in ('x','y','z')] if getattr(v.dtype,'names',None) else [float(x) for x in v]
                 pair_records.append(dict(step=global_step,phase=phase,body0=env_names.get(int(c['body0']),'ground'),
                     body1=env_names.get(int(c['body1']),'ground'),normal=normal,lambda_value=float(c['lambda'])))
+                if args.gait_plan:
+                    if not (args.output/'contact-schema.json').exists():
+                        (args.output/'contact-schema.json').write_text(json.dumps(list(c.dtype.names))+'\n')
+                    for key in ['local_pos0','local_pos1','localPos0','localPos1']:
+                        if key in c.dtype.names:
+                            point=c[key]
+                            pair_records[-1][key]=[float(point[n]) for n in ('x','y','z')] if getattr(point.dtype,'names',None) else [float(x) for x in point]
             for i,f in enumerate(digits):
                 digit_contact=any('_'+f+'_' in env_names.get(b,'') for b in pair)
                 if digit_contact and table_env in pair:finger_table[i]+=1
@@ -387,6 +400,7 @@ def main():
                     grasp_ik=grasp_error,lift_ik=lift_error,method='One simulated truth sample after natural tabletop settling; only arm motor targets replanned.'),indent=2)+'\n')
             phases=[('approach',grasp_q,opened,4),('close',grasp_q,closed,3),('lift',lift_q,closed,4)]
             if args.air_flip:phases.append(('air_flip',None,closed,args.air_flip_seconds))
+            if args.gait_plan:phases.append(('finger_gait',None,None,0))
             if args.table_supported_seat:
                 if args.upright_path=='yaw-then-tip':phases.append(('stand_yaw',None,closed,5))
                 if args.upright_path=='tip-then-yaw':phases.append(('stand_tip',None,closed,5))
@@ -402,7 +416,7 @@ def main():
                 phases.append(('functional_close',None,functional,3))
             elif args.seat_seconds>0:phases.append(('seat',lift_q,functional,args.seat_seconds))
             if args.table_supported_seat:phases.append(('relift',None,functional,4))
-            if not args.air_flip_only:phases.append(('transport',op_q,functional if args.seat_seconds>0 or table_regrasp else closed,5))
+            if not args.air_flip_only and not args.stay_after_gait:phases.append(('transport',op_q,functional if args.seat_seconds>0 or table_regrasp else closed,5))
             if args.gravity_close_before_takeover:
                 restored=np.asarray(table_regrasp.get('restore_q',functional))
                 gravity_hold_hand=functional.copy()
@@ -414,6 +428,10 @@ def main():
                                ('gravity_close_restore',None,restored,2),('gravity_close_return',None,restored,8)])
             if post_acquisition_pose is not None:phases.append(('operation_adjust',None,None,4))
             for label,end_arm,end_hand,seconds in phases:
+                if label=='finger_gait':
+                    from scripts.g2_finger_gait import execute_gait
+                    execute_gait(args.gait_plan,args.output,targets,hand_idx,arm_idx,current,tick,records,dt,k,policy.fk,table_z)
+                    continue
                 if label=='air_flip':
                     from scripts.g2_air_flip import plan_flip, check_flip
                     _,_,_,actual_w,actual_o,_=current()

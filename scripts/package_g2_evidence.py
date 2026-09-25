@@ -18,8 +18,11 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True)
     p.add_argument('--run-root',type=Path,default=ROOT/'runs/g2-tabletop-v1')
     p.add_argument('--report',type=Path,default=ROOT/'research/g2-tabletop-baseline-20260925.md')
+    p.add_argument('--extra-report',type=Path,action='append',default=[])
     p.add_argument('--base',default=BASE);p.add_argument('--label',default='v1')
-    p.add_argument('--exclude-manifest',type=Path,action='append',default=[]);p.add_argument('--video-trial',action='append',default=[]);a=p.parse_args()
+    p.add_argument('--exclude-manifest',type=Path,action='append',default=[]);p.add_argument('--video-trial',action='append',default=[])
+    p.add_argument('--video-named',action='append',default=[],help='TRIAL=descriptive-filename.mp4; names should state the achieved scope.')
+    a=p.parse_args()
     base=a.base;excluded=set()
     for previous in a.exclude_manifest:excluded.update(json.loads(previous.read_text())['trials'])
     a.output.mkdir(parents=True,exist_ok=False);run=a.run_root.resolve();stage=a.output/'evidence';stage.mkdir()
@@ -57,8 +60,8 @@ def main():
         shutil.copyfile(pin/'SOURCE_SHA256.json',dest/'SOURCE_SHA256.json')
     diagnostics=stage/'diagnostics';diagnostics.mkdir()
     for file in run.iterdir():
-        if file.is_file() and file.suffix=='.json' and not file.name.endswith('-process.json'):shutil.copyfile(file,diagnostics/file.name)
-    for file in [ROOT/'G2_TABLETOP_HANDOFF.md',a.report]:
+        if file.is_file() and file.suffix in ['.json','.jsonl'] and not file.name.endswith('-process.json'):shutil.copyfile(file,diagnostics/file.name)
+    for file in [ROOT/'G2_TABLETOP_HANDOFF.md',a.report]+a.extra_report:
         shutil.copyfile(file,stage/file.name)
     manifest=dict(created=datetime.now(timezone.utc).isoformat(),base_commit=base,excluded_previous_trials=sorted(excluded),
         current_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
@@ -74,6 +77,10 @@ def main():
         'C-pinch8-student-ideal-grasp0-v21':'g2-wuji-C-table-pickup-student-ideal-40s.mp4',
         'B-yaw90-contact-seat-grasp0-v17':'g2-wuji-B-contact-seating-28s-failure.mp4'}
     videos.update({name:'g2-wuji-'+name+'.mp4' for name in a.video_trial})
+    for item in a.video_named:
+        trial,name=item.split('=',1)
+        if Path(name).name!=name or not name.endswith('.mp4'):raise ValueError('Expected a plain .mp4 filename')
+        videos[trial]=name
     for trial,name in videos.items():
         src=run/trial/'continuous.mp4'
         if src.exists() and trial in included:shutil.copyfile(src,a.output/name)
