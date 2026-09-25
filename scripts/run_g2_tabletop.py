@@ -77,6 +77,8 @@ def main():
     parser.add_argument('--upright-orient-seconds',type=float,default=5.,help='Duration of the final upright orientation phase; changes motor trajectory timing only.')
     parser.add_argument('--standing-level-gate',choices=['tilt','support-projection'],default='tilt',help='Alternate release precheck uses the actual assembly COM gravity projection inside the modeled end footprint with 0.5mm margin. Physical release must still succeed.')
     parser.add_argument('--gravity-close-before-takeover',action='store_true',help='After functional regrasp, tilt the held knife axis upward for 3s and return to operation, allowing passive gravity closure. Only arm motor targets are commanded.')
+    parser.add_argument('--gravity-close-support',choices=['pinch','tray'],default='pinch',help='Tray tilts the knife axis 30 degrees upward, with gravity pressing its back onto the four fingers, and opens only the thumb during passive closure.')
+    parser.add_argument('--gravity-close-yaw',type=float,default=0.,help='Additional world yaw during gravity closure to avoid G2 arm limits; preserves the gravity direction in the knife frame.')
     args=parser.parse_args()
     args.output.mkdir(parents=True,exist_ok=False)
     assert not args.hand_only_diagnostic or args.group=='A'
@@ -88,6 +90,8 @@ def main():
     assert not (args.level_standing_knife or args.measured_release) or args.table_regrasp_plan
     assert 5<=args.upright_orient_seconds<=20
     assert not args.gravity_close_before_takeover or (args.table_regrasp_plan and args.group!='A')
+    assert args.gravity_close_support!='tray' or args.gravity_close_before_takeover
+    assert abs(args.gravity_close_yaw)<=30
     cfg=configuration('wuji_acquisition_bridge3_hemisphere',1,
         ['hand=wuji_paper_official_actuator','object=knife_wuji_bridge3_20260922','test=True','rl_device=cpu'],train='wujiAcquisitionSAPG')
     (args.output/'frozen-config.yaml').write_text(OmegaConf.to_yaml(cfg,resolve=True))
@@ -368,7 +372,12 @@ def main():
             phases.append(('transport',op_q,functional if args.seat_seconds>0 or table_regrasp else closed,5))
             if args.gravity_close_before_takeover:
                 restored=np.asarray(table_regrasp.get('restore_q',functional))
-                phases.extend([('gravity_close_orient',None,functional,8),('gravity_close_hold',None,functional,3),
+                gravity_hold_hand=functional.copy()
+                phases.append(('gravity_close_orient',None,functional,8))
+                if args.gravity_close_support=='tray':
+                    gravity_hold_hand[16:20]=functional_open[16:20]
+                    phases.append(('gravity_close_unload',None,gravity_hold_hand,2))
+                phases.extend([('gravity_close_hold',None,gravity_hold_hand,3),
                                ('gravity_close_restore',None,restored,2),('gravity_close_return',None,restored,8)])
             for label,end_arm,end_hand,seconds in phases:
                 if label=='stand_level':
@@ -413,7 +422,7 @@ def main():
                     continue
                 if args.table_supported_seat and label in ['stand_tip','stand_yaw','stand_orient','stand_lower','support_settle','release_pinch','withdraw',
                     'unload_pinch','free_reorient','functional_approach','functional_touch','functional_close','relift','transport',
-                    'gravity_close_orient','gravity_close_hold','gravity_close_restore','gravity_close_return']:
+                    'gravity_close_orient','gravity_close_unload','gravity_close_hold','gravity_close_restore','gravity_close_return']:
                     start=k.forward(targets[arm_idx]);start_hand=targets[hand_idx].copy()
                     if label=='unload_pinch':end_hand=current()[0].copy()
                     if label=='release_pinch' and args.measured_release:
@@ -432,10 +441,12 @@ def main():
                     elif label=='stand_lower':
                         upright_object[2,3]=table_z+.0735-.0002
                         desired=upright_object@upright_held_relation
-                    elif label in ['support_settle','unload_pinch','release_pinch','functional_touch','functional_close','gravity_close_hold','gravity_close_restore']:desired=start.copy()
+                    elif label in ['support_settle','unload_pinch','release_pinch','functional_touch','functional_close','gravity_close_unload','gravity_close_hold','gravity_close_restore']:desired=start.copy()
                     elif label=='gravity_close_orient':
                         _,_,_,w,o,_=current();tilted=o.copy()
-                        tilted[:3,:3]=minimal_alignment(o[:3,2],[0,0,1])@o[:3,:3]
+                        up_in_knife=np.array([0.,np.sqrt(.75),.5]) if args.gravity_close_support=='tray' else np.array([0.,0.,1.])
+                        tilted[:3,:3]=minimal_alignment(o[:3,:3]@up_in_knife,[0,0,1])@o[:3,:3]
+                        tilted[:3,:3]=Rotation.from_euler('z',args.gravity_close_yaw,degrees=True).as_matrix()@tilted[:3,:3]
                         tilted[2,3]=max(o[2,3],1.10)
                         desired=tilted@np.linalg.inv(o)@w
                     elif label in ['relift','withdraw']:
@@ -688,7 +699,7 @@ def score(trace,takeover,group):
         if len(relift) and not (trace['object'][relift[-15:],2]>table_height+.10).all():
             out['acquisition_stage_failure']='functional_regrasp_not_retained'
         for phase in ['preorient','stand_tip','stand_yaw','stand_orient','stand_lower','support_settle','stand_level','unload_pinch','release_pinch','withdraw','free_reorient',
-            'functional_approach','functional_touch','functional_close','seat','relift','transport','gravity_close_orient','gravity_close_hold','gravity_close_restore','gravity_close_return','settle_history']:
+            'functional_approach','functional_touch','functional_close','seat','relift','transport','gravity_close_orient','gravity_close_unload','gravity_close_hold','gravity_close_restore','gravity_close_return','settle_history']:
             mask=trace['phase']==phase
             if out['lift_success'] and mask.any() and (trace['object'][mask,2]<table_height+.05).any():
                 out['acquisition_stage_failure']='dropped_during_'+phase;break
@@ -721,6 +732,7 @@ def score(trace,takeover,group):
     complete_cycles=sum(endpoints[i]['within_10mm'] and endpoints[i+1]['within_10mm'] and
         retained[i*150:min((i+2)*150,len(held))].all() for i in range(0,len(endpoints)-1,2))
     stable=bool((drift<.01).all() and (rotation<.25).all())
+    acquisition_drop=(out.get('acquisition_stage_failure') or '').startswith('dropped_during_')
     out.update(slider_travel_m=float(np.ptp(slider)),endpoints=endpoints,basic_10mm=basic,
         completed_cycles=int(complete_cycles),
         failure_class='operation_drop' if physical_drop else ('operation_pose_escape' if not held.all() else ('operation_endpoint_error' if not basic else ('operation_unstable_drift' if not stable else None))),
@@ -732,9 +744,9 @@ def score(trace,takeover,group):
         stable_world_10mm_025rad=bool((drift<.01).all() and (rotation<.25).all()),
         natural_no_drop=bool((rel_drift<.05).all() and (rel_rotation<1.57).all()),
         below_table=bool((obj[:,2]<table_height).any()),
-        whole_success=bool((group=='A' or takeover['grasp_success']) and basic and held.all() and not physical_drop),
+        whole_success=bool((group=='A' or takeover['grasp_success']) and basic and held.all() and not physical_drop and not acquisition_drop),
         operation_success_given_grasp=bool(basic and held.all() and not physical_drop) if group!='A' else None,
-        whole_stable_success=bool((group=='A' or takeover['grasp_success']) and basic and stable and not physical_drop))
+        whole_stable_success=bool((group=='A' or takeover['grasp_success']) and basic and stable and not physical_drop and not acquisition_drop))
     return out
 
 
