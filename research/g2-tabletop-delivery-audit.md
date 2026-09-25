@@ -19,7 +19,7 @@
 | 独立分支/目录，保护旧成果及在途训练 | `feat/g2-wuji-tabletop-20260925`、独立工程；原 PID88339 核查记录 | 旧成功 Release 保留；原训练持续运行；原目录仅更新明确的续接入口 |
 | 冻结方案后预声明约 20 次验证 | `research/g2-small-placement-validation-v1.json`，GitHub 提交 `86b191b` 早于首次启动 | 10 个位置各跑 B/C，共 20 次；x/y±5 mm、yaw±2°；同一源码/参数；20次已全部结束，所有失败保留，见最终审计与报告 |
 | 三组指标、原始轨迹、失败分类 | 固定 `abc-current-continuous-v67-final.json`；`scripts/summarize_g2_validation.py` | 固定 ABC 已完整；20次终态全部从原始轨迹核验完成。初次抬起与获取到接管分列，未到操作指标为 null |
-| 无文字完整视频及代表失败 | v6 两条 109 秒成功视频；v1–v5 历史失败；20 次各自视频 | 固定成功及旧失败已发布核验；新增验证失败代表视频待 v7 发布 |
-| 可运行代码、复现命令、续接文档和 GitHub | `research/g2-tabletop-fixed-baseline.md`、`G2_TABLETOP_HANDOFF.md`、各源码 pin/命令；独立分支与 v1–v6 | 当前固定阶段交付已核验；20次最终报告已完成；仅待增量v7与最终上传核验，goal仍active |
+| 无文字完整视频及代表失败 | v6 两条 109 秒成功视频；v1–v5 历史失败；20 次各自视频 | 固定成功及旧失败已发布核验；新增验证失败代表视频已在v7发布并核验 |
+| 可运行代码、复现命令、续接文档和 GitHub | `research/g2-tabletop-fixed-baseline.md`、`G2_TABLETOP_HANDOFF.md`、各源码 pin/命令；独立分支与 v1–v6 | 当前固定阶段交付已核验；20次最终报告、v7增量与8附件SHA及20次归档内容核验已完成 |
 
-所有20次物理试验已终态，原训练仍运行。v7上传尚待实际附件核验，不能用本表替代该证据。
+所有20次物理试验已终态，原训练仍运行。v6/v7实际附件核验见[公开记录](g2-tabletop-publication-verification.json)。v7归档内20次轨迹/接触/物性/计划/失败及最终清单与原件SHA逐项一致。本轮仿真基线、初步验证与交付齐备；摆放泛化仍失败，真机与可部署感知未验证，未据此扩大完成范围。

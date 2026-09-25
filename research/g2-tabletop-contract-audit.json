@@ -1,0 +1,30 @@
+{
+  "state_and_force_api_calls": [
+    {
+      "line": 276,
+      "method": "set_actor_dof_states"
+    },
+    {
+      "line": 277,
+      "method": "set_actor_dof_states"
+    },
+    {
+      "line": 286,
+      "method": "set_actor_root_state_tensor_indexed"
+    },
+    {
+      "line": 316,
+      "method": "set_dof_position_target_tensor"
+    },
+    {
+      "line": 317,
+      "method": "simulate"
+    }
+  ],
+  "weights_sha256": {
+    "teacher": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+    "student": "022ad8c7b3af18e25681fcd4073c1b48858621470293036df0311c488068e0f5"
+  },
+  "source_sha256": "2f65673f3f781045b05bc8f3857e9513c64bc64fd859511351062e0df083e7de",
+  "interpretation": "Read source alongside trajectory/replay evidence: all actor state writes in initialization before tick is called; only position motor targets inside tick, no apply-force APIs."
+}

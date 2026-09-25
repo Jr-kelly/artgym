@@ -2,12 +2,9 @@
 
 ## 新阶段：G2桌面取刀→伸缩（2026-09-25）
 
-当前G2 goal为active；前一阶段teacher+student预置持刀goal完成不代表桌面新任务完成。用户新任务取代Franka要求。独立工程 `/data/research/artgym-g2-tabletop-20260925`，分支 `feat/g2-wuji-tabletop-20260925`，接续读该工程 `G2_TABLETOP_HANDOFF.md`，实验 `runs/g2-tabletop-v1`。21:41 CST：固定A63/B65/C66均通过两轮、10mm及稳定，B/C未全过2mm，C为理想初始化。成功视频/证据已发布核验v6；20次小变化driver PID67920运行，首对在端立支撑失败，全部保留、不调参。goal仍active，续接看G2手册和实际进程。最新Release：https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-tabletop-fixed-abc-20260925-v6 。保留旧成功与原训练88339。
+2026-09-25 22:13 CST：本轮固定仿真基线+20次验证及增量发布已交付。独立工程 `/data/research/artgym-g2-tabletop-20260925`，分支 `feat/g2-wuji-tabletop-20260925`；先读该工程 `G2_TABLETOP_HANDOFF.md` 和 `research/g2-tabletop-final-report.md`。固定A63/B65/C66两轮10mm/稳定通过，B/C未全过2mm；C仍是仿真定位/理想初始化。20次小变化全部结束，B/C各初抬10/10、到接管0/10、整段0/10，条件操作未评估。小变化泛化失败，真机未验证；不能用固定成功宣称这些已解决。
 
-
-# Wuji 美工刀持续实验：接续入口
-
-Goal工具已实际返回 **complete**（2026-09-24）；下文旧blocked记录仅为历史。用户限定的基本teacher+student滑块开合已验证并发布，后续硬件/精度/长时鲁棒性是后续范围。
+成功视频在 https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-tabletop-fixed-abc-20260925-v6 ，最终验证/报告/代表失败在 https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-tabletop-validation-20260925-v7 ，全部附件及20次归档内容已核验。旧driver已终态，不重启或替换失败。无新训练，原训练88339仍运行。下一轮只建议获取转腕时长5/10秒的6次有界对照，尚未执行；继续时新建记录并保留本轮冻结成果。
 
 
 ## 全量备份本机部分完成（2026-09-25T04:44:30.604777+00:00）

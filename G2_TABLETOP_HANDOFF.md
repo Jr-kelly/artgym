@@ -1,6 +1,6 @@
 # G2＋Wuji 桌面取刀→伸缩（2026-09-25）
 
-分支 feat/g2-wuji-tabletop-20260925；工程 /data/research/artgym-g2-tabletop-20260925；实验 runs/g2-tabletop-v1。固定A63/B65/C66两轮10mm/稳定通过，B/C未全过2mm，C是仿真定位及理想初始化。20次小变化已全部完成：每组初抬10/10、到接管0/10、整段0/10，9次转腕掉刀+1次端立倾斜超限；条件伸缩未评估。无新训练，当前待v7增量发布/核验后完成本轮交付。
+分支 feat/g2-wuji-tabletop-20260925；工程 /data/research/artgym-g2-tabletop-20260925；实验 runs/g2-tabletop-v1。本轮仿真基线及20次初步验证已交付：固定A63/B65/C66两轮10mm/稳定通过，B/C未全过2mm；C是仿真定位及理想初始化。小变化各组初抬10/10、到接管0/10、整段0/10，9次转腕掉刀+1次端立倾斜超限，条件操作未评估。成功/失败视频和原始证据已发布核验v6/v7。无新训练，原训练保留。
 
 任务：固定刀具、固定正常桌面摆放、一个功能抓姿；G2右臂接近/闭合/抬起/移到操作姿态；同一仿真连续状态接冻结teacher再student。模型源 /data/research/ArtBot/G2_crsB_wuji/robot.usd，禁止套用Franka安装或参数。
 
@@ -12,7 +12,7 @@ A预置→teacher；B实际抓取→teacher；C实际抓取→student。先A定�
 
 交付新分支/新Release、运行命令、完整无文字视频/失败视频、轨迹和分类，不覆盖旧结果或历史备份。原4090训练88339保留，运行前重查显存；仅进行有用仿真，不为占用GPU启动无效计算。
 
-当前下一步：20次driver已退出，不重启或重复样本。发布v7增量：排除release-baseline-v1、release-seating-delta-v2、release-table-support-delta-v3、release-continuous-handoff-delta-v4、release-operation-delta-v5、release-fixed-abc-delta-v6的evidence/MANIFEST.json；只收20新case及00/06代表失败视频，附final-report/最终诊断图/CSV。恢复源码验证、GitHub附件SHA核验后更新交付审计，再决定goal complete。泛化失败不能写成已解决；下一项6次转腕时长对照仅建议，未执行。原训练88339保持。
+当前续接状态：20次已全部结束并原始审计、v7上传及8附件/归档核验完成，不重启旧driver或重跑这些失败以替换统计。先读research/g2-tabletop-final-report.md及delivery-audit.md。当前瓶颈是获取转腕/放端，泛化未解决；建议下一轮只比较5秒与10秒转腕的6次有界对照（原位置+两个已观察失败位置），未执行。若继续，应新建实验记录，保留冻结v6/v7；不要自动扩大RL或重训teacher。原训练88339保留。
 
 ## 17:13 CST 进度
 
@@ -388,3 +388,10 @@ small-placement-audit-progress-v3.json已核验前8对/16次：B/C各初次抬�
 最终报告research/g2-tabletop-final-report.md及20次CSV已生成；固定A63/B65/C66仍为10mm/稳定成功单案例，泛化验证明确失败，C仍理想初始化。独立诊断图small-placement-validation-final-diagnostic.png目视核对完毕。所有原始轨迹和视频保留；拟v7增量只收20个新case，代表视频选00空中掉刀和06端立倾斜，不重复前六包。
 
 本轮无新训练。下一项仅建议对获取转腕时长5→10秒作固定位置+两个已观察失败位置的6次对照，方案未执行，不扩大RL或改本组结果。driver退出后，修正未来跨环境复现的launcher参数显式沿用冻结命令Python路径（--python command[0]），不影响已结束试验或其源码pin；原执行driverSHA记录保留。当前剩余工作仅v7上传/核验、最终文档和goal交付审计。
+
+
+## 22:13 CST v7发布核验与本轮交付收尾
+
+v7已发布：https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-tabletop-validation-20260925-v7 。8附件大小和GitHub SHA256全部相同；新增且仅新增20次预声明试验，15.1MB原始证据，排除前六包。还逐一从tar归档读取全部20次trace、接触、物性、计划、失败，与本机原件SHA相同；最终审核和清单也一致。编号06恢复3874源码/输入文件通过。两个24秒无字代表失败、20次CSV、最终报告、诊断图和复现README均已上传。公开核验记录research/g2-tabletop-publication-verification.json，原始核验在release-validation-delta-v7。
+
+固定A/B/C两条109秒成功视频仍在v6，未覆盖旧成果。验证driver和20子进程全部终态，原训练88339实查仍运行；本阶段没有新训练。所有交付项已在research/g2-tabletop-delivery-audit.md逐项复核。下一步仅建议有界获取转腕时长对照，未启动；当前固定基线完成、小范围泛化失败、student理想初始化、真机未验证这四点不变。待最后分支推送及goal工具状态更新，本轮基线/20次评估/增量交付工作即可关闭。

@@ -2,7 +2,7 @@
 
 续接入口：[G2_TABLETOP_HANDOFF.md](../G2_TABLETOP_HANDOFF.md)。独立分支 `feat/g2-wuji-tabletop-20260925`，本机工程 `/data/research/artgym-g2-tabletop-20260925`，实验目录 `runs/g2-tabletop-v1`。旧成功版本及训练 PID 88339 保留；本阶段没有训练新策略。
 
-截至2026-09-25 22:08 CST：固定A63/B65/C66均通过两轮、10mm基本到位和全程稳定，B/C未全过2mm；C为理想初始化对照。20次预声明小变化全部结束，B/C各初次抬起10/10、获取到接管0/10、整段0/10，条件操作未评估；9次转腕掉刀、1次端立倾斜超限。完整原始审计及最终报告已生成，待v7增量发布核验。没有新训练，旧成果和全部失败保留。
+截至2026-09-25 22:08 CST：固定A63/B65/C66均通过两轮、10mm基本到位和全程稳定，B/C未全过2mm；C为理想初始化对照。20次预声明小变化全部结束，B/C各初次抬起10/10、获取到接管0/10、整段0/10，条件操作未评估；9次转腕掉刀、1次端立倾斜超限。完整原始审计及最终报告已生成，v7增量已发布并核验8附件及全部20次原始归档。没有新训练，旧成果和全部失败保留。
 
 ## 模型、控制及约束
 
@@ -467,3 +467,10 @@ small-placement-audit-progress-v3.json已核验前8对/16次：B/C各初次抬�
 最终报告research/g2-tabletop-final-report.md及20次CSV已生成；固定A63/B65/C66仍为10mm/稳定成功单案例，泛化验证明确失败，C仍理想初始化。独立诊断图small-placement-validation-final-diagnostic.png目视核对完毕。所有原始轨迹和视频保留；拟v7增量只收20个新case，代表视频选00空中掉刀和06端立倾斜，不重复前六包。
 
 本轮无新训练。下一项仅建议对获取转腕时长5→10秒作固定位置+两个已观察失败位置的6次对照，方案未执行，不扩大RL或改本组结果。driver退出后，修正未来跨环境复现的launcher参数显式沿用冻结命令Python路径（--python command[0]），不影响已结束试验或其源码pin；原执行driverSHA记录保留。当前剩余工作仅v7上传/核验、最终文档和goal交付审计。
+
+
+## 22:13 CST v7发布核验与本轮交付收尾
+
+v7已发布：https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-tabletop-validation-20260925-v7 。8附件大小和GitHub SHA256全部相同；新增且仅新增20次预声明试验，15.1MB原始证据，排除前六包。还逐一从tar归档读取全部20次trace、接触、物性、计划、失败，与本机原件SHA相同；最终审核和清单也一致。编号06恢复3874源码/输入文件通过。两个24秒无字代表失败、20次CSV、最终报告、诊断图和复现README均已上传。公开核验记录research/g2-tabletop-publication-verification.json，原始核验在release-validation-delta-v7。
+
+固定A/B/C两条109秒成功视频仍在v6，未覆盖旧成果。验证driver和20子进程全部终态，原训练88339实查仍运行；本阶段没有新训练。所有交付项已在research/g2-tabletop-delivery-audit.md逐项复核。下一步仅建议有界获取转腕时长对照，未启动；当前固定基线完成、小范围泛化失败、student理想初始化、真机未验证这四点不变。待最后分支推送及goal工具状态更新，本轮基线/20次评估/增量交付工作即可关闭。
