@@ -43,6 +43,8 @@ def main():
     if a.output.exists():raise ValueError('Preserve previous plan')
     d=json.loads(a.source.read_text());c=ContactCorrection();g=DigitGeometry(max_face_axes=32);w=c.w;k=G2Kinematics()
     q0=np.array(d['touch_q']);cmd0=np.array(d['close_q']);offset=cmd0-q0;r0=np.array(d['wrist_in_knife']);normals=np.array(d['contact_normals'])
+    nominal_lower=np.maximum(w.lower,w.lower-offset);nominal_upper=np.minimum(w.upper,w.upper-offset)
+    if np.any(nominal_upper<=nominal_lower):raise ValueError('Preserved motor offset leaves no nominal joint interval')
     q=q0.copy();ids=np.r_[np.arange(0,8),np.arange(12,16)]
     trial=Path(d['source_trial']);t=np.load(d['source_trace']);step=d['source_step'];physics=json.loads((trial/'physics.json').read_text())
     qa=t['reference_targets'][step,physics['arm_indices']].astype(float);arm_start=k.forward(qa)
@@ -117,7 +119,7 @@ def main():
                          (index_point-index_target)*(0 if a.index_support else 150),
                          [min(row['gap_lower_bound_m']-.0041,0)*(0 if a.index_support else 400) for row in index_gaps],
                          [min(row['gap_lower_bound_m']+.00045,0)*400 for row in gaps],self_errors,rolling_errors,(v[:len(ids)]-q[ids])*.01]
-        x0=q[ids];lo=w.lower[ids];hi=w.upper[ids]
+        x0=q[ids];lo=nominal_lower[ids];hi=nominal_upper[ids]
         if a.rolling_support_screen:
             x0=np.r_[x0,anchor_values.ravel()];lo=np.r_[lo,anchor_lower.ravel()];hi=np.r_[hi,anchor_upper.ravel()]
         result=least_squares(residual,np.clip(x0,lo+1e-7,hi-1e-7),bounds=(lo,hi),max_nfev=90,diff_step=1e-5)
@@ -131,7 +133,7 @@ def main():
                 candidate=q.copy();candidate[16:]=v
                 return np.r_[[min(row['gap_lower_bound_m']-.0048,0)*400 for row in g.gaps(candidate,relative,t['slider'][step])],
                              [min(row['gap_lower_bound_m']-.001,0)*200 for row in g.self_gaps(candidate,'thumb')],(v-previous_thumb)*.02]
-            solved=least_squares(thumb_residual,np.clip(previous_thumb,w.lower[16:]+1e-7,w.upper[16:]-1e-7),bounds=(w.lower[16:],w.upper[16:]),max_nfev=80,diff_step=1e-5)
+            solved=least_squares(thumb_residual,np.clip(previous_thumb,nominal_lower[16:]+1e-7,nominal_upper[16:]-1e-7),bounds=(nominal_lower[16:],nominal_upper[16:]),max_nfev=80,diff_step=1e-5)
             q[16:]=solved.x
         command=q+offset;goal=obj@rotation@np.linalg.inv(obj)@arm_start
         qa,arm_error=k.solve_near(goal,qa,max_step=.15)
@@ -156,6 +158,7 @@ def main():
         self_clearance_constraint=a.self_clearance,
         rolling_support_geometry_only=a.rolling_support_screen,
         free_thumb_avoidance_commands=a.bounded_thumb_avoidance,
+        nominal_joint_bounds='Intersection of original actual-joint limits and original motor limits translated by the preserved command-minus-measured offset; no source limits relaxed.',
         command_offset_preserved_rad=offset.tolist(),thumb_motors=((('Bounded executable' if a.bounded_thumb_avoidance else 'Geometry-only')+' avoidance after '+str(a.thumb_avoidance_start_deg)+' degrees') if a.thumb_avoidance else 'Held fixed; whole-digit knife clearance checked along wrist path.'))
     if a.endpoint_screen:
         out['scope']='Hypothetical endpoint/path geometry only; not a continuous physical state or executable plan.'
