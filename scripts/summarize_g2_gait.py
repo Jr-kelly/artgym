@@ -47,7 +47,7 @@ def main():
                     position_m=float(dp[unstable[0]]),rotation_rad=float(dr[unstable[0]])) if len(unstable) else None
                 row['operation_first_all_finger_contact_loss_s']=float(t['time'][operation[lost[0]]]) if len(lost) else None
                 row['policy_first_command_delta_rad']=float(np.abs(t['reference_targets'][operation[0],ids]-takeover['targets']).max())
-            row['gait_stages']=[];row['g1_requested']=False;row['g1_passed']=False
+            row['gait_stages']=[];row['g1_requested']=False;row['g1_passed']=False;row['observed_thumb_free_stable_holds']=[]
             for folder in [trial,trial/'post-roll-gait']:
                 if not (folder/'gait-checks.json').exists():continue
                 checks=json.loads((folder/'gait-checks.json').read_text())
@@ -89,6 +89,14 @@ def main():
                         miss|=t['finger_slider_contacts'][samples,slider_index]<=0
                     stage['first_requested_contact_condition_miss_time_s']=float(t['time'][samples[np.flatnonzero(miss)[0]]]) if miss.any() else None
                     stage['contact_timing_note']='First observed miss, separate from world instability; original >=90% support-contact gate is unchanged.'
+                    if (definition.get('kind')=='hold' and definition.get('seconds',0)>=1 and stage['stable']
+                            and fractions[0]==0 and stage.get('thumb_gap_min_m',-1)>=.0041
+                            and len(samples)>=30 and (t['finger_knife_contacts'][samples,1:]>0).any(axis=1).all()):
+                        row['observed_thumb_free_stable_holds'].append(dict(stage=stage['name'],
+                            supports_at_least_90pct=[contact_names[i] for i in range(1,5) if fractions[i]>=.9],
+                            gap_min_m=stage['thumb_gap_min_m'],world_position_max_m=stage['world_position_max_m'],
+                            world_rotation_max_rad=stage['world_rotation_max_rad'],original_declared_gate_passed=bool(stage['stage_completed']),
+                            note='Observed physical hold evidence, separately from the original requested contact-set gate; raw abort and g1_passed remain unchanged.'))
                     row['gait_stages'].append(stage)
                     if required==0 and definition.get('seconds',0)>=1 and stage['stage_completed'] and stage.get('thumb_gap_min_m',-1)>=.0041:
                         row['g1_passed']=True

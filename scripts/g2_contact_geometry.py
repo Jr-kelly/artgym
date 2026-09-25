@@ -76,3 +76,17 @@ class DigitGeometry:
                         gap=np.maximum(pa.min(0)-pb.max(0),pb.min(0)-pa.max(0)).max()
                         result.append(dict(moving_link=a,other_link=b,gap_lower_bound_m=float(gap)))
         return result
+
+    def pair_gaps(self,q,pairs):
+        """Conservative face-axis separation for explicitly named own/palm pairs."""
+        frames=self.w.forward(q);results=[]
+        for a,b in pairs:
+            fa,fb=frames[a],frames[b]
+            for va,na in self.meshes[a]:
+                va=va@fa[:3,:3].T+fa[:3,3];na=na@fa[:3,:3].T
+                for vb,nb in self.meshes[b]:
+                    vb=vb@fb[:3,:3].T+fb[:3,3];nb=nb@fb[:3,:3].T
+                    axes=np.r_[na,nb];pa=va@axes.T;pb=vb@axes.T
+                    gap=np.maximum(pa.min(0)-pb.max(0),pb.min(0)-pa.max(0)).max()
+                    results.append(dict(link_a=a,link_b=b,gap_lower_bound_m=float(gap)))
+        return results
