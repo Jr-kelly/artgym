@@ -1,3 +1,5 @@
+> 当前活动目标已转为 **G2＋Wuji 桌面取刀→冻结策略**，请先读 [G2_TABLETOP_HANDOFF.md](G2_TABLETOP_HANDOFF.md)。本文件的 complete 仅指9月24日预置持刀旧目标；新目标仍 active，B/C尚未接通。旧4090训练保留。本独立工作树维护新记录，不覆盖原仓库的旧成功版本。
+
 # Wuji 美工刀持续实验：接续入口
 
 Goal工具已实际返回 **complete**（2026-09-24）；下文旧blocked记录仅为历史。用户限定的基本teacher+student滑块开合已验证并发布，后续硬件/精度/长时鲁棒性是后续范围。

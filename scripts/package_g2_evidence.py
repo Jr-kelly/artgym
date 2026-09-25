@@ -17,8 +17,9 @@ def digest(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 def main():
     p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True)
     p.add_argument('--base',default=BASE);p.add_argument('--label',default='v1')
-    p.add_argument('--exclude-manifest',type=Path);p.add_argument('--video-trial',action='append',default=[]);a=p.parse_args()
-    base=a.base;excluded=set(json.loads(a.exclude_manifest.read_text())['trials']) if a.exclude_manifest else set()
+    p.add_argument('--exclude-manifest',type=Path,action='append',default=[]);p.add_argument('--video-trial',action='append',default=[]);a=p.parse_args()
+    base=a.base;excluded=set()
+    for previous in a.exclude_manifest:excluded.update(json.loads(previous.read_text())['trials'])
     a.output.mkdir(parents=True,exist_ok=False);run=ROOT/'runs/g2-tabletop-v1';stage=a.output/'evidence';stage.mkdir()
     base_files=set(subprocess.check_output(['git','ls-tree','-r','--name-only',base],cwd=ROOT,text=True).splitlines())
     changed=set(subprocess.check_output(['git','diff',base,'--name-only'],cwd=ROOT,text=True).splitlines());cache={};included=[];pending=[]

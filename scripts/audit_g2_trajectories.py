@@ -8,19 +8,22 @@ from scipy.spatial.transform import Rotation
 
 
 def audit(path):
-    trace=np.load(path/'trace.npz');report=json.loads((path/'report.json').read_text())
+    partial=not (path/'trace.npz').exists()
+    trace=np.load(path/('partial-trace.npz' if partial else 'trace.npz'))
+    metadata=path/('report.json' if (path/'report.json').exists() else 'failure.json')
+    report=json.loads(metadata.read_text()) if metadata.exists() else {}
     physics=json.loads((path/'physics.json').read_text()) if (path/'physics.json').exists() else None
-    arm=trace['arm_q'];out=dict(name=path.name,frames=len(arm),group=report['group'],
+    arm=trace['arm_q'];out=dict(name=path.name,frames=len(arm),partial=partial,group=report.get('group'),
         grasp_success=report.get('grasp_success'),basic_10mm=report.get('basic_10mm'),
         strict_2mm=report.get('strict_2mm'),whole_success=report.get('whole_success'),
         stable_world_10mm_025rad=report.get('stable_world_10mm_025rad'),
-        failure_class=report.get('failure_class'),operation_steps=report.get('operation_steps'))
+        failure_class=report.get('failure_class',report.get('exception_type')),operation_steps=report.get('operation_steps',int((trace['phase']=='operate').sum())))
     if arm.shape[1]==7:
         k=G2Kinematics();poses=np.array([k.forward(q) for q in arm]);measured=trace['wrist']
         out.update(arm_limit_violation_rad=float(np.maximum(np.maximum(k.lower-arm,arm-k.upper),0).max()),
             fk_position_error_max_m=float(np.linalg.norm(poses[:,:3,3]-measured[:,:3],axis=1).max()),
             fk_rotation_error_max_rad=float((Rotation.from_matrix(poses[:,:3,:3]).inv()*Rotation.from_quat(measured[:,3:])).magnitude().max()))
-        if physics:
+        if physics and len(arm)>1:
             idx=physics['arm_indices'];targets=trace['targets'][:,idx];dt=float(np.median(np.diff(trace['time'])))
             out['command_velocity_max_rad_s']=(np.abs(np.diff(targets,axis=0))/dt).max(0).tolist()
             out['arm_velocity_limits_rad_s']=k.velocity.tolist()
@@ -36,8 +39,19 @@ def audit(path):
             slider_travel_m=float(np.ptp(trace['slider'][sel])),slider_final_m=float(trace['slider'][sel][-1]))
         for field in ['finger_table_contacts','finger_knife_contacts']:
             if field in trace:item[field+'_frames']=(trace[field][sel]>0).sum(0).tolist()
+        for field in ['robot_table_contacts','knife_table_contacts']:
+            if field in trace:item[field+'_frames']=int((trace[field][sel]>0).sum())
         phases[str(phase)]=item
     out['phases']=phases
+    lift_indices=np.flatnonzero(trace['phase']=='lift')
+    if len(lift_indices):
+        plan=json.loads((path/'plan.json').read_text()) if (path/'plan.json').exists() else {}
+        table=plan.get('table_top',.75)
+        low=np.flatnonzero((np.arange(len(arm))>lift_indices[-1]) & (trace['object'][:,2]<table+.05))
+        if len(low):
+            index=int(low[0]);out['first_low_object_after_commanded_lift']=dict(step=index,time_s=float(trace['time'][index]),
+                phase=str(trace['phase'][index]),object_height_m=float(trace['object'][index,2]),table_height_m=table,
+                interpretation='Observed low object before any later abort; does not identify the unique cause.')
     return out
 
 
@@ -45,7 +59,7 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--root',type=Path,default=Path('runs/g2-tabletop-v1'));a=p.parse_args()
     rows=[]
     for path in sorted(a.root.iterdir()):
-        if not (path/'trace.npz').exists() or not (path/'report.json').exists():continue
+        if not (path/'trace.npz').exists() and not (path/'partial-trace.npz').exists():continue
         try:rows.append(audit(path))
         except (KeyError,ValueError) as e:rows.append(dict(name=path.name,audit_error=str(e)))
     (a.root/'trajectory-audit.json').write_text(json.dumps(rows,indent=2)+'\n')

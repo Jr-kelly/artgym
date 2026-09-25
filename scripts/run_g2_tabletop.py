@@ -16,7 +16,7 @@ from scipy.spatial.transform import Rotation, Slerp
 from omegaconf import OmegaConf
 
 from scripts.wuji_goal_common import configuration
-from scripts.g2_kinematics import G2Kinematics,transform
+from scripts.g2_kinematics import G2Kinematics,transform,minimal_alignment
 from scripts.g2_frozen_policy import FrozenPolicy,pose
 from scripts.g2_tabletop_metrics import acquisition_hold
 
@@ -65,12 +65,26 @@ def main():
     parser.add_argument('--seat-finger-mode',choices=['contact','residual'],default='contact',help='Residual adds only restoring motor corrections to the geometric holding path.')
     parser.add_argument('--table-supported-seat',action='store_true',help='After normal flat pickup, stand the knife on its modeled flat end on the same table, regrasp, then relift.')
     parser.add_argument('--upright-yaw',type=float,default=250.)
+    parser.add_argument('--table-regrasp-plan',type=Path,help='Release the standing knife, retract, approach with a functional open hand, and close instead of sliding contacts around it.')
+    parser.add_argument('--preset-slider-offset',type=float,default=0.,help='A-only diagnosis of a passively opened slider at takeover; command origin remains the original lower limit.')
+    parser.add_argument('--level-standing-knife',action='store_true',help='Use bounded measured wrist corrections to level the supported knife before release.')
+    parser.add_argument('--measured-release',action='store_true',help='Unload pinch pressure, then open away from the measured standing knife.')
+    parser.add_argument('--upright-end',choices=['positive','negative'],default='positive',help='Modeled knife end placed on the table; negative keeps gravity directed toward slider closure.')
+    parser.add_argument('--preset-object-axis-offset',type=float,default=0.,help='A-only measured-init diagnostic, shifting the preset knife along its own long axis.')
+    parser.add_argument('--table-height',type=float,default=.75,help='Explicit scene condition in meters; hand and knife physical properties remain frozen.')
+    parser.add_argument('--upright-path',choices=['combined','yaw-then-tip','tip-then-yaw'],default='combined',help='Separate turning from tipping to limit gravity across the pinch direction.')
+    parser.add_argument('--upright-height',type=float,default=.98,help='Free-space knife center height before lowering onto the table.')
+    parser.add_argument('--upright-orient-seconds',type=float,default=5.,help='Duration of the final upright orientation phase; changes motor trajectory timing only.')
     args=parser.parse_args()
     args.output.mkdir(parents=True,exist_ok=False)
     assert not args.hand_only_diagnostic or args.group=='A'
     assert not args.seat_object_servo or args.seat_finger_feedback=='object-truth'
     assert args.seat_finger_mode!='residual' or args.seat_object_servo
-    assert not args.table_supported_seat or (args.group!='A' and args.seating_plan and args.seat_seconds>0 and not args.seat_at_operation)
+    assert not args.table_supported_seat or (args.group!='A' and (args.table_regrasp_plan or (args.seating_plan and args.seat_seconds>0)) and not args.seat_at_operation)
+    assert not args.table_regrasp_plan or args.table_supported_seat
+    assert (args.preset_slider_offset==0 and args.preset_object_axis_offset==0) or args.group=='A'
+    assert not (args.level_standing_knife or args.measured_release) or args.table_regrasp_plan
+    assert 5<=args.upright_orient_seconds<=20
     cfg=configuration('wuji_acquisition_bridge3_hemisphere',1,
         ['hand=wuji_paper_official_actuator','object=knife_wuji_bridge3_20260922','test=True','rl_device=cpu'],train='wujiAcquisitionSAPG')
     (args.output/'frozen-config.yaml').write_text(OmegaConf.to_yaml(cfg,resolve=True))
@@ -81,7 +95,9 @@ def main():
     if args.operation_pose:operation=np.asarray(json.loads(args.operation_pose.read_text()),dtype=float)
     op_q,op_error=k.solve(operation)
     assert op_error['position_m']<1e-4 and op_error['rotation_rad']<1e-3,op_error
-    table_z=.75
+    table_z=args.table_height
+    from scripts.g2_table_collision import ArmTableCollision
+    arm_table_check=ArmTableCollision(table_z)
     table_obj=transform([.50+args.dx,-.30+args.dy,table_z+.0041],
         (Rotation.from_euler('z',args.yaw,degrees=True)*Rotation.from_euler('x',90,degrees=True)).as_quat())
     grasp_pose=table_obj@transform(quaternion=Rotation.from_euler('z',args.grasp_roll,degrees=True).as_quat())@np.linalg.inv(transform(s[40:43],s[43:47]))
@@ -175,6 +191,7 @@ def main():
     options.collapse_fixed_joints=False;options.default_dof_drive_mode=gymapi.DOF_MODE_POS
     obj_asset=gym.load_asset(sim,str(ROOT),'assets/objects/knife_wuji_bridge3_20260922/000/mobility.urdf',options)
     initial_obj=operation@transform(s[40:43],s[43:47]) if args.group=='A' else table_obj
+    initial_obj[:3,3]+=initial_obj[:3,:3]@np.array([0,0,args.preset_object_axis_offset])
     t=gymapi.Transform();t.p=gymapi.Vec3(*initial_obj[:3,3]);t.r=gymapi.Quat(*Rotation.from_matrix(initial_obj[:3,:3]).as_quat())
     knife=gym.create_actor(env,obj_asset,t,'knife',0,0)
     p=gym.get_actor_rigid_body_properties(env,knife)
@@ -187,6 +204,7 @@ def main():
     p['driveMode'][:]=gymapi.DOF_MODE_POS;p['stiffness'][:]=0.;p['damping'][:]=.3;p['friction'][:]=.001;p['armature'][:]=.001
     gym.set_actor_dof_properties(env,knife,p)
     slider_lower=float(p['lower'][0])
+    assert 0<=args.preset_slider_offset<=float(p['upper'][0])-slider_lower+1e-6
     effective=dict(robot_dof_names=names,hand_indices=hand_idx.tolist(),arm_indices=arm_idx.tolist(),
         hand_asset_sha256=hashlib.sha256((ROOT/'assets/hands/wuji_artbot/right.urdf').read_bytes()).hexdigest(),
         knife_asset_sha256=hashlib.sha256((ROOT/'assets/objects/knife_wuji_bridge3_20260922/000/mobility.urdf').read_bytes()).hexdigest(),
@@ -208,12 +226,19 @@ def main():
     functional=closed.copy()
     if custom_plan:
         opened=np.asarray(custom_plan['open_q']);closed=np.asarray(custom_plan['close_q'])
+    table_regrasp=None
+    if args.table_regrasp_plan:
+        table_regrasp=json.loads(args.table_regrasp_plan.read_text())
+        assert table_regrasp['grasp']==args.grasp and table_regrasp['min_table_clearance_m']>.0005
+        assert table_regrasp.get('end','positive')==args.upright_end
+        assert max(table_regrasp['open_contact_error_m'])<.001
+        (args.output/'table-regrasp-plan.json').write_text(json.dumps(table_regrasp,indent=2)+'\n')
     opened=np.clip(opened,policy.fk.lower,policy.fk.upper)
     initial_hand=s[:20] if args.group=='A' else opened
     arm=op_q if args.group=='A' else high_q
     states=np.zeros(len(names),dtype=gymapi.DofState.dtype)
     states['pos'][hand_idx]=initial_hand;states['pos'][arm_idx]=arm[:len(arm_idx)]
-    obj_states=np.zeros(1,dtype=gymapi.DofState.dtype);obj_states['pos'][0]=slider_lower
+    obj_states=np.zeros(1,dtype=gymapi.DofState.dtype);obj_states['pos'][0]=slider_lower+args.preset_slider_offset
     targets=np.zeros(len(names)+1,dtype=np.float32);targets[hand_idx]=closed if args.group=='A' else opened
     targets[arm_idx]=arm[:len(arm_idx)];targets[-1]=slider_lower
     writer=None;cam=None
@@ -278,13 +303,15 @@ def main():
         executed=np.zeros(20,dtype=np.float32) if action is None else action
         policy.record(q,executed)
         finger_table=np.zeros(5,dtype=np.int32);finger_knife=np.zeros(5,dtype=np.int32)
-        knife_table_count=0;robot_table_count=0
+        knife_table_count=0;robot_table_count=0;robot_table_links=set()
         for c in gym.get_env_rigid_contacts(env):
             if c['lambda']<=1e-6:continue
             pair={int(c['body0']),int(c['body1'])}
             if table_env in pair:
                 if pair & knife_env:knife_table_count+=1
-                elif any(env_names.get(b,'') in rb_names for b in pair):robot_table_count+=1
+                elif any(env_names.get(b,'') in rb_names for b in pair):
+                    robot_table_count+=1
+                    robot_table_links.update(env_names[b] for b in pair if env_names.get(b,'') in rb_names)
             if pair & knife_env:
                 v=c['normal']
                 normal=[float(v[name]) for name in ('x','y','z')] if getattr(v.dtype,'names',None) else [float(x) for x in v]
@@ -306,6 +333,9 @@ def main():
             frame=gym.get_camera_image(sim,env,cam,gymapi.IMAGE_COLOR)
             writer.append_data(np.asarray(frame).reshape(720,960,4)[:,:,:3])
         global_step+=1
+        arm_or_palm_table=[name for name in robot_table_links if not any('_'+digit+'_' in name for digit in digits)]
+        if arm_or_palm_table:
+            raise ValueError('Actual G2 arm/palm table contact: '+str(sorted(arm_or_palm_table)))
         if global_step%150==0:print(json.dumps(dict(step=global_step,phase=phase,slider=sl,object=pose(o)[:3].tolist(),
             arm_error_max_rad=float(np.max(np.abs(qa-targets[arm_idx]))) if len(qa) else 0.,
             finger_table_contacts=finger_table.tolist(),finger_knife_contacts=finger_knife.tolist())),flush=True)
@@ -316,24 +346,73 @@ def main():
             for _ in range(60):tick('table_settle')
             phases=[('approach',grasp_q,opened,4),('close',grasp_q,closed,3),('lift',lift_q,closed,4)]
             if args.table_supported_seat:
-                phases.extend([('stand_orient',None,closed,5),('stand_lower',None,closed,4),('support_settle',None,closed,2)])
+                if args.upright_path=='yaw-then-tip':phases.append(('stand_yaw',None,closed,5))
+                if args.upright_path=='tip-then-yaw':phases.append(('stand_tip',None,closed,5))
+                phases.extend([('stand_orient',None,closed,args.upright_orient_seconds),('stand_lower',None,closed,4),('support_settle',None,closed,2)])
             if args.seat_at_operation:phases.append(('preorient',None,closed,5))
-            if args.seat_seconds>0:phases.append(('seat',lift_q,functional,args.seat_seconds))
+            if table_regrasp:
+                functional_open=np.asarray(table_regrasp['open_q'])
+                if args.level_standing_knife:phases.append(('stand_level',None,closed,4))
+                if args.measured_release:phases.append(('unload_pinch',None,None,1))
+                phases.extend([('release_pinch',None,opened,3 if args.measured_release else 2),('withdraw',None,opened,4),
+                    ('free_reorient',None,functional_open,5),('functional_approach',None,functional_open,4),('functional_close',None,functional,3)])
+            elif args.seat_seconds>0:phases.append(('seat',lift_q,functional,args.seat_seconds))
             if args.table_supported_seat:phases.append(('relift',None,functional,4))
-            phases.append(('transport',op_q,functional if args.seat_seconds>0 else closed,5))
+            phases.append(('transport',op_q,functional if args.seat_seconds>0 or table_regrasp else closed,5))
             for label,end_arm,end_hand,seconds in phases:
-                if args.table_supported_seat and label in ['stand_orient','stand_lower','support_settle','relift','transport']:
+                if label=='stand_level':
+                    _,_,_,initial_w,initial_o,_=current();level_goal=initial_o.copy()
+                    # Correct only tilt: loaded pinching may change yaw around
+                    # the knife axis, which is irrelevant to standing stability.
+                    vertical=np.array([0,0,-1 if args.upright_end=='positive' else 1])
+                    tilt_correction=minimal_alignment(initial_o[:3,2],vertical)
+                    level_goal[:3,:3]=tilt_correction@initial_o[:3,:3];level_goal[2,3]=table_z+.0735-.0002
+                    corrections=[]
+                    for iteration in range(4):
+                        _,_,_,w,o,_=current();desired=level_goal@np.linalg.inv(o)@w
+                        if np.linalg.norm(desired[:3,3]-initial_w[:3,3])>.025:raise ValueError('Standing leveling exceeds 25mm wrist correction bound')
+                        end,error=k.solve_near(desired,targets[arm_idx])
+                        if error['position_m']>.001 or error['rotation_rad']>.005:raise ValueError('Standing leveling IK failed: '+str(error))
+                        begin=targets[arm_idx].copy()
+                        for i in range(30):
+                            targets[arm_idx]=begin+(end-begin)*smooth((i+1)/30);tick(label)
+                        _,_,_,_,actual_o,_=current()
+                        corrections.append(dict(iteration=iteration,object=pose(actual_o).tolist(),ik=error))
+                        (args.output/'standing-level-corrections.json').write_text(json.dumps(corrections,indent=2)+'\n')
+                    if np.arccos(np.clip(actual_o[2,2]*(-1 if args.upright_end=='positive' else 1),-1,1))>.02:raise ValueError('Standing knife still tilted more than 0.02rad after leveling')
+                    continue
+                if args.table_supported_seat and label in ['stand_tip','stand_yaw','stand_orient','stand_lower','support_settle','release_pinch','withdraw',
+                    'unload_pinch','free_reorient','functional_approach','functional_close','relift','transport']:
                     start=k.forward(targets[arm_idx]);start_hand=targets[hand_idx].copy()
-                    if label=='stand_orient':
+                    if label=='unload_pinch':end_hand=current()[0].copy()
+                    if label=='release_pinch' and args.measured_release:
+                        from scripts.g2_seating_feedback import ContactCorrection
+                        hand,_,_,w,o,_=current();measured_open,opening=ContactCorrection().opening_target(hand,np.linalg.inv(o)@w)
+                        (args.output/'measured-release-plan.json').write_text(json.dumps(opening,indent=2)+'\n');end_hand=measured_open
+                    if label=='withdraw' and args.measured_release:end_hand=measured_open
+                    if label in ['stand_tip','stand_yaw','stand_orient']:
                         _,_,_,w,o,_=current();upright_held_relation=np.linalg.inv(o)@w
-                        upright_object=transform([table_obj[0,3],table_obj[1,3],.98],Rotation.from_euler('zy',[args.upright_yaw,180],degrees=True).as_quat())
+                        upright_object=transform([table_obj[0,3],table_obj[1,3],args.upright_height],Rotation.from_euler('zy',[args.upright_yaw,180 if args.upright_end=='positive' else 0],degrees=True).as_quat())
+                        if label=='stand_yaw':upright_object[:3,:3]=upright_object[:3,:3]@Rotation.from_euler('x',90 if args.upright_end=='negative' else -90,degrees=True).as_matrix()
+                        if label=='stand_tip':
+                            heading=np.arctan2(o[1,0],o[0,0])
+                            upright_object[:3,:3]=Rotation.from_euler('z',heading).as_matrix()@Rotation.from_euler('x',np.pi if args.upright_end=='positive' else 0).as_matrix()
                         desired=upright_object@upright_held_relation
                     elif label=='stand_lower':
                         upright_object[2,3]=table_z+.0735-.0002
                         desired=upright_object@upright_held_relation
-                    elif label=='support_settle':desired=start.copy()
-                    elif label=='relift':
+                    elif label in ['support_settle','unload_pinch','release_pinch','functional_close']:desired=start.copy()
+                    elif label in ['relift','withdraw']:
                         desired=start.copy();desired[2,3]+=.20
+                    elif label=='free_reorient':
+                        _,_,_,_,actual_o,_=current()
+                        tilt=np.arccos(np.clip(actual_o[2,2]*(-1 if args.upright_end=='positive' else 1),-1,1))
+                        if actual_o[2,3]<table_z+.06 or tilt>.15:raise ValueError('Released knife did not remain standing')
+                        functional_target=actual_o@np.asarray(table_regrasp['wrist_in_knife'])
+                        desired=functional_target.copy();desired[2,3]+=.20
+                        (args.output/'functional-approach-reference.json').write_text(json.dumps(dict(object_world=pose(actual_o).tolist(),
+                            wrist_world=pose(functional_target).tolist(),localization='one-time simulation truth after actual withdrawal'),indent=2)+'\n')
+                    elif label=='functional_approach':desired=functional_target.copy()
                     else:desired=operation.copy()
                     rotations=Slerp([0,1],Rotation.from_matrix([start[:3,:3],desired[:3,:3]]))
                     arm_path=[targets[arm_idx].copy()];errors=[]
@@ -344,6 +423,10 @@ def main():
                         if error['position_m']>.001 or error['rotation_rad']>.005:
                             raise ValueError('Table-supported '+label+' IK failed: '+str(error))
                         arm_path.append(motor);errors.append(error)
+                    collision_rows=[dict(knot=i,contacts=arm_table_check.collisions(motor)) for i,motor in enumerate(arm_path)]
+                    (args.output/(label+'-table-clearance.json')).write_text(json.dumps(collision_rows,indent=2)+'\n')
+                    if any(row['contacts'] for row in collision_rows):
+                        raise ValueError('G2 arm/palm path intersects tabletop with 2mm planning margin: '+label)
                     (args.output/(label+'-arm-plan.json')).write_text(json.dumps(dict(q=[q.tolist() for q in arm_path],errors=errors,
                         wrist_target=pose(desired).tolist(),method='continuous Cartesian IK and finite joint drives',
                         condition='Normal flat initial knife; robot subsequently stands the modeled flat end on the original tabletop. No fixture or pose write.'),indent=2)+'\n')
@@ -355,10 +438,14 @@ def main():
                         tick(label)
                     if label=='support_settle':
                         tail=records[-30:];support_fraction=np.mean([r['knife_table_contacts']>0 for r in tail])
+                        _,_,_,_,supported_o,_=current()
+                        support_tilt=float(np.arccos(np.clip(supported_o[2,2]*(-1 if args.upright_end=='positive' else 1),-1,1)))
                         (args.output/'table-support-check.json').write_text(json.dumps(dict(contact_fraction=float(support_fraction),
+                            tilt_rad=support_tilt,center_height_m=float(supported_o[2,3]),modeled_end=args.upright_end,
                             required_fraction=.8,hand_table_contact_frames=sum(bool(np.any(r['finger_table_contacts'])) for r in tail),
                             object_world=records[-1]['object'].tolist()),indent=2)+'\n')
                         if support_fraction<.8:raise ValueError('Knife end support was not physically established for the final second')
+                        if support_tilt>.15 or supported_o[2,3]<table_z+.06:raise ValueError('Table contact is not upright knife-end support')
                         if any(np.any(r['finger_table_contacts']) for r in tail):raise ValueError('Finger/table collision during standing support')
                     continue
                 if label=='preorient':
@@ -477,20 +564,27 @@ def main():
             # RB tensors do not run FK after an initialization write until the
             # first simulate. Use the declared initial state for the first
             # observation, exactly as original ArtManip's at_reset_ids path.
-            q=s[:20].copy();qa=arm[:len(arm_idx)].copy();sl=slider_lower;w=operation.copy();o=initial_obj.copy()
+            q=s[:20].copy();qa=arm[:len(arm_idx)].copy();sl=slider_lower+args.preset_slider_offset;w=operation.copy();o=initial_obj.copy()
             l=operation@transform(s[47:50],s[50:54])
-        policy.takeover(q,targets[hand_idx],w,o,l,slider_lower,reference_state=s if args.group=='A' else None)
+            l[:3,3]+=o[:3,:3]@np.array([0,0,args.preset_slider_offset+args.preset_object_axis_offset])
+        preset_reference=s.copy()
+        if args.group=='A' and (args.preset_slider_offset or args.preset_object_axis_offset):
+            preset_reference[40:47]=pose(np.linalg.inv(w)@o);preset_reference[47:54]=pose(np.linalg.inv(w)@l)
+        policy.takeover(q,targets[hand_idx],w,o,l,slider_lower,reference_state=preset_reference if args.group=='A' else None)
         policy.previous_slider=sl
         rel=pose(np.linalg.inv(w)@o)
-        hold_check=acquisition_hold({key:[r[key] for r in records] for key in records[0]},s) if args.group!='A' else None
+        hold_check=acquisition_hold({key:[r[key] for r in records] for key in records[0]},s,table_z) if args.group!='A' else None
         grasp_success=hold_check['success'] if hold_check is not None else True
         takeover=dict(step=global_step,time=global_step*dt,q=q.tolist(),targets=targets[hand_idx].tolist(),
             arm_q=qa.tolist(),object_world=pose(o).tolist(),wrist_world=pose(w).tolist(),object_hand=rel.tolist(),
             grasp_success=grasp_success if args.group!='A' else None,slider_at_takeover=sl,slider_command_origin=slider_lower,
             acquisition_hold_check=hold_check,
+            table_height=table_z,
             student_initialization='ideal_simulation_truth_at_takeover' if args.group=='C' else None,
             acquisition_localization='live simulation object truth during seating: '+args.seat_feedback if args.seat_feedback!='none' else 'configured table placement and one-time truth for seating planning',
-            acquisition_finger_localization=args.seat_finger_feedback,
+            acquisition_finger_localization=args.seat_finger_feedback,table_supported_regrasp=bool(table_regrasp),
+            additional_acquisition_truth_sources=dict(standing_level_samples=4 if args.level_standing_knife else 0,
+                measured_release_pose=args.measured_release,functional_reapproach_pose=bool(table_regrasp)),
             history_frames=len(policy.history),rnn='zeroed once at takeover',history='actual settled q and zero hold actions',
             force_sensor_enabled=force_sensor_enabled,
             hand_gravity='disabled as frozen training',arm_gravity=args.arm_gravity,
@@ -529,17 +623,19 @@ def main():
 
 def score(trace,takeover,group):
     sel=trace['phase']=='operate'
+    table_height=takeover.get('table_height',.75)
     out={'grasp_success':takeover['grasp_success'],'operation_steps':int(sel.sum()),
          'acquisition_hold_check':takeover.get('acquisition_hold_check'),
          'table_contact_peak_N':float(np.linalg.norm(trace['table_force'],axis=-1).max()),
          'max_object_height_m':float(trace['object'][:,2].max())}
     lift=np.where(trace['phase']=='lift')[0]
-    out['lift_success']=bool(len(lift) and (trace['object'][lift[-15:],2]>.85).all()) if group!='A' else None
+    out['lift_success']=bool(len(lift) and (trace['object'][lift[-15:],2]>table_height+.10).all()) if group!='A' else None
     if group!='A':
         out['acquisition_stage_failure']=None if takeover['grasp_success'] else ('not_lifted' if not out['lift_success'] else 'lost_after_lift')
-        for phase in ['preorient','stand_orient','stand_lower','support_settle','seat','relift','transport','settle_history']:
+        for phase in ['preorient','stand_tip','stand_yaw','stand_orient','stand_lower','support_settle','stand_level','unload_pinch','release_pinch','withdraw','free_reorient',
+            'functional_approach','functional_close','seat','relift','transport','settle_history']:
             mask=trace['phase']==phase
-            if out['lift_success'] and mask.any() and (trace['object'][mask,2]<.80).any():
+            if out['lift_success'] and mask.any() and (trace['object'][mask,2]<table_height+.05).any():
                 out['acquisition_stage_failure']='dropped_during_'+phase;break
     if not sel.any():
         out.update(whole_success=False,operation_success_given_grasp=None,
@@ -561,21 +657,29 @@ def score(trace,takeover,group):
                               within_10mm=bool((error<.01).all()),within_2mm=bool((error<.002).all())))
     basic=all(e['within_10mm'] for e in endpoints)
     held=(rel_drift<.05)&(rel_rotation<1.57)
+    no_contacts=(trace['finger_knife_contacts'][sel]>0).sum(1)==0
+    escaped=no_contacts & (rel_drift>.05)
+    drop_frames=obj[:,2]<table_height+.05
+    if 'knife_table_contacts' in trace:drop_frames=drop_frames | (trace['knife_table_contacts'][sel]>0)
+    physical_drop=bool(drop_frames.any() or (len(escaped)>=3 and np.convolve(escaped.astype(int),np.ones(3,dtype=int),'valid').max()>=3))
+    retained=held & ~drop_frames
     complete_cycles=sum(endpoints[i]['within_10mm'] and endpoints[i+1]['within_10mm'] and
-        held[i*150:min((i+2)*150,len(held))].all() for i in range(0,len(endpoints)-1,2))
+        retained[i*150:min((i+2)*150,len(held))].all() for i in range(0,len(endpoints)-1,2))
     stable=bool((drift<.01).all() and (rotation<.25).all())
     out.update(slider_travel_m=float(np.ptp(slider)),endpoints=endpoints,basic_10mm=basic,
         completed_cycles=int(complete_cycles),
-        failure_class='operation_drop' if not held.all() else ('operation_endpoint_error' if not basic else ('operation_unstable_drift' if not stable else None)),
+        failure_class='operation_drop' if physical_drop else ('operation_pose_escape' if not held.all() else ('operation_endpoint_error' if not basic else ('operation_unstable_drift' if not stable else None))),
+        physical_drop_detected=physical_drop,major_relative_rotation=bool((rel_rotation>=1.57).any()),
+        retained_within_pose_bounds=bool(held.all()),
         strict_2mm=all(e['within_2mm'] for e in endpoints),
         world_drift_max_m=float(drift.max()),world_rotation_max_rad=float(rotation.max()),
         hand_relative_drift_max_m=float(rel_drift.max()),hand_relative_rotation_max_rad=float(rel_rotation.max()),
         stable_world_10mm_025rad=bool((drift<.01).all() and (rotation<.25).all()),
         natural_no_drop=bool((rel_drift<.05).all() and (rel_rotation<1.57).all()),
-        below_table=bool((obj[:,2]<.75).any()),
-        whole_success=bool((group=='A' or takeover['grasp_success']) and basic and (rel_drift<.05).all() and (rel_rotation<1.57).all()),
-        operation_success_given_grasp=bool(basic and (rel_drift<.05).all() and (rel_rotation<1.57).all()) if group!='A' else None,
-        whole_stable_success=bool((group=='A' or takeover['grasp_success']) and basic and (drift<.01).all() and (rotation<.25).all()))
+        below_table=bool((obj[:,2]<table_height).any()),
+        whole_success=bool((group=='A' or takeover['grasp_success']) and basic and held.all() and not physical_drop),
+        operation_success_given_grasp=bool(basic and held.all() and not physical_drop) if group!='A' else None,
+        whole_stable_success=bool((group=='A' or takeover['grasp_success']) and basic and stable and not physical_drop))
     return out
 
 

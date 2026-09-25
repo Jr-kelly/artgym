@@ -8,7 +8,7 @@ import numpy as np
 import yaml
 from scipy.spatial import ConvexHull
 from scipy.spatial.transform import Rotation
-from scipy.optimize import minimize
+from scipy.optimize import minimize,least_squares
 from scripts.wuji_kinematics import WujiKinematics,FINGERS
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -46,6 +46,15 @@ class ContactCorrection:
                 J[:,index]=Jrigid[:,index]+v.T@dw
             points.append(point);jac.append(J);rigid_jac.append(Jrigid)
         return np.array(points),np.array(jac),np.array(rigid_jac)
+
+    def opening_target(self,q,wrist_in_object,gap=.012):
+        q=np.asarray(q,dtype=float);normals=np.array([[1,0,0]]+[[-1,0,0]]*4)
+        initial=self.contacts(q,wrist_in_object,normals)[0];desired=initial+normals*gap
+        def residual(v):return np.r_[(self.contacts(v,wrist_in_object,normals)[0]-desired).ravel()*150,(v-q)*.05]
+        result=least_squares(residual,np.clip(q,self.w.lower+1e-7,self.w.upper-1e-7),bounds=(self.w.lower,self.w.upper),max_nfev=80,diff_step=1e-5)
+        error=np.linalg.norm(self.contacts(result.x,wrist_in_object,normals)[0]-desired,axis=1)
+        if error.max()>.001:raise ValueError('Measured release finger IK error: '+str(error.max()))
+        return result.x,dict(contact_errors_m=error.tolist(),gap_m=gap,initial_q=q.tolist(),open_q=result.x.tolist(),wrist_in_object=wrist_in_object.tolist())
 
     def correct(self,row0,row1,fraction,wrist_in_object,previous,alpha,dt,object_servo=None,residual=False,measured_q=None):
         def mix(key,statics=False):

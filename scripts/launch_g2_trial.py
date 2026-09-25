@@ -21,10 +21,10 @@ def main():
     env=runtime_environment(dict(project=str(pin),python=py),0)
     env['VK_ICD_FILENAMES']='/etc/vulkan/icd.d/nvidia_icd.json'
     args=a.args[1:] if a.args and a.args[0]=='--' else a.args
-    for flag in ['--teacher','--student','--grasp-plan','--seating-plan','--operation-pose']:
+    for flag in ['--teacher','--student','--grasp-plan','--seating-plan','--operation-pose','--table-regrasp-plan']:
         if flag in args:
             i=args.index(flag)+1;source=Path(args[i]).resolve()
-            if flag in ['--grasp-plan','--seating-plan','--operation-pose']:
+            if flag in ['--grasp-plan','--seating-plan','--operation-pose','--table-regrasp-plan']:
                 destination=pin/'inputs'/source.name;destination.parent.mkdir(exist_ok=True);shutil.copyfile(source,destination)
                 args[i]=str(destination)
             else:args[i]=str(source)

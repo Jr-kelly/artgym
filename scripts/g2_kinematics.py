@@ -13,6 +13,22 @@ def transform(position=(0,0,0), quaternion=(0,0,0,1)):
     return t
 
 
+def minimal_alignment(source,target):
+    """Shortest rotation of two directions, without an unconstrained yaw.
+
+    The installed older SciPy SVD align_vectors is underdetermined for one
+    vector pair; use the cross-product solution for that case explicitly.
+    """
+    a=np.asarray(source,dtype=float);b=np.asarray(target,dtype=float)
+    a=a/np.linalg.norm(a);b=b/np.linalg.norm(b)
+    axis=np.cross(a,b);sine=np.linalg.norm(axis);cosine=np.clip(a@b,-1,1)
+    if sine<1e-12:
+        if cosine>0:return np.eye(3)
+        axis=np.cross(a,np.eye(3)[np.argmin(abs(a))]);axis/=np.linalg.norm(axis)
+        return Rotation.from_rotvec(axis*np.pi).as_matrix()
+    return Rotation.from_rotvec(axis*np.arctan2(sine,cosine)/sine).as_matrix()
+
+
 class G2Kinematics:
     def __init__(self,path=ROOT/'assets/robots/g2_wuji/g2_wuji.urdf'):
         robot=ET.parse(path).getroot()
