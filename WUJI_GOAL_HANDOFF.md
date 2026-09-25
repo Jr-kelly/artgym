@@ -1,4 +1,10 @@
 
+## G2 分指换握 2026-09-25T17:02:15.151253+00:00
+
+已发布并回下载核验：https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-finger-gait-20260926-v1，15个附件（10段完整无字视频、22.13MB增量证据及报告/校验）大小SHA和下载字节全部一致。代码/运行基准提交3e6486acef0a9a107595a490200cc40f7460c3a8，分支feat/g2-wuji-finger-gait-20260926；恢复D09精确源码3887项SHA通过，生成命令bash语法通过，未新增物理。报告research/g2-finger-gait-results-20260926.md。取刀/翻掌/双指底部支撑成立；拇指释放和整段teacher失败，student未运行。停止扩展并保留11次启动全部证据；下一优先检查去除拇指后的实际接触支撑可行性，再定义单次支撑预载对照。无本轮在途进程，旧训练88339实查仍活跃。
+
+本轮分支feat/g2-wuji-finger-gait-20260926；实验runs/g2-finger-gait-20260926；开发启动11/18（含独立A）。先读research/g2-finger-gait-20260926.md及实验journal.jsonl。旧任务不重启、不覆盖。
+
 ## G2 分指换握 2026-09-25T16:57:12.248121+00:00
 
 本轮物理已结束：11次启动、10次物理、9条连续B前690帧均与V2逐元素一致；全部11份源码pin共3878至3887项逐文件校验通过。最远D07取刀/翻掌/中指无名指底部换位保持；D09 teacher0.633s失稳、1.133s全失联、1.6s落桌，600帧离线接口回放误差0。D10/D11不同支撑未完成拇指离触，按停止规则收敛。先读research/g2-finger-gait-results-20260926.md；完整命令在research/g2-finger-gait-20260926.md。正在发布独立分支feat/g2-wuji-finger-gait-20260926及Release g2-wuji-finger-gait-20260926-v1；旧训练88339保留，C/新位置验证未运行。
