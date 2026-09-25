@@ -156,7 +156,7 @@ def main():
         self_clearance_constraint=a.self_clearance,
         rolling_support_geometry_only=a.rolling_support_screen,
         free_thumb_avoidance_commands=a.bounded_thumb_avoidance,
-        command_offset_preserved_rad=offset.tolist(),thumb_motors=('Geometry-only avoidance after '+str(a.thumb_avoidance_start_deg)+' degrees') if a.thumb_avoidance else 'Held fixed; whole-digit knife clearance checked along wrist path.')
+        command_offset_preserved_rad=offset.tolist(),thumb_motors=((('Bounded executable' if a.bounded_thumb_avoidance else 'Geometry-only')+' avoidance after '+str(a.thumb_avoidance_start_deg)+' degrees') if a.thumb_avoidance else 'Held fixed; whole-digit knife clearance checked along wrist path.'))
     if a.endpoint_screen:
         out['scope']='Hypothetical endpoint/path geometry only; not a continuous physical state or executable plan.'
         a.output.write_text(json.dumps(out,indent=2)+'\n')

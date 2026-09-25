@@ -35,12 +35,18 @@ def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,
         error=float(np.abs(initial_command-np.asarray(plan['initial_command'])).max())
         if error>1e-6:raise ValueError('Gait initial command mismatch: '+str(error))
     output_rows=[];normal_feedback=None;feedback_nominal=None
+    feedback_configs=plan.get('normal_feedback_segments',([plan['normal_feedback']] if 'normal_feedback' in plan else []))
     for stage in plan['stages']:
-        if plan.get('normal_feedback',{}).get('start_stage')==stage['name']:
+        matching=[config for config in feedback_configs if config.get('start_stage')==stage['name']]
+        if len(matching)>1:raise ValueError('Ambiguous normal-feedback segment start')
+        if 'required_initial_hand_command' in stage:
+            mismatch=float(np.max(np.abs(targets[hand_idx]-np.asarray(stage['required_initial_hand_command']))))
+            if mismatch>1e-5:raise ValueError('Appended segment motor reference mismatch: '+str(mismatch))
+        if matching:
             if normal_feedback is not None:raise ValueError('Normal feedback must initialize exactly once')
             from scripts.g2_normal_feedback import NormalFeedback
             measured,_,_,measured_wrist,measured_object,_=current()
-            normal_feedback=NormalFeedback(fk,plan['normal_feedback'],measured,measured_wrist,measured_object,dt)
+            normal_feedback=NormalFeedback(fk,matching[0],measured,measured_wrist,measured_object,dt)
             feedback_nominal=targets[hand_idx].copy()
         moving=list(stage.get('moving_indices',[]));start=targets[hand_idx].copy()
         nominal_start=feedback_nominal.copy() if normal_feedback is not None else start.copy();goal=nominal_start.copy()
@@ -105,3 +111,9 @@ def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,
             if fraction!=0.:raise ValueError('Requested digit did not unload for the full hold: '+stage['name'])
         if stage.get('require_thumb_gap_m') is not None:
             if result.get('thumb_gap_min_m',-1)<stage['require_thumb_gap_m']:raise ValueError('Whole-thumb clearance below declared margin: '+stage['name'])
+        if normal_feedback is not None and normal_feedback.config.get('stop_after_stage')==stage['name']:
+            with (output/'normal-feedback-lifecycle.jsonl').open('a') as stream:
+                stream.write(json.dumps(dict(time_s=float(records[-1]['time']),stage=stage['name'],
+                    event='Stop residual update, preserve actual last motor command as next nominal reference',
+                    preserved_motor_command=targets[hand_idx].tolist(),last_residual_rad=normal_feedback.delta.tolist()))+'\n')
+            normal_feedback=None;feedback_nominal=None

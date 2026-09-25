@@ -22,12 +22,13 @@ def main():
     p.add_argument('--base',default=BASE);p.add_argument('--label',default='v1')
     p.add_argument('--exclude-manifest',type=Path,action='append',default=[]);p.add_argument('--video-trial',action='append',default=[])
     p.add_argument('--video-named',action='append',default=[],help='TRIAL=descriptive-filename.mp4; names should state the achieved scope.')
+    p.add_argument('--closeup-named',action='append',default=[],help='TRIAL=descriptive-filename.mp4; synchronized closeup from the same execution.')
     a=p.parse_args()
     base=a.base;excluded=set()
     for previous in a.exclude_manifest:excluded.update(json.loads(previous.read_text())['trials'])
     a.output.mkdir(parents=True,exist_ok=False);run=a.run_root.resolve();stage=a.output/'evidence';stage.mkdir()
     base_files=set(subprocess.check_output(['git','ls-tree','-r','--name-only',base],cwd=ROOT,text=True).splitlines())
-    changed=set(subprocess.check_output(['git','diff',base,'--name-only'],cwd=ROOT,text=True).splitlines());cache={};included=[];pending=[]
+    changed=set(subprocess.check_output(['git','diff',base,'--name-only'],cwd=ROOT,text=True).splitlines());cache={};included=[];pending=[];preparation_failures=[]
     def base_hash(name):
         if name not in base_files:return None
         if name not in cache:
@@ -38,8 +39,19 @@ def main():
         if pin.name in excluded:continue
         process=run/(pin.name+'-process.json');info=json.loads(process.read_text()) if process.exists() else {}
         proc=Path('/proc',str(info.get('pid',-1)),'stat')
-        alive=proc.exists() and proc.read_text().split(') ')[1][0]!='Z'
+        alive=False
+        if proc.exists():
+            fields=proc.read_text().split(') ')[1].split()
+            alive=fields[0]!='Z' and (info.get('process_start_ticks') is None or fields[19]==str(info['process_start_ticks']))
         if alive:pending.append(pin.name);continue
+        if not (pin/'SOURCE_SHA256.json').exists():
+            if process.exists():raise ValueError('Started trial lacks immutable source manifest: '+pin.name)
+            dest=stage/'preparation-failures'/pin.name;dest.mkdir(parents=True)
+            if (pin/'inputs').exists():shutil.copytree(pin/'inputs',dest/'inputs')
+            (dest/'NOTE.json').write_text(json.dumps(dict(status='incomplete preparation before process launch',
+                source_manifest_exists=False,physical_execution=False,
+                note='Partial local source copy retained locally; no executed source pin claimed. Root diagnostic/setup-error records accompany this bundle.'),indent=2)+'\n')
+            preparation_failures.append(pin.name);continue
         included.append(pin.name);dest=stage/'trials'/pin.name;dest.mkdir(parents=True)
         result=run/pin.name
         if result.exists():
@@ -60,12 +72,14 @@ def main():
         shutil.copyfile(pin/'SOURCE_SHA256.json',dest/'SOURCE_SHA256.json')
     diagnostics=stage/'diagnostics';diagnostics.mkdir()
     for file in run.iterdir():
-        if file.is_file() and file.suffix in ['.json','.jsonl'] and not file.name.endswith('-process.json'):shutil.copyfile(file,diagnostics/file.name)
+        if file.is_file() and file.suffix in ['.json','.jsonl','.py','.log','.txt','.csv','.yaml','.yml','.npz'] and not file.name.endswith('-process.json'):
+            if file.suffix=='.log' and (run/(file.stem+'-process.json')).exists():continue
+            shutil.copyfile(file,diagnostics/file.name)
     for file in [ROOT/'G2_TABLETOP_HANDOFF.md',a.report]+a.extra_report:
         shutil.copyfile(file,stage/file.name)
     manifest=dict(created=datetime.now(timezone.utc).isoformat(),base_commit=base,excluded_previous_trials=sorted(excluded),
         current_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
-        trials=included,pending_trials=pending,models='Reuse wuji-core-teacher-student-20260924-{teacher,student}.pth from release wuji-experiments-20260923',
+        trials=included,pending_trials=pending,preparation_failures=preparation_failures,models='Reuse wuji-core-teacher-student-20260924-{teacher,student}.pth from release wuji-experiments-20260923',
         source_reconstruction='Checkout base_commit in a new directory, then overlay each path in source-overrides.json from sources/blobs/SHA256; verify SOURCE_SHA256.json.')
     (stage/'MANIFEST.json').write_text(json.dumps(manifest,indent=2)+'\n')
     archive=a.output/('g2-wuji-tabletop-evidence-'+a.label+'.tar.gz')
@@ -84,6 +98,13 @@ def main():
     for trial,name in videos.items():
         src=run/trial/'continuous.mp4'
         if src.exists() and trial in included:shutil.copyfile(src,a.output/name)
+    for item in a.closeup_named:
+        trial,name=item.split('=',1)
+        if Path(name).name!=name or not name.endswith('.mp4'):raise ValueError('Expected plain closeup .mp4 filename')
+        src=run/trial/'hand-closeup.mp4'
+        if not src.exists() or trial not in included:raise ValueError('Requested completed closeup absent: '+trial)
+        if (a.output/name).exists():raise ValueError('Duplicate published video filename: '+name)
+        shutil.copyfile(src,a.output/name)
     shutil.copyfile(a.report,a.output/'g2-wuji-tabletop-README.md')
     files=[f for f in a.output.iterdir() if f.is_file()]
     (a.output/'SHA256SUMS.txt').write_text(''.join(digest(f)+'  '+f.name+'\n' for f in sorted(files)))
