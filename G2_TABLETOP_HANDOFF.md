@@ -363,3 +363,12 @@ https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-tabletop-fixed-abc-20260
 首3对原始轨迹显示初次抬起均成功，但在stand_orient转腕阶段失去手指接触并掉落，后续support_settle才触发中止。00/01/02确认落桌时间分别为15.600/15.433/15.467秒，转腕开始后约2.4–2.6秒。00无接触自由落体期间相邻控制帧竖直速度差约−0.32m/s，与重力30Hz一致；没有物体状态写入或瞬移。新增small-placement-audit-progress-v1.json保留快照（仅首3对），源和物性检查全部通过。
 
 对应末端目标转动约125–127°，与固定成功例126.56°接近；首3例arm-plan最大变化0.034–0.048rad，未发现大幅IK分支跳转。这些证据支持获取转腕接触敏感是当前瓶颈，仍不认定唯一物理根因。small-placement-first3-turn-diagnostic.json及独立图small-placement-diagnostic-progress-v1.png从轨迹生成，视频仍无文字。暂不改变方案，等待全部20次收齐后统一结论。
+
+
+## 21:56 CST 验证继续与全控制帧自身几何核查
+
+固定B65全部3270控制帧、414个非相邻机构链对的凸包SAT检查未发现重叠，见self-clearance-B65-all-control-frames-v68.json。检查仍排除连接壳体近邻和右手指自接触，也不证明帧间无碰撞；没有更改源自碰撞配置或物理运行。
+
+当前前6个共享位置/12次已结束，均在策略接管前失败；第06对仍活跃并已经过转腕到下降阶段，尚不能提前判断。首5对独立完整审计small-placement-audit-progress-v2.json确认初次抬起每组5/5、到接管0/5、条件操作未评估（分母0）。所有源码SHA/物性/预声明偏移和视频帧数均核验。
+
+接触诊断small-placement-first6-contact-diagnostic.json显示转腕中拇指仍主要触刀身，滑块被动位置/支持指接触时序却随小偏移改变；不把这一相关性当唯一失败原因。初步证据集中在获取转腕，而非冻结策略/接管接口，未启动任何新训练。待全部20次终态后统一出最终报告。交付核查表research/g2-tabletop-delivery-audit.md已逐项列出证据与剩余验证/发布项。
