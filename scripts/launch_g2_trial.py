@@ -12,11 +12,18 @@ from scripts.monitor_wuji_checkpoints import runtime_environment
 def main():
     p=argparse.ArgumentParser();p.add_argument('--name',required=True);p.add_argument('--module',default='scripts.run_g2_tabletop')
     p.add_argument('--python',default='/home/agiuser/miniconda3/envs/artgym/bin/python')
+    p.add_argument('--source-root',type=Path,help='Freeze from an existing verified trial pin rather than the current workspace.')
     p.add_argument('args',nargs=argparse.REMAINDER);a=p.parse_args()
     root=Path(__file__).resolve().parents[1];run=root/'runs/g2-tabletop-v1';pin=run/'source-pins'/a.name
+    source_root=a.source_root.resolve() if a.source_root else root
+    if a.source_root:
+        source_manifest=json.loads((source_root/'SOURCE_SHA256.json').read_text())
+        for name,sha in source_manifest.items():
+            if hashlib.sha256((source_root/name).read_bytes()).hexdigest()!=sha:
+                raise ValueError('Frozen source changed: '+name)
     pin.mkdir(parents=True,exist_ok=False)
     for folder in ['scripts','isaacgymenvs','assets','caches','rl_games']:
-        shutil.copytree(root/folder,pin/folder,ignore=shutil.ignore_patterns('__pycache__','.git'),symlinks=False)
+        shutil.copytree(source_root/folder,pin/folder,ignore=shutil.ignore_patterns('__pycache__','.git'),symlinks=False)
     py=str(Path(a.python).resolve())
     env=runtime_environment(dict(project=str(pin),python=py),0)
     env['VK_ICD_FILENAMES']='/etc/vulkan/icd.d/nvidia_icd.json'

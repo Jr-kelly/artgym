@@ -12,7 +12,7 @@ A预置→teacher；B实际抓取→teacher；C实际抓取→student。先A定�
 
 交付新分支/新Release、运行命令、完整无文字视频/失败视频、轨迹和分类，不覆盖旧结果或历史备份。原4090训练88339保留，运行前重查显存；仅进行有用仿真，不为占用GPU启动无效计算。
 
-当前下一步：收A-operation-up5-v63。若A通过，以B58全部原参数（operation-yaw90、无operation-pose）增加 --post-acquisition-pose runs/g2-tabletop-v1/operation-knife-up5-v63.json 发B64；将新4秒腕部调整放在原回闭返回之后，验证前段逐帧一致性。B62是operation_pose_escape失败，不能重复宣称在途或成功。尚无完整B/C或20扰动验证。
+当前下一步：收B-original-path-post-up5-teacher-v64（PID见process.json）。A63已通过2轮/2mm/稳定，B64保留B58获取/回闭路径，仅接管前用4秒上倾5°；核验前2490帧至gravity_close_return逐帧一致。若B64通过则以完全相同参数接C理想初始化；通过固定B/C后才可运行run_g2_small_variations.py声明20次。B62翻转失败。
 
 ## 17:13 CST 进度
 
@@ -260,3 +260,10 @@ v62从正常桌面到接管仍抓取成功1/1，但冻结teacher操作后刀身�
 新增可选post-acquisition-pose：保持v58成功获取/承托/回闭/返回路径完全相同，仅在其后用4秒真实G2电机调整腕姿，再停稳、接管。限制额外位移≤20mm/旋转≤15度，手指电机目标保持，零物体状态写入。当前选择上倾5度、原yaw90；从v58真实返回末态电机参考预检，全路径IK位置<12nm/转角<6e-8rad且无臂掌桌碰撞（post-acquisition-up5-preflight-v63.json）。部分源关节边界仍很近，非大裕量方案。A-operation-up5-v63正在先验新腕姿；通过后再发相同旧抓取路径+B后置调整，不改10mm标准。
 
 新增audit_g2_handoff_replay.py从50帧真实执行历史重建冻结策略、仅清零一次RNN，逐帧核对观测/动作/目标及固定参考；B58全部600帧三项误差均0（frozen-replay-B58-v63.json）。轨迹审核FK最大1.06微米/2.81e-6rad，关节命令与实测速度均不越源限速，角度浮点超限2.55e-7rad。该离线回放只证明接口执行一致，不增加物理成功样本。
+
+
+## 20:59 CST A63通过，原获取路径后置调整进入物理
+
+A-operation-up5-v63在上倾5°/yaw90下20秒两轮、四端点<2mm、世界漂移7.113mm/.1564rad稳定。B-original-path-post-up5-teacher-v64已启动（PID见process.json），仍正常75cm桌面、原B58所有获取/被动回闭参数；新增4秒G2腕部上倾5°在回闭返回之后，停稳历史之前，连续物理无重置。结果未知。
+
+已将功能正面对夹及两个诊断操作位JSON加入Git可复现资产目录。新增小变化执行工具run_g2_small_variations.py，但未生成/执行验证样本；它要求固定A/B/C全段稳定通过后才能声明10个共享摆放×B/C共20次任务，范围x/y±5mm、yaw±2°，固定seed2026092501，每次来源于校验过的冻结源码pin。声明与状态分开、规划失败也保留计入整段分母，不调参重抽样。用当前失败B/C实测门禁拒绝，未误发任何验证。仍没有新训练。
