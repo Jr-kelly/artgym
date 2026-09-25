@@ -417,3 +417,10 @@ python3 -m scripts.run_g2_small_variations run \
 ```
 
 状态/分组结果写g2-small-placement-v1-results.json；不要并发启动多个driver。遇中断先核对driver和子进程，单个driver可恢复未启动项，已失败项不重跑。A/B/C权重及控制无新训练。新成功视频待增量Release v6，v5失败证据保留。
+
+
+## 21:35 CST 验证driver已启动，冻结方案保持
+
+预声明清单已先提交并推送GitHub 86b191b，随后21:34:47 CST启动唯一driver PID67920，记录g2-small-placement-v1-driver.json；初始B/C子进程为g2-small-placement-v1-00-B/C，2路并行，源C66冻结pin，原训练88339保持、整机GPU约99%。清单及public副本SHA不变，不能改样本或调参；driver/launcher源码SHA也写入driver记录，不要在途中修改或启动第二个driver。
+
+结果进度读g2-small-placement-v1-results.json，完整日志在各试验同名.log；先核实实际PID，不能据旧文档重启。首批尚未结束，不当作20次成功。新简版可复现报告research/g2-tabletop-fixed-baseline.md给出A/B/C数字、普通桌面端立路线、所有student输入来源及原始文件位置；完整开发史仍保留。

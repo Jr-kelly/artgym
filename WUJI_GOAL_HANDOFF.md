@@ -2,7 +2,7 @@
 
 ## 新阶段：G2桌面取刀→伸缩（2026-09-25）
 
-当前G2 goal为active；前一阶段teacher+student预置持刀goal完成不代表桌面新任务完成。用户新任务取代Franka要求。独立工程 `/data/research/artgym-g2-tabletop-20260925`，分支 `feat/g2-wuji-tabletop-20260925`，接续读该工程 `G2_TABLETOP_HANDOFF.md`，实验 `runs/g2-tabletop-v1`。21:27 CST：A63与连续桌面获取→teacher的B65已通过两轮、10mm端点及全程稳定；B65未全部达到2mm。C66冻结student理想初始化按完全相同源码/获取流程运行中，20变化未声明，无新训练。最新增量Release：https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-tabletop-operation-20260925-v5 。保留旧成功与原训练88339。
+当前G2 goal为active；前一阶段teacher+student预置持刀goal完成不代表桌面新任务完成。用户新任务取代Franka要求。独立工程 `/data/research/artgym-g2-tabletop-20260925`，分支 `feat/g2-wuji-tabletop-20260925`，接续读该工程 `G2_TABLETOP_HANDOFF.md`，实验 `runs/g2-tabletop-v1`。21:35 CST：固定A63/B65/C66均通过两轮、10mm端点及全程稳定，B/C未全过2mm；C为仿真定位及理想初始化对照。20次小变化按GitHub预声明清单运行，driver PID67920（只保留一个），无新训练；goal仍active，续接以G2手册和实际进程为准。最新增量Release：https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-tabletop-operation-20260925-v5 。保留旧成功与原训练88339。
 
 
 # Wuji 美工刀持续实验：接续入口

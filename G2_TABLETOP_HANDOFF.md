@@ -12,7 +12,7 @@ A预置→teacher；B实际抓取→teacher；C实际抓取→student。先A定�
 
 交付新分支/新Release、运行命令、完整无文字视频/失败视频、轨迹和分类，不覆盖旧结果或历史备份。原4090训练88339保留，运行前重查显存；仅进行有用仿真，不为占用GPU启动无效计算。
 
-当前下一步：提交/推送20次预声明清单后，启动且只启动一个run_g2_small_variations driver（状态见g2-small-placement-v1-driver.json/results.json，启动后更新）；必须全量收齐失败和成功，不调参改样本。固定A63/B65/C66已通过并审计B/C前2670帧相同、C实际历史/RNN/实时真值不变性。准备增量Release v6上传B65/C66两条109秒成功视频及证据，排除v1–v5。
+当前下一步：核对并监测20次验证driver PID67920（g2-small-placement-v1-driver.json/results.json），不要启动第二个。清单在GitHub 86b191b预声明，源C66冻结；必须收齐全部失败/成功，不调参改样本。固定A63/B65/C66已通过10mm/稳定和接管审计。先发增量Release v6（B65/C66两条109秒视频与证据，排除v1–v5），验证结束后另发v7增量及分组统计。goal仍active直到验证、汇总和发布完成。
 
 ## 17:13 CST 进度
 
@@ -338,3 +338,10 @@ python3 -m scripts.run_g2_small_variations run \
 ```
 
 状态/分组结果写g2-small-placement-v1-results.json；不要并发启动多个driver。遇中断先核对driver和子进程，单个driver可恢复未启动项，已失败项不重跑。A/B/C权重及控制无新训练。新成功视频待增量Release v6，v5失败证据保留。
+
+
+## 21:35 CST 验证driver已启动，冻结方案保持
+
+预声明清单已先提交并推送GitHub 86b191b，随后21:34:47 CST启动唯一driver PID67920，记录g2-small-placement-v1-driver.json；初始B/C子进程为g2-small-placement-v1-00-B/C，2路并行，源C66冻结pin，原训练88339保持、整机GPU约99%。清单及public副本SHA不变，不能改样本或调参；driver/launcher源码SHA也写入driver记录，不要在途中修改或启动第二个driver。
+
+结果进度读g2-small-placement-v1-results.json，完整日志在各试验同名.log；先核实实际PID，不能据旧文档重启。首批尚未结束，不当作20次成功。新简版可复现报告research/g2-tabletop-fixed-baseline.md给出A/B/C数字、普通桌面端立路线、所有student输入来源及原始文件位置；完整开发史仍保留。
