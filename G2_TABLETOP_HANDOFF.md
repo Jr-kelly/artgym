@@ -1,6 +1,6 @@
 # G2＋Wuji 桌面取刀→伸缩（2026-09-25）
 
-分支 feat/g2-wuji-tabletop-20260925；工程 /data/research/artgym-g2-tabletop-20260925；实验 runs/g2-tabletop-v1。当前A成功；B58连续取刀/重抓/回闭/teacher握持稳定，但回收超10mm；B62改变搬运/操作位后发生刀身翻转，失败。A63先测上倾5°，随后只在原B58获取路径结束后调整腕姿。完整B/C未成功，没有新训练。
+分支 feat/g2-wuji-tabletop-20260925；工程 /data/research/artgym-g2-tabletop-20260925；实验 runs/g2-tabletop-v1。当前A成功；B58/B64连续获取与teacher保持稳定但回收末0.3秒超10mm，B62翻转失败。B65仅将功能重抓沿刀轴偏移3mm，保持B64其余配置，正在运行。完整B/C未成功，没有新训练。
 
 任务：固定刀具、固定正常桌面摆放、一个功能抓姿；G2右臂接近/闭合/抬起/移到操作姿态；同一仿真连续状态接冻结teacher再student。模型源 /data/research/ArtBot/G2_crsB_wuji/robot.usd，禁止套用Franka安装或参数。
 
@@ -12,7 +12,7 @@ A预置→teacher；B实际抓取→teacher；C实际抓取→student。先A定�
 
 交付新分支/新Release、运行命令、完整无文字视频/失败视频、轨迹和分类，不覆盖旧结果或历史备份。原4090训练88339保留，运行前重查显存；仅进行有用仿真，不为占用GPU启动无效计算。
 
-当前下一步：收B-original-path-post-up5-teacher-v64（PID见process.json）。A63已通过2轮/2mm/稳定，B64保留B58获取/回闭路径，仅接管前用4秒上倾5°；核验前2490帧至gravity_close_return逐帧一致。若B64通过则以完全相同参数接C理想初始化；通过固定B/C后才可运行run_g2_small_variations.py声明20次。B62翻转失败。
+当前下一步：收B-axis3-post-up5-teacher-v65（PID见process.json）。B64最后一帧回收进10mm，但预定末0.3秒窗口最大10.342/12.251mm，仍失败；不能启动20变化。若B65固定B通过，才运行相同获取参数冻结C理想初始化并审计前段与历史。A63为对应5°最终腕姿的成功A。
 
 ## 17:13 CST 进度
 
@@ -274,3 +274,31 @@ A-operation-up5-v63在上倾5°/yaw90下20秒两轮、四端点<2mm、世界漂�
 新增audit_g2_self_clearance.py：按实际G2右臂关节轨迹、导出碰撞凸包及完整零位固定机构做SAT检查，包含面法向与边叉积；只排除两条关节边以内的连接壳体/安装接缝，以及另行处理的右手指自接触。B58每秒取样、末帧共106帧，414个候选链对均未检出>0.1mm凸包重叠。记录self-clearance-B58-stride30-v64.json；这只是采样诊断，非连续全路径认证，也没有更改源资产关闭自碰撞的物理设置。初版一次性投影阵列占8GB，已只中断该离线审核并改为256轴分块/先测面分离，完成相同SAT判据；原训练及B64均未受中断。
 
 B58/B62接管电机目标逐项相同，实际受力关节角/接触关系不同；B62操作0.20s首次拇指失联、0.233s旋转超过0.25rad、1.733s漂移超过10mm（B58均未发生）。记录B58-B62-loaded-handoff-comparison-v64.json，只作为末态/接触敏感性证据，不认定唯一原因。
+
+
+## 21:12 CST 后置5度仍未通过窗口，轴向3mm获取对照
+
+B64从桌面起共109秒，抓取1/1、条件操作0/1、全段0/1。四端点末0.3秒最大误差为2.122/10.342/2.225/12.251mm；两次收回最后一帧虽为9.782/8.835mm，但不能替换预定窗口判据。无掉落、世界漂移3.898mm/.1383rad稳定，仍0完整合格循环。不能按某一早期日志帧进入10mm便计成功。
+
+B58与B64前2490帧直至gravity_close_return的q、arm_q、物体/滑块/腕位姿、目标、接触计数全部逐项相同（B58-B64-acquisition-prefix-parity-v65.json）。B64冻结策略离线重放600帧观测/动作/目标误差均0。后置5°未导致B62那种翻转，但不足以通过回收窗口。
+
+新增plan_g2_body_regrasp --wrist-axis-offset .003：仅把功能重抓腕相对刀轴沿+z移动3mm，尝试部分抵消接管时约6mm位置偏差；不修改前段侧夹、手指电机目标、物性、权重、20秒时钟。重算四组手指目标float32与原计划完全相同，几何手桌净空11.187mm，实际withdraw末态起的功能接近/重抓/再次抬升/搬运IK位置<0.4微米、转角<2.55e-6rad且无臂掌桌碰撞。后续自由物体/承托仍需实际验证，不能据预检宣布末态已改善。
+
+B-axis3-post-up5-teacher-v65已开始（PID见process.json），保留B64后置5°及其余设置。完整B/C仍未通过、未声明或执行20变化、无新训练。下一步收v65实际末态与全程评分；若通过才发同条件C并标记理想初始化。
+
+复现该有界诊断（使用新的name，按前文下载既有冻结权重）：
+
+```bash
+python -m scripts.plan_g2_body_regrasp --thumb-corner face --gap .008 \
+  --squeeze .002 --grasp 0 --wrist-axis-offset .003 --output /tmp/g2-body-axis3.json
+python3 -m scripts.launch_g2_trial --name B-axis3-reproduce-001 -- \
+  --group B --operation-yaw 90 --yaw 180 --dx -.05 --wrist-posture -.7 \
+  --arm-gain-scale 10 --arm-damping-scale 20 --arm-integral-gain 1 \
+  --grasp-plan assets/robots/g2_wuji/plans/edge-pinch8.json \
+  --table-supported-seat --upright-yaw 250 --table-regrasp-plan /tmp/g2-body-axis3.json \
+  --level-standing-knife --standing-level-gate support-projection --measured-release \
+  --gravity-close-before-takeover --gravity-close-support tray --gravity-close-yaw 30 \
+  --post-acquisition-pose assets/robots/g2_wuji/plans/operation-knife-up5-v63.json \
+  --video --camera hand \
+  --teacher weights/g2-frozen/wuji-core-teacher-student-20260924-teacher.pth
+```

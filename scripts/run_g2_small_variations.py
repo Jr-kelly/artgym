@@ -7,6 +7,7 @@ import argparse
 from datetime import datetime, timezone
 import hashlib
 import json
+import math
 from pathlib import Path
 import random
 import subprocess
@@ -49,6 +50,13 @@ def declare(args):
         else:
             assert b == c, (key, b, c)
     assert reports['B']['teacher_sha256'] == reports['C']['teacher_sha256']
+    wrists = {g: json.loads((RUN / n / 'takeover.json').read_text())['wrist_world'] for g, n in names.items()}
+    for group in ['B', 'C']:
+        position_error = math.sqrt(sum((a - b) ** 2 for a, b in zip(wrists['A'][:3], wrists[group][:3])))
+        qa, qb = wrists['A'][3:], wrists[group][3:]
+        dot = abs(sum(a * b for a, b in zip(qa, qb))) / math.sqrt(sum(a * a for a in qa) * sum(b * b for b in qb))
+        angle_error = 2 * math.acos(min(1., dot))
+        assert position_error < .001 and angle_error < .005, 'A must verify the same final operation wrist pose'
     rng = random.Random(args.seed)
     # Latin hypercube within ±5 mm in x/y, ±2 degrees yaw, ten shared placements.
     columns = []
@@ -71,7 +79,7 @@ def declare(args):
         fixed_cases=names, source_pin=processes['C']['pin'], source_manifest_sha256=sha(Path(processes['C']['pin']) / 'SOURCE_SHA256.json'),
         commands={g: p['command'] for g, p in processes.items() if g in ['B', 'C']},
         base_arguments={g: reports[g]['args'] for g in ['B', 'C']}, input_sha256=files,
-        trials=trials, condition='Normal 0.75m tabletop; same frozen acquisition, control and policies; C ideal initialization',
+        trials=trials, condition='Normal %sm tabletop; same frozen acquisition, control and policies; C ideal initialization' % reports['B']['args']['table_height'],
         metrics='10mm endpoint criterion, full stability and drop separate; 2mm diagnostic; fixed takeover drift reference',
         interpretation='20 physical task attempts: ten predeclared placements, paired teacher/student. Keep all planning and physical failures. No tuning on these cases.')
     args.manifest.parent.mkdir(parents=True, exist_ok=True)

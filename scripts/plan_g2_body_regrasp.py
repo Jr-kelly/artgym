@@ -17,9 +17,12 @@ def main():
     p.add_argument('--grasp',type=int,default=0);p.add_argument('--squeeze',type=float,default=.002)
     p.add_argument('--thumb-corner',choices=['negative','positive','face'],default='negative')
     p.add_argument('--gap',type=float,default=.012)
+    p.add_argument('--wrist-axis-offset',type=float,default=0.,help='Acquisition-only wrist translation along the knife axis; bounded to 5mm. Changes planned motor poses, never physics state.')
     a=p.parse_args();c=ContactCorrection();w=c.w
+    assert abs(a.wrist_axis_offset)<=.005
     s=np.load(ROOT/'caches/initial_grasp/wuji/knife_wuji_bridge3_20260922/000/train/valid_grasps.npy')[a.grasp]
     relative=np.linalg.inv(transform(s[40:43],s[43:47]))
+    relative[2,3]+=a.wrist_axis_offset
     normals=np.array([[0.,1.,0.]]+[[0.,-1.,0.]]*4)
     targets=c.contacts(s[:20],relative,normals)[0]
     sign=0 if a.thumb_corner=='face' else (1 if a.thumb_corner=='positive' else -1)
@@ -53,6 +56,7 @@ def main():
         open_contact_error_m=oe.tolist(),touch_contact_error_m=te.tolist(),close_contact_error_m=ce.tolist(),
         min_table_clearance_m=float(clearance),contact_targets=targets.tolist(),contact_normals=normals.tolist(),
         squeeze_m=a.squeeze,open_gap_m=a.gap,thumb_corner=a.thumb_corner,
+        wrist_axis_offset_m=a.wrist_axis_offset,
         validation='Motor target geometry only. Thumb uses body because slider is passively open. No policy success claimed.')
     a.output.write_text(json.dumps(data,indent=2)+'\n');print(json.dumps(data))
 
