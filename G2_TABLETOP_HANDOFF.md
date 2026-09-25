@@ -12,7 +12,7 @@ A预置→teacher；B实际抓取→teacher；C实际抓取→student。先A定�
 
 交付新分支/新Release、运行命令、完整无文字视频/失败视频、轨迹和分类，不覆盖旧结果或历史备份。原4090训练88339保留，运行前重查显存；仅进行有用仿真，不为占用GPU启动无效计算。
 
-当前下一步：监测唯一20次验证driver PID67920（g2-small-placement-v1-driver.json/results.json）。第00对在support_settle倒刀，2/20已结束且未到策略；第01对运行，全部失败保留、不调参。固定ABC10mm/稳定成功已发布核验v6；验证结束后另发v7增量（排除前六个manifest）及分组统计/失败分类。原训练88339保留、GPU约97%。goal仍active直到20次验证与最终报告发布完成。
+当前下一步：监测唯一20次验证driver PID67920（g2-small-placement-v1-driver.json/results.json，核实真实子进程）。全部失败/成功保留，不调参；summarize_g2_validation.py可对全部终态生成 --require-complete审计，未进入操作指标为null，区分初次抬起与获取到接管、掉刀事件与后续guard。固定ABC10mm/稳定已发布核验v6；20次结束后发布v7增量（排除前六个manifest）及分组统计/失败分类/诊断图。原训练88339保留。goal仍active直到20次验证、最终报告与增量发布完成。
 
 ## 17:13 CST 进度
 
@@ -354,3 +354,12 @@ https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-tabletop-fixed-abc-20260
 预声明首个共享位置（dx+1.088mm、dy+0.750mm、yaw+0.393°）的B/C均在第720帧support_settle中止：刀桌接触100%但刀轴偏竖直1.605rad、刀心高度0.75655m，已经倒在桌上，不是正常端立。两次均在策略接管之前失败，不能归类为teacher或student操作失败。仅当前2/20结束，获取到接管0/2、条件操作0次，全段0/2，不能外推最终成功率。视频和partial-trace保留，driver已继续第01对；不修改清单或方案。
 
 独立工作分支代码/预声明已推，v6目标c77754a。验证driver PID67920仍运行；后续必须读最新results.json、查实际子进程，全部20次结束后生成分组比率、端点/行程/掉落/漂移和失败分类，并发布v7新增证据/代表性失败。暂不凭首对失败改参数；下一项改进建议应等完整分布再判断。goal仍active，未调用complete。
+
+
+## 21:49 CST 验证失败发生阶段与原始轨迹审计
+
+20次冻结验证继续，当前已完成前4个共享位置/8次，全部中止，driver PID67920和第04对真实子进程正常。新增summarize_g2_validation.py只读原始轨迹、source pin和命令，核对每项声明偏移、冻结物性、所有源码文件SHA、滑块目标恒定/刚度0、视频帧数及B/C实际前段一致；操作阶段若未到达，所有端点/行程/漂移指标为null，获取期间滑块移动单列。
+
+首3对原始轨迹显示初次抬起均成功，但在stand_orient转腕阶段失去手指接触并掉落，后续support_settle才触发中止。00/01/02确认落桌时间分别为15.600/15.433/15.467秒，转腕开始后约2.4–2.6秒。00无接触自由落体期间相邻控制帧竖直速度差约−0.32m/s，与重力30Hz一致；没有物体状态写入或瞬移。新增small-placement-audit-progress-v1.json保留快照（仅首3对），源和物性检查全部通过。
+
+对应末端目标转动约125–127°，与固定成功例126.56°接近；首3例arm-plan最大变化0.034–0.048rad，未发现大幅IK分支跳转。这些证据支持获取转腕接触敏感是当前瓶颈，仍不认定唯一物理根因。small-placement-first3-turn-diagnostic.json及独立图small-placement-diagnostic-progress-v1.png从轨迹生成，视频仍无文字。暂不改变方案，等待全部20次收齐后统一结论。
