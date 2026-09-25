@@ -34,9 +34,16 @@ def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,
     if 'initial_command' in plan:
         error=float(np.abs(initial_command-np.asarray(plan['initial_command'])).max())
         if error>1e-6:raise ValueError('Gait initial command mismatch: '+str(error))
-    output_rows=[]
+    output_rows=[];normal_feedback=None;feedback_nominal=None
     for stage in plan['stages']:
-        moving=list(stage.get('moving_indices',[]));start=targets[hand_idx].copy();goal=start.copy()
+        if plan.get('normal_feedback',{}).get('start_stage')==stage['name']:
+            if normal_feedback is not None:raise ValueError('Normal feedback must initialize exactly once')
+            from scripts.g2_normal_feedback import NormalFeedback
+            measured,_,_,measured_wrist,measured_object,_=current()
+            normal_feedback=NormalFeedback(fk,plan['normal_feedback'],measured,measured_wrist,measured_object,dt)
+            feedback_nominal=targets[hand_idx].copy()
+        moving=list(stage.get('moving_indices',[]));start=targets[hand_idx].copy()
+        nominal_start=feedback_nominal.copy() if normal_feedback is not None else start.copy();goal=nominal_start.copy()
         goal[moving]=np.asarray(stage.get('target',[]))
         arm_start=targets[arm_idx].copy();arm_goal=None
         if 'arm_target' in stage:
@@ -48,6 +55,7 @@ def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,
         if arm_goal is not None and np.any(1.875*np.abs(arm_goal-arm_start)/seconds>k.velocity):raise ValueError('Gait arm speed above source limit')
         first=len(records)
         if stage['kind']=='align_fixed_goal':
+            if normal_feedback is not None:raise ValueError('This comparison does not mix alignment and normal feedback')
             if world_reference is None or moving or arm_goal is not None:raise ValueError('Alignment requires unchanged external goal and fixed fingers')
             from scripts.g2_assembly_roll import align_to_fixed_goal
             from scripts.g2_table_collision import ArmTableCollision
@@ -57,10 +65,21 @@ def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,
         else:
             for i in range(steps):
                 u=(i+1)/steps;alpha=10*u**3-15*u**4+6*u**5
-                targets[hand_idx]=start+(goal-start)*alpha
+                nominal=nominal_start+(goal-nominal_start)*alpha
+                feedback_diagnostic=None
+                if normal_feedback is not None:
+                    measured,_,_,measured_wrist,_,_=current()
+                    command,feedback_diagnostic=normal_feedback.step(nominal,measured,measured_wrist)
+                    targets[hand_idx]=command;feedback_nominal=nominal.copy()
+                else:targets[hand_idx]=nominal
                 if arm_goal is not None:targets[arm_idx]=arm_start+(arm_goal-arm_start)*alpha
                 tick('gait_'+stage['name'])
-        result=stability(records[first:],world,relative,hand_idx,start,moving,table_z)
+                if feedback_diagnostic is not None:
+                    feedback_diagnostic.update(time_s=float(records[-1]['time']),stage=stage['name'])
+                    with (output/'normal-feedback.jsonl').open('a') as stream:stream.write(json.dumps(feedback_diagnostic)+'\n')
+        controlled=moving+([] if normal_feedback is None else normal_feedback.ids.tolist())
+        result=stability(records[first:],world,relative,hand_idx,start,controlled,table_z)
+        if normal_feedback is not None:result['feedback_controlled_indices']=normal_feedback.ids.tolist()
         result.update(name=stage['name'],kind=stage['kind'],moving_indices=moving,
             first_time_s=float(records[first]['time']),last_time_s=float(records[-1]['time']),
             first_command_delta_rad=float(np.abs(records[first]['reference_targets'][hand_idx]-start).max()),

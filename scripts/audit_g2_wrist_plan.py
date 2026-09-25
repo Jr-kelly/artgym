@@ -36,6 +36,7 @@ def main():
     relative0=np.array(source['wrist_in_knife']);obj=transform(t['object'][i,:3],t['object'][i,3:])
     actual_wrist0=obj@relative0;command_wrist0=k.forward(qa)
     base_overlap={};rows=[];previous_command=np.array(source['close_q']);peak_hand=0.;peak_arm=0.
+    checked_fingers=meta.get('actual_support_fingers',['middle','ring'])+(['thumb'] if meta.get('free_thumb_avoidance_commands') else [])
     suffix=plan['stages'][-len(meta['rows'])-1:-1]
     for knot,(row,stage) in enumerate(zip(meta['rows'],suffix)):
         q1=np.array(row['nominal_q']);qa1=np.array(row['arm_command']);command=np.array(row['command'])
@@ -45,7 +46,7 @@ def main():
             qs=q*(1-u)+q1*u;arm=qa*(1-u)+qa1*u
             relative=np.linalg.inv(obj)@k.forward(arm)@np.linalg.inv(command_wrist0)@actual_wrist0
             negative={}
-            for finger in meta.get('actual_support_fingers',['middle','ring']):
+            for finger in checked_fingers:
                 for pair in g.self_gaps(qs,finger):
                     if pair['gap_lower_bound_m']<0:
                         key=tuple(sorted([pair['moving_link'],pair['other_link']]))

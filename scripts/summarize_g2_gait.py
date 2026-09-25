@@ -72,6 +72,17 @@ def main():
                     stage['requested_contact_condition_met']=bool(gate)
                     stage['stage_completed']=bool(stage['stable'] and gate)
                     stage['check_source']=str(folder.relative_to(trial))
+                    samples=(np.flatnonzero((t['time']>=stage['first_time_s']-1e-7)&(t['time']<=stage['last_time_s']+1e-7))
+                        if 'first_time_s' in stage else np.flatnonzero(t['phase']=='gait_'+stage['name']))
+                    miss=np.zeros(len(samples),dtype=bool)
+                    if required is not None:miss|=t['finger_knife_contacts'][samples,required]>0
+                    required_contacts=list(definition.get('require_contacts',[]))
+                    if definition.get('require_contact') is not None:required_contacts.append(definition['require_contact'])
+                    for index in required_contacts:miss|=t['finger_knife_contacts'][samples,index]<=0
+                    if definition.get('require_thumb_gap_m') is not None and 'thumb_gap_lower_bound_m' in t:
+                        miss|=t['thumb_gap_lower_bound_m'][samples]<definition['require_thumb_gap_m']
+                    stage['first_requested_contact_condition_miss_time_s']=float(t['time'][samples[np.flatnonzero(miss)[0]]]) if miss.any() else None
+                    stage['contact_timing_note']='First observed miss, separate from world instability; original >=90% support-contact gate is unchanged.'
                     row['gait_stages'].append(stage)
                     if required==0 and definition.get('seconds',0)>=1 and stage['stage_completed'] and stage.get('thumb_gap_min_m',-1)>=.0041:
                         row['g1_passed']=True

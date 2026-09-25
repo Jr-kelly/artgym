@@ -25,14 +25,19 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--source',type=Path,required=True)
     p.add_argument('--prefix',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
     p.add_argument('--degrees',type=float,default=-25.);p.add_argument('--seconds',type=float,default=5.)
+    p.add_argument('--stage-prefix',default='supported_wrist_roll',help='Use a unique prefix when appending another physical wrist segment.')
     p.add_argument('--endpoint-screen',action='store_true',help='Geometry-only extension up to60deg; never emits an executable motor plan.')
     p.add_argument('--thumb-avoidance',action='store_true',help='After the first25deg, allow minimal thumb motor changes to preserve clearance.')
     p.add_argument('--thumb-avoidance-start-deg',type=float,default=25.,help='Geometry-only onset of free-thumb avoidance; actual thumb clearance may require earlier onset.')
+    p.add_argument('--bounded-thumb-avoidance',action='store_true',help='Emit at most20deg of coordinated support/wrist/free-thumb commands; requires a separate sweep audit before physics.')
     p.add_argument('--index-support',action='store_true',help='Use an actual established index contact as the third support; rejects absent contacts.')
     p.add_argument('--self-clearance',action='store_true',help='Penalize new or increased finger intersections while retaining actual material support points.')
     p.add_argument('--rolling-support-screen',action='store_true',help='Geometry only: allow material contacts to move within each original contacting convex hull, at most8mm per local coordinate.')
     a=p.parse_args()
-    if a.thumb_avoidance and not a.endpoint_screen:raise ValueError('Thumb avoidance currently emits geometry only')
+    if a.bounded_thumb_avoidance:
+        if abs(a.degrees)>20:raise ValueError('Executable free-thumb avoidance limited to20deg per segment')
+        a.thumb_avoidance=True
+    if a.thumb_avoidance and not (a.endpoint_screen or a.bounded_thumb_avoidance):raise ValueError('Use the explicit bounded executable avoidance option or geometry-only screening')
     if a.rolling_support_screen and not a.endpoint_screen:raise ValueError('Rolling supports currently geometry only')
     if abs(a.degrees)>(60 if a.endpoint_screen else 30):raise ValueError('Declared geometric range exceeded')
     if a.output.exists():raise ValueError('Preserve previous plan')
@@ -138,7 +143,9 @@ def main():
         rows.append(dict(knot=i,degrees=a.degrees*i/count,support_point_errors_m=error.tolist(),gaps_m=gaps,geometric_ok=ok,
             nominal_q=q.tolist(),command=command.tolist(),arm_command=qa.tolist(),wrist_in_knife=relative.tolist(),arm_error=arm_error,
             support_material_points=anchor_values.tolist(),support_anchor_hull_violation_m=anchor_violation))
-        stages.append(dict(name='supported_wrist_roll_'+str(i),kind='move',moving_indices=ids.tolist(),target=command[ids].tolist(),arm_target=qa.tolist(),seconds=a.seconds/count))
+        command_ids=np.r_[ids,np.arange(16,20)] if a.bounded_thumb_avoidance else ids
+        stages.append(dict(name=a.stage_prefix+'_'+str(i),kind='move',moving_indices=command_ids.tolist(),target=command[command_ids].tolist(),
+            arm_target=qa.tolist(),seconds=a.seconds/count,require_thumb_gap_m=.0041))
         if not ok:break
     out=dict(source=str(a.source),source_sha256=hashlib.sha256(a.source.read_bytes()).hexdigest(),method=__doc__,
         rows=rows,geometric_pass=bool(len(rows)==count and rows[-1]['geometric_ok']),
@@ -148,12 +155,13 @@ def main():
         actual_support_fingers=supports,
         self_clearance_constraint=a.self_clearance,
         rolling_support_geometry_only=a.rolling_support_screen,
+        free_thumb_avoidance_commands=a.bounded_thumb_avoidance,
         command_offset_preserved_rad=offset.tolist(),thumb_motors=('Geometry-only avoidance after '+str(a.thumb_avoidance_start_deg)+' degrees') if a.thumb_avoidance else 'Held fixed; whole-digit knife clearance checked along wrist path.')
     if a.endpoint_screen:
         out['scope']='Hypothetical endpoint/path geometry only; not a continuous physical state or executable plan.'
         a.output.write_text(json.dumps(out,indent=2)+'\n')
     elif out['geometric_pass']:
-        plan=json.loads(a.prefix.read_text());plan['stages']+=stages+[dict(name='supported_wrist_roll_hold',kind='hold',seconds=1.,require_no_contact=0,require_thumb_gap_m=.0041,
+        plan=json.loads(a.prefix.read_text());plan['stages']+=stages+[dict(name=a.stage_prefix+'_hold',kind='hold',seconds=1.,require_no_contact=0,require_thumb_gap_m=.0041,
             require_contacts=[1,2,3] if a.index_support else [2,3])]
         plan['supported_wrist_geometry']=out;a.output.write_text(json.dumps(plan,indent=2)+'\n')
     else:a.output.with_suffix('.rejected.json').write_text(json.dumps(out,indent=2)+'\n')
