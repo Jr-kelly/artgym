@@ -12,7 +12,10 @@ def main():
     rows=[]
     for file in sorted(a.root.glob('*-process.json')):
         info=json.loads(file.read_text());name=file.name[:-len('-process.json')];trial=a.root/name
-        proc=Path('/proc')/str(info['pid'])/'stat';alive=proc.exists() and proc.read_text().split(') ')[1][0]!='Z'
+        proc=Path('/proc')/str(info['pid'])/'stat';alive=False
+        if proc.exists():
+            fields=proc.read_text().split(') ')[1].split()
+            alive=fields[0]!='Z' and (info.get('process_start_ticks') is None or fields[19]==str(info['process_start_ticks']))
         if alive:rows.append(dict(name=name,status='running'));continue
         trace=trial/'trace.npz'
         if not trace.exists():trace=trial/'partial-trace.npz'
@@ -60,6 +63,8 @@ def main():
                     fractions=stage['contact_fraction_thumb_index_middle_ring_pinky']
                     gate=required is None or fractions[required]==0.
                     if definition.get('require_contact') is not None:gate=gate and fractions[definition['require_contact']]>=.9
+                    if definition.get('require_thumb_gap_m') is not None:
+                        gate=gate and stage.get('thumb_gap_min_m',-1)>=definition['require_thumb_gap_m']
                     stage['requested_contact_condition_met']=bool(gate)
                     stage['stage_completed']=bool(stage['stable'] and gate)
                 row['first_instability_time_s']=next((v['first_instability_time_s'] for v in checks['stages'] if v['first_instability_time_s'] is not None),None)

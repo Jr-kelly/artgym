@@ -13,7 +13,10 @@ def main():
     records=[]
     for f in sorted(RUN.glob('*-process.json')):
         r=json.loads(f.read_text());pid=r.get('pid');proc=Path('/proc')/str(pid)/'stat'
-        alive=proc.exists() and proc.read_text().split(') ')[1][0]!='Z'
+        alive=False
+        if proc.exists():
+            fields=proc.read_text().split(') ')[1].split()
+            alive=fields[0]!='Z' and (r.get('process_start_ticks') is None or fields[19]==str(r['process_start_ticks']))
         records.append(dict(name=f.name[:-len('-process.json')],pid=pid,alive=alive,exit_code=r.get('exit_code'),round=r.get('round',1),kind=r.get('kind','control')))
     state['processes']=records
     state['used']['control_launches']=sum(r['kind']=='control' for r in records)

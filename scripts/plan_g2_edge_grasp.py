@@ -23,6 +23,7 @@ def main():
     p.add_argument('--contact-height',type=float,default=.0035)
     p.add_argument('--squeeze',type=float,default=.002,help='Motor target overtravel per side (m), not a state penetration write.')
     p.add_argument('--allow-close-overtravel',action='store_true')
+    p.add_argument('--exclude-finger',choices=FINGERS,action='append',default=[],help='Do not require this digit to pinch; retain its table/body clearance terms and report it explicitly.')
     a=p.parse_args();w=WujiKinematics()
     s=np.load(ROOT/'caches/initial_grasp/wuji/knife_wuji_bridge3_20260922/000/train/valid_grasps.npy')[a.grasp]
     meshes={}
@@ -50,6 +51,7 @@ def main():
     def residual(x,targets,table=True,anchor=None,body_clearance=True):
         wrist,pts=frames(x);errors=[]
         for i,f in enumerate(FINGERS):
+            if f in a.exclude_finger:continue
             v=np.concatenate([pts['hand_r_'+f+'_pad_link'],pts['hand_r_'+f+'_link4']])
             # Smooth-ish local vertex minimum, reevaluated per residual call.
             if a.side_normal:
@@ -74,6 +76,8 @@ def main():
     x=result.x;wrist,pts=frames(x)
     touch_errors=[]
     for i,f in enumerate(FINGERS):
+        if f in a.exclude_finger:
+            touch_errors.append(None);continue
         v=np.concatenate([pts['hand_r_'+f+'_pad_link'],pts['hand_r_'+f+'_link4']])
         touch_errors.append(float(np.linalg.norm(v-contact[i],axis=1).min()))
     # Keep wrist fixed for open/close. A few mm of target overtravel produces
@@ -86,6 +90,7 @@ def main():
         return r.x
     opened=finger_targets(.012);closed=finger_targets(-a.squeeze)
     report=dict(kind='edge_pinch_geometry_candidate',grasp=a.grasp,roll=a.roll,side_normal=a.side_normal,
+        excluded_fingers=a.exclude_finger,active_fingers=[f for f in FINGERS if f not in a.exclude_finger],
         squeeze_m=a.squeeze,allow_close_overtravel=a.allow_close_overtravel,
         wrist_in_knife=wrist.tolist(),touch_q=x[6:].tolist(),open_q=opened.tolist(),close_q=closed.tolist(),
         contact_targets=contact.tolist(),contact_error_m=touch_errors,

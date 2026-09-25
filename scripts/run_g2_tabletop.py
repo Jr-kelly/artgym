@@ -58,6 +58,8 @@ def main():
     parser.add_argument('--seating-plan',type=Path,help='Contact-guided wrist/finger motor waypoints, executed in air without object constraints.')
     parser.add_argument('--seat-feedback',choices=['none','object-truth','translation-truth'],default='none',help='Explicit oracle localization control during seating only; not a deployable estimator.')
     parser.add_argument('--wrist-posture',type=float,help='Redundant arm joint7 target for initial approach/grasp/lift IK only.')
+    parser.add_argument('--acquisition-arm-seed',type=Path,help='G2 IK seed for the initial above-table pose; only initialization before physics.')
+    parser.add_argument('--cartesian-acquisition',action='store_true',help='Approach/lift through continuous Cartesian IK; close holds the reached arm command. Separate acquisition control condition.')
     parser.add_argument('--seat-at-operation',action='store_true',help='Carry held knife to the trained object attitude before changing grasp contacts.')
     parser.add_argument('--operation-pose',type=Path,help='Explicit wrist 4x4 pose for labeled gravity/interface diagnostics.')
     parser.add_argument('--operation-seed',type=Path,help='A-only measured G2 joint seed for solving an already reached wrist pose; never changes limits.')
@@ -145,7 +147,8 @@ def main():
         grasp_pose[2,3]+=args.close_height
     above=grasp_pose.copy(); above[2,3]+=.16
     lifted=grasp_pose.copy(); lifted[2,3]+=args.lift_height
-    high_q,high_error=k.solve(above,op_q)
+    high_seed=np.asarray(json.loads(args.acquisition_arm_seed.read_text())) if args.acquisition_arm_seed else op_q
+    high_q,high_error=k.solve(above,high_seed)
     grasp_q,grasp_error=k.solve(grasp_pose,high_q)
     lift_q,lift_error=k.solve(lifted,grasp_q)
     if args.wrist_posture is not None:
@@ -452,6 +455,17 @@ def main():
                                ('gravity_close_restore',None,restored,2),('gravity_close_return',None,restored,8)])
             if post_acquisition_pose is not None:phases.append(('operation_adjust',None,None,4))
             for label,end_arm,end_hand,seconds in phases:
+                if args.cartesian_acquisition and label=='close':end_arm=targets[arm_idx].copy()
+                if args.cartesian_acquisition and label in ['approach','lift']:
+                    from scripts.g2_cartesian_acquisition import plan_translation
+                    arm_path,diagnostic=plan_translation(k,targets[arm_idx],k.forward(end_arm),seconds,dt,arm_table_check)
+                    (args.output/(label+'-cartesian-plan.json')).write_text(json.dumps(diagnostic,indent=2)+'\n')
+                    start_hand=targets[hand_idx].copy()
+                    for i,motor in enumerate(arm_path):
+                        alpha=smooth((i+1)/len(arm_path));targets[arm_idx]=motor
+                        targets[hand_idx]=start_hand+(end_hand-start_hand)*alpha
+                        tick(label)
+                    continue
                 if label=='finger_gait':
                     from scripts.g2_finger_gait import execute_gait
                     execute_gait(args.gait_plan,args.output,targets,hand_idx,arm_idx,current,tick,records,dt,k,policy.fk,table_z)
