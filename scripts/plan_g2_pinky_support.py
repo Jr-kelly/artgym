@@ -17,8 +17,9 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--source',type=Path,required=True);p.add_argument('--prefix',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
     p.add_argument('--finger',choices=['pinky','index'],default='pinky');p.add_argument('--retained-supports',type=int,nargs='+',help='Contact indices in thumb/index/middle/ring/pinky order retained at each new hold.')
     p.add_argument('--ik-seed',choices=['actual','functional'],default='actual',help='One explicit alternative IK branch; only a planning seed, never an initial physical state.')
-    p.add_argument('--surface',choices=['side','underside'],default='side');p.add_argument('--contact-z',type=float);p.add_argument('--contact-x',type=float,default=-.005,help='Declared underside transverse point in knife coordinates.')
+    p.add_argument('--surface',choices=['side','underside','left'],default='side');p.add_argument('--contact-z',type=float);p.add_argument('--contact-x',type=float,default=-.005,help='Declared underside transverse point in knife coordinates.')
     p.add_argument('--held-thumb',action='store_true',help='Candidate2 support is thumb/middle/ring; do not impose the original route thumb-release gate.')
+    p.add_argument('--approach-normal',action='store_true',help='Reach a free point12mm along the chosen contact normal before touching.')
     p.add_argument('--approach-under',action='store_true',help='For underside contact, first reach a point12mm below the touch point, hold, then approach; preserves failed direct interpolation as a separate proposal.')
     a=p.parse_args()
     if a.output.exists():raise ValueError('Preserve previous result')
@@ -27,8 +28,9 @@ def main():
     q=np.array(d['touch_q']);relative=np.array(d['wrist_in_knife']);normals=np.array([[1,0,0]]*5)
     contact_id=4 if a.finger=='pinky' else 1;indices=np.arange(8,12) if a.finger=='pinky' else np.arange(4)
     if a.surface=='underside':normals[contact_id]=[0,-1,0]
+    elif a.surface=='left':normals[contact_id]=[-1,0,0]
     point=c.contacts(q,relative,normals)[0][contact_id]
-    target=point.copy();target[:2]=[.00965,0] if a.surface=='side' else [a.contact_x,-.00415]
+    target=point.copy();target[:2]=[.00965,0] if a.surface=='side' else [-.00965,0] if a.surface=='left' else [a.contact_x,-.00415]
     target[2]=a.contact_z if a.contact_z is not None else np.clip(point[2],-.055,-.025)
     def surface(v):
         qs=q.copy();qs[indices]=v;return qs,c.contacts(qs,relative,normals)[0][contact_id]
@@ -41,10 +43,11 @@ def main():
         return least_squares(residual,np.clip(seed,w.lower[indices]+1e-7,w.upper[indices]-1e-7),bounds=(w.lower[indices],w.upper[indices]),max_nfev=150,diff_step=1e-5)
     pre=None;preq=None;prepoint=None;seed=q[indices]
     if a.ik_seed=='functional':seed=np.load(Path(__file__).resolve().parents[1]/'caches/initial_grasp/wuji/knife_wuji_bridge3_20260922/000/train/valid_grasps.npy')[0][indices]
-    if a.approach_under:
-        prepoint=target.copy();prepoint[1]-=.012;pre=solve(prepoint,seed,free=True);preq=surface(pre.x)[0]
+    if a.approach_under or a.approach_normal:
+        prepoint=target.copy();prepoint+=normals[contact_id]*.012;pre=solve(prepoint,seed,free=True);preq=surface(pre.x)[0]
     touch=solve(target,pre.x if pre is not None else seed);touchq,actual_point=surface(touch.x);goal=target.copy()
     if a.surface=='side':goal[0]=.0085
+    elif a.surface=='left':goal[0]=-.0085
     else:goal[1]=-.003
     command=solve(goal,touch.x,True)
     sweep=[]
@@ -64,7 +67,7 @@ def main():
     geometry=dict(source=str(a.source),target_point=target.tolist(),touch_point=actual_point.tolist(),touch_q=touch.x.tolist(),command_q=command.x.tolist(),
         close_target_point=goal.tolist(),close_actual_nominal_point=surface(command.x)[1].tolist(),sweep=sweep,closing_command_sweep=close_sweep,geometric_preflight=valid,
         contact_surface=a.surface,held_thumb=a.held_thumb,
-        approach_under=a.approach_under,pre_q=None if preq is None else pre.x.tolist(),pre_point=None if prepoint is None else prepoint.tolist(),
+        approach_under=a.approach_under,approach_normal=a.approach_normal,pre_q=None if preq is None else pre.x.tolist(),pre_point=None if prepoint is None else prepoint.tolist(),
         scope='One-finger support; touch first, then1mm finite-drive preload. No force estimate. Held-thumb option retains actual candidate2 opposed grip; original option keeps thumb released.')
     plan=json.loads(a.prefix.read_text());plan['pinky_support_geometry']=geometry
     stages=[]

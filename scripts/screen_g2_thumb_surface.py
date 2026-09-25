@@ -20,7 +20,9 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--source',type=Path,required=True)
     p.add_argument('--contact-link',choices=['hand_r_thumb_pad_link','hand_r_thumb_link4','hand_r_thumb_link3'],default='hand_r_thumb_pad_link',help='Explicit contact surface; whole-thumb collision checks remain enabled.')
     p.add_argument('--extra-seeds',type=int,default=0,help='At most6 deterministic additional joint-space branches after the two local seeds fail.')
+    p.add_argument('--slider-offset',type=float,default=0.,help='Explicit hypothetical slider extension0..40mm for static workspace screening; never changes simulation state.')
     p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+    if not 0<=a.slider_offset<=.04:raise ValueError('Workspace screen offset is0..40mm')
     if a.output.exists():raise ValueError('Preserve previous screen')
     if not 0<=a.extra_seeds<=6:raise ValueError('Additional branch budget is0..6')
     d=json.loads(a.source.read_text());g=DigitGeometry(max_face_axes=32);full_geometry=DigitGeometry();w=g.w
@@ -29,6 +31,8 @@ def main():
     cache=np.load(Path(__file__).resolve().parents[1]/'caches/initial_grasp/wuji/knife_wuji_bridge3_20260922/000/train/valid_grasps.npy')[0]
     slider=(float(np.load(d['source_trace'])['slider'][d['source_step']]) if d.get('source_trace') else -.032674588)
     slider_source='actual trace frame' if d.get('source_trace') else 'explicit hypothetical closed-slider geometry'
+    slider+=a.slider_offset
+    if a.slider_offset:slider_source+=' plus explicitly hypothetical workspace extension'
     z0=.010624586881962734+slider
     lower=np.r_[w.lower[16:],vertices.min(0),-.0045,z0-.014]
     upper=np.r_[w.upper[16:],vertices.max(0),.0045,z0+.014]
@@ -63,7 +67,7 @@ def main():
             point_error_m=error,anchor_hull_violation_m=hull_error,whole_thumb_gap_m=gap,minimum_self_pair=self_gap,
             geometric_candidate=bool(error<.001 and hull_error<.0001 and gap>=-.0005 and self_gap['gap_lower_bound_m']>=0),nfev=solved.nfev))
     out=dict(source=str(a.source),contact_link=a.contact_link,slider_position_m=slider,slider_source=slider_source,rows=rows,
-        extra_branch_count=a.extra_seeds,branch_seed=2026092604 if a.extra_seeds else None,
+        hypothetical_slider_offset_m=a.slider_offset,extra_branch_count=a.extra_seeds,branch_seed=2026092604 if a.extra_seeds else None,
         limitation='Two local branches plus explicitly bounded additional branches, arbitrary point in pad hull; screening only. Not proof of global reachability or physical support.')
     a.output.write_text(json.dumps(out,indent=2)+'\n');print(json.dumps(out))
 
