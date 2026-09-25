@@ -25,10 +25,15 @@ def audit(path):
             out['command_velocity_max_rad_s']=(np.abs(np.diff(targets,axis=0))/dt).max(0).tolist()
             out['arm_velocity_limits_rad_s']=k.velocity.tolist()
             out['command_velocity_violation_max_rad_s']=float(np.maximum(np.abs(np.diff(targets,axis=0))/dt-k.velocity,0).max())
+            if 'dof_velocity' in trace:
+                velocity=np.abs(trace['dof_velocity'][:,idx])
+                out['measured_arm_velocity_max_rad_s']=velocity.max(0).tolist()
+                out['measured_arm_velocity_violation_max_rad_s']=float(np.maximum(velocity-k.velocity,0).max())
     phases={}
     for phase in dict.fromkeys(trace['phase']):
         sel=trace['phase']==phase;item=dict(frames=int(sel.sum()),
-            object_max_height_m=float(trace['object'][sel,2].max()),object_end=trace['object'][sel][-1].tolist())
+            object_max_height_m=float(trace['object'][sel,2].max()),object_end=trace['object'][sel][-1].tolist(),
+            slider_travel_m=float(np.ptp(trace['slider'][sel])),slider_final_m=float(trace['slider'][sel][-1]))
         for field in ['finger_table_contacts','finger_knife_contacts']:
             if field in trace:item[field+'_frames']=(trace[field][sel]>0).sum(0).tolist()
         phases[str(phase)]=item

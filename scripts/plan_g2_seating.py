@@ -17,7 +17,8 @@ ROOT=Path(__file__).resolve().parents[1]
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--grasp-plan',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
-    p.add_argument('--knots',type=int,default=24);a=p.parse_args()
+    p.add_argument('--knots',type=int,default=24)
+    p.add_argument('--normal-path',choices=['linear','radial'],default='linear');a=p.parse_args()
     initial=json.loads(a.grasp_plan.read_text());w=WujiKinematics()
     s=np.load(ROOT/'caches/initial_grasp/wuji/knife_wuji_bridge3_20260922/000/train/valid_grasps.npy')[initial['grasp']]
     p0=np.asarray(initial['wrist_in_knife']);p1=np.linalg.inv(transform(s[40:43],s[43:47]));q0=np.array(initial['touch_q']);q1=s[:20].astype(float)
@@ -33,7 +34,11 @@ def main():
     for i in range(a.knots+1):
         fraction=i/a.knots;target=contact0+(corner-contact0)*min(fraction/.5,1) if fraction<.5 else corner+(contact1-corner)*((fraction-.5)/.5)
         wrist=np.eye(4);wrist[:3,:3]=interpolate([fraction]).as_matrix()[0];wrist[:3,3]=p0[:3,3]*(1-fraction)+p1[:3,3]*fraction
-        direction=np.array([np.cos(fraction*np.pi/2),np.sin(fraction*np.pi/2),0])
+        angle=fraction*np.pi/2
+        if a.normal_path=='radial':
+            corner_angle=np.arctan2(.004,.0095)
+            angle=corner_angle*fraction/.5 if fraction<.5 else np.arctan2(.004,.0095*(1-(fraction-.5)/.5))
+        direction=np.array([np.cos(angle),np.sin(angle),0])
         anchor=q0*(1-fraction)+q1*fraction
         def residual(values,overtravel=0):
             offset=values[:3];values=values[3:]
@@ -63,7 +68,7 @@ def main():
             contact_residual_m=error.tolist(),optimization_cost=float(result.cost)))
         last_offset=offset
         print(json.dumps(dict(knot=i,cost=float(result.cost))),flush=True)
-    a.output.write_text(json.dumps(dict(kind='contact_guided_seating',source_plan=str(a.grasp_plan),grasp=initial['grasp'],waypoints=rows,
+    a.output.write_text(json.dumps(dict(kind='contact_guided_seating',normal_path=a.normal_path,source_plan=str(a.grasp_plan),grasp=initial['grasp'],waypoints=rows,
         validation='Kinematic motor targets only; no physical success claimed; object must remain free.'),indent=2)+'\n')
 
 

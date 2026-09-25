@@ -56,6 +56,7 @@ def main():
     parser.add_argument('--transport-path',choices=['joint','level'],default='joint')
     parser.add_argument('--seating-plan',type=Path,help='Contact-guided wrist/finger motor waypoints, executed in air without object constraints.')
     parser.add_argument('--seat-feedback',choices=['none','object-truth'],default='none',help='Explicit oracle localization control during seating only; not a deployable estimator.')
+    parser.add_argument('--wrist-posture',type=float,help='Redundant arm joint7 target for initial approach/grasp/lift IK only.')
     args=parser.parse_args()
     args.output.mkdir(parents=True,exist_ok=False)
     assert not args.hand_only_diagnostic or args.group=='A'
@@ -85,6 +86,10 @@ def main():
     high_q,high_error=k.solve(above,op_q)
     grasp_q,grasp_error=k.solve(grasp_pose,high_q)
     lift_q,lift_error=k.solve(lifted,grasp_q)
+    if args.wrist_posture is not None:
+        high_q,high_error=k.solve_wrist_posture(above,high_q,args.wrist_posture)
+        grasp_q,grasp_error=k.solve_wrist_posture(grasp_pose,high_q,args.wrist_posture)
+        lift_q,lift_error=k.solve_wrist_posture(lifted,grasp_q,args.wrist_posture)
     plan=dict(operation=op_error,approach=high_error,grasp=grasp_error,lift=lift_error,
               operation_q=op_q.tolist(),approach_q=high_q.tolist(),grasp_q=grasp_q.tolist(),lift_q=lift_q.tolist(),
               table_top=table_z,knife_pose=pose(table_obj).tolist(),planned_wrist_pose=pose(grasp_pose).tolist())
@@ -314,6 +319,7 @@ def main():
                     rotation_path=Slerp(np.arange(len(relative_path)),Rotation.from_matrix([v[:3,:3] for v in relative_path]))
                     initial_correction=np.linalg.inv(o)@w@np.linalg.inv(relative_path[0])
                     correction_rotation=Slerp([0,1],Rotation.from_matrix([initial_correction[:3,:3],np.eye(3)]))
+                    last_feedback_target=targets[arm_idx].copy()
                     for i in range(steps):
                         loc=(i+1)/steps*count;segment=min(int(loc),count-1);fraction=loc-segment
                         targets[arm_idx]=arm_path[segment]*(1-fraction)+arm_path[segment+1]*fraction
@@ -332,8 +338,12 @@ def main():
                             correction[:3,3]=initial_correction[:3,3]*(1-blend)
                             relative_pose=correction@relative_pose
                             desired=actual_o@relative_pose
-                            motor,err=k.solve_near(desired,qa,max_step=np.minimum(k.velocity*dt*.8,.15))
-                            if err['position_m']>.001 or err['rotation_rad']>.01:raise ValueError('Seating feedback IK failed: '+str(err))
+                            motor,err=k.solve_near(desired,last_feedback_target,max_step=np.minimum(k.velocity*dt*.8,.15))
+                            # Feedback IK is rate-limited, so small transient
+                            # tracking error is expected. Do not confuse a
+                            # 1 mm residual with a discontinuous arm branch.
+                            if err['position_m']>.005 or err['rotation_rad']>.05:raise ValueError('Seating feedback tracking bound exceeded: '+str(err))
+                            last_feedback_target=motor.copy()
                             targets[arm_idx]=motor
                             feedback.append(dict(step=global_step,object_observed=pose(actual_o).tolist(),wrist_target=pose(desired).tolist(),ik=err))
                         targets[hand_idx]=hand_path[segment]*(1-fraction)+hand_path[segment+1]*fraction

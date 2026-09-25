@@ -72,6 +72,22 @@ class G2Kinematics:
             rotation_rad=float(Rotation.from_matrix(target[:3,:3].T@t[:3,:3]).magnitude()),
             max_joint_step_rad=float(np.max(np.abs(q-seed))),joint_margin_rad=float(np.minimum(q-self.lower,self.upper-q).min()))
 
+    def solve_wrist_posture(self,target,seed,wrist_joint=-.5):
+        """Use the seventh arm DOF to choose an initial redundant posture."""
+        def residual(q):
+            t=self.forward(q)
+            return np.r_[(t[:3,3]-target[:3,3])*4,Rotation.from_matrix(target[:3,:3].T@t[:3,:3]).as_rotvec(),
+                         (q[-1]-wrist_joint)*.2]
+        result=least_squares(residual,np.clip(seed,self.lower+1e-6,self.upper-1e-6),bounds=(self.lower,self.upper),max_nfev=300)
+        if np.linalg.norm(residual(result.x))>1e-5:
+            alternative,_=self.solve(target)
+            retry=least_squares(residual,np.clip(alternative,self.lower+1e-6,self.upper-1e-6),bounds=(self.lower,self.upper),max_nfev=300)
+            if np.linalg.norm(residual(retry.x))<np.linalg.norm(residual(result.x)):result=retry
+        q=result.x;t=self.forward(q)
+        return q,dict(position_m=float(np.linalg.norm(t[:3,3]-target[:3,3])),
+            rotation_rad=float(Rotation.from_matrix(target[:3,:3].T@t[:3,:3]).magnitude()),
+            wrist_joint_rad=float(q[-1]),joint_margin_rad=float(np.minimum(q-self.lower,self.upper-q).min()))
+
     def level_transport(self,start,end,wrist_in_object,seed,knots=30):
         """Transport with controlled knife pitch instead of joint interpolation.
 

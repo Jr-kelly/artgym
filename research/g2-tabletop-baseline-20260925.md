@@ -2,7 +2,7 @@
 
 续接入口：[G2_TABLETOP_HANDOFF.md](../G2_TABLETOP_HANDOFF.md)。独立分支 `feat/g2-wuji-tabletop-20260925`，本机工程 `/data/research/artgym-g2-tabletop-20260925`，实验目录 `runs/g2-tabletop-v1`。旧成功版本及训练 PID 88339 保留；本阶段没有训练新策略。
 
-截至 2026-09-25 18:00 CST：A 已通过；真实桌面侧夹、抬升、搬运、停稳已通过一个固定案例。该侧夹直接接 teacher 会掉刀，B 全段尚未成功；C 尚未运行。不能把抓取子阶段成功写成 teacher＋student 全流程成功。当前重点是从侧夹连续就位到原功能抓姿。20 次扰动验收尚未开始。
+截至 2026-09-25 18:16 CST：A 已通过；真实桌面侧夹、抬升、搬运、停稳已通过一个固定案例。该侧夹直接接 teacher 和 student 都会掉刀，B/C 全段尚未成功。不能把抓取子阶段成功写成 teacher＋student 全流程成功。当前重点是从侧夹连续就位到原功能抓姿。20 次扰动验收尚未开始。
 
 ## 模型、控制及约束
 
@@ -32,11 +32,13 @@
 | B-normal-seat-grasp0-v13 | 抬升后直接插值就位 | 未操作 | 就位掉落 |
 | B-contact-seat-grasp0-v16 | 抬升后 | 未操作 | 中途 IK 解分支跳跃，门禁中止，保存部分轨迹 |
 | B-yaw90-contact-seat-grasp0-v17 | 抬升成功，就位掉落 | 未操作 | 连续 IK 可达，但自由刀身偏离预规划接触 |
-| C | 尚未执行 | N/A | 先解决 B 的末态与接管 |
+| C-pinch8-student-ideal-grasp0-v21 | 接管前抓取成功 1/1 | 条件开合 0/1，全段 0/1 | 理想初始化；接管后掉刀，0 完整循环，行程 7.543 mm |
 
 v1–v3 的早期 A 失败来自在 `prepare_sim` 前初始化的接口错误，均保留；不能以这些失败证明改物性的必要性。v4 将唯一 episode 初始化移至 prepare 后、首次 simulate 前，并恢复原环境首帧观测语义，A 恢复成功。
 
-`plan_g2_edge_grasp.py` 的几何侧夹约束已从最近顶点改为相对侧面支持点。`plan_g2_seating.py` 求解保持接触的腕部＋手指目标；有界腕部平移调整使中间接触几何残差 <0.1 mm，但物理验证仍失败。v18 仅在就位阶段增加实时仿真物体位姿反馈，明确为 oracle 定位对照，结果待收集。
+`plan_g2_edge_grasp.py` 的几何侧夹约束已从最近顶点改为相对侧面支持点。`plan_g2_seating.py` 求解保持接触的腕部＋手指目标；有界腕部平移调整使中间接触几何残差 <0.1 mm，但物理验证仍失败。v18–v22 的 oracle 位姿反馈依次暴露腕部限位、启动参考不连续及跟随自由刀身旋转导致的跟踪失稳；均保留，未作为成功结果。通过冗余关节7=-0.7 rad、桌面 x=0.45 m / yaw180 找到全路径至少 0.258 rad 限位余量；这仍是正常桌面内部摆放。当前在验证棱边接触方向是否引入不平衡轴向力矩，调整法向路径的 v23 只是待验证假设。
+
+首轮 A/B/C 基线都是固定单案例，无统计泛化结论。B 与 C 的前 600 帧抓取过程另做逐项一致性核对；两者接管后均失败只能缩小到末态/策略接管相关范围，不能据此认定唯一原因。
 
 ## 策略接管与数据来源
 
@@ -101,8 +103,10 @@ python3 -m scripts.launch_g2_trial --name B-oracle-seating-001 -- \
   --teacher weights/g2-frozen/wuji-core-teacher-student-20260924-teacher.pth
 ```
 
-C 的命令是在冻结的 B 命令上改为 `--group C` 并增加 `--student weights/g2-frozen/wuji-core-teacher-student-20260924-student.pth`。当前不把这条可运行接口命令当作已验证的 C 结果。其他 Python 环境通过 launcher 的 `--python /path/to/python` 指定。
+C 的命令是在上述侧夹 B 命令上改为 `--group C` 并增加 `--student weights/g2-frozen/wuji-core-teacher-student-20260924-student.pth`。已完成这一理想初始化失败基线；后续就位方案的 C 尚未运行。其他 Python 环境通过 launcher 的 `--python /path/to/python` 指定。
 
 每次试验自动复制独立源码 pin、保存 SHA256、完整命令及日志。结果包括 `report.json`、`trace.npz`、`takeover.json`、`physics.json`、规划数据和无文字 `continuous.mp4`；中止试验保存 `failure.json` / `partial-trace.npz`。用 Isaac Gym 环境的 Python 执行 `-m scripts.audit_g2_trajectories` 汇总轨迹审计。
+
+Release 增量证据包包含全部结束试验的轨迹、失败日志及去重的源码覆盖文件。历史源码可用 `python3 -m scripts.restore_g2_evidence --evidence /path/to/g2-wuji-tabletop-evidence --trial B-pinch8-teacher-grasp0-v15 --output /new/source/path` 从本仓库恢复，并核对每个文件的 SHA256。
 
 指标分开记录：抬升、抓取到接管、抓取后的条件开合、全段；每个 5 s 端点末 0.3 s 的 10 mm 基本标准与 2 mm 诊断；刀身世界漂移 10 mm / 0.25 rad 稳定、手内相对漂移及掉落。漂移参考仅在接管时固定。没有抓取成功时，条件伸缩为 N/A。首次固定方案真正接通后再冻结、预注册约 20 个位置/朝向变化，保留全部失败。

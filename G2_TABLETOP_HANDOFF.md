@@ -41,3 +41,17 @@ A-g2-integral-v12新伺服复测：40.090mm行程、四端点2mm均过、世界�
 简单手指插值就位B-normal-seat-grasp0-v13抬升后掉落，视频/轨迹保留。尝试保持刀具长轴近水平的B-pinch4-level-grasp0-v14在抬升后规划发生IK解分支跳跃，被连续性门禁中止，保存partial-trace；这是搬运规划失败，不是物理抓取失败。暂不扩大该路线。
 plan_g2_seating.py生成接触保持的腕部+手指路径：固定腕部插值v15中间接触误差达15.5mm；加有界腕部位置调整v16全部接触几何误差<0.1mm。B-contact-seat-grasp0-v16正在真实自由物体仿真，先抓取再8秒就位；没有物体约束、位姿写入或滑块驱动，几何可行不等于物理成功。
 仍未训练、未做C真实操作或20扰动验收，未发布GitHub。下一步收v15/v16结果定位策略接管与手内就位；不要把首次抓取成功写成完整任务成功。
+
+## 18:12 CST 连续IK/就位反馈与发布进展
+
+代码和资产已首次推送GitHub feat/g2-wuji-tabletop-20260925，提交4e740cb，报告research/g2-tabletop-baseline-20260925.md。Release尚未创建；package_g2_evidence.py已实现仅新增证据归档，历史源码用base1482edd+按SHA去重的覆盖文件恢复，不重复上传历史或冻结权重。
+B-pinch8-teacher-grasp0-v15完成：抓取到接管成功1/1，但接管后掉刀，0完整循环，四端点仅伸出端碰巧满足10mm（掉到桌上滑块停在伸出位置），不能当成功。接管相对原功能抓姿位置差8.5mm、旋转约91.7°。C-pinch8-student-ideal-grasp0-v21（PID3288961）正在同一抓取后跑student理想初始化对照，不能先宣称完成。
+B-yaw90-contact-seat-grasp0-v17连续IK已可达，但就位中段掉落。反馈v18/v19分别在第一帧和早期触及腕关节限位，被门禁中止，failure.json/partial-trace保留。改用关节7冗余姿态-0.7rad、刀具正常桌面x=.45,y=-.3,yaw180（仍离桌边150mm）后，完整就位路径关节余量至少0.258rad。v20初始IK分支种子不一致导致预检失败，v21修复初始姿态求解备用种子；不得把预检失败当作一次物理抓取失败。
+B-posture-openloop-grasp0-v21（PID3287326）已抬升，随后就位仍掉落；B-posture-feedback-grasp0-v21在就位0.3s因1.08mm瞬时限速IK残差而中止，尚无掉落证据。v22（PID3294602）保留关节限速，跟踪容差改5mm/0.05rad，并从上次关节目标限制每步变化；这是有界反馈控制允许短暂跟踪误差，不是更改任务的成功阈值。
+新增record_g2_status.py可核对真实本机进程/补记所有结束事件，current-status.json为快照。原训练88339保留。下一步收C、v22；检验反馈就位是否物理可行，再考虑接管。没有新训练、没有20扰动验收；目标仍active，不能仅以发布基线标记完成。
+
+## 18:17 CST 首轮A/B/C收齐，接触力矩假设
+
+C-pinch8-student-ideal-grasp0-v21完成：抓取1/1、条件伸缩0/1、全段0/1，行程7.543mm，0循环，接管后掉落。student SHA022ad8c7b3af18e25681fcd4073c1b48858621470293036df0311c488068e0f5。B/C前600帧q、arm_q、object、wrist、slider、targets逐元素完全相同，证据bc-acquisition-prefix-parity.json。A仍成功，B/C均失败，不代表唯一原因已锁定。
+V22反馈在就位0.53s跟随刀身转动造成38.7mm/0.260rad残差，限速门禁中止。不能继续仅放松容差；完整反馈轨迹保存。开环v21在就位3.7s、进度约46%时突然翻转掉刀，之前刀身位移约3mm、旋转约5°，各指仍接触。几何路径将法向线性转到约40°，但刀身对角棱边径向约23°，可能产生轴向翻转力矩。
+plan_g2_seating新增normal-path=radial，只改变接触方向路径以接近穿过刀身中心的夹持方向。生成contact-seating-radial.json（全程几何残差<0.22mm）。B-radial-seat-grasp0-v23正在运行，默认不使用动态物体反馈；x=.45,yaw180,arm joint7=-.7，其余物性/冻结权重不变。新增假设尚未物理验证。Release准备发布首轮失败基线及完整证据，不意味着goal完成。

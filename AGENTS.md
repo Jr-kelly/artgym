@@ -1,5 +1,7 @@
 # Wuji 美工刀持续实验
 
+当前分支的活动任务为 G2 桌面取刀→冻结策略，先读 [G2_TABLETOP_HANDOFF.md](G2_TABLETOP_HANDOFF.md) 及 `research/g2-tabletop-baseline-20260925.md`。新实验写入 `runs/g2-tabletop-v1`；旧目标记录仅供溯源，不能用旧的预置持刀成功代替当前桌面全段成功。
+
 先读本目录 [WUJI_GOAL_HANDOFF.md](WUJI_GOAL_HANDOFF.md)。这是用户要求的无上下文续接入口。
 每项实验开始/结束、配置/机器变动、结果或失败后更新该文档与
 `runs/wuji-goal/journal/events.jsonl`。同步入口副本 `/data/research/artgym/WUJI_GOAL_HANDOFF.md`
