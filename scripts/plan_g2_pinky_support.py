@@ -17,7 +17,8 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--source',type=Path,required=True);p.add_argument('--prefix',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
     p.add_argument('--finger',choices=['pinky','index'],default='pinky');p.add_argument('--retained-supports',type=int,nargs='+',help='Contact indices in thumb/index/middle/ring/pinky order retained at each new hold.')
     p.add_argument('--ik-seed',choices=['actual','functional'],default='actual',help='One explicit alternative IK branch; only a planning seed, never an initial physical state.')
-    p.add_argument('--surface',choices=['side','underside'],default='side');p.add_argument('--contact-z',type=float);p.add_argument('--held-thumb',action='store_true',help='Candidate2 support is thumb/middle/ring; do not impose the original route thumb-release gate.')
+    p.add_argument('--surface',choices=['side','underside'],default='side');p.add_argument('--contact-z',type=float);p.add_argument('--contact-x',type=float,default=-.005,help='Declared underside transverse point in knife coordinates.')
+    p.add_argument('--held-thumb',action='store_true',help='Candidate2 support is thumb/middle/ring; do not impose the original route thumb-release gate.')
     p.add_argument('--approach-under',action='store_true',help='For underside contact, first reach a point12mm below the touch point, hold, then approach; preserves failed direct interpolation as a separate proposal.')
     a=p.parse_args()
     if a.output.exists():raise ValueError('Preserve previous result')
@@ -27,7 +28,7 @@ def main():
     contact_id=4 if a.finger=='pinky' else 1;indices=np.arange(8,12) if a.finger=='pinky' else np.arange(4)
     if a.surface=='underside':normals[contact_id]=[0,-1,0]
     point=c.contacts(q,relative,normals)[0][contact_id]
-    target=point.copy();target[:2]=[.00965,0] if a.surface=='side' else [-.005,-.00415]
+    target=point.copy();target[:2]=[.00965,0] if a.surface=='side' else [a.contact_x,-.00415]
     target[2]=a.contact_z if a.contact_z is not None else np.clip(point[2],-.055,-.025)
     def surface(v):
         qs=q.copy();qs[indices]=v;return qs,c.contacts(qs,relative,normals)[0][contact_id]

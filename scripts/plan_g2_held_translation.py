@@ -20,9 +20,11 @@ from scripts.g2_table_collision import ArmTableCollision
 def main():
     p=argparse.ArgumentParser();p.add_argument('--source',type=Path,required=True);p.add_argument('--prefix',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
     p.add_argument('--distance',type=float,default=.010);p.add_argument('--stage-prefix',default='held_translation')
+    p.add_argument('--knots',type=int,default=5,help='5..15 geometry knots over the same5s move; refine a rejected interpolation without changing physical thresholds.')
     p.add_argument('--rotation-degrees',type=float,default=0.,help='Independent <=15deg motion toward functional orientation; requires --distance0 and retains opposed support.')
     p.add_argument('--support-fingers',nargs='+',choices=['thumb','index','middle','ring','pinky'],default=['thumb','middle','ring'],help='Actual contacting fingers retained by the coordinated motion; every requested finger must have an observed body contact.')
     a=p.parse_args()
+    if not 5<=a.knots<=15:raise ValueError('Bounded path resolution is5..15 knots')
     if a.output.exists():raise ValueError('Preserve old geometry')
     if not ((0<a.distance<=.010 and a.rotation_degrees==0) or (a.distance==0 and 0<a.rotation_degrees<=15)):
         raise ValueError('Choose one bounded motion: <=10mm translation OR <=15deg rotation')
@@ -53,9 +55,9 @@ def main():
     inactive=[f for f in ['thumb','index','middle','ring','pinky'] if f not in fingers]
     initial_gap={f:min(full.minimum_gap(q0,r0,slider,f),-.00045) for f in fingers};inactive_gap={f:min(full.minimum_gap(q0,r0,slider,f),.0041) for f in inactive}
     lo=np.maximum(w.lower,w.lower-offset);hi=np.minimum(w.upper,w.upper-offset);rows=[];stages=[];arm_table=ArmTableCollision(.75);arm_self=Clearance()
-    for knot in range(1,6):
-        rotation=transform(quaternion=Rotation.from_rotvec(axis*np.deg2rad(a.rotation_degrees)*knot/5).as_quat())
-        relative=rotation@r0;relative[:3,3]+=delta*knot/5
+    for knot in range(1,a.knots+1):
+        rotation=transform(quaternion=Rotation.from_rotvec(axis*np.deg2rad(a.rotation_degrees)*knot/a.knots).as_quat())
+        relative=rotation@r0;relative[:3,3]+=delta*knot/a.knots
         def errors(qv):
             frames=w.forward(qv);pts=[]
             for link,anchor,target in anchors:
@@ -70,7 +72,7 @@ def main():
                 [min(g.minimum_gap(proposed,relative,slider,f)-inactive_gap[f],0)*500 for f in inactive_gap],sg,exact,(v-q[ids])*.005]
         solved=least_squares(residual,np.clip(q[ids],lo[ids]+1e-7,hi[ids]-1e-7),bounds=(lo[ids],hi[ids]),max_nfev=90,diff_step=1e-5);q[ids]=solved.x;command=q+offset
         goal=arm0.copy() if a.rotation_degrees==0 else obj@rotation@np.linalg.inv(obj)@arm0
-        goal[:3,3]+=obj[:3,:3]@delta*knot/5;qa,ik=k.solve_near(goal,qa,max_step=.15)
+        goal[:3,3]+=obj[:3,:3]@delta*knot/a.knots;qa,ik=k.solve_near(goal,qa,max_step=.15)
         gaps={f:full.minimum_gap(q,relative,slider,f) for f in fingers+inactive};badself=[]
         for finger in fingers:
             for s in full.self_gaps(q,finger):
@@ -80,11 +82,11 @@ def main():
                     if radius is None or radius>intersections.get(key,0)+1e-5:badself.append(key)
         valid=bool(np.linalg.norm(errors(q),axis=1).max()<.001 and all(gaps[f]>=initial_gap[f]-.0001 for f in fingers) and all(gaps[f]>=inactive_gap[f] for f in inactive_gap) and not badself and not arm_table.collisions(qa) and not arm_self.collisions(qa) and ik['position_m']<.001 and ik['rotation_rad']<.005)
         rows.append(dict(knot=knot,geometric_ok=valid,nominal_q=q.tolist(),command=command.tolist(),arm_command=qa.tolist(),wrist_in_knife=relative.tolist(),gaps_m=gaps,support_errors_m=np.linalg.norm(errors(q),axis=1).tolist(),new_self_intersections=badself,arm_ik=ik))
-        stages.append(dict(name=a.stage_prefix+'_'+str(knot),kind='move',seconds=1.,moving_indices=ids.tolist(),target=command[ids].tolist(),arm_target=qa.tolist()))
+        stages.append(dict(name=a.stage_prefix+'_'+str(knot),kind='move',seconds=5./a.knots,moving_indices=ids.tolist(),target=command[ids].tolist(),arm_target=qa.tolist()))
         if not valid:break
     meta=dict(source=str(a.source),knife_center_in_hand_start_m=actual_center.tolist(),functional_knife_center_in_hand_m=desired_center.tolist(),planned_wrist_translation_in_knife_m=delta.tolist(),
         rotation_degrees=a.rotation_degrees,rotation_axis_in_knife=axis.tolist(),rows=rows,
-        geometric_pass=bool(len(rows)==5 and rows[-1]['geometric_ok']),support_anchors=[dict(link=l,local_point=v.tolist(),target=p.tolist()) for l,v,p in anchors],
+        geometric_pass=bool(len(rows)==a.knots and rows[-1]['geometric_ok']),knots=a.knots,support_anchors=[dict(link=l,local_point=v.tolist(),target=p.tolist()) for l,v,p in anchors],
         actual_support_fingers=fingers,contact_anchors=[dict(link=l,local_point=v.tolist()) for l,v,p in anchors],support_targets_knife=[p.tolist() for l,v,p in anchors],
         scope='Geometry only, <=10mm translation OR <=15deg wrist rotation retaining the declared actual supports. Original command-minus-measured offsets retained; no physics or initial state changes.')
     contact_order=['thumb','index','middle','ring','pinky']

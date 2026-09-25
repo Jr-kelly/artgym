@@ -11,6 +11,7 @@ from scipy.spatial import ConvexHull
 from scripts.g2_contact_geometry import DigitGeometry
 from scripts.g2_kinematics import G2Kinematics,transform
 from scripts.g2_table_collision import ArmTableCollision
+from scripts.audit_g2_self_clearance import Clearance
 
 
 def intersection_radius(g,q,a,b):
@@ -31,12 +32,14 @@ def main():
     if a.output.exists():raise ValueError('Preserve previous audit')
     plan=json.loads(a.plan.read_text());meta=plan.get('supported_wrist_geometry',plan.get('held_translation_geometry'));source=json.loads(Path(meta['source']).read_text())
     t=np.load(source['source_trace']);i=source['source_step'];physics=json.loads((Path(source['source_trial'])/'physics.json').read_text())
-    g=DigitGeometry(max_face_axes=32);full=DigitGeometry();k=G2Kinematics();table=ArmTableCollision(.75)
+    g=DigitGeometry(max_face_axes=32);full=DigitGeometry();k=G2Kinematics();table=ArmTableCollision(.75);arm_self=Clearance()
     q0=np.array(source['touch_q']);q=q0.copy();qa=t['reference_targets'][i,physics['arm_indices']].astype(float)
     relative0=np.array(source['wrist_in_knife']);obj=transform(t['object'][i,:3],t['object'][i,3:])
     actual_wrist0=obj@relative0;command_wrist0=k.forward(qa)
     base_overlap={};rows=[];previous_command=np.array(source['close_q']);peak_hand=0.;peak_arm=0.
     checked_fingers=meta.get('actual_support_fingers',['middle','ring'])+(['thumb'] if meta.get('free_thumb_avoidance_commands') else [])
+    held='held_translation_geometry' in plan and 'supported_wrist_geometry' not in plan
+    required_gaps={f:min(full.minimum_gap(q0,relative0,float(t['slider'][i]),f),-.00045)-.0001 for f in meta.get('actual_support_fingers',[])} if held else {}
     suffix=plan['stages'][-len(meta['rows'])-1:-1]
     for knot,(row,stage) in enumerate(zip(meta['rows'],suffix)):
         q1=np.array(row['nominal_q']);qa1=np.array(row['arm_command']);command=np.array(row['command'])
@@ -56,19 +59,26 @@ def main():
                  for pair,radius in negative.items() if radius is None or radius>max(base_overlap.get(pair,0) or 0,0)+1e-5]
             gaps={f:g.minimum_gap(qs,relative,float(t['slider'][i]),f) for f in ['thumb','index','middle','ring','pinky']}
             if gaps['thumb']<.0041:gaps['thumb']=full.minimum_gap(qs,relative,float(t['slider'][i]),'thumb')
+            for finger,minimum in required_gaps.items():
+                if gaps[finger]<minimum:gaps[finger]=full.minimum_gap(qs,relative,float(t['slider'][i]),finger)
             points=[];frames=g.w.forward(qs)
             for anchor in meta['contact_anchors']:
                 frame=relative@frames[anchor['link']];points.append(frame[:3,:3]@anchor['local_point']+frame[:3,3])
             rows.append(dict(knot=knot+1,alpha=float(u),gaps_m=gaps,
                 material_point_error_max_m=float(np.linalg.norm(np.array(points)-meta['support_targets_knife'],axis=1).max()),
-                new_or_increased_intersections=new,arm_table=table.collisions(arm)))
+                new_or_increased_intersections=new,arm_table=table.collisions(arm),arm_self=arm_self.collisions(arm)))
         q=q1;qa=qa1;previous_command=command
     out=dict(plan=str(a.plan),samples=rows,peak_hand_command_rad_s=peak_hand,peak_arm_velocity_limit_fraction=peak_arm,
         thumb_min_gap_m=min(r['gaps_m']['thumb'] for r in rows),
         new_or_increased_self_intersections=sum(bool(r['new_or_increased_intersections']) for r in rows),
         arm_table_samples=sum(bool(r['arm_table']) for r in rows),
+        arm_self_collision_samples=sum(bool(r['arm_self']) for r in rows),
         support_material_error_max_m=max(r['material_point_error_max_m'] for r in rows),
         limitation='Sampled nominal joint interpolation with fixed initial arm servo offset. Positive gap conservative; intersection radius is not penetration depth. Physics and contact persistence still required.')
+    if held:
+        out['held_support_gap_lower_bounds_m']=required_gaps
+        out['held_support_gap_violations']=[dict(knot=r['knot'],alpha=r['alpha'],finger=f,gap_m=r['gaps_m'][f],required_m=minimum) for r in rows for f,minimum in required_gaps.items() if r['gaps_m'][f]<minimum]
+        out['held_path_geometric_pass']=bool(not out['held_support_gap_violations'] and not out['new_or_increased_self_intersections'] and not out['arm_table_samples'] and not out['arm_self_collision_samples'] and peak_hand<=2 and peak_arm<=1 and out['support_material_error_max_m']<.001)
     a.output.write_text(json.dumps(out,indent=2)+'\n')
     print(json.dumps({k:v for k,v in out.items() if k!='samples'}))
 

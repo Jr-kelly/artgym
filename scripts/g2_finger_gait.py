@@ -74,8 +74,8 @@ def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,
                 nominal=nominal_start+(goal-nominal_start)*alpha
                 feedback_diagnostic=None
                 if normal_feedback is not None:
-                    measured,_,_,measured_wrist,_,_=current()
-                    command,feedback_diagnostic=normal_feedback.step(nominal,measured,measured_wrist)
+                    measured,_,_,measured_wrist,measured_object,_=current()
+                    command,feedback_diagnostic=normal_feedback.step(nominal,measured,measured_wrist,object_pose=measured_object)
                     targets[hand_idx]=command;feedback_nominal=nominal.copy()
                 else:targets[hand_idx]=nominal
                 if arm_goal is not None:targets[arm_idx]=arm_start+(arm_goal-arm_start)*alpha
