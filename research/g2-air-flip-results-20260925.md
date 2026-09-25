@@ -20,3 +20,5 @@ v3单初值换握几何误差15.47mm，被预检排除，没有物理试验。v4
 下一项有界方案（未执行）：固定v2取刀翻掌前缀，先用拇指＋无名指保持对捏，分步迁移其他支持指，再迁移拇指；先作接触可达性与保持检查。不要继续增加全手同时滚动的反馈增益，也不启动抓取RL或重训teacher。新路线未获得固定完整成功前，不做20次摆放验收，不用旧端立成功替代。
 
 复现命令和详细记录：[g2-air-flip-20260925.md](g2-air-flip-20260925.md)。工作树 `/data/research/artgym-g2-tabletop-20260925`；分支 `feat/g2-wuji-air-flip-20260925`；实验 `runs/g2-air-flip-v1`。原4090训练PID88339保留；本轮没有新训练、4个物理进程均已结束。
+
+发布：[完整视频及本轮证据](https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-sliderdown-air-flip-20260925-v1)；[代码分支](https://github.com/Jr-kelly/artgym/tree/feat/g2-wuji-air-flip-20260925)。9个附件已逐项核验大小和SHA256，不覆盖旧成果。
