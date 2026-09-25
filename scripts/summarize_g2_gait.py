@@ -66,6 +66,7 @@ def main():
                     fractions=stage['contact_fraction_thumb_index_middle_ring_pinky']
                     gate=required is None or fractions[required]==0.
                     if definition.get('require_contact') is not None:gate=gate and fractions[definition['require_contact']]>=.9
+                    gate=gate and all(fractions[i]>=.9 for i in definition.get('require_contacts',[]))
                     if definition.get('require_thumb_gap_m') is not None:
                         gate=gate and stage.get('thumb_gap_min_m',-1)>=definition['require_thumb_gap_m']
                     stage['requested_contact_condition_met']=bool(gate)

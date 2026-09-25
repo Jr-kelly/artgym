@@ -69,6 +69,10 @@ def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,
         if stage['kind']=='hold' and stage.get('require_contact') is not None:
             index=stage['require_contact'];fraction=result['contact_fraction_thumb_index_middle_ring_pinky'][index]
             if fraction<.9:raise ValueError('New contact not established for entire hold: '+stage['name'])
+        if stage['kind']=='hold':
+            for index in stage.get('require_contacts',[]):
+                if result['contact_fraction_thumb_index_middle_ring_pinky'][index]<.9:
+                    raise ValueError('Required support contact not sustained: '+stage['name']+' digit '+str(index))
         if stage['kind']=='hold' and stage.get('require_no_contact') is not None:
             index=stage['require_no_contact'];fraction=result['contact_fraction_thumb_index_middle_ring_pinky'][index]
             if fraction!=0.:raise ValueError('Requested digit did not unload for the full hold: '+stage['name'])
