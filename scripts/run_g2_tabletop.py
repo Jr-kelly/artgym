@@ -60,6 +60,7 @@ def main():
     parser.add_argument('--wrist-posture',type=float,help='Redundant arm joint7 target for initial approach/grasp/lift IK only.')
     parser.add_argument('--seat-at-operation',action='store_true',help='Carry held knife to the trained object attitude before changing grasp contacts.')
     parser.add_argument('--operation-pose',type=Path,help='Explicit wrist 4x4 pose for labeled gravity/interface diagnostics.')
+    parser.add_argument('--post-acquisition-pose',type=Path,help='B/C-only bounded wrist adjustment after acquisition and before history settling; preserves the preceding acquisition path. Hand motor targets stay fixed.')
     parser.add_argument('--seat-finger-feedback',choices=['none','object-truth'],default='none',help='Oracle finger contact correction; requires an inverse-statics plan.')
     parser.add_argument('--seat-object-servo',action='store_true',help='Bounded truth object-pose servo via hand motor targets only, during acquisition.')
     parser.add_argument('--seat-finger-mode',choices=['contact','residual'],default='contact',help='Residual adds only restoring motor corrections to the geometric holding path.')
@@ -92,6 +93,7 @@ def main():
     assert not args.gravity_close_before_takeover or (args.table_regrasp_plan and args.group!='A')
     assert args.gravity_close_support!='tray' or args.gravity_close_before_takeover
     assert abs(args.gravity_close_yaw)<=30
+    assert not args.post_acquisition_pose or (args.group!='A' and args.table_supported_seat)
     cfg=configuration('wuji_acquisition_bridge3_hemisphere',1,
         ['hand=wuji_paper_official_actuator','object=knife_wuji_bridge3_20260922','test=True','rl_device=cpu'],train='wujiAcquisitionSAPG')
     (args.output/'frozen-config.yaml').write_text(OmegaConf.to_yaml(cfg,resolve=True))
@@ -100,6 +102,11 @@ def main():
     s=np.load(ROOT/'caches/initial_grasp/wuji/knife_wuji_bridge3_20260922/000/train/valid_grasps.npy')[args.grasp]
     operation=transform([.40,-.30,1.05],(Rotation.from_euler('z',args.operation_yaw,degrees=True)*Rotation.from_euler('y',-90,degrees=True)*Rotation.from_euler('x',90,degrees=True)).as_quat())
     if args.operation_pose:operation=np.asarray(json.loads(args.operation_pose.read_text()),dtype=float)
+    post_acquisition_pose=None
+    if args.post_acquisition_pose:
+        post_acquisition_pose=np.asarray(json.loads(args.post_acquisition_pose.read_text()),dtype=float)
+        assert np.linalg.norm(post_acquisition_pose[:3,3]-operation[:3,3])<=.020
+        assert Rotation.from_matrix(operation[:3,:3].T@post_acquisition_pose[:3,:3]).magnitude()<=np.deg2rad(15)+1e-8
     op_q,op_error=k.solve(operation)
     assert op_error['position_m']<1e-4 and op_error['rotation_rad']<1e-3,op_error
     table_z=args.table_height
@@ -379,6 +386,7 @@ def main():
                     phases.append(('gravity_close_unload',None,gravity_hold_hand,2))
                 phases.extend([('gravity_close_hold',None,gravity_hold_hand,3),
                                ('gravity_close_restore',None,restored,2),('gravity_close_return',None,restored,8)])
+            if post_acquisition_pose is not None:phases.append(('operation_adjust',None,None,4))
             for label,end_arm,end_hand,seconds in phases:
                 if label=='stand_level':
                     _,_,_,initial_w,initial_o,_=current();level_goal=initial_o.copy()
@@ -422,8 +430,9 @@ def main():
                     continue
                 if args.table_supported_seat and label in ['stand_tip','stand_yaw','stand_orient','stand_lower','support_settle','release_pinch','withdraw',
                     'unload_pinch','free_reorient','functional_approach','functional_touch','functional_close','relift','transport',
-                    'gravity_close_orient','gravity_close_unload','gravity_close_hold','gravity_close_restore','gravity_close_return']:
+                    'gravity_close_orient','gravity_close_unload','gravity_close_hold','gravity_close_restore','gravity_close_return','operation_adjust']:
                     start=k.forward(targets[arm_idx]);start_hand=targets[hand_idx].copy()
+                    if label=='operation_adjust':end_hand=start_hand.copy()
                     if label=='unload_pinch':end_hand=current()[0].copy()
                     if label=='release_pinch' and args.measured_release:
                         from scripts.g2_seating_feedback import ContactCorrection
@@ -460,6 +469,7 @@ def main():
                         (args.output/'functional-approach-reference.json').write_text(json.dumps(dict(object_world=pose(actual_o).tolist(),
                             wrist_world=pose(functional_target).tolist(),localization='one-time simulation truth after actual withdrawal'),indent=2)+'\n')
                     elif label=='functional_approach':desired=functional_target.copy()
+                    elif label=='operation_adjust':desired=post_acquisition_pose.copy()
                     else:desired=operation.copy()
                     rotations=Slerp([0,1],Rotation.from_matrix([start[:3,:3],desired[:3,:3]]))
                     arm_path=[targets[arm_idx].copy()];errors=[]
@@ -699,7 +709,7 @@ def score(trace,takeover,group):
         if len(relift) and not (trace['object'][relift[-15:],2]>table_height+.10).all():
             out['acquisition_stage_failure']='functional_regrasp_not_retained'
         for phase in ['preorient','stand_tip','stand_yaw','stand_orient','stand_lower','support_settle','stand_level','unload_pinch','release_pinch','withdraw','free_reorient',
-            'functional_approach','functional_touch','functional_close','seat','relift','transport','gravity_close_orient','gravity_close_unload','gravity_close_hold','gravity_close_restore','gravity_close_return','settle_history']:
+            'functional_approach','functional_touch','functional_close','seat','relift','transport','gravity_close_orient','gravity_close_unload','gravity_close_hold','gravity_close_restore','gravity_close_return','operation_adjust','settle_history']:
             mask=trace['phase']==phase
             if out['lift_success'] and mask.any() and (trace['object'][mask,2]<table_height+.05).any():
                 out['acquisition_stage_failure']='dropped_during_'+phase;break

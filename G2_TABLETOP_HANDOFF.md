@@ -1,6 +1,6 @@
 # G2＋Wuji 桌面取刀→伸缩（2026-09-25）
 
-分支 feat/g2-wuji-tabletop-20260925；工程 /data/research/artgym-g2-tabletop-20260925；实验 runs/g2-tabletop-v1。当前A成功；v58已连续完成重抓、被动回闭和teacher操作且稳定握持，但回收端未达10mm。v60正在验证操作姿态上倾10°，完整B/C未成功，没有新训练。
+分支 feat/g2-wuji-tabletop-20260925；工程 /data/research/artgym-g2-tabletop-20260925；实验 runs/g2-tabletop-v1。当前A成功；B58连续取刀/重抓/回闭/teacher握持稳定，但回收超10mm；B62改变搬运/操作位后发生刀身翻转，失败。A63先测上倾5°，随后只在原B58获取路径结束后调整腕姿。完整B/C未成功，没有新训练。
 
 任务：固定刀具、固定正常桌面摆放、一个功能抓姿；G2右臂接近/闭合/抬起/移到操作姿态；同一仿真连续状态接冻结teacher再student。模型源 /data/research/ArtBot/G2_crsB_wuji/robot.usd，禁止套用Franka安装或参数。
 
@@ -12,7 +12,7 @@ A预置→teacher；B实际抓取→teacher；C实际抓取→student。先A定�
 
 交付新分支/新Release、运行命令、完整无文字视频/失败视频、轨迹和分类，不覆盖旧结果或历史备份。原4090训练88339保留，运行前重查显存；仅进行有用仿真，不为占用GPU启动无效计算。
 
-当前下一步：收 B-up10-tray-teacher-v60（PID见process.json），A-operation-up10-v59已通过2轮/2mm/稳定。B58保持与开合行程成立，但回收10.95/12.33mm未达10mm；v60只比较操作姿态上倾10度及相应搬运路径。若B通过，再接完全相同抓取的冻结student理想初始化C。尚无完整B/C成功或20扰动。
+当前下一步：收A-operation-up5-v63。若A通过，以B58全部原参数（operation-yaw90、无operation-pose）增加 --post-acquisition-pose runs/g2-tabletop-v1/operation-knife-up5-v63.json 发B64；将新4秒腕部调整放在原回闭返回之后，验证前段逐帧一致性。B62是operation_pose_escape失败，不能重复宣称在途或成功。尚无完整B/C或20扰动验证。
 
 ## 17:13 CST 进度
 
@@ -232,3 +232,31 @@ A/B末端审计a-b-retraction-endpoint-audit-v58.json：B手内刀沿初始刀�
 ## 20:34 CST 上倾10度A通过，B姿态对照启动
 
 A-operation-up10-v59通过20秒两轮、四端点2mm内，世界漂移6.519mm/0.1557rad稳定。B初始接近/抓取/抬升IK与原v58最大差4.6e-9rad，见operation-up10-acquisition-ik-parity-v59.json，非换初始抓法。B-up10-tray-teacher-v60已启动，PID见process.json，除最终操作姿态上倾10度（同时影响前往该姿态/承托往返路径）外保持v58条件。待判断是否修复回收不足；不改10mm阈值，不根据单项对照认定唯一原因。
+
+
+## 20:38 CST 第四份增量Release已核验
+
+https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-tabletop-handoff-20260925-v4 已发布，5附件大小和SHA256均通过；新增5项结束试验，排除前三包71项，证据9.7MB。完整62秒功能重抓诊断及105秒取刀→teacher回收未达标视频已按结果命名，均无文字。B58源码恢复3867文件一致。分支5e29c7a。B60仍在运行，不计为成功或结束试验。
+
+
+## 20:43 CST B60仅搬运IK失败；补做从实际末态出发的整路径筛查
+
+B-up10-tray-teacher-v60已真实重抓并重新抬起，但其负号肘部IK分支在直达上倾10°操作位时触及关节限位，残差2.32mm/0.0114rad，门禁在第1650帧中止。没有执行新姿态teacher，不能认为上倾重力对照无效。之前从A静态IK分支出发的局部路径可达并不适用于B实际分支；已分别记录actual-B-operation-to-up10-v61.json和fixed-wrist-posture尝试，均未放宽门禁。
+
+从B60实际抬升末态的电机参考出发，有限比较4个world yaw与6个±20mm位置候选；全路径保留table凸包碰撞和IK门禁。yaw+15与+30均可达，进一步沿B58实测手刀关系核验承托和返回路径也通过。选+15为较小转动，即操作yaw105、保留刀轴上倾10°；world-z旋转在代数上完全保持手内重力方向，便于区分可达性与重力效果。路径部分经过源关节限位，不能称有充足裕量，仍需物理验证。
+
+A-up10-yaw105-v61先验证该最终操作位，PID见process.json；A通过才发B。矩阵operation-up10-yaw105-v61.json和up10-continuous-pose-candidates-v61.json/up10-yaw-tray-roundtrip-v61.json保存。最新完整B结论仍是v58稳定但回收略超10mm，无C新成功或20扰动。
+
+
+## 20:46 CST 最终候选操作位A通过，B62开始
+
+A-up10-yaw105-v61完成20秒2轮，四端点2mm均过、漂移6.398mm稳定。B-up10-yaw105-teacher-v62已启动，PID见process.json；从实际抬升末态出发的搬运、承托和返回IK已预检通过。此B结果未知，不把A等价当B成功。若B62端点/握持/稳定通过，下一项是相同参数、同一物理抓取段的C学生理想初始化；尚未冻结20扰动方案。
+
+
+## 20:56 CST 新操作位失败与保留抓取路径的后续对照
+
+v62从正常桌面到接管仍抓取成功1/1，但冻结teacher操作后刀身大幅翻转（2.056rad）、世界漂移42.26mm，四端点10.659/29.382/11.036/28.809mm均不合格；未触桌或检测到真正掉落，归类operation_pose_escape，不能把“仍有接触”当稳定。完整105秒视频、轨迹保留。接管关系相对原功能抓姿8.535mm/0.219rad，较v58的6.016mm/0.125rad更偏，改变搬运/承托路径同时改变了末态，不能单独归因重力。
+
+新增可选post-acquisition-pose：保持v58成功获取/承托/回闭/返回路径完全相同，仅在其后用4秒真实G2电机调整腕姿，再停稳、接管。限制额外位移≤20mm/旋转≤15度，手指电机目标保持，零物体状态写入。当前选择上倾5度、原yaw90；从v58真实返回末态电机参考预检，全路径IK位置<12nm/转角<6e-8rad且无臂掌桌碰撞（post-acquisition-up5-preflight-v63.json）。部分源关节边界仍很近，非大裕量方案。A-operation-up5-v63正在先验新腕姿；通过后再发相同旧抓取路径+B后置调整，不改10mm标准。
+
+新增audit_g2_handoff_replay.py从50帧真实执行历史重建冻结策略、仅清零一次RNN，逐帧核对观测/动作/目标及固定参考；B58全部600帧三项误差均0（frozen-replay-B58-v63.json）。轨迹审核FK最大1.06微米/2.81e-6rad，关节命令与实测速度均不越源限速，角度浮点超限2.55e-7rad。该离线回放只证明接口执行一致，不增加物理成功样本。
