@@ -86,6 +86,8 @@ def inspect_trial(root, spec, manifest):
         frames=count, duration_s=float(trace['time'][-1]),
         all_phase_slider_travel_m=float(np.ptp(trace['slider'])),
         operation_frames=int((trace['phase'] == 'operate').sum()),
+        robot_table_contact_frames=int((trace['robot_table_contacts'] > 0).sum()),
+        finger_table_contact_frames=(trace['finger_table_contacts'] > 0).sum(0).tolist(),
         operation=None, initial_lift_success=False, phase_events={})
     table_height = base['table_height']
     for phase in dict.fromkeys(trace['phase']):
@@ -101,7 +103,8 @@ def inspect_trial(root, spec, manifest):
         row['initial_lift_success'] = bool((trace['object'][lift[-15:], 2] > table_height + .10).all())
     # Intentional release and reapproach are excluded from the airborne-drop
     # detector. Distinguish event onset from the later abort/guard location.
-    transfer_phases = ['stand_orient', 'stand_tip', 'stand_yaw', 'preorient', 'seat',
+    transfer_phases = ['stand_orient', 'stand_tip', 'stand_yaw', 'stand_lower',
+                       'support_settle', 'preorient', 'seat', 'relift',
                        'transport', 'gravity_close_orient', 'gravity_close_unload',
                        'gravity_close_hold', 'gravity_close_restore', 'gravity_close_return',
                        'operation_adjust', 'settle_history']
@@ -124,6 +127,12 @@ def inspect_trial(root, spec, manifest):
         row['failure_class'] = 'acquisition_drop_during_' + row['acquisition_drop']['phase']
     elif not final:
         row['failure_class'] = 'acquisition_guard_' + str(row['termination_phase']) if count else 'preflight_or_initialization'
+        support_file = path / 'table-support-check.json'
+        if row['termination_phase'] == 'support_settle' and support_file.exists():
+            support = read(support_file)
+            row['end_support_check'] = support
+            if support['tilt_rad'] > .15 and support['center_height_m'] > table_height + .06:
+                row['failure_class'] = 'end_support_tilt_exceeded'
     op = np.flatnonzero(trace['phase'] == 'operate')
     if len(op):
         assert takeover and op[0] == takeover['step']

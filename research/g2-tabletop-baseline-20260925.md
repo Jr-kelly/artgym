@@ -451,3 +451,10 @@ https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-tabletop-fixed-abc-20260
 当前前6个共享位置/12次已结束，均在策略接管前失败；第06对仍活跃并已经过转腕到下降阶段，尚不能提前判断。首5对独立完整审计small-placement-audit-progress-v2.json确认初次抬起每组5/5、到接管0/5、条件操作未评估（分母0）。所有源码SHA/物性/预声明偏移和视频帧数均核验。
 
 接触诊断small-placement-first6-contact-diagnostic.json显示转腕中拇指仍主要触刀身，滑块被动位置/支持指接触时序却随小偏移改变；不把这一相关性当唯一失败原因。初步证据集中在获取转腕，而非冻结策略/接管接口，未启动任何新训练。待全部20次终态后统一出最终报告。交付核查表research/g2-tabletop-delivery-audit.md已逐项列出证据与剩余验证/发布项。
+
+
+## 22:00 CST 16/20原始轨迹审计，失败分类分化
+
+small-placement-audit-progress-v3.json已核验前8对/16次：B/C各初次抬起8/8、获取到策略接管0/8、条件操作0次（比率null）、整段0/8。编号00–05及07在stand_orient空中掉刀；编号06则保持到桌面，支撑接触100%、刀心0.82088m，但倾角0.43997rad（25.2°）超过原0.15rad，未进入找正/松手，分类end_support_tilt_exceeded。不能一律写成未抓起或所有刀都掉落。
+
+汇总脚本新增明确端立倾斜分类，检测掉落时区分计划放端/主动释放，保留原始guard消息；所有判断仅离线读记录，不改变冻结验证。driver/launcher清单哈希未改变，编号08的两物理进程正在运行，之后仍需编号09，不能提前发布最终成功率。最后两位置完成后生成require-complete最终审核并制作v7；代表失败建议保留00空中掉刀和06端立倾斜，两者24秒无文字视频。
