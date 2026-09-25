@@ -90,6 +90,8 @@ def main():
     parser.add_argument('--table-localization',choices=['configured','settled-truth'],default='configured',help='Acquisition-only ideal localization after natural tabletop settling.')
     parser.add_argument('--gait-plan',type=Path,help='Sequential single-digit motor plan with fixed-reference one-second hold gates after actual air flip.')
     parser.add_argument('--stay-after-gait',action='store_true',help='Keep achieved wrist pose for settling and optional policy operation; no transport.')
+    parser.add_argument('--closeup',action='store_true',help='Additional synchronized camera; follows robot wrist, never affects physics.')
+    parser.add_argument('--contact-diagnostics',action='store_true',help='Record whole-thumb conservative collision separation every control frame.')
     args=parser.parse_args()
     args.output.mkdir(parents=True,exist_ok=False)
     assert not args.hand_only_diagnostic or args.group=='A'
@@ -275,7 +277,7 @@ def main():
     obj_states=np.zeros(1,dtype=gymapi.DofState.dtype);obj_states['pos'][0]=slider_lower+args.preset_slider_offset
     targets=np.zeros(len(names)+1,dtype=np.float32);targets[hand_idx]=closed if args.group=='A' else opened
     targets[arm_idx]=arm[:len(arm_idx)];targets[-1]=slider_lower
-    writer=None;cam=None
+    writer=None;cam=None;close_writer=None;close_cam=None
     if args.video:
         import imageio.v2 as imageio
         cp=gymapi.CameraProperties();cp.width=960;cp.height=720;cp.horizontal_fov=65;cp.use_collision_geometry=False
@@ -284,6 +286,19 @@ def main():
         camera_target=[.35,-.25,1.0] if args.camera=='wide' else [.4,-.3,1.0]
         gym.set_camera_location(cam,env,gymapi.Vec3(*camera_pos),gymapi.Vec3(*camera_target))
         writer=imageio.get_writer(str(args.output/'continuous.mp4'),fps=30,macro_block_size=8)
+        if args.closeup:
+            close_cp=gymapi.CameraProperties();close_cp.width=960;close_cp.height=720;close_cp.horizontal_fov=45
+            close_cam=gym.create_camera_sensor(env,close_cp)
+            close_writer=imageio.get_writer(str(args.output/'hand-closeup.mp4'),fps=30,macro_block_size=8)
+    digit_geometry=None
+    if args.contact_diagnostics:
+        from scripts.g2_contact_geometry import DigitGeometry
+        digit_geometry=DigitGeometry()
+        shape_fields={}
+        for label,actor in [('robot',robot),('knife',knife)]:
+            shape_fields[label]=[{k:float(getattr(v,k)) for k in ['contact_offset','rest_offset','friction','thickness'] if hasattr(v,k)} for v in gym.get_actor_rigid_shape_properties(env,actor)]
+        (args.output/'contact-model.json').write_text(json.dumps(dict(sim_contact_offset=float(sp.physx.contact_offset),sim_rest_offset=float(sp.physx.rest_offset),shapes=shape_fields,
+            gap_definition='Whole-digit link1-4 plus pad collision convex face-axis separation from both knife links; positive lower bound. Release uses contact absence AND clearance beyond configured pair contact offsets.'),indent=2)+'\n')
     gym.prepare_sim(sim)
     # This runtime prepares an articulation when the scene is finalized.
     # Enable sensing after that point, before acquiring the force tensor.
@@ -369,10 +384,19 @@ def main():
             slider=sl,goal=goal,wrist=pose(w),object=pose(o),slider_pose=pose(l),
             table_force=contact[table_id].cpu().numpy().copy(),hand_force=contact[hand_bodies].cpu().numpy().copy(),
             observation=np.zeros(138,dtype=np.float32) if obs is None else obs))
+        if digit_geometry is not None:
+            records[-1]['thumb_gap_lower_bound_m']=digit_geometry.minimum_gap(q,np.linalg.inv(o)@w,sl)
         if writer:
+            if close_cam is not None:
+                camera_target=w[:3,3]+w[:3,:3]@np.array([.035,0,.115])
+                camera_position=camera_target+np.array([.16,-.22,.15])
+                gym.set_camera_location(close_cam,env,gymapi.Vec3(*camera_position),gymapi.Vec3(*camera_target))
             gym.step_graphics(sim);gym.render_all_camera_sensors(sim)
             frame=gym.get_camera_image(sim,env,cam,gymapi.IMAGE_COLOR)
             writer.append_data(np.asarray(frame).reshape(720,960,4)[:,:,:3])
+            if close_writer:
+                frame=gym.get_camera_image(sim,env,close_cam,gymapi.IMAGE_COLOR)
+                close_writer.append_data(np.asarray(frame).reshape(720,960,4)[:,:,:3])
         global_step+=1
         arm_or_palm_table=[name for name in robot_table_links if not any('_'+digit+'_' in name for digit in digits)]
         if arm_or_palm_table:
@@ -749,6 +773,7 @@ def main():
         if records and not (args.output/'trace.npz').exists():
             np.savez_compressed(args.output/'partial-trace.npz',**{k:np.asarray([r[k] for r in records]) for k in records[0]})
         if writer:writer.close()
+        if close_writer:close_writer.close()
         gym.destroy_sim(sim)
 
 

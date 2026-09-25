@@ -13,6 +13,7 @@ def main():
     p.add_argument('--prefix-plan',type=Path,help='Reuse an already physically verified sequence before the new single-digit stages.')
     p.add_argument('--multi-seed',action='store_true',help='Bounded three extra joint-space IK seeds, only for a rejected geometric contact.')
     p.add_argument('--contact-z',type=float,help='Explicit longitudinal bottom-contact location in knife coordinates; preserves the outside-corner clearance path.')
+    p.add_argument('--contact-x',type=float,default=.009,help='Bottom support x coordinate; interior supports must be verified by actual contact normal.')
     p.add_argument('--unload-gap',type=float,default=.004,help='Geometric displacement in m, not measured force; default original 4mm.')
     p.add_argument('--actual-contact-anchor',action='store_true',help='Unload using the material point recorded at the actual contacting link, rather than a mesh extreme.')
     a=p.parse_args();data=json.loads(a.source.read_text());c=ContactCorrection();w=c.w
@@ -63,7 +64,7 @@ def main():
         target=point.copy();target[0]=.0135;target[1]=-.005
         if a.contact_z is not None:target[2]=a.contact_z
         solve('corner_clearance',target,np.array([1.,0.,0.]),2.)
-        target[0]=.009
+        target[0]=a.contact_x
         solve('under_body',target,np.array([0.,-1.,0.]),2.)
         target[1]=-.003
         solve('establish_bottom',target,np.array([0.,-1.,0.]),2.)

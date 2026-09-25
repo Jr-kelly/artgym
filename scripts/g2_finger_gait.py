@@ -57,6 +57,12 @@ def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,
             first_command_delta_rad=float(np.abs(records[first]['reference_targets'][hand_idx]-start).max()),
             reference='Fixed at gait start, including all preceding moves; never refreshed after a move.')
         output_rows.append(result)
+        if 'thumb_gap_lower_bound_m' in records[first]:
+            gaps=np.array([row['thumb_gap_lower_bound_m'] for row in records[first:]])
+            result['thumb_gap_min_m']=float(gaps.min());result['thumb_gap_final_m']=float(gaps[-1])
+            free=np.array([row['finger_knife_contacts'][0]==0 for row in records[first:]])
+            result['thumb_zero_contact_frames']=int(free.sum())
+            if free.any():result['thumb_first_no_contact_time_s']=float(records[first+np.flatnonzero(free)[0]]['time'])
         (output/'gait-checks.json').write_text(json.dumps(dict(stages=output_rows,world_reference=world.tolist(),hand_reference=relative.tolist()),indent=2)+'\n')
         if not result['stable']:raise ValueError('Gait fixed-reference stability failed: '+stage['name'])
         if stage['kind']=='hold' and stage.get('require_contact') is not None:
@@ -65,3 +71,5 @@ def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,
         if stage['kind']=='hold' and stage.get('require_no_contact') is not None:
             index=stage['require_no_contact'];fraction=result['contact_fraction_thumb_index_middle_ring_pinky'][index]
             if fraction!=0.:raise ValueError('Requested digit did not unload for the full hold: '+stage['name'])
+        if stage.get('require_thumb_gap_m') is not None:
+            if result.get('thumb_gap_min_m',-1)<stage['require_thumb_gap_m']:raise ValueError('Whole-thumb clearance below declared margin: '+stage['name'])

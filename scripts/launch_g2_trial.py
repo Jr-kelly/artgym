@@ -14,11 +14,17 @@ def main():
     p.add_argument('--python',default='/home/agiuser/miniconda3/envs/artgym/bin/python')
     p.add_argument('--source-root',type=Path,help='Freeze from an existing verified trial pin rather than the current workspace.')
     p.add_argument('--run-root',type=Path,help='Independent experiment directory; default preserves the original tabletop runs.')
+    p.add_argument('--supervise',action='store_true');p.add_argument('--timeout-seconds',type=float,default=1800)
     p.add_argument('args',nargs=argparse.REMAINDER);a=p.parse_args()
     root=Path(__file__).resolve().parents[1];run=a.run_root.resolve() if a.run_root else root/'runs/g2-tabletop-v1';pin=run/'source-pins'/a.name
     budget=run/'development-budget.json'
     if budget.exists() and len(list(run.glob('*-process.json')))>=json.loads(budget.read_text())['max_launches']:
         raise ValueError('Declared development launch budget exhausted; retain all trials and report the current stage.')
+    task_state=run/'task-state.json';task=json.loads(task_state.read_text()) if task_state.exists() else None
+    if task:
+        if datetime.now(timezone.utc)>=datetime.fromisoformat(task['development_cutoff_utc']):raise ValueError('Development deadline reached; finalize results')
+        prior=[json.loads(f.read_text()) for f in run.glob('*-process.json')]
+        if sum(r.get('round',1)==task['round'] for r in prior)>=task['budgets']['control_round_limit']:raise ValueError('Round budget reached; record direction review before switching round')
     source_root=a.source_root.resolve() if a.source_root else root
     if a.source_root:
         source_manifest=json.loads((source_root/'SOURCE_SHA256.json').read_text())
@@ -42,11 +48,16 @@ def main():
     manifest={str(f.relative_to(pin)):hashlib.sha256(f.read_bytes()).hexdigest() for f in pin.rglob('*') if f.is_file()}
     (pin/'SOURCE_SHA256.json').write_text(json.dumps(manifest,indent=2)+'\n')
     cmd=[py,'-m',a.module,'--output',str(run/a.name)]+args
-    with (run/(a.name+'.log')).open('w') as log:
-        child=subprocess.Popen(cmd,cwd=pin,env=env,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
-    record=dict(started=datetime.now(timezone.utc).isoformat(),pid=child.pid,command=cmd,pin=str(pin),
+    record=dict(started=datetime.now(timezone.utc).isoformat(),pid=None,command=cmd,pin=str(pin),
         source_manifest_sha256=hashlib.sha256((pin/'SOURCE_SHA256.json').read_bytes()).hexdigest())
-    (run/(a.name+'-process.json')).write_text(json.dumps(record,indent=2)+'\n')
+    if task:record.update(round=task['round'],kind='control',deadline_utc=task['development_cutoff_utc'])
+    record_path=run/(a.name+'-process.json');record_path.write_text(json.dumps(record,indent=2)+'\n')
+    with (run/(a.name+'.log')).open('w') as log:
+        launch=([py,'-m','scripts.g2_trial_supervisor','--record',str(record_path),'--timeout',str(a.timeout_seconds)] if a.supervise else cmd)
+        child=subprocess.Popen(launch,cwd=pin,env=env,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
+    if not a.supervise:
+        record['pid']=child.pid;record_path.write_text(json.dumps(record,indent=2)+'\n')
+    else:record['supervisor_pid']=child.pid
     with (run/'events.jsonl').open('a') as f:f.write(json.dumps(dict(event='trial_launched',name=a.name,**record))+'\n')
     print(json.dumps(record))
 
