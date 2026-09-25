@@ -21,6 +21,7 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--source',type=Path,required=True);p.add_argument('--prefix',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
     p.add_argument('--distance',type=float,default=.010);p.add_argument('--stage-prefix',default='held_translation')
     p.add_argument('--rotation-degrees',type=float,default=0.,help='Independent <=15deg motion toward functional orientation; requires --distance0 and retains opposed support.')
+    p.add_argument('--support-fingers',nargs='+',choices=['thumb','index','middle','ring','pinky'],default=['thumb','middle','ring'],help='Actual contacting fingers retained by the coordinated motion; every requested finger must have an observed body contact.')
     a=p.parse_args()
     if a.output.exists():raise ValueError('Preserve old geometry')
     if not ((0<a.distance<=.010 and a.rotation_degrees==0) or (a.distance==0 and 0<a.rotation_degrees<=15)):
@@ -31,13 +32,16 @@ def main():
     functional=np.linalg.inv(transform(cache[40:43],cache[43:47]));rotation_vector=Rotation.from_matrix(functional[:3,:3]@r0[:3,:3].T).as_rotvec()
     axis=rotation_vector/max(np.linalg.norm(rotation_vector),1e-10)
     trial=Path(d['source_trial']);t=np.load(d['source_trace']);i=d['source_step'];physics=json.loads((trial/'physics.json').read_text());qa=t['reference_targets'][i,physics['arm_indices']].astype(float);arm0=k.forward(qa);obj=transform(t['object'][i,:3],t['object'][i,3:]);slider=float(t['slider'][i])
-    raw=[json.loads(v) for v in (trial/'knife-contact-pairs.jsonl').read_text().splitlines()];anchors=[];fingers=['thumb','middle','ring'];ids=np.r_[np.arange(4,8),np.arange(12,20)]
+    raw=[json.loads(v) for v in (trial/'knife-contact-pairs.jsonl').read_text().splitlines()];anchors=[];fingers=a.support_fingers
+    if len(set(fingers))!=len(fingers) or len(fingers)<2:raise ValueError('Choose at least two distinct measured supports')
+    ids=np.array(sorted(w.names.index('hand_r_'+finger+'_joint'+str(j)) for finger in fingers for j in range(1,5)))
     for finger in fingers:
         points=[]
         for row in raw:
             if row['step']!=i:continue
             for side in [0,1]:
                 if '_'+finger+'_' in row['body'+str(side)] and row['body'+str(1-side)]=='link_0':points.append((row['body'+str(side)],np.array(row['localPos'+str(side)])))
+        if not points:raise ValueError('No actual body contact for requested support: '+finger)
         link=max(set(v[0] for v in points),key=lambda l:sum(v[0]==l for v in points));anchor=np.mean([v[1] for v in points if v[0]==link],axis=0);frame=r0@w.forward(q0)[link]
         anchors.append((link,anchor,frame[:3,:3]@anchor+frame[:3,3]))
     baseline={};intersections={}
@@ -46,7 +50,8 @@ def main():
             key=tuple(sorted([s['moving_link'],s['other_link']]));baseline[key]=min(s['gap_lower_bound_m'],0)
             if baseline[key]<0 and key not in intersections:intersections[key]=intersection_radius(g,q0,*key)
     if any(v is None for v in intersections.values()):raise ValueError('Unresolved initial self geometry')
-    initial_gap={f:min(full.minimum_gap(q0,r0,slider,f),-.00045) for f in fingers};inactive_gap={f:min(full.minimum_gap(q0,r0,slider,f),.0041) for f in ['index','pinky']}
+    inactive=[f for f in ['thumb','index','middle','ring','pinky'] if f not in fingers]
+    initial_gap={f:min(full.minimum_gap(q0,r0,slider,f),-.00045) for f in fingers};inactive_gap={f:min(full.minimum_gap(q0,r0,slider,f),.0041) for f in inactive}
     lo=np.maximum(w.lower,w.lower-offset);hi=np.minimum(w.upper,w.upper-offset);rows=[];stages=[];arm_table=ArmTableCollision(.75);arm_self=Clearance()
     for knot in range(1,6):
         rotation=transform(quaternion=Rotation.from_rotvec(axis*np.deg2rad(a.rotation_degrees)*knot/5).as_quat())
@@ -66,7 +71,7 @@ def main():
         solved=least_squares(residual,np.clip(q[ids],lo[ids]+1e-7,hi[ids]-1e-7),bounds=(lo[ids],hi[ids]),max_nfev=90,diff_step=1e-5);q[ids]=solved.x;command=q+offset
         goal=arm0.copy() if a.rotation_degrees==0 else obj@rotation@np.linalg.inv(obj)@arm0
         goal[:3,3]+=obj[:3,:3]@delta*knot/5;qa,ik=k.solve_near(goal,qa,max_step=.15)
-        gaps={f:full.minimum_gap(q,relative,slider,f) for f in fingers+['index','pinky']};badself=[]
+        gaps={f:full.minimum_gap(q,relative,slider,f) for f in fingers+inactive};badself=[]
         for finger in fingers:
             for s in full.self_gaps(q,finger):
                 key=tuple(sorted([s['moving_link'],s['other_link']]))
@@ -81,8 +86,9 @@ def main():
         rotation_degrees=a.rotation_degrees,rotation_axis_in_knife=axis.tolist(),rows=rows,
         geometric_pass=bool(len(rows)==5 and rows[-1]['geometric_ok']),support_anchors=[dict(link=l,local_point=v.tolist(),target=p.tolist()) for l,v,p in anchors],
         actual_support_fingers=fingers,contact_anchors=[dict(link=l,local_point=v.tolist()) for l,v,p in anchors],support_targets_knife=[p.tolist() for l,v,p in anchors],
-        scope='Geometry only, <=10mm translation OR <=15deg wrist rotation with three opposed digits. Original command-minus-measured offsets retained; no physics or initial state changes.')
-    plan=json.loads(a.prefix.read_text());plan['held_translation_geometry']=meta;plan['stages']+=stages+[dict(name=a.stage_prefix+'_support_hold',kind='hold',seconds=1.,require_contacts=[0,2,3])]
+        scope='Geometry only, <=10mm translation OR <=15deg wrist rotation retaining the declared actual supports. Original command-minus-measured offsets retained; no physics or initial state changes.')
+    contact_order=['thumb','index','middle','ring','pinky']
+    plan=json.loads(a.prefix.read_text());plan['held_translation_geometry']=meta;plan['stages']+=stages+[dict(name=a.stage_prefix+'_support_hold',kind='hold',seconds=1.,require_contacts=[contact_order.index(f) for f in fingers])]
     out=a.output if meta['geometric_pass'] else a.output.with_suffix('.rejected.json');out.write_text(json.dumps(plan,indent=2)+'\n')
     print(json.dumps(dict(output=str(out),translation=delta.tolist(),rows=[{k:v for k,v in row.items() if k not in ['nominal_q','command','arm_command','wrist_in_knife']} for row in rows])))
 
