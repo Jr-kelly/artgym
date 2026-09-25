@@ -60,6 +60,10 @@ def main():
     parser.add_argument('--wrist-posture',type=float,help='Redundant arm joint7 target for initial approach/grasp/lift IK only.')
     parser.add_argument('--acquisition-arm-seed',type=Path,help='G2 IK seed for the initial above-table pose; only initialization before physics.')
     parser.add_argument('--cartesian-acquisition',action='store_true',help='Approach/lift through continuous Cartesian IK; close holds the reached arm command. Separate acquisition control condition.')
+    parser.add_argument('--post-gait-roll',type=float,default=0.,help='Declared assembly roll about knife length after successful gait; bound45deg, no object actuation.')
+    parser.add_argument('--assembly-roll-seconds',type=float,default=4.)
+    parser.add_argument('--roll-tracking-correction',action='store_true',help='One bounded motor correction toward the unchanged declared roll endpoint before release; oracle control diagnostic.')
+    parser.add_argument('--post-roll-gait-plan',type=Path,help='Optional motor gait after assembly roll; fixed planned roll endpoint remains world reference.')
     parser.add_argument('--seat-at-operation',action='store_true',help='Carry held knife to the trained object attitude before changing grasp contacts.')
     parser.add_argument('--operation-pose',type=Path,help='Explicit wrist 4x4 pose for labeled gravity/interface diagnostics.')
     parser.add_argument('--operation-seed',type=Path,help='A-only measured G2 joint seed for solving an already reached wrist pose; never changes limits.')
@@ -101,6 +105,9 @@ def main():
     assert args.seat_finger_mode!='residual' or args.seat_object_servo
     assert not args.table_supported_seat or (args.group!='A' and (args.table_regrasp_plan or (args.seating_plan and args.seat_seconds>0)) and not args.seat_at_operation)
     assert not args.table_regrasp_plan or args.table_supported_seat
+    assert not args.post_gait_roll or (args.gait_plan and args.group!='A' and abs(args.post_gait_roll)<=45 and args.assembly_roll_seconds>0)
+    assert not args.post_roll_gait_plan or args.post_gait_roll
+    assert not args.roll_tracking_correction or args.post_gait_roll
     assert (args.preset_slider_offset==0 and args.preset_object_axis_offset==0) or args.group=='A'
     assert not (args.level_standing_knife or args.measured_release) or args.table_regrasp_plan
     assert 5<=args.upright_orient_seconds<=20
@@ -381,6 +388,8 @@ def main():
                 if digit_contact and table_env in pair:finger_table[i]+=1
                 if digit_contact and pair & knife_env:finger_knife[i]+=1
         records.append(dict(time=(global_step+1)*dt,phase=phase,q=q,arm_q=qa,targets=command_targets,reference_targets=reference_targets,action=executed.copy(),
+            all_dof_position=dof[:,0].cpu().numpy().copy(),object_rigid_state=rb[obj_id].cpu().numpy().copy(),
+            slider_rigid_state=rb[slider_id].cpu().numpy().copy(),arm_integral_state=arm_integral.copy(),
             dof_velocity=dof[:,1].cpu().numpy().copy(),dof_effort=efforts.cpu().numpy().copy() if efforts is not None else np.full(len(names)+1,np.nan),
             finger_table_contacts=finger_table,finger_knife_contacts=finger_knife,
             knife_table_contacts=knife_table_count,robot_table_contacts=robot_table_count,
@@ -469,6 +478,15 @@ def main():
                 if label=='finger_gait':
                     from scripts.g2_finger_gait import execute_gait
                     execute_gait(args.gait_plan,args.output,targets,hand_idx,arm_idx,current,tick,records,dt,k,policy.fk,table_z)
+                    if args.post_gait_roll:
+                        from scripts.g2_assembly_roll import execute_roll
+                        reference=execute_roll(k,targets,arm_idx,current,tick,records,dt,arm_table_check,args.output,args.post_gait_roll,args.assembly_roll_seconds)
+                        if args.roll_tracking_correction:
+                            from scripts.g2_assembly_roll import align_to_fixed_goal
+                            align_to_fixed_goal(k,targets,arm_idx,current,tick,records,dt,arm_table_check,args.output,reference)
+                        if args.post_roll_gait_plan:
+                            folder=args.output/'post-roll-gait';folder.mkdir()
+                            execute_gait(args.post_roll_gait_plan,folder,targets,hand_idx,arm_idx,current,tick,records,dt,k,policy.fk,table_z,world_reference=reference)
                     continue
                 if label=='air_flip':
                     from scripts.g2_air_flip import plan_flip, check_flip

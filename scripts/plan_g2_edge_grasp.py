@@ -24,6 +24,7 @@ def main():
     p.add_argument('--squeeze',type=float,default=.002,help='Motor target overtravel per side (m), not a state penetration write.')
     p.add_argument('--allow-close-overtravel',action='store_true')
     p.add_argument('--exclude-finger',choices=FINGERS,action='append',default=[],help='Do not require this digit to pinch; retain its table/body clearance terms and report it explicitly.')
+    p.add_argument('--normal-translation-max',type=float,default=.05,help='Geometric wrist search upper bound along knife normal, not a physics parameter. Expand only for a documented active search-bound rejection.')
     a=p.parse_args();w=WujiKinematics()
     s=np.load(ROOT/'caches/initial_grasp/wuji/knife_wuji_bridge3_20260922/000/train/valid_grasps.npy')[a.grasp]
     meshes={}
@@ -37,7 +38,7 @@ def main():
                       [-.0095,.0035,-.022],[-.0095,.0035,-.047]])
     contact[:,1]=a.contact_height
     lower=np.r_[[-.04,-.02,-.025],[-.35,-.35,-.35],w.lower]
-    upper=np.r_[[.04,.05,.025],[.35,.35,.35],w.upper]
+    upper=np.r_[[.04,a.normal_translation_max,.025],[.35,.35,.35],w.upper]
     x0=np.r_[np.zeros(6),s[:20]].astype(float)
 
     def frames(x):
@@ -91,6 +92,7 @@ def main():
     opened=finger_targets(.012);closed=finger_targets(-a.squeeze)
     report=dict(kind='edge_pinch_geometry_candidate',grasp=a.grasp,roll=a.roll,side_normal=a.side_normal,
         excluded_fingers=a.exclude_finger,active_fingers=[f for f in FINGERS if f not in a.exclude_finger],
+        geometric_normal_translation_max_m=a.normal_translation_max,optimized_wrist_offset=x[:6].tolist(),
         squeeze_m=a.squeeze,allow_close_overtravel=a.allow_close_overtravel,
         wrist_in_knife=wrist.tolist(),touch_q=x[6:].tolist(),open_q=opened.tolist(),close_q=closed.tolist(),
         contact_targets=contact.tolist(),contact_error_m=touch_errors,

@@ -17,7 +17,7 @@ def main():
     p.add_argument('--supervise',action='store_true');p.add_argument('--timeout-seconds',type=float,default=1800)
     p.add_argument('args',nargs=argparse.REMAINDER);a=p.parse_args()
     args=a.args[1:] if a.args and a.args[0]=='--' else a.args
-    input_flags=['--teacher','--student','--grasp-plan','--seating-plan','--operation-pose','--table-regrasp-plan','--post-acquisition-pose','--gait-plan','--operation-seed','--acquisition-arm-seed']
+    input_flags=['--teacher','--student','--grasp-plan','--seating-plan','--operation-pose','--table-regrasp-plan','--post-acquisition-pose','--gait-plan','--operation-seed','--acquisition-arm-seed','--post-roll-gait-plan']
     for flag in input_flags:
         if flag in args:
             i=args.index(flag)+1

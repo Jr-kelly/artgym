@@ -12,6 +12,7 @@ def skew(v):return np.array([[0,-v[2],v[1]],[v[2],0,-v[0]],[-v[1],v[0],0]])
 def main():
     p=argparse.ArgumentParser();p.add_argument('--trial',type=Path,required=True);p.add_argument('--phase',required=True);p.add_argument('--output',type=Path,required=True)
     p.add_argument('--distributed',action='store_true',help='Retain each actual contact point instead of averaging each digit to one point.')
+    p.add_argument('--assembly-roll-deg',type=float,default=0.,help='Hypothetical rigid hand+knife roll about knife length; changes gravity in this static model only, never simulator state.')
     a=p.parse_args()
     trace=a.trial/'trace.npz'
     if not trace.exists():trace=a.trial/'partial-trace.npz'
@@ -39,7 +40,9 @@ def main():
             points.append(dict(finger=finger,link=link,point=point,normal=normal,J=J))
     physics=json.loads((a.trial/'physics.json').read_text());limits=np.asarray(physics['robot_dof_properties']['effort'])[physics['hand_indices']]
     mass=np.array(physics['knife_mass']);slider_center=np.array([0,.0055,.010624586881962734+t['slider'][idx]])
-    com=mass[1]*slider_center/mass.sum();gravity=obj[:3,:3].T@np.array([0,0,-9.81])*mass.sum();external=np.r_[gravity,np.cross(com,gravity)]
+    com=mass[1]*slider_center/mass.sum();gravity=obj[:3,:3].T@np.array([0,0,-9.81])*mass.sum()
+    gravity=Rotation.from_euler('z',-a.assembly_roll_deg,degrees=True).apply(gravity)
+    external=np.r_[gravity,np.cross(com,gravity)]
     tests=[]
     for omit in [[],['thumb'],['thumb','pinky']]:
         selected=[v for v in points if v['finger'] not in omit]
@@ -57,6 +60,7 @@ def main():
                 modeled_joint_torque_max_Nm=float(abs(T@result.x).max()) if result.success else None,
                 modeled_per_finger_normal_N={f:float(sum(v for n,v in zip(names,result.x) if n==f)) for f in set(names)} if result.success else None))
     out=dict(trial=str(a.trial),phase=a.phase,frame=idx,points=[{k:(v.tolist() if isinstance(v,np.ndarray) else v) for k,v in p.items() if k!='J'} for p in points],
+             hypothetical_assembly_roll_deg=a.assembly_roll_deg,
              gravity_in_object_N=gravity.tolist(),com_in_object_m=com.tolist(),whole_thumb_geometry=geom.gaps(q,relative,t['slider'][idx]),support_tests=tests,
              contact_representation='all actual contact points' if a.distributed else 'mean point per digit',
              assumptions='Actual contacts at one frame; 8-ray inscribed friction cone, mu range0.5..3 (robot/knife inputs1/3; effective combine law not inferred). URDF effort caps from effective physics. Zero hand gravity baseline. Unilateral force balance about knife origin, no additional soft-finger moment. Static feasibility not proof of control or stable dynamics; model forces never measured.',

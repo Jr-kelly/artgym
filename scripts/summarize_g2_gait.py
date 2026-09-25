@@ -47,12 +47,15 @@ def main():
                     position_m=float(dp[unstable[0]]),rotation_rad=float(dr[unstable[0]])) if len(unstable) else None
                 row['operation_first_all_finger_contact_loss_s']=float(t['time'][operation[lost[0]]]) if len(lost) else None
                 row['policy_first_command_delta_rad']=float(np.abs(t['reference_targets'][operation[0],ids]-takeover['targets']).max())
-            if (trial/'gait-checks.json').exists():
-                checks=json.loads((trial/'gait-checks.json').read_text());row['gait_stages']=checks['stages']
-                plan=json.loads((trial/'gait-plan.json').read_text())
+            row['gait_stages']=[];row['g1_requested']=False;row['g1_passed']=False
+            for folder in [trial,trial/'post-roll-gait']:
+                if not (folder/'gait-checks.json').exists():continue
+                checks=json.loads((folder/'gait-checks.json').read_text())
+                plan=json.loads((folder/'gait-plan.json').read_text())
+                row['g1_requested']=row['g1_requested'] or any(s.get('require_no_contact')==0 for s in plan['stages'])
                 previous_moving=[]
                 motor_names=['index','middle','pinky','ring','thumb'];contact_names=['thumb','index','middle','ring','pinky']
-                for stage,definition in zip(row['gait_stages'],plan['stages']):
+                for stage,definition in zip(checks['stages'],plan['stages']):
                     moving=definition.get('moving_indices',[])
                     if moving:previous_moving=moving
                     required=definition.get('require_no_contact')
@@ -67,7 +70,16 @@ def main():
                         gate=gate and stage.get('thumb_gap_min_m',-1)>=definition['require_thumb_gap_m']
                     stage['requested_contact_condition_met']=bool(gate)
                     stage['stage_completed']=bool(stage['stable'] and gate)
-                row['first_instability_time_s']=next((v['first_instability_time_s'] for v in checks['stages'] if v['first_instability_time_s'] is not None),None)
+                    stage['check_source']=str(folder.relative_to(trial))
+                    row['gait_stages'].append(stage)
+                    if required==0 and definition.get('seconds',0)>=1 and stage['stage_completed'] and stage.get('thumb_gap_min_m',-1)>=.0041:
+                        row['g1_passed']=True
+            times=[v['first_instability_time_s'] for v in row['gait_stages'] if v['first_instability_time_s'] is not None]
+            if (trial/'assembly-roll-check.json').exists():
+                roll=json.loads((trial/'assembly-roll-check.json').read_text());row['assembly_roll']=roll
+                if roll['first_instability_time_s'] is not None:times.append(roll['first_instability_time_s'])
+                if not roll['success']:row['g1_passed']=False
+            row['first_instability_time_s']=min(times) if times else None
             # Actual contact locations on the knife surface, in that link's local frame.
             contacts=trial/'knife-contact-pairs.jsonl';at_end=[]
             if contacts.exists():

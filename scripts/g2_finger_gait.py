@@ -26,10 +26,10 @@ def stability(rows,world_reference,hand_reference,hand_indices,command_start,mov
         passive_slider_travel_m=float(np.ptp([r['slider'] for r in rows])))
 
 
-def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,fk,table_z):
+def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,fk,table_z,world_reference=None):
     plan=json.loads(path.read_text());(output/'gait-plan.json').write_text(json.dumps(plan,indent=2)+'\n')
-    assert plan['object_reference']=='fixed_world_at_gait_start'
-    q,qa,slider,w,o,_=current();world=o.copy();relative=np.linalg.inv(w)@o
+    assert plan['object_reference']==('fixed_world_at_gait_start' if world_reference is None else 'fixed_planned_assembly_roll_endpoint')
+    q,qa,slider,w,o,_=current();world=o.copy() if world_reference is None else np.asarray(world_reference).copy();relative=np.linalg.inv(w)@o
     initial_command=targets[hand_idx].copy()
     if 'initial_command' in plan:
         error=float(np.abs(initial_command-np.asarray(plan['initial_command'])).max())
@@ -54,8 +54,9 @@ def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,
             tick('gait_'+stage['name'])
         result=stability(records[first:],world,relative,hand_idx,start,moving,table_z)
         result.update(name=stage['name'],kind=stage['kind'],moving_indices=moving,
+            first_time_s=float(records[first]['time']),last_time_s=float(records[-1]['time']),
             first_command_delta_rad=float(np.abs(records[first]['reference_targets'][hand_idx]-start).max()),
-            reference='Fixed at gait start, including all preceding moves; never refreshed after a move.')
+            reference='Fixed at gait start, including all preceding moves; never refreshed after a move.' if world_reference is None else 'Fixed planned assembly-roll endpoint; never refreshed from measured end.')
         output_rows.append(result)
         if 'thumb_gap_lower_bound_m' in records[first]:
             gaps=np.array([row['thumb_gap_lower_bound_m'] for row in records[first:]])

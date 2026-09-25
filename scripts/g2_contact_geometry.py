@@ -47,3 +47,26 @@ class DigitGeometry:
 
     def minimum_gap(self,q,wrist_in_object,slider,finger='thumb'):
         return min(v['gap_lower_bound_m'] for v in self.gaps(q,wrist_in_object,slider,finger))
+
+    def self_gaps(self,q,finger):
+        """Conservative face-axis gaps to other digits; exclude shared palm.
+
+        Positive certifies separation. Negative requires an exact convex
+        intersection check before calling it an intersection.
+        """
+        frames=self.w.forward(q);transformed={}
+        for name,meshes in self.meshes.items():
+            if not any('_'+f+'_' in name for f in ['thumb','index','middle','ring','pinky']):continue
+            frame=frames[name]
+            transformed[name]=[(v@frame[:3,:3].T+frame[:3,3],n@frame[:3,:3].T) for v,n in meshes]
+        result=[]
+        for a,ma in transformed.items():
+            if '_'+finger+'_' not in a:continue
+            for b,mb in transformed.items():
+                if '_'+finger+'_' in b:continue
+                for va,na in ma:
+                    for vb,nb in mb:
+                        axes=np.r_[na,nb];pa=va@axes.T;pb=vb@axes.T
+                        gap=np.maximum(pa.min(0)-pb.max(0),pb.min(0)-pa.max(0)).max()
+                        result.append(dict(moving_link=a,other_link=b,gap_lower_bound_m=float(gap)))
+        return result
