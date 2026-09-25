@@ -37,4 +37,3 @@ python3 wuji-backup-restore.py --backup . --destination ../wuji-restored --reloc
 [代码分支](https://github.com/Jr-kelly/artgym/tree/backup/wuji-full-20260925) · [研究记录和历史Release索引](https://github.com/Jr-kelly/artgym/tree/backup/wuji-full-20260925/docs/wuji)
 
 本次备份保存了失败方案，不意味着它们全部成功。核心teacher+student仿真开合已完成；真实标定、DR和真机部署仍属后续工作。精细CAD不是当前必做前置项。
-
