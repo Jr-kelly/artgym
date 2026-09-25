@@ -1,6 +1,6 @@
 # G2＋Wuji 桌面取刀 → 冻结伸缩策略
 
-2026-09-25：固定 A/B/C 均通过 20 秒两轮的 **10 mm 端点与全程稳定标准**。B/C 尚未全过 2 mm 严格诊断。20 次小变化验证正在运行；这里的 1/1 均为选定的开发单案例，不是泛化成功率。
+2026-09-25：固定 A/B/C 均通过 20 秒两轮的 **10 mm 端点与全程稳定标准**。B/C 尚未全过 2 mm 严格诊断。20 次小变化验证已结束，B/C 各整段 0/10：9 次转腕掉刀、1 次端立倾斜超限，均未接管策略。详见 [最终报告](g2-tabletop-final-report.md)。这里的固定 1/1 均为选定的开发单案例，不是泛化成功率。
 
 | 组别 | 案例 | 抓取 | 抓取后伸缩 | 整段 | 端点最大误差，mm | 行程，mm | 固定参考漂移，mm / rad | 2 mm |
 |---|---|---|---|---|---|---|---|---|
@@ -83,7 +83,7 @@ Launcher 默认 Python 为 `/home/agiuser/miniconda3/envs/artgym/bin/python`。�
 
 [公开清单](g2-small-placement-validation-v1.json) 在第一项验证开始前已提交 `86b191b`；SHA256 为 `20f313a7f96681241a71a6d83b8f9a8db057947f888dbaa9caa7b718a8c5b7a1`。10 个共享位置，x/y±5 mm、yaw±2°，seed 2026092501，每个位置各跑 B/C。使用同一冻结源码与配置，不在该组上调参或更换失败样本。
 
-已有本机清单的续跑命令如下；先核对 `g2-small-placement-v1-driver.json` 中的进程，不能同时启动两个 driver：
+本机清单已全部完成，driver 正常退出；以下命令读取已完成状态而不会重跑失败。其他中断副本续跑前须先核对 driver，不能同时启动两个：
 
 ```bash
 python3 -m scripts.run_g2_small_variations run \
@@ -97,6 +97,8 @@ python3 -m scripts.run_g2_small_variations declare \
   --manifest runs/g2-tabletop-v1/reproduced-small-placement-v1.json \
   --a A-fixed-reproduce-001 --b B-fixed-reproduce-001 --c C-fixed-reproduce-001 \
   --seed 2026092501
+python3 -m scripts.run_g2_small_variations run \
+  --manifest runs/g2-tabletop-v1/reproduced-small-placement-v1.json --concurrency 2
 ```
 
 结果写到清单同目录的 `*-results.json`。所有预声明位置都计入整段分母，包括规划失败；条件操作分母仅含成功获取。原始单案例及全部失败溯源见 [实验记录](g2-tabletop-baseline-20260925.md)，当前进程与下一步见 [续接入口](../G2_TABLETOP_HANDOFF.md)。

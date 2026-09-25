@@ -17,9 +17,9 @@
 | 固定外部时钟和原目标 | `goal` 轨迹、运行脚本、验证汇总独立重算 | 20 秒、每 5 秒换向、下限和下限+40 mm；不依据到位事件切换 |
 | 保留原物性/冻结模型并记录差异 | 物性字节一致检查、源资产审核、既有权重 SHA256；A 源增益对照 | 手刀未改；G2 臂仿真伺服增益/限幅积分有单列对照。手部无重力源设定保留；未真机标定、无新增训练 |
 | 独立分支/目录，保护旧成果及在途训练 | `feat/g2-wuji-tabletop-20260925`、独立工程；原 PID88339 核查记录 | 旧成功 Release 保留；原训练持续运行；原目录仅更新明确的续接入口 |
-| 冻结方案后预声明约 20 次验证 | `research/g2-small-placement-validation-v1.json`，GitHub 提交 `86b191b` 早于首次启动 | 10 个位置各跑 B/C，共 20 次；x/y±5 mm、yaw±2°；同一源码/参数；全部运行结果待收齐 |
-| 三组指标、原始轨迹、失败分类 | 固定 `abc-current-continuous-v67-final.json`；`scripts/summarize_g2_validation.py` | 固定 ABC 已完整；20 次完整终态汇总待完成。初次抬起与获取到接管分列，未到操作指标为 null |
+| 冻结方案后预声明约 20 次验证 | `research/g2-small-placement-validation-v1.json`，GitHub 提交 `86b191b` 早于首次启动 | 10 个位置各跑 B/C，共 20 次；x/y±5 mm、yaw±2°；同一源码/参数；20次已全部结束，所有失败保留，见最终审计与报告 |
+| 三组指标、原始轨迹、失败分类 | 固定 `abc-current-continuous-v67-final.json`；`scripts/summarize_g2_validation.py` | 固定 ABC 已完整；20次终态全部从原始轨迹核验完成。初次抬起与获取到接管分列，未到操作指标为 null |
 | 无文字完整视频及代表失败 | v6 两条 109 秒成功视频；v1–v5 历史失败；20 次各自视频 | 固定成功及旧失败已发布核验；新增验证失败代表视频待 v7 发布 |
-| 可运行代码、复现命令、续接文档和 GitHub | `research/g2-tabletop-fixed-baseline.md`、`G2_TABLETOP_HANDOFF.md`、各源码 pin/命令；独立分支与 v1–v6 | 当前固定阶段交付已核验；待完成 20 次最终报告、增量 v7、最终上传核验，goal 仍 active |
+| 可运行代码、复现命令、续接文档和 GitHub | `research/g2-tabletop-fixed-baseline.md`、`G2_TABLETOP_HANDOFF.md`、各源码 pin/命令；独立分支与 v1–v6 | 当前固定阶段交付已核验；20次最终报告已完成；仅待增量v7与最终上传核验，goal仍active |
 
-本表中的待完成项必须用终态进程、原始轨迹与 GitHub 实际附件补证，不能用计划或中途快照替代。
+所有20次物理试验已终态，原训练仍运行。v7上传尚待实际附件核验，不能用本表替代该证据。

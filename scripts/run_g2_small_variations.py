@@ -140,7 +140,7 @@ def execute(args):
                 else:
                     options += [flag, str(value)]
             subprocess.run([sys.executable, '-m', 'scripts.launch_g2_trial', '--name', row['name'],
-                '--source-root', manifest['source_pin'], '--', *options], cwd=ROOT, check=True)
+                '--python', command[0], '--source-root', manifest['source_pin'], '--', *options], cwd=ROOT, check=True)
             running += 1
         rows = status(manifest)
         groups = {}

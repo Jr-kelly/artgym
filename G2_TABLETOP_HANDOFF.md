@@ -1,6 +1,6 @@
 # G2＋Wuji 桌面取刀→伸缩（2026-09-25）
 
-分支 feat/g2-wuji-tabletop-20260925；工程 /data/research/artgym-g2-tabletop-20260925；实验 runs/g2-tabletop-v1。固定A63/B65/C66全部通过两轮、10mm及全程稳定，B/C未全过2mm；C是理想初始化及仿真定位对照。20次小变化已声明清单，尚未完成；无新训练，goal仍active。
+分支 feat/g2-wuji-tabletop-20260925；工程 /data/research/artgym-g2-tabletop-20260925；实验 runs/g2-tabletop-v1。固定A63/B65/C66两轮10mm/稳定通过，B/C未全过2mm，C是仿真定位及理想初始化。20次小变化已全部完成：每组初抬10/10、到接管0/10、整段0/10，9次转腕掉刀+1次端立倾斜超限；条件伸缩未评估。无新训练，当前待v7增量发布/核验后完成本轮交付。
 
 任务：固定刀具、固定正常桌面摆放、一个功能抓姿；G2右臂接近/闭合/抬起/移到操作姿态；同一仿真连续状态接冻结teacher再student。模型源 /data/research/ArtBot/G2_crsB_wuji/robot.usd，禁止套用Franka安装或参数。
 
@@ -12,7 +12,7 @@ A预置→teacher；B实际抓取→teacher；C实际抓取→student。先A定�
 
 交付新分支/新Release、运行命令、完整无文字视频/失败视频、轨迹和分类，不覆盖旧结果或历史备份。原4090训练88339保留，运行前重查显存；仅进行有用仿真，不为占用GPU启动无效计算。
 
-当前下一步：监测唯一20次验证driver PID67920（g2-small-placement-v1-driver.json/results.json，核实真实子进程）。全部失败/成功保留，不调参；summarize_g2_validation.py可对全部终态生成 --require-complete审计，未进入操作指标为null，区分初次抬起与获取到接管、掉刀事件与后续guard。固定ABC10mm/稳定已发布核验v6；20次结束后发布v7增量（排除前六个manifest）及分组统计/失败分类/诊断图。原训练88339保留。goal仍active直到20次验证、最终报告与增量发布完成。
+当前下一步：20次driver已退出，不重启或重复样本。发布v7增量：排除release-baseline-v1、release-seating-delta-v2、release-table-support-delta-v3、release-continuous-handoff-delta-v4、release-operation-delta-v5、release-fixed-abc-delta-v6的evidence/MANIFEST.json；只收20新case及00/06代表失败视频，附final-report/最终诊断图/CSV。恢复源码验证、GitHub附件SHA核验后更新交付审计，再决定goal complete。泛化失败不能写成已解决；下一项6次转腕时长对照仅建议，未执行。原训练88339保持。
 
 ## 17:13 CST 进度
 
@@ -379,3 +379,12 @@ https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-tabletop-fixed-abc-20260
 small-placement-audit-progress-v3.json已核验前8对/16次：B/C各初次抬起8/8、获取到策略接管0/8、条件操作0次（比率null）、整段0/8。编号00–05及07在stand_orient空中掉刀；编号06则保持到桌面，支撑接触100%、刀心0.82088m，但倾角0.43997rad（25.2°）超过原0.15rad，未进入找正/松手，分类end_support_tilt_exceeded。不能一律写成未抓起或所有刀都掉落。
 
 汇总脚本新增明确端立倾斜分类，检测掉落时区分计划放端/主动释放，保留原始guard消息；所有判断仅离线读记录，不改变冻结验证。driver/launcher清单哈希未改变，编号08的两物理进程正在运行，之后仍需编号09，不能提前发布最终成功率。最后两位置完成后生成require-complete最终审核并制作v7；代表失败建议保留00空中掉刀和06端立倾斜，两者24秒无文字视频。
+
+
+## 22:08 CST 20次全部收齐并通过原始证据审计
+
+验证driver及所有20个子进程正常终态，原训练88339仍活跃。最终small-placement-validation-final-audit.json：B/C各初次抬起10/10、获取到策略接管0/10、整段0/10；条件伸缩分母0，标为未评估。每组9次stand_orient转腕掉刀、1次端立倾斜0.43997rad超0.15rad门禁，均在第720帧support_settle中止。全部视频各720帧/24秒，共14400帧；10对B/C实际获取逐项相同。没有改参数、剔除或重跑样本，源码所有文件/物性/预声明偏移/视频帧数核验通过。
+
+最终报告research/g2-tabletop-final-report.md及20次CSV已生成；固定A63/B65/C66仍为10mm/稳定成功单案例，泛化验证明确失败，C仍理想初始化。独立诊断图small-placement-validation-final-diagnostic.png目视核对完毕。所有原始轨迹和视频保留；拟v7增量只收20个新case，代表视频选00空中掉刀和06端立倾斜，不重复前六包。
+
+本轮无新训练。下一项仅建议对获取转腕时长5→10秒作固定位置+两个已观察失败位置的6次对照，方案未执行，不扩大RL或改本组结果。driver退出后，修正未来跨环境复现的launcher参数显式沿用冻结命令Python路径（--python command[0]），不影响已结束试验或其源码pin；原执行driverSHA记录保留。当前剩余工作仅v7上传/核验、最终文档和goal交付审计。
