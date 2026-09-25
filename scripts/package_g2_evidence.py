@@ -15,17 +15,21 @@ def digest(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True)
+    p.add_argument('--base',default=BASE);p.add_argument('--label',default='v1')
+    p.add_argument('--exclude-manifest',type=Path);p.add_argument('--video-trial',action='append',default=[]);a=p.parse_args()
+    base=a.base;excluded=set(json.loads(a.exclude_manifest.read_text())['trials']) if a.exclude_manifest else set()
     a.output.mkdir(parents=True,exist_ok=False);run=ROOT/'runs/g2-tabletop-v1';stage=a.output/'evidence';stage.mkdir()
-    base_files=set(subprocess.check_output(['git','ls-tree','-r','--name-only',BASE],cwd=ROOT,text=True).splitlines())
-    changed=set(subprocess.check_output(['git','diff',BASE,'--name-only'],cwd=ROOT,text=True).splitlines());cache={};included=[];pending=[]
+    base_files=set(subprocess.check_output(['git','ls-tree','-r','--name-only',base],cwd=ROOT,text=True).splitlines())
+    changed=set(subprocess.check_output(['git','diff',base,'--name-only'],cwd=ROOT,text=True).splitlines());cache={};included=[];pending=[]
     def base_hash(name):
         if name not in base_files:return None
         if name not in cache:
-            value=(subprocess.check_output(['git','show',BASE+':'+name],cwd=ROOT) if name in changed else (ROOT/name).read_bytes())
+            value=(subprocess.check_output(['git','show',base+':'+name],cwd=ROOT) if name in changed else (ROOT/name).read_bytes())
             cache[name]=hashlib.sha256(value).hexdigest()
         return cache[name]
     for pin in sorted((run/'source-pins').iterdir()):
+        if pin.name in excluded:continue
         process=run/(pin.name+'-process.json');info=json.loads(process.read_text()) if process.exists() else {}
         proc=Path('/proc',str(info.get('pid',-1)),'stat')
         alive=proc.exists() and proc.read_text().split(') ')[1][0]!='Z'
@@ -46,19 +50,19 @@ def main():
             blob=stage/'sources/blobs'/sha;blob.parent.mkdir(parents=True,exist_ok=True)
             if not blob.exists():shutil.copyfile(file,blob)
             overrides[name]=sha
-        (dest/'source-overrides.json').write_text(json.dumps(dict(base_commit=BASE,overrides=overrides),indent=2)+'\n')
+        (dest/'source-overrides.json').write_text(json.dumps(dict(base_commit=base,overrides=overrides),indent=2)+'\n')
         shutil.copyfile(pin/'SOURCE_SHA256.json',dest/'SOURCE_SHA256.json')
     diagnostics=stage/'diagnostics';diagnostics.mkdir()
     for file in run.iterdir():
         if file.is_file() and file.suffix=='.json' and not file.name.endswith('-process.json'):shutil.copyfile(file,diagnostics/file.name)
     for file in [ROOT/'G2_TABLETOP_HANDOFF.md',ROOT/'research/g2-tabletop-baseline-20260925.md']:
         shutil.copyfile(file,stage/file.name)
-    manifest=dict(created=datetime.now(timezone.utc).isoformat(),base_commit=BASE,
+    manifest=dict(created=datetime.now(timezone.utc).isoformat(),base_commit=base,excluded_previous_trials=sorted(excluded),
         current_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
         trials=included,pending_trials=pending,models='Reuse wuji-core-teacher-student-20260924-{teacher,student}.pth from release wuji-experiments-20260923',
         source_reconstruction='Checkout base_commit in a new directory, then overlay each path in source-overrides.json from sources/blobs/SHA256; verify SOURCE_SHA256.json.')
     (stage/'MANIFEST.json').write_text(json.dumps(manifest,indent=2)+'\n')
-    archive=a.output/'g2-wuji-tabletop-evidence-v1.tar.gz'
+    archive=a.output/('g2-wuji-tabletop-evidence-'+a.label+'.tar.gz')
     with tarfile.open(archive,'w:gz') as stream:stream.add(stage,arcname='g2-wuji-tabletop-evidence')
     videos={
         'A-g2-initialized-v4':'g2-wuji-A-preset-teacher-20s-success.mp4',
@@ -66,6 +70,7 @@ def main():
         'B-pinch8-teacher-grasp0-v15':'g2-wuji-B-table-pickup-teacher-40s-failure.mp4',
         'C-pinch8-student-ideal-grasp0-v21':'g2-wuji-C-table-pickup-student-ideal-40s.mp4',
         'B-yaw90-contact-seat-grasp0-v17':'g2-wuji-B-contact-seating-28s-failure.mp4'}
+    videos.update({name:'g2-wuji-'+name+'.mp4' for name in a.video_trial})
     for trial,name in videos.items():
         src=run/trial/'continuous.mp4'
         if src.exists() and trial in included:shutil.copyfile(src,a.output/name)

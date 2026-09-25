@@ -1,6 +1,6 @@
 # G2＋Wuji 桌面取刀→伸缩（2026-09-25）
 
-分支 feat/g2-wuji-tabletop-20260925；工程 /data/research/artgym-g2-tabletop-20260925；实验 runs/g2-tabletop-v1。当前资产审计/建模阶段，未进行新训练。
+分支 feat/g2-wuji-tabletop-20260925；工程 /data/research/artgym-g2-tabletop-20260925；实验 runs/g2-tabletop-v1。当前A成功，桌面抓起/搬运已成功，但B/C接管均失败；正在解决侧夹→功能抓姿的连续就位，未进行新训练。
 
 任务：固定刀具、固定正常桌面摆放、一个功能抓姿；G2右臂接近/闭合/抬起/移到操作姿态；同一仿真连续状态接冻结teacher再student。模型源 /data/research/ArtBot/G2_crsB_wuji/robot.usd，禁止套用Franka安装或参数。
 
@@ -12,7 +12,7 @@ A预置→teacher；B实际抓取→teacher；C实际抓取→student。先A定�
 
 交付新分支/新Release、运行命令、完整无文字视频/失败视频、轨迹和分类，不覆盖旧结果或历史备份。原4090训练88339保留，运行前重查显存；仅进行有用仿真，不为占用GPU启动无效计算。
 
-下一步：导出G2结构与右臂URDF（复用原Wuji手），纯观测/动作接口核对与A实验；已有USD中部分joint child frame非identity，需要完整 T_parent_joint @ inverse(T_child_joint) 转换。
+最新下一步见文末：不得重做已完成的导出/A接口恢复；优先收集正在运行的就位压力与半侧滚抓姿实验。下方时间记录保留历史过程。
 
 ## 17:13 CST 进度
 
@@ -55,3 +55,33 @@ B-posture-openloop-grasp0-v21（PID3287326）已抬升，随后就位仍掉落�
 C-pinch8-student-ideal-grasp0-v21完成：抓取1/1、条件伸缩0/1、全段0/1，行程7.543mm，0循环，接管后掉落。student SHA022ad8c7b3af18e25681fcd4073c1b48858621470293036df0311c488068e0f5。B/C前600帧q、arm_q、object、wrist、slider、targets逐元素完全相同，证据bc-acquisition-prefix-parity.json。A仍成功，B/C均失败，不代表唯一原因已锁定。
 V22反馈在就位0.53s跟随刀身转动造成38.7mm/0.260rad残差，限速门禁中止。不能继续仅放松容差；完整反馈轨迹保存。开环v21在就位3.7s、进度约46%时突然翻转掉刀，之前刀身位移约3mm、旋转约5°，各指仍接触。几何路径将法向线性转到约40°，但刀身对角棱边径向约23°，可能产生轴向翻转力矩。
 plan_g2_seating新增normal-path=radial，只改变接触方向路径以接近穿过刀身中心的夹持方向。生成contact-seating-radial.json（全程几何残差<0.22mm）。B-radial-seat-grasp0-v23正在运行，默认不使用动态物体反馈；x=.45,yaw180,arm joint7=-.7，其余物性/冻结权重不变。新增假设尚未物理验证。Release准备发布首轮失败基线及完整证据，不意味着goal完成。
+
+## 18:26 CST 首轮Release已核验，当前在途
+
+已发布 https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-tabletop-baseline-20260925-v1 （prerelease，不覆盖旧Latest）。8附件大小与GitHub SHA256全部通过，验证文件runs/g2-tabletop-v1/release-baseline-v1/publication-verified.json。包括38项已结束记录、A/B/C完整视频及代表性失败；增量证据23.7MB。B/C源码分别恢复3850/3854文件并全部hash相符。分支已推82e6743。
+V23径向法向路径仍就位掉落，比线性版本更早（物体高度<.85发生16.37s，对照16.93s），因此不支持“仅改法向就能解决”假设。不要把此前力矩解释写成已确定唯一根因。
+正在运行B-hold-pressure-seat-grasp0-v24（PID3360663）：相同90度侧夹/线性接触路径，将8mm电机目标预压保持到就位80%，最后20%平滑回到原功能目标。旧路径过早线性降到4mm附近时掉落，故测试压力时序，未改物性或增益。
+B-halfroll-pinch-grasp0-v24为半侧滚抓姿（roll-45几何）首次IK预检失败，未做物理；B-halfroll-free-arm-grasp0-v25（PID3365236）取消不适合该姿态的joint7固定目标，纯自由IK已预检可达，正在实际抓取/搬运。配套seating-halfroll-hold-v25.json由CPU规划中（exec session13433），不是物理成功。
+目前本地未提交变更：plan_g2_seating.py新增squeeze-schedule=hold及本手册。新结果尚未进入首轮Release；下一轮增量包只收新增，不重复上传全历史。目标仍未完成、没有新训练、没有20扰动验证。原训练88339仍保留，GPU持续有用负载。
+
+## 18:43 CST 就位路径新增诊断
+
+v24保持8mm压力到80%仍掉落；v25半侧滚-45抓取/搬运成功，但手臂关节插值有大绕行（joint1变化约4.47rad），不能当最终可接受方案。v26半侧滚换握仍掉落。v27整指分批路径几何误差约20mm，未进入物理。v28小步交替路径几何<1mm，B-wave-seat-grasp0-v30已执行到换握中段，仍发生掉刀，最终报告待收。
+
+B-preoriented-seat-grasp0-v29先把已夹刀转到训练物体朝向再换握，仍掉落，不能归因仅为重力。A-flat-gravity-handonly-v29在同样平躺刀具朝向的预置功能抓姿下10s握持稳定（4.54mm漂移）但回收误差16.14mm，说明重力影响操作但不是换握掉落的充分解释。
+
+新增plan_g2_static_seating.py对已有几何路径做有界逆静力诊断：规划五指接触力满足重力/合力矩与mu1摩擦锥，再用J^T f/Kp转换为电机位置目标；所有物性不变，不把规划力直接施加到手或刀。质心暂近似刀具根坐标，预压拇指1.2N；最大理论关节目标偏移0.129rad。B-static-seat-grasp0-v31已启动，12s换握，需真实物理验证。原训练88339继续，未训练新策略、未20扰动验收。
+
+## 18:49 CST 接触反馈诊断与握持判据
+
+v31逆静力开环仍掉落。v32平移真值反馈在第544控制帧因位置偏离63mm中止，刀身旋转仅0.17rad；简单跟随平移不能消除负载下的持续下沉，禁止只放宽门禁。v33手指接触IK反馈第406帧拇指残差10.3mm中止；查明柔和支持点的导数遗漏了顶点权重变化项。v34修正完整支持点Jacobian，中心差分误差5.14e-11；受力映射仍使用瞬时接触点刚体Jacobian，不能混用两者。B-finger-jacobian-feedback-grasp0-v34正在运行，仍是仿真真值定位对照。
+
+新增g2_tabletop_metrics.acquisition_hold：接管前最后30实际停稳帧/1秒，刀身高于0.85m、手内位置在参考50mm内、相对漂移10mm/0.25rad内、至少90%帧拇指与≥2支持指接触；新运行同时记录刀桌/臂手桌面接触数。功能抓姿旋转差单列，不能掺入抓取成功率隐藏失败。原B/C回查通过，手内停稳漂移0.0049mm，功能姿态仍差91.67°，因此原抓取成功结论不变；旧轨迹未记录刀桌接触时标null。
+
+所有新路径/反馈仅输出有限驱动目标，无直接物体施力或状态重设。没有新训练、未接通B/C、没有20扰动验收。准备以82e6743为base做下一份增量证据，新release不得覆盖第一版。
+
+## 18:51 CST 初始换握参考核查
+
+v34修正Jacobian后仍因拇指接触目标不可达而在换握早期中止，因此v33失败不能仅归于导数漏项。实际抬升末态相比几何侧夹 wrist-in-knife 旋转约8.3°、平移范数约21mm（腕部离刀较远，转角放大平移）；拇指支持点已经在刀身上棱附近，原就位计划却仍从理论侧面接触出发。
+
+新增actual-pinch-lift-v35.json从v31真实抬升末态测量q、腕刀关系及接触法向生成，仅作为换握规划起点，不用于初始化/重设仿真；真正桌面抓取仍沿用原edge-pinch8。plan_g2_seating现允许记录起始法向并逐步过渡。seating-from-actual-v35正在CPU规划，需完成几何门禁后验证真实连续物理。当前无试验成功换握，A/B/C结论不变。

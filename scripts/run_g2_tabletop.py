@@ -18,6 +18,7 @@ from omegaconf import OmegaConf
 from scripts.wuji_goal_common import configuration
 from scripts.g2_kinematics import G2Kinematics,transform
 from scripts.g2_frozen_policy import FrozenPolicy,pose
+from scripts.g2_tabletop_metrics import acquisition_hold
 
 ROOT=Path(__file__).resolve().parents[1]
 PUBLISHED=Path('/data/research/artgym-experiments-20260921/runs/wuji-goal/release-core-teacher-student-20260924-v1')
@@ -55,8 +56,11 @@ def main():
     parser.add_argument('--arm-integral-gain',type=float,default=0.,help='Joint-error integral compensation through existing finite torque drives.')
     parser.add_argument('--transport-path',choices=['joint','level'],default='joint')
     parser.add_argument('--seating-plan',type=Path,help='Contact-guided wrist/finger motor waypoints, executed in air without object constraints.')
-    parser.add_argument('--seat-feedback',choices=['none','object-truth'],default='none',help='Explicit oracle localization control during seating only; not a deployable estimator.')
+    parser.add_argument('--seat-feedback',choices=['none','object-truth','translation-truth'],default='none',help='Explicit oracle localization control during seating only; not a deployable estimator.')
     parser.add_argument('--wrist-posture',type=float,help='Redundant arm joint7 target for initial approach/grasp/lift IK only.')
+    parser.add_argument('--seat-at-operation',action='store_true',help='Carry held knife to the trained object attitude before changing grasp contacts.')
+    parser.add_argument('--operation-pose',type=Path,help='Explicit wrist 4x4 pose for labeled gravity/interface diagnostics.')
+    parser.add_argument('--seat-finger-feedback',choices=['none','object-truth'],default='none',help='Oracle finger contact correction; requires an inverse-statics plan.')
     args=parser.parse_args()
     args.output.mkdir(parents=True,exist_ok=False)
     assert not args.hand_only_diagnostic or args.group=='A'
@@ -67,6 +71,7 @@ def main():
     k=G2Kinematics(); model=json.loads((ROOT/'assets/robots/g2_wuji/audit.json').read_text())
     s=np.load(ROOT/'caches/initial_grasp/wuji/knife_wuji_bridge3_20260922/000/train/valid_grasps.npy')[args.grasp]
     operation=transform([.40,-.30,1.05],(Rotation.from_euler('z',args.operation_yaw,degrees=True)*Rotation.from_euler('y',-90,degrees=True)*Rotation.from_euler('x',90,degrees=True)).as_quat())
+    if args.operation_pose:operation=np.asarray(json.loads(args.operation_pose.read_text()),dtype=float)
     op_q,op_error=k.solve(operation)
     assert op_error['position_m']<1e-4 and op_error['rotation_rad']<1e-3,op_error
     table_z=.75
@@ -266,9 +271,13 @@ def main():
         executed=np.zeros(20,dtype=np.float32) if action is None else action
         policy.record(q,executed)
         finger_table=np.zeros(5,dtype=np.int32);finger_knife=np.zeros(5,dtype=np.int32)
+        knife_table_count=0;robot_table_count=0
         for c in gym.get_env_rigid_contacts(env):
             if c['lambda']<=1e-6:continue
             pair={int(c['body0']),int(c['body1'])}
+            if table_env in pair:
+                if pair & knife_env:knife_table_count+=1
+                elif any(env_names.get(b,'') in rb_names for b in pair):robot_table_count+=1
             if pair & knife_env:
                 v=c['normal']
                 normal=[float(v[name]) for name in ('x','y','z')] if getattr(v.dtype,'names',None) else [float(x) for x in v]
@@ -281,6 +290,7 @@ def main():
         records.append(dict(time=(global_step+1)*dt,phase=phase,q=q,arm_q=qa,targets=command_targets,reference_targets=reference_targets,action=executed.copy(),
             dof_velocity=dof[:,1].cpu().numpy().copy(),dof_effort=efforts.cpu().numpy().copy() if efforts is not None else np.full(len(names)+1,np.nan),
             finger_table_contacts=finger_table,finger_knife_contacts=finger_knife,
+            knife_table_contacts=knife_table_count,robot_table_contacts=robot_table_count,
             slider=sl,goal=goal,wrist=pose(w),object=pose(o),slider_pose=pose(l),
             table_force=contact[table_id].cpu().numpy().copy(),hand_force=contact[hand_bodies].cpu().numpy().copy(),
             observation=np.zeros(138,dtype=np.float32) if obs is None else obs))
@@ -298,9 +308,23 @@ def main():
         if args.group!='A':
             for _ in range(60):tick('table_settle')
             phases=[('approach',grasp_q,opened,4),('close',grasp_q,closed,3),('lift',lift_q,closed,4)]
+            if args.seat_at_operation:phases.append(('preorient',None,closed,5))
             if args.seat_seconds>0:phases.append(('seat',lift_q,functional,args.seat_seconds))
             phases.append(('transport',op_q,functional if args.seat_seconds>0 else closed,5))
             for label,end_arm,end_hand,seconds in phases:
+                if label=='preorient':
+                    q,qa,sl,w,o,l=current();held_relation=np.linalg.inv(o)@w
+                    desired_object=operation@transform(s[40:43],s[43:47])
+                    desired_wrist=desired_object@held_relation
+                    end_arm,error=k.solve(desired_wrist,targets[arm_idx])
+                    if error['position_m']>.001 or error['rotation_rad']>.005 or np.max(np.abs(end_arm-targets[arm_idx]))>3.2:
+                        raise ValueError('Preorientation IK unreachable or large arm branch change: '+str(error))
+                    (args.output/'preorientation-plan.json').write_text(json.dumps(dict(wrist_target=pose(desired_wrist).tolist(),
+                        object_target=pose(desired_object).tolist(),arm_q=end_arm.tolist(),ik=error,
+                        localization='one-time simulation truth at lift end',physics='motor targets only; free object'),indent=2)+'\n')
+                if label=='transport' and args.seat_at_operation:
+                    end_arm,error=k.solve_near(operation,targets[arm_idx])
+                    if error['position_m']>.001 or error['rotation_rad']>.005:raise ValueError('Final local operation IK failed: '+str(error))
                 if label=='seat' and args.seating_plan:
                     seating=json.loads(args.seating_plan.read_text());(args.output/'seating-plan.json').write_text(json.dumps(seating,indent=2)+'\n')
                     q,qa,sl,w,o,l=current();fixed_object_reference=o.copy()
@@ -320,10 +344,16 @@ def main():
                     initial_correction=np.linalg.inv(o)@w@np.linalg.inv(relative_path[0])
                     correction_rotation=Slerp([0,1],Rotation.from_matrix([initial_correction[:3,:3],np.eye(3)]))
                     last_feedback_target=targets[arm_idx].copy()
+                    translation_feedback=np.zeros(3)
+                    finger_feedback=None;finger_feedback_records=[]
+                    if args.seat_finger_feedback!='none':
+                        from scripts.g2_seating_feedback import ContactCorrection
+                        assert 'inverse_statics' in seating
+                        finger_feedback=ContactCorrection()
                     for i in range(steps):
                         loc=(i+1)/steps*count;segment=min(int(loc),count-1);fraction=loc-segment
                         targets[arm_idx]=arm_path[segment]*(1-fraction)+arm_path[segment+1]*fraction
-                        if args.seat_feedback=='object-truth':
+                        if args.seat_feedback!='none':
                             _,qa,_,actual_w,actual_o,_=current()
                             drift=np.linalg.norm(actual_o[:3,3]-fixed_object_reference[:3,3])
                             tilt=Rotation.from_matrix(fixed_object_reference[:3,:3].T@actual_o[:3,:3]).magnitude()
@@ -337,7 +367,13 @@ def main():
                             correction=np.eye(4);correction[:3,:3]=correction_rotation([blend]).as_matrix()[0]
                             correction[:3,3]=initial_correction[:3,3]*(1-blend)
                             relative_pose=correction@relative_pose
-                            desired=actual_o@relative_pose
+                            if args.seat_feedback=='translation-truth':
+                                # Correct measured sag, without chasing free
+                                # object rotation with the seven-joint arm.
+                                translation_feedback=.8*translation_feedback+.2*np.clip(actual_o[:3,3]-fixed_object_reference[:3,3],-.015,.015)
+                                desired=fixed_object_reference@relative_pose
+                                desired[:3,3]+=translation_feedback
+                            else:desired=actual_o@relative_pose
                             motor,err=k.solve_near(desired,last_feedback_target,max_step=np.minimum(k.velocity*dt*.8,.15))
                             # Feedback IK is rate-limited, so small transient
                             # tracking error is expected. Do not confuse a
@@ -346,7 +382,14 @@ def main():
                             last_feedback_target=motor.copy()
                             targets[arm_idx]=motor
                             feedback.append(dict(step=global_step,object_observed=pose(actual_o).tolist(),wrist_target=pose(desired).tolist(),ik=err))
-                        targets[hand_idx]=hand_path[segment]*(1-fraction)+hand_path[segment+1]*fraction
+                        if finger_feedback is not None:
+                            _,_,_,actual_w,actual_o,_=current()
+                            targets[hand_idx],diagnostic=finger_feedback.correct(seating['waypoints'][segment],seating['waypoints'][segment+1],
+                                fraction,np.linalg.inv(actual_o)@actual_w,targets[hand_idx],(i+1)/steps,dt)
+                            finger_feedback_records.append(dict(step=global_step,**diagnostic))
+                            (args.output/'seating-finger-feedback.json').write_text(json.dumps(finger_feedback_records)+'\n')
+                            if diagnostic['max_contact_error_m']>.01:raise ValueError('Oracle finger contact IK error exceeds 10mm: '+str(diagnostic['max_contact_error_m']))
+                        else:targets[hand_idx]=hand_path[segment]*(1-fraction)+hand_path[segment+1]*fraction
                         tick(label)
                         if feedback:
                             (args.output/'seating-feedback.json').write_text(json.dumps(feedback)+'\n')
@@ -379,12 +422,15 @@ def main():
         policy.takeover(q,targets[hand_idx],w,o,l,slider_lower,reference_state=s if args.group=='A' else None)
         policy.previous_slider=sl
         rel=pose(np.linalg.inv(w)@o)
-        grasp_success=bool(o[2,3]>.85 and np.linalg.norm(rel[:3]-s[40:43])<.05)
+        hold_check=acquisition_hold({key:[r[key] for r in records] for key in records[0]},s) if args.group!='A' else None
+        grasp_success=hold_check['success'] if hold_check is not None else True
         takeover=dict(step=global_step,time=global_step*dt,q=q.tolist(),targets=targets[hand_idx].tolist(),
             arm_q=qa.tolist(),object_world=pose(o).tolist(),wrist_world=pose(w).tolist(),object_hand=rel.tolist(),
             grasp_success=grasp_success if args.group!='A' else None,slider_at_takeover=sl,slider_command_origin=slider_lower,
+            acquisition_hold_check=hold_check,
             student_initialization='ideal_simulation_truth_at_takeover' if args.group=='C' else None,
-            acquisition_localization='live simulation object truth during seating' if args.seat_feedback=='object-truth' else 'configured table placement and one-time truth for seating planning',
+            acquisition_localization='live simulation object truth during seating: '+args.seat_feedback if args.seat_feedback!='none' else 'configured table placement and one-time truth for seating planning',
+            acquisition_finger_localization=args.seat_finger_feedback,
             history_frames=len(policy.history),rnn='zeroed once at takeover',history='actual settled q and zero hold actions',
             force_sensor_enabled=force_sensor_enabled,
             hand_gravity='disabled as frozen training',arm_gravity=args.arm_gravity,
@@ -424,13 +470,14 @@ def main():
 def score(trace,takeover,group):
     sel=trace['phase']=='operate'
     out={'grasp_success':takeover['grasp_success'],'operation_steps':int(sel.sum()),
+         'acquisition_hold_check':takeover.get('acquisition_hold_check'),
          'table_contact_peak_N':float(np.linalg.norm(trace['table_force'],axis=-1).max()),
          'max_object_height_m':float(trace['object'][:,2].max())}
     lift=np.where(trace['phase']=='lift')[0]
     out['lift_success']=bool(len(lift) and (trace['object'][lift[-15:],2]>.85).all()) if group!='A' else None
     if group!='A':
         out['acquisition_stage_failure']=None if takeover['grasp_success'] else ('not_lifted' if not out['lift_success'] else 'lost_after_lift')
-        for phase in ['seat','transport','settle_history']:
+        for phase in ['preorient','seat','transport','settle_history']:
             mask=trace['phase']==phase
             if out['lift_success'] and mask.any() and (trace['object'][mask,2]<.80).any():
                 out['acquisition_stage_failure']='dropped_during_'+phase;break

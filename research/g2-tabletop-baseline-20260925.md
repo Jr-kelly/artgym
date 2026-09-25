@@ -2,7 +2,7 @@
 
 续接入口：[G2_TABLETOP_HANDOFF.md](../G2_TABLETOP_HANDOFF.md)。独立分支 `feat/g2-wuji-tabletop-20260925`，本机工程 `/data/research/artgym-g2-tabletop-20260925`，实验目录 `runs/g2-tabletop-v1`。旧成功版本及训练 PID 88339 保留；本阶段没有训练新策略。
 
-截至 2026-09-25 18:16 CST：A 已通过；真实桌面侧夹、抬升、搬运、停稳已通过一个固定案例。该侧夹直接接 teacher 和 student 都会掉刀，B/C 全段尚未成功。不能把抓取子阶段成功写成 teacher＋student 全流程成功。当前重点是从侧夹连续就位到原功能抓姿。20 次扰动验收尚未开始。
+截至 2026-09-25 18:49 CST：A 已通过；真实桌面侧夹、抬升、搬运、停稳已通过一个固定案例。该侧夹直接接 teacher 和 student 都会掉刀，B/C 全段尚未成功。不能把抓取子阶段成功写成 teacher＋student 全流程成功。当前重点是从侧夹连续就位到原功能抓姿。20 次扰动验收尚未开始。
 
 ## 模型、控制及约束
 
@@ -36,7 +36,7 @@
 
 v1–v3 的早期 A 失败来自在 `prepare_sim` 前初始化的接口错误，均保留；不能以这些失败证明改物性的必要性。v4 将唯一 episode 初始化移至 prepare 后、首次 simulate 前，并恢复原环境首帧观测语义，A 恢复成功。
 
-`plan_g2_edge_grasp.py` 的几何侧夹约束已从最近顶点改为相对侧面支持点。`plan_g2_seating.py` 求解保持接触的腕部＋手指目标；有界腕部平移调整使中间接触几何残差 <0.1 mm，但物理验证仍失败。v18–v22 的 oracle 位姿反馈依次暴露腕部限位、启动参考不连续及跟随自由刀身旋转导致的跟踪失稳；均保留，未作为成功结果。通过冗余关节7=-0.7 rad、桌面 x=0.45 m / yaw180 找到全路径至少 0.258 rad 限位余量；这仍是正常桌面内部摆放。当前在验证棱边接触方向是否引入不平衡轴向力矩，调整法向路径的 v23 只是待验证假设。
+`plan_g2_edge_grasp.py` 的几何侧夹约束已从最近顶点改为相对侧面支持点。`plan_g2_seating.py` 求解保持接触的腕部＋手指目标；有界腕部平移调整使中间接触几何残差 <0.1 mm，但物理验证仍失败。v18–v22 的 oracle 位姿反馈依次暴露腕部限位、启动参考不连续及跟随自由刀身旋转导致的跟踪失稳；均保留，未作为成功结果。通过冗余关节7=-0.7 rad、桌面 x=0.45 m / yaw180 找到全路径至少 0.258 rad 限位余量；这仍是正常桌面内部摆放。v23 改接触法向、v24 延迟释放预压、v26 半侧滚换握、v29 先转到训练朝向、v30 分批小幅换握均失败。它们不支持“仅改其中一项就能解决”的解释。v31 逆静力开环仍掉落；v32 平移真值反馈引发持续下沉，位置偏离 63 mm 后中止；v33 手指反馈暴露支持点 Jacobian 漏项并中止，v34 已修正（中心差分误差 5.14e-11），但仍在早期遇到拇指接触不可达，说明导数修复不足以解决问题。v35 按真实抬升末态重建换握起点，正在物理验证。所有失败保留。
 
 首轮 A/B/C 基线都是固定单案例，无统计泛化结论。B 与 C 的前 600 帧抓取过程另做逐项一致性核对；两者接管后均失败只能缩小到末态/策略接管相关范围，不能据此认定唯一原因。
 
@@ -110,3 +110,26 @@ C 的命令是在上述侧夹 B 命令上改为 `--group C` 并增加 `--student
 Release 增量证据包包含全部结束试验的轨迹、失败日志及去重的源码覆盖文件。历史源码可用 `python3 -m scripts.restore_g2_evidence --evidence /path/to/g2-wuji-tabletop-evidence --trial B-pinch8-teacher-grasp0-v15 --output /new/source/path` 从本仓库恢复，并核对每个文件的 SHA256。
 
 指标分开记录：抬升、抓取到接管、抓取后的条件开合、全段；每个 5 s 端点末 0.3 s 的 10 mm 基本标准与 2 mm 诊断；刀身世界漂移 10 mm / 0.25 rad 稳定、手内相对漂移及掉落。漂移参考仅在接管时固定。没有抓取成功时，条件伸缩为 N/A。首次固定方案真正接通后再冻结、预注册约 20 个位置/朝向变化，保留全部失败。
+
+## 后续有限诊断（v23–v34）
+
+v25 半侧滚取刀虽能握持搬运，但关节插值出现较大绕行，未作为冻结方案。v27 大幅逐指换握几何残差约20mm，未进入仿真。v29预先把已持刀移到训练物体朝向后仍换握掉落；A平躺刀具重力诊断握持稳定但回收误差16.14mm，不能把重力认定为唯一根因。
+
+v31规划接触力满足重力及合力矩平衡，再用原Kp与J转成关节目标；接触力仅为计算变量，无直接施力。v33/v34在此基础上用实际物体位姿修正指尖接触，属于理想定位控制。全程原手刀物性、冻结策略不变。v32/v33的界限中止保留部分轨迹与从桌面开始的视频。
+
+新握持判据检查最后一秒实际停稳、刀身离桌、手内漂移和拇指/至少两支持指接触；功能姿态差单列。对原B/C回查仍为抓取1/1、条件操作0/1、全段0/1，无泛化成功率结论。
+
+逆静力诊断复现（已知失败，不是完整方案）：
+
+```bash
+python -m scripts.plan_g2_static_seating \
+  --input assets/robots/g2_wuji/plans/contact-seating-radial.json \
+  --output /tmp/seating-static.json
+python3 -m scripts.launch_g2_trial --name B-static-reproduce-001 -- \
+  --group B --operation-yaw 90 --yaw 180 --dx -.05 --wrist-posture -.7 \
+  --arm-gain-scale 10 --arm-damping-scale 20 --arm-integral-gain 1 \
+  --grasp-plan assets/robots/g2_wuji/plans/edge-pinch8.json \
+  --seat-seconds 12 --seating-plan /tmp/seating-static.json --video --camera hand
+```
+
+更详细逐次参数与完整命令以各试验 `-process.json` 和源码恢复清单为准。下一步仍是解决换握接触过渡；尚无证据需要重训整套teacher。
