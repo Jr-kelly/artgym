@@ -24,7 +24,9 @@ class NormalFeedback:
         self.normal_in_knife=np.asarray(config['normal_in_knife'],dtype=float)
         self.gain=float(config['integral_gain_per_s']);self.limit=float(config['max_correction_rad'])
         self.rate=float(config['max_correction_rate_rad_s']);self.damping=float(config['jacobian_damping_m2'])
-        if not (0<self.gain<=4 and 0<self.limit<=.08 and 0<self.rate<=.2 and self.damping>0):
+        # Existing plans retain0.08rad. The separately recorded saturation
+        # comparison permits0.12rad without changing robot or drive limits.
+        if not (0<self.gain<=4 and 0<self.limit<=.12 and 0<self.rate<=.2 and self.damping>0):
             raise ValueError('Support feedback outside predeclared control bounds')
 
     def point(self,q,wrist):

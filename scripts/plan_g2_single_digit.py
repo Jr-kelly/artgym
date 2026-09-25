@@ -75,9 +75,14 @@ def main():
         method='Move one digit only. Other motor targets and the wrist remain fixed. Geometry uses the actual_contact_anchor if supplied, otherwise a collision mesh support estimate. No measured force inference.')
     if a.prefix_plan:
         prefix=json.loads(a.prefix_plan.read_text())
-        plan['initial_command']=prefix['initial_command']
         for stage in stages:stage['name']=a.finger+'_'+stage['name']
-        plan['stages']=prefix['stages']+stages;plan['prefix']=str(a.prefix_plan)
+        stages[0]['required_initial_hand_command']=cmd.tolist()
+        # Preserve the controllers that generated the physical prefix. Stop
+        # their residual updates at its boundary, retaining the actual target.
+        configs=prefix.get('normal_feedback_segments',([prefix['normal_feedback']] if 'normal_feedback' in prefix else []))
+        for config in configs:config.setdefault('stop_after_stage',prefix['stages'][-1]['name'])
+        plan={**prefix,**plan,'initial_command':prefix['initial_command'],
+            'object_reference':prefix['object_reference'],'stages':prefix['stages']+stages,'prefix':str(a.prefix_plan)}
     a.output.write_text(json.dumps(plan,indent=2)+'\n');print(json.dumps(dict(output=str(a.output),geometry=geometry)))
 
 

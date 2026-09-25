@@ -12,8 +12,10 @@ def skew(v):return np.array([[0,-v[2],v[1]],[v[2],0,-v[0]],[-v[1],v[0],0]])
 def main():
     p=argparse.ArgumentParser();p.add_argument('--trial',type=Path,required=True);p.add_argument('--phase',required=True);p.add_argument('--output',type=Path,required=True)
     p.add_argument('--distributed',action='store_true',help='Retain each actual contact point instead of averaging each digit to one point.')
+    p.add_argument('--wrench-length-scale',type=float,default=1.,help='Equivalent LP row scaling for moment equations, in metres; use to diagnose numerical Unknown statuses, never a physics change.')
     p.add_argument('--assembly-roll-deg',type=float,default=0.,help='Hypothetical rigid hand+knife roll about knife length; changes gravity in this static model only, never simulator state.')
     a=p.parse_args()
+    if a.wrench_length_scale<=0:raise ValueError('Moment row scale must be positive')
     trace=a.trial/'trace.npz'
     if not trace.exists():trace=a.trial/'partial-trace.npz'
     t=np.load(trace);idx=int(np.flatnonzero(t['phase']==a.phase)[-1]);geom=DigitGeometry();q=t['q'][idx].astype(float)
@@ -54,12 +56,14 @@ def main():
                     force=-normal+mu*(np.cos(theta)*u+np.sin(theta)*z)
                     columns.append(np.r_[force,np.cross(v['point'],force)]);torques.append(v['J'].T@force);names.append(v['finger'])
             W=np.array(columns).T;T=np.array(torques).T
-            result=linprog(np.ones(len(columns)),A_eq=W,b_eq=-external,A_ub=np.r_[T,-T],b_ub=np.r_[limits,limits],bounds=(0,None),method='highs')
+            scale=np.r_[np.ones(3),np.full(3,1./a.wrench_length_scale)]
+            result=linprog(np.ones(len(columns)),A_eq=W*scale[:,None],b_eq=-external*scale,A_ub=np.r_[T,-T],b_ub=np.r_[limits,limits],bounds=(0,None),method='highs')
             tests.append(dict(omit=omit,mu=mu,feasible=bool(result.success),solver_message=result.message,
                 modeled_total_normal_force_N=float(result.fun) if result.success else None,
                 modeled_joint_torque_max_Nm=float(abs(T@result.x).max()) if result.success else None,
                 modeled_per_finger_normal_N={f:float(sum(v for n,v in zip(names,result.x) if n==f)) for f in set(names)} if result.success else None))
     out=dict(trial=str(a.trial),phase=a.phase,frame=idx,points=[{k:(v.tolist() if isinstance(v,np.ndarray) else v) for k,v in p.items() if k!='J'} for p in points],
+             wrench_length_scale_m=a.wrench_length_scale,
              hypothetical_assembly_roll_deg=a.assembly_roll_deg,
              gravity_in_object_N=gravity.tolist(),com_in_object_m=com.tolist(),whole_thumb_geometry=geom.gaps(q,relative,t['slider'][idx]),support_tests=tests,
              contact_representation='all actual contact points' if a.distributed else 'mean point per digit',
