@@ -72,3 +72,23 @@ Install it in editable mode:
 ```bash
 pip install -e ./rl_games
 ```
+
+## Prepared H100 development environment
+
+The four-H100 host `ssh -p 30296 wangjiarui@10.14.0.73` has an isolated runtime
+under `/home/wangjiarui/artgym-runtime`, with Python 3.8.20, PyTorch 2.1.0+cu121,
+NumPy 1.23.5 and Isaac Gym TacSL. From `/home/wangjiarui/artgym`, activate it with:
+
+```bash
+source scripts/activate_wuji_runtime.sh
+python -m pip check
+python -m scripts.run_wuji_paper_pipeline --fingertip-filter --gpus 4 \
+  --run-dir runs/wuji_knife_fingertip_4gpu --dry-run
+```
+
+This host uses the CUDA 12.1 build of the same PyTorch release because its
+internal package mirror is reachable. Exact deployed versions and setup scripts
+are recorded in `transfer/environment/h100-installed.txt` and `transfer/`.
+`ARTGYM_RUNTIME_DIR` can override the runtime location. Isaac Gym must be imported
+before PyTorch in simulation programs. See `paper_reproduction.md` for actual
+four-GPU validation, sample budgets and checkpoint continuation rules.

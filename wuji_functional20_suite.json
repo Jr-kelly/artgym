@@ -1,0 +1,75 @@
+{
+  "experiments": {
+    "wuji_functional20_count1_seed21_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_lowgain_functional20_20260922",
+      "train": "wujiAcquisitionSAPG",
+      "task": "wuji_acquisition_official_timed2",
+      "gpus": [
+        2
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "b56997292e3e275ec1552080aab40519c7154aaa96bbf0a0b5a0785c1c94be4f",
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "object.reward.GoalDistance2=0.1",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "seed=20261021",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/diagnostics/functional20-count1-warmstart/teacher.pth",
+        "train.params.config.learning_rate=0.00002"
+      ],
+      "normalizer_count_preflight": 1,
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/functional20-runtime-v2/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/functional20-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/functional20-runtime-v2/report.json"
+      },
+      "comparison": "functional20_normalizer_count_seed21",
+      "purpose": "20physically screened training grasps,1freshheldout. SameCP10 learnedweights/mean/variance, initialRMS count1versus39321601; bothnewAdam/seed20261021/5120env/horizon32/LR2e-5/100epochs/officialgains/support40mrad/fullresetnoise/timed2s. Normalized observations become different during training. This is a training adaptation comparison, not a pretrained zero-shot capability claim. Old5failedvalidation sources retained separately."
+    },
+    "wuji_functional20_countold_seed21_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_lowgain_functional20_20260922",
+      "train": "wujiAcquisitionSAPG",
+      "task": "wuji_acquisition_official_timed2",
+      "gpus": [
+        0
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "38903d492ee7d6c372633ce5584c6ea7703034362f3bab8928e31eda599e977e",
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "object.reward.GoalDistance2=0.1",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "seed=20261021",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/verified-policies/teacher-official-timed2-cp10/teacher.pth",
+        "train.params.config.learning_rate=0.00002"
+      ],
+      "normalizer_count_preflight": 39321601,
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/functional20-runtime-v2/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/functional20-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/functional20-runtime-v2/report.json"
+      },
+      "comparison": "functional20_normalizer_count_seed21",
+      "purpose": "20physically screened training grasps,1freshheldout. SameCP10 learnedweights/mean/variance, initialRMS count1versus39321601; bothnewAdam/seed20261021/5120env/horizon32/LR2e-5/100epochs/officialgains/support40mrad/fullresetnoise/timed2s. Normalized observations become different during training. This is a training adaptation comparison, not a pretrained zero-shot capability claim. Old5failedvalidation sources retained separately.",
+      "start_after_completed": [
+        "wuji_acq_official_duration_variable_v1"
+      ]
+    }
+  }
+}

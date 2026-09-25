@@ -1,0 +1,1088 @@
+{
+  "rules": {
+    "version": "approved_fingertip_v1",
+    "blade_thumb_side_min_dot": 0.82,
+    "max_reference_rotation_deg": 40.0,
+    "max_reference_center_distance_m": 0.035,
+    "min_center_height_m": 0.095,
+    "thumb_travel_m": 0.04,
+    "thumb_reach_tolerance_m": 0.002,
+    "slider_edge_margin_m": 0.001,
+    "validation_seconds": 2.0,
+    "max_drift_m": 0.01,
+    "max_rotation_rad": 0.25,
+    "min_each_fingertip_contact_fraction": 0.9,
+    "max_palm_contact_fraction": 0.0,
+    "contact_sample_control_steps": 3,
+    "contact_force_threshold": 1e-06
+  },
+  "screened_sha256": "8f2231e9de94c7d26ca68d77437a7a1b1303c7639a5bfdd83aae9b18ca3fffba",
+  "screening_sha256": "1324d556502e52c089bb855eb5e5045a19e28974d48030a1d4c64c4ca3eb1894",
+  "physical_signature": {
+    "implementation": "4fcc09a0c008bea88b834ff09afd712e0d5e338dd5ca111fea46325843517bf0",
+    "files": {
+      "isaacgymenvs/tasks/artgrasp.py": "7876b87240fb5cb4c70af977a7d1334523c369b2c2e8b961e79b72f560efee68",
+      "isaacgymenvs/tasks/artmanip.py": "cfc67054876cc5207592612c2fc8f288e774b7da9b148bbae2207f281479ebf9",
+      "isaacgymenvs/tasks/base/vec_task.py": "90233af53998d6125672487c4177f1cd2ec59e4384173669fc45d803320bf573"
+    }
+  },
+  "config": {
+    "name": "artgrasp",
+    "physics_engine": "physx",
+    "env": {
+      "numEnvs": 49,
+      "envSpacing": 0.75,
+      "episodeLength": 61,
+      "enableDebugVis": false,
+      "aggregateMode": 0,
+      "successHoldDurationSec": 1.5,
+      "successHoldDurationRangeSec": [
+        0.0,
+        2.0
+      ],
+      "maxConsecutiveSuccesses": 20,
+      "goalSwitchTimeoutSec": 10.0,
+      "jointNoise": 0,
+      "dofSpeedScale": 1.0,
+      "useRelativeControl": true,
+      "graspSplit": "train",
+      "rewardWeightCurriculum": {
+        "ObjPosDeviation": -5.0,
+        "ObjRotDeviation": -0.2,
+        "StableContact": 0.1
+      },
+      "rewardWeightCurriculumSchedule": {
+        "warmupSteps": 200,
+        "totalSteps": 2000
+      },
+      "binaryTactileThreshold": 0.05,
+      "actionsMovingAverage": 0.01,
+      "controlFrequencyInv": 4,
+      "forceScale": 0,
+      "forceProbRange": [
+        0.001,
+        0.1
+      ],
+      "forceDecay": 0.99,
+      "forceDecayInterval": 0.08,
+      "policyObsDim": 111,
+      "privilegedObsDim": 21,
+      "studentInitObsDim": 55,
+      "proprioHistoryLen": 50,
+      "enableCameraSensors": true,
+      "camera": {
+        "height": 384,
+        "width": 384,
+        "horizontal_fov": 45,
+        "use_collision_geometry": true,
+        "cam_pos": [
+          0.0,
+          0.05,
+          0.75
+        ],
+        "cam_target": [
+          0.0,
+          -0.1,
+          0.5
+        ]
+      },
+      "studentObsDim": 2055,
+      "proprioObsDim": 40,
+      "numObservations": 137,
+      "numStates": 0,
+      "numActions": 20
+    },
+    "task": {
+      "randomize": false,
+      "randomization_params": {}
+    },
+    "sim": {
+      "dt": 0.0083333,
+      "substeps": 4,
+      "up_axis": "z",
+      "use_gpu_pipeline": false,
+      "gravity": [
+        0.0,
+        0.0,
+        -9.81
+      ],
+      "physx": {
+        "num_threads": 4,
+        "solver_type": 1,
+        "use_gpu": true,
+        "num_position_iterations": 16,
+        "num_velocity_iterations": 4,
+        "max_gpu_contact_pairs": 8388608,
+        "num_subscenes": 4,
+        "contact_offset": 0.002,
+        "rest_offset": 0.0,
+        "bounce_threshold_velocity": 0.2,
+        "max_depenetration_velocity": 1000.0,
+        "default_buffer_size_multiplier": 5.0,
+        "contact_collection": 2
+      }
+    },
+    "hand": {
+      "type": "wuji",
+      "asset": "assets/hands/wuji_artbot/right.urdf",
+      "self_collisions": true,
+      "force_links": [
+        "hand_r_thumb_pad_link",
+        "hand_r_index_pad_link",
+        "hand_r_middle_pad_link",
+        "hand_r_ring_pad_link",
+        "hand_r_pinky_pad_link"
+      ],
+      "track_links": [
+        "hand_r_thumb_pad_link",
+        "hand_r_index_pad_link",
+        "hand_r_middle_pad_link",
+        "hand_r_ring_pad_link",
+        "hand_r_pinky_pad_link"
+      ],
+      "dof_names": [
+        "hand_r_index_joint1",
+        "hand_r_index_joint2",
+        "hand_r_index_joint3",
+        "hand_r_index_joint4",
+        "hand_r_middle_joint1",
+        "hand_r_middle_joint2",
+        "hand_r_middle_joint3",
+        "hand_r_middle_joint4",
+        "hand_r_pinky_joint1",
+        "hand_r_pinky_joint2",
+        "hand_r_pinky_joint3",
+        "hand_r_pinky_joint4",
+        "hand_r_ring_joint1",
+        "hand_r_ring_joint2",
+        "hand_r_ring_joint3",
+        "hand_r_ring_joint4",
+        "hand_r_thumb_joint1",
+        "hand_r_thumb_joint2",
+        "hand_r_thumb_joint3",
+        "hand_r_thumb_joint4"
+      ],
+      "dof_props": {
+        "stiffness": [
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238
+        ],
+        "damping": [
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332
+        ],
+        "friction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "armature": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "task": {
+        "numActions": 20,
+        "propDim": 40,
+        "policyObsDim": 111,
+        "studentInitObsDim": 55
+      },
+      "randomization": {
+        "randomize": false
+      },
+      "self_collision_mode": "digit_filtered"
+    },
+    "object": {
+      "task": {
+        "success_threshold": 0.005,
+        "rot_devia_threshold": 1.57,
+        "pos_devia_threshold": 0.05,
+        "goals": [
+          0.04,
+          0.0
+        ],
+        "contact_num": 5
+      },
+      "asset": {
+        "type": "knife",
+        "asset_root": "assets/objects/knife_wuji_fingertip",
+        "instance_id_list": [
+          "026"
+        ],
+        "asset_file": "mobility.urdf",
+        "initDof": "lower",
+        "disgravity_part": [],
+        "disfriction_part": [],
+        "disrbforce_part": [],
+        "dissimulate_part": []
+      },
+      "default_props": {
+        "mass": [
+          0.029,
+          0.006
+        ],
+        "friction": 3.0,
+        "dof_stiffness": 0.0,
+        "dof_damping": 1000.0
+      },
+      "randomization": {
+        "randomize": false,
+        "dof_properties": {
+          "damping": {
+            "range": [
+              0.7,
+              1.3
+            ],
+            "operation": "scaling",
+            "distribution": "uniform"
+          }
+        },
+        "rigid_body_properties": {
+          "by_body": {
+            "link_0": {
+              "mass": {
+                "range": [
+                  0.7,
+                  1.3
+                ],
+                "operation": "scaling",
+                "distribution": "uniform"
+              }
+            },
+            "link_1": {
+              "mass": {
+                "range": [
+                  0.7,
+                  1.3
+                ],
+                "operation": "scaling",
+                "distribution": "uniform"
+              }
+            }
+          }
+        },
+        "rigid_shape_properties": {
+          "friction": {
+            "num_buckets": 250,
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "operation": "additive",
+            "distribution": "uniform"
+          }
+        }
+      },
+      "reward": {
+        "ObjPosDeviation": -50.0,
+        "ObjRotDeviation": -2.0,
+        "StableContact": 1.0,
+        "HandQposDeviation": -0.001,
+        "GoalDistance1": 1000.0,
+        "GoalDistance2": 1.0,
+        "Smooth": -1.0,
+        "Drop": -1.0,
+        "Success": 50.0
+      }
+    },
+    "train": {
+      "params": {
+        "seed": 42,
+        "algo": {
+          "name": "a2c_continuous"
+        },
+        "model": {
+          "name": "continuous_a2c_logstd"
+        },
+        "network": {
+          "name": "actor_critic_sapg_priv",
+          "separate": true,
+          "space": {
+            "continuous": {
+              "mu_activation": "None",
+              "sigma_activation": "None",
+              "mu_init": {
+                "name": "default"
+              },
+              "sigma_init": {
+                "name": "const_initializer",
+                "val": 0
+              },
+              "fixed_sigma": "coef_cond"
+            }
+          },
+          "mlp": {
+            "units": [
+              512,
+              256,
+              128
+            ],
+            "activation": "elu",
+            "d2rl": false,
+            "initializer": {
+              "name": "default"
+            },
+            "regularizer": {
+              "name": "None"
+            }
+          },
+          "rnn": {
+            "name": "lstm",
+            "units": 512,
+            "layers": 1,
+            "before_mlp": true,
+            "layer_norm": true
+          },
+          "sapg_priv": {
+            "policy_obs_dim": 111,
+            "privileged_obs_dim": 21,
+            "critic_policy_contact_dim": 5,
+            "expl_embedding_dim": 32,
+            "encoder": {
+              "units": [
+                256,
+                128,
+                16
+              ],
+              "activation": "elu",
+              "initializer": {
+                "name": "default"
+              }
+            },
+            "student_encoder": {
+              "type": "auto",
+              "init_dim": 55,
+              "proprio_encoder": {
+                "units": [
+                  128,
+                  64
+                ],
+                "activation": "elu",
+                "initializer": {
+                  "name": "default"
+                }
+              },
+              "init_encoder": {
+                "units": [
+                  128,
+                  64
+                ],
+                "activation": "elu",
+                "initializer": {
+                  "name": "default"
+                }
+              },
+              "temporal": {
+                "type": "tconv",
+                "hidden_size": 192,
+                "num_layers": 5,
+                "kernel_size": 3,
+                "dilation_growth": 2,
+                "activation": "elu",
+                "dropout": 0.05
+              },
+              "latent_head": {
+                "units": [
+                  128
+                ],
+                "activation": "elu",
+                "initializer": {
+                  "name": "default"
+                }
+              }
+            }
+          }
+        },
+        "load_checkpoint": false,
+        "load_path": "",
+        "config": {
+          "name": "artmanipSAPGPrivLSTMPPO",
+          "full_experiment_name": "artmanipSAPGPrivLSTMPPO",
+          "env_name": "rlgpu",
+          "multi_gpu": false,
+          "ppo": true,
+          "mixed_precision": false,
+          "normalize_input": true,
+          "normalize_value": true,
+          "value_bootstrap": false,
+          "num_actors": 49,
+          "reward_shaper": {
+            "scale_value": 1.0
+          },
+          "normalize_advantage": true,
+          "gamma": 0.998,
+          "tau": 0.95,
+          "learning_rate": 0.0002,
+          "lr_schedule": "adaptive",
+          "schedule_type": "standard",
+          "kl_threshold": 0.016,
+          "score_to_win": 100000,
+          "max_epochs": 50000,
+          "save_best_after": 50,
+          "save_frequency": 100,
+          "print_stats": true,
+          "grad_norm": 1.0,
+          "entropy_coef": 0,
+          "truncate_grads": true,
+          "e_clip": 0.2,
+          "horizon_length": 16,
+          "minibatch_size": 8192,
+          "mini_epochs": 4,
+          "critic_coef": 4,
+          "clip_value": true,
+          "seq_length": 16,
+          "bounds_loss_coef": 0.0001,
+          "defer_summaries_sec": 5,
+          "summaries_interval_sec_min": 5,
+          "summaries_interval_sec_max": 100,
+          "expl_type": "mixed_expl_learn_param",
+          "player": {
+            "deterministic": true,
+            "use_vecenv": true,
+            "games_num": 1000000,
+            "print_stats": false
+          },
+          "use_others_experience": "lf",
+          "off_policy_ratio": 1.0,
+          "expl_reward_type": "entropy",
+          "expl_reward_coef_scale": 0.005,
+          "expl_coef_block_size": 512
+        }
+      }
+    },
+    "experiment": ""
+  },
+  "seed": 20260920,
+  "steps": 60,
+  "contact_samples": 20,
+  "physical_engine": "ArtGrasp/PhysX, nominal paper friction 3, damping 1000, gravity, filtered hand collisions",
+  "count": 49,
+  "valid": 47,
+  "train": 42,
+  "test": 5,
+  "accepted_source_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    8,
+    9,
+    10,
+    11,
+    18,
+    19,
+    26,
+    27,
+    30,
+    31,
+    32,
+    34,
+    35,
+    36,
+    37,
+    39,
+    40,
+    41,
+    42,
+    43,
+    45,
+    46,
+    47,
+    48,
+    49,
+    54,
+    55,
+    58,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    72,
+    88,
+    97,
+    98,
+    99,
+    101,
+    102
+  ],
+  "contact_fractions": [
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  ],
+  "palm_contact_fractions": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "max_drift_m": [
+    9.068688086699694e-06,
+    2.0652470993809402e-05,
+    4.7073794121388346e-05,
+    1.7720371033647098e-05,
+    3.211923103663139e-05,
+    4.104528488824144e-05,
+    1.6693769794073887e-05,
+    1.325114590144949e-05,
+    8.342095497937407e-06,
+    0.00013605525600723922,
+    2.2033089408068918e-05,
+    1.1979199371126015e-05,
+    2.4840266632963903e-05,
+    2.1063306121504866e-05,
+    6.709594890708104e-05,
+    9.761341061675921e-06,
+    5.078368758404395e-06,
+    2.13367984542856e-05,
+    6.0431026213336736e-05,
+    5.4109068514662795e-06,
+    2.4716602638363838e-05,
+    2.2961678041610867e-05,
+    7.294948591152206e-05,
+    9.968697850126773e-05,
+    1.6549818610656075e-05,
+    1.1246182111790404e-05,
+    9.170014891424216e-06,
+    7.600480603286996e-05,
+    1.9185023120371625e-05,
+    3.718665902852081e-05,
+    8.130738024192397e-06,
+    1.5295183402486145e-05,
+    4.912594249617541e-06,
+    3.018632560269907e-05,
+    0.00011785828246502206,
+    2.879599378502462e-05,
+    5.3585372370434925e-05,
+    2.625853448989801e-05,
+    2.7321273591951467e-05,
+    7.52645792090334e-05,
+    1.0457855751155876e-05,
+    1.6165609849849716e-05,
+    2.8174923500046134e-05,
+    0.00010176040086662397,
+    3.5428431601758348e-06,
+    2.9449520297930576e-05,
+    1.1130598977615591e-05,
+    1.2481304111133795e-05,
+    1.0229970030195545e-05
+  ],
+  "max_rotation_rad": [
+    0.0003718544447355373,
+    0.002947274232905861,
+    0.000611022721404991,
+    0.0020388036724087715,
+    0.0022805934623926815,
+    0.00428338641835195,
+    0.0005131823689113821,
+    0.0010395328605802988,
+    0.00034092676728384087,
+    0.013259492790935558,
+    0.0023108640763749213,
+    0.0010525428020594816,
+    0.0005711501176371157,
+    0.00177499152337646,
+    0.004107250710383934,
+    0.001385632413623163,
+    0.0004666792129675444,
+    0.0003358705758342629,
+    0.00539080262680158,
+    0.0004525027302988654,
+    0.005767243338480546,
+    0.0011221931745263906,
+    0.005743433864051016,
+    0.008344190584114931,
+    0.0010339170893143813,
+    0.0015510146129353534,
+    0.0007675765255644143,
+    0.003148130420745627,
+    0.0005408394014408677,
+    0.00393973615019284,
+    0.001386320600454559,
+    0.0010502692697398858,
+    0.0012549438656722445,
+    0.0018631395983737952,
+    0.003434015292331879,
+    0.002212045001035204,
+    0.008207577513409439,
+    0.0055665398139770166,
+    0.0035817161203815662,
+    0.0037566167666291655,
+    0.0002330251016553497,
+    0.0005406712875912039,
+    0.0017577930724077886,
+    0.005855187512825814,
+    0.0005352907732352513,
+    0.0013338511253939075,
+    0.0017285715851536293,
+    0.0018041461699440696,
+    0.0003324127989349615
+  ],
+  "outputs": {
+    "valid_grasps.npy": "0995604825b5b0b04ed0f295a147b5a2aa6d6fd28f2166460c41b350732ad1fd",
+    "valid/valid_grasps.npy": "0995604825b5b0b04ed0f295a147b5a2aa6d6fd28f2166460c41b350732ad1fd",
+    "train/valid_grasps.npy": "7dadd6e6272cb08220cd23d8485311fdb32d35c203bbe69a05d343632f697e2e",
+    "test/valid_grasps.npy": "5487de3427ea45a449a2080744265999cdc4bed81bb8cad5e4108e49bacef4f7",
+    "source_indices.npy": "7454f721eeec5e9f2d814ee83066952334ed4a716a8ab92a231119dadac925d0"
+  }
+}

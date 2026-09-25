@@ -1,0 +1,27 @@
+defaults:
+  - artmanip
+  - _self_
+
+name: wuji_demo_aligned
+env:
+  # One action per physics step, like run_wuji_knife_demo.py.
+  controlFrequencyInv: 1
+  useRelativeControl: false
+  actionsMovingAverage: 1.0
+  forceScale: 0.0
+  jointNoise: 0.0
+  episodeLength: 1440
+  maxConsecutiveSuccesses: 2
+  # The preview acceptance has no randomized goal dwell time.
+  successHoldDurationSec: 0.0
+  successHoldDurationRangeSec: [0.0, 0.0]
+  goalSwitchTimeoutSec: 12.0
+task:
+  randomize: false
+sim:
+  dt: 0.008333333333333333
+  physx:
+    num_subscenes: 0
+    max_depenetration_velocity: 100.0
+    default_buffer_size_multiplier: 2.0
+    max_gpu_contact_pairs: 1048576

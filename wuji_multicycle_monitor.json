@@ -1,0 +1,50 @@
+{
+  "project": "/home/wangjiarui/artgym-experiments-20260921",
+  "python": "/home/wangjiarui/artgym-runtime/bin/python",
+  "state_dir": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/multicycle-monitor-four",
+  "interval_seconds": 300,
+  "evaluation_timeout_seconds": 1800,
+  "evaluation_queue_order": "oldest_first",
+  "runs": [
+    {
+      "name": "wuji_acq_multicycle_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_multicycle_v1",
+      "profile": "acquisition",
+      "gpu": 3,
+      "evaluation": {
+        "task": "wuji_acquisition_fingertip_subset",
+        "hand": "wuji_paper",
+        "object": "knife_wuji_fingertip_acquisition000",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "test",
+        "repeats": 10,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "Original five withheld grasps, ten trials each,20s consecutive evaluation. Report first-cycle SR and mean complete cycles separately. Neither sampling nor validation rows changed."
+      }
+    },
+    {
+      "name": "wuji_acq_multicycle_control_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_multicycle_control_v1",
+      "profile": "acquisition",
+      "gpu": 3,
+      "evaluation": {
+        "task": "wuji_acquisition_fingertip_subset",
+        "hand": "wuji_paper",
+        "object": "knife_wuji_fingertip_acquisition000",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "test",
+        "repeats": 10,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "Original five withheld grasps, ten trials each,20s consecutive evaluation. Report first-cycle SR and mean complete cycles separately. Neither sampling nor validation rows changed."
+      }
+    }
+  ]
+}

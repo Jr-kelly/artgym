@@ -1,0 +1,21 @@
+defaults:
+  - knife
+  - _self_
+
+# Single, generated, direct-sliding knife. No press-to-unlock mechanism.
+asset:
+  asset_root: assets/objects/knife_wuji_demo
+  instance_id_list: ['000']
+  disgravity_part: []
+default_props:
+  mass: [0.08, 0.01]
+  friction: 1.5
+  dof_stiffness: 0.0
+  dof_damping: 0.3
+randomization:
+  randomize: false
+task:
+  # Wuji's three central fingertips support the handle; thumb contacts slider.
+  contact_num: 4
+  pos_devia_threshold: 0.03
+  rot_devia_threshold: 0.5

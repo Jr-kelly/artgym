@@ -1,0 +1,23 @@
+defaults:
+  - wujiKnifeSAPG
+  - _self_
+
+params:
+  network:
+    space:
+      continuous:
+        # Zero action holds the successful initial grasp. No motion imitation.
+        mu_init:
+          name: const_initializer
+          val: 0.0
+        sigma_init:
+          name: const_initializer
+          val: -4.0
+  config:
+    expl_coef_block_size: 128
+    minibatch_size: 2048
+    save_frequency: 25
+    checkpoint_first_epoch: 10
+    checkpoint_keep_recent: 6
+    checkpoint_milestone_frequency: 250
+    evaluation_frequency: 50

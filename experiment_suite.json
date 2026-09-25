@@ -1,0 +1,519 @@
+{
+  "seed": 20260921,
+  "experiments": {
+    "sharpa_paper_reference": {
+      "hand": "sharpa",
+      "object": "knife_sharpa_official",
+      "train": "paperReferenceSAPG",
+      "envs_per_rank": 10000,
+      "epochs": 6250,
+      "overrides": [],
+      "task": "artmanip_paper_reference",
+      "gpus": [
+        0,
+        1
+      ],
+      "purpose": "Paper equations/protocol, official Sharpa data, 2B transitions"
+    },
+    "sharpa_reward_corrected": {
+      "hand": "sharpa",
+      "object": "knife_sharpa_official",
+      "train": "paperReferenceSAPG",
+      "envs_per_rank": 10000,
+      "epochs": 6250,
+      "overrides": [],
+      "task": "artmanip_reward_control",
+      "gpus": [
+        2,
+        3
+      ],
+      "purpose": "Upstream reward with only bookkeeping/drop-success correction; paired with sharpa_reward_upstream"
+    },
+    "sharpa_reward_upstream": {
+      "hand": "sharpa",
+      "object": "knife_sharpa_official",
+      "train": "paperReferenceSAPG",
+      "envs_per_rank": 10000,
+      "epochs": 6250,
+      "overrides": [],
+      "task": "artmanip_reward_upstream",
+      "gpus": [
+        6,
+        7
+      ],
+      "purpose": "Uncorrected upstream reward control, same data/seed/parameters as corrected arm"
+    },
+    "wuji_single_upstream": {
+      "hand": "wuji_paper",
+      "object": "knife_wuji_demo_aligned",
+      "train": "wujiDemoAlignedSAPG",
+      "envs_per_rank": 2560,
+      "epochs": 2500,
+      "overrides": [
+        "train.params.config.expl_coef_block_size=512",
+        "train.params.config.minibatch_size=8192",
+        "train.params.config.evaluation_frequency=25"
+      ],
+      "task": "wuji_demo_aligned",
+      "gpus": [
+        4
+      ],
+      "purpose": "Same known-feasible single-grasp conditions, original reward, 102.4M transitions"
+    },
+    "wuji_single_corrected": {
+      "hand": "wuji_paper",
+      "object": "knife_wuji_demo_aligned",
+      "train": "wujiDemoAlignedSAPG",
+      "envs_per_rank": 2560,
+      "epochs": 2500,
+      "overrides": [
+        "train.params.config.expl_coef_block_size=512",
+        "train.params.config.minibatch_size=8192",
+        "train.params.config.evaluation_frequency=25"
+      ],
+      "task": "wuji_demo_corrected",
+      "gpus": [
+        5
+      ],
+      "purpose": "Only reward bookkeeping/drop-success fixed; no imitation, 102.4M transitions"
+    },
+    "wuji_acq_precision_aug_v1": {
+      "hand": "wuji_paper",
+      "object": "knife_wuji_acquisition_precision",
+      "train": "wujiAcquisitionSAPG",
+      "task": "wuji_acquisition_precision_aug",
+      "gpus": [
+        4
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 300,
+      "learned_gate": "runs/wuji-goal/verification/precision-ft-cp10-trace100/report.json",
+      "overrides": [
+        "seed=20260929",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_precision_ft_v1/evaluation/monitor/policies/epoch_000010.pth",
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.learning_rate=0.00005"
+      ],
+      "purpose": "Matched continuation of verified precision CP10; compare reset pose/joint perturbation ramp against no reset perturbation. Identical seed, optimizer and training budget. Independent nominal and fixed-noise audits required.",
+      "smoke_overrides": [
+        "task.env.initialPoseNoise.ramp_epochs=0"
+      ]
+    },
+    "wuji_acq_precision_continue_v1": {
+      "hand": "wuji_paper",
+      "object": "knife_wuji_acquisition_precision",
+      "train": "wujiAcquisitionSAPG",
+      "task": "wuji_acquisition_precision",
+      "gpus": [
+        5
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 300,
+      "learned_gate": "runs/wuji-goal/verification/precision-ft-cp10-trace100/report.json",
+      "overrides": [
+        "seed=20260929",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_precision_ft_v1/evaluation/monitor/policies/epoch_000010.pth",
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.learning_rate=0.00005"
+      ],
+      "purpose": "Matched continuation of verified precision CP10; compare reset pose/joint perturbation ramp against no reset perturbation. Identical seed, optimizer and training budget. Independent nominal and fixed-noise audits required."
+    },
+    "wuji_acq_precision_near01_v1": {
+      "hand": "wuji_paper",
+      "object": "knife_wuji_acquisition_precision",
+      "train": "wujiAcquisitionSAPG",
+      "task": "wuji_acquisition_precision_aug",
+      "gpus": [
+        0
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 150,
+      "learned_gate": "runs/wuji-goal/verification/precision-ft-cp10-trace100/report.json",
+      "overrides": [
+        "seed=20261002",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_precision_ft_v1/evaluation/monitor/policies/epoch_000010.pth",
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.learning_rate=0.00005",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "object.reward.GoalDistance2=0.1"
+      ],
+      "purpose": "Matched reward test: proximity reward 0.1; same precision task, reset augmentation, sourceCP10,seed and optimizer. Tests excessive returns for lingering near the goal; not a paper-reference arm.",
+      "smoke_overrides": [
+        "task.env.initialPoseNoise.ramp_epochs=0"
+      ],
+      "comparison": "precision_proximity_reward_v1",
+      "source_checkpoint_sha256": "357e95931c927447c7ff210290ee1b3b9d55261a950c58f8c280f220f46e2a25"
+    },
+    "wuji_acq_precision_near1_v1": {
+      "hand": "wuji_paper",
+      "object": "knife_wuji_acquisition_precision",
+      "train": "wujiAcquisitionSAPG",
+      "task": "wuji_acquisition_precision_aug",
+      "gpus": [
+        1
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 150,
+      "learned_gate": "runs/wuji-goal/verification/precision-ft-cp10-trace100/report.json",
+      "overrides": [
+        "seed=20261002",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_precision_ft_v1/evaluation/monitor/policies/epoch_000010.pth",
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.learning_rate=0.00005",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "object.reward.GoalDistance2=1.0"
+      ],
+      "purpose": "Matched reward test: proximity reward 1.0; same precision task, reset augmentation, sourceCP10,seed and optimizer. Tests excessive returns for lingering near the goal; not a paper-reference arm.",
+      "smoke_overrides": [
+        "task.env.initialPoseNoise.ramp_epochs=0"
+      ],
+      "comparison": "precision_proximity_reward_v1",
+      "source_checkpoint_sha256": "357e95931c927447c7ff210290ee1b3b9d55261a950c58f8c280f220f46e2a25"
+    },
+    "wuji_acq_pose_cost1_v1": {
+      "hand": "wuji_paper",
+      "object": "knife_wuji_fingertip_acquisition000",
+      "train": "wujiAcquisitionSAPG",
+      "envs_per_rank": 5120,
+      "epochs": 150,
+      "task": "wuji_acquisition_pose_objective",
+      "gpus": [
+        0
+      ],
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.learning_rate=0.00005",
+        "task.env.maxConsecutiveSuccesses=0",
+        "seed=20261003",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_multicycle_v1/evaluation/monitor/policies/epoch_000100.pth",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25"
+      ],
+      "purpose": "Paired absolute-pose objective from multicycleCP100,33training/5validationgrasps. Coefficient1 versus0; no changed resets, tolerances, grasp distribution or control. Starts after both near-goal reward arms complete.",
+      "learned_gate": "runs/wuji-goal/verification/all20-cp10-trace100/report.json",
+      "posture_gate": "runs/wuji-goal/data-gates/fingertip-000.json",
+      "comparison": "wuji_absolute_pose_cost_v1",
+      "initial_checkpoint_sha256": "52a7ccf3837ce0434edab956b640167eeac24df10ea44fa489c38c19fcc11028",
+      "start_after_completed": [
+        "wuji_acq_precision_near01_v1",
+        "wuji_acq_precision_near1_v1"
+      ],
+      "smoke_overrides": [
+        "task.env.absolutePoseObjective.ramp_epochs=0"
+      ]
+    },
+    "wuji_acq_pose_cost0_v1": {
+      "hand": "wuji_paper",
+      "object": "knife_wuji_fingertip_acquisition000",
+      "train": "wujiAcquisitionSAPG",
+      "envs_per_rank": 5120,
+      "epochs": 150,
+      "task": "wuji_acquisition_pose_objective",
+      "gpus": [
+        1
+      ],
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.learning_rate=0.00005",
+        "task.env.maxConsecutiveSuccesses=0",
+        "seed=20261003",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_multicycle_v1/evaluation/monitor/policies/epoch_000100.pth",
+        "task.env.absolutePoseObjective.coefficient=0.0",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25"
+      ],
+      "purpose": "Paired absolute-pose objective from multicycleCP100,33training/5validationgrasps. Coefficient1 versus0; no changed resets, tolerances, grasp distribution or control. Starts after both near-goal reward arms complete.",
+      "learned_gate": "runs/wuji-goal/verification/all20-cp10-trace100/report.json",
+      "posture_gate": "runs/wuji-goal/data-gates/fingertip-000.json",
+      "comparison": "wuji_absolute_pose_cost_v1",
+      "initial_checkpoint_sha256": "52a7ccf3837ce0434edab956b640167eeac24df10ea44fa489c38c19fcc11028",
+      "start_after_completed": [
+        "wuji_acq_precision_near01_v1",
+        "wuji_acq_precision_near1_v1"
+      ],
+      "smoke_overrides": [
+        "task.env.absolutePoseObjective.ramp_epochs=0"
+      ]
+    },
+    "wuji_acq_pose_cost1_v2": {
+      "hand": "wuji_paper",
+      "object": "knife_wuji_fingertip_acquisition000",
+      "train": "wujiAcquisitionSAPG",
+      "envs_per_rank": 5120,
+      "epochs": 150,
+      "task": "wuji_acquisition_pose_objective",
+      "gpus": [
+        4
+      ],
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.learning_rate=0.00005",
+        "task.env.maxConsecutiveSuccesses=0",
+        "seed=20261003",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_multicycle_v1/evaluation/monitor/policies/epoch_000250.pth",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25"
+      ],
+      "purpose": "Matched absolute-pose cost1 versus0 from multicycleCP250,33train/5validationgrasps. Source selected before launch becauseCP250firstachieved5/5graspcoverage160/160complete,includingfailedgrasp2(32/32,19strict);strictaggregate51/160andfullstable0/160remainpoor. StartsGPU4/5afterbothoriginalaugmentationarmscomplete.",
+      "learned_gate": "runs/wuji-goal/verification/all20-cp10-trace100/report.json",
+      "posture_gate": "runs/wuji-goal/data-gates/fingertip-000.json",
+      "comparison": "wuji_absolute_pose_cost_v1",
+      "initial_checkpoint_sha256": "a6784eb5cfe840990ac02ebc8b1fb108b75a8d6b9a452a65cc1bdaf627173f79",
+      "start_after_completed": [
+        "wuji_acq_precision_aug_v1",
+        "wuji_acq_precision_continue_v1"
+      ],
+      "smoke_overrides": [
+        "task.env.absolutePoseObjective.ramp_epochs=0"
+      ]
+    },
+    "wuji_acq_pose_cost0_v2": {
+      "hand": "wuji_paper",
+      "object": "knife_wuji_fingertip_acquisition000",
+      "train": "wujiAcquisitionSAPG",
+      "envs_per_rank": 5120,
+      "epochs": 150,
+      "task": "wuji_acquisition_pose_objective",
+      "gpus": [
+        5
+      ],
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.learning_rate=0.00005",
+        "task.env.maxConsecutiveSuccesses=0",
+        "seed=20261003",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_multicycle_v1/evaluation/monitor/policies/epoch_000250.pth",
+        "task.env.absolutePoseObjective.coefficient=0.0",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25"
+      ],
+      "purpose": "Matched absolute-pose cost1 versus0 from multicycleCP250,33train/5validationgrasps. Source selected before launch becauseCP250firstachieved5/5graspcoverage160/160complete,includingfailedgrasp2(32/32,19strict);strictaggregate51/160andfullstable0/160remainpoor. StartsGPU4/5afterbothoriginalaugmentationarmscomplete.",
+      "learned_gate": "runs/wuji-goal/verification/all20-cp10-trace100/report.json",
+      "posture_gate": "runs/wuji-goal/data-gates/fingertip-000.json",
+      "comparison": "wuji_absolute_pose_cost_v1",
+      "initial_checkpoint_sha256": "a6784eb5cfe840990ac02ebc8b1fb108b75a8d6b9a452a65cc1bdaf627173f79",
+      "start_after_completed": [
+        "wuji_acq_precision_aug_v1",
+        "wuji_acq_precision_continue_v1"
+      ],
+      "smoke_overrides": [
+        "task.env.absolutePoseObjective.ramp_epochs=0"
+      ]
+    },
+    "wuji_acq_official_actuator_support40mrad_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_precision_near01",
+      "train": "wujiAcquisitionSAPG",
+      "task": "wuji_acquisition_official_support40mrad",
+      "gpus": [
+        6
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "learned_gate": "runs/wuji-goal/verification/precision-cont-cost1-cp25-perturb100/report.json",
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.learning_rate=0.00005",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "object.reward.GoalDistance2=0.1",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "seed=20261008",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_precision_cont_cost1_v1/evaluation/monitor/policies/epoch_000025.pth"
+      ],
+      "purpose": "100epoch bounded transfer under officialWujiMJCF actuator gains andarmature, stillArtBot/PhysX geometry andsolver. Both sameCP25/newoptimizer/seed20261008/5120env/horizon32/LR5e-5/fullnoise/.1proximity/posecost1. Only supportActionSpan=.04versus.20. Frozen-policy officialactuator baseline23complete/1strict/0full per100; no hardware calibration claim. Shares upstreamSharpa GPUs6/7 without changing their sample budgets.",
+      "comparison": "official_actuator_support_authority_pair_v1",
+      "source_checkpoint_sha256": "4b9f6c48922a23c98a3b0b99ae125e666c51aef0415099ad20c02915e41b03f8",
+      "start_after_completed": [],
+      "frozen_policy_span_diagnostic": "Official gain+armature:span.04=23/1/0,.20=23/0/0,.40=13/0/0 per100. Expanding frozen actions doesnotrestorestability; boundedtrainingpair tests whetherre-adaptation andsupportauthority help. Both trainingarms were specifiedbefore.40result."
+    },
+    "wuji_acq_official_actuator_support200mrad_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_precision_near01",
+      "train": "wujiAcquisitionSAPG",
+      "task": "wuji_acquisition_official_support200mrad",
+      "gpus": [
+        7
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "learned_gate": "runs/wuji-goal/verification/precision-cont-cost1-cp25-perturb100/report.json",
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.learning_rate=0.00005",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "object.reward.GoalDistance2=0.1",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "seed=20261008",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_precision_cont_cost1_v1/evaluation/monitor/policies/epoch_000025.pth"
+      ],
+      "purpose": "100epoch bounded transfer under officialWujiMJCF actuator gains andarmature, stillArtBot/PhysX geometry andsolver. Both sameCP25/newoptimizer/seed20261008/5120env/horizon32/LR5e-5/fullnoise/.1proximity/posecost1. Only supportActionSpan=.04versus.20. Frozen-policy officialactuator baseline23complete/1strict/0full per100; no hardware calibration claim. Shares upstreamSharpa GPUs6/7 without changing their sample budgets.",
+      "comparison": "official_actuator_support_authority_pair_v1",
+      "source_checkpoint_sha256": "4b9f6c48922a23c98a3b0b99ae125e666c51aef0415099ad20c02915e41b03f8",
+      "start_after_completed": [],
+      "frozen_policy_span_diagnostic": "Official gain+armature:span.04=23/1/0,.20=23/0/0,.40=13/0/0 per100. Expanding frozen actions doesnotrestorestability; boundedtrainingpair tests whetherre-adaptation andsupportauthority help. Both trainingarms were specifiedbefore.40result."
+    },
+    "wuji_acq_official_actuator_support40mrad_resume25_v2": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_precision_near01",
+      "train": "wujiAcquisitionSAPG",
+      "task": "wuji_acquisition_official_support40mrad",
+      "gpus": [
+        4
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "learned_gate": "runs/wuji-goal/verification/precision-cont-cost1-cp25-perturb100/report.json",
+      "overrides": [
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.learning_rate=0.00005",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "object.reward.GoalDistance2=0.1",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "seed=20261008",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_official_actuator_support40mrad_v1/checkpoints/epoch_000025.pth",
+        "+train.params.config.checkpoint_weights_only=False"
+      ],
+      "purpose": "100epoch bounded transfer under officialWujiMJCF actuator gains andarmature, stillArtBot/PhysX geometry andsolver. Both sameCP25/newoptimizer/seed20261008/5120env/horizon32/LR5e-5/fullnoise/.1proximity/posecost1. Only supportActionSpan=.04versus.20. Frozen-policy officialactuator baseline23complete/1strict/0full per100; no hardware calibration claim. Shares upstreamSharpa GPUs6/7 without changing their sample budgets. Resumev2 restoresfullCP25model/Adam/normalizers/counters,remainingepochs26-100. PhysXandRNNrestartbecausephysicsisnotserialized. MatchedreallocationfromGPU6/7toGPU4/5afterbothposearmsfinish. Preflightonlyusesweightsfor3epochsanddoesnotfeedformalresume.",
+      "comparison": "official_actuator_support_authority_pair_v1",
+      "source_checkpoint_sha256": "1a22aa97f87b8d4b2346ec21aa3e4be5b5cb86223b58ae61feb89e60a76a0f3f",
+      "start_after_completed": [
+        "wuji_acq_pose_cost1_v2",
+        "wuji_acq_pose_cost0_v2"
+      ],
+      "frozen_policy_span_diagnostic": "Official gain+armature:span.04=23/1/0,.20=23/0/0,.40=13/0/0 per100. Expanding frozen actions doesnotrestorestability; boundedtrainingpair tests whetherre-adaptation andsupportauthority help. Both trainingarms were specifiedbefore.40result.",
+      "smoke_overrides": [
+        "++train.params.config.checkpoint_weights_only=True"
+      ],
+      "full_optimizer_resume": {
+        "source_run": "wuji_acq_official_actuator_support40mrad_v1",
+        "epoch": 25,
+        "frame": 4096000,
+        "formal_target_epoch": 100,
+        "physics_and_recurrent_state_reset": true
+      }
+    },
+    "wuji_acq_official_actuator_support200mrad_resume25_v2": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_precision_near01",
+      "train": "wujiAcquisitionSAPG",
+      "task": "wuji_acquisition_official_support200mrad",
+      "gpus": [
+        5
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "learned_gate": "runs/wuji-goal/verification/precision-cont-cost1-cp25-perturb100/report.json",
+      "overrides": [
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.learning_rate=0.00005",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "object.reward.GoalDistance2=0.1",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "seed=20261008",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_official_actuator_support200mrad_v1/checkpoints/epoch_000025.pth",
+        "+train.params.config.checkpoint_weights_only=False"
+      ],
+      "purpose": "100epoch bounded transfer under officialWujiMJCF actuator gains andarmature, stillArtBot/PhysX geometry andsolver. Both sameCP25/newoptimizer/seed20261008/5120env/horizon32/LR5e-5/fullnoise/.1proximity/posecost1. Only supportActionSpan=.04versus.20. Frozen-policy officialactuator baseline23complete/1strict/0full per100; no hardware calibration claim. Shares upstreamSharpa GPUs6/7 without changing their sample budgets. Resumev2 restoresfullCP25model/Adam/normalizers/counters,remainingepochs26-100. PhysXandRNNrestartbecausephysicsisnotserialized. MatchedreallocationfromGPU6/7toGPU4/5afterbothposearmsfinish. Preflightonlyusesweightsfor3epochsanddoesnotfeedformalresume.",
+      "comparison": "official_actuator_support_authority_pair_v1",
+      "source_checkpoint_sha256": "1abfb00d67da1690e9a851c69f6f151453add024c08587a9a4ff40c13084a33a",
+      "start_after_completed": [
+        "wuji_acq_pose_cost1_v2",
+        "wuji_acq_pose_cost0_v2"
+      ],
+      "frozen_policy_span_diagnostic": "Official gain+armature:span.04=23/1/0,.20=23/0/0,.40=13/0/0 per100. Expanding frozen actions doesnotrestorestability; boundedtrainingpair tests whetherre-adaptation andsupportauthority help. Both trainingarms were specifiedbefore.40result.",
+      "smoke_overrides": [
+        "++train.params.config.checkpoint_weights_only=True"
+      ],
+      "full_optimizer_resume": {
+        "source_run": "wuji_acq_official_actuator_support200mrad_v1",
+        "epoch": 25,
+        "frame": 4096000,
+        "formal_target_epoch": 100,
+        "physics_and_recurrent_state_reset": true
+      }
+    }
+  },
+  "phase1": "Official Sharpa and Wuji data generation; Wuji paired single-grasp learning",
+  "phase2": "All three Sharpa arms start when the 30 training objects are ready; held-out evaluation waits independently for five objects. Sharpa/Wuji data jobs fill available slots across both queues.",
+  "global_mapping": {
+    "total_envs": 20000,
+    "envs_per_rank": 10000,
+    "minibatch_per_rank": 20000,
+    "global_minibatch": 40000,
+    "expl_group_per_rank": 2000,
+    "global_expl_group": 4000
+  },
+  "limitations": [
+    "Distributed interpretation explicitly assumes Table 9 numbers are global; paper does not specify mapping.",
+    "Hardware is H100, not paper RTX 5090.",
+    "No successful teacher or hardware calibration is assumed.",
+    "Wuji single-grasp arms are diagnostics and do not establish generalization."
+  ],
+  "scheduling": {
+    "data_gpu_order": [
+      4,
+      5,
+      0,
+      2,
+      6,
+      1,
+      3,
+      7
+    ],
+    "data_min_free_memory_mb": 60000,
+    "share_training_gpus": true,
+    "max_data_workers_per_gpu": 1,
+    "provider_4h_minimum_utilization_percent": 26,
+    "operational_utilization_target_percent": 40,
+    "low_utilization_alert_percent": 35,
+    "pause_new_data_jobs": false
+  },
+  "additional_transfer_arms": [
+    "wuji_acq_precision_aug_v1",
+    "wuji_acq_precision_continue_v1",
+    "wuji_acq_precision_near01_v1",
+    "wuji_acq_precision_near1_v1",
+    "wuji_acq_pose_cost1_v2",
+    "wuji_acq_pose_cost0_v2",
+    "wuji_acq_official_actuator_support40mrad_v1",
+    "wuji_acq_official_actuator_support200mrad_v1",
+    "wuji_acq_official_actuator_support40mrad_resume25_v2",
+    "wuji_acq_official_actuator_support200mrad_resume25_v2"
+  ],
+  "additional_transfer_monitors": [
+    "wuji_augmentation_monitor.json",
+    "wuji_precision_reward_monitor.json",
+    "wuji_pose_objective_monitor.json",
+    "wuji_official_actuator_monitor.json"
+  ]
+}

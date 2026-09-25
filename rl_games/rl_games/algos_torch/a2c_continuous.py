@@ -9,6 +9,7 @@ from rl_games.common import datasets
 from torch import optim
 import torch
 import torch.distributed as dist 
+from rl_games.common.distributed_utils import select_checkpoint_state
 
 
 class A2CAgent(a2c_common.ContinuousA2CBase):
@@ -86,11 +87,29 @@ class A2CAgent(a2c_common.ContinuousA2CBase):
         state = {self.global_rank: self.get_full_state_weights()}
         if override_state is not None:
             state = override_state
+            for rank_state in state.values():
+                rank_state['last_mean_rewards']=self.last_mean_rewards
         torch_ext.save_checkpoint(fn, state)
 
     def restore(self, fn, set_epoch=True):
         checkpoint = torch_ext.load_checkpoint(fn)
-        self.set_full_state_weights(checkpoint[self.global_rank] if self.global_rank in checkpoint else checkpoint, set_epoch=set_epoch)
+        weights_only=bool(self.config.get('checkpoint_weights_only',False))
+        state=select_checkpoint_state(checkpoint,self.global_rank,self.world_size,weights_only)
+        if weights_only:
+            self.set_weights(state)
+            print('Loaded model and normalization weights; optimizer, counters and environments start fresh')
+        else:
+            if state.get('num_actors',self.num_actors)!=self.num_actors:
+                raise ValueError('Per-rank environment count changed; use checkpoint_weights_only=True')
+            self.set_full_state_weights(state,set_epoch=set_epoch)
+            # ArtGym does not serialize PhysX state. Continue the optimizer and
+            # global counters, but reset recurrent/rollout state consistently.
+            if not state.get('env_state'):
+                self.obs=None
+                self.rnn_states=None
+                self.dones=None
+                for name in ('current_rewards','current_shaped_rewards','current_lengths'):
+                    setattr(self,name,None)
 
     def get_masked_action_values(self, obs, action_masks):
         assert False
@@ -263,4 +282,3 @@ class A2CAgent(a2c_common.ContinuousA2CBase):
             dist.all_reduce(all_grads, op=dist.ReduceOp.SUM)
         
         return all_grads
-

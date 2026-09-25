@@ -1,0 +1,14 @@
+defaults:
+  - wujiAcquisitionSAPG
+  - _self_
+params:
+  model:
+    name: continuous_a2c_wuji_fixed_student
+  network:
+    name: wuji_fixed_student_actor
+  config:
+    learning_rate: 0.00001
+    lr_schedule: constant
+    save_frequency: 25
+    checkpoint_first_epoch: 1
+    evaluation_frequency: 0

@@ -1,0 +1,326 @@
+{
+  "project": "/home/wangjiarui/artgym-experiments-20260921",
+  "python": "/home/wangjiarui/artgym-runtime/bin/python",
+  "state_dir": "/home/wangjiarui/artgym-experiments-20260921/runs/checkpoint-monitor",
+  "interval_seconds": 300,
+  "evaluation_timeout_seconds": 1800,
+  "runs": [
+    {
+      "name": "sharpa_paper_reference",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/sharpa_paper_reference",
+      "profile": "reference",
+      "gpu": 4,
+      "evaluation": {
+        "task": "artmanip_paper_reference",
+        "hand": "sharpa",
+        "object": "knife_sharpa_official_eval",
+        "train": "paperReferenceSAPG",
+        "instances": [
+          "030",
+          "031",
+          "032",
+          "033",
+          "034"
+        ],
+        "split": "valid",
+        "repeats": 10,
+        "max_steps": 1200,
+        "randomized": true,
+        "scope": "Five held-out geometries, all valid grasps, 10 randomized repetitions per checkpoint; final report uses 100"
+      },
+      "final_evaluation": {
+        "task": "artmanip_paper_reference",
+        "hand": "sharpa",
+        "object": "knife_sharpa_official_eval",
+        "train": "paperReferenceSAPG",
+        "instances": [
+          "030",
+          "031",
+          "032",
+          "033",
+          "034"
+        ],
+        "split": "valid",
+        "repeats": 100,
+        "max_steps": 1200,
+        "randomized": true,
+        "scope": "Final paper protocol: five held-out geometries, every valid grasp, 100 randomized rollouts each; 10 mm tolerance"
+      },
+      "required_files": [
+        "/home/wangjiarui/artgym-experiments-20260921/runs/experiment-suite/sharpa-ready.json"
+      ]
+    },
+    {
+      "name": "sharpa_reward_corrected",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/sharpa_reward_corrected",
+      "profile": "reference",
+      "gpu": 4,
+      "evaluation": {
+        "task": "artmanip_reward_control",
+        "hand": "sharpa",
+        "object": "knife_sharpa_official_eval",
+        "train": "paperReferenceSAPG",
+        "instances": [
+          "030",
+          "031",
+          "032",
+          "033",
+          "034"
+        ],
+        "split": "valid",
+        "repeats": 10,
+        "max_steps": 1200,
+        "randomized": true,
+        "scope": "Five held-out geometries, all valid grasps, 10 randomized repetitions per checkpoint; final report uses 100"
+      },
+      "final_evaluation": {
+        "task": "artmanip_reward_control",
+        "hand": "sharpa",
+        "object": "knife_sharpa_official_eval",
+        "train": "paperReferenceSAPG",
+        "instances": [
+          "030",
+          "031",
+          "032",
+          "033",
+          "034"
+        ],
+        "split": "valid",
+        "repeats": 100,
+        "max_steps": 1200,
+        "randomized": true,
+        "scope": "Final paper protocol: five held-out geometries, every valid grasp, 100 randomized rollouts each; 10 mm tolerance"
+      },
+      "required_files": [
+        "/home/wangjiarui/artgym-experiments-20260921/runs/experiment-suite/sharpa-ready.json"
+      ]
+    },
+    {
+      "name": "sharpa_reward_upstream",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/sharpa_reward_upstream",
+      "profile": "reference",
+      "gpu": 4,
+      "evaluation": {
+        "task": "artmanip_reward_control",
+        "hand": "sharpa",
+        "object": "knife_sharpa_official_eval",
+        "train": "paperReferenceSAPG",
+        "instances": [
+          "030",
+          "031",
+          "032",
+          "033",
+          "034"
+        ],
+        "split": "valid",
+        "repeats": 10,
+        "max_steps": 1200,
+        "randomized": true,
+        "scope": "Five held-out geometries, all valid grasps, 10 randomized repetitions per checkpoint; final report uses 100"
+      },
+      "final_evaluation": {
+        "task": "artmanip_reward_control",
+        "hand": "sharpa",
+        "object": "knife_sharpa_official_eval",
+        "train": "paperReferenceSAPG",
+        "instances": [
+          "030",
+          "031",
+          "032",
+          "033",
+          "034"
+        ],
+        "split": "valid",
+        "repeats": 100,
+        "max_steps": 1200,
+        "randomized": true,
+        "scope": "Final paper protocol: five held-out geometries, every valid grasp, 100 randomized rollouts each; 10 mm tolerance"
+      },
+      "required_files": [
+        "/home/wangjiarui/artgym-experiments-20260921/runs/experiment-suite/sharpa-ready.json"
+      ]
+    },
+    {
+      "name": "wuji_single_upstream",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_single_upstream",
+      "profile": "demo_aligned",
+      "gpu": 4,
+      "evaluation": {
+        "task": "wuji_demo_corrected",
+        "hand": "wuji_paper",
+        "object": "knife_wuji_demo_aligned",
+        "train": "wujiDemoAlignedSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "train",
+        "repeats": 5,
+        "max_steps": 1440,
+        "randomized": false,
+        "scope": "Same one training grasp; diagnostic only"
+      }
+    },
+    {
+      "name": "wuji_single_corrected",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_single_corrected",
+      "profile": "demo_aligned",
+      "gpu": 4,
+      "evaluation": {
+        "task": "wuji_demo_corrected",
+        "hand": "wuji_paper",
+        "object": "knife_wuji_demo_aligned",
+        "train": "wujiDemoAlignedSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "train",
+        "repeats": 5,
+        "max_steps": 1440,
+        "randomized": false,
+        "scope": "Same one training grasp; diagnostic only"
+      }
+    },
+    {
+      "name": "sharpa_reward_upstream_recover3400_20260923_v2",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/sharpa_reward_upstream_recover3400_20260923_v2",
+      "profile": "reference",
+      "gpu": 4,
+      "evaluation": {
+        "task": "artmanip_reward_control",
+        "hand": "sharpa",
+        "object": "knife_sharpa_official_eval",
+        "train": "paperReferenceSAPG",
+        "instances": [
+          "030",
+          "031",
+          "032",
+          "033",
+          "034"
+        ],
+        "split": "valid",
+        "repeats": 10,
+        "max_steps": 1200,
+        "randomized": true,
+        "scope": "Five held-out geometries, all valid grasps, 10 randomized repetitions per checkpoint; final report uses 100"
+      },
+      "final_evaluation": {
+        "task": "artmanip_reward_control",
+        "hand": "sharpa",
+        "object": "knife_sharpa_official_eval",
+        "train": "paperReferenceSAPG",
+        "instances": [
+          "030",
+          "031",
+          "032",
+          "033",
+          "034"
+        ],
+        "split": "valid",
+        "repeats": 100,
+        "max_steps": 1200,
+        "randomized": true,
+        "scope": "Final paper protocol: five held-out geometries, every valid grasp, 100 randomized rollouts each; 10 mm tolerance"
+      },
+      "required_files": [
+        "/home/wangjiarui/artgym-experiments-20260921/runs/experiment-suite/sharpa-ready.json"
+      ]
+    },
+    {
+      "name": "sharpa_seed2_upstream_first500_20260923_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/sharpa_seed2_upstream_first500_20260923_v1",
+      "profile": "reference",
+      "gpu": 2,
+      "evaluation": {
+        "task": "artmanip_reward_control",
+        "hand": "sharpa",
+        "object": "knife_sharpa_official_eval",
+        "train": "paperReferenceSAPG",
+        "instances": [
+          "030",
+          "031",
+          "032",
+          "033",
+          "034"
+        ],
+        "split": "valid",
+        "repeats": 10,
+        "max_steps": 1200,
+        "randomized": true,
+        "scope": "Five held-out geometries, all valid grasps, 10 randomized repetitions per checkpoint; final report uses 100"
+      },
+      "final_evaluation": {
+        "task": "artmanip_reward_control",
+        "hand": "sharpa",
+        "object": "knife_sharpa_official_eval",
+        "train": "paperReferenceSAPG",
+        "instances": [
+          "030",
+          "031",
+          "032",
+          "033",
+          "034"
+        ],
+        "split": "valid",
+        "repeats": 100,
+        "max_steps": 1200,
+        "randomized": true,
+        "scope": "Final paper protocol: five held-out geometries, every valid grasp, 100 randomized rollouts each; 10 mm tolerance"
+      },
+      "required_files": []
+    },
+    {
+      "name": "sharpa_seed2_corrected_first500_20260923_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/sharpa_seed2_corrected_first500_20260923_v1",
+      "profile": "reference",
+      "gpu": 2,
+      "evaluation": {
+        "task": "artmanip_reward_control",
+        "hand": "sharpa",
+        "object": "knife_sharpa_official_eval",
+        "train": "paperReferenceSAPG",
+        "instances": [
+          "030",
+          "031",
+          "032",
+          "033",
+          "034"
+        ],
+        "split": "valid",
+        "repeats": 10,
+        "max_steps": 1200,
+        "randomized": true,
+        "scope": "Five held-out geometries, all valid grasps, 10 randomized repetitions per checkpoint; final report uses 100"
+      },
+      "final_evaluation": {
+        "task": "artmanip_reward_control",
+        "hand": "sharpa",
+        "object": "knife_sharpa_official_eval",
+        "train": "paperReferenceSAPG",
+        "instances": [
+          "030",
+          "031",
+          "032",
+          "033",
+          "034"
+        ],
+        "split": "valid",
+        "repeats": 100,
+        "max_steps": 1200,
+        "randomized": true,
+        "scope": "Final paper protocol: five held-out geometries, every valid grasp, 100 randomized rollouts each; 10 mm tolerance"
+      },
+      "required_files": []
+    }
+  ],
+  "evaluation_gpus": [
+    0,
+    2
+  ],
+  "evaluation_queue_order": "newest_first",
+  "priority_checkpoints": [
+    {
+      "name": "sharpa_reward_upstream",
+      "epoch": 2700
+    }
+  ]
+}

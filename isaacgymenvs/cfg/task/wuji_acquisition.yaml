@@ -1,0 +1,16 @@
+defaults:
+  - wuji_demo_corrected
+  - _self_
+name: wuji_acquisition
+env:
+  controlFrequencyInv: 4
+  episodeLength: 600
+  goalSwitchTimeoutSec: 10.0
+  maxConsecutiveSuccesses: 2
+  supportActionSpan: 0.04
+  thumbActionStep: 0.025
+  aliveReward: 0.1
+  rewardWeightCurriculum:
+    ObjPosDeviation: -0.5
+    ObjRotDeviation: -0.02
+    StableContact: 0.0

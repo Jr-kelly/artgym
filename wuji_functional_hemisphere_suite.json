@@ -1,0 +1,36 @@
+{
+  "experiments": {
+    "wuji_functional20_hemisphere_cp50_seed34_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_lowgain_functional20_20260922",
+      "task": "wuji_acquisition_functional_hemisphere",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        2
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 200,
+      "source_checkpoint_sha256": "2230146804f9e0de54d4e61ab3efd2d90ec6ef1ee403130cd9a46c235bf860b7",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/functional20-hemisphere-runtime/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/functional20-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/functional20-hemisphere-runtime/report.json"
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/verified-policies/teacher-variable-near5-seed23-cp50/teacher.pth",
+        "train.params.config.learning_rate=0.00002",
+        "object.reward.GoalDistance2=5.0",
+        "seed=20261034"
+      ],
+      "purpose": "Adaptive multi-grasp migration after sameweightsbodyframe+hemisphere gives4/80strictfirstsuccesses ontraining-source perturbations versus0/80frameonly. All20frozentraininggraspsused,no filteringbytestsuccess. WarmstartCP50weightsandnormalizer,newAdam,200epochs,5120env,horizon32,initialLR2e-5adaptiveKL,near5,variable2/5scommands,officialactuators,fullresetnoise. Changesalsoincludecheckpoint/reward/clock relativeearliercountold;notonefactortrainingcausalcomparison. ShareeightGPU2withunalteredSharpacorrectedreference toincreaseusefuloccupancy;walltime isnotfairthroughputcomparison. Studentcompatibility unverified."
+    }
+  }
+}

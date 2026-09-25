@@ -1,0 +1,109 @@
+{
+  "experiments": {
+    "wuji_student_actorrl_replaycp25_seed62_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_fixed_student_actor",
+      "train": "wujiFixedStudentActorSAPG",
+      "gpus": [
+        5
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/student-actorrl-runtime-v1/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/bridge3-current-source-runtime/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/teacher-bridge3-functionalinit-seed45-cp25/teacher.pth",
+        "task.env.episodeLength=600",
+        "seed=20261062",
+        "task.env.fixedStudentArtifact=runs/wuji-goal/frozen-candidates/student-bridge3-replay-seed60-cp25/student.pth",
+        "task.env.fixedStudentSha256=0d2480657bf6176d32c379743f68402aba67aa868bea54b112bbc1bc34142b17"
+      ],
+      "purpose": "Wuji migration intervention, not paperstudentdistillation. Frozen replayCP25student2055->16; train actor/critic with existing task rewards, same3grasps,5120envs,32stepPPO,newAdam1e-5,100epochs. Teacher actor weights initialize equivalent originalstudentactions, but its privilegedactorencoder is nevercalled. Sameprivilegedcritic allowedonlytraining. Initialcapability alreadyseen153/300fast222/300slow,notindependentvalidation.",
+      "fixed_learning_rate_preflight": 1e-05,
+      "start_after_completed": [],
+      "comparison": "fixedstudent_teacheractor_vs_ppo_adapted_actor",
+      "training_module": "scripts.train_wuji_student_actor_audited",
+      "fixed_student_actor": {
+        "student": "runs/wuji-goal/frozen-candidates/student-bridge3-replay-seed60-cp25/student.pth",
+        "student_sha256": "0d2480657bf6176d32c379743f68402aba67aa868bea54b112bbc1bc34142b17",
+        "policy_encoder_frozen": true,
+        "actor_receives_current_object_truth": false,
+        "critic_receives_current_object_truth": true,
+        "observation_normalizer_frozen": true
+      }
+    },
+    "wuji_student_actorrl_replaycp25_seed62_v2": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_fixed_student_actor",
+      "train": "wujiFixedStudentActorSAPG",
+      "gpus": [
+        5
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/student-actorrl-runtime-v2/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/bridge3-current-source-runtime/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/teacher-bridge3-functionalinit-seed45-cp25/teacher.pth",
+        "task.env.episodeLength=600",
+        "seed=20261062",
+        "task.env.fixedStudentArtifact=runs/wuji-goal/frozen-candidates/student-bridge3-replay-seed60-cp25/student.pth",
+        "task.env.fixedStudentSha256=0d2480657bf6176d32c379743f68402aba67aa868bea54b112bbc1bc34142b17"
+      ],
+      "purpose": "Wuji migration intervention, not paperstudentdistillation. Frozen replayCP25student2055->16; train actor/critic with existing task rewards, same3grasps,5120envs,32stepPPO,newAdam1e-5,100epochs. Teacher actor weights initialize equivalent originalstudentactions, but its privilegedactorencoder is nevercalled. Sameprivilegedcritic allowedonlytraining. Initialcapability alreadyseen153/300fast222/300slow,notindependentvalidation.",
+      "fixed_learning_rate_preflight": 1e-05,
+      "start_after_completed": [],
+      "comparison": "fixedstudent_teacheractor_vs_ppo_adapted_actor",
+      "training_module": "scripts.train_wuji_student_actor_audited",
+      "fixed_student_actor": {
+        "student": "runs/wuji-goal/frozen-candidates/student-bridge3-replay-seed60-cp25/student.pth",
+        "student_sha256": "0d2480657bf6176d32c379743f68402aba67aa868bea54b112bbc1bc34142b17",
+        "policy_encoder_frozen": true,
+        "actor_receives_current_object_truth": false,
+        "critic_receives_current_object_truth": true,
+        "observation_normalizer_frozen": true
+      },
+      "launch_fix": "Absolute Hydra config path; previousv1 preflight failed beforephysics. Original19200model/taskgate plus2048regression preserve evidence."
+    }
+  }
+}

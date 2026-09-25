@@ -1,0 +1,96 @@
+{
+  "experiments": {
+    "wuji_bridge3_reset2x_normfrozen_seed20261129_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_acquisition_bridge3_hemisphere",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        2
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/reset-normalizer-frozen-training-gate-20260923-v1/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/reset-normalizer-frozen-training-gate-20260923-v1/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "train.params.config.checkpoint_first_epoch=10",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "seed=20261129",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/teacher-bridge3-functionalinit-seed45-cp25/teacher.pth",
+        "task.env.initialPoseNoise.position_m=0.001",
+        "task.env.initialPoseNoise.joint_rad=0.02",
+        "task.env.initialPoseNoise.rotation_vector_rad=0.017453292519943295",
+        "task.env.initialPoseNoise.ramp_epochs=0",
+        "+train.params.config.freeze_input_normalizer=True"
+      ],
+      "fixed_learning_rate_preflight": 1e-05,
+      "max_preflight_kl": 0.05,
+      "purpose": "Paired new100epoch continuation. Same originalteacher/normalizer,newAdam,seed20261129,2xonline reset range,5120x32,LR1e-5,reward,physics,controller. Only freeze versus update input statistics. All CP10/25/50/75/100 evaluated on observed development; no independent/hardware claim. Requires complete frozen mechanism audit before training.",
+      "input_normalizer_mode_preflight": "frozen"
+    },
+    "wuji_bridge3_reset2x_normadaptive_seed20261129_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_acquisition_bridge3_hemisphere",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        2
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/reset-normalizer-adaptive-training-gate-20260923-v1/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/reset-normalizer-adaptive-training-gate-20260923-v1/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "train.params.config.checkpoint_first_epoch=10",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "seed=20261129",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/teacher-bridge3-functionalinit-seed45-cp25/teacher.pth",
+        "task.env.initialPoseNoise.position_m=0.001",
+        "task.env.initialPoseNoise.joint_rad=0.02",
+        "task.env.initialPoseNoise.rotation_vector_rad=0.017453292519943295",
+        "task.env.initialPoseNoise.ramp_epochs=0",
+        "+train.params.config.freeze_input_normalizer=False"
+      ],
+      "fixed_learning_rate_preflight": 1e-05,
+      "max_preflight_kl": 0.05,
+      "purpose": "Paired new100epoch continuation. Same originalteacher/normalizer,newAdam,seed20261129,2xonline reset range,5120x32,LR1e-5,reward,physics,controller. Only freeze versus update input statistics. All CP10/25/50/75/100 evaluated on observed development; no independent/hardware claim. Requires complete frozen mechanism audit before training.",
+      "input_normalizer_mode_preflight": "adaptive"
+    }
+  }
+}

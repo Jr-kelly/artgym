@@ -1,0 +1,38 @@
+{
+  "experiments": {
+    "wuji_functional20_scratch_seed21_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_lowgain_functional20_20260922",
+      "train": "wujiAcquisitionSAPG",
+      "task": "wuji_acquisition_official_timed2",
+      "gpus": [
+        5
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 300,
+      "overrides": [
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "object.reward.GoalDistance2=0.1",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "seed=20261021",
+        "train.params.config.learning_rate=0.0002"
+      ],
+      "normalizer_count_preflight": 1,
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/functional20-runtime-v2/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/functional20-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/functional20-runtime-v2/report.json"
+      },
+      "comparison": "functional20_adaptive_scratch_baseline",
+      "purpose": "Added after count-reset warmstart CP10 failed80trainingperturbations and earlytraining KL1.94. Initialize entireactor/critic/normalizer fromscratch using existingwujiAcquisitionSAPG config (zero mu and sigma-1),5120env,seed20261021,LR2e-4 (existingWuji default),300epochs,20traininggrasps/1heldout. This differs in initialization,LRandbudget from the100epochwarmstarts and is not a one-factor comparison. Samephysics/control/data/clock/reward. EightGPU5 onlyaftercenteringdamping100completed; studentandSharpareferences unchanged.",
+      "start_after_completed": [
+        "wuji_acq_official_damping3_centered_seed16_v1"
+      ]
+    }
+  }
+}

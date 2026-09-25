@@ -1,3 +1,5 @@
+> Wuji迁移的最新入口：[实验结果、代码、全量备份及恢复说明](docs/wuji/README.md)。
+
 # ArtGym
 
 This repository is the official implementation of **ArtManip: Category-Level Articulated In-Hand Manipulation**.
@@ -23,6 +25,9 @@ git submodule update --init --recursive
 ## Installation
 
 see [install.md](install.md) for installation.
+
+For the ArtBot Wuji right-hand port, a runnable 40 mm utility-knife slider demo,
+grasp generation, and training commands, see [wuji.md](wuji.md).
 
 ## Submodules
 

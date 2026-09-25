@@ -1,0 +1,8 @@
+defaults:
+  - wuji_acquisition_precision_aug
+  - _self_
+env:
+  maxConsecutiveSuccesses: 0
+  # Distillation has no RL epoch curriculum. Sample full training noise at reset.
+  initialPoseNoise:
+    ramp_epochs: 0

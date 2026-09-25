@@ -72,6 +72,8 @@ def parse_args():
         )
     )
     parser.add_argument("--checkpoint", required=True, help="Path to the policy checkpoint.")
+    parser.add_argument("--summary-output", type=Path, help="Write results here instead of the shared grasp cache.")
+    parser.add_argument("--pose-quality", action="store_true", help="Observe first-cycle and full-rollout pose stability without changing the task.")
     parser.add_argument("--student-artifact", default="", help="Optional distilled student artifact path.")
     parser.add_argument("--task", default="artmanip", help="Task config name.")
     parser.add_argument("--train", default=None, help="Train config name. Defaults to the config default.")
@@ -359,11 +361,12 @@ def _save_instance_cycle_metrics(
     summary_suffix="",
     success_cycle_threshold=None,
     success_cycle_metric=None,
+    summary_output=None,
 ):
     repo_root = Path(__file__).resolve().parent.parent
     instance_dir = repo_root / "caches" / "initial_grasp" / hand / asset_dir_name / str(stats["instance_id"])
-    instance_dir.mkdir(parents=True, exist_ok=True)
-    summary_path = instance_dir / f"consecutive_eval_summary{summary_suffix}.json"
+    summary_path = Path(summary_output) if summary_output else instance_dir / f"consecutive_eval_summary{summary_suffix}.json"
+    summary_path.parent.mkdir(parents=True, exist_ok=True)
     mean_cycles = np.asarray(
         stats.get("consecutive_success_cycles_mean", stats["consecutive_success_cycles"]),
         dtype=np.float32,
@@ -399,6 +402,17 @@ def _save_instance_cycle_metrics(
         "num_grasps_max_cycles_gt_1": int(stats["num_grasps_max_cycles_gt_1"]),
         "top_grasps_by_consecutive_success": top_grasps,
     }
+    if cycle_trials is not None:
+        cycles = np.asarray(cycle_trials, dtype=np.float32)
+        summary.update({
+            "execution_success_definition": "at least one complete open-close cycle within the rollout",
+            "execution_success_rate": float((cycles >= 1).mean()),
+            "successful_trials": int((cycles >= 1).sum()),
+            "total_trials": int(cycles.size),
+            "consecutive_success_cycles_trials": cycles.tolist(),
+        })
+    if 'pose_quality' in stats:
+        summary['pose_quality'] = stats['pose_quality']
     if success_cycle_threshold is not None:
         summary.update(
             _compute_threshold_success_metrics(
@@ -699,6 +713,7 @@ def main():
 
     last_trial_action_sequence = None
     raw_stats = None
+    pose_quality = None
     try:
         task_env.configure_grasp_consecutive_evaluation(
             instance_id=args.instance_id,
@@ -707,6 +722,9 @@ def main():
             grasp_split=effective_grasp_split,
             episodes_per_grasp=args.episodes_per_grasp,
         )
+        if args.pose_quality:
+            from scripts.wuji_pose_quality import attach_pose_quality
+            pose_quality = attach_pose_quality(task_env)
 
         run_grasp_evaluation_loop(
             player=player,
@@ -732,6 +750,8 @@ def main():
     if args.episodes_per_grasp > 1:
         stats["trial_stats"] = all_trial_stats
     stats.update(_compute_instance_cycle_metrics(stats))
+    if pose_quality is not None:
+        stats['pose_quality'] = pose_quality.summary(raw_stats)
     print_consecutive_summary(stats, top_k=args.top_k)
 
     if args.save_last_episode_actions:
@@ -757,6 +777,7 @@ def main():
         summary_suffix="_student" if student_artifact is not None else "",
         success_cycle_threshold=args.save_success_cycle_threshold,
         success_cycle_metric=args.save_success_cycle_metric,
+        summary_output=args.summary_output,
     )
 
     if args.save_success_cycle_threshold is not None:

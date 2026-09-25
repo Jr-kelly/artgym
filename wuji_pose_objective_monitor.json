@@ -1,0 +1,53 @@
+{
+  "project": "/home/wangjiarui/artgym-experiments-20260921",
+  "python": "/home/wangjiarui/artgym-runtime/bin/python",
+  "state_dir": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/pose-objective-monitor-eight",
+  "interval_seconds": 300,
+  "evaluation_timeout_seconds": 1800,
+  "evaluation_gpus": [
+    4
+  ],
+  "evaluation_queue_order": "oldest_first",
+  "runs": [
+    {
+      "name": "wuji_acq_pose_cost1_v2",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_pose_cost1_v2",
+      "profile": "acquisition",
+      "gpu": 4,
+      "evaluation": {
+        "task": "wuji_acquisition_fingertip_subset",
+        "hand": "wuji_paper",
+        "object": "knife_wuji_fingertip_acquisition000",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "test",
+        "repeats": 32,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "All five validation grasps x32, task completion and strict first/full pose quality. No initial perturbation in this stage."
+      }
+    },
+    {
+      "name": "wuji_acq_pose_cost0_v2",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_pose_cost0_v2",
+      "profile": "acquisition",
+      "gpu": 4,
+      "evaluation": {
+        "task": "wuji_acquisition_fingertip_subset",
+        "hand": "wuji_paper",
+        "object": "knife_wuji_fingertip_acquisition000",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "test",
+        "repeats": 32,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "All five validation grasps x32, task completion and strict first/full pose quality. No initial perturbation in this stage."
+      }
+    }
+  ]
+}

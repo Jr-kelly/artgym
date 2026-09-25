@@ -1,0 +1,9 @@
+defaults:
+  - wuji_acquisition_official_support40mrad
+  - _self_
+name: wuji_timed_acquisition
+env:
+  commandPeriodSec: 2.0
+  evaluationGoalTimeoutSec: 10.0
+  goalSwitchTimeoutSec: 0.0
+  maxConsecutiveSuccesses: 0

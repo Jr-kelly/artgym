@@ -1,0 +1,10 @@
+defaults:
+  - artmanip_paper_reference
+  - _self_
+env:
+  # Shared protocol for a one-variable comparison of reward bookkeeping.
+  rewardProtocol: corrected
+  successHoldDurationSec: 1.5
+  successHoldDurationRangeSec: [0.0, 2.0]
+  goalSwitchTimeoutSec: 10.0
+  maxConsecutiveSuccesses: 20

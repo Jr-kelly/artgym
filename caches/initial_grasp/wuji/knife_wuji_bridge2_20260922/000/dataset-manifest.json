@@ -1,0 +1,40 @@
+{
+  "status": "frozen",
+  "scope": "Freeze an adaptive two-grasp curriculum, keeping source and novel grasp distinct.\n\nTraining row0 is the exact successful source mapped into generated-asset axes;\nrow1 is functional20 training row16, chosen from training-only transfer results.\nThe original one held-out grasp stays held out. This is a curriculum branch,\nnot broad generalization or a replacement for the ongoing20-grasp experiment.\n",
+  "dataset": "knife_wuji_bridge2_20260922",
+  "train_count": 2,
+  "test_count": 1,
+  "records": [
+    {
+      "split": "train",
+      "row": 0,
+      "source": "mapped_original_successful_grasp"
+    },
+    {
+      "split": "train",
+      "row": 1,
+      "source": "functional20_training_row16"
+    },
+    {
+      "split": "test",
+      "row": 0,
+      "source": "unchanged_functional20_heldout_row0"
+    }
+  ],
+  "input_sha256": {
+    "caches/initial_grasp/wuji/knife_wuji_demo_aligned/000/train/valid_grasps.npy": "056fd45a2c7cb454a9c8c3f4a9811e384e49d4b07e6b240edc8268d975c487c5",
+    "caches/initial_grasp/wuji/knife_wuji_lowgain_functional20_20260922/000/train/valid_grasps.npy": "035d2abefb6b98071647b0016c3a69e3942c4f268da72722919c5a037794bac2",
+    "caches/initial_grasp/wuji/knife_wuji_lowgain_functional20_20260922/000/test/valid_grasps.npy": "f4aeecbc87ad3edc2bccc6c208f5a0861d37e209dc69e67906f5c90573ee72b8"
+  },
+  "geometry_sha256": "5229c66b183cc6da04190bf2d6cfbd035fadd227340dc8f26602b207171b461c",
+  "artifact_sha256": {
+    "assets/objects/knife_wuji_bridge2_20260922/lbx.json": "264b510ebe84d43fea877e0f69a421d628d1dc47b8f5a886dde81011f0549b76",
+    "assets/objects/knife_wuji_bridge2_20260922/000/mobility.urdf": "5229c66b183cc6da04190bf2d6cfbd035fadd227340dc8f26602b207171b461c",
+    "assets/objects/knife_wuji_bridge2_20260922/000/parameters.json": "d61987a57769303fbf277b5b3524dbfccb34ca18d3929a62ea25b078cd791d54",
+    "caches/initial_grasp/wuji/knife_wuji_bridge2_20260922/000/valid_grasps.npy": "6bae494a6e501ce4b13a6c81d08e2079dc3476b47818cd46be3486763c1d9901",
+    "caches/initial_grasp/wuji/knife_wuji_bridge2_20260922/000/grasp_state_metadata.json": "e362b26ebd847efd584e440edf4396a94b0eeee5462223879ca391c2a8c3ed9b",
+    "caches/initial_grasp/wuji/knife_wuji_bridge2_20260922/000/valid/valid_grasps.npy": "6bae494a6e501ce4b13a6c81d08e2079dc3476b47818cd46be3486763c1d9901",
+    "caches/initial_grasp/wuji/knife_wuji_bridge2_20260922/000/train/valid_grasps.npy": "c49837d070e71dd9d6c22e49e66db6c8b1b28796fcc12d8ea29d0b7c850121fd",
+    "caches/initial_grasp/wuji/knife_wuji_bridge2_20260922/000/test/valid_grasps.npy": "f4aeecbc87ad3edc2bccc6c208f5a0861d37e209dc69e67906f5c90573ee72b8"
+  }
+}

@@ -1,0 +1,8 @@
+defaults:
+  - wuji
+  - _self_
+
+# Match Lightning Grasp filtering: cross-finger and distal-to-palm collisions
+# are enabled; same-finger and palm/proximal overlaps are excluded.
+self_collisions: true
+self_collision_mode: digit_filtered

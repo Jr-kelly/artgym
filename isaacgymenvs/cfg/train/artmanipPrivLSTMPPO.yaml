@@ -46,7 +46,7 @@ params:
           name: default
       student_encoder:
         type: auto
-        init_dim: 57
+        init_dim: ${......task.env.studentInitObsDim}
         proprio_encoder:
           units: [128, 64]
           activation: elu

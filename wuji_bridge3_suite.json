@@ -1,0 +1,45 @@
+{
+  "experiments": {
+    "wuji_bridge3_cp50_seed45_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_acquisition_bridge3_hemisphere",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        4
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "20b6276fe406fcca679e3065056a50e6625038646d802c24b389a06a6e860952",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/bridge3-hemisphere-runtime/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/bridge3-hemisphere-runtime/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "seed=20261045",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/teacher-bridge2-seed36-cp50/teacher.pth"
+      ],
+      "purpose": "Preserve the exact two learned training grasps while adding functional20 training row15, verified on fresh200 before admission. Equal three-row sampling,100epochs,5120envs,horizon32,constantLR1e-5,newAdam,random2/5scommands,near5,officialactuators. Initialize frozenbridgeCP50,not the third-grasp-specialized policy. All300training-developmentstates and32heldout perturbations scored separately. Physical geometry unchanged. Not unseen-grasp or hardware success. Await completed warm200 on eightGPU4 before formal training.",
+      "fixed_learning_rate_preflight": 1e-05,
+      "start_after_completed": [
+        "wuji_student_near5cp50_warm200_seed31_v1"
+      ]
+    }
+  }
+}

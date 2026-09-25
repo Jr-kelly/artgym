@@ -1,0 +1,13 @@
+{
+  "action_increment": 0.025,
+  "global_envs": 20000,
+  "global_minibatch": 40000,
+  "global_expl_group": 4000,
+  "control_hz": 30.0,
+  "curriculum": {
+    "warmupSteps": 100,
+    "totalSteps": 1100
+  },
+  "reward_protocol": "paper",
+  "train_objects": 30
+}

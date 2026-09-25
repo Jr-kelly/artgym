@@ -1,0 +1,47 @@
+{
+  "status": "frozen",
+  "dataset": "knife_wuji_functional_single24_20260922",
+  "train_count": 1,
+  "test_count": 2,
+  "scope": "Freeze one physically exercised new training grasp for a separate RL stage.\n\nSelect functional27 training row24 after the documented scripted diagnostic.\nThis selection uses training data only. It remains fragile and is not a learned\npolicy success. Preserve both held-out rows and all multi-grasp experiments.\n",
+  "parent_dataset": "knife_wuji_lowgain_functional27_20260922",
+  "parent_training_row": 24,
+  "selection_report_sha256": "4f2b545f4ce99156a48785c5b1f0bf9187e05eafef687c6e6f89df387b3ab798",
+  "parent_training_sha256": "60a5e4ee01ea21cfa5e8c259522d394f908b8542135cb7d4e7d930abcf593410",
+  "scripted_result": {
+    "env": 21,
+    "stages_attained": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "endpoints_held": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "first_cycle": true,
+    "first_cycle_strict": true,
+    "all_commands_attained": true,
+    "all_endpoints_held": true,
+    "stable_full": true,
+    "stable_full_all_endpoints": true,
+    "alive_full": true,
+    "fall": false,
+    "invalid": false,
+    "max_drift_m": 0.009575679898262024,
+    "max_rotation_rad": 0.24564555287361145
+  },
+  "source_sha256": "252079b45d97b869796fbd3d5c621a47a8c8e1aa23f6a39fabff2501ea3e4742",
+  "geometry_sha256": "5229c66b183cc6da04190bf2d6cfbd035fadd227340dc8f26602b207171b461c",
+  "artifact_sha256": {
+    "caches/initial_grasp/wuji/knife_wuji_functional_single24_20260922/000/valid_grasps.npy": "d129c0033ddf121ba58214abe40530b6f3ad01dbac70490b0f968cb5d5a6f138",
+    "caches/initial_grasp/wuji/knife_wuji_functional_single24_20260922/000/grasp_state_metadata.json": "af96f9a522da04347e6ffcdfe7f3ab44461eae9e1d66f0d46ec7c62a8de60bd3",
+    "caches/initial_grasp/wuji/knife_wuji_functional_single24_20260922/000/valid/valid_grasps.npy": "d129c0033ddf121ba58214abe40530b6f3ad01dbac70490b0f968cb5d5a6f138",
+    "caches/initial_grasp/wuji/knife_wuji_functional_single24_20260922/000/train/valid_grasps.npy": "fb186e640dc7bac4cfb0dc24c9e3e64a5f40eeb02077bf52b4ab9616bbeb1064",
+    "caches/initial_grasp/wuji/knife_wuji_functional_single24_20260922/000/test/valid_grasps.npy": "b550c56d9f9a7c0fe92751516d862c26fa4f3b3017e2ac28d91da17894213105"
+  },
+  "next_gate": "Actual training runtime/control checks before scratch PPO. No imitation or trajectories in RL."
+}

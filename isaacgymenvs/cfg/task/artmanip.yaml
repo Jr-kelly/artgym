@@ -38,8 +38,9 @@ env:
   forceDecay: 0.99
   forceDecayInterval: 0.08
 
-  policyObsDim: 117
+  policyObsDim: ${...hand.task.policyObsDim}
   privilegedObsDim: 21
+  studentInitObsDim: ${...hand.task.studentInitObsDim}
   # Student obs dimensions are derived in code from proprioHistoryLen,
   # hand action dim, and the init observation layout.
   proprioHistoryLen: 50

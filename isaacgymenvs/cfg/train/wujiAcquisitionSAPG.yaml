@@ -1,0 +1,21 @@
+defaults:
+  - wujiKnifeSAPG
+  - _self_
+params:
+  network:
+    space:
+      continuous:
+        mu_init:
+          name: const_initializer
+          val: 0.0
+        sigma_init:
+          name: const_initializer
+          val: -1.0
+  config:
+    expl_coef_block_size: 512
+    minibatch_size: 16384
+    horizon_length: 32
+    seq_length: 32
+    save_frequency: 50
+    evaluation_frequency: 50
+    checkpoint_first_epoch: 10

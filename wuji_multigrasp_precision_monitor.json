@@ -1,0 +1,33 @@
+{
+  "project": "/home/wangjiarui/artgym-experiments-20260921",
+  "python": "/home/wangjiarui/artgym-runtime/bin/python",
+  "state_dir": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/multigrasp-precision-monitor-four",
+  "interval_seconds": 300,
+  "evaluation_timeout_seconds": 1800,
+  "evaluation_gpus": [
+    1
+  ],
+  "evaluation_queue_order": "oldest_first",
+  "runs": [
+    {
+      "name": "wuji_acq_multigrasp_precision_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_multigrasp_precision_v1",
+      "profile": "acquisition",
+      "gpu": 1,
+      "evaluation": {
+        "task": "wuji_acquisition_fingertip_precision",
+        "hand": "wuji_paper",
+        "object": "knife_wuji_fingertip_precision000",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "test",
+        "repeats": 32,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "All5validationgraspsx32 at2mm/.3s. Require strictfirstandfull20s quality; repeatedvalidationisnotblindunseengeometry."
+      }
+    }
+  ]
+}

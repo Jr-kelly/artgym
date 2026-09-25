@@ -1,0 +1,65 @@
+{
+  "project": "/home/wangjiarui/artgym-experiments-20260921",
+  "python": "/home/wangjiarui/artgym-runtime/bin/python",
+  "interval_seconds": 300,
+  "evaluation_timeout_seconds": 1800,
+  "evaluation_queue_order": "newest_first",
+  "runs": [
+    {
+      "name": "sharpa_reward_corrected_recover1500_exclusive_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/sharpa_reward_corrected_recover1500_exclusive_v1",
+      "profile": "reference",
+      "gpu": 2,
+      "evaluation": {
+        "task": "artmanip_reward_control",
+        "hand": "sharpa",
+        "object": "knife_sharpa_official_eval",
+        "train": "paperReferenceSAPG",
+        "instances": [
+          "030",
+          "031",
+          "032",
+          "033",
+          "034"
+        ],
+        "split": "valid",
+        "repeats": 10,
+        "max_steps": 1200,
+        "randomized": true,
+        "scope": "Five held-out geometries, all valid grasps, 10 randomized repetitions per checkpoint; final report uses 100"
+      },
+      "final_evaluation": {
+        "task": "artmanip_reward_control",
+        "hand": "sharpa",
+        "object": "knife_sharpa_official_eval",
+        "train": "paperReferenceSAPG",
+        "instances": [
+          "030",
+          "031",
+          "032",
+          "033",
+          "034"
+        ],
+        "split": "valid",
+        "repeats": 100,
+        "max_steps": 1200,
+        "randomized": true,
+        "scope": "Final paper protocol: five held-out geometries, every valid grasp, 100 randomized rollouts each; 10 mm tolerance"
+      },
+      "required_files": [
+        "/home/wangjiarui/artgym-experiments-20260921/runs/experiment-suite/sharpa-ready.json"
+      ]
+    }
+  ],
+  "state_dir": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/sharpa-corrected-recovery-monitor-four",
+  "evaluation_gpus": [
+    2,
+    1
+  ],
+  "priority_checkpoints": [
+    {
+      "name": "sharpa_reward_corrected_recover1500_exclusive_v1",
+      "epoch": 2700
+    }
+  ]
+}

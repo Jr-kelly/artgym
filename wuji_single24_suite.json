@@ -1,0 +1,41 @@
+{
+  "experiments": {
+    "wuji_single24_scratch_timed5_seed27_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_functional_single24_20260922",
+      "task": "wuji_acquisition_official_timed5",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        2
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 300,
+      "normalizer_count_preflight": 1,
+      "start_after_completed": [
+        "wuji_functional20_count1_seed21_v1"
+      ],
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/functional-single24-runtime/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/functional-single24-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/functional-single24-runtime/report.json",
+        "expected_counts": [
+          1,
+          2
+        ]
+      },
+      "overrides": [
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "object.reward.GoalDistance2=5.0",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "seed=20261027",
+        "train.params.config.learning_rate=0.0002"
+      ],
+      "purpose": "Adaptive singlecase curriculum after newfunctional trainingrow24 had fragile scripted20sjointsuccess. Scratch allweights; no imitation trajectory.5scommands,nearGaussian5,officialactuators,.3damping,fullresetnoise,300epochs. Not one-factor comparison to functional20. Mastergoal remains manygrasps andgeometry. Evaluate new100perturbations plus2heldout nominalgrasps separately."
+    }
+  }
+}

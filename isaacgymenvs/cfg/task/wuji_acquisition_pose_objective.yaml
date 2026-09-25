@@ -1,0 +1,10 @@
+defaults:
+  - wuji_acquisition_fingertip_subset
+  - _self_
+env:
+  maxConsecutiveSuccesses: 0
+  absolutePoseObjective:
+    coefficient: 1.0
+    position_scale_m: 0.01
+    rotation_scale_rad: 0.25
+    ramp_epochs: 50

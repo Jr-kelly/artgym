@@ -1,0 +1,53 @@
+{
+  "project": "/home/wangjiarui/artgym-experiments-20260921",
+  "python": "/home/wangjiarui/artgym-runtime/bin/python",
+  "state_dir": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/augmentation-monitor-eight",
+  "interval_seconds": 300,
+  "evaluation_timeout_seconds": 1800,
+  "evaluation_gpus": [
+    5
+  ],
+  "evaluation_queue_order": "oldest_first",
+  "runs": [
+    {
+      "name": "wuji_acq_precision_aug_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_precision_aug_v1",
+      "profile": "acquisition",
+      "gpu": 5,
+      "evaluation": {
+        "task": "wuji_acquisition_precision_aug",
+        "hand": "wuji_paper",
+        "object": "knife_wuji_acquisition_precision",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "train",
+        "repeats": 32,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "One prescribed grasp, strict2mm/0.3s,32 nominaltrials; reset augmentation disabled at eval; independent noise tests separate."
+      }
+    },
+    {
+      "name": "wuji_acq_precision_continue_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_precision_continue_v1",
+      "profile": "acquisition",
+      "gpu": 5,
+      "evaluation": {
+        "task": "wuji_acquisition_precision",
+        "hand": "wuji_paper",
+        "object": "knife_wuji_acquisition_precision",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "train",
+        "repeats": 32,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "One prescribed grasp, strict2mm/0.3s,32 nominaltrials; reset augmentation disabled at eval; independent noise tests separate."
+      }
+    }
+  ]
+}

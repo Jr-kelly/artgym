@@ -1,0 +1,53 @@
+{
+  "project": "/home/wangjiarui/artgym-experiments-20260921",
+  "python": "/home/wangjiarui/artgym-runtime/bin/python",
+  "state_dir": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/precision-reward-monitor-eight",
+  "interval_seconds": 300,
+  "evaluation_timeout_seconds": 1800,
+  "evaluation_gpus": [
+    0
+  ],
+  "evaluation_queue_order": "oldest_first",
+  "runs": [
+    {
+      "name": "wuji_acq_precision_near01_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_precision_near01_v1",
+      "profile": "acquisition",
+      "gpu": 0,
+      "evaluation": {
+        "task": "wuji_acquisition_precision_aug",
+        "hand": "wuji_paper",
+        "object": "knife_wuji_acquisition_precision",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "train",
+        "repeats": 32,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "Nominal precision evaluation; only training reward coefficient differs. Separate matched100trial perturbation audit atCP50/100/150."
+      }
+    },
+    {
+      "name": "wuji_acq_precision_near1_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_precision_near1_v1",
+      "profile": "acquisition",
+      "gpu": 0,
+      "evaluation": {
+        "task": "wuji_acquisition_precision_aug",
+        "hand": "wuji_paper",
+        "object": "knife_wuji_acquisition_precision",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "train",
+        "repeats": 32,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "Nominal precision evaluation; only training reward coefficient differs. Separate matched100trial perturbation audit atCP50/100/150."
+      }
+    }
+  ]
+}

@@ -8,6 +8,7 @@ from torch.optim.optimizer import Optimizer
 import math
 import torch.distributed as dist
 import time
+import tempfile
 
 numpy_to_torch_dtype_dict = {
     np.dtype('bool')       : torch.bool,
@@ -79,7 +80,21 @@ def safe_symlink(src, dst):
     safe_filesystem_op(os.symlink, src, dst)
 
 def safe_save(state, filename):
-    return safe_filesystem_op(torch.save, state, filename)
+    # Readers must see either the previous complete checkpoint or the new one.
+    filename = os.fspath(filename)
+    def write_atomic():
+        fd, temporary = tempfile.mkstemp(prefix='.checkpoint-', suffix='.tmp',
+                                         dir=os.path.dirname(filename) or '.')
+        try:
+            with os.fdopen(fd, 'wb') as stream:
+                torch.save(state, stream)
+                stream.flush()
+                os.fsync(stream.fileno())
+            os.replace(temporary, filename)
+        finally:
+            if os.path.exists(temporary):
+                os.unlink(temporary)
+    return safe_filesystem_op(write_atomic)
 
 def safe_load(filename):
     return safe_filesystem_op(torch.load, filename, map_location='cpu', weights_only=False)

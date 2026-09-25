@@ -183,7 +183,7 @@ def _reorder_urdf_limits_to_policy_order(joint_names, lower_limits, upper_limits
     if set(joint_names) == set(policy_joint_order):
         policy_indices = [joint_to_index[name] for name in policy_joint_order]
         return lower_limits[policy_indices], upper_limits[policy_indices], list(policy_joint_order)
-    return lower_limits, upper_limits, joint_names
+    raise ValueError('Configured policy joint names do not match the URDF joints')
 
 
 def _set_task_state_goal_offset(task_state_provider, goal_offset: float) -> bool:
@@ -283,10 +283,19 @@ def print_reset_debug_summary(provider, joint_names):
 
 
 def build_local_task_env(task: str, hand: str, object_name: str):
+    from hydra import compose, initialize_config_dir
+    from isaacgymenvs import register_omegaconf_resolvers
+    from omegaconf import OmegaConf
+
     repo_root = Path(__file__).resolve().parents[2]
-    task_cfg = load_simple_yaml(repo_root / "isaacgymenvs" / "cfg" / "task" / f"{task}.yaml")
-    hand_cfg = load_simple_yaml(repo_root / "isaacgymenvs" / "cfg" / "hand" / f"{hand}.yaml")
-    object_cfg = load_simple_yaml(repo_root / "isaacgymenvs" / "cfg" / "object" / f"{object_name}.yaml")
+    register_omegaconf_resolvers()
+    # Resolve the same defaults, inheritance, lists and interpolations as training.
+    # The train group is unused here but must exist for Hydra composition.
+    with initialize_config_dir(version_base='1.1', config_dir=str(repo_root / 'isaacgymenvs/cfg')):
+        cfg = compose(config_name='config', overrides=[f'task={task}', f'hand={hand}',
+            f'object={object_name}', 'train=artmanipSAPGPrivLSTMPPO', 'num_envs=1'])
+    task_cfg, hand_cfg, object_cfg = [OmegaConf.to_container(cfg[key], resolve=True)
+                                    for key in ['task', 'hand', 'object']]
     task_env_cfg = task_cfg["env"]
     asset_relpath = hand_cfg["asset"]
     urdf_path = (repo_root / asset_relpath).resolve()
@@ -295,7 +304,7 @@ def build_local_task_env(task: str, hand: str, object_name: str):
         joint_names,
         lower_limits,
         upper_limits,
-        get_optional_hand_joint_order(hand),
+        hand_cfg.get('dof_names') or get_optional_hand_joint_order(hand),
     )
     num_actions = int(hand_cfg["task"]["numActions"])
     if lower_limits.shape[0] != num_actions:
@@ -304,9 +313,18 @@ def build_local_task_env(task: str, hand: str, object_name: str):
     object_goals = object_task_cfg.get("goals")
     if object_goals is None:
         raise ValueError("object.task.goals is required.")
+    action_control = None
+    if task_cfg['name'] in ('wuji_acquisition', 'wuji_timed_acquisition'):
+        from isaacgymenvs.deploy.wuji.acquisition_control import WujiAcquisitionActionController
+        action_control = WujiAcquisitionActionController(lower_limits, upper_limits, joint_names,
+            support_span=task_env_cfg['supportActionSpan'], thumb_step=task_env_cfg['thumbActionStep'],
+            control_dt=task_cfg['sim']['dt'] * task_env_cfg['controlFrequencyInv']).description()
     return SimpleNamespace(
         task=task,
         hand=hand,
+        hand_type=hand_cfg['type'],
+        object_asset_dir=Path(object_cfg['asset']['asset_root']).name,
+        action_control=action_control,
         object_name=object_name,
         action_dim=num_actions,
         num_hand_dofs=num_actions,
@@ -336,6 +354,17 @@ class RemoteStudentPolicyDeployer:
             raise ValueError(
                 f"Server action_dim={remote_context['action_dim']} does not match local action_dim={local_task_env.action_dim}"
             )
+        self.acquisition_controller = None
+        local_control = getattr(local_task_env, 'action_control', None)
+        remote_control = remote_context.get('action_control')
+        if local_control != remote_control:
+            raise ValueError('Server and client action-control protocols differ; refuse joint commands')
+        if local_control is not None:
+            from isaacgymenvs.deploy.wuji.acquisition_control import WujiAcquisitionActionController
+            self.acquisition_controller = WujiAcquisitionActionController(
+                local_task_env.hand_dof_lower_limits, local_task_env.hand_dof_upper_limits,
+                local_task_env.hand_joint_names, support_span=local_control['support_span_rad'],
+                thumb_step=local_control['thumb_increment_rad'], control_dt=local_control['control_dt'])
 
     def build_context(self):
         return PolicyDeploymentContext(
@@ -356,16 +385,21 @@ class RemoteStudentPolicyDeployer:
             student_proprio_dim_per_step=int(self.remote_context["student_proprio_dim_per_step"]),
             student_contact_dim_per_step=int(self.remote_context["student_contact_dim_per_step"]),
             student_init_dim=int(self.remote_context["student_init_dim"]),
-            distill_meta={},
+            distill_meta={'action_control': getattr(self.local_task_env, 'action_control', None)},
         )
 
-    def reset(self, hand_joint_positions):
+    def reset(self, hand_joint_positions, commanded_initial_targets=None):
         qpos = np.asarray(hand_joint_positions, dtype=np.float32)
         if qpos.shape != (self.local_task_env.num_hand_dofs,):
             raise ValueError(
                 f"hand_joint_positions must have shape ({self.local_task_env.num_hand_dofs},), got {qpos.shape}"
             )
         self.prev_targets = qpos.copy()
+        if self.acquisition_controller is not None:
+            if commanded_initial_targets is None:
+                raise ValueError('Wuji acquisition needs commanded initial targets separately from measured qpos')
+            self.acquisition_controller.reset(commanded_initial_targets)
+            self.prev_targets = self.acquisition_controller.previous_targets.copy()
         self.need_reset_rnn = True
 
     def _action_to_joint_targets(self, action):
@@ -374,6 +408,11 @@ class RemoteStudentPolicyDeployer:
         action = np.asarray(action, dtype=np.float32)
         if action.shape != (self.local_task_env.action_dim,):
             raise ValueError(f"action must have shape ({self.local_task_env.action_dim},), got {action.shape}")
+        if not np.isfinite(action).all():
+            raise ValueError('Non-finite policy action')
+        if self.acquisition_controller is not None:
+            self.prev_targets = self.acquisition_controller.step(action)
+            return self.prev_targets.copy()
         action = np.clip(action, -1.0, 1.0)
         lower = self.local_task_env.hand_dof_lower_limits
         upper = self.local_task_env.hand_dof_upper_limits
@@ -409,10 +448,25 @@ class RemoteStudentPolicyDeployer:
         return raw_action, joint_targets, response
 
 
+def reset_deployer_from_robot(deployer, robot, provider):
+    initial_targets = None
+    if deployer.acquisition_controller is not None:
+        state = getattr(provider, 'reset_state', None)
+        if state is not None:
+            initial_targets = state.metadata.get('commanded_initial_targets')
+        if initial_targets is None:
+            getter = getattr(robot, 'get_commanded_joint_targets', None)
+            if callable(getter):
+                initial_targets = getter()
+    deployer.reset(robot.get_hand_joint_positions(), commanded_initial_targets=initial_targets)
+
+
 def main():
     args = parse_args()
 
     local_task_env = build_local_task_env(args.task, args.hand, args.object)
+    if local_task_env.action_control is not None and args.control_sleep != 0.0:
+        raise ValueError('Acquisition control is paced at its trained 30 Hz; leave --control-sleep at zero')
     robot_cls = load_class(resolve_hand_robot_class_spec(args.hand, args.robot_class), HandAPI)
     provider_cls = load_class(
         resolve_hand_observation_provider_class_spec(args.hand, args.observation_provider_class),
@@ -442,9 +496,9 @@ def main():
     provider_kwargs.setdefault("urdf_path", local_task_env.urdf_path)
 
     task_state_kwargs.setdefault("goal_offset", args.goal_offset)
-    task_state_kwargs.setdefault("hand_type", args.hand)
+    task_state_kwargs.setdefault("hand_type", local_task_env.hand_type)
     task_state_kwargs.setdefault("object_type", args.object)
-    task_state_kwargs.setdefault("asset_dir", args.asset_dir)
+    task_state_kwargs.setdefault("asset_dir", args.asset_dir or local_task_env.object_asset_dir)
     if args.grasp_instance_id:
         task_state_kwargs.setdefault("instance_id", args.grasp_instance_id)
     task_state_kwargs.setdefault("use_measured_init_hand_qpos", args.use_measured_init_hand_qpos)
@@ -499,7 +553,7 @@ def main():
             robot.reset()
             provider.reset(robot)
             print_reset_debug_summary(provider, local_task_env.hand_joint_names)
-            deployer.reset(robot.get_hand_joint_positions())
+            reset_deployer_from_robot(deployer, robot, provider)
             print(
                 f"Student policy client connected to {args.host}:{args.port}; "
                 f"control mode={'relative' if context.use_relative_control else 'absolute'}"
@@ -507,6 +561,7 @@ def main():
             rollout_start_time = time.monotonic()
 
             while True:
+                control_step_start = time.monotonic()
                 if robot.should_stop():
                     break
                 if args.max_steps > 0 and step_idx >= args.max_steps:
@@ -544,10 +599,16 @@ def main():
                     provider.reset(robot)
                     print_reset_debug_summary(provider, local_task_env.hand_joint_names)
                     reset_idx += 1
-                    deployer.reset(robot.get_hand_joint_positions())
+                    reset_deployer_from_robot(deployer, robot, provider)
                     last_action = np.zeros(context.action_dim, dtype=np.float32)
 
-                if args.control_sleep > 0.0:
+                if deployer.acquisition_controller is not None:
+                    # Never issue catch-up actions after a slow RPC. Latency changes
+                    # still need simulation/hardware validation before deployment.
+                    remaining = context.control_dt - (time.monotonic() - control_step_start)
+                    if remaining > 0:
+                        time.sleep(remaining)
+                elif args.control_sleep > 0.0:
                     time.sleep(args.control_sleep)
                 step_idx += 1
         except KeyboardInterrupt:

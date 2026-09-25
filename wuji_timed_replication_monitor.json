@@ -1,0 +1,53 @@
+{
+  "project": "/home/wangjiarui/artgym-experiments-20260921",
+  "python": "/home/wangjiarui/artgym-runtime/bin/python",
+  "state_dir": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/timed-replication-monitor-eight",
+  "interval_seconds": 300,
+  "evaluation_timeout_seconds": 1800,
+  "evaluation_gpus": [
+    4
+  ],
+  "evaluation_queue_order": "oldest_first",
+  "runs": [
+    {
+      "name": "wuji_acq_official_timed2_seed14_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_official_timed2_seed14_v1",
+      "profile": "acquisition",
+      "gpu": 4,
+      "evaluation": {
+        "task": "wuji_acquisition_official_support40mrad",
+        "hand": "wuji_paper_official_actuator",
+        "object": "knife_wuji_precision_near01",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "train",
+        "repeats": 32,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "Secondary 32 nominal arrival-evaluation trials. Primary command endpoints use separate 2s/5s clocks and 100 saved perturbed states."
+      }
+    },
+    {
+      "name": "wuji_acq_official_arrival_seed14_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_official_arrival_seed14_v1",
+      "profile": "acquisition",
+      "gpu": 5,
+      "evaluation": {
+        "task": "wuji_acquisition_official_support40mrad",
+        "hand": "wuji_paper_official_actuator",
+        "object": "knife_wuji_precision_near01",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "train",
+        "repeats": 32,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "Secondary 32 nominal arrival-evaluation trials. Primary command endpoints use separate 2s/5s clocks and 100 saved perturbed states."
+      }
+    }
+  ]
+}

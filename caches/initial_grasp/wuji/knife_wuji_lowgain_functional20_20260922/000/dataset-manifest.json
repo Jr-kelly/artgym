@@ -1,0 +1,172 @@
+{
+  "status": "frozen",
+  "scope": "Freeze physically screened training grasps without mixing source splits.\n\n17 old training-source settled states plus three fresh training-source states;\none fresh held-out state. The original five failed validation sources remain a\nseparate unchanged benchmark. This dataset is static-feasibility evidence, not\nsuccessful multi-grasp manipulation, and one feasible test grasp is inadequate\nto establish broad generalization. Further fresh seeds are collected separately.\n",
+  "dataset": "knife_wuji_lowgain_functional20_20260922",
+  "train_count": 20,
+  "test_count": 1,
+  "records": [
+    {
+      "group": "settled_train_sources",
+      "split": "train",
+      "candidate_row": 2,
+      "source": "runs/wuji-goal/diagnostics/lowgain-settled-grasps-v1/candidates/initial_states.npy",
+      "dataset_split_row": 0
+    },
+    {
+      "group": "settled_train_sources",
+      "split": "train",
+      "candidate_row": 5,
+      "source": "runs/wuji-goal/diagnostics/lowgain-settled-grasps-v1/candidates/initial_states.npy",
+      "dataset_split_row": 1
+    },
+    {
+      "group": "settled_train_sources",
+      "split": "train",
+      "candidate_row": 6,
+      "source": "runs/wuji-goal/diagnostics/lowgain-settled-grasps-v1/candidates/initial_states.npy",
+      "dataset_split_row": 2
+    },
+    {
+      "group": "settled_train_sources",
+      "split": "train",
+      "candidate_row": 7,
+      "source": "runs/wuji-goal/diagnostics/lowgain-settled-grasps-v1/candidates/initial_states.npy",
+      "dataset_split_row": 3
+    },
+    {
+      "group": "settled_train_sources",
+      "split": "train",
+      "candidate_row": 9,
+      "source": "runs/wuji-goal/diagnostics/lowgain-settled-grasps-v1/candidates/initial_states.npy",
+      "dataset_split_row": 4
+    },
+    {
+      "group": "settled_train_sources",
+      "split": "train",
+      "candidate_row": 10,
+      "source": "runs/wuji-goal/diagnostics/lowgain-settled-grasps-v1/candidates/initial_states.npy",
+      "dataset_split_row": 5
+    },
+    {
+      "group": "settled_train_sources",
+      "split": "train",
+      "candidate_row": 12,
+      "source": "runs/wuji-goal/diagnostics/lowgain-settled-grasps-v1/candidates/initial_states.npy",
+      "dataset_split_row": 6
+    },
+    {
+      "group": "settled_train_sources",
+      "split": "train",
+      "candidate_row": 13,
+      "source": "runs/wuji-goal/diagnostics/lowgain-settled-grasps-v1/candidates/initial_states.npy",
+      "dataset_split_row": 7
+    },
+    {
+      "group": "settled_train_sources",
+      "split": "train",
+      "candidate_row": 14,
+      "source": "runs/wuji-goal/diagnostics/lowgain-settled-grasps-v1/candidates/initial_states.npy",
+      "dataset_split_row": 8
+    },
+    {
+      "group": "settled_train_sources",
+      "split": "train",
+      "candidate_row": 15,
+      "source": "runs/wuji-goal/diagnostics/lowgain-settled-grasps-v1/candidates/initial_states.npy",
+      "dataset_split_row": 9
+    },
+    {
+      "group": "settled_train_sources",
+      "split": "train",
+      "candidate_row": 16,
+      "source": "runs/wuji-goal/diagnostics/lowgain-settled-grasps-v1/candidates/initial_states.npy",
+      "dataset_split_row": 10
+    },
+    {
+      "group": "settled_train_sources",
+      "split": "train",
+      "candidate_row": 18,
+      "source": "runs/wuji-goal/diagnostics/lowgain-settled-grasps-v1/candidates/initial_states.npy",
+      "dataset_split_row": 11
+    },
+    {
+      "group": "settled_train_sources",
+      "split": "train",
+      "candidate_row": 19,
+      "source": "runs/wuji-goal/diagnostics/lowgain-settled-grasps-v1/candidates/initial_states.npy",
+      "dataset_split_row": 12
+    },
+    {
+      "group": "settled_train_sources",
+      "split": "train",
+      "candidate_row": 20,
+      "source": "runs/wuji-goal/diagnostics/lowgain-settled-grasps-v1/candidates/initial_states.npy",
+      "dataset_split_row": 13
+    },
+    {
+      "group": "settled_train_sources",
+      "split": "train",
+      "candidate_row": 21,
+      "source": "runs/wuji-goal/diagnostics/lowgain-settled-grasps-v1/candidates/initial_states.npy",
+      "dataset_split_row": 14
+    },
+    {
+      "group": "settled_train_sources",
+      "split": "train",
+      "candidate_row": 22,
+      "source": "runs/wuji-goal/diagnostics/lowgain-settled-grasps-v1/candidates/initial_states.npy",
+      "dataset_split_row": 15
+    },
+    {
+      "group": "settled_train_sources",
+      "split": "train",
+      "candidate_row": 23,
+      "source": "runs/wuji-goal/diagnostics/lowgain-settled-grasps-v1/candidates/initial_states.npy",
+      "dataset_split_row": 16
+    },
+    {
+      "group": "fresh_seed20261018",
+      "split": "test",
+      "candidate_row": 1,
+      "source": "runs/wuji-goal/diagnostics/fresh-lowgain-functional-generation/independent-quality-v2/candidates/initial_states.npy",
+      "dataset_split_row": 0
+    },
+    {
+      "group": "fresh_seed20261018",
+      "split": "train",
+      "candidate_row": 8,
+      "source": "runs/wuji-goal/diagnostics/fresh-lowgain-functional-generation/independent-quality-v2/candidates/initial_states.npy",
+      "dataset_split_row": 17
+    },
+    {
+      "group": "fresh_seed20261018",
+      "split": "train",
+      "candidate_row": 20,
+      "source": "runs/wuji-goal/diagnostics/fresh-lowgain-functional-generation/independent-quality-v2/candidates/initial_states.npy",
+      "dataset_split_row": 18
+    },
+    {
+      "group": "fresh_seed20261018",
+      "split": "train",
+      "candidate_row": 21,
+      "source": "runs/wuji-goal/diagnostics/fresh-lowgain-functional-generation/independent-quality-v2/candidates/initial_states.npy",
+      "dataset_split_row": 19
+    }
+  ],
+  "source_sha256": "7a675f8827c3720d513e1b642cb08848304eb47cce6332dc413d9725feffe327",
+  "input_sha256": {
+    "runs/wuji-goal/diagnostics/lowgain-settled-grasps-v1/joined-quality-report.json": "77d84af7fad193f25c72875306b1b7da2edec325839841de0b1b028f4766dd7e",
+    "runs/wuji-goal/diagnostics/lowgain-settled-grasps-v1/candidates/initial_states.npy": "9cee397811ccf0daeb1b74b89a619eefea8d51a973df35a4e725a67f41ffe8a1",
+    "runs/wuji-goal/diagnostics/fresh-lowgain-functional-generation/independent-quality-v2/report.json": "0054c6639224d9a3f5cdfdf3d119becc702ee2160e7a4ed190734723aac66751",
+    "runs/wuji-goal/diagnostics/fresh-lowgain-functional-generation/independent-quality-v2/candidates/initial_states.npy": "c0c2846382e61bdc802a47d0d2e41f64a666d88d2714d22a2eb4f561d692e781"
+  },
+  "geometry_sha256": "5229c66b183cc6da04190bf2d6cfbd035fadd227340dc8f26602b207171b461c",
+  "artifact_sha256": {
+    "caches/initial_grasp/wuji/knife_wuji_lowgain_functional20_20260922/000/valid_grasps.npy": "4058b178b0b241eb7145f97d3f58365a4166ef585c71e08fd2c7a884df07fd6d",
+    "caches/initial_grasp/wuji/knife_wuji_lowgain_functional20_20260922/000/grasp_state_metadata.json": "e362b26ebd847efd584e440edf4396a94b0eeee5462223879ca391c2a8c3ed9b",
+    "caches/initial_grasp/wuji/knife_wuji_lowgain_functional20_20260922/000/valid/valid_grasps.npy": "4058b178b0b241eb7145f97d3f58365a4166ef585c71e08fd2c7a884df07fd6d",
+    "caches/initial_grasp/wuji/knife_wuji_lowgain_functional20_20260922/000/train/valid_grasps.npy": "035d2abefb6b98071647b0016c3a69e3942c4f268da72722919c5a037794bac2",
+    "caches/initial_grasp/wuji/knife_wuji_lowgain_functional20_20260922/000/test/valid_grasps.npy": "f4aeecbc87ad3edc2bccc6c208f5a0861d37e209dc69e67906f5c90573ee72b8"
+  },
+  "next_gate": "Actual training-env reset/control checks and a bounded PPO preflight before any training launch"
+}

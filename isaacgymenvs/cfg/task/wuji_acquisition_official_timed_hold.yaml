@@ -1,0 +1,7 @@
+defaults:
+  - wuji_acquisition_official_timed2
+  - _self_
+env:
+  # Once the command is held for .3s, reward each further in-tolerance step
+  # while the base stays within the independently defined pose thresholds.
+  endpointHoldReward: 1.0

@@ -1,0 +1,672 @@
+{
+  "status": "completed",
+  "instance": "022",
+  "checked": "2026-09-21T17:08:58.509538+00:00",
+  "valid": 6,
+  "train": 6,
+  "test": 0,
+  "source_sha256": "4d8a9a8c0f8c094fadf9bd476eb5eb2f5179235bf0491f26de0a1b060f5cecd3",
+  "screened_sha256": "718855985bec6b2a48e9806bb7ce825a56e8fc26c1c19ff80d7c47da056f6f59",
+  "urdf_sha256": "944e809b46860cfdee71af6fe0b4da697a506521e4ba327ea17cdafd6743460b",
+  "accepted_source_indices": [
+    9,
+    16,
+    17,
+    18,
+    35,
+    37
+  ],
+  "rules": {
+    "version": "approved_fingertip_v1",
+    "blade_thumb_side_min_dot": 0.82,
+    "max_reference_rotation_deg": 40.0,
+    "max_reference_center_distance_m": 0.035,
+    "min_center_height_m": 0.095,
+    "thumb_travel_m": 0.04,
+    "thumb_reach_tolerance_m": 0.002,
+    "slider_edge_margin_m": 0.001,
+    "validation_seconds": 2.0,
+    "max_drift_m": 0.01,
+    "max_rotation_rad": 0.25,
+    "min_each_fingertip_contact_fraction": 0.9,
+    "max_palm_contact_fraction": 0.0,
+    "contact_sample_control_steps": 3,
+    "contact_force_threshold": 1e-06
+  },
+  "physical_protocol": "Wuji acquisition physics: 2 seconds, 120 Hz simulation /30 Hz control, gravity, passive damping 0.3, hand friction1/object3, zero policy action",
+  "contact_fractions": [
+    [
+      1.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  ],
+  "palm_contact_fractions": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "max_drift_m": [
+    9.118737580138259e-06,
+    9.683737516752444e-06,
+    4.678681307268562e-06,
+    8.306785457534716e-05,
+    9.246348781744018e-05,
+    5.0930033467011526e-05,
+    5.7248635130235925e-06,
+    1.4614202882512473e-05
+  ],
+  "max_rotation_rad": [
+    0.0005262595950625837,
+    0.0003603947989176959,
+    0.0009068305953405797,
+    0.0017628568457439542,
+    0.004951597657054663,
+    0.0032005079556256533,
+    0.0011563141597434878,
+    0.0007573118200525641
+  ],
+  "any_reset": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ],
+  "config": {
+    "task": {
+      "name": "wuji_acquisition",
+      "physics_engine": "physx",
+      "env": {
+        "numEnvs": 8,
+        "envSpacing": 0.75,
+        "episodeLength": 600,
+        "enableDebugVis": false,
+        "aggregateMode": 0,
+        "successHoldDurationSec": 0.0,
+        "successHoldDurationRangeSec": [
+          0.0,
+          0.0
+        ],
+        "maxConsecutiveSuccesses": 2,
+        "goalSwitchTimeoutSec": 10.0,
+        "jointNoise": 0.0,
+        "dofSpeedScale": 1.0,
+        "useRelativeControl": false,
+        "graspSplit": "train",
+        "rewardWeightCurriculum": {
+          "ObjPosDeviation": -0.5,
+          "ObjRotDeviation": -0.02,
+          "StableContact": 0.0
+        },
+        "rewardWeightCurriculumSchedule": {
+          "warmupSteps": 200,
+          "totalSteps": 2000
+        },
+        "binaryTactileThreshold": 0.05,
+        "actionsMovingAverage": 1.0,
+        "controlFrequencyInv": 4,
+        "forceScale": 0.0,
+        "forceProbRange": [
+          0.001,
+          0.1
+        ],
+        "forceDecay": 0.99,
+        "forceDecayInterval": 0.08,
+        "policyObsDim": 111,
+        "privilegedObsDim": 21,
+        "studentInitObsDim": 55,
+        "proprioHistoryLen": 50,
+        "enableCameraSensors": false,
+        "camera": {
+          "height": 1080,
+          "width": 1920,
+          "horizontal_fov": 75,
+          "use_collision_geometry": true,
+          "cam_pos": [
+            0.0,
+            0.2,
+            1.0
+          ],
+          "cam_target": [
+            0.0,
+            -0.15,
+            0.5
+          ]
+        },
+        "rewardProtocol": "corrected",
+        "supportActionSpan": 0.04,
+        "thumbActionStep": 0.025,
+        "aliveReward": 0.1
+      },
+      "task": {
+        "randomize": false,
+        "randomization_params": {}
+      },
+      "sim": {
+        "dt": 0.008333333333333333,
+        "substeps": 4,
+        "up_axis": "z",
+        "use_gpu_pipeline": false,
+        "gravity": [
+          0.0,
+          0.0,
+          -9.81
+        ],
+        "physx": {
+          "num_threads": 4,
+          "solver_type": 1,
+          "use_gpu": true,
+          "num_position_iterations": 16,
+          "num_velocity_iterations": 4,
+          "max_gpu_contact_pairs": 1048576,
+          "num_subscenes": 0,
+          "contact_offset": 0.002,
+          "rest_offset": 0.0,
+          "bounce_threshold_velocity": 0.2,
+          "max_depenetration_velocity": 100.0,
+          "default_buffer_size_multiplier": 2.0,
+          "contact_collection": 2
+        }
+      }
+    },
+    "object": {
+      "task": {
+        "success_threshold": 0.005,
+        "rot_devia_threshold": 1.57,
+        "pos_devia_threshold": 0.05,
+        "goals": [
+          0.04,
+          0.0
+        ],
+        "contact_num": 5
+      },
+      "asset": {
+        "type": "knife",
+        "asset_root": "assets/objects/knife_wuji_official",
+        "instance_id_list": [
+          "022"
+        ],
+        "asset_file": "mobility.urdf",
+        "initDof": "lower",
+        "disgravity_part": [],
+        "disfriction_part": [],
+        "disrbforce_part": [],
+        "dissimulate_part": []
+      },
+      "default_props": {
+        "mass": [
+          0.029,
+          0.006
+        ],
+        "friction": 3.0,
+        "dof_stiffness": 0.0,
+        "dof_damping": 0.3
+      },
+      "randomization": {
+        "randomize": false,
+        "dof_properties": {
+          "damping": {
+            "range": [
+              0.7,
+              1.3
+            ],
+            "operation": "scaling",
+            "distribution": "uniform"
+          }
+        },
+        "rigid_body_properties": {
+          "by_body": {
+            "link_0": {
+              "mass": {
+                "range": [
+                  1.0,
+                  5.0
+                ],
+                "operation": "scaling",
+                "distribution": "uniform"
+              }
+            },
+            "link_1": {
+              "mass": {
+                "range": [
+                  1.0,
+                  2.0
+                ],
+                "operation": "scaling",
+                "distribution": "uniform"
+              }
+            }
+          }
+        },
+        "rigid_shape_properties": {
+          "friction": {
+            "num_buckets": 250,
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "operation": "additive",
+            "distribution": "uniform"
+          }
+        }
+      },
+      "reward": {
+        "ObjPosDeviation": -0.5,
+        "ObjRotDeviation": -0.02,
+        "StableContact": 0.0,
+        "HandQposDeviation": -0.001,
+        "GoalDistance1": 1000.0,
+        "GoalDistance2": 1.0,
+        "Smooth": -1.0,
+        "Drop": -25.0,
+        "Success": 50.0
+      }
+    },
+    "hand": {
+      "type": "wuji",
+      "asset": "assets/hands/wuji_artbot/right.urdf",
+      "self_collisions": true,
+      "force_links": [
+        "hand_r_thumb_pad_link",
+        "hand_r_index_pad_link",
+        "hand_r_middle_pad_link",
+        "hand_r_ring_pad_link",
+        "hand_r_pinky_pad_link"
+      ],
+      "track_links": [
+        "hand_r_thumb_pad_link",
+        "hand_r_index_pad_link",
+        "hand_r_middle_pad_link",
+        "hand_r_ring_pad_link",
+        "hand_r_pinky_pad_link"
+      ],
+      "dof_names": [
+        "hand_r_index_joint1",
+        "hand_r_index_joint2",
+        "hand_r_index_joint3",
+        "hand_r_index_joint4",
+        "hand_r_middle_joint1",
+        "hand_r_middle_joint2",
+        "hand_r_middle_joint3",
+        "hand_r_middle_joint4",
+        "hand_r_pinky_joint1",
+        "hand_r_pinky_joint2",
+        "hand_r_pinky_joint3",
+        "hand_r_pinky_joint4",
+        "hand_r_ring_joint1",
+        "hand_r_ring_joint2",
+        "hand_r_ring_joint3",
+        "hand_r_ring_joint4",
+        "hand_r_thumb_joint1",
+        "hand_r_thumb_joint2",
+        "hand_r_thumb_joint3",
+        "hand_r_thumb_joint4"
+      ],
+      "dof_props": {
+        "stiffness": [
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238
+        ],
+        "damping": [
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332
+        ],
+        "friction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "armature": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "task": {
+        "numActions": 20,
+        "propDim": 40,
+        "policyObsDim": 111,
+        "studentInitObsDim": 55
+      },
+      "randomization": {
+        "randomize": false
+      },
+      "self_collision_mode": "digit_filtered"
+    },
+    "train": {
+      "params": {
+        "seed": 20260926,
+        "algo": {
+          "name": "a2c_continuous"
+        },
+        "model": {
+          "name": "continuous_a2c_logstd"
+        },
+        "network": {
+          "name": "actor_critic_sapg_priv",
+          "separate": true,
+          "space": {
+            "continuous": {
+              "mu_activation": "None",
+              "sigma_activation": "None",
+              "mu_init": {
+                "name": "const_initializer",
+                "val": 0.0
+              },
+              "sigma_init": {
+                "name": "const_initializer",
+                "val": -1.0
+              },
+              "fixed_sigma": "coef_cond"
+            }
+          },
+          "mlp": {
+            "units": [
+              512,
+              256,
+              128
+            ],
+            "activation": "elu",
+            "d2rl": false,
+            "initializer": {
+              "name": "default"
+            },
+            "regularizer": {
+              "name": "None"
+            }
+          },
+          "rnn": {
+            "name": "lstm",
+            "units": 512,
+            "layers": 1,
+            "before_mlp": true,
+            "layer_norm": true
+          },
+          "sapg_priv": {
+            "policy_obs_dim": 111,
+            "privileged_obs_dim": 21,
+            "critic_policy_contact_dim": 5,
+            "expl_embedding_dim": 32,
+            "encoder": {
+              "units": [
+                256,
+                128,
+                16
+              ],
+              "activation": "elu",
+              "initializer": {
+                "name": "default"
+              }
+            },
+            "student_encoder": {
+              "type": "auto",
+              "init_dim": 55,
+              "proprio_encoder": {
+                "units": [
+                  128,
+                  64
+                ],
+                "activation": "elu",
+                "initializer": {
+                  "name": "default"
+                }
+              },
+              "init_encoder": {
+                "units": [
+                  128,
+                  64
+                ],
+                "activation": "elu",
+                "initializer": {
+                  "name": "default"
+                }
+              },
+              "temporal": {
+                "type": "tconv",
+                "hidden_size": 192,
+                "num_layers": 5,
+                "kernel_size": 3,
+                "dilation_growth": 2,
+                "activation": "elu",
+                "dropout": 0.05
+              },
+              "latent_head": {
+                "units": [
+                  128
+                ],
+                "activation": "elu",
+                "initializer": {
+                  "name": "default"
+                }
+              }
+            }
+          }
+        },
+        "load_checkpoint": false,
+        "load_path": "",
+        "config": {
+          "name": "artmanipSAPGPrivLSTMPPO",
+          "full_experiment_name": "artmanipSAPGPrivLSTMPPO",
+          "env_name": "rlgpu",
+          "multi_gpu": false,
+          "ppo": true,
+          "mixed_precision": false,
+          "normalize_input": true,
+          "normalize_value": true,
+          "value_bootstrap": false,
+          "num_actors": 8,
+          "reward_shaper": {
+            "scale_value": 1.0
+          },
+          "normalize_advantage": true,
+          "gamma": 0.998,
+          "tau": 0.95,
+          "learning_rate": 0.0002,
+          "lr_schedule": "adaptive",
+          "schedule_type": "standard",
+          "kl_threshold": 0.016,
+          "score_to_win": 100000,
+          "max_epochs": 50000,
+          "save_best_after": 50,
+          "save_frequency": 50,
+          "print_stats": true,
+          "grad_norm": 1.0,
+          "entropy_coef": 0,
+          "truncate_grads": true,
+          "e_clip": 0.2,
+          "horizon_length": 32,
+          "minibatch_size": 16384,
+          "mini_epochs": 4,
+          "critic_coef": 4,
+          "clip_value": true,
+          "seq_length": 32,
+          "bounds_loss_coef": 0.0001,
+          "defer_summaries_sec": 5,
+          "summaries_interval_sec_min": 5,
+          "summaries_interval_sec_max": 100,
+          "expl_type": "mixed_expl_learn_param",
+          "player": {
+            "deterministic": true,
+            "use_vecenv": true,
+            "games_num": 1000000,
+            "print_stats": false
+          },
+          "use_others_experience": "lf",
+          "off_policy_ratio": 1.0,
+          "expl_reward_type": "entropy",
+          "expl_reward_coef_scale": 0.005,
+          "expl_coef_block_size": 512,
+          "managed_checkpoints": true,
+          "checkpoint_first_epoch": 10,
+          "checkpoint_keep_recent": 6,
+          "checkpoint_milestone_frequency": 500,
+          "evaluation_frequency": 50
+        }
+      }
+    },
+    "pbt": {
+      "enabled": false
+    },
+    "task_name": "wuji_acquisition",
+    "experiment": "",
+    "num_envs": 8,
+    "seed": 20260926,
+    "torch_deterministic": false,
+    "max_iterations": "",
+    "physics_engine": "physx",
+    "pipeline": "cpu",
+    "sim_device": "cuda:0",
+    "rl_device": "cuda:0",
+    "graphics_device_id": -1,
+    "num_threads": 4,
+    "solver_type": 1,
+    "num_subscenes": 0,
+    "test": false,
+    "checkpoint": "",
+    "sigma": "",
+    "multi_gpu": false,
+    "asset_dir": "",
+    "capture_video": false,
+    "capture_video_freq": 1500,
+    "capture_video_len": 100,
+    "force_render": false,
+    "headless": true
+  },
+  "outputs": {
+    "valid_grasps.npy": "31a13f11abad6d893c325617d93007e6b79848455f269b96fe74616a19bbe8ee",
+    "source_indices.npy": "a0da5850adacb823468e4001c54d6e31acb8d6578c56ff28d732aa07b69657a4",
+    "train/valid_grasps.npy": "31a13f11abad6d893c325617d93007e6b79848455f269b96fe74616a19bbe8ee",
+    "test/valid_grasps.npy": "57be9fbd013a57aedc5c36138aaad6a9f50b3e88cf96e4dc545533712eca29bd",
+    "valid/valid_grasps.npy": "31a13f11abad6d893c325617d93007e6b79848455f269b96fe74616a19bbe8ee"
+  }
+}

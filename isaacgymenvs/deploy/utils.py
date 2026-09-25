@@ -26,6 +26,8 @@ def resolve_hand_robot_class_spec(hand: str, explicit_spec: str = "") -> str:
 def resolve_hand_observation_provider_class_spec(hand: str, explicit_spec: str = "") -> str:
     if explicit_spec:
         return explicit_spec
+    if hand in ['wuji', 'wuji_paper']:
+        return 'isaacgymenvs.deploy.wuji.observation_provider:WujiTaskObservationProvider'
     class_name = (
         "".join(part.capitalize() for part in str(hand).replace("-", "_").split("_"))
         + "StaticTaskObservationProvider"

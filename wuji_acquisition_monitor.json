@@ -1,0 +1,152 @@
+{
+  "project": "/home/wangjiarui/artgym-experiments-20260921",
+  "python": "/home/wangjiarui/artgym-runtime/bin/python",
+  "state_dir": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/checkpoint-monitor-four",
+  "interval_seconds": 300,
+  "evaluation_timeout_seconds": 1800,
+  "evaluation_queue_order": "oldest_first",
+  "runs": [
+    {
+      "name": "wuji_acq_thumb_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_thumb_v1",
+      "profile": "acquisition",
+      "gpu": 3,
+      "evaluation": {
+        "task": "wuji_acquisition_thumb",
+        "hand": "wuji_paper",
+        "object": "knife_wuji_acquisition",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "train",
+        "repeats": 32,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "One known-feasible grasp, 32 parallel independent simulated rollouts, 5 mm success tolerance; no generalization claim"
+      }
+    },
+    {
+      "name": "wuji_acq_all20_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_all20_v1",
+      "profile": "acquisition",
+      "gpu": 3,
+      "evaluation": {
+        "task": "wuji_acquisition",
+        "hand": "wuji_paper",
+        "object": "knife_wuji_acquisition",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "train",
+        "repeats": 32,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "One known-feasible grasp, 32 parallel independent simulated rollouts, 5 mm success tolerance; no generalization claim"
+      }
+    },
+    {
+      "name": "wuji_acq_official000_ft_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_official000_ft_v1",
+      "profile": "acquisition",
+      "gpu": 3,
+      "evaluation": {
+        "task": "wuji_acquisition",
+        "hand": "wuji_paper",
+        "object": "knife_wuji_official_acquisition000",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "test",
+        "repeats": 10,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "Three held-out official functional grasps of training geometry 000, ten trials each. Twelve training grasps; not unseen-geometry evaluation."
+      }
+    },
+    {
+      "name": "wuji_acq_precision_ft_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_precision_ft_v1",
+      "profile": "acquisition",
+      "gpu": 3,
+      "evaluation": {
+        "task": "wuji_acquisition_precision",
+        "hand": "wuji_paper",
+        "object": "knife_wuji_acquisition_precision",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "train",
+        "repeats": 32,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "One approved grasp, 2 mm tolerance, 0.3 s dwell; 32 independent trials, no generalization claim."
+      }
+    },
+    {
+      "name": "wuji_acq_fingertip000_ft_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_fingertip000_ft_v1",
+      "profile": "acquisition",
+      "gpu": 3,
+      "evaluation": {
+        "task": "wuji_acquisition",
+        "hand": "wuji_paper",
+        "object": "knife_wuji_fingertip_acquisition000",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "test",
+        "repeats": 10,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "Five held-out approved fingertip grasps, ten repetitions each. 33 training grasps of one geometry. Earlier Wuji generated/validated dataset, not new official func_lygra grasps."
+      }
+    },
+    {
+      "name": "wuji_acq_fingertip000_ft_v2",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_fingertip000_ft_v2",
+      "profile": "acquisition",
+      "gpu": 3,
+      "evaluation": {
+        "task": "wuji_acquisition_fingertip_subset",
+        "hand": "wuji_paper",
+        "object": "knife_wuji_fingertip_acquisition000",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "test",
+        "repeats": 10,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "Five held-out approved fingertip grasps, ten repetitions each. 33 training grasps of one geometry. Earlier Wuji generated/validated dataset, not new official func_lygra grasps."
+      }
+    },
+    {
+      "name": "wuji_acq_official3_ft_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_official3_ft_v1",
+      "profile": "acquisition",
+      "gpu": 3,
+      "evaluation": {
+        "task": "wuji_acquisition_official_subset",
+        "hand": "wuji_paper",
+        "object": "knife_wuji_official_approved3",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "001",
+          "002",
+          "003"
+        ],
+        "split": "test",
+        "repeats": 10,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "Three official training geometries, 27 train grasps; nine original withheld grasps x ten trials. Not unseen geometry."
+      }
+    }
+  ]
+}

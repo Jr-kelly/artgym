@@ -1,0 +1,84 @@
+{
+  "experiments": {
+    "wuji_horizon20_near5_cp50_seed33_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_precision_near01",
+      "train": "wujiAcquisitionSAPG",
+      "task": "wuji_acquisition_official_variable_timed",
+      "gpus": [
+        0
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "2230146804f9e0de54d4e61ab3efd2d90ec6ef1ee403130cd9a46c235bf860b7",
+      "start_after_completed": [
+        "wuji_functional20_countold_seed21_v1"
+      ],
+      "comparison": "singlegrasp_episode_horizon20vs60_fixedlr_seed33",
+      "fixed_learning_rate_preflight": 1e-05,
+      "timed_gate": "runs/wuji-goal/verification/wuji_variable_nearreward5_seed23_v1-cp50-timed2seconds-perturb100/report.json",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/near-reward-5.0/report.json",
+        "runs/wuji-goal/diagnostics/episode-duration-training-boundary600-v2/report.json",
+        "runs/wuji-goal/diagnostics/episode-duration-training-boundary1800-v2/report.json"
+      ],
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/verified-policies/teacher-variable-near5-seed23-cp50/teacher.pth",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "task.env.endpointHoldReward=0",
+        "task.env.trainingCommandDurationsSec=[2.0,5.0]",
+        "seed=20261033",
+        "object.reward.GoalDistance2=5.0",
+        "task.env.episodeLength=600"
+      ],
+      "purpose": "After CP50fresh1002scommands joint falls99at20s to74at60s, test actualtrainingepisode20versus60s. MatchedCP50weightsandnormalizer,newAdam,same20261033seed,5120env,horizon32,100epochs,constantLR1e-5,near5reward,variable2/5commands,fullnoise,officialactuators. Only maxepisode differs betweenpair; resetfrequency/statecoverage differ as consequences. This adaptivepair also changes LRrelative topreviousrun; not a singlevariablecomparison toCP100. No newgrasporhardwareclaim."
+    },
+    "wuji_horizon60_near5_cp50_seed33_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_precision_near01",
+      "train": "wujiAcquisitionSAPG",
+      "task": "wuji_acquisition_official_variable_timed",
+      "gpus": [
+        3
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "2230146804f9e0de54d4e61ab3efd2d90ec6ef1ee403130cd9a46c235bf860b7",
+      "start_after_completed": [
+        "wuji_variable_nearreward5_seed26_v1"
+      ],
+      "comparison": "singlegrasp_episode_horizon20vs60_fixedlr_seed33",
+      "fixed_learning_rate_preflight": 1e-05,
+      "timed_gate": "runs/wuji-goal/verification/wuji_variable_nearreward5_seed23_v1-cp50-timed2seconds-perturb100/report.json",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/near-reward-5.0/report.json",
+        "runs/wuji-goal/diagnostics/episode-duration-training-boundary600-v2/report.json",
+        "runs/wuji-goal/diagnostics/episode-duration-training-boundary1800-v2/report.json"
+      ],
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/verified-policies/teacher-variable-near5-seed23-cp50/teacher.pth",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "task.env.endpointHoldReward=0",
+        "task.env.trainingCommandDurationsSec=[2.0,5.0]",
+        "seed=20261033",
+        "object.reward.GoalDistance2=5.0",
+        "task.env.episodeLength=1800"
+      ],
+      "purpose": "After CP50fresh1002scommands joint falls99at20s to74at60s, test actualtrainingepisode20versus60s. MatchedCP50weightsandnormalizer,newAdam,same20261033seed,5120env,horizon32,100epochs,constantLR1e-5,near5reward,variable2/5commands,fullnoise,officialactuators. Only maxepisode differs betweenpair; resetfrequency/statecoverage differ as consequences. This adaptivepair also changes LRrelative topreviousrun; not a singlevariablecomparison toCP100. No newgrasporhardwareclaim."
+    }
+  }
+}

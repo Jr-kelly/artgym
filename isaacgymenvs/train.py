@@ -10,34 +10,6 @@ import isaacgymenvs
 isaacgymenvs.register_omegaconf_resolvers()
 
 
-class _RankAwareTrainConfig(dict):
-    def __init__(self, *args, rank_device=None, **kwargs):
-        super().__init__(*args, **kwargs)
-        self._rank_device = rank_device
-
-    def _rewrite_device_value(self, key, value):
-        if (
-            key == "device"
-            and value == "cuda:0"
-            and self._rank_device is not None
-            and bool(self.get("multi_gpu", False))
-        ):
-            return self._rank_device
-        return value
-
-    def __setitem__(self, key, value):
-        super().__setitem__(key, self._rewrite_device_value(key, value))
-
-    def update(self, *args, **kwargs):
-        items = dict(*args, **kwargs)
-        for key, value in items.items():
-            self[key] = value
-
-    def setdefault(self, key, default=None):
-        default = self._rewrite_device_value(key, default)
-        return super().setdefault(key, default)
-
-
 def preprocess_train_config(cfg, config_dict):
     train_cfg = config_dict["params"]["config"]
     train_cfg["device"] = cfg.rl_device
@@ -82,11 +54,15 @@ def _init_multi_gpu_runtime(cfg):
 
     if not torch.cuda.is_available():
         raise RuntimeError("multi_gpu=True requires CUDA, but torch.cuda.is_available() is False.")
+    if local_rank<0 or local_rank>=torch.cuda.device_count():
+        raise RuntimeError(f'LOCAL_RANK={local_rank} exceeds {torch.cuda.device_count()} visible GPUs')
+    if world_size<2 or global_rank<0 or global_rank>=world_size:
+        raise RuntimeError('Invalid torchrun rank/world size for multi-GPU training')
 
     torch.cuda.set_device(local_rank)
     cfg.sim_device = f"cuda:{local_rank}"
     cfg.rl_device = f"cuda:{local_rank}"
-    cfg.graphics_device_id = local_rank
+    cfg.graphics_device_id = local_rank if not cfg.headless or cfg.capture_video or cfg.task.env.enableCameraSensors else -1
 
     return {
         "enabled": True,
@@ -100,19 +76,6 @@ def _is_rank0(cfg):
     if not cfg.multi_gpu:
         return True
     return int(os.getenv("RANK", "0")) == 0
-
-
-def _wrap_rlgames_train_config_for_rank(cfg, rlg_config_dict):
-    params = rlg_config_dict.get("params", {})
-    train_cfg = params.get("config")
-    if not isinstance(train_cfg, dict):
-        return rlg_config_dict
-    if isinstance(train_cfg, _RankAwareTrainConfig):
-        train_cfg._rank_device = cfg.rl_device
-        return rlg_config_dict
-
-    params["config"] = _RankAwareTrainConfig(train_cfg, rank_device=cfg.rl_device)
-    return rlg_config_dict
 
 
 @hydra.main(version_base="1.1", config_name="config", config_path="./cfg")
@@ -136,7 +99,47 @@ def launch_rlg_hydra(cfg: DictConfig):
     from rl_games.torch_runner import Runner
 
     _validate_multi_gpu_launch(cfg)
+    knife_dataset = str(cfg.get('asset_dir') or cfg.object.asset.asset_root).rstrip('/').split('/')[-1]
+    if knife_dataset == 'knife_wuji_official_approved':
+        from scripts.check_official_wuji_transfer import validate
+        declared=list(cfg.task.env.get('officialAcquisitionSubset',[]))
+        if (str(cfg.task.name)!='wuji_acquisition' or not declared or
+                list(cfg.object.asset.instance_id_list)!=declared):
+            raise ValueError('Declare the exact official Wuji migration subset before training')
+        for instance in declared:
+            validate(str(instance),require_train=True)
+    if knife_dataset in {'knife_wuji_paper', 'knife_wuji_fingertip'}:
+        import json
+        from pathlib import Path
+        from scripts.validate_paper_grasps import check_dataset
+        if knife_dataset == 'knife_wuji_fingertip':
+            from scripts.filter_wuji_fingertip_grasps import check_dataset
+        manifest = json.loads((Path(__file__).resolve().parents[1] / 'assets/objects' / knife_dataset / 'manifest.json').read_text())
+        acquisition_instance=cfg.task.env.get('acquisitionGraspGate')
+        if acquisition_instance is not None:
+            acquisition_instance=str(acquisition_instance)
+            if (str(cfg.task.name)!='wuji_acquisition' or knife_dataset!='knife_wuji_fingertip'
+                    or list(cfg.object.asset.instance_id_list)!=[acquisition_instance]
+                    or acquisition_instance not in manifest['train_ids']):
+                raise ValueError('Acquisition subset must explicitly name one validated training geometry')
+            from scripts.check_wuji_transfer_data import validate
+            validate(acquisition_instance)
+        elif list(cfg.object.asset.instance_id_list) != manifest['train_ids']:
+            raise ValueError('Paper knife training must use exactly the 30 training geometries, excluding 030–034')
+        if cfg.hand.get('self_collision_mode') != 'digit_filtered':
+            raise ValueError('Paper knife training requires hand=wuji_paper for validated self-collision filtering')
+        if acquisition_instance is None:
+            check_dataset()
     dist_runtime = _init_multi_gpu_runtime(cfg)
+    if dist_runtime['enabled']:
+        train_cfg=cfg.train.params.config
+        actors=int(cfg.task.env.numEnvs)
+        if actors*int(train_cfg.horizon_length)%int(train_cfg.minibatch_size):
+            raise ValueError('Per-rank rollout batch must be divisible by minibatch_size')
+        if str(train_cfg.expl_type).startswith('mixed_expl') and actors%int(train_cfg.expl_coef_block_size):
+            raise ValueError('Per-rank environment count must be divisible by the SAPG block size')
+        print(f"Rank {dist_runtime['global_rank']}/{dist_runtime['world_size']}: "
+              f"simulation={cfg.sim_device}, policy={cfg.rl_device}, environments={actors}",flush=True)
     cfg_dict = omegaconf_to_dict(cfg)
     if _is_rank0(cfg):
         print_dict(cfg_dict)
@@ -207,21 +210,24 @@ def launch_rlg_hydra(cfg: DictConfig):
         vecenv.register("RLGPU", lambda config_name, num_actors, **kwargs: RLGPUEnv(config_name, num_actors, **kwargs))
 
     rlg_config_dict = preprocess_train_config(cfg, omegaconf_to_dict(cfg.train))
-    rlg_config_dict = _wrap_rlgames_train_config_for_rank(cfg, rlg_config_dict)
 
     model_builder.register_network("actor_critic_dict", a2c_dict_network_builder.A2CBuilder)
     model_builder.register_network("actor_critic_sapg_priv", a2c_sapg_priv_network_builder.A2CSAPGPrivBuilder)
     runner = Runner(RLGPUAlgoObserver())
     runner.load(rlg_config_dict)
     runner.reset()
-    runner.run(
-        {
-            "train": not cfg.test,
-            "play": cfg.test,
-            "checkpoint": cfg.checkpoint,
-            "sigma": cfg.sigma if cfg.sigma != "" else None,
-        }
-    )
+    try:
+        runner.run(
+            {
+                "train": not cfg.test,
+                "play": cfg.test,
+                "checkpoint": cfg.checkpoint,
+                "sigma": cfg.sigma if cfg.sigma != "" else None,
+            }
+        )
+    finally:
+        if torch.distributed.is_initialized():
+            torch.distributed.destroy_process_group()
 
 
 if __name__ == "__main__":

@@ -1,0 +1,73 @@
+{
+  "experiments": {
+    "wuji_acq_official_timed2_seed14_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_precision_near01",
+      "train": "wujiAcquisitionSAPG",
+      "task": "wuji_acquisition_official_timed2",
+      "gpus": [
+        4
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "learned_gate": "runs/wuji-goal/verification/official-actuator-support40mrad-cp25-perturb100/report.json",
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.learning_rate=0.00005",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "object.reward.GoalDistance2=0.1",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "seed=20261014",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_official_actuator_support40mrad_v1/checkpoints/epoch_000025.pth"
+      ],
+      "purpose": "Second matched training seed for official-actuator time versus arrival switching; same source CP25 and physics. Eight-card GPUs4/5 after their full-resume arms complete; original Sharpa ranks remain unchanged. New Adam, 5120 envs, 100 epochs, LR5e-5, full reset noise, posecost1, support40mrad; only switching differs between arms.",
+      "comparison": "official_timed_pair_second_seed14",
+      "source_checkpoint_sha256": "1a22aa97f87b8d4b2346ec21aa3e4be5b5cb86223b58ae61feb89e60a76a0f3f",
+      "start_after_completed": [
+        "wuji_acq_official_actuator_support40mrad_resume25_v2"
+      ],
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/timed-replication-clock-timed/report.json",
+        "runs/wuji-goal/diagnostics/timed-replication-clock-arrival/report.json"
+      ]
+    },
+    "wuji_acq_official_arrival_seed14_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_precision_near01",
+      "train": "wujiAcquisitionSAPG",
+      "task": "wuji_acquisition_official_arrival_control",
+      "gpus": [
+        5
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "learned_gate": "runs/wuji-goal/verification/official-actuator-support40mrad-cp25-perturb100/report.json",
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.learning_rate=0.00005",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "object.reward.GoalDistance2=0.1",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "seed=20261014",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_official_actuator_support40mrad_v1/checkpoints/epoch_000025.pth"
+      ],
+      "purpose": "Second matched training seed for official-actuator time versus arrival switching; same source CP25 and physics. Eight-card GPUs4/5 after their full-resume arms complete; original Sharpa ranks remain unchanged. New Adam, 5120 envs, 100 epochs, LR5e-5, full reset noise, posecost1, support40mrad; only switching differs between arms.",
+      "comparison": "official_timed_pair_second_seed14",
+      "source_checkpoint_sha256": "1a22aa97f87b8d4b2346ec21aa3e4be5b5cb86223b58ae61feb89e60a76a0f3f",
+      "start_after_completed": [
+        "wuji_acq_official_actuator_support200mrad_resume25_v2"
+      ],
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/timed-replication-clock-timed/report.json",
+        "runs/wuji-goal/diagnostics/timed-replication-clock-arrival/report.json"
+      ]
+    }
+  },
+  "protocol": "Second matched training seed for official-actuator time versus arrival switching; same source CP25 and physics. Eight-card GPUs4/5 after their full-resume arms complete; original Sharpa ranks remain unchanged."
+}

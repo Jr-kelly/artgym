@@ -296,7 +296,8 @@ class GraspCacheTaskStateProvider(TaskStateProvider):
         self.goal_offset = float(goal_offset)
         self.init_object_pos_override = _optional_vector(init_object_pos, 3, "init_object_pos")
         self.init_object_rot_override = _optional_vector(init_object_rot, 4, "init_object_rot")
-        self.init_hand_qpos_override = _optional_vector(init_hand_qpos, 22, "init_hand_qpos")
+        # Validate DOF count after receiving the hand-specific deployment context.
+        self.init_hand_qpos_override = None if init_hand_qpos is None else np.asarray(init_hand_qpos, dtype=np.float32)
         self.init_fingertip_pos_override = _optional_vector(init_fingertip_pos, 15, "init_fingertip_pos")
         self.command_cached_grasp = bool(command_cached_grasp)
         self.cached_grasp_settle_sec = float(cached_grasp_settle_sec)
@@ -318,8 +319,14 @@ class GraspCacheTaskStateProvider(TaskStateProvider):
         self.use_measured_init_hand_qpos = bool(use_measured_init_hand_qpos)
         self.use_measured_init_fingertip_pos = bool(use_measured_init_fingertip_pos)
         self._selected_grasp = None
+        self._commanded_initial_targets = None
         self.object_bbx = _load_object_bbx(self.object_dir_name, self.instance_id)
         self.link0_bbx, self.link1_bbx = _load_link_bbx(self.object_dir_name, self.instance_id)
+
+    def set_deployment_context(self, context):
+        super().set_deployment_context(context)
+        self.init_hand_qpos_override = _optional_vector(
+            self.init_hand_qpos_override, context.hand_dof_dim, 'init_hand_qpos')
 
     def _resolve_cache_path(self):
         base_dir = os.path.join(self.cache_root, self.hand_type, self.object_dir_name, self.instance_id)
@@ -396,13 +403,16 @@ class GraspCacheTaskStateProvider(TaskStateProvider):
             f"{self.hand_type}/{self.object_dir_name}/{self.instance_id}"
         )
 
+        self._commanded_initial_targets = None
         if self.command_cached_grasp:
             input(self.load_grasp_prompt)
-            cached_qpos = state["hand_dof_pos"]
+            acquisition = (self.context.distill_meta.get('action_control') or {}).get('type') == 'wuji_acquisition_v1'
+            cached_qpos = state['hand_dof_target' if acquisition else 'hand_dof_pos']
             robot.command_init_grasp(
                 np.asarray(cached_qpos, dtype=np.float32),
                 final_settle_sec=self.cached_grasp_settle_sec,
             )
+            self._commanded_initial_targets = np.asarray(cached_qpos, dtype=np.float32).copy()
 
         input(self.capture_prompt)
 
@@ -524,6 +534,8 @@ class GraspCacheTaskStateProvider(TaskStateProvider):
             init_fingertip_pos=init_fingertip_pos,
             metadata={
                 "cache_path": selected_grasp["cache_path"],
+                "pose_frame": "hand_base",
+                "commanded_initial_targets": None if self._commanded_initial_targets is None else self._commanded_initial_targets.tolist(),
                 "grasp_pool": selected_grasp["grasp_pool"],
                 "object_bbx": None if self.object_bbx is None else self.object_bbx.astype(np.float32).tolist(),
                 "init_link1_pose": np.asarray(selected["link1_pose"], dtype=np.float32).tolist(),

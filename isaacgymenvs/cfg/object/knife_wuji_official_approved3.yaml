@@ -1,0 +1,8 @@
+defaults:
+  - knife_wuji_acquisition
+  - _self_
+asset:
+  asset_root: assets/objects/knife_wuji_official_approved
+  # First three numeric training IDs with >=7 approved train grasps.
+  # Selected from training data eligibility, before policy evaluation.
+  instance_id_list: ['001', '002', '003']

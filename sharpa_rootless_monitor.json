@@ -1,0 +1,40 @@
+{
+  "project": "/home/wangjiarui/artgym-experiments-20260921",
+  "python": "/home/wangjiarui/artgym-runtime/bin/python",
+  "state_dir": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/sharpa-rootless-monitor-eight",
+  "interval_seconds": 300,
+  "evaluation_timeout_seconds": 1800,
+  "runs": [
+    {
+      "name": "sharpa_paper_reference_rootless_recover1350_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/sharpa_paper_reference_rootless_recover1350_v1",
+      "profile": "reference",
+      "gpu": 2,
+      "evaluation": {
+        "task": "artmanip_paper_reference",
+        "hand": "sharpa",
+        "object": "knife_sharpa_rootless_eval_20260922",
+        "train": "paperReferenceSAPG",
+        "instances": [
+          "030",
+          "031",
+          "032",
+          "033",
+          "034"
+        ],
+        "split": "valid",
+        "repeats": 10,
+        "max_steps": 1200,
+        "randomized": true,
+        "scope": "Five held-out geometries with empty-root removal; all valid grasps,10repetitions. Physics conditioning diagnostic,not unchanged paper reference or final100repeat report."
+      },
+      "required_files": [
+        "/home/wangjiarui/artgym-experiments-20260921/runs/experiment-suite/sharpa-ready.json"
+      ]
+    }
+  ],
+  "evaluation_gpus": [
+    2
+  ],
+  "evaluation_queue_order": "oldest_first"
+}

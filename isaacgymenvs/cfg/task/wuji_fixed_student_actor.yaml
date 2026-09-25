@@ -1,0 +1,12 @@
+defaults:
+  - wuji_acquisition_bridge3_hemisphere
+  - _self_
+name: wuji_fixed_student_actor
+env:
+  enableStudentEncoderObs: true
+  fixedStudentArtifact: ???
+  fixedStudentSha256: ???
+  fixedTeacherSha256: 4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac
+  broadGoalReward:
+    coefficient: 0.0
+    width_m: 0.01

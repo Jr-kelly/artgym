@@ -1,0 +1,7 @@
+defaults:
+  - knife_wuji_paper
+  - _self_
+
+# Evaluation only. The trainer explicitly rejects this all-instance split.
+asset:
+  instance_id_list: ['']

@@ -1,0 +1,33 @@
+{
+  "project": "/home/wangjiarui/artgym-experiments-20260921",
+  "python": "/home/wangjiarui/artgym-runtime/bin/python",
+  "state_dir": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/single24-monitor-four",
+  "interval_seconds": 300,
+  "evaluation_timeout_seconds": 1800,
+  "evaluation_gpus": [
+    2
+  ],
+  "evaluation_queue_order": "oldest_first",
+  "runs": [
+    {
+      "name": "wuji_single24_scratch_timed5_seed27_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_single24_scratch_timed5_seed27_v1",
+      "profile": "acquisition",
+      "gpu": 2,
+      "evaluation": {
+        "task": "wuji_acquisition_official_support40mrad",
+        "hand": "wuji_paper_official_actuator",
+        "object": "knife_wuji_functional_single24_20260922",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "test",
+        "repeats": 4,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "Secondary arrival metric on2untouchedheldoutgrasp sources; separate fromsingletraininggrasp100perturb timed audits."
+      }
+    }
+  ]
+}

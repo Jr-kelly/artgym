@@ -1,0 +1,7 @@
+defaults:
+  - knife_wuji_fingertip_acquisition000
+  - _self_
+task:
+  success_threshold: 0.002
+reward:
+  GoalDistance2: 0.1

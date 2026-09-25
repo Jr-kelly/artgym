@@ -9,6 +9,8 @@ from rl_games.algos_torch.moving_mean_std import GeneralizedMovingStats
 from rl_games.algos_torch.self_play_manager import SelfPlayManager
 from rl_games.algos_torch import torch_ext
 from rl_games.common import schedulers
+from rl_games.common.distributed_utils import init_distributed, broadcast_model, gather_checkpoint
+from rl_games.common.checkpoint_schedule import checkpoint_events, publish_checkpoint
 from rl_games.common.custom_utils import create_sinusoidal_encoding, filter_leader, shuffle_batch, swap_and_flatten01
 from rl_games.common.experience import ExperienceBuffer
 from rl_games.common.interval_summary_writer import IntervalSummaryWriter
@@ -108,11 +110,8 @@ class A2CBase(BaseAlgorithm):
             # total number of GPUs across all nodes
             self.world_size = int(os.getenv("WORLD_SIZE", "1"))
 
-            import hashlib
-            dist.init_process_group("gloo", rank=self.global_rank, world_size=self.world_size, init_method=f'tcp://127.0.0.1:{23400 + int(hashlib.md5(self.experiment_name[3:].encode("utf-8")).hexdigest(), 16) % 500}')
-
-            self.device_name = 'cuda:0' # DEBUG
-            config['device'] = self.device_name
+            self.local_rank,self.global_rank,self.world_size,self.checkpoint_group = init_distributed(config)
+            self.device_name = config['device']
             if self.global_rank != 0:
                 config['print_stats'] = False
                 config['lr_schedule'] = None
@@ -436,6 +435,13 @@ class A2CBase(BaseAlgorithm):
 
     def set_train(self):
         self.model.train()
+        # Opt-in continuation experiment: preserve the loaded observation
+        # transform while still optimizing actor, critic and value statistics.
+        # Keep the default path unchanged for upstream/reference experiments.
+        if self.config.get('freeze_input_normalizer', False):
+            if not self.normalize_input:
+                raise ValueError('freeze_input_normalizer requires normalize_input=True')
+            self.model.running_mean_std.eval()
         if self.normalize_rms_advantage:
             self.advantage_mean_std.train()
 
@@ -682,10 +688,25 @@ class A2CBase(BaseAlgorithm):
     def train_central_value(self):
         return self.central_value_net.train_net()
 
+    def _checkpoint_due(self, epoch):
+        if (self.max_epochs != -1 and epoch >= self.max_epochs) or (self.max_frames != -1 and self.frame >= self.max_frames):
+            return True
+        if self.config.get('managed_checkpoints', False) and checkpoint_events(self.config, epoch)[0]:
+            return True
+        if self.game_rewards.current_size == 0:
+            return False
+        periodic = self.save_freq > 0 and (
+            (int(math.sqrt(epoch // self.save_freq)) ** 2 == epoch // self.save_freq and epoch % self.save_freq == 0)
+            or epoch % 200 == 0)
+        improved = epoch >= 10 and self.game_rewards.get_mean()[0] > self.last_mean_rewards
+        return bool(periodic or improved)
+
     def get_full_state_weights(self):
         state = self.get_weights()
         state['epoch'] = self.epoch_num
         state['frame'] = self.frame
+        state['world_size'] = self.world_size
+        state['num_actors'] = self.num_actors
         state['optimizer'] = self.optimizer.state_dict()
 
         if self.has_central_value:
@@ -1462,10 +1483,11 @@ class ContinuousA2CBase(A2CBase):
         update_time = update_time_end - update_time_start
         total_time = update_time_end - play_time_start
         DECIMALS = 3
-        print("\nTiming:")
-        print(f"  Play time               : {play_time:.{DECIMALS}f} s")
-        print(f"  Update time             : {update_time:.{DECIMALS}f} s")
-        print(f"  Time to train epoch     : {total_time:.{DECIMALS}f} s\n")
+        if self.global_rank == 0:
+            print("\nTiming:")
+            print(f"  Play time               : {play_time:.{DECIMALS}f} s")
+            print(f"  Update time             : {update_time:.{DECIMALS}f} s")
+            print(f"  Time to train epoch     : {total_time:.{DECIMALS}f} s\n")
 
         return batch_dict['step_time'], play_time, update_time, total_time, a_losses, c_losses, b_losses, entropies, kls, last_lr, lr_mul, extra_infos
 
@@ -1549,9 +1571,7 @@ class ContinuousA2CBase(A2CBase):
 
         if self.multi_gpu:
             print("====================broadcasting parameters")
-            model_params = [self.model.state_dict()]
-            dist.broadcast_object_list(model_params, 0)
-            self.model.load_state_dict(model_params[0])
+            broadcast_model(self.model)
             
         # for _ in range(0):
         #     self.play_steps()
@@ -1564,20 +1584,26 @@ class ContinuousA2CBase(A2CBase):
                 return (ret_val, self.vec_env)
             step_time, play_time, update_time, sum_time, a_losses, c_losses, b_losses, entropies, kls, last_lr, lr_mul, extra_infos = ret_val
             total_time += sum_time
+            curr_frames = self.curr_frames * self.world_size
+            self.frame += curr_frames
             frame = self.frame // self.num_agents
 
             # cleaning memory to optimize space
             self.dataset.update_values_dict(None)
             should_exit = False
+            all_state_dict = None
+            if self.multi_gpu:
+                save_needed=torch.tensor(self._checkpoint_due(epoch_num) if self.global_rank==0 else False,
+                                         device=self.device,dtype=torch.int32)
+                dist.broadcast(save_needed,0)
+                if save_needed.item():
+                    all_state_dict=gather_checkpoint(self.get_full_state_weights(),self.checkpoint_group)
 
             if self.global_rank == 0:
                 self.diagnostics.epoch(self, current_epoch = epoch_num)
                 # do we need scaled_time?
                 scaled_time = self.num_agents * sum_time
                 scaled_play_time = self.num_agents * play_time
-                curr_frames = self.curr_frames * self.world_size if self.multi_gpu else self.curr_frames
-                self.frame += curr_frames
-
                 print_statistics(self.print_stats, curr_frames, step_time, scaled_play_time, scaled_time, 
                                 epoch_num, self.max_epochs, frame, self.max_frames)
 
@@ -1590,15 +1616,6 @@ class ContinuousA2CBase(A2CBase):
 
                 if self.has_soft_aug:
                     self.writer.add_scalar('losses/aug_loss', np.mean(aug_losses), frame)
-
-                if self.multi_gpu:
-                    # gather state from all gpus
-                    state = self.get_full_state_weights()
-                    state_list = [None] * self.world_size
-                    dist.gather_object(state, state_list)
-                    all_state_dict = {i: state_list[i] for i in range(self.world_size)}
-                else:
-                    all_state_dict = None
 
                 if self.game_rewards.current_size > 0:
                     mean_rewards = self.game_rewards.get_mean()
@@ -1645,7 +1662,7 @@ class ContinuousA2CBase(A2CBase):
 
                     checkpoint_name = self.config['name'] + '_ep_' + str(epoch_num) + '_rew_' + str(mean_rewards[0])
 
-                    if self.save_freq > 0:
+                    if self.save_freq > 0 and not self.config.get('managed_checkpoints', False):
                         if int(math.sqrt(epoch_num // self.save_freq)) ** 2 == epoch_num // self.save_freq and epoch_num % self.save_freq == 0:
                             self.save(os.path.join(self.nn_dir, 'last_' + checkpoint_name), all_state_dict)
                         if epoch_num % 200 == 0:    
@@ -1666,6 +1683,13 @@ class ContinuousA2CBase(A2CBase):
                                 print('Maximum reward achieved. Network won!')
                                 self.save(os.path.join(self.nn_dir, checkpoint_name), all_state_dict)
                                 should_exit = True
+
+                if self.config.get('managed_checkpoints', False):
+                    final = ((self.max_epochs != -1 and epoch_num >= self.max_epochs) or
+                             (self.max_frames != -1 and self.frame >= self.max_frames))
+                    if checkpoint_events(self.config, epoch_num, final)[0]:
+                        state = all_state_dict if self.multi_gpu else {0: self.get_full_state_weights()}
+                        publish_checkpoint(self.experiment_dir, state, self.config, final)
 
                 if epoch_num >= self.max_epochs and self.max_epochs != -1:
                     if self.game_rewards.current_size == 0:
@@ -1688,11 +1712,6 @@ class ContinuousA2CBase(A2CBase):
                     should_exit = True
 
                 update_time = 0
-            else:
-                if self.multi_gpu:
-                    state = self.get_full_state_weights()
-                    dist.gather_object(state)
-
             if self.multi_gpu:
                 should_exit_t = torch.tensor(should_exit, device=self.device).float()
                 dist.broadcast(should_exit_t, 0)

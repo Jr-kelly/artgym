@@ -1,0 +1,11 @@
+defaults:
+  - wuji_acquisition_precision
+  - _self_
+env:
+  # Reset-only perturbations; physical/controller/reward parameters unchanged.
+  # Evaluation disables sampling here and uses an independently seeded audit.
+  initialPoseNoise:
+    position_m: 0.0005
+    joint_rad: 0.01
+    rotation_vector_rad: 0.008726646259971648
+    ramp_epochs: 100

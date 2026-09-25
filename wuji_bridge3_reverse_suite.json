@@ -1,0 +1,45 @@
+{
+  "experiments": {
+    "wuji_bridge3_functionalcp100_seed45_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_acquisition_bridge3_hemisphere",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        4
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "d44f5c6f49ed5661af33e0acc226bc1072ee74f316893c26ae6d512cca05a41d",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/bridge3-current-source-runtime/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/bridge3-current-source-runtime/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "seed=20261045",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/teacher-functional20-hemisphere-seed34-cp100/teacher.pth"
+      ],
+      "purpose": "Initialization comparison after bridge3 CP100 still fails row15: same exact three training grasps,5120envs,100epochs,horizon32,seed45,constantLR1e-5,near5,2/5sclock,newAdam. Change initial model AND its normalizer as one initialization bundle from bridgeCP50 to functional20CP100, which independently succeeded on row15/16. Both initial models came from different training curricula; no universal causal claim. Same332developmentstates and all failures, then freeze and generate fresh states only if a joint model succeeds.",
+      "fixed_learning_rate_preflight": 1e-05,
+      "start_after_completed": [
+        "wuji_bridge3_cp50_seed45_v1"
+      ]
+    }
+  }
+}

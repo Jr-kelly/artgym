@@ -1,0 +1,41 @@
+{
+  "experiments": {
+    "wuji_thickness3_authored_cp50_seed52_v2": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_thickness3_v2_20260922",
+      "task": "wuji_acquisition_official_variable_timed",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        5
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "2230146804f9e0de54d4e61ab3efd2d90ec6ef1ee403130cd9a46c235bf860b7",
+      "fixed_learning_rate_preflight": 1e-05,
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/thickness3-v2-runtime/report.json"
+      ],
+      "geometry_dataset_gate": {
+        "manifest": "runs/wuji-goal/thickness3-v2-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/thickness3-v2-runtime/report.json"
+      },
+      "start_after_completed": [
+        "wuji_functional20_scratch_seed21_v1"
+      ],
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "seed=20261052",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/verified-policies/teacher-variable-near5-seed23-cp50/teacher.pth"
+      ],
+      "purpose": "Three small thickness geometries, one inherited grasp, no success filtering.\n\nThis is an explicit Wuji adaptation, combining varied contact geometry with\nauthored mass-consistent box inertia. Four length/width variants are reserved\nfrom this training dataset but have already been inspected in diagnostics;\nthey are development transfers, not a final blind generalization test.\n"
+    }
+  }
+}

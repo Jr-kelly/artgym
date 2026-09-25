@@ -1,0 +1,32 @@
+{
+  "checked": "2026-09-21T16:59:24.624364+00:00",
+  "source_dataset": "knife_wuji_official",
+  "instance": "000",
+  "original": 15,
+  "posture": 0,
+  "reachable": 0,
+  "train": 0,
+  "test": 0,
+  "source_sha256": "54ca1f968fcda4ec9bc60d72d36c2ff08fff22be7400372e2bfb8f194aee2bb7",
+  "urdf_sha256": "8068c8d7fda82011844bbbc58d323e248e8a0a7c48e03be350c792cad3bc8843",
+  "screened_sha256": "6295cc05d8c4295a2491f4343e4fb7ac0db8cdd24c9d0c0aa5b9a8294f52d2a6",
+  "rules": {
+    "version": "approved_fingertip_v1",
+    "blade_thumb_side_min_dot": 0.82,
+    "max_reference_rotation_deg": 40.0,
+    "max_reference_center_distance_m": 0.035,
+    "min_center_height_m": 0.095,
+    "thumb_travel_m": 0.04,
+    "thumb_reach_tolerance_m": 0.002,
+    "slider_edge_margin_m": 0.001,
+    "validation_seconds": 2.0,
+    "max_drift_m": 0.01,
+    "max_rotation_rad": 0.25,
+    "min_each_fingertip_contact_fraction": 0.9,
+    "max_palm_contact_fraction": 0.0,
+    "contact_sample_control_steps": 3,
+    "contact_force_threshold": 1e-06
+  },
+  "reach_results": [],
+  "provenance": "Official func_lygra/ArtGrasp output, filtered for user-approved thumbwards direction and full 40 mm reach"
+}

@@ -1,0 +1,41 @@
+{
+  "experiments": {
+    "wuji_acq_official_damping3_centered_seed16_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_precision_damping3",
+      "train": "wujiAcquisitionSAPG",
+      "task": "wuji_acquisition_official_timed2",
+      "gpus": [
+        5
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "object.reward.GoalDistance2=0.1",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "seed=20261016",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/diagnostics/damping3-centered-warmstart/policy/teacher.pth",
+        "train.params.config.learning_rate=0.00002"
+      ],
+      "purpose": "Same seed20261016/task/physicaldamping3/5120env/horizon32/LR2e-5/100epochs as the unmodified-CP10 warmstart experiment onfourGPU3. Only policy initial damping mean is shifted0.3->3; all learned weights/variance/counts unchanged. Both begin new Adam/counters. Actual observed damping stays3 and matches simulator. This is an explicit model modification evaluated independently before training, not false sensor input or hardware calibration. Runs on eighthostGPU5 after secondseedarrival100budget completes.",
+      "comparison": "damping3_normalizer_initialization_seed16",
+      "source_checkpoint_sha256": "a2b88de93b31460fbfe1958f6b1a34e9ebf4b07402b02ae5c1ecbc70af232265",
+      "start_after_completed": [
+        "wuji_acq_official_arrival_seed14_v1"
+      ],
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/damping-adaptation-gates/3.0/report.json"
+      ],
+      "normalizer_adaptation_gate": {
+        "manifest": "runs/wuji-goal/diagnostics/damping3-centered-warmstart/policy/manifest.json",
+        "report": "runs/wuji-goal/verification/damping3-centered-warmstart-timed2seconds-perturb100/report.json",
+        "minimum_first_cycle_strict": 30
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+defaults:
+  - artmanip
+  - _self_
+name: artmanip
+env:
+  rewardProtocol: paper
+  dofSpeedScale: 3.0
+  controlFrequencyInv: 4
+  episodeLength: 1200
+  maxConsecutiveSuccesses: 0
+  successHoldDurationSec: 0.0
+  successHoldDurationRangeSec: [0.0, 0.0]
+  goalSwitchTimeoutSec: 0.0
+  forceScale: 0.0
+  rewardWeightCurriculumSchedule:
+    warmupSteps: 100
+    totalSteps: 1100
+sim:
+  dt: 0.008333333333333333
+  physx:
+    num_subscenes: 0

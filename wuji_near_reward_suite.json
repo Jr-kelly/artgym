@@ -1,0 +1,70 @@
+{
+  "experiments": {
+    "wuji_variable_nearreward01_seed23_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_precision_near01",
+      "train": "wujiAcquisitionSAPG",
+      "task": "wuji_acquisition_official_variable_timed",
+      "gpus": [
+        1
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/verified-policies/teacher-official-timed2-cp10/teacher.pth",
+        "train.params.config.learning_rate=0.00002",
+        "task.env.endpointHoldReward=0",
+        "task.env.trainingCommandDurationsSec=[2.0,5.0]",
+        "seed=20261023",
+        "object.reward.GoalDistance2=0.1"
+      ],
+      "purpose": "Same frozen lowgain timedCP10/newAdam/seed20261023/5120env/horizon32/100epochs/LR2e-5/fullnoise/support40mrad/2or5second exogenousclock. Only Gaussian GoalDistance2 coefficient0.1versus5; arrival50 and otherrewards unchanged. Proposed after reached-then-reopened failure analysis; strongerongoingreward may favorholding, but success must be independently verified. Wuji migration, not paperreference. Same nominalgrasp perturbations, not multi-grasp experiment.",
+      "comparison": "variable_clock_near_reward_seed23",
+      "source_checkpoint_sha256": "38903d492ee7d6c372633ce5584c6ea7703034362f3bab8928e31eda599e977e",
+      "start_after_completed": [],
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/near-reward-0.1/report.json"
+      ],
+      "timed_gate": "runs/wuji-goal/verification/official-timed2-cp10-timed2seconds-perturb100/report.json"
+    },
+    "wuji_variable_nearreward5_seed23_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_precision_near01",
+      "train": "wujiAcquisitionSAPG",
+      "task": "wuji_acquisition_official_variable_timed",
+      "gpus": [
+        3
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/verified-policies/teacher-official-timed2-cp10/teacher.pth",
+        "train.params.config.learning_rate=0.00002",
+        "task.env.endpointHoldReward=0",
+        "task.env.trainingCommandDurationsSec=[2.0,5.0]",
+        "seed=20261023",
+        "object.reward.GoalDistance2=5.0"
+      ],
+      "purpose": "Same frozen lowgain timedCP10/newAdam/seed20261023/5120env/horizon32/100epochs/LR2e-5/fullnoise/support40mrad/2or5second exogenousclock. Only Gaussian GoalDistance2 coefficient0.1versus5; arrival50 and otherrewards unchanged. Proposed after reached-then-reopened failure analysis; strongerongoingreward may favorholding, but success must be independently verified. Wuji migration, not paperreference. Same nominalgrasp perturbations, not multi-grasp experiment.",
+      "comparison": "variable_clock_near_reward_seed23",
+      "source_checkpoint_sha256": "38903d492ee7d6c372633ce5584c6ea7703034362f3bab8928e31eda599e977e",
+      "start_after_completed": [],
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/near-reward-5.0/report.json"
+      ],
+      "timed_gate": "runs/wuji-goal/verification/official-timed2-cp10-timed2seconds-perturb100/report.json"
+    }
+  }
+}

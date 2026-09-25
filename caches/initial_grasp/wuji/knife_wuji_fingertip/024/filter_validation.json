@@ -1,0 +1,835 @@
+{
+  "rules": {
+    "version": "approved_fingertip_v1",
+    "blade_thumb_side_min_dot": 0.82,
+    "max_reference_rotation_deg": 40.0,
+    "max_reference_center_distance_m": 0.035,
+    "min_center_height_m": 0.095,
+    "thumb_travel_m": 0.04,
+    "thumb_reach_tolerance_m": 0.002,
+    "slider_edge_margin_m": 0.001,
+    "validation_seconds": 2.0,
+    "max_drift_m": 0.01,
+    "max_rotation_rad": 0.25,
+    "min_each_fingertip_contact_fraction": 0.9,
+    "max_palm_contact_fraction": 0.0,
+    "contact_sample_control_steps": 3,
+    "contact_force_threshold": 1e-06
+  },
+  "screened_sha256": "56a276c2de93c44eb170c9fe602049ff645184249a15fe8adb754dc3ca3d0021",
+  "screening_sha256": "669c05ba0901735554a7260717b5e780c7901665fce18fa60f93620e336a6f80",
+  "physical_signature": {
+    "implementation": "4fcc09a0c008bea88b834ff09afd712e0d5e338dd5ca111fea46325843517bf0",
+    "files": {
+      "isaacgymenvs/tasks/artgrasp.py": "7876b87240fb5cb4c70af977a7d1334523c369b2c2e8b961e79b72f560efee68",
+      "isaacgymenvs/tasks/artmanip.py": "cfc67054876cc5207592612c2fc8f288e774b7da9b148bbae2207f281479ebf9",
+      "isaacgymenvs/tasks/base/vec_task.py": "90233af53998d6125672487c4177f1cd2ec59e4384173669fc45d803320bf573"
+    }
+  },
+  "config": {
+    "name": "artgrasp",
+    "physics_engine": "physx",
+    "env": {
+      "numEnvs": 26,
+      "envSpacing": 0.75,
+      "episodeLength": 61,
+      "enableDebugVis": false,
+      "aggregateMode": 0,
+      "successHoldDurationSec": 1.5,
+      "successHoldDurationRangeSec": [
+        0.0,
+        2.0
+      ],
+      "maxConsecutiveSuccesses": 20,
+      "goalSwitchTimeoutSec": 10.0,
+      "jointNoise": 0,
+      "dofSpeedScale": 1.0,
+      "useRelativeControl": true,
+      "graspSplit": "train",
+      "rewardWeightCurriculum": {
+        "ObjPosDeviation": -5.0,
+        "ObjRotDeviation": -0.2,
+        "StableContact": 0.1
+      },
+      "rewardWeightCurriculumSchedule": {
+        "warmupSteps": 200,
+        "totalSteps": 2000
+      },
+      "binaryTactileThreshold": 0.05,
+      "actionsMovingAverage": 0.01,
+      "controlFrequencyInv": 4,
+      "forceScale": 0,
+      "forceProbRange": [
+        0.001,
+        0.1
+      ],
+      "forceDecay": 0.99,
+      "forceDecayInterval": 0.08,
+      "policyObsDim": 111,
+      "privilegedObsDim": 21,
+      "studentInitObsDim": 55,
+      "proprioHistoryLen": 50,
+      "enableCameraSensors": true,
+      "camera": {
+        "height": 384,
+        "width": 384,
+        "horizontal_fov": 45,
+        "use_collision_geometry": true,
+        "cam_pos": [
+          0.0,
+          0.05,
+          0.75
+        ],
+        "cam_target": [
+          0.0,
+          -0.1,
+          0.5
+        ]
+      },
+      "studentObsDim": 2055,
+      "proprioObsDim": 40,
+      "numObservations": 137,
+      "numStates": 0,
+      "numActions": 20
+    },
+    "task": {
+      "randomize": false,
+      "randomization_params": {}
+    },
+    "sim": {
+      "dt": 0.0083333,
+      "substeps": 4,
+      "up_axis": "z",
+      "use_gpu_pipeline": false,
+      "gravity": [
+        0.0,
+        0.0,
+        -9.81
+      ],
+      "physx": {
+        "num_threads": 4,
+        "solver_type": 1,
+        "use_gpu": true,
+        "num_position_iterations": 16,
+        "num_velocity_iterations": 4,
+        "max_gpu_contact_pairs": 8388608,
+        "num_subscenes": 4,
+        "contact_offset": 0.002,
+        "rest_offset": 0.0,
+        "bounce_threshold_velocity": 0.2,
+        "max_depenetration_velocity": 1000.0,
+        "default_buffer_size_multiplier": 5.0,
+        "contact_collection": 2
+      }
+    },
+    "hand": {
+      "type": "wuji",
+      "asset": "assets/hands/wuji_artbot/right.urdf",
+      "self_collisions": true,
+      "force_links": [
+        "hand_r_thumb_pad_link",
+        "hand_r_index_pad_link",
+        "hand_r_middle_pad_link",
+        "hand_r_ring_pad_link",
+        "hand_r_pinky_pad_link"
+      ],
+      "track_links": [
+        "hand_r_thumb_pad_link",
+        "hand_r_index_pad_link",
+        "hand_r_middle_pad_link",
+        "hand_r_ring_pad_link",
+        "hand_r_pinky_pad_link"
+      ],
+      "dof_names": [
+        "hand_r_index_joint1",
+        "hand_r_index_joint2",
+        "hand_r_index_joint3",
+        "hand_r_index_joint4",
+        "hand_r_middle_joint1",
+        "hand_r_middle_joint2",
+        "hand_r_middle_joint3",
+        "hand_r_middle_joint4",
+        "hand_r_pinky_joint1",
+        "hand_r_pinky_joint2",
+        "hand_r_pinky_joint3",
+        "hand_r_pinky_joint4",
+        "hand_r_ring_joint1",
+        "hand_r_ring_joint2",
+        "hand_r_ring_joint3",
+        "hand_r_ring_joint4",
+        "hand_r_thumb_joint1",
+        "hand_r_thumb_joint2",
+        "hand_r_thumb_joint3",
+        "hand_r_thumb_joint4"
+      ],
+      "dof_props": {
+        "stiffness": [
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238,
+          100.0000005060238
+        ],
+        "damping": [
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332,
+          0.9999999922536332
+        ],
+        "friction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "armature": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "task": {
+        "numActions": 20,
+        "propDim": 40,
+        "policyObsDim": 111,
+        "studentInitObsDim": 55
+      },
+      "randomization": {
+        "randomize": false
+      },
+      "self_collision_mode": "digit_filtered"
+    },
+    "object": {
+      "task": {
+        "success_threshold": 0.005,
+        "rot_devia_threshold": 1.57,
+        "pos_devia_threshold": 0.05,
+        "goals": [
+          0.04,
+          0.0
+        ],
+        "contact_num": 5
+      },
+      "asset": {
+        "type": "knife",
+        "asset_root": "assets/objects/knife_wuji_fingertip",
+        "instance_id_list": [
+          "024"
+        ],
+        "asset_file": "mobility.urdf",
+        "initDof": "lower",
+        "disgravity_part": [],
+        "disfriction_part": [],
+        "disrbforce_part": [],
+        "dissimulate_part": []
+      },
+      "default_props": {
+        "mass": [
+          0.029,
+          0.006
+        ],
+        "friction": 3.0,
+        "dof_stiffness": 0.0,
+        "dof_damping": 1000.0
+      },
+      "randomization": {
+        "randomize": false,
+        "dof_properties": {
+          "damping": {
+            "range": [
+              0.7,
+              1.3
+            ],
+            "operation": "scaling",
+            "distribution": "uniform"
+          }
+        },
+        "rigid_body_properties": {
+          "by_body": {
+            "link_0": {
+              "mass": {
+                "range": [
+                  0.7,
+                  1.3
+                ],
+                "operation": "scaling",
+                "distribution": "uniform"
+              }
+            },
+            "link_1": {
+              "mass": {
+                "range": [
+                  0.7,
+                  1.3
+                ],
+                "operation": "scaling",
+                "distribution": "uniform"
+              }
+            }
+          }
+        },
+        "rigid_shape_properties": {
+          "friction": {
+            "num_buckets": 250,
+            "range": [
+              -1.0,
+              1.0
+            ],
+            "operation": "additive",
+            "distribution": "uniform"
+          }
+        }
+      },
+      "reward": {
+        "ObjPosDeviation": -50.0,
+        "ObjRotDeviation": -2.0,
+        "StableContact": 1.0,
+        "HandQposDeviation": -0.001,
+        "GoalDistance1": 1000.0,
+        "GoalDistance2": 1.0,
+        "Smooth": -1.0,
+        "Drop": -1.0,
+        "Success": 50.0
+      }
+    },
+    "train": {
+      "params": {
+        "seed": 42,
+        "algo": {
+          "name": "a2c_continuous"
+        },
+        "model": {
+          "name": "continuous_a2c_logstd"
+        },
+        "network": {
+          "name": "actor_critic_sapg_priv",
+          "separate": true,
+          "space": {
+            "continuous": {
+              "mu_activation": "None",
+              "sigma_activation": "None",
+              "mu_init": {
+                "name": "default"
+              },
+              "sigma_init": {
+                "name": "const_initializer",
+                "val": 0
+              },
+              "fixed_sigma": "coef_cond"
+            }
+          },
+          "mlp": {
+            "units": [
+              512,
+              256,
+              128
+            ],
+            "activation": "elu",
+            "d2rl": false,
+            "initializer": {
+              "name": "default"
+            },
+            "regularizer": {
+              "name": "None"
+            }
+          },
+          "rnn": {
+            "name": "lstm",
+            "units": 512,
+            "layers": 1,
+            "before_mlp": true,
+            "layer_norm": true
+          },
+          "sapg_priv": {
+            "policy_obs_dim": 111,
+            "privileged_obs_dim": 21,
+            "critic_policy_contact_dim": 5,
+            "expl_embedding_dim": 32,
+            "encoder": {
+              "units": [
+                256,
+                128,
+                16
+              ],
+              "activation": "elu",
+              "initializer": {
+                "name": "default"
+              }
+            },
+            "student_encoder": {
+              "type": "auto",
+              "init_dim": 55,
+              "proprio_encoder": {
+                "units": [
+                  128,
+                  64
+                ],
+                "activation": "elu",
+                "initializer": {
+                  "name": "default"
+                }
+              },
+              "init_encoder": {
+                "units": [
+                  128,
+                  64
+                ],
+                "activation": "elu",
+                "initializer": {
+                  "name": "default"
+                }
+              },
+              "temporal": {
+                "type": "tconv",
+                "hidden_size": 192,
+                "num_layers": 5,
+                "kernel_size": 3,
+                "dilation_growth": 2,
+                "activation": "elu",
+                "dropout": 0.05
+              },
+              "latent_head": {
+                "units": [
+                  128
+                ],
+                "activation": "elu",
+                "initializer": {
+                  "name": "default"
+                }
+              }
+            }
+          }
+        },
+        "load_checkpoint": false,
+        "load_path": "",
+        "config": {
+          "name": "artmanipSAPGPrivLSTMPPO",
+          "full_experiment_name": "artmanipSAPGPrivLSTMPPO",
+          "env_name": "rlgpu",
+          "multi_gpu": false,
+          "ppo": true,
+          "mixed_precision": false,
+          "normalize_input": true,
+          "normalize_value": true,
+          "value_bootstrap": false,
+          "num_actors": 26,
+          "reward_shaper": {
+            "scale_value": 1.0
+          },
+          "normalize_advantage": true,
+          "gamma": 0.998,
+          "tau": 0.95,
+          "learning_rate": 0.0002,
+          "lr_schedule": "adaptive",
+          "schedule_type": "standard",
+          "kl_threshold": 0.016,
+          "score_to_win": 100000,
+          "max_epochs": 50000,
+          "save_best_after": 50,
+          "save_frequency": 100,
+          "print_stats": true,
+          "grad_norm": 1.0,
+          "entropy_coef": 0,
+          "truncate_grads": true,
+          "e_clip": 0.2,
+          "horizon_length": 16,
+          "minibatch_size": 8192,
+          "mini_epochs": 4,
+          "critic_coef": 4,
+          "clip_value": true,
+          "seq_length": 16,
+          "bounds_loss_coef": 0.0001,
+          "defer_summaries_sec": 5,
+          "summaries_interval_sec_min": 5,
+          "summaries_interval_sec_max": 100,
+          "expl_type": "mixed_expl_learn_param",
+          "player": {
+            "deterministic": true,
+            "use_vecenv": true,
+            "games_num": 1000000,
+            "print_stats": false
+          },
+          "use_others_experience": "lf",
+          "off_policy_ratio": 1.0,
+          "expl_reward_type": "entropy",
+          "expl_reward_coef_scale": 0.005,
+          "expl_coef_block_size": 512
+        }
+      }
+    },
+    "experiment": ""
+  },
+  "seed": 20260920,
+  "steps": 60,
+  "contact_samples": 20,
+  "physical_engine": "ArtGrasp/PhysX, nominal paper friction 3, damping 1000, gravity, filtered hand collisions",
+  "count": 26,
+  "valid": 24,
+  "train": 18,
+  "test": 6,
+  "accepted_source_indices": [
+    0,
+    1,
+    3,
+    7,
+    8,
+    9,
+    11,
+    12,
+    14,
+    25,
+    27,
+    31,
+    32,
+    36,
+    39,
+    40,
+    42,
+    43,
+    47,
+    48,
+    58,
+    71,
+    74,
+    77
+  ],
+  "contact_fractions": [
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  ],
+  "palm_contact_fractions": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "max_drift_m": [
+    4.4768534280592576e-05,
+    4.550995436147787e-05,
+    0.00122161116451025,
+    9.944197518052533e-05,
+    7.569661102024838e-05,
+    1.6558349670958705e-05,
+    1.8138722225558013e-05,
+    1.7466194549342617e-05,
+    3.613457374740392e-05,
+    2.3304424757952802e-05,
+    2.1558103981078602e-05,
+    4.616663500200957e-05,
+    3.603676304919645e-05,
+    7.668641956115607e-06,
+    1.440993946744129e-05,
+    2.0649442376452498e-05,
+    2.3189501007436775e-05,
+    1.2277543646632694e-05,
+    1.2418381629686337e-05,
+    4.1974071791628376e-05,
+    1.0778006071632262e-05,
+    5.713188511435874e-05,
+    1.646840973990038e-05,
+    0.00026130382320843637,
+    0.0001464157976442948,
+    3.353730062372051e-05
+  ],
+  "max_rotation_rad": [
+    0.0020665027504764874,
+    0.0038126682116422007,
+    0.22962494865600397,
+    0.0032671587148417375,
+    0.004424138346782381,
+    0.0005974098454992557,
+    0.0014530824388620533,
+    0.0008103972956402306,
+    0.00399471380826351,
+    0.0006938158816484762,
+    0.0021452808496131254,
+    0.004581360107477595,
+    0.0015224453979540429,
+    0.0011902849532146125,
+    0.002014886384510402,
+    0.006837262145360168,
+    0.0007771265177658443,
+    0.0013962587128850427,
+    0.0012943561582578018,
+    0.004061241965891257,
+    0.0008546948437301555,
+    0.0022331372468857966,
+    0.0007026690900987369,
+    0.0032658960288112363,
+    0.013553511756026506,
+    0.006072702444367612
+  ],
+  "outputs": {
+    "valid_grasps.npy": "59cab82366b32d425624a8eb312a673dd8ca82f52f687fb3e79bebcdcf94ea4d",
+    "valid/valid_grasps.npy": "59cab82366b32d425624a8eb312a673dd8ca82f52f687fb3e79bebcdcf94ea4d",
+    "train/valid_grasps.npy": "bcd73a4df2a8b058eb0a3831553efcca4b6a9d234b5f886bf91fe062b119e76e",
+    "test/valid_grasps.npy": "0cb8d813a3633fff239e7510dcc7770f163c89168a24eed99471d55b08a02520",
+    "source_indices.npy": "14bf4164a3c82b982f535ae82de9774d3d0683cda0e8f9756c213db825b5e324"
+  }
+}

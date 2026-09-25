@@ -1,0 +1,67 @@
+{
+  "project": "/home/wangjiarui/artgym-experiments-20260921",
+  "python": "/home/wangjiarui/artgym-runtime/bin/python",
+  "state_dir": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/sharpa-substep-monitor-eight",
+  "interval_seconds": 300,
+  "evaluation_timeout_seconds": 1800,
+  "runs": [
+    {
+      "name": "sharpa_paper_reference_substeps8_recover1350_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/sharpa_paper_reference_substeps8_recover1350_v1",
+      "profile": "reference",
+      "gpu": 3,
+      "evaluation": {
+        "task": "artmanip_paper_reference",
+        "hand": "sharpa",
+        "object": "knife_sharpa_official_eval",
+        "train": "paperReferenceSAPG",
+        "instances": [
+          "030",
+          "031",
+          "032",
+          "033",
+          "034"
+        ],
+        "split": "valid",
+        "repeats": 10,
+        "max_steps": 1200,
+        "randomized": true,
+        "scope": "Bounded solver-recovery diagnostic; five held-out geometries, all valid grasps,10 repetitions. Both trained policies evaluated with common original4substep physics. Not complete2Btraining or final100repeat paper report."
+      },
+      "required_files": [
+        "/home/wangjiarui/artgym-experiments-20260921/runs/experiment-suite/sharpa-ready.json"
+      ]
+    },
+    {
+      "name": "sharpa_paper_reference_substeps4_recover1350_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/sharpa_paper_reference_substeps4_recover1350_v1",
+      "profile": "reference",
+      "gpu": 3,
+      "evaluation": {
+        "task": "artmanip_paper_reference",
+        "hand": "sharpa",
+        "object": "knife_sharpa_official_eval",
+        "train": "paperReferenceSAPG",
+        "instances": [
+          "030",
+          "031",
+          "032",
+          "033",
+          "034"
+        ],
+        "split": "valid",
+        "repeats": 10,
+        "max_steps": 1200,
+        "randomized": true,
+        "scope": "Bounded solver-recovery diagnostic; five held-out geometries, all valid grasps,10 repetitions. Both trained policies evaluated with common original4substep physics. Not complete2Btraining or final100repeat paper report."
+      },
+      "required_files": [
+        "/home/wangjiarui/artgym-experiments-20260921/runs/experiment-suite/sharpa-ready.json"
+      ]
+    }
+  ],
+  "evaluation_gpus": [
+    3
+  ],
+  "evaluation_queue_order": "oldest_first"
+}

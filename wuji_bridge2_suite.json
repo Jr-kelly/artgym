@@ -1,0 +1,45 @@
+{
+  "experiments": {
+    "wuji_bridge2_cp50_seed36_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge2_20260922",
+      "task": "wuji_acquisition_bridge_hemisphere",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        2
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "2230146804f9e0de54d4e61ab3efd2d90ec6ef1ee403130cd9a46c235bf860b7",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/bridge2-hemisphere-runtime/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge2-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/bridge2-hemisphere-runtime/report.json",
+        "expected_counts": [
+          2,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/verified-policies/teacher-variable-near5-seed23-cp50/teacher.pth",
+        "object.reward.GoalDistance2=5.0",
+        "seed=20261036",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant"
+      ],
+      "purpose": "Adaptive source-plus-neighbor curriculum: equal sampling of mapped successful source and functional20 trainingrow16. SamefrozenCP50/newAdam,officialactuators,variable2/5s,near5,fullnoise,100epochs,constantLR1e-5. Row16 chosen fromtrainingresults and jointlyclosestposture; heldoutnotusedforchoice. Keepall20baselineunchanged. Notonefactorcomparison because dataandLRdiffer. No broadgeneralizationclaim.",
+      "fixed_learning_rate_preflight": 1e-05,
+      "start_after_completed": [
+        "wuji_single24_scratch_timed5_seed27_v1"
+      ]
+    }
+  }
+}

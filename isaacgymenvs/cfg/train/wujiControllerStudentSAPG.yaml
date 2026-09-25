@@ -1,0 +1,10 @@
+defaults:
+  - wujiFixedStudentActorSAPG
+  - _self_
+params:
+  model:
+    name: continuous_a2c_wuji_controller_student
+  network:
+    name: wuji_controller_student_actor
+    controller_adapter:
+      enabled: true

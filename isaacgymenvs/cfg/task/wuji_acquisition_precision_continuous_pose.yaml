@@ -1,0 +1,13 @@
+defaults:
+  - wuji_acquisition_precision_aug
+  - _self_
+env:
+  maxConsecutiveSuccesses: 0
+  # The selected source teacher has already reached full reset-noise amplitude.
+  initialPoseNoise:
+    ramp_epochs: 0
+  absolutePoseObjective:
+    coefficient: 1.0
+    position_scale_m: 0.01
+    rotation_scale_rad: 0.25
+    ramp_epochs: 50

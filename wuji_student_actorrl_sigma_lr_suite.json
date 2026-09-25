@@ -1,0 +1,118 @@
+{
+  "experiments": {
+    "wuji_student_actorrl_replaycp25_sigmaquarter_broad0_lrquarter_seed62_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_fixed_student_actor",
+      "train": "wujiFixedStudentActorSAPG",
+      "gpus": [
+        2
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "3374e4dd959bb9cd0949db5922eecbad9e19b568116c088c68bb5956e012e1b0",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/student-actorrl-sigmaquarter-runtime-v1/report.json",
+        "runs/wuji-goal/diagnostics/student-actorrl-broad5-runtime-v2/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/bridge3-current-source-runtime/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.0000025",
+        "train.params.config.lr_schedule=constant",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/student-actorrl-sigmaquarter-initial/actor.pth",
+        "task.env.episodeLength=600",
+        "seed=20261062",
+        "task.env.fixedStudentArtifact=runs/wuji-goal/frozen-candidates/student-bridge3-replay-seed60-cp25/student.pth",
+        "task.env.fixedStudentSha256=0d2480657bf6176d32c379743f68402aba67aa868bea54b112bbc1bc34142b17",
+        "task.env.broadGoalReward.coefficient=0.0"
+      ],
+      "purpose": "Followup toobservedKL0.16-0.25 atstdquarter/LR1e-5: sameinitialization/seed/data/100epochs, LR2.5e-6 withreal3epochKLmax.05gate. Preserve bothoriginalLRarms; not paperreference.",
+      "fixed_learning_rate_preflight": 2.5e-06,
+      "start_after_completed": [],
+      "comparison": "initialGaussianstdquarter_broad0",
+      "training_module": "scripts.train_wuji_student_actor_audited",
+      "fixed_student_actor": {
+        "student": "runs/wuji-goal/frozen-candidates/student-bridge3-replay-seed60-cp25/student.pth",
+        "student_sha256": "0d2480657bf6176d32c379743f68402aba67aa868bea54b112bbc1bc34142b17",
+        "policy_encoder_frozen": true,
+        "actor_receives_current_object_truth": false,
+        "critic_receives_current_object_truth": true,
+        "observation_normalizer_frozen": true
+      },
+      "launch_fix": "Absolute Hydra config path; previousv1 preflight failed beforephysics. Original19200model/taskgate plus2048regression preserve evidence.",
+      "initial_sigma_factor": 0.25,
+      "max_preflight_kl": 0.05
+    },
+    "wuji_student_actorrl_replaycp25_sigmaquarter_broad5_lrquarter_seed62_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_fixed_student_actor",
+      "train": "wujiFixedStudentActorSAPG",
+      "gpus": [
+        4
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "3374e4dd959bb9cd0949db5922eecbad9e19b568116c088c68bb5956e012e1b0",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/student-actorrl-sigmaquarter-runtime-v1/report.json",
+        "runs/wuji-goal/diagnostics/student-actorrl-broad5-runtime-v2/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/bridge3-current-source-runtime/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.0000025",
+        "train.params.config.lr_schedule=constant",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/student-actorrl-sigmaquarter-initial/actor.pth",
+        "task.env.episodeLength=600",
+        "seed=20261062",
+        "task.env.fixedStudentArtifact=runs/wuji-goal/frozen-candidates/student-bridge3-replay-seed60-cp25/student.pth",
+        "task.env.fixedStudentSha256=0d2480657bf6176d32c379743f68402aba67aa868bea54b112bbc1bc34142b17",
+        "task.env.broadGoalReward.coefficient=5.0"
+      ],
+      "purpose": "Followup toobservedKL0.16-0.25 atstdquarter/LR1e-5: sameinitialization/seed/data/100epochs, LR2.5e-6 withreal3epochKLmax.05gate. Preserve bothoriginalLRarms; not paperreference.",
+      "fixed_learning_rate_preflight": 2.5e-06,
+      "start_after_completed": [],
+      "comparison": "initialGaussianstdquarter_broad5",
+      "training_module": "scripts.train_wuji_student_actor_audited",
+      "fixed_student_actor": {
+        "student": "runs/wuji-goal/frozen-candidates/student-bridge3-replay-seed60-cp25/student.pth",
+        "student_sha256": "0d2480657bf6176d32c379743f68402aba67aa868bea54b112bbc1bc34142b17",
+        "policy_encoder_frozen": true,
+        "actor_receives_current_object_truth": false,
+        "critic_receives_current_object_truth": true,
+        "observation_normalizer_frozen": true
+      },
+      "launch_fix": "Absolute Hydra config path; previousv1 preflight failed beforephysics. Original19200model/taskgate plus2048regression preserve evidence.",
+      "initial_sigma_factor": 0.25,
+      "max_preflight_kl": 0.05
+    }
+  }
+}

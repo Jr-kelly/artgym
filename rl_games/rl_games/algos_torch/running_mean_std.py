@@ -33,7 +33,7 @@ class RunningMeanStd(nn.Module):
         self.register_buffer("count", torch.ones((), dtype = torch.float64))
 
     def _update_mean_var_count_from_moments(self, mean, var, count, batch_mean, batch_var, batch_count):
-        if os.getenv("LOCAL_RANK") and os.getenv("WORLD_SIZE"): # multi-gpu
+        if dist.is_initialized() and dist.get_world_size()>1:
             batch_square_sum = batch_var * (batch_count - 1) + (batch_mean ** 2) * batch_count
             batch_sum = batch_mean * batch_count
             batch_count = torch.tensor(batch_count, dtype=torch.float64).to(batch_mean.device)

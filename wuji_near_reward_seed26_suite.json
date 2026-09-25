@@ -1,0 +1,74 @@
+{
+  "experiments": {
+    "wuji_variable_nearreward01_seed26_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_precision_near01",
+      "train": "wujiAcquisitionSAPG",
+      "task": "wuji_acquisition_official_variable_timed",
+      "gpus": [
+        1
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/verified-policies/teacher-official-timed2-cp10/teacher.pth",
+        "train.params.config.learning_rate=0.00002",
+        "task.env.endpointHoldReward=0",
+        "task.env.trainingCommandDurationsSec=[2.0,5.0]",
+        "seed=20261026",
+        "object.reward.GoalDistance2=0.1"
+      ],
+      "purpose": "Second independent training seed20261026 after seed23 near5CP10 fresh200 achieved170joint5s. SameCP10initialization/newAdam/5120env/horizon32/initialLR2e-5/adaptiveKL/100epoch/fullnoise/officialgains/variable2or5s. Only nearGaussian coefficient0.1versus5 within this matchedpair. PrespecifyCP10fresh200andCP10/25/50/100development2/5s. Samegrasp only; not geometrygeneralization.",
+      "comparison": "variable_clock_near_reward_seed26",
+      "source_checkpoint_sha256": "38903d492ee7d6c372633ce5584c6ea7703034362f3bab8928e31eda599e977e",
+      "start_after_completed": [
+        "wuji_variable_nearreward01_seed23_v1"
+      ],
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/near-reward-0.1/report.json"
+      ],
+      "timed_gate": "runs/wuji-goal/verification/official-timed2-cp10-timed2seconds-perturb100/report.json"
+    },
+    "wuji_variable_nearreward5_seed26_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_precision_near01",
+      "train": "wujiAcquisitionSAPG",
+      "task": "wuji_acquisition_official_variable_timed",
+      "gpus": [
+        3
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/verified-policies/teacher-official-timed2-cp10/teacher.pth",
+        "train.params.config.learning_rate=0.00002",
+        "task.env.endpointHoldReward=0",
+        "task.env.trainingCommandDurationsSec=[2.0,5.0]",
+        "seed=20261026",
+        "object.reward.GoalDistance2=5.0"
+      ],
+      "purpose": "Second independent training seed20261026 after seed23 near5CP10 fresh200 achieved170joint5s. SameCP10initialization/newAdam/5120env/horizon32/initialLR2e-5/adaptiveKL/100epoch/fullnoise/officialgains/variable2or5s. Only nearGaussian coefficient0.1versus5 within this matchedpair. PrespecifyCP10fresh200andCP10/25/50/100development2/5s. Samegrasp only; not geometrygeneralization.",
+      "comparison": "variable_clock_near_reward_seed26",
+      "source_checkpoint_sha256": "38903d492ee7d6c372633ce5584c6ea7703034362f3bab8928e31eda599e977e",
+      "start_after_completed": [
+        "wuji_variable_nearreward5_seed23_v1"
+      ],
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/near-reward-5.0/report.json"
+      ],
+      "timed_gate": "runs/wuji-goal/verification/official-timed2-cp10-timed2seconds-perturb100/report.json"
+    }
+  }
+}

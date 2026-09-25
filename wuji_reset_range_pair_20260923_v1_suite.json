@@ -1,0 +1,92 @@
+{
+  "experiments": {
+    "wuji_bridge3_reset2x_cp25_seed20261124_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_acquisition_bridge3_hemisphere",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        2
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/reset-range2x-training-gate-20260923-v1/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/reset-range2x-training-gate-20260923-v1/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "train.params.config.checkpoint_first_epoch=10",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "seed=20261124",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/teacher-bridge3-functionalinit-seed45-cp25/teacher.pth",
+        "task.env.initialPoseNoise.position_m=0.001",
+        "task.env.initialPoseNoise.joint_rad=0.02",
+        "task.env.initialPoseNoise.rotation_vector_rad=0.017453292519943295",
+        "task.env.initialPoseNoise.ramp_epochs=0"
+      ],
+      "fixed_learning_rate_preflight": 1e-05,
+      "max_preflight_kl": 0.05,
+      "purpose": "Matched reset-range continuation from frozen successful CP25. Change only reset jitter amplitude1x versus2x; retain same3traininggrasps,realisticknife,physics,actor/normalizer initialization,newAdam,LR1e-5,seed20261124,5120env,32horizon,100epochs=16384000frames. Strict oldsmall and observedwider development evaluation atCP10/25/50/75/100; future independent cohort required.2x runs first for goal progress; no throughput claim."
+    },
+    "wuji_bridge3_reset1x_cp25_seed20261124_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_acquisition_bridge3_hemisphere",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        2
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/reset-range1x-training-gate-20260923-v1/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/reset-range1x-training-gate-20260923-v1/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "train.params.config.checkpoint_first_epoch=10",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "seed=20261124",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/teacher-bridge3-functionalinit-seed45-cp25/teacher.pth",
+        "task.env.initialPoseNoise.position_m=0.0005",
+        "task.env.initialPoseNoise.joint_rad=0.01",
+        "task.env.initialPoseNoise.rotation_vector_rad=0.008726646259971648",
+        "task.env.initialPoseNoise.ramp_epochs=0"
+      ],
+      "fixed_learning_rate_preflight": 1e-05,
+      "max_preflight_kl": 0.05,
+      "purpose": "Matched reset-range continuation from frozen successful CP25. Change only reset jitter amplitude1x versus2x; retain same3traininggrasps,realisticknife,physics,actor/normalizer initialization,newAdam,LR1e-5,seed20261124,5120env,32horizon,100epochs=16384000frames. Strict oldsmall and observedwider development evaluation atCP10/25/50/75/100; future independent cohort required.2x runs first for goal progress; no throughput claim."
+    }
+  }
+}

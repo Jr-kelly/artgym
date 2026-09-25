@@ -1,0 +1,15 @@
+defaults:
+  - artmanipSAPGPrivLSTMPPO
+  - _self_
+params:
+  config:
+    learning_rate: 0.0002
+    # Two ranks: global 20000 envs, 40000 minibatch, 4000 envs/exploration group.
+    expl_coef_block_size: 2000
+    minibatch_size: 20000
+    managed_checkpoints: true
+    save_frequency: 50
+    evaluation_frequency: 50
+    checkpoint_first_epoch: 10
+    checkpoint_keep_recent: 6
+    checkpoint_milestone_frequency: 500

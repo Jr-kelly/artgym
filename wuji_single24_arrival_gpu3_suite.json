@@ -1,0 +1,39 @@
+{
+  "experiments": {
+    "wuji_single24_scratch_arrival_seed27_gpu3_v2": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_functional_single24_20260922",
+      "task": "wuji_acquisition_official_arrival_control",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        3
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 300,
+      "normalizer_count_preflight": 1,
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/functional-single24-arrival-runtime/report.json",
+        "runs/wuji-goal/diagnostics/single24-arrival-positive-clock-gate/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/functional-single24-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/functional-single24-arrival-runtime/report.json",
+        "expected_counts": [
+          1,
+          2
+        ]
+      },
+      "overrides": [
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "object.reward.GoalDistance2=5.0",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "seed=20261027",
+        "train.params.config.learning_rate=0.0002"
+      ],
+      "purpose": "Adaptive matched single24 acquisition comparison after fixed5 CP100 has0/100 firstcycle,98/100 purepose stability,99/100 maximumopening<5mm. Only command switching changes: arrival versus fixed5s, same seed20261027, scratch,5120env,horizon32,300epochs, near5 and strict2mm/0.3s criteria. EightGPU7 shares upstream reference, so runtime is not a controlled throughput comparison. Independent fixed2/5s scores remain primary. No scripted targets or demonstration imitation. Scheduling revision: restart from the same scratch seed on dedicated eightGPU3 after v1 CP10 was saved, preserving v1 cancellation logs; do not combine v1/v2 samples or claim bitwise identity."
+    }
+  }
+}

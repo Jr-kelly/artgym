@@ -1,0 +1,16 @@
+defaults:
+  - artmanipSAPGPrivLSTMPPO
+  - _self_
+
+params:
+  config:
+    learning_rate: 0.0002
+    # Five exploration groups as in paper Table 9; 4090-sized batches.
+    expl_coef_block_size: 512
+    minibatch_size: 8192
+    managed_checkpoints: true
+    save_frequency: 50
+    checkpoint_first_epoch: 10
+    checkpoint_keep_recent: 6
+    checkpoint_milestone_frequency: 500
+    evaluation_frequency: 100

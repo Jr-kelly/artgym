@@ -92,7 +92,7 @@ def build_student_encoder_from_artifact(player, cfg, rlg_config_dict, student_ar
         fallback_history_len=int(cfg.task.env.get("proprioHistoryLen", 1)),
         fallback_proprio_dim_per_step=int(cfg.task.env.get("proprioObsDim", 2 * int(cfg.hand.task.numActions))),
         fallback_student_obs_dim=int(cfg.task.env.get("studentObsDim", 0)),
-        fallback_init_dim=DEFAULT_STUDENT_INIT_OBS_DIM,
+        fallback_init_dim=int(cfg.task.env.get("studentInitObsDim", DEFAULT_STUDENT_INIT_OBS_DIM)),
     )
     student_temporal_obs_mode = runtime_layout["student_temporal_obs_mode"]
     proprio_history_len = int(runtime_layout["history_len"])

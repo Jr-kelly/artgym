@@ -114,7 +114,7 @@ class ArtManip(VecTask):
         self.student_temporal_obs_layout = get_student_temporal_obs_layout(
             history_len=self.proprio_history_len,
             proprio_dim_per_step=self.student_proprio_obs_dim,
-            init_dim=DEFAULT_STUDENT_INIT_OBS_DIM,
+            init_dim=int(self.cfg["env"].get("studentInitObsDim", DEFAULT_STUDENT_INIT_OBS_DIM)),
         )
         self.student_obs_dim = int(self.student_temporal_obs_layout["student_obs_dim"])
         self.cfg["env"]["studentObsDim"] = self.student_obs_dim
@@ -402,7 +402,10 @@ class ArtManip(VecTask):
             instance_asset_options = gymapi.AssetOptions()
             instance_asset_options.default_dof_drive_mode = gymapi.DOF_MODE_POS
             instance_asset_options.override_com = True
-            instance_asset_options.override_inertia = True
+            # Preserve the upstream density-derived convention by default.
+            # Explicit asset profiles may retain authored URDF inertia for
+            # independently audited mass/inertia-consistent transfer tests.
+            instance_asset_options.override_inertia = bool(self.object_cfg['asset'].get('override_inertia', True))
             instance_asset_options.fix_base_link = False
             instance_asset_options.disable_gravity = False
             instance_asset_options.thickness = 0.01
@@ -443,6 +446,18 @@ class ArtManip(VecTask):
         upper = gymapi.Vec3(spacing, spacing, spacing)
         self._create_asset()
         self.num_hand_dofs = self.gym.get_asset_dof_count(self.hand_asset)
+        if self.num_hand_dofs != int(self.hand_cfg['task']['numActions']):
+            raise ValueError(
+                f"Hand asset has {self.num_hand_dofs} DOFs, but hand.task.numActions="
+                f"{self.hand_cfg['task']['numActions']}"
+            )
+        dof_names = self.gym.get_asset_dof_names(self.hand_asset)
+        configured_names = self.hand_cfg.get('dof_names', dof_names)
+        if list(configured_names) != list(dof_names):
+            raise ValueError(f"Hand DOF order differs from hand.dof_names: {dof_names}")
+        for name in ('stiffness', 'damping', 'friction', 'armature'):
+            if len(self.hand_cfg['dof_props'][name]) != self.num_hand_dofs:
+                raise ValueError(f"hand.dof_props.{name} must contain {self.num_hand_dofs} values")
         self.num_hand_actuators = self.num_hand_dofs
 
         self.actuated_dof_indices = [i for i in range(self.num_hand_dofs)]
@@ -492,6 +507,10 @@ class ArtManip(VecTask):
         self.object_link1_rb_handle = self.object_rb_handles[1]
         self.fingertip_handles = [self.gym.find_asset_rigid_body_index(self.hand_asset, name) for name in self.hand_cfg['track_links']]
         self.force_handles = [self.gym.find_asset_rigid_body_index(self.hand_asset, name) for name in self.hand_cfg['force_links']]
+        if len(self.fingertip_handles) != 5 or len(self.force_handles) != 5:
+            raise ValueError("ArtManip requires five track_links and force_links, ordered thumb to pinky")
+        if any(handle < 0 for handle in self.fingertip_handles + self.force_handles):
+            raise ValueError("hand.track_links or hand.force_links contains a body missing from the hand asset")
         self.tactile_sensor_handles = self.force_handles[-5:]
         for i in range(self.num_envs):
             # create env instance
@@ -543,17 +562,11 @@ class ArtManip(VecTask):
             body_names = self.gym.get_actor_rigid_body_names(env_ptr, hand_handle)
             body_shape_counts = self.gym.get_actor_rigid_body_shape_indices(env_ptr, hand_handle)
             props = self.gym.get_actor_rigid_shape_properties(env_ptr, hand_handle)
-            special_names = [
-                'left_thumb_elastomer', 
-                'left_index_elastomer', 
-                'left_middle_elastomer', 
-                'left_ring_elastomer', 
-                'left_pinky_elastomer'
-            ]
+            special_names = self.hand_cfg['force_links']
             actual_n = 0
             for id, shape in enumerate(body_shape_counts):
                 if shape.count > 0:
-                    is_special = any(name in body_names[id] for name in special_names)
+                    is_special = body_names[id] in special_names
                     if not is_special:
                         actual_n += 1
             N = sum(1 << (i + 8) for i in range(1, actual_n + 1)) if actual_n > 0 else 0
@@ -562,16 +575,22 @@ class ArtManip(VecTask):
                 if shape.count == 0:
                     continue
                 name = body_names[id]
-                if 'left_thumb_elastomer' in name:
-                    current_mask = (1 << 3) | (1 << 4) | N             # 连兄弟，加身份，连 n
-                elif 'left_index_elastomer' in name:
-                    current_mask = (1 << 3) | (1 << 5) | N
-                elif 'left_middle_elastomer' in name:
-                    current_mask = (1 << 3) | (1 << 6) | N
-                elif 'left_ring_elastomer' in name:
-                    current_mask = (1 << 3) | (1 << 7) | N
-                elif 'left_pinky_elastomer' in name:
-                    current_mask = (1 << 3) | (1 << 8) | N
+                if self.hand_cfg.get('self_collision_mode') == 'digit_filtered':
+                    digits = ('thumb', 'index', 'middle', 'ring', 'pinky')
+                    if name == 'hand_r_base_link':
+                        current_mask = sum(1 << (16+i) for i in range(5))
+                    else:
+                        digit = next((i for i, finger in enumerate(digits) if f'_{finger}_' in name), None)
+                        if digit is None:
+                            raise ValueError(f'No self-collision group for Wuji body {name}')
+                        current_mask = 1 << (8+digit)
+                        if name.endswith(('link1', 'link2')):
+                            current_mask |= 1 << (16+digit)
+                elif not self.hand_cfg.get('self_collisions', True):
+                    # Object filters use bits 0..2, so bit 3 excludes only hand self-contact.
+                    current_mask = 1 << 3
+                elif name in special_names:
+                    current_mask = (1 << 3) | (1 << (4 + special_names.index(name))) | N
                 else:
                     current_mask = 1 << (n_counter + 8)
                     n_counter += 1  
@@ -722,6 +741,10 @@ class ArtManip(VecTask):
 
 
     def _get_object_props(self):
+        if self.cfg['env'].get('batchedObjectPropertyRead', False):
+            from scripts.batched_object_properties import read_object_properties_batched
+            read_object_properties_batched(self)
+            return
         num_object_bodies = len(self.object_semantic_body_names)
         self.object_mass = torch.zeros(
             (self.num_envs, num_object_bodies),
@@ -1042,8 +1065,12 @@ class ArtManip(VecTask):
         self.eval_base_num_grasps = int(grasp_states.shape[0] if base_num_grasps is None else base_num_grasps)
         self.eval_goal_sequence = to_torch(goal_sequence, dtype=torch.float, device=self.device).view(-1, 1)
         self.eval_goal_timeout = float(self.goal_switch_timeout_sec if stage_duration is None else stage_duration)
-        if self.eval_goal_timeout <= 0.0:
-            raise ValueError(f"Eval goal timeout must be positive, got {self.eval_goal_timeout}")
+        paper_without_stage_timeout = (
+            self.cfg['env'].get('rewardProtocol', 'upstream') == 'paper'
+            and self.eval_goal_timeout == 0.0
+        )
+        if self.eval_goal_timeout <= 0.0 and not paper_without_stage_timeout:
+            raise ValueError(f"Eval goal timeout must be positive (or zero for paper protocol), got {self.eval_goal_timeout}")
         self._reset_eval_session_buffers()
 
     def _record_eval_completion(self, env_ids, reason_code, stage=None, goal_distance=None):
@@ -1376,12 +1403,22 @@ class ArtManip(VecTask):
         self.prev_obj_dof_pos.copy_(self.obj_dof_pos)
 
     def compute_reward(self, actions):
+        protocol = self.cfg['env'].get('rewardProtocol', 'upstream')
+        if protocol not in ('upstream', 'corrected', 'paper'):
+            raise ValueError(f'Unknown reward protocol: {protocol}')
         if self.eval_mode:
             self.reset_buf[~self.eval_active_mask] = 0
         self.goal_achieved_step.zero_()
         goal_distance = torch.norm(self.obj_dof_pos - self.goal_obj_dof_pos, p=1, dim=-1)
         goal_distance = torch.nan_to_num(goal_distance, nan=1.0).clamp(0.0, 1.0)
         success_envs = (goal_distance < self.object_cfg['task']['success_threshold'])
+        if protocol != 'upstream':
+            # Account for this transition before update_goal initializes the next stage.
+            valid_transition = ~self.truncated_envs & torch.isfinite(self.obj_dof_pos).all(dim=-1)
+            success_envs &= valid_transition
+            goal_distance_reward1 = torch.clamp(self.mini_goal_distance - goal_distance, min=0.0)
+            goal_distance_reward1 *= valid_transition
+            self.mini_goal_distance = torch.minimum(self.mini_goal_distance, goal_distance)
         counted_success_envs = torch.zeros_like(success_envs)
         if self.eval_mode:
             success_envs = torch.logical_and(success_envs, self.eval_active_mask)
@@ -1531,8 +1568,11 @@ class ArtManip(VecTask):
         hand_qpos_reward = torch.nan_to_num(hand_qpos_reward, nan=5.0).clamp(0.0, 5.0)
         stable_contact_reward = (torch.sum(self.contact_info[:,-5:], dim=-1) - self.object_cfg['task']['contact_num']).clamp(-5.0, 0.0)
         goal_distance_reward2 = torch.exp(- (goal_distance / self.object_cfg['task']['success_threshold']) ** 2)
-        goal_distance_reward1 = torch.clamp(self.mini_goal_distance - goal_distance, min=0.0)
-        self.mini_goal_distance = torch.minimum(self.mini_goal_distance, goal_distance)
+        if protocol == 'upstream':
+            goal_distance_reward1 = torch.clamp(self.mini_goal_distance - goal_distance, min=0.0)
+            self.mini_goal_distance = torch.minimum(self.mini_goal_distance, goal_distance)
+        else:
+            goal_distance_reward2 *= valid_transition
         self.episode_goal_distance_reward1_sum += goal_distance_reward1
         keep_success_reward = torch.zeros_like(object_pos_reward)
         target_delta = self.cur_targets[:, self.actuated_dof_indices] - self.prev_reward_targets
@@ -1543,6 +1583,12 @@ class ArtManip(VecTask):
         drop_reward[self.truncated_envs] = 1.0
         # ---------- success_reward ---------------
         success_reward = self.goal_achieved_step.clone()
+        if protocol == 'paper':
+            # Table 7: physical base velocity and normalized action difference.
+            object_pos_reward = torch.nan_to_num(torch.linalg.vector_norm(self.object_linvel, dim=-1), nan=1.0, posinf=1.0)
+            object_rot_reward = torch.nan_to_num(torch.linalg.vector_norm(self.object_angvel, dim=-1), nan=10.0, posinf=10.0)
+            action_rate_reward = torch.nan_to_num(torch.sum((self.actions - self.previous_policy_actions) ** 2, dim=-1), nan=50.0, posinf=50.0)
+            success_reward = success_envs.float()
         
         reward_terms = {
             'ObjPosDeviation': object_pos_reward,
@@ -2027,6 +2073,7 @@ class ArtManip(VecTask):
         )
 
     def pre_physics_step(self, actions):
+        self.previous_policy_actions = self.actions.clone()
         self.actions = actions.clone().to(self.device)
         targets_copy = self.cur_targets.clone()
         object_slice = slice(self.num_hand_dofs, self.num_hand_dofs + self.obj_dof_pos.shape[1])

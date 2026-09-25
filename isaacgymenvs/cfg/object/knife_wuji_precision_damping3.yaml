@@ -1,0 +1,7 @@
+defaults:
+  - knife_wuji_precision_near01
+  - _self_
+
+# Bounded sensitivity/adaptation experiment, not a calibrated real knife.
+default_props:
+  dof_damping: 3.0

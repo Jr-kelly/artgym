@@ -1,0 +1,13 @@
+defaults:
+  - knife_wuji_demo_aligned
+  - _self_
+reward:
+  ObjPosDeviation: -0.5
+  ObjRotDeviation: -0.02
+  StableContact: 0.0
+  HandQposDeviation: -0.001
+  GoalDistance1: 1000.0
+  GoalDistance2: 1.0
+  Smooth: -1.0
+  Drop: -25.0
+  Success: 50.0

@@ -1,0 +1,53 @@
+{
+  "project": "/home/wangjiarui/artgym-experiments-20260921",
+  "python": "/home/wangjiarui/artgym-runtime/bin/python",
+  "state_dir": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/damping-adaptation-monitor-four",
+  "interval_seconds": 300,
+  "evaluation_timeout_seconds": 1800,
+  "evaluation_gpus": [
+    3
+  ],
+  "evaluation_queue_order": "oldest_first",
+  "runs": [
+    {
+      "name": "wuji_acq_official_damping3_seed16_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_official_damping3_seed16_v1",
+      "profile": "acquisition",
+      "gpu": 3,
+      "evaluation": {
+        "task": "wuji_acquisition_official_support40mrad",
+        "hand": "wuji_paper_official_actuator",
+        "object": "knife_wuji_precision_damping3",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "train",
+        "repeats": 32,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "Secondary arrival metric at the training damping. Primary cross-damping external2s/5s evaluation uses all100savedinitialstates."
+      }
+    },
+    {
+      "name": "wuji_acq_official_damping03_seed16_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_official_damping03_seed16_v1",
+      "profile": "acquisition",
+      "gpu": 1,
+      "evaluation": {
+        "task": "wuji_acquisition_official_support40mrad",
+        "hand": "wuji_paper_official_actuator",
+        "object": "knife_wuji_precision_near01",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "train",
+        "repeats": 32,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "Secondary arrival metric at the training damping. Primary cross-damping external2s/5s evaluation uses all100savedinitialstates."
+      }
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "project": "/home/wangjiarui/artgym-experiments-20260921",
+  "python": "/home/wangjiarui/artgym-runtime/bin/python",
+  "state_dir": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/precision-dwell-monitor-four",
+  "interval_seconds": 300,
+  "evaluation_timeout_seconds": 1800,
+  "evaluation_gpus": [
+    3
+  ],
+  "evaluation_queue_order": "oldest_first",
+  "runs": [
+    {
+      "name": "wuji_acq_precision_hold2_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_precision_hold2_v1",
+      "profile": "acquisition",
+      "gpu": 3,
+      "evaluation": {
+        "task": "wuji_acquisition_precision_aug",
+        "hand": "wuji_paper",
+        "object": "knife_wuji_acquisition_precision",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "train",
+        "repeats": 32,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "Secondary nominal32evaluation with2mm/0.3s. Primary matched fixed-time2s/5s100perturbedtrials use separate finite queue."
+      }
+    },
+    {
+      "name": "wuji_acq_precision_hold03_v1",
+      "run": "/home/wangjiarui/artgym-experiments-20260921/runs/wuji_acq_precision_hold03_v1",
+      "profile": "acquisition",
+      "gpu": 3,
+      "evaluation": {
+        "task": "wuji_acquisition_precision_aug",
+        "hand": "wuji_paper",
+        "object": "knife_wuji_acquisition_precision",
+        "train": "wujiAcquisitionSAPG",
+        "instances": [
+          "000"
+        ],
+        "split": "train",
+        "repeats": 32,
+        "max_steps": 600,
+        "randomized": false,
+        "scope": "Secondary nominal32evaluation with2mm/0.3s. Primary matched fixed-time2s/5s100perturbedtrials use separate finite queue."
+      }
+    }
+  ]
+}

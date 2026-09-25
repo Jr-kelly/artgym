@@ -1,0 +1,128 @@
+{
+  "experiments": {
+    "wuji_student_controller_masked_smallcp25_seed65_v2": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_controller_student_actor",
+      "train": "wujiControllerStudentSAPG",
+      "gpus": [
+        2
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "77233d012a7876f09029d970f706d6ef36d337c321fb92a6b6760c734aaec34a",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/controller-actor-runtime-1655-v2/false/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/bridge3-current-source-runtime/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/student-controller-residual-initial/actor.pth",
+        "task.env.episodeLength=600",
+        "seed=20261065",
+        "task.env.fixedStudentArtifact=runs/wuji-goal/frozen-candidates/student-bridge3-replay-seed60-cp25/student.pth",
+        "task.env.fixedStudentSha256=0d2480657bf6176d32c379743f68402aba67aa868bea54b112bbc1bc34142b17",
+        "task.env.broadGoalReward.coefficient=0.0",
+        "task.env.absolutePoseObjective.ramp_epochs=0",
+        "train.params.network.controller_adapter.enabled=false"
+      ],
+      "purpose": "CP0-preserving controller tracking-error residual vs identical masked inputs. Same inheritedsmallnoiseCP25,seed65,Adam1e-5,5120x32x100,pose1ramp0,near5,broad0. Extra336weights initializedzero; botharms trainactor/critic/residual,frozenstudent/normalizer. Explicit migration ablation.",
+      "fixed_learning_rate_preflight": 1e-05,
+      "start_after_completed": [],
+      "comparison": "actual_tracking_features_vs_zeros_same_architecture_initial_policy",
+      "training_module": "scripts.train_wuji_student_actor_audited",
+      "fixed_student_actor": {
+        "student": "runs/wuji-goal/frozen-candidates/student-bridge3-replay-seed60-cp25/student.pth",
+        "student_sha256": "0d2480657bf6176d32c379743f68402aba67aa868bea54b112bbc1bc34142b17",
+        "policy_encoder_frozen": true,
+        "actor_receives_current_object_truth": false,
+        "critic_receives_current_object_truth": true,
+        "observation_normalizer_frozen": true
+      },
+      "launch_fix": "Absolute Hydra config path; previousv1 preflight failed beforephysics. Original19200model/taskgate plus2048regression preserve evidence.",
+      "initial_sigma_factor": 0.25,
+      "max_preflight_on_policy_kl": 0.05,
+      "owner": "eight",
+      "controller_adapter": {
+        "enabled": false
+      }
+    },
+    "wuji_student_controller_tracking_smallcp25_seed65_v2": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_controller_student_actor",
+      "train": "wujiControllerStudentSAPG",
+      "gpus": [
+        3
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "77233d012a7876f09029d970f706d6ef36d337c321fb92a6b6760c734aaec34a",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/controller-actor-runtime-1655-v2/true/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/bridge3-current-source-runtime/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/student-controller-residual-initial/actor.pth",
+        "task.env.episodeLength=600",
+        "seed=20261065",
+        "task.env.fixedStudentArtifact=runs/wuji-goal/frozen-candidates/student-bridge3-replay-seed60-cp25/student.pth",
+        "task.env.fixedStudentSha256=0d2480657bf6176d32c379743f68402aba67aa868bea54b112bbc1bc34142b17",
+        "task.env.broadGoalReward.coefficient=0.0",
+        "task.env.absolutePoseObjective.ramp_epochs=0",
+        "train.params.network.controller_adapter.enabled=true"
+      ],
+      "purpose": "CP0-preserving controller tracking-error residual vs identical masked inputs. Same inheritedsmallnoiseCP25,seed65,Adam1e-5,5120x32x100,pose1ramp0,near5,broad0. Extra336weights initializedzero; botharms trainactor/critic/residual,frozenstudent/normalizer. Explicit migration ablation.",
+      "fixed_learning_rate_preflight": 1e-05,
+      "start_after_completed": [],
+      "comparison": "actual_tracking_features_vs_zeros_same_architecture_initial_policy",
+      "training_module": "scripts.train_wuji_student_actor_audited",
+      "fixed_student_actor": {
+        "student": "runs/wuji-goal/frozen-candidates/student-bridge3-replay-seed60-cp25/student.pth",
+        "student_sha256": "0d2480657bf6176d32c379743f68402aba67aa868bea54b112bbc1bc34142b17",
+        "policy_encoder_frozen": true,
+        "actor_receives_current_object_truth": false,
+        "critic_receives_current_object_truth": true,
+        "observation_normalizer_frozen": true
+      },
+      "launch_fix": "Absolute Hydra config path; previousv1 preflight failed beforephysics. Original19200model/taskgate plus2048regression preserve evidence.",
+      "initial_sigma_factor": 0.25,
+      "max_preflight_on_policy_kl": 0.05,
+      "owner": "eight",
+      "controller_adapter": {
+        "enabled": true
+      }
+    }
+  }
+}

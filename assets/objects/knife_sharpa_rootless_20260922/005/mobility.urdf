@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="knife">
+  <link name="link_1">
+    <visual name="link_1">
+      <origin xyz="0 0.007041 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.00910283676823458 0.0023520667948206124 0.028017711460038064" /></geometry>
+    <material name="red"><color rgba="1 0 0 1" /></material></visual>
+    <collision>
+      <origin xyz="0 0.007041 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.00910283676823458 0.0023520667948206124 0.028017711460038064" /></geometry>
+    </collision>
+    </link>
+  <joint name="joint_1" type="prismatic">
+    <origin xyz="0 0 0" />
+    <axis xyz="0 0 1" />
+    <child link="link_1" />
+    <parent link="link_0" />
+    <limit lower="-0.035546" upper="0.014454" effort="100.0" velocity="1.0" />
+  </joint>
+  <link name="link_0">
+    <visual name="link_0">
+      <origin xyz="0 0 0" />
+      <geometry>
+        <box size="0.029979086228059327 0.0117295773974748 0.15526675053829056" /></geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" />
+      <geometry>
+        <box size="0.029979086228059327 0.0117295773974748 0.15526675053829056" /></geometry>
+    </collision>
+    </link>
+</robot>

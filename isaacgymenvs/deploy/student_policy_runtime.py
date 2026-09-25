@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import sys
 import time
 from pathlib import Path
@@ -116,7 +117,7 @@ def build_student_encoder_from_artifact(player, cfg, rlg_config_dict, student_ar
         fallback_history_len=int(cfg.task.env.get("proprioHistoryLen", 1)),
         fallback_proprio_dim_per_step=int(cfg.task.env.get("proprioObsDim", 2 * int(cfg.hand.task.numActions))),
         fallback_student_obs_dim=int(cfg.task.env.get("studentObsDim", 0)),
-        fallback_init_dim=DEFAULT_STUDENT_INIT_OBS_DIM,
+        fallback_init_dim=int(cfg.task.env.get("studentInitObsDim", DEFAULT_STUDENT_INIT_OBS_DIM)),
     )
     student_temporal_obs_mode = runtime_layout["student_temporal_obs_mode"]
     proprio_history_len = int(runtime_layout["history_len"])
@@ -211,6 +212,7 @@ class StudentPolicyRuntime:
         privileged_obs_dim: int,
         distill_meta: dict,
         goal_sequence=None,
+        action_control=None,
     ):
         self.player = player
         self.device = player.device
@@ -237,7 +239,9 @@ class StudentPolicyRuntime:
             fallback_history_len=1,
             fallback_proprio_dim_per_step=2 * self.action_dim,
             fallback_student_obs_dim=self.student_obs_dim,
-            fallback_init_dim=DEFAULT_STUDENT_INIT_OBS_DIM,
+            # Initial joints + two poses (14) + five fingertip positions (15)
+            # + the two link bounding boxes (6).
+            fallback_init_dim=self.action_dim + 35,
         )
         self.student_temporal_obs_mode = runtime_layout["student_temporal_obs_mode"]
         self.student_history_len = int(runtime_layout["history_len"])
@@ -249,6 +253,7 @@ class StudentPolicyRuntime:
         self.goal_sequence_index = -1
         self.interactive_goal_input_enabled = False
         self.sessions = {}
+        self.action_control = copy.deepcopy(action_control)
 
     def init_session(self, session_id: str):
         self.sessions[session_id] = {"states": None, "step": 0}
@@ -265,6 +270,7 @@ class StudentPolicyRuntime:
             "student_init_dim": self.student_init_dim,
             "goal_override": self.get_goal_override(),
             "server_interactive_goal_input": bool(self.interactive_goal_input_enabled),
+            "action_control": copy.deepcopy(self.action_control),
         }
 
     def set_goal_override(self, goal_offset):
@@ -413,6 +419,9 @@ def load_student_policy_runtime(
     teacher_checkpoint_path = Path(teacher_checkpoint).expanduser().resolve()
     if not teacher_checkpoint_path.exists():
         raise FileNotFoundError(f"Teacher checkpoint not found: {teacher_checkpoint_path}")
+    teacher_sha256 = distill_meta.get("teacher_checkpoint_sha256")
+    if teacher_sha256 and hashlib.sha256(teacher_checkpoint_path.read_bytes()).hexdigest() != teacher_sha256:
+        raise ValueError("Student artifact and teacher checkpoint identities differ")
 
     inferred_blocks = _infer_expl_num_blocks(teacher_checkpoint_path)
     if inferred_blocks is not None and expl_block_idx >= 0:
@@ -456,6 +465,8 @@ def load_student_policy_runtime(
     if goal_sequence is None:
         raise ValueError("object.task.goals is required.")
 
+    from isaacgymenvs.deploy._client_impl import build_local_task_env
+    control_env = build_local_task_env(resolved_identity['task'], resolved_identity['hand'], resolved_identity['object'])
     return StudentPolicyRuntime(
         player=player,
         policy_obs_dim=int(cfg.task.env.policyObsDim),
@@ -463,4 +474,5 @@ def load_student_policy_runtime(
         privileged_obs_dim=int(cfg.task.env.privilegedObsDim),
         distill_meta=distill_meta,
         goal_sequence=goal_sequence,
+        action_control=control_env.action_control,
     )

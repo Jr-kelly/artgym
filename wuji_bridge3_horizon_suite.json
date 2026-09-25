@@ -1,0 +1,90 @@
+{
+  "experiments": {
+    "wuji_bridge3_horizon60_cp25_seed58_pinned_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_acquisition_bridge3_hemisphere",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        1
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/bridge3-current-source-runtime/report.json",
+        "runs/wuji-goal/diagnostics/bridge3-episode-boundary600-seed58/report.json",
+        "runs/wuji-goal/diagnostics/bridge3-episode-boundary1800-seed58/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/bridge3-current-source-runtime/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "seed=20261058",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/teacher-bridge3-functionalinit-seed45-cp25/teacher.pth",
+        "task.env.episodeLength=1800"
+      ],
+      "purpose": "Same frozen independently validated three-grasp CP25,seed58,newAdam,5120envs,horizon32,100epochs,constantLR1e-5,near5,random2/5scommands,fullnoise and official actuators. Only training episode length20vs60 differs. Run sequentially on four-host GPU1 from an immutable code checkout. Fresh632cohort has been inspected and becomes development data for these new policies; no blind validation claim.",
+      "fixed_learning_rate_preflight": 1e-05,
+      "start_after_completed": [],
+      "comparison": "threegrasp_horizon20_vs60_seed58_same_gpu_pinned"
+    },
+    "wuji_bridge3_horizon20_cp25_seed58_pinned_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_acquisition_bridge3_hemisphere",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        1
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/bridge3-current-source-runtime/report.json",
+        "runs/wuji-goal/diagnostics/bridge3-episode-boundary600-seed58/report.json",
+        "runs/wuji-goal/diagnostics/bridge3-episode-boundary1800-seed58/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/bridge3-current-source-runtime/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "seed=20261058",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/teacher-bridge3-functionalinit-seed45-cp25/teacher.pth",
+        "task.env.episodeLength=600"
+      ],
+      "purpose": "Same frozen independently validated three-grasp CP25,seed58,newAdam,5120envs,horizon32,100epochs,constantLR1e-5,near5,random2/5scommands,fullnoise and official actuators. Only training episode length20vs60 differs. Run sequentially on four-host GPU1 from an immutable code checkout. Fresh632cohort has been inspected and becomes development data for these new policies; no blind validation claim.",
+      "fixed_learning_rate_preflight": 1e-05,
+      "start_after_completed": [],
+      "comparison": "threegrasp_horizon20_vs60_seed58_same_gpu_pinned"
+    }
+  }
+}

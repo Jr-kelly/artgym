@@ -1,0 +1,49 @@
+{
+  "experiments": {
+    "wuji_bridge2_horizon20_cp50_seed43_pinned_v2": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge2_20260922",
+      "task": "wuji_acquisition_bridge_hemisphere",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        2
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "20b6276fe406fcca679e3065056a50e6625038646d802c24b389a06a6e860952",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/bridge2-hemisphere-runtime/report.json",
+        "runs/wuji-goal/diagnostics/bridge2-episode-boundary600/report.json",
+        "runs/wuji-goal/diagnostics/bridge2-episode-boundary1800/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge2-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/bridge2-hemisphere-runtime/report.json",
+        "expected_counts": [
+          2,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/teacher-bridge2-seed36-cp50/teacher.pth",
+        "seed=20261043",
+        "task.env.episodeLength=600"
+      ],
+      "purpose": "Two-grasp long-control pair. Same frozen bridge CP50, fresh Adam, seed43,5120envs,horizon32,100epochs,constantLR1e-5,near5,random2/5scommands,fullnoise,official actuators. Only episode length20vs60 differs between pairs. Same four-host GPU2 sequential execution. Fresh432 cohort already observed is now a development test; new frozen-candidate validation remains required. Does not establish unseen grasp or geometry or hardware success.",
+      "fixed_learning_rate_preflight": 1e-05,
+      "start_after_completed": [
+        "wuji_bridge2_horizon60_cp50_seed43_v1"
+      ],
+      "comparison": "bridge2_maximum_episode20_vs60_seed43_same_gpu_sequential"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+defaults:
+  - knife
+  - _self_
+
+# Single successful preview asset; these are demo physics, not calibrated hardware.
+asset:
+  asset_root: assets/objects/knife_wuji_demo_aligned
+  instance_id_list: ['000']
+  disgravity_part: []
+default_props:
+  mass: [0.029, 0.006]
+  friction: 3.0
+  dof_stiffness: 0.0
+  dof_damping: 0.3
+randomization:
+  randomize: false

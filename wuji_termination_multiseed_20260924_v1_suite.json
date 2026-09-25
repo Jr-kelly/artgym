@@ -1,0 +1,420 @@
+{
+  "experiments": {
+    "wuji_bridge3_reset2x_donestrict_seed20261201_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_acquisition_bridge3_hemisphere",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        1
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/termination-seed20261201-20260924-strict-gate-v1/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/termination-seed20261201-20260924-strict-gate-v1/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "train.params.config.checkpoint_first_epoch=10",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "seed=20261201",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/teacher-bridge3-functionalinit-seed45-cp25/teacher.pth",
+        "task.env.initialPoseNoise.position_m=0.001",
+        "task.env.initialPoseNoise.joint_rad=0.02",
+        "task.env.initialPoseNoise.rotation_vector_rad=0.017453292519943295",
+        "task.env.initialPoseNoise.ramp_epochs=0",
+        "+train.params.config.freeze_input_normalizer=False",
+        "object.task.pos_devia_threshold=0.01",
+        "object.task.rot_devia_threshold=0.25"
+      ],
+      "fixed_learning_rate_preflight": 1e-05,
+      "max_preflight_kl": 0.05,
+      "purpose": "Additional paired seed20261201, fixed100epochs perarm, originalteacher/newAdam/LR1e-5/5120x32,2xresetnoise. Only native versus strict training termination differs. Same physicalGPU within training pair and same evaluationGPU within pair; no fresh independent or hardware claim.",
+      "input_normalizer_mode_preflight": "adaptive",
+      "termination_limits": {
+        "pos_devia_threshold": 0.01,
+        "rot_devia_threshold": 0.25
+      }
+    },
+    "wuji_bridge3_reset2x_donenative_seed20261201_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_acquisition_bridge3_hemisphere",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        1
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/termination-seed20261201-20260924-native-gate-v1/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/termination-seed20261201-20260924-native-gate-v1/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "train.params.config.checkpoint_first_epoch=10",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "seed=20261201",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/teacher-bridge3-functionalinit-seed45-cp25/teacher.pth",
+        "task.env.initialPoseNoise.position_m=0.001",
+        "task.env.initialPoseNoise.joint_rad=0.02",
+        "task.env.initialPoseNoise.rotation_vector_rad=0.017453292519943295",
+        "task.env.initialPoseNoise.ramp_epochs=0",
+        "+train.params.config.freeze_input_normalizer=False",
+        "object.task.pos_devia_threshold=0.05",
+        "object.task.rot_devia_threshold=1.57"
+      ],
+      "fixed_learning_rate_preflight": 1e-05,
+      "max_preflight_kl": 0.05,
+      "purpose": "Additional paired seed20261201, fixed100epochs perarm, originalteacher/newAdam/LR1e-5/5120x32,2xresetnoise. Only native versus strict training termination differs. Same physicalGPU within training pair and same evaluationGPU within pair; no fresh independent or hardware claim.",
+      "input_normalizer_mode_preflight": "adaptive",
+      "termination_limits": {
+        "pos_devia_threshold": 0.05,
+        "rot_devia_threshold": 1.57
+      }
+    },
+    "wuji_bridge3_reset2x_donenative_seed20261202_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_acquisition_bridge3_hemisphere",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        3
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/termination-seed20261202-20260924-native-gate-v1/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/termination-seed20261202-20260924-native-gate-v1/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "train.params.config.checkpoint_first_epoch=10",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "seed=20261202",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/teacher-bridge3-functionalinit-seed45-cp25/teacher.pth",
+        "task.env.initialPoseNoise.position_m=0.001",
+        "task.env.initialPoseNoise.joint_rad=0.02",
+        "task.env.initialPoseNoise.rotation_vector_rad=0.017453292519943295",
+        "task.env.initialPoseNoise.ramp_epochs=0",
+        "+train.params.config.freeze_input_normalizer=False",
+        "object.task.pos_devia_threshold=0.05",
+        "object.task.rot_devia_threshold=1.57"
+      ],
+      "fixed_learning_rate_preflight": 1e-05,
+      "max_preflight_kl": 0.05,
+      "purpose": "Additional paired seed20261202, fixed100epochs perarm, originalteacher/newAdam/LR1e-5/5120x32,2xresetnoise. Only native versus strict training termination differs. Same physicalGPU within training pair and same evaluationGPU within pair; no fresh independent or hardware claim.",
+      "input_normalizer_mode_preflight": "adaptive",
+      "termination_limits": {
+        "pos_devia_threshold": 0.05,
+        "rot_devia_threshold": 1.57
+      }
+    },
+    "wuji_bridge3_reset2x_donestrict_seed20261202_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_acquisition_bridge3_hemisphere",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        3
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/termination-seed20261202-20260924-strict-gate-v1/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/termination-seed20261202-20260924-strict-gate-v1/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "train.params.config.checkpoint_first_epoch=10",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "seed=20261202",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/teacher-bridge3-functionalinit-seed45-cp25/teacher.pth",
+        "task.env.initialPoseNoise.position_m=0.001",
+        "task.env.initialPoseNoise.joint_rad=0.02",
+        "task.env.initialPoseNoise.rotation_vector_rad=0.017453292519943295",
+        "task.env.initialPoseNoise.ramp_epochs=0",
+        "+train.params.config.freeze_input_normalizer=False",
+        "object.task.pos_devia_threshold=0.01",
+        "object.task.rot_devia_threshold=0.25"
+      ],
+      "fixed_learning_rate_preflight": 1e-05,
+      "max_preflight_kl": 0.05,
+      "purpose": "Additional paired seed20261202, fixed100epochs perarm, originalteacher/newAdam/LR1e-5/5120x32,2xresetnoise. Only native versus strict training termination differs. Same physicalGPU within training pair and same evaluationGPU within pair; no fresh independent or hardware claim.",
+      "input_normalizer_mode_preflight": "adaptive",
+      "termination_limits": {
+        "pos_devia_threshold": 0.01,
+        "rot_devia_threshold": 0.25
+      }
+    },
+    "wuji_bridge3_reset2x_donestrict_seed20261203_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_acquisition_bridge3_hemisphere",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        1
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/termination-seed20261203-20260924-strict-gate-v1/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/termination-seed20261203-20260924-strict-gate-v1/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "train.params.config.checkpoint_first_epoch=10",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "seed=20261203",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/teacher-bridge3-functionalinit-seed45-cp25/teacher.pth",
+        "task.env.initialPoseNoise.position_m=0.001",
+        "task.env.initialPoseNoise.joint_rad=0.02",
+        "task.env.initialPoseNoise.rotation_vector_rad=0.017453292519943295",
+        "task.env.initialPoseNoise.ramp_epochs=0",
+        "+train.params.config.freeze_input_normalizer=False",
+        "object.task.pos_devia_threshold=0.01",
+        "object.task.rot_devia_threshold=0.25"
+      ],
+      "fixed_learning_rate_preflight": 1e-05,
+      "max_preflight_kl": 0.05,
+      "purpose": "Additional paired seed20261203, fixed100epochs perarm, originalteacher/newAdam/LR1e-5/5120x32,2xresetnoise. Only native versus strict training termination differs. Same physicalGPU within training pair and same evaluationGPU within pair; no fresh independent or hardware claim.",
+      "input_normalizer_mode_preflight": "adaptive",
+      "termination_limits": {
+        "pos_devia_threshold": 0.01,
+        "rot_devia_threshold": 0.25
+      }
+    },
+    "wuji_bridge3_reset2x_donenative_seed20261203_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_acquisition_bridge3_hemisphere",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        1
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/termination-seed20261203-20260924-native-gate-v1/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/termination-seed20261203-20260924-native-gate-v1/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "train.params.config.checkpoint_first_epoch=10",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "seed=20261203",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/teacher-bridge3-functionalinit-seed45-cp25/teacher.pth",
+        "task.env.initialPoseNoise.position_m=0.001",
+        "task.env.initialPoseNoise.joint_rad=0.02",
+        "task.env.initialPoseNoise.rotation_vector_rad=0.017453292519943295",
+        "task.env.initialPoseNoise.ramp_epochs=0",
+        "+train.params.config.freeze_input_normalizer=False",
+        "object.task.pos_devia_threshold=0.05",
+        "object.task.rot_devia_threshold=1.57"
+      ],
+      "fixed_learning_rate_preflight": 1e-05,
+      "max_preflight_kl": 0.05,
+      "purpose": "Additional paired seed20261203, fixed100epochs perarm, originalteacher/newAdam/LR1e-5/5120x32,2xresetnoise. Only native versus strict training termination differs. Same physicalGPU within training pair and same evaluationGPU within pair; no fresh independent or hardware claim.",
+      "input_normalizer_mode_preflight": "adaptive",
+      "termination_limits": {
+        "pos_devia_threshold": 0.05,
+        "rot_devia_threshold": 1.57
+      }
+    },
+    "wuji_bridge3_reset2x_donenative_seed20261204_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_acquisition_bridge3_hemisphere",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        3
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/termination-seed20261204-20260924-native-gate-v1/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/termination-seed20261204-20260924-native-gate-v1/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "train.params.config.checkpoint_first_epoch=10",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "seed=20261204",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/teacher-bridge3-functionalinit-seed45-cp25/teacher.pth",
+        "task.env.initialPoseNoise.position_m=0.001",
+        "task.env.initialPoseNoise.joint_rad=0.02",
+        "task.env.initialPoseNoise.rotation_vector_rad=0.017453292519943295",
+        "task.env.initialPoseNoise.ramp_epochs=0",
+        "+train.params.config.freeze_input_normalizer=False",
+        "object.task.pos_devia_threshold=0.05",
+        "object.task.rot_devia_threshold=1.57"
+      ],
+      "fixed_learning_rate_preflight": 1e-05,
+      "max_preflight_kl": 0.05,
+      "purpose": "Additional paired seed20261204, fixed100epochs perarm, originalteacher/newAdam/LR1e-5/5120x32,2xresetnoise. Only native versus strict training termination differs. Same physicalGPU within training pair and same evaluationGPU within pair; no fresh independent or hardware claim.",
+      "input_normalizer_mode_preflight": "adaptive",
+      "termination_limits": {
+        "pos_devia_threshold": 0.05,
+        "rot_devia_threshold": 1.57
+      }
+    },
+    "wuji_bridge3_reset2x_donestrict_seed20261204_v1": {
+      "hand": "wuji_paper_official_actuator",
+      "object": "knife_wuji_bridge3_20260922",
+      "task": "wuji_acquisition_bridge3_hemisphere",
+      "train": "wujiAcquisitionSAPG",
+      "gpus": [
+        3
+      ],
+      "envs_per_rank": 5120,
+      "epochs": 100,
+      "source_checkpoint_sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+      "behavioral_gates": [
+        "runs/wuji-goal/diagnostics/termination-seed20261204-20260924-strict-gate-v1/report.json"
+      ],
+      "functional_dataset_gate": {
+        "manifest": "runs/wuji-goal/bridge3-dataset-manifest.json",
+        "runtime_report": "runs/wuji-goal/diagnostics/termination-seed20261204-20260924-strict-gate-v1/report.json",
+        "expected_counts": [
+          3,
+          1
+        ]
+      },
+      "overrides": [
+        "+train.params.config.checkpoint_weights_only=True",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=25",
+        "train.params.config.evaluation_frequency=25",
+        "train.params.config.checkpoint_first_epoch=10",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "object.reward.GoalDistance2=5.0",
+        "train.params.config.learning_rate=0.00001",
+        "train.params.config.lr_schedule=constant",
+        "seed=20261204",
+        "checkpoint=/home/wangjiarui/artgym-experiments-20260921/runs/wuji-goal/frozen-candidates/teacher-bridge3-functionalinit-seed45-cp25/teacher.pth",
+        "task.env.initialPoseNoise.position_m=0.001",
+        "task.env.initialPoseNoise.joint_rad=0.02",
+        "task.env.initialPoseNoise.rotation_vector_rad=0.017453292519943295",
+        "task.env.initialPoseNoise.ramp_epochs=0",
+        "+train.params.config.freeze_input_normalizer=False",
+        "object.task.pos_devia_threshold=0.01",
+        "object.task.rot_devia_threshold=0.25"
+      ],
+      "fixed_learning_rate_preflight": 1e-05,
+      "max_preflight_kl": 0.05,
+      "purpose": "Additional paired seed20261204, fixed100epochs perarm, originalteacher/newAdam/LR1e-5/5120x32,2xresetnoise. Only native versus strict training termination differs. Same physicalGPU within training pair and same evaluationGPU within pair; no fresh independent or hardware claim.",
+      "input_normalizer_mode_preflight": "adaptive",
+      "termination_limits": {
+        "pos_devia_threshold": 0.01,
+        "rot_devia_threshold": 0.25
+      }
+    }
+  }
+}

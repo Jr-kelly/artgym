@@ -1,5 +1,7 @@
 import argparse
 import copy
+import hashlib
+import json
 import os
 import time
 from collections import deque
@@ -681,6 +683,7 @@ def build_distill_meta(
 ):
     return {
         "teacher_checkpoint": str(checkpoint_path),
+        "teacher_checkpoint_sha256": getattr(args, "teacher_checkpoint_sha256", None),
         "teacher_algo_family": str(teacher_algo_family),
         "task": args.task,
         "train": args.train,
@@ -699,6 +702,21 @@ def build_distill_meta(
         "rollout_steps": args.rollout_steps,
         "lr": args.lr,
         "cosine_coef": args.cosine_coef,
+        "replay_capacity": int(getattr(args, 'replay_capacity', 0)),
+        "replay_fraction": float(getattr(args, 'replay_fraction', 0.0)),
+        "replay_supervision": getattr(args, 'replay_supervision', 'past'),
+        "replay_protocol": ("fifo_student_trajectories_frozen_teacher_labels"
+                            if getattr(args, 'replay_supervision', 'past') == 'past'
+                            else "duplicate_current_supervision_with_matched_fifo_overhead")
+                           if getattr(args, 'replay_capacity', 0) else "disabled",
+        "action_loss_coef": float(getattr(args, "action_loss_coef", 0.0)),
+        "student_rollout_eval_mode": bool(getattr(args, "student_rollout_eval_mode", False)),
+        "teacher_latent_mix_initial": float(getattr(args, "teacher_latent_mix_initial", 0.0)),
+        "teacher_latent_mix_updates": int(getattr(args, "teacher_latent_mix_updates", 0)),
+        "action_loss_protocol": "same_incoming_rnn_raw_gaussian_mean" if getattr(args, "action_loss_coef", 0.0) else "disabled",
+        "teacher_rollout_updates": int(getattr(args, "teacher_rollout_updates", 0)),
+        "rollout_protocol": ("teacher_latent_mix_then_student" if getattr(args, "teacher_latent_mix_initial", 0.0)
+                             else "teacher_prefix_then_student" if getattr(args, "teacher_rollout_updates", 0) else "student_only"),
         "custom_tcn": bool(args.custom_tcn),
         "best_loss": best_loss,
         "best_reward": best_reward,
@@ -706,7 +724,10 @@ def build_distill_meta(
         "object_randomize": bool(getattr(args, "object_randomize", True)),
         "grasp_split": str(args.grasp_split),
         "deterministic": bool(args.deterministic),
-        "goal_logic": "training_success_immediate_switch_timeout_reset",
+        "goal_logic": ("training_fixed_clock" if getattr(args, "command_period_steps", 0) > 0
+                       else "training_success_dwell_switch"),
+        "command_period_steps": int(getattr(args, "command_period_steps", 0)),
+        "control_dt": float(getattr(args, "control_dt", 0.0)),
         "success_hold_duration": float(getattr(args, "success_hold_duration", 0.0)),
         "goal_switch_timeout_sec": float(getattr(args, "goal_switch_timeout_sec", 0.0)),
     }
@@ -931,10 +952,24 @@ def parse_args():
     parser.add_argument("--asset-dir", default="", help="Optional asset directory under assets/objects, e.g. knife_multi.")
     parser.add_argument("--num-envs", type=int, default=32, help="How many envs to use for rollout collection.")
     parser.add_argument("--grasp-split", choices=GRASP_SPLIT_CHOICES, default="train", help="Which grasp split to use for distillation rollout sampling.")
+    parser.add_argument('--student-rollout-eval-mode', action='store_true',
+                        help='Disable student encoder dropout only while collecting actions; keep training mode for gradient supervision.')
+    parser.add_argument('--teacher-latent-mix-initial', type=float, default=0.0,
+                        help='Training-only teacher latent fraction, linearly decayed to zero; evaluation stays pure student.')
+    parser.add_argument('--teacher-latent-mix-updates', type=int, default=0,
+                        help='Number of initial updates with privileged latent mixing; subsequent updates are pure student.')
     parser.add_argument("--updates", type=int, default=200, help="How many distillation updates to run.")
     parser.add_argument("--rollout-steps", type=int, default=16, help="How many rollout steps to collect per update.")
     parser.add_argument("--lr", type=float, default=1e-4, help="Student encoder learning rate.")
     parser.add_argument("--cosine-coef", type=float, default=1.0, help="Weight on cosine latent loss.")
+    parser.add_argument('--replay-capacity', type=int, default=0,
+                        help='Optional FIFO capacity for past student observations and frozen teacher latent labels.')
+    parser.add_argument('--replay-fraction', type=float, default=0.0,
+                        help='Fraction of supervised MSE from one equally sized past-state batch per new batch.')
+    parser.add_argument('--replay-supervision', choices=['past', 'current'], default='past',
+                        help='Use historical labels, or repeat the current batch as a matched extra-pass control. Both maintain/sample the same FIFO and use private dropout RNG.')
+    parser.add_argument("--action-loss-coef", type=float, default=0.0,
+                        help="Optional frozen-actor mean-action MSE, with identical incoming detached RNN states.")
     parser.add_argument("--deterministic", action="store_true", help="Use deterministic actions during rollout.")
     parser.add_argument("--expl-block-idx", type=int, default=0, help="Which teacher exploration block id to use when applicable.")
     parser.add_argument("--sim-device", default="cuda:0", help="Simulation device.")
@@ -945,6 +980,8 @@ def parse_args():
     parser.add_argument("--headless", action="store_true", help="Run without viewer.")
     parser.add_argument("--seed", type=int, default=42, help="Random seed.")
     parser.add_argument("--student-init", choices=["teacher", "random"], default="teacher", help="How to initialize the student encoder.")
+    parser.add_argument("--teacher-rollout-updates", type=int, default=0,
+                        help="Use frozen teacher actions for this many initial updates, then student actions; latent loss is unchanged.")
     parser.add_argument("--student-checkpoint", default="", help="Optional path to an existing student distillation artifact.")
     parser.add_argument(
         "--save-every-updates",
@@ -978,6 +1015,7 @@ def parse_args():
         help="Whether to enable task.randomize during periodic eval-style validation.",
     )
     parser.add_argument("--eval-instance-id", default="", help="Object instance id to use for periodic eval-style validation.")
+    parser.add_argument("--audit-output-dir", default="", help="Optionally save resolved configuration, initial states and frozen-policy checks.")
     return parser.parse_args()
 
 
@@ -1005,6 +1043,7 @@ def main():
     checkpoint_path = Path(args.checkpoint).resolve()
     if not checkpoint_path.exists():
         raise FileNotFoundError(f"Checkpoint not found: {checkpoint_path}")
+    args.teacher_checkpoint_sha256 = hashlib.sha256(checkpoint_path.read_bytes()).hexdigest()
 
     overrides = [
         f"task={args.task}",
@@ -1030,6 +1069,19 @@ def main():
     with open_dict(cfg):
         cfg.test = True
         cfg.checkpoint = str(checkpoint_path)
+
+    knife_dataset = Path(str(cfg.get('asset_dir') or cfg.object.asset.asset_root)).name
+    if knife_dataset in {'knife_wuji_paper', 'knife_wuji_fingertip'}:
+        from scripts.validate_paper_grasps import check_dataset
+        if knife_dataset == 'knife_wuji_fingertip':
+            from scripts.filter_wuji_fingertip_grasps import check_dataset
+        manifest_path = Path(__file__).resolve().parents[1] / 'assets/objects' / knife_dataset / 'manifest.json'
+        manifest = json.loads(manifest_path.read_text())
+        if list(cfg.object.asset.instance_id_list) != manifest['train_ids'] or args.grasp_split != 'train':
+            raise ValueError('Paper knife distillation must use training geometries and training grasps only')
+        if cfg.hand.get('self_collision_mode') != 'digit_filtered':
+            raise ValueError('Paper knife distillation requires hand=wuji_paper')
+        check_dataset()
 
     set_np_formatting()
     cfg.seed = set_seed(
@@ -1110,7 +1162,7 @@ def main():
     temporal_layout = get_student_temporal_obs_layout(
         history_len=proprio_history_len,
         proprio_dim_per_step=proprio_obs_dim,
-        init_dim=DEFAULT_STUDENT_INIT_OBS_DIM,
+        init_dim=int(cfg.task.env.get("studentInitObsDim", DEFAULT_STUDENT_INIT_OBS_DIM)),
     )
     student_obs_dim = int(temporal_layout["student_obs_dim"])
     sapg_priv_cfg = rlg_config_dict["params"]["network"]["sapg_priv"]
@@ -1193,6 +1245,19 @@ def main():
     player.model.eval()
     student_encoder.train()
 
+    replay = None
+    replay_supervised_transitions = dict(past=0, current=0)
+    if args.replay_supervision == 'current' and not args.replay_capacity:
+        raise ValueError('Current-batch extra-pass control requires the same replay machinery')
+    if args.replay_capacity or args.replay_fraction:
+        if (args.replay_capacity < args.num_envs or not 0 < args.replay_fraction < 1
+                or args.cosine_coef or args.action_loss_coef or args.teacher_rollout_updates
+                or args.teacher_latent_mix_initial or dist_runtime['enabled']):
+            raise ValueError('Replay requires single-device pure-student latent MSE and a valid FIFO/fraction')
+        from isaacgymenvs.utils.distill_replay import LatentReplay
+        replay = LatentReplay(args.replay_capacity, student_obs_dim, teacher_latent_dim,
+                              player.device, int(args.seed) + 73471)
+
     total_steps = 0
     best_loss = None
     best_reward = None
@@ -1210,6 +1275,24 @@ def main():
     args.object_randomize = bool(cfg.task.task.get("randomize", True))
     args.success_hold_duration = float(task_env.success_hold_duration)
     args.goal_switch_timeout_sec = float(task_env.goal_switch_timeout_sec)
+    args.command_period_steps = int(getattr(task_env, "command_period_steps", 0))
+    args.control_dt = float(task_env.dt * task_env.control_freq_inv)
+
+    run_audit = None
+    completed_updates = 0
+    if not 0 <= args.teacher_rollout_updates <= args.updates:
+        raise ValueError("teacher-rollout-updates must lie between zero and updates")
+    from isaacgymenvs.utils.distill_rollout_utils import teacher_mix_fraction
+    teacher_mix_fraction(0, args.teacher_latent_mix_initial, args.teacher_latent_mix_updates)
+    if args.teacher_latent_mix_initial and args.teacher_rollout_updates:
+        raise ValueError('Do not combine full-teacher prefix and teacher latent mixing')
+    if args.action_loss_coef < 0:
+        raise ValueError("action-loss-coef must be nonnegative")
+    if args.audit_output_dir and dist_runtime["is_rank0"]:
+        from scripts.audit_distillation_runtime import DistillationRuntimeAudit
+        run_audit = DistillationRuntimeAudit(args.audit_output_dir, cfg, args,
+                                             task_env, player.model, teacher_encoder)
+        run_audit.observe_player_actions(player, teacher_encoder, student_encoder)
 
     def run_periodic_student_evaluation():
         with _temporarily_clear_torchrun_env():
@@ -1230,7 +1313,7 @@ def main():
                 eval_cfg = compose(config_name="config", overrides=eval_overrides)
 
             repo_root = Path(__file__).resolve().parent.parent
-            grasp_dir = repo_root / "caches" / "initial_grasp" / args.hand / Path(str(eval_cfg.object.asset.asset_root)).name / args.eval_instance_id
+            grasp_dir = repo_root / "caches" / "initial_grasp" / eval_cfg.hand.type / Path(str(eval_cfg.object.asset.asset_root)).name / args.eval_instance_id
             grasp_cache = resolve_grasp_cache_path(grasp_dir, args.grasp_split)
             effective_grasp_split = args.grasp_split
             if not grasp_cache.exists():
@@ -1356,24 +1439,58 @@ def main():
             total_cos = 0.0
             total_reward = 0.0
             total_loss_steps = 0
+            total_action_mse = 0.0
+            replay_mse_sum = 0.0
+            replay_loss_steps = 0
 
             for step_idx in range(args.rollout_steps):
                 student_obs, teacher_obs = get_encoder_observations(task_env)
                 student_encoder_obs = student_obs.to(player.device)
                 teacher_obs = teacher_obs.to(player.device)
                 teacher_encoder_obs = normalize_obs_slice(player.model, teacher_obs, policy_obs_dim)
-                player.model.a2c_network.actor_encoder_obs_override = student_encoder_obs
-
+                incoming_action_states = ([value.detach().clone() for value in player.states]
+                                          if args.action_loss_coef and player.is_rnn else None)
+                from isaacgymenvs.utils.distill_rollout_utils import distillation_action
+                fraction = teacher_mix_fraction(update_idx, args.teacher_latent_mix_initial, args.teacher_latent_mix_updates)
                 with torch.no_grad():
-                    action = player.get_action(obses, is_deterministic=args.deterministic)
+                    mixed_target = teacher_encoder(teacher_encoder_obs) if fraction else None
+                    action = distillation_action(player, obses, student_encoder_obs, teacher_encoder,
+                        use_teacher=update_idx < args.teacher_rollout_updates,
+                        deterministic=args.deterministic,
+                        student_eval_mode=args.student_rollout_eval_mode,
+                        teacher_fraction=fraction, teacher_latent=mixed_target)
 
                 with torch.no_grad():
                     teacher_latent = teacher_encoder(teacher_encoder_obs)
+                if args.student_rollout_eval_mode:
+                    assert student_encoder.training, 'Rollout did not restore encoder training mode for supervision'
                 student_latent = student_encoder(student_encoder_obs)
 
                 mse_loss = F.mse_loss(student_latent, teacher_latent)
                 cosine_loss = 1.0 - F.cosine_similarity(student_latent, teacher_latent, dim=-1).mean()
                 loss = mse_loss + args.cosine_coef * cosine_loss
+                if args.action_loss_coef:
+                    from isaacgymenvs.utils.distill_action_loss import distillation_action_loss
+                    action_mse, _, _ = distillation_action_loss(player, obses, student_latent,
+                                                              teacher_latent, incoming_action_states)
+                    loss = loss + args.action_loss_coef * action_mse
+                    total_action_mse += float(action_mse.detach())
+
+                if replay is not None:
+                    replay_step = update_idx * args.rollout_steps + step_idx
+                    if replay.size:
+                        replay_obs, replay_labels = replay.sample(len(student_encoder_obs), replay_step)
+                        if args.replay_supervision == 'current':
+                            # Keep sampling/storage/extra-pass budgets matched to the
+                            # historical arm; only supervised states/labels differ.
+                            replay_obs, replay_labels = student_encoder_obs, teacher_latent
+                        with replay.dropout_stream():
+                            replay_loss = F.mse_loss(student_encoder(replay_obs), replay_labels)
+                        replay_supervised_transitions[args.replay_supervision] += len(replay_obs)
+                        loss = (1.0 - args.replay_fraction) * loss + args.replay_fraction * replay_loss
+                        replay_mse_sum += float(replay_loss.detach())
+                        replay_loss_steps += 1
+                    replay.append(student_encoder_obs, teacher_latent, replay_step)
 
                 loss.backward()
 
@@ -1395,6 +1512,7 @@ def main():
                 torch.nn.utils.clip_grad_norm_(student_encoder.parameters(), args.max_grad_norm)
             sync_torch_device(player.device)
             optimizer.step()
+            completed_updates = update_idx + 1
             sync_torch_device(player.device)
             player.model.a2c_network.actor_encoder_obs_override = None
             optimize_time = time.perf_counter() - optimize_start
@@ -1414,6 +1532,10 @@ def main():
             mean_loss = reduced_loss_sum / loss_denominator
             mean_mse = reduced_mse_sum / loss_denominator
             mean_cos = reduced_cos_sum / loss_denominator
+            if args.action_loss_coef and dist_runtime["is_rank0"]:
+                print(f"[action-distill] update={completed_updates:04d} "
+                      f"raw_mean_mse={total_action_mse / max(total_loss_steps, 1):.8f} "
+                      f"coefficient={args.action_loss_coef}", flush=True)
             mean_reward = reduced_reward_sum / max(args.rollout_steps * dist_runtime["world_size"], 1)
             current_frames = batch_size * args.rollout_steps * dist_runtime["world_size"]
             total_steps += current_frames
@@ -1429,6 +1551,12 @@ def main():
                     f"collect_fps={collect_fps:.2f} total_steps={total_steps} "
                     f"train_steps_per_sec={train_steps_per_sec:.2f}"
                 )
+                if replay is not None:
+                    print('[replay] ' + json.dumps(dict(update=completed_updates,
+                        supervision_source=args.replay_supervision,
+                        supervised_transitions=replay_supervised_transitions,
+                        replay_mse=replay_mse_sum / max(1, replay_loss_steps),
+                        current_mse=mean_mse, **replay.report())), flush=True)
             loss_improved = (
                 (update_idx + 1) >= int(args.save_best_after_updates)
                 and (best_loss is None or mean_loss < best_loss)
@@ -1564,6 +1692,15 @@ def main():
                 )
 
     finally:
+        if replay is not None and args.audit_output_dir:
+            from scripts.monitor_wuji_checkpoints import atomic_json, now
+            atomic_json(Path(args.audit_output_dir) / 'replay-report.json',
+                        dict(finished=now(), completed_updates=completed_updates,
+                             supervision_source=args.replay_supervision,
+                             supervised_transitions=replay_supervised_transitions,
+                             fraction=args.replay_fraction, **replay.report()))
+        if run_audit is not None:
+            run_audit.finish(player.model, teacher_encoder, student_encoder, completed_updates)
         summary_logger.close()
         if dist_runtime["enabled"] and dist.is_initialized():
             dist.destroy_process_group()

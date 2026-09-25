@@ -1,0 +1,55 @@
+{
+  "status": "frozen",
+  "scope": "Add validated training grasp15 to the two-grasp curriculum without filtering.\n\nThe first two nominal states remain byte-identical; the third is row15 of the\nprevious functional20 training split. The one held-out grasp is never used in\ntraining. Its poor results remain part of every subsequent development audit.\n",
+  "dataset": "knife_wuji_bridge3_20260922",
+  "train_count": 3,
+  "test_count": 1,
+  "records": [
+    {
+      "split": "train",
+      "row": 0,
+      "source": "mapped_original_successful_grasp"
+    },
+    {
+      "split": "train",
+      "row": 1,
+      "source": "functional20_training_row16"
+    },
+    {
+      "split": "train",
+      "row": 2,
+      "source": "functional20_training_row15"
+    },
+    {
+      "split": "test",
+      "row": 0,
+      "source": "unchanged_functional20_heldout_row0"
+    }
+  ],
+  "validation": [
+    {
+      "path": "runs/wuji-goal/verification/functional15-functional20-cp100-fresh200-seed44-timed2seconds/report.json",
+      "sha256": "03908359355ce941c4bdf33c4d0bdca9ab60422261a9e56d256120d8983a92f1"
+    },
+    {
+      "path": "runs/wuji-goal/verification/functional15-functional20-cp100-fresh200-seed44-timed5seconds/report.json",
+      "sha256": "078a0c648df7a1ed13b1946386187ce442894621df6bf07679f5d21d9b9b9de6"
+    }
+  ],
+  "input_sha256": {
+    "caches/initial_grasp/wuji/knife_wuji_bridge2_20260922/000/train/valid_grasps.npy": "c49837d070e71dd9d6c22e49e66db6c8b1b28796fcc12d8ea29d0b7c850121fd",
+    "caches/initial_grasp/wuji/knife_wuji_lowgain_functional20_20260922/000/train/valid_grasps.npy": "035d2abefb6b98071647b0016c3a69e3942c4f268da72722919c5a037794bac2",
+    "caches/initial_grasp/wuji/knife_wuji_bridge2_20260922/000/test/valid_grasps.npy": "f4aeecbc87ad3edc2bccc6c208f5a0861d37e209dc69e67906f5c90573ee72b8"
+  },
+  "geometry_sha256": "5229c66b183cc6da04190bf2d6cfbd035fadd227340dc8f26602b207171b461c",
+  "artifact_sha256": {
+    "assets/objects/knife_wuji_bridge3_20260922/lbx.json": "264b510ebe84d43fea877e0f69a421d628d1dc47b8f5a886dde81011f0549b76",
+    "assets/objects/knife_wuji_bridge3_20260922/000/parameters.json": "d61987a57769303fbf277b5b3524dbfccb34ca18d3929a62ea25b078cd791d54",
+    "assets/objects/knife_wuji_bridge3_20260922/000/mobility.urdf": "5229c66b183cc6da04190bf2d6cfbd035fadd227340dc8f26602b207171b461c",
+    "caches/initial_grasp/wuji/knife_wuji_bridge3_20260922/000/grasp_state_metadata.json": "e362b26ebd847efd584e440edf4396a94b0eeee5462223879ca391c2a8c3ed9b",
+    "caches/initial_grasp/wuji/knife_wuji_bridge3_20260922/000/valid_grasps.npy": "95e8cb6b7b785120ac40d154f86a0d3efb53a0134d5e7419ac8683911af0d4cc",
+    "caches/initial_grasp/wuji/knife_wuji_bridge3_20260922/000/valid/valid_grasps.npy": "95e8cb6b7b785120ac40d154f86a0d3efb53a0134d5e7419ac8683911af0d4cc",
+    "caches/initial_grasp/wuji/knife_wuji_bridge3_20260922/000/train/valid_grasps.npy": "7df873d088d5554eb091d292e0ef76aa5cc2a570083507804d77dedb8eeb53d7",
+    "caches/initial_grasp/wuji/knife_wuji_bridge3_20260922/000/test/valid_grasps.npy": "f4aeecbc87ad3edc2bccc6c208f5a0861d37e209dc69e67906f5c90573ee72b8"
+  }
+}
