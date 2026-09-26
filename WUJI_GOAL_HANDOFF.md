@@ -1,4 +1,21 @@
 
+## 本轮已按开发预算结束并交付：G2 overnight 20260926
+
+**整段两轮稳定伸缩未成功，不要把Goal运行结束当作物理目标达成。** 48/48开发启动用完，47实际物理，1物理前失败；另有1准备失败未启动。无新训练，student和正式摆放验证未运行。连续平放取刀/翻掌/拇指离触/滑块接触成立；仅拇指动作消融有约42mm行程与后一轮开合，但首轮和稳定失败。完整teacher失败。最终中指位置反馈接触率96.82%，仍旋转0.601rad，未进入策略。
+
+工作树 `/data/research/artgym-g2-tabletop-20260925`，分支 `feat/g2-wuji-overnight-20260926`。机器状态 `/data/research/artgym-g2-tabletop-20260925/runs/g2-overnight-20260926/task-state.json`；先读 `research/g2-overnight-results-20260926.md` 与视频索引，逐次细节在 `research/g2-overnight-20260926.md`。不要在默认 `/data/research/artgym` 下误找本轮相对runs路径。
+
+Release：https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-overnight-20260926-v1 。12附件大小/哈希、重新下载证据包及3917文件源码恢复通过；核验记录 `research/g2-overnight-publication-verification-20260926.json`。无本轮物理进程存活；原训练88339在08:16 CST实查仍正常，GPU99%，不得停止。恢复检查工作树 `/data/research/artgym-overnight-source-restore-20260926` 只生成命令，未运行新的物理。
+
+唯一优先下一项：重新安排滑块接触时的非拇指抗转动支撑，先通过22秒/10mm/0.25rad固定世界保持，再接完整teacher。新工作需独立目录和新的明确预算；不得重置本轮48次计数、借用未启用的正式验证预算、覆盖旧失败或扩大到整套teacher重训。
+
+
+## Overnight G2 20260926 2026-09-26T00:18:20.413193+00:00
+
+新Release已发布并核验：https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-overnight-20260926-v1 。12附件共185169533字节的GitHub大小/SHA256全部匹配，167378756字节证据包重新下载哈希一致；215个包内原始结果文件与本机相同，R3-14在新工作树恢复3917源码/输入文件通过，未追加物理。48/48开发启动结束、47实际物理、1物理前失败，正式验证0/20、学习0、student未运行，连续目标未成功。原训练88339实查仍运行，GPU99%；本轮物理进程全部结束。报告research/g2-overnight-results-20260926.md、48行CSV及视频索引已在独立分支。唯一后续优先：改善滑块接触时的抗转动支撑，先22秒固定参考保持验收。
+
+续接：runs/g2-overnight-20260926/task-state.json；research/g2-overnight-20260926.md。独立分支feat/g2-wuji-overnight-20260926。开发截止北京时间09:07:35，总截止09:52:35。
+
 ## Overnight G2 20260926 2026-09-26T00:06:55.037196+00:00
 
 第三轮结束，总48/48开发启动均已终态。R3-16失败于22秒支持保持，未进入teacher：原固定gait参考7.493mm/.601018rad，2.5333s首次越界，中指接触96.82%。同一22秒的无反馈R3-13为8.054mm/.675528rad，中指20.91%，4.6333s首次越界；不能把更高接触率称稳定改善，反馈失稳还更早。反馈首次达到幅度限额77.6667s，晚于失稳77.5000s；不能据后期饱和直接提高增益/限幅。两试验前2249帧和物性完全相同。没有新训练/正式验证，student未运行。下一阶段唯一优先是重新安排滑块接触时的抗转动支撑，先以22秒原阈值静态保持验收。当前只剩全量新证据审核、增量发布和交接，旧训练保持。
