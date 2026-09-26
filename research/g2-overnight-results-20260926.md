@@ -102,3 +102,13 @@ bash ../reproduce-g2-overnight-R3-12/reproduce.sh
 ```
 
 改`--trial`并使用新的`--destination`可复现任一已发布对照。R3-15是独立预置A，不从桌面获取；R3-13只执行保持；R3-14是拇指动作消融。每项精确命令、输入、原始源码SHA、配置、接管状态、逐帧轨迹和接触都在`trials/TRIAL/`。全轮规划诊断与任务journal在`diagnostics/`；源码相对基线去重存储于`sources/blobs/`。
+
+
+## 发布入口
+
+- [独立代码分支](https://github.com/Jr-kelly/artgym/tree/feat/g2-wuji-overnight-20260926)
+- [新Release：视频、增量证据、哈希、结果表](https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-overnight-20260926-v1)
+- [全部48项开发结果表](g2-overnight-results-20260926.csv)
+- [视频索引及每条视频的实际范围](g2-overnight-video-index-20260926.md)
+
+物理目标未达成；本轮因开发预算用完结束。证据包包含全部48个启动记录、47条实际轨迹、物理前/准备失败以及各自源码差分；原有训练保持，不留下本轮失控任务。旧Release与历史备份不覆盖、不重复上传。
