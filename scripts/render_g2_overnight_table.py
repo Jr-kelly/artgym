@@ -18,6 +18,10 @@ def main():
         failure=trial.get('abort',{});first=trial.get('first_instability_time_s')
         op_first=trial.get('operation_first_instability')
         if op_first is not None:first=min(first,op_first['time_s']) if first is not None else op_first['time_s']
+        control=trial.get('takeover_control_audit',{});static=control if control.get('action_mode')=='no-policy' else {}
+        if static.get('first_world_instability_since_reference_s') is not None:
+            hold_first=static['reference_time_s']+static['first_world_instability_since_reference_s']
+            first=min(first,hold_first) if first is not None else hold_first
         row=dict(trial=trial['name'],kind='development',group=group,status=trial['status'],physical_execution=trial.get('physical_execution'),
             actual_tabletop_route=group in ['B','C'] and trial.get('physical_execution',False),
             lift_success=score.get('lift_success') if group!='A' else None,
@@ -34,6 +38,10 @@ def main():
             entered_policy=steps>0,operation_steps=steps,
             policy_action_mode=action_mode if steps else 'not_executed',
             unchanged_policy_actions=action_mode=='full' if steps else None,
+            static_hold_scored_seconds=static.get('samples',0)/30 if static else None,
+            static_hold_fixed_world_stable=static.get('stable_world'),
+            static_hold_world_drift_mm=static.get('world_position_max_mm'),
+            static_hold_world_rotation_rad=static.get('world_rotation_max_rad'),
             basic_10mm=score.get('basic_10mm') if steps else None,strict_2mm=score.get('strict_2mm') if steps else None,
             operation_fixed_world_stable=score.get('stable_world_10mm_025rad') if steps else None,
             slider_travel_mm=mm(score.get('slider_travel_m')) if steps else None,
@@ -44,6 +52,7 @@ def main():
             operation_hand_drift_mm=mm(score.get('hand_relative_drift_max_m')) if steps else None,
             operation_hand_rotation_rad=score.get('hand_relative_rotation_max_rad') if steps else None,
             required_operation_success=score.get('whole_stable_success') if steps else None,
+            endpoint_and_retention_cycles=score.get('completed_cycles') if steps else None,
             continuous_whole_success=bool(group in ['B','C'] and steps and score.get('whole_stable_success',False)),
             abort_phase=failure.get('last_phase'),abort_reason=failure.get('message',failure.get('error',failure.get('exception'))),
             raw_failure_class=trial.get('failure_class'),

@@ -10,6 +10,8 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--root',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
     old=Path('runs/g2-air-flip-v1/B-sliderdown-pronate180-h30-v2/trace.npz');prefix=np.load(old)
     rows=[]
+    controls_path=a.root/'takeover-controls-four-way.json'
+    controls={v['trial']:v for v in json.loads(controls_path.read_text())['trials']} if controls_path.exists() else {}
     for file in sorted(a.root.glob('*-process.json')):
         info=json.loads(file.read_text());name=file.name[:-len('-process.json')];trial=a.root/name
         proc=Path('/proc')/str(info['pid'])/'stat';alive=False
@@ -27,6 +29,10 @@ def main():
         row['verified_source_files']=len(manifest)
         if trace.exists():
             row.update(audit(trial));t=np.load(trace)
+            if name in controls:
+                control=controls[name]
+                if hashlib.sha256(trace.read_bytes()).hexdigest()!=control['trace_sha256']:raise ValueError('Supplemental control trace mismatch')
+                row['takeover_control_audit']=control
             if 'air_flip' in t['phase']:
                 end=np.flatnonzero(t['phase']=='air_flip')[-1]+1
                 row['prefix_exact']=bool(end==690 and all(np.array_equal(t[k][:end],prefix[k][:end]) for k in ['q','arm_q','object','wrist','slider','reference_targets']))
