@@ -5,6 +5,7 @@ from pathlib import Path
 import numpy as np
 import torch
 from scipy.spatial.transform import Rotation
+from scripts.train_g2_local import ActorCritic
 
 
 def main():
@@ -14,10 +15,14 @@ def main():
     f=lambda x:torch.as_tensor(np.array(x),dtype=torch.float32)
     initial=f(t['object_rigid_state'][start:start+1]);slider=f(t['slider'][start:start+1]);q=f(t['all_dof_position'][start:start+1,:27])
     observer=InputAblation('fixed-body-proprio-slider',initial,slider,q)
+    body_only=InputAblation('fixed-body-live-slider',initial,slider,q)
+    artifact=torch.load(root/'B4-S-joint-path/checkpoint-00025.pth',map_location='cpu')
+    model=ActorCritic(artifact['obs_dim'],artifact['action_dim'])
+    model.load_state_dict(artifact['model']);model.eval()
     props=json.loads(Path('configs/g2_local/physics.json').read_text())
     lower=f(props['robot_dof_properties']['lower']);upper=f(props['robot_dof_properties']['upper'])
     slider_lower=props['knife_dof_properties']['lower'][0]
-    errors=[];fkerrors=[];signs=[];robot_channel_errors=[];obs=[]
+    errors=[];fkerrors=[];signs=[];robot_channel_errors=[];obs=[];action_differences={observer.mode:[],body_only.mode:[]}
     for age,idx in enumerate(ids):
         old=idx-1;q=f(t['all_dof_position'][old:old+1,:27]);qd=f(t['dof_velocity'][old:old+1,:27])
         residual=f(t['learned_residual'][old:old+1]) if age else torch.zeros(1,20)
@@ -38,6 +43,12 @@ def main():
         expected*=1 if np.dot(expected,raw[69:73])>=0 else -1
         signs.append(float(np.dot(out[0,69:73].numpy(),expected)))
         obs.append(out.numpy())
+        body_obs=body_only.observation(q,qd,f(t['reference_targets'][old:old+1]),torch.tensor([age]),residual,action,
+            f(t['goal'][idx:idx+1]),lower,upper,slider_lower,
+            live_slider=f(t['slider'][old:old+1]),live_slider_velocity=f(t['dof_velocity'][old:old+1,27]))
+        with torch.no_grad():
+            for mode,value in [(observer.mode,out),(body_only.mode,body_obs)]:
+                action_differences[mode].append(model.mean_action(value)[0].numpy()-t['learned_action'][idx])
     assert max(robot_channel_errors)<2e-5
     assert max(fkerrors)<2e-6
     assert min(signs)>.9999, 'FK quaternion sign convention incompatible with trained observations'
@@ -45,6 +56,8 @@ def main():
         max_slider_estimation_error_m=float(np.max(np.abs(errors))),rms_slider_estimation_error_m=float(np.sqrt(np.mean(np.square(errors)))),
         max_wrist_fk_position_error_m=max(fkerrors),min_quaternion_alignment=min(signs),
         max_unchanged_robot_input_error=max(robot_channel_errors),
+        shadow_action_difference={mode:dict(first_max_abs=float(np.abs(rows[0]).max()),
+            max_abs=float(np.abs(rows).max()),mean_abs=float(np.abs(rows).mean())) for mode,rows in action_differences.items()},
         live_object_inputs='none in observation signature',input_contract=observer.description())
     (root/'R8-input-offline-audit.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result))

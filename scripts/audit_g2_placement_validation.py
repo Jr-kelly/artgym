@@ -18,7 +18,8 @@ def audit(folder):
     if not path.exists():
         path = folder/'partial-trace.npz'
     if not path.exists():
-        return dict(failure=failure, trace_missing=True)
+        return dict(failure=failure, trace_missing=True,
+            failure_category='preflight_parser' if failure.get('exception_type')=='ArgumentParserError' else 'missing_trace')
     trace = np.load(path)
     phases = trace['phase']
     rows = []
@@ -49,6 +50,7 @@ def audit(folder):
     category = ('flip_ik_precheck' if 'Air-flip IK' in message else
         'gait_support_contact' if 'Required support contact' in message else
         'gait_stability' if 'Gait fixed-reference' in message else
+        'alignment_bounds' if 'One-shot alignment outside' in message else
         'other_failure' if failure else 'completed')
     return dict(trace=str(path), trace_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
         frames=len(phases), final_phase=str(phases[-1]), failure=failure,

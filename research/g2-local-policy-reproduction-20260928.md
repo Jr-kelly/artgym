@@ -165,4 +165,32 @@ concurrent processes do not count as extra physical GPUs.
 
 The20-placement validation driver refuses declaration without an actual
 continuous success and its independent audit, and refuses execution until the
-manifest is committed and pushed. No validation positions have yet been drawn.
+manifest is committed and pushed. The manifest was committed/pushed as8c4cce1 before launch. Use a fresh declared manifest/run namespace for any new validation; never overwrite the recorded20 placements.
+
+
+## Frozen-input and hand-gravity local diagnostics
+
+Round8 does not train or change the frozen model. These are local resets from an actually reached
+H-prepared state, not continuous tabletop success. Both input variants require one ideal initial
+knife pose and slider value. The proprioceptive variant removes later live object/slider feedback
+only during S; the preceding acquisition/H pipeline is still privileged.
+
+```bash
+bash scripts/g2_local_python.sh -m scripts.run_g2_local \
+  --task S --baseline learned --num-envs 2 --episodes 1 \
+  --state configs/g2_local/S-after-continuous-learned-H-state.npz \
+  --checkpoint runs/g2-local-policy-20260928/B4-S-joint-path/checkpoint-00025.pth \
+  --input-ablation fixed-body-proprio-slider --video \
+  --output runs/g2-local-policy-20260928/my-proprio-input-test
+```
+
+Use `--input-ablation fixed-body-live-slider` for the body-only ablation. For the independent
+hand-gravity sensitivity, remove `--input-ablation` and add `--hand-gravity`; retain all other options.
+Each output records actual input observations, raw physical traces, contacts and gravity flags.
+`score_g2_local_trace` independently evaluates `episode-000.npz` with `--task S` and the same `--source` state.
+The robot FK/quaternion audit can be repeated without simulation using `scripts.audit_g2_input_ablation`.
+
+The alternate gait controller uses `--gait-arm-retarget-reference configs/g2_local/gait-nominal-start.json`
+on the continuous command above. It preserves hand commands/gates and transforms the nominal wrist path
+at the actual gait motor-reference boundary. This is a separately named development variant; its
+geometric prechecks do not establish physical success and it is not part of the frozen validation.
