@@ -1,0 +1,125 @@
+scripts/audit_g2_prepared_continuous.py
+  s_87fdc32a1dcd01::t_032806e7476ee2 28,30,61-63,100-103,118
+  s_87fdc32a1dcd01::t_097056b0252873 105,113
+scripts/compare_g2_preparation_support.py
+  s_87fdc32a1dcd01::t_6e097c351ccdb6 31-33,46-47,53-54
+  s_87fdc32a1dcd01::t_50f4195b6c30e7 1-30,34-45,48-52,55-76
+scripts/summarize_g2_local_controls.py
+  s_87fdc32a1dcd01::t_097056b0252873 55-57
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "63c269311dc11a1172ac07d8e260333d7e38647b",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.output_tokens": "6933353",
+        "tlab.session_started_at": "2026-09-27T22:51:42Z",
+        "tlab.token_usage.cache_read_tokens": "1006506860",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.input_tokens": "49816942"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "scripts/compare_g2_preparation_support.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 76
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 7
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 7
+      }
+    },
+    {
+      "old_path": "research/g2-local-policy-20260928.md",
+      "new_path": "research/g2-local-policy-20260928.md",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "old_path": "research/g2-local-policy-control-results-20260928.csv",
+      "new_path": "research/g2-local-policy-control-results-20260928.csv",
+      "additions": {
+        "human": 72
+      },
+      "deletions": {
+        "human": 70
+      }
+    },
+    {
+      "old_path": "research/g2-local-policy-reproduction-20260928.md",
+      "new_path": "research/g2-local-policy-reproduction-20260928.md",
+      "additions": {
+        "human": 57
+      }
+    },
+    {
+      "old_path": "research/g2-local-policy-results-20260928.md",
+      "new_path": "research/g2-local-policy-results-20260928.md",
+      "additions": {
+        "human": 33
+      },
+      "deletions": {
+        "human": 6
+      }
+    },
+    {
+      "old_path": "scripts/audit_g2_prepared_continuous.py",
+      "new_path": "scripts/audit_g2_prepared_continuous.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 12
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/summarize_g2_local_controls.py",
+      "new_path": "scripts/summarize_g2_local_controls.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 3
+          }
+        ]
+      }
+    }
+  ]
+}
