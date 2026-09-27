@@ -1,0 +1,106 @@
+scripts/run_g2_tabletop.py
+  s_87fdc32a1dcd01::t_1710100b30f34f 937,953-956,973-974,980-983
+  s_87fdc32a1dcd01::t_6b4604f108d5d7 897-898
+scripts/summarize_g2_local_controls.py
+  s_87fdc32a1dcd01::t_4f38d380613bad 1-32,34-38,47-63
+  s_87fdc32a1dcd01::t_1710100b30f34f 33,39-46
+scripts/g2_local_runtime.py
+  s_87fdc32a1dcd01::t_6b4604f108d5d7 97-98
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "5c5763a07087f074de9d2633ac07331f394180fe",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.session_started_at": "2026-09-27T19:49:28Z",
+        "tlab.token_usage.cache_read_tokens": "961782099",
+        "tlab.token_usage.output_tokens": "6585474",
+        "tlab.token_usage.input_tokens": "48278772"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "scripts/summarize_g2_local_controls.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 63
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 5
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 5
+      }
+    },
+    {
+      "old_path": "research/g2-local-policy-20260928.md",
+      "new_path": "research/g2-local-policy-20260928.md",
+      "additions": {
+        "human": 10
+      }
+    },
+    {
+      "old_path": "scripts/g2_local_runtime.py",
+      "new_path": "scripts/g2_local_runtime.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/run_g2_tabletop.py",
+      "new_path": "scripts/run_g2_tabletop.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 13
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 5
+          }
+        ]
+      }
+    }
+  ]
+}
