@@ -84,3 +84,5 @@ second actually reached support state, no fabricated pose. Runtime replay
 actual tabletop→H22s→S20s without resets; result pending. R7-04 checks
 one fresh environment across two local resets. Planned alternative controller
 is skipped to concentrate on the learned method. No new training configuration.
+
+R7-04 freshsingleenv, two consecutive local resets independently passes2/2; combined prepared-state repeats4/4. All remain oneplacement/oneactualHpreparedstate, not newgeometry. Continuous R7-03 pending.

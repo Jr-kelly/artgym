@@ -124,3 +124,45 @@ bash scripts/g2_local_python.sh -m scripts.audit_g2_continuous_local \
   --output runs/g2-local-policy-20260928/R4-02-handoff-audit-reproduced.json
 ```
 R4-03 uses the exact R4-02 launch arguments plus `--local-reset-quaternion-compat` and a fresh output directory. This opt-in only aligns the first measured wrist quaternion sign to the legacy local reset representation; subsequent observations use native PhysX signs. Old result/source pins remain untouched.
+
+## Actual prepared-state local evaluation and continuous counterpart
+
+R7 uses Hpilot10 after acquisition, then B4cp25 after22s hold and2s actual
+settling. Both are frozen new privileged networks. The original actor is not
+executed during B4operation. These commands do not imply continuous success
+until its report/audit passes. The state below was extracted from the actual
+R2-04 finalframe2968, not made by interpolation.
+
+```bash
+cd /data/research/artgym-g2-local-policy-20260928
+bash scripts/g2_local_python.sh -m scripts.run_g2_local \
+  --task S --baseline learned --num-envs 1 --episodes 2 \
+  --state configs/g2_local/S-after-continuous-learned-H-state.npz \
+  --checkpoint runs/g2-local-policy-20260928/B4-S-joint-path/checkpoint-00025.pth \
+  --video --output runs/g2-local-policy-20260928/my-prepared-S
+
+bash scripts/g2_local_python.sh -m scripts.run_g2_tabletop \
+  --group B --operation-yaw 90 --yaw 180 --dx -.05 \
+  --arm-gain-scale 10 --arm-damping-scale 20 --arm-integral-gain 1 \
+  --grasp-plan configs/g2_local/prefix/acquisition-candidate2-refined-initial.json \
+  --acquisition-arm-seed configs/g2_local/prefix/candidate2-arm-seed.json \
+  --cartesian-acquisition --slider-face down --table-localization settled-truth \
+  --air-flip 180 --lift-height .30 \
+  --gait-plan configs/g2_local/prefix/candidate2-thumb-slider-contact-corridor-execution.json \
+  --stay-after-gait --contact-diagnostics --seconds 20 --policy-action-mode thumb-only \
+  --learned-hold-policy runs/g2-local-policy-20260928/A1-H-pilot/checkpoint-00010.pth \
+  --learned-operation-policy runs/g2-local-policy-20260928/B4-S-joint-path/checkpoint-00025.pth \
+  --local-reset-quaternion-compat --video --closeup \
+  --output runs/g2-local-policy-20260928/my-continuous-prepared-S
+```
+
+New checkpoints/raw development evidence are in the baseline and B4/R4-R6
+increment archives on Releasev1. Extract them in the stated runroot, in that
+order. Frozen source pins, all failures and independent raw scorers are included.
+`audit_g2_gpu_budget.py` merges our process intervals on the single GPU and
+conservatively includes all control/evaluation simulations plus0.25hdebug;
+concurrent processes do not count as extra physical GPUs.
+
+The20-placement validation driver refuses declaration without an actual
+continuous success and its independent audit, and refuses execution until the
+manifest is committed and pushed. No validation positions have yet been drawn.
