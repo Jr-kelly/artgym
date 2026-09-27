@@ -191,6 +191,8 @@ class LocalG2:
         self.initial_local = self.initial_object.clone()
         self.max_drift = torch.zeros(self.n)
         self.max_rotation = torch.zeros(self.n)
+        self.max_hand_drift = torch.zeros(self.n)
+        self.max_hand_rotation = torch.zeros(self.n)
         self.endpoint_errors = torch.zeros(self.n, 4)
         self.min_slider = torch.zeros(self.n)
         self.max_slider = torch.zeros(self.n)
@@ -230,6 +232,8 @@ class LocalG2:
         self.initial_local[ids] = local_pose(self.wrist[ids], self.object[ids])
         self.max_drift[ids] = 0
         self.max_rotation[ids] = 0
+        self.max_hand_drift[ids] = 0
+        self.max_hand_rotation[ids] = 0
         self.endpoint_errors[ids] = 0
         self.min_slider[ids] = self.dof[ids, 27, 0]
         self.max_slider[ids] = self.dof[ids, 27, 0]
@@ -304,6 +308,11 @@ class LocalG2:
         err = (self.dof[:, 27, 0] - old_goal).abs()
         self.max_drift = torch.maximum(self.max_drift, drift)
         self.max_rotation = torch.maximum(self.max_rotation, rot)
+        rel = local_pose(self.wrist, self.object)
+        self.max_hand_drift = torch.maximum(self.max_hand_drift,
+            (rel[:, :3]-self.initial_local[:, :3]).norm(dim=-1))
+        self.max_hand_rotation = torch.maximum(self.max_hand_rotation,
+            rotation_error(self.initial_local[:, 3:7], rel[:, 3:7]))
         self.min_slider = torch.minimum(self.min_slider, self.dof[:, 27, 0])
         self.max_slider = torch.maximum(self.max_slider, self.dof[:, 27, 0])
         bad = (drift >= .01) | (rot >= .25)
@@ -341,6 +350,7 @@ class LocalG2:
         return dict(complete=complete, stable=stable, endpoints_10mm=endpoint,
             endpoints_2mm=(self.endpoint_errors < .002).all(-1), success=complete & stable & endpoint,
             world_drift_m=self.max_drift, world_rotation_rad=self.max_rotation,
+            hand_relative_drift_m=self.max_hand_drift, hand_relative_rotation_rad=self.max_hand_rotation,
             endpoint_max_errors_m=self.endpoint_errors, slider_travel_m=self.max_slider-self.min_slider,
             first_instability_s=torch.where(self.first_unstable<0, -1., self.first_unstable.float()/30), drop=self.ever_drop)
 

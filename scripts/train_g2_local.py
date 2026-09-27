@@ -54,6 +54,7 @@ def main():
     p.add_argument('--eval-every', type=int, default=50)
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--checkpoint', type=Path)
+    p.add_argument('--resume-optimizer', action='store_true', help='Continue the same training configuration and Adam state')
     p.add_argument('--teacher', type=Path, default=Path('/data/research/artgym-experiments-20260921/runs/wuji-goal/release-core-teacher-student-20260924-v1/wuji-core-teacher-student-20260924-teacher.pth'))
     args = p.parse_args()
     args.output.mkdir(parents=True, exist_ok=False)
@@ -71,6 +72,8 @@ def main():
     if args.checkpoint:
         saved = torch.load(args.checkpoint, map_location='cuda:0')
         model.load_state_dict(saved['model'])
+        if args.resume_optimizer:
+            optimizer.load_state_dict(saved['optimizer'])
     stopping = [False]
     for sig in [signal.SIGTERM, signal.SIGINT]:
         signal.signal(sig, lambda *_: stopping.__setitem__(0, True))
@@ -92,6 +95,7 @@ def main():
     val_buf, rew_buf, done_buf = log_buf.clone(), log_buf.clone(), log_buf.clone()
     ep_returns = torch.zeros(env.n)
     update = 0
+    error = None
 
     class StopTraining(Exception):
         pass
@@ -193,8 +197,8 @@ def main():
                     with torch.no_grad():
                         act = model.mean_action(env.observation().cuda())
                     env.step(act)
-                    # Keep up to four full traces, all replica scores, no cherry-pick.
-                    evaluation_rows.append({k:v[:min(env.n,4)] for k,v in env.frame().items()})
+                    # Preserve every evaluation replica, including failures.
+                    evaluation_rows.append(env.frame())
                 metric = {k:v.tolist() for k,v in env.metrics().items()}
                 evaluation = dict(update=update, scope='deterministic development reset, one acquisition source',
                     replicas=env.n, unique_acquisition_states=1, metrics=metric,
@@ -221,9 +225,13 @@ def main():
         save('last.pth')
     except StopTraining:
         save('last.pth')
+    except BaseException as exc:
+        error = repr(exc)
+        save('interrupted.pth')
+        raise
     finally:
-        (args.output/'status.json').write_text(json.dumps(dict(pid=os.getpid(), status='stopped' if stopping[0] else 'finished',
-            update=update, transitions=transitions, episodes=episodes, seconds=time.monotonic()-clock),indent=2)+'\n')
+        (args.output/'status.json').write_text(json.dumps(dict(pid=os.getpid(), status='error' if error else ('stopped' if stopping[0] else 'finished'),
+            error=error, update=update, transitions=transitions, episodes=episodes, seconds=time.monotonic()-clock),indent=2)+'\n')
         curve.close()
         episodic.close()
         env.close()
