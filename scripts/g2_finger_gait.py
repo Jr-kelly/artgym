@@ -26,7 +26,7 @@ def stability(rows,world_reference,hand_reference,hand_indices,command_start,mov
         passive_slider_travel_m=float(np.ptp([r['slider'] for r in rows])))
 
 
-def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,fk,table_z,world_reference=None,retarget_reference=None):
+def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,fk,table_z,world_reference=None,retarget_reference=None,translate_before_alignment=False):
     plan=json.loads(path.read_text())
     if retarget_reference is not None:
         from scripts.g2_retarget_gait import retarget
@@ -74,6 +74,9 @@ def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,
             from scripts.g2_assembly_roll import align_to_fixed_goal
             from scripts.g2_table_collision import ArmTableCollision
             folder=output/stage['name'];folder.mkdir()
+            if translate_before_alignment:
+                from scripts.g2_alignment_translation import translate_toward_fixed_goal
+                translate_toward_fixed_goal(k,targets,arm_idx,current,tick,records,dt,ArmTableCollision(table_z),folder,world)
             align_to_fixed_goal(k,targets,arm_idx,current,tick,records,dt,ArmTableCollision(table_z),folder,world,
                 max_correction_rad=stage['max_correction_rad'],seconds=stage['move_seconds'])
         else:

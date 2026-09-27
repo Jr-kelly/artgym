@@ -51,7 +51,7 @@ class LocalG2:
     plus4 corrections to frozen thumb increments, total <=.025rad/step.
     """
     def __init__(self, task='H', num_envs=1, route='support', graphics=False,
-                 state_path=None, residual_span=.20, residual_speed=.60, hand_gravity=False):
+                 state_path=None, residual_span=.20, residual_speed=.60, hand_gravity=False, hand_gravity_compensation=False):
         self.task, self.n, self.route = task, num_envs, route
         self.goal_override = None  # only for explicitly scored physical preparation diagnostics
         self.thumb_first_stroke_q4_correction = 0.  # explicit diagnostic only, never changed by training
@@ -61,6 +61,13 @@ class LocalG2:
         self.steps = 660 if task == 'H' else 600
         self.dt = 1 / 30
         self.metadata = json.loads((DATA / 'physics.json').read_text())
+        self.gravity_model=None
+        self.gravity_torque=np.zeros((num_envs,20),dtype=np.float32)
+        self.gravity_applied_bias=np.zeros((num_envs,20),dtype=np.float32)
+        if hand_gravity_compensation:
+            assert hand_gravity
+            from scripts.g2_hand_gravity import HandGravity
+            self.gravity_model=HandGravity(self.metadata['robot_dof_properties']['stiffness'][7:27])
         self.source = {k: torch.as_tensor(v.copy()) for k, v in np.load(
             state_path or DATA / (task + '-actual-state.npz')).items()}
         self.cfg = OmegaConf.load(DATA / 'frozen-config.yaml')
@@ -130,7 +137,19 @@ class LocalG2:
                 p.flags = 0 if hand_gravity and name.startswith('hand_r_') else flag
             self.gym.set_actor_rigid_body_properties(env, robot, bodyprops)
             if i==0:
-                self.effective_gravity_flags=[int(p.flags) for p in self.gym.get_actor_rigid_body_properties(env,robot)]
+                effective=self.gym.get_actor_rigid_body_properties(env,robot)
+                self.effective_gravity_flags=[int(p.flags) for p in effective]
+                self.gravity_model_property_audit=None
+                if self.gravity_model is not None:
+                    errors=[]
+                    for name,prop in zip(self.metadata['robot_body_names'],effective):
+                        if name not in self.gravity_model.masses:continue
+                        mass,com=self.gravity_model.masses[name]
+                        mass_error=abs(prop.mass-mass)
+                        com_error=float(np.linalg.norm(np.array([prop.com.x,prop.com.y,prop.com.z])-com))
+                        errors.append(dict(link=name,mass_error_kg=mass_error,com_error_m=com_error))
+                    assert errors and max(r['mass_error_kg'] for r in errors)<1e-7 and max(r['com_error_m'] for r in errors)<1e-7
+                    self.gravity_model_property_audit=errors
             shapes = self.gym.get_actor_rigid_shape_properties(env, robot)
             assert len(shapes) == len(self.metadata['collision_filters'])
             for p, filt in zip(shapes, self.metadata['collision_filters']):
@@ -231,6 +250,8 @@ class LocalG2:
         self.age[ids] = 0
         self.residual[ids] = 0
         self.last_action[ids] = 0
+        self.gravity_torque[ids.numpy()] = 0
+        self.gravity_applied_bias[ids.numpy()] = 0
         self.object[ids] = self.source['object_rigid_state'].float()
         self.slider_pose[ids] = self.source['slider_rigid_state'].float()
         self.wrist[ids] = 0
@@ -351,8 +372,18 @@ class LocalG2:
             self.teacher.last_action[:, 16:] = (self.targets[:, 23:27] - previous_thumb) / .025
         self.integral += self.dt * (self.targets[:, :7] - self.dof[:, :7, 0])
         self.integral.clamp_(-.08, .08)
+        previous_hand_command=self.command[:,7:27].clone() if self.gravity_model is not None else None
         self.command[:] = self.targets
         self.command[:, :7] = torch.max(self.lower[:7], torch.min(self.upper[:7], self.targets[:, :7] + self.integral))
+        if self.gravity_model is not None:
+            for index in range(self.n):
+                bias,torque=self.gravity_model.bias(self.dof[index,:27,0].numpy())
+                desired=self.targets[index,7:27]+torch.tensor(bias,dtype=torch.float32)
+                slew=torch.tensor([.02]*16+[.025]*4)
+                desired=previous_hand_command[index]+torch.max(-slew,torch.min(slew,desired-previous_hand_command[index]))
+                self.command[index,7:27]=torch.max(self.lower[7:27],torch.min(self.upper[7:27],desired))
+                self.gravity_torque[index]=torque
+                self.gravity_applied_bias[index]=(self.command[index,7:27]-self.targets[index,7:27]).numpy()
         self.gym.set_dof_position_target_tensor(self.sim, gymtorch.unwrap_tensor(self.command))
         old_goal = self.goal().clone()
         for _ in range(4):
@@ -455,6 +486,8 @@ class LocalG2:
             fixed_object_reference=self.initial_object.numpy().copy(),
             object_hand=local_pose(self.wrist,self.object).numpy().copy(),
             fixed_hand_reference=self.initial_local.numpy().copy())
+        if self.gravity_model is not None:
+            frame.update(hand_gravity_model_torque=self.gravity_torque.copy(),hand_gravity_applied_motor_bias=self.gravity_applied_bias.copy())
         if self.teacher is not None:
             frame.update(teacher_raw_action=self.teacher.raw_action.numpy().copy(),
                 teacher_action=self.teacher.last_action.numpy().copy(),

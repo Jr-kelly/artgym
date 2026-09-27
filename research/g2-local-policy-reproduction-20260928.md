@@ -194,3 +194,33 @@ The alternate gait controller uses `--gait-arm-retarget-reference configs/g2_loc
 on the continuous command above. It preserves hand commands/gates and transforms the nominal wrist path
 at the actual gait motor-reference boundary. This is a separately named development variant; its
 geometric prechecks do not establish physical success and it is not part of the frozen validation.
+
+
+## Separate hand-gravity motor compensation diagnostic
+
+```bash
+bash scripts/g2_local_python.sh -m scripts.run_g2_local \
+  --task S --baseline learned --num-envs 2 --episodes 1 \
+  --state configs/g2_local/S-after-continuous-learned-H-state.npz \
+  --checkpoint runs/g2-local-policy-20260928/B4-S-joint-path/checkpoint-00025.pth \
+  --hand-gravity --hand-gravity-compensation --video \
+  --output runs/g2-local-policy-20260928/my-gravity-motor-S
+```
+
+R10-01 passes2/2 local S under hand gravity ON; no continuous gravity-ON success is established yet.
+The bias is URDF-modeled static gravity torque / actual per-joint position stiffness, capped±.08rad.
+This changes robot motor targets only, with original total .02/.025rad per-step support/thumb slew and
+joint limits. Mass/COM values are checked against loaded simulator properties; gains, effort limits,
+friction and all other physical parameters remain unchanged. H uses `--task H`, the default actual
+H state (remove the S `--state` option), and A1-H-pilot/checkpoint-00010.pth. The paired H without
+feedforward omits only `--hand-gravity-compensation`.
+
+The policy observes nominal pre-feedforward targets. Raw actuator targets and
+`hand_gravity_model_torque` / `hand_gravity_applied_motor_bias` are separately saved. These torques
+are model predictions, not measurements; this is neither hidden applied force nor real calibration.
+
+The separate continuous gait variant adds `--gait-translation-before-alignment` alongside the
+retarget option. It may physically translate the held knife toward the original fixed gait reference
+by at most4mm over1s, hold1s, and then apply the **unchanged** original5mm alignment gate. The
+planned knife trajectory and actual tracking/fixed-reference errors are saved. It cannot reset poses,
+refresh the scoring reference or relax the alignment gate. Physical result pending until its report.

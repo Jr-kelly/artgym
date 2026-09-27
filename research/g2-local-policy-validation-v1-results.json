@@ -1,0 +1,417 @@
+{
+  "updated_utc": "2026-09-27T21:25:48.861626+00:00",
+  "manifest_sha256": "9e42be7bee055b3d5d35f6d5e536f573f1ea95547bc931ea8615847562db305c",
+  "planned": 20,
+  "finished": 20,
+  "acquisition_successes": 0,
+  "conditional_operation_successes": 0,
+  "whole_successes": 0,
+  "trials": [
+    {
+      "name": "g2-local-policy-validation-v1-00",
+      "placement": 0,
+      "dx_m": -0.0005761785241515083,
+      "dy_m": -0.00410628888932931,
+      "yaw_deg": -0.08909104833548409,
+      "status": "failed",
+      "grasp_success": false,
+      "operation_entered": false,
+      "operation_success": false,
+      "whole_success": false,
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "Gait fixed-reference stability failed: held_next_rotation10_5",
+        "steps": 1320,
+        "last_phase": "gait_held_next_rotation10_5",
+        "group": "B",
+        "physics_trace_preserved": true
+      }
+    },
+    {
+      "name": "g2-local-policy-validation-v1-01",
+      "placement": 1,
+      "dx_m": 0.004871844217498742,
+      "dy_m": -0.00468469268290142,
+      "yaw_deg": 0.04196555665955248,
+      "status": "failed",
+      "grasp_success": false,
+      "operation_entered": false,
+      "operation_success": false,
+      "whole_success": false,
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "Gait fixed-reference stability failed: held_translation_next8_4",
+        "steps": 960,
+        "last_phase": "gait_held_translation_next8_4",
+        "group": "B",
+        "physics_trace_preserved": true
+      }
+    },
+    {
+      "name": "g2-local-policy-validation-v1-02",
+      "placement": 2,
+      "dx_m": -0.004981292002563353,
+      "dy_m": -0.0028060291432097247,
+      "yaw_deg": 0.5909996965763566,
+      "status": "failed",
+      "grasp_success": false,
+      "operation_entered": false,
+      "operation_success": false,
+      "whole_success": false,
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "Required support contact not sustained: held_translation_next8_support_hold digit 2",
+        "steps": 990,
+        "last_phase": "gait_held_translation_next8_support_hold",
+        "group": "B",
+        "physics_trace_preserved": true
+      }
+    },
+    {
+      "name": "g2-local-policy-validation-v1-03",
+      "placement": 3,
+      "dx_m": 0.0038042833986484826,
+      "dy_m": 0.00416130176869026,
+      "yaw_deg": -1.0145606786369583,
+      "status": "failed",
+      "grasp_success": false,
+      "operation_entered": false,
+      "operation_success": false,
+      "whole_success": false,
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "Gait fixed-reference stability failed: held_translation_next8_support_hold",
+        "steps": 990,
+        "last_phase": "gait_held_translation_next8_support_hold",
+        "group": "B",
+        "physics_trace_preserved": true
+      }
+    },
+    {
+      "name": "g2-local-policy-validation-v1-04",
+      "placement": 4,
+      "dx_m": 6.680837891766989e-05,
+      "dy_m": 0.0017539295941979161,
+      "yaw_deg": 0.21804765046821561,
+      "status": "failed",
+      "grasp_success": false,
+      "operation_entered": false,
+      "operation_success": false,
+      "whole_success": false,
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "Air-flip IK/clearance precheck failed: {'control_frame': 115, 'ik': {'position_m': 0.005873623429236324, 'rotation_rad': 0.025042973410550836, 'max_joint_step_rad': 0.13866665418379742, 'joint_margin_rad': 2.220446049250313e-16}, 'arm_palm_table_collisions': []}",
+        "steps": 390,
+        "last_phase": "lift",
+        "group": "B",
+        "physics_trace_preserved": true
+      }
+    },
+    {
+      "name": "g2-local-policy-validation-v1-05",
+      "placement": 5,
+      "dx_m": -0.0032443304917945492,
+      "dy_m": -0.0009973405810038488,
+      "yaw_deg": 1.1047134935800695,
+      "status": "failed",
+      "grasp_success": false,
+      "operation_entered": false,
+      "operation_success": false,
+      "whole_success": false,
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "Gait fixed-reference stability failed: held_after12_rotation10_1",
+        "steps": 1020,
+        "last_phase": "gait_held_after12_rotation10_1",
+        "group": "B",
+        "physics_trace_preserved": true
+      }
+    },
+    {
+      "name": "g2-local-policy-validation-v1-06",
+      "placement": 6,
+      "dx_m": 0.004428649156515455,
+      "dy_m": -0.0010056398451087733,
+      "yaw_deg": 1.3365135546881697,
+      "status": "failed",
+      "grasp_success": false,
+      "operation_entered": false,
+      "operation_success": false,
+      "whole_success": false,
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "Gait fixed-reference stability failed: held_after12_rotation10_1",
+        "steps": 1020,
+        "last_phase": "gait_held_after12_rotation10_1",
+        "group": "B",
+        "physics_trace_preserved": true
+      }
+    },
+    {
+      "name": "g2-local-policy-validation-v1-07",
+      "placement": 7,
+      "dx_m": 0.0026206539719707544,
+      "dy_m": 0.0029713849664495216,
+      "yaw_deg": 1.4585814898966412,
+      "status": "failed",
+      "grasp_success": false,
+      "operation_entered": false,
+      "operation_success": false,
+      "whole_success": false,
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "One-shot alignment outside declared small-error bounds",
+        "steps": 1350,
+        "last_phase": "gait_held_next_rotation10_support_hold",
+        "group": "B",
+        "physics_trace_preserved": true
+      }
+    },
+    {
+      "name": "g2-local-policy-validation-v1-08",
+      "placement": 8,
+      "dx_m": 0.0007534187275179538,
+      "dy_m": -6.471046556756566e-05,
+      "yaw_deg": -0.6576233537843554,
+      "status": "failed",
+      "grasp_success": false,
+      "operation_entered": false,
+      "operation_success": false,
+      "whole_success": false,
+      "failure": {
+        "exception_type": "ArgumentParserError",
+        "message": "Before simulation: argparse rejects separate-token negative scientific-notation --dy; same numerical placement retry preregistered",
+        "steps": 0,
+        "last_phase": null,
+        "physics_trace_preserved": false,
+        "physics_started": false,
+        "original_log": "runs/g2-local-policy-20260928/g2-local-policy-validation-v1-08.log",
+        "recorded_utc": "2026-09-27T21:11:28.714579+00:00"
+      }
+    },
+    {
+      "name": "g2-local-policy-validation-v1-09",
+      "placement": 9,
+      "dx_m": 0.0022818854312700023,
+      "dy_m": -0.0020884289624488912,
+      "yaw_deg": -0.9703752204298297,
+      "status": "failed",
+      "grasp_success": false,
+      "operation_entered": false,
+      "operation_success": false,
+      "whole_success": false,
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "One-shot alignment outside declared small-error bounds",
+        "steps": 1350,
+        "last_phase": "gait_held_next_rotation10_support_hold",
+        "group": "B",
+        "physics_trace_preserved": true
+      }
+    },
+    {
+      "name": "g2-local-policy-validation-v1-10",
+      "placement": 10,
+      "dx_m": -0.0013500955979687463,
+      "dy_m": 0.003289609837432993,
+      "yaw_deg": -1.824715015218645,
+      "status": "failed",
+      "grasp_success": false,
+      "operation_entered": false,
+      "operation_success": false,
+      "whole_success": false,
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "Gait fixed-reference stability failed: held_next_rotation10_5",
+        "steps": 1320,
+        "last_phase": "gait_held_next_rotation10_5",
+        "group": "B",
+        "physics_trace_preserved": true
+      }
+    },
+    {
+      "name": "g2-local-policy-validation-v1-11",
+      "placement": 11,
+      "dx_m": -0.0036906531818447566,
+      "dy_m": 0.004901714666307271,
+      "yaw_deg": -1.4594330745919457,
+      "status": "failed",
+      "grasp_success": false,
+      "operation_entered": false,
+      "operation_success": false,
+      "whole_success": false,
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "Knife not retained throughout free-space flip",
+        "steps": 690,
+        "last_phase": "air_flip",
+        "group": "B",
+        "physics_trace_preserved": true
+      }
+    },
+    {
+      "name": "g2-local-policy-validation-v1-12",
+      "placement": 12,
+      "dx_m": 0.001829845617778456,
+      "dy_m": -0.003555662306450271,
+      "yaw_deg": -0.5768682840271258,
+      "status": "failed",
+      "grasp_success": false,
+      "operation_entered": false,
+      "operation_success": false,
+      "whole_success": false,
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "Air-flip IK/clearance precheck failed: {'control_frame': 115, 'ik': {'position_m': 0.0037817465171997304, 'rotation_rad': 0.01710927892093999, 'max_joint_step_rad': 0.10263584271068482, 'joint_margin_rad': 2.220446049250313e-16}, 'arm_palm_table_collisions': []}",
+        "steps": 390,
+        "last_phase": "lift",
+        "group": "B",
+        "physics_trace_preserved": true
+      }
+    },
+    {
+      "name": "g2-local-policy-validation-v1-13",
+      "placement": 13,
+      "dx_m": -0.0025941799891811435,
+      "dy_m": 0.0007863525903116631,
+      "yaw_deg": 1.916229716507973,
+      "status": "failed",
+      "grasp_success": false,
+      "operation_entered": false,
+      "operation_success": false,
+      "whole_success": false,
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "Required support contact not sustained: held_translation_next8_support_hold digit 2",
+        "steps": 990,
+        "last_phase": "gait_held_translation_next8_support_hold",
+        "group": "B",
+        "physics_trace_preserved": true
+      }
+    },
+    {
+      "name": "g2-local-policy-validation-v1-14",
+      "placement": 14,
+      "dx_m": 0.00338341920669077,
+      "dy_m": 0.00245164046050536,
+      "yaw_deg": 0.7665769887974756,
+      "status": "failed",
+      "grasp_success": false,
+      "operation_entered": false,
+      "operation_success": false,
+      "whole_success": false,
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "Required support contact not sustained: held_after12_rotation10_support_hold digit 2",
+        "steps": 1170,
+        "last_phase": "gait_held_after12_rotation10_support_hold",
+        "group": "B",
+        "physics_trace_preserved": true
+      }
+    },
+    {
+      "name": "g2-local-policy-validation-v1-15",
+      "placement": 15,
+      "dx_m": 0.001058715350370051,
+      "dy_m": -0.0033608709660627534,
+      "yaw_deg": -0.2349138118290821,
+      "status": "failed",
+      "grasp_success": false,
+      "operation_entered": false,
+      "operation_success": false,
+      "whole_success": false,
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "Knife not retained throughout free-space flip",
+        "steps": 690,
+        "last_phase": "air_flip",
+        "group": "B",
+        "physics_trace_preserved": true
+      }
+    },
+    {
+      "name": "g2-local-policy-validation-v1-16",
+      "placement": 16,
+      "dx_m": -0.0022295858531253877,
+      "dy_m": 0.003800869681475654,
+      "yaw_deg": -1.3922166542764158,
+      "status": "failed",
+      "grasp_success": false,
+      "operation_entered": false,
+      "operation_success": false,
+      "whole_success": false,
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "One-shot alignment outside declared small-error bounds",
+        "steps": 1350,
+        "last_phase": "gait_held_next_rotation10_support_hold",
+        "group": "B",
+        "physics_trace_preserved": true
+      }
+    },
+    {
+      "name": "g2-local-policy-validation-v1-17",
+      "placement": 17,
+      "dx_m": -0.0015945516155933882,
+      "dy_m": -0.001515621863785518,
+      "yaw_deg": 0.861580061806793,
+      "status": "failed",
+      "grasp_success": false,
+      "operation_entered": false,
+      "operation_success": false,
+      "whole_success": false,
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "Gait fixed-reference stability failed: held_next_rotation10_5",
+        "steps": 1320,
+        "last_phase": "gait_held_next_rotation10_5",
+        "group": "B",
+        "physics_trace_preserved": true
+      }
+    },
+    {
+      "name": "g2-local-policy-validation-v1-18",
+      "placement": 18,
+      "dx_m": -0.00403974708764673,
+      "dy_m": 0.00013349015239409346,
+      "yaw_deg": 1.7291024714056369,
+      "status": "failed",
+      "grasp_success": false,
+      "operation_entered": false,
+      "operation_success": false,
+      "whole_success": false,
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "Required support contact not sustained: held_translation_next8_support_hold digit 2",
+        "steps": 990,
+        "last_phase": "gait_held_translation_next8_support_hold",
+        "group": "B",
+        "physics_trace_preserved": true
+      }
+    },
+    {
+      "name": "g2-local-policy-validation-v1-19",
+      "placement": 19,
+      "dx_m": -0.00037395980172239717,
+      "dy_m": 0.0012528031842440168,
+      "yaw_deg": -1.7769955590562723,
+      "status": "failed",
+      "grasp_success": false,
+      "operation_entered": false,
+      "operation_success": false,
+      "whole_success": false,
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "Gait fixed-reference stability failed: held_next_rotation10_5",
+        "steps": 1320,
+        "last_phase": "gait_held_next_rotation10_5",
+        "group": "B",
+        "physics_trace_preserved": true
+      }
+    }
+  ],
+  "stopped_by_budget": false,
+  "charged_gpu_hours_upper_bound": 3.401722498239,
+  "all_finished": true,
+  "denominator": "All started trials, including planning/acquisition failures; unstarted cases reported separately"
+}

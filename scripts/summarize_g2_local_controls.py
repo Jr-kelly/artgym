@@ -29,6 +29,7 @@ def main():
         report=folder/'report.json'
         if report.exists():
             d=json.loads(report.read_text())
+            row_start=len(rows)
             if 'episodes' in d:local(folder.name,d['args']['task'],d['episodes'])
             elif (folder/'learned-hold.json').exists() and not d.get('operation_steps'):
                 h=json.loads((folder/'learned-hold.json').read_text())
@@ -39,11 +40,19 @@ def main():
             else:
                 rows.append(dict(run=folder.name,scope='continuous table acquisition and operation',task='S',episode=0,replica=0,
                     complete=d.get('operation_steps')==600,local_success=None,
-                    continuous_success=d.get('whole_stable_success',False) and d.get('operation_steps')==600,
+                    continuous_success=d.get('required_task_success',d.get('whole_stable_success',False)) and d.get('operation_steps')==600,
                     world_stable=d.get('stable_world_10mm_025rad'),endpoint_10mm=d.get('basic_10mm'),endpoint_2mm=d.get('strict_2mm'),
                     world_drift_mm=d.get('world_drift_max_m',0)*1000,world_rotation_rad=d.get('world_rotation_max_rad'),
                     slider_travel_mm=d.get('slider_travel_m',0)*1000,endpoints_mm=json.dumps([e['max_error_m']*1000 for e in d.get('endpoints',[])]),
                     failure=d.get('failure_class'),raw=str(folder/'trace.npz')))
+            args=d.get('args',{})
+            for row in rows[row_start:]:
+                row.update(input_ablation=args.get('input_ablation'),
+                    hand_gravity_diagnostic=bool(args.get('hand_gravity',False)),
+                    hand_gravity_motor_feedforward=bool(args.get('hand_gravity_compensation',False)),
+                    gait_arm_retarget=bool(args.get('gait_arm_retarget_reference')),
+                    physical_translation_alignment=bool(args.get('gait_translation_before_alignment')),
+                    baseline=args.get('baseline'),checkpoint=args.get('checkpoint',args.get('learned_operation_policy')))
         elif (folder/'failure.json').exists():
             d=json.loads((folder/'failure.json').read_text());rows.append(dict(run=folder.name,scope='continuous acquisition aborted',task='H',episode=0,replica=0,
                 complete=False,local_success=False,continuous_success=False,failure='measurement_gate_missing_before_learner: '+d['message'],raw=str(folder/'partial-trace.npz')))

@@ -13,7 +13,7 @@ from scripts.train_g2_local import ActorCritic
 
 class LocalPolicyRuntime:
     def __init__(self, checkpoint, positions, velocities, targets, wrist, obj, slider,
-                 reset_quaternion_compat=False):
+                 reset_quaternion_compat=False, input_ablation=None):
         artifact = torch.load(checkpoint, map_location='cpu')
         self.task, self.route = artifact['task'], artifact['route']
         self.thumb_plan = artifact.get('thumb_plan')
@@ -39,10 +39,15 @@ class LocalPolicyRuntime:
         self.update_state(positions,velocities,wrist,obj,slider)
         self.initial_object = self.object[:,:7].clone()
         self.initial_local = local_pose(self.wrist,self.object).clone()
+        self.input_estimator = None
+        if input_ablation:
+            assert self.task=='S' and self.route=='joint' and self.thumb_plan is not None
+            from scripts.g2_input_ablation import InputAblation
+            self.input_estimator=InputAblation(input_ablation,self.object,self.dof[:,27,0],self.dof[:,:27,0])
         self.model = ActorCritic(artifact['obs_dim'],self.action_dim)
         self.model.load_state_dict(artifact['model'])
         self.model.eval()
-        self.last_observation = LocalG2.observation(self)
+        self.last_observation = LocalG2.observation(self) if self.input_estimator is None else torch.zeros(1,artifact['obs_dim'])
         self.checkpoint = str(checkpoint)
 
     goal = LocalG2.goal
@@ -67,7 +72,14 @@ class LocalPolicyRuntime:
             quat = self.wrist[0,3:7]
             if quat[quat.abs().argmax()] < 0:
                 self.wrist[0,3:7] *= -1
-        self.last_observation = LocalG2.observation(self)
+        if self.input_estimator is None:
+            self.last_observation = LocalG2.observation(self)
+        else:
+            live=self.input_estimator.mode=='fixed-body-live-slider'
+            self.last_observation=self.input_estimator.observation(self.dof[:,:27,0],self.dof[:,:27,1],self.targets,
+                self.age,self.residual,self.last_action,self.goal(),self.lower,self.upper,self.slider_lower,
+                live_slider=self.dof[:,27,0] if live else None,
+                live_slider_velocity=self.dof[:,27,1] if live else None)
         self.wrist[:] = raw_wrist
         with torch.no_grad():
             action = self.model.mean_action(self.last_observation)
@@ -103,7 +115,7 @@ class LocalPolicyRuntime:
         return self.targets[0,7:27].numpy().copy()
 
     def description(self):
-        return dict(checkpoint=self.checkpoint,task=self.task,route=self.route,
+        result=dict(checkpoint=self.checkpoint,task=self.task,route=self.route,
             method='new learned controller, not unchanged full teacher',
             thumb_prior='kinematic material-point motor trajectory' if self.thumb_plan is not None else 'frozen teacher thumb',
             static_support=self.static_support,
@@ -115,3 +127,11 @@ class LocalPolicyRuntime:
             reference='fixed once at actual continuous takeover',span_rad=self.span,speed_rad_s=self.speed,
             thumb_joint_route=('absolute geometric prior + learned .20rad offset/.60rad per s slew, TOTAL capped .025rad/step and original limits' if self.thumb_plan is not None else 'frozen nominal + learned .025rad/step correction, TOTAL clipped .025rad/step and original limits; actual thumb action fed back'),
             physics_writes='none; returns robot hand motor targets only')
+        if self.input_estimator is not None:
+            result.update(input_ablation=self.input_estimator.description(),
+                inputs=self.input_estimator.description()['live_inputs'],
+                privileged=True,deployable=False,
+                privilege_scope='ideal one-time operation initialization; acquisition and H remain privileged',
+                live_operation_object_pose=False,
+                live_operation_slider=self.input_estimator.mode=='fixed-body-live-slider')
+        return result

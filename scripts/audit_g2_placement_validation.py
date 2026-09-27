@@ -51,10 +51,13 @@ def audit(folder):
         'gait_support_contact' if 'Required support contact' in message else
         'gait_stability' if 'Gait fixed-reference' in message else
         'alignment_bounds' if 'One-shot alignment outside' in message else
+        'flip_retention' if 'not retained throughout free-space flip' in message else
         'other_failure' if failure else 'completed')
     return dict(trace=str(path), trace_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
         frames=len(phases), final_phase=str(phases[-1]), failure=failure,
         failure_category=category, pickup_retained_at_lift_end=pickup,
+        first_failed_stage=('pickup' if not pickup else 'flip' if not flip.get('retained',False) else
+            'gait' if failure else None),
         flip_pass=bool(flip.get('retained',False)), flip_check=flip,
         first_failed_gait_check=bad[0] if bad else None,
         gait_checks=gait, stages=rows,
@@ -86,6 +89,7 @@ def main():
         conditional_operation_success=(results['conditional_operation_successes']/results['acquisition_successes'] if results['acquisition_successes'] else None),
         whole_success=results['whole_successes'],failure_categories=categories,
         finger_order=['thumb','index','middle','ring','pinky'],trials=rows)
+    out['pickup_audit_definition']='Complete120-frame lift; last30 frames knife height>0.85m, no table contacts, some hand contact every frame. Diagnostic stage extraction; original acquisition/operation gates unchanged.'
     a.output.write_text(json.dumps(out,indent=2)+'\n')
     print(json.dumps({k:v for k,v in out.items() if k!='trials'}))
 

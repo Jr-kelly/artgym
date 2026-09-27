@@ -101,6 +101,8 @@ def main():
     parser.add_argument('--table-localization',choices=['configured','settled-truth'],default='configured',help='Acquisition-only ideal localization after natural tabletop settling.')
     parser.add_argument('--gait-plan',type=Path,help='Sequential single-digit motor plan with fixed-reference one-second hold gates after actual air flip.')
     parser.add_argument('--gait-arm-retarget-reference',type=Path,help='Explicit alternate controller: rigidly retarget original wrist path at actual gait motor reference; fingers and gates unchanged')
+    parser.add_argument('--operation-input-ablation',choices=['fixed-body-live-slider','fixed-body-proprio-slider'],help='S-only frozen-policy input diagnostic with ideal one-time initialization; acquisition/H still privileged')
+    parser.add_argument('--gait-translation-before-alignment',action='store_true',help='Separate control variant: physical4mm-capped translation then hold, original alignment5mm gate unchanged')
     parser.add_argument('--stay-after-gait',action='store_true',help='Keep achieved wrist pose for settling and optional policy operation; no transport.')
     parser.add_argument('--closeup',action='store_true',help='Additional synchronized camera; follows robot wrist, never affects physics.')
     parser.add_argument('--contact-diagnostics',action='store_true',help='Record whole-thumb conservative collision separation every control frame.')
@@ -528,7 +530,7 @@ def main():
                     continue
                 if label=='finger_gait':
                     from scripts.g2_finger_gait import execute_gait
-                    execute_gait(args.gait_plan,args.output,targets,hand_idx,arm_idx,current,tick,records,dt,k,policy.fk,table_z,retarget_reference=args.gait_arm_retarget_reference)
+                    execute_gait(args.gait_plan,args.output,targets,hand_idx,arm_idx,current,tick,records,dt,k,policy.fk,table_z,retarget_reference=args.gait_arm_retarget_reference,translate_before_alignment=args.gait_translation_before_alignment)
                     if args.post_gait_roll:
                         from scripts.g2_assembly_roll import execute_roll
                         reference=execute_roll(k,targets,arm_idx,current,tick,records,dt,arm_table_check,args.output,args.post_gait_roll,args.assembly_roll_seconds)
@@ -861,7 +863,7 @@ def main():
             from scripts.g2_local_runtime import LocalPolicyRuntime
             learned_runtime=LocalPolicyRuntime(args.learned_operation_policy,dof[:,0].cpu().numpy(),dof[:,1].cpu().numpy(),targets,
                 rb[wrist_id].cpu().numpy(),rb[obj_id].cpu().numpy(),rb[slider_id].cpu().numpy(),
-                reset_quaternion_compat=args.local_reset_quaternion_compat)
+                reset_quaternion_compat=args.local_reset_quaternion_compat,input_ablation=args.operation_input_ablation)
             assert learned_runtime.task=='S'
             (args.output/'learned-operation.json').write_text(json.dumps(learned_runtime.description(),indent=2)+'\n')
         if not args.only_grasp and ((args.group=='A' and preset_candidate is None) or grasp_success):

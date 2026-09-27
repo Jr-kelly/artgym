@@ -16,31 +16,49 @@ finger gait, learned 22 s holding, 2 s actual settling/history, then 20 s operat
 | Independent 22 s preparation H | 0.620 mm / 0.01554 rad; slider movement 0.038 mm |
 | Local S repeats from actual H-prepared state | 4/4, one placement; not four geometries |
 
+An independent full fixed-placement repeat R9-03 also passes with identical metrics (2/2 continuous runs, one geometry). Its separate raw audit passes.
 The first 2969 continuous frames exactly match the previously successful real H preparation.
 The frozen runtime reproduces all 600 operation commands within 1.2e-7 rad and observations within
 6e-7. Fifty actual history frames are retained; the new learners are feedforward. The controller
 never writes the physical knife/hand state after the initial scene setup, drives the slider,
 adds an attachment or applies an external force. Full trace and source audits are in the Release.
 
-## Current validation
+## Frozen placement validation completed
 
 The successful pipeline, source pin `8569f43c67817401`, H checkpoint10 and S checkpoint25 were frozen
-before declaring 20 new placements (seed 2026092801; x/y ±5 mm, yaw ±2°), committed as `8c4cce1`.
-The manifest SHA256 is `9e42be7bee055b3d5d35f6d5e536f573f1ea95547bc931ea8615847562db305c`.
-The running test is unchanged. Early failures occur in flip IK or finger-gait stability/contact,
-before operation; they cannot identify how the S policy would perform after a valid acquisition.
-Planner localization uses known simulation placement, so this is placement variation, not perception robustness.
+before declaring20 new placements (seed2026092801; x/y±5mm, yaw±2°), committed as `8c4cce1`.
+Manifest SHA256: `9e42be7bee055b3d5d35f6d5e536f573f1ea95547bc931ea8615847562db305c`.
+All20 distinct physical placements are complete: **0/20 whole successes, 0 entered operation**.
+Therefore conditional S success is **unmeasured**, not0%.
 
-One case failed before physics because argparse rejected a negative scientific-notation `--dy` value.
-Its log is retained. An explicitly identified retry will use `--dy=<same value>` with the same frozen
-code/controller. Report the failed launch separately from the 20 unique physical placements.
-Read the final machine-readable validation results before quoting a success rate; the set is still running.
+| Stage | Completed /20 |
+|---|---:|
+| Knife retained at end of lift | 18/20 |
+| Free-space flip retained | 16/20 |
+| Functional acquisition / policy takeover | 0/20 |
+| Complete two-cycle pipeline | 0/20 |
 
-Read-only code inspection found absolute nominal arm joint targets in the gait. A bounded geometric
-retargeting diagnostic preserves the actual motor-reference start and transforms the original wrist
-path. Initial nominal/failed-case screens pass IK and arm/table checks, but this has **no physical
-success evidence yet** and does not alter the frozen test. World-transform translation includes a
-rotation lever arm; it is not the distance the knife must slide in the hand.
+The lift-stage extraction checks the complete120-frame lift and its final30 frames: knife height>0.85m,
+no table contact and some hand contact each frame. It is an explicitly described diagnostic extraction;
+original acquisition/operation acceptance gates were not changed. Cases04/12 left the knife on the table
+before a subsequent flip-IK precheck failed. Two more cases lost retention during the flip. Of the16
+retained flips,9 failed gait stability,4 support contact and3 alignment bounds. All failures remain.
+Initial placements match the manifest to numerical precision; actual serialized physics matches the
+fixed successful run. Planner localization uses known simulation placement, not a real perception system.
+
+There were21 launches: case08 first failed argparse before physics on a negative scientific-notation
+`--dy`; one explicitly documented retry used `--dy=<identical value>`, the same immutable source,
+weights and all other parameters. The original failed launch/log is preserved. Its physical retry also
+failed gait stability. The test contains20 unique geometries, not21.
+See [per-placement table](g2-local-policy-validation-v1-stages.csv) and
+[complete physical results](g2-local-policy-validation-v1-physical-results.json).
+
+A separate development variant retargets the original **commanded wrist path** by a constant world
+transform at the actual gait motor-reference boundary, preserving hand targets, gates and physical state.
+At reused placement01 it reduces error enough to pass the former body-drift gate, but the next support
+hold fails middle-finger contact (5.935mm/.1893rad body motion still passes). It is not an acquisition
+success. The same predeclared variant is being checked on reused placement00. Neither reused case is
+new validation. World-transform translation contains a rotation lever arm, not knife slip inside the hand.
 
 ## Relevant comparisons
 
@@ -85,12 +103,32 @@ outputs join **live simulated knife pose/velocity and slider state** as policy i
 residual span±0.20 rad, slew0.60 rad/s, total thumb increment≤0.025 rad/control, original joint limits.
 The G2 arm servo and its integral state persist through every stage.
 
-Round8 is preregistered for six local executions without training: two fixed-body/live-slider input
-ablations; two one-time ideal initialization plus proprioceptive slider estimates; two privileged S
-runs with hand gravity enabled as a separate physical sensitivity. They wait for the frozen validation.
-Offline on the known success, thumb-point FK predicts slider position within2.264 mm maximum;
-this is neither a closed-loop test nor a deployable result. The estimator assumes stationary body and
-no contact slip. Robot/FK and quaternion input checks pass; physical results remain pending.
+Round8 completed six local diagnostics, with frozen B4cp25 and identical actual H-prepared source:
+
+| Input / physics diagnostic | Complete S passes | Limits of the finding |
+|---|---:|---|
+| Fixed initial body pose + live slider q/qd | 2/2 | Body1.994/2.141mm, .1199/.1851rad; endpoints<4.4mm; still privileged slider feedback |
+| Fixed initial body + slider estimated from robot FK | 1/2 | One passes; one loses slider contact at2.933s and world stability at3.633s; not reliable |
+| Original privileged controller, hand gravity ON only | 0/2 | Both first unstable1.033s; same frozen controller is sensitive to omitted hand gravity |
+
+Input variants use one ideal initial object/slider measurement. Their wrist comes from robot FK.
+Independent offline replay of actual evaluations matches1200 commands per mode within1.2e-7rad;
+poisoning excluded live object/wrist inputs (and slider q/qd in proprio mode) changes commands exactly0.
+This confirms the implemented input removal, not deployment readiness. Acquisition and H still use
+simulation truth; these are frozen-policy ablations, not a trained student.
+
+The proprioceptive estimate assumes a fixed thumb material point with no slip. On the failed replica,
+error reaches30.2mm by3.5s, before the body stability threshold; approximately29.0mm of that comes from
+failure of the no-slip material-point assumption and1.14mm from ignored body motion. The successful
+replica stays within2.55mm estimate error. The initial reset frame has an empty contact cache; first
+contact establishes at1/30s, and it is excluded when identifying loss after establishment. This narrows
+the diagnosis but does not prove all proprioceptive estimation impossible.
+
+Gravity changes were verified on exactly26 hand bodies. No other physical parameter changed.
+The bounded motor-only gravity-feedforward S comparison R10-01 now independently passes2/2 under hand gravity ON:2.658/2.664mm and .10852/.10636rad; endpoints<3.5mm, strict2mm fails. H comparisons and continuous promotion remain pending. Controller:
+URDF modeled gravity divided by actual PD stiffness, target bias capped±.08rad, original total target
+slew/joint limits retained. Offline torque agrees independent potential-energy derivatives; initial
+required bias is≤.06344rad and fits original limits. These are model torques, not measured forces.
 
 Baseline hand gravity is OFF; G2 arm gravity is ON. Original servo, collision filtering, friction,
 masses and freely sliding knife joint are unchanged and uncalibrated on hardware. No real detent/lock
@@ -104,6 +142,6 @@ force has been measured. These constraints materially limit sim-to-real claims.
 - Local browser: http://127.0.0.1:8767/g2-local-policy-20260928/
 - [Reproduction commands](g2-local-policy-reproduction-20260928.md), [full preregistration/journal](g2-local-policy-20260928.md), [control ledger](g2-local-policy-control-results-20260928.csv)
 
-Next: complete all frozen placements, separate acquisition failures from conditional operation,
-then execute the preregistered input/gravity diagnostics. Any changed gait must be explicitly separated
-from this frozen test; current test placements become development data if reused.
+Next: finish the bounded gait-coordinate comparison and independent fixed continuous repetition;
+then the preregistered motor-only gravity comparison. No fifth training configuration. Any changed
+method requires a newly declared test set before a new-placement success claim.

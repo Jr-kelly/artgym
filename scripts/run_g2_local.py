@@ -23,6 +23,7 @@ def main():
     p.add_argument('--checkpoint', type=Path)
     p.add_argument('--input-ablation',choices=['fixed-body-live-slider','fixed-body-proprio-slider'],help='Frozen policy diagnostic using one ideal initialization; not a trained student')
     p.add_argument('--hand-gravity',action='store_true',help='Independent physics sensitivity: turn hand gravity ON, all other properties unchanged')
+    p.add_argument('--hand-gravity-compensation',action='store_true',help='Explicit control variant: URDF modeled gravity/K motor feedforward capped .08rad; original total motor slew and limits')
     p.add_argument('--teacher', type=Path, default=TEACHER)
     p.add_argument('--teacher-device', default='cpu')
     p.add_argument('--steps', type=int)
@@ -34,6 +35,7 @@ def main():
     p.add_argument('--thumb-first-stroke-q4-correction', type=float, default=0., help='Declared single-factor diagnostic, normalized additive q4 thumb correction only first5s; total increment remains capped .025rad/step')
     p.add_argument('--prepare-closed-seconds',type=float,default=0.,help='Explicit local diagnostic: physical closed-goal teacher preparation, separately scored, then a fresh20s external clock. No physics reset at boundary.')
     args = p.parse_args()
+    assert not args.hand_gravity_compensation or args.hand_gravity
     if args.input_ablation:
         assert args.task=='S' and args.baseline=='learned' and args.checkpoint and not args.prepare_closed_seconds
     if args.motor_replay:
@@ -50,11 +52,14 @@ def main():
     if plan is not None:
         assert args.task=='S' and args.baseline in ['learned','learned-static'] and not args.thumb_first_stroke_q4_correction and not args.prepare_closed_seconds
     args.output.mkdir(parents=True, exist_ok=False)
-    env = LocalG2(args.task, args.num_envs, args.route, graphics=args.video,state_path=args.state,hand_gravity=args.hand_gravity)
+    env = LocalG2(args.task, args.num_envs, args.route, graphics=args.video,state_path=args.state,hand_gravity=args.hand_gravity,hand_gravity_compensation=args.hand_gravity_compensation)
     (args.output/'physics-diagnostic.json').write_text(json.dumps(dict(hand_gravity_on=args.hand_gravity,
         effective_robot_gravity_flags=env.effective_gravity_flags,
         baseline_robot_gravity_flags=env.metadata['robot_gravity_flags'],
-        scope='Only explicit hand gravity override; baseline configuration otherwise unchanged'),indent=2)+'\n')
+        hand_gravity_compensation=args.hand_gravity_compensation,
+        gravity_model_vs_actual_properties=env.gravity_model_property_audit,
+        policy_reference='nominal motor reference before G2 integral and optional hand gravity feedforward; actual actuator targets logged separately',
+        scope='Only explicit hand gravity override; baseline physical parameters otherwise unchanged. Feedforward, when requested, changes motor commands only.'),indent=2)+'\n')
     assert abs(args.thumb_first_stroke_q4_correction) <= 1.
     env.thumb_first_stroke_q4_correction = args.thumb_first_stroke_q4_correction
     env.thumb_plan=plan
