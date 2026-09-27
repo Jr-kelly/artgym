@@ -894,6 +894,8 @@ def main():
             student_sha256=hashlib.sha256(args.student.read_bytes()).hexdigest() if args.group=='C' else None,
             model_sha256=model['urdf_sha256'],initial_state_writes='only before first physics step',
             slider_drive_stiffness=0.,object_external_forces=False,object_constraints=False)
+        report['operation_controller']=learned_runtime.description() if learned_runtime is not None else dict(method='original actor',action_mode=args.policy_action_mode,student=args.group=='C')
+        report['original_actor_executed_in_operation']=bool(report['operation_steps'] and (learned_runtime is None or learned_runtime.thumb_plan is None))
         (args.output/'report.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report),flush=True)
     except Exception as error:
         failure=dict(exception_type=type(error).__name__,message=str(error),steps=global_step,
@@ -932,6 +934,7 @@ def score(trace,takeover,group):
                 out['acquisition_stage_failure']='dropped_during_'+phase;break
     if not sel.any():
         out.update(whole_success=False,operation_success_given_grasp=None,
+                   required_task_success=False,operation_complete_20s=False,
                    whole_success_evaluated=not takeover['grasp_success'],
                    failure_class=out.get('acquisition_stage_failure') if not takeover['grasp_success'] else 'operation_not_requested')
         return out
@@ -947,8 +950,10 @@ def score(trace,takeover,group):
     for start in range(0,len(slider),150):
         end=min(start+150,len(slider));error=np.abs(slider[max(start,end-9):end]-goal[max(start,end-9):end])
         endpoints.append(dict(stage=len(endpoints),max_error_m=float(error.max()),final_error_m=float(error[-1]),
-                              within_10mm=bool((error<.01).all()),within_2mm=bool((error<.002).all())))
-    basic=all(e['within_10mm'] for e in endpoints)
+                              complete_phase=end-start==150,
+                              within_10mm=bool(end-start==150 and (error<.01).all()),within_2mm=bool(end-start==150 and (error<.002).all())))
+    complete_20s=len(slider)==600 and len(endpoints)==4
+    basic=complete_20s and all(e['within_10mm'] for e in endpoints)
     held=(rel_drift<.05)&(rel_rotation<1.57)
     no_contacts=(trace['finger_knife_contacts'][sel]>0).sum(1)==0
     escaped=no_contacts & (rel_drift>.05)
@@ -965,14 +970,17 @@ def score(trace,takeover,group):
         failure_class='operation_drop' if physical_drop else ('operation_pose_escape' if not held.all() else ('operation_endpoint_error' if not basic else ('operation_unstable_drift' if not stable else None))),
         physical_drop_detected=physical_drop,major_relative_rotation=bool((rel_rotation>=1.57).any()),
         retained_within_pose_bounds=bool(held.all()),
-        strict_2mm=all(e['within_2mm'] for e in endpoints),
+        strict_2mm=complete_20s and all(e['within_2mm'] for e in endpoints),
+        operation_complete_20s=complete_20s,
         world_drift_max_m=float(drift.max()),world_rotation_max_rad=float(rotation.max()),
         hand_relative_drift_max_m=float(rel_drift.max()),hand_relative_rotation_max_rad=float(rel_rotation.max()),
         stable_world_10mm_025rad=bool((drift<.01).all() and (rotation<.25).all()),
         natural_no_drop=bool((rel_drift<.05).all() and (rel_rotation<1.57).all()),
         below_table=bool((obj[:,2]<table_height).any()),
-        whole_success=bool((group=='A' or takeover['grasp_success']) and basic and held.all() and not physical_drop and not acquisition_drop),
-        operation_success_given_grasp=bool(basic and held.all() and not physical_drop) if group!='A' else None,
+        legacy_endpoint_retention_success=bool((group=='A' or takeover['grasp_success']) and basic and held.all() and not physical_drop and not acquisition_drop),
+        whole_success=bool((group=='A' or takeover['grasp_success']) and basic and stable and not physical_drop and not acquisition_drop),
+        required_task_success=bool((group=='A' or takeover['grasp_success']) and basic and stable and not physical_drop and not acquisition_drop),
+        operation_success_given_grasp=bool(basic and stable and not physical_drop) if group!='A' else None,
         whole_stable_success=bool((group=='A' or takeover['grasp_success']) and basic and stable and not physical_drop and not acquisition_drop))
     return out
 

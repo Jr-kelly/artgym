@@ -94,7 +94,8 @@ class LocalPolicyRuntime:
             thumb_prior='kinematic material-point motor trajectory' if self.thumb_plan is not None else 'frozen teacher thumb',
             static_support=self.static_support,
             inputs='measured q/qd, commanded targets, fixed takeover reference, live simulator knife pose/velocity, wrist pose, slider state, external clock, previous learner output',
-            privileged=True, deployable=False, rnn='learner feedforward; frozen thumb teacher keeps original takeover RNN reset',
+            privileged=True, deployable=False,
+            rnn=('feedforward learner; frozen thumb actor/RNN not executed during operation' if self.thumb_plan is not None else 'learner feedforward; frozen thumb teacher keeps original takeover RNN reset'),
             reference='fixed once at actual continuous takeover',span_rad=self.span,speed_rad_s=self.speed,
             thumb_joint_route=('absolute geometric prior + learned .20rad offset/.60rad per s slew, TOTAL capped .025rad/step and original limits' if self.thumb_plan is not None else 'frozen nominal + learned .025rad/step correction, TOTAL clipped .025rad/step and original limits; actual thumb action fed back'),
             physics_writes='none; returns robot hand motor targets only')
