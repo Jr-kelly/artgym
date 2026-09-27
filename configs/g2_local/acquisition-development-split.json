@@ -1,0 +1,76 @@
+{
+  "scope": "predeclared optional actual acquisition sources; not final20placementvalidation",
+  "seed": 928731,
+  "conditions": [
+    {
+      "id": "acq-dev-00",
+      "dx_m": -0.051825,
+      "dy_m": -0.000768,
+      "yaw_deg": 180.1553,
+      "split": "train",
+      "run_status": "not_launched"
+    },
+    {
+      "id": "acq-dev-01",
+      "dx_m": -0.047073000000000004,
+      "dy_m": 0.0019,
+      "yaw_deg": 178.715,
+      "split": "train",
+      "run_status": "not_launched"
+    },
+    {
+      "id": "acq-dev-02",
+      "dx_m": -0.048369,
+      "dy_m": 0.000207,
+      "yaw_deg": 179.2631,
+      "split": "train",
+      "run_status": "not_launched"
+    },
+    {
+      "id": "acq-dev-03",
+      "dx_m": -0.047127,
+      "dy_m": 0.001039,
+      "yaw_deg": 178.9574,
+      "split": "train",
+      "run_status": "not_launched"
+    },
+    {
+      "id": "acq-dev-04",
+      "dx_m": -0.047787,
+      "dy_m": 0.001529,
+      "yaw_deg": 180.5336,
+      "split": "validation",
+      "run_status": "not_launched"
+    },
+    {
+      "id": "acq-dev-05",
+      "dx_m": -0.050329000000000006,
+      "dy_m": 0.002896,
+      "yaw_deg": 181.4197,
+      "split": "validation",
+      "run_status": "not_launched"
+    },
+    {
+      "id": "acq-dev-06",
+      "dx_m": -0.048547,
+      "dy_m": -0.000377,
+      "yaw_deg": 181.0083,
+      "split": "heldout-local-test",
+      "run_status": "not_launched"
+    },
+    {
+      "id": "acq-dev-07",
+      "dx_m": -0.048993,
+      "dy_m": -0.000485,
+      "yaw_deg": 180.1295,
+      "split": "heldout-local-test",
+      "run_status": "not_launched"
+    }
+  ],
+  "notes": [
+    "whole acquisition run is split unit, no adjacent-frame random splits",
+    "retain acquisition failures in acquisition denominator",
+    "collect only after current continuous-prefix evidence and scheduling decision",
+    "do not relabel these developmentplacements as finalunseenacceptance"
+  ]
+}

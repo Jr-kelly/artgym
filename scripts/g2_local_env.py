@@ -379,7 +379,7 @@ class LocalG2:
         return dict(finger_knife_contacts=counts.numpy(), finger_slider_contacts=slider.numpy(), knife_table_contacts=table.numpy())
 
     def frame(self):
-        return dict(time=self.age.numpy().copy()/30, q=self.dof[:, 7:27, 0].numpy().copy(),
+        frame = dict(time=self.age.numpy().copy()/30, q=self.dof[:, 7:27, 0].numpy().copy(),
             all_dof_position=self.dof[:, :, 0].numpy().copy(), dof_velocity=self.dof[:, :, 1].numpy().copy(),
             object_rigid_state=self.object.numpy().copy(), slider_rigid_state=self.slider_pose.numpy().copy(),
             wrist=self.wrist[:, :7].numpy().copy(), targets=self.command.numpy().copy(),
@@ -389,6 +389,11 @@ class LocalG2:
             fixed_object_reference=self.initial_object.numpy().copy(),
             object_hand=local_pose(self.wrist,self.object).numpy().copy(),
             fixed_hand_reference=self.initial_local.numpy().copy())
+        if self.teacher is not None:
+            frame.update(teacher_raw_action=self.teacher.raw_action.numpy().copy(),
+                teacher_action=self.teacher.last_action.numpy().copy(),
+                teacher_observation=self.teacher.last_obs.numpy().copy())
+        return frame
 
     def close(self):
         self.gym.destroy_sim(self.sim)
