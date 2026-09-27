@@ -103,6 +103,13 @@ def main():
     parser.add_argument('--closeup',action='store_true',help='Additional synchronized camera; follows robot wrist, never affects physics.')
     parser.add_argument('--contact-diagnostics',action='store_true',help='Record whole-thumb conservative collision separation every control frame.')
     args=parser.parse_args()
+    # A plan with clearance gates needs actual geometry measurements. Missing
+    # diagnostics used to reach step1989 then mislabel an absent value (-1)
+    # as a physical clearance failure. Enable the required measurement up front.
+    if args.gait_plan:
+        gait_requirements=json.loads(args.gait_plan.read_text())
+        if any('require_thumb_gap_m' in stage for stage in gait_requirements['stages']):
+            args.contact_diagnostics=True
     if args.learned_operation_policy:
         assert args.policy_action_mode=='thumb-only', 'Composite controller requires explicit teacher thumb-only channel'
     assert not args.learned_hold_policy or args.group!='A'

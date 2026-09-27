@@ -63,7 +63,7 @@ bash scripts/g2_local_python.sh -m scripts.run_g2_tabletop \
   --cartesian-acquisition --slider-face down --table-localization settled-truth \
   --air-flip 180 --lift-height .30 \
   --gait-plan configs/g2_local/prefix/candidate2-thumb-slider-contact-corridor-execution.json \
-  --stay-after-gait --seconds 20 --policy-action-mode thumb-only \
+  --stay-after-gait --contact-diagnostics --seconds 20 --policy-action-mode thumb-only \
   --learned-operation-policy /absolute/path/to/S-checkpoint.pth \
   --video --closeup --output runs/g2-local-policy-20260928/my-continuous-S
 ```
