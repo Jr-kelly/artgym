@@ -864,6 +864,14 @@ def main():
                 if learned_runtime is not None:
                     target=learned_runtime.step(dof[:,0].cpu().numpy(),dof[:,1].cpu().numpy(),
                         rb[wrist_id].cpu().numpy(),rb[obj_id].cpu().numpy(),rb[slider_id].cpu().numpy(),target)
+                    if learned_runtime.route=='joint':
+                        # Feed actual joint-composite thumb commands into both
+                        # incremental reference and next actor/history input.
+                        # Keep raw frozen action separately in the trace.
+                        action=action.copy()
+                        action[16:]=learned_runtime.executed_thumb_action[0].numpy()
+                        policy.last_action=action.copy()
+                        policy.control.previous_targets=target.copy()
                 targets[hand_idx]=target
                 tick('operate',action,policy.slider_initial+offset,obs)
         trace={k:np.asarray([r[k] for r in records]) for k in records[0]}

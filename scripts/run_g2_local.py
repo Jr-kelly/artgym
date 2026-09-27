@@ -37,7 +37,7 @@ def main():
         network = ActorCritic(env.observation().shape[-1], env.action_dim)
         network.load_state_dict(artifact['model'])
         network.eval()
-    if args.task == 'S' and (args.baseline in ['full-teacher', 'thumb-only'] or args.route == 'support' and args.baseline == 'learned'):
+    if args.task == 'S' and args.baseline in ['full-teacher', 'thumb-only', 'learned', 'learned-static']:
         from scripts.g2_local_teacher import BatchedTeacher
         env.teacher = BatchedTeacher(env, args.teacher, args.teacher_device)
     writer = camera = None

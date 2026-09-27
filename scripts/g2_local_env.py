@@ -47,7 +47,8 @@ class LocalG2:
 
     Residual changes motor reference only: <=0.20rad offset and <=0.60rad/s.
     Those are new control bounds, below asset velocity limits, not physics edits.
-    Action layout is nonthumb16 (route A) or all20 (route B).
+    Route A: support16 absolute bounded residuals. Route B: same support16,
+    plus4 corrections to frozen thumb increments, total <=.025rad/step.
     """
     def __init__(self, task='H', num_envs=1, route='support', graphics=False,
                  state_path=None, residual_span=.20, residual_speed=.60):
@@ -308,13 +309,22 @@ class LocalG2:
             raise ValueError('Action order/shape mismatch')
         previous_action = self.last_action.clone()
         self.last_action[:] = action
+        previous_thumb = self.targets[:, 23:27].clone()
         if self.teacher is not None and self.task == 'S':
             self.teacher.step(full=baseline == 'full-teacher')
         if baseline == 'learned':
-            wanted = action * self.span
-            self.residual += (wanted - self.residual).clamp(-self.speed * self.dt, self.speed * self.dt)
-            self.targets[:, 7:7 + self.action_dim] = self.source['reference_targets'][7:7 + self.action_dim] + self.residual
+            wanted = action[:, :16] * self.span
+            self.residual[:, :16] += (wanted - self.residual[:, :16]).clamp(-self.speed * self.dt, self.speed * self.dt)
+            self.targets[:, 7:23] = self.source['reference_targets'][7:23] + self.residual[:, :16]
+            if self.route == 'joint':
+                nominal_thumb = torch.max(self.lower[23:27], torch.min(self.upper[23:27], self.targets[:, 23:27]))
+                increment = (nominal_thumb - previous_thumb + .025 * action[:, 16:]).clamp(-.025, .025)
+                self.targets[:, 23:27] = torch.max(self.lower[23:27], torch.min(self.upper[23:27], previous_thumb + increment))
+                # Actual incremental correction, not fictitious force/offset.
+                self.residual[:, 16:] = self.targets[:, 23:27] - nominal_thumb
         self.targets[:, :27] = torch.max(self.lower, torch.min(self.upper, self.targets[:, :27]))
+        if self.route == 'joint' and self.teacher is not None:
+            self.teacher.last_action[:, 16:] = (self.targets[:, 23:27] - previous_thumb) / .025
         self.integral += self.dt * (self.targets[:, :7] - self.dof[:, :7, 0])
         self.integral.clamp_(-.08, .08)
         self.command[:] = self.targets

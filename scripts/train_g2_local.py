@@ -38,6 +38,30 @@ class ActorCritic(nn.Module):
         return self.actor(obs).clamp(-1, 1)
 
 
+def expand_support_checkpoint(model, saved):
+    """Exact support function preservation; zero-initialize added thumb output.
+
+    Feature order: base84, residual16/20, previous_action16/20.
+    No claim of imitation/success data: simply warm-start the shared network.
+    """
+    state = model.state_dict()
+    for key, old in saved['model'].items():
+        if old.shape == state[key].shape:
+            state[key].copy_(old)
+        elif key in ['actor.0.weight', 'critic.0.weight']:
+            state[key].zero_()
+            state[key][:, :100] = old[:, :100]
+            state[key][:, 104:120] = old[:, 100:116]
+        elif key in ['actor.4.weight', 'actor.4.bias']:
+            state[key].zero_()
+            state[key][:16] = old
+        elif key == 'logstd':
+            state[key][:16] = old
+        else:
+            raise ValueError('Unexpected checkpoint expansion: '+key)
+    model.load_state_dict(state)
+
+
 def main():
     process_start = time.monotonic()
     p = argparse.ArgumentParser()
@@ -63,7 +87,7 @@ def main():
     np.random.seed(args.seed)
     torch.set_num_threads(1)
     env = LocalG2(args.task, args.num_envs, args.route)
-    if args.task == 'S' and args.route == 'support':
+    if args.task == 'S':
         from scripts.g2_local_teacher import BatchedTeacher
         env.teacher = BatchedTeacher(env, args.teacher, 'cuda:0')
     obs = env.observation().cuda()
@@ -71,7 +95,12 @@ def main():
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, eps=1e-5)
     if args.checkpoint:
         saved = torch.load(args.checkpoint, map_location='cuda:0')
-        model.load_state_dict(saved['model'])
+        if saved['action_dim'] == 16 and env.action_dim == 20:
+            if args.resume_optimizer:
+                raise ValueError('Expanded joint controller requires a new optimizer')
+            expand_support_checkpoint(model, saved)
+        else:
+            model.load_state_dict(saved['model'])
         if args.resume_optimizer:
             optimizer.load_state_dict(saved['optimizer'])
     stopping = [False]
@@ -115,7 +144,9 @@ def main():
             transitions=transitions, episodes=episodes, learning_elapsed_seconds=time.monotonic()-clock,
             obs_dim=obs.shape[-1], action_dim=env.action_dim, task=args.task, route=args.route,
             source='configs/g2_local/'+args.task+'-actual-state.npz',
-            method='new privileged PPO motor residual; original weights unchanged'), str(path)+'.tmp')
+            method='new privileged PPO motor residual; original weights unchanged',
+            action_mapping='support16 absolute+slew; joint adds thumb4 increment corrections capped total .025rad/step',
+            terminal_return='absorbing -8/step gamma.995 through finite horizon'), str(path)+'.tmp')
         os.replace(str(path)+'.tmp', path)
 
     try:

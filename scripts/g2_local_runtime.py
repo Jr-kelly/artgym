@@ -56,10 +56,17 @@ class LocalPolicyRuntime:
         with torch.no_grad():
             action = self.model.mean_action(self.last_observation)
         self.last_action[:] = action
-        desired = action*self.span
-        self.residual += (desired-self.residual).clamp(-self.speed*self.dt,self.speed*self.dt)
+        desired = action[:, :16]*self.span
+        self.residual[:, :16] += (desired-self.residual[:, :16]).clamp(-self.speed*self.dt,self.speed*self.dt)
+        previous_thumb = self.targets[:,23:27].clone()
         self.targets[0,7:27] = torch.as_tensor(np.asarray(nominal_hand).copy())
-        self.targets[:,7:7+self.action_dim] = self.source['reference_targets'][7:7+self.action_dim]+self.residual
+        self.targets[:,7:23] = self.source['reference_targets'][7:23]+self.residual[:,:16]
+        if self.route == 'joint':
+            nominal_thumb = self.targets[:,23:27].clone()
+            increment = (nominal_thumb-previous_thumb+.025*action[:,16:]).clamp(-.025,.025)
+            self.targets[:,23:27] = torch.max(self.lower[23:27],torch.min(self.upper[23:27],previous_thumb+increment))
+            self.residual[:,16:] = self.targets[:,23:27]-nominal_thumb
+            self.executed_thumb_action = (self.targets[:,23:27]-previous_thumb)/.025
         self.targets[:,:27] = torch.max(self.lower,torch.min(self.upper,self.targets[:,:27]))
         self.age += 1
         return self.targets[0,7:27].numpy().copy()
@@ -70,4 +77,5 @@ class LocalPolicyRuntime:
             inputs='measured q/qd, commanded targets, fixed takeover reference, live simulator knife pose/velocity, wrist pose, slider state, external clock, previous learner output',
             privileged=True, deployable=False, rnn='learner feedforward; frozen thumb teacher keeps original takeover RNN reset',
             reference='fixed once at actual continuous takeover',span_rad=self.span,speed_rad_s=self.speed,
+            thumb_joint_route='frozen nominal + learned .025rad/step correction, TOTAL clipped .025rad/step and original limits; actual thumb action fed back',
             physics_writes='none; returns robot hand motor targets only')
