@@ -196,6 +196,7 @@ class LocalG2:
         self.endpoint_errors = torch.zeros(self.n, 4)
         self.min_slider = torch.zeros(self.n)
         self.max_slider = torch.zeros(self.n)
+        self.max_slider_goal_error = torch.zeros(self.n)
         self.first_unstable = torch.full((self.n,), -1, dtype=torch.long)
         self.ever_drop = torch.zeros(self.n, dtype=torch.bool)
         self.teacher = None
@@ -237,6 +238,7 @@ class LocalG2:
         self.endpoint_errors[ids] = 0
         self.min_slider[ids] = self.dof[ids, 27, 0]
         self.max_slider[ids] = self.dof[ids, 27, 0]
+        self.max_slider_goal_error[ids] = 0
         self.first_unstable[ids] = -1
         self.ever_drop[ids] = False
         if self.teacher is not None:
@@ -306,6 +308,7 @@ class LocalG2:
         drift = (self.object[:, :3] - self.initial_object[:, :3]).norm(dim=-1)
         rot = rotation_error(self.initial_object[:, 3:7], self.object[:, 3:7])
         err = (self.dof[:, 27, 0] - old_goal).abs()
+        self.max_slider_goal_error = torch.maximum(self.max_slider_goal_error, err)
         self.max_drift = torch.maximum(self.max_drift, drift)
         self.max_rotation = torch.maximum(self.max_rotation, rot)
         rel = local_pose(self.wrist, self.object)
@@ -349,9 +352,10 @@ class LocalG2:
     def metrics(self):
         complete = self.age >= self.steps
         stable = (self.max_drift < .01) & (self.max_rotation < .25) & ~self.ever_drop
-        endpoint = (self.endpoint_errors < .01).all(-1) if self.task == 'S' else torch.ones(self.n, dtype=torch.bool)
+        endpoint = (self.endpoint_errors < .01).all(-1) if self.task == 'S' else self.max_slider_goal_error < .01
         return dict(complete=complete, stable=stable, endpoints_10mm=endpoint,
-            endpoints_2mm=(self.endpoint_errors < .002).all(-1), success=complete & stable & endpoint,
+            endpoints_2mm=(self.endpoint_errors < .002).all(-1) if self.task=='S' else self.max_slider_goal_error < .002,
+            success=complete & stable & endpoint, maximum_slider_goal_error_m=self.max_slider_goal_error,
             world_drift_m=self.max_drift, world_rotation_rad=self.max_rotation,
             hand_relative_drift_m=self.max_hand_drift, hand_relative_rotation_rad=self.max_hand_rotation,
             endpoint_max_errors_m=self.endpoint_errors, slider_travel_m=self.max_slider-self.min_slider,
