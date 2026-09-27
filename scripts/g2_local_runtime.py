@@ -15,6 +15,7 @@ class LocalPolicyRuntime:
     def __init__(self, checkpoint, positions, velocities, targets, wrist, obj, slider):
         artifact = torch.load(checkpoint, map_location='cpu')
         self.task, self.route = artifact['task'], artifact['route']
+        self.goal_override = None
         self.n, self.dt, self.span, self.speed = 1, 1/30, .20, .60
         self.action_dim = artifact['action_dim']
         self.steps = 660 if self.task == 'H' else 600

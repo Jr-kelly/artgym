@@ -52,6 +52,7 @@ class LocalG2:
     def __init__(self, task='H', num_envs=1, route='support', graphics=False,
                  state_path=None, residual_span=.20, residual_speed=.60):
         self.task, self.n, self.route = task, num_envs, route
+        self.goal_override = None  # only for explicitly scored physical preparation diagnostics
         self.span, self.speed = residual_span, residual_speed
         self.action_dim = 16 if route == 'support' else 20
         self.steps = 660 if task == 'H' else 600
@@ -254,9 +255,30 @@ class LocalG2:
             dst[:] = self.rb[self.body_ids[key]]
 
     def goal(self):
+        if self.goal_override is not None:
+            return torch.full((self.n,), self.slider_lower + self.goal_override)
         if self.task == 'H':
             return self.source['slider'].float().expand(self.n)
         return self.slider_lower + ((self.age // 150) % 2 == 0).float() * .04
+
+    def start_operation_window(self):
+        """Once-only stage boundary: metrics/clock reference, NO physics reset.
+
+        Used only after an explicitly logged physical closed-goal preparation.
+        q/qd, object, motor targets, residual, integrator, teacher RNN/init/history
+        are untouched. Preparation is independently scored against its old ref.
+        """
+        self.goal_override = None
+        self.age.zero_()
+        self.initial_object[:] = self.object[:, :7]
+        self.initial_local[:] = local_pose(self.wrist,self.object)
+        for name in ['max_drift','max_rotation','max_hand_drift','max_hand_rotation','max_slider_goal_error']:
+            getattr(self,name).zero_()
+        self.endpoint_errors.zero_()
+        self.min_slider[:] = self.dof[:,27,0]
+        self.max_slider[:] = self.dof[:,27,0]
+        self.first_unstable.fill_(-1)
+        self.ever_drop.zero_()
 
     def observation(self):
         """Privileged upper bound: q/qd/refs, object+slider pose/vel, wrist, clock.

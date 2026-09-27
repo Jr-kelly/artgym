@@ -24,7 +24,10 @@ def main():
     p.add_argument('--teacher-device', default='cpu')
     p.add_argument('--steps', type=int)
     p.add_argument('--video', action='store_true')
+    p.add_argument('--prepare-closed-seconds',type=float,default=0.,help='Explicit local diagnostic: physical closed-goal teacher preparation, separately scored, then a fresh20s external clock. No physics reset at boundary.')
     args = p.parse_args()
+    if args.prepare_closed_seconds:
+        assert args.task=='S' and args.baseline in ['learned','thumb-only'] and 0<args.prepare_closed_seconds<=6
     args.output.mkdir(parents=True, exist_ok=False)
     env = LocalG2(args.task, args.num_envs, args.route, graphics=args.video)
     network = None
@@ -54,6 +57,30 @@ def main():
                 env.reset()
             if args.video:
                 writer = imageio.get_writer(args.output/('local-episode-%03d.mp4'%episode), fps=30, codec='libx264', quality=7, pixelformat='yuv420p', ffmpeg_params=['-movflags', '+faststart'])
+            preparation = None
+            if args.prepare_closed_seconds:
+                env.goal_override = 0.
+                prep = [env.frame()]
+                prep_steps = round(args.prepare_closed_seconds*30)
+                for i in range(prep_steps):
+                    with torch.no_grad():
+                        action = torch.zeros(env.n,env.action_dim) if network is None else network.mean_action(env.observation())
+                    env.step(action,baseline=args.baseline)
+                    prep.append(env.frame())
+                    if writer:
+                        env.gym.step_graphics(env.sim)
+                        env.gym.render_all_camera_sensors(env.sim)
+                        image=env.gym.get_camera_image(env.sim,env.envs[0],camera,gymapi.IMAGE_COLOR)
+                        writer.append_data(image.reshape(720,960,4)[:,:,:3])
+                np.savez_compressed(args.output/('preparation-%03d.npz'%episode),**{k:np.asarray([v[k] for v in prep]) for k in prep[0]})
+                preparation = dict(seconds=args.prepare_closed_seconds,
+                    world_drift_m=env.max_drift.tolist(),world_rotation_rad=env.max_rotation.tolist(),
+                    stable=((env.max_drift<.01)&(env.max_rotation<.25)&~env.ever_drop).tolist(),
+                    closed_goal_max_error_m=env.max_slider_goal_error.tolist(),
+                    preparation_pass=((env.max_drift<.01)&(env.max_rotation<.25)&~env.ever_drop&(env.max_slider_goal_error<.01)).tolist(),
+                    slider_at_end=env.dof[:,27,0].tolist(),scope='physical preparation, fixed initial reference, no object/hand writes')
+                env.start_operation_window()
+                (args.output/('preparation-%03d.json'%episode)).write_text(json.dumps(preparation,indent=2)+'\n')
             first = env.frame()
             first.update(env.contacts_for_evaluation())
             rows = [first]
@@ -81,6 +108,9 @@ def main():
                     writer.append_data(image.reshape(720, 960, 4)[:, :, :3])
             np.savez_compressed(args.output/('episode-%03d.npz'%episode), **{k:np.asarray([r[k] for r in rows]) for k in rows[0]})
             summary = {k:v.tolist() for k,v in env.metrics().items()}
+            if preparation is not None:
+                summary['preparation'] = preparation
+                summary['preparation_and_operation_success'] = [a and b for a,b in zip(preparation['preparation_pass'],summary['success'])]
             summaries.append(summary)
             print(json.dumps(dict(episode=episode, metrics=summary)), flush=True)
             if writer:
