@@ -1,4 +1,4 @@
-# G2 + Wuji local policy results — ongoing
+# G2 + Wuji local policy results
 
 **The fixed continuous tabletop task passes (R7-03). Generalization and deployable inputs remain unproven.**
 This is a newly learned privileged H→S controller, not the unchanged original teacher or student.
@@ -148,7 +148,7 @@ The hand-gravity and small-finger comparisons are reported below. No fifth train
 
 ## Matched-state controls and contact adaptation
 
-R13 uses the SAME actual H-prepared source as the successful local joint policy,
+R13 uses the same actual H-prepared source as the successful local joint policy,
 with identical physics, servo,20s clock and independent criteria. Earlier baseline
 failures on the original S source remain recorded but are not treated as matched evidence.
 
@@ -180,10 +180,37 @@ quaternion comparisons show no hemisphere flip. This narrows the issue to
 transfer from the changed acquired grasp rather than establishing a unique cause.
 R12-02 repeats the modified small-finger method at the old nominal placement and passes the full task:2.097mm/.179235rad, endpoint maxima4.346/0/4.286/0mm, H0.619mm/.01307rad. This is a regression check of the changed method, not unseen-placement validation.
 
-R12-03 reuses exactly the seen00 acquisition and holds actual motor targets for22s instead of learned H. H fails2.603mm/.561397rad, versus learned H1.885mm/.324005rad. Both fail; this does not show that the new grasp is stable if learning is removed. The prespecified conditional static-S trial is therefore not eligible. Its S stage also fails:35.516mm/2.52290rad, first instability3.167s; all four endpoint windows fail. The independent audit proves2309identical pre-H physical frames and600matching S motor commands. Original-nominal continuous static-S remains pending.
+R12-03 reuses exactly the seen00 acquisition and holds actual motor targets for22s instead of learned H. H fails2.603mm/.561397rad, versus learned H1.885mm/.324005rad. Both fail; this does not show that the new grasp is stable if learning is removed. The prespecified conditional static-S trial is therefore not eligible. Its S stage also fails:35.516mm/2.52290rad, first instability3.167s; all four endpoint windows fail. The independent audit proves2309identical pre-H physical frames and600matching S motor commands. Original-nominal continuous static-S subsequently passed, as detailed below.
 
 Read-only contact timing shows the middle finger loses contact for at least0.3s starting6.667s under learned H and3.2s under fixed H; world rotation first exceeds its limit at8.667s and3.333s respectively. Nominal learned H maintains middle contact99.85% of frames with no sustained loss. World and hand-relative error agree because the wrist is stationary. These observations localize a support difference, but contact occurrence is not measured load and does not establish a unique cause.
 
+
+## Continuous single-inference control completed
+
+R14-01 keeps exactly the original2,969physical acquisition/H/history frames,
+then replaces dynamic S inference with one initial20-joint network output,
+held fixed while the clock-driven geometric thumb trajectory continues.
+The independent audit verifies one model call, constant normalized output,
+and exact replay of all600motor commands. No later robot/object/slider input
+is read by this S controller; actual motor servos and state/history logging continue.
+
+The complete118.967s run passes: body1.671mm /0.226193rad; four endpoint
+maxima2.915 /0 /3.387 /0.000007mm; slider travel37.288mm. There is no drop,
+table support, state reset, object constraint, external force or slider drive.
+Strict2mm extension still fails. Its rotation is closer to the0.25rad limit than
+the original dynamic S run, so this does not establish superior robustness.
+
+This is one complete trial at the original placement, plus the two earlier
+local static-output trials. It is not an additional repeat of the original dynamic
+method, nor a new placement. It confirms that continuous online S-network feedback
+is unnecessary in this tested fixed scene. Ideal initial measurement and privileged
+acquisition/H remain; no trained/deployable student claim is made.
+The conditional seen00 static-S trial was not launched because its fixed-H
+prerequisite failed. The original frozen20-placement validation remains0/20.
+
+[Single-inference full video](https://github.com/Jr-kelly/artgym/releases/download/g2-wuji-local-policy-20260928-v1/tabletop-initial-learned-offset-two-cycles-full.mp4)
+· [Same-run closeup](https://github.com/Jr-kelly/artgym/releases/download/g2-wuji-local-policy-20260928-v1/tabletop-initial-learned-offset-two-cycles-closeup.webm)
+· [Matched holding/contact diagnostic](https://github.com/Jr-kelly/artgym/releases/download/g2-wuji-local-policy-20260928-v1/continuous-hold-support-comparison-R12.png).
 
 ## 当前判断与方法链路
 
@@ -204,7 +231,14 @@ flowchart LR
 证据支持的边界：
 
 - 稳定持刀和两轮伸缩都在一个实际可达抓姿成立；同一摆放重复成功不等于泛化。
-- 公平初态对照中，原teacher、仅拇指teacher和零残差几何轨迹均失败；固定第一次学习输出也成功。因此已证明学到的关节修正有用，尚未证明持续反馈必不可少，也没有排除其他规划方法。
+- 公平初态对照中，原teacher、仅拇指teacher和零残差几何轨迹均失败；固定第一次学习输出也成功。因此这组消融支持学到的关节修正有用，尚未证明持续反馈必不可少，也没有排除其他规划方法。
 - 20个新摆放全部在取得功能抓姿之前失败。后续已见样本上的腕轨迹与小指接触修正让换握前进，但22秒保持仍失败。瓶颈更集中在获取末态的支撑分布和控制迁移；不能据此认定唯一根因或宣称必须使用RL。
 - 去除实时物体信息的局部诊断、手部重力对照都已运行；整套系统仍非可部署student。真实刀具锁止/阻力、碰撞和伺服尚未标定。
 - 下一项优先投入应是把已实际达到、但保持失败的变化抓姿纳入支持控制任务，保留名义抓姿回归对照，先验证22秒保持再扩展伸缩。它需要另行分配训练配置；本轮4组训练配置预算已用完，不追加第五组或大规模抓取RL。
+
+
+## 本轮收尾
+
+本轮在本机RTX4090实际完成4组主要训练配置、72/80次控制开发执行，以及另外20个冻结新摆放验证（含一次物理开始前CLI错误的保留重试，共21次启动）。所有开发执行已终结，没有本轮训练或仿真留在后台；原检查任务和视频服务器保留。
+
+学习、调试记账2.106 GPU小时；把全部仿真/评测也计入、合并同一GPU上重叠区间后，保守记账4.800 GPU小时，低于12小时上限。保留未使用的试验额度，不为凑预算追加试验。固定任务、强对照、摆放验证及主要迁移风险诊断均已完成；泛化和可部署输入未解决。后续训练要先为多实际获取末态的支持任务分配新配置，不把本轮剩余GPU时间当作第五配置授权。

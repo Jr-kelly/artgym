@@ -223,7 +223,7 @@ The separate continuous gait variant adds `--gait-translation-before-alignment` 
 retarget option. It may physically translate the held knife toward the original fixed gait reference
 by at most4mm over1s, hold1s, and then apply the **unchanged** original5mm alignment gate. The
 planned knife trajectory and actual tracking/fixed-reference errors are saved. It cannot reset poses,
-refresh the scoring reference or relax the alignment gate. Physical result pending until its report.
+refresh the scoring reference or relax the alignment gate. R9-04 passed that alignment and then failed small-finger support; its later R12 contact variant is separately labeled.
 
 ## Hand-gravity and acquisition follow-ups
 
@@ -330,3 +330,35 @@ The second command's prefix is the original full acquisition and H preparation.
 The audit requires identical physical frames before the declared intervention;
 for static S it additionally verifies one model call, constant normalized action
 and replay of all600 actual commands. It does not relax any success threshold.
+
+
+## Evidence restoration and browser playback
+
+Extract the following Release archives into `runs/g2-local-policy-20260928`
+in order; each is incremental and must not replace old results:
+
+1. `g2-local-policy-baselines-evidence-20260928.tar.gz`
+2. `g2-local-policy-joint-learning-R4-R6-increment-20260928.tar.gz`
+3. `g2-local-policy-continuous-success-R7-increment-20260928.tar.gz`
+4. `g2-local-policy-validation-input-R8-increment-20260928.tar.gz`
+5. `g2-local-policy-support-gravity-R9-R13-increment-20260928.tar.gz`
+6. `g2-local-policy-continuous-static-R14-final-increment-20260928.tar.gz`
+
+Each archive has its own file-level SHA256 manifest and verified archive hash.
+Source pins reuse the existing project's assets, Isaac Gym, caches and original
+policy dependencies; this increment is not a duplicate of the earlier full
+repository backup. The existing successful source pin remains unchanged.
+
+The local browser page uses HTTP and includes WebM as a Firefox-compatible
+fallback; avoid old absolute file URLs:
+
+```bash
+firefox http://127.0.0.1:8767/g2-local-policy-20260928/
+```
+
+The protected existing server serves
+`/data/research/artgym-experiments-20260921/runs/wuji-goal/local-video-preview-20260924`.
+On another machine, download named MP4/WebM assets from the Release and serve
+the download directory with `python3 -m http.server 8767 --bind 127.0.0.1`.
+Video files are uncut, original speed and contain no text overlays; page labels
+state each run's actual scope and failure.

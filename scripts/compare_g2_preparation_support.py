@@ -22,9 +22,11 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--runs', type=Path, nargs='+', required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--figure', type=Path)
     args = parser.parse_args()
     rows = []
     boundaries = []
+    curves = []
     for run in args.runs:
         t = np.load(run / 'trace.npz')
         report = json.loads((run / 'report.json').read_text())
@@ -41,6 +43,7 @@ def main():
         time = np.arange(1, len(ids) + 1) / 30.
         bad = np.flatnonzero((world_m >= .01) | (world_rad >= .25))
         contacts = t['finger_knife_contacts'][ids] > 0
+        curves.append((run.name, time, world_rad, contacts[:, 2]))
         per_finger = {}
         for finger, name in enumerate(['thumb', 'index', 'middle', 'ring', 'pinky']):
             motor_ids = [names.index('hand_r_%s_joint%d' % (name, j)) for j in range(1, 5)]
@@ -69,6 +72,28 @@ def main():
         caveat='Contact counts indicate occurrence, not measured support force. Temporal association does not identify a unique failure cause.',
         rows=rows,initial_boundary_comparisons=pairs)
     args.output.write_text(json.dumps(result,indent=2)+'\n')
+    if args.figure:
+        import matplotlib
+        matplotlib.use('Agg')
+        import matplotlib.pyplot as plt
+        fig, axes = plt.subplots(2, 1, figsize=(9, 6), sharex=True, constrained_layout=True)
+        for name, time, rotation, contact in curves:
+            axes[0].plot(time, rotation, label=name)
+            # Trailing1s fraction; no invented contact before the first frame.
+            sums = np.convolve(contact.astype(float), np.ones(30), mode='full')[:len(contact)]
+            denominator = np.minimum(np.arange(1, len(contact)+1), 30)
+            axes[1].plot(time, sums / denominator)
+        axes[0].axhline(.25, color='firebrick', linestyle='--', label='Fixed-world rotation limit')
+        axes[0].set_ylabel('Body rotation (rad)')
+        axes[0].legend(fontsize=8)
+        axes[1].set_ylabel('Middle contact fraction\n(trailing1s)')
+        axes[1].set_xlabel('Time after actual hold takeover (s)')
+        axes[1].set_ylim(-.03, 1.03)
+        for ax in axes:
+            ax.grid(alpha=.2)
+        fig.suptitle('Actual continuous preparation: nominal versus seen00\nContact occurrence is not a measurement of support force')
+        fig.savefig(args.figure, dpi=160)
+        plt.close(fig)
     print(json.dumps({k:v for k,v in result.items() if k != 'initial_boundary_comparisons'}))
 
 
