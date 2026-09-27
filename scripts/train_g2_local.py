@@ -95,6 +95,9 @@ def main():
     val_buf, rew_buf, done_buf = log_buf.clone(), log_buf.clone(), log_buf.clone()
     ep_returns = torch.zeros(env.n)
     update = 0
+    completed_updates = 0
+    evaluation_rows = None
+    evaluation_update = None
     error = None
 
     class StopTraining(Exception):
@@ -107,7 +110,8 @@ def main():
 
     def save(name):
         path = args.output/name
-        torch.save(dict(model=model.state_dict(), optimizer=optimizer.state_dict(), update=update,
+        torch.save(dict(model=model.state_dict(), optimizer=optimizer.state_dict(), update=completed_updates,
+            update_attempt=update,
             transitions=transitions, episodes=episodes, learning_elapsed_seconds=time.monotonic()-clock,
             obs_dim=obs.shape[-1], action_dim=env.action_dim, task=args.task, route=args.route,
             source='configs/g2_local/'+args.task+'-actual-state.npz',
@@ -177,6 +181,7 @@ def main():
                 if np.mean(kls[-max(1, len(order)//args.minibatch):])>.03:
                     break
             elapsed = time.monotonic()-clock
+            completed_updates = update
             row = dict(update=update, transitions=transitions, training_episodes=episodes,
                 elapsed_seconds=elapsed, end_to_end_transitions_per_second=transitions/elapsed,
                 update_seconds=time.monotonic()-batch_start, reward=float(rew_buf.mean()),
@@ -192,6 +197,7 @@ def main():
                 evaluation_start = time.monotonic()
                 env.reset()
                 evaluation_rows = []
+                evaluation_update = update
                 for frame_idx in range(env.steps):
                     check_stop()
                     with torch.no_grad():
@@ -207,6 +213,7 @@ def main():
                 (args.output/('eval-%05d.json'%update)).write_text(json.dumps(evaluation,indent=2)+'\n')
                 np.savez_compressed(args.output/('eval-%05d.npz'%update),
                     **{k:np.asarray([v[k] for v in evaluation_rows]) for k in evaluation_rows[0]})
+                evaluation_rows = None
                 success = float(np.mean(metric['success']))
                 quality = success*100 - float(np.mean(metric['world_rotation_rad'])) - 10*float(np.mean(metric['world_drift_m']))
                 if args.task == 'S':
@@ -230,8 +237,12 @@ def main():
         save('interrupted.pth')
         raise
     finally:
+        if evaluation_rows:
+            np.savez_compressed(args.output/('eval-%05d-partial.npz'%evaluation_update),
+                **{k:np.asarray([v[k] for v in evaluation_rows]) for k in evaluation_rows[0]})
         (args.output/'status.json').write_text(json.dumps(dict(pid=os.getpid(), status='error' if error else ('stopped' if stopping[0] else 'finished'),
-            error=error, update=update, transitions=transitions, episodes=episodes, seconds=time.monotonic()-clock),indent=2)+'\n')
+            error=error, update=completed_updates, update_attempt=update, transitions=transitions, episodes=episodes,
+            seconds=time.monotonic()-clock),indent=2)+'\n')
         curve.close()
         episodic.close()
         env.close()

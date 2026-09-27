@@ -112,6 +112,8 @@ def main():
             args.contact_diagnostics=True
     if args.learned_operation_policy:
         assert args.policy_action_mode=='thumb-only', 'Composite controller requires explicit teacher thumb-only channel'
+    if args.learned_operation_policy or args.learned_hold_policy:
+        assert args.group!='C', 'New learner is privileged; student history must explicitly encode its separate motor channel before C is evaluated'
     assert not args.learned_hold_policy or args.group!='A'
     args.output.mkdir(parents=True,exist_ok=False)
     assert not args.hand_only_diagnostic or args.group=='A'
