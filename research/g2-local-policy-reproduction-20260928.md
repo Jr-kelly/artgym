@@ -114,3 +114,13 @@ The standalone runner and continuous runtime recover the thumb motor plan
 from checkpoint metadata, so evaluation cannot silently revert to frozen
 teacher control. All these are reproduction examples; check cumulative budgets
 before starting new work. No complete Ssuccess is asserted by these commands.
+
+Read-only continuous handoff audit (no simulation):
+```bash
+bash scripts/g2_local_python.sh -m scripts.audit_g2_continuous_local \
+  --run runs/g2-local-policy-20260928/R4-02-continuous-joint-S-cp25 \
+  --evaluation runs/g2-local-policy-20260928/B4-S-joint-path/eval-00025.npz \
+  --checkpoint runs/g2-local-policy-20260928/B4-S-joint-path/checkpoint-00025.pth \
+  --output runs/g2-local-policy-20260928/R4-02-handoff-audit-reproduced.json
+```
+R4-03 uses the exact R4-02 launch arguments plus `--local-reset-quaternion-compat` and a fresh output directory. This opt-in only aligns the first measured wrist quaternion sign to the legacy local reset representation; subsequent observations use native PhysX signs. Old result/source pins remain untouched.

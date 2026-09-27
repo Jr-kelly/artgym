@@ -49,6 +49,7 @@ def main():
     parser.add_argument('--only-grasp',action='store_true')
     parser.add_argument('--policy-action-mode',choices=['full','thumb-only'],default='full',help='Explicit frozen-policy action-component ablation. Thumb-only holds other motor references; raw and executed actions are both recorded.')
     parser.add_argument('--learned-operation-policy',type=Path,help='New privileged local S controller; requires thumb-only teacher channel for support route. Never original full-teacher success.')
+    parser.add_argument('--local-reset-quaternion-compat',action='store_true',help='Frozen local policy diagnostic: match the legacy reset wrist quaternion sign on the FIRST observation only; no physical state write.')
     parser.add_argument('--learned-hold-policy',type=Path,help='Diagnostic22s learned H after actual gait, before real settling. Not slider-operation success.')
     parser.add_argument('--camera',choices=['wide','hand'],default='wide')
     parser.add_argument('--operation-yaw',type=float,default=0.)
@@ -853,7 +854,8 @@ def main():
         if args.learned_operation_policy:
             from scripts.g2_local_runtime import LocalPolicyRuntime
             learned_runtime=LocalPolicyRuntime(args.learned_operation_policy,dof[:,0].cpu().numpy(),dof[:,1].cpu().numpy(),targets,
-                rb[wrist_id].cpu().numpy(),rb[obj_id].cpu().numpy(),rb[slider_id].cpu().numpy())
+                rb[wrist_id].cpu().numpy(),rb[obj_id].cpu().numpy(),rb[slider_id].cpu().numpy(),
+                reset_quaternion_compat=args.local_reset_quaternion_compat)
             assert learned_runtime.task=='S'
             (args.output/'learned-operation.json').write_text(json.dumps(learned_runtime.description(),indent=2)+'\n')
         if not args.only_grasp and ((args.group=='A' and preset_candidate is None) or grasp_success):

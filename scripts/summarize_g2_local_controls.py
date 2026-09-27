@@ -56,7 +56,7 @@ def main():
     rows.sort(key=lambda r:(r['run'],r['episode'],r['replica']))
     fields=sorted(set(k for row in rows for k in row))
     with a.output.open('w',newline='') as f:
-        writer=csv.DictWriter(f,fields);writer.writeheader();writer.writerows(rows)
+        writer=csv.DictWriter(f,fields,lineterminator='\n');writer.writeheader();writer.writerows(rows)
     print(json.dumps(dict(output=str(a.output),completed_or_preserved_control_attempts=len(rows))))
 
 

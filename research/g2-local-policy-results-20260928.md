@@ -1,6 +1,6 @@
 # G2 + Wuji local policy: ongoing results
 
-Status at 2026-09-28 03:44 CST: **continuous two-cycle operation has not
+Status at 2026-09-28 04:05 CST: **continuous two-cycle operation has not
 succeeded**. Actual PPO training is running on the local RTX4090. This is an
 intermediate report, not final acceptance or a deployment result.
 
@@ -9,7 +9,7 @@ actual acquisition runs. Only episode reset writes physical state. Its motor
 interface is also available in the continuous tabletop runner, where no local
 reset occurs. H holds22s; S operates20s with external5s reversals and0/+40mm
 goals. A small privileged PPO controls16 support joints with bounded targets
-and slew. S currently uses the original frozen teacher's thumb channel.
+and slew. The earlier S support route uses the frozen thumb teacher; current B4 jointly controls all20 hand joints around a geometric thumb motor prior.
 
 | Comparison | Evidence | Interpretation |
 |---|---|---|
@@ -47,8 +47,7 @@ confirms the two local successes:4.470mm/0.19368rad with endpoint maxima
 1.636/1.592/0.779/1.179mm, and0.915mm/0.10475rad with endpoint maxima
 0.231/2.355/0.035/2.007mm. All30 failures remain in the denominator.
 The first fresh-simulator repetition failed4/4. The later checkpoint25 passed
-4/32 local development replicas and is now running through the actual continuous
-tabletop prefix (R4-02). Its outcome is pending; no table-to-operation success
+4/32 local development replicas. Continuous R4-02 failed after successful pickup:42.420mm/3.09654rad, first instability2.8s, endpoints37.203/2.527/38.686/.703mm. No table-to-operation success
 or unseen-placement validation is claimed.
 
 The [control ledger](g2-local-policy-control-results-20260928.csv) separates
@@ -69,3 +68,5 @@ Code: `feat/g2-wuji-local-policy-20260928`. Commands are in
 and chronological evidence in [journal](g2-local-policy-20260928.md).
 Machine recovery state is `runs/g2-local-policy-20260928/state.json`.
 No new-placement acceptance set or student success is claimed.
+
+Continuous handoff audit confirms all2309 prefix frames and q/qd, knife/slider state, targets, integral and50-frame history exactly match the source. It found a first-observation quaternion **sign** difference: equivalent wrist rotations cause different uncanonicalized network input. Optional first-frame compatibility matches the frozen local first action within3e-8; R4-03 tests ONLY this representation change. No physical pose reset, new weight, changed limit or fifth training configuration. Training eval50 gives2/32; eval75 pending.

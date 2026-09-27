@@ -12,11 +12,13 @@ from scripts.train_g2_local import ActorCritic
 
 
 class LocalPolicyRuntime:
-    def __init__(self, checkpoint, positions, velocities, targets, wrist, obj, slider):
+    def __init__(self, checkpoint, positions, velocities, targets, wrist, obj, slider,
+                 reset_quaternion_compat=False):
         artifact = torch.load(checkpoint, map_location='cpu')
         self.task, self.route = artifact['task'], artifact['route']
         self.thumb_plan = artifact.get('thumb_plan')
         self.static_support = artifact.get('static_support',False)
+        self.reset_quaternion_compat = reset_quaternion_compat
         self.goal_override = None
         self.n, self.dt, self.span, self.speed = 1, 1/30, .20, .60
         self.action_dim = artifact['action_dim']
@@ -54,7 +56,19 @@ class LocalPolicyRuntime:
 
     def step(self,positions,velocities,wrist,obj,slider,nominal_hand):
         self.update_state(positions,velocities,wrist,obj,slider)
+        # The legacy local reset stores a matrix-derived wrist quaternion
+        # (largest component positive), whereas later PhysX frames use their
+        # native sign. Preserve that FIRST observation convention for frozen
+        # checkpoints. q and -q describe the same measured wrist pose; this
+        # changes no simulator state, target reference, or physical history.
+        # Explicit opt-in, since old continuous failures must remain reproducible.
+        raw_wrist = self.wrist.clone()
+        if self.reset_quaternion_compat and int(self.age[0]) == 0:
+            quat = self.wrist[0,3:7]
+            if quat[quat.abs().argmax()] < 0:
+                self.wrist[0,3:7] *= -1
         self.last_observation = LocalG2.observation(self)
+        self.wrist[:] = raw_wrist
         with torch.no_grad():
             action = self.model.mean_action(self.last_observation)
         if self.static_support and int(self.age[0])>0:
@@ -93,6 +107,8 @@ class LocalPolicyRuntime:
             method='new learned controller, not unchanged full teacher',
             thumb_prior='kinematic material-point motor trajectory' if self.thumb_plan is not None else 'frozen teacher thumb',
             static_support=self.static_support,
+            first_observation_quaternion_compatibility=self.reset_quaternion_compat,
+            quaternion_compatibility_scope='first measured wrist quaternion dominant component positive, then native PhysX sign; reproduces legacy local reset representation only',
             inputs='measured q/qd, commanded targets, fixed takeover reference, live simulator knife pose/velocity, wrist pose, slider state, external clock, previous learner output',
             privileged=True, deployable=False,
             rnn=('feedforward learner; frozen thumb actor/RNN not executed during operation' if self.thumb_plan is not None else 'learner feedforward; frozen thumb teacher keeps original takeover RNN reset'),
