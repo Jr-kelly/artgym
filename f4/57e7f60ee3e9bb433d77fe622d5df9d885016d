@@ -1,0 +1,107 @@
+scripts/run_g2_local.py
+  s_87fdc32a1dcd01::t_543d2704052fd9 1-55,59-63,65-91
+  s_87fdc32a1dcd01::t_f861bf399f9ea2 56-58,64
+scripts/train_g2_local.py
+  s_87fdc32a1dcd01::t_f861bf399f9ea2 164-165,168-196
+  s_87fdc32a1dcd01::t_8bc845972b2207 1-163,166-167,197-211
+scripts/g2_local_env.py
+  s_87fdc32a1dcd01::t_9274b5e527dc06 1-107,109-161,165-341,364-375
+  s_87fdc32a1dcd01::t_2c40f5736a6951 108,162-164,342-363
+scripts/g2_local_teacher.py
+  s_87fdc32a1dcd01::t_a2c2446c8d157c 1-104
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "f457e7f60ee3e9bb433d77fe622d5df9d885016d",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.output_tokens": "6382727",
+        "tlab.token_usage.input_tokens": "47320313",
+        "tlab.session_started_at": "2026-09-27T17:58:45Z",
+        "tlab.token_usage.cache_read_tokens": "932781289"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "configs/g2_local/frozen-config.yaml",
+      "additions": {
+        "human": 464
+      }
+    },
+    {
+      "new_path": "research/g2-local-policy-20260928.md",
+      "additions": {
+        "human": 20
+      }
+    },
+    {
+      "new_path": "scripts/g2_local_env.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 375
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/g2_local_teacher.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 104
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/run_g2_local.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 91
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/train_g2_local.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 211
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 3
+      }
+    }
+  ]
+}
