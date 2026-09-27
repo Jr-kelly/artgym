@@ -48,6 +48,8 @@ def main():
     parser.add_argument('--settle-seconds',type=float,default=2.)
     parser.add_argument('--only-grasp',action='store_true')
     parser.add_argument('--policy-action-mode',choices=['full','thumb-only'],default='full',help='Explicit frozen-policy action-component ablation. Thumb-only holds other motor references; raw and executed actions are both recorded.')
+    parser.add_argument('--learned-operation-policy',type=Path,help='New privileged local S controller; requires thumb-only teacher channel for support route. Never original full-teacher success.')
+    parser.add_argument('--learned-hold-policy',type=Path,help='Diagnostic22s learned H after actual gait, before real settling. Not slider-operation success.')
     parser.add_argument('--camera',choices=['wide','hand'],default='wide')
     parser.add_argument('--operation-yaw',type=float,default=0.)
     parser.add_argument('--hand-only-diagnostic',action='store_true')
@@ -101,6 +103,9 @@ def main():
     parser.add_argument('--closeup',action='store_true',help='Additional synchronized camera; follows robot wrist, never affects physics.')
     parser.add_argument('--contact-diagnostics',action='store_true',help='Record whole-thumb conservative collision separation every control frame.')
     args=parser.parse_args()
+    if args.learned_operation_policy:
+        assert args.policy_action_mode=='thumb-only', 'Composite controller requires explicit teacher thumb-only channel'
+    assert not args.learned_hold_policy or args.group!='A'
     args.output.mkdir(parents=True,exist_ok=False)
     assert not args.hand_only_diagnostic or args.group=='A'
     assert not args.seat_object_servo or args.seat_finger_feedback=='object-truth'
@@ -367,6 +372,7 @@ def main():
         a=dof.detach().cpu().numpy();b=rb.detach().cpu().numpy()
         return a[hand_idx,0].copy(),a[arm_idx,0].copy(),float(a[-1,0]),transform(b[wrist_id,:3],b[wrist_id,3:7]),transform(b[obj_id,:3],b[obj_id,3:7]),transform(b[slider_id,:3],b[slider_id,3:7])
     records=[];takeover=None;dt=float(sp.dt)*4;global_step=0
+    learned_runtime=None
     pair_records=[]
     arm_integral=np.zeros(len(arm_idx))
     def tick(phase,action=None,goal=0.,obs=None):
@@ -418,6 +424,16 @@ def main():
             slider=sl,goal=goal,wrist=pose(w),object=pose(o),slider_pose=pose(l),
             table_force=contact[table_id].cpu().numpy().copy(),hand_force=contact[hand_bodies].cpu().numpy().copy(),
             observation=np.zeros(138,dtype=np.float32) if obs is None else obs))
+        # Separate channels: the frozen actor output and the new learner output
+        # are both actual values, not substituted cached history.
+        learned_action=np.zeros(20,dtype=np.float32);learned_residual=learned_action.copy()
+        learned_observation=np.zeros(124,dtype=np.float32)
+        if learned_runtime is not None:
+            size=learned_runtime.action_dim
+            learned_action[:size]=learned_runtime.last_action[0].numpy()
+            learned_residual[:size]=learned_runtime.residual[0].numpy()
+            ob=learned_runtime.last_observation[0].numpy();learned_observation[:len(ob)]=ob
+        records[-1].update(learned_action=learned_action,learned_residual=learned_residual,learned_observation=learned_observation)
         if digit_geometry is not None:
             records[-1]['thumb_gap_lower_bound_m']=digit_geometry.minimum_gap(q,np.linalg.inv(o)@w,sl)
         if writer:
@@ -768,6 +784,25 @@ def main():
                     targets[arm_idx]=start_arm+(end_arm-start_arm)*alpha
                     targets[hand_idx]=start_hand+(end_hand-start_hand)*alpha
                     tick(label)
+            if args.learned_hold_policy:
+                from scripts.g2_local_runtime import LocalPolicyRuntime
+                learned_runtime=LocalPolicyRuntime(args.learned_hold_policy,dof[:,0].cpu().numpy(),dof[:,1].cpu().numpy(),targets,
+                    rb[wrist_id].cpu().numpy(),rb[obj_id].cpu().numpy(),rb[slider_id].cpu().numpy())
+                assert learned_runtime.task=='H'
+                hold_start=len(records);hold_reference=learned_runtime.initial_object[0].numpy().copy()
+                for _ in range(660):
+                    targets[hand_idx]=learned_runtime.step(dof[:,0].cpu().numpy(),dof[:,1].cpu().numpy(),
+                        rb[wrist_id].cpu().numpy(),rb[obj_id].cpu().numpy(),rb[slider_id].cpu().numpy(),targets[hand_idx])
+                    tick('learned_hold')
+                held=np.asarray([r['object'] for r in records[hold_start:]])
+                drift=np.linalg.norm(held[:,:3]-hold_reference[:3],axis=-1)
+                rotation=(Rotation.from_quat(hold_reference[3:]).inv()*Rotation.from_quat(held[:,3:])).magnitude()
+                hold_report=dict(**learned_runtime.description(),duration_s=22.,world_reference=hold_reference.tolist(),
+                    max_world_drift_m=float(drift.max()),max_world_rotation_rad=float(rotation.max()),
+                    stable_10mm_025rad=bool((drift<.01).all() and (rotation<.25).all()),
+                    below_table=bool((held[:,2]<table_z+.05).any()),scope='continuous acquired H only, no slider success claim')
+                (args.output/'learned-hold.json').write_text(json.dumps(hold_report,indent=2)+'\n')
+                learned_runtime=None
             for _ in range(round(args.settle_seconds/dt)):tick('settle_history')
         q,qa,sl,w,o,l=current()
         if args.group=='A' and preset_candidate is None:
@@ -806,11 +841,20 @@ def main():
             takeover['preset_scope']='Independent geometry candidate initialized before first physics step; actual2s history and actual settled motor reference; not tabletop acquisition.'
             takeover['preset_hold_success']=bool(grasp_success)
         (args.output/'takeover.json').write_text(json.dumps(takeover,indent=2)+'\n')
+        if args.learned_operation_policy:
+            from scripts.g2_local_runtime import LocalPolicyRuntime
+            learned_runtime=LocalPolicyRuntime(args.learned_operation_policy,dof[:,0].cpu().numpy(),dof[:,1].cpu().numpy(),targets,
+                rb[wrist_id].cpu().numpy(),rb[obj_id].cpu().numpy(),rb[slider_id].cpu().numpy())
+            assert learned_runtime.task=='S'
+            (args.output/'learned-operation.json').write_text(json.dumps(learned_runtime.description(),indent=2)+'\n')
         if not args.only_grasp and ((args.group=='A' and preset_candidate is None) or grasp_success):
             for step in range(round(args.seconds/dt)):
                 if step>0 or args.group!='A':q,qa,sl,w,o,l=current()
                 offset=.04 if (step//150)%2==0 else 0.
                 target,action,obs=policy.step(q,w,o,l,sl,offset)
+                if learned_runtime is not None:
+                    target=learned_runtime.step(dof[:,0].cpu().numpy(),dof[:,1].cpu().numpy(),
+                        rb[wrist_id].cpu().numpy(),rb[obj_id].cpu().numpy(),rb[slider_id].cpu().numpy(),target)
                 targets[hand_idx]=target
                 tick('operate',action,policy.slider_initial+offset,obs)
         trace={k:np.asarray([r[k] for r in records]) for k in records[0]}

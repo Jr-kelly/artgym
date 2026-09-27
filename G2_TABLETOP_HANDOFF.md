@@ -1,3 +1,6 @@
+## Latest local learning status — 2026-09-28 02:15 CST
+Worktree `/data/research/artgym-g2-local-policy-20260928`; state/report there. Actual PPO A1-H-pilot PID3689757 (verify before acting), local4090,32 fullG2 envs. Check `runs/g2-local-policy-20260928/A1-H-pilot/learning.jsonl`, `eval-*.json`, and launch manifest. Initial evalupdate1 0/32, mean rotation.902rad (single acquired source replicated, not independent placements). Still early training; no whole-task success. Control diagnostic executions8started,4completed alignedH+S plus defectivecoordinate test retained; learningconfig1, pilotlimit.4GPUh. Existing tasks untouched. Next: readupdate10full eval then continue/configure by evidence. New continuous runtime only implemented/offlinechecked, no physical success claim.
+
 ## Active 2026-09-28 local learning task
 Latest explicit user authorization overrides preceding budget stop. New worktree `/data/research/artgym-g2-local-policy-20260928`; read `research/g2-local-policy-20260928.md` and `runs/g2-local-policy-20260928/state.json` there. Goal active; ends Sep29 01:53:41 CST, local4090 learning<=12GPUh. Implementing fullG2 local reset. Old teacher completed normally; monitors preserved.
 
