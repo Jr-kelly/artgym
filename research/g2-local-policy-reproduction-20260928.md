@@ -224,3 +224,52 @@ retarget option. It may physically translate the held knife toward the original 
 by at most4mm over1s, hold1s, and then apply the **unchanged** original5mm alignment gate. The
 planned knife trajectory and actual tracking/fixed-reference errors are saved. It cannot reset poses,
 refresh the scoring reference or relax the alignment gate. Physical result pending until its report.
+
+## Hand-gravity and acquisition follow-ups
+
+R10 is a local reset condition. Use the same H/S commands above with
+`--hand-gravity`, then add `--hand-gravity-compensation` for the paired
+motor feedforward condition. H uses `configs/g2_local/H-actual-state.npz`;
+S uses `configs/g2_local/S-after-continuous-learned-H-state.npz`.
+Do not call these tabletop results. Both flags also exist on the continuous
+runner: gravity and compensation start at the FIRST physical step and stay
+on. Full gravity-ON acquisition failed, despite local H/S passes.
+
+Every trial has an exact `*-launch.json` containing immutable source pin,
+complete argument list, checkpoint paths and output folder. To reproduce a
+recorded diagnostic with a new name (check the remaining budget first):
+
+```bash
+python3 - <<'PY_REPLAY'
+import json, pathlib, subprocess
+root = pathlib.Path('/data/research/artgym-g2-local-policy-20260928')
+runroot = root / 'runs/g2-local-policy-20260928'
+source = runroot / 'R11-02-continuous-gravity-on-motor-feedforward-launch.json'
+record = json.loads(source.read_text())
+name = 'my-gravity-continuous-repeat'
+args = record['command'][4:]
+args[args.index('--output') + 1] = str(runroot / name)
+# Reuses the documented arguments. Current scripts receive a NEW immutable pin.
+subprocess.run(['python3', str(root / 'scripts/g2_local_launch.py'),
+                '--name', name, '--module', record['module'], '--'] + args,
+               cwd=root, check=True)
+PY_REPLAY
+```
+
+For an EXACT old runtime, execute `record['command']` with only its output
+changed under `record['cwd']`, using the environment in `g2_local_launch.py`;
+do not claim current-branch replay as an identical old source pin.
+R11-03 adds only `--gait-arm-retarget-reference configs/g2_local/gait-nominal-start.json`.
+R12-01 reproduces the R9-04 seen-placement launch plus `--gait-pinky-retarget`.
+This last flag uses one simulated object-pose sample after the original
+small-finger clearance hold, replans only its touch/close joints, and checks
+knife/self/palm clearance before moving. All reference gates stay fixed.
+It is a privileged planning diagnostic; geometric checks do not certify
+physical holding. Read its actual report/failure before claiming capability.
+
+Independent motor audit:
+```bash
+bash scripts/g2_local_python.sh -m scripts.audit_g2_hand_gravity \
+  --run runs/g2-local-policy-20260928/R11-02-continuous-gravity-on-motor-feedforward \
+  --output /tmp/my-g2-gravity-motor-audit.json
+```

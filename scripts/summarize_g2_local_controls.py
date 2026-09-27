@@ -54,8 +54,10 @@ def main():
                     physical_translation_alignment=bool(args.get('gait_translation_before_alignment')),
                     baseline=args.get('baseline'),checkpoint=args.get('checkpoint',args.get('learned_operation_policy')))
         elif (folder/'failure.json').exists():
-            d=json.loads((folder/'failure.json').read_text());rows.append(dict(run=folder.name,scope='continuous acquisition aborted',task='H',episode=0,replica=0,
-                complete=False,local_success=False,continuous_success=False,failure='measurement_gate_missing_before_learner: '+d['message'],raw=str(folder/'partial-trace.npz')))
+            d=json.loads((folder/'failure.json').read_text())
+            rows.append(dict(run=folder.name,scope='continuous acquisition aborted before operation',task='acquisition',episode=0,replica=0,
+                complete=False,local_success=False,continuous_success=False,failure=d['message'],failure_stage=d.get('last_phase'),
+                raw=str(folder/'partial-trace.npz')))
     for episode in [0,1]:
         for replica in [0,1]:
             rows.append(dict(run='R1-03-parallel-repeat-H',scope='coordinate-bug diagnostic',task='H',episode=episode,replica=replica,

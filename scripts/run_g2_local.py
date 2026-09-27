@@ -14,7 +14,7 @@ TEACHER = Path('/data/research/artgym-experiments-20260921/runs/wuji-goal/releas
 def main():
     p = argparse.ArgumentParser()
     p.add_argument('--task', choices=['H', 'S'], default='H')
-    p.add_argument('--baseline', choices=['fixed', 'full-teacher', 'thumb-only', 'learned', 'learned-static'], default='fixed')
+    p.add_argument('--baseline', choices=['fixed', 'full-teacher', 'thumb-only', 'learned', 'learned-static', 'geometric-only'], default='fixed')
     p.add_argument('--num-envs', type=int, default=1)
     p.add_argument('--episodes', type=int, default=1)
     p.add_argument('--route', choices=['support', 'joint'], help='Defaults to the checkpoint route, or support for a baseline')
@@ -50,7 +50,9 @@ def main():
     if artifact:assert args.route==artifact['route'], 'Checkpoint/control route mismatch'
     plan=json.loads(args.thumb_plan.read_text()) if args.thumb_plan else (artifact.get('thumb_plan') if artifact else None)
     if plan is not None:
-        assert args.task=='S' and args.baseline in ['learned','learned-static'] and not args.thumb_first_stroke_q4_correction and not args.prepare_closed_seconds
+        assert args.task=='S' and args.baseline in ['learned','learned-static','geometric-only'] and not args.thumb_first_stroke_q4_correction and not args.prepare_closed_seconds
+    if args.baseline=='geometric-only':
+        assert args.task=='S' and args.route=='joint' and plan is not None and args.checkpoint is None
     args.output.mkdir(parents=True, exist_ok=False)
     env = LocalG2(args.task, args.num_envs, args.route, graphics=args.video,state_path=args.state,hand_gravity=args.hand_gravity,hand_gravity_compensation=args.hand_gravity_compensation)
     (args.output/'physics-diagnostic.json').write_text(json.dumps(dict(hand_gravity_on=args.hand_gravity,
@@ -163,7 +165,9 @@ def main():
                         else:
                             observation=env.observation()
                         action = torch.zeros(env.n, env.action_dim) if network is None else network.mean_action(observation)
-                env.step(action, baseline='learned' if args.baseline=='learned-static' else args.baseline)
+                # Zero residual preserves exactly the joint learner's nominal
+                # thumb path, total slew and limits in a named no-network control.
+                env.step(action, baseline='learned' if args.baseline in ['learned-static','geometric-only'] else args.baseline)
                 frame = env.frame()
                 frame.update(env.contacts_for_evaluation())
                 if reduced:
@@ -195,6 +199,7 @@ def main():
                 writer = None
         (args.output/'report.json').write_text(json.dumps(dict(scope='local reset diagnostic; not continuous tabletop acquisition',
             args={k:str(v) if isinstance(v, Path) else v for k,v in vars(args).items()},
+            residual_controller='none; identically zero' if args.baseline=='geometric-only' else 'first network output held fixed' if args.baseline=='learned-static' else args.baseline,
             thumb_controller=('privileged contact-referenced motor replay: '+args.replay_contact_follow if args.replay_contact_follow!='none' else 'open-loop learned motor-command replay diagnostic') if args.motor_replay else ('geometric motor path from explicit file or embedded checkpoint' if env.thumb_plan is not None else ('frozen teacher' if env.teacher is not None else 'fixed')),
             elapsed_seconds=time.monotonic()-start, episodes=summaries), indent=2)+'\n')
     finally:
