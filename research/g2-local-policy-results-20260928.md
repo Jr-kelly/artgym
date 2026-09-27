@@ -1,93 +1,109 @@
-# G2 + Wuji local policy: ongoing results
+# G2 + Wuji local policy results — ongoing
 
-Status at 2026-09-28 04:41 CST: **the fixed continuous tabletop task passes**
-in R7-03. New learned privileged H→S composite, not unchanged original
-teacher or a deployable student. Independent raw audit confirms20s/two cycles,
-world2.115mm/.172077rad, endpoints4.145/.001024/4.086/.000030mm; no drop/table
-support and no post-start state resets. Strict2mm fails extension. The full
-118.967s run includes actual pickup, air flip, finger gait,22sH and2srealhistory.
-The first2969frames exactly match the verified Hprefix;600-frame motor replay
-error<1.2e-7rad. Twenty new placements are now preregistered; not yet run.
+**The fixed continuous tabletop task passes (R7-03). Generalization and deployable inputs remain unproven.**
+This is a newly learned privileged H→S controller, not the unchanged original teacher or student.
+The full uncut 118.967 s run performs normal flat slider-down pickup, approximately 180° air flip,
+finger gait, learned 22 s holding, 2 s actual settling/history, then 20 s operation with two cycles.
 
-The new local environment restores measured full G2/Wuji/knife states from
-actual acquisition runs. Only episode reset writes physical state. Its motor
-interface is also available in the continuous tabletop runner, where no local
-reset occurs. H holds22s; S operates20s with external5s reversals and0/+40mm
-goals. A small privileged PPO controls16 support joints with bounded targets
-and slew. The earlier S support route uses the frozen thumb teacher; current B4 jointly controls all20 hand joints around a geometric thumb motor prior.
+| Independent fixed-run measurement | Result |
+|---|---|
+| Four final-0.3 s maximum endpoint errors | 4.145 / 0.001024 / 4.086 / 0.000030 mm |
+| Full-operation fixed-world body motion | 2.115 mm / 0.172077 rad |
+| Basic endpoint <10 mm AND world <10 mm / 0.25 rad | Pass |
+| Strict 2 mm endpoints | Fail on extension |
+| Drop / table support during operation | None |
+| Thumb–slider contact | All 600 operation frames |
+| Independent 22 s preparation H | 0.620 mm / 0.01554 rad; slider movement 0.038 mm |
+| Local S repeats from actual H-prepared state | 4/4, one placement; not four geometries |
 
-| Comparison | Evidence | Interpretation |
-|---|---|---|
-| Continuous fixed motors H, old identical prefix | 2.617mm /0.5922rad | Fails rotation |
-| Continuous learned H, R2-04 | 0.620mm /0.01554rad; slider0.038mm;22s; no table contact | H passes after real table pickup and flip |
-| Fresh local learned H, R2-01 | 4/4 H passes, one acquired state | Reset repeatability, not new-placement generalization |
-| H training selection, A1 main10 | 31/32 basic H;25/32 slider2mm | Development replicas, not independent geometries |
-| Learned first output held constant, R3-01 | 0.682mm /0.02567rad; slider0.120mm;22s | Fixed learned targets suffice for local H; feedback superiority unproven |
-| Full frozen teacher S, R2-05 | 44mm /3.131rad; slider travel4.657mm | Actual-acquired-state failure baseline |
-| H support learner + frozen thumb S, R2-03 | 18.47mm /0.964rad; endpoints40/0/6.71/25.16mm | H success does not transfer to S |
-| S support training A2 eval25 | 0/32; median22.818mm /1.2146rad | Some body improvement, no successful two-cycle operation |
-| Closed-goal5s preparation, R3-02 | 79.888mm /3.029rad; slider goes to50mm | Preparation fails; later stationary knife is not whole success |
-| Faster first-stroke thumbq4, R3-04 | Travel0.718mm;28.6mm /0.902rad | Speeding onlyq4 does not fix the articulation problem |
-| Coordinated geometric thumb path + fixed learned support, R3-05 | 2.221mm /0.0853rad body;12.389mm slider travel; all extension endpoints fail | Holds body, loses thumb-slider contact around1.5–2s |
-| Same thumb path + live Hsupport, R3-06 |301.5mm /3.118rad; drops; unstable by11s | Hfeedback transfer can itself fail |
-| B4 joint PPO update10 | **2/32 local Spasses,1/32 strict2mm**; both thumb contact100%, table0 | First learned two-cycle coordination; fragile and not continuous acquisition |
-| B4 update25 | **4/32 local Spasses**, independently rescored; strict0/32 | Basic success improved; one acquired source only |
-| Fresh simulation of B4update10, R4-01 | **0/4** across2envs×2resets | Selected training-evaluation success does not establish repeatability |
+The first 2969 continuous frames exactly match the previously successful real H preparation.
+The frozen runtime reproduces all 600 operation commands within 1.2e-7 rad and observations within
+6e-7. Fifty actual history frames are retained; the new learners are feedforward. The controller
+never writes the physical knife/hand state after the initial scene setup, drives the slider,
+adds an attachment or applies an external force. Full trace and source audits are in the Release.
 
-R2-03 exact endpoint maxima are **40.00/0/6.71/25.16mm**. All operation
-criteria remain unchanged: last0.3s max endpoint error<10mm per phase,
-full-window fixed-world drift<10mm and rotation<0.25rad, no drop/table support;
-2mm endpoint score is reported separately. H and S evidence must not be mixed.
+## Current validation
 
-A2 was stopped and saved after finding that rotation-only early termination
-omitted the remainder of the failed task from reward. A3 charges the discounted
-absorbing failure cost through the original horizon; success scoring and
-physics did not change. A3eval25 remains0/32 with median24.6mm/1.213rad;
-this support-only S route was stopped. Original failures and checkpoints are
-preserved. B4 is the fourth and final training configuration: privileged PPO
-joint20 residuals around the measured geometric thumb path, starting on the
-local4090 at03:28:55. It is a new controller; the original thumb teacher is
-now a comparison rather than part of this route. Independent raw scoring
-confirms the two local successes:4.470mm/0.19368rad with endpoint maxima
-1.636/1.592/0.779/1.179mm, and0.915mm/0.10475rad with endpoint maxima
-0.231/2.355/0.035/2.007mm. All30 failures remain in the denominator.
-The first fresh-simulator repetition failed4/4. The later checkpoint25 passed
-4/32 local development replicas. Continuous R4-02 failed after successful pickup:42.420mm/3.09654rad, first instability2.8s, endpoints37.203/2.527/38.686/.703mm. No table-to-operation success
-or unseen-placement validation is claimed.
+The successful pipeline, source pin `8569f43c67817401`, H checkpoint10 and S checkpoint25 were frozen
+before declaring 20 new placements (seed 2026092801; x/y ±5 mm, yaw ±2°), committed as `8c4cce1`.
+The manifest SHA256 is `9e42be7bee055b3d5d35f6d5e536f573f1ea95547bc931ea8615847562db305c`.
+The running test is unchanged. Early failures occur in flip IK or finger-gait stability/contact,
+before operation; they cannot identify how the S policy would perform after a valid acquisition.
+Planner localization uses known simulation placement, so this is placement variation, not perception robustness.
 
-The [control ledger](g2-local-policy-control-results-20260928.csv) separates
-local resets, continuous holding, software-aborted diagnostics and failures.
-Training evaluations are separate model-selection data, not additional
-independent placements. The completed baseline evidence and failure videos are
-in [Release v1](https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-local-policy-20260928-v1);
-active B4 and subsequent continuous checks will be delivered as another increment.
+One case failed before physics because argparse rejected a negative scientific-notation `--dy` value.
+Its log is retained. An explicitly identified retry will use `--dy=<same value>` with the same frozen
+code/controller. Report the failed launch separately from the 20 unique physical placements.
+Read the final machine-readable validation results before quoting a success rate; the set is still running.
 
-All new local networks use real-time simulated object pose, velocity and slider
-state. The composite is a **new privileged method**, not unchanged teacher
-success or a deployable student. Hand gravity remains disabled as in the
-frozen baseline; G2 servo, collision filtering and free slider are unchanged
-and have not been calibrated to a real knife or robot.
+Read-only code inspection found absolute nominal arm joint targets in the gait. A bounded geometric
+retargeting diagnostic preserves the actual motor-reference start and transforms the original wrist
+path. Initial nominal/failed-case screens pass IK and arm/table checks, but this has **no physical
+success evidence yet** and does not alter the frozen test. World-transform translation includes a
+rotation lever arm; it is not the distance the knife must slide in the hand.
 
-Code: `feat/g2-wuji-local-policy-20260928`. Commands are in
-[reproduction](g2-local-policy-reproduction-20260928.md); detailed preregistration
-and chronological evidence in [journal](g2-local-policy-20260928.md).
-Machine recovery state is `runs/g2-local-policy-20260928/state.json`.
-No new-placement acceptance set or student success is claimed.
+## Relevant comparisons
 
-Continuous handoff audit confirms all2309 prefix frames and q/qd, knife/slider state, targets, integral and50-frame history exactly match the source. It found a first-observation quaternion **sign** difference: equivalent wrist rotations cause different uncanonicalized network input. Optional first-frame compatibility matches the frozen local first action within3e-8; R4-03 tests ONLY this representation change. No physical pose reset, new weight, changed limit or fifth training configuration. Independent eval50 gives2/32; eval75 gives0/32. B4 stopped after76 completed updates,155776 sampled transitions,1462 ended training episodes and2485.67s including evaluation. All4 major configurations have been used; no fifth is started.
+| Comparison | Result and supported inference |
+|---|---|
+| Original full teacher, actual acquired local S state | 44 mm / 3.131 rad; fails |
+| Fixed motor H after same continuous prefix | 0.592 rad rotation; fails |
+| Learned H, continuous | 0.01554 rad; passes |
+| First learned H output held constant, local | 0.02567 rad; passes; feedback superiority not established |
+| H support learner + original teacher thumb S | 0.964 rad; H alone does not transfer to S |
+| Geometric thumb prior + fixed learned support | Body passes; 12.39 mm travel then contact loss; extension fails |
+| B4 joint PPO selected cp25, old local source | 4/32 development replicas; fresh repeat 0/2 |
+| Continuous B4 old source, exact first-observation fix | 44.44 mm / 2.983 rad; quaternion fix alone insufficient |
+| Successful command-sequence motor replay | 0/2; command sequence alone fragile |
+| Privileged contact-normal / full-point correction | 0/2 each; one full-point run meets endpoints but 11.07 mm / 0.998 rad fails stability |
+| Same B4 after physically executed H preparation | 4/4 local repeats and one complete continuous pass |
 
-Round5 predeclares at most6 control executions: two fresh local cp25 runs, then two open-loop replays of successful replica5 motor targets. The replay carries only600 hand command offsets at30Hz, checks original limits and .02/.025rad per-step bounds, and anchors to actual initial motor references. It neither loads measured joint/object poses nor drives the slider. This comparison is a control baseline, not live teacher/student success. Continuous replay is conditional on local evidence.
+The H-prepared source is a recorded real continuous state, not an interpolated or cached pose injected
+into the continuous task. Compared with the old S source, body pose differs by 0.576 mm / 0.03875 rad
+and support motor references by up to 0.01971 rad. This narrows attention to support initialization and
+coordination; it does not establish a unique causal mechanism.
 
-Later continuous input-compatibility test R4-03 still failed44.44mm/2.983rad despite exact first command; the sign mismatch is not sufficient to explain the failure. Freshcp25 and successful open-loop command replay both0/2. Contact-normal feedback0/2; fullpoint feedback0/2whole, although one replica passed allfour endpoints (1.311/<.001/3.042/0mm) while11.065mm/.998rad body drift failed. No threshold changed. R7 now evaluates the **actual** previously successful continuous22sH final state as a different support initialization, with the same frozen S weights; this remains local development, not new-placement generalization.
+## What was trained
 
-**New actual H-prepared state: R7-01 independently passes2/2 local S.**
-Same frozen B4cp25, but initialization is the actual end of the previously
-continuous H22s+2ssettle run. Maxworld2.145/2.038mm, rotation.19285/.17283rad;
-fourphase endpoint errors all<4.5mm (2mm strict fails). One placement, a
-second actually reached support state, no fabricated pose. Runtime replay
-600frames maxmotorerror1.2e-7rad; firstbodyjump.108mm. R7-03 now executes
-actual tabletop→H22s→S20s without resets; result pending. R7-04 checks
-one fresh environment across two local resets. Planned alternative controller
-is skipped to concentrate on the learned method. No new training configuration.
+Local full-G2 Isaac Gym / GPU PhysX environments restore a documented actually reached state only at
+training/evaluation reset. These resets are labeled local, never tabletop success. Two routes and all
+four major configurations were used: A1 learned 16-joint holding, A2 learned support with frozen teacher
+thumb, A3 corrected an early-termination reward shortcut, B4 learned a bounded 20-joint residual around
+a geometric thumb motor path. Reward and independent success scoring are separate.
 
-R7-04 freshsingleenv, two consecutive local resets independently passes2/2; combined prepared-state repeats4/4. All remain oneplacement/oneactualHpreparedstate, not newgeometry. Continuous R7-03 pending.
+B4 uses 32 environments, 128×128 MLP/PPO, horizon64, epochs4, minibatch2048, learning rate3e-4,
+gamma0.995 and lambda0.95. It completed76 updates /155,776 sampled transitions /1,462 ended training
+episodes in2485.67 s including evaluation. Evaluations at10/25/50/75 passed2/4/2/0 of32 replicas;
+training was stopped and saved after regression. No fifth major training configuration is started.
+Selected checkpoints are A1-H-pilot10 and B4-S-joint-path25. All old models and failures remain.
+
+## Input pipeline and limitations
+
+Actual robot q/qd, command targets, fixed takeover references, external clock and previous policy
+outputs join **live simulated knife pose/velocity and slider state** as policy inputs. H adjusts
+16 support targets; S adjusts20 targets around the thumb prior. Outputs are robot motor targets only:
+residual span±0.20 rad, slew0.60 rad/s, total thumb increment≤0.025 rad/control, original joint limits.
+The G2 arm servo and its integral state persist through every stage.
+
+Round8 is preregistered for six local executions without training: two fixed-body/live-slider input
+ablations; two one-time ideal initialization plus proprioceptive slider estimates; two privileged S
+runs with hand gravity enabled as a separate physical sensitivity. They wait for the frozen validation.
+Offline on the known success, thumb-point FK predicts slider position within2.264 mm maximum;
+this is neither a closed-loop test nor a deployable result. The estimator assumes stationary body and
+no contact slip. Robot/FK and quaternion input checks pass; physical results remain pending.
+
+Baseline hand gravity is OFF; G2 arm gravity is ON. Original servo, collision filtering, friction,
+masses and freely sliding knife joint are unchanged and uncalibrated on hardware. No real detent/lock
+force has been measured. These constraints materially limit sim-to-real claims.
+
+## Evidence and continuation
+
+- [Branch](https://github.com/Jr-kelly/artgym/tree/feat/g2-wuji-local-policy-20260928)
+- [Release: full continuous and close-up videos, models, raw evidence](https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-local-policy-20260928-v1)
+- [Full successful video](https://github.com/Jr-kelly/artgym/releases/download/g2-wuji-local-policy-20260928-v1/tabletop-pickup-flip-learned-H-S-two-cycles-full.mp4)
+- Local browser: http://127.0.0.1:8767/g2-local-policy-20260928/
+- [Reproduction commands](g2-local-policy-reproduction-20260928.md), [full preregistration/journal](g2-local-policy-20260928.md), [control ledger](g2-local-policy-control-results-20260928.csv)
+
+Next: complete all frozen placements, separate acquisition failures from conditional operation,
+then execute the preregistered input/gravity diagnostics. Any changed gait must be explicitly separated
+from this frozen test; current test placements become development data if reused.

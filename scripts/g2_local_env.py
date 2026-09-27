@@ -51,7 +51,7 @@ class LocalG2:
     plus4 corrections to frozen thumb increments, total <=.025rad/step.
     """
     def __init__(self, task='H', num_envs=1, route='support', graphics=False,
-                 state_path=None, residual_span=.20, residual_speed=.60):
+                 state_path=None, residual_span=.20, residual_speed=.60, hand_gravity=False):
         self.task, self.n, self.route = task, num_envs, route
         self.goal_override = None  # only for explicitly scored physical preparation diagnostics
         self.thumb_first_stroke_q4_correction = 0.  # explicit diagnostic only, never changed by training
@@ -126,9 +126,11 @@ class LocalG2:
                 props[field] = values
             self.gym.set_actor_dof_properties(env, robot, props)
             bodyprops = self.gym.get_actor_rigid_body_properties(env, robot)
-            for p, flag in zip(bodyprops, self.metadata['robot_gravity_flags']):
-                p.flags = flag
+            for p, flag, name in zip(bodyprops, self.metadata['robot_gravity_flags'],self.metadata['robot_body_names']):
+                p.flags = 0 if hand_gravity and name.startswith('hand_r_') else flag
             self.gym.set_actor_rigid_body_properties(env, robot, bodyprops)
+            if i==0:
+                self.effective_gravity_flags=[int(p.flags) for p in self.gym.get_actor_rigid_body_properties(env,robot)]
             shapes = self.gym.get_actor_rigid_shape_properties(env, robot)
             assert len(shapes) == len(self.metadata['collision_filters'])
             for p, filt in zip(shapes, self.metadata['collision_filters']):

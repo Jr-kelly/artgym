@@ -26,8 +26,16 @@ def stability(rows,world_reference,hand_reference,hand_indices,command_start,mov
         passive_slider_travel_m=float(np.ptp([r['slider'] for r in rows])))
 
 
-def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,fk,table_z,world_reference=None):
-    plan=json.loads(path.read_text());(output/'gait-plan.json').write_text(json.dumps(plan,indent=2)+'\n')
+def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,fk,table_z,world_reference=None,retarget_reference=None):
+    plan=json.loads(path.read_text())
+    if retarget_reference is not None:
+        from scripts.g2_retarget_gait import retarget
+        original=plan
+        reference=json.loads(retarget_reference.read_text())
+        plan,diagnostic=retarget(plan,reference['arm_reference'],targets[arm_idx].copy(),table_z)
+        (output/'gait-original-plan.json').write_text(json.dumps(original,indent=2)+'\n')
+        (output/'gait-arm-retarget.json').write_text(json.dumps(diagnostic,indent=2)+'\n')
+    (output/'gait-plan.json').write_text(json.dumps(plan,indent=2)+'\n')
     assert plan['object_reference']==('fixed_world_at_gait_start' if world_reference is None else 'fixed_planned_assembly_roll_endpoint')
     q,qa,slider,w,o,_=current();world=o.copy() if world_reference is None else np.asarray(world_reference).copy();relative=np.linalg.inv(w)@o
     initial_command=targets[hand_idx].copy()

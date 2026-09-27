@@ -21,6 +21,8 @@ def main():
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--state',type=Path,help='Explicit measured state from a documented actual acquisition; local reset only, never whole-task success')
     p.add_argument('--checkpoint', type=Path)
+    p.add_argument('--input-ablation',choices=['fixed-body-live-slider','fixed-body-proprio-slider'],help='Frozen policy diagnostic using one ideal initialization; not a trained student')
+    p.add_argument('--hand-gravity',action='store_true',help='Independent physics sensitivity: turn hand gravity ON, all other properties unchanged')
     p.add_argument('--teacher', type=Path, default=TEACHER)
     p.add_argument('--teacher-device', default='cpu')
     p.add_argument('--steps', type=int)
@@ -32,6 +34,8 @@ def main():
     p.add_argument('--thumb-first-stroke-q4-correction', type=float, default=0., help='Declared single-factor diagnostic, normalized additive q4 thumb correction only first5s; total increment remains capped .025rad/step')
     p.add_argument('--prepare-closed-seconds',type=float,default=0.,help='Explicit local diagnostic: physical closed-goal teacher preparation, separately scored, then a fresh20s external clock. No physics reset at boundary.')
     args = p.parse_args()
+    if args.input_ablation:
+        assert args.task=='S' and args.baseline=='learned' and args.checkpoint and not args.prepare_closed_seconds
     if args.motor_replay:
         assert args.task=='S' and args.baseline=='fixed' and args.checkpoint is None
         assert args.thumb_plan is None and not args.prepare_closed_seconds
@@ -46,7 +50,11 @@ def main():
     if plan is not None:
         assert args.task=='S' and args.baseline in ['learned','learned-static'] and not args.thumb_first_stroke_q4_correction and not args.prepare_closed_seconds
     args.output.mkdir(parents=True, exist_ok=False)
-    env = LocalG2(args.task, args.num_envs, args.route, graphics=args.video,state_path=args.state)
+    env = LocalG2(args.task, args.num_envs, args.route, graphics=args.video,state_path=args.state,hand_gravity=args.hand_gravity)
+    (args.output/'physics-diagnostic.json').write_text(json.dumps(dict(hand_gravity_on=args.hand_gravity,
+        effective_robot_gravity_flags=env.effective_gravity_flags,
+        baseline_robot_gravity_flags=env.metadata['robot_gravity_flags'],
+        scope='Only explicit hand gravity override; baseline configuration otherwise unchanged'),indent=2)+'\n')
     assert abs(args.thumb_first_stroke_q4_correction) <= 1.
     env.thumb_first_stroke_q4_correction = args.thumb_first_stroke_q4_correction
     env.thumb_plan=plan
@@ -75,6 +83,11 @@ def main():
         for episode in range(args.episodes):
             if episode:
                 env.reset()
+            reduced=None
+            if args.input_ablation:
+                from scripts.g2_input_ablation import InputAblation
+                reduced=InputAblation(args.input_ablation,env.object,env.dof[:,27,0],env.dof[:,:27,0])
+                (args.output/'input-contract.json').write_text(json.dumps(reduced.description(),indent=2)+'\n')
             replays = None
             if args.motor_replay:
                 from scripts.g2_motor_replay import MotorReplay
@@ -122,6 +135,9 @@ def main():
             first = env.frame()
             first.update(env.contacts_for_evaluation())
             rows = [first]
+            if reduced:
+                rows[0].update(input_observation=np.zeros((env.n,artifact['obs_dim']),dtype=np.float32),
+                    input_slider_estimate=env.dof[:,27,0].numpy().copy())
             for i in range(args.steps or env.steps):
                 if replays is not None:
                     # Only motor references change; env.step retains original
@@ -133,10 +149,20 @@ def main():
                                 feedback.write(json.dumps(dict(step=i,episode=episode,replica=j,**replay.diagnostic))+'\n')
                 with torch.no_grad():
                     if i == 0 or args.baseline != 'learned-static':
-                        action = torch.zeros(env.n, env.action_dim) if network is None else network.mean_action(env.observation())
+                        if reduced:
+                            live=args.input_ablation=='fixed-body-live-slider'
+                            observation=reduced.observation(env.dof[:,:27,0],env.dof[:,:27,1],env.targets,
+                                env.age,env.residual,env.last_action,env.goal(),env.lower,env.upper,env.slider_lower,
+                                live_slider=env.dof[:,27,0] if live else None,
+                                live_slider_velocity=env.dof[:,27,1] if live else None)
+                        else:
+                            observation=env.observation()
+                        action = torch.zeros(env.n, env.action_dim) if network is None else network.mean_action(observation)
                 env.step(action, baseline='learned' if args.baseline=='learned-static' else args.baseline)
                 frame = env.frame()
                 frame.update(env.contacts_for_evaluation())
+                if reduced:
+                    frame.update(input_observation=observation.numpy().copy(),input_slider_estimate=reduced.estimated_slider.numpy().copy())
                 if env.teacher:
                     frame.update(teacher_action=env.teacher.last_action.numpy().copy(),
                         teacher_raw_action=env.teacher.raw_action.numpy().copy(), teacher_observation=env.teacher.last_obs.numpy().copy())

@@ -100,6 +100,7 @@ def main():
     parser.add_argument('--slider-face',choices=['up','down'],default='up',help='Initial tabletop placement; down starts above the protruding passive slider and settles freely.')
     parser.add_argument('--table-localization',choices=['configured','settled-truth'],default='configured',help='Acquisition-only ideal localization after natural tabletop settling.')
     parser.add_argument('--gait-plan',type=Path,help='Sequential single-digit motor plan with fixed-reference one-second hold gates after actual air flip.')
+    parser.add_argument('--gait-arm-retarget-reference',type=Path,help='Explicit alternate controller: rigidly retarget original wrist path at actual gait motor reference; fingers and gates unchanged')
     parser.add_argument('--stay-after-gait',action='store_true',help='Keep achieved wrist pose for settling and optional policy operation; no transport.')
     parser.add_argument('--closeup',action='store_true',help='Additional synchronized camera; follows robot wrist, never affects physics.')
     parser.add_argument('--contact-diagnostics',action='store_true',help='Record whole-thumb conservative collision separation every control frame.')
@@ -527,7 +528,7 @@ def main():
                     continue
                 if label=='finger_gait':
                     from scripts.g2_finger_gait import execute_gait
-                    execute_gait(args.gait_plan,args.output,targets,hand_idx,arm_idx,current,tick,records,dt,k,policy.fk,table_z)
+                    execute_gait(args.gait_plan,args.output,targets,hand_idx,arm_idx,current,tick,records,dt,k,policy.fk,table_z,retarget_reference=args.gait_arm_retarget_reference)
                     if args.post_gait_roll:
                         from scripts.g2_assembly_roll import execute_roll
                         reference=execute_roll(k,targets,arm_idx,current,tick,records,dt,arm_table_check,args.output,args.post_gait_roll,args.assembly_roll_seconds)
