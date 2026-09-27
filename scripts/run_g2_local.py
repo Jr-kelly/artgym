@@ -17,45 +17,50 @@ def main():
     p.add_argument('--baseline', choices=['fixed', 'full-teacher', 'thumb-only', 'learned', 'learned-static'], default='fixed')
     p.add_argument('--num-envs', type=int, default=1)
     p.add_argument('--episodes', type=int, default=1)
-    p.add_argument('--route', choices=['support', 'joint'], default='support')
+    p.add_argument('--route', choices=['support', 'joint'], help='Defaults to the checkpoint route, or support for a baseline')
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--checkpoint', type=Path)
     p.add_argument('--teacher', type=Path, default=TEACHER)
     p.add_argument('--teacher-device', default='cpu')
     p.add_argument('--steps', type=int)
     p.add_argument('--video', action='store_true')
+    p.add_argument('--video-env',type=int,default=0,help='Declared replica to film; all replicas retain scores and raw traces')
     p.add_argument('--thumb-plan',type=Path,help='Named geometric motor-path diagnostic replaces frozen thumb actor; no slider actuation')
     p.add_argument('--thumb-first-stroke-q4-correction', type=float, default=0., help='Declared single-factor diagnostic, normalized additive q4 thumb correction only first5s; total increment remains capped .025rad/step')
     p.add_argument('--prepare-closed-seconds',type=float,default=0.,help='Explicit local diagnostic: physical closed-goal teacher preparation, separately scored, then a fresh20s external clock. No physics reset at boundary.')
     args = p.parse_args()
     if args.prepare_closed_seconds:
         assert args.task=='S' and args.baseline in ['learned','thumb-only'] and 0<args.prepare_closed_seconds<=6
+    artifact=torch.load(args.checkpoint,map_location='cpu') if args.checkpoint else None
+    args.route=args.route or (artifact['route'] if artifact else 'support')
+    if artifact:assert args.route==artifact['route'], 'Checkpoint/control route mismatch'
+    plan=json.loads(args.thumb_plan.read_text()) if args.thumb_plan else (artifact.get('thumb_plan') if artifact else None)
+    if plan is not None:
+        assert args.task=='S' and args.baseline in ['learned','learned-static'] and not args.thumb_first_stroke_q4_correction and not args.prepare_closed_seconds
     args.output.mkdir(parents=True, exist_ok=False)
     env = LocalG2(args.task, args.num_envs, args.route, graphics=args.video)
     assert abs(args.thumb_first_stroke_q4_correction) <= 1.
     env.thumb_first_stroke_q4_correction = args.thumb_first_stroke_q4_correction
-    if args.thumb_plan:
-        assert args.task=='S' and args.baseline in ['learned','learned-static'] and not args.thumb_first_stroke_q4_correction
-        env.thumb_plan=json.loads(args.thumb_plan.read_text())
+    env.thumb_plan=plan
     network = None
     if args.checkpoint:
         from scripts.train_g2_local import ActorCritic
-        artifact = torch.load(args.checkpoint, map_location='cpu')
         network = ActorCritic(env.observation().shape[-1], env.action_dim)
         network.load_state_dict(artifact['model'])
         network.eval()
-    if args.task == 'S' and args.baseline in ['full-teacher', 'thumb-only', 'learned', 'learned-static'] and not args.thumb_plan:
+    if args.task == 'S' and args.baseline in ['full-teacher', 'thumb-only', 'learned', 'learned-static'] and env.thumb_plan is None:
         from scripts.g2_local_teacher import BatchedTeacher
         env.teacher = BatchedTeacher(env, args.teacher, args.teacher_device)
     writer = camera = None
     if args.video:
+        assert 0<=args.video_env<env.n
         import imageio.v2 as imageio
         from isaacgym import gymapi
         cp = gymapi.CameraProperties()
         cp.width, cp.height = 960, 720
-        camera = env.gym.create_camera_sensor(env.envs[0], cp)
-        o = env.object[0, :3]
-        env.gym.set_camera_location(camera, env.envs[0], gymapi.Vec3(*(o+torch.tensor([.25,-.27,.18])).tolist()), gymapi.Vec3(*o.tolist()))
+        camera = env.gym.create_camera_sensor(env.envs[args.video_env], cp)
+        o = env.object[args.video_env, :3]
+        env.gym.set_camera_location(camera, env.envs[args.video_env], gymapi.Vec3(*(o+torch.tensor([.25,-.27,.18])).tolist()), gymapi.Vec3(*o.tolist()))
     summaries = []
     start = time.monotonic()
     try:
@@ -77,7 +82,7 @@ def main():
                     if writer:
                         env.gym.step_graphics(env.sim)
                         env.gym.render_all_camera_sensors(env.sim)
-                        image=env.gym.get_camera_image(env.sim,env.envs[0],camera,gymapi.IMAGE_COLOR)
+                        image=env.gym.get_camera_image(env.sim,env.envs[args.video_env],camera,gymapi.IMAGE_COLOR)
                         writer.append_data(image.reshape(720,960,4)[:,:,:3])
                 np.savez_compressed(args.output/('preparation-%03d.npz'%episode),**{k:np.asarray([v[k] for v in prep]) for k in prep[0]})
                 preparation = dict(seconds=args.prepare_closed_seconds,
@@ -125,7 +130,7 @@ def main():
                 if writer:
                     env.gym.step_graphics(env.sim)
                     env.gym.render_all_camera_sensors(env.sim)
-                    image = env.gym.get_camera_image(env.sim, env.envs[0], camera, gymapi.IMAGE_COLOR)
+                    image = env.gym.get_camera_image(env.sim, env.envs[args.video_env], camera, gymapi.IMAGE_COLOR)
                     writer.append_data(image.reshape(720, 960, 4)[:, :, :3])
             np.savez_compressed(args.output/('episode-%03d.npz'%episode), **{k:np.asarray([r[k] for r in rows]) for k in rows[0]})
             summary = {k:v.tolist() for k,v in env.metrics().items()}
@@ -139,6 +144,7 @@ def main():
                 writer = None
         (args.output/'report.json').write_text(json.dumps(dict(scope='local reset diagnostic; not continuous tabletop acquisition',
             args={k:str(v) if isinstance(v, Path) else v for k,v in vars(args).items()},
+            thumb_controller='geometric motor path from explicit file or embedded checkpoint' if env.thumb_plan is not None else ('frozen teacher' if env.teacher is not None else 'fixed'),
             elapsed_seconds=time.monotonic()-start, episodes=summaries), indent=2)+'\n')
     finally:
         if writer:

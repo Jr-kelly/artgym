@@ -878,7 +878,10 @@ def main():
                         policy.last_action=action.copy()
                         policy.control.previous_targets=target.copy()
                 targets[hand_idx]=target
-                tick('operate',action,policy.slider_initial+offset,obs)
+                # New local task uses the verified physical lower limit as0mm,
+                # even if the actual acquisition left the slider partly open.
+                zero=learned_runtime.slider_lower if learned_runtime is not None else policy.slider_initial
+                tick('operate',action,zero+offset,obs)
         trace={k:np.asarray([r[k] for r in records]) for k in records[0]}
         np.savez_compressed(args.output/'trace.npz',**trace)
         report=score(trace,takeover,args.group)

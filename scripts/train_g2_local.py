@@ -89,18 +89,19 @@ def main():
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
     torch.set_num_threads(1)
+    saved=torch.load(args.checkpoint,map_location='cuda:0') if args.checkpoint else None
+    plan=json.loads(args.thumb_plan.read_text()) if args.thumb_plan else (saved.get('thumb_plan') if saved else None)
     env = LocalG2(args.task, args.num_envs, args.route)
-    if args.thumb_plan:
+    if plan is not None:
         assert args.task=='S' and args.route=='joint'
-        env.thumb_plan=json.loads(args.thumb_plan.read_text())
-    if args.task == 'S' and not args.thumb_plan:
+        env.thumb_plan=plan
+    if args.task == 'S' and plan is None:
         from scripts.g2_local_teacher import BatchedTeacher
         env.teacher = BatchedTeacher(env, args.teacher, 'cuda:0')
     obs = env.observation().cuda()
     model = ActorCritic(obs.shape[-1], env.action_dim).cuda()
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, eps=1e-5)
     if args.checkpoint:
-        saved = torch.load(args.checkpoint, map_location='cuda:0')
         if saved['action_dim'] == 16 and env.action_dim == 20:
             if args.resume_optimizer:
                 raise ValueError('Expanded joint controller requires a new optimizer')

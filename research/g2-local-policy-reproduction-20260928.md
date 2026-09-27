@@ -87,3 +87,30 @@ not independent placements or evidence of generalization.
 `learning.jsonl`, `training-episodes.jsonl` and `eval-*.json/npz` separately
 record reward, sampled rollouts, and deterministic development checks.
 Source/contact cache sensitivity is documented in the result journal.
+
+## Final training configuration B4
+
+This is a new privileged joint controller around a motor-only geometric thumb
+path; it does not execute the frozen teacher thumb. Original models remain
+unchanged. The path alone held the knife but lost slider contact (R3-05).
+Support and thumb residuals have0.20rad span and0.60rad/s slew; total thumb
+motor increments are capped0.025rad/control and original asset joint limits.
+
+```bash
+python3 -m scripts.g2_local_launch --name my-B4 \
+  --module scripts.train_g2_local -- --task S --route joint --num-envs 32 \
+  --updates 600 --hours 2.5 --eval-every 25 \
+  --checkpoint /data/research/artgym-g2-local-policy-20260928/runs/g2-local-policy-20260928/A1-H-main/checkpoint-00010.pth \
+  --thumb-plan /data/research/artgym-g2-local-policy-20260928/configs/g2_local/thumb-material-path.json \
+  --initial-support-std .10 --initial-thumb-std .15 \
+  --output /data/research/artgym-g2-local-policy-20260928/runs/g2-local-policy-20260928/my-B4
+
+bash scripts/g2_local_python.sh -m scripts.run_g2_local --task S \
+  --baseline learned --checkpoint /absolute/path/to/B4-checkpoint.pth \
+  --video --output runs/g2-local-policy-20260928/my-B4-evaluation
+```
+
+The standalone runner and continuous runtime recover the thumb motor plan
+from checkpoint metadata, so evaluation cannot silently revert to frozen
+teacher control. All these are reproduction examples; check cumulative budgets
+before starting new work. No complete Ssuccess is asserted by these commands.
