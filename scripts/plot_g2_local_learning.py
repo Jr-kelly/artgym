@@ -33,7 +33,9 @@ def main():
         ex, success, rot, drift=[],[],[],[]
         by_update={r['update']:r for r in rows}
         for f in sorted(folder.glob('eval-*.json')):
-            r=json.loads(f.read_text());m=r['metrics'];row=by_update.get(r['update'])
+            r=json.loads(f.read_text())
+            if 'metrics' not in r or 'update' not in r:continue
+            m=r['metrics'];row=by_update.get(r['update'])
             if row is None:continue
             ex.append(offset+row['transitions']);success.append(np.mean(m['success']))
             rot.append(np.median(m['world_rotation_rad']));drift.append(np.median(m['world_drift_m'])*1000)
