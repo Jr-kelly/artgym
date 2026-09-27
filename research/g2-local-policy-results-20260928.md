@@ -26,6 +26,8 @@ and slew. S currently uses the original frozen teacher's thumb channel.
 | Coordinated geometric thumb path + fixed learned support, R3-05 | 2.221mm /0.0853rad body;12.389mm slider travel; all extension endpoints fail | Holds body, loses thumb-slider contact around1.5–2s |
 | Same thumb path + live Hsupport, R3-06 |301.5mm /3.118rad; drops; unstable by11s | Hfeedback transfer can itself fail |
 | B4 joint PPO update10 | **2/32 local Spasses,1/32 strict2mm**; both thumb contact100%, table0 | First learned two-cycle coordination; fragile and not continuous acquisition |
+| B4 update25 | **4/32 local Spasses**, independently rescored; strict0/32 | Basic success improved; one acquired source only |
+| Fresh simulation of B4update10, R4-01 | **0/4** across2envs×2resets | Selected training-evaluation success does not establish repeatability |
 
 R2-03 exact endpoint maxima are **40.00/0/6.71/25.16mm**. All operation
 criteria remain unchanged: last0.3s max endpoint error<10mm per phase,
@@ -44,7 +46,17 @@ now a comparison rather than part of this route. Independent raw scoring
 confirms the two local successes:4.470mm/0.19368rad with endpoint maxima
 1.636/1.592/0.779/1.179mm, and0.915mm/0.10475rad with endpoint maxima
 0.231/2.355/0.035/2.007mm. All30 failures remain in the denominator.
-Fresh-simulator repetition and continued training are ongoing.
+The first fresh-simulator repetition failed4/4. The later checkpoint25 passed
+4/32 local development replicas and is now running through the actual continuous
+tabletop prefix (R4-02). Its outcome is pending; no table-to-operation success
+or unseen-placement validation is claimed.
+
+The [control ledger](g2-local-policy-control-results-20260928.csv) separates
+local resets, continuous holding, software-aborted diagnostics and failures.
+Training evaluations are separate model-selection data, not additional
+independent placements. The completed baseline evidence and failure videos are
+in [Release v1](https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-local-policy-20260928-v1);
+active B4 and subsequent continuous checks will be delivered as another increment.
 
 All new local networks use real-time simulated object pose, velocity and slider
 state. The composite is a **new privileged method**, not unchanged teacher
