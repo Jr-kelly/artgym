@@ -204,7 +204,9 @@ def main():
                         act = model.mean_action(env.observation().cuda())
                     env.step(act)
                     # Preserve every evaluation replica, including failures.
-                    evaluation_rows.append(env.frame())
+                    frame = env.frame()
+                    frame.update(env.contacts_for_evaluation())
+                    evaluation_rows.append(frame)
                 metric = {k:v.tolist() for k,v in env.metrics().items()}
                 evaluation = dict(update=update, scope='deterministic development reset, one acquisition source',
                     replicas=env.n, unique_acquisition_states=1, metrics=metric,

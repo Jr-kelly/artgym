@@ -363,12 +363,17 @@ class LocalG2:
         self.age += 1
         # Hard safety failures terminate training, never count success.
         invalid = ~torch.isfinite(self.dof).all(dim=-1).all(dim=-1) | ~torch.isfinite(self.object).all(-1)
-        # Invalid simulator states terminate with an explicit penalty instead
-        # of contaminating PPO returns. Valid-state reward is unchanged.
-        reward = torch.where(invalid, torch.full_like(reward, -10.), reward)
         terminated = drop | (rot > 1.5) | invalid
         timeout = self.age >= self.steps
-        info = dict(drift=drift, rotation=rot, endpoint_error=err, terminated=terminated, timeout=timeout)
+        # A safety reset must not erase the failed remainder of a finite task.
+        # Charge an absorbing -8/step through the original horizon, discounted
+        # exactly as PPO (gamma=.995). -8 is below the bounded valid shaping
+        # reward (H >= -6.30, S >= -5.05). No change to physics or evaluation.
+        remaining = (self.steps - self.age + 1).clamp(min=1)
+        absorbing = -8. * (1. - .995 ** remaining.float()) / (1. - .995)
+        reward = torch.where(terminated, absorbing, reward.clamp(min=-8.))
+        info = dict(drift=drift, rotation=rot, endpoint_error=err, terminated=terminated, timeout=timeout,
+                    absorbing_terminal_reward=torch.where(terminated, absorbing, torch.zeros_like(reward)))
         return self.observation(), reward, terminated | timeout, info
 
     def metrics(self):
