@@ -382,7 +382,10 @@ class LocalG2:
             wrist=self.wrist[:, :7].numpy().copy(), targets=self.command.numpy().copy(),
             reference_targets=self.targets.numpy().copy(), arm_integral_state=self.integral.numpy().copy(),
             action=self.last_action.numpy().copy(), residual=self.residual.numpy().copy(),
-            slider=self.dof[:, 27, 0].numpy().copy(), hand_force=self.contact[self.hand_body_ids].numpy().copy())
+            slider=self.dof[:, 27, 0].numpy().copy(), hand_force=self.contact[self.hand_body_ids].numpy().copy(),
+            fixed_object_reference=self.initial_object.numpy().copy(),
+            object_hand=local_pose(self.wrist,self.object).numpy().copy(),
+            fixed_hand_reference=self.initial_local.numpy().copy())
 
     def close(self):
         self.gym.destroy_sim(self.sim)

@@ -19,11 +19,11 @@ ROOT = Path(__file__).resolve().parents[1]
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--name', required=True)
-    parser.add_argument('--module', choices=['scripts.run_g2_local','scripts.train_g2_local'], required=True)
+    parser.add_argument('--module', choices=['scripts.run_g2_local','scripts.train_g2_local','scripts.run_g2_tabletop'], required=True)
     parser.add_argument('args', nargs=argparse.REMAINDER)
     args = parser.parse_args()
     base = ROOT/'runs/g2-local-policy-20260928'
-    files = sorted((ROOT/'scripts').glob('*.py')) + sorted((ROOT/'configs/g2_local').glob('*'))
+    files = sorted((ROOT/'scripts').glob('*.py')) + sorted((ROOT/'configs/g2_local').rglob('*'))
     hashes = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in files if p.is_file()}
     version = hashlib.sha256(json.dumps(hashes,sort_keys=True).encode()).hexdigest()[:16]
     pin = base/'source-pins'/version

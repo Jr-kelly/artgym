@@ -14,7 +14,7 @@ TEACHER = Path('/data/research/artgym-experiments-20260921/runs/wuji-goal/releas
 def main():
     p = argparse.ArgumentParser()
     p.add_argument('--task', choices=['H', 'S'], default='H')
-    p.add_argument('--baseline', choices=['fixed', 'full-teacher', 'thumb-only', 'learned'], default='fixed')
+    p.add_argument('--baseline', choices=['fixed', 'full-teacher', 'thumb-only', 'learned', 'learned-static'], default='fixed')
     p.add_argument('--num-envs', type=int, default=1)
     p.add_argument('--episodes', type=int, default=1)
     p.add_argument('--route', choices=['support', 'joint'], default='support')
@@ -46,20 +46,22 @@ def main():
         camera = env.gym.create_camera_sensor(env.envs[0], cp)
         o = env.object[0, :3]
         env.gym.set_camera_location(camera, env.envs[0], gymapi.Vec3(*(o+torch.tensor([.25,-.27,.18])).tolist()), gymapi.Vec3(*o.tolist()))
-        writer = imageio.get_writer(args.output/'local-diagnostic.mp4', fps=30, codec='libx264', quality=7, pixelformat='yuv420p', ffmpeg_params=['-movflags', '+faststart'])
     summaries = []
     start = time.monotonic()
     try:
         for episode in range(args.episodes):
             if episode:
                 env.reset()
+            if args.video:
+                writer = imageio.get_writer(args.output/('local-episode-%03d.mp4'%episode), fps=30, codec='libx264', quality=7, pixelformat='yuv420p', ffmpeg_params=['-movflags', '+faststart'])
             first = env.frame()
             first.update(env.contacts_for_evaluation())
             rows = [first]
             for i in range(args.steps or env.steps):
                 with torch.no_grad():
-                    action = torch.zeros(env.n, env.action_dim) if network is None else network.mean_action(env.observation())
-                env.step(action, baseline=args.baseline)
+                    if i == 0 or args.baseline != 'learned-static':
+                        action = torch.zeros(env.n, env.action_dim) if network is None else network.mean_action(env.observation())
+                env.step(action, baseline='learned' if args.baseline=='learned-static' else args.baseline)
                 frame = env.frame()
                 frame.update(env.contacts_for_evaluation())
                 if env.teacher:
@@ -69,6 +71,9 @@ def main():
                         for k in ['teacher_action', 'teacher_raw_action', 'teacher_observation']:
                             rows[0][k] = np.zeros_like(frame[k])
                 rows.append(frame)
+                if (i+1)%150 == 0:
+                    print(json.dumps(dict(episode=episode,step=i+1,
+                        max_drift_m=env.max_drift.tolist(),max_rotation_rad=env.max_rotation.tolist())),flush=True)
                 if writer:
                     env.gym.step_graphics(env.sim)
                     env.gym.render_all_camera_sensors(env.sim)
@@ -78,6 +83,9 @@ def main():
             summary = {k:v.tolist() for k,v in env.metrics().items()}
             summaries.append(summary)
             print(json.dumps(dict(episode=episode, metrics=summary)), flush=True)
+            if writer:
+                writer.close()
+                writer = None
         (args.output/'report.json').write_text(json.dumps(dict(scope='local reset diagnostic; not continuous tabletop acquisition',
             args={k:str(v) if isinstance(v, Path) else v for k,v in vars(args).items()},
             elapsed_seconds=time.monotonic()-start, episodes=summaries), indent=2)+'\n')
