@@ -23,6 +23,30 @@ def main():
     parser.add_argument('args', nargs=argparse.REMAINDER)
     args = parser.parse_args()
     base = ROOT/'runs/g2-local-policy-20260928'
+    extra = args.args[1:] if args.args[:1] == ['--'] else args.args
+    def option(command, flag, default=None):
+        return command[command.index(flag)+1] if flag in command else default
+    if args.module == 'scripts.train_g2_local':
+        state = json.loads((base/'state.json').read_text())
+        now = datetime.datetime.now(datetime.timezone.utc)
+        delivery = datetime.datetime.fromisoformat(state['delivery_start_utc'])
+        hours = float(option(extra, '--hours', 2.))
+        accounted = 0.
+        for old in base.glob('*-launch.json'):
+            item = json.loads(old.read_text())
+            if item['module'] != 'scripts.train_g2_local':
+                continue
+            oldcmd = item['command']
+            status = Path(option(oldcmd,'--output'))/'status.json'
+            if status.exists():
+                accounted += json.loads(status.read_text())['seconds']/3600
+            else:
+                # Reserve the entire declared limit for a running/uncertain job.
+                accounted += float(option(oldcmd,'--hours',2.))
+        if hours <= 0 or accounted+hours > state['budgets']['gpu_hours_max']:
+            raise ValueError('Cumulative local learning budget exceeded: used/reserved %.4fh + requested %.4fh' % (accounted,hours))
+        if now >= delivery or now+datetime.timedelta(hours=hours) > delivery:
+            raise ValueError('Training would enter the reserved delivery window; shorten hours')
     files = sorted((ROOT/'scripts').glob('*.py')) + sorted((ROOT/'configs/g2_local').rglob('*'))
     hashes = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in files if p.is_file()}
     version = hashlib.sha256(json.dumps(hashes,sort_keys=True).encode()).hexdigest()[:16]
@@ -38,7 +62,6 @@ def main():
     manifest = base/(args.name+'-launch.json')
     if manifest.exists():
         raise FileExistsError('Never overwrite a launch manifest: '+str(manifest))
-    extra = args.args[1:] if args.args[:1] == ['--'] else args.args
     cmd = ['/home/agiuser/miniconda3/envs/artgym/bin/python','-u','-m',args.module]+extra
     env = os.environ.copy()
     env.update(PATH='/home/agiuser/miniconda3/envs/artgym/bin:'+env['PATH'],
