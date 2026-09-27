@@ -26,7 +26,7 @@ def stability(rows,world_reference,hand_reference,hand_indices,command_start,mov
         passive_slider_travel_m=float(np.ptp([r['slider'] for r in rows])))
 
 
-def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,fk,table_z,world_reference=None,retarget_reference=None,translate_before_alignment=False):
+def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,fk,table_z,world_reference=None,retarget_reference=None,translate_before_alignment=False,pinky_retarget=False):
     plan=json.loads(path.read_text())
     if retarget_reference is not None:
         from scripts.g2_retarget_gait import retarget
@@ -44,7 +44,17 @@ def execute_gait(path,output,targets,hand_idx,arm_idx,current,tick,records,dt,k,
         if error>1e-6:raise ValueError('Gait initial command mismatch: '+str(error))
     output_rows=[];normal_feedback=None;feedback_nominal=None
     feedback_configs=plan.get('normal_feedback_segments',([plan['normal_feedback']] if 'normal_feedback' in plan else []))
-    for stage in plan['stages']:
+    for stage_index in range(len(plan['stages'])):
+        stage=plan['stages'][stage_index]
+        if pinky_retarget and stage['name']=='pinky_underside_touch':
+            if normal_feedback is not None:raise ValueError('Do not mix small-finger replanning and normal feedback')
+            from scripts.g2_pinky_retarget import retarget as retarget_pinky
+            measured,_,actual_slider,measured_wrist,measured_object,_=current()
+            adapted,diagnostic=retarget_pinky(plan,measured,targets[hand_idx],measured_wrist,measured_object,actual_slider)
+            (output/'pinky-retarget-preflight.json').write_text(json.dumps(diagnostic,indent=2)+'\n')
+            if adapted is None:raise ValueError('Small-finger retarget geometric preflight failed')
+            plan=adapted;stage=plan['stages'][stage_index]
+            (output/'gait-pinky-adapted-plan.json').write_text(json.dumps(plan,indent=2)+'\n')
         matching=[config for config in feedback_configs if config.get('start_stage')==stage['name']]
         if len(matching)>1:raise ValueError('Ambiguous normal-feedback segment start')
         if 'required_initial_hand_command' in stage:

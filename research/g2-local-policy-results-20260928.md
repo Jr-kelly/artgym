@@ -125,7 +125,7 @@ contact establishes at1/30s, and it is excluded when identifying loss after esta
 the diagnosis but does not prove all proprioceptive estimation impossible.
 
 Gravity changes were verified on exactly26 hand bodies. No other physical parameter changed.
-The bounded motor-only gravity-feedforward S comparison R10-01 now independently passes2/2 under hand gravity ON:2.658/2.664mm and .10852/.10636rad; endpoints<3.5mm, strict2mm fails. H comparisons and continuous promotion remain pending. Controller:
+The bounded motor-only gravity-feedforward S comparison R10-01 now independently passes2/2 under hand gravity ON:2.658/2.664mm and .10852/.10636rad; endpoints<3.5mm, strict2mm fails. H comparison independently completes: gravityON without compensation0/2 (.614/.689rad); with the same compensation2/2 (2.431/2.448mm,.02965/.03928rad, slider movement.225/.279mm). The same frozen networks were used, with no new training. Continuous gravityON with/without compensation is now running from the normal tabletop start. Controller:
 URDF modeled gravity divided by actual PD stiffness, target bias capped±.08rad, original total target
 slew/joint limits retained. Offline torque agrees independent potential-energy derivatives; initial
 required bias is≤.06344rad and fits original limits. These are model torques, not measured forces.
@@ -142,6 +142,7 @@ force has been measured. These constraints materially limit sim-to-real claims.
 - Local browser: http://127.0.0.1:8767/g2-local-policy-20260928/
 - [Reproduction commands](g2-local-policy-reproduction-20260928.md), [full preregistration/journal](g2-local-policy-20260928.md), [control ledger](g2-local-policy-control-results-20260928.csv)
 
-Next: finish the bounded gait-coordinate comparison and independent fixed continuous repetition;
-then the preregistered motor-only gravity comparison. No fifth training configuration. Any changed
+R9 gait correction closed: the physical translation passed with0.0838mm tracking error and1.831mm residual position; original orientation alignment then passed with0.01177rad residual. The next failure was missing small-finger support atstep1959. This is progress in acquisition, not a full new-placement success.
+
+Next: finish the continuous hand-gravity comparison, then evaluate one bounded small-finger contact adaptation if its geometric checks pass. No fifth training configuration. Any changed
 method requires a newly declared test set before a new-placement success claim.

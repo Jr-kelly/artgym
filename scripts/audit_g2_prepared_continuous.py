@@ -23,6 +23,7 @@ def main():
     p.add_argument('--prefix-trace',type=Path,required=True)
     p.add_argument('--checkpoint',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True)
+    p.add_argument('--allow-hand-gravity',action='store_true',help='Audit separately labeled gravity-ON continuous condition; require exactly hand-body gravity flags changed, other effective physics equal. Prefix need not match physically.')
     a=p.parse_args();t=np.load(a.run/'trace.npz');prefix=np.load(a.prefix_trace)
     launch=json.loads(a.launch.read_text());pin=Path(launch['cwd'])
     takeover=json.loads((a.run/'takeover.json').read_text());reported=json.loads((a.run/'report.json').read_text())
@@ -31,7 +32,13 @@ def main():
     physics=json.loads((a.run/'physics.json').read_text());lower=physics['knife_dof_properties']['lower'][0]
     prefix_physics=json.loads((a.prefix_trace.parent/'physics.json').read_text())
     physics_equal=physics==prefix_physics
-    assert physics_equal, 'Actual physics properties differ from the frozen preparation source'
+    physics_differences=[key for key in set(physics)|set(prefix_physics) if physics.get(key)!=prefix_physics.get(key)]
+    if a.allow_hand_gravity:
+        assert physics_differences==['robot_gravity_flags'], physics_differences
+        for name,old,new in zip(physics['robot_body_names'],prefix_physics['robot_gravity_flags'],physics['robot_gravity_flags']):
+            assert (old==1 and new==0) if name.startswith('hand_r_') else old==new
+    else:
+        assert physics_equal, 'Actual physics properties differ from the frozen preparation source'
     errors=[];goal_errors=[]
     for phase in range(4):
         last=indices[phase*150+141:(phase+1)*150];goal=lower+(.04 if phase%2==0 else 0.)
@@ -43,8 +50,9 @@ def main():
     held=np.flatnonzero(t['phase']=='learned_hold');h0=held[0]-1;hd,hr=pose_error(t['object'][held],t['object'][h0]);hs=float(np.max(np.abs(t['slider'][held]-t['slider'][h0])))
     hold_success=bool(len(held)==660 and hd.max()<.01 and hr.max()<.25 and hs<.01 and not np.any(t['knife_table_contacts'][held]) and np.all(t['object'][held,2]>=takeover['table_height']+.05))
     fields=['all_dof_position','dof_velocity','object_rigid_state','slider_rigid_state','reference_targets','targets','arm_integral_state','q','wrist','action']
-    assert len(prefix['time'])==start
-    prefix_errors={k:float(np.max(np.abs(t[k][:start]-prefix[k]))) for k in fields}
+    prefix_same_length=len(prefix['time'])==start
+    if not a.allow_hand_gravity:assert prefix_same_length
+    prefix_errors={k:float(np.max(np.abs(t[k][:start]-prefix[k]))) for k in fields} if prefix_same_length else {}
     source=ast.parse((pin/'scripts/run_g2_tabletop.py').read_text())
     tick=next(n for n in ast.walk(source) if isinstance(n,ast.FunctionDef) and n.name=='tick')
     setters=[];forbidden=[]
@@ -85,7 +93,8 @@ def main():
         first_instability_s=float((first[0]+1)/30) if len(first) else None,
         hold_drift_m=float(hd.max()),hold_rotation_rad=float(hr.max()),hold_slider_error_m=hs,
         physical_goals_max_error_m=max(goal_errors),prefix_frames=start,prefix_errors=prefix_errors,
-        prefix_verified=max(prefix_errors.values())<1e-7,
+        prefix_verified=bool(prefix_same_length and max(prefix_errors.values())<1e-7),
+        prefix_comparison_scope='Diagnostic only: different hand gravity changes real acquisition dynamics' if a.allow_hand_gravity else 'Exact original frozen preparation prefix',
         input_command_parity_verified=bool(parity),maximum_motor_command_error_rad=max(command_errors),
         maximum_action_error=max(action_errors),maximum_observation_error=max(observation_errors),
         state_reset_after_start=False,state_setter_source_locations=setters,
@@ -93,6 +102,7 @@ def main():
         checkpoint_sha256=hashlib.sha256(a.checkpoint.read_bytes()).hexdigest(),
         hold_checkpoint_sha256=hashlib.sha256(Path(reported['args']['learned_hold_policy']).read_bytes()).hexdigest(),
         effective_physics_equal_to_successful_prefix=physics_equal,
+        allowed_physics_differences=physics_differences,
         actual_history_frames=takeover['history_frames'],learner_memory='feedforward; actual acquisition history retained, never injected from cache',
         original_teacher_executed=reported['original_actor_executed_in_operation'])
     assert result['independent_whole_success']==reported['required_task_success']

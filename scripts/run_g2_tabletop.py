@@ -41,6 +41,8 @@ def main():
     parser.add_argument('--arm-gain-scale',type=float,default=1.)
     parser.add_argument('--arm-damping-scale',type=float,default=1.)
     parser.add_argument('--arm-gravity',choices=['on','off'],default='on')
+    parser.add_argument('--hand-gravity',action='store_true',help='Labeled alternate physics: enable all hand-body gravity from the first physics step; default frozen baseline remains OFF')
+    parser.add_argument('--hand-gravity-compensation',action='store_true',help='Explicit motor-only URDF gravity/stiffness bias, capped .08rad and original total target slew/limits; requires --hand-gravity')
     parser.add_argument('--dx',type=float,default=0.)
     parser.add_argument('--dy',type=float,default=0.)
     parser.add_argument('--yaw',type=float,default=0.)
@@ -103,10 +105,13 @@ def main():
     parser.add_argument('--gait-arm-retarget-reference',type=Path,help='Explicit alternate controller: rigidly retarget original wrist path at actual gait motor reference; fingers and gates unchanged')
     parser.add_argument('--operation-input-ablation',choices=['fixed-body-live-slider','fixed-body-proprio-slider'],help='S-only frozen-policy input diagnostic with ideal one-time initialization; acquisition/H still privileged')
     parser.add_argument('--gait-translation-before-alignment',action='store_true',help='Separate control variant: physical4mm-capped translation then hold, original alignment5mm gate unchanged')
+    parser.add_argument('--gait-pinky-retarget',action='store_true',help='Explicit one-time truth-based adaptation of small-finger touch/close after actual clearance hold; other fingers and all gates unchanged')
     parser.add_argument('--stay-after-gait',action='store_true',help='Keep achieved wrist pose for settling and optional policy operation; no transport.')
     parser.add_argument('--closeup',action='store_true',help='Additional synchronized camera; follows robot wrist, never affects physics.')
     parser.add_argument('--contact-diagnostics',action='store_true',help='Record whole-thumb conservative collision separation every control frame.')
     args=parser.parse_args()
+    if args.hand_gravity_compensation:
+        assert args.hand_gravity and not args.hand_only_diagnostic, 'Gravity motor compensation requires full G2 and hand gravity ON'
     # A plan with clearance gates needs actual geometry measurements. Missing
     # diagnostics used to reach step1989 then mislabel an absent value (-1)
     # as a physical clearance failure. Enable the required measurement up front.
@@ -232,9 +237,25 @@ def main():
     rb_names=gym.get_actor_rigid_body_names(env,robot)
     rb_props=gym.get_actor_rigid_body_properties(env,robot)
     for name,p in zip(rb_names,rb_props):
-        # Frozen hand has gravity disabled. G2 retains gravity unless a labeled diagnostic requests otherwise.
-        p.flags=1 if name.startswith('hand_r_') or args.arm_gravity=='off' else 0
+        # Separate, explicit hand/arm conditions, established before any step.
+        p.flags=(0 if args.hand_gravity else 1) if name.startswith('hand_r_') else (1 if args.arm_gravity=='off' else 0)
     gym.set_actor_rigid_body_properties(env,robot,rb_props)
+    hand_gravity_model=None
+    if args.hand_gravity_compensation:
+        from scripts.g2_hand_gravity import HandGravity
+        hand_gravity_model=HandGravity(props['stiffness'][hand_idx])
+        assert policy.fk.names==hand_gravity_model.hand.names
+        audit={}
+        for name,prop in zip(rb_names,gym.get_actor_rigid_body_properties(env,robot)):
+            if name not in hand_gravity_model.masses:continue
+            mass,com=hand_gravity_model.masses[name]
+            audit[name]=dict(mass_error_kg=abs(prop.mass-mass),com_error_m=float(np.max(np.abs(np.array([prop.com.x,prop.com.y,prop.com.z])-com))))
+        assert max(max(item.values()) for item in audit.values())<1e-7
+        (args.output/'hand-gravity-control.json').write_text(json.dumps(dict(
+            scope='Model-based motor-target feedforward from first step; no object input or force API',
+            mass_com_audit=audit,bias_cap_rad=.08,support_total_slew_rad=.02,thumb_total_slew_rad=.025,
+            policy_reference='nominal motor target before gravity feedforward; actual command logged separately',
+            gravity_enabled_before_first_step=True),indent=2)+'\n')
     shapes=gym.get_actor_rigid_shape_properties(env,robot)
     counts=gym.get_actor_rigid_body_shape_indices(env,robot)
     digits=['thumb','index','middle','ring','pinky']
@@ -388,6 +409,7 @@ def main():
     learned_runtime=None
     pair_records=[]
     arm_integral=np.zeros(len(arm_idx))
+    previous_hand_command=targets[hand_idx].copy()
     def tick(phase,action=None,goal=0.,obs=None):
         nonlocal global_step
         reference_targets=targets.copy();command_targets=targets.copy()
@@ -395,6 +417,14 @@ def main():
             measured=dof[arm_idx,0].cpu().numpy()
             arm_integral[:]=np.clip(arm_integral+args.arm_integral_gain*dt*(targets[arm_idx]-measured),-.08,.08)
             command_targets[arm_idx]=np.clip(targets[arm_idx]+arm_integral,k.lower,k.upper)
+        if hand_gravity_model is not None:
+            gravity_input_q=np.concatenate([dof[arm_idx,0].cpu().numpy(),dof[hand_idx,0].cpu().numpy()])
+            gravity_bias,gravity_torque=hand_gravity_model.bias(gravity_input_q)
+            desired=targets[hand_idx]+gravity_bias.astype(np.float32)
+            slew=np.asarray([.02]*16+[.025]*4,dtype=np.float32)
+            desired=previous_hand_command+np.clip(desired-previous_hand_command,-slew,slew)
+            command_targets[hand_idx]=np.clip(desired,props['lower'][hand_idx],props['upper'][hand_idx])
+            previous_hand_command[:]=command_targets[hand_idx]
         gym.set_dof_position_target_tensor(sim,gymtorch.unwrap_tensor(torch.from_numpy(command_targets)))
         for _ in range(4):gym.simulate(sim);gym.fetch_results(sim,True)
         refresh();q,qa,sl,w,o,l=current()
@@ -447,6 +477,9 @@ def main():
             learned_residual[:size]=learned_runtime.residual[0].numpy()
             ob=learned_runtime.last_observation[0].numpy();learned_observation[:len(ob)]=ob
         records[-1].update(learned_action=learned_action,learned_residual=learned_residual,learned_observation=learned_observation)
+        if hand_gravity_model is not None:
+            records[-1].update(hand_gravity_input_q=gravity_input_q.copy(),hand_gravity_model_torque=gravity_torque.copy(),
+                hand_gravity_applied_motor_bias=(command_targets[hand_idx]-reference_targets[hand_idx]).copy())
         if digit_geometry is not None:
             records[-1]['thumb_gap_lower_bound_m']=digit_geometry.minimum_gap(q,np.linalg.inv(o)@w,sl)
         if writer:
@@ -530,7 +563,7 @@ def main():
                     continue
                 if label=='finger_gait':
                     from scripts.g2_finger_gait import execute_gait
-                    execute_gait(args.gait_plan,args.output,targets,hand_idx,arm_idx,current,tick,records,dt,k,policy.fk,table_z,retarget_reference=args.gait_arm_retarget_reference,translate_before_alignment=args.gait_translation_before_alignment)
+                    execute_gait(args.gait_plan,args.output,targets,hand_idx,arm_idx,current,tick,records,dt,k,policy.fk,table_z,retarget_reference=args.gait_arm_retarget_reference,translate_before_alignment=args.gait_translation_before_alignment,pinky_retarget=args.gait_pinky_retarget)
                     if args.post_gait_roll:
                         from scripts.g2_assembly_roll import execute_roll
                         reference=execute_roll(k,targets,arm_idx,current,tick,records,dt,arm_table_check,args.output,args.post_gait_roll,args.assembly_roll_seconds)
@@ -853,7 +886,8 @@ def main():
                 gravity_closure_orientation=args.gravity_close_before_takeover),
             history_frames=len(policy.history),rnn='zeroed once at takeover',history='actual settled q and zero hold actions',
             force_sensor_enabled=force_sensor_enabled,
-            hand_gravity='disabled as frozen training',arm_gravity=args.arm_gravity,
+            hand_gravity='enabled from first physics step' if args.hand_gravity else 'disabled as frozen training',
+            hand_gravity_motor_feedforward=args.hand_gravity_compensation,arm_gravity=args.arm_gravity,
             gravity_in_wrist=(w[:3,:3].T@np.array([0,0,-9.81])).tolist())
         if preset_candidate is not None:
             takeover['preset_scope']='Independent geometry candidate initialized before first physics step; actual2s history and actual settled motor reference; not tabletop acquisition.'
