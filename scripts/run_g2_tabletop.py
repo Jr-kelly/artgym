@@ -860,11 +860,16 @@ def main():
             for step in range(round(args.seconds/dt)):
                 if step>0 or args.group!='A':q,qa,sl,w,o,l=current()
                 offset=.04 if (step//150)%2==0 else 0.
-                target,action,obs=policy.step(q,w,o,l,sl,offset)
+                if learned_runtime is not None and learned_runtime.thumb_plan is not None:
+                    # Explicit new geometric thumb prior, not frozen actor output.
+                    target=targets[hand_idx].copy();action=np.zeros(20,dtype=np.float32)
+                    obs=np.zeros(138,dtype=np.float32);policy.last_raw_action[:]=0
+                else:
+                    target,action,obs=policy.step(q,w,o,l,sl,offset)
                 if learned_runtime is not None:
                     target=learned_runtime.step(dof[:,0].cpu().numpy(),dof[:,1].cpu().numpy(),
                         rb[wrist_id].cpu().numpy(),rb[obj_id].cpu().numpy(),rb[slider_id].cpu().numpy(),target)
-                    if learned_runtime.route=='joint':
+                    if learned_runtime.route=='joint' or learned_runtime.thumb_plan is not None:
                         # Feed actual joint-composite thumb commands into both
                         # incremental reference and next actor/history input.
                         # Keep raw frozen action separately in the trace.

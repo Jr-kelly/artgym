@@ -24,12 +24,19 @@ def main():
     p.add_argument('--teacher-device', default='cpu')
     p.add_argument('--steps', type=int)
     p.add_argument('--video', action='store_true')
+    p.add_argument('--thumb-plan',type=Path,help='Named geometric motor-path diagnostic replaces frozen thumb actor; no slider actuation')
+    p.add_argument('--thumb-first-stroke-q4-correction', type=float, default=0., help='Declared single-factor diagnostic, normalized additive q4 thumb correction only first5s; total increment remains capped .025rad/step')
     p.add_argument('--prepare-closed-seconds',type=float,default=0.,help='Explicit local diagnostic: physical closed-goal teacher preparation, separately scored, then a fresh20s external clock. No physics reset at boundary.')
     args = p.parse_args()
     if args.prepare_closed_seconds:
         assert args.task=='S' and args.baseline in ['learned','thumb-only'] and 0<args.prepare_closed_seconds<=6
     args.output.mkdir(parents=True, exist_ok=False)
     env = LocalG2(args.task, args.num_envs, args.route, graphics=args.video)
+    assert abs(args.thumb_first_stroke_q4_correction) <= 1.
+    env.thumb_first_stroke_q4_correction = args.thumb_first_stroke_q4_correction
+    if args.thumb_plan:
+        assert args.task=='S' and args.baseline in ['learned','learned-static'] and not args.thumb_first_stroke_q4_correction
+        env.thumb_plan=json.loads(args.thumb_plan.read_text())
     network = None
     if args.checkpoint:
         from scripts.train_g2_local import ActorCritic
@@ -37,7 +44,7 @@ def main():
         network = ActorCritic(env.observation().shape[-1], env.action_dim)
         network.load_state_dict(artifact['model'])
         network.eval()
-    if args.task == 'S' and args.baseline in ['full-teacher', 'thumb-only', 'learned', 'learned-static']:
+    if args.task == 'S' and args.baseline in ['full-teacher', 'thumb-only', 'learned', 'learned-static'] and not args.thumb_plan:
         from scripts.g2_local_teacher import BatchedTeacher
         env.teacher = BatchedTeacher(env, args.teacher, args.teacher_device)
     writer = camera = None

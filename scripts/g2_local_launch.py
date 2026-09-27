@@ -26,6 +26,9 @@ def main():
     extra = args.args[1:] if args.args[:1] == ['--'] else args.args
     def option(command, flag, default=None):
         return command[command.index(flag)+1] if flag in command else default
+    output = Path(option(extra, '--output', ''))
+    if not output.is_absolute() or base.resolve() not in output.resolve().parents:
+        raise ValueError('Use an absolute --output inside the declared experiment run directory')
     if args.module == 'scripts.train_g2_local':
         state = json.loads((base/'state.json').read_text())
         now = datetime.datetime.now(datetime.timezone.utc)

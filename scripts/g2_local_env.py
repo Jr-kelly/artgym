@@ -54,6 +54,8 @@ class LocalG2:
                  state_path=None, residual_span=.20, residual_speed=.60):
         self.task, self.n, self.route = task, num_envs, route
         self.goal_override = None  # only for explicitly scored physical preparation diagnostics
+        self.thumb_first_stroke_q4_correction = 0.  # explicit diagnostic only, never changed by training
+        self.thumb_plan = None
         self.span, self.speed = residual_span, residual_speed
         self.action_dim = 16 if route == 'support' else 20
         self.steps = 660 if task == 'H' else 600
@@ -312,18 +314,38 @@ class LocalG2:
         previous_thumb = self.targets[:, 23:27].clone()
         if self.teacher is not None and self.task == 'S':
             self.teacher.step(full=baseline == 'full-teacher')
+            if self.thumb_first_stroke_q4_correction:
+                assert self.route == 'support' and baseline != 'full-teacher'
+                # One preregistered first-stroke articulation diagnostic. Total
+                # thumb motion remains <= the original .025rad/control bound.
+                self.targets[:, 26] += .025 * self.thumb_first_stroke_q4_correction * (self.age < 150)
+                self.targets[:, 23:27] = previous_thumb + (self.targets[:, 23:27]-previous_thumb).clamp(-.025,.025)
+        if self.thumb_plan is not None:
+            assert self.task == 'S' and self.teacher is None
+            from scripts.g2_thumb_path import thumb_path_targets
+            target, _ = thumb_path_targets(self.thumb_plan,self.age.numpy(),self.source['reference_targets'][23:27].numpy())
+            target = torch.as_tensor(target,dtype=torch.float32)
+            self.targets[:,23:27] = target if self.route=='joint' else previous_thumb + (target-previous_thumb).clamp(-.025,.025)
         if baseline == 'learned':
             wanted = action[:, :16] * self.span
             self.residual[:, :16] += (wanted - self.residual[:, :16]).clamp(-self.speed * self.dt, self.speed * self.dt)
             self.targets[:, 7:23] = self.source['reference_targets'][7:23] + self.residual[:, :16]
             if self.route == 'joint':
                 nominal_thumb = torch.max(self.lower[23:27], torch.min(self.upper[23:27], self.targets[:, 23:27]))
-                increment = (nominal_thumb - previous_thumb + .025 * action[:, 16:]).clamp(-.025, .025)
+                if self.thumb_plan is not None:
+                    # Moving kinematic prior + bounded persistent joint offset.
+                    # Unlike an incremental teacher, this absolute prior would
+                    # erase yesterday's .025rad correction on every step.
+                    wanted_thumb=action[:,16:]*self.span
+                    self.residual[:,16:]+=(wanted_thumb-self.residual[:,16:]).clamp(-self.speed*self.dt,self.speed*self.dt)
+                    increment=(nominal_thumb+self.residual[:,16:]-previous_thumb).clamp(-.025,.025)
+                else:
+                    increment = (nominal_thumb - previous_thumb + .025 * action[:, 16:]).clamp(-.025, .025)
                 self.targets[:, 23:27] = torch.max(self.lower[23:27], torch.min(self.upper[23:27], previous_thumb + increment))
-                # Actual incremental correction, not fictitious force/offset.
-                self.residual[:, 16:] = self.targets[:, 23:27] - nominal_thumb
+                if self.thumb_plan is None:
+                    self.residual[:, 16:] = self.targets[:, 23:27] - nominal_thumb
         self.targets[:, :27] = torch.max(self.lower, torch.min(self.upper, self.targets[:, :27]))
-        if self.route == 'joint' and self.teacher is not None:
+        if (self.route == 'joint' or self.thumb_first_stroke_q4_correction) and self.teacher is not None:
             self.teacher.last_action[:, 16:] = (self.targets[:, 23:27] - previous_thumb) / .025
         self.integral += self.dt * (self.targets[:, :7] - self.dof[:, :7, 0])
         self.integral.clamp_(-.08, .08)
@@ -390,8 +412,9 @@ class LocalG2:
         complete = self.age >= self.steps
         stable = (self.max_drift < .01) & (self.max_rotation < .25) & ~self.ever_drop
         endpoint = (self.endpoint_errors < .01).all(-1) if self.task == 'S' else self.max_slider_goal_error < .01
-        return dict(complete=complete, stable=stable, endpoints_10mm=endpoint,
-            endpoints_2mm=(self.endpoint_errors < .002).all(-1) if self.task=='S' else self.max_slider_goal_error < .002,
+        return dict(complete=complete, stable=stable, endpoints_10mm=complete & endpoint,
+            endpoints_2mm=complete & ((self.endpoint_errors < .002).all(-1) if self.task=='S' else self.max_slider_goal_error < .002),
+            endpoint_windows_observed=self.age.unsqueeze(-1) >= torch.tensor([150,300,450,600]) if self.task=='S' else complete.unsqueeze(-1),
             success=complete & stable & endpoint, maximum_slider_goal_error_m=self.max_slider_goal_error,
             world_drift_m=self.max_drift, world_rotation_rad=self.max_rotation,
             hand_relative_drift_m=self.max_hand_drift, hand_relative_rotation_rad=self.max_hand_rotation,
@@ -434,6 +457,10 @@ class LocalG2:
             frame.update(teacher_raw_action=self.teacher.raw_action.numpy().copy(),
                 teacher_action=self.teacher.last_action.numpy().copy(),
                 teacher_observation=self.teacher.last_obs.numpy().copy())
+        if self.thumb_plan is not None:
+            from scripts.g2_thumb_path import thumb_path_targets
+            target, distance = thumb_path_targets(self.thumb_plan,(self.age-1).clamp(min=0).numpy(),self.source['reference_targets'][23:27].numpy())
+            frame.update(thumb_plan_motor_targets=target, thumb_plan_desired_distance_m=distance)
         return frame
 
     def close(self):

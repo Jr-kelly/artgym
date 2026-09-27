@@ -15,6 +15,8 @@ class LocalPolicyRuntime:
     def __init__(self, checkpoint, positions, velocities, targets, wrist, obj, slider):
         artifact = torch.load(checkpoint, map_location='cpu')
         self.task, self.route = artifact['task'], artifact['route']
+        self.thumb_plan = artifact.get('thumb_plan')
+        self.static_support = artifact.get('static_support',False)
         self.goal_override = None
         self.n, self.dt, self.span, self.speed = 1, 1/30, .20, .60
         self.action_dim = artifact['action_dim']
@@ -55,27 +57,44 @@ class LocalPolicyRuntime:
         self.last_observation = LocalG2.observation(self)
         with torch.no_grad():
             action = self.model.mean_action(self.last_observation)
+        if self.static_support and int(self.age[0])>0:
+            action[:,:16]=self.last_action[:,:16]
         self.last_action[:] = action
         desired = action[:, :16]*self.span
         self.residual[:, :16] += (desired-self.residual[:, :16]).clamp(-self.speed*self.dt,self.speed*self.dt)
         previous_thumb = self.targets[:,23:27].clone()
         self.targets[0,7:27] = torch.as_tensor(np.asarray(nominal_hand).copy())
+        if self.thumb_plan is not None:
+            from scripts.g2_thumb_path import thumb_path_targets
+            planned, _ = thumb_path_targets(self.thumb_plan,self.age.numpy(),self.source['reference_targets'][23:27].numpy())
+            planned=torch.as_tensor(planned,dtype=torch.float32)
+            self.targets[:,23:27]=planned if self.route=='joint' else previous_thumb+(planned-previous_thumb).clamp(-.025,.025)
         self.targets[:,7:23] = self.source['reference_targets'][7:23]+self.residual[:,:16]
         if self.route == 'joint':
             nominal_thumb = self.targets[:,23:27].clone()
-            increment = (nominal_thumb-previous_thumb+.025*action[:,16:]).clamp(-.025,.025)
+            if self.thumb_plan is not None:
+                desired_thumb=action[:,16:]*self.span
+                self.residual[:,16:]+=(desired_thumb-self.residual[:,16:]).clamp(-self.speed*self.dt,self.speed*self.dt)
+                increment=(nominal_thumb+self.residual[:,16:]-previous_thumb).clamp(-.025,.025)
+            else:
+                increment = (nominal_thumb-previous_thumb+.025*action[:,16:]).clamp(-.025,.025)
             self.targets[:,23:27] = torch.max(self.lower[23:27],torch.min(self.upper[23:27],previous_thumb+increment))
-            self.residual[:,16:] = self.targets[:,23:27]-nominal_thumb
+            if self.thumb_plan is None:
+                self.residual[:,16:] = self.targets[:,23:27]-nominal_thumb
             self.executed_thumb_action = (self.targets[:,23:27]-previous_thumb)/.025
         self.targets[:,:27] = torch.max(self.lower,torch.min(self.upper,self.targets[:,:27]))
+        if self.thumb_plan is not None:
+            self.executed_thumb_action=(self.targets[:,23:27]-previous_thumb)/.025
         self.age += 1
         return self.targets[0,7:27].numpy().copy()
 
     def description(self):
         return dict(checkpoint=self.checkpoint,task=self.task,route=self.route,
             method='new learned controller, not unchanged full teacher',
+            thumb_prior='kinematic material-point motor trajectory' if self.thumb_plan is not None else 'frozen teacher thumb',
+            static_support=self.static_support,
             inputs='measured q/qd, commanded targets, fixed takeover reference, live simulator knife pose/velocity, wrist pose, slider state, external clock, previous learner output',
             privileged=True, deployable=False, rnn='learner feedforward; frozen thumb teacher keeps original takeover RNN reset',
             reference='fixed once at actual continuous takeover',span_rad=self.span,speed_rad_s=self.speed,
-            thumb_joint_route='frozen nominal + learned .025rad/step correction, TOTAL clipped .025rad/step and original limits; actual thumb action fed back',
+            thumb_joint_route=('absolute geometric prior + learned .20rad offset/.60rad per s slew, TOTAL capped .025rad/step and original limits' if self.thumb_plan is not None else 'frozen nominal + learned .025rad/step correction, TOTAL clipped .025rad/step and original limits; actual thumb action fed back'),
             physics_writes='none; returns robot hand motor targets only')

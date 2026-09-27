@@ -79,6 +79,9 @@ def main():
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--checkpoint', type=Path)
     p.add_argument('--resume-optimizer', action='store_true', help='Continue the same training configuration and Adam state')
+    p.add_argument('--thumb-plan',type=Path,help='Declared routeB kinematic thumb motor prior, replacing frozen thumb actor')
+    p.add_argument('--initial-support-std',type=float)
+    p.add_argument('--initial-thumb-std',type=float)
     p.add_argument('--teacher', type=Path, default=Path('/data/research/artgym-experiments-20260921/runs/wuji-goal/release-core-teacher-student-20260924-v1/wuji-core-teacher-student-20260924-teacher.pth'))
     args = p.parse_args()
     args.output.mkdir(parents=True, exist_ok=False)
@@ -87,7 +90,10 @@ def main():
     np.random.seed(args.seed)
     torch.set_num_threads(1)
     env = LocalG2(args.task, args.num_envs, args.route)
-    if args.task == 'S':
+    if args.thumb_plan:
+        assert args.task=='S' and args.route=='joint'
+        env.thumb_plan=json.loads(args.thumb_plan.read_text())
+    if args.task == 'S' and not args.thumb_plan:
         from scripts.g2_local_teacher import BatchedTeacher
         env.teacher = BatchedTeacher(env, args.teacher, 'cuda:0')
     obs = env.observation().cuda()
@@ -103,6 +109,11 @@ def main():
             model.load_state_dict(saved['model'])
         if args.resume_optimizer:
             optimizer.load_state_dict(saved['optimizer'])
+    with torch.no_grad():
+        for value, indices in [(args.initial_support_std,slice(0,16)),(args.initial_thumb_std,slice(16,20))]:
+            if value is not None:
+                assert not args.resume_optimizer and .03 <= value <= 1.
+                model.logstd[indices]=np.log(value)
     stopping = [False]
     for sig in [signal.SIGTERM, signal.SIGINT]:
         signal.signal(sig, lambda *_: stopping.__setitem__(0, True))
@@ -145,7 +156,8 @@ def main():
             obs_dim=obs.shape[-1], action_dim=env.action_dim, task=args.task, route=args.route,
             source='configs/g2_local/'+args.task+'-actual-state.npz',
             method='new privileged PPO motor residual; original weights unchanged',
-            action_mapping='support16 absolute+slew; joint adds thumb4 increment corrections capped total .025rad/step',
+            thumb_plan=env.thumb_plan,
+            action_mapping='support16 absolute+slew; joint thumb4 uses .20rad absolute residual around IK prior or .025rad incremental correction around teacher; total thumb step capped .025rad',
             terminal_return='absorbing -8/step gamma.995 through finite horizon'), str(path)+'.tmp')
         os.replace(str(path)+'.tmp', path)
 
