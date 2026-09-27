@@ -1,0 +1,77 @@
+scripts/g2_local_env.py
+  s_87fdc32a1dcd01::t_09eaae62d4384e 55,258-259,264-281
+  s_87fdc32a1dcd01::t_6c69e532957699 282
+scripts/run_g2_local.py
+  s_87fdc32a1dcd01::t_5601c8844c3584 70-74,79-80,113
+  s_87fdc32a1dcd01::t_09eaae62d4384e 27,29-30,60-69,75-78,81-83,111-112
+scripts/g2_local_runtime.py
+  s_87fdc32a1dcd01::t_09eaae62d4384e 18
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "75063c17382cde0ddbd35fc719ebb0837ea3c2d8",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.input_tokens": "47841689",
+        "tlab.token_usage.output_tokens": "6464997",
+        "tlab.session_started_at": "2026-09-27T18:51:25Z",
+        "tlab.token_usage.cache_read_tokens": "946905459",
+        "tlab.token_usage.cache_creation_tokens": "0"
+      }
+    }
+  },
+  "changes": [
+    {
+      "old_path": "research/g2-local-policy-20260928.md",
+      "new_path": "research/g2-local-policy-20260928.md",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "old_path": "scripts/g2_local_env.py",
+      "new_path": "scripts/g2_local_env.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 22
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/g2_local_runtime.py",
+      "new_path": "scripts/g2_local_runtime.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/run_g2_local.py",
+      "new_path": "scripts/run_g2_local.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 30
+          }
+        ]
+      }
+    }
+  ]
+}
