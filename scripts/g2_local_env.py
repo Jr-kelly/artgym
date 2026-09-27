@@ -338,6 +338,9 @@ class LocalG2:
         self.age += 1
         # Hard safety failures terminate training, never count success.
         invalid = ~torch.isfinite(self.dof).all(dim=-1).all(dim=-1) | ~torch.isfinite(self.object).all(-1)
+        # Invalid simulator states terminate with an explicit penalty instead
+        # of contaminating PPO returns. Valid-state reward is unchanged.
+        reward = torch.where(invalid, torch.full_like(reward, -10.), reward)
         terminated = drop | (rot > 1.5) | invalid
         timeout = self.age >= self.steps
         info = dict(drift=drift, rotation=rot, endpoint_error=err, terminated=terminated, timeout=timeout)
