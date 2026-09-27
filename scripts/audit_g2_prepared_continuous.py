@@ -25,7 +25,9 @@ def main():
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--allow-hand-gravity',action='store_true',help='Audit separately labeled gravity-ON continuous condition; require exactly hand-body gravity flags changed, other effective physics equal. Prefix need not match physically.')
     p.add_argument('--prefix-until-phase',help='Declared control intervention: compare exact actual source prefix before this phase in both traces; later acquisition may differ. Task criteria remain unchanged.')
+    p.add_argument('--source-prefix-until-phase',help='Source boundary phase when the intervention replaces a phase, e.g. fixed_motor_hold versus learned_hold. Requires --prefix-until-phase and identical boundary frame.')
     a=p.parse_args();t=np.load(a.run/'trace.npz');prefix=np.load(a.prefix_trace)
+    assert not a.source_prefix_until_phase or a.prefix_until_phase
     launch=json.loads(a.launch.read_text());pin=Path(launch['cwd'])
     takeover=json.loads((a.run/'takeover.json').read_text());reported=json.loads((a.run/'report.json').read_text())
     indices=np.flatnonzero(t['phase']=='operate');start=int(indices[0]);complete=len(indices)==600 and np.all(np.diff(indices)==1)
@@ -56,7 +58,9 @@ def main():
     if a.prefix_until_phase:
         assert not a.allow_hand_gravity, 'Use a matched-physics intervention source'
         compare_frames=int(np.flatnonzero(t['phase']==a.prefix_until_phase)[0])
-        assert compare_frames==int(np.flatnonzero(prefix['phase']==a.prefix_until_phase)[0]) and compare_frames>0
+        source_phase=a.source_prefix_until_phase or a.prefix_until_phase
+        assert compare_frames==int(np.flatnonzero(prefix['phase']==source_phase)[0]) and compare_frames>0
+        assert np.array_equal(t['phase'][:compare_frames],prefix['phase'][:compare_frames])
     prefix_same_length=len(prefix['time'])==start if not a.prefix_until_phase else len(prefix['time'])>=compare_frames
     if not a.allow_hand_gravity:assert prefix_same_length
     prefix_errors={k:float(np.max(np.abs(t[k][:compare_frames]-prefix[k][:compare_frames]))) for k in fields} if prefix_same_length else {}
@@ -93,7 +97,12 @@ def main():
         action_errors.append(float(np.max(np.abs(rt.last_action[0].numpy()-t['learned_action'][idx]))))
         observation_errors.append(float(np.max(np.abs(rt.last_observation[0].numpy()-t['learned_observation'][idx]))))
     parity=max(command_errors)<2e-6 and max(action_errors)<2e-6 and max(observation_errors)<2e-5
+    model_calls=rt.description()['actual_model_calls']
+    if reported['args'].get('operation_static_policy'):
+        assert model_calls==1 and reported['operation_controller']['actual_model_calls']==1
+        assert np.max(np.abs(t['learned_action'][indices]-t['learned_action'][indices[0]]))==0
     first=np.flatnonzero((dp>=.01)|(dr>=.25))
+    hold_first=np.flatnonzero((hd>=.01)|(hr>=.25))
     result=dict(scope='independent scoring of an actual uncut continuous table→H→S run; offline audit only',
         run=str(a.run),operation_complete=bool(complete),operation_success=op_success,hold_success=hold_success,
         grasp_success=reported['grasp_success'],independent_whole_success=bool(reported['grasp_success'] and hold_success and op_success),
@@ -101,10 +110,12 @@ def main():
         world_drift_m=float(dp.max()),world_rotation_rad=float(dr.max()),no_drop_or_table_support=no_drop,
         first_instability_s=float((first[0]+1)/30) if len(first) else None,
         hold_drift_m=float(hd.max()),hold_rotation_rad=float(hr.max()),hold_slider_error_m=hs,
+        hold_first_instability_s=float((hold_first[0]+1)/30) if len(hold_first) else None,
         physical_goals_max_error_m=max(goal_errors),operation_start_frame=start,prefix_frames=compare_frames,prefix_errors=prefix_errors,
         prefix_verified=bool(prefix_same_length and max(prefix_errors.values())<1e-7),
         prefix_comparison_scope='Exact physical prefix before declared intervention '+a.prefix_until_phase if a.prefix_until_phase else 'Diagnostic only: different hand gravity changes real acquisition dynamics' if a.allow_hand_gravity else 'Exact original frozen preparation prefix',
         input_command_parity_verified=bool(parity),maximum_motor_command_error_rad=max(command_errors),
+        operation_model_calls=model_calls,operation_static_policy=reported['args'].get('operation_static_policy',False),
         maximum_action_error=max(action_errors),maximum_observation_error=max(observation_errors),
         state_reset_after_start=False,state_setter_source_locations=setters,
         static_state_write_audit='All3 initial state setters precede tick definition; actual pin reviewed. Runtime has no simulator handle; measured source prefix compared.',

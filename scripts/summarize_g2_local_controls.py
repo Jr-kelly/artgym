@@ -52,6 +52,9 @@ def main():
                     hand_gravity_motor_feedforward=bool(args.get('hand_gravity_compensation',False)),
                     gait_arm_retarget=bool(args.get('gait_arm_retarget_reference')),
                     physical_translation_alignment=bool(args.get('gait_translation_before_alignment')),
+                    gait_pinky_retarget=bool(args.get('gait_pinky_retarget')),
+                    fixed_preparation_hold=bool(args.get('fixed_preparation_hold')),
+                    operation_static_policy=bool(args.get('operation_static_policy')),
                     baseline=args.get('baseline'),checkpoint=args.get('checkpoint',args.get('learned_operation_policy')))
         elif (folder/'failure.json').exists():
             d=json.loads((folder/'failure.json').read_text())

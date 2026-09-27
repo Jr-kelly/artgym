@@ -57,7 +57,7 @@ A separate development variant retargets the original **commanded wrist path** b
 transform at the actual gait motor-reference boundary, preserving hand targets, gates and physical state.
 At reused placement01 it reduces error enough to pass the former body-drift gate, but the next support
 hold fails middle-finger contact (5.935mm/.1893rad body motion still passes). It is not an acquisition
-success. The same predeclared variant is being checked on reused placement00. Neither reused case is
+success. On reused placement00 it subsequently passed physical alignment but failed small-finger contact; Round12 below tests that contact. Neither reused case is
 new validation. World-transform translation contains a rotation lever arm, not knife slip inside the hand.
 
 ## Relevant comparisons
@@ -74,7 +74,7 @@ new validation. World-transform translation contains a rotation lever arm, not k
 | Continuous B4 old source, exact first-observation fix | 44.44 mm / 2.983 rad; quaternion fix alone insufficient |
 | Successful command-sequence motor replay | 0/2; command sequence alone fragile |
 | Privileged contact-normal / full-point correction | 0/2 each; one full-point run meets endpoints but 11.07 mm / 0.998 rad fails stability |
-| Same B4 after physically executed H preparation | 4/4 local repeats and one complete continuous pass |
+| Same B4 after physically executed H preparation | 4/4 local repeats and two complete continuous passes |
 
 The H-prepared source is a recorded real continuous state, not an interpolated or cached pose injected
 into the continuous task. Compared with the old S source, body pose differs by 0.576 mm / 0.03875 rad
@@ -144,8 +144,7 @@ force has been measured. These constraints materially limit sim-to-real claims.
 
 R9 gait correction closed: the physical translation passed with0.0838mm tracking error and1.831mm residual position; original orientation alignment then passed with0.01177rad residual. The next failure was missing small-finger support atstep1959. This is progress in acquisition, not a full new-placement success.
 
-Next: finish the continuous hand-gravity comparison, then evaluate one bounded small-finger contact adaptation if its geometric checks pass. No fifth training configuration. Any changed
-method requires a newly declared test set before a new-placement success claim.
+The hand-gravity and small-finger comparisons are reported below. No fifth training configuration is authorized within this task budget. Any changed method requires a newly declared test set before a new-placement success claim.
 
 ## Matched-state controls and contact adaptation
 
@@ -179,5 +178,33 @@ windows fail. There is no whole-task success on this development placement.
 Independent motor/input replay matches600S commands within1.2e-7rad; initial
 quaternion comparisons show no hemisphere flip. This narrows the issue to
 transfer from the changed acquired grasp rather than establishing a unique cause.
-A nominal-placement regression run and a matched22s fixed-motor H comparison
-are predeclared; neither is a new unseen-placement validation.
+R12-02 repeats the modified small-finger method at the old nominal placement and passes the full task:2.097mm/.179235rad, endpoint maxima4.346/0/4.286/0mm, H0.619mm/.01307rad. This is a regression check of the changed method, not unseen-placement validation.
+
+R12-03 reuses exactly the seen00 acquisition and holds actual motor targets for22s instead of learned H. H fails2.603mm/.561397rad, versus learned H1.885mm/.324005rad. Both fail; this does not show that the new grasp is stable if learning is removed. The prespecified conditional static-S trial is therefore not eligible. Its S stage also fails:35.516mm/2.52290rad, first instability3.167s; all four endpoint windows fail. The independent audit proves2309identical pre-H physical frames and600matching S motor commands. Original-nominal continuous static-S remains pending.
+
+Read-only contact timing shows the middle finger loses contact for at least0.3s starting6.667s under learned H and3.2s under fixed H; world rotation first exceeds its limit at8.667s and3.333s respectively. Nominal learned H maintains middle contact99.85% of frames with no sustained loss. World and hand-relative error agree because the wrist is stationary. These observations localize a support difference, but contact occurrence is not measured load and does not establish a unique cause.
+
+
+## 当前判断与方法链路
+
+固定摆放的连续任务已经成立：正常平放取刀、空中翻掌、分指换握、22秒学习保持、2秒实际停稳，随后20秒两轮伸缩。它使用本轮实际训练的新策略，不能记作原teacher或student成功。严格2mm端点标准尚未通过。
+
+```mermaid
+flowchart LR
+    A[平放闭刀 滑块朝下] --> B[G2 IK取刀和翻掌]
+    B --> C[分指迁移 逐段保持检查]
+    C --> D[H支持策略 22秒]
+    D --> E[实际停稳与历史 2秒]
+    E --> F[S几何拇指轨迹和学习关节修正 20秒]
+    F --> G[独立端点与固定世界稳定评分]
+```
+
+获取阶段使用仿真定位和接触检查；H、动态S使用关节、本体状态和物体真值。所有执行输出是机器人电机目标。局部环境只在回合开始从实际轨迹重置；完整连续路线从桌面起始执行，不注入局部状态。操作阶段采用固定外部时钟，滑块行程由接触产生。
+
+证据支持的边界：
+
+- 稳定持刀和两轮伸缩都在一个实际可达抓姿成立；同一摆放重复成功不等于泛化。
+- 公平初态对照中，原teacher、仅拇指teacher和零残差几何轨迹均失败；固定第一次学习输出也成功。因此已证明学到的关节修正有用，尚未证明持续反馈必不可少，也没有排除其他规划方法。
+- 20个新摆放全部在取得功能抓姿之前失败。后续已见样本上的腕轨迹与小指接触修正让换握前进，但22秒保持仍失败。瓶颈更集中在获取末态的支撑分布和控制迁移；不能据此认定唯一根因或宣称必须使用RL。
+- 去除实时物体信息的局部诊断、手部重力对照都已运行；整套系统仍非可部署student。真实刀具锁止/阻力、碰撞和伺服尚未标定。
+- 下一项优先投入应是把已实际达到、但保持失败的变化抓姿纳入支持控制任务，保留名义抓姿回归对照，先验证22秒保持再扩展伸缩。它需要另行分配训练配置；本轮4组训练配置预算已用完，不追加第五组或大规模抓取RL。

@@ -273,3 +273,60 @@ bash scripts/g2_local_python.sh -m scripts.audit_g2_hand_gravity \
   --run runs/g2-local-policy-20260928/R11-02-continuous-gravity-on-motor-feedforward \
   --output /tmp/my-g2-gravity-motor-audit.json
 ```
+
+## Matched-state controls and single-inference S
+
+The successful local S source is the actual H-prepared frame, not the earlier
+pre-H state. This matched command keeps the original source, physics, clock and
+motor limits. `learned-static` makes one network call and holds its normalized
+20-joint output; the thumb geometric motor path continues with the clock.
+
+```bash
+bash scripts/g2_local_python.sh -m scripts.run_g2_local \
+  --task S --baseline learned-static --num-envs 2 --episodes 1 \
+  --state configs/g2_local/S-after-continuous-learned-H-state.npz \
+  --checkpoint runs/g2-local-policy-20260928/B4-S-joint-path/checkpoint-00025.pth \
+  --video --output runs/g2-local-policy-20260928/my-matched-static-S
+```
+
+R13 matches `full-teacher`, `thumb-only`, `geometric-only`, and `learned-static`
+on this same source. For `geometric-only`, add `--route joint --thumb-plan
+configs/g2_local/thumb-material-path.json`. The zero residual keeps the joint
+method's motor mapping and limits; this is not the different historical point
+feedback controller. Exact commands and weights are also in each launch manifest.
+
+The continuous prepared-state command above becomes R14's single-inference S
+control by adding `--operation-static-policy` and choosing a new output. H stays
+dynamic and privileged. The initial S observation is ideal simulated state;
+subsequent S commands use clock, the geometric prior and their own last command.
+This is not a trained student. The actual controller call count is recorded in
+`report.json:operation_controller.actual_model_calls`; it must be one.
+
+R12's separate fixed-H control removes `--learned-hold-policy` and adds
+`--fixed-preparation-hold`. It retains actual motor targets for22s and the same
+hold criteria. Both options are mutually exclusive. A failed preparation is a
+whole-task failure even if later S were to pass. No pose/history is injected.
+
+Independent read-only audits (fresh output names; no physical executions):
+
+```bash
+bash scripts/g2_local_python.sh -m scripts.audit_g2_prepared_continuous \
+  --run runs/g2-local-policy-20260928/R12-03-seen00-fixed-preparation-hold \
+  --launch runs/g2-local-policy-20260928/R12-03-seen00-fixed-preparation-hold-launch.json \
+  --prefix-trace runs/g2-local-policy-20260928/R12-01-seen00-small-finger-landing/trace.npz \
+  --prefix-until-phase fixed_motor_hold --source-prefix-until-phase learned_hold \
+  --checkpoint runs/g2-local-policy-20260928/B4-S-joint-path/checkpoint-00025.pth \
+  --output /tmp/my-seen00-fixed-H-audit.json
+
+bash scripts/g2_local_python.sh -m scripts.audit_g2_prepared_continuous \
+  --run runs/g2-local-policy-20260928/R14-01-continuous-initial-offset-S \
+  --launch runs/g2-local-policy-20260928/R14-01-continuous-initial-offset-S-launch.json \
+  --prefix-trace runs/g2-local-policy-20260928/R2-04-continuous-H-diagnostics/trace.npz \
+  --checkpoint runs/g2-local-policy-20260928/B4-S-joint-path/checkpoint-00025.pth \
+  --output /tmp/my-continuous-static-S-audit.json
+```
+
+The second command's prefix is the original full acquisition and H preparation.
+The audit requires identical physical frames before the declared intervention;
+for static S it additionally verifies one model call, constant normalized action
+and replay of all600 actual commands. It does not relax any success threshold.
