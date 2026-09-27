@@ -171,6 +171,7 @@ class LocalG2:
         self.hand_body_ids = torch.tensor(self.hand_body_ids)
         self.gym.prepare_sim(self.sim)
         self.roots = gymtorch.wrap_tensor(self.gym.acquire_actor_root_state_tensor(self.sim))
+        self.gym.refresh_actor_root_state_tensor(self.sim)
         self.dof = gymtorch.wrap_tensor(self.gym.acquire_dof_state_tensor(self.sim)).view(self.n, 28, 2)
         self.rb = gymtorch.wrap_tensor(self.gym.acquire_rigid_body_state_tensor(self.sim))
         self.contact = gymtorch.wrap_tensor(self.gym.acquire_net_contact_force_tensor(self.sim))
@@ -204,7 +205,10 @@ class LocalG2:
         self.dof[ids, :, 0] = self.source['all_dof_position'].float()
         self.dof[ids, :, 1] = self.source['dof_velocity'].float()
         self.roots[self.knife_ids[ids].long()] = self.source['object_rigid_state'].float()
-        self.roots[self.knife_ids[ids].long(), :3] += self.origins[ids]
+        # This installed IsaacGym CPU tensor pipeline reports poses in each
+        # environment's world frame (confirmed using root/rigid APIs in N=2).
+        # Adding create_env grid origins displaces only the free knife and is
+        # WRONG. Origins are scene-layout metadata, never reset coordinates.
         actor_ids = torch.cat((self.robot_ids[ids], self.knife_ids[ids])).contiguous()
         self.gym.set_dof_state_tensor_indexed(self.sim, gymtorch.unwrap_tensor(self.dof),
                                             gymtorch.unwrap_tensor(actor_ids), len(actor_ids))
@@ -242,7 +246,6 @@ class LocalG2:
         for key in ['object', 'slider', 'wrist']:
             dst = self.slider_pose if key == 'slider' else getattr(self, key)
             dst[:] = self.rb[self.body_ids[key]]
-            dst[:, :3] -= self.origins
 
     def goal(self):
         if self.task == 'H':

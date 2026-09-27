@@ -39,6 +39,7 @@ class ActorCritic(nn.Module):
 
 
 def main():
+    process_start = time.monotonic()
     p = argparse.ArgumentParser()
     p.add_argument('--task', choices=['H','S'], default='H')
     p.add_argument('--route', choices=['support','joint'], default='support')
@@ -73,7 +74,15 @@ def main():
     stopping = [False]
     for sig in [signal.SIGTERM, signal.SIGINT]:
         signal.signal(sig, lambda *_: stopping.__setitem__(0, True))
-    clock = time.monotonic()
+    clock = process_start
+    # Session deadline includes scene/model setup; reserve final90min for delivery.
+    task_state = ROOT/'runs/g2-local-policy-20260928/state.json'
+    deadline = clock+args.hours*3600
+    if task_state.exists():
+        import datetime
+        state = json.loads(task_state.read_text())
+        delivery = datetime.datetime.fromisoformat(state['delivery_start_utc']).timestamp()
+        deadline = min(deadline,time.monotonic()+max(0,delivery-time.time()))
     transitions, episodes, best = 0, 0, -1e10
     curve = (args.output/'learning.jsonl').open('a', buffering=1)
     episodic = (args.output/'training-episodes.jsonl').open('a', buffering=1)
@@ -83,6 +92,14 @@ def main():
     val_buf, rew_buf, done_buf = log_buf.clone(), log_buf.clone(), log_buf.clone()
     ep_returns = torch.zeros(env.n)
     update = 0
+
+    class StopTraining(Exception):
+        pass
+
+    def check_stop():
+        if stopping[0] or time.monotonic()>=deadline:
+            stopping[0] = True
+            raise StopTraining()
 
     def save(name):
         path = args.output/name
@@ -98,6 +115,7 @@ def main():
             batch_start = time.monotonic()
             ended = []
             for step in range(args.horizon):
+                check_stop()
                 with torch.no_grad():
                     dist, value = model(obs)
                     action = dist.sample()
@@ -136,6 +154,7 @@ def main():
             flat_adv = (flat_adv-flat_adv.mean())/(flat_adv.std()+1e-8)
             losses, kls = [], []
             for epoch in range(args.epochs):
+                check_stop()
                 order = torch.randperm(len(flat_obs),device='cuda')
                 for batch in order.split(args.minibatch):
                     dist, value = model(flat_obs[batch])
@@ -170,6 +189,7 @@ def main():
                 env.reset()
                 evaluation_rows = []
                 for frame_idx in range(env.steps):
+                    check_stop()
                     with torch.no_grad():
                         act = model.mean_action(env.observation().cuda())
                     env.step(act)
@@ -198,6 +218,8 @@ def main():
                 save('last.pth')
             if stopping[0] or elapsed>=args.hours*3600:
                 break
+        save('last.pth')
+    except StopTraining:
         save('last.pth')
     finally:
         (args.output/'status.json').write_text(json.dumps(dict(pid=os.getpid(), status='stopped' if stopping[0] else 'finished',
