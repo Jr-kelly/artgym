@@ -1,3 +1,6 @@
+## Active 2026-09-28 local learning task
+Latest explicit user authorization overrides preceding budget stop. New worktree `/data/research/artgym-g2-local-policy-20260928`; read `research/g2-local-policy-20260928.md` and `runs/g2-local-policy-20260928/state.json` there. Goal active; ends Sep29 01:53:41 CST, local4090 learning<=12GPUh. Implementing fullG2 local reset. Old teacher completed normally; monitors preserved.
+
 
 ## 本轮已按开发预算结束并交付：G2 overnight 20260926
 
