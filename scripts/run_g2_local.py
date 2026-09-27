@@ -79,7 +79,21 @@ def main():
                     closed_goal_max_error_m=env.max_slider_goal_error.tolist(),
                     preparation_pass=((env.max_drift<.01)&(env.max_rotation<.25)&~env.ever_drop&(env.max_slider_goal_error<.01)).tolist(),
                     slider_at_end=env.dof[:,27,0].tolist(),scope='physical preparation, fixed initial reference, no object/hand writes')
+                before = env.frame()
+                recurrent_before = [v.clone() for v in env.teacher.states] if env.teacher else []
+                history_before = env.teacher.history.clone() if env.teacher else None
                 env.start_operation_window()
+                after = env.frame()
+                unchanged = ['all_dof_position','dof_velocity','object_rigid_state','slider_rigid_state',
+                    'targets','reference_targets','arm_integral_state','residual','action']
+                boundary_error = max(float(np.max(np.abs(before[k]-after[k]))) for k in unchanged)
+                rnn_error = max([float((a-b).abs().max()) for a,b in zip(recurrent_before,env.teacher.states)]+[0.]) if env.teacher else 0.
+                history_error = float((history_before-env.teacher.history).abs().max()) if env.teacher else 0.
+                assert boundary_error == rnn_error == history_error == 0.
+                preparation.update(boundary_physics_and_command_max_error=boundary_error,
+                    boundary_rnn_max_error=rnn_error,boundary_history_max_error=history_error,
+                    teacher_initial_observation_reference='unchanged from before physical preparation; RNN/history carry through',
+                    operation_reference='fixed once at physical preparation end; prep also scored against its original fixed reference')
                 (args.output/('preparation-%03d.json'%episode)).write_text(json.dumps(preparation,indent=2)+'\n')
             first = env.frame()
             first.update(env.contacts_for_evaluation())

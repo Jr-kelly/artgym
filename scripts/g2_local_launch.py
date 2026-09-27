@@ -31,7 +31,7 @@ def main():
         now = datetime.datetime.now(datetime.timezone.utc)
         delivery = datetime.datetime.fromisoformat(state['delivery_start_utc'])
         hours = float(option(extra, '--hours', 2.))
-        accounted = 0.
+        accounted = float(state['budgets'].get('environment_debug_gpu_hours_charged',0.))
         for old in base.glob('*-launch.json'):
             item = json.loads(old.read_text())
             if item['module'] != 'scripts.train_g2_local':
