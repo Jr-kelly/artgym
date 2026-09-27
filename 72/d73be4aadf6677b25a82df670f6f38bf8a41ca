@@ -1,0 +1,68 @@
+scripts/score_g2_local_trace.py
+  s_87fdc32a1dcd01::t_6d2eed18d86850 1-67
+scripts/g2_local_env.py
+  s_87fdc32a1dcd01::t_6d2eed18d86850 199,241,311,355,357-358
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "72d73be4aadf6677b25a82df670f6f38bf8a41ca",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_read_tokens": "941100687",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.output_tokens": "6440395",
+        "tlab.session_started_at": "2026-09-27T18:34:11Z",
+        "tlab.token_usage.input_tokens": "47799982"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "scripts/score_g2_local_trace.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 67
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "research/g2-local-policy-20260928.md",
+      "new_path": "research/g2-local-policy-20260928.md",
+      "additions": {
+        "human": 5
+      }
+    },
+    {
+      "old_path": "scripts/g2_local_env.py",
+      "new_path": "scripts/g2_local_env.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 6
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      }
+    }
+  ]
+}
