@@ -1,0 +1,282 @@
+scripts/g2_finger_gait.py
+  s_87fdc32a1dcd01::t_f0f30e17881175 29,77-79
+scripts/audit_g2_placement_validation.py
+  s_87fdc32a1dcd01::t_e849d1f6f2c461 54,59-60,92
+scripts/summarize_g2_local_controls.py
+  s_87fdc32a1dcd01::t_f7a4cf85ff286c 32,43,48-51,53,55
+  s_87fdc32a1dcd01::t_1c9c7f77226c75 52,54
+scripts/g2_local_env.py
+  s_87fdc32a1dcd01::t_f1f443be964fa1 54,64-70,375,378-386,489-490
+  s_87fdc32a1dcd01::t_b40c2c057542d1 140-152
+  s_87fdc32a1dcd01::t_a6d125febdfd48 253-254
+scripts/run_g2_local.py
+  s_87fdc32a1dcd01::t_f1f443be964fa1 26,38,55,59,61-62
+  s_87fdc32a1dcd01::t_b40c2c057542d1 60
+scripts/g2_local_runtime.py
+  s_87fdc32a1dcd01::t_a01cabd3c116dd 16,42-46,50,75-82,118,130-137
+scripts/run_g2_tabletop.py
+  s_87fdc32a1dcd01::t_a01cabd3c116dd 104,866
+  s_87fdc32a1dcd01::t_f0f30e17881175 105,533
+scripts/g2_hand_gravity.py
+  s_87fdc32a1dcd01::t_f1f443be964fa1 1-45
+scripts/audit_g2_reduced_runtime.py
+  s_87fdc32a1dcd01::t_5716b60140637b 1-41
+scripts/g2_alignment_translation.py
+  s_87fdc32a1dcd01::t_f0f30e17881175 1-54
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "3bd44f21a2c1d008e75490998c9636835afb291d",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.session_started_at": "2026-09-27T21:23:03Z",
+        "tlab.token_usage.output_tokens": "6820185",
+        "tlab.token_usage.input_tokens": "49113768",
+        "tlab.token_usage.cache_read_tokens": "993051778"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/g2-local-policy-validation-v1-physical-results.json",
+      "additions": {
+        "human": 441
+      }
+    },
+    {
+      "new_path": "research/g2-local-policy-validation-v1-results.json",
+      "additions": {
+        "human": 417
+      }
+    },
+    {
+      "new_path": "research/g2-local-policy-validation-v1-stages.csv",
+      "additions": {
+        "human": 21
+      }
+    },
+    {
+      "new_path": "scripts/audit_g2_reduced_runtime.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 41
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/g2_alignment_translation.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 54
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/g2_hand_gravity.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 45
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "old_path": "research/g2-local-policy-20260928.md",
+      "new_path": "research/g2-local-policy-20260928.md",
+      "additions": {
+        "human": 15
+      }
+    },
+    {
+      "old_path": "research/g2-local-policy-control-results-20260928.csv",
+      "new_path": "research/g2-local-policy-control-results-20260928.csv",
+      "additions": {
+        "human": 53
+      },
+      "deletions": {
+        "human": 42
+      }
+    },
+    {
+      "old_path": "research/g2-local-policy-reproduction-20260928.md",
+      "new_path": "research/g2-local-policy-reproduction-20260928.md",
+      "additions": {
+        "human": 30
+      }
+    },
+    {
+      "old_path": "research/g2-local-policy-results-20260928.md",
+      "new_path": "research/g2-local-policy-results-20260928.md",
+      "additions": {
+        "human": 64
+      },
+      "deletions": {
+        "human": 26
+      }
+    },
+    {
+      "old_path": "scripts/audit_g2_placement_validation.py",
+      "new_path": "scripts/audit_g2_placement_validation.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 4
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/g2_finger_gait.py",
+      "new_path": "scripts/g2_finger_gait.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 4
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/g2_local_env.py",
+      "new_path": "scripts/g2_local_env.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 35
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/g2_local_runtime.py",
+      "new_path": "scripts/g2_local_runtime.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 24
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 4
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/run_g2_local.py",
+      "new_path": "scripts/run_g2_local.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 7
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/run_g2_tabletop.py",
+      "new_path": "scripts/run_g2_tabletop.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 4
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 2
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/summarize_g2_local_controls.py",
+      "new_path": "scripts/summarize_g2_local_controls.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 10
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    }
+  ]
+}
