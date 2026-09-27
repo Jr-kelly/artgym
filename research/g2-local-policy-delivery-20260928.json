@@ -1,0 +1,74 @@
+{
+  "ended_utc": "2026-09-27T23:07:25.374683+00:00",
+  "status": "fixed continuous goal and required validation/diagnostics complete; publication verified",
+  "outcomes": {
+    "fixed_continuous_goal": "achieved with newly trained privileged H/S, not original teacher/student",
+    "original_dynamic_repeats": "2/2 one placement",
+    "pinky_variant_nominal": "1/1 already-used placement",
+    "single_inference_continuous": "1/1 original placement; ideal initialization",
+    "frozen_new_placements": "0/20 whole;18pickup16flip0functionalacquisition; conditional S unmeasured",
+    "deployable_student": false,
+    "hand_gravity_on_continuous_success": false,
+    "strict_2mm_success": false
+  },
+  "budgets": {
+    "gpu_hours_max": 12,
+    "gpu_hours_used": 1.8560106693686491,
+    "control_trials_max": 80,
+    "control_trials_used": 72,
+    "routes_max": 2,
+    "configs_max": 4,
+    "configs_started": 4,
+    "gpu_hours_reserved": 0,
+    "environment_debug_gpu_hours_charged": 0.25,
+    "learning_charge_completed_hours": 2.106010669368649,
+    "routes_started": 2,
+    "all_simulation_and_learning_single_gpu_union_hours": 4.800219310522079,
+    "gpu_union_accounting": "all our simulation/evaluation/learning intervals on same GPU merged; +0.25h debug, broader than learning-only cap",
+    "control_trials_terminal": 72
+  },
+  "publication": {
+    "branch": "https://github.com/Jr-kelly/artgym/tree/feat/g2-wuji-local-policy-20260928",
+    "release": "https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-local-policy-20260928-v1",
+    "code_commit": "c0646d6",
+    "archives": 7,
+    "coverage": "913raw/videofiles,100videos,210launch/log/sourcepinreferences;zero missing",
+    "local_video": "http://127.0.0.1:8767/g2-local-policy-20260928/",
+    "ended_utc": "2026-09-27T23:07:25.374683+00:00"
+  },
+  "active_task_processes": [],
+  "unresolved": [
+    "0/20 frozen new placements; functional acquisition fails",
+    "No deployable student or hardware-calibrated scene",
+    "Hand gravity ON continuous acquisition fails",
+    "Strict2mm extension fails"
+  ],
+  "next": "Future priority only: stable support across diverse actual acquisition end states, with nominal regression. Needs new training configuration allocation beyond this round4/4; no automatic further execution.",
+  "coverage": {
+    "scope": "Completed control/training and all validation directories, raw files and videos; seven archive manifests plus exact GitHub digest video aliases",
+    "folder_count": 71,
+    "raw_and_video_files_checked": 913,
+    "videos_checked": 100,
+    "missing_paths": [],
+    "existing_public_video_aliases": {
+      "R3-05-thumb-material-path-static-support/local-episode-000.mp4": "https://github.com/Jr-kelly/artgym/releases/download/g2-wuji-local-policy-20260928-v1/local-thumb-path-stable-body-contact-loss.mp4",
+      "R3-06-thumb-path-dynamic-H-support/local-episode-000.mp4": "https://github.com/Jr-kelly/artgym/releases/download/g2-wuji-local-policy-20260928-v1/local-thumb-path-dynamic-support-drop.mp4",
+      "R4-02-continuous-joint-S-cp25/continuous.mp4": "https://github.com/Jr-kelly/artgym/releases/download/g2-wuji-local-policy-20260928-v1/tabletop-flip-joint-policy-operation-failure-full.mp4",
+      "R4-02-continuous-joint-S-cp25/hand-closeup.mp4": "https://github.com/Jr-kelly/artgym/releases/download/g2-wuji-local-policy-20260928-v1/tabletop-flip-joint-policy-operation-failure-closeup.mp4",
+      "R7-01-joint-S-after-actual-H/local-episode-000.mp4": "https://github.com/Jr-kelly/artgym/releases/download/g2-wuji-local-policy-20260928-v1/local-H-prepared-joint-policy-two-cycles.mp4",
+      "R7-03-continuous-learned-H-then-joint-S/continuous.mp4": "https://github.com/Jr-kelly/artgym/releases/download/g2-wuji-local-policy-20260928-v1/tabletop-pickup-flip-learned-H-S-two-cycles-full.mp4",
+      "R7-03-continuous-learned-H-then-joint-S/hand-closeup.mp4": "https://github.com/Jr-kelly/artgym/releases/download/g2-wuji-local-policy-20260928-v1/tabletop-pickup-flip-learned-H-S-two-cycles-closeup.mp4"
+    },
+    "manifest_paths": [
+      "g2-local-policy-baselines-evidence-20260928.tar.manifest.json",
+      "g2-local-policy-continuous-static-R14-final-increment-20260928.tar.manifest.json",
+      "g2-local-policy-continuous-success-R7-increment-20260928.tar.manifest.json",
+      "g2-local-policy-joint-learning-R4-R6-increment-20260928.tar.manifest.json",
+      "g2-local-policy-remaining-development-videos-increment-20260928.tar.manifest.json",
+      "g2-local-policy-support-gravity-R9-R13-increment-20260928.tar.manifest.json",
+      "g2-local-policy-validation-input-R8-increment-20260928.tar.manifest.json"
+    ],
+    "launch_log_sourcepin_references_checked": 210,
+    "missing_launch_log_pin_paths": []
+  }
+}

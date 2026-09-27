@@ -343,6 +343,7 @@ in order; each is incremental and must not replace old results:
 4. `g2-local-policy-validation-input-R8-increment-20260928.tar.gz`
 5. `g2-local-policy-support-gravity-R9-R13-increment-20260928.tar.gz`
 6. `g2-local-policy-continuous-static-R14-final-increment-20260928.tar.gz`
+7. `g2-local-policy-remaining-development-videos-increment-20260928.tar.gz`
 
 Each archive has its own file-level SHA256 manifest and verified archive hash.
 Source pins reuse the existing project's assets, Isaac Gym, caches and original
