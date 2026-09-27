@@ -13,11 +13,15 @@ from scripts.train_g2_local import ActorCritic
 
 class LocalPolicyRuntime:
     def __init__(self, checkpoint, positions, velocities, targets, wrist, obj, slider,
-                 reset_quaternion_compat=False, input_ablation=None):
+                 reset_quaternion_compat=False, input_ablation=None, freeze_initial_action=False):
         artifact = torch.load(checkpoint, map_location='cpu')
         self.task, self.route = artifact['task'], artifact['route']
         self.thumb_plan = artifact.get('thumb_plan')
         self.static_support = artifact.get('static_support',False)
+        self.freeze_initial_action=freeze_initial_action
+        if freeze_initial_action:
+            assert self.task=='S' and self.route=='joint' and self.thumb_plan is not None and input_ablation is None
+        self.model_calls=0
         self.reset_quaternion_compat = reset_quaternion_compat
         self.goal_override = None
         self.n, self.dt, self.span, self.speed = 1, 1/30, .20, .60
@@ -60,7 +64,8 @@ class LocalPolicyRuntime:
             dest[0,:len(value)] = value
 
     def step(self,positions,velocities,wrist,obj,slider,nominal_hand):
-        self.update_state(positions,velocities,wrist,obj,slider)
+        frozen=self.freeze_initial_action and int(self.age[0])>0
+        if not frozen:self.update_state(positions,velocities,wrist,obj,slider)
         # The legacy local reset stores a matrix-derived wrist quaternion
         # (largest component positive), whereas later PhysX frames use their
         # native sign. Preserve that FIRST observation convention for frozen
@@ -72,7 +77,11 @@ class LocalPolicyRuntime:
             quat = self.wrist[0,3:7]
             if quat[quat.abs().argmax()] < 0:
                 self.wrist[0,3:7] *= -1
-        if self.input_estimator is None:
+        if frozen:
+            # The stored observation is the ONE actually used for inference,
+            # not a fabricated current measurement or policy-history buffer.
+            pass
+        elif self.input_estimator is None:
             self.last_observation = LocalG2.observation(self)
         else:
             live=self.input_estimator.mode=='fixed-body-live-slider'
@@ -82,7 +91,10 @@ class LocalPolicyRuntime:
                 live_slider_velocity=self.dof[:,27,1] if live else None)
         self.wrist[:] = raw_wrist
         with torch.no_grad():
-            action = self.model.mean_action(self.last_observation)
+            if frozen:action=self.last_action.clone()
+            else:
+                action = self.model.mean_action(self.last_observation)
+                self.model_calls+=1
         if self.static_support and int(self.age[0])>0:
             action[:,:16]=self.last_action[:,:16]
         self.last_action[:] = action
@@ -119,6 +131,7 @@ class LocalPolicyRuntime:
             method='new learned controller, not unchanged full teacher',
             thumb_prior='kinematic material-point motor trajectory' if self.thumb_plan is not None else 'frozen teacher thumb',
             static_support=self.static_support,
+            freeze_initial_action=self.freeze_initial_action,actual_model_calls=self.model_calls,
             first_observation_quaternion_compatibility=self.reset_quaternion_compat,
             quaternion_compatibility_scope='first measured wrist quaternion dominant component positive, then native PhysX sign; reproduces legacy local reset representation only',
             inputs='measured q/qd, commanded targets, fixed takeover reference, live simulator knife pose/velocity, wrist pose, slider state, external clock, previous learner output',
@@ -134,4 +147,11 @@ class LocalPolicyRuntime:
                 privilege_scope='ideal one-time operation initialization; acquisition and H remain privileged',
                 live_operation_object_pose=False,
                 live_operation_slider=self.input_estimator.mode=='fixed-body-live-slider')
+        if self.freeze_initial_action:
+            result.update(method='one initial learned20-joint offset plus the existing time-driven geometric thumb path',
+                inputs='one ideal initial q/qd/wrist/object/slider measurement and actual motor references; thereafter external clock and own previous motor commands only',
+                inference_schedule='once on first S control frame; all20 normalized outputs then held fixed',
+                recorded_observation='the single initial observation actually used; physical state and history continue to be logged separately',
+                privileged=True,deployable=False,privilege_scope='ideal initialization; acquisition and H remain privileged',
+                live_operation_object_pose=False,live_operation_slider=False)
         return result

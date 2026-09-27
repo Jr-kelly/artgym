@@ -147,4 +147,37 @@ R9 gait correction closed: the physical translation passed with0.0838mm tracking
 Next: finish the continuous hand-gravity comparison, then evaluate one bounded small-finger contact adaptation if its geometric checks pass. No fifth training configuration. Any changed
 method requires a newly declared test set before a new-placement success claim.
 
-Matched-initial-state controls are in progress (R13). Historical teacher/geometric baselines used the earlier actual S source; the current bestS uses actual H-prepared source. Those earlier failures alone do not establish that learned S feedback is necessary. The new comparisons freeze source, physics and clock and vary only the documented controller.
+## Matched-state controls and contact adaptation
+
+R13 uses the SAME actual H-prepared source as the successful local joint policy,
+with identical physics, servo,20s clock and independent criteria. Earlier baseline
+failures on the original S source remain recorded but are not treated as matched evidence.
+
+| Controller at actual H-prepared source | S success | World stability | What fails |
+|---|---:|---:|---|
+| B0 original full frozen teacher | 0/2 | 0/2 | Extension endpoint40mm error;24.2–30.6mm drift |
+| B1 original frozen teacher thumb, fixed supports | 0/2 | 0/2 | First extension misses; later pose instability |
+| Geometric thumb path, zero learned residual | 0/2 | 2/2 | Only11.2–12.7mm travel; extension endpoint40mm error |
+| B4 first20-joint network output held constant | 2/2 | 2/2 | Basic10mm passes; strict2mm extension fails |
+| B4 dynamic joint policy | 4/4 previously completed | 4/4 | Basic10mm passes; strict2mm extension fails |
+
+The geometric control keeps exactly the learned method's motor mapping and
+limits with an identically zero20-joint residual. Model inputs differ across
+methods as documented; these controls do not establish a universal necessity
+of learning or rule out other planners. In particular, the static-output pair passes with1.235/1.291mm drift and.07343/.07770rad rotation, endpoints<3.18mm. This directly prevents attributing fixed-case Ssuccess to a necessary advantage of online learned feedback. One initial learned motor offset is sufficient in these two local trials; continuous promotion is separately preregistered.
+
+R12-01, on already-seen placement00, adds one-time small-finger landing IK to
+R9's wrist-path retargeting and physical alignment. It preserves the original
+knife-relative contact point and1.15mm nominal closing displacement. Only four
+small-finger targets change (maximum0.02064rad), after geometric collision checks.
+The preceding1839physical frames exactly match the failed R9-04 run.
+
+Small-finger support now passes its1s hold (2.048mm/.01613rad,100% contact),
+then thumb release and slider contact also pass. However learned H22s fails
+rotation (.324005rad,1.885mm), and S fails40.329mm/2.82632rad; all four endpoint
+windows fail. There is no whole-task success on this development placement.
+Independent motor/input replay matches600S commands within1.2e-7rad; initial
+quaternion comparisons show no hemisphere flip. This narrows the issue to
+transfer from the changed acquired grasp rather than establishing a unique cause.
+A nominal-placement regression run and a matched22s fixed-motor H comparison
+are predeclared; neither is a new unseen-placement validation.

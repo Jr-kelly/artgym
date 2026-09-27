@@ -51,8 +51,10 @@ def main():
     parser.add_argument('--only-grasp',action='store_true')
     parser.add_argument('--policy-action-mode',choices=['full','thumb-only'],default='full',help='Explicit frozen-policy action-component ablation. Thumb-only holds other motor references; raw and executed actions are both recorded.')
     parser.add_argument('--learned-operation-policy',type=Path,help='New privileged local S controller; requires thumb-only teacher channel for support route. Never original full-teacher success.')
+    parser.add_argument('--operation-static-policy',action='store_true',help='Named S ablation: one actual initial network inference, then fixed20-joint output plus unchanged geometric thumb path; not a trained student')
     parser.add_argument('--local-reset-quaternion-compat',action='store_true',help='Frozen local policy diagnostic: match the legacy reset wrist quaternion sign on the FIRST observation only; no physical state write.')
     parser.add_argument('--learned-hold-policy',type=Path,help='Diagnostic22s learned H after actual gait, before real settling. Not slider-operation success.')
+    parser.add_argument('--fixed-preparation-hold',action='store_true',help='Named22s fixed-motor H control after actual gait, before real settling; same hold criteria, no learned H output')
     parser.add_argument('--camera',choices=['wide','hand'],default='wide')
     parser.add_argument('--operation-yaw',type=float,default=0.)
     parser.add_argument('--hand-only-diagnostic',action='store_true')
@@ -110,6 +112,8 @@ def main():
     parser.add_argument('--closeup',action='store_true',help='Additional synchronized camera; follows robot wrist, never affects physics.')
     parser.add_argument('--contact-diagnostics',action='store_true',help='Record whole-thumb conservative collision separation every control frame.')
     args=parser.parse_args()
+    assert not args.operation_static_policy or (args.learned_operation_policy and args.operation_input_ablation is None)
+    assert not args.fixed_preparation_hold or (args.group!='A' and args.learned_hold_policy is None), 'Fixed and learned preparation holds are exclusive continuous conditions'
     if args.hand_gravity_compensation:
         assert args.hand_gravity and not args.hand_only_diagnostic, 'Gravity motor compensation requires full G2 and hand gravity ON'
     # A plan with clearance gates needs actual geometry measurements. Missing
@@ -830,29 +834,38 @@ def main():
                     targets[arm_idx]=start_arm+(end_arm-start_arm)*alpha
                     targets[hand_idx]=start_hand+(end_hand-start_hand)*alpha
                     tick(label)
-            if args.learned_hold_policy:
-                from scripts.g2_local_runtime import LocalPolicyRuntime
-                learned_runtime=LocalPolicyRuntime(args.learned_hold_policy,dof[:,0].cpu().numpy(),dof[:,1].cpu().numpy(),targets,
-                    rb[wrist_id].cpu().numpy(),rb[obj_id].cpu().numpy(),rb[slider_id].cpu().numpy())
-                assert learned_runtime.task=='H'
-                hold_start=len(records);hold_reference=learned_runtime.initial_object[0].numpy().copy()
+            if args.learned_hold_policy or args.fixed_preparation_hold:
+                if args.learned_hold_policy:
+                    from scripts.g2_local_runtime import LocalPolicyRuntime
+                    learned_runtime=LocalPolicyRuntime(args.learned_hold_policy,dof[:,0].cpu().numpy(),dof[:,1].cpu().numpy(),targets,
+                        rb[wrist_id].cpu().numpy(),rb[obj_id].cpu().numpy(),rb[slider_id].cpu().numpy())
+                    assert learned_runtime.task=='H'
+                    hold_reference=learned_runtime.initial_object[0].numpy().copy()
+                    hold_description=learned_runtime.description();hold_phase='learned_hold';hold_file='learned-hold.json'
+                else:
+                    hold_reference=rb[obj_id,:7].cpu().numpy().copy()
+                    hold_description=dict(method='fixed actual hand motor references for22s; G2 servo unchanged',task='H',checkpoint=None)
+                    hold_phase='fixed_motor_hold';hold_file='fixed-motor-hold.json'
+                hold_start=len(records)
                 hold_slider_reference=float(dof[-1,0])
                 for _ in range(660):
-                    targets[hand_idx]=learned_runtime.step(dof[:,0].cpu().numpy(),dof[:,1].cpu().numpy(),
-                        rb[wrist_id].cpu().numpy(),rb[obj_id].cpu().numpy(),rb[slider_id].cpu().numpy(),targets[hand_idx])
-                    tick('learned_hold')
+                    if learned_runtime is not None:
+                        targets[hand_idx]=learned_runtime.step(dof[:,0].cpu().numpy(),dof[:,1].cpu().numpy(),
+                            rb[wrist_id].cpu().numpy(),rb[obj_id].cpu().numpy(),rb[slider_id].cpu().numpy(),targets[hand_idx])
+                    tick(hold_phase)
                 held=np.asarray([r['object'] for r in records[hold_start:]])
                 drift=np.linalg.norm(held[:,:3]-hold_reference[:3],axis=-1)
                 rotation=(Rotation.from_quat(hold_reference[3:]).inv()*Rotation.from_quat(held[:,3:])).magnitude()
                 hold_slider_error=max(abs(r['slider']-hold_slider_reference) for r in records[hold_start:])
                 hold_table_contact=any(r['knife_table_contacts']>0 for r in records[hold_start:])
-                hold_report=dict(**learned_runtime.description(),duration_s=22.,world_reference=hold_reference.tolist(),
+                if learned_runtime is not None:hold_description=learned_runtime.description()
+                hold_report=dict(**hold_description,duration_s=22.,world_reference=hold_reference.tolist(),
                     max_world_drift_m=float(drift.max()),max_world_rotation_rad=float(rotation.max()),
                     stable_10mm_025rad=bool((drift<.01).all() and (rotation<.25).all()),
                     slider_error_m=float(hold_slider_error),knife_table_contact=hold_table_contact,
                     hold_success=bool((drift<.01).all() and (rotation<.25).all() and hold_slider_error<.01 and not hold_table_contact and (held[:,2]>=table_z+.05).all()),
                     below_table=bool((held[:,2]<table_z+.05).any()),scope='continuous acquired H only, no slider success claim')
-                (args.output/'learned-hold.json').write_text(json.dumps(hold_report,indent=2)+'\n')
+                (args.output/hold_file).write_text(json.dumps(hold_report,indent=2)+'\n')
                 learned_runtime=None
             for _ in range(round(args.settle_seconds/dt)):tick('settle_history')
         q,qa,sl,w,o,l=current()
@@ -897,7 +910,8 @@ def main():
             from scripts.g2_local_runtime import LocalPolicyRuntime
             learned_runtime=LocalPolicyRuntime(args.learned_operation_policy,dof[:,0].cpu().numpy(),dof[:,1].cpu().numpy(),targets,
                 rb[wrist_id].cpu().numpy(),rb[obj_id].cpu().numpy(),rb[slider_id].cpu().numpy(),
-                reset_quaternion_compat=args.local_reset_quaternion_compat,input_ablation=args.operation_input_ablation)
+                reset_quaternion_compat=args.local_reset_quaternion_compat,input_ablation=args.operation_input_ablation,
+                freeze_initial_action=args.operation_static_policy)
             assert learned_runtime.task=='S'
             (args.output/'learned-operation.json').write_text(json.dumps(learned_runtime.description(),indent=2)+'\n')
         if not args.only_grasp and ((args.group=='A' and preset_candidate is None) or grasp_success):
@@ -929,14 +943,15 @@ def main():
         trace={k:np.asarray([r[k] for r in records]) for k in records[0]}
         np.savez_compressed(args.output/'trace.npz',**trace)
         report=score(trace,takeover,args.group)
-        if args.learned_hold_policy:
-            hold_report=json.loads((args.output/'learned-hold.json').read_text())
-            report['learned_preparation_hold_success']=hold_report['hold_success']
+        if args.learned_hold_policy or args.fixed_preparation_hold:
+            hold_report=json.loads((args.output/('fixed-motor-hold.json' if args.fixed_preparation_hold else 'learned-hold.json')).read_text())
+            report['preparation_hold_success']=hold_report['hold_success']
+            if args.learned_hold_policy:report['learned_preparation_hold_success']=hold_report['hold_success']
             report['operation_window_success']=report.get('required_task_success',False)
             if not hold_report['hold_success']:
                 for key in ['whole_success','required_task_success','whole_stable_success']:
                     report[key]=False
-                report['failure_class']='learned_hold_preparation_failed'
+                report['failure_class']='fixed_hold_preparation_failed' if args.fixed_preparation_hold else 'learned_hold_preparation_failed'
         if preset_candidate is not None:
             report.update(preset_hold_success=bool(grasp_success),preset_scope=takeover['preset_scope'],
                 preset_candidate_sha256=hashlib.sha256(args.preset_candidate.read_bytes()).hexdigest())
