@@ -30,7 +30,7 @@ def main():
         if report.exists():
             d=json.loads(report.read_text())
             if 'episodes' in d:local(folder.name,d['args']['task'],d['episodes'])
-            elif (folder/'learned-hold.json').exists():
+            elif (folder/'learned-hold.json').exists() and not d.get('operation_steps'):
                 h=json.loads((folder/'learned-hold.json').read_text())
                 rows.append(dict(run=folder.name,scope='continuous table acquisition through H; Snotrequested',task='H',episode=0,replica=0,
                     complete=True,local_success=None,continuous_success=False,world_stable=h['stable_10mm_025rad'],

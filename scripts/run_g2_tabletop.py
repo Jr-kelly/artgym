@@ -800,6 +800,7 @@ def main():
                     rb[wrist_id].cpu().numpy(),rb[obj_id].cpu().numpy(),rb[slider_id].cpu().numpy())
                 assert learned_runtime.task=='H'
                 hold_start=len(records);hold_reference=learned_runtime.initial_object[0].numpy().copy()
+                hold_slider_reference=float(dof[-1,0])
                 for _ in range(660):
                     targets[hand_idx]=learned_runtime.step(dof[:,0].cpu().numpy(),dof[:,1].cpu().numpy(),
                         rb[wrist_id].cpu().numpy(),rb[obj_id].cpu().numpy(),rb[slider_id].cpu().numpy(),targets[hand_idx])
@@ -807,9 +808,13 @@ def main():
                 held=np.asarray([r['object'] for r in records[hold_start:]])
                 drift=np.linalg.norm(held[:,:3]-hold_reference[:3],axis=-1)
                 rotation=(Rotation.from_quat(hold_reference[3:]).inv()*Rotation.from_quat(held[:,3:])).magnitude()
+                hold_slider_error=max(abs(r['slider']-hold_slider_reference) for r in records[hold_start:])
+                hold_table_contact=any(r['knife_table_contacts']>0 for r in records[hold_start:])
                 hold_report=dict(**learned_runtime.description(),duration_s=22.,world_reference=hold_reference.tolist(),
                     max_world_drift_m=float(drift.max()),max_world_rotation_rad=float(rotation.max()),
                     stable_10mm_025rad=bool((drift<.01).all() and (rotation<.25).all()),
+                    slider_error_m=float(hold_slider_error),knife_table_contact=hold_table_contact,
+                    hold_success=bool((drift<.01).all() and (rotation<.25).all() and hold_slider_error<.01 and not hold_table_contact and (held[:,2]>=table_z+.05).all()),
                     below_table=bool((held[:,2]<table_z+.05).any()),scope='continuous acquired H only, no slider success claim')
                 (args.output/'learned-hold.json').write_text(json.dumps(hold_report,indent=2)+'\n')
                 learned_runtime=None
@@ -887,6 +892,14 @@ def main():
         trace={k:np.asarray([r[k] for r in records]) for k in records[0]}
         np.savez_compressed(args.output/'trace.npz',**trace)
         report=score(trace,takeover,args.group)
+        if args.learned_hold_policy:
+            hold_report=json.loads((args.output/'learned-hold.json').read_text())
+            report['learned_preparation_hold_success']=hold_report['hold_success']
+            report['operation_window_success']=report.get('required_task_success',False)
+            if not hold_report['hold_success']:
+                for key in ['whole_success','required_task_success','whole_stable_success']:
+                    report[key]=False
+                report['failure_class']='learned_hold_preparation_failed'
         if preset_candidate is not None:
             report.update(preset_hold_success=bool(grasp_success),preset_scope=takeover['preset_scope'],
                 preset_candidate_sha256=hashlib.sha256(args.preset_candidate.read_bytes()).hexdigest())

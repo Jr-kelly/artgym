@@ -1,6 +1,6 @@
 # G2 + Wuji local policy: ongoing results
 
-Status at 2026-09-28 04:12 CST: **continuous two-cycle operation has not
+Status at 2026-09-28 04:28 CST: **continuous two-cycle operation has not
 succeeded**. Actual PPO training ran on the local RTX4090; B4 is now saved and stopped after two regressive evaluations. Frozen control diagnostics continue. This is an
 intermediate report, not final acceptance or a deployment result.
 
@@ -72,3 +72,15 @@ No new-placement acceptance set or student success is claimed.
 Continuous handoff audit confirms all2309 prefix frames and q/qd, knife/slider state, targets, integral and50-frame history exactly match the source. It found a first-observation quaternion **sign** difference: equivalent wrist rotations cause different uncanonicalized network input. Optional first-frame compatibility matches the frozen local first action within3e-8; R4-03 tests ONLY this representation change. No physical pose reset, new weight, changed limit or fifth training configuration. Independent eval50 gives2/32; eval75 gives0/32. B4 stopped after76 completed updates,155776 sampled transitions,1462 ended training episodes and2485.67s including evaluation. All4 major configurations have been used; no fifth is started.
 
 Round5 predeclares at most6 control executions: two fresh local cp25 runs, then two open-loop replays of successful replica5 motor targets. The replay carries only600 hand command offsets at30Hz, checks original limits and .02/.025rad per-step bounds, and anchors to actual initial motor references. It neither loads measured joint/object poses nor drives the slider. This comparison is a control baseline, not live teacher/student success. Continuous replay is conditional on local evidence.
+
+Later continuous input-compatibility test R4-03 still failed44.44mm/2.983rad despite exact first command; the sign mismatch is not sufficient to explain the failure. Freshcp25 and successful open-loop command replay both0/2. Contact-normal feedback0/2; fullpoint feedback0/2whole, although one replica passed allfour endpoints (1.311/<.001/3.042/0mm) while11.065mm/.998rad body drift failed. No threshold changed. R7 now evaluates the **actual** previously successful continuous22sH final state as a different support initialization, with the same frozen S weights; this remains local development, not new-placement generalization.
+
+**New actual H-prepared state: R7-01 independently passes2/2 local S.**
+Same frozen B4cp25, but initialization is the actual end of the previously
+continuous H22s+2ssettle run. Maxworld2.145/2.038mm, rotation.19285/.17283rad;
+fourphase endpoint errors all<4.5mm (2mm strict fails). One placement, a
+second actually reached support state, no fabricated pose. Runtime replay
+600frames maxmotorerror1.2e-7rad; firstbodyjump.108mm. R7-03 now executes
+actual tabletop→H22s→S20s without resets; result pending. R7-04 checks
+one fresh environment across two local resets. Planned alternative controller
+is skipped to concentrate on the learned method. No new training configuration.

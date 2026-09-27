@@ -19,6 +19,7 @@ def main():
     p.add_argument('--episodes', type=int, default=1)
     p.add_argument('--route', choices=['support', 'joint'], help='Defaults to the checkpoint route, or support for a baseline')
     p.add_argument('--output', type=Path, required=True)
+    p.add_argument('--state',type=Path,help='Explicit measured state from a documented actual acquisition; local reset only, never whole-task success')
     p.add_argument('--checkpoint', type=Path)
     p.add_argument('--teacher', type=Path, default=TEACHER)
     p.add_argument('--teacher-device', default='cpu')
@@ -27,12 +28,15 @@ def main():
     p.add_argument('--video-env',type=int,default=0,help='Declared replica to film; all replicas retain scores and raw traces')
     p.add_argument('--thumb-plan',type=Path,help='Named geometric motor-path diagnostic replaces frozen thumb actor; no slider actuation')
     p.add_argument('--motor-replay',type=Path,help='Open-loop successful motor-command replay diagnostic; no network or object-state replay')
+    p.add_argument('--replay-contact-follow',choices=['none','normal','point'],default='none',help='Explicit privileged motor replay correction using actual simulated knife and slider pose')
     p.add_argument('--thumb-first-stroke-q4-correction', type=float, default=0., help='Declared single-factor diagnostic, normalized additive q4 thumb correction only first5s; total increment remains capped .025rad/step')
     p.add_argument('--prepare-closed-seconds',type=float,default=0.,help='Explicit local diagnostic: physical closed-goal teacher preparation, separately scored, then a fresh20s external clock. No physics reset at boundary.')
     args = p.parse_args()
     if args.motor_replay:
         assert args.task=='S' and args.baseline=='fixed' and args.checkpoint is None
         assert args.thumb_plan is None and not args.prepare_closed_seconds
+    else:
+        assert args.replay_contact_follow=='none'
     if args.prepare_closed_seconds:
         assert args.task=='S' and args.baseline in ['learned','thumb-only'] and 0<args.prepare_closed_seconds<=6
     artifact=torch.load(args.checkpoint,map_location='cpu') if args.checkpoint else None
@@ -42,7 +46,7 @@ def main():
     if plan is not None:
         assert args.task=='S' and args.baseline in ['learned','learned-static'] and not args.thumb_first_stroke_q4_correction and not args.prepare_closed_seconds
     args.output.mkdir(parents=True, exist_ok=False)
-    env = LocalG2(args.task, args.num_envs, args.route, graphics=args.video)
+    env = LocalG2(args.task, args.num_envs, args.route, graphics=args.video,state_path=args.state)
     assert abs(args.thumb_first_stroke_q4_correction) <= 1.
     env.thumb_first_stroke_q4_correction = args.thumb_first_stroke_q4_correction
     env.thumb_plan=plan
@@ -71,10 +75,10 @@ def main():
         for episode in range(args.episodes):
             if episode:
                 env.reset()
-            replay = None
+            replays = None
             if args.motor_replay:
                 from scripts.g2_motor_replay import MotorReplay
-                replay = MotorReplay(args.motor_replay,env.targets[0,7:27].numpy(),env.lower[7:27].numpy(),env.upper[7:27].numpy())
+                replays = [MotorReplay(args.motor_replay,env.targets[j,7:27].numpy(),env.lower[7:27].numpy(),env.upper[7:27].numpy(),args.replay_contact_follow) for j in range(env.n)]
             if args.video:
                 writer = imageio.get_writer(args.output/('local-episode-%03d.mp4'%episode), fps=30, codec='libx264', quality=7, pixelformat='yuv420p', ffmpeg_params=['-movflags', '+faststart'])
             preparation = None
@@ -119,10 +123,14 @@ def main():
             first.update(env.contacts_for_evaluation())
             rows = [first]
             for i in range(args.steps or env.steps):
-                if replay is not None:
+                if replays is not None:
                     # Only motor references change; env.step retains original
                     # servo/integrator, physics and independent task metrics.
-                    env.targets[:,7:27] = torch.from_numpy(replay.step())
+                    for j,replay in enumerate(replays):
+                        env.targets[j,7:27] = torch.from_numpy(replay.step(env.wrist[j].numpy(),env.object[j].numpy(),float(env.dof[j,27,0])))
+                        if replay.diagnostic is not None:
+                            with (args.output/'replay-contact-feedback.jsonl').open('a') as feedback:
+                                feedback.write(json.dumps(dict(step=i,episode=episode,replica=j,**replay.diagnostic))+'\n')
                 with torch.no_grad():
                     if i == 0 or args.baseline != 'learned-static':
                         action = torch.zeros(env.n, env.action_dim) if network is None else network.mean_action(env.observation())
@@ -156,7 +164,7 @@ def main():
                 writer = None
         (args.output/'report.json').write_text(json.dumps(dict(scope='local reset diagnostic; not continuous tabletop acquisition',
             args={k:str(v) if isinstance(v, Path) else v for k,v in vars(args).items()},
-            thumb_controller='open-loop learned motor-command replay diagnostic' if args.motor_replay else ('geometric motor path from explicit file or embedded checkpoint' if env.thumb_plan is not None else ('frozen teacher' if env.teacher is not None else 'fixed')),
+            thumb_controller=('privileged contact-referenced motor replay: '+args.replay_contact_follow if args.replay_contact_follow!='none' else 'open-loop learned motor-command replay diagnostic') if args.motor_replay else ('geometric motor path from explicit file or embedded checkpoint' if env.thumb_plan is not None else ('frozen teacher' if env.teacher is not None else 'fixed')),
             elapsed_seconds=time.monotonic()-start, episodes=summaries), indent=2)+'\n')
     finally:
         if writer:
