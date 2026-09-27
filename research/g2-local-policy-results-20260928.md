@@ -1,8 +1,13 @@
 # G2 + Wuji local policy: ongoing results
 
-Status at 2026-09-28 04:28 CST: **continuous two-cycle operation has not
-succeeded**. Actual PPO training ran on the local RTX4090; B4 is now saved and stopped after two regressive evaluations. Frozen control diagnostics continue. This is an
-intermediate report, not final acceptance or a deployment result.
+Status at 2026-09-28 04:41 CST: **the fixed continuous tabletop task passes**
+in R7-03. New learned privileged H→S composite, not unchanged original
+teacher or a deployable student. Independent raw audit confirms20s/two cycles,
+world2.115mm/.172077rad, endpoints4.145/.001024/4.086/.000030mm; no drop/table
+support and no post-start state resets. Strict2mm fails extension. The full
+118.967s run includes actual pickup, air flip, finger gait,22sH and2srealhistory.
+The first2969frames exactly match the verified Hprefix;600-frame motor replay
+error<1.2e-7rad. Twenty new placements are now preregistered; not yet run.
 
 The new local environment restores measured full G2/Wuji/knife states from
 actual acquisition runs. Only episode reset writes physical state. Its motor

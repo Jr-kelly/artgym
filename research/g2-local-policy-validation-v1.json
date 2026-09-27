@@ -1,0 +1,476 @@
+{
+  "created_utc": "2026-09-27T20:41:59.752295+00:00",
+  "seed": 2026092801,
+  "source_pin": "/data/research/artgym-g2-local-policy-20260928/runs/g2-local-policy-20260928/source-pins/8569f43c67817401",
+  "source_manifest_sha256": "ed83d05a56ccbc02e9ae196ed9fc28ed18cdb0a7476386f2278046ce03b7a65b",
+  "base_launch": "runs/g2-local-policy-20260928/R7-03-launch.json",
+  "base_command": [
+    "/home/agiuser/miniconda3/envs/artgym/bin/python",
+    "-u",
+    "-m",
+    "scripts.run_g2_tabletop",
+    "--group",
+    "B",
+    "--operation-yaw",
+    "90",
+    "--yaw",
+    "180",
+    "--dx",
+    "-.05",
+    "--arm-gain-scale",
+    "10",
+    "--arm-damping-scale",
+    "20",
+    "--arm-integral-gain",
+    "1",
+    "--grasp-plan",
+    "configs/g2_local/prefix/acquisition-candidate2-refined-initial.json",
+    "--acquisition-arm-seed",
+    "configs/g2_local/prefix/candidate2-arm-seed.json",
+    "--cartesian-acquisition",
+    "--slider-face",
+    "down",
+    "--table-localization",
+    "settled-truth",
+    "--air-flip",
+    "180",
+    "--lift-height",
+    ".30",
+    "--gait-plan",
+    "configs/g2_local/prefix/candidate2-thumb-slider-contact-corridor-execution.json",
+    "--stay-after-gait",
+    "--contact-diagnostics",
+    "--seconds",
+    "20",
+    "--policy-action-mode",
+    "thumb-only",
+    "--learned-operation-policy",
+    "/data/research/artgym-g2-local-policy-20260928/runs/g2-local-policy-20260928/B4-S-joint-path/checkpoint-00025.pth",
+    "--video",
+    "--closeup",
+    "--output",
+    "/data/research/artgym-g2-local-policy-20260928/runs/g2-local-policy-20260928/R7-03-continuous-learned-H-then-joint-S",
+    "--local-reset-quaternion-compat",
+    "--learned-hold-policy",
+    "/data/research/artgym-g2-local-policy-20260928/runs/g2-local-policy-20260928/A1-H-pilot/checkpoint-00010.pth"
+  ],
+  "base_report_sha256": "cf42d6d234f4dd726b1832ee16b9752c6ca3e76139405a5c400f6c4b4364e64d",
+  "independent_audit": "runs/g2-local-policy-20260928/R7-03-independent-continuous-audit.json",
+  "independent_audit_sha256": "3c3a7a2ab67ca7885ee047b6f5ea50ecd4d068553229b7369196db464d0711d2",
+  "input_sha256": {
+    "/data/research/artgym-g2-local-policy-20260928/runs/g2-local-policy-20260928/A1-H-pilot/checkpoint-00010.pth": "214aa7b81b933adfcf9ce49b562b56699e737d4feb6b0dcb7f7bb7589c720414",
+    "/data/research/artgym-g2-local-policy-20260928/runs/g2-local-policy-20260928/B4-S-joint-path/checkpoint-00025.pth": "dced811c76513e13e0c29adc9229868006c4c908184f88813aa7f656a68dfe71"
+  },
+  "trials": [
+    {
+      "name": "g2-local-policy-validation-v1-00",
+      "placement": 0,
+      "dx_m": -0.0005761785241515083,
+      "dy_m": -0.00410628888932931,
+      "yaw_deg": -0.08909104833548409
+    },
+    {
+      "name": "g2-local-policy-validation-v1-01",
+      "placement": 1,
+      "dx_m": 0.004871844217498742,
+      "dy_m": -0.00468469268290142,
+      "yaw_deg": 0.04196555665955248
+    },
+    {
+      "name": "g2-local-policy-validation-v1-02",
+      "placement": 2,
+      "dx_m": -0.004981292002563353,
+      "dy_m": -0.0028060291432097247,
+      "yaw_deg": 0.5909996965763566
+    },
+    {
+      "name": "g2-local-policy-validation-v1-03",
+      "placement": 3,
+      "dx_m": 0.0038042833986484826,
+      "dy_m": 0.00416130176869026,
+      "yaw_deg": -1.0145606786369583
+    },
+    {
+      "name": "g2-local-policy-validation-v1-04",
+      "placement": 4,
+      "dx_m": 6.680837891766989e-05,
+      "dy_m": 0.0017539295941979161,
+      "yaw_deg": 0.21804765046821561
+    },
+    {
+      "name": "g2-local-policy-validation-v1-05",
+      "placement": 5,
+      "dx_m": -0.0032443304917945492,
+      "dy_m": -0.0009973405810038488,
+      "yaw_deg": 1.1047134935800695
+    },
+    {
+      "name": "g2-local-policy-validation-v1-06",
+      "placement": 6,
+      "dx_m": 0.004428649156515455,
+      "dy_m": -0.0010056398451087733,
+      "yaw_deg": 1.3365135546881697
+    },
+    {
+      "name": "g2-local-policy-validation-v1-07",
+      "placement": 7,
+      "dx_m": 0.0026206539719707544,
+      "dy_m": 0.0029713849664495216,
+      "yaw_deg": 1.4585814898966412
+    },
+    {
+      "name": "g2-local-policy-validation-v1-08",
+      "placement": 8,
+      "dx_m": 0.0007534187275179538,
+      "dy_m": -6.471046556756566e-05,
+      "yaw_deg": -0.6576233537843554
+    },
+    {
+      "name": "g2-local-policy-validation-v1-09",
+      "placement": 9,
+      "dx_m": 0.0022818854312700023,
+      "dy_m": -0.0020884289624488912,
+      "yaw_deg": -0.9703752204298297
+    },
+    {
+      "name": "g2-local-policy-validation-v1-10",
+      "placement": 10,
+      "dx_m": -0.0013500955979687463,
+      "dy_m": 0.003289609837432993,
+      "yaw_deg": -1.824715015218645
+    },
+    {
+      "name": "g2-local-policy-validation-v1-11",
+      "placement": 11,
+      "dx_m": -0.0036906531818447566,
+      "dy_m": 0.004901714666307271,
+      "yaw_deg": -1.4594330745919457
+    },
+    {
+      "name": "g2-local-policy-validation-v1-12",
+      "placement": 12,
+      "dx_m": 0.001829845617778456,
+      "dy_m": -0.003555662306450271,
+      "yaw_deg": -0.5768682840271258
+    },
+    {
+      "name": "g2-local-policy-validation-v1-13",
+      "placement": 13,
+      "dx_m": -0.0025941799891811435,
+      "dy_m": 0.0007863525903116631,
+      "yaw_deg": 1.916229716507973
+    },
+    {
+      "name": "g2-local-policy-validation-v1-14",
+      "placement": 14,
+      "dx_m": 0.00338341920669077,
+      "dy_m": 0.00245164046050536,
+      "yaw_deg": 0.7665769887974756
+    },
+    {
+      "name": "g2-local-policy-validation-v1-15",
+      "placement": 15,
+      "dx_m": 0.001058715350370051,
+      "dy_m": -0.0033608709660627534,
+      "yaw_deg": -0.2349138118290821
+    },
+    {
+      "name": "g2-local-policy-validation-v1-16",
+      "placement": 16,
+      "dx_m": -0.0022295858531253877,
+      "dy_m": 0.003800869681475654,
+      "yaw_deg": -1.3922166542764158
+    },
+    {
+      "name": "g2-local-policy-validation-v1-17",
+      "placement": 17,
+      "dx_m": -0.0015945516155933882,
+      "dy_m": -0.001515621863785518,
+      "yaw_deg": 0.861580061806793
+    },
+    {
+      "name": "g2-local-policy-validation-v1-18",
+      "placement": 18,
+      "dx_m": -0.00403974708764673,
+      "dy_m": 0.00013349015239409346,
+      "yaw_deg": 1.7291024714056369
+    },
+    {
+      "name": "g2-local-policy-validation-v1-19",
+      "placement": 19,
+      "dx_m": -0.00037395980172239717,
+      "dy_m": 0.0012528031842440168,
+      "yaw_deg": -1.7769955590562723
+    }
+  ],
+  "method": "frozen privileged learned H/S composite; not unchanged original teacher or deployable student",
+  "interpretation": "20 new geometric placements, one attempt each. Placement known to planner; not perception robustness. No controller tuning or failed-run reruns.",
+  "criteria": {
+    "seconds": 20,
+    "reversal_seconds": 5,
+    "endpoint_last_seconds": 0.3,
+    "endpoint_max_m": 0.01,
+    "strict_endpoint_m": 0.002,
+    "world_translation_m": 0.01,
+    "world_rotation_rad": 0.25,
+    "reference": "fixed at actual operation takeover; hold preparation independently scored"
+  },
+  "budget_anchor": {
+    "checked_utc": "2026-09-27T20:41:15.484153+00:00",
+    "physical_gpu_count": 1,
+    "scope": "all task simulation and learning/evaluation intervals, conservatively broader than learning only",
+    "union_gpu_hours": 2.409117644627889,
+    "additional_debug_reservation_hours": 0.25,
+    "charged_gpu_hours": 2.659117644627889,
+    "cap_gpu_hours": 12,
+    "remaining_gpu_hours": 9.340882355372111,
+    "raw_process_sum_hours": 3.992388398912218,
+    "budget_exceeded": false,
+    "processes": [
+      {
+        "name": "A1-H-main-launch",
+        "pid": 3734091,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T18:19:25.339267+00:00",
+        "seconds": 818.2022180557251,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.train_g2_local"
+      },
+      {
+        "name": "A1-H-pilot-launch",
+        "pid": 3689757,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T18:10:50.265126+00:00",
+        "seconds": 454.86380672454834,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.train_g2_local"
+      },
+      {
+        "name": "A2-S-pilot-launch",
+        "pid": 3790460,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T18:36:53.193689+00:00",
+        "seconds": 1632.4624598026276,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.train_g2_local"
+      },
+      {
+        "name": "A3-S-absorbing-launch",
+        "pid": 3892777,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T19:05:07.220733+00:00",
+        "seconds": 1334.0333950519562,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.train_g2_local"
+      },
+      {
+        "name": "B4-S-joint-path-launch",
+        "pid": 3990574,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T19:28:55.466759+00:00",
+        "seconds": 2496.618273496628,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.train_g2_local"
+      },
+      {
+        "name": "R1-04-launch",
+        "pid": 3677395,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T18:08:22.683359+00:00",
+        "seconds": 126.83179950714111,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_local"
+      },
+      {
+        "name": "R2-01-launch",
+        "pid": 3734888,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T18:19:32.398288+00:00",
+        "seconds": 464.6279766559601,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_local"
+      },
+      {
+        "name": "R2-02-launch",
+        "pid": 3760067,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T18:27:42.908734+00:00",
+        "seconds": 541.8826069831848,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_tabletop"
+      },
+      {
+        "name": "R2-03-launch",
+        "pid": 3776219,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T18:32:53.487777+00:00",
+        "seconds": 194.08875679969788,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_local"
+      },
+      {
+        "name": "R2-04-launch",
+        "pid": 3793393,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T18:37:27.755094+00:00",
+        "seconds": 919.3532378673553,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_tabletop"
+      },
+      {
+        "name": "R2-05-launch",
+        "pid": 3842927,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T18:52:58.205983+00:00",
+        "seconds": 205.95335841178894,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_local"
+      },
+      {
+        "name": "R3-01-launch",
+        "pid": 3892809,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T19:05:07.339281+00:00",
+        "seconds": 223.0834836959839,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_local"
+      },
+      {
+        "name": "R3-02-launch",
+        "pid": 3857140,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T18:57:00.843893+00:00",
+        "seconds": 232.47617983818054,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_local"
+      },
+      {
+        "name": "R3-03-launch",
+        "pid": 3907642,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T19:09:19.148627+00:00",
+        "seconds": 203.28800082206726,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_local"
+      },
+      {
+        "name": "R3-04-launch",
+        "pid": 3920658,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T19:13:01.075824+00:00",
+        "seconds": 199.75272679328918,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_local"
+      },
+      {
+        "name": "R3-05-launch",
+        "pid": 3957880,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T19:21:33.619184+00:00",
+        "seconds": 190.95263981819153,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_local"
+      },
+      {
+        "name": "R3-06-launch",
+        "pid": 4014985,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T19:33:39.705604+00:00",
+        "seconds": 180.8993570804596,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_local"
+      },
+      {
+        "name": "R4-01-launch",
+        "pid": 4037481,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T19:39:23.227933+00:00",
+        "seconds": 366.54702830314636,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_local"
+      },
+      {
+        "name": "R4-02-launch",
+        "pid": 4061207,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T19:46:47.891482+00:00",
+        "seconds": 879.4479284286499,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_tabletop"
+      },
+      {
+        "name": "R4-03-launch",
+        "pid": 4092476,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T20:05:15.458820+00:00",
+        "seconds": 768.3823935985565,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_tabletop"
+      },
+      {
+        "name": "R5-01-launch",
+        "pid": 4095365,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T20:08:27.873494+00:00",
+        "seconds": 219.85045742988586,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_local"
+      },
+      {
+        "name": "R5-02-launch",
+        "pid": 4098845,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T20:12:29.535967+00:00",
+        "seconds": 191.7576985359192,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_local"
+      },
+      {
+        "name": "R6-01-launch",
+        "pid": 4102618,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T20:18:09.262129+00:00",
+        "seconds": 109.54194521903992,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_local"
+      },
+      {
+        "name": "R6-02-launch",
+        "pid": 4104110,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T20:20:16.201731+00:00",
+        "seconds": 116.05304789543152,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_local"
+      },
+      {
+        "name": "R7-01-launch",
+        "pid": 4106283,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T20:23:31.465348+00:00",
+        "seconds": 116.17046165466309,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_local"
+      },
+      {
+        "name": "R7-03-launch",
+        "pid": 4109250,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T20:27:37.033895+00:00",
+        "seconds": 795.0400760173798,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_tabletop"
+      },
+      {
+        "name": "R7-04-launch",
+        "pid": 4109857,
+        "active_identity_verified": false,
+        "start_utc": "2026-09-27T20:28:20.567650+00:00",
+        "seconds": 390.4369215965271,
+        "end_rule": "now for verified active PID; terminal/log mtime + conservative10s cleanup otherwise",
+        "scope": "scripts.run_g2_local"
+      }
+    ]
+  },
+  "delivery_start_utc": "2026-09-28T16:23:41+00:00"
+}
