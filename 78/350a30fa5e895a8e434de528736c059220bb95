@@ -1,0 +1,96 @@
+scripts/run_g2_local_validation.py
+  s_87fdc32a1dcd01::t_b323d0305ef85c 1-94,100-124,126-138,144-186
+  s_87fdc32a1dcd01::t_9d062595f1f73c 95-99
+  s_87fdc32a1dcd01::t_e019c4afe80dd6 125,139-143
+scripts/audit_g2_gpu_budget.py
+  s_87fdc32a1dcd01::t_6710033c7654ae 1-55
+scripts/audit_g2_prepared_continuous.py
+  s_87fdc32a1dcd01::t_d4270d529e5b8e 1-31,35-93,96-104
+  s_87fdc32a1dcd01::t_9d062595f1f73c 32-34,94-95
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "78350a30fa5e895a8e434de528736c059220bb95",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_read_tokens": "972615638",
+        "tlab.token_usage.output_tokens": "6678729",
+        "tlab.session_started_at": "2026-09-27T20:31:15Z",
+        "tlab.token_usage.input_tokens": "48666904",
+        "tlab.token_usage.cache_creation_tokens": "0"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "scripts/audit_g2_gpu_budget.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 55
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/audit_g2_prepared_continuous.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 104
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/run_g2_local_validation.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 186
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "research/g2-local-policy-20260928.md",
+      "new_path": "research/g2-local-policy-20260928.md",
+      "additions": {
+        "human": 2
+      }
+    },
+    {
+      "old_path": "research/g2-local-policy-control-results-20260928.csv",
+      "new_path": "research/g2-local-policy-control-results-20260928.csv",
+      "additions": {
+        "human": 2
+      }
+    },
+    {
+      "old_path": "research/g2-local-policy-reproduction-20260928.md",
+      "new_path": "research/g2-local-policy-reproduction-20260928.md",
+      "additions": {
+        "human": 42
+      }
+    },
+    {
+      "old_path": "research/g2-local-policy-results-20260928.md",
+      "new_path": "research/g2-local-policy-results-20260928.md",
+      "additions": {
+        "human": 2
+      }
+    }
+  ]
+}
