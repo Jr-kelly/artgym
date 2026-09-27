@@ -63,6 +63,7 @@ class BatchedTeacher:
             state[:, ids.to(self.device)] = 0
         self.last_action[ids] = 0
         self.raw_action[ids] = 0
+        self.last_obs[ids] = 0  # no actor call yet in the new episode
         self.previous_slider[ids] = e.dof[ids, 27, 0]
         q = e.dof[ids, 7:27, 0]
         dims = torch.tensor([.019, .008, .147, .01, .003, .03]).expand(len(ids), -1)
