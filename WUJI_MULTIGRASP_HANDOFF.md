@@ -199,3 +199,23 @@ Backed up immutable D-500 with identical remote/local SHA256; not evaluated or s
 ## 多抓姿 2026-09-28T17:19:58.354401+00:00 all_four_cp500_integrity_pass
 
 四组原进程实查A728/B592/C667/D502，已全部达到CP500并CPU核验81920000交互和张量完整性；同预算1000训练未完成。B看护预计余量15.9min，D约119min训练剩余，继续原训练。最终分析全流程验证通过，正式策略评估仍等待开发冻结。 证据：research/multigrasp-20260928/receipts/cp500-ABCD-1720.json。下一步：完成四臂1000及队列开发评估，第二批新测试物理门禁后统一冻结比较。
+
+## 多抓姿 2026-09-28T17:23:50.339037+00:00 milestone_backup_verified
+
+Backed up immutable A-750 with identical remote/local SHA256; not evaluated or selected. 证据：/data/research/artgym-experiments-20260921/multigrasp-20260928/research/multigrasp-20260928/receipts/checkpoint-backups/A-750.json。下一步：Continue fixed1000epoch training and preregistered development selection。
+
+## 多抓姿 2026-09-28T17:37:08.781591+00:00 milestone_backup_verified
+
+Backed up immutable C-750 with identical remote/local SHA256; not evaluated or selected. 证据：/data/research/artgym-experiments-20260921/multigrasp-20260928/research/multigrasp-20260928/receipts/checkpoint-backups/C-750.json。下一步：Continue fixed1000epoch training and preregistered development selection。
+
+## 多抓姿 2026-09-28T17:37:39.955001+00:00 AC_cp750_integrity_pass
+
+A/C达到750并CPU核验122880000交互、有限模型及优化器状态；A822/B668/C752/D572在17:37UTC均原训练进程存活。整机即时97/97/95/98%，B看护余量约14.5min，尚未需接管；A预计约32min训练剩余。 证据：research/multigrasp-20260928/receipts/cp750-AC-1738.json。下一步：A终结后核查新测试生成衔接，C终结后开发评估；四组保持1000同预算。
+
+## 多抓姿 2026-09-28T17:56:24.449847+00:00 ABC_cp750_integrity_pass
+
+A/B/C750均CPU核验122880000交互及模型完整性；四训练17:56UTC A922/B750/C842/D647，原PID不变。预计A14min/C32min/B55min/D84min剩余，B看护余量13.5min；后续生成与开发等待器已实际核查存活。 证据：research/multigrasp-20260928/receipts/cp750-ABC-1757.json。下一步：首先核验A1000终结与第二批新抓姿生成实际启动；不抢占其它卡。
+
+## 多抓姿 2026-09-28T17:56:27.705772+00:00 milestone_backup_verified
+
+Backed up immutable B-750 with identical remote/local SHA256; not evaluated or selected. 证据：/data/research/artgym-experiments-20260921/multigrasp-20260928/research/multigrasp-20260928/receipts/checkpoint-backups/B-750.json。下一步：Continue fixed1000epoch training and preregistered development selection。
