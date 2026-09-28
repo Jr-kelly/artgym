@@ -1,6 +1,6 @@
-# 最新续接：所有实验完成，最终发布收尾（2026-09-28 23:41 UTC）
+# 最新续接：实验与GitHub交付完成（2026-09-28 23:43 UTC）
 
-工作区 `/data/research/artgym-experiments-20260921/multigrasp-20260928`，独立分支 `feat/wuji-multigrasp-2x2-20260928`。Goal当前仅剩最终GitHub发布核验；所有训练/评估均完成，不得按下方历史PID重启。无子代理。
+工作区 `/data/research/artgym-experiments-20260921/multigrasp-20260928`，独立分支 `feat/wuji-multigrasp-2x2-20260928`。实验commit `054981f65cfaaaeaf493cd14e0234c088d8feeac` 已push，正式Release已发布并核验；所有训练/评估均完成，不得按下方历史PID重启。无子代理。
 
 核心四组1000轮各163840000交互、同随机初始化。固定1000严格2s A9/B0/C19/D0，择优A75026/B10000/C75024/D10000；均每800。5s四组全0，旧teacher94/93。全部严格成功仅原训练来源。更多抓姿未改善、范围放宽无可靠独立收益（单seed、有限预算）；两张800冻结表各12000策略回合均独立复算。
 
@@ -8,7 +8,7 @@
 
 全部七训练24.430GPU小时，最后4h采样整机61.69%。23:39UTC远端所有本轮子PID已退出、无GPU计算，23:40已停止自建只读镜像3671366；本地视频932715/932716及收集器全部正常终结。仍须引用带时间收据，不将旧PID当事实。无未收束训练。
 
-已本地/远端SHA备份矩阵16里程碑＋专家12里程碑及全部训练器额外权重/TensorBoard。28个Release草稿资产服务端SHA核验通过，id398592814、tag`wuji-multigrasp-20260928-v1`。下一步发布草稿，生成正式release-assets.json并最终commit/push。大原始trace/权重在Release；代码/配置/JSON/CSV/四视频和manifest入git。
+已本地/远端SHA备份矩阵16里程碑＋专家12里程碑及全部训练器额外权重/TensorBoard。28个正式Release资产服务端SHA核验通过，id398592814、tag`wuji-multigrasp-20260928-v1`。正式链接与SHA见 `research/multigrasp-20260928/release-assets.json`。后续元数据提交仅保存发布收据，不改变实验代码/权重。大原始trace/权重在Release；代码/配置/JSON/CSV/四视频和manifest入git。
 
 四视频均已实际检查：旧reference；A1000失败；A750同一原base2三扰动严格3/3；expert3同一新增源三扰动重仿真严格2/3。视频设备/批量不同，不是冻结结果精确回放，不是三独立抓姿泛化。源3权重SHA e4111879414e4e707ccb46538a0c493f71a6fdc1d4f30aa451f68a9170cae13f。
 
@@ -765,3 +765,7 @@ Source 11: static and three policy protocols complete, 96 policy trials independ
 ## 多抓姿 2026-09-28T23:40:02.937600+00:00 all_computation_closed_and_monitor_stopped
 
 23:39UTC远端所有本轮状态terminal、实际子PID全退出、无GPU计算进程；三专家评估完整。本地专家视频正常0退出、收集器正常0退出；核对命令后停止自建只读镜像PID3671366，不影响任何其它任务。全部28项Release草稿资产上传完毕，待正式发布。 证据：research/multigrasp-20260928/receipts/remote-final-process-check.json, research/multigrasp-20260928/receipts/monitor-shutdown.json, research/multigrasp-20260928/receipts/resource-accounting-final.json。下一步：最终GitHub提交/Release发布与链接核验。
+
+## 多抓姿 2026-09-28T23:42:45.919815+00:00 github_release_published_and_verified
+
+实验commit054981f65cfaaaeaf493cd14e0234c088d8feeac已push并API核对。正式Release wuji-multigrasp-20260928-v1发布，28项资产正式URL和服务端SHA全部核验；完整对照/专家诊断交付，行为多抓姿稳定目标仍未达成。已停止本轮计算，不追加工作。 证据：research/multigrasp-20260928/release-assets.json, research/multigrasp-20260928/release-notes.md, research/multigrasp-20260928/state.json。下一步：仅最终元数据push核验；下一轮固定span.04验证源3/11完整日程的端点保持改善。
