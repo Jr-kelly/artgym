@@ -561,3 +561,49 @@ D19:24:06UTC终结，15217.42s墙钟；原PID退出+MAX EPOCHS NUM+最终CP共�
 ## 多抓姿 2026-09-28T20:29:48.353767+00:00 A750_success_video_and_core_assets_verified
 
 A750原base2三个扰动视频实际严格3/3、五完整周期、20s全程稳定，600帧抽检通过。明确单基础抓姿局部成功而非三抓姿泛化。四权重包及五主表trace包共9Release资产全部服务端SHA核验；旧参考权重和三个视频另行上传。主表图已按25基础抓姿绘出，宽松与严格分开。 证据：research/multigrasp-20260928/videos/A750-original-base2-three-perturbations-manifest.json, research/multigrasp-20260928/receipts/release-main-assets.json, research/multigrasp-20260928/final1000-analysis/per-base-outcomes.png。下一步：完成择优冻结结果与专家诊断；专家完成前不追加其它训练分支。
+
+多抓姿实查 2026-09-28T20:32:19.547483+00:00 selected-v1-B-fixed5 completed；远端PID 109395；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T20:32:19.547483+00:00 selected-v1-B-arrival running；远端PID 110057；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T20:34:57.919377+00:00 selected-v1-B-arrival completed；远端PID 110057；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T20:34:57.919377+00:00 selected-v1-C-fixed2 running；远端PID 110719；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T20:38:07.219430+00:00 selected-v1-C-fixed2 completed；远端PID 110719；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T20:38:07.219430+00:00 selected-v1-C-fixed5 running；远端PID 111368；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T20:41:16.815383+00:00 selected-v1-C-arrival running；远端PID 112030；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T20:41:16.815383+00:00 selected-v1-C-fixed5 completed；远端PID 111368；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T20:44:00.542374+00:00 selected-v1-C-arrival completed；远端PID 112030；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T20:44:00.542374+00:00 selected-v1-D-fixed2 running；远端PID 112647；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T20:47:09.772374+00:00 selected-v1-D-fixed2 completed；远端PID 112647；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T20:47:09.772374+00:00 selected-v1-D-fixed5 running；远端PID 113309；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T20:49:47.813374+00:00 selected-v1-D-arrival running；远端PID 113961；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T20:49:47.813374+00:00 selected-v1-D-fixed5 completed；远端PID 113309；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T20:52:56.791501+00:00 selected-v1-reference-fixed2 running；远端PID 114578；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T20:52:56.791501+00:00 selected-v1-D-arrival completed；远端PID 113961；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T20:56:05.379380+00:00 selected-v1-reference-fixed2 completed；远端PID 114578；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T20:56:05.379380+00:00 selected-v1-reference-fixed5 running；远端PID 115240；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T20:58:43.773373+00:00 selected-v1-reference-fixed5 completed；远端PID 115240；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T20:58:43.773373+00:00 selected-v1-reference-arrival running；远端PID 115851；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T21:01:53.853777+00:00 selected-v1-reference-arrival completed；远端PID 115851；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+## 多抓姿 2026-09-28T21:04:57.801862+00:00 selected_frozen_independent_analysis_complete
+
+择优16项完整、12000策略回合独立复算通过。fixed2 A75026/B10000/C75024/D10000(每800)，fixed5四组0；新增训练/历史/补充新抓姿均严格0，静态稳定子集相同。C同预算微收益未在择优表保留，无可靠动作范围额外收益证据。专家21:03UTC分别254/266/252轮，预计剩129-140min，继续既定唯一诊断。 证据：research/multigrasp-20260928/selected-analysis/report.json, research/multigrasp-20260928/receipts/experts-progress-2103.json。下一步：完成专家1000及独立源扰动评估；全部代码/权重/视频/报告最终发布。
