@@ -219,3 +219,79 @@ A/B/C750均CPU核验122880000交互及模型完整性；四训练17:56UTC A922/B
 ## 多抓姿 2026-09-28T17:56:27.705772+00:00 milestone_backup_verified
 
 Backed up immutable B-750 with identical remote/local SHA256; not evaluated or selected. 证据：/data/research/artgym-experiments-20260921/multigrasp-20260928/research/multigrasp-20260928/receipts/checkpoint-backups/B-750.json。下一步：Continue fixed1000epoch training and preregistered development selection。
+
+多抓姿 2026-09-28T18:10:45.935558+00:00 启动请求 mg_A_seed2801 GPU0 .93:30296；证据 runs/multigrasp-20260928/mg_A_seed2801，待核验实际PID/结果；权重 reference 4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac or scratch as command。
+
+多抓姿实查 2026-09-28T18:11:04.457470+00:00 mg_A_seed2801 completed；远端PID 2449；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T18:11:04.457470+00:00 fresh-generation-v2 running；远端PID 67680；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+## 多抓姿 2026-09-28T18:11:43.122935+00:00 milestone_backup_verified
+
+Backed up immutable A-1000 with identical remote/local SHA256; not evaluated or selected. 证据：/data/research/artgym-experiments-20260921/multigrasp-20260928/research/multigrasp-20260928/receipts/checkpoint-backups/A-1000.json。下一步：Continue fixed1000epoch training and preregistered development selection。
+
+## 多抓姿 2026-09-28T18:11:56.238241+00:00 A_full_budget_complete_fresh2_started
+
+A正式训练于18:10:45UTC正常exit0终结，11325.45s墙钟，CP1000 CPU核验163840000交互并已本地哈希备份。第二批seed2805/3000候选生成18:10:48自动接续，wrapper67679/child67680实际运行GPU0。B816/C914/D708仍原PID训练；未选任何模型。 证据：research/multigrasp-20260928/receipts/cp1000-A-1812.json, runs/multigrasp-20260928/mg_A_seed2801/status.json, research/multigrasp-20260928/receipts/monitor-latest.json。下一步：接续新测试物理筛选与四组开发冻结，之后同初态final1000和择优两张表。
+
+## 多抓姿 2026-09-28T18:12:19.249579+00:00 final_analysis_tools_synced
+
+最终两种选择入口和已验证分析脚本同步远端，仅评估/离线工具；未修改在途训练源码。后续同GPU冻结比较使用final1000和development两张表。 证据：scripts/evaluate_wuji_multigrasp_frozen.py, scripts/analyze_wuji_multigrasp_frozen.py。下一步：继续既有训练/生成队列，先收齐开发frozen.json并冻结最终初态。
+
+## 多抓姿 2026-09-28T18:21:54.869419+00:00 milestone_backup_verified
+
+Backed up immutable D-750 with identical remote/local SHA256; not evaluated or selected. 证据：/data/research/artgym-experiments-20260921/multigrasp-20260928/research/multigrasp-20260928/receipts/checkpoint-backups/D-750.json。下一步：Continue fixed1000epoch training and preregistered development selection。
+
+多抓姿 2026-09-28T18:29:17.584487+00:00 启动请求 mg_C_seed2801 GPU1 .93:30296；证据 runs/multigrasp-20260928/mg_C_seed2801，待核验实际PID/结果；权重 reference 4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac or scratch as command。
+
+多抓姿实查 2026-09-28T18:29:39.125739+00:00 mg_C_seed2801 completed；远端PID 2499；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T18:29:39.125739+00:00 dev-C-cp250-t2 running；远端PID 74944；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+## 多抓姿 2026-09-28T18:30:06.455499+00:00 milestone_backup_verified
+
+Backed up immutable C-1000 with identical remote/local SHA256; not evaluated or selected. 证据：/data/research/artgym-experiments-20260921/multigrasp-20260928/research/multigrasp-20260928/receipts/checkpoint-backups/C-1000.json。下一步：Continue fixed1000epoch training and preregistered development selection。
+
+多抓姿实查 2026-09-28T18:30:11.178515+00:00 fresh-generation-v2 completed；远端PID 67680；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T18:30:11.178515+00:00 dev-A-cp250-t2 running；远端PID 75200；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+## 多抓姿 2026-09-28T18:30:38.452392+00:00 C_full_budget_complete_development_started
+
+C正式训练18:29:17UTC正常exit0完成1000轮，12435.88s墙钟；A/C最终CP1000均CPU核验163840000交互，四组750也完整。C开发首项实际PID74944在GPU1运行，128新扰动。第二批3000生成完毕并进入第一阶段物理筛选，尚未冻结新测试。 证据：research/multigrasp-20260928/receipts/cp1000-AC-1830.json, research/multigrasp-20260928/receipts/cp750-ABCD-1830.json, runs/multigrasp-20260928/mg_C_seed2801/status.json。下一步：收集C八项开发/第二批物理门禁，B/D继续1000后开发；四权重全冻结后最终测试。
+
+多抓姿实查 2026-09-28T18:31:14.083400+00:00 dev-C-cp250-t2 completed；远端PID 74944；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T18:31:14.083400+00:00 dev-C-cp250-t5 running；远端PID 75828；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+## 多抓姿 2026-09-28T18:32:18.135342+00:00 fresh2_sync_failure_fixed
+
+第二批生成1147.97s正常完成；本地接续3838398因rsync父目录缺失退出，未进入几何或物理筛选。失败日志/status保留；脚本补mkdir并以独立v2目录重启只读同步+既定物理筛选，不重跑生成。新PID见收据，仍截止23:53UTC。 证据：runs/multigrasp-20260928/fresh2-local-continuation-launcher.log, research/multigrasp-20260928/receipts/fresh2-continuation-v2.json, scripts/collect_wuji_multigrasp_fresh2.py。下一步：检查v2几何/静态筛选完成，再冻结全部合格新测试；各臂开发继续。
+
+多抓姿实查 2026-09-28T18:32:17.492373+00:00 dev-A-cp250-t2 completed；远端PID 75200；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T18:32:17.492373+00:00 dev-A-cp250-t5 running；远端PID 76092；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T18:33:22.463479+00:00 dev-C-cp250-t5 completed；远端PID 75828；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T18:33:22.463479+00:00 dev-C-cp500-t2 running；远端PID 76630；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+## 多抓姿 2026-09-28T18:33:49.036429+00:00 fresh2805_physical_screen_complete
+
+Second3000generated candidates physically screened without learned-policy selection; qualified base count 0 证据：/data/research/artgym-experiments-20260921/multigrasp-20260928/research/multigrasp-20260928/data/fresh2805-frozen/manifest.json。下一步：Freeze four models using development then run final identical-cohort comparison。
+
+多抓姿实查 2026-09-28T18:33:54.852459+00:00 dev-A-cp250-t5 completed；远端PID 76092；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T18:33:54.852459+00:00 dev-A-cp500-t2 running；远端PID 76883；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T18:34:58.645372+00:00 dev-C-cp500-t5 running；远端PID 77245；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T18:34:58.645372+00:00 dev-C-cp500-t2 completed；远端PID 76630；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+## 多抓姿 2026-09-28T18:35:45.273708+00:00 supplemental_unseen_pool_frozen_before_policy
+
+第二批53候选49静态存活，原门禁0合格；其中1/16/29全通过姿态/拇指路径/非旧family/20s存活/刀身稳定，仅触觉代理失败。在新抓姿策略结果未运行前，三者全部冻结为new_unseen_amended_physical补充集，明确事后物理门禁修订，不冒充原预注册盲测。旧0合格manifest原样保留，无按策略筛选、无新增生成。 证据：research/multigrasp-20260928/data/fresh2805-frozen/manifest.json, research/multigrasp-20260928/data/fresh2805-supplement-frozen/manifest.json, scripts/prepare_wuji_multigrasp_supplement.py。下一步：四组开发冻结后22旧+3补充新基础姿态各32扰动同GPU评估；补充新集结果单列。
+
+多抓姿实查 2026-09-28T18:36:02.101374+00:00 dev-A-cp500-t5 running；远端PID 77555；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T18:36:02.101374+00:00 dev-A-cp500-t2 completed；远端PID 76883；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。

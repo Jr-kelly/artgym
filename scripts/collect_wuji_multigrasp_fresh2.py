@@ -1,12 +1,13 @@
 """Bounded local continuation of the queued second-generation physical test screen."""
-import datetime,json,shlex,subprocess,sys,time
+import argparse,datetime,json,shlex,subprocess,sys,time
 from pathlib import Path
 from scripts.monitor_wuji_checkpoints import runtime_environment
 R=Path(__file__).resolve().parents[1];BASE=R/'runs/multigrasp-20260928';DATA=R/'research/multigrasp-20260928/data'
 SSH=['ssh','-o','BatchMode=yes','-o','ConnectTimeout=10','-i','/home/agiuser/.ssh/id_ed25519_h200','-o','IdentitiesOnly=yes','-p','30296','wangjiarui@10.14.0.93'];REMOTE='/home/wangjiarui/artgym-multigrasp-20260928'
 def now():return datetime.datetime.now(datetime.timezone.utc).isoformat()
 def main():
- out=BASE/'fresh2-local-continuation';out.mkdir(exist_ok=False);start=time.monotonic();state=dict(status='waiting_generation',started=now(),deadline_utc='2026-09-28T23:53:52+00:00')
+ parser=argparse.ArgumentParser();parser.add_argument('--label',default='fresh2-local-continuation');a=parser.parse_args()
+ out=BASE/a.label;out.mkdir(exist_ok=False);start=time.monotonic();state=dict(status='waiting_generation',started=now(),deadline_utc='2026-09-28T23:53:52+00:00')
  def save():
   state['heartbeat']=now();(out/'status.json').write_text(json.dumps(state,indent=2)+'\n')
  while datetime.datetime.now(datetime.timezone.utc)<datetime.datetime(2026,9,28,23,53,52,tzinfo=datetime.timezone.utc):
@@ -20,6 +21,7 @@ def main():
  if remote['status']!='completed':state['status']='generation_failed';save();return
  rsync=['rsync','-a','-e',shlex.join(SSH[:-1])]
  cache='caches/initial_grasp/wuji/knife_wuji_lowgain_fresh_multigrasp2026092805/000/'
+ (R/cache).mkdir(parents=True,exist_ok=True)
  subprocess.run(rsync+[SSH[-1]+':'+REMOTE+'/'+cache,str(R/cache)+'/'],check=True,timeout=120)
  subprocess.run(rsync+[SSH[-1]+':'+REMOTE+'/runs/multigrasp-20260928/fresh-generation-3000/',str(BASE/'fresh-generation-3000')+'/'],check=True,timeout=120)
  import shutil

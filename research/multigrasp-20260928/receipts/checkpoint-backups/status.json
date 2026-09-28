@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-28T17:56:27.707886+00:00",
+  "updated": "2026-09-28T18:36:11.578506+00:00",
   "status": "waiting_milestones",
-  "count": 11,
+  "count": 14,
   "expected": 16,
   "records": {
     "A-250": {
@@ -179,6 +179,54 @@
       "sha256": "6f125a2ebb935896d66c18e500475657d761e62bbb517e366e940bba08bd9597",
       "verified_utc": "2026-09-28T17:56:27.691937+00:00",
       "local": "/data/research/artgym-experiments-20260921/multigrasp-20260928/runs/mg_B_seed2801/checkpoints/epoch_000750.pth"
+    },
+    "A-1000": {
+      "arm": "A",
+      "epoch": 1000,
+      "metadata": {
+        "epoch": 1000,
+        "frame": 163840000,
+        "world_size": 1,
+        "checkpoint": "/home/wangjiarui/artgym-multigrasp-20260928/runs/mg_A_seed2801/checkpoints/epoch_001000.pth",
+        "milestone": true,
+        "final": true
+      },
+      "relative": "runs/mg_A_seed2801/checkpoints/epoch_001000.pth",
+      "sha256": "15e0c1da0b3253901868071dfeb70a2847727e2c8a3e1912452e99b2b7621728",
+      "verified_utc": "2026-09-28T18:11:43.104483+00:00",
+      "local": "/data/research/artgym-experiments-20260921/multigrasp-20260928/runs/mg_A_seed2801/checkpoints/epoch_001000.pth"
+    },
+    "D-750": {
+      "arm": "D",
+      "epoch": 750,
+      "metadata": {
+        "epoch": 750,
+        "frame": 122880000,
+        "world_size": 1,
+        "checkpoint": "/home/wangjiarui/artgym-multigrasp-20260928/runs/mg_D_seed2801/checkpoints/epoch_000750.pth",
+        "milestone": false,
+        "final": false
+      },
+      "relative": "runs/mg_D_seed2801/checkpoints/epoch_000750.pth",
+      "sha256": "a94d8147b05931edceb69349633cf23786498f3817be67630286da25e9d7da6c",
+      "verified_utc": "2026-09-28T18:21:54.854352+00:00",
+      "local": "/data/research/artgym-experiments-20260921/multigrasp-20260928/runs/mg_D_seed2801/checkpoints/epoch_000750.pth"
+    },
+    "C-1000": {
+      "arm": "C",
+      "epoch": 1000,
+      "metadata": {
+        "epoch": 1000,
+        "frame": 163840000,
+        "world_size": 1,
+        "checkpoint": "/home/wangjiarui/artgym-multigrasp-20260928/runs/mg_C_seed2801/checkpoints/epoch_001000.pth",
+        "milestone": true,
+        "final": true
+      },
+      "relative": "runs/mg_C_seed2801/checkpoints/epoch_001000.pth",
+      "sha256": "b28c25fd94c4316a69fc0fe765becd8bf1aabc5bda6483f0b8ca92ad557a4ba3",
+      "verified_utc": "2026-09-28T18:30:06.440159+00:00",
+      "local": "/data/research/artgym-experiments-20260921/multigrasp-20260928/runs/mg_C_seed2801/checkpoints/epoch_001000.pth"
     }
   }
 }

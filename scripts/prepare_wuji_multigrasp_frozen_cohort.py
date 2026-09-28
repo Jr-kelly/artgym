@@ -20,8 +20,9 @@ def main():
   for j in range(32):rows.append(dict(row=len(rows),cohort=source,source_id='old_candidate_'+str(i),source_row=i,perturbation=j,seed=a.seed+k,independent_new_base=False))
  for k,base in enumerate(new):
   seed=a.seed+1000+k;pieces.append(states_for_seed(base[None],seed,hand,trials=32))
-  for j in range(32):rows.append(dict(row=len(rows),cohort='new_unseen',source_id='new_'+str(novel['source_rows'][k]),source_row=novel['source_rows'][k],perturbation=j,seed=seed,independent_new_base=True))
+  for j in range(32):rows.append(dict(row=len(rows),cohort=novel.get('cohort_label','new_unseen'),source_id='new_'+str(novel['source_rows'][k]),source_row=novel['source_rows'][k],perturbation=j,seed=seed,independent_new_base=True))
  states=np.concatenate(pieces);np.save(a.output/'states.npy',states)
  manifest=dict(model_freeze_receipts=freezes,created_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),states_sha256=sha(a.output/'states.npy'),new_base_pool_sha256=sha(a.novel/'base.npy'),new_base_manifest_sha256=sha(a.novel/'manifest.json'),old_source_sha256=sha(D/'candidates.npy'),nominal_records_old=22,old_near_clusters=21,new_base_count=len(new),perturbations_each=32,rows=rows,selection='all preregistered old exact-unique sources plus all physically qualified novel sources; no learned-policy outcome filtering',scope='new perturbations after model selection; historical sources remain labelled historical; zero new sources means no blind grasp conclusion')
+ manifest['novel_pool_selection']=novel.get('selection');manifest['novel_pool_limitations']=novel.get('limitation');manifest['original_preregistered_new_base_count']=novel.get('original_preregistered_new_base_count',len(new))
  (a.output/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n');print(json.dumps({k:v for k,v in manifest.items() if k!='rows'}))
 if __name__=='__main__':main()
