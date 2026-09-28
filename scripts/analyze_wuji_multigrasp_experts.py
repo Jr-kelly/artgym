@@ -29,6 +29,7 @@ def main():
         assert run['status'] == 'completed'
         plan = run['plan']
         assert sha(path.parent / 'states.npy') == plan['states_sha256']
+        assert sha(ROOT / plan['checkpoint']) == plan['checkpoint_sha256']
         source = plan['source_row']
         inputs.append(dict(path=str(path), sha256=sha(path), plan=plan))
         static = None
@@ -44,6 +45,7 @@ def main():
             alive = (trace['active'] & ~trace['fall'] & ~trace['invalid']).all(0)
             stable = alive & (trace['drift'] < .01).all(0) & (trace['rotation'] < .25).all(0)
             if protocol == 'static':
+                assert saved['alive_full'] == int(alive.sum()) and saved['recorded_steps'] == 600
                 static = dict(alive=alive, stable=stable)
                 summaries.append(dict(source_row=source, protocol=protocol, n=32,
                                       successes=None, alive_full=int(alive.sum()),

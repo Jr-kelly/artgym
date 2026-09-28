@@ -633,3 +633,15 @@ A750原base2三个扰动视频实际严格3/3、五完整周期、20s全程稳�
 ## 多抓姿 2026-09-28T22:51:05.383611+00:00 handoff_revalidated_and_delivery_collector_started
 
 22:49UTC核验三专家训练PID104797/104799/104800及三个评估等待器均真实运行；矩阵/择优已完成。补全四组训练日志证据、专家离线复算入口及有界备份收集器，不改变运行训练配置。 证据：scripts/collect_wuji_multigrasp_experts.py, scripts/analyze_wuji_multigrasp_experts.py, research/multigrasp-20260928/evidence/mg_A_seed2801/status.json。下一步：专家1000自然结束后自动SHA备份和32源扰动复算，完成最终报告与发布。
+
+## 多抓姿 2026-09-28T22:59:51.726598+00:00 delivery_reproduction_snapshot_pushed
+
+独立分支a92413a已push，保存核心四训练原始日志/状态/资源与专家复算收集入口。训练日志原始空白保留，仅源码/报告做格式检查。已终结旧前台只读观察cell284，保留有界证据镜像和收集器；未改远端训练。 证据：research/multigrasp-20260928/receipts/resource-accounting-progress.json, scripts/evaluate_wuji_multigrasp_expert.py。下一步：完成已运行三专家及源扰动冻结评估，不增新训练。
+
+## 多抓姿 2026-09-28T23:04:10.730769+00:00 matrix_additional_weights_and_tensorboard_preserved
+
+四已完成训练的额外best/nn权重、初始模型摘要、TensorBoard及训练器evaluation目录共36文件完成远端/本地SHA逐项验证，779475537字节独立包；不用于新选点或冻结结果。正在上传既有Release草稿。 证据：research/multigrasp-20260928/receipts/matrix-training-extras.json。下一步：保持专家自然完成，收集评估并归档最终交付。
+
+## 多抓姿 2026-09-28T23:05:16.873598+00:00 actual_training_curriculum_and_scalars_verified
+
+实际TensorBoard四组各1000点扰动/奖励日程完全一致；最终原奖励curriculum均0.44444445，未走完。训练回报A494/B191/C396/D-14，平均回合步数598/591/599/17，只是拟合诊断，不是严格操作成功。同预算负结果不得推广到充分训练极限。 证据：research/multigrasp-20260928/training-analysis/report.json, research/multigrasp-20260928/training-analysis/training-scalars.csv。下一步：结合专家冻结结果决定唯一下一步，保留有限训练预算边界。

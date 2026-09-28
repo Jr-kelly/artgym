@@ -1,0 +1,47 @@
+{
+  "status": "exported",
+  "evidence": [
+    {
+      "run": "mg_A_seed2801",
+      "tensorboard_sha256": "19463e2ae67240e4b0673837f191f37b308a387bf594d0870e92bbd4603c4a59",
+      "final": {
+        "rewards/step": 494.0775451660156,
+        "episode_lengths/step": 597.9224243164062,
+        "reset_noise/scale/frame": 1.0,
+        "reward_curriculum/progress/frame": 0.4444444477558136
+      }
+    },
+    {
+      "run": "mg_B_seed2801",
+      "tensorboard_sha256": "18d6859054704e13c1237841bf5c69aeace9de3f1eef8d25423753f8c9cb8979",
+      "final": {
+        "rewards/step": 190.77699279785156,
+        "episode_lengths/step": 591.4013671875,
+        "reset_noise/scale/frame": 1.0,
+        "reward_curriculum/progress/frame": 0.4444444477558136
+      }
+    },
+    {
+      "run": "mg_C_seed2801",
+      "tensorboard_sha256": "778e50f1defa1adb624a91cdac18f3830b29ed628264c7803974002f38c29f42",
+      "final": {
+        "rewards/step": 396.1561279296875,
+        "episode_lengths/step": 599.1788940429688,
+        "reset_noise/scale/frame": 1.0,
+        "reward_curriculum/progress/frame": 0.4444444477558136
+      }
+    },
+    {
+      "run": "mg_D_seed2801",
+      "tensorboard_sha256": "7b4a9a976e06c2cbdbac0de90e40b8cd2b04421a6c07578ab374a8e1af666995",
+      "final": {
+        "rewards/step": -14.013218879699707,
+        "episode_lengths/step": 17.372167587280273,
+        "reset_noise/scale/frame": 1.0,
+        "reward_curriculum/progress/frame": 0.4444444477558136
+      }
+    }
+  ],
+  "matrix_realized_schedule_exactly_equal": true,
+  "scope": "Training returns and episode lengths are fit diagnostics, not strict frozen success. The realized 1000-epoch budget stops reward-curriculum progress at 0.44444445, identically for all four matrix arms; this does not test asymptotic performance or a completed curriculum."
+}
