@@ -155,3 +155,7 @@ Backed up immutable B-250 with identical remote/local SHA256; not evaluated or s
 ## 多抓姿 2026-09-28T16:02:36.947040+00:00 matched_final_checkpoint_protocol_added
 
 在最终测试尚未运行前明确两张表：四臂CP1000均163840000交互的同预算主对照，以及原定开发集择优CP的部署候选表。新增final1000入口校验epoch/frame，不修改训练、开发规则、数据或阈值。两个选择均必须先冻结开发决策再看最终数据。 证据：scripts/evaluate_wuji_multigrasp_frozen.py, research/multigrasp-20260928/README.md。下一步：训练完成后对相同有效初态运行final1000与开发择优冻结评估，分开报告。
+
+## 多抓姿 2026-09-28T16:06:53.016840+00:00 final_analysis_realtrace_validated
+
+最终分析补充逐回合时序诊断，已在旧参考2s/5s/arrival三套真实轨迹共72回合复算，与原报告完全一致；固定严格端点由独立代码交叉核验。首次路径少一层evidence读取失败，修正后通过，无新物理或权重选择。增量a3db8f2远端核验通过。 证据：research/multigrasp-20260928/receipts/final-analysis-realtrace-validation.json, scripts/analyze_wuji_multigrasp_frozen.py。下一步：四训练继续1000轮，开发冻结后运行同预算及开发择优两套正式测试。

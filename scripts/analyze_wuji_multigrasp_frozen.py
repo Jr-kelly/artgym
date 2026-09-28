@@ -4,15 +4,19 @@ from pathlib import Path
 import numpy as np
 from scripts.wuji_timed_command_metrics import score_timed_trace
 from scripts.wuji_arrival_metrics import score_arrival_trace
+from scripts.summarize_wuji_multigrasp_trace import summarize
 R=Path(__file__).resolve().parents[1]
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 def main():
  p=argparse.ArgumentParser();p.add_argument('--results',type=Path,required=True);p.add_argument('--cohort-manifest',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
  run=json.loads(a.results.read_text());assert run['status']=='completed'
  cohort=json.loads(a.cohort_manifest.read_text());assert sha(a.cohort_manifest)==run['plan']['mapping_sha256'];mapping=cohort['rows']
- a.output.mkdir(parents=True,exist_ok=False);trials=[];grouped=[];static=None
+ a.output.mkdir(parents=True,exist_ok=False);trials=[];grouped=[];static=None;temporal=[]
  for result in run['results']:
-  path=R/result['evidence'];saved=result['report'];trace=np.load(path/'trace.npz');protocol=result['protocol']
+  path=R/result['evidence'];saved=result['report'];protocol=result['protocol']
+  # Materialize once: each NpzFile access otherwise decompresses the complete
+  # array again inside the per-grasp temporal analysis.
+  with np.load(path/'trace.npz') as archive:trace={key:archive[key] for key in archive.files}
   assert saved['initial_states_sha256']==cohort['states_sha256'] and len(mapping)==trace['active'].shape[1]
   physical=(trace['active']&~trace['fall']&~trace['invalid']).all(0)
   body=physical&(trace['drift']<.01).all(0)&(trace['rotation']<.25).all(0)
@@ -22,6 +26,10 @@ def main():
    rescored=score_arrival_trace(trace,600,.01);metric='three_cycles'
   else:
    rescored=score_timed_trace(trace,150 if protocol=='fixed5' else 60,9,600);metric='stable_full_all_endpoints'
+   details=summarize(trace,150 if protocol=='fixed5' else 60);trace_sha256=sha(path/'trace.npz')
+   for i,detail in enumerate(details):
+    assert detail['strict']==rescored['records'][i][metric], 'Independent endpoint calculation disagrees'
+    temporal.append(dict(model=result['model'],protocol=protocol,**mapping[i],diagnostics=detail,trace_sha256=trace_sha256))
   for k,v in rescored.items():
    if k=='records':
     for old,new in zip(saved[k],v):
@@ -45,6 +53,7 @@ def main():
    contrasts.append(dict(protocol=protocol,cohort=cohort_name,macro_by_base=means,more_minus_small_at04=means['B']-means['A'],more_minus_small_at20=means['D']-means['C'],span20_minus04_small=means['C']-means['A'],span20_minus04_more=means['D']-means['B'],interaction=(means['D']-means['C'])-(means['B']-means['A'])))
  for name,rows in [('trials',trials),('per-grasp',grouped)]:
   with (a.output/(name+'.csv')).open('w') as f:w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
- report=dict(status='independently_rescored',checkpoint_selection=run['plan'].get('selection','development'),results_sha256=sha(a.results),cohort_sha256=sha(a.cohort_manifest),training_seeds=1,physical_trial_count=len(trials),base_record_count=len({x['source_id'] for x in mapping}),new_base_count=cohort['new_base_count'],contrasts=contrasts,interpretation='one training seed only; paired empirical differences, no stable causal claim; repetitions are nested within base grasps; original3 include one near-family',scope='arrival success=at least3complete cycles; fixed success=allstrictendpoints+alive+body throughout20s; static failures separately counted, never silently removed',artifact_sha256={n:sha(a.output/n) for n in ['trials.csv','per-grasp.csv']})
+ (a.output/'temporal-diagnostics.json').write_text(json.dumps(temporal,indent=2)+'\n')
+ report=dict(status='independently_rescored',checkpoint_selection=run['plan'].get('selection','development'),results_sha256=sha(a.results),cohort_sha256=sha(a.cohort_manifest),training_seeds=1,physical_trial_count=len(trials),base_record_count=len({x['source_id'] for x in mapping}),new_base_count=cohort['new_base_count'],contrasts=contrasts,interpretation='one training seed only; paired empirical differences, no stable causal claim; repetitions are nested within base grasps; original3 include one near-family',scope='arrival success=at least3complete cycles; fixed success=allstrictendpoints+alive+body throughout20s; static failures separately counted, never silently removed; timed temporal diagnostics independently check endpoints and include contact-proxy loss, slider error, target/actual error and body threshold time',artifact_sha256={n:sha(a.output/n) for n in ['trials.csv','per-grasp.csv','temporal-diagnostics.json']})
  (a.output/'report.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))
 if __name__=='__main__':main()

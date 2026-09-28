@@ -1,0 +1,29 @@
+{
+  "observed_utc": "2026-09-28T16:06:52.989956+00:00",
+  "status": "passed",
+  "scope": "Validation on existing reference traces only; no new policy evaluation or checkpoint selection",
+  "corrected_attempt": "Initial lookup omitted nested evidence directory; corrected without running new physics",
+  "records": [
+    {
+      "evidence": "research/multigrasp-20260928/evidence/reference-candidates-t2-v1/evidence",
+      "trace_sha256": "984d1b84ec0d1214787e57600fb8212bba747f88400f867361a4e071cd33a1d9",
+      "num_envs": 24,
+      "saved_metrics_exact_match": true,
+      "independent_strict_match": true
+    },
+    {
+      "evidence": "research/multigrasp-20260928/evidence/reference-candidates-t5-v1/evidence",
+      "trace_sha256": "3d787c5fcdd02256755a531f428b27bdb212336f2c806a1d902ea1b23adc1713",
+      "num_envs": 24,
+      "saved_metrics_exact_match": true,
+      "independent_strict_match": true
+    },
+    {
+      "evidence": "research/multigrasp-20260928/evidence/reference-candidates-arrival-v1/evidence",
+      "trace_sha256": "fac2d2268563b723f1b9ae83463fc3e3bead0350181785ea764e4e03fd50d4c5",
+      "num_envs": 24,
+      "saved_metrics_exact_match": true,
+      "independent_strict_match": false
+    }
+  ]
+}
