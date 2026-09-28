@@ -1,0 +1,93 @@
+{
+  "scope": "CPU checkpoint integrity only; no simulation, training update, model selection or success claim",
+  "rows": [
+    {
+      "arm": "A",
+      "status": "passed",
+      "epoch": 1000,
+      "frame": 163840000,
+      "sha256": "15e0c1da0b3253901868071dfeb70a2847727e2c8a3e1912452e99b2b7621728",
+      "bytes": 89411908,
+      "model_tensor_count": 48,
+      "optimizer_saved": true,
+      "keys": [
+        "current_lengths",
+        "current_rewards",
+        "current_shaped_rewards",
+        "dones",
+        "env_state",
+        "epoch",
+        "frame",
+        "last_mean_rewards",
+        "model",
+        "num_actors",
+        "obs",
+        "optimizer",
+        "rnn_states",
+        "trackers",
+        "world_size"
+      ],
+      "finite": true
+    },
+    {
+      "arm": "B",
+      "status": "passed",
+      "epoch": 1000,
+      "frame": 163840000,
+      "sha256": "fc5c5ba6affa56e05634677574c7a3a4237974692942d09458ba61270d5dd141",
+      "bytes": 89411908,
+      "model_tensor_count": 48,
+      "optimizer_saved": true,
+      "keys": [
+        "current_lengths",
+        "current_rewards",
+        "current_shaped_rewards",
+        "dones",
+        "env_state",
+        "epoch",
+        "frame",
+        "last_mean_rewards",
+        "model",
+        "num_actors",
+        "obs",
+        "optimizer",
+        "rnn_states",
+        "trackers",
+        "world_size"
+      ],
+      "finite": true
+    },
+    {
+      "arm": "C",
+      "status": "passed",
+      "epoch": 1000,
+      "frame": 163840000,
+      "sha256": "b28c25fd94c4316a69fc0fe765becd8bf1aabc5bda6483f0b8ca92ad557a4ba3",
+      "bytes": 89411908,
+      "model_tensor_count": 48,
+      "optimizer_saved": true,
+      "keys": [
+        "current_lengths",
+        "current_rewards",
+        "current_shaped_rewards",
+        "dones",
+        "env_state",
+        "epoch",
+        "frame",
+        "last_mean_rewards",
+        "model",
+        "num_actors",
+        "obs",
+        "optimizer",
+        "rnn_states",
+        "trackers",
+        "world_size"
+      ],
+      "finite": true
+    },
+    {
+      "arm": "D",
+      "status": "missing"
+    }
+  ]
+}
