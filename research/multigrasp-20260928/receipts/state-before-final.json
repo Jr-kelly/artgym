@@ -1,0 +1,173 @@
+{
+  "updated": "2026-09-28T23:17:10.145206+00:00",
+  "goal_status": "active",
+  "deadline_utc": "2026-09-29T02:53:52+00:00",
+  "delivery_utc": "2026-09-29T01:53:52+00:00",
+  "root": "/data/research/artgym-experiments-20260921/multigrasp-20260928",
+  "branch": "feat/wuji-multigrasp-2x2-20260928",
+  "remote": "/home/wangjiarui/artgym-multigrasp-20260928",
+  "host": ".93:30296",
+  "progress": {
+    "mg_A_seed2801": "completed",
+    "mg_C_seed2801": "completed",
+    "fresh-generation-v1": "completed",
+    "static-candidates-v1": "completed",
+    "scratch-small-preflight-v1": "completed",
+    "mg_D_preflight_v1": "completed",
+    "mg_B_seed2801": "completed",
+    "mg_D_seed2801": "completed",
+    "fresh-generation-v2": "completed"
+  },
+  "static": "24/24 alive20s; duplicate2 records; max drift2.36mm, max rotation.155rad; not operation success",
+  "matrix": "all four completed1000, actual PIDs terminal",
+  "protocol": "/data/research/artgym-experiments-20260921/multigrasp-20260928/research/multigrasp-20260928/preregistration.json",
+  "next": "Finish three expert1000 trainings + independent evaluation; archive and final GitHub release",
+  "infrastructure_failures": [
+    "initial SSH host key required accept-new; key resolved",
+    "initial reference rsync missing directory, retried successfully",
+    "first generator runtime extraction wrong /tmp target, own tar PID1621 stopped; verified archive restored via ensure_lygra_runtime successfully"
+  ],
+  "weights_sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac reference; new random initial model digest in receipts",
+  "fresh": {
+    "seed": 2026092803,
+    "generated": 1000,
+    "first_physics_valid": 24,
+    "static_alive": 21,
+    "posture_and_reach": 0
+  },
+  "pushed_commit": "d108440",
+  "epoch_snapshot": {
+    "A": 1000,
+    "B": 1000,
+    "C": 1000,
+    "D": 1000
+  },
+  "previous_goal_turn": "progress: allfourCP250 and ABC500 integrity/backup; independent finalanalyzer validation; no trained-policy evaluation yet",
+  "local_status": "all local physics jobs completed; referencevideo and devstatic retained",
+  "dev_static": {
+    "alive": 128,
+    "strict_body_stable": 127,
+    "total": 128
+  },
+  "video": "research/multigrasp-20260928/videos/reference-three-grasps-policy.mp4",
+  "D_supervisor": {
+    "pid": 9453,
+    "training_pid": 4716,
+    "total_timeout_seconds": 21600,
+    "deadline_utc": "2026-09-28T21:10:29+00:00",
+    "receipt": "research/multigrasp-20260928/receipts/D-supervisor-adoption.json"
+  },
+  "reference_protocols": "static, timed2, timed5, arrival all completed;22exactunique rows",
+  "fresh2_continuation_pid": 725190,
+  "first_preregistered_checkpoint": {
+    "arm": "A",
+    "epoch": 250,
+    "interactions": 40960000,
+    "sha256": "7bb42b50049dd72c718e2b8f4dacf15c02f5f1061bae049d58981e68fdc29ecf",
+    "local": "/data/research/artgym-experiments-20260921/multigrasp-20260928/runs/mg_A_seed2801/checkpoints/epoch_000250.pth",
+    "remote": "runs/mg_A_seed2801/checkpoints/epoch_000250.pth",
+    "evaluated": false
+  },
+  "backup_pid": 3979625,
+  "frozen_evaluation_protocol": "final1000 equal163840000interactions main table + developmentselected candidate table; both same frozen cohort",
+  "first_preregistered_checkpoint_arms": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "epoch_observed_utc": "2026-09-28T22:51:05.347140+00:00",
+  "checkpoint500_verified_arms": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "checkpoint1000_verified_arms": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "checkpoint750_verified_arms": [
+    "A",
+    "B",
+    "C"
+  ],
+  "development_frozen": {
+    "A": 750,
+    "B": 1000,
+    "C": 750,
+    "D": 1000
+  },
+  "fresh2_status": "completed; original gate0, explicitly amended physical supplement3 frozen before policy tests",
+  "novel_supplement": "research/multigrasp-20260928/data/fresh2805-supplement-frozen",
+  "final_evaluation": {
+    "pid": 94685,
+    "remote_gpu": 0,
+    "label": "final1000-v1",
+    "status": "completed_independently_rescored",
+    "states": "research/multigrasp-20260928/data/final-cohort-v1/states.npy",
+    "n": 800
+  },
+  "core_matrix": "complete, final1000 independent rescore passed",
+  "selected": "complete independently_rescored",
+  "experts": {
+    "rows": [
+      3,
+      5,
+      11
+    ],
+    "pids": [
+      104797,
+      104799,
+      104800
+    ],
+    "epochs": 1000,
+    "started_utc": "2026-09-28T20:11:45+00:00",
+    "status": "all3trainingcompleted1000; source5evaluated, sources3/11evaluating"
+  },
+  "release": {
+    "id": 398592814,
+    "tag": "wuji-multigrasp-20260928-v1",
+    "draft": true
+  },
+  "latest_commit": "d108440",
+  "expert_progress": {
+    "observed_utc": "2026-09-28T23:15:27.195183+00:00",
+    "experts": [
+      {
+        "row": 3,
+        "status": "running",
+        "epoch": 923,
+        "remaining_minutes": 14.6540625,
+        "pid": 104797,
+        "pid_exists": true,
+        "evaluation_complete": false
+      },
+      {
+        "row": 5,
+        "status": "running",
+        "epoch": 979,
+        "remaining_minutes": 3.7251024999999993,
+        "pid": 104799,
+        "pid_exists": true,
+        "evaluation_complete": false
+      },
+      {
+        "row": 11,
+        "status": "running",
+        "epoch": 921,
+        "remaining_minutes": 14.673789166666662,
+        "pid": 104800,
+        "pid_exists": true,
+        "evaluation_complete": false
+      }
+    ]
+  },
+  "release_assets_verified": 22,
+  "expert_collector": "Bounded local scripts.collect_wuji_multigrasp_experts until01:00UTC; backup/CPU/SHA/rescore; no remote job changes",
+  "expert_results": {
+    "5": "completed; staticstable32, strict2/5=0, arrival3cycles0, alive32; independent rescore passed"
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "observed_utc": "2026-09-28T23:40:02.918758+00:00",
+  "last_sample_utc": "2026-09-28T23:39:47.451371+00:00",
+  "latest_four_hours": {
+    "covered_seconds": 14400.0,
+    "utilization_weighted_busy_seconds": 8882.813298433424,
+    "time_weighted_utilization_pct": 61.686203461343226
+  },
+  "jobs": [
+    {
+      "name": "mg_A_seed2801",
+      "gpu": 0,
+      "started": "2026-09-28T15:02:00.454070+00:00",
+      "finished": "2026-09-28T18:10:45.901311+00:00",
+      "device_allocation_hours": 3.1459575668970743,
+      "measured": {
+        "covered_seconds": 11004.620376825333,
+        "utilization_weighted_busy_seconds": 9557.267569823265,
+        "time_weighted_utilization_pct": 86.84777159555587
+      }
+    },
+    {
+      "name": "mg_B_seed2801",
+      "gpu": 3,
+      "started": "2026-09-28T15:04:06.516009+00:00",
+      "finished": "2026-09-28T18:53:47.596939+00:00",
+      "device_allocation_hours": 3.8280780361096065,
+      "measured": {
+        "covered_seconds": 13586.316004991531,
+        "utilization_weighted_busy_seconds": 12123.676359932413,
+        "time_weighted_utilization_pct": 89.23446470314872
+      }
+    },
+    {
+      "name": "mg_C_seed2801",
+      "gpu": 1,
+      "started": "2026-09-28T15:02:01.684422+00:00",
+      "finished": "2026-09-28T18:29:17.562175+00:00",
+      "device_allocation_hours": 3.454410486949815,
+      "measured": {
+        "covered_seconds": 12116.281240940094,
+        "utilization_weighted_busy_seconds": 10464.911283147343,
+        "time_weighted_utilization_pct": 86.37065346244289
+      }
+    },
+    {
+      "name": "mg_D_seed2801",
+      "gpu": 2,
+      "started": "2026-09-28T15:10:29.407168+00:00",
+      "finished": "2026-09-28T19:24:06.826521+00:00",
+      "device_allocation_hours": 4.227060931391186,
+      "measured": {
+        "covered_seconds": 15217.41935300827,
+        "utilization_weighted_busy_seconds": 12745.771777210242,
+        "time_weighted_utilization_pct": 83.75777443953125
+      }
+    },
+    {
+      "name": "expert_row3_seed2810",
+      "gpu": 1,
+      "started": "2026-09-28T20:11:45.611818+00:00",
+      "finished": "2026-09-28T23:31:11.220556+00:00",
+      "device_allocation_hours": 3.323780204984877,
+      "measured": {
+        "covered_seconds": 11965.608737945557,
+        "utilization_weighted_busy_seconds": 10339.174870166773,
+        "time_weighted_utilization_pct": 86.40742896246468
+      }
+    },
+    {
+      "name": "expert_row5_seed2810",
+      "gpu": 2,
+      "started": "2026-09-28T20:11:45.616415+00:00",
+      "finished": "2026-09-28T23:19:23.565474+00:00",
+      "device_allocation_hours": 3.1272080719470976,
+      "measured": {
+        "covered_seconds": 11257.949059009552,
+        "utilization_weighted_busy_seconds": 9935.880453479285,
+        "time_weighted_utilization_pct": 88.25657676544347
+      }
+    },
+    {
+      "name": "expert_row11_seed2810",
+      "gpu": 3,
+      "started": "2026-09-28T20:11:45.617828+00:00",
+      "finished": "2026-09-28T23:31:11.604561+00:00",
+      "device_allocation_hours": 3.323885203666157,
+      "measured": {
+        "covered_seconds": 11965.986733198166,
+        "utilization_weighted_busy_seconds": 10266.598396444328,
+        "time_weighted_utilization_pct": 85.79817632557545
+      }
+    }
+  ],
+  "total_completed_training_device_allocation_hours": 24.430380501945816,
+  "scope": "One GPU per training. Allocation hours are real job wall time including startup; busy seconds integrate sampled nvidia-smi utilization, not kernel-profiler GPU time or platform accounting. Sampling begins after the first jobs start. No interpolation over gaps >120s. Last4h is whole-machine mean across all4GPUs, including idle devices."
+}

@@ -1,3 +1,21 @@
+# 最新续接：所有实验完成，最终发布收尾（2026-09-28 23:41 UTC）
+
+工作区 `/data/research/artgym-experiments-20260921/multigrasp-20260928`，独立分支 `feat/wuji-multigrasp-2x2-20260928`。Goal当前仅剩最终GitHub发布核验；所有训练/评估均完成，不得按下方历史PID重启。无子代理。
+
+核心四组1000轮各163840000交互、同随机初始化。固定1000严格2s A9/B0/C19/D0，择优A75026/B10000/C75024/D10000；均每800。5s四组全0，旧teacher94/93。全部严格成功仅原训练来源。更多抓姿未改善、范围放宽无可靠独立收益（单seed、有限预算）；两张800冻结表各12000策略回合均独立复算。
+
+单抓姿专家源3/5/11各1000，全部288策略回合独立复算。源3严格2/5s7/32、宽松三轮32/32；源5全0，握持32稳定却滑块仅动≤3.36mm；源11严格0、宽松28/32，在5s32/32到达过所有目标但没保持全部端点。证明源3有可学方案，不能将新增抓姿一概视为不可操作；尚无多抓姿稳定策略。唯一未来优先事项：固定span.04和现有物理奖励，验证补足源3/11既有训练日程能否改善端点保持；当前只到日程44.4%，不预认延长一定有效，暂不接取刀。
+
+全部七训练24.430GPU小时，最后4h采样整机61.69%。23:39UTC远端所有本轮子PID已退出、无GPU计算，23:40已停止自建只读镜像3671366；本地视频932715/932716及收集器全部正常终结。仍须引用带时间收据，不将旧PID当事实。无未收束训练。
+
+已本地/远端SHA备份矩阵16里程碑＋专家12里程碑及全部训练器额外权重/TensorBoard。28个Release草稿资产服务端SHA核验通过，id398592814、tag`wuji-multigrasp-20260928-v1`。下一步发布草稿，生成正式release-assets.json并最终commit/push。大原始trace/权重在Release；代码/配置/JSON/CSV/四视频和manifest入git。
+
+四视频均已实际检查：旧reference；A1000失败；A750同一原base2三扰动严格3/3；expert3同一新增源三扰动重仿真严格2/3。视频设备/批量不同，不是冻结结果精确回放，不是三独立抓姿泛化。源3权重SHA e4111879414e4e707ccb46538a0c493f71a6fdc1d4f30aa451f68a9170cae13f。
+
+报告 `research/multigrasp-20260928/README.md`，当前状态 `research/multigrasp-20260928/state.json`，全部实验日志 `research/multigrasp-20260928/events.jsonl`，共享journal仍在父目录runs/wuji-goal/journal/events.jsonl。新测试原预注册门禁0，3源是策略评估前冻结的明确修订物理补充集；此限制必须保留。
+
+---
+
 # 最新续接：核心两表完成，三专家接近最终轮（2026-09-28 22:51 UTC）
 
 原生Goal active；禁止子代理。工作区 `/data/research/artgym-experiments-20260921/multigrasp-20260928`，分支 `feat/wuji-multigrasp-2x2-20260928`，已push `4ad8670`。硬截止2026-09-29 02:53:52UTC，01:53:52起预留交付；不要按旧状态重启实验。
@@ -645,3 +663,105 @@ A750原base2三个扰动视频实际严格3/3、五完整周期、20s全程稳�
 ## 多抓姿 2026-09-28T23:05:16.873598+00:00 actual_training_curriculum_and_scalars_verified
 
 实际TensorBoard四组各1000点扰动/奖励日程完全一致；最终原奖励curriculum均0.44444445，未走完。训练回报A494/B191/C396/D-14，平均回合步数598/591/599/17，只是拟合诊断，不是严格操作成功。同预算负结果不得推广到充分训练极限。 证据：research/multigrasp-20260928/training-analysis/report.json, research/multigrasp-20260928/training-analysis/training-scalars.csv。下一步：结合专家冻结结果决定唯一下一步，保留有限训练预算边界。
+
+多抓姿实查 2026-09-28T23:19:49.242524+00:00 expert_row5_seed2810-static running；远端PID 157749；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T23:19:49.242524+00:00 expert_row5_seed2810 completed；远端PID 104799；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+## 多抓姿 2026-09-28T23:20:06.208597+00:00 expert_5_training_complete
+
+Source 5: final1000 complete; all four checkpoints remote/local SHA and CPU epoch/frame/finite checks passed. 证据：/data/research/artgym-experiments-20260921/multigrasp-20260928/research/multigrasp-20260928/receipts/expert-5-complete.json。下一步：Complete expert independent rescore and final GitHub delivery。
+
+多抓姿实查 2026-09-28T23:20:52.171461+00:00 expert_row5_seed2810-static completed；远端PID 157749；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T23:20:52.171461+00:00 expert_row5_seed2810-fixed2 running；远端PID 158823；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T23:22:26.332473+00:00 expert_row5_seed2810-fixed2 completed；远端PID 158823；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T23:22:26.332473+00:00 expert_row5_seed2810-fixed5 running；远端PID 159673；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+## 多抓姿 2026-09-28T23:22:28.923031+00:00 expert5_weights_released_to_draft_and_restore_verified
+
+源5最终权重d6b2903bf0bb91d125046a884cfb8bf2bb273bfdfc0606589b467472f13c3356；四里程碑及所有训练器额外权重两包已上传草稿并服务端SHA验证，恢复脚本四份验证通过。独立32初态静态alive32，fixed2运行，尚无完整操作结论。 证据：research/multigrasp-20260928/receipts/release-expert5-weights.json, research/multigrasp-20260928/receipts/expert5-restore-check.txt, research/multigrasp-20260928/receipts/expert-5-complete.json。下一步：收完三专家固定协议和到位换向评估并独立复算。
+
+多抓姿实查 2026-09-28T23:24:00.449839+00:00 expert_row5_seed2810-fixed5 completed；远端PID 159673；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T23:24:00.449839+00:00 expert_row5_seed2810-arrival running；远端PID 160355；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T23:25:35.108536+00:00 expert_row5_seed2810-arrival completed；远端PID 160355；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+## 多抓姿 2026-09-28T23:25:37.509150+00:00 expert_5_evaluation_complete
+
+Source 5: static and three policy protocols complete, 96 policy trials independently rescored; see per-source results. 证据：/data/research/artgym-experiments-20260921/multigrasp-20260928/research/multigrasp-20260928/expert-analysis/row5/report.json。下一步：Complete expert independent rescore and final GitHub delivery。
+
+## 多抓姿 2026-09-28T23:27:06.300328+00:00 expert5_frozen_failure_interpreted
+
+源5三个操作协议各32回合均alive32、严格2s/5s0、宽松三轮0；静态32稳定。原始trace滑块每回合运动范围固定2s1.21–3.31mm、5s/arrival1.07–3.36mm，未完整伸出收回。此为当前1000轮/单种子专家失败，不证明不可操作。原始证据包已上传SHA验证。 证据：research/multigrasp-20260928/expert-analysis/row5/report.json, research/multigrasp-20260928/receipts/release-expert5-evidence.json。下一步：收尾源3/11专家与评估，依据三源结果选唯一下一步。
+
+多抓姿实查 2026-09-28T23:31:17.437520+00:00 expert_row11_seed2810 completed；远端PID 104800；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T23:31:17.437520+00:00 expert_row3_seed2810 completed；远端PID 104797；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+## 多抓姿 2026-09-28T23:31:45.130572+00:00 expert_3_training_complete
+
+Source 3: final1000 complete; all four checkpoints remote/local SHA and CPU epoch/frame/finite checks passed. 证据：/data/research/artgym-experiments-20260921/multigrasp-20260928/research/multigrasp-20260928/receipts/expert-3-complete.json。下一步：Complete expert independent rescore and final GitHub delivery。
+
+多抓姿实查 2026-09-28T23:31:50.875365+00:00 expert_row11_seed2810-static running；远端PID 164046；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T23:31:50.875365+00:00 expert_row3_seed2810-static running；远端PID 164047；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+## 多抓姿 2026-09-28T23:32:08.257214+00:00 expert_11_training_complete
+
+Source 11: final1000 complete; all four checkpoints remote/local SHA and CPU epoch/frame/finite checks passed. 证据：/data/research/artgym-experiments-20260921/multigrasp-20260928/research/multigrasp-20260928/receipts/expert-11-complete.json。下一步：Complete expert independent rescore and final GitHub delivery。
+
+多抓姿实查 2026-09-28T23:33:24.480544+00:00 expert_row11_seed2810-static completed；远端PID 164046；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T23:33:24.480544+00:00 expert_row3_seed2810-fixed2 running；远端PID 165111；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T23:33:24.480544+00:00 expert_row3_seed2810-static completed；远端PID 164047；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T23:33:24.480544+00:00 expert_row11_seed2810-fixed2 running；远端PID 165109；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T23:35:00.171378+00:00 expert_row3_seed2810-fixed5 running；远端PID 165929；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T23:35:00.171378+00:00 expert_row3_seed2810-fixed2 completed；远端PID 165111；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T23:35:00.171378+00:00 expert_row11_seed2810-fixed5 running；远端PID 165927；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T23:35:00.171378+00:00 expert_row11_seed2810-fixed2 completed；远端PID 165109；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+## 多抓姿 2026-09-28T23:35:32.141690+00:00 expert3_video_started
+
+源3专家fixed2首轮32/32、严格7/32；选前三严格成功扰动启动本地3env视频，实际表现另行核验。只代表单一新增训练源，不能称多抓姿泛化。源11首轮32/32但严格0。三专家全部权重已SHA备份/上传。 证据：research/multigrasp-20260928/receipts/video-expert3-launch.json, research/multigrasp-20260928/receipts/release-experts3-11-weights.json。下一步：完成剩余专家协议复算，核验新增视频并最终发布。
+
+## 多抓姿 2026-09-28T23:36:17.620856+00:00 all_expert_training_assets_preserved
+
+三专家1000训练全部完成，12里程碑与27额外训练文件均远端本地SHA保存；所有专家权重上传服务端核验通过。总七训练24.4304GPU小时；23:33UTC近四小时整机61.43%。源3/11操作评估与本地视频继续。 证据：research/multigrasp-20260928/receipts/resource-accounting-training-complete.json, research/multigrasp-20260928/receipts/experts3-11-training-extras.json, research/multigrasp-20260928/receipts/release-experts3-11-weights.json。下一步：完成最后两个专家的冻结复算和代表视频，收束发布。
+
+多抓姿实查 2026-09-28T23:36:36.357672+00:00 expert_row3_seed2810-fixed5 completed；远端PID 165929；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T23:36:36.357672+00:00 expert_row11_seed2810-arrival running；远端PID 166768；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T23:36:36.357672+00:00 expert_row11_seed2810-fixed5 completed；远端PID 165927；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T23:36:36.357672+00:00 expert_row3_seed2810-arrival running；远端PID 166770；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T23:37:41.065812+00:00 expert_row3_seed2810-arrival completed；远端PID 166770；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+## 多抓姿 2026-09-28T23:38:01.031841+00:00 expert_3_evaluation_complete
+
+Source 3: static and three policy protocols complete, 96 policy trials independently rescored; see per-source results. 证据：/data/research/artgym-experiments-20260921/multigrasp-20260928/research/multigrasp-20260928/expert-analysis/row3/report.json。下一步：Complete expert independent rescore and final GitHub delivery。
+
+## 多抓姿 2026-09-28T23:38:07.999893+00:00 expert_11_evaluation_complete
+
+Source 11: static and three policy protocols complete, 96 policy trials independently rescored; see per-source results. 证据：/data/research/artgym-experiments-20260921/multigrasp-20260928/research/multigrasp-20260928/expert-analysis/row11/report.json。下一步：Complete expert independent rescore and final GitHub delivery。
+
+多抓姿实查 2026-09-28T23:38:13.347627+00:00 expert_row11_seed2810-arrival completed；远端PID 166768；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+## 多抓姿 2026-09-28T23:39:19.579200+00:00 all_experts_rescored_and_final_priority_selected
+
+三专家1000及12物理条件全完成，288策略回合独立复算。源3严格2/5秒7/32、宽松三轮32/32；源5均0；源11严格0但宽松28/32。源3/11已有开合能力而端点保持仍缺，不能认定多抓姿泛化。唯一下一步固定span.04/物理奖励，验证补足既有日程能否改善源3/11端点保持；不预认必有效，不接取刀。专家3视频实际2/3严格，已抽帧确认。 证据：research/multigrasp-20260928/expert-analysis/summary.json, research/multigrasp-20260928/videos/expert3-three-perturbations-manifest.json, research/multigrasp-20260928/README.md。下一步：收束本轮进程，发布全部SHA资产，最终commit和push核验。
+
+## 多抓姿 2026-09-28T23:40:02.937600+00:00 all_computation_closed_and_monitor_stopped
+
+23:39UTC远端所有本轮状态terminal、实际子PID全退出、无GPU计算进程；三专家评估完整。本地专家视频正常0退出、收集器正常0退出；核对命令后停止自建只读镜像PID3671366，不影响任何其它任务。全部28项Release草稿资产上传完毕，待正式发布。 证据：research/multigrasp-20260928/receipts/remote-final-process-check.json, research/multigrasp-20260928/receipts/monitor-shutdown.json, research/multigrasp-20260928/receipts/resource-accounting-final.json。下一步：最终GitHub提交/Release发布与链接核验。

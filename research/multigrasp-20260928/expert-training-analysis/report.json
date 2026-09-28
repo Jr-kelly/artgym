@@ -1,0 +1,37 @@
+{
+  "status": "exported",
+  "evidence": [
+    {
+      "run": "expert_row3_seed2810",
+      "tensorboard_sha256": "a7ef3aa4ef1702035b2fb3d7780dc576a4813cb7d7c74fb669f4e7d0af389a46",
+      "final": {
+        "rewards/step": 467.0606994628906,
+        "episode_lengths/step": 587.201904296875,
+        "reset_noise/scale/frame": 1.0,
+        "reward_curriculum/progress/frame": 0.4444444477558136
+      }
+    },
+    {
+      "run": "expert_row5_seed2810",
+      "tensorboard_sha256": "1aa7410511263e396679506ef0786f7bd762e9f19c9bd27dcae1eeb8322c5337",
+      "final": {
+        "rewards/step": 174.9658966064453,
+        "episode_lengths/step": 599.3468627929688,
+        "reset_noise/scale/frame": 1.0,
+        "reward_curriculum/progress/frame": 0.4444444477558136
+      }
+    },
+    {
+      "run": "expert_row11_seed2810",
+      "tensorboard_sha256": "7b40748ac58418ab5f53c5d8cd2eac441d7b97cb9c2c1409a64c5364c739cfad",
+      "final": {
+        "rewards/step": 457.2599182128906,
+        "episode_lengths/step": 598.361328125,
+        "reset_noise/scale/frame": 1.0,
+        "reward_curriculum/progress/frame": 0.4444444477558136
+      }
+    }
+  ],
+  "matrix_realized_schedule_exactly_equal": null,
+  "scope": "Training diagnostics only. Three singleton experts end at curriculum0.44444445; not core matrix replicas or a completed curriculum."
+}

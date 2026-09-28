@@ -1,0 +1,27 @@
+{
+  "time": "2026-09-28T23:38:10.332422+00:00",
+  "video": "expert3-three-perturbations.mp4",
+  "checkpoint_sha256": "e4111879414e4e707ccb46538a0c493f71a6fdc1d4f30aa451f68a9170cae13f",
+  "asset_sha256": "5229c66b183cc6da04190bf2d6cfbd035fadd227340dc8f26602b207171b461c",
+  "initial_states_sha256": "bd94c73e025a13b70f4166512dc72641f71873e1205c763c72d23d8ecb0584c2",
+  "selected_rows": [
+    5,
+    9,
+    16
+  ],
+  "selection": "First three frozen fixed2 strict successes from expert3 source perturbations. One additional training base only, not three distinct grasps.",
+  "observed_render_result": "2/3 strict full endpoints;3/3 alive and first cycles; local4090/3env resimulation differs from frozenH100/32env, not exact replay.",
+  "inputs": "privileged simulator teacher inputs",
+  "control": "learned policy span.04 thumbstep.025 fixed2s; no scripted motor override or pose overwrite after initial reset",
+  "frames": 600,
+  "fps": 30,
+  "duration_seconds": 20,
+  "scope": "simulation expert fit demonstration, not hardware or unseen-grasp generalization",
+  "artifacts": {
+    "expert3-three-perturbations-trace.npz": "5bcaa15e42f0a834e61599548ac05baca61b46ff9e1719adee5cc541d2876ddb",
+    "expert3-three-perturbations-contact-sheet.jpg": "ec2e09f80bca2d36d7e4d7c10c148207a38d0ac61b0ce973613d7debba7325f9",
+    "expert3-three-perturbations-report.json": "45c73c2a777d133c5781d4270d5c99945212855090af1000b4b831d57fa965d1",
+    "expert3-three-perturbations.mp4": "0d172251fbfb6a9752d1a847c916cb134323e1568a6c10b147fc643ad0fcaee4",
+    "expert3-three-perturbations-config.yaml": "325262088e9ae575aa22f1e0b020a955317c2cbac28b1517662571c394a02dc5"
+  }
+}

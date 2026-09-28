@@ -1,0 +1,111 @@
+{
+  "observed_utc": "2026-09-28T23:19:49.672017+00:00",
+  "state": {
+    "name": "expert_row5_seed2810",
+    "gpu": 2,
+    "command": [
+      "/home/wangjiarui/artgym-runtime/bin/python",
+      "-m",
+      "scripts.train_wuji_multigrasp",
+      "task=wuji_multigrasp",
+      "hand=wuji_paper_official_actuator",
+      "object=knife_wuji_bridge3_20260922",
+      "train=wujiAcquisitionSAPG",
+      "num_envs=5120",
+      "experiment=expert_row5_seed2810",
+      "max_iterations=1000",
+      "multi_gpu=False",
+      "headless=True",
+      "graphics_device_id=-1",
+      "force_render=False",
+      "pipeline=gpu",
+      "num_subscenes=0",
+      "seed=2026092810",
+      "train.params.config.expl_coef_block_size=1024",
+      "train.params.config.minibatch_size=32768",
+      "train.params.config.save_frequency=250",
+      "train.params.config.checkpoint_keep_recent=10",
+      "train.params.config.evaluation_frequency=100000",
+      "object.reward.GoalDistance2=0.1",
+      "task.env.absolutePoseObjective.coefficient=1.0",
+      "task.env.supportActionSpan=0.04",
+      "task.env.trainingStates=research/multigrasp-20260928/data/expert-5.npy"
+    ],
+    "timeout_seconds": 14400,
+    "started": "2026-09-28T20:11:45.616415+00:00",
+    "pid": 104795,
+    "status": "completed",
+    "child_pid": 104799,
+    "heartbeat": "2026-09-28T23:19:02.551273+00:00",
+    "elapsed_seconds": 11236.862515660003,
+    "returncode": 0,
+    "finished": "2026-09-28T23:19:23.565474+00:00",
+    "wall_seconds": 11257.947671781061
+  },
+  "entries": [
+    {
+      "path": "runs/expert_row5_seed2810/checkpoints/epoch_000250.pth",
+      "sha256": "9418c81f7ed85d4adca27862332745ecee2fc6009212be52d93ee6afa5b1ab44",
+      "epoch": 250,
+      "frame": 40960000,
+      "finite": true,
+      "optimizer_saved": true,
+      "metadata": {
+        "epoch": 250,
+        "frame": 40960000,
+        "world_size": 1,
+        "checkpoint": "/home/wangjiarui/artgym-multigrasp-20260928/runs/expert_row5_seed2810/checkpoints/epoch_000250.pth",
+        "milestone": false,
+        "final": false
+      }
+    },
+    {
+      "path": "runs/expert_row5_seed2810/checkpoints/epoch_000500.pth",
+      "sha256": "fcae7bcc0bb540295fd8e95f9fd4be4d7479250410b7317a832b8d1f3c4e592f",
+      "epoch": 500,
+      "frame": 81920000,
+      "finite": true,
+      "optimizer_saved": true,
+      "metadata": {
+        "epoch": 500,
+        "frame": 81920000,
+        "world_size": 1,
+        "checkpoint": "/home/wangjiarui/artgym-multigrasp-20260928/runs/expert_row5_seed2810/checkpoints/epoch_000500.pth",
+        "milestone": true,
+        "final": false
+      }
+    },
+    {
+      "path": "runs/expert_row5_seed2810/checkpoints/epoch_000750.pth",
+      "sha256": "0b4a4c398295f5bde331ec779a2c6d774598cc3b98740024163ef7c13f4dede3",
+      "epoch": 750,
+      "frame": 122880000,
+      "finite": true,
+      "optimizer_saved": true,
+      "metadata": {
+        "epoch": 750,
+        "frame": 122880000,
+        "world_size": 1,
+        "checkpoint": "/home/wangjiarui/artgym-multigrasp-20260928/runs/expert_row5_seed2810/checkpoints/epoch_000750.pth",
+        "milestone": false,
+        "final": false
+      }
+    },
+    {
+      "path": "runs/expert_row5_seed2810/checkpoints/epoch_001000.pth",
+      "sha256": "d6b2903bf0bb91d125046a884cfb8bf2bb273bfdfc0606589b467472f13c3356",
+      "epoch": 1000,
+      "frame": 163840000,
+      "finite": true,
+      "optimizer_saved": true,
+      "metadata": {
+        "epoch": 1000,
+        "frame": 163840000,
+        "world_size": 1,
+        "checkpoint": "/home/wangjiarui/artgym-multigrasp-20260928/runs/expert_row5_seed2810/checkpoints/epoch_001000.pth",
+        "milestone": true,
+        "final": true
+      }
+    }
+  ]
+}

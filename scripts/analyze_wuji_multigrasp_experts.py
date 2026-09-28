@@ -41,11 +41,14 @@ def main():
             assert saved['checkpoint_sha256'] == plan['checkpoint_sha256']
             with np.load(evidence / 'trace.npz') as archive:
                 trace = {key: archive[key] for key in archive.files}
-            assert trace['active'].shape == (600, 32)
+            steps_recorded, environments = trace['active'].shape
+            assert environments == 32 and 0 < steps_recorded <= 600
             alive = (trace['active'] & ~trace['fall'] & ~trace['invalid']).all(0)
+            if steps_recorded != 600:
+                alive[:] = False
             stable = alive & (trace['drift'] < .01).all(0) & (trace['rotation'] < .25).all(0)
             if protocol == 'static':
-                assert saved['alive_full'] == int(alive.sum()) and saved['recorded_steps'] == 600
+                assert saved['alive_full'] == int(alive.sum()) and saved['recorded_steps'] == steps_recorded
                 static = dict(alive=alive, stable=stable)
                 summaries.append(dict(source_row=source, protocol=protocol, n=32,
                                       successes=None, alive_full=int(alive.sum()),

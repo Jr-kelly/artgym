@@ -1,0 +1,61 @@
+{
+  "status": "independently_rescored",
+  "inputs": [
+    {
+      "path": "/data/research/artgym-experiments-20260921/multigrasp-20260928/runs/multigrasp-20260928/expert_row3_seed2810-evaluation/results.json",
+      "sha256": "6367c9d47687e3a56f6040ceff371cdbb8907039878ccf137f074883f00dea3c",
+      "plan": {
+        "frozen_utc": "2026-09-28T23:31:28.631058+00:00",
+        "checkpoint": "runs/expert_row3_seed2810/checkpoints/epoch_001000.pth",
+        "checkpoint_sha256": "e4111879414e4e707ccb46538a0c493f71a6fdc1d4f30aa451f68a9170cae13f",
+        "states_sha256": "bd94c73e025a13b70f4166512dc72641f71873e1205c763c72d23d8ecb0584c2",
+        "source_row": 3,
+        "seed": 2026092823,
+        "scope": "Final1000 only, independent32 perturbations of own training source; learnability fit diagnosis, not novel-grasp generalization"
+      }
+    }
+  ],
+  "summaries": [
+    {
+      "source_row": 3,
+      "protocol": "static",
+      "n": 32,
+      "successes": null,
+      "alive_full": 32,
+      "static_stable": 32
+    },
+    {
+      "source_row": 3,
+      "protocol": "fixed2",
+      "n": 32,
+      "successes": 7,
+      "alive_full": 32,
+      "static_stable": 32,
+      "success_on_static_stable": 7,
+      "trace_sha256": "816457c161aff0951c0d235ee8f4c6f44bf3406e3f736b40561425b6db3b3e27"
+    },
+    {
+      "source_row": 3,
+      "protocol": "fixed5",
+      "n": 32,
+      "successes": 7,
+      "alive_full": 32,
+      "static_stable": 32,
+      "success_on_static_stable": 7,
+      "trace_sha256": "ddd395d4bf8770d636b83be2621b6b7b71fe8e5fc8bda87557ca65c2d96c7c8e"
+    },
+    {
+      "source_row": 3,
+      "protocol": "arrival",
+      "n": 32,
+      "successes": 32,
+      "alive_full": 31,
+      "static_stable": 32,
+      "success_on_static_stable": 32,
+      "trace_sha256": "0b90921c7150bd302cfb7f8e4194b076f217dad36356b8ad9eab7aae7f034879"
+    }
+  ],
+  "physical_policy_trials": 96,
+  "training_seed": 2026092810,
+  "scope": "Three single-training-source experts, final1000 only, 32 independently generated perturbations each. Not unseen-grasp generalization or a matrix seed replication. Failure does not prove physical impossibility."
+}

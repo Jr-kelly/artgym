@@ -57,8 +57,8 @@ def main():
     figure.savefig(args.output / 'training-curves.png', dpi=160)
     figure.savefig(args.output / 'training-curves.pdf')
     report = dict(status='exported', evidence=evidence,
-                  matrix_realized_schedule_exactly_equal=args.matrix,
-                  scope='Training returns and episode lengths are fit diagnostics, not strict frozen success. The realized 1000-epoch budget stops reward-curriculum progress at 0.44444445, identically for all four matrix arms; this does not test asymptotic performance or a completed curriculum.')
+                  matrix_realized_schedule_exactly_equal=True if args.matrix else None,
+                  scope='Training returns and episode lengths are fit diagnostics, not strict frozen success. The realized 1000-epoch budget stops reward-curriculum progress at 0.44444445 in each listed run; this does not test asymptotic performance or a completed curriculum. Matrix schedule equality is checked only with --matrix.')
     (args.output / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report, indent=2))
 
