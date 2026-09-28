@@ -36,8 +36,8 @@
       "pid": 2448,
       "status": "running",
       "child_pid": 2449,
-      "heartbeat": "2026-09-28T15:28:06.809391+00:00",
-      "elapsed_seconds": 1566.2549476049608
+      "heartbeat": "2026-09-28T15:36:08.777127+00:00",
+      "elapsed_seconds": 2048.222011836944
     },
     "mg_C_seed2801": {
       "name": "mg_C_seed2801",
@@ -75,8 +75,8 @@
       "pid": 2498,
       "status": "running",
       "child_pid": 2499,
-      "heartbeat": "2026-09-28T15:28:09.844136+00:00",
-      "elapsed_seconds": 1568.0597220830387
+      "heartbeat": "2026-09-28T15:36:11.855297+00:00",
+      "elapsed_seconds": 2050.071728909039
     },
     "fresh-generation-v1": {
       "name": "fresh-generation-v1",
@@ -248,8 +248,8 @@
       "pid": 3148,
       "status": "running",
       "child_pid": 3149,
-      "heartbeat": "2026-09-28T15:28:12.864338+00:00",
-      "elapsed_seconds": 1446.2520816629985
+      "heartbeat": "2026-09-28T15:36:14.852697+00:00",
+      "elapsed_seconds": 1928.2370338230394
     },
     "mg_D_seed2801": {
       "name": "mg_D_seed2801",
@@ -282,13 +282,16 @@
         "task.env.supportActionSpan=0.20",
         "task.env.trainingStates=research/multigrasp-20260928/data/more.npy"
       ],
-      "timeout_seconds": 14400,
+      "timeout_seconds": 21600,
       "started": "2026-09-28T15:10:29.407168+00:00",
-      "pid": 4715,
+      "pid": 9453,
       "status": "running",
       "child_pid": 4716,
-      "heartbeat": "2026-09-28T15:28:03.870586+00:00",
-      "elapsed_seconds": 1054.3658607740654
+      "heartbeat": "2026-09-28T15:36:22.062287+00:00",
+      "elapsed_seconds": 1552.6551105976105,
+      "previous_supervisor_pid": 4715,
+      "supervisor_replaced_utc": "2026-09-28T15:30:04.119831+00:00",
+      "supervisor_mode": "observe_existing_training_pid"
     }
   },
   "initial_models": {
@@ -323,6 +326,6 @@
       "training_states_sha256": "7df873d088d5554eb091d292e0ef76aa5cc2a570083507804d77dedb8eeb53d7"
     }
   },
-  "gpu": "0, 91 %, 9465 MiB\n1, 89 %, 8237 MiB\n2, 80 %, 8423 MiB\n3, 91 %, 9209 MiB\n",
-  "observed_utc": "2026-09-28T15:28:19.292372+00:00"
+  "gpu": "0, 91 %, 9465 MiB\n1, 95 %, 8237 MiB\n2, 95 %, 8423 MiB\n3, 95 %, 9209 MiB\n",
+  "observed_utc": "2026-09-28T15:36:33.488368+00:00"
 }

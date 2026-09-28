@@ -93,3 +93,17 @@ A/C/B actual running, D preflight passed then queued after new test generation; 
 ## 多抓姿 2026-09-28T15:31:03.581214+00:00 D_supervisor_extended_preserving_training
 
 D预测总时长超过原4h看护上限；验证子进程保留GPU租约后只替换旧wrapper4715为9453，实际训练PID4716/start ticks保持，已继续到epoch76。总看护上限6h（至21:10UTC），仍早于全轮截止；交互预算1000轮不变，未重启训练。相应等待开发评估的5985仅等待进程替换为v2，防止等待时限早于训练。一次收据复制命令地址拼写错误后已用正确入口完成，无训练失败。 证据：research/multigrasp-20260928/receipts/D-supervisor-adoption.json, research/multigrasp-20260928/development-D-waiter-v2.json。下一步：继续四臂训练，检查真实PID/最后20轮吞吐；训练完毕由既定开发队列冻结checkpoint。
+
+## 多抓姿 2026-09-28T15:32:19.951944+00:00 progress_increment_verified
+
+本轮进展已push并ls-remote核验6e674fa2484b5ddb0c7f32110e2f015b48cad2a4。四训练实际PID2449/2499/3149/4716再查存活，D接管后继续epoch82；9453看护和9766等待开发均存活。Goal未完成，继续同预算训练。 证据：research/multigrasp-20260928/receipts/D-supervisor-adoption.json, research/multigrasp-20260928/videos/manifest.json, research/multigrasp-20260928/development-static-validity.json。下一步：训练完成与已排队开发评估；新测试物理筛选后统一冻结评估。
+
+多抓姿 2026-09-28T15:33:24.636011+00:00 本机4090实查无计算进程，启动 reference-candidates-arrival-v1 PID3835302；命令与权重/配置见 runs/multigrasp-20260928/reference-candidates-arrival-v1；待终结核验。
+
+## 多抓姿 2026-09-28T15:34:22.722643+00:00 fresh2_physical_followup_queued
+
+前轮为progress。重新实查A162/B126/C147/D86均真实运行，未重启。新增本机有界等待PID3838398，第二批3000生成完成后自动同步全候选，执行预先固定几何/20s静态门禁并冻结全部合格新抓姿；不加载操作策略成绩筛选，无新增训练。原0合格批次保留。 证据：research/multigrasp-20260928/fresh2-local-continuation-launch.json, runs/multigrasp-20260928/fresh2-local-continuation/status.json。下一步：继续四训练及第二批物理筛选；开发集冻结权重后完成同初态最终对照。
+
+## 多抓姿 2026-09-28T15:36:49.830864+00:00 reference_both_protocols_completed
+
+旧冻结teacher实际到位换向20s评估完成；去逐位重复22抓姿：static22/22存活，固定2/5s第一轮均7/22、全部严格均3/22；arrival至少3轮7/22，16/22alive。13新增训练来源中4能开合但0严格；6历史诊断固定开合0。每基姿1回合，仅开发诊断，不代替新测试或四臂结论。 证据：research/multigrasp-20260928/reference-by-grasp.csv, research/multigrasp-20260928/reference-summary.json, research/multigrasp-20260928/evidence/reference-candidates-arrival-v1/evidence/report.json。下一步：四正式训练继续，等待各1000epoch和开发冻结，第二批新测试物理筛选已排队。

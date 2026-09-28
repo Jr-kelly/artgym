@@ -1,0 +1,33 @@
+{
+  "name": "reference-candidates-arrival-v1",
+  "gpu": 0,
+  "command": [
+    "/home/agiuser/miniconda3/envs/artgym/bin/python",
+    "-m",
+    "scripts.audit_wuji_multigrasp_arrival",
+    "--checkpoint",
+    "runs/multigrasp-20260928/reference.pth",
+    "--task",
+    "wuji_multigrasp",
+    "--hand",
+    "wuji_paper_official_actuator",
+    "--object",
+    "knife_wuji_bridge3_20260922",
+    "--initial-states",
+    "research/multigrasp-20260928/data/candidates.npy",
+    "--total-seconds",
+    "20",
+    "--output",
+    "runs/multigrasp-20260928/reference-candidates-arrival-v1/evidence"
+  ],
+  "timeout_seconds": 1800,
+  "started": "2026-09-28T15:33:24.655252+00:00",
+  "pid": 3835302,
+  "status": "completed",
+  "child_pid": 3835322,
+  "heartbeat": "2026-09-28T15:34:24.787687+00:00",
+  "elapsed_seconds": 60.111006384016946,
+  "returncode": 0,
+  "finished": "2026-09-28T15:34:54.816450+00:00",
+  "wall_seconds": 90.16109290404711
+}
