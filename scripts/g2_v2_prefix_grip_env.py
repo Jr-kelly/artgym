@@ -14,7 +14,9 @@ import torch
 class PrefixGripV2(GripV2):
  def __init__(self,*args,**kwargs):
   self.prefix_ready=False
-  data=ROOT/'configs/g2_functional_v2/grip-prefix-v2'
+  from pathlib import Path
+  data=Path(kwargs.pop('data_directory',ROOT/'configs/g2_functional_v2/grip-prefix-v2'))
+  self.data_source=str(data)
   self.prefix=torch.as_tensor(np.load(data/'prefix-trajectory.npz')['reference_targets'].copy(),dtype=torch.float32)
   super().__init__(*args,data_directory=data,**kwargs)
   self.table_source={k:v.clone() for k,v in self.source.items()}

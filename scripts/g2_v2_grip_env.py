@@ -6,6 +6,15 @@ from scripts.g2_local_env import LocalG2,local_pose,rotation_error
 import torch
 import numpy as np
 ROOT=Path(__file__).resolve().parents[1]
+def grip_observation(self):
+ from scripts.g2_local_env import qrot,qmul
+ obs=LocalG2.observation(self)
+ if not self.ready:return obs
+ expected=self.wrist[:,:3]+qrot(self.wrist[:,3:7],self.initial_local[:,:3])
+ expected_q=qmul(self.wrist[:,3:7],self.initial_local[:,3:7])
+ obs[:,60:63]=(self.object[:,:3]-expected)*100
+ qe=qmul(torch.cat((-expected_q[:,:3],expected_q[:,3:]),-1),self.object[:,3:7]);qe*=torch.where(qe[:,3:]<0,-1.,1.);obs[:,63:66]=qe[:,:3]*4
+ return obs
 class GripV2(LocalG2):
  def __init__(self,task='H',num_envs=1,route='joint',graphics=False,**kwargs):
   assert task=='H' and route=='joint';self.ready=False
@@ -22,16 +31,9 @@ class GripV2(LocalG2):
    self.ever_contact_loss[ids]=False;self.max_tracking[ids]=0;self.min_hold_clearance[ids]=float('inf');self.first_grip_failure[ids]=-1
   return out
  def observation(self):
-  obs=super().observation()
-  if not self.ready:return obs
   # Use original124 dimensions: phase value uses self.steps=150, pose-error
   # means deviation from carried body trajectory, not penalizing intended lift.
-  from scripts.g2_local_env import qrot,qmul
-  expected=self.wrist[:,:3]+qrot(self.wrist[:,3:7],self.initial_local[:,:3])
-  expected_q=qmul(self.wrist[:,3:7],self.initial_local[:,3:7])
-  obs[:,60:63]=(self.object[:,:3]-expected)*100
-  qe=qmul(torch.cat((-expected_q[:,:3],expected_q[:,3:]),-1),self.object[:,3:7]);qe*=torch.where(qe[:,3:]<0,-1.,1.);obs[:,63:66]=qe[:,:3]*4
-  return obs
+  return grip_observation(self)
  def step(self,action,baseline='learned'):
   action=action.detach().cpu().clamp(-1,1);previous=self.last_action.clone();self.last_action[:]=action
   age=self.age.clone();self.targets[:,:7]=self.path[age.clamp(max=len(self.path)-1)]

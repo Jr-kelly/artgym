@@ -57,6 +57,7 @@ def main():
     parser.add_argument('--operation-static-policy',action='store_true',help='Named S ablation: one actual initial network inference, then fixed20-joint output plus unchanged geometric thumb path; not a trained student')
     parser.add_argument('--local-reset-quaternion-compat',action='store_true',help='Frozen local policy diagnostic: match the legacy reset wrist quaternion sign on the FIRST observation only; no physical state write.')
     parser.add_argument('--learned-hold-policy',type=Path,help='Diagnostic22s learned H after actual gait, before real settling. Not slider-operation success.')
+    parser.add_argument('--learned-pickup-policy',type=Path,help='v2 privileged grip PPO during actual lift/hold only; never resets to training state')
     parser.add_argument('--fixed-preparation-hold',action='store_true',help='Named22s fixed-motor H control after actual gait, before real settling; same hold criteria, no learned H output')
     parser.add_argument('--camera',choices=['wide','hand'],default='wide')
     parser.add_argument('--operation-yaw',type=float,default=0.)
@@ -148,6 +149,8 @@ def main():
     if args.learned_operation_policy or args.learned_hold_policy:
         assert args.group!='C', 'New learner is privileged; student history must explicitly encode its separate motor channel before C is evaluated'
     assert not args.learned_hold_policy or args.group!='A'
+    if args.learned_pickup_policy:
+        assert args.group=='B' and args.knife_spec and args.cartesian_acquisition and args.pickup_only and not args.pickup_finger_feedback
     args.output.mkdir(parents=True,exist_ok=False)
     if args.knife_spec:
         (args.output/'knife-asset-spec.json').write_text(args.knife_spec.read_text())
@@ -632,6 +635,7 @@ def main():
             if args.closed_settle_seconds:phases.append(('closed_settle',None,None,args.closed_settle_seconds))
             phases.append(('lift',lift_q,closed,4))
             if args.pickup_retention_hold:phases.append(('pickup_hold',None,closed,args.pickup_retention_hold))
+            if custom_plan and 'after_short_lift_raise' in custom_plan:phases.append(('pickup_raise',None,None,custom_plan['after_short_lift_raise']['seconds']))
             if args.air_flip:phases.append(('air_flip',None,closed,args.air_flip_seconds))
             if args.gait_plan:phases.append(('finger_gait',None,None,0))
             if args.table_supported_seat:
@@ -665,10 +669,34 @@ def main():
                 if label=='closed_settle':
                     for _ in range(round(seconds/dt)):tick(label)
                     continue
+                if label=='pickup_raise':
+                    from scripts.g2_cartesian_acquisition import plan_translation
+                    from scripts.g2_tabletop_metrics import fixed_acquisition_hold
+                    spec=custom_plan['after_short_lift_raise'];shift=np.asarray(spec['shift_world_m']);assert .05<=shift[2]<=.20 and np.linalg.norm(shift[:2])<=.10
+                    _,_,_,rw,ro,_=current();target=k.forward(targets[arm_idx]);target[:3,3]+=shift
+                    path,diagnostic=plan_translation(k,targets[arm_idx],target,seconds,dt,arm_table_check)
+                    relative=np.linalg.inv(rw)@ro;expected=[k.forward(m)@relative for m in path]
+                    diagnostic.update(scope='Actual short-lift prefix followed by additional continuous motor-only raise; no scene state reload',fixed_initial_hand_object=relative.tolist(),expected_object_trajectory=[t.tolist() for t in expected],held_hand_motor=targets[hand_idx].tolist())
+                    (args.output/'pickup-raise-plan.json').write_text(json.dumps(diagnostic,indent=2)+'\n')
+                    first=len(records)
+                    for motor in path:targets[arm_idx]=motor;tick(label)
+                    moved=records[first:];actual=[transform(r['object'][:3],r['object'][3:]) for r in moved]
+                    drift=max(np.linalg.norm(o[:3,3]-e[:3,3]) for o,e in zip(actual,expected));rot=max(Rotation.from_matrix(e[:3,:3].T@o[:3,:3]).magnitude() for o,e in zip(actual,expected))
+                    carry=dict(max_planned_translation_error_m=float(drift),max_planned_rotation_error_rad=float(rot),table_free=not any(r['knife_table_contacts'] for r in moved),success=bool(drift<.01 and rot<.25 and not any(r['knife_table_contacts'] for r in moved)))
+                    (args.output/'pickup-raise-carry-check.json').write_text(json.dumps(carry,indent=2)+'\n')
+                    if not carry['success']:raise ValueError('Additional pickup raise lost fixed planned carry reference')
+                    _,_,_,hw,ho,_=current();first=len(records)
+                    for _ in range(round(spec['hold_seconds']/dt)):tick('pickup_raise_hold')
+                    check=fixed_acquisition_hold(records[first:],ho,hw,table_z)
+                    (args.output/'pickup-raise-hold-check.json').write_text(json.dumps(check,indent=2)+'\n')
+                    if not check['retained']:raise ValueError('Additional pickup raise failed original full-height hold')
+                    continue
                 if label=='pickup_hold':
                     from scripts.g2_tabletop_metrics import fixed_acquisition_hold
                     _,_,_,hold_w,hold_o,_=current();first=len(records)
                     for _ in range(round(seconds/dt)):
+                        if args.learned_pickup_policy:
+                            targets[hand_idx]=learned_runtime.step(dof[:,0].cpu().numpy(),dof[:,1].cpu().numpy(),rb[wrist_id].cpu().numpy(),rb[obj_id].cpu().numpy(),rb[slider_id].cpu().numpy())
                         if pickup_feedback is not None:
                             _,_,_,fw,fo,_=current();targets[hand_idx]=pickup_feedback.command(fw,fo,global_step*dt)
                         tick(label)
@@ -683,6 +711,7 @@ def main():
                         check['retained']=bool(check['stable'] and check['table_free'] and min(clearances)>.002 and check['opposed_contact_fraction']>=.9)
                         check.update(scope='Short2-5cm lift diagnostic ONLY, not full acquisition',minimum_body_table_clearance_m=min(clearances),short_lift_retained=check['retained'])
                     (args.output/'pickup-hold-check.json').write_text(json.dumps(check,indent=2)+'\n')
+                    if args.learned_pickup_policy:(args.output/'learned-pickup.json').write_text(json.dumps(learned_runtime.description(),indent=2)+'\n')
                     if not check['retained']:raise ValueError('Pickup failed fixed-reference hold before flip')
                     continue
                 if args.cartesian_acquisition and label=='close':end_arm=targets[arm_idx].copy()
@@ -691,12 +720,26 @@ def main():
                     arm_path,diagnostic=plan_translation(k,targets[arm_idx],k.forward(end_arm),seconds,dt,arm_table_check)
                     (args.output/(label+'-cartesian-plan.json')).write_text(json.dumps(diagnostic,indent=2)+'\n')
                     start_hand=targets[hand_idx].copy()
+                    retention_start=None
+                    if label=='lift' and args.learned_pickup_policy:
+                        from scripts.g2_v2_grip_runtime import GripPolicyRuntime
+                        learned_runtime=GripPolicyRuntime(args.learned_pickup_policy,json.loads((args.output/'physics.json').read_text()),dof[:,0].cpu().numpy(),dof[:,1].cpu().numpy(),targets,rb[wrist_id].cpu().numpy(),rb[obj_id].cpu().numpy(),rb[slider_id].cpu().numpy())
+                        (args.output/'learned-pickup.json').write_text(json.dumps(learned_runtime.description(),indent=2)+'\n')
                     if label=='lift' and args.pickup_finger_feedback:
                         from scripts.g2_side_pinch_feedback import SidePinchFeedback
                         _,_,_,fw,fo,_=current();pickup_feedback=SidePinchFeedback(targets[hand_idx],fw,fo,table_z)
                     for i,motor in enumerate(arm_path):
                         alpha=smooth((i+1)/len(arm_path));targets[arm_idx]=motor
                         targets[hand_idx]=start_hand+(end_hand-start_hand)*alpha
+                        if label=='lift' and custom_plan and 'retention_close_q' in custom_plan:
+                            # Additional closing preload after declared5mm wrist
+                            # rise; not finger gait, no object state/force input.
+                            if retention_start is None and k.forward(motor)[2,3]-k.forward(arm_path[0])[2,3]>=custom_plan['retention_close_start_lift_m']:retention_start=i
+                            if retention_start is not None:
+                                u=smooth(min(1.,(i-retention_start)*dt/custom_plan['retention_ramp_seconds']))
+                                targets[hand_idx]=start_hand+(np.asarray(custom_plan['retention_close_q'])-start_hand)*u
+                        if label=='lift' and args.learned_pickup_policy:
+                            targets[hand_idx]=learned_runtime.step(dof[:,0].cpu().numpy(),dof[:,1].cpu().numpy(),rb[wrist_id].cpu().numpy(),rb[obj_id].cpu().numpy(),rb[slider_id].cpu().numpy())
                         if pickup_feedback is not None:
                             _,_,_,fw,fo,_=current();targets[hand_idx]=pickup_feedback.command(fw,fo,global_step*dt)
                         tick(label)
@@ -722,6 +765,7 @@ def main():
                     (args.output/'air-flip-plan.json').write_text(json.dumps(diagnostic,indent=2)+'\n')
                     if not diagnostic['feasible']:raise ValueError('Air-flip IK/clearance precheck failed: '+str(diagnostic['failure']))
                     first=len(records)
+                    if custom_plan and 'retention_close_q' in custom_plan:end_hand=targets[hand_idx].copy()
                     for motor in path:
                         targets[arm_idx]=motor;targets[hand_idx]=end_hand
                         tick(label)
@@ -1119,6 +1163,8 @@ def main():
             if not grasp_success:report['failure_class']='preset_candidate_hold_failed_before_policy'
         if args.short_lift_diagnostic:
             report['short_lift_diagnostic']=True;report['full_acquisition_evaluated']=False;report['short_lift_check']=json.loads((args.output/'pickup-hold-check.json').read_text())
+            if (args.output/'pickup-raise-hold-check.json').exists():
+                report['full_acquisition_evaluated']=True;report['staged_full_height_hold']=json.loads((args.output/'pickup-raise-hold-check.json').read_text());report['planned_total_rise_m']=args.lift_height+custom_plan['after_short_lift_raise']['shift_world_m'][2]
         report.update(group=args.group,args={k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()},
             teacher_sha256=hashlib.sha256(args.teacher.read_bytes()).hexdigest(),
             student_sha256=hashlib.sha256(args.student.read_bytes()).hexdigest() if args.group=='C' else None,

@@ -1,9 +1,10 @@
 # 最新活动任务：v2功能持刀新预算轮
 
-本轮分支`feat/g2-wuji-functional-v2-20260928`，工作区`/data/research/artgym-g2-functional-v2-20260928`。
-10:57 UTC实查：20条控制启动/2组学习，保守已用GPU约0.85h，最多100/6/8单卡小时、18:06:57 UTC截止，至少20条验证保留。V2-10/16/17预置四指支撑→拇指自由转移→反馈两轮严格成功3/3；不是teacher/student、不是连续获取。V2-18/19三指3/5cm只绕桌面端点抬斜，始终未真正保持离桌。G1已主动停并保存17update检查点：局部reset首帧厘米级跳动，不能凭低success判抓姿不可行。V2-20实际执行桌面接近闭合前缀，第一抬起步位移9微米、固定电机仍失败。G2-prefix-grip-h100-pilot正在10.14.0.79:31973，128env、上限0.6h，恢复时实查PID/GPU。
-当前CPU几何试验把三指布局沿刀身+20mm，依据实际触点均在重心负侧、远端支桌；通过完整手部/G2检查后才执行。源pin保护在途任务，旧资产/权重/Release不动。
-先读`research/g2-functional-v2-20260928.md`及`runs/g2-functional-v2-20260928/state.json`；运行`python3 scripts/audit_g2_v2_round.py`核实账本。原生Goal旧blocked且工具不能恢复；本轮持久化active继续，不因旧预算停止。
+工作区`/data/research/artgym-g2-functional-v2-20260928`；分支`feat/g2-wuji-functional-v2-20260928`，最新已推032a773，后续重要代码/配置尚有未提交改动。
+11:15 UTC实查：24条控制启动/2组学习，GPU保守已用1.201h，最多100/6/8单卡小时、18:06:57 UTC截止，至少20条验证保留。原生Goal旧blocked工具不能恢复，本轮持久化active继续。
+**V2-23普通平放桌面3cm短抬+1s保持成功**：三指thumb/middle/ring夹点+10mm平衡重心，抬5mm后0.5s再加2mm几何电机预紧，保持最低桌隙25.9mm，world .1706mm/.00371rad，无物理修改。不是完整获取/翻掌/操作成功。20cm直抬与3个回缩路径G2关节5/7到限；V2-24保留3cm前缀后再升10cm(总13cm)实际在运行，原最低z=.85和10mm/.25rad保持判据不变。先查PID/结果，再实际末态规划±180翻掌并升7cm，准备脚本plan_g2_v2_flip_candidates.py。
+预置终点V2-10/16/17反馈两轮严格3/3仍保留；不是冻结teacher/student。G1/G2旧五指3mm闭合初态学习均已停止保存(17/12updates)，远端H100 .79:31973当前空闲，不做无意义占用。G2真实前缀消除了G1接触reset厘米级冲击，但本身0/128，最优抬起4.4mm；更强的V2-23无需学习已成立，余4组用于后续明确失效。新GripPolicyRuntime离线150帧目标差1.2e-7rad已核查，尚未独立连续调用模型。
+报告`research/g2-functional-v2-20260928.md`，账本`runs/g2-functional-v2-20260928/state.json`；审计命令`python3 scripts/audit_g2_v2_round.py`。Release增量02新增V2-07..15证据/源码和严格预置视频，5SHA核验；下一批应从V2-16开始，保留本轮桌面最远和失败完整视频。旧版本全部保持。
 
 ## Latest 2026-09-28T09:20:30.326260+00:00 — native Goal BLOCKED after third budget audit
 原生update_goal(status=blocked)已成功；目标未完成且未缩小。连续第3个goal轮实查同一预算阻塞：80/80控制试验、4/4主要训练配置均已用满，用户尚未回复“最多追加4次”的待确认请求。自动Goal续接不是追加额度授权。上一轮为progress（已有轨迹的接触序列分析及发布）；本轮没有新的可执行物理动作或待运行任务，故不重复空转/调参。

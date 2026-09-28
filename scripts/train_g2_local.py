@@ -66,6 +66,7 @@ def main():
     process_start = time.monotonic()
     p = argparse.ArgumentParser()
     p.add_argument('--task-variant',choices=['legacy','v2-grip','v2-prefix-grip'],default='legacy')
+    p.add_argument('--data-directory',type=Path,help='Explicit v2-prefix initialization/motor path dataset; new layout counts as declared learning configuration')
     p.add_argument('--task', choices=['H','S'], default='H')
     p.add_argument('--route', choices=['support','joint'], default='support')
     p.add_argument('--num-envs', type=int, default=64)
@@ -94,7 +95,7 @@ def main():
     plan=json.loads(args.thumb_plan.read_text()) if args.thumb_plan else (saved.get('thumb_plan') if saved else None)
     if args.task_variant=='v2-prefix-grip':
         from scripts.g2_v2_prefix_grip_env import PrefixGripV2
-        env=PrefixGripV2(args.task,args.num_envs,args.route)
+        env=PrefixGripV2(args.task,args.num_envs,args.route,**({'data_directory':args.data_directory} if args.data_directory else {}))
     elif args.task_variant=='v2-grip':
         from scripts.g2_v2_grip_env import GripV2
         env=GripV2(args.task,args.num_envs,args.route)
@@ -165,7 +166,7 @@ def main():
             source=('configs/g2_local/'+args.task+'-actual-state.npz' if args.task_variant=='legacy' else str(env.metadata.get('knife_relative_urdf'))),
             method='new privileged PPO motor residual; original weights unchanged',task_variant=args.task_variant,
             asset_urdf=env.metadata.get('knife_relative_urdf'),
-            data_source={'v2-grip':'configs/g2_functional_v2/grip-local-v1','v2-prefix-grip':'configs/g2_functional_v2/grip-prefix-v2'}.get(args.task_variant),
+            data_source=getattr(env,'data_source',{'v2-grip':'configs/g2_functional_v2/grip-local-v1'}.get(args.task_variant)),
             thumb_plan=env.thumb_plan,
             action_mapping=('all20 motor references: source closed target + absolute .20rad residual, slew .02rad/control' if args.task_variant!='legacy' else 'support16 absolute+slew; joint thumb4 uses .20rad absolute residual around IK prior or .025rad incremental correction around teacher; total thumb step capped .025rad'),
             terminal_return='absorbing -8/step gamma.995 through finite horizon'), str(path)+'.tmp')
