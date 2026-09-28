@@ -13,8 +13,10 @@ class ThumbFeedback:
    f=np.linalg.inv(obj)@wrist@self.fk.forward(q)[self.link];point=f[:3,:3]@self.anchor+f[:3,3]
    self.material_z=float(point[2]-geometry.joint_xyz[2]-slider)
    assert abs(self.material_z)<geometry.spec['measured']['button_body_length_m']/2, 'Initial thumb material point outside button'
+  self.initial_object=np.array(obj).copy()
   self.initialization=dict(material_z_m=self.material_z,actual_slider_m=float(slider),start_distance_m=self.start,source='one-time actual hand FK and simulation slider/body truth' if config.get('material_offset_at_takeover',False) else 'old contact material offset')
  def solve(self,q,wrist,obj,distance):
+  if self.c.get('body_reference')=='fixed_takeover_world':obj=self.initial_object
   relative=np.linalg.inv(wrist)@obj;v=np.array([self.c['contact_x_m'],self.g.joint_xyz[1]+self.g.spec['geometry_hypothesis']['button_base_thickness_m']/2-self.c['normal_compression_m'],self.g.joint_xyz[2]+self.g.lower+distance+self.material_z]);target=relative[:3,:3]@v+relative[:3,3]
   fixed=np.array(q,dtype=float);normal=-relative[:3,1]
   def calculate(x):
