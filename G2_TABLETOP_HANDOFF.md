@@ -1,3 +1,7 @@
+## Latest 2026-09-28T09:17:13.383304+00:00 — offline follow-up after budget exhaustion; second blocked audit turn
+Goal完整目标仍未达到。上一goal轮为progress（新资产实际试验及已核验交付）；本轮仅完成已有F1-08日志离线复核，无新物理/训练。手刀/滑块/刀桌逐帧计数核对一致；整段手滑块接触0，刀柄418帧/凸起401帧触桌，2帧有未分类表面点。食指9.4s、中指9.5s首次持续缺失，9.9s整手脱离，刀柄+85mm端在此之前一直触桌。只支持失稳次序，不认定唯一因果。脚本scripts/audit_g2_pickup_contact_sequence.py、结果research/g2-finger-surface-20260928/measured-asset-evidence/F1-08-component-sequence-offline.json、报告附录，待本轮push。
+80/80控制、4/4训练仍用满，本轮预算阻塞第2个连续goal轮；无活动仿真/训练，原监控/HTTP实查保留。原生Goal active未标complete，未达3轮blocked阈值。下一项真实物理验证需要用户追加额度；报告给出最多4次有界接触迁移/重复建议（未授权、未运行），不增加训练。所有原成果和物性不变。
+
 ## Latest 2026-09-28T09:12:33.773726+00:00 — delivered measured-knife increment; goal remains unmet, budget exhausted
 本轮交付完成：feat/g2-wuji-finger-surface-grasp-20260928（代码/报告基线e32f68a，最后提交补收据），Release g2-wuji-finger-surface-20260928-v1，12项新增资产SHA核验、原16项哈希不变；4.18MB增量包恢复验证3个pin共1670源码哈希、48新增原始运行文件，无缺失。源码/模型/配置/旧demo不覆盖。所有本轮CPU/仿真/训练已结束；HTTP4098等原任务保留，恢复请实查PID。
 实测尺寸资产独立v1，170x30x8与45mm按钮，含凸起主假设6+1+1，其他未知参数仍是假设。F1-07仅落稳后净空拒绝；F1-08通过实际0.5384mm净空并执行闭合起抬，刀心升12.35mm但始终接触桌面，9.9s全手接触丢失、保持失败，被动滑块8.9mm。没有翻掌/拇指转移/teacher/student。两次新资产开发启动、仅一次实际抓取尝试，0/1，不称泛化统计。旧尺寸F1-01..06另存。

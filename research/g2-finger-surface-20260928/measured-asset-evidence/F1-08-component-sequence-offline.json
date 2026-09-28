@@ -1,0 +1,4451 @@
+{
+  "scope": "Offline audit of existing execution only; no new dynamics, policy, or force measurement",
+  "trace_sha256": "1f1ce76f0ee51e0ec36548a0c3f6012fe7dc3962e2a29eca942de079cc4bc068",
+  "contact_log_sha256": "1648ec23717d8c57ec64df6454232ebf2c95f93b1211ef91b89ee597a94ac10c",
+  "asset_spec": "assets/objects/knife_wuji_measured_envelope_20260928_v1/000/asset-spec.json",
+  "surface_label_tolerance_m": 2e-05,
+  "pair_log_counts_match_trace": true,
+  "all_recorded_frames_have_table_contact": true,
+  "hand_slider_contact_rows": 0,
+  "finger_order": [
+    "thumb",
+    "index",
+    "middle",
+    "ring",
+    "pinky"
+  ],
+  "component_table_contact_frames": {
+    "handle": 418,
+    "button_base": 0,
+    "bump": 401,
+    "ambiguous": 0,
+    "unclassified": 2
+  },
+  "first_sustained_lift_contact_losses": [
+    {
+      "finger": "thumb",
+      "first_five_frame_absence_s": 9.900000516325235
+    },
+    {
+      "finger": "index",
+      "first_five_frame_absence_s": 9.400000490248203
+    },
+    {
+      "finger": "middle",
+      "first_five_frame_absence_s": 9.50000049546361
+    },
+    {
+      "finger": "ring",
+      "first_five_frame_absence_s": 9.900000516325235
+    },
+    {
+      "finger": "pinky",
+      "first_five_frame_absence_s": 9.900000516325235
+    }
+  ],
+  "rows": [
+    {
+      "frame": 269,
+      "time_s": 9.000000469386578,
+      "phase": "close",
+      "finger_contact_counts": [
+        4,
+        4,
+        4,
+        4,
+        3
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 3,
+        "button_base": 0,
+        "bump": 4,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499988168478012,
+          0.08500133454799652
+        ],
+        "bump": [
+          0.002799688372761011,
+          0.002800882328301668
+        ]
+      },
+      "slider_displacement_from_lower_m": -1.3810720900231388e-09
+    },
+    {
+      "frame": 270,
+      "time_s": 9.03333380445838,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        4,
+        4,
+        3,
+        4
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 2,
+        "button_base": 0,
+        "bump": 4,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08500103652477264,
+          0.08500281721353531
+        ],
+        "bump": [
+          0.0027994182892143726,
+          0.002800190122798085
+        ]
+      },
+      "slider_displacement_from_lower_m": 1.201887694313175e-06
+    },
+    {
+      "frame": 271,
+      "time_s": 9.066667139530182,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        3,
+        4,
+        4,
+        4
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 1,
+        "button_base": 0,
+        "bump": 4,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.0850001871585846,
+          0.0850001871585846
+        ],
+        "bump": [
+          0.0027994816191494465,
+          0.0028002955950796604
+        ]
+      },
+      "slider_displacement_from_lower_m": 1.4105039510270423e-06
+    },
+    {
+      "frame": 272,
+      "time_s": 9.100000474601984,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 2,
+        "button_base": 0,
+        "bump": 4,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08500068634748459,
+          0.08500122278928757
+        ],
+        "bump": [
+          0.002799930050969124,
+          0.0028007160872220993
+        ]
+      },
+      "slider_displacement_from_lower_m": -1.3810720900231388e-09
+    },
+    {
+      "frame": 273,
+      "time_s": 9.133333809673786,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 3,
+        "button_base": 0,
+        "bump": 4,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.0850004255771637,
+          0.08500128984451294
+        ],
+        "bump": [
+          0.002799584995955229,
+          0.0028008900117129087
+        ]
+      },
+      "slider_displacement_from_lower_m": 5.077299208844366e-08
+    },
+    {
+      "frame": 274,
+      "time_s": 9.166667144745588,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 4,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499927818775177,
+          0.08500081300735474
+        ],
+        "bump": [
+          0.002800030168145895,
+          0.002800192916765809
+        ]
+      },
+      "slider_displacement_from_lower_m": 3.1154331298077764e-07
+    },
+    {
+      "frame": 275,
+      "time_s": 9.20000047981739,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 3,
+        "button_base": 0,
+        "bump": 4,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499998599290848,
+          0.08500128239393234
+        ],
+        "bump": [
+          0.0027999095618724823,
+          0.0028016665019094944
+        ]
+      },
+      "slider_displacement_from_lower_m": 1.401799592515296e-07
+    },
+    {
+      "frame": 276,
+      "time_s": 9.233333814889193,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 3,
+        "button_base": 0,
+        "bump": 4,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08500035852193832,
+          0.08500102162361145
+        ],
+        "bump": [
+          0.0027992057148367167,
+          0.0028011330869048834
+        ]
+      },
+      "slider_displacement_from_lower_m": -1.3810720900231388e-09
+    },
+    {
+      "frame": 277,
+      "time_s": 9.266667149960995,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 2,
+        "button_base": 0,
+        "bump": 4,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08500028401613235,
+          0.0850021243095398
+        ],
+        "bump": [
+          0.0027999163139611483,
+          0.002800487680360675
+        ]
+      },
+      "slider_displacement_from_lower_m": 1.462658015205509e-06
+    },
+    {
+      "frame": 278,
+      "time_s": 9.300000485032797,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        4,
+        3,
+        4,
+        2
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 3,
+        "button_base": 0,
+        "bump": 4,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499769121408463,
+          0.08499958366155624
+        ],
+        "bump": [
+          0.0027993754483759403,
+          0.002800537971779704
+        ]
+      },
+      "slider_displacement_from_lower_m": -1.3810720900231388e-09
+    },
+    {
+      "frame": 279,
+      "time_s": 9.333333820104599,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        3,
+        4,
+        2,
+        4
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 3,
+        "button_base": 0,
+        "bump": 0,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.0849878117442131,
+          0.08499328792095184
+        ]
+      },
+      "slider_displacement_from_lower_m": 2.624328908057416e-05
+    },
+    {
+      "frame": 280,
+      "time_s": 9.366667155176401,
+      "phase": "lift",
+      "finger_contact_counts": [
+        3,
+        4,
+        4,
+        3,
+        3
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 0,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08498882502317429,
+          0.08499656617641449
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.00010486554082961286
+    },
+    {
+      "frame": 281,
+      "time_s": 9.400000490248203,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        0,
+        2,
+        3,
+        3
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 3,
+        "button_base": 0,
+        "bump": 0,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499298244714737,
+          0.08499857038259506
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.00024162094768614972
+    },
+    {
+      "frame": 282,
+      "time_s": 9.433333825320005,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        0,
+        0,
+        4,
+        4
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 0,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499632775783539,
+          0.08500026911497116
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.00039034198698134626
+    },
+    {
+      "frame": 283,
+      "time_s": 9.466667160391808,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        0,
+        3,
+        3,
+        4
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 0,
+        "button_base": 0,
+        "bump": 0,
+        "ambiguous": 0,
+        "unclassified": 3
+      },
+      "table_contact_local_z_range_m": {
+        "unclassified": [
+          0.08499950915575027,
+          0.08500299602746964
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.000562711169091179
+    },
+    {
+      "frame": 284,
+      "time_s": 9.50000049546361,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        0,
+        0,
+        3,
+        4
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 0,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08500013500452042,
+          0.08500098437070847
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.000774963309136345
+    },
+    {
+      "frame": 285,
+      "time_s": 9.533333830535412,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        0,
+        0,
+        3,
+        3
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 0,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499898761510849,
+          0.08500190079212189
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.0010109157460603257
+    },
+    {
+      "frame": 286,
+      "time_s": 9.566667165607214,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        0,
+        0,
+        4,
+        5
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 0,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08500044792890549,
+          0.08500202000141144
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.0012884424227151414
+    },
+    {
+      "frame": 287,
+      "time_s": 9.600000500679016,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        0,
+        0,
+        6,
+        4
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 0,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.0850016176700592,
+          0.08500431478023529
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.0016332627433213731
+    },
+    {
+      "frame": 288,
+      "time_s": 9.633333835750818,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        0,
+        0,
+        2,
+        4
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 0,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08500166237354279,
+          0.08500391989946365
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.002062233646479561
+    },
+    {
+      "frame": 289,
+      "time_s": 9.66666717082262,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        0,
+        0,
+        3,
+        4
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 0,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08500116318464279,
+          0.08500293642282486
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.002552360777822449
+    },
+    {
+      "frame": 290,
+      "time_s": 9.700000505894423,
+      "phase": "lift",
+      "finger_contact_counts": [
+        6,
+        0,
+        2,
+        4,
+        1
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 3,
+        "button_base": 0,
+        "bump": 0,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08500119298696518,
+          0.08500850945711136
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.003135573600498154
+    },
+    {
+      "frame": 291,
+      "time_s": 9.733333840966225,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        0,
+        1,
+        7,
+        2
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 0,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08500326424837112,
+          0.08500999957323074
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.003816631172862961
+    },
+    {
+      "frame": 292,
+      "time_s": 9.766667176038027,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        0,
+        0,
+        0,
+        4
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 0,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08500116318464279,
+          0.08500244468450546
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.004529051964250519
+    },
+    {
+      "frame": 293,
+      "time_s": 9.800000511109829,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        0,
+        0,
+        2,
+        3
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 0,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08500669151544571,
+          0.08501288294792175
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.005351769288149788
+    },
+    {
+      "frame": 294,
+      "time_s": 9.833333846181631,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        0,
+        0,
+        4,
+        4
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 0,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08501029759645462,
+          0.08501503616571426
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.006276296933260872
+    },
+    {
+      "frame": 295,
+      "time_s": 9.866667181253433,
+      "phase": "lift",
+      "finger_contact_counts": [
+        4,
+        0,
+        0,
+        3,
+        1
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 0,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08501013368368149,
+          0.08501920104026794
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.007275870551434471
+    },
+    {
+      "frame": 296,
+      "time_s": 9.900000516325235,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 8,
+        "button_base": 0,
+        "bump": 0,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08498664945363998,
+          0.08499450981616974
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008168394227591469
+    },
+    {
+      "frame": 297,
+      "time_s": 9.933333851397038,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 6,
+        "button_base": 0,
+        "bump": 0,
+        "ambiguous": 0,
+        "unclassified": 1
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08498825877904892,
+          0.08500413596630096
+        ],
+        "unclassified": [
+          0.002787161385640502,
+          0.002787161385640502
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008556701724496796
+    },
+    {
+      "frame": 298,
+      "time_s": 9.96666718646884,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 4,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          -0.08500020951032639,
+          -0.084998220205307
+        ],
+        "bump": [
+          -0.0027999598532915115,
+          -0.0027997165452688932
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.00865352574464412
+    },
+    {
+      "frame": 299,
+      "time_s": 10.000000521540642,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 0,
+        "button_base": 0,
+        "bump": 11,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "bump": [
+          -0.0028000313322991133,
+          0.002800063230097294
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008854544271794274
+    },
+    {
+      "frame": 300,
+      "time_s": 10.033333856612444,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.0849999487400055,
+          0.08500000089406967
+        ],
+        "bump": [
+          -0.0028000285383313894,
+          0.002800020156428218
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894918968049004
+    },
+    {
+      "frame": 301,
+      "time_s": 10.066667191684246,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499989658594131,
+          0.0849999487400055
+        ],
+        "bump": [
+          -0.002799998503178358,
+          0.0028000185266137123
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894848187533333
+    },
+    {
+      "frame": 302,
+      "time_s": 10.100000526756048,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.0849999487400055,
+          0.08500000834465027
+        ],
+        "bump": [
+          -0.0028000178281217813,
+          0.00280000944621861
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894846324888184
+    },
+    {
+      "frame": 303,
+      "time_s": 10.13333386182785,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.0849999263882637,
+          0.08500000089406967
+        ],
+        "bump": [
+          -0.0028000441379845142,
+          0.0028000345919281244
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894859363404228
+    },
+    {
+      "frame": 304,
+      "time_s": 10.166667196899652,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.0028000117745250463,
+          0.0028000324964523315
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894838874307587
+    },
+    {
+      "frame": 305,
+      "time_s": 10.200000531971455,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.0849999487400055,
+          0.08500000089406967
+        ],
+        "bump": [
+          -0.0028000124730169773,
+          0.0028000331949442625
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894850050178482
+    },
+    {
+      "frame": 306,
+      "time_s": 10.233333867043257,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499996364116669,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.0028000404126942158,
+          0.0028000599704682827
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894840736952736
+    },
+    {
+      "frame": 307,
+      "time_s": 10.266667202115059,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997109174728,
+          0.08499997854232788
+        ],
+        "bump": [
+          -0.0028000399470329285,
+          0.0028000602032989264
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894840736952736
+    },
+    {
+      "frame": 308,
+      "time_s": 10.300000537186861,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.002800040179863572,
+          0.0028000310994684696
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894838874307587
+    },
+    {
+      "frame": 309,
+      "time_s": 10.333333872258663,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800039015710354,
+          0.0028000592719763517
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894838874307587
+    },
+    {
+      "frame": 310,
+      "time_s": 10.366667207330465,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499996364116669,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.002800039714202285,
+          0.0028000595048069954
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894846324888184
+    },
+    {
+      "frame": 311,
+      "time_s": 10.400000542402267,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499998599290848,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800039714202285,
+          0.00280006043612957
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894825835791542
+    },
+    {
+      "frame": 312,
+      "time_s": 10.43333387747407,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.002800039015710354,
+          0.002800059039145708
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894835149017288
+    },
+    {
+      "frame": 313,
+      "time_s": 10.466667212545872,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800040179863572,
+          0.00280006043612957
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894840736952736
+    },
+    {
+      "frame": 314,
+      "time_s": 10.500000547617674,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499998599290848,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800009911879897,
+          0.0028000602032989264
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.00889482956108184
+    },
+    {
+      "frame": 315,
+      "time_s": 10.533333882689476,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997109174728,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.0028000406455248594,
+          0.0028000602032989264
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894840736952736
+    },
+    {
+      "frame": 316,
+      "time_s": 10.566667217761278,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.0028000399470329285,
+          0.0028000599704682827
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894838874307587
+    },
+    {
+      "frame": 317,
+      "time_s": 10.60000055283308,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.002800039714202285,
+          0.002800059737637639
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.00889485377546878
+    },
+    {
+      "frame": 318,
+      "time_s": 10.633333887904882,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499998599290848,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800039714202285,
+          0.002800059039145708
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894838874307587
+    },
+    {
+      "frame": 319,
+      "time_s": 10.666667222976685,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499996364116669,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.0028000108432024717,
+          0.0028000595048069954
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.00889483142372699
+    },
+    {
+      "frame": 320,
+      "time_s": 10.700000558048487,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08500002324581146
+        ],
+        "bump": [
+          -0.002800040179863572,
+          0.0028000616002827883
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894851912823631
+    },
+    {
+      "frame": 321,
+      "time_s": 10.733333893120289,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.002800040179863572,
+          0.0028000602032989264
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894835149017288
+    },
+    {
+      "frame": 322,
+      "time_s": 10.766667228192091,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499998599290848,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800039481371641,
+          0.002800059737637639
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894844462243034
+    },
+    {
+      "frame": 323,
+      "time_s": 10.800000563263893,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499998599290848,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800040179863572,
+          0.0028000606689602137
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.00889482956108184
+    },
+    {
+      "frame": 324,
+      "time_s": 10.833333898335695,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.0028000399470329285,
+          0.00280006043612957
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894827698436691
+    },
+    {
+      "frame": 325,
+      "time_s": 10.866667233407497,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499998599290848,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.0028000411111861467,
+          0.002800059737637639
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894842599597885
+    },
+    {
+      "frame": 326,
+      "time_s": 10.9000005684793,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.002800010610371828,
+          0.00280006043612957
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894833286372139
+    },
+    {
+      "frame": 327,
+      "time_s": 10.933333903551102,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499998599290848,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800039714202285,
+          0.0028000599704682827
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894850050178482
+    },
+    {
+      "frame": 328,
+      "time_s": 10.966667238622904,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.0028000418096780777,
+          0.0028000613674521446
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.00889483142372699
+    },
+    {
+      "frame": 329,
+      "time_s": 11.000000573694706,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997109174728,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.0028000399470329285,
+          0.002800059737637639
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894850050178482
+    },
+    {
+      "frame": 330,
+      "time_s": 11.033333908766508,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499995619058609,
+          0.08500000089406967
+        ],
+        "bump": [
+          -0.002800010610371828,
+          0.0028000306338071823
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894840736952736
+    },
+    {
+      "frame": 331,
+      "time_s": 11.06666724383831,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499995619058609,
+          0.08499997854232788
+        ],
+        "bump": [
+          -0.0028000404126942158,
+          0.0028000602032989264
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894833286372139
+    },
+    {
+      "frame": 332,
+      "time_s": 11.100000578910112,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997109174728,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.002800040179863572,
+          0.00280006043612957
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894848187533333
+    },
+    {
+      "frame": 333,
+      "time_s": 11.133333913981915,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499998599290848,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800039481371641,
+          0.0028000595048069954
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894842599597885
+    },
+    {
+      "frame": 334,
+      "time_s": 11.166667249053717,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499995619058609,
+          0.08500001579523087
+        ],
+        "bump": [
+          -0.0028000103775411844,
+          0.002800030866637826
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.00889485563811393
+    },
+    {
+      "frame": 335,
+      "time_s": 11.200000584125519,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997109174728,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800039714202285,
+          0.0028000599704682827
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894848187533333
+    },
+    {
+      "frame": 336,
+      "time_s": 11.233333919197321,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.0849999487400055,
+          0.08500000834465027
+        ],
+        "bump": [
+          -0.002800011308863759,
+          0.0028000313322991133
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894859363404228
+    },
+    {
+      "frame": 337,
+      "time_s": 11.266667254269123,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.0849999412894249,
+          0.08500000089406967
+        ],
+        "bump": [
+          -0.0028000115416944027,
+          0.002800030168145895
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.00889485377546878
+    },
+    {
+      "frame": 338,
+      "time_s": 11.300000589340925,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499996364116669,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.002800039481371641,
+          0.0028000581078231335
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894844462243034
+    },
+    {
+      "frame": 339,
+      "time_s": 11.333333924412727,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08500000834465027
+        ],
+        "bump": [
+          -0.002800010610371828,
+          0.0028000599704682827
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894823973146393
+    },
+    {
+      "frame": 340,
+      "time_s": 11.36666725948453,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.0028000399470329285,
+          0.0028000606689602137
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894840736952736
+    },
+    {
+      "frame": 341,
+      "time_s": 11.400000594556332,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499995619058609,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.002800040179863572,
+          0.0028000304009765387
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894850050178482
+    },
+    {
+      "frame": 342,
+      "time_s": 11.433333929628134,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499998599290848,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800040179863572,
+          0.0028000602032989264
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894838874307587
+    },
+    {
+      "frame": 343,
+      "time_s": 11.466667264699936,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499995619058609,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.002800010610371828,
+          0.0028000304009765387
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894833286372139
+    },
+    {
+      "frame": 344,
+      "time_s": 11.500000599771738,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.0028000399470329285,
+          0.0028000602032989264
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894859363404228
+    },
+    {
+      "frame": 345,
+      "time_s": 11.53333393484354,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.002800040179863572,
+          0.002800059737637639
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894837011662438
+    },
+    {
+      "frame": 346,
+      "time_s": 11.566667269915342,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997109174728,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800040179863572,
+          0.0028000602032989264
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894842599597885
+    },
+    {
+      "frame": 347,
+      "time_s": 11.600000604987144,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499998599290848,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800039714202285,
+          0.002800059737637639
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894846324888184
+    },
+    {
+      "frame": 348,
+      "time_s": 11.633333940058947,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.002800039714202285,
+          0.002800059737637639
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894835149017288
+    },
+    {
+      "frame": 349,
+      "time_s": 11.666667275130749,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997109174728,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.0028000108432024717,
+          0.002800030866637826
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894835149017288
+    },
+    {
+      "frame": 350,
+      "time_s": 11.70000061020255,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499998599290848,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800040179863572,
+          0.0028000592719763517
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894825835791542
+    },
+    {
+      "frame": 351,
+      "time_s": 11.733333945274353,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499998599290848,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800039714202285,
+          0.0028000588063150644
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894840736952736
+    },
+    {
+      "frame": 352,
+      "time_s": 11.766667280346155,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499998599290848,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800040179863572,
+          0.002800061833113432
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894842599597885
+    },
+    {
+      "frame": 353,
+      "time_s": 11.800000615417957,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997109174728,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.002800039714202285,
+          0.0028000595048069954
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.00889485377546878
+    },
+    {
+      "frame": 354,
+      "time_s": 11.83333395048976,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997109174728,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800039481371641,
+          0.0028000602032989264
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894835149017288
+    },
+    {
+      "frame": 355,
+      "time_s": 11.866667285561562,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499998599290848,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800039714202285,
+          0.0028000602032989264
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894833286372139
+    },
+    {
+      "frame": 356,
+      "time_s": 11.900000620633364,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800011308863759,
+          0.0028000606689602137
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894827698436691
+    },
+    {
+      "frame": 357,
+      "time_s": 11.933333955705166,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.0028000399470329285,
+          0.0028000592719763517
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894825835791542
+    },
+    {
+      "frame": 358,
+      "time_s": 11.966667290776968,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.0028000404126942158,
+          0.00280006043612957
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894850050178482
+    },
+    {
+      "frame": 359,
+      "time_s": 12.00000062584877,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.0849999487400055,
+          0.08500001579523087
+        ],
+        "bump": [
+          -0.0028000103775411844,
+          0.0028000310994684696
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894851912823631
+    },
+    {
+      "frame": 360,
+      "time_s": 12.033333960920572,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499998599290848,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.0028000108432024717,
+          0.0028000602032989264
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894827698436691
+    },
+    {
+      "frame": 361,
+      "time_s": 12.066667295992374,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499996364116669,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.002800039481371641,
+          0.0028000304009765387
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894835149017288
+    },
+    {
+      "frame": 362,
+      "time_s": 12.100000631064177,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499998599290848,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800039481371641,
+          0.002800059737637639
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894838874307587
+    },
+    {
+      "frame": 363,
+      "time_s": 12.133333966135979,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499996364116669,
+          0.08500001579523087
+        ],
+        "bump": [
+          -0.002800010610371828,
+          0.0028000304009765387
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894844462243034
+    },
+    {
+      "frame": 364,
+      "time_s": 12.16666730120778,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997109174728,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.002800039714202285,
+          0.0028000585734844208
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894857500759079
+    },
+    {
+      "frame": 365,
+      "time_s": 12.200000636279583,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499998599290848,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.002800039714202285,
+          0.0028000602032989264
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894848187533333
+    },
+    {
+      "frame": 366,
+      "time_s": 12.233333971351385,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499996364116669,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.002800039714202285,
+          0.0028000599704682827
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894838874307587
+    },
+    {
+      "frame": 367,
+      "time_s": 12.266667306423187,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499995619058609,
+          0.08500000834465027
+        ],
+        "bump": [
+          -0.0028000110760331154,
+          0.002800030866637826
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894840736952736
+    },
+    {
+      "frame": 368,
+      "time_s": 12.30000064149499,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499995619058609,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800039714202285,
+          0.0028000304009765387
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.00889482956108184
+    },
+    {
+      "frame": 369,
+      "time_s": 12.333333976566792,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.0028000406455248594,
+          0.00280006043612957
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894827698436691
+    },
+    {
+      "frame": 370,
+      "time_s": 12.366667311638594,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.0028000378515571356,
+          0.002800028072670102
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.00889485377546878
+    },
+    {
+      "frame": 371,
+      "time_s": 12.400000646710396,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997109174728,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800008747726679,
+          0.002800028072670102
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894835149017288
+    },
+    {
+      "frame": 372,
+      "time_s": 12.433333981782198,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499996364116669,
+          0.08500000834465027
+        ],
+        "bump": [
+          -0.0028000082820653915,
+          0.002800028072670102
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894851912823631
+    },
+    {
+      "frame": 373,
+      "time_s": 12.466667316854,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.0849999487400055,
+          0.08500000089406967
+        ],
+        "bump": [
+          -0.002800008049234748,
+          0.002800028771162033
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894857500759079
+    },
+    {
+      "frame": 374,
+      "time_s": 12.500000651925802,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08500000089406967
+        ],
+        "bump": [
+          -0.0028000378515571356,
+          0.0028000581078231335
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894857500759079
+    },
+    {
+      "frame": 375,
+      "time_s": 12.533333986997604,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499995619058609,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.002800037618726492,
+          0.0028000567108392715
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894846324888184
+    },
+    {
+      "frame": 376,
+      "time_s": 12.566667322069407,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997109174728,
+          0.08500000834465027
+        ],
+        "bump": [
+          -0.002800008514896035,
+          0.0028000283055007458
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894844462243034
+    },
+    {
+      "frame": 377,
+      "time_s": 12.600000657141209,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499996364116669,
+          0.08500000089406967
+        ],
+        "bump": [
+          -0.002800008514896035,
+          0.002800057642161846
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894823973146393
+    },
+    {
+      "frame": 378,
+      "time_s": 12.63333399221301,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997109174728,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.0028000373858958483,
+          0.002800057642161846
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894842599597885
+    },
+    {
+      "frame": 379,
+      "time_s": 12.666667327284813,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.0849999412894249,
+          0.08500000089406967
+        ],
+        "bump": [
+          -0.002800009213387966,
+          0.0028000292368233204
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894851912823631
+    },
+    {
+      "frame": 380,
+      "time_s": 12.700000662356615,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08500000089406967
+        ],
+        "bump": [
+          -0.0028000371530652046,
+          0.002800057176500559
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894838874307587
+    },
+    {
+      "frame": 381,
+      "time_s": 12.733333997428417,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997854232788,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.0028000078164041042,
+          0.002800028072670102
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894848187533333
+    },
+    {
+      "frame": 382,
+      "time_s": 12.76666733250022,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.0849999487400055,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.002800008514896035,
+          0.002800027607008815
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.00889483142372699
+    },
+    {
+      "frame": 383,
+      "time_s": 12.800000667572021,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499998599290848,
+          0.08500000089406967
+        ],
+        "bump": [
+          -0.002800037618726492,
+          0.0028000581078231335
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894851912823631
+    },
+    {
+      "frame": 384,
+      "time_s": 12.833334002643824,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.0849999487400055,
+          0.08500000089406967
+        ],
+        "bump": [
+          -0.002800008747726679,
+          0.0028000278398394585
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.00889485563811393
+    },
+    {
+      "frame": 385,
+      "time_s": 12.866667337715626,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499995619058609,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800008049234748,
+          0.0028000283055007458
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894833286372139
+    },
+    {
+      "frame": 386,
+      "time_s": 12.900000672787428,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997109174728,
+          0.08499999344348907
+        ],
+        "bump": [
+          -0.002800037618726492,
+          0.0028000581078231335
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894850050178482
+    },
+    {
+      "frame": 387,
+      "time_s": 12.93333400785923,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499997109174728,
+          0.08499998599290848
+        ],
+        "bump": [
+          -0.002800037618726492,
+          0.0028000278398394585
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894842599597885
+    },
+    {
+      "frame": 388,
+      "time_s": 12.966667342931032,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.08499996364116669,
+          0.08500001579523087
+        ],
+        "bump": [
+          -0.002800008049234748,
+          0.0028000285383313894
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894857500759079
+    },
+    {
+      "frame": 389,
+      "time_s": 13.000000678002834,
+      "phase": "lift",
+      "finger_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finger_slider_contact_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "table_contact_counts": {
+        "handle": 4,
+        "button_base": 0,
+        "bump": 12,
+        "ambiguous": 0,
+        "unclassified": 0
+      },
+      "table_contact_local_z_range_m": {
+        "handle": [
+          0.0849999487400055,
+          0.08500001579523087
+        ],
+        "bump": [
+          -0.002800009911879897,
+          0.0028000292368233204
+        ]
+      },
+      "slider_displacement_from_lower_m": 0.008894844462243034
+    }
+  ],
+  "causal_limit": "Sequence localizes support loss; it does not prove edge placement, friction, servo response, or bump geometry is the unique cause.",
+  "physics_trials": 0
+}
