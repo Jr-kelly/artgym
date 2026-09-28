@@ -1,0 +1,26 @@
+{
+  "method": "Oracle geometric thumb motor feedback, fixed nonthumb motor support; untrained control baseline",
+  "contact_link": "hand_r_thumb_pad_link",
+  "anchor_local": [
+    -0.0025858,
+    -0.0039094,
+    0.0013729
+  ],
+  "anchor_source": "V2-01 measured contact at settled frame59; actual collision point not tip mesh average",
+  "contact_x_m": 0.003,
+  "slider_material_z_m": 0.01455,
+  "normal_compression_m": 0.0004,
+  "normal_weight": 0.1,
+  "slider_error_gain": 0.35,
+  "max_long_correction_m": 0.004,
+  "ramp_frames": 90,
+  "inputs": [
+    "hand joints",
+    "wrist pose",
+    "LIVE simulation body pose",
+    "LIVE simulation passive slider q"
+  ],
+  "deployable": false,
+  "material_offset_at_takeover": true,
+  "change": "Single interface correction: preserve actual thumb/slider longitudinal material offset after real preparation, not old closed-state offset"
+}

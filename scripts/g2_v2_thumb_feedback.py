@@ -8,8 +8,14 @@ from scripts.wuji_kinematics import WujiKinematics
 class ThumbFeedback:
  def __init__(self,config,geometry,q,targets,wrist,obj,slider):
   self.c=config;self.fk=WujiKinematics();self.g=geometry;self.support=np.array(targets).copy();self.previous=np.array(targets).copy();self.anchor=np.array(config['anchor_local']);self.link=config['contact_link'];self.start=float(slider)-geometry.lower;self.last=dict()
+  self.material_z=config['slider_material_z_m']
+  if config.get('material_offset_at_takeover',False):
+   f=np.linalg.inv(obj)@wrist@self.fk.forward(q)[self.link];point=f[:3,:3]@self.anchor+f[:3,3]
+   self.material_z=float(point[2]-geometry.joint_xyz[2]-slider)
+   assert abs(self.material_z)<geometry.spec['measured']['button_body_length_m']/2, 'Initial thumb material point outside button'
+  self.initialization=dict(material_z_m=self.material_z,actual_slider_m=float(slider),start_distance_m=self.start,source='one-time actual hand FK and simulation slider/body truth' if config.get('material_offset_at_takeover',False) else 'old contact material offset')
  def solve(self,q,wrist,obj,distance):
-  relative=np.linalg.inv(wrist)@obj;v=np.array([self.c['contact_x_m'],self.g.joint_xyz[1]+self.g.spec['geometry_hypothesis']['button_base_thickness_m']/2-self.c['normal_compression_m'],self.g.joint_xyz[2]+self.g.lower+distance+self.c['slider_material_z_m']]);target=relative[:3,:3]@v+relative[:3,3]
+  relative=np.linalg.inv(wrist)@obj;v=np.array([self.c['contact_x_m'],self.g.joint_xyz[1]+self.g.spec['geometry_hypothesis']['button_base_thickness_m']/2-self.c['normal_compression_m'],self.g.joint_xyz[2]+self.g.lower+distance+self.material_z]);target=relative[:3,:3]@v+relative[:3,3]
   fixed=np.array(q,dtype=float);normal=-relative[:3,1]
   def calculate(x):
    fixed[16:]=x;t=self.fk.forward(fixed)[self.link];return t[:3,:3]@self.anchor+t[:3,3],t[:3,0]

@@ -674,6 +674,14 @@ def main():
                         tick(label)
                     if pickup_feedback is not None:(args.output/'pickup-finger-feedback.json').write_text(json.dumps(pickup_feedback.report(),indent=2)+'\n')
                     check=fixed_acquisition_hold(records[first:],hold_o,hold_w,table_z)
+                    if args.short_lift_diagnostic:
+                        corners=knife_geometry.collision_parts(slider_lower)[0]['vertices']
+                        clearances=[]
+                        for row in records[first:]:
+                            ot=transform(row['object'][:3],row['object'][3:]);clearances.append(float((corners@ot[2,:3]+ot[2,3]-table_z).min()))
+                        check['full_lift_retained']=check['retained']
+                        check['retained']=bool(check['stable'] and check['table_free'] and min(clearances)>.002 and check['opposed_contact_fraction']>=.9)
+                        check.update(scope='Short2-5cm lift diagnostic ONLY, not full acquisition',minimum_body_table_clearance_m=min(clearances),short_lift_retained=check['retained'])
                     (args.output/'pickup-hold-check.json').write_text(json.dumps(check,indent=2)+'\n')
                     if not check['retained']:raise ValueError('Pickup failed fixed-reference hold before flip')
                     continue
@@ -1055,7 +1063,7 @@ def main():
             assert args.group=='A' and knife_geometry is not None and args.learned_operation_policy is None
             from scripts.g2_v2_thumb_feedback import ThumbFeedback
             config=json.loads(args.geometric_operation.read_text());geometric_runtime=ThumbFeedback(config,knife_geometry,q,targets[hand_idx],w,o,sl)
-            (args.output/'geometric-operation.json').write_text(json.dumps(config,indent=2)+'\n')
+            (args.output/'geometric-operation.json').write_text(json.dumps(dict(config=config,actual_initialization=geometric_runtime.initialization),indent=2)+'\n')
         if args.learned_operation_policy:
             from scripts.g2_local_runtime import LocalPolicyRuntime
             learned_runtime=LocalPolicyRuntime(args.learned_operation_policy,dof[:,0].cpu().numpy(),dof[:,1].cpu().numpy(),targets,
@@ -1109,6 +1117,8 @@ def main():
             report.update(preset_hold_success=bool(grasp_success),preset_scope=takeover['preset_scope'],
                 preset_candidate_sha256=hashlib.sha256(args.preset_candidate.read_bytes()).hexdigest())
             if not grasp_success:report['failure_class']='preset_candidate_hold_failed_before_policy'
+        if args.short_lift_diagnostic:
+            report['short_lift_diagnostic']=True;report['full_acquisition_evaluated']=False;report['short_lift_check']=json.loads((args.output/'pickup-hold-check.json').read_text())
         report.update(group=args.group,args={k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()},
             teacher_sha256=hashlib.sha256(args.teacher.read_bytes()).hexdigest(),
             student_sha256=hashlib.sha256(args.student.read_bytes()).hexdigest() if args.group=='C' else None,
