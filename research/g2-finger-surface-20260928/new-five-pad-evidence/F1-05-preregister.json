@@ -1,0 +1,12 @@
+{
+  "id": "F1-05",
+  "utc": "2026-09-28T07:59:44.665825+00:00",
+  "budget_slot": 77,
+  "hypothesis": "Fixed motor references cannot follow the observed2\u20134mm/0.15rad within-hand movement before lateral pad contact loss; bounded finger IK using actual object truth may preserve contacts",
+  "reference": "F1-03, no extra closed dwell",
+  "single_controller_change": "Oracle finger contact following after20mm actual knife lift; joint cap0.12rad/slew0.01rad per30Hz step, same nominal4mm closing and arm path",
+  "scope": "Pickup only, not deployment/training/teacher success",
+  "guard": "Original physical limits,0.5mm table and exact convex intersection check; no object state writes or force actuation",
+  "metrics": "Same fixed reference1s hold10mm/0.25rad, minheight0.85m; every finger contact and passive slider reported",
+  "offline_check": "feedback-offline-exact-clearance-check.json: first command identical,35active recorded frames,12safe updates; not physical evidence"
+}

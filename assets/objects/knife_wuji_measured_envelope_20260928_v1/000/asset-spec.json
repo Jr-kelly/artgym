@@ -1,0 +1,102 @@
+{
+  "version": "knife_wuji_measured_envelope_20260928_v1",
+  "measurement_source": "User physical measurement supplied2026-09-28 during F1-06; approximate, no tolerances supplied",
+  "measured": {
+    "overall_length_m": 0.17,
+    "overall_max_width_m": 0.03,
+    "overall_thickness_m": 0.008,
+    "button_body_length_m": 0.045,
+    "button_has_central_upward_bump": true
+  },
+  "unmeasured": [
+    "whether overall thickness includes button and bump",
+    "actual handle outline and thickness distribution",
+    "button width",
+    "button base thickness",
+    "central bump height, width and outline",
+    "actual slider travel",
+    "closed button center relative to handle",
+    "mass and inertia",
+    "friction, pushing resistance and latch mechanism"
+  ],
+  "geometry_hypothesis": {
+    "thickness_interpretation": "Primary provisional interpretation:8mm is the closed assembly envelope including button and bump; do not add bump height on top of8mm",
+    "handle_thickness_m": 0.006,
+    "handle_cross_sections_z_width_m": [
+      [
+        -0.085,
+        0.024
+      ],
+      [
+        -0.06,
+        0.03
+      ],
+      [
+        0.06,
+        0.03
+      ],
+      [
+        0.085,
+        0.02
+      ]
+    ],
+    "handle_outline_status": "Unmeasured convex tapered-envelope proxy;170x30 are maxima, not a170x30x8 rectangular solid handle",
+    "button_width_m": 0.012,
+    "button_base_thickness_m": 0.001,
+    "button_center_y_m": 0.0035,
+    "button_closed_center_z_m": -0.02,
+    "bump_width_m": 0.01,
+    "bump_length_m": 0.008,
+    "bump_height_m": 0.001,
+    "bump_top_width_ratio": 0.7,
+    "bump_top_length_ratio": 0.7,
+    "bump_shape_status": "Unmeasured chamfered central raised pad, separate visual and collision geometry on the passive slider link"
+  },
+  "joint_hypothesis": {
+    "lower_m": -0.03267458688196273,
+    "travel_m": 0.05,
+    "operation_excursion_m": 0.04,
+    "status": "Travel and operation excursion inherited solely for controlled comparison, NOT measured and NOT inferred from45mm button length"
+  },
+  "physics_hypothesis": {
+    "body_mass_kg": 0.029,
+    "button_mass_kg": 0.006,
+    "knife_friction": 3.0,
+    "slider_damping": 0.3,
+    "slider_friction": 0.001,
+    "status": "Retain previous simulation values, uncalibrated. No force/latch inference from external dimensions. New geometry means inertia may change under existing loader override; report effective inertia."
+  },
+  "planning": {
+    "side_half_width_m": 0.015,
+    "side_contact_y_interval_m": [
+      -0.002,
+      0.001
+    ],
+    "side_flat_z_interval_m": [
+      -0.06,
+      0.06
+    ],
+    "side_contact_status": "Planning within the constant-width portion of the assumed tapered handle; require exact convex check everywhere"
+  },
+  "asset_urdf": "assets/objects/knife_wuji_measured_envelope_20260928_v1/000/mobility.urdf",
+  "generated_audit": {
+    "closed_envelope_xyz_m": [
+      0.03,
+      0.008,
+      0.17
+    ],
+    "collision_components": 3,
+    "passive_prismatic_dofs": 1,
+    "button_length_m": 0.045,
+    "travel_m": 0.05,
+    "bump_height_m": 0.001,
+    "interpretation": "Envelope agreement under explicit include-bump thickness hypothesis, not a measured CAD replica",
+    "baseline_urdf_sha256": "5229c66b183cc6da04190bf2d6cfbd035fadd227340dc8f26602b207171b461c"
+  },
+  "file_sha256": {
+    "meshes/bump.obj": "fa49a430e16ed5da7dc3b5fc952e4583eb3a6c5c080769251fd7df9d2e11e135",
+    "meshes/button.obj": "1c57f52717a877a0499bd35d8209b2405587b204fa7c3cc43877b4531ff2af65",
+    "meshes/handle.obj": "7134f2a7ae756842a2826f8cf9981f1c8bc157be4f9937c5a0e25229c29a2421",
+    "mobility.urdf": "15a76a6d7d60aa7564bdad94fa870ab9556e842edfe33257a38a83a27f62b881"
+  }
+}

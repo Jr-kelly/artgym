@@ -23,9 +23,13 @@ def main():
     p.add_argument('--balanced-margin',action='store_true',help='Leave0.08rad finger opening margin and request <=10mm longitudinal offset, allowing a closer wrist planning box')
     p.add_argument('--self-collision-audit',type=Path,help='Add all exact-audit identified link pairs as conservative separating-plane constraints')
     p.add_argument('--long-spacing',type=float,default=.012)
+    p.add_argument('--knife-spec',type=Path,help='Generated new asset-spec.json; uses its actual convex collisions and explicitly provisional initial table height')
     a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
     g=DigitGeometry(max_face_axes=20);h=g.w
     object_world=transform(*[json.loads(a.localization.read_text())['object'][v] for v in [slice(0,3),slice(3,7)]])
+    from scripts.g2_knife_geometry import KnifeGeometry
+    knife=KnifeGeometry(a.knife_spec);half_width=knife.side_half_width;ylo,yhi=knife.contact_y_interval
+    if a.knife_spec:object_world=knife.table_pose(object_world)
     base_rotation=np.array([[0.,0,1],[1.,0,0],[0,1.,0]])
     normals=np.array([[-1.,0,0]]+[[1.,0,0]]*4)
     # Long-axis slots may be used anywhere within them; no fixed old contact z.
@@ -33,6 +37,11 @@ def main():
     zmax=np.array([.06,.063,.024,.002,-.019])
     boxes=[(np.zeros(3),np.array([.0095,.004,.0735])),
         (np.array([0,.0055,-.02205]),np.array([.005,.0015,.015]))]
+    knife_parts=knife.collision_parts()
+    if a.knife_spec:
+        # Flat side assumption ends at60mm; don't place contacts on a taper
+        # while using a constant side normal/width objective.
+        zmin=np.maximum(zmin,-.055);zmax=np.minimum(zmax,.055)
     meshes={n:np.concatenate([v for v,_ in m]) for n,m in g.meshes.items()}
     axes={n:np.concatenate([v for _,v in m]) for n,m in g.meshes.items()}
     self_pairs=[]
@@ -51,9 +60,14 @@ def main():
         for n,v in vertices.items():
             ax=np.r_[np.eye(3),axes[n]@frames[n][:3,:3].T]
             proj=v@ax.T
-            for center,half in boxes:
-                low=center@ax.T-abs(ax)@half;high=center@ax.T+abs(ax)@half
-                separation.append(np.maximum(proj.min(0)-high,low-proj.max(0)).max())
+            if a.knife_spec:
+                for part in knife_parts:
+                    ka=np.r_[ax,part['normals']];pa=v@ka.T;pb=part['vertices']@ka.T
+                    separation.append(np.maximum(pa.min(0)-pb.max(0),pb.min(0)-pa.max(0)).max())
+            else:
+                for center,half in boxes:
+                    low=center@ax.T-abs(ax)@half;high=center@ax.T+abs(ax)@half
+                    separation.append(np.maximum(proj.min(0)-high,low-proj.max(0)).max())
             height.append((v@object_world[2,:3]+object_world[2,3]-.75).min())
         for n,m in self_pairs:
             ax=np.r_[axes[n]@frames[n][:3,:3].T,axes[m]@frames[m][:3,:3].T]
@@ -62,8 +76,8 @@ def main():
         return wrist,q,np.array(contact),np.array(facing),np.array(separation),np.array(height)
     def residual(x,seed,collision_weight):
         wrist,q,contact,facing,gap,height=geometry(x)
-        target_y=np.clip(contact[:,1],-.003,.002) if a.refine else np.full(5,-.001)
-        xy=contact[:,:2]-np.c_[normals[:,0]*(.0097 if a.refine else .00952),target_y]
+        target_y=np.clip(contact[:,1],ylo,yhi) if a.refine else np.full(5,-.001)
+        xy=contact[:,:2]-np.c_[normals[:,0]*(half_width+(.0002 if a.refine else .00002)),target_y]
         z=contact[:,2];range_error=z-np.clip(z,zmin,zmax)
         residuals=np.r_[xy.ravel()*200,range_error*150,
             np.minimum(z[1:-1]-z[2:]-a.long_spacing,0)*150,
@@ -107,7 +121,7 @@ def main():
         if a.refine:
             def constraints(v):
                 w,q,c,f,gap,height=geometry(v)
-                tg=np.c_[normals[:,0]*.0095,np.clip(c[:,1],-.003,.002),np.clip(c[:,2],zmin,zmax)]
+                tg=np.c_[normals[:,0]*half_width,np.clip(c[:,1],ylo,yhi),np.clip(c[:,2],zmin,zmax)]
                 values=np.r_[(height-.00055)*1000,(gap-.00001)*1000,
                     f-.32,(.0009-np.linalg.norm(c-tg,axis=1))*1000,
                     (c[1:-1,2]-c[2:,2]-a.long_spacing)*1000,
@@ -119,7 +133,7 @@ def main():
                 options=dict(maxiter=180,ftol=1e-10))
             x=fit.x;stages.append(dict(method='SLSQP',success=bool(fit.success),iterations=fit.nit,message=fit.message))
         wrist,q,points,facing,gaps,heights=geometry(x)
-        targets=np.c_[normals[:,0]*.0095,np.clip(points[:,1],-.003,.002) if a.refine else np.full(5,-.001),np.clip(points[:,2],zmin,zmax)]
+        targets=np.c_[normals[:,0]*half_width,np.clip(points[:,1],ylo,yhi) if a.refine else np.full(5,-.001),np.clip(points[:,2],zmin,zmax)]
         error=np.linalg.norm(points-targets,axis=1)
         ordering=points[1:-1,2]-points[2:,2]
         accepted=bool(error.max()<.001 and facing.min()>.3 and gaps.min()>=0 and heights.min()>=.0005 and ordering.min()>=a.long_spacing)
@@ -141,8 +155,12 @@ def main():
         row['self_collision_pairs_constrained']=self_pairs
         row['required_long_spacing_m']=a.long_spacing
         if a.refine:
-            row.update(source_plan=str(a.refine[seedid]),contact_height_interval_m=[-.003,.002],
+            row.update(source_plan=str(a.refine[seedid]),contact_height_interval_m=[ylo,yhi],
                 constraint_change='Contact may occupy real side face y in [-3,+2]mm; old y=-1mm was an arbitrary planner line. Physical dimensions, collision and acceptance thresholds unchanged.')
+        if a.knife_spec:
+            row.update(knife_spec=str(a.knife_spec),planning_object_world=object_world.tolist(),
+                planning_pose_status='Provisional table resting-envelope pose preserving old orientation; actual settling on new geometry unmeasured',
+                constraint_change='New explicitly parameterized measured-envelope asset, actual three convex components; baseline asset unchanged')
         (a.output/(row['name']+'.json')).write_text(json.dumps(row,indent=2)+'\n');results.append(row)
         print(json.dumps({k:row[k] for k in ['name','contact_errors_m','pad_facing_cosines','min_convex_separating_gap_m','min_table_clearance_m','geometric_pass','seconds']}),flush=True)
     (a.output/'summary.json').write_text(json.dumps(dict(candidates=results,physics_executions=0,training_configs=0),indent=2)+'\n')

@@ -25,6 +25,7 @@ def main():
     p=argparse.ArgumentParser()
     for key in ['plan','localization','output']:
         p.add_argument('--'+key,type=Path,required=True)
+    p.add_argument('--knife-spec',type=Path)
     a=p.parse_args();assert not a.output.exists()
     plan=json.loads(a.plan.read_text());loc=json.loads(a.localization.read_text())
     g=DigitGeometry();q=np.asarray(plan['touch_q']);frames=g.w.forward(q);wrist=np.asarray(plan['wrist_in_knife'])
@@ -43,6 +44,10 @@ def main():
     corners=np.array([[x,y,z] for x in [-1,1] for y in [-1,1] for z in [-1,1]])
     boxes={'body':corners*np.array([.0095,.004,.0735]),
         'slider':corners*np.array([.005,.0015,.015])+[0,.0055,.010624586881962734-.03267458826303482]}
+    if a.knife_spec:
+        from scripts.g2_knife_geometry import KnifeGeometry
+        knife=KnifeGeometry(a.knife_spec)
+        boxes={part['link']+'-component'+str(part['index']):part['vertices'] for part in knife.collision_parts()}
     body_overlaps=[]
     for n,v in points.items():
         local=v@wrist[:3,:3].T+wrist[:3,3]
@@ -51,6 +56,8 @@ def main():
             if r is None or r>1e-5:body_overlaps.append(dict(hand_link=n,knife_link=name,intersection_inscribed_radius_m=r))
     arm=G2Kinematics();table=ArmTableCollision(.75)
     object_world=transform(loc['object'][:3],loc['object'][3:]);target=object_world@wrist
+    if a.knife_spec:
+        object_world=knife.table_pose(object_world);target=object_world@wrist
     qa,err=arm.solve(target,np.asarray(loc['grasp_q']),attempts=1)
     near_limits=[]
     for i,name in enumerate(g.w.names):
@@ -63,6 +70,7 @@ def main():
         g2_ik=err,g2_arm_q=qa.tolist(),g2_arm_table=table.collisions(qa),
         joints_with_less_than_0p01rad_margin=near_limits,
         ready_for_physics=False,outstanding='Touch-only screening. Open/close approach, finger-table path and flip/flatten handoff not validated.')
+    if a.knife_spec:result['knife_spec']=str(a.knife_spec)
     a.output.write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
 
 

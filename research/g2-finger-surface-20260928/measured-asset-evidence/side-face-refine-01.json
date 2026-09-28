@@ -1,0 +1,312 @@
+{
+  "name": "side-face-refine-01",
+  "kind": "geometric_touch_only",
+  "validation": "No physics execution; accepted only requests further exact collision/path checks",
+  "initial_flex": null,
+  "initial_pitch_rad": null,
+  "initial_thumb": null,
+  "wrist_in_knife": [
+    [
+      -0.33198561588186204,
+      -0.6665883997336776,
+      0.6674170032206518,
+      -0.06276569793427582
+    ],
+    [
+      0.7230725421881956,
+      0.2745422813121603,
+      0.633871149765798,
+      -0.12257752920135148
+    ],
+    [
+      -0.6057653420104527,
+      0.6930270132631262,
+      0.3908476804415625,
+      -0.023398980093386482
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "touch_q": [
+    0.16032217493481477,
+    -0.28999999433208296,
+    0.6850753521022951,
+    1.4084765109762727,
+    0.468148231586497,
+    -0.2653833236722682,
+    0.7120203837211101,
+    0.9650722486717949,
+    0.9066101243090344,
+    -0.08853559048342087,
+    -0.006877666547332771,
+    0.9912478991624313,
+    0.6494067529146312,
+    -0.14346724183191886,
+    0.5885996578142472,
+    0.8043979556890476,
+    1.518709682452286,
+    0.06867477576065135,
+    -0.38419996353836533,
+    1.0129452549896885
+  ],
+  "joint_names": [
+    "hand_r_index_joint1",
+    "hand_r_index_joint2",
+    "hand_r_index_joint3",
+    "hand_r_index_joint4",
+    "hand_r_middle_joint1",
+    "hand_r_middle_joint2",
+    "hand_r_middle_joint3",
+    "hand_r_middle_joint4",
+    "hand_r_pinky_joint1",
+    "hand_r_pinky_joint2",
+    "hand_r_pinky_joint3",
+    "hand_r_pinky_joint4",
+    "hand_r_ring_joint1",
+    "hand_r_ring_joint2",
+    "hand_r_ring_joint3",
+    "hand_r_ring_joint4",
+    "hand_r_thumb_joint1",
+    "hand_r_thumb_joint2",
+    "hand_r_thumb_joint3",
+    "hand_r_thumb_joint4"
+  ],
+  "contact_targets": [
+    [
+      -0.015,
+      -0.002,
+      -0.02
+    ],
+    [
+      0.015,
+      -0.002,
+      0.026053126451713537
+    ],
+    [
+      0.015,
+      -0.002,
+      -0.0037178572845958323
+    ],
+    [
+      0.015,
+      -0.002,
+      -0.025218863398506278
+    ],
+    [
+      0.015,
+      -0.002,
+      -0.04521864492849409
+    ]
+  ],
+  "contact_normals": [
+    [
+      -1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ]
+  ],
+  "contact_points": [
+    [
+      -0.015194176602302914,
+      -0.0022534422462254207,
+      -0.020026120784012474
+    ],
+    [
+      0.015226966348480966,
+      -0.002166397960919712,
+      0.026053126451713537
+    ],
+    [
+      0.01522634129954957,
+      -0.00200944619868175,
+      -0.0037178572845958323
+    ],
+    [
+      0.015233210299143407,
+      -0.0020053778764751538,
+      -0.025218863398506278
+    ],
+    [
+      0.015231798868179658,
+      -0.0020114763366542968,
+      -0.04521864492849409
+    ]
+  ],
+  "contact_errors_m": [
+    0.0003203432852599184,
+    0.00028142850733538265,
+    0.00022653832909978733,
+    0.00023327229835953415,
+    0.00023208279038389174
+  ],
+  "pad_facing_cosines": [
+    0.47604602752250147,
+    0.5539993965486125,
+    0.5906960942932693,
+    0.6082010491972893,
+    0.6834414726519032
+  ],
+  "min_convex_separating_gap_m": 9.731621235013754e-06,
+  "min_table_clearance_m": 0.0005500033928523829,
+  "length_contact_spacing_m": [
+    0.02977098373630937,
+    0.021501006113910447,
+    0.019999781529987812
+  ],
+  "joint_margin_min_rad": 0.08000000000000068,
+  "geometric_pass": false,
+  "stages": [
+    {
+      "collision_weight": 100,
+      "cost": 0.034224487509290503,
+      "nfev": 65,
+      "message": "The maximum number of function evaluations is exceeded."
+    },
+    {
+      "collision_weight": 500,
+      "cost": 0.025244050451255162,
+      "nfev": 110,
+      "message": "The maximum number of function evaluations is exceeded."
+    },
+    {
+      "method": "SLSQP",
+      "success": false,
+      "iterations": 180,
+      "message": "Iteration limit reached"
+    }
+  ],
+  "seconds": 84.24294805526733,
+  "active_fingers": [
+    "thumb",
+    "index",
+    "middle",
+    "ring",
+    "pinky"
+  ],
+  "excluded_fingers": [],
+  "thumb_palm_constraint": true,
+  "balance_long_axis_requested": true,
+  "thumb_to_four_pad_centroid_z_m": -0.00800056099404181,
+  "balanced_margin_requested": true,
+  "self_collision_pairs_constrained": [
+    [
+      "hand_r_middle_link2",
+      "hand_r_ring_link2"
+    ],
+    [
+      "hand_r_middle_link2",
+      "hand_r_ring_link3"
+    ],
+    [
+      "hand_r_middle_link3",
+      "hand_r_ring_link3"
+    ],
+    [
+      "hand_r_middle_link4",
+      "hand_r_ring_link3"
+    ],
+    [
+      "hand_r_middle_link4",
+      "hand_r_ring_link4"
+    ],
+    [
+      "hand_r_middle_pad_link",
+      "hand_r_ring_link4"
+    ],
+    [
+      "hand_r_pinky_link2",
+      "hand_r_ring_link2"
+    ],
+    [
+      "hand_r_pinky_link3",
+      "hand_r_ring_link2"
+    ],
+    [
+      "hand_r_pinky_link3",
+      "hand_r_ring_link3"
+    ],
+    [
+      "hand_r_pinky_link3",
+      "hand_r_ring_link4"
+    ],
+    [
+      "hand_r_pinky_link4",
+      "hand_r_ring_link3"
+    ],
+    [
+      "hand_r_pinky_link4",
+      "hand_r_ring_link4"
+    ],
+    [
+      "hand_r_pinky_link4",
+      "hand_r_ring_pad_link"
+    ],
+    [
+      "hand_r_pinky_pad_link",
+      "hand_r_ring_pad_link"
+    ],
+    [
+      "hand_r_base_link",
+      "hand_r_thumb_link3"
+    ]
+  ],
+  "required_long_spacing_m": 0.02,
+  "source_plan": "runs/g2-finger-surface-20260928/thumb-palm-clearance/side-face-refine-00.json",
+  "contact_height_interval_m": [
+    -0.002,
+    0.001
+  ],
+  "constraint_change": "New explicitly parameterized measured-envelope asset, actual three convex components; baseline asset unchanged",
+  "knife_spec": "assets/objects/knife_wuji_measured_envelope_20260928_v1/000/asset-spec.json",
+  "planning_object_world": [
+    [
+      0.9999999948700489,
+      3.480091137673526e-06,
+      -0.00010123137602212624,
+      0.44999802112579346
+    ],
+    [
+      0.00010129074988233036,
+      -0.03725926997722101,
+      0.9993056271936773,
+      -0.2998431921005249
+    ],
+    [
+      -2.941325123499708e-07,
+      -0.99930563232109,
+      -0.03725927013858371,
+      0.756264957800068
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "planning_pose_status": "Provisional table resting-envelope pose preserving old orientation; actual settling on new geometry unmeasured"
+}

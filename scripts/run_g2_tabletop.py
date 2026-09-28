@@ -105,6 +105,8 @@ def main():
     parser.add_argument('--pickup-retention-hold',type=float,default=0.,choices=[0.,1.],help='Separate fixed-reference1s physical hold after lift, gate before flip; records every finger without asserting force')
     parser.add_argument('--pickup-only',action='store_true',help='Isolated continuous table pickup plus1s hold, no flip/transport/policy; does not claim full task success')
     parser.add_argument('--closed-settle-seconds',type=float,default=0.,choices=[0.,1.],help='Explicit single-factor closed-hand dwell on the original table before first lift; actual state remains continuous')
+    parser.add_argument('--pickup-finger-feedback',action='store_true',help='Explicit privileged bounded contact-following motor controller during lift/hold only; no model training or object actuation')
+    parser.add_argument('--knife-spec',type=Path,help='New generated asset-spec.json; never overwrites baseline. Only B acquisition diagnostics until frozen policy geometry/interface audit is complete.')
     parser.add_argument('--slider-face',choices=['up','down'],default='up',help='Initial tabletop placement; down starts above the protruding passive slider and settles freely.')
     parser.add_argument('--table-localization',choices=['configured','settled-truth'],default='configured',help='Acquisition-only ideal localization after natural tabletop settling.')
     parser.add_argument('--gait-plan',type=Path,help='Sequential single-digit motor plan with fixed-reference one-second hold gates after actual air flip.')
@@ -117,6 +119,14 @@ def main():
     parser.add_argument('--contact-diagnostics',action='store_true',help='Record whole-thumb conservative collision separation every control frame.')
     args=parser.parse_args()
     assert not args.pickup_only or (args.only_grasp and args.pickup_retention_hold==1 and not args.air_flip and not args.gait_plan)
+    assert not args.pickup_finger_feedback or args.pickup_only
+    knife_geometry=None
+    knife_asset_path=ROOT/'assets/objects/knife_wuji_bridge3_20260922/000/mobility.urdf'
+    if args.knife_spec:
+        assert args.group=='B' and args.only_grasp and (args.pickup_only or args.air_flip_only)
+        assert not args.pickup_finger_feedback and not args.table_supported_seat and not args.gait_plan
+        from scripts.g2_knife_geometry import KnifeGeometry
+        knife_geometry=KnifeGeometry(args.knife_spec);knife_asset_path=knife_geometry.urdf
     assert not args.operation_static_policy or (args.learned_operation_policy and args.operation_input_ablation is None)
     assert not args.fixed_preparation_hold or (args.group!='A' and args.learned_hold_policy is None), 'Fixed and learned preparation holds are exclusive continuous conditions'
     if args.hand_gravity_compensation:
@@ -134,6 +144,8 @@ def main():
         assert args.group!='C', 'New learner is privileged; student history must explicitly encode its separate motor channel before C is evaluated'
     assert not args.learned_hold_policy or args.group!='A'
     args.output.mkdir(parents=True,exist_ok=False)
+    if args.knife_spec:
+        (args.output/'knife-asset-spec.json').write_text(args.knife_spec.read_text())
     assert not args.hand_only_diagnostic or args.group=='A'
     assert not args.seat_object_servo or args.seat_finger_feedback=='object-truth'
     assert args.seat_finger_mode!='residual' or args.seat_object_servo
@@ -184,12 +196,16 @@ def main():
     table_obj=transform([.50+args.dx,-.30+args.dy,table_z+(.0071 if args.slider_face=='down' else .0041)],
         (Rotation.from_euler('z',args.yaw,degrees=True)*Rotation.from_euler('x',90,degrees=True)).as_quat())
     if args.slider_face=='down':table_obj=table_obj@transform(quaternion=Rotation.from_euler('z',180,degrees=True).as_quat())
+    if knife_geometry is not None:table_obj=knife_geometry.table_pose(table_obj,table_z)
     grasp_pose=table_obj@transform(quaternion=Rotation.from_euler('z',args.grasp_roll,degrees=True).as_quat())@np.linalg.inv(transform(s[40:43],s[43:47]))
     grasp_pose[2,3]+=args.close_height
     custom_plan=None
     if args.grasp_plan:
         assert args.group!='A'
         custom_plan=json.loads(args.grasp_plan.read_text())
+        assert bool(custom_plan.get('knife_spec'))==bool(args.knife_spec),'Grasp plan/knife geometry versions must agree'
+        if args.knife_spec:
+            assert json.loads((ROOT/custom_plan['knife_spec']).read_text())['file_sha256']==knife_geometry.spec['file_sha256']
         (args.output/'grasp-plan.json').write_text(json.dumps(custom_plan,indent=2)+'\n')
         grasp_pose=table_obj@np.asarray(custom_plan['wrist_in_knife'])
         grasp_pose[2,3]+=args.close_height
@@ -294,7 +310,7 @@ def main():
     options=gymapi.AssetOptions();options.override_com=True;options.override_inertia=True
     options.fix_base_link=False;options.disable_gravity=False;options.thickness=.01;options.density=1000
     options.collapse_fixed_joints=False;options.default_dof_drive_mode=gymapi.DOF_MODE_POS
-    obj_asset=gym.load_asset(sim,str(ROOT),'assets/objects/knife_wuji_bridge3_20260922/000/mobility.urdf',options)
+    obj_asset=gym.load_asset(sim,str(knife_asset_path.parent),knife_asset_path.name,options)
     initial_obj=operation@transform(s[40:43],s[43:47]) if args.group=='A' else table_obj
     initial_obj[:3,3]+=initial_obj[:3,:3]@np.array([0,0,args.preset_object_axis_offset])
     t=gymapi.Transform();t.p=gymapi.Vec3(*initial_obj[:3,3]);t.r=gymapi.Quat(*Rotation.from_matrix(initial_obj[:3,:3]).as_quat())
@@ -312,7 +328,8 @@ def main():
     assert 0<=args.preset_slider_offset<=float(p['upper'][0])-slider_lower+1e-6
     effective=dict(robot_dof_names=names,hand_indices=hand_idx.tolist(),arm_indices=arm_idx.tolist(),
         hand_asset_sha256=hashlib.sha256((ROOT/'assets/hands/wuji_artbot/right.urdf').read_bytes()).hexdigest(),
-        knife_asset_sha256=hashlib.sha256((ROOT/'assets/objects/knife_wuji_bridge3_20260922/000/mobility.urdf').read_bytes()).hexdigest(),
+        knife_asset_sha256=hashlib.sha256(knife_asset_path.read_bytes()).hexdigest(),
+        knife_asset_path=str(knife_asset_path),knife_asset_spec=knife_geometry.spec if knife_geometry is not None else None,
         robot_dof_properties={n:props[n].tolist() for n in props.dtype.names},
         knife_dof_properties={n:p[n].tolist() for n in p.dtype.names},
         robot_body_names=rb_names,robot_gravity_flags=[int(v.flags) for v in gym.get_actor_rigid_body_properties(env,robot)],
@@ -320,6 +337,8 @@ def main():
         knife_mass=[float(v.mass) for v in gym.get_actor_rigid_body_properties(env,knife)],
         table_friction=[float(v.friction) for v in gym.get_actor_rigid_shape_properties(env,table)],
         source_self_collision='G2 non-hand self-contact disabled per asset; existing Wuji digit filtering retained')
+    effective['knife_effective_inertial']=[dict(mass=float(v.mass),com=[float(getattr(v.com,n)) for n in ['x','y','z']],
+        inertia=[[float(getattr(getattr(v.inertia,row),col)) for col in ['x','y','z']] for row in ['x','y','z']]) for v in gym.get_actor_rigid_body_properties(env,knife)]
     (args.output/'physics.json').write_text(json.dumps(effective,indent=2)+'\n')
     closed=s[20:40].copy();opened=closed.copy()
     if preset_candidate is not None:
@@ -371,7 +390,7 @@ def main():
     digit_geometry=None
     if args.contact_diagnostics:
         from scripts.g2_contact_geometry import DigitGeometry
-        digit_geometry=DigitGeometry()
+        digit_geometry=DigitGeometry(knife_spec=args.knife_spec)
         shape_fields={}
         for label,actor in [('robot',robot),('knife',knife)]:
             shape_fields[label]=[{k:float(getattr(v,k)) for k in ['contact_offset','rest_offset','friction','thickness'] if hasattr(v,k)} for v in gym.get_actor_rigid_shape_properties(env,actor)]
@@ -561,6 +580,7 @@ def main():
                 phases.extend([('gravity_close_hold',None,gravity_hold_hand,3),
                                ('gravity_close_restore',None,restored,2),('gravity_close_return',None,restored,8)])
             if post_acquisition_pose is not None:phases.append(('operation_adjust',None,None,4))
+            pickup_feedback=None
             for label,end_arm,end_hand,seconds in phases:
                 if label=='closed_settle':
                     for _ in range(round(seconds/dt)):tick(label)
@@ -568,7 +588,11 @@ def main():
                 if label=='pickup_hold':
                     from scripts.g2_tabletop_metrics import fixed_acquisition_hold
                     _,_,_,hold_w,hold_o,_=current();first=len(records)
-                    for _ in range(round(seconds/dt)):tick(label)
+                    for _ in range(round(seconds/dt)):
+                        if pickup_feedback is not None:
+                            _,_,_,fw,fo,_=current();targets[hand_idx]=pickup_feedback.command(fw,fo,global_step*dt)
+                        tick(label)
+                    if pickup_feedback is not None:(args.output/'pickup-finger-feedback.json').write_text(json.dumps(pickup_feedback.report(),indent=2)+'\n')
                     check=fixed_acquisition_hold(records[first:],hold_o,hold_w,table_z)
                     (args.output/'pickup-hold-check.json').write_text(json.dumps(check,indent=2)+'\n')
                     if not check['retained']:raise ValueError('Pickup failed fixed-reference hold before flip')
@@ -579,10 +603,16 @@ def main():
                     arm_path,diagnostic=plan_translation(k,targets[arm_idx],k.forward(end_arm),seconds,dt,arm_table_check)
                     (args.output/(label+'-cartesian-plan.json')).write_text(json.dumps(diagnostic,indent=2)+'\n')
                     start_hand=targets[hand_idx].copy()
+                    if label=='lift' and args.pickup_finger_feedback:
+                        from scripts.g2_side_pinch_feedback import SidePinchFeedback
+                        _,_,_,fw,fo,_=current();pickup_feedback=SidePinchFeedback(targets[hand_idx],fw,fo,table_z)
                     for i,motor in enumerate(arm_path):
                         alpha=smooth((i+1)/len(arm_path));targets[arm_idx]=motor
                         targets[hand_idx]=start_hand+(end_hand-start_hand)*alpha
+                        if pickup_feedback is not None:
+                            _,_,_,fw,fo,_=current();targets[hand_idx]=pickup_feedback.command(fw,fo,global_step*dt)
                         tick(label)
+                    if pickup_feedback is not None:(args.output/'pickup-finger-feedback.json').write_text(json.dumps(pickup_feedback.report(),indent=2)+'\n')
                     continue
                 if label=='finger_gait':
                     from scripts.g2_finger_gait import execute_gait

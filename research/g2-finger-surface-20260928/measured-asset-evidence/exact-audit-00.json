@@ -1,0 +1,28 @@
+{
+  "plan": "runs/g2-finger-surface-20260928/measured-asset-two-seeds/side-face-refine-00.json",
+  "scope": "One geometric touch pose only, no motor preload/dynamics or path certificate",
+  "nonadjacent_hand_pairs_tested": 270,
+  "excluded": "Joint graph distances <=2 for mounting/joint shells only",
+  "hand_intersections": [],
+  "knife_intersections": [],
+  "overlap_definition": "Radius of a ball inside both convex hulls; not collision penetration depth or measured force",
+  "g2_ik": {
+    "residual": 1.529394525545362e-08,
+    "position_m": 2.4580568377820236e-09,
+    "rotation_rad": 1.1714609118213927e-08
+  },
+  "g2_arm_q": [
+    -1.3583606521428073,
+    -0.6550099705950209,
+    0.47403112961868504,
+    -1.5376773384482425,
+    -1.1185239866290504,
+    0.09433550770890202,
+    0.08748226873641683
+  ],
+  "g2_arm_table": [],
+  "joints_with_less_than_0p01rad_margin": [],
+  "ready_for_physics": false,
+  "outstanding": "Touch-only screening. Open/close approach, finger-table path and flip/flatten handoff not validated.",
+  "knife_spec": "assets/objects/knife_wuji_measured_envelope_20260928_v1/000/asset-spec.json"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "F1-06",
+  "utc": "2026-09-28T08:08:22.954538+00:00",
+  "budget_slot": 78,
+  "hypothesis": "Shift motor compression from index toward ring/pinky to test support distribution while retaining all5lateral pads",
+  "reference": "F1-03",
+  "single_plan_change": "close_q resulting from requested thumb/index/middle/ring/pinky compression[4,2,4,6,6]mm; open/touch/wrist arrays exactly equal",
+  "geometry": "Full sampled hand/table and G2 approach/lift audit pass; hard solver iterationlimit retained, achieved middle/ring nominal contact error0.592/0.662mm",
+  "scope": "Pickup+1s hold only, no flip/policy; no dwell/feedback or new physics",
+  "acceptance": "Original fixed world/hand hold10mm/0.25rad and height>0.85m, all contacts and passive slider reported"
+}

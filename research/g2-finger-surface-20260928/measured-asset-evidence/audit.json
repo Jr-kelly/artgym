@@ -1,0 +1,145 @@
+{
+  "scope": "CPU geometric audit, no dynamics, no training",
+  "old_closed_envelope_xyz_m": [
+    0.019,
+    0.011,
+    0.147
+  ],
+  "new_closed_envelope_xyz_m": [
+    0.03,
+    0.008,
+    0.17
+  ],
+  "difference": {
+    "handle_length_m": 0.023,
+    "max_width_m": 0.011,
+    "button_length_m": 0.015
+  },
+  "thickness_caution": "Old handle alone8mm plus3mm button gives11mm full envelope. New8mm full envelope includes1mm assumed bump under provisional interpretation. These are different definitions.",
+  "old_actual_operation_pose_on_new_asset_intersections": [],
+  "thumbnail_ik": [
+    {
+      "assumed_slider_displacement_m": 0.0,
+      "thumb_landmark_target_knife": [
+        0.0,
+        0.0052,
+        -0.02
+      ],
+      "ik_landmark_error_m": 0.00027350829661423843,
+      "q": [
+        0.1770348846912384,
+        0.24307258427143097,
+        1.0209935903549194,
+        0.8820921182632446,
+        0.20378954708576202,
+        -0.21202990412712097,
+        1.1308647394180298,
+        1.2922621965408325,
+        -0.08301063627004623,
+        -0.36119890213012695,
+        1.3508328199386597,
+        0.3877115845680237,
+        0.3982512056827545,
+        -0.19860245287418365,
+        0.6974937915802002,
+        1.2740967273712158,
+        1.565501746205853,
+        0.29201941864578246,
+        0.6273717245069409,
+        -0.4698999938004073
+      ],
+      "joint_margin_min_rad": 2.4313884239290928e-14,
+      "qualification": "Only nominal thumb-landmark IK in an old preset frame, not full-pad collision, reach path, holding or slider success"
+    },
+    {
+      "assumed_slider_displacement_m": 0.04,
+      "thumb_landmark_target_knife": [
+        0.0,
+        0.0052,
+        0.02
+      ],
+      "ik_landmark_error_m": 0.0002951362085377675,
+      "q": [
+        0.1770348846912384,
+        0.24307258427143097,
+        1.0209935903549194,
+        0.8820921182632446,
+        0.20378954708576202,
+        -0.21202990412712097,
+        1.1308647394180298,
+        1.2922621965408325,
+        -0.08301063627004623,
+        -0.36119890213012695,
+        1.3508328199386597,
+        0.3877115845680237,
+        0.3982512056827545,
+        -0.19860245287418365,
+        0.6974937915802002,
+        1.2740967273712158,
+        0.9785173416480595,
+        0.44844830793903084,
+        0.6750287188597469,
+        -0.46989999380039454
+      ],
+      "joint_margin_min_rad": 3.708144902248023e-14,
+      "qualification": "Only nominal thumb-landmark IK in an old preset frame, not full-pad collision, reach path, holding or slider success"
+    },
+    {
+      "assumed_slider_displacement_m": 0.05,
+      "thumb_landmark_target_knife": [
+        0.0,
+        0.0052,
+        0.030000000000000002
+      ],
+      "ik_landmark_error_m": 0.0003693554195137154,
+      "q": [
+        0.1770348846912384,
+        0.24307258427143097,
+        1.0209935903549194,
+        0.8820921182632446,
+        0.20378954708576202,
+        -0.21202990412712097,
+        1.1308647394180298,
+        1.2922621965408325,
+        -0.08301063627004623,
+        -0.36119890213012695,
+        1.3508328199386597,
+        0.3877115845680237,
+        0.3982512056827545,
+        -0.19860245287418365,
+        0.6974937915802002,
+        1.2740967273712158,
+        0.9614602707861027,
+        0.4463233043549795,
+        0.525680550771816,
+        -0.46989999380043157
+      ],
+      "joint_margin_min_rad": 5.551115123125783e-17,
+      "qualification": "Only nominal thumb-landmark IK in an old preset frame, not full-pad collision, reach path, holding or slider success"
+    }
+  ],
+  "unsupported_claims": [
+    "No newasset grasp/hold/flip demonstrated",
+    "No stable nonthumb support with thumb released",
+    "No complete slider sweep or frozen policy success",
+    "No deployment or measured resistance/latch"
+  ],
+  "required_updates": [
+    "Replan lateral pads for30mm width instead of19mm",
+    "Recompute table initial height/natural settling including bump",
+    "Use new convex geometry for all approach/flip/regrasp audits",
+    "Re-evaluate thumb transfer and sweep at actual acquired state",
+    "Student initialization currently hardcodes six old geometry dimensions; explicit geometry interface audit required before C"
+  ],
+  "uncertainty": [
+    "whether overall thickness includes button and bump",
+    "actual handle outline and thickness distribution",
+    "button width",
+    "button base thickness",
+    "central bump height, width and outline",
+    "actual slider travel",
+    "closed button center relative to handle",
+    "mass and inertia",
+    "friction, pushing resistance and latch mechanism"
+  ]
+}

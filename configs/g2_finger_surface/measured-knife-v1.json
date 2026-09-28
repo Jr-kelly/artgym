@@ -1,0 +1,48 @@
+{
+  "version": "knife_wuji_measured_envelope_20260928_v1",
+  "measurement_source": "User physical measurement supplied2026-09-28 during F1-06; approximate, no tolerances supplied",
+  "measured": {
+    "overall_length_m": 0.170,
+    "overall_max_width_m": 0.030,
+    "overall_thickness_m": 0.008,
+    "button_body_length_m": 0.045,
+    "button_has_central_upward_bump": true
+  },
+  "unmeasured": ["whether overall thickness includes button and bump", "actual handle outline and thickness distribution", "button width", "button base thickness", "central bump height, width and outline", "actual slider travel", "closed button center relative to handle", "mass and inertia", "friction, pushing resistance and latch mechanism"],
+  "geometry_hypothesis": {
+    "thickness_interpretation": "Primary provisional interpretation:8mm is the closed assembly envelope including button and bump; do not add bump height on top of8mm",
+    "handle_thickness_m": 0.006,
+    "handle_cross_sections_z_width_m": [[-0.085,0.024],[-0.060,0.030],[0.060,0.030],[0.085,0.020]],
+    "handle_outline_status": "Unmeasured convex tapered-envelope proxy;170x30 are maxima, not a170x30x8 rectangular solid handle",
+    "button_width_m": 0.012,
+    "button_base_thickness_m": 0.001,
+    "button_center_y_m": 0.0035,
+    "button_closed_center_z_m": -0.020,
+    "bump_width_m": 0.010,
+    "bump_length_m": 0.008,
+    "bump_height_m": 0.001,
+    "bump_top_width_ratio": 0.7,
+    "bump_top_length_ratio": 0.7,
+    "bump_shape_status": "Unmeasured chamfered central raised pad, separate visual and collision geometry on the passive slider link"
+  },
+  "joint_hypothesis": {
+    "lower_m": -0.03267458688196273,
+    "travel_m": 0.050,
+    "operation_excursion_m": 0.040,
+    "status": "Travel and operation excursion inherited solely for controlled comparison, NOT measured and NOT inferred from45mm button length"
+  },
+  "physics_hypothesis": {
+    "body_mass_kg": 0.029,
+    "button_mass_kg": 0.006,
+    "knife_friction": 3.0,
+    "slider_damping": 0.3,
+    "slider_friction": 0.001,
+    "status": "Retain previous simulation values, uncalibrated. No force/latch inference from external dimensions. New geometry means inertia may change under existing loader override; report effective inertia."
+  },
+  "planning": {
+    "side_half_width_m": 0.015,
+    "side_contact_y_interval_m": [-0.002,0.001],
+    "side_flat_z_interval_m": [-0.060,0.060],
+    "side_contact_status": "Planning within the constant-width portion of the assumed tapered handle; require exact convex check everywhere"
+  }
+}

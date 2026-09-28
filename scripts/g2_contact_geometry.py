@@ -13,8 +13,12 @@ from scipy.spatial.transform import Rotation
 from scripts.wuji_kinematics import WujiKinematics,ROOT
 
 class DigitGeometry:
-    def __init__(self,max_face_axes=None):
+    def __init__(self,max_face_axes=None,knife_spec=None):
         self.w=WujiKinematics();self.meshes={}
+        self.knife_geometry=None
+        if knife_spec is not None:
+            from scripts.g2_knife_geometry import KnifeGeometry
+            self.knife_geometry=KnifeGeometry(knife_spec)
         path=ROOT/'assets/hands/wuji_artbot/right.urdf';xml=ET.parse(path).getroot()
         for link in xml.findall('link'):
             name=link.get('name')
@@ -36,6 +40,17 @@ class DigitGeometry:
 
     def gaps(self,q,wrist_in_object,slider,finger='thumb'):
         frames=self.w.forward(q);results=[]
+        if self.knife_geometry is not None:
+            for link,meshes in self.meshes.items():
+                if '_'+finger+'_' not in link:continue
+                frame=wrist_in_object@frames[link]
+                for vertices,normals in meshes:
+                    v=vertices@frame[:3,:3].T+frame[:3,3]
+                    for part in self.knife_geometry.collision_parts(slider):
+                        axes=np.r_[normals@frame[:3,:3].T,part['normals']];a=v@axes.T;b=part['vertices']@axes.T
+                        gap=np.maximum(a.min(0)-b.max(0),b.min(0)-a.max(0)).max()
+                        results.append(dict(hand_link=link,knife_link=part['link'],knife_component=part['index'],gap_lower_bound_m=float(gap)))
+            return results
         boxes=[('link_0',np.zeros(3),np.array([.019,.008,.147])/2),
                ('link_1',np.array([0,.0055,.010624586881962734+slider]),np.array([.01,.003,.03])/2)]
         for link,meshes in self.meshes.items():
