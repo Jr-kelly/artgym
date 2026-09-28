@@ -1,0 +1,26 @@
+{
+  "scope": "Frozen preset endpoint feasibility baseline; NOT autonomous acquisition or learned teacher/student",
+  "source_run": "/data/research/artgym-g2-functional-v2-20260928/runs/g2-functional-v2-20260928/V2-10-A-feedback-fixed-body-reference",
+  "launch_manifest": "/data/research/artgym-g2-functional-v2-20260928/runs/g2-functional-v2-20260928/V2-10-A-feedback-fixed-body-reference-launch.json",
+  "source_version": "13f18f83d9755e7e",
+  "controller": "thumb-feedback-v3-fixed-body.json",
+  "asset": "knife_wuji_measured_box_20260928_v2",
+  "strict_endpoints_m": [
+    0.0008691646717488774,
+    0.0016884282231330872,
+    0.0010376968048512944,
+    0.0014127753674983978
+  ],
+  "world_drift_m": 0.00033423384810056696,
+  "world_rotation_rad": 0.04572858201609489,
+  "deployable": false,
+  "inputs": "one initial true body pose, live wrist/q and passive slider true position; no current true body pose input to operation controller",
+  "verification": "One independent physics run; repeat pending",
+  "hashes": {
+    "A00-reference.json": "3f38748aa9c7e6b9fb4e67007aeda85ebfb0e488558bae800a490d0a4d227453",
+    "thumb-release-v1.json": "82dc69679fd6ac75f15c013d814e4ffe2dbefa174cb2a1705a1526044e901b89",
+    "thumb-feedback-v3-fixed-body.json": "2fa939c4f77abfb73995f0962577eed5028894afdb56bfbee23c556b55fe7cbf",
+    "level-pose.json": "ce605744e0f211568414acb673f7f68a14d7b46fc778bc2c9d704a7b9000be6b",
+    "level-seed.json": "480163961255583ead2782be83c48f51f320ada077bb96c58be3cfef47230087"
+  }
+}

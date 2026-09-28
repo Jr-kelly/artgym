@@ -51,7 +51,7 @@ class LocalG2:
     plus4 corrections to frozen thumb increments, total <=.025rad/step.
     """
     def __init__(self, task='H', num_envs=1, route='support', graphics=False,
-                 state_path=None, residual_span=.20, residual_speed=.60, hand_gravity=False, hand_gravity_compensation=False):
+                 state_path=None, residual_span=.20, residual_speed=.60, hand_gravity=False, hand_gravity_compensation=False, data_directory=None):
         self.task, self.n, self.route = task, num_envs, route
         self.goal_override = None  # only for explicitly scored physical preparation diagnostics
         self.thumb_first_stroke_q4_correction = 0.  # explicit diagnostic only, never changed by training
@@ -60,7 +60,8 @@ class LocalG2:
         self.action_dim = 16 if route == 'support' else 20
         self.steps = 660 if task == 'H' else 600
         self.dt = 1 / 30
-        self.metadata = json.loads((DATA / 'physics.json').read_text())
+        data=Path(data_directory) if data_directory is not None else DATA
+        self.metadata = json.loads((data / 'physics.json').read_text())
         self.gravity_model=None
         self.gravity_torque=np.zeros((num_envs,20),dtype=np.float32)
         self.gravity_applied_bias=np.zeros((num_envs,20),dtype=np.float32)
@@ -69,8 +70,8 @@ class LocalG2:
             from scripts.g2_hand_gravity import HandGravity
             self.gravity_model=HandGravity(self.metadata['robot_dof_properties']['stiffness'][7:27])
         self.source = {k: torch.as_tensor(v.copy()) for k, v in np.load(
-            state_path or DATA / (task + '-actual-state.npz')).items()}
-        self.cfg = OmegaConf.load(DATA / 'frozen-config.yaml')
+            state_path or data / (task + '-actual-state.npz')).items()}
+        self.cfg = OmegaConf.load(data / 'frozen-config.yaml')
         self.gym = gymapi.acquire_gym()
         sp = gymapi.SimParams()
         sp.dt = float(self.cfg.task.sim.dt)
@@ -111,7 +112,7 @@ class LocalG2:
         opt.collapse_fixed_joints = False
         opt.default_dof_drive_mode = gymapi.DOF_MODE_POS
         knife_asset = self.gym.load_asset(self.sim, str(ROOT),
-            'assets/objects/knife_wuji_bridge3_20260922/000/mobility.urdf', opt)
+            self.metadata.get('knife_relative_urdf','assets/objects/knife_wuji_bridge3_20260922/000/mobility.urdf'), opt)
         floor = gymapi.PlaneParams()
         floor.normal = gymapi.Vec3(0, 0, 1)
         self.gym.add_ground(self.sim, floor)

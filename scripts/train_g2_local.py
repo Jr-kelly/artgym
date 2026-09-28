@@ -65,6 +65,7 @@ def expand_support_checkpoint(model, saved):
 def main():
     process_start = time.monotonic()
     p = argparse.ArgumentParser()
+    p.add_argument('--task-variant',choices=['legacy','v2-grip'],default='legacy')
     p.add_argument('--task', choices=['H','S'], default='H')
     p.add_argument('--route', choices=['support','joint'], default='support')
     p.add_argument('--num-envs', type=int, default=64)
@@ -91,7 +92,10 @@ def main():
     torch.set_num_threads(1)
     saved=torch.load(args.checkpoint,map_location='cuda:0') if args.checkpoint else None
     plan=json.loads(args.thumb_plan.read_text()) if args.thumb_plan else (saved.get('thumb_plan') if saved else None)
-    env = LocalG2(args.task, args.num_envs, args.route)
+    if args.task_variant=='v2-grip':
+        from scripts.g2_v2_grip_env import GripV2
+        env=GripV2(args.task,args.num_envs,args.route)
+    else:env = LocalG2(args.task, args.num_envs, args.route)
     if plan is not None:
         assert args.task=='S' and args.route=='joint'
         env.thumb_plan=plan
@@ -122,7 +126,7 @@ def main():
     # Session deadline includes scene/model setup; reserve final90min for delivery.
     task_state = ROOT/'runs/g2-local-policy-20260928/state.json'
     deadline = clock+args.hours*3600
-    if task_state.exists():
+    if task_state.exists() and args.task_variant=='legacy':
         import datetime
         state = json.loads(task_state.read_text())
         delivery = datetime.datetime.fromisoformat(state['delivery_start_utc']).timestamp()
@@ -156,7 +160,9 @@ def main():
             transitions=transitions, episodes=episodes, learning_elapsed_seconds=time.monotonic()-clock,
             obs_dim=obs.shape[-1], action_dim=env.action_dim, task=args.task, route=args.route,
             source='configs/g2_local/'+args.task+'-actual-state.npz',
-            method='new privileged PPO motor residual; original weights unchanged',
+            method='new privileged PPO motor residual; original weights unchanged',task_variant=args.task_variant,
+            asset_urdf=env.metadata.get('knife_relative_urdf'),
+            data_source='configs/g2_functional_v2/grip-local-v1' if args.task_variant=='v2-grip' else None,
             thumb_plan=env.thumb_plan,
             action_mapping='support16 absolute+slew; joint thumb4 uses .20rad absolute residual around IK prior or .025rad incremental correction around teacher; total thumb step capped .025rad',
             terminal_return='absorbing -8/step gamma.995 through finite horizon'), str(path)+'.tmp')
