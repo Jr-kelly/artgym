@@ -1,3 +1,8 @@
+## Latest 2026-09-28T09:20:30.326260+00:00 — native Goal BLOCKED after third budget audit
+原生update_goal(status=blocked)已成功；目标未完成且未缩小。连续第3个goal轮实查同一预算阻塞：80/80控制试验、4/4主要训练配置均已用满，用户尚未回复“最多追加4次”的待确认请求。自动Goal续接不是追加额度授权。上一轮为progress（已有轨迹的接触序列分析及发布）；本轮没有新的可执行物理动作或待运行任务，故不重复空转/调参。
+实查8个F1启动PID均不存在且各自有终结failure.json；原HTTP4098和监控97337、3132243仍在，未干扰。远端分支与本地421222e一致，已有代码/报告/29项Release资产及恢复检查均已交付。完整目标仍是连续取刀→翻掌→四指支撑→teacher/student两轮，当前新刀仅闭合/起抬失败，不能称完成。
+恢复条件：用户明确追加有界控制试验额度后，先核查当前工作树/进程与物性，围绕已定位的侧面边缘接触丢失做最多4次提案中的逐次对照；不自动新增训练。已询问一次，不重复请求。持久状态runs/g2-finger-surface-20260928/state.json；主要报告research/g2-measured-knife-20260928.md。旧成功链路/资产/权重/视频全部保留。
+
 ## Latest 2026-09-28T09:17:13.383304+00:00 — offline follow-up after budget exhaustion; second blocked audit turn
 Goal完整目标仍未达到。上一goal轮为progress（新资产实际试验及已核验交付）；本轮仅完成已有F1-08日志离线复核，无新物理/训练。手刀/滑块/刀桌逐帧计数核对一致；整段手滑块接触0，刀柄418帧/凸起401帧触桌，2帧有未分类表面点。食指9.4s、中指9.5s首次持续缺失，9.9s整手脱离，刀柄+85mm端在此之前一直触桌。只支持失稳次序，不认定唯一因果。脚本scripts/audit_g2_pickup_contact_sequence.py、结果research/g2-finger-surface-20260928/measured-asset-evidence/F1-08-component-sequence-offline.json、报告附录，已push为0836921；独立JSON已追加Release并核验SHA。
 80/80控制、4/4训练仍用满，本轮预算阻塞第2个连续goal轮；无活动仿真/训练，原监控/HTTP实查保留。原生Goal active未标complete，未达3轮blocked阈值。下一项真实物理验证需要用户追加额度；报告给出最多4次有界接触迁移/重复建议（未授权、未运行），不增加训练。已向用户集中询问是否追加最多4次，等待明确回复，未追加额度或启动试验。所有原成果和物性不变。

@@ -1,0 +1,90 @@
+{
+  "utc": "2026-09-28T06:50:41.577349+00:00",
+  "protected_branch": "feat/g2-wuji-local-policy-20260928",
+  "protected_commit": "ef3f51d066a2526881b6078a4a07a57ce37280ba",
+  "protected_worktree": "/data/research/artgym-g2-local-policy-20260928",
+  "protected_release": "https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-local-policy-20260928-v1",
+  "protected_models": {
+    "A1-H-pilot/checkpoint-00010.pth": {
+      "path": "/data/research/artgym-g2-local-policy-20260928/runs/g2-local-policy-20260928/A1-H-pilot/checkpoint-00010.pth",
+      "sha256": "214aa7b81b933adfcf9ce49b562b56699e737d4feb6b0dcb7f7bb7589c720414"
+    },
+    "B4-S-joint-path/checkpoint-00025.pth": {
+      "path": "/data/research/artgym-g2-local-policy-20260928/runs/g2-local-policy-20260928/B4-S-joint-path/checkpoint-00025.pth",
+      "sha256": "dced811c76513e13e0c29adc9229868006c4c908184f88813aa7f656a68dfe71"
+    }
+  },
+  "new_branch": "feat/g2-wuji-finger-surface-grasp-20260928",
+  "new_worktree": "/data/research/artgym-g2-finger-surface-20260928",
+  "scope": "Continuous thumb-versus-four-finger pickup and functional finger-surface support",
+  "new_physical_trials": 8,
+  "new_training_configs": 0,
+  "active_processes": [],
+  "next": "With renewed physical budget, prioritize side-contact migration away from thin-handle upper edge and a short-lift retention diagnostic; first verify real thickness definition when available. No RL necessity claim.",
+  "latest_user_route": {
+    "acquisition": "Thumb on one lateral handle face, all four non-thumb fingers on the opposing side, normal tabletop slider-down initial state",
+    "after_lift": "Arm/hand flip approximately180degrees, then open the finger posture toward a distributed volar support surface while retaining the knife",
+    "operation": "Thumb adjustment and slider movement after stable support",
+    "caution": "Rigid wrist rotation alone does not change knife-to-hand contact side. Contact migration requires actual finger/knife motion; no state reset or cached pose injection."
+  },
+  "current_action": "Native Goal marked blocked after third consecutive budget audit; all useful existing evidence analyzed and delivered; awaiting explicit additional control budget",
+  "last_checked_utc": "2026-09-28T09:20:30.326260+00:00",
+  "cpu_geometry_solves": 28,
+  "goal_status": "blocked",
+  "goal_started_utc": "2026-09-28T07:19:26.926366+00:00",
+  "deadline_utc": "2026-09-28T17:53:41+00:00",
+  "delivery_start_utc": "2026-09-28T16:23:41+00:00",
+  "budgets": {
+    "physical_trials_remaining": 0,
+    "total_control_trials_previous": 72,
+    "training_configs_used": 4,
+    "training_configs_max": 4,
+    "single_gpu_hours_used_prior": 4.800219310522079,
+    "single_gpu_hours_max": 12,
+    "total_control_trials_started": 80,
+    "single_gpu_hours_used_current": 0.15642818828423818,
+    "single_gpu_hours_conservative_total": 4.956647498806317,
+    "total_control_trials_terminal": 80
+  },
+  "reporting": "Concise Chinese progress at meaningful result/failure/route change, at least once per minute while active; journal/handoff after each run",
+  "geometry_motion_plans": 15,
+  "release": "https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-finger-surface-20260928-v1",
+  "measurement_asset": "assets/objects/knife_wuji_measured_envelope_20260928_v1/000/asset-spec.json",
+  "goal_completed": false,
+  "budget_block_audit_turns": 3,
+  "delivery": {
+    "verified": true,
+    "code_baseline_commit": "e32f68a",
+    "release": "https://github.com/Jr-kelly/artgym/releases/tag/g2-wuji-finger-surface-20260928-v1",
+    "new_assets": 12,
+    "existing_unchanged": 16,
+    "restored_source_hash_entries": 1670,
+    "raw_run_files_verified": 48
+  },
+  "previous_goal_turn_classification": "progress: offline contact sequence changed failure localization and was published",
+  "latest_goal_turn_classification": "no progress toward physical goal: same exhausted80/80 and4/4 limits, no authorization reply or live task process",
+  "additional_control_budget_proposal": {
+    "status": "awaiting_explicit_user_reply",
+    "max_trials": 4,
+    "new_training_configs": 0,
+    "scope": "One bounded interior-side contact migration candidate, then evidence-gated repeat/followups",
+    "question": "\u8ffd\u52a0\u6700\u591a4\u6b21\u672c\u673a\u7269\u7406\u63a7\u5236\u5bf9\u7167\uff0c\u7269\u6027/\u5224\u636e\u4e0d\u53d8\uff0c\u4e0d\u65b0\u589e\u8bad\u7ec3"
+  },
+  "offline_delivery": {
+    "utc": "2026-09-28T09:18:14.880771+00:00",
+    "asset": "https://github.com/Jr-kelly/artgym/releases/download/g2-wuji-finger-surface-20260928-v1/F1-08-component-sequence-offline.json",
+    "sha256": "fd15298f80b3724dd216817a4dba05f69ba591af40da3b4d12531e2dfa766677",
+    "digest_verified": true,
+    "physics_trials": 0,
+    "code_commit": "0836921"
+  },
+  "blocker": {
+    "type": "user_defined_development_budget_exhausted",
+    "control_trials_used": 80,
+    "control_trials_max": 80,
+    "training_configurations_used": 4,
+    "training_configurations_max": 4,
+    "pending_request": "At most4additional local control trials for interior-side contact migration; no new training",
+    "no_automatic_budget_extension": true
+  }
+}
