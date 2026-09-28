@@ -1,3 +1,11 @@
+# 多抓姿Goal最新接续 2026-09-28T15:31:43.019779+00:00
+
+本轮有进展：代表旧teacher视频和开发初态实际检查已push7537334（四组训练仍未完成），报告research/multigrasp-20260928/README.md，视频videos/reference-three-grasps-policy.mp4。本机物理已结束。四H100训练持续，最新实查A141/B108/C128/D71；D之后已观察epoch76，勿据历史PID重启。D最新wrapper9453接管原4716训练，6h看护至21:10UTC（原4h预计不足），原训练PID/startticks/租约/1000轮预算不变；开发D等待器v2见development-D-waiter-v2.json。其它A/B/C wrapper原样。总截止09-29 02:53:52UTC不变。
+
+128开发扰动静态alive128，strict body127，不据此筛去失败。新seed2803物理联合门禁0合格；追加seed2805最多3000仍afterA，之后A开发评估；新抓姿门禁脚本freeze_wuji_multigrasp_test.py可直接收第二批，但先跑实际静态/几何筛选。最终prepare_wuji_multigrasp_frozen_cohort.py要求四个development-X/frozen.json存在后生成同批最终扰动，evaluate_wuji_multigrasp_frozen.py统一GPU顺序跑static+四组及旧reference各2s/5s/arrival；这些最终入口尚未运行，不能当结果。
+
+下一项：检查真实训练进程/吞吐与超时余量，等待同预算四组完成；按预注册开发选CP和物理有效新测试完成冻结比较，再据实选唯一诊断、代表新策略视频并GitHub交付。不得停留在此中间交付、不标Goal完成。详细历史如下。
+
 # 多抓姿2×2 Goal 实际续接（2026-09-28T15:19:00.569063+00:00）
 
 本轮原生Goal active，禁止创建子代理。主根 `/data/research/artgym-experiments-20260921/multigrasp-20260928`，独立分支 `feat/wuji-multigrasp-2x2-20260928`，已push7759dd3，后续增量待提交。绝对截止2026-09-29 02:53:52 UTC，01:53:52 UTC至少留评估交付；不要重启已运行实验。
@@ -81,3 +89,7 @@ A/C/B actual running, D preflight passed then queued after new test generation; 
 ## 多抓姿 2026-09-28T15:28:23.771227+00:00 development_static_completed
 
 128开发扰动全部静态存活，127/128全程刀身稳定；base7一扰动未过严格稳定，保留全部行并单列，不调阈值。代表视频已push001b043并HTTP200/远端commit核验。当前本机仿真全部结束，四H100训练仍在运行，未新增主要诊断。 证据：research/multigrasp-20260928/development-static-validity.json, research/multigrasp-20260928/videos/manifest.json。下一步：四组1000epoch与已排队开发评估，补充新测试抓姿；留出冻结评估和最终提交时间。
+
+## 多抓姿 2026-09-28T15:31:03.581214+00:00 D_supervisor_extended_preserving_training
+
+D预测总时长超过原4h看护上限；验证子进程保留GPU租约后只替换旧wrapper4715为9453，实际训练PID4716/start ticks保持，已继续到epoch76。总看护上限6h（至21:10UTC），仍早于全轮截止；交互预算1000轮不变，未重启训练。相应等待开发评估的5985仅等待进程替换为v2，防止等待时限早于训练。一次收据复制命令地址拼写错误后已用正确入口完成，无训练失败。 证据：research/multigrasp-20260928/receipts/D-supervisor-adoption.json, research/multigrasp-20260928/development-D-waiter-v2.json。下一步：继续四臂训练，检查真实PID/最后20轮吞吐；训练完毕由既定开发队列冻结checkpoint。

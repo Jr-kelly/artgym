@@ -1,0 +1,22 @@
+{
+  "old_waiter": 5985,
+  "new_waiter": 9766,
+  "command": [
+    "/home/wangjiarui/artgym-runtime/bin/python",
+    "-m",
+    "scripts.run_multigrasp_after",
+    "--after",
+    "mg_D_seed2801",
+    "--wait-seconds",
+    "24000",
+    "--",
+    "PYTHON",
+    "-m",
+    "scripts.evaluate_wuji_multigrasp_development",
+    "--arm",
+    "D",
+    "--gpu",
+    "2"
+  ],
+  "reason": "align waiter bound with adopted6h training supervision; no evaluation running or restarted"
+}
