@@ -1,0 +1,265 @@
+scripts/evaluate_wuji_multigrasp_expert.py
+  s_721f503d39167b::t_82489feb187c5a 9-20,22-23,31
+scripts/collect_wuji_multigrasp_experts.py
+  s_721f503d39167b::t_ee5894f5a2c957 1-107
+scripts/analyze_wuji_multigrasp_experts.py
+  s_721f503d39167b::t_abc82a31417c60 1-95
+scripts/summarize_wuji_multigrasp_resources.py
+  s_721f503d39167b::t_42b8dfc5e106a8 1-65
+scripts/train_wuji_multigrasp_expert.py
+  s_721f503d39167b::t_cd81c8e499974d 19-22
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "a92413a635112f77f8cbb863f815569c5e276bbe",
+  "prompts": {},
+  "sessions": {
+    "s_721f503d39167b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0e87e-fbfa-7a80-b73c-3a968594ab0a",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.session_started_at": "2026-09-28T22:49:18Z",
+        "tlab.token_usage.cache_read_tokens": "85309998",
+        "tlab.token_usage.input_tokens": "9551429",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.output_tokens": "183473"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/multigrasp-20260928/evidence/mg_A_seed2801/gpu.jsonl",
+      "additions": {
+        "human": 376
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/mg_A_seed2801/output.log",
+      "additions": {
+        "human": 16515
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/mg_A_seed2801/status.json",
+      "additions": {
+        "human": 42
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/mg_B_seed2801/gpu.jsonl",
+      "additions": {
+        "human": 458
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/mg_B_seed2801/output.log",
+      "additions": {
+        "human": 16367
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/mg_B_seed2801/status.json",
+      "additions": {
+        "human": 42
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/mg_C_seed2801/gpu.jsonl",
+      "additions": {
+        "human": 413
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/mg_C_seed2801/output.log",
+      "additions": {
+        "human": 16349
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/mg_C_seed2801/status.json",
+      "additions": {
+        "human": 42
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/mg_D_seed2801/gpu.jsonl",
+      "additions": {
+        "human": 968
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/mg_D_seed2801/output.log",
+      "additions": {
+        "human": 15713
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/mg_D_seed2801/status.json",
+      "additions": {
+        "human": 47
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/mg_D_seed2801/supervisor-adoption.json",
+      "additions": {
+        "human": 68
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/receipts/experts-backup-2148.json",
+      "additions": {
+        "human": 29
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/receipts/experts-backup-2243.json",
+      "additions": {
+        "human": 59
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/receipts/experts-progress-2149.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/receipts/experts-progress-latest.json",
+      "additions": {
+        "human": 32
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/receipts/process-throughput-20260928T1610.json",
+      "additions": {
+        "human": 54
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/receipts/release-selected-assets.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/receipts/reproduction-config-check.json",
+      "additions": {
+        "human": 7
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/receipts/resource-accounting-progress.json",
+      "additions": {
+        "human": 61
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/receipts/utilization-fourhour-2243.json",
+      "additions": {
+        "human": 7
+      }
+    },
+    {
+      "new_path": "scripts/analyze_wuji_multigrasp_experts.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 95
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/collect_wuji_multigrasp_experts.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 107
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/summarize_wuji_multigrasp_resources.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 65
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "WUJI_MULTIGRASP_HANDOFF.md",
+      "new_path": "WUJI_MULTIGRASP_HANDOFF.md",
+      "additions": {
+        "human": 26
+      }
+    },
+    {
+      "old_path": "research/multigrasp-20260928/receipts/gpu-history.jsonl",
+      "new_path": "research/multigrasp-20260928/receipts/gpu-history.jsonl",
+      "additions": {
+        "human": 848
+      }
+    },
+    {
+      "old_path": "research/multigrasp-20260928/receipts/monitor-latest.json",
+      "new_path": "research/multigrasp-20260928/receipts/monitor-latest.json",
+      "additions": {
+        "human": 2668
+      },
+      "deletions": {
+        "human": 188
+      }
+    },
+    {
+      "old_path": "scripts/evaluate_wuji_multigrasp_expert.py",
+      "new_path": "scripts/evaluate_wuji_multigrasp_expert.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 15
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 8
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/train_wuji_multigrasp_expert.py",
+      "new_path": "scripts/train_wuji_multigrasp_expert.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 4
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 1
+          }
+        ]
+      }
+    }
+  ]
+}
