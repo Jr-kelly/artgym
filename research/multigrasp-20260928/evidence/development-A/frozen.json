@@ -1,0 +1,92 @@
+{
+  "status": "frozen",
+  "frozen_utc": "2026-09-28T18:44:46.795187+00:00",
+  "arm": "A",
+  "seed": 2026092801,
+  "span": 0.04,
+  "cp": 750,
+  "checkpoint": "runs/mg_A_seed2801/checkpoints/epoch_000750.pth",
+  "sha256": "5ba648157501f657871cb175397ccdbe36d2fed212bd33f743c50c8e1eccf463",
+  "scores": {
+    "250": 0.0,
+    "500": 0.0078125,
+    "750": 0.03125,
+    "1000": 0.0078125
+  },
+  "rows": [
+    {
+      "cp": 250,
+      "seconds": 2,
+      "score": 0.0,
+      "strict": 0,
+      "alive": 98,
+      "path": "runs/multigrasp-20260928/dev-A-cp250-t2/evidence",
+      "checkpoint_sha256": "7bb42b50049dd72c718e2b8f4dacf15c02f5f1061bae049d58981e68fdc29ecf"
+    },
+    {
+      "cp": 250,
+      "seconds": 5,
+      "score": 0.0,
+      "strict": 0,
+      "alive": 96,
+      "path": "runs/multigrasp-20260928/dev-A-cp250-t5/evidence",
+      "checkpoint_sha256": "7bb42b50049dd72c718e2b8f4dacf15c02f5f1061bae049d58981e68fdc29ecf"
+    },
+    {
+      "cp": 500,
+      "seconds": 2,
+      "score": 0.015625,
+      "strict": 2,
+      "alive": 85,
+      "path": "runs/multigrasp-20260928/dev-A-cp500-t2/evidence",
+      "checkpoint_sha256": "a8fdc2fe10c7905889978d290607ba5e297188482f42fcccb0c47de7d02e9b51"
+    },
+    {
+      "cp": 500,
+      "seconds": 5,
+      "score": 0.0,
+      "strict": 0,
+      "alive": 84,
+      "path": "runs/multigrasp-20260928/dev-A-cp500-t5/evidence",
+      "checkpoint_sha256": "a8fdc2fe10c7905889978d290607ba5e297188482f42fcccb0c47de7d02e9b51"
+    },
+    {
+      "cp": 750,
+      "seconds": 2,
+      "score": 0.0625,
+      "strict": 8,
+      "alive": 103,
+      "path": "runs/multigrasp-20260928/dev-A-cp750-t2/evidence",
+      "checkpoint_sha256": "5ba648157501f657871cb175397ccdbe36d2fed212bd33f743c50c8e1eccf463"
+    },
+    {
+      "cp": 750,
+      "seconds": 5,
+      "score": 0.0,
+      "strict": 0,
+      "alive": 93,
+      "path": "runs/multigrasp-20260928/dev-A-cp750-t5/evidence",
+      "checkpoint_sha256": "5ba648157501f657871cb175397ccdbe36d2fed212bd33f743c50c8e1eccf463"
+    },
+    {
+      "cp": 1000,
+      "seconds": 2,
+      "score": 0.015625,
+      "strict": 2,
+      "alive": 112,
+      "path": "runs/multigrasp-20260928/dev-A-cp1000-t2/evidence",
+      "checkpoint_sha256": "15e0c1da0b3253901868071dfeb70a2847727e2c8a3e1912452e99b2b7621728"
+    },
+    {
+      "cp": 1000,
+      "seconds": 5,
+      "score": 0.0,
+      "strict": 0,
+      "alive": 104,
+      "path": "runs/multigrasp-20260928/dev-A-cp1000-t5/evidence",
+      "checkpoint_sha256": "15e0c1da0b3253901868071dfeb70a2847727e2c8a3e1912452e99b2b7621728"
+    }
+  ],
+  "rule": "max equally weighted16union-training-record dev strict2/5s; tie latest; blind test not read",
+  "formal_training_interactions": 163840000
+}

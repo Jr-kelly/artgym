@@ -1,0 +1,92 @@
+{
+  "status": "frozen",
+  "frozen_utc": "2026-09-28T18:43:44.362452+00:00",
+  "arm": "C",
+  "seed": 2026092801,
+  "span": 0.2,
+  "cp": 750,
+  "checkpoint": "runs/mg_C_seed2801/checkpoints/epoch_000750.pth",
+  "sha256": "b39a6c72c82178129bf3bfbb7bbc177a48a94cbedef71e195ff3852b2208d752",
+  "scores": {
+    "250": 0.00390625,
+    "500": 0.015625,
+    "750": 0.0234375,
+    "1000": 0.0078125
+  },
+  "rows": [
+    {
+      "cp": 250,
+      "seconds": 2,
+      "score": 0.0,
+      "strict": 0,
+      "alive": 59,
+      "path": "runs/multigrasp-20260928/dev-C-cp250-t2/evidence",
+      "checkpoint_sha256": "ce3b3594b9ccb2b385b3ffd55076ef07fa7c31ca52d8b9c35980245aaee0acd3"
+    },
+    {
+      "cp": 250,
+      "seconds": 5,
+      "score": 0.0078125,
+      "strict": 1,
+      "alive": 60,
+      "path": "runs/multigrasp-20260928/dev-C-cp250-t5/evidence",
+      "checkpoint_sha256": "ce3b3594b9ccb2b385b3ffd55076ef07fa7c31ca52d8b9c35980245aaee0acd3"
+    },
+    {
+      "cp": 500,
+      "seconds": 2,
+      "score": 0.0,
+      "strict": 0,
+      "alive": 65,
+      "path": "runs/multigrasp-20260928/dev-C-cp500-t2/evidence",
+      "checkpoint_sha256": "323c0854f70cddd0e086409d89af2dd8c8162e1357ee00e714d07581700005ac"
+    },
+    {
+      "cp": 500,
+      "seconds": 5,
+      "score": 0.03125,
+      "strict": 4,
+      "alive": 65,
+      "path": "runs/multigrasp-20260928/dev-C-cp500-t5/evidence",
+      "checkpoint_sha256": "323c0854f70cddd0e086409d89af2dd8c8162e1357ee00e714d07581700005ac"
+    },
+    {
+      "cp": 750,
+      "seconds": 2,
+      "score": 0.046875,
+      "strict": 6,
+      "alive": 82,
+      "path": "runs/multigrasp-20260928/dev-C-cp750-t2/evidence",
+      "checkpoint_sha256": "b39a6c72c82178129bf3bfbb7bbc177a48a94cbedef71e195ff3852b2208d752"
+    },
+    {
+      "cp": 750,
+      "seconds": 5,
+      "score": 0.0,
+      "strict": 0,
+      "alive": 77,
+      "path": "runs/multigrasp-20260928/dev-C-cp750-t5/evidence",
+      "checkpoint_sha256": "b39a6c72c82178129bf3bfbb7bbc177a48a94cbedef71e195ff3852b2208d752"
+    },
+    {
+      "cp": 1000,
+      "seconds": 2,
+      "score": 0.015625,
+      "strict": 2,
+      "alive": 96,
+      "path": "runs/multigrasp-20260928/dev-C-cp1000-t2/evidence",
+      "checkpoint_sha256": "b28c25fd94c4316a69fc0fe765becd8bf1aabc5bda6483f0b8ca92ad557a4ba3"
+    },
+    {
+      "cp": 1000,
+      "seconds": 5,
+      "score": 0.0,
+      "strict": 0,
+      "alive": 96,
+      "path": "runs/multigrasp-20260928/dev-C-cp1000-t5/evidence",
+      "checkpoint_sha256": "b28c25fd94c4316a69fc0fe765becd8bf1aabc5bda6483f0b8ca92ad557a4ba3"
+    }
+  ],
+  "rule": "max equally weighted16union-training-record dev strict2/5s; tie latest; blind test not read",
+  "formal_training_interactions": 163840000
+}

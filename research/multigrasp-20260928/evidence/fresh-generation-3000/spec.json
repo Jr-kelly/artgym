@@ -1,0 +1,23 @@
+{
+  "seed": 2026092805,
+  "candidates": 3000,
+  "command": [
+    "/tmp/artgym-lygra-runtime/bin/python",
+    "scripts/run_official_seeded.py",
+    "--seed",
+    "2026092805",
+    "func_lygra/generate.py",
+    "robot=wuji_artbot",
+    "object=knife_wuji_artbot",
+    "visualize=False",
+    "target_n_result=3000",
+    "batch_size_outer=512",
+    "batch_size_inner=512",
+    "object.asset.input_dir=/home/wangjiarui/artgym-multigrasp-20260928/assets/objects/knife_wuji_lowgain_fresh_multigrasp2026092805",
+    "object.asset.instance_id='000'",
+    "save_dir=/home/wangjiarui/artgym-multigrasp-20260928/caches/initial_grasp"
+  ],
+  "generation_timeout_seconds": 2700,
+  "selection": "physical criteria only; all candidates and rejections retained",
+  "purpose": "new test sources, never training or checkpoint selection"
+}
