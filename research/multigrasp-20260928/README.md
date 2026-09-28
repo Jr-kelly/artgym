@@ -63,3 +63,5 @@
 |合计|22|22|7 / 7|3 / 3|7|16|
 
 逐抓姿CSV：`reference-by-grasp.csv`。到位换向使用10mm即换向，严格固定时钟使用2mm末.3s保持及整段10mm/.25rad刀柄门槛，两者各自真实运行。不能把到位换向的循环数当严格端点稳定。原3记录仍只有2近邻构型簇，不据1回合估计稳定泛化率。所有原始trace随evidence保存。
+
+最终冻结评估另外提供`--selection final1000`，四臂均取163840000交互后的CP1000进行相同步数比较；`--selection development`保留原定开发集择优结果，两者分开报告，不能把不同CP轮次的择优表当相同有效训练步数证据。final1000必须核对checkpoint原子metadata的epoch/frame；尚未执行最终评估。
