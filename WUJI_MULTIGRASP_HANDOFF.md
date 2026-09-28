@@ -175,3 +175,7 @@ Backed up immutable A-500 with identical remote/local SHA256; not evaluated or s
 ## 多抓姿 2026-09-28T16:37:35.959615+00:00 A_cp500_and_full_analyzer_validation
 
 A500已真实保存及CPU完整性核验（81920000交互），所有四臂250已备份。正式分析入口用旧参考重用构造的验证夹具完整执行，通过360行CSV/JSON、相同输入零因素差、时序及独立评分检查；夹具不是四臂结果且临时输出已删除。训练A501/B405/C457/D331在16:36UTC实查存活，B看护余量17.8min。 证据：research/multigrasp-20260928/receipts/cp500-first-1638.json, research/multigrasp-20260928/receipts/final-analysis-export-validation.json。下一步：继续同预算训练及后续开发评估；优先检查实际进程和B超时余量。
+
+## 多抓姿 2026-09-28T16:39:00.371421+00:00 contact_gate_limitation_audited
+
+离线核查发现原参考成功抓姿0和2也不满足新测试>=3非拇指二值触觉95%门禁；触觉净力阈值不是逐物体接触身份，故门禁保守且非可操作性的必要条件。保留本轮预注册筛选不放宽。首批仍独立因姿态+拇指路径0合格；零合格不能推断无可操作新姿态。 证据：research/multigrasp-20260928/receipts/contact-gate-sensitivity.json。下一步：继续四臂训练；第二批按原物理门禁完成，同时明确筛选适用范围。
