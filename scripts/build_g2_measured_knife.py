@@ -27,9 +27,30 @@ def write_mesh(path,vertices):
     path.write_text('\n'.join(lines)+'\n')
 
 
+def build_box_v2(s, output):
+    h=s['geometry_hypothesis']; j=s['joint_hypothesis']; m=s['measured']
+    assert h['handle_thickness_m']==m['handle_thickness_m'] and h['button_base_thickness_m']==m['button_protrusion_m']
+    output.mkdir(parents=True,exist_ok=False)
+    baseline=ROOT/'assets/objects/knife_wuji_bridge3_20260922/000/mobility.urdf'
+    xml=ET.parse(baseline); robot=xml.getroot(); robot.set('name',s['version'])
+    sizes=[[h['handle_width_m'],h['handle_thickness_m'],h['handle_length_m']],[h['button_width_m'],h['button_base_thickness_m'],m['button_body_length_m']]]
+    for link,size in zip(robot.findall('link'),sizes):
+        for tag in ['visual','collision']:
+            link.find(tag+'/geometry/box').set('size',' '.join(map(str,size)))
+        mass=float(link.find('inertial/mass').get('value'));x,y,z=size
+        for key,val in zip(['ixx','iyy','izz'],[mass*(y*y+z*z)/12,mass*(x*x+z*z)/12,mass*(x*x+y*y)/12]):link.find('inertial/inertia').set(key,str(val))
+    joint=robot.find('joint');joint.find('limit').set('lower',str(j['lower_m']));joint.find('limit').set('upper',str(j['lower_m']+j['travel_m']))
+    joint.find('origin').set('xyz','0 %.12g %.12g'%(h['button_center_y_m'],h['button_closed_center_z_m']-j['lower_m']))
+    xml.write(output/'mobility.urdf',encoding='utf-8',xml_declaration=True)
+    s.update(asset_urdf=str((output/'mobility.urdf').resolve().relative_to(ROOT)),generated_audit=dict(handle_box_xyz_m=sizes[0],button_box_xyz_m=sizes[1],closed_envelope_xyz_m=[.030,.010,.170],collision_components=2,rigid_bodies=2,passive_prismatic_dofs=1,button_length_m=.045,button_protrusion_m=.002,travel_m=j['travel_m'],separate_bump=False,baseline_urdf_sha256=hashlib.sha256(baseline.read_bytes()).hexdigest(),inertia_policy='URDF analytic boxes at unchanged declared masses; retained Isaac override_com/inertia and mass assignment, effective actual values logged per run. Uncalibrated.'))
+    s['file_sha256']={'mobility.urdf':hashlib.sha256((output/'mobility.urdf').read_bytes()).hexdigest()}
+    (output/'asset-spec.json').write_text(json.dumps(s,indent=2)+'\n');print(json.dumps(s['generated_audit']))
+
+
 def main():
     p=argparse.ArgumentParser();p.add_argument('--spec',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
     a=p.parse_args();s=json.loads(a.spec.read_text());h=s['geometry_hypothesis'];j=s['joint_hypothesis'];m=s['measured']
+    if h.get('model')=='two_boxes_v2':return build_box_v2(s,a.output)
     a.output.mkdir(parents=True,exist_ok=False);meshdir=a.output/'meshes';meshdir.mkdir()
     half=h['handle_thickness_m']/2
     body=np.array([[x,y,z] for z,width in h['handle_cross_sections_z_width_m'] for x in [-width/2,width/2] for y in [-half,half]])

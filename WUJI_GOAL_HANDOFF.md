@@ -1,3 +1,9 @@
+# 最新活动任务：v2功能持刀新预算轮
+
+本轮分支`feat/g2-wuji-functional-v2-20260928`，工作区`/data/research/artgym-g2-functional-v2-20260928`。
+先读`research/g2-functional-v2-20260928.md`及`runs/g2-functional-v2-20260928/state.json`。
+用户新授权100条执行、6组学习、8单卡小时、8小时墙钟；旧预算耗尽不是本轮阻塞。
+
 ## Latest 2026-09-28T09:20:30.326260+00:00 — native Goal BLOCKED after third budget audit
 原生update_goal(status=blocked)已成功；目标未完成且未缩小。连续第3个goal轮实查同一预算阻塞：80/80控制试验、4/4主要训练配置均已用满，用户尚未回复“最多追加4次”的待确认请求。自动Goal续接不是追加额度授权。上一轮为progress（已有轨迹的接触序列分析及发布）；本轮没有新的可执行物理动作或待运行任务，故不重复空转/调参。
 实查8个F1启动PID均不存在且各自有终结failure.json；原HTTP4098和监控97337、3132243仍在，未干扰。远端分支与本地421222e一致，已有代码/报告/29项Release资产及恢复检查均已交付。完整目标仍是连续取刀→翻掌→四指支撑→teacher/student两轮，当前新刀仅闭合/起抬失败，不能称完成。

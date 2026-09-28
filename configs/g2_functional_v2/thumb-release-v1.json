@@ -1,0 +1,209 @@
+{
+  "scope": "Preset-only thumb unloading motor path; nonthumb references held exactly; not acquisition",
+  "ik_residual_m": 2.2112386112194888e-08,
+  "displacement_m": 0.008,
+  "stages": [
+    {
+      "name": "reference_hold",
+      "seconds": 1,
+      "hold": true
+    },
+    {
+      "name": "thumb_unload",
+      "seconds": 1,
+      "indices": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "target": [
+        1.2150934800703965,
+        0.19267659265612413,
+        1.1495920259665353,
+        -0.4327691104546827
+      ]
+    },
+    {
+      "name": "thumb_clear_hold",
+      "seconds": 1,
+      "hold": true,
+      "require_clear": true
+    },
+    {
+      "name": "thumb_return",
+      "seconds": 1,
+      "indices": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "target": [
+        1.3342170715332031,
+        0.26586204767227173,
+        0.9587644338607788,
+        -0.469899982213974
+      ]
+    }
+  ],
+  "audit": [
+    {
+      "fraction": 0.0,
+      "intersections": [],
+      "thumb_gap_m": 0.0002985969402514938
+    },
+    {
+      "fraction": 0.03333333333333333,
+      "intersections": [],
+      "thumb_gap_m": 0.0005112355223779435
+    },
+    {
+      "fraction": 0.06666666666666667,
+      "intersections": [],
+      "thumb_gap_m": 0.0007248824839816356
+    },
+    {
+      "fraction": 0.1,
+      "intersections": [],
+      "thumb_gap_m": 0.0009395206394113408
+    },
+    {
+      "fraction": 0.13333333333333333,
+      "intersections": [],
+      "thumb_gap_m": 0.0011551327591994079
+    },
+    {
+      "fraction": 0.16666666666666666,
+      "intersections": [],
+      "thumb_gap_m": 0.0013717015719071565
+    },
+    {
+      "fraction": 0.2,
+      "intersections": [],
+      "thumb_gap_m": 0.0015892097659745003
+    },
+    {
+      "fraction": 0.23333333333333334,
+      "intersections": [],
+      "thumb_gap_m": 0.001807639991573756
+    },
+    {
+      "fraction": 0.26666666666666666,
+      "intersections": [],
+      "thumb_gap_m": 0.00202697486246705
+    },
+    {
+      "fraction": 0.3,
+      "intersections": [],
+      "thumb_gap_m": 0.0022471969578674485
+    },
+    {
+      "fraction": 0.3333333333333333,
+      "intersections": [],
+      "thumb_gap_m": 0.0024682888243033243
+    },
+    {
+      "fraction": 0.36666666666666664,
+      "intersections": [],
+      "thumb_gap_m": 0.0026902329774860113
+    },
+    {
+      "fraction": 0.4,
+      "intersections": [],
+      "thumb_gap_m": 0.002913011904179955
+    },
+    {
+      "fraction": 0.43333333333333335,
+      "intersections": [],
+      "thumb_gap_m": 0.0031366080640759346
+    },
+    {
+      "fraction": 0.4666666666666667,
+      "intersections": [],
+      "thumb_gap_m": 0.0033610038916664312
+    },
+    {
+      "fraction": 0.5,
+      "intersections": [],
+      "thumb_gap_m": 0.0035861817981231135
+    },
+    {
+      "fraction": 0.5333333333333333,
+      "intersections": [],
+      "thumb_gap_m": 0.003812124173176482
+    },
+    {
+      "fraction": 0.5666666666666667,
+      "intersections": [],
+      "thumb_gap_m": 0.004038813386996973
+    },
+    {
+      "fraction": 0.6,
+      "intersections": [],
+      "thumb_gap_m": 0.004262618240654671
+    },
+    {
+      "fraction": 0.6333333333333333,
+      "intersections": [],
+      "thumb_gap_m": 0.0044866928619093655
+    },
+    {
+      "fraction": 0.6666666666666666,
+      "intersections": [],
+      "thumb_gap_m": 0.004711502532426451
+    },
+    {
+      "fraction": 0.7,
+      "intersections": [],
+      "thumb_gap_m": 0.004937029646688625
+    },
+    {
+      "fraction": 0.7333333333333333,
+      "intersections": [],
+      "thumb_gap_m": 0.0051632565837485215
+    },
+    {
+      "fraction": 0.7666666666666666,
+      "intersections": [],
+      "thumb_gap_m": 0.005390165709113723
+    },
+    {
+      "fraction": 0.8,
+      "intersections": [],
+      "thumb_gap_m": 0.005617739376632522
+    },
+    {
+      "fraction": 0.8333333333333334,
+      "intersections": [],
+      "thumb_gap_m": 0.005845959930380444
+    },
+    {
+      "fraction": 0.8666666666666667,
+      "intersections": [],
+      "thumb_gap_m": 0.00607480970654645
+    },
+    {
+      "fraction": 0.9,
+      "intersections": [],
+      "thumb_gap_m": 0.006304271035319841
+    },
+    {
+      "fraction": 0.9333333333333333,
+      "intersections": [],
+      "thumb_gap_m": 0.006534326242776526
+    },
+    {
+      "fraction": 0.9666666666666667,
+      "intersections": [],
+      "thumb_gap_m": 0.006764957652764908
+    },
+    {
+      "fraction": 1.0,
+      "intersections": [],
+      "thumb_gap_m": 0.006996147588790974
+    }
+  ],
+  "limits_ok": true,
+  "numerical_intersection_radius_threshold_m": 1e-05
+}

@@ -26,9 +26,11 @@ def pose(t):
 
 
 class FrozenPolicy:
-    def __init__(self,cfg,teacher,student=None,action_mode='full'):
+    def __init__(self,cfg,teacher,student=None,action_mode='full', geometry=None):
         if action_mode not in ['full','thumb-only']:raise ValueError('Unknown explicit action ablation')
         self.action_mode=action_mode;self.last_raw_action=np.zeros(20,dtype=np.float32)
+        self.geometry=np.asarray(geometry if geometry is not None else [.019,.008,.147,.01,.003,.03],dtype=np.float32)
+        assert self.geometry.shape==(6,) and (self.geometry>0).all()
         self.fk=WujiKinematics(); self.cfg=cfg
         train=preprocess_train_config(cfg,OmegaConf.to_container(cfg.train,resolve=True))
         self.player=build_policy_player(cfg,train,Path(teacher),_infer_expl_num_blocks(Path(teacher)),0)
@@ -58,10 +60,10 @@ class FrozenPolicy:
         local=np.linalg.inv(wrist)
         # A can reproduce the original cached initialization; B/C use actual state.
         if reference_state is None:
-            self.init=np.r_[self.normalized(q),pose(local@obj),pose(local@slider_pose),self.tips(q),[.019,.008,.147,.01,.003,.03]]
+            self.init=np.r_[self.normalized(q),pose(local@obj),pose(local@slider_pose),self.tips(q),self.geometry]
         else:
             s=reference_state
-            self.init=np.r_[self.normalized(s[:20]),s[40:54],s[55:70],[.019,.008,.147,.01,.003,.03]]
+            self.init=np.r_[self.normalized(s[:20]),s[40:54],s[55:70],self.geometry]
         self.slider_initial=float(slider);self.previous_slider=float(slider)
         self.last_action=np.zeros(20,dtype=np.float32)
         assert len(self.init)==55

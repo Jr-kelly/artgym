@@ -1,0 +1,57 @@
+{
+  "version": "knife_wuji_measured_box_20260928_v2",
+  "measurement_source": "User corrected measurements2026-09-28: BODY thickness8mm; button protrusion2mm, peak ambiguity retained",
+  "measured": {
+    "handle_length_m": 0.17,
+    "handle_max_width_m": 0.03,
+    "handle_thickness_m": 0.008,
+    "button_body_length_m": 0.045,
+    "button_protrusion_m": 0.002,
+    "button_has_central_bump": true
+  },
+  "unmeasured": [
+    "button width",
+    "button closed center",
+    "slider travel",
+    "central bump peak within2mm or additional",
+    "actual tapered profile",
+    "mass/inertia/friction/push resistance/latch"
+  ],
+  "geometry_hypothesis": {
+    "model": "two_boxes_v2",
+    "handle_thickness_m": 0.008,
+    "handle_length_m": 0.17,
+    "handle_width_m": 0.03,
+    "button_width_m": 0.012,
+    "button_base_thickness_m": 0.002,
+    "button_center_y_m": 0.005,
+    "button_closed_center_z_m": -0.02,
+    "outline_status": "170x30x8 bounding-box approximation authorized by user; no taper or separate bump",
+    "bump_status": "Merged into whole2mm button block; peak interpretation remains unmeasured"
+  },
+  "joint_hypothesis": {
+    "lower_m": -0.03267458688196273,
+    "travel_m": 0.05,
+    "operation_excursion_m": 0.04,
+    "status": "Travel and operation excursion inherited solely for controlled comparison, NOT measured and NOT inferred from45mm button length"
+  },
+  "physics_hypothesis": {
+    "body_mass_kg": 0.029,
+    "button_mass_kg": 0.006,
+    "knife_friction": 3.0,
+    "slider_damping": 0.3,
+    "slider_friction": 0.001,
+    "status": "Retain previous simulation values, uncalibrated. No force/latch inference from external dimensions. New geometry means inertia may change under existing loader override; report effective inertia."
+  },
+  "planning": {
+    "side_half_width_m": 0.015,
+    "side_contact_y_interval_m": [
+      -0.003,
+      0.003
+    ],
+    "side_flat_z_interval_m": [
+      -0.075,
+      0.075
+    ]
+  }
+}

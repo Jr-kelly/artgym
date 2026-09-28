@@ -35,6 +35,7 @@ def main():
     parser.add_argument('--teacher',type=Path,default=PUBLISHED/(PREFIX+'teacher.pth'))
     parser.add_argument('--student',type=Path,default=PUBLISHED/(PREFIX+'student.pth'))
     parser.add_argument('--grasp',type=int,default=0,choices=[0,1,2])
+    parser.add_argument('--preset-preparation',type=Path,help='A-only motor-only single-digit preparation after actual settle; fixed-reference hold gates')
     parser.add_argument('--preset-candidate',type=Path,help='A-only explicit70-value candidate state before the first physics step, followed by2s actual settling; never a continuous acquisition result.')
     parser.add_argument('--video',action='store_true')
     parser.add_argument('--seconds',type=float,default=20)
@@ -123,7 +124,7 @@ def main():
     knife_geometry=None
     knife_asset_path=ROOT/'assets/objects/knife_wuji_bridge3_20260922/000/mobility.urdf'
     if args.knife_spec:
-        assert args.group=='B' and args.only_grasp and (args.pickup_only or args.air_flip_only)
+        assert (args.group=='A' and args.preset_candidate) or (args.group=='B' and args.only_grasp and (args.pickup_only or args.air_flip_only)), 'New geometry: presetA or acquisition diagnostic only until further interface audit'
         assert not args.pickup_finger_feedback and not args.table_supported_seat and not args.gait_plan
         from scripts.g2_knife_geometry import KnifeGeometry
         knife_geometry=KnifeGeometry(args.knife_spec);knife_asset_path=knife_geometry.urdf
@@ -232,7 +233,11 @@ def main():
               table_top=table_z,knife_pose=pose(table_obj).tolist(),planned_wrist_pose=pose(grasp_pose).tolist())
     (args.output/'plan.json').write_text(json.dumps(plan,indent=2)+'\n')
     if preset_candidate is None:assert max(e['position_m'] for e in [high_error,grasp_error,lift_error])<.001
-    policy=FrozenPolicy(cfg,args.teacher,args.student if args.group=='C' else None,action_mode=args.policy_action_mode)
+    geometry_input=None
+    if knife_geometry is not None:
+        geometry_input=np.concatenate([np.ptp(v,axis=0) for name,idx,v in knife_geometry.parts if idx==0])
+        assert len(geometry_input)==6
+    policy=FrozenPolicy(cfg,args.teacher,args.student if args.group=='C' else None,action_mode=args.policy_action_mode,geometry=geometry_input)
     gym=gymapi.acquire_gym(); sp=gymapi.SimParams()
     sp.dt=float(cfg.task.sim.dt);sp.substeps=int(cfg.task.sim.substeps);sp.up_axis=gymapi.UP_AXIS_Z
     sp.gravity=gymapi.Vec3(0,0,-9.81);sp.use_gpu_pipeline=False
@@ -355,7 +360,7 @@ def main():
             geometry_override='knife-asset-spec.json',effective_simulator_properties='physics.json',
             knife_asset_urdf=str(knife_asset_path),knife_file_sha256=knife_geometry.spec['file_sha256'],
             cli={key:str(value) if isinstance(value,Path) else value for key,value in vars(args).items()},
-            policies_executed=False,scope='Measured-envelope acquisition diagnostic; no policy operation'),indent=2)+'\n')
+            geometry_observation=policy.geometry.tolist(),weights_frozen=True,policy_execution='See report.operation_steps; geometry interface corrected without retraining',scope='Independent presetA or continuous acquisition diagnostic'),indent=2)+'\n')
     closed=s[20:40].copy();opened=closed.copy()
     if preset_candidate is not None:
         assert np.all(s[:20]>=policy.fk.lower-1e-6) and np.all(s[:20]<=policy.fk.upper+1e-6)
@@ -548,6 +553,30 @@ def main():
     try:
         refresh()
         if preset_candidate is not None:
+            for _ in range(round(args.settle_seconds/dt)):tick('settle_history')
+        if args.preset_preparation:
+            assert args.group=='A' and preset_candidate is not None and args.contact_diagnostics
+            plan_pre=json.loads(args.preset_preparation.read_text())
+            (args.output/'preset-preparation.json').write_text(json.dumps(plan_pre,indent=2)+'\n')
+            checks=[]
+            for stage in plan_pre['stages']:
+                start=targets[hand_idx].copy();end=start.copy()
+                if not stage.get('hold'):
+                    ids=stage['indices'];assert len(ids)<=4, 'Only one digit per stage'
+                    end[ids]=stage['target']
+                    assert np.all(end>=policy.fk.lower) and np.all(end<=policy.fk.upper)
+                _,_,_,ref_w,ref_o,_=current();ref_rel=np.linalg.inv(ref_w)@ref_o;first=len(records)
+                for frame in range(round(stage['seconds']/dt)):
+                    a=smooth((frame+1)/round(stage['seconds']/dt));targets[hand_idx]=start+(end-start)*a
+                    tick('preset_'+stage['name'])
+                rows=records[first:];objects=np.asarray([r['object'] for r in rows]);rels=np.array([np.linalg.inv(transform(r['wrist'][:3],r['wrist'][3:]))@transform(r['object'][:3],r['object'][3:]) for r in rows])
+                wd=float(np.linalg.norm(objects[:,:3]-ref_o[:3,3],axis=1).max());wr=float(Rotation.from_matrix(ref_o[:3,:3].T@Rotation.from_quat(objects[:,3:]).as_matrix()).magnitude().max())
+                hd=float(np.linalg.norm(rels[:,:3,3]-ref_rel[:3,3],axis=1).max());hr=float(Rotation.from_matrix(ref_rel[:3,:3].T@rels[:,:3,:3]).magnitude().max())
+                c=np.asarray([r['finger_knife_contacts'] for r in rows]);clear=bool((c[:,0]==0).all() and min(r['thumb_gap_lower_bound_m'] for r in rows)>.001)
+                stable=wd<.01 and wr<.25 and hd<.01 and hr<.25 and all(r['knife_table_contacts']==0 for r in rows) and objects[:,2].min()>table_z+.1
+                check=dict(name=stage['name'],hold=stage.get('hold',False),world_drift_m=wd,world_rotation_rad=wr,hand_drift_m=hd,hand_rotation_rad=hr,stable=bool(stable),thumb_clear=clear,contacts_fraction=(c>0).mean(0).tolist(),first_step=first,last_step=len(records),slider_passive_delta_m=rows[-1]['slider']-rows[0]['slider'])
+                checks.append(check);(args.output/'preset-preparation-checks.json').write_text(json.dumps(checks,indent=2)+'\n')
+                if stage.get('hold') and (not stable or (stage.get('require_clear') and not clear)):raise ValueError('Preset preparation hold failed: '+stage['name'])
             for _ in range(round(args.settle_seconds/dt)):tick('settle_history')
         if args.group!='A':
             for _ in range(60):tick('table_settle')
