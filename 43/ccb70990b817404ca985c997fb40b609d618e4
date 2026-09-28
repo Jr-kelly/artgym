@@ -1,0 +1,167 @@
+scripts/prepare_wuji_multigrasp_supplement.py
+  s_721f503d39167b::t_28cb7be61628c4 1-43
+scripts/collect_wuji_multigrasp_fresh2.py
+  s_721f503d39167b::t_85af6970bd583c 2,9-10,24
+scripts/prepare_wuji_multigrasp_frozen_cohort.py
+  s_721f503d39167b::t_28cb7be61628c4 23,26
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "43ccb70990b817404ca985c997fb40b609d618e4",
+  "prompts": {},
+  "sessions": {
+    "s_721f503d39167b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0e87e-fbfa-7a80-b73c-3a968594ab0a",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.output_tokens": "116368",
+        "tlab.token_usage.input_tokens": "4279415",
+        "tlab.token_usage.cache_read_tokens": "38688578",
+        "tlab.session_started_at": "2026-09-28T18:32:18Z"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/multigrasp-20260928/data/fresh2805-frozen/manifest.json",
+      "additions": {
+        "human": 708
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/data/fresh2805-geometry.json",
+      "additions": {
+        "human": 831
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/data/fresh2805-supplement-frozen/manifest.json",
+      "additions": {
+        "human": 21
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/receipts/checkpoint-backups/A-1000.json",
+      "additions": {
+        "human": 16
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/receipts/checkpoint-backups/C-1000.json",
+      "additions": {
+        "human": 16
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/receipts/checkpoint-backups/D-750.json",
+      "additions": {
+        "human": 16
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/receipts/cp1000-A-1812.json",
+      "additions": {
+        "human": 21
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/receipts/cp1000-AC-1830.json",
+      "additions": {
+        "human": 45
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/receipts/cp750-ABCD-1830.json",
+      "additions": {
+        "human": 117
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/receipts/fresh2-continuation-v2.json",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "new_path": "scripts/prepare_wuji_multigrasp_supplement.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 43
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "WUJI_MULTIGRASP_HANDOFF.md",
+      "new_path": "WUJI_MULTIGRASP_HANDOFF.md",
+      "additions": {
+        "human": 76
+      }
+    },
+    {
+      "old_path": "research/multigrasp-20260928/README.md",
+      "new_path": "research/multigrasp-20260928/README.md",
+      "additions": {
+        "human": 8
+      }
+    },
+    {
+      "old_path": "research/multigrasp-20260928/receipts/checkpoint-backups/status.json",
+      "new_path": "research/multigrasp-20260928/receipts/checkpoint-backups/status.json",
+      "additions": {
+        "human": 50
+      },
+      "deletions": {
+        "human": 2
+      }
+    },
+    {
+      "old_path": "scripts/collect_wuji_multigrasp_fresh2.py",
+      "new_path": "scripts/collect_wuji_multigrasp_fresh2.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 4
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 2
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/prepare_wuji_multigrasp_frozen_cohort.py",
+      "new_path": "scripts/prepare_wuji_multigrasp_frozen_cohort.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 2
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 1
+          }
+        ]
+      }
+    }
+  ]
+}
