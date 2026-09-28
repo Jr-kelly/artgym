@@ -1,3 +1,9 @@
+## Latest 2026-09-28T09:12:33.773726+00:00 — delivered measured-knife increment; goal remains unmet, budget exhausted
+本轮交付完成：feat/g2-wuji-finger-surface-grasp-20260928（代码/报告基线e32f68a，最后提交补收据），Release g2-wuji-finger-surface-20260928-v1，12项新增资产SHA核验、原16项哈希不变；4.18MB增量包恢复验证3个pin共1670源码哈希、48新增原始运行文件，无缺失。源码/模型/配置/旧demo不覆盖。所有本轮CPU/仿真/训练已结束；HTTP4098等原任务保留，恢复请实查PID。
+实测尺寸资产独立v1，170x30x8与45mm按钮，含凸起主假设6+1+1，其他未知参数仍是假设。F1-07仅落稳后净空拒绝；F1-08通过实际0.5384mm净空并执行闭合起抬，刀心升12.35mm但始终接触桌面，9.9s全手接触丢失、保持失败，被动滑块8.9mm。没有翻掌/拇指转移/teacher/student。两次新资产开发启动、仅一次实际抓取尝试，0/1，不称泛化统计。旧尺寸F1-01..06另存。
+预算80/80控制和4/4主要训练配置已满；本分支0新增训练，保守累计GPU4.95665h/12。总体Goal未达到，不标complete；本轮预算阻塞首次审计，不自动第81次/第五配置。唯一后续优先：另有额度后，薄刀上缘接触迁移＋短抬保持有界对照，先稳定侧夹再扩展翻掌。不把预算未用完的墙钟或GPU时数当额外控制/训练授权。
+当前报告research/g2-measured-knife-20260928.md；复现research/g2-finger-surface-reproduction-20260928.md；持久状态runs/g2-finger-surface-20260928/state.json。收据在research/g2-finger-surface-20260928/measured-asset-evidence。视频本地已HTTP200验证：firefox http://127.0.0.1:8767/g2-finger-surface-20260928/（WebM默认）。GitHub视频名F1-08-measured-knife-side-pinch-failure-continuous.webm，明确失败范围。完整原始MP4和近景保留，无文字/拼接。
+
 ## Latest 2026-09-28T09:05:54.832912+00:00 — measured-knife trials terminal;80/80 physical budget, delivery in progress
 工作树/data/research/artgym-g2-finger-surface-20260928，分支feat/g2-wuji-finger-surface-grasp-20260928。所有本轮仿真/几何进程已结束，原监控/HTTP保留；恢复时重新实查。新资产170x30x8mm/45mm按钮＋可调凸起保持独立；8mm含凸起只是6+1+1主假设，其余未知量明确，旧资产/权重哈希不变。
 F1-07新资产仅自然落稳60帧，实际手桌净空0.0416mm，接近前拒绝（未尝试抓取）。F1-08用实测末态仅离线重规划，从桌面初态重新执行420帧；前60帧刀身轨迹与F1-07完全相同，实际预检0.5384mm通过。闭合五指接触，刀心最高升12.35mm但全程仍有刀桌接触，9.9s全手失去接触；固定1s保持失败。被动滑块约8.9mm，不是策略输出。无翻掌/拇指迁移/teacher/student。3条当前G2分支翻掌路径到限位，不泛化为所有G2路径不可行。
