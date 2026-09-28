@@ -1,0 +1,33 @@
+{
+  "name": "reference-candidates-t5-v1",
+  "gpu": 0,
+  "command": [
+    "/home/agiuser/miniconda3/envs/artgym/bin/python",
+    "-m",
+    "scripts.audit_wuji_multigrasp",
+    "--checkpoint",
+    "runs/multigrasp-20260928/reference.pth",
+    "--task",
+    "wuji_multigrasp",
+    "--hand",
+    "wuji_paper_official_actuator",
+    "--object",
+    "knife_wuji_bridge3_20260922",
+    "--initial-states",
+    "research/multigrasp-20260928/data/candidates.npy",
+    "--stage-seconds",
+    "5",
+    "--output",
+    "runs/multigrasp-20260928/reference-candidates-t5-v1/evidence"
+  ],
+  "timeout_seconds": 1800,
+  "started": "2026-09-28T15:19:00.573099+00:00",
+  "pid": 3744256,
+  "status": "completed",
+  "child_pid": 3744259,
+  "heartbeat": "2026-09-28T15:20:00.702192+00:00",
+  "elapsed_seconds": 60.10719365300611,
+  "returncode": 0,
+  "finished": "2026-09-28T15:20:27.732616+00:00",
+  "wall_seconds": 87.15943673695438
+}

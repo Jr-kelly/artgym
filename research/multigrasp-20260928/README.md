@@ -50,3 +50,5 @@
 旧teacher5秒固定时钟结果：19/24alive、9/24完整第一轮、5/24全部严格，严格成功仍仅原3记录及2重复。完整视频已生成于 `videos/reference-three-grasps-policy.mp4`，manifest写明选取规则、物体/权重/输入及同一脚本实际重仿真结果；600帧、20秒、30fps。3-env视频实际行0成功、行3推不动、行5旋转过大；行5没有复现24-env数值诊断中的掉落，不能称精确重放。同一个基础初态的不同并行批量也存在仿真差异，正式四组在相同批量/设备/协议比较。
 
 新测试seed2803的物理门禁联合结果固定为0合格，见data/fresh2803-frozen/manifest.json；保留失败，不运行空分母评估。第二批3000候选仍在A训练之后的队列中。冻结最终四组+旧参考统一评估入口 `scripts/evaluate_wuji_multigrasp_frozen.py` 已实现，尚未执行（等待训练/开发选定权重与合格新测试）。
+
+开发集初态静态预检完成：128/128存活，127/128全程满足10mm/.25rad刀身阈值。额外训练基础记录7的一次扰动越过刀身阈值，保留并单列；不据此重选开发集或改变预注册CP规则。证据`development-static-validity.json`及`evidence/dev-static-precheck-v1`。

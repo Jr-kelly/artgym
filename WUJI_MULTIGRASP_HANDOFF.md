@@ -77,3 +77,7 @@ A/C/B actual running, D preflight passed then queued after new test generation; 
 上一goal轮为progress；本轮再次实查四训练PID2449/2499/3149/4716均存活。旧teacher5秒严格5/24（原3及2重复），19/24存活。新seed2803最终物理门禁0合格。三抓姿20秒视频完成并检查600帧；1/3严格、3/3存活，行5小batch未复现24-env掉落，已明确标注。 证据：research/multigrasp-20260928/videos/manifest.json, research/multigrasp-20260928/data/fresh2803-frozen/manifest.json, research/multigrasp-20260928/receipts/process-throughput-20260928T1524.json。下一步：保留四组1000epoch训练，监测D四小时job上限余量；等新3000生成后物理筛选并执行冻结最终评估。
 
 多抓姿 2026-09-28T15:26:02.034277+00:00 本机4090实查无计算进程，启动 dev-static-precheck-v1 PID3788253；命令与权重/配置见 runs/multigrasp-20260928/dev-static-precheck-v1；待终结核验。
+
+## 多抓姿 2026-09-28T15:28:23.771227+00:00 development_static_completed
+
+128开发扰动全部静态存活，127/128全程刀身稳定；base7一扰动未过严格稳定，保留全部行并单列，不调阈值。代表视频已push001b043并HTTP200/远端commit核验。当前本机仿真全部结束，四H100训练仍在运行，未新增主要诊断。 证据：research/multigrasp-20260928/development-static-validity.json, research/multigrasp-20260928/videos/manifest.json。下一步：四组1000epoch与已排队开发评估，补充新测试抓姿；留出冻结评估和最终提交时间。
