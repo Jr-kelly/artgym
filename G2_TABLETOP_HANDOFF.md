@@ -1,3 +1,8 @@
+## Latest 2026-09-28 14:50 CST — user reference image: finger-surface functional grasp
+新需求：保留全部已成功链路/demo，另研究刀身横跨非拇指掌侧指面、拇指在滑块面操作的功能抓姿。旧成功分支和Release保留，独立工作树 `/data/research/artgym-g2-finger-surface-20260928`，分支 `feat/g2-wuji-finger-surface-grasp-20260928`，基于 ef3f51d。本次仅只读轨迹核查＋目标定义，0物理试验/0训练，未追加第五训练配置，无新活动进程。
+实际旧成功R7-03操作600帧：index100%、middle48.33%、ring0%、pinky59%、thumb-slider100%；中指触刀侧边附近，拇指滑块宽边附近。旧预置R3-15-A：index/middle/pinky100%、ring93.83%、thumb-slider100%，4指同时底面接触93.83%；两轮2mm及稳定均通过，但只是预置操作证据，不是连续获取。该A只作为有操作证据的第一参考，不强制回缓存关节；视觉上仍较参考图弯曲，不宣称已复现图中姿态。
+目标/保护索引在 `configs/g2_finger_surface/`，只允许规划参照，不得注入连续物理。报告 `research/g2-finger-surface-reference-20260928.md`；实际接触/截图对比 `research/g2-finger-surface-20260928/`。下一项：围绕分布式指面支撑、较小蜷曲和完整拇指行程做目标可达性筛选，再设计连续获取；旧成功回归需保留。本次不冒称完成新抓姿、泛化或部署。接触占比不等于实测承载。
+
 ## Latest 2026-09-28 07:08 CST — delivered; no active task simulation/training
 本轮固定场景连续目标及必要验证已完成，全部新增代码、报告和增量证据已发布。工作树 `/data/research/artgym-g2-local-policy-20260928`；分支 `feat/g2-wuji-local-policy-20260928`；Release `g2-wuji-local-policy-20260928-v1`。固定动态H/S两次通过同一摆放；新增单次S推理连续对照也通过（1.671mm/.226193rad，端点2.915/0/3.387/0mm）。两者严格2mm均失败，不是原teacher或可部署student。
 冻结20新摆放整段0/20（18取刀、16翻掌、0进入伸缩；条件S未测到）。已见00接触修正推进换握，但学习/固定H都失败。手部重力打开后的连续获取仍失败；局部重力补偿成功不能替代整段。4/4主要训练配置、72/80控制开发执行均已结束；学习/调试2.106GPUh，含全部仿真的保守合并记账4.800GPUh/12。无本轮训练或仿真残留；原monitor97337、HTTP4098保留，恢复时实查身份。

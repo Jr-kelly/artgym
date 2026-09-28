@@ -1,0 +1,255 @@
+{
+  "scope": "Read-only comparison of two real recorded operation windows; no new simulation or training",
+  "continuous": {
+    "run": "/data/research/artgym-g2-local-policy-20260928/runs/g2-local-policy-20260928/R7-03-continuous-learned-H-then-joint-S",
+    "source_trace_sha256": "e73f63ef92be00d989ee317a6f230146132b5dfe91b6d8abb659b1806a7bbf65",
+    "contact_log_sha256": "9488a8002c6680517a0011ecae3bdfe89ed908e690c123945fc1b1564a03ad1e",
+    "frames": 600,
+    "contact_order": [
+      "thumb",
+      "index",
+      "middle",
+      "ring",
+      "pinky"
+    ],
+    "contacts": {
+      "thumb": {
+        "contact_link": "link_1",
+        "operation_contact_fraction": 1.0,
+        "point_median_m": [
+          -0.005000276491045952,
+          0.0014995684614405036,
+          0.014460701495409012
+        ],
+        "point_min_m": [
+          -0.005216396879404783,
+          0.0014286604709923267,
+          0.013573559932410717
+        ],
+        "point_max_m": [
+          -0.0048631965182721615,
+          0.001534280483610928,
+          0.014997836202383041
+        ],
+        "width_edge_margin_median_m": -2.764910459517392e-07
+      },
+      "index": {
+        "contact_link": "link_0",
+        "operation_contact_fraction": 1.0,
+        "point_median_m": [
+          -0.00022383604664355516,
+          -0.003999317530542612,
+          0.01126681687310338
+        ],
+        "point_min_m": [
+          -0.0002294203732162714,
+          -0.004008172545582056,
+          0.011263464577496052
+        ],
+        "point_max_m": [
+          -7.401825860142708e-05,
+          -0.003993913996964693,
+          0.011438514105975628
+        ],
+        "width_edge_margin_median_m": 0.009276163953356445
+      },
+      "middle": {
+        "contact_link": "link_0",
+        "operation_contact_fraction": 0.48333333333333334,
+        "point_median_m": [
+          0.009500850923359394,
+          -0.004001965746283531,
+          -0.0026823156513273716
+        ],
+        "point_min_m": [
+          0.00942986086010933,
+          -0.004239232279360294,
+          -0.0027648452669382095
+        ],
+        "point_max_m": [
+          0.009577352553606033,
+          -0.003735485253855586,
+          -0.0009762259433045983
+        ],
+        "width_edge_margin_median_m": -8.509233593943094e-07
+      },
+      "ring": {
+        "contact_link": "link_0",
+        "operation_contact_fraction": 0.0,
+        "point_median_m": null,
+        "point_min_m": null,
+        "point_max_m": null,
+        "width_edge_margin_median_m": null
+      },
+      "pinky": {
+        "contact_link": "link_0",
+        "operation_contact_fraction": 0.59,
+        "point_median_m": [
+          -0.004091211128979921,
+          -0.003999910783022642,
+          -0.054525189101696014
+        ],
+        "point_min_m": [
+          -0.006390794180333614,
+          -0.004008140880614519,
+          -0.05460771173238754
+        ],
+        "point_max_m": [
+          -0.003922249190509319,
+          -0.0039964644238352776,
+          -0.054319676011800766
+        ],
+        "width_edge_margin_median_m": 0.005408788871020078
+      }
+    },
+    "three_or_more_non_thumb_bottom_pad_fraction": 0.43,
+    "four_non_thumb_bottom_pad_fraction": 0.0,
+    "bottom_face_diagnostic_tolerance_m": 0.0003,
+    "bottom_face_tolerance_scope": "Classification around actual knife y=-4mm; not a new physical success or penetration threshold",
+    "endpoint_max_errors_m": [
+      0.004145194273442031,
+      1.0244548320770264e-06,
+      0.004086331427097321,
+      2.9802322387695312e-08
+    ],
+    "world_drift_max_m": 0.0021151794407986636,
+    "world_rotation_max_rad": 0.17207741857648912,
+    "basic_10mm": true,
+    "strict_2mm": false,
+    "stable_world_10mm_025rad": true,
+    "initial_scene_group": "B"
+  },
+  "preset_reference": {
+    "run": "/data/research/artgym-g2-tabletop-20260925/runs/g2-overnight-20260926/R3-15-A-functional-current-wrist",
+    "source_trace_sha256": "d66cd9cd097200101fba261fb9416fa197bbae7cbd90d6e311ebb755d6fe5baa",
+    "contact_log_sha256": "dcae487943d8b23bee658234bf9d210c02fe1ac155ed083754f8ad20e02be9bb",
+    "frames": 600,
+    "contact_order": [
+      "thumb",
+      "index",
+      "middle",
+      "ring",
+      "pinky"
+    ],
+    "contacts": {
+      "thumb": {
+        "contact_link": "link_1",
+        "operation_contact_fraction": 1.0,
+        "point_median_m": [
+          0.0015551180113106966,
+          0.0014998328406363726,
+          0.00987720675766468
+        ],
+        "point_min_m": [
+          -0.0049956487491726875,
+          0.0014544412260875106,
+          0.007077288813889027
+        ],
+        "point_max_m": [
+          0.0037031834945082664,
+          0.0015370702603831887,
+          0.015177179127931595
+        ],
+        "width_edge_margin_median_m": 0.003444631462916732
+      },
+      "index": {
+        "contact_link": "link_0",
+        "operation_contact_fraction": 1.0,
+        "point_median_m": [
+          0.002355564385652542,
+          -0.003998818341642618,
+          0.04625704884529114
+        ],
+        "point_min_m": [
+          0.0019017364829778671,
+          -0.0040537696331739426,
+          0.0445789210498333
+        ],
+        "point_max_m": [
+          0.0028286371380090714,
+          -0.0039319428615272045,
+          0.04693719744682312
+        ],
+        "width_edge_margin_median_m": 0.007144435614347458
+      },
+      "middle": {
+        "contact_link": "link_0",
+        "operation_contact_fraction": 1.0,
+        "point_median_m": [
+          -0.0003259821096435189,
+          -0.00399941997602582,
+          0.002224141964688897
+        ],
+        "point_min_m": [
+          -0.008917798288166523,
+          -0.004043371416628361,
+          0.0016337358392775059
+        ],
+        "point_max_m": [
+          0.00014981545973569155,
+          -0.003960940986871719,
+          0.003171767108142376
+        ],
+        "width_edge_margin_median_m": 0.00917401789035648
+      },
+      "ring": {
+        "contact_link": "link_0",
+        "operation_contact_fraction": 0.9383333333333334,
+        "point_median_m": [
+          0.007843555882573128,
+          -0.003999804146587849,
+          -0.02194831147789955
+        ],
+        "point_min_m": [
+          0.007422441616654396,
+          -0.004040249157696962,
+          -0.02276616171002388
+        ],
+        "point_max_m": [
+          0.008674371056258678,
+          -0.003969645593315363,
+          -0.020511958748102188
+        ],
+        "width_edge_margin_median_m": 0.001656444117426872
+      },
+      "pinky": {
+        "contact_link": "link_0",
+        "operation_contact_fraction": 1.0,
+        "point_median_m": [
+          -0.0017792098224163055,
+          -0.003999954089522362,
+          -0.05143513157963753
+        ],
+        "point_min_m": [
+          -0.0025354232639074326,
+          -0.0040300022810697556,
+          -0.0537048876285553
+        ],
+        "point_max_m": [
+          0.004709400236606598,
+          -0.0039632669650018215,
+          -0.051220789551734924
+        ],
+        "width_edge_margin_median_m": 0.007716468840837478
+      }
+    },
+    "three_or_more_non_thumb_bottom_pad_fraction": 1.0,
+    "four_non_thumb_bottom_pad_fraction": 0.9383333333333334,
+    "bottom_face_diagnostic_tolerance_m": 0.0003,
+    "bottom_face_tolerance_scope": "Classification around actual knife y=-4mm; not a new physical success or penetration threshold",
+    "endpoint_max_errors_m": [
+      0.0008098459430038937,
+      0.0,
+      6.777463480830276e-05,
+      0.0
+    ],
+    "world_drift_max_m": 0.004450220089635502,
+    "world_rotation_max_rad": 0.23963228381833102,
+    "basic_10mm": true,
+    "strict_2mm": true,
+    "stable_world_10mm_025rad": true,
+    "initial_scene_group": "A"
+  },
+  "target_file": "configs/g2_finger_surface/operation-target-v1.json",
+  "caveat": "Contact fraction and bottom-surface geometry do not measure load. Preset success is not table acquisition success."
+}
