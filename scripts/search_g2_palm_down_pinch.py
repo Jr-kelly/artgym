@@ -19,6 +19,7 @@ def main():
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--refine',type=Path,action='append',default=[],help='Bounded hard-constraint follow-up; contact height can use the actual side face instead of the arbitrary old y=-1mm line')
     p.add_argument('--avoid-thumb-palm',action='store_true',help='Add the exact-audit identified thumb-link3 / palm separation constraint')
+    p.add_argument('--balance-long-axis',action='store_true',help='Bound thumb contact within4mm of the four-pad longitudinal centroid; geometric moment-arm hypothesis, not a measured force condition')
     a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
     g=DigitGeometry(max_face_axes=20);h=g.w
     object_world=transform(*[json.loads(a.localization.read_text())['object'][v] for v in [slice(0,3),slice(3,7)]])
@@ -58,11 +59,13 @@ def main():
         target_y=np.clip(contact[:,1],-.003,.002) if a.refine else np.full(5,-.001)
         xy=contact[:,:2]-np.c_[normals[:,0]*(.0097 if a.refine else .00952),target_y]
         z=contact[:,2];range_error=z-np.clip(z,zmin,zmax)
-        return np.r_[xy.ravel()*200,range_error*150,
+        residuals=np.r_[xy.ravel()*200,range_error*150,
             np.minimum(z[1:-1]-z[2:]-.012,0)*150,
             np.maximum(.6-facing,0)*1.,np.minimum(height-.0007,0)*250,
             np.minimum(gap-.000015,0)*collision_weight,
             (q-seed)*.007,np.maximum((object_world[:3,:3]@wrist[:3,:3])[2,0]+.7,0)*2]
+        if a.balance_long_axis:residuals=np.r_[residuals,(z[0]-z[1:].mean())*200]
+        return residuals
     lower=np.r_[[-.17,-.10,-.025],[-.6,-.6,-.6],h.lower+.015]
     upper=np.r_[[-.065,-.02,.025],[.6,.6,.6],h.upper-.015]
     thumb_seeds=[[1.46384255,.61801879,-.41471956,-.44764651],
@@ -75,6 +78,7 @@ def main():
         # bounds, not robot joint limits or changes to the physical task.
         lower[:3]=[-.18,-.14,-.060];upper[:3]=[-.06,-.020,.060]
         lower[3:6]=-.9;upper[3:6]=.9
+        if a.balance_long_axis:lower[2]=-.085
     for seedid,(flex,pitch,th) in enumerate(seeds):
         if a.refine:
             prior=json.loads(a.refine[seedid].read_text());w=np.asarray(prior['wrist_in_knife'])
@@ -93,10 +97,12 @@ def main():
             def constraints(v):
                 w,q,c,f,gap,height=geometry(v)
                 tg=np.c_[normals[:,0]*.0095,np.clip(c[:,1],-.003,.002),np.clip(c[:,2],zmin,zmax)]
-                return np.r_[(height-.00055)*1000,(gap-.00001)*1000,
+                values=np.r_[(height-.00055)*1000,(gap-.00001)*1000,
                     f-.32,(.0009-np.linalg.norm(c-tg,axis=1))*1000,
                     (c[1:-1,2]-c[2:,2]-.012)*1000,
                     -.7-(object_world[:3,:3]@w[:3,:3])[2,0]]
+                if a.balance_long_axis:values=np.r_[values,(.004-abs(c[0,2]-c[1:,2].mean()))*1000]
+                return values
             fit=minimize(lambda v:float(np.sum(residual(v,seed,100)**2)),x,
                 method='SLSQP',bounds=list(zip(lower,upper)),constraints=[dict(type='ineq',fun=constraints)],
                 options=dict(maxiter=180,ftol=1e-10))
@@ -117,6 +123,9 @@ def main():
             geometric_pass=accepted,stages=stages,seconds=time.time()-begin,
             active_fingers=list(FINGERS),excluded_fingers=[])
         row['thumb_palm_constraint']=a.avoid_thumb_palm
+        row['balance_long_axis_requested']=a.balance_long_axis
+        row['thumb_to_four_pad_centroid_z_m']=float(points[0,2]-points[1:,2].mean())
+        if a.balance_long_axis:row['geometric_pass']=row['geometric_pass'] and abs(row['thumb_to_four_pad_centroid_z_m'])<=.004
         if a.refine:
             row.update(source_plan=str(a.refine[seedid]),contact_height_interval_m=[-.003,.002],
                 constraint_change='Contact may occupy real side face y in [-3,+2]mm; old y=-1mm was an arbitrary planner line. Physical dimensions, collision and acceptance thresholds unchanged.')

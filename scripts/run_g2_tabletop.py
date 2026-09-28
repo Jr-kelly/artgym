@@ -839,10 +839,21 @@ def main():
                         tick(label)
                     continue
                 start_arm=targets[arm_idx].copy();start_hand=targets[hand_idx].copy();steps=round(seconds/dt)
+                close_waypoints=custom_plan.get('close_waypoints') if label=='close' and custom_plan else None
+                if close_waypoints:
+                    assert close_waypoints[0]['fraction']==0 and close_waypoints[-1]['fraction']==1
+                    assert np.max(abs(np.asarray(close_waypoints[0]['q'])-start_hand))<1e-6,'Closing plan must begin at actual previous motor reference'
                 for i in range(steps):
                     alpha=smooth((i+1)/steps)
                     targets[arm_idx]=start_arm+(end_arm-start_arm)*alpha
                     targets[hand_idx]=start_hand+(end_hand-start_hand)*alpha
+                    if close_waypoints:
+                        u=(i+1)/steps
+                        for first,last in zip(close_waypoints,close_waypoints[1:]):
+                            if first['fraction']<=u<=last['fraction']:
+                                v=smooth((u-first['fraction'])/(last['fraction']-first['fraction']))
+                                targets[hand_idx]=(1-v)*np.asarray(first['q'])+v*np.asarray(last['q'])
+                                break
                     tick(label)
             if args.learned_hold_policy or args.fixed_preparation_hold:
                 if args.learned_hold_policy:

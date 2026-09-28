@@ -27,6 +27,9 @@ def main():
     p.add_argument('--opening',type=float,default=.005)
     p.add_argument('--squeeze',type=float,default=.001)
     p.add_argument('--lift',type=float,default=.30)
+    p.add_argument('--open-pad-lift',type=float,default=0.,help='Open pads move up in the knife frame by this amount; real motor path, not an object state edit')
+    p.add_argument('--flip-degrees',type=float,choices=[-180.,180.],default=180.)
+    p.add_argument('--close-via-touch',action='store_true',help='Specify two motor segments instead of direct open-to-close interpolation')
     a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
     original=json.loads(a.plan.read_text());loc=json.loads(a.localization.read_text())
     g=DigitGeometry(max_face_axes=24);h=g.w
@@ -67,6 +70,7 @@ def main():
 
     def fit_offset(offset):
         desired=sample(q0)[0]+normals*offset
+        if offset>0:desired[:,1]-=a.open_pad_lift
         def residual(q):
             points,facing,gap,height,selfgap,_=sample(q)
             parts=[(points-desired).ravel()*500,np.minimum(facing-.32,0),
@@ -88,12 +92,17 @@ def main():
         open_q=opened.tolist(),close_q=closed.tolist(),grasp=0,opening_m=a.opening,squeeze_m=a.squeeze,
         allow_close_overtravel=False,open_fit=open_fit,close_fit=close_fit,
         preload_definition='Geometric compression requested via legal joint motor targets only, not measured positions or forces')
+    if a.close_via_touch:
+        result['close_waypoints']=[dict(fraction=0.,q=opened.tolist()),dict(fraction=2/3,q=q0.tolist()),dict(fraction=1.,q=closed.tolist())]
+    result.update(open_pad_lift_m=a.open_pad_lift,planned_flip_degrees=a.flip_degrees)
     (a.output/'motor-plan.json').write_text(json.dumps(result,indent=2)+'\n')
     # All nonadjacent convex pairs audited at 21 sampled hand configurations.
     # Closing-command object overlap is separately reported, not executed as a
     # configuration setter. Table and self collision remain disallowed.
     rows=[]
-    for phase,qa,qb in [('open_to_touch',opened,q0),('touch_to_preload',q0,closed),('actual_open_to_close_command',opened,closed)]:
+    segments=[('open_to_touch',opened,q0),('touch_to_preload',q0,closed)]
+    if not a.close_via_touch:segments.append(('actual_open_to_close_command',opened,closed))
+    for phase,qa,qb in segments:
         for u in np.linspace(0,1,61 if phase=='actual_open_to_close_command' else 21):
             q=qa*(1-u)+qb*u;points,facing,gap,height,selfgap,vs=sample(q)
             bad=[]
@@ -126,7 +135,7 @@ def main():
         approach,ad=plan_translation(arm,high_q,target,4,1/30,table)
         lifted,ld=plan_translation(arm,approach[-1],lift,4,1/30,table)
         lifted_object=object_world.copy();lifted_object[2,3]+=a.lift
-        flip,fd=plan_flip(arm,arm.forward(lifted[-1]),lifted_object,lifted[-1],180,10,1/30,table)
+        flip,fd=plan_flip(arm,arm.forward(lifted[-1]),lifted_object,lifted[-1],a.flip_degrees,10,1/30,table)
         arm_result=dict(grasp_ik=err,high_ik=high_err,approach=ad,lift=ld,flip=fd)
         arm_pass=fd['feasible']
     except ValueError as exc:arm_result['failure']=str(exc)
