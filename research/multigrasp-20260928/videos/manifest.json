@@ -1,0 +1,32 @@
+{
+  "created_utc": "2026-09-28T15:25:30.348444+00:00",
+  "video": "reference-three-grasps-policy.mp4",
+  "scope": "historical frozen teacher, original knife, simulation; successful manipulation and two operation failures, not new four-arm model results",
+  "object": "knife_wuji_bridge3_20260922",
+  "asset_sha256": "5229c66b183cc6da04190bf2d6cfbd035fadd227340dc8f26602b207171b461c",
+  "checkpoint_sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+  "selected_rows": [
+    0,
+    3,
+    5
+  ],
+  "selection": "chosen after24-row diagnostic to show source success and two distinct failures; no added statistical trials",
+  "control": "privileged teacher, supportSpan .04, thumbStep .025, fixed2s goal switch, no motor script or pose override after initial episode reset",
+  "inputs": "simulator object state + proprioception/contact teacher observations",
+  "duration_seconds": 20,
+  "frames": 600,
+  "fps": 30,
+  "resolution": [
+    1536,
+    384
+  ],
+  "observed_result": "1/3 strict success; all3 alive. Row5 did not reproduce the drop seen in the24-env numerical diagnostic: this3-env render instead rotates1.037rad and fails operation. No claim of bitwise replay.",
+  "visual_inspection": "frames0/150/300/450/599 inspected; complete unobscured three-panel hand/knife render without text",
+  "artifacts": {
+    "reference-three-grasps-policy.mp4": "070a6c0ac25a6c168dfb9fd738f3e7992fc052db18bd2933dd6192664dc38458",
+    "reference-three-grasps-config.yaml": "6751a1d4aea35de162a7a380ccfbb25936815eddf1eb2d323c16f9172380eca7",
+    "reference-contact-sheet.png": "69c7ba0f64b71fd3e8d581ee170a67d5091b1a764fbc926b89ed82bb8bf8ade4",
+    "reference-three-grasps-trace.npz": "3dc73e3416e655b7ad080bb1959cb3a92d90893bd8475b5b293a279ff12ff76f",
+    "reference-three-grasps-report.json": "3f573edc68574f0b88ef441b5060734624bdf7e135b22acdc606ae6cc25e5700"
+  }
+}

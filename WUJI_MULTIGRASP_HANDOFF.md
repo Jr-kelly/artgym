@@ -67,3 +67,13 @@ A/C/B actual running, D preflight passed then queued after new test generation; 
 多抓姿 2026-09-28T15:16:28.653902+00:00 本机4090实查无计算进程，启动 static-candidates-local-v1 PID3728900；命令与权重/配置见 runs/multigrasp-20260928/static-candidates-local-v1；待终结核验。
 
 多抓姿 2026-09-28T15:19:00.554304+00:00 本机4090实查无计算进程，启动 reference-candidates-t5-v1 PID3744256；命令与权重/配置见 runs/multigrasp-20260928/reference-candidates-t5-v1；待终结核验。
+
+2026-09-28T15:20:58.009740+00:00 实查四臂epochs A94/B69/C85/D37，继续。最新push8bec6f4；5minGPU86.375%，重启以来1688.5s均值53.7098%，不是完整4h。下一项同预算训练/自动开发评估、新生成测试物理门禁。
+
+多抓姿 2026-09-28T15:22:29.235418+00:00 本机4090实查无计算进程，启动 reference-video-success-failure-v1 PID3765605；命令与权重/配置见 runs/multigrasp-20260928/reference-video-success-failure-v1；待终结核验。
+
+## 多抓姿 2026-09-28T15:25:30.366571+00:00 reference_video_and_fresh_screen_terminal
+
+上一goal轮为progress；本轮再次实查四训练PID2449/2499/3149/4716均存活。旧teacher5秒严格5/24（原3及2重复），19/24存活。新seed2803最终物理门禁0合格。三抓姿20秒视频完成并检查600帧；1/3严格、3/3存活，行5小batch未复现24-env掉落，已明确标注。 证据：research/multigrasp-20260928/videos/manifest.json, research/multigrasp-20260928/data/fresh2803-frozen/manifest.json, research/multigrasp-20260928/receipts/process-throughput-20260928T1524.json。下一步：保留四组1000epoch训练，监测D四小时job上限余量；等新3000生成后物理筛选并执行冻结最终评估。
+
+多抓姿 2026-09-28T15:26:02.034277+00:00 本机4090实查无计算进程，启动 dev-static-precheck-v1 PID3788253；命令与权重/配置见 runs/multigrasp-20260928/dev-static-precheck-v1；待终结核验。

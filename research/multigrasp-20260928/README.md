@@ -42,3 +42,11 @@
 接触数组顺序为thumb/index/middle/ring/pinky，关节顺序为index/middle/ring/pinky/thumb。初版离线接触标签曾颠倒，标为`*.invalid-contact-order.json`保留，修正文件`*-contact-order-v2.json`有效；物理轨迹和成功指标未改。
 
 一键重现某臂：`python -m scripts.reproduce_wuji_multigrasp --arm A --gpu 0 --name NEW_UNIQUE_RUN`。复现脚本给6小时监控上限，不改变1000轮交互预算；当前首轮实际已启动监控上限4小时，接手须根据吞吐核查是否足够（尤其more/.20），超时不得当方法失败。
+
+## 15:25 UTC 更新
+
+四组训练PID重新实查存活。最近20epoch平均A10.70/B12.94/C11.75/D14.22秒；D的4小时监控上限接近预计总时长，需要续接时检查，不能让基础设施超时造成不等预算。
+
+旧teacher5秒固定时钟结果：19/24alive、9/24完整第一轮、5/24全部严格，严格成功仍仅原3记录及2重复。完整视频已生成于 `videos/reference-three-grasps-policy.mp4`，manifest写明选取规则、物体/权重/输入及同一脚本实际重仿真结果；600帧、20秒、30fps。3-env视频实际行0成功、行3推不动、行5旋转过大；行5没有复现24-env数值诊断中的掉落，不能称精确重放。同一个基础初态的不同并行批量也存在仿真差异，正式四组在相同批量/设备/协议比较。
+
+新测试seed2803的物理门禁联合结果固定为0合格，见data/fresh2803-frozen/manifest.json；保留失败，不运行空分母评估。第二批3000候选仍在A训练之后的队列中。冻结最终四组+旧参考统一评估入口 `scripts/evaluate_wuji_multigrasp_frozen.py` 已实现，尚未执行（等待训练/开发选定权重与合格新测试）。

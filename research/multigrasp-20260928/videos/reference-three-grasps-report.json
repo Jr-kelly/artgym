@@ -1,0 +1,160 @@
+{
+  "num_envs": 3,
+  "recorded_steps": 600,
+  "first_cycle": 1,
+  "first_cycle_strict": 1,
+  "all_commands_attained": 1,
+  "all_endpoints_held": 1,
+  "stable_full": 1,
+  "stable_full_all_endpoints": 1,
+  "alive_full": 3,
+  "records": [
+    {
+      "env": 0,
+      "stages_attained": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "endpoints_held": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "first_cycle": true,
+      "first_cycle_strict": true,
+      "all_commands_attained": true,
+      "all_endpoints_held": true,
+      "stable_full": true,
+      "stable_full_all_endpoints": true,
+      "alive_full": true,
+      "fall": false,
+      "invalid": false,
+      "max_drift_m": 0.005011896602809429,
+      "max_rotation_rad": 0.16264782845973969
+    },
+    {
+      "env": 1,
+      "stages_attained": [
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true
+      ],
+      "endpoints_held": [
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true
+      ],
+      "first_cycle": false,
+      "first_cycle_strict": false,
+      "all_commands_attained": false,
+      "all_endpoints_held": false,
+      "stable_full": false,
+      "stable_full_all_endpoints": false,
+      "alive_full": true,
+      "fall": false,
+      "invalid": false,
+      "max_drift_m": 0.005367210600525141,
+      "max_rotation_rad": 0.08395718783140182
+    },
+    {
+      "env": 2,
+      "stages_attained": [
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true
+      ],
+      "endpoints_held": [
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true
+      ],
+      "first_cycle": false,
+      "first_cycle_strict": false,
+      "all_commands_attained": false,
+      "all_endpoints_held": false,
+      "stable_full": false,
+      "stable_full_all_endpoints": false,
+      "alive_full": true,
+      "fall": false,
+      "invalid": false,
+      "max_drift_m": 0.018796171993017197,
+      "max_rotation_rad": 1.0372843742370605
+    }
+  ],
+  "control_mode": "privileged_teacher",
+  "wall_seconds": 67.75281164306216,
+  "checkpoint_sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+  "task": "wuji_multigrasp",
+  "hand": "wuji_paper_official_actuator",
+  "object": "knife_wuji_bridge3_20260922",
+  "action_control": {
+    "support_span_rad": 0.04,
+    "thumb_step_rad": 0.025
+  },
+  "student_sha256": null,
+  "initial_states_sha256": "be028e58e9964ba2de33d9af0f4d1af8b9d8a736e409ad72ea9fe889c1efaa52",
+  "initial_state_rows": [
+    0,
+    3,
+    5
+  ],
+  "source_sha256": "de32b022f5bebdbfbe6bef5a753d3a01a13572e031fdf5243b3efc8a7397683b",
+  "scorer_sha256": "484a9b4279677cf55ade37b024b87d9ff2200f013af23604e1bb30026bafe97d",
+  "protocol": {
+    "stage_seconds": 2.0,
+    "stage_steps": 60,
+    "control_dt": 0.03333333507180214,
+    "goal_tolerance_m": 0.002,
+    "hold_steps": 9,
+    "schedule": "alternate open/close for20s",
+    "runtime_overrides": {
+      "success_hold_duration": 1000000000.0,
+      "eval_goal_timeout": 0
+    },
+    "arrival_used_for_switching": false
+  },
+  "scope": "Independent fixed-time goal commands; arrival never triggers a command change.\n\nPhysics, policy observations and action mapping use the original environment.\nThe simulator still supplies privileged inputs to a teacher; only the student\nhas the deployment observation restriction. Neither path establishes hardware\nsuccess. All timing decisions depend only on the control-step counter.\n"
+}
