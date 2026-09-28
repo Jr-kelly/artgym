@@ -1,3 +1,21 @@
+# 最新续接：多抓姿核心对照完成，专家诊断运行（2026-09-28T20:26:23.276846+00:00）
+
+Goal仍active，禁止子代理。工作区`/data/research/artgym-experiments-20260921/multigrasp-20260928`，分支`feat/wuji-multigrasp-2x2-20260928`。总截止2026-09-29 02:53:52UTC，01:53:52留最终交付。
+
+四臂1000轮全部完成，16CP本地备份/CPU哈希核验；同预算final1000-v1的16项800初态物理评估完成，独立复算passed。fixed2严格A9/B0/C19/D0/reference94，fixed5 A/B/C/D0/reference93。每组800，严格全部集中原训练。详`research/multigrasp-20260928/README.md`和`final1000-analysis/`。所有新训练/历史/新测试严格均0，旧teacher未被替代。
+
+四开发冻结A750/B1000/C750/D1000。`selected-v1`当前GPU0实际继续（队列95255，需实查），同800初态/同GPU；最终状态`runs/multigrasp-20260928/selected-v1/results.json`远端，尚未结束。新测试原门禁两批均0；第二批53候选中的1/16/29除了触觉代理均有效，明确物理门禁修订后在策略评估前全部冻结补充集，不冒充原预注册盲测。最终800静态687alive/656stable；新96中42alive/30stable(2bases)，全部策略严格0。
+
+唯一后续主要诊断已20:11UTC启动：单抓姿专家源3/5/11，GPU1/2/3，trainPID104797/104799/104800，名字expert_row3_seed2810等；各1000轮、5120env、span.04、seed2026092810，同初始化tensorSHA0ad7813cc00ba3d935547e9f42bf0ca467f6683e47306317f3f400779716e94b。4h wrapper有界，预计23:30前后完成，要按真实吞吐核查。独立32源扰动final1000评估等待PID106197/106198/106199；脚本evaluate_wuji_multigrasp_expert.py，00:30截止等待，4个协议每项600s。无其它诊断分支。
+
+Release草稿`wuji-multigrasp-20260928-v1` id398592814已创建；四权重包16CP服务端SHA成功。五份final1000原始trace包正在上传，工具session76209，可poll，不要重复覆盖资产。大trace>100MB未入git，小JSON/CSV已入。恢复入口restore_wuji_multigrasp_weights.py已对全部16验证，通过；reference.pth另在delivery/wuji-historical-reference.pth待上传。draft GET by tag404，gh api releases列表按id操作。最终发布后URL中untagged需重新从API获取正式地址。
+
+本轮A1000视频已完成`videos/A1000-three-grasps.mp4`，实际0/3strict/2alive(原主表成功行重仿真最后端点失败)，差异明确；旧reference成功视频保留。frames0/150/300/450/599实检。可加专家成功/失败视频，但不得把现视频标严格成功。
+
+最新已commit0651f91，push工具session58779待poll确认；此前2825f0f已push。原四训练均结束；本地无训练，上传/原monitor仍运行，备份16/16完成。必须重新实查所有PID和资源，不依据此文重启。当前下一步：完成selected表并独立复算、检查专家吞吐和结果，补专家权重/视频与报告，Release全部资产SHA/恢复测试，最终push核验。研究任务尚未全部交付，不能标Goalcomplete。
+
+---
+
 # 多抓姿Goal最新接续 2026-09-28T15:31:43.019779+00:00
 
 本轮有进展：代表旧teacher视频和开发初态实际检查已push7537334（四组训练仍未完成），报告research/multigrasp-20260928/README.md，视频videos/reference-three-grasps-policy.mp4。本机物理已结束。四H100训练持续，最新实查A141/B108/C128/D71；D之后已观察epoch76，勿据历史PID重启。D最新wrapper9453接管原4716训练，6h看护至21:10UTC（原4h预计不足），原训练PID/startticks/租约/1000轮预算不变；开发D等待器v2见development-D-waiter-v2.json。其它A/B/C wrapper原样。总截止09-29 02:53:52UTC不变。
@@ -527,3 +545,19 @@ D19:24:06UTC终结，15217.42s墙钟；原PID退出+MAX EPOCHS NUM+最终CP共�
 ## 多抓姿 2026-09-28T20:24:29.138607+00:00 weights_release_and_restore_verified
 
 四个矩阵权重包共16CP已上传草稿Release398592814并服务端SHA核验；恢复入口对全部16权重逐一SHA检查并恢复epoch元数据和开发冻结记录。大原始trace继续上传。A1000代表视频600帧实检，实际0strict/2alive，已明确批量设备改变导致非精确回放。 证据：research/multigrasp-20260928/receipts/weight-restore-verification.txt, research/multigrasp-20260928/videos/A1000-three-grasps-manifest.json。下一步：完成择优表和专家诊断，最后发布Release并核验链接/所有权重哈希。
+
+多抓姿实查 2026-09-28T20:26:22.039376+00:00 selected-v1-A-arrival completed；远端PID 108072；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T20:26:22.039376+00:00 selected-v1-B-fixed2 running；远端PID 108733；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+## 多抓姿 2026-09-28T20:27:44.409719+00:00 selected_A750_original_base_render_started
+
+开发选定A750固定2s正式800中26严格成功，前三个成功行64/65/66均来自同一原base2。启动本地视频三扰动，明确不是3独立抓姿，也不把重仿真当精确回放；A1000失败视频原样保留。 证据：research/multigrasp-20260928/receipts/video-A750-launch.json。下一步：核查实际视频是否严格成功；继续完整择优表/专家训练。
+
+多抓姿实查 2026-09-28T20:29:03.385793+00:00 selected-v1-B-fixed2 completed；远端PID 108733；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+多抓姿实查 2026-09-28T20:29:03.385793+00:00 selected-v1-B-fixed5 running；远端PID 109395；证据 research/multigrasp-20260928/receipts/monitor-latest.json，命令/配置/权重路径及初始tensor哈希随收据。下一项收集结果/冻结评估。
+
+## 多抓姿 2026-09-28T20:29:48.353767+00:00 A750_success_video_and_core_assets_verified
+
+A750原base2三个扰动视频实际严格3/3、五完整周期、20s全程稳定，600帧抽检通过。明确单基础抓姿局部成功而非三抓姿泛化。四权重包及五主表trace包共9Release资产全部服务端SHA核验；旧参考权重和三个视频另行上传。主表图已按25基础抓姿绘出，宽松与严格分开。 证据：research/multigrasp-20260928/videos/A750-original-base2-three-perturbations-manifest.json, research/multigrasp-20260928/receipts/release-main-assets.json, research/multigrasp-20260928/final1000-analysis/per-base-outcomes.png。下一步：完成择优冻结结果与专家诊断；专家完成前不追加其它训练分支。

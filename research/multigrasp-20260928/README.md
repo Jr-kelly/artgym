@@ -26,6 +26,8 @@ A=原3、span.04；B=更多16、.04；C=原3、.20；D=更多16、.20。referenc
 
 全部新增训练、历史保留及补充新抓姿的严格成功均0，包含静态稳定子集；C的严格收益局限于原训练2秒条件。宽松到位换向在历史诊断集A/C有提高，但不满足严格稳定要求。D固定协议799/800终止，终止者中位0.467秒，所有800次刀身越阈值；这是失败时序，不能仅凭它证明动作范围的因果机制。
 
+![每基础抓姿冻结结果](final1000-analysis/per-base-outcomes.png)
+
 ## 冻结选择与初态有效性
 
 开发集为16训练记录×8固定扰动，CP250/500/750/1000分别2/5秒严格率等权，平局latest。选择A750/B1000/C750/D1000；分数分别3.125%/0/2.344%/0。最终未见数据没有用于选CP。主表固定1000，部署候选表另用开发选择，避免把不同CP步数当同预算证据。
@@ -45,7 +47,8 @@ A=原3、span.04；B=更多16、.04；C=原3、.20；D=更多16、.20。referenc
 - 冻结主表：`python -m scripts.evaluate_wuji_multigrasp_frozen --states research/multigrasp-20260928/data/final-cohort-v1/states.npy --manifest research/multigrasp-20260928/data/final-cohort-v1/manifest.json --gpu 0 --label NEW_LABEL --selection final1000`；另选`development`复现择优表。
 - 下载四个`wuji-multigrasp-?-checkpoints.tar.gz`与`wuji-historical-reference.pth`后，执行`python -m scripts.restore_wuji_multigrasp_weights --downloads DOWNLOAD_DIR`，逐份验证SHA并恢复相邻epoch元数据和开发冻结记录。
 - 原始CSV/逐基础及逐回合时序 `final1000-analysis/`；小体积评估JSON和配置 `evidence/`。大trace及全部16权重按模型分包到Release `wuji-multigrasp-20260928-v1`，SHA核验收据随`receipts/`，当前草稿上传中。
-- 视频 `videos/A1000-three-grasps.mp4`：选最终行70/96/352代表性重仿真，实际0/3全严格、2/3alive；第一格连续开合但最后端点没保持、第二格掉刀、第三格刀身不稳。批量/设备不同，非800env精确重放。旧参考成功视频 `videos/reference-three-grasps-policy.mp4` 保留。每个视频的权重、输入、动作控制与筛选说明见manifest。
+- 成功视频 `videos/A750-original-base2-three-perturbations.mp4`：本轮开发选定A750，同一原base2的3扰动，实际3/3严格成功、五完整开合周期；不是3独立抓姿泛化。
+- 失败视频 `videos/A1000-three-grasps.mp4`：选最终行70/96/352代表性重仿真，实际0/3全严格、2/3alive；第一格连续开合但最后端点没保持、第二格掉刀、第三格刀身不稳。批量/设备不同，非800env精确重放。旧参考成功视频 `videos/reference-three-grasps-policy.mp4` 保留。每个视频的权重、输入、动作控制与筛选说明见manifest。
 
 ## 资源与边界
 

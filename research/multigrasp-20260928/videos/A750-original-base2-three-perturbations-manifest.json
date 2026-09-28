@@ -1,0 +1,27 @@
+{
+  "time": "2026-09-28T20:29:30.065215+00:00",
+  "video": "A750-original-base2-three-perturbations.mp4",
+  "checkpoint_sha256": "5ba648157501f657871cb175397ccdbe36d2fed212bd33f743c50c8e1eccf463",
+  "asset_sha256": "5229c66b183cc6da04190bf2d6cfbd035fadd227340dc8f26602b207171b461c",
+  "selected_final_rows": [
+    64,
+    65,
+    66
+  ],
+  "base_source": "old_candidate_2 only",
+  "selection": "first3 strictly successful selected-A final test rows, post hoc; all from one original training base, NOT three different grasps",
+  "observed_render_result": "3/3 full strict fixed2s endpoints with body stable and alive for20s; five complete cycles",
+  "inputs": "privileged simulator teacher inputs",
+  "control": "policy supportspan.04 thumbstep.025, fixed2s; no scripted motor/pose overrides after initial episode reset",
+  "scope": "simulation demonstration on one trained base with3perturbations; local4090/3env resimulation, not exact800env replay or independent blind/hardware evidence",
+  "frames": 600,
+  "fps": 30,
+  "duration_seconds": 20,
+  "artifacts": {
+    "A750-original-base2-three-perturbations-report.json": "507859697b43d8127e7f234bf33aaccf0a6f2ac6b0b479898c3aa9cf0c8d1134",
+    "A750-original-base2-three-perturbations-config.yaml": "205e9aa0ce033efbcfef995bbd189c2fcf6e16064ab0b0ca5d541a4421053d8e",
+    "A750-original-base2-three-perturbations-contact-sheet.jpg": "3613ead2803d02b415956127687a8aa00abf246e0d5d833d39bf9b3ad9347844",
+    "A750-original-base2-three-perturbations.mp4": "2ee4e3614f94a02ba007536091e8cff733ae274e7e5a4446a7d15746acaa8594",
+    "A750-original-base2-three-perturbations-trace.npz": "65a85cc9b1fff59bd85e7bb3cf08c6cebb371531818b1fdfbdbd4dc24a5bb24c"
+  }
+}
