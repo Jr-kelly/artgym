@@ -51,6 +51,10 @@ def main():
   for cohort_name in sorted({x['cohort'] for x in mapping}):
    means={m:float(np.mean([x['success_rate'] for x in grouped if x['model']==m and x['protocol']==protocol and x['cohort']==cohort_name])) for m in ['A','B','C','D','reference']}
    contrasts.append(dict(protocol=protocol,cohort=cohort_name,macro_by_base=means,more_minus_small_at04=means['B']-means['A'],more_minus_small_at20=means['D']-means['C'],span20_minus04_small=means['C']-means['A'],span20_minus04_more=means['D']-means['B'],interaction=(means['D']-means['C'])-(means['B']-means['A'])))
+   for subset,denom,num in [('static_alive','static_alive_count','success_on_static_alive'),('static_stable','static_stable_count','success_on_static_stable')]:
+    eligible=[x for x in grouped if x['protocol']==protocol and x['cohort']==cohort_name and x[denom]>0]
+    conditional={m:float(np.mean([x[num]/x[denom] for x in eligible if x['model']==m])) for m in ['A','B','C','D','reference']} if eligible else {m:None for m in ['A','B','C','D','reference']}
+    contrasts[-1][subset]=dict(macro_by_eligible_base=conditional,eligible_base_count=len({x['source_id'] for x in eligible}),eligible_trials=sum(x[denom] for x in eligible if x['model']=='A'))
  for name,rows in [('trials',trials),('per-grasp',grouped)]:
   with (a.output/(name+'.csv')).open('w') as f:w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
  (a.output/'temporal-diagnostics.json').write_text(json.dumps(temporal,indent=2)+'\n')

@@ -1,0 +1,414 @@
+{
+  "selection": "final1000",
+  "created_utc": "2026-09-28T19:27:15.953837+00:00",
+  "states_sha256": "900c7cfef3d411ff622fda34cc67892e3c5ab96b434005e2bf1d49f332e146bd",
+  "mapping_sha256": "afb5693124b0619124c5f0650dd928f1060e7335a8d63b4fb2401ee7767b133f",
+  "gpu": 0,
+  "models": [
+    {
+      "label": "A",
+      "checkpoint": "/home/wangjiarui/artgym-multigrasp-20260928/runs/mg_A_seed2801/checkpoints/epoch_001000.pth",
+      "sha256": "15e0c1da0b3253901868071dfeb70a2847727e2c8a3e1912452e99b2b7621728",
+      "span": 0.04,
+      "freeze": {
+        "status": "frozen",
+        "frozen_utc": "2026-09-28T18:44:46.795187+00:00",
+        "arm": "A",
+        "seed": 2026092801,
+        "span": 0.04,
+        "cp": 1000,
+        "checkpoint": "runs/mg_A_seed2801/checkpoints/epoch_001000.pth",
+        "sha256": "15e0c1da0b3253901868071dfeb70a2847727e2c8a3e1912452e99b2b7621728",
+        "scores": {
+          "250": 0.0,
+          "500": 0.0078125,
+          "750": 0.03125,
+          "1000": 0.0078125
+        },
+        "rows": [
+          {
+            "cp": 250,
+            "seconds": 2,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 98,
+            "path": "runs/multigrasp-20260928/dev-A-cp250-t2/evidence",
+            "checkpoint_sha256": "7bb42b50049dd72c718e2b8f4dacf15c02f5f1061bae049d58981e68fdc29ecf"
+          },
+          {
+            "cp": 250,
+            "seconds": 5,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 96,
+            "path": "runs/multigrasp-20260928/dev-A-cp250-t5/evidence",
+            "checkpoint_sha256": "7bb42b50049dd72c718e2b8f4dacf15c02f5f1061bae049d58981e68fdc29ecf"
+          },
+          {
+            "cp": 500,
+            "seconds": 2,
+            "score": 0.015625,
+            "strict": 2,
+            "alive": 85,
+            "path": "runs/multigrasp-20260928/dev-A-cp500-t2/evidence",
+            "checkpoint_sha256": "a8fdc2fe10c7905889978d290607ba5e297188482f42fcccb0c47de7d02e9b51"
+          },
+          {
+            "cp": 500,
+            "seconds": 5,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 84,
+            "path": "runs/multigrasp-20260928/dev-A-cp500-t5/evidence",
+            "checkpoint_sha256": "a8fdc2fe10c7905889978d290607ba5e297188482f42fcccb0c47de7d02e9b51"
+          },
+          {
+            "cp": 750,
+            "seconds": 2,
+            "score": 0.0625,
+            "strict": 8,
+            "alive": 103,
+            "path": "runs/multigrasp-20260928/dev-A-cp750-t2/evidence",
+            "checkpoint_sha256": "5ba648157501f657871cb175397ccdbe36d2fed212bd33f743c50c8e1eccf463"
+          },
+          {
+            "cp": 750,
+            "seconds": 5,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 93,
+            "path": "runs/multigrasp-20260928/dev-A-cp750-t5/evidence",
+            "checkpoint_sha256": "5ba648157501f657871cb175397ccdbe36d2fed212bd33f743c50c8e1eccf463"
+          },
+          {
+            "cp": 1000,
+            "seconds": 2,
+            "score": 0.015625,
+            "strict": 2,
+            "alive": 112,
+            "path": "runs/multigrasp-20260928/dev-A-cp1000-t2/evidence",
+            "checkpoint_sha256": "15e0c1da0b3253901868071dfeb70a2847727e2c8a3e1912452e99b2b7621728"
+          },
+          {
+            "cp": 1000,
+            "seconds": 5,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 104,
+            "path": "runs/multigrasp-20260928/dev-A-cp1000-t5/evidence",
+            "checkpoint_sha256": "15e0c1da0b3253901868071dfeb70a2847727e2c8a3e1912452e99b2b7621728"
+          }
+        ],
+        "rule": "fixed final1000; identical163840000traininginteractions for every arm",
+        "formal_training_interactions": 163840000
+      }
+    },
+    {
+      "label": "B",
+      "checkpoint": "/home/wangjiarui/artgym-multigrasp-20260928/runs/mg_B_seed2801/checkpoints/epoch_001000.pth",
+      "sha256": "fc5c5ba6affa56e05634677574c7a3a4237974692942d09458ba61270d5dd141",
+      "span": 0.04,
+      "freeze": {
+        "status": "frozen",
+        "frozen_utc": "2026-09-28T19:08:08.885917+00:00",
+        "arm": "B",
+        "seed": 2026092801,
+        "span": 0.04,
+        "cp": 1000,
+        "checkpoint": "runs/mg_B_seed2801/checkpoints/epoch_001000.pth",
+        "sha256": "fc5c5ba6affa56e05634677574c7a3a4237974692942d09458ba61270d5dd141",
+        "scores": {
+          "250": 0.0,
+          "500": 0.0,
+          "750": 0.0,
+          "1000": 0.0
+        },
+        "rows": [
+          {
+            "cp": 250,
+            "seconds": 2,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 124,
+            "path": "runs/multigrasp-20260928/dev-B-cp250-t2/evidence",
+            "checkpoint_sha256": "6764aff4a9465ca927baf049e23a34c5e33cc7ad8b358c5058e7b33d731b24c5"
+          },
+          {
+            "cp": 250,
+            "seconds": 5,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 125,
+            "path": "runs/multigrasp-20260928/dev-B-cp250-t5/evidence",
+            "checkpoint_sha256": "6764aff4a9465ca927baf049e23a34c5e33cc7ad8b358c5058e7b33d731b24c5"
+          },
+          {
+            "cp": 500,
+            "seconds": 2,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 128,
+            "path": "runs/multigrasp-20260928/dev-B-cp500-t2/evidence",
+            "checkpoint_sha256": "b715d7d13d7a3e27cc4b0229d0511e0e8ad82d6b1f425906cdb80d607c0c091e"
+          },
+          {
+            "cp": 500,
+            "seconds": 5,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 128,
+            "path": "runs/multigrasp-20260928/dev-B-cp500-t5/evidence",
+            "checkpoint_sha256": "b715d7d13d7a3e27cc4b0229d0511e0e8ad82d6b1f425906cdb80d607c0c091e"
+          },
+          {
+            "cp": 750,
+            "seconds": 2,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 128,
+            "path": "runs/multigrasp-20260928/dev-B-cp750-t2/evidence",
+            "checkpoint_sha256": "6f125a2ebb935896d66c18e500475657d761e62bbb517e366e940bba08bd9597"
+          },
+          {
+            "cp": 750,
+            "seconds": 5,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 127,
+            "path": "runs/multigrasp-20260928/dev-B-cp750-t5/evidence",
+            "checkpoint_sha256": "6f125a2ebb935896d66c18e500475657d761e62bbb517e366e940bba08bd9597"
+          },
+          {
+            "cp": 1000,
+            "seconds": 2,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 128,
+            "path": "runs/multigrasp-20260928/dev-B-cp1000-t2/evidence",
+            "checkpoint_sha256": "fc5c5ba6affa56e05634677574c7a3a4237974692942d09458ba61270d5dd141"
+          },
+          {
+            "cp": 1000,
+            "seconds": 5,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 127,
+            "path": "runs/multigrasp-20260928/dev-B-cp1000-t5/evidence",
+            "checkpoint_sha256": "fc5c5ba6affa56e05634677574c7a3a4237974692942d09458ba61270d5dd141"
+          }
+        ],
+        "rule": "fixed final1000; identical163840000traininginteractions for every arm",
+        "formal_training_interactions": 163840000
+      }
+    },
+    {
+      "label": "C",
+      "checkpoint": "/home/wangjiarui/artgym-multigrasp-20260928/runs/mg_C_seed2801/checkpoints/epoch_001000.pth",
+      "sha256": "b28c25fd94c4316a69fc0fe765becd8bf1aabc5bda6483f0b8ca92ad557a4ba3",
+      "span": 0.2,
+      "freeze": {
+        "status": "frozen",
+        "frozen_utc": "2026-09-28T18:43:44.362452+00:00",
+        "arm": "C",
+        "seed": 2026092801,
+        "span": 0.2,
+        "cp": 1000,
+        "checkpoint": "runs/mg_C_seed2801/checkpoints/epoch_001000.pth",
+        "sha256": "b28c25fd94c4316a69fc0fe765becd8bf1aabc5bda6483f0b8ca92ad557a4ba3",
+        "scores": {
+          "250": 0.00390625,
+          "500": 0.015625,
+          "750": 0.0234375,
+          "1000": 0.0078125
+        },
+        "rows": [
+          {
+            "cp": 250,
+            "seconds": 2,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 59,
+            "path": "runs/multigrasp-20260928/dev-C-cp250-t2/evidence",
+            "checkpoint_sha256": "ce3b3594b9ccb2b385b3ffd55076ef07fa7c31ca52d8b9c35980245aaee0acd3"
+          },
+          {
+            "cp": 250,
+            "seconds": 5,
+            "score": 0.0078125,
+            "strict": 1,
+            "alive": 60,
+            "path": "runs/multigrasp-20260928/dev-C-cp250-t5/evidence",
+            "checkpoint_sha256": "ce3b3594b9ccb2b385b3ffd55076ef07fa7c31ca52d8b9c35980245aaee0acd3"
+          },
+          {
+            "cp": 500,
+            "seconds": 2,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 65,
+            "path": "runs/multigrasp-20260928/dev-C-cp500-t2/evidence",
+            "checkpoint_sha256": "323c0854f70cddd0e086409d89af2dd8c8162e1357ee00e714d07581700005ac"
+          },
+          {
+            "cp": 500,
+            "seconds": 5,
+            "score": 0.03125,
+            "strict": 4,
+            "alive": 65,
+            "path": "runs/multigrasp-20260928/dev-C-cp500-t5/evidence",
+            "checkpoint_sha256": "323c0854f70cddd0e086409d89af2dd8c8162e1357ee00e714d07581700005ac"
+          },
+          {
+            "cp": 750,
+            "seconds": 2,
+            "score": 0.046875,
+            "strict": 6,
+            "alive": 82,
+            "path": "runs/multigrasp-20260928/dev-C-cp750-t2/evidence",
+            "checkpoint_sha256": "b39a6c72c82178129bf3bfbb7bbc177a48a94cbedef71e195ff3852b2208d752"
+          },
+          {
+            "cp": 750,
+            "seconds": 5,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 77,
+            "path": "runs/multigrasp-20260928/dev-C-cp750-t5/evidence",
+            "checkpoint_sha256": "b39a6c72c82178129bf3bfbb7bbc177a48a94cbedef71e195ff3852b2208d752"
+          },
+          {
+            "cp": 1000,
+            "seconds": 2,
+            "score": 0.015625,
+            "strict": 2,
+            "alive": 96,
+            "path": "runs/multigrasp-20260928/dev-C-cp1000-t2/evidence",
+            "checkpoint_sha256": "b28c25fd94c4316a69fc0fe765becd8bf1aabc5bda6483f0b8ca92ad557a4ba3"
+          },
+          {
+            "cp": 1000,
+            "seconds": 5,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 96,
+            "path": "runs/multigrasp-20260928/dev-C-cp1000-t5/evidence",
+            "checkpoint_sha256": "b28c25fd94c4316a69fc0fe765becd8bf1aabc5bda6483f0b8ca92ad557a4ba3"
+          }
+        ],
+        "rule": "fixed final1000; identical163840000traininginteractions for every arm",
+        "formal_training_interactions": 163840000
+      }
+    },
+    {
+      "label": "D",
+      "checkpoint": "/home/wangjiarui/artgym-multigrasp-20260928/runs/mg_D_seed2801/checkpoints/epoch_001000.pth",
+      "sha256": "afec6d652771fb821e2a52225beb1ddfa36ed6b0a2d60ce90e548611db02083a",
+      "span": 0.2,
+      "freeze": {
+        "status": "frozen",
+        "frozen_utc": "2026-09-28T19:26:16.361647+00:00",
+        "arm": "D",
+        "seed": 2026092801,
+        "span": 0.2,
+        "cp": 1000,
+        "checkpoint": "runs/mg_D_seed2801/checkpoints/epoch_001000.pth",
+        "sha256": "afec6d652771fb821e2a52225beb1ddfa36ed6b0a2d60ce90e548611db02083a",
+        "scores": {
+          "250": 0.0,
+          "500": 0.0,
+          "750": 0.0,
+          "1000": 0.0
+        },
+        "rows": [
+          {
+            "cp": 250,
+            "seconds": 2,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 0,
+            "path": "runs/multigrasp-20260928/dev-D-cp250-t2/evidence",
+            "checkpoint_sha256": "40ad0ffd114a58fbee04043975bd974917a414509f2ad1a76af52b755f1c10ef"
+          },
+          {
+            "cp": 250,
+            "seconds": 5,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 0,
+            "path": "runs/multigrasp-20260928/dev-D-cp250-t5/evidence",
+            "checkpoint_sha256": "40ad0ffd114a58fbee04043975bd974917a414509f2ad1a76af52b755f1c10ef"
+          },
+          {
+            "cp": 500,
+            "seconds": 2,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 0,
+            "path": "runs/multigrasp-20260928/dev-D-cp500-t2/evidence",
+            "checkpoint_sha256": "df4dc5b659aebd7576b68a042e92e587a726bf7d561b4e247a35515fd36239ed"
+          },
+          {
+            "cp": 500,
+            "seconds": 5,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 0,
+            "path": "runs/multigrasp-20260928/dev-D-cp500-t5/evidence",
+            "checkpoint_sha256": "df4dc5b659aebd7576b68a042e92e587a726bf7d561b4e247a35515fd36239ed"
+          },
+          {
+            "cp": 750,
+            "seconds": 2,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 0,
+            "path": "runs/multigrasp-20260928/dev-D-cp750-t2/evidence",
+            "checkpoint_sha256": "a94d8147b05931edceb69349633cf23786498f3817be67630286da25e9d7da6c"
+          },
+          {
+            "cp": 750,
+            "seconds": 5,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 0,
+            "path": "runs/multigrasp-20260928/dev-D-cp750-t5/evidence",
+            "checkpoint_sha256": "a94d8147b05931edceb69349633cf23786498f3817be67630286da25e9d7da6c"
+          },
+          {
+            "cp": 1000,
+            "seconds": 2,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 0,
+            "path": "runs/multigrasp-20260928/dev-D-cp1000-t2/evidence",
+            "checkpoint_sha256": "afec6d652771fb821e2a52225beb1ddfa36ed6b0a2d60ce90e548611db02083a"
+          },
+          {
+            "cp": 1000,
+            "seconds": 5,
+            "score": 0.0,
+            "strict": 0,
+            "alive": 0,
+            "path": "runs/multigrasp-20260928/dev-D-cp1000-t5/evidence",
+            "checkpoint_sha256": "afec6d652771fb821e2a52225beb1ddfa36ed6b0a2d60ce90e548611db02083a"
+          }
+        ],
+        "rule": "fixed final1000; identical163840000traininginteractions for every arm",
+        "formal_training_interactions": 163840000
+      }
+    },
+    {
+      "label": "reference",
+      "checkpoint": "/home/wangjiarui/artgym-multigrasp-20260928/runs/multigrasp-20260928/reference.pth",
+      "sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+      "span": 0.04
+    }
+  ],
+  "protocols": [
+    "static20s",
+    "fixed2s",
+    "fixed5s",
+    "arrival10mm20s"
+  ],
+  "scope": "fixed models, identical state ordering and physics; no subsequent checkpoint selection on this cohort"
+}

@@ -1,0 +1,38 @@
+{
+  "time": "2026-09-28T20:11:43.610295+00:00",
+  "major_diagnostic": "single_grasp_experts_only",
+  "selection": [
+    {
+      "row": 3,
+      "static_stable": 32,
+      "n": 32,
+      "reason": "No first cycle in A/B/C/D; representative stable but no slider operation"
+    },
+    {
+      "row": 5,
+      "static_stable": 32,
+      "n": 32,
+      "reason": "Historical reference can operate but loses body stability; current A/B no first cycle, C partial"
+    },
+    {
+      "row": 11,
+      "static_stable": 32,
+      "n": 32,
+      "reason": "A has23/32 first cycles but0strict; B/D fail, represents operation without stable endpoint holding"
+    }
+  ],
+  "span": 0.04,
+  "seed": 2026092810,
+  "initialization": "random, same seed for all experts",
+  "epochs": 1000,
+  "interactions_each": 163840000,
+  "gpus": [
+    1,
+    2,
+    3
+  ],
+  "deadline_utc": "2026-09-29T00:30:00+00:00",
+  "evaluation": "Fixed final1000 only; own source32 independent new perturbations, fixed2/fixed5/arrival; no expert checkpoint selection on final matrix cohort",
+  "interpretation": "Success supports learnability under same physics; failure does not prove impossibility. Not matrix seed replication.",
+  "basis": "Full four-arm final1000 policy protocols completed: B/D strict0 and no operation on selected training sources; reference tail still running."
+}

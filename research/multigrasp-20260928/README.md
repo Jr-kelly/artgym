@@ -1,79 +1,54 @@
-# Wuji 多抓姿 × 支撑动作范围（执行中）
+# Wuji 多抓姿 × 非拇指动作范围：实测报告（诊断仍运行）
 
-尚未得到正式训练或冻结评估结论。旧刀 URDF SHA256 `5229c66b183cc6da04190bf2d6cfbd035fadd227340dc8f26602b207171b461c`，原 teacher SHA256 `4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac`。
+核心2×2已完成：四组各1000轮、163840000次环境交互、同随机初始化；全部16候选权重已校验备份。800相同初态上的同预算冻结评估16项已完成，12000策略回合已从原始轨迹独立复算。开发择优冻结评估及唯一后续单抓姿专家诊断仍在运行；没有达到多抓姿稳定伸缩的目标，不能接回自主取刀。
 
-独立分支 `feat/wuji-multigrasp-2x2-20260928`。工作目录 `/data/research/artgym-experiments-20260921/multigrasp-20260928`；远端 `/home/wangjiarui/artgym-multigrasp-20260928`。开始 2026-09-28 14:53:52 UTC，截止次日 02:53:52 UTC，至少最后一小时用于评估交付。
+## 当前回答
 
-| 组 | 训练记录 | supportActionSpan | seed | 正式预算 |
-|---|---:|---:|---:|---:|
-| A | 原 3 | .04 | 2026092801 | 1000 × 5120 × 32 |
-| B | 16（包含原 3） | .04 | 2026092801 | 同 A |
-| C | 原 3 | .20 | 2026092801 | 同 A |
-| D | 同 B | .20 | 2026092801 | 同 A |
+- **增加训练抓姿：** 本轮单种子、同总交互预算下未改善，B/D严格成功均0。B多数能握持却基本不开合；D明显快速失稳。更多抓姿同时减少每个抓姿的采样次数，这个实际效果不能分解为“多样性本身有害”。
+- **放宽非拇指范围：** C相对A在原抓姿2秒协议有少量收益，全部800初态严格成功增加1.25个百分点；5秒协议四组均0，新增13训练抓姿和新测试均无严格收益。D未改善B且握持明显恶化。不能凭单种子宣称范围是根因或稳定因果收益。
+- **可操作与仅静态保持：** 原训练抓姿仍最可操作，旧teacher在原3×32上严格94/96（2秒）、93/96（5秒）；新策略远低于它。新增13训练抓姿405/416次静态满足刀身门槛，四组与参考严格操作均0；其中有宽松开合，故“只静态成功”不等于物理不可操作。
+- **自主取刀：** 不支持重新接入。本轮没有稳定的新多抓姿操作能力，也没有连续取刀终态接管验证；仅旧刀仿真，未替换实测v2、未运行机器人。
+- **唯一后续诊断：** 静态稳定的源3/5/11单抓姿专家正在训练。专家成功可证明同物理存在可学方案；失败不能证明物理不可能。最终优先事项等诊断完成后确定，不追加新网络/奖励/形状矩阵。
 
-四组随机初始化；初始所有模型张量 digest 必须一致，记录见 receipts。旧权重只作附加参考，不参与初始化。动作中心逐回合为 init_targets；拇指仍按 prev_targets 增量 .025 rad/step。沿用 bridge3 的原刀坐标转换和四元数半球约定；观测137维，20动作，30Hz控制。训练均在线 ±.5mm/axis、±.01rad/joint、±.5°旋转向量分量扰动，noise ramp=0；奖励/网络/物性/终止/curriculum 同配置，仅训练池路径和 span 不同。
+## 同预算主表：固定CP1000
 
-静态预检24记录全部存活20秒，最大刀身漂移2.36mm、转动.155rad，未推动滑块。24记录含两个逐位重复；保留原三个训练记录中另有一对近邻（2.23mm、2.03°、关节RMS .0595rad）。按5mm/.05rad/5°关节RMS合取去重，原3属于2个构型簇，16训练记录属于15个簇。重复和近邻不跨训练/测试。不能将16记录称为16个严格独立构型。
+|模型|严格固定2秒|严格固定5秒|2秒至少首轮开合|10mm到位换向≥3轮|2秒整段存活|
+|---|---:|---:|---:|---:|---:|
+|A|9/800|0/800|143/800|239/800|584/800|
+|B|0/800|0/800|1/800|3/800|666/800|
+|C|19/800|0/800|125/800|244/800|490/800|
+|D|0/800|0/800|0/800|0/800|1/800|
+|reference|94/800|93/800|209/800|227/800|517/800|
 
-训练与开发分组在运行前冻结于 `data/manifest.json`。历史已查看 functional20 其余来源仅作为历史保留诊断，不称盲测。新测试 seed2026092803 从官方功能抓姿生成入口产生，最多2700秒生成与1800秒第一物理筛选；后续保持门槛固定，与策略结果无关。
+A=原3、span.04；B=更多16、.04；C=原3、.20；D=更多16、.20。reference为旧成功teacher，训练预算不同，仅附加参照。原3包含2个近邻构型簇，更多16包含15簇，不把记录数当独立构型数。每个基础抓姿32次扰动不是32个独立抓姿。一个训练seed=2026092801；无独立矩阵种子复验。
 
-开发集：16训练记录各8个新扰动，CP250/500/750/1000按2/5秒固定时钟严格成功率等权选择，平局取较晚CP；不使用新测试调参或选权重。严格协议：20秒完整开合；各2/5秒指令末.3秒连续滑块误差<2mm、整段刀身平移<10mm/转动<.25rad且自然存活。继承历史严格小于门槛，不在看结果后放宽。额外现有协议：10mm到位立即反向，20秒连续完整开合计数、至少3轮和alive_full。两种协议各自运行，不能互换成功率。
+严格固定时钟：20秒按2/5秒交替伸出收回，每阶段末0.3秒滑块误差<2mm，全程刀柄平移<10mm、旋转<.25rad且存活。宽松协议为10mm到位立即反向，≥3完整轮，独立物理运行；其循环成功不包含严格握持约束。端点处存在硬限位，未测内部目标，不能宣称任意位置2mm控制。
 
-当前吞吐预检约每轮10.6秒，163840交互；四卡并行各卡内串行，避免同卡训练/生成/评估竞争。GPU历史为本机采样，非平台四小时计费口径。每个job都有14400秒上限、命令、PID、状态和GPU采样；监控只镜像证据不重启任务。全部旧任务/视频/模型保留。无student训练、无机器人动作、无新刀物性替换。
+全部新增训练、历史保留及补充新抓姿的严格成功均0，包含静态稳定子集；C的严格收益局限于原训练2秒条件。宽松到位换向在历史诊断集A/C有提高，但不满足严格稳定要求。D固定协议799/800终止，终止者中位0.467秒，所有800次刀身越阈值；这是失败时序，不能仅凭它证明动作范围的因果机制。
 
-## 入口
+## 冻结选择与初态有效性
 
-训练：`python -m scripts.train_wuji_multigrasp task=wuji_multigrasp hand=wuji_paper_official_actuator object=knife_wuji_bridge3_20260922 train=wujiAcquisitionSAPG num_envs=5120 experiment=NEW_NAME max_iterations=1000 headless=True graphics_device_id=-1 pipeline=gpu seed=2026092801 train.params.config.expl_coef_block_size=1024 train.params.config.minibatch_size=32768 task.env.trainingStates=research/multigrasp-20260928/data/small.npy task.env.supportActionSpan=.04`。完整实际命令以 receipts 中运行记录为准，补充保存频率、奖励固定值等选项。
+开发集为16训练记录×8固定扰动，CP250/500/750/1000分别2/5秒严格率等权，平局latest。选择A750/B1000/C750/D1000；分数分别3.125%/0/2.344%/0。最终未见数据没有用于选CP。主表固定1000，部署候选表另用开发选择，避免把不同CP步数当同预算证据。
 
-固定时钟：`python -m scripts.audit_wuji_multigrasp --checkpoint CHECKPOINT --task wuji_multigrasp --hand wuji_paper_official_actuator --object knife_wuji_bridge3_20260922 --initial-states STATES --span .04 --stage-seconds 2 --output NEW_OUTPUT`。`--static`替换为初始关节目标保持。
+最终25基础×32=800初态，四模型冻结后生成；22逐位唯一历史来源（原3＋新增13训练＋6历史诊断）和3补充新来源。静态687/800存活，656/800刀身严格稳定。按基础等权报告全体、静态alive子集与静态stable子集；无有效样本的基础不强写0%操作成功。分层分母见 `receipts/final-static-validity.json` 和 `final1000-analysis/report.json`。
 
-到位换向：`python -m scripts.audit_wuji_multigrasp_arrival --checkpoint CHECKPOINT --task wuji_multigrasp --hand wuji_paper_official_actuator --object knife_wuji_bridge3_20260922 --initial-states STATES --span .04 --total-seconds 20 --output NEW_OUTPUT`。
+新测试来源：首批seed2803生成1000，24初筛、21静态存活、姿态＋拇指行程0合格。第二批seed2805生成3000，53初筛、49静态存活、3姿态/行程/刀身稳定合格；原“≥3非拇指二值触觉95%”门禁仍0合格。该净力代理也拒绝旧参考成功记录0/2，不是可操作性必要条件。因此在任何新抓姿策略评估前，把全部仅失败此代理门禁的行1/16/29冻结为**补充修订物理筛选集**，标签`new_unseen_amended_physical`。原门禁0保留，不冒充原预注册盲测。补充3×32仅42静态alive、30严格stable（来自2基础）；全部策略在这30稳定回合仍无严格成功。此经验范围不代表动力学吸引域。
 
-全部运行环境使用 `scripts.monitor_wuji_checkpoints.runtime_environment`，IsaacGym先于torch，独占GPU租约。数据预置与复现整理在收尾时完善。结果、视频和下一步尚待真实实验，不预判两因素作用。
+扰动：手物平移每轴±0.5mm、旋转向量每轴±0.5°、关节±.01rad并限幅。构型距离分开用mm/正确旋转角/关节RMS，未用75维L2当物理距离。接触信号顺序thumb/index/middle/ring/pinky；关节顺序index/middle/ring/pinky/thumb。触觉净力是代理，不能识别每个物体接触或建立因果先后。
 
-## 15:17 UTC 更新
+## 复现与证据
 
-四组均已正式运行，随机初始化全张量哈希完全相同。`configs/audit.json` 对实际命令重新合成四份完整配置，除运行名称外只有训练池、span这两个预定因素不同。运行时动作映射与训练池采样20800交互核验通过。
+- 代码分支 `feat/wuji-multigrasp-2x2-20260928`；逐次执行历史 `progress-history.md`，续接 `WUJI_MULTIGRASP_HANDOFF.md`。
+- 旧刀URDF SHA256 `5229c66b183cc6da04190bf2d6cfbd035fadd227340dc8f26602b207171b461c`；teacher SHA256 `4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac`。
+- 训练初始化全张量SHA `bdf13bb79563529617cba46355011a9d857f1fdefe13f2a8279de8a0458f66b4`。原始完整配置 `configs/`，分组哈希 `data/manifest.json`，阈值 `preregistration.json`。
+- 单臂复现：`python -m scripts.reproduce_wuji_multigrasp --arm A --gpu 0 --name NEW_UNIQUE_RUN`；环境用已有IsaacGym运行时，先IsaacGym后torch，`scripts.monitor_wuji_checkpoints.runtime_environment`设置库路径。
+- 冻结主表：`python -m scripts.evaluate_wuji_multigrasp_frozen --states research/multigrasp-20260928/data/final-cohort-v1/states.npy --manifest research/multigrasp-20260928/data/final-cohort-v1/manifest.json --gpu 0 --label NEW_LABEL --selection final1000`；另选`development`复现择优表。
+- 下载四个`wuji-multigrasp-?-checkpoints.tar.gz`与`wuji-historical-reference.pth`后，执行`python -m scripts.restore_wuji_multigrasp_weights --downloads DOWNLOAD_DIR`，逐份验证SHA并恢复相邻epoch元数据和开发冻结记录。
+- 原始CSV/逐基础及逐回合时序 `final1000-analysis/`；小体积评估JSON和配置 `evidence/`。大trace及全部16权重按模型分包到Release `wuji-multigrasp-20260928-v1`，SHA核验收据随`receipts/`，当前草稿上传中。
+- 视频 `videos/A1000-three-grasps.mp4`：选最终行70/96/352代表性重仿真，实际0/3全严格、2/3alive；第一格连续开合但最后端点没保持、第二格掉刀、第三格刀身不稳。批量/设备不同，非800env精确重放。旧参考成功视频 `videos/reference-three-grasps-policy.mp4` 保留。每个视频的权重、输入、动作控制与筛选说明见manifest。
 
-旧冻结teacher在24候选记录上2秒指令：18/24存活，9/24至少开合一轮，5/24通过全部严格端点+刀身稳定；这5条正是原3条及2重复，去逐位重复后3/22。额外4条能开合一轮但不满足全程严格要求，不能称所有新抓姿都无法操作。这是历史候选诊断，本机4090结果，正式四组另在H100使用相同评估配置比较。
+## 资源与边界
 
-新seed2803：1000候选、24第一阶段有效、20秒21/24存活；固定姿态+拇指行程检查0合格，不虚构新盲测分母。已限量排队追加seed2805的3000候选，A训练结束后GPU0先生成再开发评估；其余各卡训练完成后开发评估。
+开始2026-09-28 14:53:52 UTC，截止09-29 02:53:52 UTC，至少末一小时留交付。四H100各卡串行；训练A/B/C/D墙钟与实际GPU占用日志在各job状态及GPU采样。19:14最近4h整机本方时间加权79.60%，非平台直接口径；只运行训练、筛选、评估等有用计算。D原训练PID持续，因实测吞吐更换看护延长上限，未重启优化器/随机数/训练；终结按PID退出+最终CP+MAX EPOCHS日志核验，exitcode不可恢复。所有基础设施失败保留并修复，不算方法失败。
 
-接触数组顺序为thumb/index/middle/ring/pinky，关节顺序为index/middle/ring/pinky/thumb。初版离线接触标签曾颠倒，标为`*.invalid-contact-order.json`保留，修正文件`*-contact-order-v2.json`有效；物理轨迹和成功指标未改。
-
-一键重现某臂：`python -m scripts.reproduce_wuji_multigrasp --arm A --gpu 0 --name NEW_UNIQUE_RUN`。复现脚本给6小时监控上限，不改变1000轮交互预算；当前首轮实际已启动监控上限4小时，接手须根据吞吐核查是否足够（尤其more/.20），超时不得当方法失败。
-
-## 15:25 UTC 更新
-
-四组训练PID重新实查存活。最近20epoch平均A10.70/B12.94/C11.75/D14.22秒；D的4小时监控上限接近预计总时长，需要续接时检查，不能让基础设施超时造成不等预算。
-
-旧teacher5秒固定时钟结果：19/24alive、9/24完整第一轮、5/24全部严格，严格成功仍仅原3记录及2重复。完整视频已生成于 `videos/reference-three-grasps-policy.mp4`，manifest写明选取规则、物体/权重/输入及同一脚本实际重仿真结果；600帧、20秒、30fps。3-env视频实际行0成功、行3推不动、行5旋转过大；行5没有复现24-env数值诊断中的掉落，不能称精确重放。同一个基础初态的不同并行批量也存在仿真差异，正式四组在相同批量/设备/协议比较。
-
-新测试seed2803的物理门禁联合结果固定为0合格，见data/fresh2803-frozen/manifest.json；保留失败，不运行空分母评估。第二批3000候选仍在A训练之后的队列中。冻结最终四组+旧参考统一评估入口 `scripts/evaluate_wuji_multigrasp_frozen.py` 已实现，尚未执行（等待训练/开发选定权重与合格新测试）。
-
-开发集初态静态预检完成：128/128存活，127/128全程满足10mm/.25rad刀身阈值。额外训练基础记录7的一次扰动越过刀身阈值，保留并单列；不据此重选开发集或改变预注册CP规则。证据`development-static-validity.json`及`evidence/dev-static-precheck-v1`。
-
-## 旧参考两套协议（每基姿1回合，历史诊断）
-
-|来源|逐位唯一记录|静态alive|固定2/5s第一完整轮|固定2/5s全部严格|到位换向至少3轮|到位换向alive|
-|---|---:|---:|---:|---:|---:|---:|
-|原训练|3|3|3 / 3|3 / 3|3|2|
-|新增训练来源|13|13|4 / 4|0 / 0|4|11|
-|历史保留诊断|6|6|0 / 0|0 / 0|0|3|
-|合计|22|22|7 / 7|3 / 3|7|16|
-
-逐抓姿CSV：`reference-by-grasp.csv`。到位换向使用10mm即换向，严格固定时钟使用2mm末.3s保持及整段10mm/.25rad刀柄门槛，两者各自真实运行。不能把到位换向的循环数当严格端点稳定。原3记录仍只有2近邻构型簇，不据1回合估计稳定泛化率。所有原始trace随evidence保存。
-
-最终冻结评估另外提供`--selection final1000`，四臂均取163840000交互后的CP1000进行相同步数比较；`--selection development`保留原定开发集择优结果，两者分开报告，不能把不同CP轮次的择优表当相同有效训练步数证据。final1000必须核对checkpoint原子metadata的epoch/frame；尚未执行最终评估。
-
-新测试门禁的限制（16:39 UTC离线核查）：原参考成功记录0和2也没有满足“至少3个非拇指二值触觉持续95%”条件。该信号是远端指节净力的阈值代理，并非逐物体接触身份；门禁不是可操作性的必要条件。本轮保留预注册条件，不根据操作结果放宽。首批生成数据另有独立的姿态＋拇指路径0合格，不能把零合格解释为不存在可操作的新抓姿。证据 `receipts/contact-gate-sensitivity.json`。
-
-最终分析导出已用旧参考真实轨迹验证：固定2/5s和arrival原评分完全复算一致；严格端点由第二份代码交叉检查；完整CSV/JSON和因素差计算用重复参考的临时夹具通过。夹具不是四臂结果。最终真实结果将带逐回合滑块误差、刀身阈值越界时间、支撑接触代理变化、目标/实际关节偏差和trace哈希。
-
-## 18:35 UTC：训练与测试集进展
-
-A/C已正常完成1000轮，同为163840000交互；墙钟分别11325.45/12435.88秒。B/D继续原训练。开发集正在按预注册八条件运行，尚无最终对照结果。
-
-第二批3000生成及初筛完成，53候选、49静态20秒存活，姿态＋拇指完整行程3合格。三者（行1/16/29）均满足静态刀身稳定、与旧family分离，但二值触觉门禁失败；原预注册新测试池仍为0。鉴于接触门禁在旧成功抓姿上的假阴性，在任何新抓姿策略评估前，将这3者全部冻结为补充新测试池 `data/fresh2805-supplement-frozen`。只删除触觉代理门禁，不改变几何/动态阈值，不按策略成绩挑选；明确这是生成后的物理筛选修订，结果单列 `new_unseen_amended_physical`，不冒充原预注册盲测。最终同批共22旧＋3补充新基础抓姿各32扰动。
-
-本地同步第一次因缺失父目录失败，日志保留；修复后复用同一批结果完成几何和实际静态筛选，没有重复生成。
+本轮源码/资产、训练拟合、冻结评估、离线独立复算、脚本视频与真机严格分账。无student蒸馏、无v2型号泛化、无任意位置控制、无取刀接管或机器人成功主张。

@@ -1,0 +1,31 @@
+{
+  "time": "2026-09-28T20:19:57.836599+00:00",
+  "video": "A1000-three-grasps.mp4",
+  "asset_sha256": "5229c66b183cc6da04190bf2d6cfbd035fadd227340dc8f26602b207171b461c",
+  "checkpoint_sha256": "15e0c1da0b3253901868071dfeb70a2847727e2c8a3e1912452e99b2b7621728",
+  "selected_final_rows": [
+    70,
+    96,
+    352
+  ],
+  "base_sources": [
+    2,
+    3,
+    11
+  ],
+  "selection": "post hoc representative successful original/operation failure/unstable cycle from final1000 H100 table",
+  "observed_render_result": "0/3 full strict,2/3 alive. First panel all10 stages attained with body stable but last endpoint not held; second panel drops; third panel body drift14.38mm/rotation.752rad. Rendering on local4090 with3env differs from800env frozen test, not exact replay.",
+  "inputs": "privileged simulator teacher inputs",
+  "control": "policy, supportspan.04, thumbstep.025, fixed2s; no scripted motor actions or runtime object pose overwrite",
+  "scope": "simulation demonstration, not independent generalization or hardware evidence",
+  "frames": 600,
+  "fps": 30,
+  "duration_seconds": 20,
+  "artifacts": {
+    "A1000-three-grasps-contact-sheet.jpg": "4a0396eb725f8cc65660dcc1e13a835eda64c284a14101c9200b63b668ce5e7b",
+    "A1000-three-grasps.mp4": "537a03e220bff12a7b0de6e69ad16f3e7b0ba9ea5d4821116fe4fa3d06441a70",
+    "A1000-three-grasps-config.yaml": "205e9aa0ce033efbcfef995bbd189c2fcf6e16064ab0b0ca5d541a4421053d8e",
+    "A1000-three-grasps-report.json": "fab542a7ccbed90b918209548a76138f150d9177e99bf1ce8036a3b10be6587d",
+    "A1000-three-grasps-trace.npz": "e4f8e3f5c93d133ad4ef9e470286c950593dae259c99bc108caa9dba2d67ecf5"
+  }
+}
