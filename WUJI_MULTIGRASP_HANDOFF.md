@@ -107,3 +107,19 @@ D预测总时长超过原4h看护上限；验证子进程保留GPU租约后只�
 ## 多抓姿 2026-09-28T15:36:49.830864+00:00 reference_both_protocols_completed
 
 旧冻结teacher实际到位换向20s评估完成；去逐位重复22抓姿：static22/22存活，固定2/5s第一轮均7/22、全部严格均3/22；arrival至少3轮7/22，16/22alive。13新增训练来源中4能开合但0严格；6历史诊断固定开合0。每基姿1回合，仅开发诊断，不代替新测试或四臂结论。 证据：research/multigrasp-20260928/reference-by-grasp.csv, research/multigrasp-20260928/reference-summary.json, research/multigrasp-20260928/evidence/reference-candidates-arrival-v1/evidence/report.json。下一步：四正式训练继续，等待各1000epoch和开发冻结，第二批新测试物理筛选已排队。
+
+## 多抓姿 2026-09-28T15:37:32.850214+00:00 reference_protocol_increment_pushed
+
+已push并远端核验aaf65578484d82d8c6eae37b7140aa215827bab3。四训练原PID2449/2499/3149/4716实查均live；GPU即时94/89/80/91%。上一轮与本轮均有实际证据进展，当前下一关键结果需等待训练。新测试后续实际等待PID3838398，不重启既有任务。 证据：research/multigrasp-20260928/reference-summary.json, research/multigrasp-20260928/fresh2-local-continuation-launch.json。下一步：继续已验证存活的四训练到1000；开发评估后冻结权重；追加新抓姿物理门禁和最终统一测试。
+
+## 多抓姿 2026-09-28T15:40:20.533260+00:00 four_checkpoint_integrity_passed
+
+四组已保存CP10均CPU加载成功、48模型张量有限、epoch10与1638400交互一致、含优化器与RNN状态。仅完整性检查，不运行CP10策略或选择权重。最新实查A190/B149/C173/D106均live，D看护余量105min；B预测看护余量22min，需要继续监测。 证据：research/multigrainvalid.json, research/multigrasp-20260928/receipts/checkpoints-cp10-cpu-audit.json, research/multigrasp-20260928/receipts/process-throughput-20260928T1538.json。下一步：保留训练运行至1000轮；检查保存的CP250/500/750/1000和队列衔接。
+
+## 多抓姿 2026-09-28T15:40:43.990534+00:00 evidence_path_correction
+
+上一条four_checkpoint_integrity_passed误附了一个不存在的research/multigrainvalid.json路径；该路径无证据效力。两份真实checkpoint/进程收据均存在，结论不变。事件记录入口现要求全部证据路径存在后才追加，原失败记录保留。 证据：research/multigrasp-20260928/receipts/checkpoints-cp10-cpu-audit.json, research/multigrasp-20260928/receipts/process-throughput-20260928T1538.json。下一步：继续既有训练及有界等待，不重启或扩大实验。
+
+## 多抓姿 2026-09-28T15:42:54.295444+00:00 training_source_unchanged_verified
+
+四臂继续运行至A212/B167/C193/D122，八个核心训练、控制、观测、PPO源码远端/本地/初始manifest哈希全部一致；后续评估与看护变更没有修改在途训练逻辑。 证据：research/multigrasp-20260928/receipts/training-source-unchanged-1543.json, research/multigrasp-20260928/receipts/process-throughput-20260928T1542.json。下一步：等待训练产生预注册checkpoint并继续至1000轮。
