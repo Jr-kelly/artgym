@@ -1,0 +1,658 @@
+{
+  "candidates": [
+    {
+      "name": "fixed-old-wrist-all-five-pads",
+      "scope": "Geometry only; all five digits requested, zero physical execution",
+      "source_plan": "configs/g2_local/prefix/acquisition-candidate2-refined-initial.json",
+      "settled_localization": "/data/research/artgym-g2-local-policy-20260928/runs/g2-local-policy-20260928/R7-03-continuous-learned-H-then-joint-S/settled-table-localization.json",
+      "movable_wrist": false,
+      "less_flexed_initial_guess": false,
+      "active_fingers": [
+        "thumb",
+        "index",
+        "middle",
+        "ring",
+        "pinky"
+      ],
+      "excluded_fingers": [],
+      "contact_normals": [
+        [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "contact_targets": [
+        [
+          -0.0095,
+          -0.000999999999999999,
+          -0.019
+        ],
+        [
+          0.0095,
+          -0.001000000000000001,
+          0.0385
+        ],
+        [
+          0.0095,
+          -0.001000000000000001,
+          0.0016
+        ],
+        [
+          0.0095,
+          -0.001000000000000001,
+          -0.022
+        ],
+        [
+          0.0095,
+          -0.001000000000000001,
+          -0.047
+        ]
+      ],
+      "contact_points": [
+        [
+          -0.009402642793117142,
+          -0.0017415970665155538,
+          -0.018443198696004883
+        ],
+        [
+          0.024242620254183552,
+          -0.004448537523983405,
+          0.02518954066938176
+        ],
+        [
+          0.009523643644912339,
+          -0.0013389745331281104,
+          0.0015659797785330756
+        ],
+        [
+          0.009533465506551732,
+          -0.0011042416149261293,
+          -0.02200752628671802
+        ],
+        [
+          0.009549396371771417,
+          -0.0011093253057985948,
+          -0.04700306395828523
+        ]
+      ],
+      "contact_errors_m": [
+        0.0009324549999475415,
+        0.02015950372914539,
+        0.0003414968982623693,
+        0.00010974014490118518,
+        0.0001200058826579336
+      ],
+      "pad_facing_cosines": [
+        -0.628460282498873,
+        0.598179222526276,
+        0.35522593136688496,
+        0.4482115628717559,
+        0.650427432048338
+      ],
+      "wrist_in_knife": [
+        [
+          0.17248293686868718,
+          -0.28395119562669224,
+          0.9431974104032117,
+          -0.09358048227049387
+        ],
+        [
+          0.9490235227234705,
+          0.30437504165633644,
+          -0.08191573313007822,
+          -0.055938406305765805
+        ],
+        [
+          -0.26382568071870344,
+          0.9092455952705384,
+          0.32197586504959863,
+          -0.04771880693955757
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "touch_q": [
+        0.5362679913664744,
+        0.3699999943320836,
+        0.392988311794202,
+        1.5752998653562749,
+        0.930257767394537,
+        0.33650723024255697,
+        0.3786091494248643,
+        1.574499851764815,
+        0.9270852536064377,
+        0.1766739536011141,
+        0.6012818673265736,
+        1.0685679706100495,
+        0.9939037013603532,
+        0.29280174780664275,
+        0.4327815416496149,
+        1.380023693786939,
+        0.3962107664134282,
+        -0.07930932416140457,
+        1.5622999108111622,
+        0.5822332722751844
+      ],
+      "joint_names": [
+        "hand_r_index_joint1",
+        "hand_r_index_joint2",
+        "hand_r_index_joint3",
+        "hand_r_index_joint4",
+        "hand_r_middle_joint1",
+        "hand_r_middle_joint2",
+        "hand_r_middle_joint3",
+        "hand_r_middle_joint4",
+        "hand_r_pinky_joint1",
+        "hand_r_pinky_joint2",
+        "hand_r_pinky_joint3",
+        "hand_r_pinky_joint4",
+        "hand_r_ring_joint1",
+        "hand_r_ring_joint2",
+        "hand_r_ring_joint3",
+        "hand_r_ring_joint4",
+        "hand_r_thumb_joint1",
+        "hand_r_thumb_joint2",
+        "hand_r_thumb_joint3",
+        "hand_r_thumb_joint4"
+      ],
+      "min_table_clearance_m": 0.00035531995163673447,
+      "link_table_clearances_m": {
+        "hand_r_base_link": 0.006007990343338321,
+        "hand_r_index_link1": 0.06018367577758266,
+        "hand_r_index_link2": 0.036849185179363864,
+        "hand_r_index_link3": 0.014947724859079248,
+        "hand_r_index_link4": 0.006600995512196173,
+        "hand_r_index_pad_link": 0.0003705675300091915,
+        "hand_r_middle_link1": 0.07102128492991555,
+        "hand_r_middle_link2": 0.040140015493468795,
+        "hand_r_middle_link3": 0.012892493058911492,
+        "hand_r_middle_link4": 0.0051145926495436145,
+        "hand_r_middle_pad_link": 0.0004686458979932251,
+        "hand_r_pinky_link1": 0.07639029932871821,
+        "hand_r_pinky_link2": 0.046296588041029874,
+        "hand_r_pinky_link3": 0.019199204928891045,
+        "hand_r_pinky_link4": 0.008457182933125806,
+        "hand_r_pinky_pad_link": 0.00048133779427106393,
+        "hand_r_ring_link1": 0.07500423173399373,
+        "hand_r_ring_link2": 0.0433495267556302,
+        "hand_r_ring_link3": 0.015258347787364346,
+        "hand_r_ring_link4": 0.006650743429398309,
+        "hand_r_ring_pad_link": 0.00047784314498922065,
+        "hand_r_thumb_link1": 0.034674916009430845,
+        "hand_r_thumb_link2": 0.013860532698357075,
+        "hand_r_thumb_link3": 0.002180722693432613,
+        "hand_r_thumb_link4": 0.00035531995163673447,
+        "hand_r_thumb_pad_link": 0.001373570403553237
+      },
+      "palm_world_up_component": -0.9385346498882117,
+      "full_contact_table_precheck": false,
+      "joint_margin_min_rad": 5.551115123125783e-17,
+      "solver_cost": 8.270560070512435,
+      "solver_nfev": 55,
+      "seconds": 1.8195021152496338,
+      "outstanding": "If precheck passes: exact self/body collision, open/close path, G2 reach and real continuous pickup. No readiness is implied."
+    },
+    {
+      "name": "bounded-wrist-all-five-pads",
+      "scope": "Geometry only; all five digits requested, zero physical execution",
+      "source_plan": "configs/g2_local/prefix/acquisition-candidate2-refined-initial.json",
+      "settled_localization": "/data/research/artgym-g2-local-policy-20260928/runs/g2-local-policy-20260928/R7-03-continuous-learned-H-then-joint-S/settled-table-localization.json",
+      "movable_wrist": true,
+      "less_flexed_initial_guess": false,
+      "active_fingers": [
+        "thumb",
+        "index",
+        "middle",
+        "ring",
+        "pinky"
+      ],
+      "excluded_fingers": [],
+      "contact_normals": [
+        [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "contact_targets": [
+        [
+          -0.0095,
+          -0.000999999999999999,
+          -0.019
+        ],
+        [
+          0.0095,
+          -0.001000000000000001,
+          0.0385
+        ],
+        [
+          0.0095,
+          -0.001000000000000001,
+          0.0016
+        ],
+        [
+          0.0095,
+          -0.001000000000000001,
+          -0.022
+        ],
+        [
+          0.0095,
+          -0.001000000000000001,
+          -0.047
+        ]
+      ],
+      "contact_points": [
+        [
+          -0.009537384770098184,
+          -0.0009862073054032064,
+          -0.01900916023855122
+        ],
+        [
+          0.009913479752639552,
+          -0.0014262597162490384,
+          0.038486511459891536
+        ],
+        [
+          0.009542608225865048,
+          -0.0010944461853026918,
+          0.00159030903067101
+        ],
+        [
+          0.009557792024138135,
+          -0.0010493097661490077,
+          -0.022012736108181632
+        ],
+        [
+          0.00955783607196177,
+          -0.0010535463451203971,
+          -0.04701138031197729
+        ]
+      ],
+      "contact_errors_m": [
+        4.08872771146452e-05,
+        0.0005940074008409602,
+        0.00010406468044506069,
+        7.702973155390572e-05,
+        7.96350035877444e-05
+      ],
+      "pad_facing_cosines": [
+        0.218609052026432,
+        0.5752718287182961,
+        0.5649784597816664,
+        0.598204144972901,
+        0.6918113388666561
+      ],
+      "wrist_in_knife": [
+        [
+          -0.02451891522670968,
+          -0.6767749882996488,
+          0.7357815151307592,
+          -0.09019493108598448
+        ],
+        [
+          0.8900047424083873,
+          0.320419173183901,
+          0.3243811214400824,
+          -0.08093820296268198
+        ],
+        [
+          -0.45529153438943454,
+          0.6628025110605388,
+          0.5944766185857596,
+          -0.050543610424334626
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "touch_q": [
+        0.022373235579289517,
+        -0.29433059207328144,
+        1.2652163595518602,
+        -0.33662826510299765,
+        0.5658289630974184,
+        -0.3082702214770104,
+        0.46623313549911904,
+        1.5742460712253472,
+        0.6218036036904133,
+        -0.2470146658923324,
+        0.8816931445287574,
+        0.8134446783216188,
+        0.5832422911742157,
+        -0.23238752436134943,
+        0.8104847191506489,
+        1.1011520612803343,
+        1.0311758356526148,
+        0.1363351553503795,
+        1.468683777846706,
+        -0.46987328704042325
+      ],
+      "joint_names": [
+        "hand_r_index_joint1",
+        "hand_r_index_joint2",
+        "hand_r_index_joint3",
+        "hand_r_index_joint4",
+        "hand_r_middle_joint1",
+        "hand_r_middle_joint2",
+        "hand_r_middle_joint3",
+        "hand_r_middle_joint4",
+        "hand_r_pinky_joint1",
+        "hand_r_pinky_joint2",
+        "hand_r_pinky_joint3",
+        "hand_r_pinky_joint4",
+        "hand_r_ring_joint1",
+        "hand_r_ring_joint2",
+        "hand_r_ring_joint3",
+        "hand_r_ring_joint4",
+        "hand_r_thumb_joint1",
+        "hand_r_thumb_joint2",
+        "hand_r_thumb_joint3",
+        "hand_r_thumb_joint4"
+      ],
+      "min_table_clearance_m": 0.00045951458936144274,
+      "link_table_clearances_m": {
+        "hand_r_base_link": 0.03866419602444038,
+        "hand_r_index_link1": 0.04661109387406426,
+        "hand_r_index_link2": 0.034942564450210156,
+        "hand_r_index_link3": 0.014708583198172143,
+        "hand_r_index_link4": 0.006276870983182747,
+        "hand_r_index_pad_link": 0.00045951458936144274,
+        "hand_r_middle_link1": 0.05781136595094527,
+        "hand_r_middle_link2": 0.03257212573042911,
+        "hand_r_middle_link3": 0.010384223799115633,
+        "hand_r_middle_link4": 0.003818852678695528,
+        "hand_r_middle_pad_link": 0.0004703654795483736,
+        "hand_r_pinky_link1": 0.07021073690796598,
+        "hand_r_pinky_link2": 0.04120522994117748,
+        "hand_r_pinky_link3": 0.01601507017934667,
+        "hand_r_pinky_link4": 0.006696347043658846,
+        "hand_r_pinky_pad_link": 0.0004804271983989139,
+        "hand_r_ring_link1": 0.06447079588847604,
+        "hand_r_ring_link2": 0.03782012052653405,
+        "hand_r_ring_link3": 0.012463420421564453,
+        "hand_r_ring_link4": 0.005190178214684482,
+        "hand_r_ring_pad_link": 0.00048327993452457196,
+        "hand_r_thumb_link1": 0.04627740548406123,
+        "hand_r_thumb_link2": 0.01707961083880727,
+        "hand_r_thumb_link3": 0.01025497866445324,
+        "hand_r_thumb_link4": 0.00450476751657658,
+        "hand_r_thumb_pad_link": 0.0008476892493500809
+      },
+      "palm_world_up_component": -0.872422914397746,
+      "full_contact_table_precheck": false,
+      "joint_margin_min_rad": 2.6706760008377017e-05,
+      "solver_cost": 0.08844018543555464,
+      "solver_nfev": 120,
+      "seconds": 5.84758186340332,
+      "outstanding": "If precheck passes: exact self/body collision, open/close path, G2 reach and real continuous pickup. No readiness is implied."
+    },
+    {
+      "name": "bounded-wrist-less-flexed-seed",
+      "scope": "Geometry only; all five digits requested, zero physical execution",
+      "source_plan": "configs/g2_local/prefix/acquisition-candidate2-refined-initial.json",
+      "settled_localization": "/data/research/artgym-g2-local-policy-20260928/runs/g2-local-policy-20260928/R7-03-continuous-learned-H-then-joint-S/settled-table-localization.json",
+      "movable_wrist": true,
+      "less_flexed_initial_guess": true,
+      "active_fingers": [
+        "thumb",
+        "index",
+        "middle",
+        "ring",
+        "pinky"
+      ],
+      "excluded_fingers": [],
+      "contact_normals": [
+        [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "contact_targets": [
+        [
+          -0.0095,
+          -0.000999999999999999,
+          -0.019
+        ],
+        [
+          0.0095,
+          -0.001000000000000001,
+          0.0385
+        ],
+        [
+          0.0095,
+          -0.001000000000000001,
+          0.0016
+        ],
+        [
+          0.0095,
+          -0.001000000000000001,
+          -0.022
+        ],
+        [
+          0.0095,
+          -0.001000000000000001,
+          -0.047
+        ]
+      ],
+      "contact_points": [
+        [
+          -0.009537340807335289,
+          -0.001126614901767953,
+          -0.019003785206163692
+        ],
+        [
+          0.009842366577087959,
+          -0.001370984172481001,
+          0.038484746421946915
+        ],
+        [
+          0.009686350955927419,
+          -0.0012453227769736964,
+          0.0016009412627987108
+        ],
+        [
+          0.009728235047060697,
+          -0.0011987269292644796,
+          -0.02199870266898801
+        ],
+        [
+          0.00952622551329125,
+          -0.0012186549914925701,
+          -0.047009911420789294
+        ]
+      ],
+      "contact_errors_m": [
+        0.00013206058090081804,
+        0.0005050512854965913,
+        0.00030807601278386556,
+        0.0003026306530896078,
+        0.00022044504783294056
+      ],
+      "pad_facing_cosines": [
+        0.2337758066645872,
+        0.6293426699824131,
+        0.8342693033956763,
+        0.8927148827824816,
+        0.6561270817431406
+      ],
+      "wrist_in_knife": [
+        [
+          -0.05082459129280272,
+          -0.5481219127320931,
+          0.8348528191860113,
+          -0.11208695192764506
+        ],
+        [
+          0.9872585454230552,
+          0.09863858392422518,
+          0.12486390291263907,
+          -0.06491406146219722
+        ],
+        [
+          -0.15078934116532544,
+          0.8305617367446777,
+          0.5361247765647394,
+          -0.056047090578005034
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "touch_q": [
+        0.48251153726900525,
+        -0.15571074863423096,
+        0.3231313721887452,
+        0.21621347740289032,
+        0.5319666321165591,
+        -0.31953153356869146,
+        0.7611300601621254,
+        -0.13933861878976023,
+        0.5506261460927149,
+        -0.33503385753513293,
+        0.27968912622129516,
+        1.5734437656098763,
+        0.47935311935786445,
+        -0.3082930528162289,
+        1.024676603883768,
+        -0.31148717099019413,
+        1.4094505346946633,
+        0.16875323734768113,
+        1.0428685917651859,
+        -0.4697043930298524
+      ],
+      "joint_names": [
+        "hand_r_index_joint1",
+        "hand_r_index_joint2",
+        "hand_r_index_joint3",
+        "hand_r_index_joint4",
+        "hand_r_middle_joint1",
+        "hand_r_middle_joint2",
+        "hand_r_middle_joint3",
+        "hand_r_middle_joint4",
+        "hand_r_pinky_joint1",
+        "hand_r_pinky_joint2",
+        "hand_r_pinky_joint3",
+        "hand_r_pinky_joint4",
+        "hand_r_ring_joint1",
+        "hand_r_ring_joint2",
+        "hand_r_ring_joint3",
+        "hand_r_ring_joint4",
+        "hand_r_thumb_joint1",
+        "hand_r_thumb_joint2",
+        "hand_r_thumb_joint3",
+        "hand_r_thumb_joint4"
+      ],
+      "min_table_clearance_m": 0.00044227479504099776,
+      "link_table_clearances_m": {
+        "hand_r_base_link": 0.013173163706394764,
+        "hand_r_index_link1": 0.056044206304620814,
+        "hand_r_index_link2": 0.03427171431991205,
+        "hand_r_index_link3": 0.015216447237387687,
+        "hand_r_index_link4": 0.0065448374249019725,
+        "hand_r_index_pad_link": 0.00046784843643188356,
+        "hand_r_middle_link1": 0.06384167164724475,
+        "hand_r_middle_link2": 0.041889594742586245,
+        "hand_r_middle_link3": 0.01657389708349799,
+        "hand_r_middle_link4": 0.007689164940476445,
+        "hand_r_middle_pad_link": 0.000478916366351112,
+        "hand_r_pinky_link1": 0.06342444119205237,
+        "hand_r_pinky_link2": 0.038120377593029,
+        "hand_r_pinky_link3": 0.01732372163141671,
+        "hand_r_pinky_link4": 0.007977493700431215,
+        "hand_r_pinky_pad_link": 0.00044227479504099776,
+        "hand_r_ring_link1": 0.06491440939841808,
+        "hand_r_ring_link2": 0.04380895393987427,
+        "hand_r_ring_link3": 0.01720261492409869,
+        "hand_r_ring_link4": 0.008521903876795855,
+        "hand_r_ring_pad_link": 0.00048584275096619223,
+        "hand_r_thumb_link1": 0.042398027870535926,
+        "hand_r_thumb_link2": 0.01652451146364109,
+        "hand_r_thumb_link3": 0.011191392228918184,
+        "hand_r_thumb_link4": 0.0039251184852618914,
+        "hand_r_thumb_pad_link": 0.0004659789185607055
+      },
+      "palm_world_up_component": -0.9809547092527232,
+      "full_contact_table_precheck": false,
+      "joint_margin_min_rad": 5.6202323668763654e-05,
+      "solver_cost": 0.07506566228234318,
+      "solver_nfev": 120,
+      "seconds": 5.9398393630981445,
+      "outstanding": "If precheck passes: exact self/body collision, open/close path, G2 reach and real continuous pickup. No readiness is implied."
+    }
+  ],
+  "new_physical_trials": 0,
+  "new_training_configs": 0,
+  "conclusions": "Numerical candidates are only local solves; rejection does not establish global infeasibility. No physics or motor drive parameters changed."
+}

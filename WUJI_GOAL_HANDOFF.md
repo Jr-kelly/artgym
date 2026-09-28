@@ -1,3 +1,11 @@
+## Latest 2026-09-28 15:03 CST — full-convex side-pinch follow-up retained
+最新第五次CPU几何求解允许纵向落点变化并加入完整凸包分离约束，SLSQP子问题失败：最大触达误差4.679mm，仍有刀身相交。两次精确凸包审计/G2可达检查保留；累计5几何、0新物理/0训练，无活动任务进程。几何拒绝不代表用户路线不可行。下一项：以掌心朝下、五指共同侧夹、关节有余量的新构型建立初值，同时保留完整凸包避障及纵向落点选择；不在原三指附近同一个失败初值上重复调参。原成功链路/模型/demo不变。详见 `research/g2-finger-surface-acquisition-20260928.md`。
+
+## Latest 2026-09-28 15:00 CST — thumb versus four-finger pickup specified; geometry obstacle localized
+用户明确新主路线：取刀时拇指与四指分列刀身两侧→空中翻掌→逐步展平四指托刀→拇指调整/滑块操作。保留全部旧成功链路/demo。继续独立工作树 `/data/research/artgym-g2-finger-surface-20260928`，分支 `feat/g2-wuji-finger-surface-grasp-20260928`。旧预置A只是有操作证据的参考，不强制复现它的弯曲关节。
+本次4个CPU几何求解，0新物理/0训练，无新活动进程。有限腕调整后五指目标误差≤0.508mm、G2可达，270非邻接手链接无体积交集；但完整凸包核查发现index/middle/ring link4与刀身交集内切球半径约0.75–0.83mm，thumb/pinky远端到限位，尚无可执行候选。0.5mm桌面裕量在数值边界，预检保留false。记录全部失败，不放宽阈值，不把触达当抓取成功。
+报告 `research/g2-finger-surface-acquisition-20260928.md`，目标 `configs/g2_finger_surface/operation-target-v1.json`。下一项唯一优先：完整凸包碰撞约束＋沿刀长可选的四指落点，避免强绑旧三指布局，然后检查开合路径；翻掌后先保留拇指对压直到指面支撑真实稳定。后续物理仍计旧剩余8/80开发额度，不自动追加第五训练配置。原成功分支 ef3f51d 和Release不动。
+
 ## Latest 2026-09-28 14:50 CST — user reference image: finger-surface functional grasp
 新需求：保留全部已成功链路/demo，另研究刀身横跨非拇指掌侧指面、拇指在滑块面操作的功能抓姿。旧成功分支和Release保留，独立工作树 `/data/research/artgym-g2-finger-surface-20260928`，分支 `feat/g2-wuji-finger-surface-grasp-20260928`，基于 ef3f51d。本次仅只读轨迹核查＋目标定义，0物理试验/0训练，未追加第五训练配置，无新活动进程。
 实际旧成功R7-03操作600帧：index100%、middle48.33%、ring0%、pinky59%、thumb-slider100%；中指触刀侧边附近，拇指滑块宽边附近。旧预置R3-15-A：index/middle/pinky100%、ring93.83%、thumb-slider100%，4指同时底面接触93.83%；两轮2mm及稳定均通过，但只是预置操作证据，不是连续获取。该A只作为有操作证据的第一参考，不强制回缓存关节；视觉上仍较参考图弯曲，不宣称已复现图中姿态。

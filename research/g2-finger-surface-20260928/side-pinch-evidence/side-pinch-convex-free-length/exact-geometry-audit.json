@@ -1,0 +1,57 @@
+{
+  "plan": "runs/g2-finger-surface-20260928/side-pinch-convex-free-length/hard-constraint-refinement.json",
+  "scope": "One geometric touch pose only, no motor preload/dynamics or path certificate",
+  "nonadjacent_hand_pairs_tested": 270,
+  "excluded": "Joint graph distances <=2 for mounting/joint shells only",
+  "hand_intersections": [],
+  "knife_intersections": [
+    {
+      "hand_link": "hand_r_index_link4",
+      "knife_link": "body",
+      "intersection_inscribed_radius_m": 0.00021716456884609956
+    },
+    {
+      "hand_link": "hand_r_ring_link4",
+      "knife_link": "body",
+      "intersection_inscribed_radius_m": 0.00043181814304806877
+    },
+    {
+      "hand_link": "hand_r_ring_pad_link",
+      "knife_link": "body",
+      "intersection_inscribed_radius_m": 1.300778636821388e-05
+    },
+    {
+      "hand_link": "hand_r_thumb_pad_link",
+      "knife_link": "body",
+      "intersection_inscribed_radius_m": 0.00016325966629415005
+    }
+  ],
+  "overlap_definition": "Radius of a ball inside both convex hulls; not collision penetration depth or measured force",
+  "g2_ik": {
+    "residual": 6.661752702599138e-11,
+    "position_m": 1.3376311324002907e-11,
+    "rotation_rad": 3.968732332713203e-11
+  },
+  "g2_arm_q": [
+    -1.5939717650944114,
+    -0.8343436459571589,
+    0.6120077094715438,
+    -1.0143158384618074,
+    -1.0129643012781335,
+    0.037649160629059174,
+    -0.8255710049464777
+  ],
+  "g2_arm_table": [],
+  "joints_with_less_than_0p01rad_margin": [
+    {
+      "joint": "hand_r_pinky_joint4",
+      "margin_rad": 0.005008295630179127
+    },
+    {
+      "joint": "hand_r_thumb_joint4",
+      "margin_rad": 0.0014636643901374535
+    }
+  ],
+  "ready_for_physics": false,
+  "outstanding": "Touch-only screening. Open/close approach, finger-table path and flip/flatten handoff not validated."
+}
