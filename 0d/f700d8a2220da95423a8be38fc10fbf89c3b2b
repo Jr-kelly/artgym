@@ -1,0 +1,336 @@
+scripts/audit_g2_measured_knife.py
+  s_87fdc32a1dcd01::t_451a22dac4a55c 1-26,28-42,44-49,51-65
+  s_87fdc32a1dcd01::t_91f9646406451e 43,50
+  s_87fdc32a1dcd01::t_8a80cfe2b767e9 27
+research/g2-measured-knife-20260928.md
+  s_87fdc32a1dcd01::t_91f9646406451e 1-61
+scripts/g2_side_pinch_feedback.py
+  s_87fdc32a1dcd01::t_9a0403a46614fc 10,41-43,87
+  s_87fdc32a1dcd01::t_5f8ee09387ccc2 1-9,11-40,44-86,88
+configs/g2_finger_surface/measured-knife-v1.json
+  s_87fdc32a1dcd01::t_aa80c9d75a1d3e 1-48
+scripts/build_g2_measured_knife.py
+  s_87fdc32a1dcd01::t_aa80c9d75a1d3e 1-72
+scripts/g2_knife_geometry.py
+  s_87fdc32a1dcd01::t_e34a90631fa62d 1-57
+scripts/audit_g2_side_pickup_candidate.py
+  s_87fdc32a1dcd01::t_47722662f686a6 28,47-50,59-60,73
+scripts/run_g2_tabletop.py
+  s_87fdc32a1dcd01::t_5f8ee09387ccc2 108,122,583,591-595,606-608,612-613,615
+  s_87fdc32a1dcd01::t_cffd741442d075 109,123-129,147-148,199,206-208,313,331-332,340-341,393
+scripts/plan_g2_side_pinch_motion.py
+  s_87fdc32a1dcd01::t_904d59af146c15 11,36,106-119
+  s_87fdc32a1dcd01::t_cffd741442d075 37,43-46,71-78,129,158-160
+  s_87fdc32a1dcd01::t_d0d55104adbd57 29,89-92,97,121-123,128
+research/g2-finger-surface-reproduction-20260928.md
+  s_87fdc32a1dcd01::t_11c566bd3714ac 1-53
+scripts/search_g2_palm_down_pinch.py
+  s_87fdc32a1dcd01::t_47722662f686a6 26,30-32,40-44,63-70,79-80,124,136,158,160-163
+scripts/g2_contact_geometry.py
+  s_87fdc32a1dcd01::t_e34a90631fa62d 16,18-21,43-53
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "0df700d8a2220da95423a8be38fc10fbf89c3b2b",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.session_started_at": "2026-09-28T07:56:21Z",
+        "tlab.token_usage.input_tokens": "50751878",
+        "tlab.token_usage.cache_read_tokens": "1029750885",
+        "tlab.token_usage.output_tokens": "7102615"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "assets/objects/knife_wuji_measured_envelope_20260928_v1/000/asset-spec.json",
+      "additions": {
+        "human": 102
+      }
+    },
+    {
+      "new_path": "assets/objects/knife_wuji_measured_envelope_20260928_v1/000/meshes/bump.obj",
+      "additions": {
+        "human": 21
+      }
+    },
+    {
+      "new_path": "assets/objects/knife_wuji_measured_envelope_20260928_v1/000/meshes/button.obj",
+      "additions": {
+        "human": 21
+      }
+    },
+    {
+      "new_path": "assets/objects/knife_wuji_measured_envelope_20260928_v1/000/meshes/handle.obj",
+      "additions": {
+        "human": 45
+      }
+    },
+    {
+      "new_path": "assets/objects/knife_wuji_measured_envelope_20260928_v1/000/mobility.urdf",
+      "additions": {
+        "human": 2
+      }
+    },
+    {
+      "new_path": "configs/g2_finger_surface/balanced-side-pinch-redistributed.json",
+      "additions": {
+        "human": 450
+      }
+    },
+    {
+      "new_path": "configs/g2_finger_surface/measured-knife-v1.json",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 48
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/measured-asset-evidence/audit.json",
+      "additions": {
+        "human": 145
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/measured-asset-evidence/exact-audit-00.json",
+      "additions": {
+        "human": 28
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/measured-asset-evidence/side-face-refine-00.json",
+      "additions": {
+        "human": 312
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/measured-asset-evidence/side-face-refine-01.json",
+      "additions": {
+        "human": 312
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/new-five-pad-evidence/F1-04-measured-summary.json",
+      "additions": {
+        "human": 299
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/new-five-pad-evidence/F1-05-measured-summary.json",
+      "additions": {
+        "human": 269
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/new-five-pad-evidence/F1-05-preregister.json",
+      "additions": {
+        "human": 12
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/new-five-pad-evidence/F1-06-measured-summary.json",
+      "additions": {
+        "human": 269
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/new-five-pad-evidence/F1-06-preregister.json",
+      "additions": {
+        "human": 11
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-reproduction-20260928.md",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 53
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "research/g2-measured-knife-20260928.md",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 61
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/audit_g2_measured_knife.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 65
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/build_g2_measured_knife.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 72
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/g2_knife_geometry.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 57
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/g2_side_pinch_feedback.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 88
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "old_path": "research/g2-finger-surface-acquisition-20260928.md",
+      "new_path": "research/g2-finger-surface-acquisition-20260928.md",
+      "additions": {
+        "human": 29
+      }
+    },
+    {
+      "old_path": "scripts/audit_g2_side_pickup_candidate.py",
+      "new_path": "scripts/audit_g2_side_pickup_candidate.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 8
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/g2_contact_geometry.py",
+      "new_path": "scripts/g2_contact_geometry.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 16
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 1
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/plan_g2_side_pinch_motion.py",
+      "new_path": "scripts/plan_g2_side_pinch_motion.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 43
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 12
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/run_g2_tabletop.py",
+      "new_path": "scripts/run_g2_tabletop.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 34
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 4
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/search_g2_palm_down_pinch.py",
+      "new_path": "scripts/search_g2_palm_down_pinch.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 26
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 8
+          }
+        ]
+      }
+    }
+  ]
+}
