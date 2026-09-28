@@ -36,8 +36,8 @@
       "pid": 2448,
       "status": "running",
       "child_pid": 2449,
-      "heartbeat": "2026-09-28T15:05:01.338256+00:00",
-      "elapsed_seconds": 180.78601658297703
+      "heartbeat": "2026-09-28T15:13:02.988517+00:00",
+      "elapsed_seconds": 662.4789586679544
     },
     "mg_C_seed2801": {
       "name": "mg_C_seed2801",
@@ -75,8 +75,8 @@
       "pid": 2498,
       "status": "running",
       "child_pid": 2499,
-      "heartbeat": "2026-09-28T15:05:02.453739+00:00",
-      "elapsed_seconds": 180.71168852504343
+      "heartbeat": "2026-09-28T15:13:04.207768+00:00",
+      "elapsed_seconds": 662.4157038390404
     },
     "fresh-generation-v1": {
       "name": "fresh-generation-v1",
@@ -89,10 +89,13 @@
       "timeout_seconds": 14400,
       "started": "2026-09-28T15:02:58.198209+00:00",
       "pid": 2869,
-      "status": "running",
+      "status": "completed",
       "child_pid": 2870,
-      "heartbeat": "2026-09-28T15:05:28.896826+00:00",
-      "elapsed_seconds": 150.60190736001823
+      "heartbeat": "2026-09-28T15:10:00.038630+00:00",
+      "elapsed_seconds": 421.7428757910384,
+      "returncode": 0,
+      "finished": "2026-09-28T15:10:27.058176+00:00",
+      "wall_seconds": 448.85899153596256
     },
     "static-candidates-v1": {
       "name": "static-candidates-v1",
@@ -245,8 +248,47 @@
       "pid": 3148,
       "status": "running",
       "child_pid": 3149,
-      "heartbeat": "2026-09-28T15:05:06.873468+00:00",
-      "elapsed_seconds": 60.25341435801238
+      "heartbeat": "2026-09-28T15:13:08.888171+00:00",
+      "elapsed_seconds": 542.2720980619779
+    },
+    "mg_D_seed2801": {
+      "name": "mg_D_seed2801",
+      "gpu": 2,
+      "command": [
+        "/home/wangjiarui/artgym-runtime/bin/python",
+        "-m",
+        "scripts.train_wuji_multigrasp",
+        "task=wuji_multigrasp",
+        "hand=wuji_paper_official_actuator",
+        "object=knife_wuji_bridge3_20260922",
+        "train=wujiAcquisitionSAPG",
+        "num_envs=5120",
+        "experiment=mg_D_seed2801",
+        "max_iterations=1000",
+        "multi_gpu=False",
+        "headless=True",
+        "graphics_device_id=-1",
+        "force_render=False",
+        "pipeline=gpu",
+        "num_subscenes=0",
+        "seed=2026092801",
+        "train.params.config.expl_coef_block_size=1024",
+        "train.params.config.minibatch_size=32768",
+        "train.params.config.save_frequency=250",
+        "train.params.config.checkpoint_keep_recent=10",
+        "train.params.config.evaluation_frequency=100000",
+        "object.reward.GoalDistance2=0.1",
+        "task.env.absolutePoseObjective.coefficient=1.0",
+        "task.env.supportActionSpan=0.20",
+        "task.env.trainingStates=research/multigrasp-20260928/data/more.npy"
+      ],
+      "timeout_seconds": 14400,
+      "started": "2026-09-28T15:10:29.407168+00:00",
+      "pid": 4715,
+      "status": "running",
+      "child_pid": 4716,
+      "heartbeat": "2026-09-28T15:13:00.053488+00:00",
+      "elapsed_seconds": 150.5858735020738
     }
   },
   "models": {
@@ -268,6 +310,12 @@
       "initialization": "random; no checkpoint",
       "training_states_sha256": "2a7cb15f49410ea1afc321d390bff794e27af9849035388f896254d9258433dc"
     },
+    "mg_D_seed2801": {
+      "model_tensor_sha256": "bdf13bb79563529617cba46355011a9d857f1fdefe13f2a8279de8a0458f66b4",
+      "epoch": 0,
+      "initialization": "random; no checkpoint",
+      "training_states_sha256": "2a7cb15f49410ea1afc321d390bff794e27af9849035388f896254d9258433dc"
+    },
     "mg_A_seed2801": {
       "model_tensor_sha256": "bdf13bb79563529617cba46355011a9d857f1fdefe13f2a8279de8a0458f66b4",
       "epoch": 0,
@@ -275,5 +323,5 @@
       "training_states_sha256": "7df873d088d5554eb091d292e0ef76aa5cc2a570083507804d77dedb8eeb53d7"
     }
   },
-  "observed_utc": "2026-09-28T15:05:29.079713+00:00"
+  "observed_utc": "2026-09-28T15:13:16.823470+00:00"
 }

@@ -1,0 +1,32 @@
+{
+  "command": [
+    "/home/wangjiarui/artgym-runtime/bin/python",
+    "-m",
+    "scripts.run_multigrasp_after",
+    "--after",
+    "mg_A_seed2801",
+    "--wait-seconds",
+    "15000",
+    "--",
+    "PYTHON",
+    "-m",
+    "scripts.run_multigrasp_job",
+    "--name",
+    "fresh-generation-v2",
+    "--gpu",
+    "0",
+    "--timeout",
+    "4800",
+    "--",
+    "PYTHON",
+    "-m",
+    "scripts.generate_wuji_multigrasp_test",
+    "--seed",
+    "2026092805",
+    "--count",
+    "3000",
+    "--label",
+    "fresh-generation-3000"
+  ],
+  "reason": "first1000 produced24ArtGrasp valid but0posture+thumb-path qualified; no policy tested; capped3000additional candidates"
+}

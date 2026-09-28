@@ -1,0 +1,86 @@
+[
+  {
+    "arm": "A",
+    "pid": 5849,
+    "command": [
+      "/home/wangjiarui/artgym-runtime/bin/python",
+      "-m",
+      "scripts.run_multigrasp_after",
+      "--after",
+      "fresh-generation-v2",
+      "--wait-seconds",
+      "20500",
+      "--",
+      "PYTHON",
+      "-m",
+      "scripts.evaluate_wuji_multigrasp_development",
+      "--arm",
+      "A",
+      "--gpu",
+      "0"
+    ]
+  },
+  {
+    "arm": "B",
+    "pid": 5894,
+    "command": [
+      "/home/wangjiarui/artgym-runtime/bin/python",
+      "-m",
+      "scripts.run_multigrasp_after",
+      "--after",
+      "mg_B_seed2801",
+      "--wait-seconds",
+      "20500",
+      "--",
+      "PYTHON",
+      "-m",
+      "scripts.evaluate_wuji_multigrasp_development",
+      "--arm",
+      "B",
+      "--gpu",
+      "3"
+    ]
+  },
+  {
+    "arm": "C",
+    "pid": 5940,
+    "command": [
+      "/home/wangjiarui/artgym-runtime/bin/python",
+      "-m",
+      "scripts.run_multigrasp_after",
+      "--after",
+      "mg_C_seed2801",
+      "--wait-seconds",
+      "20500",
+      "--",
+      "PYTHON",
+      "-m",
+      "scripts.evaluate_wuji_multigrasp_development",
+      "--arm",
+      "C",
+      "--gpu",
+      "1"
+    ]
+  },
+  {
+    "arm": "D",
+    "pid": 5985,
+    "command": [
+      "/home/wangjiarui/artgym-runtime/bin/python",
+      "-m",
+      "scripts.run_multigrasp_after",
+      "--after",
+      "mg_D_seed2801",
+      "--wait-seconds",
+      "20500",
+      "--",
+      "PYTHON",
+      "-m",
+      "scripts.evaluate_wuji_multigrasp_development",
+      "--arm",
+      "D",
+      "--gpu",
+      "2"
+    ]
+  }
+]

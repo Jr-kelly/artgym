@@ -1,0 +1,76 @@
+{
+  "status": "passed",
+  "differences_from_A": {
+    "B": {
+      ".task.env.trainingStates": [
+        "research/multigrasp-20260928/data/small.npy",
+        "research/multigrasp-20260928/data/more.npy"
+      ],
+      ".experiment": [
+        "mg_A_seed2801",
+        "mg_B_seed2801"
+      ],
+      ".train.params.config.name": [
+        "mg_A_seed2801",
+        "mg_B_seed2801"
+      ],
+      ".train.params.config.full_experiment_name": [
+        "mg_A_seed2801",
+        "mg_B_seed2801"
+      ]
+    },
+    "C": {
+      ".task.env.supportActionSpan": [
+        0.04,
+        0.2
+      ],
+      ".experiment": [
+        "mg_A_seed2801",
+        "mg_C_seed2801"
+      ],
+      ".train.params.config.name": [
+        "mg_A_seed2801",
+        "mg_C_seed2801"
+      ],
+      ".train.params.config.full_experiment_name": [
+        "mg_A_seed2801",
+        "mg_C_seed2801"
+      ]
+    },
+    "D": {
+      ".task.env.supportActionSpan": [
+        0.04,
+        0.2
+      ],
+      ".task.env.trainingStates": [
+        "research/multigrasp-20260928/data/small.npy",
+        "research/multigrasp-20260928/data/more.npy"
+      ],
+      ".experiment": [
+        "mg_A_seed2801",
+        "mg_D_seed2801"
+      ],
+      ".train.params.config.name": [
+        "mg_A_seed2801",
+        "mg_D_seed2801"
+      ],
+      ".train.params.config.full_experiment_name": [
+        "mg_A_seed2801",
+        "mg_D_seed2801"
+      ]
+    }
+  },
+  "initial_model_tensor_sha256": "bdf13bb79563529617cba46355011a9d857f1fdefe13f2a8279de8a0458f66b4",
+  "hand_joint_order": "index,middle,ring,pinky,thumb; four joints each",
+  "contact_sensor_order": "thumb,index,middle,ring,pinky",
+  "quaternion_order": "xyzw",
+  "pose_frame": "hand_base",
+  "control_hz": 30,
+  "source_pin": "source-manifest.json",
+  "config_sha256": {
+    "C.yaml": "0381b86c62b5bb34278aef9fb1d72744a6c40c812b9838433479525a679a1e1d",
+    "D.yaml": "1bc9c36b45da57aa570b8680d773323e6f3f2bf5ccabd046abb7dba33ffb6340",
+    "B.yaml": "426660039ba6f9cac426def978f0253b499a3e168113d234496f2fc665b82039",
+    "A.yaml": "15559f45318b6256a5391957d81fb6b66f8ad2957e2b98328ea793c7ad3e8a01"
+  }
+}

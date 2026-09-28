@@ -30,3 +30,15 @@
 到位换向：`python -m scripts.audit_wuji_multigrasp_arrival --checkpoint CHECKPOINT --task wuji_multigrasp --hand wuji_paper_official_actuator --object knife_wuji_bridge3_20260922 --initial-states STATES --span .04 --total-seconds 20 --output NEW_OUTPUT`。
 
 全部运行环境使用 `scripts.monitor_wuji_checkpoints.runtime_environment`，IsaacGym先于torch，独占GPU租约。数据预置与复现整理在收尾时完善。结果、视频和下一步尚待真实实验，不预判两因素作用。
+
+## 15:17 UTC 更新
+
+四组均已正式运行，随机初始化全张量哈希完全相同。`configs/audit.json` 对实际命令重新合成四份完整配置，除运行名称外只有训练池、span这两个预定因素不同。运行时动作映射与训练池采样20800交互核验通过。
+
+旧冻结teacher在24候选记录上2秒指令：18/24存活，9/24至少开合一轮，5/24通过全部严格端点+刀身稳定；这5条正是原3条及2重复，去逐位重复后3/22。额外4条能开合一轮但不满足全程严格要求，不能称所有新抓姿都无法操作。这是历史候选诊断，本机4090结果，正式四组另在H100使用相同评估配置比较。
+
+新seed2803：1000候选、24第一阶段有效、20秒21/24存活；固定姿态+拇指行程检查0合格，不虚构新盲测分母。已限量排队追加seed2805的3000候选，A训练结束后GPU0先生成再开发评估；其余各卡训练完成后开发评估。
+
+接触数组顺序为thumb/index/middle/ring/pinky，关节顺序为index/middle/ring/pinky/thumb。初版离线接触标签曾颠倒，标为`*.invalid-contact-order.json`保留，修正文件`*-contact-order-v2.json`有效；物理轨迹和成功指标未改。
+
+一键重现某臂：`python -m scripts.reproduce_wuji_multigrasp --arm A --gpu 0 --name NEW_UNIQUE_RUN`。复现脚本给6小时监控上限，不改变1000轮交互预算；当前首轮实际已启动监控上限4小时，接手须根据吞吐核查是否足够（尤其more/.20），超时不得当方法失败。
