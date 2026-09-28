@@ -21,3 +21,6 @@ isaacgym_task_map = {
     "wuji_bridge3_hemisphere": WujiBridge3Hemisphere,
     "wuji_bridge3_controller_state": WujiBridge3ControllerState,
 }
+
+from .wuji_multigrasp import WujiMultigrasp
+isaacgym_task_map["wuji_multigrasp"] = WujiMultigrasp

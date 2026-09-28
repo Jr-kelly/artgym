@@ -1,0 +1,227 @@
+{
+  "frozen_utc": "2026-09-28T15:01:39.137437+00:00",
+  "sources": [
+    {
+      "candidate_row": 0,
+      "source": "bridge3_train_0",
+      "training": true,
+      "duplicate_of": null
+    },
+    {
+      "candidate_row": 1,
+      "source": "bridge3_train_1",
+      "training": true,
+      "duplicate_of": null
+    },
+    {
+      "candidate_row": 2,
+      "source": "bridge3_train_2",
+      "training": true,
+      "duplicate_of": null
+    },
+    {
+      "candidate_row": 3,
+      "source": "functional20_train_0",
+      "training": true,
+      "duplicate_of": null
+    },
+    {
+      "candidate_row": 4,
+      "source": "functional20_train_1",
+      "training": true,
+      "duplicate_of": null
+    },
+    {
+      "candidate_row": 5,
+      "source": "functional20_train_2",
+      "training": true,
+      "duplicate_of": null
+    },
+    {
+      "candidate_row": 6,
+      "source": "functional20_train_3",
+      "training": true,
+      "duplicate_of": null
+    },
+    {
+      "candidate_row": 7,
+      "source": "functional20_train_4",
+      "training": true,
+      "duplicate_of": null
+    },
+    {
+      "candidate_row": 8,
+      "source": "functional20_train_5",
+      "training": true,
+      "duplicate_of": null
+    },
+    {
+      "candidate_row": 9,
+      "source": "functional20_train_6",
+      "training": true,
+      "duplicate_of": null
+    },
+    {
+      "candidate_row": 10,
+      "source": "functional20_train_7",
+      "training": true,
+      "duplicate_of": null
+    },
+    {
+      "candidate_row": 11,
+      "source": "functional20_train_8",
+      "training": true,
+      "duplicate_of": null
+    },
+    {
+      "candidate_row": 12,
+      "source": "functional20_train_9",
+      "training": true,
+      "duplicate_of": null
+    },
+    {
+      "candidate_row": 13,
+      "source": "functional20_train_10",
+      "training": true,
+      "duplicate_of": null
+    },
+    {
+      "candidate_row": 14,
+      "source": "functional20_train_11",
+      "training": true,
+      "duplicate_of": null
+    },
+    {
+      "candidate_row": 15,
+      "source": "functional20_train_12",
+      "training": true,
+      "duplicate_of": null
+    },
+    {
+      "candidate_row": 16,
+      "source": "functional20_train_13",
+      "training": false,
+      "duplicate_of": null
+    },
+    {
+      "candidate_row": 17,
+      "source": "functional20_train_14",
+      "training": false,
+      "duplicate_of": null
+    },
+    {
+      "candidate_row": 18,
+      "source": "functional20_train_15",
+      "training": false,
+      "duplicate_of": 2
+    },
+    {
+      "candidate_row": 19,
+      "source": "functional20_train_16",
+      "training": false,
+      "duplicate_of": 1
+    },
+    {
+      "candidate_row": 20,
+      "source": "functional20_train_17",
+      "training": false,
+      "duplicate_of": null
+    },
+    {
+      "candidate_row": 21,
+      "source": "functional20_train_18",
+      "training": false,
+      "duplicate_of": null
+    },
+    {
+      "candidate_row": 22,
+      "source": "functional20_train_19",
+      "training": false,
+      "duplicate_of": null
+    },
+    {
+      "candidate_row": 23,
+      "source": "historical_functional20_test",
+      "training": false,
+      "duplicate_of": null
+    }
+  ],
+  "training_more_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "small_count": 3,
+  "more_count": 16,
+  "near_duplicate_pairs": [
+    {
+      "i": 1,
+      "j": 0,
+      "mm": 2.2331462241709232,
+      "degrees": 2.0324640825533162,
+      "joint_rms_rad": 0.05947495251893997
+    },
+    {
+      "i": 18,
+      "j": 2,
+      "mm": 0.0,
+      "degrees": 0.0,
+      "joint_rms_rad": 0.0
+    },
+    {
+      "i": 19,
+      "j": 0,
+      "mm": 2.2331462241709232,
+      "degrees": 2.0324640825533162,
+      "joint_rms_rad": 0.05947495251893997
+    },
+    {
+      "i": 19,
+      "j": 1,
+      "mm": 0.0,
+      "degrees": 0.0,
+      "joint_rms_rad": 0.0
+    }
+  ],
+  "deduplication": "5mm + .05rad + 5deg joint RMS; keep original 3 training records but all near-duplicate family members stay training; 3 records represent 2 clusters",
+  "reserved_scope": "historically observed sources, withheld from this round; NOT new blind test",
+  "blind_test": "separate newly seeded physical generation; no model-based selection",
+  "protocol": {
+    "duration_seconds": 20,
+    "command_seconds": [
+      2,
+      5
+    ],
+    "strict_slider_m": 0.002,
+    "strict_body_drift_m": 0.01,
+    "strict_body_angle_rad": 0.25,
+    "endpoint_hold_seconds": 0.3,
+    "loose_slider_m": 0.01,
+    "selection": "highest equally weighted dev strict success across 2/5s at CP250/500/750/1000; ties latest; test never selects",
+    "initialization": "same random seed; verified initial model tensor digest",
+    "train_interactions_per_epoch": 163840,
+    "planned_epochs": 1000,
+    "formal_seed": 2026092801
+  },
+  "sha256": {
+    "historical-reserved.npy": "9ba0df8ace9f16b69ad89f59a7d557b8c96f9eece975209723afe0d13a715534",
+    "small.npy": "7df873d088d5554eb091d292e0ef76aa5cc2a570083507804d77dedb8eeb53d7",
+    "candidates.npy": "be028e58e9964ba2de33d9af0f4d1af8b9d8a736e409ad72ea9fe889c1efaa52",
+    "more.npy": "2a7cb15f49410ea1afc321d390bff794e27af9849035388f896254d9258433dc",
+    "dev-perturb.npy": "bffae463257078da48a2d5e2f4900309a5acb3e58a9940ef1328b0a71ee63afb",
+    "historical-reserved-perturb.npy": "a1bb23a987e0d3965fcd3fc18ccb96bba9535d13feef001532a50461e1262de6"
+  }
+}
