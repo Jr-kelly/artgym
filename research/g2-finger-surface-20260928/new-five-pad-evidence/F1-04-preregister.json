@@ -1,0 +1,10 @@
+{
+  "id": "F1-04",
+  "utc": "2026-09-28T07:51:03.400087+00:00",
+  "budget_slot": 76,
+  "hypothesis": "At end ofF1-03 closure actual hand joint velocity reaches0.527rad/s despite zero scheduled terminal speed; test whether a1s closed dwell reduces transients before lifting",
+  "single_variable": "Add1s closed-settle phase before first lift; same balanced plan and4mm motor compression",
+  "acceptance": "Same fixed1s hold10mm/0.25rad, no drop; report five-finger support and passive slider position",
+  "scope": "Table pickup only, no flip/policy",
+  "reject_inference": "Failure/success cannot uniquely prove causation from one rollout"
+}

@@ -29,7 +29,9 @@ def main():
     p.add_argument('--lift',type=float,default=.30)
     p.add_argument('--open-pad-lift',type=float,default=0.,help='Open pads move up in the knife frame by this amount; real motor path, not an object state edit')
     p.add_argument('--flip-degrees',type=float,choices=[-180.,180.],default=180.)
+    p.add_argument('--flip-axis',choices=['wrist-forward','knife-length'],default='wrist-forward')
     p.add_argument('--close-via-touch',action='store_true',help='Specify two motor segments instead of direct open-to-close interpolation')
+    p.add_argument('--arm-wrist-posture',type=float,help='Use G2 redundant joint7 to select an initial IK posture; original robot limits remain')
     a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
     original=json.loads(a.plan.read_text());loc=json.loads(a.localization.read_text())
     g=DigitGeometry(max_face_axes=24);h=g.w
@@ -63,9 +65,12 @@ def main():
                 lo=center@ax.T-abs(ax)@half;hi=center@ax.T+abs(ax)@half
                 gap.append(np.maximum(proj.min(0)-hi,lo-proj.max(0)).max())
             height.append((v@object_world[2,:3]+object_world[2,3]-.75).min())
-        n,m='hand_r_base_link','hand_r_thumb_link3'
-        ax=np.r_[axes[n],axes[m]];va,vb=vs[n]@ax.T,vs[m]@ax.T
-        selfgap=np.maximum(va.min(0)-vb.max(0),vb.min(0)-va.max(0)).max()
+        selfgaps=[]
+        constrained_pairs=list(original.get('self_collision_pairs_constrained',[]))+[['hand_r_base_link','hand_r_thumb_link3']]
+        for n,m in constrained_pairs:
+            ax=np.r_[axes[n],axes[m]];va,vb=vs[n]@ax.T,vs[m]@ax.T
+            selfgaps.append(np.maximum(va.min(0)-vb.max(0),vb.min(0)-va.max(0)).max())
+        selfgap=min(selfgaps)
         return np.asarray(points),np.asarray(facing),np.asarray(gap),np.asarray(height),selfgap,vs
 
     def fit_offset(offset):
@@ -94,7 +99,7 @@ def main():
         preload_definition='Geometric compression requested via legal joint motor targets only, not measured positions or forces')
     if a.close_via_touch:
         result['close_waypoints']=[dict(fraction=0.,q=opened.tolist()),dict(fraction=2/3,q=q0.tolist()),dict(fraction=1.,q=closed.tolist())]
-    result.update(open_pad_lift_m=a.open_pad_lift,planned_flip_degrees=a.flip_degrees)
+    result.update(open_pad_lift_m=a.open_pad_lift,planned_flip_degrees=a.flip_degrees,planned_flip_axis=a.flip_axis)
     (a.output/'motor-plan.json').write_text(json.dumps(result,indent=2)+'\n')
     # All nonadjacent convex pairs audited at 21 sampled hand configurations.
     # Closing-command object overlap is separately reported, not executed as a
@@ -129,17 +134,20 @@ def main():
     arm_result={};arm_pass=False
     try:
         grasp_q,err=arm.solve(target,np.asarray(loc['grasp_q']))
+        if a.arm_wrist_posture is not None:
+            grasp_q,err=arm.solve_wrist_posture(target,grasp_q,a.arm_wrist_posture)
         high_q,high_err=arm.solve(above,grasp_q,attempts=1)
         if high_err['position_m']>.001 or high_err['rotation_rad']>.005:raise ValueError('Above-table IK '+str(high_err))
         (a.output/'arm-seed.json').write_text(json.dumps(high_q.tolist(),indent=2)+'\n')
         approach,ad=plan_translation(arm,high_q,target,4,1/30,table)
         lifted,ld=plan_translation(arm,approach[-1],lift,4,1/30,table)
         lifted_object=object_world.copy();lifted_object[2,3]+=a.lift
-        flip,fd=plan_flip(arm,arm.forward(lifted[-1]),lifted_object,lifted[-1],a.flip_degrees,10,1/30,table)
+        flip,fd=plan_flip(arm,arm.forward(lifted[-1]),lifted_object,lifted[-1],a.flip_degrees,10,1/30,table,axis_mode=a.flip_axis)
         arm_result=dict(grasp_ik=err,high_ik=high_err,approach=ad,lift=ld,flip=fd)
         arm_pass=fd['feasible']
     except ValueError as exc:arm_result['failure']=str(exc)
     max_motor_velocity=float(abs(closed-opened).max()*1.875/3.)
+    if a.close_via_touch:max_motor_velocity=float(max(abs(q0-opened).max()*1.875/2,abs(closed-q0).max()*1.875))
     hand_pass=bool(all(r['table_min_m']>=.0005 and not r['self_intersections'] and
         (r['phase']!='open_to_touch' or r['knife_gap_min_m']>=-1e-7) for r in rows)
         and not approach_overlaps and max(open_fit['contact_error_m'])<.001)

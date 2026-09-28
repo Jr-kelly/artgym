@@ -1,0 +1,269 @@
+{
+  "trials": [
+    {
+      "name": "F1-03-balanced-pickup-hold",
+      "trace": "runs/g2-finger-surface-20260928/F1-03-balanced-pickup-hold/partial-trace.npz",
+      "control_frames": 420,
+      "duration_s": 14.000000730156898,
+      "contact_order": [
+        "thumb",
+        "index",
+        "middle",
+        "ring",
+        "pinky"
+      ],
+      "phases": [
+        {
+          "phase": "table_settle",
+          "start_s": 0.03333333507180214,
+          "end_s": 2.0000001043081284,
+          "min_object_z_m": 0.7567358016967773,
+          "max_object_z_m": 0.7568958401679993,
+          "hand_translation_from_phase_start_max_m": 0.004948031167958328,
+          "hand_rotation_from_phase_start_max_rad": 0.024347871375544023,
+          "first_10mm_or025rad_hand_departure_s": null,
+          "last_second_finger_contact_fraction": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "last_second_all_five_contact_fraction": 0.0,
+          "finger_table_contact_frames": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "knife_table_contact_frames": 60,
+          "slider_start_m": -0.03259836882352829,
+          "slider_end_m": -0.032585348933935165,
+          "slider_range_m": 1.8265098333358765e-05,
+          "diagnostic": "Phase-start hand-relative movement, not a success score during planned regrasp"
+        },
+        {
+          "phase": "approach",
+          "start_s": 2.0333334393799305,
+          "end_s": 6.000000312924385,
+          "min_object_z_m": 0.7567355632781982,
+          "max_object_z_m": 0.7567358016967773,
+          "hand_translation_from_phase_start_max_m": 0.16087733680248145,
+          "hand_rotation_from_phase_start_max_rad": 0.035854810940306174,
+          "first_10mm_or025rad_hand_departure_s": 2.833333481103182,
+          "last_second_finger_contact_fraction": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "last_second_all_five_contact_fraction": 0.0,
+          "finger_table_contact_frames": [
+            0,
+            7,
+            0,
+            0,
+            0
+          ],
+          "knife_table_contact_frames": 120,
+          "slider_start_m": -0.03258535638451576,
+          "slider_end_m": -0.032591745257377625,
+          "slider_range_m": 6.433576345443726e-06,
+          "diagnostic": "Phase-start hand-relative movement, not a success score during planned regrasp"
+        },
+        {
+          "phase": "close",
+          "start_s": 6.033333647996187,
+          "end_s": 9.000000469386578,
+          "min_object_z_m": 0.7567352652549744,
+          "max_object_z_m": 0.7571922540664673,
+          "hand_translation_from_phase_start_max_m": 0.0015415239853729535,
+          "hand_rotation_from_phase_start_max_rad": 0.036550704460387655,
+          "first_10mm_or025rad_hand_departure_s": null,
+          "last_second_finger_contact_fraction": [
+            0.8333333333333334,
+            0.8666666666666667,
+            0.8,
+            0.8333333333333334,
+            0.8
+          ],
+          "last_second_all_five_contact_fraction": 0.7333333333333333,
+          "finger_table_contact_frames": [
+            14,
+            0,
+            0,
+            0,
+            0
+          ],
+          "knife_table_contact_frames": 87,
+          "slider_start_m": -0.03259174898266792,
+          "slider_end_m": -0.03005708009004593,
+          "slider_range_m": 0.0026175081729888916,
+          "diagnostic": "Phase-start hand-relative movement, not a success score during planned regrasp"
+        },
+        {
+          "phase": "lift",
+          "start_s": 9.03333380445838,
+          "end_s": 13.000000678002834,
+          "min_object_z_m": 0.7569999098777771,
+          "max_object_z_m": 0.8892568349838257,
+          "hand_translation_from_phase_start_max_m": 0.30248651417113437,
+          "hand_rotation_from_phase_start_max_rad": 1.7483988646681095,
+          "first_10mm_or025rad_hand_departure_s": 10.933333903551102,
+          "last_second_finger_contact_fraction": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "last_second_all_five_contact_fraction": 0.0,
+          "finger_table_contact_frames": [
+            11,
+            0,
+            0,
+            0,
+            0
+          ],
+          "knife_table_contact_frames": 67,
+          "slider_start_m": -0.029805190861225128,
+          "slider_end_m": -0.01874074712395668,
+          "slider_range_m": 0.011064447462558746,
+          "diagnostic": "Phase-start hand-relative movement, not a success score during planned regrasp"
+        },
+        {
+          "phase": "pickup_hold",
+          "start_s": 13.033334013074636,
+          "end_s": 14.000000730156898,
+          "min_object_z_m": 0.7569999694824219,
+          "max_object_z_m": 0.7570000290870667,
+          "hand_translation_from_phase_start_max_m": 0.002075554810433323,
+          "hand_rotation_from_phase_start_max_rad": 0.003250951799569188,
+          "first_10mm_or025rad_hand_departure_s": null,
+          "last_second_finger_contact_fraction": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "last_second_all_five_contact_fraction": 0.0,
+          "finger_table_contact_frames": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "knife_table_contact_frames": 30,
+          "slider_start_m": -0.018740756437182426,
+          "slider_end_m": -0.018740765750408173,
+          "slider_range_m": 2.9802322387695312e-08,
+          "diagnostic": "Phase-start hand-relative movement, not a success score during planned regrasp"
+        }
+      ],
+      "entered_policy": false,
+      "slider_motor_target_constant": true,
+      "measured_effort_available": false,
+      "operation_success": null,
+      "whole_success": false,
+      "pickup_hold_check": {
+        "retained": false,
+        "stable": true,
+        "frames": 30,
+        "fixed_initial_object": [
+          [
+            0.9999369246428209,
+            -5.61441387491278e-07,
+            0.011231506379018735,
+            0.4305950701236725
+          ],
+          [
+            -0.011231506378923922,
+            1.7174307015421775e-07,
+            0.9999369246429649,
+            -0.30359700322151184
+          ],
+          [
+            -5.633349077624125e-07,
+            -0.9999999999998276,
+            1.6542640485228688e-07,
+            0.7570000290870667
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "fixed_initial_hand_object": [
+          [
+            -0.364038854841557,
+            0.8093753134627139,
+            -0.460854981662107,
+            0.28501392223909505
+          ],
+          [
+            -0.6520221319822092,
+            0.13187106600261808,
+            0.7466439321100167,
+            0.05981588362838253
+          ],
+          [
+            0.665088604300977,
+            0.5722950496976769,
+            0.47972442560339906,
+            0.2955422157918576
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "world_translation_max_m": 6.664001874625056e-08,
+        "world_rotation_max_rad": 1.0899703144676639e-06,
+        "hand_translation_max_m": 0.0021890287570935146,
+        "hand_rotation_max_rad": 0.0034234482756522406,
+        "min_object_height_m": 0.7569999694824219,
+        "table_free": false,
+        "contact_order": [
+          "thumb",
+          "index",
+          "middle",
+          "ring",
+          "pinky"
+        ],
+        "per_finger_contact_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "all_five_contact_fraction": 0.0,
+        "opposed_contact_fraction": 0.0,
+        "interpretation": "Contact presence is not measured load. References fixed before the hold, not refreshed.",
+        "thresholds": {
+          "translation_m": 0.01,
+          "rotation_rad": 0.25,
+          "min_height_m": 0.85,
+          "opposed_fraction": 0.9
+        }
+      },
+      "failure": {
+        "exception_type": "ValueError",
+        "message": "Pickup failed fixed-reference hold before flip",
+        "steps": 420,
+        "last_phase": "pickup_hold",
+        "group": "B",
+        "physics_trace_preserved": true
+      }
+    }
+  ],
+  "scope": "Development, no new-placement validation; no operation inference from acquisition"
+}

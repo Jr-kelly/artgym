@@ -1,0 +1,21 @@
+{
+  "id": "F1-03",
+  "utc": "2026-09-28T07:47:37.384183+00:00",
+  "budget_slot": 75,
+  "hypothesis": "Longitudinally balanced thumb-versus-four-pad side contacts may retain the knife instead of rotating toward thumb/index only",
+  "scope": "Continuous tabletop pickup and1s fixed-reference hold only; flip remains geometrically unresolved",
+  "changes": "Contact layout, compatible open/close motor path and initial redundant G2 posture; retain4mm geometric preload and original physical properties",
+  "planner": "balanced-clear-longaxis-motion",
+  "hand_path_pass": true,
+  "flip_path_pass": false,
+  "no_flip_executed": true,
+  "acceptance": {
+    "hold_s": 1,
+    "world_drift_m": 0.01,
+    "world_angle_rad": 0.25,
+    "hand_drift_m": 0.01,
+    "hand_angle_rad": 0.25,
+    "min_height_m": 0.85,
+    "all_five_contact_reported": true
+  }
+}

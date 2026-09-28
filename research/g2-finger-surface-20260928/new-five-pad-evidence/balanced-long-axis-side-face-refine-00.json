@@ -1,0 +1,220 @@
+{
+  "name": "side-face-refine-00",
+  "kind": "geometric_touch_only",
+  "validation": "No physics execution; accepted only requests further exact collision/path checks",
+  "initial_flex": null,
+  "initial_pitch_rad": null,
+  "initial_thumb": null,
+  "wrist_in_knife": [
+    [
+      -0.27536582706856283,
+      -0.7548595445782744,
+      0.5952820585587362,
+      -0.06325740120972935
+    ],
+    [
+      0.7523090092497866,
+      0.21630213872789722,
+      0.6222897551650213,
+      -0.11015657756478943
+    ],
+    [
+      -0.5985021435921938,
+      0.6191933888058059,
+      0.5083254187769202,
+      -0.06248811877616539
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "touch_q": [
+    -0.1434999963573653,
+    -0.3549999943320799,
+    0.7463350793337401,
+    1.560299865356221,
+    -0.04169267566801977,
+    -0.23653568101796457,
+    1.3298617130163082,
+    0.7328692215502463,
+    0.30359133472100647,
+    -0.017416301722536578,
+    1.3927672104395814,
+    0.22159943168250787,
+    0.15971114300689213,
+    -0.05933194306096513,
+    1.4791899201448597,
+    0.2703154001536156,
+    0.8738956513751037,
+    0.5031679369170067,
+    1.0323725038073768,
+    -0.4548999938004307
+  ],
+  "joint_names": [
+    "hand_r_index_joint1",
+    "hand_r_index_joint2",
+    "hand_r_index_joint3",
+    "hand_r_index_joint4",
+    "hand_r_middle_joint1",
+    "hand_r_middle_joint2",
+    "hand_r_middle_joint3",
+    "hand_r_middle_joint4",
+    "hand_r_pinky_joint1",
+    "hand_r_pinky_joint2",
+    "hand_r_pinky_joint3",
+    "hand_r_pinky_joint4",
+    "hand_r_ring_joint1",
+    "hand_r_ring_joint2",
+    "hand_r_ring_joint3",
+    "hand_r_ring_joint4",
+    "hand_r_thumb_joint1",
+    "hand_r_thumb_joint2",
+    "hand_r_thumb_joint3",
+    "hand_r_thumb_joint4"
+  ],
+  "contact_targets": [
+    [
+      -0.0095,
+      -0.003,
+      -0.018726711366477404
+    ],
+    [
+      0.0095,
+      -0.003,
+      0.019
+    ],
+    [
+      0.0095,
+      -0.002994138480231702,
+      -0.0069770606902475815
+    ],
+    [
+      0.0095,
+      -0.003,
+      -0.031
+    ],
+    [
+      0.0095,
+      -0.0029988835337963144,
+      -0.05592025274517535
+    ]
+  ],
+  "contact_normals": [
+    [
+      -1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ]
+  ],
+  "contact_points": [
+    [
+      -0.009700252976685479,
+      -0.003106846065254074,
+      -0.018726711366477404
+    ],
+    [
+      0.009720339145056787,
+      -0.0030251145725058138,
+      0.01899084884953391
+    ],
+    [
+      0.009737040982509233,
+      -0.002994138480231702,
+      -0.0069770606902475815
+    ],
+    [
+      0.009718196511752077,
+      -0.0030021409010036713,
+      -0.031002147998595322
+    ],
+    [
+      0.00972036003769771,
+      -0.0029988835337963144,
+      -0.05592025274517535
+    ]
+  ],
+  "contact_errors_m": [
+    0.0002269743076466426,
+    0.00022195455424784357,
+    0.00023704098250923282,
+    0.00021821758658698256,
+    0.00022036003769771058
+  ],
+  "pad_facing_cosines": [
+    0.5718485051067085,
+    0.5851745126421697,
+    0.5991393586590943,
+    0.597130704018091,
+    0.6029424937076238
+  ],
+  "min_convex_separating_gap_m": 9.916345682646141e-06,
+  "min_table_clearance_m": 0.0006315580315723324,
+  "length_contact_spacing_m": [
+    0.02596790953978149,
+    0.02402508730834774,
+    0.024918104746580027
+  ],
+  "joint_margin_min_rad": 0.015000000000000902,
+  "geometric_pass": true,
+  "stages": [
+    {
+      "collision_weight": 100,
+      "cost": 0.0026633489462277588,
+      "nfev": 65,
+      "message": "The maximum number of function evaluations is exceeded."
+    },
+    {
+      "collision_weight": 500,
+      "cost": 0.002683408411586377,
+      "nfev": 73,
+      "message": "`xtol` termination condition is satisfied."
+    },
+    {
+      "method": "SLSQP",
+      "success": false,
+      "iterations": 180,
+      "message": "Iteration limit reached"
+    }
+  ],
+  "seconds": 28.704126358032227,
+  "active_fingers": [
+    "thumb",
+    "index",
+    "middle",
+    "ring",
+    "pinky"
+  ],
+  "excluded_fingers": [],
+  "thumb_palm_constraint": true,
+  "balance_long_axis_requested": true,
+  "thumb_to_four_pad_centroid_z_m": 4.4177964367980715e-07,
+  "source_plan": "runs/g2-finger-surface-20260928/thumb-palm-clearance/side-face-refine-00.json",
+  "contact_height_interval_m": [
+    -0.003,
+    0.002
+  ],
+  "constraint_change": "Contact may occupy real side face y in [-3,+2]mm; old y=-1mm was an arbitrary planner line. Physical dimensions, collision and acceptance thresholds unchanged."
+}

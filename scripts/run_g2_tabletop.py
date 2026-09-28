@@ -98,10 +98,13 @@ def main():
     parser.add_argument('--gravity-close-yaw',type=float,default=0.,help='Additional world yaw during gravity closure to avoid G2 arm limits; preserves the gravity direction in the knife frame.')
     parser.add_argument('--air-flip',type=float,default=0.,choices=[-180.,0.,180.],help='After lifting, pronate the held hand by 180 degrees about its horizontal forward direction using G2 motor targets only.')
     parser.add_argument('--air-flip-seconds',type=float,default=10.)
+    parser.add_argument('--air-flip-axis',choices=['wrist-forward','knife-length'],default='wrist-forward',help='Acquisition planning axis; both use a fixed measured horizontal axis and motors only')
     parser.add_argument('--air-flip-shift',type=float,nargs=3,default=[0.,0.,0.],help='Smooth world translation of the planned wrist-flip pivot; robot motion only.')
     parser.add_argument('--air-flip-only',action='store_true',help='Diagnostic: stop after free-space flip and actual settling, without transport or policy operation.')
     parser.add_argument('--lift-height',type=float,default=.20,help='Vertical wrist lift in metres; no object state changes.')
     parser.add_argument('--pickup-retention-hold',type=float,default=0.,choices=[0.,1.],help='Separate fixed-reference1s physical hold after lift, gate before flip; records every finger without asserting force')
+    parser.add_argument('--pickup-only',action='store_true',help='Isolated continuous table pickup plus1s hold, no flip/transport/policy; does not claim full task success')
+    parser.add_argument('--closed-settle-seconds',type=float,default=0.,choices=[0.,1.],help='Explicit single-factor closed-hand dwell on the original table before first lift; actual state remains continuous')
     parser.add_argument('--slider-face',choices=['up','down'],default='up',help='Initial tabletop placement; down starts above the protruding passive slider and settles freely.')
     parser.add_argument('--table-localization',choices=['configured','settled-truth'],default='configured',help='Acquisition-only ideal localization after natural tabletop settling.')
     parser.add_argument('--gait-plan',type=Path,help='Sequential single-digit motor plan with fixed-reference one-second hold gates after actual air flip.')
@@ -113,6 +116,7 @@ def main():
     parser.add_argument('--closeup',action='store_true',help='Additional synchronized camera; follows robot wrist, never affects physics.')
     parser.add_argument('--contact-diagnostics',action='store_true',help='Record whole-thumb conservative collision separation every control frame.')
     args=parser.parse_args()
+    assert not args.pickup_only or (args.only_grasp and args.pickup_retention_hold==1 and not args.air_flip and not args.gait_plan)
     assert not args.operation_static_policy or (args.learned_operation_policy and args.operation_input_ablation is None)
     assert not args.fixed_preparation_hold or (args.group!='A' and args.learned_hold_policy is None), 'Fixed and learned preparation holds are exclusive continuous conditions'
     if args.hand_gravity_compensation:
@@ -525,7 +529,9 @@ def main():
                 (args.output/'settled-table-localization.json').write_text(json.dumps(dict(
                     object=pose(actual_table_object).tolist(),grasp_q=grasp_q.tolist(),lift_q=lift_q.tolist(),
                     grasp_ik=grasp_error,lift_ik=lift_error,method='One simulated truth sample after natural tabletop settling; only arm motor targets replanned.'),indent=2)+'\n')
-            phases=[('approach',grasp_q,opened,4),('close',grasp_q,closed,3),('lift',lift_q,closed,4)]
+            phases=[('approach',grasp_q,opened,4),('close',grasp_q,closed,3)]
+            if args.closed_settle_seconds:phases.append(('closed_settle',None,None,args.closed_settle_seconds))
+            phases.append(('lift',lift_q,closed,4))
             if args.pickup_retention_hold:phases.append(('pickup_hold',None,closed,args.pickup_retention_hold))
             if args.air_flip:phases.append(('air_flip',None,closed,args.air_flip_seconds))
             if args.gait_plan:phases.append(('finger_gait',None,None,0))
@@ -544,7 +550,7 @@ def main():
                 phases.append(('functional_close',None,functional,3))
             elif args.seat_seconds>0:phases.append(('seat',lift_q,functional,args.seat_seconds))
             if args.table_supported_seat:phases.append(('relift',None,functional,4))
-            if not args.air_flip_only and not args.stay_after_gait:phases.append(('transport',op_q,functional if args.seat_seconds>0 or table_regrasp else closed,5))
+            if not args.air_flip_only and not args.stay_after_gait and not args.pickup_only:phases.append(('transport',op_q,functional if args.seat_seconds>0 or table_regrasp else closed,5))
             if args.gravity_close_before_takeover:
                 restored=np.asarray(table_regrasp.get('restore_q',functional))
                 gravity_hold_hand=functional.copy()
@@ -556,6 +562,9 @@ def main():
                                ('gravity_close_restore',None,restored,2),('gravity_close_return',None,restored,8)])
             if post_acquisition_pose is not None:phases.append(('operation_adjust',None,None,4))
             for label,end_arm,end_hand,seconds in phases:
+                if label=='closed_settle':
+                    for _ in range(round(seconds/dt)):tick(label)
+                    continue
                 if label=='pickup_hold':
                     from scripts.g2_tabletop_metrics import fixed_acquisition_hold
                     _,_,_,hold_w,hold_o,_=current();first=len(records)
@@ -591,7 +600,7 @@ def main():
                 if label=='air_flip':
                     from scripts.g2_air_flip import plan_flip, check_flip
                     _,_,_,actual_w,actual_o,_=current()
-                    path,diagnostic=plan_flip(k,actual_w,actual_o,targets[arm_idx],args.air_flip,seconds,dt,arm_table_check,args.air_flip_shift)
+                    path,diagnostic=plan_flip(k,actual_w,actual_o,targets[arm_idx],args.air_flip,seconds,dt,arm_table_check,args.air_flip_shift,axis_mode=args.air_flip_axis)
                     (args.output/'air-flip-plan.json').write_text(json.dumps(diagnostic,indent=2)+'\n')
                     if not diagnostic['feasible']:raise ValueError('Air-flip IK/clearance precheck failed: '+str(diagnostic['failure']))
                     first=len(records)

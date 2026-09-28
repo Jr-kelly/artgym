@@ -1,0 +1,126 @@
+{
+  "plan": "runs/g2-finger-surface-20260928/balanced-opening-margin/side-face-refine-00.json",
+  "scope": "One geometric touch pose only, no motor preload/dynamics or path certificate",
+  "nonadjacent_hand_pairs_tested": 270,
+  "excluded": "Joint graph distances <=2 for mounting/joint shells only",
+  "hand_intersections": [
+    {
+      "pair": [
+        "hand_r_middle_link2",
+        "hand_r_ring_link2"
+      ],
+      "intersection_inscribed_radius_m": 0.00019663599925849362
+    },
+    {
+      "pair": [
+        "hand_r_middle_link2",
+        "hand_r_ring_link3"
+      ],
+      "intersection_inscribed_radius_m": 8.94821719884958e-05
+    },
+    {
+      "pair": [
+        "hand_r_middle_link3",
+        "hand_r_ring_link3"
+      ],
+      "intersection_inscribed_radius_m": 0.0006822773415316346
+    },
+    {
+      "pair": [
+        "hand_r_middle_link4",
+        "hand_r_ring_link3"
+      ],
+      "intersection_inscribed_radius_m": 0.0001811609242432788
+    },
+    {
+      "pair": [
+        "hand_r_middle_link4",
+        "hand_r_ring_link4"
+      ],
+      "intersection_inscribed_radius_m": 0.0005312740241298144
+    },
+    {
+      "pair": [
+        "hand_r_middle_pad_link",
+        "hand_r_ring_link4"
+      ],
+      "intersection_inscribed_radius_m": 0.0001983269552671904
+    },
+    {
+      "pair": [
+        "hand_r_pinky_link2",
+        "hand_r_ring_link2"
+      ],
+      "intersection_inscribed_radius_m": 0.001070354778318088
+    },
+    {
+      "pair": [
+        "hand_r_pinky_link3",
+        "hand_r_ring_link2"
+      ],
+      "intersection_inscribed_radius_m": 0.0012377406231313325
+    },
+    {
+      "pair": [
+        "hand_r_pinky_link3",
+        "hand_r_ring_link3"
+      ],
+      "intersection_inscribed_radius_m": 0.0016393842814010602
+    },
+    {
+      "pair": [
+        "hand_r_pinky_link3",
+        "hand_r_ring_link4"
+      ],
+      "intersection_inscribed_radius_m": 0.0013136837331779588
+    },
+    {
+      "pair": [
+        "hand_r_pinky_link4",
+        "hand_r_ring_link3"
+      ],
+      "intersection_inscribed_radius_m": 0.0008218646716371125
+    },
+    {
+      "pair": [
+        "hand_r_pinky_link4",
+        "hand_r_ring_link4"
+      ],
+      "intersection_inscribed_radius_m": 0.0020927970523818076
+    },
+    {
+      "pair": [
+        "hand_r_pinky_link4",
+        "hand_r_ring_pad_link"
+      ],
+      "intersection_inscribed_radius_m": 0.00207311235129988
+    },
+    {
+      "pair": [
+        "hand_r_pinky_pad_link",
+        "hand_r_ring_pad_link"
+      ],
+      "intersection_inscribed_radius_m": 0.0017270017996905557
+    }
+  ],
+  "knife_intersections": [],
+  "overlap_definition": "Radius of a ball inside both convex hulls; not collision penetration depth or measured force",
+  "g2_ik": {
+    "residual": 9.887949467040336e-09,
+    "position_m": 1.6263245055119133e-09,
+    "rotation_rad": 7.4466530943160084e-09
+  },
+  "g2_arm_q": [
+    -1.4697709884785992,
+    -0.635465877247726,
+    0.5558974443896902,
+    -1.3880707177120013,
+    -0.9827091202877837,
+    -0.01643396283717391,
+    -0.21462473505533178
+  ],
+  "g2_arm_table": [],
+  "joints_with_less_than_0p01rad_margin": [],
+  "ready_for_physics": false,
+  "outstanding": "Touch-only screening. Open/close approach, finger-table path and flip/flatten handoff not validated."
+}
