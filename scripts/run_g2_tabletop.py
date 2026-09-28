@@ -35,6 +35,7 @@ def main():
     parser.add_argument('--teacher',type=Path,default=PUBLISHED/(PREFIX+'teacher.pth'))
     parser.add_argument('--student',type=Path,default=PUBLISHED/(PREFIX+'student.pth'))
     parser.add_argument('--grasp',type=int,default=0,choices=[0,1,2])
+    parser.add_argument('--preset-support-gate',action='store_true',help='A v2: judge stable nonthumb support without requiring thumb contact; original acquisition gate separately retained')
     parser.add_argument('--preset-preparation',type=Path,help='A-only motor-only single-digit preparation after actual settle; fixed-reference hold gates')
     parser.add_argument('--preset-candidate',type=Path,help='A-only explicit70-value candidate state before the first physics step, followed by2s actual settling; never a continuous acquisition result.')
     parser.add_argument('--video',action='store_true')
@@ -51,6 +52,7 @@ def main():
     parser.add_argument('--settle-seconds',type=float,default=2.)
     parser.add_argument('--only-grasp',action='store_true')
     parser.add_argument('--policy-action-mode',choices=['full','thumb-only'],default='full',help='Explicit frozen-policy action-component ablation. Thumb-only holds other motor references; raw and executed actions are both recorded.')
+    parser.add_argument('--geometric-operation',type=Path,help='Named privileged thumb IK feedback baseline; frozen actor not executed')
     parser.add_argument('--learned-operation-policy',type=Path,help='New privileged local S controller; requires thumb-only teacher channel for support route. Never original full-teacher success.')
     parser.add_argument('--operation-static-policy',action='store_true',help='Named S ablation: one actual initial network inference, then fixed20-joint output plus unchanged geometric thumb path; not a trained student')
     parser.add_argument('--local-reset-quaternion-compat',action='store_true',help='Frozen local policy diagnostic: match the legacy reset wrist quaternion sign on the FIRST observation only; no physical state write.')
@@ -104,6 +106,8 @@ def main():
     parser.add_argument('--air-flip-only',action='store_true',help='Diagnostic: stop after free-space flip and actual settling, without transport or policy operation.')
     parser.add_argument('--lift-height',type=float,default=.20,help='Vertical wrist lift in metres; no object state changes.')
     parser.add_argument('--pickup-retention-hold',type=float,default=0.,choices=[0.,1.],help='Separate fixed-reference1s physical hold after lift, gate before flip; records every finger without asserting force')
+    parser.add_argument('--table-settle-only',action='store_true',help='Counted B diagnostic: natural2s settle, save actual pose, no approach/grasp')
+    parser.add_argument('--short-lift-diagnostic',action='store_true',help='B-only2-5cm short lift; separate from full acquisition')
     parser.add_argument('--pickup-only',action='store_true',help='Isolated continuous table pickup plus1s hold, no flip/transport/policy; does not claim full task success')
     parser.add_argument('--closed-settle-seconds',type=float,default=0.,choices=[0.,1.],help='Explicit single-factor closed-hand dwell on the original table before first lift; actual state remains continuous')
     parser.add_argument('--pickup-finger-feedback',action='store_true',help='Explicit privileged bounded contact-following motor controller during lift/hold only; no model training or object actuation')
@@ -124,7 +128,7 @@ def main():
     knife_geometry=None
     knife_asset_path=ROOT/'assets/objects/knife_wuji_bridge3_20260922/000/mobility.urdf'
     if args.knife_spec:
-        assert (args.group=='A' and args.preset_candidate) or (args.group=='B' and args.only_grasp and (args.pickup_only or args.air_flip_only)), 'New geometry: presetA or acquisition diagnostic only until further interface audit'
+        assert (args.group=='A' and args.preset_candidate) or (args.group=='B' and args.only_grasp and (args.pickup_only or args.air_flip_only or args.table_settle_only)), 'New geometry: presetA or acquisition diagnostic only until further interface audit'
         assert not args.pickup_finger_feedback and not args.table_supported_seat and not args.gait_plan
         from scripts.g2_knife_geometry import KnifeGeometry
         knife_geometry=KnifeGeometry(args.knife_spec);knife_asset_path=knife_geometry.urdf
@@ -164,7 +168,8 @@ def main():
     assert not args.post_acquisition_pose or (args.group!='A' and args.table_supported_seat)
     assert not args.air_flip or (args.group!='A' and not args.table_supported_seat and not args.seat_at_operation)
     assert not args.air_flip_only or (args.air_flip and args.only_grasp and args.seat_seconds==0)
-    assert 5<=args.air_flip_seconds<=20 and .20<=args.lift_height<=.40
+    assert 5<=args.air_flip_seconds<=20
+    assert (.02<=args.lift_height<=.05 and args.pickup_only) if args.short_lift_diagnostic else .20<=args.lift_height<=.40
     assert np.linalg.norm(args.air_flip_shift)<=.25
     assert not args.gait_plan or (args.air_flip and not args.table_supported_seat and not args.seating_plan and args.seat_seconds==0)
     cfg=configuration('wuji_acquisition_bridge3_hemisphere',1,
@@ -217,7 +222,7 @@ def main():
     above=grasp_pose.copy(); above[2,3]+=.16
     lifted=grasp_pose.copy(); lifted[2,3]+=args.lift_height
     high_seed=np.asarray(json.loads(args.acquisition_arm_seed.read_text())) if args.acquisition_arm_seed else op_q
-    if preset_candidate is None:
+    if preset_candidate is None and not args.table_settle_only:
         high_q,high_error=k.solve(above,high_seed)
         grasp_q,grasp_error=k.solve(grasp_pose,high_q)
         lift_q,lift_error=k.solve(lifted,grasp_q)
@@ -232,7 +237,7 @@ def main():
               operation_q=op_q.tolist(),approach_q=high_q.tolist(),grasp_q=grasp_q.tolist(),lift_q=lift_q.tolist(),
               table_top=table_z,knife_pose=pose(table_obj).tolist(),planned_wrist_pose=pose(grasp_pose).tolist())
     (args.output/'plan.json').write_text(json.dumps(plan,indent=2)+'\n')
-    if preset_candidate is None:assert max(e['position_m'] for e in [high_error,grasp_error,lift_error])<.001
+    if preset_candidate is None and not args.table_settle_only:assert max(e['position_m'] for e in [high_error,grasp_error,lift_error])<.001
     geometry_input=None
     if knife_geometry is not None:
         geometry_input=np.concatenate([np.ptp(v,axis=0) for name,idx,v in knife_geometry.parts if idx==0])
@@ -456,6 +461,7 @@ def main():
         return a[hand_idx,0].copy(),a[arm_idx,0].copy(),float(a[-1,0]),transform(b[wrist_id,:3],b[wrist_id,3:7]),transform(b[obj_id,:3],b[obj_id,3:7]),transform(b[slider_id,:3],b[slider_id,3:7])
     records=[];takeover=None;dt=float(sp.dt)*4;global_step=0
     learned_runtime=None
+    geometric_runtime=None
     pair_records=[]
     arm_integral=np.zeros(len(arm_idx))
     previous_hand_command=targets[hand_idx].copy()
@@ -507,7 +513,7 @@ def main():
                 if digit_contact and pair & knife_env:finger_knife[i]+=1
                 if digit_contact and any(env_names.get(b)=='link_1' for b in pair):finger_slider[i]+=1
         records.append(dict(time=(global_step+1)*dt,phase=phase,q=q,arm_q=qa,targets=command_targets,reference_targets=reference_targets,action=executed.copy(),
-            raw_policy_action=policy.last_raw_action.copy() if action is not None else np.zeros(20,dtype=np.float32),
+            geometric_feedback=np.zeros(3,dtype=np.float32),raw_policy_action=policy.last_raw_action.copy() if action is not None else np.zeros(20,dtype=np.float32),
             all_dof_position=dof[:,0].cpu().numpy().copy(),object_rigid_state=rb[obj_id].cpu().numpy().copy(),
             slider_rigid_state=rb[slider_id].cpu().numpy().copy(),arm_integral_state=arm_integral.copy(),
             dof_velocity=dof[:,1].cpu().numpy().copy(),dof_effort=efforts.cpu().numpy().copy() if efforts is not None else np.full(len(names)+1,np.nan),
@@ -580,6 +586,12 @@ def main():
             for _ in range(round(args.settle_seconds/dt)):tick('settle_history')
         if args.group!='A':
             for _ in range(60):tick('table_settle')
+            if args.table_settle_only:
+                _,_,sl,_,o,_=current()
+                (args.output/'settled-table-localization.json').write_text(json.dumps(dict(object=pose(o).tolist(),slider_position_m=sl,grasp_q=grasp_q.tolist(),method='Measured after natural2s free settle; only initial physical setup, no manipulation yet'),indent=2)+'\n')
+                np.savez_compressed(args.output/'trace.npz',**{key:np.asarray([r[key] for r in records]) for key in records[0]})
+                (args.output/'report.json').write_text(json.dumps(dict(scope='Natural-table-settle-only, not acquisition or operation',physics_steps=global_step,knife_asset_sha256=effective['knife_asset_sha256'])))
+                return
             if args.table_localization=='settled-truth':
                 assert custom_plan is not None
                 _,_,actual_table_slider,_,actual_table_object,_=current()
@@ -1011,11 +1023,16 @@ def main():
         policy.previous_slider=sl
         rel=pose(np.linalg.inv(w)@o)
         hold_check=acquisition_hold({key:[r[key] for r in records] for key in records[0]},s,table_z) if args.group!='A' or preset_candidate is not None else None
+        legacy_hold_check=hold_check
+        if args.preset_support_gate:
+            assert args.group=='A' and preset_candidate is not None and args.knife_spec
+            from scripts.g2_tabletop_metrics import preset_support_hold
+            hold_check=preset_support_hold(records,table_z)
         grasp_success=hold_check['success'] if hold_check is not None else True
         takeover=dict(step=global_step,time=global_step*dt,q=q.tolist(),targets=targets[hand_idx].tolist(),
             arm_q=qa.tolist(),object_world=pose(o).tolist(),wrist_world=pose(w).tolist(),object_hand=rel.tolist(),
             grasp_success=grasp_success if args.group!='A' else None,slider_at_takeover=sl,slider_command_origin=slider_lower,
-            acquisition_hold_check=hold_check,
+            acquisition_hold_check=hold_check,legacy_opposed_grip_check=legacy_hold_check,
             table_height=table_z,
             policy_action_mode=args.policy_action_mode,
             executed_action_provenance='raw actor output' if args.policy_action_mode=='full' else 'thumb actor output; non-thumb components explicitly zeroed before controller, last-action observation and history; raw output saved separately',
@@ -1034,6 +1051,11 @@ def main():
             takeover['preset_scope']='Independent geometry candidate initialized before first physics step; actual2s history and actual settled motor reference; not tabletop acquisition.'
             takeover['preset_hold_success']=bool(grasp_success)
         (args.output/'takeover.json').write_text(json.dumps(takeover,indent=2)+'\n')
+        if args.geometric_operation:
+            assert args.group=='A' and knife_geometry is not None and args.learned_operation_policy is None
+            from scripts.g2_v2_thumb_feedback import ThumbFeedback
+            config=json.loads(args.geometric_operation.read_text());geometric_runtime=ThumbFeedback(config,knife_geometry,q,targets[hand_idx],w,o,sl)
+            (args.output/'geometric-operation.json').write_text(json.dumps(config,indent=2)+'\n')
         if args.learned_operation_policy:
             from scripts.g2_local_runtime import LocalPolicyRuntime
             learned_runtime=LocalPolicyRuntime(args.learned_operation_policy,dof[:,0].cpu().numpy(),dof[:,1].cpu().numpy(),targets,
@@ -1046,7 +1068,9 @@ def main():
             for step in range(round(args.seconds/dt)):
                 if step>0 or args.group!='A':q,qa,sl,w,o,l=current()
                 offset=.04 if (step//150)%2==0 else 0.
-                if learned_runtime is not None and learned_runtime.thumb_plan is not None:
+                if geometric_runtime is not None:
+                    target=geometric_runtime.step(q,w,o,sl,step);action=np.zeros(20,dtype=np.float32);obs=np.zeros(138,dtype=np.float32);policy.last_raw_action[:]=0
+                elif learned_runtime is not None and learned_runtime.thumb_plan is not None:
                     # Explicit new geometric thumb prior, not frozen actor output.
                     target=targets[hand_idx].copy();action=np.zeros(20,dtype=np.float32)
                     obs=np.zeros(138,dtype=np.float32);policy.last_raw_action[:]=0
@@ -1068,6 +1092,7 @@ def main():
                 # even if the actual acquisition left the slider partly open.
                 zero=learned_runtime.slider_lower if learned_runtime is not None else policy.slider_initial
                 tick('operate',action,zero+offset,obs)
+                if geometric_runtime is not None:records[-1]['geometric_feedback']=np.array([geometric_runtime.last[n] for n in ['reference_distance_m','long_feedback_m','ik_error_m']])
         trace={k:np.asarray([r[k] for r in records]) for k in records[0]}
         np.savez_compressed(args.output/'trace.npz',**trace)
         report=score(trace,takeover,args.group)
@@ -1090,7 +1115,8 @@ def main():
             model_sha256=model['urdf_sha256'],initial_state_writes='only before first physics step',
             slider_drive_stiffness=0.,object_external_forces=False,object_constraints=False)
         report['operation_controller']=learned_runtime.description() if learned_runtime is not None else dict(method='original actor',action_mode=args.policy_action_mode,student=args.group=='C')
-        report['original_actor_executed_in_operation']=bool(report['operation_steps'] and (learned_runtime is None or learned_runtime.thumb_plan is None))
+        if geometric_runtime is not None:report['operation_controller']=dict(method='privileged geometric thumb feedback',config=str(args.geometric_operation),frozen_actor_executed=False)
+        report['original_actor_executed_in_operation']=bool(report['operation_steps'] and geometric_runtime is None and (learned_runtime is None or learned_runtime.thumb_plan is None))
         (args.output/'report.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report),flush=True)
     except Exception as error:
         failure=dict(exception_type=type(error).__name__,message=str(error),steps=global_step,

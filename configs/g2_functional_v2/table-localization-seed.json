@@ -1,0 +1,492 @@
+{
+  "name": "side-face-refine-00",
+  "kind": "five_finger_side_pinch_motor_plan",
+  "validation": "No physics execution; accepted only requests further exact collision/path checks",
+  "initial_flex": null,
+  "initial_pitch_rad": null,
+  "initial_thumb": null,
+  "wrist_in_knife": [
+    [
+      -0.3207568595335718,
+      -0.6984000829060203,
+      0.639806502982757,
+      -0.050783886687293826
+    ],
+    [
+      0.7157112582347452,
+      0.26372593736032574,
+      0.6466885067785383,
+      -0.1213619712993379
+    ],
+    [
+      -0.6203808764768612,
+      0.6653464918073001,
+      0.41526089864267257,
+      -0.02043089063681133
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "touch_q": [
+    0.14060426511166726,
+    -0.2899999943320812,
+    0.9998288386392019,
+    1.2786899502683262,
+    0.577321036994144,
+    -0.28999999433190976,
+    0.8378360444898253,
+    0.9177453581999641,
+    1.0840636990124803,
+    -0.15530935448306404,
+    -0.04514007838655079,
+    1.0663023928983981,
+    0.8390483799746615,
+    -0.1882311024116268,
+    0.5530899914014927,
+    0.8552936362824781,
+    1.412813717607152,
+    -0.05869998454149627,
+    -0.3841999635403076,
+    1.3601398842240193
+  ],
+  "joint_names": [
+    "hand_r_index_joint1",
+    "hand_r_index_joint2",
+    "hand_r_index_joint3",
+    "hand_r_index_joint4",
+    "hand_r_middle_joint1",
+    "hand_r_middle_joint2",
+    "hand_r_middle_joint3",
+    "hand_r_middle_joint4",
+    "hand_r_pinky_joint1",
+    "hand_r_pinky_joint2",
+    "hand_r_pinky_joint3",
+    "hand_r_pinky_joint4",
+    "hand_r_ring_joint1",
+    "hand_r_ring_joint2",
+    "hand_r_ring_joint3",
+    "hand_r_ring_joint4",
+    "hand_r_thumb_joint1",
+    "hand_r_thumb_joint2",
+    "hand_r_thumb_joint3",
+    "hand_r_thumb_joint4"
+  ],
+  "contact_targets": [
+    [
+      -0.015,
+      -0.002,
+      -0.02
+    ],
+    [
+      0.015,
+      -0.002,
+      0.02631707901302043
+    ],
+    [
+      0.015,
+      -0.002,
+      -0.006718740501322443
+    ],
+    [
+      0.015,
+      -0.002,
+      -0.031
+    ],
+    [
+      0.015,
+      -0.002,
+      -0.05106565574754429
+    ]
+  ],
+  "contact_normals": [
+    [
+      -1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ]
+  ],
+  "contact_points": [
+    [
+      -0.01519837512087291,
+      -0.002473543982050733,
+      -0.020046725505825255
+    ],
+    [
+      0.015200893735703054,
+      -0.002415260078689387,
+      0.02631707901302043
+    ],
+    [
+      0.015193685530661328,
+      -0.0023247617539407144,
+      -0.006718740501322443
+    ],
+    [
+      0.015202090148189087,
+      -0.002313850967158295,
+      -0.03101055657758911
+    ],
+    [
+      0.01520007222984293,
+      -0.002291584726464881,
+      -0.05106565574754429
+    ]
+  ],
+  "contact_errors_m": [
+    0.000515538421858578,
+    0.00046130166485483715,
+    0.00037813262436638465,
+    0.0003734358029322839,
+    0.00035362487166759317
+  ],
+  "pad_facing_cosines": [
+    0.34805077072741425,
+    0.4458047035587868,
+    0.478213597339768,
+    0.4886997070006317,
+    0.5556536292043667
+  ],
+  "min_convex_separating_gap_m": 9.999999949505262e-06,
+  "min_table_clearance_m": 0.0005499999999808436,
+  "length_contact_spacing_m": [
+    0.03303581951434287,
+    0.024291816076266667,
+    0.02005509916995518
+  ],
+  "joint_margin_min_rad": 0.08000000000000018,
+  "geometric_pass": true,
+  "stages": [
+    {
+      "collision_weight": 100,
+      "cost": 0.0735203694467487,
+      "nfev": 48,
+      "message": "`ftol` termination condition is satisfied."
+    },
+    {
+      "collision_weight": 500,
+      "cost": 0.07371110977653214,
+      "nfev": 24,
+      "message": "`ftol` termination condition is satisfied."
+    },
+    {
+      "method": "SLSQP",
+      "success": true,
+      "iterations": 45,
+      "message": "Optimization terminated successfully"
+    }
+  ],
+  "seconds": 26.420400857925415,
+  "active_fingers": [
+    "thumb",
+    "index",
+    "middle",
+    "ring",
+    "pinky"
+  ],
+  "excluded_fingers": [],
+  "thumb_palm_constraint": true,
+  "balance_long_axis_requested": true,
+  "thumb_to_four_pad_centroid_z_m": -0.0044272570524664,
+  "balanced_margin_requested": true,
+  "self_collision_pairs_constrained": [
+    [
+      "hand_r_base_link",
+      "hand_r_thumb_link3"
+    ],
+    [
+      "hand_r_index_link4",
+      "hand_r_middle_link3"
+    ],
+    [
+      "hand_r_index_pad_link",
+      "hand_r_middle_link3"
+    ],
+    [
+      "hand_r_index_pad_link",
+      "hand_r_middle_link4"
+    ],
+    [
+      "hand_r_middle_link2",
+      "hand_r_ring_link2"
+    ],
+    [
+      "hand_r_middle_link2",
+      "hand_r_ring_link3"
+    ],
+    [
+      "hand_r_middle_link3",
+      "hand_r_ring_link3"
+    ],
+    [
+      "hand_r_middle_link4",
+      "hand_r_ring_link3"
+    ],
+    [
+      "hand_r_middle_link4",
+      "hand_r_ring_link4"
+    ],
+    [
+      "hand_r_middle_pad_link",
+      "hand_r_ring_link4"
+    ],
+    [
+      "hand_r_pinky_link2",
+      "hand_r_ring_link2"
+    ],
+    [
+      "hand_r_pinky_link3",
+      "hand_r_ring_link2"
+    ],
+    [
+      "hand_r_pinky_link3",
+      "hand_r_ring_link3"
+    ],
+    [
+      "hand_r_pinky_link3",
+      "hand_r_ring_link4"
+    ],
+    [
+      "hand_r_pinky_link4",
+      "hand_r_ring_link3"
+    ],
+    [
+      "hand_r_pinky_link4",
+      "hand_r_ring_link4"
+    ],
+    [
+      "hand_r_pinky_link4",
+      "hand_r_ring_pad_link"
+    ],
+    [
+      "hand_r_pinky_pad_link",
+      "hand_r_ring_pad_link"
+    ]
+  ],
+  "required_long_spacing_m": 0.012,
+  "source_plan": "runs/g2-finger-surface-20260928/measured-rest-balanced-touch/side-face-refine-00.json",
+  "contact_height_interval_m": [
+    -0.002,
+    0.001
+  ],
+  "constraint_change": "New explicitly parameterized measured-envelope asset, actual three convex components; baseline asset unchanged",
+  "knife_spec": "assets/objects/knife_wuji_measured_box_20260928_v2/000/asset-spec.json",
+  "planning_object_world": [
+    [
+      0.9998996897155961,
+      -0.014162964600344595,
+      -0.0001447079278268544,
+      0.4500676393508911
+    ],
+    [
+      -0.00010609467287305864,
+      -0.01770598738930279,
+      0.9998432310889996,
+      -0.299982488155365
+    ],
+    [
+      -0.014163306484552893,
+      -0.9997429211773893,
+      -0.017705713911768395,
+      0.7546458840370178
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "planning_pose_status": "Offline motor planning from actual F1-07 naturally settled pose, no geometric height overwrite, no simulation state injection",
+  "planning_localization_source": "runs/g2-finger-surface-20260928/measured-recorded-rest-planning-localization.json",
+  "planning_localization_method": "Offline geometry planning from F1-07 actual natural resting pose and passive slider; never reset simulation to this state",
+  "use_recorded_table_pose": true,
+  "planning_slider_m": -0.03260699287056923,
+  "source_touch_plan": "runs/g2-finger-surface-20260928/measured-recorded-rest-touch/side-face-refine-00.json",
+  "open_q": [
+    0.16685717748416726,
+    -0.3649983417819287,
+    0.8197109620476212,
+    1.504709865735777,
+    0.6848563974294322,
+    -0.32894961246304844,
+    0.38982562830370227,
+    1.532722332344182,
+    0.9047946823367794,
+    -0.19765218762731457,
+    0.29525012981200266,
+    0.8515864435136022,
+    0.9029869712300133,
+    -0.23238650544359254,
+    0.19669500998928333,
+    1.344493445304081,
+    1.3769218766266191,
+    -0.09903091367543622,
+    -0.4522447100523946,
+    1.5517999505279305
+  ],
+  "close_q": [
+    0.12155746678392748,
+    -0.24044320206296477,
+    1.1295208150652054,
+    1.1682122473796153,
+    0.6043273523254559,
+    -0.2482145419598719,
+    0.8651194068090465,
+    0.9282266676511958,
+    1.0722074018723868,
+    -0.13364165447120865,
+    0.08735294814517162,
+    0.9813959172538169,
+    0.9603756220446417,
+    -0.1486540727989026,
+    0.28393055937822526,
+    1.205094539356697,
+    1.4019979682139818,
+    -0.037203339972450934,
+    -0.26445871606225685,
+    1.2755611894398997
+  ],
+  "grasp": 0,
+  "opening_m": 0.005,
+  "squeeze_m": 0.004,
+  "allow_close_overtravel": false,
+  "open_fit": {
+    "success": true,
+    "nfev": 126,
+    "message": "`ftol` termination condition is satisfied.",
+    "contact_error_m": [
+      3.806656796969225e-05,
+      1.4815535037934645e-07,
+      9.208340287104069e-05,
+      2.1425612281284395e-05,
+      6.649018040124777e-05
+    ]
+  },
+  "close_fit": {
+    "success": true,
+    "nfev": 19,
+    "message": "Both `ftol` and `xtol` termination conditions are satisfied.",
+    "contact_error_m": [
+      1.5518085890138785e-05,
+      0.0001204110595913148,
+      1.4675433820270442e-09,
+      4.6440312029250773e-07,
+      3.828761824807044e-07
+    ]
+  },
+  "preload_definition": "Geometric compression requested via legal joint motor targets only, not measured positions or forces",
+  "squeeze_per_finger_m": [
+    0.004,
+    0.004,
+    0.004,
+    0.004,
+    0.004
+  ],
+  "full_self_axes": false,
+  "seed_motor_plan": null,
+  "close_waypoints": [
+    {
+      "fraction": 0.0,
+      "q": [
+        0.16685717748416726,
+        -0.3649983417819287,
+        0.8197109620476212,
+        1.504709865735777,
+        0.6848563974294322,
+        -0.32894961246304844,
+        0.38982562830370227,
+        1.532722332344182,
+        0.9047946823367794,
+        -0.19765218762731457,
+        0.29525012981200266,
+        0.8515864435136022,
+        0.9029869712300133,
+        -0.23238650544359254,
+        0.19669500998928333,
+        1.344493445304081,
+        1.3769218766266191,
+        -0.09903091367543622,
+        -0.4522447100523946,
+        1.5517999505279305
+      ]
+    },
+    {
+      "fraction": 0.6666666666666666,
+      "q": [
+        0.14060426511166726,
+        -0.2899999943320812,
+        0.9998288386392019,
+        1.2786899502683262,
+        0.577321036994144,
+        -0.28999999433190976,
+        0.8378360444898253,
+        0.9177453581999641,
+        1.0840636990124803,
+        -0.15530935448306404,
+        -0.04514007838655079,
+        1.0663023928983981,
+        0.8390483799746615,
+        -0.1882311024116268,
+        0.5530899914014927,
+        0.8552936362824781,
+        1.412813717607152,
+        -0.05869998454149627,
+        -0.3841999635403076,
+        1.3601398842240193
+      ]
+    },
+    {
+      "fraction": 1.0,
+      "q": [
+        0.12155746678392748,
+        -0.24044320206296477,
+        1.1295208150652054,
+        1.1682122473796153,
+        0.6043273523254559,
+        -0.2482145419598719,
+        0.8651194068090465,
+        0.9282266676511958,
+        1.0722074018723868,
+        -0.13364165447120865,
+        0.08735294814517162,
+        0.9813959172538169,
+        0.9603756220446417,
+        -0.1486540727989026,
+        0.28393055937822526,
+        1.205094539356697,
+        1.4019979682139818,
+        -0.037203339972450934,
+        -0.26445871606225685,
+        1.2755611894398997
+      ]
+    }
+  ],
+  "open_pad_lift_m": 0.002,
+  "planned_flip_degrees": 180.0,
+  "planned_flip_axis": "knife-length",
+  "scope": "Old v1 hand plan ONLY for initial above-table robot pose; never executed in settle-only diagnostic"
+}

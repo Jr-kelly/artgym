@@ -1,6 +1,7 @@
 # 最新活动任务：v2功能持刀新预算轮
 
 本轮分支`feat/g2-wuji-functional-v2-20260928`，工作区`/data/research/artgym-g2-functional-v2-20260928`。
+当前5条执行已启动；V2-03预置四指托刀/拇指离开1s稳定，原获取gate误拦，V2-04实际接teacher进行中。V2-01完整操作未达标；连续获取尚未验证。
 先读`research/g2-functional-v2-20260928.md`及`runs/g2-functional-v2-20260928/state.json`。
 用户新授权100条执行、6组学习、8单卡小时、8小时墙钟；旧预算耗尽不是本轮阻塞。
 

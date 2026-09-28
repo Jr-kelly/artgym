@@ -52,3 +52,18 @@ def acquisition_hold(trace,reference,table_height=.75):
         functional_rotation_error_rad=float((Rotation.from_quat(reference[43:47]).inv()*Rotation.from_matrix(rel[-1,:3,:3])).magnitude()),
         thresholds=dict(height_m=minimum_height,proximity_m=.05,relative_drift_m=.01,relative_rotation_rad=.25,opposed_contact_fraction=.9),
         definition='Stable pickup for one settled second; functional-pose error reported separately, not hidden in pickup success.')
+
+
+def preset_support_hold(records,table_height=.75):
+    """Preset final-second support test. No thumb opposition requirement.
+    Physical fixed-reference thresholds unchanged; doesn't count as pickup.
+    """
+    indices=np.flatnonzero(np.array([r['phase'] for r in records])=='settle_history')[-30:]
+    if len(indices)!=30:return dict(success=False,reason='insufficient_actual_history')
+    rows=[records[i] for i in indices];first=rows[0]
+    o=transform(first['object'][:3],first['object'][3:]);w=transform(first['wrist'][:3],first['wrist'][3:])
+    metrics=fixed_acquisition_hold(rows,o,w,table_height)
+    contacts=np.array([r['finger_knife_contacts'] for r in rows])>0
+    support=(contacts[:,1:].sum(1)>=2).mean()
+    metrics.update(success=bool(metrics['stable'] and metrics['table_free'] and metrics['min_object_height_m']>table_height+.1 and support>=.9),nonthumb_support_fraction=float(support),scope='Preset-only final pose feasibility, not actual acquisition. Contact numbers are not load measurements.',definition='Fixed world and hand references;10mm/.25rad, no table/drop; >=2 nonthumb digits present90% of frames; thumb may be free.')
+    return metrics
