@@ -1,0 +1,959 @@
+{
+  "scope": "CPU26sample nominal thumb sweep at old measured functional reference, sequential IK; no dynamics or newly acquired support",
+  "measured_button_length_m": 0.045,
+  "unmeasured_travel_m": 0.05,
+  "normal_target": "Thumb volar normal toward knife -y, landmark0.2mm above assumed bump top",
+  "intersections_semantics": "Exact convex-hull intersection-ball radius, NOT force or penetration depth",
+  "gap_semantics": "Positive lower bound certifies separation; negative alone is inconclusive",
+  "reference": "configs/g2_finger_surface/operation-target-v1.json",
+  "spec": "assets/objects/knife_wuji_measured_envelope_20260928_v1/000/asset-spec.json",
+  "physics_trials": 0,
+  "rows": [
+    {
+      "displacement_m": 0.0,
+      "thumb_q": [
+        1.565501746205853,
+        0.29201941864578246,
+        0.6273717245069409,
+        -0.4698999938004073
+      ],
+      "landmark_error_m": 0.00027350829661423843,
+      "thumb_joint_margin_min_rad": 2.4313884239290928e-14,
+      "thumb_max_joint_step_rad": 0.3419780174287891,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0006039841613478018
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        }
+      ],
+      "bump_gap_lower_bound_m": 0.0007174064281526664,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        -0.02
+      ]
+    },
+    {
+      "displacement_m": 0.002,
+      "thumb_q": [
+        1.5217727048468175,
+        0.3034840178874261,
+        0.6545116164798919,
+        -0.4698999937997002
+      ],
+      "landmark_error_m": 0.00026613882830985925,
+      "thumb_joint_margin_min_rad": 7.314149286230531e-13,
+      "thumb_max_joint_step_rad": 0.04372904135903544,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0007117102651131512
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        }
+      ],
+      "bump_gap_lower_bound_m": 0.0006492134298974293,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        -0.018000000000000002
+      ]
+    },
+    {
+      "displacement_m": 0.004,
+      "thumb_q": [
+        1.4798876352136643,
+        0.3150947716449523,
+        0.6777612940984252,
+        -0.46989999379994085
+      ],
+      "landmark_error_m": 0.00026091486917988887,
+      "thumb_joint_margin_min_rad": 4.907740880355504e-13,
+      "thumb_max_joint_step_rad": 0.041885069633153194,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0008101149162599479
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        }
+      ],
+      "bump_gap_lower_bound_m": 0.0005841806984351909,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        -0.016
+      ]
+    },
+    {
+      "displacement_m": 0.006,
+      "thumb_q": [
+        1.439610589920134,
+        0.3267230408598548,
+        0.6976152425108536,
+        -0.46989999380008896
+      ],
+      "landmark_error_m": 0.0002572807363787231,
+      "thumb_joint_margin_min_rad": 3.4267033655055457e-13,
+      "thumb_max_joint_step_rad": 0.04027704529353038,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0009024342284100182
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        }
+      ],
+      "bump_gap_lower_bound_m": 0.000516833092574347,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        -0.014
+      ]
+    },
+    {
+      "displacement_m": 0.008,
+      "thumb_q": [
+        1.4007907739705845,
+        0.3382550090945013,
+        0.7144344838353125,
+        -0.469899993800188
+      ],
+      "landmark_error_m": 0.00025486058019699774,
+      "thumb_joint_margin_min_rad": 2.436384427539906e-13,
+      "thumb_max_joint_step_rad": 0.03881981594954942,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0009872450344478737
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        }
+      ],
+      "bump_gap_lower_bound_m": 0.0004671535948965119,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        -0.012
+      ]
+    },
+    {
+      "displacement_m": 0.01,
+      "thumb_q": [
+        1.3633358626255205,
+        0.3495871069004953,
+        0.728490375086714,
+        -0.4698999938002561
+      ],
+      "landmark_error_m": 0.00025339674748329105,
+      "thumb_joint_margin_min_rad": 1.7552626019323725e-13,
+      "thumb_max_joint_step_rad": 0.03745491134506396,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0010624138413354992
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        }
+      ],
+      "bump_gap_lower_bound_m": 0.00039059034681767626,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        -0.01
+      ]
+    },
+    {
+      "displacement_m": 0.012,
+      "thumb_q": [
+        1.3271954330062095,
+        0.360623677506249,
+        0.7399913386557091,
+        -0.46989999380030095
+      ],
+      "landmark_error_m": 0.0002527064577812195,
+      "thumb_joint_margin_min_rad": 1.3067324999838092e-13,
+      "thumb_max_joint_step_rad": 0.036140429619311076,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0011281023534178236
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        }
+      ],
+      "bump_gap_lower_bound_m": 0.0003182210262108534,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        -0.008
+      ]
+    },
+    {
+      "displacement_m": 0.014,
+      "thumb_q": [
+        1.292350375875473,
+        0.3712759087539985,
+        0.7490994688698889,
+        -0.46989999380033143
+      ],
+      "landmark_error_m": 0.00025265762600064454,
+      "thumb_joint_margin_min_rad": 1.0019762797242038e-13,
+      "thumb_max_joint_step_rad": 0.03484505713073638,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.001184781271424642
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        }
+      ],
+      "bump_gap_lower_bound_m": 0.000247468976214774,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        -0.006
+      ]
+    },
+    {
+      "displacement_m": 0.016,
+      "thumb_q": [
+        1.2588057117483626,
+        0.3814615368321002,
+        0.7559412494178311,
+        -0.4698999938003525
+      ],
+      "landmark_error_m": 0.00025315379012408486,
+      "thumb_joint_margin_min_rad": 7.91033905045424e-14,
+      "thumb_max_joint_step_rad": 0.033544664127110435,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0012348131158230178
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        }
+      ],
+      "bump_gap_lower_bound_m": 0.00015666846122943355,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        -0.004
+      ]
+    },
+    {
+      "displacement_m": 0.018000000000000002,
+      "thumb_q": [
+        1.2265855339100429,
+        0.3911050297540306,
+        0.760614532190537,
+        -0.46989999380036784
+      ],
+      "landmark_error_m": 0.00025412520556235843,
+      "thumb_joint_margin_min_rad": 6.378231276471524e-14,
+      "thumb_max_joint_step_rad": 0.03222017783831976,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0012751130731145962
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        }
+      ],
+      "bump_gap_lower_bound_m": 0.0001570155418220212,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        -0.0019999999999999983
+      ]
+    },
+    {
+      "displacement_m": 0.02,
+      "thumb_q": [
+        1.1957293172656367,
+        0.40013807335072193,
+        0.7631930703104007,
+        -0.46989999380037933
+      ],
+      "landmark_error_m": 0.00025552331523411194,
+      "thumb_joint_margin_min_rad": 5.229150445984487e-14,
+      "thumb_max_joint_step_rad": 0.030856216644406187,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0013057073592463709
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        }
+      ],
+      "bump_gap_lower_bound_m": 7.768444636964585e-05,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        0.0
+      ]
+    },
+    {
+      "displacement_m": 0.022,
+      "thumb_q": [
+        1.166289179506731,
+        0.4085002361070415,
+        0.7637293417425902,
+        -0.4698999938003885
+      ],
+      "landmark_error_m": 0.0002573174147955449,
+      "thumb_joint_margin_min_rad": 4.313216450668733e-14,
+      "thumb_max_joint_step_rad": 0.02944013775890575,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0013264922662300973
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        }
+      ],
+      "bump_gap_lower_bound_m": -2.8717343217521396e-05,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        0.0019999999999999983
+      ]
+    },
+    {
+      "displacement_m": 0.024,
+      "thumb_q": [
+        1.1383278755613335,
+        0.416139728476835,
+        0.7622560987319014,
+        -0.46989999380039643
+      ],
+      "landmark_error_m": 0.00025949280902693925,
+      "thumb_joint_margin_min_rad": 3.519406988061746e-14,
+      "thumb_max_joint_step_rad": 0.02796130394539742,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0013372753643100242
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 1,
+          "intersection_ball_radius_m": 4.4092095558104334e-05
+        }
+      ],
+      "bump_gap_lower_bound_m": -9.631459412255336e-05,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        0.004
+      ]
+    },
+    {
+      "displacement_m": 0.026000000000000002,
+      "thumb_q": [
+        1.1119174543801824,
+        0.4230141764983888,
+        0.7587868571552016,
+        -0.4698999938004039
+      ],
+      "landmark_error_m": 0.00026205080824115223,
+      "thumb_joint_margin_min_rad": 2.7700064464397656e-14,
+      "thumb_max_joint_step_rad": 0.02641042118115111,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0013378554225886158
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 1,
+          "intersection_ball_radius_m": 8.535392445084555e-05
+        }
+      ],
+      "bump_gap_lower_bound_m": -0.00018969137207731912,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        0.006000000000000002
+      ]
+    },
+    {
+      "displacement_m": 0.028,
+      "thumb_q": [
+        1.0871385065502175,
+        0.429091374744078,
+        0.7533155106847416,
+        -0.4698999938004113
+      ],
+      "landmark_error_m": 0.0002650090214647281,
+      "thumb_joint_margin_min_rad": 2.0317081350640365e-14,
+      "thumb_max_joint_step_rad": 0.024778947829964926,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0013279778919897504
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 1,
+          "intersection_ball_radius_m": 0.00012413458914885817
+        }
+      ],
+      "bump_gap_lower_bound_m": -0.00025969772085525367,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        0.008
+      ]
+    },
+    {
+      "displacement_m": 0.03,
+      "thumb_q": [
+        1.06408014538193,
+        0.43434996851386026,
+        0.7458149724405831,
+        -0.4698999938004191
+      ],
+      "landmark_error_m": 0.00026840382465752706,
+      "thumb_joint_margin_min_rad": 1.2545520178264269e-14,
+      "thumb_max_joint_step_rad": 0.023058361168287522,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0013073303118160617
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 1,
+          "intersection_ball_radius_m": 0.00015517420433483334
+        }
+      ],
+      "bump_gap_lower_bound_m": -0.00033916063852706436,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        0.009999999999999998
+      ]
+    },
+    {
+      "displacement_m": 0.032,
+      "thumb_q": [
+        1.0428407732137541,
+        0.43878006431082645,
+        0.7362348331650209,
+        -0.46989999380042685
+      ],
+      "landmark_error_m": 0.0002722932471229773,
+      "thumb_joint_margin_min_rad": 4.773959005888173e-15,
+      "thumb_max_joint_step_rad": 0.02123937216817584,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0012755531681398462
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 1,
+          "intersection_ball_radius_m": 0.00017951092428709954
+        }
+      ],
+      "bump_gap_lower_bound_m": -0.00040919789663206203,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        0.012
+      ]
+    },
+    {
+      "displacement_m": 0.034,
+      "thumb_q": [
+        1.023529964290305,
+        0.44238376007342284,
+        0.7244976496664325,
+        -0.4698999938004296
+      ],
+      "landmark_error_m": 0.00027676296108464953,
+      "thumb_joint_margin_min_rad": 1.9984014443252818e-15,
+      "thumb_max_joint_step_rad": 0.019310808923449052,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0012322633568532736
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 1,
+          "intersection_ball_radius_m": 0.0001996257230323784
+        }
+      ],
+      "bump_gap_lower_bound_m": -0.00046886050945730944,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        0.014000000000000002
+      ]
+    },
+    {
+      "displacement_m": 0.036000000000000004,
+      "thumb_q": [
+        1.0062717651215192,
+        0.4451756480340979,
+        0.7104934732472,
+        -0.46989999380043157
+      ],
+      "landmark_error_m": 0.0002819344541022475,
+      "thumb_joint_margin_min_rad": 5.551115123125783e-17,
+      "thumb_max_joint_step_rad": 0.017258199168785904,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0011772653341282798
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 1,
+          "intersection_ball_radius_m": 0.0002155819276600219
+        }
+      ],
+      "bump_gap_lower_bound_m": -0.0005172142644235822,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        0.016000000000000004
+      ]
+    },
+    {
+      "displacement_m": 0.038,
+      "thumb_q": [
+        0.9912101048878714,
+        0.4471833590829367,
+        0.6940716890397235,
+        -0.4698999938004036
+      ],
+      "landmark_error_m": 0.00028797850041782777,
+      "thumb_joint_margin_min_rad": 2.8033131371785203e-14,
+      "thumb_max_joint_step_rad": 0.01642178420747653,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0011127484716351966
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 1,
+          "intersection_ball_radius_m": 0.00022737688278068406
+        }
+      ],
+      "bump_gap_lower_bound_m": -0.0005533144070528177,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        0.018
+      ]
+    },
+    {
+      "displacement_m": 0.04,
+      "thumb_q": [
+        0.9785173562017264,
+        0.44844830628406157,
+        0.6750287002881699,
+        -0.4698999938002698
+      ],
+      "landmark_error_m": 0.00029513651087270367,
+      "thumb_joint_margin_min_rad": 1.6181500583911657e-13,
+      "thumb_max_joint_step_rad": 0.019042988751553636,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0010353854629721081
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 1,
+          "intersection_ball_radius_m": 0.00023492446188626872
+        }
+      ],
+      "bump_gap_lower_bound_m": -0.0005761685631257459,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        0.02
+      ]
+    },
+    {
+      "displacement_m": 0.042,
+      "thumb_q": [
+        0.9684079791189,
+        0.4490268897900569,
+        0.653088746936225,
+        -0.4698999937998884
+      ],
+      "landmark_error_m": 0.0003037559197010259,
+      "thumb_joint_margin_min_rad": 5.432321259490891e-13,
+      "thumb_max_joint_step_rad": 0.021939953351944874,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0009440397950009311
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 1,
+          "intersection_ball_radius_m": 0.00023802883119563995
+        }
+      ],
+      "bump_gap_lower_bound_m": -0.0005846827957776135,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        0.022000000000000002
+      ]
+    },
+    {
+      "displacement_m": 0.044,
+      "thumb_q": [
+        0.9611609900404934,
+        0.44899264384657667,
+        0.6278725891294408,
+        -0.4698999937988985
+      ],
+      "landmark_error_m": 0.0003143533369516916,
+      "thumb_joint_margin_min_rad": 1.5331069747048787e-12,
+      "thumb_max_joint_step_rad": 0.025216157806784212,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0008371891175771799
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 1,
+          "intersection_ball_radius_m": 0.00023634309945266672
+        }
+      ],
+      "bump_gap_lower_bound_m": -0.000576595833480395,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        0.023999999999999997
+      ]
+    },
+    {
+      "displacement_m": 0.046,
+      "thumb_q": [
+        0.957159882850344,
+        0.448440207424346,
+        0.598842042097031,
+        -0.46989999380043146
+      ],
+      "landmark_error_m": 0.0003277512358593276,
+      "thumb_joint_margin_min_rad": 1.6653345369377348e-16,
+      "thumb_max_joint_step_rad": 0.029030547032409815,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.000717534308761698
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 1,
+          "intersection_ball_radius_m": 0.0002293032494529137
+        }
+      ],
+      "bump_gap_lower_bound_m": -0.0005505469026887838,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        0.026
+      ]
+    },
+    {
+      "displacement_m": 0.048,
+      "thumb_q": [
+        0.9569627380329776,
+        0.44749362989520425,
+        0.5652020010599261,
+        -0.4698999938004307
+      ],
+      "landmark_error_m": 0.00034526585650542126,
+      "thumb_joint_margin_min_rad": 9.43689570931383e-16,
+      "thumb_max_joint_step_rad": 0.03364004103710483,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005857064294918892
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 1,
+          "intersection_ball_radius_m": 0.00021599624615170949
+        }
+      ],
+      "bump_gap_lower_bound_m": -0.0005053921897341801,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        0.028
+      ]
+    },
+    {
+      "displacement_m": 0.05,
+      "thumb_q": [
+        0.9614598086674265,
+        0.4463233246641823,
+        0.5256811580060692,
+        -0.4698999938004258
+      ],
+      "landmark_error_m": 0.000369348026847825,
+      "thumb_joint_margin_min_rad": 5.828670879282072e-15,
+      "thumb_max_joint_step_rad": 0.03952084305385695,
+      "thumb_self_intersections": [],
+      "thumb_knife_intersections": [
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_0",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0004332943275444087
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 0,
+          "intersection_ball_radius_m": 0.0005
+        },
+        {
+          "hand_link": "hand_r_thumb_pad_link",
+          "knife_link": "link_1",
+          "knife_component": 1,
+          "intersection_ball_radius_m": 0.00019493328607563505
+        }
+      ],
+      "bump_gap_lower_bound_m": -0.0004295913007421742,
+      "landmark_target_knife": [
+        0.0,
+        0.0052,
+        0.030000000000000002
+      ]
+    }
+  ],
+  "full_sampled_geometric_sweep_clear": false,
+  "retention_tested": false,
+  "slider_control_tested": false,
+  "conclusion": "Old reference requires independent support adjustment and thumb path validation; no claim of dynamic reach or newasset success"
+}

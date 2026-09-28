@@ -5,6 +5,7 @@ are not assigned measured finger positions and never imply a force estimate.
 """
 import argparse
 import json
+from functools import lru_cache
 from pathlib import Path
 
 import numpy as np
@@ -35,6 +36,9 @@ def main():
     p.add_argument('--arm-wrist-posture',type=float,help='Use G2 redundant joint7 to select an initial IK posture; original robot limits remain')
     p.add_argument('--hard-close-clearance',action='store_true',help='One constrained closing-path refinement, unchanged requested motor compression')
     p.add_argument('--knife-spec',type=Path)
+    p.add_argument('--extra-self-pairs',type=Path,help='Previously exact-audited collision pairs to constrain in both motor paths')
+    p.add_argument('--full-self-axes',action='store_true',help='Use every hull-face normal for constrained self pairs; same gap threshold')
+    p.add_argument('--seed-motor-plan',type=Path,help='Previous offline motor plan as optimizer seed only, no physics injection')
     a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
     original=json.loads(a.plan.read_text());loc=json.loads(a.localization.read_text())
     g=DigitGeometry(max_face_axes=24);h=g.w
@@ -47,6 +51,10 @@ def main():
     normals=np.asarray(original['contact_normals'])
     vertices={n:np.concatenate([v for v,_ in m]) for n,m in g.meshes.items()}
     normals_local={n:np.concatenate([v for _,v in m]) for n,m in g.meshes.items()}
+    full_normals=None
+    if a.full_self_axes:
+        full=DigitGeometry()
+        full_normals={n:np.unique(np.round(np.concatenate([v for _,v in m]),10),axis=0) for n,m in full.meshes.items()}
     boxes=[(np.zeros(3),np.array([.0095,.004,.0735])),
         (np.array([0,.0055,.010624586881962734-.03267458826303482]),np.array([.005,.0015,.015]))]
     graph={}
@@ -56,8 +64,13 @@ def main():
     for i,n in enumerate(sorted(vertices)):
         near={n}|graph.get(n,set());near|=set().union(*(graph.get(v,set()) for v in list(near)))
         pairs.extend((n,m) for m in sorted(vertices)[i+1:] if m not in near)
+    constrained_pairs=list(original.get('self_collision_pairs_constrained',[]))+[['hand_r_base_link','hand_r_thumb_link3']]
+    if a.extra_self_pairs:constrained_pairs+=json.loads(a.extra_self_pairs.read_text())
+    constrained_pairs=sorted(set(tuple(sorted(pair)) for pair in constrained_pairs))
 
-    def sample(q):
+    @lru_cache(maxsize=512)
+    def cached_sample(values):
+        q=np.asarray(values)
         frames={n:wrist@f for n,f in h.forward(q).items()}
         vs={n:v@frames[n][:3,:3].T+frames[n][:3,3] for n,v in vertices.items()}
         axes={n:v@frames[n][:3,:3].T for n,v in normals_local.items()}
@@ -78,12 +91,14 @@ def main():
                     gap.append(np.maximum(proj.min(0)-hi,lo-proj.max(0)).max())
             height.append((v@object_world[2,:3]+object_world[2,3]-.75).min())
         selfgaps=[]
-        constrained_pairs=list(original.get('self_collision_pairs_constrained',[]))+[['hand_r_base_link','hand_r_thumb_link3']]
         for n,m in constrained_pairs:
-            ax=np.r_[axes[n],axes[m]];va,vb=vs[n]@ax.T,vs[m]@ax.T
+            ax=np.r_[axes[n],axes[m]] if full_normals is None else np.r_[full_normals[n]@frames[n][:3,:3].T,full_normals[m]@frames[m][:3,:3].T]
+            va,vb=vs[n]@ax.T,vs[m]@ax.T
             selfgaps.append(np.maximum(va.min(0)-vb.max(0),vb.min(0)-va.max(0)).max())
         selfgap=min(selfgaps)
         return np.asarray(points),np.asarray(facing),np.asarray(gap),np.asarray(height),selfgap,vs
+
+    def sample(q):return cached_sample(tuple(q))
 
     def fit_offset(offset):
         values=np.broadcast_to(np.asarray(offset),5)
@@ -102,9 +117,10 @@ def main():
                 parts.extend([np.minimum(middle_height-.0006,0)*800,
                     np.array([min(middle_selfgap-.000015,0)*800])])
             return np.concatenate(parts)
-        fit=least_squares(residual,q0,bounds=(h.lower+.005,h.upper-.005),max_nfev=160,diff_step=1e-5)
+        seed=q0 if not a.seed_motor_plan else np.asarray(json.loads(a.seed_motor_plan.read_text())['open_q' if opening else 'close_q'])
+        fit=least_squares(residual,seed,bounds=(h.lower+.005,h.upper-.005),max_nfev=160,diff_step=1e-5)
         x=fit.x;info=dict(success=bool(fit.success),nfev=fit.nfev,message=fit.message)
-        if a.hard_close_clearance and not opening:
+        if a.hard_close_clearance:
             def constraints(q):
                 out=[]
                 for u in [.25,.5,.75,1.]:
@@ -126,6 +142,9 @@ def main():
         allow_close_overtravel=False,open_fit=open_fit,close_fit=close_fit,
         preload_definition='Geometric compression requested via legal joint motor targets only, not measured positions or forces')
     result['squeeze_per_finger_m']=squeeze.tolist()
+    result['self_collision_pairs_constrained']=[list(pair) for pair in constrained_pairs]
+    result['full_self_axes']=a.full_self_axes
+    result['seed_motor_plan']=str(a.seed_motor_plan) if a.seed_motor_plan else None
     if a.knife_spec:result['knife_spec']=str(a.knife_spec)
     if a.close_via_touch:
         result['close_waypoints']=[dict(fraction=0.,q=opened.tolist()),dict(fraction=2/3,q=q0.tolist()),dict(fraction=1.,q=closed.tolist())]
@@ -144,8 +163,19 @@ def main():
             for n,m in pairs:
                 r=radius(vs[n],vs[m])
                 if r is None or r>1e-5:bad.append(dict(pair=[n,m],inscribed_intersection_radius_m=r))
+            # A negative separation from a subset of face normals is
+            # inconclusive, not proof of overlap. Certify it using all convex
+            # hull planes before accepting/rejecting the open-to-touch path.
+            knife_bad=[]
+            if phase=='open_to_touch' and float(gap.min()) < -1e-7:
+                kvs=[part['vertices'] for part in knife_parts] if a.knife_spec else [center+np.array([[x,y,z] for x in [-1,1] for y in [-1,1] for z in [-1,1]])*half for center,half in boxes]
+                for n,v in vs.items():
+                    for bi,kv in enumerate(kvs):
+                        r=radius(v,kv)
+                        if r is None or r>1e-5:knife_bad.append(dict(hand_link=n,knife_component=bi,inscribed_intersection_radius_m=r))
             rows.append(dict(phase=phase,fraction=float(u),table_min_m=float(height.min()),
                 knife_gap_min_m=float(gap.min()),self_intersections=bad,
+                knife_intersections=knife_bad,knife_gap_semantics='Positive SAT gap certifies separation; negative gap requires exact hull intersection audit',
                 facing_min=float(facing.min())))
     # Vertical approach with the OPEN hand must remain separated from the
     # resting knife, not merely clear at its final pose.
@@ -162,7 +192,7 @@ def main():
     arm=G2Kinematics();table=ArmTableCollision(.75)
     target=object_world@wrist;above=target.copy();above[2,3]+=.16
     lift=target.copy();lift[2,3]+=a.lift
-    arm_result={};arm_pass=False
+    arm_result={};arm_pass=False;pickup_arm_pass=False
     try:
         grasp_q,err=arm.solve(target,np.asarray(loc['grasp_q']))
         if a.arm_wrist_posture is not None:
@@ -172,6 +202,8 @@ def main():
         (a.output/'arm-seed.json').write_text(json.dumps(high_q.tolist(),indent=2)+'\n')
         approach,ad=plan_translation(arm,high_q,target,4,1/30,table)
         lifted,ld=plan_translation(arm,approach[-1],lift,4,1/30,table)
+        pickup_arm_pass=True
+        arm_result=dict(grasp_ik=err,high_ik=high_err,approach=ad,lift=ld)
         lifted_object=object_world.copy();lifted_object[2,3]+=a.lift
         flip,fd=plan_flip(arm,arm.forward(lifted[-1]),lifted_object,lifted[-1],a.flip_degrees,10,1/30,table,axis_mode=a.flip_axis)
         arm_result=dict(grasp_ik=err,high_ik=high_err,approach=ad,lift=ld,flip=fd)
@@ -180,16 +212,17 @@ def main():
     max_motor_velocity=float(abs(closed-opened).max()*1.875/3.)
     if a.close_via_touch:max_motor_velocity=float(max(abs(q0-opened).max()*1.875/2,abs(closed-q0).max()*1.875))
     hand_pass=bool(all(r['table_min_m']>=.0005 and not r['self_intersections'] and
-        (r['phase']!='open_to_touch' or r['knife_gap_min_m']>=-1e-7) for r in rows)
+        not r['knife_intersections'] for r in rows)
         and not approach_overlaps and max(open_fit['contact_error_m'])<.001)
     audit=dict(hand_path_rows=rows,approach_intersections=approach_overlaps,arm=arm_result,
         hand_path_pass=hand_pass,arm_path_pass=bool(arm_pass),geometric_ready_for_one_physics_trial=bool(hand_pass and arm_pass),
+        pickup_arm_path_pass=pickup_arm_pass,geometric_ready_for_pickup_only_trial=bool(hand_pass and pickup_arm_pass),
         max_quintic_close_motor_speed_rad_s=max_motor_velocity,
         scope='Sampled CPU motor geometry precheck; actual servo tracking, contact, holding, flip, and flattening remain untested',
         no_state_injection=True,physics_trials=0)
     (a.output/'motion-audit.json').write_text(json.dumps(audit,indent=2)+'\n')
     print(json.dumps(dict(hand_path_pass=hand_pass,arm_path_pass=arm_pass,
-        hand_failures=[r for r in rows if r['table_min_m']<.0005 or r['self_intersections'] or (r['phase']=='open_to_touch' and r['knife_gap_min_m']< -1e-7)],
+        hand_failures=[r for r in rows if r['table_min_m']<.0005 or r['self_intersections'] or r['knife_intersections']],
         approach_intersections=approach_overlaps,open_fit=open_fit,close_fit=close_fit,
         arm_failure=arm_result.get('failure',arm_result.get('flip',{}).get('failure')))),flush=True)
 

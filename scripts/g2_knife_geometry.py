@@ -1,5 +1,6 @@
 """URDF collision geometry shared by measured-asset planner and diagnostics."""
 import json
+import hashlib
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
@@ -15,6 +16,10 @@ class KnifeGeometry:
     def __init__(self,spec=None):
         self.spec=json.loads(Path(spec).read_text()) if spec else None
         self.urdf=ROOT/self.spec['asset_urdf'] if self.spec else BASELINE
+        if self.spec:
+            for name,expected in self.spec['file_sha256'].items():
+                if hashlib.sha256((self.urdf.parent/name).read_bytes()).hexdigest()!=expected:
+                    raise ValueError('Immutable knife asset hash mismatch: '+name)
         robot=ET.parse(self.urdf).getroot();joint=robot.find('joint')
         self.lower=float(joint.find('limit').get('lower'));self.upper=float(joint.find('limit').get('upper'))
         self.axis=np.fromstring(joint.find('axis').get('xyz'),sep=' ')

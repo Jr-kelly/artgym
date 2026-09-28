@@ -59,3 +59,34 @@ bash scripts/g2_local_python.sh -m scripts.audit_g2_measured_knife \
 ```
 
 本轮实测轨迹和全部逐次判定见 `g2-finger-surface-acquisition-20260928.md`；连续运行命令见 `g2-finger-surface-reproduction-20260928.md`。新增旧资产失败和新资产模型分开发布，不能混为实测刀具成功率。
+
+## 完整路径补查（2026-09-28）
+
+旧参考实际关节/手物姿态保持不变，换为新几何后，四根非拇指与刀身的保守正分离间隙为0.917–1.000mm，拇指与滑块的最小正间隙约2.633mm。因此“没有几何相交”不能当作支撑已成立。
+
+以同一个旧操作参考做26点顺序拇指IK，假设行程0–50mm每2mm采样、名义指面标记点取凸起顶部外0.2mm：全部点误差<0.370mm，但完整指腹有刀身/按钮相交且拇指关节到限位。它否定这条名义标记点路径作为直接可执行解，不否定所有拇指接触方式。不能用点IK成功替代完整指腹避碰或动力学推拉。原始数据`measured-thumb-sweep-v1.json`。
+
+新刀侧夹touch候选00的静态精确碰撞通过；motion-v1发现张开/闭合中的食指pad/link4与中指link3/link4相交。正在用这3对明确碰撞约束做一次有界路径修正。刀具少量法向SAT负间隙现在触发精确凸包核查，不把保守估计直接当穿透；原10微米交集内切球判定、0.5mm桌隙等门槛保持。
+
+新资产加载时检查URDF和每个网格SHA256，运行器记录实际载入形状数、每形状属性、质心和惯量。`frozen-config.yaml`明确是继承控制配置；新的`effective-configuration.json`指明真正生效的几何覆盖和`physics.json`，避免把旧配置里的资产名字误读为实际加载资产。滑块朝下自然落稳后还会重查手指/桌面路径；若新凸起改变落稳倾角而使规划失效，先停在接近前并保存证据。
+
+
+几何扫掠复现（输出新文件，拒绝覆盖）：
+
+```bash
+bash scripts/g2_local_python.sh -m scripts.audit_g2_measured_thumb_sweep \
+  --spec assets/objects/knife_wuji_measured_envelope_20260928_v1/000/asset-spec.json \
+  --reference configs/g2_finger_surface/operation-target-v1.json \
+  --output runs/g2-finger-surface-20260928/my-measured-thumb-sweep.json
+```
+
+复测时优先补齐：**8mm的厚度定义、滑块完整行程及收回位置**。按钮宽和凸起尺寸再决定接触方式；阻力/摩擦/锁止是另一组测量，不能由上述外形反推。在补测前，当前几何结论均以版本化假设为条件。
+
+
+### 自然落稳条件不能照搬旧刀
+
+新旧几何的桌面静态姿态不同。以真实三组件凸包、35g继承质量分配的几何质心估计最低势能（仅CPU，假设滑块留在下限，没有对物理仿真施加约束），新刀预测俯仰约-0.01957rad。与旧刀实际落稳朝向相差0.01770rad（约1.01°），刀根高度约754.763mm；直接保留旧倾角则为756.265mm。原新刀touch/电机路径在该新姿态下，无名指pad最低约低于桌面1.35mm。
+
+这说明旧落稳姿态只是无效的规划假设，**不是**新刀物理抓取失败证据。启动一次有界CPU触达重规划，使用该显式静态预测；真实运行仍从闭刀平放开始自然落稳，重新定位并检查手桌净空。预测不替代实际落稳/滑块记录。motion-v1/v2/v3作为旧倾角下的失败/诊断全部保留，不计物理试验。
+
+生成器的新可选`thickness_measurement_interpretation`支持明确的`closed_assembly_includes_bump`（当前默认）和`closed_assembly_excludes_bump`。后者只供补测后新版本使用，需独立配置并核对不含凸起的厚度；当前v1网格完全未改。重建检查逐文件SHA与已冻结新资产一致，旧刀URDF和保护的H/S权重SHA也复核一致。

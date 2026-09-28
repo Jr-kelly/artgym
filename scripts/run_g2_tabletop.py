@@ -169,6 +169,10 @@ def main():
     cfg=configuration('wuji_acquisition_bridge3_hemisphere',1,
         ['hand=wuji_paper_official_actuator','object=knife_wuji_bridge3_20260922','test=True','rl_device=cpu'],train='wujiAcquisitionSAPG')
     (args.output/'frozen-config.yaml').write_text(OmegaConf.to_yaml(cfg,resolve=True))
+    if knife_geometry is not None:
+        assumed=knife_geometry.spec['physics_hypothesis']
+        assert np.allclose(list(cfg.object.default_props.mass),[assumed['body_mass_kg'],assumed['button_mass_kg']],rtol=0,atol=1e-9)
+        assert assumed['knife_friction']==3. and assumed['slider_damping']==.3 and assumed['slider_friction']==.001, 'This diagnostic retains baseline physics; do not silently ignore changed spec values'
     assert cfg.task.env.forceScale==0 and cfg.task.env.actionsMovingAverage==1 and not cfg.task.env.useRelativeControl
     k=G2Kinematics(); model=json.loads((ROOT/'assets/robots/g2_wuji/audit.json').read_text())
     s=np.load(ROOT/'caches/initial_grasp/wuji/knife_wuji_bridge3_20260922/000/train/valid_grasps.npy')[args.grasp]
@@ -330,6 +334,11 @@ def main():
         hand_asset_sha256=hashlib.sha256((ROOT/'assets/hands/wuji_artbot/right.urdf').read_bytes()).hexdigest(),
         knife_asset_sha256=hashlib.sha256(knife_asset_path.read_bytes()).hexdigest(),
         knife_asset_path=str(knife_asset_path),knife_asset_spec=knife_geometry.spec if knife_geometry is not None else None,
+        knife_body_names=gym.get_asset_rigid_body_names(obj_asset),
+        knife_loaded_shape_count=gym.get_asset_rigid_shape_count(obj_asset),
+        knife_loaded_shapes=[{name:(int(getattr(v,name)) if name=='filter' else float(getattr(v,name)))
+            for name in ['friction','rolling_friction','torsion_friction','restitution','contact_offset','rest_offset','filter'] if hasattr(v,name)}
+            for v in gym.get_actor_rigid_shape_properties(env,knife)],
         robot_dof_properties={n:props[n].tolist() for n in props.dtype.names},
         knife_dof_properties={n:p[n].tolist() for n in p.dtype.names},
         robot_body_names=rb_names,robot_gravity_flags=[int(v.flags) for v in gym.get_actor_rigid_body_properties(env,robot)],
@@ -340,6 +349,13 @@ def main():
     effective['knife_effective_inertial']=[dict(mass=float(v.mass),com=[float(getattr(v.com,n)) for n in ['x','y','z']],
         inertia=[[float(getattr(getattr(v.inertia,row),col)) for col in ['x','y','z']] for row in ['x','y','z']]) for v in gym.get_actor_rigid_body_properties(env,knife)]
     (args.output/'physics.json').write_text(json.dumps(effective,indent=2)+'\n')
+    if knife_geometry is not None:
+        (args.output/'effective-configuration.json').write_text(json.dumps(dict(
+            base_configuration='frozen-config.yaml records inherited controller settings; it is not the effective knife geometry',
+            geometry_override='knife-asset-spec.json',effective_simulator_properties='physics.json',
+            knife_asset_urdf=str(knife_asset_path),knife_file_sha256=knife_geometry.spec['file_sha256'],
+            cli={key:str(value) if isinstance(value,Path) else value for key,value in vars(args).items()},
+            policies_executed=False,scope='Measured-envelope acquisition diagnostic; no policy operation'),indent=2)+'\n')
     closed=s[20:40].copy();opened=closed.copy()
     if preset_candidate is not None:
         assert np.all(s[:20]>=policy.fk.lower-1e-6) and np.all(s[:20]<=policy.fk.upper+1e-6)
@@ -548,6 +564,28 @@ def main():
                 (args.output/'settled-table-localization.json').write_text(json.dumps(dict(
                     object=pose(actual_table_object).tolist(),grasp_q=grasp_q.tolist(),lift_q=lift_q.tolist(),
                     grasp_ik=grasp_error,lift_ik=lift_error,method='One simulated truth sample after natural tabletop settling; only arm motor targets replanned.'),indent=2)+'\n')
+                if knife_geometry is not None:
+                    # Bump-down resting may tilt differently from the old
+                    # asset used for offline planning. Recheck finger/table
+                    # geometry using the actual settled pose before approach.
+                    from scripts.g2_contact_geometry import DigitGeometry
+                    check_geometry=DigitGeometry(max_face_axes=24)
+                    waypoints=custom_plan.get('close_waypoints',[dict(q=opened.tolist()),dict(q=closed.tolist())])
+                    table_rows=[]
+                    for segment,(start,end) in enumerate(zip(waypoints[:-1],waypoints[1:])):
+                        for u in np.linspace(0,1,21):
+                            qcheck=np.asarray(start['q'])*(1-u)+np.asarray(end['q'])*u
+                            frames=check_geometry.w.forward(qcheck)
+                            minimum=float('inf');minimum_link=None
+                            for name,meshes in check_geometry.meshes.items():
+                                frame=measured_grasp@frames[name]
+                                height=min(float((v@frame[2,:3]+frame[2,3]-table_z).min()) for v,_ in meshes)
+                                if height<minimum:minimum=height;minimum_link=name
+                            table_rows.append(dict(segment=segment,fraction=float(u),table_clearance_m=minimum,hand_link=minimum_link))
+                    table_audit=dict(scope='Nominal hand motor path recheck at actual naturally settled newknife pose, before approach; not actual servo tracking',
+                        threshold_m=.0005,rows=table_rows,passed=all(r['table_clearance_m']>=.0005 for r in table_rows))
+                    (args.output/'settled-hand-table-path-check.json').write_text(json.dumps(table_audit,indent=2)+'\n')
+                    if not table_audit['passed']:raise ValueError('New knife settled pose invalidates hand/table path clearance; stop before approach')
             phases=[('approach',grasp_q,opened,4),('close',grasp_q,closed,3)]
             if args.closed_settle_seconds:phases.append(('closed_settle',None,None,args.closed_settle_seconds))
             phases.append(('lift',lift_q,closed,4))

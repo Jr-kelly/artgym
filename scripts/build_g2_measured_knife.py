@@ -58,11 +58,19 @@ def main():
     xml.write(a.output/'mobility.urdf',encoding='utf-8',xml_declaration=True)
     closed=np.concatenate([body,button+[0,h['button_center_y_m'],h['button_closed_center_z_m']],bump+[0,h['button_center_y_m'],h['button_closed_center_z_m']]])
     bounds=closed.max(0)-closed.min(0)
-    assert np.allclose(bounds,[m['overall_max_width_m'],m['overall_thickness_m'],m['overall_length_m']],atol=1e-9)
+    interpretation=h.get('thickness_measurement_interpretation','closed_assembly_includes_bump')
+    assert interpretation in ['closed_assembly_includes_bump','closed_assembly_excludes_bump']
+    measured_bounds=bounds.copy()
+    if interpretation=='closed_assembly_excludes_bump':
+        # An explicitly different future asset hypothesis only. Never silently
+        # stack bump height on the user measurement in the primary version.
+        measured_bounds[1]=np.ptp(np.concatenate([body,button+[0,h['button_center_y_m'],h['button_closed_center_z_m']]]),axis=0)[1]
+    assert np.allclose(measured_bounds,[m['overall_max_width_m'],m['overall_thickness_m'],m['overall_length_m']],atol=1e-9)
     s.update(asset_urdf=str((a.output/'mobility.urdf').resolve().relative_to(ROOT)),
         generated_audit=dict(closed_envelope_xyz_m=bounds.tolist(),collision_components=3,passive_prismatic_dofs=1,
             button_length_m=float(np.ptp(button[:,2])),travel_m=j['travel_m'],bump_height_m=h['bump_height_m'],
-            interpretation='Envelope agreement under explicit include-bump thickness hypothesis, not a measured CAD replica',
+            thickness_measurement_interpretation=interpretation,
+            interpretation='Envelope agreement under the declared thickness hypothesis, not a measured CAD replica',
             baseline_urdf_sha256=hashlib.sha256(baseline.read_bytes()).hexdigest()))
     s['file_sha256']={str(p.relative_to(a.output)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(a.output.rglob('*')) if p.is_file()}
     (a.output/'asset-spec.json').write_text(json.dumps(s,indent=2)+'\n')
