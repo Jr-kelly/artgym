@@ -1,0 +1,186 @@
+scripts/run_g2_tabletop.py
+  s_87fdc32a1dcd01::t_ea7fd94e9e2213 101,603
+  s_87fdc32a1dcd01::t_ee5e3ba352166d 106,119,553
+  s_87fdc32a1dcd01::t_37d398e82b739c 107,532-534,565-567
+scripts/search_g2_palm_down_pinch.py
+  s_87fdc32a1dcd01::t_fcc464a9bbc25b 24-25,38-41,58,69,113,125,141-142
+  s_87fdc32a1dcd01::t_4b9ce0c796a075 23,73-75,90-92,115,139-140
+scripts/plan_g2_side_pinch_motion.py
+  s_87fdc32a1dcd01::t_300e53900e1fc6 34,137-138,150
+  s_87fdc32a1dcd01::t_ea7fd94e9e2213 32,68-73,102,145
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "4f2248a274f93bb26228056c87d2d0ae5e8eadac",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.cache_read_tokens": "1023965064",
+        "tlab.token_usage.output_tokens": "7061326",
+        "tlab.session_started_at": "2026-09-28T07:37:00Z",
+        "tlab.token_usage.input_tokens": "50533362"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "configs/g2_finger_surface/balanced-side-pinch-v1-arm-seed.json",
+      "additions": {
+        "human": 9
+      }
+    },
+    {
+      "new_path": "configs/g2_finger_surface/balanced-side-pinch-v1.json",
+      "additions": {
+        "human": 438
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/new-five-pad-evidence/F1-03-measured-summary.json",
+      "additions": {
+        "human": 269
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/new-five-pad-evidence/F1-03-preregister.json",
+      "additions": {
+        "human": 21
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/new-five-pad-evidence/F1-04-preregister.json",
+      "additions": {
+        "human": 10
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/new-five-pad-evidence/balanced-long-axis-exact-audit.json",
+      "additions": {
+        "human": 27
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/new-five-pad-evidence/balanced-long-axis-side-face-refine-00.json",
+      "additions": {
+        "human": 220
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/new-five-pad-evidence/balanced-opening-margin-exact-audit.json",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/new-five-pad-evidence/balanced-opening-margin-side-face-refine-00.json",
+      "additions": {
+        "human": 221
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/new-five-pad-evidence/balanced-self-clear-exact-audit.json",
+      "additions": {
+        "human": 27
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/new-five-pad-evidence/balanced-self-clear-side-face-refine-00.json",
+      "additions": {
+        "human": 284
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "old_path": "research/g2-finger-surface-acquisition-20260928.md",
+      "new_path": "research/g2-finger-surface-acquisition-20260928.md",
+      "additions": {
+        "human": 13
+      },
+      "deletions": {
+        "human": 1
+      }
+    },
+    {
+      "old_path": "scripts/plan_g2_side_pinch_motion.py",
+      "new_path": "scripts/plan_g2_side_pinch_motion.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 13
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 5
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/run_g2_tabletop.py",
+      "new_path": "scripts/run_g2_tabletop.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 12
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 3
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/search_g2_palm_down_pinch.py",
+      "new_path": "scripts/search_g2_palm_down_pinch.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 22
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 8
+          }
+        ]
+      }
+    }
+  ]
+}
