@@ -1,0 +1,162 @@
+scripts/audit_g2_side_pickup_candidate.py
+  s_87fdc32a1dcd01::t_adff183ff21b8d 1-70
+scripts/plan_g2_four_finger_side_pickup.py
+  s_87fdc32a1dcd01::t_12f409d259a242 1-11,13-25,28,30-53,55-58,77-94,96-107,110-111,113-114,120-132,166,169-175,177-182,188-197
+  s_87fdc32a1dcd01::t_fd0acd33a2edbf 27,29,54,59-76,95,108-109,139-142,148-157,167-168,176,186-187
+  s_87fdc32a1dcd01::t_52cebc507a5440 12,26,112,115-119,133-138,143-147,158-165,183-185
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "fb5e7c4d62edb1b9ab51929f26a606fc43ceb642",
+  "prompts": {},
+  "sessions": {
+    "s_87fdc32a1dcd01": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd19-33a4-7b20-8df3-7a71faff56ec",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_read_tokens": "1013936681",
+        "tlab.token_usage.output_tokens": "6987615",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.session_started_at": "2026-09-28T06:54:28Z",
+        "tlab.token_usage.input_tokens": "50095420"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/g2-finger-surface-20260928/side-pinch-evidence/side-pinch-convex-free-length.log",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/side-pinch-evidence/side-pinch-convex-free-length/exact-geometry-audit.json",
+      "additions": {
+        "human": 57
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/side-pinch-evidence/side-pinch-convex-free-length/hard-constraint-refinement.json",
+      "additions": {
+        "human": 221
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/side-pinch-evidence/side-pinch-convex-free-length/summary.json",
+      "additions": {
+        "human": 228
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/side-pinch-evidence/side-pinch-hard-constraints.log",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/side-pinch-evidence/side-pinch-hard-constraints/exact-geometry-audit.json",
+      "additions": {
+        "human": 62
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/side-pinch-evidence/side-pinch-hard-constraints/hard-constraint-refinement.json",
+      "additions": {
+        "human": 219
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/side-pinch-evidence/side-pinch-hard-constraints/summary.json",
+      "additions": {
+        "human": 226
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/side-pinch-evidence/side-pinch-screen.log",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/side-pinch-evidence/side-pinch-screen/bounded-wrist-all-five-pads.json",
+      "additions": {
+        "human": 217
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/side-pinch-evidence/side-pinch-screen/bounded-wrist-less-flexed-seed.json",
+      "additions": {
+        "human": 217
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/side-pinch-evidence/side-pinch-screen/fixed-old-wrist-all-five-pads.json",
+      "additions": {
+        "human": 217
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-20260928/side-pinch-evidence/side-pinch-screen/summary.json",
+      "additions": {
+        "human": 658
+      }
+    },
+    {
+      "new_path": "research/g2-finger-surface-acquisition-20260928.md",
+      "additions": {
+        "human": 56
+      }
+    },
+    {
+      "new_path": "scripts/audit_g2_side_pickup_candidate.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 70
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/plan_g2_four_finger_side_pickup.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_87fdc32a1dcd01",
+            "lines": 197
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "G2_TABLETOP_HANDOFF.md",
+      "new_path": "G2_TABLETOP_HANDOFF.md",
+      "additions": {
+        "human": 8
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 8
+      }
+    },
+    {
+      "old_path": "configs/g2_finger_surface/operation-target-v1.json",
+      "new_path": "configs/g2_finger_surface/operation-target-v1.json",
+      "additions": {
+        "human": 7
+      },
+      "deletions": {
+        "human": 1
+      }
+    }
+  ]
+}
