@@ -123,3 +123,7 @@ D预测总时长超过原4h看护上限；验证子进程保留GPU租约后只�
 ## 多抓姿 2026-09-28T15:42:54.295444+00:00 training_source_unchanged_verified
 
 四臂继续运行至A212/B167/C193/D122，八个核心训练、控制、观测、PPO源码远端/本地/初始manifest哈希全部一致；后续评估与看护变更没有修改在途训练逻辑。 证据：research/multigrasp-20260928/receipts/training-source-unchanged-1543.json, research/multigrasp-20260928/receipts/process-throughput-20260928T1542.json。下一步：等待训练产生预注册checkpoint并继续至1000轮。
+
+## 多抓姿 2026-09-28T15:52:36.900583+00:00 A_checkpoint250_verified_and_backed_up
+
+A首个预注册CP250实际保存，CPU核验250轮/40960000交互、48模型张量有限、optimizer/RNN完整；远端与本地备份SHA256一致：7bb42b50049dd72c718e2b8f4dacf15c02f5f1061bae049d58981e68fdc29ecf。此CP未评估/未选择，四训练原进程继续。 证据：research/multigrasp-20260928/receipts/checkpoints-cp250-first-20260928.json, research/multigrasp-20260928/receipts/process-throughput-20260928T1550.json, runs/mg_A_seed2801/checkpoints/epoch_000250.pth。下一步：继续1000轮训练，保留统一开发选CP和冻结测试；新测试补充生成/物理筛选仍有界排队。
