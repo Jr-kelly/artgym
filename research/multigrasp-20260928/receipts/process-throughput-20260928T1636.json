@@ -1,0 +1,54 @@
+{
+  "observed_utc": "2026-09-28T16:36:48.254844+00:00",
+  "arms": {
+    "A": {
+      "status": "running",
+      "pid": 2449,
+      "pid_exists": true,
+      "cmdline": "/home/wangjiarui/artgym-runtime/bin/python -m scripts.train_wuji_multigrasp task=wuji_multigrasp hand=wuji_paper_official_actuator object=knife_wuji_bridge3_20260922 train=wujiAcquisitionSAPG num_envs=5120 experiment=mg_A_seed2801 max_iterations=1000 multi_gpu=False headless=True graphics_device_id=-1 force_render=False pipeline=gpu num_subscenes=0 seed=2026092801 train.params.config.expl_coef_block_size=1024 train.params.config.minibatch_size=32768 train.params.config.save_frequency=250 train.params.config.checkpoint_keep_recent=10 train.params.config.evaluation_frequency=100000 object.reward.GoalDistance2=0.1 task.env.absolutePoseObjective.coefficient=1.0 task.env.supportActionSpan=0.04 task.env.trainingStates=research/multigrasp-20260928/data/small.npy ",
+      "epoch": 501,
+      "total_epochs": 1000,
+      "mean_last20_epoch_seconds": 10.63155,
+      "remaining_seconds_estimate": 5305.1434500000005,
+      "job_elapsed_seconds": 5663.010018893983,
+      "job_timeout_seconds": 14400
+    },
+    "B": {
+      "status": "running",
+      "pid": 3149,
+      "pid_exists": true,
+      "cmdline": "/home/wangjiarui/artgym-runtime/bin/python -m scripts.train_wuji_multigrasp task=wuji_multigrasp hand=wuji_paper_official_actuator object=knife_wuji_bridge3_20260922 train=wujiAcquisitionSAPG num_envs=5120 experiment=mg_B_seed2801 max_iterations=1000 multi_gpu=False headless=True graphics_device_id=-1 force_render=False pipeline=gpu num_subscenes=0 seed=2026092801 train.params.config.expl_coef_block_size=1024 train.params.config.minibatch_size=32768 train.params.config.save_frequency=250 train.params.config.checkpoint_keep_recent=10 train.params.config.evaluation_frequency=100000 object.reward.GoalDistance2=0.1 task.env.absolutePoseObjective.coefficient=1.0 task.env.supportActionSpan=0.04 task.env.trainingStates=research/multigrasp-20260928/data/more.npy ",
+      "epoch": 405,
+      "total_epochs": 1000,
+      "mean_last20_epoch_seconds": 13.090700000000002,
+      "remaining_seconds_estimate": 7788.966500000001,
+      "job_elapsed_seconds": 5542.652124691987,
+      "job_timeout_seconds": 14400
+    },
+    "C": {
+      "status": "running",
+      "pid": 2499,
+      "pid_exists": true,
+      "cmdline": "/home/wangjiarui/artgym-runtime/bin/python -m scripts.train_wuji_multigrasp task=wuji_multigrasp hand=wuji_paper_official_actuator object=knife_wuji_bridge3_20260922 train=wujiAcquisitionSAPG num_envs=5120 experiment=mg_C_seed2801 max_iterations=1000 multi_gpu=False headless=True graphics_device_id=-1 force_render=False pipeline=gpu num_subscenes=0 seed=2026092801 train.params.config.expl_coef_block_size=1024 train.params.config.minibatch_size=32768 train.params.config.save_frequency=250 train.params.config.checkpoint_keep_recent=10 train.params.config.evaluation_frequency=100000 object.reward.GoalDistance2=0.1 task.env.absolutePoseObjective.coefficient=1.0 task.env.supportActionSpan=0.20 task.env.trainingStates=research/multigrasp-20260928/data/small.npy ",
+      "epoch": 457,
+      "total_epochs": 1000,
+      "mean_last20_epoch_seconds": 11.493400000000001,
+      "remaining_seconds_estimate": 6240.916200000001,
+      "job_elapsed_seconds": 5664.980671508005,
+      "job_timeout_seconds": 14400
+    },
+    "D": {
+      "status": "running",
+      "pid": 4716,
+      "pid_exists": true,
+      "cmdline": "/home/wangjiarui/artgym-runtime/bin/python -m scripts.train_wuji_multigrasp task=wuji_multigrasp hand=wuji_paper_official_actuator object=knife_wuji_bridge3_20260922 train=wujiAcquisitionSAPG num_envs=5120 experiment=mg_D_seed2801 max_iterations=1000 multi_gpu=False headless=True graphics_device_id=-1 force_render=False pipeline=gpu num_subscenes=0 seed=2026092801 train.params.config.expl_coef_block_size=1024 train.params.config.minibatch_size=32768 train.params.config.save_frequency=250 train.params.config.checkpoint_keep_recent=10 train.params.config.evaluation_frequency=100000 object.reward.GoalDistance2=0.1 task.env.absolutePoseObjective.coefficient=1.0 task.env.supportActionSpan=0.20 task.env.trainingStates=research/multigrasp-20260928/data/more.npy ",
+      "epoch": 331,
+      "total_epochs": 1000,
+      "mean_last20_epoch_seconds": 14.589850000000002,
+      "remaining_seconds_estimate": 9760.609650000002,
+      "job_elapsed_seconds": 5165.2952082157135,
+      "job_timeout_seconds": 21600
+    }
+  },
+  "gpu": "0, 91 %, 9809 MiB\n1, 90 %, 8239 MiB\n2, 69 %, 8423 MiB\n3, 92 %, 9209 MiB\n"
+}

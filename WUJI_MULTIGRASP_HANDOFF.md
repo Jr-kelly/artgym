@@ -159,3 +159,19 @@ Backed up immutable B-250 with identical remote/local SHA256; not evaluated or s
 ## 多抓姿 2026-09-28T16:06:53.016840+00:00 final_analysis_realtrace_validated
 
 最终分析补充逐回合时序诊断，已在旧参考2s/5s/arrival三套真实轨迹共72回合复算，与原报告完全一致；固定严格端点由独立代码交叉核验。首次路径少一层evidence读取失败，修正后通过，无新物理或权重选择。增量a3db8f2远端核验通过。 证据：research/multigrasp-20260928/receipts/final-analysis-realtrace-validation.json, scripts/analyze_wuji_multigrasp_frozen.py。下一步：四训练继续1000轮，开发冻结后运行同预算及开发择优两套正式测试。
+
+## 多抓姿 2026-09-28T16:16:34.523291+00:00 milestone_backup_verified
+
+Backed up immutable D-250 with identical remote/local SHA256; not evaluated or selected. 证据：/data/research/artgym-experiments-20260921/multigrasp-20260928/research/multigrasp-20260928/receipts/checkpoint-backups/D-250.json。下一步：Continue fixed1000epoch training and preregistered development selection。
+
+## 多抓姿 2026-09-28T16:17:35.381774+00:00 all_four_cp250_integrity_pass
+
+D250已备份；四臂CP250全部CPU加载检查通过，epoch250/frame40960000，模型张量有限且含优化器。D权重SHA40ad0ffd114a58fbee04043975bd974917a414509f2ad1a76af52b755f1c10ef；四正式训练继续，无提前策略测试或选择。 证据：research/multigrasp-20260928/receipts/cp250-ABCD-1617.json, research/multigrasp-20260928/receipts/checkpoint-backups/D-250.json。下一步：继续1000epoch及预注册开发评估，待新测试物理门禁后冻结正式比较。
+
+## 多抓姿 2026-09-28T16:36:58.949887+00:00 milestone_backup_verified
+
+Backed up immutable A-500 with identical remote/local SHA256; not evaluated or selected. 证据：/data/research/artgym-experiments-20260921/multigrasp-20260928/research/multigrasp-20260928/receipts/checkpoint-backups/A-500.json。下一步：Continue fixed1000epoch training and preregistered development selection。
+
+## 多抓姿 2026-09-28T16:37:35.959615+00:00 A_cp500_and_full_analyzer_validation
+
+A500已真实保存及CPU完整性核验（81920000交互），所有四臂250已备份。正式分析入口用旧参考重用构造的验证夹具完整执行，通过360行CSV/JSON、相同输入零因素差、时序及独立评分检查；夹具不是四臂结果且临时输出已删除。训练A501/B405/C457/D331在16:36UTC实查存活，B看护余量17.8min。 证据：research/multigrasp-20260928/receipts/cp500-first-1638.json, research/multigrasp-20260928/receipts/final-analysis-export-validation.json。下一步：继续同预算训练及后续开发评估；优先检查实际进程和B超时余量。

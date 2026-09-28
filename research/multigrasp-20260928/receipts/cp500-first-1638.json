@@ -1,0 +1,45 @@
+{
+  "scope": "CPU checkpoint integrity only; no simulation, training update, model selection or success claim",
+  "rows": [
+    {
+      "arm": "A",
+      "status": "passed",
+      "epoch": 500,
+      "frame": 81920000,
+      "sha256": "a8fdc2fe10c7905889978d290607ba5e297188482f42fcccb0c47de7d02e9b51",
+      "bytes": 89411908,
+      "model_tensor_count": 48,
+      "optimizer_saved": true,
+      "keys": [
+        "current_lengths",
+        "current_rewards",
+        "current_shaped_rewards",
+        "dones",
+        "env_state",
+        "epoch",
+        "frame",
+        "last_mean_rewards",
+        "model",
+        "num_actors",
+        "obs",
+        "optimizer",
+        "rnn_states",
+        "trackers",
+        "world_size"
+      ],
+      "finite": true
+    },
+    {
+      "arm": "B",
+      "status": "missing"
+    },
+    {
+      "arm": "C",
+      "status": "missing"
+    },
+    {
+      "arm": "D",
+      "status": "missing"
+    }
+  ]
+}
