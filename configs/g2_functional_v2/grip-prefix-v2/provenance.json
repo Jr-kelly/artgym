@@ -1,0 +1,16 @@
+{
+  "source": "/data/research/artgym-g2-functional-v2-20260928/runs/g2-functional-v2-20260928/V2-09-B-short-lift-yaw45",
+  "sha256": "774791954e8ab439b229bbe96af62171d556c86a59a44655ab11a54804253ba2",
+  "initial_frame": 0,
+  "initial_condition": "Flat normal table knife, open hand above it; first recorded30Hz step after scene initialization. No grasp contact.",
+  "prefix_frames": [
+    1,
+    269
+  ],
+  "learned_frames": [
+    270,
+    419
+  ],
+  "reset_scope": "Training episodes only. No state writes after each episode initialization; full physical motor approach and close.",
+  "change_from_G1": "Same robot/knife/physics/3mm close/lift/reward/observation/motor bounds; initialize unloaded then physically execute prefix. Synchronous finite-horizon lift episodes."
+}

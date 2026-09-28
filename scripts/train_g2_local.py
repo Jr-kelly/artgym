@@ -65,7 +65,7 @@ def expand_support_checkpoint(model, saved):
 def main():
     process_start = time.monotonic()
     p = argparse.ArgumentParser()
-    p.add_argument('--task-variant',choices=['legacy','v2-grip'],default='legacy')
+    p.add_argument('--task-variant',choices=['legacy','v2-grip','v2-prefix-grip'],default='legacy')
     p.add_argument('--task', choices=['H','S'], default='H')
     p.add_argument('--route', choices=['support','joint'], default='support')
     p.add_argument('--num-envs', type=int, default=64)
@@ -92,7 +92,10 @@ def main():
     torch.set_num_threads(1)
     saved=torch.load(args.checkpoint,map_location='cuda:0') if args.checkpoint else None
     plan=json.loads(args.thumb_plan.read_text()) if args.thumb_plan else (saved.get('thumb_plan') if saved else None)
-    if args.task_variant=='v2-grip':
+    if args.task_variant=='v2-prefix-grip':
+        from scripts.g2_v2_prefix_grip_env import PrefixGripV2
+        env=PrefixGripV2(args.task,args.num_envs,args.route)
+    elif args.task_variant=='v2-grip':
         from scripts.g2_v2_grip_env import GripV2
         env=GripV2(args.task,args.num_envs,args.route)
     else:env = LocalG2(args.task, args.num_envs, args.route)
@@ -159,12 +162,12 @@ def main():
             update_attempt=update,
             transitions=transitions, episodes=episodes, learning_elapsed_seconds=time.monotonic()-clock,
             obs_dim=obs.shape[-1], action_dim=env.action_dim, task=args.task, route=args.route,
-            source='configs/g2_local/'+args.task+'-actual-state.npz',
+            source=('configs/g2_local/'+args.task+'-actual-state.npz' if args.task_variant=='legacy' else str(env.metadata.get('knife_relative_urdf'))),
             method='new privileged PPO motor residual; original weights unchanged',task_variant=args.task_variant,
             asset_urdf=env.metadata.get('knife_relative_urdf'),
-            data_source='configs/g2_functional_v2/grip-local-v1' if args.task_variant=='v2-grip' else None,
+            data_source={'v2-grip':'configs/g2_functional_v2/grip-local-v1','v2-prefix-grip':'configs/g2_functional_v2/grip-prefix-v2'}.get(args.task_variant),
             thumb_plan=env.thumb_plan,
-            action_mapping='support16 absolute+slew; joint thumb4 uses .20rad absolute residual around IK prior or .025rad incremental correction around teacher; total thumb step capped .025rad',
+            action_mapping=('all20 motor references: source closed target + absolute .20rad residual, slew .02rad/control' if args.task_variant!='legacy' else 'support16 absolute+slew; joint thumb4 uses .20rad absolute residual around IK prior or .025rad incremental correction around teacher; total thumb step capped .025rad'),
             terminal_return='absorbing -8/step gamma.995 through finite horizon'), str(path)+'.tmp')
         os.replace(str(path)+'.tmp', path)
 
@@ -246,6 +249,8 @@ def main():
                 interrupted = int((env.age>0).sum())
                 evaluation_start = time.monotonic()
                 env.reset()
+                if hasattr(env,'prefix_end'):
+                    np.savez_compressed(args.output/('prefix-end-%05d.npz'%update),**env.prefix_end)
                 evaluation_rows = []
                 evaluation_update = update
                 for frame_idx in range(env.steps):
@@ -268,6 +273,8 @@ def main():
                 evaluation_rows = None
                 success = float(np.mean(metric['success']))
                 quality = success*100 - float(np.mean(metric['world_rotation_rad'])) - 10*float(np.mean(metric['world_drift_m']))
+                if args.task_variant!='legacy':
+                    quality=success*100-float(np.mean(metric['hand_relative_rotation_rad']))-10*float(np.mean(metric['short_lift_tracking_error_m']))+10*float(np.mean(metric['minimum_hold_rise_m']))
                 if args.task == 'S':
                     quality -= 25*float(np.mean(metric['endpoint_max_errors_m']))
                 if quality > best:

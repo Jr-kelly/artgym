@@ -7,9 +7,10 @@ from scripts.g2_cartesian_acquisition import plan_translation
 from scripts.g2_table_collision import ArmTableCollision
 ROOT=Path(__file__).resolve().parents[1]
 def main():
- p=argparse.ArgumentParser();p.add_argument('--plan',type=Path,required=True);p.add_argument('--localization',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--lift',type=float,default=.03);a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
+ p=argparse.ArgumentParser();p.add_argument('--plan',type=Path,required=True);p.add_argument('--localization',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--lift',type=float,default=.03);p.add_argument('--seed',type=Path);a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
  d=json.loads(a.plan.read_text());loc=json.loads(a.localization.read_text());obj=transform(loc['object'][:3],loc['object'][3:]);target=obj@np.array(d['wrist_in_knife']);above=target.copy();above[2,3]+=.16;up=target.copy();up[2,3]+=a.lift;k=G2Kinematics();check=ArmTableCollision(.75)
  seeds=[np.array(json.loads((ROOT/'configs/g2_finger_surface/measured-recorded-rest-pickup-v2-arm-seed.json').read_text())),np.array(json.loads((ROOT/'configs/g2_finger_surface/balanced-side-pinch-v1-arm-seed.json').read_text()))]
+ if a.seed:seeds=[np.array(json.loads(a.seed.read_text()))]
  rows=[]
  for i,seed in enumerate(seeds):
   row=dict(seed=i);rows.append(row)

@@ -9,7 +9,7 @@ ROOT=Path(__file__).resolve().parents[1]
 class GripV2(LocalG2):
  def __init__(self,task='H',num_envs=1,route='joint',graphics=False,**kwargs):
   assert task=='H' and route=='joint';self.ready=False
-  data=ROOT/'configs/g2_functional_v2/grip-local-v1'
+  data=Path(kwargs.pop('data_directory',ROOT/'configs/g2_functional_v2/grip-local-v1'))
   super().__init__(task,num_envs,route,graphics=graphics,data_directory=data,**kwargs)
   self.path=torch.as_tensor(np.load(data/'arm-trajectory.npz')['reference_targets'].copy(),dtype=torch.float32)
   self.steps=150;self.ready=True;self.reset()
