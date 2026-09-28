@@ -1,0 +1,35 @@
+{
+  "plan": "runs/g2-finger-surface-20260928/side-face-refinement/side-face-refine-00.json",
+  "scope": "One geometric touch pose only, no motor preload/dynamics or path certificate",
+  "nonadjacent_hand_pairs_tested": 270,
+  "excluded": "Joint graph distances <=2 for mounting/joint shells only",
+  "hand_intersections": [
+    {
+      "pair": [
+        "hand_r_base_link",
+        "hand_r_thumb_link3"
+      ],
+      "intersection_inscribed_radius_m": 0.0011723913709898734
+    }
+  ],
+  "knife_intersections": [],
+  "overlap_definition": "Radius of a ball inside both convex hulls; not collision penetration depth or measured force",
+  "g2_ik": {
+    "residual": 5.828120799378025e-09,
+    "position_m": 8.734970605355715e-10,
+    "rotation_rad": 4.664658424355873e-09
+  },
+  "g2_arm_q": [
+    -1.4700727673260645,
+    -0.6624822553948513,
+    0.5027808953231557,
+    -1.3409039859254892,
+    -1.1811716316866723,
+    0.15337971227710287,
+    -0.317898944241353
+  ],
+  "g2_arm_table": [],
+  "joints_with_less_than_0p01rad_margin": [],
+  "ready_for_physics": false,
+  "outstanding": "Touch-only screening. Open/close approach, finger-table path and flip/flatten handoff not validated."
+}

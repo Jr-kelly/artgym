@@ -1,0 +1,27 @@
+{
+  "plan": "runs/g2-finger-surface-20260928/thumb-palm-clearance/side-face-refine-00.json",
+  "scope": "One geometric touch pose only, no motor preload/dynamics or path certificate",
+  "nonadjacent_hand_pairs_tested": 270,
+  "excluded": "Joint graph distances <=2 for mounting/joint shells only",
+  "hand_intersections": [],
+  "knife_intersections": [],
+  "overlap_definition": "Radius of a ball inside both convex hulls; not collision penetration depth or measured force",
+  "g2_ik": {
+    "residual": 7.883777941919128e-09,
+    "position_m": 1.5484447591474363e-09,
+    "rotation_rad": 4.8776075983408094e-09
+  },
+  "g2_arm_q": [
+    -1.5038859584445763,
+    -0.7093227106523582,
+    0.5827230679584686,
+    -1.2567288628696793,
+    -1.180875648671027,
+    0.0734157205002935,
+    -0.4653380587468402
+  ],
+  "g2_arm_table": [],
+  "joints_with_less_than_0p01rad_margin": [],
+  "ready_for_physics": false,
+  "outstanding": "Touch-only screening. Open/close approach, finger-table path and flip/flatten handoff not validated."
+}

@@ -101,6 +101,7 @@ def main():
     parser.add_argument('--air-flip-shift',type=float,nargs=3,default=[0.,0.,0.],help='Smooth world translation of the planned wrist-flip pivot; robot motion only.')
     parser.add_argument('--air-flip-only',action='store_true',help='Diagnostic: stop after free-space flip and actual settling, without transport or policy operation.')
     parser.add_argument('--lift-height',type=float,default=.20,help='Vertical wrist lift in metres; no object state changes.')
+    parser.add_argument('--pickup-retention-hold',type=float,default=0.,choices=[0.,1.],help='Separate fixed-reference1s physical hold after lift, gate before flip; records every finger without asserting force')
     parser.add_argument('--slider-face',choices=['up','down'],default='up',help='Initial tabletop placement; down starts above the protruding passive slider and settles freely.')
     parser.add_argument('--table-localization',choices=['configured','settled-truth'],default='configured',help='Acquisition-only ideal localization after natural tabletop settling.')
     parser.add_argument('--gait-plan',type=Path,help='Sequential single-digit motor plan with fixed-reference one-second hold gates after actual air flip.')
@@ -449,7 +450,7 @@ def main():
                 normal=[float(v[name]) for name in ('x','y','z')] if getattr(v.dtype,'names',None) else [float(x) for x in v]
                 pair_records.append(dict(step=global_step,phase=phase,body0=env_names.get(int(c['body0']),'ground'),
                     body1=env_names.get(int(c['body1']),'ground'),normal=normal,lambda_value=float(c['lambda'])))
-                if args.gait_plan or preset_candidate is not None:
+                if args.gait_plan or preset_candidate is not None or args.contact_diagnostics:
                     if not (args.output/'contact-schema.json').exists():
                         (args.output/'contact-schema.json').write_text(json.dumps(list(c.dtype.names))+'\n')
                     for key in ['local_pos0','local_pos1','localPos0','localPos1']:
@@ -525,6 +526,7 @@ def main():
                     object=pose(actual_table_object).tolist(),grasp_q=grasp_q.tolist(),lift_q=lift_q.tolist(),
                     grasp_ik=grasp_error,lift_ik=lift_error,method='One simulated truth sample after natural tabletop settling; only arm motor targets replanned.'),indent=2)+'\n')
             phases=[('approach',grasp_q,opened,4),('close',grasp_q,closed,3),('lift',lift_q,closed,4)]
+            if args.pickup_retention_hold:phases.append(('pickup_hold',None,closed,args.pickup_retention_hold))
             if args.air_flip:phases.append(('air_flip',None,closed,args.air_flip_seconds))
             if args.gait_plan:phases.append(('finger_gait',None,None,0))
             if args.table_supported_seat:
@@ -554,6 +556,14 @@ def main():
                                ('gravity_close_restore',None,restored,2),('gravity_close_return',None,restored,8)])
             if post_acquisition_pose is not None:phases.append(('operation_adjust',None,None,4))
             for label,end_arm,end_hand,seconds in phases:
+                if label=='pickup_hold':
+                    from scripts.g2_tabletop_metrics import fixed_acquisition_hold
+                    _,_,_,hold_w,hold_o,_=current();first=len(records)
+                    for _ in range(round(seconds/dt)):tick(label)
+                    check=fixed_acquisition_hold(records[first:],hold_o,hold_w,table_z)
+                    (args.output/'pickup-hold-check.json').write_text(json.dumps(check,indent=2)+'\n')
+                    if not check['retained']:raise ValueError('Pickup failed fixed-reference hold before flip')
+                    continue
                 if args.cartesian_acquisition and label=='close':end_arm=targets[arm_idx].copy()
                 if args.cartesian_acquisition and label in ['approach','lift']:
                     from scripts.g2_cartesian_acquisition import plan_translation

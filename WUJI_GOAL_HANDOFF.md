@@ -1,3 +1,6 @@
+## Latest 2026-09-28T15:21:26.893627+08:00 — active Goal, functional four-finger acquisition
+原生Goal已实查并建立为active（本轮平台get_goal最初返回null，已恢复；不是仅写文档）。独立分支feat/g2-wuji-finger-surface-grasp-20260928，保护旧成果。19个CPU几何求解已结束，0新物理/0训练。真实侧面高度可选后两候选初筛通过，但完整审计发现拇指link3/掌体相交；当前单次CPU加入该对分离约束，其余门槛不变。执行器仍为G2+Wuji一代，后续须审计全部手内相交和张开/接近/闭合路径。剩余8/80控制试验、4/4训练配置已用完；截止09-29 01:53:41 CST，00:23:41进入收尾。原monitor97337保留，CPU无需虚增GPU占用。最新状态runs/g2-finger-surface-20260928/state.json，结果research/g2-finger-surface-acquisition-20260928.md。唯一优先：得到无自碰撞、可接近的五指侧夹后，连续桌面物理验证。
+
 ## Latest 2026-09-28 15:03 CST — full-convex side-pinch follow-up retained
 最新第五次CPU几何求解允许纵向落点变化并加入完整凸包分离约束，SLSQP子问题失败：最大触达误差4.679mm，仍有刀身相交。两次精确凸包审计/G2可达检查保留；累计5几何、0新物理/0训练，无活动任务进程。几何拒绝不代表用户路线不可行。下一项：以掌心朝下、五指共同侧夹、关节有余量的新构型建立初值，同时保留完整凸包避障及纵向落点选择；不在原三指附近同一个失败初值上重复调参。原成功链路/模型/demo不变。详见 `research/g2-finger-surface-acquisition-20260928.md`。
 

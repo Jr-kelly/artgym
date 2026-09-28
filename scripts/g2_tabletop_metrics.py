@@ -4,6 +4,32 @@ from scipy.spatial.transform import Rotation
 from scripts.g2_kinematics import transform
 
 
+def fixed_acquisition_hold(records,initial_object,initial_wrist,table_height=.75):
+    """Independent fixed-reference hold, unrelated to a cached functional pose."""
+    obj=np.asarray([r['object'] for r in records]);wrist=np.asarray([r['wrist'] for r in records])
+    objt=np.array([transform(o[:3],o[3:]) for o in obj])
+    rel=np.array([np.linalg.inv(transform(w[:3],w[3:]))@o for w,o in zip(wrist,objt)])
+    rel0=np.linalg.inv(initial_wrist)@initial_object
+    world_dist=np.linalg.norm(objt[:,:3,3]-initial_object[:3,3],axis=1)
+    world_ang=Rotation.from_matrix(initial_object[:3,:3].T@objt[:,:3,:3]).magnitude()
+    hand_dist=np.linalg.norm(rel[:,:3,3]-rel0[:3,3],axis=1)
+    hand_ang=Rotation.from_matrix(rel0[:3,:3].T@rel[:,:3,:3]).magnitude()
+    contact=np.asarray([r['finger_knife_contacts'] for r in records])>0
+    opposed=contact[:,0]&(contact[:,1:].sum(1)>=2)
+    table_free=bool(all(r['knife_table_contacts']==0 for r in records))
+    stable=bool(world_dist.max()<.01 and world_ang.max()<.25 and hand_dist.max()<.01 and hand_ang.max()<.25)
+    retained=bool(stable and obj[:,2].min()>table_height+.10 and table_free and opposed.mean()>=.9)
+    return dict(retained=retained,stable=stable,frames=len(records),
+        fixed_initial_object=initial_object.tolist(),fixed_initial_hand_object=rel0.tolist(),
+        world_translation_max_m=float(world_dist.max()),world_rotation_max_rad=float(world_ang.max()),
+        hand_translation_max_m=float(hand_dist.max()),hand_rotation_max_rad=float(hand_ang.max()),
+        min_object_height_m=float(obj[:,2].min()),table_free=table_free,
+        contact_order=['thumb','index','middle','ring','pinky'],per_finger_contact_fraction=contact.mean(0).tolist(),
+        all_five_contact_fraction=float(contact.all(1).mean()),opposed_contact_fraction=float(opposed.mean()),
+        interpretation='Contact presence is not measured load. References fixed before the hold, not refreshed.',
+        thresholds=dict(translation_m=.01,rotation_rad=.25,min_height_m=table_height+.10,opposed_fraction=.9))
+
+
 def acquisition_hold(trace,reference,table_height=.75):
     indices=np.flatnonzero(np.asarray(trace['phase'])=='settle_history')[-30:]
     if len(indices)<30:return dict(success=False,reason='fewer_than_30_actual_settled_frames')

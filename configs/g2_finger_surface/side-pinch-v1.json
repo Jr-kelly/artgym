@@ -1,0 +1,292 @@
+{
+  "name": "side-face-refine-00",
+  "kind": "five_finger_side_pinch_motor_plan",
+  "validation": "No physics execution; accepted only requests further exact collision/path checks",
+  "initial_flex": null,
+  "initial_pitch_rad": null,
+  "initial_thumb": null,
+  "wrist_in_knife": [
+    [
+      -0.10986728998070813,
+      -0.6468577633743764,
+      0.7546550288407242,
+      -0.07505851240405076
+    ],
+    [
+      0.8720289111543041,
+      0.30161024833370187,
+      0.3854826016970434,
+      -0.09254120503604814
+    ],
+    [
+      -0.47696410420841284,
+      0.7004329318802637,
+      0.5309415704522338,
+      -0.0599999999999913
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "touch_q": [
+    0.07843532575343617,
+    -0.08832847259807945,
+    1.01148157337311,
+    1.2885144918746534,
+    0.31726100181641653,
+    -0.06110134798499514,
+    1.2470483717628926,
+    0.6932074314834643,
+    0.5793293406039903,
+    0.0005646386830369431,
+    1.1643466940212235,
+    0.4954136925755766,
+    0.45998183353338473,
+    0.07217709350756095,
+    1.297897215912216,
+    0.3942795718907313,
+    0.546705138077916,
+    0.5695677885301977,
+    0.8459501774515181,
+    -0.4548999937997843
+  ],
+  "joint_names": [
+    "hand_r_index_joint1",
+    "hand_r_index_joint2",
+    "hand_r_index_joint3",
+    "hand_r_index_joint4",
+    "hand_r_middle_joint1",
+    "hand_r_middle_joint2",
+    "hand_r_middle_joint3",
+    "hand_r_middle_joint4",
+    "hand_r_pinky_joint1",
+    "hand_r_pinky_joint2",
+    "hand_r_pinky_joint3",
+    "hand_r_pinky_joint4",
+    "hand_r_ring_joint1",
+    "hand_r_ring_joint2",
+    "hand_r_ring_joint3",
+    "hand_r_ring_joint4",
+    "hand_r_thumb_joint1",
+    "hand_r_thumb_joint2",
+    "hand_r_thumb_joint3",
+    "hand_r_thumb_joint4"
+  ],
+  "contact_targets": [
+    [
+      -0.0095,
+      -0.003,
+      0.016308588859969653
+    ],
+    [
+      0.0095,
+      -0.003,
+      0.019
+    ],
+    [
+      0.0095,
+      -0.003,
+      -0.007
+    ],
+    [
+      0.0095,
+      -0.003,
+      -0.027595404082947916
+    ],
+    [
+      0.0095,
+      -0.003,
+      -0.05408181048380503
+    ]
+  ],
+  "contact_normals": [
+    [
+      -1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ]
+  ],
+  "contact_points": [
+    [
+      -0.009704701779642994,
+      -0.003128987393872314,
+      0.016308588859969653
+    ],
+    [
+      0.009714790597727832,
+      -0.0030295759952994913,
+      0.018991838565596608
+    ],
+    [
+      0.009737191536264667,
+      -0.003002995718015344,
+      -0.0070009076646432985
+    ],
+    [
+      0.009729557192848723,
+      -0.0030008204924930042,
+      -0.027595404082947916
+    ],
+    [
+      0.009706225937969092,
+      -0.0030000131624170878,
+      -0.05408181048380503
+    ]
+  ],
+  "contact_errors_m": [
+    0.00024195157855856267,
+    0.00021697084915203634,
+    0.00023721218994209644,
+    0.0002295586591625699,
+    0.00020622593838913925
+  ],
+  "pad_facing_cosines": [
+    0.5735116900900941,
+    0.5743118582907992,
+    0.5965074025184094,
+    0.5992434281633088,
+    0.6005047172082404
+  ],
+  "min_convex_separating_gap_m": 1.0000000013188695e-05,
+  "min_table_clearance_m": 0.0006153287373362737,
+  "length_contact_spacing_m": [
+    0.025992746230239908,
+    0.020594496418304617,
+    0.026486406400857115
+  ],
+  "joint_margin_min_rad": 0.015000000000647329,
+  "geometric_pass": true,
+  "stages": [
+    {
+      "collision_weight": 100,
+      "cost": 0.001356169574398656,
+      "nfev": 65,
+      "message": "The maximum number of function evaluations is exceeded."
+    },
+    {
+      "collision_weight": 500,
+      "cost": 0.0014043709615345474,
+      "nfev": 26,
+      "message": "`xtol` termination condition is satisfied."
+    },
+    {
+      "method": "SLSQP",
+      "success": true,
+      "iterations": 110,
+      "message": "Optimization terminated successfully"
+    }
+  ],
+  "seconds": 17.63753318786621,
+  "active_fingers": [
+    "thumb",
+    "index",
+    "middle",
+    "ring",
+    "pinky"
+  ],
+  "excluded_fingers": [],
+  "thumb_palm_constraint": true,
+  "source_plan": "runs/g2-finger-surface-20260928/side-face-refinement/side-face-refine-00.json",
+  "contact_height_interval_m": [
+    -0.003,
+    0.002
+  ],
+  "constraint_change": "Contact may occupy real side face y in [-3,+2]mm; old y=-1mm was an arbitrary planner line. Physical dimensions, collision and acceptance thresholds unchanged.",
+  "source_touch_plan": "runs/g2-finger-surface-20260928/thumb-palm-clearance/side-face-refine-00.json",
+  "open_q": [
+    0.14534869922493376,
+    -0.14434022268094124,
+    0.7762269688807568,
+    1.4756046858548328,
+    0.3253144215551131,
+    -0.11605205097460528,
+    1.0890599680440725,
+    0.8580525760887616,
+    0.5612779923441443,
+    -0.03215873808801127,
+    1.0944359312778316,
+    0.4782929513565687,
+    0.4437525787686966,
+    0.01751779680806254,
+    1.181042157903647,
+    0.5392794350477152,
+    0.36193527560061955,
+    0.5780627919949424,
+    1.0247228933317523,
+    -0.46489999267708676
+  ],
+  "close_q": [
+    0.07362368434023622,
+    -0.07448161453213425,
+    1.030144684114021,
+    1.2992664784923007,
+    0.3170154174851614,
+    -0.04866575604438253,
+    1.261130168864873,
+    0.7062445577258233,
+    0.5854840366075933,
+    0.007646713098128145,
+    1.17203986608546,
+    0.5038880344937794,
+    0.4614327996073885,
+    0.08422745828631381,
+    1.309528107628101,
+    0.40727140988236865,
+    0.5600109409344698,
+    0.5741105765531702,
+    0.8124707394523771,
+    -0.395796070480915
+  ],
+  "grasp": 0,
+  "opening_m": 0.005,
+  "squeeze_m": 0.001,
+  "allow_close_overtravel": false,
+  "open_fit": {
+    "success": true,
+    "nfev": 22,
+    "message": "`xtol` termination condition is satisfied.",
+    "contact_error_m": [
+      3.334617374429176e-08,
+      1.3383966190115052e-07,
+      3.706839996193941e-08,
+      1.709720142917287e-08,
+      4.454017244905511e-09
+    ]
+  },
+  "close_fit": {
+    "success": true,
+    "nfev": 24,
+    "message": "`xtol` termination condition is satisfied.",
+    "contact_error_m": [
+      1.3752856210797759e-08,
+      1.3902762995950454e-09,
+      1.3302842161337943e-09,
+      1.1928439812079632e-09,
+      5.731082356172239e-10
+    ]
+  },
+  "preload_definition": "Geometric compression requested via legal joint motor targets only, not measured positions or forces"
+}

@@ -1,0 +1,217 @@
+{
+  "name": "side-face-refine-00",
+  "kind": "geometric_touch_only",
+  "validation": "No physics execution; accepted only requests further exact collision/path checks",
+  "initial_flex": null,
+  "initial_pitch_rad": null,
+  "initial_thumb": null,
+  "wrist_in_knife": [
+    [
+      -0.15272617474428835,
+      -0.653852198073952,
+      0.7410479192480326,
+      -0.07793381219914189
+    ],
+    [
+      0.8083968599921858,
+      0.3486769392822211,
+      0.4742561636579507,
+      -0.09525766566290014
+    ],
+    [
+      -0.5684797554027335,
+      0.6714921407482323,
+      0.47531996866385134,
+      -0.05999999999999964
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "touch_q": [
+    -0.14349999635736982,
+    -0.16226896085451983,
+    0.9538860724009437,
+    1.4866472510807922,
+    0.06060013474950397,
+    -0.042668567244451276,
+    1.325699188716847,
+    0.7806193247620388,
+    0.4475258934789245,
+    0.017600529165061912,
+    1.1714343180217475,
+    0.558002831537324,
+    0.26065604944997245,
+    0.08929016761876683,
+    1.380036156258363,
+    0.43509371638247163,
+    0.5677341428857782,
+    0.7111204530214102,
+    0.7250593302781647,
+    -0.4548999938004316
+  ],
+  "joint_names": [
+    "hand_r_index_joint1",
+    "hand_r_index_joint2",
+    "hand_r_index_joint3",
+    "hand_r_index_joint4",
+    "hand_r_middle_joint1",
+    "hand_r_middle_joint2",
+    "hand_r_middle_joint3",
+    "hand_r_middle_joint4",
+    "hand_r_pinky_joint1",
+    "hand_r_pinky_joint2",
+    "hand_r_pinky_joint3",
+    "hand_r_pinky_joint4",
+    "hand_r_ring_joint1",
+    "hand_r_ring_joint2",
+    "hand_r_ring_joint3",
+    "hand_r_ring_joint4",
+    "hand_r_thumb_joint1",
+    "hand_r_thumb_joint2",
+    "hand_r_thumb_joint3",
+    "hand_r_thumb_joint4"
+  ],
+  "contact_targets": [
+    [
+      -0.0095,
+      -0.003,
+      0.010400058663852154
+    ],
+    [
+      0.0095,
+      -0.0029518756672073337,
+      0.019013918409883767
+    ],
+    [
+      0.0095,
+      -0.003,
+      -0.006967676505400116
+    ],
+    [
+      0.0095,
+      -0.003,
+      -0.031
+    ],
+    [
+      0.0095,
+      -0.003,
+      -0.05973925560020258
+    ]
+  ],
+  "contact_normals": [
+    [
+      -1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ]
+  ],
+  "contact_points": [
+    [
+      -0.009705006436545111,
+      -0.003058484684632282,
+      0.010400058663852154
+    ],
+    [
+      0.00971390608119484,
+      -0.0029518756672073337,
+      0.019013918409883767
+    ],
+    [
+      0.009730997461077962,
+      -0.003003201942231666,
+      -0.006967676505400116
+    ],
+    [
+      0.009716161719600836,
+      -0.0030063434385613286,
+      -0.031007729838921683
+    ],
+    [
+      0.009714125281264996,
+      -0.0030015616028905502,
+      -0.05973925560020258
+    ]
+  ],
+  "contact_errors_m": [
+    0.0002131855937005648,
+    0.0002139060811948406,
+    0.00023101965167171318,
+    0.00021639288029722068,
+    0.00021413097552759996
+  ],
+  "pad_facing_cosines": [
+    0.5864636161953962,
+    0.5968906207154487,
+    0.5960266221712044,
+    0.5968403931466959,
+    0.5988953069303516
+  ],
+  "min_convex_separating_gap_m": 9.802255610138685e-06,
+  "min_table_clearance_m": 0.0006638850851038436,
+  "length_contact_spacing_m": [
+    0.025981594915283884,
+    0.024040053333521567,
+    0.028731525761280897
+  ],
+  "joint_margin_min_rad": 0.014999999999999986,
+  "geometric_pass": true,
+  "stages": [
+    {
+      "collision_weight": 100,
+      "cost": 0.004366534674477333,
+      "nfev": 65,
+      "message": "The maximum number of function evaluations is exceeded."
+    },
+    {
+      "collision_weight": 500,
+      "cost": 0.0017683629382074981,
+      "nfev": 110,
+      "message": "The maximum number of function evaluations is exceeded."
+    },
+    {
+      "method": "SLSQP",
+      "success": false,
+      "iterations": 180,
+      "message": "Iteration limit reached"
+    }
+  ],
+  "seconds": 29.255601406097412,
+  "active_fingers": [
+    "thumb",
+    "index",
+    "middle",
+    "ring",
+    "pinky"
+  ],
+  "excluded_fingers": [],
+  "source_plan": "runs/g2-finger-surface-20260928/fresh-five-pad-search/fresh-five-pad-09.json",
+  "contact_height_interval_m": [
+    -0.003,
+    0.002
+  ],
+  "constraint_change": "Contact may occupy real side face y in [-3,+2]mm; old y=-1mm was an arbitrary planner line. Physical dimensions, collision and acceptance thresholds unchanged."
+}

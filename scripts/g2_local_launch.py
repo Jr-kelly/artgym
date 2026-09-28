@@ -19,16 +19,25 @@ ROOT = Path(__file__).resolve().parents[1]
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--name', required=True)
+    parser.add_argument('--experiment-directory',choices=['g2-local-policy-20260928','g2-finger-surface-20260928'],default='g2-local-policy-20260928')
     parser.add_argument('--module', choices=['scripts.run_g2_local','scripts.train_g2_local','scripts.run_g2_tabletop'], required=True)
     parser.add_argument('args', nargs=argparse.REMAINDER)
     args = parser.parse_args()
-    base = ROOT/'runs/g2-local-policy-20260928'
+    base = ROOT/'runs'/args.experiment_directory
     extra = args.args[1:] if args.args[:1] == ['--'] else args.args
     def option(command, flag, default=None):
         return command[command.index(flag)+1] if flag in command else default
     output = Path(option(extra, '--output', ''))
     if not output.is_absolute() or base.resolve() not in output.resolve().parents:
         raise ValueError('Use an absolute --output inside the declared experiment run directory')
+    if args.experiment_directory=='g2-finger-surface-20260928':
+        if args.module!='scripts.run_g2_tabletop':
+            raise ValueError('New functional grasp inherits exhausted 4/4 training configurations; no new learner is authorized')
+        state=json.loads((base/'state.json').read_text())
+        if len(list(base.glob('*-launch.json')))>=8:
+            raise ValueError('All 8 remaining control execution slots used; preserve the inherited 80 trial cap')
+        if datetime.datetime.now(datetime.timezone.utc)>=datetime.datetime.fromisoformat(state['delivery_start_utc']):
+            raise ValueError('Reserved delivery window reached')
     if args.module == 'scripts.train_g2_local':
         state = json.loads((base/'state.json').read_text())
         now = datetime.datetime.now(datetime.timezone.utc)
@@ -50,7 +59,7 @@ def main():
             raise ValueError('Cumulative local learning budget exceeded: used/reserved %.4fh + requested %.4fh' % (accounted,hours))
         if now >= delivery or now+datetime.timedelta(hours=hours) > delivery:
             raise ValueError('Training would enter the reserved delivery window; shorten hours')
-    files = sorted((ROOT/'scripts').glob('*.py')) + sorted((ROOT/'configs/g2_local').rglob('*'))
+    files = sorted((ROOT/'scripts').glob('*.py')) + sorted((ROOT/'configs').rglob('*'))
     hashes = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in files if p.is_file()}
     version = hashlib.sha256(json.dumps(hashes,sort_keys=True).encode()).hexdigest()[:16]
     pin = base/'source-pins'/version

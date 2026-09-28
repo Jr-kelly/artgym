@@ -1,0 +1,28 @@
+{
+  "id": "F1-01",
+  "hypothesis": "Five-pad lateral grasp with a collision-free motor approach can lift and retain the real free knife through a1s hold then180deg flip",
+  "source": "five-pad-motion-v2",
+  "variables": "new five-finger grasp layout; original physics/gains/limits remain",
+  "opening_m": 0.005,
+  "closing_motor_geometric_compression_m": 0.001,
+  "table_z_m": 0.75,
+  "slider_face": "down",
+  "position": [
+    0.45,
+    -0.3
+  ],
+  "yaw_degrees": 180,
+  "hold_seconds": 1,
+  "lift_m": 0.3,
+  "flip_degrees": 180,
+  "stop": "failed lift hold or flip gate; no policy operation in this first diagnostic",
+  "acceptance": {
+    "world_hold_m": 0.01,
+    "world_hold_rad": 0.25,
+    "hand_hold_m": 0.01,
+    "hand_hold_rad": 0.25,
+    "contact_all_five_reported": true
+  },
+  "physical_budget_slot": 73,
+  "utc": "2026-09-28T07:25:14.568309+00:00"
+}
