@@ -179,3 +179,23 @@ A500已真实保存及CPU完整性核验（81920000交互），所有四臂250�
 ## 多抓姿 2026-09-28T16:39:00.371421+00:00 contact_gate_limitation_audited
 
 离线核查发现原参考成功抓姿0和2也不满足新测试>=3非拇指二值触觉95%门禁；触觉净力阈值不是逐物体接触身份，故门禁保守且非可操作性的必要条件。保留本轮预注册筛选不放宽。首批仍独立因姿态+拇指路径0合格；零合格不能推断无可操作新姿态。 证据：research/multigrasp-20260928/receipts/contact-gate-sensitivity.json。下一步：继续四臂训练；第二批按原物理门禁完成，同时明确筛选适用范围。
+
+## 多抓姿 2026-09-28T16:46:09.371737+00:00 milestone_backup_verified
+
+Backed up immutable C-500 with identical remote/local SHA256; not evaluated or selected. 证据：/data/research/artgym-experiments-20260921/multigrasp-20260928/research/multigrasp-20260928/receipts/checkpoint-backups/C-500.json。下一步：Continue fixed1000epoch training and preregistered development selection。
+
+## 多抓姿 2026-09-28T16:59:23.179913+00:00 milestone_backup_verified
+
+Backed up immutable B-500 with identical remote/local SHA256; not evaluated or selected. 证据：/data/research/artgym-experiments-20260921/multigrasp-20260928/research/multigrasp-20260928/receipts/checkpoint-backups/B-500.json。下一步：Continue fixed1000epoch training and preregistered development selection。
+
+## 多抓姿 2026-09-28T16:59:29.445883+00:00 ABC_cp500_utilization_verified
+
+A/B/C500权重已CPU核验epoch500/frame81920000且模型有限，D仍继续。实测15:07至16:59UTC整机采样时加权利用率86.28%，覆盖1.86h，尚非平台4h口径；未运行填充计算。四臂16:59UTC A618/B502/C566/D419，B看护余量约16.9min，维持现有看护。 证据：research/multigrasp-20260928/receipts/cp500-ABC-1700.json, research/multigrasp-20260928/receipts/utilization-audit-1700.json。下一步：继续至统一1000轮；收集第二批新测试与开发冻结，之后完整比较。
+
+## 多抓姿 2026-09-28T17:19:44.071752+00:00 milestone_backup_verified
+
+Backed up immutable D-500 with identical remote/local SHA256; not evaluated or selected. 证据：/data/research/artgym-experiments-20260921/multigrasp-20260928/research/multigrasp-20260928/receipts/checkpoint-backups/D-500.json。下一步：Continue fixed1000epoch training and preregistered development selection。
+
+## 多抓姿 2026-09-28T17:19:58.354401+00:00 all_four_cp500_integrity_pass
+
+四组原进程实查A728/B592/C667/D502，已全部达到CP500并CPU核验81920000交互和张量完整性；同预算1000训练未完成。B看护预计余量15.9min，D约119min训练剩余，继续原训练。最终分析全流程验证通过，正式策略评估仍等待开发冻结。 证据：research/multigrasp-20260928/receipts/cp500-ABCD-1720.json。下一步：完成四臂1000及队列开发评估，第二批新测试物理门禁后统一冻结比较。
