@@ -1,0 +1,86 @@
+{
+  "retained": false,
+  "stable": true,
+  "frames": 30,
+  "fixed_initial_object": [
+    [
+      0.9998306481693165,
+      -0.015556940172617674,
+      0.00983140853537827,
+      0.4476865530014038
+    ],
+    [
+      -0.01012720932513697,
+      -0.019050934452035206,
+      0.999767223671485,
+      -0.3005537688732147
+    ],
+    [
+      -0.015366021365622692,
+      -0.9996974759940978,
+      -0.01920525653099625,
+      0.7547852396965027
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "fixed_initial_hand_object": [
+    [
+      -0.3147692307215927,
+      0.7180716543250705,
+      -0.620720090415795,
+      0.2703346090712988
+    ],
+    [
+      -0.7036416721169875,
+      0.26237185048293615,
+      0.660340373848646,
+      0.09043168185911488
+    ],
+    [
+      0.6370311834214605,
+      0.644619353827525,
+      0.42267855400958954,
+      0.3180306655881384
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "world_translation_max_m": 6.664001874625056e-08,
+  "world_rotation_max_rad": 3.0206973525220093e-06,
+  "hand_translation_max_m": 0.0013777075183649514,
+  "hand_rotation_max_rad": 0.0016328801865346753,
+  "min_object_height_m": 0.7547851800918579,
+  "table_free": false,
+  "contact_order": [
+    "thumb",
+    "index",
+    "middle",
+    "ring",
+    "pinky"
+  ],
+  "per_finger_contact_fraction": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "all_five_contact_fraction": 0.0,
+  "opposed_contact_fraction": 0.0,
+  "interpretation": "Contact presence is not measured load. References fixed before the hold, not refreshed.",
+  "thresholds": {
+    "translation_m": 0.01,
+    "rotation_rad": 0.25,
+    "min_height_m": 0.85,
+    "opposed_fraction": 0.9
+  }
+}

@@ -47,7 +47,7 @@ def main():
     if a.knife_spec:
         from scripts.g2_knife_geometry import KnifeGeometry
         knife=KnifeGeometry(a.knife_spec)
-        boxes={part['link']+'-component'+str(part['index']):part['vertices'] for part in knife.collision_parts()}
+        boxes={part['link']+'-component'+str(part['index']):part['vertices'] for part in knife.collision_parts(plan.get('planning_slider_m'))}
     body_overlaps=[]
     for n,v in points.items():
         local=v@wrist[:3,:3].T+wrist[:3,3]
@@ -57,7 +57,8 @@ def main():
     arm=G2Kinematics();table=ArmTableCollision(.75)
     object_world=transform(loc['object'][:3],loc['object'][3:]);target=object_world@wrist
     if a.knife_spec:
-        object_world=knife.table_pose(object_world);target=object_world@wrist
+        if not plan.get('use_recorded_table_pose',False):object_world=knife.table_pose(object_world)
+        target=object_world@wrist
     qa,err=arm.solve(target,np.asarray(loc['grasp_q']),attempts=1)
     near_limits=[]
     for i,name in enumerate(g.w.names):

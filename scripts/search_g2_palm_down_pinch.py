@@ -24,12 +24,13 @@ def main():
     p.add_argument('--self-collision-audit',type=Path,help='Add all exact-audit identified link pairs as conservative separating-plane constraints')
     p.add_argument('--long-spacing',type=float,default=.012)
     p.add_argument('--knife-spec',type=Path,help='Generated new asset-spec.json; uses its actual convex collisions and explicitly provisional initial table height')
+    p.add_argument('--use-recorded-table-pose',action='store_true',help='Offline planning from a recorded naturally settled pose; do not replace its root height with an ideal envelope height')
     a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
     g=DigitGeometry(max_face_axes=20);h=g.w
     object_world=transform(*[json.loads(a.localization.read_text())['object'][v] for v in [slice(0,3),slice(3,7)]])
     from scripts.g2_knife_geometry import KnifeGeometry
     knife=KnifeGeometry(a.knife_spec);half_width=knife.side_half_width;ylo,yhi=knife.contact_y_interval
-    if a.knife_spec:object_world=knife.table_pose(object_world)
+    if a.knife_spec and not a.use_recorded_table_pose:object_world=knife.table_pose(object_world)
     base_rotation=np.array([[0.,0,1],[1.,0,0],[0,1.,0]])
     normals=np.array([[-1.,0,0]]+[[1.,0,0]]*4)
     # Long-axis slots may be used anywhere within them; no fixed old contact z.
@@ -37,7 +38,8 @@ def main():
     zmax=np.array([.06,.063,.024,.002,-.019])
     boxes=[(np.zeros(3),np.array([.0095,.004,.0735])),
         (np.array([0,.0055,-.02205]),np.array([.005,.0015,.015]))]
-    knife_parts=knife.collision_parts()
+    planning_slider=json.loads(a.localization.read_text()).get('slider_position_m') if a.use_recorded_table_pose else None
+    knife_parts=knife.collision_parts(planning_slider)
     if a.knife_spec:
         # Flat side assumption ends at60mm; don't place contacts on a taper
         # while using a constant side normal/width objective.
@@ -159,7 +161,10 @@ def main():
                 constraint_change='Contact may occupy real side face y in [-3,+2]mm; old y=-1mm was an arbitrary planner line. Physical dimensions, collision and acceptance thresholds unchanged.')
         if a.knife_spec:
             row.update(knife_spec=str(a.knife_spec),planning_object_world=object_world.tolist(),
-                planning_pose_status='Provisional table resting-envelope pose preserving old orientation; actual settling on new geometry unmeasured',
+                planning_pose_status='Provisional table envelope placement at supplied orientation; actual settling on new geometry unmeasured',
+                planning_localization_source=str(a.localization),
+                planning_localization_method=json.loads(a.localization.read_text()).get('method','unspecified'),
+                use_recorded_table_pose=a.use_recorded_table_pose,planning_slider_m=planning_slider,
                 constraint_change='New explicitly parameterized measured-envelope asset, actual three convex components; baseline asset unchanged')
         (a.output/(row['name']+'.json')).write_text(json.dumps(row,indent=2)+'\n');results.append(row)
         print(json.dumps({k:row[k] for k in ['name','contact_errors_m','pad_facing_cosines','min_convex_separating_gap_m','min_table_clearance_m','geometric_pass','seconds']}),flush=True)

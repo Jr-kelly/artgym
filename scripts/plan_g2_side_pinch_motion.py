@@ -46,8 +46,8 @@ def main():
     object_world=transform(loc['object'][:3],loc['object'][3:])
     from scripts.g2_knife_geometry import KnifeGeometry
     knife=KnifeGeometry(a.knife_spec)
-    if a.knife_spec:object_world=knife.table_pose(object_world)
-    knife_parts=knife.collision_parts()
+    if a.knife_spec and not original.get('use_recorded_table_pose',False):object_world=knife.table_pose(object_world)
+    knife_parts=knife.collision_parts(original.get('planning_slider_m'))
     normals=np.asarray(original['contact_normals'])
     vertices={n:np.concatenate([v for v,_ in m]) for n,m in g.meshes.items()}
     normals_local={n:np.concatenate([v for _,v in m]) for n,m in g.meshes.items()}

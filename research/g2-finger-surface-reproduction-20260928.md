@@ -51,3 +51,49 @@ firefox http://127.0.0.1:8767/g2-finger-surface-20260928/
 闭合预压是目标关节对应的几何压入量，不是手指测得的位置或力。手内反馈的首帧电机参考、动作范围、避碰拒绝和实际物体运动都单独记录，评分参考不会跟随物体刷新。
 
 原先成功版本、权重和视频仍保留于独立 `g2-wuji-local-policy-20260928-v1` Release；不能用它替代本轮新布局的成功证据。
+
+## 实测尺寸新资产 F1-07 / F1-08
+
+实测/假设及结果见 [新刀报告](g2-measured-knife-20260928.md)。两个试验都是获取诊断，未执行teacher/student。F1-07停在接近前净空检查；F1-08执行闭合与抬起但没有取离桌面。不是完整任务demo。预算80/80已用完，下列是完整复现命令，本轮未自动重复执行。
+
+F1-08（固定运行器pin `0cc7584737f0d607`）的等价运行命令；必须使用新输出目录。`--table-localization settled-truth`是自然落稳后的一次仿真真值定位，不是可部署视觉输入：
+
+```bash
+cd /data/research/artgym-g2-finger-surface-20260928
+bash scripts/g2_local_python.sh -m scripts.run_g2_tabletop \
+  --group B --operation-yaw 90 --yaw 180 --dx=-.05 \
+  --arm-gain-scale 10 --arm-damping-scale 20 --arm-integral-gain 1 \
+  --grasp-plan configs/g2_finger_surface/measured-recorded-rest-pickup-v2.json \
+  --acquisition-arm-seed configs/g2_finger_surface/measured-recorded-rest-pickup-v2-arm-seed.json \
+  --knife-spec assets/objects/knife_wuji_measured_envelope_20260928_v1/000/asset-spec.json \
+  --cartesian-acquisition --slider-face down --table-localization settled-truth \
+  --lift-height .30 --pickup-retention-hold 1 --only-grasp --pickup-only \
+  --video --closeup --contact-diagnostics \
+  --output /data/research/artgym-g2-finger-surface-20260928/runs/g2-finger-surface-20260928/replay-measured-F1-08
+```
+
+F1-07相同参数，将plan/arm-seed改为`measured-rest-balanced-pickup-v1.json` / `measured-rest-balanced-pickup-v1-arm-seed.json`，使用新output；其原pin为`9d2343a27f1c2fe4`。F1-06旧刀的精确命令仍在增量03的`runs/F1-06-launch.json`中，不能换成新资产却沿用旧结果。
+
+离线重建几何规划，不新增物理试验：
+
+```bash
+bash scripts/g2_local_python.sh -m scripts.search_g2_palm_down_pinch \
+  --localization runs/g2-finger-surface-20260928/measured-recorded-rest-planning-localization.json \
+  --output runs/g2-finger-surface-20260928/my-recorded-rest-touch \
+  --refine runs/g2-finger-surface-20260928/measured-rest-balanced-touch/side-face-refine-00.json \
+  --avoid-thumb-palm --balance-long-axis --balanced-margin --use-recorded-table-pose \
+  --self-collision-audit runs/g2-finger-surface-20260928/known-path-self-pairs-for-retarget.json \
+  --knife-spec assets/objects/knife_wuji_measured_envelope_20260928_v1/000/asset-spec.json
+bash scripts/g2_local_python.sh -m scripts.plan_g2_side_pinch_motion \
+  --plan runs/g2-finger-surface-20260928/my-recorded-rest-touch/side-face-refine-00.json \
+  --localization runs/g2-finger-surface-20260928/measured-recorded-rest-planning-localization.json \
+  --output runs/g2-finger-surface-20260928/my-recorded-rest-motor \
+  --opening .005 --squeeze .004 --open-pad-lift .002 --close-via-touch \
+  --arm-wrist-posture -.8 --flip-axis knife-length \
+  --extra-self-pairs configs/g2_finger_surface/measured-motion-extra-self-pairs.json \
+  --knife-spec assets/objects/knife_wuji_measured_envelope_20260928_v1/000/asset-spec.json
+```
+
+上述记录只用作离线规划输入；运行器依旧创建正常平放、闭刀滑块朝下的初始场景，真实执行自然落稳和全段电机控制。不能用记录直接重设运行中的手、刀、滑块。
+
+离线几何/动态图检查入口：`audit_g2_measured_thumb_sweep.py`、`predict_g2_measured_rest.py`、`plot_g2_measured_pickup.py`。两次新资产结果的全部原始文件在Release增量03；恢复目录映射以包内`manifest-03.json`为准。源文件相同部分复用Git基线commit或前两个证据增量，不重复历史备份；所有源码pin均有哈希索引。

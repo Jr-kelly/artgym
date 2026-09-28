@@ -553,7 +553,7 @@ def main():
             for _ in range(60):tick('table_settle')
             if args.table_localization=='settled-truth':
                 assert custom_plan is not None
-                _,_,_,_,actual_table_object,_=current()
+                _,_,actual_table_slider,_,actual_table_object,_=current()
                 measured_grasp=actual_table_object@np.asarray(custom_plan['wrist_in_knife'])
                 measured_grasp[2,3]+=args.close_height
                 measured_lift=measured_grasp.copy();measured_lift[2,3]+=args.lift_height
@@ -563,6 +563,7 @@ def main():
                     raise ValueError('Settled-table localization IK failed')
                 (args.output/'settled-table-localization.json').write_text(json.dumps(dict(
                     object=pose(actual_table_object).tolist(),grasp_q=grasp_q.tolist(),lift_q=lift_q.tolist(),
+                    slider_position_m=float(actual_table_slider),
                     grasp_ik=grasp_error,lift_ik=lift_error,method='One simulated truth sample after natural tabletop settling; only arm motor targets replanned.'),indent=2)+'\n')
                 if knife_geometry is not None:
                     # Bump-down resting may tilt differently from the old
