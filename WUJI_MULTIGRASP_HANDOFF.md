@@ -1,3 +1,17 @@
+# 最新续接：核心两表完成，三专家接近最终轮（2026-09-28 22:51 UTC）
+
+原生Goal active；禁止子代理。工作区 `/data/research/artgym-experiments-20260921/multigrasp-20260928`，分支 `feat/wuji-multigrasp-2x2-20260928`，已push `4ad8670`。硬截止2026-09-29 02:53:52UTC，01:53:52起预留交付；不要按旧状态重启实验。
+
+四组均完成1000轮/163840000交互，同预算和开发择优两张完整800初态冻结表均已独立复算。主表2s严格A9/B0/C19/D0/reference94；择优A75026/B10000/C75024/D10000/reference94；5s四组均0，reference93。全部严格成功仅原训练来源。报告 `research/multigrasp-20260928/README.md`。
+
+唯一主要后续诊断：源3/5/11专家，seed2026092810，span.04，各1000轮。22:49UTC训练PID104797/104799/104800、独立32源扰动评估等待器106197/106198/106199全部实际存活；重新验证后才能引用为当前。预计约23:25–23:35完成，不改训练设置。九份250/500/750权重已本地SHA备份。22:51启动 `scripts.collect_wuji_multigrasp_experts`（本地session61526，日志runs/multigrasp-20260928/expert-collector.log），截止01:00UTC，自动同步每个完成专家的四权重并CPU/SHA核验、归档，等待既有评估并独立复算；它不启动远端训练。评估本身等待截止00:30，四协议每项600s。该收集器完成情况须查日志。
+
+18项Release草稿资产全部上传且服务端SHA核验，release id398592814/tag wuji-multigrasp-20260928-v1。包括全部16矩阵权重、两表10份原始时序包、旧teacher、3视频。最终仍须上传专家包并发布草稿、刷新正式下载URL，核对远端分支。现有成功视频A750在同一原base2的三个扰动3/3严格，绝非三个独立抓姿；A1000失败视频和reference旧视频保留。
+
+最近4h利用率22:42UTC本方采样55.45%；非平台口径。原本地有界证据镜像PID3671366在22:51UTC真实存活。最终需终结自己的镜像/等待任务并记录，不干扰其它任务。下一项：等专家完成并复算，根据结果定唯一下一步；补训练时间/资源、完整证据与权重、最终报告和GitHub发布，完成后才标Goal complete。
+
+---
+
 # 最新续接：多抓姿核心对照完成，专家诊断运行（2026-09-28T20:26:23.276846+00:00）
 
 Goal仍active，禁止子代理。工作区`/data/research/artgym-experiments-20260921/multigrasp-20260928`，分支`feat/wuji-multigrasp-2x2-20260928`。总截止2026-09-29 02:53:52UTC，01:53:52留最终交付。
@@ -607,3 +621,15 @@ A750原base2三个扰动视频实际严格3/3、五完整周期、20s全程稳�
 ## 多抓姿 2026-09-28T21:04:57.801862+00:00 selected_frozen_independent_analysis_complete
 
 择优16项完整、12000策略回合独立复算通过。fixed2 A75026/B10000/C75024/D10000(每800)，fixed5四组0；新增训练/历史/补充新抓姿均严格0，静态稳定子集相同。C同预算微收益未在择优表保留，无可靠动作范围额外收益证据。专家21:03UTC分别254/266/252轮，预计剩129-140min，继续既定唯一诊断。 证据：research/multigrasp-20260928/selected-analysis/report.json, research/multigrasp-20260928/receipts/experts-progress-2103.json。下一步：完成专家1000及独立源扰动评估；全部代码/权重/视频/报告最终发布。
+
+## 多抓姿 2026-09-28T21:48:42.036019+00:00 experts_halfway_and_release_evidence_verified
+
+专家源3/5/11在21:48UTC为485/509/479轮，预计剩85-97min，4h看护余量46-58min；三个CP250及源5CP500本地SHA备份。全部核心两表10个trace包、4权重包、reference和3视频共18Release草稿资产已服务端SHA验证，最新主分支4ad8670已push。 证据：research/multigrasp-20260928/receipts/experts-progress-2149.json, research/multigrasp-20260928/receipts/experts-backup-2148.json, research/multigrasp-20260928/receipts/release-selected-assets.json。下一步：专家保持1000预算并自动源扰动评估，收尾报告和Release发布。
+
+## 多抓姿 2026-09-28T22:43:58.032048+00:00 expert750_backup_and_resource_check
+
+三专家均达到750，250/500/750九份权重逐一远端本地SHA备份完成。最近四小时整机55.45%，仍高于26%门槛/40%目标；配置恢复检查通过，Release18资产确认。继续最后约40-50min训练并源扰动评估，不新增比较。 证据：research/multigrasp-20260928/receipts/experts-backup-2243.json, research/multigrasp-20260928/receipts/utilization-fourhour-2243.json, research/multigrasp-20260928/receipts/reproduction-config-check.json。下一步：等待专家1000自然终结，复核每源32扰动结果，更新唯一优先事项并最终发布。
+
+## 多抓姿 2026-09-28T22:51:05.383611+00:00 handoff_revalidated_and_delivery_collector_started
+
+22:49UTC核验三专家训练PID104797/104799/104800及三个评估等待器均真实运行；矩阵/择优已完成。补全四组训练日志证据、专家离线复算入口及有界备份收集器，不改变运行训练配置。 证据：scripts/collect_wuji_multigrasp_experts.py, scripts/analyze_wuji_multigrasp_experts.py, research/multigrasp-20260928/evidence/mg_A_seed2801/status.json。下一步：专家1000自然结束后自动SHA备份和32源扰动复算，完成最终报告与发布。

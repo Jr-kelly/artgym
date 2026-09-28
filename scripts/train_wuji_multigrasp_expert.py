@@ -16,7 +16,10 @@ def main():
     else:np.save(data,states)
     # Reuse exact recorded matrix A overrides, replacing only diagnostic identity,
     # singleton source pool, seed, and explicitly bounded epoch count.
-    original=json.loads((B/'mg_A_seed2801/status.json').read_text())['command']
+    status=B/'mg_A_seed2801/status.json'
+    if not status.exists():
+        status=R/'research/multigrasp-20260928/evidence/mg_A_seed2801/status.json'
+    original=json.loads(status.read_text())['command']
     overrides=original[3:]
     replacement={'experiment':a.name,'seed':str(a.seed),'max_iterations':str(a.epochs),
         'task.env.trainingStates':str(data.relative_to(R))}
