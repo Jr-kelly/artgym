@@ -1,0 +1,839 @@
+scripts/evaluate_wuji_multigrasp_expert.py
+  s_721f503d39167b::t_29001b799158c5 1-31
+scripts/restore_wuji_multigrasp_weights.py
+  s_721f503d39167b::t_edf5db917b8c7d 1-44
+scripts/analyze_wuji_multigrasp_frozen.py
+  s_721f503d39167b::t_4c4e959f46df7b 54-57
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "0651f91fb3f393465fc3381e88f1d990315c0acb",
+  "prompts": {},
+  "sessions": {
+    "s_721f503d39167b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0e87e-fbfa-7a80-b73c-3a968594ab0a",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.input_tokens": "5741298",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.output_tokens": "149437",
+        "tlab.session_started_at": "2026-09-28T19:50:04Z",
+        "tlab.token_usage.cache_read_tokens": "58006414"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-A-arrival/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-A-arrival/evidence/report.json",
+      "additions": {
+        "human": 14380
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-A-arrival/evidence/source.py",
+      "additions": {
+        "human": 186
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-A-arrival/evidence/source_metrics.py",
+      "additions": {
+        "human": 46
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-A-arrival/gpu.jsonl",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-A-arrival/output.log",
+      "additions": {
+        "human": 129
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-A-arrival/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-A-fixed2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-A-fixed2/evidence/report.json",
+      "additions": {
+        "human": 31243
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-A-fixed2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-A-fixed2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-A-fixed2/gpu.jsonl",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-A-fixed2/output.log",
+      "additions": {
+        "human": 129
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-A-fixed2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-A-fixed5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-A-fixed5/evidence/report.json",
+      "additions": {
+        "human": 21643
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-A-fixed5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-A-fixed5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-A-fixed5/gpu.jsonl",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-A-fixed5/output.log",
+      "additions": {
+        "human": 129
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-A-fixed5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-B-arrival/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-B-arrival/evidence/report.json",
+      "additions": {
+        "human": 11548
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-B-arrival/evidence/source.py",
+      "additions": {
+        "human": 186
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-B-arrival/evidence/source_metrics.py",
+      "additions": {
+        "human": 46
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-B-arrival/gpu.jsonl",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-B-arrival/output.log",
+      "additions": {
+        "human": 129
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-B-arrival/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-B-fixed2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-B-fixed2/evidence/report.json",
+      "additions": {
+        "human": 31243
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-B-fixed2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-B-fixed2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-B-fixed2/gpu.jsonl",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-B-fixed2/output.log",
+      "additions": {
+        "human": 129
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-B-fixed2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-B-fixed5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-B-fixed5/evidence/report.json",
+      "additions": {
+        "human": 21643
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-B-fixed5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-B-fixed5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-B-fixed5/gpu.jsonl",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-B-fixed5/output.log",
+      "additions": {
+        "human": 129
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-B-fixed5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-C-arrival/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-C-arrival/evidence/report.json",
+      "additions": {
+        "human": 14770
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-C-arrival/evidence/source.py",
+      "additions": {
+        "human": 186
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-C-arrival/evidence/source_metrics.py",
+      "additions": {
+        "human": 46
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-C-arrival/gpu.jsonl",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-C-arrival/output.log",
+      "additions": {
+        "human": 128
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-C-arrival/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-C-fixed2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-C-fixed2/evidence/report.json",
+      "additions": {
+        "human": 31243
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-C-fixed2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-C-fixed2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-C-fixed2/gpu.jsonl",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-C-fixed2/output.log",
+      "additions": {
+        "human": 128
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-C-fixed2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-C-fixed5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-C-fixed5/evidence/report.json",
+      "additions": {
+        "human": 21643
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-C-fixed5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-C-fixed5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-C-fixed5/gpu.jsonl",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-C-fixed5/output.log",
+      "additions": {
+        "human": 129
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-C-fixed5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-D-arrival/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-D-arrival/evidence/report.json",
+      "additions": {
+        "human": 11302
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-D-arrival/evidence/source.py",
+      "additions": {
+        "human": 186
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-D-arrival/evidence/source_metrics.py",
+      "additions": {
+        "human": 46
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-D-arrival/gpu.jsonl",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-D-arrival/output.log",
+      "additions": {
+        "human": 129
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-D-arrival/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-D-fixed2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-D-fixed2/evidence/report.json",
+      "additions": {
+        "human": 31243
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-D-fixed2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-D-fixed2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-D-fixed2/gpu.jsonl",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-D-fixed2/output.log",
+      "additions": {
+        "human": 129
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-D-fixed2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-D-fixed5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-D-fixed5/evidence/report.json",
+      "additions": {
+        "human": 21643
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-D-fixed5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-D-fixed5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-D-fixed5/gpu.jsonl",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-D-fixed5/output.log",
+      "additions": {
+        "human": 129
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-D-fixed5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-arrival/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-arrival/evidence/report.json",
+      "additions": {
+        "human": 14803
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-arrival/evidence/source.py",
+      "additions": {
+        "human": 186
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-arrival/evidence/source_metrics.py",
+      "additions": {
+        "human": 46
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-arrival/gpu.jsonl",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-arrival/output.log",
+      "additions": {
+        "human": 129
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-arrival/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-fixed2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-fixed2/evidence/report.json",
+      "additions": {
+        "human": 31243
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-fixed2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-fixed2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-fixed2/gpu.jsonl",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-fixed2/output.log",
+      "additions": {
+        "human": 129
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-fixed2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-fixed5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-fixed5/evidence/report.json",
+      "additions": {
+        "human": 21643
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-fixed5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-fixed5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-fixed5/gpu.jsonl",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-fixed5/output.log",
+      "additions": {
+        "human": 129
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-fixed5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-static/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-static/evidence/report.json",
+      "additions": {
+        "human": 31243
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-static/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-static/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-static/gpu.jsonl",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-static/output.log",
+      "additions": {
+        "human": 128
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1-reference-static/status.json",
+      "additions": {
+        "human": 38
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1/plan.json",
+      "additions": {
+        "human": 414
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/evidence/final1000-v1/results.json",
+      "additions": {
+        "human": 362976
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/expert-diagnostic-preregistration.json",
+      "additions": {
+        "human": 38
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/final1000-analysis/failure-summary.json",
+      "additions": {
+        "human": 92
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/final1000-analysis/per-grasp.csv",
+      "additions": {
+        "human": 376
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/final1000-analysis/report.json",
+      "additions": {
+        "human": 475
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/final1000-analysis/temporal-diagnostics.json",
+      "additions": {
+        "human": 372539
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/final1000-analysis/trials.csv",
+      "additions": {
+        "human": 12001
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/progress-history.md",
+      "additions": {
+        "human": 79
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/receipts/video-A1000-launch.json",
+      "additions": {
+        "human": 48
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/receipts/weight-restore-verification.txt",
+      "additions": {
+        "human": 16
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/videos/A1000-three-grasps-config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/videos/A1000-three-grasps-manifest.json",
+      "additions": {
+        "human": 31
+      }
+    },
+    {
+      "new_path": "research/multigrasp-20260928/videos/A1000-three-grasps-report.json",
+      "additions": {
+        "human": 160
+      }
+    },
+    {
+      "new_path": "scripts/evaluate_wuji_multigrasp_expert.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 31
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/restore_wuji_multigrasp_weights.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 44
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "WUJI_MULTIGRASP_HANDOFF.md",
+      "new_path": "WUJI_MULTIGRASP_HANDOFF.md",
+      "additions": {
+        "human": 74
+      }
+    },
+    {
+      "old_path": "research/multigrasp-20260928/README.md",
+      "new_path": "research/multigrasp-20260928/README.md",
+      "additions": {
+        "human": 36
+      },
+      "deletions": {
+        "human": 61
+      }
+    },
+    {
+      "old_path": "scripts/analyze_wuji_multigrasp_frozen.py",
+      "new_path": "scripts/analyze_wuji_multigrasp_frozen.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 4
+          }
+        ]
+      }
+    }
+  ]
+}
