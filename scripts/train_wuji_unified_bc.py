@@ -29,7 +29,23 @@ def main():
   info=json.loads((directory/'interface.json').read_text());report=json.loads((directory/'report.json').read_text())
   assert d['obs'].shape[0]==600 and d['obs'].shape[1]>=4
   d['lower']=torch.tensor(info['joint_lower'],device=player.device);d['upper']=torch.tensor(info['joint_upper'],device=player.device)
-  d['period']=report['protocol']['stage_steps'];data.append(d);man.append(dict(path=str(directory),sha256=sha(directory/'sequences.npz'),expert=info['checkpoint_sha256']))
+  d['period']=report['protocol']['stage_steps']
+  with np.load(directory/'trace.npz') as trace:
+   reached=np.abs(trace['slider']-trace['goal'])<.002
+  phase=np.zeros(reached.shape,dtype=np.int64);streak=np.zeros(reached.shape[1],dtype=np.int64)
+  for step in range(600):
+   if step%d['period']==0:streak[:]=0
+   streak=np.where(reached[step],streak+1,0)
+   phase[step]=np.where(streak==0,0,np.where(streak<=9,1,2))+(step//d['period']%2)*3
+  weights=np.zeros(phase.shape,dtype=np.float32)
+  for ep in range(phase.shape[1]):
+   active=d['active_before'][:,ep].cpu().numpy().astype(bool)
+   for category in range(6):
+    mask=(phase[:,ep]==category)&active
+    if mask.any():weights[mask,ep]=1./mask.sum()
+   weights[:,ep]*=max(1,active.sum())/max(1e-9,weights[:,ep].sum())
+  d['phase_weight']=torch.tensor(weights,device=player.device)
+  data.append(d);man.append(dict(path=str(directory),sha256=sha(directory/'sequences.npz'),expert=info['checkpoint_sha256']))
  manifest=dict(args={k:str(v) if isinstance(v,Path) else [str(x) for x in v] if k=='data' else v for k,v in vars(a).items()},data=man,init_sha256=sha(a.init),normalization='Inherited from initialization checkpoint, frozen for entire run; experts retain own statistics',sequence='Complete600-step episodes; segments carry detached states; optimizer step only after full episode; reset mask shifted from previous transition',training_interactions=0)
  (a.output/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
  base=torch.load(a.init,map_location='cpu');base=base[0] if 0 in base else base
@@ -52,11 +68,11 @@ def main():
    pred=mu.clamp(-1,1);raw=flat('initial_target')+pred*.04;raw[:,16:]=flat('previous_target')[:,16:]+pred[:,16:]*.025
    targets=torch.maximum(torch.minimum(raw,d['upper']),d['lower']);terr=(targets-flat('target_clipped'))/(d['upper']-d['lower'])
    mask=flat('active_before').float().squeeze(-1)
-   # Equalize movement/switch, endpoint-arrival and holding time regions within each command.
-   steps=torch.arange(start,end,device=player.device)%d['period'];weight=torch.where(steps<15,torch.tensor(2.,device=player.device),torch.tensor(1.,device=player.device)).repeat(n)
-   err=(mu-flat('mu')).square().mean(-1);loss=(err*mask*weight).sum()/(mask*weight).sum().clamp_min(1)
-   if train:(loss*length/600).backward()
-   loss_sum+=float(loss.detach())*length/600
+   # Balance open/close x moving/first9-at-target/holding within each trajectory.
+   weight=flat('phase_weight').squeeze(-1)
+   err=(mu-flat('mu')).square().mean(-1);loss=(err*mask*weight).sum()/d['phase_weight'][:,ids].sum().clamp_min(1)
+   if train:loss.backward()
+   loss_sum+=float(loss.detach())
    errors.append(err.detach()[mask.bool()]);target_errors.append(terr.detach().abs()[mask.bool()])
   if train:torch.nn.utils.clip_grad_norm_(params,1.);opt.step()
   te=torch.cat(target_errors);er=torch.cat(errors)

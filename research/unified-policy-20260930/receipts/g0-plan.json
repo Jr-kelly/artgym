@@ -1,0 +1,30 @@
+{
+  "utc": "2026-09-29T16:07:12.038734+00:00",
+  "event": "runtime_transfer_completed",
+  "code_commit": "42ef273",
+  "runtime_bytes": 6403874442,
+  "source": "/home/agiuser/miniconda3/envs/artgym",
+  "destination": "/home/wangjiarui/artgym-runtime",
+  "evidence": "rsync session45091 exit0; relocated only local task runtime egg-link/easy-install.pth",
+  "next": "CUDA smoke session59518 pending; then bounded G0 on GPU0/1",
+  "g0_plan": {
+    "per_source": 32,
+    "sources": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "device_protocol": {
+      "0": 2,
+      "1": 5
+    },
+    "models": [
+      "historical",
+      "source3",
+      "static"
+    ],
+    "total_physics_episodes": 768,
+    "code_commit": "42ef273"
+  }
+}
