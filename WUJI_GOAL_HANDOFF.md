@@ -1,7 +1,7 @@
 <!-- HOLD_CURRENT_START -->
-# 当前端点保持Goal：本轮实验与发布完成，最终交付记录提交中
+# 当前端点保持Goal：本轮有界实验与GitHub交付完成，行为目标部分达成
 
-截至2026-09-29T14:27:32.202255+00:00。工作区`/data/research/artgym-experiments-20260921/hold-20260929`，分支`feat/wuji-hold-controlled-20260929`，实验结果已push55bccd0；最终发布核验记录待本次提交。禁止子代理。原12h预算06:08:43—18:08:43UTC，全部计算14:22UTC前结束；14:23UTC开发机4H100均0%、1MiB、无计算PID，已告知用户释放。14:25UTC仅自建本地monitor1521593核验身份后停止，其它任务未碰。**不要重启任何旧实验或等待器。**
+截至2026-09-29T14:27:32.202255+00:00。工作区`/data/research/artgym-experiments-20260921/hold-20260929`，分支`feat/wuji-hold-controlled-20260929`，实验结果55bccd0、发布核验3c2a0e9均已push并由GitHub API核验；本次只收尾交接状态。禁止子代理。原12h预算06:08:43—18:08:43UTC，全部计算14:22UTC前结束；14:23UTC开发机4H100均0%、1MiB、无计算PID，已告知用户释放。14:25UTC仅自建本地monitor1521593核验身份后停止，其它任务未碰。**不要重启任何旧实验或等待器。**
 
 核心同预算每臂+1000epoch/163840000交互：源3原57/128、65/128，改动109/128、120/128；均值47.65625%→89.453125%。第二续训种子源3原27/128、36/128，改115/128、123/128；24.609375%→92.96875%。两种子仅续训RNG不同，父专家和测试集相同。源11原0/0、改1/1（各128），仍未解决。源3改动为已有GoalDistance2系数.1→1，物理/网络/动作范围/严格成功固定。奖励日程起终相同，44.4%不是稳定约束未生效。
 
@@ -11,7 +11,7 @@
 
 所有冻结时序本地/远端SHA和独立端点评分交叉复算通过：analysis-seed2901、analysis-seed2902、analysis-integration、analysis-thumb-latch，汇总followup-summary。实际核心/复验/整合开发与最终物理12800回合，额外干预512、视频14；复用结果不重复算物理独立回合。均仿真已训练基础抓姿邻域，非未见抓姿/真机。
 
-32正式CP全部SHA/CPU核验，8完整训练归档恢复核验，30Release资产服务器SHA核验。Release id398889931/tagwuji-hold-20260929-v1，已正式发布 https://github.com/Jr-kelly/artgym/releases/tag/wuji-hold-20260929-v1 ，30资产服务器SHA全部核验；最后提交发布记录和公开视频下载凭据。所有8视频已上传且检查；video/integration-inspection.json等。代表源3dense1视频严格1/1；源11dense1为0/1；整合两段均仅源3成功1/4。
+32正式CP全部SHA/CPU核验，8完整训练归档恢复核验，30Release资产服务器SHA核验。Release id398889931/tagwuji-hold-20260929-v1，已正式发布 https://github.com/Jr-kelly/artgym/releases/tag/wuji-hold-20260929-v1 ，30资产服务器SHA全部核验；8段公开视频下载SHA全部通过；发布记录已提交，无待执行任务。所有8视频已上传且检查；video/integration-inspection.json等。代表源3dense1视频严格1/1；源11dense1为0/1；整合两段均仅源3成功1/4。
 
 训练归档等待器旧session49802读心跳空JSON退出，保留archive-followup.log，修复有界重试后v2session69676成功完成4归档；没有训练重启。视频打包改用现成imageio_ffmpeg，既有文件SHA一致后续接。所有train/eval/backup/collect/archive/render会话已完成；monitor已停，无待跑队列。
 
@@ -507,3 +507,8 @@ seed2902 sources [3] independently rescored; matched-budget and selected results
 
 Release wuji-hold-20260929-v1已正式发布，30资产服务器SHA逐项匹配，8视频均无认证公开下载SHA通过。实验结果提交55bccd0已push；最终发布索引/交接提交中。源3改善两续训种子复现，源11与共享原抓姿未解决，行为目标只部分达成。开发机14:23UTC已释放，本轮无剩余计算。
 证据：research/hold-20260929/receipts/final-release-verified.json, research/hold-20260929/receipts/public-video-downloads.json, research/hold-20260929/weights-index.json。下一步：提交最终发布记录并核验分支，结束本轮有界实验；后续唯一优先为源11到位后保持与支撑协同。
+
+## 2026-09-29T14:31:34.892582+00:00 bounded_goal_delivery_complete
+
+本轮有界实验交付完成：GitHub API确认分支3c2a0e992cdfee624fab75841b7eb652884d72fc，Release正式公开30资产/8视频下载SHA核验，无剩余计算或交付任务。行为目标部分达成，不宣称源11或统一策略已解决；本次只提交此收尾续接记录。
+证据：research/hold-20260929/final-delivery.json, research/hold-20260929/receipts/final-release-verified.json。下一步：本轮结束；若继续新实验，唯一优先源11到位后保持与非拇指支撑协同。
