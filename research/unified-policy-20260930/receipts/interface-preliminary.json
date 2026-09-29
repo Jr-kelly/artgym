@@ -1,0 +1,17 @@
+{
+  "utc": "2026-09-29T16:04:53.407825+00:00",
+  "event": "phase_A_interface_data_implementation",
+  "evidence": [
+    "data/manifest.json",
+    "scripts/collect_wuji_unified.py",
+    "scripts/train_wuji_unified_bc.py"
+  ],
+  "experts": {
+    "historical": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+    "source3": "fae13402080f3fac1665d61c69cdc078302b15ea75db8b14c85e500073d748cd"
+  },
+  "facts": "CPU model loading passed;111policy21priv16latent,512LSTM; frozen disjoint initial states",
+  "infrastructure_failure": "Weight rsync first attempt lacked parent directory; created task-owned parent then second transfer completed",
+  "gpu_hours": 0,
+  "next": "Finish runtime migration, validate H200 imports and G0 physical regression"
+}
