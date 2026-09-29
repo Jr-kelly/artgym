@@ -1,37 +1,21 @@
 <!-- HOLD_CURRENT_START -->
-# 当前端点保持Goal：核心完成、后续运行
+# 当前端点保持Goal：全部实验完成，最终发布核验中
 
-截至2026-09-29T10:39:43.702889+00:00。Goal active，不创建子代理。工作区 `/data/research/artgym-experiments-20260921/hold-20260929`，分支 `feat/wuji-hold-controlled-20260929`，已push792ee2f，核心结果和后续脚本待增量提交。总截止2026-09-29 18:08:43UTC，17:08:43起至少留1h最终交付。
+截至2026-09-29T14:27:32.202255+00:00。工作区`/data/research/artgym-experiments-20260921/hold-20260929`，分支`feat/wuji-hold-controlled-20260929`，已push7f72404；最终报告和新冻结结果待本次提交。禁止子代理。原12h预算06:08:43—18:08:43UTC，全部计算14:22UTC前结束；14:23UTC开发机4H100均0%、1MiB、无计算PID，已告知用户释放。14:25UTC仅自建本地monitor1521593核验身份后停止，其它任务未碰。**不要重启任何旧实验或等待器。**
 
-核心4臂CP1000→2000全部完成、16权重备份核验、全部训练权重日志归档上传。源3严格2/5：父19/33、原续训57/65、系数1改动109/120（各128）；均值改动89.453125% vs原47.65625%，body差-0.78125pp。源11父0/0、原0/0、改动1/1，无实用改善。独立复算通过，analysis-seed2901/；源3开发选改动CP1500最终116/118，补充表不代替同预算。源3伸出保持大幅改善、源11仍伸出后回缩。奖励日程起终相同，44.4%不是约束未充分生效。
+核心同预算每臂+1000epoch/163840000交互：源3原57/128、65/128，改动109/128、120/128；均值47.65625%→89.453125%。第二续训种子源3原27/128、36/128，改115/128、123/128；24.609375%→92.96875%。两种子仅续训RNG不同，父专家和测试集相同。源11原0/0、改1/1（各128），仍未解决。源3改动为已有GoalDistance2系数.1→1，物理/网络/动作范围/严格成功固定。奖励日程起终相同，44.4%不是稳定约束未生效。
 
-核心GPU计算10:28UTC全部结束，用户已明确得知释放；核心结果触发预注册后续，10:30UTC已告知额外四卡约3.5h训练+.5h评估，预计北京时间22:15–22:45释放。随后10:32UTC实查四卡空闲才启动后续，不是偷偷延长核心。
+共享整合：同源3改动CP2000父，singleton3 vs shared0/1/2/3各+1000epoch至固定CP3000。共享原0/1/2严格全部0/128，源3为118/128、124/128；同表单源109/122、父112/117。历史策略原0/1/2为126/124、127/128、126/127（各128），全部旧成功权重保留。整合未通过每源每协议>=50%门槛。父本来不具备原抓姿技能，不能称本次共享训练遗忘父的已有原技能。原抓姿共享刀身通常<1s失稳；同批静态/历史策略大多稳定，仅描述，未证明统一根因。
 
-远端10.14.0.107:30296、key `/home/agiuser/.ssh/id_ed25519_h200`，root `/home/wangjiarui/artgym-hold-20260929`，python `/home/wangjiarui/artgym-runtime/bin/python`。后续各1000新增轮/163840000交互：
-- hold_r3_dense1_seed2902: GPU1 PID114961 CP1039 running
-- hold_r3_original_seed2902: GPU0 PID114963 CP1038 running
-- hold_integrate_shared_seed2903: GPU3 PID114967 CP2036 running
-- hold_integrate_singleton_seed2903: GPU2 PID114965 CP2039 running
+源11机制：脚本到位后固定拇指目标使严格2/5从1/1变36/59，但body125/122变92/87（各128），不是学习策略成功。下一步唯一优先事项：源11到位后拇指保持与非拇指支撑协同的受控修复，端点和刀身同时约束；不直接采用脚本固定，不追加本轮训练。
 
-复验seed2902从原源3专家CP1000起，原/改奖励，两臂模型优化器LR匹配；整合seed2903从源3改动CP2000起，singleton3 vs shared原0/1/2+3，仅池不同，两臂模型优化器LR匹配。源11明确未解决且排除整合。全部完整Hydra解析核验通过configs-followup/；本地解析曾SIGSEGV，远端补离线helper后通过，训练无影响。禁止修改正在运行训练源码。
+所有冻结时序本地/远端SHA和独立端点评分交叉复算通过：analysis-seed2901、analysis-seed2902、analysis-integration、analysis-thumb-latch，汇总followup-summary。实际核心/复验/整合开发与最终物理12800回合，额外干预512、视频14；复用结果不重复算物理独立回合。均仿真已训练基础抓姿邻域，非未见抓姿/真机。
 
-远端评估等待PID115408/115409（复验dev）、115410（复验final GPU0）、115411（整合final GPU2）。复验复用同32/128扰动，只新训练RNG不是新测试或新父专家种子；整合CP3000固定终点，4源各128，新0/1/2此前未测、源3显式复用核心已测集。整合不进行最终数据选点，报告每源。各等待须接手重查，不重复启动。
+32正式CP全部SHA/CPU核验，8完整训练归档恢复核验，30Release资产服务器SHA核验。Release id398889931/tagwuji-hold-20260929-v1，目前draft，**下一步最终commit/push、发布Release、公开下载和最终状态核验**。所有8视频已上传且检查；video/integration-inspection.json等。代表源3dense1视频严格1/1；源11dense1为0/1；整合两段均仅源3成功1/4。
 
-本地有界会话：monitor40377；复验备份4989、整合备份9624、后续完整归档/上传49802、复验收集独立复算68708、整合收集独立复算41326。日志runs/hold-20260929/{backup-replication,backup-integration,archive-followup,collect-replication,collect-integration}.log。评估等待截止16/16:30UTC。旧core backup58950/archive73336/collector22003均完成。
+训练归档等待器旧session49802读心跳空JSON退出，保留archive-followup.log，修复有界重试后v2session69676成功完成4归档；没有训练重启。视频打包改用现成imageio_ffmpeg，既有文件SHA一致后续接。所有train/eval/backup/collect/archive/render会话已完成；monitor已停，无待跑队列。
 
-6代表视频（父两段、final四段）已本机实际渲染并检查，固定历史第0回合5秒；只有source3dense1final严格1/1，其余0/1，不能代替冻结128。videos/hold-{parent,final}-source*.mp4，video/各report。全部视频/raw和核心两源raw已Release草稿SHA核验。Release id398889931，tagwuji-hold-20260929-v1，仍draft；不可提前发布最终结论。所有旧版本保留。
-
-附件Codex-Goal-Wuji-Hold-20260929.md仍未找到、路径问题待回复；依据明确用户消息执行，未声称已读。
-
-下一步：提交/push核心成果与后续配置；监测后续吞吐、里程碑备份和冻结评估，完成后独立复算；补共享策略代表视频、复验/整合权重原始证据与最终报告/交接，发布Release并核验push。源11依然未解决，最终唯一优先事项须按后续结果决定。不要把当前中间交付当Goal完成。
-
-最新 2026-09-29T11:02:26.832940+00:00：后续运行{'hold_r3_dense1_seed2902': 1157, 'hold_r3_original_seed2902': 1156, 'hold_integrate_shared_seed2903': 2149, 'hold_integrate_singleton_seed2903': 2158}。最新已push791a6ca。源11本机脚本拇指目标固定机制诊断已完成并独立逐步复算：原策略2/5严格各1/128，干预36/128、59/128，但body125/122降92/87，不能当学习策略成功或直接修复。analysis-thumb-latch/及Release raw已保存，本机诊断结束。不再附加训练。整合最终四源视频预定行0/128/256/384，等待器本地session29611，日志render-integration.log；其它后续队列照旧。
-
-最新 2026-09-29T12:20:57.375956+00:00：后续{'hold_r3_dense1_seed2902': 1557, 'hold_r3_original_seed2902': 1555, 'hold_integrate_shared_seed2903': 2535, 'hold_integrate_singleton_seed2903': 2562}。后续8个半程权重已核验（复验1250/1500、整合2250/2500），所有轮次累计24正式CP保存。最新push eed1057。训练/评估等待/收集/视频队列保持原样，尚无后续冻结结果。
-
-最新 2026-09-29T13:25:32.496390+00:00：后续{'hold_r3_dense1_seed2902': 1881, 'hold_r3_original_seed2902': 1879, 'hold_integrate_shared_seed2903': 2853, 'hold_integrate_singleton_seed2903': 2889}，全部12个后续1250/1500/1750和2250/2500/2750权重已核验，累计28正式CP。预计训练13:45–13:55UTC完，最终评估+交付仍余量充分。源11机制结论保持原样，无附加训练。所有后续eval/collect/archive/video等待器ID见当前文档，接手重查不重复。
-
-最新 2026-09-29T13:57:15.087994+00:00：全部后续训练完成，最终4CP备份SHA/CPU验证，累计32正式CP和24Release资产。singleton13:47:25、dense复验13:49:05、original复验13:49:35、shared13:55:15UTC完成。GPU3已释放，GPU0/1开发评估后GPU0最终复验；GPU2整合最终。归档旧session49802因读心跳JSON瞬间空内容退出，原日志保留，修复后v2 session69676已归档上传全部4组，无需重启。完整归档恢复检查session51681；本机视频session29611已开始实际渲染。仍待两冻结报告和独立复算，严禁将训练完成当Goal交付完成。当前已push d00d7c0。下一步冻结结果、视频、最终报告及发布。
+详细报告`research/hold-20260929/README.md`；`weights-index.json`；资源`receipts/resources-final.json`，训练含预检26.2475GPUh，结束前4h整机利用率77.465%/100%覆盖；释放凭据`receipts/remote-released.json`。附件Hold文档未在可见路径找到，依明确用户消息执行，不声称已读。
 <!-- HOLD_CURRENT_END -->
 
 # Wuji端点保持受控实验续接
@@ -488,3 +472,33 @@ video-integration-shared-fixed5: strict 1/4; individual source outcomes recorded
 
 第二续训种子开发集原奖励选CP1500、改动选CP2000；最终同预算仍CP2000固定，开发选点单列。GPU1开发评估完成，GPU0等待器进入最终128评估；GPU2整合继续。
 证据：research/hold-20260929/receipts/replication-development-selection.json。下一步：完成既有最终测试，保持所有失败和不同CP选择的区别。
+
+## 2026-09-29T14:21:28.516531+00:00 integration_frozen_independent_rescore_completed
+
+Shared-policy and singleton controls raw SHA verified and independently rescored per source
+证据：research/hold-20260929/receipts/raw-integration.json, research/hold-20260929/analysis-integration/report.json。下一步：Report every source and preserve prior successful expert; inspect representative actual video and complete delivery。
+
+## 2026-09-29T14:22:20.748875+00:00 core_frozen_evidence_collected
+
+Source3 seed2902: development and final raw evidence mirrored; every remote/local file SHA verified
+证据：research/hold-20260929/receipts/raw-row3-seed2902.json。下一步：Independently rescore both sources before followup decisions。
+
+## 2026-09-29T14:22:26.016917+00:00 core_frozen_independent_rescore_completed
+
+seed2902 sources [3] independently rescored; matched-budget and selected results remain separate
+证据：research/hold-20260929/analysis-seed2902/report.json。下一步：Inspect all counts and endpoint diagnostics; apply frozen followup criteria。
+
+## 2026-09-29T14:23:13.498378+00:00 remote_gpu_released
+
+14:23UTC实查开发机4H100均0%、1MiB，无计算PID，无本轮训练评估进程。全部冻结结果独立复算通过，第二种子源3原24.609375%改92.96875%；整合源3成功但原0/1/2全部0，未通过联合门槛。告知用户开发机已释放；仅本机报告、上传与发布继续。
+证据：research/hold-20260929/receipts/remote-released.json, research/hold-20260929/followup-summary/report.json。下一步：完成资源核算、最终报告/交接、公开Release验证与独立分支push。
+
+## 2026-09-29T14:25:03.539723+00:00 owned_monitor_stopped
+
+本轮训练/评估/备份/收集/归档/渲染队列全部完成，仅自建只读monitor仍存活；核验PID1521593命令与cwd后SIGTERM停止，不影响其它任务。
+证据：research/hold-20260929/receipts/monitor-stopped.json。下一步：最终报告及发布，开发机保持释放。
+
+## 2026-09-29T14:27:32.221573+00:00 final_conclusions_verified
+
+所有预定实验及条件后续已完成，源3两续训种子奖励改动有效；源11未解决；共享保留源3但未获得原0/1/2技能，body在首秒附近失稳。30资产/32正式CP/8视频及原始时序均保存。下一步唯一研究优先为源11到位后保持与支撑协同受控修复；当前只做最终发布，不再计算。
+证据：research/hold-20260929/README.md, research/hold-20260929/followup-summary/report.json, research/hold-20260929/analysis-integration/body-breach-timing.json, research/hold-20260929/receipts/assets-final-draft-verified.json。下一步：最终commit/push、公开Release和下载哈希核验，完成本轮有界Goal交付。

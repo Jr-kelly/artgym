@@ -1,0 +1,65 @@
+{
+  "frozen_utc": "2026-09-29T14:01:20.900458+00:00",
+  "row": 3,
+  "states_sha256": "92a04a73289cfa83a071e982fcebeab3ebf0ee7c21a06d726b7c34b6f2eca071",
+  "models": {
+    "parent": {
+      "path": "runs/hold-20260929/parents/expert3.pth",
+      "sha256": "e4111879414e4e707ccb46538a0c493f71a6fdc1d4f30aa451f68a9170cae13f"
+    },
+    "original-final": {
+      "path": "runs/hold_r3_original_seed2902/checkpoints/epoch_002000.pth",
+      "sha256": "71ad9ddd546db0cbbc67546aaecbf8fac6844a7a88c054ad690c8612d510c52e"
+    },
+    "original-selected": {
+      "path": "runs/hold_r3_original_seed2902/checkpoints/epoch_001500.pth",
+      "sha256": "b299130a2898c6b61c93d41f71e86546357e57aae1994a79c30d18f66ec0435c"
+    },
+    "dense1-final": {
+      "path": "runs/hold_r3_dense1_seed2902/checkpoints/epoch_002000.pth",
+      "sha256": "3c784fac57944fe184c89d0d541436511caaac83c8fd2836f6352f80dc39a882"
+    },
+    "dense1-selected": {
+      "path": "runs/hold_r3_dense1_seed2902/checkpoints/epoch_002000.pth",
+      "sha256": "3c784fac57944fe184c89d0d541436511caaac83c8fd2836f6352f80dc39a882"
+    }
+  },
+  "selected": {
+    "original": {
+      "status": "frozen",
+      "frozen_utc": "2026-09-29T14:00:56.570492+00:00",
+      "name": "hold_r3_original_seed2902",
+      "row": 3,
+      "condition": "original",
+      "epoch": 1500,
+      "checkpoint": "runs/hold_r3_original_seed2902/checkpoints/epoch_001500.pth",
+      "sha256": "b299130a2898c6b61c93d41f71e86546357e57aae1994a79c30d18f66ec0435c",
+      "scores": {
+        "1250": 0.46875,
+        "1500": 0.515625,
+        "1750": 0.234375,
+        "2000": 0.25
+      },
+      "rule": "Equal strict fixed2/5 rates on32 fixed own-source development perturbations; tie latest; final not used"
+    },
+    "dense1": {
+      "status": "frozen",
+      "frozen_utc": "2026-09-29T14:01:03.637752+00:00",
+      "name": "hold_r3_dense1_seed2902",
+      "row": 3,
+      "condition": "dense1",
+      "epoch": 2000,
+      "checkpoint": "runs/hold_r3_dense1_seed2902/checkpoints/epoch_002000.pth",
+      "sha256": "3c784fac57944fe184c89d0d541436511caaac83c8fd2836f6352f80dc39a882",
+      "scores": {
+        "1250": 0.703125,
+        "1500": 0.921875,
+        "1750": 0.921875,
+        "2000": 0.9375
+      },
+      "rule": "Equal strict fixed2/5 rates on32 fixed own-source development perturbations; tie latest; final not used"
+    }
+  },
+  "gpu": 0,
+  "scope": "Same128 new perturbations per source and physicalGPU. Primary final2000 equal additional163840000 interactions; developmentselected table supplementary. Parent reference unchanged. Not unseen-grasp generalization."
+}

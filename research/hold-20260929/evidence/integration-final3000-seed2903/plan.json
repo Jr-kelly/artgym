@@ -1,0 +1,52 @@
+{
+  "frozen_utc": "2026-09-29T13:55:20.883022+00:00",
+  "sources": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "trials_per_source": 128,
+  "training_names": {
+    "singleton": "hold_integrate_singleton_seed2903",
+    "shared": "hold_integrate_shared_seed2903"
+  },
+  "seed": 2026092903,
+  "additional_epochs": 1000,
+  "additional_interactions": 163840000,
+  "final_epoch": 3000,
+  "parent_checkpoint": "runs/hold_r3_dense1_seed2901/checkpoints/epoch_002000.pth",
+  "parent_sha256": "fae13402080f3fac1665d61c69cdc078302b15ea75db8b14c85e500073d748cd",
+  "historical_checkpoint": "runs/hold-20260929/parents/historical-reference.pth",
+  "historical_sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+  "final_states": "research/hold-20260929/data/integration-final.npy",
+  "final_states_sha256": "8fe44bf4ce724318bddfc53976b071971442af772574cbfd5af9574f216ffad8",
+  "training_pool_sha256": {
+    "integration-shared.npy": "fccb3b4d66291e078ac4247fa3310ff780543a73982007767e4aad820ad3a506",
+    "integration-singleton3.npy": "5194e70a25f88d0e96a8a698df8e8d4da2743f97a5a5344202d60e087f39b8dc"
+  },
+  "evaluation_label": "integration-final3000-seed2903",
+  "deadline_utc": "2026-09-29T16:30:00+00:00",
+  "selection": "FinalCP3000 only, no final-data checkpoint selection",
+  "interpretation": "Report each source and both2/5 protocols; joint-policy success requires>=50% strict on every source/protocol, with source3 retention compared to singleton and parent. Original3 represent2near-duplicate clusters. Source11 excluded unresolved.",
+  "scope": "New multi-source training; row3 final128 already used in core, explicitly reused diagnostic cohort, not new independent test for integration. Original0/1/2 final128 were frozen but unused before integration. No unseen-base claim.",
+  "models": {
+    "parent": {
+      "path": "runs/hold_r3_dense1_seed2901/checkpoints/epoch_002000.pth",
+      "sha256": "fae13402080f3fac1665d61c69cdc078302b15ea75db8b14c85e500073d748cd"
+    },
+    "historical": {
+      "path": "runs/hold-20260929/parents/historical-reference.pth",
+      "sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac"
+    },
+    "singleton": {
+      "path": "runs/hold_integrate_singleton_seed2903/checkpoints/epoch_003000.pth",
+      "sha256": "57e4ecfd49e77ff2705576695bf8a636c81daaa8f66c50eddc5d529b500f6c27"
+    },
+    "shared": {
+      "path": "runs/hold_integrate_shared_seed2903/checkpoints/epoch_003000.pth",
+      "sha256": "1829aeac7a186ef1b9f63ffb7c5464f60746bbe41ac4e1eef1ad30b9a6a78664"
+    }
+  },
+  "gpu": 2
+}

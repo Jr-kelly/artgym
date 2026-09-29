@@ -1,0 +1,354 @@
+{
+  "status": "independently_rescored",
+  "inputs": [
+    {
+      "path": "/data/research/artgym-experiments-20260921/hold-20260929/runs/hold-20260929/final-row3-seed2902/results.json",
+      "sha256": "80d28f59b639a6da0da7c49bcdfbfd1847efde4ea63afad911eb098543e012a8",
+      "plan": {
+        "frozen_utc": "2026-09-29T14:01:20.900458+00:00",
+        "row": 3,
+        "states_sha256": "92a04a73289cfa83a071e982fcebeab3ebf0ee7c21a06d726b7c34b6f2eca071",
+        "models": {
+          "parent": {
+            "path": "runs/hold-20260929/parents/expert3.pth",
+            "sha256": "e4111879414e4e707ccb46538a0c493f71a6fdc1d4f30aa451f68a9170cae13f"
+          },
+          "original-final": {
+            "path": "runs/hold_r3_original_seed2902/checkpoints/epoch_002000.pth",
+            "sha256": "71ad9ddd546db0cbbc67546aaecbf8fac6844a7a88c054ad690c8612d510c52e"
+          },
+          "original-selected": {
+            "path": "runs/hold_r3_original_seed2902/checkpoints/epoch_001500.pth",
+            "sha256": "b299130a2898c6b61c93d41f71e86546357e57aae1994a79c30d18f66ec0435c"
+          },
+          "dense1-final": {
+            "path": "runs/hold_r3_dense1_seed2902/checkpoints/epoch_002000.pth",
+            "sha256": "3c784fac57944fe184c89d0d541436511caaac83c8fd2836f6352f80dc39a882"
+          },
+          "dense1-selected": {
+            "path": "runs/hold_r3_dense1_seed2902/checkpoints/epoch_002000.pth",
+            "sha256": "3c784fac57944fe184c89d0d541436511caaac83c8fd2836f6352f80dc39a882"
+          }
+        },
+        "selected": {
+          "original": {
+            "status": "frozen",
+            "frozen_utc": "2026-09-29T14:00:56.570492+00:00",
+            "name": "hold_r3_original_seed2902",
+            "row": 3,
+            "condition": "original",
+            "epoch": 1500,
+            "checkpoint": "runs/hold_r3_original_seed2902/checkpoints/epoch_001500.pth",
+            "sha256": "b299130a2898c6b61c93d41f71e86546357e57aae1994a79c30d18f66ec0435c",
+            "scores": {
+              "1250": 0.46875,
+              "1500": 0.515625,
+              "1750": 0.234375,
+              "2000": 0.25
+            },
+            "rule": "Equal strict fixed2/5 rates on32 fixed own-source development perturbations; tie latest; final not used"
+          },
+          "dense1": {
+            "status": "frozen",
+            "frozen_utc": "2026-09-29T14:01:03.637752+00:00",
+            "name": "hold_r3_dense1_seed2902",
+            "row": 3,
+            "condition": "dense1",
+            "epoch": 2000,
+            "checkpoint": "runs/hold_r3_dense1_seed2902/checkpoints/epoch_002000.pth",
+            "sha256": "3c784fac57944fe184c89d0d541436511caaac83c8fd2836f6352f80dc39a882",
+            "scores": {
+              "1250": 0.703125,
+              "1500": 0.921875,
+              "1750": 0.921875,
+              "2000": 0.9375
+            },
+            "rule": "Equal strict fixed2/5 rates on32 fixed own-source development perturbations; tie latest; final not used"
+          }
+        },
+        "gpu": 0,
+        "scope": "Same128 new perturbations per source and physicalGPU. Primary final2000 equal additional163840000 interactions; developmentselected table supplementary. Parent reference unchanged. Not unseen-grasp generalization."
+      }
+    }
+  ],
+  "summaries": [
+    {
+      "source": 3,
+      "model": "static",
+      "protocol": "static",
+      "n": 128,
+      "success": null,
+      "alive": 125,
+      "body_stable": 125
+    },
+    {
+      "source": 3,
+      "model": "parent",
+      "protocol": "fixed2",
+      "n": 128,
+      "success": 19,
+      "alive": 126,
+      "body_stable": 126,
+      "first_cycle": 126,
+      "static_stable_n": 125,
+      "success_on_static_stable": 18,
+      "trace_sha256": "ebf126b315c3e200ce1315f6cc26412cbba1e71a12198935ece2b9bdf7973f7d",
+      "reused": false
+    },
+    {
+      "source": 3,
+      "model": "parent",
+      "protocol": "fixed5",
+      "n": 128,
+      "success": 33,
+      "alive": 123,
+      "body_stable": 123,
+      "first_cycle": 126,
+      "static_stable_n": 125,
+      "success_on_static_stable": 33,
+      "trace_sha256": "9d91a8c61a3f820967717298afd0e9b4c3cc715cff8a44f291f6638c8891b91e",
+      "reused": false
+    },
+    {
+      "source": 3,
+      "model": "parent",
+      "protocol": "arrival",
+      "n": 128,
+      "success": 125,
+      "alive": 121,
+      "body_stable": 118,
+      "first_cycle": 128,
+      "static_stable_n": 125,
+      "success_on_static_stable": 122,
+      "trace_sha256": "26e123eaf10239d843b5868503169c6a959f07a03ff3d4546227012c39ac5db4",
+      "reused": false
+    },
+    {
+      "source": 3,
+      "model": "original-final",
+      "protocol": "fixed2",
+      "n": 128,
+      "success": 27,
+      "alive": 127,
+      "body_stable": 127,
+      "first_cycle": 127,
+      "static_stable_n": 125,
+      "success_on_static_stable": 26,
+      "trace_sha256": "0cae36d07e06d50b7abd1cda6fee4d3279ef8a8547ae285622f9556dbb8a2237",
+      "reused": false
+    },
+    {
+      "source": 3,
+      "model": "original-final",
+      "protocol": "fixed5",
+      "n": 128,
+      "success": 36,
+      "alive": 127,
+      "body_stable": 127,
+      "first_cycle": 127,
+      "static_stable_n": 125,
+      "success_on_static_stable": 35,
+      "trace_sha256": "ec6db5ef9d66393caf8ff193d4e0be77307201fb36e22d8096e592d2cf9090ea",
+      "reused": false
+    },
+    {
+      "source": 3,
+      "model": "original-final",
+      "protocol": "arrival",
+      "n": 128,
+      "success": 127,
+      "alive": 122,
+      "body_stable": 121,
+      "first_cycle": 127,
+      "static_stable_n": 125,
+      "success_on_static_stable": 125,
+      "trace_sha256": "f23d47dcf9105e1faf6817fe88c4272940c46be47341f61741ddf8ca0a2b9efc",
+      "reused": false
+    },
+    {
+      "source": 3,
+      "model": "original-selected",
+      "protocol": "fixed2",
+      "n": 128,
+      "success": 66,
+      "alive": 128,
+      "body_stable": 128,
+      "first_cycle": 126,
+      "static_stable_n": 125,
+      "success_on_static_stable": 65,
+      "trace_sha256": "cb351c07feb3c1f8c68eb49fcdd28f5f058bf1203abeb590822c75b4d7fc5178",
+      "reused": false
+    },
+    {
+      "source": 3,
+      "model": "original-selected",
+      "protocol": "fixed5",
+      "n": 128,
+      "success": 58,
+      "alive": 127,
+      "body_stable": 127,
+      "first_cycle": 127,
+      "static_stable_n": 125,
+      "success_on_static_stable": 56,
+      "trace_sha256": "f3574d0c6612ea154b3ee6092ad02cfcc206f49601f166ee22ded6da22c58f6c",
+      "reused": false
+    },
+    {
+      "source": 3,
+      "model": "original-selected",
+      "protocol": "arrival",
+      "n": 128,
+      "success": 126,
+      "alive": 121,
+      "body_stable": 121,
+      "first_cycle": 128,
+      "static_stable_n": 125,
+      "success_on_static_stable": 123,
+      "trace_sha256": "fbde212bb434fb97267d6f9e0e3d447ff6b0e2eb4d32e249eb469ab7c7eb0061",
+      "reused": false
+    },
+    {
+      "source": 3,
+      "model": "dense1-final",
+      "protocol": "fixed2",
+      "n": 128,
+      "success": 115,
+      "alive": 127,
+      "body_stable": 127,
+      "first_cycle": 128,
+      "static_stable_n": 125,
+      "success_on_static_stable": 113,
+      "trace_sha256": "abb401045608dcffc38e115eebdd1745ccd7be1460ff49da2452c34f068e2d32",
+      "reused": false
+    },
+    {
+      "source": 3,
+      "model": "dense1-final",
+      "protocol": "fixed5",
+      "n": 128,
+      "success": 123,
+      "alive": 128,
+      "body_stable": 128,
+      "first_cycle": 128,
+      "static_stable_n": 125,
+      "success_on_static_stable": 121,
+      "trace_sha256": "23cb337fe18e7a12a22f088b4b5bd1d6f783b31348aba910aa139946cdfe2cf2",
+      "reused": false
+    },
+    {
+      "source": 3,
+      "model": "dense1-final",
+      "protocol": "arrival",
+      "n": 128,
+      "success": 126,
+      "alive": 121,
+      "body_stable": 120,
+      "first_cycle": 128,
+      "static_stable_n": 125,
+      "success_on_static_stable": 123,
+      "trace_sha256": "11b0b98b5b26a951c5358540b8588266690900afe757bc88c9e2a19ae8e2ffb5",
+      "reused": false
+    },
+    {
+      "source": 3,
+      "model": "dense1-selected",
+      "protocol": "fixed2",
+      "n": 128,
+      "success": 115,
+      "alive": 127,
+      "body_stable": 127,
+      "first_cycle": 128,
+      "static_stable_n": 125,
+      "success_on_static_stable": 113,
+      "trace_sha256": "abb401045608dcffc38e115eebdd1745ccd7be1460ff49da2452c34f068e2d32",
+      "reused": true
+    },
+    {
+      "source": 3,
+      "model": "dense1-selected",
+      "protocol": "fixed5",
+      "n": 128,
+      "success": 123,
+      "alive": 128,
+      "body_stable": 128,
+      "first_cycle": 128,
+      "static_stable_n": 125,
+      "success_on_static_stable": 121,
+      "trace_sha256": "23cb337fe18e7a12a22f088b4b5bd1d6f783b31348aba910aa139946cdfe2cf2",
+      "reused": true
+    },
+    {
+      "source": 3,
+      "model": "dense1-selected",
+      "protocol": "arrival",
+      "n": 128,
+      "success": 126,
+      "alive": 121,
+      "body_stable": 120,
+      "first_cycle": 128,
+      "static_stable_n": 125,
+      "success_on_static_stable": 123,
+      "trace_sha256": "11b0b98b5b26a951c5358540b8588266690900afe757bc88c9e2a19ae8e2ffb5",
+      "reused": true
+    }
+  ],
+  "contrasts": [
+    {
+      "source": 3,
+      "selection": "final",
+      "protocol": "fixed2",
+      "changed_minus_original_pp": 68.75,
+      "changed_only": 91,
+      "original_only": 3,
+      "both": 24
+    },
+    {
+      "source": 3,
+      "selection": "final",
+      "protocol": "fixed5",
+      "changed_minus_original_pp": 67.96875,
+      "changed_only": 89,
+      "original_only": 2,
+      "both": 34
+    },
+    {
+      "source": 3,
+      "selection": "final",
+      "protocol": "arrival",
+      "changed_minus_original_pp": -0.78125,
+      "changed_only": 1,
+      "original_only": 2,
+      "both": 125
+    },
+    {
+      "source": 3,
+      "selection": "selected",
+      "protocol": "fixed2",
+      "changed_minus_original_pp": 38.28125,
+      "changed_only": 53,
+      "original_only": 4,
+      "both": 62
+    },
+    {
+      "source": 3,
+      "selection": "selected",
+      "protocol": "fixed5",
+      "changed_minus_original_pp": 50.78125,
+      "changed_only": 66,
+      "original_only": 1,
+      "both": 57
+    },
+    {
+      "source": 3,
+      "selection": "selected",
+      "protocol": "arrival",
+      "changed_minus_original_pp": 0.0,
+      "changed_only": 2,
+      "original_only": 2,
+      "both": 124
+    }
+  ],
+  "unique_physical_episodes_including_static": 1664,
+  "reported_policy_rows": 1920,
+  "scope": "Within-source128 perturbation paired empirical differences, one continuation seed unless separately replicated. Two distinct sources, not256 independent base grasps. Identical final/selected weight evidence explicitly reused; not new physical trials. No hardware or novel-grasp-generalization claim."
+}

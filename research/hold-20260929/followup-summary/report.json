@@ -1,0 +1,553 @@
+{
+  "replication": [
+    {
+      "seed": "seed2901",
+      "original": [
+        {
+          "source": 3,
+          "model": "original-final",
+          "protocol": "fixed2",
+          "n": 128,
+          "success": 57,
+          "alive": 127,
+          "body_stable": 127,
+          "first_cycle": 127,
+          "static_stable_n": 125,
+          "success_on_static_stable": 56,
+          "trace_sha256": "b3ae11c5e15254237f2bf621d577fedb874ae42c10b039756a2e2ff03fbad26e",
+          "reused": false
+        },
+        {
+          "source": 3,
+          "model": "original-final",
+          "protocol": "fixed5",
+          "n": 128,
+          "success": 65,
+          "alive": 128,
+          "body_stable": 128,
+          "first_cycle": 127,
+          "static_stable_n": 125,
+          "success_on_static_stable": 64,
+          "trace_sha256": "70b0aaa633b2e0929daa547f22d17f04d794fb79f9b538e9396db6c5f70d8888",
+          "reused": false
+        }
+      ],
+      "changed": [
+        {
+          "source": 3,
+          "model": "dense1-final",
+          "protocol": "fixed2",
+          "n": 128,
+          "success": 109,
+          "alive": 125,
+          "body_stable": 125,
+          "first_cycle": 127,
+          "static_stable_n": 125,
+          "success_on_static_stable": 106,
+          "trace_sha256": "aace9fbbbb6af946b1860d3bb66dcfc766614df1efbee252fcaf70b5d8ee8075",
+          "reused": false
+        },
+        {
+          "source": 3,
+          "model": "dense1-final",
+          "protocol": "fixed5",
+          "n": 128,
+          "success": 120,
+          "alive": 128,
+          "body_stable": 128,
+          "first_cycle": 127,
+          "static_stable_n": 125,
+          "success_on_static_stable": 117,
+          "trace_sha256": "ba7ca49024e24c4bac9f52834b63393c48fb022943cb0957f59e7e42f6c3519c",
+          "reused": false
+        }
+      ],
+      "original_mean_pct": 47.65625,
+      "changed_mean_pct": 89.453125,
+      "change_pp": 41.796875,
+      "body_change_pp": -0.78125
+    },
+    {
+      "seed": "seed2902",
+      "original": [
+        {
+          "source": 3,
+          "model": "original-final",
+          "protocol": "fixed2",
+          "n": 128,
+          "success": 27,
+          "alive": 127,
+          "body_stable": 127,
+          "first_cycle": 127,
+          "static_stable_n": 125,
+          "success_on_static_stable": 26,
+          "trace_sha256": "0cae36d07e06d50b7abd1cda6fee4d3279ef8a8547ae285622f9556dbb8a2237",
+          "reused": false
+        },
+        {
+          "source": 3,
+          "model": "original-final",
+          "protocol": "fixed5",
+          "n": 128,
+          "success": 36,
+          "alive": 127,
+          "body_stable": 127,
+          "first_cycle": 127,
+          "static_stable_n": 125,
+          "success_on_static_stable": 35,
+          "trace_sha256": "ec6db5ef9d66393caf8ff193d4e0be77307201fb36e22d8096e592d2cf9090ea",
+          "reused": false
+        }
+      ],
+      "changed": [
+        {
+          "source": 3,
+          "model": "dense1-final",
+          "protocol": "fixed2",
+          "n": 128,
+          "success": 115,
+          "alive": 127,
+          "body_stable": 127,
+          "first_cycle": 128,
+          "static_stable_n": 125,
+          "success_on_static_stable": 113,
+          "trace_sha256": "abb401045608dcffc38e115eebdd1745ccd7be1460ff49da2452c34f068e2d32",
+          "reused": false
+        },
+        {
+          "source": 3,
+          "model": "dense1-final",
+          "protocol": "fixed5",
+          "n": 128,
+          "success": 123,
+          "alive": 128,
+          "body_stable": 128,
+          "first_cycle": 128,
+          "static_stable_n": 125,
+          "success_on_static_stable": 121,
+          "trace_sha256": "23cb337fe18e7a12a22f088b4b5bd1d6f783b31348aba910aa139946cdfe2cf2",
+          "reused": false
+        }
+      ],
+      "original_mean_pct": 24.609375,
+      "changed_mean_pct": 92.96875,
+      "change_pp": 68.359375,
+      "body_change_pp": 0.390625
+    }
+  ],
+  "integration": [
+    {
+      "source": 0,
+      "models": {
+        "historical": [
+          {
+            "source": 0,
+            "model": "historical",
+            "protocol": "fixed2",
+            "n": 128,
+            "success": 126,
+            "alive": 126,
+            "body_stable": 126,
+            "trace_sha256": "e3998b3e7513252788957b8b380d9b8204a39cc715eb973b7b41aca245d65445"
+          },
+          {
+            "source": 0,
+            "model": "historical",
+            "protocol": "fixed5",
+            "n": 128,
+            "success": 124,
+            "alive": 124,
+            "body_stable": 124,
+            "trace_sha256": "23a2d2c39934801747519797730fd9f31efc81d0a9f499630be5740e76eeea49"
+          }
+        ],
+        "parent": [
+          {
+            "source": 0,
+            "model": "parent",
+            "protocol": "fixed2",
+            "n": 128,
+            "success": 0,
+            "alive": 1,
+            "body_stable": 0,
+            "trace_sha256": "557f4b81ad4c4a993e66b5685518ffd731be41e52ce42f5c62efe15df9020eba"
+          },
+          {
+            "source": 0,
+            "model": "parent",
+            "protocol": "fixed5",
+            "n": 128,
+            "success": 0,
+            "alive": 1,
+            "body_stable": 0,
+            "trace_sha256": "628497be01eda4e7e13bd97882ddb1022ea67466f589b57b5be639d6942f7783"
+          }
+        ],
+        "singleton": [
+          {
+            "source": 0,
+            "model": "singleton",
+            "protocol": "fixed2",
+            "n": 128,
+            "success": 0,
+            "alive": 0,
+            "body_stable": 0,
+            "trace_sha256": "19602658121b99bdedc8a527eb2bebfef764bba816749025cb05a144a83a8f23"
+          },
+          {
+            "source": 0,
+            "model": "singleton",
+            "protocol": "fixed5",
+            "n": 128,
+            "success": 0,
+            "alive": 0,
+            "body_stable": 0,
+            "trace_sha256": "bc006444c66510657478ab729d82fb9f1bf2b941f2f0828f67288d3690e30af6"
+          }
+        ],
+        "shared": [
+          {
+            "source": 0,
+            "model": "shared",
+            "protocol": "fixed2",
+            "n": 128,
+            "success": 0,
+            "alive": 0,
+            "body_stable": 0,
+            "trace_sha256": "c077c8641dcecb88915c0fdce78fe1765ae2a14b2b9f132b218f23d01dc9676d"
+          },
+          {
+            "source": 0,
+            "model": "shared",
+            "protocol": "fixed5",
+            "n": 128,
+            "success": 0,
+            "alive": 0,
+            "body_stable": 0,
+            "trace_sha256": "47f4d8973e0cc5e5d835b8406e42c36ed6ab42186a8b5a02ed24d86627f74855"
+          }
+        ]
+      },
+      "shared_passes_both": false,
+      "shared_minus_singleton_pp": 0.0,
+      "shared_minus_parent_pp": 0.0
+    },
+    {
+      "source": 1,
+      "models": {
+        "historical": [
+          {
+            "source": 1,
+            "model": "historical",
+            "protocol": "fixed2",
+            "n": 128,
+            "success": 127,
+            "alive": 128,
+            "body_stable": 127,
+            "trace_sha256": "e3998b3e7513252788957b8b380d9b8204a39cc715eb973b7b41aca245d65445"
+          },
+          {
+            "source": 1,
+            "model": "historical",
+            "protocol": "fixed5",
+            "n": 128,
+            "success": 128,
+            "alive": 128,
+            "body_stable": 128,
+            "trace_sha256": "23a2d2c39934801747519797730fd9f31efc81d0a9f499630be5740e76eeea49"
+          }
+        ],
+        "parent": [
+          {
+            "source": 1,
+            "model": "parent",
+            "protocol": "fixed2",
+            "n": 128,
+            "success": 0,
+            "alive": 0,
+            "body_stable": 0,
+            "trace_sha256": "557f4b81ad4c4a993e66b5685518ffd731be41e52ce42f5c62efe15df9020eba"
+          },
+          {
+            "source": 1,
+            "model": "parent",
+            "protocol": "fixed5",
+            "n": 128,
+            "success": 0,
+            "alive": 1,
+            "body_stable": 0,
+            "trace_sha256": "628497be01eda4e7e13bd97882ddb1022ea67466f589b57b5be639d6942f7783"
+          }
+        ],
+        "singleton": [
+          {
+            "source": 1,
+            "model": "singleton",
+            "protocol": "fixed2",
+            "n": 128,
+            "success": 0,
+            "alive": 0,
+            "body_stable": 0,
+            "trace_sha256": "19602658121b99bdedc8a527eb2bebfef764bba816749025cb05a144a83a8f23"
+          },
+          {
+            "source": 1,
+            "model": "singleton",
+            "protocol": "fixed5",
+            "n": 128,
+            "success": 0,
+            "alive": 0,
+            "body_stable": 0,
+            "trace_sha256": "bc006444c66510657478ab729d82fb9f1bf2b941f2f0828f67288d3690e30af6"
+          }
+        ],
+        "shared": [
+          {
+            "source": 1,
+            "model": "shared",
+            "protocol": "fixed2",
+            "n": 128,
+            "success": 0,
+            "alive": 1,
+            "body_stable": 0,
+            "trace_sha256": "c077c8641dcecb88915c0fdce78fe1765ae2a14b2b9f132b218f23d01dc9676d"
+          },
+          {
+            "source": 1,
+            "model": "shared",
+            "protocol": "fixed5",
+            "n": 128,
+            "success": 0,
+            "alive": 1,
+            "body_stable": 0,
+            "trace_sha256": "47f4d8973e0cc5e5d835b8406e42c36ed6ab42186a8b5a02ed24d86627f74855"
+          }
+        ]
+      },
+      "shared_passes_both": false,
+      "shared_minus_singleton_pp": 0.0,
+      "shared_minus_parent_pp": 0.0
+    },
+    {
+      "source": 2,
+      "models": {
+        "historical": [
+          {
+            "source": 2,
+            "model": "historical",
+            "protocol": "fixed2",
+            "n": 128,
+            "success": 126,
+            "alive": 127,
+            "body_stable": 127,
+            "trace_sha256": "e3998b3e7513252788957b8b380d9b8204a39cc715eb973b7b41aca245d65445"
+          },
+          {
+            "source": 2,
+            "model": "historical",
+            "protocol": "fixed5",
+            "n": 128,
+            "success": 127,
+            "alive": 127,
+            "body_stable": 127,
+            "trace_sha256": "23a2d2c39934801747519797730fd9f31efc81d0a9f499630be5740e76eeea49"
+          }
+        ],
+        "parent": [
+          {
+            "source": 2,
+            "model": "parent",
+            "protocol": "fixed2",
+            "n": 128,
+            "success": 0,
+            "alive": 0,
+            "body_stable": 0,
+            "trace_sha256": "557f4b81ad4c4a993e66b5685518ffd731be41e52ce42f5c62efe15df9020eba"
+          },
+          {
+            "source": 2,
+            "model": "parent",
+            "protocol": "fixed5",
+            "n": 128,
+            "success": 0,
+            "alive": 0,
+            "body_stable": 0,
+            "trace_sha256": "628497be01eda4e7e13bd97882ddb1022ea67466f589b57b5be639d6942f7783"
+          }
+        ],
+        "singleton": [
+          {
+            "source": 2,
+            "model": "singleton",
+            "protocol": "fixed2",
+            "n": 128,
+            "success": 0,
+            "alive": 1,
+            "body_stable": 0,
+            "trace_sha256": "19602658121b99bdedc8a527eb2bebfef764bba816749025cb05a144a83a8f23"
+          },
+          {
+            "source": 2,
+            "model": "singleton",
+            "protocol": "fixed5",
+            "n": 128,
+            "success": 0,
+            "alive": 1,
+            "body_stable": 0,
+            "trace_sha256": "bc006444c66510657478ab729d82fb9f1bf2b941f2f0828f67288d3690e30af6"
+          }
+        ],
+        "shared": [
+          {
+            "source": 2,
+            "model": "shared",
+            "protocol": "fixed2",
+            "n": 128,
+            "success": 0,
+            "alive": 0,
+            "body_stable": 0,
+            "trace_sha256": "c077c8641dcecb88915c0fdce78fe1765ae2a14b2b9f132b218f23d01dc9676d"
+          },
+          {
+            "source": 2,
+            "model": "shared",
+            "protocol": "fixed5",
+            "n": 128,
+            "success": 0,
+            "alive": 0,
+            "body_stable": 0,
+            "trace_sha256": "47f4d8973e0cc5e5d835b8406e42c36ed6ab42186a8b5a02ed24d86627f74855"
+          }
+        ]
+      },
+      "shared_passes_both": false,
+      "shared_minus_singleton_pp": 0.0,
+      "shared_minus_parent_pp": 0.0
+    },
+    {
+      "source": 3,
+      "models": {
+        "historical": [
+          {
+            "source": 3,
+            "model": "historical",
+            "protocol": "fixed2",
+            "n": 128,
+            "success": 0,
+            "alive": 127,
+            "body_stable": 127,
+            "trace_sha256": "e3998b3e7513252788957b8b380d9b8204a39cc715eb973b7b41aca245d65445"
+          },
+          {
+            "source": 3,
+            "model": "historical",
+            "protocol": "fixed5",
+            "n": 128,
+            "success": 0,
+            "alive": 127,
+            "body_stable": 126,
+            "trace_sha256": "23a2d2c39934801747519797730fd9f31efc81d0a9f499630be5740e76eeea49"
+          }
+        ],
+        "parent": [
+          {
+            "source": 3,
+            "model": "parent",
+            "protocol": "fixed2",
+            "n": 128,
+            "success": 112,
+            "alive": 127,
+            "body_stable": 127,
+            "trace_sha256": "557f4b81ad4c4a993e66b5685518ffd731be41e52ce42f5c62efe15df9020eba"
+          },
+          {
+            "source": 3,
+            "model": "parent",
+            "protocol": "fixed5",
+            "n": 128,
+            "success": 117,
+            "alive": 127,
+            "body_stable": 127,
+            "trace_sha256": "628497be01eda4e7e13bd97882ddb1022ea67466f589b57b5be639d6942f7783"
+          }
+        ],
+        "singleton": [
+          {
+            "source": 3,
+            "model": "singleton",
+            "protocol": "fixed2",
+            "n": 128,
+            "success": 109,
+            "alive": 128,
+            "body_stable": 128,
+            "trace_sha256": "19602658121b99bdedc8a527eb2bebfef764bba816749025cb05a144a83a8f23"
+          },
+          {
+            "source": 3,
+            "model": "singleton",
+            "protocol": "fixed5",
+            "n": 128,
+            "success": 122,
+            "alive": 128,
+            "body_stable": 128,
+            "trace_sha256": "bc006444c66510657478ab729d82fb9f1bf2b941f2f0828f67288d3690e30af6"
+          }
+        ],
+        "shared": [
+          {
+            "source": 3,
+            "model": "shared",
+            "protocol": "fixed2",
+            "n": 128,
+            "success": 118,
+            "alive": 126,
+            "body_stable": 126,
+            "trace_sha256": "c077c8641dcecb88915c0fdce78fe1765ae2a14b2b9f132b218f23d01dc9676d"
+          },
+          {
+            "source": 3,
+            "model": "shared",
+            "protocol": "fixed5",
+            "n": 128,
+            "success": 124,
+            "alive": 127,
+            "body_stable": 127,
+            "trace_sha256": "47f4d8973e0cc5e5d835b8406e42c36ed6ab42186a8b5a02ed24d86627f74855"
+          }
+        ]
+      },
+      "shared_passes_both": true,
+      "shared_minus_singleton_pp": 4.296875,
+      "shared_minus_parent_pp": 5.078125
+    }
+  ],
+  "shared_passes_every_source_protocol": false,
+  "scope": "Fixed final checkpoints only. Replication changes continuation RNG, with the same parent and test cohort. Integration source3 reuses the tested cohort; originals0/1/2 represent two nearby clusters. No unseen-base or hardware claim.",
+  "physical_evaluation_counts": {
+    "core_final": {
+      "actual_physical_episodes": 2944,
+      "reported_rows_including_explicit_reuse": 4096,
+      "unique_physical_runs": 23
+    },
+    "replication_final": {
+      "actual_physical_episodes": 1664,
+      "reported_rows_including_explicit_reuse": 2048,
+      "unique_physical_runs": 13
+    },
+    "core_development": {
+      "actual_physical_episodes": 1024,
+      "reported_rows_including_explicit_reuse": 1024,
+      "unique_physical_runs": 32
+    },
+    "replication_development": {
+      "actual_physical_episodes": 512,
+      "reported_rows_including_explicit_reuse": 512,
+      "unique_physical_runs": 16
+    },
+    "integration_final": {
+      "actual_physical_episodes": 6656,
+      "reported_rows_including_explicit_reuse": 6656,
+      "unique_physical_runs": 13
+    }
+  }
+}
