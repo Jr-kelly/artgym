@@ -1,0 +1,36 @@
+{
+  "dev-hold_r3_original_seed2902": {
+    "status": "frozen",
+    "frozen_utc": "2026-09-29T14:00:56.570492+00:00",
+    "name": "hold_r3_original_seed2902",
+    "row": 3,
+    "condition": "original",
+    "epoch": 1500,
+    "checkpoint": "runs/hold_r3_original_seed2902/checkpoints/epoch_001500.pth",
+    "sha256": "b299130a2898c6b61c93d41f71e86546357e57aae1994a79c30d18f66ec0435c",
+    "scores": {
+      "1250": 0.46875,
+      "1500": 0.515625,
+      "1750": 0.234375,
+      "2000": 0.25
+    },
+    "rule": "Equal strict fixed2/5 rates on32 fixed own-source development perturbations; tie latest; final not used"
+  },
+  "dev-hold_r3_dense1_seed2902": {
+    "status": "frozen",
+    "frozen_utc": "2026-09-29T14:01:03.637752+00:00",
+    "name": "hold_r3_dense1_seed2902",
+    "row": 3,
+    "condition": "dense1",
+    "epoch": 2000,
+    "checkpoint": "runs/hold_r3_dense1_seed2902/checkpoints/epoch_002000.pth",
+    "sha256": "3c784fac57944fe184c89d0d541436511caaac83c8fd2836f6352f80dc39a882",
+    "scores": {
+      "1250": 0.703125,
+      "1500": 0.921875,
+      "1750": 0.921875,
+      "2000": 0.9375
+    },
+    "rule": "Equal strict fixed2/5 rates on32 fixed own-source development perturbations; tie latest; final not used"
+  }
+}

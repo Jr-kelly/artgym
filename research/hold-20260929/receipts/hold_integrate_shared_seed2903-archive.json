@@ -1,0 +1,124 @@
+{
+  "state": {
+    "name": "hold_integrate_shared_seed2903",
+    "gpu": 3,
+    "command": [
+      "/home/wangjiarui/artgym-runtime/bin/python",
+      "-m",
+      "scripts.train_wuji_hold_integration",
+      "task=wuji_multigrasp",
+      "hand=wuji_paper_official_actuator",
+      "object=knife_wuji_bridge3_20260922",
+      "train=wujiAcquisitionSAPG",
+      "num_envs=5120",
+      "experiment=hold_integrate_shared_seed2903",
+      "max_iterations=3000",
+      "multi_gpu=False",
+      "headless=True",
+      "graphics_device_id=-1",
+      "force_render=False",
+      "pipeline=gpu",
+      "num_subscenes=0",
+      "seed=2026092903",
+      "train.params.config.expl_coef_block_size=1024",
+      "train.params.config.minibatch_size=32768",
+      "train.params.config.save_frequency=250",
+      "train.params.config.checkpoint_keep_recent=10",
+      "train.params.config.evaluation_frequency=100000",
+      "object.reward.GoalDistance2=1.0",
+      "task.env.absolutePoseObjective.coefficient=1.0",
+      "task.env.supportActionSpan=0.04",
+      "task.env.trainingStates=research/hold-20260929/data/integration-shared.npy",
+      "checkpoint=/home/wangjiarui/artgym-hold-20260929/runs/hold_r3_dense1_seed2901/checkpoints/epoch_002000.pth"
+    ],
+    "timeout_seconds": 14400,
+    "started": "2026-09-29T10:32:10.447214+00:00",
+    "pid": 114960,
+    "status": "completed",
+    "child_pid": 114967,
+    "heartbeat": "2026-09-29T13:55:00.829089+00:00",
+    "elapsed_seconds": 12170.2839777302,
+    "returncode": 0,
+    "finished": "2026-09-29T13:55:15.840296+00:00",
+    "wall_seconds": 12185.392181556206
+  },
+  "files": [
+    {
+      "path": "runs/hold_integrate_shared_seed2903/resume-identity.json",
+      "sha256": "c9a8d17dc590fbf6804c3d02fc487678ed11037d06f1b2077fc06a9730bf0515",
+      "bytes": 882
+    },
+    {
+      "path": "runs/hold_integrate_shared_seed2903/nn/last_hold_integrate_shared_seed2903_ep_3000_rew__212.37_.pth",
+      "sha256": "1829aeac7a186ef1b9f63ffb7c5464f60746bbe41ac4e1eef1ad30b9a6a78664",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_integrate_shared_seed2903/summaries/events.out.tfevents.1790677944.d-20260920124121-d9ns7",
+      "sha256": "e8dded9f7ce9813d6bd4092948d8d6f63011766ec36a9876dd4340b3556a040b",
+      "bytes": 5746000
+    },
+    {
+      "path": "runs/hold_integrate_shared_seed2903/checkpoints/epoch_002250.pth",
+      "sha256": "8150c816cd57cafb83ac6e1af1f48a06ff315b73f08a24df0fca689b6dab5888",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_integrate_shared_seed2903/checkpoints/latest.pth",
+      "sha256": "1829aeac7a186ef1b9f63ffb7c5464f60746bbe41ac4e1eef1ad30b9a6a78664",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_integrate_shared_seed2903/checkpoints/epoch_002250.json",
+      "sha256": "b1d22548fb601ebf08c975deb0f25a06413095a6973e9291caa7420c481be0af",
+      "bytes": 222
+    },
+    {
+      "path": "runs/hold_integrate_shared_seed2903/checkpoints/epoch_002500.pth",
+      "sha256": "0170f41adce2cbc9c182d0f602688000789464f544dbb6882c132d0885d8e51a",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_integrate_shared_seed2903/checkpoints/epoch_002750.json",
+      "sha256": "d813adf26abadc96372f8729a5b0e580a01ce456ee5cd1d091d1134d495fad55",
+      "bytes": 222
+    },
+    {
+      "path": "runs/hold_integrate_shared_seed2903/checkpoints/epoch_002750.pth",
+      "sha256": "c9cc71115b2a60faa276a917ea147aa2dd6b5e8ddc8d7acbc946ebb523a8190e",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_integrate_shared_seed2903/checkpoints/epoch_003000.json",
+      "sha256": "1c469c3fc32b0c12e16eb86180792cbc8f612aeba9a2542d3e231fd01855a6bd",
+      "bytes": 220
+    },
+    {
+      "path": "runs/hold_integrate_shared_seed2903/checkpoints/epoch_002500.json",
+      "sha256": "64d966983270dcad9e03d858e403dc17fbad4a0ee2dd06f63bb2dc5e89c081f9",
+      "bytes": 221
+    },
+    {
+      "path": "runs/hold_integrate_shared_seed2903/checkpoints/latest.json",
+      "sha256": "1c469c3fc32b0c12e16eb86180792cbc8f612aeba9a2542d3e231fd01855a6bd",
+      "bytes": 220
+    },
+    {
+      "path": "runs/hold_integrate_shared_seed2903/checkpoints/epoch_003000.pth",
+      "sha256": "1829aeac7a186ef1b9f63ffb7c5464f60746bbe41ac4e1eef1ad30b9a6a78664",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_integrate_shared_seed2903/evaluation/inbox/epoch_003000.json",
+      "sha256": "ac823faa933723f0e3a591697794562e50d1efd531c2b55b209b26d3fa0e9108",
+      "bytes": 354
+    },
+    {
+      "path": "runs/hold_integrate_shared_seed2903/evaluation/inbox/epoch_003000.pth",
+      "sha256": "22d816a86b2bcbfef6bbc56a2b10d8b6ac9ab539929187f9a59e6e5ccce8c42d",
+      "bytes": 14843846
+    }
+  ],
+  "verified_utc": "2026-09-29T13:55:43.691824+00:00",
+  "scope": "All trainer weights and logs preserved; checkpoint selection uses preregistered development rule only"
+}

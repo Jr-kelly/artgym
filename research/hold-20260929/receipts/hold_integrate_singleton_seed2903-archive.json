@@ -1,0 +1,134 @@
+{
+  "state": {
+    "name": "hold_integrate_singleton_seed2903",
+    "gpu": 2,
+    "command": [
+      "/home/wangjiarui/artgym-runtime/bin/python",
+      "-m",
+      "scripts.train_wuji_hold_integration",
+      "task=wuji_multigrasp",
+      "hand=wuji_paper_official_actuator",
+      "object=knife_wuji_bridge3_20260922",
+      "train=wujiAcquisitionSAPG",
+      "num_envs=5120",
+      "experiment=hold_integrate_singleton_seed2903",
+      "max_iterations=3000",
+      "multi_gpu=False",
+      "headless=True",
+      "graphics_device_id=-1",
+      "force_render=False",
+      "pipeline=gpu",
+      "num_subscenes=0",
+      "seed=2026092903",
+      "train.params.config.expl_coef_block_size=1024",
+      "train.params.config.minibatch_size=32768",
+      "train.params.config.save_frequency=250",
+      "train.params.config.checkpoint_keep_recent=10",
+      "train.params.config.evaluation_frequency=100000",
+      "object.reward.GoalDistance2=1.0",
+      "task.env.absolutePoseObjective.coefficient=1.0",
+      "task.env.supportActionSpan=0.04",
+      "task.env.trainingStates=research/hold-20260929/data/integration-singleton3.npy",
+      "checkpoint=/home/wangjiarui/artgym-hold-20260929/runs/hold_r3_dense1_seed2901/checkpoints/epoch_002000.pth"
+    ],
+    "timeout_seconds": 14400,
+    "started": "2026-09-29T10:32:10.399999+00:00",
+    "pid": 114959,
+    "status": "completed",
+    "child_pid": 114965,
+    "heartbeat": "2026-09-29T13:46:58.762630+00:00",
+    "elapsed_seconds": 11688.298407911789,
+    "returncode": 0,
+    "finished": "2026-09-29T13:47:25.783367+00:00",
+    "wall_seconds": 11715.38263354078
+  },
+  "files": [
+    {
+      "path": "runs/hold_integrate_singleton_seed2903/resume-identity.json",
+      "sha256": "af0dd665ae86fda4bd72d91b3b1f58bf1760c0d6740facbe2d0be216c0ebc137",
+      "bytes": 882
+    },
+    {
+      "path": "runs/hold_integrate_singleton_seed2903/nn/hold_integrate_singleton_seed2903.pth",
+      "sha256": "0f1f5f1faae32af98931762c37ababb239cbfbe25b5f22d44f983f21974a0a25",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_integrate_singleton_seed2903/nn/last_hold_integrate_singleton_seed2903_ep_3000_rew__1021.51_.pth",
+      "sha256": "57e4ecfd49e77ff2705576695bf8a636c81daaa8f66c50eddc5d529b500f6c27",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_integrate_singleton_seed2903/evaluation/inbox/epoch_003000.json",
+      "sha256": "61aa1b4d847b4006dcddca4cb2fa52a98e785cfe01af6df3da8fdcf2d1a65e2a",
+      "bytes": 360
+    },
+    {
+      "path": "runs/hold_integrate_singleton_seed2903/evaluation/inbox/epoch_003000.pth",
+      "sha256": "dada22fa125624d5a16c844875b3824412d07a9a16a58947746a29009bafa6e1",
+      "bytes": 14843846
+    },
+    {
+      "path": "runs/hold_integrate_singleton_seed2903/summaries/events.out.tfevents.1790677944.d-20260920124121-d9ns7",
+      "sha256": "8aa6364949b5e18985b66d5c833d3c0b377bdd8c132b9dc15e1876b27e1d5a79",
+      "bytes": 5746302
+    },
+    {
+      "path": "runs/hold_integrate_singleton_seed2903/best/model.pth",
+      "sha256": "0f1f5f1faae32af98931762c37ababb239cbfbe25b5f22d44f983f21974a0a25",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_integrate_singleton_seed2903/checkpoints/epoch_002250.pth",
+      "sha256": "df9e0353d429b443943130cef89d70530c86258d55c6dcf305b18d1ca0a2fa4a",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_integrate_singleton_seed2903/checkpoints/latest.json",
+      "sha256": "ea79591509b6ea0e1fc959fc209471b678316e866e89af14c6689b77b0365e8e",
+      "bytes": 223
+    },
+    {
+      "path": "runs/hold_integrate_singleton_seed2903/checkpoints/latest.pth",
+      "sha256": "57e4ecfd49e77ff2705576695bf8a636c81daaa8f66c50eddc5d529b500f6c27",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_integrate_singleton_seed2903/checkpoints/epoch_002500.pth",
+      "sha256": "9359cf3c9745d37f20bced5920514670c5ba83fd4bc190f549f9b9e7a2a9f3f4",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_integrate_singleton_seed2903/checkpoints/epoch_003000.pth",
+      "sha256": "57e4ecfd49e77ff2705576695bf8a636c81daaa8f66c50eddc5d529b500f6c27",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_integrate_singleton_seed2903/checkpoints/epoch_003000.json",
+      "sha256": "ea79591509b6ea0e1fc959fc209471b678316e866e89af14c6689b77b0365e8e",
+      "bytes": 223
+    },
+    {
+      "path": "runs/hold_integrate_singleton_seed2903/checkpoints/epoch_002250.json",
+      "sha256": "ab2d3d230e245126bc1e17875e066f0a1fb197cee1c6253ca2b77f88444cd234",
+      "bytes": 225
+    },
+    {
+      "path": "runs/hold_integrate_singleton_seed2903/checkpoints/epoch_002500.json",
+      "sha256": "a8248441e518bc4768246e0ffcc70cb516d197638878fca20d04820d51e09f3b",
+      "bytes": 224
+    },
+    {
+      "path": "runs/hold_integrate_singleton_seed2903/checkpoints/epoch_002750.pth",
+      "sha256": "d7092f38ca7e39b2174d6e533163e6ef501ba595b9fcd939a6ba37d7c73ecdcb",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_integrate_singleton_seed2903/checkpoints/epoch_002750.json",
+      "sha256": "bf193521685256df52799bcf2c6fdc075da5d1005011e33b981aff18a542e26c",
+      "bytes": 225
+    }
+  ],
+  "verified_utc": "2026-09-29T13:48:45.496874+00:00",
+  "scope": "All trainer weights and logs preserved; checkpoint selection uses preregistered development rule only"
+}

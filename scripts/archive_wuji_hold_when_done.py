@@ -20,7 +20,14 @@ def main():
     deadline=datetime.datetime.fromisoformat(a.deadline_utc).timestamp();done=set()
     while time.time()<deadline:
         code='import pathlib,json; r=pathlib.Path('+repr(REMOTE)+'); print(json.dumps({n:json.loads((r/"runs/hold-20260929"/n/"status.json").read_text())["status"] for n in '+repr(a.names)+'}))'
-        states=json.loads(subprocess.check_output(SSH+['python3 -c '+shlex.quote(code)],text=True,timeout=45))
+        try:
+            states=json.loads(subprocess.check_output(SSH+['python3 -c '+shlex.quote(code)],text=True,timeout=45))
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired, json.JSONDecodeError) as error:
+            # The existing status writer can briefly expose an empty file while
+            # updating its heartbeat. Retry reads within the original deadline.
+            print('Status read unavailable; retrying within deadline: '+str(error),flush=True)
+            time.sleep(15)
+            continue
         for name,state in states.items():
             if name in done:continue
             if state=='failed':raise RuntimeError('Trainer failed: '+name)

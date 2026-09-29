@@ -30,6 +30,8 @@
 最新 2026-09-29T12:20:57.375956+00:00：后续{'hold_r3_dense1_seed2902': 1557, 'hold_r3_original_seed2902': 1555, 'hold_integrate_shared_seed2903': 2535, 'hold_integrate_singleton_seed2903': 2562}。后续8个半程权重已核验（复验1250/1500、整合2250/2500），所有轮次累计24正式CP保存。最新push eed1057。训练/评估等待/收集/视频队列保持原样，尚无后续冻结结果。
 
 最新 2026-09-29T13:25:32.496390+00:00：后续{'hold_r3_dense1_seed2902': 1881, 'hold_r3_original_seed2902': 1879, 'hold_integrate_shared_seed2903': 2853, 'hold_integrate_singleton_seed2903': 2889}，全部12个后续1250/1500/1750和2250/2500/2750权重已核验，累计28正式CP。预计训练13:45–13:55UTC完，最终评估+交付仍余量充分。源11机制结论保持原样，无附加训练。所有后续eval/collect/archive/video等待器ID见当前文档，接手重查不重复。
+
+最新 2026-09-29T13:57:15.087994+00:00：全部后续训练完成，最终4CP备份SHA/CPU验证，累计32正式CP和24Release资产。singleton13:47:25、dense复验13:49:05、original复验13:49:35、shared13:55:15UTC完成。GPU3已释放，GPU0/1开发评估后GPU0最终复验；GPU2整合最终。归档旧session49802因读心跳JSON瞬间空内容退出，原日志保留，修复后v2 session69676已归档上传全部4组，无需重启。完整归档恢复检查session51681；本机视频session29611已开始实际渲染。仍待两冻结报告和独立复算，严禁将训练完成当Goal交付完成。当前已push d00d7c0。下一步冻结结果、视频、最终报告及发布。
 <!-- HOLD_CURRENT_END -->
 
 # Wuji端点保持受控实验续接
@@ -1089,3 +1091,343 @@ hold_integrate_shared_seed2903:2750 remote/local SHA and CPU integrity passed; c
 
 新增离线汇总scripts.summarize_wuji_hold_followup（仅在两份独立复算均完成后运行）与scripts.package_wuji_hold_integration_video（渲染队列完成后运行）；逐源50%门槛、复验差值、物理回合去重及视频原始manifest均显式保存。未修改在训源码。13:39UTC训练继续，暂无后续冻结结果。
 证据：scripts/summarize_wuji_hold_followup.py, scripts/package_wuji_hold_integration_video.py, research/hold-20260929/receipts/resource-1329.json。下一步：训练结束核验CP2000/3000，完成既有队列后运行离线汇总、视频打包和发布。
+
+## 2026-09-29T13:47:46.827994+00:00 remote_transition
+
+hold_integrate_singleton_seed2903 completed observed; PID 114965
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:48:04.914492+00:00 checkpoint_backed_up
+
+hold_integrate_singleton_seed2903:3000 remote/local SHA and CPU integrity passed; 57e4ecfd49e77ff2705576695bf8a636c81daaa8f66c50eddc5d529b500f6c27
+证据：research/hold-20260929/receipts/backup-integration.json。下一步：Continue bounded training and frozen evaluations。
+
+## 2026-09-29T13:48:26.724675+00:00 archive_waiter_read_failure_recovered
+
+13:48UTC发现后续归档等待器此前读取心跳status.json时JSONDecodeError（写入瞬间空内容）退出；没有开始归档、无上传覆盖。保留archive-followup.log，离线等待器增加原截止内15s重试，重启仅归档等待器。单源整合训练已完成且CP3000 SHA/CPU检查通过，所有训练和评估不重启。
+证据：runs/hold-20260929/archive-followup.log, scripts/archive_wuji_hold_when_done.py, research/hold-20260929/receipts/backup-integration.json。下一步：重新归档四组全部权重日志并上传，继续既有冻结评估队列。
+
+## 2026-09-29T13:48:27.602520+00:00 completed_training_archive_started
+
+hold_integrate_singleton_seed2903 completed; preserving all trainer weights and logs
+证据：research/hold-20260929/preregistration.json。下一步：Verify archive SHA and upload immutable draft assets。
+
+## 2026-09-29T13:49:20.909371+00:00 remote_transition
+
+hold_r3_dense1_seed2902 completed observed; PID 114961
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:49:28.884029+00:00 checkpoint_backed_up
+
+hold_r3_dense1_seed2902:2000 remote/local SHA and CPU integrity passed; 3c784fac57944fe184c89d0d541436511caaac83c8fd2836f6352f80dc39a882
+证据：research/hold-20260929/receipts/backup-replication.json。下一步：Continue bounded training and frozen evaluations。
+
+## 2026-09-29T13:49:52.881174+00:00 remote_transition
+
+hold_r3_original_seed2902 completed observed; PID 114963
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:49:52.881407+00:00 remote_transition
+
+dev-hold_r3_original_seed2902-cp1250-t2 running observed; PID 220178
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:49:52.881507+00:00 remote_transition
+
+dev-hold_r3_dense1_seed2902-cp1250-t2 running observed; PID 219825
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:49:59.506081+00:00 completed_training_archive_uploaded
+
+hold_integrate_singleton_seed2903 all trainer weights/logs archived; server SHA verified
+证据：research/hold-20260929/receipts/release-hold_integrate_singleton_seed2903.json, research/hold-20260929/receipts/hold_integrate_singleton_seed2903-archive.json。下一步：Finish frozen comparisons; keep draft unpublished until final evidence and report。
+
+## 2026-09-29T13:50:21.989822+00:00 checkpoint_backed_up
+
+hold_r3_original_seed2902:2000 remote/local SHA and CPU integrity passed; 71ad9ddd546db0cbbc67546aaecbf8fac6844a7a88c054ad690c8612d510c52e
+证据：research/hold-20260929/receipts/backup-replication.json。下一步：Continue bounded training and frozen evaluations。
+
+## 2026-09-29T13:50:30.272236+00:00 completed_training_archive_started
+
+hold_r3_original_seed2902 completed; preserving all trainer weights and logs
+证据：research/hold-20260929/preregistration.json。下一步：Verify archive SHA and upload immutable draft assets。
+
+## 2026-09-29T13:50:54.872565+00:00 remote_transition
+
+dev-hold_r3_dense1_seed2902-cp1250-t5 running observed; PID 221162
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:50:56.139868+00:00 remote_transition
+
+dev-hold_r3_dense1_seed2902-cp1250-t2 completed observed; PID 219825
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:51:28.515512+00:00 remote_transition
+
+dev-hold_r3_original_seed2902-cp1250-t2 completed observed; PID 220178
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:51:28.516082+00:00 remote_transition
+
+dev-hold_r3_original_seed2902-cp1250-t5 running observed; PID 221303
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:51:45.724787+00:00 completed_training_archive_uploaded
+
+hold_r3_original_seed2902 all trainer weights/logs archived; server SHA verified
+证据：research/hold-20260929/receipts/release-hold_r3_original_seed2902.json, research/hold-20260929/receipts/hold_r3_original_seed2902-archive.json。下一步：Finish frozen comparisons; keep draft unpublished until final evidence and report。
+
+## 2026-09-29T13:51:45.725008+00:00 completed_training_archive_started
+
+hold_r3_dense1_seed2902 completed; preserving all trainer weights and logs
+证据：research/hold-20260929/preregistration.json。下一步：Verify archive SHA and upload immutable draft assets。
+
+## 2026-09-29T13:52:31.846026+00:00 remote_transition
+
+dev-hold_r3_dense1_seed2902-cp1250-t5 completed observed; PID 221162
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:52:33.215630+00:00 remote_transition
+
+dev-hold_r3_original_seed2902-cp1250-t5 completed observed; PID 221303
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:52:33.215846+00:00 remote_transition
+
+dev-hold_r3_dense1_seed2902-cp1500-t2 running observed; PID 221969
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:52:33.215929+00:00 remote_transition
+
+dev-hold_r3_original_seed2902-cp1500-t2 running observed; PID 222120
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:52:56.756922+00:00 completed_training_archive_uploaded
+
+hold_r3_dense1_seed2902 all trainer weights/logs archived; server SHA verified
+证据：research/hold-20260929/receipts/release-hold_r3_dense1_seed2902.json, research/hold-20260929/receipts/hold_r3_dense1_seed2902-archive.json。下一步：Finish frozen comparisons; keep draft unpublished until final evidence and report。
+
+## 2026-09-29T13:54:06.286910+00:00 remote_transition
+
+dev-hold_r3_dense1_seed2902-cp1500-t5 running observed; PID 222874
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:54:06.287056+00:00 remote_transition
+
+dev-hold_r3_original_seed2902-cp1500-t5 running observed; PID 222924
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:54:07.553649+00:00 remote_transition
+
+dev-hold_r3_dense1_seed2902-cp1500-t2 completed observed; PID 221969
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:54:08.870943+00:00 remote_transition
+
+dev-hold_r3_original_seed2902-cp1500-t2 completed observed; PID 222120
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:55:30.637389+00:00 completed_training_archive_started
+
+hold_integrate_shared_seed2903 completed; preserving all trainer weights and logs
+证据：research/hold-20260929/preregistration.json。下一步：Verify archive SHA and upload immutable draft assets。
+
+## 2026-09-29T13:55:41.962414+00:00 remote_transition
+
+dev-hold_r3_original_seed2902-cp1750-t2 running observed; PID 223784
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:55:43.129612+00:00 remote_transition
+
+hold_integrate_shared_seed2903 completed observed; PID 114967
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:55:44.700748+00:00 remote_transition
+
+dev-hold_r3_dense1_seed2902-cp1500-t5 completed observed; PID 222874
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:55:46.168222+00:00 remote_transition
+
+dev-hold_r3_original_seed2902-cp1500-t5 completed observed; PID 222924
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:55:46.168452+00:00 remote_transition
+
+integration-final3000-seed2903-static running observed; PID 223829
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:55:46.168646+00:00 remote_transition
+
+dev-hold_r3_dense1_seed2902-cp1750-t2 running observed; PID 223778
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:55:50.782387+00:00 checkpoint_backed_up
+
+hold_integrate_shared_seed2903:3000 remote/local SHA and CPU integrity passed; 1829aeac7a186ef1b9f63ffb7c5464f60746bbe41ac4e1eef1ad30b9a6a78664
+证据：research/hold-20260929/receipts/backup-integration.json。下一步：Continue bounded training and frozen evaluations。
+
+## 2026-09-29T13:56:10.879162+00:00 integration_video_started
+
+video-integration-singleton-fixed5: four fixed source trial0 rows, local4090 separate render
+证据：research/hold-20260929/integration-video-plan.json。下一步：Render actual final policy; retain every source outcome。
+
+## 2026-09-29T13:56:38.370810+00:00 completed_training_archive_uploaded
+
+hold_integrate_shared_seed2903 all trainer weights/logs archived; server SHA verified
+证据：research/hold-20260929/receipts/release-hold_integrate_shared_seed2903.json, research/hold-20260929/receipts/hold_integrate_shared_seed2903-archive.json。下一步：Finish frozen comparisons; keep draft unpublished until final evidence and report。
+
+## 2026-09-29T13:56:50.049502+00:00 remote_transition
+
+dev-hold_r3_original_seed2902-cp1750-t2 completed observed; PID 223784
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:56:50.049754+00:00 remote_transition
+
+dev-hold_r3_dense1_seed2902-cp1750-t5 running observed; PID 224958
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:56:50.049880+00:00 remote_transition
+
+dev-hold_r3_original_seed2902-cp1750-t5 running observed; PID 224953
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:56:51.518355+00:00 remote_transition
+
+dev-hold_r3_dense1_seed2902-cp1750-t2 completed observed; PID 223778
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:56:59.668470+00:00 all_followup_training_completed
+
+四后续训练已全部完成：singleton13:47:25、dense复验13:49:05、original复验13:49:35、shared13:55:15UTC；各新增1000轮/163840000交互，最终CP2000/3000四权重SHA和CPU完整性通过，全部4完整权重日志归档已上传服务器SHA通过。GPU3无本轮任务；GPU0/1开发评估、GPU2整合冻结评估；本机四抓姿视频开始。告知用户再约25–40分钟释放全部开发机GPU，不再训练。
+证据：research/hold-20260929/receipts/backup-replication.json, research/hold-20260929/receipts/backup-integration.json, research/hold-20260929/receipts/monitor-latest.json, research/hold-20260929/weights-index.json。下一步：完成冻结评分与独立复算、视频检查、资源释放、最终发布。
+
+## 2026-09-29T13:57:26.062119+00:00 integration_video_completed
+
+video-integration-singleton-fixed5: strict 1/4; individual source outcomes recorded
+证据：runs/hold-20260929/video-integration-singleton-fixed5/evidence/report.json。下一步：Inspect frames and archive videos/raw traces; do not replace frozen512 metrics。
+
+## 2026-09-29T13:57:26.123059+00:00 integration_video_started
+
+video-integration-shared-fixed5: four fixed source trial0 rows, local4090 separate render
+证据：research/hold-20260929/integration-video-plan.json。下一步：Render actual final policy; retain every source outcome。
+
+## 2026-09-29T13:57:27.385564+00:00 remote_transition
+
+integration-final3000-seed2903-static completed observed; PID 223829
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:57:27.385775+00:00 remote_transition
+
+integration-final3000-seed2903-parent-fixed2 running observed; PID 225288
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:58:30.641677+00:00 remote_transition
+
+dev-hold_r3_dense1_seed2902-cp1750-t5 completed observed; PID 224958
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:58:31.909929+00:00 remote_transition
+
+dev-hold_r3_original_seed2902-cp1750-t5 completed observed; PID 224953
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:58:31.910200+00:00 remote_transition
+
+dev-hold_r3_dense1_seed2902-cp2000-t2 running observed; PID 225824
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:58:31.910293+00:00 remote_transition
+
+dev-hold_r3_original_seed2902-cp2000-t2 running observed; PID 225819
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:58:41.296941+00:00 integration_video_completed
+
+video-integration-shared-fixed5: strict 1/4; individual source outcomes recorded
+证据：runs/hold-20260929/video-integration-shared-fixed5/evidence/report.json。下一步：Inspect frames and archive videos/raw traces; do not replace frozen512 metrics。
+
+## 2026-09-29T13:59:33.977543+00:00 remote_transition
+
+dev-hold_r3_original_seed2902-cp2000-t5 running observed; PID 226408
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:59:33.977692+00:00 remote_transition
+
+integration-final3000-seed2903-parent-fixed5 running observed; PID 226349
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:59:37.801979+00:00 remote_transition
+
+integration-final3000-seed2903-parent-fixed2 completed observed; PID 225288
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:59:39.118871+00:00 remote_transition
+
+dev-hold_r3_original_seed2902-cp2000-t2 completed observed; PID 225819
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T13:59:46.913834+00:00 integration_videos_packaged_verified
+
+两段本机四源视频已逐步独立复算并检查固定帧，两组均仅源3严格成功1/4。打包首次因系统PATH无ffmpeg失败，改用已有imageio_ffmpeg；未重仿真、已复制文件SHA一致后续接成功。原始视频/时序保留。
+证据：research/hold-20260929/video/integration-video-results.json, research/hold-20260929/video/integration-inspection.json。下一步：上传两视频和原始归档，等待冻结512结果再形成整合结论。
+
+## 2026-09-29T14:00:10.140591+00:00 remote_transition
+
+dev-hold_r3_dense1_seed2902-cp2000-t5 running observed; PID 226576
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T14:00:11.408823+00:00 remote_transition
+
+dev-hold_r3_dense1_seed2902-cp2000-t2 completed observed; PID 225824
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T14:01:15.295828+00:00 remote_transition
+
+dev-hold_r3_original_seed2902-cp2000-t5 completed observed; PID 226408
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T14:01:16.763335+00:00 remote_transition
+
+dev-hold_r3_dense1_seed2902-cp2000-t5 completed observed; PID 226576
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T14:01:23.747105+00:00 remote_transition
+
+integration-final3000-seed2903-parent-fixed5 completed observed; PID 226349
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T14:01:23.747396+00:00 remote_transition
+
+integration-final3000-seed2903-parent-arrival running observed; PID 227228
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T14:01:52.921705+00:00 replication_development_frozen
+
+第二续训种子开发集原奖励选CP1500、改动选CP2000；最终同预算仍CP2000固定，开发选点单列。GPU1开发评估完成，GPU0等待器进入最终128评估；GPU2整合继续。
+证据：research/hold-20260929/receipts/replication-development-selection.json。下一步：完成既有最终测试，保持所有失败和不同CP选择的区别。
+
+## 2026-09-29T14:01:54.806695+00:00 remote_transition
+
+final-r3-seed2902-static running observed; PID 227556
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T14:02:56.873692+00:00 remote_transition
+
+final-r3-seed2902-parent-fixed2 running observed; PID 228279
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T14:02:58.291897+00:00 remote_transition
+
+final-r3-seed2902-static completed observed; PID 227556
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T14:03:31.520964+00:00 remote_transition
+
+integration-final3000-seed2903-parent-arrival completed observed; PID 227228
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。
+
+## 2026-09-29T14:03:31.521289+00:00 remote_transition
+
+integration-final3000-seed2903-historical-fixed2 running observed; PID 228420
+证据：research/hold-20260929/receipts/monitor-latest.json。下一步：Verify full evidence and preserve matched-budget comparison。

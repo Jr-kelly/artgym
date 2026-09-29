@@ -11,14 +11,16 @@ ROOT = Path(__file__).resolve().parents[1]
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--release-id', type=int, default=398592814)
+    parser.add_argument('--tag', default='wuji-multigrasp-20260928-v1')
+    parser.add_argument('--receipts', type=Path, default=ROOT/'research/multigrasp-20260928/receipts')
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--allow-draft', action='store_true')
     args = parser.parse_args()
     release = json.loads(subprocess.check_output(['gh', 'api', f'repos/Jr-kelly/artgym/releases/{args.release_id}'], text=True))
-    assert release['tag_name'] == 'wuji-multigrasp-20260928-v1'
+    assert release['tag_name'] == args.tag
     assert args.allow_draft or not release['draft']
     expected = {}
-    for path in (ROOT / 'research/multigrasp-20260928/receipts').glob('release-*.json'):
+    for path in args.receipts.glob('release-*.json'):
         if path.name.endswith(('.pending.json', '.error.json')):
             continue
         records = json.loads(path.read_text())
@@ -36,7 +38,7 @@ def main():
         asset = actual[name]
         assert asset['state'] == 'uploaded' and asset['digest'] == 'sha256:' + expected[name]
         if not release['draft']:
-            assert '/download/wuji-multigrasp-20260928-v1/' in asset['browser_download_url']
+            assert '/download/'+args.tag+'/' in asset['browser_download_url']
         assets.append(dict(name=name, bytes=asset['size'], sha256=expected[name],
                            url=asset['browser_download_url'], server_digest_verified=True))
     output = dict(verified_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),

@@ -1,0 +1,134 @@
+{
+  "state": {
+    "name": "hold_r3_dense1_seed2902",
+    "gpu": 1,
+    "command": [
+      "/home/wangjiarui/artgym-runtime/bin/python",
+      "-m",
+      "scripts.train_wuji_hold",
+      "task=wuji_multigrasp",
+      "hand=wuji_paper_official_actuator",
+      "object=knife_wuji_bridge3_20260922",
+      "train=wujiAcquisitionSAPG",
+      "num_envs=5120",
+      "experiment=hold_r3_dense1_seed2902",
+      "max_iterations=2000",
+      "multi_gpu=False",
+      "headless=True",
+      "graphics_device_id=-1",
+      "force_render=False",
+      "pipeline=gpu",
+      "num_subscenes=0",
+      "seed=2026092902",
+      "train.params.config.expl_coef_block_size=1024",
+      "train.params.config.minibatch_size=32768",
+      "train.params.config.save_frequency=250",
+      "train.params.config.checkpoint_keep_recent=10",
+      "train.params.config.evaluation_frequency=100000",
+      "object.reward.GoalDistance2=1.0",
+      "task.env.absolutePoseObjective.coefficient=1.0",
+      "task.env.supportActionSpan=0.04",
+      "task.env.trainingStates=research/multigrasp-20260928/data/expert-3.npy",
+      "checkpoint=/home/wangjiarui/artgym-hold-20260929/runs/hold-20260929/parents/expert3.pth"
+    ],
+    "timeout_seconds": 18000,
+    "started": "2026-09-29T10:32:10.391925+00:00",
+    "pid": 114957,
+    "status": "completed",
+    "child_pid": 114961,
+    "heartbeat": "2026-09-29T13:48:59.116725+00:00",
+    "elapsed_seconds": 11808.666221491061,
+    "returncode": 0,
+    "finished": "2026-09-29T13:49:05.123361+00:00",
+    "wall_seconds": 11814.730439036153
+  },
+  "files": [
+    {
+      "path": "runs/hold_r3_dense1_seed2902/resume-identity.json",
+      "sha256": "dc8b91db15fae6b928a93db6992d864714b8caad941ed5daad210ac33bcdcdac",
+      "bytes": 896
+    },
+    {
+      "path": "runs/hold_r3_dense1_seed2902/best/model.pth",
+      "sha256": "8f3d52b15a11dfd45fff910cac6ad0a0465ec3f44c1c1ab2b10ef6d0bbde8a74",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_r3_dense1_seed2902/evaluation/inbox/epoch_002000.json",
+      "sha256": "6ec41a4fdc9d287794aa3e13c8c1cbf8ff3d58f6e1dad0209d11f1a602155c20",
+      "bytes": 340
+    },
+    {
+      "path": "runs/hold_r3_dense1_seed2902/evaluation/inbox/epoch_002000.pth",
+      "sha256": "42eea86b267e4ef26415301982cfc030d157e80454d3382d53d45cc0b7b94de3",
+      "bytes": 14843846
+    },
+    {
+      "path": "runs/hold_r3_dense1_seed2902/nn/last_hold_r3_dense1_seed2902_ep_2000_rew__989.06_.pth",
+      "sha256": "3c784fac57944fe184c89d0d541436511caaac83c8fd2836f6352f80dc39a882",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_r3_dense1_seed2902/nn/hold_r3_dense1_seed2902.pth",
+      "sha256": "8f3d52b15a11dfd45fff910cac6ad0a0465ec3f44c1c1ab2b10ef6d0bbde8a74",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_r3_dense1_seed2902/summaries/events.out.tfevents.1790677944.d-20260920124121-d9ns7",
+      "sha256": "764ca455266cc60caf2b66d1ba53e81c24efd20bb49628f25aee615e09a523fe",
+      "bytes": 5714898
+    },
+    {
+      "path": "runs/hold_r3_dense1_seed2902/checkpoints/epoch_001250.pth",
+      "sha256": "285bdf66f25f7e9133fb41bc9d826858f1c171446f956469c8fdd4d0c2e80fd5",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_r3_dense1_seed2902/checkpoints/latest.pth",
+      "sha256": "3c784fac57944fe184c89d0d541436511caaac83c8fd2836f6352f80dc39a882",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_r3_dense1_seed2902/checkpoints/epoch_001500.json",
+      "sha256": "53f08b676b81ef0084ca2a015ec69ee4f1ff9b816b475f1353c9d95ef1fc5f5d",
+      "bytes": 214
+    },
+    {
+      "path": "runs/hold_r3_dense1_seed2902/checkpoints/epoch_001500.pth",
+      "sha256": "2376d96455f811d67d9e3c7f5d75e6ee7b24befd17d0bc2c08c35a372603c87a",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_r3_dense1_seed2902/checkpoints/epoch_002000.json",
+      "sha256": "c83362115831062c6ed000d12031a29f576ea2d93d0d20f69fd11346e8049ec1",
+      "bytes": 213
+    },
+    {
+      "path": "runs/hold_r3_dense1_seed2902/checkpoints/epoch_001250.json",
+      "sha256": "0a90fcd450f051a6caaae4a941a4999436084a3e430587e5a1eef818cccce035",
+      "bytes": 215
+    },
+    {
+      "path": "runs/hold_r3_dense1_seed2902/checkpoints/epoch_001750.pth",
+      "sha256": "0ad136492e49ecf104af0e2a5f25f1c0eb38ceb9d50cf421a9ec02018d94557e",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_r3_dense1_seed2902/checkpoints/latest.json",
+      "sha256": "c83362115831062c6ed000d12031a29f576ea2d93d0d20f69fd11346e8049ec1",
+      "bytes": 213
+    },
+    {
+      "path": "runs/hold_r3_dense1_seed2902/checkpoints/epoch_001750.json",
+      "sha256": "ae7c4b318e2621ab6522090c39d23e397fbb0daa670611f00c0bfd0d890f7201",
+      "bytes": 215
+    },
+    {
+      "path": "runs/hold_r3_dense1_seed2902/checkpoints/epoch_002000.pth",
+      "sha256": "3c784fac57944fe184c89d0d541436511caaac83c8fd2836f6352f80dc39a882",
+      "bytes": 89411908
+    }
+  ],
+  "verified_utc": "2026-09-29T13:51:53.839640+00:00",
+  "scope": "All trainer weights and logs preserved; checkpoint selection uses preregistered development rule only"
+}

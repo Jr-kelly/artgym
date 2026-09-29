@@ -14,6 +14,8 @@ def sha(path):
 
 
 def main():
+    import imageio_ffmpeg
+    ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
     research = ROOT/'research/hold-20260929'
     result = json.loads((research/'video/integration-render-results.json').read_text())
     assert result['status'] == 'completed'
@@ -22,13 +24,19 @@ def main():
         name = 'video-integration-'+item['condition']+'-fixed5'
         source = ROOT/'runs/hold-20260929'/name
         destination = research/'video'/name
-        assert not destination.exists()
-        shutil.copytree(source, destination, ignore=shutil.ignore_patterns('trace.npz', '*.mp4'))
+        if not destination.exists():
+            shutil.copytree(source, destination, ignore=shutil.ignore_patterns('trace.npz', '*.mp4'))
+        else:
+            for path in destination.rglob('*'):
+                if path.is_file():
+                    assert sha(path) == sha(source/path.relative_to(destination))
         video = ROOT/'videos'/('hold-integration-'+item['condition']+'-fixed5.mp4')
-        assert not video.exists()
-        shutil.copy2(source/'evidence/policy.mp4', video)
+        if video.exists():
+            assert sha(video) == sha(source/'evidence/policy.mp4')
+        else:
+            shutil.copy2(source/'evidence/policy.mp4', video)
         sheet = research/'video'/(name+'-contact-sheet.png')
-        subprocess.run(['ffmpeg', '-v', 'error', '-i', str(video), '-vf',
+        subprocess.run([ffmpeg, '-v', 'error', '-n', '-i', str(video), '-vf',
                         "select='eq(n,0)+eq(n,149)+eq(n,299)+eq(n,449)+eq(n,599)',scale=640:-1,tile=5x1",
                         '-frames:v', '1', '-update', '1', str(sheet)], check=True)
         files = [dict(path=str(path.relative_to(ROOT)), sha256=sha(path))
