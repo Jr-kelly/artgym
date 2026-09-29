@@ -5,3 +5,7 @@ G0完成：dev32historical0/1/2各32/32双协议；source3=24/32,31/32。触发>
 B采集16:27:27UTC启动 wrapperPID2604GPU0(2s)、2605GPU1(5s)，超时3700s，接手续查；每source每协议128轨迹，0/1/2历史专家，3源3CP2000。runs/unified-policy-20260930/train-data-t2和t5/source0..3。先96train后32val，wholeepisode，最终集从未打开。采集完成需同步原始证据/SHA。
 下一步：已有scripts/train_wuji_unified_bc.py尚未实际运行，用源3/历史各自2%actor+encoder扰动初始化、小4轨迹20epoch先拟合预检，实际吞吐和误差后锁定单专家训练预算，再G1闭环每负责source每协议专家差<=10pp、body差<=3pp。G1未过不得多专家。训练自己的encoder+actor，固定继承normalizer，600step完整回合分100step反传跨段detach、episode后optimizerstep。已有源动作逐步GPU重放exact，batch100step数值差8.57e-4保存，非时序错位；阶段B实际训练还要检查cuDNNbackward等。
 Github目前已核验a6a2e5d；本地最新13274a2+待提交日志/summary资源实现。直接push的外部worktree config EPERM，用rsync common.git到/tmp/wuji-unified-publish.git(排除worktrees/index/logs)再barepush已成功；不要改权限或forcepush。附全文GOAL.md和state/DECISIONS为准。
+
+2026-09-29T16:32UTC B小拟合pilot队列PID2976 (/tmp/wuji-unified-pilot-queue.py)已启动等待双采集completed，最多1800s。自动各GPU启动historical(source0)/source3两协议每file前4轨迹各20epoch/40updates,perturb.02；各1000s超时。只pilot不自动正式训练；结束读取bc-pilot-*/metrics.jsonl和status，实际吞吐/损失后判G1正式。代码副本receipts/pilot-queue.py。
+
+2026-09-29T16:36UTC collection1024episodes completed, queue2976/pilots3159/3160 completed20epoch/40updates. Historical smallfit improves;source3trainingimproves butvalidationovershoots. Controlledlr source3 same savedepoch0 both100epoch/200updates lr1e-4(GPU0PID3311) vs1e-5(GPU1PID3312) launched16:35:38,timeout1000s. NoformalG1/unified yet. Readpilot-lr-decision.json and actualstatus.

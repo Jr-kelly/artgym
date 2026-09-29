@@ -1,5 +1,5 @@
 """Whole-episode recurrent action BC, fixed inherited normalization, no latent matching."""
-import argparse,copy,hashlib,json,time
+import argparse,copy,hashlib,json,time,os
 from pathlib import Path
 from scripts.wuji_goal_common import configuration
 from isaacgymenvs.deploy.student_policy_runtime import build_policy_player
@@ -11,7 +11,7 @@ import torch
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def main():
  p=argparse.ArgumentParser();p.add_argument('--init',type=Path,required=True);p.add_argument('--data',type=Path,nargs='+',required=True);p.add_argument('--output',type=Path,required=True)
- p.add_argument('--limit',type=int,default=0);p.add_argument('--epochs',type=int,default=100);p.add_argument('--save-every',type=int,default=25);p.add_argument('--seed',type=int,default=2026093001);p.add_argument('--lr',type=float,default=1e-4);p.add_argument('--perturb',type=float,default=0);p.add_argument('--batch',type=int,default=96);p.add_argument('--segment',type=int,default=100);p.add_argument('--max-seconds',type=int,default=3600);a=p.parse_args()
+ p.add_argument('--resume',action='store_true');p.add_argument('--limit',type=int,default=0);p.add_argument('--epochs',type=int,default=100);p.add_argument('--save-every',type=int,default=25);p.add_argument('--seed',type=int,default=2026093001);p.add_argument('--lr',type=float,default=1e-4);p.add_argument('--perturb',type=float,default=0);p.add_argument('--batch',type=int,default=96);p.add_argument('--segment',type=int,default=100);p.add_argument('--max-seconds',type=int,default=3600);a=p.parse_args()
  a.output.mkdir(parents=True,exist_ok=False);torch.manual_seed(a.seed);np.random.seed(a.seed);started=time.monotonic()
  cfg=configuration('wuji_multigrasp',1,['object=knife_wuji_bridge3_20260922','hand=wuji_paper_official_actuator'],train='wujiAcquisitionSAPG',seed=a.seed)
  player=build_policy_player(cfg,preprocess_train_config(cfg,OmegaConf.to_container(cfg.train,resolve=True)),a.init,_infer_expl_num_blocks(a.init),0);model=player.model;model.eval()
@@ -56,7 +56,8 @@ def main():
   state=copy.deepcopy(base);state['model']={k:v.detach().cpu() for k,v in model.state_dict().items()};state['running_mean_std']=model.running_mean_std.state_dict();state['bc_optimizer']=opt.state_dict();state['bc_epoch']=epoch;state['bc_updates']=updates;state['bc_manifest']=manifest
   # Existing PPO optimizer belongs to source expert and is explicitly not BC continuation.
   state.pop('optimizer',None);state['training_kind']='offline_sequence_BC_not_resumed_PPO'
-  torch.save(state,a.output/f'epoch_{epoch:06d}.pth')
+  state['bc_torch_rng']=torch.get_rng_state();state['bc_cuda_rng']=torch.cuda.get_rng_state_all();state['bc_numpy_rng']=np.random.get_state()
+  target=a.output/f'epoch_{epoch:06d}.pth';temporary=target.with_suffix('.pth.tmp');torch.save(state,temporary);os.replace(temporary,target)
  def pass_data(d,ids,train):
   model.train(train);model.running_mean_std.eval();model.value_mean_std.eval()
   n=len(ids);states=[torch.zeros((x.shape[0],n,x.shape[2]),device=player.device) for x in model.get_default_rnn_state()]
@@ -87,8 +88,14 @@ def main():
   row=dict(epoch=epoch,updates=updates,wall_seconds=time.monotonic()-started,validation=metrics,training_probe=train_metrics)
   with (a.output/'metrics.jsonl').open('a') as f:f.write(json.dumps(row)+'\n')
   print(json.dumps(row),flush=True)
- save(0);validate(0)
- for epoch in range(1,a.epochs+1):
+ start_epoch=0
+ if a.resume:
+  assert a.perturb==0 and 'bc_optimizer' in base and 'bc_torch_rng' in base
+  opt.load_state_dict(base['bc_optimizer']);updates=base['bc_updates'];start_epoch=base['bc_epoch']
+  torch.set_rng_state(base['bc_torch_rng']);torch.cuda.set_rng_state_all(base['bc_cuda_rng']);np.random.set_state(base['bc_numpy_rng'])
+  assert a.epochs>start_epoch
+ save(start_epoch);validate(start_epoch)
+ for epoch in range(start_epoch+1,a.epochs+1):
   for j in np.random.permutation(len(data)):
    d=data[j];count=int(d['obs'].shape[1]*.75);ids=torch.randperm(count,device=player.device)
    for offset in range(0,count,a.batch):pass_data(d,ids[offset:offset+a.batch],True);updates+=1

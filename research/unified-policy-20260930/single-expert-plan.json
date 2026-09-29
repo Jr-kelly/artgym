@@ -1,0 +1,49 @@
+{
+  "utc": "2026-09-29T16:38:05.803084+00:00",
+  "event": "B_smallfit_passed_singleexpert_budget_frozen",
+  "evidence": "Source3 paired100epoch:lr1e-5 trainMSE5.84e-6/6.97e-6 andval4.83e-4/4.08e-4;lr1e-4 train8.91e-5/7.57e-5 val.00223/.00302; exactsameepoch0 and200updates",
+  "decision": "Use lr1e-5, no model/obs/action/physics changes; new full-data singleexpert runs from own same savedperturbedepoch0 (pilots not maininitialization)",
+  "runs": {
+    "historical": {
+      "sources": [
+        0,
+        1,
+        2
+      ],
+      "files": 6,
+      "epochs": 100,
+      "updates": 600
+    },
+    "source3": {
+      "sources": [
+        3
+      ],
+      "files": 2,
+      "epochs": 100,
+      "updates": 200
+    }
+  },
+  "fixed": {
+    "learning_rate": 1e-05,
+    "segment_steps": 100,
+    "batch_episodes": 96,
+    "fit_per_file": 96,
+    "validation_per_file": 32,
+    "checkpoint_epochs": [
+      0,
+      25,
+      50,
+      75,
+      100
+    ],
+    "seed": 2026093001
+  },
+  "estimated_upper_seconds": {
+    "historical": 1200,
+    "source3": 600
+  },
+  "timeout_seconds": 2400,
+  "selection": "First G1 compare fixed100 and before0 on development32, sameGPU/protocol as experts; ifpass verify64; no final opened",
+  "code_sha256": "eb38cdd1e34c6fe8262ba2e341db44bbe47e9738ec231f4439459a3caa469a6e",
+  "next": "Train then actual G1; no unified beforeG1"
+}
