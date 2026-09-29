@@ -16,6 +16,8 @@
 训练归档等待器旧session49802读心跳空JSON退出，保留archive-followup.log，修复有界重试后v2session69676成功完成4归档；没有训练重启。视频打包改用现成imageio_ffmpeg，既有文件SHA一致后续接。所有train/eval/backup/collect/archive/render会话已完成；monitor已停，无待跑队列。
 
 详细报告`research/hold-20260929/README.md`；`weights-index.json`；资源`receipts/resources-final.json`，训练含预检26.2475GPUh，结束前4h整机利用率77.465%/100%覆盖；释放凭据`receipts/remote-released.json`。附件Hold文档未在可见路径找到，依明确用户消息执行，不声称已读。
+
+视频展示网站已发布：https://jr-kelly.github.io/artgym/ ，独立wuji-demo-site分支ecfa30b，公网桌面/手机4视频播放与交互核验通过。源码docs/wuji-demo；仅静态托管，不需开发机/GPU。用户2026-09-29要求制作网站已完成。
 <!-- HOLD_CURRENT_END -->
 
 # Wuji端点保持受控实验续接
@@ -517,3 +519,8 @@ Release wuji-hold-20260929-v1已正式发布，30资产服务器SHA逐项匹配�
 
 应用户要求制作Wuji视频展示网站，docs/wuji-demo包含4原始MP4及SHA、预览、播放/倍速/循环/场景切换/手机布局，区分成功、失败、历史策略和冻结指标。Chromium实际4视频播放和交互通过，桌面/手机截图已检查。无训练或开发机GPU占用。计划独立wuji-demo-site分支部署GitHub Pages；仓库此前has_pages=false。
 证据：docs/wuji-demo/index.html, docs/wuji-demo/media-manifest.json, docs/wuji-demo/README.md。下一步：发布独立网站分支，检查公网网页和视频播放，给用户直接访问地址。
+
+## 2026-09-29T15:09:39.344068+00:00 video_website_published
+
+Wuji网站已发布 https://jr-kelly.github.io/artgym/ ，独立wuji-demo-site分支ecfa30b；Pages built，公网Chromium实际4视频播放/切换/倍速/循环/重播/深链接/手机无横溢出全部通过，4公开MP4 SHA与原视频一致。首次网站分支push遇GitHub远端临时pack写入失败，重试成功；无历史内容覆盖。无需训练进程或开发机保持运行。
+证据：research/hold-20260929/receipts/video-site-published.json, docs/wuji-demo/README.md。下一步：用户直接访问网站观看；本次网站交付结束。
