@@ -1,0 +1,53 @@
+{
+  "time": "2026-09-29T06:43:28.628969+00:00",
+  "identities": {
+    "hold_r11_original_seed2901": {
+      "epoch": 1000,
+      "frame": 163840000,
+      "num_actors": 5120,
+      "model_sha256": "77067f108c6b29f97260f9ea811a0b2fe40fe573128cba1c15d6061425c21eb3",
+      "optimizer_sha256": "c1cbf6cdbcbfcbf5ab06996e6bc944a796705bad738b891fa8f10bf013d22cf7",
+      "intrinsic_reward_sha256": null,
+      "last_lr": 3.9506172839506166e-05,
+      "training_states_sha256": "1b9bed179749fc4e5c0f5539c226f00ec574539085cd05b22d257d8bae5ff79e",
+      "reward_scales": {
+        "ObjPosDeviation": -0.5,
+        "ObjRotDeviation": -0.02,
+        "StableContact": 0.0,
+        "HandQposDeviation": -0.001,
+        "GoalDistance1": 1000.0,
+        "GoalDistance2": 0.1,
+        "Smooth": -1.0,
+        "Drop": -25.0,
+        "Success": 50.0
+      },
+      "span": 0.04,
+      "rollout_reset": true,
+      "scope": "Full optimizer/model/normalizer/counters resumed; PhysX state absent in parent so rollouts/RNN reset in both arms. New paired seed; no claim of bitwise uninterrupted training."
+    },
+    "hold_r11_dense1_seed2901": {
+      "epoch": 1000,
+      "frame": 163840000,
+      "num_actors": 5120,
+      "model_sha256": "77067f108c6b29f97260f9ea811a0b2fe40fe573128cba1c15d6061425c21eb3",
+      "optimizer_sha256": "c1cbf6cdbcbfcbf5ab06996e6bc944a796705bad738b891fa8f10bf013d22cf7",
+      "intrinsic_reward_sha256": null,
+      "last_lr": 3.9506172839506166e-05,
+      "training_states_sha256": "1b9bed179749fc4e5c0f5539c226f00ec574539085cd05b22d257d8bae5ff79e",
+      "reward_scales": {
+        "ObjPosDeviation": -0.5,
+        "ObjRotDeviation": -0.02,
+        "StableContact": 0.0,
+        "HandQposDeviation": -0.001,
+        "GoalDistance1": 1000.0,
+        "GoalDistance2": 1.0,
+        "Smooth": -1.0,
+        "Drop": -25.0,
+        "Success": 50.0
+      },
+      "span": 0.04,
+      "rollout_reset": true,
+      "scope": "Full optimizer/model/normalizer/counters resumed; PhysX state absent in parent so rollouts/RNN reset in both arms. New paired seed; no claim of bitwise uninterrupted training."
+    }
+  }
+}

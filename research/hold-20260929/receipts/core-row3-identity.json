@@ -1,0 +1,53 @@
+{
+  "time": "2026-09-29T06:43:28.628969+00:00",
+  "identities": {
+    "hold_r3_original_seed2901": {
+      "epoch": 1000,
+      "frame": 163840000,
+      "num_actors": 5120,
+      "model_sha256": "68d3d3bc2dbcf90b762bde6712356f36b276dd4515897815e50a6ed9bf2109a6",
+      "optimizer_sha256": "233611abae34e98cceeb152df1d898048b7bd49afe6c0f9ff983ff173dfa0d99",
+      "intrinsic_reward_sha256": null,
+      "last_lr": 8.888888888888888e-05,
+      "training_states_sha256": "5194e70a25f88d0e96a8a698df8e8d4da2743f97a5a5344202d60e087f39b8dc",
+      "reward_scales": {
+        "ObjPosDeviation": -0.5,
+        "ObjRotDeviation": -0.02,
+        "StableContact": 0.0,
+        "HandQposDeviation": -0.001,
+        "GoalDistance1": 1000.0,
+        "GoalDistance2": 0.1,
+        "Smooth": -1.0,
+        "Drop": -25.0,
+        "Success": 50.0
+      },
+      "span": 0.04,
+      "rollout_reset": true,
+      "scope": "Full optimizer/model/normalizer/counters resumed; PhysX state absent in parent so rollouts/RNN reset in both arms. New paired seed; no claim of bitwise uninterrupted training."
+    },
+    "hold_r3_dense1_seed2901": {
+      "epoch": 1000,
+      "frame": 163840000,
+      "num_actors": 5120,
+      "model_sha256": "68d3d3bc2dbcf90b762bde6712356f36b276dd4515897815e50a6ed9bf2109a6",
+      "optimizer_sha256": "233611abae34e98cceeb152df1d898048b7bd49afe6c0f9ff983ff173dfa0d99",
+      "intrinsic_reward_sha256": null,
+      "last_lr": 8.888888888888888e-05,
+      "training_states_sha256": "5194e70a25f88d0e96a8a698df8e8d4da2743f97a5a5344202d60e087f39b8dc",
+      "reward_scales": {
+        "ObjPosDeviation": -0.5,
+        "ObjRotDeviation": -0.02,
+        "StableContact": 0.0,
+        "HandQposDeviation": -0.001,
+        "GoalDistance1": 1000.0,
+        "GoalDistance2": 1.0,
+        "Smooth": -1.0,
+        "Drop": -25.0,
+        "Success": 50.0
+      },
+      "span": 0.04,
+      "rollout_reset": true,
+      "scope": "Full optimizer/model/normalizer/counters resumed; PhysX state absent in parent so rollouts/RNN reset in both arms. New paired seed; no claim of bitwise uninterrupted training."
+    }
+  }
+}

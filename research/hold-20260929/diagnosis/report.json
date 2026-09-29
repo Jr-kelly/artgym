@@ -1,0 +1,70 @@
+{
+  "status": "existing_frozen_trace_diagnosis",
+  "summaries": [
+    {
+      "source": 3,
+      "protocol": "fixed2",
+      "episodes": 32,
+      "stages": 320,
+      "strict_episodes": 7,
+      "alive_episodes": 32,
+      "attained_stages": 316,
+      "endpoint_held_stages": 245,
+      "attained_then_left": 74,
+      "failed_endpoints_body_stable": 75,
+      "failed_endpoint_thumb_action_abs_mean": 0.2829059880475203,
+      "failed_endpoint_thumb_contact_fraction_mean": 0.96,
+      "trace_sha256": "816457c161aff0951c0d235ee8f4c6f44bf3406e3f736b40561425b6db3b3e27",
+      "checkpoint_sha256": "e4111879414e4e707ccb46538a0c493f71a6fdc1d4f30aa451f68a9170cae13f"
+    },
+    {
+      "source": 3,
+      "protocol": "fixed5",
+      "episodes": 32,
+      "stages": 128,
+      "strict_episodes": 7,
+      "alive_episodes": 32,
+      "attained_stages": 125,
+      "endpoint_held_stages": 84,
+      "attained_then_left": 61,
+      "failed_endpoints_body_stable": 44,
+      "failed_endpoint_thumb_action_abs_mean": 0.3056308041877029,
+      "failed_endpoint_thumb_contact_fraction_mean": 0.9494949494949494,
+      "trace_sha256": "ddd395d4bf8770d636b83be2621b6b7b71fe8e5fc8bda87557ca65c2d96c7c8e",
+      "checkpoint_sha256": "e4111879414e4e707ccb46538a0c493f71a6fdc1d4f30aa451f68a9170cae13f"
+    },
+    {
+      "source": 11,
+      "protocol": "fixed2",
+      "episodes": 32,
+      "stages": 320,
+      "strict_episodes": 0,
+      "alive_episodes": 32,
+      "attained_stages": 313,
+      "endpoint_held_stages": 166,
+      "attained_then_left": 148,
+      "failed_endpoints_body_stable": 154,
+      "failed_endpoint_thumb_action_abs_mean": 0.28733917669235887,
+      "failed_endpoint_thumb_contact_fraction_mean": 0.8845598845598845,
+      "trace_sha256": "b0318b1ab38b1dd1e2577dd479700dda95a212f45d9eebd451206ee627578902",
+      "checkpoint_sha256": "d5f0cca7d21bc18363da04549a4af7e9ec6db27dd56a48d285cfb1d71bdde1ff"
+    },
+    {
+      "source": 11,
+      "protocol": "fixed5",
+      "episodes": 32,
+      "stages": 128,
+      "strict_episodes": 0,
+      "alive_episodes": 32,
+      "attained_stages": 128,
+      "endpoint_held_stages": 63,
+      "attained_then_left": 65,
+      "failed_endpoints_body_stable": 65,
+      "failed_endpoint_thumb_action_abs_mean": 0.24932135204569653,
+      "failed_endpoint_thumb_contact_fraction_mean": 0.9384615384615385,
+      "trace_sha256": "ead82adf0707f299a36827da8aff3556e7f7fbe3a2518e5a870fe16604038e35",
+      "checkpoint_sha256": "d5f0cca7d21bc18363da04549a4af7e9ec6db27dd56a48d285cfb1d71bdde1ff"
+    }
+  ],
+  "interpretation": "Observed attainment, subsequent departure, actuation and contact proxies do not establish a reward or contact causal mechanism. No checkpoint selected; all original final1000 traces retained."
+}

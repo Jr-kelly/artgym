@@ -81,4 +81,12 @@ hold_r11_original_seed2901 running observed; PID 6458
 开发每源32独立扰动、最终每源128扰动在新策略评估前冻结；4候选CP1250/1500/1750/2000开发严格2/5平均选点，主表固定CP2000同预算。已启动四开发等待器和两最终等待器，等待截止16:00UTC；最终每源两臂/父专家在同GPU同128初態评估，原3抓姿仅为条件整合预留。
 证据：research/hold-20260929/data/manifest.json, research/hold-20260929/receipts/evaluation-queues.json, scripts/evaluate_wuji_hold.py。下一步：训练持续、核验配置与哈希并保存中期权重；不查看最终结果选择checkpoint。
 
-旧实验完整历史见相邻multigrasp-20260928副本；共享最新版在/data/research/artgym/WUJI_GOAL_HANDOFF.md。
+## 2026-09-29T06:45:02.042996+00:00 core_configuration_and_source_pin_verified
+
+实查四正式训练命令：每源两条件除实验名外仅GoalDistance2权重.1→1.0不同；模型/优化器/学习率起点摘要成对相同。已保存远端运行源码逐文件SHA，训练源码保持不变。
+证据：research/hold-20260929/receipts/core-source-config-audit.json, research/hold-20260929/receipts/core-row3-identity.json, research/hold-20260929/receipts/core-row11-identity.json。下一步：继续同预算训练，保存里程碑；冻结评估入口和独立复算已准备。
+
+## 2026-09-29T06:46:08.067739+00:00 endpoint_diagnostic_label_corrected
+
+离线端点标签初版误用绝对slider>0.02判断伸出，已保留invalid文件并按冻结命令阶段偶数伸出/奇数收回修正。任务目标是init_slider+.04和init_slider，不是全局.04/0。原始物理/误差/严格评分及训练配置不受影响。
+证据：research/hold-20260929/diagnosis/by-endpoint.json, research/hold-20260929/diagnosis/by-endpoint.invalid-absolute-threshold.json。下一步：用正确阶段标签解释到达后回缩/过冲，继续既定单系数对照。

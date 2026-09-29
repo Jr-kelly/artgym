@@ -1,0 +1,62 @@
+{
+  "frozen_utc": "2026-09-29T06:37:29.843860+00:00",
+  "parent_epoch": 1000,
+  "primary_candidate_additional_epochs": 1000,
+  "budget_rule": "Confirm with 10epoch preflight; same additional interactions per arm; reserve>=1h final evaluation",
+  "sources": [
+    3,
+    11
+  ],
+  "conditions": {
+    "original": {
+      "GoalDistance2": 0.1
+    },
+    "dense1": {
+      "GoalDistance2": 1.0
+    }
+  },
+  "minimal_change": "Only existing per-step exp(-(slider_error/.002)^2) coefficient .1->1; no new reward, no timing/dynamics/action/network changes",
+  "rationale": "Frequent attained-then-left stages while body stable; success reward50 counted once per command, sustained error bonus0.1. Test sufficiency without presuming cause.",
+  "fixed": {
+    "span": 0.04,
+    "thumb_step": 0.025,
+    "physics": "old knife",
+    "envs": 5120,
+    "horizon": 32,
+    "seed": 2026092901,
+    "training_durations_seconds": [
+      2,
+      5
+    ]
+  },
+  "resume": "Same full expert checkpoint within source: model/normalizers/optimizer/intrinsic state/epoch/frame. PhysX absent, reset rollout/RNN with paired seed. Check digests before update.",
+  "selection": "Primary final equal-budget; supplemental dev among cp1250/1500/1750/2000 by mean strict2/5 on32 dev source perturbations, ties latest; unseen final not used",
+  "evaluation": {
+    "old32": "historical diagnostic only",
+    "development_seed": 2026092910,
+    "final_seed": 2026092920,
+    "dev_trials_per_source": 32,
+    "final_trials_per_source": 128,
+    "protocols": [
+      "static",
+      "fixed2",
+      "fixed5",
+      "arrival"
+    ],
+    "strict": "20s all scheduled endpoint last.3s error<2mm, alive, drift<10mm and rotation<.25rad throughout; unchanged",
+    "internal_targets": "not claimed"
+  },
+  "followup": "Only after benefit: prioritize paired independent continuation seed; conditional one-policy small pool original3+source3+source11; no takeover/hardware",
+  "attachment_status": "not found; path requested; execute explicit user request meanwhile",
+  "locked_additional_epochs": 1000,
+  "locked_additional_interactions": 163840000,
+  "locked_final_epoch": 2000,
+  "locked_utc": "2026-09-29T06:40:11.005870+00:00",
+  "measured_preflight_epoch_seconds": [
+    10.855250000000002,
+    10.81625,
+    10.8075,
+    10.589222222222222
+  ],
+  "estimated_training_hours": 3.0153472222222226
+}
