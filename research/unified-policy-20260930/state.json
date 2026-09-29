@@ -7,7 +7,7 @@
   "max_concurrent_gpus": 2,
   "start_commit": "16ae5d894542cb8fa0cdda6cba7fc5d270842fae",
   "branch": "feat/wuji-unified-policy-20260930",
-  "stage": "C_normalization_correction_preflight",
+  "stage": "frozen_final_evaluation",
   "goal_sha256": "9ae6022a34e95376a08012289c4298e37d990382dac87f88aa3b263062314559",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
   "resource_observation_utc": "2026-09-29T15:58:05Z",
@@ -19,12 +19,26 @@
     "final128": 2026093004,
     "train_replication": 2026093005
   },
-  "next": "Run bounded normalization pilot, compare pre-change source3 baseline and native function preservation diagnostics; at most one further evidence-based modification.",
+  "next": "No further training. Independently rescore final results, finish fixed demos, archive and publicrelease, verifyremoteGPUreleased",
   "remote_root": "/tmp/artgym-unified-policy-20260930",
   "runtime": "/tmp/wuji-unified-runtime/bin/python",
-  "active_jobs": [],
-  "last_observed_utc": "2026-09-29T17:15:10.630469+00:00",
-  "queue": null,
+  "active_jobs": [
+    {
+      "name": "final-t2-job",
+      "pid": 7769,
+      "gpu": 0
+    },
+    {
+      "name": "final-t5-job",
+      "pid": 7770,
+      "gpu": 1
+    }
+  ],
+  "last_observed_utc": "2026-09-29T17:30:35.440410+00:00",
+  "queue": {
+    "pid": 7940,
+    "purpose": "Bounded fixed-demo render after corresponding finalGPUreleased"
+  },
   "monitor": {
     "utc": "2026-09-29T16:46:21.766603+00:00",
     "event": "resource_monitor_started",

@@ -1,0 +1,22 @@
+{
+  "utc": "2026-09-29T17:23:42.583042+00:00",
+  "rows": [
+    {
+      "path": "/tmp/wuji-unified-source3-restore-check/runs/unified-policy-20260930/bc-single-source3/epoch_000100.pth",
+      "sha256": "e886b669847760daabc8f65d61c1d1715a3c014cd345af4a7af13f7f04b6e8c5",
+      "epoch": 100,
+      "updates": 200,
+      "optimizer_tensors": 20,
+      "status": "restored,CPU loaded,finite,optimizer/RNG retained"
+    },
+    {
+      "path": "/tmp/wuji-unified-source3-restore-check/runs/unified-policy-20260930/bc-resume-source3-audit/epoch_000101.pth",
+      "sha256": "36a3b7ef69573a510afb5a0492d044ad030bf46c4fe0b42556a85608db0a0c30",
+      "epoch": 101,
+      "updates": 202,
+      "optimizer_tensors": 20,
+      "status": "restored,CPU loaded,finite,optimizer/RNG retained"
+    }
+  ],
+  "training_resume": "Original savedBC100 actually resumed to101 before packing; recovery hash verifies these exact files, not a claim of bitwise uninterrupted equivalence"
+}

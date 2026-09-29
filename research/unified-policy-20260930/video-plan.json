@@ -1,0 +1,25 @@
+{
+  "utc": "2026-09-29T17:26:28.668451+00:00",
+  "event": "demonstration_plan_fixed_before_candidate_freeze",
+  "initial_states": "research/unified-policy-20260930/data/development-all.npy",
+  "rows": [
+    0,
+    32,
+    64,
+    96
+  ],
+  "sources": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "protocols": [
+    2,
+    5
+  ],
+  "selection": "First developmentreset of eachsource; never outcome-selected",
+  "policy": "Use eventualselectedsinglecheckpoint for all4; labelprivilegedteacher and actualperexamplesuccess/failure",
+  "scope": "Separate visualization resimulation, not finalstatistics; fixed20s originalphysics/scoring",
+  "next": "Render only after candidate frozen and at most2GPUconcurrent; no data for retuning"
+}

@@ -1,0 +1,118 @@
+{
+  "utc": "2026-09-29T17:28:31.813975+00:00",
+  "event": "all_training_stopped_candidate_and_final_protocol_frozen",
+  "candidate": {
+    "path": "runs/unified-policy-20260930/bc-unified-historical-s3001-seg1/epoch_000100.pth",
+    "sha256": "3801eca359022e729510fef28f00d43b35af8561755f20a5f4be0206b6a07ab8",
+    "status": "Best failed unified candidate; G2 not met; not promoted teacher"
+  },
+  "ranking": [
+    {
+      "arm": "historical",
+      "epoch": 100,
+      "worst_strict": 0.03125,
+      "worst_body": 0.90625,
+      "macro_strict": 0.765625,
+      "passed": false
+    },
+    {
+      "arm": "lrfix",
+      "epoch": 100,
+      "worst_strict": 0.03125,
+      "worst_body": 0.84375,
+      "macro_strict": 0.71875,
+      "passed": false
+    },
+    {
+      "arm": "lrfix",
+      "epoch": 50,
+      "worst_strict": 0.0,
+      "worst_body": 0.78125,
+      "macro_strict": 0.765625,
+      "passed": false
+    },
+    {
+      "arm": "historical",
+      "epoch": 50,
+      "worst_strict": 0.0,
+      "worst_body": 0.0,
+      "macro_strict": 0.74609375,
+      "passed": false
+    },
+    {
+      "arm": "normfix",
+      "epoch": 50,
+      "worst_strict": 0.0,
+      "worst_body": 0.0,
+      "macro_strict": 0.23046875,
+      "passed": false
+    },
+    {
+      "arm": "source3",
+      "epoch": 100,
+      "worst_strict": 0.0,
+      "worst_body": 0.0,
+      "macro_strict": 0.23046875,
+      "passed": false
+    },
+    {
+      "arm": "normfix",
+      "epoch": 100,
+      "worst_strict": 0.0,
+      "worst_body": 0.0,
+      "macro_strict": 0.2265625,
+      "passed": false
+    },
+    {
+      "arm": "source3",
+      "epoch": 50,
+      "worst_strict": 0.0,
+      "worst_body": 0.0,
+      "macro_strict": 0.21484375,
+      "passed": false
+    }
+  ],
+  "selection": "worst8strict thenworstbody thenmacro thenearliest; final maynotchange selection",
+  "models": {
+    "historical": {
+      "path": "runs/unified-policy-20260930/experts/historical.pth",
+      "sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac"
+    },
+    "source3": {
+      "path": "runs/unified-policy-20260930/experts/source3.pth",
+      "sha256": "fae13402080f3fac1665d61c69cdc078302b15ea75db8b14c85e500073d748cd"
+    },
+    "single_historical": {
+      "path": "runs/unified-policy-20260930/bc-single-historical/epoch_000100.pth",
+      "sha256": "0fa99571b3d0f9d45eaae84ac11887ec931a855707eea94464d2027ab7c3704c"
+    },
+    "single_source3": {
+      "path": "runs/unified-policy-20260930/bc-single-source3/epoch_000100.pth",
+      "sha256": "e886b669847760daabc8f65d61c1d1715a3c014cd345af4a7af13f7f04b6e8c5"
+    },
+    "unified": {
+      "path": "runs/unified-policy-20260930/bc-unified-historical-s3001-seg1/epoch_000100.pth",
+      "sha256": "3801eca359022e729510fef28f00d43b35af8561755f20a5f4be0206b6a07ab8"
+    }
+  },
+  "final_states": {
+    "path": "research/unified-policy-20260930/data/final-all.npy",
+    "sha256": "90c3c1730a362f0b71b1fdfd222c96792aa2f2444b2ac5bd47153896d5467bb1",
+    "per_source": 128,
+    "total": 512,
+    "previously_evaluated": false
+  },
+  "protocols": [
+    2,
+    5
+  ],
+  "final_purpose": "Independent frozen failure characterization and matched expert/singleBC baselines; not claim of passing promotion",
+  "rules": "20s600steps,last9steps eachstage error<.002m;fullvalidalive,drift<.01m,rotation<.25rad; external2/5commands",
+  "no_further_training": true,
+  "student": "Not executed: G2development64 trigger unmet",
+  "second_seed": "Not triggered: no G2 candidate",
+  "D1": "Not triggered: unified heldoutactionfit criterion unmet",
+  "D2": "Not started: errors remain large and2methodmodifications exhausted; no automaticPPO",
+  "source11": "Not executed: optional branch does not improve unresolved mainline; retainpriorresults",
+  "next": "Final512env models5 perprotocol GPU0/1 then independent rescore; videos fixed4devstates; archive/upload/verify"
+}

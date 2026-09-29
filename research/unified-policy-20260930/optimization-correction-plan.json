@@ -1,0 +1,18 @@
+{
+  "utc": "2026-09-29T17:20:19.147735+00:00",
+  "event": "second_and_last_correction_optimization_plan_frozen",
+  "method_modification": 2,
+  "evidence": [
+    "c-historical-seg1-analysis/report.json",
+    "c-source3-seg1-analysis/report.json",
+    "receipts/unified-historical100-fit.json",
+    "receipts/mixed-input-diagnostic.json"
+  ],
+  "normalization_pilot_interim": "t5 CP50and100 both strict[0,0,0,31]/32 body[0,0,0,32]; t2 CP50 strict[0,0,0,28], lastt2pending; alreadycannotpassG2. No extension.",
+  "hypothesis": "Learning rate chosen for a near-identity perturbed single-expert clone is too conservative for acquiring the distant expert action mapping: historical-init source3 heldoutMSE remains .124/.102 while train and heldout both keep declining. A larger optimization step may reduce the mixed-fit bottleneck without added capacity/data.",
+  "only_change": "Original historical expert init, all same source-balanced data/phase loss/seed/normalizer/batch/800updates/dev50and100; learning rate1e-5 to1e-4 only. Retain existing historical1e-5 same-start/equal-update control. This is one optimization modification, not a third expert initialization.",
+  "pilot_budget": "100epochs800updates; CP50and100 matcheddev32. Train timeout2400s; eval eachprotocol bounded. No learning-rate grid.",
+  "stop": "If two equal50epoch intervals worst-cell improve<5pp and no new evidence, stop this method. Extend only on meaningful worst-cell gain without body regression; at most300totalepochs in this method before redecision. No third method modification.",
+  "init_sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+  "next": "Queue after normfix completion, then actual G2 development gate and fit diagnosis; no automatic PPO/DAgger/student"
+}

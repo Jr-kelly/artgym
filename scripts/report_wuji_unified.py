@@ -1,0 +1,34 @@
+"""Write an evidence-driven report without promoting a failed candidate."""
+import json,csv,datetime
+from pathlib import Path
+R=Path(__file__).resolve().parents[1];Q=R/'research/unified-policy-20260930'
+def get(stage):return json.loads((Q/stage/'report.json').read_text())['rows']
+def table(rows,models,body=False):
+ out=['|模型|协议|来源0|来源1|来源2|来源3|','|---|---|---:|---:|---:|---:|']
+ for name,label in models:
+  for sec in [2,5]:
+   a=[next(x for x in rows if x['model']==name and x['seconds']==sec and x['source']==s) for s in range(4)];key='body_stable' if body else 'success'
+   out.append('|'+label+'|'+str(sec)+'秒|'+'|'.join(f"{x[key]}/{x['n']} ({100*x[key]/x['n']:.1f}%)" for x in a)+'|')
+ return '\n'.join(out)
+def main():
+ freeze=json.loads((Q/'final-freeze.json').read_text());final=(Q/'final-analysis/report.json').exists();parts=[]
+ parts.append('# Wuji统一策略：本轮未通过G2\n\n同一权重尚不能稳定覆盖0/1/2+3。G0专家复核和G1单专家序列克隆通过开发32与64复核；两种统一初始化和两项受控修正均未通过G2，依照预定规则停止训练。冻结的最佳失败候选为历史初始化BC100，SHA `'+freeze['candidate']['sha256']+'`。teacher未达到统一门槛，student未触发。')
+ parts.append('全部能力证据仅为历史刀资产 `knife_wuji_bridge3_20260922`、已训练基础抓姿邻域的IsaacGym仿真，使用privileged teacher。来源0/1是相近构型，与源2合计两簇，源3为第三簇；不是四种独立新抓姿。没有从桌面获取、未见基础抓姿、其它刀、任意内部滑块位置或真机验证。推理没有source-ID、专家路由或锁刀身脚本。')
+ if final:
+  rows=get('final-analysis');parts.append('## 冻结最终128初态验证\n\n每来源128，统一批量512，各模型同初态同协议。候选与评分在打开最终结果前冻结，未据此调参或改选。此评估是失败候选的独立刻画，不是跳过G2晋级。严格成功如下：\n\n'+table(rows,[('historical','历史专家'),('source3','源3专家'),('single_historical','历史单专家BC100'),('single_source3','源3单专家BC100'),('unified','冻结统一BC100')]))
+  parts.append('冻结统一候选的全程刀身稳定：\n\n'+table(rows,[('unified','统一BC100')],True)+'\n\n逐回合记录、Wilson 95%区间、各阶段端点和首个失败时序见 [最终复算](final-analysis/report.json)、[CSV](final-analysis/trials.csv)、[时序](final-analysis/temporal.json)。相近来源按簇单列，不能把轨迹数当独立构型数。两个实现逐回合严格结果一致，原始trace SHA同时保留。')
+ else:parts.append('## 最终验证正在运行\n\n五模型已按[冻结计划](final-freeze.json)启动本轮最终128初态验证；尚未汇总完成，不将开发32数字当最终结论。训练已经停止，不会根据最终结果调参。')
+ parts.append('## 专家与单专家克隆\n\nG0开发32：历史专家在0/1/2两协议均32/32；源3为24/32、31/32。源3的2秒成绩比旧整合批次下降12.5个百分点，触发回归：同历史核心128初态重跑112/128、119/128，对旧109/128、120/128无实质退步。再进行预定64开发复核，G0通过；首32失败完整保留，差异不归因于已证明的单一原因。\n\n'+table(get('g0-promotion-analysis'),[('historical','历史专家开发64'),('source3','源3专家开发64')]))
+ parts.append('单专家模仿从各自保存的2%参数扰动初始化重新训练，并非原封不动加载专家。小数据同起点对照显示1e-5比1e-4更适合近恒等克隆，正式100轮：历史600更新、源3共200更新。G1开发32和64均在负责来源满足相对专家严格下降≤10个百分点、刀身下降≤3个百分点。源3扰动前后开发32为29→27及31→31，因此不能声称每格闭环都改善。\n\n'+table(get('g1-promotion-analysis'),[('historical-bc100','历史单专家BC开发64'),('source3-bc100','源3单专家BC开发64')]))
+ parts.append('## 统一BC与两个受控修正\n\n以下均为开发32，每一行使用同一权重覆盖四来源。每个正式分支固定100轮800更新，CP50与CP100均保存并评估。全部开发选点遵循最差严格、最差刀身、宏平均、再较早轮次，另保留固定预算末点。')
+ for arm,label in [('historical','历史初始化'),('source3','源3初始化'),('normfix','归一化修正'),('lrfix','学习率修正')]:
+  parts.append(table(get('c-'+arm+'-seg1-analysis'),[('cp50',label+'50'),('cp100',label+'100')]))
+ parts.append('第一修正依据源3normalizer使原来源前30步31.5–40.6%观测分量被裁剪，而历史normalizer各来源低于0.2%。使用历史宽归一化，actor/critic输入LSTM和encoder首层作仿射补偿；原未裁剪区域保持等价，原裁剪区域有意变化。原生源3重放目标误差在冻结数值下限内，但合并效果更差，停止该修正。这说明单独消除观测裁剪没有解决问题，不能据此认定唯一根因。\n\n第二修正检验近恒等单专家小拟合选择的低学习率是否不足以学习另一专家：从原历史专家重新开始，仅lr1e-5→1e-4，同数据、同800更新、同评估。原始源3动作MSE更低，但闭环最差格未有足够提升且旧来源退步，停止。没有扩模型、换奖励、扫大网格或进行第三修改。')
+ parts.append('历史初始化BC100与lr修正BC100最差严格同为1/32；前者最差刀身29/32，后者27/32，因此冻结前者。源3及normalizer分支最差严格为零。[各阶段证据](DECISIONS.jsonl)、[最终冻结排序](final-freeze.json)与完整CP指标均保留。')
+ parts.append('## 数据、接口和证据边界\n\n采集1024条完整600步轨迹，共614400条记录控制转移；失败回合保留，终止后标签不参与拟合。每来源/协议前96轨迹训练、后32轨迹验证，完整轨迹划分无泄漏。采集时专家分别负责0/1/2与3，各自用自己的normalizer和正确RNN历史；来源仅用于标签采集与统计。原始观测138维含SAPG编号；归一化前137维，policy111、privileged21、critic contact5，推理SAPG系数50。privileged encoder输出16维；各BC的encoder与actor共同训练，没有跨专家latent MSE。\n\nbaseline监督专家未裁剪mu，执行动作另存；实际非拇指目标为初始目标+0.04×动作，拇指为上一目标+0.025×动作，随后关节限位。数据核验了mu/裁剪动作/上一动作/目标映射。600步整序列分6段100步，携带detach状态，完整回合后一次优化。训练相位均衡使用首次到位1–9步与后续保持；诊断则用到位1–8步、保持≥9步，均不改变原端点评分。离线更新不是新增仿真交互。\n\n[动作拟合判据](action-fit-criterion.json)在G1后C前冻结，以单专家目标关节范围归一化均值/P95的1.5倍和实测数值下限为参照。统一BC仍不满足这个诊断门槛，因此没有把状态分布偏移当成已证实根因并自动启动DAgger。逐步GPU重放专家动作完全一致；批量GPU/CPU有小数值差，初次过严1e-4检查失败被保留并用于设定数值地板。')
+ parts.append('## 未执行的分支\n\n|项目|状态与原因|\n|---|---|\n|第二训练随机种子|未执行，G2未通过触发条件|\n|D1数据聚合|未执行，统一动作拟合尚未达到预定判据|\n|D2纯PPO与PPO+BC|未执行，未确认仅剩局部控制误差，且两项修改额度已用完|\n|D3额外标签/扩容量|未执行，没有证据足以判定容量或现有输入缺失|\n|Student/G3|未执行，teacher开发64晋级条件未满足|\n|60秒/可变间隔挑战|未执行，基础统一验证未通过|\n|源11可选支线|未执行，避免拖延未解决主线；旧结果保留|\n|真机|未执行，本轮只做仿真|')
+ parts.append('## 恢复、视频与交付\n\n[恢复与完整命令](REPRODUCE.md)、[权重索引](weights-index.json)、[续接文档](HANDOFF.md)、[目标原文](GOAL.md)。43个实际保存checkpoint含原专家、扰动起点、所有pilot/正式里程碑及恢复审计，模型CPU读取与有限值检查通过。源3BC100→101实际恢复Adam/RNG续训；归档解包逐文件哈希通过，未宣称与不中断训练逐位相同。大文件放本轮独立Release，不进入普通Git；旧Release/网站和原工作区修改保留。\n\n视频使用[预先固定的开发四初态](video-plan.json)，统一同权重四列显示，标明privileged teacher及每例成功/失败。单独重仿真展示，不能替代冻结最终统计。Release和视频公开下载核验完成后见交付索引；在其生成前本报告仍属交付进行中。')
+ parts.append('下一轮只优先解决统一BC在源3的目标关节拟合误差：考虑以实际执行动作/物理目标为监督的同起点同预算对照，区分未执行的饱和mu误差与有效控制误差。本轮未运行该第三修改；不把这个建议写成已验证解法，也不以更大模型或更多PPO替代诊断。')
+ (Q/'README.md').write_text('\n\n'.join(parts)+'\n')
+ print(json.dumps(dict(final_report_included=final,output=str(Q/'README.md'))))
+if __name__=='__main__':main()

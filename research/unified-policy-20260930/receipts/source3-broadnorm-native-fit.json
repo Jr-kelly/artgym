@@ -1,0 +1,166 @@
+{
+  "checkpoint": "runs/unified-policy-20260930/source3-broadnorm-init/policy.pth",
+  "sha256": "1bf7d828ea4193546f1b66cb97704d4c613657079d5105027fa6261720803d97",
+  "device": "cpu",
+  "rows": [
+    {
+      "data": "runs/unified-policy-20260930/train-data-t2/source3",
+      "source": 3,
+      "seconds": 2.0,
+      "groups": {
+        "all_all": {
+          "values": 372160,
+          "target_range_mean": 1.4482693586614914e-05,
+          "target_range_p95": 1.6630598111078143e-05,
+          "action_mse": 6.945485074538738e-05
+        },
+        "all_support": {
+          "values": 297728,
+          "target_range_mean": 1.4857570931781083e-05,
+          "target_range_p95": 1.7176493838633167e-05,
+          "action_mse": 5.2385770686669275e-05
+        },
+        "all_thumb": {
+          "values": 74432,
+          "target_range_mean": 1.2983179658476729e-05,
+          "target_range_p95": 1.4899771485943347e-05,
+          "action_mse": 0.00013773127284366637
+        },
+        "switch_first15_all": {
+          "values": 93160,
+          "target_range_mean": 8.6547079263255e-06,
+          "target_range_p95": 1.6966558268904924e-05,
+          "action_mse": 3.393139559193514e-05
+        },
+        "switch_first15_support": {
+          "values": 74528,
+          "target_range_mean": 9.36286505748285e-06,
+          "target_range_p95": 1.8203580111730844e-05,
+          "action_mse": 2.124727689079009e-05
+        },
+        "switch_first15_thumb": {
+          "values": 18632,
+          "target_range_mean": 5.8220807659381535e-06,
+          "target_range_p95": 1.1560887287487276e-05,
+          "action_mse": 8.466786675853655e-05
+        },
+        "arrival_first8_all": {
+          "values": 50060,
+          "target_range_mean": 6.626953108934686e-06,
+          "target_range_p95": 1.615905694052342e-05,
+          "action_mse": 4.181280019111e-06
+        },
+        "arrival_first8_support": {
+          "values": 40048,
+          "target_range_mean": 6.817697794758715e-06,
+          "target_range_p95": 1.618900250832667e-05,
+          "action_mse": 4.366018401924521e-06
+        },
+        "arrival_first8_thumb": {
+          "values": 10012,
+          "target_range_mean": 5.863973001396516e-06,
+          "target_range_p95": 1.6062294889707098e-05,
+          "action_mse": 3.442327397351619e-06
+        },
+        "holding_after9_all": {
+          "values": 227080,
+          "target_range_mean": 5.938702543062391e-06,
+          "target_range_p95": 1.572790006321148e-05,
+          "action_mse": 3.1431784464075463e-06
+        },
+        "holding_after9_support": {
+          "values": 181664,
+          "target_range_mean": 5.947382305748761e-06,
+          "target_range_p95": 1.6105421309475787e-05,
+          "action_mse": 2.876674898288911e-06
+        },
+        "holding_after9_thumb": {
+          "values": 45416,
+          "target_range_mean": 5.903984856558964e-06,
+          "target_range_p95": 1.4706302863487508e-05,
+          "action_mse": 4.209193775750464e-06
+        }
+      }
+    },
+    {
+      "data": "runs/unified-policy-20260930/train-data-t5/source3",
+      "source": 3,
+      "seconds": 5.0,
+      "groups": {
+        "all_all": {
+          "values": 363400,
+          "target_range_mean": 4.197072030365234e-06,
+          "target_range_p95": 1.4680817366752271e-05,
+          "action_mse": 1.1862839528475888e-05
+        },
+        "all_support": {
+          "values": 290720,
+          "target_range_mean": 4.108691427973099e-06,
+          "target_range_p95": 1.4941434528736863e-05,
+          "action_mse": 8.696960321685765e-06
+        },
+        "all_thumb": {
+          "values": 72680,
+          "target_range_mean": 4.550593985186424e-06,
+          "target_range_p95": 1.3856370060238987e-05,
+          "action_mse": 2.4526369088562205e-05
+        },
+        "switch_first15_all": {
+          "values": 36700,
+          "target_range_mean": 1.0660856787580997e-05,
+          "target_range_p95": 1.5585808796458878e-05,
+          "action_mse": 0.00011545050074346364
+        },
+        "switch_first15_support": {
+          "values": 29360,
+          "target_range_mean": 1.1474841812741943e-05,
+          "target_range_p95": 1.667265760261216e-05,
+          "action_mse": 8.427088323514909e-05
+        },
+        "switch_first15_thumb": {
+          "values": 7340,
+          "target_range_mean": 7.404915777442511e-06,
+          "target_range_p95": 1.096267078537494e-05,
+          "action_mse": 0.00024016894167289138
+        },
+        "arrival_first8_all": {
+          "values": 21020,
+          "target_range_mean": 3.4899096590379486e-06,
+          "target_range_p95": 1.441788026568247e-05,
+          "action_mse": 9.826108993138405e-08
+        },
+        "arrival_first8_support": {
+          "values": 16816,
+          "target_range_mean": 3.410545104998164e-06,
+          "target_range_p95": 1.4425575955101522e-05,
+          "action_mse": 8.03255701953276e-08
+        },
+        "arrival_first8_thumb": {
+          "values": 4204,
+          "target_range_mean": 3.8073685573181137e-06,
+          "target_range_p95": 1.4276683805292112e-05,
+          "action_mse": 1.7000314755932777e-07
+        },
+        "holding_after9_all": {
+          "values": 305260,
+          "target_range_mean": 3.473706101431162e-06,
+          "target_range_p95": 1.4579794878954999e-05,
+          "action_mse": 2.347854746176381e-07
+        },
+        "holding_after9_support": {
+          "values": 244208,
+          "target_range_mean": 3.27479574480094e-06,
+          "target_range_p95": 1.477508035350183e-05,
+          "action_mse": 2.157716210149374e-07
+        },
+        "holding_after9_thumb": {
+          "values": 61052,
+          "target_range_mean": 4.2693468458310235e-06,
+          "target_range_p95": 1.4099121563049262e-05,
+          "action_mse": 3.10840931661005e-07
+        }
+      }
+    }
+  ],
+  "scope": "Heldout episode96..127, recurrent full history, one-step physical target conditioned on expert previous target; not closed-loop success; no cross-expert latent supervision"
+}
