@@ -1,0 +1,505 @@
+{
+  "updated_utc": "2026-09-29T10:51:38.599195+00:00",
+  "parents": {
+    "entries": [
+      {
+        "row": 3,
+        "path": "runs/hold-20260929/parents/expert3.pth",
+        "sha256": "e4111879414e4e707ccb46538a0c493f71a6fdc1d4f30aa451f68a9170cae13f",
+        "epoch": 1000,
+        "frame": 163840000
+      },
+      {
+        "row": 11,
+        "path": "runs/hold-20260929/parents/expert11.pth",
+        "sha256": "d5f0cca7d21bc18363da04549a4af7e9ec6db27dd56a48d285cfb1d71bdde1ff",
+        "epoch": 1000,
+        "frame": 163840000
+      }
+    ],
+    "source_branch": "feat/wuji-multigrasp-2x2-20260928",
+    "source_release": "wuji-multigrasp-20260928-v1"
+  },
+  "checkpoints": [
+    {
+      "name": "hold_r11_original_seed2901",
+      "epoch": 1250,
+      "path": "runs/hold_r11_original_seed2901/checkpoints/epoch_001250.pth",
+      "sha256": "57c0b77c508c01fa4f5a783473d1a42bd46b4948d1ec40165fff5b5385a49bc7",
+      "frame": 204800000,
+      "model_finite": true,
+      "optimizer_saved": true,
+      "verified_utc": "2026-09-29T07:28:00.291047+00:00",
+      "role": "core matched continuation",
+      "archive": {
+        "name": "wuji-hold_r11_original_seed2901.tar.gz",
+        "sha256": "f12d8b1fbd2409c1a7e86ae196f83906b11906fb1ae53c5a53975671b160c75e",
+        "asset_id": 597856082,
+        "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold_r11_original_seed2901.tar.gz",
+        "digest_verified": true
+      },
+      "release_url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-hold-20260929-v1/wuji-hold_r11_original_seed2901.tar.gz",
+      "release_status": "draft until final delivery; URL resolves only after publication",
+      "restore": "python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz"
+    },
+    {
+      "name": "hold_r11_dense1_seed2901",
+      "epoch": 1250,
+      "path": "runs/hold_r11_dense1_seed2901/checkpoints/epoch_001250.pth",
+      "sha256": "d1f4ab58cdfd9f1d683a1d6a9b28994527556b325c57b7eaeb88e5343b3400be",
+      "frame": 204800000,
+      "model_finite": true,
+      "optimizer_saved": true,
+      "verified_utc": "2026-09-29T07:28:04.210476+00:00",
+      "role": "core matched continuation",
+      "archive": {
+        "name": "wuji-hold_r11_dense1_seed2901.tar.gz",
+        "sha256": "5f65103b7bcab1d141bebd1688a205e39e7792bc239db02121247ad81384f156",
+        "asset_id": 597859289,
+        "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold_r11_dense1_seed2901.tar.gz",
+        "digest_verified": true
+      },
+      "release_url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-hold-20260929-v1/wuji-hold_r11_dense1_seed2901.tar.gz",
+      "release_status": "draft until final delivery; URL resolves only after publication",
+      "restore": "python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz"
+    },
+    {
+      "name": "hold_r3_original_seed2901",
+      "epoch": 1250,
+      "path": "runs/hold_r3_original_seed2901/checkpoints/epoch_001250.pth",
+      "sha256": "8c79ff6a2593402d07b08f3474255adafd96d21cdb32fed9d22c00220a19e4d3",
+      "frame": 204800000,
+      "model_finite": true,
+      "optimizer_saved": true,
+      "verified_utc": "2026-09-29T07:28:56.092316+00:00",
+      "role": "core matched continuation",
+      "archive": {
+        "name": "wuji-hold_r3_original_seed2901.tar.gz",
+        "sha256": "1c060ddd112bec886bb1d8044fe426c15014f8719b2add233edcafa63d7d8c52",
+        "asset_id": 597867475,
+        "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold_r3_original_seed2901.tar.gz",
+        "digest_verified": true
+      },
+      "release_url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-hold-20260929-v1/wuji-hold_r3_original_seed2901.tar.gz",
+      "release_status": "draft until final delivery; URL resolves only after publication",
+      "restore": "python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz"
+    },
+    {
+      "name": "hold_r3_dense1_seed2901",
+      "epoch": 1250,
+      "path": "runs/hold_r3_dense1_seed2901/checkpoints/epoch_001250.pth",
+      "sha256": "694433b62b851caf8494d3766917343af72b5848357e7025d919121f26aaec44",
+      "frame": 204800000,
+      "model_finite": true,
+      "optimizer_saved": true,
+      "verified_utc": "2026-09-29T07:28:59.977164+00:00",
+      "role": "core matched continuation",
+      "archive": {
+        "name": "wuji-hold_r3_dense1_seed2901.tar.gz",
+        "sha256": "6fca6fdae505b5bd260e7e04d4698b8245a09a0527e0f9df70ff529b49b76dfe",
+        "asset_id": 597872501,
+        "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold_r3_dense1_seed2901.tar.gz",
+        "digest_verified": true
+      },
+      "release_url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-hold-20260929-v1/wuji-hold_r3_dense1_seed2901.tar.gz",
+      "release_status": "draft until final delivery; URL resolves only after publication",
+      "restore": "python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz"
+    },
+    {
+      "name": "hold_r11_original_seed2901",
+      "epoch": 1500,
+      "path": "runs/hold_r11_original_seed2901/checkpoints/epoch_001500.pth",
+      "sha256": "a7fc9fefb511dff53b26834d1645e368e7dbe13616c0d63ce4a9a04ee81653d1",
+      "frame": 245760000,
+      "model_finite": true,
+      "optimizer_saved": true,
+      "verified_utc": "2026-09-29T08:15:13.035359+00:00",
+      "role": "core matched continuation",
+      "archive": {
+        "name": "wuji-hold_r11_original_seed2901.tar.gz",
+        "sha256": "f12d8b1fbd2409c1a7e86ae196f83906b11906fb1ae53c5a53975671b160c75e",
+        "asset_id": 597856082,
+        "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold_r11_original_seed2901.tar.gz",
+        "digest_verified": true
+      },
+      "release_url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-hold-20260929-v1/wuji-hold_r11_original_seed2901.tar.gz",
+      "release_status": "draft until final delivery; URL resolves only after publication",
+      "restore": "python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz"
+    },
+    {
+      "name": "hold_r11_dense1_seed2901",
+      "epoch": 1500,
+      "path": "runs/hold_r11_dense1_seed2901/checkpoints/epoch_001500.pth",
+      "sha256": "833a831b4f6be761853a6ba3c50ef2848cd896d915093291e0c215024170659d",
+      "frame": 245760000,
+      "model_finite": true,
+      "optimizer_saved": true,
+      "verified_utc": "2026-09-29T08:15:20.051916+00:00",
+      "role": "core matched continuation",
+      "archive": {
+        "name": "wuji-hold_r11_dense1_seed2901.tar.gz",
+        "sha256": "5f65103b7bcab1d141bebd1688a205e39e7792bc239db02121247ad81384f156",
+        "asset_id": 597859289,
+        "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold_r11_dense1_seed2901.tar.gz",
+        "digest_verified": true
+      },
+      "release_url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-hold-20260929-v1/wuji-hold_r11_dense1_seed2901.tar.gz",
+      "release_status": "draft until final delivery; URL resolves only after publication",
+      "restore": "python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz"
+    },
+    {
+      "name": "hold_r3_original_seed2901",
+      "epoch": 1500,
+      "path": "runs/hold_r3_original_seed2901/checkpoints/epoch_001500.pth",
+      "sha256": "327b52dff459264ca28c363a8173d496d8d447e44ac7d121da4e9be52651ac62",
+      "frame": 245760000,
+      "model_finite": true,
+      "optimizer_saved": true,
+      "verified_utc": "2026-09-29T08:17:43.758544+00:00",
+      "role": "core matched continuation",
+      "archive": {
+        "name": "wuji-hold_r3_original_seed2901.tar.gz",
+        "sha256": "1c060ddd112bec886bb1d8044fe426c15014f8719b2add233edcafa63d7d8c52",
+        "asset_id": 597867475,
+        "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold_r3_original_seed2901.tar.gz",
+        "digest_verified": true
+      },
+      "release_url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-hold-20260929-v1/wuji-hold_r3_original_seed2901.tar.gz",
+      "release_status": "draft until final delivery; URL resolves only after publication",
+      "restore": "python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz"
+    },
+    {
+      "name": "hold_r3_dense1_seed2901",
+      "epoch": 1500,
+      "path": "runs/hold_r3_dense1_seed2901/checkpoints/epoch_001500.pth",
+      "sha256": "10479ef3962dff74d86d4bac177b0e0ff48759b3dcd79bf2cfbf41e83163ed87",
+      "frame": 245760000,
+      "model_finite": true,
+      "optimizer_saved": true,
+      "verified_utc": "2026-09-29T08:18:38.256978+00:00",
+      "role": "core matched continuation",
+      "archive": {
+        "name": "wuji-hold_r3_dense1_seed2901.tar.gz",
+        "sha256": "6fca6fdae505b5bd260e7e04d4698b8245a09a0527e0f9df70ff529b49b76dfe",
+        "asset_id": 597872501,
+        "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold_r3_dense1_seed2901.tar.gz",
+        "digest_verified": true
+      },
+      "release_url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-hold-20260929-v1/wuji-hold_r3_dense1_seed2901.tar.gz",
+      "release_status": "draft until final delivery; URL resolves only after publication",
+      "restore": "python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz"
+    },
+    {
+      "name": "hold_r11_original_seed2901",
+      "epoch": 1750,
+      "path": "runs/hold_r11_original_seed2901/checkpoints/epoch_001750.pth",
+      "sha256": "775b26ee82ea5b7036654e0c115f252b7c64073bbc4dbf3d50084023da90b493",
+      "frame": 286720000,
+      "model_finite": true,
+      "optimizer_saved": true,
+      "verified_utc": "2026-09-29T09:02:53.470276+00:00",
+      "role": "core matched continuation",
+      "archive": {
+        "name": "wuji-hold_r11_original_seed2901.tar.gz",
+        "sha256": "f12d8b1fbd2409c1a7e86ae196f83906b11906fb1ae53c5a53975671b160c75e",
+        "asset_id": 597856082,
+        "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold_r11_original_seed2901.tar.gz",
+        "digest_verified": true
+      },
+      "release_url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-hold-20260929-v1/wuji-hold_r11_original_seed2901.tar.gz",
+      "release_status": "draft until final delivery; URL resolves only after publication",
+      "restore": "python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz"
+    },
+    {
+      "name": "hold_r11_dense1_seed2901",
+      "epoch": 1750,
+      "path": "runs/hold_r11_dense1_seed2901/checkpoints/epoch_001750.pth",
+      "sha256": "587821031d2bea10b516d226d42dcedcc6e169eb7ae710c7edafe9206e028127",
+      "frame": 286720000,
+      "model_finite": true,
+      "optimizer_saved": true,
+      "verified_utc": "2026-09-29T09:03:00.104779+00:00",
+      "role": "core matched continuation",
+      "archive": {
+        "name": "wuji-hold_r11_dense1_seed2901.tar.gz",
+        "sha256": "5f65103b7bcab1d141bebd1688a205e39e7792bc239db02121247ad81384f156",
+        "asset_id": 597859289,
+        "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold_r11_dense1_seed2901.tar.gz",
+        "digest_verified": true
+      },
+      "release_url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-hold-20260929-v1/wuji-hold_r11_dense1_seed2901.tar.gz",
+      "release_status": "draft until final delivery; URL resolves only after publication",
+      "restore": "python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz"
+    },
+    {
+      "name": "hold_r3_original_seed2901",
+      "epoch": 1750,
+      "path": "runs/hold_r3_original_seed2901/checkpoints/epoch_001750.pth",
+      "sha256": "9731e76ff522a292123a3da651cca9465cb687fd05db157d6435b978ebc0fd16",
+      "frame": 286720000,
+      "model_finite": true,
+      "optimizer_saved": true,
+      "verified_utc": "2026-09-29T09:06:57.188779+00:00",
+      "role": "core matched continuation",
+      "archive": {
+        "name": "wuji-hold_r3_original_seed2901.tar.gz",
+        "sha256": "1c060ddd112bec886bb1d8044fe426c15014f8719b2add233edcafa63d7d8c52",
+        "asset_id": 597867475,
+        "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold_r3_original_seed2901.tar.gz",
+        "digest_verified": true
+      },
+      "release_url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-hold-20260929-v1/wuji-hold_r3_original_seed2901.tar.gz",
+      "release_status": "draft until final delivery; URL resolves only after publication",
+      "restore": "python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz"
+    },
+    {
+      "name": "hold_r3_dense1_seed2901",
+      "epoch": 1750,
+      "path": "runs/hold_r3_dense1_seed2901/checkpoints/epoch_001750.pth",
+      "sha256": "cc75f188d9c184d9e2eede3d27534bec16638a9a379a984a4591e33859c94be3",
+      "frame": 286720000,
+      "model_finite": true,
+      "optimizer_saved": true,
+      "verified_utc": "2026-09-29T09:07:47.739221+00:00",
+      "role": "core matched continuation",
+      "archive": {
+        "name": "wuji-hold_r3_dense1_seed2901.tar.gz",
+        "sha256": "6fca6fdae505b5bd260e7e04d4698b8245a09a0527e0f9df70ff529b49b76dfe",
+        "asset_id": 597872501,
+        "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold_r3_dense1_seed2901.tar.gz",
+        "digest_verified": true
+      },
+      "release_url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-hold-20260929-v1/wuji-hold_r3_dense1_seed2901.tar.gz",
+      "release_status": "draft until final delivery; URL resolves only after publication",
+      "restore": "python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz"
+    },
+    {
+      "name": "hold_r11_dense1_seed2901",
+      "epoch": 2000,
+      "path": "runs/hold_r11_dense1_seed2901/checkpoints/epoch_002000.pth",
+      "sha256": "121f912db441fdc44c442fe85416f56e2f81cb5381b0239db10f7d1f61df011a",
+      "frame": 327680000,
+      "model_finite": true,
+      "optimizer_saved": true,
+      "verified_utc": "2026-09-29T09:50:45.584012+00:00",
+      "role": "core matched continuation",
+      "archive": {
+        "name": "wuji-hold_r11_dense1_seed2901.tar.gz",
+        "sha256": "5f65103b7bcab1d141bebd1688a205e39e7792bc239db02121247ad81384f156",
+        "asset_id": 597859289,
+        "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold_r11_dense1_seed2901.tar.gz",
+        "digest_verified": true
+      },
+      "release_url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-hold-20260929-v1/wuji-hold_r11_dense1_seed2901.tar.gz",
+      "release_status": "draft until final delivery; URL resolves only after publication",
+      "restore": "python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz"
+    },
+    {
+      "name": "hold_r11_original_seed2901",
+      "epoch": 2000,
+      "path": "runs/hold_r11_original_seed2901/checkpoints/epoch_002000.pth",
+      "sha256": "3828448659b718f5459f1726d70a8f2f442050f9c4deabf0a6352277bdaa5a8b",
+      "frame": 327680000,
+      "model_finite": true,
+      "optimizer_saved": true,
+      "verified_utc": "2026-09-29T09:51:34.434913+00:00",
+      "role": "core matched continuation",
+      "archive": {
+        "name": "wuji-hold_r11_original_seed2901.tar.gz",
+        "sha256": "f12d8b1fbd2409c1a7e86ae196f83906b11906fb1ae53c5a53975671b160c75e",
+        "asset_id": 597856082,
+        "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold_r11_original_seed2901.tar.gz",
+        "digest_verified": true
+      },
+      "release_url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-hold-20260929-v1/wuji-hold_r11_original_seed2901.tar.gz",
+      "release_status": "draft until final delivery; URL resolves only after publication",
+      "restore": "python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz"
+    },
+    {
+      "name": "hold_r3_original_seed2901",
+      "epoch": 2000,
+      "path": "runs/hold_r3_original_seed2901/checkpoints/epoch_002000.pth",
+      "sha256": "2f85c2107ef71d275093429fc8e8e94252e24e272a01432a8d7b9e3b1ec112c4",
+      "frame": 327680000,
+      "model_finite": true,
+      "optimizer_saved": true,
+      "verified_utc": "2026-09-29T09:56:19.842496+00:00",
+      "role": "core matched continuation",
+      "archive": {
+        "name": "wuji-hold_r3_original_seed2901.tar.gz",
+        "sha256": "1c060ddd112bec886bb1d8044fe426c15014f8719b2add233edcafa63d7d8c52",
+        "asset_id": 597867475,
+        "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold_r3_original_seed2901.tar.gz",
+        "digest_verified": true
+      },
+      "release_url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-hold-20260929-v1/wuji-hold_r3_original_seed2901.tar.gz",
+      "release_status": "draft until final delivery; URL resolves only after publication",
+      "restore": "python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz"
+    },
+    {
+      "name": "hold_r3_dense1_seed2901",
+      "epoch": 2000,
+      "path": "runs/hold_r3_dense1_seed2901/checkpoints/epoch_002000.pth",
+      "sha256": "fae13402080f3fac1665d61c69cdc078302b15ea75db8b14c85e500073d748cd",
+      "frame": 327680000,
+      "model_finite": true,
+      "optimizer_saved": true,
+      "verified_utc": "2026-09-29T09:57:15.143839+00:00",
+      "role": "core matched continuation",
+      "archive": {
+        "name": "wuji-hold_r3_dense1_seed2901.tar.gz",
+        "sha256": "6fca6fdae505b5bd260e7e04d4698b8245a09a0527e0f9df70ff529b49b76dfe",
+        "asset_id": 597872501,
+        "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold_r3_dense1_seed2901.tar.gz",
+        "digest_verified": true
+      },
+      "release_url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-hold-20260929-v1/wuji-hold_r3_dense1_seed2901.tar.gz",
+      "release_status": "draft until final delivery; URL resolves only after publication",
+      "restore": "python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz"
+    }
+  ],
+  "verified_asset_count": 20,
+  "assets": [
+    {
+      "name": "hold-final-source3-original-fixed5.mp4",
+      "sha256": "9f89c2129db363c07c70d8f25a2ae8e8f9fb9f44ddeaf8f9913ef01cb00fab9d",
+      "asset_id": 597885849,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/hold-final-source3-original-fixed5.mp4",
+      "digest_verified": true
+    },
+    {
+      "name": "hold-final-source3-dense1-fixed5.mp4",
+      "sha256": "ba43361bbf2f030c92b6e4d6814a8c7095f63ee563359626f97519dffa52f624",
+      "asset_id": 597885895,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/hold-final-source3-dense1-fixed5.mp4",
+      "digest_verified": true
+    },
+    {
+      "name": "hold-final-source11-original-fixed5.mp4",
+      "sha256": "fc1c0adefd99bf324b7734ebc7d7fbac8e268b2b7f37df36b040af6821481388",
+      "asset_id": 597885952,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/hold-final-source11-original-fixed5.mp4",
+      "digest_verified": true
+    },
+    {
+      "name": "hold-final-source11-dense1-fixed5.mp4",
+      "sha256": "bf2b461388112f53c3c5f38058ffebe745f7ffe405f387e9f205432c48b375c5",
+      "asset_id": 597886024,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/hold-final-source11-dense1-fixed5.mp4",
+      "digest_verified": true
+    },
+    {
+      "name": "wuji-hold-final-video-raw-evidence.tar.gz",
+      "sha256": "c604a06111614bb03d4c9bb86f69da82ac7a067069c250d507cafefe49b59008",
+      "asset_id": 597886057,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold-final-video-raw-evidence.tar.gz",
+      "digest_verified": true
+    },
+    {
+      "name": "wuji-preflight_r3_dense1.tar.gz",
+      "sha256": "e89716fce992561fd54cc37bc037e9663703d419ad506abedd5b6ee463723316",
+      "asset_id": 597534822,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-preflight_r3_dense1.tar.gz",
+      "digest_verified": true
+    },
+    {
+      "name": "wuji-preflight_r11_original.tar.gz",
+      "sha256": "ca46cf9b914d61e4f52b12cb5bfb46b725233037926454ecfc4ea48fd84c5cec",
+      "asset_id": 597535369,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-preflight_r11_original.tar.gz",
+      "digest_verified": true
+    },
+    {
+      "name": "wuji-preflight_r11_dense1.tar.gz",
+      "sha256": "e7b723c5716a2f46d22f558841344bcdb9ef77bb06157e1f64cd9a7db562f7e9",
+      "asset_id": 597536000,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-preflight_r11_dense1.tar.gz",
+      "digest_verified": true
+    },
+    {
+      "name": "hold-parent-source3-fixed5.mp4",
+      "sha256": "4c4073ead3ab54b5345af57ed5d6b668a0dafb7091995d4766f0ccea4aa297ae",
+      "asset_id": 597547004,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/hold-parent-source3-fixed5.mp4",
+      "digest_verified": true
+    },
+    {
+      "name": "hold-parent-source11-fixed5.mp4",
+      "sha256": "a1b2c26b52a6625da0af48ef08e7c9d96102785d7d13513948270dd1086187d9",
+      "asset_id": 597547045,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/hold-parent-source11-fixed5.mp4",
+      "digest_verified": true
+    },
+    {
+      "name": "wuji-hold-parent-experts.tar.gz",
+      "sha256": "23b61a640899c9f7ca517ad506ee457a2744cf010240b131a576ef1054e33fd2",
+      "asset_id": 597518696,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold-parent-experts.tar.gz",
+      "digest_verified": true
+    },
+    {
+      "name": "wuji-preflight_r3_original.tar.gz",
+      "sha256": "37d6cf9ba506f29012b2dfc183bccbbb73926b3c4b4626e22155196d8ccd6737",
+      "asset_id": 597520107,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-preflight_r3_original.tar.gz",
+      "digest_verified": true
+    },
+    {
+      "name": "wuji-hold_r3_original_seed2901.tar.gz",
+      "sha256": "1c060ddd112bec886bb1d8044fe426c15014f8719b2add233edcafa63d7d8c52",
+      "asset_id": 597867475,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold_r3_original_seed2901.tar.gz",
+      "digest_verified": true
+    },
+    {
+      "name": "wuji-hold-source11-thumb-latch-diagnostic.tar.gz",
+      "sha256": "76a3ce32821af6cd908bdc1f353af407a789f073454ff39207852a5c87a01837",
+      "asset_id": 597973340,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold-source11-thumb-latch-diagnostic.tar.gz",
+      "digest_verified": true
+    },
+    {
+      "name": "wuji-hold_r11_dense1_seed2901.tar.gz",
+      "sha256": "5f65103b7bcab1d141bebd1688a205e39e7792bc239db02121247ad81384f156",
+      "asset_id": 597859289,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold_r11_dense1_seed2901.tar.gz",
+      "digest_verified": true
+    },
+    {
+      "name": "wuji-hold-row11-seed2901-raw-evidence.tar.gz",
+      "sha256": "eedbe237eac86e562500445a61d385e705910cbbb0e5785c4b856ada53f91454",
+      "asset_id": 597917117,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold-row11-seed2901-raw-evidence.tar.gz",
+      "digest_verified": true
+    },
+    {
+      "name": "wuji-hold_r3_dense1_seed2901.tar.gz",
+      "sha256": "6fca6fdae505b5bd260e7e04d4698b8245a09a0527e0f9df70ff529b49b76dfe",
+      "asset_id": 597872501,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold_r3_dense1_seed2901.tar.gz",
+      "digest_verified": true
+    },
+    {
+      "name": "wuji-hold_r11_original_seed2901.tar.gz",
+      "sha256": "f12d8b1fbd2409c1a7e86ae196f83906b11906fb1ae53c5a53975671b160c75e",
+      "asset_id": 597856082,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold_r11_original_seed2901.tar.gz",
+      "digest_verified": true
+    },
+    {
+      "name": "wuji-hold-parent-video-raw-evidence.tar.gz",
+      "sha256": "7687eae1190a666ce902f0c49e758f40d63d27a60caaa8ee792909bf688d03c7",
+      "asset_id": 597597692,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold-parent-video-raw-evidence.tar.gz",
+      "digest_verified": true
+    },
+    {
+      "name": "wuji-hold-row3-seed2901-raw-evidence.tar.gz",
+      "sha256": "9e0b2b07d9a90a56c5a0c8463718413e4fdaa5268278f570e19047e14aa04d8f",
+      "asset_id": 597945650,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/untagged-0a2c5f3fc8aacd506fa4/wuji-hold-row3-seed2901-raw-evidence.tar.gz",
+      "digest_verified": true
+    }
+  ],
+  "scope": "Every scheduled checkpoint retained; complete archives additionally contain all trainer nn weights, optimizer state, TensorBoard and logs. Parent release and historical successes preserved. Core final CP2000 primary, development selected CP1500 source3 dense only supplementary; integration final CP3000 predeclared."
+}

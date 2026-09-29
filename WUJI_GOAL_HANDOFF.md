@@ -280,3 +280,13 @@ seed2901 both sources independently rescored; matched-budget and selected result
 
 后续4份完整Hydra配置解析并逐键比较通过：复验仅奖励系数，整合仅训练池，除实验标识外无其它差异。本地只读解析首次IsaacGym导入SIGSEGV，改远端后发现缺少离线flatten模块，补同步该辅助模块后通过；均未改训练源码/进程。
 证据：research/hold-20260929/configs-followup/audit.json, research/hold-20260929/receipts/followup-config-audit.log。下一步：继续固定预算后续训练，整理核心报告和全部权重/原始时序交付。
+
+## 2026-09-29T10:42:30.085997+00:00 source11_thumb_latch_diagnostic_started
+
+源11核心无改善，冻结本机4090机制对照：同CP2000系数1、同128初态、同GPU，各2/5秒比较原策略与到位连续9步后令拇指增量0至换向。只诊断持续拇指指令是否参与破坏保持，不当成学习策略/部署成功；不改核心结果，不占远端后续4GPU。
+证据：research/hold-20260929/thumb-latch-plan.json, scripts/audit_wuji_hold_thumb_latch.py。下一步：运行4个有界物理诊断、独立复算并区分脚本干预与原策略结果。
+
+## 2026-09-29T10:49:50.096111+00:00 source11_thumb_latch_diagnostic_completed
+
+本机源11机制对照512回合完成，独立逐步核验9步触发/换向复位/只改拇指及严格评分通过。原策略2/5严格1/1（各128），固定拇指目标36/59；刀身稳定125/122降至92/87。说明持续拇指增量参与保持破坏，但简单冻结有稳定性代价，不能当学会保持或直接修复。全部原始trace/动作干预归档，本机物理结束，远端4后续训练继续。
+证据：research/hold-20260929/analysis-thumb-latch/report.json, research/hold-20260929/receipts/thumb-latch-raw-manifest.json。下一步：完成既定种子复验和共享策略整合，不扩散附加训练；报告机制限制。

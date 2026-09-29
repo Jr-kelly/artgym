@@ -1,0 +1,19 @@
+{
+  "time": "2026-09-29T10:42:30.048076+00:00",
+  "source": 11,
+  "checkpoint": "runs/hold_r11_dense1_seed2901/checkpoints/epoch_002000.pth",
+  "states": "research/hold-20260929/data/final-row11.npy",
+  "n": 128,
+  "protocols": [
+    "fixed2",
+    "fixed5"
+  ],
+  "conditions": [
+    "policy",
+    "thumb_latch"
+  ],
+  "seed": 2026092930,
+  "scope": "Local4090 sameGPU paired diagnostic on already used source11 final128. Trigger9 consecutive observed2mm transitions, then zero thumb increments only until next scheduled command. No physics/network/range/strict-scoring change. Scripted intervention is NOT learned performance or deployment evidence. Entire source11 final128 included, no screening.",
+  "rationale": "Source11 all256 fixed5 extension stages attained but only4held; investigate whether ongoing thumb increments contribute to loss versus target-held passive/contact limitations.",
+  "gpu_before": "1161799, /opt/todesk/bin/ToDesk_Session\n"
+}

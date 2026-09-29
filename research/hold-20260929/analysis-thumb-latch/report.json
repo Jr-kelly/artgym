@@ -1,0 +1,170 @@
+{
+  "status": "independently_rescored",
+  "results": [
+    {
+      "condition": "policy",
+      "protocol": "fixed2",
+      "strict": 1,
+      "alive": 128,
+      "body_stable": 125,
+      "n": 128,
+      "latch_timing_verified": true,
+      "action_intervention_verified": true,
+      "latched_steps": 47620,
+      "endpoints": [
+        {
+          "endpoint": "extension",
+          "stages": 640,
+          "attained": 621,
+          "final_held": 108,
+          "attained_then_left": 524,
+          "failed": 532,
+          "failed_body_stable": 531,
+          "failed_endpoint_mean_signed_error_mm": -7.6122063197811745,
+          "failed_endpoint_thumb_action_abs": 0.5351358517528253,
+          "failed_endpoint_thumb_tracking_error_rad": 0.02895813340958404,
+          "failed_endpoint_thumb_contact_fraction": 0.888888888888889
+        },
+        {
+          "endpoint": "retraction",
+          "stages": 640,
+          "attained": 640,
+          "final_held": 640,
+          "attained_then_left": 0,
+          "failed": 0,
+          "failed_body_stable": 0,
+          "failed_endpoint_mean_signed_error_mm": null,
+          "failed_endpoint_thumb_action_abs": null,
+          "failed_endpoint_thumb_tracking_error_rad": null,
+          "failed_endpoint_thumb_contact_fraction": null
+        }
+      ],
+      "trace_sha256": "061ca0e570b499dc3bf23cdbb6938583da3b7b0b1c6034688ec39fd67b5d03d3",
+      "report": "runs/hold-20260929/diag-r11-policy-fixed2/evidence/report.json"
+    },
+    {
+      "condition": "thumb_latch",
+      "protocol": "fixed2",
+      "strict": 36,
+      "alive": 125,
+      "body_stable": 92,
+      "n": 128,
+      "latch_timing_verified": true,
+      "action_intervention_verified": true,
+      "latched_steps": 43436,
+      "endpoints": [
+        {
+          "endpoint": "extension",
+          "stages": 640,
+          "attained": 595,
+          "final_held": 445,
+          "attained_then_left": 168,
+          "failed": 195,
+          "failed_body_stable": 148,
+          "failed_endpoint_mean_signed_error_mm": -7.45901172772432,
+          "failed_endpoint_thumb_action_abs": 0.07423821024787731,
+          "failed_endpoint_thumb_tracking_error_rad": 0.031915450524514034,
+          "failed_endpoint_thumb_contact_fraction": 0.8404558404558405
+        },
+        {
+          "endpoint": "retraction",
+          "stages": 640,
+          "attained": 629,
+          "final_held": 628,
+          "attained_then_left": 1,
+          "failed": 12,
+          "failed_body_stable": 2,
+          "failed_endpoint_mean_signed_error_mm": -17.570230801900227,
+          "failed_endpoint_thumb_action_abs": 0.4721805701653163,
+          "failed_endpoint_thumb_tracking_error_rad": 0.048479749163637585,
+          "failed_endpoint_thumb_contact_fraction": 0.3055555555555555
+        }
+      ],
+      "trace_sha256": "c05ba49af201eef7ce8158b79b1755640bded0dedbefeb60ba3c394bc37b36f4",
+      "report": "runs/hold-20260929/diag-r11-thumb_latch-fixed2/evidence/report.json"
+    },
+    {
+      "condition": "policy",
+      "protocol": "fixed5",
+      "strict": 1,
+      "alive": 128,
+      "body_stable": 122,
+      "n": 128,
+      "latch_timing_verified": true,
+      "action_intervention_verified": true,
+      "latched_steps": 65944,
+      "endpoints": [
+        {
+          "endpoint": "extension",
+          "stages": 256,
+          "attained": 256,
+          "final_held": 3,
+          "attained_then_left": 255,
+          "failed": 253,
+          "failed_body_stable": 253,
+          "failed_endpoint_mean_signed_error_mm": -14.294653325212803,
+          "failed_endpoint_thumb_action_abs": 0.42062445182220737,
+          "failed_endpoint_thumb_tracking_error_rad": 0.02489018996095233,
+          "failed_endpoint_thumb_contact_fraction": 0.8814229249011858
+        },
+        {
+          "endpoint": "retraction",
+          "stages": 256,
+          "attained": 256,
+          "final_held": 256,
+          "attained_then_left": 0,
+          "failed": 0,
+          "failed_body_stable": 0,
+          "failed_endpoint_mean_signed_error_mm": null,
+          "failed_endpoint_thumb_action_abs": null,
+          "failed_endpoint_thumb_tracking_error_rad": null,
+          "failed_endpoint_thumb_contact_fraction": null
+        }
+      ],
+      "trace_sha256": "2c3c3793b68b28c63f1b6af4af568162eeba308ba34d98ac726711beb7a06939",
+      "report": "runs/hold-20260929/diag-r11-policy-fixed5/evidence/report.json"
+    },
+    {
+      "condition": "thumb_latch",
+      "protocol": "fixed5",
+      "strict": 59,
+      "alive": 122,
+      "body_stable": 87,
+      "n": 128,
+      "latch_timing_verified": true,
+      "action_intervention_verified": true,
+      "latched_steps": 61871,
+      "endpoints": [
+        {
+          "endpoint": "extension",
+          "stages": 256,
+          "attained": 243,
+          "final_held": 172,
+          "attained_then_left": 95,
+          "failed": 84,
+          "failed_body_stable": 44,
+          "failed_endpoint_mean_signed_error_mm": -3.2129049613362266,
+          "failed_endpoint_thumb_action_abs": 0.06205820788939794,
+          "failed_endpoint_thumb_tracking_error_rad": 0.02462257744905184,
+          "failed_endpoint_thumb_contact_fraction": 0.8386243386243384
+        },
+        {
+          "endpoint": "retraction",
+          "stages": 256,
+          "attained": 250,
+          "final_held": 250,
+          "attained_then_left": 0,
+          "failed": 6,
+          "failed_body_stable": 0,
+          "failed_endpoint_mean_signed_error_mm": -32.23556582132975,
+          "failed_endpoint_thumb_action_abs": 0.555273175239563,
+          "failed_endpoint_thumb_tracking_error_rad": 0.00014404482256698733,
+          "failed_endpoint_thumb_contact_fraction": 0.0
+        }
+      ],
+      "trace_sha256": "ed2cc9f8f0a83005c447ab4ecf2a24b1cfce6408b6c27da399b4f121555ad5c9",
+      "report": "runs/hold-20260929/diag-r11-thumb_latch-fixed5/evidence/report.json"
+    }
+  ],
+  "scope": "Same local GPU128 source11 perturbations, scripted thumb increment freeze after observed attainment. Outcome tests this intervention only; does not prove a unique root cause, learned stability, robustness outside this cohort, or hardware applicability."
+}
