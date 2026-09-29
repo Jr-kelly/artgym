@@ -1,0 +1,419 @@
+scripts/verify_wuji_multigrasp_release.py
+  s_721f503d39167b::t_e9d3d2ca7feeac 14-15,20,23,41
+scripts/package_wuji_hold_integration_video.py
+  s_721f503d39167b::t_27288d748ad713 17-18,27-32,34-37,39
+scripts/archive_wuji_hold_when_done.py
+  s_721f503d39167b::t_8b679c85180274 23-30
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "7f72404ad7baaa076bce9b2594c451ad3147ccb8",
+  "prompts": {},
+  "sessions": {
+    "s_721f503d39167b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0e87e-fbfa-7a80-b73c-3a968594ab0a",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.output_tokens": "391447",
+        "tlab.token_usage.input_tokens": "25876562",
+        "tlab.session_started_at": "2026-09-29T13:42:23Z",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.cache_read_tokens": "163656733"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/hold-20260929/evidence/hold_integrate_shared_seed2903/gpu.jsonl",
+      "additions": {
+        "human": 405
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_integrate_shared_seed2903/output.log",
+      "additions": {
+        "human": 15453
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_integrate_shared_seed2903/status.json",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_integrate_singleton_seed2903/gpu.jsonl",
+      "additions": {
+        "human": 389
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_integrate_singleton_seed2903/output.log",
+      "additions": {
+        "human": 15505
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_integrate_singleton_seed2903/status.json",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_r3_dense1_seed2902/gpu.jsonl",
+      "additions": {
+        "human": 393
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_r3_dense1_seed2902/output.log",
+      "additions": {
+        "human": 15607
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_r3_dense1_seed2902/status.json",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_r3_original_seed2902/gpu.jsonl",
+      "additions": {
+        "human": 394
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_r3_original_seed2902/output.log",
+      "additions": {
+        "human": 15521
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_r3_original_seed2902/status.json",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/assets-1342-verified.json",
+      "additions": {
+        "human": 150
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/followup-archive-restore-check.txt",
+      "additions": {
+        "human": 4
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/hold_integrate_shared_seed2903-archive.json",
+      "additions": {
+        "human": 124
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/hold_integrate_singleton_seed2903-archive.json",
+      "additions": {
+        "human": 134
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/hold_r3_dense1_seed2902-archive.json",
+      "additions": {
+        "human": 134
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/hold_r3_original_seed2902-archive.json",
+      "additions": {
+        "human": 134
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/release-hold_integrate_shared_seed2903.json",
+      "additions": {
+        "human": 9
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/release-hold_integrate_singleton_seed2903.json",
+      "additions": {
+        "human": 9
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/release-hold_r3_dense1_seed2902.json",
+      "additions": {
+        "human": 9
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/release-hold_r3_original_seed2902.json",
+      "additions": {
+        "human": 9
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/release-integration-videos.json",
+      "additions": {
+        "human": 23
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/replication-development-selection.json",
+      "additions": {
+        "human": 36
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/integration-inspection.json",
+      "additions": {
+        "human": 38
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/integration-render-results.json",
+      "additions": {
+        "human": 27
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/integration-video-results.json",
+      "additions": {
+        "human": 122
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/video-integration-shared-fixed5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/video-integration-shared-fixed5/evidence/report.json",
+      "additions": {
+        "human": 151
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/video-integration-shared-fixed5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/video-integration-shared-fixed5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/video-integration-shared-fixed5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/video-integration-shared-fixed5/output.log",
+      "additions": {
+        "human": 41
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/video-integration-shared-fixed5/status.json",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/video-integration-singleton-fixed5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/video-integration-singleton-fixed5/evidence/report.json",
+      "additions": {
+        "human": 151
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/video-integration-singleton-fixed5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/video-integration-singleton-fixed5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/video-integration-singleton-fixed5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/video-integration-singleton-fixed5/output.log",
+      "additions": {
+        "human": 41
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/video-integration-singleton-fixed5/status.json",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 102
+      }
+    },
+    {
+      "old_path": "WUJI_HOLD_HANDOFF.md",
+      "new_path": "WUJI_HOLD_HANDOFF.md",
+      "additions": {
+        "human": 342
+      }
+    },
+    {
+      "old_path": "research/hold-20260929/README.md",
+      "new_path": "research/hold-20260929/README.md",
+      "additions": {
+        "human": 10
+      },
+      "deletions": {
+        "human": 2
+      }
+    },
+    {
+      "old_path": "research/hold-20260929/receipts/backup-integration.json",
+      "new_path": "research/hold-20260929/receipts/backup-integration.json",
+      "additions": {
+        "human": 61
+      },
+      "deletions": {
+        "human": 1
+      }
+    },
+    {
+      "old_path": "research/hold-20260929/receipts/backup-replication.json",
+      "new_path": "research/hold-20260929/receipts/backup-replication.json",
+      "additions": {
+        "human": 61
+      },
+      "deletions": {
+        "human": 1
+      }
+    },
+    {
+      "old_path": "research/hold-20260929/receipts/gpu-history.jsonl",
+      "new_path": "research/hold-20260929/receipts/gpu-history.jsonl",
+      "additions": {
+        "human": 392
+      }
+    },
+    {
+      "old_path": "research/hold-20260929/receipts/monitor-latest.json",
+      "new_path": "research/hold-20260929/receipts/monitor-latest.json",
+      "additions": {
+        "human": 989
+      },
+      "deletions": {
+        "human": 61
+      }
+    },
+    {
+      "old_path": "research/hold-20260929/state.json",
+      "new_path": "research/hold-20260929/state.json",
+      "additions": {
+        "human": 5
+      },
+      "deletions": {
+        "human": 4
+      }
+    },
+    {
+      "old_path": "research/hold-20260929/weights-index.json",
+      "new_path": "research/hold-20260929/weights-index.json",
+      "additions": {
+        "human": 335
+      },
+      "deletions": {
+        "human": 10
+      }
+    },
+    {
+      "old_path": "scripts/archive_wuji_hold_when_done.py",
+      "new_path": "scripts/archive_wuji_hold_when_done.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 8
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 1
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/package_wuji_hold_integration_video.py",
+      "new_path": "scripts/package_wuji_hold_integration_video.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 13
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 5
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/verify_wuji_multigrasp_release.py",
+      "new_path": "scripts/verify_wuji_multigrasp_release.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 5
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 3
+          }
+        ]
+      }
+    }
+  ]
+}
