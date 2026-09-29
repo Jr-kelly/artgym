@@ -47,7 +47,7 @@ def main():
    end=min(start+a.segment,600);length=end-start
    def flat(key):return d[key][start:end,ids].transpose(0,1).reshape(n*length,-1)
    obs=flat('obs');reset=torch.zeros((600,n),device=player.device,dtype=torch.bool);reset[1:]=d['done'][:-1,ids].bool()
-   inp=dict(obs=model.norm_obs(obs),rnn_states=states,seq_length=length,dones=reset[start:end].transpose(0,1).reshape(-1,1),bptt_len=0)
+   inp=dict(obs=model.norm_obs(obs),rnn_states=states,seq_length=length,dones=reset[start:end].transpose(0,1).reshape(-1,1).float(),bptt_len=0)
    mu,_,_,states=model.a2c_network(inp);states=[s.detach() for s in states]
    pred=mu.clamp(-1,1);raw=flat('initial_target')+pred*.04;raw[:,16:]=flat('previous_target')[:,16:]+pred[:,16:]*.025
    targets=torch.maximum(torch.minimum(raw,d['upper']),d['lower']);terr=(targets-flat('target_clipped'))/(d['upper']-d['lower'])
