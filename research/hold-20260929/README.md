@@ -51,3 +51,13 @@
 - 父权重SHA、初始化摘要、数据SHA、运行命令见 `receipts/` 与 `data/manifest.json`；预注册 `preregistration.json`；持续交接 `WUJI_HOLD_HANDOFF.md`。
 - 新主机10.14.0.107:30296，06:12UTC实测4张H100空闲后使用；未终止其它任务。各卡只有有用训练/评估；利用率和实际PID均带时间，见 `receipts/gpu-history.jsonl`、`monitor-latest.json`。
 - 用户命名的附件 `Codex-Goal-Wuji-Hold-20260929.md` 暂未在可见下载/tmp/research找到，已请求路径；当前执行依据是本轮用户消息的明确要求，未声称读过缺失文件。
+
+
+## 代表视频（父策略，非本轮冻结结果）
+
+在新策略结果出现前固定历史诊断每源第0回合、5秒命令及同一前视相机。实际本机4090重仿真均所有命令曾到位，但严格全程成功均0/1；源3刀身稳定1/1、源11刀身稳定0/1。不同设备、环境数量和重仿真可能造成轨迹差异，这两段不替代旧32或本轮新128结果。见 `video/parent-video-results.json` 和逐回合原始评分。后续最终权重使用同回合对照，不按成功挑选视频。
+
+- `videos/hold-parent-source3-fixed5.mp4`
+- `videos/hold-parent-source11-fixed5.mp4`
+
+草稿Release `wuji-hold-20260929-v1` 已保存父权重、全部预检权重日志与父策略视频，服务器SHA逐项核验；当前尚未正式发布实验结论。全部训练权重归档在每组完成后自动进行，不只保留开发选中的checkpoint。

@@ -1,0 +1,22 @@
+{
+  "time": "2026-09-29T07:08:13.444415+00:00",
+  "states": "historical diagnostic32 per source; fixed row0 chosen before new policy results",
+  "sources": [
+    3,
+    11
+  ],
+  "trial_rows": [
+    0
+  ],
+  "protocol": "fixed5",
+  "seed": 2026092820,
+  "camera": "scripts.render_wuji_multigrasp front camera",
+  "policy_plan": [
+    "parent",
+    "original-final",
+    "dense1-final"
+  ],
+  "scope": "Actual new rendered physical rollouts on local4090, separate from frozen128 quantitative table. No best-trial selection; report video strict outcome even if different from historical trace.",
+  "local_gpu_before": "0, NVIDIA GeForce RTX 4090, 16 %, 1455 MiB\n",
+  "local_compute_before": "1161799, /opt/todesk/bin/ToDesk_Session, 651 MiB\n"
+}
