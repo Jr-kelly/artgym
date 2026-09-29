@@ -7,7 +7,7 @@
   "max_concurrent_gpus": 2,
   "start_commit": "16ae5d894542cb8fa0cdda6cba7fc5d270842fae",
   "branch": "feat/wuji-unified-policy-20260930",
-  "stage": "B_smallfit_lr_control",
+  "stage": "B_G1_promotion_evaluation",
   "goal_sha256": "9ae6022a34e95376a08012289c4298e37d990382dac87f88aa3b263062314559",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
   "resource_observation_utc": "2026-09-29T15:58:05Z",
@@ -19,21 +19,34 @@
     "final128": 2026093004,
     "train_replication": 2026093005
   },
-  "next": "Read equal-budget pilot fit metrics, then fullsingle-expert fit and actualG1closedloop",
+  "next": "Confirm64promotion then freeze physicaltarget-fit criterion and enterC; no unified trained yet",
   "remote_root": "/tmp/artgym-unified-policy-20260930",
   "runtime": "/tmp/wuji-unified-runtime/bin/python",
   "active_jobs": [
     {
-      "name": "bc-pilot-source3-lr4-job",
-      "pid": 3311,
+      "name": "g1-promotion-t2-job",
+      "pid": 4399,
       "gpu": 0
     },
     {
-      "name": "bc-pilot-source3-lr5-job",
-      "pid": 3312,
+      "name": "g1-promotion-t5-job",
+      "pid": 4400,
       "gpu": 1
     }
   ],
-  "last_observed_utc": "2026-09-29T16:36:15.224816+00:00",
-  "queue": null
+  "last_observed_utc": "2026-09-29T16:50:46.484669+00:00",
+  "queue": null,
+  "monitor": {
+    "utc": "2026-09-29T16:46:21.766603+00:00",
+    "event": "resource_monitor_started",
+    "pid": 3901,
+    "host": "10.13.160.5:33024",
+    "started_utc": "2026-09-29T16:44:09.768204Z",
+    "command": "python3 -m scripts.monitor_wuji_unified_resources",
+    "file": "runs/unified-policy-20260930/machine-gpu-history.jsonl",
+    "interval_seconds": 5,
+    "deadline_utc": "2026-09-30T07:56:50Z",
+    "purpose": "Read-only full-machine utilization; no artificial GPU workload",
+    "next": "Include fine-grained coverage in resource ledger; stop own monitor after task"
+  }
 }

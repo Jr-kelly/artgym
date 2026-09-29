@@ -13,12 +13,20 @@ def main():
     try:
      d=json.loads(line);rows=d['gpus'].strip().splitlines();values=[float(x.split(',')[1].strip().replace('%','')) for x in rows];samples.append((stamp(d['time']),sum(values)/len(values)))
     except (ValueError,KeyError):pass
+ fine=base/'machine-gpu-history.jsonl'
+ if fine.exists():
+  high=[]
+  for line in fine.read_text().splitlines():
+   try:
+    d=json.loads(line);values=[float(x.split(',')[1].strip().replace('%','')) for x in d['gpus'].strip().splitlines()];high.append((stamp(d['time']),sum(values)/len(values)))
+   except (ValueError,KeyError):pass
+  if high:samples=[x for x in samples if x[0]<min(t for t,v in high)]+high
  samples.sort();dedup=[]
  for t,value in samples:
-  if not dedup or t-dedup[-1][0]>=10:dedup.append((t,value))
+  if not dedup or t-dedup[-1][0]>=4:dedup.append((t,value))
  area=duration=0
  for (t,v),(u,w) in zip(dedup,dedup[1:]):
   if 0<u-t<=90:area+=(u-t)*v;duration+=u-t
- result=dict(recorded_utc=now.isoformat(),jobs=jobs,owned_reserved_gpu_hours=sum(x['gpu_hours'] for x in jobs),training_reserved_gpu_hours=sum(x['gpu_hours'] for x in jobs if x['role']=='training'),remote_observed_machine_mean_gpu_utilization_percent=area/duration if duration else None,remote_sample_covered_seconds=duration,remote_sample_count=len(dedup),full_four_hour_window_covered=duration>=14400,note='Includes job startup/I/O reservations conservatively; active jobs charged through last heartbeat. Host utilization averages all4cards, deduplicates dual-wrapper samples; missing time not asserted measured. CUDA smoke and offline short audit additionally tracked separately.')
+ result=dict(recorded_utc=now.isoformat(),jobs=jobs,owned_reserved_gpu_hours=sum(x['gpu_hours'] for x in jobs),training_reserved_gpu_hours=sum(x['gpu_hours'] for x in jobs if x['role']=='training'),remote_observed_machine_mean_gpu_utilization_percent=area/duration if duration else None,remote_sample_covered_seconds=duration,remote_sample_count=len(dedup),full_four_hour_window_covered=duration>=14400,note='Uses five-second monitor when available, retains older coarse prefix. Includes job startup/I/O reservations conservatively; active jobs charged through last heartbeat. Host utilization averages all4cards, deduplicates dual-wrapper samples; missing time not asserted measured. CUDA smoke and offline short audit additionally tracked separately.')
  a.output.write_text(json.dumps(result,indent=2)+'\n');print(json.dumps({k:v for k,v in result.items() if k!='jobs'}))
 if __name__=='__main__':main()

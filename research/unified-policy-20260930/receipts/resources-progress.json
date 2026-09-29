@@ -1,5 +1,5 @@
 {
-  "recorded_utc": "2026-09-29T16:25:26.508964+00:00",
+  "recorded_utc": "2026-09-29T16:43:33.151561+00:00",
   "jobs": [
     {
       "name": "g0-t5-job",
@@ -20,6 +20,51 @@
       "role": "collection_evaluation_or_preflight"
     },
     {
+      "name": "train-data-t5-job",
+      "status": "completed",
+      "gpu": 1,
+      "started": "2026-09-29T16:27:27.429524+00:00",
+      "finished": "2026-09-29T16:33:59.113008+00:00",
+      "gpu_hours": 0.10880092752249994,
+      "role": "collection_evaluation_or_preflight"
+    },
+    {
+      "name": "bc-pilot-historical-job",
+      "status": "completed",
+      "gpu": 0,
+      "started": "2026-09-29T16:34:09.426194+00:00",
+      "finished": "2026-09-29T16:34:18.523640+00:00",
+      "gpu_hours": 0.002527025903611199,
+      "role": "training"
+    },
+    {
+      "name": "train-data-t2-job",
+      "status": "completed",
+      "gpu": 0,
+      "started": "2026-09-29T16:27:27.429461+00:00",
+      "finished": "2026-09-29T16:34:05.162509+00:00",
+      "gpu_hours": 0.11048139257194457,
+      "role": "collection_evaluation_or_preflight"
+    },
+    {
+      "name": "bc-single-historical-job",
+      "status": "completed",
+      "gpu": 0,
+      "started": "2026-09-29T16:38:06.581379+00:00",
+      "finished": "2026-09-29T16:38:48.776078+00:00",
+      "gpu_hours": 0.011720703439444454,
+      "role": "training"
+    },
+    {
+      "name": "bc-pilot-source3-lr5-job",
+      "status": "completed",
+      "gpu": 1,
+      "started": "2026-09-29T16:35:38.195915+00:00",
+      "finished": "2026-09-29T16:35:53.279895+00:00",
+      "gpu_hours": 0.0041899516202776495,
+      "role": "training"
+    },
+    {
       "name": "g0-t2-job",
       "status": "completed",
       "gpu": 0,
@@ -29,12 +74,21 @@
       "role": "collection_evaluation_or_preflight"
     },
     {
+      "name": "bc-pilot-source3-lr4-job",
+      "status": "completed",
+      "gpu": 0,
+      "started": "2026-09-29T16:35:38.195794+00:00",
+      "finished": "2026-09-29T16:35:53.296270+00:00",
+      "gpu_hours": 0.004194529093055432,
+      "role": "training"
+    },
+    {
       "name": "g0-promotion-t2-job",
-      "status": "running",
+      "status": "completed",
       "gpu": 0,
       "started": "2026-09-29T16:23:09.482732+00:00",
-      "finished": null,
-      "gpu_hours": 4.117905556692373e-07,
+      "finished": "2026-09-29T16:26:43.208610+00:00",
+      "gpu_hours": 0.059368256684722384,
       "role": "collection_evaluation_or_preflight"
     },
     {
@@ -48,11 +102,11 @@
     },
     {
       "name": "g0-promotion-t5-job",
-      "status": "running",
+      "status": "completed",
       "gpu": 1,
       "started": "2026-09-29T16:23:09.482857+00:00",
-      "finished": null,
-      "gpu_hours": 4.073552776794208e-07,
+      "finished": "2026-09-29T16:26:34.158700+00:00",
+      "gpu_hours": 0.05685435908638889,
       "role": "collection_evaluation_or_preflight"
     },
     {
@@ -63,13 +117,31 @@
       "finished": "2026-09-29T16:09:23.851476+00:00",
       "gpu_hours": 0.01920741284414867,
       "role": "collection_evaluation_or_preflight"
+    },
+    {
+      "name": "bc-single-source3-job",
+      "status": "completed",
+      "gpu": 1,
+      "started": "2026-09-29T16:38:06.581736+00:00",
+      "finished": "2026-09-29T16:38:24.661297+00:00",
+      "gpu_hours": 0.005022058762222059,
+      "role": "training"
+    },
+    {
+      "name": "bc-pilot-source3-job",
+      "status": "completed",
+      "gpu": 1,
+      "started": "2026-09-29T16:34:09.426403+00:00",
+      "finished": "2026-09-29T16:34:18.526235+00:00",
+      "gpu_hours": 0.002527690133611284,
+      "role": "training"
     }
   ],
-  "owned_reserved_gpu_hours": 0.23939920387775981,
-  "training_reserved_gpu_hours": 0,
-  "remote_observed_machine_mean_gpu_utilization_percent": 33.265239303365625,
-  "remote_sample_covered_seconds": 434.81687688827515,
-  "remote_sample_count": 15,
+  "owned_reserved_gpu_hours": 0.6050852795497044,
+  "training_reserved_gpu_hours": 0.030181958952222077,
+  "remote_observed_machine_mean_gpu_utilization_percent": 29.891965953340193,
+  "remote_sample_covered_seconds": 1213.6473560333252,
+  "remote_sample_count": 40,
   "full_four_hour_window_covered": false,
   "note": "Includes job startup/I/O reservations conservatively; active jobs charged through last heartbeat. Host utilization averages all4cards, deduplicates dual-wrapper samples; missing time not asserted measured. CUDA smoke and offline short audit additionally tracked separately."
 }

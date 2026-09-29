@@ -1,0 +1,76 @@
+{
+  "recorded_utc": "2026-09-29T16:51:52.858750+00:00",
+  "status": "frozen_after_G1_32_pass_before_any_C_training",
+  "criterion": "Each source/protocol heldout one-step physical target error normalized by joint range; bothmean andP95 <=max(1.5*correspondingG1BC100reference,measurednumericalfloor)",
+  "mean_floor": 1.7403452829967136e-05,
+  "p95_floor": 7.328170022447009e-05,
+  "floor_evidence": "Five times largest observed own-expert CPU100step batch-vs-H200step target mean/P95 on heldout sequences; lowerbound1e-7/5e-7 only numerical minimum",
+  "rows": [
+    {
+      "source": 0,
+      "seconds": 2.0,
+      "reference_mean": 1.4654618098575156e-05,
+      "reference_p95": 4.5025670260656625e-05,
+      "max_mean": 2.1981927147862734e-05,
+      "max_p95": 7.328170022447009e-05
+    },
+    {
+      "source": 0,
+      "seconds": 5.0,
+      "reference_mean": 1.449935371056199e-05,
+      "reference_p95": 4.5360524381976575e-05,
+      "max_mean": 2.1749030565842986e-05,
+      "max_p95": 7.328170022447009e-05
+    },
+    {
+      "source": 1,
+      "seconds": 2.0,
+      "reference_mean": 1.7271195247303694e-05,
+      "reference_p95": 5.0710671894194044e-05,
+      "max_mean": 2.5906792870955542e-05,
+      "max_p95": 7.606600784129107e-05
+    },
+    {
+      "source": 1,
+      "seconds": 5.0,
+      "reference_mean": 1.7946669686352834e-05,
+      "reference_p95": 5.265641939331543e-05,
+      "max_mean": 2.692000452952925e-05,
+      "max_p95": 7.898462908997315e-05
+    },
+    {
+      "source": 2,
+      "seconds": 2.0,
+      "reference_mean": 1.881118987512309e-05,
+      "reference_p95": 6.294733611866832e-05,
+      "max_mean": 2.8216784812684637e-05,
+      "max_p95": 9.442100417800248e-05
+    },
+    {
+      "source": 2,
+      "seconds": 5.0,
+      "reference_mean": 1.9927636458305642e-05,
+      "reference_p95": 6.310843309620395e-05,
+      "max_mean": 2.9891454687458463e-05,
+      "max_p95": 9.466264964430593e-05
+    },
+    {
+      "source": 3,
+      "seconds": 2.0,
+      "reference_mean": 7.03990735928528e-05,
+      "reference_p95": 0.00030700420029461384,
+      "max_mean": 0.0001055986103892792,
+      "max_p95": 0.00046050630044192076
+    },
+    {
+      "source": 3,
+      "seconds": 5.0,
+      "reference_mean": 8.006641292013228e-05,
+      "reference_p95": 0.00034458129666745617,
+      "max_mean": 0.00012009961938019842,
+      "max_p95": 0.0005168719450011842
+    }
+  ],
+  "diagnostics": "All/support/thumb x all/switchfirst15/arrivalfirst8/holdingafter9 are separatelyreported; rawactionMSEretained",
+  "scope": "Onlydiagnosticbranchchoice; doesnotreplaceclosedloopG1/G2or guaranteeon-policyperformance"
+}

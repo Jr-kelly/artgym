@@ -1,0 +1,482 @@
+{
+  "checkpoint": "runs/unified-policy-20260930/experts/historical.pth",
+  "sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac",
+  "device": "cpu",
+  "rows": [
+    {
+      "data": "runs/unified-policy-20260930/train-data-t2/source0",
+      "source": 0,
+      "seconds": 2.0,
+      "groups": {
+        "all_all": {
+          "values": 365420,
+          "target_range_mean": 2.3006218725640792e-06,
+          "target_range_p95": 7.370033472398063e-06,
+          "action_mse": 2.1501220359709805e-08
+        },
+        "all_support": {
+          "values": 292336,
+          "target_range_mean": 2.3686136501055444e-06,
+          "target_range_p95": 7.077183909132145e-06,
+          "action_mse": 1.1670790556195243e-08
+        },
+        "all_thumb": {
+          "values": 73084,
+          "target_range_mean": 2.0286536255298415e-06,
+          "target_range_p95": 8.73496537678875e-06,
+          "action_mse": 6.082294845555225e-08
+        },
+        "switch_first15_all": {
+          "values": 91660,
+          "target_range_mean": 2.0479039903875673e-06,
+          "target_range_p95": 6.302121619228274e-06,
+          "action_mse": 1.3182956060120432e-08
+        },
+        "switch_first15_support": {
+          "values": 73328,
+          "target_range_mean": 2.3096840777725447e-06,
+          "target_range_p95": 6.584702077816473e-06,
+          "action_mse": 1.086485745815935e-08
+        },
+        "switch_first15_thumb": {
+          "values": 18332,
+          "target_range_mean": 1.0007851187765482e-06,
+          "target_range_p95": 4.9526784096087795e-06,
+          "action_mse": 2.2455346027072665e-08
+        },
+        "arrival_first8_all": {
+          "values": 48740,
+          "target_range_mean": 2.155228457922931e-06,
+          "target_range_p95": 7.411976639559725e-06,
+          "action_mse": 2.006658128550498e-08
+        },
+        "arrival_first8_support": {
+          "values": 38992,
+          "target_range_mean": 2.131129349436378e-06,
+          "target_range_p95": 6.84647920934367e-06,
+          "action_mse": 8.87672690907948e-09
+        },
+        "arrival_first8_thumb": {
+          "values": 9748,
+          "target_range_mean": 2.2516242097481154e-06,
+          "target_range_p95": 9.107613550440864e-06,
+          "action_mse": 6.48260041202775e-08
+        },
+        "holding_after9_all": {
+          "values": 211260,
+          "target_range_mean": 2.4333837700396543e-06,
+          "target_range_p95": 7.771876880724449e-06,
+          "action_mse": 2.495298012661351e-08
+        },
+        "holding_after9_support": {
+          "values": 169008,
+          "target_range_mean": 2.4543226118112216e-06,
+          "target_range_p95": 7.337693659792421e-06,
+          "action_mse": 1.2700492213468806e-08
+        },
+        "holding_after9_thumb": {
+          "values": 42252,
+          "target_range_mean": 2.349629767195438e-06,
+          "target_range_p95": 9.807680726225954e-06,
+          "action_mse": 7.396292289740813e-08
+        }
+      }
+    },
+    {
+      "data": "runs/unified-policy-20260930/train-data-t5/source0",
+      "source": 0,
+      "seconds": 5.0,
+      "groups": {
+        "all_all": {
+          "values": 369600,
+          "target_range_mean": 2.3782415610185126e-06,
+          "target_range_p95": 7.662250027351547e-06,
+          "action_mse": 2.553409039762755e-08
+        },
+        "all_support": {
+          "values": 295680,
+          "target_range_mean": 2.392160695308121e-06,
+          "target_range_p95": 7.15193391442881e-06,
+          "action_mse": 1.2783091918322498e-08
+        },
+        "all_thumb": {
+          "values": 73920,
+          "target_range_mean": 2.322564341739053e-06,
+          "target_range_p95": 9.884302926366217e-06,
+          "action_mse": 7.653812872376875e-08
+        },
+        "switch_first15_all": {
+          "values": 37500,
+          "target_range_mean": 2.0282300283724908e-06,
+          "target_range_p95": 6.327769824565621e-06,
+          "action_mse": 1.3682161181804986e-08
+        },
+        "switch_first15_support": {
+          "values": 30000,
+          "target_range_mean": 2.246511485282099e-06,
+          "target_range_p95": 6.524583136524594e-06,
+          "action_mse": 1.0258545124486318e-08
+        },
+        "switch_first15_thumb": {
+          "values": 7500,
+          "target_range_mean": 1.1551032912393566e-06,
+          "target_range_p95": 5.4264125992631205e-06,
+          "action_mse": 2.7376627187436497e-08
+        },
+        "arrival_first8_all": {
+          "values": 20580,
+          "target_range_mean": 2.1505688891920727e-06,
+          "target_range_p95": 7.249213467730442e-06,
+          "action_mse": 1.94989766555409e-08
+        },
+        "arrival_first8_support": {
+          "values": 16464,
+          "target_range_mean": 2.132708686986007e-06,
+          "target_range_p95": 6.725659204676049e-06,
+          "action_mse": 9.08224695450599e-09
+        },
+        "arrival_first8_thumb": {
+          "values": 4116,
+          "target_range_mean": 2.2220108348847134e-06,
+          "target_range_p95": 8.901516139303567e-06,
+          "action_mse": 6.116589901239422e-08
+        },
+        "holding_after9_all": {
+          "values": 306740,
+          "target_range_mean": 2.432296014376334e-06,
+          "target_range_p95": 7.815495337126777e-06,
+          "action_mse": 2.729010795121667e-08
+        },
+        "holding_after9_support": {
+          "values": 245392,
+          "target_range_mean": 2.4259322799480287e-06,
+          "target_range_p95": 7.249213467730442e-06,
+          "action_mse": 1.334349430948123e-08
+        },
+        "holding_after9_thumb": {
+          "values": 61348,
+          "target_range_mean": 2.457750724715879e-06,
+          "target_range_p95": 1.0344037946197204e-05,
+          "action_mse": 8.307655008366055e-08
+        }
+      }
+    },
+    {
+      "data": "runs/unified-policy-20260930/train-data-t2/source1",
+      "source": 1,
+      "seconds": 2.0,
+      "groups": {
+        "all_all": {
+          "values": 384000,
+          "target_range_mean": 1.8153041310142726e-06,
+          "target_range_p95": 6.086010671424447e-06,
+          "action_mse": 1.1317121462184332e-08
+        },
+        "all_support": {
+          "values": 307200,
+          "target_range_mean": 1.9565636648621876e-06,
+          "target_range_p95": 6.423608738259645e-06,
+          "action_mse": 8.810459029007234e-09
+        },
+        "all_thumb": {
+          "values": 76800,
+          "target_range_mean": 1.2502658819357748e-06,
+          "target_range_p95": 5.008326752431458e-06,
+          "action_mse": 2.1343760536751688e-08
+        },
+        "switch_first15_all": {
+          "values": 96000,
+          "target_range_mean": 1.8872749478759943e-06,
+          "target_range_p95": 6.0007378124282695e-06,
+          "action_mse": 1.1461596116646433e-08
+        },
+        "switch_first15_support": {
+          "values": 76800,
+          "target_range_mean": 2.1287610252329614e-06,
+          "target_range_p95": 6.4065059859785894e-06,
+          "action_mse": 1.0387902982245123e-08
+        },
+        "switch_first15_thumb": {
+          "values": 19200,
+          "target_range_mean": 9.213306384481257e-07,
+          "target_range_p95": 3.984370323451003e-06,
+          "action_mse": 1.575637398332219e-08
+        },
+        "arrival_first8_all": {
+          "values": 51500,
+          "target_range_mean": 1.764503736012557e-06,
+          "target_range_p95": 6.088662189540606e-06,
+          "action_mse": 1.1333786353873165e-08
+        },
+        "arrival_first8_support": {
+          "values": 41200,
+          "target_range_mean": 1.8149808056477923e-06,
+          "target_range_p95": 6.262514943955466e-06,
+          "action_mse": 7.246721001052947e-09
+        },
+        "arrival_first8_thumb": {
+          "values": 10300,
+          "target_range_mean": 1.5625969354005065e-06,
+          "target_range_p95": 5.746687747887336e-06,
+          "action_mse": 2.7682061087830334e-08
+        },
+        "holding_after9_all": {
+          "values": 215320,
+          "target_range_mean": 1.778669684426859e-06,
+          "target_range_p95": 6.141694939287845e-06,
+          "action_mse": 1.0978985720555556e-08
+        },
+        "holding_after9_support": {
+          "values": 172256,
+          "target_range_mean": 1.8918931345979217e-06,
+          "target_range_p95": 6.484018740593456e-06,
+          "action_mse": 8.265597095657995e-09
+        },
+        "holding_after9_thumb": {
+          "values": 43064,
+          "target_range_mean": 1.3257757700557704e-06,
+          "target_range_p95": 5.176618742552819e-06,
+          "action_mse": 2.1832537555610543e-08
+        }
+      }
+    },
+    {
+      "data": "runs/unified-policy-20260930/train-data-t5/source1",
+      "source": 1,
+      "seconds": 5.0,
+      "groups": {
+        "all_all": {
+          "values": 384000,
+          "target_range_mean": 1.8319370838071336e-06,
+          "target_range_p95": 6.262514943955466e-06,
+          "action_mse": 1.1935611610169872e-08
+        },
+        "all_support": {
+          "values": 307200,
+          "target_range_mean": 1.9488995803840226e-06,
+          "target_range_p95": 6.56456541037187e-06,
+          "action_mse": 8.779215576737442e-09
+        },
+        "all_thumb": {
+          "values": 76800,
+          "target_range_mean": 1.364086188004876e-06,
+          "target_range_p95": 5.411919573816704e-06,
+          "action_mse": 2.4561201072970107e-08
+        },
+        "switch_first15_all": {
+          "values": 38400,
+          "target_range_mean": 1.8793856497723027e-06,
+          "target_range_p95": 5.9822114963026214e-06,
+          "action_mse": 1.1681707157151777e-08
+        },
+        "switch_first15_support": {
+          "values": 30720,
+          "target_range_mean": 2.082164428429678e-06,
+          "target_range_p95": 6.3198087900673255e-06,
+          "action_mse": 9.775558140745488e-09
+        },
+        "switch_first15_thumb": {
+          "values": 7680,
+          "target_range_mean": 1.068270194082288e-06,
+          "target_range_p95": 4.618790171662113e-06,
+          "action_mse": 1.930630944002587e-08
+        },
+        "arrival_first8_all": {
+          "values": 20480,
+          "target_range_mean": 1.7605940456633107e-06,
+          "target_range_p95": 5.9604644775390625e-06,
+          "action_mse": 1.1017023737736054e-08
+        },
+        "arrival_first8_support": {
+          "values": 16384,
+          "target_range_mean": 1.8108257791027427e-06,
+          "target_range_p95": 6.1618316067324486e-06,
+          "action_mse": 7.188396988766499e-09
+        },
+        "arrival_first8_thumb": {
+          "values": 4096,
+          "target_range_mean": 1.5596665434713941e-06,
+          "target_range_p95": 5.516820237971842e-06,
+          "action_mse": 2.6331527180900594e-08
+        },
+        "holding_after9_all": {
+          "values": 321960,
+          "target_range_mean": 1.8293366110810894e-06,
+          "target_range_p95": 6.322924946289277e-06,
+          "action_mse": 1.2022030482228274e-08
+        },
+        "holding_after9_support": {
+          "values": 257568,
+          "target_range_mean": 1.9372655515326187e-06,
+          "target_range_p95": 6.645112534897635e-06,
+          "action_mse": 8.712503607455346e-09
+        },
+        "holding_after9_thumb": {
+          "values": 64392,
+          "target_range_mean": 1.397620053467108e-06,
+          "target_range_p95": 5.516820237971842e-06,
+          "action_mse": 2.5260133540427887e-08
+        }
+      }
+    },
+    {
+      "data": "runs/unified-policy-20260930/train-data-t2/source2",
+      "source": 2,
+      "seconds": 2.0,
+      "groups": {
+        "all_all": {
+          "values": 384000,
+          "target_range_mean": 2.1385478703450644e-06,
+          "target_range_p95": 6.725659204676049e-06,
+          "action_mse": 1.4918143165232323e-08
+        },
+        "all_support": {
+          "values": 307200,
+          "target_range_mean": 2.2663543859380297e-06,
+          "target_range_p95": 7.1485301305074245e-06,
+          "action_mse": 1.0642533077032112e-08
+        },
+        "all_thumb": {
+          "values": 76800,
+          "target_range_mean": 1.6273213532258524e-06,
+          "target_range_p95": 5.425687049864791e-06,
+          "action_mse": 3.202056930717845e-08
+        },
+        "switch_first15_all": {
+          "values": 96000,
+          "target_range_mean": 2.1731680135417264e-06,
+          "target_range_p95": 6.616950031457236e-06,
+          "action_mse": 1.3938588061535029e-08
+        },
+        "switch_first15_support": {
+          "values": 76800,
+          "target_range_mean": 2.2863353024149546e-06,
+          "target_range_p95": 7.007573003647849e-06,
+          "action_mse": 1.063777421705936e-08
+        },
+        "switch_first15_thumb": {
+          "values": 19200,
+          "target_range_mean": 1.7204993127961643e-06,
+          "target_range_p95": 5.5926717550391905e-06,
+          "action_mse": 2.714183899854561e-08
+        },
+        "arrival_first8_all": {
+          "values": 51240,
+          "target_range_mean": 2.199706841565785e-06,
+          "target_range_p95": 7.410307262034621e-06,
+          "action_mse": 1.297761631491312e-08
+        },
+        "arrival_first8_support": {
+          "values": 40992,
+          "target_range_mean": 2.334491000510752e-06,
+          "target_range_p95": 8.032381356315444e-06,
+          "action_mse": 9.90365300879148e-09
+        },
+        "arrival_first8_thumb": {
+          "values": 10248,
+          "target_range_mean": 1.660569068917539e-06,
+          "target_range_p95": 5.210330527916085e-06,
+          "action_mse": 2.5273470427578104e-08
+        },
+        "holding_after9_all": {
+          "values": 195880,
+          "target_range_mean": 2.007927605518489e-06,
+          "target_range_p95": 6.353123262670124e-06,
+          "action_mse": 1.5529627361843268e-08
+        },
+        "holding_after9_support": {
+          "values": 156704,
+          "target_range_mean": 2.121776560670696e-06,
+          "target_range_p95": 6.604838745261077e-06,
+          "action_mse": 9.794102417970407e-09
+        },
+        "holding_after9_thumb": {
+          "values": 39176,
+          "target_range_mean": 1.5525301932939328e-06,
+          "target_range_p95": 5.48133539268747e-06,
+          "action_mse": 3.847172536097787e-08
+        }
+      }
+    },
+    {
+      "data": "runs/unified-policy-20260930/train-data-t5/source2",
+      "source": 2,
+      "seconds": 5.0,
+      "groups": {
+        "all_all": {
+          "values": 384000,
+          "target_range_mean": 2.100873643939849e-06,
+          "target_range_p95": 6.56456541037187e-06,
+          "action_mse": 1.6121671109203817e-08
+        },
+        "all_support": {
+          "values": 307200,
+          "target_range_mean": 2.1890887182962615e-06,
+          "target_range_p95": 6.765932539565256e-06,
+          "action_mse": 1.0465607047649428e-08
+        },
+        "all_thumb": {
+          "values": 76800,
+          "target_range_mean": 1.7480160749983042e-06,
+          "target_range_p95": 5.954344032943482e-06,
+          "action_mse": 3.874594156627609e-08
+        },
+        "switch_first15_all": {
+          "values": 38400,
+          "target_range_mean": 2.21480672735197e-06,
+          "target_range_p95": 6.886752998980228e-06,
+          "action_mse": 1.4159343919573075e-08
+        },
+        "switch_first15_support": {
+          "values": 30720,
+          "target_range_mean": 2.3340305688179797e-06,
+          "target_range_p95": 7.370033472398063e-06,
+          "action_mse": 1.1093176155441142e-08
+        },
+        "switch_first15_thumb": {
+          "values": 7680,
+          "target_range_mean": 1.7379093151248526e-06,
+          "target_range_p95": 5.516820237971842e-06,
+          "action_mse": 2.6424014976100807e-08
+        },
+        "arrival_first8_all": {
+          "values": 20480,
+          "target_range_mean": 2.146749238818302e-06,
+          "target_range_p95": 7.007573003647849e-06,
+          "action_mse": 1.2226626822098297e-08
+        },
+        "arrival_first8_support": {
+          "values": 16384,
+          "target_range_mean": 2.251865680591436e-06,
+          "target_range_p95": 7.6217424975766335e-06,
+          "action_mse": 9.11713637918865e-09
+        },
+        "arrival_first8_thumb": {
+          "values": 4096,
+          "target_range_mean": 1.7262834717257647e-06,
+          "target_range_p95": 5.137082439432561e-06,
+          "action_mse": 2.466458681738004e-08
+        },
+        "holding_after9_all": {
+          "values": 311160,
+          "target_range_mean": 2.0666211639763787e-06,
+          "target_range_p95": 6.455176389863482e-06,
+          "action_mse": 1.664780491239526e-08
+        },
+        "holding_after9_support": {
+          "values": 248928,
+          "target_range_mean": 2.1463749817485223e-06,
+          "target_range_p95": 6.592978479602607e-06,
+          "action_mse": 1.0327554811340178e-08
+        },
+        "holding_after9_thumb": {
+          "values": 62232,
+          "target_range_mean": 1.747605779200967e-06,
+          "target_range_p95": 6.065639809094137e-06,
+          "action_mse": 4.192880354025874e-08
+        }
+      }
+    }
+  ],
+  "scope": "Heldout episode96..127, recurrent full history, one-step physical target conditioned on expert previous target; not closed-loop success; no cross-expert latent supervision"
+}

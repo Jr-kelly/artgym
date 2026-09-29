@@ -1,0 +1,166 @@
+{
+  "checkpoint": "runs/unified-policy-20260930/bc-single-source3/epoch_000100.pth",
+  "sha256": "e886b669847760daabc8f65d61c1d1715a3c014cd345af4a7af13f7f04b6e8c5",
+  "device": "cpu",
+  "rows": [
+    {
+      "data": "runs/unified-policy-20260930/train-data-t2/source3",
+      "source": 3,
+      "seconds": 2.0,
+      "groups": {
+        "all_all": {
+          "values": 372160,
+          "target_range_mean": 7.03990735928528e-05,
+          "target_range_p95": 0.00030700420029461384,
+          "action_mse": 6.030346776242368e-05
+        },
+        "all_support": {
+          "values": 297728,
+          "target_range_mean": 7.350839587161317e-05,
+          "target_range_p95": 0.0003279947515693489,
+          "action_mse": 6.074817065382376e-05
+        },
+        "all_thumb": {
+          "values": 74432,
+          "target_range_mean": 5.796180630568415e-05,
+          "target_range_p95": 0.00022661808907287166,
+          "action_mse": 5.852464528288692e-05
+        },
+        "switch_first15_all": {
+          "values": 93160,
+          "target_range_mean": 7.752079545753077e-05,
+          "target_range_p95": 0.0003296638940810227,
+          "action_mse": 6.286107964115217e-05
+        },
+        "switch_first15_support": {
+          "values": 74528,
+          "target_range_mean": 8.7307947978843e-05,
+          "target_range_p95": 0.00035984196147182833,
+          "action_mse": 6.199898052727804e-05
+        },
+        "switch_first15_thumb": {
+          "values": 18632,
+          "target_range_mean": 3.837219628621824e-05,
+          "target_range_p95": 0.0002002513283514418,
+          "action_mse": 6.630947609664872e-05
+        },
+        "arrival_first8_all": {
+          "values": 50060,
+          "target_range_mean": 7.128871948225424e-05,
+          "target_range_p95": 0.00029749967507086694,
+          "action_mse": 4.013794750790112e-05
+        },
+        "arrival_first8_support": {
+          "values": 40048,
+          "target_range_mean": 7.55839646444656e-05,
+          "target_range_p95": 0.00032289808150380854,
+          "action_mse": 4.0802893636282533e-05
+        },
+        "arrival_first8_thumb": {
+          "values": 10012,
+          "target_range_mean": 5.41077897651121e-05,
+          "target_range_p95": 0.00021045067551312958,
+          "action_mse": 3.747816299437545e-05
+        },
+        "holding_after9_all": {
+          "values": 227080,
+          "target_range_mean": 6.718781514791772e-05,
+          "target_range_p95": 0.00029445254331221727,
+          "action_mse": 6.136419688118622e-05
+        },
+        "holding_after9_support": {
+          "values": 181664,
+          "target_range_mean": 6.754470086889341e-05,
+          "target_range_p95": 0.00031189128349069545,
+          "action_mse": 6.310304888756946e-05
+        },
+        "holding_after9_thumb": {
+          "values": 45416,
+          "target_range_mean": 6.576032319571823e-05,
+          "target_range_p95": 0.00023147674073698,
+          "action_mse": 5.4408788855653256e-05
+        }
+      }
+    },
+    {
+      "data": "runs/unified-policy-20260930/train-data-t5/source3",
+      "source": 3,
+      "seconds": 5.0,
+      "groups": {
+        "all_all": {
+          "values": 363400,
+          "target_range_mean": 8.006641292013228e-05,
+          "target_range_p95": 0.00034458129666745617,
+          "action_mse": 0.00012557364243548363
+        },
+        "all_support": {
+          "values": 290720,
+          "target_range_mean": 8.144327875925228e-05,
+          "target_range_p95": 0.0003645058284746482,
+          "action_mse": 0.00012267267447896302
+        },
+        "all_thumb": {
+          "values": 72680,
+          "target_range_mean": 7.455895683960989e-05,
+          "target_range_p95": 0.0002811528480378914,
+          "action_mse": 0.00013717736874241382
+        },
+        "switch_first15_all": {
+          "values": 36700,
+          "target_range_mean": 8.499439718434587e-05,
+          "target_range_p95": 0.00036169364902889335,
+          "action_mse": 0.00015078374417498708
+        },
+        "switch_first15_support": {
+          "values": 29360,
+          "target_range_mean": 9.687631973065436e-05,
+          "target_range_p95": 0.0004018955602077767,
+          "action_mse": 0.00014425552217289805
+        },
+        "switch_first15_thumb": {
+          "values": 7340,
+          "target_range_mean": 3.7466688809217885e-05,
+          "target_range_p95": 0.0001743224114761686,
+          "action_mse": 0.00017689660307951272
+        },
+        "arrival_first8_all": {
+          "values": 21020,
+          "target_range_mean": 7.335074769798666e-05,
+          "target_range_p95": 0.0003036180554772726,
+          "action_mse": 5.0933987949974835e-05
+        },
+        "arrival_first8_support": {
+          "values": 16816,
+          "target_range_mean": 7.710028148721904e-05,
+          "target_range_p95": 0.0003221628212486394,
+          "action_mse": 5.096779204905033e-05
+        },
+        "arrival_first8_thumb": {
+          "values": 4204,
+          "target_range_mean": 5.83526270929724e-05,
+          "target_range_p95": 0.00022926519741304217,
+          "action_mse": 5.079877519165166e-05
+        },
+        "holding_after9_all": {
+          "values": 305260,
+          "target_range_mean": 7.960930815897882e-05,
+          "target_range_p95": 0.0003439082021941428,
+          "action_mse": 0.00012635946040973067
+        },
+        "holding_after9_support": {
+          "values": 244208,
+          "target_range_mean": 7.957230263855308e-05,
+          "target_range_p95": 0.00036105443869018924,
+          "action_mse": 0.00012385037553030998
+        },
+        "holding_after9_thumb": {
+          "values": 61052,
+          "target_range_mean": 7.975728658493608e-05,
+          "target_range_p95": 0.00029211374057922505,
+          "action_mse": 0.00013639588723890483
+        }
+      }
+    }
+  ],
+  "scope": "Heldout episode96..127, recurrent full history, one-step physical target conditioned on expert previous target; not closed-loop success; no cross-expert latent supervision"
+}
