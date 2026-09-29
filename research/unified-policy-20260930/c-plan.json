@@ -1,0 +1,43 @@
+{
+  "utc": "2026-09-29T16:55:41.064606+00:00",
+  "event": "G1_promotion_passed_C_frozen",
+  "g1_counts": {
+    "historical_fixed2": [
+      63,
+      64,
+      63
+    ],
+    "historical_fixed5": [
+      62,
+      64,
+      63
+    ],
+    "source3": [
+      60,
+      61
+    ]
+  },
+  "n": 64,
+  "all8_success_and_body_gap_pass": true,
+  "evidence": "g1-promotion-analysis/report.json",
+  "hypothesis": "One existing-capacity recurrent actor can combine both experts using current initial geometry and state, without routing",
+  "change": "Only combine alreadyvalidated source-assigned sequence labels in one BC model; same inheritedhistorical frozen normalizer, modelcapacity andactioninterface; ownprivilegedencoder+actor train jointly",
+  "initialization": "historical original teacher4d8af063; noBCsingleweight or pilot endpoint",
+  "fixed": {
+    "lr": 1e-05,
+    "seed": 2026093001,
+    "epochs_first": 100,
+    "updates_first": 800,
+    "batch": 96,
+    "segment_steps": 100,
+    "checkpoint_epochs": [
+      50,
+      100
+    ],
+    "source_balance": "onefile/source/protocol eachdataepoch",
+    "phase_balance": "open/close x moving/arrivalfirst8/holdingafter9 pertrajectory"
+  },
+  "selection": "Maximize worst8 strict rates, thenworstbody, thenmacrostrict; tieearlier. Keepfixedbudgetlast. Allfromdevelopment32;64promotiononlyforpotentialadvance;finalclosed",
+  "stop": "Two consecutiveequal50epochsegments worststrict improve<5pp withoutnewfailureevidence ->stop branch. Max300epochs initial arm ifprogress; atmost2initializations withsamebudget/protocol ifneeded; atmost2evidencebasedDmodifications",
+  "next": "Cfirsthistorical100epochs andmatcheddev at50/100; evaluatefitusingfrozenaction-fit-criterion.json beforechoosingfailurebranch"
+}
