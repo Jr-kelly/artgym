@@ -1,0 +1,75 @@
+{
+  "time": "2026-09-29T10:09:56.686106+00:00",
+  "frozen": {
+    "dev-hold_r3_dense1_seed2901": {
+      "status": "frozen",
+      "frozen_utc": "2026-09-29T10:07:53.810543+00:00",
+      "name": "hold_r3_dense1_seed2901",
+      "row": 3,
+      "condition": "dense1",
+      "epoch": 1500,
+      "checkpoint": "runs/hold_r3_dense1_seed2901/checkpoints/epoch_001500.pth",
+      "sha256": "10479ef3962dff74d86d4bac177b0e0ff48759b3dcd79bf2cfbf41e83163ed87",
+      "scores": {
+        "1250": 0.75,
+        "1500": 0.96875,
+        "1750": 0.828125,
+        "2000": 0.84375
+      },
+      "rule": "Equal strict fixed2/5 rates on32 fixed own-source development perturbations; tie latest; final not used"
+    },
+    "dev-hold_r11_original_seed2901": {
+      "status": "frozen",
+      "frozen_utc": "2026-09-29T10:02:37.403551+00:00",
+      "name": "hold_r11_original_seed2901",
+      "row": 11,
+      "condition": "original",
+      "epoch": 2000,
+      "checkpoint": "runs/hold_r11_original_seed2901/checkpoints/epoch_002000.pth",
+      "sha256": "3828448659b718f5459f1726d70a8f2f442050f9c4deabf0a6352277bdaa5a8b",
+      "scores": {
+        "1250": 0.0,
+        "1500": 0.0,
+        "1750": 0.0,
+        "2000": 0.0
+      },
+      "rule": "Equal strict fixed2/5 rates on32 fixed own-source development perturbations; tie latest; final not used"
+    },
+    "dev-hold_r11_dense1_seed2901": {
+      "status": "frozen",
+      "frozen_utc": "2026-09-29T10:02:17.461617+00:00",
+      "name": "hold_r11_dense1_seed2901",
+      "row": 11,
+      "condition": "dense1",
+      "epoch": 2000,
+      "checkpoint": "runs/hold_r11_dense1_seed2901/checkpoints/epoch_002000.pth",
+      "sha256": "121f912db441fdc44c442fe85416f56e2f81cb5381b0239db10f7d1f61df011a",
+      "scores": {
+        "1250": 0.0,
+        "1500": 0.0,
+        "1750": 0.015625,
+        "2000": 0.015625
+      },
+      "rule": "Equal strict fixed2/5 rates on32 fixed own-source development perturbations; tie latest; final not used"
+    },
+    "dev-hold_r3_original_seed2901": {
+      "status": "frozen",
+      "frozen_utc": "2026-09-29T10:07:34.001751+00:00",
+      "name": "hold_r3_original_seed2901",
+      "row": 3,
+      "condition": "original",
+      "epoch": 2000,
+      "checkpoint": "runs/hold_r3_original_seed2901/checkpoints/epoch_002000.pth",
+      "sha256": "2f85c2107ef71d275093429fc8e8e94252e24e272a01432a8d7b9e3b1ec112c4",
+      "scores": {
+        "1250": 0.265625,
+        "1500": 0.09375,
+        "1750": 0.359375,
+        "2000": 0.453125
+      },
+      "rule": "Equal strict fixed2/5 rates on32 fixed own-source development perturbations; tie latest; final not used"
+    }
+  },
+  "gpu": "0, 95 %, 1625 MiB\n1, 0 %, 1 MiB\n2, 95 %, 1625 MiB\n3, 0 %, 1 MiB\n",
+  "processes": "GPU-11a66201-1239-3501-4e67-f4cd751a27c1, 103278, /home/wangjiarui/artgym-runtime/bin/python\nGPU-f8ac472a-1460-ebc9-e743-e3e7a2f6e6a5, 102942, /home/wangjiarui/artgym-runtime/bin/python\n"
+}

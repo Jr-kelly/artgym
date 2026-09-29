@@ -1,0 +1,36 @@
+{
+  "time": "2026-09-29T10:34:38.415144+00:00",
+  "status": "passed",
+  "pairs": [
+    {
+      "left": "hold_r3_original_seed2902",
+      "right": "hold_r3_dense1_seed2902",
+      "differences": {
+        "experiment": [
+          "hold_r3_original_seed2902",
+          "hold_r3_dense1_seed2902"
+        ],
+        "object.reward.GoalDistance2": [
+          ".1",
+          "1.0"
+        ]
+      },
+      "identity_matched": true
+    },
+    {
+      "left": "hold_integrate_singleton_seed2903",
+      "right": "hold_integrate_shared_seed2903",
+      "differences": {
+        "task.env.trainingStates": [
+          "research/hold-20260929/data/integration-singleton3.npy",
+          "research/hold-20260929/data/integration-shared.npy"
+        ],
+        "experiment": [
+          "hold_integrate_singleton_seed2903",
+          "hold_integrate_shared_seed2903"
+        ]
+      },
+      "identity_matched": true
+    }
+  ]
+}

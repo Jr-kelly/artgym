@@ -5,11 +5,11 @@
   "branch": "feat/wuji-hold-controlled-20260929",
   "source_commit": "f332e4e6ae1161c2ae9ff976085ee243c91bfb76",
   "host": "10.14.0.107:30296",
-  "status": "core_training_running",
+  "status": "followup_replication_and_integration_training",
   "attachment": "named attachment not found in downloads/tmp/research; requested path; continuing explicit user-authorized diagnostics",
-  "next": "Core still running; await CP1750/2000 and frozen results. User asked release timing, estimated core GPU release10:15\u201310:35UTC, announce followup occupancy before starting.",
-  "updated": "2026-09-29T08:29:25.212981+00:00",
-  "pushed_commit": "2f3c5e2",
+  "next": "Finish4 followup training, frozen independent rescore, final videos/report/push/release",
+  "updated": "2026-09-29T10:40:04.031668+00:00",
+  "pushed_commit": "792ee2f",
   "training_started_utc": "2026-09-29T06:40:16+00:00",
   "core_additional_epochs": 1000,
   "core_final_epoch": 2000,
@@ -25,5 +25,9 @@
   "archive_queue": "scripts.archive_wuji_hold_when_done local session73336; four core completed runs -> all weights/logs -> release draft398889931; deadline16:30UTC",
   "parent_videos": "completed; historical row0 each, fixed5 strict0/1 both; video/parent-video-results.json",
   "collector": "scripts.collect_wuji_hold_evaluation local session22003 until16:30UTC",
-  "backup_progress": "CP1250/1500 all four arms:8 verified"
+  "backup_progress": "all16 including CP2000 verified",
+  "final_video_queue": "local33434 waits4 CP2000; logrender-final.log",
+  "development": "all32 completed; source3 original selected2000, dense selected1500; source11 both2000",
+  "gpu": "1/3 free as of10:09UTC;0/2 final physical evaluation",
+  "local_queues": "receipts/followup-local-queues.json"
 }

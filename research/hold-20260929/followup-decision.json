@@ -1,0 +1,140 @@
+{
+  "time": "2026-09-29T10:29:51.541763+00:00",
+  "sources": [
+    {
+      "source": 3,
+      "metrics": {
+        "parent": {
+          "strict_mean_pct": 20.3125,
+          "body_mean_pct": 97.265625,
+          "strict_counts": {
+            "fixed2": [
+              19,
+              128
+            ],
+            "fixed5": [
+              33,
+              128
+            ]
+          }
+        },
+        "original-final": {
+          "strict_mean_pct": 47.65625,
+          "body_mean_pct": 99.609375,
+          "strict_counts": {
+            "fixed2": [
+              57,
+              128
+            ],
+            "fixed5": [
+              65,
+              128
+            ]
+          }
+        },
+        "dense1-final": {
+          "strict_mean_pct": 89.453125,
+          "body_mean_pct": 98.828125,
+          "strict_counts": {
+            "fixed2": [
+              109,
+              128
+            ],
+            "fixed5": [
+              120,
+              128
+            ]
+          }
+        }
+      },
+      "changed_minus_original_pp": 41.796875,
+      "body_change_pp": -0.78125,
+      "replication_trigger": true,
+      "integration_trigger": true
+    },
+    {
+      "source": 11,
+      "metrics": {
+        "parent": {
+          "strict_mean_pct": 0.0,
+          "body_mean_pct": 97.65625,
+          "strict_counts": {
+            "fixed2": [
+              0,
+              128
+            ],
+            "fixed5": [
+              0,
+              128
+            ]
+          }
+        },
+        "original-final": {
+          "strict_mean_pct": 0.0,
+          "body_mean_pct": 97.265625,
+          "strict_counts": {
+            "fixed2": [
+              0,
+              128
+            ],
+            "fixed5": [
+              0,
+              128
+            ]
+          }
+        },
+        "dense1-final": {
+          "strict_mean_pct": 0.78125,
+          "body_mean_pct": 97.265625,
+          "strict_counts": {
+            "fixed2": [
+              1,
+              128
+            ],
+            "fixed5": [
+              1,
+              128
+            ]
+          }
+        }
+      },
+      "changed_minus_original_pp": 0.78125,
+      "body_change_pp": 0.0,
+      "replication_trigger": false,
+      "integration_trigger": false
+    }
+  ],
+  "replication_priority": [
+    {
+      "source": 3,
+      "benefit_pp": 41.796875,
+      "body_change_pp": -0.78125
+    }
+  ],
+  "integration_sources": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "integration_starting_expert": {
+    "source": 3,
+    "model": "dense1-final",
+    "strict_mean_pct": 89.453125,
+    "body_mean_pct": 98.828125,
+    "strict_counts": {
+      "fixed2": [
+        109,
+        128
+      ],
+      "fixed5": [
+        120,
+        128
+      ]
+    }
+  },
+  "excluded_additional_sources": [
+    11
+  ],
+  "scope": "Thresholds from preregistration: changed-original mean strict2/5>=10pp and body drop<=5pp for paired seed replication; expert mean>=50% and above parent for integration. Primary CP2000 only. Triggers are budget-conditional experimental priorities, not statistical proof or a launch instruction."
+}

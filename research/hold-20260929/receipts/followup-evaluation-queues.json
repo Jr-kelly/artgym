@@ -1,0 +1,73 @@
+{
+  "time": "2026-09-29T10:33:08.370714+00:00",
+  "jobs": [
+    {
+      "name": "rep-dev-original",
+      "pid": 115408,
+      "command": [
+        "/home/wangjiarui/artgym-runtime/bin/python",
+        "-m",
+        "scripts.evaluate_wuji_hold",
+        "--mode",
+        "development",
+        "--row",
+        "3",
+        "--condition",
+        "original",
+        "--gpu",
+        "0",
+        "--seed-label",
+        "seed2902"
+      ]
+    },
+    {
+      "name": "rep-dev-dense1",
+      "pid": 115409,
+      "command": [
+        "/home/wangjiarui/artgym-runtime/bin/python",
+        "-m",
+        "scripts.evaluate_wuji_hold",
+        "--mode",
+        "development",
+        "--row",
+        "3",
+        "--condition",
+        "dense1",
+        "--gpu",
+        "1",
+        "--seed-label",
+        "seed2902"
+      ]
+    },
+    {
+      "name": "rep-final",
+      "pid": 115410,
+      "command": [
+        "/home/wangjiarui/artgym-runtime/bin/python",
+        "-m",
+        "scripts.evaluate_wuji_hold",
+        "--mode",
+        "final",
+        "--row",
+        "3",
+        "--gpu",
+        "0",
+        "--seed-label",
+        "seed2902"
+      ]
+    },
+    {
+      "name": "integration-final",
+      "pid": 115411,
+      "command": [
+        "/home/wangjiarui/artgym-runtime/bin/python",
+        "-m",
+        "scripts.evaluate_wuji_hold_integration",
+        "--plan",
+        "research/hold-20260929/integration-plan.json",
+        "--gpu",
+        "2"
+      ]
+    }
+  ]
+}

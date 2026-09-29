@@ -27,10 +27,11 @@ def sync(relative):
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--seed-label',default='seed2901')
+    p.add_argument('--rows',type=int,nargs='+',default=[3,11],choices=[3,11])
     p.add_argument('--deadline-utc',default='2026-09-29T16:30:00+00:00');a=p.parse_args()
     deadline=datetime.datetime.fromisoformat(a.deadline_utc).timestamp();done=set();paths=[]
     while time.time()<deadline:
-        for row in [3,11]:
+        for row in a.rows:
             if row in done:continue
             relative=f'runs/hold-20260929/final-row{row}-{a.seed_label}'
             code='import pathlib,json; p=pathlib.Path('+repr(REMOTE+'/'+relative+'/results.json')+'); print(json.dumps(json.loads(p.read_text()) if p.exists() else None))'
@@ -61,11 +62,12 @@ def main():
             paths.append(ROOT/relative/'results.json');done.add(row)
             record('core_frozen_evidence_collected',f'Source{row} {a.seed_label}: development and final raw evidence mirrored; every remote/local file SHA verified',
                 [str(receipt.relative_to(ROOT))],'Independently rescore both sources before followup decisions')
-        if len(done)==2:
+        if len(done)==len(a.rows):
             output=ROOT/'research/hold-20260929'/('analysis-'+a.seed_label)
             subprocess.run([sys.executable,'-m','scripts.analyze_wuji_hold','--results',*map(str,paths),'--output',str(output)],cwd=ROOT,check=True)
-            subprocess.run([sys.executable,'-m','scripts.plot_wuji_hold_results','--analysis',str(output),'--output',str(output/'figures')],cwd=ROOT,check=True)
-            record('core_frozen_independent_rescore_completed',a.seed_label+' both sources independently rescored; matched-budget and selected results remain separate',
+            if set(a.rows)=={3,11}:
+                subprocess.run([sys.executable,'-m','scripts.plot_wuji_hold_results','--analysis',str(output),'--output',str(output/'figures')],cwd=ROOT,check=True)
+            record('core_frozen_independent_rescore_completed',a.seed_label+' sources '+str(a.rows)+' independently rescored; matched-budget and selected results remain separate',
                 [str((output/'report.json').relative_to(ROOT))],'Inspect all counts and endpoint diagnostics; apply frozen followup criteria')
             return
         time.sleep(30)

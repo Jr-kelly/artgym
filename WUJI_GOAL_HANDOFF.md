@@ -1,27 +1,29 @@
 <!-- HOLD_CURRENT_START -->
-# 当前端点保持实验续接（2026-09-29T07:28:50.732807+00:00）
+# 当前端点保持Goal：核心完成、后续运行
 
-Goal active；实验副本 `/data/research/artgym-experiments-20260921/hold-20260929`；分支 `feat/wuji-hold-controlled-20260929`；最新已push `2f3c5e2`。禁止子代理。
+截至2026-09-29T10:39:43.702889+00:00。Goal active，不创建子代理。工作区 `/data/research/artgym-experiments-20260921/hold-20260929`，分支 `feat/wuji-hold-controlled-20260929`，已push792ee2f，核心结果和后续脚本待增量提交。总截止2026-09-29 18:08:43UTC，17:08:43起至少留1h最终交付。
 
-硬截止2026-09-29 18:08:43UTC，17:08:43起至少留1h冻结评估与交付。四核心训练从CP1000各追加1000轮至CP2000，唯一源内条件GoalDistance2 .1→1.0。稳定奖励日程起终相同；44.4%不是约束未生效，禁止据此延长全组。
+核心4臂CP1000→2000全部完成、16权重备份核验、全部训练权重日志归档上传。源3严格2/5：父19/33、原续训57/65、系数1改动109/120（各128）；均值改动89.453125% vs原47.65625%，body差-0.78125pp。源11父0/0、原0/0、改动1/1，无实用改善。独立复算通过，analysis-seed2901/；源3开发选改动CP1500最终116/118，补充表不代替同预算。源3伸出保持大幅改善、源11仍伸出后回缩。奖励日程起终相同，44.4%不是约束未充分生效。
 
-远端 `.107:30296`，SSH key `/home/agiuser/.ssh/id_ed25519_h200`，root `/home/wangjiarui/artgym-hold-20260929`，Python `/home/wangjiarui/artgym-runtime/bin/python`。下列PID/轮数仅此时间采样，接手重查：
-- hold_r3_original_seed2901: GPU0, PID6454, CP1251, running
-- hold_r11_dense1_seed2901: GPU3, PID6460, CP1256, running
-- hold_r3_dense1_seed2901: GPU1, PID6455, CP1250, running
-- hold_r11_original_seed2901: GPU2, PID6458, CP1257, running
+核心GPU计算10:28UTC全部结束，用户已明确得知释放；核心结果触发预注册后续，10:30UTC已告知额外四卡约3.5h训练+.5h评估，预计北京时间22:15–22:45释放。随后10:32UTC实查四卡空闲才启动后续，不是偷偷延长核心。
 
-四开发等待器7483–7486、两最终等待器7487/7488已于07:09UTC验证存活，等训练完成；不要重复启动。开发32选CP1250/1500/1750/2000，最终128每源同GPU同扰动主表CP2000。原3抓姿扰动仅条件整合预留。
+远端10.14.0.107:30296、key `/home/agiuser/.ssh/id_ed25519_h200`，root `/home/wangjiarui/artgym-hold-20260929`，python `/home/wangjiarui/artgym-runtime/bin/python`。后续各1000新增轮/163840000交互：
+- hold_r3_dense1_seed2902: GPU1 PID114961 CP1039 running
+- hold_r3_original_seed2902: GPU0 PID114963 CP1038 running
+- hold_integrate_shared_seed2903: GPU3 PID114967 CP2036 running
+- hold_integrate_singleton_seed2903: GPU2 PID114965 CP2039 running
 
-本地monitor session40377、CP备份58950、完成后全权重归档/上传73336均有界运行。日志在runs/hold-20260929；源11两组CP1250已07:28UTC备份核验，源3即将到点。Release草稿398889931/tag wuji-hold-20260929-v1已7资产，仅父/预检/父视频；未公布新策略结论。
+复验seed2902从原源3专家CP1000起，原/改奖励，两臂模型优化器LR匹配；整合seed2903从源3改动CP2000起，singleton3 vs shared原0/1/2+3，仅池不同，两臂模型优化器LR匹配。源11明确未解决且排除整合。全部完整Hydra解析核验通过configs-followup/；本地解析曾SIGSEGV，远端补离线helper后通过，训练无影响。禁止修改正在运行训练源码。
 
-两父策略历史第0回合5秒视频已新渲染，strict均0/1；源3body1/1、源11body0/1；单独本地4090回合非冻结128证据。视频videos/hold-parent-source{3,11}-fixed5.mp4，评分research/hold-20260929/video/。本机渲染已结束。
+远端评估等待PID115408/115409（复验dev）、115410（复验final GPU0）、115411（整合final GPU2）。复验复用同32/128扰动，只新训练RNG不是新测试或新父专家种子；整合CP3000固定终点，4源各128，新0/1/2此前未测、源3显式复用核心已测集。整合不进行最终数据选点，报告每源。各等待须接手重查，不重复启动。
 
-附件Codex-Goal-Wuji-Hold-20260929.md仍未找到、路径问题待回复；仅依据明确用户指令执行，不声称已读。
+本地有界会话：monitor40377；复验备份4989、整合备份9624、后续完整归档/上传49802、复验收集独立复算68708、整合收集独立复算41326。日志runs/hold-20260929/{backup-replication,backup-integration,archive-followup,collect-replication,collect-integration}.log。评估等待截止16/16:30UTC。旧core backup58950/archive73336/collector22003均完成。
 
-下一步：完成四组CP1250备份并保持同预算训练；冻结最终结果后按preregistration判据再决定种子复验/整合。需要运行analyze_wuji_hold与plot_wuji_hold_results、补最终策略固定回合视频、归档所有raw trace、完成报告/交接并commit/push/publish。不得把本次中期快照当完成。
+6代表视频（父两段、final四段）已本机实际渲染并检查，固定历史第0回合5秒；只有source3dense1final严格1/1，其余0/1，不能代替冻结128。videos/hold-{parent,final}-source*.mp4，video/各report。全部视频/raw和核心两源raw已Release草稿SHA核验。Release id398889931，tagwuji-hold-20260929-v1，仍draft；不可提前发布最终结论。所有旧版本保留。
 
-最新状态 2026-09-29T08:29:11.051613+00:00：hold_r3_original_seed2901 CP1560, hold_r11_dense1_seed2901 CP1575, hold_r3_dense1_seed2901 CP1558, hold_r11_original_seed2901 CP1574。四组CP1250/1500共8权重已核验。冻结收集器本地session22003正在等待；原归档73336/备份58950/监控40377继续。用户08:21UTC问释放时间，已给核心训练09:45–09:52UTC完成、评估后10:15–10:35UTC释放估计；如后续复验/整合启动先说明新增占用。
+附件Codex-Goal-Wuji-Hold-20260929.md仍未找到、路径问题待回复；依据明确用户消息执行，未声称已读。
+
+下一步：提交/push核心成果与后续配置；监测后续吞吐、里程碑备份和冻结评估，完成后独立复算；补共享策略代表视频、复验/整合权重原始证据与最终报告/交接，发布Release并核验push。源11依然未解决，最终唯一优先事项须按后续结果决定。不要把当前中间交付当Goal完成。
 <!-- HOLD_CURRENT_END -->
 
 # Wuji端点保持受控实验续接
@@ -153,3 +155,128 @@ hold_r11_original_seed2901 running observed; PID 6458
 
 四最终策略固定历史第0回合视频等待器session33434已启动，等待全部CP2000备份后本机4090空闲才渲染；不额外占用开发机远端GPU，结果保留真实成功/失败。
 证据：research/hold-20260929/receipts/final-render-queue.json, research/hold-20260929/video/plan.json。下一步：继续核心训练，最终冻结评估与本机视频可并行，按实际进度更新释放时间。
+
+## 2026-09-29T09:09:33.134106+00:00 core_three_quarter_budget_verified
+
+四组CP1250/1500/1750共12正式权重全部本地/远端SHA、CPU轮数/交互计数/有限性/优化器检查通过；训练剩最后250轮，开发/最终等待器不变。
+证据：research/hold-20260929/receipts/backup-core.json, research/hold-20260929/state.json。下一步：完成最终CP2000，核查开发评估接续与实际耗时，更新GPU释放时间。
+
+## 2026-09-29T09:50:50.207025+00:00 completed_training_archive_started
+
+hold_r11_original_seed2901 completed; preserving all trainer weights and logs
+证据：research/hold-20260929/preregistration.json。下一步：Verify archive SHA and upload immutable draft assets。
+
+## 2026-09-29T09:52:18.174478+00:00 completed_training_archive_uploaded
+
+hold_r11_original_seed2901 all trainer weights/logs archived; server SHA verified
+证据：research/hold-20260929/receipts/release-hold_r11_original_seed2901.json, research/hold-20260929/receipts/hold_r11_original_seed2901-archive.json。下一步：Finish frozen comparisons; keep draft unpublished until final evidence and report。
+
+## 2026-09-29T09:52:18.174820+00:00 completed_training_archive_started
+
+hold_r11_dense1_seed2901 completed; preserving all trainer weights and logs
+证据：research/hold-20260929/preregistration.json。下一步：Verify archive SHA and upload immutable draft assets。
+
+## 2026-09-29T09:54:38.325088+00:00 completed_training_archive_uploaded
+
+hold_r11_dense1_seed2901 all trainer weights/logs archived; server SHA verified
+证据：research/hold-20260929/receipts/release-hold_r11_dense1_seed2901.json, research/hold-20260929/receipts/hold_r11_dense1_seed2901-archive.json。下一步：Finish frozen comparisons; keep draft unpublished until final evidence and report。
+
+## 2026-09-29T09:56:41.492955+00:00 completed_training_archive_started
+
+hold_r3_original_seed2901 completed; preserving all trainer weights and logs
+证据：research/hold-20260929/preregistration.json。下一步：Verify archive SHA and upload immutable draft assets。
+
+## 2026-09-29T09:57:35.819817+00:00 final_representative_video_started
+
+video-final-r3-original-fixed5: fixed historical trial0; separate local4090 evaluation, not frozen128 quantitative evidence
+证据：research/hold-20260929/video/plan.json, research/hold-20260929/receipts/backup-core.json。下一步：Render actual learned policy and retain true outcome。
+
+## 2026-09-29T09:58:04.959932+00:00 all_core_training_completed
+
+四组核心训练均正常退出CP2000，每组从同源CP1000追加163840000交互；四保存点共16权重全部远端/本地SHA和CPU完整性核验通过。开发评估已接续，本机最终视频队列等待备份完成后启动。训练完成不等于行为改善。
+证据：research/hold-20260929/receipts/core-training-complete.json, research/hold-20260929/receipts/backup-core.json。下一步：完成冻结评估与独立时序复算，按预注册判据决定后续。
+
+## 2026-09-29T09:58:28.257303+00:00 completed_training_archive_uploaded
+
+hold_r3_original_seed2901 all trainer weights/logs archived; server SHA verified
+证据：research/hold-20260929/receipts/release-hold_r3_original_seed2901.json, research/hold-20260929/receipts/hold_r3_original_seed2901-archive.json。下一步：Finish frozen comparisons; keep draft unpublished until final evidence and report。
+
+## 2026-09-29T09:58:28.257520+00:00 completed_training_archive_started
+
+hold_r3_dense1_seed2901 completed; preserving all trainer weights and logs
+证据：research/hold-20260929/preregistration.json。下一步：Verify archive SHA and upload immutable draft assets。
+
+## 2026-09-29T09:58:42.018532+00:00 final_representative_video_completed
+
+video-final-r3-original-fixed5: actual strict 0/1
+证据：runs/hold-20260929/video-final-r3-original-fixed5/evidence/report.json。下一步：Inspect fixed frame contact sheets, archive raw trace and video。
+
+## 2026-09-29T09:58:42.089667+00:00 final_representative_video_started
+
+video-final-r3-dense1-fixed5: fixed historical trial0; separate local4090 evaluation, not frozen128 quantitative evidence
+证据：research/hold-20260929/video/plan.json, research/hold-20260929/receipts/backup-core.json。下一步：Render actual learned policy and retain true outcome。
+
+## 2026-09-29T09:59:48.262109+00:00 final_representative_video_completed
+
+video-final-r3-dense1-fixed5: actual strict 1/1
+证据：runs/hold-20260929/video-final-r3-dense1-fixed5/evidence/report.json。下一步：Inspect fixed frame contact sheets, archive raw trace and video。
+
+## 2026-09-29T09:59:48.323052+00:00 final_representative_video_started
+
+video-final-r11-original-fixed5: fixed historical trial0; separate local4090 evaluation, not frozen128 quantitative evidence
+证据：research/hold-20260929/video/plan.json, research/hold-20260929/receipts/backup-core.json。下一步：Render actual learned policy and retain true outcome。
+
+## 2026-09-29T10:00:04.726735+00:00 completed_training_archive_uploaded
+
+hold_r3_dense1_seed2901 all trainer weights/logs archived; server SHA verified
+证据：research/hold-20260929/receipts/release-hold_r3_dense1_seed2901.json, research/hold-20260929/receipts/hold_r3_dense1_seed2901-archive.json。下一步：Finish frozen comparisons; keep draft unpublished until final evidence and report。
+
+## 2026-09-29T10:00:57.492650+00:00 final_representative_video_completed
+
+video-final-r11-original-fixed5: actual strict 0/1
+证据：runs/hold-20260929/video-final-r11-original-fixed5/evidence/report.json。下一步：Inspect fixed frame contact sheets, archive raw trace and video。
+
+## 2026-09-29T10:00:57.554759+00:00 final_representative_video_started
+
+video-final-r11-dense1-fixed5: fixed historical trial0; separate local4090 evaluation, not frozen128 quantitative evidence
+证据：research/hold-20260929/video/plan.json, research/hold-20260929/receipts/backup-core.json。下一步：Render actual learned policy and retain true outcome。
+
+## 2026-09-29T10:02:06.846237+00:00 final_representative_video_completed
+
+video-final-r11-dense1-fixed5: actual strict 0/1
+证据：runs/hold-20260929/video-final-r11-dense1-fixed5/evidence/report.json。下一步：Inspect fixed frame contact sheets, archive raw trace and video。
+
+## 2026-09-29T10:10:45.364605+00:00 all_development_frozen_two_gpus_free
+
+32项开发评估全部完成并冻结：源3原CP2000均值45.3125%、改动CP1500选点96.875%(其CP2000为84.375%)；源11原0、改动1.5625%，均选CP2000。10:09UTC实查GPU1/3无计算PID、0%/1MiB；GPU0/2继续同卡最终128评估。开发信号不替代最终结论。
+证据：research/hold-20260929/receipts/development-frozen-all.json。下一步：完成最终128主表和独立复算；若触发后续先向用户说明新增占用。
+
+## 2026-09-29T10:19:18.515162+00:00 core_frozen_evidence_collected
+
+Source11 seed2901: development and final raw evidence mirrored; every remote/local file SHA verified
+证据：research/hold-20260929/receipts/raw-row11-seed2901.json。下一步：Independently rescore both sources before followup decisions。
+
+## 2026-09-29T10:28:41.944494+00:00 core_frozen_evidence_collected
+
+Source3 seed2901: development and final raw evidence mirrored; every remote/local file SHA verified
+证据：research/hold-20260929/receipts/raw-row3-seed2901.json。下一步：Independently rescore both sources before followup decisions。
+
+## 2026-09-29T10:28:53.185169+00:00 core_frozen_independent_rescore_completed
+
+seed2901 both sources independently rescored; matched-budget and selected results remain separate
+证据：research/hold-20260929/analysis-seed2901/report.json。下一步：Inspect all counts and endpoint diagnostics; apply frozen followup criteria。
+
+## 2026-09-29T10:31:13.469563+00:00 followup_budget_and_pools_frozen
+
+核心独立复算源3改动均值89.453125% vs原47.65625%(+41.796875pp)，body仅-0.78125pp，触发复验与整合。冻结第二续训seed2902源3两臂各1000新增轮；整合seed2903同改动CP2000起点单源vs原3+源3各1000轮至3000，仅池不同。源11排除。已向用户说明预计额外四卡3.5h训练+约.5h评估、北京时间22:15–22:45释放。
+证据：research/hold-20260929/followup-decision.json, research/hold-20260929/integration-plan.json, research/hold-20260929/replication-plan.json。下一步：同步新增入口/冻结配置，核查GPU空闲后启动4个有用后续任务，保持17:08UTC预留。
+
+## 2026-09-29T10:34:38.432661+00:00 followup_running_identity_verified
+
+后续4任务已实际更新至复验CP1006/整合CP2006，PID114963/114961/114965/114967。源3复验模型/优化器/学习率起点成对完全相同；整合两臂亦同CP2000模型/优化器/学习率，仅训练池不同。动作/物理/网络不变。复验评估等待115408–115410，整合115411；备份本地4989/9624、全归档49802已启动。
+证据：research/hold-20260929/receipts/followup-launch.json, research/hold-20260929/receipts/followup-pair-audit.json, research/hold-20260929/receipts/followup-evaluation-queues.json。下一步：保持1000轮同预算，核验后续完整Hydra配置并收集最终物理结果，停止新增任务留交付余量。
+
+## 2026-09-29T10:39:19.907198+00:00 followup_resolved_configs_verified
+
+后续4份完整Hydra配置解析并逐键比较通过：复验仅奖励系数，整合仅训练池，除实验标识外无其它差异。本地只读解析首次IsaacGym导入SIGSEGV，改远端后发现缺少离线flatten模块，补同步该辅助模块后通过；均未改训练源码/进程。
+证据：research/hold-20260929/configs-followup/audit.json, research/hold-20260929/receipts/followup-config-audit.log。下一步：继续固定预算后续训练，整理核心报告和全部权重/原始时序交付。

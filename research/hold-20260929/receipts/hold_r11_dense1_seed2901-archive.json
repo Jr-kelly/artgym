@@ -1,0 +1,134 @@
+{
+  "state": {
+    "name": "hold_r11_dense1_seed2901",
+    "gpu": 3,
+    "command": [
+      "/home/wangjiarui/artgym-runtime/bin/python",
+      "-m",
+      "scripts.train_wuji_hold",
+      "task=wuji_multigrasp",
+      "hand=wuji_paper_official_actuator",
+      "object=knife_wuji_bridge3_20260922",
+      "train=wujiAcquisitionSAPG",
+      "num_envs=5120",
+      "experiment=hold_r11_dense1_seed2901",
+      "max_iterations=2000",
+      "multi_gpu=False",
+      "headless=True",
+      "graphics_device_id=-1",
+      "force_render=False",
+      "pipeline=gpu",
+      "num_subscenes=0",
+      "seed=2026092901",
+      "train.params.config.expl_coef_block_size=1024",
+      "train.params.config.minibatch_size=32768",
+      "train.params.config.save_frequency=250",
+      "train.params.config.checkpoint_keep_recent=10",
+      "train.params.config.evaluation_frequency=100000",
+      "object.reward.GoalDistance2=1.0",
+      "task.env.absolutePoseObjective.coefficient=1.0",
+      "task.env.supportActionSpan=0.04",
+      "task.env.trainingStates=research/multigrasp-20260928/data/expert-11.npy",
+      "checkpoint=/home/wangjiarui/artgym-hold-20260929/runs/hold-20260929/parents/expert11.pth"
+    ],
+    "timeout_seconds": 18000,
+    "started": "2026-09-29T06:40:16.828262+00:00",
+    "pid": 6453,
+    "status": "completed",
+    "child_pid": 6460,
+    "heartbeat": "2026-09-29T09:50:03.833974+00:00",
+    "elapsed_seconds": 11386.927722378168,
+    "returncode": 0,
+    "finished": "2026-09-29T09:50:27.853085+00:00",
+    "wall_seconds": 11411.02389330091
+  },
+  "files": [
+    {
+      "path": "runs/hold_r11_dense1_seed2901/resume-identity.json",
+      "sha256": "dc547c7579f5389b7bb319403f803cecdb76e27562cc7ef4514db0b64d7e9b20",
+      "bytes": 897
+    },
+    {
+      "path": "runs/hold_r11_dense1_seed2901/nn/hold_r11_dense1_seed2901.pth",
+      "sha256": "9b1bb68c7cb0467823f56064364d5a661803c15fdbe86d5b0d653b576b5768b1",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_r11_dense1_seed2901/nn/last_hold_r11_dense1_seed2901_ep_2000_rew__756.54_.pth",
+      "sha256": "121f912db441fdc44c442fe85416f56e2f81cb5381b0239db10f7d1f61df011a",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_r11_dense1_seed2901/checkpoints/epoch_001250.pth",
+      "sha256": "d1f4ab58cdfd9f1d683a1d6a9b28994527556b325c57b7eaeb88e5343b3400be",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_r11_dense1_seed2901/checkpoints/latest.pth",
+      "sha256": "121f912db441fdc44c442fe85416f56e2f81cb5381b0239db10f7d1f61df011a",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_r11_dense1_seed2901/checkpoints/latest.json",
+      "sha256": "9792ada879be53c95dc87ed3af625a807155cb962e84a770d16db518d062fb1c",
+      "bytes": 214
+    },
+    {
+      "path": "runs/hold_r11_dense1_seed2901/checkpoints/epoch_001500.json",
+      "sha256": "25e083d9f153a43f072061d47b5217f9443195acb012207bd1274bbaa41842d1",
+      "bytes": 215
+    },
+    {
+      "path": "runs/hold_r11_dense1_seed2901/checkpoints/epoch_002000.json",
+      "sha256": "9792ada879be53c95dc87ed3af625a807155cb962e84a770d16db518d062fb1c",
+      "bytes": 214
+    },
+    {
+      "path": "runs/hold_r11_dense1_seed2901/checkpoints/epoch_001250.json",
+      "sha256": "271d253a582a63d919fef41e7e7de0e23d01dfe3ddfa34cccfaa107d44e7d83b",
+      "bytes": 216
+    },
+    {
+      "path": "runs/hold_r11_dense1_seed2901/checkpoints/epoch_001750.pth",
+      "sha256": "587821031d2bea10b516d226d42dcedcc6e169eb7ae710c7edafe9206e028127",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_r11_dense1_seed2901/checkpoints/epoch_001500.pth",
+      "sha256": "833a831b4f6be761853a6ba3c50ef2848cd896d915093291e0c215024170659d",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_r11_dense1_seed2901/checkpoints/epoch_002000.pth",
+      "sha256": "121f912db441fdc44c442fe85416f56e2f81cb5381b0239db10f7d1f61df011a",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/hold_r11_dense1_seed2901/checkpoints/epoch_001750.json",
+      "sha256": "14180938b96584da4806144b8f6c19006f31546831ea7a0ca74f67930714493b",
+      "bytes": 216
+    },
+    {
+      "path": "runs/hold_r11_dense1_seed2901/evaluation/inbox/epoch_002000.json",
+      "sha256": "0ee916a2b9b0e6ea8896524e4ff0df8d1fdf2cf34f3f36b740192e58ff6c1297",
+      "bytes": 342
+    },
+    {
+      "path": "runs/hold_r11_dense1_seed2901/evaluation/inbox/epoch_002000.pth",
+      "sha256": "1555f633d51c06e403de94b9b4bb2d6114c9c55b0683e2d2a547ff1747d9e08a",
+      "bytes": 14843846
+    },
+    {
+      "path": "runs/hold_r11_dense1_seed2901/summaries/events.out.tfevents.1790664031.d-20260920124121-d9ns7",
+      "sha256": "5c5416218c43784bed23183550edb562ec43cf99ee7d61f3b9a3ed6e6fca6f46",
+      "bytes": 5712692
+    },
+    {
+      "path": "runs/hold_r11_dense1_seed2901/best/model.pth",
+      "sha256": "9b1bb68c7cb0467823f56064364d5a661803c15fdbe86d5b0d653b576b5768b1",
+      "bytes": 89411908
+    }
+  ],
+  "verified_utc": "2026-09-29T09:52:33.630132+00:00",
+  "scope": "All trainer weights and logs preserved; checkpoint selection uses preregistered development rule only"
+}

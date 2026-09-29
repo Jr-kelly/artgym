@@ -1,0 +1,89 @@
+{
+  "time": "2026-09-29T10:32:10.197538+00:00",
+  "jobs": [
+    {
+      "name": "hold_r3_original_seed2902",
+      "gpu": 0,
+      "pid": 114953,
+      "command": [
+        "/home/wangjiarui/artgym-runtime/bin/python",
+        "-m",
+        "scripts.launch_wuji_hold_arm",
+        "--row",
+        "3",
+        "--condition",
+        "original",
+        "--additional-epochs",
+        "1000",
+        "--seed",
+        "2026092902",
+        "--gpu",
+        "0",
+        "--name",
+        "hold_r3_original_seed2902"
+      ]
+    },
+    {
+      "name": "hold_r3_dense1_seed2902",
+      "gpu": 1,
+      "pid": 114954,
+      "command": [
+        "/home/wangjiarui/artgym-runtime/bin/python",
+        "-m",
+        "scripts.launch_wuji_hold_arm",
+        "--row",
+        "3",
+        "--condition",
+        "dense1",
+        "--additional-epochs",
+        "1000",
+        "--seed",
+        "2026092902",
+        "--gpu",
+        "1",
+        "--name",
+        "hold_r3_dense1_seed2902"
+      ]
+    },
+    {
+      "name": "hold_integrate_singleton_seed2903",
+      "gpu": 2,
+      "pid": 114955,
+      "command": [
+        "/home/wangjiarui/artgym-runtime/bin/python",
+        "-m",
+        "scripts.launch_wuji_hold_integration",
+        "--decision",
+        "research/hold-20260929/followup-decision.json",
+        "--condition",
+        "singleton",
+        "--additional-epochs",
+        "1000",
+        "--gpu",
+        "2",
+        "--name",
+        "hold_integrate_singleton_seed2903"
+      ]
+    },
+    {
+      "name": "hold_integrate_shared_seed2903",
+      "gpu": 3,
+      "pid": 114956,
+      "command": [
+        "/home/wangjiarui/artgym-runtime/bin/python",
+        "-m",
+        "scripts.launch_wuji_hold_integration",
+        "--decision",
+        "research/hold-20260929/followup-decision.json",
+        "--condition",
+        "shared",
+        "--additional-epochs",
+        "1000",
+        "--gpu",
+        "3",
+        "--name",
+        "hold_integrate_shared_seed2903"
+      ]
+    }
+  ]
+}
