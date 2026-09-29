@@ -1,0 +1,94 @@
+{
+  "state": {
+    "name": "preflight_r11_original",
+    "gpu": 2,
+    "command": [
+      "/home/wangjiarui/artgym-runtime/bin/python",
+      "-m",
+      "scripts.train_wuji_hold",
+      "task=wuji_multigrasp",
+      "hand=wuji_paper_official_actuator",
+      "object=knife_wuji_bridge3_20260922",
+      "train=wujiAcquisitionSAPG",
+      "num_envs=5120",
+      "experiment=preflight_r11_original",
+      "max_iterations=1010",
+      "multi_gpu=False",
+      "headless=True",
+      "graphics_device_id=-1",
+      "force_render=False",
+      "pipeline=gpu",
+      "num_subscenes=0",
+      "seed=2026092901",
+      "train.params.config.expl_coef_block_size=1024",
+      "train.params.config.minibatch_size=32768",
+      "train.params.config.save_frequency=250",
+      "train.params.config.checkpoint_keep_recent=10",
+      "train.params.config.evaluation_frequency=100000",
+      "object.reward.GoalDistance2=.1",
+      "task.env.absolutePoseObjective.coefficient=1.0",
+      "task.env.supportActionSpan=0.04",
+      "task.env.trainingStates=research/multigrasp-20260928/data/expert-11.npy",
+      "checkpoint=/home/wangjiarui/artgym-hold-20260929/runs/hold-20260929/parents/expert11.pth"
+    ],
+    "timeout_seconds": 1200,
+    "started": "2026-09-29T06:37:41.067585+00:00",
+    "pid": 5610,
+    "status": "completed",
+    "child_pid": 5615,
+    "heartbeat": "2026-09-29T06:39:41.865146+00:00",
+    "elapsed_seconds": 120.6442653639242,
+    "returncode": 0,
+    "finished": "2026-09-29T06:40:02.881252+00:00",
+    "wall_seconds": 141.81244634790346
+  },
+  "files": [
+    {
+      "path": "runs/preflight_r11_original/resume-identity.json",
+      "sha256": "3f709132ab2d2a2405504af3bdd33e6e089dd8b53b5ba9c7edd754d3ecd99b93",
+      "bytes": 897
+    },
+    {
+      "path": "runs/preflight_r11_original/summaries/events.out.tfevents.1790663882.d-20260920124121-d9ns7",
+      "sha256": "a613a5add3f0d5ca4203dbf376a8e025b1ed9a8a36c3b89ea7fa7e7b234ae6b1",
+      "bytes": 55210
+    },
+    {
+      "path": "runs/preflight_r11_original/evaluation/inbox/epoch_001010.pth",
+      "sha256": "3fefc65a87b42cbfbabf8ebcafacebab73638422703f75335f2d13e7f86c9dc0",
+      "bytes": 14843846
+    },
+    {
+      "path": "runs/preflight_r11_original/evaluation/inbox/epoch_001010.json",
+      "sha256": "a5d2b86d412b46ba74ce6bb64f3a888933b9690dd6686367f6769652a8633d4f",
+      "bytes": 339
+    },
+    {
+      "path": "runs/preflight_r11_original/nn/last_preflight_r11_original_ep_1010_rew__457.1_.pth",
+      "sha256": "879067e10a98070677ec1a20678b2f4c3bdbcd4f7cc32e115f1c6ad608e5f12d",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/preflight_r11_original/checkpoints/epoch_001010.pth",
+      "sha256": "879067e10a98070677ec1a20678b2f4c3bdbcd4f7cc32e115f1c6ad608e5f12d",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/preflight_r11_original/checkpoints/epoch_001010.json",
+      "sha256": "ef6a572fc3e078555ab481ebdc7e769f7db9eedba688062031325b302c2f2991",
+      "bytes": 213
+    },
+    {
+      "path": "runs/preflight_r11_original/checkpoints/latest.pth",
+      "sha256": "879067e10a98070677ec1a20678b2f4c3bdbcd4f7cc32e115f1c6ad608e5f12d",
+      "bytes": 89411908
+    },
+    {
+      "path": "runs/preflight_r11_original/checkpoints/latest.json",
+      "sha256": "ef6a572fc3e078555ab481ebdc7e769f7db9eedba688062031325b302c2f2991",
+      "bytes": 213
+    }
+  ],
+  "verified_utc": "2026-09-29T07:04:19.413676+00:00",
+  "scope": "All trainer weights and logs preserved; checkpoint selection uses preregistered development rule only"
+}

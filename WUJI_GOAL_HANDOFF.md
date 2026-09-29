@@ -82,3 +82,8 @@ hold_r11_original_seed2901 running observed; PID 6458
 证据：research/hold-20260929/data/manifest.json, research/hold-20260929/receipts/evaluation-queues.json, scripts/evaluate_wuji_hold.py。下一步：训练持续、核验配置与哈希并保存中期权重；不查看最终结果选择checkpoint。
 
 旧实验完整历史见相邻multigrasp-20260928副本；共享最新版在/data/research/artgym/WUJI_GOAL_HANDOFF.md。
+
+## 2026-09-29T07:03:38.875647+00:00 offline_diagnostic_reproduction_passed
+
+通用逐阶段保持诊断在既有896阶段上全部复现；按命令奇偶标伸出/收回，新增冻结复算将输出同口径端点表。父专家与预检Release资产服务器SHA核验通过。资源统计明确区分实际采样覆盖和四小时门槛，不将短时均值冒充四小时。
+证据：research/hold-20260929/receipts/stage-diagnostic-reproduction.json, research/hold-20260929/receipts/release-parent-preflight.json, research/hold-20260929/receipts/resources-current.json。下一步：继续四核心同预算训练与权重备份，待最终物理结果后判定后续。

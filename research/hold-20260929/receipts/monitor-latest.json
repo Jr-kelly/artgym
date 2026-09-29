@@ -1,5 +1,5 @@
 {
-  "time": "2026-09-29T06:48:37.843600+00:00",
+  "time": "2026-09-29T07:06:09.500737+00:00",
   "jobs": {
     "preflight_r11_dense1": {
       "name": "preflight_r11_dense1",
@@ -130,11 +130,11 @@
       "pid": 6450,
       "status": "running",
       "child_pid": 6454,
-      "heartbeat": "2026-09-29T06:48:18.953832+00:00",
-      "elapsed_seconds": 482.0745075698942,
+      "heartbeat": "2026-09-29T07:05:53.071862+00:00",
+      "elapsed_seconds": 1536.146584045142,
       "actual_cmdline": "/home/wangjiarui/artgym-runtime/bin/python -m scripts.train_wuji_hold task=wuji_multigrasp hand=wuji_paper_official_actuator object=knife_wuji_bridge3_20260922 train=wujiAcquisitionSAPG num_envs=5120 experiment=hold_r3_original_seed2901 max_iterations=2000 multi_gpu=False headless=True graphics_device_id=-1 force_render=False pipeline=gpu num_subscenes=0 seed=2026092901 train.params.config.expl_coef_block_size=1024 train.params.config.minibatch_size=32768 train.params.config.save_frequency=250 train.params.config.checkpoint_keep_recent=10 train.params.config.evaluation_frequency=100000 object.reward.GoalDistance2=.1 task.env.absolutePoseObjective.coefficient=1.0 task.env.supportActionSpan=0.04 task.env.trainingStates=research/multigrasp-20260928/data/expert-3.npy checkpoint=/home/wangjiarui/artgym-hold-20260929/runs/hold-20260929/parents/expert3.pth ",
-      "observed_epoch": 1042,
-      "seconds_per_epoch_last20": 10.723
+      "observed_epoch": 1134,
+      "seconds_per_epoch_last20": 10.914349999999997
     },
     "hold_r11_dense1_seed2901": {
       "name": "hold_r11_dense1_seed2901",
@@ -173,11 +173,11 @@
       "pid": 6453,
       "status": "running",
       "child_pid": 6460,
-      "heartbeat": "2026-09-29T06:48:19.095167+00:00",
-      "elapsed_seconds": 482.15398902306333,
+      "heartbeat": "2026-09-29T07:05:53.368102+00:00",
+      "elapsed_seconds": 1536.429958842229,
       "actual_cmdline": "/home/wangjiarui/artgym-runtime/bin/python -m scripts.train_wuji_hold task=wuji_multigrasp hand=wuji_paper_official_actuator object=knife_wuji_bridge3_20260922 train=wujiAcquisitionSAPG num_envs=5120 experiment=hold_r11_dense1_seed2901 max_iterations=2000 multi_gpu=False headless=True graphics_device_id=-1 force_render=False pipeline=gpu num_subscenes=0 seed=2026092901 train.params.config.expl_coef_block_size=1024 train.params.config.minibatch_size=32768 train.params.config.save_frequency=250 train.params.config.checkpoint_keep_recent=10 train.params.config.evaluation_frequency=100000 object.reward.GoalDistance2=1.0 task.env.absolutePoseObjective.coefficient=1.0 task.env.supportActionSpan=0.04 task.env.trainingStates=research/multigrasp-20260928/data/expert-11.npy checkpoint=/home/wangjiarui/artgym-hold-20260929/runs/hold-20260929/parents/expert11.pth ",
-      "observed_epoch": 1043,
-      "seconds_per_epoch_last20": 10.53905
+      "observed_epoch": 1136,
+      "seconds_per_epoch_last20": 10.628049999999998
     },
     "preflight_r3_original": {
       "name": "preflight_r3_original",
@@ -308,11 +308,11 @@
       "pid": 6451,
       "status": "running",
       "child_pid": 6455,
-      "heartbeat": "2026-09-29T06:48:19.061830+00:00",
-      "elapsed_seconds": 482.1734902970493,
+      "heartbeat": "2026-09-29T07:05:53.200022+00:00",
+      "elapsed_seconds": 1536.3232000269927,
       "actual_cmdline": "/home/wangjiarui/artgym-runtime/bin/python -m scripts.train_wuji_hold task=wuji_multigrasp hand=wuji_paper_official_actuator object=knife_wuji_bridge3_20260922 train=wujiAcquisitionSAPG num_envs=5120 experiment=hold_r3_dense1_seed2901 max_iterations=2000 multi_gpu=False headless=True graphics_device_id=-1 force_render=False pipeline=gpu num_subscenes=0 seed=2026092901 train.params.config.expl_coef_block_size=1024 train.params.config.minibatch_size=32768 train.params.config.save_frequency=250 train.params.config.checkpoint_keep_recent=10 train.params.config.evaluation_frequency=100000 object.reward.GoalDistance2=1.0 task.env.absolutePoseObjective.coefficient=1.0 task.env.supportActionSpan=0.04 task.env.trainingStates=research/multigrasp-20260928/data/expert-3.npy checkpoint=/home/wangjiarui/artgym-hold-20260929/runs/hold-20260929/parents/expert3.pth ",
-      "observed_epoch": 1042,
-      "seconds_per_epoch_last20": 10.682999999999998
+      "observed_epoch": 1134,
+      "seconds_per_epoch_last20": 11.0211
     },
     "hold_r11_original_seed2901": {
       "name": "hold_r11_original_seed2901",
@@ -351,11 +351,11 @@
       "pid": 6452,
       "status": "running",
       "child_pid": 6458,
-      "heartbeat": "2026-09-29T06:48:19.142862+00:00",
-      "elapsed_seconds": 482.2604760201648,
+      "heartbeat": "2026-09-29T07:05:53.375244+00:00",
+      "elapsed_seconds": 1536.4924722029828,
       "actual_cmdline": "/home/wangjiarui/artgym-runtime/bin/python -m scripts.train_wuji_hold task=wuji_multigrasp hand=wuji_paper_official_actuator object=knife_wuji_bridge3_20260922 train=wujiAcquisitionSAPG num_envs=5120 experiment=hold_r11_original_seed2901 max_iterations=2000 multi_gpu=False headless=True graphics_device_id=-1 force_render=False pipeline=gpu num_subscenes=0 seed=2026092901 train.params.config.expl_coef_block_size=1024 train.params.config.minibatch_size=32768 train.params.config.save_frequency=250 train.params.config.checkpoint_keep_recent=10 train.params.config.evaluation_frequency=100000 object.reward.GoalDistance2=.1 task.env.absolutePoseObjective.coefficient=1.0 task.env.supportActionSpan=0.04 task.env.trainingStates=research/multigrasp-20260928/data/expert-11.npy checkpoint=/home/wangjiarui/artgym-hold-20260929/runs/hold-20260929/parents/expert11.pth ",
-      "observed_epoch": 1043,
-      "seconds_per_epoch_last20": 10.54955
+      "observed_epoch": 1136,
+      "seconds_per_epoch_last20": 10.647549999999999
     }
   },
   "identities": {
@@ -552,5 +552,5 @@
       "scope": "Full optimizer/model/normalizer/counters resumed; PhysX state absent in parent so rollouts/RNN reset in both arms. New paired seed; no claim of bitwise uninterrupted training."
     }
   },
-  "gpu": "0, 94 %, 9479 MiB\n1, 83 %, 10183 MiB\n2, 94 %, 8087 MiB\n3, 94 %, 8087 MiB\n"
+  "gpu": "0, 97 %, 9543 MiB\n1, 0 %, 10183 MiB\n2, 97 %, 8409 MiB\n3, 94 %, 8089 MiB\n"
 }

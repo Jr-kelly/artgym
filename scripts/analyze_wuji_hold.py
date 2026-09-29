@@ -8,6 +8,7 @@ import numpy as np
 from scripts.wuji_timed_command_metrics import score_timed_trace
 from scripts.wuji_arrival_metrics import score_arrival_trace
 from scripts.summarize_wuji_multigrasp_trace import summarize
+from scripts.summarize_wuji_hold_stages import stages, grouped
 
 ROOT=Path(__file__).resolve().parents[1]
 
@@ -18,7 +19,7 @@ def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 def main():
     p=argparse.ArgumentParser();p.add_argument('--results',type=Path,nargs='+',required=True)
     p.add_argument('--output',type=Path,required=True);a=p.parse_args()
-    a.output.mkdir(parents=True,exist_ok=False);trials=[];summaries=[];temporal=[];contrasts=[];inputs=[];physical={}
+    a.output.mkdir(parents=True,exist_ok=False);trials=[];summaries=[];temporal=[];contrasts=[];inputs=[];physical={};endpoints=[]
     for path in a.results:
         run=json.loads(path.read_text());assert run['status']=='completed'
         plan=run['plan'];source=plan['row'];inputs.append(dict(path=str(path),sha256=sha(path),plan=plan));static=None
@@ -42,6 +43,7 @@ def main():
             else:
                 stage=150 if protocol=='fixed5' else 60
                 rescored=score_timed_trace(trace,stage,9,600);metric='stable_full_all_endpoints'
+                endpoints.extend(dict(source=source,model=model,protocol=protocol,**item) for item in grouped(stages(trace,stage)))
                 for i,item in enumerate(summarize(trace,stage)):
                     assert item['strict']==rescored['records'][i][metric]
                     temporal.append(dict(source=source,model=model,protocol=protocol,**item))
@@ -70,6 +72,7 @@ def main():
     with (a.output/'trials.csv').open('w') as stream:
         writer=csv.DictWriter(stream,fieldnames=list(trials[0]),lineterminator='\n');writer.writeheader();writer.writerows(trials)
     (a.output/'temporal-diagnostics.json').write_text(json.dumps(temporal,indent=2)+'\n')
+    (a.output/'endpoint-diagnostics.json').write_text(json.dumps(endpoints,indent=2)+'\n')
     result=dict(status='independently_rescored',inputs=inputs,summaries=summaries,contrasts=contrasts,
         unique_physical_episodes_including_static=sum(physical.values()),reported_policy_rows=len(trials),
         scope='Within-source128 perturbation paired empirical differences, one continuation seed unless separately replicated. Two distinct sources, not256 independent base grasps. Identical final/selected weight evidence explicitly reused; not new physical trials. No hardware or novel-grasp-generalization claim.')

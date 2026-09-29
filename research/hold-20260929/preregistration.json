@@ -58,5 +58,12 @@
     10.8075,
     10.589222222222222
   ],
-  "estimated_training_hours": 3.0153472222222226
+  "estimated_training_hours": 3.0153472222222226,
+  "interpretation_rule_before_outcomes": {
+    "recorded_utc": "2026-09-29T06:52:48.355662+00:00",
+    "primary": "Report all source/protocol paired counts atCP2000; do not choose improved source or protocol to hide regressions",
+    "seed_replication_trigger": "At least10percentagepoint improvement in source-average strict2/5 for changed versus original, without >5pp body-stability loss; then replicate that paired source comparison with independent continuation seed if budget allows. Otherwise report weak/null evidence.",
+    "integration_trigger": "A source expert reaches at least50percent mean strict2/5 on frozen128 and improvement versus parent is present. If enough budget, one shared-policy attempt original3+eligible additional sources; excluded source11 if unresolved must be explicit. Do not infer unseen or joint-policy success from expert metrics.",
+    "budget": "Measured core/eval throughput determines added work; stop starting training before17:08UTC and leave final>=1h delivery; shrink optional work first"
+  }
 }

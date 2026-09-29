@@ -90,3 +90,33 @@ hold_r11_original_seed2901 running observed; PID 6458
 
 离线端点标签初版误用绝对slider>0.02判断伸出，已保留invalid文件并按冻结命令阶段偶数伸出/奇数收回修正。任务目标是init_slider+.04和init_slider，不是全局.04/0。原始物理/误差/严格评分及训练配置不受影响。
 证据：research/hold-20260929/diagnosis/by-endpoint.json, research/hold-20260929/diagnosis/by-endpoint.invalid-absolute-threshold.json。下一步：用正确阶段标签解释到达后回缩/过冲，继续既定单系数对照。
+
+## 2026-09-29T06:50:07.139309+00:00 hold_initial_snapshot_pushed
+
+新分支feat/wuji-hold-controlled-20260929首个实验快照fa49855已push；奖励日程纠正、既有时序诊断、冻结方案/数据、可运行续训/评估入口已保存。正式四训练保持运行，不当成完成。
+证据：research/hold-20260929/state.json, research/hold-20260929/README.md。下一步：按实测吞吐继续核心训练，完整冻结评估后才决定追加复验/整合。
+
+## 2026-09-29T06:52:03.013021+00:00 resolved_hold_configs_verified
+
+从实际训练命令解析四份完整Hydra配置，逐键核对通过：源内唯一实质差异为GoalDistance2 .1→1.0；span、绝对位姿惩罚、奖励起终值、物理与网络均相同。已存完整YAML和SHA。
+证据：research/hold-20260929/configs/audit.json。下一步：保持核心训练预算，待冻结结果再判定额外奖励是否改善端点保持。
+
+## 2026-09-29T06:52:48.371938+00:00 followup_decision_rules_recorded_before_outcomes
+
+在任何新策略评估前补充后续判据：改动相对原续训在某源严格2/5均值至少+10个百分点且刀身稳定不下降>5点，才优先该源成对续训种子复验；专家均值≥50%且优于父策略才视预算尝试原3+有效新增源的单策略整合。源11若仍失败明确不声称已整合。完整同预算结果始终报告，不按有利协议隐藏退化。
+证据：research/hold-20260929/preregistration.json。下一步：按既定训练/冻结结果判据选择后续，禁止提前认定奖励有效。
+
+## 2026-09-29T06:56:39.526895+00:00 archive_restore_flow_verified
+
+已用完成的10轮源3原奖励预检实际验证全权重/日志归档和恢复：9文件远端本地SHA一致，179714847字节包恢复核验通过。预检权重不参与正式对照或选点。附件在/home/agiuser及/mnt再次按完整文件名搜索仍未找到，按明确用户指令继续。
+证据：research/hold-20260929/receipts/archive-restore-preflight-check.txt, research/hold-20260929/receipts/preflight_r3_original-archive.json。下一步：保持核心四臂运行，完成后使用相同归档流程保存所有权重与日志。
+
+## 2026-09-29T06:58:30.682717+00:00 hold_delivery_draft_created
+
+本轮Release草稿id398889931/tag wuji-hold-20260929-v1已建立，仅用于保存不可变证据，正式结论尚未发布。父专家权重与预检归档上传中；核心四训练继续，最终必须待冻结结果完成再发布。
+证据：research/hold-20260929/receipts/release-created.json, research/hold-20260929/receipts/parent-weights.json。下一步：保存全部权重/时序与配置，完成核心冻结表后决定追加实验。
+
+## 2026-09-29T07:03:38.875647+00:00 offline_diagnostic_reproduction_passed
+
+通用逐阶段保持诊断在既有896阶段上全部复现；按命令奇偶标伸出/收回，新增冻结复算将输出同口径端点表。父专家与预检Release资产服务器SHA核验通过。资源统计明确区分实际采样覆盖和四小时门槛，不将短时均值冒充四小时。
+证据：research/hold-20260929/receipts/stage-diagnostic-reproduction.json, research/hold-20260929/receipts/release-parent-preflight.json, research/hold-20260929/receipts/resources-current.json。下一步：继续四核心同预算训练与权重备份，待最终物理结果后判定后续。
