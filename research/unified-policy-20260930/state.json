@@ -7,7 +7,7 @@
   "max_concurrent_gpus": 2,
   "start_commit": "16ae5d894542cb8fa0cdda6cba7fc5d270842fae",
   "branch": "feat/wuji-unified-policy-20260930",
-  "stage": "B_G1_promotion_evaluation",
+  "stage": "C_normalization_correction_preflight",
   "goal_sha256": "9ae6022a34e95376a08012289c4298e37d990382dac87f88aa3b263062314559",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
   "resource_observation_utc": "2026-09-29T15:58:05Z",
@@ -19,22 +19,11 @@
     "final128": 2026093004,
     "train_replication": 2026093005
   },
-  "next": "Confirm64promotion then freeze physicaltarget-fit criterion and enterC; no unified trained yet",
+  "next": "Run bounded normalization pilot, compare pre-change source3 baseline and native function preservation diagnostics; at most one further evidence-based modification.",
   "remote_root": "/tmp/artgym-unified-policy-20260930",
   "runtime": "/tmp/wuji-unified-runtime/bin/python",
-  "active_jobs": [
-    {
-      "name": "g1-promotion-t2-job",
-      "pid": 4399,
-      "gpu": 0
-    },
-    {
-      "name": "g1-promotion-t5-job",
-      "pid": 4400,
-      "gpu": 1
-    }
-  ],
-  "last_observed_utc": "2026-09-29T16:50:46.484669+00:00",
+  "active_jobs": [],
+  "last_observed_utc": "2026-09-29T17:15:10.630469+00:00",
   "queue": null,
   "monitor": {
     "utc": "2026-09-29T16:46:21.766603+00:00",

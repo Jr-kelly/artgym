@@ -1,0 +1,49 @@
+{
+  "utc": "2026-09-29T17:01:59.335167+00:00",
+  "event": "C_historical_first100_failed_G2_alternate_init_frozen",
+  "evidence": "c-historical-seg1-analysis/report.json independentlyrescored",
+  "checkpoint50": {
+    "strict2": [
+      32,
+      32,
+      31,
+      0
+    ],
+    "strict5": [
+      32,
+      32,
+      32,
+      0
+    ],
+    "source3_body": [
+      0,
+      0
+    ]
+  },
+  "checkpoint100": {
+    "strict2": [
+      32,
+      32,
+      32,
+      1
+    ],
+    "strict5": [
+      32,
+      32,
+      32,
+      3
+    ],
+    "source3_body": [
+      29,
+      30
+    ]
+  },
+  "n": 32,
+  "selected_epoch": 100,
+  "selection_rule": "worst8strict thenworstbody thenmacro thenearlier",
+  "branch": "No blind continuation aftertwo50segments worststrict0\u21920\u21923.125%; retainstrongbodygain butstrictinsufficient; use allowed secondinitialization as samebudget controlledbaseline",
+  "hypothesis": "Source3 expert initialization/its frozen normalizer maymerge old neargraspfamily more effectively than historical initialization",
+  "only_change": "Initial expert fullpolicy/normalization historical\u2192source3dense1CP2000; same8files,lr1e-5,seed3001,100epochs800updates,cp50/100,device/evalrules",
+  "stop": "No more than2initializations; aftersamebudget selectfailurebranch fromactualerror/stateevidence; noRLorDAggerautomatic",
+  "next": "Train source3-initialized unifiedarm andmatcheddev50/100; finish offlinephysicaltargetfitdiagnostics"
+}

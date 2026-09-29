@@ -1,0 +1,640 @@
+{
+  "checkpoint": "runs/unified-policy-20260930/bc-unified-historical-s3001-seg1/epoch_000100.pth",
+  "sha256": "3801eca359022e729510fef28f00d43b35af8561755f20a5f4be0206b6a07ab8",
+  "device": "cpu",
+  "rows": [
+    {
+      "data": "runs/unified-policy-20260930/train-data-t2/source0",
+      "source": 0,
+      "seconds": 2.0,
+      "groups": {
+        "all_all": {
+          "values": 365420,
+          "target_range_mean": 0.0004318345454521477,
+          "target_range_p95": 0.0013484745286405087,
+          "action_mse": 0.000588398368563503
+        },
+        "all_support": {
+          "values": 292336,
+          "target_range_mean": 0.0004901187494397163,
+          "target_range_p95": 0.0014486395521089435,
+          "action_mse": 0.0005935317603871226
+        },
+        "all_thumb": {
+          "values": 73084,
+          "target_range_mean": 0.00019869748211931437,
+          "target_range_p95": 0.0007636084104888112,
+          "action_mse": 0.0005678647430613637
+        },
+        "switch_first15_all": {
+          "values": 91660,
+          "target_range_mean": 0.0005910326144658029,
+          "target_range_p95": 0.0019653338356874885,
+          "action_mse": 0.001040963688865304
+        },
+        "switch_first15_support": {
+          "values": 73328,
+          "target_range_mean": 0.0006866059266030788,
+          "target_range_p95": 0.0021344502456486225,
+          "action_mse": 0.0010300497524440289
+        },
+        "switch_first15_thumb": {
+          "values": 18332,
+          "target_range_mean": 0.00020873975881841034,
+          "target_range_p95": 0.000982390221906826,
+          "action_mse": 0.001084620482288301
+        },
+        "arrival_first8_all": {
+          "values": 48740,
+          "target_range_mean": 0.00038053671596571803,
+          "target_range_p95": 0.001240231143310665,
+          "action_mse": 0.0004199443501420319
+        },
+        "arrival_first8_support": {
+          "values": 38992,
+          "target_range_mean": 0.0004223784198984504,
+          "target_range_p95": 0.0013322504120878867,
+          "action_mse": 0.0004057975020259619
+        },
+        "arrival_first8_thumb": {
+          "values": 9748,
+          "target_range_mean": 0.0002131697692675516,
+          "target_range_p95": 0.0007453414553310718,
+          "action_mse": 0.00047653185902163386
+        },
+        "holding_after9_all": {
+          "values": 211260,
+          "target_range_mean": 0.0003597528557293117,
+          "target_range_p95": 0.001031604321906343,
+          "action_mse": 0.00038047623820602894
+        },
+        "holding_after9_support": {
+          "values": 169008,
+          "target_range_mean": 0.0004059014027006924,
+          "target_range_p95": 0.0010888378892559556,
+          "action_mse": 0.000406871666200459
+        },
+        "holding_after9_thumb": {
+          "values": 42252,
+          "target_range_mean": 0.00017515850777272135,
+          "target_range_p95": 0.0005697096989024429,
+          "action_mse": 0.00027489467174746096
+        }
+      }
+    },
+    {
+      "data": "runs/unified-policy-20260930/train-data-t5/source0",
+      "source": 0,
+      "seconds": 5.0,
+      "groups": {
+        "all_all": {
+          "values": 369600,
+          "target_range_mean": 0.00036831499892286956,
+          "target_range_p95": 0.001124227326363325,
+          "action_mse": 0.000487352634081617
+        },
+        "all_support": {
+          "values": 295680,
+          "target_range_mean": 0.0004162368713878095,
+          "target_range_p95": 0.0011991825129371134,
+          "action_mse": 0.00049393973313272
+        },
+        "all_thumb": {
+          "values": 73920,
+          "target_range_mean": 0.00017662740719970316,
+          "target_range_p95": 0.0006584039045264946,
+          "action_mse": 0.00046100476174615324
+        },
+        "switch_first15_all": {
+          "values": 37500,
+          "target_range_mean": 0.0006636845646426082,
+          "target_range_p95": 0.0021667032851837545,
+          "action_mse": 0.001491518341936171
+        },
+        "switch_first15_support": {
+          "values": 30000,
+          "target_range_mean": 0.0007715435931459069,
+          "target_range_p95": 0.002362724940758198,
+          "action_mse": 0.0014427604619413614
+        },
+        "switch_first15_thumb": {
+          "values": 7500,
+          "target_range_mean": 0.00023224846518132836,
+          "target_range_p95": 0.0010989729489665474,
+          "action_mse": 0.0016865500947460532
+        },
+        "arrival_first8_all": {
+          "values": 20580,
+          "target_range_mean": 0.0003891246160492301,
+          "target_range_p95": 0.001263470313278958,
+          "action_mse": 0.0004763246397487819
+        },
+        "arrival_first8_support": {
+          "values": 16464,
+          "target_range_mean": 0.0004277580010239035,
+          "target_range_p95": 0.0013472422957420346,
+          "action_mse": 0.0004621355910785496
+        },
+        "arrival_first8_thumb": {
+          "values": 4116,
+          "target_range_mean": 0.00023459098883904517,
+          "target_range_p95": 0.0008236888679675758,
+          "action_mse": 0.0005330810672603548
+        },
+        "holding_after9_all": {
+          "values": 306740,
+          "target_range_mean": 0.0003265012055635452,
+          "target_range_p95": 0.0009514612960629161,
+          "action_mse": 0.00035429070703685284
+        },
+        "holding_after9_support": {
+          "values": 245392,
+          "target_range_mean": 0.00036743623786605895,
+          "target_range_p95": 0.001006853330181911,
+          "action_mse": 0.00036982970777899027
+        },
+        "holding_after9_thumb": {
+          "values": 61348,
+          "target_range_mean": 0.0001627614110475406,
+          "target_range_p95": 0.0005763081600889557,
+          "action_mse": 0.0002921346458606422
+        }
+      }
+    },
+    {
+      "data": "runs/unified-policy-20260930/train-data-t2/source1",
+      "source": 1,
+      "seconds": 2.0,
+      "groups": {
+        "all_all": {
+          "values": 384000,
+          "target_range_mean": 0.00035654156818054616,
+          "target_range_p95": 0.0012128336820751429,
+          "action_mse": 0.00048419542144984007
+        },
+        "all_support": {
+          "values": 307200,
+          "target_range_mean": 0.0004022507928311825,
+          "target_range_p95": 0.0013111707288771866,
+          "action_mse": 0.0004898077459074557
+        },
+        "all_thumb": {
+          "values": 76800,
+          "target_range_mean": 0.00017370469868183136,
+          "target_range_p95": 0.000714524171780795,
+          "action_mse": 0.00046174609451554716
+        },
+        "switch_first15_all": {
+          "values": 96000,
+          "target_range_mean": 0.0005407016724348068,
+          "target_range_p95": 0.0017114527989178902,
+          "action_mse": 0.0009955771965906024
+        },
+        "switch_first15_support": {
+          "values": 76800,
+          "target_range_mean": 0.0006179252522997558,
+          "target_range_p95": 0.00180297504994087,
+          "action_mse": 0.0010087327100336552
+        },
+        "switch_first15_thumb": {
+          "values": 19200,
+          "target_range_mean": 0.00023180723655968904,
+          "target_range_p95": 0.0010380925203207867,
+          "action_mse": 0.0009429553174413741
+        },
+        "arrival_first8_all": {
+          "values": 51500,
+          "target_range_mean": 0.0003330758772790432,
+          "target_range_p95": 0.001080536819063127,
+          "action_mse": 0.0003667876007966697
+        },
+        "arrival_first8_support": {
+          "values": 41200,
+          "target_range_mean": 0.0003674566396512091,
+          "target_range_p95": 0.0011631826520897442,
+          "action_mse": 0.0003632701118476689
+        },
+        "arrival_first8_thumb": {
+          "values": 10300,
+          "target_range_mean": 0.00019555292965378612,
+          "target_range_p95": 0.0006730100169079378,
+          "action_mse": 0.0003808572073467076
+        },
+        "holding_after9_all": {
+          "values": 215320,
+          "target_range_mean": 0.00025965890381485224,
+          "target_range_p95": 0.0008358343038707972,
+          "action_mse": 0.00023413720191456378
+        },
+        "holding_after9_support": {
+          "values": 172256,
+          "target_range_mean": 0.0002896105288527906,
+          "target_range_p95": 0.0008953120413934812,
+          "action_mse": 0.00023370992857962847
+        },
+        "holding_after9_thumb": {
+          "values": 43064,
+          "target_range_mean": 0.0001398527092533186,
+          "target_range_p95": 0.0005266450229100882,
+          "action_mse": 0.0002358463389100507
+        }
+      }
+    },
+    {
+      "data": "runs/unified-policy-20260930/train-data-t5/source1",
+      "source": 1,
+      "seconds": 5.0,
+      "groups": {
+        "all_all": {
+          "values": 384000,
+          "target_range_mean": 0.00029571945196948946,
+          "target_range_p95": 0.0010591782163828609,
+          "action_mse": 0.0003379492263775319
+        },
+        "all_support": {
+          "values": 307200,
+          "target_range_mean": 0.000336919620167464,
+          "target_range_p95": 0.0011388748651370404,
+          "action_mse": 0.0003496813587844372
+        },
+        "all_thumb": {
+          "values": 76800,
+          "target_range_mean": 0.0001309188228333369,
+          "target_range_p95": 0.0005403163435403258,
+          "action_mse": 0.00029102087137289345
+        },
+        "switch_first15_all": {
+          "values": 38400,
+          "target_range_mean": 0.0006384306470863521,
+          "target_range_p95": 0.001976900757290423,
+          "action_mse": 0.0014178837882354856
+        },
+        "switch_first15_support": {
+          "values": 30720,
+          "target_range_mean": 0.00073322030948475,
+          "target_range_p95": 0.0020962520036846392,
+          "action_mse": 0.001441643456928432
+        },
+        "switch_first15_thumb": {
+          "values": 7680,
+          "target_range_mean": 0.0002592718810774386,
+          "target_range_p95": 0.0012399970844853667,
+          "action_mse": 0.0013228451134636998
+        },
+        "arrival_first8_all": {
+          "values": 20480,
+          "target_range_mean": 0.00034895329736173153,
+          "target_range_p95": 0.0011207166360691187,
+          "action_mse": 0.0004146668070461601
+        },
+        "arrival_first8_support": {
+          "values": 16384,
+          "target_range_mean": 0.0003899760195054114,
+          "target_range_p95": 0.0012003805546555667,
+          "action_mse": 0.0004298064741306007
+        },
+        "arrival_first8_thumb": {
+          "values": 4096,
+          "target_range_mean": 0.00018486227781977504,
+          "target_range_p95": 0.0007354449189733714,
+          "action_mse": 0.0003541082260198891
+        },
+        "holding_after9_all": {
+          "values": 321960,
+          "target_range_mean": 0.0002490974438842386,
+          "target_range_p95": 0.0008857159351464354,
+          "action_mse": 0.00019815564155578613
+        },
+        "holding_after9_support": {
+          "values": 257568,
+          "target_range_mean": 0.0002833497419487685,
+          "target_range_p95": 0.0009694141859654336,
+          "action_mse": 0.0002085741434711963
+        },
+        "holding_after9_thumb": {
+          "values": 64392,
+          "target_range_mean": 0.00011208832438569516,
+          "target_range_p95": 0.00044523467076942294,
+          "action_mse": 0.0001564817357575521
+        }
+      }
+    },
+    {
+      "data": "runs/unified-policy-20260930/train-data-t2/source2",
+      "source": 2,
+      "seconds": 2.0,
+      "groups": {
+        "all_all": {
+          "values": 384000,
+          "target_range_mean": 0.00037952259299345315,
+          "target_range_p95": 0.0012547530233860014,
+          "action_mse": 0.0004377970763016492
+        },
+        "all_support": {
+          "values": 307200,
+          "target_range_mean": 0.0004189015307929367,
+          "target_range_p95": 0.00135662339744158,
+          "action_mse": 0.0004050050920341164
+        },
+        "all_thumb": {
+          "values": 76800,
+          "target_range_mean": 0.00022200716193765402,
+          "target_range_p95": 0.0007889872998930517,
+          "action_mse": 0.000568965042475611
+        },
+        "switch_first15_all": {
+          "values": 96000,
+          "target_range_mean": 0.00044244725722819567,
+          "target_range_p95": 0.0014571402221918112,
+          "action_mse": 0.0006333596538752317
+        },
+        "switch_first15_support": {
+          "values": 76800,
+          "target_range_mean": 0.00048096655518747866,
+          "target_range_p95": 0.0015268917079083624,
+          "action_mse": 0.0005601283628493547
+        },
+        "switch_first15_thumb": {
+          "values": 19200,
+          "target_range_mean": 0.00028837003628723323,
+          "target_range_p95": 0.0010946047957986586,
+          "action_mse": 0.0009262842941097915
+        },
+        "arrival_first8_all": {
+          "values": 51240,
+          "target_range_mean": 0.00037842418532818556,
+          "target_range_p95": 0.0012679750623647117,
+          "action_mse": 0.00035360167385078967
+        },
+        "arrival_first8_support": {
+          "values": 40992,
+          "target_range_mean": 0.00042053204379044473,
+          "target_range_p95": 0.0013986541773192578,
+          "action_mse": 0.0003537683514878154
+        },
+        "arrival_first8_thumb": {
+          "values": 10248,
+          "target_range_mean": 0.00020999304251745343,
+          "target_range_p95": 0.0007409763667965306,
+          "action_mse": 0.0003529348177835345
+        },
+        "holding_after9_all": {
+          "values": 195880,
+          "target_range_mean": 0.00032504633418284357,
+          "target_range_p95": 0.001036658632801845,
+          "action_mse": 0.00031498997122980654
+        },
+        "holding_after9_support": {
+          "values": 156704,
+          "target_range_mean": 0.0003622523508965969,
+          "target_range_p95": 0.0011520490748807794,
+          "action_mse": 0.0002896914375014603
+        },
+        "holding_after9_thumb": {
+          "values": 39176,
+          "target_range_mean": 0.00017622229643166065,
+          "target_range_p95": 0.0006512223335448653,
+          "action_mse": 0.00041618425166234374
+        }
+      }
+    },
+    {
+      "data": "runs/unified-policy-20260930/train-data-t5/source2",
+      "source": 2,
+      "seconds": 5.0,
+      "groups": {
+        "all_all": {
+          "values": 384000,
+          "target_range_mean": 0.00032826338429003954,
+          "target_range_p95": 0.0010758745891507712,
+          "action_mse": 0.00034663494443520904
+        },
+        "all_support": {
+          "values": 307200,
+          "target_range_mean": 0.0003626624820753932,
+          "target_range_p95": 0.0011466782889328895,
+          "action_mse": 0.0003134370199404657
+        },
+        "all_thumb": {
+          "values": 76800,
+          "target_range_mean": 0.0001906670513562858,
+          "target_range_p95": 0.0006612261408008636,
+          "action_mse": 0.00047942629316821694
+        },
+        "switch_first15_all": {
+          "values": 38400,
+          "target_range_mean": 0.0005010783206671476,
+          "target_range_p95": 0.0016369278193451452,
+          "action_mse": 0.0008915122598409653
+        },
+        "switch_first15_support": {
+          "values": 30720,
+          "target_range_mean": 0.0005501418490894139,
+          "target_range_p95": 0.001677717687562108,
+          "action_mse": 0.0007750408258289099
+        },
+        "switch_first15_thumb": {
+          "values": 7680,
+          "target_range_mean": 0.0003048241196665913,
+          "target_range_p95": 0.0012072805198840753,
+          "action_mse": 0.0013573984615504742
+        },
+        "arrival_first8_all": {
+          "values": 20480,
+          "target_range_mean": 0.0003682156384456903,
+          "target_range_p95": 0.0012064528535120184,
+          "action_mse": 0.0003375562955625355
+        },
+        "arrival_first8_support": {
+          "values": 16384,
+          "target_range_mean": 0.00040336206438951194,
+          "target_range_p95": 0.0013064668688457454,
+          "action_mse": 0.00032973464112728834
+        },
+        "arrival_first8_thumb": {
+          "values": 4096,
+          "target_range_mean": 0.00022763002198189497,
+          "target_range_p95": 0.000731507854652591,
+          "action_mse": 0.00036884291330352426
+        },
+        "holding_after9_all": {
+          "values": 311160,
+          "target_range_mean": 0.0002952130453195423,
+          "target_range_p95": 0.0009489431569818404,
+          "action_mse": 0.0002610223018564284
+        },
+        "holding_after9_support": {
+          "values": 248928,
+          "target_range_mean": 0.0003274981281720102,
+          "target_range_p95": 0.0010176405950915069,
+          "action_mse": 0.00023676430282648653
+        },
+        "holding_after9_thumb": {
+          "values": 62232,
+          "target_range_mean": 0.00016607287398073822,
+          "target_range_p95": 0.0005797819525469093,
+          "action_mse": 0.00035805447259917855
+        }
+      }
+    },
+    {
+      "data": "runs/unified-policy-20260930/train-data-t2/source3",
+      "source": 3,
+      "seconds": 2.0,
+      "groups": {
+        "all_all": {
+          "values": 372160,
+          "target_range_mean": 0.003576970426365733,
+          "target_range_p95": 0.014733671816065906,
+          "action_mse": 0.12367994338274002
+        },
+        "all_support": {
+          "values": 297728,
+          "target_range_mean": 0.003941784612834454,
+          "target_range_p95": 0.01583963371813296,
+          "action_mse": 0.12725088000297546
+        },
+        "all_thumb": {
+          "values": 74432,
+          "target_range_mean": 0.00211771740578115,
+          "target_range_p95": 0.008746030367910862,
+          "action_mse": 0.10939610749483109
+        },
+        "switch_first15_all": {
+          "values": 93160,
+          "target_range_mean": 0.004845864605158567,
+          "target_range_p95": 0.01734764967113734,
+          "action_mse": 0.16747097671031952
+        },
+        "switch_first15_support": {
+          "values": 74528,
+          "target_range_mean": 0.005567460786551237,
+          "target_range_p95": 0.018811270594596845,
+          "action_mse": 0.1682538241147995
+        },
+        "switch_first15_thumb": {
+          "values": 18632,
+          "target_range_mean": 0.0019594791810959578,
+          "target_range_p95": 0.009382399544119837,
+          "action_mse": 0.16433967649936676
+        },
+        "arrival_first8_all": {
+          "values": 50060,
+          "target_range_mean": 0.004461811389774084,
+          "target_range_p95": 0.017083813808858372,
+          "action_mse": 0.1373821198940277
+        },
+        "arrival_first8_support": {
+          "values": 40048,
+          "target_range_mean": 0.004737833980470896,
+          "target_range_p95": 0.0180612406693399,
+          "action_mse": 0.1288003772497177
+        },
+        "arrival_first8_thumb": {
+          "values": 10012,
+          "target_range_mean": 0.0033577189315110445,
+          "target_range_p95": 0.013048812793567762,
+          "action_mse": 0.1717090606689453
+        },
+        "holding_after9_all": {
+          "values": 227080,
+          "target_range_mean": 0.0027988802175968885,
+          "target_range_p95": 0.012362031731754526,
+          "action_mse": 0.09563401341438293
+        },
+        "holding_after9_support": {
+          "values": 181664,
+          "target_range_mean": 0.0030118876602500677,
+          "target_range_p95": 0.013397961296141157,
+          "action_mse": 0.10454284399747849
+        },
+        "holding_after9_thumb": {
+          "values": 45416,
+          "target_range_mean": 0.0019468499813228846,
+          "target_range_p95": 0.007260118960402906,
+          "action_mse": 0.059998735785484314
+        }
+      }
+    },
+    {
+      "data": "runs/unified-policy-20260930/train-data-t5/source3",
+      "source": 3,
+      "seconds": 5.0,
+      "groups": {
+        "all_all": {
+          "values": 363400,
+          "target_range_mean": 0.0030040161218494177,
+          "target_range_p95": 0.012706155329942702,
+          "action_mse": 0.10227186977863312
+        },
+        "all_support": {
+          "values": 290720,
+          "target_range_mean": 0.003282365621998906,
+          "target_range_p95": 0.013683107774704691,
+          "action_mse": 0.11133347451686859
+        },
+        "all_thumb": {
+          "values": 72680,
+          "target_range_mean": 0.0018906196346506476,
+          "target_range_p95": 0.006449069874361159,
+          "action_mse": 0.06602545082569122
+        },
+        "switch_first15_all": {
+          "values": 36700,
+          "target_range_mean": 0.004887075629085302,
+          "target_range_p95": 0.017889593169093124,
+          "action_mse": 0.17682009935379028
+        },
+        "switch_first15_support": {
+          "values": 29360,
+          "target_range_mean": 0.005595853552222252,
+          "target_range_p95": 0.019532181415706857,
+          "action_mse": 0.1747657060623169
+        },
+        "switch_first15_thumb": {
+          "values": 7340,
+          "target_range_mean": 0.0020519616082310677,
+          "target_range_p95": 0.009949344769120213,
+          "action_mse": 0.185037761926651
+        },
+        "arrival_first8_all": {
+          "values": 21020,
+          "target_range_mean": 0.004515616688877344,
+          "target_range_p95": 0.01729135243222117,
+          "action_mse": 0.14043760299682617
+        },
+        "arrival_first8_support": {
+          "values": 16816,
+          "target_range_mean": 0.004797455854713917,
+          "target_range_p95": 0.018408954609185457,
+          "action_mse": 0.1289673000574112
+        },
+        "arrival_first8_thumb": {
+          "values": 4204,
+          "target_range_mean": 0.0033882574643939734,
+          "target_range_p95": 0.013173118839040395,
+          "action_mse": 0.18631884455680847
+        },
+        "holding_after9_all": {
+          "values": 305260,
+          "target_range_mean": 0.002658251905813813,
+          "target_range_p95": 0.011581778526306149,
+          "action_mse": 0.089583620429039
+        },
+        "holding_after9_support": {
+          "values": 244208,
+          "target_range_mean": 0.0028751848731189966,
+          "target_range_p95": 0.012561274226754904,
+          "action_mse": 0.10127031803131104
+        },
+        "holding_after9_thumb": {
+          "values": 61052,
+          "target_range_mean": 0.0017905216664075851,
+          "target_range_p95": 0.005849985429085789,
+          "action_mse": 0.04283684119582176
+        }
+      }
+    }
+  ],
+  "scope": "Heldout episode96..127, recurrent full history, one-step physical target conditioned on expert previous target; not closed-loop success; no cross-expert latent supervision"
+}

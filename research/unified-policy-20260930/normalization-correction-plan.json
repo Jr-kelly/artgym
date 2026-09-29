@@ -1,0 +1,44 @@
+{
+  "utc": "2026-09-29T17:15:10.630469+00:00",
+  "event": "C_second_baseline_completed_normalization_correction_frozen",
+  "evidence": [
+    "c-source3-seg1-analysis/report.json",
+    "receipts/mixed-input-diagnostic.json",
+    "dataset-audit.json"
+  ],
+  "baseline": {
+    "strict2": [
+      1,
+      1,
+      0,
+      27
+    ],
+    "strict5": [
+      0,
+      0,
+      0,
+      30
+    ],
+    "body2": [
+      14,
+      15,
+      2,
+      32
+    ],
+    "body5": [
+      20,
+      18,
+      0,
+      32
+    ],
+    "n": 32,
+    "epoch": 100
+  },
+  "hypothesis": "Source3 normalizer clips 31.5-40.6 percent of old-source first30-step components, compressing useful input variation. Broader historical normalization with affine first-layer compensation may make joint fitting easier.",
+  "only_change": "Source3 original policy normalization rebased to historical expert stats; actor/critic encoder first layers and input LSTM weights/biases compensated. Same seed/data/lr1e-5/800updates/CP50and100. No third expert initialization, routing, capacity or reward change.",
+  "method_modification": 1,
+  "pilot_budget": "100epochs800updates, at most2400s training plus bounded matched-dev evaluations; normally under1min training",
+  "stop": "Evaluate after50and100; no extension if two equal segments worst-cell gains each below5pp without new evidence. If native source3 body drops >5pp diagnose and stop expansion. No DAgger while fit remains poor.",
+  "normalization_init_sha256": "1bf7d828ea4193546f1b66cb97704d4c613657079d5105027fa6261720803d97",
+  "next": "Run bounded normalization pilot, compare pre-change source3 baseline and native function preservation diagnostics; at most one further evidence-based modification."
+}
