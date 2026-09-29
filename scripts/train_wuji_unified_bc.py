@@ -11,7 +11,7 @@ import torch
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def main():
  p=argparse.ArgumentParser();p.add_argument('--init',type=Path,required=True);p.add_argument('--data',type=Path,nargs='+',required=True);p.add_argument('--output',type=Path,required=True)
- p.add_argument('--epochs',type=int,default=100);p.add_argument('--save-every',type=int,default=25);p.add_argument('--seed',type=int,default=2026093001);p.add_argument('--lr',type=float,default=1e-4);p.add_argument('--perturb',type=float,default=0);p.add_argument('--batch',type=int,default=96);p.add_argument('--segment',type=int,default=100);p.add_argument('--max-seconds',type=int,default=3600);a=p.parse_args()
+ p.add_argument('--limit',type=int,default=0);p.add_argument('--epochs',type=int,default=100);p.add_argument('--save-every',type=int,default=25);p.add_argument('--seed',type=int,default=2026093001);p.add_argument('--lr',type=float,default=1e-4);p.add_argument('--perturb',type=float,default=0);p.add_argument('--batch',type=int,default=96);p.add_argument('--segment',type=int,default=100);p.add_argument('--max-seconds',type=int,default=3600);a=p.parse_args()
  a.output.mkdir(parents=True,exist_ok=False);torch.manual_seed(a.seed);np.random.seed(a.seed);started=time.monotonic()
  cfg=configuration('wuji_multigrasp',1,['object=knife_wuji_bridge3_20260922','hand=wuji_paper_official_actuator'],train='wujiAcquisitionSAPG',seed=a.seed)
  player=build_policy_player(cfg,preprocess_train_config(cfg,OmegaConf.to_container(cfg.train,resolve=True)),a.init,_infer_expl_num_blocks(a.init),0);model=player.model;model.eval()
@@ -26,12 +26,14 @@ def main():
  data=[];man=[]
  for directory in a.data:
   with np.load(directory/'sequences.npz') as z:d={k:torch.as_tensor(z[k],device=player.device) for k in z.files}
+  if a.limit:d={k:v[:,:a.limit] for k,v in d.items()}
   info=json.loads((directory/'interface.json').read_text());report=json.loads((directory/'report.json').read_text())
   assert d['obs'].shape[0]==600 and d['obs'].shape[1]>=4
   d['lower']=torch.tensor(info['joint_lower'],device=player.device);d['upper']=torch.tensor(info['joint_upper'],device=player.device)
   d['period']=report['protocol']['stage_steps']
   with np.load(directory/'trace.npz') as trace:
    reached=np.abs(trace['slider']-trace['goal'])<.002
+   if a.limit:reached=reached[:,:a.limit]
   phase=np.zeros(reached.shape,dtype=np.int64);streak=np.zeros(reached.shape[1],dtype=np.int64)
   for step in range(600):
    if step%d['period']==0:streak[:]=0
@@ -56,6 +58,7 @@ def main():
   state.pop('optimizer',None);state['training_kind']='offline_sequence_BC_not_resumed_PPO'
   torch.save(state,a.output/f'epoch_{epoch:06d}.pth')
  def pass_data(d,ids,train):
+  model.train(train);model.running_mean_std.eval();model.value_mean_std.eval()
   n=len(ids);states=[torch.zeros((x.shape[0],n,x.shape[2]),device=player.device) for x in model.get_default_rnn_state()]
   errors=[];target_errors=[];loss_sum=0.
   if train:opt.zero_grad(set_to_none=True)
@@ -80,7 +83,8 @@ def main():
  def validate(epoch):
   with torch.no_grad():
    metrics=[pass_data(d,torch.arange(int(d['obs'].shape[1]*.75),d['obs'].shape[1],device=player.device),False) for d in data]
-  row=dict(epoch=epoch,updates=updates,wall_seconds=time.monotonic()-started,validation=metrics)
+   train_metrics=[pass_data(d,torch.arange(min(8,int(d['obs'].shape[1]*.75)),device=player.device),False) for d in data]
+  row=dict(epoch=epoch,updates=updates,wall_seconds=time.monotonic()-started,validation=metrics,training_probe=train_metrics)
   with (a.output/'metrics.jsonl').open('a') as f:f.write(json.dumps(row)+'\n')
   print(json.dumps(row),flush=True)
  save(0);validate(0)

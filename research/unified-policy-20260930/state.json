@@ -7,7 +7,7 @@
   "max_concurrent_gpus": 2,
   "start_commit": "16ae5d894542cb8fa0cdda6cba7fc5d270842fae",
   "branch": "feat/wuji-unified-policy-20260930",
-  "stage": "A",
+  "stage": "A_G0_running",
   "goal_sha256": "9ae6022a34e95376a08012289c4298e37d990382dac87f88aa3b263062314559",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
   "resource_observation_utc": "2026-09-29T15:58:05Z",
@@ -19,5 +19,20 @@
     "final128": 2026093004,
     "train_replication": 2026093005
   },
-  "next": "audit interfaces and G0 closed loop; no jobs started"
+  "next": "Check G0 per-source regression; B remains conditional; static and two experts each128env per protocol",
+  "remote_root": "/tmp/artgym-unified-policy-20260930",
+  "runtime": "/tmp/wuji-unified-runtime/bin/python",
+  "active_jobs": [
+    {
+      "name": "g0-t2-job",
+      "pid": 1402,
+      "gpu": 0
+    },
+    {
+      "name": "g0-t5-job",
+      "pid": 1403,
+      "gpu": 1
+    }
+  ],
+  "last_observed_utc": "2026-09-29T16:14:39.990819+00:00"
 }

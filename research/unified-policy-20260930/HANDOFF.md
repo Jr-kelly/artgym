@@ -1,5 +1,4 @@
-# 最新2026-09-29T16:09UTC：统一Goal阶段A
-远端NAS Python读取阻塞，现迁移到/tmp/wuji-unified-runtime和/tmp/artgym-unified-policy-20260930，传输session86929/17818。旧NAS测试PID758核验命令后终止。原本地worktree不变，原生Goal active。只有本地4初态collector预检PID965048/965056（带300s超时，session96475），不是G0，接手续查。下一步本地盘runtime→H200 G0。
+# 最新统一Goal 2026-09-29T16:14UTC
 
-
-16:12UTC correction: NAS smoke758 exited0 before stop command; no process killed. Local collector preflight finished, GPU step replay exact. Batched differences retained. No active localGPU jobs. Remote /tmp runtime transfer86929 pending.
+原生Goal active，阶段A G0已启动。worktree `/data/research/artgym-experiments-20260921/unified-policy-20260930`，GitHub分支feat/wuji-unified-policy-20260930已核验a6a2e5d。截止09-30 07:56:50UTC，训练截止06:26:50UTC，24GPUh/22训练GPUh/同时2卡。授权主机10.13.160.5:33024，SSH key /home/agiuser/.ssh/id_ed25519_h200。**新远端运行路径 `/tmp/artgym-unified-policy-20260930`，python `/tmp/wuji-unified-runtime/bin/python`**；NAS/home副本读取很慢，已保留但不用于实验。
+16:13:58UTC G0 wrapper PID1402 GPU0固定2s、1403 GPU1固定5s，超时2800s；接手重查。每协议同128env=4source×32的static/historical/source3。原始结果在runs/unified-policy-20260930/g0-t2,g0-t5。代码未改物理/评分，collect额外采集obs/mean/executed/pre-post target/done。本地4env预检完成，逐步GPU重放mu完全一致；100step batched数值误差8.57e-4保留，不是闭环结果。没有B训练、没有最终测试打开。下一步读取G0独立复算逐来源并判门，再收集train每source128×两协议，先小数据及单专家BC。训练脚本已有但未执行，勿冒充验证。阶段文档research/unified-policy-20260930/state.json/DECISIONS.jsonl为准。

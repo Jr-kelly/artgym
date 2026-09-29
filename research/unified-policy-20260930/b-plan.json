@@ -1,0 +1,45 @@
+{
+  "recorded_utc": "2026-09-29T16:16:36.291296+00:00",
+  "trigger": "Only after G0 passes; no B jobs launched yet",
+  "collection": {
+    "trajectories_per_source_protocol": 128,
+    "sources": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "protocols": [
+      2,
+      5
+    ],
+    "fit_episodes_per_file": 96,
+    "validation_episodes_per_file": 32,
+    "action_mode": "deterministic clipped mean",
+    "failed_trajectories": "Retained; fit valid active steps, no initial-state outcome filtering",
+    "expert_assignment": {
+      "0": "historical",
+      "1": "historical",
+      "2": "historical",
+      "3": "source3"
+    }
+  },
+  "pilot": {
+    "limit_trajectories_per_file": 4,
+    "epochs": 20,
+    "perturbation": "Gaussian 2% of per-parameter std with1e-3std floor on actor+encoder",
+    "lr": 0.0001,
+    "stop": "If fitting fails, inspect alignment/normalization/context before expanding"
+  },
+  "single_expert": {
+    "initialization": "Own verified expert+same2% perturbation, saved epoch0 and own frozen normalizer",
+    "initial_epochs": 100,
+    "check_every": 25,
+    "segment_steps": 100,
+    "optimizer_step": "After complete600step batch, hidden state detached only at segment boundaries",
+    "selection": "Development only; G1 sourcewise strict gap<=10pp/body gap<=3pp",
+    "budget": "Confirm actual pilot throughput before locking full epochs; no large training before gate"
+  },
+  "normalization": "One inherited frozen normalizer per candidate; experts each retain their own; no cross-expert latent MSE",
+  "unified": "ConditionalG1; source-balanced trajectory files and balanced open/close x movement/arrival/holding labels; historical init first"
+}
