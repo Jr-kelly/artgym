@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111715"><meta name="description" content="Wuji 灵巧手美工刀操作实验：从不同手内抓姿出发，观察滑块反复伸缩与保持。真实策略仿真视频及冻结评估。">
+<title>Wuji / 手内操作观察室</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar"><a class="brand" href="#"><span class="brand-icon">W</span> WUJI <span class="brand-sub">/ 运动观察室</span></a><a class="report-link" href="https://github.com/Jr-kelly/artgym/blob/feat/wuji-hold-controlled-20260929/research/hold-20260929/README.md" target="_blank" rel="noopener">实验报告 <span>↗</span></a></header>
+<main>
+<section class="intro"><div><p class="eyebrow"><span></span> DEXTEROUS MANIPULATION · 2026.09</p><h1>抓稳。伸出。收回。</h1><p class="lead">从不同手内抓姿出发，观察 Wuji 反复操作美工刀滑块。</p></div><div class="scope"><span class="scope-dot"></span><div>真实策略 · 仿真演示<small>从已抓持状态开始，不含取刀过程</small></div></div></section>
+<section class="workspace" aria-label="视频观察室">
+<div class="viewer">
+<div class="viewer-top"><span id="sceneLabel">01 / 新增抓姿 · 源3</span><span class="live-tag">RECORDED SIMULATION</span></div>
+<div class="screen"><video id="player" controls playsInline preload="metadata" loop muted poster="media/source3.jpg" aria-label="源3滑块反复伸缩视频"><source src="media/source3.mp4" type="video/mp4"></video><div class="video-error" id="videoError" hidden>视频暂时无法加载，可点击下方「打开原视频」。</div></div>
+<div class="toolbar"><div class="tool-group"><button id="replay" title="从头播放">↺ <span>重新播放</span></button><label class="speed-label">速度 <select id="speed" aria-label="播放速度"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label><button id="loop" aria-pressed="true" class="active">循环 开</button></div><a id="download" href="media/source3.mp4" target="_blank" rel="noopener">打开原视频 ↗</a></div>
+<div class="caption" aria-live="polite"><div class="caption-heading"><h2 id="videoTitle">源3：伸缩后稳定保持</h2><span id="badge" class="badge success">本段成功</span></div><p id="description">每5秒切换伸出与收回。改进后的策略完成两个完整周期，并在阶段末保持滑块到位。</p><div id="layoutNote" class="layout-note">20秒 · 2个完整伸缩周期 · 单抓姿专家策略</div></div>
+</div>
+<aside class="library"><div class="library-heading"><h2>选择观察场景</h2><span>04 / 位置与策略</span></div><div id="sceneList" class="scene-list"></div><div class="library-foot"><span>观察提示</span><p>先看滑块是否到位，再看能否保持；同时注意刀身是否翻转或脱落。</p></div></aside>
+</section>
+<section class="evidence"><div class="section-heading"><div><p class="eyebrow">BEYOND THE VIDEO</p><h2>演示之外，完整评估怎么看？</h2></div><span>严格成功 · 固定20秒</span></div><div class="metric-grid"><article class="metric"><span class="metric-label">源3 · 第一续训种子</span><div class="metric-value"><span>47.66<small>%</small></span><b>→</b>89.45<small>%</small></div><p>原奖励续训 → 持续定位奖励改动</p></article><article class="metric"><span class="metric-label">源3 · 第二续训种子</span><div class="metric-value"><span>24.61<small>%</small></span><b>→</b>92.97<small>%</small></div><p>同一父专家和测试集，改变续训随机种子</p></article><article class="metric unresolved"><span class="metric-label">统一策略 · 仍未完成</span><div class="metric-statement">源3稳定，原抓姿失稳</div><p>原0/1/2严格均0/128；源3为118/128、124/128。</p></article></div><p class="method">成功率为2秒与5秒命令协议的等权均值，每协议128个扰动初态。要求每阶段末0.3秒误差小于2mm，并全程保持刀身稳定。代表视频是单独重仿真，不替代冻结评估；现有成功表现依赖不同策略，尚未实现统一策略覆盖所有抓姿。</p></section>
+<footer><span>WUJI / ArtGym <span class="footer-dot">·</span> 已训练抓姿邻域的仿真验证，非真机结果</span><a href="https://github.com/Jr-kelly/artgym/releases/tag/wuji-hold-20260929-v1" target="_blank" rel="noopener">全部视频与实验记录 ↗</a></footer>
+</main><script src="app.js"></script></body></html>

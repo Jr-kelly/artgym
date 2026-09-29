@@ -1655,3 +1655,8 @@ Release wuji-hold-20260929-v1已正式发布，30资产服务器SHA逐项匹配�
 
 本轮有界实验交付完成：GitHub API确认分支3c2a0e992cdfee624fab75841b7eb652884d72fc，Release正式公开30资产/8视频下载SHA核验，无剩余计算或交付任务。行为目标部分达成，不宣称源11或统一策略已解决；本次只提交此收尾续接记录。
 证据：research/hold-20260929/final-delivery.json, research/hold-20260929/receipts/final-release-verified.json。下一步：本轮结束；若继续新实验，唯一优先源11到位后保持与非拇指支撑协同。
+
+## 2026-09-29T15:06:05.201924+00:00 video_website_ready
+
+应用户要求制作Wuji视频展示网站，docs/wuji-demo包含4原始MP4及SHA、预览、播放/倍速/循环/场景切换/手机布局，区分成功、失败、历史策略和冻结指标。Chromium实际4视频播放和交互通过，桌面/手机截图已检查。无训练或开发机GPU占用。计划独立wuji-demo-site分支部署GitHub Pages；仓库此前has_pages=false。
+证据：docs/wuji-demo/index.html, docs/wuji-demo/media-manifest.json, docs/wuji-demo/README.md。下一步：发布独立网站分支，检查公网网页和视频播放，给用户直接访问地址。

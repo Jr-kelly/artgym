@@ -1,0 +1,16 @@
+'use strict';
+const scenes = [
+ {id:'source3',label:'01 / 新增抓姿 · 源3',name:'源3 · 伸缩并保持',short:'单抓姿专家 / 本轮改进',status:'本段成功',kind:'success',title:'源3：伸缩后稳定保持',description:'每5秒切换伸出与收回。改进后的策略完成两个完整周期，并在阶段末保持滑块到位。',note:'20秒 · 2个完整伸缩周期 · 单抓姿专家策略'},
+ {id:'original',label:'02 / 原有抓姿 · 历史策略',name:'原有3种抓姿',short:'历史策略 / 多画面对比',status:'历史演示',kind:'reference',title:'原有抓姿：历史策略的伸缩演示',description:'并排观察原有三种相近抓姿的滑块操作。使用保留的历史策略，和源3改进专家不是同一个策略。',note:'原有3条抓姿记录代表2个近邻构型簇，不等于3种独立形态'},
+ {id:'shared',label:'03 / 四抓姿 · 共享策略',name:'同一策略 · 4种抓姿',short:'原0/1/2 + 源3 / 整合对比',status:'仅源3成功',kind:'caution',title:'共享策略：源3稳定，原抓姿失稳',description:'同一个策略从四个初态开始操作。本段只有源3完成严格伸缩保持，原0/1/2出现失稳；统一策略整合尚未成功。',note:'20秒 · 上排从左到右为原0 / 1 / 2，下排左侧为源3'},
+ {id:'source11',label:'04 / 新增抓姿 · 源11',name:'源11 · 保持失败',short:'单抓姿专家 / 失败观察',status:'到位后回缩',kind:'caution',title:'源11：能够到位，但保持不住',description:'观察滑块到达伸出位置后的回缩。提高持续定位奖励未解决这个抓姿的保持问题，本段未达到严格成功标准。',note:'20秒 · 每5秒切换命令 · 保留真实失败表现'}
+];
+const player=document.querySelector('#player'),list=document.querySelector('#sceneList');
+for(const s of scenes){const button=document.createElement('button');button.className='scene';button.dataset.id=s.id;button.setAttribute('aria-pressed',String(s.id==='source3'));button.innerHTML=`<div class="thumb"><img src="media/${s.id}.jpg" alt="${s.name}的仿真画面"><span>▶</span></div><div><span class="scene-name">${s.name}</span><span class="scene-desc">${s.short}</span><span class="scene-status ${s.kind}">${s.status}</span></div>`;button.addEventListener('click',()=>selectScene(s,true));list.append(button);}
+function selectScene(s,play){player.pause();player.poster=`media/${s.id}.jpg`;player.src=`media/${s.id}.mp4`;player.setAttribute('aria-label',s.title);player.load();player.playbackRate=Number(document.querySelector('#speed').value);document.querySelector('#videoError').hidden=true;document.querySelector('#sceneLabel').textContent=s.label;document.querySelector('#videoTitle').textContent=s.title;document.querySelector('#description').textContent=s.description;document.querySelector('#layoutNote').textContent=s.note;const badge=document.querySelector('#badge');badge.textContent=s.status;badge.className=`badge ${s.kind}`;document.querySelector('#download').href=`media/${s.id}.mp4`;for(const b of list.children)b.setAttribute('aria-pressed',String(b.dataset.id===s.id));history.replaceState(null,'',`#${s.id}`);if(play)player.play().catch(()=>{});}
+player.addEventListener('error',()=>{document.querySelector('#videoError').hidden=false;});
+document.querySelector('#speed').addEventListener('change',e=>{player.playbackRate=Number(e.target.value);});
+document.querySelector('#replay').addEventListener('click',()=>{player.currentTime=0;player.play().catch(()=>{});});
+document.querySelector('#loop').addEventListener('click',e=>{player.loop=!player.loop;e.currentTarget.setAttribute('aria-pressed',String(player.loop));e.currentTarget.textContent=`循环 ${player.loop?'开':'关'}`;e.currentTarget.classList.toggle('active',player.loop);});
+const initial=scenes.find(s=>s.id===location.hash.slice(1));if(initial)selectScene(initial,false);
+window.addEventListener('hashchange',()=>{const s=scenes.find(s=>s.id===location.hash.slice(1));if(s)selectScene(s,false);});
