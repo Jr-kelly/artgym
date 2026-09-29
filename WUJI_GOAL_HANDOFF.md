@@ -26,6 +26,10 @@
 下一步：提交/push核心成果与后续配置；监测后续吞吐、里程碑备份和冻结评估，完成后独立复算；补共享策略代表视频、复验/整合权重原始证据与最终报告/交接，发布Release并核验push。源11依然未解决，最终唯一优先事项须按后续结果决定。不要把当前中间交付当Goal完成。
 
 最新 2026-09-29T11:02:26.832940+00:00：后续运行{'hold_r3_dense1_seed2902': 1157, 'hold_r3_original_seed2902': 1156, 'hold_integrate_shared_seed2903': 2149, 'hold_integrate_singleton_seed2903': 2158}。最新已push791a6ca。源11本机脚本拇指目标固定机制诊断已完成并独立逐步复算：原策略2/5严格各1/128，干预36/128、59/128，但body125/122降92/87，不能当学习策略成功或直接修复。analysis-thumb-latch/及Release raw已保存，本机诊断结束。不再附加训练。整合最终四源视频预定行0/128/256/384，等待器本地session29611，日志render-integration.log；其它后续队列照旧。
+
+最新 2026-09-29T12:20:57.375956+00:00：后续{'hold_r3_dense1_seed2902': 1557, 'hold_r3_original_seed2902': 1555, 'hold_integrate_shared_seed2903': 2535, 'hold_integrate_singleton_seed2903': 2562}。后续8个半程权重已核验（复验1250/1500、整合2250/2500），所有轮次累计24正式CP保存。最新push eed1057。训练/评估等待/收集/视频队列保持原样，尚无后续冻结结果。
+
+最新 2026-09-29T13:25:32.496390+00:00：后续{'hold_r3_dense1_seed2902': 1881, 'hold_r3_original_seed2902': 1879, 'hold_integrate_shared_seed2903': 2853, 'hold_integrate_singleton_seed2903': 2889}，全部12个后续1250/1500/1750和2250/2500/2750权重已核验，累计28正式CP。预计训练13:45–13:55UTC完，最终评估+交付仍余量充分。源11机制结论保持原样，无附加训练。所有后续eval/collect/archive/video等待器ID见当前文档，接手重查不重复。
 <!-- HOLD_CURRENT_END -->
 
 # Wuji端点保持受控实验续接
@@ -322,3 +326,63 @@ hold_integrate_shared_seed2903:2250 remote/local SHA and CPU integrity passed; 8
 
 后续复验两组CP1250、整合两组CP2250全部远端/本地SHA、CPU轮数/交互/有限性/优化器核验通过，仍固定各新增1000轮终点。源11脚本机制诊断已完整交付，无附加训练。
 证据：research/hold-20260929/receipts/backup-replication.json, research/hold-20260929/receipts/backup-integration.json。下一步：继续到复验CP1500/整合CP2500，再完成最终冻结评估和交付。
+
+## 2026-09-29T12:09:04.485610+00:00 checkpoint_backed_up
+
+hold_integrate_singleton_seed2903:2500 remote/local SHA and CPU integrity passed; 9359cf3c9745d37f20bced5920514670c5ba83fd4bc190f549f9b9e7a2a9f3f4
+证据：research/hold-20260929/receipts/backup-integration.json。下一步：Continue bounded training and frozen evaluations。
+
+## 2026-09-29T12:09:46.033545+00:00 checkpoint_backed_up
+
+hold_r3_dense1_seed2902:1500 remote/local SHA and CPU integrity passed; 2376d96455f811d67d9e3c7f5d75e6ee7b24befd17d0bc2c08c35a372603c87a
+证据：research/hold-20260929/receipts/backup-replication.json。下一步：Continue bounded training and frozen evaluations。
+
+## 2026-09-29T12:10:35.948193+00:00 checkpoint_backed_up
+
+hold_r3_original_seed2902:1500 remote/local SHA and CPU integrity passed; b299130a2898c6b61c93d41f71e86546357e57aae1994a79c30d18f66ec0435c
+证据：research/hold-20260929/receipts/backup-replication.json。下一步：Continue bounded training and frozen evaluations。
+
+## 2026-09-29T12:14:30.812360+00:00 checkpoint_backed_up
+
+hold_integrate_shared_seed2903:2500 remote/local SHA and CPU integrity passed; 0170f41adce2cbc9c182d0f602688000789464f544dbb6882c132d0885d8e51a
+证据：research/hold-20260929/receipts/backup-integration.json。下一步：Continue bounded training and frozen evaluations。
+
+## 2026-09-29T12:15:43.670073+00:00 followup_midbudget_verified
+
+后续复验CP1250/1500及整合CP2250/2500共8权重均SHA和CPU完整性核验通过，四任务已过新增预算半程。固定终点复验2000/整合3000，等待器/采集器保持运行。
+证据：research/hold-20260929/receipts/backup-replication.json, research/hold-20260929/receipts/backup-integration.json。下一步：完成后半程训练、冻结评估和视频，最终只报告实测整合结果。
+
+## 2026-09-29T12:58:25.044448+00:00 checkpoint_backed_up
+
+hold_integrate_singleton_seed2903:2750 remote/local SHA and CPU integrity passed; d7092f38ca7e39b2174d6e533163e6ef501ba595b9fcd939a6ba37d7c73ecdcb
+证据：research/hold-20260929/receipts/backup-integration.json。下一步：Continue bounded training and frozen evaluations。
+
+## 2026-09-29T12:59:52.812801+00:00 checkpoint_backed_up
+
+hold_r3_original_seed2902:1750 remote/local SHA and CPU integrity passed; 953fdadb3803a220d4d1833883e0b72a2ec591fa5ca9984666f5ae69269f3755
+证据：research/hold-20260929/receipts/backup-replication.json。下一步：Continue bounded training and frozen evaluations。
+
+## 2026-09-29T13:00:01.786376+00:00 checkpoint_backed_up
+
+hold_r3_dense1_seed2902:1750 remote/local SHA and CPU integrity passed; 0ad136492e49ecf104af0e2a5f25f1c0eb38ceb9d50cf421a9ec02018d94557e
+证据：research/hold-20260929/receipts/backup-replication.json。下一步：Continue bounded training and frozen evaluations。
+
+## 2026-09-29T13:04:43.901655+00:00 checkpoint_backed_up
+
+hold_integrate_shared_seed2903:2750 remote/local SHA and CPU integrity passed; c9cc71115b2a60faa276a917ea147aa2dd6b5e8ddc8d7acbc946ebb523a8190e
+证据：research/hold-20260929/receipts/backup-integration.json。下一步：Continue bounded training and frozen evaluations。
+
+## 2026-09-29T13:09:04.253030+00:00 followup_three_quarter_checkpoints_verified
+
+后续复验三保存点及整合三保存点共12权重全部SHA/CPU完整性核验通过；13:07UTC剩训练约38–45分钟，预计13:45–13:53UTC结束，评估后北京时间22:15–22:45释放估计保持。
+证据：research/hold-20260929/receipts/backup-replication.json, research/hold-20260929/receipts/backup-integration.json, research/hold-20260929/receipts/monitor-latest.json。下一步：完成最终权重，核查冻结评估接续；留足报告视频发布时间。
+
+## 2026-09-29T13:28:24.280808+00:00 followup_live_revalidated
+
+13:27UTC重新实查四组训练仍运行，追加进度86–90%，四H100瞬时76–91%；预计13:47–13:54训练完成，后续冻结评估预计14:15–14:45释放。未重启实验，不追加训练。离线权重索引增加显式published开关，训练源码未动。
+证据：research/hold-20260929/receipts/monitor-latest.json, scripts/index_wuji_hold_weights.py。下一步：完成既有训练、冻结评估、独立复算和交付，实查空闲后告知用户释放。
+
+## 2026-09-29T13:39:17.351183+00:00 followup_delivery_tools_ready
+
+新增离线汇总scripts.summarize_wuji_hold_followup（仅在两份独立复算均完成后运行）与scripts.package_wuji_hold_integration_video（渲染队列完成后运行）；逐源50%门槛、复验差值、物理回合去重及视频原始manifest均显式保存。未修改在训源码。13:39UTC训练继续，暂无后续冻结结果。
+证据：scripts/summarize_wuji_hold_followup.py, scripts/package_wuji_hold_integration_video.py, research/hold-20260929/receipts/resource-1329.json。下一步：训练结束核验CP2000/3000，完成既有队列后运行离线汇总、视频打包和发布。

@@ -1,4 +1,5 @@
 """Build a portable checkpoint index from verified backups and immutable releases."""
+import argparse
 import datetime
 import json
 from pathlib import Path
@@ -7,6 +8,9 @@ ROOT=Path(__file__).resolve().parents[1]
 
 
 def main():
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--published',action='store_true',help='Use only after confirming the GitHub release is published')
+    args=parser.parse_args()
     research=ROOT/'research/hold-20260929';receipts=research/'receipts';assets={}
     for path in receipts.glob('release-*.json'):
         try:items=json.loads(path.read_text())
@@ -23,7 +27,7 @@ def main():
             if 'integrate_' in name:role='shared pool continuation' if 'shared' in name else 'singleton consolidation control'
             entries.append(dict(**item,role=role,archive=asset,
                 release_url='https://github.com/Jr-kelly/artgym/releases/download/wuji-hold-20260929-v1/'+asset['name'] if asset else None,
-                release_status='draft until final delivery; URL resolves only after publication',
+                release_status='published' if args.published else 'draft until final delivery; URL resolves only after publication',
                 restore='python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz'))
     parents=json.loads((receipts/'parent-weights.json').read_text())
     result=dict(updated_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),parents=parents,

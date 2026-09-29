@@ -1,0 +1,201 @@
+{
+  "as_of_utc": "2026-09-29T13:29:40.547476+00:00",
+  "latest_four_hours": {
+    "requested_seconds": 14400.0,
+    "covered_seconds": 14400.0,
+    "coverage_pct": 100.0,
+    "observed_time_weighted_utilization_pct": 79.23209886818297,
+    "lower_bound_if_missing_samples_idle_pct": 79.23209886818297
+  },
+  "full_observed_interval": {
+    "requested_seconds": 24625.185485124588,
+    "covered_seconds": 24625.185485124588,
+    "coverage_pct": 100.0,
+    "observed_time_weighted_utilization_pct": 82.32541798726434,
+    "lower_bound_if_missing_samples_idle_pct": 82.32541798726434
+  },
+  "jobs": [
+    {
+      "name": "preflight_r11_dense1",
+      "status": "completed",
+      "gpu": 3,
+      "started": "2026-09-29T06:37:41.065420+00:00",
+      "finished": "2026-09-29T06:40:02.871836+00:00",
+      "allocation_hours": 0.03939067112074958,
+      "measured": {
+        "requested_seconds": 141.8064160346985,
+        "covered_seconds": 47.50984501838684,
+        "coverage_pct": 33.50331130769266,
+        "observed_time_weighted_utilization_pct": 97.0,
+        "lower_bound_if_missing_samples_idle_pct": 32.49821196846188
+      }
+    },
+    {
+      "name": "preflight_r11_original",
+      "status": "completed",
+      "gpu": 2,
+      "started": "2026-09-29T06:37:41.067585+00:00",
+      "finished": "2026-09-29T06:40:02.881252+00:00",
+      "allocation_hours": 0.039392685294151304,
+      "measured": {
+        "requested_seconds": 141.8136670589447,
+        "covered_seconds": 47.51926112174988,
+        "coverage_pct": 33.508238033220415,
+        "observed_time_weighted_utilization_pct": 93.3000968986905,
+        "lower_bound_if_missing_samples_idle_pct": 31.26321855403851
+      }
+    },
+    {
+      "name": "hold_r3_original_seed2901",
+      "status": "completed",
+      "gpu": 0,
+      "started": "2026-09-29T06:40:16.771695+00:00",
+      "finished": "2026-09-29T09:56:10.876209+00:00",
+      "allocation_hours": 3.265029031700558,
+      "measured": {
+        "requested_seconds": 11754.10451412201,
+        "covered_seconds": 11754.10451412201,
+        "coverage_pct": 100.0,
+        "observed_time_weighted_utilization_pct": 86.74228581002934,
+        "lower_bound_if_missing_samples_idle_pct": 86.74228581002934
+      }
+    },
+    {
+      "name": "hold_r3_dense1_seed2902",
+      "status": "running",
+      "gpu": 1,
+      "started": "2026-09-29T10:32:10.391925+00:00",
+      "finished": null,
+      "allocation_hours": 2.9583765419324237,
+      "measured": {
+        "requested_seconds": 10650.155550956726,
+        "covered_seconds": 10650.155550956726,
+        "coverage_pct": 100.0,
+        "observed_time_weighted_utilization_pct": 85.67472615910833,
+        "lower_bound_if_missing_samples_idle_pct": 85.67472615910833
+      }
+    },
+    {
+      "name": "hold_r11_dense1_seed2901",
+      "status": "completed",
+      "gpu": 3,
+      "started": "2026-09-29T06:40:16.828262+00:00",
+      "finished": "2026-09-29T09:50:27.853085+00:00",
+      "allocation_hours": 3.169729117486212,
+      "measured": {
+        "requested_seconds": 11411.024822950363,
+        "covered_seconds": 11411.024822950363,
+        "coverage_pct": 100.0,
+        "observed_time_weighted_utilization_pct": 88.15311532407522,
+        "lower_bound_if_missing_samples_idle_pct": 88.15311532407522
+      }
+    },
+    {
+      "name": "hold_r3_original_seed2902",
+      "status": "running",
+      "gpu": 0,
+      "started": "2026-09-29T10:32:10.396859+00:00",
+      "finished": null,
+      "allocation_hours": 2.9583751714229582,
+      "measured": {
+        "requested_seconds": 10650.15061712265,
+        "covered_seconds": 10650.15061712265,
+        "coverage_pct": 100.0,
+        "observed_time_weighted_utilization_pct": 87.01668772361197,
+        "lower_bound_if_missing_samples_idle_pct": 87.01668772361197
+      }
+    },
+    {
+      "name": "hold_integrate_shared_seed2903",
+      "status": "running",
+      "gpu": 3,
+      "started": "2026-09-29T10:32:10.447214+00:00",
+      "finished": null,
+      "allocation_hours": 2.9583611839347417,
+      "measured": {
+        "requested_seconds": 10650.10026216507,
+        "covered_seconds": 10650.10026216507,
+        "coverage_pct": 100.0,
+        "observed_time_weighted_utilization_pct": 85.25220167165924,
+        "lower_bound_if_missing_samples_idle_pct": 85.25220167165924
+      }
+    },
+    {
+      "name": "hold_integrate_singleton_seed2903",
+      "status": "running",
+      "gpu": 2,
+      "started": "2026-09-29T10:32:10.399999+00:00",
+      "finished": null,
+      "allocation_hours": 2.958374299208323,
+      "measured": {
+        "requested_seconds": 10650.147477149963,
+        "covered_seconds": 10650.147477149963,
+        "coverage_pct": 100.0,
+        "observed_time_weighted_utilization_pct": 86.73969383866614,
+        "lower_bound_if_missing_samples_idle_pct": 86.73969383866614
+      }
+    },
+    {
+      "name": "preflight_r3_original",
+      "status": "completed",
+      "gpu": 0,
+      "started": "2026-09-29T06:37:41.063630+00:00",
+      "finished": "2026-09-29T06:40:02.873245+00:00",
+      "allocation_hours": 0.03939155969354841,
+      "measured": {
+        "requested_seconds": 141.8096148967743,
+        "covered_seconds": 47.51125407218933,
+        "coverage_pct": 33.50354918231292,
+        "observed_time_weighted_utilization_pct": 86.65331803587237,
+        "lower_bound_if_missing_samples_idle_pct": 29.031937026254536
+      }
+    },
+    {
+      "name": "preflight_r3_dense1",
+      "status": "completed",
+      "gpu": 1,
+      "started": "2026-09-29T06:37:41.093434+00:00",
+      "finished": "2026-09-29T06:39:59.853277+00:00",
+      "allocation_hours": 0.0385444007979499,
+      "measured": {
+        "requested_seconds": 138.75984287261963,
+        "covered_seconds": 44.49128603935242,
+        "coverage_pct": 32.063517166270536,
+        "observed_time_weighted_utilization_pct": 96.38857851755077,
+        "lower_bound_if_missing_samples_idle_pct": 30.905568419299044
+      }
+    },
+    {
+      "name": "hold_r3_dense1_seed2901",
+      "status": "completed",
+      "gpu": 1,
+      "started": "2026-09-29T06:40:16.773448+00:00",
+      "finished": "2026-09-29T09:56:28.944183+00:00",
+      "allocation_hours": 3.270047426422437,
+      "measured": {
+        "requested_seconds": 11772.170735120773,
+        "covered_seconds": 11772.170735120773,
+        "coverage_pct": 100.0,
+        "observed_time_weighted_utilization_pct": 86.51974434878277,
+        "lower_bound_if_missing_samples_idle_pct": 86.51974434878277
+      }
+    },
+    {
+      "name": "hold_r11_original_seed2901",
+      "status": "completed",
+      "gpu": 2,
+      "started": "2026-09-29T06:40:16.779575+00:00",
+      "finished": "2026-09-29T09:50:45.860159+00:00",
+      "allocation_hours": 3.1747446066141127,
+      "measured": {
+        "requested_seconds": 11429.080583810806,
+        "covered_seconds": 11429.080583810806,
+        "coverage_pct": 100.0,
+        "observed_time_weighted_utilization_pct": 85.29162223197288,
+        "lower_bound_if_missing_samples_idle_pct": 85.29162223197288
+      }
+    }
+  ],
+  "total_training_allocation_hours": 24.869756695628165,
+  "scope": "Whole-machine mean of all four GPUs, including idle devices. No interpolation over >120s gaps. Coverage and zero-filled lower bound accompany observed mean; incomplete coverage is not a full four-hour platform measurement. Allocation is wall time including startup, not kernel profiler time."
+}
