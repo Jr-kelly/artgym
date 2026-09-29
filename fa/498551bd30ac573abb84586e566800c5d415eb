@@ -1,0 +1,278 @@
+scripts/evaluate_wuji_hold.py
+  s_721f503d39167b::t_da01efdcdbffe6 1-98
+scripts/launch_wuji_hold_arm.py
+  s_721f503d39167b::t_08ddf859c3ece4 1-21,24-40
+  s_721f503d39167b::t_cf51eacf0ad736 22-23
+scripts/train_wuji_hold.py
+  s_721f503d39167b::t_08ddf859c3ece4 1-42,44
+  s_721f503d39167b::t_cf51eacf0ad736 43
+scripts/diagnose_wuji_hold_traces.py
+  s_721f503d39167b::t_34802832a08c37 1-72
+scripts/analyze_wuji_hold.py
+  s_721f503d39167b::t_b097b513d838d5 1-79
+scripts/monitor_wuji_hold.py
+  s_721f503d39167b::t_d70f38fa7513ab 1-43
+scripts/record_wuji_hold_event.py
+  s_721f503d39167b::t_d7fd995bb91411 1-32
+scripts/backup_wuji_hold.py
+  s_721f503d39167b::t_995ee9affffa3a 1-44
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "fa498551bd30ac573abb84586e566800c5d415eb",
+  "prompts": {},
+  "sessions": {
+    "s_721f503d39167b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0e87e-fbfa-7a80-b73c-3a968594ab0a",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.input_tokens": "14021022",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.output_tokens": "251370",
+        "tlab.token_usage.cache_read_tokens": "96339760",
+        "tlab.session_started_at": "2026-09-29T06:23:05Z"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "WUJI_HOLD_HANDOFF.md",
+      "additions": {
+        "human": 92
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/README.md",
+      "additions": {
+        "human": 53
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/data/manifest.json",
+      "additions": {
+        "human": 86
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/diagnosis/by-endpoint.invalid-absolute-threshold.json",
+      "additions": {
+        "human": 98
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/diagnosis/by-endpoint.json",
+      "additions": {
+        "human": 101
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/diagnosis/failure-traces-manifest.json",
+      "additions": {
+        "human": 14
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/diagnosis/report.json",
+      "additions": {
+        "human": 70
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/diagnosis/stages.csv",
+      "additions": {
+        "human": 897
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/preregistration.json",
+      "additions": {
+        "human": 62
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/core-launch.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/core-row11-identity.json",
+      "additions": {
+        "human": 53
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/core-row3-identity.json",
+      "additions": {
+        "human": 53
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/core-source-config-audit.json",
+      "additions": {
+        "human": 135
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/curriculum-correction.json",
+      "additions": {
+        "human": 15
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/evaluation-queues.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/gpu-history.jsonl",
+      "additions": {
+        "human": 19
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/monitor-latest.json",
+      "additions": {
+        "human": 556
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/preflight-launch.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/preflight-resume-verified.json",
+      "additions": {
+        "human": 276
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/state.json",
+      "additions": {
+        "human": 11
+      }
+    },
+    {
+      "new_path": "scripts/analyze_wuji_hold.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 79
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/backup_wuji_hold.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 44
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/diagnose_wuji_hold_traces.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 72
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/evaluate_wuji_hold.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 98
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/launch_wuji_hold_arm.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 40
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/monitor_wuji_hold.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 43
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/record_wuji_hold_event.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 32
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/run_wuji_hold_job.py",
+      "additions": {
+        "human": 39
+      }
+    },
+    {
+      "new_path": "scripts/train_wuji_hold.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 44
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "AGENTS.md",
+      "new_path": "AGENTS.md",
+      "additions": {
+        "human": 1
+      },
+      "deletions": {
+        "human": 1
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 50
+      },
+      "deletions": {
+        "human": 954
+      }
+    }
+  ]
+}
