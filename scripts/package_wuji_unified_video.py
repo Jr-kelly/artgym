@@ -1,5 +1,7 @@
 """Label four fixed-reset panels; visualization is separate from final statistics."""
 import argparse,json,subprocess,hashlib
+import imageio.v2 as imageio
+import imageio_ffmpeg
 from pathlib import Path
 
 def main():
@@ -10,8 +12,8 @@ def main():
  draw=f"[grid]drawtext=fontfile={font}:text='{header}':x=14:y=9:fontsize=23:fontcolor=white,drawtext=fontfile={font}:text='Separate fixed development examples; video outcomes are not frozen batch statistics. Simulation only.':x=14:y=38:fontsize=18:fontcolor=white"
  for source,row in enumerate(r['records']):
   ok=row['stable_full_all_endpoints'];text=f'Source {source} | example STRICT '+('PASS' if ok else 'FAIL');color='lime' if ok else 'red';draw+=f",drawtext=fontfile={font}:text='{text}':x={source*512+15}:y=452:fontsize=22:fontcolor={color}"
- filters.append(draw+'[out]');subprocess.run(['ffmpeg','-v','error','-i',str(a.input/'policy.mp4'),'-filter_complex',';'.join(filters),'-map','[out]','-an','-c:v','libx264','-crf','20','-preset','fast','-pix_fmt','yuv420p','-movflags','+faststart',str(a.output)],check=True)
- probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_streams','-show_format','-of','json',str(a.output)],text=True));assert abs(float(probe['format']['duration'])-20)<.2
+ filters.append(draw+'[out]');subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(),'-v','error','-i',str(a.input/'policy.mp4'),'-filter_complex',';'.join(filters),'-map','[out]','-an','-c:v','libx264','-crf','20','-preset','fast','-pix_fmt','yuv420p','-movflags','+faststart',str(a.output)],check=True)
+ reader=imageio.get_reader(a.output);probe=reader.get_meta_data();frame_count=reader.count_frames();reader.close();probe['frame_count']=frame_count;assert frame_count==600 and abs(float(probe['duration'])-20)<.2
  out=dict(video=str(a.output),sha256=hashlib.sha256(a.output.read_bytes()).hexdigest(),checkpoint_sha256=cp,source_rows=[0,32,64,96],seconds=sec,strict_examples=[x['stable_full_all_endpoints'] for x in r['records']],all_sources_same_weights=True,policy='privileged teacher, no source routing',scope='Separate resimulation, fixed development examples; not final statistics',probe=probe)
  a.output.with_suffix('.json').write_text(json.dumps(out,indent=2)+'\n');print(json.dumps({k:v for k,v in out.items() if k!='probe'}))
 if __name__=='__main__':main()

@@ -7,7 +7,7 @@
   "max_concurrent_gpus": 2,
   "start_commit": "16ae5d894542cb8fa0cdda6cba7fc5d270842fae",
   "branch": "feat/wuji-unified-policy-20260930",
-  "stage": "frozen_final_evaluation",
+  "stage": "publication_only_all_compute_finished",
   "goal_sha256": "9ae6022a34e95376a08012289c4298e37d990382dac87f88aa3b263062314559",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
   "resource_observation_utc": "2026-09-29T15:58:05Z",
@@ -19,26 +19,12 @@
     "final128": 2026093004,
     "train_replication": 2026093005
   },
-  "next": "No further training. Independently rescore final results, finish fixed demos, archive and publicrelease, verifyremoteGPUreleased",
+  "next": "OnlylocalCPUpackaging/GitHubupload remains; publishandpublicdownloadverifybeforegoalcomplete",
   "remote_root": "/tmp/artgym-unified-policy-20260930",
   "runtime": "/tmp/wuji-unified-runtime/bin/python",
-  "active_jobs": [
-    {
-      "name": "final-t2-job",
-      "pid": 7769,
-      "gpu": 0
-    },
-    {
-      "name": "final-t5-job",
-      "pid": 7770,
-      "gpu": 1
-    }
-  ],
-  "last_observed_utc": "2026-09-29T17:30:35.440410+00:00",
-  "queue": {
-    "pid": 7940,
-    "purpose": "Bounded fixed-demo render after corresponding finalGPUreleased"
-  },
+  "active_jobs": [],
+  "last_observed_utc": "2026-09-29T17:56:25.257167+00:00",
+  "queue": null,
   "monitor": {
     "utc": "2026-09-29T16:46:21.766603+00:00",
     "event": "resource_monitor_started",
@@ -50,6 +36,7 @@
     "interval_seconds": 5,
     "deadline_utc": "2026-09-30T07:56:50Z",
     "purpose": "Read-only full-machine utilization; no artificial GPU workload",
-    "next": "Include fine-grained coverage in resource ledger; stop own monitor after task"
+    "next": "Include fine-grained coverage in resource ledger; stop own monitor after task",
+    "status": "stopped_and_pid_absent"
   }
 }

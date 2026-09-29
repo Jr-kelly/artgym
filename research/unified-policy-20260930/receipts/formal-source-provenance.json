@@ -1,0 +1,17 @@
+{
+  "utc": "2026-09-29T17:37:43.543673+00:00",
+  "event": "postrun_source_provenance_audit",
+  "formal_training_commit": "e414ce5",
+  "trainer_unchanged_since_that_commit": true,
+  "scope": "Formal singleBC,allunifiedBCandcorrections used unchanged trainer; audited after training, not claiming per-run snapshot newly saved before execution. Actual run args/data/init hashes live in each bc_manifest, evaluation source/scorer snapshots in each rawrun.",
+  "files": {
+    "scripts/train_wuji_unified_bc.py": "eb38cdd1e34c6fe8262ba2e341db44bbe47e9738ec231f4439459a3caa469a6e",
+    "scripts/collect_wuji_unified.py": "721fbe3e65dc63aeab01dfb48a4049911b172a41d326e38bd14e31ffee7fa15a",
+    "scripts/audit_wuji_multigrasp.py": "de32b022f5bebdbfbe6bef5a753d3a01a13572e031fdf5243b3efc8a7397683b",
+    "scripts/wuji_timed_command_metrics.py": "484a9b4279677cf55ade37b024b87d9ff2200f013af23604e1bb30026bafe97d",
+    "scripts/evaluate_wuji_unified_gate.py": "618a47d2ae680417be45a475bdac3b18fc0454758086b1ed35474afb08f936be",
+    "scripts/run_wuji_unified_job.py": "9c33825dad2d82d4d46bc5979261076e9a87516b9bf50e4014c20e628b804a50",
+    "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+  },
+  "next": "Keep provenance with final archive; no edits to simulator/scorer/actor"
+}

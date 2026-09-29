@@ -1,0 +1,86 @@
+{
+  "rows": [
+    {
+      "seconds": 2,
+      "source": 0,
+      "n": 128,
+      "strict": 127,
+      "body_stable": 127,
+      "body_stable_but_strict_failure": 0,
+      "body_failure": 1,
+      "first_body_threshold_median_among_breaches": 0.6666666666666666
+    },
+    {
+      "seconds": 2,
+      "source": 1,
+      "n": 128,
+      "strict": 128,
+      "body_stable": 128,
+      "body_stable_but_strict_failure": 0,
+      "body_failure": 0,
+      "first_body_threshold_median_among_breaches": null
+    },
+    {
+      "seconds": 2,
+      "source": 2,
+      "n": 128,
+      "strict": 120,
+      "body_stable": 121,
+      "body_stable_but_strict_failure": 1,
+      "body_failure": 7,
+      "first_body_threshold_median_among_breaches": 17.833333333333332
+    },
+    {
+      "seconds": 2,
+      "source": 3,
+      "n": 128,
+      "strict": 2,
+      "body_stable": 115,
+      "body_stable_but_strict_failure": 113,
+      "body_failure": 13,
+      "first_body_threshold_median_among_breaches": 8.9
+    },
+    {
+      "seconds": 5,
+      "source": 0,
+      "n": 128,
+      "strict": 126,
+      "body_stable": 126,
+      "body_stable_but_strict_failure": 0,
+      "body_failure": 2,
+      "first_body_threshold_median_among_breaches": 8.566666666666666
+    },
+    {
+      "seconds": 5,
+      "source": 1,
+      "n": 128,
+      "strict": 128,
+      "body_stable": 128,
+      "body_stable_but_strict_failure": 0,
+      "body_failure": 0,
+      "first_body_threshold_median_among_breaches": null
+    },
+    {
+      "seconds": 5,
+      "source": 2,
+      "n": 128,
+      "strict": 128,
+      "body_stable": 128,
+      "body_stable_but_strict_failure": 0,
+      "body_failure": 0,
+      "first_body_threshold_median_among_breaches": null
+    },
+    {
+      "seconds": 5,
+      "source": 3,
+      "n": 128,
+      "strict": 5,
+      "body_stable": 118,
+      "body_stable_but_strict_failure": 113,
+      "body_failure": 10,
+      "first_body_threshold_median_among_breaches": 10.55
+    }
+  ],
+  "interpretation": "Source3 mostly remains within body thresholds yet misses strict stage endpoints; some body failures remain. Mixed offline target errors also exceed frozen singleBC reference. Neither observation uniquely proves state shift, normalization, loss choice or capacity as root cause.",
+  "next_priority": "One future same-start controlled comparison of raw expert mean versus actually executed action/physical target supervision; not executed as a third modification in this stopped goal."
+}
