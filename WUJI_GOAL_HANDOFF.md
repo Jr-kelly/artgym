@@ -1,7 +1,7 @@
 <!-- HOLD_CURRENT_START -->
 # 当前端点保持实验续接（2026-09-29T07:28:50.732807+00:00）
 
-Goal active；实验副本 `/data/research/artgym-experiments-20260921/hold-20260929`；分支 `feat/wuji-hold-controlled-20260929`；最新已push `ccb7a5e`。禁止子代理。
+Goal active；实验副本 `/data/research/artgym-experiments-20260921/hold-20260929`；分支 `feat/wuji-hold-controlled-20260929`；最新已push `2f3c5e2`。禁止子代理。
 
 硬截止2026-09-29 18:08:43UTC，17:08:43起至少留1h冻结评估与交付。四核心训练从CP1000各追加1000轮至CP2000，唯一源内条件GoalDistance2 .1→1.0。稳定奖励日程起终相同；44.4%不是约束未生效，禁止据此延长全组。
 
@@ -20,6 +20,8 @@ Goal active；实验副本 `/data/research/artgym-experiments-20260921/hold-2026
 附件Codex-Goal-Wuji-Hold-20260929.md仍未找到、路径问题待回复；仅依据明确用户指令执行，不声称已读。
 
 下一步：完成四组CP1250备份并保持同预算训练；冻结最终结果后按preregistration判据再决定种子复验/整合。需要运行analyze_wuji_hold与plot_wuji_hold_results、补最终策略固定回合视频、归档所有raw trace、完成报告/交接并commit/push/publish。不得把本次中期快照当完成。
+
+最新状态 2026-09-29T08:29:11.051613+00:00：hold_r3_original_seed2901 CP1560, hold_r11_dense1_seed2901 CP1575, hold_r3_dense1_seed2901 CP1558, hold_r11_original_seed2901 CP1574。四组CP1250/1500共8权重已核验。冻结收集器本地session22003正在等待；原归档73336/备份58950/监控40377继续。用户08:21UTC问释放时间，已给核心训练09:45–09:52UTC完成、评估后10:15–10:35UTC释放估计；如后续复验/整合启动先说明新增占用。
 <!-- HOLD_CURRENT_END -->
 
 # Wuji端点保持受控实验续接
@@ -131,3 +133,23 @@ hold_r11_original_seed2901 running observed; PID 6458
 
 本地冻结证据收集器session22003等待两源最终结果，完成后镜像开发/最终全部原始时序、逐文件远端/本地SHA核验、归档并运行独立严格复算与逐端点诊断；不新增物理或改变远端训练/评估。
 证据：research/hold-20260929/receipts/collector-start.json。下一步：保持核心训练，检查各有界队列错误日志，最终表完成后按冻结判据决策。
+
+## 2026-09-29T08:19:00.333423+00:00 core_midbudget_verified
+
+四核心训练CP1250/1500共8个checkpoint全部远端/本地SHA、epoch/frame、模型有限性和优化器存在检查通过；各组新增预算已过半，仍固定CP2000结束。无新冻结结果，不依据训练奖励判定改善。
+证据：research/hold-20260929/receipts/backup-core.json。下一步：继续至CP1750/2000；开发与最终等待器保持原样，后续按最终严格结果决策。
+
+## 2026-09-29T08:21:29.829279+00:00 user_resource_release_estimate
+
+用户要求继续并询问释放开发机时间。08:21UTC实測四组剩85–91分钟，预计09:45–09:52UTC训完，核心冻结评估预计再20–40分钟；对用户给北京时间18:15–18:35左右可释放核心占用的估计。后续若证据支持复验/整合，启动前明确额外占用，不默认偷偷延长。
+证据：research/hold-20260929/receipts/resource-release-estimate.json。下一步：继续固定核心预算，按实测评估吞吐更新释放估计。
+
+## 2026-09-29T08:23:59.325530+00:00 frozen_state_reproduction_verified
+
+10份冻结初态从记录种子逐位重现通过，未覆盖数据。每个源内开发/最终种子不同；跨源dev11与final1共享随机种子但基础抓姿不同，明确不声称所有跨源随机扰动相互独立。
+证据：research/hold-20260929/receipts/frozen-states-reproduced.json。下一步：继续核心训练；最终评估解释限定已训练基础抓姿附近扰动。
+
+## 2026-09-29T08:45:56.354358+00:00 final_video_queue_started
+
+四最终策略固定历史第0回合视频等待器session33434已启动，等待全部CP2000备份后本机4090空闲才渲染；不额外占用开发机远端GPU，结果保留真实成功/失败。
+证据：research/hold-20260929/receipts/final-render-queue.json, research/hold-20260929/video/plan.json。下一步：继续核心训练，最终冻结评估与本机视频可并行，按实际进度更新释放时间。

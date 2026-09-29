@@ -1,0 +1,105 @@
+{
+  "time": "2026-09-29T08:23:47.785134+00:00",
+  "status": "passed",
+  "entries": [
+    {
+      "row": 0,
+      "split": "dev",
+      "n": 32,
+      "seed": 2026092910,
+      "path": "research/hold-20260929/data/dev-row0.npy",
+      "sha256": "63826ef2abb86550a35209a76dc5cd4b05ac6b6ef21a297e117fe0070658378e",
+      "bitwise_reproduced": true
+    },
+    {
+      "row": 0,
+      "split": "final",
+      "n": 128,
+      "seed": 2026092920,
+      "path": "research/hold-20260929/data/final-row0.npy",
+      "sha256": "e4b545179c69b28a26abee0fc1d99205b668505880e6608361b81791b46de3d0",
+      "bitwise_reproduced": true
+    },
+    {
+      "row": 1,
+      "split": "dev",
+      "n": 32,
+      "seed": 2026092911,
+      "path": "research/hold-20260929/data/dev-row1.npy",
+      "sha256": "8820adb9692b472752b2ce70417d58ed0b5f81679ce8c6ad8e34f037e9155b3b",
+      "bitwise_reproduced": true
+    },
+    {
+      "row": 1,
+      "split": "final",
+      "n": 128,
+      "seed": 2026092921,
+      "path": "research/hold-20260929/data/final-row1.npy",
+      "sha256": "9cb64526afd97d8c46991eca31349bbff2b38fc97ff0653e65cbc7f372b51d12",
+      "bitwise_reproduced": true
+    },
+    {
+      "row": 2,
+      "split": "dev",
+      "n": 32,
+      "seed": 2026092912,
+      "path": "research/hold-20260929/data/dev-row2.npy",
+      "sha256": "107330bd17afdd018ea186995ea836323c443e3a418bb914e8e974a2342a2548",
+      "bitwise_reproduced": true
+    },
+    {
+      "row": 2,
+      "split": "final",
+      "n": 128,
+      "seed": 2026092922,
+      "path": "research/hold-20260929/data/final-row2.npy",
+      "sha256": "14c0c030cc9858818627d8b21bf449bf6f0681d38ac88f0e64970e8a840d9da8",
+      "bitwise_reproduced": true
+    },
+    {
+      "row": 3,
+      "split": "dev",
+      "n": 32,
+      "seed": 2026092913,
+      "path": "research/hold-20260929/data/dev-row3.npy",
+      "sha256": "400ee6272e5ed9f92fdf9719bc568b716036f539f073a7925708ab46d970ab71",
+      "bitwise_reproduced": true
+    },
+    {
+      "row": 3,
+      "split": "final",
+      "n": 128,
+      "seed": 2026092923,
+      "path": "research/hold-20260929/data/final-row3.npy",
+      "sha256": "92a04a73289cfa83a071e982fcebeab3ebf0ee7c21a06d726b7c34b6f2eca071",
+      "bitwise_reproduced": true
+    },
+    {
+      "row": 11,
+      "split": "dev",
+      "n": 32,
+      "seed": 2026092921,
+      "path": "research/hold-20260929/data/dev-row11.npy",
+      "sha256": "353586d195213b28b358e77340474ae45ce9eaa132bc88bd49eb548afd9ef009",
+      "bitwise_reproduced": true
+    },
+    {
+      "row": 11,
+      "split": "final",
+      "n": 128,
+      "seed": 2026092931,
+      "path": "research/hold-20260929/data/final-row11.npy",
+      "sha256": "b4bb67465972ba036cc7645839f57ddefb1ed0c42f9a62010ca867f962f6f277",
+      "bitwise_reproduced": true
+    }
+  ],
+  "source_sha256": "be028e58e9964ba2de33d9af0f4d1af8b9d8a736e409ad72ea9fe889c1efaa52",
+  "cross_source_seed_collisions": [
+    {
+      "left": "research/hold-20260929/data/dev-row11.npy",
+      "right": "research/hold-20260929/data/final-row1.npy",
+      "seed": 2026092921
+    }
+  ],
+  "scope": "All stored data bitwise reproduced from frozen seeds; within each source dev/final distinct. A cross-source seed collision shares noise draws across different base grasps, not identical states; do not claim all random draws globally independent."
+}
