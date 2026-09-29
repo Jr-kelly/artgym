@@ -1,0 +1,130 @@
+scripts/decide_wuji_hold_followup.py
+  s_721f503d39167b::t_569bf0beb9b789 1-43
+scripts/render_wuji_hold_final.py
+  s_721f503d39167b::t_8532d8a44fc9ea 1-55
+scripts/verify_wuji_hold_states.py
+  s_721f503d39167b::t_71921991403967 1-38
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "792ee2f4fdb02ee9088525353999f7857122f209",
+  "prompts": {},
+  "sessions": {
+    "s_721f503d39167b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0e87e-fbfa-7a80-b73c-3a968594ab0a",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.output_tokens": "311343",
+        "tlab.token_usage.input_tokens": "19631948",
+        "tlab.token_usage.cache_read_tokens": "108753076",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.session_started_at": "2026-09-29T08:23:47Z"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/hold-20260929/receipts/final-render-queue.json",
+      "additions": {
+        "human": 8
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/frozen-states-reproduced.json",
+      "additions": {
+        "human": 105
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/resource-release-estimate.json",
+      "additions": {
+        "human": 12
+      }
+    },
+    {
+      "new_path": "scripts/decide_wuji_hold_followup.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 43
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/render_wuji_hold_final.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 55
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/verify_wuji_hold_states.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 38
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 23
+      },
+      "deletions": {
+        "human": 1
+      }
+    },
+    {
+      "old_path": "WUJI_HOLD_HANDOFF.md",
+      "new_path": "WUJI_HOLD_HANDOFF.md",
+      "additions": {
+        "human": 43
+      },
+      "deletions": {
+        "human": 1
+      }
+    },
+    {
+      "old_path": "research/hold-20260929/receipts/backup-core.json",
+      "new_path": "research/hold-20260929/receipts/backup-core.json",
+      "additions": {
+        "human": 40
+      }
+    },
+    {
+      "old_path": "research/hold-20260929/receipts/resources-current.json",
+      "new_path": "research/hold-20260929/receipts/resources-current.json",
+      "additions": {
+        "human": 30
+      },
+      "deletions": {
+        "human": 30
+      }
+    },
+    {
+      "old_path": "research/hold-20260929/state.json",
+      "new_path": "research/hold-20260929/state.json",
+      "additions": {
+        "human": 4
+      },
+      "deletions": {
+        "human": 4
+      }
+    }
+  ]
+}
