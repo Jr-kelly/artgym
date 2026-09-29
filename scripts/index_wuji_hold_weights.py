@@ -18,6 +18,12 @@ def main():
         if not isinstance(items,list):continue
         for item in items:
             if isinstance(item,dict) and item.get('digest_verified'):assets[item['name']]=item
+    if args.published:
+        release=json.loads((receipts/'final-release-verified.json').read_text())
+        assert not release['draft'] and release['asset_count']==len(assets)
+        for asset in release['assets']:
+            assert assets[asset['name']]['sha256']==asset['sha256']
+            assets[asset['name']]=dict(assets[asset['name']],url=asset['url'])
     entries=[]
     for path in sorted(receipts.glob('backup-*.json')):
         for item in json.loads(path.read_text()).get('entries',[]):

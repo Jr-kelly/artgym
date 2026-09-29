@@ -98,7 +98,7 @@
 - `videos/hold-parent-source3-fixed5.mp4`
 - `videos/hold-parent-source11-fixed5.mp4`
 
-Release `wuji-hold-20260929-v1` 保存父权重、历史参考策略、全部预检/正式训练权重日志、全部代表视频和原始时序，服务器SHA逐项核验；发布状态以 `receipts/final-release-verified.json` 为准。全部训练权重均归档，不只保留开发选中的checkpoint。
+Release `wuji-hold-20260929-v1` 保存父权重、历史参考策略、全部预检/正式训练权重日志、全部代表视频和原始时序，服务器SHA逐项核验；已正式发布，见 [Release](https://github.com/Jr-kelly/artgym/releases/tag/wuji-hold-20260929-v1) 和 `receipts/final-release-verified.json`。全部训练权重均归档，不只保留开发选中的checkpoint。
 
 
 ## 源11机制干预诊断（不是学习策略结果）
