@@ -1,0 +1,314 @@
+scripts/index_wuji_hold_weights.py
+  s_721f503d39167b::t_18834fd01e8654 1-36
+scripts/audit_wuji_hold_thumb_latch.py
+  s_721f503d39167b::t_eba07e18ecd164 1-61
+scripts/analyze_wuji_hold_thumb_latch.py
+  s_721f503d39167b::t_e15a1e8ae4f307 1-50
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "791a6ca161ad36cde550269eb675a3543a4c32a7",
+  "prompts": {},
+  "sessions": {
+    "s_721f503d39167b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0e87e-fbfa-7a80-b73c-3a968594ab0a",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.session_started_at": "2026-09-29T10:42:29Z",
+        "tlab.token_usage.input_tokens": "23210047",
+        "tlab.token_usage.output_tokens": "352055",
+        "tlab.token_usage.cache_read_tokens": "128637357"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/hold-20260929/analysis-thumb-latch/report.json",
+      "additions": {
+        "human": 170
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-policy-fixed2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-policy-fixed2/evidence/intervention-source.py",
+      "additions": {
+        "human": 61
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-policy-fixed2/evidence/report.json",
+      "additions": {
+        "human": 5042
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-policy-fixed2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-policy-fixed2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-policy-fixed2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-policy-fixed2/output.log",
+      "additions": {
+        "human": 41
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-policy-fixed2/status.json",
+      "additions": {
+        "human": 39
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-policy-fixed5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-policy-fixed5/evidence/intervention-source.py",
+      "additions": {
+        "human": 61
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-policy-fixed5/evidence/report.json",
+      "additions": {
+        "human": 3506
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-policy-fixed5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-policy-fixed5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-policy-fixed5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-policy-fixed5/output.log",
+      "additions": {
+        "human": 41
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-policy-fixed5/status.json",
+      "additions": {
+        "human": 39
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-thumb_latch-fixed2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-thumb_latch-fixed2/evidence/intervention-source.py",
+      "additions": {
+        "human": 61
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-thumb_latch-fixed2/evidence/report.json",
+      "additions": {
+        "human": 5042
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-thumb_latch-fixed2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-thumb_latch-fixed2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-thumb_latch-fixed2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-thumb_latch-fixed2/output.log",
+      "additions": {
+        "human": 41
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-thumb_latch-fixed2/status.json",
+      "additions": {
+        "human": 39
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-thumb_latch-fixed5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-thumb_latch-fixed5/evidence/intervention-source.py",
+      "additions": {
+        "human": 61
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-thumb_latch-fixed5/evidence/report.json",
+      "additions": {
+        "human": 3506
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-thumb_latch-fixed5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-thumb_latch-fixed5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-thumb_latch-fixed5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-thumb_latch-fixed5/output.log",
+      "additions": {
+        "human": 41
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/diag-r11-thumb_latch-fixed5/status.json",
+      "additions": {
+        "human": 39
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/followup-source-pin.json",
+      "additions": {
+        "human": 100
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/release-thumb-latch.json",
+      "additions": {
+        "human": 9
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/thumb-latch-raw-manifest.json",
+      "additions": {
+        "human": 165
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/thumb-latch-plan.json",
+      "additions": {
+        "human": 19
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/weights-index.json",
+      "additions": {
+        "human": 505
+      }
+    },
+    {
+      "new_path": "scripts/analyze_wuji_hold_thumb_latch.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 50
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/audit_wuji_hold_thumb_latch.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 61
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/index_wuji_hold_weights.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 36
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 10
+      }
+    },
+    {
+      "old_path": "WUJI_HOLD_HANDOFF.md",
+      "new_path": "WUJI_HOLD_HANDOFF.md",
+      "additions": {
+        "human": 10
+      }
+    },
+    {
+      "old_path": "research/hold-20260929/README.md",
+      "new_path": "research/hold-20260929/README.md",
+      "additions": {
+        "human": 14
+      }
+    }
+  ]
+}
