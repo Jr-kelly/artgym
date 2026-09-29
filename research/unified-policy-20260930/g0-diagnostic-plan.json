@@ -1,0 +1,36 @@
+{
+  "utc": "2026-09-29T16:20:25.156701+00:00",
+  "event": "G0_reproduction_diagnostic_triggered",
+  "evidence": {
+    "historical_2s": [
+      32,
+      32,
+      32,
+      0
+    ],
+    "historical_5s": [
+      32,
+      32,
+      32,
+      0
+    ],
+    "source3_2s": [
+      0,
+      0,
+      0,
+      24
+    ],
+    "source3_5s": [
+      0,
+      0,
+      0,
+      31
+    ],
+    "n_per_source": 32
+  },
+  "rule": "Source3 fixed2 75% below historical integration87.5% by12.5pp; investigate >10pp decline before B",
+  "hypothesis": "Distinguish small32-sample cohort variation versus runtime/batch reproduction change",
+  "change": "No policy/physics/interface changes: evaluate source3 on old core128 source3 states and both experts on preregistered promotion64/source; old data explicitly historical regression, not new final",
+  "stop": "NoBC until located reproduction issue or adequate evidence of baseline reproduction; final set stays closed",
+  "next": "rescore traces then regression+promotion expert evaluations"
+}

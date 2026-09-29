@@ -161,5 +161,12 @@
   "base_sha256": "be028e58e9964ba2de33d9af0f4d1af8b9d8a736e409ad72ea9fe889c1efaa52",
   "split_rule": "Whole trajectories; train first96 episodes/source/protocol for fitting, last32 held out; final unavailable for selection",
   "scope": "Trained base grasp neighbourhoods; 0/1/2 two near-duplicate clusters; source3 additional base",
-  "unique_states": 1408
+  "unique_states": 1408,
+  "source_cluster_map": {
+    "0": "near01",
+    "1": "near01",
+    "2": "source2",
+    "3": "source3"
+  },
+  "cluster_evidence": "Inherited multigrasp manifest:source0/1 separation2.233mm,2.032degrees,jointRMS.05947rad within frozen5mm/.05rad/5degree thresholds"
 }

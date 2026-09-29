@@ -1,0 +1,38 @@
+{
+  "utc": "2026-09-29T16:27:26.681141+00:00",
+  "event": "G0_passed_enter_B",
+  "evidence": [
+    "g0-analysis/report.json",
+    "g0-regression-analysis/report.json",
+    "g0-promotion-analysis/report.json"
+  ],
+  "promotion64": {
+    "historical_fixed2": [
+      63,
+      64,
+      64,
+      0
+    ],
+    "historical_fixed5": [
+      62,
+      64,
+      64,
+      0
+    ],
+    "source3_fixed2": [
+      0,
+      0,
+      0,
+      60
+    ],
+    "source3_fixed5": [
+      0,
+      0,
+      0,
+      62
+    ]
+  },
+  "reason": "SHA/interface/stepwiseRNN alignment verified; old128regression112/119 matches historical109/120; predeclared64development confirms source3>=93.75%, no material decline; retain all32 failures, attribute only cohort/batch variability not proven unique cause",
+  "next": "Collect128 trajectories/source/protocol with own expert; G1 smallfit then singleexpert BC, no unified training untilG1",
+  "budget": "Approx0.4GPUh used so far; far inside24GPUh/16h; reserve2GPUh90minutes unchanged"
+}

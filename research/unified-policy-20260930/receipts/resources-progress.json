@@ -1,0 +1,75 @@
+{
+  "recorded_utc": "2026-09-29T16:25:26.508964+00:00",
+  "jobs": [
+    {
+      "name": "g0-t5-job",
+      "status": "completed",
+      "gpu": 1,
+      "started": "2026-09-29T16:13:58.421416+00:00",
+      "finished": "2026-09-29T16:18:53.759680+00:00",
+      "gpu_hours": 0.08203836338611104,
+      "role": "collection_evaluation_or_preflight"
+    },
+    {
+      "name": "g0-regression-t5-job",
+      "status": "completed",
+      "gpu": 1,
+      "started": "2026-09-29T16:20:25.889930+00:00",
+      "finished": "2026-09-29T16:22:02.366789+00:00",
+      "gpu_hours": 0.026799086022777675,
+      "role": "collection_evaluation_or_preflight"
+    },
+    {
+      "name": "g0-t2-job",
+      "status": "completed",
+      "gpu": 0,
+      "started": "2026-09-29T16:13:58.421698+00:00",
+      "finished": "2026-09-29T16:18:59.778608+00:00",
+      "gpu_hours": 0.0837102117002779,
+      "role": "collection_evaluation_or_preflight"
+    },
+    {
+      "name": "g0-promotion-t2-job",
+      "status": "running",
+      "gpu": 0,
+      "started": "2026-09-29T16:23:09.482732+00:00",
+      "finished": null,
+      "gpu_hours": 4.117905556692373e-07,
+      "role": "collection_evaluation_or_preflight"
+    },
+    {
+      "name": "g0-regression-t2-job",
+      "status": "completed",
+      "gpu": 0,
+      "started": "2026-09-29T16:20:25.890130+00:00",
+      "finished": "2026-09-29T16:22:05.406221+00:00",
+      "gpu_hours": 0.02764331077861117,
+      "role": "collection_evaluation_or_preflight"
+    },
+    {
+      "name": "g0-promotion-t5-job",
+      "status": "running",
+      "gpu": 1,
+      "started": "2026-09-29T16:23:09.482857+00:00",
+      "finished": null,
+      "gpu_hours": 4.073552776794208e-07,
+      "role": "collection_evaluation_or_preflight"
+    },
+    {
+      "name": "local-collector-smoke",
+      "status": "completed",
+      "gpu": 0,
+      "started": "2026-09-29T16:08:14.704668+00:00",
+      "finished": "2026-09-29T16:09:23.851476+00:00",
+      "gpu_hours": 0.01920741284414867,
+      "role": "collection_evaluation_or_preflight"
+    }
+  ],
+  "owned_reserved_gpu_hours": 0.23939920387775981,
+  "training_reserved_gpu_hours": 0,
+  "remote_observed_machine_mean_gpu_utilization_percent": 33.265239303365625,
+  "remote_sample_covered_seconds": 434.81687688827515,
+  "remote_sample_count": 15,
+  "full_four_hour_window_covered": false,
+  "note": "Includes job startup/I/O reservations conservatively; active jobs charged through last heartbeat. Host utilization averages all4cards, deduplicates dual-wrapper samples; missing time not asserted measured. CUDA smoke and offline short audit additionally tracked separately."
+}

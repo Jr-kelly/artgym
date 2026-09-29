@@ -26,6 +26,12 @@ def main():
     valid=sub['active']&~sub['fall']&~sub['invalid'];body=valid.all(0)&(sub['drift']<.01).all(0)&(sub['rotation']<.25).all(0)
     success=r['stable_full_all_endpoints'];row=dict(model=model,source=source,seconds=report['protocol']['stage_seconds'],n=n,success=success,rate=success/n,wilson95=wilson(success,n),body_stable=int(body.sum()),body_rate=float(body.mean()),alive=r['alive_full'],trace_sha256=hashlib.sha256((dest/'trace.npz').read_bytes()).hexdigest());rows.append(row)
     for i,record in enumerate(r['records']):trials.append(dict(model=model,source=source,seconds=row['seconds'],trial=i,strict=record['stable_full_all_endpoints'],body_stable=bool(body[i]),alive=record['alive_full']))
+ clusters=[]
+ for model,seconds in sorted({(x['model'],x['seconds']) for x in rows}):
+  for cluster,sources in [('near01',[0,1]),('source2',[2]),('source3',[3])]:
+   selected=[x for x in rows if x['model']==model and x['seconds']==seconds and x['source'] in sources]
+   if selected:clusters.append(dict(model=model,seconds=seconds,cluster=cluster,sources=[x['source'] for x in selected],n=sum(x['n'] for x in selected),success=sum(x['success'] for x in selected),mean_source_rate=sum(x['rate'] for x in selected)/len(selected),note='Pooled nearby reset episodes, not independent base grasp shapes'))
+ (a.output/'clusters.json').write_text(json.dumps(clusters,indent=2)+'\n')
  (a.output/'temporal.json').write_text(json.dumps(temporal,indent=2)+'\n')
  (a.output/'endpoints.json').write_text(json.dumps(endpoints,indent=2)+'\n')
  (a.output/'report.json').write_text(json.dumps(dict(rows=rows,independent_rescore='passed',scope='Simulation, trained base neighbourhoods; source0/1/2 are three records in two near-duplicate clusters; no unseen-base/hardware claim'),indent=2)+'\n')
