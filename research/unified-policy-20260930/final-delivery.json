@@ -1,0 +1,63 @@
+{
+  "utc": "2026-09-29T18:16:41.184823+00:00",
+  "status": "Bounded protocol execution and required artifacts delivered; unified capability NOT achieved",
+  "branch": "feat/wuji-unified-policy-20260930",
+  "scientific_result_commit": "af19615f610517c3da59c3efc285bf169400c09b",
+  "release_url": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-unified-policy-20260930-v1",
+  "report_url": "https://github.com/Jr-kelly/artgym/blob/feat/wuji-unified-policy-20260930/research/unified-policy-20260930/README.md",
+  "candidate": {
+    "path": "runs/unified-policy-20260930/bc-unified-historical-s3001-seg1/epoch_000100.pth",
+    "sha256": "3801eca359022e729510fef28f00d43b35af8561755f20a5f4be0206b6a07ab8",
+    "status": "Best failed unified candidate; G2 not met; not promoted teacher"
+  },
+  "final_strict2": [
+    127,
+    128,
+    120,
+    2
+  ],
+  "final_strict5": [
+    126,
+    128,
+    128,
+    5
+  ],
+  "n_per_source": 128,
+  "teacher": "G2 failed",
+  "student": "Not triggered; no unifiedteacher passedG2",
+  "next_priority": "New controlled same-start actual-executed-action/physical-target-supervision comparison to reduce source3 unifiedBC fitting error; no more training in this goal",
+  "asset_count": 27,
+  "server_all_hashes_verified": true,
+  "public_downloads": [
+    {
+      "name": "wuji-unified-fixed2.mp4",
+      "sha256": "76acfa6a7206e5af7ac7a2b8fd07e845a4fdb0cca8ae3d065ce96cdd01a6e1ef",
+      "bytes": 1939497,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-unified-policy-20260930-v1/wuji-unified-fixed2.mp4",
+      "unauthenticated_curl_download": true
+    },
+    {
+      "name": "wuji-unified-fixed5.mp4",
+      "sha256": "618e0951f568265fbf9aca5d133a5f48874d4f3ddc07b8d2052ef50733d6348e",
+      "bytes": 1245659,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-unified-policy-20260930-v1/wuji-unified-fixed5.mp4",
+      "unauthenticated_curl_download": true
+    },
+    {
+      "name": "wuji-unified-baseline-historical.tar.gz",
+      "sha256": "cb8083dc81df75f894e68d675c9265b15942b37caf694c9ce56df0ccba94326d",
+      "bytes": 537582655,
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-unified-policy-20260930-v1/wuji-unified-baseline-historical.tar.gz",
+      "unauthenticated_curl_download": true
+    }
+  ],
+  "selected_archive_restored_and_cpu_loaded": true,
+  "all43checkpoints_archived": true,
+  "all5120finaltrials_independently_rescored": true,
+  "video_frames_each": 600,
+  "owned_gpu_hours": 1.9082688383730217,
+  "conservative_budget_account_gpu_hours": 2.1582688383730217,
+  "all_owned_compute_stopped": true,
+  "wall_hours_to_delivery": 2.3308846730555555,
+  "release_tag_commit_note": "Final scientific result commit; subsequent branch commits contain publication/download receipts only."
+}
