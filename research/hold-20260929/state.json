@@ -7,9 +7,9 @@
   "host": "10.14.0.107:30296",
   "status": "core_training_running",
   "attachment": "named attachment not found in downloads/tmp/research; requested path; continuing explicit user-authorized diagnostics",
-  "next": "Wait matched1000 additional epochs; dev/final queues active; source3/11CP1250 backup next",
+  "next": "Continue fixed CP2000 budget; next CP1500. Collect/independently rescore complete final then apply followup criteria.",
   "updated": "2026-09-29T07:19:11.810909+00:00",
-  "pushed_commit": "55e7ce8",
+  "pushed_commit": "ccb7a5e",
   "training_started_utc": "2026-09-29T06:40:16+00:00",
   "core_additional_epochs": 1000,
   "core_final_epoch": 2000,
@@ -23,5 +23,7 @@
     "time": "2026-09-29T06:57:08.270486+00:00"
   },
   "archive_queue": "scripts.archive_wuji_hold_when_done local session73336; four core completed runs -> all weights/logs -> release draft398889931; deadline16:30UTC",
-  "parent_videos": "completed; historical row0 each, fixed5 strict0/1 both; video/parent-video-results.json"
+  "parent_videos": "completed; historical row0 each, fixed5 strict0/1 both; video/parent-video-results.json",
+  "collector": "scripts.collect_wuji_hold_evaluation local session22003 until16:30UTC",
+  "backup_progress": "all4 CP1250 local/remote SHA and CPU checked 07:29UTC"
 }

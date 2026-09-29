@@ -1,3 +1,27 @@
+<!-- HOLD_CURRENT_START -->
+# 当前端点保持实验续接（2026-09-29T07:28:50.732807+00:00）
+
+Goal active；实验副本 `/data/research/artgym-experiments-20260921/hold-20260929`；分支 `feat/wuji-hold-controlled-20260929`；最新已push `ccb7a5e`。禁止子代理。
+
+硬截止2026-09-29 18:08:43UTC，17:08:43起至少留1h冻结评估与交付。四核心训练从CP1000各追加1000轮至CP2000，唯一源内条件GoalDistance2 .1→1.0。稳定奖励日程起终相同；44.4%不是约束未生效，禁止据此延长全组。
+
+远端 `.107:30296`，SSH key `/home/agiuser/.ssh/id_ed25519_h200`，root `/home/wangjiarui/artgym-hold-20260929`，Python `/home/wangjiarui/artgym-runtime/bin/python`。下列PID/轮数仅此时间采样，接手重查：
+- hold_r3_original_seed2901: GPU0, PID6454, CP1251, running
+- hold_r11_dense1_seed2901: GPU3, PID6460, CP1256, running
+- hold_r3_dense1_seed2901: GPU1, PID6455, CP1250, running
+- hold_r11_original_seed2901: GPU2, PID6458, CP1257, running
+
+四开发等待器7483–7486、两最终等待器7487/7488已于07:09UTC验证存活，等训练完成；不要重复启动。开发32选CP1250/1500/1750/2000，最终128每源同GPU同扰动主表CP2000。原3抓姿扰动仅条件整合预留。
+
+本地monitor session40377、CP备份58950、完成后全权重归档/上传73336均有界运行。日志在runs/hold-20260929；源11两组CP1250已07:28UTC备份核验，源3即将到点。Release草稿398889931/tag wuji-hold-20260929-v1已7资产，仅父/预检/父视频；未公布新策略结论。
+
+两父策略历史第0回合5秒视频已新渲染，strict均0/1；源3body1/1、源11body0/1；单独本地4090回合非冻结128证据。视频videos/hold-parent-source{3,11}-fixed5.mp4，评分research/hold-20260929/video/。本机渲染已结束。
+
+附件Codex-Goal-Wuji-Hold-20260929.md仍未找到、路径问题待回复；仅依据明确用户指令执行，不声称已读。
+
+下一步：完成四组CP1250备份并保持同预算训练；冻结最终结果后按preregistration判据再决定种子复验/整合。需要运行analyze_wuji_hold与plot_wuji_hold_results、补最终策略固定回合视频、归档所有raw trace、完成报告/交接并commit/push/publish。不得把本次中期快照当完成。
+<!-- HOLD_CURRENT_END -->
+
 # Wuji端点保持受控实验续接
 
 本轮起点2026-09-29 06:08:43UTC，硬截止18:08:43，17:08:43前停止新增训练并留至少1小时冻结评估与交付。独立分支feat/wuji-hold-controlled-20260929，源f332e4e；本目录为新实验，历史multigrasp副本完整保留。禁止子代理。
@@ -102,3 +126,8 @@ hold_r11_original_seed2901 running observed; PID 6458
 
 本地有界归档等待器已启动，四核心训练完成后逐组保存全部权重/日志并上传Release草稿核验SHA；不修改远端训练，16:30UTC截止。当前草稿7资产均为父权重/预检/父视频，尚无正式新策略结论。
 证据：research/hold-20260929/receipts/archive-queue-start.json, research/hold-20260929/state.json。下一步：核验首批CP1250，继续固定预算与冻结评估队列。
+
+## 2026-09-29T07:34:54.393303+00:00 frozen_evidence_collector_started
+
+本地冻结证据收集器session22003等待两源最终结果，完成后镜像开发/最终全部原始时序、逐文件远端/本地SHA核验、归档并运行独立严格复算与逐端点诊断；不新增物理或改变远端训练/评估。
+证据：research/hold-20260929/receipts/collector-start.json。下一步：保持核心训练，检查各有界队列错误日志，最终表完成后按冻结判据决策。
