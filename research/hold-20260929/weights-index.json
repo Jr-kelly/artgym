@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-09-29T10:51:38.599195+00:00",
+  "updated_utc": "2026-09-29T11:25:29.503073+00:00",
   "parents": {
     "entries": [
       {
@@ -354,6 +354,66 @@
         "digest_verified": true
       },
       "release_url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-hold-20260929-v1/wuji-hold_r3_dense1_seed2901.tar.gz",
+      "release_status": "draft until final delivery; URL resolves only after publication",
+      "restore": "python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz"
+    },
+    {
+      "name": "hold_integrate_singleton_seed2903",
+      "epoch": 2250,
+      "path": "runs/hold_integrate_singleton_seed2903/checkpoints/epoch_002250.pth",
+      "sha256": "df9e0353d429b443943130cef89d70530c86258d55c6dcf305b18d1ca0a2fa4a",
+      "frame": 368640000,
+      "model_finite": true,
+      "optimizer_saved": true,
+      "verified_utc": "2026-09-29T11:20:35.249867+00:00",
+      "role": "singleton consolidation control",
+      "archive": null,
+      "release_url": null,
+      "release_status": "draft until final delivery; URL resolves only after publication",
+      "restore": "python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz"
+    },
+    {
+      "name": "hold_integrate_shared_seed2903",
+      "epoch": 2250,
+      "path": "runs/hold_integrate_shared_seed2903/checkpoints/epoch_002250.pth",
+      "sha256": "8150c816cd57cafb83ac6e1af1f48a06ff315b73f08a24df0fca689b6dab5888",
+      "frame": 368640000,
+      "model_finite": true,
+      "optimizer_saved": true,
+      "verified_utc": "2026-09-29T11:23:42.900189+00:00",
+      "role": "shared pool continuation",
+      "archive": null,
+      "release_url": null,
+      "release_status": "draft until final delivery; URL resolves only after publication",
+      "restore": "python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz"
+    },
+    {
+      "name": "hold_r3_dense1_seed2902",
+      "epoch": 1250,
+      "path": "runs/hold_r3_dense1_seed2902/checkpoints/epoch_001250.pth",
+      "sha256": "285bdf66f25f7e9133fb41bc9d826858f1c171446f956469c8fdd4d0c2e80fd5",
+      "frame": 204800000,
+      "model_finite": true,
+      "optimizer_saved": true,
+      "verified_utc": "2026-09-29T11:20:35.948604+00:00",
+      "role": "independent continuation RNG replication; same parent and test cohort",
+      "archive": null,
+      "release_url": null,
+      "release_status": "draft until final delivery; URL resolves only after publication",
+      "restore": "python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz"
+    },
+    {
+      "name": "hold_r3_original_seed2902",
+      "epoch": 1250,
+      "path": "runs/hold_r3_original_seed2902/checkpoints/epoch_001250.pth",
+      "sha256": "b2d91f2087ccc74a7973494e17136722d00fa8cff3911101035994e8efe3b00f",
+      "frame": 204800000,
+      "model_finite": true,
+      "optimizer_saved": true,
+      "verified_utc": "2026-09-29T11:21:25.700973+00:00",
+      "role": "independent continuation RNG replication; same parent and test cohort",
+      "archive": null,
+      "release_url": null,
       "release_status": "draft until final delivery; URL resolves only after publication",
       "restore": "python -m scripts.restore_wuji_hold_run ARCHIVE.tar.gz"
     }
