@@ -1,0 +1,3087 @@
+scripts/collect_wuji_hold_integration.py
+  s_721f503d39167b::t_70df7a5fbbb793 1-49
+scripts/evaluate_wuji_hold_integration.py
+  s_721f503d39167b::t_9409d4ef3bd7fe 1-29
+scripts/launch_wuji_hold_integration.py
+  s_721f503d39167b::t_5f2ac093cbaafa 1-21,23-44
+  s_721f503d39167b::t_47691aa9e30a43 22
+scripts/audit_wuji_hold_followup_configs.py
+  s_721f503d39167b::t_453becd8257208 1-29
+scripts/train_wuji_hold_integration.py
+  s_721f503d39167b::t_5f2ac093cbaafa 8-41
+  s_721f503d39167b::t_2176f63be9585e 1-7
+scripts/collect_wuji_hold_evaluation.py
+  s_721f503d39167b::t_70df7a5fbbb793 30,34,65,68-70
+scripts/analyze_wuji_hold_integration.py
+  s_721f503d39167b::t_9409d4ef3bd7fe 1-46
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "9110a1ab43eeec0bc7d320595fb75df627f792b9",
+  "prompts": {},
+  "sessions": {
+    "s_721f503d39167b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0e87e-fbfa-7a80-b73c-3a968594ab0a",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.session_started_at": "2026-09-29T10:06:08Z",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.input_tokens": "21731477",
+        "tlab.token_usage.output_tokens": "340431",
+        "tlab.token_usage.cache_read_tokens": "125988456"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/hold-20260929/analysis-seed2901/endpoint-diagnostics.json",
+      "additions": {
+        "human": 642
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/analysis-seed2901/figures/manifest.json",
+      "additions": {
+        "human": 10
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/analysis-seed2901/report.json",
+      "additions": {
+        "human": 696
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/analysis-seed2901/temporal-diagnostics.json",
+      "additions": {
+        "human": 76234
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/analysis-seed2901/trials.csv",
+      "additions": {
+        "human": 3841
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/configs-followup/audit.json",
+      "additions": {
+        "human": 55
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/configs-followup/hold_integrate_shared_seed2903.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/configs-followup/hold_integrate_singleton_seed2903.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/configs-followup/hold_r3_dense1_seed2902.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/configs-followup/hold_r3_original_seed2902.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1250-t2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1250-t2/evidence/report.json",
+      "additions": {
+        "human": 1291
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1250-t2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1250-t2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1250-t2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1250-t2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1250-t2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1250-t5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1250-t5/evidence/report.json",
+      "additions": {
+        "human": 907
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1250-t5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1250-t5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1250-t5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1250-t5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1250-t5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1500-t2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1500-t2/evidence/report.json",
+      "additions": {
+        "human": 1291
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1500-t2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1500-t2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1500-t2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1500-t2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1500-t2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1500-t5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1500-t5/evidence/report.json",
+      "additions": {
+        "human": 907
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1500-t5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1500-t5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1500-t5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1500-t5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1500-t5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1750-t2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1750-t2/evidence/report.json",
+      "additions": {
+        "human": 1291
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1750-t2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1750-t2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1750-t2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1750-t2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1750-t2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1750-t5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1750-t5/evidence/report.json",
+      "additions": {
+        "human": 907
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1750-t5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1750-t5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1750-t5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1750-t5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp1750-t5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp2000-t2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp2000-t2/evidence/report.json",
+      "additions": {
+        "human": 1291
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp2000-t2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp2000-t2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp2000-t2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp2000-t2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp2000-t2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp2000-t5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp2000-t5/evidence/report.json",
+      "additions": {
+        "human": 907
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp2000-t5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp2000-t5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp2000-t5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp2000-t5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901-cp2000-t5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901/frozen.json",
+      "additions": {
+        "human": 17
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901/progress.json",
+      "additions": {
+        "human": 8834
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_dense1_seed2901/results.json",
+      "additions": {
+        "human": 8837
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1250-t2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1250-t2/evidence/report.json",
+      "additions": {
+        "human": 1291
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1250-t2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1250-t2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1250-t2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1250-t2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1250-t2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1250-t5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1250-t5/evidence/report.json",
+      "additions": {
+        "human": 907
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1250-t5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1250-t5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1250-t5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1250-t5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1250-t5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1500-t2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1500-t2/evidence/report.json",
+      "additions": {
+        "human": 1291
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1500-t2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1500-t2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1500-t2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1500-t2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1500-t2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1500-t5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1500-t5/evidence/report.json",
+      "additions": {
+        "human": 907
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1500-t5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1500-t5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1500-t5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1500-t5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1500-t5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1750-t2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1750-t2/evidence/report.json",
+      "additions": {
+        "human": 1291
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1750-t2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1750-t2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1750-t2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1750-t2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1750-t2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1750-t5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1750-t5/evidence/report.json",
+      "additions": {
+        "human": 907
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1750-t5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1750-t5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1750-t5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1750-t5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp1750-t5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp2000-t2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp2000-t2/evidence/report.json",
+      "additions": {
+        "human": 1291
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp2000-t2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp2000-t2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp2000-t2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp2000-t2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp2000-t2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp2000-t5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp2000-t5/evidence/report.json",
+      "additions": {
+        "human": 907
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp2000-t5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp2000-t5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp2000-t5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp2000-t5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901-cp2000-t5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901/frozen.json",
+      "additions": {
+        "human": 17
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901/progress.json",
+      "additions": {
+        "human": 8834
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r11_original_seed2901/results.json",
+      "additions": {
+        "human": 8837
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1250-t2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1250-t2/evidence/report.json",
+      "additions": {
+        "human": 1291
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1250-t2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1250-t2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1250-t2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1250-t2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1250-t2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1250-t5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1250-t5/evidence/report.json",
+      "additions": {
+        "human": 907
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1250-t5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1250-t5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1250-t5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1250-t5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1250-t5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1500-t2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1500-t2/evidence/report.json",
+      "additions": {
+        "human": 1291
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1500-t2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1500-t2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1500-t2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1500-t2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1500-t2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1500-t5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1500-t5/evidence/report.json",
+      "additions": {
+        "human": 907
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1500-t5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1500-t5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1500-t5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1500-t5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1500-t5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1750-t2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1750-t2/evidence/report.json",
+      "additions": {
+        "human": 1291
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1750-t2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1750-t2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1750-t2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1750-t2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1750-t2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1750-t5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1750-t5/evidence/report.json",
+      "additions": {
+        "human": 907
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1750-t5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1750-t5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1750-t5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1750-t5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp1750-t5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp2000-t2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp2000-t2/evidence/report.json",
+      "additions": {
+        "human": 1291
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp2000-t2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp2000-t2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp2000-t2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp2000-t2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp2000-t2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp2000-t5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp2000-t5/evidence/report.json",
+      "additions": {
+        "human": 907
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp2000-t5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp2000-t5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp2000-t5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp2000-t5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901-cp2000-t5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901/frozen.json",
+      "additions": {
+        "human": 17
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901/progress.json",
+      "additions": {
+        "human": 8834
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_dense1_seed2901/results.json",
+      "additions": {
+        "human": 8837
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1250-t2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1250-t2/evidence/report.json",
+      "additions": {
+        "human": 1291
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1250-t2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1250-t2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1250-t2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1250-t2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1250-t2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1250-t5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1250-t5/evidence/report.json",
+      "additions": {
+        "human": 907
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1250-t5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1250-t5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1250-t5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1250-t5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1250-t5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1500-t2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1500-t2/evidence/report.json",
+      "additions": {
+        "human": 1291
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1500-t2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1500-t2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1500-t2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1500-t2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1500-t2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1500-t5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1500-t5/evidence/report.json",
+      "additions": {
+        "human": 907
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1500-t5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1500-t5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1500-t5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1500-t5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1500-t5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1750-t2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1750-t2/evidence/report.json",
+      "additions": {
+        "human": 1291
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1750-t2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1750-t2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1750-t2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1750-t2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1750-t2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1750-t5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1750-t5/evidence/report.json",
+      "additions": {
+        "human": 907
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1750-t5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1750-t5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1750-t5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1750-t5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp1750-t5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp2000-t2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp2000-t2/evidence/report.json",
+      "additions": {
+        "human": 1291
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp2000-t2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp2000-t2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp2000-t2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp2000-t2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp2000-t2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp2000-t5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp2000-t5/evidence/report.json",
+      "additions": {
+        "human": 907
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp2000-t5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp2000-t5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp2000-t5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp2000-t5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901-cp2000-t5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901/frozen.json",
+      "additions": {
+        "human": 17
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901/progress.json",
+      "additions": {
+        "human": 8834
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/dev-hold_r3_original_seed2901/results.json",
+      "additions": {
+        "human": 8837
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-dense1-final-arrival/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-dense1-final-arrival/evidence/report.json",
+      "additions": {
+        "human": 3346
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-dense1-final-arrival/evidence/source.py",
+      "additions": {
+        "human": 186
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-dense1-final-arrival/evidence/source_metrics.py",
+      "additions": {
+        "human": 46
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-dense1-final-arrival/gpu.jsonl",
+      "additions": {
+        "human": 4
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-dense1-final-arrival/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-dense1-final-arrival/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-dense1-final-fixed2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-dense1-final-fixed2/evidence/report.json",
+      "additions": {
+        "human": 5035
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-dense1-final-fixed2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-dense1-final-fixed2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-dense1-final-fixed2/gpu.jsonl",
+      "additions": {
+        "human": 4
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-dense1-final-fixed2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-dense1-final-fixed2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-dense1-final-fixed5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-dense1-final-fixed5/evidence/report.json",
+      "additions": {
+        "human": 3499
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-dense1-final-fixed5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-dense1-final-fixed5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-dense1-final-fixed5/gpu.jsonl",
+      "additions": {
+        "human": 4
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-dense1-final-fixed5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-dense1-final-fixed5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-original-final-arrival/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-original-final-arrival/evidence/report.json",
+      "additions": {
+        "human": 3381
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-original-final-arrival/evidence/source.py",
+      "additions": {
+        "human": 186
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-original-final-arrival/evidence/source_metrics.py",
+      "additions": {
+        "human": 46
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-original-final-arrival/gpu.jsonl",
+      "additions": {
+        "human": 4
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-original-final-arrival/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-original-final-arrival/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-original-final-fixed2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-original-final-fixed2/evidence/report.json",
+      "additions": {
+        "human": 5035
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-original-final-fixed2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-original-final-fixed2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-original-final-fixed2/gpu.jsonl",
+      "additions": {
+        "human": 4
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-original-final-fixed2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-original-final-fixed2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-original-final-fixed5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-original-final-fixed5/evidence/report.json",
+      "additions": {
+        "human": 3499
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-original-final-fixed5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-original-final-fixed5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-original-final-fixed5/gpu.jsonl",
+      "additions": {
+        "human": 4
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-original-final-fixed5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-original-final-fixed5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-parent-arrival/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-parent-arrival/evidence/report.json",
+      "additions": {
+        "human": 3296
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-parent-arrival/evidence/source.py",
+      "additions": {
+        "human": 186
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-parent-arrival/evidence/source_metrics.py",
+      "additions": {
+        "human": 46
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-parent-arrival/gpu.jsonl",
+      "additions": {
+        "human": 4
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-parent-arrival/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-parent-arrival/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-parent-fixed2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-parent-fixed2/evidence/report.json",
+      "additions": {
+        "human": 5035
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-parent-fixed2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-parent-fixed2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-parent-fixed2/gpu.jsonl",
+      "additions": {
+        "human": 4
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-parent-fixed2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-parent-fixed2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-parent-fixed5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-parent-fixed5/evidence/report.json",
+      "additions": {
+        "human": 3499
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-parent-fixed5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-parent-fixed5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-parent-fixed5/gpu.jsonl",
+      "additions": {
+        "human": 4
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-parent-fixed5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-parent-fixed5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-static/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-static/evidence/report.json",
+      "additions": {
+        "human": 5035
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-static/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-static/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-static/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-static/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r11-seed2901-static/status.json",
+      "additions": {
+        "human": 38
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-final-arrival/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-final-arrival/evidence/report.json",
+      "additions": {
+        "human": 3606
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-final-arrival/evidence/source.py",
+      "additions": {
+        "human": 186
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-final-arrival/evidence/source_metrics.py",
+      "additions": {
+        "human": 46
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-final-arrival/gpu.jsonl",
+      "additions": {
+        "human": 4
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-final-arrival/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-final-arrival/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-final-fixed2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-final-fixed2/evidence/report.json",
+      "additions": {
+        "human": 5035
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-final-fixed2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-final-fixed2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-final-fixed2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-final-fixed2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-final-fixed2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-final-fixed5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-final-fixed5/evidence/report.json",
+      "additions": {
+        "human": 3499
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-final-fixed5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-final-fixed5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-final-fixed5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-final-fixed5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-final-fixed5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-selected-arrival/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-selected-arrival/evidence/report.json",
+      "additions": {
+        "human": 3554
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-selected-arrival/evidence/source.py",
+      "additions": {
+        "human": 186
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-selected-arrival/evidence/source_metrics.py",
+      "additions": {
+        "human": 46
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-selected-arrival/gpu.jsonl",
+      "additions": {
+        "human": 4
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-selected-arrival/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-selected-arrival/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-selected-fixed2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-selected-fixed2/evidence/report.json",
+      "additions": {
+        "human": 5035
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-selected-fixed2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-selected-fixed2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-selected-fixed2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-selected-fixed2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-selected-fixed2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-selected-fixed5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-selected-fixed5/evidence/report.json",
+      "additions": {
+        "human": 3499
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-selected-fixed5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-selected-fixed5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-selected-fixed5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-selected-fixed5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-dense1-selected-fixed5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-original-final-arrival/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-original-final-arrival/evidence/report.json",
+      "additions": {
+        "human": 3807
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-original-final-arrival/evidence/source.py",
+      "additions": {
+        "human": 186
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-original-final-arrival/evidence/source_metrics.py",
+      "additions": {
+        "human": 46
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-original-final-arrival/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-original-final-arrival/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-original-final-arrival/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-original-final-fixed2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-original-final-fixed2/evidence/report.json",
+      "additions": {
+        "human": 5035
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-original-final-fixed2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-original-final-fixed2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-original-final-fixed2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-original-final-fixed2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-original-final-fixed2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-original-final-fixed5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-original-final-fixed5/evidence/report.json",
+      "additions": {
+        "human": 3499
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-original-final-fixed5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-original-final-fixed5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-original-final-fixed5/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-original-final-fixed5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-original-final-fixed5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-parent-arrival/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-parent-arrival/evidence/report.json",
+      "additions": {
+        "human": 3493
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-parent-arrival/evidence/source.py",
+      "additions": {
+        "human": 186
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-parent-arrival/evidence/source_metrics.py",
+      "additions": {
+        "human": 46
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-parent-arrival/gpu.jsonl",
+      "additions": {
+        "human": 4
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-parent-arrival/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-parent-arrival/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-parent-fixed2/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-parent-fixed2/evidence/report.json",
+      "additions": {
+        "human": 5035
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-parent-fixed2/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-parent-fixed2/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-parent-fixed2/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-parent-fixed2/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-parent-fixed2/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-parent-fixed5/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-parent-fixed5/evidence/report.json",
+      "additions": {
+        "human": 3499
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-parent-fixed5/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-parent-fixed5/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-parent-fixed5/gpu.jsonl",
+      "additions": {
+        "human": 4
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-parent-fixed5/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-parent-fixed5/status.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-static/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-static/evidence/report.json",
+      "additions": {
+        "human": 5035
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-static/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-static/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-static/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-static/output.log",
+      "additions": {
+        "human": 126
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-r3-seed2901-static/status.json",
+      "additions": {
+        "human": 38
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-row11-seed2901/plan.json",
+      "additions": {
+        "human": 65
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-row11-seed2901/progress.json",
+      "additions": {
+        "human": 64543
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-row11-seed2901/results.json",
+      "additions": {
+        "human": 64611
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-row3-seed2901/plan.json",
+      "additions": {
+        "human": 65
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-row3-seed2901/progress.json",
+      "additions": {
+        "human": 66057
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/final-row3-seed2901/results.json",
+      "additions": {
+        "human": 66125
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_r11_dense1_seed2901/gpu.jsonl",
+      "additions": {
+        "human": 379
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_r11_dense1_seed2901/output.log",
+      "additions": {
+        "human": 15547
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_r11_dense1_seed2901/status.json",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_r11_original_seed2901/gpu.jsonl",
+      "additions": {
+        "human": 380
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_r11_original_seed2901/output.log",
+      "additions": {
+        "human": 15503
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_r11_original_seed2901/status.json",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_r3_dense1_seed2901/gpu.jsonl",
+      "additions": {
+        "human": 391
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_r3_dense1_seed2901/output.log",
+      "additions": {
+        "human": 15573
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_r3_dense1_seed2901/status.json",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_r3_original_seed2901/gpu.jsonl",
+      "additions": {
+        "human": 391
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_r3_original_seed2901/output.log",
+      "additions": {
+        "human": 15579
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/hold_r3_original_seed2901/status.json",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/followup-decision.json",
+      "additions": {
+        "human": 140
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/integration-plan.json",
+      "additions": {
+        "human": 33
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/core-archive-restore-check.txt",
+      "additions": {
+        "human": 4
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/core-training-complete.json",
+      "additions": {
+        "human": 233
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/development-frozen-all.json",
+      "additions": {
+        "human": 75
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/final-video-raw-manifest.json",
+      "additions": {
+        "human": 149
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/followup-config-audit.log",
+      "additions": {
+        "human": 154
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/followup-evaluation-queues.json",
+      "additions": {
+        "human": 73
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/followup-idle-check.json",
+      "additions": {
+        "human": 5
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/followup-initial-identities.json",
+      "additions": {
+        "human": 268
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/followup-launch.json",
+      "additions": {
+        "human": 89
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/followup-local-queues.json",
+      "additions": {
+        "human": 9
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/followup-pair-audit.json",
+      "additions": {
+        "human": 36
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/hold_r11_dense1_seed2901-archive.json",
+      "additions": {
+        "human": 134
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/hold_r11_original_seed2901-archive.json",
+      "additions": {
+        "human": 134
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/hold_r3_dense1_seed2901-archive.json",
+      "additions": {
+        "human": 134
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/hold_r3_original_seed2901-archive.json",
+      "additions": {
+        "human": 134
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/raw-row11-seed2901.json",
+      "additions": {
+        "human": 874
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/raw-row3-seed2901.json",
+      "additions": {
+        "human": 970
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/release-final-videos.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/release-hold_r11_dense1_seed2901.json",
+      "additions": {
+        "human": 9
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/release-hold_r11_original_seed2901.json",
+      "additions": {
+        "human": 9
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/release-hold_r3_dense1_seed2901.json",
+      "additions": {
+        "human": 9
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/release-hold_r3_original_seed2901.json",
+      "additions": {
+        "human": 9
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/release-row11-core-raw.json",
+      "additions": {
+        "human": 9
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/release-row3-core-raw.json",
+      "additions": {
+        "human": 9
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/replication-plan.json",
+      "additions": {
+        "human": 14
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-render-results.json",
+      "additions": {
+        "human": 37
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source11-dense1/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source11-dense1/evidence/report.json",
+      "additions": {
+        "human": 70
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source11-dense1/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source11-dense1/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source11-dense1/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source11-dense1/output.log",
+      "additions": {
+        "human": 41
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source11-dense1/status.json",
+      "additions": {
+        "human": 40
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source11-original/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source11-original/evidence/report.json",
+      "additions": {
+        "human": 70
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source11-original/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source11-original/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source11-original/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source11-original/output.log",
+      "additions": {
+        "human": 41
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source11-original/status.json",
+      "additions": {
+        "human": 40
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source3-dense1/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source3-dense1/evidence/report.json",
+      "additions": {
+        "human": 70
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source3-dense1/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source3-dense1/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source3-dense1/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source3-dense1/output.log",
+      "additions": {
+        "human": 41
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source3-dense1/status.json",
+      "additions": {
+        "human": 40
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source3-original/evidence/config.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source3-original/evidence/report.json",
+      "additions": {
+        "human": 70
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source3-original/evidence/source.py",
+      "additions": {
+        "human": 179
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source3-original/evidence/source_metrics.py",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source3-original/gpu.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source3-original/output.log",
+      "additions": {
+        "human": 41
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-source3-original/status.json",
+      "additions": {
+        "human": 40
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/video/final-video-results.json",
+      "additions": {
+        "human": 45
+      }
+    },
+    {
+      "new_path": "scripts/analyze_wuji_hold_integration.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 46
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/audit_wuji_hold_followup_configs.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 29
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/collect_wuji_hold_integration.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 49
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/evaluate_wuji_hold_integration.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 29
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/launch_wuji_hold_integration.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 44
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/train_wuji_hold_integration.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 41
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 141
+      },
+      "deletions": {
+        "human": 14
+      }
+    },
+    {
+      "old_path": "WUJI_HOLD_HANDOFF.md",
+      "new_path": "WUJI_HOLD_HANDOFF.md",
+      "additions": {
+        "human": 771
+      },
+      "deletions": {
+        "human": 14
+      }
+    },
+    {
+      "old_path": "research/hold-20260929/README.md",
+      "new_path": "research/hold-20260929/README.md",
+      "additions": {
+        "human": 35
+      },
+      "deletions": {
+        "human": 4
+      }
+    },
+    {
+      "old_path": "research/hold-20260929/receipts/backup-core.json",
+      "new_path": "research/hold-20260929/receipts/backup-core.json",
+      "additions": {
+        "human": 81
+      },
+      "deletions": {
+        "human": 1
+      }
+    },
+    {
+      "old_path": "research/hold-20260929/receipts/gpu-history.jsonl",
+      "new_path": "research/hold-20260929/receipts/gpu-history.jsonl",
+      "additions": {
+        "human": 412
+      }
+    },
+    {
+      "old_path": "research/hold-20260929/receipts/monitor-latest.json",
+      "new_path": "research/hold-20260929/receipts/monitor-latest.json",
+      "additions": {
+        "human": 2518
+      },
+      "deletions": {
+        "human": 38
+      }
+    },
+    {
+      "old_path": "research/hold-20260929/state.json",
+      "new_path": "research/hold-20260929/state.json",
+      "additions": {
+        "human": 9
+      },
+      "deletions": {
+        "human": 5
+      }
+    },
+    {
+      "old_path": "scripts/collect_wuji_hold_evaluation.py",
+      "new_path": "scripts/collect_wuji_hold_evaluation.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 6
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 4
+          }
+        ]
+      }
+    }
+  ]
+}
