@@ -1,0 +1,348 @@
+scripts/archive_wuji_hold_run.py
+  s_721f503d39167b::t_46600259cdcdde 1-45
+scripts/audit_wuji_hold_configs.py
+  s_721f503d39167b::t_572ded3e51847c 1-40
+scripts/restore_wuji_hold_run.py
+  s_721f503d39167b::t_46600259cdcdde 1-38
+scripts/summarize_wuji_hold_stages.py
+  s_721f503d39167b::t_6e619faf4c3b6e 1-85
+scripts/analyze_wuji_hold.py
+  s_721f503d39167b::t_6e619faf4c3b6e 11,22,46,75
+scripts/record_wuji_hold_event.py
+  s_721f503d39167b::t_6e619faf4c3b6e 19
+scripts/summarize_wuji_hold_resources.py
+  s_721f503d39167b::t_c2a85d544c0a18 1-52
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "55e7ce819f90afba730fc6a5b5e93fc91bfb116e",
+  "prompts": {},
+  "sessions": {
+    "s_721f503d39167b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0e87e-fbfa-7a80-b73c-3a968594ab0a",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.input_tokens": "16574222",
+        "tlab.token_usage.cache_read_tokens": "98265867",
+        "tlab.session_started_at": "2026-09-29T06:51:29Z",
+        "tlab.token_usage.output_tokens": "275112",
+        "tlab.token_usage.cache_creation_tokens": "0"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/hold-20260929/configs/audit.json",
+      "additions": {
+        "human": 48
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/configs/hold_r11_dense1_seed2901.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/configs/hold_r11_original_seed2901.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/configs/hold_r3_dense1_seed2901.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/configs/hold_r3_original_seed2901.yaml",
+      "additions": {
+        "human": 465
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/preflight_r11_dense1/gpu.jsonl",
+      "additions": {
+        "human": 5
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/preflight_r11_dense1/output.log",
+      "additions": {
+        "human": 600
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/preflight_r11_dense1/status.json",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/preflight_r11_original/gpu.jsonl",
+      "additions": {
+        "human": 5
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/preflight_r11_original/output.log",
+      "additions": {
+        "human": 596
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/preflight_r11_original/status.json",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/preflight_r3_dense1/gpu.jsonl",
+      "additions": {
+        "human": 5
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/preflight_r3_dense1/output.log",
+      "additions": {
+        "human": 596
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/preflight_r3_dense1/status.json",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/preflight_r3_original/gpu.jsonl",
+      "additions": {
+        "human": 5
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/preflight_r3_original/output.log",
+      "additions": {
+        "human": 596
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/evidence/preflight_r3_original/status.json",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/archive-restore-preflight-check.txt",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/parent-weights.json",
+      "additions": {
+        "human": 20
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/preflight_r11_dense1-archive.json",
+      "additions": {
+        "human": 94
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/preflight_r11_original-archive.json",
+      "additions": {
+        "human": 94
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/preflight_r3_dense1-archive.json",
+      "additions": {
+        "human": 94
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/preflight_r3_original-archive.json",
+      "additions": {
+        "human": 94
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/release-created.json",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/release-parent-preflight.json",
+      "additions": {
+        "human": 16
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/resources-current.json",
+      "additions": {
+        "human": 141
+      }
+    },
+    {
+      "new_path": "research/hold-20260929/receipts/stage-diagnostic-reproduction.json",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "new_path": "scripts/archive_wuji_hold_run.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 45
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/audit_wuji_hold_configs.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 40
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/restore_wuji_hold_run.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 38
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/summarize_wuji_hold_resources.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 52
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/summarize_wuji_hold_stages.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 85
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 5
+      }
+    },
+    {
+      "old_path": "WUJI_HOLD_HANDOFF.md",
+      "new_path": "WUJI_HOLD_HANDOFF.md",
+      "additions": {
+        "human": 30
+      }
+    },
+    {
+      "old_path": "research/hold-20260929/preregistration.json",
+      "new_path": "research/hold-20260929/preregistration.json",
+      "additions": {
+        "human": 8
+      },
+      "deletions": {
+        "human": 1
+      }
+    },
+    {
+      "old_path": "research/hold-20260929/receipts/gpu-history.jsonl",
+      "new_path": "research/hold-20260929/receipts/gpu-history.jsonl",
+      "additions": {
+        "human": 34
+      }
+    },
+    {
+      "old_path": "research/hold-20260929/receipts/monitor-latest.json",
+      "new_path": "research/hold-20260929/receipts/monitor-latest.json",
+      "additions": {
+        "human": 18
+      },
+      "deletions": {
+        "human": 18
+      }
+    },
+    {
+      "old_path": "research/hold-20260929/state.json",
+      "new_path": "research/hold-20260929/state.json",
+      "additions": {
+        "human": 16
+      },
+      "deletions": {
+        "human": 2
+      }
+    },
+    {
+      "old_path": "scripts/analyze_wuji_hold.py",
+      "new_path": "scripts/analyze_wuji_hold.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 4
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 1
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/record_wuji_hold_event.py",
+      "new_path": "scripts/record_wuji_hold_event.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 1
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 1
+          }
+        ]
+      }
+    }
+  ]
+}
