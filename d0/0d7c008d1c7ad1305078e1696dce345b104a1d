@@ -1,0 +1,95 @@
+scripts/summarize_wuji_hold_followup.py
+  s_721f503d39167b::t_b03ca207992e50 1-49,68-105
+  s_721f503d39167b::t_0b4f88770d412e 50-67
+scripts/index_wuji_hold_weights.py
+  s_721f503d39167b::t_7d29dce9c7616f 2,11-13,30
+scripts/package_wuji_hold_integration_video.py
+  s_721f503d39167b::t_abc69afa24185b 1-52
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "d00d7c008d1c7ad1305078e1696dce345b104a1d",
+  "prompts": {},
+  "sessions": {
+    "s_721f503d39167b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0e87e-fbfa-7a80-b73c-3a968594ab0a",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.input_tokens": "24750452",
+        "tlab.session_started_at": "2026-09-29T13:28:24Z",
+        "tlab.token_usage.output_tokens": "383868",
+        "tlab.token_usage.cache_read_tokens": "161753467"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/hold-20260929/receipts/resource-1329.json",
+      "additions": {
+        "human": 201
+      }
+    },
+    {
+      "new_path": "scripts/package_wuji_hold_integration_video.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 52
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/summarize_wuji_hold_followup.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 105
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 64
+      }
+    },
+    {
+      "old_path": "WUJI_HOLD_HANDOFF.md",
+      "new_path": "WUJI_HOLD_HANDOFF.md",
+      "additions": {
+        "human": 64
+      }
+    },
+    {
+      "old_path": "scripts/index_wuji_hold_weights.py",
+      "new_path": "scripts/index_wuji_hold_weights.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 5
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_721f503d39167b",
+            "lines": 1
+          }
+        ]
+      }
+    }
+  ]
+}
