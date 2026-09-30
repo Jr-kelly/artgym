@@ -1,0 +1,15 @@
+defaults:
+  - knife_wuji_bridge3_20260922
+  - _self_
+task:
+  success_threshold: 0.005
+reward:
+  ObjPosDeviation: -50.0
+  ObjRotDeviation: -2.0
+  StableContact: 1.0
+  GoalDistance1: 1000.0
+  GoalDistance2: 1.0
+  HandQposDeviation: -0.001
+  Smooth: -1.0
+  Drop: -1.0
+  Success: 50.0

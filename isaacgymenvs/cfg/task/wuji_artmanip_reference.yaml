@@ -1,0 +1,28 @@
+defaults:
+  - wuji_demo_corrected
+  - _self_
+name: wuji_artmanip_reference
+env:
+  trainingStates: research/artmanip-recovery-20260930/data/rl-train.npy
+  singleSource: -1
+  controlFrequencyInv: 4
+  useRelativeControl: true
+  dofSpeedScale: 1.0
+  actionsMovingAverage: 0.01
+  episodeLength: 1200
+  successHoldDurationSec: 1.5
+  successHoldDurationRangeSec: [0.0, 2.0]
+  maxConsecutiveSuccesses: 20
+  goalSwitchTimeoutSec: 10.0
+  jointNoise: 0.01
+  rewardProtocol: corrected
+  rewardWeightCurriculum:
+    ObjPosDeviation: -5.0
+    ObjRotDeviation: -0.2
+    StableContact: 0.1
+  rewardWeightCurriculumSchedule:
+    warmupSteps: 200
+    totalSteps: 2000
+  # Kept for compatible generic audit metadata only, not used by control.
+  supportActionSpan: 0.04
+  thumbActionStep: 0.025
