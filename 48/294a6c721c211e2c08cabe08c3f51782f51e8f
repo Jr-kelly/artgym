@@ -1,0 +1,192 @@
+scripts/validate_wuji_recovery_final.py
+  s_13dba2dc3e07f8::t_10eb0858592b1e 1-36
+scripts/freeze_wuji_recovery.py
+  s_13dba2dc3e07f8::t_b2d03ef61f2df7 110
+scripts/evaluate_wuji_recovery_batch.py
+  s_13dba2dc3e07f8::t_10eb0858592b1e 2,4,9-10,12
+scripts/launch_wuji_recovery_local_video.py
+  s_13dba2dc3e07f8::t_b2d03ef61f2df7 1-14,16-58,73-81,85-107
+  s_13dba2dc3e07f8::t_8ce79a59f71305 15,59-72,82-84
+scripts/launch_wuji_recovery.py
+  s_13dba2dc3e07f8::t_b2d03ef61f2df7 29-31
+scripts/status_wuji_recovery.py
+  s_13dba2dc3e07f8::t_b2d03ef61f2df7 22-28,30-40,45,48,50-51
+  s_13dba2dc3e07f8::t_8ce79a59f71305 29
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "48294a6c721c211e2c08cabe08c3f51782f51e8f",
+  "prompts": {},
+  "sessions": {
+    "s_13dba2dc3e07f8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f10b-dd7b-7be1-bb17-993f50d34df5",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_read_tokens": "107049570",
+        "tlab.token_usage.input_tokens": "2414766",
+        "tlab.token_usage.output_tokens": "442545",
+        "tlab.session_started_at": "2026-09-30T13:37:52Z",
+        "tlab.token_usage.cache_creation_tokens": "0"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-launch-validation.json",
+      "additions": {
+        "human": 15
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/video-runtime-readiness.json",
+      "additions": {
+        "human": 9
+      }
+    },
+    {
+      "new_path": "scripts/launch_wuji_recovery_local_video.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 107
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/validate_wuji_recovery_final.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 36
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 51
+      },
+      "deletions": {
+        "human": 27
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/DECISIONS.jsonl",
+      "new_path": "research/artmanip-recovery-20260930/DECISIONS.jsonl",
+      "additions": {
+        "human": 42
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/HANDOFF.md",
+      "new_path": "research/artmanip-recovery-20260930/HANDOFF.md",
+      "additions": {
+        "human": 51
+      },
+      "deletions": {
+        "human": 27
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/STATE.json",
+      "new_path": "research/artmanip-recovery-20260930/STATE.json",
+      "additions": {
+        "human": 37
+      },
+      "deletions": {
+        "human": 19
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/draft-assets-verified.json",
+      "new_path": "research/artmanip-recovery-20260930/draft-assets-verified.json",
+      "additions": {
+        "human": 7
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/resources/latest.json",
+      "new_path": "research/artmanip-recovery-20260930/resources/latest.json",
+      "additions": {
+        "human": 250
+      },
+      "deletions": {
+        "human": 215
+      }
+    },
+    {
+      "old_path": "scripts/evaluate_wuji_recovery_batch.py",
+      "new_path": "scripts/evaluate_wuji_recovery_batch.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 5
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 2
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/freeze_wuji_recovery.py",
+      "new_path": "scripts/freeze_wuji_recovery.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 1
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/launch_wuji_recovery.py",
+      "new_path": "scripts/launch_wuji_recovery.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 3
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/status_wuji_recovery.py",
+      "new_path": "scripts/status_wuji_recovery.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 23
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 2
+          }
+        ]
+      }
+    }
+  ]
+}
