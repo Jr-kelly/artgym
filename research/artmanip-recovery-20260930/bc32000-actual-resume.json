@@ -1,0 +1,63 @@
+{
+  "rows": [
+    {
+      "arm": "M",
+      "epoch": 4100,
+      "updates": 32800,
+      "adam_steps": [
+        32800
+      ],
+      "fixed_tensor_count": 28,
+      "normalizer_critic_frozen": true,
+      "sha256": "ca65222b793f7a1dd5669652ace4413b213e018ef26b77eb78c80696940ca25a"
+    },
+    {
+      "arm": "E",
+      "epoch": 4100,
+      "updates": 32800,
+      "adam_steps": [
+        32800
+      ],
+      "fixed_tensor_count": 28,
+      "normalizer_critic_frozen": true,
+      "sha256": "7d6432a7110019abc112b9cd3321a45c56e72eb1b0c88f2ade5747b638b89410"
+    }
+  ],
+  "same_end_rng": true,
+  "passed": true,
+  "scope": "Checkpoint integrity and paired optimizer/sequence random state, not a closed-loop score",
+  "actual_resume": [
+    {
+      "arm": "M",
+      "parent_sha256": "d1780b90eda8ce7e3d437465a90a0418503ba8de02ef2a8a4b475300c114b6b3",
+      "saved_start_sha256": "dd356f46d20eb1157f2f128f7f801f8ab94396f503bd12c5efd03df1586ddfb9",
+      "equal_fields": [
+        "model",
+        "bc_optimizer",
+        "bc_torch_rng",
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_epoch",
+        "bc_updates"
+      ],
+      "first_epoch": 2501,
+      "first_updates": 20008
+    },
+    {
+      "arm": "E",
+      "parent_sha256": "0f8256a45fe685674272165ea2a1c213a9f753951c89c9b1a2c61e82726ba41a",
+      "saved_start_sha256": "79f9e3e4598b53518b6aefaefa633bc26feb7f309e4dae88f666f57a17d65a3a",
+      "equal_fields": [
+        "model",
+        "bc_optimizer",
+        "bc_torch_rng",
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_epoch",
+        "bc_updates"
+      ],
+      "first_epoch": 2501,
+      "first_updates": 20008
+    }
+  ]
+}

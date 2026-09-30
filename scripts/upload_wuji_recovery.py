@@ -8,6 +8,7 @@ def main():
     verified=[]
     for receipt in sorted((R/'delivery/artmanip-recovery-20260930').glob('*.receipt.json')):
         item=json.loads(receipt.read_text());p=R/item['archive'];assert p.exists()
+        assert item['size'] <= 2*1024**3, 'Split oversized archives before GitHub upload: '+str(p)
         assets=json.loads(gh('api',f'repos/{REPO}/releases/{rid}/assets','--paginate'));found=[a for a in assets if a['name']==p.name]
         if not found:
             record('release_upload_started',name=p.name,sha256=item['sha256'],release=TAG,next='Verify server digest')

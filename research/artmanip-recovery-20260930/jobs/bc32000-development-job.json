@@ -1,0 +1,30 @@
+{
+  "name": "bc32000-development-job",
+  "gpu": 1,
+  "timeout": 1800,
+  "final_phase": false,
+  "command": [
+    "PYTHON",
+    "-m",
+    "scripts.evaluate_wuji_recovery_batch",
+    "--name",
+    "bc32000-development",
+    "--states",
+    "research/artmanip-recovery-20260930/data/development-all.npy",
+    "--models",
+    "M4100=runs/artmanip-recovery-20260930/bc-pair32000/M/epoch_004100.pth",
+    "E4100=runs/artmanip-recovery-20260930/bc-pair32000/E/epoch_004100.pth",
+    "--protocols",
+    "S2",
+    "S5",
+    "F"
+  ],
+  "source_sha": "857270b7de6fc7ab17d196d6dec54c0822371d8b",
+  "created_utc": "2026-09-30T12:42:39.455842+00:00",
+  "budget_receipt_utc": "2026-09-30T12:42:39.282952+00:00",
+  "occupied_gpu_hours": 10.964272831388886,
+  "other_jobs_reserved_gpu_hours": 1.5761187855555554,
+  "root": "/tmp/artgym-recovery-20260930",
+  "pin": "/tmp/artgym-recovery-20260930/pins/857270b7de6fc7ab17d196d6dec54c0822371d8b",
+  "pid": 42986
+}

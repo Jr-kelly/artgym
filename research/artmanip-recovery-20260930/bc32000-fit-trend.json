@@ -1,0 +1,77 @@
+{
+  "rows": [
+    {
+      "arm": "M",
+      "epoch": 2500,
+      "target_mean": 0.0003238626813981682,
+      "source3_target_mean": 0.0008270117687061429,
+      "executed_mse": 0.001337815232545836
+    },
+    {
+      "arm": "M",
+      "epoch": 3800,
+      "target_mean": 0.0002903269087255467,
+      "source3_target_mean": 0.0007904801168479025,
+      "executed_mse": 0.001181175504143539
+    },
+    {
+      "arm": "M",
+      "epoch": 3900,
+      "target_mean": 0.0002888762792281341,
+      "source3_target_mean": 0.0007870751724112779,
+      "executed_mse": 0.0011729319053301879
+    },
+    {
+      "arm": "M",
+      "epoch": 4000,
+      "target_mean": 0.00028793062301701866,
+      "source3_target_mean": 0.0007857883756514639,
+      "executed_mse": 0.00116811870498168
+    },
+    {
+      "arm": "M",
+      "epoch": 4100,
+      "target_mean": 0.00028785746781068156,
+      "source3_target_mean": 0.0007851578702684492,
+      "executed_mse": 0.0011688141999002255
+    },
+    {
+      "arm": "E",
+      "epoch": 2500,
+      "target_mean": 0.0002444686833769083,
+      "source3_target_mean": 0.0006262511305976659,
+      "executed_mse": 0.0006932787894129433
+    },
+    {
+      "arm": "E",
+      "epoch": 3800,
+      "target_mean": 0.0002171735586671275,
+      "source3_target_mean": 0.0005611127853626385,
+      "executed_mse": 0.0005791524408778059
+    },
+    {
+      "arm": "E",
+      "epoch": 3900,
+      "target_mean": 0.00021541111527767498,
+      "source3_target_mean": 0.0005563185841310769,
+      "executed_mse": 0.0005725187409097998
+    },
+    {
+      "arm": "E",
+      "epoch": 4000,
+      "target_mean": 0.00021472456410265295,
+      "source3_target_mean": 0.0005547644104808569,
+      "executed_mse": 0.0005683079809841729
+    },
+    {
+      "arm": "E",
+      "epoch": 4100,
+      "target_mean": 0.0002130158172803931,
+      "source3_target_mean": 0.0005511560593731701,
+      "executed_mse": 0.0005638723816900892
+    }
+  ],
+  "scope": "Offline held-out actual expert histories; normalized target range errors, not radians or closed-loop success",
+  "interpretation": "2500\u21924100 error still decreases overall. Late3800\u21924100 total mean target improvementM0.85percent/E1.91percent; no whole-branch plateau claim without phase/body and independent closed-loop evidence.",
+  "next": "Wait4100 independentdev and compare actual state shift before choosing continued optimization or a small history-consistent data aggregation control."
+}
