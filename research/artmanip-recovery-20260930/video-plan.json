@@ -1,0 +1,18 @@
+{
+  "frozen_example_rows": [
+    0,
+    32,
+    64,
+    96
+  ],
+  "states": "research/artmanip-recovery-20260930/data/development-all.npy",
+  "selection": "Use eventual selected teacher with same weights for all4sources; retain at least one representative failing example separately if fixed grid has no failure.",
+  "protocols": [
+    "S2",
+    "S5",
+    "F"
+  ],
+  "scope": "Separate same-initial-state simulation, not final batch evidence; device recorded after actual launch.",
+  "device": "Prefer authorized H200 if camera precheck works; prior H200 camera failure exists, local4090 fallback only after actual availability check and max2GPU accounting.",
+  "packaging": "scripts/package_wuji_recovery_video.py independently rescores raw trace and checks600/1200frames. No final model or heldout outcome selected now."
+}
