@@ -1,0 +1,118 @@
+scripts/audit_wuji_recovery_reset_pool.py
+  s_13dba2dc3e07f8::t_6e9a4e012515b6 42-45,63-73,87
+  s_13dba2dc3e07f8::t_1fb1e2dc37f571 19,24,26-29
+scripts/repair_wuji_recovery_training_pool.py
+  s_13dba2dc3e07f8::t_1fb1e2dc37f571 1-53
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "49cd4bce9f9859c42e99150d692914bd68c53973",
+  "prompts": {},
+  "sessions": {
+    "s_13dba2dc3e07f8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f10b-dd7b-7be1-bb17-993f50d34df5",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.session_started_at": "2026-09-30T09:58:51Z",
+        "tlab.token_usage.input_tokens": "1643822",
+        "tlab.token_usage.cache_read_tokens": "63583506",
+        "tlab.token_usage.output_tokens": "226864"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/artmanip-recovery-20260930/data/rl-train-static-valid.json",
+      "additions": {
+        "human": 45
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/reset-repair-comparison-plan.json",
+      "additions": {
+        "human": 9
+      }
+    },
+    {
+      "new_path": "scripts/repair_wuji_recovery_training_pool.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 53
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 141
+      },
+      "deletions": {
+        "human": 83
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/DECISIONS.jsonl",
+      "new_path": "research/artmanip-recovery-20260930/DECISIONS.jsonl",
+      "additions": {
+        "human": 6
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/HANDOFF.md",
+      "new_path": "research/artmanip-recovery-20260930/HANDOFF.md",
+      "additions": {
+        "human": 133
+      },
+      "deletions": {
+        "human": 19
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/README.md",
+      "new_path": "research/artmanip-recovery-20260930/README.md",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/STATE.json",
+      "new_path": "research/artmanip-recovery-20260930/STATE.json",
+      "additions": {
+        "human": 81
+      },
+      "deletions": {
+        "human": 12
+      }
+    },
+    {
+      "old_path": "scripts/audit_wuji_recovery_reset_pool.py",
+      "new_path": "scripts/audit_wuji_recovery_reset_pool.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 22
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 4
+          }
+        ]
+      }
+    }
+  ]
+}
