@@ -5,7 +5,7 @@
 |项目|论文|固定上游源码|既有 Wuji|本轮参考与分类|
 |---|---|---|---|---|
 |任务范围|30实例训练、5留出；类别级多抓姿|`sample_grasps` 随实例随机抓姿池|固定刀，0/1近邻、2为另一旧簇、3新簇|只固定刀0/1/2/3；每reset随机来源及扰动，记录实际访问；主动缩小范围，非类别复现|
-|初态|每实例1000候选，一秒静态筛选|保存关节位置/目标、物体两link位姿、接触；reset目标恢复|75维既有抓姿及±.01rad、±.5mm、±.5°扰动|新RL train128/源；BC复用旧1024轨迹；全新dev32/promotion64/final128/源，最终不传计算机；移植必需|
+|初态|每实例1000候选，一秒静态筛选|保存关节位置/目标、物体两link位姿、接触；reset目标恢复|75维既有抓姿及±.01rad、±.5mm、±.5°扰动|新RL train128/源；BC复用旧1024轨迹；全新dev32/promotion64/final128/源，冻结前不向计算节点传送最终集；移植必需|
 |手与驱动|Sharpa22动作|配置关节索引，PD位置控制|Wuji URDF20仿真关节，thumb索引16:20，digit-filtered碰撞|保留核验过的Wuji顺序、官方MJCF敏感性PD配置，不称实物校准；移植必需|
 |目标增量|全手 α=1/40|`ArtManip.pre_physics_step`: previous+speed×sim.dt×action；speed1、dt≈1/120，控制inv4|非拇指init+.04×a，thumb previous+.025×a；clamp目标|直接调用上游全增量路径，实测每输出的有效步长，不把论文.025静默替换进去；整体系统改动|
 |裁剪与平滑|动作[-1,1]|RL player/env裁剪；relative不应用moving average|先裁动作，再混合目标、限位，再内部unscale→scale|参考相对分支；M/E保留原混合链路；动作/prev action/目标一致性用旧数据重核验|

@@ -177,3 +177,32 @@ from its restored archive. `complete_wuji_recovery_final_analysis` reuses that c
 and scores the remaining17 restored models, preserving the same scorer hash, before
 merging `final-analysis`. It is a session orchestration helper with resource checks; the
 commands above are the portable offline rescore procedure.
+
+
+## Exact commands and source snapshots used in this round
+
+The commands above are explanatory examples. The following immutable job specifications
+contain the actual argument arrays, parent checkpoints, source commit, timeout and device
+allocation. Their wrapper directories in the corresponding Release archives contain
+`status.json` and `output.log`; training directories additionally contain the parsed
+configuration and resume metadata. Restore each parent before attempting a continuation,
+use the specification's source commit, and choose a fresh output name for a new run.
+These are reproducibility records, not instructions to repeat this round's opened final set.
+
+|Stage|Actual job specification|
+|---|---|
+|Original joint RL, segments 1–4|[1](jobs/rl-seg1-retry1-job.json), [2](jobs/rl-seg2-job.json), [3](jobs/rl-seg3-job.json), [4](jobs/rl-seg4-job.json)|
+|Matched M/E, cumulative 32,000 added updates|[M/E final segment](jobs/bc-pair32000-job.json); preceding segments are indexed in [jobs](jobs)|
+|E extension to 44,800 added updates|[E extension](jobs/bc-executed44800-job.json)|
+|Same-parent original-goal and holding-goal RL controls|[Original goal](jobs/rl-reference-clean-job.json), [holding goal](jobs/rl-clockhold-clean-job.json)|
+|Own-history collection and matched aggregate/replay fitting|[Collection](jobs/aggregation1-collection-job.json), [paired fitting](jobs/aggregation1-pair6400-job.json)|
+|Primary independent 64/source confirmation|[Confirmation](jobs/aggregation1-promotion64-job.json)|
+|Second optimization seed, complete route|[E 44,800](jobs/bc-seed2-executed44800-job.json), [own collection](jobs/aggregation2-collection-job.json), [aggregate 3,200](jobs/bc-seed2-aggregate3200-job.json)|
+|Second-seed independent 64/source confirmation|[Confirmation](jobs/seed2-promotion64-job.json)|
+|Once-only frozen final comparison|[GPU 0](jobs/final-g0-job.json), [GPU 1](jobs/final-g1-job.json), [immutable freeze](final-freeze.json)|
+
+The primary's aggregate 6,100 checkpoint contains48,800 total BC Adam updates:
+800 inherited at BC100,44,800 execution-label updates, then3,200 aggregation updates.
+Its6,500 fixed endpoint and the replay6,500 control contain52,000 total updates.
+Both matched M/E4,100 checkpoints contain32,800 total updates. Epoch numbers are
+serialized continuation labels; they are not environment interactions or optimizer counts.
