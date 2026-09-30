@@ -1,9 +1,9 @@
-"""Independent fixed-time goal commands; arrival never triggers a command change.
+"""Independent S fixed-clock or F arrival-triggered physical evaluation episodes.
 
 Physics, policy observations and action mapping use the original environment.
 The simulator still supplies privileged inputs to a teacher; only the student
 has the deployment observation restriction. Neither path establishes hardware
-success. All timing decisions depend only on the control-step counter.
+success. S switches on its fixed clock; F switches after45 valid in-tolerance steps.
 """
 import argparse
 import hashlib
@@ -111,6 +111,10 @@ def main():
                    fall=env.debug_reset_cause_fall, invalid=env.debug_reset_cause_invalid,
                    contact=env.contact_info, contact_force=env.contact_forces[:, env.force_handles], object_pos=env.object_pos, object_rot=env.object_rot, q=env.hand_dof_pos, target=env.cur_targets[:, :20], action=env.actions)
         frames.append({k:v.detach().cpu().numpy().copy() for k,v in row.items()})
+        if len(frames) % 100 == 0:
+            (args.output/'progress.json').write_text(json.dumps(dict(
+                recorded_steps=len(frames),declared_steps=total_steps,
+                active=int(active.sum()),wall_seconds=__import__('time').monotonic()-started))+'\n')
         # post_physics_step computes next observations after this callback, so
         # the next policy action sees the new goal with one history update.
         if args.protocol=='F':
