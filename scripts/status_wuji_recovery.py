@@ -34,5 +34,5 @@ print(json.dumps(dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat
     if a.pull:
         subprocess.run(['rsync','-a','--exclude=*.pth','--exclude=*.npz','--exclude=*.mp4','-e','ssh -i /home/agiuser/.ssh/id_ed25519_h200 -p 33024','wangjiarui@10.13.160.5:'+REMOTE+'/runs/artmanip-recovery-20260930/',str(R/'runs/artmanip-recovery-20260930/')],check=True)
     for j in newly:record('job_finished',job=j,gpu_hours=gpu_hours,next='Read evidence and decide follow-up; process state verified at '+result['utc'])
-    print(json.dumps(dict(utc=result['utc'],gpu_hours=gpu_hours,gpus=result['gpus'],active=[dict(name=j['name'],pid=j['pid'],gpu=j['gpu']) for j in state['active_jobs']],newly_finished=[dict(name=j['name'],status=j['status']) for j in newly],learning=result['learning'])))
+    print(json.dumps(dict(utc=result['utc'],gpu_hours=gpu_hours,gpus=result['gpus'],active=[dict(name=j['name'],pid=j['pid'],gpu=j['gpu']) for j in state['active_jobs']],newly_finished=[dict(name=j['name'],status=j['status']) for j in newly],learning={name:[{k:r[k] for k in ['epoch','frame_after','optimizer_updates','wall_seconds','lr','reward_weights','source_visits']} for r in rows] for name,rows in result['learning'].items()})))
 if __name__=='__main__':main()

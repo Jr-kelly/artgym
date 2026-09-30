@@ -33,5 +33,9 @@
   "minimum_before_plateau": "planned4000epochs and3consecutive assessment points with no error/progress/phase/body improvement; numerical faults or confirmed success exempt",
   "decision": "early training arrivals exist in all4sources, so do not open single-source control without later evidence of multi-source exploration failure",
   "next": "Continue CP20 to1000 onGPU0 after current pilot-evaluation wrapper completes; C paired800 updates onGPU1 after expert regression completes",
-  "limits": "16h wall/24GPUh/max2GPUs; reserve90min+2GPUh; budget-limited fixed-knife reference, not2B category reproduction"
+  "limits": "16h wall/24GPUh/max2GPUs; reserve90min+2GPUh; budget-limited fixed-knife reference, not2B category reproduction",
+  "development_evaluation_allowance_seconds_per_checkpoint": 900,
+  "pilot_functional_early_terminal": true,
+  "full_horizon_static_F_observed_seconds": 182.10443004099943,
+  "evaluation_note": "86.7s pilot F terminated all128 at17.23s; full40s runs budgeted using static182s and900s for three protocols, not assuming early termination"
 }
