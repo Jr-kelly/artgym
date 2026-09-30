@@ -1317,6 +1317,52 @@
       ]
     },
     {
+      "path": "runs/recovery-rl-clockhold-clean/checkpoints/epoch_001250.pth",
+      "sha256": "35c642303adea90bd89a5b622a5b298c4f9c9c47cbdd2e8931eabc8f343c8880",
+      "size": 89425600,
+      "kind": "RL_or_parent_expert",
+      "epoch": 1250,
+      "optimizer_updates": 45000,
+      "adam_steps": [
+        45000
+      ],
+      "environment_interactions": 102400000,
+      "has_normalizer": true,
+      "rng_keys": [
+        "cuda",
+        "numpy",
+        "python",
+        "torch"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-holding-checkpoint1250.tar.gz",
+        "delivery/artmanip-recovery-20260930/recovery-rl-clockhold-clean2000.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-seg2/checkpoints/epoch_001500.pth",
+      "sha256": "4c0574568c899ece1903193675813c2b11ebf2dea12ff616d22e6c618c0aabcc",
+      "size": 89425536,
+      "kind": "RL_or_parent_expert",
+      "epoch": 1500,
+      "optimizer_updates": 54000,
+      "adam_steps": [
+        54000
+      ],
+      "environment_interactions": 122880000,
+      "has_normalizer": true,
+      "rng_keys": [
+        "cuda",
+        "numpy",
+        "python",
+        "torch"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-reference-checkpoint1500.tar.gz",
+        "delivery/artmanip-recovery-20260930/recovery-reference-segment2.tar.gz"
+      ]
+    },
+    {
       "path": "runs/recovery-rl-pilot20-retry2/checkpoints/epoch_000020.pth",
       "sha256": "c64a4cb02039125fd19f0fa3f2b25ee7fab119381e38926cf58c89b99387a3e6",
       "size": 89425600,
@@ -1574,6 +1620,346 @@
       "archives": [
         "delivery/artmanip-recovery-20260930/recovery-reference-segment1.tar.gz"
       ]
+    },
+    {
+      "path": "runs/recovery-rl-seg2/checkpoints/epoch_001250.pth",
+      "sha256": "907e716ba870307b907c853c40c3f38f4699562ecae74e5df3377bce5a52875a",
+      "size": 89425600,
+      "kind": "RL_or_parent_expert",
+      "epoch": 1250,
+      "optimizer_updates": 45000,
+      "adam_steps": [
+        45000
+      ],
+      "environment_interactions": 102400000,
+      "has_normalizer": true,
+      "rng_keys": [
+        "cuda",
+        "numpy",
+        "python",
+        "torch"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-reference-segment2.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-seg2/checkpoints/epoch_001750.pth",
+      "sha256": "bd77d27d5cae027c4de1c8482973def6f07d11bb22317bfbaadad5e9dc40753a",
+      "size": 89425600,
+      "kind": "RL_or_parent_expert",
+      "epoch": 1750,
+      "optimizer_updates": 63000,
+      "adam_steps": [
+        63000
+      ],
+      "environment_interactions": 143360000,
+      "has_normalizer": true,
+      "rng_keys": [
+        "cuda",
+        "numpy",
+        "python",
+        "torch"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-reference-segment2.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-seg2/checkpoints/epoch_002000.pth",
+      "sha256": "06cc70381add8cb3f65626474e0e58542a6637c219f669483878c148cfc8f534",
+      "size": 89425600,
+      "kind": "RL_or_parent_expert",
+      "epoch": 2000,
+      "optimizer_updates": 72000,
+      "adam_steps": [
+        72000
+      ],
+      "environment_interactions": 163840000,
+      "has_normalizer": true,
+      "rng_keys": [
+        "cuda",
+        "numpy",
+        "python",
+        "torch"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-reference-segment2.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-seg2/evaluation/inbox/epoch_001250.pth",
+      "sha256": "f47b8fd691d18137bdd111e59ed11e360235035faf22f393c164325f5ec49f95",
+      "size": 14843846,
+      "kind": "RL_or_parent_expert",
+      "epoch": 1250,
+      "optimizer_updates": null,
+      "adam_steps": [],
+      "environment_interactions": 102400000,
+      "has_normalizer": true,
+      "rng_keys": [],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-reference-segment2.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-seg2/evaluation/inbox/epoch_001500.pth",
+      "sha256": "90f9a9cceadd90d0ea312d9a97c37165e15e31e41b25548e02cf79d5c8ad2e77",
+      "size": 14843846,
+      "kind": "RL_or_parent_expert",
+      "epoch": 1500,
+      "optimizer_updates": null,
+      "adam_steps": [],
+      "environment_interactions": 122880000,
+      "has_normalizer": true,
+      "rng_keys": [],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-reference-segment2.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-seg2/evaluation/inbox/epoch_001750.pth",
+      "sha256": "01def31fe00aa17febcb71a481bb9bf1199e357fbd653a7700073add54dec66d",
+      "size": 14843846,
+      "kind": "RL_or_parent_expert",
+      "epoch": 1750,
+      "optimizer_updates": null,
+      "adam_steps": [],
+      "environment_interactions": 143360000,
+      "has_normalizer": true,
+      "rng_keys": [],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-reference-segment2.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-seg2/evaluation/inbox/epoch_002000.pth",
+      "sha256": "4a093b7a147ea0eafc0f28cbe7e25662c0c90501002333e418dc49f3eceee90d",
+      "size": 14843846,
+      "kind": "RL_or_parent_expert",
+      "epoch": 2000,
+      "optimizer_updates": null,
+      "adam_steps": [],
+      "environment_interactions": 163840000,
+      "has_normalizer": true,
+      "rng_keys": [],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-reference-segment2.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-seg2/initial.pth",
+      "sha256": "b143208440a7757c93c11752b1fdf1613fbfa0f02e6a671bfc2baec106290ec2",
+      "size": 86563202,
+      "kind": "RL_or_parent_expert",
+      "epoch": 1000,
+      "optimizer_updates": 36000,
+      "adam_steps": [
+        36000
+      ],
+      "environment_interactions": 81920000,
+      "has_normalizer": true,
+      "rng_keys": [
+        "cuda",
+        "numpy",
+        "python",
+        "torch"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-reference-segment2.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-seg2/nn/last_recovery-rl-seg2_ep_2000_rew__333.53_.pth",
+      "sha256": "06cc70381add8cb3f65626474e0e58542a6637c219f669483878c148cfc8f534",
+      "size": 89425600,
+      "kind": "RL_or_parent_expert",
+      "epoch": 2000,
+      "optimizer_updates": 72000,
+      "adam_steps": [
+        72000
+      ],
+      "environment_interactions": 163840000,
+      "has_normalizer": true,
+      "rng_keys": [
+        "cuda",
+        "numpy",
+        "python",
+        "torch"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-reference-segment2.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-clockhold-clean/checkpoints/epoch_001500.pth",
+      "sha256": "ec5bd14cb8a12846ab243bb9e3af9375a8d15dd06252cf908a63a85e222dcd70",
+      "size": 89425536,
+      "kind": "RL_or_parent_expert",
+      "epoch": 1500,
+      "optimizer_updates": 54000,
+      "adam_steps": [
+        54000
+      ],
+      "environment_interactions": 122880000,
+      "has_normalizer": true,
+      "rng_keys": [
+        "cuda",
+        "numpy",
+        "python",
+        "torch"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-rl-clockhold-clean2000.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-clockhold-clean/checkpoints/epoch_001750.pth",
+      "sha256": "8bc9f46474907cb6b542ff74492f84d3ca11420f8d056a8da68dbc1a93fd3ec0",
+      "size": 89425600,
+      "kind": "RL_or_parent_expert",
+      "epoch": 1750,
+      "optimizer_updates": 63000,
+      "adam_steps": [
+        63000
+      ],
+      "environment_interactions": 143360000,
+      "has_normalizer": true,
+      "rng_keys": [
+        "cuda",
+        "numpy",
+        "python",
+        "torch"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-rl-clockhold-clean2000.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-clockhold-clean/checkpoints/epoch_002000.pth",
+      "sha256": "d2d596b4973bcf47d86dda0c512b453296934c1534d8a9887f0d02c9b2e186ae",
+      "size": 89425600,
+      "kind": "RL_or_parent_expert",
+      "epoch": 2000,
+      "optimizer_updates": 72000,
+      "adam_steps": [
+        72000
+      ],
+      "environment_interactions": 163840000,
+      "has_normalizer": true,
+      "rng_keys": [
+        "cuda",
+        "numpy",
+        "python",
+        "torch"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-rl-clockhold-clean2000.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-clockhold-clean/evaluation/inbox/epoch_001250.pth",
+      "sha256": "9150039504a99734603a3991b5c8fe49ed6df09405d3082268d15b7edcdbabc3",
+      "size": 14843846,
+      "kind": "RL_or_parent_expert",
+      "epoch": 1250,
+      "optimizer_updates": null,
+      "adam_steps": [],
+      "environment_interactions": 102400000,
+      "has_normalizer": true,
+      "rng_keys": [],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-rl-clockhold-clean2000.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-clockhold-clean/evaluation/inbox/epoch_001500.pth",
+      "sha256": "163917050ed36b55138324d7b4f5cda20ac51bfd45cba8dcf3d8d4682bda05f0",
+      "size": 14843846,
+      "kind": "RL_or_parent_expert",
+      "epoch": 1500,
+      "optimizer_updates": null,
+      "adam_steps": [],
+      "environment_interactions": 122880000,
+      "has_normalizer": true,
+      "rng_keys": [],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-rl-clockhold-clean2000.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-clockhold-clean/evaluation/inbox/epoch_001750.pth",
+      "sha256": "5928f569fd6c15b84eb6a2e603980888d21e9f12186e911e115504e350da0fa1",
+      "size": 14843846,
+      "kind": "RL_or_parent_expert",
+      "epoch": 1750,
+      "optimizer_updates": null,
+      "adam_steps": [],
+      "environment_interactions": 143360000,
+      "has_normalizer": true,
+      "rng_keys": [],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-rl-clockhold-clean2000.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-clockhold-clean/evaluation/inbox/epoch_002000.pth",
+      "sha256": "922265b756fcc777ed005b2028861201327b3e9af64c3732da2253f162d13284",
+      "size": 14843846,
+      "kind": "RL_or_parent_expert",
+      "epoch": 2000,
+      "optimizer_updates": null,
+      "adam_steps": [],
+      "environment_interactions": 163840000,
+      "has_normalizer": true,
+      "rng_keys": [],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-rl-clockhold-clean2000.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-clockhold-clean/initial.pth",
+      "sha256": "b143208440a7757c93c11752b1fdf1613fbfa0f02e6a671bfc2baec106290ec2",
+      "size": 86563202,
+      "kind": "RL_or_parent_expert",
+      "epoch": 1000,
+      "optimizer_updates": 36000,
+      "adam_steps": [
+        36000
+      ],
+      "environment_interactions": 81920000,
+      "has_normalizer": true,
+      "rng_keys": [
+        "cuda",
+        "numpy",
+        "python",
+        "torch"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-rl-clockhold-clean2000.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-clockhold-clean/nn/last_recovery-rl-clockhold-clean_ep_2000_rew__-219.71_.pth",
+      "sha256": "d2d596b4973bcf47d86dda0c512b453296934c1534d8a9887f0d02c9b2e186ae",
+      "size": 89425600,
+      "kind": "RL_or_parent_expert",
+      "epoch": 2000,
+      "optimizer_updates": 72000,
+      "adam_steps": [
+        72000
+      ],
+      "environment_interactions": 163840000,
+      "has_normalizer": true,
+      "rng_keys": [
+        "cuda",
+        "numpy",
+        "python",
+        "torch"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-rl-clockhold-clean2000.tar.gz"
+      ]
     }
   ],
   "archives": [
@@ -1634,8 +2020,20 @@
       "sha256": "329ffb72c97d1a83196229658d3a904764999dd6b209fc202b9d0b1b79dcdf20"
     },
     {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-holding-checkpoint1250.tar.gz",
+      "sha256": "ea2f5c25b2ea529d66b936153802e4def6995c46b64465f1e5e1afeae63cb515"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-holding-precheck-and-original-pool-diagnostics.tar.gz",
+      "sha256": "b97f2f7c9b9abdd20a28670af1d8fc847ecdc814b63d371e670368612edf0371"
+    },
+    {
       "archive": "delivery/artmanip-recovery-20260930/recovery-initial-evaluation.tar.gz",
       "sha256": "5b3d17c99f4ae1a1c5df3258f151f4e2bfc49b2ebdf7bb4514b753f6b0ea76ff"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-reference-checkpoint1500.tar.gz",
+      "sha256": "4cc34f5cc2c38e404c750d55a0287f0a21ba3409735f643477a6f5f7009b4bb0"
     },
     {
       "archive": "delivery/artmanip-recovery-20260930/recovery-reference-pilot20.tar.gz",
@@ -1644,6 +2042,14 @@
     {
       "archive": "delivery/artmanip-recovery-20260930/recovery-reference-segment1.tar.gz",
       "sha256": "f32ab05394e51f733ba4355cf8db7d69bd9548344d66d34cb55abe3fb7cb1f68"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-reference-segment2.tar.gz",
+      "sha256": "3730465860e261be35d2588b8f49ac1ec9d6a542820e6f754c4ea1572c417207"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-reference2000-holdingmid-development.tar.gz",
+      "sha256": "a3e3247dce012ffbbb148cadcb551db5354d8ed7b5f8eaba02197f3f3c0d789e"
     },
     {
       "archive": "delivery/artmanip-recovery-20260930/recovery-reference250.tar.gz",
@@ -1656,6 +2062,14 @@
     {
       "archive": "delivery/artmanip-recovery-20260930/recovery-reference750.tar.gz",
       "sha256": "d75b2e153b7bc9c8106baf918bcac89b140399d13dffb8d3654ab53fb9b5db16"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-repaired-pool-static-verification.tar.gz",
+      "sha256": "4f3001f939a17b7eb3789002b49082b848b7d3b29bae29b17ca90d89dc74c9ad"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-rl-clockhold-clean2000.tar.gz",
+      "sha256": "939b4d9b38a5eca5ff229de72245ef16297a3f74421ed39a4401e7f27c6e60fe"
     },
     {
       "archive": "delivery/artmanip-recovery-20260930/recovery-rl1000-development.tar.gz",

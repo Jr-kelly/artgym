@@ -194,7 +194,6 @@ def main():
         report['declared_horizon_steps']=total_steps
         report['all_terminated_early']=len(frames)<total_steps
         report['protocol']['kind']=args.protocol
-        if task=='wuji_artmanip_reference':report['action_control']=dict(mode='all_joint_incremental',step_rad=env.dt*env.hand_dof_speed_scale)
         if args.protocol=='F':
             report['protocol']=dict(kind='F',duration_seconds=40,goal_tolerance_m=.01,hold_steps=45,control_dt=dt,arrival_used_for_switching=True,hold_seconds=1.5,name='this_round_functional_protocol',stage_timeout=0)
         (args.output/'report.json').write_text(json.dumps(report, indent=2)+'\n')
