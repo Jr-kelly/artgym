@@ -2,7 +2,7 @@
 import json,hashlib,argparse
 from pathlib import Path
 from scripts.wuji_goal_common import configuration,make_env
-import torch
+import torch,numpy as np
 from omegaconf import OmegaConf
 from isaacgymenvs.utils.torch_jit_utils import quat_mul,quat_conjugate
 
@@ -14,6 +14,15 @@ def main():
     env=make_env(cfg);env.reset()
     periods=env.clock_period.clone();source=env.source_ids.clone();initial=env.init_targets[:,:20].clone();object_target=env.prev_targets[:,20:].clone()
     counts={};max_map=0.;stable_all=torch.ones(128,dtype=torch.bool,device=env.device);rows=[]
+    # Observe the transition before post_physics_step autoresets its initial pose.
+    # Comparing cached object_pos to the next episode's init pose is not drift.
+    physical=[];original_reward=env.compute_reward
+    def capture(actions):
+        original_reward(actions)
+        drift=torch.linalg.vector_norm(env.object_pos-env.init_object_pos,dim=-1)
+        angle=2*torch.asin(torch.linalg.vector_norm(quat_mul(env.object_rot,quat_conjugate(env.init_object_rot))[:,:3],dim=-1).clamp(0,1))
+        physical.append(dict(drift=drift.cpu().numpy().copy(),rotation=angle.cpu().numpy().copy(),progress=env.progress_buf.cpu().numpy().copy(),done=env.reset_buf.cpu().numpy().copy(),source=env.source_ids.cpu().numpy().copy()))
+    env.compute_reward=capture
     try:
         for step in range(600):
             obs,reward,done,info=env.step(torch.zeros((128,20),device=env.device))
@@ -21,9 +30,7 @@ def main():
             assert not done.any() if step<599 else done.all()
             if step<599:assert torch.equal(env.prev_targets[:,20:],object_target)
             if step<599:max_map=max(max_map,float((env.cur_targets[:,:20]-initial).abs().max()))
-            stable=(torch.linalg.vector_norm(env.object_pos-env.init_object_pos,dim=-1)<.01)
-            angle=2*torch.asin(torch.linalg.vector_norm(quat_mul(env.object_rot,quat_conjugate(env.init_object_rot))[:,:3],dim=-1).clamp(0,1))
-            stable_all &= stable & (angle<.25)
+            stable_all &= torch.as_tensor((physical[-1]['drift']<.01)&(physical[-1]['rotation']<.25),device=env.device)
             assert float(info['holding/max_abs_additional_reward'])<=25.00001
             expected_switch=((step+1)%periods==0)&(step<599)
             assert int(info['holding/switches_this_step'])==int(expected_switch.sum())
@@ -43,6 +50,13 @@ def main():
         result=dict(passed=False,error=repr(exc),step=step if 'step' in locals() else None,map_max_error=max_map,body_stable_so_far=int(stable_all.sum()),switch_events=rows)
         (out/'failure.json').write_text(json.dumps(result,indent=2)+'\n')
         raise
-    finally:env.gym.destroy_sim(env.sim)
+    finally:
+        if physical:
+            trace={k:np.stack([r[k] for r in physical]) for k in physical[0]}
+            np.savez_compressed(out/'trace.npz',**trace)
+            stable=(trace['drift']<.01)&(trace['rotation']<.25)
+            diagnostics=dict(max_drift=float(trace['drift'].max()),max_rotation=float(trace['rotation'].max()),bad_trials=np.flatnonzero(~stable.all(0)).tolist(),first_bad_steps={str(i):int(np.flatnonzero(~stable[:,i])[0]+1) for i in np.flatnonzero(~stable.all(0))},per_source=[dict(source=s,n=int((source.cpu().numpy()==s).sum()),stable=int(stable.all(0)[source.cpu().numpy()==s].sum())) for s in range(4)],capture='Inside compute_reward, before terminal reset; threshold unchanged10mm/.25rad')
+            (out/'physical-diagnostics.json').write_text(json.dumps(diagnostics,indent=2)+'\n')
+        env.gym.destroy_sim(env.sim)
 
 if __name__=='__main__':main()
