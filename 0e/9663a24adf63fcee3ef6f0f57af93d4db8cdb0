@@ -1,0 +1,147 @@
+scripts/audit_wuji_recovery_aggregation_data.py
+  s_13dba2dc3e07f8::t_05798a713c32fd 1-62
+scripts/audit_wuji_recovery_aggregation_pair.py
+  s_13dba2dc3e07f8::t_b07a7075ba8767 1-52
+scripts/freeze_wuji_recovery.py
+  s_13dba2dc3e07f8::t_a2a9782c2b23b9 81,86
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "0e9663a24adf63fcee3ef6f0f57af93d4db8cdb0",
+  "prompts": {},
+  "sessions": {
+    "s_13dba2dc3e07f8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f10b-dd7b-7be1-bb17-993f50d34df5",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.session_started_at": "2026-09-30T16:07:58Z",
+        "tlab.token_usage.cache_read_tokens": "147334925",
+        "tlab.token_usage.input_tokens": "2926946",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.output_tokens": "584354"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/artmanip-recovery-20260930/aggregation1-availability.json",
+      "additions": {
+        "human": 258
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/aggregation1-collection-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/aggregation1-data-integrity.json",
+      "additions": {
+        "human": 110
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/aggregation1-training-plan.json",
+      "additions": {
+        "human": 40
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/bc44800-confirmation64-comparison.json",
+      "additions": {
+        "human": 271
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/resources/four-hour-1606UTC.json",
+      "additions": {
+        "human": 31
+      }
+    },
+    {
+      "new_path": "scripts/audit_wuji_recovery_aggregation_data.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 62
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/audit_wuji_recovery_aggregation_pair.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 52
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 30
+      },
+      "deletions": {
+        "human": 59
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/DECISIONS.jsonl",
+      "new_path": "research/artmanip-recovery-20260930/DECISIONS.jsonl",
+      "additions": {
+        "human": 5
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/HANDOFF.md",
+      "new_path": "research/artmanip-recovery-20260930/HANDOFF.md",
+      "additions": {
+        "human": 30
+      },
+      "deletions": {
+        "human": 59
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/STATE.json",
+      "new_path": "research/artmanip-recovery-20260930/STATE.json",
+      "additions": {
+        "human": 22
+      },
+      "deletions": {
+        "human": 50
+      }
+    },
+    {
+      "old_path": "scripts/freeze_wuji_recovery.py",
+      "new_path": "scripts/freeze_wuji_recovery.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 2
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 2
+          }
+        ]
+      }
+    }
+  ]
+}
