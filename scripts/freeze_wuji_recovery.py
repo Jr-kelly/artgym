@@ -80,11 +80,14 @@ def main():
             candidates[name] = row
     families = {}
     for name, row in candidates.items():
+        if name in args.replicates:
+            continue
         match = re.fullmatch(r'(M|E|Eagg|Ereplay|rl|rlhold|rlclean)(\d+)', name)
         if match:
             families.setdefault(match[1], []).append(row)
     assert set(families) >= {'M', 'E', 'rl', 'rlhold', 'rlclean'}
     selected = {family: min(rows, key=rank)['model'] for family, rows in families.items()}
+    assert not set(args.replicates) & set(args.endpoints), 'Keep replication endpoints in their own argument'
     endpoint_families = {re.fullmatch(r'(M|E|Eagg|Ereplay|rl|rlhold|rlclean)(\d+)', n)[1]
                          for n in args.endpoints}
     assert endpoint_families == set(families), 'Keep each trained family endpoint'
