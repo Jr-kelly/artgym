@@ -1,0 +1,27 @@
+{
+  "name": "g0-regression-retry1-job",
+  "gpu": 1,
+  "timeout": 3500,
+  "command": [
+    "PYTHON",
+    "-m",
+    "scripts.evaluate_wuji_recovery_batch",
+    "--name",
+    "g0-regression-retry1",
+    "--states",
+    "research/artmanip-recovery-20260930/data/development-all.npy",
+    "--models",
+    "historical=runs/unified-policy-20260930/experts/historical.pth",
+    "source3=runs/unified-policy-20260930/experts/source3.pth",
+    "--static",
+    "--protocols",
+    "S2",
+    "S5",
+    "F"
+  ],
+  "source_sha": "02912ce559ed7ed2ad253c46138cee5409b3de8e",
+  "created_utc": "2026-09-30T06:52:35.883418+00:00",
+  "root": "/tmp/artgym-recovery-20260930",
+  "pin": "/tmp/artgym-recovery-20260930/pins/02912ce559ed7ed2ad253c46138cee5409b3de8e",
+  "pid": 1482
+}

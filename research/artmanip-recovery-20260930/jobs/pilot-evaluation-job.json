@@ -1,0 +1,26 @@
+{
+  "name": "pilot-evaluation-job",
+  "gpu": 0,
+  "timeout": 1800,
+  "command": [
+    "PYTHON",
+    "-m",
+    "scripts.evaluate_wuji_recovery_batch",
+    "--name",
+    "pilot-evaluation",
+    "--states",
+    "research/artmanip-recovery-20260930/data/development-all.npy",
+    "--models",
+    "rl20=runs/recovery-rl-pilot20-retry2/checkpoints/epoch_000020.pth",
+    "bc100=runs/unified-policy-20260930/bc-unified-historical-s3001-seg1/epoch_000100.pth",
+    "--protocols",
+    "S2",
+    "S5",
+    "F"
+  ],
+  "source_sha": "fd1346c7a90b8c023229de58dc60752379c45e02",
+  "created_utc": "2026-09-30T06:59:40.628439+00:00",
+  "root": "/tmp/artgym-recovery-20260930",
+  "pin": "/tmp/artgym-recovery-20260930/pins/fd1346c7a90b8c023229de58dc60752379c45e02",
+  "pid": 2804
+}

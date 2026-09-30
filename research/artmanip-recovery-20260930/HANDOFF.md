@@ -7,20 +7,36 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T07:08:21.500133+00:00",
-  "event": "formal_rl_budget_frozen",
-  "evidence": "research/artmanip-recovery-20260930/b-plan.json",
-  "segments": [
-    1000,
-    2000,
-    3000,
-    4000
+  "utc": "2026-09-30T07:15:27.216832+00:00",
+  "event": "initial_independent_evaluation_passed",
+  "evidence": "research/artmanip-recovery-20260930/initial-analysis/report.json",
+  "bc100_F_success": [
+    32,
+    32,
+    32,
+    32
   ],
-  "total_environment_interactions": 327680000,
-  "expected_optimizer_updates": 144000,
-  "curriculum": "200→2000 unchanged",
-  "next": "Launch first formal segment after current evaluation releasesGPU0; C afterGPU1 expert regression",
-  "reason": "Complete20epoch training and independent F/S measured; all-zero earlystrict/F not a convergence finding"
+  "bc100_F_body": [
+    32,
+    23,
+    20,
+    25
+  ],
+  "bc100_S2": [
+    32,
+    32,
+    31,
+    0
+  ],
+  "bc100_S5": [
+    32,
+    32,
+    32,
+    2
+  ],
+  "n_per_source": 32,
+  "scope": "Historical same-weight BC100 newly evaluated, not a new training gain; preliminary functionality with incomplete stability/strict hold",
+  "next": "Continue directRL4000budget and paired M/E6400planned updates; no student until S64 gate"
 }
 ```
 
@@ -38,68 +54,96 @@
   "phase": "A complete; B pilot / C checks",
   "active_jobs": [
     {
-      "source_sha256": "c0d858d0b83ea45ba7759946fb3619878056c02cf7062aa41bfc261c1437848f",
-      "name": "g0-regression-retry1-job",
-      "gpu": 1,
+      "name": "rl-seg1-job",
+      "gpu": 0,
+      "timeout": 8400,
       "command": [
-        "/tmp/wuji-recovery-runtime/bin/python",
+        "PYTHON",
         "-m",
-        "scripts.evaluate_wuji_recovery_batch",
-        "--name",
-        "g0-regression-retry1",
-        "--states",
-        "research/artmanip-recovery-20260930/data/development-all.npy",
-        "--models",
-        "historical=runs/unified-policy-20260930/experts/historical.pth",
-        "source3=runs/unified-policy-20260930/experts/source3.pth",
-        "--static",
-        "--protocols",
-        "S2",
-        "S5",
-        "F"
+        "scripts.train_wuji_recovery_rl",
+        "task=wuji_artmanip_reference",
+        "hand=wuji_paper_official_actuator",
+        "object=knife_wuji_reference",
+        "train=wujiArtManipReferenceSAPG",
+        "num_envs=5120",
+        "headless=True",
+        "pipeline=gpu",
+        "graphics_device_id=-1",
+        "force_render=False",
+        "num_subscenes=0",
+        "multi_gpu=False",
+        "seed=2026093011",
+        "experiment=recovery-rl-seg1",
+        "max_iterations=1000",
+        "checkpoint=runs/recovery-rl-pilot20-retry2/checkpoints/epoch_000020.pth",
+        "train.params.config.save_frequency=250",
+        "train.params.config.evaluation_frequency=250",
+        "train.params.config.checkpoint_first_epoch=250"
       ],
-      "timeout_seconds": 3500,
-      "started": "2026-09-30T06:52:40.132742+00:00",
-      "pid": 1482,
-      "status": "running",
-      "child_pid": 1483,
-      "heartbeat": "2026-09-30T07:05:43.451738+00:00",
-      "elapsed_seconds": 783.2071431389995,
-      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/g0-regression-retry1-job/status.json",
-      "pid_exists": true
+      "source_sha": "88728bdd8e32dab9a134c1a4f3a4f3db7e8ed988",
+      "created_utc": "2026-09-30T07:13:30.152954+00:00",
+      "root": "/tmp/artgym-recovery-20260930",
+      "pin": "/tmp/artgym-recovery-20260930/pins/88728bdd8e32dab9a134c1a4f3a4f3db7e8ed988",
+      "pid": 4510
     },
     {
-      "source_sha256": "f3aa89d7dd469f42563d350d539692893c96bccfc1edbed3afc06947af96c54e",
-      "name": "pilot-evaluation-job",
-      "gpu": 0,
+      "name": "bc-pair800-job",
+      "gpu": 1,
+      "timeout": 3200,
       "command": [
-        "/tmp/wuji-recovery-runtime/bin/python",
+        "PYTHON",
         "-m",
-        "scripts.evaluate_wuji_recovery_batch",
+        "scripts.run_wuji_recovery_bc_pair",
         "--name",
-        "pilot-evaluation",
-        "--states",
-        "research/artmanip-recovery-20260930/data/development-all.npy",
-        "--models",
-        "rl20=runs/recovery-rl-pilot20-retry2/checkpoints/epoch_000020.pth",
-        "bc100=runs/unified-policy-20260930/bc-unified-historical-s3001-seg1/epoch_000100.pth",
-        "--protocols",
-        "S2",
-        "S5",
-        "F"
+        "bc-pair800",
+        "--end-epoch",
+        "200",
+        "--previous-epoch",
+        "100",
+        "--max-seconds",
+        "1400"
       ],
-      "timeout_seconds": 1800,
-      "started": "2026-09-30T06:59:45.735773+00:00",
-      "pid": 2804,
-      "status": "running",
-      "child_pid": 2805,
-      "heartbeat": "2026-09-30T07:05:17.259784+00:00",
-      "elapsed_seconds": 331.4039791380055,
-      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/pilot-evaluation-job/status.json",
-      "pid_exists": true
+      "source_sha": "88728bdd8e32dab9a134c1a4f3a4f3db7e8ed988",
+      "created_utc": "2026-09-30T07:13:33.356785+00:00",
+      "root": "/tmp/artgym-recovery-20260930",
+      "pin": "/tmp/artgym-recovery-20260930/pins/88728bdd8e32dab9a134c1a4f3a4f3db7e8ed988",
+      "pid": 4608
+    },
+    {
+      "name": "rl-seg1-retry1-job",
+      "gpu": 0,
+      "timeout": 8400,
+      "command": [
+        "PYTHON",
+        "-m",
+        "scripts.train_wuji_recovery_rl",
+        "task=wuji_artmanip_reference",
+        "hand=wuji_paper_official_actuator",
+        "object=knife_wuji_reference",
+        "train=wujiArtManipReferenceSAPG",
+        "num_envs=5120",
+        "headless=True",
+        "pipeline=gpu",
+        "graphics_device_id=-1",
+        "force_render=False",
+        "num_subscenes=0",
+        "multi_gpu=False",
+        "seed=2026093011",
+        "experiment=recovery-rl-seg1-retry1",
+        "max_iterations=1000",
+        "checkpoint=runs/recovery-rl-pilot20-retry2/checkpoints/epoch_000020.pth",
+        "train.params.config.save_frequency=250",
+        "train.params.config.evaluation_frequency=250",
+        "train.params.config.checkpoint_first_epoch=250"
+      ],
+      "source_sha": "7cb1b917db59af0294d652937fa22b9d2cedc119",
+      "created_utc": "2026-09-30T07:14:52.376583+00:00",
+      "root": "/tmp/artgym-recovery-20260930",
+      "pin": "/tmp/artgym-recovery-20260930/pins/7cb1b917db59af0294d652937fa22b9d2cedc119",
+      "pid": 4900
     }
   ],
-  "gpu_hours": 0.42709153972222225,
+  "gpu_hours": 0.629392573611111,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -107,20 +151,36 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "Restore isolated runtime; audit upstream and Wuji; meaningful prechecks; pin four-segment RL budget from full-update throughput.",
   "last_event": {
-    "utc": "2026-09-30T07:08:21.500133+00:00",
-    "event": "formal_rl_budget_frozen",
-    "evidence": "research/artmanip-recovery-20260930/b-plan.json",
-    "segments": [
-      1000,
-      2000,
-      3000,
-      4000
+    "utc": "2026-09-30T07:15:27.216832+00:00",
+    "event": "initial_independent_evaluation_passed",
+    "evidence": "research/artmanip-recovery-20260930/initial-analysis/report.json",
+    "bc100_F_success": [
+      32,
+      32,
+      32,
+      32
     ],
-    "total_environment_interactions": 327680000,
-    "expected_optimizer_updates": 144000,
-    "curriculum": "200→2000 unchanged",
-    "next": "Launch first formal segment after current evaluation releasesGPU0; C afterGPU1 expert regression",
-    "reason": "Complete20epoch training and independent F/S measured; all-zero earlystrict/F not a convergence finding"
+    "bc100_F_body": [
+      32,
+      23,
+      20,
+      25
+    ],
+    "bc100_S2": [
+      32,
+      32,
+      31,
+      0
+    ],
+    "bc100_S5": [
+      32,
+      32,
+      32,
+      2
+    ],
+    "n_per_source": 32,
+    "scope": "Historical same-weight BC100 newly evaluated, not a new training gain; preliminary functionality with incomplete stability/strict hold",
+    "next": "Continue directRL4000budget and paired M/E6400planned updates; no student until S64 gate"
   },
   "monitor": {
     "pid": 1192,
@@ -132,9 +192,11 @@
     "rl-pilot20-job",
     "rl-pilot20-retry1-job",
     "reference-precheck-job",
-    "rl-pilot20-retry2-job"
+    "rl-pilot20-retry2-job",
+    "g0-regression-retry1-job",
+    "pilot-evaluation-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T07:05:47.320485+00:00"
+  "last_resource_check_utc": "2026-09-30T07:13:09.329956+00:00"
 }
 ```

@@ -1,0 +1,29 @@
+{
+  "name": "rl-pilot20-retry1-job",
+  "gpu": 0,
+  "timeout": 1800,
+  "command": [
+    "PYTHON",
+    "-m",
+    "scripts.train_wuji_recovery_rl",
+    "task=wuji_artmanip_reference",
+    "hand=wuji_paper_official_actuator",
+    "object=knife_wuji_reference",
+    "train=wujiArtManipReferenceSAPG",
+    "num_envs=5120",
+    "headless=True",
+    "pipeline=gpu",
+    "graphics_device_id=-1",
+    "force_render=False",
+    "num_subscenes=0",
+    "multi_gpu=False",
+    "seed=2026093011",
+    "experiment=recovery-rl-pilot20-retry1",
+    "max_iterations=20"
+  ],
+  "source_sha": "02912ce559ed7ed2ad253c46138cee5409b3de8e",
+  "created_utc": "2026-09-30T06:52:32.906384+00:00",
+  "root": "/tmp/artgym-recovery-20260930",
+  "pin": "/tmp/artgym-recovery-20260930/pins/02912ce559ed7ed2ad253c46138cee5409b3de8e",
+  "pid": 1382
+}
