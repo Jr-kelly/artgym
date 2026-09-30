@@ -1,8 +1,8 @@
 """Append evidence and refresh all current handoff entry points."""
-import datetime,json,argparse
+import datetime,json,argparse,fcntl
 from pathlib import Path
 R=Path(__file__).resolve().parents[1];D=R/'research/artmanip-recovery-20260930'
-def record(event, **details):
+def _record(event, **details):
     row=dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),event=event,**details)
     for p in [D/'DECISIONS.jsonl',R.parent/'runs/wuji-goal/journal/events.jsonl']:
         p.parent.mkdir(parents=True,exist_ok=True)
@@ -18,5 +18,10 @@ def record(event, **details):
             if marker in old:old=old.split(marker,1)[1]
             p.write_text(text+'\n'+marker+'\n'+old)
     return row
+def record(event, **details):
+    with (D/'.event.lock').open('a') as lock:
+        fcntl.flock(lock,fcntl.LOCK_EX)
+        return _record(event,**details)
+
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('event');p.add_argument('details');a=p.parse_args();print(json.dumps(record(a.event,**json.loads(a.details)),ensure_ascii=False))
