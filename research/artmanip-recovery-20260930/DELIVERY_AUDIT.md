@@ -1,4 +1,4 @@
-# 本轮交付核验（最终统计完成，公开分发核验待完成）
+# 本轮交付核验（最终统计、公开分发与清理均已验证）
 
 此表以当前冻结统计和实际恢复证据为准；归档中的早期同名表保留其当时状态，不作为最终结论。
 
@@ -18,7 +18,7 @@
 |全部权重内容恢复|219归档路径、211不同文件哈希，另11内容相同别名，覆盖230本地路径；82证据归档与3视频索引，另有无新增权重的最终元数据归档|
 |预算|22.4177注册GPU小时+.05余量=22.4677<24；最大2并发；16小时截止22:42:33UTC|
 |利用率与清理|远端末4h整机30.51%达到26%，40%目标未达；本地395秒53.23%，无完整4h声明；19:39UTC所有自建GPU与监控退出，保留ToDesk|
-|GitHub分发|分支增量提交；86资产最后上传中。正式公开、匿名下载/实际恢复和最终branch SHA将在发布后单独记录|
+|GitHub分发|科学提交cf6f6a0对应公开Release；86资产服务器哈希通过，主归档与3视频匿名下载/实际恢复/解码通过；public-verification.json与final-delivery.json记录核验|
 |teacher/student及下一步|teacher固定仿真刀邻域严格能力已验证；未训练student。下一轮只优先核查可用观测后的统一teacher→student蒸馏，使用新登记验证集|
 
-[README.md](README.md) 是最终科学报告；[final-decision.json](final-decision.json) 固定结论；[weights-coverage-final.json](weights-coverage-final.json) 与恢复回执支持资产完整性。最终公开分发证据在发布后生成，不以草稿服务器哈希代替公网下载证明。
+[README.md](README.md) 是最终科学报告；[final-decision.json](final-decision.json) 固定结论；[weights-coverage-final.json](weights-coverage-final.json) 与恢复回执支持资产完整性。最终公开分发证据已在发布后生成：[public-verification.json](public-verification.json)。19:39后的再次进程核验见 [resources/delivery-final-processes.json](resources/delivery-final-processes.json)。

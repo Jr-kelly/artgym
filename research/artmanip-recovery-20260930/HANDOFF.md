@@ -7,16 +7,47 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T19:57:40.475117+00:00",
-  "event": "final_source_and_report_checks_passed",
-  "checks": [
-    "Frozen54cells/27648independenttrials andexactgates",
-    "All219archiveweightpaths CPUread and11contentaliases",
-    "3videos600frames20s independentlyscored andvisuallyinspected",
-    "Changedorchestrators py_compile",
-    "git diff check with CSV CRLF recognised"
-  ],
-  "next": "Commit andpublish; preserve hashedCSVbytes unchanged"
+  "utc": "2026-09-30T20:03:21.399111+00:00",
+  "event": "bounded_experiment_public_delivery_verified",
+  "evidence": "research/artmanip-recovery-20260930/final-delivery.json",
+  "delivery": {
+    "verified_utc": "2026-09-30T20:03:21.398613+00:00",
+    "objective": "Bounded Wuji ArtManip audit, joint learning, frozen validation and public delivery",
+    "science_complete": true,
+    "primary": "Eagg6100",
+    "primary_checkpoint_sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+    "primary_final_S": true,
+    "primary_final_F": true,
+    "second_seed_final_S": true,
+    "second_seed_development64_S": false,
+    "teacher_only": true,
+    "student_trained": false,
+    "final_models": 18,
+    "final_episodes": 27648,
+    "final_physical_cells": 54,
+    "independent_rescore_and_completeness": true,
+    "release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-artmanip-recovery-20260930-v1",
+    "assets": 86,
+    "scientific_tag_commit": "cf6f6a0f861203af1335d61f17265e1bf5707d1f",
+    "public_primary_actual_restore": true,
+    "public_videos_decoded": 3,
+    "registered_GPU_hours": 22.417678576666656,
+    "conservative_GPU_hours": 22.467678576666657,
+    "wall_hours_at_verification": 13.3467773925,
+    "deadline_utc": "2026-09-30T22:42:33+00:00",
+    "all_owned_jobs_and_monitors_finished": true,
+    "evidence": [
+      "public-verification.json",
+      "final-integrity.json",
+      "final-decision.json",
+      "weights-coverage-final.json",
+      "resources/delivery-final-processes.json"
+    ],
+    "only_next_priority": "Next round: distill this single frozen privileged teacher into a student using verified available observations/history, freeze actor, and evaluate on newly preregistered states. No more training or final-set tuning in this round.",
+    "scope": "Fixed simulated knife and trained grasp neighborhoods only; no unseen-grasp, shape, acquisition or hardware claim.",
+    "administrative_note": "Public verification receipts follow the scientific release tag on this experiment branch. No more GPU work is authorized within this closed final evaluation."
+  },
+  "next": "Push final verification receipts; this round is finished and any student experiment needs a new registered round"
 }
 ```
 
@@ -31,7 +62,7 @@
   "max_concurrent_gpus": 2,
   "rl_default_gpu_hours": 16,
   "bc_default_gpu_hours": 2.25,
-  "phase": "Final S teacher capability and second-seed final validation passed; completing publication and cleanup",
+  "phase": "Bounded experiment complete: primary andsecondseed finalS passed,86assets public/downloadrestored,ownedprocesses stopped",
   "active_jobs": [],
   "gpu_hours": 22.417678576666656,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
@@ -41,16 +72,47 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "Next round: distill this single frozen privileged teacher into a student using verified available observations/history, freeze actor, and evaluate on newly preregistered states. No more training or final-set tuning in this round.",
   "last_event": {
-    "utc": "2026-09-30T19:57:40.475117+00:00",
-    "event": "final_source_and_report_checks_passed",
-    "checks": [
-      "Frozen54cells/27648independenttrials andexactgates",
-      "All219archiveweightpaths CPUread and11contentaliases",
-      "3videos600frames20s independentlyscored andvisuallyinspected",
-      "Changedorchestrators py_compile",
-      "git diff check with CSV CRLF recognised"
-    ],
-    "next": "Commit andpublish; preserve hashedCSVbytes unchanged"
+    "utc": "2026-09-30T20:03:21.399111+00:00",
+    "event": "bounded_experiment_public_delivery_verified",
+    "evidence": "research/artmanip-recovery-20260930/final-delivery.json",
+    "delivery": {
+      "verified_utc": "2026-09-30T20:03:21.398613+00:00",
+      "objective": "Bounded Wuji ArtManip audit, joint learning, frozen validation and public delivery",
+      "science_complete": true,
+      "primary": "Eagg6100",
+      "primary_checkpoint_sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+      "primary_final_S": true,
+      "primary_final_F": true,
+      "second_seed_final_S": true,
+      "second_seed_development64_S": false,
+      "teacher_only": true,
+      "student_trained": false,
+      "final_models": 18,
+      "final_episodes": 27648,
+      "final_physical_cells": 54,
+      "independent_rescore_and_completeness": true,
+      "release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-artmanip-recovery-20260930-v1",
+      "assets": 86,
+      "scientific_tag_commit": "cf6f6a0f861203af1335d61f17265e1bf5707d1f",
+      "public_primary_actual_restore": true,
+      "public_videos_decoded": 3,
+      "registered_GPU_hours": 22.417678576666656,
+      "conservative_GPU_hours": 22.467678576666657,
+      "wall_hours_at_verification": 13.3467773925,
+      "deadline_utc": "2026-09-30T22:42:33+00:00",
+      "all_owned_jobs_and_monitors_finished": true,
+      "evidence": [
+        "public-verification.json",
+        "final-integrity.json",
+        "final-decision.json",
+        "weights-coverage-final.json",
+        "resources/delivery-final-processes.json"
+      ],
+      "only_next_priority": "Next round: distill this single frozen privileged teacher into a student using verified available observations/history, freeze actor, and evaluate on newly preregistered states. No more training or final-set tuning in this round.",
+      "scope": "Fixed simulated knife and trained grasp neighborhoods only; no unseen-grasp, shape, acquisition or hardware claim.",
+      "administrative_note": "Public verification receipts follow the scientific release tag on this experiment branch. No more GPU work is authorized within this closed final evaluation."
+    },
+    "next": "Push final verification receipts; this round is finished and any student experiment needs a new registered round"
   },
   "monitor": {
     "pid": 1192,
@@ -117,17 +179,16 @@
     "local-final-S5-failure-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T19:39:23.745119+00:00",
+  "last_resource_check_utc": "2026-09-30T20:02:27.973812+00:00",
   "next_actions": [
-    "Current round: finish fixed videos, archive/restore final statistics, figures and resource ledgers, regenerate weight coverage index, upload allassets, publish then anonymously download/restore/read primary and videos, verify final branch and owned-process cleanup.",
-    "Final set immutable and closed; no more training, selection or physical final evaluation.",
+    "This round is finished. Preserve its immutable final cohort, weights, archives and original workspaces. Do not resume training or select checkpoints against this final set.",
     "Next round: distill this single frozen privileged teacher into a student using verified available observations/history, freeze actor, and evaluate on newly preregistered states. No more training or final-set tuning in this round."
   ],
   "bc_current_pair": "runs/artmanip-recovery-20260930/bc-pair32000",
   "training_active_runs": [],
   "bc_next_plan": "research/artmanip-recovery-20260930/bc44800-plan.json",
-  "github_last_verified_commit": "5dbac12",
-  "release_verified_assets": 61,
+  "github_last_verified_commit": "cf6f6a0f861203af1335d61f17265e1bf5707d1f",
+  "release_verified_assets": 86,
   "gpu_hours_by_host": {
     "authorized_remote": 22.35554528388888,
     "local": 0.06213329277777778
@@ -146,7 +207,7 @@
     "S32_passed": true,
     "S64_verified": true,
     "final_evaluated": true,
-    "verification": "aggregation1-promotion64-gates.json",
+    "verification": "final-decision.json / final-integrity.json / public-verification.json",
     "final_S_passed": true,
     "final_F_passed": true
   },
@@ -181,6 +242,10 @@
     ],
     "gpu_hours": 22.35554528388888,
     "finished_utc": "2026-09-30T19:34:13.235452+00:00"
-  }
+  },
+  "final_cohort_closed": true,
+  "public_release_verified": true,
+  "github_scientific_commit": "cf6f6a0f861203af1335d61f17265e1bf5707d1f",
+  "final_delivery": "research/artmanip-recovery-20260930/final-delivery.json"
 }
 ```

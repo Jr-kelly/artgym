@@ -97,4 +97,4 @@ GPU工作已结束：注册占卡22.4177 GPU小时，含0.05小时保守预检�
 
 快速恢复主候选可下载 [约69MB独立归档](https://github.com/Jr-kelly/artgym/releases/download/wuji-artmanip-recovery-20260930-v1/recovery-primary-candidate-Eagg6100.tar.gz)，归档SHA256 `3fa51b91d03e7cb795f9b8a27bd3d7b0fd81233e0c5137ea2753901025cf2d31`。它包含真实模型、48,800步Adam和RNG；完整最终权重包包含全部18个冻结模型。
 
-[REPRODUCE.md](REPRODUCE.md) 给出恢复、实际训练命令及离线最终复算入口；[weights-index.json](weights-index.json) 索引实际权重和归档。[STATE.json](STATE.json)、[HANDOFF.md](HANDOFF.md)、[DECISIONS.jsonl](DECISIONS.jsonl) 维护带时间的预算、进程和下一步。发布后补交的公网下载/实际恢复核验记录与最终交付状态以分支最新提交为准。
+[REPRODUCE.md](REPRODUCE.md) 给出恢复、实际训练命令及离线最终复算入口；[weights-index.json](weights-index.json) 索引实际权重和归档。[STATE.json](STATE.json)、[HANDOFF.md](HANDOFF.md)、[DECISIONS.jsonl](DECISIONS.jsonl) 维护带时间的预算、进程和下一步。本轮86个资产已公开，服务器哈希全部通过；主候选归档及三段视频匿名下载哈希一致，下载后主权重/Adam/RNG实际恢复与视频600帧/20秒解码均通过。见 [public-verification.json](public-verification.json) 与 [final-delivery.json](final-delivery.json)。科学Release标签为 `cf6f6a0`；公网核验回执在发布后追加提交。

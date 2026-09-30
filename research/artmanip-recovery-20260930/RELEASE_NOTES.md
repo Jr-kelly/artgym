@@ -19,4 +19,4 @@ S含绝对严格≥80%、刀身≥95%，以及相对同批负责专家下降≤1
 - 三段直接视频：`recovery-teacher-S2.mp4`、`recovery-teacher-S5.mp4`、`recovery-teacher-S5-failure.mp4`。
 - 资源：占卡22.4177GPUh，含保守预检余量22.4677<24，最多2卡；所有自建GPU作业与监控已退出。远端末4h整机30.51%，达到26%但未达40%目标。
 
-本轮只完成特权teacher；没有student、未见抓姿、形状泛化、自主取刀或真机结果。下一轮只优先核查可用观测后的统一teacher→student蒸馏，并使用新登记验证集。历史分支、Release和网站保留。发布后公网匿名下载及实际恢复回执在该分支追加提交。
+本轮只完成特权teacher；没有student、未见抓姿、形状泛化、自主取刀或真机结果。下一轮只优先核查可用观测后的统一teacher→student蒸馏，并使用新登记验证集。历史分支、Release和网站保留。86资产服务器哈希、主候选和3视频的匿名下载哈希均通过；下载后实际恢复CPU模型/Adam/RNG并解码600帧/20秒视频。[公网验证回执](https://github.com/Jr-kelly/artgym/blob/feat/wuji-artmanip-recovery-20260930/research/artmanip-recovery-20260930/public-verification.json)与[最终交付](https://github.com/Jr-kelly/artgym/blob/feat/wuji-artmanip-recovery-20260930/research/artmanip-recovery-20260930/final-delivery.json)在科学标签之后追加提交。
