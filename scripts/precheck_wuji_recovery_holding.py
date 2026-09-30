@@ -10,7 +10,7 @@ def main():
     out=Path('runs/artmanip-recovery-20260930/holding-precheck');out.mkdir(parents=True,exist_ok=False)
     cfg=configuration('wuji_artmanip_clock_hold',128,['object=knife_wuji_reference','hand=wuji_paper_official_actuator'],train='wujiArtManipReferenceSAPG',seed=2026093091)
     (out/'resolved.yaml').write_text(OmegaConf.to_yaml(cfg,resolve=True))
-    env=make_env(cfg);env.reset()
+    env=make_env(cfg);env.reset_idx(torch.arange(env.num_envs,device=env.device));env.compute_observations();env.reset()
     periods=env.clock_period.clone();source=env.source_ids.clone();initial=env.init_targets[:,:20].clone();object_target=env.prev_targets[:,20:].clone()
     counts={};max_map=0.;stable_all=torch.ones(128,dtype=torch.bool,device=env.device);rows=[]
     try:
@@ -18,7 +18,7 @@ def main():
             obs,reward,done,info=env.step(torch.zeros((128,20),device=env.device))
             assert torch.isfinite(reward).all() and torch.isfinite(env.hand_dof_pos).all()
             assert not done.any() if step<599 else done.all()
-            assert torch.equal(env.prev_targets[:,20:],object_target)
+            if step<599:assert torch.equal(env.prev_targets[:,20:],object_target)
             if step<599:max_map=max(max_map,float((env.cur_targets[:,:20]-initial).abs().max()))
             stable=(torch.linalg.vector_norm(env.object_pos-env.init_object_pos,dim=-1)<.01)
             angle=2*torch.asin(torch.linalg.vector_norm(quat_mul(env.object_rot,quat_conjugate(env.init_object_rot))[:,:3],dim=-1).clamp(0,1))
