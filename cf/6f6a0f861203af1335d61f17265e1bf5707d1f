@@ -1,0 +1,526 @@
+scripts/complete_wuji_recovery_final_analysis.py
+  s_13dba2dc3e07f8::t_5476f85b9f2a37 5,19-23
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "cf6f6a0f861203af1335d61f17265e1bf5707d1f",
+  "prompts": {},
+  "sessions": {
+    "s_13dba2dc3e07f8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f10b-dd7b-7be1-bb17-993f50d34df5",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.output_tokens": "821571",
+        "tlab.session_started_at": "2026-09-30T19:33:55Z",
+        "tlab.token_usage.cache_read_tokens": "200644734",
+        "tlab.token_usage.input_tokens": "3748490",
+        "tlab.token_usage.cache_creation_tokens": "0"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/artmanip-recovery-20260930/FINAL.md",
+      "additions": {
+        "human": 251
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/RELEASE_NOTES.md",
+      "additions": {
+        "human": 22
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/aggregation1-fit.json",
+      "additions": {
+        "human": 19309
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/bc44800-decision.json",
+      "additions": {
+        "human": 53
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/bc44800-fit.json",
+      "additions": {
+        "human": 18237
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/bc44800-gates.json",
+      "additions": {
+        "human": 124
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/bc44800-state-shift.json",
+      "additions": {
+        "human": 2885
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/bc800-gates.json",
+      "additions": {
+        "human": 242
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/extra-weights-archive-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-E4100-archive-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-E500-archive-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-Eagg6500-archive-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-M300-archive-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-M4100-archive-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-analysis-archive-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-analysis-precheck-failure.json",
+      "additions": {
+        "human": 11
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-analysis/clusters.json",
+      "additions": {
+        "human": 2810
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-analysis/provenance.json",
+      "additions": {
+        "human": 19
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-analysis/report.json",
+      "additions": {
+        "human": 8717
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-analysis/trials.csv",
+      "additions": {
+        "human": 27649
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-batch-records-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-bc100-archive-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-decision.json",
+      "additions": {
+        "human": 38
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-figures/counts.csv",
+      "additions": {
+        "human": 433
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-figures/provenance.json",
+      "additions": {
+        "human": 25
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-gates.json",
+      "additions": {
+        "human": 1894
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-historical-archive-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-integrity.json",
+      "additions": {
+        "human": 339
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-known-weight-catalog.json",
+      "additions": {
+        "human": 72
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-metadata-archive-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-remaining-analysis/clusters.json",
+      "additions": {
+        "human": 2654
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-remaining-analysis/report.json",
+      "additions": {
+        "human": 8233
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-remaining-analysis/trials.csv",
+      "additions": {
+        "human": 26113
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-rl1000-archive-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-rl3000-archive-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-rl4000-archive-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-rlclean2000-archive-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-rlhold1500-archive-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-rlhold2000-archive-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-seed2Eagg6100-archive-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-source3-archive-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/final-videos-archive-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/local-cleanup.json",
+      "additions": {
+        "human": 11
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/local-jobs/local-final-S2-job.json",
+      "additions": {
+        "human": 76
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/local-jobs/local-final-S5-failure-job.json",
+      "additions": {
+        "human": 76
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/local-jobs/local-final-S5-job.json",
+      "additions": {
+        "human": 76
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/local-monitor.json",
+      "additions": {
+        "human": 9
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/remote-cleanup.json",
+      "additions": {
+        "human": 8
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/resources/final-budget.json",
+      "additions": {
+        "human": 17
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/resources/local-final-utilization.json",
+      "additions": {
+        "human": 12
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/resources/local-video-history.jsonl",
+      "additions": {
+        "human": 80
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/resources/remote-final-utilization.json",
+      "additions": {
+        "human": 31
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/training-diagnostics2000-archive-restore.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/video-manifest.json",
+      "additions": {
+        "human": 101
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/videos/recovery-teacher-S2.json",
+      "additions": {
+        "human": 31
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/videos/recovery-teacher-S5-failure.json",
+      "additions": {
+        "human": 31
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/videos/recovery-teacher-S5.json",
+      "additions": {
+        "human": 31
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/weight-alias-precheck.json",
+      "additions": {
+        "human": 128
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/weights-aliases-final.json",
+      "additions": {
+        "human": 99
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/weights-coverage-final.json",
+      "additions": {
+        "human": 13
+      }
+    },
+    {
+      "old_path": ".gitignore",
+      "new_path": ".gitignore",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 64
+      },
+      "deletions": {
+        "human": 123
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/DECISIONS.jsonl",
+      "new_path": "research/artmanip-recovery-20260930/DECISIONS.jsonl",
+      "additions": {
+        "human": 1050
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/DELIVERY_AUDIT.md",
+      "new_path": "research/artmanip-recovery-20260930/DELIVERY_AUDIT.md",
+      "additions": {
+        "human": 21
+      },
+      "deletions": {
+        "human": 22
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/HANDOFF.md",
+      "new_path": "research/artmanip-recovery-20260930/HANDOFF.md",
+      "additions": {
+        "human": 64
+      },
+      "deletions": {
+        "human": 123
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/README.md",
+      "new_path": "research/artmanip-recovery-20260930/README.md",
+      "additions": {
+        "human": 72
+      },
+      "deletions": {
+        "human": 43
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/REPRODUCE.md",
+      "new_path": "research/artmanip-recovery-20260930/REPRODUCE.md",
+      "additions": {
+        "human": 10
+      },
+      "deletions": {
+        "human": 1
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/SECOND_SEED.md",
+      "new_path": "research/artmanip-recovery-20260930/SECOND_SEED.md",
+      "additions": {
+        "human": 5
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/STATE.json",
+      "new_path": "research/artmanip-recovery-20260930/STATE.json",
+      "additions": {
+        "human": 54
+      },
+      "deletions": {
+        "human": 119
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/draft-assets-verified.json",
+      "new_path": "research/artmanip-recovery-20260930/draft-assets-verified.json",
+      "additions": {
+        "human": 392
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/final-archive-watch.json",
+      "new_path": "research/artmanip-recovery-20260930/final-archive-watch.json",
+      "additions": {
+        "human": 18
+      },
+      "deletions": {
+        "human": 4
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/resources/latest.json",
+      "new_path": "research/artmanip-recovery-20260930/resources/latest.json",
+      "additions": {
+        "human": 162
+      },
+      "deletions": {
+        "human": 11
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/weights-index.json",
+      "new_path": "research/artmanip-recovery-20260930/weights-index.json",
+      "additions": {
+        "human": 839
+      },
+      "deletions": {
+        "human": 176
+      }
+    },
+    {
+      "old_path": "scripts/complete_wuji_recovery_final_analysis.py",
+      "new_path": "scripts/complete_wuji_recovery_final_analysis.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 6
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 2
+          }
+        ]
+      }
+    }
+  ]
+}
