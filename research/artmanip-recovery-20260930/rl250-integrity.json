@@ -1,0 +1,17 @@
+{
+  "checkpoint": "runs/recovery-rl-seg1-retry1/checkpoints/epoch_000250.pth",
+  "sha256": "36c11bb21ad290017f7ac175299bd7f861d0c7097a9c90f7aecda610240789c3",
+  "epoch": 250,
+  "frame": 20480000,
+  "updates": 9000,
+  "adam_steps": [
+    9000
+  ],
+  "rng_keys": [
+    "cuda",
+    "numpy",
+    "python",
+    "torch"
+  ],
+  "scope": "Adam/model/normalizer/SAPG/counters/RNG restored; PhysX not serialized, fresh rollout and recurrent reset on resume"
+}
