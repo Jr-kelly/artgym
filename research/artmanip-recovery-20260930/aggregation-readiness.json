@@ -1,0 +1,16 @@
+{
+  "status": "Read-only implementation inventory; no new aggregation experiment triggered or run",
+  "available": [
+    "scripts.collect_wuji_unified.py",
+    "scripts.train_wuji_recovery_bc.py",
+    "scripts.train_wuji_command_dagger.py"
+  ],
+  "findings": [
+    "Existing unified collector records responsible-expert physical histories, not learner-state histories. It cannot be relabelled as aggregation.",
+    "Old command DAgger trains a separate feedforward deployment student, so it is not the required recurrent unified privileged-teacher continuation. Do not reuse its scientific claims.",
+    "A valid new collector would maintain each responsible recurrent expert from the same reset along actual learner observations and previous executed learner actions, with done-mask reset. Save counterfactual expert labels separately from actual learner actions and targets.",
+    "Need test expert label availability/recovery on shifted states; finite labels alone do not show expert can recover.",
+    "Existing paired BC remains priority while meaningful validation target error decreases. Evaluate32000 endpoint before deciding any aggregation."
+  ],
+  "next": "Await pairedBC32000 independent development and late fit trend; no source11, new knife, capacity change or student experiment."
+}
