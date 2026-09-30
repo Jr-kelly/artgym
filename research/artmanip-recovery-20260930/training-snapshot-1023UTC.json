@@ -1,0 +1,74 @@
+{
+  "checked_utc": "2026-09-30T10:23:44.092672+00:00",
+  "runs": {
+    "recovery-rl-seg2": {
+      "first_epoch": 1001,
+      "last_epoch": 1510,
+      "recorded_epochs": 510,
+      "all_finite": true,
+      "source_visits": [
+        11559,
+        11693,
+        11751,
+        11439
+      ],
+      "first20_mean": {
+        "source0/goal_error": 0.014472513203509152,
+        "source1/goal_error": 0.014452091068960726,
+        "source2/goal_error": 0.01456775243859738,
+        "source3/goal_error": 0.01534438852686435
+      },
+      "last20_mean": {
+        "source0/goal_error": 0.012749102199450135,
+        "source1/goal_error": 0.013020835956558586,
+        "source2/goal_error": 0.012850443786010145,
+        "source3/goal_error": 0.01937345080077648
+      }
+    },
+    "recovery-rl-clockhold-clean": {
+      "first_epoch": 1001,
+      "last_epoch": 1147,
+      "recorded_epochs": 147,
+      "all_finite": true,
+      "source_visits": [
+        5855,
+        6003,
+        6047,
+        5871
+      ],
+      "first20_mean": {
+        "source0/goal_error": 0.010209347593263373,
+        "source1/goal_error": 0.010617596055089962,
+        "source2/goal_error": 0.012424423748598201,
+        "source3/goal_error": 0.011644630928640255,
+        "holding/reward": 0.8386064848862589,
+        "holding/body_penalty": -5.120262539386749,
+        "holding/stable_fraction": 0.49252930879592893,
+        "holding/period2_fraction": 0.5119238376617432,
+        "holding/max_abs_additional_reward": 22.34575023651123,
+        "source0/strict_body_fraction": 0.28956083077937367,
+        "source1/strict_body_fraction": 0.25556696247076616,
+        "source2/strict_body_fraction": 0.5190647047013044,
+        "source3/strict_body_fraction": 0.9214768171310425,
+        "holding/switches_this_step": 130.55
+      },
+      "last20_mean": {
+        "source0/goal_error": 0.009383909148164093,
+        "source1/goal_error": 0.008612500433810056,
+        "source2/goal_error": 0.011815677816048264,
+        "source3/goal_error": 0.017156902560964228,
+        "holding/reward": 2.348992717266083,
+        "holding/body_penalty": -3.0878501176834106,
+        "holding/stable_fraction": 0.9292480617761611,
+        "holding/period2_fraction": 0.5048437610268592,
+        "holding/max_abs_additional_reward": 25.0,
+        "source0/strict_body_fraction": 0.9324130058288574,
+        "source1/strict_body_fraction": 0.9818677783012391,
+        "source2/strict_body_fraction": 0.8916795402765274,
+        "source3/strict_body_fraction": 0.8925759464502334,
+        "holding/switches_this_step": 88.85
+      }
+    }
+  },
+  "scope": "Means of the last sampled control transition in each training epoch, not complete-rollout or complete-episode success. Endpointdev still required."
+}
