@@ -53,3 +53,8 @@
 
 
 旧评估报告的`action_control.support_span_rad/thumb_step_rad`来自通用兼容配置；对reference任务不是实际生效接口。历史reference实际控制以单步实测0.008333rad及任务源码为准，不能误读为.04/.025混合接口。新报告明确区分`full_incremental`的实际步长与mixed接口；仅补正元数据，轨迹和评分未改变。
+
+
+训练探索日志补查：`exploration-runtime-audit.json` 固定了上游原文件SHA及对应行。实际5个SAPG block的embedding为[50,37.5,25,12.5,0]，intrinsic entropy系数为[.0025,.001875,.00125,.000625,0]，每块1024环境。正式评估固定block0/id50，与固定上游 `eval_consecutive.py`、`infer_teacher_impl.py` 默认一致；未据训练熵差异认定选块错误或另开选块实验。Gaussian熵是训练分布统计，不是裁剪后执行动作熵，也不证明探索对某一来源有效。
+
+学习率字段有时序区别：TensorBoard `info/last_lr` 是最后一次优化更新返回的LR；`learning.jsonl` 的 `lr` 则在该epoch末尾自适应调度完成后读取，可能已经变为下一次更新的LR。归档Adam参数组保存后者。该区别由 `a2c_continuous.py` 返回值及 `a2c_common.py` 调度顺序核实，不是本轮新改学习率。

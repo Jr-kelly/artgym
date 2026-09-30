@@ -1,0 +1,92 @@
+{
+  "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
+  "source_evidence": {
+    "isaacgymenvs/eval_consecutive.py": {
+      "sha256": "73f97bfc864d52c1018bdca7e0103066dbb620c4c5ee13cb98c018fd8001318c",
+      "relevant_lines": [
+        {
+          "line": 124,
+          "text": "    parser.add_argument(\"--expl-block-idx\", type=int, default=0, help=\"Teacher exploration block id when applicable.\")"
+        },
+        {
+          "line": 661,
+          "text": "        coef_ids = torch.linspace(50.0, 0.0, inferred_blocks, device=player.device)"
+        },
+        {
+          "line": 662,
+          "text": "        player.intr_reward_coef_embd[:] = coef_ids[block_idx]"
+        }
+      ]
+    },
+    "isaacgymenvs/infer_teacher_impl.py": {
+      "sha256": "f84320e1388da4718816ba23a384f6b4e60c6ed4314f1300f8f9abaef3c4111f",
+      "relevant_lines": [
+        {
+          "line": 40,
+          "text": "    parser.add_argument(\"--expl-block-idx\", type=int, default=0, help=\"Which teacher exploration block id to use during inference when applicable.\")"
+        },
+        {
+          "line": 175,
+          "text": "        coef_ids = torch.linspace(50.0, 0.0, inferred_blocks, device=player.device)"
+        },
+        {
+          "line": 176,
+          "text": "        player.intr_reward_coef_embd[:] = coef_ids[block_idx]"
+        }
+      ]
+    },
+    "rl_games/rl_games/common/a2c_common.py": {
+      "sha256": "f48f298a98200a1e691787ede2e93ecebeb231d675211b264547a746d4d67bbd",
+      "relevant_lines": [
+        {
+          "line": 335,
+          "text": "                embedding_genvec = torch.linspace(50.0, 0.0, self.num_actors // self.intr_coef_block_size).to(self.ppo_device)[env_ids]"
+        },
+        {
+          "line": 344,
+          "text": "                self.intr_reward_coef = torch.linspace(0.5, 0.0, self.num_actors // self.intr_coef_block_size).to(self.ppo_device)[env_ids] * config.get('expl_reward_coef_scale')"
+        },
+        {
+          "line": 347,
+          "text": "                self.intr_reward_coef = torch.linspace(0.0, 0.0, self.num_actors // self.intr_coef_block_size).to(self.ppo_device)[env_ids]"
+        }
+      ]
+    }
+  },
+  "blocks": [
+    {
+      "index": 0,
+      "embedding_id": 50.0,
+      "intrinsic_entropy_scale": 0.0025
+    },
+    {
+      "index": 1,
+      "embedding_id": 37.5,
+      "intrinsic_entropy_scale": 0.001875
+    },
+    {
+      "index": 2,
+      "embedding_id": 25.0,
+      "intrinsic_entropy_scale": 0.00125
+    },
+    {
+      "index": 3,
+      "embedding_id": 12.5,
+      "intrinsic_entropy_scale": 0.0006250000000000001
+    },
+    {
+      "index": 4,
+      "embedding_id": 0.0,
+      "intrinsic_entropy_scale": 0.0
+    }
+  ],
+  "envs_per_block": 1024,
+  "formal_inference": {
+    "block": 0,
+    "embedding_id": 50,
+    "deterministic_mean_clipped": true
+  },
+  "finding": "Current inference50 agrees with both pinned upstream consecutive evaluator and teacher infer defaults. No inferred block-selection bug; no alternate-block experiment started. Logged Gaussian exploration entropy covers training, not deterministic F/S behavior.",
+  "learning_rate_semantics": "TensorBoard info/last_lr is captured by train_actor_critic on last update, before the final standard adaptive-scheduler step. learning.jsonl lr records self.last_lr after that step. They can legitimately differ; saved Adam param-group LR is prospective next-update LR.",
+  "training_export": "training-diagnostics-through2000/report.json"
+}

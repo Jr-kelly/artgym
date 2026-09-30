@@ -1,0 +1,59 @@
+{
+  "runs": [
+    {
+      "run": "runs/recovery-rl-seg1-retry1",
+      "first_epoch": 21,
+      "last_epoch": 1000,
+      "epochs": 980,
+      "all_exported_metrics_finite": true,
+      "files": [
+        {
+          "path": "runs/recovery-rl-seg1-retry1/learning.jsonl",
+          "sha256": "79146e3ce286f5a0aa298f7aed10d894d5d786b9ac5ef905526812da3266bd9a"
+        },
+        {
+          "path": "runs/recovery-rl-seg1-retry1/summaries/events.out.tfevents.1790752593.d-20260929154040-5x7zz",
+          "sha256": "37cf9db3ed33dae49ae0133ea24e79717b8f1ac93b6bcce9fdb979dda285df7e"
+        }
+      ]
+    },
+    {
+      "run": "runs/recovery-rl-seg2",
+      "first_epoch": 1001,
+      "last_epoch": 2000,
+      "epochs": 1000,
+      "all_exported_metrics_finite": true,
+      "files": [
+        {
+          "path": "runs/recovery-rl-seg2/learning.jsonl",
+          "sha256": "b5f75d9fc824e965f0e123270ba966b94727f7323b2397590257b3e69d1a8d41"
+        },
+        {
+          "path": "runs/recovery-rl-seg2/summaries/events.out.tfevents.1790760045.d-20260929154040-5x7zz",
+          "sha256": "19cc7b167bd53bb6f1aac763bd4159056bd4949ff65ca5c6db3f2784b943eaef"
+        }
+      ]
+    },
+    {
+      "run": "runs/recovery-rl-clockhold-clean",
+      "first_epoch": 1001,
+      "last_epoch": 2000,
+      "epochs": 1000,
+      "all_exported_metrics_finite": true,
+      "files": [
+        {
+          "path": "runs/recovery-rl-clockhold-clean/learning.jsonl",
+          "sha256": "2866e347ceaf69ec12eee7570c71ca5826976b692757cbeee050faa0c54d64ce"
+        },
+        {
+          "path": "runs/recovery-rl-clockhold-clean/summaries/events.out.tfevents.1790762756.d-20260929154040-5x7zz",
+          "sha256": "bf852a5fb425e7eb79a62a33a0e085c2e4eae7d3ca527064c02d46e3dc170e81"
+        }
+      ]
+    }
+  ],
+  "scalar_rows": 41720,
+  "learning_rows": 2980,
+  "scope": "TensorBoard actual learner scalars plus last-rollout-step source/reward snapshots. Global/SAPG-block entropy is not source-specific. Training objectives and rewards differ; do not rank capabilities using these reward curves. F/S evidence remains independent.",
+  "lr_scope": "TensorBoard info/last_lr is captured on the last optimizer update. learning.jsonl lr is self.last_lr after the final adaptive scheduler update; the values can differ."
+}

@@ -42,8 +42,8 @@
       "pid": 38444,
       "status": "running",
       "child_pid": 38445,
-      "heartbeat": "2026-09-30T13:10:32.360123+00:00",
-      "elapsed_seconds": 4398.823252406,
+      "heartbeat": "2026-09-30T13:16:03.662693+00:00",
+      "elapsed_seconds": 4730.058777223996,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg3-job/status.json",
       "pid_exists": true
     },
@@ -81,13 +81,13 @@
       "pid": 44425,
       "status": "running",
       "child_pid": 44426,
-      "heartbeat": "2026-09-30T13:10:45.893810+00:00",
-      "elapsed_seconds": 873.6504749300075,
+      "heartbeat": "2026-09-30T13:15:47.322340+00:00",
+      "elapsed_seconds": 1175.0750628530077,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-reference-clean-job/status.json",
       "pid_exists": true
     }
   ],
-  "gpu_hours": 11.875644010277774,
+  "gpu_hours": 12.050953333055551,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -95,42 +95,14 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "GPU0 original segment3→3000, development, segment4→4000. GPU1 matched repaired-pool originalcontrol44425 CP1000→2000 just started; after its required dev, execute E-only4100→5700 underbc44800-plan.",
   "last_event": {
-    "utc": "2026-09-30T13:07:55.981207+00:00",
-    "event": "rolling_resource_window_verified",
-    "evidence": "research/artmanip-recovery-20260930/resources/four-hour-1307UTC.json",
-    "result": {
-      "first_sample_utc": "2026-09-30T06:50:57.632491+00:00",
-      "last_sample_utc": "2026-09-30T13:07:17.966298+00:00",
-      "samples": 4517,
-      "elapsed_seconds": 22580.333806991577,
-      "full_observed_window": {
-        "covered_seconds": 22580.333806991577,
-        "gap_seconds": 0.0,
-        "device_mean_percent": [
-          78.65071692658948,
-          71.41924908494175,
-          0.0,
-          0.0
-        ],
-        "machine_mean_percent": 37.51749150288281
-      },
-      "last_up_to_four_hours": {
-        "covered_seconds": 14400.0,
-        "gap_seconds": 0.0,
-        "device_mean_percent": [
-          81.09822088115745,
-          72.98014593884349,
-          0.0,
-          0.0
-        ],
-        "machine_mean_percent": 38.51959170500024
-      },
-      "has_complete_four_hour_coverage": true,
-      "scope": "Four physical H200 devices, including unused devices. Time-weighted zero-order hold between samples, gaps over15s excluded and disclosed. GPU occupied job wall budget is accounted separately; utilization does not justify filler computation.",
-      "four_hour_26percent_met": true
-    },
-    "local_reporting_correction": "A manual path used20260921 rather than20260930; corrected before producing any report. GPU jobs unaffected.",
-    "next": "Continue originalseg3 and matchedcleancontrol; no fillerGPU computation."
+    "utc": "2026-09-30T13:21:03.248625+00:00",
+    "event": "archive_completed",
+    "name": "recovery-training-diagnostics2000",
+    "archive": "delivery/artmanip-recovery-20260930/recovery-training-diagnostics2000.tar.gz",
+    "sha256": "5e9ddf2ae0bd92d79ee87d6ad88b3a16527170ce039db0f22ce82eca1276c4a4",
+    "size": 2964272,
+    "files": 8,
+    "next": "Restore-check and upload; local originals retained"
   },
   "monitor": {
     "pid": 1192,
@@ -174,7 +146,7 @@
     "bc32000-development-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T13:10:55.091288+00:00",
+  "last_resource_check_utc": "2026-09-30T13:16:10.648069+00:00",
   "next_actions": [
     "GPU0 originalsegment3 PID38444 at13:03UTC epoch2519. Continue3000; preregistereddev2500+3000 then originalseg4to4000 withdev3500+4000. ActualCP2000→2001restorepassed; originalpoolunchanged.",
     "Repaired training pool d885794f6bd5c77a71591c5d5e17753b4679252c8582587ab7217d6d61c73836 passed full51220sec static and clock/mapping checks. Four source0 slots47/94/104/117 replaced by original0/1/2/3, distinctcounts124/128/128/128. No evaluation filtering.",
