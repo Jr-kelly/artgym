@@ -7,8 +7,46 @@
   "max_concurrent_gpus": 2,
   "rl_default_gpu_hours": 16,
   "bc_default_gpu_hours": 2,
-  "phase": "A complete; B pilot / C checks",
+  "phase": "B/C active; actual stages and next decisions in active_jobs and next_actions",
   "active_jobs": [
+    {
+      "source_sha256": "f3aa89d7dd469f42563d350d539692893c96bccfc1edbed3afc06947af96c54e",
+      "name": "rl-clockhold-clean-job",
+      "gpu": 1,
+      "command": [
+        "/tmp/wuji-recovery-runtime/bin/python",
+        "-m",
+        "scripts.train_wuji_recovery_rl",
+        "task=wuji_artmanip_clock_hold",
+        "hand=wuji_paper_official_actuator",
+        "object=knife_wuji_reference",
+        "train=wujiArtManipReferenceSAPG",
+        "num_envs=5120",
+        "headless=True",
+        "pipeline=gpu",
+        "graphics_device_id=-1",
+        "force_render=False",
+        "num_subscenes=0",
+        "multi_gpu=False",
+        "seed=2026093011",
+        "experiment=recovery-rl-clockhold-clean",
+        "max_iterations=2000",
+        "checkpoint=runs/recovery-rl-seg1-retry1/checkpoints/epoch_001000.pth",
+        "train.params.config.save_frequency=250",
+        "train.params.config.evaluation_frequency=250",
+        "train.params.config.checkpoint_first_epoch=1250",
+        "task.env.trainingStates=research/artmanip-recovery-20260930/data/rl-train-static-valid.npy"
+      ],
+      "timeout_seconds": 8400,
+      "started": "2026-09-30T10:05:22.332052+00:00",
+      "pid": 25006,
+      "status": "running",
+      "child_pid": 25007,
+      "heartbeat": "2026-09-30T10:07:22.917074+00:00",
+      "elapsed_seconds": 120.47355902499112,
+      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-clockhold-clean-job/status.json",
+      "pid_exists": true
+    },
     {
       "source_sha256": "f3aa89d7dd469f42563d350d539692893c96bccfc1edbed3afc06947af96c54e",
       "name": "rl-seg2-job",
@@ -41,13 +79,13 @@
       "pid": 18856,
       "status": "running",
       "child_pid": 18857,
-      "heartbeat": "2026-09-30T10:04:12.956825+00:00",
-      "elapsed_seconds": 2650.617483681999,
+      "heartbeat": "2026-09-30T10:07:13.684230+00:00",
+      "elapsed_seconds": 2831.344598565993,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg2-job/status.json",
       "pid_exists": true
     }
   ],
-  "gpu_hours": 5.837522132500001,
+  "gpu_hours": 5.931311113333335,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -55,52 +93,11 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "Launch repaired-pool holding RL1000→2000; verify actual startup model/Adam/RNG counters. Original RL segment2 continues through2000, then3000/4000. After holding dev, BC pair32000 and matched repaired-pool original-control1000→2000 remain authorized and required.",
   "last_event": {
-    "utc": "2026-09-30T10:05:15.443174+00:00",
-    "event": "repaired_pool_full_static_and_clock_passed",
-    "evidence": "runs/artmanip-recovery-20260930/holding-repaired-pool-static/report.json",
-    "report": {
-      "task": "wuji_artmanip_clock_hold",
-      "seed": 2026093092,
-      "rows": [
-        {
-          "source": 0,
-          "n": 128,
-          "body_1sec": 128,
-          "body_20sec": 128,
-          "bad_pool_rows": []
-        },
-        {
-          "source": 1,
-          "n": 128,
-          "body_1sec": 128,
-          "body_20sec": 128,
-          "bad_pool_rows": []
-        },
-        {
-          "source": 2,
-          "n": 128,
-          "body_1sec": 128,
-          "body_20sec": 128,
-          "bad_pool_rows": []
-        },
-        {
-          "source": 3,
-          "n": 128,
-          "body_1sec": 128,
-          "body_20sec": 128,
-          "bad_pool_rows": []
-        }
-      ],
-      "max_target_change": 0.0,
-      "clock_schedule_verified": true,
-      "bad_first_steps": {},
-      "training_states_sha256": "d885794f6bd5c77a71591c5d5e17753b4679252c8582587ab7217d6d61c73836",
-      "trace_sha256": "496abde9bf2951b4d4cad926e927b2b11f8744e1eda2afe981356d1178949c62",
-      "scope": "All512 frozen training rows, one per environment, zero hand action. Goal timeout and success-budget reset disabled for20s physical diagnostic; physical invalid/fall termination unchanged. Capture before resets. No filtering or learned skill claim."
-    },
-    "parent_checkpoint": "runs/recovery-rl-seg1-retry1/checkpoints/epoch_001000.pth",
-    "parent_sha256": "f0fa3cd807e6b493bfbbea4a4064ccad3c09929ed97cb147b96f4017d692e2db",
-    "next": "Launch repaired-pool holding RL1000→2000; verify actual startup model/Adam/RNG counters. Original RL segment2 continues through2000, then3000/4000. After holding dev, BC pair32000 and matched repaired-pool original-control1000→2000 remain authorized and required."
+    "utc": "2026-09-30T10:09:52.891107+00:00",
+    "event": "development_figures_exported",
+    "evidence": "research/artmanip-recovery-20260930/comparison-figures/inputs.json",
+    "scope": "Independent development cells, separate BC/RL plots of strict or functional success, phase hold/cycle count, full body stability. No final result. BC PNG visually checked.",
+    "next": "Both RL jobs continue to planned endpoints; preserve original goal learning and matched holding comparison."
   },
   "monitor": {
     "pid": 1192,
@@ -138,7 +135,7 @@
     "holding-repaired-pool-static-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T10:04:22.625285+00:00",
+  "last_resource_check_utc": "2026-09-30T10:07:41.298834+00:00",
   "next_actions": [
     "Revalidate GPU0 original rl-seg2-job before decisions; original frozen pool has4/512 static-invalid perturbations, baseline retained and labelled.",
     "Repaired training pool d885794f6bd5c77a71591c5d5e17753b4679252c8582587ab7217d6d61c73836 passed full51220sec static and clock/mapping checks. Four source0 slots47/94/104/117 replaced by original0/1/2/3, distinctcounts124/128/128/128. No evaluation filtering.",

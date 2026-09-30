@@ -75,3 +75,21 @@ A single model instance controls all four source groups in each batch. Prefix an
 F has a40-second maximum horizon,10mm tolerance, and1.5 seconds continuously at target before switching. A complete open-close cycle counts as functional success; full survival/body stability and later drops are reported separately. If all environments terminate early, the physical trace ends there and records failure/survival facts; it does not pretend to contain40 seconds of live behavior.
 
 S is a separate20-second episode with external2/5-second switching. Every stage's final9 control samples must stay within2mm, with full validity/survival and base drift<10mm/rotation<.25rad. The original and independent strict scorers agree episode by episode. F's state machine is reconstructed independently from its own physical trace. Development/promotion are separate from the new final128/source set. Do not open final trajectories/scores during training or selection.
+
+
+## Matched holding-objective comparison after static reset repair
+
+The original4segment reference retains its original training pool, whose complete512-row static diagnostic found4 unstable source0 perturbations. Those facts are retained in its interpretation. The later controlled comparison uses a separate repaired training-only pool for **both** arms, with explicit4-row mapping and SHA in`data/rl-train-static-valid.json`. All development/promotion/final states remain unfiltered. The full repaired512-row20s static/clock check passed; this is initialization evidence, not policy success.
+
+Resume the originalRL1000 checkpoint with the jointRL command above, using `max_iterations=2000`, `train.params.config.checkpoint_first_epoch=1250`, and `task.env.trainingStates=research/artmanip-recovery-20260930/data/rl-train-static-valid.npy`. Use separate experiment names. Select `task=wuji_artmanip_reference` for the matched original-goal control and `task=wuji_artmanip_clock_hold` for the fixed-clock/sustained-body objective. Both receive81,920,000 additional environment interactions and36,000 actual Adam updates from the same parent optimizer/RNG. Evaluate both with names beginning `rl`, which selects their full-incremental physical control interface. Compare both to the separately retained original-pool baseline.
+
+CPU checkpoint and actual resumed-first-update verification:
+
+```bash
+"$WUJI_PYTHON" -m scripts.audit_wuji_recovery_rl \
+ --checkpoint runs/recovery-rl-seg1-retry1/checkpoints/epoch_001000.pth \
+ --epoch 1000 --resumed-run runs/recovery-rl-clockhold-clean \
+ --output holding-resume-audit.json
+```
+
+The simulation precheck scripts require explicit global RNG seeding for random sampling; `isaacgymenvs.make(seed=...)` alone does not seed Torch/NumPy. Formal RL already calls the upstream `set_seed`; full-pool diagnostics enumerate exact rows and also set global seed. Recorded evaluations load fixed state matrices and report physical trace hashes.

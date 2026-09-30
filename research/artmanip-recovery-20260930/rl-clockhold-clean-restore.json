@@ -1,0 +1,25 @@
+{
+  "checkpoint": "runs/recovery-rl-seg1-retry1/checkpoints/epoch_001000.pth",
+  "sha256": "f0fa3cd807e6b493bfbbea4a4064ccad3c09929ed97cb147b96f4017d692e2db",
+  "epoch": 1000,
+  "frame": 81920000,
+  "updates": 36000,
+  "adam_steps": [
+    36000
+  ],
+  "rng_keys": [
+    "cuda",
+    "numpy",
+    "python",
+    "torch"
+  ],
+  "model_digest": "8d3a05e94d2c6a91778f294b8b4dedeb2414c13b2a09ce128aefeaddbba7fbb6",
+  "actual_resume": {
+    "run": "runs/recovery-rl-clockhold-clean",
+    "first_epoch": 1001,
+    "first_updates": 36036,
+    "first_curriculum_epoch": 1001
+  },
+  "passed": true,
+  "scope": "CPU checkpoint integrity and optional actual resume counters/model. PhysX is not serialized; fresh physical rollout and recurrent reset. No capability claim."
+}
