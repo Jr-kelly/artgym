@@ -1,0 +1,29 @@
+{
+  "name": "bc12800-evaluation-job",
+  "gpu": 1,
+  "timeout": 2400,
+  "command": [
+    "PYTHON",
+    "-m",
+    "scripts.evaluate_wuji_recovery_batch",
+    "--name",
+    "bc12800-evaluation",
+    "--states",
+    "research/artmanip-recovery-20260930/data/development-all.npy",
+    "--models",
+    "M1700=runs/artmanip-recovery-20260930/bc-pair12800/M/epoch_001700.pth",
+    "E1700=runs/artmanip-recovery-20260930/bc-pair12800/E/epoch_001700.pth",
+    "--protocols",
+    "S2",
+    "S5",
+    "F"
+  ],
+  "source_sha": "f74b0ab25c38b553d6ce3419aa09ae73ca4444b6",
+  "created_utc": "2026-09-30T08:52:50.274509+00:00",
+  "budget_receipt_utc": "2026-09-30T08:52:50.028137+00:00",
+  "occupied_gpu_hours": 3.746808476944444,
+  "other_jobs_reserved_gpu_hours": 0.7013966416666666,
+  "root": "/tmp/artgym-recovery-20260930",
+  "pin": "/tmp/artgym-recovery-20260930/pins/f74b0ab25c38b553d6ce3419aa09ae73ca4444b6",
+  "pid": 16161
+}
