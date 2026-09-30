@@ -1,0 +1,45 @@
+{
+  "input": "research/artmanip-recovery-20260930/data/rl-train.npy",
+  "input_sha256": "882ed2ee3e367be8855d469d6acbff6b16bb3d34a1c72fac84a3da90ec4d2072",
+  "output": "research/artmanip-recovery-20260930/data/rl-train-static-valid.npy",
+  "sha256": "d885794f6bd5c77a71591c5d5e17753b4679252c8582587ab7217d6d61c73836",
+  "mapping": [
+    {
+      "row": 47,
+      "source": 0,
+      "replacement_from_row": 0
+    },
+    {
+      "row": 94,
+      "source": 0,
+      "replacement_from_row": 1
+    },
+    {
+      "row": 104,
+      "source": 0,
+      "replacement_from_row": 2
+    },
+    {
+      "row": 117,
+      "source": 0,
+      "replacement_from_row": 3
+    }
+  ],
+  "source_distinct_counts": [
+    124,
+    128,
+    128,
+    128
+  ],
+  "reports": [
+    {
+      "path": "runs/artmanip-recovery-20260930/reference-pool-static/report.json",
+      "sha256": "08903d80227adf8876c3a687fe49c7d09b20b7469aea7193f9f07d11972dc836"
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/holding-pool-static/report.json",
+      "sha256": "bd7a64aadef20fcd46e232cd8a5ee9611d9133b45a678ac871764fd1d5c72be3"
+    }
+  ],
+  "scope": "Training-only duplicated stable rows; source/reset probabilities and512 slots retained. All evaluation populations unchanged. Original baseline remains on its original pool. Both new objective-comparison arms must use this identical repaired pool, after static verification."
+}

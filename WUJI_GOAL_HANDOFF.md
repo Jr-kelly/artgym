@@ -7,44 +7,60 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T09:45:05.886621+00:00",
-  "event": "bc19200_independent_development",
+  "utc": "2026-09-30T10:00:42.606615+00:00",
+  "event": "training_pool_repair_created",
   "evidence": [
-    "research/artmanip-recovery-20260930/bc19200-rl1000-analysis/report.json",
-    "research/artmanip-recovery-20260930/bc19200-rl1000-gates.json"
+    "runs/artmanip-recovery-20260930/reference-pool-static/report.json",
+    "runs/artmanip-recovery-20260930/holding-pool-static/report.json",
+    "research/artmanip-recovery-20260930/data/rl-train-static-valid.json"
   ],
-  "weights": {
-    "M2500": "d1780b90eda8ce7e3d437465a90a0418503ba8de02ef2a8a4b475300c114b6b3",
-    "E2500": "0f8256a45fe685674272165ea2a1c213a9f753951c89c9b1a2c61e82726ba41a"
+  "finding": "Both tasks produce bit-identical zero-action physical traces and same4 early-unstable source0 rows. Objective did not cause static failure.",
+  "repair": {
+    "input": "research/artmanip-recovery-20260930/data/rl-train.npy",
+    "input_sha256": "882ed2ee3e367be8855d469d6acbff6b16bb3d34a1c72fac84a3da90ec4d2072",
+    "output": "research/artmanip-recovery-20260930/data/rl-train-static-valid.npy",
+    "sha256": "d885794f6bd5c77a71591c5d5e17753b4679252c8582587ab7217d6d61c73836",
+    "mapping": [
+      {
+        "row": 47,
+        "source": 0,
+        "replacement_from_row": 0
+      },
+      {
+        "row": 94,
+        "source": 0,
+        "replacement_from_row": 1
+      },
+      {
+        "row": 104,
+        "source": 0,
+        "replacement_from_row": 2
+      },
+      {
+        "row": 117,
+        "source": 0,
+        "replacement_from_row": 3
+      }
+    ],
+    "source_distinct_counts": [
+      124,
+      128,
+      128,
+      128
+    ],
+    "reports": [
+      {
+        "path": "runs/artmanip-recovery-20260930/reference-pool-static/report.json",
+        "sha256": "08903d80227adf8876c3a687fe49c7d09b20b7469aea7193f9f07d11972dc836"
+      },
+      {
+        "path": "runs/artmanip-recovery-20260930/holding-pool-static/report.json",
+        "sha256": "bd7a64aadef20fcd46e232cd8a5ee9611d9133b45a678ac871764fd1d5c72be3"
+      }
+    ],
+    "scope": "Training-only duplicated stable rows; source/reset probabilities and512 slots retained. All evaluation populations unchanged. Original baseline remains on its original pool. Both new objective-comparison arms must use this identical repaired pool, after static verification."
   },
-  "M_S2": [
-    32,
-    32,
-    32,
-    8
-  ],
-  "M_S5": [
-    32,
-    32,
-    32,
-    9
-  ],
-  "E_S2": [
-    32,
-    32,
-    32,
-    21
-  ],
-  "E_S5": [
-    32,
-    32,
-    32,
-    11
-  ],
-  "E_S_body": "all cells32/32",
-  "F_cycles": "M and E all sources32/32",
-  "interpretation": "E still improves effective validation and source3 S2/body; no both-arm plateau. S failed; no64 promotion or student.",
-  "next": "Prioritize controlled holding RL while original segment2 continues; retain evidence for subsequent BC continuation within budget"
+  "next": "Verify repaired512 training rows all pass same20s static thresholds and holding schedule before formal matched continuations"
 }
 ```
 
@@ -61,6 +77,29 @@
   "bc_default_gpu_hours": 2,
   "phase": "A complete; B pilot / C checks",
   "active_jobs": [
+    {
+      "source_sha256": "f3aa89d7dd469f42563d350d539692893c96bccfc1edbed3afc06947af96c54e",
+      "name": "holding-pool-static-job",
+      "gpu": 1,
+      "command": [
+        "/tmp/wuji-recovery-runtime/bin/python",
+        "-m",
+        "scripts.audit_wuji_recovery_reset_pool",
+        "--task",
+        "wuji_artmanip_clock_hold",
+        "--output",
+        "runs/artmanip-recovery-20260930/holding-pool-static"
+      ],
+      "timeout_seconds": 900,
+      "started": "2026-09-30T09:57:49.240322+00:00",
+      "pid": 23979,
+      "status": "running",
+      "child_pid": 23980,
+      "heartbeat": "2026-09-30T09:59:49.886026+00:00",
+      "elapsed_seconds": 120.53105462799431,
+      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/holding-pool-static-job/status.json",
+      "pid_exists": true
+    },
     {
       "source_sha256": "f3aa89d7dd469f42563d350d539692893c96bccfc1edbed3afc06947af96c54e",
       "name": "rl-seg2-job",
@@ -93,58 +132,74 @@
       "pid": 18856,
       "status": "running",
       "child_pid": 18857,
-      "heartbeat": "2026-09-30T09:44:07.799283+00:00",
-      "elapsed_seconds": 1445.4591972319904,
+      "heartbeat": "2026-09-30T09:59:41.832844+00:00",
+      "elapsed_seconds": 2379.4543452719954,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg2-job/status.json",
       "pid_exists": true
     }
   ],
-  "gpu_hours": 5.304425074722224,
+  "gpu_hours": 5.7216330141666685,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
   "resource_check_utc": "2026-09-30T06:42:41Z",
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
-  "next": "ReviewRL1000/M2500/E2500 independentdev whencomplete. RLsegment2continues2000, later3000/4000. Usefit/phase/bodyjointtrendsfornextBCbranch; Msource3fitrecentlyflatter.",
+  "next": "Complete holding precheck before formal RL1000→2000 controlled comparison. Continue original four-segment RL. BC E still improves; revisit continuation after GPU1 availability.",
   "last_event": {
-    "utc": "2026-09-30T09:45:05.886621+00:00",
-    "event": "bc19200_independent_development",
+    "utc": "2026-09-30T10:00:42.606615+00:00",
+    "event": "training_pool_repair_created",
     "evidence": [
-      "research/artmanip-recovery-20260930/bc19200-rl1000-analysis/report.json",
-      "research/artmanip-recovery-20260930/bc19200-rl1000-gates.json"
+      "runs/artmanip-recovery-20260930/reference-pool-static/report.json",
+      "runs/artmanip-recovery-20260930/holding-pool-static/report.json",
+      "research/artmanip-recovery-20260930/data/rl-train-static-valid.json"
     ],
-    "weights": {
-      "M2500": "d1780b90eda8ce7e3d437465a90a0418503ba8de02ef2a8a4b475300c114b6b3",
-      "E2500": "0f8256a45fe685674272165ea2a1c213a9f753951c89c9b1a2c61e82726ba41a"
+    "finding": "Both tasks produce bit-identical zero-action physical traces and same4 early-unstable source0 rows. Objective did not cause static failure.",
+    "repair": {
+      "input": "research/artmanip-recovery-20260930/data/rl-train.npy",
+      "input_sha256": "882ed2ee3e367be8855d469d6acbff6b16bb3d34a1c72fac84a3da90ec4d2072",
+      "output": "research/artmanip-recovery-20260930/data/rl-train-static-valid.npy",
+      "sha256": "d885794f6bd5c77a71591c5d5e17753b4679252c8582587ab7217d6d61c73836",
+      "mapping": [
+        {
+          "row": 47,
+          "source": 0,
+          "replacement_from_row": 0
+        },
+        {
+          "row": 94,
+          "source": 0,
+          "replacement_from_row": 1
+        },
+        {
+          "row": 104,
+          "source": 0,
+          "replacement_from_row": 2
+        },
+        {
+          "row": 117,
+          "source": 0,
+          "replacement_from_row": 3
+        }
+      ],
+      "source_distinct_counts": [
+        124,
+        128,
+        128,
+        128
+      ],
+      "reports": [
+        {
+          "path": "runs/artmanip-recovery-20260930/reference-pool-static/report.json",
+          "sha256": "08903d80227adf8876c3a687fe49c7d09b20b7469aea7193f9f07d11972dc836"
+        },
+        {
+          "path": "runs/artmanip-recovery-20260930/holding-pool-static/report.json",
+          "sha256": "bd7a64aadef20fcd46e232cd8a5ee9611d9133b45a678ac871764fd1d5c72be3"
+        }
+      ],
+      "scope": "Training-only duplicated stable rows; source/reset probabilities and512 slots retained. All evaluation populations unchanged. Original baseline remains on its original pool. Both new objective-comparison arms must use this identical repaired pool, after static verification."
     },
-    "M_S2": [
-      32,
-      32,
-      32,
-      8
-    ],
-    "M_S5": [
-      32,
-      32,
-      32,
-      9
-    ],
-    "E_S2": [
-      32,
-      32,
-      32,
-      21
-    ],
-    "E_S5": [
-      32,
-      32,
-      32,
-      11
-    ],
-    "E_S_body": "all cells32/32",
-    "F_cycles": "M and E all sources32/32",
-    "interpretation": "E still improves effective validation and source3 S2/body; no both-arm plateau. S failed; no64 promotion or student.",
-    "next": "Prioritize controlled holding RL while original segment2 continues; retain evidence for subsequent BC continuation within budget"
+    "next": "Verify repaired512 training rows all pass same20s static thresholds and holding schedule before formal matched continuations"
   },
   "monitor": {
     "pid": 1192,
@@ -174,18 +229,21 @@
     "rl-seg1-retry1-job",
     "bc-pair19200-job",
     "bc19200-rl1000-evaluation-job",
-    "holding-precheck-job"
+    "holding-precheck-job",
+    "holding-precheck-retry1-job",
+    "holding-precheck-retry2-job",
+    "reference-pool-static-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T09:44:08.610602+00:00",
+  "last_resource_check_utc": "2026-09-30T09:59:57.490204+00:00",
   "next_actions": [
-    "Revalidate: GPU0RLseg2wrapper18856 sourcepinc0f6160 running; GPU1bc19200-rl1000-evaluationwrapper19208 samepin, launched09:21:08UTC. OldBC19200train17663finished.",
-    "BC19200epoch2500/Adam20000sameRNG/normalizerpassed. Msha d1780b90eda8ce7e3d437465a90a0418503ba8de02ef2a8a4b475300c114b6b3; Esha0f8256a45fe685674272165ea2a1c213a9f753951c89c9b1a2c61e82726ba41a. TargetvalM.000323863/E.000244469,source3M.000827012/E.000626251. Msource3late2100→2500only2.3percenttotal,eachrecent100epoch<2percent; E stillfalls. Needinspectactualtrainprobe/perphase andclosedloopforconditionalDAgger/targetsupervision; notautomaticallystopboth.",
-    "Currentbc19200-rl1000-evaluation orderrl1000,M2500,E2500 independentS2/S5/F ondev32. Pullrawandrescore/gate. NoS64yet. Afterresults choosebudgetedcontinuationordiagnostic basedGOAL; ifMofflineeffectiveerrorstabilizes andclosedloopshiftpersists, boundedhistoryconsistentDAggerisallowedwithoutrequiringbotharms nearzero. NeverusearbitraryexpertLSTMstate; labelsfollowactualstudenthistory fromsame reset.",
-    "RLseg2actualrestoreverified by modeldigestmatch, startup1000/frame81920000/Adam36000, firstepoch1001/Adam36036/curriculum1001; receipt rl-seg2-restore.json. Continueto2000; cumulativeplanned3000/4000remain. Pin changes sincefirstsegmentonlyscripts; task/configsame. Sourceexposurecountersrestartonresume, globalinteractionsdo not.",
-    "Launcher now refreshes real jobs and reserves all live remaining timeouts plus proposed timeout. Uses22GPUh pre-final ceiling and21:12UTC training cutoff. Final128 still unopened/untransferred. No student or secondseed until exactS64gate.",
-    "GitHubconfirmedf653313. BC19200archive1.25GBactualextract36files+CPUAdam20000passed; upload15session84408 log/tmp/wuji-recovery-incremental-upload15.log activecheckbeforeanotherupload. Segment1archiveupload14finished. Release399789402draft23assets expectedafterBC19200upload, finalpublicrelease/videos/downloadrestore stillpending. Final128unopened. weightsindex20/13needsrefreshlater.",
-    "CPU scripts: plot_wuji_recovery_learning exports separated training/fit/development trends; diagnose_wuji_recovery_state_shift measures matched-time physical q/target distribution shift. Existing bc800 shift does not triggerDAgger because validation still improves; do not add lossmodules now."
+    "Revalidate jobs in resources/latest.json; timestamps are historical receipts, not current facts.",
+    "Holding-precheck retry1 uses public env.reset after harness at_reset_ids failure. Do not launch holding training without passing simulation report.",
+    "BC19200 results: E source3 S2=21/32,S5=11/32,Sbody32/32both; M=8/9 and body30/32. No S64 promotion. E continues improving, not overall plateau.",
+    "Original RL segment2 target2000 fromCP1000 actual optimizer/RNG restore verified; mandatory original endpoints3000/4000 remain.",
+    "After holding comparison re-evaluate continuing BC; source3 S5 distribution shift remains, E S2 shift decreased. New module requires evidence and recorded budget.",
+    "New final128 untransferred/unopened. Freeze selected and fixed budget endpoints plus protocols before final evaluation once.",
+    "GitHub code/result branch pushed b7ad15b. Draft Release upload17 in progress; check process before additional uploader. Actual final videos/public download/restore/cleanup remain."
   ],
   "training_active_run": "runs/recovery-rl-seg2",
   "bc_current_pair": "runs/artmanip-recovery-20260930/bc-pair19200"
