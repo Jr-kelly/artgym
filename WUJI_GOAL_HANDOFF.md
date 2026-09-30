@@ -7,34 +7,11 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T06:53:42.792662+00:00",
-  "event": "job_finished",
-  "job": {
-    "source_sha256": "c0d858d0b83ea45ba7759946fb3619878056c02cf7062aa41bfc261c1437848f",
-    "name": "reference-precheck-job",
-    "gpu": 0,
-    "command": [
-      "/tmp/wuji-recovery-runtime/bin/python",
-      "-m",
-      "scripts.precheck_wuji_reference",
-      "--output",
-      "runs/artmanip-recovery-20260930/reference-precheck"
-    ],
-    "timeout_seconds": 600,
-    "started": "2026-09-30T06:47:50.536656+00:00",
-    "pid": 659,
-    "status": "completed",
-    "child_pid": 660,
-    "heartbeat": "2026-09-30T06:48:20.763923+00:00",
-    "elapsed_seconds": 30.106572240001697,
-    "returncode": 0,
-    "finished": "2026-09-30T06:48:23.767158+00:00",
-    "wall_seconds": 33.23031579999952,
-    "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/reference-precheck-job/status.json",
-    "pid_exists": false
-  },
-  "gpu_hours": 0.0536827361111111,
-  "next": "Read evidence and decide follow-up; process state verified at 2026-09-30T06:53:40.719277+00:00"
+  "utc": "2026-09-30T07:02:33.007840+00:00",
+  "event": "release_asset_verified",
+  "name": "recovery-training-sequences-t5.tar.gz",
+  "sha256": "8cc28eeccb2f34b48d6dad82d87b1b2d35b997abef9639ff085f730304919c96",
+  "next": "Continue experiment; final publication requires freeze and download verification"
 }
 ```
 
@@ -77,13 +54,43 @@
       "pid": 1482,
       "status": "running",
       "child_pid": 1483,
-      "heartbeat": "2026-09-30T06:53:40.451264+00:00",
-      "elapsed_seconds": 60.23082429799979,
+      "heartbeat": "2026-09-30T07:01:12.275976+00:00",
+      "elapsed_seconds": 512.0258732069997,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/g0-regression-retry1-job/status.json",
+      "pid_exists": true
+    },
+    {
+      "source_sha256": "f3aa89d7dd469f42563d350d539692893c96bccfc1edbed3afc06947af96c54e",
+      "name": "pilot-evaluation-job",
+      "gpu": 0,
+      "command": [
+        "/tmp/wuji-recovery-runtime/bin/python",
+        "-m",
+        "scripts.evaluate_wuji_recovery_batch",
+        "--name",
+        "pilot-evaluation",
+        "--states",
+        "research/artmanip-recovery-20260930/data/development-all.npy",
+        "--models",
+        "rl20=runs/recovery-rl-pilot20-retry2/checkpoints/epoch_000020.pth",
+        "bc100=runs/unified-policy-20260930/bc-unified-historical-s3001-seg1/epoch_000100.pth",
+        "--protocols",
+        "S2",
+        "S5",
+        "F"
+      ],
+      "timeout_seconds": 1800,
+      "started": "2026-09-30T06:59:45.735773+00:00",
+      "pid": 2804,
+      "status": "running",
+      "child_pid": 2805,
+      "heartbeat": "2026-09-30T07:01:16.140152+00:00",
+      "elapsed_seconds": 90.33790184100508,
+      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/pilot-evaluation-job/status.json",
       "pid_exists": true
     }
   ],
-  "gpu_hours": 0.0536827361111111,
+  "gpu_hours": 0.2773706619444445,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -91,34 +98,11 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "Restore isolated runtime; audit upstream and Wuji; meaningful prechecks; pin four-segment RL budget from full-update throughput.",
   "last_event": {
-    "utc": "2026-09-30T06:53:42.792662+00:00",
-    "event": "job_finished",
-    "job": {
-      "source_sha256": "c0d858d0b83ea45ba7759946fb3619878056c02cf7062aa41bfc261c1437848f",
-      "name": "reference-precheck-job",
-      "gpu": 0,
-      "command": [
-        "/tmp/wuji-recovery-runtime/bin/python",
-        "-m",
-        "scripts.precheck_wuji_reference",
-        "--output",
-        "runs/artmanip-recovery-20260930/reference-precheck"
-      ],
-      "timeout_seconds": 600,
-      "started": "2026-09-30T06:47:50.536656+00:00",
-      "pid": 659,
-      "status": "completed",
-      "child_pid": 660,
-      "heartbeat": "2026-09-30T06:48:20.763923+00:00",
-      "elapsed_seconds": 30.106572240001697,
-      "returncode": 0,
-      "finished": "2026-09-30T06:48:23.767158+00:00",
-      "wall_seconds": 33.23031579999952,
-      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/reference-precheck-job/status.json",
-      "pid_exists": false
-    },
-    "gpu_hours": 0.0536827361111111,
-    "next": "Read evidence and decide follow-up; process state verified at 2026-09-30T06:53:40.719277+00:00"
+    "utc": "2026-09-30T07:02:33.007840+00:00",
+    "event": "release_asset_verified",
+    "name": "recovery-training-sequences-t5.tar.gz",
+    "sha256": "8cc28eeccb2f34b48d6dad82d87b1b2d35b997abef9639ff085f730304919c96",
+    "next": "Continue experiment; final publication requires freeze and download verification"
   },
   "monitor": {
     "pid": 1192,
@@ -129,9 +113,10 @@
     "g0-regression-job",
     "rl-pilot20-job",
     "rl-pilot20-retry1-job",
-    "reference-precheck-job"
+    "reference-precheck-job",
+    "rl-pilot20-retry2-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T06:53:40.719277+00:00"
+  "last_resource_check_utc": "2026-09-30T07:01:17.822905+00:00"
 }
 ```

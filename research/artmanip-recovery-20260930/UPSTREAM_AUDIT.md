@@ -28,3 +28,9 @@
 ## 证据边界
 
 代码/资产、训练拟合、开发闭环、新冻结最终、独立复算、固定初态视频分别存放。旧最终128只作已见历史证据。无未见基础抓姿、形状泛化、自主取刀和真机验证。新参考与混合BC的比较包含接口、奖励、观测及指令多项改变，不能归因于单项。
+
+## 实测补证（2026-09-30 07:02 UTC）
+
+`reference-precheck/report.json`：128环境全通过一秒静态body，来源29/33/28/38；实际step=0.00833333377rad，策略dt=0.0333333351s，映射误差0，物体target变化0。`pilot-throughput.json`：20个完整SAPG epoch=1,638,400交互/720次优化，每epoch实际36次优化（包含SAPG经验复用），平均6.155s，后10轮6.510s。启动/保存额外132.99s。随机初始checkpoint SHA `c4cbd272868da979aa7b34ad560b7d7928fff5d392de9035a43b9dfce468af8d`。这仍是吞吐预检，非收敛结果；F/S独立评估未结束。
+
+原始配置已打印在pilot wrapper output.log，实际构造env配置在startup.json；此前没有单独config.yaml，归档不虚构该文件。后续正式入口直接截获Hydra与learner完整解析配置，并另存实际env配置。源码pin首次因symlink assets使IsaacGym相对路径逃逸而失败；改pin内硬链接assets后已真实训练成功。

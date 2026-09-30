@@ -53,4 +53,14 @@ def epoch(self):
     with (Path(self.experiment_dir)/'learning.jsonl').open('a') as f:f.write(json.dumps(row)+'\n')
     return result
 A2CAgent.get_full_state_weights=get;A2CAgent.set_full_state_weights=restore;A2CAgent.train=train;A2CAgent.train_epoch=epoch;A2CAgent.train_actor_critic=update
-runpy.run_module('isaacgymenvs.train',run_name='__main__')
+from isaacgymenvs import train as entry
+from omegaconf import OmegaConf
+original_preprocess=entry.preprocess_train_config
+def capture_config(cfg, config_dict):
+    result=original_preprocess(cfg,config_dict)
+    out=Path('runs')/str(cfg.experiment);out.mkdir(parents=True,exist_ok=True)
+    (out/'resolved.yaml').write_text(OmegaConf.to_yaml(cfg,resolve=True))
+    (out/'resolved-learner.json').write_text(json.dumps(result,indent=2,default=str)+'\n')
+    return result
+entry.preprocess_train_config=capture_config
+entry.launch_rlg_hydra()
