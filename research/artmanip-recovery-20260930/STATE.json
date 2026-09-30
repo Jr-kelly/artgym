@@ -42,8 +42,8 @@
       "pid": 73922,
       "status": "running",
       "child_pid": 73923,
-      "heartbeat": "2026-09-30T18:20:12.533146+00:00",
-      "elapsed_seconds": 30.109037585003534,
+      "heartbeat": "2026-09-30T18:36:16.792744+00:00",
+      "elapsed_seconds": 994.3697740960051,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/final-g1-job/status.json",
       "pid_exists": true,
       "host": "authorized_remote"
@@ -81,14 +81,14 @@
       "pid": 73774,
       "status": "running",
       "child_pid": 73775,
-      "heartbeat": "2026-09-30T18:20:08.497755+00:00",
-      "elapsed_seconds": 30.123537938998197,
+      "heartbeat": "2026-09-30T18:36:12.676645+00:00",
+      "elapsed_seconds": 994.2655420859955,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/final-g0-job/status.json",
       "pid_exists": true,
       "host": "authorized_remote"
     }
   ],
-  "gpu_hours": 19.983175829722207,
+  "gpu_hours": 20.518761613055545,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -96,19 +96,18 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "Wait existing final-g0/g1 jobs, no duplicate final attempts. Complete raw pull and independent final rescore/audit/gates, fixed videos, publicRelease/downloadrestore and cleanup.",
   "last_event": {
-    "utc": "2026-09-30T18:22:37.743801+00:00",
-    "event": "all_development_artifacts_verified_while_final_runs",
-    "assets": 59,
+    "utc": "2026-09-30T18:37:43.617039+00:00",
+    "event": "primary_final_cached_scores_and_remaining_validation_handoff",
     "evidence": [
-      "research/artmanip-recovery-20260930/draft-assets-verified.json",
-      "research/artmanip-recovery-20260930/seed2-promotion64-archive-restore.json"
+      "research/artmanip-recovery-20260930/final-primary-analysis",
+      "scripts/complete_wuji_recovery_final_analysis.py"
     ],
-    "next": "Only final-g0/g1 GPU jobs remain. Finish frozen validation, independentlyaudit, renderfixedvideos, publishandverifydownloads, cleanupownprocesses."
+    "next": "Continue existing finalGPU jobs andartifactwatcher. Preservependingexpertcomparison; afterbatchmetadatarestore score remaining17 andmergecachedprimary, thenauditall54 cells andgate."
   },
   "monitor": {
     "pid": 1192,
     "host": "10.13.160.5:33024",
-    "checked_utc": "2026-09-30T17:30:19+00:00",
+    "checked_utc": "2026-09-30T18:26:28.203203+00:00",
     "command_verified": "python3 -m scripts.monitor_wuji_recovery_resources"
   },
   "recorded_finished_jobs": [
@@ -164,17 +163,21 @@
     "seed2-promotion64-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T18:20:37.244979+00:00",
+  "last_resource_check_utc": "2026-09-30T18:36:41.299389+00:00",
   "next_actions": [
     "FINAL SET NOW OPEN. No further training, checkpoint reselection or final retry without infrastructure audit. final-freeze.json is immutable, SHA881e2989c91105e4f6fd8b6b0bfa13360cab3e9cccdad5d11e0f190375d73385, committed5dbac12. Frozen simulator source a36219f268ea7776aa58b034f7c82c219f3ba93e. Final state SHA9705b08c2d7fd0db167cb5e0d6c1a0e3e77d4cd0f747d8bd209079cd06ad21d7.",
     "Active remote final GPU0 wrapper73774 and GPU1 wrapper73922 started18:19:35/39UTC, timeout5400each. Reverified18:20:37UTC;19.98318GPUh, both9-model plan files have exact freezehash. Expected54 physical model/protocol cells,216 sourcecells,27648 episodes. No local GPU job yet.",
+    "CPU artifact watcher ACTIVE: PID2594428 started18:31:39UTC, toolsession91020, max6000s (<=20:11:39UTC), registration final-archive-watch.json, log /tmp/wuji-recovery-final-archive-watch.log. It status-pulls, archivescompletedmodels, restores into /tmp/wuji-recovery-final-restore, uploadsnewassets. Do NOT launch anotherwatcher/uploader whileit runs. NoGPUlaunch orscoring inside. First Eagg6100/E5700 archives alreadyrestored anduploaded;61assetsverified. ReverifywatcherPID/status.",
     "GPU0 final-g0 order: Eagg6100,Ereplay6500,E500,M300,rl3000,rlhold1500,rlclean2000,M4100,E4100. GPU1 final-g1 order: E5700,rl4000,rlhold2000,Eagg6500,bc100,rl1000,seed2Eagg6100,historical,source3. EachS2/S5/F. Freeze contains all exactpaths/hashes; E4100 added before freeze to retain matchedM/E32000 endpoints, E5700 extra44800 separate.",
     "Normal work concluded19.95154GPUh. Totalmax24 plusconservative .05 included at launch; final9/9 timeout5400each and3localvideos500each worsttotal~23.4182. Deadline22:42:33UTC; no need use remainingbudget fortraining. OriginalRL4000 remains budget-limited, notconverged.",
     "Second full optimization seed completed E44800+owncollection+aggregate3200. Endpoint seed2Eagg6100 SHA054a32298af88e287cbaa6ef057389489996f3cc102546db86632dad4c3e64e9, Adam48800/28frozen/actualparent/RNG/archiverestorepassed. SharedBC100/experts, notindependentpretraining.",
     "Seed2 exact64 S gate FAILED ONLY source1S2 relativebody:62/64 vs expert64/64, drop3.125pp >3pp by.125pp. S2strict[64,62,63,58],S5[63,64,63,60]. BodyS2[64,62,63,64],S5[63,64,63,64]. All absoluteS gatespass; do notlabel fullS64pass. Fcyclesall64,body[63,53,51,64]. SECOND_SEED.md/REPLICATION64.md and second-seed-decision.json; primary unchanged.",
     "PrimaryEagg6100 SHA2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8 passedexact64;S2[64,64,63,60],S5[63,64,63,64];bodyS2[64,64,63,64],S5[63,64,63,64]. Finalresultpending; no student/hardwareclaim.",
     "After finaljobs finish: status --pull omitsNPZ/PTH/MP4, so full rsync final-g0/final-g1. RuntimePython CPU summarize_wuji_recovery --directories both --output research/.../final-analysis; gate_wuji_recovery --reports final-analysis/report.json --experts same final-analysis/report.json; audit_wuji_recovery_final --analysis final-analysis --output final-integrity.json enforcesall54/216/27648 unique andexactprovenance. write_wuji_recovery_tables --phase final requires artgym Python (systemPython lacksNumPy).",
+    "PRIMARY FINAL independentlyrescored fromrestoredarchive: final-primary-analysis/ cached1536episodes. S2strict[128,127,127,111],S5[123,128,128,110];bodyS2[128,127,127,126],S5[124,128,128,127];Fcyclesall128,body[127,115,110,125]. AllabsoluteS thresholdspass; relativeexpertsPENDING, no fullSclaim yet. Do notrescore primaryagain unnecessarily.",
+    "After18modelarchives+completedbatchmetadata restored, use CUDA_VISIBLE_DEVICES empty +artgymPython -m scripts.complete_wuji_recovery_final_analysis. It scoresONLYremaining17 fromrestoredtraces in temporaryderivedviews (no newphysicalplan), verifiescachedprimaryscorerhash, merges final-analysis. Then audit_wuji_recovery_final and gate_wuji_recovery (reportsANDexperts final-analysis/report.json), write_wuji_recovery_tables phasefinal withartgymPython. This replaces earlier full-all summarization instruction; no scoringrule changed.",
     "Archive complete final per-model3protocol directories (avoid>2GiB singleasset); retain batchplans/results andjobmetadata separately. Restore each archive; upload_wuji_recovery only works whileRelease draft. Do notmutate archivedevidence. Update README finaltable andFINAL.md, retainfullDEVELOPMENT/SECOND_SEED/STRICT64.",
+    "Incremental final helper scripts/archive_wuji_recovery_final_model.py and watch_wuji_recovery_final_archives.py added AFTER evaluatorfreeze, CPUartifactonly; runningfilesmustremainunchanged. Each finalmodelarchive contains3protocol directories/logs plusimmutableplan/freeze. Watcher restores all18 into shared /tmp/wuji-recovery-final-restore; next MUST archive+restore final-g0/g1 results.json/completed.json andjobmetadata separately afterjobsfinish. Then summarize restored fullbatch directories ifdesired; finalauditor compares originalreportmetadata/hashes. Do notbundle>2GiB wholebatches.",
     "Videos ONLY after remote jobs done: launch_wuji_recovery_local_video --python /home/agiuser/miniconda3/envs/artgym/bin/python --timeout500, protocolsS2 fixed, S5 fixed, S5 --example failure. Fixedrows[0,32,64,96],failure[0,32,64,97] frompre-finaldev. Same primaryweights; localresimulation maydiffer, independentlyscore anddo notpresume failure reproduced.",
     "LocalToDesk2034815 verified17:39UTC desktopC+G video session651MiB;22589MiBfree. Launcher allows only exact /opt/todesk/bin/ToDesk_Session + --isVideoSession=true and>=16000MiBfree; unknowncompute blocks. Realpreflight andnegativeCPUcasespassed. Preserve desktop; cleanup claims onlynoownedcompute, notwholeGPUidle.",
     "package_wuji_recovery_video makes4parallelpanels andscoresframecount/trace. DirectMP4receipt kind standalone_video foruploader/index; rawvideo/report/trace/metadata in separatearchive. If frozenfailure resimpasses, reportthat honestly and retain originaldevelopmentfailure evidence; donotchange finalcohort orweights.",
@@ -186,9 +189,9 @@
   "training_active_runs": [],
   "bc_next_plan": "research/artmanip-recovery-20260930/bc44800-plan.json",
   "github_last_verified_commit": "5dbac12",
-  "release_verified_assets": 59,
+  "release_verified_assets": 61,
   "gpu_hours_by_host": {
-    "authorized_remote": 19.983175829722207,
+    "authorized_remote": 20.518761613055545,
     "local": 0.0
   },
   "bc_executed_endpoint": {
@@ -208,5 +211,18 @@
     "verification": "aggregation1-promotion64-gates.json"
   },
   "final_freeze_sha256": "881e2989c91105e4f6fd8b6b0bfa13360cab3e9cccdad5d11e0f190375d73385",
-  "final_cohort_opened": true
+  "final_cohort_opened": true,
+  "artifact_watcher": {
+    "pid": 2594428,
+    "started_utc": "2026-09-30T18:31:39.183807+00:00",
+    "max_seconds": 6000,
+    "kind": "CPU-only artifact orchestration",
+    "status": "running",
+    "heartbeat_utc": "2026-09-30T18:32:29.501169+00:00",
+    "restored_models": [
+      "Eagg6100",
+      "E5700"
+    ],
+    "gpu_hours": 20.378051403611096
+  }
 }
