@@ -7,7 +7,7 @@
   "max_concurrent_gpus": 2,
   "rl_default_gpu_hours": 16,
   "bc_default_gpu_hours": 2,
-  "phase": "B original RL segment2 and holding-objective precheck; C paired19200 independently evaluated",
+  "phase": "A complete; B pilot / C checks",
   "active_jobs": [
     {
       "source_sha256": "f3aa89d7dd469f42563d350d539692893c96bccfc1edbed3afc06947af96c54e",
@@ -41,13 +41,13 @@
       "pid": 18856,
       "status": "running",
       "child_pid": 18857,
-      "heartbeat": "2026-09-30T09:47:38.666976+00:00",
-      "elapsed_seconds": 1656.333323687999,
+      "heartbeat": "2026-09-30T09:50:39.407048+00:00",
+      "elapsed_seconds": 1837.0286077649944,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg2-job/status.json",
       "pid_exists": true
     }
   ],
-  "gpu_hours": 5.402964395277779,
+  "gpu_hours": 5.476691574722224,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -55,12 +55,15 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "Complete holding precheck before formal RL1000→2000 controlled comparison. Continue original four-segment RL. BC E still improves; revisit continuation after GPU1 availability.",
   "last_event": {
-    "utc": "2026-09-30T09:48:40.221494+00:00",
-    "event": "holding_precheck_terminal_diagnostic",
-    "evidence": "runs/artmanip-recovery-20260930/holding-precheck-retry1/failure.json",
-    "finding": "600 control transitions completed with max target error0; 127/128 post-step body checks passed. reset_idx replaces init_object_pos but cached derived object_pos is refreshed on next step, so terminal post-reset drift can mix episodes. Capture every physical transition inside reward before reset to distinguish real breach; do not alter task/threshold.",
-    "retry": 2,
-    "next": "Unique bounded retry2; retain full drift/rotation trace, all128 static pass still required"
+    "utc": "2026-09-30T09:52:15.215435+00:00",
+    "event": "holding_precheck_physical_failure",
+    "evidence": [
+      "runs/artmanip-recovery-20260930/holding-precheck-retry2/physical-diagnostics.json",
+      "runs/artmanip-recovery-20260930/holding-precheck-retry2/failure.json"
+    ],
+    "finding": "Actual pre-reset source0 trial72 breaches at step2 and terminates step5. This is a physical reset finding, not another infrastructure retry. make_env does not set global RNG; previous128 samples differed despite cfg.seed. Training entry does seed RNG. No formal holding training authorized by precheck yet.",
+    "next": "Enumerate all512 frozen training states with explicit global seed and exact per-env row on both task configurations; retain original pool and existing RL, investigate reset matching before any filtering or task change.",
+    "budget": "Two bounded600step static diagnostic jobs, at most900seconds each onGPU1; useful physical audit, not filler"
   },
   "monitor": {
     "pid": 1192,
@@ -91,10 +94,11 @@
     "bc-pair19200-job",
     "bc19200-rl1000-evaluation-job",
     "holding-precheck-job",
-    "holding-precheck-retry1-job"
+    "holding-precheck-retry1-job",
+    "holding-precheck-retry2-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T09:48:02.859911+00:00",
+  "last_resource_check_utc": "2026-09-30T09:50:57.906736+00:00",
   "next_actions": [
     "Revalidate jobs in resources/latest.json; timestamps are historical receipts, not current facts.",
     "Holding-precheck retry1 uses public env.reset after harness at_reset_ids failure. Do not launch holding training without passing simulation report.",
