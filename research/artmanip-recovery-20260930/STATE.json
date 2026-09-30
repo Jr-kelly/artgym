@@ -35,8 +35,8 @@
       "pid": 19208,
       "status": "running",
       "child_pid": 19209,
-      "heartbeat": "2026-09-30T09:24:43.519901+00:00",
-      "elapsed_seconds": 210.81105999699503,
+      "heartbeat": "2026-09-30T09:33:15.796638+00:00",
+      "elapsed_seconds": 723.0398735600029,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/bc19200-rl1000-evaluation-job/status.json",
       "pid_exists": true
     },
@@ -72,13 +72,13 @@
       "pid": 18856,
       "status": "running",
       "child_pid": 18857,
-      "heartbeat": "2026-09-30T09:24:33.254935+00:00",
-      "elapsed_seconds": 270.8693198339897,
+      "heartbeat": "2026-09-30T09:33:35.665928+00:00",
+      "elapsed_seconds": 813.3494900439982,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg2-job/status.json",
       "pid_exists": true
     }
   ],
-  "gpu_hours": 4.700846697222223,
+  "gpu_hours": 4.998255866111112,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -86,22 +86,14 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "ReviewRL1000/M2500/E2500 independentdev whencomplete. RLsegment2continues2000, later3000/4000. Usefit/phase/bodyjointtrendsfornextBCbranch; Msource3fitrecentlyflatter.",
   "last_event": {
-    "utc": "2026-09-30T09:25:35.083196+00:00",
-    "event": "continuation_checkpoint_0925",
-    "evidence": [
-      "research/artmanip-recovery-20260930/STATE.json",
-      "research/artmanip-recovery-20260930/rl-seg2-restore.json",
-      "research/artmanip-recovery-20260930/bc19200-archive-restore.json"
-    ],
-    "verified_utc": "2026-09-30T09:24:44.352602+00:00",
-    "active": {
-      "rl_segment2_gpu0_wrapper": 18856,
-      "bc19200_rl1000_evaluation_gpu1_wrapper": 19208
-    },
-    "rl_epoch": 1035,
-    "gpu_hours": 4.700846697222223,
-    "progress": "RLfirst1000completed/secondsegmentactuallyrestored; BC19200trainedandarchiveactualrestored; independentcurrentevaluationongoing;f653313pushed",
-    "next": "ReviewRL1000/M2500/E2500 independentdev whencomplete. RLsegment2continues2000, later3000/4000. Usefit/phase/bodyjointtrendsfornextBCbranch; Msource3fitrecentlyflatter."
+    "utc": "2026-09-30T09:33:07.402471+00:00",
+    "event": "archive_completed",
+    "name": "recovery-rl1000-development",
+    "archive": "delivery/artmanip-recovery-20260930/recovery-rl1000-development.tar.gz",
+    "sha256": "4fa0e95287b71f429f9a0ad08a755600156e2092a6d82ccce3caa14c16b4b665",
+    "size": 72490559,
+    "files": 24,
+    "next": "Restore-check and upload; local originals retained"
   },
   "monitor": {
     "pid": 1192,
@@ -132,7 +124,7 @@
     "bc-pair19200-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T09:24:44.352602+00:00",
+  "last_resource_check_utc": "2026-09-30T09:33:39.689106+00:00",
   "next_actions": [
     "Revalidate: GPU0RLseg2wrapper18856 sourcepinc0f6160 running; GPU1bc19200-rl1000-evaluationwrapper19208 samepin, launched09:21:08UTC. OldBC19200train17663finished.",
     "BC19200epoch2500/Adam20000sameRNG/normalizerpassed. Msha d1780b90eda8ce7e3d437465a90a0418503ba8de02ef2a8a4b475300c114b6b3; Esha0f8256a45fe685674272165ea2a1c213a9f753951c89c9b1a2c61e82726ba41a. TargetvalM.000323863/E.000244469,source3M.000827012/E.000626251. Msource3late2100→2500only2.3percenttotal,eachrecent100epoch<2percent; E stillfalls. Needinspectactualtrainprobe/perphase andclosedloopforconditionalDAgger/targetsupervision; notautomaticallystopboth.",
