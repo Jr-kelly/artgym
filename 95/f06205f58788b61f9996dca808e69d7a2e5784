@@ -1,0 +1,180 @@
+scripts/assess_wuji_recovery_aggregation.py
+  s_13dba2dc3e07f8::t_72dad474c878c2 1-53
+scripts/check_wuji_recovery_expert_replay.py
+  s_13dba2dc3e07f8::t_2a522081486375 1-36,38-39,46-49,51,56-59
+  s_13dba2dc3e07f8::t_7d3ed3fb510bc5 37,40-45,50,52-55
+scripts/run_wuji_recovery_aggregation_pair.py
+  s_13dba2dc3e07f8::t_72dad474c878c2 1-40
+scripts/collect_wuji_recovery_aggregation.py
+  s_13dba2dc3e07f8::t_5a84dd65c2b25e 41
+  s_13dba2dc3e07f8::t_fd0acbdaca7504 1-11,13-40,42-155
+  s_13dba2dc3e07f8::t_bb10a50ecf3574 12
+scripts/prepare_wuji_recovery_aggregation.py
+  s_13dba2dc3e07f8::t_886299c9515fa6 1-95
+scripts/run_wuji_recovery_aggregation_collection.py
+  s_13dba2dc3e07f8::t_886299c9515fa6 1-34
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "95f06205f58788b61f9996dca808e69d7a2e5784",
+  "prompts": {},
+  "sessions": {
+    "s_13dba2dc3e07f8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f10b-dd7b-7be1-bb17-993f50d34df5",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.cache_read_tokens": "143776607",
+        "tlab.session_started_at": "2026-09-30T15:50:07Z",
+        "tlab.token_usage.output_tokens": "560150",
+        "tlab.token_usage.input_tokens": "2600189"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/artmanip-recovery-20260930/aggregation-expert-cpu-replay.json",
+      "additions": {
+        "human": 1227
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/aggregation1-plan.json",
+      "additions": {
+        "human": 54
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/bc44800-confirmation64-analysis/clusters.json",
+      "additions": {
+        "human": 314
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/bc44800-confirmation64-analysis/report.json",
+      "additions": {
+        "human": 973
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/bc44800-confirmation64-analysis/trials.csv",
+      "additions": {
+        "human": 1537
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/data/aggregation1-states.json",
+      "additions": {
+        "human": 171
+      }
+    },
+    {
+      "new_path": "scripts/assess_wuji_recovery_aggregation.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 53
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/check_wuji_recovery_expert_replay.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 59
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/collect_wuji_recovery_aggregation.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 155
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/prepare_wuji_recovery_aggregation.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 95
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/run_wuji_recovery_aggregation_collection.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 34
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/run_wuji_recovery_aggregation_pair.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 40
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 24
+      },
+      "deletions": {
+        "human": 47
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/DECISIONS.jsonl",
+      "new_path": "research/artmanip-recovery-20260930/DECISIONS.jsonl",
+      "additions": {
+        "human": 43
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/HANDOFF.md",
+      "new_path": "research/artmanip-recovery-20260930/HANDOFF.md",
+      "additions": {
+        "human": 24
+      },
+      "deletions": {
+        "human": 47
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/STATE.json",
+      "new_path": "research/artmanip-recovery-20260930/STATE.json",
+      "additions": {
+        "human": 17
+      },
+      "deletions": {
+        "human": 41
+      }
+    }
+  ]
+}
