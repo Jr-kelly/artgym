@@ -7,11 +7,22 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T18:17:50.340028+00:00",
-  "event": "replication_table_interpreter_retry",
-  "failure": "System python3 table writer lacked NumPy via Wilson helper import; no output table was created.",
-  "resolution": "Reran with existing artgym scientific interpreter and CUDA disabled; REPLICATION64.md completed.",
-  "next": "Commit completed replication evidence, then freeze final models once. No evaluation repeated."
+  "utc": "2026-09-30T18:18:16.552121+00:00",
+  "event": "development_ended_final_models_and_protocol_frozen",
+  "freeze": "research/artmanip-recovery-20260930/final-freeze.json",
+  "freeze_sha256": "881e2989c91105e4f6fd8b6b0bfa13360cab3e9cccdad5d11e0f190375d73385",
+  "selected_by_family": {
+    "Eagg": "Eagg6100",
+    "Ereplay": "Ereplay6500",
+    "E": "E500",
+    "M": "M300",
+    "rl": "rl3000",
+    "rlhold": "rlhold1500",
+    "rlclean": "rlclean2000"
+  },
+  "overall_candidate": "Eagg6100",
+  "reason": "Primary Eagg6100 passed exact independent64 S gate; full preregistered second optimization seed and own aggregation completed, but source1 S2 relative body gate missed by0.125pp. Preserve both fixed weights, no seed/checkpoint reselection. Four-segment327680000-step RL and matched controls completed and remain budget-limited, not converged. Prioritize complete once-only final validation and delivery within24GPUh/16h.",
+  "next": "Commit exact freeze, transfer final states, evaluate once; no reselection or tuning"
 }
 ```
 
@@ -36,11 +47,22 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "Fixed second-seed Eagg6100 promotion64 running on GPU0 wrapper72687; complete independent rescore, then once-only finalfreeze with18models including bothE4100/E5700.",
   "last_event": {
-    "utc": "2026-09-30T18:17:50.340028+00:00",
-    "event": "replication_table_interpreter_retry",
-    "failure": "System python3 table writer lacked NumPy via Wilson helper import; no output table was created.",
-    "resolution": "Reran with existing artgym scientific interpreter and CUDA disabled; REPLICATION64.md completed.",
-    "next": "Commit completed replication evidence, then freeze final models once. No evaluation repeated."
+    "utc": "2026-09-30T18:18:16.552121+00:00",
+    "event": "development_ended_final_models_and_protocol_frozen",
+    "freeze": "research/artmanip-recovery-20260930/final-freeze.json",
+    "freeze_sha256": "881e2989c91105e4f6fd8b6b0bfa13360cab3e9cccdad5d11e0f190375d73385",
+    "selected_by_family": {
+      "Eagg": "Eagg6100",
+      "Ereplay": "Ereplay6500",
+      "E": "E500",
+      "M": "M300",
+      "rl": "rl3000",
+      "rlhold": "rlhold1500",
+      "rlclean": "rlclean2000"
+    },
+    "overall_candidate": "Eagg6100",
+    "reason": "Primary Eagg6100 passed exact independent64 S gate; full preregistered second optimization seed and own aggregation completed, but source1 S2 relative body gate missed by0.125pp. Preserve both fixed weights, no seed/checkpoint reselection. Four-segment327680000-step RL and matched controls completed and remain budget-limited, not converged. Prioritize complete once-only final validation and delivery within24GPUh/16h.",
+    "next": "Commit exact freeze, transfer final states, evaluate once; no reselection or tuning"
   },
   "monitor": {
     "pid": 1192,
@@ -101,7 +123,7 @@
     "seed2-promotion64-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T18:16:15.730544+00:00",
+  "last_resource_check_utc": "2026-09-30T18:18:14.338943+00:00",
   "next_actions": [
     "Full second optimization seed E44800 + own-history aggregation3200 completed, realAdam48800/frozen28 and actualparent/RNG checks passed. Endpoint SHA054a32298af88e287cbaa6ef057389489996f3cc102546db86632dad4c3e64e9, fixed name seed2Eagg6100.",
     "GPU0 seed2-promotion64 wrapper72687 started18:09:20UTC, timeout900, source9f9fb188227b7699aa3d6739069079ff49fb89fc. Reverify status. Same256 promotioninitials, S2/S5/F, experts reuse firstpromotion64. No primaryreselection.",
