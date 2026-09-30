@@ -1,0 +1,18 @@
+{
+  "created_utc": "2026-09-30T09:30:13.128212+00:00",
+  "name": "reference_clock_hold",
+  "parent": "runs/recovery-rl-seg1-retry1/checkpoints/epoch_001000.pth",
+  "parent_sha256": "f0fa3cd807e6b493bfbbea4a4064ccad3c09929ed97cb147b96f4017d692e2db",
+  "evidence": "rl1000-analysis: F32/32eachsource butbody0all; S0withpartialendpointheld. Source3 Ffirstbreach6.02sec upfrom.71at500, so originalcontinueslearning andmustnotbereplaced.",
+  "comparison": "Originalgoal RLsegment2 versus fixedclock+sustainedhold objective package, both continueCP1000 trueAdam/RNG through2000;81,920,000additionalinteractions/36,000updates. This is a training-objective system comparison, not attribution to one reward term.",
+  "unchanged": "Samefullincrementalcontrol/hand/object/resetpool/obs/architecture/normalizationlearning/SAPG/curriculum/optimizerrecipe, same parent and5120env/horizon16.",
+  "changes": {
+    "schedule": "Perreset independentlysample2or5seconds, alternate+.04/0 for20seconds; noarrival switching or10sgoaltimeout",
+    "reward": "Keeporiginalprogress/velocity/contact/smooth/drop anddensegoalreward. Disablearrivalcountsuccessbyinfinitehold. Add5*exp(-(error/.002)^2) onlywhilebody<.01m/.25rad andvalid; subtract5*clamp(max(drift/.01,angle/.25),0,5). Reward boundedadditional[-25,5].",
+    "termination": "Samephysicalfall/invalidthresholds,20secondepisode; nohardbodylock,noobjectactuation,nooracletrajectory"
+  },
+  "precheck": "Actualsimzeroactions full20seconds verifies schedule andtargetmapping,physicalstaticbody,finiteboundedreward; modelnottrainedinprecheck.",
+  "eval": "SameindependentdevS2/S5/F,32/source, evaluatorusesreferencecontrolidenticaltofine-tune; endpoints1250/1500/2000 optionalfortrend, mandatory2000.",
+  "budget": "Additional1000epochs estimated1.9GPUh withinRL16GPUh/total24; timeout8400s. BC mayresumeafterfine-tune or beforedependingevidence. NoextraGPU beyond0/1.",
+  "next": "Implementisolatedtask/config; runboundedactualprecheckonGPU1aftercurrentBC19200evaluation; originalRLsegment2continuesGPU0."
+}

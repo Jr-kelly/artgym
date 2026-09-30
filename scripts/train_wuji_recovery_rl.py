@@ -49,7 +49,7 @@ def epoch(self):
     start=time.monotonic();before=getattr(self,'recovery_updates',0)
     result=old_epoch(self)
     env=self.vec_env.env
-    row=dict(epoch=self.epoch_num,frame_after=self.frame+self.curr_frames,optimizer_updates=getattr(self,'recovery_updates',0),updates_this_epoch=getattr(self,'recovery_updates',0)-before,wall_seconds=time.monotonic()-start,rollout_seconds=float(result[1]),update_seconds=float(result[2]),lr=self.last_lr,curriculum_epoch=env.policy_update_step,reward_weights=env.reward_scales_current,source_visits=env.source_visits.cpu().tolist(),metrics={k:float(v) for k,v in env.extras.items() if (k.startswith('source') or k in env.reward_scales_current) and (isinstance(v,(int,float)) or torch.is_tensor(v) and v.numel()==1)})
+    row=dict(epoch=self.epoch_num,frame_after=self.frame+self.curr_frames,optimizer_updates=getattr(self,'recovery_updates',0),updates_this_epoch=getattr(self,'recovery_updates',0)-before,wall_seconds=time.monotonic()-start,rollout_seconds=float(result[1]),update_seconds=float(result[2]),lr=self.last_lr,curriculum_epoch=env.policy_update_step,reward_weights=env.reward_scales_current,source_visits=env.source_visits.cpu().tolist(),metrics={k:float(v) for k,v in env.extras.items() if (k.startswith(('source','holding/')) or k in env.reward_scales_current) and (isinstance(v,(int,float)) or torch.is_tensor(v) and v.numel()==1)})
     with (Path(self.experiment_dir)/'learning.jsonl').open('a') as f:f.write(json.dumps(row)+'\n')
     return result
 A2CAgent.get_full_state_weights=get;A2CAgent.set_full_state_weights=restore;A2CAgent.train=train;A2CAgent.train_epoch=epoch;A2CAgent.train_actor_critic=update
