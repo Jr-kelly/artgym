@@ -1,0 +1,85 @@
+scripts/audit_wuji_recovery_reset_pool.py
+  s_13dba2dc3e07f8::t_4f275638fa6f40 1-81
+scripts/audit_wuji_recovery_rl.py
+  s_13dba2dc3e07f8::t_7f2317deb1271b 1-60
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "fe489127627e45d672fa399fa1ecc97a0a1d1f34",
+  "prompts": {},
+  "sessions": {
+    "s_13dba2dc3e07f8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f10b-dd7b-7be1-bb17-993f50d34df5",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_read_tokens": "61470453",
+        "tlab.token_usage.output_tokens": "217356",
+        "tlab.token_usage.input_tokens": "1620851",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.session_started_at": "2026-09-30T09:49:24Z"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/artmanip-recovery-20260930/rl-seg2-audit.json",
+      "additions": {
+        "human": 25
+      }
+    },
+    {
+      "new_path": "scripts/audit_wuji_recovery_reset_pool.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 81
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/audit_wuji_recovery_rl.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 60
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/DECISIONS.jsonl",
+      "new_path": "research/artmanip-recovery-20260930/DECISIONS.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/HANDOFF.md",
+      "new_path": "research/artmanip-recovery-20260930/HANDOFF.md",
+      "additions": {
+        "human": 25
+      },
+      "deletions": {
+        "human": 18
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/STATE.json",
+      "new_path": "research/artmanip-recovery-20260930/STATE.json",
+      "additions": {
+        "human": 16
+      },
+      "deletions": {
+        "human": 12
+      }
+    }
+  ]
+}
