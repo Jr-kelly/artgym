@@ -1,0 +1,30 @@
+{
+  "name": "holding2000-development-job",
+  "gpu": 1,
+  "timeout": 1800,
+  "final_phase": false,
+  "command": [
+    "PYTHON",
+    "-m",
+    "scripts.evaluate_wuji_recovery_batch",
+    "--name",
+    "holding2000-development",
+    "--states",
+    "research/artmanip-recovery-20260930/data/development-all.npy",
+    "--models",
+    "rlhold1750=runs/recovery-rl-clockhold-clean/checkpoints/epoch_001750.pth",
+    "rlhold2000=runs/recovery-rl-clockhold-clean/checkpoints/epoch_002000.pth",
+    "--protocols",
+    "S2",
+    "S5",
+    "F"
+  ],
+  "source_sha": "f8684e83417f81b2035a081302b3498f096c541d",
+  "created_utc": "2026-09-30T12:03:10.083820+00:00",
+  "budget_receipt_utc": "2026-09-30T12:03:09.786812+00:00",
+  "occupied_gpu_hours": 9.686715717222219,
+  "other_jobs_reserved_gpu_hours": 2.2342776805555555,
+  "root": "/tmp/artgym-recovery-20260930",
+  "pin": "/tmp/artgym-recovery-20260930/pins/f8684e83417f81b2035a081302b3498f096c541d",
+  "pid": 39392
+}

@@ -31,7 +31,8 @@ def main():
     cutoff=datetime.datetime.fromisoformat(state['deadline_utc'] if a.final else state['training_cutoff_utc'])
     if (cutoff-now).total_seconds()<a.timeout:raise RuntimeError('Job would exceed reserved final-validation cutoff')
     outstanding_seconds=sum(max(0,j['timeout_seconds']-(now-datetime.datetime.fromisoformat(j['started'])).total_seconds()) for j in state['active_jobs'])
-    if state.get('gpu_hours',0)+state.get('unmetered_cuda_preflight_reserve_gpu_hours',.05)+(outstanding_seconds+a.timeout)/3600 > (24 if a.final else 22):
+    ceiling = state['max_gpu_hours'] if a.final else state['max_gpu_hours'] - max(2, state['reserved_final_gpu_hours'])
+    if state.get('gpu_hours',0)+state.get('unmetered_cuda_preflight_reserve_gpu_hours',.05)+(outstanding_seconds+a.timeout)/3600 > ceiling:
         raise RuntimeError('Job timeout could consume reserved final GPU budget; shorten or finalize')
     spec=dict(name=a.name,gpu=a.gpu,timeout=a.timeout,final_phase=a.final,command=a.command[1:] if a.command[:1]==['--'] else a.command,source_sha=sha,created_utc=now.isoformat(),budget_receipt_utc=state['last_resource_check_utc'],occupied_gpu_hours=state['gpu_hours'],other_jobs_reserved_gpu_hours=outstanding_seconds/3600)
     archive=subprocess.check_output(['git','archive',sha,'scripts','isaacgymenvs','rl_games'],cwd=R)

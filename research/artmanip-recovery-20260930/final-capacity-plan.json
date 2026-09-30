@@ -1,0 +1,25 @@
+{
+  "created_utc": "2026-09-30T12:04:36.644225+00:00",
+  "phase": "Planning only; no final weights selected and no final states evaluated",
+  "development128_wall_seconds": [
+    99.48359887600236,
+    200.45393277000403,
+    239.64493776700692,
+    101.93319546499697,
+    121.86674951500027,
+    99.43252763299097,
+    228.2188830859959,
+    110.08280585499597,
+    229.87065030100348,
+    116.52171144398744,
+    109.13821745700261,
+    115.34383104598965
+  ],
+  "observed_all_three_protocols_seconds_per_model": "approximately430\u2013490 for128env, excluding some initialization overhead",
+  "final_scale": "512env timing not yet known; do not infer linear scaling. Allow up to4GPUh and2wall hours for frozen selected+endpoint models, experts, video retries, and upload.",
+  "models": "Select each trained family by preregistered development rank, retain fixed-budget endpoints. Deduplicate exact same checkpoint/interface. Include both responsible experts; no source routing within a candidate.",
+  "reserved_gpu_hours": 4,
+  "reserved_wall_seconds": 7200,
+  "reason": "Additional repaired-pool control and holding branch expand final comparison; protect final delivery before more optional training.",
+  "next": "Finish mandatory original4000, pairedBC32000 and matched repaired original2000. Re-estimate using completed evaluation throughput before further optional segment."
+}
