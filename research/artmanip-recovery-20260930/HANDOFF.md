@@ -7,14 +7,31 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T07:54:36.715333+00:00",
-  "event": "archive_completed",
-  "name": "recovery-bc-added3200",
-  "archive": "delivery/artmanip-recovery-20260930/recovery-bc-added3200.tar.gz",
-  "sha256": "a19dbec44cf12190927fe3c43872f4a53ca58099d968375d3dbb4e9a35f6e150",
-  "size": 416391460,
-  "files": 24,
-  "next": "Restore-check and upload; local originals retained"
+  "utc": "2026-09-30T07:56:52.408897+00:00",
+  "event": "bc3200_archive_restore_verified",
+  "archive_sha256": "a19dbec44cf12190927fe3c43872f4a53ca58099d968375d3dbb4e9a35f6e150",
+  "rows": [
+    {
+      "arm": "M",
+      "adam_steps": [
+        4000
+      ],
+      "epoch": 500,
+      "torch_rng_size": 5056,
+      "cuda_rng_count": 1
+    },
+    {
+      "arm": "E",
+      "adam_steps": [
+        4000
+      ],
+      "epoch": 500,
+      "torch_rng_size": 5056,
+      "cuda_rng_count": 1
+    }
+  ],
+  "scope": "Actual local archive extraction, all file hashes verified, CPU model/Adam/RNG read; BC6400 will exercise actual optimizer continuation",
+  "next": "Finish current RL250/BC3200 independent assessment, then paired6400; continue RL planned foursegments"
 }
 ```
 
@@ -63,17 +80,17 @@
       "pid": 4900,
       "status": "running",
       "child_pid": 4901,
-      "heartbeat": "2026-09-30T07:53:04.861958+00:00",
-      "elapsed_seconds": 2289.4803677450036,
+      "heartbeat": "2026-09-30T07:54:35.293452+00:00",
+      "elapsed_seconds": 2379.8763552849996,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg1-retry1-job/status.json",
       "pid_exists": true
     },
     {
+      "source_sha256": "f3aa89d7dd469f42563d350d539692893c96bccfc1edbed3afc06947af96c54e",
       "name": "bc3200-rl250-evaluation-job",
       "gpu": 1,
-      "timeout": 3000,
       "command": [
-        "PYTHON",
+        "/tmp/wuji-recovery-runtime/bin/python",
         "-m",
         "scripts.evaluate_wuji_recovery_batch",
         "--name",
@@ -89,17 +106,18 @@
         "S5",
         "F"
       ],
-      "source_sha": "5317b86ff5984c9d401044935f896a3b354b41ec",
-      "created_utc": "2026-09-30T07:53:15.674823+00:00",
-      "budget_receipt_utc": "2026-09-30T07:53:15.477767+00:00",
-      "occupied_gpu_hours": 1.8272651144444445,
-      "other_jobs_reserved_gpu_hours": 1.694340998888889,
-      "root": "/tmp/artgym-recovery-20260930",
-      "pin": "/tmp/artgym-recovery-20260930/pins/5317b86ff5984c9d401044935f896a3b354b41ec",
-      "pid": 9284
+      "timeout_seconds": 3000,
+      "started": "2026-09-30T07:53:19.174431+00:00",
+      "pid": 9284,
+      "status": "running",
+      "child_pid": 9285,
+      "heartbeat": "2026-09-30T07:54:49.625361+00:00",
+      "elapsed_seconds": 90.36150513500615,
+      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/bc3200-rl250-evaluation-job/status.json",
+      "pid_exists": true
     }
   ],
-  "gpu_hours": 1.8272651144444445,
+  "gpu_hours": 1.8864437933333336,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -107,14 +125,31 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "Finish bc3200-rl250-evaluation and independently rescore. Continue BC500→900 (added6400 total); keep RL1000→2000→3000→4000 with actual optimizer restore.",
   "last_event": {
-    "utc": "2026-09-30T07:54:36.715333+00:00",
-    "event": "archive_completed",
-    "name": "recovery-bc-added3200",
-    "archive": "delivery/artmanip-recovery-20260930/recovery-bc-added3200.tar.gz",
-    "sha256": "a19dbec44cf12190927fe3c43872f4a53ca58099d968375d3dbb4e9a35f6e150",
-    "size": 416391460,
-    "files": 24,
-    "next": "Restore-check and upload; local originals retained"
+    "utc": "2026-09-30T07:56:52.408897+00:00",
+    "event": "bc3200_archive_restore_verified",
+    "archive_sha256": "a19dbec44cf12190927fe3c43872f4a53ca58099d968375d3dbb4e9a35f6e150",
+    "rows": [
+      {
+        "arm": "M",
+        "adam_steps": [
+          4000
+        ],
+        "epoch": 500,
+        "torch_rng_size": 5056,
+        "cuda_rng_count": 1
+      },
+      {
+        "arm": "E",
+        "adam_steps": [
+          4000
+        ],
+        "epoch": 500,
+        "torch_rng_size": 5056,
+        "cuda_rng_count": 1
+      }
+    ],
+    "scope": "Actual local archive extraction, all file hashes verified, CPU model/Adam/RNG read; BC6400 will exercise actual optimizer continuation",
+    "next": "Finish current RL250/BC3200 independent assessment, then paired6400; continue RL planned foursegments"
   },
   "monitor": {
     "pid": 1192,
@@ -137,7 +172,7 @@
     "bc-pair3200-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T07:53:15.477767+00:00",
+  "last_resource_check_utc": "2026-09-30T07:55:03.847721+00:00",
   "next_actions": [
     "Revalidate status. At07:53:15UTC GPU0 wrapper4900 RLseg1 (pin7cb1b91), GPU1 wrapper9284 bc3200-rl250-evaluation (pin5317b86) active. Never duplicate live wrappers.",
     "BC3200 pair completed and Adam4000/normalizer/RNG passed. Its held-out target error still improves: M .0006043→.0004851, E .0006674→.0004966 from1600. Eval order rl250 thenM500 thenE500, S2/S5/F separate. Pull full raw npz after completion, run summarize and gate with initial expert report.",
