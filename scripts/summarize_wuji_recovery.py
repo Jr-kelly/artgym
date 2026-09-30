@@ -71,6 +71,14 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--directories',type=Path,nargs='+',required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
     rows=[];trials=[]
     for d in a.directories:r,t=analyze(d);rows+=r;trials+=t
+    clusters=[]
+    for model,protocol in sorted(set((r['model'],r['protocol']) for r in rows)):
+        for cluster,sources in [('near01',[0,1]),('source2',[2]),('source3',[3])]:
+            group=[r for r in rows if r['model']==model and r['protocol']==protocol and r['source'] in sources]
+            if group:
+                n=sum(r['n'] for r in group);k=sum(r['success'] for r in group)
+                clusters.append(dict(model=model,protocol=protocol,cluster=cluster,sources=sources,n=n,success=k,rate=k/n,wilson95=wilson(k,n),body_stable=sum(r['body_stable'] for r in group),note='Pooled reset episodes in three base-configuration clusters; sources0/1 are nearby records, not independent morphologies'))
+    (a.output/'clusters.json').write_text(json.dumps(clusters,indent=2)+'\n')
     (a.output/'report.json').write_text(json.dumps(dict(rows=rows,independent_rescore='passed'),indent=2)+'\n')
     with (a.output/'trials.csv').open('w') as f:w=csv.DictWriter(f,fieldnames=list(trials[0]));w.writeheader();w.writerows(trials)
     for r in rows:print(json.dumps({k:r[k] for k in ['model','protocol','source','success','n','body_stable']+(['phase_hold_rate'] if 'phase_hold_rate' in r else ['cycles_mean'])}))
