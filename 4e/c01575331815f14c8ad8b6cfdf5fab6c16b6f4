@@ -1,0 +1,110 @@
+scripts/train_wuji_recovery_rl.py
+  s_13dba2dc3e07f8::t_daeea785b2d6f6 52
+isaacgymenvs/tasks/wuji_artmanip_clock_hold.py
+  s_13dba2dc3e07f8::t_daeea785b2d6f6 1-13,16-35,37-53
+  s_13dba2dc3e07f8::t_70ecc690faa635 36
+  s_13dba2dc3e07f8::t_a8938b028e470f 14-15
+isaacgymenvs/cfg/task/wuji_artmanip_clock_hold.yaml
+  s_13dba2dc3e07f8::t_daeea785b2d6f6 1-9
+isaacgymenvs/tasks/__init__.py
+  s_13dba2dc3e07f8::t_daeea785b2d6f6 30-31
+scripts/precheck_wuji_recovery_holding.py
+  s_13dba2dc3e07f8::t_70ecc690faa635 1-6,8-21,23,26-29,31-32,34-43
+  s_13dba2dc3e07f8::t_a8938b028e470f 7,22,24-25,30,33
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "4ec01575331815f14c8ad8b6cfdf5fab6c16b6f4",
+  "prompts": {},
+  "sessions": {
+    "s_13dba2dc3e07f8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f10b-dd7b-7be1-bb17-993f50d34df5",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.output_tokens": "195092",
+        "tlab.token_usage.cache_read_tokens": "54178224",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.session_started_at": "2026-09-30T09:30:13Z",
+        "tlab.token_usage.input_tokens": "1286464"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "isaacgymenvs/cfg/task/wuji_artmanip_clock_hold.yaml",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 9
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "isaacgymenvs/tasks/wuji_artmanip_clock_hold.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 53
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "research/artmanip-recovery-20260930/holding-plan.json",
+      "additions": {
+        "human": 18
+      }
+    },
+    {
+      "new_path": "scripts/precheck_wuji_recovery_holding.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 43
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "isaacgymenvs/tasks/__init__.py",
+      "new_path": "isaacgymenvs/tasks/__init__.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 2
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/train_wuji_recovery_rl.py",
+      "new_path": "scripts/train_wuji_recovery_rl.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 1
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 1
+          }
+        ]
+      }
+    }
+  ]
+}
