@@ -7,10 +7,11 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T17:34:55.083538+00:00",
-  "event": "report_commit_identity_retry",
-  "failure": "Plain git commit rejected because this worktree has no default author identity; no commit was created.",
-  "next": "Use previously verified session author wangjiarui/Jr-kelly@users.noreply.github.com with command-scoped Git settings; preserve repository/global configuration."
+  "utc": "2026-09-30T17:36:22.904540+00:00",
+  "event": "final_completeness_audit_prepared",
+  "evidence": "scripts/audit_wuji_recovery_final.py",
+  "validation": "Syntax and CLI checks passed. Actual final data validation pending; no final cohort opened.",
+  "next": "Finish full seed2 E5700, then own collection and availability gate. Use final auditor only after once-only frozen evaluation and independent rescore."
 }
 ```
 
@@ -87,10 +88,11 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "FullsecondoptimizationseedE44800 running; actualBC100model/Adam kept andnewCPU/CUDA/NumPy seed2026093061 verified. Finish5700thenfreshcollection/originalavailability/aggregation3200/fixed64replicate; final128unopened.",
   "last_event": {
-    "utc": "2026-09-30T17:34:55.083538+00:00",
-    "event": "report_commit_identity_retry",
-    "failure": "Plain git commit rejected because this worktree has no default author identity; no commit was created.",
-    "next": "Use previously verified session author wangjiarui/Jr-kelly@users.noreply.github.com with command-scoped Git settings; preserve repository/global configuration."
+    "utc": "2026-09-30T17:36:22.904540+00:00",
+    "event": "final_completeness_audit_prepared",
+    "evidence": "scripts/audit_wuji_recovery_final.py",
+    "validation": "Syntax and CLI checks passed. Actual final data validation pending; no final cohort opened.",
+    "next": "Finish full seed2 E5700, then own collection and availability gate. Use final auditor only after once-only frozen evaluation and independent rescore."
   },
   "monitor": {
     "pid": 1192,
@@ -164,7 +166,7 @@
     "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E"
   ],
   "bc_next_plan": "research/artmanip-recovery-20260930/bc44800-plan.json",
-  "github_last_verified_commit": "0b921f2cad2a648a2d5dcd36b5aa71dc5c7ff89b",
+  "github_last_verified_commit": "25e926a6470a1bc4bdd8efd31d62f057e9105402",
   "release_verified_assets": 54,
   "gpu_hours_by_host": {
     "authorized_remote": 19.383490808888876,
