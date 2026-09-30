@@ -7,47 +7,20 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T20:03:21.399111+00:00",
-  "event": "bounded_experiment_public_delivery_verified",
-  "evidence": "research/artmanip-recovery-20260930/final-delivery.json",
-  "delivery": {
-    "verified_utc": "2026-09-30T20:03:21.398613+00:00",
-    "objective": "Bounded Wuji ArtManip audit, joint learning, frozen validation and public delivery",
-    "science_complete": true,
-    "primary": "Eagg6100",
-    "primary_checkpoint_sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
-    "primary_final_S": true,
-    "primary_final_F": true,
-    "second_seed_final_S": true,
-    "second_seed_development64_S": false,
-    "teacher_only": true,
-    "student_trained": false,
-    "final_models": 18,
-    "final_episodes": 27648,
-    "final_physical_cells": 54,
-    "independent_rescore_and_completeness": true,
-    "release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-artmanip-recovery-20260930-v1",
+  "utc": "2026-09-30T20:04:28.331650+00:00",
+  "event": "final_branch_delivery_verified_round_closed",
+  "receipt": {
+    "utc": "2026-09-30T20:04:28.323850+00:00",
+    "verified_delivery_commit": "4944b9c4462ce9517e3bb370f2a9c435b4e88f4c",
+    "remote_branch_commit": "4944b9c4462ce9517e3bb370f2a9c435b4e88f4c",
+    "worktree_clean_at_check": true,
+    "public_release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-artmanip-recovery-20260930-v1",
     "assets": 86,
-    "scientific_tag_commit": "cf6f6a0f861203af1335d61f17265e1bf5707d1f",
-    "public_primary_actual_restore": true,
-    "public_videos_decoded": 3,
-    "registered_GPU_hours": 22.417678576666656,
-    "conservative_GPU_hours": 22.467678576666657,
-    "wall_hours_at_verification": 13.3467773925,
-    "deadline_utc": "2026-09-30T22:42:33+00:00",
-    "all_owned_jobs_and_monitors_finished": true,
-    "evidence": [
-      "public-verification.json",
-      "final-integrity.json",
-      "final-decision.json",
-      "weights-coverage-final.json",
-      "resources/delivery-final-processes.json"
-    ],
-    "only_next_priority": "Next round: distill this single frozen privileged teacher into a student using verified available observations/history, freeze actor, and evaluate on newly preregistered states. No more training or final-set tuning in this round.",
-    "scope": "Fixed simulated knife and trained grasp neighborhoods only; no unseen-grasp, shape, acquisition or hardware claim.",
-    "administrative_note": "Public verification receipts follow the scientific release tag on this experiment branch. No more GPU work is authorized within this closed final evaluation."
+    "release_body_matches_committed_notes": true,
+    "scope": "Final scientific and public recovery evidence is committed and pushed; subsequent journal-only commit preserves this verification without changing experiments or assets."
   },
-  "next": "Push final verification receipts; this round is finished and any student experiment needs a new registered round"
+  "evidence": "research/artmanip-recovery-20260930/branch-delivery-verified.json",
+  "next": "This bounded round is complete; no active experiments, uploads or monitors. Preserve finalcohort and primary. Only next research priority is separately registered unifiedteacher-to-student distillation with verified available observations and new validation states."
 }
 ```
 
@@ -72,47 +45,20 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "Next round: distill this single frozen privileged teacher into a student using verified available observations/history, freeze actor, and evaluate on newly preregistered states. No more training or final-set tuning in this round.",
   "last_event": {
-    "utc": "2026-09-30T20:03:21.399111+00:00",
-    "event": "bounded_experiment_public_delivery_verified",
-    "evidence": "research/artmanip-recovery-20260930/final-delivery.json",
-    "delivery": {
-      "verified_utc": "2026-09-30T20:03:21.398613+00:00",
-      "objective": "Bounded Wuji ArtManip audit, joint learning, frozen validation and public delivery",
-      "science_complete": true,
-      "primary": "Eagg6100",
-      "primary_checkpoint_sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
-      "primary_final_S": true,
-      "primary_final_F": true,
-      "second_seed_final_S": true,
-      "second_seed_development64_S": false,
-      "teacher_only": true,
-      "student_trained": false,
-      "final_models": 18,
-      "final_episodes": 27648,
-      "final_physical_cells": 54,
-      "independent_rescore_and_completeness": true,
-      "release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-artmanip-recovery-20260930-v1",
+    "utc": "2026-09-30T20:04:28.331650+00:00",
+    "event": "final_branch_delivery_verified_round_closed",
+    "receipt": {
+      "utc": "2026-09-30T20:04:28.323850+00:00",
+      "verified_delivery_commit": "4944b9c4462ce9517e3bb370f2a9c435b4e88f4c",
+      "remote_branch_commit": "4944b9c4462ce9517e3bb370f2a9c435b4e88f4c",
+      "worktree_clean_at_check": true,
+      "public_release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-artmanip-recovery-20260930-v1",
       "assets": 86,
-      "scientific_tag_commit": "cf6f6a0f861203af1335d61f17265e1bf5707d1f",
-      "public_primary_actual_restore": true,
-      "public_videos_decoded": 3,
-      "registered_GPU_hours": 22.417678576666656,
-      "conservative_GPU_hours": 22.467678576666657,
-      "wall_hours_at_verification": 13.3467773925,
-      "deadline_utc": "2026-09-30T22:42:33+00:00",
-      "all_owned_jobs_and_monitors_finished": true,
-      "evidence": [
-        "public-verification.json",
-        "final-integrity.json",
-        "final-decision.json",
-        "weights-coverage-final.json",
-        "resources/delivery-final-processes.json"
-      ],
-      "only_next_priority": "Next round: distill this single frozen privileged teacher into a student using verified available observations/history, freeze actor, and evaluate on newly preregistered states. No more training or final-set tuning in this round.",
-      "scope": "Fixed simulated knife and trained grasp neighborhoods only; no unseen-grasp, shape, acquisition or hardware claim.",
-      "administrative_note": "Public verification receipts follow the scientific release tag on this experiment branch. No more GPU work is authorized within this closed final evaluation."
+      "release_body_matches_committed_notes": true,
+      "scope": "Final scientific and public recovery evidence is committed and pushed; subsequent journal-only commit preserves this verification without changing experiments or assets."
     },
-    "next": "Push final verification receipts; this round is finished and any student experiment needs a new registered round"
+    "evidence": "research/artmanip-recovery-20260930/branch-delivery-verified.json",
+    "next": "This bounded round is complete; no active experiments, uploads or monitors. Preserve finalcohort and primary. Only next research priority is separately registered unifiedteacher-to-student distillation with verified available observations and new validation states."
   },
   "monitor": {
     "pid": 1192,
@@ -187,7 +133,7 @@
   "bc_current_pair": "runs/artmanip-recovery-20260930/bc-pair32000",
   "training_active_runs": [],
   "bc_next_plan": "research/artmanip-recovery-20260930/bc44800-plan.json",
-  "github_last_verified_commit": "cf6f6a0f861203af1335d61f17265e1bf5707d1f",
+  "github_last_verified_commit": "4944b9c4462ce9517e3bb370f2a9c435b4e88f4c",
   "release_verified_assets": 86,
   "gpu_hours_by_host": {
     "authorized_remote": 22.35554528388888,
@@ -246,6 +192,8 @@
   "final_cohort_closed": true,
   "public_release_verified": true,
   "github_scientific_commit": "cf6f6a0f861203af1335d61f17265e1bf5707d1f",
-  "final_delivery": "research/artmanip-recovery-20260930/final-delivery.json"
+  "final_delivery": "research/artmanip-recovery-20260930/final-delivery.json",
+  "final_branch_verification": "research/artmanip-recovery-20260930/branch-delivery-verified.json",
+  "bounded_goal_work_complete": true
 }
 ```
