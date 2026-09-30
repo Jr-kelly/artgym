@@ -7,11 +7,22 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T09:23:18.853503+00:00",
-  "event": "release_asset_verified",
-  "name": "recovery-training-sequences-t5.tar.gz",
-  "sha256": "8cc28eeccb2f34b48d6dad82d87b1b2d35b997abef9639ff085f730304919c96",
-  "next": "Continue experiment; final publication requires freeze and download verification"
+  "utc": "2026-09-30T09:25:35.083196+00:00",
+  "event": "continuation_checkpoint_0925",
+  "evidence": [
+    "research/artmanip-recovery-20260930/STATE.json",
+    "research/artmanip-recovery-20260930/rl-seg2-restore.json",
+    "research/artmanip-recovery-20260930/bc19200-archive-restore.json"
+  ],
+  "verified_utc": "2026-09-30T09:24:44.352602+00:00",
+  "active": {
+    "rl_segment2_gpu0_wrapper": 18856,
+    "bc19200_rl1000_evaluation_gpu1_wrapper": 19208
+  },
+  "rl_epoch": 1035,
+  "gpu_hours": 4.700846697222223,
+  "progress": "RLfirst1000completed/secondsegmentactuallyrestored; BC19200trainedandarchiveactualrestored; independentcurrentevaluationongoing;f653313pushed",
+  "next": "ReviewRL1000/M2500/E2500 independentdev whencomplete. RLsegment2continues2000, later3000/4000. Usefit/phase/bodyjointtrendsfornextBCbranch; Msource3fitrecentlyflatter."
 }
 ```
 
@@ -28,6 +39,37 @@
   "bc_default_gpu_hours": 2,
   "phase": "A complete; B segment2actualrestoreverified; C BC19200done, RL1000/BC19200developmentlive",
   "active_jobs": [
+    {
+      "source_sha256": "f3aa89d7dd469f42563d350d539692893c96bccfc1edbed3afc06947af96c54e",
+      "name": "bc19200-rl1000-evaluation-job",
+      "gpu": 1,
+      "command": [
+        "/tmp/wuji-recovery-runtime/bin/python",
+        "-m",
+        "scripts.evaluate_wuji_recovery_batch",
+        "--name",
+        "bc19200-rl1000-evaluation",
+        "--states",
+        "research/artmanip-recovery-20260930/data/development-all.npy",
+        "--models",
+        "rl1000=runs/recovery-rl-seg1-retry1/checkpoints/epoch_001000.pth",
+        "M2500=runs/artmanip-recovery-20260930/bc-pair19200/M/epoch_002500.pth",
+        "E2500=runs/artmanip-recovery-20260930/bc-pair19200/E/epoch_002500.pth",
+        "--protocols",
+        "S2",
+        "S5",
+        "F"
+      ],
+      "timeout_seconds": 3000,
+      "started": "2026-09-30T09:21:12.636722+00:00",
+      "pid": 19208,
+      "status": "running",
+      "child_pid": 19209,
+      "heartbeat": "2026-09-30T09:24:43.519901+00:00",
+      "elapsed_seconds": 210.81105999699503,
+      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/bc19200-rl1000-evaluation-job/status.json",
+      "pid_exists": true
+    },
     {
       "source_sha256": "f3aa89d7dd469f42563d350d539692893c96bccfc1edbed3afc06947af96c54e",
       "name": "rl-seg2-job",
@@ -60,43 +102,13 @@
       "pid": 18856,
       "status": "running",
       "child_pid": 18857,
-      "heartbeat": "2026-09-30T09:21:02.486256+00:00",
-      "elapsed_seconds": 60.16842225599976,
+      "heartbeat": "2026-09-30T09:24:33.254935+00:00",
+      "elapsed_seconds": 270.8693198339897,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg2-job/status.json",
       "pid_exists": true
-    },
-    {
-      "name": "bc19200-rl1000-evaluation-job",
-      "gpu": 1,
-      "timeout": 3000,
-      "command": [
-        "PYTHON",
-        "-m",
-        "scripts.evaluate_wuji_recovery_batch",
-        "--name",
-        "bc19200-rl1000-evaluation",
-        "--states",
-        "research/artmanip-recovery-20260930/data/development-all.npy",
-        "--models",
-        "rl1000=runs/recovery-rl-seg1-retry1/checkpoints/epoch_001000.pth",
-        "M2500=runs/artmanip-recovery-20260930/bc-pair19200/M/epoch_002500.pth",
-        "E2500=runs/artmanip-recovery-20260930/bc-pair19200/E/epoch_002500.pth",
-        "--protocols",
-        "S2",
-        "S5",
-        "F"
-      ],
-      "source_sha": "c0f6160e34e161677a6a69d5ae356ad3f4952c82",
-      "created_utc": "2026-09-30T09:21:08.519117+00:00",
-      "budget_receipt_utc": "2026-09-30T09:21:08.373627+00:00",
-      "occupied_gpu_hours": 4.582042570833334,
-      "other_jobs_reserved_gpu_hours": 2.3149286563888887,
-      "root": "/tmp/artgym-recovery-20260930",
-      "pin": "/tmp/artgym-recovery-20260930/pins/c0f6160e34e161677a6a69d5ae356ad3f4952c82",
-      "pid": 19208
     }
   ],
-  "gpu_hours": 4.582042570833334,
+  "gpu_hours": 4.700846697222223,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -104,11 +116,22 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "ReviewRL1000/M2500/E2500 independentdev whencomplete. RLsegment2continues2000, later3000/4000. Usefit/phase/bodyjointtrendsfornextBCbranch; Msource3fitrecentlyflatter.",
   "last_event": {
-    "utc": "2026-09-30T09:23:18.853503+00:00",
-    "event": "release_asset_verified",
-    "name": "recovery-training-sequences-t5.tar.gz",
-    "sha256": "8cc28eeccb2f34b48d6dad82d87b1b2d35b997abef9639ff085f730304919c96",
-    "next": "Continue experiment; final publication requires freeze and download verification"
+    "utc": "2026-09-30T09:25:35.083196+00:00",
+    "event": "continuation_checkpoint_0925",
+    "evidence": [
+      "research/artmanip-recovery-20260930/STATE.json",
+      "research/artmanip-recovery-20260930/rl-seg2-restore.json",
+      "research/artmanip-recovery-20260930/bc19200-archive-restore.json"
+    ],
+    "verified_utc": "2026-09-30T09:24:44.352602+00:00",
+    "active": {
+      "rl_segment2_gpu0_wrapper": 18856,
+      "bc19200_rl1000_evaluation_gpu1_wrapper": 19208
+    },
+    "rl_epoch": 1035,
+    "gpu_hours": 4.700846697222223,
+    "progress": "RLfirst1000completed/secondsegmentactuallyrestored; BC19200trainedandarchiveactualrestored; independentcurrentevaluationongoing;f653313pushed",
+    "next": "ReviewRL1000/M2500/E2500 independentdev whencomplete. RLsegment2continues2000, later3000/4000. Usefit/phase/bodyjointtrendsfornextBCbranch; Msource3fitrecentlyflatter."
   },
   "monitor": {
     "pid": 1192,
@@ -139,14 +162,14 @@
     "bc-pair19200-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T09:21:08.373627+00:00",
+  "last_resource_check_utc": "2026-09-30T09:24:44.352602+00:00",
   "next_actions": [
     "Revalidate: GPU0RLseg2wrapper18856 sourcepinc0f6160 running; GPU1bc19200-rl1000-evaluationwrapper19208 samepin, launched09:21:08UTC. OldBC19200train17663finished.",
     "BC19200epoch2500/Adam20000sameRNG/normalizerpassed. Msha d1780b90eda8ce7e3d437465a90a0418503ba8de02ef2a8a4b475300c114b6b3; Esha0f8256a45fe685674272165ea2a1c213a9f753951c89c9b1a2c61e82726ba41a. TargetvalM.000323863/E.000244469,source3M.000827012/E.000626251. Msource3late2100→2500only2.3percenttotal,eachrecent100epoch<2percent; E stillfalls. Needinspectactualtrainprobe/perphase andclosedloopforconditionalDAgger/targetsupervision; notautomaticallystopboth.",
     "Currentbc19200-rl1000-evaluation orderrl1000,M2500,E2500 independentS2/S5/F ondev32. Pullrawandrescore/gate. NoS64yet. Afterresults choosebudgetedcontinuationordiagnostic basedGOAL; ifMofflineeffectiveerrorstabilizes andclosedloopshiftpersists, boundedhistoryconsistentDAggerisallowedwithoutrequiringbotharms nearzero. NeverusearbitraryexpertLSTMstate; labelsfollowactualstudenthistory fromsame reset.",
     "RLseg2actualrestoreverified by modeldigestmatch, startup1000/frame81920000/Adam36000, firstepoch1001/Adam36036/curriculum1001; receipt rl-seg2-restore.json. Continueto2000; cumulativeplanned3000/4000remain. Pin changes sincefirstsegmentonlyscripts; task/configsame. Sourceexposurecountersrestartonresume, globalinteractionsdo not.",
     "Launcher now refreshes real jobs and reserves all live remaining timeouts plus proposed timeout. Uses22GPUh pre-final ceiling and21:12UTC training cutoff. Final128 still unopened/untransferred. No student or secondseed until exactS64gate.",
-    "GitHubconfirmedc0f6160; newRL1000/BC19200reportsneedcommitpush. Upload14session68142 log/tmp/wuji-recovery-incremental-upload14.log mayactive (segment1archive595MB); verifybeforeanotheruploader. BC19200archive1.25GB notyetmade; makeafterallpulledwithintegrityfit. Final128stillunopened/videosactualnone, publicrelease/downloadrestore/cleanup remain.",
+    "GitHubconfirmedf653313. BC19200archive1.25GBactualextract36files+CPUAdam20000passed; upload15session84408 log/tmp/wuji-recovery-incremental-upload15.log activecheckbeforeanotherupload. Segment1archiveupload14finished. Release399789402draft23assets expectedafterBC19200upload, finalpublicrelease/videos/downloadrestore stillpending. Final128unopened. weightsindex20/13needsrefreshlater.",
     "CPU scripts: plot_wuji_recovery_learning exports separated training/fit/development trends; diagnose_wuji_recovery_state_shift measures matched-time physical q/target distribution shift. Existing bc800 shift does not triggerDAgger because validation still improves; do not add lossmodules now."
   ],
   "training_active_run": "runs/recovery-rl-seg2",
