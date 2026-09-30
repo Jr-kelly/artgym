@@ -34,3 +34,9 @@
 `reference-precheck/report.json`：128环境全通过一秒静态body，来源29/33/28/38；实际step=0.00833333377rad，策略dt=0.0333333351s，映射误差0，物体target变化0。`pilot-throughput.json`：20个完整SAPG epoch=1,638,400交互/720次优化，每epoch实际36次优化（包含SAPG经验复用），平均6.155s，后10轮6.510s。启动/保存额外132.99s。随机初始checkpoint SHA `c4cbd272868da979aa7b34ad560b7d7928fff5d392de9035a43b9dfce468af8d`。这仍是吞吐预检，非收敛结果；F/S独立评估未结束。
 
 原始配置已打印在pilot wrapper output.log，实际构造env配置在startup.json；此前没有单独config.yaml，归档不虚构该文件。后续正式入口直接截获Hydra与learner完整解析配置，并另存实际env配置。源码pin首次因symlink assets使IsaacGym相对路径逃逸而失败；改pin内硬链接assets后已真实训练成功。
+
+### 配方选择补充
+
+参考的初始LR2e-4采用论文Table9及既有Wuji训练配置；上游当前YAML是1e-4。这是预先明确的配方选择，不宣称逐项使用开源默认值；自适应LR随后按实际KL更新，逐epoch已记录。手/刀物理、关闭外力/物理随机化也是已列出的Wuji配置匹配项。
+
+历史 `weights-index.json`43项与 `failure-diagnosis.json`复核：BC100原source3两个S协议均有113/128条“body稳定但严格失败”，支持区分端点误差与掉落；不独立证明动作监督、状态偏移或容量根因。本轮M/E与新F均保持此证据边界。

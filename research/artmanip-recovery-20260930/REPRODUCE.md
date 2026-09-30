@@ -1,0 +1,77 @@
+# Restore and reproduce
+
+Use this experiment's branch `feat/wuji-artmanip-recovery-20260930`. The release tag is `wuji-artmanip-recovery-20260930-v1`; while training is active it is a draft. Each tar archive includes per-file SHA256 values. Download the assets into a separate checkout and restore with:
+
+```bash
+python3 -m scripts.restore_wuji_unified recovery-assets-resets.tar.gz --output .
+python3 -m scripts.restore_wuji_unified recovery-expert-parents.tar.gz --output .
+python3 -m scripts.restore_wuji_unified recovery-training-sequences-t2.tar.gz --output .
+python3 -m scripts.restore_wuji_unified recovery-training-sequences-t5.tar.gz --output .
+python3 -m scripts.restore_wuji_unified recovery-reference-pilot20.tar.gz --output .
+```
+
+Other completed-stage archives use the same restorer. It refuses conflicting existing files. Large weights and physical traces live in Release assets. Source/config/report files live in Git; immutable source SHAs and complete commands are in `jobs/*.json`, and checkpoint/data SHAs in the corresponding manifests. The supplied remote launcher is specific to this session's authorized host; an address in a historical receipt is not permission to use that host.
+
+A compatible IsaacGym TacSL installation, Python3.8, PyTorch2.1.0+cu118 and NVIDIA driver are needed. The tested runtime was relocated from an existing environment, including its IsaacGym editable-install paths. Do not assume a copied `.egg-link` still points to a valid package. On an authorized device, adapt the runtime prefix consistently:
+
+```bash
+export WUJI_PYTHON=/path/to/artgym-runtime/bin/python
+export LD_LIBRARY_PATH=/path/to/artgym-runtime/lib:$LD_LIBRARY_PATH
+export PYTHONPATH="$PWD:$PWD/rl_games"
+export PYTHONNOUSERSITE=1 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 MAX_JOBS=2
+export CUDA_VISIBLE_DEVICES=0
+```
+
+System `python3` is sufficient for archive/JSON orchestration. Use the runtime interpreter for NumPy, Torch and simulator scripts. Keep assets as actual files under the checkout: IsaacGym did not resolve a source-pin asset symlink escaping its root. This round uses immutable source snapshots and hard-linked asset copies without modifying their source assets.
+
+## Joint RL
+
+The reference starts from random seed2026093011, with no old mixed-action expert initialization. Pilot20 is 1,638,400 environment interactions and720 actual Adam updates. Its `initial.pth` is the random starting state; its `checkpoints/epoch_000020.pth` is a genuine resumable learner. Actual epoch20→21 restoration was verified, with Adam720→756 and full model/normalizer/RNG restored. PhysX is not serialized: every resumed run starts new physical rollouts and reset recurrent histories. Do not claim bitwise equivalence to uninterrupted simulation.
+
+The first formal segment continues the pilot to cumulative epoch1000:
+
+```bash
+"$WUJI_PYTHON" -m scripts.train_wuji_recovery_rl \
+ task=wuji_artmanip_reference hand=wuji_paper_official_actuator \
+ object=knife_wuji_reference train=wujiArtManipReferenceSAPG \
+ num_envs=5120 headless=True pipeline=gpu graphics_device_id=-1 \
+ force_render=False num_subscenes=0 multi_gpu=False seed=2026093011 \
+ experiment=my-reference-segment1 max_iterations=1000 \
+ checkpoint=runs/recovery-rl-pilot20-retry2/checkpoints/epoch_000020.pth \
+ train.params.config.save_frequency=250 \
+ train.params.config.evaluation_frequency=250 \
+ train.params.config.checkpoint_first_epoch=250
+```
+
+Use new output names. Subsequent segments resume the corresponding previous1000/2000/3000 checkpoint and end at2000/3000/4000. The preregistered baseline is327,680,000 interactions, not the paper's2B category-level experiment. Actual per-epoch optimizer counts, source visits/interactions, rewards and curriculum weights are in `learning.jsonl`; `resolved.yaml`, `resolved-learner.json`, and actual constructed environment `startup.json` distinguish configuration from runtime behavior. Five SAPG blocks and coefficient50 inference remain fixed.
+
+## Paired recurrent BC
+
+The historical BC100 starting SHA is `3801eca359022e729510fef28f00d43b35af8561755f20a5f4be0206b6a07ab8`. Both arms restore its actual800-step Adam/RNG. M supervises original expert μ; E supervises `clip(expert μ,-1,1)` using the unbounded network output in the loss. Both keep old mixed control, whole600-step episodes, actual previous executed action, shifted done masks, fixed normalization and their own jointly trained encoder/actor. Source/phase sampling and LR are identical.
+
+```bash
+"$WUJI_PYTHON" -m scripts.run_wuji_recovery_bc_pair \
+ --name my-bc-added800 --previous-epoch 100 --end-epoch 200 --max-seconds 1400
+```
+
+For later segments pass `--previous-name my-bc-added800 --previous-epoch 200 --end-epoch 300` and a new name; then300→500 and500→900 give cumulative added1600,3200,6400 updates. Optional900→1700 requires ongoing evidence and remaining budget. The driver serially executes both arms on the assigned GPU. `training.jsonl` stores actual changing-model training batches; `metrics.jsonl` stores frozen validation and first-eight fitting-trajectory probes. Do not confuse either with closed-loop success.
+
+## Independent physical protocols
+
+A single model instance controls all four source groups in each batch. Prefix an incremental-reference model name with `rl`; other model names select the historical mixed interface. No source routing occurs within a model. This example evaluates BC800 outcomes:
+
+```bash
+"$WUJI_PYTHON" -m scripts.evaluate_wuji_recovery_batch \
+ --name my-bc800-development \
+ --states research/artmanip-recovery-20260930/data/development-all.npy \
+ --models M200=runs/artmanip-recovery-20260930/bc-pair800/M/epoch_000200.pth \
+          E200=runs/artmanip-recovery-20260930/bc-pair800/E/epoch_000200.pth \
+ --protocols S2 S5 F
+"$WUJI_PYTHON" -m scripts.summarize_wuji_recovery \
+ --directories runs/artmanip-recovery-20260930/my-bc800-development \
+ --output research/artmanip-recovery-20260930/my-bc800-analysis
+```
+
+F has a40-second maximum horizon,10mm tolerance, and1.5 seconds continuously at target before switching. A complete open-close cycle counts as functional success; full survival/body stability and later drops are reported separately. If all environments terminate early, the physical trace ends there and records failure/survival facts; it does not pretend to contain40 seconds of live behavior.
+
+S is a separate20-second episode with external2/5-second switching. Every stage's final9 control samples must stay within2mm, with full validity/survival and base drift<10mm/rotation<.25rad. The original and independent strict scorers agree episode by episode. F's state machine is reconstructed independently from its own physical trace. Development/promotion are separate from the new final128/source set. Do not open final trajectories/scores during training or selection.
