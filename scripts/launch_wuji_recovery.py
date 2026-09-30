@@ -20,7 +20,7 @@ def main():
     archive=subprocess.check_output(['git','archive',sha,'scripts','isaacgymenvs','rl_games'],cwd=R)
     pin=REMOTE+'/pins/'+sha
     # Extract only committed code, never overwrite an existing immutable pin.
-    setup="import sys,tarfile,io,os; from pathlib import Path; p=Path("+repr(pin)+"); data=sys.stdin.buffer.read(); exists=p.exists(); p.mkdir(parents=True,exist_ok=True); tarfile.open(fileobj=io.BytesIO(data)).extractall(p) if not exists else None; [(p/x).symlink_to(Path("+repr(REMOTE)+")/x,target_is_directory=True) for x in ['assets','caches','research','runs'] if not (p/x).exists()]"
+    setup="import sys,tarfile,io,os,shutil; from pathlib import Path; p=Path("+repr(pin)+"); data=sys.stdin.buffer.read(); exists=p.exists(); p.mkdir(parents=True,exist_ok=True); tarfile.open(fileobj=io.BytesIO(data)).extractall(p) if not exists else None; [(p/x).symlink_to(Path("+repr(REMOTE)+")/x,target_is_directory=True) for x in ['caches','research','runs'] if not (p/x).exists()]; shutil.copytree(Path("+repr(REMOTE)+")/'assets',p/'assets',copy_function=os.link) if not (p/'assets').exists() else None"
     subprocess.run(SSH+['python3 -c '+__import__('shlex').quote(setup)],input=archive,check=True)
     launch='''import json,subprocess,os,sys
 from pathlib import Path
