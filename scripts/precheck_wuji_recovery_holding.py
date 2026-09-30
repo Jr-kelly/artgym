@@ -1,5 +1,5 @@
 """Actual simulation checks for new objective timing, reset and static body validity."""
-import json,hashlib
+import json,hashlib,argparse
 from pathlib import Path
 from scripts.wuji_goal_common import configuration,make_env
 import torch
@@ -7,10 +7,11 @@ from omegaconf import OmegaConf
 from isaacgymenvs.utils.torch_jit_utils import quat_mul,quat_conjugate
 
 def main():
-    out=Path('runs/artmanip-recovery-20260930/holding-precheck');out.mkdir(parents=True,exist_ok=False)
+    parser=argparse.ArgumentParser();parser.add_argument('--output',required=True);args=parser.parse_args()
+    out=Path(args.output);out.mkdir(parents=True,exist_ok=False)
     cfg=configuration('wuji_artmanip_clock_hold',128,['object=knife_wuji_reference','hand=wuji_paper_official_actuator'],train='wujiArtManipReferenceSAPG',seed=2026093091)
     (out/'resolved.yaml').write_text(OmegaConf.to_yaml(cfg,resolve=True))
-    env=make_env(cfg);env.reset_idx(torch.arange(env.num_envs,device=env.device));env.compute_observations();env.reset()
+    env=make_env(cfg);env.reset()
     periods=env.clock_period.clone();source=env.source_ids.clone();initial=env.init_targets[:,:20].clone();object_target=env.prev_targets[:,20:].clone()
     counts={};max_map=0.;stable_all=torch.ones(128,dtype=torch.bool,device=env.device);rows=[]
     try:
@@ -38,6 +39,10 @@ def main():
         assert int((env.source_visits-before_visits).sum())==128
         result=dict(passed=True,scope='20second zero-action static and training-objective scheduling precheck; not learned manipulation',steps=600,initial_source_counts=counts,period2_count=int((periods==60).sum()),period5_count=int((periods==150).sum()),switch_events=rows,map_max_error=max_map,body_position_all128=True,object_targets_unchanged=True,reset_clock_verified=True,training_states_sha256=env.training_states_sha256,task_source_sha256=hashlib.sha256(Path('isaacgymenvs/tasks/wuji_artmanip_clock_hold.py').read_bytes()).hexdigest())
         (out/'report.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
+    except Exception as exc:
+        result=dict(passed=False,error=repr(exc),step=step if 'step' in locals() else None,map_max_error=max_map,body_stable_so_far=int(stable_all.sum()),switch_events=rows)
+        (out/'failure.json').write_text(json.dumps(result,indent=2)+'\n')
+        raise
     finally:env.gym.destroy_sim(env.sim)
 
 if __name__=='__main__':main()

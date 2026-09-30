@@ -7,14 +7,44 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T09:33:07.402471+00:00",
-  "event": "archive_completed",
-  "name": "recovery-rl1000-development",
-  "archive": "delivery/artmanip-recovery-20260930/recovery-rl1000-development.tar.gz",
-  "sha256": "4fa0e95287b71f429f9a0ad08a755600156e2092a6d82ccce3caa14c16b4b665",
-  "size": 72490559,
-  "files": 24,
-  "next": "Restore-check and upload; local originals retained"
+  "utc": "2026-09-30T09:45:05.886621+00:00",
+  "event": "bc19200_independent_development",
+  "evidence": [
+    "research/artmanip-recovery-20260930/bc19200-rl1000-analysis/report.json",
+    "research/artmanip-recovery-20260930/bc19200-rl1000-gates.json"
+  ],
+  "weights": {
+    "M2500": "d1780b90eda8ce7e3d437465a90a0418503ba8de02ef2a8a4b475300c114b6b3",
+    "E2500": "0f8256a45fe685674272165ea2a1c213a9f753951c89c9b1a2c61e82726ba41a"
+  },
+  "M_S2": [
+    32,
+    32,
+    32,
+    8
+  ],
+  "M_S5": [
+    32,
+    32,
+    32,
+    9
+  ],
+  "E_S2": [
+    32,
+    32,
+    32,
+    21
+  ],
+  "E_S5": [
+    32,
+    32,
+    32,
+    11
+  ],
+  "E_S_body": "all cells32/32",
+  "F_cycles": "M and E all sources32/32",
+  "interpretation": "E still improves effective validation and source3 S2/body; no both-arm plateau. S failed; no64 promotion or student.",
+  "next": "Prioritize controlled holding RL while original segment2 continues; retain evidence for subsequent BC continuation within budget"
 }
 ```
 
@@ -29,39 +59,8 @@
   "max_concurrent_gpus": 2,
   "rl_default_gpu_hours": 16,
   "bc_default_gpu_hours": 2,
-  "phase": "A complete; B segment2actualrestoreverified; C BC19200done, RL1000/BC19200developmentlive",
+  "phase": "A complete; B pilot / C checks",
   "active_jobs": [
-    {
-      "source_sha256": "f3aa89d7dd469f42563d350d539692893c96bccfc1edbed3afc06947af96c54e",
-      "name": "bc19200-rl1000-evaluation-job",
-      "gpu": 1,
-      "command": [
-        "/tmp/wuji-recovery-runtime/bin/python",
-        "-m",
-        "scripts.evaluate_wuji_recovery_batch",
-        "--name",
-        "bc19200-rl1000-evaluation",
-        "--states",
-        "research/artmanip-recovery-20260930/data/development-all.npy",
-        "--models",
-        "rl1000=runs/recovery-rl-seg1-retry1/checkpoints/epoch_001000.pth",
-        "M2500=runs/artmanip-recovery-20260930/bc-pair19200/M/epoch_002500.pth",
-        "E2500=runs/artmanip-recovery-20260930/bc-pair19200/E/epoch_002500.pth",
-        "--protocols",
-        "S2",
-        "S5",
-        "F"
-      ],
-      "timeout_seconds": 3000,
-      "started": "2026-09-30T09:21:12.636722+00:00",
-      "pid": 19208,
-      "status": "running",
-      "child_pid": 19209,
-      "heartbeat": "2026-09-30T09:31:15.257816+00:00",
-      "elapsed_seconds": 602.4987150369998,
-      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/bc19200-rl1000-evaluation-job/status.json",
-      "pid_exists": true
-    },
     {
       "source_sha256": "f3aa89d7dd469f42563d350d539692893c96bccfc1edbed3afc06947af96c54e",
       "name": "rl-seg2-job",
@@ -94,13 +93,13 @@
       "pid": 18856,
       "status": "running",
       "child_pid": 18857,
-      "heartbeat": "2026-09-30T09:31:05.100069+00:00",
-      "elapsed_seconds": 662.742493889993,
+      "heartbeat": "2026-09-30T09:44:07.799283+00:00",
+      "elapsed_seconds": 1445.4591972319904,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg2-job/status.json",
       "pid_exists": true
     }
   ],
-  "gpu_hours": 4.919175557777779,
+  "gpu_hours": 5.304425074722224,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -108,14 +107,44 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "ReviewRL1000/M2500/E2500 independentdev whencomplete. RLsegment2continues2000, later3000/4000. Usefit/phase/bodyjointtrendsfornextBCbranch; Msource3fitrecentlyflatter.",
   "last_event": {
-    "utc": "2026-09-30T09:33:07.402471+00:00",
-    "event": "archive_completed",
-    "name": "recovery-rl1000-development",
-    "archive": "delivery/artmanip-recovery-20260930/recovery-rl1000-development.tar.gz",
-    "sha256": "4fa0e95287b71f429f9a0ad08a755600156e2092a6d82ccce3caa14c16b4b665",
-    "size": 72490559,
-    "files": 24,
-    "next": "Restore-check and upload; local originals retained"
+    "utc": "2026-09-30T09:45:05.886621+00:00",
+    "event": "bc19200_independent_development",
+    "evidence": [
+      "research/artmanip-recovery-20260930/bc19200-rl1000-analysis/report.json",
+      "research/artmanip-recovery-20260930/bc19200-rl1000-gates.json"
+    ],
+    "weights": {
+      "M2500": "d1780b90eda8ce7e3d437465a90a0418503ba8de02ef2a8a4b475300c114b6b3",
+      "E2500": "0f8256a45fe685674272165ea2a1c213a9f753951c89c9b1a2c61e82726ba41a"
+    },
+    "M_S2": [
+      32,
+      32,
+      32,
+      8
+    ],
+    "M_S5": [
+      32,
+      32,
+      32,
+      9
+    ],
+    "E_S2": [
+      32,
+      32,
+      32,
+      21
+    ],
+    "E_S5": [
+      32,
+      32,
+      32,
+      11
+    ],
+    "E_S_body": "all cells32/32",
+    "F_cycles": "M and E all sources32/32",
+    "interpretation": "E still improves effective validation and source3 S2/body; no both-arm plateau. S failed; no64 promotion or student.",
+    "next": "Prioritize controlled holding RL while original segment2 continues; retain evidence for subsequent BC continuation within budget"
   },
   "monitor": {
     "pid": 1192,
@@ -143,10 +172,12 @@
     "bc-pair12800-job",
     "bc12800-evaluation-job",
     "rl-seg1-retry1-job",
-    "bc-pair19200-job"
+    "bc-pair19200-job",
+    "bc19200-rl1000-evaluation-job",
+    "holding-precheck-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T09:31:17.344551+00:00",
+  "last_resource_check_utc": "2026-09-30T09:44:08.610602+00:00",
   "next_actions": [
     "Revalidate: GPU0RLseg2wrapper18856 sourcepinc0f6160 running; GPU1bc19200-rl1000-evaluationwrapper19208 samepin, launched09:21:08UTC. OldBC19200train17663finished.",
     "BC19200epoch2500/Adam20000sameRNG/normalizerpassed. Msha d1780b90eda8ce7e3d437465a90a0418503ba8de02ef2a8a4b475300c114b6b3; Esha0f8256a45fe685674272165ea2a1c213a9f753951c89c9b1a2c61e82726ba41a. TargetvalM.000323863/E.000244469,source3M.000827012/E.000626251. Msource3late2100→2500only2.3percenttotal,eachrecent100epoch<2percent; E stillfalls. Needinspectactualtrainprobe/perphase andclosedloopforconditionalDAgger/targetsupervision; notautomaticallystopboth.",
