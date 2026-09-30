@@ -25,6 +25,7 @@ class WujiArtManipReference(WujiDemoAligned):
         self.training_states_sha256 = hashlib.sha256(path.read_bytes()).hexdigest()
         self.source_ids = torch.zeros(self.num_envs, device=self.device, dtype=torch.long)
         self.source_visits = torch.zeros(4, device=self.device, dtype=torch.long)
+        self.source_steps = torch.zeros_like(self.source_visits)
         self.reference_ready = True
 
     def sample_grasps(self, env_ids):
@@ -49,12 +50,15 @@ class WujiArtManipReference(WujiDemoAligned):
         return torch.maximum(torch.minimum(raw, self.hand_dof_upper_limits), self.hand_dof_lower_limits)
 
     def compute_reward(self, actions):
+        old_error = (self.obj_dof_pos - self.goal_obj_dof_pos).abs().squeeze(-1).clone()
         ArtManip.compute_reward(self, actions)
         if self.reference_ready and not self.eval_mode:
-            error = (self.obj_dof_pos - self.goal_obj_dof_pos).abs().squeeze(-1)
+            error = old_error
+            self.source_steps += torch.bincount(self.source_ids,minlength=4)
             for source in range(4):
                 mask = self.source_ids == source
                 self.extras[f'source{source}/visits'] = self.source_visits[source].float()
+                self.extras[f'source{source}/control_steps'] = self.source_steps[source].float()
                 if mask.any():
                     self.extras[f'source{source}/goal_error'] = error[mask].mean()
                     self.extras[f'source{source}/arrival'] = (error[mask] < self.object_cfg['task']['success_threshold']).float().mean()
