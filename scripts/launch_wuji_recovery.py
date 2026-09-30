@@ -64,7 +64,7 @@ s['pid']=child.pid;(out/(s['name']+'-spec.json')).write_text(json.dumps(s,indent
     spec.update(root=REMOTE,pin=pin)
     result=json.loads(subprocess.check_output(SSH+['python3 -c '+__import__('shlex').quote(launch)],input=json.dumps(spec).encode()))
     receipts=D/'jobs';receipts.mkdir(exist_ok=True);(receipts/(a.name+'.json')).write_text(json.dumps(result,indent=2)+'\n')
-    state['active_jobs'].append(result);state['phase']='B/C active; actual stages and next decisions in active_jobs and next_actions'
+    state['active_jobs'].append(result);state['phase']='Final frozen evaluation active' if a.final else 'B/C active; actual stages and next decisions in active_jobs and next_actions'
     (D/'STATE.json').write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n')
     from scripts.record_wuji_recovery import record
     record('job_started',**result,next='Poll wrapper status and evidence before any further launch on this GPU')
