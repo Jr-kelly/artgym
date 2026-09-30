@@ -32,26 +32,36 @@
       "pid": 65486,
       "status": "running",
       "child_pid": 65487,
-      "heartbeat": "2026-09-30T16:56:53.479849+00:00",
-      "elapsed_seconds": 361.6020409969933,
+      "heartbeat": "2026-09-30T17:04:25.369957+00:00",
+      "elapsed_seconds": 813.4508048779971,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/aggregation1-promotion64-job/status.json",
       "pid_exists": true,
       "host": "authorized_remote"
     }
   ],
-  "gpu_hours": 18.835048374166654,
+  "gpu_hours": 18.95719707972221,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
   "resource_check_utc": "2026-09-30T06:42:41Z",
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
-  "next": "Both trainingfamilies paused for independentdevelopment, notgoalpause: originalRL4000 completed, mandatory3500/4000 evaluationGPU0; aggregation6100/6500 evaluationGPU1. Choose remainingnormalbudget learning from resultingphase/body/fit evidence; finalunopened.",
+  "next": "Exact64/source promotion with samebatchexperts running. Ifpassed prioritize fullBC-route secondoptimizationseed, using conditionalplan; do notopenfinal orstartstudent yet.",
   "last_event": {
-    "utc": "2026-09-30T16:58:57.407440+00:00",
-    "event": "release_asset_verified",
-    "name": "recovery-training-sequences-t5.tar.gz",
-    "sha256": "8cc28eeccb2f34b48d6dad82d87b1b2d35b997abef9639ff085f730304919c96",
-    "next": "Continue experiment; final publication requires freeze and download verification"
+    "utc": "2026-09-30T17:04:23.348895+00:00",
+    "event": "S32_breakthrough_and64_pending_handoff",
+    "candidate": {
+      "name": "Eagg6100",
+      "path": "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
+      "sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+      "S32_passed": true,
+      "S64_verified": false,
+      "final_evaluated": false
+    },
+    "evidence": [
+      "research/artmanip-recovery-20260930/aggregation1-promotion-plan.json",
+      "research/artmanip-recovery-20260930/second-seed-conditional-plan.json"
+    ],
+    "next": "Exact64/source promotion with samebatchexperts running. Ifpassed prioritize fullBC-route secondoptimizationseed, using conditionalplan; do notopenfinal orstartstudent yet."
   },
   "monitor": {
     "pid": 1192,
@@ -107,23 +117,24 @@
     "reference4000-development-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T16:57:18.959204+00:00",
+  "last_resource_check_utc": "2026-09-30T17:04:38.694544+00:00",
   "next_actions": [
-    "Finish originalRL4000 and mandatorydevelopment3500/4000; aggregationpairedtraining6500 completed, development6100/6500 active. Decide further learning from jointclosed-loop/fit/budget evidence before once-onlyfinalfreeze.",
-    "GPU1 aggregation1-development wrapper62424 started16:24:56UTC, source563d534, timeout2400. Fourmodels Ereplay6100/Eagg6100/Ereplay6500/Eagg6500, all3protocols32/source. Reverifyprocess; pullfulltraces and independentlyscore whencomplete.",
-    "Aggregationbotharms finished6500/52000Adam. Parentactualmodel/Adam/RNG andfirst5701/45608 exact; endRNG/sharedinitialvalidation/frozen28tensors passed. ReplaySHA778ce694..., aggregateSHAd748794b..., exactfullhashes aggregation1-pair-integrity.json. Archive8c271209... created; restore/upload ongoing at16:28UTC.",
-    "OfflineaggregateexecutionMSE .00986→.00636 improves buttargetrange .000485→.000526 worsens. CPUonlyold32/new8 decomposition launched16:27UTC timeout600; /tmp/wuji-recovery-aggregation1-heldout-fit.log and aggregation1-heldout-fit-decomposition.json. Notphysicalevaluation.",
-    "OriginalRLseg4wrapper51150 GPU0 sourcee80d5f4 started14:25UTC;3944 at16:28UTC. Finish4000 thenfullpull/audit/archive+development3500/4000. Furtherlearningdecisiondependsjointtrends/budget, no convergenceclaimfromstrictzero.",
-    "Final128unopened. Keepnormal20GPUh, reserve4GPUh/2h. NoS64promotion/student/secondseed. finalfreeze/video/publicRelease/anonymousrestore/index/report remain.",
-    "GitHub563d534 pushed (HEADverificationpending), draft47assets previouslyverified; newpairarchive uploadpending. Monitor1192 commandverified16:14UTC; currentPIDs/resourceusagealwaysreverify."
+    "Exact64/source promotion with samebatchexperts running. Ifpassed prioritize fullBC-route secondoptimizationseed, using conditionalplan; do notopenfinal orstartstudent yet.",
+    "GPU1 wrapper65486, source2c29436, started16:50:48UTC, timeout1800, aggregation1-promotion64: Eagg6100,historical,source3 S2/S5/F onpromotion-all.npy. At17:03UTC mainall3+historicalS2/S5 complete. Producer maincountsS2[64,64,63,60],S5[63,64,63,64],F[64,64,63,63] arePROVISIONAL; independentrescore/fullbody/relativeexpertgates pending.",
+    "GPU0 originalRL4000 anddevelopment3500/4000 complete; fullpull/archive/actualrestore passed. CP4000 SHA0641cd6c...,327.68Minteractions/144000Adam; reference4000-analysis/gates/decision. Source3phase/bodybreachimproves butstrict/bodyallzero. No convergenceclaim; prioritize firstSsuccess verification.",
+    "Eagg6100 passedS32[32,32,32,28]bothclocks,bodyall32; selectedviaexistingranking. Eagg6500fixedendpointalsoS32passed. Bothpaired6100/6500 actualAdam/RNG/frozen28 audited. Aggregateoldheldoutfitworsens whilenewstatefitimproves andclosedloopSgains; seeaggregation1-heldout-fit-summary.",
+    "second-seed-conditional-plan.json prepared, NOsecondseedGPUstarted. FullE44800 fromsameBC100actualAdam800 withexplicit --sequence-seed2026093061 thenownbehaviorcollection/originalavailability/mixeddata/aggregate3200→6100; fixed64replicate. Newoption/auditcode committed0b79bb0 andpushed, actualforktest awaitslaunch. Sameexperts/initweights; noindependentexpertpretraining claim.",
+    "Currentreserve4GPUh/normal20 remains. Conditionalfullsecondroute expected~.955GPUh,bounded~1.375; afterexact64passfreshbudget mayrequire prospectivereallocation toreserve3.5/normal20.5 while retaining2wallhours. Do notsilentlyspendreserve.",
+    "Final128untouched,no finalfreeze. Freezehelper nowrecognizesEagg/Ereplay families; doNOTfeed32and64 assessmentsforsamenameasconflictingrows. Preserve32mainselection,64gateasverification. Ifsecondseedruns, addasfixedreplicationendpoint/extraanchor withoutreselectingmainby64scores; helpermayneed --replicates support.",
+    "GitHub0b79bb0pushed,currentHEADverificationpending;52draftassetsverified incllatestdevelopment. weights-index195checkpoints/50archives predateslast2developmentarchivesbutno newweightsafterindex. Finalpublicrelease,anonymousrestore,fullreport/videos andprocesscleanupremain. Monitor1192 lastcommandverified16:14UTC; recheck."
   ],
   "bc_current_pair": "runs/artmanip-recovery-20260930/bc-pair32000",
   "training_active_runs": [],
   "bc_next_plan": "research/artmanip-recovery-20260930/bc44800-plan.json",
   "github_last_verified_commit": "d88b96b7e62f2ffa818eba5ba96f72a2b02e0b7a",
-  "release_verified_assets": 48,
+  "release_verified_assets": 52,
   "gpu_hours_by_host": {
-    "authorized_remote": 18.835048374166654,
+    "authorized_remote": 18.95719707972221,
     "local": 0.0
   },
   "bc_executed_endpoint": {
@@ -132,5 +143,13 @@
     "epoch": 5700,
     "updates": 45600,
     "updates_after_BC100": 44800
+  },
+  "current_candidate": {
+    "name": "Eagg6100",
+    "path": "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
+    "sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+    "S32_passed": true,
+    "S64_verified": false,
+    "final_evaluated": false
   }
 }

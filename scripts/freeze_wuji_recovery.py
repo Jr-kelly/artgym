@@ -54,6 +54,8 @@ def main():
     parser.add_argument('--gates', type=Path, nargs='+', required=True)
     parser.add_argument('--endpoints', nargs='+', required=True)
     parser.add_argument('--anchors', nargs='*', default=['bc100', 'rl1000'])
+    parser.add_argument('--replicates', nargs='*', default=[],
+                        help='Fixed second-seed endpoints, included without competing for primary checkpoint choice')
     parser.add_argument('--reason', required=True,
                         help='Evidence or actual budget reason for ending development')
     args = parser.parse_args()
@@ -96,8 +98,9 @@ def main():
             if name in catalog:
                 assert catalog[name] == item, 'Reused model name with different weight'
             catalog[name] = item
+    assert not set(args.replicates) & set(selected.values()), 'Replications must not compete in primary family selection'
     names = list(dict.fromkeys([*selected.values(), *args.endpoints,
-                              *args.anchors, 'historical', 'source3']))
+                              *args.anchors, *args.replicates, 'historical', 'source3']))
     models = {}
     for name in names:
         if name not in ['historical', 'source3']:
@@ -107,7 +110,8 @@ def main():
         models[name] = dict(**item, interface='full_incremental' if name.startswith('rl')
                             else 'mixed_support_initial_thumb_increment',
                             selected_for=[f for f, n in selected.items() if n == name],
-                            fixed_endpoint=name in args.endpoints,
+                            fixed_endpoint=name in args.endpoints or name in args.replicates,
+                            replication_endpoint=name in args.replicates,
                             anchor=name in args.anchors)
     manifest = json.loads((D / 'data/manifest.json').read_text())
     final_states = next(x for x in manifest['entries']
@@ -123,6 +127,7 @@ def main():
                   source_sha=source_sha, models=models, selected_by_family=selected,
                   overall_candidate=ranked[0]['model'], endpoints=args.endpoints,
                   anchors=args.anchors, ranking=ranked,
+                  replicates=args.replicates,
                   all_development_candidates=sorted(candidates.values(), key=rank),
                   evidence=[dict(path=str(p), sha256=sha(p)) for p in args.gates],
                   selection='Worst S strict, worst phase hold, worst body, common mean slider error, earlier epoch.',
