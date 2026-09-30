@@ -1,0 +1,61 @@
+{
+  "utc": "2026-09-30T16:50:47.074443+00:00",
+  "selected": "Eagg6100",
+  "checkpoint": "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
+  "checkpoint_sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+  "selection": "Existing32 preregistered worststrict/phase/body/error ranking picks Eagg6100; Eagg6500 remains fixedendpoint. Do not reselect from64.",
+  "evidence": [
+    "aggregation1-analysis/report.json",
+    "aggregation1-gates.json"
+  ],
+  "development32": {
+    "S2": [
+      32,
+      32,
+      32,
+      28
+    ],
+    "S5": [
+      32,
+      32,
+      32,
+      28
+    ],
+    "S_body": [
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32
+    ],
+    "F_cycles": [
+      32,
+      32,
+      32,
+      32
+    ]
+  },
+  "confirmation": {
+    "name": "aggregation1-promotion64",
+    "models": [
+      "Eagg6100",
+      "historical",
+      "source3"
+    ],
+    "states": "data/promotion-all.npy",
+    "states_sha256": "74f2e0bd8e6cdecf89fe039cb7defbdb3c3a0d420048a1a4021a9319b9e93840",
+    "protocols": [
+      "S2",
+      "S5",
+      "F"
+    ],
+    "timeout": 1800
+  },
+  "budget": "18.699GPUh at16:49UTC, originaldevelopmentstillactive. Launcher checks timeout reservations undernormal20GPUh ceiling and4GPUh finalreserve.",
+  "if_pass": "Prioritize secondtrainingseed or bounded keycontrol verification, before any student. Estimate fullsecondseed from actual E throughput and remaining budget; document whether fullpipeline or sharedparent perturbation. No student without verified64 and sufficientremainingbudget.",
+  "if_fail": "Retain exact32 selectedcandidate andendpoint; use jointphase/body/fit andbudget for decision, nofinalcohortopened.",
+  "scope": "Independentdevelopment64 with samebatchresponsibleexperts; not final128 or student."
+}
