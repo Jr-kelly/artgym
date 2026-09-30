@@ -1,0 +1,69 @@
+scripts/verify_wuji_recovery_public.py
+  s_13dba2dc3e07f8::t_97a580dd5188eb 1-123
+scripts/monitor_wuji_recovery_local_resources.py
+  s_13dba2dc3e07f8::t_6cc0b77b153603 1-36
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "d3b25e62ebf5afec2514d76c9fe1d51974d225ce",
+  "prompts": {},
+  "sessions": {
+    "s_13dba2dc3e07f8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f10b-dd7b-7be1-bb17-993f50d34df5",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.input_tokens": "3741388",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.output_tokens": "817147",
+        "tlab.session_started_at": "2026-09-30T19:27:23Z",
+        "tlab.token_usage.cache_read_tokens": "199774300"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "scripts/monitor_wuji_recovery_local_resources.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 36
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/verify_wuji_recovery_public.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 123
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/REPRODUCE.md",
+      "new_path": "research/artmanip-recovery-20260930/REPRODUCE.md",
+      "additions": {
+        "human": 29
+      }
+    },
+    {
+      "old_path": "research/artmanip-recovery-20260930/UPSTREAM_AUDIT.md",
+      "new_path": "research/artmanip-recovery-20260930/UPSTREAM_AUDIT.md",
+      "additions": {
+        "human": 1
+      },
+      "deletions": {
+        "human": 1
+      }
+    }
+  ]
+}
