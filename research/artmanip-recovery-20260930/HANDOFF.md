@@ -7,13 +7,23 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T13:51:24.646135+00:00",
-  "event": "downloaded_holding_checkpoint_cpu_state_verified",
-  "evidence": "research/artmanip-recovery-20260930/holding2000-network-restored-state.json",
-  "checkpoint_sha256": "d2d596b4973bcf47d86dda0c512b453296934c1534d8a9887f0d02c9b2e186ae",
-  "adam_steps": 72000,
-  "environment_interactions": 163840000,
-  "next": "Continue two active RL jobs; this is artifact recovery evidence, not new capability evaluation"
+  "utc": "2026-09-30T13:57:19.777259+00:00",
+  "event": "remote_process_identity_and_compute_inventory_checked",
+  "evidence": "research/artmanip-recovery-20260930/resources/latest.json",
+  "checked_utc": "2026-09-30T13:57:06.021304+00:00",
+  "active": [
+    {
+      "name": "rl-seg3-job",
+      "pid": 38444,
+      "gpu": 0
+    },
+    {
+      "name": "rl-reference-clean-job",
+      "pid": 44425,
+      "gpu": 1
+    }
+  ],
+  "next": "Next launcher also rejects any existing compute process on its target GPU. No existing process terminated."
 }
 ```
 
@@ -63,8 +73,8 @@
       "pid": 38444,
       "status": "running",
       "child_pid": 38445,
-      "heartbeat": "2026-09-30T13:49:12.087268+00:00",
-      "elapsed_seconds": 6718.5279670549935,
+      "heartbeat": "2026-09-30T13:56:44.217407+00:00",
+      "elapsed_seconds": 7170.616287326993,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg3-job/status.json",
       "pid_exists": true,
       "host": "authorized_remote"
@@ -103,14 +113,14 @@
       "pid": 44425,
       "status": "running",
       "child_pid": 44426,
-      "heartbeat": "2026-09-30T13:49:26.518496+00:00",
-      "elapsed_seconds": 3194.3142837350024,
+      "heartbeat": "2026-09-30T13:56:58.626232+00:00",
+      "elapsed_seconds": 3646.4244968150015,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-reference-clean-job/status.json",
       "pid_exists": true,
       "host": "authorized_remote"
     }
   ],
-  "gpu_hours": 13.162504133055549,
+  "gpu_hours": 13.415049574722218,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -118,13 +128,23 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "GPU0 original segment3→3000, development, segment4→4000. GPU1 matched repaired-pool originalcontrol44425 CP1000→2000 just started; after its required dev, execute E-only4100→5700 underbc44800-plan.",
   "last_event": {
-    "utc": "2026-09-30T13:51:24.646135+00:00",
-    "event": "downloaded_holding_checkpoint_cpu_state_verified",
-    "evidence": "research/artmanip-recovery-20260930/holding2000-network-restored-state.json",
-    "checkpoint_sha256": "d2d596b4973bcf47d86dda0c512b453296934c1534d8a9887f0d02c9b2e186ae",
-    "adam_steps": 72000,
-    "environment_interactions": 163840000,
-    "next": "Continue two active RL jobs; this is artifact recovery evidence, not new capability evaluation"
+    "utc": "2026-09-30T13:57:19.777259+00:00",
+    "event": "remote_process_identity_and_compute_inventory_checked",
+    "evidence": "research/artmanip-recovery-20260930/resources/latest.json",
+    "checked_utc": "2026-09-30T13:57:06.021304+00:00",
+    "active": [
+      {
+        "name": "rl-seg3-job",
+        "pid": 38444,
+        "gpu": 0
+      },
+      {
+        "name": "rl-reference-clean-job",
+        "pid": 44425,
+        "gpu": 1
+      }
+    ],
+    "next": "Next launcher also rejects any existing compute process on its target GPU. No existing process terminated."
   },
   "monitor": {
     "pid": 1192,
@@ -168,7 +188,7 @@
     "bc32000-development-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T13:49:31.439509+00:00",
+  "last_resource_check_utc": "2026-09-30T13:57:06.021304+00:00",
   "next_actions": [
     "GPU0 originalsegment3 PID38444 at13:03UTC epoch2519. Continue3000; preregistereddev2500+3000 then originalseg4to4000 withdev3500+4000. ActualCP2000→2001restorepassed; originalpoolunchanged.",
     "Repaired training pool d885794f6bd5c77a71591c5d5e17753b4679252c8582587ab7217d6d61c73836 passed full51220sec static and clock/mapping checks. Four source0 slots47/94/104/117 replaced by original0/1/2/3, distinctcounts124/128/128/128. No evaluation filtering.",
@@ -183,10 +203,10 @@
     "runs/recovery-rl-reference-clean"
   ],
   "bc_next_plan": "research/artmanip-recovery-20260930/bc44800-plan.json",
-  "github_last_verified_commit": "48294a6c721c211e2c08cabe08c3f51782f51e8f",
+  "github_last_verified_commit": "3d64c3978b551df6b365e8b484249fd1008f0c5d",
   "release_verified_assets": 37,
   "gpu_hours_by_host": {
-    "authorized_remote": 13.162504133055549,
+    "authorized_remote": 13.415049574722218,
     "local": 0.0
   }
 }

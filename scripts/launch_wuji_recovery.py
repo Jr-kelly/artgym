@@ -52,6 +52,8 @@ for f in out.glob('*/status.json'):
         try:os.kill(old['pid'],0)
         except ProcessLookupError:continue
         raise RuntimeError('Existing live wrapper '+str(f))
+compute=subprocess.check_output(['nvidia-smi','-i',str(s['gpu']),'--query-compute-apps=pid','--format=csv,noheader,nounits'],text=True)
+assert not compute.strip(), 'Target GPU has an existing compute process; do not interfere with other jobs'
 assert not (out/s['name']).exists()
 env=dict(os.environ,PYTHONPATH=str(pin)+':'+str(pin/'rl_games'),LD_LIBRARY_PATH='/tmp/wuji-recovery-runtime/lib',TORCH_EXTENSIONS_DIR='/tmp/wuji-recovery-extensions',WUJI_RECOVERY_FINAL_PHASE='1' if s['final_phase'] else '0')
 cmd=['/tmp/wuji-recovery-runtime/bin/python','-m','scripts.run_wuji_recovery_job','--name',s['name'],'--gpu',str(s['gpu']),'--timeout',str(s['timeout']),'--']+s['command']

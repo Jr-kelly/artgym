@@ -11,12 +11,14 @@ from pathlib import Path
 root=Path('/tmp/artgym-recovery-20260930');jobs=[];learning={}
 for p in (root/'runs/artmanip-recovery-20260930').glob('*/status.json'):
  s=json.loads(p.read_text());s['path']=str(p)
- try:os.kill(s['pid'],0);s['pid_exists']=True
- except ProcessLookupError:s['pid_exists']=False
+ try:
+  command=Path('/proc')/str(s['pid'])/'cmdline';parts=command.read_bytes().split(bytes([0]))
+  s['pid_exists']=b'scripts.run_wuji_recovery_job' in parts and s['name'].encode() in parts
+ except (FileNotFoundError,ProcessLookupError):s['pid_exists']=False
  jobs.append(s)
 for p in (root/'runs').glob('recovery-*/learning.jsonl'):
  lines=p.read_text().splitlines();learning[p.parent.name]=[json.loads(x) for x in lines[-2:]]
-print(json.dumps(dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),jobs=jobs,learning=learning,gpus=subprocess.check_output(['nvidia-smi','--query-gpu=index,utilization.gpu,memory.used','--format=csv,noheader'],text=True))))
+print(json.dumps(dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),jobs=jobs,learning=learning,gpus=subprocess.check_output(['nvidia-smi','--query-gpu=index,utilization.gpu,memory.used','--format=csv,noheader'],text=True),compute_processes=subprocess.check_output(['nvidia-smi','--query-compute-apps=gpu_uuid,pid,process_name,used_memory','--format=csv,noheader'],text=True))))
 '''
     result=json.loads(subprocess.check_output(SSH+['python3 -c '+shlex.quote(code)]))
     for job in result['jobs']:job['host']='authorized_remote'
