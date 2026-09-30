@@ -105,3 +105,10 @@ Final model selection is reproducible with `scripts.freeze_wuji_recovery`: suppl
 
 
 TheBC32000 complete local archive exceeded GitHub's2GiB single-asset limit. Published `recovery-bc32000-M.tar.gz` and `recovery-bc32000-E.tar.gz` restore into the same output root and together reconstruct the complete run. The oversized full archive remains in local `delivery/artmanip-recovery-20260930/local-only/`. `audit_wuji_recovery_bc --parent-pair runs/artmanip-recovery-20260930/bc-pair19200 --parent-epoch 2500` additionally checks the new segment's actual saved initial model, full Adam and CPU/CUDA/NumPy RNG against each parent, plus the first new update.
+
+
+## Training-state aggregation availability pilot
+
+`aggregation1-plan.json` fixes the prospective gate before collecting data. `prepare_wuji_recovery_aggregation initials` selects24 fitting and8 heldout initial states per source from the existing BC training split, preserving original whole-trajectory separation. `run_wuji_recovery_aggregation_collection` runs behavior and scripted early-handover episodes for2/5 seconds. Each responsible expert keeps its own normalizer and recurrent state from the same reset, receives actual previous behavior actions, and resets at actual done. A same-GPU full-history replay must reproduce labels within1e-5. CPU versus historical GPU replay did not meet1e-4; that discrepancy remains a diagnostic, not a passed check.
+
+`assess_wuji_recovery_aggregation` independently scores handover availability. It requires body retention in all cells, old-source strict retention, and improvement of source3S5 holding or strict success. No new-data fitting is allowed without this result. If allowed and budget permits, `prepare_wuji_recovery_aggregation mix` retains all96 old fitting histories and adds24 new histories or24 repeated old histories; both arms share40 heldout histories. `run_wuji_recovery_aggregation_pair` restores the same E5700 model/Adam/RNG and gives both arms6400 additional updates with batch120 and LR1e-5. This is a separate controlled extra-data pilot; M/E matched-budget claims end at32000.

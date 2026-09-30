@@ -1,5 +1,9 @@
 # Wuji ArtManip recovery：实验进行中
 
+截至 2026-09-30 16:02 UTC：原版风格 RL 第四段仍在运行，BC 已完成同预算 M/E 各新增32000更新和 E 单独延长至44800。完整开发计数、区间和阶段/刀身证据见 [DEVELOPMENT.md](DEVELOPMENT.md)，独立64初态复核见 [CONFIRMATION64.md](CONFIRMATION64.md)，趋势图在 [development-curves](development-curves)。最终128集尚未评估。
+
+64复核中 E4100→E5700 的源3 S2严格为46→46/64，S5为28→29/64；32样本所见的S5退步没有复现。额外离线拟合尚未明显改善严格保持，已预登记训练状态采集、真实历史专家标签重放和专家接管可用性检查，见 `aggregation1-plan.json`。只有检查通过才执行聚合/旧数据重放同起点对照；接管诊断不计作统一策略成功。
+
 目标是同一teacher权重在固定仿真刀0/1/2/3邻域完成伸缩保持。新开发评估发现旧统一BC100已能按本轮F协议在四来源完成至少一轮，但严格保持仍失败；它仍不是已验证的稳定部署策略。没有student或真机实验。
 
 审计见 [UPSTREAM_AUDIT.md](UPSTREAM_AUDIT.md)，预算和进程见 [STATE.json](STATE.json)，完整要求见 [GOAL.md](GOAL.md)。新分支从 `c1c489f` 开始，上游固定 `63b94fb`；原工作区训练与用户修改保留。

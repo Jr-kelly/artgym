@@ -7,15 +7,15 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T15:59:01.624692+00:00",
-  "event": "aggregation_preflight_and_plan_registered",
+  "utc": "2026-09-30T16:02:17.302592+00:00",
+  "event": "development_tables_and_incremental_archive_verified",
   "evidence": [
-    "research/artmanip-recovery-20260930/aggregation1-plan.json",
-    "research/artmanip-recovery-20260930/aggregation-expert-cpu-replay.json"
+    "research/artmanip-recovery-20260930/DEVELOPMENT.md",
+    "research/artmanip-recovery-20260930/CONFIRMATION64.md",
+    "research/artmanip-recovery-20260930/bc44800-development-archive-restore.json"
   ],
-  "cpu_replay": "Initial missing-library attempt failed; corrected CPU/GPU replay failed strict1e-4 (max .00139/.00399). Recorded as numerical diagnostic only. Same-device full-history replay is required before labels are accepted.",
-  "confirmation": "64 independent rescoring passed;32 source3S5 regression not reproduced, closed-loop plateau persists",
-  "next": "Run bounded collection from committed code, inspect full-history replay and handover. Fit only if gate passes and fresh budget permits. RL4000/development remain mandatory; final remains unopened."
+  "archive_sha256": "48e9d31ef4ef51f08f2a3080f07bd413ffca1b00dceb6ba32330b0e3d84f6158",
+  "next": "Monitor originalRL4000 and training-state expert availability pilot; no final freeze until development decisions complete."
 }
 ```
 
@@ -65,14 +65,41 @@
       "pid": 51150,
       "status": "running",
       "child_pid": 51151,
-      "heartbeat": "2026-09-30T15:57:17.975760+00:00",
-      "elapsed_seconds": 5513.255469768992,
+      "heartbeat": "2026-09-30T16:01:18.965831+00:00",
+      "elapsed_seconds": 5754.242221897992,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg4-job/status.json",
+      "pid_exists": true,
+      "host": "authorized_remote"
+    },
+    {
+      "source_sha256": "998b1c057e21c029884c58abe3d29ca976f05682d6a54b5092ccd4f3bef4d76e",
+      "name": "aggregation1-collection-job",
+      "gpu": 1,
+      "final_phase": false,
+      "command": [
+        "/tmp/wuji-recovery-runtime/bin/python",
+        "-m",
+        "scripts.run_wuji_recovery_aggregation_collection",
+        "--name",
+        "aggregation1-collection",
+        "--checkpoint",
+        "runs/artmanip-recovery-20260930/bc-executed44800/E/epoch_005700.pth",
+        "--states",
+        "research/artmanip-recovery-20260930/data/aggregation1-states.npy"
+      ],
+      "timeout_seconds": 1800,
+      "started": "2026-09-30T15:59:16.067778+00:00",
+      "pid": 59421,
+      "status": "running",
+      "child_pid": 59422,
+      "heartbeat": "2026-09-30T16:01:16.660800+00:00",
+      "elapsed_seconds": 120.47107506000611,
+      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/aggregation1-collection-job/status.json",
       "pid_exists": true,
       "host": "authorized_remote"
     }
   ],
-  "gpu_hours": 17.149350046111106,
+  "gpu_hours": 17.256473073055552,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -80,15 +107,15 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "GPU0 originalsegment4 continues to4000, then development3500/4000. GPU1 E5700 development PID57178 started15:34UTC. E44800 training completed, actual parent/Adam/RNG and archive restore passed. After development, independently score and diagnose state shift; choose further learning from phase/body/fit and actual budget.",
   "last_event": {
-    "utc": "2026-09-30T15:59:01.624692+00:00",
-    "event": "aggregation_preflight_and_plan_registered",
+    "utc": "2026-09-30T16:02:17.302592+00:00",
+    "event": "development_tables_and_incremental_archive_verified",
     "evidence": [
-      "research/artmanip-recovery-20260930/aggregation1-plan.json",
-      "research/artmanip-recovery-20260930/aggregation-expert-cpu-replay.json"
+      "research/artmanip-recovery-20260930/DEVELOPMENT.md",
+      "research/artmanip-recovery-20260930/CONFIRMATION64.md",
+      "research/artmanip-recovery-20260930/bc44800-development-archive-restore.json"
     ],
-    "cpu_replay": "Initial missing-library attempt failed; corrected CPU/GPU replay failed strict1e-4 (max .00139/.00399). Recorded as numerical diagnostic only. Same-device full-history replay is required before labels are accepted.",
-    "confirmation": "64 independent rescoring passed;32 source3S5 regression not reproduced, closed-loop plateau persists",
-    "next": "Run bounded collection from committed code, inspect full-history replay and handover. Fit only if gate passes and fresh budget permits. RL4000/development remain mandatory; final remains unopened."
+    "archive_sha256": "48e9d31ef4ef51f08f2a3080f07bd413ffca1b00dceb6ba32330b0e3d84f6158",
+    "next": "Monitor originalRL4000 and training-state expert availability pilot; no final freeze until development decisions complete."
   },
   "monitor": {
     "pid": 1192,
@@ -139,7 +166,7 @@
     "bc44800-confirmation64-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T15:57:45.571223+00:00",
+  "last_resource_check_utc": "2026-09-30T16:01:43.640949+00:00",
   "next_actions": [
     "GPU0: original segment4 wrapper51150, source e80d5f4, started14:25UTC. At14:31UTC epoch3040. CP3000→3001 actual model/Adam restore and effective configuration passed. Finish4000, then development3500+4000. Decide further learning from joint phase/body/training trends and remaining budget; minimum4000 is not a convergence claim.",
     "Matched repaired-pool original control completed2000 and independently scored; see matched-control-comparison.json. Holding improves old-source body but source3 late phases worsen and source2F collapses; retain early candidates, no blind hold2000 continuation.",
@@ -156,7 +183,7 @@
   "github_last_verified_commit": "3a720e7d5f7cb44591c1233d104d3e054c09eef8",
   "release_verified_assets": 44,
   "gpu_hours_by_host": {
-    "authorized_remote": 17.149350046111106,
+    "authorized_remote": 17.256473073055552,
     "local": 0.0
   },
   "bc_executed_endpoint": {
