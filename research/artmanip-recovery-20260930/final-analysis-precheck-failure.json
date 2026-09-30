@@ -1,0 +1,11 @@
+{
+  "utc": "2026-09-30T19:33:55.581475+00:00",
+  "operation": "complete_wuji_recovery_final_analysis initial status pull",
+  "error": "System ssh inherited Conda LD_LIBRARY_PATH; OpenSSL built30000020 vs loaded30600040; subprocess exit255",
+  "scoring_started": false,
+  "final_rollout_repeated": false,
+  "partial_analysis_exists": false,
+  "helper_sha256": "8c5492dab578b45c41c6c4e082d52e2b49aa0d55c406b5eb0c852e39e516b1ab",
+  "fix": "Run resource/ssh orchestration under system Python with LD_LIBRARY_PATH removed; retain runtime libraries for scientific scoring",
+  "retry": 1
+}

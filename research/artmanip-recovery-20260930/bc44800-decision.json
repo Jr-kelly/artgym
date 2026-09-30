@@ -1,0 +1,53 @@
+{
+  "created_utc": "2026-09-30T15:44:33.021732+00:00",
+  "evidence": [
+    "bc44800-analysis/report.json",
+    "bc44800-state-shift.json",
+    "bc44800-fit-trend.json"
+  ],
+  "observations": {
+    "E5700_S2": [
+      32,
+      32,
+      32,
+      25
+    ],
+    "E5700_S5": [
+      32,
+      32,
+      32,
+      10
+    ],
+    "S_body": "32/32 all cells",
+    "F_cycles": "32/32 all sources",
+    "source3_S5_phase_hold": [
+      0.7734375,
+      0.71875
+    ],
+    "source3_S5_q_outlier_fraction": [
+      0.3017704290499229,
+      0.35239583333333335
+    ],
+    "offline_full_segment_target_improvement": 0.07058869500565823,
+    "offline_late5400_to5700_improvement": 0.006986770992520319
+  },
+  "interpretation": "S2 strict gain2/32 is a small-count change, while S5 holding and coverage regress. Overall fit improved7percent but last300epochs changed<1percent. This supports a state-distribution hypothesis, not a whole-branch convergence claim.",
+  "confirmation": {
+    "name": "bc44800-confirmation64",
+    "states": "research/artmanip-recovery-20260930/data/promotion-all.npy",
+    "states_sha256": "74f2e0bd8e6cdecf89fe039cb7defbdb3c3a0d420048a1a4021a9319b9e93840",
+    "models": [
+      "E4100",
+      "E5700"
+    ],
+    "protocols": [
+      "S2",
+      "S5",
+      "F"
+    ],
+    "purpose": "Independent development confirmation of checkpoint trends, not final cohort or student promotion. Retain existing32-based selection order and report64 separately."
+  },
+  "conditional_next": "Prepare one small recurrent-history-consistent expert aggregation pilot. Collect only training initial states; experts carry from same reset along actual unified actions; validate labels/recovery. Execute training only after64 evidence reviewed and label availability checked. At most3 rounds and normal20GPUh ceiling.",
+  "budget": "64 two-model wrapper1800s; overall reserve4GPUh unchanged. Estimated collection+label-check+one training/evaluation pilot<=0.7GPUh; exact launcher rechecks and bounded commands required.",
+  "untriggered": "NoS64 promotion/student or second seed; no final freeze yet."
+}

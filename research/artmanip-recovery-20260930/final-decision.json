@@ -1,0 +1,38 @@
+{
+  "utc": "2026-09-30T19:37:31.131868+00:00",
+  "final_integrity_passed": true,
+  "models": 18,
+  "physical_cells": 54,
+  "source_cells": 216,
+  "episodes": 27648,
+  "primary": "Eagg6100",
+  "primary_sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+  "primary_S_passed": true,
+  "primary_F_passed": true,
+  "second_seed": "seed2Eagg6100",
+  "second_seed_sha256": "054a32298af88e287cbaa6ef057389489996f3cc102546db86632dad4c3e64e9",
+  "second_seed_final_S_passed": true,
+  "second_seed_promotion64_S_passed": false,
+  "aggregate_fixed_endpoint_S_passed": false,
+  "aggregate_fixed_endpoint_failed_cells": [
+    {
+      "source": 3,
+      "protocol": "S5",
+      "n": 128,
+      "margins": {
+        "strict_absolute": 0.035937499999999956,
+        "body_absolute": 0.034375000000000044,
+        "strict_relative": -0.017187499999999994,
+        "body_relative": 0.0221875
+      },
+      "passed": false,
+      "within_one_episode": false
+    }
+  ],
+  "freeze_sha256": "881e2989c91105e4f6fd8b6b0bfa13360cab3e9cccdad5d11e0f190375d73385",
+  "selection_unchanged": true,
+  "RL_conclusion": "Budget-limited327680000 interactions; F learned, strict body/holding not solved, not converged.",
+  "student": "Not trained; prioritised full teacher replication and frozen verification.",
+  "only_next_priority": "Next round: distill this single frozen privileged teacher into a student using verified available observations/history, freeze actor, and evaluate on newly preregistered states. No more training or final-set tuning in this round.",
+  "scope": "Fixed simulated knife and trained grasp neighborhoods only; no unseen-grasp, shape, acquisition or hardware claim."
+}

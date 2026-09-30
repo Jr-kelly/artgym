@@ -1,0 +1,72 @@
+{
+  "utc": "2026-09-30T17:24:28.110861+00:00",
+  "passed": true,
+  "known_models": {
+    "Eagg6100": {
+      "path": "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
+      "sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8"
+    },
+    "Ereplay6500": {
+      "path": "runs/artmanip-recovery-20260930/aggregation1-pair6400/replay/E/epoch_006500.pth",
+      "sha256": "778ce694e31f3259a768b3f8d5ad3eae33bf1319fc6f29c8e8a01c31a70c238e"
+    },
+    "E500": {
+      "path": "runs/artmanip-recovery-20260930/bc-pair3200/E/epoch_000500.pth",
+      "sha256": "f276ea19f729594da2ea70b67dd0b5dd4518738cebcfa2c6d8cd2253f9c86377"
+    },
+    "M300": {
+      "path": "runs/artmanip-recovery-20260930/bc-pair1600/M/epoch_000300.pth",
+      "sha256": "1b19665b6ccc15a147808f583edf0d979b1ff86e20ec7ffed6eabb5ab6e57e83"
+    },
+    "rl3000": {
+      "path": "runs/recovery-rl-seg3/checkpoints/epoch_003000.pth",
+      "sha256": "2207992032d92b6d2ecc72c7ecc971aa5a622978872fede31ff90fc928198b39"
+    },
+    "rlhold1500": {
+      "path": "runs/recovery-rl-clockhold-clean/checkpoints/epoch_001500.pth",
+      "sha256": "ec5bd14cb8a12846ab243bb9e3af9375a8d15dd06252cf908a63a85e222dcd70"
+    },
+    "rlclean2000": {
+      "path": "runs/recovery-rl-reference-clean/checkpoints/epoch_002000.pth",
+      "sha256": "962674126ff194e7070c7e6b27a917458c31481f96fef469aa655fd8aa6d523a"
+    },
+    "M4100": {
+      "path": "runs/artmanip-recovery-20260930/bc-pair32000/M/epoch_004100.pth",
+      "sha256": "ca65222b793f7a1dd5669652ace4413b213e018ef26b77eb78c80696940ca25a"
+    },
+    "E5700": {
+      "path": "runs/artmanip-recovery-20260930/bc-executed44800/E/epoch_005700.pth",
+      "sha256": "2f85fa6b77b9c5358d519dcd816b285efcf33900498400dd54a8ae22bba1fac3"
+    },
+    "rl4000": {
+      "path": "runs/recovery-rl-seg4/checkpoints/epoch_004000.pth",
+      "sha256": "0641cd6c6404d709d1c9d3b0547090465415fa60b9cf1cb853b11d8fcf72f8ac"
+    },
+    "rlhold2000": {
+      "path": "runs/recovery-rl-clockhold-clean/checkpoints/epoch_002000.pth",
+      "sha256": "d2d596b4973bcf47d86dda0c512b453296934c1534d8a9887f0d02c9b2e186ae"
+    },
+    "Eagg6500": {
+      "path": "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006500.pth",
+      "sha256": "d748794bc68a8648e2696f759a1be190e2f6b08b90eacdd3b9ae8a2728c3bf5b"
+    },
+    "bc100": {
+      "path": "runs/unified-policy-20260930/bc-unified-historical-s3001-seg1/epoch_000100.pth",
+      "sha256": "3801eca359022e729510fef28f00d43b35af8561755f20a5f4be0206b6a07ab8"
+    },
+    "rl1000": {
+      "path": "runs/recovery-rl-seg1-retry1/checkpoints/epoch_001000.pth",
+      "sha256": "f0fa3cd807e6b493bfbbea4a4064ccad3c09929ed97cb147b96f4017d692e2db"
+    },
+    "historical": {
+      "path": "runs/unified-policy-20260930/experts/historical.pth",
+      "sha256": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac"
+    },
+    "source3": {
+      "path": "runs/unified-policy-20260930/experts/source3.pth",
+      "sha256": "fae13402080f3fac1665d61c69cdc078302b15ea75db8b14c85e500073d748cd"
+    }
+  },
+  "all_plan_model_names_consistent": true,
+  "scope": "CPU preparation for eventual frozen selection. No finalcohort opened or modelselectedfromfinal; secondseedstillpending."
+}

@@ -1,25 +1,24 @@
-# 本轮交付核验表（实验进行中）
+# 本轮交付核验（最终统计完成，公开分发核验待完成）
 
-此表记录证据范围与未完成项；不是完成声明。最终交付时必须以当时实际文件、进程和远端结果重新核验。
+此表以当前冻结统计和实际恢复证据为准；归档中的早期同名表保留其当时状态，不作为最终结论。
 
-|要求|目前可查证据|状态与缺口|
-|---|---|---|
-|完整目标、独立分支、起始及上游SHA|GOAL.md、STATE.json、UPSTREAM_AUDIT.md、Git提交|已保存；原工作区只更新续接文档，实验位于独立worktree|
-|论文／上游／旧Wuji／新基线四列差异|UPSTREAM_AUDIT.md、upstream、各run的resolved.yaml和startup.json|已完成初始审计；后续方法变更要补充|
-|动作映射、静态初态、专家与序列预检|reference-precheck、initial-analysis、BC数据审计和父权重归档|已有实际证据；不是目标能力验证|
-|足量直接多抓姿RL|b-plan.json、learning.jsonl、rl250/500-integrity.json|已完成第二段2000/1.6384亿交互/72000Adam并实际恢复；第三段进行中，3000/4000待完成|
-|同起点M/E及最低3200预算|c-plan.json、bc800/1600/3200/6400-fit与integrity|已训练新增19200且独立复算；E有效误差及源3 S2继续改善，不能称两臂平台|
-|完整趋势及固定末点|每段训练日志、逐来源F/S分析、checkpoint归档|持续积累；最终固定预算末点与选中点均须列明|
-|有证据的后续实验|DECISIONS.jsonl、bc800-state-shift.json、rl250-analysis|RL1000四来源F均32/32而严格body全0，已触发同起点固定时钟保持比较；修复池保持分支2000已完成并独立复算，出现源0改善/源2伸出退化；同修复池原目标对照尚待执行；无DAgger|
-|同权重四来源推理、独立F/S|evaluate_wuji_recovery_batch、原始trace与独立summarize|开发评估已做；来源只用于采样/标签/统计。F存在循环且漂移，不等于S|
-|新最终每来源128只开一次|data/manifest.json中final哈希|初态已生成；尚未传至远端或评估。先冻结模型/协议/选点，再开最终集|
-|同批负责专家、计数、Wilson区间、构型簇|initial-analysis、各阶段report/trials/clusters|开发已具备；最终集仍待统一候选和专家同批比较|
-|S64后第二种子，之后才student|gate_wuji_recovery、各stage-gates|尚未过S；第二种子/student未触发。不得称已完成部署观测验证|
-|四来源同权重并排视频及代表失败|video-plan.json、package_wuji_recovery_video.py|脚本与固定开发rows已保存；实际渲染、逐例标签、失败例和视频检查未完成|
-|模型/Adam/RNG/完整数据可恢复|阶段归档、restore receipts、weights-index.json|BC19200、RL2000和holding2000已完整归档并CPU实际恢复；最近索引96权重/32归档，随新增归档刷新|
-|GitHub分支与独立公开Release|分支推送记录、draft-assets-verified.json|增量分支/草稿资产已上传；正式tag、公开下载SHA与下载后的恢复待最终交付|
-|16h/24GPUh/max2与收尾预留|STATE.json、jobs命令、resources/latest.json、launcher预算检查|累计账实时刷新；扩展对照后已提高至2h/4GPUh收尾预留。超时余量按现有活动作业计入|
-|资源利用率与最终清理|machine-gpu-history、report_wuji_recovery_resources|12:09UTC最新完整4h整机38.35%/无缺口/超过26%。结束时仍需重新核实仅本轮训练/监控退出，不能只凭历史PID|
-|唯一推荐继续点与明确边界|HANDOFF.md、README.md|最终冻结后重写；当前仅固定仿真刀与已训练抓姿邻域、特权teacher，无真机/取刀/新形状声明|
+|要求|结果与证据|
+|---|---|
+|目标、独立分支与资源核查|GOAL完整保存；起始c1c489f、上游63b94fb；独立worktree，未动原训练或网站|
+|论文/上游/旧Wuji/实际新基线|UPSTREAM_AUDIT及每run解析配置、startup、单步映射和静态/专家/序列实测|
+|足量直接联合RL|四段327680000交互/144000Adam；固定末点与开发选点均入最终。F成立、S失败，预算受限而非收敛|
+|同起点M/E|真实BC100 Adam/RNG恢复；两臂新增32000更新，完整曲线；E单独扩展44800；不按短期严格成功停训|
+|按证据触发后续|同父点/同修复池RL保持对照；一轮实际历史数据聚合与同预算旧数据重放对照；专家标签可用性与RNN重放核验|
+|第二种子|完整E44800+本种子采集+聚合3200；64例源1相对刀身失败保留；固定128例最终S通过|
+|最终冻结与唯一评估|18权重，54物理组合，216来源格，27648回合；final-freeze和final-integrity校验通过，无最终调参或重选|
+|独立复算与原始证据|全部18模型归档实际恢复；S逐回合评分与F状态机独立复算一致，CSV/构型簇/Wilson区间完整|
+|同一策略0/1/2/3|主候选Eagg6100及固定第二种子最终S全部门槛通过；primary权重不按来源切换|
+|选点与末点如实保留|Eagg6100主候选通过；同方法固定6500末点源3S5相对专家门槛失败；FINAL.md列全部模型|
+|视频与代表失败|三段固定四来源同权重600帧/20秒视频独立评分，均保留源3严格失败、刀身通过；另保留原H200失败轨迹图|
+|全部权重内容恢复|219归档路径、211不同文件哈希，另11内容相同别名，覆盖230本地路径；82证据归档与3视频索引，另有无新增权重的最终元数据归档|
+|预算|22.4177注册GPU小时+.05余量=22.4677<24；最大2并发；16小时截止22:42:33UTC|
+|利用率与清理|远端末4h整机30.51%达到26%，40%目标未达；本地395秒53.23%，无完整4h声明；19:39UTC所有自建GPU与监控退出，保留ToDesk|
+|GitHub分发|分支增量提交；86资产最后上传中。正式公开、匿名下载/实际恢复和最终branch SHA将在发布后单独记录|
+|teacher/student及下一步|teacher固定仿真刀邻域严格能力已验证；未训练student。下一轮只优先核查可用观测后的统一teacher→student蒸馏，使用新登记验证集|
 
-最终审核必须确认每一行状态。能力失败可以如实交付，但不能以文档、归档或一次短评估替代尚有依据且预算充足的学习分支。
+[README.md](README.md) 是最终科学报告；[final-decision.json](final-decision.json) 固定结论；[weights-coverage-final.json](weights-coverage-final.json) 与恢复回执支持资产完整性。最终公开分发证据在发布后生成，不以草稿服务器哈希代替公网下载证明。

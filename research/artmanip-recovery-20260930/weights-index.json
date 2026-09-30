@@ -103,7 +103,9 @@
         "bc_torch_rng"
       ],
       "archives": [
-        "delivery/artmanip-recovery-20260930/recovery-aggregation1-pair6400.tar.gz"
+        "delivery/artmanip-recovery-20260930/recovery-aggregation1-pair6400.tar.gz",
+        "delivery/artmanip-recovery-20260930/recovery-final-weights.tar.gz",
+        "delivery/artmanip-recovery-20260930/recovery-primary-candidate-Eagg6100.tar.gz"
       ]
     },
     {
@@ -187,7 +189,8 @@
         "bc_torch_rng"
       ],
       "archives": [
-        "delivery/artmanip-recovery-20260930/recovery-aggregation1-pair6400.tar.gz"
+        "delivery/artmanip-recovery-20260930/recovery-aggregation1-pair6400.tar.gz",
+        "delivery/artmanip-recovery-20260930/recovery-final-weights.tar.gz"
       ]
     },
     {
@@ -376,7 +379,8 @@
         "bc_torch_rng"
       ],
       "archives": [
-        "delivery/artmanip-recovery-20260930/recovery-aggregation1-pair6400.tar.gz"
+        "delivery/artmanip-recovery-20260930/recovery-aggregation1-pair6400.tar.gz",
+        "delivery/artmanip-recovery-20260930/recovery-final-weights.tar.gz"
       ]
     },
     {
@@ -838,7 +842,8 @@
         "bc_torch_rng"
       ],
       "archives": [
-        "delivery/artmanip-recovery-20260930/recovery-bc-added1600.tar.gz"
+        "delivery/artmanip-recovery-20260930/recovery-bc-added1600.tar.gz",
+        "delivery/artmanip-recovery-20260930/recovery-final-weights.tar.gz"
       ]
     },
     {
@@ -1279,7 +1284,8 @@
         "bc_torch_rng"
       ],
       "archives": [
-        "delivery/artmanip-recovery-20260930/recovery-bc-added3200.tar.gz"
+        "delivery/artmanip-recovery-20260930/recovery-bc-added3200.tar.gz",
+        "delivery/artmanip-recovery-20260930/recovery-final-weights.tar.gz"
       ]
     },
     {
@@ -1993,7 +1999,8 @@
         "bc_torch_rng"
       ],
       "archives": [
-        "delivery/artmanip-recovery-20260930/recovery-bc-executed44800.tar.gz"
+        "delivery/artmanip-recovery-20260930/recovery-bc-executed44800.tar.gz",
+        "delivery/artmanip-recovery-20260930/recovery-final-weights.tar.gz"
       ]
     },
     {
@@ -2350,7 +2357,8 @@
         "bc_torch_rng"
       ],
       "archives": [
-        "delivery/artmanip-recovery-20260930/recovery-bc32000-E.tar.gz"
+        "delivery/artmanip-recovery-20260930/recovery-bc32000-E.tar.gz",
+        "delivery/artmanip-recovery-20260930/recovery-final-weights.tar.gz"
       ]
     },
     {
@@ -2707,7 +2715,8 @@
         "bc_torch_rng"
       ],
       "archives": [
-        "delivery/artmanip-recovery-20260930/recovery-bc32000-M.tar.gz"
+        "delivery/artmanip-recovery-20260930/recovery-bc32000-M.tar.gz",
+        "delivery/artmanip-recovery-20260930/recovery-final-weights.tar.gz"
       ]
     },
     {
@@ -2728,7 +2737,8 @@
         "bc_torch_rng"
       ],
       "archives": [
-        "delivery/artmanip-recovery-20260930/recovery-expert-parents.tar.gz"
+        "delivery/artmanip-recovery-20260930/recovery-expert-parents.tar.gz",
+        "delivery/artmanip-recovery-20260930/recovery-final-weights.tar.gz"
       ]
     },
     {
@@ -2745,7 +2755,8 @@
       "has_normalizer": true,
       "rng_keys": [],
       "archives": [
-        "delivery/artmanip-recovery-20260930/recovery-expert-parents.tar.gz"
+        "delivery/artmanip-recovery-20260930/recovery-expert-parents.tar.gz",
+        "delivery/artmanip-recovery-20260930/recovery-final-weights.tar.gz"
       ]
     },
     {
@@ -2762,7 +2773,223 @@
       "has_normalizer": true,
       "rng_keys": [],
       "archives": [
-        "delivery/artmanip-recovery-20260930/recovery-expert-parents.tar.gz"
+        "delivery/artmanip-recovery-20260930/recovery-expert-parents.tar.gz",
+        "delivery/artmanip-recovery-20260930/recovery-final-weights.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/bc-seed2-aggregate3200/E/epoch_006100.pth",
+      "sha256": "054a32298af88e287cbaa6ef057389489996f3cc102546db86632dad4c3e64e9",
+      "size": 74549846,
+      "kind": "offline_BC",
+      "epoch": 6100,
+      "optimizer_updates": 48800,
+      "adam_steps": [
+        48800
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-final-weights.tar.gz",
+        "delivery/artmanip-recovery-20260930/recovery-seed2-aggregate3200.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-clockhold-clean/checkpoints/epoch_001500.pth",
+      "sha256": "ec5bd14cb8a12846ab243bb9e3af9375a8d15dd06252cf908a63a85e222dcd70",
+      "size": 89425536,
+      "kind": "RL_or_parent_expert",
+      "epoch": 1500,
+      "optimizer_updates": 54000,
+      "adam_steps": [
+        54000
+      ],
+      "environment_interactions": 122880000,
+      "has_normalizer": true,
+      "rng_keys": [
+        "cuda",
+        "numpy",
+        "python",
+        "torch"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-final-weights.tar.gz",
+        "delivery/artmanip-recovery-20260930/recovery-rl-clockhold-clean2000.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-clockhold-clean/checkpoints/epoch_002000.pth",
+      "sha256": "d2d596b4973bcf47d86dda0c512b453296934c1534d8a9887f0d02c9b2e186ae",
+      "size": 89425600,
+      "kind": "RL_or_parent_expert",
+      "epoch": 2000,
+      "optimizer_updates": 72000,
+      "adam_steps": [
+        72000
+      ],
+      "environment_interactions": 163840000,
+      "has_normalizer": true,
+      "rng_keys": [
+        "cuda",
+        "numpy",
+        "python",
+        "torch"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-final-weights.tar.gz",
+        "delivery/artmanip-recovery-20260930/recovery-rl-clockhold-clean2000.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-reference-clean/checkpoints/epoch_002000.pth",
+      "sha256": "962674126ff194e7070c7e6b27a917458c31481f96fef469aa655fd8aa6d523a",
+      "size": 89425600,
+      "kind": "RL_or_parent_expert",
+      "epoch": 2000,
+      "optimizer_updates": 72000,
+      "adam_steps": [
+        72000
+      ],
+      "environment_interactions": 163840000,
+      "has_normalizer": true,
+      "rng_keys": [
+        "cuda",
+        "numpy",
+        "python",
+        "torch"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-final-weights.tar.gz",
+        "delivery/artmanip-recovery-20260930/recovery-reference-clean2000.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-seg1-retry1/checkpoints/epoch_001000.pth",
+      "sha256": "f0fa3cd807e6b493bfbbea4a4064ccad3c09929ed97cb147b96f4017d692e2db",
+      "size": 89425536,
+      "kind": "RL_or_parent_expert",
+      "epoch": 1000,
+      "optimizer_updates": 36000,
+      "adam_steps": [
+        36000
+      ],
+      "environment_interactions": 81920000,
+      "has_normalizer": true,
+      "rng_keys": [
+        "cuda",
+        "numpy",
+        "python",
+        "torch"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-final-weights.tar.gz",
+        "delivery/artmanip-recovery-20260930/recovery-reference-segment1.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-seg3/checkpoints/epoch_003000.pth",
+      "sha256": "2207992032d92b6d2ecc72c7ecc971aa5a622978872fede31ff90fc928198b39",
+      "size": 89425536,
+      "kind": "RL_or_parent_expert",
+      "epoch": 3000,
+      "optimizer_updates": 108000,
+      "adam_steps": [
+        108000
+      ],
+      "environment_interactions": 245760000,
+      "has_normalizer": true,
+      "rng_keys": [
+        "cuda",
+        "numpy",
+        "python",
+        "torch"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-final-weights.tar.gz",
+        "delivery/artmanip-recovery-20260930/recovery-reference-segment3.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-seg4/checkpoints/epoch_004000.pth",
+      "sha256": "0641cd6c6404d709d1c9d3b0547090465415fa60b9cf1cb853b11d8fcf72f8ac",
+      "size": 89425600,
+      "kind": "RL_or_parent_expert",
+      "epoch": 4000,
+      "optimizer_updates": 144000,
+      "adam_steps": [
+        144000
+      ],
+      "environment_interactions": 327680000,
+      "has_normalizer": true,
+      "rng_keys": [
+        "cuda",
+        "numpy",
+        "python",
+        "torch"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-final-weights.tar.gz",
+        "delivery/artmanip-recovery-20260930/recovery-reference-segment4.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/recovery-rl-pilot20-retry2/evaluation/inbox/epoch_000020.pth",
+      "sha256": "a0dc6ae8efa539d839c0fd98fdb24b7050efd1902c1723b8c312dbf4f3c2eb0d",
+      "size": 14843846,
+      "kind": "RL_or_parent_expert",
+      "epoch": 20,
+      "optimizer_updates": null,
+      "adam_steps": [],
+      "environment_interactions": 1638400,
+      "has_normalizer": true,
+      "rng_keys": [],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-historical-and-pilot-extra-weights.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/unified-policy-20260930/bc-unified-historical-s3001-seg1/epoch_000000.pth",
+      "sha256": "854852e9d6cf2a4465174cdb469d2eb619406aca42d724446baee82e2f5b1b73",
+      "size": 59737362,
+      "kind": "offline_BC",
+      "epoch": 0,
+      "optimizer_updates": 0,
+      "adam_steps": [],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-historical-and-pilot-extra-weights.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/unified-policy-20260930/bc-unified-historical-s3001-seg1/epoch_000050.pth",
+      "sha256": "cf6bb4f07c445d38fcab0183bb7c3dde48fe8a7b9b80aa24f6d89e9924239565",
+      "size": 74549526,
+      "kind": "offline_BC",
+      "epoch": 50,
+      "optimizer_updates": 400,
+      "adam_steps": [
+        400
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-historical-and-pilot-extra-weights.tar.gz"
       ]
     },
     {
@@ -2866,28 +3093,6 @@
         63000
       ],
       "environment_interactions": 143360000,
-      "has_normalizer": true,
-      "rng_keys": [
-        "cuda",
-        "numpy",
-        "python",
-        "torch"
-      ],
-      "archives": [
-        "delivery/artmanip-recovery-20260930/recovery-reference-clean2000.tar.gz"
-      ]
-    },
-    {
-      "path": "runs/recovery-rl-reference-clean/checkpoints/epoch_002000.pth",
-      "sha256": "962674126ff194e7070c7e6b27a917458c31481f96fef469aa655fd8aa6d523a",
-      "size": 89425600,
-      "kind": "RL_or_parent_expert",
-      "epoch": 2000,
-      "optimizer_updates": 72000,
-      "adam_steps": [
-        72000
-      ],
-      "environment_interactions": 163840000,
       "has_normalizer": true,
       "rng_keys": [
         "cuda",
@@ -3112,28 +3317,6 @@
       "archives": [
         "delivery/artmanip-recovery-20260930/recovery-reference-segment1.tar.gz",
         "delivery/artmanip-recovery-20260930/recovery-reference750.tar.gz"
-      ]
-    },
-    {
-      "path": "runs/recovery-rl-seg1-retry1/checkpoints/epoch_001000.pth",
-      "sha256": "f0fa3cd807e6b493bfbbea4a4064ccad3c09929ed97cb147b96f4017d692e2db",
-      "size": 89425536,
-      "kind": "RL_or_parent_expert",
-      "epoch": 1000,
-      "optimizer_updates": 36000,
-      "adam_steps": [
-        36000
-      ],
-      "environment_interactions": 81920000,
-      "has_normalizer": true,
-      "rng_keys": [
-        "cuda",
-        "numpy",
-        "python",
-        "torch"
-      ],
-      "archives": [
-        "delivery/artmanip-recovery-20260930/recovery-reference-segment1.tar.gz"
       ]
     },
     {
@@ -3499,28 +3682,6 @@
       ]
     },
     {
-      "path": "runs/recovery-rl-seg3/checkpoints/epoch_003000.pth",
-      "sha256": "2207992032d92b6d2ecc72c7ecc971aa5a622978872fede31ff90fc928198b39",
-      "size": 89425536,
-      "kind": "RL_or_parent_expert",
-      "epoch": 3000,
-      "optimizer_updates": 108000,
-      "adam_steps": [
-        108000
-      ],
-      "environment_interactions": 245760000,
-      "has_normalizer": true,
-      "rng_keys": [
-        "cuda",
-        "numpy",
-        "python",
-        "torch"
-      ],
-      "archives": [
-        "delivery/artmanip-recovery-20260930/recovery-reference-segment3.tar.gz"
-      ]
-    },
-    {
       "path": "runs/recovery-rl-seg3/evaluation/inbox/epoch_002250.pth",
       "sha256": "e32a7df6bb12b5e55481d2bf07b0c00575daeba54bf9fc81b909bb1ed6f198ff",
       "size": 14843846,
@@ -3691,28 +3852,6 @@
       ]
     },
     {
-      "path": "runs/recovery-rl-seg4/checkpoints/epoch_004000.pth",
-      "sha256": "0641cd6c6404d709d1c9d3b0547090465415fa60b9cf1cb853b11d8fcf72f8ac",
-      "size": 89425600,
-      "kind": "RL_or_parent_expert",
-      "epoch": 4000,
-      "optimizer_updates": 144000,
-      "adam_steps": [
-        144000
-      ],
-      "environment_interactions": 327680000,
-      "has_normalizer": true,
-      "rng_keys": [
-        "cuda",
-        "numpy",
-        "python",
-        "torch"
-      ],
-      "archives": [
-        "delivery/artmanip-recovery-20260930/recovery-reference-segment4.tar.gz"
-      ]
-    },
-    {
       "path": "runs/recovery-rl-seg4/evaluation/inbox/epoch_003250.pth",
       "sha256": "d9ae96392be46dc6d284589574ac16bb7bec6825272440d261654cf7f7d0274c",
       "size": 14843846,
@@ -3817,28 +3956,6 @@
       ]
     },
     {
-      "path": "runs/recovery-rl-clockhold-clean/checkpoints/epoch_001500.pth",
-      "sha256": "ec5bd14cb8a12846ab243bb9e3af9375a8d15dd06252cf908a63a85e222dcd70",
-      "size": 89425536,
-      "kind": "RL_or_parent_expert",
-      "epoch": 1500,
-      "optimizer_updates": 54000,
-      "adam_steps": [
-        54000
-      ],
-      "environment_interactions": 122880000,
-      "has_normalizer": true,
-      "rng_keys": [
-        "cuda",
-        "numpy",
-        "python",
-        "torch"
-      ],
-      "archives": [
-        "delivery/artmanip-recovery-20260930/recovery-rl-clockhold-clean2000.tar.gz"
-      ]
-    },
-    {
       "path": "runs/recovery-rl-clockhold-clean/checkpoints/epoch_001750.pth",
       "sha256": "8bc9f46474907cb6b542ff74492f84d3ca11420f8d056a8da68dbc1a93fd3ec0",
       "size": 89425600,
@@ -3849,28 +3966,6 @@
         63000
       ],
       "environment_interactions": 143360000,
-      "has_normalizer": true,
-      "rng_keys": [
-        "cuda",
-        "numpy",
-        "python",
-        "torch"
-      ],
-      "archives": [
-        "delivery/artmanip-recovery-20260930/recovery-rl-clockhold-clean2000.tar.gz"
-      ]
-    },
-    {
-      "path": "runs/recovery-rl-clockhold-clean/checkpoints/epoch_002000.pth",
-      "sha256": "d2d596b4973bcf47d86dda0c512b453296934c1534d8a9887f0d02c9b2e186ae",
-      "size": 89425600,
-      "kind": "RL_or_parent_expert",
-      "epoch": 2000,
-      "optimizer_updates": 72000,
-      "adam_steps": [
-        72000
-      ],
-      "environment_interactions": 163840000,
       "has_normalizer": true,
       "rng_keys": [
         "cuda",
@@ -3985,6 +4080,426 @@
       "archives": [
         "delivery/artmanip-recovery-20260930/recovery-rl-clockhold-clean2000.tar.gz"
       ]
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/bc-seed2-aggregate3200/E/epoch_005700.pth",
+      "sha256": "b837619d8a027338f85b89a77a0c1fba465a4f9b36ab5bd60011bf1597837ffd",
+      "size": 74549846,
+      "kind": "offline_BC",
+      "epoch": 5700,
+      "optimizer_updates": 45600,
+      "adam_steps": [
+        45600
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-seed2-aggregate3200.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/bc-seed2-aggregate3200/E/epoch_005800.pth",
+      "sha256": "4b1f90f8c488cec8e03cc575732f689a530d8767c31912ed0f06de9f1d68318a",
+      "size": 74549910,
+      "kind": "offline_BC",
+      "epoch": 5800,
+      "optimizer_updates": 46400,
+      "adam_steps": [
+        46400
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-seed2-aggregate3200.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/bc-seed2-aggregate3200/E/epoch_005900.pth",
+      "sha256": "4198ebe9709c4571814248e7d0196370447b46286e3017380d9ec6e0f92b3510",
+      "size": 74549910,
+      "kind": "offline_BC",
+      "epoch": 5900,
+      "optimizer_updates": 47200,
+      "adam_steps": [
+        47200
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-seed2-aggregate3200.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/bc-seed2-aggregate3200/E/epoch_006000.pth",
+      "sha256": "7612c52190f7f048f59af8cdad94065bb52af052672b1e9dd3adb503df76e9f7",
+      "size": 74549846,
+      "kind": "offline_BC",
+      "epoch": 6000,
+      "optimizer_updates": 48000,
+      "adam_steps": [
+        48000
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-seed2-aggregate3200.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E/epoch_000100.pth",
+      "sha256": "76d65305c44659e01f44143306857c3450edee840e4972242ed5fad4080ceecc",
+      "size": 74549974,
+      "kind": "offline_BC",
+      "epoch": 100,
+      "optimizer_updates": 800,
+      "adam_steps": [
+        800
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-seed2-executed44800.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E/epoch_000400.pth",
+      "sha256": "f63d77f22dfaccdd4f648f40346ba1e54f5ab9c76b3284bb583cc0d6e1198861",
+      "size": 74549910,
+      "kind": "offline_BC",
+      "epoch": 400,
+      "optimizer_updates": 3200,
+      "adam_steps": [
+        3200
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-seed2-executed44800.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E/epoch_000800.pth",
+      "sha256": "0c9a12a7e919ce22e7f664c5aaa1606931400f9d77f03ceee492ede7cf447ff0",
+      "size": 74549910,
+      "kind": "offline_BC",
+      "epoch": 800,
+      "optimizer_updates": 6400,
+      "adam_steps": [
+        6400
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-seed2-executed44800.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E/epoch_001200.pth",
+      "sha256": "631e7dbf50f06a10603db35f7359b3b394eec37de1bf5beac98c8983c1e54513",
+      "size": 74549910,
+      "kind": "offline_BC",
+      "epoch": 1200,
+      "optimizer_updates": 9600,
+      "adam_steps": [
+        9600
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-seed2-executed44800.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E/epoch_001600.pth",
+      "sha256": "af6c4fd413c816715907ef6a9bfb7db9413ee98202bb6e873a029aa30045ec48",
+      "size": 74549910,
+      "kind": "offline_BC",
+      "epoch": 1600,
+      "optimizer_updates": 12800,
+      "adam_steps": [
+        12800
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-seed2-executed44800.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E/epoch_002000.pth",
+      "sha256": "3814ec9b0bce93b257b0fd898e76967b18445cb310e683f7f66a3fd7fde322ef",
+      "size": 74549910,
+      "kind": "offline_BC",
+      "epoch": 2000,
+      "optimizer_updates": 16000,
+      "adam_steps": [
+        16000
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-seed2-executed44800.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E/epoch_002400.pth",
+      "sha256": "7d3fa7003b36658792ea8b3a352ed29bcfca929930206cab5b69754938879bf5",
+      "size": 74549910,
+      "kind": "offline_BC",
+      "epoch": 2400,
+      "optimizer_updates": 19200,
+      "adam_steps": [
+        19200
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-seed2-executed44800.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E/epoch_002800.pth",
+      "sha256": "5587717ca6a4c26a6a76666df675e80819b5c62b7fd63aedb78eca08bca93247",
+      "size": 74549974,
+      "kind": "offline_BC",
+      "epoch": 2800,
+      "optimizer_updates": 22400,
+      "adam_steps": [
+        22400
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-seed2-executed44800.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E/epoch_003200.pth",
+      "sha256": "ce5600fd2a0e7c3a2781b339e94d2936d93cf14147e10e21b7610d84a620026d",
+      "size": 74549974,
+      "kind": "offline_BC",
+      "epoch": 3200,
+      "optimizer_updates": 25600,
+      "adam_steps": [
+        25600
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-seed2-executed44800.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E/epoch_003600.pth",
+      "sha256": "17a5716c74bff732b0ab3b462b4ab44b9c674d8fa1f018c285e48037709ebcd6",
+      "size": 74549974,
+      "kind": "offline_BC",
+      "epoch": 3600,
+      "optimizer_updates": 28800,
+      "adam_steps": [
+        28800
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-seed2-executed44800.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E/epoch_004000.pth",
+      "sha256": "cc53cff13c0482f1a83771aecc5912d647f0cb2a92fe05c14f6e9e070d9aeb08",
+      "size": 74549910,
+      "kind": "offline_BC",
+      "epoch": 4000,
+      "optimizer_updates": 32000,
+      "adam_steps": [
+        32000
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-seed2-executed44800.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E/epoch_004400.pth",
+      "sha256": "b4efd26cb88ebea38d9961d5ca8c56e0c83d640babe9eefc432408e8d4e5244e",
+      "size": 74549910,
+      "kind": "offline_BC",
+      "epoch": 4400,
+      "optimizer_updates": 35200,
+      "adam_steps": [
+        35200
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-seed2-executed44800.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E/epoch_004800.pth",
+      "sha256": "fed5b876a326516bee22ba846c4e40d8a7a7e50011cf1000fe333fcf2d77cfad",
+      "size": 74549974,
+      "kind": "offline_BC",
+      "epoch": 4800,
+      "optimizer_updates": 38400,
+      "adam_steps": [
+        38400
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-seed2-executed44800.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E/epoch_005200.pth",
+      "sha256": "30fc3ea792d28c3557c9cc9805a81f039991d4f13322c5639832a6d2940758fb",
+      "size": 74549974,
+      "kind": "offline_BC",
+      "epoch": 5200,
+      "optimizer_updates": 41600,
+      "adam_steps": [
+        41600
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-seed2-executed44800.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E/epoch_005600.pth",
+      "sha256": "10552594b5ed9937915ed105f553a3f4691a4b1a03c79fd351c97990b812d856",
+      "size": 74549910,
+      "kind": "offline_BC",
+      "epoch": 5600,
+      "optimizer_updates": 44800,
+      "adam_steps": [
+        44800
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-seed2-executed44800.tar.gz"
+      ]
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E/epoch_005700.pth",
+      "sha256": "10a86c022d1aea57a572ea6b42dac271ca330973d9a5625b51d85ceb1fc62c04",
+      "size": 74549974,
+      "kind": "offline_BC",
+      "epoch": 5700,
+      "optimizer_updates": 45600,
+      "adam_steps": [
+        45600
+      ],
+      "environment_interactions": 0,
+      "has_normalizer": true,
+      "rng_keys": [
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_torch_rng"
+      ],
+      "archives": [
+        "delivery/artmanip-recovery-20260930/recovery-seed2-executed44800.tar.gz"
+      ]
     }
   ],
   "archives": [
@@ -3997,8 +4512,16 @@
       "sha256": "315332b6fc85f09312a347c6f971a374493900bcbcd0029e8b52f51708d2ca4f"
     },
     {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-aggregation1-development.tar.gz",
+      "sha256": "e0e6e50748f002edf644718ca741fc39516c5a79782bd5982030dcd55e514668"
+    },
+    {
       "archive": "delivery/artmanip-recovery-20260930/recovery-aggregation1-pair6400.tar.gz",
       "sha256": "8c2712097737a4dbfcf25090c23dc855360502dfa83f2d8085d7ebb416b2f2f8"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-aggregation1-promotion64.tar.gz",
+      "sha256": "d8f20c9d8eee261d20015fc7b300310befba508717d849ab2affe18c3c8cf087"
     },
     {
       "archive": "delivery/artmanip-recovery-20260930/recovery-assets-resets.tar.gz",
@@ -4077,6 +4600,98 @@
       "sha256": "329ffb72c97d1a83196229658d3a904764999dd6b209fc202b9d0b1b79dcdf20"
     },
     {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-E4100.tar.gz",
+      "sha256": "a8853d101f744b5dfd1039bb2d8199396116f5afe74a2b33a0945f6a6a05c990"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-E500.tar.gz",
+      "sha256": "9192625639df9e40d94c8f58ce3763fb4d56c6a0036a15922a08658e3ca54c5e"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-E5700.tar.gz",
+      "sha256": "13fb4f9c1d28cc1976b1f661a8d2fc1a1a8f3dd62aea2112d23bd6a9aebb0c6c"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-Eagg6100.tar.gz",
+      "sha256": "ffb869228cc8f18c3a5ea1f2180b415a68d3296f8b8c8e62577264e1cf91042f"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-Eagg6500.tar.gz",
+      "sha256": "40ef0c61098ba8c79f9b8cfd6c25a72c88625b247f02e3f7122db1eeebed7f48"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-Ereplay6500.tar.gz",
+      "sha256": "46a6ebcde9990145aa2f0fb160dda345765f58270c5302877b3cac9793371c58"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-M300.tar.gz",
+      "sha256": "3608b8a311666b3375a04886e56c815671260ba0addde4815b062300c6faad8f"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-M4100.tar.gz",
+      "sha256": "3be0bd3517d8d74289d2205436008d0d6400db2175aed25fb1e312cb82c652fe"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-analysis.tar.gz",
+      "sha256": "2b99c124d38d42ec27da443218327bfd4e2a3cc65f85ac236922f27231b1670c"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-batch-records.tar.gz",
+      "sha256": "1dc799cd7c1fd676bb56c509f7dfba7b666ee4a2b25ea27a439e58941533fe5f"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-bc100.tar.gz",
+      "sha256": "0d08b6abc5d72504e1afca511b8e306822016994a5316740f553a5699f0013a7"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-historical.tar.gz",
+      "sha256": "ba366d82bf67e9623b4d0e30903b619f7b1d228f6dfa3d554c81d51ecc28cdef"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-rl1000.tar.gz",
+      "sha256": "72e24f4b2bf1207ffae7e9a6a6523a95ae679ced2abae290e491c46a896fa37d"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-rl3000.tar.gz",
+      "sha256": "95e2c21b602ba6122099180cbed9edf1338243e140f38e3ab3477ff50d3b6f93"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-rl4000.tar.gz",
+      "sha256": "2ce7cd13ab05c12325555cf578fe52dd26f5de1e7fcfb587d6fcabd9eec19131"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-rlclean2000.tar.gz",
+      "sha256": "3500eb48b7803a64db6aadae6f3040e31926bdd0bd2223ee157eb3fa57aef052"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-rlhold1500.tar.gz",
+      "sha256": "11d09acb2bb70ec6778872551eb26900753e9039e4c116831ac48598482a652f"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-rlhold2000.tar.gz",
+      "sha256": "cb3bc61a125cc0875eb19df3419514a2af5eec8645322ba58f249ec975c084ca"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-seed2Eagg6100.tar.gz",
+      "sha256": "efeb880835521197578f9266e78420be963d46db7a556b4358a4e7ff12492c5a"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-source3.tar.gz",
+      "sha256": "9fc203a9713acc0f8301b30151818c71c4224a0d77a00d00a59e940c1c18366a"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-videos.tar.gz",
+      "sha256": "b9fb26570c08f2669595c61e7eb3d3c5c90a916b763cb65e1105d3b60043163a"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-final-weights.tar.gz",
+      "sha256": "c928173bfa6de75f6dbf668b0ac2f3c5a1a5ee94a40e5bbeac3b0c822ff8215e"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-historical-and-pilot-extra-weights.tar.gz",
+      "sha256": "25218430da965eb417ae6eaa900a115d15a59488ce3d7f99d8241520c4c58c61"
+    },
+    {
       "archive": "delivery/artmanip-recovery-20260930/recovery-holding-checkpoint1250.tar.gz",
       "sha256": "ea2f5c25b2ea529d66b936153802e4def6995c46b64465f1e5e1afeae63cb515"
     },
@@ -4091,6 +4706,10 @@
     {
       "archive": "delivery/artmanip-recovery-20260930/recovery-initial-evaluation.tar.gz",
       "sha256": "5b3d17c99f4ae1a1c5df3258f151f4e2bfc49b2ebdf7bb4514b753f6b0ea76ff"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-primary-candidate-Eagg6100.tar.gz",
+      "sha256": "3fa51b91d03e7cb795f9b8a27bd3d7b0fd81233e0c5137ea2753901025cf2d31"
     },
     {
       "archive": "delivery/artmanip-recovery-20260930/recovery-reference-checkpoint1500.tar.gz",
@@ -4137,6 +4756,10 @@
       "sha256": "8600a4a2bc45a6f254b9bf865b14badf8090eed4bf587f02205f246c0c048720"
     },
     {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-reference4000-development.tar.gz",
+      "sha256": "8e8fec3811c309703de93d3ca82b9873310d40b232f5e1960c2b291a251366f4"
+    },
+    {
       "archive": "delivery/artmanip-recovery-20260930/recovery-reference500.tar.gz",
       "sha256": "bf4af8c512a454e05997a3f0ac008ef32db047612987e626aaed29c8d463edf6"
     },
@@ -4165,6 +4788,26 @@
       "sha256": "e035b53287fbd70e86cbfc6b129cf15ab4706b1e9e5c27055214108f5f797663"
     },
     {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-seed2-aggregate3200.tar.gz",
+      "sha256": "8c4bebce16e633dc5c3f087760e7250eea71f82497e3adf3896c84fb9e469c23"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-seed2-aggregation-data.tar.gz",
+      "sha256": "533c974e9d86ee00289859506f78b9e64a40469b4da438d000b00bfd667a78bc"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-seed2-collection.tar.gz",
+      "sha256": "3250cffc3b6aafc5057286162e7c86c24603e4c5829f1828790e9afd7206f64a"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-seed2-executed44800.tar.gz",
+      "sha256": "6b1bbc85a0b0bd36ced2af23115e558940b683864379b4d0c62d5c4e53d89d64"
+    },
+    {
+      "archive": "delivery/artmanip-recovery-20260930/recovery-seed2-promotion64.tar.gz",
+      "sha256": "5017fe5d58e8fe5c14c3b6b9170e5d51424dfbca1ca02dd5a8a0400c3bd66877"
+    },
+    {
       "archive": "delivery/artmanip-recovery-20260930/recovery-training-diagnostics-clean2000.tar.gz",
       "sha256": "e29feff6abf730eaffef53b85f4f9d92625e5eb37b4c265f1556e239c02af238"
     },
@@ -4187,6 +4830,26 @@
     {
       "archive": "delivery/artmanip-recovery-20260930/recovery-training-sequences-t5.tar.gz",
       "sha256": "8cc28eeccb2f34b48d6dad82d87b1b2d35b997abef9639ff085f730304919c96"
+    }
+  ],
+  "standalone_assets": [
+    {
+      "path": "delivery/artmanip-recovery-20260930/recovery-teacher-S2.mp4",
+      "sha256": "9b2e7f8e2d5c26e18b33017860abce14a5cc271cbf033c0073bd61f4c988989c",
+      "size": 1976886,
+      "kind": "standalone_video"
+    },
+    {
+      "path": "delivery/artmanip-recovery-20260930/recovery-teacher-S5-failure.mp4",
+      "sha256": "eaa0d2553877af300c68695cda6568c03b99e99acb1ce1f10758fa91dbe7512b",
+      "size": 1077888,
+      "kind": "standalone_video"
+    },
+    {
+      "path": "delivery/artmanip-recovery-20260930/recovery-teacher-S5.mp4",
+      "sha256": "4272eab6187465794b21edfb6c031ec8b91b2e6eefabeb033d82e2090f42db65",
+      "size": 1186834,
+      "kind": "standalone_video"
     }
   ]
 }

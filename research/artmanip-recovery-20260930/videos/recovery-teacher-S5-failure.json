@@ -1,0 +1,31 @@
+{
+  "video": "delivery/artmanip-recovery-20260930/recovery-teacher-S5-failure.mp4",
+  "sha256": "eaa0d2553877af300c68695cda6568c03b99e99acb1ce1f10758fa91dbe7512b",
+  "trace_sha256": "010e60edc3248812670bcac80bd963a730b363bfdd015d6dbc2e01f7bacee948",
+  "checkpoint_sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+  "source_rows": [
+    0,
+    32,
+    64,
+    97
+  ],
+  "example": "failure",
+  "protocol": "S",
+  "example_success": [
+    true,
+    true,
+    true,
+    false
+  ],
+  "example_body": [
+    true,
+    true,
+    true,
+    true
+  ],
+  "frame_count": 600,
+  "duration_seconds": 20.0,
+  "independent_rescore": true,
+  "policy": "same privileged teacher weights; no source routing",
+  "scope": "Fixed development examples, separately simulated; not final cohort statistics or hardware"
+}

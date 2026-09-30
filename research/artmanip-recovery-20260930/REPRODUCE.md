@@ -1,6 +1,6 @@
 # Restore and reproduce
 
-Use this experiment's branch `feat/wuji-artmanip-recovery-20260930`. The release tag is `wuji-artmanip-recovery-20260930-v1`; while training is active it is a draft. Each tar archive includes per-file SHA256 values. Download the assets into a separate checkout and restore with:
+Use this experiment's branch `feat/wuji-artmanip-recovery-20260930`. The release tag is `wuji-artmanip-recovery-20260930-v1`; training and the once-only final evaluation are complete. Each tar archive includes per-file SHA256 values. Download the assets into a separate checkout and restore with:
 
 ```bash
 python3 -m scripts.restore_wuji_unified recovery-assets-resets.tar.gz --output .
@@ -206,3 +206,12 @@ The primary's aggregate 6,100 checkpoint contains48,800 total BC Adam updates:
 Its6,500 fixed endpoint and the replay6,500 control contain52,000 total updates.
 Both matched M/E4,100 checkpoints contain32,800 total updates. Epoch numbers are
 serialized continuation labels; they are not environment interactions or optimizer counts.
+
+
+## Completed inventory and public verification
+
+`weights-coverage-final.json` checks all scoped local PTH contents. `weights-aliases-final.json` maps11 `latest`/`best` or duplicate pilot filenames to already archived identical hashes. Restore the canonical numbered paths used by the job specifications; aliases contain no extra learned state. `recovery-historical-and-pilot-extra-weights.tar.gz` retains the two inherited earlier BC snapshots and auxiliary pilot inference snapshot found by this coverage audit. Weight file counts include duplicate content and do not mean independent trained policies.
+
+After publication, `scripts.verify_wuji_recovery_public --output MY_RECEIPT.json --download-root NEW_EMPTY_DIRECTORY` runs under the CPU scientific interpreter. It queries the public Release without authentication, checks every asset name/size/server digest, anonymously downloads the primary69MB archive and all3 labelled MP4s, actually restores and CPU-loads the primary model/Adam/RNG, and decodes/checks each video's full frame count and duration. It does not run simulation. Publication receipts are committed after the scientific release tag because they can only be produced once the assets are public.
+
+The final session rescore helper uses system Python with `LD_LIBRARY_PATH` cleared for SSH/resource orchestration; its scientific scoring subprocess keeps the runtime environment. This prevents the observed system-SSH/Conda-OpenSSL conflict without changing frozen simulator or scoring code.

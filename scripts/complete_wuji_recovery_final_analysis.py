@@ -2,6 +2,7 @@
 import csv
 import hashlib
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -15,8 +16,11 @@ def sha(path):
 
 
 def main():
-    subprocess.run([sys.executable, '-m', 'scripts.status_wuji_recovery', '--pull'],
-                   cwd=R, stdout=subprocess.DEVNULL, check=True)
+    # System ssh must not load the scientific Conda runtime's different OpenSSL.
+    orchestration_env = os.environ.copy()
+    orchestration_env.pop('LD_LIBRARY_PATH', None)
+    subprocess.run(['/usr/bin/python3', '-m', 'scripts.status_wuji_recovery', '--pull'],
+                   cwd=R, env=orchestration_env, stdout=subprocess.DEVNULL, check=True)
     jobs = json.loads((D / 'resources/latest.json').read_text())['jobs']
     assert all(any(j['name'] == name and j['status'] == 'completed' for j in jobs)
                for name in ['final-g0-job', 'final-g1-job'])
