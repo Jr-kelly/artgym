@@ -7,9 +7,61 @@
   "max_concurrent_gpus": 2,
   "rl_default_gpu_hours": 16,
   "bc_default_gpu_hours": 2.25,
-  "phase": "Teacher method passed strict64; full second optimization seed replication authorized by measured evidence",
-  "active_jobs": [],
-  "gpu_hours": 19.034644998888876,
+  "phase": "B/C active; actual stages and next decisions in active_jobs and next_actions",
+  "active_jobs": [
+    {
+      "source_sha256": "998b1c057e21c029884c58abe3d29ca976f05682d6a54b5092ccd4f3bef4d76e",
+      "name": "bc-seed2-executed44800-job",
+      "gpu": 0,
+      "final_phase": false,
+      "command": [
+        "/tmp/wuji-recovery-runtime/bin/python",
+        "-m",
+        "scripts.train_wuji_recovery_bc",
+        "--resume",
+        "--init",
+        "runs/unified-policy-20260930/bc-unified-historical-s3001-seg1/epoch_000100.pth",
+        "--data",
+        "runs/unified-policy-20260930/train-data-t2/source0",
+        "runs/unified-policy-20260930/train-data-t5/source0",
+        "runs/unified-policy-20260930/train-data-t2/source1",
+        "runs/unified-policy-20260930/train-data-t5/source1",
+        "runs/unified-policy-20260930/train-data-t2/source2",
+        "runs/unified-policy-20260930/train-data-t5/source2",
+        "runs/unified-policy-20260930/train-data-t2/source3",
+        "runs/unified-policy-20260930/train-data-t5/source3",
+        "--output",
+        "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E",
+        "--label",
+        "executed",
+        "--epochs",
+        "5700",
+        "--save-every",
+        "400",
+        "--lr",
+        ".00001",
+        "--seed",
+        "2026093001",
+        "--sequence-seed",
+        "2026093061",
+        "--batch",
+        "96",
+        "--max-seconds",
+        "2700"
+      ],
+      "timeout_seconds": 2800,
+      "started": "2026-09-30T17:12:10.676539+00:00",
+      "pid": 67484,
+      "status": "running",
+      "child_pid": 67485,
+      "heartbeat": "2026-09-30T17:16:11.742669+00:00",
+      "elapsed_seconds": 240.96984168900235,
+      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/bc-seed2-executed44800-job/status.json",
+      "pid_exists": true,
+      "host": "authorized_remote"
+    }
+  ],
+  "gpu_hours": 19.10893731694443,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -17,29 +69,14 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "Run fullsecondoptimizationseed2026093061 fromactualBC100 model/Adam through E44800 thenownhistoryaggregation3200; fixedsamecohort64replicationendpoint. MainEagg6100 unchanged,final128 unopened.",
   "last_event": {
-    "utc": "2026-09-30T17:12:06.578368+00:00",
-    "event": "teacher_strict64_passed_method_frozen_and_second_seed_budget_allocated",
-    "checkpoint_sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
-    "S2": [
-      64,
-      64,
-      63,
-      60
-    ],
-    "S5": [
-      63,
-      64,
-      63,
-      64
-    ],
-    "evidence": [
-      "research/artmanip-recovery-20260930/aggregation1-promotion64-analysis/report.json",
-      "research/artmanip-recovery-20260930/aggregation1-promotion64-gates.json",
-      "research/artmanip-recovery-20260930/teacher-method-freeze.json"
-    ],
-    "final_reserve_gpuh": 3.5,
-    "normal_ceiling_gpuh": 20.5,
-    "next": "Run fullsecondoptimizationseed2026093061 fromactualBC100 model/Adam through E44800 thenownhistoryaggregation3200; fixedsamecohort64replicationendpoint. MainEagg6100 unchanged,final128 unopened."
+    "utc": "2026-09-30T17:16:38.124036+00:00",
+    "event": "archive_completed",
+    "name": "recovery-primary-candidate-Eagg6100",
+    "archive": "delivery/artmanip-recovery-20260930/recovery-primary-candidate-Eagg6100.tar.gz",
+    "sha256": "3fa51b91d03e7cb795f9b8a27bd3d7b0fd81233e0c5137ea2753901025cf2d31",
+    "size": 69329747,
+    "files": 5,
+    "next": "Restore-check and upload; local originals retained"
   },
   "monitor": {
     "pid": 1192,
@@ -96,7 +133,7 @@
     "aggregation1-promotion64-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T17:09:35.974446+00:00",
+  "last_resource_check_utc": "2026-09-30T17:16:38.128884+00:00",
   "next_actions": [
     "Exact64/source promotion with samebatchexperts running. Ifpassed prioritize fullBC-route secondoptimizationseed, using conditionalplan; do notopenfinal orstartstudent yet.",
     "GPU1 wrapper65486, source2c29436, started16:50:48UTC, timeout1800, aggregation1-promotion64: Eagg6100,historical,source3 S2/S5/F onpromotion-all.npy. At17:03UTC mainall3+historicalS2/S5 complete. Producer maincountsS2[64,64,63,60],S5[63,64,63,64],F[64,64,63,63] arePROVISIONAL; independentrescore/fullbody/relativeexpertgates pending.",
@@ -113,7 +150,7 @@
   "github_last_verified_commit": "0b79bb0",
   "release_verified_assets": 52,
   "gpu_hours_by_host": {
-    "authorized_remote": 19.034644998888876,
+    "authorized_remote": 19.10893731694443,
     "local": 0.0
   },
   "bc_executed_endpoint": {
