@@ -1,0 +1,18 @@
+{
+  "utc": "2026-09-30T17:38:05.009475+00:00",
+  "condition": "All fixed second-seed stages concluded and exact once-only final freeze committed; not permission to open before then.",
+  "expected_models": 17,
+  "gpu0_max_seconds": 5400,
+  "gpu1_max_seconds": 4800,
+  "local_video_max_seconds_each": 600,
+  "local_video_count": 3,
+  "remote_and_local_serial": true,
+  "total_max_gpu_seconds": 12000,
+  "total_gpu_hours": 3.3333333333333335,
+  "normal_ceiling_gpu_hours": 20.5,
+  "unmetered_reserve_gpu_hours": 0.05,
+  "worst_total_gpu_hours": 23.883333333333333,
+  "models": "Split frozen model list 9/8 across GPUs0/1; all S2/S5/F per model. Actual source/weights/cohort fixed by final-freeze, not this budget plan.",
+  "videos": "S2 fixed rows, S5 fixed rows, S5 first development failure rows; same primary teacher, local replay only after all remote jobs. Reproduced result must be rescored, not presumed failure.",
+  "limits": "Each launch refreshes actual global budget and processes. No training or reselection after final freeze. Infrastructure failure recorded and reviewed within original budget; no automatic duplicate final cells."
+}

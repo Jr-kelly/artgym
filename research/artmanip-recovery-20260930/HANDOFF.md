@@ -7,11 +7,11 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T17:36:22.904540+00:00",
-  "event": "final_completeness_audit_prepared",
-  "evidence": "scripts/audit_wuji_recovery_final.py",
-  "validation": "Syntax and CLI checks passed. Actual final data validation pending; no final cohort opened.",
-  "next": "Finish full seed2 E5700, then own collection and availability gate. Use final auditor only after once-only frozen evaluation and independent rescore."
+  "utc": "2026-09-30T17:39:15.512687+00:00",
+  "event": "local_video_desktop_process_preflight",
+  "evidence": "research/artmanip-recovery-20260930/local-desktop-preflight.json",
+  "change": "Accept only exact ToDesk_Session with --isVideoSession=true and at least16GiB free, preserving desktop process; unknown compute users still block. No local GPU workload launched.",
+  "next": "Recheck at frozen video launch after all remote jobs; keep same global GPU ledger."
 }
 ```
 
@@ -88,11 +88,11 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "FullsecondoptimizationseedE44800 running; actualBC100model/Adam kept andnewCPU/CUDA/NumPy seed2026093061 verified. Finish5700thenfreshcollection/originalavailability/aggregation3200/fixed64replicate; final128unopened.",
   "last_event": {
-    "utc": "2026-09-30T17:36:22.904540+00:00",
-    "event": "final_completeness_audit_prepared",
-    "evidence": "scripts/audit_wuji_recovery_final.py",
-    "validation": "Syntax and CLI checks passed. Actual final data validation pending; no final cohort opened.",
-    "next": "Finish full seed2 E5700, then own collection and availability gate. Use final auditor only after once-only frozen evaluation and independent rescore."
+    "utc": "2026-09-30T17:39:15.512687+00:00",
+    "event": "local_video_desktop_process_preflight",
+    "evidence": "research/artmanip-recovery-20260930/local-desktop-preflight.json",
+    "change": "Accept only exact ToDesk_Session with --isVideoSession=true and at least16GiB free, preserving desktop process; unknown compute users still block. No local GPU workload launched.",
+    "next": "Recheck at frozen video launch after all remote jobs; keep same global GPU ledger."
   },
   "monitor": {
     "pid": 1192,

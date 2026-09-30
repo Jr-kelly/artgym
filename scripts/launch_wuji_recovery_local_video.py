@@ -23,6 +23,27 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def desktop_compute_receipt():
+    """Allow the verified desktop video session, never an unknown compute user."""
+    output = subprocess.check_output(['nvidia-smi', '-i', '0',
+        '--query-compute-apps=pid,process_name,used_memory', '--format=csv,noheader,nounits'], text=True)
+    receipts = []
+    for line in output.splitlines():
+        pid, executable, memory = [part.strip() for part in line.split(',')]
+        command = subprocess.check_output(['ps', '-p', pid, '-o', 'args='], text=True).strip()
+        parts = command.split()
+        assert executable == '/opt/todesk/bin/ToDesk_Session' and parts and parts[0] == executable
+        assert '--isVideoSession=true' in parts, 'Unknown compute user; do not share the GPU'
+        receipts.append(dict(pid=int(pid), executable=executable, command=command,
+                             used_memory_mib=int(memory), kind='existing desktop video session'))
+    free = int(subprocess.check_output(['nvidia-smi', '-i', '0', '--query-gpu=memory.free',
+                                       '--format=csv,noheader,nounits'], text=True).strip())
+    assert free >= 16000, 'Insufficient free memory for the isolated four-environment video'
+    return dict(existing_desktop_compute=receipts, free_memory_mib=free,
+                checked_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                scope='Existing desktop session is preserved; unknown compute users block launch.')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--protocol', choices=['S2', 'S5', 'F'], required=True)
@@ -43,9 +64,9 @@ def main():
     now = datetime.datetime.now(datetime.timezone.utc)
     assert (datetime.datetime.fromisoformat(state['deadline_utc']) - now).total_seconds() >= args.timeout
     assert state['gpu_hours'] + state['unmetered_cuda_preflight_reserve_gpu_hours'] + args.timeout / 3600 <= state['max_gpu_hours']
-    # Desktop graphics are not terminated. Reject other compute users on GPU0.
-    compute = subprocess.check_output(['nvidia-smi', '-i', '0', '--query-compute-apps=pid', '--format=csv,noheader,nounits'], text=True)
-    assert not compute.strip(), 'Local GPU0 has an existing compute process'
+    # Desktop video encoding can appear as C+G, despite not being a training job.
+    # Preserve it and its receipt; all unknown compute processes still block.
+    desktop = desktop_compute_receipt()
     gpu = subprocess.check_output(['nvidia-smi', '-i', '0', '--query-gpu=index,name,uuid,memory.used', '--format=csv,noheader'], text=True)
     name = frozen['overall_candidate']
     model = frozen['models'][name]
@@ -96,7 +117,7 @@ def main():
         child = subprocess.Popen(wrapper, cwd=pin, env=env, stdin=subprocess.DEVNULL,
                                  stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
     spec = dict(name=wrapper_name, pid=child.pid, gpu=0, host='local',
-                hostname=socket.gethostname(), gpu_snapshot=gpu, source_sha=source,
+                hostname=socket.gethostname(), gpu_snapshot=gpu, desktop_receipt=desktop, source_sha=source,
                 created_utc=now.isoformat(), timeout=args.timeout, final_phase=True,
                 status_path=f'runs/artmanip-recovery-20260930/{wrapper_name}/status.json',
                 command=wrapper, checkpoint_sha256=model['sha256'],

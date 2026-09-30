@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "case": "unknown_compute",
+      "rejected": true
+    },
+    {
+      "case": "non_video_todesk",
+      "rejected": true
+    },
+    {
+      "case": "low_memory",
+      "rejected": true
+    },
+    {
+      "case": "idle_gpu_with_sufficient_memory",
+      "accepted": true
+    }
+  ],
+  "scope": "CPU mocks of blocking cases; separate actual desktop preflight in local-desktop-preflight.json"
+}
