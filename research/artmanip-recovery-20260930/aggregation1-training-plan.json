@@ -1,0 +1,40 @@
+{
+  "utc": "2026-09-30T16:07:58.177308+00:00",
+  "parent": "runs/artmanip-recovery-20260930/bc-executed44800/E/epoch_005700.pth",
+  "parent_sha256": "2f85fa6b77b9c5358d519dcd816b285efcf33900498400dd54a8ae22bba1fac3",
+  "availability": "aggregation1-availability.json",
+  "same_gpu_replay_max_error": 0,
+  "training": {
+    "name": "aggregation1-pair6400",
+    "arms": [
+      "replay",
+      "aggregate"
+    ],
+    "end_epoch": 6500,
+    "updates_per_arm": 6400,
+    "lr": 1e-05,
+    "batch": 120,
+    "timeout": 2000,
+    "only20percent_fitting_histories_differ": true
+  },
+  "development": {
+    "models": [
+      "Ereplay6100",
+      "Eagg6100",
+      "Ereplay6500",
+      "Eagg6500"
+    ],
+    "states": "data/development-all.npy",
+    "protocols": [
+      "S2",
+      "S5",
+      "F"
+    ],
+    "sample_count_per_source": 32,
+    "timeout": 2400,
+    "selection": "Same preregistered family ranking; keep each6500 endpoint. No extra checkpoints selected by offline score."
+  },
+  "budget": "Actual17.405GPUh at16:06UTC; reserve4GPUh unchanged. OriginalRL remaining wrapper<.7GPUh, paired wrapper<=.556GPUh, development<=.667GPUh plus mandatoryoriginalRL development<=.5GPUh fits20 ceiling. Refresh before each launch; no claim all timeout estimates will be consumed.",
+  "scope": "One controlled training-state data aggregation pilot; scripted expert handover is label availability evidence, not unified success. Full histories, own expert normalizers, actual previous behavior actions and reset-consistentRNN.",
+  "next": "Validate mixed dataset split/hash equivalence, transfer exact datasets, launch botharms from committed source; audit actual saved parent and optimizer/RNG then independently evaluate fixed6100/6500."
+}
