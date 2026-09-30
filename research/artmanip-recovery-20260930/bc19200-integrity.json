@@ -1,0 +1,29 @@
+{
+  "rows": [
+    {
+      "arm": "M",
+      "epoch": 2500,
+      "updates": 20000,
+      "adam_steps": [
+        20000
+      ],
+      "fixed_tensor_count": 28,
+      "normalizer_critic_frozen": true,
+      "sha256": "d1780b90eda8ce7e3d437465a90a0418503ba8de02ef2a8a4b475300c114b6b3"
+    },
+    {
+      "arm": "E",
+      "epoch": 2500,
+      "updates": 20000,
+      "adam_steps": [
+        20000
+      ],
+      "fixed_tensor_count": 28,
+      "normalizer_critic_frozen": true,
+      "sha256": "0f8256a45fe685674272165ea2a1c213a9f753951c89c9b1a2c61e82726ba41a"
+    }
+  ],
+  "same_end_rng": true,
+  "passed": true,
+  "scope": "Checkpoint integrity and paired optimizer/sequence random state, not a closed-loop score"
+}
