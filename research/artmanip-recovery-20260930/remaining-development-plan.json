@@ -1,0 +1,52 @@
+{
+  "created_utc": "2026-09-30T13:03:31.652527+00:00",
+  "scope": "Prospective development checkpoints; no final cohort opened or endpoint scores consulted",
+  "batches": [
+    {
+      "name": "reference3000-development",
+      "gpu": 0,
+      "after": "rl-seg3-job completed",
+      "models": [
+        "rl2500=runs/recovery-rl-seg3/checkpoints/epoch_002500.pth",
+        "rl3000=runs/recovery-rl-seg3/checkpoints/epoch_003000.pth"
+      ]
+    },
+    {
+      "name": "reference4000-development",
+      "gpu": 0,
+      "after": "rl-seg4-job completed",
+      "models": [
+        "rl3500=runs/recovery-rl-seg4/checkpoints/epoch_003500.pth",
+        "rl4000=runs/recovery-rl-seg4/checkpoints/epoch_004000.pth"
+      ]
+    },
+    {
+      "name": "reference-clean2000-development",
+      "gpu": 1,
+      "after": "rl-reference-clean-job completed",
+      "models": [
+        "rlclean1500=runs/recovery-rl-reference-clean/checkpoints/epoch_001500.pth",
+        "rlclean2000=runs/recovery-rl-reference-clean/checkpoints/epoch_002000.pth"
+      ]
+    },
+    {
+      "name": "bc44800-development",
+      "gpu": 1,
+      "after": "bc-executed44800-job completed",
+      "models": [
+        "E5700=runs/artmanip-recovery-20260930/bc-executed44800/E/epoch_005700.pth"
+      ]
+    }
+  ],
+  "states": "research/artmanip-recovery-20260930/data/development-all.npy",
+  "protocols": [
+    "S2",
+    "S5",
+    "F"
+  ],
+  "per_source": 32,
+  "two_model_timeout": 1800,
+  "one_model_timeout": 1200,
+  "reason": "Continue500epoch development spacing introduced atoriginal1500/2000, retain each1000epoch segment endpoint and compare cleancontrol1500/2000 to matching existingholding points. These are prospective, not selected by newdevelopment score.",
+  "next": "Complete originalminimum4000 and matchedcleancontrol; Eonlyextension remains separately preregistered. Assess further learning using phase/body/fit and actual budget."
+}
