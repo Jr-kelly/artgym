@@ -1,0 +1,20 @@
+{
+  "created_utc": "2026-09-30T10:03:19.295395+00:00",
+  "name": "bc-pair32000",
+  "parent": "runs/artmanip-recovery-20260930/bc-pair19200",
+  "parent_epoch": 2500,
+  "end_epoch": 4100,
+  "cumulative_added_updates": 32000,
+  "segment_updates_per_arm": 12800,
+  "label_only_comparison": "M original mu, E clipped expert mu with unbounded prediction MSE. Retain identical original1024 recorded trajectories, whole-trajectory split, phase weighting, frozen stats, LR1e-5, paired actual Adam/RNG continuation.",
+  "evidence": [
+    "bc19200-fit.json",
+    "bc19200-rl1000-analysis/report.json",
+    "bc19200-state-shift.json"
+  ],
+  "why": "E physical target validation continues improving; source3 S2 improves14\u219221/32 and bothSbody32/32. M source3 recent offline fit flatter but keeping one further same-budget M continuation provides the controlled supervision comparison. No whole-route convergence claim.",
+  "expected_compute": "Prior pair19200 cumulative BC training approximately0.61GPUh. Extra12800 updates/arm estimated0.4GPUh, still below2BC default. Launcher will refresh actual budget and leases.",
+  "evaluate": "Mandatory dev32/source S2/S5/F for M4100/E4100 with independent raw-trace rescore and prior expert comparison. Retain checkpoints every100epochs; decide subsequent continuation using fit/phase/body, not short strict alone.",
+  "priority": "OriginalRL remainsGPU0. GPU1 after repaired-pool holding endpoint, before clean original-objective control if schedule permits; holding+cleancontrol both1000epoch equal-budget endpoints remain required.",
+  "next": "Do not launch concurrently with liveGPU1 job; execute after holding endpoint and archive/audit trueAdam32800 perarm."
+}

@@ -15,7 +15,7 @@ def _record(event, **details):
     for p in [R.parent/'WUJI_GOAL_HANDOFF.md',Path('/data/research/artgym/WUJI_GOAL_HANDOFF.md')]:
         if p.exists():
             old=p.read_text(); marker='<!-- RECOVERY_HISTORY -->'
-            if marker in old:old=old.split(marker,1)[1]
+            if marker in old:old=old.split(marker,1)[1].lstrip('\n')
             p.write_text(text+'\n'+marker+'\n'+old)
     return row
 def record(event, **details):
