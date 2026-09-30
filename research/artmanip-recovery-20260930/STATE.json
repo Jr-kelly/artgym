@@ -11,6 +11,39 @@
   "active_jobs": [
     {
       "source_sha256": "998b1c057e21c029884c58abe3d29ca976f05682d6a54b5092ccd4f3bef4d76e",
+      "name": "bc-executed44800-job",
+      "gpu": 1,
+      "final_phase": false,
+      "command": [
+        "/tmp/wuji-recovery-runtime/bin/python",
+        "-m",
+        "scripts.run_wuji_recovery_bc_pair",
+        "--name",
+        "bc-executed44800",
+        "--previous-name",
+        "bc-pair32000",
+        "--previous-epoch",
+        "4100",
+        "--end-epoch",
+        "5700",
+        "--arms",
+        "E",
+        "--max-seconds",
+        "1100"
+      ],
+      "timeout_seconds": 1500,
+      "started": "2026-09-30T15:20:26.233337+00:00",
+      "pid": 55940,
+      "status": "running",
+      "child_pid": 55941,
+      "heartbeat": "2026-09-30T15:20:56.450102+00:00",
+      "elapsed_seconds": 30.108378705001087,
+      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/bc-executed44800-job/status.json",
+      "pid_exists": true,
+      "host": "authorized_remote"
+    },
+    {
+      "source_sha256": "998b1c057e21c029884c58abe3d29ca976f05682d6a54b5092ccd4f3bef4d76e",
       "name": "rl-seg4-job",
       "gpu": 0,
       "final_phase": false,
@@ -42,56 +75,29 @@
       "pid": 51150,
       "status": "running",
       "child_pid": 51151,
-      "heartbeat": "2026-09-30T15:02:03.958293+00:00",
-      "elapsed_seconds": 2199.2159175569977,
+      "heartbeat": "2026-09-30T15:21:08.370993+00:00",
+      "elapsed_seconds": 3343.6528326359985,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg4-job/status.json",
-      "pid_exists": true,
-      "host": "authorized_remote"
-    },
-    {
-      "source_sha256": "998b1c057e21c029884c58abe3d29ca976f05682d6a54b5092ccd4f3bef4d76e",
-      "name": "reference-clean2000-development-job",
-      "gpu": 1,
-      "final_phase": false,
-      "command": [
-        "/tmp/wuji-recovery-runtime/bin/python",
-        "-m",
-        "scripts.evaluate_wuji_recovery_batch",
-        "--name",
-        "reference-clean2000-development",
-        "--states",
-        "research/artmanip-recovery-20260930/data/development-all.npy",
-        "--models",
-        "rlclean1500=runs/recovery-rl-reference-clean/checkpoints/epoch_001500.pth",
-        "rlclean2000=runs/recovery-rl-reference-clean/checkpoints/epoch_002000.pth"
-      ],
-      "timeout_seconds": 1800,
-      "started": "2026-09-30T15:01:33.569310+00:00",
-      "pid": 54193,
-      "status": "running",
-      "child_pid": 54194,
-      "heartbeat": "2026-09-30T15:02:03.796743+00:00",
-      "elapsed_seconds": 30.109982709996984,
-      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/reference-clean2000-development-job/status.json",
       "pid_exists": true,
       "host": "authorized_remote"
     }
   ],
-  "gpu_hours": 15.479795519999996,
+  "gpu_hours": 16.061186204166663,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
   "resource_check_utc": "2026-09-30T06:42:41Z",
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
-  "next": "GPU0 segment4 PID51150 continues to4000, then dev3500/4000. GPU1 matchedcleancontrol completed2000; dev1500/2000 PID54193 started15:01UTC. After independent rescore/comparison, execute bc44800-command.json and audit/evaluate E5700.",
+  "next": "GPU0 segment4 PID51150 continues→4000, then dev3500/4000. GPU1 E-only continuation PID55940 from08c5144 started15:20UTC,4100→5700. After training, actual parent/Adam/RNG audit, fit and independentE5700 S2/S5/F, then evidence-based next choice. Matched control completed and independently compared.",
   "last_event": {
-    "utc": "2026-09-30T15:03:36.525412+00:00",
-    "event": "matched_control_training_archives_restored",
-    "evidence": [
-      "research/artmanip-recovery-20260930/rlclean2000-restored-integrity.json",
-      "research/artmanip-recovery-20260930/training-diagnostics-clean2000-archive-restore.json"
-    ],
-    "next": "Finish matched control development, independent rescore and holding comparison; then execute E continuation"
+    "utc": "2026-09-30T15:23:29.192828+00:00",
+    "event": "e44800_actual_start_restore_verified",
+    "evidence": "research/artmanip-recovery-20260930/bc44800-start-restore.json",
+    "parent_sha256": "7d6432a7110019abc112b9cd3321a45c56e72eb1b0c88f2ade5747b638b89410",
+    "first_epoch": 4101,
+    "first_adam_updates": 32808,
+    "scope": "Exact model/Adam/CPU-CUDA-NumPy RNG state equality; archive byte hash differs from reserialization. Frozen28 tensors verified.",
+    "next": "FinishE5700; audit endpoint and evaluate independentS2/S5/F before next decision"
   },
   "monitor": {
     "pid": 1192,
@@ -135,15 +141,16 @@
     "bc32000-development-job",
     "rl-seg3-job",
     "reference3000-development-job",
-    "rl-reference-clean-job"
+    "rl-reference-clean-job",
+    "reference-clean2000-development-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T15:02:06.842304+00:00",
+  "last_resource_check_utc": "2026-09-30T15:21:20.289577+00:00",
   "next_actions": [
     "GPU0: original segment4 wrapper51150, source e80d5f4, started14:25UTC. At14:31UTC epoch3040. CP3000→3001 actual model/Adam restore and effective configuration passed. Finish4000, then development3500+4000. Decide further learning from joint phase/body/training trends and remaining budget; minimum4000 is not a convergence claim.",
-    "GPU0 segment4 PID51150 continues to4000, then dev3500/4000. GPU1 matchedcleancontrol completed2000; dev1500/2000 PID54193 started15:01UTC. After independent rescore/comparison, execute bc44800-command.json and audit/evaluate E5700.",
+    "Matched repaired-pool original control completed2000 and independently scored; see matched-control-comparison.json. Holding improves old-source body but source3 late phases worsen and source2F collapses; retain early candidates, no blind hold2000 continuation.",
     "Repaired training pool SHA d885794f6bd5c77a71591c5d5e17753b4679252c8582587ab7217d6d61c73836 passed512 static20s trials. Replaced source0 slots47/94/104/117 with originals0/1/2/3. Original reference retains its original pool. No development/final filtering.",
-    "After GPU1 control evaluation: execute bc44800-command.json, E-only4100→5700 (12800 more updates, cumulative44800 afterBC100). Then actual parent/Adam/RNG audit, fit/state-shift and development S2/S5/F. M/E same-budget comparison ends at32000; E extension is unequal additional optimization.",
+    "GPU0 segment4 PID51150 continues→4000, then dev3500/4000. GPU1 E-only continuation PID55940 from08c5144 started15:20UTC,4100→5700. After training, actual parent/Adam/RNG audit, fit and independentE5700 S2/S5/F, then evidence-based next choice. Matched control completed and independently compared.",
     "Final128 remains unopened. Freeze only after evidence-based learning stop/budget decision. Keep4GPUh and2h final reserve. Exact final batch guard exists; transfer frozen JSON and final states only after committed freeze. Final videos use fixed four development rows plus a frozen first-failure example if needed. No local GPU has been started.",
     "GitHub verified17b3c3a and draft40 assets. Latest source/restore/evaluation evidence is committed. Weights index needs refresh. Final public Release, anonymous download/restore, videos, complete report and own-process cleanup remain. Monitor1192 identity last verified14:02UTC; recheck at cleanup."
   ],
@@ -152,10 +159,11 @@
     "runs/recovery-rl-seg4"
   ],
   "bc_next_plan": "research/artmanip-recovery-20260930/bc44800-plan.json",
-  "github_last_verified_commit": "17b3c3a413085f119324f91c380f04443e59bbac",
-  "release_verified_assets": 40,
+  "github_last_verified_commit": "08c51447649a1f5ff1b963990130e7a477011aee",
+  "release_verified_assets": 42,
   "gpu_hours_by_host": {
-    "authorized_remote": 15.479795519999996,
+    "authorized_remote": 16.061186204166663,
     "local": 0.0
-  }
+  },
+  "bc_active_continuation": "runs/artmanip-recovery-20260930/bc-executed44800"
 }

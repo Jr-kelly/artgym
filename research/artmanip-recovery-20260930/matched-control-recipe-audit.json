@@ -1,0 +1,79 @@
+{
+  "equal_logged_runtime_fields": {
+    "epoch": 1000,
+    "frame": 81920000,
+    "optimizer_updates": 36000,
+    "num_actors": 5120,
+    "model_sha256": "8d3a05e94d2c6a91778f294b8b4dedeb2414c13b2a09ce128aefeaddbba7fbb6",
+    "training_states_sha256": "d885794f6bd5c77a71591c5d5e17753b4679252c8582587ab7217d6d61c73836",
+    "action_step_rad": 0.008333333767950535,
+    "control_dt": 0.03333333507180214
+  },
+  "identical_configuration": [
+    "hand",
+    "object",
+    "simulation",
+    "task randomization",
+    "policy network"
+  ],
+  "configuration_differences": [
+    {
+      "field": ".env.episodeLength",
+      "holding": 600,
+      "original_control": 1200
+    },
+    {
+      "field": ".env.goalSwitchTimeoutSec",
+      "holding": 0.0,
+      "original_control": 10.0
+    },
+    {
+      "field": ".env.maxConsecutiveSuccesses",
+      "holding": 0,
+      "original_control": 20
+    },
+    {
+      "field": ".env.successHoldDurationRangeSec",
+      "holding": "[1000000000.0, 1000000000.0]",
+      "original_control": "[0.0, 2.0]"
+    },
+    {
+      "field": ".experiment",
+      "holding": "recovery-rl-clockhold-clean",
+      "original_control": "recovery-rl-reference-clean"
+    },
+    {
+      "field": ".name",
+      "holding": "wuji_artmanip_clock_hold",
+      "original_control": "wuji_artmanip_reference"
+    },
+    {
+      "field": ".train.params.config.full_experiment_name",
+      "holding": "recovery-rl-clockhold-clean",
+      "original_control": "recovery-rl-reference-clean"
+    },
+    {
+      "field": ".train.params.config.name",
+      "holding": "recovery-rl-clockhold-clean",
+      "original_control": "recovery-rl-reference-clean"
+    }
+  ],
+  "original_control_direct_noise_observation": {
+    "effective_randomize": false,
+    "effective_joint_noise": 0.0,
+    "effective_force_scale": 0.0
+  },
+  "holding_direct_noise_fields_logged": false,
+  "noise_scope": "Holding startup predates direct effective-noise logging. Equal false-randomization configurations are recorded; do not fabricate a direct holding-startup observation.",
+  "evidence": [
+    {
+      "path": "runs/recovery-rl-clockhold-clean/startup.json",
+      "sha256": "346e0f5f17d46e41b5486cb581197c0b2617a7094d0bfb7a65e1d8230cdb1f54"
+    },
+    {
+      "path": "runs/recovery-rl-reference-clean/startup.json",
+      "sha256": "15d74fbb11233fac2ddb53df4a523abda61953b0432df1a9054764d5b1d37485"
+    }
+  ],
+  "scope": "Same CP1000 model, repaired reset pool, physical/action/policy configuration and added budget. Holding changes command/reward package and training horizon; do not attribute to one reward term."
+}
