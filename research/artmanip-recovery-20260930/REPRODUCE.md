@@ -142,3 +142,38 @@ On this workstation, ToDesk's verified `--isVideoSession=true` desktop session a
 C+G in `nvidia-smi`; it is preserved and recorded. Only that exact desktop process is allowed
 alongside video rendering, with at least16GiB free. Any unknown compute process blocks launch.
 Local video starts only after remote jobs finish and is included in the same occupied-GPU ledger.
+
+## Offline verification of the published final comparison
+
+The final artifact set uses one `recovery-final-MODEL.tar.gz` per frozen model,
+`recovery-final-weights.tar.gz` for all18 frozen checkpoint files plus the joint-limit
+reference, and `recovery-final-batch-records.tar.gz` for completed batch records.
+Download all `recovery-final-*.tar.gz` assets from this round's public Release into a
+separate checkout of the published branch/tag, then restore:
+
+```bash
+for wuji_archive in recovery-final-*.tar.gz; do
+  python3 -m scripts.restore_wuji_unified "$wuji_archive" --output .
+done
+CUDA_VISIBLE_DEVICES='' "$WUJI_PYTHON" -m scripts.summarize_wuji_recovery \
+ --directories runs/artmanip-recovery-20260930/final-g0 \
+               runs/artmanip-recovery-20260930/final-g1 \
+ --output my-final-analysis
+python3 -m scripts.audit_wuji_recovery_final \
+ --analysis my-final-analysis --output my-final-integrity.json
+python3 -m scripts.gate_wuji_recovery \
+ --reports my-final-analysis/report.json \
+ --experts my-final-analysis/report.json --output my-final-gates.json
+```
+
+This verifies recorded final trajectories without starting IsaacGym or using a GPU.
+The final weights bundle is necessary for the completeness auditor's exact checkpoint
+hash checks; the per-model final archives contain physical traces and resolved configs.
+New physical simulation additionally requires the asset/runtime installation described
+above and is a separate reproduction, not a replacement for the once-only results.
+
+Within the original experiment session, the primary model was independently scored early
+from its restored archive. `complete_wuji_recovery_final_analysis` reuses that cached result
+and scores the remaining17 restored models, preserving the same scorer hash, before
+merging `final-analysis`. It is a session orchestration helper with resource checks; the
+commands above are the portable offline rescore procedure.
