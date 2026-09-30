@@ -7,29 +7,12 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T10:54:07.583338+00:00",
-  "event": "rl1750_checkpoint_integrity",
-  "audit": {
-    "checkpoint": "runs/recovery-rl-seg2/checkpoints/epoch_001750.pth",
-    "sha256": "bd77d27d5cae027c4de1c8482973def6f07d11bb22317bfbaadad5e9dc40753a",
-    "epoch": 1750,
-    "frame": 143360000,
-    "updates": 63000,
-    "adam_steps": [
-      63000
-    ],
-    "rng_keys": [
-      "cuda",
-      "numpy",
-      "python",
-      "torch"
-    ],
-    "model_digest": "3e72cde7f873fbc82fd6e5fa5cb0fb3407372c3a2468a1447056c7c80394b1ee",
-    "passed": true,
-    "scope": "CPU checkpoint integrity and optional actual resume counters/model. PhysX is not serialized; fresh physical rollout and recurrent reset. No capability claim."
-  },
-  "evidence": "research/artmanip-recovery-20260930/rl1750-integrity.json",
-  "next": "Retain checkpoint in upcoming full segment2 archive after2000; intermediate1500alreadyuploaded. No GPU interruption."
+  "utc": "2026-09-30T11:28:08.231331+00:00",
+  "event": "segment2_archive_actual_restore_verified",
+  "archive_sha256": "3730465860e261be35d2588b8f49ac1ec9d6a542820e6f754c4ea1572c417207",
+  "restored_files": 26,
+  "evidence": "research/artmanip-recovery-20260930/rl2000-archive-restore.json",
+  "next": "Uploadfullsegmentarchive; devbatchrunningGPU0,holdingcontinuesGPU1"
 }
 ```
 
@@ -79,50 +62,44 @@
       "pid": 25006,
       "status": "running",
       "child_pid": 25007,
-      "heartbeat": "2026-09-30T10:52:04.288815+00:00",
-      "elapsed_seconds": 2801.840406296993,
+      "heartbeat": "2026-09-30T11:23:12.019890+00:00",
+      "elapsed_seconds": 4669.577991318991,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-clockhold-clean-job/status.json",
       "pid_exists": true
     },
     {
-      "source_sha256": "f3aa89d7dd469f42563d350d539692893c96bccfc1edbed3afc06947af96c54e",
-      "name": "rl-seg2-job",
+      "name": "reference2000-holdingmid-development-job",
       "gpu": 0,
+      "timeout": 3000,
       "command": [
-        "/tmp/wuji-recovery-runtime/bin/python",
+        "PYTHON",
         "-m",
-        "scripts.train_wuji_recovery_rl",
-        "task=wuji_artmanip_reference",
-        "hand=wuji_paper_official_actuator",
-        "object=knife_wuji_reference",
-        "train=wujiArtManipReferenceSAPG",
-        "num_envs=5120",
-        "headless=True",
-        "pipeline=gpu",
-        "graphics_device_id=-1",
-        "force_render=False",
-        "num_subscenes=0",
-        "multi_gpu=False",
-        "seed=2026093011",
-        "experiment=recovery-rl-seg2",
-        "max_iterations=2000",
-        "checkpoint=runs/recovery-rl-seg1-retry1/checkpoints/epoch_001000.pth",
-        "train.params.config.save_frequency=250",
-        "train.params.config.evaluation_frequency=250",
-        "train.params.config.checkpoint_first_epoch=1250"
+        "scripts.evaluate_wuji_recovery_batch",
+        "--name",
+        "reference2000-holdingmid-development",
+        "--states",
+        "research/artmanip-recovery-20260930/data/development-all.npy",
+        "--models",
+        "rl1500=runs/recovery-rl-seg2/checkpoints/epoch_001500.pth",
+        "rl2000=runs/recovery-rl-seg2/checkpoints/epoch_002000.pth",
+        "rlhold1250=runs/recovery-rl-clockhold-clean/checkpoints/epoch_001250.pth",
+        "rlhold1500=runs/recovery-rl-clockhold-clean/checkpoints/epoch_001500.pth",
+        "--protocols",
+        "S2",
+        "S5",
+        "F"
       ],
-      "timeout_seconds": 8400,
-      "started": "2026-09-30T09:20:02.262280+00:00",
-      "pid": 18856,
-      "status": "running",
-      "child_pid": 18857,
-      "heartbeat": "2026-09-30T10:51:55.766705+00:00",
-      "elapsed_seconds": 5513.385484582002,
-      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg2-job/status.json",
-      "pid_exists": true
+      "source_sha": "fb0a332405c9ac9b9c08411c571445a1e4646a3c",
+      "created_utc": "2026-09-30T11:23:13.275763+00:00",
+      "budget_receipt_utc": "2026-09-30T11:23:13.118592+00:00",
+      "occupied_gpu_hours": 8.428717526944444,
+      "other_jobs_reserved_gpu_hours": 1.0358489691666668,
+      "root": "/tmp/artgym-recovery-20260930",
+      "pin": "/tmp/artgym-recovery-20260930/pins/fb0a332405c9ac9b9c08411c571445a1e4646a3c",
+      "pid": 35029
     }
   ],
-  "gpu_hours": 7.422496631666667,
+  "gpu_hours": 8.428717526944444,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -130,29 +107,12 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "Original1756→2000, holding1397→2000 asof10:52UTC. When original completes, use GPU0 preregistered reference2000-holdingmid development batch, then resume original3000. BC32000 and matched repaired originalcontrol stillremain.",
   "last_event": {
-    "utc": "2026-09-30T10:54:07.583338+00:00",
-    "event": "rl1750_checkpoint_integrity",
-    "audit": {
-      "checkpoint": "runs/recovery-rl-seg2/checkpoints/epoch_001750.pth",
-      "sha256": "bd77d27d5cae027c4de1c8482973def6f07d11bb22317bfbaadad5e9dc40753a",
-      "epoch": 1750,
-      "frame": 143360000,
-      "updates": 63000,
-      "adam_steps": [
-        63000
-      ],
-      "rng_keys": [
-        "cuda",
-        "numpy",
-        "python",
-        "torch"
-      ],
-      "model_digest": "3e72cde7f873fbc82fd6e5fa5cb0fb3407372c3a2468a1447056c7c80394b1ee",
-      "passed": true,
-      "scope": "CPU checkpoint integrity and optional actual resume counters/model. PhysX is not serialized; fresh physical rollout and recurrent reset. No capability claim."
-    },
-    "evidence": "research/artmanip-recovery-20260930/rl1750-integrity.json",
-    "next": "Retain checkpoint in upcoming full segment2 archive after2000; intermediate1500alreadyuploaded. No GPU interruption."
+    "utc": "2026-09-30T11:28:08.231331+00:00",
+    "event": "segment2_archive_actual_restore_verified",
+    "archive_sha256": "3730465860e261be35d2588b8f49ac1ec9d6a542820e6f754c4ea1572c417207",
+    "restored_files": 26,
+    "evidence": "research/artmanip-recovery-20260930/rl2000-archive-restore.json",
+    "next": "Uploadfullsegmentarchive; devbatchrunningGPU0,holdingcontinuesGPU1"
   },
   "monitor": {
     "pid": 1192,
@@ -187,10 +147,11 @@
     "holding-precheck-retry2-job",
     "reference-pool-static-job",
     "holding-pool-static-job",
-    "holding-repaired-pool-static-job"
+    "holding-repaired-pool-static-job",
+    "rl-seg2-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T10:52:25.432767+00:00",
+  "last_resource_check_utc": "2026-09-30T11:23:13.118592+00:00",
   "next_actions": [
     "GPU0 original rl-seg2-job18856 continues2000; original pool has4/512 early static-unstable perturbations, retained baseline explicitly labelled. No NaN or action mapping error.",
     "Repaired training pool d885794f6bd5c77a71591c5d5e17753b4679252c8582587ab7217d6d61c73836 passed full51220sec static and clock/mapping checks. Four source0 slots47/94/104/117 replaced by original0/1/2/3, distinctcounts124/128/128/128. No evaluation filtering.",
