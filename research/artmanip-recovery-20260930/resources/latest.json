@@ -1,5 +1,5 @@
 {
-  "utc": "2026-09-30T17:33:06.521455+00:00",
+  "utc": "2026-09-30T17:56:50.648180+00:00",
   "jobs": [
     {
       "source_sha256": "f3aa89d7dd469f42563d350d539692893c96bccfc1edbed3afc06947af96c54e",
@@ -821,12 +821,15 @@
       "timeout_seconds": 2800,
       "started": "2026-09-30T17:12:10.676539+00:00",
       "pid": 67484,
-      "status": "running",
+      "status": "completed",
       "child_pid": 67485,
-      "heartbeat": "2026-09-30T17:32:45.439261+00:00",
-      "elapsed_seconds": 1234.6927468890062,
+      "heartbeat": "2026-09-30T17:51:19.667892+00:00",
+      "elapsed_seconds": 2348.915327203009,
+      "returncode": 0,
+      "finished": "2026-09-30T17:51:37.686304+00:00",
+      "wall_seconds": 2367.0095720490062,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/bc-seed2-executed44800-job/status.json",
-      "pid_exists": true,
+      "pid_exists": false,
       "host": "authorized_remote"
     },
     {
@@ -1461,6 +1464,33 @@
       "wall_seconds": 708.1070815359999,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/bc-pair12800-job/status.json",
       "pid_exists": false,
+      "host": "authorized_remote"
+    },
+    {
+      "source_sha256": "998b1c057e21c029884c58abe3d29ca976f05682d6a54b5092ccd4f3bef4d76e",
+      "name": "aggregation2-collection-job",
+      "gpu": 0,
+      "final_phase": false,
+      "command": [
+        "/tmp/wuji-recovery-runtime/bin/python",
+        "-m",
+        "scripts.run_wuji_recovery_aggregation_collection",
+        "--name",
+        "aggregation2-collection",
+        "--checkpoint",
+        "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E/epoch_005700.pth",
+        "--states",
+        "research/artmanip-recovery-20260930/data/aggregation1-states.npy"
+      ],
+      "timeout_seconds": 900,
+      "started": "2026-09-30T17:53:30.765373+00:00",
+      "pid": 71007,
+      "status": "running",
+      "child_pid": 71008,
+      "heartbeat": "2026-09-30T17:56:31.610509+00:00",
+      "elapsed_seconds": 180.7552565789956,
+      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/aggregation2-collection-job/status.json",
+      "pid_exists": true,
       "host": "authorized_remote"
     },
     {
@@ -2513,6 +2543,6 @@
       }
     ]
   },
-  "gpus": "0, 80 %, 2947 MiB\n1, 0 %, 0 MiB\n2, 0 %, 0 MiB\n3, 0 %, 0 MiB\n",
-  "compute_processes": "GPU-35c575bc-1ac2-47f4-b845-189cb328f4b8, 67485, /tmp/wuji-recovery-runtime/bin/python, 2938 MiB\n"
+  "gpus": "0, 0 %, 847 MiB\n1, 0 %, 0 MiB\n2, 0 %, 0 MiB\n3, 0 %, 0 MiB\n",
+  "compute_processes": "GPU-35c575bc-1ac2-47f4-b845-189cb328f4b8, 71277, /tmp/wuji-recovery-runtime/bin/python, 838 MiB\n"
 }

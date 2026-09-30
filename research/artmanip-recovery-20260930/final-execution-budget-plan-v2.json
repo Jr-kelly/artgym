@@ -1,0 +1,20 @@
+{
+  "utc": "2026-09-30T17:55:58.696791+00:00",
+  "condition": "All fixed second-seed stages concluded and exact once-only final freeze committed; not permission to open before then.",
+  "expected_models": 18,
+  "gpu0_max_seconds": 5400,
+  "gpu1_max_seconds": 5400,
+  "local_video_max_seconds_each": 500,
+  "local_video_count": 3,
+  "remote_and_local_serial": true,
+  "total_max_gpu_seconds": 12300,
+  "total_gpu_hours": 3.4166666666666665,
+  "normal_ceiling_gpu_hours": 20.5,
+  "unmetered_reserve_gpu_hours": 0.05,
+  "worst_total_gpu_hours": 23.96666666666667,
+  "models": "Split frozen18 model list9/9 across GPUs0/1. Include E4100 as matched-budget endpoint alongside M4100; retain extra-budget E5700 separately.",
+  "videos": "S2 fixed rows, S5 fixed rows, S5 first development failure rows; same primary teacher, local replay only after all remote jobs. Reproduced result must be rescored, not presumed failure.",
+  "limits": "Each launch refreshes actual global budget and processes. No training or reselection after final freeze. Infrastructure failure recorded and reviewed within original budget; no automatic duplicate final cells.",
+  "supersedes": "final-execution-budget-plan.json before any final opening",
+  "reason": "Final frozen M/E comparison must include both original32000-update matched endpoints, not M32000 versus E44800."
+}

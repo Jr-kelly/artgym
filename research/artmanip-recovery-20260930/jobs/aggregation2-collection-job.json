@@ -1,0 +1,25 @@
+{
+  "name": "aggregation2-collection-job",
+  "gpu": 0,
+  "timeout": 900,
+  "final_phase": false,
+  "command": [
+    "PYTHON",
+    "-m",
+    "scripts.run_wuji_recovery_aggregation_collection",
+    "--name",
+    "aggregation2-collection",
+    "--checkpoint",
+    "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E/epoch_005700.pth",
+    "--states",
+    "research/artmanip-recovery-20260930/data/aggregation1-states.npy"
+  ],
+  "source_sha": "9f54d74e8b6a44932be0ad83bc48474efd9bee29",
+  "created_utc": "2026-09-30T17:53:25.931214+00:00",
+  "budget_receipt_utc": "2026-09-30T17:53:25.659613+00:00",
+  "occupied_gpu_hours": 19.69214771138888,
+  "other_jobs_reserved_gpu_hours": 0.0,
+  "root": "/tmp/artgym-recovery-20260930",
+  "pin": "/tmp/artgym-recovery-20260930/pins/9f54d74e8b6a44932be0ad83bc48474efd9bee29",
+  "pid": 71007
+}

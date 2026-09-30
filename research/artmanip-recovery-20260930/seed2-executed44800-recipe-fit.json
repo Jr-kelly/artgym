@@ -1,0 +1,131 @@
+{
+  "passed": true,
+  "same_eight_sequence_and_expert_hashes": true,
+  "initial_sha256": "3801eca359022e729510fef28f00d43b35af8561755f20a5f4be0206b6a07ab8",
+  "sampling_seed": {
+    "seed": 2026093061,
+    "scope": "Shared parent weights/Adam; independent CPU/CUDA/NumPy optimization sampling stream. Not an exact RNG continuation or independent expert pretraining."
+  },
+  "end_fit": {
+    "arm": "E",
+    "epoch": 5700,
+    "executed_mse": 0.0005064728156867204,
+    "target_range_mean": 0.00019712597259058384,
+    "source3_target_mean": 0.0005121787980897352
+  },
+  "validation_curve": [
+    {
+      "arm": "E",
+      "epoch": 100,
+      "executed_mse": 0.015231716224661795,
+      "target_range_mean": 0.001092686528863851,
+      "source3_target_mean": 0.0032906351843848825
+    },
+    {
+      "arm": "E",
+      "epoch": 400,
+      "executed_mse": 0.003419853577725007,
+      "target_range_mean": 0.0005573228445427958,
+      "source3_target_mean": 0.0015431976644322276
+    },
+    {
+      "arm": "E",
+      "epoch": 800,
+      "executed_mse": 0.0016419510702689877,
+      "target_range_mean": 0.00038956395837885793,
+      "source3_target_mean": 0.0010275957465637475
+    },
+    {
+      "arm": "E",
+      "epoch": 1200,
+      "executed_mse": 0.0011823698769148905,
+      "target_range_mean": 0.0003354734944878146,
+      "source3_target_mean": 0.0008800246578175575
+    },
+    {
+      "arm": "E",
+      "epoch": 1600,
+      "executed_mse": 0.0009095412506212597,
+      "target_range_mean": 0.00028721226954075973,
+      "source3_target_mean": 0.000736047251848504
+    },
+    {
+      "arm": "E",
+      "epoch": 2000,
+      "executed_mse": 0.0007955185305945633,
+      "target_range_mean": 0.0002655587413755711,
+      "source3_target_mean": 0.0006819684931542724
+    },
+    {
+      "arm": "E",
+      "epoch": 2400,
+      "executed_mse": 0.0008395370552989334,
+      "target_range_mean": 0.00027106288871436846,
+      "source3_target_mean": 0.0007258088444359601
+    },
+    {
+      "arm": "E",
+      "epoch": 2800,
+      "executed_mse": 0.0006632767156133923,
+      "target_range_mean": 0.00023668466383242048,
+      "source3_target_mean": 0.0006064046610845253
+    },
+    {
+      "arm": "E",
+      "epoch": 3200,
+      "executed_mse": 0.0006257764844121994,
+      "target_range_mean": 0.00022873961734148907,
+      "source3_target_mean": 0.0005894191563129425
+    },
+    {
+      "arm": "E",
+      "epoch": 3600,
+      "executed_mse": 0.0005929256237777736,
+      "target_range_mean": 0.00022044950219424209,
+      "source3_target_mean": 0.0005689240933861583
+    },
+    {
+      "arm": "E",
+      "epoch": 4000,
+      "executed_mse": 0.0005714448520848237,
+      "target_range_mean": 0.0002149934935005149,
+      "source3_target_mean": 0.000554711019503884
+    },
+    {
+      "arm": "E",
+      "epoch": 4400,
+      "executed_mse": 0.0005509162501766696,
+      "target_range_mean": 0.00021033969278505538,
+      "source3_target_mean": 0.0005423096299637109
+    },
+    {
+      "arm": "E",
+      "epoch": 4800,
+      "executed_mse": 0.00054227170608101,
+      "target_range_mean": 0.000208253986784257,
+      "source3_target_mean": 0.0005414842016762123
+    },
+    {
+      "arm": "E",
+      "epoch": 5200,
+      "executed_mse": 0.0005206772150359029,
+      "target_range_mean": 0.0002009344889302156,
+      "source3_target_mean": 0.0005210169038036838
+    },
+    {
+      "arm": "E",
+      "epoch": 5600,
+      "executed_mse": 0.0005116195650316513,
+      "target_range_mean": 0.00020115727238589898,
+      "source3_target_mean": 0.0005156074621481821
+    },
+    {
+      "arm": "E",
+      "epoch": 5700,
+      "executed_mse": 0.0005064728156867204,
+      "target_range_mean": 0.00019712597259058384,
+      "source3_target_mean": 0.0005121787980897352
+    }
+  ],
+  "scope": "Offline recorded-history fitting and recipe replication; not closed-loop strict success."
+}

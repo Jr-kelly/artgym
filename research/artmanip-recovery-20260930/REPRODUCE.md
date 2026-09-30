@@ -101,7 +101,7 @@ Evaluation players call `Runner.load_config`, which seeds Torch/CUDA/NumPy/Pytho
 For final physical evaluation only, `scripts.launch_wuji_recovery --final` requires an exact committed `final-freeze.json` with `source_sha` identifying frozen simulator/evaluator code. It rejects training commands and requires all development/training jobs to finish. Normal jobs subtract the current reserved-final GPU budget in STATE.json from the24GPUh limit and honor its training cutoff. After the exactS64 pass, the registered full second-seed replication reallocated0.5GPUh: the current reserve is3.5GPUh and2wall hours (20.5GPUh/20:42UTC ordinary ceiling); frozen final jobs may use up to24GPUh and22:42UTC. Earlier development reserved4GPUh; see teacher-method-freeze.json and STATE.json for the dated allocation. This switch does not authorize repeated tuning or reopening final scores. The final cohort has not been opened during current development.
 
 
-Final model selection is reproducible with `scripts.freeze_wuji_recovery`: supply all completed development `--gates`, one `--endpoints` name per trained family, and the evidence/budget `--reason` for ending development. It requires the originalRL4000 development result and the repaired-pool original control, rechecks no active GPU jobs, ranks each family using the preregistered ordering, retains fixed endpoints and the BC100/RL1000 anchors, resolves exact weights through actual batch plans, and hashes the untouched final state file. It creates `final-freeze.json` exclusively and records the event; it does not evaluate. Commit that exact file before using the final launcher. This helper has been syntax/rank checked on existing development evidence; it has not been run to freeze the current experiment.
+Final model selection is reproducible with `scripts.freeze_wuji_recovery`: supply all completed development `--gates`, at least one `--endpoints` name per trained family (include both E4100 matched-budget and E5700 extended endpoints), and the evidence/budget `--reason` for ending development. It requires the originalRL4000 development result and the repaired-pool original control, rechecks no active GPU jobs, ranks each family using the preregistered ordering, retains fixed endpoints and the BC100/RL1000 anchors, resolves exact weights through actual batch plans, and hashes the untouched final state file. It creates `final-freeze.json` exclusively and records the event; it does not evaluate. Commit that exact file before using the final launcher. This helper has been syntax/rank checked on existing development evidence; it has not been run to freeze the current experiment.
 
 
 TheBC32000 complete local archive exceeded GitHub's2GiB single-asset limit. Published `recovery-bc32000-M.tar.gz` and `recovery-bc32000-E.tar.gz` restore into the same output root and together reconstruct the complete run. The oversized full archive remains in local `delivery/artmanip-recovery-20260930/local-only/`. `audit_wuji_recovery_bc --parent-pair runs/artmanip-recovery-20260930/bc-pair19200 --parent-epoch 2500` additionally checks the new segment's actual saved initial model, full Adam and CPU/CUDA/NumPy RNG against each parent, plus the first new update.
@@ -122,3 +122,23 @@ If completed, pass the predeclared second-seed endpoint to `freeze_wuji_recovery
 
 
 After frozen local videos are rendered, package with `package_wuji_recovery_video`. Direct MP4 Release receipts use `kind: standalone_video`, relative `archive` path, exact `sha256` and byte `size`; `upload_wuji_recovery` verifies the same GitHub server digest as for tar archives. The weight index hashes these standalone videos separately and does not treat them as checkpoint tarballs. Video trace/report/config sources remain in a normal verified evidence archive.
+
+After all frozen final batches complete, rescore their original traces with
+`summarize_wuji_recovery`, then run the complete-cohort audit:
+
+```bash
+python3 -m scripts.audit_wuji_recovery_final \
+ --analysis research/artmanip-recovery-20260930/final-analysis \
+ --output research/artmanip-recovery-20260930/final-integrity.json
+```
+
+The audit requires every frozen model/protocol exactly once,512 unfiltered initial rows,
+matching weight/cohort/evaluator/scorer hashes, the declared control interface and protocol,
+and128 unique independently scored trials per source. It checks completeness and provenance;
+capability is assessed separately by `gate_wuji_recovery` using final same-cohort experts.
+
+The local renderer rechecks compute processes and free memory immediately before launch.
+On this workstation, ToDesk's verified `--isVideoSession=true` desktop session appears as
+C+G in `nvidia-smi`; it is preserved and recorded. Only that exact desktop process is allowed
+alongside video rendering, with at least16GiB free. Any unknown compute process blocks launch.
+Local video starts only after remote jobs finish and is included in the same occupied-GPU ledger.
