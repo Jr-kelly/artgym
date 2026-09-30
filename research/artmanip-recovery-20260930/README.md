@@ -1,6 +1,6 @@
 # Wuji 多抓姿滑块操作：审计与学习
 
-截至 2026-09-30 18:17 UTC，同一套 **Eagg6100 特权 teacher** 权重在来源0/1/2/3的独立开发复核中通过严格保持门槛。完整第二优化种子已复现方法，但64例的一个相对刀身门槛未过；最终每来源128初态尚未打开。当前结论只适用于固定仿真刀及已训练基础抓姿邻域。
+截至 2026-09-30 18:20 UTC，同一套 **Eagg6100 特权 teacher** 权重在来源0/1/2/3的独立开发复核中通过严格保持门槛。完整第二优化种子已复现方法，但64例的一个相对刀身门槛未过；最终每来源128初态已在冻结后首次打开，18个模型的验证正在运行，结果尚未完成。当前结论只适用于固定仿真刀及已训练基础抓姿邻域。
 
 ## 当前最强证据
 
@@ -18,7 +18,7 @@
 八个S格均满足严格成功≥80%、刀身稳定≥95%，并通过与同批负责专家的相对门槛。F完成一轮不等于40秒稳定。逐格Wilson区间、阶段指标和专家参考见 [STRICT64.md](STRICT64.md)；原始轨迹由独立实现逐回合复算。
 
 候选按事前登记的32例排序选出，64例只作复核：
-`runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth`，SHA256 `2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8`。方法冻结见 [teacher-method-freeze.json](teacher-method-freeze.json)，不等同最终集冻结。
+`runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth`，SHA256 `2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8`。方法冻结见 [teacher-method-freeze.json](teacher-method-freeze.json)；最终模型、源码、初态和协议见不可改写的 [final-freeze.json](final-freeze.json)。
 
 第二种子S2严格[64,62,63,58]/64、S5[63,64,63,60]/64。源1 S2刀身相对专家下降3.125点，超过原定3点上限，严格复验保留为失败；不放宽门槛或重选主点。详见 [SECOND_SEED.md](SECOND_SEED.md)。
 
