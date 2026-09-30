@@ -42,14 +42,45 @@
       "pid": 51150,
       "status": "running",
       "child_pid": 51151,
-      "heartbeat": "2026-09-30T16:06:20.370677+00:00",
-      "elapsed_seconds": 6055.607467775,
+      "heartbeat": "2026-09-30T16:18:53.477995+00:00",
+      "elapsed_seconds": 6808.731770580998,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg4-job/status.json",
+      "pid_exists": true,
+      "host": "authorized_remote"
+    },
+    {
+      "source_sha256": "998b1c057e21c029884c58abe3d29ca976f05682d6a54b5092ccd4f3bef4d76e",
+      "name": "aggregation1-pair6400-job",
+      "gpu": 1,
+      "final_phase": false,
+      "command": [
+        "/tmp/wuji-recovery-runtime/bin/python",
+        "-m",
+        "scripts.run_wuji_recovery_aggregation_pair",
+        "--name",
+        "aggregation1-pair6400",
+        "--data",
+        "runs/artmanip-recovery-20260930/aggregation1-data",
+        "--availability",
+        "research/artmanip-recovery-20260930/aggregation1-availability.json",
+        "--init",
+        "runs/artmanip-recovery-20260930/bc-executed44800/E/epoch_005700.pth",
+        "--end-epoch",
+        "6500"
+      ],
+      "timeout_seconds": 2000,
+      "started": "2026-09-30T16:12:09.984833+00:00",
+      "pid": 60992,
+      "status": "running",
+      "child_pid": 60993,
+      "heartbeat": "2026-09-30T16:18:41.770815+00:00",
+      "elapsed_seconds": 391.6670171880105,
+      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/aggregation1-pair6400-job/status.json",
       "pid_exists": true,
       "host": "authorized_remote"
     }
   ],
-  "gpu_hours": 17.40526096944444,
+  "gpu_hours": 17.726283764444442,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -57,19 +88,22 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "GPU0 originalsegment4 continues to4000, then development3500/4000. GPU1 E5700 development PID57178 started15:34UTC. E44800 training completed, actual parent/Adam/RNG and archive restore passed. After development, independently score and diagnose state shift; choose further learning from phase/body/fit and actual budget.",
   "last_event": {
-    "utc": "2026-09-30T16:08:44.195638+00:00",
-    "event": "archive_completed",
-    "name": "recovery-aggregation1-collection",
-    "archive": "delivery/artmanip-recovery-20260930/recovery-aggregation1-collection.tar.gz",
-    "sha256": "dc9b090813098d5b467551e558a17d70754002b4beb45fc480e22f9ba712273b",
-    "size": 395266433,
-    "files": 103,
-    "next": "Restore-check and upload; local originals retained"
+    "utc": "2026-09-30T16:20:06.483851+00:00",
+    "event": "aggregation1_both_actual_resumes_and_publication_verified",
+    "evidence": [
+      "research/artmanip-recovery-20260930/aggregation1-replay-start-restore.json",
+      "research/artmanip-recovery-20260930/aggregation1-aggregate-start-restore.json"
+    ],
+    "parent_sha256": "2f85fa6b77b9c5358d519dcd816b285efcf33900498400dd54a8ae22bba1fac3",
+    "release_assets": 47,
+    "commit": "0e9663a24adf63fcee3ef6f0f57af93d4db8cdb0",
+    "upload_retry": "GitHub502 firstretry succeeded, collection anddatasets serverSHA verified",
+    "next": "Finish aggregate6500 and originalRL4000; pull all weights, audit pairedfixedstate/RNG and evaluate preregistered6100/6500 and3500/4000. No final freeze."
   },
   "monitor": {
     "pid": 1192,
     "host": "10.13.160.5:33024",
-    "checked_utc": "2026-09-30T14:02:23.439782+00:00",
+    "checked_utc": "2026-09-30T16:14:30+00:00",
     "command_verified": "python3 -m scripts.monitor_wuji_recovery_resources"
   },
   "recorded_finished_jobs": [
@@ -116,7 +150,7 @@
     "aggregation1-collection-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T16:06:23.113543+00:00",
+  "last_resource_check_utc": "2026-09-30T16:18:54.390219+00:00",
   "next_actions": [
     "Original RL segment4 active, wrapper51150 GPU0 started14:25UTC; finish4000 then independent development3500/4000 and decide further training from phase/body/training trends and remaining normal20GPUh.",
     "Aggregation collection wrapper59421 GPU1 started15:59UTC, immutable95f0620, timeout1800. Behavior and scripted handoverS2 completed with exact same-GPU expert replay0; S5 outstanding. Independently assess full availability gate before fitting.",
@@ -129,10 +163,10 @@
     "runs/recovery-rl-seg4"
   ],
   "bc_next_plan": "research/artmanip-recovery-20260930/bc44800-plan.json",
-  "github_last_verified_commit": "a3d713ed9bd17bd5b1c7d281a0a73611dde6f44a",
-  "release_verified_assets": 45,
+  "github_last_verified_commit": "0e9663a24adf63fcee3ef6f0f57af93d4db8cdb0",
+  "release_verified_assets": 47,
   "gpu_hours_by_host": {
-    "authorized_remote": 17.40526096944444,
+    "authorized_remote": 17.726283764444442,
     "local": 0.0
   },
   "bc_executed_endpoint": {

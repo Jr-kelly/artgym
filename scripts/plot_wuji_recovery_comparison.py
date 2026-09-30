@@ -31,9 +31,10 @@ def main():
         writer = csv.DictWriter(f, fieldnames=fields)
         writer.writeheader()
         writer.writerows(rows)
-    patterns = [('BC', r'([ME])(\d+)', 'Additional BC Adam updates after historical BC100'),
-                ('RL', r'(rl(?:hold|clean)?)(\d+)', 'Total training interactions (million)')]
-    for title, pattern, xlabel in patterns:
+    patterns = [('BC', r'([ME])(\d+)', 'Additional BC Adam updates after historical BC100', 100),
+                ('RL', r'(rl(?:hold|clean)?)(\d+)', 'Total training interactions (million)', None),
+                ('Aggregation', r'(Eagg|Ereplay)(\d+)', 'Additional BC Adam updates after shared E5700', 5700)]
+    for title, pattern, xlabel, bc_parent in patterns:
         selected = [r for r in rows if re.fullmatch(pattern, r['model'])]
         if not selected:
             continue
@@ -49,8 +50,8 @@ def main():
                          and re.fullmatch(pattern, r['model'])[1] == family]
                 group.sort(key=lambda r: int(re.fullmatch(pattern, r['model'])[2]))
                 epochs = [int(re.fullmatch(pattern, r['model'])[2]) for r in group]
-                xs = [(e - 100) * 8 for e in epochs] if title == 'BC' else [e * .08192 for e in epochs]
-                style = {'M': '--', 'E': '-', 'rl': '-', 'rlhold': '--', 'rlclean': ':'}[family]
+                xs = [(e - bc_parent) * 8 for e in epochs] if bc_parent is not None else [e * .08192 for e in epochs]
+                style = {'M': '--', 'E': '-', 'Eagg': '-', 'Ereplay': '--', 'rl': '-', 'rlhold': '--', 'rlclean': ':'}[family]
                 for row_index, metric in enumerate(metrics):
                     ax = axes[row_index, col]
                     ax.plot(xs, [r[metric] for r in group], style, marker='o', markersize=3,

@@ -6,10 +6,11 @@ def gh(*args):return subprocess.check_output(['gh',*args],cwd=R,text=True,timeou
 def main():
     release=json.loads(gh('release','view',TAG,'--repo',REPO,'--json','databaseId,url,isDraft'));rid=release['databaseId'];assert release['isDraft']
     verified=[]
+    assets=json.loads(gh('api',f'repos/{REPO}/releases/{rid}/assets','--paginate'))
     for receipt in sorted((R/'delivery/artmanip-recovery-20260930').glob('*.receipt.json')):
         item=json.loads(receipt.read_text());p=R/item['archive'];assert p.exists()
         assert item['size'] <= 2*1024**3, 'Split oversized archives before GitHub upload: '+str(p)
-        assets=json.loads(gh('api',f'repos/{REPO}/releases/{rid}/assets','--paginate'));found=[a for a in assets if a['name']==p.name]
+        found=[a for a in assets if a['name']==p.name]
         if not found:
             record('release_upload_started',name=p.name,sha256=item['sha256'],release=TAG,next='Verify server digest')
             gh('release','upload',TAG,str(p),'--repo',REPO)
