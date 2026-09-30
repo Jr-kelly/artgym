@@ -1,0 +1,124 @@
+{
+  "models": [
+    {
+      "model": "rl500",
+      "F_passed": true,
+      "S_passed": false,
+      "cohort_n": 32,
+      "promotion64_indicated": false,
+      "student_or_second_seed_eligible": false,
+      "worst_strict": 0.0,
+      "worst_phase_hold": 0.21875,
+      "worst_body": 0.0,
+      "mean_slider_error_m": 0.012563846772536635,
+      "cells": [
+        {
+          "source": 0,
+          "protocol": "S2",
+          "n": 32,
+          "margins": {
+            "strict_absolute": -0.8,
+            "body_absolute": -0.95,
+            "strict_relative": -0.9,
+            "body_relative": -0.97
+          },
+          "passed": false,
+          "within_one_episode": false
+        },
+        {
+          "source": 1,
+          "protocol": "S2",
+          "n": 32,
+          "margins": {
+            "strict_absolute": -0.8,
+            "body_absolute": -0.95,
+            "strict_relative": -0.9,
+            "body_relative": -0.97
+          },
+          "passed": false,
+          "within_one_episode": false
+        },
+        {
+          "source": 2,
+          "protocol": "S2",
+          "n": 32,
+          "margins": {
+            "strict_absolute": -0.8,
+            "body_absolute": -0.91875,
+            "strict_relative": -0.9,
+            "body_relative": -0.93875
+          },
+          "passed": false,
+          "within_one_episode": false
+        },
+        {
+          "source": 3,
+          "protocol": "S2",
+          "n": 32,
+          "margins": {
+            "strict_absolute": -0.8,
+            "body_absolute": -0.95,
+            "strict_relative": -0.775,
+            "body_relative": -0.9075
+          },
+          "passed": false,
+          "within_one_episode": false
+        },
+        {
+          "source": 0,
+          "protocol": "S5",
+          "n": 32,
+          "margins": {
+            "strict_absolute": -0.8,
+            "body_absolute": -0.95,
+            "strict_relative": -0.9,
+            "body_relative": -0.97
+          },
+          "passed": false,
+          "within_one_episode": false
+        },
+        {
+          "source": 1,
+          "protocol": "S5",
+          "n": 32,
+          "margins": {
+            "strict_absolute": -0.8,
+            "body_absolute": -0.95,
+            "strict_relative": -0.9,
+            "body_relative": -0.97
+          },
+          "passed": false,
+          "within_one_episode": false
+        },
+        {
+          "source": 2,
+          "protocol": "S5",
+          "n": 32,
+          "margins": {
+            "strict_absolute": -0.8,
+            "body_absolute": -0.95,
+            "strict_relative": -0.9,
+            "body_relative": -0.97
+          },
+          "passed": false,
+          "within_one_episode": false
+        },
+        {
+          "source": 3,
+          "protocol": "S5",
+          "n": 32,
+          "margins": {
+            "strict_absolute": -0.8,
+            "body_absolute": -0.95,
+            "strict_relative": -0.8375,
+            "body_relative": -0.97
+          },
+          "passed": false,
+          "within_one_episode": false
+        }
+      ]
+    }
+  ],
+  "ordering": "Worst S success, worst phase endpoint hold, worst body; common closed-loop slider error for cross-family ties. BC within-family offline joint-target fit remains diagnostic/tie evidence. No incomparable raw mu loss ranking.",
+  "promotion_note": "Within one episode at32 only triggers a64 check, never labels32 as passed; full64 exact thresholds required before second seed/student."
+}
