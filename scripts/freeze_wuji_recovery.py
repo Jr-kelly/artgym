@@ -24,6 +24,31 @@ def rank(row):
             row['mean_slider_error_m'], epoch, row['model'])
 
 
+def failure_video(plans, model, development_sha):
+    """First failed development row; chosen before final results are opened."""
+    for protocol in ['S5', 'S2']:
+        for path in plans:
+            plan = json.loads(path.read_text())
+            if plan['states_sha256'] != development_sha or model not in plan['models']:
+                continue
+            report_path = path.parent / (model + '-' + protocol) / 'report.json'
+            if not report_path.exists():
+                continue
+            rows = json.loads(report_path.read_text())['records']
+            assert len(rows) == 128
+            # Prioritize source3, then the first other source with a failure.
+            for source in [3, 0, 1, 2]:
+                for index in range(source * 32, (source + 1) * 32):
+                    if not rows[index]['stable_full_all_endpoints']:
+                        selected = [0, 32, 64, 96]
+                        selected[source] = index
+                        return dict(protocol=protocol, rows=selected, failure_source=source,
+                                    failure_row=index, report=str(report_path.relative_to(R)),
+                                    report_sha256=sha(report_path),
+                                    selection='First strict failure row, source3 first then0/1/2; S5 first thenS2. Fixed before final evaluation. Local resimulation may differ.')
+    return None
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--gates', type=Path, nargs='+', required=True)
@@ -93,6 +118,7 @@ def main():
     assert not any(json.loads(p.read_text()).get('states_sha256') == final_states['sha256']
                    for p in plans)
     ranked = sorted((candidates[n] for n in selected.values()), key=rank)
+    development_sha = sha(D/'data/development-all.npy')
     result = dict(created_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
                   source_sha=source_sha, models=models, selected_by_family=selected,
                   overall_candidate=ranked[0]['model'], endpoints=args.endpoints,
@@ -107,8 +133,9 @@ def main():
                   final_reselection_allowed=False, no_further_training=True,
                   development_stop_reason=args.reason,
                   video=dict(states='research/artmanip-recovery-20260930/data/development-all.npy',
-                             states_sha256=sha(D/'data/development-all.npy'),
+                             states_sha256=development_sha,
                              rows=[0, 32, 64, 96], model=ranked[0]['model'],
+                             failure_example=failure_video(plans, ranked[0]['model'], development_sha),
                              scope='Separate fixed development simulation, not final statistics'),
                   resource_receipt_utc=state['last_resource_check_utc'],
                   occupied_gpu_hours=state['gpu_hours'])

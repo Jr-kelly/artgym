@@ -1,0 +1,33 @@
+{
+  "results": {
+    "E500": {
+      "protocol": "S5",
+      "rows": [
+        0,
+        32,
+        64,
+        96
+      ],
+      "failure_source": 3,
+      "failure_row": 96,
+      "report": "runs/artmanip-recovery-20260930/bc3200-rl250-evaluation/E500-S5/report.json",
+      "report_sha256": "ccf2eb48d7e3833df1dba505f322cdbc969baa3e13b5bef19a1d1d1a3062c212",
+      "selection": "First strict failure row, source3 first then0/1/2; S5 first thenS2. Fixed before final evaluation. Local resimulation may differ."
+    },
+    "E4100": {
+      "protocol": "S5",
+      "rows": [
+        0,
+        32,
+        64,
+        97
+      ],
+      "failure_source": 3,
+      "failure_row": 97,
+      "report": "runs/artmanip-recovery-20260930/bc32000-development/E4100-S5/report.json",
+      "report_sha256": "10bd55bbd3c316e8078945c9b85a06ebcc590f1f37d1f2e2a43a6ca46d367be4",
+      "selection": "First strict failure row, source3 first then0/1/2; S5 first thenS2. Fixed before final evaluation. Local resimulation may differ."
+    }
+  },
+  "scope": "Read-only existing development records. No model selected or final freeze created; no simulation or GPU started."
+}

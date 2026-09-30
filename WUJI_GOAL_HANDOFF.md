@@ -7,20 +7,10 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T13:42:01.996626+00:00",
-  "event": "final_launch_contract_and_local_video_accounting_prepared",
-  "evidence": "research/artmanip-recovery-20260930/final-launch-validation.json",
-  "checks": [
-    "valid frozen batch accepted",
-    "development unaffected",
-    "final without phase rejected",
-    "development in final phase rejected",
-    "unfrozen model rejected",
-    "invalid protocol rejected",
-    "changed weight rejected",
-    "repeat final cell rejected"
-  ],
-  "next": "Continue original segment3 and matched repaired-pool control; final cohort remains unopened"
+  "utc": "2026-09-30T13:48:05.315865+00:00",
+  "event": "failure_video_selection_rule_prepared",
+  "evidence": "research/artmanip-recovery-20260930/failure-video-selection-validation.json",
+  "next": "Freeze candidate later; render four fixed rows plus frozen first-failure example if required; retain local-versus-development differences"
 }
 ```
 
@@ -70,8 +60,8 @@
       "pid": 38444,
       "status": "running",
       "child_pid": 38445,
-      "heartbeat": "2026-09-30T13:40:39.746820+00:00",
-      "elapsed_seconds": 6206.154653450998,
+      "heartbeat": "2026-09-30T13:43:40.549508+00:00",
+      "elapsed_seconds": 6386.9730409529875,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg3-job/status.json",
       "pid_exists": true,
       "host": "authorized_remote"
@@ -110,14 +100,14 @@
       "pid": 44425,
       "status": "running",
       "child_pid": 44426,
-      "heartbeat": "2026-09-30T13:40:24.076243+00:00",
-      "elapsed_seconds": 2651.8268849830056,
+      "heartbeat": "2026-09-30T13:43:55.093527+00:00",
+      "elapsed_seconds": 2862.8669888550066,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-reference-clean-job/status.json",
       "pid_exists": true,
       "host": "authorized_remote"
     }
   ],
-  "gpu_hours": 12.869083918055551,
+  "gpu_hours": 12.981163264722216,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -125,20 +115,10 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "GPU0 original segment3→3000, development, segment4→4000. GPU1 matched repaired-pool originalcontrol44425 CP1000→2000 just started; after its required dev, execute E-only4100→5700 underbc44800-plan.",
   "last_event": {
-    "utc": "2026-09-30T13:42:01.996626+00:00",
-    "event": "final_launch_contract_and_local_video_accounting_prepared",
-    "evidence": "research/artmanip-recovery-20260930/final-launch-validation.json",
-    "checks": [
-      "valid frozen batch accepted",
-      "development unaffected",
-      "final without phase rejected",
-      "development in final phase rejected",
-      "unfrozen model rejected",
-      "invalid protocol rejected",
-      "changed weight rejected",
-      "repeat final cell rejected"
-    ],
-    "next": "Continue original segment3 and matched repaired-pool control; final cohort remains unopened"
+    "utc": "2026-09-30T13:48:05.315865+00:00",
+    "event": "failure_video_selection_rule_prepared",
+    "evidence": "research/artmanip-recovery-20260930/failure-video-selection-validation.json",
+    "next": "Freeze candidate later; render four fixed rows plus frozen first-failure example if required; retain local-versus-development differences"
   },
   "monitor": {
     "pid": 1192,
@@ -182,7 +162,7 @@
     "bc32000-development-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T13:40:43.283122+00:00",
+  "last_resource_check_utc": "2026-09-30T13:44:05.025946+00:00",
   "next_actions": [
     "GPU0 originalsegment3 PID38444 at13:03UTC epoch2519. Continue3000; preregistereddev2500+3000 then originalseg4to4000 withdev3500+4000. ActualCP2000→2001restorepassed; originalpoolunchanged.",
     "Repaired training pool d885794f6bd5c77a71591c5d5e17753b4679252c8582587ab7217d6d61c73836 passed full51220sec static and clock/mapping checks. Four source0 slots47/94/104/117 replaced by original0/1/2/3, distinctcounts124/128/128/128. No evaluation filtering.",
@@ -197,10 +177,10 @@
     "runs/recovery-rl-reference-clean"
   ],
   "bc_next_plan": "research/artmanip-recovery-20260930/bc44800-plan.json",
-  "github_last_verified_commit": "9567358482353a3a48113095eb64cd35cb2c4c38",
+  "github_last_verified_commit": "48294a6c721c211e2c08cabe08c3f51782f51e8f",
   "release_verified_assets": 37,
   "gpu_hours_by_host": {
-    "authorized_remote": 12.869083918055551,
+    "authorized_remote": 12.981163264722216,
     "local": 0.0
   }
 }

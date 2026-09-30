@@ -27,6 +27,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--protocol', choices=['S2', 'S5', 'F'], required=True)
     parser.add_argument('--name', required=True)
+    parser.add_argument('--example', choices=['fixed', 'failure'], default='fixed')
     parser.add_argument('--python', type=Path, required=True)
     parser.add_argument('--timeout', type=int, default=1200)
     args = parser.parse_args()
@@ -52,6 +53,11 @@ def main():
     video = frozen['video']
     assert sha(R / video['states']) == video['states_sha256']
     assert video['rows'] == [0, 32, 64, 96]
+    selected_rows = video['rows']
+    if args.example == 'failure':
+        failure = video['failure_example']
+        assert failure and args.protocol == failure['protocol']
+        selected_rows = failure['rows']
     source = frozen['source_sha']
     pin = R.parent / '.wuji-recovery-local-pins' / source
     if not pin.exists():
@@ -75,7 +81,7 @@ def main():
     command = ['PYTHON', '-m', 'scripts.evaluate_wuji_recovery', '--checkpoint', model['path'],
                '--task', 'wuji_artmanip_reference' if name.startswith('rl') else 'wuji_multigrasp',
                '--hand', 'wuji_paper_official_actuator', '--object', 'knife_wuji_bridge3_20260922',
-               '--initial-states', video['states'], '--initial-state-rows', *map(str, video['rows']),
+               '--initial-states', video['states'], '--initial-state-rows', *map(str, selected_rows),
                '--output', str(output), '--seed', str(frozen['seed']), '--protocol', args.protocol[0],
                '--stage-seconds', '5' if args.protocol == 'S5' else '2', '--video']
     wrapper_name = args.name + '-job'
@@ -94,6 +100,7 @@ def main():
                 created_utc=now.isoformat(), timeout=args.timeout, final_phase=True,
                 status_path=f'runs/artmanip-recovery-20260930/{wrapper_name}/status.json',
                 command=wrapper, checkpoint_sha256=model['sha256'],
+                example=args.example, selected_rows=selected_rows,
                 freeze_sha256=sha(frozen_path), scope='Separate local simulation video; not final cohort statistics')
     temporary = registry / (wrapper_name + '.tmp')
     temporary.write_text(json.dumps(spec, indent=2) + '\n')
