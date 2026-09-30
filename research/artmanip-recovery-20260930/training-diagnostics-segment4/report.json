@@ -1,0 +1,25 @@
+{
+  "runs": [
+    {
+      "run": "runs/recovery-rl-seg4",
+      "first_epoch": 3001,
+      "last_epoch": 4000,
+      "epochs": 1000,
+      "all_exported_metrics_finite": true,
+      "files": [
+        {
+          "path": "runs/recovery-rl-seg4/learning.jsonl",
+          "sha256": "f707c6e0cf8d62ff3a960167f58c4d598f951ba2f65277b10a870934a19a09fd"
+        },
+        {
+          "path": "runs/recovery-rl-seg4/summaries/events.out.tfevents.1790778352.d-20260929154040-5x7zz",
+          "sha256": "d830c8c3fea17e34cab3e07a282f81d891fa76a8783bdb4c0a08b1301c098891"
+        }
+      ]
+    }
+  ],
+  "scalar_rows": 14000,
+  "learning_rows": 1000,
+  "scope": "TensorBoard actual learner scalars plus last-rollout-step source/reward snapshots. Global/SAPG-block entropy is not source-specific. Training objectives and rewards differ; do not rank capabilities using these reward curves. F/S evidence remains independent.",
+  "lr_scope": "TensorBoard info/last_lr is captured on the last optimizer update. learning.jsonl lr is self.last_lr after the final adaptive scheduler update; the values can differ."
+}

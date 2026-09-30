@@ -7,16 +7,15 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T16:32:02.957965+00:00",
-  "event": "aggregation1_old_new_fit_tradeoff_measured",
+  "utc": "2026-09-30T16:40:08.372498+00:00",
+  "event": "rl4000_archive_actual_restore_verified",
+  "checkpoint_sha256": "0641cd6c6404d709d1c9d3b0547090465415fa60b9cf1cb853b11d8fcf72f8ac",
+  "archive_sha256": "f0114629df12446af73cf66c30c00c0b417cd32387db07ca8f28c9a003713d3d",
   "evidence": [
-    "research/artmanip-recovery-20260930/aggregation1-heldout-fit-decomposition.json",
-    "research/artmanip-recovery-20260930/aggregation1-heldout-fit-summary.json",
-    "research/artmanip-recovery-20260930/aggregation1-restored-pair-integrity.json"
+    "research/artmanip-recovery-20260930/rl4000-archive-restore.json",
+    "research/artmanip-recovery-20260930/rl4000-restored-integrity.json"
   ],
-  "finding": "CPUcomparative decomposition: source3 newheldout targetrange .006010→.004439 (26.1percent better), oldheldout .000516→.001081 (109.6percent worse). Replay remains nearparent onnewstates. Overalltargetmean worsens because fitting shifts between old/newhistories; no unconditionallossimprovement or capacityrootcause claim.",
-  "scope": "Recorded-history CPUdiagnostic; does not replace ongoing physicaldevelopment.",
-  "next": "Assess independent6100/6500 phase/body/strict before choosing any morelearning. OriginalRL4000 anddevelopment remain required."
+  "next": "Await bothindependentdevelopment batches; select remaininglearning from phase/body/fit and freshbudget, notstrictzero orminimumepochalone."
 }
 ```
 
@@ -57,70 +56,58 @@
       "pid": 62424,
       "status": "running",
       "child_pid": 62425,
-      "heartbeat": "2026-09-30T16:28:01.825107+00:00",
-      "elapsed_seconds": 180.87307584100927,
+      "heartbeat": "2026-09-30T16:37:33.804204+00:00",
+      "elapsed_seconds": 752.8501214950084,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/aggregation1-development-job/status.json",
       "pid_exists": true,
       "host": "authorized_remote"
     },
     {
       "source_sha256": "998b1c057e21c029884c58abe3d29ca976f05682d6a54b5092ccd4f3bef4d76e",
-      "name": "rl-seg4-job",
+      "name": "reference4000-development-job",
       "gpu": 0,
       "final_phase": false,
       "command": [
         "/tmp/wuji-recovery-runtime/bin/python",
         "-m",
-        "scripts.train_wuji_recovery_rl",
-        "task=wuji_artmanip_reference",
-        "hand=wuji_paper_official_actuator",
-        "object=knife_wuji_reference",
-        "train=wujiArtManipReferenceSAPG",
-        "num_envs=5120",
-        "headless=True",
-        "pipeline=gpu",
-        "graphics_device_id=-1",
-        "force_render=False",
-        "num_subscenes=0",
-        "multi_gpu=False",
-        "seed=2026093011",
-        "experiment=recovery-rl-seg4",
-        "max_iterations=4000",
-        "checkpoint=runs/recovery-rl-seg3/checkpoints/epoch_003000.pth",
-        "train.params.config.save_frequency=250",
-        "train.params.config.evaluation_frequency=250",
-        "train.params.config.checkpoint_first_epoch=3250"
+        "scripts.evaluate_wuji_recovery_batch",
+        "--name",
+        "reference4000-development",
+        "--states",
+        "research/artmanip-recovery-20260930/data/development-all.npy",
+        "--models",
+        "rl3500=runs/recovery-rl-seg4/checkpoints/epoch_003500.pth",
+        "rl4000=runs/recovery-rl-seg4/checkpoints/epoch_004000.pth"
       ],
-      "timeout_seconds": 8400,
-      "started": "2026-09-30T14:25:24.648020+00:00",
-      "pid": 51150,
+      "timeout_seconds": 1800,
+      "started": "2026-09-30T16:35:58.011572+00:00",
+      "pid": 63689,
       "status": "running",
-      "child_pid": 51151,
-      "heartbeat": "2026-09-30T16:27:55.661046+00:00",
-      "elapsed_seconds": 7350.894774781002,
-      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg4-job/status.json",
+      "child_pid": 63691,
+      "heartbeat": "2026-09-30T16:37:28.435273+00:00",
+      "elapsed_seconds": 90.35815158500918,
+      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/reference4000-development-job/status.json",
       "pid_exists": true,
       "host": "authorized_remote"
     }
   ],
-  "gpu_hours": 18.02901640055555,
+  "gpu_hours": 18.338417431944436,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
   "resource_check_utc": "2026-09-30T06:42:41Z",
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
-  "next": "Finish originalRL4000 and mandatorydevelopment3500/4000; aggregationpairedtraining6500 completed, development6100/6500 active. Decide further learning from jointclosed-loop/fit/budget evidence before once-onlyfinalfreeze.",
+  "next": "Both trainingfamilies paused for independentdevelopment, notgoalpause: originalRL4000 completed, mandatory3500/4000 evaluationGPU0; aggregation6100/6500 evaluationGPU1. Choose remainingnormalbudget learning from resultingphase/body/fit evidence; finalunopened.",
   "last_event": {
-    "utc": "2026-09-30T16:32:02.957965+00:00",
-    "event": "aggregation1_old_new_fit_tradeoff_measured",
+    "utc": "2026-09-30T16:40:08.372498+00:00",
+    "event": "rl4000_archive_actual_restore_verified",
+    "checkpoint_sha256": "0641cd6c6404d709d1c9d3b0547090465415fa60b9cf1cb853b11d8fcf72f8ac",
+    "archive_sha256": "f0114629df12446af73cf66c30c00c0b417cd32387db07ca8f28c9a003713d3d",
     "evidence": [
-      "research/artmanip-recovery-20260930/aggregation1-heldout-fit-decomposition.json",
-      "research/artmanip-recovery-20260930/aggregation1-heldout-fit-summary.json",
-      "research/artmanip-recovery-20260930/aggregation1-restored-pair-integrity.json"
+      "research/artmanip-recovery-20260930/rl4000-archive-restore.json",
+      "research/artmanip-recovery-20260930/rl4000-restored-integrity.json"
     ],
-    "finding": "CPUcomparative decomposition: source3 newheldout targetrange .006010→.004439 (26.1percent better), oldheldout .000516→.001081 (109.6percent worse). Replay remains nearparent onnewstates. Overalltargetmean worsens because fitting shifts between old/newhistories; no unconditionallossimprovement or capacityrootcause claim.",
-    "scope": "Recorded-history CPUdiagnostic; does not replace ongoing physicaldevelopment.",
-    "next": "Assess independent6100/6500 phase/body/strict before choosing any morelearning. OriginalRL4000 anddevelopment remain required."
+    "next": "Await bothindependentdevelopment batches; select remaininglearning from phase/body/fit and freshbudget, notstrictzero orminimumepochalone."
   },
   "monitor": {
     "pid": 1192,
@@ -170,10 +157,11 @@
     "bc44800-development-job",
     "bc44800-confirmation64-job",
     "aggregation1-collection-job",
-    "aggregation1-pair6400-job"
+    "aggregation1-pair6400-job",
+    "rl-seg4-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T16:28:12.618025+00:00",
+  "last_resource_check_utc": "2026-09-30T16:37:49.228212+00:00",
   "next_actions": [
     "Finish originalRL4000 and mandatorydevelopment3500/4000; aggregationpairedtraining6500 completed, development6100/6500 active. Decide further learning from jointclosed-loop/fit/budget evidence before once-onlyfinalfreeze.",
     "GPU1 aggregation1-development wrapper62424 started16:24:56UTC, source563d534, timeout2400. Fourmodels Ereplay6100/Eagg6100/Ereplay6500/Eagg6500, all3protocols32/source. Reverifyprocess; pullfulltraces and independentlyscore whencomplete.",
@@ -184,14 +172,12 @@
     "GitHub563d534 pushed (HEADverificationpending), draft47assets previouslyverified; newpairarchive uploadpending. Monitor1192 commandverified16:14UTC; currentPIDs/resourceusagealwaysreverify."
   ],
   "bc_current_pair": "runs/artmanip-recovery-20260930/bc-pair32000",
-  "training_active_runs": [
-    "runs/recovery-rl-seg4"
-  ],
+  "training_active_runs": [],
   "bc_next_plan": "research/artmanip-recovery-20260930/bc44800-plan.json",
-  "github_last_verified_commit": "0e9663a24adf63fcee3ef6f0f57af93d4db8cdb0",
-  "release_verified_assets": 47,
+  "github_last_verified_commit": "d88b96b7e62f2ffa818eba5ba96f72a2b02e0b7a",
+  "release_verified_assets": 48,
   "gpu_hours_by_host": {
-    "authorized_remote": 18.02901640055555,
+    "authorized_remote": 18.338417431944436,
     "local": 0.0
   },
   "bc_executed_endpoint": {
