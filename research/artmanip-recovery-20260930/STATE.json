@@ -35,8 +35,8 @@
       "pid": 1482,
       "status": "running",
       "child_pid": 1483,
-      "heartbeat": "2026-09-30T07:01:12.275976+00:00",
-      "elapsed_seconds": 512.0258732069997,
+      "heartbeat": "2026-09-30T07:05:43.451738+00:00",
+      "elapsed_seconds": 783.2071431389995,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/g0-regression-retry1-job/status.json",
       "pid_exists": true
     },
@@ -65,13 +65,13 @@
       "pid": 2804,
       "status": "running",
       "child_pid": 2805,
-      "heartbeat": "2026-09-30T07:01:16.140152+00:00",
-      "elapsed_seconds": 90.33790184100508,
+      "heartbeat": "2026-09-30T07:05:17.259784+00:00",
+      "elapsed_seconds": 331.4039791380055,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/pilot-evaluation-job/status.json",
       "pid_exists": true
     }
   ],
-  "gpu_hours": 0.2773706619444445,
+  "gpu_hours": 0.42709153972222225,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -79,11 +79,20 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "Restore isolated runtime; audit upstream and Wuji; meaningful prechecks; pin four-segment RL budget from full-update throughput.",
   "last_event": {
-    "utc": "2026-09-30T07:02:33.007840+00:00",
-    "event": "release_asset_verified",
-    "name": "recovery-training-sequences-t5.tar.gz",
-    "sha256": "8cc28eeccb2f34b48d6dad82d87b1b2d35b997abef9639ff085f730304919c96",
-    "next": "Continue experiment; final publication requires freeze and download verification"
+    "utc": "2026-09-30T07:08:21.500133+00:00",
+    "event": "formal_rl_budget_frozen",
+    "evidence": "research/artmanip-recovery-20260930/b-plan.json",
+    "segments": [
+      1000,
+      2000,
+      3000,
+      4000
+    ],
+    "total_environment_interactions": 327680000,
+    "expected_optimizer_updates": 144000,
+    "curriculum": "200→2000 unchanged",
+    "next": "Launch first formal segment after current evaluation releasesGPU0; C afterGPU1 expert regression",
+    "reason": "Complete20epoch training and independent F/S measured; all-zero earlystrict/F not a convergence finding"
   },
   "monitor": {
     "pid": 1192,
@@ -98,5 +107,5 @@
     "rl-pilot20-retry2-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T07:01:17.822905+00:00"
+  "last_resource_check_utc": "2026-09-30T07:05:47.320485+00:00"
 }

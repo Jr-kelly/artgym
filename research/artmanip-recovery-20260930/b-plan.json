@@ -1,0 +1,37 @@
+{
+  "frozen_before_formal_training": true,
+  "init": "runs/recovery-rl-pilot20-retry2/checkpoints/epoch_000020.pth",
+  "initial_random_checkpoint_sha256": "c4cbd272868da979aa7b34ad560b7d7928fff5d392de9035a43b9dfce468af8d",
+  "training_origin": "Random weights seed2026093011; completed20epoch pilot counts toward first1000, full Adam/RNG restore with fresh physical rollout",
+  "total_epochs": 4000,
+  "segment_end_epochs": [
+    1000,
+    2000,
+    3000,
+    4000
+  ],
+  "early_observation_checkpoints": [
+    250,
+    500
+  ],
+  "environments": 5120,
+  "horizon": 16,
+  "interactions_per_epoch": 81920,
+  "optimizer_updates_per_epoch_observed": 36,
+  "total_interactions": 327680000,
+  "total_optimizer_updates_expected": 144000,
+  "paper_interactions_fraction": 0.16384,
+  "curriculum": "unchanged upstream epoch200 through2000; full end weights in remaining2000epochs",
+  "measured_epoch_seconds": 6.15491726855,
+  "planning_epoch_seconds": 7.5,
+  "expected_training_gpu_hours": 6.838796965055555,
+  "conservative_training_gpu_hours": 8.333333333333334,
+  "pilot_functional_evaluation_seconds": 86.676173560998,
+  "development_every_segment": "independent S2/S5/F,32/source; promotion64 when boundary or gate",
+  "per_segment_timeout_seconds": 8400,
+  "rl_total_default_gpu_hours": 16,
+  "minimum_before_plateau": "planned4000epochs and3consecutive assessment points with no error/progress/phase/body improvement; numerical faults or confirmed success exempt",
+  "decision": "early training arrivals exist in all4sources, so do not open single-source control without later evidence of multi-source exploration failure",
+  "next": "Continue CP20 to1000 onGPU0 after current pilot-evaluation wrapper completes; C paired800 updates onGPU1 after expert regression completes",
+  "limits": "16h wall/24GPUh/max2GPUs; reserve90min+2GPUh; budget-limited fixed-knife reference, not2B category reproduction"
+}
