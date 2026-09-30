@@ -7,14 +7,15 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T15:37:03.486226+00:00",
-  "event": "e44800_archive_restored_and_development_active",
-  "checkpoint_sha256": "2f85fa6b77b9c5358d519dcd816b285efcf33900498400dd54a8ae22bba1fac3",
+  "utc": "2026-09-30T15:59:01.624692+00:00",
+  "event": "aggregation_preflight_and_plan_registered",
   "evidence": [
-    "research/artmanip-recovery-20260930/bc44800-restored-integrity.json",
-    "research/artmanip-recovery-20260930/bc44800-fit-trend.json"
+    "research/artmanip-recovery-20260930/aggregation1-plan.json",
+    "research/artmanip-recovery-20260930/aggregation-expert-cpu-replay.json"
   ],
-  "next": "GPU0 originalsegment4 continues to4000, then development3500/4000. GPU1 E5700 development PID57178 started15:34UTC. E44800 training completed, actual parent/Adam/RNG and archive restore passed. After development, independently score and diagnose state shift; choose further learning from phase/body/fit and actual budget."
+  "cpu_replay": "Initial missing-library attempt failed; corrected CPU/GPU replay failed strict1e-4 (max .00139/.00399). Recorded as numerical diagnostic only. Same-device full-history replay is required before labels are accepted.",
+  "confirmation": "64 independent rescoring passed;32 source3S5 regression not reproduced, closed-loop plateau persists",
+  "next": "Run bounded collection from committed code, inspect full-history replay and handover. Fit only if gate passes and fresh budget permits. RL4000/development remain mandatory; final remains unopened."
 }
 ```
 
@@ -31,33 +32,6 @@
   "bc_default_gpu_hours": 2,
   "phase": "B/C active; actual stages and next decisions in active_jobs and next_actions",
   "active_jobs": [
-    {
-      "source_sha256": "998b1c057e21c029884c58abe3d29ca976f05682d6a54b5092ccd4f3bef4d76e",
-      "name": "bc44800-development-job",
-      "gpu": 1,
-      "final_phase": false,
-      "command": [
-        "/tmp/wuji-recovery-runtime/bin/python",
-        "-m",
-        "scripts.evaluate_wuji_recovery_batch",
-        "--name",
-        "bc44800-development",
-        "--states",
-        "research/artmanip-recovery-20260930/data/development-all.npy",
-        "--models",
-        "E5700=runs/artmanip-recovery-20260930/bc-executed44800/E/epoch_005700.pth"
-      ],
-      "timeout_seconds": 1200,
-      "started": "2026-09-30T15:34:30.581376+00:00",
-      "pid": 57178,
-      "status": "running",
-      "child_pid": 57179,
-      "heartbeat": "2026-09-30T15:36:01.117494+00:00",
-      "elapsed_seconds": 90.4225345349987,
-      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/bc44800-development-job/status.json",
-      "pid_exists": true,
-      "host": "authorized_remote"
-    },
     {
       "source_sha256": "998b1c057e21c029884c58abe3d29ca976f05682d6a54b5092ccd4f3bef4d76e",
       "name": "rl-seg4-job",
@@ -91,14 +65,14 @@
       "pid": 51150,
       "status": "running",
       "child_pid": 51151,
-      "heartbeat": "2026-09-30T15:36:12.363730+00:00",
-      "elapsed_seconds": 4247.6227793,
+      "heartbeat": "2026-09-30T15:57:17.975760+00:00",
+      "elapsed_seconds": 5513.255469768992,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg4-job/status.json",
       "pid_exists": true,
       "host": "authorized_remote"
     }
   ],
-  "gpu_hours": 16.52030672555555,
+  "gpu_hours": 17.149350046111106,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -106,14 +80,15 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "GPU0 originalsegment4 continues to4000, then development3500/4000. GPU1 E5700 development PID57178 started15:34UTC. E44800 training completed, actual parent/Adam/RNG and archive restore passed. After development, independently score and diagnose state shift; choose further learning from phase/body/fit and actual budget.",
   "last_event": {
-    "utc": "2026-09-30T15:37:03.486226+00:00",
-    "event": "e44800_archive_restored_and_development_active",
-    "checkpoint_sha256": "2f85fa6b77b9c5358d519dcd816b285efcf33900498400dd54a8ae22bba1fac3",
+    "utc": "2026-09-30T15:59:01.624692+00:00",
+    "event": "aggregation_preflight_and_plan_registered",
     "evidence": [
-      "research/artmanip-recovery-20260930/bc44800-restored-integrity.json",
-      "research/artmanip-recovery-20260930/bc44800-fit-trend.json"
+      "research/artmanip-recovery-20260930/aggregation1-plan.json",
+      "research/artmanip-recovery-20260930/aggregation-expert-cpu-replay.json"
     ],
-    "next": "GPU0 originalsegment4 continues to4000, then development3500/4000. GPU1 E5700 development PID57178 started15:34UTC. E44800 training completed, actual parent/Adam/RNG and archive restore passed. After development, independently score and diagnose state shift; choose further learning from phase/body/fit and actual budget."
+    "cpu_replay": "Initial missing-library attempt failed; corrected CPU/GPU replay failed strict1e-4 (max .00139/.00399). Recorded as numerical diagnostic only. Same-device full-history replay is required before labels are accepted.",
+    "confirmation": "64 independent rescoring passed;32 source3S5 regression not reproduced, closed-loop plateau persists",
+    "next": "Run bounded collection from committed code, inspect full-history replay and handover. Fit only if gate passes and fresh budget permits. RL4000/development remain mandatory; final remains unopened."
   },
   "monitor": {
     "pid": 1192,
@@ -159,10 +134,12 @@
     "reference3000-development-job",
     "rl-reference-clean-job",
     "reference-clean2000-development-job",
-    "bc-executed44800-job"
+    "bc-executed44800-job",
+    "bc44800-development-job",
+    "bc44800-confirmation64-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T15:36:16.430686+00:00",
+  "last_resource_check_utc": "2026-09-30T15:57:45.571223+00:00",
   "next_actions": [
     "GPU0: original segment4 wrapper51150, source e80d5f4, started14:25UTC. At14:31UTC epoch3040. CP3000→3001 actual model/Adam restore and effective configuration passed. Finish4000, then development3500+4000. Decide further learning from joint phase/body/training trends and remaining budget; minimum4000 is not a convergence claim.",
     "Matched repaired-pool original control completed2000 and independently scored; see matched-control-comparison.json. Holding improves old-source body but source3 late phases worsen and source2F collapses; retain early candidates, no blind hold2000 continuation.",
@@ -176,10 +153,10 @@
     "runs/recovery-rl-seg4"
   ],
   "bc_next_plan": "research/artmanip-recovery-20260930/bc44800-plan.json",
-  "github_last_verified_commit": "b8596aa7dda301082e07536a050d6661de25e71f",
-  "release_verified_assets": 43,
+  "github_last_verified_commit": "3a720e7d5f7cb44591c1233d104d3e054c09eef8",
+  "release_verified_assets": 44,
   "gpu_hours_by_host": {
-    "authorized_remote": 16.52030672555555,
+    "authorized_remote": 17.149350046111106,
     "local": 0.0
   },
   "bc_executed_endpoint": {

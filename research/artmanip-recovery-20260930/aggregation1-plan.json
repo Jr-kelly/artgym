@@ -1,0 +1,54 @@
+{
+  "utc": "2026-09-30T15:59:01.624523+00:00",
+  "parent": "runs/artmanip-recovery-20260930/bc-executed44800/E/epoch_005700.pth",
+  "parent_sha256": "2f85fa6b77b9c5358d519dcd816b285efcf33900498400dd54a8ae22bba1fac3",
+  "confirmation": "bc44800-confirmation64-analysis/report.json",
+  "finding": "Independent64 source3 S2 46/64 both, S5 28/64 to29/64; phase holding slightly decreases. The32 S5 regression is NOT confirmed. Extra offline fitting has not materially improved closed-loop strict holding; observed state shift remains a testable hypothesis, not an established cause or whole-branch convergence.",
+  "collection": {
+    "states": "data/aggregation1-states.npy",
+    "sha256": "b65e757740d031d156cd0107b84283a5d8b7f779ee496af067557eba1e619c10",
+    "physical_episodes": 512,
+    "transitions": 307200,
+    "timeout_seconds": 1800,
+    "training_only": true,
+    "modes": [
+      "behavior",
+      "scripted_expert_handover"
+    ],
+    "handover_fraction_first_stage": 0.6,
+    "same_gpu_history_replay_max_error": 1e-05
+  },
+  "availability": {
+    "body_at_least": 0.9,
+    "body_drop_at_most": 0.05,
+    "old_strict_drop_at_most": 0.1,
+    "source3_S5_phase_gain_at_least": 0.1,
+    "alternative_source3_S5_strict_gain_at_least": 0.15,
+    "all_cells_initially_active": true
+  },
+  "conditional_training": {
+    "arms": [
+      "replay",
+      "aggregate"
+    ],
+    "start_epoch": 5700,
+    "end_epoch": 6500,
+    "added_updates_per_arm": 6400,
+    "batch": 120,
+    "lr": 1e-05,
+    "old_fit_sequences": 96,
+    "changed_fit_sequences": 24,
+    "shared_validation_sequences": 40,
+    "max_seconds_per_arm": 800,
+    "only_if_availability_passes": true
+  },
+  "budget": {
+    "normal_ceiling_gpuh": 20,
+    "reserved_final_gpuh": 4,
+    "collection_max_gpuh": 0.5,
+    "pair_max_gpuh": 0.55,
+    "development_max_gpuh": 0.4,
+    "rl_remaining_reserved_gpuh": 0.8
+  },
+  "next": "Run bounded collection from committed code, inspect full-history replay and handover. Fit only if gate passes and fresh budget permits. RL4000/development remain mandatory; final remains unopened."
+}
