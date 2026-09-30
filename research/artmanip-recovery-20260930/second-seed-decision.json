@@ -1,0 +1,25 @@
+{
+  "utc": "2026-09-30T18:17:32.174281+00:00",
+  "model": "seed2Eagg6100",
+  "checkpoint_sha256": "054a32298af88e287cbaa6ef057389489996f3cc102546db86632dad4c3e64e9",
+  "full_method_replication_completed": true,
+  "S64_passed": false,
+  "F64_passed": true,
+  "failed_cells": [
+    {
+      "source": 1,
+      "protocol": "S2",
+      "n": 64,
+      "margins": {
+        "strict_absolute": 0.16874999999999996,
+        "body_absolute": 0.018750000000000044,
+        "strict_relative": 0.06875,
+        "body_relative": -0.0012500000000000011
+      },
+      "passed": false,
+      "within_one_episode": true
+    }
+  ],
+  "scope": "Same BC100 weights/Adam and experts, second CPU/CUDA/NumPy optimization sampling seed and own new trajectories. Absolute S thresholds pass; exact relative body threshold fails in source1 S2. No independent expert pretraining or hardware result.",
+  "decision": "Keep fixed primary Eagg6100 and fixed second-seed endpoint. No retuning/reselection after frozen method; proceed to once-only final128 for all fixed models. RL is budget-limited, not converged."
+}

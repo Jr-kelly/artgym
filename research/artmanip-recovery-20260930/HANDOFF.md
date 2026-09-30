@@ -7,15 +7,11 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T18:13:07.892485+00:00",
-  "event": "full_second_seed_artifacts_published_to_draft",
-  "assets": 58,
-  "endpoint_sha256": "054a32298af88e287cbaa6ef057389489996f3cc102546db86632dad4c3e64e9",
-  "evidence": [
-    "research/artmanip-recovery-20260930/draft-assets-verified.json",
-    "research/artmanip-recovery-20260930/seed2-aggregate3200-restored-integrity.json"
-  ],
-  "next": "Complete fixed64 replication evaluation, freeze18 final models exactly once, no moretraining. Finalstates remainunopened."
+  "utc": "2026-09-30T18:17:50.340028+00:00",
+  "event": "replication_table_interpreter_retry",
+  "failure": "System python3 table writer lacked NumPy via Wilson helper import; no output table was created.",
+  "resolution": "Reran with existing artgym scientific interpreter and CUDA disabled; REPLICATION64.md completed.",
+  "next": "Commit completed replication evidence, then freeze final models once. No evaluation repeated."
 }
 ```
 
@@ -31,40 +27,8 @@
   "rl_default_gpu_hours": 16,
   "bc_default_gpu_hours": 2.25,
   "phase": "B/C active; actual stages and next decisions in active_jobs and next_actions",
-  "active_jobs": [
-    {
-      "source_sha256": "998b1c057e21c029884c58abe3d29ca976f05682d6a54b5092ccd4f3bef4d76e",
-      "name": "seed2-promotion64-job",
-      "gpu": 0,
-      "final_phase": false,
-      "command": [
-        "/tmp/wuji-recovery-runtime/bin/python",
-        "-m",
-        "scripts.evaluate_wuji_recovery_batch",
-        "--name",
-        "seed2-promotion64",
-        "--states",
-        "research/artmanip-recovery-20260930/data/promotion-all.npy",
-        "--models",
-        "seed2Eagg6100=runs/artmanip-recovery-20260930/bc-seed2-aggregate3200/E/epoch_006100.pth",
-        "--protocols",
-        "S2",
-        "S5",
-        "F"
-      ],
-      "timeout_seconds": 900,
-      "started": "2026-09-30T18:09:23.617083+00:00",
-      "pid": 72687,
-      "status": "running",
-      "child_pid": 72688,
-      "heartbeat": "2026-09-30T18:11:24.201514+00:00",
-      "elapsed_seconds": 120.47487641399493,
-      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/seed2-promotion64-job/status.json",
-      "pid_exists": true,
-      "host": "authorized_remote"
-    }
-  ],
-  "gpu_hours": 19.889959968333322,
+  "active_jobs": [],
+  "gpu_hours": 19.951541223055543,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -72,15 +36,11 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "Fixed second-seed Eagg6100 promotion64 running on GPU0 wrapper72687; complete independent rescore, then once-only finalfreeze with18models including bothE4100/E5700.",
   "last_event": {
-    "utc": "2026-09-30T18:13:07.892485+00:00",
-    "event": "full_second_seed_artifacts_published_to_draft",
-    "assets": 58,
-    "endpoint_sha256": "054a32298af88e287cbaa6ef057389489996f3cc102546db86632dad4c3e64e9",
-    "evidence": [
-      "research/artmanip-recovery-20260930/draft-assets-verified.json",
-      "research/artmanip-recovery-20260930/seed2-aggregate3200-restored-integrity.json"
-    ],
-    "next": "Complete fixed64 replication evaluation, freeze18 final models exactly once, no moretraining. Finalstates remainunopened."
+    "utc": "2026-09-30T18:17:50.340028+00:00",
+    "event": "replication_table_interpreter_retry",
+    "failure": "System python3 table writer lacked NumPy via Wilson helper import; no output table was created.",
+    "resolution": "Reran with existing artgym scientific interpreter and CUDA disabled; REPLICATION64.md completed.",
+    "next": "Commit completed replication evidence, then freeze final models once. No evaluation repeated."
   },
   "monitor": {
     "pid": 1192,
@@ -137,10 +97,11 @@
     "aggregation1-promotion64-job",
     "bc-seed2-executed44800-job",
     "aggregation2-collection-job",
-    "bc-seed2-aggregate3200-job"
+    "bc-seed2-aggregate3200-job",
+    "seed2-promotion64-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T18:11:40.421609+00:00",
+  "last_resource_check_utc": "2026-09-30T18:16:15.730544+00:00",
   "next_actions": [
     "Full second optimization seed E44800 + own-history aggregation3200 completed, realAdam48800/frozen28 and actualparent/RNG checks passed. Endpoint SHA054a32298af88e287cbaa6ef057389489996f3cc102546db86632dad4c3e64e9, fixed name seed2Eagg6100.",
     "GPU0 seed2-promotion64 wrapper72687 started18:09:20UTC, timeout900, source9f9fb188227b7699aa3d6739069079ff49fb89fc. Reverify status. Same256 promotioninitials, S2/S5/F, experts reuse firstpromotion64. No primaryreselection.",
@@ -158,7 +119,7 @@
   "github_last_verified_commit": "9f54d74e8b6a44932be0ad83bc48474efd9bee29",
   "release_verified_assets": 58,
   "gpu_hours_by_host": {
-    "authorized_remote": 19.889959968333322,
+    "authorized_remote": 19.951541223055543,
     "local": 0.0
   },
   "bc_executed_endpoint": {
