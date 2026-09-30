@@ -19,7 +19,7 @@
 |模型/Adam/RNG/完整数据可恢复|阶段归档、restore receipts、weights-index.json|BC19200与RL1000完整归档及CPU实际恢复已通过；索引随新增归档刷新|
 |GitHub分支与独立公开Release|分支推送记录、draft-assets-verified.json|增量分支/草稿资产已上传；正式tag、公开下载SHA与下载后的恢复待最终交付|
 |16h/24GPUh/max2与收尾预留|STATE.json、jobs命令、resources/latest.json、launcher预算检查|累计账实时刷新；需继续保留90min/2GPUh。超时余量按现有活动作业计入|
-|资源利用率与最终清理|machine-gpu-history、report_wuji_recovery_resources|观测不足4h时不声称四小时达标；结束时核实仅本轮训练/监控退出，不能只凭历史PID|
+|资源利用率与最终清理|machine-gpu-history、report_wuji_recovery_resources|首个完整4h整机36.49%/无缺口/超过26%；当时最近30min41.73%。结束时仍需重新核实仅本轮训练/监控退出，不能只凭历史PID|
 |唯一推荐继续点与明确边界|HANDOFF.md、README.md|最终冻结后重写；当前仅固定仿真刀与已训练抓姿邻域、特权teacher，无真机/取刀/新形状声明|
 
 最终审核必须确认每一行状态。能力失败可以如实交付，但不能以文档、归档或一次短评估替代尚有依据且预算充足的学习分支。
