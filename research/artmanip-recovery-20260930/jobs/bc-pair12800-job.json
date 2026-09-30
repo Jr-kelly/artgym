@@ -1,0 +1,28 @@
+{
+  "name": "bc-pair12800-job",
+  "gpu": 1,
+  "timeout": 2400,
+  "command": [
+    "PYTHON",
+    "-m",
+    "scripts.run_wuji_recovery_bc_pair",
+    "--name",
+    "bc-pair12800",
+    "--previous-name",
+    "bc-pair6400",
+    "--previous-epoch",
+    "900",
+    "--end-epoch",
+    "1700",
+    "--max-seconds",
+    "1000"
+  ],
+  "source_sha": "66cd4bd5c51eade227b9c1bd1463193ff7247a20",
+  "created_utc": "2026-09-30T08:40:15.837161+00:00",
+  "budget_receipt_utc": "2026-09-30T08:40:15.372838+00:00",
+  "occupied_gpu_hours": 3.340485544444444,
+  "other_jobs_reserved_gpu_hours": 0.9109625716666667,
+  "root": "/tmp/artgym-recovery-20260930",
+  "pin": "/tmp/artgym-recovery-20260930/pins/66cd4bd5c51eade227b9c1bd1463193ff7247a20",
+  "pid": 14889
+}

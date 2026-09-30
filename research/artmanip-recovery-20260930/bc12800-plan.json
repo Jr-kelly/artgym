@@ -1,0 +1,20 @@
+{
+  "created_utc": "2026-09-30T08:40:13.761582+00:00",
+  "previous_pair": "bc-pair6400",
+  "start_epoch": 900,
+  "end_epoch": 1700,
+  "added_updates_this_segment": 6400,
+  "total_added_after_BC100": 12800,
+  "total_adam_expected": 13600,
+  "arms": [
+    "M",
+    "E"
+  ],
+  "optimizer": "Continue respective trueAdam/RNG; unchangedLR1e-5 anddata/phaseweights/frozennormalizer",
+  "basis": "Both heldout target errors continue to decline18/26percent from3200to6400; allsources trainprobe/validation endpointsimprove. Closedloopregression retained, not3jointtrendplateau. Complete6400independentscoresbeforeselection; nofinalset.",
+  "timeout_seconds": 2400,
+  "per_arm_max_seconds": 1000,
+  "expected_pair_wall_seconds": 720,
+  "budget": "BC total occupied training remainswellbelow2GPUh; launchrefreshesalljobreservation and22GPUhceiling",
+  "evaluation": "IndependentS2/S5/F dev32 sameexpertcomparison; no64promotionunlessgate/nearboundary"
+}

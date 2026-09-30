@@ -7,14 +7,20 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T08:29:15.797435+00:00",
-  "event": "archive_completed",
-  "name": "recovery-rl500-development",
-  "archive": "delivery/artmanip-recovery-20260930/recovery-rl500-development.tar.gz",
-  "sha256": "e035b53287fbd70e86cbfc6b129cf15ab4706b1e9e5c27055214108f5f797663",
-  "size": 74197700,
-  "files": 24,
-  "next": "Restore-check and upload; local originals retained"
+  "utc": "2026-09-30T08:41:44.881379+00:00",
+  "event": "bc6400_closedloop_shift_review",
+  "evidence": [
+    "research/artmanip-recovery-20260930/bc6400-state-shift.json"
+  ],
+  "source3_S5_q_fraction_above_expert_heldout_p95": {
+    "expert": 0.05003,
+    "M500": 0.40827,
+    "M900": 0.41589,
+    "E500": 0.27713,
+    "E900": 0.44891
+  },
+  "decision": "E900closedloopphysicalshift grows alongsideS5bodydrop despiteofflinefit improvement. This is descriptive association, notcausality; completecurrent12800continuation and inspecteffectiveerrortrajectory beforeDAgger trigger. RLgeometryrows cannotdiagnoseBCgeneralization.",
+  "next": "Complete12800 andclosedloop; ifofflineeffectiveerrorsstabilize withpersistentdeficit, allowboundedhistoryconsistentDAgger basedonthisevidence"
 }
 ```
 
@@ -29,7 +35,7 @@
   "max_concurrent_gpus": 2,
   "rl_default_gpu_hours": 16,
   "bc_default_gpu_hours": 2,
-  "phase": "A complete; B formal segment1; C BC6400 training complete, RL500/BC6400 development live",
+  "phase": "A complete; B formal segment1; C paired12800 training",
   "active_jobs": [
     {
       "source_sha256": "f3aa89d7dd469f42563d350d539692893c96bccfc1edbed3afc06947af96c54e",
@@ -63,64 +69,68 @@
       "pid": 4900,
       "status": "running",
       "child_pid": 4901,
-      "heartbeat": "2026-09-30T08:27:43.480487+00:00",
-      "elapsed_seconds": 4368.062454732004,
+      "heartbeat": "2026-09-30T08:39:46.697588+00:00",
+      "elapsed_seconds": 5091.323523252999,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg1-retry1-job/status.json",
       "pid_exists": true
     },
     {
-      "source_sha256": "f3aa89d7dd469f42563d350d539692893c96bccfc1edbed3afc06947af96c54e",
-      "name": "bc6400-rl500-evaluation-job",
+      "name": "bc-pair12800-job",
       "gpu": 1,
+      "timeout": 2400,
       "command": [
-        "/tmp/wuji-recovery-runtime/bin/python",
+        "PYTHON",
         "-m",
-        "scripts.evaluate_wuji_recovery_batch",
+        "scripts.run_wuji_recovery_bc_pair",
         "--name",
-        "bc6400-rl500-evaluation",
-        "--states",
-        "research/artmanip-recovery-20260930/data/development-all.npy",
-        "--models",
-        "rl500=runs/recovery-rl-seg1-retry1/checkpoints/epoch_000500.pth",
-        "M900=runs/artmanip-recovery-20260930/bc-pair6400/M/epoch_000900.pth",
-        "E900=runs/artmanip-recovery-20260930/bc-pair6400/E/epoch_000900.pth",
-        "--protocols",
-        "S2",
-        "S5",
-        "F"
+        "bc-pair12800",
+        "--previous-name",
+        "bc-pair6400",
+        "--previous-epoch",
+        "900",
+        "--end-epoch",
+        "1700",
+        "--max-seconds",
+        "1000"
       ],
-      "timeout_seconds": 3000,
-      "started": "2026-09-30T08:20:16.246359+00:00",
-      "pid": 12502,
-      "status": "running",
-      "child_pid": 12503,
-      "heartbeat": "2026-09-30T08:27:48.412949+00:00",
-      "elapsed_seconds": 452.0687139189977,
-      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/bc6400-rl500-evaluation-job/status.json",
-      "pid_exists": true
+      "source_sha": "66cd4bd5c51eade227b9c1bd1463193ff7247a20",
+      "created_utc": "2026-09-30T08:40:15.837161+00:00",
+      "budget_receipt_utc": "2026-09-30T08:40:15.372838+00:00",
+      "occupied_gpu_hours": 3.340485544444444,
+      "other_jobs_reserved_gpu_hours": 0.9109625716666667,
+      "root": "/tmp/artgym-recovery-20260930",
+      "pin": "/tmp/artgym-recovery-20260930/pins/66cd4bd5c51eade227b9c1bd1463193ff7247a20",
+      "pid": 14889
     }
   ],
-  "gpu_hours": 2.9604366438888885,
+  "gpu_hours": 3.340485544444444,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
   "resource_check_utc": "2026-09-30T06:42:41Z",
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
-  "next": "Finish BC6400/RL500 independent evaluation; likely continue paired12800 since both heldout target errors still decrease. RL firstsegment continues1000 then remaining3segments.",
+  "next": "Finish paired12800 and inspect validation+closedloop; continue original RL1000/2000/3000/4000. Finalfreeze stillnotopened.",
   "last_event": {
-    "utc": "2026-09-30T08:29:15.797435+00:00",
-    "event": "archive_completed",
-    "name": "recovery-rl500-development",
-    "archive": "delivery/artmanip-recovery-20260930/recovery-rl500-development.tar.gz",
-    "sha256": "e035b53287fbd70e86cbfc6b129cf15ab4706b1e9e5c27055214108f5f797663",
-    "size": 74197700,
-    "files": 24,
-    "next": "Restore-check and upload; local originals retained"
+    "utc": "2026-09-30T08:41:44.881379+00:00",
+    "event": "bc6400_closedloop_shift_review",
+    "evidence": [
+      "research/artmanip-recovery-20260930/bc6400-state-shift.json"
+    ],
+    "source3_S5_q_fraction_above_expert_heldout_p95": {
+      "expert": 0.05003,
+      "M500": 0.40827,
+      "M900": 0.41589,
+      "E500": 0.27713,
+      "E900": 0.44891
+    },
+    "decision": "E900closedloopphysicalshift grows alongsideS5bodydrop despiteofflinefit improvement. This is descriptive association, notcausality; completecurrent12800continuation and inspecteffectiveerrortrajectory beforeDAgger trigger. RLgeometryrows cannotdiagnoseBCgeneralization.",
+    "next": "Complete12800 andclosedloop; ifofflineeffectiveerrorsstabilize withpersistentdeficit, allowboundedhistoryconsistentDAgger basedonthisevidence"
   },
   "monitor": {
     "pid": 1192,
     "host": "10.13.160.5:33024",
-    "checked_utc": "2026-09-30T06:51:00Z"
+    "checked_utc": "2026-09-30T08:34:07Z",
+    "command_verified": "python3 -m scripts.monitor_wuji_recovery_resources"
   },
   "recorded_finished_jobs": [
     "g0-regression-job",
@@ -137,17 +147,18 @@
     "bc1600-evaluation-job",
     "bc-pair3200-job",
     "bc3200-rl250-evaluation-job",
-    "bc-pair6400-job"
+    "bc-pair6400-job",
+    "bc6400-rl500-evaluation-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T08:28:10.788409+00:00",
+  "last_resource_check_utc": "2026-09-30T08:40:15.372838+00:00",
   "next_actions": [
-    "Revalidate live jobs: at08:20:12UTC GPU0 RL4900 child4901 sourcepin7cb1b91 and GPU1 evaluation12502 sourcepin6157f9c. No duplicate launches. BC6400 wrapper11727 completed.",
-    "BC6400 pair epoch900/Adam7200 passed integrity. Msha8e78b5d41068b3d225caa02c4e1b19ac56e52955af59040e70800d17350e1fed; Esha aaa3cc7e645b160ea10612c8c539be76596212e7738b037e9f05f5b0f58f8927. Validationtarget M .000397536 E .000366444, improvement18/26percent from3200. E700temporarysource3fit spike recovered by800/900, trainprobe also spiked, no persistent overfit.",
-    "Current eval bc6400-rl500-evaluation runs rl500 thenM900 thenE900, S2/S5/F each, dev32/source. Pull full npz and independent summarize/gate before next experiment. If no fault, paired12800: namebc-pair12800 previous-namebc-pair6400 previous-epoch900 end-epoch1700, timeout2400/max-seconds1000 perarm enough by observed178sec/400epochs. Predeclare update budget and recordcontinuation; do not stop atshortstrict plateau.",
-    "RL500 CP exists local/remote and passed Adam18000/frame40960000/RNG, sha765063c19666ac3c4551437563c981bef1a13934af9dd01eb2d2e9a6bdfa6cb4. RL250 F31/32/31/30 butbody0 andalive6/2/27/0, S0. Continue1000endpoint andactualrestore→2000→3000→4000. Do not replace originalreference byfixedclockfine-tune before baselinebudget. Later holdingcomparison may use a common substantivecheckpoint ifstabilityremainslow.",
+    "Revalidate status. At08:40:15UTC GPU0 RL4900 andGPU1 BC12800wrapper14889 live, sourcepin66cd4bd forBC. PriorBC6400/RL500eval12502 completed.",
+    "BC6400 independentlyrescored: M900source3S2/S5=9/20,body28/32; E900=15/10,body29/24. Fbothall32cycles butEsource3Fbody16/32. NoS/64gate. Offline target continuesdeclining18/26percent; pair12800 extensionpredeclared inbc12800-plan.json, run900→1700, actualAdamtarget13600.",
+    "AfterBC12800finished, pull weights/audit epoch1700Adam13600/RNG, fitallpairs, independentevalM1700/E1700 dev32 S2/S5/F. It maycoincideRL1000endpoint; evaluateRL1000 whenavailable. Needretainfixedbudgetendpoints notjustbest. Ifclosedloopgap persists andofflineeffectiveerror stabilizes, inspect state-shift and consider≤3DAggerrnds orphysicaltargetloss perGOAL; do notautomatically addboth.",
+    "RL500 independentlyverifiedF32/32/32/29,alive10/31/19/8,bodyall0;source2breach8.54secversus1.13at250,source3still.707sec. Sstrictall0 butsource3S5phasehold.21875>.0078at250. Continue4segmentoriginalgoal. At624sourcevisits16674/16670/16630/16569 balanced; actualvelocitypenaltyweight -15.6 (notpositiondrift), curriculumadvances. CP750retain; nextmandatory1000dev thenresume2000/3000/4000.",
     "Launcher now refreshes real jobs and reserves all live remaining timeouts plus proposed timeout. Uses22GPUh pre-final ceiling and21:12UTC training cutoff. Final128 still unopened/untransferred. No student or secondseed until exactS64gate.",
-    "GitHub confirmedb3c72ea; BC6400 archive actualextract28files+CPUAdam7200 passed. Uploadsession98413 /tmp/wuji-recovery-incremental-upload8.log maystillactive, checkbeforeanotheruploader. Release399789402 draft, final16assets expected after6400 upload. weights-index currently20/13 mustrefreshlater. Video/finalfreeze/final128/publicrelease stillpending.",
+    "GitHub confirmed66cd4bd; morelocalreportchanges mayneedpush. Release399789402draft17assets afterRL500upload9verified. weights-index20/13stale refreshlater. Sourceandvideoscripts committed; videosactualpendingfreeze. DELIVERY_AUDIT.md listsremainingfullscope. Final128unopened; publication/downloadrestore/finalcleanup stillrequired.",
     "CPU scripts: plot_wuji_recovery_learning exports separated training/fit/development trends; diagnose_wuji_recovery_state_shift measures matched-time physical q/target distribution shift. Existing bc800 shift does not triggerDAgger because validation still improves; do not add lossmodules now."
   ],
   "training_active_run": "runs/recovery-rl-seg1-retry1",
