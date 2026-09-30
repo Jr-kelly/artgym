@@ -1,0 +1,41 @@
+{
+  "scope": "RL training snapshots, BC held-out recorded-history error, and independent development success are distinct evidence.",
+  "rl": [
+    {
+      "run": "recovery-rl-pilot20-retry2",
+      "first_epoch": 1,
+      "last_epoch": 20,
+      "last_interactions": 1638400,
+      "last_updates": 720,
+      "mean_epoch_seconds": 6.15491726854998,
+      "source_visits": [
+        2497,
+        2584,
+        2504,
+        2485
+      ]
+    },
+    {
+      "run": "recovery-rl-seg1-retry1",
+      "first_epoch": 21,
+      "last_epoch": 624,
+      "last_interactions": 51118080,
+      "last_updates": 22464,
+      "mean_epoch_seconds": 6.585833455836037,
+      "source_visits": [
+        16674,
+        16670,
+        16630,
+        16569
+      ]
+    }
+  ],
+  "bc_fit": "research/artmanip-recovery-20260930/bc6400-fit.json",
+  "development_reports": [
+    "research/artmanip-recovery-20260930/initial-analysis/report.json",
+    "research/artmanip-recovery-20260930/bc800-analysis/report.json",
+    "research/artmanip-recovery-20260930/bc1600-analysis/report.json",
+    "research/artmanip-recovery-20260930/bc3200-rl250-analysis/report.json",
+    "research/artmanip-recovery-20260930/rl500-analysis/report.json"
+  ]
+}
