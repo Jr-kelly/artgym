@@ -14,7 +14,7 @@
 |奖励|progress1000、target1、linear-50、angular-2、contact1、hand-.001、smooth-1、drop-1、success50|速度用相邻姿态差并限幅；smooth是目标关节差平方；success保持后一次；与文字不同|corrected奖励，低稳定成本-.5/-.02/0、drop-25、dense项旧.1/专家3为1；alive .1|参考恢复上游权重、无alive，保留已存在corrected时序修复，明确偏离上游bug；不是完整逐字论文实现|
 |奖励时序疑似错误|进度是旧目标最佳距离改善|上游先 `update_goal` 重置 `mini_goal_distance`，后与切换前 `goal_distance` 比较，可能把新目标距离奖励到旧转移|已存在corrected分支把进度算在换向前|复用已修正分支，单独保存数值反例；明确实现错误，不据此断言旧统一失败根因|
 |课程|附录warmup100、持续1000；正文叙述性能动机|默认warmup200、total2000；实现分母total-warmup，在2000结束|旧稳定项起终值相同，课程虽推进权重不变|参考默认上游200→2000，-.5等旧解释不再适用；每epoch记录真实权重，不预先缩短日程|
-|动力学/接触|Sharpa有效摩擦2–4、knife damping700–1300，专门标定非真值|随机质量、摩擦、关节阻尼与外力|35g分配、阻尼.3、物体摩擦3、手1、Wuji碰撞；无外力/物理随机化|保留这套静态已验证Wuji profile；不复制Sharpa参数。参考保留jointNoise .01；随机化范围未知，作为边界而非宣称硬件有效|
+|动力学/接触|Sharpa有效摩擦2–4、knife damping700–1300，专门标定非真值|随机质量、摩擦、关节阻尼与外力|35g分配、阻尼.3、物体摩擦3、手1、Wuji碰撞；无外力/物理随机化|保留这套静态已验证Wuji profile；不复制Sharpa参数。参考YAML jointNoise=.01，但ArtManip在randomize=false时强制joint_noise=0，实际无观测噪声/外力/物理随机化；这一实际边界不代表硬件有效|
 |终止|5cm或1.57rad掉落|实现同阈值，另episode/goal timeout|训练同物理终止，S额外10mm/.25rad评分|参考训练上游；F记录全程漂移/旋转/存活；S严格独立复算。S不通过不写成F失败|
 |学习预算|约2B交互、2×5090约48h、SAPG、4 mini epochs|默认horizon16、seq16、block3200、minibatch32000、LR1e-4|horizon32、block512、低LR BC800更新即停止|RL random，LSTM512+encoder256/128/16、5blocks、horizon16，LR2e-4；全20epoch预检测量后锁定≥4段，不用pilot宣判方法无效|
 |恢复|未详述|PPO状态可恢复，但PhysX state为空|BC保存Adam/CPU CUDA NumPy RNG|RL额外保存RNG/实际optimizer更新；恢复时明确reset物理/RNN，不宣称逐位不中断；M/E同BC100真实Adam/RNG|
@@ -50,3 +50,6 @@
 
 
 对已有专家序列的目标速率诊断（`expert-target-rate-active-diagnostic.json`）：参考接口最大目标速率0.25rad/s，旧专家源2的2秒协议在首个末端保持采样时刻，其记录目标相对初态所需最短目标移动时间中位数约2.38s；128个有效记录均超过该采样时刻1.733s。这里只比较记录目标轨迹的速率需求，并不证明滑块任务没有其它成功轨迹，不把即时旧权重失败当作新接口无效，也未据此改变参考控制步长。首版未筛除末端已失效回合的诊断保留，active版本为正式解释依据。
+
+
+旧评估报告的`action_control.support_span_rad/thumb_step_rad`来自通用兼容配置；对reference任务不是实际生效接口。历史reference实际控制以单步实测0.008333rad及任务源码为准，不能误读为.04/.025混合接口。新报告明确区分`full_incremental`的实际步长与mixed接口；仅补正元数据，轨迹和评分未改变。

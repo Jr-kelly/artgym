@@ -93,3 +93,6 @@ CPU checkpoint and actual resumed-first-update verification:
 ```
 
 The simulation precheck scripts require explicit global RNG seeding for random sampling; `isaacgymenvs.make(seed=...)` alone does not seed Torch/NumPy. Formal RL already calls the upstream `set_seed`; full-pool diagnostics enumerate exact rows and also set global seed. Recorded evaluations load fixed state matrices and report physical trace hashes.
+
+
+Evaluation players call `Runner.load_config`, which seeds Torch/CUDA/NumPy/Python; actual evaluation logs show `self.seed = 2026093031`. The standalone precheck seeding issue therefore does not imply unseeded policy evaluations. Another configuration distinction is explicit: reference YAML contains `jointNoise=.01`, but `ArtManip.__init__` forces `joint_noise=0` and `force_scale=0` when `task.randomize=false`, as in every current reference startup configuration. New startup/evaluation reports record these effective instance attributes; historical source pins and configurations establish the same constructor path. Existing training physics/observations are not changed by this logging addition.

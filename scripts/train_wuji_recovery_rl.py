@@ -38,7 +38,7 @@ def update(self,*args,**kwargs):
 def train(self):
     out=Path(self.experiment_dir);out.mkdir(parents=True,exist_ok=True)
     env=self.vec_env.env
-    row=dict(epoch=self.epoch_num,frame=self.frame,optimizer_updates=getattr(self,'recovery_updates',0),num_actors=self.num_actors,model_sha256=digest(self.model.state_dict()),training_states_sha256=env.training_states_sha256,reward_scales=env.reward_scales_current,action_step_rad=float(env.dt*env.hand_dof_speed_scale),control_dt=float(env.dt*env.control_freq_inv),config=env.cfg,source=str(Path(__file__).resolve()))
+    row=dict(epoch=self.epoch_num,frame=self.frame,optimizer_updates=getattr(self,'recovery_updates',0),num_actors=self.num_actors,model_sha256=digest(self.model.state_dict()),training_states_sha256=env.training_states_sha256,reward_scales=env.reward_scales_current,effective_randomize=bool(env.randomize),effective_joint_noise=float(env.joint_noise),effective_force_scale=float(env.force_scale),action_step_rad=float(env.dt*env.hand_dof_speed_scale),control_dt=float(env.dt*env.control_freq_inv),config=env.cfg,source=str(Path(__file__).resolve()))
     (out/'startup.json').write_text(json.dumps(row,indent=2,default=str)+'\n')
     # Populate zero rollout buffers before serializing the random initial state.
     self.init_tensors()

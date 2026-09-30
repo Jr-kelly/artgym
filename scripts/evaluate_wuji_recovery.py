@@ -16,6 +16,7 @@ import torch
 from omegaconf import OmegaConf
 from isaacgymenvs.student_eval_utils import run_grasp_evaluation_loop
 from isaacgymenvs.utils.torch_jit_utils import quat_mul, quat_conjugate
+from isaacgymenvs.tasks.wuji_artmanip_reference import WujiArtManipReference
 from scripts.wuji_timed_command_metrics import score_timed_trace
 
 
@@ -171,10 +172,16 @@ def main():
             report=dict(num_envs=env.num_envs,recorded_steps=len(frames),records=records,functional=sum(r['functional'] for r in records),alive_full=int(valid.all(0).sum()),body_stable=int(body.sum()))
         report['control_mode'] = 'static_initial_targets' if args.static else 'privileged_teacher'
         report['wall_seconds'] = __import__('time').monotonic()-started
-        report.update(checkpoint_sha256=hashlib.sha256(args.checkpoint.read_bytes()).hexdigest(),
+        report.update(effective_randomize=bool(env.randomize),effective_joint_noise=float(env.joint_noise),effective_force_scale=float(env.force_scale),checkpoint_sha256=hashlib.sha256(args.checkpoint.read_bytes()).hexdigest(),
             task=task, hand=args.hand, object=args.object,
-            action_control=dict(support_span_rad=env.cfg['env']['supportActionSpan'],
-                                thumb_step_rad=env.cfg['env']['thumbActionStep']),
+            action_control=(dict(mode='full_incremental',
+                                 effective_target_step_rad=float(env.dt * env.hand_dof_speed_scale),
+                                 control_dt=float(env.dt * env.control_freq_inv))
+                            if isinstance(env, WujiArtManipReference) else
+                            dict(mode='mixed_support_initial_thumb_increment',
+                                 support_span_rad=env.cfg['env']['supportActionSpan'],
+                                 thumb_step_rad=env.cfg['env']['thumbActionStep'],
+                                 control_dt=float(env.dt * env.control_freq_inv))),
             student_sha256=hashlib.sha256(args.student_artifact.read_bytes()).hexdigest() if args.student_artifact else None,
             initial_states_sha256=hashlib.sha256(args.initial_states.read_bytes()).hexdigest(),
             initial_state_rows=selected_rows,
