@@ -1,0 +1,26 @@
+{
+  "name": "bc1600-evaluation-job",
+  "gpu": 1,
+  "timeout": 2400,
+  "command": [
+    "PYTHON",
+    "-m",
+    "scripts.evaluate_wuji_recovery_batch",
+    "--name",
+    "bc1600-evaluation",
+    "--states",
+    "research/artmanip-recovery-20260930/data/development-all.npy",
+    "--models",
+    "M300=runs/artmanip-recovery-20260930/bc-pair1600/M/epoch_000300.pth",
+    "E300=runs/artmanip-recovery-20260930/bc-pair1600/E/epoch_000300.pth",
+    "--protocols",
+    "S2",
+    "S5",
+    "F"
+  ],
+  "source_sha": "7b9722e7d29576eab6d8bc814d6aa3d55ebadaf0",
+  "created_utc": "2026-09-30T07:33:01.953779+00:00",
+  "root": "/tmp/artgym-recovery-20260930",
+  "pin": "/tmp/artgym-recovery-20260930/pins/7b9722e7d29576eab6d8bc814d6aa3d55ebadaf0",
+  "pid": 6696
+}

@@ -13,12 +13,16 @@ def main():
     # Reject uncommitted source changes; reporting files may change during work.
     dirty=subprocess.check_output(['git','status','--porcelain','--','scripts','isaacgymenvs','rl_games'],cwd=R,text=True)
     if dirty.strip():raise RuntimeError('Commit source before launching: '+dirty)
+    # Reserve outstanding wrapper time as well as elapsed usage. Refresh actual
+    # process state first: a stale handoff is not a resource or budget receipt.
+    subprocess.run([sys.executable,'-m','scripts.status_wuji_recovery'],cwd=R,stdout=subprocess.DEVNULL,check=True)
     state=json.loads((D/'STATE.json').read_text());now=datetime.datetime.now(datetime.timezone.utc)
     cutoff=datetime.datetime.fromisoformat(state['training_cutoff_utc'])
     if (cutoff-now).total_seconds()<a.timeout:raise RuntimeError('Job would exceed reserved final-validation cutoff')
-    if state.get('gpu_hours',0)+state.get('unmetered_cuda_preflight_reserve_gpu_hours',.05)+a.timeout/3600 > 22:
+    outstanding_seconds=sum(max(0,j['timeout_seconds']-(now-datetime.datetime.fromisoformat(j['started'])).total_seconds()) for j in state['active_jobs'])
+    if state.get('gpu_hours',0)+state.get('unmetered_cuda_preflight_reserve_gpu_hours',.05)+(outstanding_seconds+a.timeout)/3600 > 22:
         raise RuntimeError('Job timeout could consume reserved final GPU budget; shorten or finalize')
-    spec=dict(name=a.name,gpu=a.gpu,timeout=a.timeout,command=a.command[1:] if a.command[:1]==['--'] else a.command,source_sha=sha,created_utc=now.isoformat())
+    spec=dict(name=a.name,gpu=a.gpu,timeout=a.timeout,command=a.command[1:] if a.command[:1]==['--'] else a.command,source_sha=sha,created_utc=now.isoformat(),budget_receipt_utc=state['last_resource_check_utc'],occupied_gpu_hours=state['gpu_hours'],other_jobs_reserved_gpu_hours=outstanding_seconds/3600)
     archive=subprocess.check_output(['git','archive',sha,'scripts','isaacgymenvs','rl_games'],cwd=R)
     pin=REMOTE+'/pins/'+sha
     # Extract only committed code, never overwrite an existing immutable pin.
