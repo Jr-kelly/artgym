@@ -1,0 +1,26 @@
+{
+  "name": "reference3000-development-job",
+  "gpu": 0,
+  "timeout": 1800,
+  "final_phase": false,
+  "command": [
+    "PYTHON",
+    "-m",
+    "scripts.evaluate_wuji_recovery_batch",
+    "--name",
+    "reference3000-development",
+    "--states",
+    "research/artmanip-recovery-20260930/data/development-all.npy",
+    "--models",
+    "rl2500=runs/recovery-rl-seg3/checkpoints/epoch_002500.pth",
+    "rl3000=runs/recovery-rl-seg3/checkpoints/epoch_003000.pth"
+  ],
+  "source_sha": "953a143ffecaf17ef50023bc7da36a0c7523f97d",
+  "created_utc": "2026-09-30T14:07:25.146739+00:00",
+  "budget_receipt_utc": "2026-09-30T14:07:24.889454+00:00",
+  "occupied_gpu_hours": 13.733278015833328,
+  "other_jobs_reserved_gpu_hours": 1.14638404,
+  "root": "/tmp/artgym-recovery-20260930",
+  "pin": "/tmp/artgym-recovery-20260930/pins/953a143ffecaf17ef50023bc7da36a0c7523f97d",
+  "pid": 49339
+}
