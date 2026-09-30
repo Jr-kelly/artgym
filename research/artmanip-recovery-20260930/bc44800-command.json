@@ -1,0 +1,33 @@
+{
+  "plan": "bc44800-plan.json",
+  "not_started": true,
+  "launcher": [
+    "python3",
+    "-m",
+    "scripts.launch_wuji_recovery",
+    "--name",
+    "bc-executed44800-job",
+    "--gpu",
+    "1",
+    "--timeout",
+    "1500",
+    "--",
+    "PYTHON",
+    "-m",
+    "scripts.run_wuji_recovery_bc_pair",
+    "--name",
+    "bc-executed44800",
+    "--previous-name",
+    "bc-pair32000",
+    "--previous-epoch",
+    "4100",
+    "--end-epoch",
+    "5700",
+    "--arms",
+    "E",
+    "--max-seconds",
+    "1100"
+  ],
+  "output": "runs/artmanip-recovery-20260930/bc-executed44800/E",
+  "post_checks": "completed.json must sayepoch5700; audit with--arms E --parent-pair bc-pair32000 --parent-epoch4100 and actual45600Adam; independentE5700S2/S5/F before nextdecision."
+}

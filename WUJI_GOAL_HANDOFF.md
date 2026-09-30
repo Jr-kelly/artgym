@@ -7,14 +7,12 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T12:59:04.368898+00:00",
-  "event": "archive_completed",
-  "name": "recovery-bc32000-development",
-  "archive": "delivery/artmanip-recovery-20260930/recovery-bc32000-development.tar.gz",
-  "sha256": "912fa403f1513246e5da03997366f0f35ae70baedeceacbf231d15fd41e2b797",
-  "size": 177452358,
-  "files": 51,
-  "next": "Restore-check and upload; local originals retained"
+  "utc": "2026-09-30T13:02:15.508579+00:00",
+  "event": "single_E_continuation_driver_prepared",
+  "source": "scripts/run_wuji_recovery_bc_pair.py",
+  "evidence": "research/artmanip-recovery-20260930/bc44800-command.json",
+  "validation": "CLI accepts explicit --arms E; preserves default pairedM/E behavior and asserts actual requested endpoint after each arm.",
+  "next": "No newtraining now: originalseg3 and matchedcleancontrol occupyGPUs. Execute only afterrequiredcontrol/development and budgetrecheck."
 }
 ```
 
@@ -64,18 +62,18 @@
       "pid": 38444,
       "status": "running",
       "child_pid": 38445,
-      "heartbeat": "2026-09-30T12:55:58.731312+00:00",
-      "elapsed_seconds": 3525.1353095019876,
+      "heartbeat": "2026-09-30T12:59:29.630072+00:00",
+      "elapsed_seconds": 3736.0325081689953,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg3-job/status.json",
       "pid_exists": true
     },
     {
+      "source_sha256": "998b1c057e21c029884c58abe3d29ca976f05682d6a54b5092ccd4f3bef4d76e",
       "name": "rl-reference-clean-job",
       "gpu": 1,
-      "timeout": 8400,
       "final_phase": false,
       "command": [
-        "PYTHON",
+        "/tmp/wuji-recovery-runtime/bin/python",
         "-m",
         "scripts.train_wuji_recovery_rl",
         "task=wuji_artmanip_reference",
@@ -98,17 +96,18 @@
         "train.params.config.checkpoint_first_epoch=1250",
         "task.env.trainingStates=research/artmanip-recovery-20260930/data/rl-train-static-valid.npy"
       ],
-      "source_sha": "bdd4c7c31bd8ba451134fe2761f9ba22eb47b4dc",
-      "created_utc": "2026-09-30T12:56:07.470146+00:00",
-      "budget_receipt_utc": "2026-09-30T12:56:07.239983+00:00",
-      "occupied_gpu_hours": 11.383751424166661,
-      "other_jobs_reserved_gpu_hours": 1.3516703677777777,
-      "root": "/tmp/artgym-recovery-20260930",
-      "pin": "/tmp/artgym-recovery-20260930/pins/bdd4c7c31bd8ba451134fe2761f9ba22eb47b4dc",
-      "pid": 44425
+      "timeout_seconds": 8400,
+      "started": "2026-09-30T12:56:12.129283+00:00",
+      "pid": 44425,
+      "status": "running",
+      "child_pid": 44426,
+      "heartbeat": "2026-09-30T12:59:43.058979+00:00",
+      "elapsed_seconds": 210.83046116199694,
+      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-reference-clean-job/status.json",
+      "pid_exists": true
     }
   ],
-  "gpu_hours": 11.383751424166661,
+  "gpu_hours": 11.50524274305555,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -116,14 +115,12 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "GPU0 original segment3→3000, development, segment4→4000. GPU1 matched repaired-pool originalcontrol44425 CP1000→2000 just started; after its required dev, execute E-only4100→5700 underbc44800-plan.",
   "last_event": {
-    "utc": "2026-09-30T12:59:04.368898+00:00",
-    "event": "archive_completed",
-    "name": "recovery-bc32000-development",
-    "archive": "delivery/artmanip-recovery-20260930/recovery-bc32000-development.tar.gz",
-    "sha256": "912fa403f1513246e5da03997366f0f35ae70baedeceacbf231d15fd41e2b797",
-    "size": 177452358,
-    "files": 51,
-    "next": "Restore-check and upload; local originals retained"
+    "utc": "2026-09-30T13:02:15.508579+00:00",
+    "event": "single_E_continuation_driver_prepared",
+    "source": "scripts/run_wuji_recovery_bc_pair.py",
+    "evidence": "research/artmanip-recovery-20260930/bc44800-command.json",
+    "validation": "CLI accepts explicit --arms E; preserves default pairedM/E behavior and asserts actual requested endpoint after each arm.",
+    "next": "No newtraining now: originalseg3 and matchedcleancontrol occupyGPUs. Execute only afterrequiredcontrol/development and budgetrecheck."
   },
   "monitor": {
     "pid": 1192,
@@ -167,7 +164,7 @@
     "bc32000-development-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T12:56:07.239983+00:00",
+  "last_resource_check_utc": "2026-09-30T12:59:48.369007+00:00",
   "next_actions": [
     "GPU0 segment3 wrapper38444 reverified12:24UTC, epoch2212. ActualCP2000→2001 model and Adam72000→72036 restore passed; continue to3000, mandatorydevelopment, then fourthsegment4000. Runtime randomize=false/joint_noise=0/force_scale=0.",
     "Repaired training pool d885794f6bd5c77a71591c5d5e17753b4679252c8582587ab7217d6d61c73836 passed full51220sec static and clock/mapping checks. Four source0 slots47/94/104/117 replaced by original0/1/2/3, distinctcounts124/128/128/128. No evaluation filtering.",

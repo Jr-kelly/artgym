@@ -1,0 +1,66 @@
+{
+  "rows": [
+    {
+      "model": "E2500",
+      "protocol": "S2",
+      "source": 3,
+      "n": 32,
+      "success": 21,
+      "body_stable": 32,
+      "open_hold_rate": 0.84375,
+      "close_hold_rate": 0.9875,
+      "open_arrival_rate": 0.975,
+      "close_arrival_rate": 1.0,
+      "open_retreat_mean_m": 0.001722633818280883,
+      "close_retreat_mean_m": 0.00016789458459243178
+    },
+    {
+      "model": "E2500",
+      "protocol": "S5",
+      "source": 3,
+      "n": 32,
+      "success": 11,
+      "body_stable": 32,
+      "open_hold_rate": 0.484375,
+      "close_hold_rate": 1.0,
+      "open_arrival_rate": 1.0,
+      "close_arrival_rate": 1.0,
+      "open_retreat_mean_m": 0.004577835756208515,
+      "close_retreat_mean_m": 0.0
+    },
+    {
+      "model": "E4100",
+      "protocol": "S2",
+      "source": 3,
+      "n": 32,
+      "success": 23,
+      "body_stable": 32,
+      "open_hold_rate": 0.90625,
+      "close_hold_rate": 1.0,
+      "open_arrival_rate": 0.975,
+      "close_arrival_rate": 1.0,
+      "open_retreat_mean_m": 0.0012188673659693449,
+      "close_retreat_mean_m": 1.4566583558917046e-06
+    },
+    {
+      "model": "E4100",
+      "protocol": "S5",
+      "source": 3,
+      "n": 32,
+      "success": 14,
+      "body_stable": 31,
+      "open_hold_rate": 0.609375,
+      "close_hold_rate": 0.9375,
+      "open_arrival_rate": 0.984375,
+      "close_arrival_rate": 0.984375,
+      "open_retreat_mean_m": 0.0032451614840990966,
+      "close_retreat_mean_m": 0.00037606760498977475
+    }
+  ],
+  "input_sha256": {
+    "research/artmanip-recovery-20260930/bc19200-rl1000-analysis/report.json": "3c272f9b1d4f07534c0e3e506522ee8885d3cad41e25b6bba41527f584839f5f",
+    "research/artmanip-recovery-20260930/bc32000-analysis/report.json": "6317a325d2beb981879922770338ff9b037e6bb7a93ac953b9518104d6b0016f"
+  },
+  "finding": "Source3E5s main remaining failure is sustained extension: E4100 open endpoint hold39/64 versus E2500 31/64; mean retreat after within-stage peak decreases4.578\u21923.245mm. Close hold regresses64/64\u219260/64 and one episode loses validity. Do not call uniform improvement or treat correlated stages as independent episodes.",
+  "decision": "Continue preregistered existingE branch because phase hold/retreat and state coverage improve. This describes failure location; no root-cause or oracle-label claim."
+}
