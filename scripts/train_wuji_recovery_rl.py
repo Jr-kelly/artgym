@@ -63,4 +63,8 @@ def capture_config(cfg, config_dict):
     (out/'resolved-learner.json').write_text(json.dumps(result,indent=2,default=str)+'\n')
     return result
 entry.preprocess_train_config=capture_config
-entry.launch_rlg_hydra()
+import hydra
+@hydra.main(version_base="1.1",config_name="config",config_path=str(Path(__file__).resolve().parents[1]/"isaacgymenvs/cfg"))
+def launch(cfg):
+    entry.launch_rlg_hydra.__wrapped__(cfg)
+launch()
