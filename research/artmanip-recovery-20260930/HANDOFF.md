@@ -7,13 +7,20 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T07:37:32.751578+00:00",
-  "event": "launcher_outstanding_budget_reservation",
+  "utc": "2026-09-30T07:41:16.690667+00:00",
+  "event": "bc800_physical_state_coverage_diagnostic",
   "evidence": [
-    "scripts/launch_wuji_recovery.py"
+    "scripts/diagnose_wuji_recovery_state_shift.py",
+    "research/artmanip-recovery-20260930/bc800-state-shift.json"
   ],
-  "change": "Before any new launch refresh remote status, then reserve both existing live wrapper remaining timeout and proposed timeout against22GPUh learning ceiling. Source pins already running remain unchanged.",
-  "next": "Commit diagnostics and budget check; continue paired3200 after current assessment"
+  "source3_S5_joint_fraction_above_expert_validation_p95": {
+    "expert": 0.05003,
+    "M": 0.32274,
+    "E": 0.23695
+  },
+  "scope": "Matched-control-step nearest96 fitting expert physical states, joint-range normalized RMS; surviving states only. Not policy observation coverage or causal identification; compare body/survival separately.",
+  "decision": "Descriptive shift exists but heldout targets still improving through1600, so continue paired learning; no DAgger trigger yet.",
+  "next": "Complete1600 assessment and3200/6400; revisit coverage only if offline error stabilizes with persistent closed-loop deficit"
 }
 ```
 
@@ -62,8 +69,8 @@
       "pid": 4900,
       "status": "running",
       "child_pid": 4901,
-      "heartbeat": "2026-09-30T07:36:00.800000+00:00",
-      "elapsed_seconds": 1265.4209076190018,
+      "heartbeat": "2026-09-30T07:40:31.908763+00:00",
+      "elapsed_seconds": 1536.5533354840009,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg1-retry1-job/status.json",
       "pid_exists": true
     },
@@ -92,13 +99,13 @@
       "pid": 6696,
       "status": "running",
       "child_pid": 6697,
-      "heartbeat": "2026-09-30T07:36:06.133699+00:00",
-      "elapsed_seconds": 180.56648123899504,
+      "heartbeat": "2026-09-30T07:40:37.044972+00:00",
+      "elapsed_seconds": 451.41981077399396,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/bc1600-evaluation-job/status.json",
       "pid_exists": true
     }
   ],
-  "gpu_hours": 1.3020391111111114,
+  "gpu_hours": 1.45487301,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -106,13 +113,20 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "Review paired1600 closed-loop and continue paired3200; RL segment1 cumulative1000 continues with optional250 development",
   "last_event": {
-    "utc": "2026-09-30T07:37:32.751578+00:00",
-    "event": "launcher_outstanding_budget_reservation",
+    "utc": "2026-09-30T07:41:16.690667+00:00",
+    "event": "bc800_physical_state_coverage_diagnostic",
     "evidence": [
-      "scripts/launch_wuji_recovery.py"
+      "scripts/diagnose_wuji_recovery_state_shift.py",
+      "research/artmanip-recovery-20260930/bc800-state-shift.json"
     ],
-    "change": "Before any new launch refresh remote status, then reserve both existing live wrapper remaining timeout and proposed timeout against22GPUh learning ceiling. Source pins already running remain unchanged.",
-    "next": "Commit diagnostics and budget check; continue paired3200 after current assessment"
+    "source3_S5_joint_fraction_above_expert_validation_p95": {
+      "expert": 0.05003,
+      "M": 0.32274,
+      "E": 0.23695
+    },
+    "scope": "Matched-control-step nearest96 fitting expert physical states, joint-range normalized RMS; surviving states only. Not policy observation coverage or causal identification; compare body/survival separately.",
+    "decision": "Descriptive shift exists but heldout targets still improving through1600, so continue paired learning; no DAgger trigger yet.",
+    "next": "Complete1600 assessment and3200/6400; revisit coverage only if offline error stabilizes with persistent closed-loop deficit"
   },
   "monitor": {
     "pid": 1192,
@@ -133,7 +147,7 @@
     "bc-pair1600-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T07:36:24.227287+00:00",
+  "last_resource_check_utc": "2026-09-30T07:40:59.328305+00:00",
   "next_actions": [
     "Recheck live wrappers. At07:34:34UTC GPU0 RL wrapper4900 and GPU1 BC1600 evaluation6696 were live. Do not duplicate jobs.",
     "BC1600 pair has passed actual Adam2400/RNG and frozen-normalizer audit; held-out target errors continue decreasing. Review its S2/S5/F then train pair3200.",
