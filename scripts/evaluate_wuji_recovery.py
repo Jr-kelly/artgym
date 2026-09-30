@@ -163,7 +163,7 @@ def main():
         else:
             valid=trace['active'] & ~trace['fall'] & ~trace['invalid']
             body=valid.all(0)&(trace['drift']<.01).all(0)&(trace['rotation']<.25).all(0)
-            records=[dict(env=i,cycles=int(f_cycles[i]),functional=bool(f_cycles[i]>=1),alive_full=bool(valid[:,i].all()),body_stable=bool(body[i]),max_drift_m=float(trace['drift'][:,i].max()),max_rotation_rad=float(trace['rotation'][:,i].max())) for i in range(env.num_envs)]
+            records=[dict(env=i,cycles=int(f_cycles[i]),functional=bool(f_cycles[i]>=1),alive_full=bool(valid[:,i].all()),body_stable=bool(body[i]),max_drift_m=float(trace['drift'][:,i][trace['active'][:,i]].max()),max_rotation_rad=float(trace['rotation'][:,i][trace['active'][:,i]].max())) for i in range(env.num_envs)]
             report=dict(num_envs=env.num_envs,recorded_steps=len(frames),records=records,functional=sum(r['functional'] for r in records),alive_full=int(valid.all(0).sum()),body_stable=int(body.sum()))
         report['control_mode'] = 'static_initial_targets' if args.static else 'privileged_teacher'
         report['wall_seconds'] = __import__('time').monotonic()-started

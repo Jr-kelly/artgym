@@ -1,5 +1,5 @@
 """Bounded single-GPU job with lease, immutable command and resource receipts."""
-import argparse,datetime,hashlib,json,os,subprocess,sys,time
+import argparse,datetime,hashlib,json,os,subprocess,sys,time,signal
 from pathlib import Path
 from scripts.monitor_wuji_checkpoints import runtime_environment
 from scripts.evaluation_gpu_lease import acquire_evaluation_gpu
@@ -21,19 +21,26 @@ def main():
   if lease is None:time.sleep(5)
  env=runtime_environment(dict(project=str(R),python=sys.executable),a.gpu)
  with (out/'output.log').open('w') as log:
-  child=subprocess.Popen(cmd,cwd=R,env=env,stdout=log,stderr=subprocess.STDOUT,pass_fds=(lease.fileno(),))
+  child=subprocess.Popen(cmd,cwd=R,env=env,stdout=log,stderr=subprocess.STDOUT,pass_fds=(lease.fileno(),),start_new_session=True)
   state.update(status='running',child_pid=child.pid);save();last=0
   try:
    while child.poll() is None:
     t=time.monotonic()
-    if t-start>a.timeout:child.terminate();child.wait(timeout=30);state['timed_out']=True;break
+    if t-start>a.timeout:
+     os.killpg(child.pid,signal.SIGTERM)
+     try:child.wait(timeout=30)
+     except subprocess.TimeoutExpired:os.killpg(child.pid,signal.SIGKILL);child.wait()
+     state['timed_out']=True;break
     if t-last>=30:
      util=subprocess.check_output(['nvidia-smi','--query-gpu=index,utilization.gpu,memory.used','--format=csv,noheader'],text=True)
      with (out/'gpu.jsonl').open('a') as f:f.write(json.dumps(dict(time=now(),gpus=util))+'\n')
      state.update(heartbeat=now(),elapsed_seconds=t-start);(out/'status.json').write_text(json.dumps(state,indent=2)+'\n');last=t
     time.sleep(3)
   finally:
-   if child.poll() is None:child.terminate();child.wait(timeout=30)
+   if child.poll() is None:
+    os.killpg(child.pid,signal.SIGTERM)
+    try:child.wait(timeout=30)
+    except subprocess.TimeoutExpired:os.killpg(child.pid,signal.SIGKILL);child.wait()
  state.update(status='completed' if child.returncode==0 else 'failed',returncode=child.returncode,finished=now(),wall_seconds=time.monotonic()-start);save();lease.close()
  if child.returncode:sys.exit(child.returncode)
 if __name__=='__main__':main()

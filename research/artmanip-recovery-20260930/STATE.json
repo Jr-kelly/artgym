@@ -35,13 +35,46 @@
       "pid": 1482,
       "status": "running",
       "child_pid": 1483,
-      "heartbeat": "2026-09-30T06:53:40.451264+00:00",
-      "elapsed_seconds": 60.23082429799979,
+      "heartbeat": "2026-09-30T06:54:40.693475+00:00",
+      "elapsed_seconds": 120.45217997400323,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/g0-regression-retry1-job/status.json",
+      "pid_exists": true
+    },
+    {
+      "source_sha256": "c0d858d0b83ea45ba7759946fb3619878056c02cf7062aa41bfc261c1437848f",
+      "name": "rl-pilot20-retry2-job",
+      "gpu": 0,
+      "command": [
+        "/tmp/wuji-recovery-runtime/bin/python",
+        "-m",
+        "scripts.train_wuji_recovery_rl",
+        "task=wuji_artmanip_reference",
+        "hand=wuji_paper_official_actuator",
+        "object=knife_wuji_reference",
+        "train=wujiArtManipReferenceSAPG",
+        "num_envs=5120",
+        "headless=True",
+        "pipeline=gpu",
+        "graphics_device_id=-1",
+        "force_render=False",
+        "num_subscenes=0",
+        "multi_gpu=False",
+        "seed=2026093011",
+        "experiment=recovery-rl-pilot20-retry2",
+        "max_iterations=20"
+      ],
+      "timeout_seconds": 1800,
+      "started": "2026-09-30T06:54:22.523096+00:00",
+      "pid": 1849,
+      "status": "running",
+      "child_pid": 1850,
+      "heartbeat": "2026-09-30T06:54:52.770108+00:00",
+      "elapsed_seconds": 30.15889735699602,
+      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-pilot20-retry2-job/status.json",
       "pid_exists": true
     }
   ],
-  "gpu_hours": 0.0536827361111111,
+  "gpu_hours": 0.08315819249999999,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -49,14 +82,14 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "Restore isolated runtime; audit upstream and Wuji; meaningful prechecks; pin four-segment RL budget from full-update throughput.",
   "last_event": {
-    "utc": "2026-09-30T06:54:19.550442+00:00",
-    "event": "pilot_startup_checkpoint_fixed",
-    "failed_job": "rl-pilot20-retry1-job",
-    "failure": "Instrumentation requested get_full_state_weights before init_tensors, so dones was absent; no optimizer updates occurred",
-    "change": "Initialize zero rollout buffers before random initial checkpoint; learner remains unchanged",
-    "retry": 2,
-    "max_infrastructure_retries": 2,
-    "next": "Final bounded infrastructure retry of20epoch full update pilot; expert regression continues independently"
+    "utc": "2026-09-30T06:55:41.160524+00:00",
+    "event": "bounded_process_group_cleanup_added",
+    "change": "Future immutable job wrappers terminate full child process group on timeout, with30s grace then kill; launcher checks conservative GPU reservation",
+    "evidence": [
+      "scripts/run_wuji_recovery_job.py",
+      "scripts/launch_wuji_recovery.py"
+    ],
+    "next": "Measure full20epoch pilot throughput and its evaluation cost; no running source modified"
   },
   "monitor": {
     "pid": 1192,
@@ -70,5 +103,5 @@
     "reference-precheck-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T06:53:40.719277+00:00"
+  "last_resource_check_utc": "2026-09-30T06:54:54.677008+00:00"
 }

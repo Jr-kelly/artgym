@@ -16,6 +16,8 @@ def main():
     state=json.loads((D/'STATE.json').read_text());now=datetime.datetime.now(datetime.timezone.utc)
     cutoff=datetime.datetime.fromisoformat(state['training_cutoff_utc'])
     if (cutoff-now).total_seconds()<a.timeout:raise RuntimeError('Job would exceed reserved final-validation cutoff')
+    if state.get('gpu_hours',0)+state.get('unmetered_cuda_preflight_reserve_gpu_hours',.05)+a.timeout/3600 > 22:
+        raise RuntimeError('Job timeout could consume reserved final GPU budget; shorten or finalize')
     spec=dict(name=a.name,gpu=a.gpu,timeout=a.timeout,command=a.command[1:] if a.command[:1]==['--'] else a.command,source_sha=sha,created_utc=now.isoformat())
     archive=subprocess.check_output(['git','archive',sha,'scripts','isaacgymenvs','rl_games'],cwd=R)
     pin=REMOTE+'/pins/'+sha
