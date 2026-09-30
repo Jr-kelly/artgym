@@ -25,12 +25,19 @@ def main():
     start = time.monotonic()
     frozen = json.loads((D / 'final-freeze.json').read_text())
     deadline = datetime.datetime.fromisoformat(json.loads((D / 'STATE.json').read_text())['deadline_utc'])
+    def limit(seconds):
+        remaining = min(args.max_seconds - (time.monotonic() - start),
+                        (deadline - datetime.datetime.now(datetime.timezone.utc)).total_seconds())
+        assert remaining > 0, 'Artifact watcher time budget expired'
+        return min(seconds, remaining)
     try:
         while time.monotonic() - start < args.max_seconds:
             assert datetime.datetime.now(datetime.timezone.utc) < deadline
-            raw = subprocess.check_output([sys.executable, '-m', 'scripts.status_wuji_recovery', '--pull'], cwd=R, timeout=60)
+            raw = subprocess.check_output([sys.executable, '-m', 'scripts.status_wuji_recovery', '--pull'], cwd=R, timeout=limit(60))
             resource = json.loads(raw)
-            assert not any(j['status'] == 'failed' for j in resource['newly_finished']), 'Review final infrastructure failure before continuing'
+            jobs = json.loads((D / 'resources/latest.json').read_text())['jobs']
+            assert not any(j['status'] == 'failed' for j in jobs if j['name'] in
+                           ['final-g0-job', 'final-g1-job']), 'Review final infrastructure failure before continuing'
             changed = False
             for batch in ['final-g0', 'final-g1']:
                 rows = json.loads((R / 'runs/artmanip-recovery-20260930' / batch / 'results.json').read_text())
@@ -47,18 +54,18 @@ def main():
                     if not receipt.exists():
                         assert not archive.exists(), 'Incomplete archive must be audited before retry'
                         subprocess.run([sys.executable, '-m', 'scripts.archive_wuji_recovery_final_model',
-                            '--batch', batch, '--model', model], cwd=R, check=True, timeout=300)
+                            '--batch', batch, '--model', model], cwd=R, check=True, timeout=limit(300))
                         changed = True
                     if not restore.exists():
                         with restore.with_suffix('.tmp').open('w') as output:
                             subprocess.run([sys.executable, '-m', 'scripts.restore_wuji_unified', str(archive),
-                                '--output', '/tmp/wuji-recovery-final-restore'], cwd=R, stdout=output, check=True, timeout=180)
+                                '--output', '/tmp/wuji-recovery-final-restore'], cwd=R, stdout=output, check=True, timeout=limit(180))
                         restore.with_suffix('.tmp').rename(restore)
                         record('final_model_archive_restore_verified', model=model,
                                evidence=str(restore.relative_to(R)), next='Upload immutable archive to draft; full independent final rescore still required')
                         changed = True
             if changed:
-                subprocess.run([sys.executable, '-m', 'scripts.upload_wuji_recovery'], cwd=R, check=True, timeout=900)
+                subprocess.run([sys.executable, '-m', 'scripts.upload_wuji_recovery'], cwd=R, check=True, timeout=limit(900))
             restored = [m for m in frozen['models'] if (D / ('final-' + m + '-archive-restore.json')).exists()]
             status.update(heartbeat_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
                           restored_models=restored, gpu_hours=resource['gpu_hours'])
@@ -67,7 +74,7 @@ def main():
             if len(restored) == len(frozen['models']):
                 status['status'] = 'completed'
                 break
-            time.sleep(45)
+            time.sleep(limit(45))
         else:
             raise TimeoutError('Bounded artifact watcher expired; inspect completed receipts before continuing')
     except BaseException as error:
