@@ -1,0 +1,22 @@
+{
+  "training_states_sha256": "882ed2ee3e367be8855d469d6acbff6b16bb3d34a1c72fac84a3da90ec4d2072",
+  "effective_randomize": false,
+  "effective_joint_noise": 0.0,
+  "effective_force_scale": 0.0,
+  "action_step_rad": 0.008333333767950535,
+  "control_dt": 0.03333333507180214,
+  "startup_sha256": "8029e4fbefe95d441433d5ef789fc3618d00e21fe244b9d2de774b387b57a879",
+  "first_epoch": 3001,
+  "first_update_reward_weights": {
+    "ObjPosDeviation": -50.0,
+    "ObjRotDeviation": -2.0,
+    "StableContact": 1.0,
+    "HandQposDeviation": -0.001,
+    "GoalDistance1": 1000.0,
+    "GoalDistance2": 1.0,
+    "Smooth": -1.0,
+    "Drop": -1.0,
+    "Success": 50.0
+  },
+  "note": "startup reward scales precede curriculum application; actual epoch3001 full weights checked above. Original pool retained including its disclosed four invalid slots."
+}

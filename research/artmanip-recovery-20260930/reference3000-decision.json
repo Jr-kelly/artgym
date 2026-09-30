@@ -1,0 +1,13 @@
+{
+  "created_utc": "2026-09-30T14:25:19.752829+00:00",
+  "evidence": [
+    "reference3000-analysis/report.json",
+    "reference3000-gates.json",
+    "rl3000-training-progress.json"
+  ],
+  "F": "Both2500/3000:32/32 cycles for all sources, all full-body counts0/32",
+  "S": "Both checkpoints:strict and full-body all0/32 for both clocks",
+  "learning": "Source3 phase hold S2 .300\u2192.421875, S5 .2265625\u2192.3125; source2 S5 .453125\u2192.7265625. Body breach timing improves for some other sources, remains early forsource3. This is learning progress, not stable holding or convergence.",
+  "decision": "Continue preregistered fourth original segment3000\u21924000 with original pool/objective and actualAdam/RNG restore; assess further learning jointly after4000 within remaining budget.",
+  "untriggered": "NoS64 promotion/secondseed/student. No need forsingle-source exploration control because F cycles already reliable."
+}

@@ -1,0 +1,21 @@
+{
+  "plan": "runs/artmanip-recovery-20260930/reference3000-development/plan.json",
+  "states_sha256": "8969ee2beb796cd7e396468bdeea5f440447685a55d4f0862a2cdf27ca9e6a2c",
+  "models": {
+    "rl2500": {
+      "path": "runs/recovery-rl-seg3/checkpoints/epoch_002500.pth",
+      "sha256": "a8b32b8160a42cf98684be6ebc56471babde22751e629e0683383c179ac01b52"
+    },
+    "rl3000": {
+      "path": "runs/recovery-rl-seg3/checkpoints/epoch_003000.pth",
+      "sha256": "2207992032d92b6d2ecc72c7ecc971aa5a622978872fede31ff90fc928198b39"
+    }
+  },
+  "protocols": [
+    "S2",
+    "S5",
+    "F"
+  ],
+  "verified": true,
+  "scope": "Running batch contract only; all six protocols and independent trace rescore still required"
+}

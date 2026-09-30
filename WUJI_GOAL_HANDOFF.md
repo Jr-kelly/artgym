@@ -7,11 +7,10 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T14:11:19.259614+00:00",
-  "event": "reference3000_archives_uploaded_and_server_hashes_verified",
-  "assets": 39,
-  "evidence": "research/artmanip-recovery-20260930/draft-assets-verified.json",
-  "next": "Complete ongoing2500/3000development then originalsegment4; matchedcleancontrol and E continuation remain"
+  "utc": "2026-09-30T14:27:44.282044+00:00",
+  "event": "reference_segment4_effective_runtime_verified",
+  "evidence": "research/artmanip-recovery-20260930/rl-seg4-runtime.json",
+  "next": "Continue original segment4 to4000; matchedcleancontrol to2000 then E extension"
 }
 ```
 
@@ -30,29 +29,40 @@
   "active_jobs": [
     {
       "source_sha256": "998b1c057e21c029884c58abe3d29ca976f05682d6a54b5092ccd4f3bef4d76e",
-      "name": "reference3000-development-job",
+      "name": "rl-seg4-job",
       "gpu": 0,
       "final_phase": false,
       "command": [
         "/tmp/wuji-recovery-runtime/bin/python",
         "-m",
-        "scripts.evaluate_wuji_recovery_batch",
-        "--name",
-        "reference3000-development",
-        "--states",
-        "research/artmanip-recovery-20260930/data/development-all.npy",
-        "--models",
-        "rl2500=runs/recovery-rl-seg3/checkpoints/epoch_002500.pth",
-        "rl3000=runs/recovery-rl-seg3/checkpoints/epoch_003000.pth"
+        "scripts.train_wuji_recovery_rl",
+        "task=wuji_artmanip_reference",
+        "hand=wuji_paper_official_actuator",
+        "object=knife_wuji_reference",
+        "train=wujiArtManipReferenceSAPG",
+        "num_envs=5120",
+        "headless=True",
+        "pipeline=gpu",
+        "graphics_device_id=-1",
+        "force_render=False",
+        "num_subscenes=0",
+        "multi_gpu=False",
+        "seed=2026093011",
+        "experiment=recovery-rl-seg4",
+        "max_iterations=4000",
+        "checkpoint=runs/recovery-rl-seg3/checkpoints/epoch_003000.pth",
+        "train.params.config.save_frequency=250",
+        "train.params.config.evaluation_frequency=250",
+        "train.params.config.checkpoint_first_epoch=3250"
       ],
-      "timeout_seconds": 1800,
-      "started": "2026-09-30T14:07:28.996109+00:00",
-      "pid": 49339,
+      "timeout_seconds": 8400,
+      "started": "2026-09-30T14:25:24.648020+00:00",
+      "pid": 51150,
       "status": "running",
-      "child_pid": 49340,
-      "heartbeat": "2026-09-30T14:11:00.076011+00:00",
-      "elapsed_seconds": 210.96373280099942,
-      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/reference3000-development-job/status.json",
+      "child_pid": 51151,
+      "heartbeat": "2026-09-30T14:25:54.840158+00:00",
+      "elapsed_seconds": 30.0818115889997,
+      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg4-job/status.json",
       "pid_exists": true,
       "host": "authorized_remote"
     },
@@ -90,26 +100,25 @@
       "pid": 44425,
       "status": "running",
       "child_pid": 44426,
-      "heartbeat": "2026-09-30T14:11:02.270635+00:00",
-      "elapsed_seconds": 4490.085626775006,
+      "heartbeat": "2026-09-30T14:26:05.943408+00:00",
+      "elapsed_seconds": 5393.761509618998,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-reference-clean-job/status.json",
       "pid_exists": true,
       "host": "authorized_remote"
     }
   ],
-  "gpu_hours": 13.852921487222217,
+  "gpu_hours": 14.316980208611106,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
   "resource_check_utc": "2026-09-30T06:42:41Z",
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
-  "next": "GPU0 development2500+3000 PID49339 started14:07UTC; then execute rl-seg4-command.json, actual3001 restore check, finish4000 and dev3500+4000. GPU1 matched repaired-pool control PID44425 continues to2000; dev1500/2000 then E-only5700.",
+  "next": "GPU0 segment4 PID51150 from e80d5f4 started14:25UTC, actualCP3000→3001 restore passed; finish4000 then dev3500+4000. GPU1 matched repaired-pool originalcontrol PID44425 continues→2000, dev1500/2000 then E-only4100→5700.",
   "last_event": {
-    "utc": "2026-09-30T14:11:19.259614+00:00",
-    "event": "reference3000_archives_uploaded_and_server_hashes_verified",
-    "assets": 39,
-    "evidence": "research/artmanip-recovery-20260930/draft-assets-verified.json",
-    "next": "Complete ongoing2500/3000development then originalsegment4; matchedcleancontrol and E continuation remain"
+    "utc": "2026-09-30T14:27:44.282044+00:00",
+    "event": "reference_segment4_effective_runtime_verified",
+    "evidence": "research/artmanip-recovery-20260930/rl-seg4-runtime.json",
+    "next": "Continue original segment4 to4000; matchedcleancontrol to2000 then E extension"
   },
   "monitor": {
     "pid": 1192,
@@ -151,12 +160,13 @@
     "holding2000-development-job",
     "bc-pair32000-job",
     "bc32000-development-job",
-    "rl-seg3-job"
+    "rl-seg3-job",
+    "reference3000-development-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T14:11:02.301030+00:00",
+  "last_resource_check_utc": "2026-09-30T14:26:07.054368+00:00",
   "next_actions": [
-    "GPU0 development2500+3000 PID49339 started14:07UTC; then execute rl-seg4-command.json, actual3001 restore check, finish4000 and dev3500+4000. GPU1 matched repaired-pool control PID44425 continues to2000; dev1500/2000 then E-only5700.",
+    "GPU0 segment4 PID51150 from e80d5f4 started14:25UTC, actualCP3000→3001 restore passed; finish4000 then dev3500+4000. GPU1 matched repaired-pool originalcontrol PID44425 continues→2000, dev1500/2000 then E-only4100→5700.",
     "Repaired training pool d885794f6bd5c77a71591c5d5e17753b4679252c8582587ab7217d6d61c73836 passed full51220sec static and clock/mapping checks. Four source0 slots47/94/104/117 replaced by original0/1/2/3, distinctcounts124/128/128/128. No evaluation filtering.",
     "GPU1 matched repaired-pool originalcontrol PID44425 fromsourcebdd4c7c at13:03UTC epoch1059. ActualCP1000→1001 model/Adamrestore, repairedpoolhash and false/0/0 noise verified. Finish2000, devrlclean1500+2000; compareholdingpoints independently.",
     "BC32000 independentdev passed: E4100 S2[32,32,32,23],S5[31,32,32,14],Fall32; source3phasehold and5sstatecoverage improve. Mclosedloopflat/worse. Preregistered E-only44800additionaltotal end5700, Adam45600; keep paired32000 comparison separate from laterunequal-budget extension.",
@@ -165,13 +175,14 @@
   ],
   "bc_current_pair": "runs/artmanip-recovery-20260930/bc-pair32000",
   "training_active_runs": [
+    "runs/recovery-rl-seg4",
     "runs/recovery-rl-reference-clean"
   ],
   "bc_next_plan": "research/artmanip-recovery-20260930/bc44800-plan.json",
-  "github_last_verified_commit": "3d64c3978b551df6b365e8b484249fd1008f0c5d",
+  "github_last_verified_commit": "e80d5f4184b01138fdb82adc3cada87528af8011",
   "release_verified_assets": 39,
   "gpu_hours_by_host": {
-    "authorized_remote": 13.852921487222217,
+    "authorized_remote": 14.316980208611106,
     "local": 0.0
   }
 }
