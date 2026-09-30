@@ -7,14 +7,15 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T17:16:38.124036+00:00",
-  "event": "archive_completed",
-  "name": "recovery-primary-candidate-Eagg6100",
-  "archive": "delivery/artmanip-recovery-20260930/recovery-primary-candidate-Eagg6100.tar.gz",
-  "sha256": "3fa51b91d03e7cb795f9b8a27bd3d7b0fd81233e0c5137ea2753901025cf2d31",
-  "size": 69329747,
-  "files": 5,
-  "next": "Restore-check and upload; local originals retained"
+  "utc": "2026-09-30T17:22:16.310102+00:00",
+  "event": "full_second_seed_current_handoff_and_candidate_restore",
+  "commit": "0b921f2cad2a648a2d5dcd36b5aa71dc5c7ff89b",
+  "release_assets": 54,
+  "evidence": [
+    "research/artmanip-recovery-20260930/primary-candidate-restored-integrity.json",
+    "research/artmanip-recovery-20260930/seed2-actual-fork-integrity.json"
+  ],
+  "next": "FullsecondoptimizationseedE44800 running; actualBC100model/Adam kept andnewCPU/CUDA/NumPy seed2026093061 verified. Finish5700thenfreshcollection/originalavailability/aggregation3200/fixed64replicate; final128unopened."
 }
 ```
 
@@ -76,29 +77,30 @@
       "pid": 67484,
       "status": "running",
       "child_pid": 67485,
-      "heartbeat": "2026-09-30T17:13:41.139807+00:00",
-      "elapsed_seconds": 90.38749481999548,
+      "heartbeat": "2026-09-30T17:19:42.534457+00:00",
+      "elapsed_seconds": 451.76813189699897,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/bc-seed2-executed44800-job/status.json",
       "pid_exists": true,
       "host": "authorized_remote"
     }
   ],
-  "gpu_hours": 19.060847350277765,
+  "gpu_hours": 19.168374428888878,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
   "resource_check_utc": "2026-09-30T06:42:41Z",
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
-  "next": "Run fullsecondoptimizationseed2026093061 fromactualBC100 model/Adam through E44800 thenownhistoryaggregation3200; fixedsamecohort64replicationendpoint. MainEagg6100 unchanged,final128 unopened.",
+  "next": "FullsecondoptimizationseedE44800 running; actualBC100model/Adam kept andnewCPU/CUDA/NumPy seed2026093061 verified. Finish5700thenfreshcollection/originalavailability/aggregation3200/fixed64replicate; final128unopened.",
   "last_event": {
-    "utc": "2026-09-30T17:16:38.124036+00:00",
-    "event": "archive_completed",
-    "name": "recovery-primary-candidate-Eagg6100",
-    "archive": "delivery/artmanip-recovery-20260930/recovery-primary-candidate-Eagg6100.tar.gz",
-    "sha256": "3fa51b91d03e7cb795f9b8a27bd3d7b0fd81233e0c5137ea2753901025cf2d31",
-    "size": 69329747,
-    "files": 5,
-    "next": "Restore-check and upload; local originals retained"
+    "utc": "2026-09-30T17:22:16.310102+00:00",
+    "event": "full_second_seed_current_handoff_and_candidate_restore",
+    "commit": "0b921f2cad2a648a2d5dcd36b5aa71dc5c7ff89b",
+    "release_assets": 54,
+    "evidence": [
+      "research/artmanip-recovery-20260930/primary-candidate-restored-integrity.json",
+      "research/artmanip-recovery-20260930/seed2-actual-fork-integrity.json"
+    ],
+    "next": "FullsecondoptimizationseedE44800 running; actualBC100model/Adam kept andnewCPU/CUDA/NumPy seed2026093061 verified. Finish5700thenfreshcollection/originalavailability/aggregation3200/fixed64replicate; final128unopened."
   },
   "monitor": {
     "pid": 1192,
@@ -155,24 +157,27 @@
     "aggregation1-promotion64-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T17:13:45.005004+00:00",
+  "last_resource_check_utc": "2026-09-30T17:20:12.102487+00:00",
   "next_actions": [
-    "Exact64/source promotion with samebatchexperts running. Ifpassed prioritize fullBC-route secondoptimizationseed, using conditionalplan; do notopenfinal orstartstudent yet.",
-    "GPU1 wrapper65486, source2c29436, started16:50:48UTC, timeout1800, aggregation1-promotion64: Eagg6100,historical,source3 S2/S5/F onpromotion-all.npy. At17:03UTC mainall3+historicalS2/S5 complete. Producer maincountsS2[64,64,63,60],S5[63,64,63,64],F[64,64,63,63] arePROVISIONAL; independentrescore/fullbody/relativeexpertgates pending.",
-    "GPU0 originalRL4000 anddevelopment3500/4000 complete; fullpull/archive/actualrestore passed. CP4000 SHA0641cd6c...,327.68Minteractions/144000Adam; reference4000-analysis/gates/decision. Source3phase/bodybreachimproves butstrict/bodyallzero. No convergenceclaim; prioritize firstSsuccess verification.",
-    "Eagg6100 passedS32[32,32,32,28]bothclocks,bodyall32; selectedviaexistingranking. Eagg6500fixedendpointalsoS32passed. Bothpaired6100/6500 actualAdam/RNG/frozen28 audited. Aggregateoldheldoutfitworsens whilenewstatefitimproves andclosedloopSgains; seeaggregation1-heldout-fit-summary.",
-    "second-seed-conditional-plan.json prepared, NOsecondseedGPUstarted. FullE44800 fromsameBC100actualAdam800 withexplicit --sequence-seed2026093061 thenownbehaviorcollection/originalavailability/mixeddata/aggregate3200→6100; fixed64replicate. Newoption/auditcode committed0b79bb0 andpushed, actualforktest awaitslaunch. Sameexperts/initweights; noindependentexpertpretraining claim.",
-    "Currentreserve4GPUh/normal20 remains. Conditionalfullsecondroute expected~.955GPUh,bounded~1.375; afterexact64passfreshbudget mayrequire prospectivereallocation toreserve3.5/normal20.5 while retaining2wallhours. Do notsilentlyspendreserve.",
-    "Final128untouched,no finalfreeze. Freezehelper nowrecognizesEagg/Ereplay families; doNOTfeed32and64 assessmentsforsamenameasconflictingrows. Preserve32mainselection,64gateasverification. Ifsecondseedruns, addasfixedreplicationendpoint/extraanchor withoutreselectingmainby64scores; helpermayneed --replicates support.",
-    "GitHub0b79bb0pushed,currentHEADverificationpending;52draftassetsverified incllatestdevelopment. weights-index195checkpoints/50archives predateslast2developmentarchivesbutno newweightsafterindex. Finalpublicrelease,anonymousrestore,fullreport/videos andprocesscleanupremain. Monitor1192 lastcommandverified16:14UTC; recheck."
+    "FullsecondoptimizationseedE44800 running; actualBC100model/Adam kept andnewCPU/CUDA/NumPy seed2026093061 verified. Finish5700thenfreshcollection/originalavailability/aggregation3200/fixed64replicate; final128unopened.",
+    "GPU0 wrapper67484 started17:12:07UTC, source3032de354a3e9c2ac8bd90995c0fe02cc7d77249, timeout2800 (trainermax2700). Runbc-seed2-executed44800/E, epoch1226/updates9808 at17:20UTC. ReverifyPIDs/currentepoch; expect5700/45600. --sequence-seed onlyusedonceat100; latercontinueactualRNG.",
+    "Actualseedfork auditpassed: model/Adam/epoch/updatesexactBC100, CPU/NumPyinitialseedstateexact, CUDAencodedseed2026093061,first101/808. research/.../seed2-actual-fork-integrity.json. NewoptimizerseedsharesBC100andexperts; notindependentexpertpretraining.",
+    "After5700: fullpull/audit/archive. Run boundedcollection fromnewcheckpoint on same data/aggregation1-states.npy; fourbehavior/handover2/5s, exactGPUreplay andexistingavailabilitygate. Preparemix old96+new24, shared40; trainaggregateonlyfromnew5700to6100 (+3200),batch120, no seedreset. Then64samecohort endpointseed2Eagg6100, reusefirstpromotion64responsibleexperts. Noextraadaptingseed/checkpointselection.",
+    "Main Eagg6100 SH2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8 passedexact64/S2[64,64,63,60],S5[63,64,63,64],body[64,64,63,64]/[63,64,63,64]. Fcycles[64,64,63,63],40sbody[64,57,53,63]. Methodfreeze teacher-method-freeze.json; no student.",
+    "Budgetnormal20.5GPUh andfinalreserve3.5 noweffective; max24/max2GPUs; trainingcutoff20:42UTC/deadline22:42UTC unchanged. Fullsecondroutebounded4950secondsregisteredbeforelaunch; do notspendremainingbudgetonunrelatedRL. Original4000 stillnonconverged, budgetpriority shiftedto successfulroute replication.",
+    "Final-candidate-readiness.json has16knownmodels/18gatefiles32only; pendingseed2replicate adds17th. Selected M300,E500,rl3000,rlhold1500,rlclean2000,Eagg6100,Ereplay6500. Freezehelper --replicates seed2Eagg6100 includesfixedendpointbutexcludesitfromprimaryranking. Firstmain64verificationfilemustnotconflictwith32Eagg6100gate.",
+    "Final128nottransferred/evaluated,nofinal-freeze.json. Frozenvideo fixedrows[0,32,64,96], firstfailureS5row97->[0,32,64,97] fromprimarydev; candidate-video-readiness.json. Localvideofallbackonlyafterallremotejobs, samegloballedger; no localGPUusedyet.",
+    "GitHubverified 0b921f2cad2a648a2d5dcd36b5aa71dc5c7ff89b; draft54 assets. Primarycandidate69MBarchive3fa51b91... actualrestoredCPUauditpassed. weightsindex195/50 predateslaterreportarchives; refreshafterseed2/final. Needfinalstats,publicrelease+anonymousdownloadrestore,videos,finalreportandownprocesscleanup. Monitor1192 identitylastchecked16:14UTC, reverify."
   ],
   "bc_current_pair": "runs/artmanip-recovery-20260930/bc-pair32000",
-  "training_active_runs": [],
+  "training_active_runs": [
+    "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E"
+  ],
   "bc_next_plan": "research/artmanip-recovery-20260930/bc44800-plan.json",
-  "github_last_verified_commit": "0b79bb0",
-  "release_verified_assets": 52,
+  "github_last_verified_commit": "0b921f2cad2a648a2d5dcd36b5aa71dc5c7ff89b",
+  "release_verified_assets": 54,
   "gpu_hours_by_host": {
-    "authorized_remote": 19.060847350277765,
+    "authorized_remote": 19.168374428888878,
     "local": 0.0
   },
   "bc_executed_endpoint": {

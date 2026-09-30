@@ -11,10 +11,14 @@ def sha(path):
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);a=p.parse_args()
-    root=Path(__file__).resolve().parents[1];entries={};archives=[]
+    root=Path(__file__).resolve().parents[1];entries={};archives=[];standalone_assets=[]
     for receipt in sorted((root/'delivery/artmanip-recovery-20260930').glob('*.receipt.json')):
         item=json.loads(receipt.read_text());path=root/item['archive']
         assert sha(path)==item['sha256']
+        if item.get('kind')=='standalone_video':
+            assert path.suffix=='.mp4' and path.stat().st_size==item['size']
+            standalone_assets.append(dict(path=item['archive'],sha256=item['sha256'],size=item['size'],kind='standalone_video'))
+            continue
         with tarfile.open(path) as tf:
             members=[m for m in tf.getmembers() if m.name.startswith('release-manifests/') and m.name.endswith('.json')]
             assert len(members)==1;manifest=json.load(tf.extractfile(members[0]))
@@ -30,7 +34,7 @@ def main():
                 steps=sorted(set(int(x['step']) for x in optimizer.get('state',{}).values() if 'step' in x))
                 entries[key]=dict(path=f['path'],sha256=f['sha256'],size=f['size'],kind='offline_BC' if bc else 'RL_or_parent_expert',epoch=state.get('bc_epoch' if bc else 'epoch'),optimizer_updates=state.get('bc_updates' if bc else 'recovery_optimizer_updates'),adam_steps=steps,environment_interactions=0 if bc else state.get('frame'),has_normalizer=bool('running_mean_std' in state or any('running_mean_std' in k for k in state.get('model',{}))),rng_keys=sorted(k for k in state if k.startswith('bc_') and 'rng' in k) if bc else sorted(state.get('recovery_rng',{})),archives=[])
             entries[key]['archives'].append(item['archive'])
-    result=dict(scope='Archived checkpoint inventory, actual archive and local-file SHA256 checks plus CPU deserialization. Historical PPO parent metadata is not evidence of this round training. PhysX is not serialized. No claim of policy success.',weights=list(entries.values()),archives=archives)
+    result=dict(scope='Archived checkpoint inventory, actual archive and local-file SHA256 checks plus CPU deserialization. Historical PPO parent metadata is not evidence of this round training. PhysX is not serialized. No claim of policy success.',weights=list(entries.values()),archives=archives,standalone_assets=standalone_assets)
     a.output.write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(dict(weights=len(entries),archives=len(archives),output=str(a.output))))
 
 if __name__=='__main__':main()
