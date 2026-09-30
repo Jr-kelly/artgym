@@ -11,45 +11,53 @@
   "active_jobs": [
     {
       "source_sha256": "998b1c057e21c029884c58abe3d29ca976f05682d6a54b5092ccd4f3bef4d76e",
-      "name": "aggregation2-collection-job",
+      "name": "seed2-promotion64-job",
       "gpu": 0,
       "final_phase": false,
       "command": [
         "/tmp/wuji-recovery-runtime/bin/python",
         "-m",
-        "scripts.run_wuji_recovery_aggregation_collection",
+        "scripts.evaluate_wuji_recovery_batch",
         "--name",
-        "aggregation2-collection",
-        "--checkpoint",
-        "runs/artmanip-recovery-20260930/bc-seed2-executed44800/E/epoch_005700.pth",
+        "seed2-promotion64",
         "--states",
-        "research/artmanip-recovery-20260930/data/aggregation1-states.npy"
+        "research/artmanip-recovery-20260930/data/promotion-all.npy",
+        "--models",
+        "seed2Eagg6100=runs/artmanip-recovery-20260930/bc-seed2-aggregate3200/E/epoch_006100.pth",
+        "--protocols",
+        "S2",
+        "S5",
+        "F"
       ],
       "timeout_seconds": 900,
-      "started": "2026-09-30T17:53:30.765373+00:00",
-      "pid": 71007,
+      "started": "2026-09-30T18:09:23.617083+00:00",
+      "pid": 72687,
       "status": "running",
-      "child_pid": 71008,
-      "heartbeat": "2026-09-30T17:56:31.610509+00:00",
-      "elapsed_seconds": 180.7552565789956,
-      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/aggregation2-collection-job/status.json",
+      "child_pid": 72688,
+      "heartbeat": "2026-09-30T18:13:54.837193+00:00",
+      "elapsed_seconds": 271.1438679359999,
+      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/seed2-promotion64-job/status.json",
       "pid_exists": true,
       "host": "authorized_remote"
     }
   ],
-  "gpu_hours": 19.747670713333324,
+  "gpu_hours": 19.935183044999988,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
   "resource_check_utc": "2026-09-30T06:42:41Z",
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
-  "next": "GPU0 aggregation2-collection wrapper71007 started17:53:30UTC, timeout900, source9f54d74e8b6a44932be0ad83bc48474efd9bee29. Reverify live status. Same128 training-only initials, own secondseed behavior/earlyhandover S2/S5; sameGPU replay and original availability gate required before fitting.",
+  "next": "Fixed second-seed Eagg6100 promotion64 running on GPU0 wrapper72687; complete independent rescore, then once-only finalfreeze with18models including bothE4100/E5700.",
   "last_event": {
-    "utc": "2026-09-30T17:56:26.790141+00:00",
-    "event": "second_seed_collection_and_final_inventory_handoff_refreshed",
-    "next": "GPU0 aggregation2-collection wrapper71007 started17:53:30UTC, timeout900, source9f54d74e8b6a44932be0ad83bc48474efd9bee29. Reverify live status. Same128 training-only initials, own secondseed behavior/earlyhandover S2/S5; sameGPU replay and original availability gate required before fitting.",
-    "final_candidate_inventory": "final-candidate-readiness-v2.json",
-    "final_budget": "final-execution-budget-plan-v2.json"
+    "utc": "2026-09-30T18:13:07.892485+00:00",
+    "event": "full_second_seed_artifacts_published_to_draft",
+    "assets": 58,
+    "endpoint_sha256": "054a32298af88e287cbaa6ef057389489996f3cc102546db86632dad4c3e64e9",
+    "evidence": [
+      "research/artmanip-recovery-20260930/draft-assets-verified.json",
+      "research/artmanip-recovery-20260930/seed2-aggregate3200-restored-integrity.json"
+    ],
+    "next": "Complete fixed64 replication evaluation, freeze18 final models exactly once, no moretraining. Finalstates remainunopened."
   },
   "monitor": {
     "pid": 1192,
@@ -104,28 +112,30 @@
     "aggregation1-development-job",
     "reference4000-development-job",
     "aggregation1-promotion64-job",
-    "bc-seed2-executed44800-job"
+    "bc-seed2-executed44800-job",
+    "aggregation2-collection-job",
+    "bc-seed2-aggregate3200-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T17:56:50.648180+00:00",
+  "last_resource_check_utc": "2026-09-30T18:14:23.224685+00:00",
   "next_actions": [
-    "Current: second optimization seed E5700/45600 completed and actually archive-restored; SHA10a86c022d1aea57a572ea6b42dac271ca330973d9a5625b51d85ceb1fc62c04. Full44800 addedupdates from sharedBC100/Adam; new sampling seed2026093061 only.",
-    "GPU0 aggregation2-collection wrapper71007 started17:53:30UTC, timeout900, source9f54d74e8b6a44932be0ad83bc48474efd9bee29. Reverify live status. Same128 training-only initials, own secondseed behavior/earlyhandover S2/S5; sameGPU replay and original availability gate required before fitting.",
-    "After collection: fullpull, assess_wuji_recovery_aggregation -> aggregation2-availability.json. If passed, mix aggregation2-data, actualarray audit andremote hashes; aggregateonly secondseedE5700 ->6100/+3200,batch120,LR1e-5,noseedreset,timeout350. Then fixed seed2Eagg6100 promotion64 S2/S5/F timeout900; samecohort experts from aggregation1-promotion64-analysis. No primaryreselection.",
+    "Full second optimization seed E44800 + own-history aggregation3200 completed, realAdam48800/frozen28 and actualparent/RNG checks passed. Endpoint SHA054a32298af88e287cbaa6ef057389489996f3cc102546db86632dad4c3e64e9, fixed name seed2Eagg6100.",
+    "GPU0 seed2-promotion64 wrapper72687 started18:09:20UTC, timeout900, source9f9fb188227b7699aa3d6739069079ff49fb89fc. Reverify status. Same256 promotioninitials, S2/S5/F, experts reuse firstpromotion64. No primaryreselection.",
+    "Own collection completed:512episodes/307200transitions, all16 sameGPU historyreplay errors0; source3S5 behavior8/32 ->handover31/32. Originalavailability gate passed. All65 mixed dataset files exactremotehashes; actualarray splits passed. No secondreplaytrained. Final128stillunopened.",
     "Final inventory correction BEFORE opening: use final-candidate-readiness-v2.json and final-execution-budget-plan-v2.json. E4100 MUST join endpoints alongside E5700: compare M4100/E4100 same32000 budget, E5700 extra44800 separately. Now17 knownmodels +pendingreplicate =18,27648 physicalepisodes. Freeze helper accepts multiple E endpoints (familyset check).",
     "Final candidate remains Eagg6100 SHA2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8, passed exactdevelopment64. No final-freeze.json, final128 untransferred/unevaluated. Final batches9/9 timeout5400each, local3videos timeout500each; worst20.5+.05+12300/3600=23.9667GPuh. Do not add normaltraining.",
     "Final audit scripts/audit_wuji_recovery_final.py added; checks allunique frozenmodels/protocols/source/weights/code and512 rows/128 per source plusCSVcount. Use after summarize and gates. Syntax/CLI checked; actualfinal notyet.",
     "Local GPU0 desktop ToDesk2034815 identified17:39UTC as C+G video session,651MiB;22589MiBfree. Local launcher now allows ONLY exactbinary+--isVideoSession=true with>=16000MiBfree, rejects unknowncompute. Realpreflight+CPU negativechecks passed. No localGPUstarted; reverifyafterremotejobs beforevideos.",
-    "Primary candidate archive69MB actualrestore passed; secondE44800archive1.114GB SHA6b1bbc85a0b0bd36ced2af23115e558940b683864379b4d0c62d5c4e53d89d64 actualrestore passed. Uploader session28885 started17:55UTC, recheck; draft54 priorassets+newseedarchive expected55.",
+    "Primary candidate archive69MB actualrestore passed; secondE44800archive1.114GB SHA6b1bbc85a0b0bd36ced2af23115e558940b683864379b4d0c62d5c4e53d89d64 actualrestore passed. Uploader completed;55 draftassets server hashes verified.",
     "GitHub branch lastpushed9f54d74; docs/readiness-v2/results pendingcommit. README consolidated, fullolder narrative in DEVELOPMENT_NARRATIVE.md. Need finalstats,publicRelease/anonymousdownloadrestore,videos,weightsindexrefresh,ownprocesscleanup. Monitor1192 commandverified17:34UTC;fourhour17:36mean35.20percent/gap0,26passed/40targetnotmet."
   ],
   "bc_current_pair": "runs/artmanip-recovery-20260930/bc-pair32000",
   "training_active_runs": [],
   "bc_next_plan": "research/artmanip-recovery-20260930/bc44800-plan.json",
   "github_last_verified_commit": "9f54d74e8b6a44932be0ad83bc48474efd9bee29",
-  "release_verified_assets": 54,
+  "release_verified_assets": 58,
   "gpu_hours_by_host": {
-    "authorized_remote": 19.747670713333324,
+    "authorized_remote": 19.935183044999988,
     "local": 0.0
   },
   "bc_executed_endpoint": {

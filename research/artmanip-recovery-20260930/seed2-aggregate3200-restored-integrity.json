@@ -1,0 +1,37 @@
+{
+  "rows": [
+    {
+      "arm": "E",
+      "epoch": 6100,
+      "updates": 48800,
+      "adam_steps": [
+        48800
+      ],
+      "fixed_tensor_count": 28,
+      "normalizer_critic_frozen": true,
+      "sha256": "054a32298af88e287cbaa6ef057389489996f3cc102546db86632dad4c3e64e9"
+    }
+  ],
+  "paired": false,
+  "same_end_rng": null,
+  "passed": true,
+  "scope": "Checkpoint integrity and optional paired optimizer/sequence random state, not a closed-loop score",
+  "actual_resume": [
+    {
+      "arm": "E",
+      "parent_sha256": "10a86c022d1aea57a572ea6b42dac271ca330973d9a5625b51d85ceb1fc62c04",
+      "saved_start_sha256": "b837619d8a027338f85b89a77a0c1fba465a4f9b36ab5bd60011bf1597837ffd",
+      "equal_fields": [
+        "model",
+        "bc_optimizer",
+        "bc_torch_rng",
+        "bc_cuda_rng",
+        "bc_numpy_rng",
+        "bc_epoch",
+        "bc_updates"
+      ],
+      "first_epoch": 5701,
+      "first_updates": 45608
+    }
+  ]
+}

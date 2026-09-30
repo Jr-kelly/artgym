@@ -1,0 +1,29 @@
+{
+  "name": "seed2-promotion64-job",
+  "gpu": 0,
+  "timeout": 900,
+  "final_phase": false,
+  "command": [
+    "PYTHON",
+    "-m",
+    "scripts.evaluate_wuji_recovery_batch",
+    "--name",
+    "seed2-promotion64",
+    "--states",
+    "research/artmanip-recovery-20260930/data/promotion-all.npy",
+    "--models",
+    "seed2Eagg6100=runs/artmanip-recovery-20260930/bc-seed2-aggregate3200/E/epoch_006100.pth",
+    "--protocols",
+    "S2",
+    "S5",
+    "F"
+  ],
+  "source_sha": "9f9fb188227b7699aa3d6739069079ff49fb89fc",
+  "created_utc": "2026-09-30T18:09:20.743606+00:00",
+  "budget_receipt_utc": "2026-09-30T18:09:20.432131+00:00",
+  "occupied_gpu_hours": 19.851958711111102,
+  "other_jobs_reserved_gpu_hours": 0.0,
+  "root": "/tmp/artgym-recovery-20260930",
+  "pin": "/tmp/artgym-recovery-20260930/pins/9f9fb188227b7699aa3d6739069079ff49fb89fc",
+  "pid": 72687
+}
