@@ -1,0 +1,30 @@
+{
+  "name": "bc3200-rl250-evaluation-job",
+  "gpu": 1,
+  "timeout": 3000,
+  "command": [
+    "PYTHON",
+    "-m",
+    "scripts.evaluate_wuji_recovery_batch",
+    "--name",
+    "bc3200-rl250-evaluation",
+    "--states",
+    "research/artmanip-recovery-20260930/data/development-all.npy",
+    "--models",
+    "rl250=runs/recovery-rl-seg1-retry1/checkpoints/epoch_000250.pth",
+    "M500=runs/artmanip-recovery-20260930/bc-pair3200/M/epoch_000500.pth",
+    "E500=runs/artmanip-recovery-20260930/bc-pair3200/E/epoch_000500.pth",
+    "--protocols",
+    "S2",
+    "S5",
+    "F"
+  ],
+  "source_sha": "5317b86ff5984c9d401044935f896a3b354b41ec",
+  "created_utc": "2026-09-30T07:53:15.674823+00:00",
+  "budget_receipt_utc": "2026-09-30T07:53:15.477767+00:00",
+  "occupied_gpu_hours": 1.8272651144444445,
+  "other_jobs_reserved_gpu_hours": 1.694340998888889,
+  "root": "/tmp/artgym-recovery-20260930",
+  "pin": "/tmp/artgym-recovery-20260930/pins/5317b86ff5984c9d401044935f896a3b354b41ec",
+  "pid": 9284
+}

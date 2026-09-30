@@ -7,13 +7,13 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T07:49:58.151634+00:00",
+  "utc": "2026-09-30T07:54:36.715333+00:00",
   "event": "archive_completed",
-  "name": "recovery-bc1600-evaluation",
-  "archive": "delivery/artmanip-recovery-20260930/recovery-bc1600-evaluation.tar.gz",
-  "sha256": "420f1eef8efa9e3e1e63df6792bf7c029cfb2931cf9e4bb0344fb5df0befc3ed",
-  "size": 177183465,
-  "files": 46,
+  "name": "recovery-bc-added3200",
+  "archive": "delivery/artmanip-recovery-20260930/recovery-bc-added3200.tar.gz",
+  "sha256": "a19dbec44cf12190927fe3c43872f4a53ca58099d968375d3dbb4e9a35f6e150",
+  "size": 416391460,
+  "files": 24,
   "next": "Restore-check and upload; local originals retained"
 }
 ```
@@ -29,7 +29,7 @@
   "max_concurrent_gpus": 2,
   "rl_default_gpu_hours": 16,
   "bc_default_gpu_hours": 2,
-  "phase": "A complete; B formal segment1; C paired3200 training",
+  "phase": "A complete; B formal segment1; C paired3200 assessed offline, independent RL250/BC3200 evaluation live",
   "active_jobs": [
     {
       "source_sha256": "f3aa89d7dd469f42563d350d539692893c96bccfc1edbed3afc06947af96c54e",
@@ -63,55 +63,57 @@
       "pid": 4900,
       "status": "running",
       "child_pid": 4901,
-      "heartbeat": "2026-09-30T07:48:33.571709+00:00",
-      "elapsed_seconds": 2018.1506612890007,
+      "heartbeat": "2026-09-30T07:53:04.861958+00:00",
+      "elapsed_seconds": 2289.4803677450036,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg1-retry1-job/status.json",
       "pid_exists": true
     },
     {
-      "name": "bc-pair3200-job",
+      "name": "bc3200-rl250-evaluation-job",
       "gpu": 1,
-      "timeout": 2400,
+      "timeout": 3000,
       "command": [
         "PYTHON",
         "-m",
-        "scripts.run_wuji_recovery_bc_pair",
+        "scripts.evaluate_wuji_recovery_batch",
         "--name",
-        "bc-pair3200",
-        "--previous-name",
-        "bc-pair1600",
-        "--previous-epoch",
-        "300",
-        "--end-epoch",
-        "500",
-        "--max-seconds",
-        "1000"
+        "bc3200-rl250-evaluation",
+        "--states",
+        "research/artmanip-recovery-20260930/data/development-all.npy",
+        "--models",
+        "rl250=runs/recovery-rl-seg1-retry1/checkpoints/epoch_000250.pth",
+        "M500=runs/artmanip-recovery-20260930/bc-pair3200/M/epoch_000500.pth",
+        "E500=runs/artmanip-recovery-20260930/bc-pair3200/E/epoch_000500.pth",
+        "--protocols",
+        "S2",
+        "S5",
+        "F"
       ],
-      "source_sha": "e4c35af90dc1bb683f008bd7f252ffc8b944d87c",
-      "created_utc": "2026-09-30T07:48:57.218175+00:00",
-      "budget_receipt_utc": "2026-09-30T07:48:57.038112+00:00",
-      "occupied_gpu_hours": 1.7027326727777778,
-      "other_jobs_reserved_gpu_hours": 1.766134512222222,
+      "source_sha": "5317b86ff5984c9d401044935f896a3b354b41ec",
+      "created_utc": "2026-09-30T07:53:15.674823+00:00",
+      "budget_receipt_utc": "2026-09-30T07:53:15.477767+00:00",
+      "occupied_gpu_hours": 1.8272651144444445,
+      "other_jobs_reserved_gpu_hours": 1.694340998888889,
       "root": "/tmp/artgym-recovery-20260930",
-      "pin": "/tmp/artgym-recovery-20260930/pins/e4c35af90dc1bb683f008bd7f252ffc8b944d87c",
-      "pid": 8738
+      "pin": "/tmp/artgym-recovery-20260930/pins/5317b86ff5984c9d401044935f896a3b354b41ec",
+      "pid": 9284
     }
   ],
-  "gpu_hours": 1.7027326727777778,
+  "gpu_hours": 1.8272651144444445,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
   "resource_check_utc": "2026-09-30T06:42:41Z",
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
-  "next": "After paired3200 finishes, audit Adam4000 and evaluate M500/E500 plus rl250 on independent S2/S5/F; continue planned BC6400 and RL four segments.",
+  "next": "Finish bc3200-rl250-evaluation and independently rescore. Continue BC500→900 (added6400 total); keep RL1000→2000→3000→4000 with actual optimizer restore.",
   "last_event": {
-    "utc": "2026-09-30T07:49:58.151634+00:00",
+    "utc": "2026-09-30T07:54:36.715333+00:00",
     "event": "archive_completed",
-    "name": "recovery-bc1600-evaluation",
-    "archive": "delivery/artmanip-recovery-20260930/recovery-bc1600-evaluation.tar.gz",
-    "sha256": "420f1eef8efa9e3e1e63df6792bf7c029cfb2931cf9e4bb0344fb5df0befc3ed",
-    "size": 177183465,
-    "files": 46,
+    "name": "recovery-bc-added3200",
+    "archive": "delivery/artmanip-recovery-20260930/recovery-bc-added3200.tar.gz",
+    "sha256": "a19dbec44cf12190927fe3c43872f4a53ca58099d968375d3dbb4e9a35f6e150",
+    "size": 416391460,
+    "files": 24,
     "next": "Restore-check and upload; local originals retained"
   },
   "monitor": {
@@ -131,19 +133,21 @@
     "rl-seg1-job",
     "bc800-evaluation-job",
     "bc-pair1600-job",
-    "bc1600-evaluation-job"
+    "bc1600-evaluation-job",
+    "bc-pair3200-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T07:48:57.038112+00:00",
+  "last_resource_check_utc": "2026-09-30T07:53:15.477767+00:00",
   "next_actions": [
-    "At07:48:57UTC RL wrapper4900 GPU0 and BC3200 wrapper8738 GPU1 live; recheck actual status before launch.",
-    "BC1600 complete and independently rescored: M source3 S2/S5=14/13, E=18/6 of32; both F all4=32. M currently better worst-strict, no final selection. Pair3200 runs300→500; then audit and assess.",
-    "Pair3200: previous-name bc-pair1600, previous-epoch300, end-epoch500; pair6400: previous-name bc-pair3200, previous-epoch500, end-epoch900. Optional12800 uses900→1700 only with improving evidence.",
-    "RL CP250 optional dev after BC1600 assessment when GPU1 available; CP500 next optional. RL primary segments cumulative1000,2000,3000,4000; no strict-zero early stopping.",
-    "RL evaluation model names MUST start rl so batch evaluator selects incremental/native-observation task; M/E/bc100 use mixed interface. Keep same immutable source pins per running job.",
-    "Final new128/source stays untested and absent from remote until model+protocol freeze. Final F/S separate episodes. Public releaseTAG wuji-artmanip-recovery-20260930-v1, draft id399789402; publication awaits final validation/video/downloads."
+    "Revalidate status. At07:53:15UTC GPU0 wrapper4900 RLseg1 (pin7cb1b91), GPU1 wrapper9284 bc3200-rl250-evaluation (pin5317b86) active. Never duplicate live wrappers.",
+    "BC3200 pair completed and Adam4000/normalizer/RNG passed. Its held-out target error still improves: M .0006043→.0004851, E .0006674→.0004966 from1600. Eval order rl250 thenM500 thenE500, S2/S5/F separate. Pull full raw npz after completion, run summarize and gate with initial expert report.",
+    "After evaluation, pair6400: --name bc-pair6400 --previous-name bc-pair3200 --previous-epoch500 --end-epoch900; then independent closed-loop. Optional12800 uses900→1700 with improvement; branch2GPUh ample, accounted training ~0.14h.",
+    "RL checkpoint250 exists and passed CPUAdam9000/frame20480000/RNG; sha36c11bb21ad290017f7ac175299bd7f861d0c7097a9c90f7aecda610240789c3. Fixed four endpoints1000/2000/3000/4000; CP500 optional. Segment1 max1000, timeout8400, ~6.4sec/epoch. No strictzero plateau conclusion.",
+    "Launcher now refreshes real jobs and reserves all live remaining timeouts plus proposed timeout. Uses22GPUh pre-final ceiling and21:12UTC training cutoff. Final128 still unopened/untransferred. No student or secondseed until exactS64gate.",
+    "GitHub branch last confirmed e4c35af; current scientific commits later need push via /tmp/wuji-recovery-publish.git nonforce. Release399789402 remains draft; incremental assets server-SHA verified. Complete final models/protocol freeze, final128 allroutes+experts, fixed same-weight4sourcevideos, public release+download+actualrestore, ownprocess cleanup before finish.",
+    "CPU scripts: plot_wuji_recovery_learning exports separated training/fit/development trends; diagnose_wuji_recovery_state_shift measures matched-time physical q/target distribution shift. Existing bc800 shift does not triggerDAgger because validation still improves; do not add lossmodules now."
   ],
   "training_active_run": "runs/recovery-rl-seg1-retry1",
-  "bc_current_pair": "runs/artmanip-recovery-20260930/bc-pair1600"
+  "bc_current_pair": "runs/artmanip-recovery-20260930/bc-pair3200"
 }
 ```
