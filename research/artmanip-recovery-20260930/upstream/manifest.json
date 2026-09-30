@@ -1,0 +1,22 @@
+{
+  "paper_url": "https://arxiv.org/pdf/2609.12498",
+  "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
+  "files": {
+    "artmanip.txt": "359dc13f89fb17ed46c397f33b29639ccef420b4f71d6e879876fff39f01c9c6",
+    "artmanip.py": "c730ef321ca9eb32bb3a9a9ed14153182bea195bc47bc1fb5fadd7f4d6c44ff3",
+    "artmanip.pdf": "58dd745c48df2dbd35eabee3f2b3945c48249d1c1235282ad7b2e8aaad3da98e",
+    "artmanip.yaml": "ce8471b60f7d93db64053d43f75d61801abc6d1d19852235c573399460c7945b"
+  },
+  "reward_order_counterexample": {
+    "old_best": 0.001,
+    "old_goal_error": 0.0005,
+    "new_goal_error_after_switch": 0.0395,
+    "upstream_progress": 0.039,
+    "corrected_progress": 0.0005,
+    "type": "arithmetic illustration of verified source order, not a new rollout"
+  },
+  "curriculum": {
+    "paper": "(e-100)/1000",
+    "upstream": "(e-200)/(2000-200)"
+  }
+}
