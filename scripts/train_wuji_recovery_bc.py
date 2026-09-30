@@ -11,7 +11,7 @@ import torch
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def main():
  p=argparse.ArgumentParser();p.add_argument('--init',type=Path,required=True);p.add_argument('--data',type=Path,nargs='+',required=True);p.add_argument('--output',type=Path,required=True)
- p.add_argument('--label',choices=['mu','executed'],default='mu');p.add_argument('--resume',action='store_true');p.add_argument('--limit',type=int,default=0);p.add_argument('--epochs',type=int,default=100);p.add_argument('--save-every',type=int,default=25);p.add_argument('--seed',type=int,default=2026093001);p.add_argument('--lr',type=float,default=1e-4);p.add_argument('--perturb',type=float,default=0);p.add_argument('--batch',type=int,default=96);p.add_argument('--segment',type=int,default=100);p.add_argument('--max-seconds',type=int,default=3600);a=p.parse_args()
+ p.add_argument('--label',choices=['mu','executed'],default='mu');p.add_argument('--resume',action='store_true');p.add_argument('--limit',type=int,default=0);p.add_argument('--epochs',type=int,default=100);p.add_argument('--save-every',type=int,default=25);p.add_argument('--seed',type=int,default=2026093001);p.add_argument('--sequence-seed',type=int,help='Explicit second optimization seed: preserve parent model/Adam, reset CPU/CUDA/NumPy sampling RNG after restore');p.add_argument('--lr',type=float,default=1e-4);p.add_argument('--perturb',type=float,default=0);p.add_argument('--batch',type=int,default=96);p.add_argument('--segment',type=int,default=100);p.add_argument('--max-seconds',type=int,default=3600);a=p.parse_args()
  a.output.mkdir(parents=True,exist_ok=False);torch.manual_seed(a.seed);np.random.seed(a.seed);started=time.monotonic()
  cfg=configuration('wuji_multigrasp',1,['object=knife_wuji_bridge3_20260922','hand=wuji_paper_official_actuator'],train='wujiAcquisitionSAPG',seed=a.seed)
  player=build_policy_player(cfg,preprocess_train_config(cfg,OmegaConf.to_container(cfg.train,resolve=True)),a.init,_infer_expl_num_blocks(a.init),0);model=player.model;model.eval()
@@ -103,6 +103,11 @@ def main():
   assert a.epochs>start_epoch
   manifest['restored_adam_lr']=[g['lr'] for g in opt.param_groups]
   manifest['resume_updates']=updates
+  (a.output/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+ if a.sequence_seed is not None:
+  assert a.resume, 'A sequence seed fork requires an explicit parent restore'
+  torch.manual_seed(a.sequence_seed);torch.cuda.manual_seed_all(a.sequence_seed);np.random.seed(a.sequence_seed)
+  manifest['sampling_seed_reset']=dict(seed=a.sequence_seed,scope='Shared parent weights/Adam; independent CPU/CUDA/NumPy optimization sampling stream. Not an exact RNG continuation or independent expert pretraining.')
   (a.output/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
  save(start_epoch);validate(start_epoch)
  for epoch in range(start_epoch+1,a.epochs+1):

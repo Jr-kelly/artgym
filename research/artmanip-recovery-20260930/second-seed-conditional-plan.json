@@ -1,0 +1,29 @@
+{
+  "utc": "2026-09-30T16:57:04.837271+00:00",
+  "conditional": "Only after selectedEagg6100 passes exact64/source gate with samebatchresponsibleexperts",
+  "optimization_seed": 2026093061,
+  "initial": "runs/unified-policy-20260930/bc-unified-historical-s3001-seg1/epoch_000100.pth",
+  "initial_sha256": "3801eca359022e729510fef28f00d43b35af8561755f20a5f4be0206b6a07ab8",
+  "recipe": [
+    "Restore actualBC100 model/Adam800; explicitly reset CPU/CUDA/NumPy sequence RNG tosecondseed, auditactualsavedstart andfirst101/808.",
+    "Train executed-labelE on same original1024 histories from100to5700:44800newAdamupdates,LR1e-5,batch96; checkpointlogging every400 instead of100 toreduceoverhead, nooptimizer ordatachanges.",
+    "Collect same128traininginitials with this newE5700, behavior andscriptedhandover2/5s; exactsameGPUhistoryreplay andoriginalavailabilitygate required. Do not replace failedexpertavailability withoracle assumption.",
+    "Construct old96+new24 fitting andsameold32+new8heldout asfirstseed. Continue aggregateonly fromactualnewE5700 to6100 (+3200updates),batch120; nosecondreplayarm because firstmatchedcontrol retained.",
+    "Evaluate fixedseed2Eagg6100 on64/source S2/S5/F withalreadymeasuredsamecohortexperts. Keep originalEagg6100 asselectedcandidate; secondseed isreplicationendpoint, not64basedreselection."
+  ],
+  "scope": "Second optimization seed for full E44800+aggregation3200 route from sharedBC100 andsharedexperts. Does not independently repeat expertpretraining or changeinitialnetworkweights.",
+  "estimated_gpu_seconds": {
+    "E44800": 2462,
+    "collection": 415,
+    "aggregate3200": 190,
+    "evaluation": 370
+  },
+  "prospective_timeout_seconds": {
+    "E44800": 2800,
+    "collection": 900,
+    "aggregate3200": 350,
+    "evaluation": 900
+  },
+  "budget": "Not authorized to launch by thisfilealone: require actual64pass andfreshbudget. Existingnormalceiling20/reserve4 unchanged now. Ifnecessary after64pass, prospectively reallocate .5GPUh from4reserve tosecondseed, retain3.5GPUh and2wallhours for final. Actual18.76GPUh at16:52UTC; first64mayconsume~.3GPUh. Totalboundedsecondroute~1.375GPUh fitsnormal20.5 onlyif freshbudget allows. No student reserved.",
+  "failure": "Record actual numerical/availability/timeout failure andretainweights. Noautomaticpolicyfailure retries orseedselection. Do notclaimfullsecondroute completed if an earlierstage stops."
+}

@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "rows": [
+    {
+      "arm": "replay",
+      "checkpoint_sha256": "be32ef2c37a0caae32064b9c6601f394f46ae510ac5139e141c4be1d13a25ab2",
+      "epoch": 6100,
+      "updates": 48800,
+      "added_updates": 3200,
+      "actual_parent_model_optimizer_rng_equal": true,
+      "fixed_tensors": 28,
+      "first_epoch": 5701
+    },
+    {
+      "arm": "aggregate",
+      "checkpoint_sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+      "epoch": 6100,
+      "updates": 48800,
+      "added_updates": 3200,
+      "actual_parent_model_optimizer_rng_equal": true,
+      "fixed_tensors": 28,
+      "first_epoch": 5701
+    }
+  ],
+  "same_end_rng": true,
+  "same_initial_validation": true,
+  "parent_sha256": "2f85fa6b77b9c5358d519dcd816b285efcf33900498400dd54a8ae22bba1fac3",
+  "scope": "Actual saved parent and continuation audit. Dataset split checked separately. No closed-loop capability claim."
+}

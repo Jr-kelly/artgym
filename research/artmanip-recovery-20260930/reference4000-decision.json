@@ -1,0 +1,13 @@
+{
+  "utc": "2026-09-30T16:55:24.131721+00:00",
+  "checkpoint_sha256": "0641cd6c6404d709d1c9d3b0547090465415fa60b9cf1cb853b11d8fcf72f8ac",
+  "evidence": [
+    "reference4000-analysis/report.json",
+    "reference4000-gates.json",
+    "rl4000-training-progress.json"
+  ],
+  "results": "rl3500 Fcycles all32; rl4000 Fcycles31/32,32/32,32/32,32/32. Sstrict andfullbody allzero atbothpoints. Source3S5 phasehold .15625\u2192.390625 andfirstbodybreach1.845\u21922.769s; someothersregress.",
+  "interpretation": "Continuing functional/phase learning is visible. The originalreference is NOT converged and Szero is NOT evidence of nolearning. This remains327.68M interactions (16.384percent paper2B), fixedknife andtrainedneighborhoods.",
+  "allocation": "After firstaggregateS32pass, spend remainingnormalbudget on independent64 and ifpassed fullBCroute secondoptimizationseed beforemoreoriginalRL orstudent. This is evidence-priority/budget allocation, not a convergence stop. If64fails, reconsider usefullearning from allphase/body/fit evidence andfreshbudget.",
+  "next": "Complete aggregation1-promotion64 withsampler-matchedexperts; original4000 endpoint preserved. Final128 remains unopened."
+}

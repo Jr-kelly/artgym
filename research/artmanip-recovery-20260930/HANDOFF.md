@@ -7,11 +7,11 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T16:50:47.074713+00:00",
-  "event": "aggregation1_first_development32_S_pass_and64_registered",
-  "checkpoint_sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
-  "evidence": "research/artmanip-recovery-20260930/aggregation1-promotion-plan.json",
-  "next": "Run selectedEagg6100 and bothresponsibleexperts on64/source; exactgates before secondseed/student. RL4000development stillfinishing."
+  "utc": "2026-09-30T16:58:57.407440+00:00",
+  "event": "release_asset_verified",
+  "name": "recovery-training-sequences-t5.tar.gz",
+  "sha256": "8cc28eeccb2f34b48d6dad82d87b1b2d35b997abef9639ff085f730304919c96",
+  "next": "Continue experiment; final publication requires freeze and download verification"
 }
 ```
 
@@ -30,34 +30,35 @@
   "active_jobs": [
     {
       "source_sha256": "998b1c057e21c029884c58abe3d29ca976f05682d6a54b5092ccd4f3bef4d76e",
-      "name": "reference4000-development-job",
-      "gpu": 0,
+      "name": "aggregation1-promotion64-job",
+      "gpu": 1,
       "final_phase": false,
       "command": [
         "/tmp/wuji-recovery-runtime/bin/python",
         "-m",
         "scripts.evaluate_wuji_recovery_batch",
         "--name",
-        "reference4000-development",
+        "aggregation1-promotion64",
         "--states",
-        "research/artmanip-recovery-20260930/data/development-all.npy",
+        "research/artmanip-recovery-20260930/data/promotion-all.npy",
         "--models",
-        "rl3500=runs/recovery-rl-seg4/checkpoints/epoch_003500.pth",
-        "rl4000=runs/recovery-rl-seg4/checkpoints/epoch_004000.pth"
+        "Eagg6100=runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
+        "historical=runs/unified-policy-20260930/experts/historical.pth",
+        "source3=runs/unified-policy-20260930/experts/source3.pth"
       ],
       "timeout_seconds": 1800,
-      "started": "2026-09-30T16:35:58.011572+00:00",
-      "pid": 63689,
+      "started": "2026-09-30T16:50:51.806028+00:00",
+      "pid": 65486,
       "status": "running",
-      "child_pid": 63691,
-      "heartbeat": "2026-09-30T16:49:01.546335+00:00",
-      "elapsed_seconds": 783.4200736329949,
-      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/reference4000-development-job/status.json",
+      "child_pid": 65487,
+      "heartbeat": "2026-09-30T16:56:53.479849+00:00",
+      "elapsed_seconds": 361.6020409969933,
+      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/aggregation1-promotion64-job/status.json",
       "pid_exists": true,
       "host": "authorized_remote"
     }
   ],
-  "gpu_hours": 18.698870269444434,
+  "gpu_hours": 18.835048374166654,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -65,11 +66,11 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "Both trainingfamilies paused for independentdevelopment, notgoalpause: originalRL4000 completed, mandatory3500/4000 evaluationGPU0; aggregation6100/6500 evaluationGPU1. Choose remainingnormalbudget learning from resultingphase/body/fit evidence; finalunopened.",
   "last_event": {
-    "utc": "2026-09-30T16:50:47.074713+00:00",
-    "event": "aggregation1_first_development32_S_pass_and64_registered",
-    "checkpoint_sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
-    "evidence": "research/artmanip-recovery-20260930/aggregation1-promotion-plan.json",
-    "next": "Run selectedEagg6100 and bothresponsibleexperts on64/source; exactgates before secondseed/student. RL4000development stillfinishing."
+    "utc": "2026-09-30T16:58:57.407440+00:00",
+    "event": "release_asset_verified",
+    "name": "recovery-training-sequences-t5.tar.gz",
+    "sha256": "8cc28eeccb2f34b48d6dad82d87b1b2d35b997abef9639ff085f730304919c96",
+    "next": "Continue experiment; final publication requires freeze and download verification"
   },
   "monitor": {
     "pid": 1192,
@@ -121,10 +122,11 @@
     "aggregation1-collection-job",
     "aggregation1-pair6400-job",
     "rl-seg4-job",
-    "aggregation1-development-job"
+    "aggregation1-development-job",
+    "reference4000-development-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T16:49:27.920019+00:00",
+  "last_resource_check_utc": "2026-09-30T16:57:18.959204+00:00",
   "next_actions": [
     "Finish originalRL4000 and mandatorydevelopment3500/4000; aggregationpairedtraining6500 completed, development6100/6500 active. Decide further learning from jointclosed-loop/fit/budget evidence before once-onlyfinalfreeze.",
     "GPU1 aggregation1-development wrapper62424 started16:24:56UTC, source563d534, timeout2400. Fourmodels Ereplay6100/Eagg6100/Ereplay6500/Eagg6500, all3protocols32/source. Reverifyprocess; pullfulltraces and independentlyscore whencomplete.",
@@ -140,7 +142,7 @@
   "github_last_verified_commit": "d88b96b7e62f2ffa818eba5ba96f72a2b02e0b7a",
   "release_verified_assets": 48,
   "gpu_hours_by_host": {
-    "authorized_remote": 18.698870269444434,
+    "authorized_remote": 18.835048374166654,
     "local": 0.0
   },
   "bc_executed_endpoint": {
