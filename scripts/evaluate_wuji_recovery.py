@@ -180,6 +180,8 @@ def main():
                           goal_tolerance_m=.002, hold_steps=9, schedule='alternate open/close for20s',
                           runtime_overrides=dict(success_hold_duration=1e9, eval_goal_timeout=0),
                           arrival_used_for_switching=False), scope=__doc__)
+        report['declared_horizon_steps']=total_steps
+        report['all_terminated_early']=len(frames)<total_steps
         report['protocol']['kind']=args.protocol
         if task=='wuji_artmanip_reference':report['action_control']=dict(mode='all_joint_incremental',step_rad=env.dt*env.hand_dof_speed_scale)
         if args.protocol=='F':

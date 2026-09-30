@@ -18,14 +18,16 @@ def analyze(directory):
         body=valid.all(0)&(t['drift']<.01).all(0)&(t['rotation']<.25).all(0)
         error=np.abs(t['slider']-t['goal'])
         if protocol.startswith('S'):
-            assert T==600
+            assert 0<T<=600
+            if T<600:assert not valid[-1].any(), 'Short trace without all terminal environments'
             period=report['protocol']['stage_steps']
             score=score_timed_trace(t,period,9,600);ind=summarize(t,period)
             assert score['records']==report['records']
             success=np.array([r['strict'] for r in ind]);assert success.tolist()==[r['stable_full_all_endpoints'] for r in score['records']]
             holds=np.array([r['endpoints_held'] for r in score['records']]);attained=np.array([r['stages_attained'] for r in score['records']])
         else:
-            assert T==1200
+            assert 0<T<=1200
+            if T<1200:assert not valid[-1].any(), 'Short F trace without all terminal environments'
             # Reconstruct hold-triggered state machine from pre-switch physical goals.
             streak=np.zeros(N,dtype=int);cycles=np.zeros(N,dtype=int);phase=np.zeros(N,dtype=int)
             init=t['goal'][0]-.04
@@ -40,7 +42,7 @@ def analyze(directory):
             sl=slice(s*n,(s+1)*n);k=int(success[sl].sum());active=t['active'][:,sl].astype(bool)
             breach=~valid[:,sl]|(t['drift'][:,sl]>=.01)|(t['rotation'][:,sl]>=.25)
             first=np.where(breach.any(0),breach.argmax(0)/30,T/30)
-            row=dict(model=model,protocol=protocol,source=s,n=n,success=k,rate=k/n,wilson95=wilson(k,n),body_stable=int(body[sl].sum()),body_rate=float(body[sl].mean()),alive=int(valid[:,sl].all(0).sum()),phase_error_mean_m=float(error[:,sl][active].mean()),phase_error_max_m=float(error[:,sl][active].max()),body_first_breach_mean_sec=float(first.mean()),action_saturation=float((abs(t['action'][:,sl][active])>=.999999).mean()),max_drift_m=float(t['drift'][:,sl][active].max()),max_rotation_rad=float(t['rotation'][:,sl][active].max()),trace_sha256=hashlib.sha256((dest/'trace.npz').read_bytes()).hexdigest())
+            row=dict(recorded_steps=T,declared_horizon_steps=1200 if protocol=='F' else 600,all_terminated_early=T<(1200 if protocol=='F' else 600),model=model,protocol=protocol,source=s,n=n,success=k,rate=k/n,wilson95=wilson(k,n),body_stable=int(body[sl].sum()),body_rate=float(body[sl].mean()),alive=int(valid[:,sl].all(0).sum()),phase_error_mean_m=float(error[:,sl][active].mean()),phase_error_max_m=float(error[:,sl][active].max()),body_first_breach_mean_sec=float(first.mean()),action_saturation=float((abs(t['action'][:,sl][active])>=.999999).mean()),max_drift_m=float(t['drift'][:,sl][active].max()),max_rotation_rad=float(t['rotation'][:,sl][active].max()),trace_sha256=hashlib.sha256((dest/'trace.npz').read_bytes()).hexdigest())
             targets=t['target'][:,sl][active];joints=t['q'][:,sl][active]
             row['joint_target_limit_fraction']=float(((targets<=lower+1e-5)|(targets>=upper-1e-5)).mean())
             row['joint_position_limit_fraction']=float(((joints<=lower+1e-5)|(joints>=upper-1e-5)).mean())
