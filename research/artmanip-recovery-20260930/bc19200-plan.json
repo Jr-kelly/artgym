@@ -1,0 +1,26 @@
+{
+  "created_utc": "2026-09-30T09:08:08.230998+00:00",
+  "start_epoch": 1700,
+  "end_epoch": 2500,
+  "total_added_updates": 19200,
+  "additional_updates": 6400,
+  "total_adam_expected": 20000,
+  "arms": [
+    "M",
+    "E"
+  ],
+  "init_pair": "bc-pair12800",
+  "max_job_seconds": 2400,
+  "per_arm_max_seconds": 1000,
+  "observed_previous_pair_seconds": 708,
+  "expected_gpu_hours": 0.2,
+  "bc_occupied_gpu_hours_before": 0.40844467485,
+  "bc_default_gpu_hour_limit": 2,
+  "scope": "Beyond suggested12800checkpoint schedule, using user-authorized evidence-based continuation within unchanged2GPUhBC and24GPUh total budgets. This is a preregistered nextsegment, not a claim that12800 converged.",
+  "evidence": [
+    "bc12800-fit.json",
+    "bc12800-analysis/report.json"
+  ],
+  "basis": "E source3 bodyS2/S5 improves29/24\u219232/31; E5sphasehold.656\u2192.719; M2sphasehold.775\u2192.834. Heldouttargets drop15/24percent M/E; originalsources broadlyretained. Three consecutive combined-trend plateau absent.",
+  "protocol": "SameAdam/RNG/labels/LR1e-5/phaseweights/frozennormalizer/data; independentdev32F/S at2500 then jointtrenddecision; numerical/overfitfaultstopexception unchanged"
+}
