@@ -14,9 +14,10 @@ def equal_tree(a,b):
     return a==b
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--pair',type=Path,required=True);p.add_argument('--initial',type=Path,required=True);p.add_argument('--epoch',type=int,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--parent-pair',type=Path);p.add_argument('--parent-epoch',type=int);a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--pair',type=Path,required=True);p.add_argument('--initial',type=Path,required=True);p.add_argument('--epoch',type=int,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--parent-pair',type=Path);p.add_argument('--parent-epoch',type=int);p.add_argument('--arms',nargs='+',choices=['M','E'],default=['M','E']);a=p.parse_args()
     assert (a.parent_pair is None)==(a.parent_epoch is None)
-    base=load(a.initial);states={k:load(a.pair/k/f'epoch_{a.epoch:06d}.pth') for k in ['M','E']};rows=[]
+    assert len(a.arms)==len(set(a.arms))
+    base=load(a.initial);states={k:load(a.pair/k/f'epoch_{a.epoch:06d}.pth') for k in a.arms};rows=[]
     for k,s in states.items():
         checkpoint=a.pair/k/f'epoch_{a.epoch:06d}.pth'
         fixed=[name for name in base['model'] if not any('a2c_network.'+part in name for part in ['priv_encoder.','a_rnn.','a_layer_norm.','actor_mlp.','mu.'])]
@@ -24,13 +25,15 @@ def main():
         assert all(torch.isfinite(v).all() for v in s['model'].values())
         steps=sorted(set(int(v['step']) for v in s['bc_optimizer']['state'].values()));assert steps==[a.epoch*8]
         rows.append(dict(arm=k,epoch=s['bc_epoch'],updates=s['bc_updates'],adam_steps=steps,fixed_tensor_count=len(fixed),normalizer_critic_frozen=True,sha256=hashlib.sha256(checkpoint.read_bytes()).hexdigest()))
-    m,e=states['M'],states['E']
-    assert torch.equal(m['bc_torch_rng'],e['bc_torch_rng']) and all(torch.equal(x,y) for x,y in zip(m['bc_cuda_rng'],e['bc_cuda_rng']))
-    assert all(np.array_equal(x,y) for x,y in zip(m['bc_numpy_rng'],e['bc_numpy_rng']))
-    result=dict(rows=rows,same_end_rng=True,passed=True,scope='Checkpoint integrity and paired optimizer/sequence random state, not a closed-loop score')
+    paired=len(states)==2
+    if paired:
+        m,e=states['M'],states['E']
+        assert equal_tree(m['bc_torch_rng'],e['bc_torch_rng']) and equal_tree(m['bc_cuda_rng'],e['bc_cuda_rng'])
+        assert equal_tree(m['bc_numpy_rng'],e['bc_numpy_rng'])
+    result=dict(rows=rows,paired=paired,same_end_rng=True if paired else None,passed=True,scope='Checkpoint integrity and optional paired optimizer/sequence random state, not a closed-loop score')
     if a.parent_pair:
         result['actual_resume']=[]
-        for arm in ['M','E']:
+        for arm in a.arms:
             parent_path=a.parent_pair/arm/f'epoch_{a.parent_epoch:06d}.pth'
             start_path=a.pair/arm/f'epoch_{a.parent_epoch:06d}.pth'
             parent,start=load(parent_path),load(start_path)

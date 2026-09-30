@@ -5,7 +5,9 @@ from pathlib import Path
 def main():
     p=argparse.ArgumentParser();p.add_argument('--pairs',type=Path,nargs='+',required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args();rows=[]
     for pair in a.pairs:
+        assert any((pair/arm/'manifest.json').exists() for arm in ['M','E'])
         for arm in ['M','E']:
+            if not (pair/arm).exists():continue  # Explicit later single-arm continuation.
             path=pair/arm;manifest=json.loads((path/'manifest.json').read_text())
             for line in (path/'metrics.jsonl').read_text().splitlines():
                 item=json.loads(line)

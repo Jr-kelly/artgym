@@ -1,0 +1,23 @@
+{
+  "created_utc": "2026-09-30T12:58:08.521863+00:00",
+  "name": "bc-executed44800",
+  "parent": "runs/artmanip-recovery-20260930/bc-pair32000/E/epoch_004100.pth",
+  "parent_sha256": "7d6432a7110019abc112b9cd3321a45c56e72eb1b0c88f2ade5747b638b89410",
+  "start_epoch": 4100,
+  "end_epoch": 5700,
+  "additional_updates": 12800,
+  "cumulative_updates_after_BC100": 44800,
+  "final_adam_updates": 45600,
+  "configuration": "Same existing1024 trajectories/whole-trajectory split, executed labels, unbounded predictionMSE, LR1e-5, batch96, segment100, ownactor+encoder, frozen stats/critic, actualAdam/RNG continuation. Save every100epochs.",
+  "evidence": [
+    "bc32000-analysis/report.json",
+    "bc32000-state-shift.json",
+    "bc32000-fit-trend.json"
+  ],
+  "reason": "E1700\u21922500\u21924100 source3S2strict14\u219221\u219223; S5strict11\u219211\u219214; S2phasehold.8625\u2192.915625\u2192.953125; S5phasehold.71875\u2192.7421875\u2192.7734375. E5s q-coverage outlier fraction.4324\u2192.3018 from2500\u21924100. Existing branch still learns. M corresponding source3S2strict12\u21928\u21927 andS5strict10\u21929\u219210 with rising5sstate shift; chooseE underC3, not a claim M has converged.",
+  "comparison_scope": "M/E remain same-start same-budget comparison through32000added updates. This laterE-only continuation receives more optimization and must be reported as evidence-guided extension, not a same-budget label-causal comparison with M4100.",
+  "budget": "Expected~0.2GPUh forE-only1600epochs plus~0.12GPUh development. Current cumulativeBC training~1GPUh, below2default. Actual launcher rechecks total/active timeouts/reserve.",
+  "priority": "After required matched repaired-pool original control and original baseline scheduling; do not interrupt original4000 minimum.",
+  "evaluation": "E5700 development32/source S2,S5,F, independent rescore, effective target fit and phase/body trends;64 only if boundary/gate.",
+  "aggregation": "Not yet triggered: Eeffectivefit, phase hold and physical state coverage still improve. No short-strict-only stop or newmodule needed."
+}
