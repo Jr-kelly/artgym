@@ -1,0 +1,21 @@
+{
+  "created_utc": "2026-09-30T10:37:48.536645+00:00",
+  "name": "reference2000-holdingmid-development",
+  "trigger": "Original segment2 completes2000 and releasesGPU0; hold arm remains runningGPU1. Revalidate both wrappers beforelaunch.",
+  "states": "research/artmanip-recovery-20260930/data/development-all.npy",
+  "models": {
+    "rl1500": "runs/recovery-rl-seg2/checkpoints/epoch_001500.pth",
+    "rl2000": "runs/recovery-rl-seg2/checkpoints/epoch_002000.pth",
+    "rlhold1250": "runs/recovery-rl-clockhold-clean/checkpoints/epoch_001250.pth",
+    "rlhold1500": "runs/recovery-rl-clockhold-clean/checkpoints/epoch_001500.pth"
+  },
+  "protocols": [
+    "S2",
+    "S5",
+    "F"
+  ],
+  "cohort": "32/source;4models x3independentprotocols x128episodes=1536episodes",
+  "budget": "GPU0 bounded3000seconds; estimated~0.4GPUh. Newlaunch reserves all outstanding timeouts and2GPUh/90min finalreserve.",
+  "why": "Original1500/2000 learningtrend plus holding250/500extraepoch checkpoints test whether sampled body improvements trade awayfunctionalcycles. No action from these scores changes the alreadyplanned1000epoch holding comparison ororiginal4segmentbudget. Exactmatched original/repairedpoolcontrol stillrequired.",
+  "next": "After eval pullraw/rescore/gates; resume originalCP2000\u21923000 onGPU0. Holdingcontinues2000GPU1. ThenBC32000pair andmatched repairedoriginalcontrol perplans. Finalunopened."
+}

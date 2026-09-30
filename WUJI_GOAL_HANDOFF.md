@@ -7,14 +7,30 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T10:24:03.922182+00:00",
-  "event": "archive_completed",
-  "name": "recovery-reference-checkpoint1500",
-  "archive": "delivery/artmanip-recovery-20260930/recovery-reference-checkpoint1500.tar.gz",
-  "sha256": "4cc34f5cc2c38e404c750d55a0287f0a21ba3409735f643477a6f5f7009b4bb0",
-  "size": 82635074,
-  "files": 5,
-  "next": "Restore-check and upload; local originals retained"
+  "utc": "2026-09-30T10:37:48.536787+00:00",
+  "event": "next_endpoint_development_batch_planned",
+  "plan": {
+    "created_utc": "2026-09-30T10:37:48.536645+00:00",
+    "name": "reference2000-holdingmid-development",
+    "trigger": "Original segment2 completes2000 and releasesGPU0; hold arm remains runningGPU1. Revalidate both wrappers beforelaunch.",
+    "states": "research/artmanip-recovery-20260930/data/development-all.npy",
+    "models": {
+      "rl1500": "runs/recovery-rl-seg2/checkpoints/epoch_001500.pth",
+      "rl2000": "runs/recovery-rl-seg2/checkpoints/epoch_002000.pth",
+      "rlhold1250": "runs/recovery-rl-clockhold-clean/checkpoints/epoch_001250.pth",
+      "rlhold1500": "runs/recovery-rl-clockhold-clean/checkpoints/epoch_001500.pth"
+    },
+    "protocols": [
+      "S2",
+      "S5",
+      "F"
+    ],
+    "cohort": "32/source;4models x3independentprotocols x128episodes=1536episodes",
+    "budget": "GPU0 bounded3000seconds; estimated~0.4GPUh. Newlaunch reserves all outstanding timeouts and2GPUh/90min finalreserve.",
+    "why": "Original1500/2000 learningtrend plus holding250/500extraepoch checkpoints test whether sampled body improvements trade awayfunctionalcycles. No action from these scores changes the alreadyplanned1000epoch holding comparison ororiginal4segmentbudget. Exactmatched original/repairedpoolcontrol stillrequired.",
+    "next": "After eval pullraw/rescore/gates; resume originalCP2000→3000 onGPU0. Holdingcontinues2000GPU1. ThenBC32000pair andmatched repairedoriginalcontrol perplans. Finalunopened."
+  },
+  "next": "After eval pullraw/rescore/gates; resume originalCP2000→3000 onGPU0. Holdingcontinues2000GPU1. ThenBC32000pair andmatched repairedoriginalcontrol perplans. Finalunopened."
 }
 ```
 
@@ -64,8 +80,8 @@
       "pid": 25006,
       "status": "running",
       "child_pid": 25007,
-      "heartbeat": "2026-09-30T10:22:26.965055+00:00",
-      "elapsed_seconds": 1024.543707439996,
+      "heartbeat": "2026-09-30T10:36:00.466480+00:00",
+      "elapsed_seconds": 1838.0207789709966,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-clockhold-clean-job/status.json",
       "pid_exists": true
     },
@@ -101,13 +117,13 @@
       "pid": 18856,
       "status": "running",
       "child_pid": 18857,
-      "heartbeat": "2026-09-30T10:22:17.961383+00:00",
-      "elapsed_seconds": 3735.5799014259974,
+      "heartbeat": "2026-09-30T10:35:51.397793+00:00",
+      "elapsed_seconds": 4549.013483914998,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-seg2-job/status.json",
       "pid_exists": true
     }
   ],
-  "gpu_hours": 6.428818794444446,
+  "gpu_hours": 6.876302522222223,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -115,14 +131,30 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "Launch repaired-pool holding RL1000→2000; verify actual startup model/Adam/RNG counters. Original RL segment2 continues through2000, then3000/4000. After holding dev, BC pair32000 and matched repaired-pool original-control1000→2000 remain authorized and required.",
   "last_event": {
-    "utc": "2026-09-30T10:24:03.922182+00:00",
-    "event": "archive_completed",
-    "name": "recovery-reference-checkpoint1500",
-    "archive": "delivery/artmanip-recovery-20260930/recovery-reference-checkpoint1500.tar.gz",
-    "sha256": "4cc34f5cc2c38e404c750d55a0287f0a21ba3409735f643477a6f5f7009b4bb0",
-    "size": 82635074,
-    "files": 5,
-    "next": "Restore-check and upload; local originals retained"
+    "utc": "2026-09-30T10:37:48.536787+00:00",
+    "event": "next_endpoint_development_batch_planned",
+    "plan": {
+      "created_utc": "2026-09-30T10:37:48.536645+00:00",
+      "name": "reference2000-holdingmid-development",
+      "trigger": "Original segment2 completes2000 and releasesGPU0; hold arm remains runningGPU1. Revalidate both wrappers beforelaunch.",
+      "states": "research/artmanip-recovery-20260930/data/development-all.npy",
+      "models": {
+        "rl1500": "runs/recovery-rl-seg2/checkpoints/epoch_001500.pth",
+        "rl2000": "runs/recovery-rl-seg2/checkpoints/epoch_002000.pth",
+        "rlhold1250": "runs/recovery-rl-clockhold-clean/checkpoints/epoch_001250.pth",
+        "rlhold1500": "runs/recovery-rl-clockhold-clean/checkpoints/epoch_001500.pth"
+      },
+      "protocols": [
+        "S2",
+        "S5",
+        "F"
+      ],
+      "cohort": "32/source;4models x3independentprotocols x128episodes=1536episodes",
+      "budget": "GPU0 bounded3000seconds; estimated~0.4GPUh. Newlaunch reserves all outstanding timeouts and2GPUh/90min finalreserve.",
+      "why": "Original1500/2000 learningtrend plus holding250/500extraepoch checkpoints test whether sampled body improvements trade awayfunctionalcycles. No action from these scores changes the alreadyplanned1000epoch holding comparison ororiginal4segmentbudget. Exactmatched original/repairedpoolcontrol stillrequired.",
+      "next": "After eval pullraw/rescore/gates; resume originalCP2000→3000 onGPU0. Holdingcontinues2000GPU1. ThenBC32000pair andmatched repairedoriginalcontrol perplans. Finalunopened."
+    },
+    "next": "After eval pullraw/rescore/gates; resume originalCP2000→3000 onGPU0. Holdingcontinues2000GPU1. ThenBC32000pair andmatched repairedoriginalcontrol perplans. Finalunopened."
   },
   "monitor": {
     "pid": 1192,
@@ -160,7 +192,7 @@
     "holding-repaired-pool-static-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T10:22:36.812660+00:00",
+  "last_resource_check_utc": "2026-09-30T10:36:02.283370+00:00",
   "next_actions": [
     "Revalidate GPU0 original rl-seg2-job before decisions; original frozen pool has4/512 static-invalid perturbations, baseline retained and labelled.",
     "Repaired training pool d885794f6bd5c77a71591c5d5e17753b4679252c8582587ab7217d6d61c73836 passed full51220sec static and clock/mapping checks. Four source0 slots47/94/104/117 replaced by original0/1/2/3, distinctcounts124/128/128/128. No evaluation filtering.",
