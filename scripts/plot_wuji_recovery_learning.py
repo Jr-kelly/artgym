@@ -36,7 +36,7 @@ def main():
                     y = [r['metrics'].get(f'source{s}/{key}', np.nan) for r in rows]
                     ax.plot(x, y, color=f'C{s}', alpha=.8, label=f'source {s}' if name == groups[0][0] else None)
             axes[1, 1].plot(x, [r['reward_weights']['ObjPosDeviation'] for r in rows], label=name)
-        for ax, title in zip(axes.flat, ['Last control-step mean goal error (m)', 'Last control-step fraction at goal', 'Control steps by source (reset on resume)', 'Actual position-deviation reward weight']):
+        for ax, title in zip(axes.flat, ['Last control-step mean goal error (m)', 'Last control-step fraction at goal', 'Control steps by source (reset on resume)', 'Actual linear-velocity penalty weight']):
             ax.set(title=title, xlabel='Cumulative environment interactions (million)')
             ax.grid(alpha=.2)
         axes[0, 0].legend()
