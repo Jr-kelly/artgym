@@ -107,6 +107,7 @@ def main():
                   final_reselection_allowed=False, no_further_training=True,
                   development_stop_reason=args.reason,
                   video=dict(states='research/artmanip-recovery-20260930/data/development-all.npy',
+                             states_sha256=sha(D/'data/development-all.npy'),
                              rows=[0, 32, 64, 96], model=ranked[0]['model'],
                              scope='Separate fixed development simulation, not final statistics'),
                   resource_receipt_utc=state['last_resource_check_utc'],

@@ -1,0 +1,9 @@
+{
+  "status": "Read-only preparation; no new renderer or local GPU started",
+  "historical_evidence": "/data/research/artgym-experiments-20260921/unified-policy-20260930/runs/unified-policy-20260930/demo-t2-job/output.log",
+  "historical_result": "Both prior H200 camera jobs exited-11 during scene/camera initialization; localRTX4090 same-checkpoint4-row rendering succeeded. This is historical evidence, not a current device check.",
+  "future": "Freeze selected weights first; check current camera availability. If H200 rendering fails, preserve failure and use localRTX4090 only after fresh resource check and global max2GPU validation.",
+  "accounting_requirement": "status_wuji_recovery currently totals remote wrappers only. Before any local fallback, extend accounting to include explicitly registered local wrapper durations/active GPUs, or provide equally auditable additive local ledger. Never let a later remote status refresh erase local GPU time.",
+  "source_requirement": "Use final frozen source snapshot and same checkpoint/protocol/fixedrows; local rendering is separate simulation, not final statistics. Recheck all local/remote own processes after finishing.",
+  "next": "No video model selected yet; continue two active RL jobs."
+}

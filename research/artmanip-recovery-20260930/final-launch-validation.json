@@ -1,0 +1,15 @@
+{
+  "checks": [
+    "valid frozen batch accepted",
+    "development unaffected",
+    "final without phase rejected",
+    "development in final phase rejected",
+    "unfrozen model rejected",
+    "invalid protocol rejected",
+    "changed weight rejected",
+    "repeat final cell rejected"
+  ],
+  "syntax": "passed",
+  "scope": "Synthetic CPU contract checks only; no actual final states evaluated, no GPU or renderer started",
+  "local_accounting": "No local jobs yet; current remote-only sum agrees with prior ledger"
+}

@@ -26,6 +26,9 @@ def main():
     # process state first: a stale handoff is not a resource or budget receipt.
     subprocess.run([sys.executable,'-m','scripts.status_wuji_recovery'],cwd=R,stdout=subprocess.DEVNULL,check=True)
     state=json.loads((D/'STATE.json').read_text());now=datetime.datetime.now(datetime.timezone.utc)
+    devices={(j.get('host','authorized_remote'),j['gpu']) for j in state['active_jobs']}
+    if len(devices|{('authorized_remote',a.gpu)})>state['max_concurrent_gpus']:
+        raise RuntimeError('Global local/remote GPU concurrency limit would be exceeded')
     if a.final and any(not j.get('final_phase',False) for j in state['active_jobs']):
         raise RuntimeError('Finish development/training jobs before opening the final cohort')
     cutoff=datetime.datetime.fromisoformat(state['deadline_utc'] if a.final else state['training_cutoff_utc'])
