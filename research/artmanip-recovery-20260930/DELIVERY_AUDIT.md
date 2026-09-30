@@ -7,10 +7,10 @@
 |完整目标、独立分支、起始及上游SHA|GOAL.md、STATE.json、UPSTREAM_AUDIT.md、Git提交|已保存；原工作区只更新续接文档，实验位于独立worktree|
 |论文／上游／旧Wuji／新基线四列差异|UPSTREAM_AUDIT.md、upstream、各run的resolved.yaml和startup.json|已完成初始审计；后续方法变更要补充|
 |动作映射、静态初态、专家与序列预检|reference-precheck、initial-analysis、BC数据审计和父权重归档|已有实际证据；不是目标能力验证|
-|足量直接多抓姿RL|b-plan.json、learning.jsonl、rl250/500-integrity.json|已完成第一段1000，第二段正续训2000；累计3000/4000仍待完成|
+|足量直接多抓姿RL|b-plan.json、learning.jsonl、rl250/500-integrity.json|已完成第二段2000/1.6384亿交互/72000Adam并实际恢复；第三四段3000/4000待完成|
 |同起点M/E及最低3200预算|c-plan.json、bc800/1600/3200/6400-fit与integrity|已训练新增19200且独立复算；E有效误差及源3 S2继续改善，不能称两臂平台|
 |完整趋势及固定末点|每段训练日志、逐来源F/S分析、checkpoint归档|持续积累；最终固定预算末点与选中点均须列明|
-|有证据的后续实验|DECISIONS.jsonl、bc800-state-shift.json、rl250-analysis|RL1000四来源F均32/32而严格body全0，已触发同起点固定时钟保持目标比较，正在实际预检；尚无DAgger|
+|有证据的后续实验|DECISIONS.jsonl、bc800-state-shift.json、rl250-analysis|RL1000四来源F均32/32而严格body全0，已触发同起点固定时钟保持比较；修复训练池后正式续训中，同修复池原目标对照尚待执行；无DAgger|
 |同权重四来源推理、独立F/S|evaluate_wuji_recovery_batch、原始trace与独立summarize|开发评估已做；来源只用于采样/标签/统计。F存在循环且漂移，不等于S|
 |新最终每来源128只开一次|data/manifest.json中final哈希|初态已生成；尚未传至远端或评估。先冻结模型/协议/选点，再开最终集|
 |同批负责专家、计数、Wilson区间、构型簇|initial-analysis、各阶段report/trials/clusters|开发已具备；最终集仍待统一候选和专家同批比较|

@@ -10,7 +10,7 @@ def main():
  out=R/'runs/artmanip-recovery-20260930'/a.name;out.mkdir(parents=True,exist_ok=False)
  cmd=a.command;cmd=cmd[1:] if cmd and cmd[0]=='--' else cmd
  cmd=[sys.executable if x=='PYTHON' else x for x in cmd]
- state=dict(source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),name=a.name,gpu=a.gpu,command=cmd,timeout_seconds=a.timeout,started=now(),pid=os.getpid(),status='waiting_lease')
+ state=dict(source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),name=a.name,gpu=a.gpu,final_phase=os.environ.get('WUJI_RECOVERY_FINAL_PHASE')=='1',command=cmd,timeout_seconds=a.timeout,started=now(),pid=os.getpid(),status='waiting_lease')
  def save():
   (out/'status.json').write_text(json.dumps(state,indent=2)+'\n')
   with (R/'runs/artmanip-recovery-20260930/events.jsonl').open('a') as f:f.write(json.dumps(state)+'\n')

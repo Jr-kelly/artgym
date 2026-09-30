@@ -7,14 +7,11 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T11:32:52.228679+00:00",
-  "event": "effective_control_metadata_correction",
-  "evidence": [
-    "scripts/evaluate_wuji_recovery.py",
-    "runs/artmanip-recovery-20260930/reference-precheck/report.json"
-  ],
-  "finding": "Earlier generic evaluation action_control fields printed legacy supportSpan.04/thumbStep.025 even for reference task, though actual reference control was measured.008333rad/policy call. New reports distinguish full_incremental effective step from mixed control; metrics, trajectories, scoring and running source pins unchanged.",
-  "next": "Use measured reference precheck and task source for historical report control semantics; new evaluation reports explicit effective metadata."
+  "utc": "2026-09-30T11:40:29.562774+00:00",
+  "event": "reserved_final_launcher_path_added",
+  "evidence": "scripts/launch_wuji_recovery.py",
+  "change": "--final requires committed final-freeze.json with source_sha, pins that exact code, permits evaluation modules only and no live development/training jobs. Uses24GPUh/enddeadline ceiling; ordinary jobs retain22GPUh/trainingcutoff. No finalfreeze exists or hasbeenopened.",
+  "next": "Future final-freeze mustinclude source_sha of committed evaluation code. Currentstage remains development; nextnormal RLsegment3 also verifies default launcher path."
 }
 ```
 
@@ -64,8 +61,8 @@
       "pid": 25006,
       "status": "running",
       "child_pid": 25007,
-      "heartbeat": "2026-09-30T11:30:43.904145+00:00",
-      "elapsed_seconds": 5121.4657261569955,
+      "heartbeat": "2026-09-30T11:35:45.249441+00:00",
+      "elapsed_seconds": 5422.802136152997,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/rl-clockhold-clean-job/status.json",
       "pid_exists": true
     },
@@ -96,28 +93,25 @@
       "pid": 35029,
       "status": "running",
       "child_pid": 35030,
-      "heartbeat": "2026-09-30T11:30:49.908910+00:00",
-      "elapsed_seconds": 451.8732609650033,
+      "heartbeat": "2026-09-30T11:35:51.337442+00:00",
+      "elapsed_seconds": 753.2843049079966,
       "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/reference2000-holdingmid-development-job/status.json",
       "pid_exists": true
     }
   ],
-  "gpu_hours": 8.686462872777776,
+  "gpu_hours": 8.861673378333332,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
   "resource_check_utc": "2026-09-30T06:42:41Z",
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
-  "next": "Original1756→2000, holding1397→2000 asof10:52UTC. When original completes, use GPU0 preregistered reference2000-holdingmid development batch, then resume original3000. BC32000 and matched repaired originalcontrol stillremain.",
+  "next": "GPU0 dev batch reference2000-holdingmid-development is running, then original referenceCP2000→3000/4000. GPU1holding target2000, then pairedBC32000 and same-repaired-pool originalCP1000→2000. Final cohort unopened.",
   "last_event": {
-    "utc": "2026-09-30T11:32:52.228679+00:00",
-    "event": "effective_control_metadata_correction",
-    "evidence": [
-      "scripts/evaluate_wuji_recovery.py",
-      "runs/artmanip-recovery-20260930/reference-precheck/report.json"
-    ],
-    "finding": "Earlier generic evaluation action_control fields printed legacy supportSpan.04/thumbStep.025 even for reference task, though actual reference control was measured.008333rad/policy call. New reports distinguish full_incremental effective step from mixed control; metrics, trajectories, scoring and running source pins unchanged.",
-    "next": "Use measured reference precheck and task source for historical report control semantics; new evaluation reports explicit effective metadata."
+    "utc": "2026-09-30T11:40:29.562774+00:00",
+    "event": "reserved_final_launcher_path_added",
+    "evidence": "scripts/launch_wuji_recovery.py",
+    "change": "--final requires committed final-freeze.json with source_sha, pins that exact code, permits evaluation modules only and no live development/training jobs. Uses24GPUh/enddeadline ceiling; ordinary jobs retain22GPUh/trainingcutoff. No finalfreeze exists or hasbeenopened.",
+    "next": "Future final-freeze mustinclude source_sha of committed evaluation code. Currentstage remains development; nextnormal RLsegment3 also verifies default launcher path."
   },
   "monitor": {
     "pid": 1192,
@@ -156,16 +150,16 @@
     "rl-seg2-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T11:30:59.465181+00:00",
+  "last_resource_check_utc": "2026-09-30T11:36:14.844091+00:00",
   "next_actions": [
-    "GPU0 original rl-seg2-job18856 continues2000; original pool has4/512 early static-unstable perturbations, retained baseline explicitly labelled. No NaN or action mapping error.",
+    "GPU0 reference2000-holdingmid-development-job35029 running fromsourcepinfb0a332 afteroriginalsegment2 completed2000; analyze rawtraces, then launch originalsegment3 fromCP2000sha06cc70381add8cb3f65626474e0e58542a6637c219f669483878c148cfc8f534 to3000. Original4segmentbudget remainsrequired.",
     "Repaired training pool d885794f6bd5c77a71591c5d5e17753b4679252c8582587ab7217d6d61c73836 passed full51220sec static and clock/mapping checks. Four source0 slots47/94/104/117 replaced by original0/1/2/3, distinctcounts124/128/128/128. No evaluation filtering.",
     "GPU1 rl-clockhold-clean-job25006 is running; sourcepin81a60a8, actualRL1000→1001 optimizer/model restore verified. Uses repaired pool, target2000. Matched repaired-pool original goalCP1000→2000 remainsrequired after BC32000.",
     "BC M/E2500 independentdevelopment recorded: E21/32 S2source3,11/32 S5source3,allSbody32/32; stillimproving. Execute preregistered paired32000addedupdates2500→4100 after holding, then independentdev. No S64 gate/secondseed/student yet.",
     "Final128 stillunopened/untransferred. Finalfreeze, once-onlyassessment, videos,publicRelease/downloadrestore/processcleanup remain.",
-    "GitHub lastconfirmed8ef05cc; localcea8c1e pluscurrentreports. Draft29assets expected afterupload21completed; verify server listing before furtheruploader. Fullfinalfreeze/videos/publicdownloadrestore/cleanup outstanding."
+    "GitHubconfirmed61f8c7c; localdf67a04 adds effective-control/noise logging only (future runs, livepins unchanged). Draft30assets expected upload22completed; finalpublicRelease/downloadrestore/videos pending. Full4h26percentthresholdpassed36.49, recent30min41.73 at10:52UTC."
   ],
-  "training_active_run": "runs/recovery-rl-seg2",
+  "training_active_run": "runs/recovery-rl-clockhold-clean",
   "bc_current_pair": "runs/artmanip-recovery-20260930/bc-pair19200"
 }
 ```

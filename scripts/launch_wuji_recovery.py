@@ -8,21 +8,32 @@ R=Path(__file__).resolve().parents[1];D=R/'research/artmanip-recovery-20260930'
 SSH=['ssh','-i','/home/agiuser/.ssh/id_ed25519_h200','-p','33024','wangjiarui@10.13.160.5']
 REMOTE='/tmp/artgym-recovery-20260930'
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--name',required=True);p.add_argument('--gpu',type=int,choices=[0,1],required=True);p.add_argument('--timeout',type=int,required=True);p.add_argument('command',nargs=argparse.REMAINDER);a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--name',required=True);p.add_argument('--gpu',type=int,choices=[0,1],required=True);p.add_argument('--timeout',type=int,required=True);p.add_argument('--final',action='store_true',help='Frozen evaluation only; uses reserved final time/GPU budget');p.add_argument('command',nargs=argparse.REMAINDER);a=p.parse_args()
     sha=subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip()
     # Reject uncommitted source changes; reporting files may change during work.
     dirty=subprocess.check_output(['git','status','--porcelain','--','scripts','isaacgymenvs','rl_games'],cwd=R,text=True)
     if dirty.strip():raise RuntimeError('Commit source before launching: '+dirty)
+    if a.final:
+        freeze_path=D/'final-freeze.json'
+        frozen=json.loads(freeze_path.read_text())
+        tracked=subprocess.check_output(['git','show','HEAD:research/artmanip-recovery-20260930/final-freeze.json'],cwd=R)
+        if tracked!=freeze_path.read_bytes():raise RuntimeError('Commit the exact final freeze before opening final evaluation')
+        command=a.command[1:] if a.command[:1]==['--'] else a.command
+        if len(command)<3 or command[1]!='-m' or command[2] not in ['scripts.evaluate_wuji_recovery_batch','scripts.evaluate_wuji_recovery']:
+            raise RuntimeError('Reserved final budget is for frozen physical evaluation/video, not training')
+        sha=frozen['source_sha']  # Keep final simulator/scorer code fixed across jobs.
     # Reserve outstanding wrapper time as well as elapsed usage. Refresh actual
     # process state first: a stale handoff is not a resource or budget receipt.
     subprocess.run([sys.executable,'-m','scripts.status_wuji_recovery'],cwd=R,stdout=subprocess.DEVNULL,check=True)
     state=json.loads((D/'STATE.json').read_text());now=datetime.datetime.now(datetime.timezone.utc)
-    cutoff=datetime.datetime.fromisoformat(state['training_cutoff_utc'])
+    if a.final and any(not j.get('final_phase',False) for j in state['active_jobs']):
+        raise RuntimeError('Finish development/training jobs before opening the final cohort')
+    cutoff=datetime.datetime.fromisoformat(state['deadline_utc'] if a.final else state['training_cutoff_utc'])
     if (cutoff-now).total_seconds()<a.timeout:raise RuntimeError('Job would exceed reserved final-validation cutoff')
     outstanding_seconds=sum(max(0,j['timeout_seconds']-(now-datetime.datetime.fromisoformat(j['started'])).total_seconds()) for j in state['active_jobs'])
-    if state.get('gpu_hours',0)+state.get('unmetered_cuda_preflight_reserve_gpu_hours',.05)+(outstanding_seconds+a.timeout)/3600 > 22:
+    if state.get('gpu_hours',0)+state.get('unmetered_cuda_preflight_reserve_gpu_hours',.05)+(outstanding_seconds+a.timeout)/3600 > (24 if a.final else 22):
         raise RuntimeError('Job timeout could consume reserved final GPU budget; shorten or finalize')
-    spec=dict(name=a.name,gpu=a.gpu,timeout=a.timeout,command=a.command[1:] if a.command[:1]==['--'] else a.command,source_sha=sha,created_utc=now.isoformat(),budget_receipt_utc=state['last_resource_check_utc'],occupied_gpu_hours=state['gpu_hours'],other_jobs_reserved_gpu_hours=outstanding_seconds/3600)
+    spec=dict(name=a.name,gpu=a.gpu,timeout=a.timeout,final_phase=a.final,command=a.command[1:] if a.command[:1]==['--'] else a.command,source_sha=sha,created_utc=now.isoformat(),budget_receipt_utc=state['last_resource_check_utc'],occupied_gpu_hours=state['gpu_hours'],other_jobs_reserved_gpu_hours=outstanding_seconds/3600)
     archive=subprocess.check_output(['git','archive',sha,'scripts','isaacgymenvs','rl_games'],cwd=R)
     pin=REMOTE+'/pins/'+sha
     # Extract only committed code, never overwrite an existing immutable pin.
@@ -38,7 +49,7 @@ for f in out.glob('*/status.json'):
         except ProcessLookupError:continue
         raise RuntimeError('Existing live wrapper '+str(f))
 assert not (out/s['name']).exists()
-env=dict(os.environ,PYTHONPATH=str(pin)+':'+str(pin/'rl_games'),LD_LIBRARY_PATH='/tmp/wuji-recovery-runtime/lib',TORCH_EXTENSIONS_DIR='/tmp/wuji-recovery-extensions')
+env=dict(os.environ,PYTHONPATH=str(pin)+':'+str(pin/'rl_games'),LD_LIBRARY_PATH='/tmp/wuji-recovery-runtime/lib',TORCH_EXTENSIONS_DIR='/tmp/wuji-recovery-extensions',WUJI_RECOVERY_FINAL_PHASE='1' if s['final_phase'] else '0')
 cmd=['/tmp/wuji-recovery-runtime/bin/python','-m','scripts.run_wuji_recovery_job','--name',s['name'],'--gpu',str(s['gpu']),'--timeout',str(s['timeout']),'--']+s['command']
 with (out/(s['name']+'-launch.log')).open('w') as f:
     child=subprocess.Popen(cmd,cwd=pin,env=env,stdin=subprocess.DEVNULL,stdout=f,stderr=subprocess.STDOUT,start_new_session=True)
