@@ -106,9 +106,13 @@ def main():
   (a.output/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
  save(start_epoch);validate(start_epoch)
  for epoch in range(start_epoch+1,a.epochs+1):
+  epoch_training=[]
   for j in np.random.permutation(len(data)):
    d=data[j];count=int(d['obs'].shape[1]*.75);ids=torch.randperm(count,device=player.device)
-   for offset in range(0,count,a.batch):pass_data(d,ids[offset:offset+a.batch],True);updates+=1
+   for offset in range(0,count,a.batch):
+    result=pass_data(d,ids[offset:offset+a.batch],True);updates+=1
+    epoch_training.append(dict(dataset=int(j),**result))
+  with (a.output/'training.jsonl').open('a') as f:f.write(json.dumps(dict(epoch=epoch,updates=updates,batches=epoch_training))+'\n')
   if epoch%a.save_every==0 or epoch==a.epochs:save(epoch);validate(epoch)
   if time.monotonic()-started>a.max_seconds:save(epoch);validate(epoch);break
  (a.output/'completed.json').write_text(json.dumps(dict(epoch=epoch,updates=updates,wall_seconds=time.monotonic()-started,simulation_interactions=0))+'\n')
