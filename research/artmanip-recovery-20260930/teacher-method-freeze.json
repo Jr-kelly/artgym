@@ -1,0 +1,206 @@
+{
+  "utc": "2026-09-30T17:12:06.578157+00:00",
+  "kind": "Teacher method freeze before second optimization seed; not final cohort opening",
+  "primary": {
+    "name": "Eagg6100",
+    "path": "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
+    "sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+    "S32_passed": true,
+    "S64_verified": true,
+    "final_evaluated": false,
+    "verification": "aggregation1-promotion64-gates.json"
+  },
+  "eligibility": {
+    "model": "Eagg6100",
+    "F_passed": true,
+    "S_passed": true,
+    "cohort_n": 64,
+    "promotion64_indicated": false,
+    "student_or_second_seed_eligible": true,
+    "worst_strict": 0.9375,
+    "worst_phase_hold": 0.984375,
+    "worst_body": 0.984375,
+    "mean_slider_error_m": 0.0053705418249592185,
+    "cells": [
+      {
+        "source": 0,
+        "protocol": "S2",
+        "n": 64,
+        "margins": {
+          "strict_absolute": 0.19999999999999996,
+          "body_absolute": 0.050000000000000044,
+          "strict_relative": 0.1,
+          "body_relative": 0.03
+        },
+        "passed": true,
+        "within_one_episode": true
+      },
+      {
+        "source": 1,
+        "protocol": "S2",
+        "n": 64,
+        "margins": {
+          "strict_absolute": 0.19999999999999996,
+          "body_absolute": 0.050000000000000044,
+          "strict_relative": 0.1,
+          "body_relative": 0.03
+        },
+        "passed": true,
+        "within_one_episode": true
+      },
+      {
+        "source": 2,
+        "protocol": "S2",
+        "n": 64,
+        "margins": {
+          "strict_absolute": 0.18437499999999996,
+          "body_absolute": 0.034375000000000044,
+          "strict_relative": 0.084375,
+          "body_relative": 0.014374999999999999
+        },
+        "passed": true,
+        "within_one_episode": true
+      },
+      {
+        "source": 3,
+        "protocol": "S2",
+        "n": 64,
+        "margins": {
+          "strict_absolute": 0.13749999999999996,
+          "body_absolute": 0.050000000000000044,
+          "strict_relative": 0.146875,
+          "body_relative": 0.045625
+        },
+        "passed": true,
+        "within_one_episode": true
+      },
+      {
+        "source": 0,
+        "protocol": "S5",
+        "n": 64,
+        "margins": {
+          "strict_absolute": 0.18437499999999996,
+          "body_absolute": 0.034375000000000044,
+          "strict_relative": 0.115625,
+          "body_relative": 0.045625
+        },
+        "passed": true,
+        "within_one_episode": true
+      },
+      {
+        "source": 1,
+        "protocol": "S5",
+        "n": 64,
+        "margins": {
+          "strict_absolute": 0.19999999999999996,
+          "body_absolute": 0.050000000000000044,
+          "strict_relative": 0.1,
+          "body_relative": 0.03
+        },
+        "passed": true,
+        "within_one_episode": true
+      },
+      {
+        "source": 2,
+        "protocol": "S5",
+        "n": 64,
+        "margins": {
+          "strict_absolute": 0.18437499999999996,
+          "body_absolute": 0.034375000000000044,
+          "strict_relative": 0.084375,
+          "body_relative": 0.014374999999999999
+        },
+        "passed": true,
+        "within_one_episode": true
+      },
+      {
+        "source": 3,
+        "protocol": "S5",
+        "n": 64,
+        "margins": {
+          "strict_absolute": 0.19999999999999996,
+          "body_absolute": 0.050000000000000044,
+          "strict_relative": 0.146875,
+          "body_relative": 0.045625
+        },
+        "passed": true,
+        "within_one_episode": true
+      }
+    ]
+  },
+  "initial_BC100_sha256": "3801eca359022e729510fef28f00d43b35af8561755f20a5f4be0206b6a07ab8",
+  "original_sequence_data": [
+    {
+      "path": "/tmp/artgym-recovery-20260930/pins/08c51447649a1f5ff1b963990130e7a477011aee/runs/unified-policy-20260930/train-data-t2/source0",
+      "sha256": "3fe715b16671561c0a7ff6b79a9ad9ddca8a7f3d3a87091983c0e4d5b4e20408",
+      "expert": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac"
+    },
+    {
+      "path": "/tmp/artgym-recovery-20260930/pins/08c51447649a1f5ff1b963990130e7a477011aee/runs/unified-policy-20260930/train-data-t5/source0",
+      "sha256": "4d10a4555225a5bcdeccd03243d116402efd9acf749023be1dda47f91c5485a8",
+      "expert": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac"
+    },
+    {
+      "path": "/tmp/artgym-recovery-20260930/pins/08c51447649a1f5ff1b963990130e7a477011aee/runs/unified-policy-20260930/train-data-t2/source1",
+      "sha256": "6e9af156a542b4c630a7d9d50a315180070977235a3abf88996f85757f7d9039",
+      "expert": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac"
+    },
+    {
+      "path": "/tmp/artgym-recovery-20260930/pins/08c51447649a1f5ff1b963990130e7a477011aee/runs/unified-policy-20260930/train-data-t5/source1",
+      "sha256": "6b65a0cc07b181368c5f73de5652e8ea84b4cc00524ff61f9adcecc1679c1128",
+      "expert": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac"
+    },
+    {
+      "path": "/tmp/artgym-recovery-20260930/pins/08c51447649a1f5ff1b963990130e7a477011aee/runs/unified-policy-20260930/train-data-t2/source2",
+      "sha256": "f6a9befe1cdff5274da14a53eab30316605d1446e92926e43fb8eeacc13907fb",
+      "expert": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac"
+    },
+    {
+      "path": "/tmp/artgym-recovery-20260930/pins/08c51447649a1f5ff1b963990130e7a477011aee/runs/unified-policy-20260930/train-data-t5/source2",
+      "sha256": "626c198ce0df3f17ad66fcea230026c45033a6d8df1f74dcbfebdab51f946d9a",
+      "expert": "4d8af0637a29787811b5ab2251425ddc79382dce2f84ae00708455b1149890ac"
+    },
+    {
+      "path": "/tmp/artgym-recovery-20260930/pins/08c51447649a1f5ff1b963990130e7a477011aee/runs/unified-policy-20260930/train-data-t2/source3",
+      "sha256": "db4fef5125e44968f8ff8e5b6eae68addcecf24373c00050dfe6e3e3a3875785",
+      "expert": "fae13402080f3fac1665d61c69cdc078302b15ea75db8b14c85e500073d748cd"
+    },
+    {
+      "path": "/tmp/artgym-recovery-20260930/pins/08c51447649a1f5ff1b963990130e7a477011aee/runs/unified-policy-20260930/train-data-t5/source3",
+      "sha256": "4ca0af01ad2b5111c579abb786dd32978a06b0fc1df0791060f8d73bff5c8728",
+      "expert": "fae13402080f3fac1665d61c69cdc078302b15ea75db8b14c85e500073d748cd"
+    }
+  ],
+  "recipe": {
+    "executed_label": "clip expert mu, unbounded prediction MSE",
+    "E_added_updates": 44800,
+    "aggregation_added_updates": 3200,
+    "lr": 1e-05,
+    "original_batch": 96,
+    "aggregate_batch": 120,
+    "full_history_steps": 600,
+    "old_fitting_per_source_clock": 96,
+    "new_fitting": 24,
+    "shared_heldout": 40,
+    "actor_and_own_encoder_train": true,
+    "normalizer_critic_frozen": true,
+    "no_latent_alignment": true
+  },
+  "aggregation_initial_states_sha256": "b65e757740d031d156cd0107b84283a5d8b7f779ee496af067557eba1e619c10",
+  "availability": "Same initialstates and original preregistered handover/replay checks applied to seed2; no unconditional expert oracle",
+  "replication": "Same experts and BC100 weights/Adam; reset optimization sampling CPU/CUDA/NumPy seed2026093061 once at100, continue actual state through5700 and6100. Not independent expert pretraining.",
+  "primary_reselection_allowed": false,
+  "student": "No student launched; prioritize full teacher replication and frozen final validation.",
+  "budget": {
+    "occupied_gpuh": 19.034644998888876,
+    "previous_final_reserve": 4,
+    "new_final_reserve": 3.5,
+    "normal_ceiling": 20.5,
+    "total_ceiling": 24,
+    "final_wall_reserve_hours": 2,
+    "training_cutoff": "2026-09-30T20:42:33+00:00",
+    "second_route_max_gpu_seconds": 4950,
+    "bc_allocation_gpuh": 2.25,
+    "reason": "First exactS64 pass triggers mandated priority for second optimization seed. FullBCroute estimated3440GPUseconds from measured earlier stages; bounded4950fitsnormal20.5. Reserve3.5 remains above attachment minimum2 and is retained for expandedfinal models/video."
+  }
+}

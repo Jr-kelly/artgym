@@ -7,21 +7,29 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T17:04:23.348895+00:00",
-  "event": "S32_breakthrough_and64_pending_handoff",
-  "candidate": {
-    "name": "Eagg6100",
-    "path": "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
-    "sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
-    "S32_passed": true,
-    "S64_verified": false,
-    "final_evaluated": false
-  },
-  "evidence": [
-    "research/artmanip-recovery-20260930/aggregation1-promotion-plan.json",
-    "research/artmanip-recovery-20260930/second-seed-conditional-plan.json"
+  "utc": "2026-09-30T17:12:06.578368+00:00",
+  "event": "teacher_strict64_passed_method_frozen_and_second_seed_budget_allocated",
+  "checkpoint_sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+  "S2": [
+    64,
+    64,
+    63,
+    60
   ],
-  "next": "Exact64/source promotion with samebatchexperts running. Ifpassed prioritize fullBC-route secondoptimizationseed, using conditionalplan; do notopenfinal orstartstudent yet."
+  "S5": [
+    63,
+    64,
+    63,
+    64
+  ],
+  "evidence": [
+    "research/artmanip-recovery-20260930/aggregation1-promotion64-analysis/report.json",
+    "research/artmanip-recovery-20260930/aggregation1-promotion64-gates.json",
+    "research/artmanip-recovery-20260930/teacher-method-freeze.json"
+  ],
+  "final_reserve_gpuh": 3.5,
+  "normal_ceiling_gpuh": 20.5,
+  "next": "Run fullsecondoptimizationseed2026093061 fromactualBC100 model/Adam through E44800 thenownhistoryaggregation3200; fixedsamecohort64replicationendpoint. MainEagg6100 unchanged,final128 unopened."
 }
 ```
 
@@ -32,65 +40,43 @@
   "deadline_utc": "2026-09-30T22:42:33+00:00",
   "training_cutoff_utc": "2026-09-30T20:42:33+00:00",
   "max_gpu_hours": 24,
-  "reserved_final_gpu_hours": 4,
+  "reserved_final_gpu_hours": 3.5,
   "max_concurrent_gpus": 2,
   "rl_default_gpu_hours": 16,
-  "bc_default_gpu_hours": 2,
-  "phase": "B/C active; actual stages and next decisions in active_jobs and next_actions",
-  "active_jobs": [
-    {
-      "source_sha256": "998b1c057e21c029884c58abe3d29ca976f05682d6a54b5092ccd4f3bef4d76e",
-      "name": "aggregation1-promotion64-job",
-      "gpu": 1,
-      "final_phase": false,
-      "command": [
-        "/tmp/wuji-recovery-runtime/bin/python",
-        "-m",
-        "scripts.evaluate_wuji_recovery_batch",
-        "--name",
-        "aggregation1-promotion64",
-        "--states",
-        "research/artmanip-recovery-20260930/data/promotion-all.npy",
-        "--models",
-        "Eagg6100=runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
-        "historical=runs/unified-policy-20260930/experts/historical.pth",
-        "source3=runs/unified-policy-20260930/experts/source3.pth"
-      ],
-      "timeout_seconds": 1800,
-      "started": "2026-09-30T16:50:51.806028+00:00",
-      "pid": 65486,
-      "status": "running",
-      "child_pid": 65487,
-      "heartbeat": "2026-09-30T17:02:55.003814+00:00",
-      "elapsed_seconds": 723.0867587370012,
-      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/aggregation1-promotion64-job/status.json",
-      "pid_exists": true,
-      "host": "authorized_remote"
-    }
-  ],
-  "gpu_hours": 18.930096156666654,
+  "bc_default_gpu_hours": 2.25,
+  "phase": "Teacher method passed strict64; full second optimization seed replication authorized by measured evidence",
+  "active_jobs": [],
+  "gpu_hours": 19.034644998888876,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
   "resource_check_utc": "2026-09-30T06:42:41Z",
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
-  "next": "Exact64/source promotion with samebatchexperts running. Ifpassed prioritize fullBC-route secondoptimizationseed, using conditionalplan; do notopenfinal orstartstudent yet.",
+  "next": "Run fullsecondoptimizationseed2026093061 fromactualBC100 model/Adam through E44800 thenownhistoryaggregation3200; fixedsamecohort64replicationendpoint. MainEagg6100 unchanged,final128 unopened.",
   "last_event": {
-    "utc": "2026-09-30T17:04:23.348895+00:00",
-    "event": "S32_breakthrough_and64_pending_handoff",
-    "candidate": {
-      "name": "Eagg6100",
-      "path": "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
-      "sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
-      "S32_passed": true,
-      "S64_verified": false,
-      "final_evaluated": false
-    },
-    "evidence": [
-      "research/artmanip-recovery-20260930/aggregation1-promotion-plan.json",
-      "research/artmanip-recovery-20260930/second-seed-conditional-plan.json"
+    "utc": "2026-09-30T17:12:06.578368+00:00",
+    "event": "teacher_strict64_passed_method_frozen_and_second_seed_budget_allocated",
+    "checkpoint_sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+    "S2": [
+      64,
+      64,
+      63,
+      60
     ],
-    "next": "Exact64/source promotion with samebatchexperts running. Ifpassed prioritize fullBC-route secondoptimizationseed, using conditionalplan; do notopenfinal orstartstudent yet."
+    "S5": [
+      63,
+      64,
+      63,
+      64
+    ],
+    "evidence": [
+      "research/artmanip-recovery-20260930/aggregation1-promotion64-analysis/report.json",
+      "research/artmanip-recovery-20260930/aggregation1-promotion64-gates.json",
+      "research/artmanip-recovery-20260930/teacher-method-freeze.json"
+    ],
+    "final_reserve_gpuh": 3.5,
+    "normal_ceiling_gpuh": 20.5,
+    "next": "Run fullsecondoptimizationseed2026093061 fromactualBC100 model/Adam through E44800 thenownhistoryaggregation3200; fixedsamecohort64replicationendpoint. MainEagg6100 unchanged,final128 unopened."
   },
   "monitor": {
     "pid": 1192,
@@ -143,10 +129,11 @@
     "aggregation1-pair6400-job",
     "rl-seg4-job",
     "aggregation1-development-job",
-    "reference4000-development-job"
+    "reference4000-development-job",
+    "aggregation1-promotion64-job"
   ],
   "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
-  "last_resource_check_utc": "2026-09-30T17:03:01.131221+00:00",
+  "last_resource_check_utc": "2026-09-30T17:09:35.974446+00:00",
   "next_actions": [
     "Exact64/source promotion with samebatchexperts running. Ifpassed prioritize fullBC-route secondoptimizationseed, using conditionalplan; do notopenfinal orstartstudent yet.",
     "GPU1 wrapper65486, source2c29436, started16:50:48UTC, timeout1800, aggregation1-promotion64: Eagg6100,historical,source3 S2/S5/F onpromotion-all.npy. At17:03UTC mainall3+historicalS2/S5 complete. Producer maincountsS2[64,64,63,60],S5[63,64,63,64],F[64,64,63,63] arePROVISIONAL; independentrescore/fullbody/relativeexpertgates pending.",
@@ -160,10 +147,10 @@
   "bc_current_pair": "runs/artmanip-recovery-20260930/bc-pair32000",
   "training_active_runs": [],
   "bc_next_plan": "research/artmanip-recovery-20260930/bc44800-plan.json",
-  "github_last_verified_commit": "d88b96b7e62f2ffa818eba5ba96f72a2b02e0b7a",
+  "github_last_verified_commit": "0b79bb0",
   "release_verified_assets": 52,
   "gpu_hours_by_host": {
-    "authorized_remote": 18.930096156666654,
+    "authorized_remote": 19.034644998888876,
     "local": 0.0
   },
   "bc_executed_endpoint": {
@@ -178,8 +165,9 @@
     "path": "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
     "sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
     "S32_passed": true,
-    "S64_verified": false,
-    "final_evaluated": false
+    "S64_verified": true,
+    "final_evaluated": false,
+    "verification": "aggregation1-promotion64-gates.json"
   }
 }
 ```
