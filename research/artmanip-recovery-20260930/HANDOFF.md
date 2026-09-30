@@ -7,29 +7,34 @@
 最近事件：
 ```json
 {
-  "utc": "2026-09-30T06:49:19.710545+00:00",
-  "event": "reference_precheck_passed",
-  "evidence": "runs/artmanip-recovery-20260930/reference-precheck/report.json",
-  "control_step_rad": 0.008333333767950535,
-  "control_dt": 0.03333333507180214,
-  "mapping_error": 0,
-  "object_target_change": 0,
-  "static_1s_body_counts": [
-    29,
-    33,
-    28,
-    38
-  ],
-  "static_1s_n": [
-    29,
-    33,
-    28,
-    38
-  ],
-  "completed_wrapper_pid": 659,
-  "gpu_hours": 0.00923,
-  "next": "Run20epoch5120env completeSAPG pilot onGPU0 and unchanged expert regression onGPU1",
-  "git_failure": "Missing author configuration; use same explicit per-command author as prior branch without global mutation"
+  "utc": "2026-09-30T06:53:42.792662+00:00",
+  "event": "job_finished",
+  "job": {
+    "source_sha256": "c0d858d0b83ea45ba7759946fb3619878056c02cf7062aa41bfc261c1437848f",
+    "name": "reference-precheck-job",
+    "gpu": 0,
+    "command": [
+      "/tmp/wuji-recovery-runtime/bin/python",
+      "-m",
+      "scripts.precheck_wuji_reference",
+      "--output",
+      "runs/artmanip-recovery-20260930/reference-precheck"
+    ],
+    "timeout_seconds": 600,
+    "started": "2026-09-30T06:47:50.536656+00:00",
+    "pid": 659,
+    "status": "completed",
+    "child_pid": 660,
+    "heartbeat": "2026-09-30T06:48:20.763923+00:00",
+    "elapsed_seconds": 30.106572240001697,
+    "returncode": 0,
+    "finished": "2026-09-30T06:48:23.767158+00:00",
+    "wall_seconds": 33.23031579999952,
+    "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/reference-precheck-job/status.json",
+    "pid_exists": false
+  },
+  "gpu_hours": 0.0536827361111111,
+  "next": "Read evidence and decide follow-up; process state verified at 2026-09-30T06:53:40.719277+00:00"
 }
 ```
 
@@ -44,9 +49,41 @@
   "max_concurrent_gpus": 2,
   "rl_default_gpu_hours": 16,
   "bc_default_gpu_hours": 2,
-  "phase": "A audit and runtime restoration",
-  "active_jobs": [],
-  "gpu_hours": 0,
+  "phase": "A complete; B pilot / C checks",
+  "active_jobs": [
+    {
+      "source_sha256": "c0d858d0b83ea45ba7759946fb3619878056c02cf7062aa41bfc261c1437848f",
+      "name": "g0-regression-retry1-job",
+      "gpu": 1,
+      "command": [
+        "/tmp/wuji-recovery-runtime/bin/python",
+        "-m",
+        "scripts.evaluate_wuji_recovery_batch",
+        "--name",
+        "g0-regression-retry1",
+        "--states",
+        "research/artmanip-recovery-20260930/data/development-all.npy",
+        "--models",
+        "historical=runs/unified-policy-20260930/experts/historical.pth",
+        "source3=runs/unified-policy-20260930/experts/source3.pth",
+        "--static",
+        "--protocols",
+        "S2",
+        "S5",
+        "F"
+      ],
+      "timeout_seconds": 3500,
+      "started": "2026-09-30T06:52:40.132742+00:00",
+      "pid": 1482,
+      "status": "running",
+      "child_pid": 1483,
+      "heartbeat": "2026-09-30T06:53:40.451264+00:00",
+      "elapsed_seconds": 60.23082429799979,
+      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/g0-regression-retry1-job/status.json",
+      "pid_exists": true
+    }
+  ],
+  "gpu_hours": 0.0536827361111111,
   "base_sha": "c1c489f7f76ba068dc1e583da0b4d14b28b1f443",
   "upstream_sha": "63b94fb3364596db51b7e4651b3c3c98ff994710",
   "authorized_host": "wangjiarui@10.13.160.5:33024",
@@ -54,29 +91,47 @@
   "resource_observation": "4 H200 idle, no compute processes; previous /tmp runtime and project absent",
   "next": "Restore isolated runtime; audit upstream and Wuji; meaningful prechecks; pin four-segment RL budget from full-update throughput.",
   "last_event": {
-    "utc": "2026-09-30T06:49:19.710545+00:00",
-    "event": "reference_precheck_passed",
-    "evidence": "runs/artmanip-recovery-20260930/reference-precheck/report.json",
-    "control_step_rad": 0.008333333767950535,
-    "control_dt": 0.03333333507180214,
-    "mapping_error": 0,
-    "object_target_change": 0,
-    "static_1s_body_counts": [
-      29,
-      33,
-      28,
-      38
-    ],
-    "static_1s_n": [
-      29,
-      33,
-      28,
-      38
-    ],
-    "completed_wrapper_pid": 659,
-    "gpu_hours": 0.00923,
-    "next": "Run20epoch5120env completeSAPG pilot onGPU0 and unchanged expert regression onGPU1",
-    "git_failure": "Missing author configuration; use same explicit per-command author as prior branch without global mutation"
-  }
+    "utc": "2026-09-30T06:53:42.792662+00:00",
+    "event": "job_finished",
+    "job": {
+      "source_sha256": "c0d858d0b83ea45ba7759946fb3619878056c02cf7062aa41bfc261c1437848f",
+      "name": "reference-precheck-job",
+      "gpu": 0,
+      "command": [
+        "/tmp/wuji-recovery-runtime/bin/python",
+        "-m",
+        "scripts.precheck_wuji_reference",
+        "--output",
+        "runs/artmanip-recovery-20260930/reference-precheck"
+      ],
+      "timeout_seconds": 600,
+      "started": "2026-09-30T06:47:50.536656+00:00",
+      "pid": 659,
+      "status": "completed",
+      "child_pid": 660,
+      "heartbeat": "2026-09-30T06:48:20.763923+00:00",
+      "elapsed_seconds": 30.106572240001697,
+      "returncode": 0,
+      "finished": "2026-09-30T06:48:23.767158+00:00",
+      "wall_seconds": 33.23031579999952,
+      "path": "/tmp/artgym-recovery-20260930/runs/artmanip-recovery-20260930/reference-precheck-job/status.json",
+      "pid_exists": false
+    },
+    "gpu_hours": 0.0536827361111111,
+    "next": "Read evidence and decide follow-up; process state verified at 2026-09-30T06:53:40.719277+00:00"
+  },
+  "monitor": {
+    "pid": 1192,
+    "host": "10.13.160.5:33024",
+    "checked_utc": "2026-09-30T06:51:00Z"
+  },
+  "recorded_finished_jobs": [
+    "g0-regression-job",
+    "rl-pilot20-job",
+    "rl-pilot20-retry1-job",
+    "reference-precheck-job"
+  ],
+  "unmetered_cuda_preflight_reserve_gpu_hours": 0.05,
+  "last_resource_check_utc": "2026-09-30T06:53:40.719277+00:00"
 }
 ```

@@ -1,0 +1,18 @@
+{
+  "checkpoint_sha256": "3801eca359022e729510fef28f00d43b35af8561755f20a5f4be0206b6a07ab8",
+  "bc_epoch": 100,
+  "bc_updates": 800,
+  "adam_steps": [
+    800
+  ],
+  "learning_rates": [
+    1e-05
+  ],
+  "rng_keys": [
+    "bc_torch_rng",
+    "bc_cuda_rng",
+    "bc_numpy_rng"
+  ],
+  "finite_parameters": true,
+  "source": "actual serialized checkpoint; no optimizer reinitialization required"
+}

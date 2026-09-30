@@ -1,0 +1,27 @@
+{
+  "init": "runs/unified-policy-20260930/bc-unified-historical-s3001-seg1/epoch_000100.pth",
+  "sha256": "3801eca359022e729510fef28f00d43b35af8561755f20a5f4be0206b6a07ab8",
+  "restore": "same actual BC Adam/RNG, frozen normalizer; lr from restored state1e-5",
+  "arms": {
+    "M": "MSE(predicted_mu, expert_mu)",
+    "E": "MSE(predicted_mu, clip(expert_mu))"
+  },
+  "additional_updates": [
+    800,
+    1600,
+    3200,
+    6400
+  ],
+  "conditional_extension": 12800,
+  "checkpoints_absolute_epoch": [
+    200,
+    300,
+    500,
+    900
+  ],
+  "minimum_for_plateau": 3200,
+  "shared": "data/order/phase weights/batch96/sequence600/TBPTT100/capacity",
+  "branch_budget_gpu_hours": 2,
+  "selection": "min strict, min phase_hold, min body, mean effective target error, earlier point",
+  "stop": "3 consecutive validation/phase/body platforms after minimum; numerical or overfit fault diagnose immediately; strict zero alone does not stop"
+}

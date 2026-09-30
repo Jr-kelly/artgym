@@ -85,7 +85,7 @@ def main():
    for category in ([] if train else range(6)):
     m=mask.bool() & (phase_values==category)
     if m.any():phase_metrics.append(dict(phase=category,n=int(m.sum()),raw_mse=float((mu-flat('mu'))[m].square().mean()),executed_mse=float((pred-flat('executed_action'))[m].square().mean()),thumb_target_rad=float((targets-flat('target_clipped'))[m,16:].abs().mean()),support_target_rad=float((targets-flat('target_clipped'))[m,:16].abs().mean())))
-  if train:torch.nn.utils.clip_grad_norm_(params,1.);opt.step()
+  if train:torch.nn.utils.clip_grad_norm_(params,1.,error_if_nonfinite=True);opt.step()
   te=torch.cat(target_errors);er=torch.cat(errors)
   return dict(raw_mu_mse=float(torch.cat(raw_errors).mean()),executed_action_mse=float(torch.cat(executed_errors).mean()),phase_metrics=phase_metrics,loss=loss_sum,action_mse=float(er.mean()),target_range_mean=float(te.mean()),target_range_p95=float(torch.quantile(te.flatten(),.95)),thumb_mean=float(te[:,16:].mean()),support_mean=float(te[:,:16].mean()))
  def validate(epoch):
