@@ -210,6 +210,7 @@ def main():
                 r['body_stable'] = bool(ok)
             report['body_stable'] = int(body.sum())
         report['control_mode'] = 'static_initial_targets' if args.static else ('initial_calibration_conditional_student' if (args.student_artifact or args.unified_student) else 'privileged_teacher')
+        report['known_controller_max_error_rad'] = getattr(env,'known_controller_max_error',None)
         report['fk_max_abs_error_m'] = getattr(env, 'student_fk_max_error', None)
         report['unified_student_sha256'] = hashlib.sha256(args.unified_student.read_bytes()).hexdigest() if args.unified_student else None
         report['wall_seconds'] = __import__('time').monotonic()-started

@@ -16,7 +16,7 @@ def main():
   assert set(int(s['step']) for s in opt.state.values())=={steps}
  assert tensor_hash(models[0].state_dict())==tensor_hash(saved['student_encoder'])
  torch.set_num_threads(2);torch.manual_seed(61111)
- x=torch.randn(4,2055);label=torch.randn(4,16)
+ x=torch.randn(4,getattr(models[0],'input_dim',2055));label=torch.randn(4,16)
  losses=[]
  for model,opt in zip(models,opts):
   opt.zero_grad();loss=((model(x)-label)**2).mean();loss.backward();opt.step();losses.append(float(loss))

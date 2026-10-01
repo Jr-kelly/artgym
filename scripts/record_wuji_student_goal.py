@@ -19,6 +19,8 @@ def record(event, **details):
                 stream.write(json.dumps(row, ensure_ascii=False) + '\n')
         state = json.loads((D / 'STATE.json').read_text())
         state['last_event'] = row
+        if 'next' in details: state['next'] = details['next']
+        if 'phase' in details: state['phase'] = details['phase']
         jobs = R / 'runs/unified-student-20261001/jobs'
         if jobs.exists():
             state['active_jobs'] = [json.loads(p.read_text()) for p in jobs.glob('*/identity.json') if not (p.parent/'result.json').exists()]

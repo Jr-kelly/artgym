@@ -13,6 +13,14 @@ SPEC=dict(type='proprio_init_temporal',history_len=HISTORY,proprio_dim_per_step=
  proprio_encoder=dict(units=[128,64],activation='elu'),init_encoder=dict(units=[128,64],activation='elu'),
  temporal=dict(type='tconv',impl='torch_conv1d',hidden_size=192,num_layers=5,kernel_size=3,dilation_growth=2,dropout=0.),latent_head=dict(units=[128],activation='elu'))
 
+class SplitContextLinear(nn.Linear):
+ def forward(self,x):
+  # Keep the parent's55-channel GEMM unchanged. A wider GEMM can select
+  # different reduced-precision kernels even when added weights are zero.
+  base=torch.nn.functional.linear(x[:,:55],self.weight[:,:55].contiguous(),self.bias)
+  extra=torch.nn.functional.linear(x[:,55:],self.weight[:,55:].contiguous(),None)
+  return base+extra
+
 class ConstantEncoder(nn.Module):
  def __init__(self):super().__init__();self.register_buffer('latent',torch.zeros(16))
  def forward(self,x):return self.latent.expand(len(x),-1)
@@ -23,9 +31,15 @@ class InitialEncoder(nn.Module):
 def build_encoder(kind):
  if kind=='C0':return ConstantEncoder()
  if kind=='C1':return InitialEncoder()
- if kind=='S0':
+ if kind in ['S0','SC']:
   from isaacgymenvs.distill import ProprioInitTemporalStudentEncoder
-  return ProprioInitTemporalStudentEncoder(2055,16,SPEC,'elu')
+  spec=dict(SPEC)
+  if kind=='SC':spec['init_dim']=76
+  model=ProprioInitTemporalStudentEncoder(2000+spec['init_dim'],16,spec,'elu')
+  if kind=='SC':
+   first=model.init_encoder[0];replacement=SplitContextLinear(76,first.out_features)
+   replacement.load_state_dict(first.state_dict());model.init_encoder[0]=replacement
+  return model
  raise ValueError(kind)
 
 def tensor_hash(mapping):
@@ -69,6 +83,9 @@ def load_artifact(player,env,path):
  e=build_encoder(a['kind']).to(player.device);e.load_state_dict(a['student_encoder']);e.eval()
  player.model.a2c_network.priv_encoder=e
  install_legal_public(env);install_student_player(player)
+ if a['kind']=='SC':
+  from scripts.wuji_known_controller import install_known_controller
+  install_known_controller(env,a['controller_mode'])
  env.set_student_encoder_obs_enabled(True)
  return a
 
@@ -83,7 +100,13 @@ def score_holdout_probes(player,env,paths):
   probes=torch.load(path,map_location='cpu');metrics=[]
   with torch.no_grad():
    for p in probes:
-    x=p['x'].to(player.device);label=p['label'].to(player.device);pred=encoder(x)
+    x=p['x'].to(player.device);label=p['label'].to(player.device)
+    if getattr(encoder,'input_dim',2055)==2076:
+     from isaacgymenvs.utils.torch_jit_utils import unscale
+     context=torch.cat([unscale(p['previous'].to(player.device),env.hand_dof_lower_limits,env.hand_dof_upper_limits),p['obs'].to(player.device)[:,95:96]/.04],dim=1)
+     if env.known_controller_mode=='masked':context=torch.zeros_like(context)
+     x=torch.cat([x,context],dim=1)
+    pred=encoder(x)
     states=[s.to(player.device) for s in p['rnn']];obs=legal_policy_observation(p['obs'].to(player.device))
     ms=frozen_actor_mean(player,obs,pred,states);mt=frozen_actor_mean(player,obs,label,states)
     def target(mu):

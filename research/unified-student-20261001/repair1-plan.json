@@ -1,0 +1,37 @@
+{
+  "name": "repair1-known-controller",
+  "parent": "runs/unified-student-20261001/S0-3200/step_003200.pth",
+  "parent_sha256": "d3009c417e0e56c513019fb56a673f9586a4ee25be2345c303e7db758ac90055",
+  "branches": {
+    "SC-real-6400": "21 known controller fields observed",
+    "SC-masked-6400": "same 21 fields masked to zero; exact initial S0 function"
+  },
+  "start_update": 3200,
+  "end_update": 6400,
+  "additional_updates_each": 3200,
+  "interactions_each": 3276800,
+  "save_at": [
+    3600,
+    4000,
+    4800,
+    6400
+  ],
+  "envs": 256,
+  "rollout_steps": 4,
+  "seed": 61001,
+  "lr": 0.0003,
+  "loss": "latent MSE unchanged",
+  "teacher_fraction": 0,
+  "optimizer_rng": "restored same parent, zero pad added column Adam moments",
+  "primary_factor": "known issued target20 plus external command1",
+  "input_authority": "issued initialization commands and exact known recurrence only; no current simulator targets fed back",
+  "expected_gpu_hours_each": 0.55,
+  "max_gpu_hours_each": 1.5,
+  "trigger": "S0 S2 strict [10,12,21,14]/32 and S5 [9,27,29,12]/32 at3200; initialq differs from issuedreset targets; proven commandmemory exact",
+  "decision": "Compare matched budget development S2/S5/F and teacher-history errors; continue improving routes to12800 if warranted, do not infer convergence from isolated worstsourcefail",
+  "repair_count": 1,
+  "preflight_evidence": [
+    "controller-preflight-pair-audit.json",
+    "controller-parent3200-audit.json"
+  ]
+}

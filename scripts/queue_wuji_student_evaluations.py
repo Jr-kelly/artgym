@@ -12,11 +12,13 @@ def main():
   jobs=R/'runs/unified-student-20261001/jobs';active=[json.loads(p.read_text()) for p in jobs.glob('*/identity.json') if not (p.parent/'result.json').exists()]
   if len(active)>=4 or any(x['gpu']==a.gpu and not x.get('local') for x in active):time.sleep(15);continue
   available=[]
+  active_names={j['name'] for j in active}
   for e in pending:
    receipt=jobs/e['name']/'result.json'
    if receipt.exists():
     assert json.loads(receipt.read_text())['exit_code']==0, 'Previously failed evaluation requires explicit repair'
     available.append(e);continue
+   if e['name'] in active_names:continue
    path=REMOTE+'/'+e['checkpoint']
    ready=subprocess.call(SSH+['test -f '+path+' && test -f '+path.replace('.pth','.sha256')],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)==0
    if not ready:continue

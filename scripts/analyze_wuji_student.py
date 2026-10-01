@@ -34,10 +34,13 @@ def analyze(directory,model):
   drift=np.linalg.norm(t['object_pos']-t['init_object_pos'],axis=-1)
   assert np.allclose(drift,t['drift'],atol=2e-6)
   q=t['object_rot'].astype(np.float64);q0=t['init_object_rot'].astype(np.float64)
-  vector=-q[...,:3]*0 # quaternion q * conjugate(q0)
+  # Quaternion q * conjugate(q0), independently in float64.
   vector=-q[...,3,None]*q0[...,:3]+q0[...,3,None]*q[...,:3]-np.cross(q[...,:3],q0[...,:3])
   angle=2*np.arcsin(np.clip(np.linalg.norm(vector,axis=-1),0,1))
-  assert np.allclose(angle,t['rotation'],atol=2e-6)
+  assert np.allclose(angle[valid],t['rotation'][valid],atol=2e-6)
+  assert np.array_equal(angle<.25,t['rotation']<.25), 'Independent rotation threshold disagreement'
+  # Inactive post-terminal spins near pi magnify float32 asin rounding;
+  # validate their threshold classification, not a uniform angle tolerance.
  tracehash=hashlib.sha256((directory/'trace.npz').read_bytes()).hexdigest();rows=[];trials=[]
  for s in range(4):
   ids=np.arange(s*n,(s+1)*n);k=int(success[ids].sum());kb=int(body[ids].sum())
