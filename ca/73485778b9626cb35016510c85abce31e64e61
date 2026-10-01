@@ -1,0 +1,246 @@
+scripts/verify_wuji_student_checkpoint.py
+  s_13dba2dc3e07f8::t_0ac3a77447caa7 13-14,25
+scripts/audit_wuji_student_final.py
+  s_13dba2dc3e07f8::t_3d06ea47837dad 35-43,45
+scripts/verify_wuji_student_public.py
+  s_13dba2dc3e07f8::t_21131287439db9 1-119
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "ca73485778b9626cb35016510c85abce31e64e61",
+  "prompts": {},
+  "sessions": {
+    "s_13dba2dc3e07f8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f10b-dd7b-7be1-bb17-993f50d34df5",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.output_tokens": "1251570",
+        "tlab.session_started_at": "2026-10-01T10:36:21Z",
+        "tlab.token_usage.input_tokens": "6007735",
+        "tlab.token_usage.cache_read_tokens": "272614571",
+        "tlab.token_usage.cache_creation_tokens": "0"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/unified-student-20261001/SA-12800-finite-cpu-restore.json",
+      "additions": {
+        "human": 18
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/SA-22400-finite-cpu-restore.json",
+      "additions": {
+        "human": 19
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/SA-22400-sequence-input-audit.json",
+      "additions": {
+        "human": 13
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/SA-real-22400-development-analysis/report.json",
+      "additions": {
+        "human": 903
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/SA-real-22400-development-analysis/trials.csv",
+      "additions": {
+        "human": 769
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/SC-real-22400-development-analysis/report.json",
+      "additions": {
+        "human": 903
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/SC-real-22400-development-analysis/trials.csv",
+      "additions": {
+        "human": 769
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/action-control-paired22400.json",
+      "additions": {
+        "human": 297
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/extension22400-stages/report.json",
+      "additions": {
+        "human": 920
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/extension22400-stages/trials.csv",
+      "additions": {
+        "human": 769
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/upload-source-history.json",
+      "additions": {
+        "human": 9
+      }
+    },
+    {
+      "new_path": "scripts/verify_wuji_student_public.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 119
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "README.md",
+      "new_path": "README.md",
+      "additions": {
+        "human": 2
+      },
+      "deletions": {
+        "human": 2
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 13
+      },
+      "deletions": {
+        "human": 65
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/DECISIONS.jsonl",
+      "new_path": "research/unified-student-20261001/DECISIONS.jsonl",
+      "additions": {
+        "human": 25
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/HANDOFF.md",
+      "new_path": "research/unified-student-20261001/HANDOFF.md",
+      "additions": {
+        "human": 13
+      },
+      "deletions": {
+        "human": 65
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/README.md",
+      "new_path": "research/unified-student-20261001/README.md",
+      "additions": {
+        "human": 4
+      },
+      "deletions": {
+        "human": 2
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/RESEARCH_NOTES.md",
+      "new_path": "research/unified-student-20261001/RESEARCH_NOTES.md",
+      "additions": {
+        "human": 4
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/STATE.json",
+      "new_path": "research/unified-student-20261001/STATE.json",
+      "additions": {
+        "human": 13
+      },
+      "deletions": {
+        "human": 65
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/development-ranking.json",
+      "new_path": "research/unified-student-20261001/development-ranking.json",
+      "additions": {
+        "human": 168
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/figures/source-learning-curves.svg",
+      "new_path": "research/unified-student-20261001/figures/source-learning-curves.svg",
+      "additions": {
+        "human": 1376
+      },
+      "deletions": {
+        "human": 1328
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/fit-versus-closedloop.csv",
+      "new_path": "research/unified-student-20261001/fit-versus-closedloop.csv",
+      "additions": {
+        "human": 16
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/fit-versus-closedloop.json",
+      "new_path": "research/unified-student-20261001/fit-versus-closedloop.json",
+      "additions": {
+        "human": 304
+      }
+    },
+    {
+      "old_path": "scripts/audit_wuji_student_final.py",
+      "new_path": "scripts/audit_wuji_student_final.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 10
+          }
+        ]
+      },
+      "deletions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 1
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "scripts/verify_wuji_student_checkpoint.py",
+      "new_path": "scripts/verify_wuji_student_checkpoint.py",
+      "additions": {
+        "human": 1,
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 3
+          }
+        ]
+      },
+      "deletions": {
+        "human": 1,
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 1
+          }
+        ]
+      }
+    }
+  ]
+}
