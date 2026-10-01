@@ -13,8 +13,8 @@
   "max_concurrent_gpus": 4,
   "reserved_final_gpu_hours": 6,
   "reserved_final_seconds": 5400,
-  "gpu_hours": 19.978961930937242,
-  "phase": "SC/SA fixed-method extension to51200 active; bestSA44800; finalunopened",
+  "gpu_hours": 20.173222558763296,
+  "phase": "SC/SA fixed-method51200 nearing completion; bestSA48000; finalunopened",
   "active_jobs": [
     {
       "name": "SC-real-51200",
@@ -141,14 +141,16 @@
   "goal_sha256": "c7e9c244d11824a5d230cfb24ac9207e78fcb1965a376bff6a38f03c084c4a3f",
   "existing_student_run_found": false,
   "prior_session": "Previous user turn performed only read-only attachment/connectivity check; no studentgoal/training/worktree existed. Prior teacher round closed.",
-  "next": "Complete48000/51200 and reassess continuation from multi-metric evidence; keep newbestSA44800",
+  "next": "Complete51200 and choose nextstage from multiplecheckpoint evidence; newbestSA48000 remains provisional",
   "last_event": {
-    "utc": "2026-10-01T14:54:35.358660+00:00",
-    "event": "phase_fit41600_44800_completed",
-    "evidence": "research/unified-student-20261001/phase-fit41600-44800",
-    "summary": "SA41600to44800 fixed-teacher-history S2 opening targetMSE decreases source0 4.214e-6to1.401e-6, source1 2.941e-6to0.758e-6, source2 0.530e-6to0.138e-6; source3 slightly worsens2.668e-6to2.862e-6. AllSA44800 S2 failures and allbutone S5 failures retainfullbody and missopeningholds; nofullbody-stable closing failures. This supports continued fitting and localized opening gaps, not a causality or convergence claim.",
-    "max_cpu_gpu_relative_difference": 0.002946467584092739,
-    "next": "Complete48000/51200 and reassess continuation from multi-metric evidence; keep newbestSA44800"
+    "utc": "2026-10-01T15:29:13.437866+00:00",
+    "event": "SA48000_restore_and_wholeplayer_audits_passed",
+    "checkpoint_sha256": "ad5c40bfbc170e028c8a98f35b67cedd94c4085ec6c10d22257f1466cc73eb82",
+    "evidence": [
+      "research/unified-student-20261001/SA-48000-finite-cpu-restore.json",
+      "research/unified-student-20261001/SA-48000-sequence-input-audit.json"
+    ],
+    "next": "Complete51200 and choose nextstage from multiplecheckpoint evidence; newbestSA48000 remains provisional"
   },
   "research_notes": "research/unified-student-20261001/RESEARCH_NOTES.md",
   "current_plan": "research/unified-student-20261001/fixed-method-extension51200-plan.json",
@@ -163,25 +165,28 @@
     "extension51200-SA-evaluation-queue.json": 1
   },
   "provisional_best_development": {
-    "name": "SA-real-44800",
-    "checkpoint": "runs/unified-student-20261001/SA-real-51200/step_044800.pth",
-    "sha256": "412bac607b2c40458bdaaf50c790da8d04de0321ed8ee9e86e162fdf150cee2d",
+    "name": "SA-real-48000",
+    "checkpoint": "runs/unified-student-20261001/SA-real-51200/step_048000.pth",
+    "sha256": "ad5c40bfbc170e028c8a98f35b67cedd94c4085ec6c10d22257f1466cc73eb82",
     "worst_strict_count": 23,
+    "worst_stage_hold": 0.75,
     "n": 32,
     "full_gate": false,
     "final_selected": false
   },
   "delivery_progress": {
-    "last_pushed_commit": "bcf9144",
+    "last_pushed_commit": "e4282e2471559c2c147fa00a43715b0c9cafffed",
     "release_id": 400860039,
     "tag": "wuji-unified-student-20261001-v1",
     "draft": true,
-    "uploaded_assets": 10,
+    "uploaded_assets": 12,
     "upload_receipts": [
       "research/unified-student-20261001/upload-development-first3.json",
       "research/unified-student-20261001/upload-source-history.json",
       "research/unified-student-20261001/upload-through25600.json",
-      "research/unified-student-20261001/upload-through38400.json"
+      "research/unified-student-20261001/upload-through38400.json",
+      "research/unified-student-20261001/upload-paired-teacher-video.json",
+      "research/unified-student-20261001/upload-runtime-provenance44800.json"
     ],
     "teacher_paired_video": "delivery/unified-student-20261001/teacher-paired-four-sources.mp4",
     "student_video_pending": true,
