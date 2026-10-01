@@ -58,7 +58,7 @@ def main():
         writer = csv.DictWriter(stream, fieldnames=list(output[0]))
         writer.writeheader()
         writer.writerows(output)
-    print(json.dumps(dict(cells=len(output), latest=[r for r in output if r['model'] == 'SA-real-28800'])))
+    print(json.dumps(dict(cells=len(output), models=len({r['model'] for r in output}))))
 
 
 if __name__ == '__main__':

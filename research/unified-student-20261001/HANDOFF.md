@@ -13,7 +13,7 @@
   "max_concurrent_gpus": 4,
   "reserved_final_gpu_hours": 6,
   "reserved_final_seconds": 5400,
-  "gpu_hours": 14.871383368902737,
+  "gpu_hours": 15.062792928218844,
   "phase": "Fixed-method SC/SA25600to38400; bestSA28800; finalunopened",
   "active_jobs": [
     {
@@ -131,41 +131,6 @@
       },
       "pinned_source_matches_local": true,
       "remote_shell": "cd /tmp/artgym-student-20261001/pins/SA-real-38400 && CUDA_VISIBLE_DEVICES=0 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 14000 /tmp/wuji-student-runtime/bin/python -m scripts.train_wuji_unified_student --teacher runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth --output runs/unified-student-20261001/SA-real-38400 --kind SC --controller-mode real --updates 38400 --resume runs/unified-student-20261001/SA-real-25600/step_025600.pth --save-at 28800 32000 35200 38400 --envs 256 --rollout-steps 4 --seed 61001 --lr .0003 --warm-updates 400 --target-loss-weight 25 --target-loss-scale .04"
-    },
-    {
-      "name": "SC-real-32000-development",
-      "gpu": 3,
-      "seconds": 1800,
-      "command": [
-        "/tmp/wuji-student-runtime/bin/python",
-        "-m",
-        "scripts.evaluate_wuji_student_batch",
-        "--teacher",
-        "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
-        "--models",
-        "SC-real-32000=runs/unified-student-20261001/SC-real-38400/step_032000.pth",
-        "--states",
-        "research/unified-student-20261001/data/development-all.npy",
-        "--output",
-        "runs/unified-student-20261001/SC-real-32000-development"
-      ],
-      "start_utc": "2026-10-01T12:26:22.498845+00:00",
-      "local_pid": 2132599,
-      "remote_root": "/tmp/artgym-student-20261001",
-      "final": false,
-      "local": false,
-      "resource_check": "0, 2863\n1, 0\n2, 2865\n3, 0\n",
-      "local_source_sha256": "30ce117550123a11201f118602e6f80e845fe1d5970c9c3af88381de94f2566b",
-      "pinned_source_sha256": "8c323d1fbbda9698ded3c7e028fa52656119efcf21755dc24c424b2526682ff0",
-      "selected_source_sha256": {
-        "scripts/evaluate_wuji_recovery.py": "9feaaac6e172ba6505277f2ffbaf9e3d2cbaa25dcdac52df1a14087de36d3ab5",
-        "scripts/train_wuji_unified_student.py": "9e3932aa0c848728ec54c81ef28d779e45c1f6ba35751554e9b4403c4f846bf9",
-        "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
-        "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
-        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
-      },
-      "pinned_source_matches_local": false,
-      "remote_shell": "cd /tmp/artgym-student-20261001/pins/SC-real-32000-development && CUDA_VISIBLE_DEVICES=3 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 1800 /tmp/wuji-student-runtime/bin/python -m scripts.evaluate_wuji_student_batch --teacher runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth --models SC-real-32000=runs/unified-student-20261001/SC-real-38400/step_032000.pth --states research/unified-student-20261001/data/development-all.npy --output runs/unified-student-20261001/SC-real-32000-development"
     }
   ],
   "base_sha": "56d4dcc66e805298cb5f4c365a55f9c14df36b37",
@@ -176,25 +141,14 @@
   "goal_sha256": "c7e9c244d11824a5d230cfb24ac9207e78fcb1965a376bff6a38f03c084c4a3f",
   "existing_student_run_found": false,
   "prior_session": "Previous user turn performed only read-only attachment/connectivity check; no studentgoal/training/worktree existed. Prior teacher round closed.",
-  "next": "Poll status; do not duplicate job",
+  "next": "Retain snapshots for final supplemental source archive; active jobs unchanged",
   "last_event": {
-    "utc": "2026-10-01T12:26:47.716458+00:00",
-    "event": "owned_remote_process_snapshot",
-    "checked_utc": "2026-10-01T12:26:46.682124+00:00",
-    "processes": [
-      "110963, /tmp/wuji-student-runtime/bin/python, 2854 MiB",
-      "110817, /tmp/wuji-student-runtime/bin/python, 2856 MiB",
-      "170370, /tmp/wuji-student-runtime/bin/python, 2030 MiB",
-      " 110791 Thu Oct  1 19:26:24 2026 timeout --signal=TERM --kill-after=30 14000 /tmp/wuji-student-runtime/bin/python -m scripts.train_wuji_unified_student --teacher runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth --output runs/unified-student-20261001/SC-real-38400 --kind SC --controller-mode real --updates 38400 --resume runs/unified-student-20261001/SC-real-25600/step_025600.pth --save-at 28800 32000 35200 38400 --envs 256 --rollout-steps 4 --seed 61001 --lr .0003 --warm-updates 400 --target-loss-weight 0 --target-loss-scale .04",
-      " 110817 Thu Oct  1 19:26:24 2026 /tmp/wuji-student-runtime/bin/python -m scripts.train_wuji_unified_student --teacher runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth --output runs/unified-student-20261001/SC-real-38400 --kind SC --controller-mode real --updates 38400 --resume runs/unified-student-20261001/SC-real-25600/step_025600.pth --save-at 28800 32000 35200 38400 --envs 256 --rollout-steps 4 --seed 61001 --lr .0003 --warm-updates 400 --target-loss-weight 0 --target-loss-scale .04",
-      " 110946 Thu Oct  1 19:26:25 2026 timeout --signal=TERM --kill-after=30 14000 /tmp/wuji-student-runtime/bin/python -m scripts.train_wuji_unified_student --teacher runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth --output runs/unified-student-20261001/SA-real-38400 --kind SC --controller-mode real --updates 38400 --resume runs/unified-student-20261001/SA-real-25600/step_025600.pth --save-at 28800 32000 35200 38400 --envs 256 --rollout-steps 4 --seed 61001 --lr .0003 --warm-updates 400 --target-loss-weight 25 --target-loss-scale .04",
-      " 110963 Thu Oct  1 19:26:25 2026 /tmp/wuji-student-runtime/bin/python -m scripts.train_wuji_unified_student --teacher runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth --output runs/unified-student-20261001/SA-real-38400 --kind SC --controller-mode real --updates 38400 --resume runs/unified-student-20261001/SA-real-25600/step_025600.pth --save-at 28800 32000 35200 38400 --envs 256 --rollout-steps 4 --seed 61001 --lr .0003 --warm-updates 400 --target-loss-weight 25 --target-loss-scale .04",
-      " 170352 Thu Oct  1 20:26:24 2026 timeout --signal=TERM --kill-after=30 1800 /tmp/wuji-student-runtime/bin/python -m scripts.evaluate_wuji_student_batch --teacher runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth --models SC-real-32000=runs/unified-student-20261001/SC-real-38400/step_032000.pth --states research/unified-student-20261001/data/development-all.npy --output runs/unified-student-20261001/SC-real-32000-development",
-      " 170369 Thu Oct  1 20:26:24 2026 /tmp/wuji-student-runtime/bin/python -m scripts.evaluate_wuji_student_batch --teacher runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth --models SC-real-32000=runs/unified-student-20261001/SC-real-38400/step_032000.pth --states research/unified-student-20261001/data/development-all.npy --output runs/unified-student-20261001/SC-real-32000-development",
-      " 170370 Thu Oct  1 20:26:24 2026 /tmp/wuji-student-runtime/bin/python -m scripts.evaluate_wuji_recovery --checkpoint runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth --task wuji_multigrasp --hand wuji_paper_official_actuator --object knife_wuji_bridge3_20260922 --seed 2026093031 --initial-states research/unified-student-20261001/data/development-all.npy --output runs/unified-student-20261001/SC-real-32000-development/SC-real-32000-S2 --stage-seconds 2 --protocol S --unified-student runs/unified-student-20261001/SC-real-38400/step_032000.pth --holdout-probes runs/unified-student-20261001/teacher-legal-S2/latent-probes.pth runs/unified-student-20261001/teacher-legal-S5/latent-probes.pth"
-    ],
-    "evidence": "research/unified-student-20261001/resources.jsonl",
-    "next": "Reverify identities before any stop; noPIDassumedcurrent"
+    "utc": "2026-10-01T12:39:18.581413+00:00",
+    "event": "completed_job_source_pins_recovered",
+    "evidence": "research/unified-student-20261001/source-pins-through32000-with-local.json",
+    "verified": 42,
+    "newly_copied": 3,
+    "next": "Retain snapshots for final supplemental source archive; active jobs unchanged"
   },
   "research_notes": "research/unified-student-20261001/RESEARCH_NOTES.md",
   "current_plan": "research/unified-student-20261001/fixed-method-extension38400-plan.json",
