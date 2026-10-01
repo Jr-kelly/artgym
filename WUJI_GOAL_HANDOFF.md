@@ -13,7 +13,7 @@
   "max_concurrent_gpus": 4,
   "reserved_final_gpu_hours": 6,
   "reserved_final_seconds": 5400,
-  "gpu_hours": 15.115006510019306,
+  "gpu_hours": 15.306664924025537,
   "phase": "Fixed-method SC/SA25600to38400; bestSA28800; finalunopened",
   "active_jobs": [
     {
@@ -141,20 +141,14 @@
   "goal_sha256": "c7e9c244d11824a5d230cfb24ac9207e78fcb1965a376bff6a38f03c084c4a3f",
   "existing_student_run_found": false,
   "prior_session": "Previous user turn performed only read-only attachment/connectivity check; no studentgoal/training/worktree existed. Prior teacher round closed.",
-  "next": "Continue unchanged training and formal evaluations; retain both replay conditions separately",
+  "next": "Complete38400 fixed endpoints; assess multi-metric marginal value before further training or final freeze",
   "last_event": {
-    "utc": "2026-10-01T12:49:46.907812+00:00",
-    "event": "SA28800_uninstrumented_repeat_exact",
-    "evidence": "research/unified-student-20261001/SA-28800-uninstrumented-repeat-audit.json",
-    "all_physical_and_action_arrays_match_original": true,
-    "strict_counts": [
-      30,
-      19,
-      28,
-      20
-    ],
-    "conclusion": "Uninstrumented original is exactly reproducible in this repeat; instrumented condition differs. Root numerical cause remains unresolved; do not attribute full diagnostic labels to original.",
-    "next": "Continue unchanged training and formal evaluations; retain both replay conditions separately"
+    "utc": "2026-10-01T13:09:02.366539+00:00",
+    "event": "matched35200_assessed",
+    "evidence": "research/unified-student-20261001/action-control-paired35200.json",
+    "best": "SA-real-28800",
+    "student_confirmation_eligible": false,
+    "next": "Complete38400 fixed endpoints; assess multi-metric marginal value before further training or final freeze"
   },
   "research_notes": "research/unified-student-20261001/RESEARCH_NOTES.md",
   "current_plan": "research/unified-student-20261001/fixed-method-extension38400-plan.json",
@@ -178,7 +172,7 @@
     "final_selected": false
   },
   "delivery_progress": {
-    "last_pushed_commit": "2a3bc5e",
+    "last_pushed_commit": "ecedb18",
     "release_id": 400860039,
     "tag": "wuji-unified-student-20261001-v1",
     "draft": true,
