@@ -6,6 +6,8 @@ Development-best remains action-aware SA28800, with S2 `[30,19,28,20]/32`, S5 `[
 
 The38400 endpoints both regress: SA S2 `[27,7,24,23]`, S5 `[29,26,27,17]`; SC S2 `[32,7,27,18]`, S5 `[23,24,25,18]`, all out of32. Neither meets the full or one-episode-boundary gate. Both endpoints pass finite Adam/RNG restore and whole-player input audits. The methods now continue unchanged to51200, restoring their own38400 state. The preceding35200 source1 S2 improvement and continuing source0/2 fitting improvements justify this bounded extra window; the regression is not labelled convergence. [Matched endpoint evidence](action-control-paired38400.json), [failure decomposition](development-failure-decomposition.csv), and [per-source fitting curves](figures/source-fitting-curves.png) retain the distinction between fit, endpoint holding and body stability.
 
+At41600, SC S2 `[24,16,28,21]`, S5 `[25,30,9,22]`; SA S2 `[8,3,28,26]`, S5 `[1,0,14,26]`, all /32. SA source3 improves while0/1 regress; no confirmation trigger and no change of best model. [Original-trace margins](raw-margins28800-41600.json) distinguish body-stable2–5mm opening misses from body failures; the2mm criterion is unchanged.
+
 SA28800 has an exact uninstrumented repeat of its original S2 action and physical trajectories. Its after-action diagnostic replay changes the first action and later outcomes, so those labels cannot be attributed to the original episodes. Both conditions are retained in the [replay audit](SA-28800-uninstrumented-repeat-audit.json); no repeat enlarges the denominator. Earlier exact SA12800 and SC25600 diagnostic replays remain evidence for those particular trajectories.
 
 | Evidence | S2 strict per source | S5 strict per source | Body / scope |
