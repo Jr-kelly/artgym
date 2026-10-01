@@ -1,0 +1,36 @@
+{
+  "directory": "/tmp/wuji-student-restore-preflight-walh8l6i",
+  "checkpoint": {
+    "checkpoint": "runs/unified-student-20261001/SC-real-25600/step_025600.pth",
+    "sha256": "4008c4dc53ca5bc25a03276e19fef12a42e4d108866231ef6d7722ac41e6467b",
+    "saved_steps": 25600,
+    "next_steps": 25601,
+    "restored_next_update_identical": true,
+    "finite_encoder_and_optimizer": true,
+    "has_rng": [
+      "torch",
+      "cuda",
+      "numpy",
+      "python"
+    ],
+    "cpu_rng_draws_identical": true,
+    "cuda_rng_payloads": 1,
+    "cuda_rng_execution_tested": false,
+    "frozen_hash": "f8775c12963a51e1adc225b1fdd107df71eb0bc6b7e1291845ad410693361232",
+    "scope": "CPU restoration of encoder/Adam and Python/NumPy/Torch RNG; CUDA RNG payload validated but not executed by this CPU audit. Physics resumes with new declared episodes, not serialized PhysX"
+  },
+  "policy": {
+    "student_sha256": "4008c4dc53ca5bc25a03276e19fef12a42e4d108866231ef6d7722ac41e6467b",
+    "probes_sha256": "237e95fbb863017d95a3ca9811ed895b131d5c31194c6fa242ab0736963bca5d",
+    "snapshots": 30,
+    "simultaneous_histories": 32,
+    "states_per_history": 4,
+    "action_and_all_rnn_exact_invariance": true,
+    "actor_teacher_encoder_calls": 0,
+    "fixed_policy_parameter_id": 50.0,
+    "critic_receives_constant_normalized_dummy": true,
+    "frozen_hash_unchanged": true,
+    "scope": "CPU full get_action path on frozen nonconstant history snapshots, with recurrent state propagated from zero. No simulator or physical success claim; snapshots are not new independent trials."
+  },
+  "scope": "Local isolated-code/assets restoration smoke check; public downloaded artifact verification remains mandatory and pending."
+}

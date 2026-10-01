@@ -1,0 +1,34 @@
+[
+  {
+    "run": "teacher-official-S2",
+    "steps": 600,
+    "cpu_replay_max_target_difference_rad": 1.1682510375976562e-05,
+    "target_feedback": false,
+    "initialization": "declared reset commands from state20:40",
+    "scope": "CPU replay of actual GPU actions; separate same-device live audit still required"
+  },
+  {
+    "run": "teacher-official-S5",
+    "steps": 600,
+    "cpu_replay_max_target_difference_rad": 1.3828277587890625e-05,
+    "target_feedback": false,
+    "initialization": "declared reset commands from state20:40",
+    "scope": "CPU replay of actual GPU actions; separate same-device live audit still required"
+  },
+  {
+    "run": "S0-800-development/S0-800-S2",
+    "steps": 600,
+    "cpu_replay_max_target_difference_rad": 7.867813110351562e-06,
+    "target_feedback": false,
+    "initialization": "declared reset commands from state20:40",
+    "scope": "CPU replay of actual GPU actions; separate same-device live audit still required"
+  },
+  {
+    "run": "S0-800-development/S0-800-S5",
+    "steps": 600,
+    "cpu_replay_max_target_difference_rad": 1.1801719665527344e-05,
+    "target_feedback": false,
+    "initialization": "declared reset commands from state20:40",
+    "scope": "CPU replay of actual GPU actions; separate same-device live audit still required"
+  }
+]

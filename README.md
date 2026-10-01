@@ -9,22 +9,25 @@ This repository is the official implementation of **ArtManip: Category-Level Art
 ArtGym contains Isaac Gym environments and scripts for articulated-object grasping, manipulation, teacher training, student distillation, and simulation evaluation.
 
 <!-- WUJI_STUDENT_CURRENT -->
-## Wuji unified student — active, 2026-10-01
+## Wuji unified student — frozen results, 2026-10-01
 
-One student encoder is being trained against the fixed Eagg6100 actor for the existing knife and four nearby initial-state sources. **The student has not passed the full gate.** All counts below are development results, not final validation or hardware results.
+**One student can execute slider cycles, but does not meet the full strict-stability gate.** These are once-opened, independently rescored H200 final results, **128 episodes per source and protocol**; every table entry is out of128. They concern the existing simulated knife and three grasp clusters (nearby sources0/1, source2, source3), not hardware or unseen-grasp generalization.
 
-| Policy / evidence | S2 strict, sources 0/1/2/3 | S5 strict, sources 0/1/2/3 | Input conditions and remaining gap |
+| Policy | S2 strict, sources 0/1/2/3 | S5 strict, sources 0/1/2/3 | Minimum S2 / S5 body stability |
 |---|---|---|---|
-| Fixed Eagg6100 teacher, 32/source | 32,32,32,24 /32 | 32,32,32,29 /32 | Runtime privileged object state; all S body32/32 |
-| Earlier student S0-3200, same initial states | 10,12,21,14 /32 | 9,27,29,12 /32 | Calibrated initial object poses/geometry plus q/action history, FK and external commands; strict holding and source1 stability remain inadequate |
-| Current best SA-51200, same initial states | 31,30,28,24 /32 | 31,31,30,25 /32 | Calibrated initial state, known controller memory and executed-target loss; worst strict24/32, minimum S body31/32; full gate still fails |
-| Initial-information-only C1, 3200 updates | 0,0,0,0 /32 | 0,0,0,0 /32 | Low-cost baseline; this result does not rule out every constant-latent method |
+| Eagg6100 teacher | 128,127,126,105 | 125,128,127,112 | 125 / 125 |
+| SA-51200 selected student | 126,120,117,93 | 126,121,122,97 | 121 / 124 |
+| SA-70400 fixed endpoint | 114,108,113,94 | 106,97,83,84 | 120 / 122 |
+| SC-51200 equal-update latent control | 120,119,115,77 | 115,123,117,62 | 124 / 124 |
+| C1 initial-only reference | 0,0,0,0 | 0,0,0,0 | 0 / 0 |
 
-The executed-target and latent-only methods now continue equally to70400 updates in the final smaller window. SA51200 is the new development-best candidate with worst strict24/32; the maximum full-gate deficit has narrowed to two episodes; both methods have checkpoint-dependent gains and regressions. The masked-controller control completed12800; its benefits vary by checkpoint. Original checkpoints and failures are retained. S2/S5 commands follow a fixed clock; the separate F benchmark uses a truth-based arrival scheduler to issue external commands and does not establish autonomous sensor-free arrival detection. Teacher confirmation also retains a source0 S5 body boundary (60/64).
+The selected student's worst strict result is source3 S2 **93/128 (72.7%)**, with body stability121/128 (94.5%); source3 S5 is97/128 (75.8%). Sources0/1/2 pass their S gates. F completes a cycle in[128,128,128,126]/128, while full40-second body stability is[124,106,128,110]/128. Cycle completion is distinct from stability.
 
-[Current report and method](research/unified-student-20261001/README.md) · [Input audit](research/unified-student-20261001/INPUTS.md) · [Learning curves](research/unified-student-20261001/figures/source-learning-curves.png) · [Durable state](research/unified-student-20261001/STATE.json)
+The student requires calibrated initial object geometry/poses, joint and action history, realizable hand FK, known controller targets and external commands. It does not read runtime object state or call the teacher encoder. The F benchmark's external command generator uses true slider arrival; sensor-free arrival detection and real calibration are unverified.
 
-An independent final evaluation and Release are pending; previous teacher releases remain intact.
+At the same51200 optimizer counter, executed-target supervision improves7/8 strict source/protocol cells and worst strict93/128 versus62/128 for latent-only control, with body/F tradeoffs. Development gains vary by checkpoint; there is no second optimization seed or convergence claim. Both continuous branches completed70400; the chosen weight was fixed before final access.
+
+[Final report, intervals and paired transitions](research/unified-student-20261001/FINAL_REPORT.md) · [Method and limitations](research/unified-student-20261001/README.md) · [Input audit](research/unified-student-20261001/INPUTS.md) · [Reproduce](research/unified-student-20261001/REPRODUCE.md) · [Release](https://github.com/Jr-kelly/artgym/releases/tag/wuji-unified-student-20261001-v1) · [Teacher/student video](https://github.com/Jr-kelly/artgym/releases/download/wuji-unified-student-20261001-v1/teacher-student-fixed-comparison.mp4)
 <!-- /WUJI_STUDENT_CURRENT -->
 
 ## Clone

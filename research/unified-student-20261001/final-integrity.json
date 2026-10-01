@@ -1,0 +1,100 @@
+{
+  "passed": true,
+  "freeze_sha256": "b2ec866146bd958501e41713f9db172f65edf079cafbb0f6267fe390b87fba80",
+  "models": 5,
+  "cells": 60,
+  "independently_scored_episodes": 7680,
+  "evidence": [
+    {
+      "model": "teacher",
+      "protocol": "S2",
+      "directory": "runs/unified-student-20261001/final-teacher/teacher-S2",
+      "trace_sha256": "83fc6f7552557444380669cca80277662497b03b9633bc851367f1d5ab689cfd"
+    },
+    {
+      "model": "teacher",
+      "protocol": "S5",
+      "directory": "runs/unified-student-20261001/final-teacher/teacher-S5",
+      "trace_sha256": "20c02d374a7f1640f90af222a1661ee44b32db319b8192a7bcaabd5edf60d034"
+    },
+    {
+      "model": "teacher",
+      "protocol": "F",
+      "directory": "runs/unified-student-20261001/final-teacher/teacher-F",
+      "trace_sha256": "f3ba97b5fff05ff54d65cf13173333fb04adb5a6424077d6e339391c3d9bb877"
+    },
+    {
+      "model": "SA-real-51200",
+      "protocol": "S2",
+      "directory": "runs/unified-student-20261001/final-SA-real-51200/SA-real-51200-S2",
+      "trace_sha256": "dade0759fbcc7959276f84a6ec137a2980577bdcf6a7faf53e5485f1667b7ead"
+    },
+    {
+      "model": "SA-real-51200",
+      "protocol": "S5",
+      "directory": "runs/unified-student-20261001/final-SA-real-51200/SA-real-51200-S5",
+      "trace_sha256": "5ce3f645ea94b898235e615cc149dc81cd2c6c782f22b56271022d5fee1bc615"
+    },
+    {
+      "model": "SA-real-51200",
+      "protocol": "F",
+      "directory": "runs/unified-student-20261001/final-SA-real-51200/SA-real-51200-F",
+      "trace_sha256": "751ef2bbc2b6cda962164227dfb4b4f4d4c0c114ad67a6c6a91b9c57ad70548c"
+    },
+    {
+      "model": "SA-real-70400",
+      "protocol": "S2",
+      "directory": "runs/unified-student-20261001/final-SA-real-70400/SA-real-70400-S2",
+      "trace_sha256": "4b4a1ce7b99078254699cc754f548cc33698a66d4ad4e1a97c51168b6c0f6cf5"
+    },
+    {
+      "model": "SA-real-70400",
+      "protocol": "S5",
+      "directory": "runs/unified-student-20261001/final-SA-real-70400/SA-real-70400-S5",
+      "trace_sha256": "6e95146f4ea53db9d7103fe4ac94e9672f2eb83cba30a19e1c4db6eec8328ed6"
+    },
+    {
+      "model": "SA-real-70400",
+      "protocol": "F",
+      "directory": "runs/unified-student-20261001/final-SA-real-70400/SA-real-70400-F",
+      "trace_sha256": "3b83e7c84729cb942bc0036297e1205d151d9afe98ec9dd38a547ee8161e0673"
+    },
+    {
+      "model": "SC-real-51200",
+      "protocol": "S2",
+      "directory": "runs/unified-student-20261001/final-SC-real-51200/SC-real-51200-S2",
+      "trace_sha256": "9c70bb046750a36d6e74ef8db6b43f0339b40f98489fbe2c3eb4e45fadf79293"
+    },
+    {
+      "model": "SC-real-51200",
+      "protocol": "S5",
+      "directory": "runs/unified-student-20261001/final-SC-real-51200/SC-real-51200-S5",
+      "trace_sha256": "a90c271b236aed0302b8e74bb5e17eeefcbe2c0fc596cc031ff6fe0a16621796"
+    },
+    {
+      "model": "SC-real-51200",
+      "protocol": "F",
+      "directory": "runs/unified-student-20261001/final-SC-real-51200/SC-real-51200-F",
+      "trace_sha256": "27a7d5415b952b861c5a137943fc2db3da4d4ac642721557a58a598cf2d335cd"
+    },
+    {
+      "model": "C1-3200",
+      "protocol": "S2",
+      "directory": "runs/unified-student-20261001/final-C1-3200/C1-3200-S2",
+      "trace_sha256": "99fbbaa3c1ef3a92d8a2945e4ac7cf0d4d7a4ff7d47b3ea09dd262ef11dad3eb"
+    },
+    {
+      "model": "C1-3200",
+      "protocol": "S5",
+      "directory": "runs/unified-student-20261001/final-C1-3200/C1-3200-S5",
+      "trace_sha256": "e498702607ca8df33d5b7de45f324183928e09c93865e132a1661c622f35f703"
+    },
+    {
+      "model": "C1-3200",
+      "protocol": "F",
+      "directory": "runs/unified-student-20261001/final-C1-3200/C1-3200-F",
+      "trace_sha256": "81d107a0979da994914f72c6739f0519c3b96d7d6bd1a0d5463363e07478e98c"
+    }
+  ],
+  "scope": "Coverage, immutable identities, conditions and unfiltered per-episode scoring verified. Capability gates are reported separately; repeated protocols share initial states."
+}

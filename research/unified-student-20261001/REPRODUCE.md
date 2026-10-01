@@ -170,3 +170,37 @@ rescores every displayed result, labels actual success/failure, verifies all600
 frames, and creates the paired comparison. Failed columns are retained.
 Initial object pose calibration and a real slider-sensing command generator
 have not been established on hardware; no video here is a hardware experiment.
+
+## Frozen primary release bundle
+
+The frozen primary is `SA-real-51200`. Download
+`student-primary-SA51200.tar.gz` from the separate student Release and restore
+into a new directory. It includes the teacher actor, selected student encoder,
+Adam/RNG, fixed assets/configuration, legal inference fixture and frozen reports.
+The shared teacher file is needed for the actor; its privileged encoder is not
+called by the student behavior path.
+
+```bash
+python3 -m scripts.restore_wuji_unified student-primary-SA51200.tar.gz --output RESTORED_ROOT
+cd RESTORED_ROOT
+CUDA_VISIBLE_DEVICES='' "$WUJI_PYTHON" -m scripts.audit_wuji_student_inference \
+  --student runs/unified-student-20261001/SA-real-51200/step_051200.pth \
+  --teacher runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth \
+  --probes runs/unified-student-20261001/SC-25600-S5-diagnostic-after-action/latent-probes.pth \
+  --output restored-input-audit.json
+```
+
+The final cohort is closed. Recompute scores from the archived final traces;
+do not use those initial states for model development or reselection. The
+publication check uses `public-manifest.json` and records anonymous downloaded
+bytes, execution of downloaded code, encoder/Adam/RNG restoration, whole-player
+input invariance and every video frame in `public-verification.json`. This is
+restoration evidence, not an independent runtime implementation or new rollout.
+
+For large Release uploads, the retained delivery helper
+`research/unified-student-20261001/upload_streamed_release_assets.py` uses a
+streaming POST and streaming SHA256; the original `curl --data-binary` attempt
+on the 1.76 GB final trace archive exceeded local memory. The archive bytes were
+unchanged. `failure_video_layout.py` only increases the plot's bottom margin;
+its original layout is retained in the video-evidence archive. Neither delivery
+adjustment changes the frozen experiment source or scoring.

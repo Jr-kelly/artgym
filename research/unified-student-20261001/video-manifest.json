@@ -1,0 +1,105 @@
+{
+  "videos": [
+    {
+      "name": "teacher-paired-four-sources.mp4",
+      "frames": 600,
+      "duration_seconds": 20.0,
+      "dimensions": [
+        2048,
+        512
+      ],
+      "sha256": "6378ff540cd0ed7dbbbff3dce79acc5575f284936a3ac060c8ef8ad54121ca00"
+    },
+    {
+      "name": "student-four-sources.mp4",
+      "frames": 600,
+      "duration_seconds": 20.0,
+      "dimensions": [
+        2048,
+        512
+      ],
+      "sha256": "c9263d4b1735e99ec932c57230866d2313c56adc6a91fb20c793907f0921d38b"
+    },
+    {
+      "name": "teacher-student-fixed-comparison.mp4",
+      "frames": 600,
+      "duration_seconds": 20.0,
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "sha256": "11c91b1e31037c2f6c7674718517c0cac66174ec367f5d7b7e0f7d441a0ec02a"
+    },
+    {
+      "name": "student-original-failure-trace.mp4",
+      "frames": 600,
+      "duration_seconds": 20.0,
+      "dimensions": [
+        1200,
+        960
+      ],
+      "sha256": "8c2d79b181daae71df6385b339cebc95d06d48a2a0e32bb91ccb6665a73c107a"
+    }
+  ],
+  "rendered_rows": [
+    0,
+    32,
+    64,
+    96
+  ],
+  "rendered_student_strict": [
+    true,
+    true,
+    true,
+    false
+  ],
+  "rendered_student_body": [
+    true,
+    true,
+    true,
+    true
+  ],
+  "rendered_teacher_strict": [
+    true,
+    true,
+    true,
+    true
+  ],
+  "original_failure": {
+    "model": "SA-real-51200",
+    "checkpoint_sha256": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9",
+    "protocol": "S2",
+    "source": 0,
+    "trial": 23,
+    "initial_state_row": 23,
+    "cohort_sha256": "fff2f01e7abb7b21a09553a0741bd629f6a17cd5fe618f93ebeebd932bf650fe",
+    "trace_sha256": "834b4a09c981863400c643b71bb8e35cf4a4547629dcdc6248b5eabc0dd8711e",
+    "selection_rule": "first_failed_development_episode_sorted_S2_S5_source_trial",
+    "independent_trial": {
+      "model": "SA-real-51200",
+      "protocol": "S2",
+      "source": "0",
+      "trial": "23",
+      "success": "False",
+      "body_stable": "True",
+      "alive": "True",
+      "first_body_breach_sec": "20.0",
+      "endpoint_holds": "0111111111",
+      "cycles": "",
+      "cohort_sha256": "fff2f01e7abb7b21a09553a0741bd629f6a17cd5fe618f93ebeebd932bf650fe"
+    },
+    "scope": "Animated original H200 development trajectory, with no physics rerun and no new statistical sample. Not a camera rendering or hardware experiment.",
+    "video_verification": {
+      "decoded_frames": 600,
+      "duration_seconds": 20.0,
+      "dimensions": [
+        1200,
+        960
+      ],
+      "sha256": "8c2d79b181daae71df6385b339cebc95d06d48a2a0e32bb91ccb6665a73c107a"
+    }
+  },
+  "render_scope": "RTX4090 resimulation on four fixed development states; not primary H200 final samples or hardware.",
+  "layout_source": "research/unified-student-20261001/failure_video_layout.py",
+  "layout_source_sha256": "81a7b0acd0e3890cad8d8df63612de6507c91afed890727cbee6b97e40ceac36"
+}
