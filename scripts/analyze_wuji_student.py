@@ -69,7 +69,7 @@ def main():
    checks.append(dict(protocol=r['protocol'],source=r['source'],passed=cellpass,strict_drop=ref['rate']-r['rate'],body_drop=ref['body_rate']-r['body_rate']))
    ct=sorted([t for t in trials if t['model']==model and t['source']==r['source'] and t['protocol']==r['protocol']],key=lambda x:x['trial']);rt=sorted([t for t in trials if t['model']==a.teacher and t['source']==r['source'] and t['protocol']==r['protocol']],key=lambda x:x['trial'])
    assert len(ct)==len(rt)
-   pairs.append(dict(model=model,source=r['source'],protocol=r['protocol'],both_pass=sum(x['success'] and y['success'] for x,y in zip(ct,rt)),teacher_only=sum(not x['success'] and y['success'] for x,y in zip(ct,rt)),student_only=sum(x['success'] and not y['success'] for x,y in zip(ct,rt)),both_fail=sum(not x['success'] and not y['success'] for x,y in zip(ct,rt))))
+   pairs.append(dict(model=model,source=r['source'],protocol=r['protocol'],both_pass=sum(x['success'] and y['success'] for x,y in zip(ct,rt)),teacher_only=sum(not x['success'] and y['success'] for x,y in zip(ct,rt)),student_only=sum(x['success'] and not y['success'] for x,y in zip(ct,rt)),both_fail=sum(not x['success'] and not y['success'] for x,y in zip(ct,rt)),body_both_pass=sum(x['body_stable'] and y['body_stable'] for x,y in zip(ct,rt)),body_teacher_only=sum(not x['body_stable'] and y['body_stable'] for x,y in zip(ct,rt)),body_student_only=sum(x['body_stable'] and not y['body_stable'] for x,y in zip(ct,rt)),body_both_fail=sum(not x['body_stable'] and not y['body_stable'] for x,y in zip(ct,rt))))
   gates[model]=dict(complete_cells=len(checks)==12,passed=len(checks)==12 and all(x['passed'] for x in checks),checks=checks)
  clusters=[]
  for model,protocol in sorted(set((r['model'],r['protocol']) for r in rows)):
