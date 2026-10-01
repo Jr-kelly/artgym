@@ -30,11 +30,13 @@ def main():
     parser.add_argument('--unified-student', type=Path)
     parser.add_argument('--legal-public', action='store_true')
     parser.add_argument('--latent-probes', action='store_true')
+    parser.add_argument('--holdout-probes', nargs='*')
     parser.add_argument('--task', help='Explicit trained action/task variant; default follows teacher/student mode.')
     parser.add_argument('--hand', choices=['wuji_paper', 'wuji_paper_official_actuator'], default='wuji_paper')
     parser.add_argument('--object', default='knife_wuji_acquisition_precision', help='Explicit object and physics profile for this audit.')
     parser.add_argument('--initial-states', type=Path, required=True)
     parser.add_argument('--initial-state-rows', type=int, nargs='+')
+    parser.add_argument('--video-columns', type=int, default=3, choices=range(1,7))
     parser.add_argument('--video', action='store_true', help='Text-free grid for at most six explicitly chosen states.')
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--stage-seconds', type=float, choices=[2., 5.], required=True)
@@ -71,6 +73,9 @@ def main():
         from scripts.wuji_student_interface import load_artifact
         artifact = load_artifact(player, env, args.unified_student)
         assert artifact['teacher_sha256'] == hashlib.sha256(args.checkpoint.read_bytes()).hexdigest()
+        if args.holdout_probes:
+            from scripts.wuji_student_interface import score_holdout_probes
+            (args.output/'holdout-errors.json').write_text(json.dumps(score_holdout_probes(player,env,args.holdout_probes),indent=2))
     elif args.legal_public:
         from scripts.wuji_student_interface import install_legal_public
         install_legal_public(env)
@@ -136,7 +141,7 @@ def main():
         row = dict(active=active, goal=goal, slider=env.obj_dof_pos[:, 0],
                    drift=torch.norm(env.object_pos-env.init_object_pos, dim=-1), rotation=angle,
                    fall=env.debug_reset_cause_fall, invalid=env.debug_reset_cause_invalid,
-                   contact=env.contact_info, contact_force=env.contact_forces[:, env.force_handles], object_pos=env.object_pos, object_rot=env.object_rot, q=env.hand_dof_pos, target=env.cur_targets[:, :20], action=env.actions)
+                   reset=env.reset_buf, timeout=env.debug_reset_cause_timeout, init_object_pos=env.init_object_pos, init_object_rot=env.init_object_rot, contact=env.contact_info, contact_force=env.contact_forces[:, env.force_handles], object_pos=env.object_pos, object_rot=env.object_rot, q=env.hand_dof_pos, target=env.cur_targets[:, :20], action=env.actions)
         frames.append({k:v.detach().cpu().numpy().copy() for k,v in row.items()})
         if len(frames) % 100 == 0:
             (args.output/'progress.json').write_text(json.dumps(dict(
@@ -176,7 +181,7 @@ def main():
                     camera = int(camera.item())
                 raw = env.gym.get_camera_image(env.sim, env.envs[i], camera, gymapi.IMAGE_COLOR)
                 pictures.append(np.asarray(raw).reshape(384, 512, -1)[:, :, :3])
-            columns = min(3, len(pictures))
+            columns = min(args.video_columns, len(pictures))
             rows = (len(pictures)+columns-1)//columns
             pictures.extend([np.zeros_like(first)]*(rows*columns-len(pictures)))
             return np.concatenate([np.concatenate(pictures[j*columns:(j+1)*columns], axis=1)
@@ -198,6 +203,12 @@ def main():
             body=valid.all(0)&(trace['drift']<.01).all(0)&(trace['rotation']<.25).all(0)
             records=[dict(env=i,cycles=int(f_cycles[i]),functional=bool(f_cycles[i]>=1),alive_full=bool(valid[:,i].all()),body_stable=bool(body[i]),max_drift_m=float(trace['drift'][:,i][trace['active'][:,i]].max()),max_rotation_rad=float(trace['rotation'][:,i][trace['active'][:,i]].max())) for i in range(env.num_envs)]
             report=dict(num_envs=env.num_envs,recorded_steps=len(frames),records=records,functional=sum(r['functional'] for r in records),alive_full=int(valid.all(0).sum()),body_stable=int(body.sum()))
+        if args.protocol=='S':
+            valid=trace['active'] & ~trace['fall'] & ~trace['invalid']
+            body=(len(trace['active'])==total_steps) & valid.all(0) & (trace['drift']<.01).all(0) & (trace['rotation']<.25).all(0)
+            for r, ok in zip(report['records'],body):
+                r['body_stable'] = bool(ok)
+            report['body_stable'] = int(body.sum())
         report['control_mode'] = 'static_initial_targets' if args.static else ('initial_calibration_conditional_student' if (args.student_artifact or args.unified_student) else 'privileged_teacher')
         report['fk_max_abs_error_m'] = getattr(env, 'student_fk_max_error', None)
         report['unified_student_sha256'] = hashlib.sha256(args.unified_student.read_bytes()).hexdigest() if args.unified_student else None

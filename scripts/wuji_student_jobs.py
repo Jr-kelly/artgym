@@ -1,12 +1,12 @@
 """Bounded single-GPU remote jobs with immutable source snapshots and durable ledger."""
-import argparse,fcntl,datetime,hashlib,json,os,shlex,subprocess,time
+import argparse,fcntl,shutil,datetime,hashlib,json,os,shlex,subprocess,time
 from pathlib import Path
 from scripts.record_wuji_student_goal import record,R,D
 SSH=['ssh','-i','/home/agiuser/.ssh/id_ed25519_h200','-p','33024','wangjiarui@10.13.160.5']
 REMOTE='/tmp/artgym-student-20261001'
 def utc():return datetime.datetime.now(datetime.timezone.utc).isoformat()
 def main():
- p=argparse.ArgumentParser();p.add_argument('name');p.add_argument('--gpu',type=int,required=True);p.add_argument('--seconds',type=int,required=True);p.add_argument('--final',action='store_true');p.add_argument('command',nargs=argparse.REMAINDER);a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('name');p.add_argument('--gpu',type=int,required=True);p.add_argument('--seconds',type=int,required=True);p.add_argument('--final',action='store_true');p.add_argument('--local',action='store_true');p.add_argument('command',nargs=argparse.REMAINDER);a=p.parse_args()
  assert a.gpu in range(4) and a.seconds>0
  state=json.loads((D/'STATE.json').read_text())
  cutoff=state['deadline_utc'] if a.final else state['ordinary_cutoff_utc']
@@ -16,15 +16,19 @@ def main():
   fcntl.flock(lock,fcntl.LOCK_EX)
   completed=sum(json.loads(p.read_text())['gpu_hours'] for p in jobs.glob('*/result.json'))
   active=[json.loads(p.read_text()) for p in jobs.glob('*/identity.json') if not (p.parent/'result.json').exists()]
-  assert not any(j['gpu']==a.gpu for j in active), 'GPU has an owned active job'
+  assert not any(j['gpu']==a.gpu and j.get('local',False)==a.local for j in active), 'GPU has an owned active job'
   assert len(active)<4
   reserve=0 if a.final else state['reserved_final_gpu_hours']
   assert completed+sum(j['seconds']/3600 for j in active)+a.seconds/3600<=state['max_gpu_hours']-reserve
-  available=subprocess.check_output(SSH+['nvidia-smi --query-gpu=index,memory.used --format=csv,noheader,nounits'],text=True)
+  available=subprocess.check_output(([] if a.local else SSH)+(['nvidia-smi','--query-gpu=index,memory.used','--format=csv,noheader,nounits'] if a.local else ['nvidia-smi --query-gpu=index,memory.used --format=csv,noheader,nounits']),text=True)
   memory={int(line.split(',')[0]):int(line.split(',')[1]) for line in available.strip().splitlines()}
-  assert memory[a.gpu]<100, 'GPU is not idle'
+  if a.local:
+   processes=subprocess.check_output(['nvidia-smi','--query-compute-apps=process_name','--format=csv,noheader'],text=True).strip().splitlines()
+   assert all('ToDesk' in x for x in processes), 'Unrelated local compute process'
+   assert memory[a.gpu]<5000
+  else:assert memory[a.gpu]<100, 'GPU is not idle'
   out=jobs/a.name;out.mkdir(exist_ok=False)
-  start=time.time();identity=dict(name=a.name,gpu=a.gpu,seconds=a.seconds,command=a.command,start_utc=utc(),local_pid=os.getpid(),remote_root=REMOTE,final=a.final,resource_check=available)
+  start=time.time();identity=dict(name=a.name,gpu=a.gpu,seconds=a.seconds,command=a.command,start_utc=utc(),local_pid=os.getpid(),remote_root=REMOTE,final=a.final,local=a.local,resource_check=available)
   codehash=hashlib.sha256()
   for folder in ['scripts','isaacgymenvs','rl_games']:
    for path in sorted((R/folder).rglob('*')):
@@ -35,15 +39,24 @@ def main():
  # A real copy freezes source/config and assets; outputs use a shared job namespace.
  pin=REMOTE+'/pins/'+a.name
  prep='mkdir -p '+shlex.quote(pin)+'; cp -a '+REMOTE+'/source/. '+shlex.quote(pin)+'/; ln -s '+REMOTE+'/runs '+shlex.quote(pin)+'/runs'
- subprocess.run(SSH+[prep],check=True)
+ if a.local:
+  pin='/tmp/artgym-student-local-pins/'+a.name
+  Path(pin).mkdir(parents=True,exist_ok=False)
+  for folder in ['scripts','isaacgymenvs','rl_games','assets','caches']:
+   shutil.copytree(R/folder,Path(pin)/folder,ignore=shutil.ignore_patterns('__pycache__'))
+  for folder in ['unified-student-20261001/data','multigrasp-20260928/data','artmanip-recovery-20260930/data']:
+   shutil.copytree(R/'research'/folder,Path(pin)/'research'/folder,ignore=shutil.ignore_patterns('final*'))
+  (Path(pin)/'runs').symlink_to(R/'runs',target_is_directory=True)
+ else:subprocess.run(SSH+[prep],check=True)
  command=a.command[1:] if a.command[:1]==['--'] else a.command
  env='CUDA_VISIBLE_DEVICES='+str(a.gpu)+' LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1'
+ if a.local:env='PATH=/home/agiuser/miniconda3/envs/artgym/bin:$PATH '+env.replace('/tmp/wuji-student-runtime/lib','/home/agiuser/miniconda3/envs/artgym/lib').replace('/tmp/wuji-student-torch-extensions','/tmp/wuji-student-local-torch-extensions')
  shell='cd '+shlex.quote(pin)+' && '+env+' timeout --signal=TERM --kill-after=30 '+str(a.seconds)+' '+shlex.join(command)
  identity['remote_shell']=shell
  (out/'identity.json').write_text(json.dumps(identity,indent=2))
  record('job_started',**identity,next='Poll status; do not duplicate job')
  with (out/'stdout.log').open('w') as log:
-  code=subprocess.call(SSH+[shell],stdout=log,stderr=subprocess.STDOUT)
+  code=subprocess.call((['bash','-c',shell] if a.local else SSH+[shell]),stdout=log,stderr=subprocess.STDOUT)
  elapsed=time.time()-start
  result=dict(**identity,end_utc=utc(),exit_code=code,wall_seconds=elapsed,gpu_hours=elapsed/3600)
  (out/'result.json').write_text(json.dumps(result,indent=2))

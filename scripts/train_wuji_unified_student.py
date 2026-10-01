@@ -39,7 +39,7 @@ def main():
  p.add_argument('--kind',choices=['C0','C1','S0'],required=True);p.add_argument('--updates',type=int,default=3200);p.add_argument('--envs',type=int,default=256);p.add_argument('--rollout-steps',type=int,default=4);p.add_argument('--seed',type=int,default=61001);p.add_argument('--resume',type=Path);p.add_argument('--warm-updates',type=int,default=400);p.add_argument('--save-at',type=int,nargs='+',default=[16,400,800,1600,3200,6400,12800]);p.add_argument('--lr',type=float,default=.0003)
  a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True)
  assert a.envs%4==0
- overrides=['object=knife_wuji_bridge3_20260922','hand=wuji_paper_official_actuator','task.env.trainingStates=research/unified-student-20261001/data/training-all.npy','task.env.episodeLength=600','task.env.proprioHistoryLen=50','task.env.studentInitObsDim=55','task.env.enableStudentEncoderObs=True']
+ overrides=['object=knife_wuji_bridge3_20260922','hand=wuji_paper_official_actuator','task.env.trainingStates=research/unified-student-20261001/data/training-all.npy','task.env.episodeLength=600','task.env.proprioHistoryLen=50','task.env.studentInitObsDim=55','+task.env.enableStudentEncoderObs=True']
  cfg=configuration('wuji_multigrasp',a.envs,overrides,train='wujiAcquisitionSAPG',seed=a.seed)
  (a.output/'config.yaml').write_text(OmegaConf.to_yaml(cfg,resolve=True))
  env,player=make_player(cfg,a.teacher);net=player.model.a2c_network
@@ -65,6 +65,8 @@ def main():
   encoder.load_state_dict(restored['student_encoder']);optimizer.load_state_dict(restored['optimizer'])
   start_update=restored['optimizer_steps'];total_interactions=restored['interactions'];restore_rng(restored['rng'])
   assert restored['frozen_hash']==frozen_hash and restored['teacher_encoder_hash']==teacher_hash
+  assert tensor_hash(encoder.state_dict())==tensor_hash(restored['student_encoder'])
+  (a.output/'resume-audit.json').write_text(json.dumps(dict(parent=str(a.resume),parent_sha256=hashlib.sha256(a.resume.read_bytes()).hexdigest(),restored_optimizer_steps=start_update,adam_steps=sorted(set(int(v['step']) for v in optimizer.state.values())),encoder_hash=tensor_hash(encoder.state_dict()),frozen_hash=frozen_hash,rng_restored=True,physics='new episode reset after RNG restore'),indent=2))
  # Resume starts a declared new physics episode. Optimizer/RNG are preserved; no claim of PhysX bitwise continuation.
  obs=player.env_reset(player.env)
  check=interface_check(player,env,obs,encoder)

@@ -71,3 +71,28 @@ def load_artifact(player,env,path):
  install_legal_public(env);install_student_player(player)
  env.set_student_encoder_obs_enabled(True)
  return a
+
+def score_holdout_probes(player,env,paths):
+ """Frozen teacher-history diagnostics; these probe samples are never optimized."""
+ from pathlib import Path
+ from isaacgymenvs.utils.distill_action_loss import frozen_actor_mean
+ encoder=player.model.a2c_network.priv_encoder;results=[]
+ for path in paths:
+  path=Path(path)
+  if not path.exists():continue
+  probes=torch.load(path,map_location='cpu');metrics=[]
+  with torch.no_grad():
+   for p in probes:
+    x=p['x'].to(player.device);label=p['label'].to(player.device);pred=encoder(x)
+    states=[s.to(player.device) for s in p['rnn']];obs=legal_policy_observation(p['obs'].to(player.device))
+    ms=frozen_actor_mean(player,obs,pred,states);mt=frozen_actor_mean(player,obs,label,states)
+    def target(mu):
+     action=mu.clamp(-1,1);q=p['initial'].to(player.device)+.04*action
+     q[:,16:]=p['previous'].to(player.device)[:,16:]+.025*action[:,16:]
+     return torch.maximum(torch.minimum(q,env.hand_dof_upper_limits),env.hand_dof_lower_limits)
+    metrics.append(torch.stack([((pred-label)**2).mean(1),((ms-mt)**2).mean(1),((ms.clamp(-1,1)-mt.clamp(-1,1))**2).mean(1),((target(ms)-target(mt))**2).mean(1)],dim=1).cpu())
+  values=torch.stack(metrics);n=values.shape[1]//4
+  for source in range(4):
+   v=values[:,source*n:(source+1)*n].mean((0,1)).tolist()
+   results.append(dict(probes=str(path),source=source,latent_mse=v[0],raw_mean_mse=v[1],clipped_action_mse=v[2],target_mse_rad2=v[3],sampled_times=len(probes),independent_initial_states=n,scope='Frozen teacher history; repeated times are not independent episodes'))
+ return results
