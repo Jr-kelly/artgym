@@ -3,6 +3,7 @@ import argparse
 import datetime
 import hashlib
 import json
+import os
 import subprocess
 import sys
 import urllib.request
@@ -30,6 +31,8 @@ def main():
     parser.add_argument('--download-root', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
+    args.download_root = args.download_root.resolve()
+    args.output = args.output.resolve()
     assert not args.output.exists() and not args.download_root.exists()
     manifest = json.loads(args.manifest.read_text())
     tag = 'wuji-unified-student-20261001-v1'
@@ -82,8 +85,19 @@ def main():
     teacher = restored / frozen['teacher']['path']
     assert sha(teacher) == frozen['teacher']['sha256']
     checkpoint_receipt = args.download_root / 'downloaded-primary-restore-audit.json'
+    restored_environment = dict(os.environ)
+    restored_environment['CUDA_VISIBLE_DEVICES'] = ''
+    restored_environment['PYTHONPATH'] = str(restored.resolve()) + ':' + str((restored / 'rl_games').resolve())
     subprocess.run([sys.executable, '-m', 'scripts.verify_wuji_student_checkpoint',
-        str(checkpoint), '--output', str(checkpoint_receipt)], cwd=R, check=True)
+        str(checkpoint.resolve()), '--output', str(checkpoint_receipt.resolve())],
+        cwd=restored, env=restored_environment, check=True)
+    inference_receipt = args.download_root / 'downloaded-primary-input-audit.json'
+    fixture = restored / manifest['inference_fixture_path']
+    assert fixture.is_file()
+    subprocess.run([sys.executable, '-m', 'scripts.audit_wuji_student_inference',
+        '--student', str(checkpoint.resolve()), '--teacher', str(teacher.resolve()),
+        '--probes', str(fixture.resolve()), '--output', str(inference_receipt.resolve())],
+        cwd=restored, env=restored_environment, check=True)
     import imageio.v2 as imageio
     videos = []
     for specification in manifest['videos']:
@@ -106,8 +120,9 @@ def main():
                   release=release['html_url'], release_id=release['id'], draft=False,
                   all_server_digests_verified=True, assets=len(expected), anonymous_downloads=receipts,
                   actual_restore=restore_receipt, checkpoint=json.loads(checkpoint_receipt.read_text()),
-                  teacher_hash_verified=True, videos=videos,
-                  scope='Actual public distribution, CPU encoder/Adam/RNG restoration and full video decode; no new simulation or hardware claim.')
+                  teacher_hash_verified=True, downloaded_code_executed=True,
+                  full_policy_input_audit=json.loads(inference_receipt.read_text()), videos=videos,
+                  scope='Actual public distribution, downloaded-code CPU encoder/Adam/RNG and whole-player restoration, and full video decode. This reuses the audited evaluation implementation; it is not a separate runtime implementation, new simulation or hardware result.')
     args.output.write_text(json.dumps(result, indent=2) + '\n')
     record('student_public_download_restore_verified', evidence=str(args.output), release=release['html_url'],
            assets=len(expected), primary_sha256=primary['sha256'], videos=len(videos),

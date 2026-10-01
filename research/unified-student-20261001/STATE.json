@@ -6,8 +6,8 @@
   "max_concurrent_gpus": 4,
   "reserved_final_gpu_hours": 6,
   "reserved_final_seconds": 5400,
-  "gpu_hours": 14.676645901600523,
-  "phase": "Fixed-method SC/SA25600to38400; currentbestSC25600; finalunopened",
+  "gpu_hours": 14.871383368902737,
+  "phase": "Fixed-method SC/SA25600to38400; bestSA28800; finalunopened",
   "active_jobs": [
     {
       "name": "SC-real-38400",
@@ -134,37 +134,37 @@
   "goal_sha256": "c7e9c244d11824a5d230cfb24ac9207e78fcb1965a376bff6a38f03c084c4a3f",
   "existing_student_run_found": false,
   "prior_session": "Previous user turn performed only read-only attachment/connectivity check; no studentgoal/training/worktree existed. Prior teacher round closed.",
-  "next": "Continue fixed-method38400 stage; confirmation/final stillpending",
+  "next": "Continue registered32000/35200/38400 evaluations; preserve existing processes and original budget",
   "last_event": {
-    "utc": "2026-10-01T11:36:04.446543+00:00",
-    "event": "SC25600_fullplayer_input_audit_passed",
-    "evidence": "research/unified-student-20261001/SC-25600-sequence-input-audit.json",
-    "checkpoint_sha256": "4008c4dc53ca5bc25a03276e19fef12a42e4d108866231ef6d7722ac41e6467b",
-    "actor_teacher_encoder_calls": 0,
-    "actions_and_all_rnn_exact_invariance": true,
-    "next": "Continue fixed-method38400 stage; confirmation/final stillpending"
+    "utc": "2026-10-01T12:20:13.738245+00:00",
+    "event": "continuation_reverified_1220",
+    "evidence": "research/unified-student-20261001/resume-1220-resource-audit.json",
+    "phase": "Fixed-method SC/SA25600to38400; bestSA28800; finalunopened",
+    "next": "Continue registered32000/35200/38400 evaluations; preserve existing processes and original budget"
   },
   "research_notes": "research/unified-student-20261001/RESEARCH_NOTES.md",
   "current_plan": "research/unified-student-20261001/fixed-method-extension38400-plan.json",
   "repair_count": 2,
   "current_evaluation_plans": [
-    "research/unified-student-20261001/extension38400-evaluation-queue.json"
+    "research/unified-student-20261001/extension38400-SC-evaluation-queue.json",
+    "research/unified-student-20261001/extension38400-SA-evaluation-queue.json"
   ],
   "supplemental_plan": "research/unified-student-20261001/controller-long-budget-plan.json",
   "evaluation_gpu_assignments": {
-    "extension38400-evaluation-queue.json": 3
+    "extension38400-SC-evaluation-queue.json": 3,
+    "extension38400-SA-evaluation-queue.json": 1
   },
   "provisional_best_development": {
-    "name": "SC-real-25600",
-    "checkpoint": "runs/unified-student-20261001/SC-real-25600/step_025600.pth",
-    "sha256": "4008c4dc53ca5bc25a03276e19fef12a42e4d108866231ef6d7722ac41e6467b",
-    "worst_strict_count": 14,
+    "name": "SA-real-28800",
+    "checkpoint": "runs/unified-student-20261001/SA-real-38400/step_028800.pth",
+    "sha256": "936cc7aeeb8c6982f9c5b484cb5d01f2a32f5bf9a1341b68517fc502971e0ba6",
+    "worst_strict_count": 19,
     "n": 32,
     "full_gate": false,
     "final_selected": false
   },
   "delivery_progress": {
-    "last_pushed_commit": "ca73485",
+    "last_pushed_commit": "f6c53f2",
     "release_id": 400860039,
     "tag": "wuji-unified-student-20261001-v1",
     "draft": true,
