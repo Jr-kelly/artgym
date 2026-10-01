@@ -32,8 +32,17 @@ def main():
     evidence = []
     for model in models:
         assert sha(Path(model['path'])) == model['sha256']
+        evaluation_root = Path(model['evaluation_root'])
+        job = evaluation_root.parent / 'jobs' / evaluation_root.name
+        identity = json.loads((job / 'identity.json').read_text())
+        result = json.loads((job / 'result.json').read_text())
+        assert identity['final'] and not identity['local'] and result['exit_code'] == 0
+        assert identity['pinned_source_sha256'] == frozen['code_sha256']
+        assert identity['freeze_sha256'] == sha(args.freeze)
+        assert identity['final_cohort_sha256'] == frozen['cohort']['sha256']
+        assert model['path'] in identity['frozen_models_used']
         for protocol in frozen['protocols']:
-            directory = Path(model['evaluation_root']) / (model['name'] + '-' + protocol)
+            directory = evaluation_root / (model['name'] + '-' + protocol)
             report = json.loads((directory / 'report.json').read_text())
             assert report['num_envs'] == 512 and report['initial_state_rows'] == list(range(512))
             assert report['initial_states_sha256'] == frozen['cohort']['sha256']
