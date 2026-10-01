@@ -1,0 +1,3875 @@
+{
+  "protocol_runs": 78,
+  "unique_static_valid_initial_states": 5951,
+  "candidate": "unchanged SA51200",
+  "new_optimizer_updates": 0,
+  "training_prerequisite_passed": false,
+  "available_source_macro": [
+    {
+      "model": "student",
+      "protocol": "F",
+      "geometries": 13,
+      "equal_geometry_available_source_macro": 0.9854849557930314,
+      "body_macro": 0.8324383363723089,
+      "success_and_full_stability_macro": 0.8324383363723089,
+      "worst_geometry": {
+        "geometry": "W120",
+        "covered_sources": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "missing_sources": [],
+        "minimum_source_n": 102,
+        "rate": 0.8666896446078431,
+        "body_rate": 0.7060738357843137,
+        "success_and_full_stability_rate": 0.7060738357843137,
+        "worst_source": {
+          "geometry": "W120",
+          "model": "student",
+          "protocol": "F",
+          "source": 3,
+          "n": 102,
+          "success": 50,
+          "rate": 0.49019607843137253,
+          "wilson95": [
+            0.39531402726372666,
+            0.5857897857195373
+          ],
+          "body_stable": 2,
+          "body_rate": 0.0196078431372549,
+          "body_wilson95": [
+            0.005393752169586458,
+            0.06869308401034692
+          ],
+          "stable_endpoint_failures": 0,
+          "max_drift_m": 0.06118927150964737,
+          "max_rotation_rad": 3.1390089988708496,
+          "median_travel_fraction": 1.0,
+          "median_first_arrival_s": 1.8333333333333333,
+          "success_and_full_stability": 2,
+          "success_and_full_stability_rate": 0.0196078431372549,
+          "success_and_full_stability_wilson95": [
+            0.005393752169586458,
+            0.06869308401034692
+          ],
+          "median_mean_abs_slider_error_m": 0.011302405968308449
+        }
+      },
+      "geometry_rows": [
+        {
+          "geometry": "L110",
+          "covered_sources": [
+            0,
+            1,
+            2
+          ],
+          "missing_sources": [
+            3
+          ],
+          "minimum_source_n": 128,
+          "rate": 1.0,
+          "body_rate": 0.8359375,
+          "success_and_full_stability_rate": 0.8359375,
+          "worst_source": {
+            "geometry": "L110",
+            "model": "student",
+            "protocol": "F",
+            "source": 0,
+            "n": 128,
+            "success": 128,
+            "rate": 1.0,
+            "wilson95": [
+              0.9708630437264931,
+              1.0
+            ],
+            "body_stable": 121,
+            "body_rate": 0.9453125,
+            "body_wilson95": [
+              0.8914150997002549,
+              0.9732597986186532
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.02955373004078865,
+            "max_rotation_rad": 1.8446569442749023,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 121,
+            "success_and_full_stability_rate": 0.9453125,
+            "success_and_full_stability_wilson95": [
+              0.8914150997002549,
+              0.9732597986186532
+            ],
+            "median_mean_abs_slider_error_m": 0.007470819167792797
+          }
+        },
+        {
+          "geometry": "L120",
+          "covered_sources": [
+            0,
+            1,
+            2
+          ],
+          "missing_sources": [
+            3
+          ],
+          "minimum_source_n": 128,
+          "rate": 0.9973958333333334,
+          "body_rate": 0.8333333333333334,
+          "success_and_full_stability_rate": 0.8333333333333334,
+          "worst_source": {
+            "geometry": "L120",
+            "model": "student",
+            "protocol": "F",
+            "source": 0,
+            "n": 128,
+            "success": 127,
+            "rate": 0.9921875,
+            "wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "body_stable": 121,
+            "body_rate": 0.9453125,
+            "body_wilson95": [
+              0.8914150997002549,
+              0.9732597986186532
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.03825661912560463,
+            "max_rotation_rad": 2.4011800289154053,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 121,
+            "success_and_full_stability_rate": 0.9453125,
+            "success_and_full_stability_wilson95": [
+              0.8914150997002549,
+              0.9732597986186532
+            ],
+            "median_mean_abs_slider_error_m": 0.007506967056542635
+          }
+        },
+        {
+          "geometry": "L80",
+          "covered_sources": [
+            0,
+            1,
+            2
+          ],
+          "missing_sources": [
+            3
+          ],
+          "minimum_source_n": 128,
+          "rate": 1.0,
+          "body_rate": 0.8723958333333334,
+          "success_and_full_stability_rate": 0.8723958333333334,
+          "worst_source": {
+            "geometry": "L80",
+            "model": "student",
+            "protocol": "F",
+            "source": 0,
+            "n": 128,
+            "success": 128,
+            "rate": 1.0,
+            "wilson95": [
+              0.9708630437264931,
+              1.0
+            ],
+            "body_stable": 114,
+            "body_rate": 0.890625,
+            "body_wilson95": [
+              0.8247655486183249,
+              0.933721204292998
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.04393374174833298,
+            "max_rotation_rad": 2.511173725128174,
+            "median_travel_fraction": 0.9809352457523346,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 114,
+            "success_and_full_stability_rate": 0.890625,
+            "success_and_full_stability_wilson95": [
+              0.8247655486183249,
+              0.933721204292998
+            ],
+            "median_mean_abs_slider_error_m": 0.007925482001155615
+          }
+        },
+        {
+          "geometry": "L90",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 13,
+          "rate": 0.9807692307692308,
+          "body_rate": 0.662109375,
+          "success_and_full_stability_rate": 0.662109375,
+          "worst_source": {
+            "geometry": "L90",
+            "model": "student",
+            "protocol": "F",
+            "source": 3,
+            "n": 13,
+            "success": 12,
+            "rate": 0.9230769230769231,
+            "wilson95": [
+              0.6668604907890129,
+              0.9862895787574429
+            ],
+            "body_stable": 0,
+            "body_rate": 0.0,
+            "body_wilson95": [
+              0.0,
+              0.22809537235418867
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.02181200124323368,
+            "max_rotation_rad": 1.5701828002929688,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 1.8833333333333333,
+            "success_and_full_stability": 0,
+            "success_and_full_stability_rate": 0.0,
+            "success_and_full_stability_wilson95": [
+              0.0,
+              0.22809537235418867
+            ],
+            "median_mean_abs_slider_error_m": 0.03672023117542267
+          }
+        },
+        {
+          "geometry": "T110",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 97,
+          "rate": 0.9948453608247423,
+          "body_rate": 0.9061090528350515,
+          "success_and_full_stability_rate": 0.9061090528350515,
+          "worst_source": {
+            "geometry": "T110",
+            "model": "student",
+            "protocol": "F",
+            "source": 3,
+            "n": 97,
+            "success": 95,
+            "rate": 0.979381443298969,
+            "wilson95": [
+              0.9279124175258443,
+              0.9943273148977335
+            ],
+            "body_stable": 78,
+            "body_rate": 0.8041237113402062,
+            "body_wilson95": [
+              0.7142162230627449,
+              0.870860596431783
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.062479231506586075,
+            "max_rotation_rad": 2.3705942630767822,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 78,
+            "success_and_full_stability_rate": 0.8041237113402062,
+            "success_and_full_stability_wilson95": [
+              0.7142162230627449,
+              0.870860596431783
+            ],
+            "median_mean_abs_slider_error_m": 0.007823350839316845
+          }
+        },
+        {
+          "geometry": "T120",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 83,
+          "rate": 0.9939759036144579,
+          "body_rate": 0.8665992093373494,
+          "success_and_full_stability_rate": 0.8665992093373494,
+          "worst_source": {
+            "geometry": "T120",
+            "model": "student",
+            "protocol": "F",
+            "source": 3,
+            "n": 83,
+            "success": 81,
+            "rate": 0.9759036144578314,
+            "wilson95": [
+              0.9163369075658393,
+              0.9933668338592722
+            ],
+            "body_stable": 64,
+            "body_rate": 0.7710843373493976,
+            "body_wilson95": [
+              0.6699193229025636,
+              0.8482663525927531
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.05748233199119568,
+            "max_rotation_rad": 2.449713945388794,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 64,
+            "success_and_full_stability_rate": 0.7710843373493976,
+            "success_and_full_stability_wilson95": [
+              0.6699193229025636,
+              0.8482663525927531
+            ],
+            "median_mean_abs_slider_error_m": 0.007268026005476713
+          }
+        },
+        {
+          "geometry": "T80",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 122,
+          "rate": 0.9938524590163934,
+          "body_rate": 0.7287717725409836,
+          "success_and_full_stability_rate": 0.7287717725409836,
+          "worst_source": {
+            "geometry": "T80",
+            "model": "student",
+            "protocol": "F",
+            "source": 3,
+            "n": 122,
+            "success": 119,
+            "rate": 0.9754098360655737,
+            "wilson95": [
+              0.9301924015641118,
+              0.9916023796397792
+            ],
+            "body_stable": 84,
+            "body_rate": 0.6885245901639344,
+            "body_wilson95": [
+              0.6016541997450104,
+              0.7638851100427395
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.05887092277407646,
+            "max_rotation_rad": 2.443033218383789,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 84,
+            "success_and_full_stability_rate": 0.6885245901639344,
+            "success_and_full_stability_wilson95": [
+              0.6016541997450104,
+              0.7638851100427395
+            ],
+            "median_mean_abs_slider_error_m": 0.009741747751832008
+          }
+        },
+        {
+          "geometry": "T90",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 108,
+          "rate": 0.9957320601851851,
+          "body_rate": 0.8546006944444444,
+          "success_and_full_stability_rate": 0.8546006944444444,
+          "worst_source": {
+            "geometry": "T90",
+            "model": "student",
+            "protocol": "F",
+            "source": 3,
+            "n": 108,
+            "success": 107,
+            "rate": 0.9907407407407407,
+            "wilson95": [
+              0.9494065448063386,
+              0.9983636391461165
+            ],
+            "body_stable": 84,
+            "body_rate": 0.7777777777777778,
+            "body_wilson95": [
+              0.690599159693213,
+              0.8458745293364786
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.05833151191473007,
+            "max_rotation_rad": 2.124441146850586,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 84,
+            "success_and_full_stability_rate": 0.7777777777777778,
+            "success_and_full_stability_wilson95": [
+              0.690599159693213,
+              0.8458745293364786
+            ],
+            "median_mean_abs_slider_error_m": 0.009201453067362309
+          }
+        },
+        {
+          "geometry": "W110",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 99,
+          "rate": 0.9924242424242424,
+          "body_rate": 0.8141374684343434,
+          "success_and_full_stability_rate": 0.8141374684343434,
+          "worst_source": {
+            "geometry": "W110",
+            "model": "student",
+            "protocol": "F",
+            "source": 3,
+            "n": 99,
+            "success": 96,
+            "rate": 0.9696969696969697,
+            "wilson95": [
+              0.914663197938982,
+              0.9896413604215456
+            ],
+            "body_stable": 37,
+            "body_rate": 0.37373737373737376,
+            "body_wilson95": [
+              0.28483183001383344,
+              0.4720755467709709
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.05973273888230324,
+            "max_rotation_rad": 2.9749741554260254,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 37,
+            "success_and_full_stability_rate": 0.37373737373737376,
+            "success_and_full_stability_wilson95": [
+              0.28483183001383344,
+              0.4720755467709709
+            ],
+            "median_mean_abs_slider_error_m": 0.009395457804203033
+          }
+        },
+        {
+          "geometry": "W120",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 102,
+          "rate": 0.8666896446078431,
+          "body_rate": 0.7060738357843137,
+          "success_and_full_stability_rate": 0.7060738357843137,
+          "worst_source": {
+            "geometry": "W120",
+            "model": "student",
+            "protocol": "F",
+            "source": 3,
+            "n": 102,
+            "success": 50,
+            "rate": 0.49019607843137253,
+            "wilson95": [
+              0.39531402726372666,
+              0.5857897857195373
+            ],
+            "body_stable": 2,
+            "body_rate": 0.0196078431372549,
+            "body_wilson95": [
+              0.005393752169586458,
+              0.06869308401034692
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.06118927150964737,
+            "max_rotation_rad": 3.1390089988708496,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 2,
+            "success_and_full_stability_rate": 0.0196078431372549,
+            "success_and_full_stability_wilson95": [
+              0.005393752169586458,
+              0.06869308401034692
+            ],
+            "median_mean_abs_slider_error_m": 0.011302405968308449
+          }
+        },
+        {
+          "geometry": "W80",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 104,
+          "rate": 1.0,
+          "body_rate": 0.8562199519230769,
+          "success_and_full_stability_rate": 0.8562199519230769,
+          "worst_source": {
+            "geometry": "W80",
+            "model": "student",
+            "protocol": "F",
+            "source": 0,
+            "n": 128,
+            "success": 128,
+            "rate": 1.0,
+            "wilson95": [
+              0.9708630437264931,
+              1.0
+            ],
+            "body_stable": 119,
+            "body_rate": 0.9296875,
+            "body_wilson95": [
+              0.8717651965063957,
+              0.9625702316960594
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.02704736776649952,
+            "max_rotation_rad": 2.034517765045166,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 1.8666666666666667,
+            "success_and_full_stability": 119,
+            "success_and_full_stability_rate": 0.9296875,
+            "success_and_full_stability_wilson95": [
+              0.8717651965063957,
+              0.9625702316960594
+            ],
+            "median_mean_abs_slider_error_m": 0.007386172190308571
+          }
+        },
+        {
+          "geometry": "W90",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 103,
+          "rate": 0.9975728155339806,
+          "body_rate": 0.9361915958737864,
+          "success_and_full_stability_rate": 0.9361915958737864,
+          "worst_source": {
+            "geometry": "W90",
+            "model": "student",
+            "protocol": "F",
+            "source": 3,
+            "n": 103,
+            "success": 102,
+            "rate": 0.9902912621359223,
+            "wilson95": [
+              0.9470418081674651,
+              0.9982841085209498
+            ],
+            "body_stable": 92,
+            "body_rate": 0.8932038834951457,
+            "body_wilson95": [
+              0.8188200043472533,
+              0.9393126615117726
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.05407268926501274,
+            "max_rotation_rad": 1.9057039022445679,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 92,
+            "success_and_full_stability_rate": 0.8932038834951457,
+            "success_and_full_stability_wilson95": [
+              0.8188200043472533,
+              0.9393126615117726
+            ],
+            "median_mean_abs_slider_error_m": 0.008763267658650875
+          }
+        },
+        {
+          "geometry": "baseline",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 128,
+          "rate": 0.998046875,
+          "body_rate": 0.94921875,
+          "success_and_full_stability_rate": 0.94921875,
+          "worst_source": {
+            "geometry": "baseline",
+            "model": "student",
+            "protocol": "F",
+            "source": 0,
+            "n": 128,
+            "success": 127,
+            "rate": 0.9921875,
+            "wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "body_stable": 123,
+            "body_rate": 0.9609375,
+            "body_wilson95": [
+              0.911812979233165,
+              0.9832013892021959
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.035913825035095215,
+            "max_rotation_rad": 2.4031310081481934,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 123,
+            "success_and_full_stability_rate": 0.9609375,
+            "success_and_full_stability_wilson95": [
+              0.911812979233165,
+              0.9832013892021959
+            ],
+            "median_mean_abs_slider_error_m": 0.007408517645671964
+          }
+        }
+      ],
+      "scope": "Conditional on available sources only; geometry coverage differs and is explicit. No claim of full4source coverage or continuous range."
+    },
+    {
+      "model": "student",
+      "protocol": "S2",
+      "geometries": 13,
+      "equal_geometry_available_source_macro": 0.6920214968876114,
+      "body_macro": 0.9107641611823889,
+      "success_and_full_stability_macro": 0.6920214968876114,
+      "worst_geometry": {
+        "geometry": "L90",
+        "covered_sources": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "missing_sources": [],
+        "minimum_source_n": 13,
+        "rate": 0.263671875,
+        "body_rate": 0.73046875,
+        "success_and_full_stability_rate": 0.263671875,
+        "worst_source": {
+          "geometry": "L90",
+          "model": "student",
+          "protocol": "S2",
+          "source": 2,
+          "n": 128,
+          "success": 0,
+          "rate": 0.0,
+          "wilson95": [
+            0.0,
+            0.02913695627350686
+          ],
+          "body_stable": 128,
+          "body_rate": 1.0,
+          "body_wilson95": [
+            0.9708630437264931,
+            1.0
+          ],
+          "stable_endpoint_failures": 128,
+          "max_drift_m": 0.0050373016856610775,
+          "max_rotation_rad": 0.19745512306690216,
+          "median_travel_fraction": 0.9521032217890024,
+          "median_first_arrival_s": 2.8,
+          "success_and_full_stability": 0,
+          "success_and_full_stability_rate": 0.0,
+          "success_and_full_stability_wilson95": [
+            0.0,
+            0.02913695627350686
+          ],
+          "median_mean_abs_slider_error_m": 0.00880754180252552
+        }
+      },
+      "geometry_rows": [
+        {
+          "geometry": "L110",
+          "covered_sources": [
+            0,
+            1,
+            2
+          ],
+          "missing_sources": [
+            3
+          ],
+          "minimum_source_n": 128,
+          "rate": 0.7552083333333334,
+          "body_rate": 0.921875,
+          "success_and_full_stability_rate": 0.7552083333333334,
+          "worst_source": {
+            "geometry": "L110",
+            "model": "student",
+            "protocol": "S2",
+            "source": 1,
+            "n": 128,
+            "success": 76,
+            "rate": 0.59375,
+            "wilson95": [
+              0.5071398426419367,
+              0.6748969780567808
+            ],
+            "body_stable": 100,
+            "body_rate": 0.78125,
+            "body_wilson95": [
+              0.702015703045537,
+              0.8440947590506156
+            ],
+            "stable_endpoint_failures": 24,
+            "max_drift_m": 0.006512611173093319,
+            "max_rotation_rad": 0.263074666261673,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 76,
+            "success_and_full_stability_rate": 0.59375,
+            "success_and_full_stability_wilson95": [
+              0.5071398426419367,
+              0.6748969780567808
+            ],
+            "median_mean_abs_slider_error_m": 0.00923031335696578
+          }
+        },
+        {
+          "geometry": "L120",
+          "covered_sources": [
+            0,
+            1,
+            2
+          ],
+          "missing_sources": [
+            3
+          ],
+          "minimum_source_n": 128,
+          "rate": 0.7213541666666666,
+          "body_rate": 0.9375,
+          "success_and_full_stability_rate": 0.7213541666666666,
+          "worst_source": {
+            "geometry": "L120",
+            "model": "student",
+            "protocol": "S2",
+            "source": 1,
+            "n": 128,
+            "success": 73,
+            "rate": 0.5703125,
+            "wilson95": [
+              0.4837393288504064,
+              0.6527882866736316
+            ],
+            "body_stable": 107,
+            "body_rate": 0.8359375,
+            "body_wilson95": [
+              0.762181923962932,
+              0.8901166835408055
+            ],
+            "stable_endpoint_failures": 34,
+            "max_drift_m": 0.0065901088528335094,
+            "max_rotation_rad": 0.268087774515152,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 73,
+            "success_and_full_stability_rate": 0.5703125,
+            "success_and_full_stability_wilson95": [
+              0.4837393288504064,
+              0.6527882866736316
+            ],
+            "median_mean_abs_slider_error_m": 0.009261258877813816
+          }
+        },
+        {
+          "geometry": "L80",
+          "covered_sources": [
+            0,
+            1,
+            2
+          ],
+          "missing_sources": [
+            3
+          ],
+          "minimum_source_n": 128,
+          "rate": 0.3072916666666667,
+          "body_rate": 0.9739583333333334,
+          "success_and_full_stability_rate": 0.3072916666666667,
+          "worst_source": {
+            "geometry": "L80",
+            "model": "student",
+            "protocol": "S2",
+            "source": 2,
+            "n": 128,
+            "success": 1,
+            "rate": 0.0078125,
+            "wilson95": [
+              0.0013804318928742967,
+              0.04292625943885903
+            ],
+            "body_stable": 128,
+            "body_rate": 1.0,
+            "body_wilson95": [
+              0.9708630437264931,
+              1.0
+            ],
+            "stable_endpoint_failures": 127,
+            "max_drift_m": 0.006020722445100546,
+            "max_rotation_rad": 0.2268107682466507,
+            "median_travel_fraction": 0.9506620466709137,
+            "median_first_arrival_s": 2.8,
+            "success_and_full_stability": 1,
+            "success_and_full_stability_rate": 0.0078125,
+            "success_and_full_stability_wilson95": [
+              0.0013804318928742967,
+              0.04292625943885903
+            ],
+            "median_mean_abs_slider_error_m": 0.008756047114729881
+          }
+        },
+        {
+          "geometry": "L90",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 13,
+          "rate": 0.263671875,
+          "body_rate": 0.73046875,
+          "success_and_full_stability_rate": 0.263671875,
+          "worst_source": {
+            "geometry": "L90",
+            "model": "student",
+            "protocol": "S2",
+            "source": 2,
+            "n": 128,
+            "success": 0,
+            "rate": 0.0,
+            "wilson95": [
+              0.0,
+              0.02913695627350686
+            ],
+            "body_stable": 128,
+            "body_rate": 1.0,
+            "body_wilson95": [
+              0.9708630437264931,
+              1.0
+            ],
+            "stable_endpoint_failures": 128,
+            "max_drift_m": 0.0050373016856610775,
+            "max_rotation_rad": 0.19745512306690216,
+            "median_travel_fraction": 0.9521032217890024,
+            "median_first_arrival_s": 2.8,
+            "success_and_full_stability": 0,
+            "success_and_full_stability_rate": 0.0,
+            "success_and_full_stability_wilson95": [
+              0.0,
+              0.02913695627350686
+            ],
+            "median_mean_abs_slider_error_m": 0.00880754180252552
+          }
+        },
+        {
+          "geometry": "T110",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 97,
+          "rate": 0.832373550257732,
+          "body_rate": 0.9534471649484536,
+          "success_and_full_stability_rate": 0.832373550257732,
+          "worst_source": {
+            "geometry": "T110",
+            "model": "student",
+            "protocol": "S2",
+            "source": 3,
+            "n": 97,
+            "success": 60,
+            "rate": 0.6185567010309279,
+            "wilson95": [
+              0.5191274393745469,
+              0.7089533546656928
+            ],
+            "body_stable": 85,
+            "body_rate": 0.8762886597938144,
+            "body_wilson95": [
+              0.7961126092514339,
+              0.9277959979197616
+            ],
+            "stable_endpoint_failures": 25,
+            "max_drift_m": 0.058771029114723206,
+            "max_rotation_rad": 2.95312237739563,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 60,
+            "success_and_full_stability_rate": 0.6185567010309279,
+            "success_and_full_stability_wilson95": [
+              0.5191274393745469,
+              0.7089533546656928
+            ],
+            "median_mean_abs_slider_error_m": 0.006538980174809694
+          }
+        },
+        {
+          "geometry": "T120",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 83,
+          "rate": 0.7729903990963856,
+          "body_rate": 0.9562076430722891,
+          "success_and_full_stability_rate": 0.7729903990963856,
+          "worst_source": {
+            "geometry": "T120",
+            "model": "student",
+            "protocol": "S2",
+            "source": 3,
+            "n": 83,
+            "success": 42,
+            "rate": 0.5060240963855421,
+            "wilson95": [
+              0.40060395423381917,
+              0.6109112829994101
+            ],
+            "body_stable": 73,
+            "body_rate": 0.8795180722891566,
+            "body_wilson95": [
+              0.7922368486742863,
+              0.9332230970191568
+            ],
+            "stable_endpoint_failures": 31,
+            "max_drift_m": 0.05665541812777519,
+            "max_rotation_rad": 2.458967924118042,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7333333333333333,
+            "success_and_full_stability": 42,
+            "success_and_full_stability_rate": 0.5060240963855421,
+            "success_and_full_stability_wilson95": [
+              0.40060395423381917,
+              0.6109112829994101
+            ],
+            "median_mean_abs_slider_error_m": 0.005908184219151735
+          }
+        },
+        {
+          "geometry": "T80",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 122,
+          "rate": 0.6813844774590164,
+          "body_rate": 0.8547323258196722,
+          "success_and_full_stability_rate": 0.6813844774590164,
+          "worst_source": {
+            "geometry": "T80",
+            "model": "student",
+            "protocol": "S2",
+            "source": 3,
+            "n": 122,
+            "success": 38,
+            "rate": 0.3114754098360656,
+            "wilson95": [
+              0.23611488995726057,
+              0.39834580025498956
+            ],
+            "body_stable": 94,
+            "body_rate": 0.7704918032786885,
+            "body_wilson95": [
+              0.6883006215525832,
+              0.8361688229254925
+            ],
+            "stable_endpoint_failures": 56,
+            "max_drift_m": 0.06079068407416344,
+            "max_rotation_rad": 2.7887837886810303,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 38,
+            "success_and_full_stability_rate": 0.3114754098360656,
+            "success_and_full_stability_wilson95": [
+              0.23611488995726057,
+              0.39834580025498956
+            ],
+            "median_mean_abs_slider_error_m": 0.008716033771634102
+          }
+        },
+        {
+          "geometry": "T90",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 108,
+          "rate": 0.7701099537037037,
+          "body_rate": 0.9340277777777778,
+          "success_and_full_stability_rate": 0.7701099537037037,
+          "worst_source": {
+            "geometry": "T90",
+            "model": "student",
+            "protocol": "S2",
+            "source": 3,
+            "n": 108,
+            "success": 34,
+            "rate": 0.3148148148148148,
+            "wilson95": [
+              0.23486550444655452,
+              0.4074853695336511
+            ],
+            "body_stable": 93,
+            "body_rate": 0.8611111111111112,
+            "body_wilson95": [
+              0.7834258825797727,
+              0.9139899131588264
+            ],
+            "stable_endpoint_failures": 59,
+            "max_drift_m": 0.05833211913704872,
+            "max_rotation_rad": 2.111156702041626,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 34,
+            "success_and_full_stability_rate": 0.3148148148148148,
+            "success_and_full_stability_wilson95": [
+              0.23486550444655452,
+              0.4074853695336511
+            ],
+            "median_mean_abs_slider_error_m": 0.008135291282087564
+          }
+        },
+        {
+          "geometry": "W110",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 99,
+          "rate": 0.7185132575757576,
+          "body_rate": 0.8906052714646464,
+          "success_and_full_stability_rate": 0.7185132575757576,
+          "worst_source": {
+            "geometry": "W110",
+            "model": "student",
+            "protocol": "S2",
+            "source": 3,
+            "n": 99,
+            "success": 3,
+            "rate": 0.030303030303030304,
+            "wilson95": [
+              0.010358639578454329,
+              0.08533680206101803
+            ],
+            "body_stable": 58,
+            "body_rate": 0.5858585858585859,
+            "body_wilson95": [
+              0.4873979779628506,
+              0.6779050058234822
+            ],
+            "stable_endpoint_failures": 55,
+            "max_drift_m": 0.059560973197221756,
+            "max_rotation_rad": 3.1054463386535645,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 3,
+            "success_and_full_stability_rate": 0.030303030303030304,
+            "success_and_full_stability_wilson95": [
+              0.010358639578454329,
+              0.08533680206101803
+            ],
+            "median_mean_abs_slider_error_m": 0.008210072293877602
+          }
+        },
+        {
+          "geometry": "W120",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 102,
+          "rate": 0.625,
+          "body_rate": 0.7588465073529411,
+          "success_and_full_stability_rate": 0.625,
+          "worst_source": {
+            "geometry": "W120",
+            "model": "student",
+            "protocol": "S2",
+            "source": 3,
+            "n": 102,
+            "success": 0,
+            "rate": 0.0,
+            "wilson95": [
+              3.469446951953614e-18,
+              0.03629446214646126
+            ],
+            "body_stable": 6,
+            "body_rate": 0.058823529411764705,
+            "body_wilson95": [
+              0.02723563934537509,
+              0.12243594490150247
+            ],
+            "stable_endpoint_failures": 6,
+            "max_drift_m": 0.06118927150964737,
+            "max_rotation_rad": 3.0770814418792725,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 0,
+            "success_and_full_stability_rate": 0.0,
+            "success_and_full_stability_wilson95": [
+              3.469446951953614e-18,
+              0.03629446214646126
+            ],
+            "median_mean_abs_slider_error_m": 0.010405377019196749
+          }
+        },
+        {
+          "geometry": "W80",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 104,
+          "rate": 0.7647235576923077,
+          "body_rate": 0.962890625,
+          "success_and_full_stability_rate": 0.7647235576923077,
+          "worst_source": {
+            "geometry": "W80",
+            "model": "student",
+            "protocol": "S2",
+            "source": 3,
+            "n": 104,
+            "success": 37,
+            "rate": 0.3557692307692308,
+            "wilson95": [
+              0.27040432529096187,
+              0.45140952693186015
+            ],
+            "body_stable": 104,
+            "body_rate": 1.0,
+            "body_wilson95": [
+              0.9643786456275499,
+              0.9999999999999999
+            ],
+            "stable_endpoint_failures": 67,
+            "max_drift_m": 0.007951352745294571,
+            "max_rotation_rad": 0.2226884663105011,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7333333333333333,
+            "success_and_full_stability": 37,
+            "success_and_full_stability_rate": 0.3557692307692308,
+            "success_and_full_stability_wilson95": [
+              0.27040432529096187,
+              0.45140952693186015
+            ],
+            "median_mean_abs_slider_error_m": 0.007815864402800798
+          }
+        },
+        {
+          "geometry": "W90",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 103,
+          "rate": 0.8871738470873787,
+          "body_rate": 0.9829528216019418,
+          "success_and_full_stability_rate": 0.8871738470873787,
+          "worst_source": {
+            "geometry": "W90",
+            "model": "student",
+            "protocol": "S2",
+            "source": 3,
+            "n": 103,
+            "success": 71,
+            "rate": 0.6893203883495146,
+            "wilson95": [
+              0.5945002023335545,
+              0.7705266367837543
+            ],
+            "body_stable": 100,
+            "body_rate": 0.970873786407767,
+            "body_wilson95": [
+              0.9178416343391819,
+              0.9900456321833552
+            ],
+            "stable_endpoint_failures": 29,
+            "max_drift_m": 0.043078839778900146,
+            "max_rotation_rad": 1.7939133644104004,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 71,
+            "success_and_full_stability_rate": 0.6893203883495146,
+            "success_and_full_stability_wilson95": [
+              0.5945002023335545,
+              0.7705266367837543
+            ],
+            "median_mean_abs_slider_error_m": 0.007650597952306271
+          }
+        },
+        {
+          "geometry": "baseline",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 128,
+          "rate": 0.896484375,
+          "body_rate": 0.982421875,
+          "success_and_full_stability_rate": 0.896484375,
+          "worst_source": {
+            "geometry": "baseline",
+            "model": "student",
+            "protocol": "S2",
+            "source": 3,
+            "n": 128,
+            "success": 96,
+            "rate": 0.75,
+            "wilson95": [
+              0.6684443704768337,
+              0.8169871513864129
+            ],
+            "body_stable": 123,
+            "body_rate": 0.9609375,
+            "body_wilson95": [
+              0.911812979233165,
+              0.9832013892021959
+            ],
+            "stable_endpoint_failures": 27,
+            "max_drift_m": 0.05733603611588478,
+            "max_rotation_rad": 2.1885812282562256,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 96,
+            "success_and_full_stability_rate": 0.75,
+            "success_and_full_stability_wilson95": [
+              0.6684443704768337,
+              0.8169871513864129
+            ],
+            "median_mean_abs_slider_error_m": 0.00663928990252316
+          }
+        }
+      ],
+      "scope": "Conditional on available sources only; geometry coverage differs and is explicit. No claim of full4source coverage or continuous range."
+    },
+    {
+      "model": "student",
+      "protocol": "S5",
+      "geometries": 13,
+      "equal_geometry_available_source_macro": 0.6377553617584986,
+      "body_macro": 0.9176368272352449,
+      "success_and_full_stability_macro": 0.6377553617584986,
+      "worst_geometry": {
+        "geometry": "L120",
+        "covered_sources": [
+          0,
+          1,
+          2
+        ],
+        "missing_sources": [
+          3
+        ],
+        "minimum_source_n": 128,
+        "rate": 0.22135416666666666,
+        "body_rate": 0.9427083333333334,
+        "success_and_full_stability_rate": 0.22135416666666666,
+        "worst_source": {
+          "geometry": "L120",
+          "model": "student",
+          "protocol": "S5",
+          "source": 1,
+          "n": 128,
+          "success": 11,
+          "rate": 0.0859375,
+          "wilson95": [
+            0.04866313137138695,
+            0.14734091054261092
+          ],
+          "body_stable": 111,
+          "body_rate": 0.8671875,
+          "body_wilson95": [
+            0.7975798330550484,
+            0.9153977146815951
+          ],
+          "stable_endpoint_failures": 100,
+          "max_drift_m": 0.006682731676846743,
+          "max_rotation_rad": 0.2732066214084625,
+          "median_travel_fraction": 1.0,
+          "median_first_arrival_s": 0.7,
+          "success_and_full_stability": 11,
+          "success_and_full_stability_rate": 0.0859375,
+          "success_and_full_stability_wilson95": [
+            0.04866313137138695,
+            0.14734091054261092
+          ],
+          "median_mean_abs_slider_error_m": 0.004023426910862327
+        }
+      },
+      "geometry_rows": [
+        {
+          "geometry": "L110",
+          "covered_sources": [
+            0,
+            1,
+            2
+          ],
+          "missing_sources": [
+            3
+          ],
+          "minimum_source_n": 128,
+          "rate": 0.28125,
+          "body_rate": 0.953125,
+          "success_and_full_stability_rate": 0.28125,
+          "worst_source": {
+            "geometry": "L110",
+            "model": "student",
+            "protocol": "S5",
+            "source": 1,
+            "n": 128,
+            "success": 16,
+            "rate": 0.125,
+            "wilson95": [
+              0.07842644638761767,
+              0.19342627081751254
+            ],
+            "body_stable": 114,
+            "body_rate": 0.890625,
+            "body_wilson95": [
+              0.8247655486183249,
+              0.933721204292998
+            ],
+            "stable_endpoint_failures": 98,
+            "max_drift_m": 0.006516486871987581,
+            "max_rotation_rad": 0.268731951713562,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 16,
+            "success_and_full_stability_rate": 0.125,
+            "success_and_full_stability_wilson95": [
+              0.07842644638761767,
+              0.19342627081751254
+            ],
+            "median_mean_abs_slider_error_m": 0.003966569667682052
+          }
+        },
+        {
+          "geometry": "L120",
+          "covered_sources": [
+            0,
+            1,
+            2
+          ],
+          "missing_sources": [
+            3
+          ],
+          "minimum_source_n": 128,
+          "rate": 0.22135416666666666,
+          "body_rate": 0.9427083333333334,
+          "success_and_full_stability_rate": 0.22135416666666666,
+          "worst_source": {
+            "geometry": "L120",
+            "model": "student",
+            "protocol": "S5",
+            "source": 1,
+            "n": 128,
+            "success": 11,
+            "rate": 0.0859375,
+            "wilson95": [
+              0.04866313137138695,
+              0.14734091054261092
+            ],
+            "body_stable": 111,
+            "body_rate": 0.8671875,
+            "body_wilson95": [
+              0.7975798330550484,
+              0.9153977146815951
+            ],
+            "stable_endpoint_failures": 100,
+            "max_drift_m": 0.006682731676846743,
+            "max_rotation_rad": 0.2732066214084625,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 11,
+            "success_and_full_stability_rate": 0.0859375,
+            "success_and_full_stability_wilson95": [
+              0.04866313137138695,
+              0.14734091054261092
+            ],
+            "median_mean_abs_slider_error_m": 0.004023426910862327
+          }
+        },
+        {
+          "geometry": "L80",
+          "covered_sources": [
+            0,
+            1,
+            2
+          ],
+          "missing_sources": [
+            3
+          ],
+          "minimum_source_n": 128,
+          "rate": 0.4322916666666667,
+          "body_rate": 0.984375,
+          "success_and_full_stability_rate": 0.4322916666666667,
+          "worst_source": {
+            "geometry": "L80",
+            "model": "student",
+            "protocol": "S5",
+            "source": 2,
+            "n": 128,
+            "success": 0,
+            "rate": 0.0,
+            "wilson95": [
+              0.0,
+              0.02913695627350686
+            ],
+            "body_stable": 127,
+            "body_rate": 0.9921875,
+            "body_wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "stable_endpoint_failures": 127,
+            "max_drift_m": 0.024603623896837234,
+            "max_rotation_rad": 1.7167505025863647,
+            "median_travel_fraction": 0.9490942116826773,
+            "median_first_arrival_s": 5.766666666666667,
+            "success_and_full_stability": 0,
+            "success_and_full_stability_rate": 0.0,
+            "success_and_full_stability_wilson95": [
+              0.0,
+              0.02913695627350686
+            ],
+            "median_mean_abs_slider_error_m": 0.004400725942105055
+          }
+        },
+        {
+          "geometry": "L90",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 13,
+          "rate": 0.322265625,
+          "body_rate": 0.734375,
+          "success_and_full_stability_rate": 0.322265625,
+          "worst_source": {
+            "geometry": "L90",
+            "model": "student",
+            "protocol": "S5",
+            "source": 2,
+            "n": 128,
+            "success": 0,
+            "rate": 0.0,
+            "wilson95": [
+              0.0,
+              0.02913695627350686
+            ],
+            "body_stable": 126,
+            "body_rate": 0.984375,
+            "body_wilson95": [
+              0.9448190233201845,
+              0.9957045502898558
+            ],
+            "stable_endpoint_failures": 126,
+            "max_drift_m": 0.030910883098840714,
+            "max_rotation_rad": 2.104557514190674,
+            "median_travel_fraction": 0.9506671689450741,
+            "median_first_arrival_s": 5.766666666666667,
+            "success_and_full_stability": 0,
+            "success_and_full_stability_rate": 0.0,
+            "success_and_full_stability_wilson95": [
+              0.0,
+              0.02913695627350686
+            ],
+            "median_mean_abs_slider_error_m": 0.00431282795034349
+          }
+        },
+        {
+          "geometry": "T110",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 97,
+          "rate": 0.8441728414948454,
+          "body_rate": 0.9482925257731959,
+          "success_and_full_stability_rate": 0.8441728414948454,
+          "worst_source": {
+            "geometry": "T110",
+            "model": "student",
+            "protocol": "S5",
+            "source": 3,
+            "n": 97,
+            "success": 57,
+            "rate": 0.5876288659793815,
+            "wilson95": [
+              0.48815469664242533,
+              0.6804267598220995
+            ],
+            "body_stable": 83,
+            "body_rate": 0.8556701030927835,
+            "body_wilson95": [
+              0.7722059515958372,
+              0.9120364305248817
+            ],
+            "stable_endpoint_failures": 26,
+            "max_drift_m": 0.056708212941884995,
+            "max_rotation_rad": 1.9975582361221313,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 57,
+            "success_and_full_stability_rate": 0.5876288659793815,
+            "success_and_full_stability_wilson95": [
+              0.48815469664242533,
+              0.6804267598220995
+            ],
+            "median_mean_abs_slider_error_m": 0.0026603592559695244
+          }
+        },
+        {
+          "geometry": "T120",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 83,
+          "rate": 0.7667074548192772,
+          "body_rate": 0.9480657003012049,
+          "success_and_full_stability_rate": 0.7667074548192772,
+          "worst_source": {
+            "geometry": "T120",
+            "model": "student",
+            "protocol": "S5",
+            "source": 3,
+            "n": 83,
+            "success": 25,
+            "rate": 0.30120481927710846,
+            "wilson95": [
+              0.21310689683441553,
+              0.40689027446901904
+            ],
+            "body_stable": 69,
+            "body_rate": 0.8313253012048193,
+            "body_wilson95": [
+              0.7365588598487048,
+              0.8967791879789043
+            ],
+            "stable_endpoint_failures": 44,
+            "max_drift_m": 0.055965714156627655,
+            "max_rotation_rad": 2.249319076538086,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7333333333333333,
+            "success_and_full_stability": 25,
+            "success_and_full_stability_rate": 0.30120481927710846,
+            "success_and_full_stability_wilson95": [
+              0.21310689683441553,
+              0.40689027446901904
+            ],
+            "median_mean_abs_slider_error_m": 0.0029039490036666393
+          }
+        },
+        {
+          "geometry": "T80",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 122,
+          "rate": 0.8231301229508197,
+          "body_rate": 0.9424948770491803,
+          "success_and_full_stability_rate": 0.8231301229508197,
+          "worst_source": {
+            "geometry": "T80",
+            "model": "student",
+            "protocol": "S5",
+            "source": 3,
+            "n": 122,
+            "success": 70,
+            "rate": 0.5737704918032787,
+            "wilson95": [
+              0.48508656584157084,
+              0.6579505553797225
+            ],
+            "body_stable": 113,
+            "body_rate": 0.9262295081967213,
+            "body_wilson95": [
+              0.8657305059229281,
+              0.9607061944667674
+            ],
+            "stable_endpoint_failures": 43,
+            "max_drift_m": 0.056189894676208496,
+            "max_rotation_rad": 2.1517763137817383,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 70,
+            "success_and_full_stability_rate": 0.5737704918032787,
+            "success_and_full_stability_wilson95": [
+              0.48508656584157084,
+              0.6579505553797225
+            ],
+            "median_mean_abs_slider_error_m": 0.0031197909265756607
+          }
+        },
+        {
+          "geometry": "T90",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 108,
+          "rate": 0.8355758101851852,
+          "body_rate": 0.9717158564814815,
+          "success_and_full_stability_rate": 0.8355758101851852,
+          "worst_source": {
+            "geometry": "T90",
+            "model": "student",
+            "protocol": "S5",
+            "source": 3,
+            "n": 108,
+            "success": 53,
+            "rate": 0.49074074074074076,
+            "wilson95": [
+              0.39840891298325326,
+              0.583708630715757
+            ],
+            "body_stable": 100,
+            "body_rate": 0.9259259259259259,
+            "body_wilson95": [
+              0.8606032385435991,
+              0.961989751301928
+            ],
+            "stable_endpoint_failures": 47,
+            "max_drift_m": 0.05918151140213013,
+            "max_rotation_rad": 2.3519275188446045,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 53,
+            "success_and_full_stability_rate": 0.49074074074074076,
+            "success_and_full_stability_wilson95": [
+              0.39840891298325326,
+              0.583708630715757
+            ],
+            "median_mean_abs_slider_error_m": 0.003062616684474051
+          }
+        },
+        {
+          "geometry": "W110",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 99,
+          "rate": 0.6932212752525253,
+          "body_rate": 0.8238044507575758,
+          "success_and_full_stability_rate": 0.6932212752525253,
+          "worst_source": {
+            "geometry": "W110",
+            "model": "student",
+            "protocol": "S5",
+            "source": 3,
+            "n": 99,
+            "success": 10,
+            "rate": 0.10101010101010101,
+            "wilson95": [
+              0.05579667502880589,
+              0.176030635611176
+            ],
+            "body_stable": 30,
+            "body_rate": 0.30303030303030304,
+            "body_wilson95": [
+              0.22126289634155225,
+              0.3995126114427425
+            ],
+            "stable_endpoint_failures": 20,
+            "max_drift_m": 0.06293006241321564,
+            "max_rotation_rad": 3.116800546646118,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 10,
+            "success_and_full_stability_rate": 0.10101010101010101,
+            "success_and_full_stability_wilson95": [
+              0.05579667502880589,
+              0.176030635611176
+            ],
+            "median_mean_abs_slider_error_m": 0.004489910323172808
+          }
+        },
+        {
+          "geometry": "W120",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 102,
+          "rate": 0.564453125,
+          "body_rate": 0.7421875,
+          "success_and_full_stability_rate": 0.564453125,
+          "worst_source": {
+            "geometry": "W120",
+            "model": "student",
+            "protocol": "S5",
+            "source": 3,
+            "n": 102,
+            "success": 0,
+            "rate": 0.0,
+            "wilson95": [
+              3.469446951953614e-18,
+              0.03629446214646126
+            ],
+            "body_stable": 0,
+            "body_rate": 0.0,
+            "body_wilson95": [
+              3.469446951953614e-18,
+              0.03629446214646126
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.061645593494176865,
+            "max_rotation_rad": 3.069723606109619,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 0,
+            "success_and_full_stability_rate": 0.0,
+            "success_and_full_stability_wilson95": [
+              3.469446951953614e-18,
+              0.03629446214646126
+            ],
+            "median_mean_abs_slider_error_m": 0.009146695025265217
+          }
+        },
+        {
+          "geometry": "W80",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 104,
+          "rate": 0.7043269230769231,
+          "body_rate": 0.9678485576923077,
+          "success_and_full_stability_rate": 0.7043269230769231,
+          "worst_source": {
+            "geometry": "W80",
+            "model": "student",
+            "protocol": "S5",
+            "source": 3,
+            "n": 104,
+            "success": 46,
+            "rate": 0.4423076923076923,
+            "wilson95": [
+              0.35060243907219246,
+              0.5381231018169363
+            ],
+            "body_stable": 102,
+            "body_rate": 0.9807692307692307,
+            "body_wilson95": [
+              0.9325768708423238,
+              0.9947102884149358
+            ],
+            "stable_endpoint_failures": 56,
+            "max_drift_m": 0.014317456632852554,
+            "max_rotation_rad": 1.6165432929992676,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7333333333333333,
+            "success_and_full_stability": 46,
+            "success_and_full_stability_rate": 0.4423076923076923,
+            "success_and_full_stability_wilson95": [
+              0.35060243907219246,
+              0.5381231018169363
+            ],
+            "median_mean_abs_slider_error_m": 0.0032038181088864803
+          }
+        },
+        {
+          "geometry": "W90",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 103,
+          "rate": 0.9055863167475728,
+          "body_rate": 0.9839578276699029,
+          "success_and_full_stability_rate": 0.9055863167475728,
+          "worst_source": {
+            "geometry": "W90",
+            "model": "student",
+            "protocol": "S5",
+            "source": 3,
+            "n": 103,
+            "success": 81,
+            "rate": 0.7864077669902912,
+            "wilson95": [
+              0.6977175385206237,
+              0.8545025514260741
+            ],
+            "body_stable": 98,
+            "body_rate": 0.9514563106796117,
+            "body_wilson95": [
+              0.8913594304491923,
+              0.9790891859074669
+            ],
+            "stable_endpoint_failures": 17,
+            "max_drift_m": 0.046321652829647064,
+            "max_rotation_rad": 1.807220458984375,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 81,
+            "success_and_full_stability_rate": 0.7864077669902912,
+            "success_and_full_stability_wilson95": [
+              0.6977175385206237,
+              0.8545025514260741
+            ],
+            "median_mean_abs_slider_error_m": 0.0028998313937336206
+          }
+        },
+        {
+          "geometry": "baseline",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 128,
+          "rate": 0.896484375,
+          "body_rate": 0.986328125,
+          "success_and_full_stability_rate": 0.896484375,
+          "worst_source": {
+            "geometry": "baseline",
+            "model": "student",
+            "protocol": "S5",
+            "source": 3,
+            "n": 128,
+            "success": 98,
+            "rate": 0.765625,
+            "wilson95": [
+              0.6851645688917738,
+              0.8306064230879258
+            ],
+            "body_stable": 127,
+            "body_rate": 0.9921875,
+            "body_wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "stable_endpoint_failures": 29,
+            "max_drift_m": 0.055150531232357025,
+            "max_rotation_rad": 2.6147966384887695,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 98,
+            "success_and_full_stability_rate": 0.765625,
+            "success_and_full_stability_wilson95": [
+              0.6851645688917738,
+              0.8306064230879258
+            ],
+            "median_mean_abs_slider_error_m": 0.0025108844274654984
+          }
+        }
+      ],
+      "scope": "Conditional on available sources only; geometry coverage differs and is explicit. No claim of full4source coverage or continuous range."
+    },
+    {
+      "model": "teacher",
+      "protocol": "F",
+      "geometries": 13,
+      "equal_geometry_available_source_macro": 0.9984697738603988,
+      "body_macro": 0.8819658956523349,
+      "success_and_full_stability_macro": 0.8819658956523349,
+      "worst_geometry": {
+        "geometry": "T80",
+        "covered_sources": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "missing_sources": [],
+        "minimum_source_n": 122,
+        "rate": 0.9921875,
+        "body_rate": 0.7703317110655737,
+        "success_and_full_stability_rate": 0.7703317110655737,
+        "worst_source": {
+          "geometry": "T80",
+          "model": "teacher",
+          "protocol": "F",
+          "source": 0,
+          "n": 128,
+          "success": 125,
+          "rate": 0.9765625,
+          "wilson95": [
+            0.9333562549485696,
+            0.9919975836032443
+          ],
+          "body_stable": 124,
+          "body_rate": 0.96875,
+          "body_wilson95": [
+            0.922402368738641,
+            0.9877817347549464
+          ],
+          "stable_endpoint_failures": 0,
+          "max_drift_m": 0.034699928015470505,
+          "max_rotation_rad": 2.4683761596679688,
+          "median_travel_fraction": 0.9859463199973106,
+          "median_first_arrival_s": 1.8333333333333333,
+          "success_and_full_stability": 124,
+          "success_and_full_stability_rate": 0.96875,
+          "success_and_full_stability_wilson95": [
+            0.922402368738641,
+            0.9877817347549464
+          ],
+          "median_mean_abs_slider_error_m": 0.00755775161087513
+        }
+      },
+      "geometry_rows": [
+        {
+          "geometry": "L110",
+          "covered_sources": [
+            0,
+            1,
+            2
+          ],
+          "missing_sources": [
+            3
+          ],
+          "minimum_source_n": 128,
+          "rate": 1.0,
+          "body_rate": 0.8229166666666666,
+          "success_and_full_stability_rate": 0.8229166666666666,
+          "worst_source": {
+            "geometry": "L110",
+            "model": "teacher",
+            "protocol": "F",
+            "source": 0,
+            "n": 128,
+            "success": 128,
+            "rate": 1.0,
+            "wilson95": [
+              0.9708630437264931,
+              1.0
+            ],
+            "body_stable": 127,
+            "body_rate": 0.9921875,
+            "body_wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.03051295503973961,
+            "max_rotation_rad": 1.6122643947601318,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 127,
+            "success_and_full_stability_rate": 0.9921875,
+            "success_and_full_stability_wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "median_mean_abs_slider_error_m": 0.007490325719118118
+          }
+        },
+        {
+          "geometry": "L120",
+          "covered_sources": [
+            0,
+            1,
+            2
+          ],
+          "missing_sources": [
+            3
+          ],
+          "minimum_source_n": 128,
+          "rate": 1.0,
+          "body_rate": 0.8307291666666666,
+          "success_and_full_stability_rate": 0.8307291666666666,
+          "worst_source": {
+            "geometry": "L120",
+            "model": "teacher",
+            "protocol": "F",
+            "source": 0,
+            "n": 128,
+            "success": 128,
+            "rate": 1.0,
+            "wilson95": [
+              0.9708630437264931,
+              1.0
+            ],
+            "body_stable": 127,
+            "body_rate": 0.9921875,
+            "body_wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.034548304975032806,
+            "max_rotation_rad": 2.0715858936309814,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 127,
+            "success_and_full_stability_rate": 0.9921875,
+            "success_and_full_stability_wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "median_mean_abs_slider_error_m": 0.007502366788685322
+          }
+        },
+        {
+          "geometry": "L80",
+          "covered_sources": [
+            0,
+            1,
+            2
+          ],
+          "missing_sources": [
+            3
+          ],
+          "minimum_source_n": 128,
+          "rate": 1.0,
+          "body_rate": 0.9296875,
+          "success_and_full_stability_rate": 0.9296875,
+          "worst_source": {
+            "geometry": "L80",
+            "model": "teacher",
+            "protocol": "F",
+            "source": 0,
+            "n": 128,
+            "success": 128,
+            "rate": 1.0,
+            "wilson95": [
+              0.9708630437264931,
+              1.0
+            ],
+            "body_stable": 126,
+            "body_rate": 0.984375,
+            "body_wilson95": [
+              0.9448190233201845,
+              0.9957045502898558
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.0302815493196249,
+            "max_rotation_rad": 2.2131848335266113,
+            "median_travel_fraction": 0.9798678103834391,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 126,
+            "success_and_full_stability_rate": 0.984375,
+            "success_and_full_stability_wilson95": [
+              0.9448190233201845,
+              0.9957045502898558
+            ],
+            "median_mean_abs_slider_error_m": 0.0076321689411997795
+          }
+        },
+        {
+          "geometry": "L90",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 13,
+          "rate": 1.0,
+          "body_rate": 0.9241286057692308,
+          "success_and_full_stability_rate": 0.9241286057692308,
+          "worst_source": {
+            "geometry": "L90",
+            "model": "teacher",
+            "protocol": "F",
+            "source": 0,
+            "n": 128,
+            "success": 128,
+            "rate": 1.0,
+            "wilson95": [
+              0.9708630437264931,
+              1.0
+            ],
+            "body_stable": 127,
+            "body_rate": 0.9921875,
+            "body_wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.0065512219443917274,
+            "max_rotation_rad": 0.2628549039363861,
+            "median_travel_fraction": 0.981502840295434,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 127,
+            "success_and_full_stability_rate": 0.9921875,
+            "success_and_full_stability_wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "median_mean_abs_slider_error_m": 0.007619553478434682
+          }
+        },
+        {
+          "geometry": "T110",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 97,
+          "rate": 1.0,
+          "body_rate": 0.9382047358247423,
+          "success_and_full_stability_rate": 0.9382047358247423,
+          "worst_source": {
+            "geometry": "T110",
+            "model": "teacher",
+            "protocol": "F",
+            "source": 0,
+            "n": 128,
+            "success": 128,
+            "rate": 1.0,
+            "wilson95": [
+              0.9708630437264931,
+              1.0
+            ],
+            "body_stable": 127,
+            "body_rate": 0.9921875,
+            "body_wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.00652817590162158,
+            "max_rotation_rad": 0.2664238512516022,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 127,
+            "success_and_full_stability_rate": 0.9921875,
+            "success_and_full_stability_wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "median_mean_abs_slider_error_m": 0.0074532420840114355
+          }
+        },
+        {
+          "geometry": "T120",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 83,
+          "rate": 0.99609375,
+          "body_rate": 0.9038027108433735,
+          "success_and_full_stability_rate": 0.9038027108433735,
+          "worst_source": {
+            "geometry": "T120",
+            "model": "teacher",
+            "protocol": "F",
+            "source": 0,
+            "n": 128,
+            "success": 127,
+            "rate": 0.9921875,
+            "wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "body_stable": 126,
+            "body_rate": 0.984375,
+            "body_wilson95": [
+              0.9448190233201845,
+              0.9957045502898558
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.03307117521762848,
+            "max_rotation_rad": 2.693007469177246,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 126,
+            "success_and_full_stability_rate": 0.984375,
+            "success_and_full_stability_wilson95": [
+              0.9448190233201845,
+              0.9957045502898558
+            ],
+            "median_mean_abs_slider_error_m": 0.007382298586890101
+          }
+        },
+        {
+          "geometry": "T80",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 122,
+          "rate": 0.9921875,
+          "body_rate": 0.7703317110655737,
+          "success_and_full_stability_rate": 0.7703317110655737,
+          "worst_source": {
+            "geometry": "T80",
+            "model": "teacher",
+            "protocol": "F",
+            "source": 0,
+            "n": 128,
+            "success": 125,
+            "rate": 0.9765625,
+            "wilson95": [
+              0.9333562549485696,
+              0.9919975836032443
+            ],
+            "body_stable": 124,
+            "body_rate": 0.96875,
+            "body_wilson95": [
+              0.922402368738641,
+              0.9877817347549464
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.034699928015470505,
+            "max_rotation_rad": 2.4683761596679688,
+            "median_travel_fraction": 0.9859463199973106,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 124,
+            "success_and_full_stability_rate": 0.96875,
+            "success_and_full_stability_wilson95": [
+              0.922402368738641,
+              0.9877817347549464
+            ],
+            "median_mean_abs_slider_error_m": 0.00755775161087513
+          }
+        },
+        {
+          "geometry": "T90",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 108,
+          "rate": 0.9937789351851851,
+          "body_rate": 0.8721064814814815,
+          "success_and_full_stability_rate": 0.8721064814814815,
+          "worst_source": {
+            "geometry": "T90",
+            "model": "teacher",
+            "protocol": "F",
+            "source": 0,
+            "n": 128,
+            "success": 126,
+            "rate": 0.984375,
+            "wilson95": [
+              0.9448190233201845,
+              0.9957045502898558
+            ],
+            "body_stable": 123,
+            "body_rate": 0.9609375,
+            "body_wilson95": [
+              0.911812979233165,
+              0.9832013892021959
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.0482657365500927,
+            "max_rotation_rad": 2.285466194152832,
+            "median_travel_fraction": 0.9900613687932491,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 123,
+            "success_and_full_stability_rate": 0.9609375,
+            "success_and_full_stability_wilson95": [
+              0.911812979233165,
+              0.9832013892021959
+            ],
+            "median_mean_abs_slider_error_m": 0.007571081630885601
+          }
+        },
+        {
+          "geometry": "W110",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 99,
+          "rate": 1.0,
+          "body_rate": 0.8877643623737373,
+          "success_and_full_stability_rate": 0.8877643623737373,
+          "worst_source": {
+            "geometry": "W110",
+            "model": "teacher",
+            "protocol": "F",
+            "source": 0,
+            "n": 128,
+            "success": 128,
+            "rate": 1.0,
+            "wilson95": [
+              0.9708630437264931,
+              1.0
+            ],
+            "body_stable": 128,
+            "body_rate": 1.0,
+            "body_wilson95": [
+              0.9708630437264931,
+              1.0
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.006384405307471752,
+            "max_rotation_rad": 0.21655133366584778,
+            "median_travel_fraction": 0.9994205553084612,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 128,
+            "success_and_full_stability_rate": 1.0,
+            "success_and_full_stability_wilson95": [
+              0.9708630437264931,
+              1.0
+            ],
+            "median_mean_abs_slider_error_m": 0.007612387416884303
+          }
+        },
+        {
+          "geometry": "W120",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 102,
+          "rate": 1.0,
+          "body_rate": 0.820733762254902,
+          "success_and_full_stability_rate": 0.820733762254902,
+          "worst_source": {
+            "geometry": "W120",
+            "model": "teacher",
+            "protocol": "F",
+            "source": 0,
+            "n": 128,
+            "success": 128,
+            "rate": 1.0,
+            "wilson95": [
+              0.9708630437264931,
+              1.0
+            ],
+            "body_stable": 128,
+            "body_rate": 1.0,
+            "body_wilson95": [
+              0.9708630437264931,
+              1.0
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.006281489040702581,
+            "max_rotation_rad": 0.2037949413061142,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 128,
+            "success_and_full_stability_rate": 1.0,
+            "success_and_full_stability_wilson95": [
+              0.9708630437264931,
+              1.0
+            ],
+            "median_mean_abs_slider_error_m": 0.007612210465595126
+          }
+        },
+        {
+          "geometry": "W80",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 104,
+          "rate": 1.0,
+          "body_rate": 0.8984375,
+          "success_and_full_stability_rate": 0.8984375,
+          "worst_source": {
+            "geometry": "W80",
+            "model": "teacher",
+            "protocol": "F",
+            "source": 0,
+            "n": 128,
+            "success": 128,
+            "rate": 1.0,
+            "wilson95": [
+              0.9708630437264931,
+              1.0
+            ],
+            "body_stable": 125,
+            "body_rate": 0.9765625,
+            "body_wilson95": [
+              0.9333562549485696,
+              0.9919975836032443
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.03181801363825798,
+            "max_rotation_rad": 2.6097962856292725,
+            "median_travel_fraction": 0.9937294758856297,
+            "median_first_arrival_s": 1.8666666666666667,
+            "success_and_full_stability": 125,
+            "success_and_full_stability_rate": 0.9765625,
+            "success_and_full_stability_wilson95": [
+              0.9333562549485696,
+              0.9919975836032443
+            ],
+            "median_mean_abs_slider_error_m": 0.007461584405973554
+          }
+        },
+        {
+          "geometry": "W90",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 103,
+          "rate": 0.998046875,
+          "body_rate": 0.9428853155339806,
+          "success_and_full_stability_rate": 0.9428853155339806,
+          "worst_source": {
+            "geometry": "W90",
+            "model": "teacher",
+            "protocol": "F",
+            "source": 2,
+            "n": 128,
+            "success": 127,
+            "rate": 0.9921875,
+            "wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "body_stable": 118,
+            "body_rate": 0.921875,
+            "body_wilson95": [
+              0.8621530681952115,
+              0.9570126249490171
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.044492170214653015,
+            "max_rotation_rad": 2.453160047531128,
+            "median_travel_fraction": 0.9883179794996977,
+            "median_first_arrival_s": 2.066666666666667,
+            "success_and_full_stability": 118,
+            "success_and_full_stability_rate": 0.921875,
+            "success_and_full_stability_wilson95": [
+              0.8621530681952115,
+              0.9570126249490171
+            ],
+            "median_mean_abs_slider_error_m": 0.00925168814137578
+          }
+        },
+        {
+          "geometry": "baseline",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 128,
+          "rate": 1.0,
+          "body_rate": 0.923828125,
+          "success_and_full_stability_rate": 0.923828125,
+          "worst_source": {
+            "geometry": "baseline",
+            "model": "teacher",
+            "protocol": "F",
+            "source": 0,
+            "n": 128,
+            "success": 128,
+            "rate": 1.0,
+            "wilson95": [
+              0.9708630437264931,
+              1.0
+            ],
+            "body_stable": 127,
+            "body_rate": 0.9921875,
+            "body_wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.03696657344698906,
+            "max_rotation_rad": 1.8807047605514526,
+            "median_travel_fraction": 0.9943340439349413,
+            "median_first_arrival_s": 1.8333333333333333,
+            "success_and_full_stability": 127,
+            "success_and_full_stability_rate": 0.9921875,
+            "success_and_full_stability_wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "median_mean_abs_slider_error_m": 0.007544398307800293
+          }
+        }
+      ],
+      "scope": "Conditional on available sources only; geometry coverage differs and is explicit. No claim of full4source coverage or continuous range."
+    },
+    {
+      "model": "teacher",
+      "protocol": "S2",
+      "geometries": 13,
+      "equal_geometry_available_source_macro": 0.8995877790444985,
+      "body_macro": 0.9828578698737022,
+      "success_and_full_stability_macro": 0.8995877790444985,
+      "worst_geometry": {
+        "geometry": "L90",
+        "covered_sources": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "missing_sources": [],
+        "minimum_source_n": 13,
+        "rate": 0.65234375,
+        "body_rate": 0.9788161057692308,
+        "success_and_full_stability_rate": 0.65234375,
+        "worst_source": {
+          "geometry": "L90",
+          "model": "teacher",
+          "protocol": "S2",
+          "source": 3,
+          "n": 13,
+          "success": 0,
+          "rate": 0.0,
+          "wilson95": [
+            0.0,
+            0.22809537235418867
+          ],
+          "body_stable": 12,
+          "body_rate": 0.9230769230769231,
+          "body_wilson95": [
+            0.6668604907890129,
+            0.9862895787574429
+          ],
+          "stable_endpoint_failures": 12,
+          "max_drift_m": 0.02281321957707405,
+          "max_rotation_rad": 1.176830768585205,
+          "median_travel_fraction": 1.0,
+          "median_first_arrival_s": 0.8,
+          "success_and_full_stability": 0,
+          "success_and_full_stability_rate": 0.0,
+          "success_and_full_stability_wilson95": [
+            0.0,
+            0.22809537235418867
+          ],
+          "median_mean_abs_slider_error_m": 0.01037499401718378
+        }
+      },
+      "geometry_rows": [
+        {
+          "geometry": "L110",
+          "covered_sources": [
+            0,
+            1,
+            2
+          ],
+          "missing_sources": [
+            3
+          ],
+          "minimum_source_n": 128,
+          "rate": 0.9635416666666666,
+          "body_rate": 0.9947916666666666,
+          "success_and_full_stability_rate": 0.9635416666666666,
+          "worst_source": {
+            "geometry": "L110",
+            "model": "teacher",
+            "protocol": "S2",
+            "source": 2,
+            "n": 128,
+            "success": 118,
+            "rate": 0.921875,
+            "wilson95": [
+              0.8621530681952115,
+              0.9570126249490171
+            ],
+            "body_stable": 127,
+            "body_rate": 0.9921875,
+            "body_wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "stable_endpoint_failures": 9,
+            "max_drift_m": 0.02422255277633667,
+            "max_rotation_rad": 1.6301110982894897,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 1.0333333333333334,
+            "success_and_full_stability": 118,
+            "success_and_full_stability_rate": 0.921875,
+            "success_and_full_stability_wilson95": [
+              0.8621530681952115,
+              0.9570126249490171
+            ],
+            "median_mean_abs_slider_error_m": 0.008820406161248684
+          }
+        },
+        {
+          "geometry": "L120",
+          "covered_sources": [
+            0,
+            1,
+            2
+          ],
+          "missing_sources": [
+            3
+          ],
+          "minimum_source_n": 128,
+          "rate": 0.9479166666666666,
+          "body_rate": 0.9921875,
+          "success_and_full_stability_rate": 0.9479166666666666,
+          "worst_source": {
+            "geometry": "L120",
+            "model": "teacher",
+            "protocol": "S2",
+            "source": 1,
+            "n": 128,
+            "success": 119,
+            "rate": 0.9296875,
+            "wilson95": [
+              0.8717651965063957,
+              0.9625702316960594
+            ],
+            "body_stable": 126,
+            "body_rate": 0.984375,
+            "body_wilson95": [
+              0.9448190233201845,
+              0.9957045502898558
+            ],
+            "stable_endpoint_failures": 7,
+            "max_drift_m": 0.0066662984900176525,
+            "max_rotation_rad": 0.2575165629386902,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 119,
+            "success_and_full_stability_rate": 0.9296875,
+            "success_and_full_stability_wilson95": [
+              0.8717651965063957,
+              0.9625702316960594
+            ],
+            "median_mean_abs_slider_error_m": 0.009061950724571943
+          }
+        },
+        {
+          "geometry": "L80",
+          "covered_sources": [
+            0,
+            1,
+            2
+          ],
+          "missing_sources": [
+            3
+          ],
+          "minimum_source_n": 128,
+          "rate": 0.8046875,
+          "body_rate": 0.9921875,
+          "success_and_full_stability_rate": 0.8046875,
+          "worst_source": {
+            "geometry": "L80",
+            "model": "teacher",
+            "protocol": "S2",
+            "source": 2,
+            "n": 128,
+            "success": 62,
+            "rate": 0.484375,
+            "wilson95": [
+              0.3995229802596979,
+              0.5701375496238493
+            ],
+            "body_stable": 127,
+            "body_rate": 0.9921875,
+            "body_wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "stable_endpoint_failures": 65,
+            "max_drift_m": 0.027147721499204636,
+            "max_rotation_rad": 1.826979160308838,
+            "median_travel_fraction": 0.9651110041886568,
+            "median_first_arrival_s": 1.3333333333333333,
+            "success_and_full_stability": 62,
+            "success_and_full_stability_rate": 0.484375,
+            "success_and_full_stability_wilson95": [
+              0.3995229802596979,
+              0.5701375496238493
+            ],
+            "median_mean_abs_slider_error_m": 0.008586559910327196
+          }
+        },
+        {
+          "geometry": "L90",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 13,
+          "rate": 0.65234375,
+          "body_rate": 0.9788161057692308,
+          "success_and_full_stability_rate": 0.65234375,
+          "worst_source": {
+            "geometry": "L90",
+            "model": "teacher",
+            "protocol": "S2",
+            "source": 3,
+            "n": 13,
+            "success": 0,
+            "rate": 0.0,
+            "wilson95": [
+              0.0,
+              0.22809537235418867
+            ],
+            "body_stable": 12,
+            "body_rate": 0.9230769230769231,
+            "body_wilson95": [
+              0.6668604907890129,
+              0.9862895787574429
+            ],
+            "stable_endpoint_failures": 12,
+            "max_drift_m": 0.02281321957707405,
+            "max_rotation_rad": 1.176830768585205,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.8,
+            "success_and_full_stability": 0,
+            "success_and_full_stability_rate": 0.0,
+            "success_and_full_stability_wilson95": [
+              0.0,
+              0.22809537235418867
+            ],
+            "median_mean_abs_slider_error_m": 0.01037499401718378
+          }
+        },
+        {
+          "geometry": "T110",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 97,
+          "rate": 0.9225998711340206,
+          "body_rate": 0.9954695554123711,
+          "success_and_full_stability_rate": 0.9225998711340206,
+          "worst_source": {
+            "geometry": "T110",
+            "model": "teacher",
+            "protocol": "S2",
+            "source": 3,
+            "n": 97,
+            "success": 70,
+            "rate": 0.7216494845360825,
+            "wilson95": [
+              0.625323647406787,
+              0.8010882718858349
+            ],
+            "body_stable": 96,
+            "body_rate": 0.9896907216494846,
+            "body_wilson95": [
+              0.943895009757103,
+              0.998177835191713
+            ],
+            "stable_endpoint_failures": 26,
+            "max_drift_m": 0.015706075355410576,
+            "max_rotation_rad": 0.42149296402931213,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7333333333333333,
+            "success_and_full_stability": 70,
+            "success_and_full_stability_rate": 0.7216494845360825,
+            "success_and_full_stability_wilson95": [
+              0.625323647406787,
+              0.8010882718858349
+            ],
+            "median_mean_abs_slider_error_m": 0.006242507603019476
+          }
+        },
+        {
+          "geometry": "T120",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 83,
+          "rate": 0.8574689382530121,
+          "body_rate": 0.9684205572289156,
+          "success_and_full_stability_rate": 0.8574689382530121,
+          "worst_source": {
+            "geometry": "T120",
+            "model": "teacher",
+            "protocol": "S2",
+            "source": 3,
+            "n": 83,
+            "success": 48,
+            "rate": 0.5783132530120482,
+            "wilson95": [
+              0.47092823305023646,
+              0.6787698509817439
+            ],
+            "body_stable": 79,
+            "body_rate": 0.9518072289156626,
+            "body_wilson95": [
+              0.8825414079954871,
+              0.9811013844967073
+            ],
+            "stable_endpoint_failures": 31,
+            "max_drift_m": 0.0508856326341629,
+            "max_rotation_rad": 1.7109500169754028,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7666666666666667,
+            "success_and_full_stability": 48,
+            "success_and_full_stability_rate": 0.5783132530120482,
+            "success_and_full_stability_wilson95": [
+              0.47092823305023646,
+              0.6787698509817439
+            ],
+            "median_mean_abs_slider_error_m": 0.006143294740468264
+          }
+        },
+        {
+          "geometry": "T80",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 122,
+          "rate": 0.9215227971311475,
+          "body_rate": 0.9520683913934427,
+          "success_and_full_stability_rate": 0.9215227971311475,
+          "worst_source": {
+            "geometry": "T80",
+            "model": "teacher",
+            "protocol": "S2",
+            "source": 3,
+            "n": 122,
+            "success": 98,
+            "rate": 0.8032786885245902,
+            "wilson95": [
+              0.7239527940587434,
+              0.864088704295463
+            ],
+            "body_stable": 111,
+            "body_rate": 0.9098360655737705,
+            "body_wilson95": [
+              0.8457432172942373,
+              0.9489074561573928
+            ],
+            "stable_endpoint_failures": 13,
+            "max_drift_m": 0.05395972728729248,
+            "max_rotation_rad": 1.382108211517334,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 98,
+            "success_and_full_stability_rate": 0.8032786885245902,
+            "success_and_full_stability_wilson95": [
+              0.7239527940587434,
+              0.864088704295463
+            ],
+            "median_mean_abs_slider_error_m": 0.007629635278135538
+          }
+        },
+        {
+          "geometry": "T90",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 108,
+          "rate": 0.953197337962963,
+          "body_rate": 0.9829282407407407,
+          "success_and_full_stability_rate": 0.953197337962963,
+          "worst_source": {
+            "geometry": "T90",
+            "model": "teacher",
+            "protocol": "S2",
+            "source": 3,
+            "n": 108,
+            "success": 92,
+            "rate": 0.8518518518518519,
+            "wilson95": [
+              0.7728286547321908,
+              0.9067046847054185
+            ],
+            "body_stable": 104,
+            "body_rate": 0.9629629629629629,
+            "body_wilson95": [
+              0.9086183563893889,
+              0.9855044586600968
+            ],
+            "stable_endpoint_failures": 12,
+            "max_drift_m": 0.05715535581111908,
+            "max_rotation_rad": 1.7556840181350708,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 92,
+            "success_and_full_stability_rate": 0.8518518518518519,
+            "success_and_full_stability_wilson95": [
+              0.7728286547321908,
+              0.9067046847054185
+            ],
+            "median_mean_abs_slider_error_m": 0.007012692280113697
+          }
+        },
+        {
+          "geometry": "W110",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 99,
+          "rate": 0.9032315340909091,
+          "body_rate": 0.9803701073232323,
+          "success_and_full_stability_rate": 0.9032315340909091,
+          "worst_source": {
+            "geometry": "W110",
+            "model": "teacher",
+            "protocol": "S2",
+            "source": 3,
+            "n": 99,
+            "success": 63,
+            "rate": 0.6363636363636364,
+            "wilson95": [
+              0.53815898895096,
+              0.7243810441214512
+            ],
+            "body_stable": 92,
+            "body_rate": 0.9292929292929293,
+            "body_wilson95": [
+              0.8611851492149004,
+              0.9653297697167645
+            ],
+            "stable_endpoint_failures": 29,
+            "max_drift_m": 0.0579446516931057,
+            "max_rotation_rad": 2.272050619125366,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 63,
+            "success_and_full_stability_rate": 0.6363636363636364,
+            "success_and_full_stability_wilson95": [
+              0.53815898895096,
+              0.7243810441214512
+            ],
+            "median_mean_abs_slider_error_m": 0.006748382467776537
+          }
+        },
+        {
+          "geometry": "W120",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 102,
+          "rate": 0.8834252450980392,
+          "body_rate": 0.9770220588235294,
+          "success_and_full_stability_rate": 0.8834252450980392,
+          "worst_source": {
+            "geometry": "W120",
+            "model": "teacher",
+            "protocol": "S2",
+            "source": 3,
+            "n": 102,
+            "success": 64,
+            "rate": 0.6274509803921569,
+            "wilson95": [
+              0.5306001919994512,
+              0.7150502392181175
+            ],
+            "body_stable": 99,
+            "body_rate": 0.9705882352941176,
+            "body_wilson95": [
+              0.9170694250062348,
+              0.9899475517970959
+            ],
+            "stable_endpoint_failures": 35,
+            "max_drift_m": 0.058526284992694855,
+            "max_rotation_rad": 2.0352563858032227,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7666666666666667,
+            "success_and_full_stability": 64,
+            "success_and_full_stability_rate": 0.6274509803921569,
+            "success_and_full_stability_wilson95": [
+              0.5306001919994512,
+              0.7150502392181175
+            ],
+            "median_mean_abs_slider_error_m": 0.006117727141827345
+          }
+        },
+        {
+          "geometry": "W80",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 104,
+          "rate": 0.9553786057692308,
+          "body_rate": 0.9765625,
+          "success_and_full_stability_rate": 0.9553786057692308,
+          "worst_source": {
+            "geometry": "W80",
+            "model": "teacher",
+            "protocol": "S2",
+            "source": 3,
+            "n": 104,
+            "success": 96,
+            "rate": 0.9230769230769231,
+            "wilson95": [
+              0.8555044538374441,
+              0.9605082463089445
+            ],
+            "body_stable": 104,
+            "body_rate": 1.0,
+            "body_wilson95": [
+              0.9643786456275499,
+              0.9999999999999999
+            ],
+            "stable_endpoint_failures": 8,
+            "max_drift_m": 0.006989277433604002,
+            "max_rotation_rad": 0.17774850130081177,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7333333333333333,
+            "success_and_full_stability": 96,
+            "success_and_full_stability_rate": 0.9230769230769231,
+            "success_and_full_stability_wilson95": [
+              0.8555044538374441,
+              0.9605082463089445
+            ],
+            "median_mean_abs_slider_error_m": 0.008048447780311108
+          }
+        },
+        {
+          "geometry": "W90",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 103,
+          "rate": 0.9703428398058253,
+          "body_rate": 0.9921875,
+          "success_and_full_stability_rate": 0.9703428398058253,
+          "worst_source": {
+            "geometry": "W90",
+            "model": "teacher",
+            "protocol": "S2",
+            "source": 3,
+            "n": 103,
+            "success": 94,
+            "rate": 0.912621359223301,
+            "wilson95": [
+              0.8422225372494152,
+              0.9533487787754884
+            ],
+            "body_stable": 103,
+            "body_rate": 1.0,
+            "body_wilson95": [
+              0.9640452417713538,
+              1.0
+            ],
+            "stable_endpoint_failures": 9,
+            "max_drift_m": 0.00804231595247984,
+            "max_rotation_rad": 0.205590158700943,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 94,
+            "success_and_full_stability_rate": 0.912621359223301,
+            "success_and_full_stability_wilson95": [
+              0.8422225372494152,
+              0.9533487787754884
+            ],
+            "median_mean_abs_slider_error_m": 0.007368040271103382
+          }
+        },
+        {
+          "geometry": "baseline",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 128,
+          "rate": 0.958984375,
+          "body_rate": 0.994140625,
+          "success_and_full_stability_rate": 0.958984375,
+          "worst_source": {
+            "geometry": "baseline",
+            "model": "teacher",
+            "protocol": "S2",
+            "source": 3,
+            "n": 128,
+            "success": 110,
+            "rate": 0.859375,
+            "wilson95": [
+              0.7886475076210406,
+              0.9091603050573764
+            ],
+            "body_stable": 127,
+            "body_rate": 0.9921875,
+            "body_wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "stable_endpoint_failures": 17,
+            "max_drift_m": 0.05382537096738815,
+            "max_rotation_rad": 0.8417236804962158,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 110,
+            "success_and_full_stability_rate": 0.859375,
+            "success_and_full_stability_wilson95": [
+              0.7886475076210406,
+              0.9091603050573764
+            ],
+            "median_mean_abs_slider_error_m": 0.006471840664744377
+          }
+        }
+      ],
+      "scope": "Conditional on available sources only; geometry coverage differs and is explicit. No claim of full4source coverage or continuous range."
+    },
+    {
+      "model": "teacher",
+      "protocol": "S5",
+      "geometries": 13,
+      "equal_geometry_available_source_macro": 0.9061641285458985,
+      "body_macro": 0.9890331124735373,
+      "success_and_full_stability_macro": 0.9061641285458985,
+      "worst_geometry": {
+        "geometry": "L90",
+        "covered_sources": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "missing_sources": [],
+        "minimum_source_n": 13,
+        "rate": 0.591796875,
+        "body_rate": 0.994140625,
+        "success_and_full_stability_rate": 0.591796875,
+        "worst_source": {
+          "geometry": "L90",
+          "model": "teacher",
+          "protocol": "S5",
+          "source": 3,
+          "n": 13,
+          "success": 0,
+          "rate": 0.0,
+          "wilson95": [
+            0.0,
+            0.22809537235418867
+          ],
+          "body_stable": 13,
+          "body_rate": 1.0,
+          "body_wilson95": [
+            0.7719046276458112,
+            1.0
+          ],
+          "stable_endpoint_failures": 13,
+          "max_drift_m": 0.008029170334339142,
+          "max_rotation_rad": 0.22900032997131348,
+          "median_travel_fraction": 0.9877612814307213,
+          "median_first_arrival_s": 0.8,
+          "success_and_full_stability": 0,
+          "success_and_full_stability_rate": 0.0,
+          "success_and_full_stability_wilson95": [
+            0.0,
+            0.22809537235418867
+          ],
+          "median_mean_abs_slider_error_m": 0.004320165142416954
+        }
+      },
+      "geometry_rows": [
+        {
+          "geometry": "L110",
+          "covered_sources": [
+            0,
+            1,
+            2
+          ],
+          "missing_sources": [
+            3
+          ],
+          "minimum_source_n": 128,
+          "rate": 0.9947916666666666,
+          "body_rate": 0.9947916666666666,
+          "success_and_full_stability_rate": 0.9947916666666666,
+          "worst_source": {
+            "geometry": "L110",
+            "model": "teacher",
+            "protocol": "S5",
+            "source": 0,
+            "n": 128,
+            "success": 127,
+            "rate": 0.9921875,
+            "wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "body_stable": 127,
+            "body_rate": 0.9921875,
+            "body_wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "stable_endpoint_failures": 0,
+            "max_drift_m": 0.036771249026060104,
+            "max_rotation_rad": 2.145808219909668,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.8666666666666667,
+            "success_and_full_stability": 127,
+            "success_and_full_stability_rate": 0.9921875,
+            "success_and_full_stability_wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "median_mean_abs_slider_error_m": 0.0025446934159845114
+          }
+        },
+        {
+          "geometry": "L120",
+          "covered_sources": [
+            0,
+            1,
+            2
+          ],
+          "missing_sources": [
+            3
+          ],
+          "minimum_source_n": 128,
+          "rate": 0.9947916666666666,
+          "body_rate": 0.9973958333333334,
+          "success_and_full_stability_rate": 0.9947916666666666,
+          "worst_source": {
+            "geometry": "L120",
+            "model": "teacher",
+            "protocol": "S5",
+            "source": 0,
+            "n": 128,
+            "success": 127,
+            "rate": 0.9921875,
+            "wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "body_stable": 128,
+            "body_rate": 1.0,
+            "body_wilson95": [
+              0.9708630437264931,
+              1.0
+            ],
+            "stable_endpoint_failures": 1,
+            "max_drift_m": 0.005975787062197924,
+            "max_rotation_rad": 0.21691253781318665,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.8666666666666667,
+            "success_and_full_stability": 127,
+            "success_and_full_stability_rate": 0.9921875,
+            "success_and_full_stability_wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "median_mean_abs_slider_error_m": 0.0025712461210787296
+          }
+        },
+        {
+          "geometry": "L80",
+          "covered_sources": [
+            0,
+            1,
+            2
+          ],
+          "missing_sources": [
+            3
+          ],
+          "minimum_source_n": 128,
+          "rate": 0.7317708333333334,
+          "body_rate": 0.9947916666666666,
+          "success_and_full_stability_rate": 0.7317708333333334,
+          "worst_source": {
+            "geometry": "L80",
+            "model": "teacher",
+            "protocol": "S5",
+            "source": 2,
+            "n": 128,
+            "success": 37,
+            "rate": 0.2890625,
+            "wilson95": [
+              0.21758399767802758,
+              0.3728331557498582
+            ],
+            "body_stable": 128,
+            "body_rate": 1.0,
+            "body_wilson95": [
+              0.9708630437264931,
+              1.0
+            ],
+            "stable_endpoint_failures": 91,
+            "max_drift_m": 0.005142547190189362,
+            "max_rotation_rad": 0.18961679935455322,
+            "median_travel_fraction": 0.9630531072616577,
+            "median_first_arrival_s": 1.3333333333333333,
+            "success_and_full_stability": 37,
+            "success_and_full_stability_rate": 0.2890625,
+            "success_and_full_stability_wilson95": [
+              0.21758399767802758,
+              0.3728331557498582
+            ],
+            "median_mean_abs_slider_error_m": 0.003833452006801963
+          }
+        },
+        {
+          "geometry": "L90",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 13,
+          "rate": 0.591796875,
+          "body_rate": 0.994140625,
+          "success_and_full_stability_rate": 0.591796875,
+          "worst_source": {
+            "geometry": "L90",
+            "model": "teacher",
+            "protocol": "S5",
+            "source": 3,
+            "n": 13,
+            "success": 0,
+            "rate": 0.0,
+            "wilson95": [
+              0.0,
+              0.22809537235418867
+            ],
+            "body_stable": 13,
+            "body_rate": 1.0,
+            "body_wilson95": [
+              0.7719046276458112,
+              1.0
+            ],
+            "stable_endpoint_failures": 13,
+            "max_drift_m": 0.008029170334339142,
+            "max_rotation_rad": 0.22900032997131348,
+            "median_travel_fraction": 0.9877612814307213,
+            "median_first_arrival_s": 0.8,
+            "success_and_full_stability": 0,
+            "success_and_full_stability_rate": 0.0,
+            "success_and_full_stability_wilson95": [
+              0.0,
+              0.22809537235418867
+            ],
+            "median_mean_abs_slider_error_m": 0.004320165142416954
+          }
+        },
+        {
+          "geometry": "T110",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 97,
+          "rate": 0.9186936211340206,
+          "body_rate": 0.9850797358247423,
+          "success_and_full_stability_rate": 0.9186936211340206,
+          "worst_source": {
+            "geometry": "T110",
+            "model": "teacher",
+            "protocol": "S5",
+            "source": 3,
+            "n": 97,
+            "success": 70,
+            "rate": 0.7216494845360825,
+            "wilson95": [
+              0.625323647406787,
+              0.8010882718858349
+            ],
+            "body_stable": 95,
+            "body_rate": 0.979381443298969,
+            "body_wilson95": [
+              0.9279124175258443,
+              0.9943273148977335
+            ],
+            "stable_endpoint_failures": 25,
+            "max_drift_m": 0.056096892803907394,
+            "max_rotation_rad": 1.7563629150390625,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7333333333333333,
+            "success_and_full_stability": 70,
+            "success_and_full_stability_rate": 0.7216494845360825,
+            "success_and_full_stability_wilson95": [
+              0.625323647406787,
+              0.8010882718858349
+            ],
+            "median_mean_abs_slider_error_m": 0.002464805729687214
+          }
+        },
+        {
+          "geometry": "T120",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 83,
+          "rate": 0.8649519954819277,
+          "body_rate": 0.9673616340361446,
+          "success_and_full_stability_rate": 0.8649519954819277,
+          "worst_source": {
+            "geometry": "T120",
+            "model": "teacher",
+            "protocol": "S5",
+            "source": 3,
+            "n": 83,
+            "success": 44,
+            "rate": 0.5301204819277109,
+            "wilson95": [
+              0.4238096644588525,
+              0.6337665217072939
+            ],
+            "body_stable": 78,
+            "body_rate": 0.9397590361445783,
+            "body_wilson95": [
+              0.8666157190676185,
+              0.9739965989581174
+            ],
+            "stable_endpoint_failures": 34,
+            "max_drift_m": 0.05405523627996445,
+            "max_rotation_rad": 1.8468815088272095,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7666666666666667,
+            "success_and_full_stability": 44,
+            "success_and_full_stability_rate": 0.5301204819277109,
+            "success_and_full_stability_wilson95": [
+              0.4238096644588525,
+              0.6337665217072939
+            ],
+            "median_mean_abs_slider_error_m": 0.002449625637382269
+          }
+        },
+        {
+          "geometry": "T80",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 122,
+          "rate": 0.9679815573770492,
+          "body_rate": 0.9741290983606558,
+          "success_and_full_stability_rate": 0.9679815573770492,
+          "worst_source": {
+            "geometry": "T80",
+            "model": "teacher",
+            "protocol": "S5",
+            "source": 3,
+            "n": 122,
+            "success": 114,
+            "rate": 0.9344262295081968,
+            "wilson95": [
+              0.8759285826309459,
+              0.9664011312277822
+            ],
+            "body_stable": 117,
+            "body_rate": 0.9590163934426229,
+            "body_wilson95": [
+              0.9076394737211005,
+              0.9823692805447252
+            ],
+            "stable_endpoint_failures": 3,
+            "max_drift_m": 0.06682946532964706,
+            "max_rotation_rad": 2.3829755783081055,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 114,
+            "success_and_full_stability_rate": 0.9344262295081968,
+            "success_and_full_stability_wilson95": [
+              0.8759285826309459,
+              0.9664011312277822
+            ],
+            "median_mean_abs_slider_error_m": 0.002760749193839729
+          }
+        },
+        {
+          "geometry": "T90",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 108,
+          "rate": 0.9720775462962963,
+          "body_rate": 0.9879195601851851,
+          "success_and_full_stability_rate": 0.9720775462962963,
+          "worst_source": {
+            "geometry": "T90",
+            "model": "teacher",
+            "protocol": "S5",
+            "source": 3,
+            "n": 108,
+            "success": 101,
+            "rate": 0.9351851851851852,
+            "wilson95": [
+              0.8722236366714651,
+              0.9682518094750519
+            ],
+            "body_stable": 107,
+            "body_rate": 0.9907407407407407,
+            "body_wilson95": [
+              0.9494065448063386,
+              0.9983636391461165
+            ],
+            "stable_endpoint_failures": 6,
+            "max_drift_m": 0.052169881761074066,
+            "max_rotation_rad": 1.3822919130325317,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 101,
+            "success_and_full_stability_rate": 0.9351851851851852,
+            "success_and_full_stability_wilson95": [
+              0.8722236366714651,
+              0.9682518094750519
+            ],
+            "median_mean_abs_slider_error_m": 0.0026145429583266377
+          }
+        },
+        {
+          "geometry": "W110",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 99,
+          "rate": 0.9397293244949495,
+          "body_rate": 0.9896622474747475,
+          "success_and_full_stability_rate": 0.9397293244949495,
+          "worst_source": {
+            "geometry": "W110",
+            "model": "teacher",
+            "protocol": "S5",
+            "source": 3,
+            "n": 99,
+            "success": 79,
+            "rate": 0.797979797979798,
+            "wilson95": [
+              0.7084558888292201,
+              0.8652427019586415
+            ],
+            "body_stable": 98,
+            "body_rate": 0.98989898989899,
+            "body_wilson95": [
+              0.9449846853541292,
+              0.9982146927208299
+            ],
+            "stable_endpoint_failures": 19,
+            "max_drift_m": 0.05916944891214371,
+            "max_rotation_rad": 1.7911566495895386,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 79,
+            "success_and_full_stability_rate": 0.797979797979798,
+            "success_and_full_stability_wilson95": [
+              0.7084558888292201,
+              0.8652427019586415
+            ],
+            "median_mean_abs_slider_error_m": 0.0024181529879570007
+          }
+        },
+        {
+          "geometry": "W120",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 102,
+          "rate": 0.886297487745098,
+          "body_rate": 0.9936427696078431,
+          "success_and_full_stability_rate": 0.886297487745098,
+          "worst_source": {
+            "geometry": "W120",
+            "model": "teacher",
+            "protocol": "S5",
+            "source": 3,
+            "n": 102,
+            "success": 58,
+            "rate": 0.5686274509803921,
+            "wilson95": [
+              0.4717497773240266,
+              0.6605235317931258
+            ],
+            "body_stable": 101,
+            "body_rate": 0.9901960784313726,
+            "body_wilson95": [
+              0.9465420852342245,
+              0.9982672656025783
+            ],
+            "stable_endpoint_failures": 43,
+            "max_drift_m": 0.014787305146455765,
+            "max_rotation_rad": 0.4447541832923889,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7666666666666667,
+            "success_and_full_stability": 58,
+            "success_and_full_stability_rate": 0.5686274509803921,
+            "success_and_full_stability_wilson95": [
+              0.4717497773240266,
+              0.6605235317931258
+            ],
+            "median_mean_abs_slider_error_m": 0.0024644797667860985
+          }
+        },
+        {
+          "geometry": "W80",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 104,
+          "rate": 0.9821213942307692,
+          "body_rate": 0.99609375,
+          "success_and_full_stability_rate": 0.9821213942307692,
+          "worst_source": {
+            "geometry": "W80",
+            "model": "teacher",
+            "protocol": "S5",
+            "source": 3,
+            "n": 104,
+            "success": 99,
+            "rate": 0.9519230769230769,
+            "wilson95": [
+              0.8923579720276766,
+              0.9792919576741472
+            ],
+            "body_stable": 104,
+            "body_rate": 1.0,
+            "body_wilson95": [
+              0.9643786456275499,
+              0.9999999999999999
+            ],
+            "stable_endpoint_failures": 5,
+            "max_drift_m": 0.007077049929648638,
+            "max_rotation_rad": 0.17774850130081177,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7333333333333333,
+            "success_and_full_stability": 99,
+            "success_and_full_stability_rate": 0.9519230769230769,
+            "success_and_full_stability_wilson95": [
+              0.8923579720276766,
+              0.9792919576741472
+            ],
+            "median_mean_abs_slider_error_m": 0.0028988468693569303
+          }
+        },
+        {
+          "geometry": "W90",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 103,
+          "rate": 0.9800515776699029,
+          "body_rate": 0.994140625,
+          "success_and_full_stability_rate": 0.9800515776699029,
+          "worst_source": {
+            "geometry": "W90",
+            "model": "teacher",
+            "protocol": "S5",
+            "source": 3,
+            "n": 103,
+            "success": 98,
+            "rate": 0.9514563106796117,
+            "wilson95": [
+              0.8913594304491923,
+              0.9790891859074669
+            ],
+            "body_stable": 103,
+            "body_rate": 1.0,
+            "body_wilson95": [
+              0.9640452417713538,
+              1.0
+            ],
+            "stable_endpoint_failures": 5,
+            "max_drift_m": 0.006725757848471403,
+            "max_rotation_rad": 0.205590158700943,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 98,
+            "success_and_full_stability_rate": 0.9514563106796117,
+            "success_and_full_stability_wilson95": [
+              0.8913594304491923,
+              0.9790891859074669
+            ],
+            "median_mean_abs_slider_error_m": 0.0027828451711684465
+          }
+        },
+        {
+          "geometry": "baseline",
+          "covered_sources": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "missing_sources": [],
+          "minimum_source_n": 128,
+          "rate": 0.955078125,
+          "body_rate": 0.98828125,
+          "success_and_full_stability_rate": 0.955078125,
+          "worst_source": {
+            "geometry": "baseline",
+            "model": "teacher",
+            "protocol": "S5",
+            "source": 3,
+            "n": 128,
+            "success": 110,
+            "rate": 0.859375,
+            "wilson95": [
+              0.7886475076210406,
+              0.9091603050573764
+            ],
+            "body_stable": 127,
+            "body_rate": 0.9921875,
+            "body_wilson95": [
+              0.957073740561141,
+              0.9986195681071258
+            ],
+            "stable_endpoint_failures": 17,
+            "max_drift_m": 0.046868499368429184,
+            "max_rotation_rad": 1.7220439910888672,
+            "median_travel_fraction": 1.0,
+            "median_first_arrival_s": 0.7,
+            "success_and_full_stability": 110,
+            "success_and_full_stability_rate": 0.859375,
+            "success_and_full_stability_wilson95": [
+              0.7886475076210406,
+              0.9091603050573764
+            ],
+            "median_mean_abs_slider_error_m": 0.0024563234765082598
+          }
+        }
+      ],
+      "scope": "Conditional on available sources only; geometry coverage differs and is explicit. No claim of full4source coverage or continuous range."
+    }
+  ],
+  "scope": "Conditional discrete geometry simulation only; complete source counts/coverage and Fholding reported; no hardware."
+}

@@ -1,0 +1,46 @@
+{
+  "checked_utc": "2026-10-01T23:11:57.038130+00:00",
+  "failures": [
+    {
+      "failure": "Cache missing hand_base metadata caused50mm falls in3steps",
+      "disposition": "Metadata copied and effective-frame assertion added before main controlled evaluations",
+      "evidence": "runs/geometry-generalization-20261002/baseline-static-screen"
+    },
+    {
+      "failure": "Authored URDF inertia overridden by shape-derived inertia",
+      "disposition": "Measured baseline effective actor inertia frozen with recompute=False; original changed-inertia statics supplementary",
+      "evidence": "research/geometry-generalization-20261002/BASELINE_PHYSICS.json"
+    },
+    {
+      "failure": "CPU extension/build and initial interface harness issues",
+      "disposition": "Existing conda runtime PATH/harness repaired; nonconstant CPU original-player replay passes, preceding failures retained",
+      "evidence": "runs/geometry-generalization-20261002/offline-runtime-audit-v4.log"
+    },
+    {
+      "failure": "Actual H200 input replay on CPU fails tolerance, including same exact network input",
+      "disposition": "Unresolved device/backend numerical parity; no TF32 causality or hardware success claim",
+      "evidence": "research/geometry-generalization-20261002/physical-exact-network-diagnostic.json"
+    },
+    {
+      "failure": "Common Git config write permission prevents direct original-worktree push",
+      "disposition": "Independent temporary bare repository and incremental bundles publish without mutating common config",
+      "evidence": "public branch7955c674d93676ef582da055bfeb03ea38dfba3e"
+    },
+    {
+      "failure": "Optional legacy SSH submodule fresh clone failed",
+      "disposition": "Main checkout complete; plain clone required runtime and tracked rl_games/assets work; no unnecessary submodule retry",
+      "evidence": "runs/geometry-generalization-20261002/draft-clone-optional-submodules-failure.log"
+    },
+    {
+      "failure": "System Python lacks numpy for first independent intervention analysis call",
+      "disposition": "Run CPU analysis in existing scientific conda environment, no scientific rerun",
+      "evidence": "runs/geometry-generalization-20261002/intervention-analysis-rescore.log"
+    },
+    {
+      "failure": "Teacher-latent intervention at W120source3 loses functional success despite holding gain",
+      "disposition": "Registered prerequisite failed; no training or relaxed threshold",
+      "evidence": "research/geometry-generalization-20261002/intervention-analysis/report.json"
+    }
+  ],
+  "scope": "Infrastructure/runtime faults are separate from valid-initialization policy failures; no silent deleted conditions or automatic scientific restarts."
+}

@@ -1,0 +1,535 @@
+[
+  {
+    "name": "final-L110-batch",
+    "gpu": 3,
+    "seconds": 1800,
+    "command": [
+      "/tmp/wuji-student-runtime/bin/python",
+      "-m",
+      "scripts.batch_wuji_geometry",
+      "--label",
+      "L110",
+      "--static",
+      "L110-static-final",
+      "--split",
+      "final-attempts",
+      "--take",
+      "128",
+      "--prefix",
+      "final-"
+    ],
+    "start_utc": "2026-10-01T22:51:30.775254+00:00",
+    "local_pid": 1380189,
+    "remote_root": "/tmp/artgym-geometry-20261002",
+    "final": true,
+    "local": false,
+    "resource_check": "0, 0\n1, 0\n2, 0\n3, 0\n",
+    "registered_models": {
+      "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+      "runs/unified-student-20261001/SA-real-51200/step_051200.pth": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9"
+    },
+    "local_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "pinned_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "selected_source_sha256": {
+      "scripts/evaluate_wuji_recovery.py": "9feaaac6e172ba6505277f2ffbaf9e3d2cbaa25dcdac52df1a14087de36d3ab5",
+      "scripts/train_wuji_unified_student.py": "9e3932aa0c848728ec54c81ef28d779e45c1f6ba35751554e9b4403c4f846bf9",
+      "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+      "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+      "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+    },
+    "pinned_source_matches_local": true,
+    "remote_shell": "cd /tmp/artgym-geometry-20261002/pins/final-L110-batch && CUDA_VISIBLE_DEVICES=3 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 1800 /tmp/wuji-student-runtime/bin/python -m scripts.batch_wuji_geometry --label L110 --static L110-static-final --split final-attempts --take 128 --prefix final-"
+  },
+  {
+    "name": "final-L120-batch",
+    "gpu": 0,
+    "seconds": 1800,
+    "command": [
+      "/tmp/wuji-student-runtime/bin/python",
+      "-m",
+      "scripts.batch_wuji_geometry",
+      "--label",
+      "L120",
+      "--static",
+      "L120-static-final",
+      "--split",
+      "final-attempts",
+      "--take",
+      "128",
+      "--prefix",
+      "final-"
+    ],
+    "start_utc": "2026-10-01T23:06:43.039128+00:00",
+    "local_pid": 1392646,
+    "remote_root": "/tmp/artgym-geometry-20261002",
+    "final": true,
+    "local": false,
+    "resource_check": "0, 0\n1, 2159\n2, 849\n3, 2159\n",
+    "registered_models": {
+      "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+      "runs/unified-student-20261001/SA-real-51200/step_051200.pth": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9"
+    },
+    "local_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "pinned_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "selected_source_sha256": {
+      "scripts/evaluate_wuji_recovery.py": "9feaaac6e172ba6505277f2ffbaf9e3d2cbaa25dcdac52df1a14087de36d3ab5",
+      "scripts/train_wuji_unified_student.py": "9e3932aa0c848728ec54c81ef28d779e45c1f6ba35751554e9b4403c4f846bf9",
+      "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+      "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+      "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+    },
+    "pinned_source_matches_local": true,
+    "remote_shell": "cd /tmp/artgym-geometry-20261002/pins/final-L120-batch && CUDA_VISIBLE_DEVICES=0 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 1800 /tmp/wuji-student-runtime/bin/python -m scripts.batch_wuji_geometry --label L120 --static L120-static-final --split final-attempts --take 128 --prefix final-"
+  },
+  {
+    "name": "final-L80-batch",
+    "gpu": 1,
+    "seconds": 1800,
+    "command": [
+      "/tmp/wuji-student-runtime/bin/python",
+      "-m",
+      "scripts.batch_wuji_geometry",
+      "--label",
+      "L80",
+      "--static",
+      "L80-static-final",
+      "--split",
+      "final-attempts",
+      "--take",
+      "128",
+      "--prefix",
+      "final-"
+    ],
+    "start_utc": "2026-10-01T22:51:24.743945+00:00",
+    "local_pid": 1380097,
+    "remote_root": "/tmp/artgym-geometry-20261002",
+    "final": true,
+    "local": false,
+    "resource_check": "0, 0\n1, 0\n2, 0\n3, 0\n",
+    "registered_models": {
+      "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+      "runs/unified-student-20261001/SA-real-51200/step_051200.pth": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9"
+    },
+    "local_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "pinned_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "selected_source_sha256": {
+      "scripts/evaluate_wuji_recovery.py": "9feaaac6e172ba6505277f2ffbaf9e3d2cbaa25dcdac52df1a14087de36d3ab5",
+      "scripts/train_wuji_unified_student.py": "9e3932aa0c848728ec54c81ef28d779e45c1f6ba35751554e9b4403c4f846bf9",
+      "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+      "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+      "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+    },
+    "pinned_source_matches_local": true,
+    "remote_shell": "cd /tmp/artgym-geometry-20261002/pins/final-L80-batch && CUDA_VISIBLE_DEVICES=1 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 1800 /tmp/wuji-student-runtime/bin/python -m scripts.batch_wuji_geometry --label L80 --static L80-static-final --split final-attempts --take 128 --prefix final-"
+  },
+  {
+    "name": "final-L90-batch",
+    "gpu": 2,
+    "seconds": 1800,
+    "command": [
+      "/tmp/wuji-student-runtime/bin/python",
+      "-m",
+      "scripts.batch_wuji_geometry",
+      "--label",
+      "L90",
+      "--static",
+      "L90-static-final",
+      "--split",
+      "final-attempts",
+      "--take",
+      "128",
+      "--prefix",
+      "final-"
+    ],
+    "start_utc": "2026-10-01T22:51:27.831412+00:00",
+    "local_pid": 1380139,
+    "remote_root": "/tmp/artgym-geometry-20261002",
+    "final": true,
+    "local": false,
+    "resource_check": "0, 0\n1, 0\n2, 0\n3, 0\n",
+    "registered_models": {
+      "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+      "runs/unified-student-20261001/SA-real-51200/step_051200.pth": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9"
+    },
+    "local_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "pinned_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "selected_source_sha256": {
+      "scripts/evaluate_wuji_recovery.py": "9feaaac6e172ba6505277f2ffbaf9e3d2cbaa25dcdac52df1a14087de36d3ab5",
+      "scripts/train_wuji_unified_student.py": "9e3932aa0c848728ec54c81ef28d779e45c1f6ba35751554e9b4403c4f846bf9",
+      "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+      "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+      "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+    },
+    "pinned_source_matches_local": true,
+    "remote_shell": "cd /tmp/artgym-geometry-20261002/pins/final-L90-batch && CUDA_VISIBLE_DEVICES=2 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 1800 /tmp/wuji-student-runtime/bin/python -m scripts.batch_wuji_geometry --label L90 --static L90-static-final --split final-attempts --take 128 --prefix final-"
+  },
+  {
+    "name": "final-T110-batch",
+    "gpu": 3,
+    "seconds": 1800,
+    "command": [
+      "/tmp/wuji-student-runtime/bin/python",
+      "-m",
+      "scripts.batch_wuji_geometry",
+      "--label",
+      "T110",
+      "--static",
+      "T110-static-final",
+      "--split",
+      "final-attempts",
+      "--take",
+      "128",
+      "--prefix",
+      "final-"
+    ],
+    "start_utc": "2026-10-01T23:19:25.367929+00:00",
+    "local_pid": 1402061,
+    "remote_root": "/tmp/artgym-geometry-20261002",
+    "final": true,
+    "local": false,
+    "resource_check": "0, 2251\n1, 0\n2, 2373\n3, 0\n",
+    "registered_models": {
+      "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+      "runs/unified-student-20261001/SA-real-51200/step_051200.pth": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9"
+    },
+    "local_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "pinned_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "selected_source_sha256": {
+      "scripts/evaluate_wuji_recovery.py": "9feaaac6e172ba6505277f2ffbaf9e3d2cbaa25dcdac52df1a14087de36d3ab5",
+      "scripts/train_wuji_unified_student.py": "9e3932aa0c848728ec54c81ef28d779e45c1f6ba35751554e9b4403c4f846bf9",
+      "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+      "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+      "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+    },
+    "pinned_source_matches_local": true,
+    "remote_shell": "cd /tmp/artgym-geometry-20261002/pins/final-T110-batch && CUDA_VISIBLE_DEVICES=3 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 1800 /tmp/wuji-student-runtime/bin/python -m scripts.batch_wuji_geometry --label T110 --static T110-static-final --split final-attempts --take 128 --prefix final-"
+  },
+  {
+    "name": "final-T120-batch",
+    "gpu": 0,
+    "seconds": 1800,
+    "command": [
+      "/tmp/wuji-student-runtime/bin/python",
+      "-m",
+      "scripts.batch_wuji_geometry",
+      "--label",
+      "T120",
+      "--static",
+      "T120-static-final",
+      "--split",
+      "final-attempts",
+      "--take",
+      "128",
+      "--prefix",
+      "final-"
+    ],
+    "start_utc": "2026-10-01T23:34:43.327633+00:00",
+    "local_pid": 1412926,
+    "remote_root": "/tmp/artgym-geometry-20261002",
+    "final": true,
+    "local": false,
+    "resource_check": "0, 0\n1, 0\n2, 2379\n3, 0\n",
+    "registered_models": {
+      "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+      "runs/unified-student-20261001/SA-real-51200/step_051200.pth": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9"
+    },
+    "local_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "pinned_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "selected_source_sha256": {
+      "scripts/evaluate_wuji_recovery.py": "9feaaac6e172ba6505277f2ffbaf9e3d2cbaa25dcdac52df1a14087de36d3ab5",
+      "scripts/train_wuji_unified_student.py": "9e3932aa0c848728ec54c81ef28d779e45c1f6ba35751554e9b4403c4f846bf9",
+      "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+      "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+      "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+    },
+    "pinned_source_matches_local": true,
+    "remote_shell": "cd /tmp/artgym-geometry-20261002/pins/final-T120-batch && CUDA_VISIBLE_DEVICES=0 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 1800 /tmp/wuji-student-runtime/bin/python -m scripts.batch_wuji_geometry --label T120 --static T120-static-final --split final-attempts --take 128 --prefix final-"
+  },
+  {
+    "name": "final-T80-batch",
+    "gpu": 1,
+    "seconds": 1800,
+    "command": [
+      "/tmp/wuji-student-runtime/bin/python",
+      "-m",
+      "scripts.batch_wuji_geometry",
+      "--label",
+      "T80",
+      "--static",
+      "T80-static-final",
+      "--split",
+      "final-attempts",
+      "--take",
+      "128",
+      "--prefix",
+      "final-"
+    ],
+    "start_utc": "2026-10-01T23:18:53.100000+00:00",
+    "local_pid": 1401668,
+    "remote_root": "/tmp/artgym-geometry-20261002",
+    "final": true,
+    "local": false,
+    "resource_check": "0, 2251\n1, 0\n2, 2373\n3, 2373\n",
+    "registered_models": {
+      "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+      "runs/unified-student-20261001/SA-real-51200/step_051200.pth": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9"
+    },
+    "local_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "pinned_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "selected_source_sha256": {
+      "scripts/evaluate_wuji_recovery.py": "9feaaac6e172ba6505277f2ffbaf9e3d2cbaa25dcdac52df1a14087de36d3ab5",
+      "scripts/train_wuji_unified_student.py": "9e3932aa0c848728ec54c81ef28d779e45c1f6ba35751554e9b4403c4f846bf9",
+      "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+      "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+      "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+    },
+    "pinned_source_matches_local": true,
+    "remote_shell": "cd /tmp/artgym-geometry-20261002/pins/final-T80-batch && CUDA_VISIBLE_DEVICES=1 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 1800 /tmp/wuji-student-runtime/bin/python -m scripts.batch_wuji_geometry --label T80 --static T80-static-final --split final-attempts --take 128 --prefix final-"
+  },
+  {
+    "name": "final-T90-batch",
+    "gpu": 2,
+    "seconds": 1800,
+    "command": [
+      "/tmp/wuji-student-runtime/bin/python",
+      "-m",
+      "scripts.batch_wuji_geometry",
+      "--label",
+      "T90",
+      "--static",
+      "T90-static-final",
+      "--split",
+      "final-attempts",
+      "--take",
+      "128",
+      "--prefix",
+      "final-"
+    ],
+    "start_utc": "2026-10-01T23:20:39.771258+00:00",
+    "local_pid": 1403213,
+    "remote_root": "/tmp/artgym-geometry-20261002",
+    "final": true,
+    "local": false,
+    "resource_check": "0, 2157\n1, 2225\n2, 0\n3, 2157\n",
+    "registered_models": {
+      "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+      "runs/unified-student-20261001/SA-real-51200/step_051200.pth": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9"
+    },
+    "local_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "pinned_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "selected_source_sha256": {
+      "scripts/evaluate_wuji_recovery.py": "9feaaac6e172ba6505277f2ffbaf9e3d2cbaa25dcdac52df1a14087de36d3ab5",
+      "scripts/train_wuji_unified_student.py": "9e3932aa0c848728ec54c81ef28d779e45c1f6ba35751554e9b4403c4f846bf9",
+      "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+      "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+      "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+    },
+    "pinned_source_matches_local": true,
+    "remote_shell": "cd /tmp/artgym-geometry-20261002/pins/final-T90-batch && CUDA_VISIBLE_DEVICES=2 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 1800 /tmp/wuji-student-runtime/bin/python -m scripts.batch_wuji_geometry --label T90 --static T90-static-final --split final-attempts --take 128 --prefix final-"
+  },
+  {
+    "name": "final-W110-batch",
+    "gpu": 3,
+    "seconds": 1800,
+    "command": [
+      "/tmp/wuji-student-runtime/bin/python",
+      "-m",
+      "scripts.batch_wuji_geometry",
+      "--label",
+      "W110",
+      "--static",
+      "W110-static-final",
+      "--split",
+      "final-attempts",
+      "--take",
+      "128",
+      "--prefix",
+      "final-"
+    ],
+    "start_utc": "2026-10-01T23:04:34.332368+00:00",
+    "local_pid": 1390547,
+    "remote_root": "/tmp/artgym-geometry-20261002",
+    "final": true,
+    "local": false,
+    "resource_check": "0, 2301\n1, 0\n2, 2255\n3, 0\n",
+    "registered_models": {
+      "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+      "runs/unified-student-20261001/SA-real-51200/step_051200.pth": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9"
+    },
+    "local_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "pinned_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "selected_source_sha256": {
+      "scripts/evaluate_wuji_recovery.py": "9feaaac6e172ba6505277f2ffbaf9e3d2cbaa25dcdac52df1a14087de36d3ab5",
+      "scripts/train_wuji_unified_student.py": "9e3932aa0c848728ec54c81ef28d779e45c1f6ba35751554e9b4403c4f846bf9",
+      "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+      "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+      "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+    },
+    "pinned_source_matches_local": true,
+    "remote_shell": "cd /tmp/artgym-geometry-20261002/pins/final-W110-batch && CUDA_VISIBLE_DEVICES=3 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 1800 /tmp/wuji-student-runtime/bin/python -m scripts.batch_wuji_geometry --label W110 --static W110-static-final --split final-attempts --take 128 --prefix final-"
+  },
+  {
+    "name": "final-W120-batch",
+    "gpu": 0,
+    "seconds": 1800,
+    "command": [
+      "/tmp/wuji-student-runtime/bin/python",
+      "-m",
+      "scripts.batch_wuji_geometry",
+      "--label",
+      "W120",
+      "--static",
+      "W120-static-final",
+      "--split",
+      "final-attempts",
+      "--take",
+      "128",
+      "--prefix",
+      "final-"
+    ],
+    "start_utc": "2026-10-01T23:19:56.333166+00:00",
+    "local_pid": 1402641,
+    "remote_root": "/tmp/artgym-geometry-20261002",
+    "final": true,
+    "local": false,
+    "resource_check": "0, 0\n1, 2225\n2, 2373\n3, 1649\n",
+    "registered_models": {
+      "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+      "runs/unified-student-20261001/SA-real-51200/step_051200.pth": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9"
+    },
+    "local_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "pinned_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "selected_source_sha256": {
+      "scripts/evaluate_wuji_recovery.py": "9feaaac6e172ba6505277f2ffbaf9e3d2cbaa25dcdac52df1a14087de36d3ab5",
+      "scripts/train_wuji_unified_student.py": "9e3932aa0c848728ec54c81ef28d779e45c1f6ba35751554e9b4403c4f846bf9",
+      "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+      "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+      "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+    },
+    "pinned_source_matches_local": true,
+    "remote_shell": "cd /tmp/artgym-geometry-20261002/pins/final-W120-batch && CUDA_VISIBLE_DEVICES=0 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 1800 /tmp/wuji-student-runtime/bin/python -m scripts.batch_wuji_geometry --label W120 --static W120-static-final --split final-attempts --take 128 --prefix final-"
+  },
+  {
+    "name": "final-W80-batch",
+    "gpu": 1,
+    "seconds": 1800,
+    "command": [
+      "/tmp/wuji-student-runtime/bin/python",
+      "-m",
+      "scripts.batch_wuji_geometry",
+      "--label",
+      "W80",
+      "--static",
+      "W80-static-final",
+      "--split",
+      "final-attempts",
+      "--take",
+      "128",
+      "--prefix",
+      "final-"
+    ],
+    "start_utc": "2026-10-01T23:04:31.311712+00:00",
+    "local_pid": 1390520,
+    "remote_root": "/tmp/artgym-geometry-20261002",
+    "final": true,
+    "local": false,
+    "resource_check": "0, 2301\n1, 0\n2, 2255\n3, 0\n",
+    "registered_models": {
+      "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+      "runs/unified-student-20261001/SA-real-51200/step_051200.pth": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9"
+    },
+    "local_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "pinned_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "selected_source_sha256": {
+      "scripts/evaluate_wuji_recovery.py": "9feaaac6e172ba6505277f2ffbaf9e3d2cbaa25dcdac52df1a14087de36d3ab5",
+      "scripts/train_wuji_unified_student.py": "9e3932aa0c848728ec54c81ef28d779e45c1f6ba35751554e9b4403c4f846bf9",
+      "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+      "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+      "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+    },
+    "pinned_source_matches_local": true,
+    "remote_shell": "cd /tmp/artgym-geometry-20261002/pins/final-W80-batch && CUDA_VISIBLE_DEVICES=1 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 1800 /tmp/wuji-student-runtime/bin/python -m scripts.batch_wuji_geometry --label W80 --static W80-static-final --split final-attempts --take 128 --prefix final-"
+  },
+  {
+    "name": "final-W90-batch",
+    "gpu": 2,
+    "seconds": 1800,
+    "command": [
+      "/tmp/wuji-student-runtime/bin/python",
+      "-m",
+      "scripts.batch_wuji_geometry",
+      "--label",
+      "W90",
+      "--static",
+      "W90-static-final",
+      "--split",
+      "final-attempts",
+      "--take",
+      "128",
+      "--prefix",
+      "final-"
+    ],
+    "start_utc": "2026-10-01T23:06:05.896350+00:00",
+    "local_pid": 1391880,
+    "remote_root": "/tmp/artgym-geometry-20261002",
+    "final": true,
+    "local": false,
+    "resource_check": "0, 2365\n1, 2159\n2, 0\n3, 2159\n",
+    "registered_models": {
+      "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+      "runs/unified-student-20261001/SA-real-51200/step_051200.pth": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9"
+    },
+    "local_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "pinned_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "selected_source_sha256": {
+      "scripts/evaluate_wuji_recovery.py": "9feaaac6e172ba6505277f2ffbaf9e3d2cbaa25dcdac52df1a14087de36d3ab5",
+      "scripts/train_wuji_unified_student.py": "9e3932aa0c848728ec54c81ef28d779e45c1f6ba35751554e9b4403c4f846bf9",
+      "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+      "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+      "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+    },
+    "pinned_source_matches_local": true,
+    "remote_shell": "cd /tmp/artgym-geometry-20261002/pins/final-W90-batch && CUDA_VISIBLE_DEVICES=2 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 1800 /tmp/wuji-student-runtime/bin/python -m scripts.batch_wuji_geometry --label W90 --static W90-static-final --split final-attempts --take 128 --prefix final-"
+  },
+  {
+    "name": "final-baseline-batch",
+    "gpu": 0,
+    "seconds": 1800,
+    "command": [
+      "/tmp/wuji-student-runtime/bin/python",
+      "-m",
+      "scripts.batch_wuji_geometry",
+      "--label",
+      "baseline",
+      "--static",
+      "baseline-static-final",
+      "--split",
+      "final-attempts",
+      "--take",
+      "128",
+      "--prefix",
+      "final-"
+    ],
+    "start_utc": "2026-10-01T22:51:21.473746+00:00",
+    "local_pid": 1380036,
+    "remote_root": "/tmp/artgym-geometry-20261002",
+    "final": true,
+    "local": false,
+    "resource_check": "0, 0\n1, 0\n2, 0\n3, 0\n",
+    "registered_models": {
+      "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+      "runs/unified-student-20261001/SA-real-51200/step_051200.pth": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9"
+    },
+    "local_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "pinned_source_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+    "selected_source_sha256": {
+      "scripts/evaluate_wuji_recovery.py": "9feaaac6e172ba6505277f2ffbaf9e3d2cbaa25dcdac52df1a14087de36d3ab5",
+      "scripts/train_wuji_unified_student.py": "9e3932aa0c848728ec54c81ef28d779e45c1f6ba35751554e9b4403c4f846bf9",
+      "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+      "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+      "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+    },
+    "pinned_source_matches_local": true,
+    "remote_shell": "cd /tmp/artgym-geometry-20261002/pins/final-baseline-batch && CUDA_VISIBLE_DEVICES=0 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 1800 /tmp/wuji-student-runtime/bin/python -m scripts.batch_wuji_geometry --label baseline --static baseline-static-final --split final-attempts --take 128 --prefix final-"
+  }
+]

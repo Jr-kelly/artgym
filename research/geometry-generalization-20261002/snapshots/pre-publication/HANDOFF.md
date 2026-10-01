@@ -1,3 +1,8 @@
+# 当前 Wuji 尺寸泛化 Goal
+
+工作区 `/data/research/artgym-experiments-20260921/geometry-generalization-20261002`。先读 research/geometry-generalization-20261002/{GOAL.md,STATE.json,HANDOFF.md,PENDING_TASKS.md,DECISIONS.jsonl}。禁止子代理；旧最终集保持关闭。PID/利用率为带时间历史记录，须重新验证。旧墙钟截止及续训方案已由新Goal替换。
+
+```json
 {
   "start_utc": "2026-10-01T21:11:50.381254+00:00",
   "base_sha": "e6c9f3e0d6167b0df529a5e7d75c88b91ff42613",
@@ -19,16 +24,11 @@
   "goal_sha256": "9dafc220bfe1b1d3bbf1d6f7cfa21259bc8cff9410ff740156c24425365bdfb1",
   "active_jobs": [],
   "final_opened": true,
-  "next": "Restore-check and upload; local originals retained",
+  "next": "Freeze a stable metadata copy, upload it, then commit/publish scientific deliverables",
   "last_event": {
-    "utc": "2026-10-01T23:54:20.460195+00:00",
-    "event": "archive_completed",
-    "name": "geometry-final-scientific-metadata",
-    "archive": "delivery/geometry-generalization-20261002/geometry-final-scientific-metadata.tar.gz",
-    "sha256": "4863b281eef46eefac57152add8bc81c33970d8518067bd659f03e1f1abff465",
-    "size": 8263104,
-    "files": 171,
-    "next": "Restore-check and upload; local originals retained"
+    "utc": "2026-10-01T23:54:14.108356+00:00",
+    "event": "pre_publication_metadata_snapshot_started",
+    "next": "Freeze a stable metadata copy, upload it, then commit/publish scientific deliverables"
   },
   "active_gpu_elapsed_hours": 0,
   "cumulative_gpu_hours_including_active": 40.39133241547478,
@@ -74,3 +74,4 @@
   "final_packets_delivered": 13,
   "report_complete": true
 }
+```
