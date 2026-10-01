@@ -1,0 +1,53 @@
+{
+  "name": "repair2-fixed-method-extension-to25600",
+  "repair_count": 2,
+  "new_repair_factor": false,
+  "start_update": 12800,
+  "end_update": 25600,
+  "additional_updates_each": 12800,
+  "additional_interactions_each": 13107200,
+  "branches": {
+    "SA-real-25600": {
+      "parent": "runs/unified-student-20261001/SA-real-12800/step_012800.pth",
+      "parent_sha256": "fdd6d54e0054a24c722cef4337cabb8f13d9835f884b9ecc7038b703b0e551af",
+      "target_loss_weight": 25,
+      "gpu": 0,
+      "expected_seconds": 7800,
+      "max_seconds": 14000
+    },
+    "SC-real-25600": {
+      "parent": "runs/unified-student-20261001/SC-real-12800/step_012800.pth",
+      "parent_sha256": "08cf853d7384bc13f9fbefb3fcc5fe624d39105acdc799e825c2c17d43368b41",
+      "target_loss_weight": 0,
+      "gpu": 2,
+      "expected_seconds": 7800,
+      "max_seconds": 14000
+    }
+  },
+  "common": {
+    "kind": "SC",
+    "controller_mode": "real",
+    "envs": 256,
+    "rollout_steps": 4,
+    "lr": 0.0003,
+    "seed": 61001,
+    "target_loss_scale_rad": 0.04,
+    "teacher_fraction": 0,
+    "optimizer_rng": "Restore each branch12800 optimizer/RNG; new physical episodes declared at shared boundary",
+    "original_common_parent_sha256": "45ba3b151ba276087c440cddcdd70d86ee1a280a04ffedbfa4d94d8d6de23194"
+  },
+  "save_at": [
+    16000,
+    19200,
+    22400,
+    25600
+  ],
+  "trigger": [
+    "SA12800 S2[28,21,12,24],S5[25,22,21,23]; worst12/32 exceeds priorbest9/32 and pairedSC12800worst5/32",
+    "SA source3 body recovers from0/32 at8000 to27/32 S2 and31/32 S5; source2holding is nowworst",
+    "F all32/source; still17episodes short in worstgatecell, so no64confirmationtrigger"
+  ],
+  "estimated_combined_gpu_hours": 5.5,
+  "decision": "Continue both fixed methods with equal additional updates. No newloss/input/replay/architecture factor. Keep all earlier candidates and fixed25600 endpoints; reassess multi-checkpoint fitting, targets, holding and failuretimes.",
+  "next": "Fulloroneepisodeboundary triggers64confirmation; after25600 decide furtherfixedmethodcontinuation only with evidence, never claim convergence from strictplateaualone"
+}

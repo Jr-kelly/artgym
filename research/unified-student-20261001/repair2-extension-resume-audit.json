@@ -1,0 +1,38 @@
+{
+  "rows": [
+    {
+      "name": "SA-real-25600",
+      "parent": "runs/unified-student-20261001/SA-real-12800/step_012800.pth",
+      "parent_sha256": "fdd6d54e0054a24c722cef4337cabb8f13d9835f884b9ecc7038b703b0e551af",
+      "restored_optimizer_steps": 12800,
+      "adam_steps": [
+        12800
+      ],
+      "encoder_hash": "63fbfbd6b3b4252c2596b03988d8671af12e5b63f6be4c00ed52ff2e06930479",
+      "frozen_hash": "f8775c12963a51e1adc225b1fdd107df71eb0bc6b7e1291845ad410693361232",
+      "rng_restored": true,
+      "controller_columns_expanded": false,
+      "physics": "new episode reset after RNG restore",
+      "parent_target_loss_weight": 25.0,
+      "target_loss_weight": 25.0
+    },
+    {
+      "name": "SC-real-25600",
+      "parent": "runs/unified-student-20261001/SC-real-12800/step_012800.pth",
+      "parent_sha256": "08cf853d7384bc13f9fbefb3fcc5fe624d39105acdc799e825c2c17d43368b41",
+      "restored_optimizer_steps": 12800,
+      "adam_steps": [
+        12800
+      ],
+      "encoder_hash": "72e6f9f54c4f2dbe553fe1a80c84f9ef951f70cfda9d136de906f93f81b43422",
+      "frozen_hash": "f8775c12963a51e1adc225b1fdd107df71eb0bc6b7e1291845ad410693361232",
+      "rng_restored": true,
+      "controller_columns_expanded": false,
+      "physics": "new episode reset after RNG restore",
+      "parent_target_loss_weight": 0.0,
+      "target_loss_weight": 0.0
+    }
+  ],
+  "pinned_source_sha256": "0e0670aaa77eeb01e8bd0b7a8677cf13add46d65e4f4b4255ee22292486cb8c5",
+  "same_method_continuation": true
+}
