@@ -6,11 +6,11 @@
   "max_concurrent_gpus": 4,
   "reserved_final_gpu_hours": 6,
   "reserved_final_seconds": 5400,
-  "gpu_hours": 15.306664924025537,
-  "phase": "Fixed-method SC/SA25600to38400; bestSA28800; finalunopened",
+  "gpu_hours": 19.596952613327243,
+  "phase": "Fixed-method SC/SA38400to51200 active; bestSA28800; finalunopened",
   "active_jobs": [
     {
-      "name": "SC-real-38400",
+      "name": "SC-real-51200",
       "gpu": 2,
       "seconds": 14000,
       "command": [
@@ -20,20 +20,20 @@
         "--teacher",
         "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
         "--output",
-        "runs/unified-student-20261001/SC-real-38400",
+        "runs/unified-student-20261001/SC-real-51200",
         "--kind",
         "SC",
         "--controller-mode",
         "real",
         "--updates",
-        "38400",
+        "51200",
         "--resume",
-        "runs/unified-student-20261001/SC-real-25600/step_025600.pth",
+        "runs/unified-student-20261001/SC-real-38400/step_038400.pth",
         "--save-at",
-        "28800",
-        "32000",
-        "35200",
-        "38400",
+        "41600",
+        "44800",
+        "48000",
+        "51200",
         "--envs",
         "256",
         "--rollout-steps",
@@ -49,14 +49,14 @@
         "--target-loss-scale",
         ".04"
       ],
-      "start_utc": "2026-10-01T11:26:22.419207+00:00",
-      "local_pid": 1744768,
+      "start_utc": "2026-10-01T13:43:25.418225+00:00",
+      "local_pid": 2624588,
       "remote_root": "/tmp/artgym-student-20261001",
       "final": false,
       "local": false,
       "resource_check": "0, 0\n1, 0\n2, 0\n3, 0\n",
-      "local_source_sha256": "1d81d4cb386e89e6b4f536ca602304c2fcb1a558410b7a39a83ec6b3e0773ea4",
-      "pinned_source_sha256": "1d81d4cb386e89e6b4f536ca602304c2fcb1a558410b7a39a83ec6b3e0773ea4",
+      "local_source_sha256": "2c6ca83adf895410535530da7cd0bab08d137a7d397a1af8980e8d2af573c2c2",
+      "pinned_source_sha256": "2c6ca83adf895410535530da7cd0bab08d137a7d397a1af8980e8d2af573c2c2",
       "selected_source_sha256": {
         "scripts/evaluate_wuji_recovery.py": "9feaaac6e172ba6505277f2ffbaf9e3d2cbaa25dcdac52df1a14087de36d3ab5",
         "scripts/train_wuji_unified_student.py": "9e3932aa0c848728ec54c81ef28d779e45c1f6ba35751554e9b4403c4f846bf9",
@@ -65,10 +65,10 @@
         "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
       },
       "pinned_source_matches_local": true,
-      "remote_shell": "cd /tmp/artgym-student-20261001/pins/SC-real-38400 && CUDA_VISIBLE_DEVICES=2 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 14000 /tmp/wuji-student-runtime/bin/python -m scripts.train_wuji_unified_student --teacher runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth --output runs/unified-student-20261001/SC-real-38400 --kind SC --controller-mode real --updates 38400 --resume runs/unified-student-20261001/SC-real-25600/step_025600.pth --save-at 28800 32000 35200 38400 --envs 256 --rollout-steps 4 --seed 61001 --lr .0003 --warm-updates 400 --target-loss-weight 0 --target-loss-scale .04"
+      "remote_shell": "cd /tmp/artgym-student-20261001/pins/SC-real-51200 && CUDA_VISIBLE_DEVICES=2 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 14000 /tmp/wuji-student-runtime/bin/python -m scripts.train_wuji_unified_student --teacher runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth --output runs/unified-student-20261001/SC-real-51200 --kind SC --controller-mode real --updates 51200 --resume runs/unified-student-20261001/SC-real-38400/step_038400.pth --save-at 41600 44800 48000 51200 --envs 256 --rollout-steps 4 --seed 61001 --lr .0003 --warm-updates 400 --target-loss-weight 0 --target-loss-scale .04"
     },
     {
-      "name": "SA-real-38400",
+      "name": "SA-real-51200",
       "gpu": 0,
       "seconds": 14000,
       "command": [
@@ -78,20 +78,20 @@
         "--teacher",
         "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
         "--output",
-        "runs/unified-student-20261001/SA-real-38400",
+        "runs/unified-student-20261001/SA-real-51200",
         "--kind",
         "SC",
         "--controller-mode",
         "real",
         "--updates",
-        "38400",
+        "51200",
         "--resume",
-        "runs/unified-student-20261001/SA-real-25600/step_025600.pth",
+        "runs/unified-student-20261001/SA-real-38400/step_038400.pth",
         "--save-at",
-        "28800",
-        "32000",
-        "35200",
-        "38400",
+        "41600",
+        "44800",
+        "48000",
+        "51200",
         "--envs",
         "256",
         "--rollout-steps",
@@ -107,14 +107,14 @@
         "--target-loss-scale",
         ".04"
       ],
-      "start_utc": "2026-10-01T11:26:23.626328+00:00",
-      "local_pid": 1744915,
+      "start_utc": "2026-10-01T13:43:26.642469+00:00",
+      "local_pid": 2624735,
       "remote_root": "/tmp/artgym-student-20261001",
       "final": false,
       "local": false,
       "resource_check": "0, 0\n1, 0\n2, 0\n3, 0\n",
-      "local_source_sha256": "1d81d4cb386e89e6b4f536ca602304c2fcb1a558410b7a39a83ec6b3e0773ea4",
-      "pinned_source_sha256": "1d81d4cb386e89e6b4f536ca602304c2fcb1a558410b7a39a83ec6b3e0773ea4",
+      "local_source_sha256": "2c6ca83adf895410535530da7cd0bab08d137a7d397a1af8980e8d2af573c2c2",
+      "pinned_source_sha256": "2c6ca83adf895410535530da7cd0bab08d137a7d397a1af8980e8d2af573c2c2",
       "selected_source_sha256": {
         "scripts/evaluate_wuji_recovery.py": "9feaaac6e172ba6505277f2ffbaf9e3d2cbaa25dcdac52df1a14087de36d3ab5",
         "scripts/train_wuji_unified_student.py": "9e3932aa0c848728ec54c81ef28d779e45c1f6ba35751554e9b4403c4f846bf9",
@@ -123,7 +123,7 @@
         "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
       },
       "pinned_source_matches_local": true,
-      "remote_shell": "cd /tmp/artgym-student-20261001/pins/SA-real-38400 && CUDA_VISIBLE_DEVICES=0 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 14000 /tmp/wuji-student-runtime/bin/python -m scripts.train_wuji_unified_student --teacher runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth --output runs/unified-student-20261001/SA-real-38400 --kind SC --controller-mode real --updates 38400 --resume runs/unified-student-20261001/SA-real-25600/step_025600.pth --save-at 28800 32000 35200 38400 --envs 256 --rollout-steps 4 --seed 61001 --lr .0003 --warm-updates 400 --target-loss-weight 25 --target-loss-scale .04"
+      "remote_shell": "cd /tmp/artgym-student-20261001/pins/SA-real-51200 && CUDA_VISIBLE_DEVICES=0 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 14000 /tmp/wuji-student-runtime/bin/python -m scripts.train_wuji_unified_student --teacher runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth --output runs/unified-student-20261001/SA-real-51200 --kind SC --controller-mode real --updates 51200 --resume runs/unified-student-20261001/SA-real-38400/step_038400.pth --save-at 41600 44800 48000 51200 --envs 256 --rollout-steps 4 --seed 61001 --lr .0003 --warm-updates 400 --target-loss-weight 25 --target-loss-scale .04"
     }
   ],
   "base_sha": "56d4dcc66e805298cb5f4c365a55f9c14df36b37",
@@ -134,26 +134,27 @@
   "goal_sha256": "c7e9c244d11824a5d230cfb24ac9207e78fcb1965a376bff6a38f03c084c4a3f",
   "existing_student_run_found": false,
   "prior_session": "Previous user turn performed only read-only attachment/connectivity check; no studentgoal/training/worktree existed. Prior teacher round closed.",
-  "next": "Complete38400 fixed endpoints; assess multi-metric marginal value before further training or final freeze",
+  "next": "Continue51200 development; keepnewRelease draft until scientific freeze/final evaluations and actual public restoration",
   "last_event": {
-    "utc": "2026-10-01T13:09:02.366539+00:00",
-    "event": "matched35200_assessed",
-    "evidence": "research/unified-student-20261001/action-control-paired35200.json",
-    "best": "SA-real-28800",
-    "student_confirmation_eligible": false,
-    "next": "Complete38400 fixed endpoints; assess multi-metric marginal value before further training or final freeze"
+    "utc": "2026-10-01T13:56:11.775967+00:00",
+    "event": "completed38400_release_assets_server_verified",
+    "receipt": "research/unified-student-20261001/upload-through38400.json",
+    "release_id": 400860039,
+    "total_draft_assets": 10,
+    "source_restore": "research/unified-student-20261001/source-supplement38400-local-restore.json",
+    "next": "Continue51200 development; keepnewRelease draft until scientific freeze/final evaluations and actual public restoration"
   },
   "research_notes": "research/unified-student-20261001/RESEARCH_NOTES.md",
-  "current_plan": "research/unified-student-20261001/fixed-method-extension38400-plan.json",
+  "current_plan": "research/unified-student-20261001/fixed-method-extension51200-plan.json",
   "repair_count": 2,
   "current_evaluation_plans": [
-    "research/unified-student-20261001/extension38400-SC-evaluation-queue.json",
-    "research/unified-student-20261001/extension38400-SA-evaluation-queue.json"
+    "research/unified-student-20261001/extension51200-SC-evaluation-queue.json",
+    "research/unified-student-20261001/extension51200-SA-evaluation-queue.json"
   ],
   "supplemental_plan": "research/unified-student-20261001/controller-long-budget-plan.json",
   "evaluation_gpu_assignments": {
-    "extension38400-SC-evaluation-queue.json": 3,
-    "extension38400-SA-evaluation-queue.json": 1
+    "extension51200-SC-evaluation-queue.json": 3,
+    "extension51200-SA-evaluation-queue.json": 1
   },
   "provisional_best_development": {
     "name": "SA-real-28800",
@@ -165,15 +166,16 @@
     "final_selected": false
   },
   "delivery_progress": {
-    "last_pushed_commit": "ecedb18",
+    "last_pushed_commit": "1e80cd0",
     "release_id": 400860039,
     "tag": "wuji-unified-student-20261001-v1",
     "draft": true,
-    "uploaded_assets": 7,
+    "uploaded_assets": 10,
     "upload_receipts": [
       "research/unified-student-20261001/upload-development-first3.json",
       "research/unified-student-20261001/upload-source-history.json",
-      "research/unified-student-20261001/upload-through25600.json"
+      "research/unified-student-20261001/upload-through25600.json",
+      "research/unified-student-20261001/upload-through38400.json"
     ],
     "teacher_paired_video": "delivery/unified-student-20261001/teacher-paired-four-sources.mp4",
     "student_video_pending": true,

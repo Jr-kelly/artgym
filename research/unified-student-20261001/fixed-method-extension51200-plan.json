@@ -1,0 +1,59 @@
+{
+  "name": "fixed-method-continuation38400to51200",
+  "registered_utc": "2026-10-01T13:42:35.180586+00:00",
+  "repair_count": 2,
+  "new_repair_factor": false,
+  "start_update": 38400,
+  "end_update": 51200,
+  "additional_updates_each": 12800,
+  "additional_interactions_each": 13107200,
+  "save_at": [
+    41600,
+    44800,
+    48000,
+    51200
+  ],
+  "branches": {
+    "SC-real-51200": {
+      "parent": "runs/unified-student-20261001/SC-real-38400/step_038400.pth",
+      "parent_sha256": "50782e86f2d42ac8c9e78cb7a0058d1d632e973252daa132b6188d556e827cbb",
+      "target_loss_weight": 0,
+      "gpu": 2,
+      "expected_seconds": 7500,
+      "max_seconds": 14000
+    },
+    "SA-real-51200": {
+      "parent": "runs/unified-student-20261001/SA-real-38400/step_038400.pth",
+      "parent_sha256": "801394b11497e7f17f2b0ea0a6b7d605bb790a064d5747f34cb30f16eee15fc6",
+      "target_loss_weight": 25,
+      "gpu": 0,
+      "expected_seconds": 7900,
+      "max_seconds": 14000
+    }
+  },
+  "common": {
+    "kind": "SC",
+    "controller_mode": "real",
+    "envs": 256,
+    "rollout_steps": 4,
+    "lr": 0.0003,
+    "seed": 61001,
+    "target_loss_scale_rad": 0.04,
+    "teacher_fraction": 0,
+    "optimizer_rng": "Restore each own38400 encoder/Adam/RNG; new physical episodes explicitly declared",
+    "original_common_parent_sha256": "45ba3b151ba276087c440cddcdd70d86ee1a280a04ffedbfa4d94d8d6de23194"
+  },
+  "trigger": [
+    "SA35200 source1S2 reaches29/32 while source2/3 deficits persist; gains are not jointly retained at38400",
+    "SA source0/2 own-rollout and fixed-history target errors decreased at35200; source-specific fitting remains active",
+    "Both38400 endpoints regress, particularly source1; one endpoint regression and worst-strict plateau alone do not establish convergence",
+    "No full/one-episode-boundary candidate. A further12800 unchanged updates per method tests whether local gains can be retained jointly, with ample remaining budget"
+  ],
+  "estimated_combined_gpu_hours": 5.0,
+  "decision": "Extend unchanged latent-only and action-aware methods equally to51200. No third input/loss/replay/architecture/LR factor. Preserve bestSA28800 and every38400 endpoint.",
+  "decision_rules": [
+    "Full or within-one-episode across all cells triggers64confirmation; ifpassed prioritize independent optimization-seed feasibility under remaining budget",
+    "At51200 reassess multiple checkpoints, source-specific frozen/own-state fitting, executed-target errors, stage holds, body failures and failure times; strict plateau alone is not convergence",
+    "Final cohort remains unopened; reserve90minutes and6GPUh, retain original06:03:30UTC start and22:03:30UTC deadline"
+  ]
+}
