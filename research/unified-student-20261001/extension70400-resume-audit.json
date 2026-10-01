@@ -1,0 +1,44 @@
+[
+  {
+    "name": "SC-real-70400",
+    "local_pid": 193345,
+    "start_utc": "2026-10-01T18:19:34.180061+00:00",
+    "pinned_source_sha256": "605cf349015a46469e4cd7b76503c648ea8c7a8c9e280ebacba8e50c4f77d19a",
+    "resume": {
+      "parent": "runs/unified-student-20261001/SC-real-64000/step_064000.pth",
+      "parent_sha256": "7aef8b71ef391d8a7ed84dd443eaf8bf2031309b049bbe08d306e3d27debbf0a",
+      "restored_optimizer_steps": 64000,
+      "adam_steps": [
+        64000
+      ],
+      "encoder_hash": "8c5f571d4918814117203afdcf1cb52773648b47151bdfe29828956bb17cdd73",
+      "frozen_hash": "f8775c12963a51e1adc225b1fdd107df71eb0bc6b7e1291845ad410693361232",
+      "rng_restored": true,
+      "controller_columns_expanded": false,
+      "physics": "new episode reset after RNG restore",
+      "parent_target_loss_weight": 0.0,
+      "target_loss_weight": 0.0
+    }
+  },
+  {
+    "name": "SA-real-70400",
+    "local_pid": 193497,
+    "start_utc": "2026-10-01T18:19:35.320092+00:00",
+    "pinned_source_sha256": "605cf349015a46469e4cd7b76503c648ea8c7a8c9e280ebacba8e50c4f77d19a",
+    "resume": {
+      "parent": "runs/unified-student-20261001/SA-real-64000/step_064000.pth",
+      "parent_sha256": "05869d97cf2fa22ad8c57f633594659012323fe88f35ebd2f5656f00a428d9e1",
+      "restored_optimizer_steps": 64000,
+      "adam_steps": [
+        64000
+      ],
+      "encoder_hash": "58bfaea9694a3fc51ab64e04bd6ff690e455944c5bc886abbed3f170cc43a9de",
+      "frozen_hash": "f8775c12963a51e1adc225b1fdd107df71eb0bc6b7e1291845ad410693361232",
+      "rng_restored": true,
+      "controller_columns_expanded": false,
+      "physics": "new episode reset after RNG restore",
+      "parent_target_loss_weight": 25.0,
+      "target_loss_weight": 25.0
+    }
+  }
+]

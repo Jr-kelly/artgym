@@ -80,7 +80,7 @@ reproduction. Use target weight0 for its registered latent-only control:
 The subsequent registered25600 continuation resumes each branch's own12800
 checkpoint, with save points16000/19200/22400/25600 and the unchanged loss.
 The next continuation restores each25600 checkpoint and ends at38400, with28800/32000/35200/38400 save points and unchanged settings.
-The next equal continuations restore38400→51200 and51200→64000 with saves every3200updates. Each restores its own Adam/RNG; neither adds a new experimental factor.
+The next equal continuations restore38400→51200 and51200→64000 with saves every3200updates. The final smaller64000→70400 continuation saves67200/70400. Each restores its own Adam/RNG; none adds a new experimental factor.
 The repair plans record parent hashes, budgets and all controlled factors.
 The action objective is latent MSE +25 × executed-target MSE/(.04 rad)².
 Its forward target is the exact controller target; its backward gradient is an

@@ -1,0 +1,57 @@
+{
+  "name": "final-fixed-method-continuation64000to70400",
+  "registered_utc": "2026-10-01T18:18:30.410787+00:00",
+  "repair_count": 2,
+  "new_repair_factor": false,
+  "start_update": 64000,
+  "end_update": 70400,
+  "additional_updates_each": 6400,
+  "additional_interactions_each": 6553600,
+  "save_at": [
+    67200,
+    70400
+  ],
+  "branches": {
+    "SC-real-70400": {
+      "parent": "runs/unified-student-20261001/SC-real-64000/step_064000.pth",
+      "parent_sha256": "7aef8b71ef391d8a7ed84dd443eaf8bf2031309b049bbe08d306e3d27debbf0a",
+      "target_loss_weight": 0,
+      "gpu": 2,
+      "expected_seconds": 3650,
+      "max_seconds": 5400
+    },
+    "SA-real-70400": {
+      "parent": "runs/unified-student-20261001/SA-real-64000/step_064000.pth",
+      "parent_sha256": "05869d97cf2fa22ad8c57f633594659012323fe88f35ebd2f5656f00a428d9e1",
+      "target_loss_weight": 25,
+      "gpu": 0,
+      "expected_seconds": 3850,
+      "max_seconds": 5400
+    }
+  },
+  "common": {
+    "kind": "SC",
+    "controller_mode": "real",
+    "envs": 256,
+    "rollout_steps": 4,
+    "lr": 0.0003,
+    "seed": 61001,
+    "target_loss_scale_rad": 0.04,
+    "teacher_fraction": 0,
+    "optimizer_rng": "Restore each own64000 encoder/Adam/RNG; new physical episodes explicitly declared"
+  },
+  "trigger": [
+    "Last12800window didnotimprove overallbestSA51200worst24/32; do not label this convergence",
+    "SC60800 recoveredworst23/32 andstrongper-sourcefitting but64000regressed; SA64000 source1ownMSE .01343 andsource2S5frozen-targetMSE .0748e-6 improve despite source3/holdinggaps",
+    "A smaller6400window tests retention/recovery with unchangedmethod andequalupdatecontrol; about2.3GPUh and65minutes keeps robustfinaldeliverytime",
+    "Bothallowedrepairfactorsalreadyused; no newLR/loss/input/replay/architecture change"
+  ],
+  "estimated_combined_gpu_hours": 2.4,
+  "decision": "One final smaller equalbudget fixedmethod window to70400. Then freeze the preregistered development-best, fixedendpoint,teacher andnecessarycontrols for once-opened final evaluation; no convergence claim.",
+  "decision_rules": [
+    "Any full orwithin-one-episode candidate triggers64confirmation; oneboundary64result permitsregistered128expandedconfirmation",
+    "No newtraining beyond70400 in this round; allow time for finalcodefreeze,128/source pairedvalidation,videos,archives,publicdownload/restoredcode verification",
+    "Ifearlyconfirmationpasses, assess secondseed feasibility honestly: resume--seed alone isnotnewRNG andfulltrainingrepeatmayexceedremainingwallbudget; no falseindependenceclaim",
+    "Originalstart06:03:30UTC/deadline22:03:30UTC unchanged, ordinarycutoff20:33:30UTC andminimum90min/6GPUh finalreserve"
+  ]
+}
