@@ -1,0 +1,26 @@
+{
+  "name": "controller-input-longer-budget-followthrough",
+  "new_repair": false,
+  "repair_count": 2,
+  "parent": "runs/unified-student-20261001/SC-masked-6400-r1/step_006400.pth",
+  "parent_sha256": "d767f22a4425d412466e327322bafe9b0445276d7db6dd7a049e441b83c78848",
+  "start_update": 6400,
+  "end_update": 12800,
+  "additional_updates": 6400,
+  "additional_interactions": 6553600,
+  "kind": "SC",
+  "controller_mode": "masked",
+  "target_loss_weight": 0,
+  "lr": 0.0003,
+  "seed": 61001,
+  "teacher_fraction": 0,
+  "save_at": [
+    9600,
+    12800
+  ],
+  "comparison": "Existing SC-real latent-only continuation from its respective6400 parent to12800; same3200 common ancestor and equal total updates. Both restart declared physics episodes at6400 and restore Adam/RNG.",
+  "trigger": "Controller-input6400 improved worst body but not unified holding. At9600 real and action-aware remain changing with source tradeoffs; a longer same-input masked continuation distinguishes lasting controller benefit from early optimization noise without introducing a third repair.",
+  "expected_gpu_hours": 1.1,
+  "max_gpu_hours": 2,
+  "next": "Score9600/12800 against real matched total budgets; preserve S03200best and all fixed endpoints"
+}
