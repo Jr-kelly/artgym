@@ -1,0 +1,127 @@
+{
+  "verified_utc": "2026-10-01T20:15:13.626519+00:00",
+  "release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-unified-student-20261001-v1",
+  "release_id": 400860039,
+  "draft": false,
+  "metadata_source": "operator-authenticated GitHub API because anonymous metadata rate-limited; file downloads use no authentication",
+  "all_server_digests_verified": true,
+  "assets": 28,
+  "anonymous_downloads": [
+    {
+      "name": "student-primary-SA51200.tar.gz",
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-unified-student-20261001-v1/student-primary-SA51200.tar.gz",
+      "sha256": "94a17c440a224ef9d25f22aa1996c0ee3be7514a6aa33165b45bec3fb45b0fb8",
+      "authentication": "none"
+    },
+    {
+      "name": "teacher-paired-four-sources.mp4",
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-unified-student-20261001-v1/teacher-paired-four-sources.mp4",
+      "sha256": "6378ff540cd0ed7dbbbff3dce79acc5575f284936a3ac060c8ef8ad54121ca00",
+      "authentication": "none"
+    },
+    {
+      "name": "student-four-sources.mp4",
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-unified-student-20261001-v1/student-four-sources.mp4",
+      "sha256": "c9263d4b1735e99ec932c57230866d2313c56adc6a91fb20c793907f0921d38b",
+      "authentication": "none"
+    },
+    {
+      "name": "teacher-student-fixed-comparison.mp4",
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-unified-student-20261001-v1/teacher-student-fixed-comparison.mp4",
+      "sha256": "11c91b1e31037c2f6c7674718517c0cac66174ec367f5d7b7e0f7d441a0ec02a",
+      "authentication": "none"
+    },
+    {
+      "name": "student-original-failure-trace.mp4",
+      "url": "https://github.com/Jr-kelly/artgym/releases/download/wuji-unified-student-20261001-v1/student-original-failure-trace.mp4",
+      "sha256": "8c2d79b181daae71df6385b339cebc95d06d48a2a0e32bb91ccb6665a73c107a",
+      "authentication": "none"
+    }
+  ],
+  "actual_restore": {
+    "archive": "/tmp/wuji-student-public-20261001-final/student-primary-SA51200.tar.gz",
+    "archive_sha256": "94a17c440a224ef9d25f22aa1996c0ee3be7514a6aa33165b45bec3fb45b0fb8",
+    "restored_files": 4246,
+    "output": "/tmp/wuji-student-public-20261001-final/restored",
+    "status": "verified"
+  },
+  "checkpoint": {
+    "checkpoint": "/tmp/wuji-student-public-20261001-final/restored/runs/unified-student-20261001/SA-real-51200/step_051200.pth",
+    "sha256": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9",
+    "saved_steps": 51200,
+    "next_steps": 51201,
+    "restored_next_update_identical": true,
+    "finite_encoder_and_optimizer": true,
+    "has_rng": [
+      "torch",
+      "cuda",
+      "numpy",
+      "python"
+    ],
+    "cpu_rng_draws_identical": true,
+    "cuda_rng_payloads": 1,
+    "cuda_rng_execution_tested": false,
+    "frozen_hash": "f8775c12963a51e1adc225b1fdd107df71eb0bc6b7e1291845ad410693361232",
+    "scope": "CPU restoration of encoder/Adam and Python/NumPy/Torch RNG; CUDA RNG payload validated but not executed by this CPU audit. Physics resumes with new declared episodes, not serialized PhysX"
+  },
+  "teacher_hash_verified": true,
+  "downloaded_code_executed": true,
+  "full_policy_input_audit": {
+    "student_sha256": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9",
+    "probes_sha256": "237e95fbb863017d95a3ca9811ed895b131d5c31194c6fa242ab0736963bca5d",
+    "snapshots": 30,
+    "simultaneous_histories": 32,
+    "states_per_history": 4,
+    "action_and_all_rnn_exact_invariance": true,
+    "actor_teacher_encoder_calls": 0,
+    "fixed_policy_parameter_id": 50.0,
+    "critic_receives_constant_normalized_dummy": true,
+    "frozen_hash_unchanged": true,
+    "scope": "CPU full get_action path on frozen nonconstant history snapshots, with recurrent state propagated from zero. No simulator or physical success claim; snapshots are not new independent trials."
+  },
+  "videos": [
+    {
+      "name": "teacher-paired-four-sources.mp4",
+      "decoded_frames": 600,
+      "duration_seconds": 20.0,
+      "dimensions": [
+        2048,
+        512
+      ],
+      "sha256": "6378ff540cd0ed7dbbbff3dce79acc5575f284936a3ac060c8ef8ad54121ca00"
+    },
+    {
+      "name": "student-four-sources.mp4",
+      "decoded_frames": 600,
+      "duration_seconds": 20.0,
+      "dimensions": [
+        2048,
+        512
+      ],
+      "sha256": "c9263d4b1735e99ec932c57230866d2313c56adc6a91fb20c793907f0921d38b"
+    },
+    {
+      "name": "teacher-student-fixed-comparison.mp4",
+      "decoded_frames": 600,
+      "duration_seconds": 20.0,
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "sha256": "11c91b1e31037c2f6c7674718517c0cac66174ec367f5d7b7e0f7d441a0ec02a"
+    },
+    {
+      "name": "student-original-failure-trace.mp4",
+      "decoded_frames": 600,
+      "duration_seconds": 20.0,
+      "dimensions": [
+        1200,
+        960
+      ],
+      "sha256": "8c2d79b181daae71df6385b339cebc95d06d48a2a0e32bb91ccb6665a73c107a"
+    }
+  ],
+  "scope": "Actual public distribution, downloaded-code CPU encoder/Adam/RNG and whole-player restoration, and full video decode. This reuses the audited evaluation implementation; it is not a separate runtime implementation, new simulation or hardware result.",
+  "restored_frozen_source_sha256": "6176b3d2219808b44be464fbffe0249d4a1445e28ef682456c280772cd79f8b5",
+  "restored_input_definition_and_cohort_hashes_match": true
+}

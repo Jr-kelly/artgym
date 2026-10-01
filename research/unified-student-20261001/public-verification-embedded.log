@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "research/unified-student-20261001/verify_public_release_download.py", line 128, in <module>
+    main()
+  File "research/unified-student-20261001/verify_public_release_download.py", line 40, in main
+    with request(api + '/tags/' + tag) as response:
+  File "research/unified-student-20261001/verify_public_release_download.py", line 24, in request
+    return urllib.request.urlopen(urllib.request.Request(url, headers={
+  File "/home/agiuser/miniconda3/envs/artgym/lib/python3.8/urllib/request.py", line 222, in urlopen
+    return opener.open(url, data, timeout)
+  File "/home/agiuser/miniconda3/envs/artgym/lib/python3.8/urllib/request.py", line 531, in open
+    response = meth(req, response)
+  File "/home/agiuser/miniconda3/envs/artgym/lib/python3.8/urllib/request.py", line 640, in http_response
+    response = self.parent.error(
+  File "/home/agiuser/miniconda3/envs/artgym/lib/python3.8/urllib/request.py", line 569, in error
+    return self._call_chain(*args)
+  File "/home/agiuser/miniconda3/envs/artgym/lib/python3.8/urllib/request.py", line 502, in _call_chain
+    result = func(*args)
+  File "/home/agiuser/miniconda3/envs/artgym/lib/python3.8/urllib/request.py", line 649, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 403: rate limit exceeded

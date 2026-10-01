@@ -27,6 +27,8 @@ The student requires calibrated initial object geometry/poses, joint and action 
 
 At the same51200 optimizer counter, executed-target supervision improves7/8 strict source/protocol cells and worst strict93/128 versus62/128 for latent-only control, with body/F tradeoffs. Development gains vary by checkpoint; there is no second optimization seed or convergence claim. Both continuous branches completed70400; the chosen weight was fixed before final access.
 
+Public distribution verification passed: actual primary/video downloads, restored-code policy checks and full video decoding ([receipt](research/unified-student-20261001/public-verification.json)).
+
 [Final report, intervals and paired transitions](research/unified-student-20261001/FINAL_REPORT.md) · [Method and limitations](research/unified-student-20261001/README.md) · [Input audit](research/unified-student-20261001/INPUTS.md) · [Reproduce](research/unified-student-20261001/REPRODUCE.md) · [Release](https://github.com/Jr-kelly/artgym/releases/tag/wuji-unified-student-20261001-v1) · [Teacher/student video](https://github.com/Jr-kelly/artgym/releases/download/wuji-unified-student-20261001-v1/teacher-student-fixed-comparison.mp4)
 <!-- /WUJI_STUDENT_CURRENT -->
 

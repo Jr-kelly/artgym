@@ -1,0 +1,24 @@
+Traceback (most recent call last):
+  File "/home/agiuser/miniconda3/envs/artgym/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/agiuser/miniconda3/envs/artgym/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/data/research/artgym-experiments-20260921/unified-student-20261001/scripts/verify_wuji_student_public.py", line 134, in <module>
+    main()
+  File "/data/research/artgym-experiments-20260921/unified-student-20261001/scripts/verify_wuji_student_public.py", line 46, in main
+    with request(api + '/' + str(release['id']) + '/assets?per_page=100&page=' + str(page)) as response:
+  File "/data/research/artgym-experiments-20260921/unified-student-20261001/scripts/verify_wuji_student_public.py", line 24, in request
+    return urllib.request.urlopen(urllib.request.Request(url, headers={
+  File "/home/agiuser/miniconda3/envs/artgym/lib/python3.8/urllib/request.py", line 222, in urlopen
+    return opener.open(url, data, timeout)
+  File "/home/agiuser/miniconda3/envs/artgym/lib/python3.8/urllib/request.py", line 531, in open
+    response = meth(req, response)
+  File "/home/agiuser/miniconda3/envs/artgym/lib/python3.8/urllib/request.py", line 640, in http_response
+    response = self.parent.error(
+  File "/home/agiuser/miniconda3/envs/artgym/lib/python3.8/urllib/request.py", line 569, in error
+    return self._call_chain(*args)
+  File "/home/agiuser/miniconda3/envs/artgym/lib/python3.8/urllib/request.py", line 502, in _call_chain
+    result = func(*args)
+  File "/home/agiuser/miniconda3/envs/artgym/lib/python3.8/urllib/request.py", line 649, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 403: rate limit exceeded

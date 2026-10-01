@@ -204,3 +204,10 @@ on the 1.76 GB final trace archive exceeded local memory. The archive bytes were
 unchanged. `failure_video_layout.py` only increases the plot's bottom margin;
 its original layout is retained in the video-evidence archive. Neither delivery
 adjustment changes the frozen experiment source or scoring.
+
+The completed public check used `verify_public_release_download.py` after the
+anonymous GitHub metadata API rate-limited both metadata attempts. The retained
+helper reads metadata with the existing operator credential through `gh api`;
+all five actual file downloads use a separate urllib request carrying only a
+User-Agent, with no authentication. The verification receipt records both modes
+explicitly. This delivery fallback does not alter the frozen experiment source.

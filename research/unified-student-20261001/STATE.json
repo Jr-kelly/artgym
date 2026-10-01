@@ -7,7 +7,7 @@
   "reserved_final_gpu_hours": 6,
   "reserved_final_seconds": 5400,
   "gpu_hours": 32.4534053852823,
-  "phase": "Finalnegativecapabilityresultverified; CPUpublicdeliveryremaining",
+  "phase": "Publicrestorationverified; finalGitHubsyncremaining",
   "active_jobs": [],
   "base_sha": "56d4dcc66e805298cb5f4c365a55f9c14df36b37",
   "teacher_sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
@@ -17,14 +17,16 @@
   "goal_sha256": "c7e9c244d11824a5d230cfb24ac9207e78fcb1965a376bff6a38f03c084c4a3f",
   "existing_student_run_found": false,
   "prior_session": "Previous user turn performed only read-only attachment/connectivity check; no studentgoal/training/worktree existed. Prior teacher round closed.",
-  "next": "Commitpushscientificdelivery thenpublishReleaseatthatcommit; actuallydownloadprimaryand4videos",
+  "next": "Pushverificationcode/records andverifycleanremoteHEAD; thenclosethisboundedgoal",
   "last_event": {
-    "utc": "2026-10-01T20:03:54.941389+00:00",
-    "event": "all28_release_asset_bytes_and_server_digests_verified",
-    "evidence": "/data/research/artgym-experiments-20260921/unified-student-20261001/research/unified-student-20261001/public-manifest.json",
-    "asset_count": 28,
-    "total_bytes": 9478824470,
-    "next": "Commitpushscientificdelivery thenpublishReleaseatthatcommit; actuallydownloadprimaryand4videos"
+    "utc": "2026-10-01T20:17:08.764361+00:00",
+    "event": "public_delivery_verification_documented",
+    "phase": "Publicrestorationverified; finalGitHubsyncremaining",
+    "evidence": "/data/research/artgym-experiments-20260921/unified-student-20261001/research/unified-student-20261001/public-verification.json",
+    "assets": 28,
+    "anonymous_files": 5,
+    "fully_decoded_videos": 4,
+    "next": "Pushverificationcode/records andverifycleanremoteHEAD; thenclosethisboundedgoal"
   },
   "research_notes": "research/unified-student-20261001/RESEARCH_NOTES.md",
   "current_plan": "research/unified-student-20261001/fixed-method-extension70400-plan.json",
@@ -52,7 +54,7 @@
     "last_pushed_commit": "bd866a317f9560a158a06ce9ed95b1f860b7a195",
     "release_id": 400860039,
     "tag": "wuji-unified-student-20261001-v1",
-    "draft": true,
+    "draft": false,
     "uploaded_assets": 28,
     "upload_receipts": [
       "research/unified-student-20261001/upload-development-first3.json",
@@ -79,7 +81,10 @@
     ],
     "teacher_paired_video": "delivery/unified-student-20261001/teacher-paired-four-sources.mp4",
     "student_video_pending": false,
-    "final_cohort_opened": true
+    "final_cohort_opened": true,
+    "public_release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-unified-student-20261001-v1",
+    "public_verification": "research/unified-student-20261001/public-verification.json",
+    "public_download_restore_verified": true
   },
   "verification_helpers": [
     "scripts/audit_wuji_student_final.py",
@@ -102,5 +107,6 @@
     "pid": 4059290,
     "status": "stopped",
     "evidence": "research/unified-student-20261001/resources-final.json"
-  }
+  },
+  "public_release_verified": true
 }
