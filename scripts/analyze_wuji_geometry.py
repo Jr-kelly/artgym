@@ -9,8 +9,10 @@ def paired_ci(difference,seed=2026100210):
  if not len(d):return None
  rng=np.random.default_rng(seed);v=d[rng.integers(len(d),size=(4000,len(d)))].mean(1)
  return [float(x) for x in np.quantile(v,[.025,.975])]
-def read_run(directory,selection):
+def read_run(directory,selection,models):
  report=json.loads((directory/'report.json').read_text());receipt=json.loads((directory/'geometry-receipt.json').read_text());label=receipt['asset']['parameters']['label'];model=receipt['model'];protocol=receipt['protocol'];horizon=1200 if protocol=='F' else 600
+ assert receipt['model_unchanged'] and report['checkpoint_sha256']==models['teacher']
+ if model=='student':assert report['unified_student_sha256']==models['student']
  with np.load(directory/'trace.npz') as z:t={k:z[k] for k in z.files}
  T,N=t['active'].shape;assert N==len(selection['source_order'])
  valid=t['active']&~t['fall']&~t['invalid'];pose=(t['drift']<.01)&(t['rotation']<.25)&np.isfinite(t['drift'])&np.isfinite(t['rotation']);body=valid.all(0)&pose.all(0)&(T==horizon)
@@ -22,7 +24,7 @@ def read_run(directory,selection):
   for k in range(T):
    assert np.allclose(t['goal'][k][valid[k]],(init+np.where(phase==0,.04,0))[valid[k]],atol=1e-6)
    streak=np.where(valid[k]&(error[k]<.01),streak+1,0);ready=streak>=45
-   first_arrival[np.isnan(first_arrival)&ready]=k/30
+   first_arrival[np.isnan(first_arrival)&ready]=(k+1)/30
    cycles+=ready&(phase==1);reached_counts+=ready;phase[ready]=1-phase[ready];streak[ready]=0
   success=cycles>=1;assert cycles.tolist()==[r['cycles'] for r in report['records']]
   holds=None
@@ -35,25 +37,25 @@ def read_run(directory,selection):
    streak=np.zeros(N,int);got=np.zeros(N,bool)
    for k in range(start,min(end,T)):
     streak=np.where(valid[k]&(error[k]<.002),streak+1,0);ready=(streak>=9)&~got;got|=ready
-    first_arrival[np.isnan(first_arrival)&ready]=k/30
+    first_arrival[np.isnan(first_arrival)&ready]=(k+1)/30
    reached_counts+=got
   cycles=np.array([sum(r['stages_attained'][j] and r['stages_attained'][j+1] for j in range(0,len(r['stages_attained']),2)) for r in report['records']])
  assert body.tolist()==[r['body_stable'] for r in report['records']]
  trials=[];tracehash=hashlib.sha256((directory/'trace.npz').read_bytes()).hexdigest()
  for i,source in enumerate(selection['source_order']):
-  active=t['active'][:,i];bad=np.flatnonzero(~valid[:,i]|~pose[:,i]);first_bad=float(bad[0]/30) if len(bad) else None
+  active=t['active'][:,i];bad=np.flatnonzero(~valid[:,i]|~pose[:,i]);first_bad=float((bad[0]+1)/30) if len(bad) else None
   init=t['goal'][0,i]-.04;path=t['slider'][:,i][active]
   trials.append(dict(geometry=label,model=model,protocol=protocol,source=source,attempt_row=selection['selected_attempt_rows'][i],env=i,success=bool(success[i]),body_stable=bool(body[i]),alive_full=bool(valid[:,i].all() and T==horizon),failure=('body/invalid' if not body[i] else 'endpoint' if not success[i] else None),max_drift_m=float(t['drift'][:,i][active].max()),max_rotation_rad=float(t['rotation'][:,i][active].max()),first_body_breach_s=first_bad,first_arrival_s=None if np.isnan(first_arrival[i]) else float(first_arrival[i]),max_extension_fraction=float(np.clip((path.max()-init)/.04,0,1)),travel_range_fraction=float(np.clip((path.max()-path.min())/.04,0,1)),valid_open_close_cycles=int(cycles[i]),commands_reached=int(reached_counts[i]),endpoint_holds=''.join('1' if x else '0' for x in holds[i]) if holds is not None else '',cohort_sha256=report['initial_states_sha256'],trace_sha256=tracehash,mean_abs_slider_error_m=float(error[:,i][active].mean()),max_abs_slider_error_m=float(error[:,i][active].max()),worst_stage_tail_mean_error_m=max(float(error[max(0,min(T,start+period)-9):min(T,start+period),i].mean()) for start in range(0,T,period)) if protocol!='F' else None))
  return trials
 def main():
- p=argparse.ArgumentParser();p.add_argument('--runs',type=Path,default=Path('runs/geometry-generalization-20261002'));p.add_argument('--prefix',default='screen-');p.add_argument('--output',type=Path,required=True);a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True)
+ p=argparse.ArgumentParser();p.add_argument('--runs',type=Path,default=Path('runs/geometry-generalization-20261002'));p.add_argument('--prefix',default='screen-');p.add_argument('--output',type=Path,required=True);p.add_argument('--teacher-sha256',default='2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8');p.add_argument('--student-sha256',default='16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9');a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True);models=dict(teacher=a.teacher_sha256,student=a.student_sha256)
  selections={}
  for path in a.runs.glob('*/selection.json'):
   matrix=path.parent/'valid-states.npy'
   if matrix.exists():selections[hashlib.sha256(matrix.read_bytes()).hexdigest()]=json.loads(path.read_text())
  trials=[];runs=[]
  for path in sorted(a.runs.glob(a.prefix+'*/geometry-receipt.json')):
-  directory=path.parent;report=json.loads((directory/'report.json').read_text());trials+=read_run(directory,selections[report['initial_states_sha256']]);runs.append(str(directory))
+  directory=path.parent;report=json.loads((directory/'report.json').read_text());trials+=read_run(directory,selections[report['initial_states_sha256']],models);runs.append(str(directory))
  assert trials,'No complete physical runs'
  rows=[]
  keys=sorted(set((t['geometry'],t['model'],t['protocol'],t['source']) for t in trials))
@@ -88,7 +90,14 @@ def main():
    group=[r for r in rows if (r['geometry'],r['model'],r['protocol'])==(g,m,p)]
    if len(group)==4:groups.append(dict(geometry=g,rate=float(np.mean([r['rate'] for r in group])),body_rate=float(np.mean([r['body_rate'] for r in group])),worst_source=min(r['rate'] for r in group)))
   if groups:macro.append(dict(model=m,protocol=p,complete_geometries=len(groups),equal_geometry_source_macro=float(np.mean([r['rate'] for r in groups])),worst_geometry=min(groups,key=lambda r:r['rate']),geometries=groups,scope='incomplete-source geometries remain separate; not averaged away'))
- result=dict(rows=rows,paired=pairs,baseline_paired=baseline,macro=macro,runs=runs,independent_rescore=True,statistics='Episode unit; Wilson95 per cell; bootstrap within paired episode; source/geometry explicit; zero valid source is missing coverage, not0%policy success')
+ conditional_macro=[]
+ for m,p in sorted(set((r['model'],r['protocol']) for r in rows)):
+  groups=[]
+  for g in sorted(set(r['geometry'] for r in rows)):
+   group=[r for r in rows if (r['geometry'],r['model'],r['protocol'])==(g,m,p)]
+   if group:groups.append(dict(geometry=g,covered_sources=[r['source'] for r in group],missing_sources=sorted(set(range(4))-{r['source'] for r in group}),minimum_source_n=min(r['n'] for r in group),rate=float(np.mean([r['rate'] for r in group])),body_rate=float(np.mean([r['body_rate'] for r in group])),success_and_full_stability_rate=float(np.mean([r['success_and_full_stability_rate'] for r in group])),worst_source=min(group,key=lambda r:r['rate'])))
+  if groups:conditional_macro.append(dict(model=m,protocol=p,geometries=len(groups),equal_geometry_available_source_macro=float(np.mean([r['rate'] for r in groups])),body_macro=float(np.mean([r['body_rate'] for r in groups])),success_and_full_stability_macro=float(np.mean([r['success_and_full_stability_rate'] for r in groups])),worst_geometry=min(groups,key=lambda r:r['rate']),geometry_rows=groups,scope='Conditional on available sources only; geometry coverage differs and is explicit. No claim of full4source coverage or continuous range.'))
+ result=dict(rows=rows,paired=pairs,baseline_paired=baseline,macro=macro,available_source_macro=conditional_macro,runs=runs,expected_model_sha256=models,independent_rescore=True,time_convention='Trace captures after each30Hzphysics control step: framek at(k+1)/30s.',statistics='Episode unit; Wilson95 per cell; bootstrap within paired episode; source/geometry explicit; zero valid source is missing coverage, not0%policy success')
  (a.output/'report.json').write_text(json.dumps(result,indent=2)+'\n')
  for name,records in [('episodes.csv',trials),('cells.csv',rows)]:
   with (a.output/name).open('w') as f:

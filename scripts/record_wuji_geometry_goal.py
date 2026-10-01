@@ -20,7 +20,7 @@ def record(event, **details):
   current=datetime.datetime.now(datetime.timezone.utc);s['active_gpu_elapsed_hours']=sum(max(0,(current-datetime.datetime.fromisoformat(j['start_utc'])).total_seconds())/3600 for j in s['active_jobs'])
   s['cumulative_gpu_hours_including_active']=s['cumulative_gpu_hours']+s['active_gpu_elapsed_hours'];s['remaining_including_active']=s['max_gpu_hours']-s['cumulative_gpu_hours_including_active']
   (D/'STATE.json').write_text(json.dumps(s,ensure_ascii=False,indent=2)+'\n')
-  message='# 当前 Wuji 尺寸泛化 Goal\n\n工作区 `'+str(R)+'`。先读 research/geometry-generalization-20261002/{GOAL.md,STATE.json,HANDOFF.md,DECISIONS.jsonl}。禁止子代理；旧最终集保持关闭。PID/利用率为带时间历史记录，须重新验证。旧墙钟截止及续训方案已由新Goal替换。\n\n```json\n'+json.dumps(s,ensure_ascii=False,indent=2)+'\n```\n'
+  message='# 当前 Wuji 尺寸泛化 Goal\n\n工作区 `'+str(R)+'`。先读 research/geometry-generalization-20261002/{GOAL.md,STATE.json,HANDOFF.md,PENDING_TASKS.md,DECISIONS.jsonl}。禁止子代理；旧最终集保持关闭。PID/利用率为带时间历史记录，须重新验证。旧墙钟截止及续训方案已由新Goal替换。\n\n```json\n'+json.dumps(s,ensure_ascii=False,indent=2)+'\n```\n'
   (D/'HANDOFF.md').write_text(message);(R/'WUJI_GOAL_HANDOFF.md').write_text(message)
   marker='<!-- GEOMETRY_HISTORY -->'
   for p in [R.parent/'WUJI_GOAL_HANDOFF.md',Path('/data/research/artgym/WUJI_GOAL_HANDOFF.md')]:
@@ -30,7 +30,7 @@ def record(event, **details):
   if not s.get('remote_mirror_disabled'):
    from scripts.host_tool_environment import host_tool_environment
    destination='wangjiarui@10.13.160.5:/tmp/artgym-geometry-20261002/'
-   commands=[['rsync','-az','-e','ssh -p33024',str(D/'STATE.json'),str(D/'GOAL.md'),str(D/'HANDOFF.md'),str(D/'DECISIONS.jsonl'),destination+'research/geometry-generalization-20261002/'],['rsync','-az','-e','ssh -p33024',str(R/'WUJI_GOAL_HANDOFF.md'),destination],['rsync','-az','-e','ssh -p33024',str(R.parent/'runs/wuji-goal/journal/events.jsonl'),destination+'runs/wuji-goal/journal/']]
+   commands=[['rsync','-az','-e','ssh -p33024',str(D/'STATE.json'),str(D/'GOAL.md'),str(D/'HANDOFF.md'),str(D/'DECISIONS.jsonl'),*([str(D/'PENDING_TASKS.md')] if (D/'PENDING_TASKS.md').exists() else []),destination+'research/geometry-generalization-20261002/'],['rsync','-az','-e','ssh -p33024',str(R/'WUJI_GOAL_HANDOFF.md'),destination],['rsync','-az','-e','ssh -p33024',str(R.parent/'runs/wuji-goal/journal/events.jsonl'),destination+'runs/wuji-goal/journal/']]
    try:
     for command in commands:subprocess.run(command,check=True,capture_output=True,timeout=15,env=host_tool_environment())
    except (subprocess.SubprocessError,OSError) as error:

@@ -1,0 +1,41 @@
+{
+  "principal_branch": "E\u2192C: targeted learner-distribution diagnosis, conditional bounded geometry distillation",
+  "evidence": "54 independent protocol runs across9geometries, same64valid/source whenfeasible; nofinaldataopened",
+  "targets": [
+    {
+      "geometry": "L110",
+      "source": 1,
+      "parent_F": 64,
+      "parent_body": 33,
+      "teacher_F": 64,
+      "teacher_body": 58,
+      "n": 64
+    },
+    {
+      "geometry": "W120",
+      "source": 3,
+      "parent_F": 33,
+      "parent_body": 2,
+      "teacher_F": 64,
+      "teacher_body": 55,
+      "n": 64
+    }
+  ],
+  "unreliable_teacher_region": "Source2 of L110/W120 has worse teacher40sholding thanstudent; exclude it from new-geometry teacher-supervisedtraining, but retain evaluation",
+  "diagnostic": {
+    "protocol": "F40s",
+    "cohort": "exact same accepted confirm64 states for all covered sources",
+    "intervention": "First2s legalfrozenSA learner; thereafter sameactor/incomingRNN with frozen originalteacher latent from legal teacher privileged observations. Explicit privileged diagnostic, not deployable student.",
+    "criterion": "Each target holding improves>=15pp, paired bootstrap95 lower>0; target functional rate not clearly worse. If not supported, no distillation; report diagnostic failure and finalize baseline.",
+    "max_gpu_hours": 1.5,
+    "max_jobs": 2,
+    "job_seconds": 900
+  },
+  "training_if_supported": "One preregistered original-LR geometry/valid-initialization distribution arm vs equal update/interaction baseline-only arm from sameSA51200 parent. No LR/network/loss changes. Reserve>=6GPUh. Register actual updates/cost/selection metric/fresh RNG before launch.",
+  "why_not_A_first": "Static length-source3 gaps are real, but independent cohorts confirm severe physical studentholding/function failures in valid initial states across width and length. This targeted diagnostic directly tests usable teacher supervision; no global teacherupperbound claim.",
+  "models": {
+    "teacher": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+    "parent_student": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9"
+  },
+  "other_boundaries": "L-source3 graspadaptation holes; T80source1 bothphysicalholdingpoor; strictprecision losses distinctfromFfunction; noinitialgraspframeworkrewrite"
+}

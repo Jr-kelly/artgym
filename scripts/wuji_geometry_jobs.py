@@ -27,7 +27,7 @@ def main():
    assert memory[a.gpu]<5000
   else:assert memory[a.gpu]<100, 'GPU is not idle'
   out=jobs/a.name;out.mkdir(exist_ok=False)
-  start=time.time();identity=dict(name=a.name,gpu=a.gpu,seconds=a.seconds,command=a.command,start_utc=utc(),local_pid=os.getpid(),remote_root=REMOTE,final=a.final,local=a.local,resource_check=available)
+  start=time.time();identity=dict(name=a.name,gpu=a.gpu,seconds=a.seconds,command=a.command,start_utc=utc(),local_pid=os.getpid(),remote_root=REMOTE,final=a.final,local=a.local,resource_check=available,registered_models=state['models'])
   codehash=hashlib.sha256()
   for folder in ['scripts','isaacgymenvs','rl_games']:
    for path in sorted((R/folder).rglob('*')):

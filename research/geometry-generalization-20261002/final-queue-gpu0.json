@@ -1,0 +1,74 @@
+[
+  {
+    "name": "final-baseline-batch",
+    "seconds": 1800,
+    "final": true,
+    "module": "scripts.batch_wuji_geometry",
+    "args": [
+      "--label",
+      "baseline",
+      "--static",
+      "baseline-static-final",
+      "--split",
+      "final-attempts",
+      "--take",
+      "128",
+      "--prefix",
+      "final-"
+    ]
+  },
+  {
+    "name": "final-L120-batch",
+    "seconds": 1800,
+    "final": true,
+    "module": "scripts.batch_wuji_geometry",
+    "args": [
+      "--label",
+      "L120",
+      "--static",
+      "L120-static-final",
+      "--split",
+      "final-attempts",
+      "--take",
+      "128",
+      "--prefix",
+      "final-"
+    ]
+  },
+  {
+    "name": "final-W120-batch",
+    "seconds": 1800,
+    "final": true,
+    "module": "scripts.batch_wuji_geometry",
+    "args": [
+      "--label",
+      "W120",
+      "--static",
+      "W120-static-final",
+      "--split",
+      "final-attempts",
+      "--take",
+      "128",
+      "--prefix",
+      "final-"
+    ]
+  },
+  {
+    "name": "final-T120-batch",
+    "seconds": 1800,
+    "final": true,
+    "module": "scripts.batch_wuji_geometry",
+    "args": [
+      "--label",
+      "T120",
+      "--static",
+      "T120-static-final",
+      "--split",
+      "final-attempts",
+      "--take",
+      "128",
+      "--prefix",
+      "final-"
+    ]
+  }
+]

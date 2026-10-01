@@ -1,0 +1,48 @@
+{
+  "kind": "SC",
+  "controller_mode": "real",
+  "optimizer_steps": 51200,
+  "interactions": 52428800,
+  "teacher_sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+  "frozen_hash": "f8775c12963a51e1adc225b1fdd107df71eb0bc6b7e1291845ad410693361232",
+  "teacher_encoder_hash": "0576893b4f285bfc57b052b0daa11f4810cb017dd44c906f31120ae216c25198",
+  "args": {
+    "teacher": "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
+    "output": "runs/unified-student-20261001/SA-real-51200",
+    "kind": "SC",
+    "updates": 51200,
+    "envs": 256,
+    "rollout_steps": 4,
+    "seed": 61001,
+    "resume": "runs/unified-student-20261001/SA-real-38400/step_038400.pth",
+    "warm_updates": 400,
+    "save_at": [
+      41600,
+      44800,
+      48000,
+      51200
+    ],
+    "lr": 0.0003,
+    "controller_mode": "real",
+    "target_loss_weight": 25.0,
+    "target_loss_scale": 0.04
+  },
+  "adam_group": [
+    {
+      "lr": 0.0003,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0,
+      "amsgrad": false,
+      "maximize": false,
+      "foreach": null,
+      "capturable": false,
+      "differentiable": false,
+      "fused": null
+    }
+  ],
+  "scheduler": "none in checkpoint or original training script"
+}

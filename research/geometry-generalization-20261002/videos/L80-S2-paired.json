@@ -1,0 +1,185 @@
+{
+  "video": "research/geometry-generalization-20261002/videos/L80-S2-paired.mp4",
+  "sha256": "7abd0d80d641cc7aa21c28af9e13751be575aa0161774f6ee5aadbb327c68bc5",
+  "frames": 600,
+  "duration_s": 20.0,
+  "geometry": "L80",
+  "dimensions_mm_LWT": [
+    117.6,
+    19.0,
+    8.0
+  ],
+  "protocol": "S2",
+  "sources": [
+    0,
+    2
+  ],
+  "cohort_sha256": "58486885a0dc05d007c5c1ad14b0e469bcb3c056899644131f763815c72f5e20",
+  "rollouts": [
+    "runs/geometry-generalization-20261002/video-L80-teacher-S2",
+    "runs/geometry-generalization-20261002/video-L80-student-S2"
+  ],
+  "outcomes": [
+    [
+      {
+        "env": 0,
+        "stages_attained": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "endpoints_held": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "first_cycle": true,
+        "first_cycle_strict": true,
+        "all_commands_attained": true,
+        "all_endpoints_held": true,
+        "stable_full": true,
+        "stable_full_all_endpoints": true,
+        "alive_full": true,
+        "fall": false,
+        "invalid": false,
+        "max_drift_m": 0.005502145271748304,
+        "max_rotation_rad": 0.16677740216255188,
+        "body_stable": true
+      },
+      {
+        "env": 1,
+        "stages_attained": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "endpoints_held": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "first_cycle": true,
+        "first_cycle_strict": true,
+        "all_commands_attained": true,
+        "all_endpoints_held": true,
+        "stable_full": true,
+        "stable_full_all_endpoints": true,
+        "alive_full": true,
+        "fall": false,
+        "invalid": false,
+        "max_drift_m": 0.0037411898374557495,
+        "max_rotation_rad": 0.13407090306282043,
+        "body_stable": true
+      }
+    ],
+    [
+      {
+        "env": 0,
+        "stages_attained": [
+          true,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true
+        ],
+        "endpoints_held": [
+          true,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true
+        ],
+        "first_cycle": true,
+        "first_cycle_strict": true,
+        "all_commands_attained": false,
+        "all_endpoints_held": false,
+        "stable_full": true,
+        "stable_full_all_endpoints": false,
+        "alive_full": true,
+        "fall": false,
+        "invalid": false,
+        "max_drift_m": 0.005104840267449617,
+        "max_rotation_rad": 0.16119922697544098,
+        "body_stable": true
+      },
+      {
+        "env": 1,
+        "stages_attained": [
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true
+        ],
+        "endpoints_held": [
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true
+        ],
+        "first_cycle": false,
+        "first_cycle_strict": false,
+        "all_commands_attained": false,
+        "all_endpoints_held": false,
+        "stable_full": false,
+        "stable_full_all_endpoints": false,
+        "alive_full": true,
+        "fall": false,
+        "invalid": false,
+        "max_drift_m": 0.0037613476160913706,
+        "max_rotation_rad": 0.12573088705539703,
+        "body_stable": true
+      }
+    ]
+  ],
+  "scope": "Separate RTX4090 camera resimulation; does not replace H200 statistics, no hardware; external commands, F true-slider scheduler"
+}

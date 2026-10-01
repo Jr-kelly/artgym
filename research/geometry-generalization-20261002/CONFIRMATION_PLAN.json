@@ -11,9 +11,10 @@
     "L110",
     "L120",
     "W80",
-    "W110"
+    "W110",
+    "W120"
   ],
-  "pending_thickness_conditions": "Choose at most2 representative extremes after full13-condition screen",
+  "pending_thickness_conditions": null,
   "protocols": [
     "S2",
     "S5",
@@ -23,7 +24,12 @@
     "teacher",
     "student"
   ],
-  "estimated_upper_gpu_hours": 8,
+  "estimated_upper_gpu_hours": 9,
   "max_job_seconds": 2400,
-  "branch_selected": false
+  "branch_selected": false,
+  "thickness_conditions": [
+    "T80",
+    "T120"
+  ],
+  "thickness_basis": "Both extremes cover functional/stability and static acceptance boundaries seen in complete screen. T120 source3 may not reach64valid from192attempts; report actual n/coverage, no padding or policy filtering."
 }

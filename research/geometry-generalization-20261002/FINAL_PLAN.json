@@ -1,0 +1,239 @@
+{
+  "utc": "2026-10-01T22:50:26.698372+00:00",
+  "candidate": "Unchanged SA-real-51200",
+  "teacher": "Unchanged epoch_006100",
+  "conditions": [
+    "baseline",
+    "L80",
+    "L90",
+    "L110",
+    "L120",
+    "W80",
+    "W90",
+    "W110",
+    "W120",
+    "T80",
+    "T90",
+    "T110",
+    "T120"
+  ],
+  "split": "final-attempts",
+  "seed": 2026100204,
+  "attempts_per_source": 192,
+  "take": 128,
+  "protocols": [
+    "S2",
+    "S5",
+    "F"
+  ],
+  "rule": "First up to128 statically valid/source; no padding or policy filtering, all missing/undersampled sources explicit",
+  "grasp_recipe": "Original registered contact IK and static checks, no adaptation repair",
+  "no_training": true,
+  "selection_closed": true,
+  "no_post_final_tuning": true,
+  "heldout_geometry_requirement": "Cross-size-training clause not triggered: no training performed. Independent unseen initial states across all13 original geometries.",
+  "max_jobs": 13,
+  "timeout_seconds_each": 1800,
+  "maximum_gpu_hours": 6.5,
+  "data_entries": [
+    {
+      "label": "baseline",
+      "split": "final-attempts",
+      "attempts_per_source": 192,
+      "path": "research/geometry-generalization-20261002/data/baseline/final-attempts.npy",
+      "sha256": "6bc7e2c36449f2fc11e03ca52a82f6980d0ceacdaca9f3c5dd85de2a51836f17",
+      "paired_perturbation_seed": 2026100204,
+      "source_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "final_access": "static and policy evaluation only after candidate freeze"
+    },
+    {
+      "label": "L80",
+      "split": "final-attempts",
+      "attempts_per_source": 192,
+      "path": "research/geometry-generalization-20261002/data/L80/final-attempts.npy",
+      "sha256": "a6968aec116e96f97f5b7e742ae49c7aaa3ecb393b29e45d09dc6d63f763853f",
+      "paired_perturbation_seed": 2026100204,
+      "source_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "final_access": "static and policy evaluation only after candidate freeze"
+    },
+    {
+      "label": "L90",
+      "split": "final-attempts",
+      "attempts_per_source": 192,
+      "path": "research/geometry-generalization-20261002/data/L90/final-attempts.npy",
+      "sha256": "b0e2b89fcb0f0a020d94986f59123ce4d7fe9a16dbad7366f4df91c8b75c97c5",
+      "paired_perturbation_seed": 2026100204,
+      "source_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "final_access": "static and policy evaluation only after candidate freeze"
+    },
+    {
+      "label": "L110",
+      "split": "final-attempts",
+      "attempts_per_source": 192,
+      "path": "research/geometry-generalization-20261002/data/L110/final-attempts.npy",
+      "sha256": "7d87a6d1c7389e87e6748d30e601be363aaa28f93b624219e64a17f78f15dbf4",
+      "paired_perturbation_seed": 2026100204,
+      "source_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "final_access": "static and policy evaluation only after candidate freeze"
+    },
+    {
+      "label": "L120",
+      "split": "final-attempts",
+      "attempts_per_source": 192,
+      "path": "research/geometry-generalization-20261002/data/L120/final-attempts.npy",
+      "sha256": "7d87a6d1c7389e87e6748d30e601be363aaa28f93b624219e64a17f78f15dbf4",
+      "paired_perturbation_seed": 2026100204,
+      "source_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "final_access": "static and policy evaluation only after candidate freeze"
+    },
+    {
+      "label": "W80",
+      "split": "final-attempts",
+      "attempts_per_source": 192,
+      "path": "research/geometry-generalization-20261002/data/W80/final-attempts.npy",
+      "sha256": "ddb855b5d74b5972cf101b8b648a065cfe5b9eb6222b8e54e8afc2b79c3674d6",
+      "paired_perturbation_seed": 2026100204,
+      "source_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "final_access": "static and policy evaluation only after candidate freeze"
+    },
+    {
+      "label": "W90",
+      "split": "final-attempts",
+      "attempts_per_source": 192,
+      "path": "research/geometry-generalization-20261002/data/W90/final-attempts.npy",
+      "sha256": "10d1dbb73f8ceeadb36eb04b224a8697d4776f9c0b37cbaf54185e4a0cdcdfff",
+      "paired_perturbation_seed": 2026100204,
+      "source_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "final_access": "static and policy evaluation only after candidate freeze"
+    },
+    {
+      "label": "W110",
+      "split": "final-attempts",
+      "attempts_per_source": 192,
+      "path": "research/geometry-generalization-20261002/data/W110/final-attempts.npy",
+      "sha256": "1f1ffab0a0a220692d1743eb8296edac4398adc43540fbf33ada54d2681053cf",
+      "paired_perturbation_seed": 2026100204,
+      "source_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "final_access": "static and policy evaluation only after candidate freeze"
+    },
+    {
+      "label": "W120",
+      "split": "final-attempts",
+      "attempts_per_source": 192,
+      "path": "research/geometry-generalization-20261002/data/W120/final-attempts.npy",
+      "sha256": "6cdad028c991add9f1ceea8fb0630fad91994460994f0611ad21f5896db2399a",
+      "paired_perturbation_seed": 2026100204,
+      "source_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "final_access": "static and policy evaluation only after candidate freeze"
+    },
+    {
+      "label": "T80",
+      "split": "final-attempts",
+      "attempts_per_source": 192,
+      "path": "research/geometry-generalization-20261002/data/T80/final-attempts.npy",
+      "sha256": "6ceafc04671f204a5b4d76b6f1564e58de025d0ae554131f23573baef4bd874b",
+      "paired_perturbation_seed": 2026100204,
+      "source_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "final_access": "static and policy evaluation only after candidate freeze"
+    },
+    {
+      "label": "T90",
+      "split": "final-attempts",
+      "attempts_per_source": 192,
+      "path": "research/geometry-generalization-20261002/data/T90/final-attempts.npy",
+      "sha256": "ce6fb81bb8007cfd9d35a897113f44991634f63a1e50d8881be2db63e2eb34b8",
+      "paired_perturbation_seed": 2026100204,
+      "source_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "final_access": "static and policy evaluation only after candidate freeze"
+    },
+    {
+      "label": "T110",
+      "split": "final-attempts",
+      "attempts_per_source": 192,
+      "path": "research/geometry-generalization-20261002/data/T110/final-attempts.npy",
+      "sha256": "3ac95dbb18385ebc123be1cdfcdf22e92f83428fd6aaedc1588fd7e4e35e7d63",
+      "paired_perturbation_seed": 2026100204,
+      "source_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "final_access": "static and policy evaluation only after candidate freeze"
+    },
+    {
+      "label": "T120",
+      "split": "final-attempts",
+      "attempts_per_source": 192,
+      "path": "research/geometry-generalization-20261002/data/T120/final-attempts.npy",
+      "sha256": "e42da17645e03c487150a16b2cfb07e132d9430fa399238ded48c8ef7e205dfe",
+      "paired_perturbation_seed": 2026100204,
+      "source_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "final_access": "static and policy evaluation only after candidate freeze"
+    }
+  ],
+  "models": {
+    "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+    "runs/unified-student-20261001/SA-real-51200/step_051200.pth": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9"
+  }
+}

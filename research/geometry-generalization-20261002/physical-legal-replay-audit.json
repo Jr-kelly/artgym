@@ -1,0 +1,33 @@
+{
+  "passed": false,
+  "fixture": "runs/geometry-generalization-20261002/screen-T90-student-S2/legal-replay-fixture.pth",
+  "fixture_sha256": "3985ea65a668797d4d628648b519047b7e759ee28a07a89ad01ec4d334f7c70c",
+  "steps": 64,
+  "batch": 8,
+  "ids": [
+    0,
+    9,
+    18,
+    27,
+    36,
+    45,
+    54,
+    63
+  ],
+  "geometry": "T90",
+  "max_absolute_errors": {
+    "public": 1.4901161193847656e-07,
+    "history": 1.4901161193847656e-07,
+    "action": 0.004527084529399872,
+    "target": 0.00011324882507324219,
+    "rnn": 0.06078362464904785
+  },
+  "thresholds": {
+    "public": 2e-05,
+    "history": 2e-05,
+    "action": 0.002,
+    "target": 0.0001,
+    "rnn": 0.002
+  },
+  "scope": "CPU replay of recorded legal inputs/actions/RNN from physical H200 evaluation; no new physics or hardware, no current object/slider/contact truth consumed"
+}

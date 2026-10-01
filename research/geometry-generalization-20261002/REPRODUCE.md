@@ -2,7 +2,7 @@
 
 Use `feat/wuji-geometry-generalization-20261002`, based on the completed student branch e6c9f3e. Previous final cohorts/releases are closed and unchanged. This is a new geometry research round with cumulative64GPUh, historical32.4534053852823GPUh and6GPUh final reserve; there is no old wall-clock deadline. No hardware is connected.
 
-Restore the previous `student-primary-SA51200.tar.gz` using `scripts.restore_wuji_unified` into an isolated checkout to recover baseline assets/configuration, teacher actor/encoder and SA51200 Adam/RNG. Overlay this branch's source and this round's asset/data release bundles when available. Never overwrite different existing artifact bytes. Source checkout alone does not include ignored large model/data files.
+Clone this public branch without `--recurse-submodules`: the legacy `func_lygra`/`make_data` SSH submodules are not needed by this geometry runtime; `rl_games`, baseline hand assets, quaternion reference caches and default training seeds are already tracked in the main tree. Restore this round's `geometry-frozen-parent-models.tar.gz` and `geometry-controlled-assets-v1.tar.gz` with `scripts.restore_wuji_unified` into the isolated checkout. These provide the exact frozen teacher/SA51200 Adam/RNG, generated controlled assets and new split datasets. Never overwrite different existing artifact bytes. Additional final candidate/evidence bundles are listed in the final release manifest. The previous primary bundle remains preserved as an optional historical reference; it is not required for this new restoration chain.
 
 Scientific runtime is Python3.8/PyTorch2.1.0+cu118 with IsaacGym TacSL. Import IsaacGym beforeTorch. Supply a compatible driver/runtime independently. Use the complete runtime prefix:
 

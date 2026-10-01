@@ -1,0 +1,137 @@
+{
+  "video": "research/geometry-generalization-20261002/videos/W120-S5-paired.mp4",
+  "sha256": "ffd068d2c23c8874876b5e589456c9b0a043049e3359e5067a142f5f9dc80662",
+  "frames": 600,
+  "duration_s": 20.0,
+  "geometry": "W120",
+  "dimensions_mm_LWT": [
+    147.0,
+    22.799999999999997,
+    8.0
+  ],
+  "protocol": "S5",
+  "sources": [
+    0,
+    3
+  ],
+  "cohort_sha256": "3c81c469d1a993aa1174e8a5a1ef24769d4d24a236b846caae8e7787cc9fef95",
+  "rollouts": [
+    "runs/geometry-generalization-20261002/video-W120-teacher-S5",
+    "runs/geometry-generalization-20261002/video-W120-student-S5"
+  ],
+  "outcomes": [
+    [
+      {
+        "env": 0,
+        "stages_attained": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "endpoints_held": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "first_cycle": true,
+        "first_cycle_strict": true,
+        "all_commands_attained": true,
+        "all_endpoints_held": true,
+        "stable_full": true,
+        "stable_full_all_endpoints": true,
+        "alive_full": true,
+        "fall": false,
+        "invalid": false,
+        "max_drift_m": 0.004777420312166214,
+        "max_rotation_rad": 0.13417579233646393,
+        "body_stable": true
+      },
+      {
+        "env": 1,
+        "stages_attained": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "endpoints_held": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "first_cycle": true,
+        "first_cycle_strict": true,
+        "all_commands_attained": true,
+        "all_endpoints_held": true,
+        "stable_full": false,
+        "stable_full_all_endpoints": false,
+        "alive_full": true,
+        "fall": false,
+        "invalid": false,
+        "max_drift_m": 0.008209417574107647,
+        "max_rotation_rad": 0.421038419008255,
+        "body_stable": false
+      }
+    ],
+    [
+      {
+        "env": 0,
+        "stages_attained": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "endpoints_held": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "first_cycle": true,
+        "first_cycle_strict": true,
+        "all_commands_attained": true,
+        "all_endpoints_held": true,
+        "stable_full": true,
+        "stable_full_all_endpoints": true,
+        "alive_full": true,
+        "fall": false,
+        "invalid": false,
+        "max_drift_m": 0.004938273690640926,
+        "max_rotation_rad": 0.13216163218021393,
+        "body_stable": true
+      },
+      {
+        "env": 1,
+        "stages_attained": [
+          true,
+          false,
+          false,
+          false
+        ],
+        "endpoints_held": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "first_cycle": false,
+        "first_cycle_strict": false,
+        "all_commands_attained": false,
+        "all_endpoints_held": false,
+        "stable_full": false,
+        "stable_full_all_endpoints": false,
+        "alive_full": false,
+        "fall": true,
+        "invalid": false,
+        "max_drift_m": 0.046068355441093445,
+        "max_rotation_rad": 1.96548330783844,
+        "body_stable": false
+      }
+    ]
+  ],
+  "scope": "Separate RTX4090 camera resimulation; does not replace H200 statistics, no hardware; external commands, F true-slider scheduler"
+}
