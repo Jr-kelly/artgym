@@ -7,7 +7,7 @@
   "reserved_final_gpu_hours": 6,
   "reserved_final_seconds": 5400,
   "gpu_hours": 32.4534053852823,
-  "phase": "Publicrestorationverified; finalGitHubsyncremaining",
+  "phase": "Boundedroundcomplete: finalnegativegateverified,28assetspublic,downloadsrestored,ownedjobsstopped",
   "active_jobs": [],
   "base_sha": "56d4dcc66e805298cb5f4c365a55f9c14df36b37",
   "teacher_sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
@@ -17,16 +17,17 @@
   "goal_sha256": "c7e9c244d11824a5d230cfb24ac9207e78fcb1965a376bff6a38f03c084c4a3f",
   "existing_student_run_found": false,
   "prior_session": "Previous user turn performed only read-only attachment/connectivity check; no studentgoal/training/worktree existed. Prior teacher round closed.",
-  "next": "Pushverificationcode/records andverifycleanremoteHEAD; thenclosethisboundedgoal",
+  "next": "This bounded round is complete. Preserve frozen primary, closed final cohort and all prior work. Do not resume training or tune on either closed final set. A future research round requires separately registered data/budget and fresh optimization RNG.",
   "last_event": {
-    "utc": "2026-10-01T20:17:08.764361+00:00",
-    "event": "public_delivery_verification_documented",
-    "phase": "Publicrestorationverified; finalGitHubsyncremaining",
-    "evidence": "/data/research/artgym-experiments-20260921/unified-student-20261001/research/unified-student-20261001/public-verification.json",
+    "utc": "2026-10-01T20:21:28.342332+00:00",
+    "event": "bounded_student_round_closed_after_public_verification",
+    "evidence": "/data/research/artgym-experiments-20260921/unified-student-20261001/research/unified-student-20261001/branch-delivery-verified.json",
+    "verified_public_delivery_commit": "23fa76af3a55c4634b6284cf23d0e10ad1fa8697",
     "assets": 28,
-    "anonymous_files": 5,
-    "fully_decoded_videos": 4,
-    "next": "Pushverificationcode/records andverifycleanremoteHEAD; thenclosethisboundedgoal"
+    "final_full_gate_pass": false,
+    "primary_worst_strict": "93/128 source3 S2",
+    "gpu_hours": 32.4534053852823,
+    "next": "This bounded round is complete. Preserve frozen primary, closed final cohort and all prior work. Do not resume training or tune on either closed final set. A future research round requires separately registered data/budget and fresh optimization RNG."
   },
   "research_notes": "research/unified-student-20261001/RESEARCH_NOTES.md",
   "current_plan": "research/unified-student-20261001/fixed-method-extension70400-plan.json",
@@ -51,7 +52,6 @@
     "final_selected": false
   },
   "delivery_progress": {
-    "last_pushed_commit": "bd866a317f9560a158a06ce9ed95b1f860b7a195",
     "release_id": 400860039,
     "tag": "wuji-unified-student-20261001-v1",
     "draft": false,
@@ -84,7 +84,9 @@
     "final_cohort_opened": true,
     "public_release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-unified-student-20261001-v1",
     "public_verification": "research/unified-student-20261001/public-verification.json",
-    "public_download_restore_verified": true
+    "public_download_restore_verified": true,
+    "verified_public_delivery_commit": "23fa76af3a55c4634b6284cf23d0e10ad1fa8697",
+    "branch_verification": "research/unified-student-20261001/branch-delivery-verified.json"
   },
   "verification_helpers": [
     "scripts/audit_wuji_student_final.py",
@@ -108,5 +110,7 @@
     "status": "stopped",
     "evidence": "research/unified-student-20261001/resources-final.json"
   },
-  "public_release_verified": true
+  "public_release_verified": true,
+  "bounded_goal_work_complete": true,
+  "closed_utc": "2026-10-01T20:21:28.264521+00:00"
 }
