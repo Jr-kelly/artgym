@@ -15,7 +15,8 @@ def main():
     files=[]
     for rel in a.paths:
         path=R/rel;assert path.exists();files.extend([path] if path.is_file() else [x for x in path.rglob('*') if x.is_file() and not x.is_symlink()])
-    files=sorted(set(files));entries=[dict(path=str(x.relative_to(R)),sha256=sha(x),size=x.stat().st_size) for x in files]
+    files=sorted(x for x in set(files) if not {'.git','__pycache__','.pytest_cache'}.intersection(x.relative_to(R).parts) and x.suffix not in {'.pyc','.pyo'})
+    entries=[dict(path=str(x.relative_to(R)),sha256=sha(x),size=x.stat().st_size) for x in files]
     record('archive_started',name=a.name,paths=a.paths,next='Verify source hashes then upload independent release asset')
     manifest=dict(name=a.name,created_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),files=entries,restore='python -m scripts.restore_wuji_unified ARCHIVE --output RESTORE_ROOT')
     with tarfile.open(archive,'w:gz',compresslevel=1) as tf:

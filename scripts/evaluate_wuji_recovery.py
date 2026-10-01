@@ -30,6 +30,7 @@ def main():
     parser.add_argument('--unified-student', type=Path)
     parser.add_argument('--legal-public', action='store_true')
     parser.add_argument('--latent-probes', action='store_true')
+    parser.add_argument('--probe-after-action', action='store_true', help='Diagnostic forwards run after the live action, before physics, using the saved incoming RNN.')
     parser.add_argument('--holdout-probes', nargs='*')
     parser.add_argument('--task', help='Explicit trained action/task variant; default follows teacher/student mode.')
     parser.add_argument('--hand', choices=['wuji_paper', 'wuji_paper_official_actuator'], default='wuji_paper')
@@ -42,6 +43,8 @@ def main():
     parser.add_argument('--stage-seconds', type=float, choices=[2., 5.], required=True)
     parser.add_argument('--seed', type=int, default=1616)
     args = parser.parse_args()
+    if args.probe_after_action:
+        assert args.latent_probes and args.unified_student
     total_steps=600 if args.protocol=='S' else 1200
     started=__import__('time').monotonic()
     args.output.mkdir(parents=True, exist_ok=True)
@@ -108,15 +111,22 @@ def main():
         original_action = player.get_action
         probe_step = [0]
         def probing_action(observations, *a, **kw):
+            early_action = None
+            saved_incoming = None
             if probe_step[0] % 20 == 0:
+                if args.probe_after_action:
+                    saved_incoming = [state.clone() for state in player.states]
+                    early_action = original_action(observations, *a, **kw)
                 with torch.no_grad():
                     label = probe_teacher(normalize_obs_slice(player.model, env.teacher_privileged_obs_buf, 111))
-                latent_probes.append(dict(step=probe_step[0], x=env.student_obs_buf.detach().cpu().clone(), label=label.cpu(), obs=observations.cpu(), rnn=[s.cpu().clone() for s in player.states], initial=env.init_targets[:,:20].cpu().clone(), previous=env.prev_targets[:,:20].cpu().clone()))
+                incoming_for_record = saved_incoming if saved_incoming is not None else player.states
+                latent_probes.append(dict(step=probe_step[0], x=env.student_obs_buf.detach().cpu().clone(), label=label.cpu(), obs=observations.cpu(), rnn=[s.cpu().clone() for s in incoming_for_record], initial=env.init_targets[:,:20].cpu().clone(), previous=env.prev_targets[:,:20].cpu().clone()))
                 if args.unified_student:
                     from scripts.wuji_student_interface import legal_policy_observation
                     from isaacgymenvs.utils.distill_action_loss import frozen_actor_mean
                     from scripts.wuji_executed_target_loss import executed_targets
-                    incoming = [state.clone() for state in player.states]
+                    incoming = saved_incoming if saved_incoming is not None else [state.clone() for state in player.states]
+                    protected_live = [state.clone() for state in player.states] if saved_incoming is not None else incoming
                     with torch.no_grad():
                         prediction = player.model.a2c_network.priv_encoder(env.student_obs_buf)
                         policy_obs = legal_policy_observation(observations)
@@ -125,10 +135,12 @@ def main():
                         command_args = (env.init_targets[:,:20],env.prev_targets[:,:20],env.hand_dof_lower_limits,env.hand_dof_upper_limits)
                         student_target = executed_targets(student_mean,*command_args)
                         teacher_target = executed_targets(teacher_mean,*command_args)
-                    assert all(torch.equal(x,y) for x,y in zip(incoming,player.states)), 'Diagnostic altered live RNN'
+                    assert all(torch.equal(x,y) for x,y in zip(protected_live,player.states)), 'Diagnostic altered live RNN'
                     latent_probes[-1].update(prediction=prediction.cpu(),student_mean=student_mean.cpu(),teacher_mean=teacher_mean.cpu(),student_target=student_target.cpu(),teacher_target=teacher_target.cpu(),active=env.eval_active_mask.cpu().clone(),scope='Independent teacher-label diagnostic only; never optimization or an injected policy latent')
 
             probe_step[0] += 1
+            if early_action is not None:
+                return early_action
             return original_action(observations, *a, **kw)
         player.get_action = probing_action
     env.configure_fixed_grasp_consecutive_evaluation(instance_id='000', grasp_state=states[0],
@@ -234,6 +246,7 @@ def main():
         report['known_controller_max_error_rad'] = getattr(env,'known_controller_max_error',None)
         report['fk_max_abs_error_m'] = getattr(env, 'student_fk_max_error', None)
         report['independent_teacher_label_diagnostic'] = bool(args.latent_probes and args.unified_student)
+        report['diagnostic_forward_order'] = ('after_live_action_before_physics' if args.probe_after_action else 'before_live_action') if args.latent_probes else None
         report['unified_student_sha256'] = hashlib.sha256(args.unified_student.read_bytes()).hexdigest() if args.unified_student else None
         report['wall_seconds'] = __import__('time').monotonic()-started
         report.update(effective_randomize=bool(env.randomize),effective_joint_noise=float(env.joint_noise),effective_force_scale=float(env.force_scale),checkpoint_sha256=hashlib.sha256(args.checkpoint.read_bytes()).hexdigest(),

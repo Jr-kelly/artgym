@@ -1,0 +1,33 @@
+{
+  "rows": [
+    {
+      "fixture": "teacher-legal-S2",
+      "snapshots": 30,
+      "observations": 3840,
+      "extra_raw_width": 1,
+      "unique_values": [
+        50.0
+      ]
+    },
+    {
+      "fixture": "SC-8000-onpolicy-diagnostic-warmup",
+      "snapshots": 30,
+      "observations": 3840,
+      "extra_raw_width": 1,
+      "unique_values": [
+        50.0
+      ]
+    },
+    {
+      "fixture": "SA-8000-onpolicy-diagnostic",
+      "snapshots": 30,
+      "observations": 3840,
+      "extra_raw_width": 1,
+      "unique_values": [
+        50.0
+      ]
+    }
+  ],
+  "scope": "Raw field137 is fixed SAPG coefficient ID50, selecting parameter block0. It is constant for every observed source/time; not grasp routing or runtime physical information.",
+  "source": "scripts.wuji_goal_common.make_player; build_policy_player with selected_block_idx=0 maps index0 to coefficient50"
+}

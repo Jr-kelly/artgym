@@ -1,0 +1,18 @@
+{
+  "checkpoint": "runs/unified-student-20261001/SC-masked-12800/step_012800.pth",
+  "sha256": "20b05ac744f4d7427f4c273e27a993a585b09ff1799f5548ad4e04fd68bedde5",
+  "saved_steps": 12800,
+  "next_steps": 12801,
+  "restored_next_update_identical": true,
+  "has_rng": [
+    "torch",
+    "cuda",
+    "numpy",
+    "python"
+  ],
+  "cpu_rng_draws_identical": true,
+  "cuda_rng_payloads": 1,
+  "cuda_rng_execution_tested": false,
+  "frozen_hash": "f8775c12963a51e1adc225b1fdd107df71eb0bc6b7e1291845ad410693361232",
+  "scope": "CPU restoration of encoder/Adam and Python/NumPy/Torch RNG; CUDA RNG payload validated but not executed by this CPU audit. Physics resumes with new declared episodes, not serialized PhysX"
+}

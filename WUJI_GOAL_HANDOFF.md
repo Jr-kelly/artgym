@@ -13,55 +13,9 @@
   "max_concurrent_gpus": 4,
   "reserved_final_gpu_hours": 6,
   "reserved_final_seconds": 5400,
-  "gpu_hours": 8.070667138563262,
+  "gpu_hours": 9.758571391304335,
   "phase": "Fixed-method SA/SC continuation12800to25600, plus existing masked12800control",
   "active_jobs": [
-    {
-      "name": "SC-masked-12800",
-      "gpu": 1,
-      "seconds": 7200,
-      "command": [
-        "/tmp/wuji-student-runtime/bin/python",
-        "-m",
-        "scripts.train_wuji_unified_student",
-        "--teacher",
-        "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
-        "--output",
-        "runs/unified-student-20261001/SC-masked-12800",
-        "--kind",
-        "SC",
-        "--controller-mode",
-        "masked",
-        "--updates",
-        "12800",
-        "--resume",
-        "runs/unified-student-20261001/SC-masked-6400-r1/step_006400.pth",
-        "--save-at",
-        "9600",
-        "12800",
-        "--target-loss-weight",
-        "0",
-        "--target-loss-scale",
-        ".04"
-      ],
-      "start_utc": "2026-10-01T08:37:04.961614+00:00",
-      "local_pid": 664511,
-      "remote_root": "/tmp/artgym-student-20261001",
-      "final": false,
-      "local": false,
-      "resource_check": "0, 2863\n1, 0\n2, 2039\n3, 2865\n",
-      "local_source_sha256": "0d96ab6e39536f5df4c8ca97aa0a167336340e3b33f6c4ca9b6fffdde4575003",
-      "pinned_source_sha256": "0d96ab6e39536f5df4c8ca97aa0a167336340e3b33f6c4ca9b6fffdde4575003",
-      "selected_source_sha256": {
-        "scripts/evaluate_wuji_recovery.py": "2c43b141c00dad35be05d8e29fd65ffc10916481e64e83c8deceb4c17d486647",
-        "scripts/train_wuji_unified_student.py": "9e3932aa0c848728ec54c81ef28d779e45c1f6ba35751554e9b4403c4f846bf9",
-        "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
-        "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
-        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
-      },
-      "pinned_source_matches_local": true,
-      "remote_shell": "cd /tmp/artgym-student-20261001/pins/SC-masked-12800 && CUDA_VISIBLE_DEVICES=1 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 7200 /tmp/wuji-student-runtime/bin/python -m scripts.train_wuji_unified_student --teacher runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth --output runs/unified-student-20261001/SC-masked-12800 --kind SC --controller-mode masked --updates 12800 --resume runs/unified-student-20261001/SC-masked-6400-r1/step_006400.pth --save-at 9600 12800 --target-loss-weight 0 --target-loss-scale .04"
-    },
     {
       "name": "SC-real-25600",
       "gpu": 2,
@@ -109,41 +63,6 @@
       },
       "pinned_source_matches_local": true,
       "remote_shell": "cd /tmp/artgym-student-20261001/pins/SC-real-25600 && CUDA_VISIBLE_DEVICES=2 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 14000 /tmp/wuji-student-runtime/bin/python -m scripts.train_wuji_unified_student --teacher runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth --output runs/unified-student-20261001/SC-real-25600 --kind SC --controller-mode real --updates 25600 --resume runs/unified-student-20261001/SC-real-12800/step_012800.pth --save-at 16000 19200 22400 25600 --target-loss-weight 0 --target-loss-scale .04"
-    },
-    {
-      "name": "SC-masked-9600-development",
-      "gpu": 3,
-      "seconds": 1800,
-      "command": [
-        "/tmp/wuji-student-runtime/bin/python",
-        "-m",
-        "scripts.evaluate_wuji_student_batch",
-        "--teacher",
-        "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
-        "--models",
-        "SC-masked-9600=runs/unified-student-20261001/SC-masked-12800/step_009600.pth",
-        "--states",
-        "research/unified-student-20261001/data/development-all.npy",
-        "--output",
-        "runs/unified-student-20261001/SC-masked-9600-development"
-      ],
-      "start_utc": "2026-10-01T09:12:24.302247+00:00",
-      "local_pid": 890801,
-      "remote_root": "/tmp/artgym-student-20261001",
-      "final": false,
-      "local": false,
-      "resource_check": "0, 2863\n1, 2865\n2, 2865\n3, 0\n",
-      "local_source_sha256": "0e0670aaa77eeb01e8bd0b7a8677cf13add46d65e4f4b4255ee22292486cb8c5",
-      "pinned_source_sha256": "0e0670aaa77eeb01e8bd0b7a8677cf13add46d65e4f4b4255ee22292486cb8c5",
-      "selected_source_sha256": {
-        "scripts/evaluate_wuji_recovery.py": "2c43b141c00dad35be05d8e29fd65ffc10916481e64e83c8deceb4c17d486647",
-        "scripts/train_wuji_unified_student.py": "9e3932aa0c848728ec54c81ef28d779e45c1f6ba35751554e9b4403c4f846bf9",
-        "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
-        "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
-        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
-      },
-      "pinned_source_matches_local": true,
-      "remote_shell": "cd /tmp/artgym-student-20261001/pins/SC-masked-9600-development && CUDA_VISIBLE_DEVICES=3 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 1800 /tmp/wuji-student-runtime/bin/python -m scripts.evaluate_wuji_student_batch --teacher runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth --models SC-masked-9600=runs/unified-student-20261001/SC-masked-12800/step_009600.pth --states research/unified-student-20261001/data/development-all.npy --output runs/unified-student-20261001/SC-masked-9600-development"
     },
     {
       "name": "SA-real-25600",
@@ -202,12 +121,28 @@
   "goal_sha256": "c7e9c244d11824a5d230cfb24ac9207e78fcb1965a376bff6a38f03c084c4a3f",
   "existing_student_run_found": false,
   "prior_session": "Previous user turn performed only read-only attachment/connectivity check; no studentgoal/training/worktree existed. Prior teacher round closed.",
-  "next": "Collectmasked9600 and subsequent16k checkpoints; no methodchanges while comparisonsrun",
+  "next": "MainSA/SC fixedmethod25600 training continues; bestprovisionalSA12800retained",
   "last_event": {
-    "utc": "2026-10-01T09:12:35.536862+00:00",
-    "event": "extension_parent_optimizer_rng_audited",
-    "evidence": "research/unified-student-20261001/repair2-extension-resume-audit.json",
-    "next": "Collectmasked9600 and subsequent16k checkpoints; no methodchanges while comparisonsrun"
+    "utc": "2026-10-01T09:58:01.440016+00:00",
+    "event": "controller_long_budget12800_comparison_complete",
+    "evidence": [
+      "research/unified-student-20261001/SC-masked-12800-development-analysis/report.json",
+      "research/unified-student-20261001/SC-real-12800-development-analysis/report.json"
+    ],
+    "worst_S_strict": {
+      "real": 5,
+      "masked": 5
+    },
+    "worst_S_body": {
+      "real": 29,
+      "masked": 27
+    },
+    "F_source1_body": {
+      "real": 30,
+      "masked": 2
+    },
+    "interpretation": "Knowncontroller input improves some fixed12800stability outcomes but not worststrictsuccess; gains tradedacrosssources and didnotpersist at9600. No claim it solvesstableunifiedstudent. Its existing continuation stops at registered12800 endpoint; GPU1 availableforusefulmaincheckpoint evaluations.",
+    "next": "MainSA/SC fixedmethod25600 training continues; bestprovisionalSA12800retained"
   },
   "research_notes": "research/unified-student-20261001/RESEARCH_NOTES.md",
   "current_plan": "research/unified-student-20261001/repair2-extension-plan.json",
@@ -218,6 +153,15 @@
   "supplemental_plan": "research/unified-student-20261001/controller-long-budget-plan.json",
   "evaluation_gpu_assignments": {
     "extended-combined-evaluation-queue.json": 3
+  },
+  "provisional_best_development": {
+    "name": "SA-real-12800",
+    "checkpoint": "runs/unified-student-20261001/SA-real-12800/step_012800.pth",
+    "sha256": "fdd6d54e0054a24c722cef4337cabb8f13d9835f884b9ecc7038b703b0e551af",
+    "worst_strict_count": 12,
+    "n": 32,
+    "full_gate": false,
+    "final_selected": false
   }
 }
 ```

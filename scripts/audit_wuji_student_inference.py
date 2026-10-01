@@ -40,6 +40,7 @@ def main():
     install_student_player(player)
     probes = torch.load(args.probes, map_location='cpu')
     assert len(probes) >= 10
+    assert all(probe['obs'].shape[1] == 138 and torch.all(probe['obs'][:, 137] == 50) for probe in probes)
     count = len(probes[0]['x'])
     assert count % 4 == 0
     ids = torch.cat([torch.arange(s * (count // 4), s * (count // 4) + min(8, count // 4)) for s in range(4)])
@@ -74,6 +75,7 @@ def main():
         probes_sha256=hashlib.sha256(args.probes.read_bytes()).hexdigest(),
         snapshots=len(probes), simultaneous_histories=len(ids), states_per_history=len(player.states),
         action_and_all_rnn_exact_invariance=True, actor_teacher_encoder_calls=calls[0],
+        fixed_policy_parameter_id=50.0,
         critic_receives_constant_normalized_dummy=True, frozen_hash_unchanged=True,
         scope='CPU full get_action path on frozen nonconstant history snapshots, with recurrent state propagated from zero. No simulator or physical success claim; snapshots are not new independent trials.')
     args.output.write_text(json.dumps(result, indent=2) + '\n')

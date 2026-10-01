@@ -13,6 +13,7 @@
 | Teacher current poses + physics + slider state |21|pose14, mass2, friction1, damping1, stiffness1, slider displacement1, velocity1; total21|frozen teacher slice111:132|teacher_privileged_obs_buf|training supervision only; never deployment|
 | Critic contact auxiliary |5|binary current contact|frozen shared statistics|raw132:137|zeroed along with teacher fields before student player; no contact sensor assumed|
 | Student temporal input |2055|50×(normalized q20+previous action20) + transformed initial55|q limit scaling; initial raw canonical coordinates; no adaptive stats|student interface install_legal_public|same available inputs above|
+| Fixed SAPG parameter ID |1|dimensionless, constant50 for the entire policy|unchanged fixed parameter lookup, block index0|make_player; build_policy_player|fixed configuration, not a sensor or grasp source ID|
 | Actor RNN |4×512 state (actor h/c, critic h/c)|pre-action; reset per environment|fixed layer normalization|player.states|local memory; privileged dummy fields enforced for critic too|
 | Action output |20|dimensionless clipped[-1,1]|teacher unchanged|frozen actor|original controller|
 | Joint target |20|rad|joint limit clamp; nonthumb init target+.04a; thumb previous target+.025a|WujiAcquisition.actions_to_targets; preflight verifies actual target|controller can maintain issued targets; S0 does not consume targets|
