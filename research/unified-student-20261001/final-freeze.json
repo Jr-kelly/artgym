@@ -1,0 +1,216 @@
+{
+  "frozen_utc": "2026-10-01T19:30:59.608265+00:00",
+  "code_sha256": "6176b3d2219808b44be464fbffe0249d4a1445e28ef682456c280772cd79f8b5",
+  "teacher": {
+    "name": "teacher",
+    "role": "teacher",
+    "path": "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
+    "sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+    "evaluation_root": "runs/unified-student-20261001/final-teacher"
+  },
+  "models": [
+    {
+      "name": "SA-real-51200",
+      "role": "primary",
+      "path": "runs/unified-student-20261001/SA-real-51200/step_051200.pth",
+      "sha256": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9",
+      "evaluation_root": "runs/unified-student-20261001/final-SA-real-51200",
+      "restore_audit": "research/unified-student-20261001/SA-51200-finite-cpu-restore.json",
+      "input_audit": "research/unified-student-20261001/SA-51200-sequence-input-audit.json"
+    },
+    {
+      "name": "SA-real-70400",
+      "role": "fixed_endpoint",
+      "path": "runs/unified-student-20261001/SA-real-70400/step_070400.pth",
+      "sha256": "c0b2321ece88442920b86302e8a7ef8c488892ce6c876de56f52f2f310981f87",
+      "evaluation_root": "runs/unified-student-20261001/final-SA-real-70400",
+      "restore_audit": "research/unified-student-20261001/SA-70400-finite-cpu-restore.json",
+      "input_audit": "research/unified-student-20261001/SA-70400-sequence-input-audit.json"
+    },
+    {
+      "name": "SC-real-51200",
+      "role": "matched_latent_only_control",
+      "path": "runs/unified-student-20261001/SC-real-51200/step_051200.pth",
+      "sha256": "0a458863983e0cfb337c61aff94d025e0f9e0bd27c6f8f64c2d1c232a74105c8",
+      "evaluation_root": "runs/unified-student-20261001/final-SC-real-51200",
+      "restore_audit": "research/unified-student-20261001/SC-51200-finite-cpu-restore.json",
+      "input_audit": "research/unified-student-20261001/SC-51200-sequence-input-audit.json"
+    },
+    {
+      "name": "C1-3200",
+      "role": "initial_only_reference",
+      "path": "runs/unified-student-20261001/C1-3200/step_003200.pth",
+      "sha256": "53612c29e084b83062ca2f19c514c6b27f1cc195de4ebb001db0523f44e42dc7",
+      "evaluation_root": "runs/unified-student-20261001/final-C1-3200",
+      "restore_audit": "research/unified-student-20261001/C1-3200-finite-cpu-restore.json",
+      "input_audit": "research/unified-student-20261001/C1-3200-sequence-input-audit.json"
+    }
+  ],
+  "cohort": {
+    "path": "research/unified-student-20261001/data/final-all.npy",
+    "sha256": "a47be7464659f75e69ef6f7165a7b057a0fd433ed180af76723f9bb5e1576a82",
+    "n_per_source": 128
+  },
+  "protocols": [
+    "S2",
+    "S5",
+    "F"
+  ],
+  "selection": {
+    "rule": [
+      "input legality and all gates",
+      "minimum source S strict",
+      "minimum stage hold",
+      "minimum body stability",
+      "earlier checkpoint"
+    ],
+    "development_best": {
+      "model": "SA-real-51200",
+      "ranking_key": [
+        0,
+        0.75,
+        0.75,
+        0.96875,
+        -51200
+      ],
+      "evidence": "research/unified-student-20261001/SA-real-51200-development-analysis/report.json",
+      "complete_gate": false,
+      "worst_missing_episode_count": 2,
+      "confirmation_eligible": false,
+      "deficits": [
+        {
+          "protocol": "S2",
+          "source": 0,
+          "strict_deficit": 0,
+          "body_deficit": 0
+        },
+        {
+          "protocol": "S2",
+          "source": 1,
+          "strict_deficit": 0,
+          "body_deficit": 1
+        },
+        {
+          "protocol": "S2",
+          "source": 2,
+          "strict_deficit": 1,
+          "body_deficit": 0
+        },
+        {
+          "protocol": "S2",
+          "source": 3,
+          "strict_deficit": 2,
+          "body_deficit": 1
+        },
+        {
+          "protocol": "S5",
+          "source": 0,
+          "strict_deficit": 0,
+          "body_deficit": 0
+        },
+        {
+          "protocol": "S5",
+          "source": 1,
+          "strict_deficit": 0,
+          "body_deficit": 0
+        },
+        {
+          "protocol": "S5",
+          "source": 2,
+          "strict_deficit": 0,
+          "body_deficit": 0
+        },
+        {
+          "protocol": "S5",
+          "source": 3,
+          "strict_deficit": 1,
+          "body_deficit": 0
+        },
+        {
+          "protocol": "F",
+          "source": 0,
+          "strict_deficit": 0
+        },
+        {
+          "protocol": "F",
+          "source": 1,
+          "strict_deficit": 0
+        },
+        {
+          "protocol": "F",
+          "source": 2,
+          "strict_deficit": 0
+        },
+        {
+          "protocol": "F",
+          "source": 3,
+          "strict_deficit": 0
+        }
+      ]
+    },
+    "development_ranking_sha256": "0beee1e4d1a466f269bc91d8fc0150e6ed4b305f20cad1e416c0f6013c164268",
+    "all_confirmation_eligible": false,
+    "reason": "All registered training through70400 and paired development are complete; no candidate met complete/within-one-episode confirmation rule. Preserve development-best, fixed endpoint, matched equal-update loss control and simple reference. Ending training is bounded time allocation, not convergence.",
+    "second_optimization_seed": "Not triggered by development gate; no independent optimization repeat claimed"
+  },
+  "input_definition_sha256": "a4876a06f85d2814b1ceb7e084b50a55b0d75cca80a0dd48c03bf8b231acef09",
+  "frozen_actor_normalizer_sha256": "f8775c12963a51e1adc225b1fdd107df71eb0bc6b7e1291845ad410693361232",
+  "evaluation_conditions": {
+    "task": "wuji_multigrasp",
+    "hand": "wuji_paper_official_actuator",
+    "object": "knife_wuji_bridge3_20260922",
+    "effective_randomize": false,
+    "effective_joint_noise": 0.0,
+    "effective_force_scale": 0.0,
+    "source_sha256": "9feaaac6e172ba6505277f2ffbaf9e3d2cbaa25dcdac52df1a14087de36d3ab5",
+    "scorer_sha256": "484a9b4279677cf55ade37b024b87d9ff2200f013af23604e1bb30026bafe97d",
+    "action_control": {
+      "mode": "mixed_support_initial_thumb_increment",
+      "support_span_rad": 0.04,
+      "thumb_step_rad": 0.025,
+      "control_dt": 0.03333333507180214
+    }
+  },
+  "protocol_definitions": {
+    "S2": {
+      "stage_seconds": 2.0,
+      "stage_steps": 60,
+      "control_dt": 0.03333333507180214,
+      "goal_tolerance_m": 0.002,
+      "hold_steps": 9,
+      "schedule": "alternate open/close for20s",
+      "runtime_overrides": {
+        "success_hold_duration": 1000000000.0,
+        "eval_goal_timeout": 0
+      },
+      "arrival_used_for_switching": false,
+      "kind": "S"
+    },
+    "S5": {
+      "stage_seconds": 5.0,
+      "stage_steps": 150,
+      "control_dt": 0.03333333507180214,
+      "goal_tolerance_m": 0.002,
+      "hold_steps": 9,
+      "schedule": "alternate open/close for20s",
+      "runtime_overrides": {
+        "success_hold_duration": 1000000000.0,
+        "eval_goal_timeout": 0
+      },
+      "arrival_used_for_switching": false,
+      "kind": "S"
+    },
+    "F": {
+      "kind": "F",
+      "duration_seconds": 40,
+      "goal_tolerance_m": 0.01,
+      "hold_steps": 45,
+      "control_dt": 0.03333333507180214,
+      "arrival_used_for_switching": true,
+      "hold_seconds": 1.5,
+      "name": "this_round_functional_protocol",
+      "stage_timeout": 0
+    }
+  },
+  "scope": "Five distinct frozen models; new512-row final cohort once per S2/S5/F. No filtering teacher failures, no reselection or training after final access. Local fixed-state video is separate rendered resimulation."
+}

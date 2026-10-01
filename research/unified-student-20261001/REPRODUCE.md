@@ -94,6 +94,12 @@ Every continuation restores encoder, Adam and Python/NumPy/Torch/CUDA RNG.
 Physics and current recurrent rollout state are restarted as declared new
 episodes; PhysX is not serialized, so this is not bitwise uninterrupted training.
 
+Changing `--seed` together with `--resume` does **not** create an independent
+optimization seed: restoration overwrites the initial Python/NumPy/Torch/CUDA
+RNG setup. A separate optimization repeat needs explicitly registered fresh RNG
+initialization and its own learner rollouts, or a fresh encoder run. The current
+continuations are one optimization seed, and no second-seed result is claimed.
+
 The CPU restore audit checks the saved optimizer step, identical next updates
 from two restores, and repeated CPU RNG draws. It validates CUDA RNG payloads
 without claiming to execute them on a CPU:
