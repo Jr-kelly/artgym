@@ -1,0 +1,232 @@
+scripts/audit_wuji_student_inference.py
+  s_13dba2dc3e07f8::t_78365a3dafe19c 1-84
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "f00c60d334a2421652a5472e9075d80118a72820",
+  "prompts": {},
+  "sessions": {
+    "s_13dba2dc3e07f8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f10b-dd7b-7be1-bb17-993f50d34df5",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.input_tokens": "5614977",
+        "tlab.token_usage.output_tokens": "1131740",
+        "tlab.token_usage.cache_read_tokens": "249659907",
+        "tlab.session_started_at": "2026-10-01T08:58:44Z",
+        "tlab.token_usage.cache_creation_tokens": "0"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/unified-student-20261001/S0-3200-sequence-input-audit.json",
+      "additions": {
+        "human": 12
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/SA-12800-full-cpu-restore.json",
+      "additions": {
+        "human": 18
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/SA-real-12800-development-analysis/report.json",
+      "additions": {
+        "human": 855
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/SA-real-12800-development-analysis/trials.csv",
+      "additions": {
+        "human": 769
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/SC-12800-full-cpu-restore.json",
+      "additions": {
+        "human": 18
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/SC-12800-sequence-input-audit.json",
+      "additions": {
+        "human": 12
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/SC-real-12800-development-analysis/report.json",
+      "additions": {
+        "human": 855
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/SC-real-12800-development-analysis/trials.csv",
+      "additions": {
+        "human": 769
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/extended-combined-evaluation-queue.json",
+      "additions": {
+        "human": 56
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/repair2-extension-evaluation-queue.json",
+      "additions": {
+        "human": 46
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/repair2-extension-plan.json",
+      "additions": {
+        "human": 53
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/repair2-extension-resume-audit.json",
+      "additions": {
+        "human": 38
+      }
+    },
+    {
+      "new_path": "scripts/audit_wuji_student_inference.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 84
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "README.md",
+      "new_path": "README.md",
+      "additions": {
+        "human": 3
+      },
+      "deletions": {
+        "human": 2
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 80
+      },
+      "deletions": {
+        "human": 55
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/DECISIONS.jsonl",
+      "new_path": "research/unified-student-20261001/DECISIONS.jsonl",
+      "additions": {
+        "human": 29
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/HANDOFF.md",
+      "new_path": "research/unified-student-20261001/HANDOFF.md",
+      "additions": {
+        "human": 80
+      },
+      "deletions": {
+        "human": 55
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/README.md",
+      "new_path": "research/unified-student-20261001/README.md",
+      "additions": {
+        "human": 3
+      },
+      "deletions": {
+        "human": 1
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/RESEARCH_NOTES.md",
+      "new_path": "research/unified-student-20261001/RESEARCH_NOTES.md",
+      "additions": {
+        "human": 4
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/STATE.json",
+      "new_path": "research/unified-student-20261001/STATE.json",
+      "additions": {
+        "human": 80
+      },
+      "deletions": {
+        "human": 55
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/development-ranking.json",
+      "new_path": "research/unified-student-20261001/development-ranking.json",
+      "additions": {
+        "human": 252
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/figures/source-learning-curves.svg",
+      "new_path": "research/unified-student-20261001/figures/source-learning-curves.svg",
+      "additions": {
+        "human": 1954
+      },
+      "deletions": {
+        "human": 1732
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/fit-versus-closedloop.csv",
+      "new_path": "research/unified-student-20261001/fit-versus-closedloop.csv",
+      "additions": {
+        "human": 24
+      },
+      "deletions": {
+        "human": 8
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/fit-versus-closedloop.json",
+      "new_path": "research/unified-student-20261001/fit-versus-closedloop.json",
+      "additions": {
+        "human": 352
+      },
+      "deletions": {
+        "human": 8
+      }
+    },
+    {
+      "old_path": "scripts/plot_wuji_student_learning.py",
+      "new_path": "scripts/plot_wuji_student_learning.py",
+      "additions": {
+        "human": 1
+      },
+      "deletions": {
+        "human": 1
+      }
+    },
+    {
+      "old_path": "scripts/summarize_wuji_student_fit.py",
+      "new_path": "scripts/summarize_wuji_student_fit.py",
+      "additions": {
+        "human": 1
+      },
+      "deletions": {
+        "human": 1
+      }
+    }
+  ]
+}
