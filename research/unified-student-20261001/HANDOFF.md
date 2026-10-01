@@ -13,7 +13,7 @@
   "max_concurrent_gpus": 4,
   "reserved_final_gpu_hours": 6,
   "reserved_final_seconds": 5400,
-  "gpu_hours": 15.062792928218844,
+  "gpu_hours": 15.115006510019306,
   "phase": "Fixed-method SC/SA25600to38400; bestSA28800; finalunopened",
   "active_jobs": [
     {
@@ -141,14 +141,20 @@
   "goal_sha256": "c7e9c244d11824a5d230cfb24ac9207e78fcb1965a376bff6a38f03c084c4a3f",
   "existing_student_run_found": false,
   "prior_session": "Previous user turn performed only read-only attachment/connectivity check; no studentgoal/training/worktree existed. Prior teacher round closed.",
-  "next": "Retain snapshots for final supplemental source archive; active jobs unchanged",
+  "next": "Continue unchanged training and formal evaluations; retain both replay conditions separately",
   "last_event": {
-    "utc": "2026-10-01T12:39:18.581413+00:00",
-    "event": "completed_job_source_pins_recovered",
-    "evidence": "research/unified-student-20261001/source-pins-through32000-with-local.json",
-    "verified": 42,
-    "newly_copied": 3,
-    "next": "Retain snapshots for final supplemental source archive; active jobs unchanged"
+    "utc": "2026-10-01T12:49:46.907812+00:00",
+    "event": "SA28800_uninstrumented_repeat_exact",
+    "evidence": "research/unified-student-20261001/SA-28800-uninstrumented-repeat-audit.json",
+    "all_physical_and_action_arrays_match_original": true,
+    "strict_counts": [
+      30,
+      19,
+      28,
+      20
+    ],
+    "conclusion": "Uninstrumented original is exactly reproducible in this repeat; instrumented condition differs. Root numerical cause remains unresolved; do not attribute full diagnostic labels to original.",
+    "next": "Continue unchanged training and formal evaluations; retain both replay conditions separately"
   },
   "research_notes": "research/unified-student-20261001/RESEARCH_NOTES.md",
   "current_plan": "research/unified-student-20261001/fixed-method-extension38400-plan.json",

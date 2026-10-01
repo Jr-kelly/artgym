@@ -1,0 +1,158 @@
+{
+  "reports": {
+    "repeat": [
+      30,
+      19,
+      28,
+      20
+    ],
+    "diagnostic": [
+      29,
+      21,
+      28,
+      23
+    ],
+    "original": [
+      30,
+      19,
+      28,
+      20
+    ]
+  },
+  "pairs": {
+    "repeat_vs_original": {
+      "action": {
+        "exact": true,
+        "first_index": null,
+        "first_step_max_abs_error": 0.0
+      },
+      "target": {
+        "exact": true,
+        "first_index": null,
+        "first_step_max_abs_error": 0.0
+      },
+      "q": {
+        "exact": true,
+        "first_index": null,
+        "first_step_max_abs_error": 0.0
+      },
+      "slider": {
+        "exact": true,
+        "first_index": null,
+        "first_step_max_abs_error": 0.0
+      },
+      "object_pos": {
+        "exact": true,
+        "first_index": null,
+        "first_step_max_abs_error": 0.0
+      },
+      "object_rot": {
+        "exact": true,
+        "first_index": null,
+        "first_step_max_abs_error": 0.0
+      },
+      "goal": {
+        "exact": true,
+        "first_index": null,
+        "first_step_max_abs_error": 0.0
+      },
+      "active": {
+        "exact": true,
+        "first_index": null,
+        "first_step_max_abs_error": 0.0
+      },
+      "init_object_pos": {
+        "exact": true,
+        "first_index": null,
+        "first_step_max_abs_error": 0.0
+      },
+      "init_object_rot": {
+        "exact": true,
+        "first_index": null,
+        "first_step_max_abs_error": 0.0
+      }
+    },
+    "repeat_vs_diagnostic": {
+      "action": {
+        "exact": false,
+        "first_index": [
+          0,
+          7,
+          0
+        ],
+        "first_step_max_abs_error": 0.00021654367446899414
+      },
+      "target": {
+        "exact": false,
+        "first_index": [
+          0,
+          7,
+          0
+        ],
+        "first_step_max_abs_error": 6.318092346191406e-06
+      },
+      "q": {
+        "exact": false,
+        "first_index": [
+          0,
+          7,
+          0
+        ],
+        "first_step_max_abs_error": 0.0005213022232055664
+      },
+      "slider": {
+        "exact": false,
+        "first_index": [
+          0,
+          7
+        ],
+        "first_step_max_abs_error": 3.359466791152954e-05
+      },
+      "object_pos": {
+        "exact": false,
+        "first_index": [
+          0,
+          7,
+          0
+        ],
+        "first_step_max_abs_error": 3.9577484130859375e-05
+      },
+      "object_rot": {
+        "exact": false,
+        "first_index": [
+          0,
+          7,
+          0
+        ],
+        "first_step_max_abs_error": 0.0008330941200256348
+      },
+      "goal": {
+        "exact": false,
+        "first_index": [
+          240,
+          111
+        ],
+        "first_step_max_abs_error": 0.0
+      },
+      "active": {
+        "exact": false,
+        "first_index": [
+          182,
+          111
+        ],
+        "first_step_max_abs_error": 0.0
+      },
+      "init_object_pos": {
+        "exact": true,
+        "first_index": null,
+        "first_step_max_abs_error": 0.0
+      },
+      "init_object_rot": {
+        "exact": true,
+        "first_index": null,
+        "first_step_max_abs_error": 0.0
+      }
+    }
+  },
+  "scope": "No repeated state adds independent samples; retain original development outcome and report all repeats. Root cause is not established by a single paired repeat."
+}
