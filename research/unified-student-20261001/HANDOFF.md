@@ -141,19 +141,14 @@
   "goal_sha256": "c7e9c244d11824a5d230cfb24ac9207e78fcb1965a376bff6a38f03c084c4a3f",
   "existing_student_run_found": false,
   "prior_session": "Previous user turn performed only read-only attachment/connectivity check; no studentgoal/training/worktree existed. Prior teacher round closed.",
-  "next": "Continue64000stage; finalprimary/finalcohort/video/publicrestore pending; do not closegoal",
+  "next": "Retain unfiltered teacher boundary and studentextra losses; unchanged64000training continues",
   "last_event": {
-    "utc": "2026-10-01T16:08:24.583019+00:00",
-    "event": "51200_completed_evidence_uploaded_and_source_restored",
-    "evidence": [
-      "research/unified-student-20261001/upload-development51200.json",
-      "research/unified-student-20261001/upload-source51200.json",
-      "research/unified-student-20261001/source51200-local-restore.json"
-    ],
-    "release_assets": 15,
-    "draft": true,
-    "restored_source_pins": 10,
-    "next": "Continue64000stage; finalprimary/finalcohort/video/publicrestore pending; do not closegoal"
+    "utc": "2026-10-01T16:14:38.716606+00:00",
+    "event": "shared_teacher_student_stalled_opening_audited",
+    "summary": "Original >10mm stableopeningmiss audit selects onlydevelopmentrow111 (source3trial15) inbothS2/S5. Fixedteacher also stallsat40mm onthissameinitialstate inbothprotocols; no teacherfailurefiltering. LaterS2opening sliderexcursion~0, thumbjoint4issuedtargetatlimitthroughout, butnetpadcontactmostlypresent; targettrackingRMSup to~.23rad. Thisdescribes a sharedteacher/student boundary, notproof thatjointlimit/contact causesfailure or that otherstudentlossesareexplained. Netpadcontact isnot slider-specific touch. No newrollouts or teacherlabels.",
+    "evidence": "research/unified-student-20261001/SA51200-stalled-opening.json",
+    "script_sha256": "0565aa41b62d891beaebeadb71c973e5e6275e1d96bee0a685be8def6c1a3277",
+    "next": "Retain unfiltered teacher boundary and studentextra losses; unchanged64000training continues"
   },
   "research_notes": "research/unified-student-20261001/RESEARCH_NOTES.md",
   "current_plan": "research/unified-student-20261001/fixed-method-extension64000-plan.json",
