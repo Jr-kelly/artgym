@@ -13,7 +13,7 @@
   "max_concurrent_gpus": 4,
   "reserved_final_gpu_hours": 6,
   "reserved_final_seconds": 5400,
-  "gpu_hours": 24.4922556702296,
+  "gpu_hours": 24.683956155776983,
   "phase": "SC/SA51200to64000 running; bestSA51200; finalunopened",
   "active_jobs": [
     {
@@ -141,14 +141,17 @@
   "goal_sha256": "c7e9c244d11824a5d230cfb24ac9207e78fcb1965a376bff6a38f03c084c4a3f",
   "existing_student_run_found": false,
   "prior_session": "Previous user turn performed only read-only attachment/connectivity check; no studentgoal/training/worktree existed. Prior teacher round closed.",
-  "next": "Retain unfiltered teacher boundary and studentextra losses; unchanged64000training continues",
+  "next": "Continue registered57600/60800/64000 withoutmethodchange; bestSA51200 retained",
   "last_event": {
-    "utc": "2026-10-01T16:14:38.716606+00:00",
-    "event": "shared_teacher_student_stalled_opening_audited",
-    "summary": "Original >10mm stableopeningmiss audit selects onlydevelopmentrow111 (source3trial15) inbothS2/S5. Fixedteacher also stallsat40mm onthissameinitialstate inbothprotocols; no teacherfailurefiltering. LaterS2opening sliderexcursion~0, thumbjoint4issuedtargetatlimitthroughout, butnetpadcontactmostlypresent; targettrackingRMSup to~.23rad. Thisdescribes a sharedteacher/student boundary, notproof thatjointlimit/contact causesfailure or that otherstudentlossesareexplained. Netpadcontact isnot slider-specific touch. No newrollouts or teacherlabels.",
-    "evidence": "research/unified-student-20261001/SA51200-stalled-opening.json",
-    "script_sha256": "0565aa41b62d891beaebeadb71c973e5e6275e1d96bee0a685be8def6c1a3277",
-    "next": "Retain unfiltered teacher boundary and studentextra losses; unchanged64000training continues"
+    "utc": "2026-10-01T16:43:08.964595+00:00",
+    "event": "54400_fitting_and_failure_decomposition_recorded",
+    "summary": "54400fixed-history targetfit regressesacrossallsources forbothmethods relative51200: SA S2targetMSE1e-6 [1.077,.535,.264,4.021] vs[.453,.380,.098,3.430];SC[2.115,.568,.247,3.699] vs[.655,.272,.083,2.789]. SA source2 S2/S5strictfailures21/28 allretainfullbody andmissopening; closingholdsallpass. Ownstatelossalso rises. Preserve this as actual multi-metric regression, not proof of convergence; complete57600/60800/64000.",
+    "evidence": [
+      "research/unified-student-20261001/fit-versus-closedloop.csv",
+      "research/unified-student-20261001/development-failure-decomposition.csv",
+      "research/unified-student-20261001/action-control-paired54400.json"
+    ],
+    "next": "Continue registered57600/60800/64000 withoutmethodchange; bestSA51200 retained"
   },
   "research_notes": "research/unified-student-20261001/RESEARCH_NOTES.md",
   "current_plan": "research/unified-student-20261001/fixed-method-extension64000-plan.json",
@@ -173,7 +176,7 @@
     "final_selected": false
   },
   "delivery_progress": {
-    "last_pushed_commit": "ad14975",
+    "last_pushed_commit": "325e0d5a74e8f06e1126872351a9edee7d4b1e70",
     "release_id": 400860039,
     "tag": "wuji-unified-student-20261001-v1",
     "draft": true,
