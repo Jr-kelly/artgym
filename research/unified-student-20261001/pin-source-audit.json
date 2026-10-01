@@ -1,0 +1,406 @@
+{
+  "checked_utc": "2026-10-01T07:32:58.850846+00:00",
+  "pins": [
+    {
+      "job": "C0-collection",
+      "pinned_source_sha256": "878d43ffd3567270df83fec7fd1b340c989d25f12ef3bc442a210213e5600ff9",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "c4f5c9da7983675c30fdeb5c6a5decba9afa6b068d249ce49042eba0a3cb902c",
+        "scripts/train_wuji_unified_student.py": "52901caa7b28df11dd6ebd6ca719cf37826523bfe2f62794ee2a98656d72bf38",
+        "scripts/wuji_student_interface.py": "5a30ff26cfae2c804ef02b49bccfef7898f54bf100f4376a9c7ffd1797687265",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "C0-development",
+      "pinned_source_sha256": "878d43ffd3567270df83fec7fd1b340c989d25f12ef3bc442a210213e5600ff9",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "c4f5c9da7983675c30fdeb5c6a5decba9afa6b068d249ce49042eba0a3cb902c",
+        "scripts/train_wuji_unified_student.py": "52901caa7b28df11dd6ebd6ca719cf37826523bfe2f62794ee2a98656d72bf38",
+        "scripts/wuji_student_interface.py": "5a30ff26cfae2c804ef02b49bccfef7898f54bf100f4376a9c7ffd1797687265",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "C1-1600-development",
+      "pinned_source_sha256": "00a0dc1c846c7e3e76c936923d2832830f1d7c9cc0f25d2c7d5c80ca293abbbe",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "0f23326d852344fe72b336c1528ca3790a72d82ec2d9f73d841c365baf69c100",
+        "scripts/train_wuji_unified_student.py": "c06a491d486dd69f52ddbbc35fb39b428a6bfbf48e3a7c6059748fe01369621a",
+        "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+        "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "C1-3200",
+      "pinned_source_sha256": "8eeab60c97c3cefc346b73d7deb712f9895496bc18bbe50f290b642f664b4303",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "6ee190001d1f1c6c9dd16429f4309d04cfe0fb2f454891d3ed23baca5cd85be2",
+        "scripts/train_wuji_unified_student.py": "52901caa7b28df11dd6ebd6ca719cf37826523bfe2f62794ee2a98656d72bf38",
+        "scripts/wuji_student_interface.py": "54aecddadebb12eeda051e302e3382c90a7064042c628827456df30c84dcd613",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "C1-3200-development",
+      "pinned_source_sha256": "00a0dc1c846c7e3e76c936923d2832830f1d7c9cc0f25d2c7d5c80ca293abbbe",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "0f23326d852344fe72b336c1528ca3790a72d82ec2d9f73d841c365baf69c100",
+        "scripts/train_wuji_unified_student.py": "c06a491d486dd69f52ddbbc35fb39b428a6bfbf48e3a7c6059748fe01369621a",
+        "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+        "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "C1-400-development",
+      "pinned_source_sha256": "767a8ca63e281c2043bb3abde6368d964952c24e7be894d441b78f25686fae26",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "c354ecc73dc672ac1c72cdf67942e6aadc15d89c1af4e9568fb5bc0e565f96c9",
+        "scripts/train_wuji_unified_student.py": "52901caa7b28df11dd6ebd6ca719cf37826523bfe2f62794ee2a98656d72bf38",
+        "scripts/wuji_student_interface.py": "54aecddadebb12eeda051e302e3382c90a7064042c628827456df30c84dcd613",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "C1-800-development",
+      "pinned_source_sha256": "767a8ca63e281c2043bb3abde6368d964952c24e7be894d441b78f25686fae26",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "c354ecc73dc672ac1c72cdf67942e6aadc15d89c1af4e9568fb5bc0e565f96c9",
+        "scripts/train_wuji_unified_student.py": "52901caa7b28df11dd6ebd6ca719cf37826523bfe2f62794ee2a98656d72bf38",
+        "scripts/wuji_student_interface.py": "54aecddadebb12eeda051e302e3382c90a7064042c628827456df30c84dcd613",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "S0-1600-development",
+      "pinned_source_sha256": "767a8ca63e281c2043bb3abde6368d964952c24e7be894d441b78f25686fae26",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "c354ecc73dc672ac1c72cdf67942e6aadc15d89c1af4e9568fb5bc0e565f96c9",
+        "scripts/train_wuji_unified_student.py": "52901caa7b28df11dd6ebd6ca719cf37826523bfe2f62794ee2a98656d72bf38",
+        "scripts/wuji_student_interface.py": "54aecddadebb12eeda051e302e3382c90a7064042c628827456df30c84dcd613",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "S0-3200",
+      "pinned_source_sha256": "650d06b34aba9d83bd50214d0ced70482d4d7d5c0cdef06698f9750481101ec1",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "c4f5c9da7983675c30fdeb5c6a5decba9afa6b068d249ce49042eba0a3cb902c",
+        "scripts/train_wuji_unified_student.py": "52901caa7b28df11dd6ebd6ca719cf37826523bfe2f62794ee2a98656d72bf38",
+        "scripts/wuji_student_interface.py": "5a30ff26cfae2c804ef02b49bccfef7898f54bf100f4376a9c7ffd1797687265",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "S0-3200-development",
+      "pinned_source_sha256": "00a0dc1c846c7e3e76c936923d2832830f1d7c9cc0f25d2c7d5c80ca293abbbe",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "0f23326d852344fe72b336c1528ca3790a72d82ec2d9f73d841c365baf69c100",
+        "scripts/train_wuji_unified_student.py": "c06a491d486dd69f52ddbbc35fb39b428a6bfbf48e3a7c6059748fe01369621a",
+        "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+        "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "S0-400-development",
+      "pinned_source_sha256": "767a8ca63e281c2043bb3abde6368d964952c24e7be894d441b78f25686fae26",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "c354ecc73dc672ac1c72cdf67942e6aadc15d89c1af4e9568fb5bc0e565f96c9",
+        "scripts/train_wuji_unified_student.py": "52901caa7b28df11dd6ebd6ca719cf37826523bfe2f62794ee2a98656d72bf38",
+        "scripts/wuji_student_interface.py": "54aecddadebb12eeda051e302e3382c90a7064042c628827456df30c84dcd613",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "S0-800-development",
+      "pinned_source_sha256": "767a8ca63e281c2043bb3abde6368d964952c24e7be894d441b78f25686fae26",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "c354ecc73dc672ac1c72cdf67942e6aadc15d89c1af4e9568fb5bc0e565f96c9",
+        "scripts/train_wuji_unified_student.py": "52901caa7b28df11dd6ebd6ca719cf37826523bfe2f62794ee2a98656d72bf38",
+        "scripts/wuji_student_interface.py": "54aecddadebb12eeda051e302e3382c90a7064042c628827456df30c84dcd613",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "S0-preflight",
+      "pinned_source_sha256": "ee1c0aadddb00adf49796e13022bf7bba04f34cf836378e94b19a29c085fe0da",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "30d7fefe4b4ca6f0eed24b487d2a1db96f4648663f37ccdd5f4cc259cc808d1b",
+        "scripts/train_wuji_unified_student.py": "ba50b719694c79ac69142a7bd70a03704639bb1d76893031c07294f149faab90",
+        "scripts/wuji_student_interface.py": "5a30ff26cfae2c804ef02b49bccfef7898f54bf100f4376a9c7ffd1797687265",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "S0-preflight-r1",
+      "pinned_source_sha256": "02c4882974c7b4180daf1413673d0a2baf96f8ed5b3bab9d25d5533e3f242a5d",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "d05853d21ad2122456712b003041a9f9f1d8a5e26ed545472094d649e14e435c",
+        "scripts/train_wuji_unified_student.py": "88fa9869caaeb9e1d1d4d11ca65e4867269a691abb18666f6c8bc0599d1cdd1a",
+        "scripts/wuji_student_interface.py": "5a30ff26cfae2c804ef02b49bccfef7898f54bf100f4376a9c7ffd1797687265",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "SC-interface-preflight",
+      "pinned_source_sha256": "4e963d3abd61ea819d4dcba2cf9710f39551246bde8f9ec3ab7c1478d2b46b95",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "0f23326d852344fe72b336c1528ca3790a72d82ec2d9f73d841c365baf69c100",
+        "scripts/train_wuji_unified_student.py": "703879fd285dbce50a51396bf016aeae33b6586441f08854f46418d7d7bf8d9c",
+        "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+        "scripts/wuji_student_interface.py": "580360149d700a46a77eadddaaa8d31b0385ab4f95560c39c03f49b86d5cfb9b",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "SC-interface-preflight-r1",
+      "pinned_source_sha256": "00a0dc1c846c7e3e76c936923d2832830f1d7c9cc0f25d2c7d5c80ca293abbbe",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "0f23326d852344fe72b336c1528ca3790a72d82ec2d9f73d841c365baf69c100",
+        "scripts/train_wuji_unified_student.py": "c06a491d486dd69f52ddbbc35fb39b428a6bfbf48e3a7c6059748fe01369621a",
+        "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+        "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "SC-masked-3600-development",
+      "pinned_source_sha256": "8c59c3b33bf854cdcd570c9cfb3c7dd028a025f88665994f07ac2602f09be9cb",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "0f23326d852344fe72b336c1528ca3790a72d82ec2d9f73d841c365baf69c100",
+        "scripts/train_wuji_unified_student.py": "c06a491d486dd69f52ddbbc35fb39b428a6bfbf48e3a7c6059748fe01369621a",
+        "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+        "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "SC-masked-4000-development",
+      "pinned_source_sha256": "8c59c3b33bf854cdcd570c9cfb3c7dd028a025f88665994f07ac2602f09be9cb",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "0f23326d852344fe72b336c1528ca3790a72d82ec2d9f73d841c365baf69c100",
+        "scripts/train_wuji_unified_student.py": "c06a491d486dd69f52ddbbc35fb39b428a6bfbf48e3a7c6059748fe01369621a",
+        "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+        "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "SC-masked-4800-development",
+      "pinned_source_sha256": "8c59c3b33bf854cdcd570c9cfb3c7dd028a025f88665994f07ac2602f09be9cb",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "0f23326d852344fe72b336c1528ca3790a72d82ec2d9f73d841c365baf69c100",
+        "scripts/train_wuji_unified_student.py": "c06a491d486dd69f52ddbbc35fb39b428a6bfbf48e3a7c6059748fe01369621a",
+        "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+        "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "SC-masked-6400",
+      "pinned_source_sha256": "8c59c3b33bf854cdcd570c9cfb3c7dd028a025f88665994f07ac2602f09be9cb",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "0f23326d852344fe72b336c1528ca3790a72d82ec2d9f73d841c365baf69c100",
+        "scripts/train_wuji_unified_student.py": "c06a491d486dd69f52ddbbc35fb39b428a6bfbf48e3a7c6059748fe01369621a",
+        "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+        "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "SC-masked-6400-r1",
+      "pinned_source_sha256": "8c59c3b33bf854cdcd570c9cfb3c7dd028a025f88665994f07ac2602f09be9cb",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "0f23326d852344fe72b336c1528ca3790a72d82ec2d9f73d841c365baf69c100",
+        "scripts/train_wuji_unified_student.py": "c06a491d486dd69f52ddbbc35fb39b428a6bfbf48e3a7c6059748fe01369621a",
+        "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+        "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "SC-masked-preflight",
+      "pinned_source_sha256": "00a0dc1c846c7e3e76c936923d2832830f1d7c9cc0f25d2c7d5c80ca293abbbe",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "0f23326d852344fe72b336c1528ca3790a72d82ec2d9f73d841c365baf69c100",
+        "scripts/train_wuji_unified_student.py": "c06a491d486dd69f52ddbbc35fb39b428a6bfbf48e3a7c6059748fe01369621a",
+        "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+        "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "SC-real-3600-development",
+      "pinned_source_sha256": "8c59c3b33bf854cdcd570c9cfb3c7dd028a025f88665994f07ac2602f09be9cb",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "0f23326d852344fe72b336c1528ca3790a72d82ec2d9f73d841c365baf69c100",
+        "scripts/train_wuji_unified_student.py": "c06a491d486dd69f52ddbbc35fb39b428a6bfbf48e3a7c6059748fe01369621a",
+        "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+        "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "SC-real-4000-development",
+      "pinned_source_sha256": "8c59c3b33bf854cdcd570c9cfb3c7dd028a025f88665994f07ac2602f09be9cb",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "0f23326d852344fe72b336c1528ca3790a72d82ec2d9f73d841c365baf69c100",
+        "scripts/train_wuji_unified_student.py": "c06a491d486dd69f52ddbbc35fb39b428a6bfbf48e3a7c6059748fe01369621a",
+        "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+        "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "SC-real-4800-development",
+      "pinned_source_sha256": "8c59c3b33bf854cdcd570c9cfb3c7dd028a025f88665994f07ac2602f09be9cb",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "0f23326d852344fe72b336c1528ca3790a72d82ec2d9f73d841c365baf69c100",
+        "scripts/train_wuji_unified_student.py": "c06a491d486dd69f52ddbbc35fb39b428a6bfbf48e3a7c6059748fe01369621a",
+        "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+        "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "SC-real-6400",
+      "pinned_source_sha256": "8c59c3b33bf854cdcd570c9cfb3c7dd028a025f88665994f07ac2602f09be9cb",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "0f23326d852344fe72b336c1528ca3790a72d82ec2d9f73d841c365baf69c100",
+        "scripts/train_wuji_unified_student.py": "c06a491d486dd69f52ddbbc35fb39b428a6bfbf48e3a7c6059748fe01369621a",
+        "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
+        "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "teacher-condition128",
+      "pinned_source_sha256": "02c4882974c7b4180daf1413673d0a2baf96f8ed5b3bab9d25d5533e3f242a5d",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "d05853d21ad2122456712b003041a9f9f1d8a5e26ed545472094d649e14e435c",
+        "scripts/train_wuji_unified_student.py": "88fa9869caaeb9e1d1d4d11ca65e4867269a691abb18666f6c8bc0599d1cdd1a",
+        "scripts/wuji_student_interface.py": "5a30ff26cfae2c804ef02b49bccfef7898f54bf100f4376a9c7ffd1797687265",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "teacher-condition5",
+      "pinned_source_sha256": "ee1c0aadddb00adf49796e13022bf7bba04f34cf836378e94b19a29c085fe0da",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "30d7fefe4b4ca6f0eed24b487d2a1db96f4648663f37ccdd5f4cc259cc808d1b",
+        "scripts/train_wuji_unified_student.py": "ba50b719694c79ac69142a7bd70a03704639bb1d76893031c07294f149faab90",
+        "scripts/wuji_student_interface.py": "5a30ff26cfae2c804ef02b49bccfef7898f54bf100f4376a9c7ffd1797687265",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "teacher-condition5-render",
+      "pinned_source_sha256": "ee1c0aadddb00adf49796e13022bf7bba04f34cf836378e94b19a29c085fe0da",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "30d7fefe4b4ca6f0eed24b487d2a1db96f4648663f37ccdd5f4cc259cc808d1b",
+        "scripts/train_wuji_unified_student.py": "ba50b719694c79ac69142a7bd70a03704639bb1d76893031c07294f149faab90",
+        "scripts/wuji_student_interface.py": "5a30ff26cfae2c804ef02b49bccfef7898f54bf100f4376a9c7ffd1797687265",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "teacher-confirm-S2",
+      "pinned_source_sha256": "ee1c0aadddb00adf49796e13022bf7bba04f34cf836378e94b19a29c085fe0da",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "30d7fefe4b4ca6f0eed24b487d2a1db96f4648663f37ccdd5f4cc259cc808d1b",
+        "scripts/train_wuji_unified_student.py": "ba50b719694c79ac69142a7bd70a03704639bb1d76893031c07294f149faab90",
+        "scripts/wuji_student_interface.py": "5a30ff26cfae2c804ef02b49bccfef7898f54bf100f4376a9c7ffd1797687265",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "teacher-dev-F",
+      "pinned_source_sha256": "878d43ffd3567270df83fec7fd1b340c989d25f12ef3bc442a210213e5600ff9",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "c4f5c9da7983675c30fdeb5c6a5decba9afa6b068d249ce49042eba0a3cb902c",
+        "scripts/train_wuji_unified_student.py": "52901caa7b28df11dd6ebd6ca719cf37826523bfe2f62794ee2a98656d72bf38",
+        "scripts/wuji_student_interface.py": "5a30ff26cfae2c804ef02b49bccfef7898f54bf100f4376a9c7ffd1797687265",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "teacher-dev-S2",
+      "pinned_source_sha256": "c7a9c276969e7dadac9c84f67f36a293dee474be4bde5d3103aff92a81849099",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "064d4acf30ea764d7051de9cb5f8c03ba1f01c552bd8a4a22c1ff757d327cda2",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "teacher-dev-S5",
+      "pinned_source_sha256": "c7a9c276969e7dadac9c84f67f36a293dee474be4bde5d3103aff92a81849099",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "064d4acf30ea764d7051de9cb5f8c03ba1f01c552bd8a4a22c1ff757d327cda2",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "teacher-fixed-S2",
+      "pinned_source_sha256": "2bf514211eca26cf0675df41e63e7c2fa124688511befd4a6584fabca2e3710b",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "b06afd230f3b0acaa9fd788e2303e203b947c7c4ac92cecb2c7eb7dcb1b78ad3",
+        "scripts/train_wuji_unified_student.py": "d4ee599f7fa422b6802d37c411817bd2f28b6361c22361132bcdfd0797642d42",
+        "scripts/wuji_student_interface.py": "5a30ff26cfae2c804ef02b49bccfef7898f54bf100f4376a9c7ffd1797687265",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "teacher-fixed-S5",
+      "pinned_source_sha256": "2bf514211eca26cf0675df41e63e7c2fa124688511befd4a6584fabca2e3710b",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "b06afd230f3b0acaa9fd788e2303e203b947c7c4ac92cecb2c7eb7dcb1b78ad3",
+        "scripts/train_wuji_unified_student.py": "d4ee599f7fa422b6802d37c411817bd2f28b6361c22361132bcdfd0797642d42",
+        "scripts/wuji_student_interface.py": "5a30ff26cfae2c804ef02b49bccfef7898f54bf100f4376a9c7ffd1797687265",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "teacher-legal-S2",
+      "pinned_source_sha256": "02c4882974c7b4180daf1413673d0a2baf96f8ed5b3bab9d25d5533e3f242a5d",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "d05853d21ad2122456712b003041a9f9f1d8a5e26ed545472094d649e14e435c",
+        "scripts/train_wuji_unified_student.py": "88fa9869caaeb9e1d1d4d11ca65e4867269a691abb18666f6c8bc0599d1cdd1a",
+        "scripts/wuji_student_interface.py": "5a30ff26cfae2c804ef02b49bccfef7898f54bf100f4376a9c7ffd1797687265",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "teacher-legal-S5",
+      "pinned_source_sha256": "8eeab60c97c3cefc346b73d7deb712f9895496bc18bbe50f290b642f664b4303",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "6ee190001d1f1c6c9dd16429f4309d04cfe0fb2f454891d3ed23baca5cd85be2",
+        "scripts/train_wuji_unified_student.py": "52901caa7b28df11dd6ebd6ca719cf37826523bfe2f62794ee2a98656d72bf38",
+        "scripts/wuji_student_interface.py": "54aecddadebb12eeda051e302e3382c90a7064042c628827456df30c84dcd613",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "teacher-official-S2",
+      "pinned_source_sha256": "2bf514211eca26cf0675df41e63e7c2fa124688511befd4a6584fabca2e3710b",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "b06afd230f3b0acaa9fd788e2303e203b947c7c4ac92cecb2c7eb7dcb1b78ad3",
+        "scripts/train_wuji_unified_student.py": "d4ee599f7fa422b6802d37c411817bd2f28b6361c22361132bcdfd0797642d42",
+        "scripts/wuji_student_interface.py": "5a30ff26cfae2c804ef02b49bccfef7898f54bf100f4376a9c7ffd1797687265",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    },
+    {
+      "job": "teacher-official-S5",
+      "pinned_source_sha256": "2bf514211eca26cf0675df41e63e7c2fa124688511befd4a6584fabca2e3710b",
+      "selected_source_sha256": {
+        "scripts/evaluate_wuji_recovery.py": "b06afd230f3b0acaa9fd788e2303e203b947c7c4ac92cecb2c7eb7dcb1b78ad3",
+        "scripts/train_wuji_unified_student.py": "d4ee599f7fa422b6802d37c411817bd2f28b6361c22361132bcdfd0797642d42",
+        "scripts/wuji_student_interface.py": "5a30ff26cfae2c804ef02b49bccfef7898f54bf100f4376a9c7ffd1797687265",
+        "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+      }
+    }
+  ]
+}
