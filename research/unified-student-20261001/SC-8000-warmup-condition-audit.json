@@ -1,0 +1,35 @@
+{
+  "traces": [
+    "SC-real-8000-development/SC-real-8000-S2",
+    "SC-8000-onpolicy-diagnostic",
+    "SC-8000-onpolicy-diagnostic-warmup"
+  ],
+  "trace_sha256": [
+    "05f1619652a2526278c5dbbabb3a35111a8e764a6079df0310ac3bdb30cefac4",
+    "db1f1b7f51dc1736b6832402443736946f75a33e54943474b19356ebc8492557",
+    "5d69c67a6dffe3d86661ef0400985d61b0ff7415b7358be4de851d03efa3c8eb"
+  ],
+  "diagnostic_pair_exact": {
+    "action": true,
+    "target": true,
+    "q": true,
+    "slider": true,
+    "object_pos": true,
+    "object_rot": true,
+    "goal": true,
+    "active": true
+  },
+  "original_vs_warmup_exact": {
+    "action": false,
+    "target": false,
+    "q": false,
+    "slider": false,
+    "object_pos": false,
+    "object_rot": false,
+    "goal": false,
+    "active": false
+  },
+  "first_action_max_difference": 0.00024712085723876953,
+  "conclusion": "Adding original holdout warmup does not restore original trajectory. Instrumented repeats agree exactly; underlying numerical/execution-order cause remains unresolved. Separate diagnostic condition only; original success counts retained.",
+  "next": "No more replay samples counted; final runs use uninstrumented scoring path. If a passing candidate appears, resolve inference-condition parity before deployment claims."
+}

@@ -13,7 +13,7 @@
   "max_concurrent_gpus": 4,
   "reserved_final_gpu_hours": 6,
   "reserved_final_seconds": 5400,
-  "gpu_hours": 5.76850554128488,
+  "gpu_hours": 5.7883481298552635,
   "phase": "Second and final controlled repair: executed-target loss versus latent-only6400to12800",
   "active_jobs": [
     {
@@ -169,64 +169,16 @@
   "goal_sha256": "c7e9c244d11824a5d230cfb24ac9207e78fcb1965a376bff6a38f03c084c4a3f",
   "existing_student_run_found": false,
   "prior_session": "Previous user turn performed only read-only attachment/connectivity check; no studentgoal/training/worktree existed. Prior teacher round closed.",
-  "next": "Inspect evidence before dependent experiments",
+  "next": "All12800endpoint evaluations nowautomaticallyfollow parent completion; do not duplicate",
   "last_event": {
-    "utc": "2026-10-01T08:38:18.039472+00:00",
-    "event": "job_finished",
-    "name": "SC-8000-onpolicy-diagnostic-warmup",
-    "gpu": 2,
-    "seconds": 900,
-    "command": [
-      "/tmp/wuji-student-runtime/bin/python",
-      "-m",
-      "scripts.evaluate_wuji_recovery",
-      "--checkpoint",
-      "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
-      "--task",
-      "wuji_multigrasp",
-      "--hand",
-      "wuji_paper_official_actuator",
-      "--object",
-      "knife_wuji_bridge3_20260922",
-      "--seed",
-      "2026093031",
-      "--initial-states",
-      "research/unified-student-20261001/data/development-all.npy",
-      "--output",
-      "runs/unified-student-20261001/SC-8000-onpolicy-diagnostic-warmup",
-      "--stage-seconds",
-      "2",
-      "--protocol",
-      "S",
-      "--unified-student",
-      "runs/unified-student-20261001/SC-real-12800/step_008000.pth",
-      "--latent-probes",
-      "--holdout-probes",
-      "runs/unified-student-20261001/teacher-legal-S2/latent-probes.pth",
-      "runs/unified-student-20261001/teacher-legal-S5/latent-probes.pth"
-    ],
-    "start_utc": "2026-10-01T08:35:08.026552+00:00",
-    "local_pid": 651978,
-    "remote_root": "/tmp/artgym-student-20261001",
-    "final": false,
-    "local": false,
-    "resource_check": "0, 2863\n1, 2039\n2, 0\n3, 2865\n",
-    "local_source_sha256": "0d96ab6e39536f5df4c8ca97aa0a167336340e3b33f6c4ca9b6fffdde4575003",
-    "pinned_source_sha256": "f7f077bdf9eb02109a90d0edfd5c623c929c7a9649d72f18c4d2eff482eda660",
-    "selected_source_sha256": {
-      "scripts/evaluate_wuji_recovery.py": "2c43b141c00dad35be05d8e29fd65ffc10916481e64e83c8deceb4c17d486647",
-      "scripts/train_wuji_unified_student.py": "9e3932aa0c848728ec54c81ef28d779e45c1f6ba35751554e9b4403c4f846bf9",
-      "scripts/wuji_known_controller.py": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8",
-      "scripts/wuji_student_interface.py": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0",
-      "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+    "utc": "2026-10-01T08:52:38.644116+00:00",
+    "event": "evaluation_assignment_handoff_updated",
+    "assignments": {
+      "repair2-SA-real-evaluation-queue.json": 0,
+      "repair2-SC-real-evaluation-queue.json": 2,
+      "controller-long-budget-evaluation-queue.json": 3
     },
-    "pinned_source_matches_local": false,
-    "remote_shell": "cd /tmp/artgym-student-20261001/pins/SC-8000-onpolicy-diagnostic-warmup && CUDA_VISIBLE_DEVICES=2 LD_LIBRARY_PATH=/tmp/wuji-student-runtime/lib PYTHONPATH=.:rl_games TORCH_EXTENSIONS_DIR=/tmp/wuji-student-torch-extensions OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 MAX_JOBS=2 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 timeout --signal=TERM --kill-after=30 900 /tmp/wuji-student-runtime/bin/python -m scripts.evaluate_wuji_recovery --checkpoint runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth --task wuji_multigrasp --hand wuji_paper_official_actuator --object knife_wuji_bridge3_20260922 --seed 2026093031 --initial-states research/unified-student-20261001/data/development-all.npy --output runs/unified-student-20261001/SC-8000-onpolicy-diagnostic-warmup --stage-seconds 2 --protocol S --unified-student runs/unified-student-20261001/SC-real-12800/step_008000.pth --latent-probes --holdout-probes runs/unified-student-20261001/teacher-legal-S2/latent-probes.pth runs/unified-student-20261001/teacher-legal-S5/latent-probes.pth",
-    "end_utc": "2026-10-01T08:38:18.038884+00:00",
-    "exit_code": 0,
-    "wall_seconds": 190.01233577728271,
-    "gpu_hours": 0.05278120438257853,
-    "next": "Inspect evidence before dependent experiments"
+    "next": "All12800endpoint evaluations nowautomaticallyfollow parent completion; do not duplicate"
   },
   "research_notes": "research/unified-student-20261001/RESEARCH_NOTES.md",
   "current_plan": "research/unified-student-20261001/repair2-plan.json",
@@ -236,6 +188,11 @@
     "research/unified-student-20261001/repair2-SC-real-evaluation-queue.json",
     "research/unified-student-20261001/controller-long-budget-evaluation-queue.json"
   ],
-  "supplemental_plan": "research/unified-student-20261001/controller-long-budget-plan.json"
+  "supplemental_plan": "research/unified-student-20261001/controller-long-budget-plan.json",
+  "evaluation_gpu_assignments": {
+    "repair2-SA-real-evaluation-queue.json": 0,
+    "repair2-SC-real-evaluation-queue.json": 2,
+    "controller-long-budget-evaluation-queue.json": 3
+  }
 }
 ```

@@ -5,12 +5,12 @@ import numpy as np
 import torch
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--directory',type=Path,required=True);p.add_argument('--original',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('--directory',type=Path,required=True);p.add_argument('--original',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--separate-condition',action='store_true',help='Analyze this replay only; never attribute its labels to the original trajectory');a=p.parse_args()
  probes=torch.load(a.directory/'latent-probes.pth',map_location='cpu')
  with np.load(a.directory/'trace.npz') as z:trace={k:z[k] for k in z.files}
  with np.load(a.original/'trace.npz') as z:original={k:z[k] for k in z.files}
  parity={k:bool(np.array_equal(trace[k],original[k])) for k in ['action','target','q','slider','object_pos','object_rot','goal','active'] if k in trace}
- assert all(parity.values()), 'Diagnostic changed scored trajectory; investigate before attributing snapshots to original'
+ assert all(parity.values()) or a.separate_condition, 'Diagnostic changed scored trajectory; investigate before attributing snapshots to original'
  bad=(trace['drift']>=.01)|(trace['rotation']>=.25)|trace['fall'].astype(bool)|trace['invalid'].astype(bool)|~trace['active'].astype(bool)
  bad=np.maximum.accumulate(bad,axis=0);rows=[]
  for q in probes:
@@ -24,6 +24,6 @@ def main():
    for label,mask in [('before_breach',~prior[selected]),('after_breach',prior[selected])]:
     row[label+'_episodes']=int(mask.sum());row[label+'_target_mse_rad2']=float(errors[selected[mask],3].mean()) if mask.any() else None
    rows.append(row)
- result=dict(trajectory_exact_parity=parity,diagnostic_trace_sha256=hashlib.sha256((a.directory/'trace.npz').read_bytes()).hexdigest(),original_trace_sha256=hashlib.sha256((a.original/'trace.npz').read_bytes()).hexdigest(),rows=rows,scope='Same episodes repeated only for independent diagnostics. Teacher labels never enter student action or optimization; times are not independent trials.')
+ result=dict(trajectory_exact_parity=parity,attributable_to_original=all(parity.values()),separate_condition=a.separate_condition,diagnostic_trace_sha256=hashlib.sha256((a.directory/'trace.npz').read_bytes()).hexdigest(),original_trace_sha256=hashlib.sha256((a.original/'trace.npz').read_bytes()).hexdigest(),rows=rows,scope='Repeated initial states only for diagnostics, never added to success denominators. Metrics describe this diagnostic trajectory. Teacher labels never enter student action or optimization; times are not independent trials. When exact parity fails, labels must not be attributed to original scored episodes.')
  a.output.write_text(json.dumps(result,indent=2));print(json.dumps(dict(exact_parity=all(parity.values()),rows=len(rows))))
 if __name__=='__main__':main()
