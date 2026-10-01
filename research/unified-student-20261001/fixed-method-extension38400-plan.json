@@ -1,0 +1,59 @@
+{
+  "name": "fixed-method-continuation25600to38400",
+  "registered_utc": "2026-10-01T11:26:00.312602+00:00",
+  "repair_count": 2,
+  "new_repair_factor": false,
+  "start_update": 25600,
+  "end_update": 38400,
+  "additional_updates_each": 12800,
+  "additional_interactions_each": 13107200,
+  "save_at": [
+    28800,
+    32000,
+    35200,
+    38400
+  ],
+  "branches": {
+    "SC-real-38400": {
+      "parent": "runs/unified-student-20261001/SC-real-25600/step_025600.pth",
+      "parent_sha256": "4008c4dc53ca5bc25a03276e19fef12a42e4d108866231ef6d7722ac41e6467b",
+      "target_loss_weight": 0,
+      "gpu": 2,
+      "expected_seconds": 7500,
+      "max_seconds": 14000
+    },
+    "SA-real-38400": {
+      "parent": "runs/unified-student-20261001/SA-real-25600/step_025600.pth",
+      "parent_sha256": "8c8929e065c96568e6b050fb970edff198cddad6b8530063d0679ca968def588",
+      "target_loss_weight": 25,
+      "gpu": 0,
+      "expected_seconds": 7900,
+      "max_seconds": 14000
+    }
+  },
+  "common": {
+    "kind": "SC",
+    "controller_mode": "real",
+    "envs": 256,
+    "rollout_steps": 4,
+    "lr": 0.0003,
+    "seed": 61001,
+    "target_loss_scale_rad": 0.04,
+    "teacher_fraction": 0,
+    "optimizer_rng": "Restore each own25600 encoder/Adam/RNG; new physical episodes explicitly declared",
+    "original_common_parent_sha256": "45ba3b151ba276087c440cddcdd70d86ee1a280a04ffedbfa4d94d8d6de23194"
+  },
+  "trigger": [
+    "SA22400 improves priorbest12to13/32 and minimumSbody27to31/32, despite SA25600source1regression",
+    "SC25600 improves worststrict14/32 and worstfullgate deficit12episodes (previousbest16); S2[30,28,21,26],S5[30,30,32,14]",
+    "SCown-state supervision continues decreasing; source/protocol improvements and reversals show continued learning and no stable convergence evidence",
+    "No model full or within-one-episode gate; no studentconfirmation orsecondseed trigger yet"
+  ],
+  "estimated_combined_gpu_hours": 4.5,
+  "decision": "Extend both unchanged methods equally. Latent-only is current preferred candidate; keep action-aware matchedcontrol and everyearlierbest. No new input/loss/replay/architecture/learning-rate factor.",
+  "decision_rules": [
+    "At eachcomplete checkpoint, fulloroneepisodeboundary acrossallcells triggers64confirmation; ifpass prioritize independentoptimizationseed",
+    "After38400 reassess frozen per-source supervision/executedtargets, stageholding/body/failuretime and marginalvalue; strictplateaualone never provesconvergence",
+    "Preserve25600 endpoints and new38400 endpoints. Finalcohort remainsunopened until genuine method/candidate freeze."
+  ]
+}

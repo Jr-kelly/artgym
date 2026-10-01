@@ -1,0 +1,40 @@
+[
+  {
+    "name": "SC-real-38400",
+    "resume": {
+      "parent": "runs/unified-student-20261001/SC-real-25600/step_025600.pth",
+      "parent_sha256": "4008c4dc53ca5bc25a03276e19fef12a42e4d108866231ef6d7722ac41e6467b",
+      "restored_optimizer_steps": 25600,
+      "adam_steps": [
+        25600
+      ],
+      "encoder_hash": "4ad75a3cdbf989e56ab31b5babd5c84fd53e3d0ec56d47f529b89b4bc4179b7c",
+      "frozen_hash": "f8775c12963a51e1adc225b1fdd107df71eb0bc6b7e1291845ad410693361232",
+      "rng_restored": true,
+      "controller_columns_expanded": false,
+      "physics": "new episode reset after RNG restore",
+      "parent_target_loss_weight": 0.0,
+      "target_loss_weight": 0.0
+    },
+    "source": "1d81d4cb386e89e6b4f536ca602304c2fcb1a558410b7a39a83ec6b3e0773ea4"
+  },
+  {
+    "name": "SA-real-38400",
+    "resume": {
+      "parent": "runs/unified-student-20261001/SA-real-25600/step_025600.pth",
+      "parent_sha256": "8c8929e065c96568e6b050fb970edff198cddad6b8530063d0679ca968def588",
+      "restored_optimizer_steps": 25600,
+      "adam_steps": [
+        25600
+      ],
+      "encoder_hash": "14249539326cdaa3b77c52bbcd72b6a41bf9ba25aa194902b39cc462404a6fc7",
+      "frozen_hash": "f8775c12963a51e1adc225b1fdd107df71eb0bc6b7e1291845ad410693361232",
+      "rng_restored": true,
+      "controller_columns_expanded": false,
+      "physics": "new episode reset after RNG restore",
+      "parent_target_loss_weight": 25.0,
+      "target_loss_weight": 25.0
+    },
+    "source": "1d81d4cb386e89e6b4f536ca602304c2fcb1a558410b7a39a83ec6b3e0773ea4"
+  }
+]
