@@ -1,0 +1,912 @@
+{
+  "baseline": {
+    "object": "knife_wuji_geo_baseline_20261002",
+    "dimensions_mm_LWT": [
+      147.0,
+      19.0,
+      8.0
+    ],
+    "parameters": {
+      "id": "000",
+      "split": "train",
+      "geometry_profile": "nt_a300gr",
+      "handle_size": [
+        0.019,
+        0.008,
+        0.147
+      ],
+      "masses": [
+        0.029,
+        0.006
+      ],
+      "total_size_lwt": [
+        0.147,
+        0.019,
+        0.011
+      ],
+      "slider_size": [
+        0.01,
+        0.003,
+        0.03
+      ],
+      "joint_lower": -0.03267458688196273,
+      "joint_upper": 0.017325413118037272,
+      "slider_origin": [
+        0.0,
+        0.0055,
+        0.010624586881962734
+      ],
+      "slider_initial_center": [
+        0.0,
+        0.0055,
+        -0.022049999999999997
+      ],
+      "urdf_sha256": "5229c66b183cc6da04190bf2d6cfbd035fadd227340dc8f26602b207171b461c",
+      "round": "geometry-generalization-20261002",
+      "label": "baseline",
+      "mass_inertia_mode": "both fixed at baseline: controlled geometry diagnostic",
+      "length_anchor": "handle center and slider longitudinal origin fixed",
+      "thickness_coupling": "slider joint origin Y shifts by half thickness difference",
+      "axes": "URDF W,T,L; policy transforms bbox to W,L,T"
+    },
+    "files": {
+      "assets/objects/knife_wuji_geo_baseline_20261002/lbx.json": "f4319b29fa2970cd72ab1f17d8284e962c712d31fe58928514676b8985e8f535",
+      "assets/objects/knife_wuji_geo_baseline_20261002/000/mobility.urdf": "5229c66b183cc6da04190bf2d6cfbd035fadd227340dc8f26602b207171b461c",
+      "assets/objects/knife_wuji_geo_baseline_20261002/000/parameters.json": "b664d80e46a8b8e4f663821637d6efd5eee2ecf3655a1787823e814812b94a39",
+      "isaacgymenvs/cfg/object/knife_wuji_geo_baseline_20261002.yaml": "fb21f3808e793531469655a8ff99de94062f951613f40cfc023cddbd42ecacb2"
+    },
+    "effective_inertia": [
+      {
+        "ixx": 4.0355131204705685e-05,
+        "iyy": 4.0908144001150504e-05,
+        "izz": 7.913500894574099e-07
+      },
+      {
+        "ixx": 6.817499098588087e-08,
+        "iyy": 7.499999554738679e-08,
+        "izz": 8.174999344134903e-09
+      }
+    ],
+    "effective_inertia_basis": "measured original baseline with IsaacGym override_inertia; frozen actor assignment with recompute=False"
+  },
+  "L80": {
+    "object": "knife_wuji_geo_L80_20261002",
+    "dimensions_mm_LWT": [
+      117.6,
+      19.0,
+      8.0
+    ],
+    "parameters": {
+      "id": "000",
+      "split": "train",
+      "geometry_profile": "nt_a300gr",
+      "handle_size": [
+        0.019,
+        0.008,
+        0.1176
+      ],
+      "masses": [
+        0.029,
+        0.006
+      ],
+      "total_size_lwt": [
+        0.1176,
+        0.019,
+        0.011
+      ],
+      "slider_size": [
+        0.01,
+        0.003,
+        0.03
+      ],
+      "joint_lower": -0.03267458688196273,
+      "joint_upper": 0.017325413118037272,
+      "slider_origin": [
+        0.0,
+        0.0055,
+        0.010624586881962734
+      ],
+      "slider_initial_center": [
+        0.0,
+        0.0055,
+        -0.022049999999999997
+      ],
+      "urdf_sha256": "a6b1e08391dfabdf4a637d0dc1e8ad443755c50e8a63495cd636dd69c9187413",
+      "round": "geometry-generalization-20261002",
+      "label": "L80",
+      "mass_inertia_mode": "both fixed at baseline: controlled geometry diagnostic",
+      "length_anchor": "handle center and slider longitudinal origin fixed",
+      "thickness_coupling": "slider joint origin Y shifts by half thickness difference",
+      "axes": "URDF W,T,L; policy transforms bbox to W,L,T"
+    },
+    "files": {
+      "assets/objects/knife_wuji_geo_L80_20261002/lbx.json": "9fd32b6ddd9c9f60679c59c23d930452a9d94be49fba82285b4bc846250ab565",
+      "assets/objects/knife_wuji_geo_L80_20261002/000/mobility.urdf": "a6b1e08391dfabdf4a637d0dc1e8ad443755c50e8a63495cd636dd69c9187413",
+      "assets/objects/knife_wuji_geo_L80_20261002/000/parameters.json": "401472c445a6b189217ea18e775ba5b3ba380566d46253af50f16ec44e397da9",
+      "isaacgymenvs/cfg/object/knife_wuji_geo_L80_20261002.yaml": "74fe9fa989771bb57d94fa265965878e949d19e0ee05f084abde4f6efb61224e"
+    },
+    "effective_inertia": [
+      {
+        "ixx": 4.0355131204705685e-05,
+        "iyy": 4.0908144001150504e-05,
+        "izz": 7.913500894574099e-07
+      },
+      {
+        "ixx": 6.817499098588087e-08,
+        "iyy": 7.499999554738679e-08,
+        "izz": 8.174999344134903e-09
+      }
+    ],
+    "effective_inertia_basis": "measured original baseline with IsaacGym override_inertia; frozen actor assignment with recompute=False"
+  },
+  "L90": {
+    "object": "knife_wuji_geo_L90_20261002",
+    "dimensions_mm_LWT": [
+      132.3,
+      19.0,
+      8.0
+    ],
+    "parameters": {
+      "id": "000",
+      "split": "train",
+      "geometry_profile": "nt_a300gr",
+      "handle_size": [
+        0.019,
+        0.008,
+        0.1323
+      ],
+      "masses": [
+        0.029,
+        0.006
+      ],
+      "total_size_lwt": [
+        0.1323,
+        0.019,
+        0.011
+      ],
+      "slider_size": [
+        0.01,
+        0.003,
+        0.03
+      ],
+      "joint_lower": -0.03267458688196273,
+      "joint_upper": 0.017325413118037272,
+      "slider_origin": [
+        0.0,
+        0.0055,
+        0.010624586881962734
+      ],
+      "slider_initial_center": [
+        0.0,
+        0.0055,
+        -0.022049999999999997
+      ],
+      "urdf_sha256": "4fa5c792fc69be9e46fbe5adeeaf5784e0636eeb4af36befecff4ba8c02a6fd1",
+      "round": "geometry-generalization-20261002",
+      "label": "L90",
+      "mass_inertia_mode": "both fixed at baseline: controlled geometry diagnostic",
+      "length_anchor": "handle center and slider longitudinal origin fixed",
+      "thickness_coupling": "slider joint origin Y shifts by half thickness difference",
+      "axes": "URDF W,T,L; policy transforms bbox to W,L,T"
+    },
+    "files": {
+      "assets/objects/knife_wuji_geo_L90_20261002/lbx.json": "6bd7ebe0fcbc7304e7ad16dc50b495aaeafa3e30a6adea50f260e11c7d08bac8",
+      "assets/objects/knife_wuji_geo_L90_20261002/000/mobility.urdf": "4fa5c792fc69be9e46fbe5adeeaf5784e0636eeb4af36befecff4ba8c02a6fd1",
+      "assets/objects/knife_wuji_geo_L90_20261002/000/parameters.json": "660b36b1849089d06e7e8fda9dfb37a30f60e4d587fb8484e72de54babdef28a",
+      "isaacgymenvs/cfg/object/knife_wuji_geo_L90_20261002.yaml": "f26a4790ee3027319f5f9a0965df9dc3dc0ee24b6f02df660a1b74830b889863"
+    },
+    "effective_inertia": [
+      {
+        "ixx": 4.0355131204705685e-05,
+        "iyy": 4.0908144001150504e-05,
+        "izz": 7.913500894574099e-07
+      },
+      {
+        "ixx": 6.817499098588087e-08,
+        "iyy": 7.499999554738679e-08,
+        "izz": 8.174999344134903e-09
+      }
+    ],
+    "effective_inertia_basis": "measured original baseline with IsaacGym override_inertia; frozen actor assignment with recompute=False"
+  },
+  "L110": {
+    "object": "knife_wuji_geo_L110_20261002",
+    "dimensions_mm_LWT": [
+      161.70000000000002,
+      19.0,
+      8.0
+    ],
+    "parameters": {
+      "id": "000",
+      "split": "train",
+      "geometry_profile": "nt_a300gr",
+      "handle_size": [
+        0.019,
+        0.008,
+        0.1617
+      ],
+      "masses": [
+        0.029,
+        0.006
+      ],
+      "total_size_lwt": [
+        0.1617,
+        0.019,
+        0.011
+      ],
+      "slider_size": [
+        0.01,
+        0.003,
+        0.03
+      ],
+      "joint_lower": -0.03267458688196273,
+      "joint_upper": 0.017325413118037272,
+      "slider_origin": [
+        0.0,
+        0.0055,
+        0.010624586881962734
+      ],
+      "slider_initial_center": [
+        0.0,
+        0.0055,
+        -0.022049999999999997
+      ],
+      "urdf_sha256": "6b7b418182c7705e54aaf9d462c88591a5a195b6f9caeae64458025f66a25417",
+      "round": "geometry-generalization-20261002",
+      "label": "L110",
+      "mass_inertia_mode": "both fixed at baseline: controlled geometry diagnostic",
+      "length_anchor": "handle center and slider longitudinal origin fixed",
+      "thickness_coupling": "slider joint origin Y shifts by half thickness difference",
+      "axes": "URDF W,T,L; policy transforms bbox to W,L,T"
+    },
+    "files": {
+      "assets/objects/knife_wuji_geo_L110_20261002/lbx.json": "ed5a2cc33969fa8e3ef670eeff9b232b65be0eae342b4dd2d7888a0d2195facb",
+      "assets/objects/knife_wuji_geo_L110_20261002/000/mobility.urdf": "6b7b418182c7705e54aaf9d462c88591a5a195b6f9caeae64458025f66a25417",
+      "assets/objects/knife_wuji_geo_L110_20261002/000/parameters.json": "aa046c74fede40f9c46ca70e77eb404939dcf833743d8074308d0082b3ccaaf5",
+      "isaacgymenvs/cfg/object/knife_wuji_geo_L110_20261002.yaml": "da2e2557500d1c12d5fd7b23634a240d849363896e2d1fd10f07fc8e6bc249dd"
+    },
+    "effective_inertia": [
+      {
+        "ixx": 4.0355131204705685e-05,
+        "iyy": 4.0908144001150504e-05,
+        "izz": 7.913500894574099e-07
+      },
+      {
+        "ixx": 6.817499098588087e-08,
+        "iyy": 7.499999554738679e-08,
+        "izz": 8.174999344134903e-09
+      }
+    ],
+    "effective_inertia_basis": "measured original baseline with IsaacGym override_inertia; frozen actor assignment with recompute=False"
+  },
+  "L120": {
+    "object": "knife_wuji_geo_L120_20261002",
+    "dimensions_mm_LWT": [
+      176.39999999999998,
+      19.0,
+      8.0
+    ],
+    "parameters": {
+      "id": "000",
+      "split": "train",
+      "geometry_profile": "nt_a300gr",
+      "handle_size": [
+        0.019,
+        0.008,
+        0.17639999999999997
+      ],
+      "masses": [
+        0.029,
+        0.006
+      ],
+      "total_size_lwt": [
+        0.17639999999999997,
+        0.019,
+        0.011
+      ],
+      "slider_size": [
+        0.01,
+        0.003,
+        0.03
+      ],
+      "joint_lower": -0.03267458688196273,
+      "joint_upper": 0.017325413118037272,
+      "slider_origin": [
+        0.0,
+        0.0055,
+        0.010624586881962734
+      ],
+      "slider_initial_center": [
+        0.0,
+        0.0055,
+        -0.022049999999999997
+      ],
+      "urdf_sha256": "dfcf7406dc769f66c89ca93cc9431c446a04bf4ccba738e9a373a64a616d78aa",
+      "round": "geometry-generalization-20261002",
+      "label": "L120",
+      "mass_inertia_mode": "both fixed at baseline: controlled geometry diagnostic",
+      "length_anchor": "handle center and slider longitudinal origin fixed",
+      "thickness_coupling": "slider joint origin Y shifts by half thickness difference",
+      "axes": "URDF W,T,L; policy transforms bbox to W,L,T"
+    },
+    "files": {
+      "assets/objects/knife_wuji_geo_L120_20261002/lbx.json": "89606ac903b10c38e63f0e7e9179665ddabc3b1ae96e4243edab68ae07bfb32c",
+      "assets/objects/knife_wuji_geo_L120_20261002/000/mobility.urdf": "dfcf7406dc769f66c89ca93cc9431c446a04bf4ccba738e9a373a64a616d78aa",
+      "assets/objects/knife_wuji_geo_L120_20261002/000/parameters.json": "6d1aa0e82216c12385f915312436e34f07a84b3f2fa05b5c978e21c94e9c4e87",
+      "isaacgymenvs/cfg/object/knife_wuji_geo_L120_20261002.yaml": "9647b952bd7d0ea6a264e7a172840e3d41fe0008405ff67c94a156ccbdf6a8d9"
+    },
+    "effective_inertia": [
+      {
+        "ixx": 4.0355131204705685e-05,
+        "iyy": 4.0908144001150504e-05,
+        "izz": 7.913500894574099e-07
+      },
+      {
+        "ixx": 6.817499098588087e-08,
+        "iyy": 7.499999554738679e-08,
+        "izz": 8.174999344134903e-09
+      }
+    ],
+    "effective_inertia_basis": "measured original baseline with IsaacGym override_inertia; frozen actor assignment with recompute=False"
+  },
+  "W80": {
+    "object": "knife_wuji_geo_W80_20261002",
+    "dimensions_mm_LWT": [
+      147.0,
+      15.2,
+      8.0
+    ],
+    "parameters": {
+      "id": "000",
+      "split": "train",
+      "geometry_profile": "nt_a300gr",
+      "handle_size": [
+        0.0152,
+        0.008,
+        0.147
+      ],
+      "masses": [
+        0.029,
+        0.006
+      ],
+      "total_size_lwt": [
+        0.147,
+        0.0152,
+        0.011
+      ],
+      "slider_size": [
+        0.01,
+        0.003,
+        0.03
+      ],
+      "joint_lower": -0.03267458688196273,
+      "joint_upper": 0.017325413118037272,
+      "slider_origin": [
+        0.0,
+        0.0055,
+        0.010624586881962734
+      ],
+      "slider_initial_center": [
+        0.0,
+        0.0055,
+        -0.022049999999999997
+      ],
+      "urdf_sha256": "85a6ea1b96b6c7a7b79a43f748697631dbc73e2b39afbd85afb213dbe0c1dfba",
+      "round": "geometry-generalization-20261002",
+      "label": "W80",
+      "mass_inertia_mode": "both fixed at baseline: controlled geometry diagnostic",
+      "length_anchor": "handle center and slider longitudinal origin fixed",
+      "thickness_coupling": "slider joint origin Y shifts by half thickness difference",
+      "axes": "URDF W,T,L; policy transforms bbox to W,L,T"
+    },
+    "files": {
+      "assets/objects/knife_wuji_geo_W80_20261002/lbx.json": "60cc9cbad9a03a2f095559122e824b29ad7aec37763ef23eff36530900f78d7a",
+      "assets/objects/knife_wuji_geo_W80_20261002/000/mobility.urdf": "85a6ea1b96b6c7a7b79a43f748697631dbc73e2b39afbd85afb213dbe0c1dfba",
+      "assets/objects/knife_wuji_geo_W80_20261002/000/parameters.json": "722021875d9ef13e2696149ed6ec177a356ec3b9184c70edb3409e32fd388396",
+      "isaacgymenvs/cfg/object/knife_wuji_geo_W80_20261002.yaml": "966ce88a2d4287ee7f750e50c6a38317cba88a54b5de9d7ce91aa8e69852cf45"
+    },
+    "effective_inertia": [
+      {
+        "ixx": 4.0355131204705685e-05,
+        "iyy": 4.0908144001150504e-05,
+        "izz": 7.913500894574099e-07
+      },
+      {
+        "ixx": 6.817499098588087e-08,
+        "iyy": 7.499999554738679e-08,
+        "izz": 8.174999344134903e-09
+      }
+    ],
+    "effective_inertia_basis": "measured original baseline with IsaacGym override_inertia; frozen actor assignment with recompute=False"
+  },
+  "W90": {
+    "object": "knife_wuji_geo_W90_20261002",
+    "dimensions_mm_LWT": [
+      147.0,
+      17.1,
+      8.0
+    ],
+    "parameters": {
+      "id": "000",
+      "split": "train",
+      "geometry_profile": "nt_a300gr",
+      "handle_size": [
+        0.0171,
+        0.008,
+        0.147
+      ],
+      "masses": [
+        0.029,
+        0.006
+      ],
+      "total_size_lwt": [
+        0.147,
+        0.0171,
+        0.011
+      ],
+      "slider_size": [
+        0.01,
+        0.003,
+        0.03
+      ],
+      "joint_lower": -0.03267458688196273,
+      "joint_upper": 0.017325413118037272,
+      "slider_origin": [
+        0.0,
+        0.0055,
+        0.010624586881962734
+      ],
+      "slider_initial_center": [
+        0.0,
+        0.0055,
+        -0.022049999999999997
+      ],
+      "urdf_sha256": "c33cdfed400b35e611e1e584c564456432cc34cc75b4927694a72d2558184ab1",
+      "round": "geometry-generalization-20261002",
+      "label": "W90",
+      "mass_inertia_mode": "both fixed at baseline: controlled geometry diagnostic",
+      "length_anchor": "handle center and slider longitudinal origin fixed",
+      "thickness_coupling": "slider joint origin Y shifts by half thickness difference",
+      "axes": "URDF W,T,L; policy transforms bbox to W,L,T"
+    },
+    "files": {
+      "assets/objects/knife_wuji_geo_W90_20261002/lbx.json": "2d408c6c56aa45f49855321ccf3e04fbd06bd19a4384027e04e9628e3b0f4df2",
+      "assets/objects/knife_wuji_geo_W90_20261002/000/mobility.urdf": "c33cdfed400b35e611e1e584c564456432cc34cc75b4927694a72d2558184ab1",
+      "assets/objects/knife_wuji_geo_W90_20261002/000/parameters.json": "8f47ce661622e091dd563183eb2f7e1eb132b99addec602f2187065e665df23b",
+      "isaacgymenvs/cfg/object/knife_wuji_geo_W90_20261002.yaml": "5a694e74e3df68e0f648f63e74ade9f41bbf410c59a78b4de4889fe4e06f1f40"
+    },
+    "effective_inertia": [
+      {
+        "ixx": 4.0355131204705685e-05,
+        "iyy": 4.0908144001150504e-05,
+        "izz": 7.913500894574099e-07
+      },
+      {
+        "ixx": 6.817499098588087e-08,
+        "iyy": 7.499999554738679e-08,
+        "izz": 8.174999344134903e-09
+      }
+    ],
+    "effective_inertia_basis": "measured original baseline with IsaacGym override_inertia; frozen actor assignment with recompute=False"
+  },
+  "W110": {
+    "object": "knife_wuji_geo_W110_20261002",
+    "dimensions_mm_LWT": [
+      147.0,
+      20.900000000000002,
+      8.0
+    ],
+    "parameters": {
+      "id": "000",
+      "split": "train",
+      "geometry_profile": "nt_a300gr",
+      "handle_size": [
+        0.020900000000000002,
+        0.008,
+        0.147
+      ],
+      "masses": [
+        0.029,
+        0.006
+      ],
+      "total_size_lwt": [
+        0.147,
+        0.020900000000000002,
+        0.011
+      ],
+      "slider_size": [
+        0.01,
+        0.003,
+        0.03
+      ],
+      "joint_lower": -0.03267458688196273,
+      "joint_upper": 0.017325413118037272,
+      "slider_origin": [
+        0.0,
+        0.0055,
+        0.010624586881962734
+      ],
+      "slider_initial_center": [
+        0.0,
+        0.0055,
+        -0.022049999999999997
+      ],
+      "urdf_sha256": "f787eccc358923ff7580d402eaf993f0f96d119045e86e6c08befacc10e4453b",
+      "round": "geometry-generalization-20261002",
+      "label": "W110",
+      "mass_inertia_mode": "both fixed at baseline: controlled geometry diagnostic",
+      "length_anchor": "handle center and slider longitudinal origin fixed",
+      "thickness_coupling": "slider joint origin Y shifts by half thickness difference",
+      "axes": "URDF W,T,L; policy transforms bbox to W,L,T"
+    },
+    "files": {
+      "assets/objects/knife_wuji_geo_W110_20261002/lbx.json": "c32a28d33c76d6195658beae1485f2b27f524db4aa79abe51c839950e93c64c0",
+      "assets/objects/knife_wuji_geo_W110_20261002/000/mobility.urdf": "f787eccc358923ff7580d402eaf993f0f96d119045e86e6c08befacc10e4453b",
+      "assets/objects/knife_wuji_geo_W110_20261002/000/parameters.json": "f137b745aed8033f18237c911cc760646093a709a8d0a1f20d495a7bf3c34b6b",
+      "isaacgymenvs/cfg/object/knife_wuji_geo_W110_20261002.yaml": "d081409c067fda6e444ebc1b36e39fe58a169a1c8eba38dcee78313b1b3456eb"
+    },
+    "effective_inertia": [
+      {
+        "ixx": 4.0355131204705685e-05,
+        "iyy": 4.0908144001150504e-05,
+        "izz": 7.913500894574099e-07
+      },
+      {
+        "ixx": 6.817499098588087e-08,
+        "iyy": 7.499999554738679e-08,
+        "izz": 8.174999344134903e-09
+      }
+    ],
+    "effective_inertia_basis": "measured original baseline with IsaacGym override_inertia; frozen actor assignment with recompute=False"
+  },
+  "W120": {
+    "object": "knife_wuji_geo_W120_20261002",
+    "dimensions_mm_LWT": [
+      147.0,
+      22.799999999999997,
+      8.0
+    ],
+    "parameters": {
+      "id": "000",
+      "split": "train",
+      "geometry_profile": "nt_a300gr",
+      "handle_size": [
+        0.022799999999999997,
+        0.008,
+        0.147
+      ],
+      "masses": [
+        0.029,
+        0.006
+      ],
+      "total_size_lwt": [
+        0.147,
+        0.022799999999999997,
+        0.011
+      ],
+      "slider_size": [
+        0.01,
+        0.003,
+        0.03
+      ],
+      "joint_lower": -0.03267458688196273,
+      "joint_upper": 0.017325413118037272,
+      "slider_origin": [
+        0.0,
+        0.0055,
+        0.010624586881962734
+      ],
+      "slider_initial_center": [
+        0.0,
+        0.0055,
+        -0.022049999999999997
+      ],
+      "urdf_sha256": "f388a619bb5e4a84b2be549bc58be99399828da93ac87bfdaeec2c0fb9f65351",
+      "round": "geometry-generalization-20261002",
+      "label": "W120",
+      "mass_inertia_mode": "both fixed at baseline: controlled geometry diagnostic",
+      "length_anchor": "handle center and slider longitudinal origin fixed",
+      "thickness_coupling": "slider joint origin Y shifts by half thickness difference",
+      "axes": "URDF W,T,L; policy transforms bbox to W,L,T"
+    },
+    "files": {
+      "assets/objects/knife_wuji_geo_W120_20261002/lbx.json": "b77c2e7a35593d5ca2a2ced3e35e0b67807aaf9f71d8e6f3cbe505f5225523b9",
+      "assets/objects/knife_wuji_geo_W120_20261002/000/mobility.urdf": "f388a619bb5e4a84b2be549bc58be99399828da93ac87bfdaeec2c0fb9f65351",
+      "assets/objects/knife_wuji_geo_W120_20261002/000/parameters.json": "da645fd7760d98240ff243fd84a785a43df86371bf3b684de3a867cea9eed16a",
+      "isaacgymenvs/cfg/object/knife_wuji_geo_W120_20261002.yaml": "05e4eeb176cae045fef992f4877aeec0fdbd6369a6f3f866939c1ba590326e3a"
+    },
+    "effective_inertia": [
+      {
+        "ixx": 4.0355131204705685e-05,
+        "iyy": 4.0908144001150504e-05,
+        "izz": 7.913500894574099e-07
+      },
+      {
+        "ixx": 6.817499098588087e-08,
+        "iyy": 7.499999554738679e-08,
+        "izz": 8.174999344134903e-09
+      }
+    ],
+    "effective_inertia_basis": "measured original baseline with IsaacGym override_inertia; frozen actor assignment with recompute=False"
+  },
+  "T80": {
+    "object": "knife_wuji_geo_T80_20261002",
+    "dimensions_mm_LWT": [
+      147.0,
+      19.0,
+      6.4
+    ],
+    "parameters": {
+      "id": "000",
+      "split": "train",
+      "geometry_profile": "nt_a300gr",
+      "handle_size": [
+        0.019,
+        0.0064,
+        0.147
+      ],
+      "masses": [
+        0.029,
+        0.006
+      ],
+      "total_size_lwt": [
+        0.147,
+        0.019,
+        0.0094
+      ],
+      "slider_size": [
+        0.01,
+        0.003,
+        0.03
+      ],
+      "joint_lower": -0.03267458688196273,
+      "joint_upper": 0.017325413118037272,
+      "slider_origin": [
+        0.0,
+        0.004699999999999999,
+        0.010624586881962734
+      ],
+      "slider_initial_center": [
+        0.0,
+        0.004699999999999999,
+        -0.022049999999999997
+      ],
+      "urdf_sha256": "14cbca7a43fc87c2a1ec0773bbbafe58bb9b0190ea347efeb4b46b407bb27e5b",
+      "round": "geometry-generalization-20261002",
+      "label": "T80",
+      "mass_inertia_mode": "both fixed at baseline: controlled geometry diagnostic",
+      "length_anchor": "handle center and slider longitudinal origin fixed",
+      "thickness_coupling": "slider joint origin Y shifts by half thickness difference",
+      "axes": "URDF W,T,L; policy transforms bbox to W,L,T"
+    },
+    "files": {
+      "assets/objects/knife_wuji_geo_T80_20261002/lbx.json": "46d6d046a1aa2b26a1df61519645fd9e0678a760a0197c2488c094159d740ac9",
+      "assets/objects/knife_wuji_geo_T80_20261002/000/mobility.urdf": "14cbca7a43fc87c2a1ec0773bbbafe58bb9b0190ea347efeb4b46b407bb27e5b",
+      "assets/objects/knife_wuji_geo_T80_20261002/000/parameters.json": "c6eaafb22db6a9864b431014eafb0dac114a8e7445d46c5926b8585f704cfe6a",
+      "isaacgymenvs/cfg/object/knife_wuji_geo_T80_20261002.yaml": "05e5d5f18f2feb5e5a2ebf1129ef7b35d682cee1a6e783097e98bcc95778e281"
+    },
+    "effective_inertia": [
+      {
+        "ixx": 4.0355131204705685e-05,
+        "iyy": 4.0908144001150504e-05,
+        "izz": 7.913500894574099e-07
+      },
+      {
+        "ixx": 6.817499098588087e-08,
+        "iyy": 7.499999554738679e-08,
+        "izz": 8.174999344134903e-09
+      }
+    ],
+    "effective_inertia_basis": "measured original baseline with IsaacGym override_inertia; frozen actor assignment with recompute=False"
+  },
+  "T90": {
+    "object": "knife_wuji_geo_T90_20261002",
+    "dimensions_mm_LWT": [
+      147.0,
+      19.0,
+      7.200000000000001
+    ],
+    "parameters": {
+      "id": "000",
+      "split": "train",
+      "geometry_profile": "nt_a300gr",
+      "handle_size": [
+        0.019,
+        0.007200000000000001,
+        0.147
+      ],
+      "masses": [
+        0.029,
+        0.006
+      ],
+      "total_size_lwt": [
+        0.147,
+        0.019,
+        0.0102
+      ],
+      "slider_size": [
+        0.01,
+        0.003,
+        0.03
+      ],
+      "joint_lower": -0.03267458688196273,
+      "joint_upper": 0.017325413118037272,
+      "slider_origin": [
+        0.0,
+        0.0051,
+        0.010624586881962734
+      ],
+      "slider_initial_center": [
+        0.0,
+        0.0051,
+        -0.022049999999999997
+      ],
+      "urdf_sha256": "5364cf7e6bdcd668a56259b94249ecf3acc2edd55b8d7cf69d982deef04850cf",
+      "round": "geometry-generalization-20261002",
+      "label": "T90",
+      "mass_inertia_mode": "both fixed at baseline: controlled geometry diagnostic",
+      "length_anchor": "handle center and slider longitudinal origin fixed",
+      "thickness_coupling": "slider joint origin Y shifts by half thickness difference",
+      "axes": "URDF W,T,L; policy transforms bbox to W,L,T"
+    },
+    "files": {
+      "assets/objects/knife_wuji_geo_T90_20261002/lbx.json": "f6c1b5701610dc4e349112dadfe1a08615860ddcb17c2dccb403b274f4c0bdea",
+      "assets/objects/knife_wuji_geo_T90_20261002/000/mobility.urdf": "5364cf7e6bdcd668a56259b94249ecf3acc2edd55b8d7cf69d982deef04850cf",
+      "assets/objects/knife_wuji_geo_T90_20261002/000/parameters.json": "c351b392f2bb34703f2f065cc181cc8515dc253c97c52fd4640e235927c02367",
+      "isaacgymenvs/cfg/object/knife_wuji_geo_T90_20261002.yaml": "e38f234dc84d258fd9542a7876cdcea22c82c242a18b9965dafca663e92d7168"
+    },
+    "effective_inertia": [
+      {
+        "ixx": 4.0355131204705685e-05,
+        "iyy": 4.0908144001150504e-05,
+        "izz": 7.913500894574099e-07
+      },
+      {
+        "ixx": 6.817499098588087e-08,
+        "iyy": 7.499999554738679e-08,
+        "izz": 8.174999344134903e-09
+      }
+    ],
+    "effective_inertia_basis": "measured original baseline with IsaacGym override_inertia; frozen actor assignment with recompute=False"
+  },
+  "T110": {
+    "object": "knife_wuji_geo_T110_20261002",
+    "dimensions_mm_LWT": [
+      147.0,
+      19.0,
+      8.8
+    ],
+    "parameters": {
+      "id": "000",
+      "split": "train",
+      "geometry_profile": "nt_a300gr",
+      "handle_size": [
+        0.019,
+        0.0088,
+        0.147
+      ],
+      "masses": [
+        0.029,
+        0.006
+      ],
+      "total_size_lwt": [
+        0.147,
+        0.019,
+        0.011800000000000001
+      ],
+      "slider_size": [
+        0.01,
+        0.003,
+        0.03
+      ],
+      "joint_lower": -0.03267458688196273,
+      "joint_upper": 0.017325413118037272,
+      "slider_origin": [
+        0.0,
+        0.0059,
+        0.010624586881962734
+      ],
+      "slider_initial_center": [
+        0.0,
+        0.0059,
+        -0.022049999999999997
+      ],
+      "urdf_sha256": "9b8928055915884097180e6b0f535495c4d0b1cce8b9efc735163db7d86e34a4",
+      "round": "geometry-generalization-20261002",
+      "label": "T110",
+      "mass_inertia_mode": "both fixed at baseline: controlled geometry diagnostic",
+      "length_anchor": "handle center and slider longitudinal origin fixed",
+      "thickness_coupling": "slider joint origin Y shifts by half thickness difference",
+      "axes": "URDF W,T,L; policy transforms bbox to W,L,T"
+    },
+    "files": {
+      "assets/objects/knife_wuji_geo_T110_20261002/lbx.json": "283690f31b81f308519e0fd116dc322c1cdc97b060a69946c734f0b575fd457c",
+      "assets/objects/knife_wuji_geo_T110_20261002/000/mobility.urdf": "9b8928055915884097180e6b0f535495c4d0b1cce8b9efc735163db7d86e34a4",
+      "assets/objects/knife_wuji_geo_T110_20261002/000/parameters.json": "af36f71926f5cec388a120d94a873c7ca0b978196b1caa6b6ec543d65bea807a",
+      "isaacgymenvs/cfg/object/knife_wuji_geo_T110_20261002.yaml": "bc8fc98fb90d9846f5b3ebca0f315194a210185751ec0406b6988f307a14776a"
+    },
+    "effective_inertia": [
+      {
+        "ixx": 4.0355131204705685e-05,
+        "iyy": 4.0908144001150504e-05,
+        "izz": 7.913500894574099e-07
+      },
+      {
+        "ixx": 6.817499098588087e-08,
+        "iyy": 7.499999554738679e-08,
+        "izz": 8.174999344134903e-09
+      }
+    ],
+    "effective_inertia_basis": "measured original baseline with IsaacGym override_inertia; frozen actor assignment with recompute=False"
+  },
+  "T120": {
+    "object": "knife_wuji_geo_T120_20261002",
+    "dimensions_mm_LWT": [
+      147.0,
+      19.0,
+      9.6
+    ],
+    "parameters": {
+      "id": "000",
+      "split": "train",
+      "geometry_profile": "nt_a300gr",
+      "handle_size": [
+        0.019,
+        0.0096,
+        0.147
+      ],
+      "masses": [
+        0.029,
+        0.006
+      ],
+      "total_size_lwt": [
+        0.147,
+        0.019,
+        0.0126
+      ],
+      "slider_size": [
+        0.01,
+        0.003,
+        0.03
+      ],
+      "joint_lower": -0.03267458688196273,
+      "joint_upper": 0.017325413118037272,
+      "slider_origin": [
+        0.0,
+        0.006299999999999999,
+        0.010624586881962734
+      ],
+      "slider_initial_center": [
+        0.0,
+        0.006299999999999999,
+        -0.022049999999999997
+      ],
+      "urdf_sha256": "f2ce8ed534d8b4adfedec5517a99afcc26aa3da871dab9b7464f35842204bd80",
+      "round": "geometry-generalization-20261002",
+      "label": "T120",
+      "mass_inertia_mode": "both fixed at baseline: controlled geometry diagnostic",
+      "length_anchor": "handle center and slider longitudinal origin fixed",
+      "thickness_coupling": "slider joint origin Y shifts by half thickness difference",
+      "axes": "URDF W,T,L; policy transforms bbox to W,L,T"
+    },
+    "files": {
+      "assets/objects/knife_wuji_geo_T120_20261002/lbx.json": "d37e14b6214e2cbd65d0081e84764293d5e3be45bbee87c257951f52067309ee",
+      "assets/objects/knife_wuji_geo_T120_20261002/000/mobility.urdf": "f2ce8ed534d8b4adfedec5517a99afcc26aa3da871dab9b7464f35842204bd80",
+      "assets/objects/knife_wuji_geo_T120_20261002/000/parameters.json": "c9dae16074f4ddb82890b4fdab2b01f0f8aca75e9388dcf05e97284fc3671a85",
+      "isaacgymenvs/cfg/object/knife_wuji_geo_T120_20261002.yaml": "081a97e8be77a799d6d0cf0aa64f9b250872bb9454d9e62ed564493b98869ceb"
+    },
+    "effective_inertia": [
+      {
+        "ixx": 4.0355131204705685e-05,
+        "iyy": 4.0908144001150504e-05,
+        "izz": 7.913500894574099e-07
+      },
+      {
+        "ixx": 6.817499098588087e-08,
+        "iyy": 7.499999554738679e-08,
+        "izz": 8.174999344134903e-09
+      }
+    ],
+    "effective_inertia_basis": "measured original baseline with IsaacGym override_inertia; frozen actor assignment with recompute=False"
+  }
+}

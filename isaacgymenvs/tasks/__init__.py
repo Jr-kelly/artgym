@@ -29,3 +29,6 @@ from .wuji_artmanip_reference import WujiArtManipReference
 isaacgym_task_map['wuji_artmanip_reference'] = WujiArtManipReference
 from .wuji_artmanip_clock_hold import WujiArtManipClockHold
 isaacgym_task_map['wuji_artmanip_clock_hold'] = WujiArtManipClockHold
+
+from .wuji_geometry import WujiGeometry
+isaacgym_task_map["wuji_geometry"] = WujiGeometry

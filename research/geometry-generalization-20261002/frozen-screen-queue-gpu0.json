@@ -1,0 +1,49 @@
+[
+  {
+    "name": "frozen-screen-baseline",
+    "seconds": 1200,
+    "module": "scripts.batch_wuji_geometry",
+    "args": [
+      "--label",
+      "baseline",
+      "--static",
+      "baseline-static-screen-v2",
+      "--skip",
+      "teacher-S2",
+      "student-S2"
+    ]
+  },
+  {
+    "name": "frozen-screen-L120",
+    "seconds": 1200,
+    "module": "scripts.batch_wuji_geometry",
+    "args": [
+      "--label",
+      "L120",
+      "--static",
+      "L120-static-fixed"
+    ]
+  },
+  {
+    "name": "frozen-screen-W120",
+    "seconds": 1200,
+    "module": "scripts.batch_wuji_geometry",
+    "args": [
+      "--label",
+      "W120",
+      "--static",
+      "W120-static-fixed"
+    ]
+  },
+  {
+    "name": "frozen-screen-T120",
+    "seconds": 1200,
+    "module": "scripts.batch_wuji_geometry",
+    "args": [
+      "--label",
+      "T120",
+      "--static",
+      "T120-static-fixed"
+    ]
+  }
+]

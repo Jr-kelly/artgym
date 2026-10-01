@@ -1,0 +1,31 @@
+{
+  "static_seconds": 2,
+  "translation_m": 0.01,
+  "rotation_rad": 0.25,
+  "penetration_rule": "vertex SDF baseline source +1mm; proxy only",
+  "contact_IK_error_max_m": 0.002,
+  "policy_result_filter": false,
+  "screen": {
+    "attempts_per_source": 32,
+    "valid_take": 16
+  },
+  "confirm": {
+    "attempts_per_source": 96,
+    "valid_take": 64
+  },
+  "confirm_expanded": {
+    "attempts_per_source": 192,
+    "valid_take": 128
+  },
+  "final": {
+    "attempts_per_source": 192,
+    "valid_take": 128
+  },
+  "comparison": "same statically valid state arrays teacher/SA51200; source-order selection first valid rows; preserve missing coverage",
+  "signals_pp": {
+    "degradation": 15,
+    "added_gap": 15
+  },
+  "reserved_gpu_hours": 6,
+  "old_final_access": false
+}

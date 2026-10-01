@@ -1,3 +1,3 @@
-# Wuji unified student
+# Wuji geometry generalization
 
-Read WUJI_GOAL_HANDOFF.md and research/unified-student-20261001/{GOAL.md,STATE.json,HANDOFF.md}. Execute new student goal; old teacher final cohort remains closed. No subagents. Preserve original workspaces and ToDesk. All starts/ends/failures/configuration changes must use scripts.record_wuji_student_goal. Pin running source, bound every GPUjob, count64GPUh/16h/max4; reserve6GPUh/90min. No utilization minimum per current usergoal.
+Read WUJI_GOAL_HANDOFF.md and research/geometry-generalization-20261002/{GOAL.md,STATE.json,HANDOFF.md}. No subagents. Preserve old workspaces, models, closed final sets and unrelated processes. New user goal replaces old deadlines and continuation target. Use scripts.record_wuji_geometry_goal for each start/end/failure/configuration/decision. Pin running source; cumulative64GPUh incl32.4534053852823 historical, reserve6GPUh, max4GPU. Only useful compute; whole-machine4h utilization minimum26%, target>40%. No hardware commands. Import isaacgym before torch.

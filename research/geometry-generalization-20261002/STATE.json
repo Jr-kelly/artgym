@@ -1,8 +1,3 @@
-# 当前 Wuji 尺寸泛化 Goal
-
-工作区 `/data/research/artgym-experiments-20260921/geometry-generalization-20261002`。先读 research/geometry-generalization-20261002/{GOAL.md,STATE.json,HANDOFF.md,DECISIONS.jsonl}。禁止子代理；旧最终集保持关闭。PID/利用率为带时间历史记录，须重新验证。旧墙钟截止及续训方案已由新Goal替换。
-
-```json
 {
   "start_utc": "2026-10-01T21:11:50.381254+00:00",
   "base_sha": "e6c9f3e0d6167b0df529a5e7d75c88b91ff42613",
@@ -152,59 +147,30 @@
     }
   ],
   "final_opened": false,
-  "next": "Core GPUscreen continues; preserve separate self-stream numerical diagnostic, then confirm influential geometry/source conditions",
+  "next": "Reverify identities before any stop; noPIDassumedcurrent",
   "last_event": {
-    "utc": "2026-10-01T21:27:07.343386+00:00",
-    "event": "offline_reset_step_original_player_parity_verified",
-    "evidence": "research/geometry-generalization-20261002/offline-runtime-audit.json",
-    "result": {
-      "passed": true,
-      "steps": 80,
-      "batch": 4,
-      "dimensions": [
-        "baseline",
-        "T90",
-        "W120"
-      ],
-      "nonconstant_joint_inputs": true,
-      "partial_resets": [
-        {
-          "step": 17,
-          "ids": [
-            1,
-            3
-          ],
-          "untouched_rnn_exact": true
-        },
-        {
-          "step": 41,
-          "ids": [
-            0,
-            2
-          ],
-          "untouched_rnn_exact": true
-        }
-      ],
-      "max_absolute_errors": {
-        "public": 4.470348358154297e-07,
-        "history": 4.470348358154297e-07,
-        "action": 1.138448715209961e-05,
-        "target": 4.76837158203125e-07,
-        "rnn": 0.00015076994895935059
-      },
-      "reference": "Original build_policy_player/get_action + ArtManip history update + inherited WujiDemoAligned/ArtManip pre_physics_step with no-hardware output stub",
-      "models": {
-        "teacher": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
-        "student": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9"
-      },
-      "initial_data_sha256": {
-        "baseline": "fccb3b4d66291e078ac4247fa3310ff780543a73982007767e4aad820ad3a506",
-        "T90": "f5b9cd4681b618c3ed8da3b2041ee0c1e5b48eaad093f445f6e718b0a2dd9083",
-        "W120": "b6e0ed4f8af55d656adbeca70be1ee2452ee9f2d0cc5be6ef8cd9d4845907a6c"
-      },
-      "scope": "CPU legal input replay/parity, not physical rollout or hardware. Commands external. Runtime accepts initial calibration and known geometry; no current object/slider/contact truth."
-    },
-    "next": "Core GPUscreen continues; preserve separate self-stream numerical diagnostic, then confirm influential geometry/source conditions"
+    "utc": "2026-10-01T21:27:28.909752+00:00",
+    "event": "owned_remote_process_snapshot",
+    "checked_utc": "2026-10-01T21:27:27.901686+00:00",
+    "processes": [
+      "453548, /tmp/wuji-student-runtime/bin/python, 1986 MiB",
+      "453510, /tmp/wuji-student-runtime/bin/python, 1986 MiB",
+      "453689, /tmp/wuji-student-runtime/bin/python, 1480 MiB",
+      "453420, /tmp/wuji-student-runtime/bin/python, 1986 MiB",
+      " 451265 Fri Oct  2 05:21:15 2026 timeout --signal=TERM --kill-after=30 1200 /tmp/wuji-student-runtime/bin/python -m scripts.batch_wuji_geometry --label L110 --static L110-static-fixed",
+      " 451282 Fri Oct  2 05:21:15 2026 /tmp/wuji-student-runtime/bin/python -m scripts.batch_wuji_geometry --label L110 --static L110-static-fixed",
+      " 451423 Fri Oct  2 05:21:16 2026 timeout --signal=TERM --kill-after=30 1200 /tmp/wuji-student-runtime/bin/python -m scripts.batch_wuji_geometry --label L90 --static L90-static-fixed",
+      " 451442 Fri Oct  2 05:21:16 2026 /tmp/wuji-student-runtime/bin/python -m scripts.batch_wuji_geometry --label L90 --static L90-static-fixed",
+      " 451502 Fri Oct  2 05:21:17 2026 timeout --signal=TERM --kill-after=30 1200 /tmp/wuji-student-runtime/bin/python -m scripts.batch_wuji_geometry --label baseline --static baseline-static-screen-v2 --skip teacher-S2 student-S2",
+      " 451519 Fri Oct  2 05:21:17 2026 /tmp/wuji-student-runtime/bin/python -m scripts.batch_wuji_geometry --label baseline --static baseline-static-screen-v2 --skip teacher-S2 student-S2",
+      " 451586 Fri Oct  2 05:21:18 2026 timeout --signal=TERM --kill-after=30 1200 /tmp/wuji-student-runtime/bin/python -m scripts.batch_wuji_geometry --label L80 --static L80-static-fixed",
+      " 451615 Fri Oct  2 05:21:18 2026 /tmp/wuji-student-runtime/bin/python -m scripts.batch_wuji_geometry --label L80 --static L80-static-fixed",
+      " 453420 Fri Oct  2 05:26:29 2026 /tmp/wuji-student-runtime/bin/python -m scripts.evaluate_wuji_geometry --label L110 --states runs/geometry-generalization-20261002/L110-static-fixed/valid-states.npy --output runs/geometry-generalization-20261002/screen-L110-student-S2 --model student --protocol S2",
+      " 453510 Fri Oct  2 05:26:48 2026 /tmp/wuji-student-runtime/bin/python -m scripts.evaluate_wuji_geometry --label L80 --states runs/geometry-generalization-20261002/L80-static-fixed/valid-states.npy --output runs/geometry-generalization-20261002/screen-L80-student-S2 --model student --protocol S2",
+      " 453548 Fri Oct  2 05:26:53 2026 /tmp/wuji-student-runtime/bin/python -m scripts.evaluate_wuji_geometry --label baseline --states runs/geometry-generalization-20261002/baseline-static-screen-v2/valid-states.npy --output runs/geometry-generalization-20261002/screen-baseline-student-F --model student --protocol F",
+      " 453689 Fri Oct  2 05:27:21 2026 /tmp/wuji-student-runtime/bin/python -m scripts.evaluate_wuji_geometry --label L90 --states runs/geometry-generalization-20261002/L90-static-fixed/valid-states.npy --output runs/geometry-generalization-20261002/screen-L90-student-S2 --model student --protocol S2"
+    ],
+    "evidence": "research/geometry-generalization-20261002/resources.jsonl",
+    "next": "Reverify identities before any stop; noPIDassumedcurrent"
   }
 }
-```
