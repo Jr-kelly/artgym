@@ -13,7 +13,7 @@
   "max_concurrent_gpus": 4,
   "reserved_final_gpu_hours": 6,
   "reserved_final_seconds": 5400,
-  "gpu_hours": 29.373717030485476,
+  "gpu_hours": 29.5676978364918,
   "phase": "FinalSC/SA64000to70400 running; bestSA51200; finalunopened",
   "active_jobs": [
     {
@@ -137,14 +137,12 @@
   "goal_sha256": "c7e9c244d11824a5d230cfb24ac9207e78fcb1965a376bff6a38f03c084c4a3f",
   "existing_student_run_found": false,
   "prior_session": "Previous user turn performed only read-only attachment/connectivity check; no studentgoal/training/worktree existed. Prior teacher round closed.",
-  "next": "Finish67200/70400 then exercise report on actual frozen128 results",
+  "next": "Append selectedmodel andfrozenresults only afterselection; actualpublicrestore remainsmandatory",
   "last_event": {
-    "utc": "2026-10-01T18:38:35.191679+00:00",
-    "event": "final_report_contract_completed_before_freeze",
-    "code_sha256": "6176b3d2219808b44be464fbffe0249d4a1445e28ef682456c280772cd79f8b5",
-    "evidence": "/data/research/artgym-experiments-20260921/unified-student-20261001/research/unified-student-20261001/pre-final-source-sync.json",
-    "changes": "Explicit teacher absolute boundary cells, primary full-gate checks, repeated-stage holds and first-failure timing; no scoring change",
-    "next": "Finish67200/70400 then exercise report on actual frozen128 results"
+    "utc": "2026-10-01T19:00:47.125036+00:00",
+    "event": "primary_restoration_bundle_paths_checked",
+    "evidence": "/data/research/artgym-experiments-20260921/unified-student-20261001/research/unified-student-20261001/primary-archive-plan.json",
+    "next": "Append selectedmodel andfrozenresults only afterselection; actualpublicrestore remainsmandatory"
   },
   "research_notes": "research/unified-student-20261001/RESEARCH_NOTES.md",
   "current_plan": "research/unified-student-20261001/fixed-method-extension70400-plan.json",
