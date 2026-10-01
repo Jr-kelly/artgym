@@ -13,8 +13,8 @@
   "max_concurrent_gpus": 4,
   "reserved_final_gpu_hours": 6,
   "reserved_final_seconds": 5400,
-  "gpu_hours": 19.788489921622812,
-  "phase": "Fixed-method SC/SA38400to51200 active; bestSA28800; finalunopened",
+  "gpu_hours": 19.978961930937242,
+  "phase": "SC/SA fixed-method extension to51200 active; bestSA44800; finalunopened",
   "active_jobs": [
     {
       "name": "SC-real-51200",
@@ -141,15 +141,14 @@
   "goal_sha256": "c7e9c244d11824a5d230cfb24ac9207e78fcb1965a376bff6a38f03c084c4a3f",
   "existing_student_run_found": false,
   "prior_session": "Previous user turn performed only read-only attachment/connectivity check; no studentgoal/training/worktree existed. Prior teacher round closed.",
-  "next": "Continue51200 registeredtraining; useoriginaltrace precision/body partition withoutattributing failedinstrumentation labels",
+  "next": "Complete48000/51200 and reassess continuation from multi-metric evidence; keep newbestSA44800",
   "last_event": {
-    "utc": "2026-10-01T14:27:42.076111+00:00",
-    "event": "original_trace_holding_margins_verified",
-    "evidence": "research/unified-student-20261001/raw-margins28800-41600.json",
-    "analysis_source_sha256": "4bd0fefe997d8bfd63c8034a43aa1c84ccce643ba05febc7169cf8cef6b622e3",
-    "original_traces": 4,
-    "stage_source_cells": 112,
-    "next": "Continue51200 registeredtraining; useoriginaltrace precision/body partition withoutattributing failedinstrumentation labels"
+    "utc": "2026-10-01T14:54:35.358660+00:00",
+    "event": "phase_fit41600_44800_completed",
+    "evidence": "research/unified-student-20261001/phase-fit41600-44800",
+    "summary": "SA41600to44800 fixed-teacher-history S2 opening targetMSE decreases source0 4.214e-6to1.401e-6, source1 2.941e-6to0.758e-6, source2 0.530e-6to0.138e-6; source3 slightly worsens2.668e-6to2.862e-6. AllSA44800 S2 failures and allbutone S5 failures retainfullbody and missopeningholds; nofullbody-stable closing failures. This supports continued fitting and localized opening gaps, not a causality or convergence claim.",
+    "max_cpu_gpu_relative_difference": 0.002946467584092739,
+    "next": "Complete48000/51200 and reassess continuation from multi-metric evidence; keep newbestSA44800"
   },
   "research_notes": "research/unified-student-20261001/RESEARCH_NOTES.md",
   "current_plan": "research/unified-student-20261001/fixed-method-extension51200-plan.json",
@@ -164,16 +163,16 @@
     "extension51200-SA-evaluation-queue.json": 1
   },
   "provisional_best_development": {
-    "name": "SA-real-28800",
-    "checkpoint": "runs/unified-student-20261001/SA-real-38400/step_028800.pth",
-    "sha256": "936cc7aeeb8c6982f9c5b484cb5d01f2a32f5bf9a1341b68517fc502971e0ba6",
-    "worst_strict_count": 19,
+    "name": "SA-real-44800",
+    "checkpoint": "runs/unified-student-20261001/SA-real-51200/step_044800.pth",
+    "sha256": "412bac607b2c40458bdaaf50c790da8d04de0321ed8ee9e86e162fdf150cee2d",
+    "worst_strict_count": 23,
     "n": 32,
     "full_gate": false,
     "final_selected": false
   },
   "delivery_progress": {
-    "last_pushed_commit": "5b9339d",
+    "last_pushed_commit": "bcf9144",
     "release_id": 400860039,
     "tag": "wuji-unified-student-20261001-v1",
     "draft": true,
