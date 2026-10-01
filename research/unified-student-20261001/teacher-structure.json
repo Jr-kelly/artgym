@@ -1,0 +1,189 @@
+{
+  "keys": [
+    "model",
+    "epoch",
+    "frame",
+    "world_size",
+    "num_actors",
+    "last_mean_rewards",
+    "trackers",
+    "env_state",
+    "rnn_states",
+    "dones",
+    "obs",
+    "current_rewards",
+    "current_shaped_rewards",
+    "current_lengths",
+    "running_mean_std",
+    "bc_optimizer",
+    "bc_epoch",
+    "bc_updates",
+    "bc_manifest",
+    "training_kind",
+    "bc_torch_rng",
+    "bc_cuda_rng",
+    "bc_numpy_rng"
+  ],
+  "model": {
+    "value_mean_std.running_mean": [
+      1
+    ],
+    "value_mean_std.running_var": [
+      1
+    ],
+    "value_mean_std.count": [],
+    "running_mean_std.running_mean": [
+      137
+    ],
+    "running_mean_std.running_var": [
+      137
+    ],
+    "running_mean_std.count": [],
+    "a2c_network.extra_params": [
+      5,
+      32
+    ],
+    "a2c_network.sigma": [
+      5,
+      20
+    ],
+    "a2c_network.priv_encoder.0.weight": [
+      256,
+      21
+    ],
+    "a2c_network.priv_encoder.0.bias": [
+      256
+    ],
+    "a2c_network.priv_encoder.2.weight": [
+      128,
+      256
+    ],
+    "a2c_network.priv_encoder.2.bias": [
+      128
+    ],
+    "a2c_network.priv_encoder.4.weight": [
+      16,
+      128
+    ],
+    "a2c_network.priv_encoder.4.bias": [
+      16
+    ],
+    "a2c_network.critic_priv_encoder.0.weight": [
+      256,
+      21
+    ],
+    "a2c_network.critic_priv_encoder.0.bias": [
+      256
+    ],
+    "a2c_network.critic_priv_encoder.2.weight": [
+      128,
+      256
+    ],
+    "a2c_network.critic_priv_encoder.2.bias": [
+      128
+    ],
+    "a2c_network.critic_priv_encoder.4.weight": [
+      16,
+      128
+    ],
+    "a2c_network.critic_priv_encoder.4.bias": [
+      16
+    ],
+    "a2c_network.a_rnn.rnn.weight_ih_l0": [
+      2048,
+      159
+    ],
+    "a2c_network.a_rnn.rnn.weight_hh_l0": [
+      2048,
+      512
+    ],
+    "a2c_network.a_rnn.rnn.bias_ih_l0": [
+      2048
+    ],
+    "a2c_network.a_rnn.rnn.bias_hh_l0": [
+      2048
+    ],
+    "a2c_network.c_rnn.rnn.weight_ih_l0": [
+      2048,
+      164
+    ],
+    "a2c_network.c_rnn.rnn.weight_hh_l0": [
+      2048,
+      512
+    ],
+    "a2c_network.c_rnn.rnn.bias_ih_l0": [
+      2048
+    ],
+    "a2c_network.c_rnn.rnn.bias_hh_l0": [
+      2048
+    ],
+    "a2c_network.a_layer_norm.weight": [
+      512
+    ],
+    "a2c_network.a_layer_norm.bias": [
+      512
+    ],
+    "a2c_network.c_layer_norm.weight": [
+      512
+    ],
+    "a2c_network.c_layer_norm.bias": [
+      512
+    ],
+    "a2c_network.actor_mlp.0.weight": [
+      512,
+      512
+    ],
+    "a2c_network.actor_mlp.0.bias": [
+      512
+    ],
+    "a2c_network.actor_mlp.2.weight": [
+      256,
+      512
+    ],
+    "a2c_network.actor_mlp.2.bias": [
+      256
+    ],
+    "a2c_network.actor_mlp.4.weight": [
+      128,
+      256
+    ],
+    "a2c_network.actor_mlp.4.bias": [
+      128
+    ],
+    "a2c_network.critic_mlp.0.weight": [
+      512,
+      512
+    ],
+    "a2c_network.critic_mlp.0.bias": [
+      512
+    ],
+    "a2c_network.critic_mlp.2.weight": [
+      256,
+      512
+    ],
+    "a2c_network.critic_mlp.2.bias": [
+      256
+    ],
+    "a2c_network.critic_mlp.4.weight": [
+      128,
+      256
+    ],
+    "a2c_network.critic_mlp.4.bias": [
+      128
+    ],
+    "a2c_network.value.weight": [
+      1,
+      128
+    ],
+    "a2c_network.value.bias": [
+      1
+    ],
+    "a2c_network.mu.weight": [
+      20,
+      128
+    ],
+    "a2c_network.mu.bias": [
+      20
+    ]
+  }
+}

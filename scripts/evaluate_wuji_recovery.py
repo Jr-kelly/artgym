@@ -27,6 +27,9 @@ def main():
     parser.add_argument('--static', action='store_true')
     parser.add_argument('--checkpoint', type=Path, required=True)
     parser.add_argument('--student-artifact', type=Path)
+    parser.add_argument('--unified-student', type=Path)
+    parser.add_argument('--legal-public', action='store_true')
+    parser.add_argument('--latent-probes', action='store_true')
     parser.add_argument('--task', help='Explicit trained action/task variant; default follows teacher/student mode.')
     parser.add_argument('--hand', choices=['wuji_paper', 'wuji_paper_official_actuator'], default='wuji_paper')
     parser.add_argument('--object', default='knife_wuji_acquisition_precision', help='Explicit object and physics profile for this audit.')
@@ -51,6 +54,8 @@ def main():
         raise ValueError('A video requires one to six explicitly chosen initial states')
     task = args.task or ('wuji_acquisition_precision_student' if args.student_artifact else 'wuji_acquisition_precision_aug')
     overrides = ['object='+args.object, 'hand='+args.hand, 'test=True', 'task.env.episodeLength='+str(total_steps), 'task.env.supportActionSpan='+str(args.span)]
+    if args.unified_student or args.latent_probes:
+        overrides += ['task.env.proprioHistoryLen=50', 'task.env.studentInitObsDim=55']
     if args.video:
         overrides += ['graphics_device_id=0', 'task.env.enableCameraSensors=True',
             'task.env.camera.width=512', 'task.env.camera.height=384',
@@ -62,6 +67,13 @@ def main():
     (args.output/'source.py').write_bytes(audit_source)
     (args.output/'source_metrics.py').write_bytes(scorer_source)
     env, player = make_player(cfg, args.checkpoint)
+    if args.unified_student:
+        from scripts.wuji_student_interface import load_artifact
+        artifact = load_artifact(player, env, args.unified_student)
+        assert artifact['teacher_sha256'] == hashlib.sha256(args.checkpoint.read_bytes()).hexdigest()
+    elif args.legal_public:
+        from scripts.wuji_student_interface import install_legal_public
+        install_legal_public(env)
     if args.static:
         player.get_action = lambda *a, **kw: env.zero_actions()
     if args.student_artifact:
@@ -79,6 +91,20 @@ def main():
         player.model.a2c_network.priv_encoder = encoder
         player.model.eval()
         env.set_student_encoder_obs_enabled(True)
+    latent_probes = []
+    if args.latent_probes:
+        from isaacgymenvs.distill import normalize_obs_slice
+        env.set_student_encoder_obs_enabled(True)
+        original_action = player.get_action
+        probe_step = [0]
+        def probing_action(observations, *a, **kw):
+            if probe_step[0] % 20 == 0:
+                with torch.no_grad():
+                    label = player.model.a2c_network.priv_encoder(normalize_obs_slice(player.model, env.teacher_privileged_obs_buf, 111))
+                latent_probes.append(dict(step=probe_step[0], x=env.student_obs_buf.detach().cpu().clone(), label=label.cpu(), obs=observations.cpu(), rnn=[s.cpu().clone() for s in player.states], initial=env.init_targets[:,:20].cpu().clone(), previous=env.prev_targets[:,:20].cpu().clone()))
+            probe_step[0] += 1
+            return original_action(observations, *a, **kw)
+        player.get_action = probing_action
     env.configure_fixed_grasp_consecutive_evaluation(instance_id='000', grasp_state=states[0],
         goal_sequence=tuple(cfg.object.task.goals), episodes_per_grasp=len(states))
     if states.shape != tuple(env.eval_grasp_states.shape):
@@ -160,7 +186,9 @@ def main():
         writer = imageio.get_writer(args.output/'policy.mp4', fps=30)
     try:
         run_grasp_evaluation_loop(player, env, deterministic=True, progress_interval_sec=30,
-                                  use_student_encoder=args.student_artifact is not None, video_writer=writer)
+                                  use_student_encoder=(args.student_artifact is not None or args.unified_student is not None), video_writer=writer)
+        if latent_probes:
+            torch.save(latent_probes, args.output/'latent-probes.pth')
         trace = {key:np.stack([row[key] for row in frames]) for key in frames[0]}
         np.savez_compressed(args.output/'trace.npz', **trace)
         if args.protocol=='S':
@@ -170,7 +198,9 @@ def main():
             body=valid.all(0)&(trace['drift']<.01).all(0)&(trace['rotation']<.25).all(0)
             records=[dict(env=i,cycles=int(f_cycles[i]),functional=bool(f_cycles[i]>=1),alive_full=bool(valid[:,i].all()),body_stable=bool(body[i]),max_drift_m=float(trace['drift'][:,i][trace['active'][:,i]].max()),max_rotation_rad=float(trace['rotation'][:,i][trace['active'][:,i]].max())) for i in range(env.num_envs)]
             report=dict(num_envs=env.num_envs,recorded_steps=len(frames),records=records,functional=sum(r['functional'] for r in records),alive_full=int(valid.all(0).sum()),body_stable=int(body.sum()))
-        report['control_mode'] = 'static_initial_targets' if args.static else 'privileged_teacher'
+        report['control_mode'] = 'static_initial_targets' if args.static else ('initial_calibration_conditional_student' if (args.student_artifact or args.unified_student) else 'privileged_teacher')
+        report['fk_max_abs_error_m'] = getattr(env, 'student_fk_max_error', None)
+        report['unified_student_sha256'] = hashlib.sha256(args.unified_student.read_bytes()).hexdigest() if args.unified_student else None
         report['wall_seconds'] = __import__('time').monotonic()-started
         report.update(effective_randomize=bool(env.randomize),effective_joint_noise=float(env.joint_noise),effective_force_scale=float(env.force_scale),checkpoint_sha256=hashlib.sha256(args.checkpoint.read_bytes()).hexdigest(),
             task=task, hand=args.hand, object=args.object,
