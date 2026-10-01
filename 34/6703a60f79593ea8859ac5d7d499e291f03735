@@ -1,0 +1,267 @@
+scripts/summarize_wuji_student_holding_gap.py
+  s_13dba2dc3e07f8::t_70068c365e3fce 1-2,4-18,20-70
+  s_13dba2dc3e07f8::t_2174532f22cae2 3,19
+scripts/compare_wuji_student_trials.py
+  s_13dba2dc3e07f8::t_174879fed30805 1-50
+scripts/audit_wuji_student_final.py
+  s_13dba2dc3e07f8::t_aa76e7d558b921 1-68
+research/unified-student-20261001/REPRODUCE.md
+  s_13dba2dc3e07f8::t_78ed38541da30c 1-164
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "346703a60f79593ea8859ac5d7d499e291f03735",
+  "prompts": {},
+  "sessions": {
+    "s_13dba2dc3e07f8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f10b-dd7b-7be1-bb17-993f50d34df5",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.cache_read_tokens": "268756254",
+        "tlab.token_usage.input_tokens": "5976016",
+        "tlab.session_started_at": "2026-10-01T10:14:51Z",
+        "tlab.token_usage.output_tokens": "1232708"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/unified-student-20261001/REPRODUCE.md",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 164
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/SA-12800-after-action-diagnostic.json",
+      "additions": {
+        "human": 1699
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/SA-12800-holding-gap.json",
+      "additions": {
+        "human": 925
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/SA-12800-sequence-input-audit.json",
+      "additions": {
+        "human": 13
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/SA-real-19200-development-analysis/report.json",
+      "additions": {
+        "human": 855
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/SA-real-19200-development-analysis/trials.csv",
+      "additions": {
+        "human": 769
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/SC-real-19200-development-analysis/report.json",
+      "additions": {
+        "human": 855
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/SC-real-19200-development-analysis/trials.csv",
+      "additions": {
+        "human": 769
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/action-control-paired12800.json",
+      "additions": {
+        "human": 297
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/controller-input-paired12800.json",
+      "additions": {
+        "human": 297
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/extension-through19200-stages/report.json",
+      "additions": {
+        "human": 2744
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/extension-through19200-stages/trials.csv",
+      "additions": {
+        "human": 2305
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/release-create-request.json",
+      "additions": {
+        "human": 8
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/release-created.json",
+      "additions": {
+        "human": 1
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/restored-source-pins-audit.json",
+      "additions": {
+        "human": 407
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/upload-development-first3.json",
+      "additions": {
+        "human": 23
+      }
+    },
+    {
+      "new_path": "scripts/audit_wuji_student_final.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 68
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/compare_wuji_student_trials.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 50
+          }
+        ]
+      }
+    },
+    {
+      "new_path": "scripts/summarize_wuji_student_holding_gap.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 70
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 61
+      },
+      "deletions": {
+        "human": 22
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/DECISIONS.jsonl",
+      "new_path": "research/unified-student-20261001/DECISIONS.jsonl",
+      "additions": {
+        "human": 31
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/HANDOFF.md",
+      "new_path": "research/unified-student-20261001/HANDOFF.md",
+      "additions": {
+        "human": 61
+      },
+      "deletions": {
+        "human": 22
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/RESEARCH_NOTES.md",
+      "new_path": "research/unified-student-20261001/RESEARCH_NOTES.md",
+      "additions": {
+        "human": 4
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/STATE.json",
+      "new_path": "research/unified-student-20261001/STATE.json",
+      "additions": {
+        "human": 61
+      },
+      "deletions": {
+        "human": 22
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/development-ranking.json",
+      "new_path": "research/unified-student-20261001/development-ranking.json",
+      "additions": {
+        "human": 168
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/figures/learning-curves.svg",
+      "new_path": "research/unified-student-20261001/figures/learning-curves.svg",
+      "additions": {
+        "human": 9688
+      },
+      "deletions": {
+        "human": 5900
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/figures/source-learning-curves.svg",
+      "new_path": "research/unified-student-20261001/figures/source-learning-curves.svg",
+      "additions": {
+        "human": 1894
+      },
+      "deletions": {
+        "human": 2089
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/fit-versus-closedloop.csv",
+      "new_path": "research/unified-student-20261001/fit-versus-closedloop.csv",
+      "additions": {
+        "human": 48
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/fit-versus-closedloop.json",
+      "new_path": "research/unified-student-20261001/fit-versus-closedloop.json",
+      "additions": {
+        "human": 972
+      },
+      "deletions": {
+        "human": 60
+      }
+    },
+    {
+      "old_path": "scripts/analyze_wuji_student.py",
+      "new_path": "scripts/analyze_wuji_student.py",
+      "additions": {
+        "human": 1
+      },
+      "deletions": {
+        "human": 1
+      }
+    }
+  ]
+}
