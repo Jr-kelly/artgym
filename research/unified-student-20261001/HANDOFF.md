@@ -13,7 +13,7 @@
   "max_concurrent_gpus": 4,
   "reserved_final_gpu_hours": 6,
   "reserved_final_seconds": 5400,
-  "gpu_hours": 24.87465639121003,
+  "gpu_hours": 25.069630378219824,
   "phase": "SC/SA51200to64000 running; bestSA51200; finalunopened",
   "active_jobs": [
     {
@@ -141,13 +141,16 @@
   "goal_sha256": "c7e9c244d11824a5d230cfb24ac9207e78fcb1965a376bff6a38f03c084c4a3f",
   "existing_student_run_found": false,
   "prior_session": "Previous user turn performed only read-only attachment/connectivity check; no studentgoal/training/worktree existed. Prior teacher round closed.",
-  "next": "Continue60800/64000; currentbestSA51200 retained",
+  "next": "Finish64000; retainbestSA51200 andsecondarySC60800, no finalaccess",
   "last_event": {
-    "utc": "2026-10-01T17:14:09.259710+00:00",
-    "event": "57600_fitting_recovery_and_closedloop_tradeoffs",
-    "summary": "54400to57600 SA frozenS2targetMSE improves1e-6[1.077,.535,.264,4.021]→[.533,.254,.125,3.714], ownstateMSEimprovesallfour, butsource3S5strict19 andsource1Fbody15remain. SC source0/1/2fitrecovers,source3ownMSErises .0384to.0778. Nojointgate orconvergence inference; next60800/64000 remainregistered.",
-    "evidence": "research/unified-student-20261001/fit-versus-closedloop.csv",
-    "next": "Continue60800/64000; currentbestSA51200 retained"
+    "utc": "2026-10-01T17:46:59.441207+00:00",
+    "event": "60800_joint_fitting_and_ranking_recorded",
+    "summary": "At60800 SC ownstateMSE[.01726,.01719,.01232,.03193] improvesallsources vs57600 andfrozenS2targets[.481,.189,.112,3.115]e-6 improve. SC60800 issecondranked (worststrict23, worststage25/32), notoverallbest. SA source3 frozenS2targetMSErises3.714e-6to4.256e-6 andS5to4.127e-6 while strict19/17; associationonly, no causalproof. Complete64000 before deciding extension/freeze.",
+    "evidence": [
+      "research/unified-student-20261001/fit-versus-closedloop.csv",
+      "research/unified-student-20261001/development-ranking.json"
+    ],
+    "next": "Finish64000; retainbestSA51200 andsecondarySC60800, no finalaccess"
   },
   "research_notes": "research/unified-student-20261001/RESEARCH_NOTES.md",
   "current_plan": "research/unified-student-20261001/fixed-method-extension64000-plan.json",
