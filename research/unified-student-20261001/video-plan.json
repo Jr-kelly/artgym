@@ -22,5 +22,7 @@
     "retain failing column(s) if present; do not replace initialstates"
   ],
   "prior_failure_evidence": "Preserve existing teacher-local5-render video and paired condition5 traces containing original source3 failure rows96/97; these repeated conditions are not independentnew samples",
-  "labels": "Rendered resimulation, singleepisode per displayedsource; separately report main H200 frozen128 statistics"
+  "labels": "Rendered resimulation, singleepisode per displayedsource; separately report main H200 frozen128 statistics",
+  "failure_trace_rule": "first_failed_development_episode_sorted_S2_S5_source_trial",
+  "failure_trace_scope": "After freezing the primary, animate the first failed development S episode sorted by protocol S2/S5, source, trial. Use original physical arrays, not a new simulation. Separate from the fixed four-state rendered videos and never add a sample."
 }

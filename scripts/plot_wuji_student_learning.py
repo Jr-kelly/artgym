@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 def main():
  p=argparse.ArgumentParser();p.add_argument('--runs',type=Path,default=Path('runs/unified-student-20261001'));p.add_argument('--output',type=Path,required=True);a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True)
  fig,axes=plt.subplots(2,2,figsize=(12,8));colors={'S0':'#2266bb','C1':'#b85c19','SC-real':'#218c55','SC-masked':'#9257b5','SA-real':'#c83737'}
- folders={'S0':['S0-3200'],'C1':['C1-3200'],'SC-real':['SC-real-6400','SC-real-12800','SC-real-25600','SC-real-38400','SC-real-51200'],'SC-masked':['SC-masked-6400-r1','SC-masked-12800'],'SA-real':['SA-real-12800','SA-real-25600','SA-real-38400','SA-real-51200']}
+ folders={'S0':['S0-3200'],'C1':['C1-3200'],'SC-real':['SC-real-6400','SC-real-12800','SC-real-25600','SC-real-38400','SC-real-51200','SC-real-64000'],'SC-masked':['SC-masked-6400-r1','SC-masked-12800'],'SA-real':['SA-real-12800','SA-real-25600','SA-real-38400','SA-real-51200','SA-real-64000']}
  for model in colors:
   paths=[a.runs/folder/'learning.jsonl' for folder in folders[model]]
   rows=[json.loads(line) for path in paths if path.exists() for line in path.read_text().splitlines()]

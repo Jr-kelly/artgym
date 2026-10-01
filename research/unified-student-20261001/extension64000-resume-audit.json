@@ -1,0 +1,46 @@
+[
+  {
+    "name": "SC-real-64000",
+    "local_pid": 3518026,
+    "remote_pid": 303563,
+    "start_utc": "2026-10-01T16:03:26.143219+00:00",
+    "pinned_source_sha256": "91beb367ba0a0f9e8f73e51aec48cf8473ad98bcba64a1912cf35d7b7b26742c",
+    "resume": {
+      "parent": "runs/unified-student-20261001/SC-real-51200/step_051200.pth",
+      "parent_sha256": "0a458863983e0cfb337c61aff94d025e0f9e0bd27c6f8f64c2d1c232a74105c8",
+      "restored_optimizer_steps": 51200,
+      "adam_steps": [
+        51200
+      ],
+      "encoder_hash": "1d51d2ac58155980bf4b2e610cc49a644851711aa3cab1e5cbf8e58548d7c3c3",
+      "frozen_hash": "f8775c12963a51e1adc225b1fdd107df71eb0bc6b7e1291845ad410693361232",
+      "rng_restored": true,
+      "controller_columns_expanded": false,
+      "physics": "new episode reset after RNG restore",
+      "parent_target_loss_weight": 0.0,
+      "target_loss_weight": 0.0
+    }
+  },
+  {
+    "name": "SA-real-64000",
+    "local_pid": 3518206,
+    "remote_pid": 303611,
+    "start_utc": "2026-10-01T16:03:27.387515+00:00",
+    "pinned_source_sha256": "91beb367ba0a0f9e8f73e51aec48cf8473ad98bcba64a1912cf35d7b7b26742c",
+    "resume": {
+      "parent": "runs/unified-student-20261001/SA-real-51200/step_051200.pth",
+      "parent_sha256": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9",
+      "restored_optimizer_steps": 51200,
+      "adam_steps": [
+        51200
+      ],
+      "encoder_hash": "7f0b96c7868a329cf995f416da9c0dc0ad04a12e91b2239cf7187ccd63d08fbb",
+      "frozen_hash": "f8775c12963a51e1adc225b1fdd107df71eb0bc6b7e1291845ad410693361232",
+      "rng_restored": true,
+      "controller_columns_expanded": false,
+      "physics": "new episode reset after RNG restore",
+      "parent_target_loss_weight": 25.0,
+      "target_loss_weight": 25.0
+    }
+  }
+]

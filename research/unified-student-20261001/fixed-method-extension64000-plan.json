@@ -1,0 +1,59 @@
+{
+  "name": "fixed-method-continuation51200to64000",
+  "registered_utc": "2026-10-01T16:01:49.916537+00:00",
+  "repair_count": 2,
+  "new_repair_factor": false,
+  "start_update": 51200,
+  "end_update": 64000,
+  "additional_updates_each": 12800,
+  "additional_interactions_each": 13107200,
+  "save_at": [
+    54400,
+    57600,
+    60800,
+    64000
+  ],
+  "branches": {
+    "SC-real-64000": {
+      "parent": "runs/unified-student-20261001/SC-real-51200/step_051200.pth",
+      "parent_sha256": "0a458863983e0cfb337c61aff94d025e0f9e0bd27c6f8f64c2d1c232a74105c8",
+      "target_loss_weight": 0,
+      "gpu": 2,
+      "expected_seconds": 7240,
+      "max_seconds": 12000
+    },
+    "SA-real-64000": {
+      "parent": "runs/unified-student-20261001/SA-real-51200/step_051200.pth",
+      "parent_sha256": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9",
+      "target_loss_weight": 25,
+      "gpu": 0,
+      "expected_seconds": 7610,
+      "max_seconds": 12000
+    }
+  },
+  "common": {
+    "kind": "SC",
+    "controller_mode": "real",
+    "envs": 256,
+    "rollout_steps": 4,
+    "lr": 0.0003,
+    "seed": 61001,
+    "target_loss_scale_rad": 0.04,
+    "teacher_fraction": 0,
+    "optimizer_rng": "Restore each own51200 encoder/Adam/RNG; new physical episodes explicitly declared"
+  },
+  "trigger": [
+    "SA worststrict improves19/32 at28800 to23/32 at44800/48000 and24/32 at51200; fullgate deficit shrinks6to4to2episodes over latest threecheckpoints",
+    "SA source3 own-stateMSE improves .05456to.04454to.03289 across44800/48000/51200; source3 frozenS2targetMSE improves4.533e-6to3.430e-6 atlaststep andS5to3.166e-6",
+    "BothS andFbody retained strongly atSA51200; remaining deficits predominantlyopening holds, source3worst. SC remains necessary equalbudget control, not an independent seed",
+    "No full/within-one-episode candidate yet; meaningful remaining progress and >4hours before ordinarycutoff support another12800 unchangedupdates"
+  ],
+  "estimated_combined_gpu_hours": 4.7,
+  "decision": "Continue both fixed methods equally to64000; no third loss/input/LR/replay/architecture factor. Preserve bestSA51200 and prior candidates.",
+  "decision_rules": [
+    "Full or within-one-episode across all required cells triggers64confirmation withteacher",
+    "At64000 reassess all metrics and remainingtime. Do not equate shortstrictplateauwithconvergence",
+    "Ifconfirmationpasses prioritize second optimizationseed only with explicit RNG reinitialization/ownrollouts and enough remainingbudget; changing--seed underresume alone is insufficient",
+    "Originalstart06:03:30UTC deadline22:03:30UTC unchanged, ordinarycutoff20:33:30UTC, reserve90min/6GPUh"
+  ]
+}

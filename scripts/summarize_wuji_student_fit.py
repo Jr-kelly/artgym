@@ -8,7 +8,7 @@ def main():
   name=path.parent.name[:-3];match=re.search(r'-(\d+)$',name)
   if not match:continue
   step=int(match.group(1));method=name[:match.start()]
-  folders={'S0':['S0-3200'],'C1':['C1-3200'],'SC-real':['SC-real-6400','SC-real-12800','SC-real-25600','SC-real-38400','SC-real-51200'],'SC-masked':['SC-masked-6400-r1','SC-masked-12800'],'SA-real':['SA-real-12800','SA-real-25600','SA-real-38400','SA-real-51200']}
+  folders={'S0':['S0-3200'],'C1':['C1-3200'],'SC-real':['SC-real-6400','SC-real-12800','SC-real-25600','SC-real-38400','SC-real-51200','SC-real-64000'],'SC-masked':['SC-masked-6400-r1','SC-masked-12800'],'SA-real':['SA-real-12800','SA-real-25600','SA-real-38400','SA-real-51200','SA-real-64000']}
   training=[]
   for folder in folders.get(method,[]):
    p=root/folder/'learning.jsonl'
