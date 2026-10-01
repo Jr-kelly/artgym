@@ -1,0 +1,96 @@
+scripts/summarize_wuji_student_failures.py
+  s_13dba2dc3e07f8::t_ba131076455a7f 13
+  s_13dba2dc3e07f8::t_501c3886cd03d2 1-12,14-65
+---
+{
+  "schema_version": "authorship/3.1.0",
+  "tlab_version": "0.13.0",
+  "base_commit_sha": "ea997311c7f789d15d678effd24267df2707d637",
+  "prompts": {},
+  "sessions": {
+    "s_13dba2dc3e07f8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f10b-dd7b-7be1-bb17-993f50d34df5",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "unknown",
+      "custom_attributes": {
+        "tlab.session_started_at": "2026-10-01T12:21:14Z",
+        "tlab.token_usage.output_tokens": "1355324",
+        "tlab.token_usage.cache_creation_tokens": "0",
+        "tlab.token_usage.cache_read_tokens": "293270701",
+        "tlab.token_usage.input_tokens": "6341026"
+      }
+    }
+  },
+  "changes": [
+    {
+      "new_path": "research/unified-student-20261001/development-failure-decomposition.csv",
+      "additions": {
+        "human": 265
+      }
+    },
+    {
+      "new_path": "research/unified-student-20261001/development-failure-decomposition.json",
+      "additions": {
+        "human": 5021
+      }
+    },
+    {
+      "new_path": "scripts/summarize_wuji_student_failures.py",
+      "additions": {
+        "ai": [
+          {
+            "session_id": "s_13dba2dc3e07f8",
+            "lines": 65
+          }
+        ]
+      }
+    },
+    {
+      "old_path": "WUJI_GOAL_HANDOFF.md",
+      "new_path": "WUJI_GOAL_HANDOFF.md",
+      "additions": {
+        "human": 54
+      },
+      "deletions": {
+        "human": 7
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/DECISIONS.jsonl",
+      "new_path": "research/unified-student-20261001/DECISIONS.jsonl",
+      "additions": {
+        "human": 3
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/HANDOFF.md",
+      "new_path": "research/unified-student-20261001/HANDOFF.md",
+      "additions": {
+        "human": 54
+      },
+      "deletions": {
+        "human": 7
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/RESEARCH_NOTES.md",
+      "new_path": "research/unified-student-20261001/RESEARCH_NOTES.md",
+      "additions": {
+        "human": 2
+      }
+    },
+    {
+      "old_path": "research/unified-student-20261001/STATE.json",
+      "new_path": "research/unified-student-20261001/STATE.json",
+      "additions": {
+        "human": 54
+      },
+      "deletions": {
+        "human": 7
+      }
+    }
+  ]
+}
