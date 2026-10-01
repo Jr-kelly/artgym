@@ -1,0 +1,79 @@
+{
+  "plans": [
+    {
+      "label": "baseline",
+      "protocol": "S2",
+      "sources": [
+        0,
+        3
+      ],
+      "selected_valid_rows": [
+        0,
+        48
+      ],
+      "attempt_rows": [
+        0,
+        96
+      ],
+      "states": "research/geometry-generalization-20261002/video-states/baseline.npy",
+      "states_sha256": "fd39ea4204cea97fd29ac1fe34dc06cd5cd4de2c512e6dba1cfc2206aad7581f"
+    },
+    {
+      "label": "L80",
+      "protocol": "S2",
+      "sources": [
+        0,
+        2
+      ],
+      "selected_valid_rows": [
+        0,
+        32
+      ],
+      "attempt_rows": [
+        0,
+        64
+      ],
+      "states": "research/geometry-generalization-20261002/video-states/L80.npy",
+      "states_sha256": "58486885a0dc05d007c5c1ad14b0e469bcb3c056899644131f763815c72f5e20"
+    },
+    {
+      "label": "L110",
+      "protocol": "F",
+      "sources": [
+        0,
+        2
+      ],
+      "selected_valid_rows": [
+        0,
+        32
+      ],
+      "attempt_rows": [
+        0,
+        64
+      ],
+      "states": "research/geometry-generalization-20261002/video-states/L110.npy",
+      "states_sha256": "58486885a0dc05d007c5c1ad14b0e469bcb3c056899644131f763815c72f5e20"
+    },
+    {
+      "label": "W110",
+      "protocol": "S5",
+      "sources": [
+        0,
+        3
+      ],
+      "selected_valid_rows": [
+        0,
+        48
+      ],
+      "attempt_rows": [
+        0,
+        96
+      ],
+      "states": "research/geometry-generalization-20261002/video-states/W110.npy",
+      "states_sha256": "32f03123855ab784cfef53707cc108aee9272ea7cc54a4f421887563d202f506"
+    }
+  ],
+  "selection": "first accepted screen state per namedsource, deterministic; planned from screening, confirmation status added in finalreport; retain failures and actual camera outcomes",
+  "device": "RTX4090 separate re-simulation, not H200 frozen statistics",
+  "max_concurrency_including_H200": 4
+}

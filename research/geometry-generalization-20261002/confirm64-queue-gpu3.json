@@ -1,0 +1,36 @@
+[
+  {
+    "name": "confirm64-W80",
+    "seconds": 2400,
+    "module": "scripts.batch_wuji_geometry",
+    "args": [
+      "--label",
+      "W80",
+      "--static",
+      "W80-static-confirm64",
+      "--split",
+      "confirm128-attempts",
+      "--take",
+      "64",
+      "--prefix",
+      "confirm64-"
+    ]
+  },
+  {
+    "name": "confirm64-W110",
+    "seconds": 2400,
+    "module": "scripts.batch_wuji_geometry",
+    "args": [
+      "--label",
+      "W110",
+      "--static",
+      "W110-static-confirm64",
+      "--split",
+      "confirm128-attempts",
+      "--take",
+      "64",
+      "--prefix",
+      "confirm64-"
+    ]
+  }
+]

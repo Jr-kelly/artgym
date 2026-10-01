@@ -1,0 +1,29 @@
+{
+  "purpose": "Independent confirmation of screen losses/boundaries; not model/grasp selection using final data",
+  "cohort": "confirm128-attempts",
+  "seed": 2026100203,
+  "static_attempts_per_source": 192,
+  "take_per_source": 64,
+  "reason_for_192_attempts": "Some width source3 acceptance is near50%; use pre-generated independent cohort to reach64 where feasible, without policy filtering. Missing and undersampled sources remain explicit.",
+  "known_conditions": [
+    "baseline",
+    "L80",
+    "L110",
+    "L120",
+    "W80",
+    "W110"
+  ],
+  "pending_thickness_conditions": "Choose at most2 representative extremes after full13-condition screen",
+  "protocols": [
+    "S2",
+    "S5",
+    "F"
+  ],
+  "models": [
+    "teacher",
+    "student"
+  ],
+  "estimated_upper_gpu_hours": 8,
+  "max_job_seconds": 2400,
+  "branch_selected": false
+}

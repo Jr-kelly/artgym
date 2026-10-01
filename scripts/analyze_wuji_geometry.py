@@ -43,7 +43,7 @@ def read_run(directory,selection):
  for i,source in enumerate(selection['source_order']):
   active=t['active'][:,i];bad=np.flatnonzero(~valid[:,i]|~pose[:,i]);first_bad=float(bad[0]/30) if len(bad) else None
   init=t['goal'][0,i]-.04;path=t['slider'][:,i][active]
-  trials.append(dict(geometry=label,model=model,protocol=protocol,source=source,attempt_row=selection['selected_attempt_rows'][i],env=i,success=bool(success[i]),body_stable=bool(body[i]),alive_full=bool(valid[:,i].all() and T==horizon),failure=('body/invalid' if not body[i] else 'endpoint' if not success[i] else None),max_drift_m=float(t['drift'][:,i][active].max()),max_rotation_rad=float(t['rotation'][:,i][active].max()),first_body_breach_s=first_bad,first_arrival_s=None if np.isnan(first_arrival[i]) else float(first_arrival[i]),max_extension_fraction=float(np.clip((path.max()-init)/.04,0,1)),travel_range_fraction=float(np.clip((path.max()-path.min())/.04,0,1)),valid_open_close_cycles=int(cycles[i]),commands_reached=int(reached_counts[i]),endpoint_holds=''.join('1' if x else '0' for x in holds[i]) if holds is not None else '',cohort_sha256=report['initial_states_sha256'],trace_sha256=tracehash))
+  trials.append(dict(geometry=label,model=model,protocol=protocol,source=source,attempt_row=selection['selected_attempt_rows'][i],env=i,success=bool(success[i]),body_stable=bool(body[i]),alive_full=bool(valid[:,i].all() and T==horizon),failure=('body/invalid' if not body[i] else 'endpoint' if not success[i] else None),max_drift_m=float(t['drift'][:,i][active].max()),max_rotation_rad=float(t['rotation'][:,i][active].max()),first_body_breach_s=first_bad,first_arrival_s=None if np.isnan(first_arrival[i]) else float(first_arrival[i]),max_extension_fraction=float(np.clip((path.max()-init)/.04,0,1)),travel_range_fraction=float(np.clip((path.max()-path.min())/.04,0,1)),valid_open_close_cycles=int(cycles[i]),commands_reached=int(reached_counts[i]),endpoint_holds=''.join('1' if x else '0' for x in holds[i]) if holds is not None else '',cohort_sha256=report['initial_states_sha256'],trace_sha256=tracehash,mean_abs_slider_error_m=float(error[:,i][active].mean()),max_abs_slider_error_m=float(error[:,i][active].max()),worst_stage_tail_mean_error_m=max(float(error[max(0,min(T,start+period)-9):min(T,start+period),i].mean()) for start in range(0,T,period)) if protocol!='F' else None))
  return trials
 def main():
  p=argparse.ArgumentParser();p.add_argument('--runs',type=Path,default=Path('runs/geometry-generalization-20261002'));p.add_argument('--prefix',default='screen-');p.add_argument('--output',type=Path,required=True);a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True)
@@ -71,6 +71,10 @@ def main():
    x=[teacher[i][metric] for i in ids];y=[student[i][metric] for i in ids];difference=np.array(x,int)-np.array(y,int)
    row[metric]=dict(both_success=sum(a and b for a,b in zip(x,y)),teacher_only=sum(a and not b for a,b in zip(x,y)),student_only=sum(not a and b for a,b in zip(x,y)),both_fail=sum(not a and not b for a,b in zip(x,y)),teacher_minus_student=float(difference.mean()),paired_bootstrap95=paired_ci(difference))
   pairs.append(row)
+ for row in rows:
+  group=[t for t in trials if all(t[k]==row[k] for k in ['geometry','model','protocol','source'])]
+  k=sum(t['success'] and t['body_stable'] for t in group)
+  row.update(success_and_full_stability=k,success_and_full_stability_rate=k/row['n'],success_and_full_stability_wilson95=wilson(k,row['n']),median_mean_abs_slider_error_m=float(np.median([t['mean_abs_slider_error_m'] for t in group])))
  for row in rows:
   g,m,p,s=[row[k] for k in ['geometry','model','protocol','source']]
   if g=='baseline':continue
