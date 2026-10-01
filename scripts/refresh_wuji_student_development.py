@@ -56,6 +56,7 @@ def main():
          '--right-model', models[1], '--output', str(D / ('action-control-paired' + str(args.step) + '.json'))],
         ['scripts.summarize_wuji_student_stages', '--models', *models, '--output', str(D / ('stages' + str(args.step)))],
         ['scripts.summarize_wuji_student_fit'], ['scripts.summarize_wuji_student_failures'],
+        ['scripts.summarize_wuji_student_controls'],
         ['scripts.rank_wuji_student_development'],
         ['scripts.plot_wuji_student_learning', '--output', str(D / 'figures')],
         ['scripts.plot_wuji_student_sources'], ['scripts.plot_wuji_student_fitting'],

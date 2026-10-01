@@ -6,7 +6,7 @@
   "max_concurrent_gpus": 4,
   "reserved_final_gpu_hours": 6,
   "reserved_final_seconds": 5400,
-  "gpu_hours": 24.683956155776983,
+  "gpu_hours": 24.87465639121003,
   "phase": "SC/SA51200to64000 running; bestSA51200; finalunopened",
   "active_jobs": [
     {
@@ -134,17 +134,13 @@
   "goal_sha256": "c7e9c244d11824a5d230cfb24ac9207e78fcb1965a376bff6a38f03c084c4a3f",
   "existing_student_run_found": false,
   "prior_session": "Previous user turn performed only read-only attachment/connectivity check; no studentgoal/training/worktree existed. Prior teacher round closed.",
-  "next": "Continue registered57600/60800/64000 withoutmethodchange; bestSA51200 retained",
+  "next": "Continue60800/64000; currentbestSA51200 retained",
   "last_event": {
-    "utc": "2026-10-01T16:43:08.964595+00:00",
-    "event": "54400_fitting_and_failure_decomposition_recorded",
-    "summary": "54400fixed-history targetfit regressesacrossallsources forbothmethods relative51200: SA S2targetMSE1e-6 [1.077,.535,.264,4.021] vs[.453,.380,.098,3.430];SC[2.115,.568,.247,3.699] vs[.655,.272,.083,2.789]. SA source2 S2/S5strictfailures21/28 allretainfullbody andmissopening; closingholdsallpass. Ownstatelossalso rises. Preserve this as actual multi-metric regression, not proof of convergence; complete57600/60800/64000.",
-    "evidence": [
-      "research/unified-student-20261001/fit-versus-closedloop.csv",
-      "research/unified-student-20261001/development-failure-decomposition.csv",
-      "research/unified-student-20261001/action-control-paired54400.json"
-    ],
-    "next": "Continue registered57600/60800/64000 withoutmethodchange; bestSA51200 retained"
+    "utc": "2026-10-01T17:14:09.259710+00:00",
+    "event": "57600_fitting_recovery_and_closedloop_tradeoffs",
+    "summary": "54400to57600 SA frozenS2targetMSE improves1e-6[1.077,.535,.264,4.021]→[.533,.254,.125,3.714], ownstateMSEimprovesallfour, butsource3S5strict19 andsource1Fbody15remain. SC source0/1/2fitrecovers,source3ownMSErises .0384to.0778. Nojointgate orconvergence inference; next60800/64000 remainregistered.",
+    "evidence": "research/unified-student-20261001/fit-versus-closedloop.csv",
+    "next": "Continue60800/64000; currentbestSA51200 retained"
   },
   "research_notes": "research/unified-student-20261001/RESEARCH_NOTES.md",
   "current_plan": "research/unified-student-20261001/fixed-method-extension64000-plan.json",
@@ -169,7 +165,7 @@
     "final_selected": false
   },
   "delivery_progress": {
-    "last_pushed_commit": "325e0d5a74e8f06e1126872351a9edee7d4b1e70",
+    "last_pushed_commit": "72e3a309f7d53a7d232ac39a54caa24ec1fb33ce",
     "release_id": 400860039,
     "tag": "wuji-unified-student-20261001-v1",
     "draft": true,
