@@ -1,0 +1,59 @@
+{
+  "name": "repair2-executed-target-loss",
+  "repair_count": 2,
+  "parent": "runs/unified-student-20261001/SC-real-6400/step_006400.pth",
+  "parent_sha256": "45ba3b151ba276087c440cddcdd70d86ee1a280a04ffedbfa4d94d8d6de23194",
+  "start_update": 6400,
+  "end_update": 12800,
+  "additional_updates_each": 6400,
+  "additional_interactions_each": 6553600,
+  "branches": {
+    "SA-real-12800": {
+      "target_loss_weight": 25,
+      "expected_seconds": 4500,
+      "max_seconds": 9000
+    },
+    "SC-real-12800": {
+      "target_loss_weight": 0,
+      "expected_seconds": 3600,
+      "max_seconds": 7200
+    }
+  },
+  "target_loss_scale_rad": 0.04,
+  "common": {
+    "kind": "SC",
+    "controller_mode": "real",
+    "envs": 256,
+    "rollout_steps": 4,
+    "seed": 61001,
+    "lr": 0.0003,
+    "teacher_fraction": 0,
+    "optimizer_rng": "same parent restored; new physics episodes at common6400 boundary"
+  },
+  "save_at": [
+    6432,
+    7200,
+    8000,
+    9600,
+    12800
+  ],
+  "evaluation_steps": [
+    7200,
+    8000,
+    9600,
+    12800
+  ],
+  "engineering_check_at": 6432,
+  "loss": "latent MSE + weight*executed joint-target MSE/(.04rad)^2",
+  "gradient": "Forward uses original clipping/limits/scale roundtrip; predicted gradient uses straight-through unclipped mixed command. Teacher label detached, actor frozen; identical incoming RNN.",
+  "counterfactual_action_tolerance": 2e-05,
+  "trigger": [
+    "At6400 real versusmasked improves worst S body29/32 versus2/32, but strict holding remains inadequate and tradeoffs persist",
+    "Frozen teacher-history source3 late targetMSE5.32e-6rad2 vs0.05-0.19e-6 other sources, smaller latent-error contrast",
+    "OriginalS0 and zero-input expandedparent produce exactly equal fullS2 physical/action traces"
+  ],
+  "parent_choice": "A controlled repair parent retaining known-command information and better worst body retention; NOT promoted over best S0-3200 by development ranking",
+  "best_existing_candidate": "S0-3200 remains retained with better worst S strict count9/32",
+  "selection": "Compare all matching checkpoints on fixed development protocols; retain best earlier checkpoint and fixed12800 endpoints. Trigger64 confirmation for complete or one-episode-borderline candidate. No finalset use.",
+  "next": "At12800 continue an improving fixed method if needed and budget permits; no third repair or stacked replay/architecture change"
+}

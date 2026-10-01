@@ -1,0 +1,26 @@
+{
+  "protocol": "S2",
+  "states": "research/unified-student-20261001/data/development-all.npy",
+  "rows": [
+    0,
+    32,
+    64,
+    96
+  ],
+  "seed": 2026093031,
+  "model_selection": "Use the eventually frozen primary student; no replacement of initial states after viewing videos",
+  "teacher": "sameEagg6100 and samefourstates",
+  "hardware": "Previously authorized localRTX4090; H200 camera creation failed, primary statistics remain H200",
+  "envs": 4,
+  "render": true,
+  "steps": 600,
+  "fps": 30,
+  "columns": 4,
+  "deliver": [
+    "student four-source fixedinitialstate video with actual per-video outcomes",
+    "teacher/student paired comparison from identical localhardware/batch/settings",
+    "retain failing column(s) if present; do not replace initialstates"
+  ],
+  "prior_failure_evidence": "Preserve existing teacher-local5-render video and paired condition5 traces containing original source3 failure rows96/97; these repeated conditions are not independentnew samples",
+  "labels": "Rendered resimulation, singleepisode per displayedsource; separately report main H200 frozen128 statistics"
+}
