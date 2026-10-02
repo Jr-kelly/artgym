@@ -9,8 +9,10 @@ from isaacgymenvs.utils.torch_jit_utils import quat_mul,quat_conjugate
 from scripts.prepare_wuji_geometry import meshes,penetration
 from scripts.wuji_kinematics import WujiKinematics
 def main():
- p=argparse.ArgumentParser();p.add_argument('--label',required=True);p.add_argument('--split',default='screen-attempts');p.add_argument('--take',type=int,default=16);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
- root=Path(__file__).resolve().parents[1];d=root/'research/geometry-generalization-20261002';meta=json.loads((d/'ASSETS.json').read_text())[a.label];path=d/'data'/a.label/(a.split+'.npy');states=np.load(path);n=len(states)//4
+ p=argparse.ArgumentParser();p.add_argument('--label',required=True);p.add_argument('--split',default='screen-attempts');p.add_argument('--take',type=int,default=16);p.add_argument('--output',type=Path,required=True)
+ p.add_argument('--research-dir',type=Path,default=Path('research/geometry-generalization-20261002'))
+ a=p.parse_args()
+ root=Path(__file__).resolve().parents[1];d=root/a.research_dir;meta=json.loads((d/'ASSETS.json').read_text())[a.label];path=d/'data'/a.label/(a.split+'.npy');states=np.load(path);n=len(states)//4
  a.output.mkdir(parents=True,exist_ok=False);started=time.monotonic()
  hand=WujiKinematics();mesh=meshes(hand);size=np.array(meta['parameters']['handle_size']);origin=np.array(meta['parameters']['slider_origin']);base=np.array([.019,.008,.147]);origin0=np.array([0,.0055,.010624586881962734]);lineage=np.load(d/'data'/a.label/'adapted-seeds.npy')
  # Relative penetration allowance uses already validated original contact preload.
@@ -20,7 +22,14 @@ def main():
  limit=np.r_[hand.lower,hand.lower];upper=np.r_[hand.upper,hand.upper]
  legal=np.isfinite(states).all(1)&(states[:,:40]>=limit-2e-6).all(1)&(states[:,:40]<=upper+2e-6).all(1)
  geo=np.array([depths[i]<=base_depth[i//n]+.001 for i in range(len(states))])
- cfg=configuration('wuji_geometry',len(states),['object='+meta['object'],'hand=wuji_paper_official_actuator','test=True','task.env.episodeLength=60'],train='wujiAcquisitionSAPG',seed=2026100209)
+ overrides=['object='+meta['object'],'hand=wuji_paper_official_actuator','test=True','task.env.episodeLength=60']
+ if meta['parameters']['round']!='geometry-generalization-20261002':overrides+=['+task.env.geometryRound='+meta['parameters']['round']]
+ reach=np.ones(len(states),dtype=bool)
+ if meta['parameters']['round']=='width-student-distillation-20261002':
+  grasp=json.loads((d/'GRASPS.json').read_text())[a.label]
+  reach=np.asarray([grasp[i//n]['thumb_reach_valid'] for i in range(len(states))],dtype=bool)
+ geo=geo&reach
+ cfg=configuration('wuji_geometry',len(states),overrides,train='wujiAcquisitionSAPG',seed=2026100209)
  (a.output/'config.yaml').write_text(OmegaConf.to_yaml(cfg,resolve=True));env=make_env(cfg)
  assert bool(env.instance_grasp_state_pose_is_local.all()), 'New cache must use hand_base poses'
  frames=[]

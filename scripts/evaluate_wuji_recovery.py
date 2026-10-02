@@ -35,6 +35,7 @@ def main():
     parser.add_argument('--task', help='Explicit trained action/task variant; default follows teacher/student mode.')
     parser.add_argument('--hand', choices=['wuji_paper', 'wuji_paper_official_actuator'], default='wuji_paper')
     parser.add_argument('--object', default='knife_wuji_acquisition_precision', help='Explicit object and physics profile for this audit.')
+    parser.add_argument('--geometry-round', help='Registered asset namespace for controlled geometry evaluation.')
     parser.add_argument('--initial-states', type=Path, required=True)
     parser.add_argument('--initial-state-rows', type=int, nargs='+')
     parser.add_argument('--video-columns', type=int, default=3, choices=range(1,7))
@@ -59,6 +60,8 @@ def main():
         raise ValueError('A video requires one to six explicitly chosen initial states')
     task = args.task or ('wuji_acquisition_precision_student' if args.student_artifact else 'wuji_acquisition_precision_aug')
     overrides = ['object='+args.object, 'hand='+args.hand, 'test=True', 'task.env.episodeLength='+str(total_steps), 'task.env.supportActionSpan='+str(args.span)]
+    if args.geometry_round:
+        overrides += ['+task.env.geometryRound='+args.geometry_round]
     if args.unified_student or args.latent_probes:
         overrides += ['task.env.proprioHistoryLen=50', 'task.env.studentInitObsDim=55']
     if args.video:

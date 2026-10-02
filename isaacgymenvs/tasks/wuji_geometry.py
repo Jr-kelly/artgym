@@ -25,7 +25,7 @@ class WujiGeometry(WujiBridge3Hemisphere):
   assert hashlib.sha256(source.read_bytes()).hexdigest()=='056fd45a2c7cb454a9c8c3f4a9811e384e49d4b07e6b240edc8268d975c487c5'
   self.hemisphere_reference=np.load(source)[0,43:47].copy()
   folder=root/cfg['object']['asset']['asset_root'];meta=json.loads((folder/'000/parameters.json').read_text())
-  assert meta['round']=='geometry-generalization-20261002'
+  assert meta['round']==cfg['env'].get('geometryRound','geometry-generalization-20261002')
   assert hashlib.sha256((folder/'000/mobility.urdf').read_bytes()).hexdigest()==meta['urdf_sha256']
   WujiVariableTimedAcquisition.__init__(self,cfg,*args,**kwargs)
   states=np.load(root/cfg['env']['trainingStates']);assert states.shape[1]==75

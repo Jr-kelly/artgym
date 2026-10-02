@@ -32,3 +32,5 @@ isaacgym_task_map['wuji_artmanip_clock_hold'] = WujiArtManipClockHold
 
 from .wuji_geometry import WujiGeometry
 isaacgym_task_map["wuji_geometry"] = WujiGeometry
+from .wuji_width_student import WujiWidthStudent
+isaacgym_task_map["wuji_width_student"] = WujiWidthStudent

@@ -540,7 +540,7 @@ class ArtManip(VecTask):
             self.hand_indices.append(hand_idx)
 
             # add object
-            instance_index = np.random.choice(len(self.instance_index_list), p=self.instance_id_prob)
+            instance_index = self._select_instance_index(i)
             instance_asset = self.instance_asset_list[instance_index]
             self.env2instance.append(instance_index)
             object_handle = self.gym.create_actor(env_ptr, instance_asset, gymapi.Transform(), 'object', i, 0)
@@ -2171,6 +2171,10 @@ class ArtManip(VecTask):
         self.contact_info = get_binary_contact(self.contact_forces[:, self.force_handles], threshold=self.binary_tactile_threshold)
 
 
+
+    def _select_instance_index(self, env_id):
+        """Optional deterministic slot assignment; default sampling is unchanged."""
+        return np.random.choice(len(self.instance_index_list), p=self.instance_id_prob)
 
     def _load_init_states(self):
         self.valid_states = []

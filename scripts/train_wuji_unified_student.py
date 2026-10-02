@@ -17,7 +17,10 @@ def restore_rng(r):
  torch.set_rng_state(r['torch']);torch.cuda.set_rng_state_all(r['cuda']);np.random.set_state(r['numpy']);random.setstate(r['python'])
 def atomic_save(payload,p):
  tmp=p.with_suffix('.tmp');torch.save(payload,tmp);tmp.replace(p)
- p.with_suffix('.sha256').write_text(hashlib.sha256(p.read_bytes()).hexdigest()+'\n')
+ digest=hashlib.sha256(p.read_bytes()).hexdigest()
+ p.with_suffix('.sha256').write_text(digest+'\n')
+ ready=p.with_suffix('.ready.json');temp=ready.with_suffix('.tmp')
+ temp.write_text(json.dumps(dict(sha256=digest,optimizer_steps=payload['optimizer_steps'],interactions=payload['interactions']),indent=2)+'\n');temp.replace(ready)
 
 def interface_check(player,env,obs,encoder):
  net=player.model.a2c_network
@@ -37,11 +40,19 @@ def interface_check(player,env,obs,encoder):
 def main():
  p=argparse.ArgumentParser();p.add_argument('--teacher',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
  p.add_argument('--kind',choices=['C0','C1','S0','SC'],required=True);p.add_argument('--updates',type=int,default=3200);p.add_argument('--envs',type=int,default=256);p.add_argument('--rollout-steps',type=int,default=4);p.add_argument('--seed',type=int,default=61001);p.add_argument('--resume',type=Path);p.add_argument('--warm-updates',type=int,default=400);p.add_argument('--save-at',type=int,nargs='+',default=[16,400,800,1600,3200,6400,12800]);p.add_argument('--lr',type=float,default=.0003);p.add_argument('--controller-mode',choices=['real','masked'],default='real');p.add_argument('--target-loss-weight',type=float,default=0.);p.add_argument('--target-loss-scale',type=float,default=.04)
- a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True)
+ p.add_argument('--width-arm',choices=['C','G']);p.add_argument('--width-training-manifest',type=Path);p.add_argument('--fresh-optimization-seed',type=int)
+ a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
  assert a.envs%4==0
  assert a.target_loss_weight>=0 and a.target_loss_scale>0
  overrides=['object=knife_wuji_bridge3_20260922','hand=wuji_paper_official_actuator','task.env.trainingStates=research/unified-student-20261001/data/training-all.npy','task.env.episodeLength=600','task.env.proprioHistoryLen=50','task.env.studentInitObsDim=55','+task.env.enableStudentEncoderObs=True']
- cfg=configuration('wuji_multigrasp',a.envs,overrides,train='wujiAcquisitionSAPG',seed=a.seed)
+ task='wuji_multigrasp'
+ if a.width_arm:
+  assert a.envs==256 and a.rollout_steps==4 and a.kind=='SC' and a.controller_mode=='real'
+  assert a.target_loss_weight==25 and a.target_loss_scale==.04 and a.lr==.0003 and a.warm_updates==400
+  assert a.resume and a.width_training_manifest
+  task='wuji_width_student';overrides[0]='object=knife_wuji_width_train_20261002'
+  overrides+=['task.env.widthArm='+a.width_arm,'task.env.widthTrainingManifest='+str(a.width_training_manifest)]
+ cfg=configuration(task,a.envs,overrides,train='wujiAcquisitionSAPG',seed=a.seed)
  (a.output/'config.yaml').write_text(OmegaConf.to_yaml(cfg,resolve=True))
  env,player=make_player(cfg,a.teacher);net=player.model.a2c_network
  for param in player.model.parameters():param.requires_grad_(False)
@@ -50,13 +61,13 @@ def main():
  frozen_hash=tensor_hash(frozen());teacher_hash=tensor_hash(teacher.state_dict())
  install_legal_public(env);install_student_player(player)
  # Each slot stays in one source stratum; no source information enters policy inputs.
- nsource=len(env.all_valid_states)//4;source=torch.arange(a.envs,device=env.device)%4
+ nsource=len(env.all_valid_states)//4;source=env.width_source if a.width_arm else torch.arange(a.envs,device=env.device)%4
  sample_counts=torch.zeros(4,device=env.device,dtype=torch.long)
  def sample(ids):
   group=source[ids];sample_counts.add_(torch.bincount(group,minlength=4))
   rows=group*nsource+torch.randint(nsource,(len(ids),),device=env.device)
   return env.all_valid_states[rows]
- env.sample_grasps=sample
+ if not a.width_arm:env.sample_grasps=sample
  if a.kind=='SC':
   from scripts.wuji_known_controller import install_known_controller
   install_known_controller(env,a.controller_mode)
@@ -79,6 +90,29 @@ def main():
   assert restored['frozen_hash']==frozen_hash and restored['teacher_encoder_hash']==teacher_hash
   assert tensor_hash(encoder.state_dict())==tensor_hash(state)
   (a.output/'resume-audit.json').write_text(json.dumps(dict(parent=str(a.resume),parent_sha256=hashlib.sha256(a.resume.read_bytes()).hexdigest(),restored_optimizer_steps=start_update,adam_steps=sorted(set(int(v['step']) for v in optimizer.state.values())),encoder_hash=tensor_hash(encoder.state_dict()),frozen_hash=frozen_hash,rng_restored=True,controller_columns_expanded=expanding,physics='new episode reset after RNG restore',parent_target_loss_weight=restored['args'].get('target_loss_weight',0.),target_loss_weight=a.target_loss_weight),indent=2))
+ if a.width_arm:
+  assert a.updates>start_update, 'The updates argument is an absolute endpoint, not the added budget'
+  assert restored['controller_mode']=='real' and not expanding
+  assert restored['teacher_sha256']==hashlib.sha256(a.teacher.read_bytes()).hexdigest()
+  assert all(int(v['step'])==start_update for v in optimizer.state.values())
+  for group in optimizer.param_groups:
+   assert group['lr']==.0003 and tuple(group['betas'])==(.9,.999) and group['eps']==1e-8 and group['weight_decay']==0
+  assert restored['args']['target_loss_weight']==25 and restored['args']['target_loss_scale']==.04
+  if a.fresh_optimization_seed is not None:
+   # The checkpoint RNG must be restored first. This is a new experiment,
+   # explicitly reseeded once; continuations of this experiment never reseed.
+   assert start_update==51200
+   assert hashlib.sha256(a.resume.read_bytes()).hexdigest()=='16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9'
+   seed=a.fresh_optimization_seed
+   torch.manual_seed(seed);torch.cuda.manual_seed_all(seed);np.random.seed(seed);random.seed(seed)
+   torch.save(rng(),a.output/'fresh-optimization-rng.pth')
+  else:
+   assert restored.get('width_sampler'), 'First paired experiment requires explicit fresh optimization seed'
+   assert restored['width_sampler']['manifest_sha256']==env.width_manifest_sha256
+   assert restored['args']['width_arm']==a.width_arm
+   env.width_reset_counts[:]=torch.tensor(restored['width_sampler']['reset_counts'],device=env.device)
+   env.width_transition_counts[:]=torch.tensor(restored['width_sampler']['transition_counts'],device=env.device)
+  (a.output/'width-contract.json').write_text(json.dumps(dict(arm=a.width_arm,absolute_start=start_update,absolute_endpoint=a.updates,added_updates=a.updates-start_update,added_interactions=(a.updates-start_update)*a.envs*a.rollout_steps,fresh_seed=a.fresh_optimization_seed,rng_restored_before_fresh_seed=True,adam_groups=[{k:g[k] for k in ['lr','betas','eps','weight_decay']} for g in optimizer.param_groups],sampler=env.width_receipt(),parent_sha256=hashlib.sha256(a.resume.read_bytes()).hexdigest(),physics='new episodes; no PhysX bitwise continuation'),indent=2)+'\n')
  # Resume starts a declared new physics episode. Optimizer/RNG are preserved; no claim of PhysX bitwise continuation.
  obs=player.env_reset(player.env)
  if a.resume and expanding:
@@ -98,6 +132,7 @@ def main():
   assert tensor_hash(frozen())==frozen_hash and tensor_hash(teacher.state_dict())==teacher_hash
   if optimizer:assert all(int(v['step'])==u for v in optimizer.state.values())
   payload=dict(format='wuji-unified-student-v1',kind=a.kind,controller_mode=a.controller_mode if a.kind=='SC' else None,spec={**SPEC,'init_dim':76 if a.kind=='SC' else 55},student_encoder=encoder.state_dict(),optimizer=None if optimizer is None else optimizer.state_dict(),optimizer_steps=u if optimizer else 0,collection_updates=u,interactions=total_interactions,rng=rng(),teacher_sha256=teacher_sha,frozen_hash=frozen_hash,teacher_encoder_hash=teacher_hash,args=vars(a),scope='initial calibration conditional; current q/actions, URDF FK and external command; no current object truth',resume_contract='Optimizer/RNG restored; simulator starts new episodes; no bitwise PhysX state restore')
+  if a.width_arm:payload['width_sampler']=env.width_receipt()
   atomic_save(payload,a.output/('step_%06d.pth'%u))
  try:
   for u0 in range(start_update,a.updates):
@@ -142,6 +177,7 @@ def main():
     duration=env.command_deadline-env.progress_buf
     for d in duration_counts:duration_counts[d]+=int((duration==d).sum())
     obs,_,done,_=player.env_step(player.env,action);total_interactions+=a.envs
+    if a.width_arm:env.record_width_transitions()
     # Exclude freshly reset slots whose targets intentionally changed.
     alive=~done.bool()
     if alive.any():max_target_error=max(max_target_error,float((env.cur_targets[alive,:20]-predicted_target[alive]).abs().max()))
@@ -154,6 +190,9 @@ def main():
     assert a.kind=='C0' or tensor_hash(encoder.state_dict())!=initial_hash
     assert max_target_error<1e-5
    row=dict(update=u,optimizer_steps=u if optimizer else 0,interactions=total_interactions,wall_seconds=time.monotonic()-begin,latent_mse=float(np.mean(losses)),source_mse=np.mean(by_source,axis=0).tolist(),raw_mean_mse=float(np.mean(raws)) if raws else None,clipped_action_mse=float(np.mean(clipped)) if clipped else None,target_mse_rad2=float(np.mean(targets)) if targets else None,grad_norm=grad,teacher_fraction=fraction,counterfactual_live_action_max_error=counterfactual_action_error if a.target_loss_weight else None,target_loss_weight=a.target_loss_weight,target_loss_scale_rad=a.target_loss_scale,executed_target_mse_rad2=float(np.mean(executed_losses)) if executed_losses else None,total_loss=float(np.mean(total_losses)) if total_losses else None,resets=reset_count,source_reset_counts=sample_counts.tolist(),duration_counts=duration_counts,fk_max_error_m=env.student_fk_max_error,target_mapping_max_error_rad=max_target_error,known_controller_max_error_rad=getattr(env,'known_controller_max_error',None))
+   if a.width_arm:
+    sample_counts[:]=env.width_reset_counts.sum(0)
+    row.update(source_reset_counts=sample_counts.tolist(),width_reset_counts=env.width_reset_counts.tolist(),width_transition_counts=env.width_transition_counts.tolist())
    with (a.output/'learning.jsonl').open('a') as f:f.write(json.dumps(row)+'\n')
    if u%25==0 or u<=2:print(json.dumps(row),flush=True)
    if u in a.save_at or u==a.updates:save(u)
