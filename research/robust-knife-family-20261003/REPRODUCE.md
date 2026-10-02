@@ -111,3 +111,30 @@ python -m scripts.prepare_wuji_acquisition_transfer \
 ```
 
 保留此前抓姿占50%，新实际长边抓姿占50%，不按策略成功筛选。静态缓存清零初速度的局限仍适用；连续G2流程从不在接管时重置物体或速度。
+
+## 新的带阻力取刀来源与实际末态扰动
+
+`g2-under-support-static-preload-v25`已连续从桌面取刀并在新增变化负载0.05N、起动幅度0.05N下保持关闭滑块及拇指/三支撑指接触；仅取刀子模块成功。`v26`R800接管掉刀；`v27`按时序拇指IK第一次实际压紧推进约36mm，缩回失去支撑。`thumb-path-branch-jump-v1.json`指出旧固定材料点路径27mm附近存在关节分支跳变，不能以小接触点误差宣称连续关节轨迹。
+
+```bash
+python -m scripts.prepare_wuji_acquisition_transfer \
+  --trace runs/robust-knife-family-20261003/demo/g2-under-support-static-preload-v25/trace.npz \
+  --time 15 --name knife_wuji_dense_under_20261003 \
+  --source-family knife_wuji_dense_longside_20261003 \
+  --output research/robust-knife-family-20261003/under-family-v1 --seed 2026100348
+python -m scripts.train_wuji_robust_residual \
+  --output runs/robust-knife-family-20261003/train/recovered-under-dynamics \
+  --envs 2048 --updates 500 --seed 2026100350 \
+  --resume runs/robust-knife-family-20261003/train/acquired-F1/update_000100.pth \
+  --object knife_wuji_dense_under_20261003 --randomization-scale 1. \
+  --load-max .1 --detent-max .1 --support-residual-scale 2. --thumb-residual-scale 2. \
+  --rotation-cost 4. --actual-hold-history 50 \
+  --handover-profiles research/robust-knife-family-20261003/handover-dynamics-profiles-v1.json \
+  --contact-progress-reward 4.
+```
+
+普通适配M与候选N唯一区别是`--contact-progress-reward`为0或4；同父权重、种子、分布、控制幅度与交互预算。2.0残差允许取消/反向冻结actor的饱和动作；最终动作仍[-1,1]，支撑目标跨度仍0.04rad、拇指递推步长仍0.025rad，原关节/力矩限制及电机Kp不变。新奖励仅用仿真数据计算，接触位置与持稳门控下的有界、带方向目标误差减小，不向actor传入当前真值。
+
+150个真实仿真接管前样本提供三种取刀腕姿态和腕坐标中的相对物体速度。它们与功能抓姿池独立混合，25%清零、其余按实测样本幅度0.5–1.0缩放，是工程扰动包络；代理手仍固定，未精确复现实际腕加速度或手指初速度。连续G2入口保留完整真实物理状态。`initial-snapshot.npz`及`initial-materials.json`在任何策略动作前保存完整初态；8例新开发对照所有已保存初态字段逐位一致，初始保持8/8有效，但R800/F100的操作均未完成。
+
+新资产恢复包`under-family-v1-assets-caches.tar.gz` SHA256 `5d2cdc194023949614c3873936783d92c1b0de10a0ca1652cc1f4b665e79a3f8`。实际命令与权重哈希以每个jobs身份文件、开发报告及最终freeze为准；上列500仅原计划绝对更新数，是否延长由行为检查决定。

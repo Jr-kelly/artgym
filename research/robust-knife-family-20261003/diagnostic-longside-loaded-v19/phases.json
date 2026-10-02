@@ -1,0 +1,290 @@
+{
+  "demo": "runs/robust-knife-family-20261003/demo/g2-side-edge-loaded-baseline-v19",
+  "configuration": {
+    "output": "runs/robust-knife-family-20261003/demo/g2-side-edge-loaded-baseline-v19",
+    "video": true,
+    "seconds": 36.0,
+    "table_height": 0.75,
+    "dx": -0.198,
+    "dy": 0.05,
+    "yaw": 0.0,
+    "close_height": 0,
+    "load": 0.05,
+    "grasp_plan": "research/robust-knife-family-20261003/functional-side-edge-passive-equilibrium-v5/motor-plan.json",
+    "slider_face": "up",
+    "arm_seed": null,
+    "grasp_only": false,
+    "table_calibration": "research/robust-knife-family-20261003/functional-side-edge-five-support-v3/localization.json",
+    "cartesian_path": null,
+    "acquisition_path": "research/robust-knife-family-20261003/functional-side-edge-lateral-path-v2/acquisition-path.json",
+    "thumb_action_gain": 1.0,
+    "support_action_gain": 1.0,
+    "residual_checkpoint": null,
+    "detent": 0.05,
+    "variable_load": true
+  },
+  "weight_sha256": {
+    "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth": "bbf61592721300b1cf053de8246898a69989ed102b7a034da6fb47cc9a541dcd",
+    "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8"
+  },
+  "reported_full_success": false,
+  "reported_first_failure": "holding after handover",
+  "fingers": [
+    "thumb",
+    "index",
+    "middle",
+    "ring",
+    "pinky"
+  ],
+  "rows": [
+    {
+      "stage": "settle/approach",
+      "time_s": [
+        0,
+        5
+      ],
+      "frames": 150,
+      "height_min_m": 0.7560005784034729,
+      "thumb_slider_contact_fraction": 0.0,
+      "finger_body_contact_fractions": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_thumb_slider_solver_magnitude": 0.0,
+      "mean_finger_body_solver_magnitudes": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "slider_from_lower_range_m": [
+        -1.3810720900231388e-09,
+        2.3442182084387753e-09
+      ],
+      "body_rotation_from_handover_max_rad": 0.6778272555701501,
+      "body_drift_from_handover_max_m": 0.09205755591392517
+    },
+    {
+      "stage": "close",
+      "time_s": [
+        5,
+        8
+      ],
+      "frames": 90,
+      "height_min_m": 0.755997896194458,
+      "thumb_slider_contact_fraction": 0.2777777777777778,
+      "finger_body_contact_fractions": [
+        0.0,
+        0.2,
+        0.23333333333333334,
+        0.0,
+        0.25555555555555554
+      ],
+      "mean_thumb_slider_solver_magnitude": 0.11285616608543528,
+      "mean_finger_body_solver_magnitudes": [
+        0.0,
+        0.007985934373896776,
+        0.03444147509031205,
+        0.0,
+        0.061467202067918454
+      ],
+      "slider_from_lower_range_m": [
+        -1.3810720900231388e-09,
+        0.0006602169173631212
+      ],
+      "body_rotation_from_handover_max_rad": 0.6789366124513244,
+      "body_drift_from_handover_max_m": 0.0920601412653923
+    },
+    {
+      "stage": "lift",
+      "time_s": [
+        8,
+        12
+      ],
+      "frames": 120,
+      "height_min_m": 0.7560036778450012,
+      "thumb_slider_contact_fraction": 1.0,
+      "finger_body_contact_fractions": [
+        0.0,
+        0.975,
+        0.95,
+        0.0,
+        1.0
+      ],
+      "mean_thumb_slider_solver_magnitude": 0.5768062276868174,
+      "mean_finger_body_solver_magnitudes": [
+        0.0,
+        0.12958261947302768,
+        0.2550392599659972,
+        0.0,
+        0.45543004892703415
+      ],
+      "slider_from_lower_range_m": [
+        -1.3810720900231388e-09,
+        0.0006586075919541856
+      ],
+      "body_rotation_from_handover_max_rad": 0.7589350232366755,
+      "body_drift_from_handover_max_m": 0.09205421805381775
+    },
+    {
+      "stage": "hold/real history",
+      "time_s": [
+        12,
+        16
+      ],
+      "frames": 120,
+      "height_min_m": 0.8479210734367371,
+      "thumb_slider_contact_fraction": 0.14166666666666666,
+      "finger_body_contact_fractions": [
+        0.8333333333333334,
+        0.9166666666666666,
+        0.9416666666666667,
+        0.5166666666666667,
+        0.95
+      ],
+      "mean_thumb_slider_solver_magnitude": 0.05736687784083187,
+      "mean_finger_body_solver_magnitudes": [
+        0.3669508048643669,
+        0.13480838450583785,
+        0.36133109889924525,
+        0.08268081165297189,
+        0.36139826531289143
+      ],
+      "slider_from_lower_range_m": [
+        -1.3810720900231388e-09,
+        0.0004918747740659257
+      ],
+      "body_rotation_from_handover_max_rad": 0.5212107087903803,
+      "body_drift_from_handover_max_m": 0.004042556043714285
+    },
+    {
+      "stage": "extend1",
+      "time_s": [
+        16,
+        21
+      ],
+      "frames": 150,
+      "height_min_m": 0.7583830952644348,
+      "thumb_slider_contact_fraction": 0.0,
+      "finger_body_contact_fractions": [
+        0.12666666666666668,
+        0.08666666666666667,
+        0.15333333333333332,
+        0.07333333333333333,
+        0.12
+      ],
+      "mean_thumb_slider_solver_magnitude": 0.0,
+      "mean_finger_body_solver_magnitudes": [
+        0.03796790867423018,
+        0.013177642902592197,
+        0.0654890775308013,
+        0.00854513494297862,
+        0.03753896745542685
+      ],
+      "slider_from_lower_range_m": [
+        -1.3810720900231388e-09,
+        0.0009631985026273271
+      ],
+      "body_rotation_from_handover_max_rad": 2.5733326231900184,
+      "body_drift_from_handover_max_m": 0.09233865141868591
+    },
+    {
+      "stage": "retract1",
+      "time_s": [
+        21,
+        26
+      ],
+      "frames": 150,
+      "height_min_m": 0.75838303565979,
+      "thumb_slider_contact_fraction": 0.0,
+      "finger_body_contact_fractions": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_thumb_slider_solver_magnitude": 0.0,
+      "mean_finger_body_solver_magnitudes": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "slider_from_lower_range_m": [
+        0.0007620626288327714,
+        0.0007621222334775468
+      ],
+      "body_rotation_from_handover_max_rad": 2.493839128185607,
+      "body_drift_from_handover_max_m": 0.0923386961221695
+    },
+    {
+      "stage": "extend2",
+      "time_s": [
+        26,
+        31
+      ],
+      "frames": 150,
+      "height_min_m": 0.75838303565979,
+      "thumb_slider_contact_fraction": 0.0,
+      "finger_body_contact_fractions": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_thumb_slider_solver_magnitude": 0.0,
+      "mean_finger_body_solver_magnitudes": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "slider_from_lower_range_m": [
+        0.0007620663541230699,
+        0.0007621185081872484
+      ],
+      "body_rotation_from_handover_max_rad": 2.4938405290630348,
+      "body_drift_from_handover_max_m": 0.0923386961221695
+    },
+    {
+      "stage": "retract2",
+      "time_s": [
+        31,
+        36
+      ],
+      "frames": 150,
+      "height_min_m": 0.75838303565979,
+      "thumb_slider_contact_fraction": 0.0,
+      "finger_body_contact_fractions": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_thumb_slider_solver_magnitude": 0.0,
+      "mean_finger_body_solver_magnitudes": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "slider_from_lower_range_m": [
+        0.000762058903542473,
+        0.0007621185081872484
+      ],
+      "body_rotation_from_handover_max_rad": 2.493841914855423,
+      "body_drift_from_handover_max_m": 0.0923386961221695
+    }
+  ],
+  "scope": "Recorded continuous simulation, exact contact-pair presence; simulated solver normal magnitude is neither hardware force nor constant-force regulation; static height on table is not pickup"
+}

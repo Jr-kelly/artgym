@@ -14,7 +14,7 @@ from scripts.g2_kinematics import G2Kinematics,transform
 from scripts.wuji_kinematics import FINGERS
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);p.add_argument('--root-inset',type=float,default=.008);p.add_argument('--y',type=float,default=-.25);p.add_argument('--refine',type=Path);p.add_argument('--three-support',action='store_true');p.add_argument('--self-separation',action='store_true');p.add_argument('--positive-end-two-support',action='store_true');p.add_argument('--side-edge-all-support',action='store_true');p.add_argument('--source',type=int,choices=range(4));p.add_argument('--maximum-pad-gap',type=float,default=0.);p.add_argument('--thumb-joint-margin',type=float,default=.015);p.add_argument('--stroke-span',type=float,default=0.,help='Jointly screen a second thumb configuration at declared slider travel; geometric hypothesis only');a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
+    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);p.add_argument('--root-inset',type=float,default=.008);p.add_argument('--y',type=float,default=-.25);p.add_argument('--refine',type=Path);p.add_argument('--three-support',action='store_true');p.add_argument('--self-separation',action='store_true');p.add_argument('--positive-end-two-support',action='store_true');p.add_argument('--side-edge-all-support',action='store_true');p.add_argument('--source',type=int,choices=range(4));p.add_argument('--maximum-pad-gap',type=float,default=0.);p.add_argument('--thumb-joint-margin',type=float,default=.015);p.add_argument('--thumb-contact-x',type=float);p.add_argument('--longside-three-support',action='store_true');p.add_argument('--under-edge-support',action='store_true',help='Support the exposed lower knife face with opposed vertical normals; all table/self collisions retained');p.add_argument('--stroke-span',type=float,default=0.,help='Jointly screen a second thumb configuration at declared slider travel; geometric hypothesis only');a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
     g=DigitGeometry(max_face_axes=24,knife_spec='research/robust-knife-family-20261003/real-knife-asset-spec.json');h=g.w;k=G2Kinematics();knife=g.knife_geometry
     world=transform([.30+a.root_inset,a.y,.7561],(Rotation.from_euler('z',0 if a.side_edge_all_support else -90 if a.positive_end_two_support else 90,degrees=True)*Rotation.from_euler('x',90,degrees=True)).as_quat());parts=knife.collision_parts(-.03267458688196273)
     table_center=np.array([.60,-.25,.725]);table_half=np.array([.30,.40,.025]);normal=np.array([[0,1.,0]]+[[0,-1.,0]]*4)
@@ -26,15 +26,16 @@ def main():
     if a.positive_end_two_support:
         active=np.array([0,1,2]);target_z=np.array([-.02205,.039,.019,-.022,-.047])
     if a.side_edge_all_support:
-        active=np.arange(5);target_z=np.array([-.02205,.039,.001,-.022,-.047])
-        normal[1:]=np.array([-1.,-1.,0.])/np.sqrt(2)
+        active=np.array([0,1,2,4]) if a.longside_three_support else np.arange(5);target_z=np.array([-.02205,.039,.001,-.022,-.047])
+        normal[1:]=np.array([0.,-1.,0.]) if a.under_edge_support else np.array([-1.,-1.,0.])/np.sqrt(2)
     facing_target=np.full(5,.35);facing_floor=np.full(5,.25)
     if a.side_edge_all_support:
         # Body supports may use a pad edge. Only the operating thumb must face the slider.
         facing_target[1:]=0.;facing_floor[1:]=0.
     def desired_contacts(contact):
         target=np.c_[np.clip(contact[:,0],-.004,.004),[.0092,-.0062,-.0062,-.0062,-.0062],target_z]
-        if a.side_edge_all_support:target[1:,0]=-.0082
+        if a.side_edge_all_support:target[1:,0]=-.006 if a.under_edge_support else -.0082
+        if a.thumb_contact_x is not None:target[0,0]=a.thumb_contact_x
         return target
     self_pairs=[]
     if a.self_separation:
@@ -83,7 +84,8 @@ def main():
         thumb_indices=[h.names.index('hand_r_thumb_joint'+str(index)) for index in range(1,5)]
         lo[6+np.array(thumb_indices)]=h.lower[thumb_indices]+a.thumb_joint_margin;hi[6+np.array(thumb_indices)]=h.upper[thumb_indices]-a.thumb_joint_margin
         if a.stroke_span:
-            x=np.r_[x,x[6+np.array(thumb_indices)]];lo=np.r_[lo,h.lower[thumb_indices]+.015];hi=np.r_[hi,h.upper[thumb_indices]-.015]
+            endpoint_seed=np.array(prior['stroke_endpoint']['thumb_q']) if a.refine and 'stroke_endpoint' in prior else x[6+np.array(thumb_indices)]
+            x=np.r_[x,endpoint_seed];lo=np.r_[lo,h.lower[thumb_indices]+.015];hi=np.r_[hi,h.upper[thumb_indices]-.015]
         fit=least_squares(residual,np.clip(x,lo+1e-7,hi-1e-7),args=(s[:20],),bounds=(lo,hi),max_nfev=150,diff_step=1e-5);x=fit.x
         def cons(x):
             w,q,c,f,clear,table,pad_gap=geometry(x);target=desired_contacts(c)

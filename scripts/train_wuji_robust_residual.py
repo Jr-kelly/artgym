@@ -13,10 +13,12 @@ def main():
     p.add_argument('--support-residual-scale',type=float,default=.25);p.add_argument('--rotation-cost',type=float,default=0.);p.add_argument('--wrist-nominal',type=Path);p.add_argument('--wrist-probability',type=float,default=.5)
     p.add_argument('--object',default='knife_wuji_robust_family_20261003');p.add_argument('--actual-hold-history',type=int,choices=[0,50],default=50)
     p.add_argument('--thumb-slider-reward',type=float,default=0.)
+    p.add_argument('--thumb-residual-scale',type=float,default=.75);p.add_argument('--contact-progress-reward',type=float,default=0.)
+    p.add_argument('--handover-profiles',type=Path)
     a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
     torch.set_num_threads(4);torch.manual_seed(a.seed);np.random.seed(a.seed)
     wrist=json.loads(a.wrist_nominal.read_text())['wrist_quaternion_xyzw'] if a.wrist_nominal else None
-    system=LearningSystem(a.envs,a.seed,a.randomization_scale,a.load_max,a.detent_max,support_scale=a.support_residual_scale,rotation_cost=a.rotation_cost,wrist_nominal=wrist,wrist_probability=a.wrist_probability,object_name=a.object,history_hold_frames=a.actual_hold_history,thumb_slider_reward=a.thumb_slider_reward);device=system.env.device
+    system=LearningSystem(a.envs,a.seed,a.randomization_scale,a.load_max,a.detent_max,support_scale=a.support_residual_scale,rotation_cost=a.rotation_cost,wrist_nominal=wrist,wrist_probability=a.wrist_probability,object_name=a.object,history_hold_frames=a.actual_hold_history,thumb_slider_reward=a.thumb_slider_reward,thumb_scale=a.thumb_residual_scale,contact_progress_reward=a.contact_progress_reward,handover_profiles=a.handover_profiles);device=system.env.device
     model=ResidualActorCritic().to(device);opt=torch.optim.Adam(model.parameters(),lr=3e-4,eps=1e-5);start=0
     if a.resume:
         saved=torch.load(a.resume,map_location=device);model.load_state_dict(saved['model']);opt.load_state_dict(saved['optimizer']);start=saved['updates']

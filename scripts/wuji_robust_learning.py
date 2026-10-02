@@ -25,9 +25,10 @@ class ResidualActorCritic(nn.Module):
         return Normal(self.actor(public),self.logstd.clamp(-3.5,-.4).exp()),self.critic(critic).squeeze(-1)
 
 class LearningSystem:
-    def __init__(self,n,seed=2026100307,randomization_scale=.5,loadmax=.1,detentmax=.1,delay=.15,instances=None,support_scale=.25,rotation_cost=0.,wrist_nominal=None,wrist_probability=0.,object_name='knife_wuji_robust_family_20261003',history_hold_frames=50,thumb_slider_reward=0.):
+    def __init__(self,n,seed=2026100307,randomization_scale=.5,loadmax=.1,detentmax=.1,delay=.15,instances=None,support_scale=.25,rotation_cost=0.,wrist_nominal=None,wrist_probability=0.,object_name='knife_wuji_robust_family_20261003',history_hold_frames=50,thumb_slider_reward=0.,thumb_scale=.75,contact_progress_reward=0.,handover_profiles=None):
         isaacgym_task_map['wuji_robust_family']=WujiRobustFamily
         overrides=[f'object={object_name}','hand=wuji_paper_official_actuator',f'task.env.robustRandomizationScale={randomization_scale}',f'task.env.robustLoadMaxN={loadmax}',f'task.env.robustDetentMaxN={detentmax}',f'task.env.robustDelayProbability={delay}']
+        if handover_profiles is not None:overrides+=['+task.env.robustHandoverProfileFile='+str(handover_profiles)]
         if instances is not None:overrides+=['object.asset.instance_id_list='+str(instances).replace(' ','')]
         if wrist_nominal is not None:
             overrides+=['+task.env.robustWristNominalQuaternion='+str(list(wrist_nominal)).replace(' ',''),f'+task.env.robustWristNominalProbability={wrist_probability}']
@@ -42,7 +43,7 @@ class LearningSystem:
             pol,pri=original();pol=pol.clone();q=(pol[:,55:75]+1)*.5*(self.env.hand_dof_upper_limits-self.env.hand_dof_lower_limits)+self.env.hand_dof_lower_limits
             pol[:,96:111]=fk(q);return pol,pri
         self.env._compute_sapg_priv_observations=public_obs
-        self.obs=self.player.env_reset(self.player.env);self.scale=torch.tensor([support_scale]*16+[.75]*4,device=self.env.device)
+        self.obs=self.player.env_reset(self.player.env);self.scale=torch.tensor([support_scale]*16+[thumb_scale]*4,device=self.env.device)
         self.episodes=0;self.transitions=0;self.stats=[]
         self.current_return=torch.zeros(n,device=self.env.device);self.current_peak=torch.zeros(n,device=self.env.device)
         self.current_contact=torch.zeros(n,device=self.env.device);self.current_steps=torch.zeros(n,device=self.env.device)
@@ -53,7 +54,9 @@ class LearningSystem:
         self.policy_active=torch.zeros(n,device=self.env.device,dtype=torch.bool)
         self.transition_reward=None;self.transition_peak=None;self.transition_contact=None;self.transition_fall=None
         self.thumb_slider_reward=thumb_slider_reward
-        if thumb_slider_reward:
+        self.contact_progress_reward=contact_progress_reward
+        self.previous_goal_error=None
+        if thumb_slider_reward or contact_progress_reward:
             # Actual thumb-pad collision mesh, transformed by simulator states for reward only.
             import xml.etree.ElementTree as ET
             from scipy.spatial.transform import Rotation
@@ -79,6 +82,12 @@ class LearningSystem:
             if self.thumb_slider_reward:
                 proximity=self.thumb_slider_proximity()
                 reward+=self.thumb_slider_reward*proximity
+                self.transition_thumb_slider_proximity=proximity.detach().clone()
+            if self.contact_progress_reward:
+                proximity=self.thumb_slider_proximity()
+                progress=((self.previous_goal_error-error)/.002).clamp(-1,1)
+                body_gate=torch.exp(-(drift/.01).square()-(rotation/.25).square())
+                reward+=self.contact_progress_reward*proximity*body_gate*progress
                 self.transition_thumb_slider_proximity=proximity.detach().clone()
             self.transition_reward=torch.where(valid,reward,torch.full_like(reward,-8.)).detach().clone()
             self.transition_peak=(self.env.obj_dof_pos-origin).squeeze(-1).detach().clone()
@@ -135,6 +144,7 @@ class LearningSystem:
         action=torch.where(self.policy_active[:,None],action,torch.zeros_like(action))
         executed=self.env.delayed(action)
         goal=self.env.goal_obj_dof_pos.clone();origin=self.env.init_obj_dof_pos.clone()
+        self.previous_goal_error=(self.env.obj_dof_pos-goal).abs().sum(-1).clone()
         self.obs,oldreward,done,_=self.player.env_step(self.player.env,executed)
         done=done.to(self.env.device)
         self._features=None

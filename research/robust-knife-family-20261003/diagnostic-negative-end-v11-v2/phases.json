@@ -1,0 +1,190 @@
+{
+  "demo": "runs/robust-knife-family-20261003/demo/g2-functional-equilibrium-continuous-v11",
+  "configuration": {
+    "output": "runs/robust-knife-family-20261003/demo/g2-functional-equilibrium-continuous-v11",
+    "video": true,
+    "seconds": 36.0,
+    "table_height": 0.75,
+    "dx": -0.192,
+    "dy": 0.05,
+    "yaw": 90.0,
+    "close_height": 0,
+    "load": 0,
+    "grasp_plan": "research/robust-knife-family-20261003/functional-edge-equilibrium-v1/motor-plan.json",
+    "slider_face": "up",
+    "arm_seed": null,
+    "grasp_only": false,
+    "table_calibration": "research/robust-knife-family-20261003/functional-edge-self-localization-v2.json",
+    "cartesian_path": null,
+    "acquisition_path": "research/robust-knife-family-20261003/functional-edge-lateral-path-v1/acquisition-path.json"
+  },
+  "weight_sha256": {
+    "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth": "bbf61592721300b1cf053de8246898a69989ed102b7a034da6fb47cc9a541dcd",
+    "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8"
+  },
+  "reported_full_success": false,
+  "reported_first_failure": "holding after handover",
+  "fingers": [
+    "thumb",
+    "index",
+    "middle",
+    "ring",
+    "pinky"
+  ],
+  "exact_pair_contacts_recorded": false,
+  "rows": [
+    {
+      "stage": "settle/approach",
+      "time_s": [
+        0,
+        5
+      ],
+      "frames": 150,
+      "height_min_m": 0.7560000419616699,
+      "thumb_slider_contact_fraction": null,
+      "finger_body_contact_fractions": null,
+      "mean_thumb_slider_solver_magnitude": null,
+      "mean_finger_body_solver_magnitudes": null,
+      "slider_from_lower_range_m": [
+        2.1344532338096744e-05,
+        3.1253804532005436e-05
+      ],
+      "body_rotation_from_handover_max_rad": 0.036446814509749466,
+      "body_drift_from_handover_max_m": 0.09947746247053146
+    },
+    {
+      "stage": "close",
+      "time_s": [
+        5,
+        8
+      ],
+      "frames": 90,
+      "height_min_m": 0.755999743938446,
+      "thumb_slider_contact_fraction": null,
+      "finger_body_contact_fractions": null,
+      "mean_thumb_slider_solver_magnitude": null,
+      "mean_finger_body_solver_magnitudes": null,
+      "slider_from_lower_range_m": [
+        -1.3810720900231388e-09,
+        3.2397468653633243e-05
+      ],
+      "body_rotation_from_handover_max_rad": 0.03658401332565325,
+      "body_drift_from_handover_max_m": 0.09947775304317474
+    },
+    {
+      "stage": "lift",
+      "time_s": [
+        8,
+        12
+      ],
+      "frames": 120,
+      "height_min_m": 0.7561066150665283,
+      "thumb_slider_contact_fraction": null,
+      "finger_body_contact_fractions": null,
+      "mean_thumb_slider_solver_magnitude": null,
+      "mean_finger_body_solver_magnitudes": null,
+      "slider_from_lower_range_m": [
+        -1.3810720900231388e-09,
+        8.80258950730628e-08
+      ],
+      "body_rotation_from_handover_max_rad": 0.02464763506016592,
+      "body_drift_from_handover_max_m": 0.09936904162168503
+    },
+    {
+      "stage": "hold/real history",
+      "time_s": [
+        12,
+        16
+      ],
+      "frames": 120,
+      "height_min_m": 0.8553955554962158,
+      "thumb_slider_contact_fraction": null,
+      "finger_body_contact_fractions": null,
+      "mean_thumb_slider_solver_magnitude": null,
+      "mean_finger_body_solver_magnitudes": null,
+      "slider_from_lower_range_m": [
+        -1.3810720900231388e-09,
+        -1.3810720900231388e-09
+      ],
+      "body_rotation_from_handover_max_rad": 0.0002865269822839167,
+      "body_drift_from_handover_max_m": 0.0001936335174832493
+    },
+    {
+      "stage": "extend1",
+      "time_s": [
+        16,
+        21
+      ],
+      "frames": 150,
+      "height_min_m": 0.830930769443512,
+      "thumb_slider_contact_fraction": null,
+      "finger_body_contact_fractions": null,
+      "mean_thumb_slider_solver_magnitude": null,
+      "mean_finger_body_solver_magnitudes": null,
+      "slider_from_lower_range_m": [
+        -1.3810720900231388e-09,
+        0.04999999936398597
+      ],
+      "body_rotation_from_handover_max_rad": 1.4505054992699098,
+      "body_drift_from_handover_max_m": 0.02808394655585289
+    },
+    {
+      "stage": "retract1",
+      "time_s": [
+        21,
+        26
+      ],
+      "frames": 150,
+      "height_min_m": 0.7560000419616699,
+      "thumb_slider_contact_fraction": null,
+      "finger_body_contact_fractions": null,
+      "mean_thumb_slider_solver_magnitude": null,
+      "mean_finger_body_solver_magnitudes": null,
+      "slider_from_lower_range_m": [
+        0.047536176179614975,
+        0.04999999936398597
+      ],
+      "body_rotation_from_handover_max_rad": 2.3347542119530535,
+      "body_drift_from_handover_max_m": 0.11298993229866028
+    },
+    {
+      "stage": "extend2",
+      "time_s": [
+        26,
+        31
+      ],
+      "frames": 150,
+      "height_min_m": 0.7560000419616699,
+      "thumb_slider_contact_fraction": null,
+      "finger_body_contact_fractions": null,
+      "mean_thumb_slider_solver_magnitude": null,
+      "mean_finger_body_solver_magnitudes": null,
+      "slider_from_lower_range_m": [
+        0.04756767723437877,
+        0.04756902392682166
+      ],
+      "body_rotation_from_handover_max_rad": 1.9453289490477228,
+      "body_drift_from_handover_max_m": 0.11298993229866028
+    },
+    {
+      "stage": "retract2",
+      "time_s": [
+        31,
+        36
+      ],
+      "frames": 150,
+      "height_min_m": 0.7560000419616699,
+      "thumb_slider_contact_fraction": null,
+      "finger_body_contact_fractions": null,
+      "mean_thumb_slider_solver_magnitude": null,
+      "mean_finger_body_solver_magnitudes": null,
+      "slider_from_lower_range_m": [
+        0.047568997849789574,
+        0.04757026817378135
+      ],
+      "body_rotation_from_handover_max_rad": 1.945328879321481,
+      "body_drift_from_handover_max_m": 0.11298993229866028
+    }
+  ],
+  "scope": "Recorded continuous simulation, exact contact-pair presence; simulated solver normal magnitude is neither hardware force nor constant-force regulation; static height on table is not pickup"
+}

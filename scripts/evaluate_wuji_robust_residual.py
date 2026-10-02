@@ -10,10 +10,10 @@ import torch,numpy as np
 from isaacgymenvs.utils.torch_jit_utils import quat_mul,quat_conjugate
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);p.add_argument('--checkpoint',type=Path);p.add_argument('--envs',type=int,default=96);p.add_argument('--seed',type=int,default=2026100311);p.add_argument('--load-max',type=float,default=.1);p.add_argument('--detent-max',type=float,default=.1);p.add_argument('--randomization-scale',type=float,default=.5);p.add_argument('--heldout',action='store_true');p.add_argument('--wrist-nominal',type=Path);p.add_argument('--wrist-probability',type=float,default=.5);p.add_argument('--object',default='knife_wuji_robust_family_20261003');p.add_argument('--thumb-slider-diagnostic',action='store_true');a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
+    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);p.add_argument('--checkpoint',type=Path);p.add_argument('--envs',type=int,default=96);p.add_argument('--seed',type=int,default=2026100311);p.add_argument('--load-max',type=float,default=.1);p.add_argument('--detent-max',type=float,default=.1);p.add_argument('--randomization-scale',type=float,default=.5);p.add_argument('--heldout',action='store_true');p.add_argument('--wrist-nominal',type=Path);p.add_argument('--wrist-probability',type=float,default=.5);p.add_argument('--object',default='knife_wuji_robust_family_20261003');p.add_argument('--thumb-slider-diagnostic',action='store_true');p.add_argument('--handover-profiles',type=Path);a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
     instances=['012','013','014','015'] if a.heldout else None
     wrist=json.loads(a.wrist_nominal.read_text())['wrist_quaternion_xyzw'] if a.wrist_nominal else None
-    system=LearningSystem(a.envs,a.seed,a.randomization_scale,a.load_max,a.detent_max,instances=instances,wrist_nominal=wrist,wrist_probability=a.wrist_probability,object_name=a.object,history_hold_frames=0,thumb_slider_reward=1. if a.thumb_slider_diagnostic else 0.);env=system.env;model=ResidualActorCritic().to(env.device)
+    system=LearningSystem(a.envs,a.seed,a.randomization_scale,a.load_max,a.detent_max,instances=instances,wrist_nominal=wrist,wrist_probability=a.wrist_probability,object_name=a.object,history_hold_frames=0,thumb_slider_reward=1. if a.thumb_slider_diagnostic else 0.,handover_profiles=a.handover_profiles);env=system.env;model=ResidualActorCritic().to(env.device)
     if a.checkpoint:
         saved=torch.load(a.checkpoint,map_location=env.device);model.load_state_dict(saved['model']);model.eval()
         system.scale=torch.tensor(saved['action_scale'],device=env.device)
@@ -22,6 +22,9 @@ def main():
         env._ensure_grasp_split_loaded(instance_index,'test')
     env._refresh_grasp_split_tensors()
     env.runtime_grasp_split='test';system.obs=system.player.env_reset(system.player.env)
+    snapshot=dict(hand_q=env.hand_dof_pos.detach().cpu().numpy().copy(),hand_velocity=env.hand_dof_vel.detach().cpu().numpy().copy(),issued_targets=env.cur_targets[:,:20].detach().cpu().numpy().copy(),object_root=env.root_state_tensor[env.object_indices].detach().cpu().numpy().copy(),hand_root=env.root_state_tensor[env.hand_indices].detach().cpu().numpy().copy(),load_amplitude=env.load_amplitude.detach().cpu().numpy().copy(),load_phase=env.load_phase.detach().cpu().numpy().copy(),detent_amplitude=env.detent_amplitude.detach().cpu().numpy().copy(),detent_center=env.detent_center.detach().cpu().numpy().copy(),profile_index=env.handover_profile_index.detach().cpu().numpy().copy(),velocity_scale=env.handover_velocity_scale.detach().cpu().numpy().copy())
+    np.savez_compressed(a.output/'initial-snapshot.npz',**snapshot)
+    (a.output/'initial-materials.json').write_text(json.dumps(dict(materials=env.actual_material_coefficients,scope='Reset conditions, before actual50-frame hold and any policy action; diagnostics only, not actor inputs'),indent=2))
     frames=[];original_reward=env.compute_reward
     def capture(action):
         goal=env.goal_obj_dof_pos[:,0].clone();original_reward(action)

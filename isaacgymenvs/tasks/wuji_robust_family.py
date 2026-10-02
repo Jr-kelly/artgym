@@ -32,6 +32,13 @@ class WujiRobustFamily(WujiBridge3Hemisphere):
         self.load_work=torch.zeros(n,device=device);self.load_force=torch.zeros(n,device=device)
         self.detent_potential=torch.zeros(n,device=device);self.reset_counts=torch.zeros(n,device=device,dtype=torch.long)
         self.gravity_vector=torch.zeros((n,3),device=device)
+        profile_file=cfg['env'].get('robustHandoverProfileFile')
+        self.handover_profiles=None
+        self.handover_profile_index=torch.full((n,),-1,device=device,dtype=torch.long)
+        self.handover_velocity_scale=torch.zeros(n,device=device)
+        if profile_file:
+            profiles=json.loads((ROOT/profile_file).read_text())['profiles']
+            self.handover_profiles=torch.tensor([p['wrist_quaternion_xyzw']+p['object_relative_linear_velocity_m_s']+p['object_relative_angular_velocity_rad_s'] for p in profiles],device=device,dtype=torch.float32)
         self.measurement_noise=torch.zeros((n,20),device=device);self.measurement_step=-1
         self.hand_jac=gymtorch.wrap_tensor(self.gym.acquire_jacobian_tensor(self.sim,'hand'))
         props=self.gym.get_actor_rigid_body_properties(self.envs[0],self.hand_handles[0]) if hasattr(self,'hand_handles') else self.gym.get_actor_rigid_body_properties(self.envs[0],self.gym.find_actor_handle(self.envs[0],'hand'))
@@ -90,6 +97,10 @@ class WujiRobustFamily(WujiBridge3Hemisphere):
                 use_acquired=torch.rand(n,device=d)<self.wrist_nominal_probability
                 nominal=self.wrist_nominal.expand(n,-1)
                 q=torch.where(use_acquired[:,None],quat_mul(nominal,q),q)
+            if self.handover_profiles is not None:
+                profile_ids=torch.randint(len(self.handover_profiles),(n,),device=d)
+                self.handover_profile_index[ids]=profile_ids
+                q=quat_mul(self.handover_profiles[profile_ids,:4],torch.cat([rot/(norm+1e-9)*torch.sin(norm/2),torch.cos(norm/2)],-1))
             self.root_state_tensor[self.hand_indices[ids],3:7]=q
             indices=self.hand_indices[ids].to(torch.int32)
             self.gym.set_actor_root_state_tensor_indexed(self.sim,gymtorch.unwrap_tensor(self.root_state_tensor),gymtorch.unwrap_tensor(indices),len(indices))
@@ -105,6 +116,15 @@ class WujiRobustFamily(WujiBridge3Hemisphere):
                     self.gym.set_actor_rigid_shape_properties(env,actor,ps)
                 self.actual_material_coefficients[index]=[mu_hand,mu_obj]
         super().reset_idx(ids,goal_env_ids)
+        if self.robust_ready and self.handover_profiles is not None:
+            profile=self.handover_profiles[self.handover_profile_index[ids]]
+            scale=torch.where(torch.rand(len(ids),device=self.device)<.25,torch.zeros(len(ids),device=self.device),.5+.5*torch.rand(len(ids),device=self.device))
+            self.handover_velocity_scale[ids]=scale
+            wrist=self.root_state_tensor[self.hand_indices[ids],3:7]
+            self.root_state_tensor[self.object_indices[ids],7:10]=quat_apply(wrist,profile[:,4:7]*scale[:,None])
+            self.root_state_tensor[self.object_indices[ids],10:13]=quat_apply(wrist,profile[:,7:10]*scale[:,None])
+            indices=self.object_indices[ids].to(torch.int32)
+            self.gym.set_actor_root_state_tensor_indexed(self.sim,gymtorch.unwrap_tensor(self.root_state_tensor),gymtorch.unwrap_tensor(indices),len(indices))
 
     def _get_hand_proprio_obs(self,env_ids=None):
         if not self.robust_ready:return super()._get_hand_proprio_obs(env_ids)

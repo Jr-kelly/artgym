@@ -82,3 +82,17 @@ class G2R800Policy(FrozenPolicy):
         self.last_action = action[0].cpu().numpy()
         self.last_raw_action = raw_action[0].cpu().numpy()
         return target[0].cpu().numpy(), self.last_action.copy()
+
+    def scripted_target(self, target):
+        """Issue calibrated script targets through the same legal action memory.
+
+        Offline geometry and scheduled command only; no force/slider feedback.
+        """
+        desired=self.tensor(target)
+        action=(desired-self.known.initial)/.04
+        action[:,16:]=(desired[:,16:]-self.known.issued[:,16:])/.025
+        action=action.clamp(-1,1)
+        with torch.no_grad():issued=self.known.step(action)
+        self.last_action=action[0].cpu().numpy()
+        self.last_raw_action=np.zeros(20,dtype=np.float32)
+        return issued[0].cpu().numpy(),self.last_action.copy()
