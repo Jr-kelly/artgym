@@ -1,15 +1,9 @@
-# Remaining work after real training and final connection loss
+# 当前剩余工作
 
-2026-10-02T10:12:42UTC:17314SSHauthentication-before-timeout, afterall8finalconnectionsclosedbyremotehost at~10:10UTC. Need endpoint restoration or a new explicitly authorized connection. Do not probe historical ports.
+2026-10-02 19:14北京时间：17314已恢复。服务端18:10杀停原因为四小时平均GPU利用率19.9461%<26%，不是认证失败。临时目录丢失，八个未完成final的原收据与保守1.4 GPUh记账保留。
 
-Complete: twoC/G3200-update pairs,12fullencoder/Adam/RNG checkpoints, all126dev and54confirmation physical tasks, rawindependent rescore29880episode, all12factualvideos, restored maincheckpoint/newstates, plots and partial science delivery. Reuse them. No more training or model/data/threshold selection afterfinalopened.
+冻结模型、源码、初态及batch均未变化；`queues/frozen-final-resume-v2.json`对8个中断任务使用唯一retry1目录，其余82项沿用原身份。90项最终评测正在8H200有限队列中执行，原始轨迹边完成边回传归档。
 
-Frozen unfinished:90finaltasks,0counted complete,8executionreceiptsunknown,82pending. Cohorts1960initialstates acrossbaseline/W110/W120/W115/W115+T110;35280correlatedplannedepisodes. final-freeze.json and sourceB unchanged. Heldoutpolicy results unavailable, not0%success.
+剩余：全部90项独立复算、最终能力/失败报告、15个最终raw分包与最终分析发布到final-v2 Release；复用v1已经公开的权重、训练/dev/confirmation及视频。禁止重新训练或因final结果更换候选。
 
-1. Reconnect authorizedH200 and reconcile8surviving execution receipts andtemporary1.4GPUhcharge before relaunching.
-2. Preservefailedattempts, retrieve completed outputs if any, retry only incomplete scientific identities into new output directories. Same frozen models/data/physics/protocol/batch. Original64GPUhcap, conservative13.10091779remaining untilreconciled.
-3. Finishexactmatrix, independentfinal rawrescore/timeparts/plots, fullfinalreport, new immutable rawassets andverifiedGitHubpublication. Do not overwrite delivered assets or redo training.
-
-MonitorPID2684571was verified bystart_ticks andstopped at10:18UTC; no usefullocalGPUworkremains. LocalToDeskPID2990076was observed alive at10:25UTCanduntouched. Remote8tasks termination cannot be verified whileSSHunreachable; finite600+30stimeouts are registered. STATE.unreconciled_remote_jobs is authoritative pendinglist.
-
-Research priority afterfinal: strict S2/S5 endpointprecision preservation, using one bounded error/timing diagnostic rather than blind width continuation. Lengthsource3grasp adaptation is separate and not a premise ofthispairedcomparison.
+监控：UTILIZATION_RESUME_MONITOR.json及UTILIZATION_RESUME_SAMPLES.jsonl。旧43.25%只覆盖109分钟；四小时利用率以官方杀停通知19.9461%为准。所有PID/状态再次接手时须复核。

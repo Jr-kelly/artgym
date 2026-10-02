@@ -1,5 +1,5 @@
 """Fetch only completed immutable runs and independently rescore raw episodes."""
-import argparse,json,os,shlex,subprocess,sys
+import argparse,json,os,shlex,subprocess,sys,time
 from pathlib import Path
 from scripts.record_wuji_width_goal import R,D,record
 from scripts.wuji_width_contract import sha
@@ -12,6 +12,11 @@ def collect(queues,manifest,output):
         assert q['historical_final_access'] is False
         assert all(t['status']=='complete' for t in q['tasks'])
         tasks+=q['tasks']
+    if manifest.name=='FINAL_MANIFEST.json' and (D/'FINAL_INCREMENTAL_FETCH.json').exists():
+        deadline=time.monotonic()+1200
+        while json.loads((D/'FINAL_INCREMENTAL_FETCH.json').read_text())['count']<90:
+            assert time.monotonic()<deadline, 'Incremental copy incomplete; do not race partial files'
+            time.sleep(10)
     ssh=json.loads(os.environ['WUJI_WIDTH_SSH_ARGV'])
     paths=[t['output'] for t in tasks if not (R/t['output']/'geometry-receipt.json').exists()]
     record('completed_queue_raw_fetch_started',evidence=str(manifest.relative_to(R)),tasks=len(tasks),missing_local=len(paths),next='Read only completed samebackend outputs; no new policy runs')

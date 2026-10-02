@@ -1,8 +1,8 @@
 # Restore completed science and resume the frozen final
 
-Current authorized endpoint `ssh -p 17314 wangjiarui@10.13.160.5` connected and ran the two paired experiments, but all eight final SSH sessions closed at about2026-10-02T10:10UTC; a10:12:42UTC reconnect timed out before authentication. This endpoint is currently unavailable. Authentication stays in the operator's private environment. Do not probe historical ports or serialize private SSH arguments.
+Endpoint17314 reconnected on2026-10-02T11:08UTC. The user supplied the provider notification: instance killed at10:10UTC after4h0m11s because four-hour GPU mean19.9461% was below26%. On reconnect all8H200 were idle and the temporary experiment directory was absent; the licensed runtime persisted. Authentication stays private.
 
-Two optimization streams are complete: C1/G1 seed2026100215 and C2/G2 seed2026100216, each arm51200→54400, saving52000/52800/54400,12,800total updates. All126dev and54confirmation runs are independently rescored. Final is **opened, frozen and unfinished**:8unknown execution receipts,82pending tasks,0counted final runs. The native Goal is not complete. Never rerun training or choose models based on a final retry.
+Two paired optimization streams and all180dev/confirmation evaluations are complete. No training was restarted. Eight incomplete final jobs retain their original receipts and conservative1.4GPUh charge. The frozen90-task matrix resumes in `queues/frozen-final-resume-v2.json`, with retry1 names only for those8interrupted identities;82never-started tasks retain original names. Exact remote hashes match the original freeze. Final results are not used for model selection.
 
 ## Minimal restore
 
@@ -45,15 +45,21 @@ python research/width-student-distillation-20261002/audit_full_checkpoints.py \
 
 Repeat withpair2 only if verifying restored copies. It reads actual Adam steps, moments, LR, frozen hashes, counters, RNG and geometry/source sampling; no GPU optimization or old recovery reruns.
 
-## Recover the interrupted final without duplicating work
+## Reconciled interruption and frozen final
 
-First recover the authorized endpoint or receive a new explicitly authorized endpoint. Re-inventory live GPUs/runtime/user tasks. Check the8names in STATE.unreconciled_remote_jobs and their surviving remote `runs/width-student-distillation-20261002/jobs/NAME/execution.json` receipts. A transport failure is not evidence the child stopped. Each has a finite600s timeout plus30s termination grace. The current ledger charges1.4GPUh across8unknown jobs pending reconciliation; never erase those charges just because SSH failed.
+PROVIDER_KILL_RECONCILIATION.json and PRE_RECONCILIATION_RECEIPTS.json preserve the interruption evidence. `resume_after_kill.py` is the historical one-shot restoration controller, not an idempotent command to rerun. It restores exact sourceB/model/cohort files, preserves final_opened=true, then runs the versioned90-task queue. Check current STATE and live processes before any action. No further optimization, candidate reselection, threshold changes or batch/shard changes are allowed.
 
-If a job really finished, retrieve its exact output/receipt, verify frozen hashes and only then mark its queue task complete. If it terminated incompletely, preserve old output/identity/log and register a bounded retry in a new output directory with the identical scientific identity, model, cohort, batch size, source assets and protocol. Count exactly one completed result per scientific identity. Do not simply reset all90tasks to pending or overwrite old results. Preserve final_opened=true and final-freeze.json byte-for-byte.
+SourceA02749e10 exactly matches firstpair optimization; sourceBdba402c2 exactly matches secondpair and confirmation/final. The only A/B changes are the static constructor and queue mapping; trainer/task/controller/evaluator match. Frozen source SHA is a1739e7c66f61705b0b1d1edbf78c33924fb455d20471a9d35767afa38cd795e.
 
-If the instance and/tmp are gone, restore prepared files/parents/checkpoints/assets/caches into a new independent source/runs staging layout. SourceA02749e10 exactly matches firstpair optimization; sourceBdba402c2 exactly matches secondpair and confirmation/final, and differs only in staticconstructor and queue mapping. All actual training/task/controller/evaluator files match. Recreate the exact sourceB for final. Any necessary new-endpoint launcher routing change must be documented separately without changing scientific inference files or frozen model/data/thresholds. Do not reuse discarded precheck checkpoints.
+All final raw archives will be partitioned by geometry/protocol, preserving full original simulation batches, for publication in `wuji-width-student-distillation-20261002-final-v2`. Model, training/dev/confirmation and video assets remain in v1. Restore the15 `width-final-GEOMETRY-PROTOCOL-raw-v2.tar.gz` packets, then recompute with FINAL_MANIFEST.json:
 
-Only launch on verified idle H200 devices, atmost8GPUs acrossallmachines. No further training is allowed now final is open. Completed12videos require no new GPUrender. Use surviving complete tasks and claim only still-missing identities from a newly versioned finite queue. Read current STATE and receipts before launching; remaining budget is conservatively13.10091779GPUh pending those8receipts, original cumulativecap64unchanged. Use finite timeouts based on actual512batch throughput, with no batch/shard change after final opening.
+```bash
+python -m scripts.analyze_wuji_width \
+  --manifest research/width-student-distillation-20261002/FINAL_MANIFEST.json \
+  --output NEW_FINAL_ANALYSIS
+```
+
+The collector deduplicates registered identities;35280episode records represent1960initial states shared across6models×3protocols, not35280independent states. No incomplete killed trajectory is included.
 
 A direct scientific evaluation example, after restoring the unchanged freeze and runtime:
 
