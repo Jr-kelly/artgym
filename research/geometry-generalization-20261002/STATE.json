@@ -11,7 +11,7 @@
   "authorized_host": "wangjiarui@10.13.160.5:33024",
   "remote_root": "/tmp/artgym-geometry-20261002",
   "runtime": "/tmp/wuji-student-runtime/bin/python",
-  "phase": "Experiments, public byte recovery, command verification and process shutdown complete; closure Git delivery",
+  "phase": "Bounded geometry round complete: final evidence public and recovered; owned jobs and monitor stopped",
   "models": {
     "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
     "runs/unified-student-20261001/SA-real-51200/step_051200.pth": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9"
@@ -19,16 +19,21 @@
   "goal_sha256": "9dafc220bfe1b1d3bbf1d6f7cfa21259bc8cff9410ff740156c24425365bdfb1",
   "active_jobs": [],
   "final_opened": true,
-  "next": "Commit/push final administrative receipts; verify branch/tag then record closure only",
+  "next": "Preserve this round and allclosed finals. Future priority: separately registered local functionalgrasp adaptation with fresh development/finaldata; no restart or tuning of thisclosed round.",
   "last_event": {
-    "utc": "2026-10-02T00:09:41.066206+00:00",
-    "event": "all_scientific_and_public_recovery_work_closed_ready_for_git_closure",
-    "evidence": [
-      "research/geometry-generalization-20261002/FINAL_REPORT.md",
-      "research/geometry-generalization-20261002/final-release-index.json"
-    ],
-    "phase": "Experiments, public byte recovery, command verification and process shutdown complete; closure Git delivery",
-    "next": "Commit/push final administrative receipts; verify branch/tag then record closure only"
+    "utc": "2026-10-02T00:10:53.432259+00:00",
+    "event": "bounded_geometry_round_closed_after_public_verification",
+    "evidence": "research/geometry-generalization-20261002/branch-delivery-verified.json",
+    "verified_delivery_commit": "302a0c436eb8a481ac5f67b06b4d06c789434161",
+    "scientific_commit": "f558fcd5582963c98587c58210c37962d36819a2",
+    "assets": 40,
+    "state_updates": {
+      "bounded_goal_work_complete": true,
+      "closed_utc": "2026-10-02T00:10:53.432083+00:00",
+      "final_selected_candidate_unchanged": true
+    },
+    "phase": "Bounded geometry round complete: final evidence public and recovered; owned jobs and monitor stopped",
+    "next": "Preserve this round and allclosed finals. Future priority: separately registered local functionalgrasp adaptation with fresh development/finaldata; no restart or tuning of thisclosed round."
   },
   "active_gpu_elapsed_hours": 0,
   "cumulative_gpu_hours_including_active": 40.43593221975697,
@@ -94,5 +99,8 @@
   },
   "public_download_restore_verified": true,
   "gpu_work_closed": true,
-  "public_release_verified": true
+  "public_release_verified": true,
+  "bounded_goal_work_complete": true,
+  "closed_utc": "2026-10-02T00:10:53.432083+00:00",
+  "final_selected_candidate_unchanged": true
 }
