@@ -4,7 +4,7 @@ Use the independent branch `feat/wuji-geometry-generalization-20261002`, based o
 
 ## Restore the exact frozen parents and controlled assets
 
-The release tag is `wuji-geometry-generalization-20261002-v1`. Until `STATE.json` records public verification, it is a draft; do not interpret these eventual public commands as proof that publication is already complete.
+The release tag is `wuji-geometry-generalization-20261002-v1`. The release is public. `public-verification.json` records anonymous model/asset/final-packet downloads, restoration and complete video decoding. `public-command-verification.json` records the actual restored public-source evaluation commands. Scientific source/results are pinned to commit `f558fcd5582963c98587c58210c37962d36819a2`; later branch commits contain delivery/closure evidence.
 
 ```bash
 git clone --branch feat/wuji-geometry-generalization-20261002 \
@@ -87,3 +87,5 @@ CPU original-player parity passed on80 nonconstant steps and partial resets. Act
 Source/assets, static initialization, frozen H200 screening, independent confirmation/final, privileged diagnosis, CPU replay and separately rendered RTX4090 resimulation videos are distinct evidence. No robot was driven. No autonomous grasping, paper cutting or sim2real result is claimed. The final report states the remaining calibration and physical-measurement requirements.
 
 The CSV field `worst_stage_tail_mean_error_m` is an auxiliary recorded-window diagnostic: truncated runs can include partial or inactive tail windows. It is not the strict score or a fair full-stage accuracy estimate. The main endpoint/F-cycle scores and body counts are independently recomputed; mean/max error uses active recorded samples. Frame k is recorded after physics and has time(k+1)/30 seconds.
+
+The final administrative verification packet retains the public command smoke raw traces/logs, optimizer/RNG recovery audit and resource/monitor-stop proof. Its archived asset index is the earlier39-core-asset snapshot; `final-release-index.json` checks the complete index after this additional packet. This is delivery verification, not new capability data or candidate selection.

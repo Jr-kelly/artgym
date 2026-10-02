@@ -8,15 +8,15 @@
   "base_sha": "e6c9f3e0d6167b0df529a5e7d75c88b91ff42613",
   "max_gpu_hours": 64,
   "historical_gpu_hours": 32.4534053852823,
-  "new_gpu_hours": 7.93792703019248,
-  "cumulative_gpu_hours": 40.39133241547478,
-  "remaining_gpu_hours": 23.60866758452522,
+  "new_gpu_hours": 7.982526834474668,
+  "cumulative_gpu_hours": 40.43593221975697,
+  "remaining_gpu_hours": 23.56406778024303,
   "reserved_final_gpu_hours": 6,
   "max_concurrent_gpus": 4,
   "authorized_host": "wangjiarui@10.13.160.5:33024",
   "remote_root": "/tmp/artgym-geometry-20261002",
   "runtime": "/tmp/wuji-student-runtime/bin/python",
-  "phase": "Independent final statistical analysis and public delivery",
+  "phase": "Experiments, public byte recovery, command verification and process shutdown complete; closure Git delivery",
   "models": {
     "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
     "runs/unified-student-20261001/SA-real-51200/step_051200.pth": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9"
@@ -24,27 +24,31 @@
   "goal_sha256": "9dafc220bfe1b1d3bbf1d6f7cfa21259bc8cff9410ff740156c24425365bdfb1",
   "active_jobs": [],
   "final_opened": true,
-  "next": "Restore-check and upload; local originals retained",
+  "next": "Commit/push final administrative receipts; verify branch/tag then record closure only",
   "last_event": {
-    "utc": "2026-10-01T23:54:20.460195+00:00",
-    "event": "archive_completed",
-    "name": "geometry-final-scientific-metadata",
-    "archive": "delivery/geometry-generalization-20261002/geometry-final-scientific-metadata.tar.gz",
-    "sha256": "4863b281eef46eefac57152add8bc81c33970d8518067bd659f03e1f1abff465",
-    "size": 8263104,
-    "files": 171,
-    "next": "Restore-check and upload; local originals retained"
+    "utc": "2026-10-02T00:09:41.066206+00:00",
+    "event": "all_scientific_and_public_recovery_work_closed_ready_for_git_closure",
+    "evidence": [
+      "research/geometry-generalization-20261002/FINAL_REPORT.md",
+      "research/geometry-generalization-20261002/final-release-index.json"
+    ],
+    "phase": "Experiments, public byte recovery, command verification and process shutdown complete; closure Git delivery",
+    "next": "Commit/push final administrative receipts; verify branch/tag then record closure only"
   },
   "active_gpu_elapsed_hours": 0,
-  "cumulative_gpu_hours_including_active": 40.39133241547478,
-  "remaining_including_active": 23.60866758452522,
+  "cumulative_gpu_hours_including_active": 40.43593221975697,
+  "remaining_including_active": 23.56406778024303,
   "delivery": {
     "release_id": 401374769,
     "tag": "wuji-geometry-generalization-20261002-v1",
-    "draft": true,
-    "published": false,
+    "draft": false,
+    "published": true,
     "parent_archive": "delivery/geometry-generalization-20261002/geometry-frozen-parent-models.tar.gz",
-    "parent_restore_verified": true
+    "parent_restore_verified": true,
+    "release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-geometry-generalization-20261002-v1",
+    "scientific_commit": "f558fcd5582963c98587c58210c37962d36819a2",
+    "assets": 40,
+    "public_verified": true
   },
   "confirmation_plan": "research/geometry-generalization-20261002/CONFIRMATION_PLAN.json",
   "screen_complete": true,
@@ -77,6 +81,24 @@
   "final_cohort_closed": true,
   "final_analysis_complete": true,
   "final_packets_delivered": 13,
-  "report_complete": true
+  "report_complete": true,
+  "public_command_restore_verified": true,
+  "monitor": {
+    "pid": 1304630,
+    "argv": [
+      "python3",
+      "-m",
+      "scripts.monitor_wuji_geometry",
+      "--seconds",
+      "28800"
+    ],
+    "cwd": "/data/research/artgym-experiments-20260921/geometry-generalization-20261002",
+    "start_ticks": "92868481",
+    "checked_utc": "2026-10-02T00:04:50.962219+00:00",
+    "status": "stopped"
+  },
+  "public_download_restore_verified": true,
+  "gpu_work_closed": true,
+  "public_release_verified": true
 }
 ```

@@ -1,0 +1,4631 @@
+{
+  "public_git_commit": "f558fcd5582963c98587c58210c37962d36819a2",
+  "code_sha256": "0413cd7b5237d039be75575fe5c820a6dfde50c41a4746f556709d0b0cb25d62",
+  "files": [
+    {
+      "path": "scripts/adopt_wuji_multigrasp_training.py",
+      "sha256": "040fed60316e522e5430ca68a052e1a28fb90c7d8fda6ec23b24aec0b4005ed6"
+    },
+    {
+      "path": "scripts/analyze_g2_gait_contacts.py",
+      "sha256": "6d4fd56452994be647c6fb858550030bb4c0ae268a083ce203a9152250028b58"
+    },
+    {
+      "path": "scripts/analyze_sharpa_matched_checkpoints.py",
+      "sha256": "d845959e7d1c62aa978feea30a03e4a1d6bb0300702b39eec1fdd7eeaa1b964e"
+    },
+    {
+      "path": "scripts/analyze_sharpa_student_checkpoint.py",
+      "sha256": "a76141bb3666a24a4ccdf3db213e847e6c514c21de8fedb84e1147cdf93a7fc5"
+    },
+    {
+      "path": "scripts/analyze_wuji_action_imitation.py",
+      "sha256": "c27bbb0fe05dd0d101681a56d83d3148cdc03b4b0deccb587ecbcf9c94f68e79"
+    },
+    {
+      "path": "scripts/analyze_wuji_action_labels.py",
+      "sha256": "31ae05899da43cc11c1c57494e55731a2506240e48d0ba962431785162eb8366"
+    },
+    {
+      "path": "scripts/analyze_wuji_actor_noise_drift.py",
+      "sha256": "eeac41ed1f8bb104601b708ab18826fd71ff394f3c111cd91b2044384a5e1ec0"
+    },
+    {
+      "path": "scripts/analyze_wuji_command_loss_scales.py",
+      "sha256": "b0f84a7f398724276f066e92908ff384341d5d5cec053672d410ec72952d0195"
+    },
+    {
+      "path": "scripts/analyze_wuji_departure_phase.py",
+      "sha256": "13a94e994cc91b2ff38e864b3ad6dfda5d0aa7d4a3089013ff99ceec3c35ce84"
+    },
+    {
+      "path": "scripts/analyze_wuji_geometry.py",
+      "sha256": "eb569092d737f65fd5ce16288d68486ff678a5a94ad0b304bb6cd58b97271980"
+    },
+    {
+      "path": "scripts/analyze_wuji_geometry_intervention.py",
+      "sha256": "da928a0fdd0e0809f0d55dbbdcee99600900981f1e4053a69c6f127142a9b974"
+    },
+    {
+      "path": "scripts/analyze_wuji_hold.py",
+      "sha256": "c6c03ac176603283c0c6aca052ea663857caf5a4cf7f288dde13f8e5bad01f16"
+    },
+    {
+      "path": "scripts/analyze_wuji_hold_integration.py",
+      "sha256": "036e68013a6155541d8d90a6da9018bcf8e52190adcc2c6adcc7d64d58a47217"
+    },
+    {
+      "path": "scripts/analyze_wuji_hold_thumb_latch.py",
+      "sha256": "f4fb0ba018306304b386aa2c38bdc3cf9d8981ff63060642163d779e4994b0d7"
+    },
+    {
+      "path": "scripts/analyze_wuji_kinematic_slider.py",
+      "sha256": "c6b0874689fb62995700123ff94f9bdd3c003f671d3e5c44ea468f87e919302c"
+    },
+    {
+      "path": "scripts/analyze_wuji_multigrasp_experts.py",
+      "sha256": "1c898d5d7f8f9429fb7e8f26be94e032a6efa371102d619723f68cc04aa0c254"
+    },
+    {
+      "path": "scripts/analyze_wuji_multigrasp_frozen.py",
+      "sha256": "f0b65aa1947e49ee9ebfc6d12219a439e4b6d839aed993a18ea743fbf4711f51"
+    },
+    {
+      "path": "scripts/analyze_wuji_precision_pair.py",
+      "sha256": "db4022340014f9a1946208abb5a0155a7bea59851d16106899f48be77d9e48fb"
+    },
+    {
+      "path": "scripts/analyze_wuji_reset_mechanism.py",
+      "sha256": "ae1ebaa8b4c3477680dec4acf5a115832b4247fd4527a453f10dee9fc2a2e71f"
+    },
+    {
+      "path": "scripts/analyze_wuji_reset_range_pair.py",
+      "sha256": "52efed3e91d4d1760d92857542276382ac1c05059872dd99b01308cf0c1cd9f2"
+    },
+    {
+      "path": "scripts/analyze_wuji_rgb_goal_counterfactual.py",
+      "sha256": "67e68c6c50fff521b2c6dffffa135ff8c76bf2a03e5c8d7daf8e6d33dd8cdc32"
+    },
+    {
+      "path": "scripts/analyze_wuji_single24_acquisition.py",
+      "sha256": "9f9b12d99f11c2efcdb49042550ce60d2906c2d15b4c9c49f36385abe3f87b2f"
+    },
+    {
+      "path": "scripts/analyze_wuji_state_clock_transfer.py",
+      "sha256": "c13d4fe284011fa8aa0f1f793265275cab15d598006d8dbf6f811d13242a2e15"
+    },
+    {
+      "path": "scripts/analyze_wuji_state_component_probes.py",
+      "sha256": "f5535e85dd53028c31a467547c969c419c96effcdda4171f5e2a11f41ed86c9c"
+    },
+    {
+      "path": "scripts/analyze_wuji_state_encoder_evaluations.py",
+      "sha256": "92cb47748415283098959f00abb5b8dea40dbca056f6e5fb9fd42128cc558acb"
+    },
+    {
+      "path": "scripts/analyze_wuji_state_endpoint_bias.py",
+      "sha256": "cd366cc2fe5563082a084a1cebdcec751ca3d5e7283d8304731450fa7e51a559"
+    },
+    {
+      "path": "scripts/analyze_wuji_student.py",
+      "sha256": "a66fcf44258c60f0363d15156c85cb52c544bd158e4e74dd6041c88aca3b9588"
+    },
+    {
+      "path": "scripts/analyze_wuji_student_phase_fit.py",
+      "sha256": "a39741cc5b9ad75833f90bb1bcbcf1a8d4c2f80b8946dbb14b432243eaaa60ab"
+    },
+    {
+      "path": "scripts/analyze_wuji_student_stalled_opening.py",
+      "sha256": "0565aa41b62d891beaebeadb71c973e5e6275e1d96bee0a685be8def6c1a3277"
+    },
+    {
+      "path": "scripts/analyze_wuji_student_state_diagnostic.py",
+      "sha256": "41b6ef8a9d3a81805f09e0d68ec0e1f65e15d6c287ad8af5827e6a3da4fc4e9b"
+    },
+    {
+      "path": "scripts/analyze_wuji_teacher_command_targets.py",
+      "sha256": "0dc7a000a4114df30e75a4e7d58ff0be7ef89b2de9c61c6b049dc35750100c49"
+    },
+    {
+      "path": "scripts/analyze_wuji_teacher_sensor_accuracy.py",
+      "sha256": "efcfb3605b92301b358a0ce626f7ecd604d8fad259485ef50e9479659b6fae17"
+    },
+    {
+      "path": "scripts/analyze_wuji_termination_gap.py",
+      "sha256": "5ebc95d23178d7d28c1472d68dd8bdb11b1c31d1eb09a9980221ecb4009f0fc4"
+    },
+    {
+      "path": "scripts/analyze_wuji_timed_holding.py",
+      "sha256": "4a392e5c88175e6b4f343649dd2bc9533427be50153ec2edbeb874c9b21f4bd6"
+    },
+    {
+      "path": "scripts/archive_wuji_geometry.py",
+      "sha256": "294d9055a86400522efea582c6dc1ce692a7498db1485378a80d2c1ba0042c20"
+    },
+    {
+      "path": "scripts/archive_wuji_geometry_sources.py",
+      "sha256": "e963546acd646026ab5da5e462a340b1da91c0c4b8daed7101df18eb071909bf"
+    },
+    {
+      "path": "scripts/archive_wuji_hold_run.py",
+      "sha256": "b07f5b5fe17cfe32fda93022206ed62bb8fb30e1c953e1f59c6ad0bc062c8b88"
+    },
+    {
+      "path": "scripts/archive_wuji_hold_when_done.py",
+      "sha256": "4d71cbec77ecb81a8e23d050155890d7ce031181727339279df0ed52cec36ff0"
+    },
+    {
+      "path": "scripts/archive_wuji_recovery.py",
+      "sha256": "043529d261b50f68fa90786a8a213400b76607e499e316a80fdfd72bc0adf7b8"
+    },
+    {
+      "path": "scripts/archive_wuji_recovery_final_model.py",
+      "sha256": "b13c98a0b256bc9b0cf9bab3eae947424547cb1cb1c9c275a339b9e12e53880e"
+    },
+    {
+      "path": "scripts/archive_wuji_student.py",
+      "sha256": "289311b0ce8c9cda99b4a7ec5a278f2e2748d8cbd448b4fb6b94b1eaa4ef678f"
+    },
+    {
+      "path": "scripts/archive_wuji_training_extras.py",
+      "sha256": "fe11f9553241426c710bae38b25d9ef7ea0465e40f3c3f7b2d1697238ddbccab"
+    },
+    {
+      "path": "scripts/archive_wuji_unified.py",
+      "sha256": "ba08d78f7a7d31b5ff8a42cc0bcc81e6e36ca9ddee51c29398fe34fbd7e4d625"
+    },
+    {
+      "path": "scripts/assess_wuji_recovery_aggregation.py",
+      "sha256": "d9c70068aa8faa704b07cedfb3d3fd0a3f81ba2f0da946c364fb362739b2a1de"
+    },
+    {
+      "path": "scripts/audit_distillation_runtime.py",
+      "sha256": "6c082634b72cd138622424270951455f38c6b9918c2e7e2dd92d9a120d45deb1"
+    },
+    {
+      "path": "scripts/audit_g2_continuous_local.py",
+      "sha256": "1a69be7c8af1074b952bd718d30ce5d805df9207dd5cf5d7966e87bbc79bd62d"
+    },
+    {
+      "path": "scripts/audit_g2_digit_own_links.py",
+      "sha256": "26e1cf3f851bd71bdaa568aa40cf2d4836233c13c84514eef43cc0209f5d3969"
+    },
+    {
+      "path": "scripts/audit_g2_finger_surface_target.py",
+      "sha256": "9c119b887dc61ce89ab33ad0a1ac7f0a1a244db9ce57753f98106fc3efe18615"
+    },
+    {
+      "path": "scripts/audit_g2_geometry.py",
+      "sha256": "99e6a58198eeaa3c09b59d86457ce8f4fd0a526f4a9cc29e0965da644a97f3d4"
+    },
+    {
+      "path": "scripts/audit_g2_gpu_budget.py",
+      "sha256": "b21edd646be1b7b82778422699bc20f819dc9aaaa0a4f5cc523bda76310e2ceb"
+    },
+    {
+      "path": "scripts/audit_g2_hand_gravity.py",
+      "sha256": "d4e05b6f1129853b753b6c28f99a7ae0f7e46ac12ce291778a26d4ad0549cab1"
+    },
+    {
+      "path": "scripts/audit_g2_handoff_replay.py",
+      "sha256": "69d217b934181206043ced4a5d95f7793704ecf706ceae35053ea4247ee85e55"
+    },
+    {
+      "path": "scripts/audit_g2_input_ablation.py",
+      "sha256": "12fea43db2666d4b99b7204ebf379faab0c1f8e9b0cd6ec4d8a0b6d16d4622ca"
+    },
+    {
+      "path": "scripts/audit_g2_joint_adapter.py",
+      "sha256": "1ff747cba27466f8223b4e88f4e0a74eae45148ec566a92a2d96ebd6be453a1c"
+    },
+    {
+      "path": "scripts/audit_g2_local_runtime.py",
+      "sha256": "18b79abafb4be3a2a572c2985262c6e92f5d8a97e97284de97a0c59be361610f"
+    },
+    {
+      "path": "scripts/audit_g2_measured_knife.py",
+      "sha256": "c898503e06ce99ed892d84e1acbf8091a763654e2980a908fceac49814be905d"
+    },
+    {
+      "path": "scripts/audit_g2_measured_thumb_sweep.py",
+      "sha256": "3ba10218a310834c4e8188aa83b05b1943c6498be0915308f42aad95b701e3cf"
+    },
+    {
+      "path": "scripts/audit_g2_pickup_contact_sequence.py",
+      "sha256": "98e17e030f26664bd803c1e25ecbc3ba1f03a30cc77271f0a8ca74b19b4a3ff0"
+    },
+    {
+      "path": "scripts/audit_g2_placement_validation.py",
+      "sha256": "bc307f66487e386f008e423b678b3aa40f379b9c7d0363360f79a0f60e2bfa51"
+    },
+    {
+      "path": "scripts/audit_g2_policy_interface.py",
+      "sha256": "1b9d7cd7a85537326aae3e42e2b31b65fa74ca8026d7043bbfef58e82483ea82"
+    },
+    {
+      "path": "scripts/audit_g2_prepared_continuous.py",
+      "sha256": "428f9b25938b744b44c68d0fb43f8a421610e663b61c51d6d392779ca0d21f17"
+    },
+    {
+      "path": "scripts/audit_g2_reduced_runtime.py",
+      "sha256": "79f10535deab9fca456f97f0c5535bd4d163e7648161ce22894acd683b64a964"
+    },
+    {
+      "path": "scripts/audit_g2_self_clearance.py",
+      "sha256": "62ee7aa0549a4cb233eef91412285a47c0b06573d5a39d8cd90a5af3165960b0"
+    },
+    {
+      "path": "scripts/audit_g2_side_pickup_candidate.py",
+      "sha256": "8f00ffc644c16a7226c49d5f72069cd515a25e0c67aca8149448d5533312ea62"
+    },
+    {
+      "path": "scripts/audit_g2_single_digit_path.py",
+      "sha256": "45b59df1543e1b8a840a6c4feffdc15ce9a5895b1a3a7251d23b77d1982353e6"
+    },
+    {
+      "path": "scripts/audit_g2_static_runtime.py",
+      "sha256": "2b8ed9b7fd08e47c3578710d0a6b0213e973c8688948138a170d0f97165d3f67"
+    },
+    {
+      "path": "scripts/audit_g2_student_interface.py",
+      "sha256": "76f50cadf0efe676d6cfef7668ffdc0999c46a810f353aff69c1d918f010d3ca"
+    },
+    {
+      "path": "scripts/audit_g2_supported_statics.py",
+      "sha256": "aabc1397841c65e9836f751b9e8c1f904ba4af6aef3016b395b959d4e4a6bca7"
+    },
+    {
+      "path": "scripts/audit_g2_trajectories.py",
+      "sha256": "df4cba1c32798053d809ccee0a0c429f4be831a38a8fc849d8d1b624c12cb4e2"
+    },
+    {
+      "path": "scripts/audit_g2_v2_grip_replay.py",
+      "sha256": "19e32946b7dba239f980f9f264b83640350f65a66187da50f98634c08f5bfa8e"
+    },
+    {
+      "path": "scripts/audit_g2_v2_reduced_grasp.py",
+      "sha256": "4b066bf77274cde18e10a504bbde1d0786a9b9521939509d5ed0042fceb25bf6"
+    },
+    {
+      "path": "scripts/audit_g2_v2_round.py",
+      "sha256": "43ab3061197282af6983bf361e08e7827efd2b647a0f2711728d2a115c09b531"
+    },
+    {
+      "path": "scripts/audit_g2_wrist_plan.py",
+      "sha256": "2dbf850cd9e8fec6f0b260899ea1561faadd23f1fff1549f861b6301347bb06e"
+    },
+    {
+      "path": "scripts/audit_wuji_absolute_target_fit.py",
+      "sha256": "c1f198dcc36f84310d41dd1e3786cc884d1695258d9024309161571c2a1b1c8a"
+    },
+    {
+      "path": "scripts/audit_wuji_actor_imitation.py",
+      "sha256": "c111f1be6031184a590ac5bf6d9d806eddf2f9b60fc90211db03a655604b8a60"
+    },
+    {
+      "path": "scripts/audit_wuji_arrival_commands.py",
+      "sha256": "174727b0a9b49d64ae5b8d2b3a2cc60b8bf03093e06eb310d5de275683fd6466"
+    },
+    {
+      "path": "scripts/audit_wuji_checkpoint.py",
+      "sha256": "8e66710aa778d0f45dbe84d6119c723d9ebacd49b2aabd5c2a0dff7190a136c9"
+    },
+    {
+      "path": "scripts/audit_wuji_command_slider_data.py",
+      "sha256": "1915bb245d0850e544b8fa6eab3341fb872540dc1af9206f398f3a885cddffe8"
+    },
+    {
+      "path": "scripts/audit_wuji_command_slider_fit.py",
+      "sha256": "8a28ee3cc75cfd14e42261797869e217c845c1f030bdf052ed0e4fbfb22196f5"
+    },
+    {
+      "path": "scripts/audit_wuji_contact_pairs.py",
+      "sha256": "11216a6fdc7f6a21fc6228c4a5b87538daccfd55532185d01a8d8a3ed25f4ad7"
+    },
+    {
+      "path": "scripts/audit_wuji_controller_actor.py",
+      "sha256": "b0ec4093457f9d6cd1c3b3ecc36b1d1ada9181222970e1ddedb0b05d3167a0c5"
+    },
+    {
+      "path": "scripts/audit_wuji_controller_history.py",
+      "sha256": "9ac7f371ef296bf441f7e4b49f554aff7ced0d2260d00b50cb6fe8e865c5b6f4"
+    },
+    {
+      "path": "scripts/audit_wuji_controller_transplant.py",
+      "sha256": "7b30289471a75b63320e0a4cf1583eef985e4e52348fe4d7a8863e88d14b80b8"
+    },
+    {
+      "path": "scripts/audit_wuji_custom_command_tcn.py",
+      "sha256": "57aa90f7c047a02390340cb583b4da1917979543428f9d3b2866ee1cf5375130"
+    },
+    {
+      "path": "scripts/audit_wuji_damping_normalization.py",
+      "sha256": "d7b3fa67d3f49b01e589dabbffe7ab469a4b7bcf0da2aaba26ab9039e2e46789"
+    },
+    {
+      "path": "scripts/audit_wuji_exploration_block.py",
+      "sha256": "77e3ceebcceaecc5d51ac21ec5b56aa8b95239538990d4d8fb2be896130f1f09"
+    },
+    {
+      "path": "scripts/audit_wuji_exploration_blocks.py",
+      "sha256": "d15a5087d222d51c95d5f4c42b78f38c334279f8d48cd079ace56747680014dd"
+    },
+    {
+      "path": "scripts/audit_wuji_extended_timed_commands.py",
+      "sha256": "dfbb225557e96d69a4f32a59a8da22c326357c8a7ea302693e25c2a675b7c55f"
+    },
+    {
+      "path": "scripts/audit_wuji_frame_transfer.py",
+      "sha256": "b661ba14aa8604eba8ab3f6f562a0a35cbed2555c07dbb7f57b2c63bdcd80e39"
+    },
+    {
+      "path": "scripts/audit_wuji_frozen_training_rollout.py",
+      "sha256": "9ec213f00f57a07cdb32a06bfbbaa16dce7295e37c829bdadf9f8e9e095d9a63"
+    },
+    {
+      "path": "scripts/audit_wuji_full_resume.py",
+      "sha256": "19862ec4fdd316da354849e41381d64ff627fa6ca4a0b9dcd8817c66c7e0eaea"
+    },
+    {
+      "path": "scripts/audit_wuji_functional27_continuity.py",
+      "sha256": "519de0cc8f8d965a0ed57f62bc87f51d0fd218ad960552fc8a1b92b2c704a8a0"
+    },
+    {
+      "path": "scripts/audit_wuji_geometry_resources.py",
+      "sha256": "cad6b542f6bb4876beb92fb21f3c3f91895b3a63e09710ea8a0c99415382dc43"
+    },
+    {
+      "path": "scripts/audit_wuji_geometry_runtime.py",
+      "sha256": "8865b5c3e8df4ae406415275cd7af74b685b7315cee302c07e76b2c74e1e6c88"
+    },
+    {
+      "path": "scripts/audit_wuji_geometry_sensitivity.py",
+      "sha256": "d691a46914b02621baaae837790bf3def75a0c8a85c5f40b06e81fa1adfac33d"
+    },
+    {
+      "path": "scripts/audit_wuji_grasp_separation.py",
+      "sha256": "ad5471b8a414283218dac3e28407eb5ee9eca65f6b5c198a7cf0cc908af0cb55"
+    },
+    {
+      "path": "scripts/audit_wuji_hemisphere_transfer.py",
+      "sha256": "a4f3d3e219bfc042efea8c3890f5ec337b1a010730be7755707ff950b118af17"
+    },
+    {
+      "path": "scripts/audit_wuji_hold_configs.py",
+      "sha256": "94f690d5359a97f9d0cc393e834e165ec853397c74b357858e1590bc5b0951fd"
+    },
+    {
+      "path": "scripts/audit_wuji_hold_followup_configs.py",
+      "sha256": "d75243b17fa418d578c585636ded69d88c6e6816bd0ccab9c81476e13d73603b"
+    },
+    {
+      "path": "scripts/audit_wuji_hold_thumb_latch.py",
+      "sha256": "55ac8dfe30f20b76fa58cf5976c67dac07d45aa0386df53e670dec0936d61c78"
+    },
+    {
+      "path": "scripts/audit_wuji_joint_imitation.py",
+      "sha256": "8f2cb0b431dce4c32c95c487d1cc1a80837ffce651225572fbcf320b2ae28a1d"
+    },
+    {
+      "path": "scripts/audit_wuji_known_controller.py",
+      "sha256": "1528463131a4ba5ac0100fd081ee782b9b1ec8d4de4f8d329810899944a03958"
+    },
+    {
+      "path": "scripts/audit_wuji_memory_data.py",
+      "sha256": "86eb05cf11462a92559ce22a4612c9c42334737b873b5c1bfc86cf0c8ee40f03"
+    },
+    {
+      "path": "scripts/audit_wuji_multigrasp.py",
+      "sha256": "de32b022f5bebdbfbe6bef5a753d3a01a13572e031fdf5243b3efc8a7397683b"
+    },
+    {
+      "path": "scripts/audit_wuji_multigrasp_arrival.py",
+      "sha256": "79d4993431b02cca2794a0ef3ed84fa82a93166d12b18e03b35f8d0f3b23ebcc"
+    },
+    {
+      "path": "scripts/audit_wuji_multigrasp_checkpoints.py",
+      "sha256": "e655cc83151d9f750fa2228d78961757ad1fea20fb7e9d3be307b418934af240"
+    },
+    {
+      "path": "scripts/audit_wuji_multigrasp_configs.py",
+      "sha256": "a12e7ca70fa0751667ded7fdecc9dc0697201a367b21fd576f894e028608c3ff"
+    },
+    {
+      "path": "scripts/audit_wuji_object_inertia.py",
+      "sha256": "aad1fbccca980e4d4c25f2742434c5bb939cb334303a9657e9ff9d6085dcb425"
+    },
+    {
+      "path": "scripts/audit_wuji_precision_contacts.py",
+      "sha256": "d6d61915d33474fd0cc86d2c8f946b561eaf136c7a6b06c78121fca4b9c6f464"
+    },
+    {
+      "path": "scripts/audit_wuji_reach_continuity.py",
+      "sha256": "a0083e362271a4fedb4c2dc70134648062134231cd01254695f506ccd68657db"
+    },
+    {
+      "path": "scripts/audit_wuji_recovery_aggregation_data.py",
+      "sha256": "da81df7f01754fa33bba6510d3a8f2636157242f508495561e4e5a527b8e0d96"
+    },
+    {
+      "path": "scripts/audit_wuji_recovery_aggregation_pair.py",
+      "sha256": "a86fe6336b764fa85a4202929e15a4fa10233e927f655cb07ac383dfb01e7fea"
+    },
+    {
+      "path": "scripts/audit_wuji_recovery_bc.py",
+      "sha256": "7d323a1dce3008b8775d3451ef11f95cad51eeb00c5abc4ed3479f81fb034f40"
+    },
+    {
+      "path": "scripts/audit_wuji_recovery_final.py",
+      "sha256": "d7d96582be9879a5100b09856fb53c4ab7b0a7b97abd036c4ee735017599cd4b"
+    },
+    {
+      "path": "scripts/audit_wuji_recovery_reset_pool.py",
+      "sha256": "ab7dc8799f57326807756efbdbd5481f76664ee934e386b6f9fa998881172c68"
+    },
+    {
+      "path": "scripts/audit_wuji_recovery_rl.py",
+      "sha256": "5b39ad55ed5699ef262fca1a0f3b79ed3c2b62bda4051a01c6149eb667b4af67"
+    },
+    {
+      "path": "scripts/audit_wuji_recovery_seed_fork.py",
+      "sha256": "03106607d15009e16ae283a3d1a47ee1ce4de90f8536273d5f04b5e97db40a4d"
+    },
+    {
+      "path": "scripts/audit_wuji_reset_mechanism.py",
+      "sha256": "b11941828f0c8ad7b2307c1adb0ef6f0146a711f9f804ccd6dacfa6a0d11cc54"
+    },
+    {
+      "path": "scripts/audit_wuji_reset_range_cp_results.py",
+      "sha256": "3d0df35fae16300ad5669cc3d2ec329401a1a0792e9c775cd2e23e27a320a6bd"
+    },
+    {
+      "path": "scripts/audit_wuji_reset_range_training.py",
+      "sha256": "2ddc34d283f51f922f60a3983bd520df930ce8211766348fe6205ff6e2d762b4"
+    },
+    {
+      "path": "scripts/audit_wuji_rgb_fit.py",
+      "sha256": "33107c9d2f28cf4af5b94a97ff346aad32c188d253ae909429e16e640136c3a3"
+    },
+    {
+      "path": "scripts/audit_wuji_rgb_mixed_fit.py",
+      "sha256": "2ebab4010d35166b3e4adab853dda310d3cae2cadbf4d1b56ab723f0b9ed1689"
+    },
+    {
+      "path": "scripts/audit_wuji_rgb_policy_results.py",
+      "sha256": "33a030feb4244ec0309c7f08639ee57f30acebd1b99ee1de9ceca7a8a529c495"
+    },
+    {
+      "path": "scripts/audit_wuji_rgb_state_data.py",
+      "sha256": "1c7fb74bc318cfc5ace71ff75dde26b4d3d4e998690709385e0a4e279d0d497f"
+    },
+    {
+      "path": "scripts/audit_wuji_settled_contacts.py",
+      "sha256": "63b64b9eac3b2a2939b2233b087e5114d02d8fc6f35573f5790726724d6a8891"
+    },
+    {
+      "path": "scripts/audit_wuji_slider_fusion.py",
+      "sha256": "c2c8603df4e20f3946159de704ddccabeea140e838a6f89d815af7fa667c0e57"
+    },
+    {
+      "path": "scripts/audit_wuji_state_aggregation_data.py",
+      "sha256": "0faed3a8c33578495a279c8f93c53aae973aebfa7a89310eab6f817bf9ac0a39"
+    },
+    {
+      "path": "scripts/audit_wuji_state_memory_runtime.py",
+      "sha256": "e90886e478062f83995403c5bc248542c954c34c9d41964c089c36207a59fad6"
+    },
+    {
+      "path": "scripts/audit_wuji_static_grasp.py",
+      "sha256": "45aa700c257a45dbb8f720c73b6d2732490d468be95d18f8732d8a0ce52d6ba5"
+    },
+    {
+      "path": "scripts/audit_wuji_static_roundoff.py",
+      "sha256": "ca158d60b200ec707beb798d09171b0f37e78627800acbd423d6c33793b21d03"
+    },
+    {
+      "path": "scripts/audit_wuji_stochastic_policy.py",
+      "sha256": "9dbe0750e0e8f8fad883e2c7e6e96642b8de2f2c43d83e6fd9958fa469108d1d"
+    },
+    {
+      "path": "scripts/audit_wuji_student_actor.py",
+      "sha256": "f935d27d2d4f37ca0c8da71aa9294a8f0ddebdaee26b61f1db5a763b10a69b19"
+    },
+    {
+      "path": "scripts/audit_wuji_student_calibration.py",
+      "sha256": "22732760f86ace334c438ba231dfae579c473f39f96b93c26c70b120df0f8270"
+    },
+    {
+      "path": "scripts/audit_wuji_student_final.py",
+      "sha256": "d9c40ace61966f6b0dc4a692209882526370960113906ed14c1647e7d5acdf05"
+    },
+    {
+      "path": "scripts/audit_wuji_student_inference.py",
+      "sha256": "85f19d37aca7bd4f0d65ecfe67d163f4e9c97a504a5df5b729e7f0e9b1e7484e"
+    },
+    {
+      "path": "scripts/audit_wuji_student_sensitivity.py",
+      "sha256": "020cc3573276dde4792048244eed0a3bcc344657876ef0f9ec0be17c88242223"
+    },
+    {
+      "path": "scripts/audit_wuji_thickness_adaptation.py",
+      "sha256": "3d796c0a23f8b75b11161cc0f40ce1efa552fc8da77c112e55e2400978933e93"
+    },
+    {
+      "path": "scripts/audit_wuji_timed_commands.py",
+      "sha256": "e74b946f4998e650571b652fcc94aa3eb97e399217834fd56659944892ec00c0"
+    },
+    {
+      "path": "scripts/audit_wuji_unified_dataset.py",
+      "sha256": "50f47121c01486ab2d3d3041636cb4d72eee14607967689e83707bdd48941c9f"
+    },
+    {
+      "path": "scripts/audit_wuji_unified_fit.py",
+      "sha256": "1f3ef21e0c62ee00cd01c54122661ce4fcb3ac6829824f7daf0ccd6780a7fa6a"
+    },
+    {
+      "path": "scripts/audit_wuji_unified_sequence.py",
+      "sha256": "b7a8da67f3ef860bab077e32c2c43e410d84097396c8625afa23101e5ae189ba"
+    },
+    {
+      "path": "scripts/await_wuji_command_results.py",
+      "sha256": "6962c3cda8ebc9741b72bba9dbfb66cd945fcdba332d559786c13960c274c7d5"
+    },
+    {
+      "path": "scripts/backup_wuji_hold.py",
+      "sha256": "6741d517483dd2568aec2910c4118a48978fc9b3411b3db866cd1292e1e79d3b"
+    },
+    {
+      "path": "scripts/backup_wuji_multigrasp_checkpoints.py",
+      "sha256": "0757bf0917156d4c70ab0d4501efd95d983a78f94d61f0f46a68d41ac94216a5"
+    },
+    {
+      "path": "scripts/batch_wuji_geometry.py",
+      "sha256": "a17d79d12ebe3c50aabfb0b1f19fb3803cc61c94331b4a8b0a8dbdca620c47b1"
+    },
+    {
+      "path": "scripts/batched_object_properties.py",
+      "sha256": "0e43fb8a8d3cb455374d6c7c87ce70094f8c9e2aab0cfff6137c80fd18f2da34"
+    },
+    {
+      "path": "scripts/benchmark_object_property_reader.py",
+      "sha256": "533f347e8bb6ead5989ae2770a12b7ba4b17223ec8beef62ea0d6c2e797a8c34"
+    },
+    {
+      "path": "scripts/benchmark_wuji_command_inference.py",
+      "sha256": "5e565f1e8264c58dfef3d25cc03486af137e7070f81e65504676969625e71e31"
+    },
+    {
+      "path": "scripts/benchmark_wuji_sensor_cpu.py",
+      "sha256": "5599d034410ef39f426ada65479306af5e2db8d76a233676b515c7eea9a89bee"
+    },
+    {
+      "path": "scripts/build_g2_measured_knife.py",
+      "sha256": "005c869605de5dcfd6f4611c8fd4c39629c4014916bc6d3004aaff33f5b8c6e2"
+    },
+    {
+      "path": "scripts/build_wuji_knife_demo.py",
+      "sha256": "be1ba81731de0afdcc366ce0aa23cbf8b2b606880fbb58fe243e00a1e3782d6b"
+    },
+    {
+      "path": "scripts/check_captured_ik.py",
+      "sha256": "51243a8e5273b1d13c9f7c15f4ffb1672a91727cff1d32063be8e7db23b8afd3"
+    },
+    {
+      "path": "scripts/check_hand.py",
+      "sha256": "e2d72c4c4c4deeeaf9af300f8192e50abf7654b2d3e7f6628a12bff0e9eb8e3b"
+    },
+    {
+      "path": "scripts/check_lygra_setup.py",
+      "sha256": "50a4f283fbb92e43b461f8de216bc4504f72cb493bbe332b01b8eee054e630e2"
+    },
+    {
+      "path": "scripts/check_official_wuji_transfer.py",
+      "sha256": "f2dd6463374924c137bc5a826bee951ea01a9ba05e8b8a6233756d6f6c979dd1"
+    },
+    {
+      "path": "scripts/check_projection_chunking.py",
+      "sha256": "0e1e9cd5dc6a52c3745160755029a98f5159c6630709a0a61f89e23a0387887b"
+    },
+    {
+      "path": "scripts/check_wuji_action_distillation.py",
+      "sha256": "84fd167b3ed3a1def66d0c3875ec6b8cc6f374c360a12081e0cf8e0c4af75860"
+    },
+    {
+      "path": "scripts/check_wuji_bridge3_controller_inputs.py",
+      "sha256": "a64f4b69e100e87c9d7a1ff5618f7675d9e161f145236703c3e0d70b9b96e4d7"
+    },
+    {
+      "path": "scripts/check_wuji_bridge3_episode_duration.py",
+      "sha256": "355bc18e81b53cc967a9c9b0ecbba406a27dbc0881f85f90beb4b32a1fbb30e3"
+    },
+    {
+      "path": "scripts/check_wuji_bridge3_hemisphere_runtime.py",
+      "sha256": "2d4767c05c5324bc2ddf0243b7dfaf9612d3f1012a53420663beafc8b401bd94"
+    },
+    {
+      "path": "scripts/check_wuji_bridge_episode_duration.py",
+      "sha256": "6836f376f2917e835cfdd93eeded2534c6eaf45631433f8eb836e0d12524edfe"
+    },
+    {
+      "path": "scripts/check_wuji_bridge_hemisphere_runtime.py",
+      "sha256": "ec99eb7620d8679263006c47f49bf1d0cdf21839c759f5966fc1e540bbd68fd8"
+    },
+    {
+      "path": "scripts/check_wuji_broad_reward_pair.py",
+      "sha256": "9a2a3266a8467135e78648abdaf6051efd6b248367ceb7112e7da909e01ab2dd"
+    },
+    {
+      "path": "scripts/check_wuji_broad_reward_state_v2.py",
+      "sha256": "62d67af950f3ca7702dfb39c5c3c99ddb1e3f241b23d03373a096f61adba08f9"
+    },
+    {
+      "path": "scripts/check_wuji_controller_actor_runtime.py",
+      "sha256": "66d5562a99e7cbdcd2959004f5e2483cf31d9d0864e0aecda68bb7861be4e66a"
+    },
+    {
+      "path": "scripts/check_wuji_damping_config.py",
+      "sha256": "46dc26edd525043028ff2cbc1eb94ad3ce65bfc7b8f8caa13d2b662fba5c8260"
+    },
+    {
+      "path": "scripts/check_wuji_demo_alignment.py",
+      "sha256": "e4109377223841f860018d1a2e8825a29ce5996fb28f1b99c09b7af283decb31"
+    },
+    {
+      "path": "scripts/check_wuji_episode_duration.py",
+      "sha256": "8a05fa266962e4f77e63f44d9556bb9ca9881e6b32e2b15637f59f02a51e50eb"
+    },
+    {
+      "path": "scripts/check_wuji_functional20_runtime.py",
+      "sha256": "97f706ee8a5c2259124c3ebf39a6c64261d95320006f8896c662897eddf11193"
+    },
+    {
+      "path": "scripts/check_wuji_functional_hemisphere_runtime.py",
+      "sha256": "34b1218ebbe91e0f04203ae6180a2988a561d8b1ddd740e72852b1d1115f3472"
+    },
+    {
+      "path": "scripts/check_wuji_latent_replay.py",
+      "sha256": "2ccb675830140f36340c04e0663e17c05be15c8d16c1779defeeab03356dc811"
+    },
+    {
+      "path": "scripts/check_wuji_multigrasp_runtime.py",
+      "sha256": "c58aa8b0148c4745992277152c76893cc28d7050a0e8965c746e386ae8dedd76"
+    },
+    {
+      "path": "scripts/check_wuji_near_reward.py",
+      "sha256": "e69135df8285c5a7a6fbe79ce211e9df2a6082163bebe464a17f2ae89a999549"
+    },
+    {
+      "path": "scripts/check_wuji_recovery_expert_replay.py",
+      "sha256": "c31be05fa944b4783d6e06d3b13215355d5f24c69c1d03956d947720c6e1d7e6"
+    },
+    {
+      "path": "scripts/check_wuji_reset_training_range.py",
+      "sha256": "6ab9a515be255ef76922d0ea1b42cbb61ec911b7331d971cd6a52fa15466b0f8"
+    },
+    {
+      "path": "scripts/check_wuji_sapg_kl_metrics.py",
+      "sha256": "0db874b93aa221ecc094b1799fc2c002162a8ac3e19956efeaff39483ae1c03d"
+    },
+    {
+      "path": "scripts/check_wuji_sigmaquarter_runtime.py",
+      "sha256": "dae58a599aa3a8feecc715b0e2aaf9eda1934206bdc5f486c56877ffd63aa753"
+    },
+    {
+      "path": "scripts/check_wuji_single24_arrival_runtime.py",
+      "sha256": "c1ca2ae905f247f08165cf4183a49a9ce7764d550a9910e4f51f23641418812a"
+    },
+    {
+      "path": "scripts/check_wuji_single24_runtime.py",
+      "sha256": "ed0ca4493a58c1e41d35797f6699dfd0eacd16a4aa40ba20ce83011dc3ac0af0"
+    },
+    {
+      "path": "scripts/check_wuji_student_actor_runtime.py",
+      "sha256": "fba3a8660796166c519cbdcda512e9db7c4665cd3cacc8e5eee3c5f698299cd1"
+    },
+    {
+      "path": "scripts/check_wuji_student_latent_curriculum.py",
+      "sha256": "454f2d97eaa63221779ad4e5c72ef30e64b4d9a1af44029ae494c943e5958a52"
+    },
+    {
+      "path": "scripts/check_wuji_student_rollout_dropout.py",
+      "sha256": "871fdd4b21cf61542b7e79a4d79594b715f15d66dc638f0401e2ca581338a7e4"
+    },
+    {
+      "path": "scripts/check_wuji_termination_training.py",
+      "sha256": "103591e3934a6885d803bb062871b23de5f12025ef7a075acb779aef3e16b86e"
+    },
+    {
+      "path": "scripts/check_wuji_thickness_runtime.py",
+      "sha256": "7bc00b2a2f057a2f4974600659947e07f5990ba3d7e0c48d9086c6a75469c337"
+    },
+    {
+      "path": "scripts/check_wuji_training_clock.py",
+      "sha256": "4adaa544a0d21216c3b888e66c8c3c82aa5c65dd30913989037da212ba734619"
+    },
+    {
+      "path": "scripts/check_wuji_transfer_data.py",
+      "sha256": "b7041f5cba8addf5454110ff57e6d307329e870752e35c54bfd8195d2363c4f1"
+    },
+    {
+      "path": "scripts/check_wuji_variable_clock.py",
+      "sha256": "30187c9c63ed3a4b2ab8a9fbd9c7606863d98838d47c7ab54eeff4499786921f"
+    },
+    {
+      "path": "scripts/collect_g2_baseline_results.py",
+      "sha256": "3d9c6e17cd74b14eb6d953084dbe4c52d31d6b7650f3649f0d49990811682122"
+    },
+    {
+      "path": "scripts/collect_wuji_core_evaluation.py",
+      "sha256": "f85eb304da60eb4816ff032b8d24c34610e07b904b31e7ccd07fa6aa58642774"
+    },
+    {
+      "path": "scripts/collect_wuji_goal_progress.py",
+      "sha256": "aac7c768355450c3a62312b71cbe46b71a149d18e56b8bba702746ebeed69cdd"
+    },
+    {
+      "path": "scripts/collect_wuji_hold_evaluation.py",
+      "sha256": "381eaa0efeae948f69586342a00a58cc07e0838ced51d9cec2b0ad918c6a055e"
+    },
+    {
+      "path": "scripts/collect_wuji_hold_integration.py",
+      "sha256": "8d5a388d781190d5e79d497ea0d282be36018b51b350897d0b129d8dd0c58c75"
+    },
+    {
+      "path": "scripts/collect_wuji_multigrasp_experts.py",
+      "sha256": "8facce6e9fca34152239f0c685962a777f77b2492b57b0519f207d4b5e789983"
+    },
+    {
+      "path": "scripts/collect_wuji_multigrasp_fresh2.py",
+      "sha256": "c00f90a2aeea62ac92d65f78174ec0abd23d4e095da42a14c225502ec69831b6"
+    },
+    {
+      "path": "scripts/collect_wuji_recovery_aggregation.py",
+      "sha256": "0a13e70b31136c585e953a9a4d036af0c21c77215c5502892d83fd8a4ebd6ab2"
+    },
+    {
+      "path": "scripts/collect_wuji_rgb_state_data.py",
+      "sha256": "19e8e4357d88208db0d3fedeb5cffed47ebbcd8ba30ff1fa74477e1ce888ea9d"
+    },
+    {
+      "path": "scripts/collect_wuji_state_fit_diagnostic.py",
+      "sha256": "6705e4158914acbbe5c036de19b6f8a3f1254a9a1e51992336443aa8400a262e"
+    },
+    {
+      "path": "scripts/collect_wuji_state_fit_multiclock.py",
+      "sha256": "6bfdcbce63e252173a8c19e61d103b3101eaeaba6941e6db168457fddfd0c98c"
+    },
+    {
+      "path": "scripts/collect_wuji_student_evidence.py",
+      "sha256": "d9f6ae7b4f8caf4354d1e0e5396c53a6ea03ed466531506ff455001064069d81"
+    },
+    {
+      "path": "scripts/collect_wuji_student_pins.py",
+      "sha256": "87ec10d5884651743f507d5b4918fe42d52fd51c0547b48ac2d1af0fda6e7884"
+    },
+    {
+      "path": "scripts/collect_wuji_unified.py",
+      "sha256": "721fbe3e65dc63aeab01dfb48a4049911b172a41d326e38bd14e31ffee7fa15a"
+    },
+    {
+      "path": "scripts/collect_wuji_unified_training.py",
+      "sha256": "5d057bd8f769a5285618094f43ed7fb04840099975405aa0903e58e6ff1bfb55"
+    },
+    {
+      "path": "scripts/compare_g2_local_tail.py",
+      "sha256": "02c761cc9570915d8bcc9052136db1c3309fc2363a42ca4087f7bfebcb3274eb"
+    },
+    {
+      "path": "scripts/compare_g2_preparation_support.py",
+      "sha256": "535907df7bde57c14beea2d4ca135f8f4e0921800f3eca54e340bcd570d47ad0"
+    },
+    {
+      "path": "scripts/compare_wuji_hand_inertial_sources.py",
+      "sha256": "b782301025df3250906135f1da82d7ead5c81f9b708db487ffb22022481550f3"
+    },
+    {
+      "path": "scripts/compare_wuji_student_trials.py",
+      "sha256": "93747f568b6e80bf2322d529db9dbd57f6215cba8c94916fedbc2a27f8526e91"
+    },
+    {
+      "path": "scripts/complete_wuji_recovery_final_analysis.py",
+      "sha256": "6c5846aece7c92823a3ef1b540be3bd1d68f8830ed8bc507b9111c9b810a60d9"
+    },
+    {
+      "path": "scripts/complete_wuji_spring_preload_offline.py",
+      "sha256": "bc52f4c9f241e4df359676fbab455d421cde9ca3d1168d87b631019f84bdd2c6"
+    },
+    {
+      "path": "scripts/continue_sharpa_reference_diagnostic.py",
+      "sha256": "d5caeecafa79bf14dc1fe17ac90498df33eb62b5da1220ed5478fafd01d2eceb"
+    },
+    {
+      "path": "scripts/continue_wuji_multigrasp_selected.py",
+      "sha256": "df6f3fff440348d31d2f843e771449ccfe28cb4cdb40a27e755ddc13d4a1e382"
+    },
+    {
+      "path": "scripts/decide_wuji_hold_followup.py",
+      "sha256": "1ad7fd03ffa6c2da55dfbaec1cd26a3fbe15f7701a13345e8534b10be5379340"
+    },
+    {
+      "path": "scripts/derive_g2_held_grasp.py",
+      "sha256": "f07fe06305eba14f93b75c0faf47ea4907f0d862c447584160b05f72eac2f101"
+    },
+    {
+      "path": "scripts/diagnose_functional_grasps.py",
+      "sha256": "fd2d75771c3eafafd28b02a15613778f146a1079a15ce821af2a25de08ec8277"
+    },
+    {
+      "path": "scripts/diagnose_g2_preload_model.py",
+      "sha256": "3f1e5490044e03dc1ae0c4c4169b9d89a86b36dba8cdff03c7afa01e4692315a"
+    },
+    {
+      "path": "scripts/diagnose_g2_support.py",
+      "sha256": "bb006b9f8416d9c11b1288c572275a5b58aef99026eae9b7fa8c4c3b84c18e43"
+    },
+    {
+      "path": "scripts/diagnose_g2_takeover_controls.py",
+      "sha256": "8c854736d8c30ef91c320392c6f9f93aa0289deb0956ed32d96e9587bdfacd9b"
+    },
+    {
+      "path": "scripts/diagnose_official_collision.py",
+      "sha256": "93ae3aaffaea58831586b28793c0623bfa4d3931e6f1a537f5f8849b6bacd597"
+    },
+    {
+      "path": "scripts/diagnose_wuji_acquisition.py",
+      "sha256": "fdc66ecc5ade1ae1d4098d07baef216b8f798f0be432958814ed41a44085d690"
+    },
+    {
+      "path": "scripts/diagnose_wuji_closing_tracking.py",
+      "sha256": "fdc7b96e37cca80d853162e9afcde5f44c0e0b1b90285c7a000db852d4442f63"
+    },
+    {
+      "path": "scripts/diagnose_wuji_contact_path.py",
+      "sha256": "0e49c577de44957785c6838e0837ad36386e85cea128240ffa9fd2c92d4e3d9a"
+    },
+    {
+      "path": "scripts/diagnose_wuji_geometry_numerics.py",
+      "sha256": "bba3a91a1836d09174a906ce96253c923f7c661b6bf6a646c9a65d365b132f6d"
+    },
+    {
+      "path": "scripts/diagnose_wuji_hold_traces.py",
+      "sha256": "9bd0c1a5ac0b65186d1f48776937184f678176a64392b07083ec12b05cd388a4"
+    },
+    {
+      "path": "scripts/diagnose_wuji_recovery_aggregation_fit.py",
+      "sha256": "d1b24330fe89ca4c53f11bfbecac6669f623b1ec7d5f083eeeecd5b7dcf845c3"
+    },
+    {
+      "path": "scripts/diagnose_wuji_recovery_control_rate.py",
+      "sha256": "8d736343ab5aa00430247f29b56efa3d42ccbb02008c29c011aed56a36eff9ba"
+    },
+    {
+      "path": "scripts/diagnose_wuji_recovery_state_shift.py",
+      "sha256": "f5096f93d5add3ad46d1f9ee4988d0750cbb00ceb0eb8bbde93f126673d433be"
+    },
+    {
+      "path": "scripts/diagnose_wuji_sapg_kl.py",
+      "sha256": "73fe3cb857bc85eed34562ee001ba30c3d48fa9f737d642c40018cd94eee8048"
+    },
+    {
+      "path": "scripts/diagnose_wuji_sensor_discrepancy.py",
+      "sha256": "594bf30962570c4c54a4f2e31b3ece63352555faf1df0a5ff4200cbd300538ca"
+    },
+    {
+      "path": "scripts/distill_sharpa_audited.py",
+      "sha256": "be65e4cb53e62783bd95c2e6fb0c33edc8a3c9a888c13bb129aae489c8a72957"
+    },
+    {
+      "path": "scripts/distill_wuji_variable_student.py",
+      "sha256": "4868bc7a32dbb6d0abb4ef09e5fd6e804c901564bb63501a2be1baa182fb05c1"
+    },
+    {
+      "path": "scripts/ensure_lygra_runtime.py",
+      "sha256": "7492644e3ea00103f6d561929d7ee4f993e1ccd0bd5456abf99bd81e124031c9"
+    },
+    {
+      "path": "scripts/eval_sharpa_final_repeats.py",
+      "sha256": "a1981cf5ec5c99aa818686f9890a3ee84cdc46852a1db40d5f06f778e6e54a17"
+    },
+    {
+      "path": "scripts/eval_sharpa_matched_teachers.py",
+      "sha256": "c05fe557ac590e7d7ef4d627624fc6751c5382888253a56e7f0516ffe0f6d4a2"
+    },
+    {
+      "path": "scripts/eval_sharpa_student_audited.py",
+      "sha256": "a1527824fe52bc629e8b2139c67c4b06a40ae7de117ece32ab6b9525501cff01"
+    },
+    {
+      "path": "scripts/eval_wuji_absolute_target_student.py",
+      "sha256": "b845b877ed305544311998ce214e82bf678fccc324da0e6e26798c460ea4d1de"
+    },
+    {
+      "path": "scripts/eval_wuji_fitted_state_encoder.py",
+      "sha256": "9dbff121d2b42af2e12d72aca9c92e4728256d9681275534ecc59669ccc7b339"
+    },
+    {
+      "path": "scripts/eval_wuji_physical_state_encoder.py",
+      "sha256": "3a6aa61b419f7b4abbfb01ce244941df03bd28acbe4be937a7e9abad1c86e0fe"
+    },
+    {
+      "path": "scripts/eval_wuji_reset_oracle.py",
+      "sha256": "ec3151b70daafd7b833b065dce4e137a0a5d4d2a3c6c85580bc71c6569594e76"
+    },
+    {
+      "path": "scripts/eval_wuji_rgb_state_policy.py",
+      "sha256": "b1e9d56df95cb745c253cb815f10989fefeafff572e66750da28889d6fafdad7"
+    },
+    {
+      "path": "scripts/eval_wuji_state_memory.py",
+      "sha256": "7e114b5ab26c18dbc278f8d40297d7ea8ca9ebbb5ca0450ce9aeadbfaa3f92d8"
+    },
+    {
+      "path": "scripts/evaluate_existing_wuji_command_training.py",
+      "sha256": "7ad4029b3193af44c57289ae372f0124df48d8e2716cb33b3744e9ab6c553b95"
+    },
+    {
+      "path": "scripts/evaluate_wuji_geometry.py",
+      "sha256": "9f209d497aec7a3257ad6111e14203a85208c7d543c4187276fe97ea62928bed"
+    },
+    {
+      "path": "scripts/evaluate_wuji_hold.py",
+      "sha256": "87e8a53c178b134c14b436c0e7a846a84513af1a506ecb59a3e18b66c8a88444"
+    },
+    {
+      "path": "scripts/evaluate_wuji_hold_integration.py",
+      "sha256": "773b2542376f85f929e55a325fd7a71748df88ef1bfa97489d9770df26a24a6c"
+    },
+    {
+      "path": "scripts/evaluate_wuji_multigrasp_development.py",
+      "sha256": "1fc5d886de397e3a95406bd4afb3829d818bb6ea96e21b607987e19a18644418"
+    },
+    {
+      "path": "scripts/evaluate_wuji_multigrasp_expert.py",
+      "sha256": "92f6a62812baa7ebb4d2802561c0a9941a3757af551e71256f8816a364829b9f"
+    },
+    {
+      "path": "scripts/evaluate_wuji_multigrasp_frozen.py",
+      "sha256": "79249bb527553111c3aea1d4afbcd175baf4476eebfbdc78a71d308b450fb310"
+    },
+    {
+      "path": "scripts/evaluate_wuji_recovery.py",
+      "sha256": "9feaaac6e172ba6505277f2ffbaf9e3d2cbaa25dcdac52df1a14087de36d3ab5"
+    },
+    {
+      "path": "scripts/evaluate_wuji_recovery_batch.py",
+      "sha256": "10fe7ea89703dc31b7309874d4636b6dacc1bf57ffe8e2d0e5d3b8af3b05733d"
+    },
+    {
+      "path": "scripts/evaluate_wuji_student_batch.py",
+      "sha256": "05edca03a4eb97b72518c9c3dddae0fad9b77cccd2c2bb2e68c7e1cbb275ca79"
+    },
+    {
+      "path": "scripts/evaluate_wuji_unified_gate.py",
+      "sha256": "618a47d2ae680417be45a475bdac3b18fc0454758086b1ed35474afb08f936be"
+    },
+    {
+      "path": "scripts/evaluation_gpu_lease.py",
+      "sha256": "74de1dff8bed12b7db1a5228de6ad84f9c3f9c37191347b74400444772765094"
+    },
+    {
+      "path": "scripts/export_g2_tabletop.py",
+      "sha256": "25c998cf69135c4cb7f0d35b98c7736bd5a5ef9517873a3be2e91d418ec298ad"
+    },
+    {
+      "path": "scripts/export_wuji_knife_grasps.py",
+      "sha256": "06d987733aa56c6c3be8946d4c6f9b418f85fbe48e4524c796500efff918b357"
+    },
+    {
+      "path": "scripts/extract_g2_local_state.py",
+      "sha256": "2c87337dfe0efda9208aa4b08b8f4c20d49d42c5dde3a76e9ac037b7832cafbb"
+    },
+    {
+      "path": "scripts/extract_g2_observed_state.py",
+      "sha256": "5c833ab99ccfe3334b2e6b3c8c31581df084f3cb959f7790be111d81dfa4cf91"
+    },
+    {
+      "path": "scripts/filter_official_wuji_transfer.py",
+      "sha256": "de6bd28ba9956c2d032d71861f22d053d614541ff7820a73957a94f4e1b2bd48"
+    },
+    {
+      "path": "scripts/filter_wuji_fingertip_grasps.py",
+      "sha256": "d4ed56d68385c38977851a27355786414be46a29c7bda0588230c1107cd04ae1"
+    },
+    {
+      "path": "scripts/finalize_wuji_reset_range_pair.py",
+      "sha256": "23338796fbe7ed7bb44c42f938171f3883cca987ca9bc304cb60b1671383b2f8"
+    },
+    {
+      "path": "scripts/finalize_wuji_reset_seed_replication.py",
+      "sha256": "6addd34122e10c134dcbcdf534924fdae7394140ef42acd5949277b04bd1c381"
+    },
+    {
+      "path": "scripts/finalize_wuji_rgb_evaluations.py",
+      "sha256": "3f77fc211e06724328dad5638aba4b261aa980ee4302a54305c785434f36fa35"
+    },
+    {
+      "path": "scripts/fit_wuji_absolute_target_student.py",
+      "sha256": "c87e114dc259183d1cd25d4671516199c2fb41b3c4c482781beab97ce49456ea"
+    },
+    {
+      "path": "scripts/fit_wuji_command_slider_pair.py",
+      "sha256": "798eda53840823aa7cdd1a7c05e6bb7d900bed7acb0de9ab5b2c50442a467dbb"
+    },
+    {
+      "path": "scripts/fit_wuji_rgb_state_pair.py",
+      "sha256": "faa50df8eac693707b75f1750d6c5b6f86582bb3ffd17c8ecf432c6a30695294"
+    },
+    {
+      "path": "scripts/fit_wuji_slider_fusion.py",
+      "sha256": "789c307c89a598fd5374792ade959e4c04b81fccb0cc914652c5604263e30d92"
+    },
+    {
+      "path": "scripts/fit_wuji_state_aggregation_pair.py",
+      "sha256": "d1aaac0d9f93f5af8e3d96a904e8c2ca0345357842ec31454a1314b4deff7424"
+    },
+    {
+      "path": "scripts/fit_wuji_state_memory_pair.py",
+      "sha256": "f8b76e922b8bd9ba1712f69916017fa6e86283f6c49fa4832caa819be18de105"
+    },
+    {
+      "path": "scripts/fit_wuji_state_output_scaling.py",
+      "sha256": "0bb4d9d8353df15e190b2f070d3d47578a1496bbef810fe8aff599aa9520269c"
+    },
+    {
+      "path": "scripts/fit_wuji_student_latent_calibration.py",
+      "sha256": "4e3ce636ca60c9bf25eab047570fd5ea6705ed6aeb168fb81361e5644e630fbf"
+    },
+    {
+      "path": "scripts/freeze_wuji_multigrasp_test.py",
+      "sha256": "dba7ef517a21b35c3fd9a5364de71d7d5da2152a7510812540c6079b1cd3c361"
+    },
+    {
+      "path": "scripts/freeze_wuji_recovery.py",
+      "sha256": "88ea2da2f14a64d71b33c9995c4d03b16d161b6bb65f478483e94b534bbf172d"
+    },
+    {
+      "path": "scripts/full_backup/finalize_local.py",
+      "sha256": "2af253375762f2e02bc33e99a493af8c01a7d63276b971a756d1044b9e3d3076"
+    },
+    {
+      "path": "scripts/full_backup/restore.py",
+      "sha256": "094419ebd235e80841c3fe7f97fb2aef290ad8b4f9e6bcc33c53dc7f8a8b2655"
+    },
+    {
+      "path": "scripts/full_backup/snapshot.py",
+      "sha256": "9b659ac37f07b24362eee91282946b9bbc1e9d8ed3600e562e248cbd23bff3af"
+    },
+    {
+      "path": "scripts/full_backup/upload.py",
+      "sha256": "e215dc922a247f1ff0fcb88fe5c18af74ab27c6be9cb158ed43b1698c377d195"
+    },
+    {
+      "path": "scripts/g2_air_flip.py",
+      "sha256": "9f09f65761498e2acf15a39512351875751fe63f4b5f7974b0b4030b35a384fd"
+    },
+    {
+      "path": "scripts/g2_alignment_translation.py",
+      "sha256": "bac13faa046488110f652f01c196dfd03b77546d0cf89572dc8543bc89a34bed"
+    },
+    {
+      "path": "scripts/g2_assembly_roll.py",
+      "sha256": "94f5dab095f689870ef8f0e540dd0a120b56a9d636988c2bc3c712cc3fee8f31"
+    },
+    {
+      "path": "scripts/g2_cartesian_acquisition.py",
+      "sha256": "73050ba3b218d9f099bd837ce981483002ef5b490def5356c4be86063cc53674"
+    },
+    {
+      "path": "scripts/g2_contact_geometry.py",
+      "sha256": "4406f4b8c1a8946369eb43c7e1805fa41d653f6e59b5f9e45ecbad181da79eaf"
+    },
+    {
+      "path": "scripts/g2_finger_gait.py",
+      "sha256": "cb0490b8e0442af2ec2345446c8e38c8d25e77ed1f4a587fc24a4fc1dc8ba114"
+    },
+    {
+      "path": "scripts/g2_frozen_policy.py",
+      "sha256": "01e6e0bbb228ddb258ea4549352a1b420a249f6f5cf73b0c6ecb9c870044091f"
+    },
+    {
+      "path": "scripts/g2_hand_gravity.py",
+      "sha256": "110fcd79769ff3b46681d31f69896517a7013a991da43e779eb27033e06ce289"
+    },
+    {
+      "path": "scripts/g2_input_ablation.py",
+      "sha256": "8aec973f780bbf65cb80e0747da99034daf655d10b5ad2ec2ee8cfeb3d444087"
+    },
+    {
+      "path": "scripts/g2_kinematics.py",
+      "sha256": "d9cc522f16fb300ee5f1c562770606b237b4e78fbad1fde93136856ee2b78746"
+    },
+    {
+      "path": "scripts/g2_knife_geometry.py",
+      "sha256": "b5c381dafaf3a35625c61b8cd832423c844c18a871cf6d01f138226707cf9b16"
+    },
+    {
+      "path": "scripts/g2_local_env.py",
+      "sha256": "da44df4be95f97dbfc11179f1c55d66518d1cb7a03c72e7c14d39b0cbb082b7b"
+    },
+    {
+      "path": "scripts/g2_local_launch.py",
+      "sha256": "1634697da23919908da7ea16b43aea9276aaa3e8885c0835c72f3fc659797d8b"
+    },
+    {
+      "path": "scripts/g2_local_runtime.py",
+      "sha256": "85da5a99e273604e60f53e4c607adc65da04d4489990232cfdb49fd02bc1b930"
+    },
+    {
+      "path": "scripts/g2_local_teacher.py",
+      "sha256": "c7ad6ebe77d048a3ad1fe28825cc73a8e51bab9fcf44161d2faa396cafe2c7ed"
+    },
+    {
+      "path": "scripts/g2_motor_replay.py",
+      "sha256": "dd8fb4c0db4143348d159c81c69b7aa50d20cdc86274bb7838024e274448c373"
+    },
+    {
+      "path": "scripts/g2_normal_feedback.py",
+      "sha256": "19fdfecbe47371408621ba9835a0d0f756c1172b74c1e2a25820d4908c736762"
+    },
+    {
+      "path": "scripts/g2_overnight_state.py",
+      "sha256": "85cc48294b6aa1421d953484551f64df76b350027c4d0d729a7289ad30eecd6f"
+    },
+    {
+      "path": "scripts/g2_pinky_retarget.py",
+      "sha256": "ed8fdeffc8ed692bcb855ff74b9f865d3ff3e8f8bf47b341322b58800cb3bba3"
+    },
+    {
+      "path": "scripts/g2_retarget_gait.py",
+      "sha256": "d02bda0e42c9382b09fd72bca4e3bada99cd59c0d1d9fef93ff43fbc5ef9de64"
+    },
+    {
+      "path": "scripts/g2_seating_feedback.py",
+      "sha256": "0306176adf35697e9a0f7e714032ecfc3c52b32d49d1f24148014d0d02fac5f6"
+    },
+    {
+      "path": "scripts/g2_side_pinch_feedback.py",
+      "sha256": "02c26dc2e0232e98cdfa92b746aa7a4e92408d684103332c21abeda36a2faa78"
+    },
+    {
+      "path": "scripts/g2_table_collision.py",
+      "sha256": "302c334b7a87ae68e27f992ae55a1fb8c38237e82f044f2bb27b66adfbbd539f"
+    },
+    {
+      "path": "scripts/g2_tabletop_metrics.py",
+      "sha256": "221c63bfb5d078f22e2d2b3c6f4e6ab8f8d6982ed7d68427ca142a1051e22e35"
+    },
+    {
+      "path": "scripts/g2_thumb_path.py",
+      "sha256": "a4f7c07a0d93d3a6883818466e51d31f4c8da4759119dfd204a380c6a7b22664"
+    },
+    {
+      "path": "scripts/g2_trial_supervisor.py",
+      "sha256": "f98a02a4d03b26f19f1960959d9bfe433ae9982c2374c37cf56de3344a1fdfaf"
+    },
+    {
+      "path": "scripts/g2_v2_grip_env.py",
+      "sha256": "00f319f4a9731caae2038e69268f7a7343dc62cf9c03e013a5855ef3544bc318"
+    },
+    {
+      "path": "scripts/g2_v2_grip_runtime.py",
+      "sha256": "8cc6ecbadb5946ddac463d4fcd3603c9c844c82c564a23fd251e2ee96fa7af69"
+    },
+    {
+      "path": "scripts/g2_v2_launch.py",
+      "sha256": "87175273298bb937311e7e97d695ab184f7cdde0add78e8faf89c7be2d31709e"
+    },
+    {
+      "path": "scripts/g2_v2_prefix_grip_env.py",
+      "sha256": "6bc415b554cde1073e8f4c564f755de9a2af10de1d8b8d93bee501f562e28b86"
+    },
+    {
+      "path": "scripts/g2_v2_thumb_feedback.py",
+      "sha256": "1046999d84bd2d084878240a84792becedb5bcf95d251067690f2b96f0eef661"
+    },
+    {
+      "path": "scripts/gate_wuji_recovery.py",
+      "sha256": "8d41d837664afda4aef68573cede2bc0dacb2094f3b9cedc366cc2bb53aeade8"
+    },
+    {
+      "path": "scripts/gate_wuji_unified.py",
+      "sha256": "f113f1717b69145186dcb02e325fbd6439d2fbf5a514e6bc08ca403d533fac96"
+    },
+    {
+      "path": "scripts/generate_functional_wuji_grasps.py",
+      "sha256": "ada9cd41a5d06c308628861f035cc65deb156b0c13b212b22d5bb23a36a65441"
+    },
+    {
+      "path": "scripts/generate_paper_knives.py",
+      "sha256": "f08e3eece5156b6dd765593f21acf2a7b1633c3413f7594f2811c95d3cb1f39a"
+    },
+    {
+      "path": "scripts/generate_wuji_multigrasp_test.py",
+      "sha256": "288bb74fd619209bb5bc0167c99780bc6e847be723388e230d8072a38b8cc559"
+    },
+    {
+      "path": "scripts/handoff_wuji_bridge2_evaluations.py",
+      "sha256": "afd06b9eac94cc0ccdc07392185c6cd9417d6d234522d5385f17bdeb9a50531a"
+    },
+    {
+      "path": "scripts/host_tool_environment.py",
+      "sha256": "f4164c3f583a4a3693434554dcf516c32cbcda93ba344e3c4ce26e3c2e9eb21b"
+    },
+    {
+      "path": "scripts/import_wuji_artbot.py",
+      "sha256": "d1ba7cd81bc28fde966b237669ccd2e7f9f1eed55a025ce211994469d157cc89"
+    },
+    {
+      "path": "scripts/index_wuji_hold_weights.py",
+      "sha256": "3ed6ad4cb2c490806cefa730219c2158ce8e9e2d88247991a8abcc4a97acea7d"
+    },
+    {
+      "path": "scripts/index_wuji_recovery_weights.py",
+      "sha256": "6728bf9e1e9e6fd785dde10eb144c72884069e2e5a3ed68a1bf01eed354bb9e8"
+    },
+    {
+      "path": "scripts/index_wuji_unified_weights.py",
+      "sha256": "1a126422d14e49c6eae949ce607473f648b0b29924ad50a4c246f51cab633eaa"
+    },
+    {
+      "path": "scripts/inspect_wuji_multigrasp_progress.py",
+      "sha256": "3b7d98527dcf6f94ae8ed4db4238aceabdb13387532cdb7f2eb2b485ab862bee"
+    },
+    {
+      "path": "scripts/join_wuji_settled_quality.py",
+      "sha256": "0c68e8b738ff4986d3f67ff6e608b3c598dcb10f97a8bd00f92749ac041d4f07"
+    },
+    {
+      "path": "scripts/journal_g2_gait.py",
+      "sha256": "7680b309c130756bcb59009644d7aa79da203023347b6c5cec7b67b2d6216ff6"
+    },
+    {
+      "path": "scripts/launch_g2_trial.py",
+      "sha256": "95d2f7026b8fcfd9f80f1bf67a4e1e928844f0fcc648f75a16445bb26dc77b54"
+    },
+    {
+      "path": "scripts/launch_wuji_hold_arm.py",
+      "sha256": "a4808614370239c71f8e2f2d9b64f769191fcf07027cf67f15fedb960f14fc2a"
+    },
+    {
+      "path": "scripts/launch_wuji_hold_integration.py",
+      "sha256": "b42fed6509d457c62064da7fa6db2da62203fda62a59a3e1bd763a8bdffd9e7e"
+    },
+    {
+      "path": "scripts/launch_wuji_near_reward_suite.py",
+      "sha256": "8b15b0edd6ac2ca6d7473518edfbdc2014c38167ff51ef4ab3a5abf15a1e136e"
+    },
+    {
+      "path": "scripts/launch_wuji_recovery.py",
+      "sha256": "f390f4a180142a91e146cbe1f7109d25bd0a337dc74ecb338f91b858cf963dff"
+    },
+    {
+      "path": "scripts/launch_wuji_recovery_local_video.py",
+      "sha256": "6289f1b1092458542fe17f5d472b3bc3edb5e017e22694088855d5683d5ed369"
+    },
+    {
+      "path": "scripts/mirror_wuji_goal_handoff.py",
+      "sha256": "e70ae2181a04c11fe90114a3537122cdc848d9c3b99f817b6fd61d8bdf8a9067"
+    },
+    {
+      "path": "scripts/monitor_active_wuji_goal.py",
+      "sha256": "da385d6222d35f3f26d7343fa87ea5e353e68ce1b4fa35b92d84116a73aa7d15"
+    },
+    {
+      "path": "scripts/monitor_gpu_utilization.py",
+      "sha256": "2a202a4b93acc66ca8aef7ecf70bd1ca82de2ce2bb94b14b5c8cc9b1dfdd11b5"
+    },
+    {
+      "path": "scripts/monitor_termination_queue.py",
+      "sha256": "fc2770756f5ced1f179b3fa0d9a5e17a2e4f5137f116d70327eef436196689c7"
+    },
+    {
+      "path": "scripts/monitor_termination_seed20261201.py",
+      "sha256": "e372870d5e845a0f574eec0ceaf3046f9d2107c394c7654ef10c9c89f54b5c48"
+    },
+    {
+      "path": "scripts/monitor_termination_seed20261202.py",
+      "sha256": "2b58a31ab82f32fe8090539d7526e2197bb1f1827121f03946be5487f1dce096"
+    },
+    {
+      "path": "scripts/monitor_termination_seed20261203.py",
+      "sha256": "b878eee77b3b71f10921d2908127e2d7605b12a2e9af1675f93e660e511717be"
+    },
+    {
+      "path": "scripts/monitor_termination_seed20261204.py",
+      "sha256": "7d25cb06e4b416fc3d162657393c53a9f851e1402a37ff4dab4c1be600c3f030"
+    },
+    {
+      "path": "scripts/monitor_wuji_checkpoints.py",
+      "sha256": "4bb10cd8c839c1c2f3b8d5e2914f5a8eaf1be8750a49536925a5f36ef77babaf"
+    },
+    {
+      "path": "scripts/monitor_wuji_geometry.py",
+      "sha256": "6279f8fd68d6e6068dce91342efb2cc1204acda2d418b52d31b271fec4718c3b"
+    },
+    {
+      "path": "scripts/monitor_wuji_hold.py",
+      "sha256": "dd8847088626bdbc574932765f5980a39b99cb6afeebfff71d05b126b9c78a75"
+    },
+    {
+      "path": "scripts/monitor_wuji_multigrasp_round.py",
+      "sha256": "37060c4a19594bc4410a00ea2c554a65a50d77c2e1f47399ed98587e354795ea"
+    },
+    {
+      "path": "scripts/monitor_wuji_recovery_local_resources.py",
+      "sha256": "720332fa088375b16a36a4ec25544cb800668007d6489a2066da5ec65a22b7ff"
+    },
+    {
+      "path": "scripts/monitor_wuji_recovery_resources.py",
+      "sha256": "666eff9d1ad449f2cffa0e906736d0ca89bad44856896edcfb89beec40e74629"
+    },
+    {
+      "path": "scripts/monitor_wuji_reset_mechanism.py",
+      "sha256": "1e5d3a8e993b67f91cace2e91555062579c2cfac3a0e1be3e5beb99d6f8a748c"
+    },
+    {
+      "path": "scripts/monitor_wuji_student.py",
+      "sha256": "8e80daccd787d9e29fe16340a8a73291ef8225922b6cbba75f2c601d32017bd6"
+    },
+    {
+      "path": "scripts/monitor_wuji_unified_resources.py",
+      "sha256": "a77ebd35bc014eb8e2e27925b184931ecb82084b2171e0a7494b082825cca1c4"
+    },
+    {
+      "path": "scripts/package_command_and_sharpa_final_results.py",
+      "sha256": "b2533ab997d23d2d26d9386c4ec2043da862ff697a4931deece5fa4179b34afc"
+    },
+    {
+      "path": "scripts/package_g2_evidence.py",
+      "sha256": "a9335f8807f32030f4424475abf60260f6c92b91533bcbe27f75fc9c674ccab1"
+    },
+    {
+      "path": "scripts/package_g2_local_baselines.py",
+      "sha256": "83264a8b61537fecdb11cc41cd74d30768093dd3e6ef9aa2468faaf7caecf7e6"
+    },
+    {
+      "path": "scripts/package_g2_local_increment.py",
+      "sha256": "eed4a901e3e241721a0767c4fb88cda493ed3c10a52a6d9bd3ee893e711c1d50"
+    },
+    {
+      "path": "scripts/package_official_timed_cp10.py",
+      "sha256": "1636331955ed01f7f6bafac0948b563d9f1836f92891009eb11c3689fab3fd08"
+    },
+    {
+      "path": "scripts/package_sharpa_matched100.py",
+      "sha256": "5f83825607c02dc39d92c7d53c140202bda40f917cb34cbe9e3d45f062625fd9"
+    },
+    {
+      "path": "scripts/package_wuji_adaptation_progress.py",
+      "sha256": "3b5caa92e89c5964c8b377d336cb8c5b5effa46bc4a874872f6bcb087d23904e"
+    },
+    {
+      "path": "scripts/package_wuji_completed_validation.py",
+      "sha256": "d65b1fe4d8929c0b68bca3c140e35d23201281589ea03a0769d73fdf04d77f49"
+    },
+    {
+      "path": "scripts/package_wuji_contact_diagnostics.py",
+      "sha256": "5446d21a332cfdc695c4def60975fbb788621af2276f4efe13d54ddb5c1fb8fb"
+    },
+    {
+      "path": "scripts/package_wuji_core_task.py",
+      "sha256": "13380f6dfd340d86fedf671c517592a50ee764bb10053a436e0f8bcbf09d331d"
+    },
+    {
+      "path": "scripts/package_wuji_dagger_final.py",
+      "sha256": "82e291b24fd36c044460a11e18dae03d69fe4e32ea8b342622be6fe8d54e168a"
+    },
+    {
+      "path": "scripts/package_wuji_geometry_video.py",
+      "sha256": "1155007f053f36c7fce7c8bbe53653e665eb3ef75e5617ff35cca7550bf0fdb6"
+    },
+    {
+      "path": "scripts/package_wuji_h100_runtime.py",
+      "sha256": "d2a3649d07ef832e13477c29d993a785caf38745b08a8b6e46b06414abae9e1e"
+    },
+    {
+      "path": "scripts/package_wuji_hold_integration_video.py",
+      "sha256": "26f01666a59f165deff8c4556c50a996ba83077887027a22cdc51a580fb84319"
+    },
+    {
+      "path": "scripts/package_wuji_holding_phase.py",
+      "sha256": "8158fd053bddd4f97270f1e19ebabc386f9a9f2466df0537a8ca10d77c198125"
+    },
+    {
+      "path": "scripts/package_wuji_joint_continuation.py",
+      "sha256": "fdd15b15c7df77bd90ecba3c685d61415abded4053f69a48211eaa829885c30b"
+    },
+    {
+      "path": "scripts/package_wuji_long_horizon_hemisphere.py",
+      "sha256": "5cd21baa2df6c52fbff2371e20254ca402651d16ad4f25a7c29efe327893dbc9"
+    },
+    {
+      "path": "scripts/package_wuji_normalizer_diagnostics.py",
+      "sha256": "04dc94342822fc185de157eab767fc50931ec9dc5f089ca4d796f9faf86a8e38"
+    },
+    {
+      "path": "scripts/package_wuji_recovery_video.py",
+      "sha256": "4902cce9a1ff2a1fcbeb6255c3d713bd3e8c1efd4f4e4f150d2d02144b91da4f"
+    },
+    {
+      "path": "scripts/package_wuji_reset_oracle.py",
+      "sha256": "ceaed6790ecb9f42e2abc2a1525738ce7df125ed5d009e5e20d423cef1e286bb"
+    },
+    {
+      "path": "scripts/package_wuji_reset_range_pair.py",
+      "sha256": "24807f8e97a994d8f2e9233ce82fbff9914066b4a639cd03ed53cf41caabb5c1"
+    },
+    {
+      "path": "scripts/package_wuji_rgb_final.py",
+      "sha256": "17559c098204e5ee15fc1575c53943ce855eb0399768a9f3035ba8753a6a51d9"
+    },
+    {
+      "path": "scripts/package_wuji_rgb_independent.py",
+      "sha256": "09e5db3151cb599ac9ce3e89dc38c4a238b42caa6b518bf173fc296cc95e328d"
+    },
+    {
+      "path": "scripts/package_wuji_rgb_mixed_development.py",
+      "sha256": "2c812a62c2a95077dbc539b0da8de0982d11265caed05711bc17e77232e576b7"
+    },
+    {
+      "path": "scripts/package_wuji_sensor_gate_videos.py",
+      "sha256": "89968df78818131f6a16c5baeee47f20346db349fc274a4f34f2b9c7ce3a541a"
+    },
+    {
+      "path": "scripts/package_wuji_student_failure_trace.py",
+      "sha256": "b2abb02f67737610c1592e06c073d08b81cb1100a47b4a3c04f8360c7b811f5f"
+    },
+    {
+      "path": "scripts/package_wuji_student_video.py",
+      "sha256": "8140888343b45d8c143a426024907481c1075a656f21f1ab7679b00c189e918c"
+    },
+    {
+      "path": "scripts/package_wuji_thickness_video.py",
+      "sha256": "e45965a41359810b5b0e012e35d404df59a52f5d03a52bc92065db3d9ab46ad7"
+    },
+    {
+      "path": "scripts/package_wuji_timed_student200.py",
+      "sha256": "2ae9aff42adb3ce8d3d46cb0321deae23f154f6aaee1f27bb3a39cb719ca7170"
+    },
+    {
+      "path": "scripts/package_wuji_unified_completed.py",
+      "sha256": "065884c1e54a50f05b912895bf146be75e3e1efee51c6ccb6e383b97402062f0"
+    },
+    {
+      "path": "scripts/package_wuji_unified_final.py",
+      "sha256": "53ce0f9ffaf1d5b73555bf2b2444e2d1ee3d7616f319946368edf81271df6cd1"
+    },
+    {
+      "path": "scripts/package_wuji_unified_video.py",
+      "sha256": "5726bd6a717020393c281c2ed9de507c23e5b95feb1fc2fa19505fd96723893b"
+    },
+    {
+      "path": "scripts/plan_g2_body_regrasp.py",
+      "sha256": "a21a5b718eab90e42e2e1e13b60dec9b9062fb56ad0b6f916ff989d045dd0d0b"
+    },
+    {
+      "path": "scripts/plan_g2_contact_roll.py",
+      "sha256": "464d016018f6e36d951d70e391f3e77486ee7e544bfa51dace3614ed529ccec3"
+    },
+    {
+      "path": "scripts/plan_g2_distal_clear_path.py",
+      "sha256": "9141210d1eb445f179d90ff91e930d6db75821c406d9d5a3ca54b5af1f59c52d"
+    },
+    {
+      "path": "scripts/plan_g2_distal_support.py",
+      "sha256": "8d01511502f332b569a3029cb3818328d0ab42d49da4cdf2a39067a75e7699b6"
+    },
+    {
+      "path": "scripts/plan_g2_edge_grasp.py",
+      "sha256": "60e5fbbde61e3e904507d06f70b68b5183c4a7de87f44db945b34d9f6eb94cb1"
+    },
+    {
+      "path": "scripts/plan_g2_four_finger_side_pickup.py",
+      "sha256": "16188e8f6b75e1db8d927fc2bf217255d31421f94bb77e6ceb26d981adffee52"
+    },
+    {
+      "path": "scripts/plan_g2_functional_open.py",
+      "sha256": "9bc5084db0a48ca173323de6a44710a7bd561b2767557f0c57fcd08ade0f4c58"
+    },
+    {
+      "path": "scripts/plan_g2_held_translation.py",
+      "sha256": "e3a781cf482c0de3759fa66093ca703259fba5a547929a42c5019bc1236072cd"
+    },
+    {
+      "path": "scripts/plan_g2_index_clear_approach.py",
+      "sha256": "8681e994f63b7950f7712896f171544ffaed1c07fd5c1beafccc4569596ea89a"
+    },
+    {
+      "path": "scripts/plan_g2_index_rrt.py",
+      "sha256": "a01c1d51a7e972d90147614d9a5c2f863099827d73ffaa8051eff968c50a8e05"
+    },
+    {
+      "path": "scripts/plan_g2_pinky_support.py",
+      "sha256": "c7ddefab484f85541092f18a29a51b04f70472e414c84b190e30aa873719d106"
+    },
+    {
+      "path": "scripts/plan_g2_seating.py",
+      "sha256": "0a99fc5f906fa6d10e46d76b420798c51190451c7d8b9f6f078933235ef33156"
+    },
+    {
+      "path": "scripts/plan_g2_side_pinch_motion.py",
+      "sha256": "947342cfb48df8b76caa06bdc5ee9db30bc5c92250fe3b4b3cdb3b8464c4bd1b"
+    },
+    {
+      "path": "scripts/plan_g2_single_digit.py",
+      "sha256": "d02ea3d4075dfe2a0fec14e6855c1a252db8eee4e969dc913c83fa3a16562a74"
+    },
+    {
+      "path": "scripts/plan_g2_static_seating.py",
+      "sha256": "714c7624a3f7a2d210a0d42dd7bb9393c7e8aa184c6502cfa187666c34d67bf1"
+    },
+    {
+      "path": "scripts/plan_g2_supported_wrist.py",
+      "sha256": "5f147b86bd8bcb9f3c07c86e43b8795308e817be69a1e43a61220f64425864a1"
+    },
+    {
+      "path": "scripts/plan_g2_thumb_escape.py",
+      "sha256": "56073818f20d54d70d791efe70ca9d3a0aa20735e686129a77cfc8302b1dfa70"
+    },
+    {
+      "path": "scripts/plan_g2_thumb_slider.py",
+      "sha256": "22009f0fcec650f7a98c256b325f820a9a697a43776224342a9cdce95817f78d"
+    },
+    {
+      "path": "scripts/plan_g2_v2_arm_pickup.py",
+      "sha256": "0efab1c9441247063dc1fbd40aa49fc55b84c1252a00381f3ce36fd8113badc1"
+    },
+    {
+      "path": "scripts/plan_g2_v2_flip_candidates.py",
+      "sha256": "98637a1333832175e3d3643950ce9d4388be2cbafcbb80e97d641b09f7322aec"
+    },
+    {
+      "path": "scripts/plan_g2_v2_raise.py",
+      "sha256": "8978d29ebada99daf4a0f2787bccf5cadd6bbe63d57e48a81f6eae94c8545690"
+    },
+    {
+      "path": "scripts/plan_g2_v2_retention_squeeze.py",
+      "sha256": "920ab6d9a27468e635541ccd3ffda9e312eff497b2f5866bb65fcabe68e7bff6"
+    },
+    {
+      "path": "scripts/plan_g2_v2_thumb_release.py",
+      "sha256": "c44b932b3b57c8a60c8c92a606c14555924f856bd9bb3575be184d79218c2069"
+    },
+    {
+      "path": "scripts/plan_wuji_knife_motion.py",
+      "sha256": "cbac8a2a4c88ea66f50e5effe58bef4635a76672626f7d2c85086abb87ecce70"
+    },
+    {
+      "path": "scripts/plot_g2_local_learning.py",
+      "sha256": "197aeda1c2b140ce9b577db3cd380147771ce3e64b7bc0e2c6d86b521ee19257"
+    },
+    {
+      "path": "scripts/plot_g2_measured_pickup.py",
+      "sha256": "d59d617dcd8e1a76778e4c685ea6eb5d1edb766eb076a0a031546aba1ea4c324"
+    },
+    {
+      "path": "scripts/plot_g2_takeover_controls.py",
+      "sha256": "b968165784fd6cef1fdbd25fa1d9bdea6f420704ed2c8b18f53193df415b69be"
+    },
+    {
+      "path": "scripts/plot_g2_validation.py",
+      "sha256": "3cd92bd184558fcd0697e6364f90dd5c152ad969116ca154d425c51f4c3e9cb5"
+    },
+    {
+      "path": "scripts/plot_wuji_geometry.py",
+      "sha256": "161c97b3583837fcf4af75e2fea1c8e77620ac748e87922ced19e2c12c19e590"
+    },
+    {
+      "path": "scripts/plot_wuji_hold_results.py",
+      "sha256": "b03e2b2cd96cc3db721abb9a09ffd48b1c9cc01a89c3c454d7f7ee431c47e1f7"
+    },
+    {
+      "path": "scripts/plot_wuji_multicycle_comparison.py",
+      "sha256": "08073922fc04c8c11ce185bcb29a17f0804d8bfd4fbfb8774caa7496171e95fc"
+    },
+    {
+      "path": "scripts/plot_wuji_multigrasp_results.py",
+      "sha256": "1dd9d788b7b314d987366337aecf30334459fe3c305ba0dac12a84fb39897595"
+    },
+    {
+      "path": "scripts/plot_wuji_precision_trace.py",
+      "sha256": "f0b1081ec8d430d460237d153decf7e3f2101e45052cb27383b4c3c670972c9b"
+    },
+    {
+      "path": "scripts/plot_wuji_recovery_comparison.py",
+      "sha256": "fed6d6e9835668172b99bac08ff1a1c68aaffbf9b4a697fa62015eea695ae6d2"
+    },
+    {
+      "path": "scripts/plot_wuji_recovery_failure.py",
+      "sha256": "19e9b5fa5467f7abfe47eaf6c8e379f4cc42b1a2f146035df10775e9be348673"
+    },
+    {
+      "path": "scripts/plot_wuji_recovery_final.py",
+      "sha256": "ba7be201291bd7b62bd105be0b111980af206a18835fa81b7ddb33beca048995"
+    },
+    {
+      "path": "scripts/plot_wuji_recovery_learning.py",
+      "sha256": "49efd72b28bbc39b0450448a0bc6da459fe1d7ecef1e44d778f11fe06b40939f"
+    },
+    {
+      "path": "scripts/plot_wuji_robustness_audit.py",
+      "sha256": "8d9da035d5c38b244594a1e639e1fdd07b66f909a1cb5b0a7b6a4090a326c75b"
+    },
+    {
+      "path": "scripts/plot_wuji_student_fitting.py",
+      "sha256": "c980e8cf9ccdea56a89b1f9035203caefe45e49224334baf72f631e3bf4d50e4"
+    },
+    {
+      "path": "scripts/plot_wuji_student_learning.py",
+      "sha256": "76996054632129ed0e79659c82cdbfc8a91b744f15b2d88dace923a8c0ee960f"
+    },
+    {
+      "path": "scripts/plot_wuji_student_sources.py",
+      "sha256": "8262e928d766463b378ebde020ced8abd8e4d7045c483551ebc0235afa6caaa9"
+    },
+    {
+      "path": "scripts/plot_wuji_termination_gap.py",
+      "sha256": "0b2d5943215d857187b75a422859f93cfde8a7ff243ece2aa39e519e99101f19"
+    },
+    {
+      "path": "scripts/precheck_wuji_recovery_holding.py",
+      "sha256": "00a5bbb1c1557bcb40fedcf3d1c9d22909dffb8eb0c66e33883bec5c7f29b2e5"
+    },
+    {
+      "path": "scripts/precheck_wuji_reference.py",
+      "sha256": "07327caf8a4d3717cca631b9879cad7aaa95c73c5f0207b510ddc5816a55ce10"
+    },
+    {
+      "path": "scripts/predict_g2_measured_rest.py",
+      "sha256": "87d4c89df63d0559708fd2c8e5f471a720adee9c700ced70474b4e4b23c8efca"
+    },
+    {
+      "path": "scripts/preflight_fresh_wuji_lowgain.py",
+      "sha256": "a63a0258cc0730128f335c7012b6e0f78e1bc71f8735cbe07744fc8b0135f166"
+    },
+    {
+      "path": "scripts/prepare_approved_wuji_assets.py",
+      "sha256": "a034015f39620e709f4da2d678334cbbd41ac0d8077b24dc2930e747ec66bdd3"
+    },
+    {
+      "path": "scripts/prepare_g2_candidate_preset.py",
+      "sha256": "a3a730ee98eb28cfae54ac787b630c9a572e5e5f51effc014beebd30a8a2aa7a"
+    },
+    {
+      "path": "scripts/prepare_g2_slider_support_hold.py",
+      "sha256": "78ea4127eef751a2c4f77f04671b84ad090529cefdfead11b2e5ad612f77127c"
+    },
+    {
+      "path": "scripts/prepare_g2_v2_grip_training.py",
+      "sha256": "295deab2acf4d231a73283b3cd39f3feb6d8585a4a8464dfb3095d23cc54c714"
+    },
+    {
+      "path": "scripts/prepare_g2_v2_prefix_training.py",
+      "sha256": "186bcd0a1adf5b59b24a4f0d248c7abea17ca447d9ffc0b17f641128ddf5a8e1"
+    },
+    {
+      "path": "scripts/prepare_g2_v2_reference.py",
+      "sha256": "17c21d847edfda585443433d5fefa4aacefa13e1f042a0eb7a4d6b583ef43080"
+    },
+    {
+      "path": "scripts/prepare_sharpa_rootless_diagnostic.py",
+      "sha256": "0a3dff7e2a7e0fe16f627ac067282f00951451172a0d30c934bca51f101cc994"
+    },
+    {
+      "path": "scripts/prepare_wuji_bridge2_dataset.py",
+      "sha256": "5fe61f1acfba2209b1a73b0b3044191095fecb73cf417d17a4b061081d694f9e"
+    },
+    {
+      "path": "scripts/prepare_wuji_bridge2_fresh_validation.py",
+      "sha256": "5c41c11f5f6e881e4dbb1169113bb73cdf2ddd6e7478194fabdd4ac217bc3d35"
+    },
+    {
+      "path": "scripts/prepare_wuji_bridge3_dataset.py",
+      "sha256": "90692d88ab992122f0a65e84a8591f48ba6f9d3cae6ca8c476290c2459761d29"
+    },
+    {
+      "path": "scripts/prepare_wuji_bridge3_fresh_validation.py",
+      "sha256": "5113578851c5a15b9d2f56b46dc5c65d670e6666a3fabf7c270b1fdbf6262d0f"
+    },
+    {
+      "path": "scripts/prepare_wuji_command_slider_data.py",
+      "sha256": "d629ef13af95bce14f6dda86c61b19e8b0a12564c81c177573a4ed9832974c31"
+    },
+    {
+      "path": "scripts/prepare_wuji_command_states.py",
+      "sha256": "fe6836a23aa94a680b698dbe66e53fb9c3003f395ab5c678a0433860f84fe6e2"
+    },
+    {
+      "path": "scripts/prepare_wuji_controller_actor.py",
+      "sha256": "41bfc16df7e7b215fb69adcbd3f9540dab1041c4c61534c9ec605f93ff781e66"
+    },
+    {
+      "path": "scripts/prepare_wuji_cp50_replication.py",
+      "sha256": "125740f66afb4a5e062cc265d1a036d0213edb5f5e7debaa2bd77f053a0f3464"
+    },
+    {
+      "path": "scripts/prepare_wuji_damping_centered_policy.py",
+      "sha256": "d8a332a34c9842d3c9bc9cf78fd844a2e7be1a51d87cfdf8f3ad31198e1af685"
+    },
+    {
+      "path": "scripts/prepare_wuji_demo_aligned.py",
+      "sha256": "6b98733b0ee7a223756fdd859fb445efb3871fb85cf5817b200c06b90cc96e11"
+    },
+    {
+      "path": "scripts/prepare_wuji_equivalent_frame_states.py",
+      "sha256": "0173d014886f6f6c554fdad975b6a938d030f2a8480fb2d5e4aa4d38f45742ed"
+    },
+    {
+      "path": "scripts/prepare_wuji_functional16_validation.py",
+      "sha256": "446940a336239b16180d1d3efd05096844e07c355b188b4baedb8291fd9c2ee4"
+    },
+    {
+      "path": "scripts/prepare_wuji_functional20_dataset.py",
+      "sha256": "7a675f8827c3720d513e1b642cb08848304eb47cce6332dc413d9725feffe327"
+    },
+    {
+      "path": "scripts/prepare_wuji_functional20_experiments.py",
+      "sha256": "b39c004e5d580ab75eff7c58d1d4d065f0fe00ea5cf5615f4e82e063c0bd560e"
+    },
+    {
+      "path": "scripts/prepare_wuji_functional27_dataset.py",
+      "sha256": "e5b19732fca561d267f9cce356812607dd4c34bbeba3887b3a6cbf071158d433"
+    },
+    {
+      "path": "scripts/prepare_wuji_functional_single24.py",
+      "sha256": "252079b45d97b869796fbd3d5c621a47a8c8e1aa23f6a39fabff2501ea3e4742"
+    },
+    {
+      "path": "scripts/prepare_wuji_gain_diagnostic.py",
+      "sha256": "ced0f5db149b1adc8399e2501be45130bd90dc55e111231a9c18c55f9c63022f"
+    },
+    {
+      "path": "scripts/prepare_wuji_geometry.py",
+      "sha256": "c2654c4d3a74a2c7a27864c9ce831375fa02bbfa0b4ac77c6286c07ebc1c717a"
+    },
+    {
+      "path": "scripts/prepare_wuji_geometry_sensitivity.py",
+      "sha256": "a9e1cd5451f669fb554d27fab5eb02a111fb2faae54f24f4408d591eaa55223c"
+    },
+    {
+      "path": "scripts/prepare_wuji_grasp_balance.py",
+      "sha256": "5f9ec09e5b151035bc65b71e321917b1ecbf09251ab6dd0487110c4aadb1812f"
+    },
+    {
+      "path": "scripts/prepare_wuji_horizon60_validation.py",
+      "sha256": "81f7985fe40e925d6049e38cf1e3a05b99007fb445fb48eebd8cf4b8f97ae812"
+    },
+    {
+      "path": "scripts/prepare_wuji_knife_training.py",
+      "sha256": "34c1ddddb0ede8bc263e3f487b30d37fb70b157ff26a92e4b3ac7d840c4eafd9"
+    },
+    {
+      "path": "scripts/prepare_wuji_multigrasp_frozen_cohort.py",
+      "sha256": "98c0d371d60eca403a7c4b9f27479bfc0c2fb6b3ac0c64e47f528a208b2efdb7"
+    },
+    {
+      "path": "scripts/prepare_wuji_multigrasp_round.py",
+      "sha256": "b53f7f697548033376e78a39bd77d4ec3133fcde64477f02803f923e0235fdaf"
+    },
+    {
+      "path": "scripts/prepare_wuji_multigrasp_supplement.py",
+      "sha256": "afa674553cd024b33cc65ba2bd122293528f7ba02aa7f335b396a056f51602e6"
+    },
+    {
+      "path": "scripts/prepare_wuji_normalizer_count_warmstart.py",
+      "sha256": "c1a788e9bde60c9d3b48eee7b5c30e20a8663da008495373bbb1b70498275233"
+    },
+    {
+      "path": "scripts/prepare_wuji_preload_probe.py",
+      "sha256": "6d23835d9afb1a6649d9c892ef3b9e1b42f1d62e8671360cf8329486055ce412"
+    },
+    {
+      "path": "scripts/prepare_wuji_recovery_aggregation.py",
+      "sha256": "0c0feed86793fcfeae7bb2073750002e6bd93c86b35f01a33fe4120f782c2b04"
+    },
+    {
+      "path": "scripts/prepare_wuji_recovery_data.py",
+      "sha256": "7f087e7c41fa39ff5fd685564279b526be1013b8dd4eb25649d384b71d6316cd"
+    },
+    {
+      "path": "scripts/prepare_wuji_rgb_fresh_validation.py",
+      "sha256": "06d9f2a76578c608bcd3f707f8dd566ef7d4da7361a55a6f1d8a7991a2018781"
+    },
+    {
+      "path": "scripts/prepare_wuji_settled_grasps.py",
+      "sha256": "15314816623f2670f3dddbb3e697aa64eb415b2e85878d25f607717816503809"
+    },
+    {
+      "path": "scripts/prepare_wuji_sigmaquarter_actor.py",
+      "sha256": "0f1d514da2b2d33a95986acec6fe55e1cd74bc469db897c962518c9ffaacf3f7"
+    },
+    {
+      "path": "scripts/prepare_wuji_slim_demo.py",
+      "sha256": "796dc5969de8ec9ce0458949f1d662753574957d1cd5851e77ba5b5a2ed87477"
+    },
+    {
+      "path": "scripts/prepare_wuji_spring_preload.py",
+      "sha256": "b55b454b105c0104d411a6df01e314332c99a3015c26dd6bdde734a55be573c4"
+    },
+    {
+      "path": "scripts/prepare_wuji_state_memory_data.py",
+      "sha256": "c22f01e1dbe15af5b14f77e806d6794f42196c5e551e5be13b22652f2d4d73dd"
+    },
+    {
+      "path": "scripts/prepare_wuji_student_data.py",
+      "sha256": "ceb21d8efb24639b88af1a5c6f5139a3a57ee4979ed5658d02b531445f9e820d"
+    },
+    {
+      "path": "scripts/prepare_wuji_thickness_adaptation.py",
+      "sha256": "06a8131417a1a51f0cc85a646490feac4222083ce96ceec01e3af3257e505b4e"
+    },
+    {
+      "path": "scripts/prepare_wuji_third_grasp_validation.py",
+      "sha256": "e938c0b33774e83d9b5c2f68be14cf28b33ed24d527654225ea8ed40c9ab5b8c"
+    },
+    {
+      "path": "scripts/prepare_wuji_unified_data.py",
+      "sha256": "831b7b36edb83485efad6f21f47e10e2870ef93eac311e3c1bbc1d3974d7583b"
+    },
+    {
+      "path": "scripts/prepare_wuji_wider_rgb_validation.py",
+      "sha256": "5e98165811c23a73f13a665c674ce2aa1e3022a9cf8fc3bbb8869c1c1cbf4a02"
+    },
+    {
+      "path": "scripts/probe_vulkan_devices.py",
+      "sha256": "54f0e4b19b8f9afcedee2cca4dcb3d2e7e309ee611f3f358c141cdf939fcdfee"
+    },
+    {
+      "path": "scripts/probe_wuji_action_labels.py",
+      "sha256": "3470bcf0034ffa10dcac3064c04735db307b84a87f372ffc70fe515852230d04"
+    },
+    {
+      "path": "scripts/probe_wuji_bridge3_student_latents.py",
+      "sha256": "da2d175d014bd66e717feb4f8e7d36f22e050050ac0481ad5a67724488df5348"
+    },
+    {
+      "path": "scripts/probe_wuji_bridge3_student_latents_v2.py",
+      "sha256": "45dedd4909e88f9a935bf324a64fc699710ac0480d85bdec30a29c49318841c0"
+    },
+    {
+      "path": "scripts/probe_wuji_camera_visibility.py",
+      "sha256": "be3f8f045076fe0c07111ae740b626a6963108dc11a3b3bd3f60b56621497155"
+    },
+    {
+      "path": "scripts/probe_wuji_command_latency.py",
+      "sha256": "0fe04e6d5231231a81ec92744902c536b63209a328a115277e247b5a1ee56e9c"
+    },
+    {
+      "path": "scripts/probe_wuji_continuous_contact_motion.py",
+      "sha256": "8379131f4b86a06d59cf7aecb33e72913ddaaa900175a7de5e33aad4c75b17fa"
+    },
+    {
+      "path": "scripts/probe_wuji_fitted_state_components.py",
+      "sha256": "9207d2e27285e1cf87f3e440fee6c077a6e9d2f16aaef9e59273643b1ba5e2be"
+    },
+    {
+      "path": "scripts/probe_wuji_hemisphere_policy_sensitivity.py",
+      "sha256": "c8e9b38867f3cf3259da29273cbe41a597108a6559d9286c2b146f0ce87cc9fb"
+    },
+    {
+      "path": "scripts/probe_wuji_normalizer_policy_jump.py",
+      "sha256": "5d124f7ccdede5985bc767445499ec6835867feb3c5e1d8838017e6bbe12f866"
+    },
+    {
+      "path": "scripts/probe_wuji_normalizer_update_sensitivity.py",
+      "sha256": "e7e3d4edf250e0026ae49d27ed88db6d33ee5730c64405728664f530e4af5643"
+    },
+    {
+      "path": "scripts/probe_wuji_resistance_factorial.py",
+      "sha256": "26cf43d1aba3dc1437e363e45ee8980b2a022533dca7001ac84cec5cdf246a24"
+    },
+    {
+      "path": "scripts/probe_wuji_single24_scripted_perturbations.py",
+      "sha256": "49186d0eb045936122ba5207efc2daedb7d443b4bad5e31a666e0ab18e5edfd9"
+    },
+    {
+      "path": "scripts/probe_wuji_slider_resistance.py",
+      "sha256": "4f57df9ca24281ddcc97ad5602375ced2e10746cc818a913bcab94f0ede95e7d"
+    },
+    {
+      "path": "scripts/probe_wuji_student_latents.py",
+      "sha256": "82bc3e659a5a8862ba3b56da8677839d19abbdd6696fd7e6037b267d39be5e4a"
+    },
+    {
+      "path": "scripts/probe_wuji_student_oracle_blend.py",
+      "sha256": "2288c6a4ea0d4e88bfafd38de4baf112afa71e7968ee2546c3006847960797fa"
+    },
+    {
+      "path": "scripts/probe_wuji_teacher_inputs.py",
+      "sha256": "75f9b964690630add99f6f53f4e8403f5d80c99f0db06992b91df00408e6787e"
+    },
+    {
+      "path": "scripts/probe_wuji_teacher_sensor_accuracy.py",
+      "sha256": "62890e73c6b69eabf3b7f4113f35c7f5b231f38be66e0220bc5c3c3ebb6a2b04"
+    },
+    {
+      "path": "scripts/probe_wuji_training_objective.py",
+      "sha256": "1dda659d2d23f8d67cd2ae5237373094ea4c05d2e23c3ca5a1874e2559f11967"
+    },
+    {
+      "path": "scripts/publish_wuji_action_imitation.py",
+      "sha256": "58784d1272cadb68b292532b6dec6e31e3b0d1bd033c5ce352f435f851d15251"
+    },
+    {
+      "path": "scripts/publish_wuji_action_labels.py",
+      "sha256": "68965057160a983f9e694c84b80de99ac8c48661f31be77814701de583fa455b"
+    },
+    {
+      "path": "scripts/publish_wuji_actor_followup_final.py",
+      "sha256": "5a2d66e6f29bce0acf5bf282fe305663e6550a4455f47adb5d7fe5adfc8b4ad0"
+    },
+    {
+      "path": "scripts/publish_wuji_actor_noise_final.py",
+      "sha256": "ea7721bac1f572462011ab2aec87f468c1fafe8461d6e7be6f19dfe6caf00eb7"
+    },
+    {
+      "path": "scripts/publish_wuji_bridge3_student_diagnostic.py",
+      "sha256": "91ba756a47eadbe7b4a22d7aa90eefbacf8e932659ca2efafd2227c56ccd09d8"
+    },
+    {
+      "path": "scripts/publish_wuji_bridge_and_latency.py",
+      "sha256": "a9bfa3d43df9a51de64cb0cb222e1cb4db66fe5978a3c45f8f17223d929a7ab3"
+    },
+    {
+      "path": "scripts/publish_wuji_command_backend_results.py",
+      "sha256": "17347aa7feb2689468a2e895babc26f34a128b9681ee95f66a07007b70d50a96"
+    },
+    {
+      "path": "scripts/publish_wuji_command_slider_final.py",
+      "sha256": "a06a32e7f8d3f3f01f072970a8e170050031a715fd305116eaa549356006cbf5"
+    },
+    {
+      "path": "scripts/publish_wuji_continuous_cp100_results.py",
+      "sha256": "24fa96e92b2743122267e71982969ee156a67c25adc8956c68f33ca1d8874771"
+    },
+    {
+      "path": "scripts/publish_wuji_continuous_results.py",
+      "sha256": "8f0a6928fea68adb13930b0122c2f37161d792e9b65874524fc0169f935def20"
+    },
+    {
+      "path": "scripts/publish_wuji_controller_pose_final.py",
+      "sha256": "5b7f4588a89e7a7d83e4d620aa8b85b047d8c5b64ed2198f264bf86a0160413d"
+    },
+    {
+      "path": "scripts/publish_wuji_core_task.py",
+      "sha256": "76d3badcf48d8bad57a7e2eb1d6f865eaf4149948647596795fea0385d594274"
+    },
+    {
+      "path": "scripts/publish_wuji_exploration_diagnostic.py",
+      "sha256": "e19d4c084e2212b97b3dc8e708141960a844fb64842180c25a2e8d1d9066faa5"
+    },
+    {
+      "path": "scripts/publish_wuji_fitted_state_results.py",
+      "sha256": "0340a26eaf3d29cfc124c98b07283b245f224fbcf43845dfed08d5ead487a81e"
+    },
+    {
+      "path": "scripts/publish_wuji_geometry_and_inertia.py",
+      "sha256": "4a2026646831419ef40246dadfaabca9d863226855dfccdcfb367cf5fc64af65"
+    },
+    {
+      "path": "scripts/publish_wuji_joint_imitation.py",
+      "sha256": "55533f8503c2caf8662253d00bce95a6b5a25b53ecc743bd56657714ccda1368"
+    },
+    {
+      "path": "scripts/publish_wuji_near_reward_cp10.py",
+      "sha256": "0e361ba9843e97080c6902f3c217bf9ab64c6ed9e8b32c1a776634a8e12381f9"
+    },
+    {
+      "path": "scripts/publish_wuji_near_reward_cp50.py",
+      "sha256": "c758f8d662497c398fad338e360354bab7f3c2b60a02906c06d04e9d380661d0"
+    },
+    {
+      "path": "scripts/publish_wuji_new_grasp_and_horizon.py",
+      "sha256": "b16a5da548e4504c8caab31905fae963549ef32891732a78988b203e84953721"
+    },
+    {
+      "path": "scripts/publish_wuji_official_actuator_cp25.py",
+      "sha256": "fddbef8baf7278755fc1ed0a78e87ba58ff205008bbeef6b11dd77e2e6ba6d3a"
+    },
+    {
+      "path": "scripts/publish_wuji_population_diagnostics.py",
+      "sha256": "65627668f8e9ecfe819f9d38565cfdc7aecde141e3925bc6f25603e549bff6bd"
+    },
+    {
+      "path": "scripts/publish_wuji_population_final.py",
+      "sha256": "54012329b217e7a0dcf5fea2a20d2448bcb047a78fa55fe58a5a2ff732b4a1fe"
+    },
+    {
+      "path": "scripts/publish_wuji_precision_cp100_artifacts.py",
+      "sha256": "0845e949c9bfd93b5dac0e68e28d593cf7faebb4d1081e58b7d8905e794ae32b"
+    },
+    {
+      "path": "scripts/publish_wuji_precision_cp125_results.py",
+      "sha256": "b14a816ccd06731fdf5e03565460967466af92ed25678c2e02fbc06ec838436f"
+    },
+    {
+      "path": "scripts/publish_wuji_replication_and_transfer.py",
+      "sha256": "44589a53c8bf276550193310604b9e3e07124d960f715f924116dd2c44842844"
+    },
+    {
+      "path": "scripts/publish_wuji_sapg_kl_diagnostic.py",
+      "sha256": "2340609589b59862e8fe3b9fc3727e5e9129f4ee053bb3f494abea069c296e53"
+    },
+    {
+      "path": "scripts/publish_wuji_slider_components_final.py",
+      "sha256": "1b248144c42dd8fd4677f89102077de262437daa8ed0665179f3c829090f0c27"
+    },
+    {
+      "path": "scripts/publish_wuji_slider_fusion_final.py",
+      "sha256": "e0ba4ca70aa7bcd33c93a6f836939e3529bd7c8db421b9c843f7b34b34f41839"
+    },
+    {
+      "path": "scripts/publish_wuji_state_aggregation_final.py",
+      "sha256": "e04b264a4937a98322c1f3af788961ea34f818d6730e0d2cf1d29d835185605f"
+    },
+    {
+      "path": "scripts/publish_wuji_state_component_results.py",
+      "sha256": "898ef5a273092a0dbe72d7094e1b187ce2bebe62d2c636fa67d275fb73e18817"
+    },
+    {
+      "path": "scripts/publish_wuji_state_memory_final.py",
+      "sha256": "f5c8f2a7b8188dedb03e5e358889661ab638393aa90240435e75de8581626818"
+    },
+    {
+      "path": "scripts/publish_wuji_state_replay_final.py",
+      "sha256": "08aea529c24e5aae3a624f71ae2f4a68867089692b2116a4db9a9d23ce7bfe40"
+    },
+    {
+      "path": "scripts/publish_wuji_student_calibration.py",
+      "sha256": "cc3eb7c043c3d5bc2f14864ba94edbdc662b8ed62e4a46af40c9ef42372129f0"
+    },
+    {
+      "path": "scripts/publish_wuji_student_oracle_diagnostic.py",
+      "sha256": "e6f8aa8e3ed42fb70fc5654c8d8ef03787785c441bf20b485e55b2a36c5bc66e"
+    },
+    {
+      "path": "scripts/publish_wuji_student_replay_final.py",
+      "sha256": "018744bad382e3699f774605307f59bc4d87f6d3cba62e38e21b0c666f2fefcd"
+    },
+    {
+      "path": "scripts/publish_wuji_student_replay_results.py",
+      "sha256": "e2ed62e053dc20e7193aab7de834493589ad546cd171c0d996a473df4cec29c2"
+    },
+    {
+      "path": "scripts/publish_wuji_teacher_sensor_results.py",
+      "sha256": "a543f60b61f770fbeba5e3d8b8a5c9957d8455d5091dbaa5772c1d1a86cbdb77"
+    },
+    {
+      "path": "scripts/publish_wuji_third_grasp_and_long_control.py",
+      "sha256": "a576fe28d4ead881aa5dc14140dfc9ca6728bffbdd2034cc40d1d3dcbfc05732"
+    },
+    {
+      "path": "scripts/publish_wuji_three_grasp_teacher.py",
+      "sha256": "fea49c8c121e4d2989bccee5347c4823b970cebcbb41efa2c442c356f4f32760"
+    },
+    {
+      "path": "scripts/queue_wuji_student_evaluations.py",
+      "sha256": "8649a2355051fd6d90290142722307282312ff9601c4e6ff016d9e1a33b7c35c"
+    },
+    {
+      "path": "scripts/rank_wuji_student_development.py",
+      "sha256": "e2dfc6ec5b7f397cb8807b8aa8dd66205096c2730a980412878aa5f2fbf17eee"
+    },
+    {
+      "path": "scripts/rebase_wuji_unified_normalization.py",
+      "sha256": "e13da63e17056c74f5edb9a8133492ed1f2066bc20eecebe4a5939c0ea664adf"
+    },
+    {
+      "path": "scripts/reconcile_wuji_audit_provenance.py",
+      "sha256": "988d04d7a53040caf60d71d195633ef5a95fca985bc9452fa59d34a55f885de7"
+    },
+    {
+      "path": "scripts/reconcile_wuji_static_provenance.py",
+      "sha256": "4e2c487ca5513a11df40f0a5a7593cf8fdf897b10f1013f61bcd812d4cba32e9"
+    },
+    {
+      "path": "scripts/record_g2_status.py",
+      "sha256": "e95c6800a1eda50a8dc7642f0ae1749e6e3376f57b9479905045331e0e2e4f91"
+    },
+    {
+      "path": "scripts/record_wuji_geometry_goal.py",
+      "sha256": "a6924218ca1d79e1090b7672325d5aac4eae554ecd8e0f1448c8e3207fa72550"
+    },
+    {
+      "path": "scripts/record_wuji_hold_event.py",
+      "sha256": "98b791ca263f4f134ba0e2ab8f5bd463773f8ed7982d838c733aa096df58f69d"
+    },
+    {
+      "path": "scripts/record_wuji_multigrasp_event.py",
+      "sha256": "3d686ad68c71314d46e4953fac9f78b725f88b4ee178ffd0b39670d5ad3c522a"
+    },
+    {
+      "path": "scripts/record_wuji_recovery.py",
+      "sha256": "c97261023069a0c7cdc1591e78210ba093f5d0f57f2e85ec754ede08d6ab8038"
+    },
+    {
+      "path": "scripts/record_wuji_student_goal.py",
+      "sha256": "af15bb50a55e9ed5e24cb249bab03eef221c3c931ec825b414d715cc2e9c915d"
+    },
+    {
+      "path": "scripts/recover_sharpa_corrected_nccl.py",
+      "sha256": "ee1a5ef96755b318c80cdef8390d4fd918af7ac149accaf0b875fca39ff6e0b9"
+    },
+    {
+      "path": "scripts/recover_sharpa_reference.py",
+      "sha256": "67d037cb91a00e00b181cf087869bef56b7af5ed490a1ae84b31ba9219746265"
+    },
+    {
+      "path": "scripts/reference_metrics.py",
+      "sha256": "e7347f6bf5f8adf33b5be4f35a91127f651dada1f16d0c371d3d25d978c52f64"
+    },
+    {
+      "path": "scripts/refine_g2_free_digit.py",
+      "sha256": "f7e9d14de1c5dd9aca33b57252a620f6da3d64cd0cb32f0748eec28674a78b6c"
+    },
+    {
+      "path": "scripts/refine_wuji_knife_grasp.py",
+      "sha256": "7f563712e140289c120c73281b1c53d747bea73d100d03e718f78a4d5f1f11bd"
+    },
+    {
+      "path": "scripts/refresh_wuji_student_development.py",
+      "sha256": "7df653c4dfe613901f56ee508e99c487ea59b523a7f4ed63c73be825ed1079f2"
+    },
+    {
+      "path": "scripts/render_g2_overnight_table.py",
+      "sha256": "829ca891a88cbb8655d671535a6ab93304e536cfb900ce6809c38172a6affe03"
+    },
+    {
+      "path": "scripts/render_wuji_geometry_videos.py",
+      "sha256": "e3493095a9ec6e28dd2209f6ac9aa8b23575d3046947e827ae3a668396bd5fab"
+    },
+    {
+      "path": "scripts/render_wuji_hold_final.py",
+      "sha256": "8210f2e92b93433650524a6d3494fa28f54ce4bc79a59a5082eed2a728aa5b7c"
+    },
+    {
+      "path": "scripts/render_wuji_hold_integration.py",
+      "sha256": "74cca6b5568c12f52f2982575766a8dd6c20d49a585a261b20faccedff764890"
+    },
+    {
+      "path": "scripts/render_wuji_multigrasp.py",
+      "sha256": "65a84714054158b716e118ea6cf425b58540df96f25bf42d96629bc7cfbe27a1"
+    },
+    {
+      "path": "scripts/repair_wuji_recovery_training_pool.py",
+      "sha256": "43c66b4bc2edf41cf0b8662c7580e27397738a1a33978a181098cb1764d0ac8f"
+    },
+    {
+      "path": "scripts/replay_sharpa_physics_state.py",
+      "sha256": "8becc88964bc484f4762554a549967067a78795c2459e7b6d324cf97ded2196e"
+    },
+    {
+      "path": "scripts/replay_wuji_geometry_fixture.py",
+      "sha256": "540b979928f915c2e94383989b7d7fd1abeac9591e0935efdbc7063b1c953f82"
+    },
+    {
+      "path": "scripts/report_wuji_recovery_resources.py",
+      "sha256": "97fff4e03cf01098d6628d851d15031edcc3fe5e223ff5e7759c8f2a446a90ff"
+    },
+    {
+      "path": "scripts/report_wuji_student_final.py",
+      "sha256": "50ef885802b0f410b14162bcae087d8a61dddb5b044e5047014fa7b085a620a2"
+    },
+    {
+      "path": "scripts/report_wuji_unified.py",
+      "sha256": "8db67898fb5b46d01ea8b2a4544ca3376f985981cbfede6f9d3c628345a80ed9"
+    },
+    {
+      "path": "scripts/reproduce_wuji_multigrasp.py",
+      "sha256": "1becb3322093d397f5cc080489a6fb31f54df2f69aaf22597e30a889764e3f68"
+    },
+    {
+      "path": "scripts/rescore_wuji_reset_mechanism.py",
+      "sha256": "68062b6977378a61197ebe4d9d024c9917d605449bac457c0302fbd8080161cc"
+    },
+    {
+      "path": "scripts/resources_wuji_unified.py",
+      "sha256": "7c749a5833ee82d03b1a9a37411cf71a1a12025270fe366fc66eceed2e49aa73"
+    },
+    {
+      "path": "scripts/restore_g2_evidence.py",
+      "sha256": "3e556821ad2fa1c885c6d720068a6d28767057057af69065e0567dae15b9f505"
+    },
+    {
+      "path": "scripts/restore_g2_evidence_trial.py",
+      "sha256": "91112dd6aa674eced74f698e9229247901d7ba03418a4665bad94f1a451c2d20"
+    },
+    {
+      "path": "scripts/restore_wuji_hold_run.py",
+      "sha256": "1ea74e616cbd9621797716f8b0e0d0ac3337be6f03e5c00e8319f50b7da8a6c8"
+    },
+    {
+      "path": "scripts/restore_wuji_multigrasp_experts.py",
+      "sha256": "5508b93c1d3da66b64611fa88cac8de7807e3ed4b2eb4e088ea97db0851bfd39"
+    },
+    {
+      "path": "scripts/restore_wuji_multigrasp_weights.py",
+      "sha256": "db1bced7eea63edd0192edd171c51e42e6ae1c079d7ccd4dea5f5ca061c20ed6"
+    },
+    {
+      "path": "scripts/restore_wuji_unified.py",
+      "sha256": "9b6adf6e04bc4ccebde27eb1af325fa60e52ed42fccffb353cb6fb18d4131a67"
+    },
+    {
+      "path": "scripts/resume_local_baseline.py",
+      "sha256": "ee3b3407644ae1ea493d983ba7fc370bc988305d692cb525690d443802d99b4f"
+    },
+    {
+      "path": "scripts/resume_sharpa_upstream_after_restart.py",
+      "sha256": "7b0b1f90e46f7ac2f5951cda092dca775432540d909ba0cdae5a654f79742ae9"
+    },
+    {
+      "path": "scripts/resume_wuji_release_upload.py",
+      "sha256": "9931ab0765b8d287fbf635d5d566e2e3b1b2dbbd162c0c00731301b8447c6a7e"
+    },
+    {
+      "path": "scripts/retarget_g2_pinch_pressure.py",
+      "sha256": "7c0273f43c0fe757902bf3f6f75218471c130e32ac94afec5708ccae69297f52"
+    },
+    {
+      "path": "scripts/retry_g2_validation_cli.py",
+      "sha256": "80fa59190304b23916871cd113352573328b03c82102c875a619cf4d76ecd7a3"
+    },
+    {
+      "path": "scripts/run_bounded_wuji_diagnostic.py",
+      "sha256": "42dc3563679cd632479fc2b7d9ac3a799bfe6913bad545f8b40617e53810cb4e"
+    },
+    {
+      "path": "scripts/run_dataset_with_pid.py",
+      "sha256": "37a15fc13cd267760139f7efd924c63797fa344603c15e37296ea9d512d03538"
+    },
+    {
+      "path": "scripts/run_declared_wuji_series.py",
+      "sha256": "53604cb7fe12e56b9e0787d04fcc2708563e30dae2cb0efa16cc82c95bc93871"
+    },
+    {
+      "path": "scripts/run_eight_gpu_suite.py",
+      "sha256": "13494588e455c9dad0dfd13e7e0f5e77be07723e1fdc3043d399bd61cb0ff30e"
+    },
+    {
+      "path": "scripts/run_fresh_wuji_lowgain_generation.py",
+      "sha256": "156df23eb278cf6ae44aac3b45071578b8486db09538f83e94f4c7fade4fea9f"
+    },
+    {
+      "path": "scripts/run_g2_input_diagnostics.py",
+      "sha256": "f5a812db8b4057098fbcef12f37b9b351b53093f4806101951d45d31d349deaa"
+    },
+    {
+      "path": "scripts/run_g2_local.py",
+      "sha256": "dc020332966e9dc1295235f7b7de5f8cfc03aca165ae1e0e2089c994f47a73c1"
+    },
+    {
+      "path": "scripts/run_g2_local_validation.py",
+      "sha256": "4d9754b4f2f0dd8147a501e2081873fe09bcb396b103722bc96c920b434a8c97"
+    },
+    {
+      "path": "scripts/run_g2_small_variations.py",
+      "sha256": "74167e2602d4162bee2805cceb3aa81136599be8de41904a2e96ce84a20de521"
+    },
+    {
+      "path": "scripts/run_g2_tabletop.py",
+      "sha256": "3f91f94a39fa7bc514fc8500c781c63e38063bd528af40ef12bccbc5848a849a"
+    },
+    {
+      "path": "scripts/run_g2_v2_grip_diagnostic.py",
+      "sha256": "8e952058bbf3a7d66eff232833cd3539b2dc528dbbdfd2ee65e8097093294dd5"
+    },
+    {
+      "path": "scripts/run_multigrasp_after.py",
+      "sha256": "658ad8c6794c2d5fea3ed78f430fe2d67b22e2aa60a250b679e3f3d1e37c23a4"
+    },
+    {
+      "path": "scripts/run_multigrasp_job.py",
+      "sha256": "c9f2f8b8384cd2edfa2d44750f6453efff9515d088ebab7ff6c8f535f8359a3e"
+    },
+    {
+      "path": "scripts/run_official_dataset.py",
+      "sha256": "450b22d2cb879de348b75aba1aa166e1287845e500722194663a21b6ec0356e8"
+    },
+    {
+      "path": "scripts/run_official_seeded.py",
+      "sha256": "f44670bc28e5bd57f57fe3d993f620fa06e22bce6df11f5439e1ee271164f1cb"
+    },
+    {
+      "path": "scripts/run_official_wuji_screen.py",
+      "sha256": "29696b1b4e49d64f9e8734f0b96a236cf474eac393140bd7e6513cdc24d51969"
+    },
+    {
+      "path": "scripts/run_property_reader_training_probe.py",
+      "sha256": "c1db019fa22035bfee0f0c0c208a9f87e34f1e2f40e351bd928d43544c82ce70"
+    },
+    {
+      "path": "scripts/run_reference_experiment.py",
+      "sha256": "3b5bef2613583fd3cf987e5e145b6380f036ed1ff3a649cf96ebbcb9d3132dfb"
+    },
+    {
+      "path": "scripts/run_sharpa_final_repeats.py",
+      "sha256": "91478ca71af7c15248a331770bb2790e2a8d7e710d9b69f8d973259355b3e0aa"
+    },
+    {
+      "path": "scripts/run_sharpa_rootless_recovery.py",
+      "sha256": "0bc4df41652ae575367bf892a328162b9a7331e4b853f3bb8cd61dd191708928"
+    },
+    {
+      "path": "scripts/run_sharpa_seed_replication.py",
+      "sha256": "4bb5f5723966213fce026a486d593beafae50192d8016e016a1b04d4af10ffab"
+    },
+    {
+      "path": "scripts/run_sharpa_student_evaluations.py",
+      "sha256": "827fe106baad427f55c7534f94c42c784fb62df8b4cc85c3fb031a00668d286c"
+    },
+    {
+      "path": "scripts/run_sharpa_student_reference.py",
+      "sha256": "3f6b869b0493323ffe72dbd5ea14078d8f79c254c5a7504519b7f60b36ea5f93"
+    },
+    {
+      "path": "scripts/run_sharpa_substep_recovery_pair.py",
+      "sha256": "883e260fce7a2a1154b508ac3f5fb96723f7d60da4f2ae53637c995c1de37748"
+    },
+    {
+      "path": "scripts/run_wuji_absolute_target_evaluation.py",
+      "sha256": "5be8ff00ed30ce639339471fb0a5149a271b04cfd98b2526a889553e4d46d6c0"
+    },
+    {
+      "path": "scripts/run_wuji_absolute_target_pair.py",
+      "sha256": "514935dfabcc34dc947303171c8a8d3402a31d94261cd0db19152a490382967b"
+    },
+    {
+      "path": "scripts/run_wuji_acquisition_suite.py",
+      "sha256": "4d13bcc63303f180797812def2ed9a3c57c4312d3bce4ef391caf15957836a08"
+    },
+    {
+      "path": "scripts/run_wuji_action_label_probe.py",
+      "sha256": "c9df57bd942631f11cf6fb46ad71b2b73a4ff4abc11006171f24a63ca007b94b"
+    },
+    {
+      "path": "scripts/run_wuji_actor_imitation.py",
+      "sha256": "aa18b7e37ebf7737626bfe62f8bdf3f34c5c4bd720e2aed78c66645fb886a747"
+    },
+    {
+      "path": "scripts/run_wuji_bridge2_experiment.py",
+      "sha256": "6d41790cff09fa52390e9777e997009245e92d2739be9519a72128f90d99a28a"
+    },
+    {
+      "path": "scripts/run_wuji_bridge3_encoder_diagnostic.py",
+      "sha256": "4aa93aa8adfce009848e05f0e83c20b1b496f7bf0af410c01b9df22747b9d7a2"
+    },
+    {
+      "path": "scripts/run_wuji_bridge3_encoder_diagnostic_v2.py",
+      "sha256": "9e73ade6135d99e62138d8d74041754e06f682f36aa3ecfb51e2e9a9f175d467"
+    },
+    {
+      "path": "scripts/run_wuji_bridge3_experiment.py",
+      "sha256": "fac6180eaf50ee0432b2725857f82b2db16e777f9f9682554ce5b55362ac9945"
+    },
+    {
+      "path": "scripts/run_wuji_bridge3_horizon_pair.py",
+      "sha256": "0ac981813abcd01558228f9bd7ed339162115ebfa3de9dd72e57214a6f32bdaf"
+    },
+    {
+      "path": "scripts/run_wuji_bridge3_reverse_initialization.py",
+      "sha256": "a8a9d758fc27685d1cf96928884c3fe0e712db5ecd75168f028cc330d34607ff"
+    },
+    {
+      "path": "scripts/run_wuji_bridge_horizon_pair.py",
+      "sha256": "e238c84874ec91736b862bf9846d6d2feb8f0c51177f61bb45a83b0b81e1f144"
+    },
+    {
+      "path": "scripts/run_wuji_command_backend_evaluation.py",
+      "sha256": "e33a9c40c225ec0b0a61f3a8c3bffbfe6605b91baa3d06eb383eb9e548b0a9ad"
+    },
+    {
+      "path": "scripts/run_wuji_command_dagger_experiment.py",
+      "sha256": "70a94b23bafa3a640beee1f2db97ada9f97baaa5d1c90be7ccfaec1abf0ffa14"
+    },
+    {
+      "path": "scripts/run_wuji_command_slider_pair.py",
+      "sha256": "bdeb5cbc2274a50e7b71c8f0530bf2d65e3b8bb9d9ba1bc6646fcc0aa3e7735b"
+    },
+    {
+      "path": "scripts/run_wuji_controller_pair.py",
+      "sha256": "2988cb98e8aef237beb8676e261d87024692f3ffbba59029aa74282414bf1c68"
+    },
+    {
+      "path": "scripts/run_wuji_core_evaluation.py",
+      "sha256": "98f9f5fe050e11742beab29acc9ab02c6a2f4ad71a336dad5a462bf879afa18f"
+    },
+    {
+      "path": "scripts/run_wuji_demo_aligned_training.py",
+      "sha256": "782fd91a2de80d6198ea3e7d1b243086cb71ba137eec97e44fc4143a8bed2868"
+    },
+    {
+      "path": "scripts/run_wuji_exploration_group_diagnostic.py",
+      "sha256": "c6f1a535bc93647cdd72c5781d5aba5e124effca819261e1a95b614a191f5544"
+    },
+    {
+      "path": "scripts/run_wuji_fingertip_filter.py",
+      "sha256": "c350e1ea14d1831c68f91de53c49d869e6c505df83af32c29b8f7f52c6959b7d"
+    },
+    {
+      "path": "scripts/run_wuji_geometry_queue.py",
+      "sha256": "c32388010d6f3c97cbdd08efcafa97ecae13705aff692acfba3b92e1797cf58d"
+    },
+    {
+      "path": "scripts/run_wuji_goal_audits.py",
+      "sha256": "14fe7b21fca2a47edee12526d03788288023fef1e9a449a50dd7802fdbfbe182"
+    },
+    {
+      "path": "scripts/run_wuji_goal_diagnostics.py",
+      "sha256": "b2bd5a7aa65ea8cbf5dd2485970989ff47cd82381aac47234abd413792a52893"
+    },
+    {
+      "path": "scripts/run_wuji_hold_job.py",
+      "sha256": "fe1e8b07b281576196aa57164d4021799e708c961b5231a2cc659c79c8ecc5bb"
+    },
+    {
+      "path": "scripts/run_wuji_joint_imitation.py",
+      "sha256": "49ed08830fac2614ebc4ca81a649ac95ea9cc903e679008605f3e306850bdda5"
+    },
+    {
+      "path": "scripts/run_wuji_knife_demo.py",
+      "sha256": "53bce0791f192196acf71a341ca5d1b796bc60680ab2f1288ba934b10fd5a0de"
+    },
+    {
+      "path": "scripts/run_wuji_paired_queue_exclusive.py",
+      "sha256": "50509cbcd8fb7c734b25af76fa45051e54aef87b05712b8f4d105b04156503a6"
+    },
+    {
+      "path": "scripts/run_wuji_paper_pipeline.py",
+      "sha256": "a49dc97e6a4ec58428fcb8cd5f62fd62696293f6c33a1234cbc60354776e50fb"
+    },
+    {
+      "path": "scripts/run_wuji_physical_state_encoder.py",
+      "sha256": "45ce68f0f184fe6cd7c37f43a2c20956594cdb0bf0b2a8c861bb9233d440f194"
+    },
+    {
+      "path": "scripts/run_wuji_physical_state_evaluations.py",
+      "sha256": "ba735421e4ffbf92c731c32012c612a229e52e8dfc13835f1ceed2609f7d59dc"
+    },
+    {
+      "path": "scripts/run_wuji_physical_state_replay_pair.py",
+      "sha256": "b2817156c20924809dddbf5d84cabd0891dde49328a0a0be2d43d46c09687406"
+    },
+    {
+      "path": "scripts/run_wuji_recovery_aggregation_collection.py",
+      "sha256": "e55f88ac6452d8130f3bc71e37fedf24c1ec2458801fbeb5c49adf99518238f1"
+    },
+    {
+      "path": "scripts/run_wuji_recovery_aggregation_pair.py",
+      "sha256": "8563c855a9bb189597841f69a466fc66802920da1fab25135eb981e8b962a54c"
+    },
+    {
+      "path": "scripts/run_wuji_recovery_bc_pair.py",
+      "sha256": "a7c2e5c92c6947b4fd7f1f24495043f01547013c1c4907446a5072c34ab1f59a"
+    },
+    {
+      "path": "scripts/run_wuji_recovery_job.py",
+      "sha256": "998b1c057e21c029884c58abe3d29ca976f05682d6a54b5092ccd4f3bef4d76e"
+    },
+    {
+      "path": "scripts/run_wuji_remote_cp_local_audits.py",
+      "sha256": "8d57b44516274cbc9e03e34ce4babebe8878e19e0b0a748aa79f70eedaeccbcc"
+    },
+    {
+      "path": "scripts/run_wuji_reset_mechanism.py",
+      "sha256": "c03aa6bfe69af43984d592c86db074838a19cf57b922e94e5c7d2cef924f54b6"
+    },
+    {
+      "path": "scripts/run_wuji_reset_oracle.py",
+      "sha256": "7d655c86ef8d61ce0e33c32f61166292e04042725c7577dd0ebe05454439ba2f"
+    },
+    {
+      "path": "scripts/run_wuji_reset_range_pair.py",
+      "sha256": "3de28751ef156703ed39bd9d102eeee89697014b0db1dde2d2f3edf261ec17e6"
+    },
+    {
+      "path": "scripts/run_wuji_reset_range_seed_replication.py",
+      "sha256": "77642020df0578863e28df264704afb59a2180137344d4af1a24a0ae019e25e9"
+    },
+    {
+      "path": "scripts/run_wuji_rgb_mixed_fit.py",
+      "sha256": "61f20a68c95e98a74348af642dd3b48a23b395971fc9a1c59387ae6cfd6db3e9"
+    },
+    {
+      "path": "scripts/run_wuji_rgb_ownstate_collection.py",
+      "sha256": "46ce08e4e34bb0ff41fd5d9f3b1d45d92db5d889f4a4c452a2f56b3059584984"
+    },
+    {
+      "path": "scripts/run_wuji_rgb_policy_experiment.py",
+      "sha256": "97deaac2bb6fd2228086c82d0bc9e02d27f6935bb487f95c23ef2ef86425a00a"
+    },
+    {
+      "path": "scripts/run_wuji_settled_grasp_probe.py",
+      "sha256": "34d1503ff1bf946ac8e817c17cae539813c0ee584c044ee7ffe554070b7f8424"
+    },
+    {
+      "path": "scripts/run_wuji_single24_arrival_experiment.py",
+      "sha256": "1dffda7b45a6a3f1d3b10633756093edd9155fa55ca0933c5e1a3090bd75aac4"
+    },
+    {
+      "path": "scripts/run_wuji_slider_fusion.py",
+      "sha256": "06bc5c8e5481a27d7a9ecf1e2feb834b2031d63118561b5430e0024f26d69564"
+    },
+    {
+      "path": "scripts/run_wuji_spring_preload_probe.py",
+      "sha256": "7c92f0359360bacc85bc6361338b7163717a5fbcf63e2b04ccaf814a1c64cab1"
+    },
+    {
+      "path": "scripts/run_wuji_state_aggregation_pair.py",
+      "sha256": "9d7c4fdd63e1df640b8b65356e6f93c43a9af430eed82413e83e188a0ca7409d"
+    },
+    {
+      "path": "scripts/run_wuji_state_component_probes.py",
+      "sha256": "525fac7f338dec3554c106871c1c797ae7971a61ced80d7cb2045532b47968df"
+    },
+    {
+      "path": "scripts/run_wuji_state_memory_pair.py",
+      "sha256": "7da32266b33ce9967c8be2cf7aec38b538470a7dba1ff19a62aeac34de8d8156"
+    },
+    {
+      "path": "scripts/run_wuji_student_acquisition.py",
+      "sha256": "7f56ce041f9cae10e0153d5ed308d9f7b0d96bda69ac576705c7852fa2af5223"
+    },
+    {
+      "path": "scripts/run_wuji_student_after_teacher500.py",
+      "sha256": "5717c5547342e4cfa3cea5fea24829022d9f20ec055ea98c007d7b822db549b5"
+    },
+    {
+      "path": "scripts/run_wuji_student_from_spec.py",
+      "sha256": "5e57696fab63ef06c4f3b9e889004f6964011d32a4f0909ef7d70189ce5a8de8"
+    },
+    {
+      "path": "scripts/run_wuji_student_precision125.py",
+      "sha256": "988172a70ced03342040c957af08184c5a861e5d61441718bc1fa54443ef04ab"
+    },
+    {
+      "path": "scripts/run_wuji_student_replay_pair.py",
+      "sha256": "9de0e697f3bc24de82e7b45595a4a00d859a8bff1b6fc31a592ef7a294222200"
+    },
+    {
+      "path": "scripts/run_wuji_teacher_input_probe.py",
+      "sha256": "b31706da9e434a35dcf903d50c8c790291576de08e7a15effc9de862c5b7cb01"
+    },
+    {
+      "path": "scripts/run_wuji_teacher_sensor_accuracy.py",
+      "sha256": "26bbbb0473dc28f19cad54632483291baec2592be4df37b7fc5726a51f3a2010"
+    },
+    {
+      "path": "scripts/run_wuji_thickness_adaptation.py",
+      "sha256": "c42d42fc5c63d3c462424408ada77df28ccaffe231c4696755fbc5140e9692c5"
+    },
+    {
+      "path": "scripts/run_wuji_training_objective_probe.py",
+      "sha256": "c1bcfd93c37362eb7148f3908008e77001b59fe8b610937dbecd2e3ccae90123"
+    },
+    {
+      "path": "scripts/run_wuji_unified_c_segment.py",
+      "sha256": "cd3f0e98d0c9551fcb61cd0874624489b1ba6a38ec7a12df0a9b0114d62f9c3c"
+    },
+    {
+      "path": "scripts/run_wuji_unified_job.py",
+      "sha256": "9c33825dad2d82d4d46bc5979261076e9a87516b9bf50e4014c20e628b804a50"
+    },
+    {
+      "path": "scripts/run_wuji_weighted_command_gate.py",
+      "sha256": "aa8e8898d990e96ab43f0169e50b828bb265ffd05bfaecbd5ff3ab713dd34b42"
+    },
+    {
+      "path": "scripts/score_g2_local_trace.py",
+      "sha256": "33ad3cb2a5ff6a9c30da6f9a9798575fd9a6e0afb66d7ddf182df08945e8a29c"
+    },
+    {
+      "path": "scripts/screen_fresh_wuji_lowgain.py",
+      "sha256": "bc5f161c850c81611177e18fb30ced5bc2baad7ecd3bcd5fab73ccdc8fce3f34"
+    },
+    {
+      "path": "scripts/screen_g2_digit_workspace.py",
+      "sha256": "858036eac79ebf464bea079329b1a2344c7231d24a31564e7b1e2bb3888e7bbd"
+    },
+    {
+      "path": "scripts/screen_g2_local_thumb_path.py",
+      "sha256": "475fef1eeb2ed68f929924f781bf58efcc2984a698378b042a00cd44a33a3d93"
+    },
+    {
+      "path": "scripts/screen_g2_support_wrench.py",
+      "sha256": "db9b8c6e694b7370e7619ba8f5d2c8b445afc73d3d3d86d4e398744cc0264be5"
+    },
+    {
+      "path": "scripts/screen_g2_supported_endpoint.py",
+      "sha256": "5cff9e4490dbf3f5c94589d64fff37357b1b077ab2efc1ac7fb1d2dc43cbba87"
+    },
+    {
+      "path": "scripts/screen_g2_thumb_endpoint.py",
+      "sha256": "c3c2fc4270965cad08f1daf77767e8962fc772699dddb2d30aba02f3928c96fa"
+    },
+    {
+      "path": "scripts/screen_g2_thumb_surface.py",
+      "sha256": "649669e26ed077e936929f685bd53cf8891d206050ba076ae8a81ebc325eb593"
+    },
+    {
+      "path": "scripts/screen_g2_v2_thumb_feedback.py",
+      "sha256": "1a62033aafaa4099c42fe9fc4257d4573ceeb60024b0794ac4bf8d59b56b3264"
+    },
+    {
+      "path": "scripts/screen_wuji_multigrasp_test.py",
+      "sha256": "757e25968283eeccbc7648cb9280bb3d52ceebf8cfe42c50e53f77595793bb75"
+    },
+    {
+      "path": "scripts/search_g2_palm_down_pinch.py",
+      "sha256": "dccc41edc29241e21f7ced93ed61c5e183dd3a2b2cb154cdd5cb42c8ec6cea7f"
+    },
+    {
+      "path": "scripts/search_wuji_knife_side_grasp.py",
+      "sha256": "3abb264f410ff3f3e9a840ce3a2db257bee0750505bdff94936e333e1d0a8cf6"
+    },
+    {
+      "path": "scripts/smoke_wuji_geometry_restore.py",
+      "sha256": "12bd416785975819c74884c9829392eab36d445bca366fb213da39e31764103d"
+    },
+    {
+      "path": "scripts/snapshot_experiment_source.py",
+      "sha256": "16039fe0e3bc6e95644b1989e0bcaa244778790c3a60b052e30f989638e6760c"
+    },
+    {
+      "path": "scripts/static_wuji_geometry.py",
+      "sha256": "18497f1630b81c1558a4122e88142e9620af873577f26f771f14fede74181eaa"
+    },
+    {
+      "path": "scripts/status_wuji_recovery.py",
+      "sha256": "47a36c9960b39e71e2577058a5ec0d55082d451bac4845ef6141afc090e004cc"
+    },
+    {
+      "path": "scripts/suite_scheduling.py",
+      "sha256": "f892e9283079078a03cd633ab7720e230b90c7cd18d7fc4d2e7fa4b2987fb271"
+    },
+    {
+      "path": "scripts/summarize_g2_air_flip.py",
+      "sha256": "d3c136b97c56d6c6e67f9dd84da2919fac7496236a92bd582167218a864e6c4b"
+    },
+    {
+      "path": "scripts/summarize_g2_finger_surface.py",
+      "sha256": "1d5fad006542692a9cd2e04a81df01cd45af6a184ecc76a6e79a7d1c418a5b4f"
+    },
+    {
+      "path": "scripts/summarize_g2_gait.py",
+      "sha256": "f8df931265cd4e02be4f8bf2104617f17eddc1983e7a124b10af544309487185"
+    },
+    {
+      "path": "scripts/summarize_g2_local_controls.py",
+      "sha256": "7143fad8d915abfe4faee137a36c507d70fd4c572a3e84d31e7ed7ce94a24f1e"
+    },
+    {
+      "path": "scripts/summarize_g2_matched_controls.py",
+      "sha256": "4e646a6610ebad8140260479d106adeceb8b29795a96a826ddeeaaa8014d3431"
+    },
+    {
+      "path": "scripts/summarize_g2_validation.py",
+      "sha256": "002021f5305013e91bfbd959ad3e032b540599f17d81a61d29b6a514f2ba4964"
+    },
+    {
+      "path": "scripts/summarize_sharpa_final100.py",
+      "sha256": "5a3597acfb4d4fab56278c8a61d810a8c0ddaec3d4641d0a880d4de9480444b2"
+    },
+    {
+      "path": "scripts/summarize_sharpa_matched100.py",
+      "sha256": "6d5845666d242b322ba62fcdece2d8612515d841e82801022efc761b9ea2140b"
+    },
+    {
+      "path": "scripts/summarize_wuji_command_student_final.py",
+      "sha256": "c6dd81bf0f027263701ddf48e96721683ea33543e4b926d7da300c3da88886fb"
+    },
+    {
+      "path": "scripts/summarize_wuji_geometry_report.py",
+      "sha256": "f31238e912eb061c6b3d3142951fb0b3dfea22889930412be307ad4957dd149f"
+    },
+    {
+      "path": "scripts/summarize_wuji_hold_body_breach.py",
+      "sha256": "0588f70a6ab03cc41b574f4b3e813e9e897ea2e2e5a51cb7ab9cda6afd085a0b"
+    },
+    {
+      "path": "scripts/summarize_wuji_hold_followup.py",
+      "sha256": "b83ede457d8d5cbb59c6ef08cf3877735c137f4e1dcb874f133536b166c64bc3"
+    },
+    {
+      "path": "scripts/summarize_wuji_hold_resources.py",
+      "sha256": "4f8270a0eb1eed02927c17fea037f4d79025f95b589fde939ab5ff5d95a9ebae"
+    },
+    {
+      "path": "scripts/summarize_wuji_hold_stages.py",
+      "sha256": "f549893873c59961718c2f0a5b769343aa4030f0dce9de76044e7bf8f4e89ec5"
+    },
+    {
+      "path": "scripts/summarize_wuji_multigrasp_resources.py",
+      "sha256": "93c49f1b0dadcb8af4ce695f70937c9725fbb4c45db8e1d7c3d33bd0c01e5fdc"
+    },
+    {
+      "path": "scripts/summarize_wuji_multigrasp_trace.py",
+      "sha256": "74b82679bba3fc4273829611f74f58819009e3cc5013528070c57d24837136ca"
+    },
+    {
+      "path": "scripts/summarize_wuji_recovery.py",
+      "sha256": "4da7e3f1bc9bf855d9e97d1c929d405958d4cf82b3c61cc3769cd32e1133a79b"
+    },
+    {
+      "path": "scripts/summarize_wuji_recovery_bc_fit.py",
+      "sha256": "ae693760d7f4ca5b03eb3ee99199059a315a9f796610eb54509a356c5385cdcc"
+    },
+    {
+      "path": "scripts/summarize_wuji_recovery_training.py",
+      "sha256": "51c5092bfcda3bac01833cb797411e6b7931e68ce02c4de875d860a6cd1d4fcd"
+    },
+    {
+      "path": "scripts/summarize_wuji_reset_oracle.py",
+      "sha256": "1d4f676863e4105a2756134fd84ff2929d587eac914d32f82840c0dd0e026087"
+    },
+    {
+      "path": "scripts/summarize_wuji_reset_stress.py",
+      "sha256": "ef15d5fd7821403f215fcacf5660cc6372cfb9bc507ab096ead1e2f49c21e572"
+    },
+    {
+      "path": "scripts/summarize_wuji_rgb_independent.py",
+      "sha256": "a4fcfe57039e0d6ab2d1a83f7ab92434ebc26ecefeda9c4e42c72f3048a248ef"
+    },
+    {
+      "path": "scripts/summarize_wuji_student_controls.py",
+      "sha256": "ccc0ec1c3232ea4e9ded20e3808caef316163ad35578a15030d3def1748594f3"
+    },
+    {
+      "path": "scripts/summarize_wuji_student_failures.py",
+      "sha256": "d07014833bbfe6fcc946f4fe1d4b71041f604bcb0f240da4d51b85bdacd7264e"
+    },
+    {
+      "path": "scripts/summarize_wuji_student_fit.py",
+      "sha256": "6df6b7b4009e382b00ca0b786eb2c4cf38b802d1e39e7ecabceddba6c68ed743"
+    },
+    {
+      "path": "scripts/summarize_wuji_student_holding_gap.py",
+      "sha256": "684754593cc82fd09db20a44969ede37c0cf477e992810dd28d147c5acb5dc03"
+    },
+    {
+      "path": "scripts/summarize_wuji_student_raw_margins.py",
+      "sha256": "4bd0fefe997d8bfd63c8034a43aa1c84ccce643ba05febc7169cf8cef6b622e3"
+    },
+    {
+      "path": "scripts/summarize_wuji_student_stages.py",
+      "sha256": "a8b3d8a0ad59d97937c8a9777f636d050dc5e877f42d2a6068ee7782b2283ddc"
+    },
+    {
+      "path": "scripts/summarize_wuji_training_scalars.py",
+      "sha256": "fb5ac06095df310cab375111e58b9529889d1e64fd14dfcf9c5341530fc4b3d1"
+    },
+    {
+      "path": "scripts/summarize_wuji_unified.py",
+      "sha256": "55673a7889fbc00dcf843dd8a6db8d01bc7c1f5b8b8c4bbbceae085ffce10f9d"
+    },
+    {
+      "path": "scripts/train_g2_local.py",
+      "sha256": "9c6d77a280eca4cfe55d81ae1949c1070ef883e158af0b009144a12504b0ad20"
+    },
+    {
+      "path": "scripts/train_with_finite_audit.py",
+      "sha256": "9e93c6d9a3f66a741441db8755c9c73e93c2ddc8ccd941336117b2df22d99774"
+    },
+    {
+      "path": "scripts/train_with_physics_finite_audit.py",
+      "sha256": "0dbd9ebba05c505c92b9e7f74eed1f71a58ac43195b2418dad32129dd035d46a"
+    },
+    {
+      "path": "scripts/train_wuji_actor_imitation.py",
+      "sha256": "4f2e3e5e098aaf27e530502a3dc40dfb9c8dae6bed14afee1a2f0b5ac3336b46"
+    },
+    {
+      "path": "scripts/train_wuji_command_dagger.py",
+      "sha256": "4a5bbd3131e799a7ddd344ed14ae9a4682e182636c9ff7c4f7b381d6e77d6fc5"
+    },
+    {
+      "path": "scripts/train_wuji_hold.py",
+      "sha256": "72ac9e6396413f3c18d47a60ea752872922ecedf7be3c4a8b055f861a11a67bc"
+    },
+    {
+      "path": "scripts/train_wuji_hold_integration.py",
+      "sha256": "f44e4b0b8f8ccc2e0d1291339db5a4a2d1757414fd8b9b61a7d4cfe385943951"
+    },
+    {
+      "path": "scripts/train_wuji_joint_imitation.py",
+      "sha256": "9e19a89686145a28ea130861d8c33cc65608e5a0c818b2118fb2690561e7adce"
+    },
+    {
+      "path": "scripts/train_wuji_multigrasp.py",
+      "sha256": "878dc7c57e6f5eb1a9b57379da4369c7565c3b0b209865392ac718f35bf1b126"
+    },
+    {
+      "path": "scripts/train_wuji_multigrasp_expert.py",
+      "sha256": "f867a4b9bc1b2a4cf853099f92da93987d84a7df76d7794634c350275df0706f"
+    },
+    {
+      "path": "scripts/train_wuji_physical_state_encoder.py",
+      "sha256": "e71deed116ce36a35aee4ba0976443b5ac66b2ce34109143f441ecb914bcf2ba"
+    },
+    {
+      "path": "scripts/train_wuji_physical_state_replay.py",
+      "sha256": "589d1529365bd7a4c6fccedcf28afc636eeeac9be6f50045b33f230965f58006"
+    },
+    {
+      "path": "scripts/train_wuji_population_student.py",
+      "sha256": "9cab690e6a0c3a9ee2624a05cacd34ffa6dee37acdb0b913daa6db437334afdb"
+    },
+    {
+      "path": "scripts/train_wuji_recovery_bc.py",
+      "sha256": "e481dde1307261ffa25347f2920ac8e37900ccd51b8c099e5e0a151d6fc6e4ac"
+    },
+    {
+      "path": "scripts/train_wuji_recovery_rl.py",
+      "sha256": "70dc3588e4ad044088fd3b3cbb5b7a1d28eb331f01c4dd39c250752351a5605d"
+    },
+    {
+      "path": "scripts/train_wuji_student_actor.py",
+      "sha256": "d04e35c600c93d97453b54227c484eebfaf8d8b0f9c2fcfd6913de9df6c9e8c2"
+    },
+    {
+      "path": "scripts/train_wuji_student_actor_audited.py",
+      "sha256": "c99e320376d4cd5043305100a920de69c0dcbed6d5b3ea4cd1f9b9c5e4bae69e"
+    },
+    {
+      "path": "scripts/train_wuji_unified_bc.py",
+      "sha256": "eb38cdd1e34c6fe8262ba2e341db44bbe47e9738ec231f4439459a3caa469a6e"
+    },
+    {
+      "path": "scripts/train_wuji_unified_student.py",
+      "sha256": "9e3932aa0c848728ec54c81ef28d779e45c1f6ba35751554e9b4403c4f846bf9"
+    },
+    {
+      "path": "scripts/upload_wuji_recovery.py",
+      "sha256": "4030670f094593ce1a204324049069960bb804f01eb662758900955d6733381f"
+    },
+    {
+      "path": "scripts/upload_wuji_release_assets.py",
+      "sha256": "61f5f9938daff0078d844b6f5adcac7720884d29befa1b1c88b2016a111e8f82"
+    },
+    {
+      "path": "scripts/upload_wuji_unified_assets.py",
+      "sha256": "439036281a6e88dd9f06b2ab1178a7c0b52879df41df8d19899e8366d7a10ca4"
+    },
+    {
+      "path": "scripts/validate_fresh_wuji_lowgain.py",
+      "sha256": "79c578e722fc1f4ee31bbe0237c5ea8701c6849d7fe9c8b9076aa9362c384fe3"
+    },
+    {
+      "path": "scripts/validate_paper_grasps.py",
+      "sha256": "3b42ccae5b576fdc936674f421ba93d499ac0e11a144803ecc4237af81813864"
+    },
+    {
+      "path": "scripts/validate_wuji_recovery_final.py",
+      "sha256": "6d6ba36e3520fcfe82bc91771f16722746145b62f8d203225b62efff5bfaa0ef"
+    },
+    {
+      "path": "scripts/validate_wuji_student_final.py",
+      "sha256": "0eff0361bfa9239b8ca65b5060d9c7453cd202d10e51f94d5562f5e0b0c6ae66"
+    },
+    {
+      "path": "scripts/verify_wuji_deployment_roundtrip.py",
+      "sha256": "09b14303f7eab4a39de4269d54e9eb5cbf6aeb698d6891fb380dc094ab851082"
+    },
+    {
+      "path": "scripts/verify_wuji_hold_states.py",
+      "sha256": "73e4065b11a9c540df7e594cb259bb11a38b728b3c2ae60aff6e989ed9bf527a"
+    },
+    {
+      "path": "scripts/verify_wuji_multigrasp_release.py",
+      "sha256": "d46fc2d028be6a1d7c3068bb9d7dbd63bf23e218c5ff2c948dc9bf765dc4ca4f"
+    },
+    {
+      "path": "scripts/verify_wuji_recovery_public.py",
+      "sha256": "ececbc770024f3eb26b03759520dfc4da6bbf220c47d93acb6dca83d37cae08e"
+    },
+    {
+      "path": "scripts/verify_wuji_student_checkpoint.py",
+      "sha256": "10643f8e63de3e613f10fc242dcd0b835aa858a14d60bcd8d96a7e7b819993a3"
+    },
+    {
+      "path": "scripts/verify_wuji_student_public.py",
+      "sha256": "20ac35d997c1cd49c409beefd5743b6cd2589d7ea080435494e89ccad7f65b73"
+    },
+    {
+      "path": "scripts/video_wuji_rgb_collection.py",
+      "sha256": "50f4163682585a9851584ec7a5217945aae3c3d1d03df866f2b0f469826e81e2"
+    },
+    {
+      "path": "scripts/watch_eight_gpu_suite.py",
+      "sha256": "526e7f402537d7373a5ee217c1915b2544829c6c927c8e8e20a3761494dfbb23"
+    },
+    {
+      "path": "scripts/watch_wuji_acquisition.py",
+      "sha256": "b2a8897ebb17d421912fba684b606b624d57c223fe4abbacb963792256187beb"
+    },
+    {
+      "path": "scripts/watch_wuji_recovery_final_archives.py",
+      "sha256": "3cfc708be884af0fa2bb1188323215e9b0a0fe154fbfc08b1637ddf1893764e7"
+    },
+    {
+      "path": "scripts/watch_wuji_training.py",
+      "sha256": "90841de3cb9805fb9584c5b53e7961dc7bcb7b174cffeda7beaf4107e05558b0"
+    },
+    {
+      "path": "scripts/write_wuji_recovery_tables.py",
+      "sha256": "a8610725ba9f460f3c73a6ac45756fc4938b5792e6893f103a7b161ae6d83bd3"
+    },
+    {
+      "path": "scripts/wuji_absolute_target_student.py",
+      "sha256": "874bbfefd651565dd9985528df1badee140aaa46e34db69d2673a5d529cf014c"
+    },
+    {
+      "path": "scripts/wuji_arrival_metrics.py",
+      "sha256": "ef20482232c758bc43e592a781c5938c0b2f56a1b4d8bac130be57ef3fed2b00"
+    },
+    {
+      "path": "scripts/wuji_command_slider.py",
+      "sha256": "13e9eb0b2b89f764da1c7712d6ea93f0ee97e26a53667b2d7284c98ffdacc1bd"
+    },
+    {
+      "path": "scripts/wuji_control_interventions.py",
+      "sha256": "57067e329dff21777be15ecf022df00a620bae6d6e0d8714f767c3bf89c1cbc2"
+    },
+    {
+      "path": "scripts/wuji_endpoint_reward.py",
+      "sha256": "f65e1545524f6e625c23dfe9bf119ee7977473ff20e8df6e7bbdf68277167a93"
+    },
+    {
+      "path": "scripts/wuji_executed_target_loss.py",
+      "sha256": "ce568062de8d40b323cd94fe07464cab94e682e214a9d286491706bbad7ed692"
+    },
+    {
+      "path": "scripts/wuji_geometry_jobs.py",
+      "sha256": "d58b0daf49af392f98e349c35b13fbbb01a9fd89a9d4a85c6ac5618a67ada45c"
+    },
+    {
+      "path": "scripts/wuji_goal_common.py",
+      "sha256": "e06ceae04ed4461701e1fa3f64fc9f4014347e294646c8a51f18ade24b6e3d97"
+    },
+    {
+      "path": "scripts/wuji_kinematics.py",
+      "sha256": "e510822893c3f705f68efa9eaf3e614f241e5b766b2702f0943c58dc03046db9"
+    },
+    {
+      "path": "scripts/wuji_knife_demo.py",
+      "sha256": "dde38a30e13495832809a732ae1982611f1756d855d5a26881a54497fa4c9e52"
+    },
+    {
+      "path": "scripts/wuji_knife_frame.py",
+      "sha256": "12db49760d8c9631065a71dfc9da5347432aa3e07fec154f22e14f83a67bd7e3"
+    },
+    {
+      "path": "scripts/wuji_known_controller.py",
+      "sha256": "b663ccb9c154a0c448935b4898c708cc506e7d42f4fb378c53607268142386d8"
+    },
+    {
+      "path": "scripts/wuji_physical_state_encoder.py",
+      "sha256": "8acc7403078dcc794818c33a48fd2f52524b82a5a79a70cae8f848d7c31d451c"
+    },
+    {
+      "path": "scripts/wuji_pose_objective.py",
+      "sha256": "0ea4dc0d054aa2618a6295805ddc2f44a6f6a630cef7565a121ef1753fa133a5"
+    },
+    {
+      "path": "scripts/wuji_pose_quality.py",
+      "sha256": "05fe82820f3682c16a9eee6f08faf414ea2dcc533ef17ae91b8de9728c81f727"
+    },
+    {
+      "path": "scripts/wuji_quaternion_hemisphere.py",
+      "sha256": "ba201d49d0fc09d6d28853aa21303a62cad60360a70415bbe550a2f97a363efd"
+    },
+    {
+      "path": "scripts/wuji_rgb_state_model.py",
+      "sha256": "9cef82bff61b7bac655722578910fa467815659e9dcb60a95763d02774af0017"
+    },
+    {
+      "path": "scripts/wuji_sapg_kl_metrics.py",
+      "sha256": "b8f9b8e9451350e9e4ebfa1eb03547ccc94aaaed5512b7b8cd027f3f22be2bdc"
+    },
+    {
+      "path": "scripts/wuji_slider_fusion.py",
+      "sha256": "165855834a30a3866b5bdb13e9589955e7dc11d21403d723215166ddd208d86b"
+    },
+    {
+      "path": "scripts/wuji_state_memory.py",
+      "sha256": "b977bfcd4192c52cd7c93cd067abf4e9746cd6b27d4ea4470781135c6b9d92ad"
+    },
+    {
+      "path": "scripts/wuji_student_interface.py",
+      "sha256": "78166ac137dbe432b7e000645a10a43981edc38b940283b6e4f1eaf28e6ca6a0"
+    },
+    {
+      "path": "scripts/wuji_student_jobs.py",
+      "sha256": "bbcb2fd7e748a0c2aaf5e71452a8be167f367bae0bc487640888d5ca884999ac"
+    },
+    {
+      "path": "scripts/wuji_timed_command_metrics.py",
+      "sha256": "484a9b4279677cf55ade37b024b87d9ff2200f013af23604e1bb30026bafe97d"
+    },
+    {
+      "path": "scripts/wuji_training_launch.py",
+      "sha256": "d68d1bde3994e1b077bc77139fd829b27b00c32e9ede81ae9623e31df723dc95"
+    },
+    {
+      "path": "isaacgymenvs/__init__.py",
+      "sha256": "3439a4b1fa1648d54fff380685869bb084c77e0b9a72b275127a7f6f34190c43"
+    },
+    {
+      "path": "isaacgymenvs/cfg/config.yaml",
+      "sha256": "43a9d234905916e17ba341d8c13d9234528c5a58d97a8b81f21d6aeae7eaf2ae"
+    },
+    {
+      "path": "isaacgymenvs/cfg/hand/sharpa.yaml",
+      "sha256": "076bde44c7a5c43bc7cd2a7d32b3763b6f28b7ba6be97f64d25980d9c6ae67cf"
+    },
+    {
+      "path": "isaacgymenvs/cfg/hand/wuji.yaml",
+      "sha256": "fceea13cc92ad3d871e7605db82039771f941b5bb9cea661b27cd4fac5402b87"
+    },
+    {
+      "path": "isaacgymenvs/cfg/hand/wuji_paper.yaml",
+      "sha256": "e49f6c062938b62e03c46da819f7303ed812b121dad69731d14c41390ff9ffc3"
+    },
+    {
+      "path": "isaacgymenvs/cfg/hand/wuji_paper_official_actuator.yaml",
+      "sha256": "4f567fce5a24902d5c34adf8c5ab352601a738d7644f58b91296ee6201ae6223"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife.yaml",
+      "sha256": "e49c9fa51d94ffcdcdcfb90089d78281374cf3e0cd4428ea966bf47429d14b2e"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_sharpa_official.yaml",
+      "sha256": "a26606d701a9056eac098864bf643c76613e5d6123ec69de62b6b1a4d886ca22"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_sharpa_official_eval.yaml",
+      "sha256": "4f6b9b3b967e54bb964df42d6ad762d685ad09d555e97d22f80223165a2e19a4"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_sharpa_preflight.yaml",
+      "sha256": "04244ae77fcb39d352066a77caa62124165586355c3111eaa25fddf238966315"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_sharpa_rootless_20260922.yaml",
+      "sha256": "b1b603656c7db413f3932ec28b6d8bfe850ad8158a251ba2cd248f7cd59036f5"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_sharpa_rootless_eval_20260922.yaml",
+      "sha256": "98a0a20f97c0c19f57efc159c090504591182ad1b44f6516707a253d1c5484ec"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_acquisition.yaml",
+      "sha256": "e5ce937ae73dc727c0dcace28f08885931792f7e24987c580e04c8361dcf0452"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_acquisition_precision.yaml",
+      "sha256": "eafeaf9a324e69798bb9f0e0a7233680e331ee69d04e41b028e69edcf3273f2f"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_bridge2_20260922.yaml",
+      "sha256": "54e14d360c9c0adf33ed299876cad31b608aefc7a32a166c349ac1236f3f25b2"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_bridge3_20260922.yaml",
+      "sha256": "171143536941132ebba3e1fac62987c32dc874196e25f052e061b823dbb0c9fb"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_demo.yaml",
+      "sha256": "6d9b468d0d79107a8acbb7076330f370e4bf07b8f19abb251a5607abbec38174"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_demo_aligned.yaml",
+      "sha256": "bcd6e2a44c0a7c7ce8bf99d15cfa6300e4de30d95d2a838ca7a864dd2479c157"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_fingertip.yaml",
+      "sha256": "dea3a07bfc08e134815d1ad3df7455085e4c6a68f399296ed2b2b2e43cfe23fe"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_fingertip_acquisition000.yaml",
+      "sha256": "6a23673cd33b0901e924c5a70ab4c54abea58f3bceae5640b06e016b29a236f2"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_fingertip_eval.yaml",
+      "sha256": "e9583340c8bd1799db851570b0458dc0616cb96194c56dfc13ea0a398aa4eeea"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_fingertip_precision000.yaml",
+      "sha256": "462dce439d009572d6dad9bcf633d4273a4aaa9e54a1bb27783840e5aee6c9d6"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_functional_single24_20260922.yaml",
+      "sha256": "8e888c6ce419e40f0c0920b7171f57f15dc31468c673a5f8602b2c595c91c2bf"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geo_L110_20261002.yaml",
+      "sha256": "da2e2557500d1c12d5fd7b23634a240d849363896e2d1fd10f07fc8e6bc249dd"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geo_L120_20261002.yaml",
+      "sha256": "9647b952bd7d0ea6a264e7a172840e3d41fe0008405ff67c94a156ccbdf6a8d9"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geo_L80_20261002.yaml",
+      "sha256": "74fe9fa989771bb57d94fa265965878e949d19e0ee05f084abde4f6efb61224e"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geo_L90_20261002.yaml",
+      "sha256": "f26a4790ee3027319f5f9a0965df9dc3dc0ee24b6f02df660a1b74830b889863"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geo_T110_20261002.yaml",
+      "sha256": "bc8fc98fb90d9846f5b3ebca0f315194a210185751ec0406b6988f307a14776a"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geo_T120_20261002.yaml",
+      "sha256": "081a97e8be77a799d6d0cf0aa64f9b250872bb9454d9e62ed564493b98869ceb"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geo_T80_20261002.yaml",
+      "sha256": "05e5d5f18f2feb5e5a2ebf1129ef7b35d682cee1a6e783097e98bcc95778e281"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geo_T90_20261002.yaml",
+      "sha256": "e38f234dc84d258fd9542a7876cdcea22c82c242a18b9965dafca663e92d7168"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geo_W110_20261002.yaml",
+      "sha256": "d081409c067fda6e444ebc1b36e39fe58a169a1c8eba38dcee78313b1b3456eb"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geo_W120_20261002.yaml",
+      "sha256": "05e4eeb176cae045fef992f4877aeec0fdbd6369a6f3f866939c1ba590326e3a"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geo_W80_20261002.yaml",
+      "sha256": "966ce88a2d4287ee7f750e50c6a38317cba88a54b5de9d7ce91aa8e69852cf45"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geo_W90_20261002.yaml",
+      "sha256": "5a694e74e3df68e0f648f63e74ade9f41bbf410c59a78b4de4889fe4e06f1f40"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geo_baseline_20261002.yaml",
+      "sha256": "fb21f3808e793531469655a8ff99de94062f951613f40cfc023cddbd42ecacb2"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geometry_body7_20260922.yaml",
+      "sha256": "b9b4759036e02b076cd0c594325f823c401689b885ccd90f45f4c8295b026d9b"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geometry_body7_authored.yaml",
+      "sha256": "783ac2de6aebb82a8fa354df4b907c4a3041f0fc61bc8006d3ea930ed4b06ef1"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geometry_body9_20260922.yaml",
+      "sha256": "39fbb9462db470fd243eae8f04f593ae05971416241ee47b5e9d1ae3f8b8a74d"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geometry_body9_authored.yaml",
+      "sha256": "dfc2a72929e33141b83b8df92679ef775ac9409f202c8f08318c9e23b842a57c"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geometry_length142_20260922.yaml",
+      "sha256": "0f8f0883228cf7a465ceb27d54b7db3fd470fd55405f5ebb96158cdc8470790e"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geometry_length142_authored.yaml",
+      "sha256": "82f41ebad3ec10a602dc11d785d1a49a01394a6e707c1ed4fa87d530393001eb"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geometry_length152_20260922.yaml",
+      "sha256": "eac39bf54f4d718ff5fb6d87c0ec18cd7a69f4718dbfe799a84a8e649cef3d13"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geometry_length152_authored.yaml",
+      "sha256": "09e8d67b391cdeb6a55031cd68f55c4cf3bef5abb353fff95b4ff71bd3239dcc"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geometry_nominal_20260922.yaml",
+      "sha256": "15f1c6c3e89290644bbc8a23ca69173743654eac2eb7903db8137b8871fe5ca5"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geometry_nominal_authored.yaml",
+      "sha256": "350db9d8ff2eb29fb865c1060f9437467ed489c0583d2d56b91df38a8dbfc070"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geometry_width18_20260922.yaml",
+      "sha256": "591684f036093dca5ac9631ba95977882dd4d8ee71fad1aee4e5613bbc55c319"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geometry_width18_authored.yaml",
+      "sha256": "c9b8d4fe2ec0fa35453dc0ed469b2626cf90bb7b6dc7e41781a4fda6f61b4a64"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geometry_width20_20260922.yaml",
+      "sha256": "e686efa79419fb7f26580baba588ceee31eee8db3a8fdac28ebf68c2aea74933"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_geometry_width20_authored.yaml",
+      "sha256": "7b3c69d7b56f45ca1b268c5134bbc4d910f00fadf9a9621139c378782a78d050"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_lowgain_fresh20260922.yaml",
+      "sha256": "55f166c77870554991eabbc736427e9a9213a6ffef6435aa64e5257bf367eb78"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_lowgain_fresh20260922_seed19.yaml",
+      "sha256": "98a1707623339812ae44676dc29d9315ad6f327f1b6d57e1bc25d03caab7aa6d"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_lowgain_fresh20260922_seed20.yaml",
+      "sha256": "3464268f3e08798f23581b0ade15747a34d81ed7a2d063cab4b175c9cd87c8e4"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_lowgain_functional20_20260922.yaml",
+      "sha256": "2b3c4499c6f3891b6d9f68b3cb8cf98cc3ce593843295b7786a05bdadf2bfe02"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_lowgain_functional27_20260922.yaml",
+      "sha256": "d972736e8f45e52d2d3dc799ac7f900ee3a9894c2811a1b5c49d189accfb365e"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_official.yaml",
+      "sha256": "1954852ed0535a30f4b6a3c05fb7793d8798c9320a3c54844c40f67ec7324b14"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_official_acquisition000.yaml",
+      "sha256": "352f1f01376fb9035f4ab12793a67e371ab0249d1682de1577f82fab91be98c4"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_official_approved3.yaml",
+      "sha256": "ab58ca803367e8c2b150d6e9c660c645da66b9a5043da994d5a687b60d80d7b7"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_paper.yaml",
+      "sha256": "534f9ca34394a2045933742d0012caaf395e50dea5dc2d59f05ba211dba8eaa0"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_paper_eval.yaml",
+      "sha256": "d479508a036588e6190f500533f3e745907937c09759a751ae20d24b1a9f7ca5"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_precision_authored_inertia.yaml",
+      "sha256": "607b52259d0790f1a67532cfaccfb67945ef32a1c917f3bbe5ef19439951d1cd"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_precision_damping3.yaml",
+      "sha256": "4a57202cc28844e9f7b161d0146e0cce029f218ef3d23bca8e6f5e0305fef74b"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_precision_near01.yaml",
+      "sha256": "22c362ad53d29ffcd57828a33529feeb5195edb99c69f2978b96e35f661ad8fc"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_reference.yaml",
+      "sha256": "60b37d1859343fee88652225ca78be1f8e640b9c74da7a1a00381b2e071230cc"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_thickness3_20260922.yaml",
+      "sha256": "04af04c32510ce8332ef65f5ef276aed6b3e2d10e7d97ff0428c897ccd07870e"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/knife_wuji_thickness3_v2_20260922.yaml",
+      "sha256": "5a119a2497e75a607ad323f2a284e1953ade043211ed78fb849eb9046e8cc8b1"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/lighter.yaml",
+      "sha256": "aeaead05761b25710007fef0586904e3642dff0ccc82dd2ec3418c17a1b45356"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/stapler.yaml",
+      "sha256": "ab5116962c6f93ce0d8ebffed8d71d6a662d3119a38be8f4cb52923cb1cef1fd"
+    },
+    {
+      "path": "isaacgymenvs/cfg/object/tong.yaml",
+      "sha256": "8bb7bb642cd53e587d077a2c8230db0d8279f6acbc1c152ea6bfa4b299fd8e65"
+    },
+    {
+      "path": "isaacgymenvs/cfg/pbt/mutation/allegro_hand_mutation.yaml",
+      "sha256": "c3d16b8765d8f7aacd2c786c9103a8eaf0ee76dfc21dc9dc9810b3efc9b220a1"
+    },
+    {
+      "path": "isaacgymenvs/cfg/pbt/mutation/allegro_kuka_mutation.yaml",
+      "sha256": "3bc51d4e8d6a1969fb60bc94a6ed9dae6c7d29963c0271a8da5b6eddcd2a90b2"
+    },
+    {
+      "path": "isaacgymenvs/cfg/pbt/mutation/ant_mutation.yaml",
+      "sha256": "b46196a1ae55f3428a60070baaf26c860c579472945f600ca0e2f02dfdf6292c"
+    },
+    {
+      "path": "isaacgymenvs/cfg/pbt/mutation/default_mutation.yaml",
+      "sha256": "ba631c60810d298f53a5cee0b00cb84388b91540bdd0fe9db08f0f186e09509d"
+    },
+    {
+      "path": "isaacgymenvs/cfg/pbt/mutation/humanoid_mutation.yaml",
+      "sha256": "4f3d33039dd28d96985fb1a638a57fb279b1730f1878ed8d0e72c1274b81a33f"
+    },
+    {
+      "path": "isaacgymenvs/cfg/pbt/no_pbt.yaml",
+      "sha256": "58a7c045d074cb961a0c93a62fae59301f58c6377e34c734946b363a1fabe1a6"
+    },
+    {
+      "path": "isaacgymenvs/cfg/pbt/pbt_default.yaml",
+      "sha256": "629f986d0b2b546bd03af204984dd98bf32214fb12d3996a71e3567f583a8902"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/artgrasp.yaml",
+      "sha256": "7306b118405413ea0d3338ea45cd7d49f81c2f5b2d932dcce5b8e131b8c9988c"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/artmanip.yaml",
+      "sha256": "4f983324e37f8cb19199b36cc435a321ae61b763b9d295ab520fd2a2d4bda50d"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/artmanip_paper_reference.yaml",
+      "sha256": "895b4fcd32cd97142324671d1d0358c58a744e41c2d7b3d56d47308c7f2d80db"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/artmanip_reward_control.yaml",
+      "sha256": "df61b869a3e72ff320951edbd54fad435c19dd3caf05c04a05c0e4eef3ff867d"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/artmanip_reward_upstream.yaml",
+      "sha256": "f498dc593c133873c423fb693420d7c41b4e8c28d93dd98424a764675c5e2de0"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/sharpa_student_upstream.yaml",
+      "sha256": "f498dc593c133873c423fb693420d7c41b4e8c28d93dd98424a764675c5e2de0"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_acquisition.yaml",
+      "sha256": "167928c5b1221753ebc02cfc766fb1da6448ed3cdfbbeeee8b72a5369759cd20"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_acquisition_bridge3_controller_state.yaml",
+      "sha256": "b4a78abc9d8ada8f813c92b71149d1fa00b9afea03def4b3bdff84a3a7bb03f2"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_acquisition_bridge3_hemisphere.yaml",
+      "sha256": "39479bfefdb04f963f2f4e2cbaaf6353148d7ead90a7d242b8eb251462d4b4f8"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_acquisition_bridge_hemisphere.yaml",
+      "sha256": "9352c549440caa4de67f73aa0351337a2baa590474f2853f3cb50fedef779f91"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_acquisition_fingertip_precision.yaml",
+      "sha256": "8b6cd15e31b4af718406c0602d13702e412643c3ce58a0a618b28ce2a3eb6c86"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_acquisition_fingertip_subset.yaml",
+      "sha256": "866ab74fd4603de242e3b7afab723350aaae34b2cd6194d33fc004dccb195fb7"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_acquisition_functional_hemisphere.yaml",
+      "sha256": "5ecafdcbd01582b0c71a8ff6a52a39562d50015f13b484bf0c5407a14c492bbd"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_acquisition_official_arrival_control.yaml",
+      "sha256": "a20db103ea0a3fc23590d21a66700dc08770af29d4d732ffc94c48f2b5f9fa06"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_acquisition_official_subset.yaml",
+      "sha256": "eac61667f7657abde529ab110725502e5f3cb1f289884c51f88682314c9a811f"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_acquisition_official_support200mrad.yaml",
+      "sha256": "827933b1a2cedd8b0139ae08a22ff92874fd65c1212e498f6ccfee57a8064f8c"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_acquisition_official_support40mrad.yaml",
+      "sha256": "31b237bd89db4586bda8decc38531807180e3356edd43fc5d9963e8b297460f0"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_acquisition_official_timed2.yaml",
+      "sha256": "ebb7d47f5e4aad600b24ef56ebf5df2afe5f2f2380a31fd3cb482cc6f0a36ebf"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_acquisition_official_timed5.yaml",
+      "sha256": "25e307cc4c21c0ed7fdd1d351229d716913e93a76b51e0c036e4a321cb6bc430"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_acquisition_official_timed_hold.yaml",
+      "sha256": "516e88705934e91c2572b194741180db356bb9f82cfb82c6d39d55603c934e6f"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_acquisition_official_variable_timed.yaml",
+      "sha256": "55531d76acd93141e98d8a192271a92c62176c268047312f8012bb55f36bddb3"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_acquisition_pose_objective.yaml",
+      "sha256": "d0bdb9dcc258b33e73ef0e66da2904555f279d17195aec1e42d18fda6affdf35"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_acquisition_precision.yaml",
+      "sha256": "3d974f0dcb302dc3d3ca0e11600208a3c7b875ab6de2a986f24ddce8f2658ac9"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_acquisition_precision_aug.yaml",
+      "sha256": "7e73d98cb7d6cbb86179f189da4becbadfb62172247c09a8799b90a5a9731fa1"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_acquisition_precision_continuous_pose.yaml",
+      "sha256": "dafe302326b7c6ff7475b5de37c562aa2c2ad1b28286fe0c77fe63654b817c1c"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_acquisition_precision_student.yaml",
+      "sha256": "c4faacea344b574847ecc3a2f0a3e17927afde9b0f42e1d30177110c5964d09c"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_acquisition_thumb.yaml",
+      "sha256": "db1191e38b216686981254c4dd60e01757c6aeba2089ed51e73928c0d9aa8074"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_artmanip_clock_hold.yaml",
+      "sha256": "a85be0a20dda01aaa62ee3894cf44c745c7fb327819604ed94ad079738f72945"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_artmanip_reference.yaml",
+      "sha256": "44b2c6b741ef4cf3cf6525d042a7c7fed7d5d89a4c49fcec6f1214100d1e5b43"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_controller_student_actor.yaml",
+      "sha256": "9dc9d46139ad7e66ca3a9dc4ad6ade4b86583e4a133543acc826efa7c14a49aa"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_demo_aligned.yaml",
+      "sha256": "4769aee3afd4bcb1b19f2803f4e3d010ecfe941ba93d1db8db81294811f64100"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_demo_corrected.yaml",
+      "sha256": "0c1d18ba4c6047a457325905ea0b0b7d95131b8f5d090f35afa1015946b8d4cc"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_fixed_student_actor.yaml",
+      "sha256": "a97b3d53d2643ad35fbb9db37695aee9b6d6c1861cfada169561b4b201ba6aec"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_geometry.yaml",
+      "sha256": "4200611758c14178066c3a65be0c8f8a457ed3db69c3bde15ec8b6cef786594e"
+    },
+    {
+      "path": "isaacgymenvs/cfg/task/wuji_multigrasp.yaml",
+      "sha256": "95522ff1f4ab90a7b2d2b8c5db678969168f63b5c7dc86fe5af839bb024f6d86"
+    },
+    {
+      "path": "isaacgymenvs/cfg/train/artmanipPrivLSTMPPO.yaml",
+      "sha256": "46ae48ea397e6ee70f9c95bd6c1acd9b9f42bf625243be40eb3155a97cd03762"
+    },
+    {
+      "path": "isaacgymenvs/cfg/train/artmanipSAPGPrivLSTMPPO.yaml",
+      "sha256": "51ee93dad5ac008f65ea2f7304fafc69d1f042d11af1b07353755408ba6a7a51"
+    },
+    {
+      "path": "isaacgymenvs/cfg/train/paperReferenceSAPG.yaml",
+      "sha256": "96949d424ede7408fe712e5b242900cbf5a8a540eed39e590a22393bd861ceeb"
+    },
+    {
+      "path": "isaacgymenvs/cfg/train/wujiAcquisitionSAPG.yaml",
+      "sha256": "a6e775bbd22727907b385d0a5ea991fcaab41a48ee5363ccb4fe7fb25dbe0c74"
+    },
+    {
+      "path": "isaacgymenvs/cfg/train/wujiArtManipReferenceSAPG.yaml",
+      "sha256": "eda5aed35c39112ec7e5458e8fff9636e1f0783fc7c8fba53f220cd8efa4de7e"
+    },
+    {
+      "path": "isaacgymenvs/cfg/train/wujiControllerStudentSAPG.yaml",
+      "sha256": "99bc5f85373adfce0c56e7352d747e3348d1e713f31d6c63fc55a9a4b35a57ee"
+    },
+    {
+      "path": "isaacgymenvs/cfg/train/wujiDemoAlignedSAPG.yaml",
+      "sha256": "fe251a2f4924948685e943c76086cd2b054b9d727d3ab4f82a578dc1e66089d5"
+    },
+    {
+      "path": "isaacgymenvs/cfg/train/wujiFixedStudentActorSAPG.yaml",
+      "sha256": "3c9c7e5663b118394f50bf833b34e47cb15307695a58207ec2bfbf968a945448"
+    },
+    {
+      "path": "isaacgymenvs/cfg/train/wujiKnifeSAPG.yaml",
+      "sha256": "14e34eb92b8510c90890e61961e9532936859b6d02ff7d4a7ec645028f09366c"
+    },
+    {
+      "path": "isaacgymenvs/cfg/train/wujiPopulationStudentSAPG.yaml",
+      "sha256": "fbe3480f5be4a951059d5e40b90a3e7246bc70a7f8a0655e5871de4628ec82ff"
+    },
+    {
+      "path": "isaacgymenvs/consecutive_eval_utils.py",
+      "sha256": "b16af7399efd511f4fcdb8b8124c519c1076213d5c7c02d79db47508045ad806"
+    },
+    {
+      "path": "isaacgymenvs/deploy/__init__.py",
+      "sha256": "38cd33f1f3e19527eeba6f75fb658e1c8536dce2c46e084a16355afe1e651a56"
+    },
+    {
+      "path": "isaacgymenvs/deploy/__main__.py",
+      "sha256": "a5257e3f1aa06953f039821516dc763ba07aba05b001d07f1c46903ab8c7abf0"
+    },
+    {
+      "path": "isaacgymenvs/deploy/_client_impl.py",
+      "sha256": "af64f2f2102411955debb7eaed59272cf760a2ee4610cbf997c5224c5aa9a5f9"
+    },
+    {
+      "path": "isaacgymenvs/deploy/_server_impl.py",
+      "sha256": "f9a38c937bc6f94fac84413873f231f2c414af0765b58fd3760ea95db91af2b3"
+    },
+    {
+      "path": "isaacgymenvs/deploy/load_selected_grasp_real.py",
+      "sha256": "ebfcff79257eb7718c36cc4060711e3182321b477eb765d6dbe2cb26c582b467"
+    },
+    {
+      "path": "isaacgymenvs/deploy/obs_layout.py",
+      "sha256": "243751d7e1b5ddf6e62a9e31fb8268987d2ae7c8c7ab2dfecb524898a46299c7"
+    },
+    {
+      "path": "isaacgymenvs/deploy/policy_rpc.py",
+      "sha256": "581cfdaa3148445ee0726a19f9806063adfa67aa7047928fd1233d645733b813"
+    },
+    {
+      "path": "isaacgymenvs/deploy/real_robot_policy_api.py",
+      "sha256": "2950a2773817adad9af26c1f3e646985417f9d0a3567e4ef2bfa87fd6384ac5b"
+    },
+    {
+      "path": "isaacgymenvs/deploy/replay_cur_targets_real.py",
+      "sha256": "4595690f6514b5b77ddf735aa1f9f85611a5310626c1bf9dbc9d3cf7382e6d43"
+    },
+    {
+      "path": "isaacgymenvs/deploy/robot_api_stub.py",
+      "sha256": "bff7029a17ec7bd7dc02f3d0dd6c12d1f9a64a3dc69feb1fa2431f516f4ca819"
+    },
+    {
+      "path": "isaacgymenvs/deploy/sharpa/__init__.py",
+      "sha256": "d539545600d2e0c82a14735a3a5bf1a590b65697a6d17ab6589f2e3488cf7fac"
+    },
+    {
+      "path": "isaacgymenvs/deploy/sharpa/observation_provider.py",
+      "sha256": "f5e9d7d20e585769c2163e9b6b829753dc9f90232622a74e183e2e3d51863691"
+    },
+    {
+      "path": "isaacgymenvs/deploy/sharpa/robot.py",
+      "sha256": "88ff8acfef5f93770e952a9af859cf4afcdec40c11ef0f9d502358d424d7f28b"
+    },
+    {
+      "path": "isaacgymenvs/deploy/student_policy_runtime.py",
+      "sha256": "ec0b44fec95cc97259afddfc9a23280fa380f5b1baeadd4133fe48c34117d7fc"
+    },
+    {
+      "path": "isaacgymenvs/deploy/task_state_provider.py",
+      "sha256": "98e83c01cc4cbe866bac88ff3331d840c105981ff50d56e1238344b8560df638"
+    },
+    {
+      "path": "isaacgymenvs/deploy/utils.py",
+      "sha256": "c3abab3504898caef203e6c48adec49e03f865d993fcb7dcfbb862d49a6715fe"
+    },
+    {
+      "path": "isaacgymenvs/deploy/wuji/__init__.py",
+      "sha256": "b13f680b0490c39dc055e8330ad2da8ec089ebaf5e8d748c6c75b58883bd0c61"
+    },
+    {
+      "path": "isaacgymenvs/deploy/wuji/acquisition_control.py",
+      "sha256": "e7868aacfd050b60379794cc3ad0c3e209fef65b5b15939de1db89d0da9d4866"
+    },
+    {
+      "path": "isaacgymenvs/deploy/wuji/observation_provider.py",
+      "sha256": "989d15cbd757903c32c8bfa03f4be036891a09cb3df5dc15d8419c6f1cc4918b"
+    },
+    {
+      "path": "isaacgymenvs/deploy/wuji/rgb_policy_runtime.py",
+      "sha256": "c2672f9cd326fc7693bd6100b61c599af0ea4cc79780b52c7ba7bca760278bf8"
+    },
+    {
+      "path": "isaacgymenvs/deploy/wuji/temporal_policy_runtime.py",
+      "sha256": "5f51af4b6769c5dad2c766fa6858e8df0554221617793bb40bbf619444b9a7b9"
+    },
+    {
+      "path": "isaacgymenvs/distill.py",
+      "sha256": "1e5f1e19a112dd8b2f9be9f3f3d53225dd8ea3d6710a336643f1e503ae6066a3"
+    },
+    {
+      "path": "isaacgymenvs/eval_common.py",
+      "sha256": "50fbad5da3f3952fa0505a7920dc7ae51a56b12937c31c710e1be5552967bc4d"
+    },
+    {
+      "path": "isaacgymenvs/eval_consecutive.py",
+      "sha256": "3d57fdc8c4f930a2d61a949fbabe0ee269af8b18df2be27bea6a69b8a4825a84"
+    },
+    {
+      "path": "isaacgymenvs/grasp_split_utils.py",
+      "sha256": "af878ec24b6d83fcbcb27dcb03c093f0bfbdcf1f7e11b981136cd9b7df2f0953"
+    },
+    {
+      "path": "isaacgymenvs/infer.py",
+      "sha256": "8e830063998e3672911d68d2f9dc635a708478c1255c7f5ff6a56c5c853fafce"
+    },
+    {
+      "path": "isaacgymenvs/infer_student_impl.py",
+      "sha256": "5b748e048cff160719f4a44b8354d21a78d8a95d83df76ea7f52e71d6e2ee76c"
+    },
+    {
+      "path": "isaacgymenvs/infer_teacher_impl.py",
+      "sha256": "f84320e1388da4718816ba23a384f6b4e60c6ed4314f1300f8f9abaef3c4111f"
+    },
+    {
+      "path": "isaacgymenvs/learning/__init__.py",
+      "sha256": "710898a5b409ec75e5eb6ae0198815b85e647cd688978a5008f241cb04902df5"
+    },
+    {
+      "path": "isaacgymenvs/learning/a2c_dict_network_builder.py",
+      "sha256": "53e13a5bb91cdd4e35bcca5f244ab2882df2a35f80510a3783d4792f046b9054"
+    },
+    {
+      "path": "isaacgymenvs/learning/a2c_sapg_priv_network_builder.py",
+      "sha256": "ecd00cc0fe90b313e0a2a9434be4f4fea8a2c079c755fad807caeb3cbcd9095e"
+    },
+    {
+      "path": "isaacgymenvs/learning/wuji_controller_student_actor.py",
+      "sha256": "7806776eac3ae4576e9c100cf0c0f7acc7d6f0f9a9e074370325c5b22cf0468a"
+    },
+    {
+      "path": "isaacgymenvs/learning/wuji_fixed_student_actor.py",
+      "sha256": "5fa73e2f3e61083a5e443e72c6f4615495b8d47a283335f28fa56e7fb3d562d2"
+    },
+    {
+      "path": "isaacgymenvs/learning/wuji_population_student_actor.py",
+      "sha256": "b517c837964e40e5d1df02fff966bec2f20a893492a4336e3e71e4d26cf7b883"
+    },
+    {
+      "path": "isaacgymenvs/replay_saved_actions.py",
+      "sha256": "cf202789e3111ee8b566bef7d572c9dd5118b754cea80a70ff8f108d5edf2783"
+    },
+    {
+      "path": "isaacgymenvs/student_eval_utils.py",
+      "sha256": "9c22cefddf82c63a6ebd66ead6925e784b19f9ccf77465964eb47b16b74d166f"
+    },
+    {
+      "path": "isaacgymenvs/tasks/__init__.py",
+      "sha256": "4ab73a9b8ebf374533c58388271cb40391f6fd6fab688d57882f00461b0b1da8"
+    },
+    {
+      "path": "isaacgymenvs/tasks/artgrasp.py",
+      "sha256": "7876b87240fb5cb4c70af977a7d1334523c369b2c2e8b961e79b72f560efee68"
+    },
+    {
+      "path": "isaacgymenvs/tasks/artmanip.py",
+      "sha256": "858094dfca96b8e7e3c03a418179248fff4ff824dd5a05a522d2656d8b437031"
+    },
+    {
+      "path": "isaacgymenvs/tasks/base/__init__.py",
+      "sha256": "caacb10b64df23c31b9badfeae824db4594f23833c9866265c74ab3da8958cfd"
+    },
+    {
+      "path": "isaacgymenvs/tasks/base/vec_task.py",
+      "sha256": "90233af53998d6125672487c4177f1cd2ec59e4384173669fc45d803320bf573"
+    },
+    {
+      "path": "isaacgymenvs/tasks/wuji_acquisition.py",
+      "sha256": "6e647fdc406d68ac76ab33fe0140054f1300c48e7da4df11eb4e5d1b55c7c86a"
+    },
+    {
+      "path": "isaacgymenvs/tasks/wuji_artmanip_clock_hold.py",
+      "sha256": "35f075a3831fe7d09ada959951eb04dc4f250b70f56198040ddb4a1109f37ca2"
+    },
+    {
+      "path": "isaacgymenvs/tasks/wuji_artmanip_reference.py",
+      "sha256": "5461327e572e9c903faf3979619f34a157af7964d59b58ef76b466b656c59449"
+    },
+    {
+      "path": "isaacgymenvs/tasks/wuji_bridge3_controller_state.py",
+      "sha256": "d3986584c44530a115cc5de73d295dc00d8de39f5c69be3c612a144c90d06493"
+    },
+    {
+      "path": "isaacgymenvs/tasks/wuji_bridge3_hemisphere.py",
+      "sha256": "5e45d60c54025dab2d703626afaced48ccf3fd688711e6c99d91205c6344dffb"
+    },
+    {
+      "path": "isaacgymenvs/tasks/wuji_bridge_hemisphere.py",
+      "sha256": "a99f69554876a1d037772a07f3a01f8da919df5acb315267b081bb0b5f0463e7"
+    },
+    {
+      "path": "isaacgymenvs/tasks/wuji_controller_student_actor.py",
+      "sha256": "bbd770fb7e752d5e4bf00b3f16099c403b54d9ae33c0060b5f25532326edeb14"
+    },
+    {
+      "path": "isaacgymenvs/tasks/wuji_demo_aligned.py",
+      "sha256": "bd5eb3eb689fb2a0c9a1789cf7deaea2f48aa95c139ac4887870e4d6605cb0ed"
+    },
+    {
+      "path": "isaacgymenvs/tasks/wuji_fixed_student_actor.py",
+      "sha256": "adaac791a91d983b2eb6b7c2600b8cf01ea1fc255de4817c8d16dd3739e65538"
+    },
+    {
+      "path": "isaacgymenvs/tasks/wuji_functional_hemisphere.py",
+      "sha256": "933e698981f613d652bfc462df515c05e1a3715a0f81c25b572a5832bd11b95d"
+    },
+    {
+      "path": "isaacgymenvs/tasks/wuji_geometry.py",
+      "sha256": "74be6c6546582aff784d8a1c841d604e8c24843d6d6ede8efdaff08761d24092"
+    },
+    {
+      "path": "isaacgymenvs/tasks/wuji_multigrasp.py",
+      "sha256": "982aa5e087a82790e0419aa1ef16f73521757efa43dcda43995776a94025167b"
+    },
+    {
+      "path": "isaacgymenvs/tasks/wuji_reset_randomization.py",
+      "sha256": "12016412725a33bd862cb18612659e23bdd69744f4718174fd93e46443cf831f"
+    },
+    {
+      "path": "isaacgymenvs/tasks/wuji_timed_acquisition.py",
+      "sha256": "1f4cca7075f4785bf0139197dd0fbcbe62d65c2d50690a55f1e7a288bedabbab"
+    },
+    {
+      "path": "isaacgymenvs/tasks/wuji_variable_timed_acquisition.py",
+      "sha256": "a3ca27ad4f00682c6b3f886a8891a6e7f7a7dda6d153ea24ea190982f096e87e"
+    },
+    {
+      "path": "isaacgymenvs/train.py",
+      "sha256": "bf8dfdeb14346c3b6f89933527d5bbcaa5c76d878d0d95abd0f058654fa43f08"
+    },
+    {
+      "path": "isaacgymenvs/utils/__init__.py",
+      "sha256": "efb16408628da7fe259020cfbb203888d42c89e14df954d8eb0912bbdf025108"
+    },
+    {
+      "path": "isaacgymenvs/utils/distill_action_loss.py",
+      "sha256": "1fd20d5772ee56b0000516c7da68e4896434db9929c48f3264c4050d3816aa89"
+    },
+    {
+      "path": "isaacgymenvs/utils/distill_replay.py",
+      "sha256": "666cfe792db63db19ef33a98d52b27851cb5d5550cacffa628df36a155925bb0"
+    },
+    {
+      "path": "isaacgymenvs/utils/distill_rollout_utils.py",
+      "sha256": "55f6a2de5df694894eda7ea2a6542fffd7869d0f0e516429d3e0bcb9e59763d1"
+    },
+    {
+      "path": "isaacgymenvs/utils/distributed_runtime.py",
+      "sha256": "24b6d406e66cdfaf5c96af4e2c1334367b420dcb8eea938f64fc58b566c99c8f"
+    },
+    {
+      "path": "isaacgymenvs/utils/dr_utils.py",
+      "sha256": "9f006a0c925929700ed7dfa1f1225a8b10a3da9ff5ba69ba43e55bf0a5d7c314"
+    },
+    {
+      "path": "isaacgymenvs/utils/infer_recording.py",
+      "sha256": "f58a4319e53ca46f7ce9f6fd29ca67a766b0b5e03dc6d259b499c4b7168feb04"
+    },
+    {
+      "path": "isaacgymenvs/utils/infer_runtime.py",
+      "sha256": "3bad44996d03438739fd27bc1ba16995c771ef5766bb781b0bf0c4f22d0dacc3"
+    },
+    {
+      "path": "isaacgymenvs/utils/player_utils.py",
+      "sha256": "153167727ea5874049f0f6efa70653b2a9edb180ebd06df4f04d23c93709012e"
+    },
+    {
+      "path": "isaacgymenvs/utils/reformat.py",
+      "sha256": "ed3040dd2c5390b2a4628297724bccf7657eb101538e1d144e5e5be7aab63192"
+    },
+    {
+      "path": "isaacgymenvs/utils/rlgames_utils.py",
+      "sha256": "f41ed538e3ee8313306e83a5dfb7053d729d70410ef2b5dc495af6fad5015f97"
+    },
+    {
+      "path": "isaacgymenvs/utils/student_obs_utils.py",
+      "sha256": "fcae194bbbf0799a7151e99965b454014c652b09487e4ca16614e4cdd8825856"
+    },
+    {
+      "path": "isaacgymenvs/utils/student_runtime_utils.py",
+      "sha256": "e7be1cad3eb63ccf8fd5a0cb0743e7fd454f7d93aaf1f73ec4c565a6c59f0c09"
+    },
+    {
+      "path": "isaacgymenvs/utils/torch_jit_utils.py",
+      "sha256": "95602e6ef57c148143f682640e063eb27ded035d04a29fe5959de032177e6ca3"
+    },
+    {
+      "path": "isaacgymenvs/utils/utils.py",
+      "sha256": "c64a080575fee1b21c9d773ee267409b4589bb905d8e906cd8417d44c66291c1"
+    },
+    {
+      "path": "isaacgymenvs/valid_grasp.py",
+      "sha256": "a8b2a7e7d65c7699ddc55a51882e152f2e4a3f08955abe75bef1bffd7e2449f8"
+    },
+    {
+      "path": "rl_games/rl_games/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "rl_games/rl_games/algos_torch/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "rl_games/rl_games/algos_torch/a2c_continuous.py",
+      "sha256": "7dd62ccd9d68771eea40b030eeb43c36b732cf16baab8f27d880c52b0c39d365"
+    },
+    {
+      "path": "rl_games/rl_games/algos_torch/a2c_discrete.py",
+      "sha256": "513e77df9c8cb9311e42e4899cfa789aaff044c3eeffeabb8aeba04d77334b68"
+    },
+    {
+      "path": "rl_games/rl_games/algos_torch/central_value.py",
+      "sha256": "245ca25d5fad86ab83a2228471cc97a592adc09007d4c1f523737fd8f6559a6a"
+    },
+    {
+      "path": "rl_games/rl_games/algos_torch/d2rl.py",
+      "sha256": "9cbe2efea126690f3fbe6eceac8d0eceb866e217f1a553e5ba91a0d07bbd4a4f"
+    },
+    {
+      "path": "rl_games/rl_games/algos_torch/flatten.py",
+      "sha256": "be68ff046052d7d68e7f92dea21ee1908e1650df739bcafeab0bc9d8fff0481c"
+    },
+    {
+      "path": "rl_games/rl_games/algos_torch/layers.py",
+      "sha256": "4f43d09b171cc5e7a72399ee77a90973049f13a72fe3632ec6570ea21d14fd45"
+    },
+    {
+      "path": "rl_games/rl_games/algos_torch/model_builder.py",
+      "sha256": "67f63a42e057bcf57f0c5239fdbd72bf7f6fc77134e9d728e4d21ef4bc0d581f"
+    },
+    {
+      "path": "rl_games/rl_games/algos_torch/models.py",
+      "sha256": "0b1cfe90ba56622b2c9dcf439235e3c97b95fad4503dcf00b21b45e32983fbec"
+    },
+    {
+      "path": "rl_games/rl_games/algos_torch/moving_mean_std.py",
+      "sha256": "5ca24c71d5591b21586e9bc6db608d9a9eaf37939a2f9ed6e33fd4fe608f28a7"
+    },
+    {
+      "path": "rl_games/rl_games/algos_torch/network_builder.py",
+      "sha256": "fa064f68a41236fb69aeb019f073a321ebd40c8bfe2a9efe0e2796a039e4461b"
+    },
+    {
+      "path": "rl_games/rl_games/algos_torch/players.py",
+      "sha256": "3e3153afd89d1993b18946d8788a30a82556fee3cd094a5e118a805b1c157812"
+    },
+    {
+      "path": "rl_games/rl_games/algos_torch/running_mean_std.py",
+      "sha256": "0bd1aaf5f671caa7eeff5062ed6456e8d6c4686774f2714caba836024d1d4888"
+    },
+    {
+      "path": "rl_games/rl_games/algos_torch/sac_agent.py",
+      "sha256": "3e76f7e8d8d5c99f37022bd8295fc258ff7713a71d4ae068bd97900ace8f50ca"
+    },
+    {
+      "path": "rl_games/rl_games/algos_torch/sac_helper.py",
+      "sha256": "7f1309126849886531d70b39cd5ad8efdbd0072e35e41d64f96a2f13b1c8eae3"
+    },
+    {
+      "path": "rl_games/rl_games/algos_torch/self_play_manager.py",
+      "sha256": "da9eda16bb48a1464dcb07749264891dfe63e7cee6f84ce6c459151a09592758"
+    },
+    {
+      "path": "rl_games/rl_games/algos_torch/torch_ext.py",
+      "sha256": "7d6a94c59c952c792fb6d8a407b85eac0521eef3e52311333fe1d6ffdc96ba8b"
+    },
+    {
+      "path": "rl_games/rl_games/common/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "rl_games/rl_games/common/a2c_common.py",
+      "sha256": "2925edbaae7c964e51945cacd3bb1db637563bbb4b603f506a4b6074d05e342b"
+    },
+    {
+      "path": "rl_games/rl_games/common/algo_observer.py",
+      "sha256": "87f00911460c9cab211bfb85172c62b818333f37dbb6e26daad21034ea97848d"
+    },
+    {
+      "path": "rl_games/rl_games/common/categorical.py",
+      "sha256": "f8078f46af943e2799fb61d111a89f83072770b5ebca0180f95a0d934ed3c6ae"
+    },
+    {
+      "path": "rl_games/rl_games/common/checkpoint_schedule.py",
+      "sha256": "e7914f9fb17dc600e5e0dbd3335d48e6f8d9f1b312a3c15c56d75c11c91172e8"
+    },
+    {
+      "path": "rl_games/rl_games/common/common_losses.py",
+      "sha256": "97c9a5df6095f881c21affd316ce479b3f069cfbf705e6c9877eb5c8e64c915a"
+    },
+    {
+      "path": "rl_games/rl_games/common/custom_utils.py",
+      "sha256": "9c9f6918376b111f6e16c2b5731451edb809dab697f6353fae48d17a2ef76e72"
+    },
+    {
+      "path": "rl_games/rl_games/common/datasets.py",
+      "sha256": "3253fb6a1a31ee9396d675f0efbd7a472880024f883fea50d34f5bdabd05e21c"
+    },
+    {
+      "path": "rl_games/rl_games/common/diagnostics.py",
+      "sha256": "987ad53cf905453363d649a476a37b4b1813e7967dae8d23ad3e19152cad5cad"
+    },
+    {
+      "path": "rl_games/rl_games/common/distributed_utils.py",
+      "sha256": "5cfc792a10a5f0fd3ea6cfe968ae7d4b5ce26f88182f159e2f056cadeb6f436b"
+    },
+    {
+      "path": "rl_games/rl_games/common/divergence.py",
+      "sha256": "3b0ec78faa97460f739091c237de0ba385f4ac07d0e4a4d6fcf3f0f78805e139"
+    },
+    {
+      "path": "rl_games/rl_games/common/env_configurations.py",
+      "sha256": "47fd976b412382ff5ca0f01488fbcccb2d9e610c3e8a5d4f13ca2ee9fe2bcdc7"
+    },
+    {
+      "path": "rl_games/rl_games/common/experience.py",
+      "sha256": "943afd12f34729972d3a35e12b7673f1a5bc96faf57b5065fefe56343a57b871"
+    },
+    {
+      "path": "rl_games/rl_games/common/experiment.py",
+      "sha256": "ab3b5f16c2192292c30ac5fd70053caf985de585b75749e84b1bbd1952547bac"
+    },
+    {
+      "path": "rl_games/rl_games/common/extensions/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "rl_games/rl_games/common/extensions/distributions.py",
+      "sha256": "e438eba1425d2e114281520ff41e1eeecf580c8af6d2b315619b94d855989cf5"
+    },
+    {
+      "path": "rl_games/rl_games/common/file_utils.py",
+      "sha256": "1f3d08bbc4de7bc6a3c868917e552961538fd41289a3b4baa37ed105d94c654e"
+    },
+    {
+      "path": "rl_games/rl_games/common/interval_summary_writer.py",
+      "sha256": "1f82b55613c086d90cde9d388dd3d97e35c3971b4d5a8d5c27c3aa532ac4d31a"
+    },
+    {
+      "path": "rl_games/rl_games/common/ivecenv.py",
+      "sha256": "b27b45c3a566219625e09ca21346b21960c05e1a8b800a804427c80104f7aa36"
+    },
+    {
+      "path": "rl_games/rl_games/common/layers/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "rl_games/rl_games/common/layers/action.py",
+      "sha256": "992ea6be14648093b4bac3f5ad27b3d5843e8a3a7ed206e77b1189acebe53f42"
+    },
+    {
+      "path": "rl_games/rl_games/common/layers/recurrent.py",
+      "sha256": "513a0cada38071444a8b2459690db904426b0913c568b66ec8a721338210f023"
+    },
+    {
+      "path": "rl_games/rl_games/common/layers/value.py",
+      "sha256": "9dd98ffcb8191e59b61da280d6e76d5cf5f704de8b5f7fff9b42630ecb9682e3"
+    },
+    {
+      "path": "rl_games/rl_games/common/object_factory.py",
+      "sha256": "e34f96477828f611d8c96aa79215c625a991aa60fb59ff10afc94c205fdf06e1"
+    },
+    {
+      "path": "rl_games/rl_games/common/player.py",
+      "sha256": "0118466077c35e8f2e2209ff9083620b0b18a76d6e1ef677d115b3d28e059296"
+    },
+    {
+      "path": "rl_games/rl_games/common/rollouts.py",
+      "sha256": "5d61c066a7920defccf3237b7cf3e7ef123d7ed30c075fabb881023b5eb5265f"
+    },
+    {
+      "path": "rl_games/rl_games/common/schedulers.py",
+      "sha256": "5c75d9851accf305f6417976169bb8eaffd5a77687282a3d1b3a2e90e35c8f94"
+    },
+    {
+      "path": "rl_games/rl_games/common/segment_tree.py",
+      "sha256": "4160d90eb0ebe1eff4aa02d041fff5f79dc2dff672869655e23d1a2299beb753"
+    },
+    {
+      "path": "rl_games/rl_games/common/test_utils.py",
+      "sha256": "c165344c92e8394440c4d665fe3640b3e6440ad72bbf5fa93919aebe11a77245"
+    },
+    {
+      "path": "rl_games/rl_games/common/tr_helpers.py",
+      "sha256": "4a8da52119a4c13f76f9f4cfd73a82e86925e18cd4635e0665aef11472377c60"
+    },
+    {
+      "path": "rl_games/rl_games/common/transforms/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "rl_games/rl_games/common/transforms/soft_augmentation.py",
+      "sha256": "1d7fb10e668b330e711a58c3e79e249387ecaf7c29434ae63ff4cea6b1910259"
+    },
+    {
+      "path": "rl_games/rl_games/common/transforms/transforms.py",
+      "sha256": "1d37e6a56fde242a9662db1b789f0e340ee7df398e14666fc249756bf0c3a0a2"
+    },
+    {
+      "path": "rl_games/rl_games/common/vecenv.py",
+      "sha256": "48d63fce4c7300e2dd4f4f3962236899c25e0f409c9470bc60a095e3d86444a3"
+    },
+    {
+      "path": "rl_games/rl_games/common/wrappers.py",
+      "sha256": "b8091f49ac9233aabcfa18bb0f706ff3a66798c975205ea0afe1648083eb2569"
+    },
+    {
+      "path": "rl_games/rl_games/configs/atari/ppo_breakout.yaml",
+      "sha256": "44ca45ef4877d175ae70c38f47f9ec0430647b34f4d86455ed2b5e15d3fd718b"
+    },
+    {
+      "path": "rl_games/rl_games/configs/atari/ppo_breakout_cule.yaml",
+      "sha256": "fd5ed516ddef0790d4157d7b41d726a621cd44f8cc1a26210f3dbad273bfd26a"
+    },
+    {
+      "path": "rl_games/rl_games/configs/atari/ppo_breakout_envpool.yaml",
+      "sha256": "c039cd571c719f761f1a98ec659e0ea60486d3a76b58cf9fdd5397c8f4a9fae5"
+    },
+    {
+      "path": "rl_games/rl_games/configs/atari/ppo_breakout_envpool_resnet.yaml",
+      "sha256": "88265c3c8c54545992c9edf0384960bfa8cba9a49a86b23d392f1ee5dc1e29a7"
+    },
+    {
+      "path": "rl_games/rl_games/configs/atari/ppo_breakout_torch_impala.yaml",
+      "sha256": "76d90bd7689d93cde6c7e9a41fdf9669d8bb8c1c0d0ee8d498b21908ba0c0f9d"
+    },
+    {
+      "path": "rl_games/rl_games/configs/atari/ppo_gopher.yaml",
+      "sha256": "292d2db12d1d2b049e3f97f5d8b45d01f45f304ee65fae6aa32574746cbd01d8"
+    },
+    {
+      "path": "rl_games/rl_games/configs/atari/ppo_invaders_envpool.yaml",
+      "sha256": "7b58cb3c9fe5fbc4210bc3a7bad76ae489c9dbac708b5bd78a14f934b0d3fa9d"
+    },
+    {
+      "path": "rl_games/rl_games/configs/atari/ppo_invaders_envpool_rnn.yaml",
+      "sha256": "681dc45ab976f5b614c782364b5a8d38b8d36914ef71aa3114f964b1104c7248"
+    },
+    {
+      "path": "rl_games/rl_games/configs/atari/ppo_pacman_envpool.yaml",
+      "sha256": "60ce1a9cda5d4b0e46898014aa286b8e92d3cbe53b9cd82b443fea3158a6761f"
+    },
+    {
+      "path": "rl_games/rl_games/configs/atari/ppo_pacman_envpool_resnet.yaml",
+      "sha256": "37b9de8c834c2a4d7745a44099461ca13059aa6fb5843012e48c319563876ba0"
+    },
+    {
+      "path": "rl_games/rl_games/configs/atari/ppo_pacman_envpool_rnn.yaml",
+      "sha256": "a6605b3056d11a9d95b929d4738dceacc2f21879e8adb4ed375a25ab36650a99"
+    },
+    {
+      "path": "rl_games/rl_games/configs/atari/ppo_pacman_torch.yaml",
+      "sha256": "54b0b4982cb2693f2d5c0d7aca06cc726c814a799f7c79abab6bc8eee8fb78df"
+    },
+    {
+      "path": "rl_games/rl_games/configs/atari/ppo_pacman_torch_rnn.yaml",
+      "sha256": "df30bbb3f3df8085d822eae9a2c4196085405b88fb2463c664d964c8a4dd6a1a"
+    },
+    {
+      "path": "rl_games/rl_games/configs/atari/ppo_pong.yaml",
+      "sha256": "9386e9c532fc311934cd062a9ba5e2383bea65492351c79b6bea9ba64afbd88b"
+    },
+    {
+      "path": "rl_games/rl_games/configs/atari/ppo_pong_cule.yaml",
+      "sha256": "6a320359907006ab6d4444225be5253f23e1d2e76a61ecbd7f07577ece7c0906"
+    },
+    {
+      "path": "rl_games/rl_games/configs/atari/ppo_pong_envpool.yaml",
+      "sha256": "62544d3e3a28152ed191b06b7dd3e4021517ee7ff4240eda1584831c18d03441"
+    },
+    {
+      "path": "rl_games/rl_games/configs/atari/ppo_pong_envpool_resnet.yaml",
+      "sha256": "6e979ac7af63214e65506b3e19328af1c8e333de655c9e3fb1eb4f6d6c545e4c"
+    },
+    {
+      "path": "rl_games/rl_games/configs/atari/ppo_space_invaders_resnet.yaml",
+      "sha256": "fd26b1b9591fce315726cac8ece313cb796bed7558cb1420d25f3d54b597b0de"
+    },
+    {
+      "path": "rl_games/rl_games/configs/atari/ppo_space_invaders_torch.yaml",
+      "sha256": "82efeda4b72ce1dc5adc6803ea07f4a25bfa105a874832e8ca1658cf35b0ca48"
+    },
+    {
+      "path": "rl_games/rl_games/configs/brax/ppo_ant.yaml",
+      "sha256": "322f81a4d0e1b7c0f3241899f834055246bdf4375ebe14dccc5b7fa760f7da11"
+    },
+    {
+      "path": "rl_games/rl_games/configs/brax/ppo_ant_tcnn.yaml",
+      "sha256": "0697d485d1d2e683080e47f669fcc1ab7c724b496fcb241c4d8e6daee1228e35"
+    },
+    {
+      "path": "rl_games/rl_games/configs/brax/ppo_grasp.yaml",
+      "sha256": "b41108fe0289b988ffbb968d11ca9a1f7096bd5ac65a7d76caafd0259fc0d33c"
+    },
+    {
+      "path": "rl_games/rl_games/configs/brax/ppo_halfcheetah.yaml",
+      "sha256": "6d262e7493cb0641a399432e7017782b7bed24a1b2d08646cb4cf9e8eac96677"
+    },
+    {
+      "path": "rl_games/rl_games/configs/brax/ppo_humanoid.yaml",
+      "sha256": "191d423e18e609937e3ad3c157cbb505c15053c40b5e0896ec0cbb661e4a5efc"
+    },
+    {
+      "path": "rl_games/rl_games/configs/brax/ppo_ur5e.yaml",
+      "sha256": "f813475a41420d8e4611b7545bb44dd11da18cf6339696dea8f0e2cf43102d35"
+    },
+    {
+      "path": "rl_games/rl_games/configs/brax/sac_ant.yaml",
+      "sha256": "53105031285ca2090aaa5ee7868acceec53d948c10a1841b98bc8257dd7bfcb4"
+    },
+    {
+      "path": "rl_games/rl_games/configs/brax/sac_humanoid.yaml",
+      "sha256": "2792d77d4fe9e5df9f37cb85ab9a01b1f2fb23c2dd647f6710ab3dcd358a47c7"
+    },
+    {
+      "path": "rl_games/rl_games/configs/carracing_ppo.yaml",
+      "sha256": "d30f888db4daa32de2fa2dea2ba1acc7f18ec14abcf0474c4ece98a63f3e5f84"
+    },
+    {
+      "path": "rl_games/rl_games/configs/dm_control/acrobot_swingup.yaml",
+      "sha256": "5b6c3173d88e62e80a7df4eebd743e6920f85ee13f9a9901cecf99b2f5f88c1f"
+    },
+    {
+      "path": "rl_games/rl_games/configs/dm_control/ball_in_cup.yaml",
+      "sha256": "f4530d861e7ec80287a9d54552259c91dcb95835745ef0011600868cb1f2d543"
+    },
+    {
+      "path": "rl_games/rl_games/configs/dm_control/cartpole.yaml",
+      "sha256": "3ef218606b344604e397397b3e3da18e8ed726cbcbf878eaa2f1d4530fb4882b"
+    },
+    {
+      "path": "rl_games/rl_games/configs/dm_control/cheetah_walk.yaml",
+      "sha256": "6790a969ad167a2dff84e1ede7f674ab3078c2eac3c14e7eca00cbc03ba482b3"
+    },
+    {
+      "path": "rl_games/rl_games/configs/dm_control/fish_swim.yaml",
+      "sha256": "0173369beb367d54735667b9c6ce97dd17ce9584d3405a5f72f45bd81509ae13"
+    },
+    {
+      "path": "rl_games/rl_games/configs/dm_control/hopper_hop.yaml",
+      "sha256": "f6f27259b4ec5f63010e9958f4379a4dd886a1aa8e7b1e91d8a3c29cd750398d"
+    },
+    {
+      "path": "rl_games/rl_games/configs/dm_control/hopper_stand.yaml",
+      "sha256": "61999dd341580a143dc678d9b397834c64ffc5a45156614577b417acd9beb4cf"
+    },
+    {
+      "path": "rl_games/rl_games/configs/dm_control/humanoid_run.yaml",
+      "sha256": "19025ca73834e3fda538d472aec8ee6c280b952a778b7b7d29fd2a2446325730"
+    },
+    {
+      "path": "rl_games/rl_games/configs/dm_control/humanoid_stand.yaml",
+      "sha256": "6d4ac584cd460079e506bf89a6f90f716aea7ece0f97df36408de0141c4816e4"
+    },
+    {
+      "path": "rl_games/rl_games/configs/dm_control/humanoid_walk.yaml",
+      "sha256": "d70991f552bc7b76ad51d4746ae75419467720b48df6b5fdcc2615cba9d4034a"
+    },
+    {
+      "path": "rl_games/rl_games/configs/dm_control/manipulator_bringball.yaml",
+      "sha256": "df85c8eb6f01a550e9eed1e307875fe50c3775d71f2771f5c1bc3c72a8e50cd0"
+    },
+    {
+      "path": "rl_games/rl_games/configs/dm_control/pendulum_swingup.yaml",
+      "sha256": "35eeefae0faeceb97920eb7aa6defc19b988f76646d6960f9b819b04a8bae588"
+    },
+    {
+      "path": "rl_games/rl_games/configs/dm_control/walker_run.yaml",
+      "sha256": "6c94c6d04294127c82233da368b68fd043c8b7e7becf20ec18b1ded290c55b52"
+    },
+    {
+      "path": "rl_games/rl_games/configs/dm_control/walker_stand.yaml",
+      "sha256": "b35057e91cd82c1758d693d512b516ffd946455dee39815d09771cee7a6b061f"
+    },
+    {
+      "path": "rl_games/rl_games/configs/dm_control/walker_walk.yaml",
+      "sha256": "9968e5252aec6430aaa48aa772e88207472f0dca5ccadfbeac9f7e67cb7e4fa7"
+    },
+    {
+      "path": "rl_games/rl_games/configs/ma/ppo_connect4_self_play.yaml",
+      "sha256": "56513ffaf036e7250c62f8ffa0ba4270e4d35c5c13653e32986dbbc2da7de504"
+    },
+    {
+      "path": "rl_games/rl_games/configs/ma/ppo_connect4_self_play_resnet.yaml",
+      "sha256": "b1e0a7b39aa29003cc76dc2a506f2dea9bda3c619617d5e5547619405d4f065e"
+    },
+    {
+      "path": "rl_games/rl_games/configs/ma/ppo_slime_self_play.yaml",
+      "sha256": "efff26173770acaa7d9e473e155c1e7aa19aa9f29785775175a072b102614b9b"
+    },
+    {
+      "path": "rl_games/rl_games/configs/ma/ppo_slime_v0.yaml",
+      "sha256": "6bfc8d8770191e1edb9ba29629159775d553eb07e8e80d565cb655bea9697b5f"
+    },
+    {
+      "path": "rl_games/rl_games/configs/minigrid/lava_rnn_img.yaml",
+      "sha256": "9b8a8e3597b38c9952c1f0b2694c2e1aaec5acf0a552577983c6090d74807d50"
+    },
+    {
+      "path": "rl_games/rl_games/configs/minigrid/minigrid_rnn_img.yaml",
+      "sha256": "76b07f0790f500e3ed021d2979e28058d2ce4de1ff2a82e3131ee1050a13ad70"
+    },
+    {
+      "path": "rl_games/rl_games/configs/mujoco/ant.yaml",
+      "sha256": "51e1d2a5086d66c0c5cbcca9e806bd373faa46f37fe118572758d923445f27e7"
+    },
+    {
+      "path": "rl_games/rl_games/configs/mujoco/ant_envpool.yaml",
+      "sha256": "6b77519f59c5716be5f8c8b23079d69086227dbc2c1cc3cf29f66673b30062c2"
+    },
+    {
+      "path": "rl_games/rl_games/configs/mujoco/halfcheetah.yaml",
+      "sha256": "c8f101b9664098797e0dd2da94a2d8de2a37b2bb4272129e75a4976615b5533f"
+    },
+    {
+      "path": "rl_games/rl_games/configs/mujoco/halfcheetah_envpool.yaml",
+      "sha256": "89827221654232bbe330f0fc3eb76709cc02a755080e3ed28768473a2c542463"
+    },
+    {
+      "path": "rl_games/rl_games/configs/mujoco/hopper.yaml",
+      "sha256": "ea60b0a8014c19cac8a02113d538b59044d8cc2c6812b5b731c6a4e352e9488b"
+    },
+    {
+      "path": "rl_games/rl_games/configs/mujoco/hopper_envpool.yaml",
+      "sha256": "2b02ec9a57db8762f8afacc64e816e8ad2cdc904891c6401b404db0e3d6f3ae5"
+    },
+    {
+      "path": "rl_games/rl_games/configs/mujoco/humanoid.yaml",
+      "sha256": "138a2945ae6cd16fb640ebccaed2df43fface99aef1ff13d08d5750bdf26c350"
+    },
+    {
+      "path": "rl_games/rl_games/configs/mujoco/humanoid_envpool.yaml",
+      "sha256": "d94a0797aa7ea6c5002d0b2e4fe2efc8cf64cd643038e94fe298e5772b6fe551"
+    },
+    {
+      "path": "rl_games/rl_games/configs/mujoco/sac_ant_envpool.yaml",
+      "sha256": "e85ca472d409557d208082f716c089d66ac49a3864e8c49362eb423e30c45a1b"
+    },
+    {
+      "path": "rl_games/rl_games/configs/mujoco/sac_halfcheetah_envpool.yaml",
+      "sha256": "3c966dfa8a9fcb6d6509f357ffebf7f1e8b192e85da545fab9426184972a970c"
+    },
+    {
+      "path": "rl_games/rl_games/configs/mujoco/walker2d.yaml",
+      "sha256": "75a09780c3b9f3f05560c6fc033171bc66804b487872cfa4f8d66779c72f3176"
+    },
+    {
+      "path": "rl_games/rl_games/configs/mujoco/walker2d_envpool.yaml",
+      "sha256": "116003290e5f60c964b7e8ddcc4725088a7536f06b3f3bf8ddc8c73fea0b78a5"
+    },
+    {
+      "path": "rl_games/rl_games/configs/openai/ppo_gym_ant.yaml",
+      "sha256": "9890a6f9ccf05bfc86fcea0069f35e1a526eef216741dd8d9c90eb59348abdd0"
+    },
+    {
+      "path": "rl_games/rl_games/configs/openai/ppo_gym_hand.yaml",
+      "sha256": "21081c8719c337ec35a66e29efc8ee97b5b776c1aec6ae0ad4d1ad4b974ad98b"
+    },
+    {
+      "path": "rl_games/rl_games/configs/openai/ppo_gym_humanoid.yaml",
+      "sha256": "17fb54f00fc1ed3db7bad840742b7c46c586b4537a1a4580f83df5fb0664539f"
+    },
+    {
+      "path": "rl_games/rl_games/configs/ppo_cartpole.yaml",
+      "sha256": "45ad94c9387080244380d340bec3f262db2401a799176443002b888f57b5c941"
+    },
+    {
+      "path": "rl_games/rl_games/configs/ppo_cartpole_masked_velocity_rnn.yaml",
+      "sha256": "1db1562c7067cb787a9ec5bc9ce71c8b4e84a1e7a97aa076d25cc93c51c2a2b0"
+    },
+    {
+      "path": "rl_games/rl_games/configs/ppo_continuous.yaml",
+      "sha256": "473e0a4311ae215d26118814ca364df296d3beb64af78bd9d52f2072cc98e947"
+    },
+    {
+      "path": "rl_games/rl_games/configs/ppo_continuous_lstm.yaml",
+      "sha256": "1a5cc3c0c9ec2dec79020e835a383ddc02f09e07c0be1644bb3d1e777009766c"
+    },
+    {
+      "path": "rl_games/rl_games/configs/ppo_lunar.yaml",
+      "sha256": "eca8829580044520d4bc36ac8754972eeca753b0e2f08675db147ea1b406772b"
+    },
+    {
+      "path": "rl_games/rl_games/configs/ppo_lunar_continiuos_torch.yaml",
+      "sha256": "169e3cbcb034e0e4041c73435e728d4501b91ceab74ba2a826c58c034993fa34"
+    },
+    {
+      "path": "rl_games/rl_games/configs/ppo_lunar_discrete.yaml",
+      "sha256": "6595de63b5069d62dfec4ea55e7bb03dda29f3a422895182703c6131735cf429"
+    },
+    {
+      "path": "rl_games/rl_games/configs/ppo_multiwalker.yaml",
+      "sha256": "ba7a640837cfa1e4cd9681a22d3f3661237886ccbd6eea8ace10c9f7de4f490f"
+    },
+    {
+      "path": "rl_games/rl_games/configs/ppo_pendulum.yaml",
+      "sha256": "84a5f2bce69c9d178a2952dbd2886460a77e7be6c313f299cc828c88dc84cf8b"
+    },
+    {
+      "path": "rl_games/rl_games/configs/ppo_pendulum_torch.yaml",
+      "sha256": "ec91eecd615b3a333bdde08aea8a579cece5ad88af1b25ce1e118bbbed621575"
+    },
+    {
+      "path": "rl_games/rl_games/configs/ppo_reacher.yaml",
+      "sha256": "182db847cfde556eac93c3280ed711a52b14e4f476c7a746b8360087c86e040d"
+    },
+    {
+      "path": "rl_games/rl_games/configs/ppo_smac.yaml",
+      "sha256": "14207e7c45b950f71328ab4f3237685aaac8d56c4f18ae6765bf904851d5e2cc"
+    },
+    {
+      "path": "rl_games/rl_games/configs/ppo_walker.yaml",
+      "sha256": "ff185e3ed0c6344d978f8d7044d374a958bfd9703e980bd365309e6b551ea15f"
+    },
+    {
+      "path": "rl_games/rl_games/configs/ppo_walker_hardcore.yaml",
+      "sha256": "725f3a53d87cc63fac6bb2e8376467bcb493759acbd4db97876cc97c77ad3034"
+    },
+    {
+      "path": "rl_games/rl_games/configs/ppo_walker_rnn.yaml",
+      "sha256": "7a2b6fef165857e241644b1f5c43a09fb45926b96ba1818d0cfca7c426b7709e"
+    },
+    {
+      "path": "rl_games/rl_games/configs/ppo_walker_tcnn.yaml",
+      "sha256": "42cb4271ea6a207503a099c33526b82ac877a4da31d6e9f21be6d751d8f7b047"
+    },
+    {
+      "path": "rl_games/rl_games/configs/procgen/ppo_coinrun.yaml",
+      "sha256": "831834bb4b8e9781bba83feb26147997185cddfcd981b833459faed74118f0f9"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/10m_vs_11m_torch.yaml",
+      "sha256": "4ec27bc7d6f59f9fd2f314dc8bb0cfa24aecb23d8c6d06e4dcb4f726cb95d44d"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/27m_vs_30m_cv.yaml",
+      "sha256": "8699464e5f61d8fe1809698f1f3b790a9fa4f901e6748aa7ab84a2084fa57aac"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/27m_vs_30m_torch.yaml",
+      "sha256": "c8e00398e6be1330c9345f5a989ba0aa1cfdc90389af2263a06928db7af9203b"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/2m_vs_1z.yaml",
+      "sha256": "d72828da7611699516e8c36cfb99aab8912fb080e9309ffcd9ab8be088156a54"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/2m_vs_1z_torch.yaml",
+      "sha256": "9758ff4b6db979d4dba416785c20850f3ed2bc80b6bf61e12dbf7d48f57b74c4"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/2s_vs_1c.yaml",
+      "sha256": "5de1c94fb7aa6f56df7ef0491645f27c47e34f9c34218e9846915b0072fccb9f"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/3m_cnn_torch.yaml",
+      "sha256": "d15d6276b19d272522332219281db68dc9354d6cf3603b0d96ceba9d8d1ac120"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/3m_torch.yaml",
+      "sha256": "92bd3b61f446857f6492f608b23d737348217b064517ddd140fa05e164f869f4"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/3m_torch_cv.yaml",
+      "sha256": "09e1f5405c96f61a2441d5dcf0987d143a99c49a6256d7325df222122f0bed54"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/3m_torch_cv_joint.yaml",
+      "sha256": "58f920af0109b40d6682d0c2571edbd5535defe0f33d6719cf12f146dd0272e1"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/3m_torch_cv_rnn.yaml",
+      "sha256": "331eb1b81ea56259956b122daa3f26f000065efa1247e552684cae52e38e3711"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/3m_torch_rnn.yaml",
+      "sha256": "d3db21ae9e031771b3fcafebbf0c5946e987cb53b4500f53adc7c07a83d69a42"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/3m_torch_sparse.yaml",
+      "sha256": "d3e0e8738ed82b99ba66a6dab414e36373907b691425b3a497db18b8cb6f7cfc"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/3s5z_vs_3s6z_torch.yaml",
+      "sha256": "b05272c5c5eadc548861855966f748ffe30595ca87788908a79acc38ade932d0"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/3s5z_vs_3s6z_torch_cv.yaml",
+      "sha256": "6847780a1313d5c8f64a7adf0ae1f4f12e955f4c9fd6ac056b97fa6716697a3b"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/3s_vs_4z.yaml",
+      "sha256": "f6b3dd42944613ce56937dea081cb2f5113f42bf30d7d1b96c9412a6fcce182d"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/3s_vs_5z.yaml",
+      "sha256": "a30633376d2b99794c2e0665b52aeab063b64e13dc2e4e363bff2579cacb9de7"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/3s_vs_5z_cv.yaml",
+      "sha256": "a6847c3f3c0423115b2a322cbbccde9a7224d68f61983f85344a63888fdc236f"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/3s_vs_5z_cv_rnn.yaml",
+      "sha256": "a8ee927794ecc6e6c12dadaa74bcaaca349445710f684d17523d1454c454b878"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/3s_vs_5z_torch_lstm.yaml",
+      "sha256": "68c692fad60c322040e573cc4184810cd3135ae042fac36df44c398afdb060e7"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/3s_vs_5z_torch_lstm2.yaml",
+      "sha256": "7e979927b61eed2a5c9d08b6200d8538dde43204fc949a47c78a7b64ea3e667f"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/5m_vs_6m_rnn.yaml",
+      "sha256": "c0225a0c95127a61b0980d62a96ef811c58b4a5cbf80cdf13f5890f8d44e36bd"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/5m_vs_6m_rnn_cv.yaml",
+      "sha256": "5ce9ff0146772814c7d4c5fa9dd1bc584bedee99607353d385eb7c24b5c6428a"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/5m_vs_6m_torch.yaml",
+      "sha256": "21b5f0cca4e15d2e2b9d3aa6ea89622f338ca7278c5de1837a87613210d2e999"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/6h_vs_8z_torch.yaml",
+      "sha256": "6ee6cd0544d7a25ad03ca70e470899286d4ddf56f3108f11013651cf4085649c"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/6h_vs_8z_torch_cv.yaml",
+      "sha256": "7a98ad1e74740ac09d4d579a07a266c12fda55174335a8665a93ecc9a5329df4"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/8m_torch.yaml",
+      "sha256": "50169ceff493a17c2984010b3ebccf735bb300c3a537c96d50cd588eba931eb2"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/8m_torch_cv.yaml",
+      "sha256": "174ae9b384dd6926ca73a0649c345bd48b6f5db13bc86185f4d39874bac1b081"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/MMM2_torch.yaml",
+      "sha256": "f1e07a95ee65dabb27e1749335428453f509ce78c5dde1a3f4aa923728cd336f"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/corridor_torch.yaml",
+      "sha256": "c4429fc9f7cf6e1cc938b66767f7dd82ea703882740d08e1b3fc22da2f99b948"
+    },
+    {
+      "path": "rl_games/rl_games/configs/smac/corridor_torch_cv.yaml",
+      "sha256": "e336b230fa23d6b9e59ac0233b6dede9088940eca9f0192ede5c4350731d0c2c"
+    },
+    {
+      "path": "rl_games/rl_games/configs/test/test_asymmetric_continuous.yaml",
+      "sha256": "6cc62f3857789cc245967765b848c15bd5c77baf20b1b2fda3604cfce108c44c"
+    },
+    {
+      "path": "rl_games/rl_games/configs/test/test_asymmetric_discrete.yaml",
+      "sha256": "182ca949d56b3a13332c76dce4b32e602c1e65bae1ad38afee4f9ca4f65ac4ea"
+    },
+    {
+      "path": "rl_games/rl_games/configs/test/test_asymmetric_discrete_mhv.yaml",
+      "sha256": "5dadb46d36bd8738c5bb495aab787b2bc082c906226bc757af8f7d56c73e051e"
+    },
+    {
+      "path": "rl_games/rl_games/configs/test/test_asymmetric_discrete_mhv_mops.yaml",
+      "sha256": "fbc3983bebf163a232cd2b26c3ce13757bf35996dec14e3bbecf5470162c804d"
+    },
+    {
+      "path": "rl_games/rl_games/configs/test/test_discrete.yaml",
+      "sha256": "dafb0a839539285f9ba032052befdc14b3dda09407611f49e31deb881b5fcbca"
+    },
+    {
+      "path": "rl_games/rl_games/configs/test/test_discrete_multidiscrete_mhv.yaml",
+      "sha256": "d8122545a7cfbff2b30fa5f074e5b4ead07538f4c08cde9584205a175f779526"
+    },
+    {
+      "path": "rl_games/rl_games/configs/test/test_ppo_walker_truncated_time.yaml",
+      "sha256": "23524705638ac4616755330e558b824b7c7815dc5ef20953546edc860235e2f4"
+    },
+    {
+      "path": "rl_games/rl_games/configs/test/test_rnn.yaml",
+      "sha256": "f043332c7a3bcac1bb83a19304769da29368125686fe86291d293d73090cd639"
+    },
+    {
+      "path": "rl_games/rl_games/configs/test/test_rnn_multidiscrete.yaml",
+      "sha256": "ccf5b4df8a1c766205970c777e0299c7999e805c84115c004084bbfea895b83a"
+    },
+    {
+      "path": "rl_games/rl_games/configs/test/test_rnn_multidiscrete_mhv.yaml",
+      "sha256": "9389cc578ea0ffe2f6d80a2975222007265af176c0f5b9708ef002c09fc55dd7"
+    },
+    {
+      "path": "rl_games/rl_games/distributed/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "rl_games/rl_games/envs/__init__.py",
+      "sha256": "05a0f9983784c7dfa28fd196b7274d79b5f45f5d16bdd30a595f618721d4da11"
+    },
+    {
+      "path": "rl_games/rl_games/envs/brax.py",
+      "sha256": "6cb57d4f15382f6e36556833e7442ec40ad58da97250cb24f0c78cc2fd480dda"
+    },
+    {
+      "path": "rl_games/rl_games/envs/connect4_network.py",
+      "sha256": "4fdfc3211f455e925148f2915ae9189e1044fe93ab2a29117ec6dea4753b56c2"
+    },
+    {
+      "path": "rl_games/rl_games/envs/connect4_selfplay.py",
+      "sha256": "2453452fdd76e13dfdde6edeb30065feea4e68414477a82bee6550e6d5d64c47"
+    },
+    {
+      "path": "rl_games/rl_games/envs/cule.py",
+      "sha256": "c628793b7542d93a8c817de4364729e465c823ba919408c256aa5a13da0f7e72"
+    },
+    {
+      "path": "rl_games/rl_games/envs/diambra/diambra.py",
+      "sha256": "bdfe862607d1028991f226377b87236020b19c62b429a0f2a38b0608d947764a"
+    },
+    {
+      "path": "rl_games/rl_games/envs/envpool.py",
+      "sha256": "ab405396d44ed9f91f43eb9cf77387ca47a520d5ab9dde5e68cab9e79f45140b"
+    },
+    {
+      "path": "rl_games/rl_games/envs/multiwalker.py",
+      "sha256": "367795c2a9f349cda8a233759670776cfcf233c43b11c52c9b7acd659974cd24"
+    },
+    {
+      "path": "rl_games/rl_games/envs/slimevolley_selfplay.py",
+      "sha256": "7f9748e5ce6e86a89d749958c5cbe99dd20adda412c2720b138f7ea77cc2be45"
+    },
+    {
+      "path": "rl_games/rl_games/envs/smac_env.py",
+      "sha256": "e69a001ad307701b64acda20ce7fe8e653bec1cbc22a9bd83f547fcc57fc8fa2"
+    },
+    {
+      "path": "rl_games/rl_games/envs/test/__init__.py",
+      "sha256": "8daf005568e1e04f64a85ba56ae0a65881cbd5997bab60afb67692747ef27661"
+    },
+    {
+      "path": "rl_games/rl_games/envs/test/example_env.py",
+      "sha256": "d927cd7864e7b6f5a0b6724ef492188ef486da5cffce70dbc5ee2f045aa12d1a"
+    },
+    {
+      "path": "rl_games/rl_games/envs/test/rnn_env.py",
+      "sha256": "75fcf90dccd5e945337a2b6f9c9447cdd1986f84aeb3f13cc851ac6b6c328a37"
+    },
+    {
+      "path": "rl_games/rl_games/envs/test/test_asymmetric_env.py",
+      "sha256": "3777ff540f872d9aeba6fefa4b651a9b7ff05374b88ddc0a3b94e49af624786b"
+    },
+    {
+      "path": "rl_games/rl_games/envs/test_network.py",
+      "sha256": "5f8df0b6ca58aa2c612f8e3699ce462eeea94b68f7bca7564ba6fb36489446ce"
+    },
+    {
+      "path": "rl_games/rl_games/interfaces/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "rl_games/rl_games/interfaces/base_algorithm.py",
+      "sha256": "29fdaf9353cb2493e9efa6a2321a0d4f2c966003f8ba8ba8697a96b0c9b64265"
+    },
+    {
+      "path": "rl_games/rl_games/networks/__init__.py",
+      "sha256": "608ed45e8e06d297fd6898c9395f8bec38d5186927606884d5d1f65fb1a61454"
+    },
+    {
+      "path": "rl_games/rl_games/networks/tcnn_mlp.py",
+      "sha256": "ed93a6fd8fde37fb7b4cf143e11cb28dd58de8fd284f546617e32df44626c84e"
+    },
+    {
+      "path": "rl_games/rl_games/torch_runner.py",
+      "sha256": "80fcf248ebccbb2a183caa04bbf8f02358bb4feff4e69cf3f98b4772a1d17946"
+    },
+    {
+      "path": "rl_games/runner.py",
+      "sha256": "8a4129ba99e3548b8a2ab6ca99c148a5abfe617d647df211199814df852c1e35"
+    },
+    {
+      "path": "rl_games/tests/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "rl_games/tests/simple_test.py",
+      "sha256": "baa0809672d32d68b9b6917a653b306303f6027905dfa5ad44790627ca319d9e"
+    }
+  ],
+  "source": "Actual public scientific-result Git checkout, no legacy submodules needed"
+}

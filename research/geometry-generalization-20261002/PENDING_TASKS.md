@@ -1,7 +1,9 @@
-# 当前接续事项
+# 本轮已完成，禁止盲目重启
 
-全部13最终GPU批次与78协议已完成并独立复算，13按几何raw包全部上传SHA通过；5951初态×6=35706协议记录。最终候选仍SA51200，权重16202c4e..，teacher2857950c..，没有训练或最终集重选。FINAL_REPORT/FINAL_TABLES/FINAL_SUMMARY与final-analysis及figures/final已完成。
+13受控单轴尺寸、78筛查协议、9条件54独立确认协议、13条件78最终协议均完成。最终5951个静态有效初态×2模型×3协议=35706协议episode记录；SOURCE/ASSETS/GRASPS/DATA/FINAL_PLAN/final-freeze保留。teacher与SA51200原哈希未变。E→C诊断失败预登记续训条件；未启动任何研究训练/新optimizer更新，不回训最终集。
 
-剩余：冻结pre-publication元数据快照并打包上传；提交最终科学结果push；Release id401374769更新target为科学commit并发布tag；verify_public_delivery.py匿名下载/恢复/全视频decode（不得先声称通过）；下载的parent用原verify_wuji_student_checkpoint做CPU Adam/RNG审计，再在更新的公开Git源码+实际下载资产模型上有限GPU command smoke；核对源码hash0413cd7b..；停止仅自建monitor（必须新ps/proc身份验证，旧PID1304630仅线索），保留ToDesk与用户进程；最终预算/资源audit/journal/公开delivery验证commitpush，原生Goal才可complete。
+FINAL_REPORT/FINAL_TABLES/图/CSV/JSON、每几何raw包、实际源码pins、4组teacher/student视频均交付。独立Release wuji-geometry-generalization-20261002-v1公开；科学commit f558fcd5582963c98587c58210c37962d36819a2。匿名模型/受控资产/L80最终raw/全部视频下载、SHA、恢复、全帧解码通过；公开源码实际teacher/student命令完整600步通过，原Adam/RNG CPU恢复通过（合成验证副本不算研究训练）。交付核验包保存smoke原始迹线和日志。
 
-sourcepins pre-final44remote+8local与final13remote三个包已上传，覆盖实际运行源码版本。publicsmoke预期同0413 source，其identity可引用已有final源码blob包。四个有限队列与CPU final delivery watcher均退出0，无GPU实验运行；接手仍重新验证，不盲目重启。源码/模型/初始化/评分已封闭，禁止任何续训/调阈值。
+实际本轮7.982526834474668 GPUh，历史32.4534053852823，累计40.43593221975697，剩余23.56406778024303。66个GPU作业已退出，无活跃GPU任务；自建monitor按/proc命令/cwd/start_ticks于2026-10-02 00:04:50UTC后核验停止，ToDesk保留。resources-final、public-verification、public-command-verification、final-release-index、branch-delivery-verified是完成证据；收尾记录commitpush后Goal完成。PID/利用率是历史时间点，未来接手必须重新查，不应启动旧任务。
+
+能力边界：仅静态有效初态与三个旧抓姿簇邻域的单轴离散仿真点。抓姿缺口与功能/持握/S严格指标分开。F换向读取仿真slider真值；CPU原player接口回放通过但H200→CPU跨设备回放失败；没有真机结果。下一轮只优先局部功能抓姿适配修复，用全新开发与最终数据注册新Goal，不再调整本轮封闭最终集。
