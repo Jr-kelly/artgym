@@ -12,21 +12,31 @@
     "runs/width-student-distillation-20261002/C1-window1-h200-17314/step_054400.pth": "b537578fc1123a6c3bad0358d8aa122b0c9c97bd970f98984960f685fa787a2f",
     "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8"
   },
-  "phase": "Publishing completed negative result",
+  "phase": "Complete: negative result published, GPU work closed",
   "optimizer_updates": 0,
   "remote_inventory_verified": true,
   "remote_additional_consumption_unknown": false,
   "active_jobs": [],
   "final_opened": false,
-  "goal_complete": false,
+  "goal_complete": true,
   "last_event": {
-    "utc": "2026-10-02T13:52:28.929052+00:00",
-    "event": "delivery_prepared",
-    "phase": "Publishing completed negative result",
-    "next": "Push scientific commit and publish five verified release assets; no restore audit or further GPU work",
-    "evidence_archive_sha256": "a1fd4fe45897dbdd047e5e3c906af3d5c5cc8130c0141bcbb2ed69fcae8ec752"
+    "utc": "2026-10-02T13:58:24.848003+00:00",
+    "event": "goal_delivery_completed",
+    "phase": "Complete: negative result published, GPU work closed",
+    "release_url": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-real-knife-press-resistance-20261002-v1",
+    "scientific_commit": "051b9f52c587ca14fc828fc1ba5655d2c0bd5ec3",
+    "verification": "Five server SHA256 digests matched; immutable report link verified once; no full download audit",
+    "state_updates": {
+      "goal_complete": true,
+      "delivery_complete": true,
+      "release_url": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-real-knife-press-resistance-20261002-v1",
+      "scientific_commit": "051b9f52c587ca14fc828fc1ba5655d2c0bd5ec3",
+      "optimizer_updates": 0,
+      "gpu_work_closed": true
+    },
+    "next": "No automatic experiments pending. Next separately registered task: establish sustained contact and holding on approximate real-size knife before training; all final sets remain closed."
   },
-  "next": "Push scientific commit and publish five verified release assets; no restore audit or further GPU work",
+  "next": "No automatic experiments pending. Next separately registered task: establish sustained contact and holding on approximate real-size knife before training; all final sets remain closed.",
   "active_gpu_elapsed_hours": 0,
   "remaining_including_active": 8.626521646656087,
   "candidate_frozen": true,
@@ -34,5 +44,8 @@
   "training_started": false,
   "confirmation_complete": true,
   "confirmation_closed": true,
-  "gpu_work_closed": true
+  "gpu_work_closed": true,
+  "delivery_complete": true,
+  "release_url": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-real-knife-press-resistance-20261002-v1",
+  "scientific_commit": "051b9f52c587ca14fc828fc1ba5655d2c0bd5ec3"
 }
