@@ -26,13 +26,28 @@
   "optimizer_updates": 0,
   "final_opened": false,
   "closed_historical_final_sets": true,
-  "next": "Upload two unique additive assets; formal study remains SSH-blocked",
+  "next": "SSH TCP timeout is the hard blocker. Preserve current pins/cohorts/parents; resume remote inventory then same-H200 checks and matched formal C/G trial",
   "last_event": {
-    "utc": "2026-10-02T07:33:20.704876+00:00",
-    "event": "additive_local_precheck_packet_restore_verified",
-    "evidence": "research/width-student-distillation-20261002/LOCAL_PRECHECK_DELIVERY.json",
-    "restored_files": 71,
-    "next": "Upload two unique additive assets; formal study remains SSH-blocked"
+    "utc": "2026-10-02T07:36:44.343919+00:00",
+    "event": "additive_local_precheck_release_published",
+    "evidence": "research/width-student-distillation-20261002/upload-local-precheck-v1.json",
+    "state_updates": {
+      "delivery": {
+        "release_id": 401601529,
+        "tag": "wuji-width-student-distillation-20261002-preparation-v1",
+        "draft": false,
+        "published": true,
+        "release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-width-student-distillation-20261002-preparation-v1",
+        "assets": 4,
+        "digests_verified": true,
+        "prepared_packet_restored_files": 161,
+        "scientific_training_complete": false,
+        "local_precheck_restored_files": 71,
+        "local_precheck_digest_verified": true,
+        "formal_training_complete": false
+      }
+    },
+    "next": "SSH TCP timeout is the hard blocker. Preserve current pins/cohorts/parents; resume remote inventory then same-H200 checks and matched formal C/G trial"
   },
   "active_gpu_elapsed_hours": 0,
   "remaining_including_active": 23.510887235009967,
@@ -49,10 +64,13 @@
     "draft": false,
     "published": true,
     "release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-width-student-distillation-20261002-preparation-v1",
-    "assets": 2,
+    "assets": 4,
     "digests_verified": true,
     "prepared_packet_restored_files": 161,
-    "scientific_training_complete": false
+    "scientific_training_complete": false,
+    "local_precheck_restored_files": 71,
+    "local_precheck_digest_verified": true,
+    "formal_training_complete": false
   },
   "blocked_goal_turns": 2,
   "local_zero_change_path_verified": true,
