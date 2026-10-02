@@ -120,3 +120,5 @@ NVML覆盖109.01分钟（08:20:33—10:09:33UTC），该覆盖期整机平均43.
 [本轮分支](https://github.com/Jr-kelly/artgym/tree/feat/wuji-width-student-distillation-20261002)；[训练/确认/视频Release](https://github.com/Jr-kelly/artgym/releases/tag/wuji-width-student-distillation-20261002-v1)。该版本明确final待续，准备和旧几何Release保留。checkpoint、raw dev/confirmation、实际失败/未知收据、图和视频均独立发布并核对服务器SHA。关键新checkpoint/新静态数据恢复通过，父模型按旧Release及固定SHA引用，不重跑历史恢复。
 
 当前唯一必要下一步：恢复授权H200端点，先对账8个未知execution收据，再继续同一冻结最终矩阵。研究后续首要问题是严格定时到位精度的保留，先作单变量时序/同incomingRNN执行目标误差诊断；不要盲目延长宽度训练。
+
+本次登记Goal开始至已完成科学材料交付：262.45分钟（UTC2026-10-02T10:42:19.305106+00:00）。主要等待为旧端口不可达、两组配对训练边界、评测、raw搬运与上传；最终矩阵因连接中断未完成，后续墙钟另记。

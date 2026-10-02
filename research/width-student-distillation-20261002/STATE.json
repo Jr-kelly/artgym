@@ -1,7 +1,7 @@
 {
   "start_utc": "2026-10-02T06:19:52.569245+00:00",
   "base_sha": "89689142c9f0e52fb679ce710f9c95a55b8a6643",
-  "phase": "Two paired seeds training/dev, confirmation and videos complete; frozenfinalblockedwith8unknown82pending",
+  "phase": "Delivered two-seed training/dev, independentconfirmation andvideos; finalblockedafterSSHloss",
   "historical_gpu_hours": 40.43593221975697,
   "max_gpu_hours": 64,
   "reserved_final_gpu_hours": 6,
@@ -21,12 +21,17 @@
   "optimizer_updates": 12800,
   "final_opened": true,
   "closed_historical_final_sets": true,
-  "next": "Publish completedscience aspartial; Goal remainsunfinished, endpointrestorationneeded",
+  "next": "RestoreauthorizedH200endpoint, reconcile8unknownreceipts andcontinueunchangedfinal90matrix. No furthertraining,reselectionoroldfinalaccess.",
   "last_event": {
-    "utc": "2026-10-02T10:35:14.799912+00:00",
-    "event": "completed_work_and_remaining_final_integrity_audit",
-    "evidence": "research/width-student-distillation-20261002/COMPLETED_WORK_AND_REMAINING_AUDIT.json",
-    "next": "Publish completedscience aspartial; Goal remainsunfinished, endpointrestorationneeded"
+    "utc": "2026-10-02T10:42:19.305290+00:00",
+    "event": "completed_science_delivery_finished_frozen_final_waiting_endpoint",
+    "evidence": "research/width-student-distillation-20261002/DELIVERY_HANDOFF_AUDIT.json",
+    "phase": "Delivered two-seed training/dev, independentconfirmation andvideos; finalblockedafterSSHloss",
+    "state_updates": {
+      "final_delivery_complete": false,
+      "goal_complete": false
+    },
+    "next": "RestoreauthorizedH200endpoint, reconcile8unknownreceipts andcontinueunchangedfinal90matrix. No furthertraining,reselectionoroldfinalaccess."
   },
   "active_gpu_elapsed_hours": 0,
   "remaining_including_active": 13.100917793462962,
@@ -40,13 +45,16 @@
   "delivery": {
     "release_id": 401698813,
     "tag": "wuji-width-student-distillation-20261002-v1",
-    "draft": true,
-    "published": false,
+    "draft": false,
+    "published": true,
+    "release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-width-student-distillation-20261002-v1",
+    "assets": 23,
+    "digests_verified": true,
     "formal_training_complete": true,
-    "scientific_training_complete": true,
     "confirmation_complete": true,
-    "final_complete": false,
-    "goal_complete": false
+    "scientific_final_complete": false,
+    "goal_complete": false,
+    "scientific_commit": "523cff1c865ecd62c1999bb3114603c16401aa82"
   },
   "blocked_goal_turns": 1,
   "local_zero_change_path_verified": true,
@@ -177,5 +185,7 @@
     "local_precheck_digest_verified": true,
     "formal_training_complete": false
   },
-  "completed_science_delivery_ready": true
+  "completed_science_delivery_ready": true,
+  "completed_science_delivery_verified": true,
+  "goal_complete": false
 }
