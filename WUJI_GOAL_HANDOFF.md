@@ -17,16 +17,28 @@
   "optimizer_updates": 1600,
   "remote_inventory_verified": true,
   "remote_additional_consumption_unknown": false,
-  "goal_complete": false,
+  "goal_complete": true,
   "last_event": {
-    "utc": "2026-10-02T16:18:35.494753+00:00",
-    "event": "evidence_ready_for_publication",
-    "archive": "delivery/real-size-student-adaptation-20261002/real-size-student-evidence-v1.tar.gz",
-    "sha256": "0e60970a10ca47a4a01ca495c98798dbcae378efd352ece6a8afdfeb37ccb00b",
-    "next": "Publish scientific commit and one new Release with five assets; no additional audits"
+    "utc": "2026-10-02T16:23:26.062340+00:00",
+    "event": "real_size_student_goal_complete_and_published",
+    "release_url": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-real-size-student-adaptation-20261002-v1",
+    "scientific_commit": "420d84d8e461fb23807c315b7d7ceb823b835bfb",
+    "phase": "Complete: paired training, independent confirmation, video and public delivery",
+    "state_updates": {
+      "goal_complete": true,
+      "delivery_complete": true,
+      "release_url": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-real-size-student-adaptation-20261002-v1",
+      "scientific_commit": "420d84d8e461fb23807c315b7d7ceb823b835bfb",
+      "training_closed": true,
+      "confirmation_closed": true,
+      "gpu_work_closed": true,
+      "optimizer_updates": 1600,
+      "formal_transitions": 1638400
+    },
+    "next": "No automatic experiments pending. Preserve R800 and closed confirmation. Next separately registered priority: axial drive and endpoint holding while retaining support stability. Remaining7.882011920672166 GPUh."
   },
-  "phase": "Science complete; compact report and publication",
-  "next": "Publish scientific commit and one new Release with five assets; no additional audits",
+  "phase": "Complete: paired training, independent confirmation, video and public delivery",
+  "next": "No automatic experiments pending. Preserve R800 and closed confirmation. Next separately registered priority: axial drive and endpoint holding while retaining support stability. Remaining7.882011920672166 GPUh.",
   "active_jobs": [],
   "new_gpu_hours": 0.7445097259839208,
   "cumulative_gpu_hours": 56.11798807932783,
@@ -42,6 +54,9 @@
   "confirmation_opened": true,
   "confirmation_complete": true,
   "confirmation_closed": true,
-  "gpu_work_closed": true
+  "gpu_work_closed": true,
+  "delivery_complete": true,
+  "release_url": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-real-size-student-adaptation-20261002-v1",
+  "scientific_commit": "420d84d8e461fb23807c315b7d7ceb823b835bfb"
 }
 ```
