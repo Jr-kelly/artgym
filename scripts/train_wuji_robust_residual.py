@@ -11,10 +11,12 @@ from scripts.wuji_student_interface import tensor_hash
 def main():
     p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);p.add_argument('--envs',type=int,default=512);p.add_argument('--updates',type=int,default=400);p.add_argument('--horizon',type=int,default=32);p.add_argument('--seed',type=int,default=2026100307);p.add_argument('--randomization-scale',type=float,default=.5);p.add_argument('--load-max',type=float,default=.1);p.add_argument('--detent-max',type=float,default=.1);p.add_argument('--epochs',type=int,default=4);p.add_argument('--minibatch',type=int,default=4096);p.add_argument('--resume',type=Path)
     p.add_argument('--support-residual-scale',type=float,default=.25);p.add_argument('--rotation-cost',type=float,default=0.);p.add_argument('--wrist-nominal',type=Path);p.add_argument('--wrist-probability',type=float,default=.5)
+    p.add_argument('--object',default='knife_wuji_robust_family_20261003');p.add_argument('--actual-hold-history',type=int,choices=[0,50],default=50)
+    p.add_argument('--thumb-slider-reward',type=float,default=0.)
     a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
     torch.set_num_threads(4);torch.manual_seed(a.seed);np.random.seed(a.seed)
     wrist=json.loads(a.wrist_nominal.read_text())['wrist_quaternion_xyzw'] if a.wrist_nominal else None
-    system=LearningSystem(a.envs,a.seed,a.randomization_scale,a.load_max,a.detent_max,support_scale=a.support_residual_scale,rotation_cost=a.rotation_cost,wrist_nominal=wrist,wrist_probability=a.wrist_probability);device=system.env.device
+    system=LearningSystem(a.envs,a.seed,a.randomization_scale,a.load_max,a.detent_max,support_scale=a.support_residual_scale,rotation_cost=a.rotation_cost,wrist_nominal=wrist,wrist_probability=a.wrist_probability,object_name=a.object,history_hold_frames=a.actual_hold_history,thumb_slider_reward=a.thumb_slider_reward);device=system.env.device
     model=ResidualActorCritic().to(device);opt=torch.optim.Adam(model.parameters(),lr=3e-4,eps=1e-5);start=0
     if a.resume:
         saved=torch.load(a.resume,map_location=device);model.load_state_dict(saved['model']);opt.load_state_dict(saved['optimizer']);start=saved['updates'];torch.set_rng_state(saved['rng_cpu']);torch.cuda.set_rng_state_all(saved['rng_cuda']);np.random.set_state(saved['rng_numpy'])
@@ -28,10 +30,11 @@ def main():
     last=start
     try:
         for u in range(start+1,a.updates+1):
-            public=[];critic=[];actions=[];logs=[];values=[];rewards=[];dones=[]
+            public=[];critic=[];actions=[];logs=[];values=[];rewards=[];dones=[];active=[]
             for step in range(a.horizon):
                 x,c=system.features()
                 with torch.no_grad():dist,value=model(x,c);action=dist.sample();log=dist.log_prob(action).sum(-1)
+                active.append(system.policy_active.clone())
                 reward,done=system.step(action)
                 public.append(x);critic.append(c);actions.append(action);logs.append(log);values.append(value);rewards.append(reward);dones.append(done)
             with torch.no_grad():
@@ -41,14 +44,15 @@ def main():
             for t in reversed(range(a.horizon)):
                 nextv=nv if t==a.horizon-1 else v[t+1];live=(~d[t]).float();delta=r[t]+.995*nextv*live-v[t];gae=delta+.995*.95*live*gae;adv[t]=gae
             returns=(adv+v).flatten();advantages=adv.flatten();advantages=(advantages-advantages.mean())/(advantages.std()+1e-8)
-            px=torch.stack(public).flatten(0,1);cx=torch.stack(critic).flatten(0,1);ac=torch.stack(actions).flatten(0,1);lp=torch.stack(logs).flatten();losses=[];kls=[]
+            px=torch.stack(public).flatten(0,1);cx=torch.stack(critic).flatten(0,1);ac=torch.stack(actions).flatten(0,1);lp=torch.stack(logs).flatten();eligible=torch.stack(active).flatten();losses=[];kls=[]
             for epoch in range(a.epochs):
                 for ids in torch.randperm(len(px),device=device).split(a.minibatch):
-                    dist,value=model(px[ids],cx[ids]);newlog=dist.log_prob(ac[ids]).sum(-1);ratio=(newlog-lp[ids]).exp();piloss=-torch.minimum(ratio*advantages[ids],ratio.clamp(.8,1.2)*advantages[ids]).mean();vloss=.5*(value-returns[ids]).square().mean();loss=piloss+.5*vloss-.001*dist.entropy().sum(-1).mean()
+                    dist,value=model(px[ids],cx[ids]);newlog=dist.log_prob(ac[ids]).sum(-1);ratio=(newlog-lp[ids]).exp();mask=eligible[ids].float();denom=mask.sum().clamp_min(1)
+                    piloss=-(torch.minimum(ratio*advantages[ids],ratio.clamp(.8,1.2)*advantages[ids])*mask).sum()/denom;vloss=.5*(value-returns[ids]).square().mean();loss=piloss+.5*vloss-.001*(dist.entropy().sum(-1)*mask).sum()/denom
                     opt.zero_grad(set_to_none=True);loss.backward();torch.nn.utils.clip_grad_norm_(model.parameters(),1.);opt.step();losses.append(float(loss));kls.append(float(((ratio-1)-(newlog-lp[ids])).mean()))
                 if np.mean(kls[-max(1,len(px)//a.minibatch):])>.03:break
             recent=system.stats[-min(128,len(system.stats)):]
-            row=dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),update=u,transitions=system.transitions,episodes=system.episodes,reward=float(r.mean()),loss=float(np.mean(losses)),kl=float(np.mean(kls)),wall_seconds=time.monotonic()-begin,peak_extension_mean_m=float(np.mean([e['peak_extension_m'] for e in recent])) if recent else None,contact_mean=float(np.mean([e['thumb_contact_fraction'] for e in recent])) if recent else None,fall_fraction=float(np.mean([e['fall'] for e in recent])) if recent else None,scope='Training fitting/behavior only')
+            row=dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),update=u,transitions=system.transitions,episodes=system.episodes,reward=float(r.mean()),loss=float(np.mean(losses)),kl=float(np.mean(kls)),policy_active_fraction=float(eligible.float().mean()),actual_hold_history_frames=a.actual_hold_history,wall_seconds=time.monotonic()-begin,peak_extension_mean_m=float(np.mean([e['peak_extension_m'] for e in recent])) if recent else None,contact_mean=float(np.mean([e['thumb_contact_fraction'] for e in recent])) if recent else None,fall_fraction=float(np.mean([e['fall'] for e in recent])) if recent else None,scope='Training fitting/behavior only')
             with (a.output/'learning.jsonl').open('a') as f:f.write(json.dumps(row)+'\n')
             print(json.dumps(row),flush=True);last=u
             if u%50==0 or u==a.updates or stopping[0]:save(u)

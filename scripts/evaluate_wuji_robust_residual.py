@@ -10,9 +10,10 @@ import torch,numpy as np
 from isaacgymenvs.utils.torch_jit_utils import quat_mul,quat_conjugate
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);p.add_argument('--checkpoint',type=Path);p.add_argument('--envs',type=int,default=96);p.add_argument('--seed',type=int,default=2026100311);p.add_argument('--load-max',type=float,default=.1);p.add_argument('--detent-max',type=float,default=.1);p.add_argument('--randomization-scale',type=float,default=.5);p.add_argument('--heldout',action='store_true');a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
+    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);p.add_argument('--checkpoint',type=Path);p.add_argument('--envs',type=int,default=96);p.add_argument('--seed',type=int,default=2026100311);p.add_argument('--load-max',type=float,default=.1);p.add_argument('--detent-max',type=float,default=.1);p.add_argument('--randomization-scale',type=float,default=.5);p.add_argument('--heldout',action='store_true');p.add_argument('--wrist-nominal',type=Path);p.add_argument('--wrist-probability',type=float,default=.5);a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
     instances=['012','013','014','015'] if a.heldout else None
-    system=LearningSystem(a.envs,a.seed,a.randomization_scale,a.load_max,a.detent_max,instances=instances);env=system.env;model=ResidualActorCritic().to(env.device)
+    wrist=json.loads(a.wrist_nominal.read_text())['wrist_quaternion_xyzw'] if a.wrist_nominal else None
+    system=LearningSystem(a.envs,a.seed,a.randomization_scale,a.load_max,a.detent_max,instances=instances,wrist_nominal=wrist,wrist_probability=a.wrist_probability,history_hold_frames=0);env=system.env;model=ResidualActorCritic().to(env.device)
     if a.checkpoint:
         saved=torch.load(a.checkpoint,map_location=env.device);model.load_state_dict(saved['model']);model.eval()
         system.scale=torch.tensor(saved['action_scale'],device=env.device)

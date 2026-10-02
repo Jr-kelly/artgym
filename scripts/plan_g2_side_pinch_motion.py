@@ -36,6 +36,9 @@ def main():
     p.add_argument('--arm-wrist-posture',type=float,help='Use G2 redundant joint7 to select an initial IK posture; original robot limits remain')
     p.add_argument('--hard-close-clearance',action='store_true',help='One constrained closing-path refinement, unchanged requested motor compression')
     p.add_argument('--knife-spec',type=Path)
+    p.add_argument('--edge-table',action='store_true',help='Check actual finite table box; fingers outside table may extend below its top')
+    p.add_argument('--no-flip',action='store_true',help='Pickup-only or functional grasp: no unneeded180degree wrist rotation')
+    p.add_argument('--approach-height',type=float,default=.16)
     p.add_argument('--extra-self-pairs',type=Path,help='Previously exact-audited collision pairs to constrain in both motor paths')
     p.add_argument('--full-self-axes',action='store_true',help='Use every hull-face normal for constrained self pairs; same gap threshold')
     p.add_argument('--seed-motor-plan',type=Path,help='Previous offline motor plan as optimizer seed only, no physics injection')
@@ -49,6 +52,7 @@ def main():
     if a.knife_spec and not original.get('use_recorded_table_pose',False):object_world=knife.table_pose(object_world)
     knife_parts=knife.collision_parts(original.get('planning_slider_m'))
     normals=np.asarray(original['contact_normals'])
+    active=np.array([FINGERS.index(f) for f in original.get('active_fingers',FINGERS)])
     vertices={n:np.concatenate([v for v,_ in m]) for n,m in g.meshes.items()}
     normals_local={n:np.concatenate([v for _,v in m]) for n,m in g.meshes.items()}
     full_normals=None
@@ -89,7 +93,9 @@ def main():
                 for center,half in boxes:
                     lo=center@ax.T-abs(ax)@half;hi=center@ax.T+abs(ax)@half
                     gap.append(np.maximum(proj.min(0)-hi,lo-proj.max(0)).max())
-            height.append((v@object_world[2,:3]+object_world[2,3]-.75).min())
+            if a.edge_table:
+                vw=v@object_world[:3,:3].T+object_world[:3,3];ta=np.r_[np.eye(3),axes[n]@object_world[:3,:3].T];pv=(vw-np.array([.60,-.25,.725]))@ta.T;radius=abs(ta)@np.array([.30,.40,.025]);height.append(np.maximum(pv.min(0)-radius,-radius-pv.max(0)).max())
+            else:height.append((v@object_world[2,:3]+object_world[2,3]-.75).min())
         selfgaps=[]
         for n,m in constrained_pairs:
             ax=np.r_[axes[n],axes[m]] if full_normals is None else np.r_[full_normals[n]@frames[n][:3,:3].T,full_normals[m]@frames[m][:3,:3].T]
@@ -107,7 +113,7 @@ def main():
         if opening:desired[:,1]-=a.open_pad_lift
         def residual(q):
             points,facing,gap,height,selfgap,_=sample(q)
-            parts=[(points-desired).ravel()*500,np.minimum(facing-.32,0),
+            parts=[(points[active]-desired[active]).ravel()*500,np.minimum(facing[active]-.32,0),
                 np.minimum(height-.0006,0)*600,np.array([min(selfgap-.000015,0)*600]),(q-q0)*.02]
             if opening:parts.append(np.minimum(gap-.000015,0)*500)
             # Endpoint clearance does not guarantee joint-space interpolation
@@ -176,7 +182,7 @@ def main():
             rows.append(dict(phase=phase,fraction=float(u),table_min_m=float(height.min()),
                 knife_gap_min_m=float(gap.min()),self_intersections=bad,
                 knife_intersections=knife_bad,knife_gap_semantics='Positive SAT gap certifies separation; negative gap requires exact hull intersection audit',
-                facing_min=float(facing.min())))
+                facing_min=float(facing[active].min())))
     # Vertical approach with the OPEN hand must remain separated from the
     # resting knife, not merely clear at its final pose.
     _,_,_,_,_,vs=sample(opened)
@@ -190,7 +196,7 @@ def main():
                 r=radius(v+local_shift,kv)
                 if r is None or r>1e-5:approach_overlaps.append(dict(dz_m=float(dz),hand_link=n,knife_link=bi,radius_m=r))
     arm=G2Kinematics();table=ArmTableCollision(.75)
-    target=object_world@wrist;above=target.copy();above[2,3]+=.16
+    target=object_world@wrist;above=target.copy();above[2,3]+=a.approach_height
     lift=target.copy();lift[2,3]+=a.lift
     arm_result={};arm_pass=False;pickup_arm_pass=False
     try:
@@ -205,15 +211,17 @@ def main():
         pickup_arm_pass=True
         arm_result=dict(grasp_ik=err,high_ik=high_err,approach=ad,lift=ld)
         lifted_object=object_world.copy();lifted_object[2,3]+=a.lift
-        flip,fd=plan_flip(arm,arm.forward(lifted[-1]),lifted_object,lifted[-1],a.flip_degrees,10,1/30,table,axis_mode=a.flip_axis)
-        arm_result=dict(grasp_ik=err,high_ik=high_err,approach=ad,lift=ld,flip=fd)
-        arm_pass=fd['feasible']
+        if a.no_flip:arm_pass=True
+        else:
+            flip,fd=plan_flip(arm,arm.forward(lifted[-1]),lifted_object,lifted[-1],a.flip_degrees,10,1/30,table,axis_mode=a.flip_axis)
+            arm_result=dict(grasp_ik=err,high_ik=high_err,approach=ad,lift=ld,flip=fd)
+            arm_pass=fd['feasible']
     except ValueError as exc:arm_result['failure']=str(exc)
     max_motor_velocity=float(abs(closed-opened).max()*1.875/3.)
     if a.close_via_touch:max_motor_velocity=float(max(abs(q0-opened).max()*1.875/2,abs(closed-q0).max()*1.875))
     hand_pass=bool(all(r['table_min_m']>=.0005 and not r['self_intersections'] and
         not r['knife_intersections'] for r in rows)
-        and not approach_overlaps and max(open_fit['contact_error_m'])<.001)
+        and not approach_overlaps and max(np.array(open_fit['contact_error_m'])[active])<.001)
     audit=dict(hand_path_rows=rows,approach_intersections=approach_overlaps,arm=arm_result,
         hand_path_pass=hand_pass,arm_path_pass=bool(arm_pass),geometric_ready_for_one_physics_trial=bool(hand_pass and arm_pass),
         pickup_arm_path_pass=pickup_arm_pass,geometric_ready_for_pickup_only_trial=bool(hand_pass and pickup_arm_pass),

@@ -19,27 +19,36 @@ def main():
         for f,n in zip(FINGERS,normal):
             mat=wrist@frames['hand_r_'+f+'_pad_link'];v=np.concatenate([v for v,_ in g.meshes['hand_r_'+f+'_pad_link']]);v=v@mat[:3,:3].T+mat[:3,3];proj=v@n;weights=np.exp(-(proj-proj.min())/.0002);weights/=weights.sum();out.append(weights@v)
         return np.asarray(out)
-    contact=points(q);jac=np.empty((5,3,20))
+    active=[FINGERS.index(f) for f in plan.get('active_fingers',FINGERS)];normal=normal[active];count=len(active)
+    # Contact extraction still uses the full mesh/name order.
+    extraction_normals=np.asarray(plan['contact_normals'])
+    def active_points(q):
+        frames=h.forward(q);out=[]
+        for index in active:
+            f=FINGERS[index];n=extraction_normals[index];mat=wrist@frames['hand_r_'+f+'_pad_link'];v=np.concatenate([v for v,_ in g.meshes['hand_r_'+f+'_pad_link']]);v=v@mat[:3,:3].T+mat[:3,3];proj=v@n;weights=np.exp(-(proj-proj.min())/.0002);weights/=weights.sum();out.append(weights@v)
+        return np.asarray(out)
+    contact=active_points(q);jac=np.empty((count,3,20))
     for j in range(20):
-        delta=np.zeros(20);delta[j]=1e-5;jac[:,:,j]=(points(q+delta)-points(q-delta))/2e-5
+        delta=np.zeros(20);delta[j]=1e-5;jac[:,:,j]=(active_points(q+delta)-active_points(q-delta))/2e-5
     profile=OmegaConf.load('isaacgymenvs/cfg/hand/wuji_paper_official_actuator.yaml');kp=np.asarray(profile.dof_props.stiffness)
     lower_offset=np.maximum(-a.joint_offset_limit,h.lower+.005-q)
     upper_offset=np.minimum(a.joint_offset_limit,h.upper-.005-q)
     gravity=world[:3,:3].T@np.array([0,0,-.035*9.81]);com=np.array([0,.0075,-.02205])*(.006/.035)
-    preferred=np.array([a.thumb_normal]+[a.thumb_normal/4]*4)
+    preferred=np.array([a.thumb_normal]+[a.thumb_normal/(count-1)]*(count-1))
+    t1=np.array([np.eye(3)[np.argmin(abs(n))] for n in normal]);t2=np.cross(normal,t1)
     # Variables: normal magnitude plus two side-plane tangential components.
-    def forces(x):return -normal*x[:,0:1]+np.c_[np.zeros(5),x[:,1],x[:,2]]
+    def forces(x):return -normal*x[:,0:1]+t1*x[:,1:2]+t2*x[:,2:3]
     def equality(flat):
-        f=forces(flat.reshape(5,3));return np.r_[f.sum(0)+gravity,np.cross(contact-com,f).sum(0)*100]
+        f=forces(flat.reshape(count,3));return np.r_[f.sum(0)+gravity,np.cross(contact-com,f).sum(0)*100]
     def inequality(flat):
-        x=flat.reshape(5,3);offset=np.einsum('fij,fi->j',jac,forces(x))/kp
+        x=flat.reshape(count,3);offset=np.einsum('fij,fi->j',jac,forces(x))/kp
         return np.r_[1.1*x[:,0]-np.linalg.norm(x[:,1:],axis=1),offset-lower_offset,upper_offset-offset]
-    seed=np.c_[preferred,np.tile(-gravity[1:]/5,(5,1))]
-    fit=minimize(lambda x:float(((x.reshape(5,3)[:,0]-preferred)**2).sum()+.3*(x.reshape(5,3)[:,1:]**2).sum()),seed.ravel(),method='SLSQP',bounds=[b for _ in range(5) for b in [(0.08,3.),(-2.,2.),(-2.,2.)]],constraints=[dict(type='eq',fun=equality),dict(type='ineq',fun=inequality)],options=dict(maxiter=300,ftol=1e-12))
-    f=forces(fit.x.reshape(5,3));motor_tau=np.einsum('fij,fi->j',jac,f)
+    seed=np.c_[preferred,-(t1@gravity)/count,-(t2@gravity)/count]
+    fit=minimize(lambda x:float(((x.reshape(count,3)[:,0]-preferred)**2).sum()+.3*(x.reshape(count,3)[:,1:]**2).sum()),seed.ravel(),method='SLSQP',bounds=[b for _ in range(count) for b in [(0.08,3.),(-2.,2.),(-2.,2.)]],constraints=[dict(type='eq',fun=equality),dict(type='ineq',fun=inequality)],options=dict(maxiter=300,ftol=1e-12))
+    f=forces(fit.x.reshape(count,3));motor_tau=np.einsum('fij,fi->j',jac,f)
     offset=motor_tau/kp;bounded=np.clip(offset,-a.joint_offset_limit,a.joint_offset_limit);target=np.clip(q+bounded,h.lower+.005,h.upper-.005)
     plan['close_q']=target.tolist();plan['close_waypoints']=[dict(fraction=0.,q=plan['open_q']),dict(fraction=2/3,q=q.tolist()),dict(fraction=1.,q=target.tolist())]
-    audit=dict(method='Static nominal impedance equilibrium; does not measure or regulate contact force',args=vars(a),optimizer_success=bool(fit.success),message=fit.message,contact_points_knife_m=contact.tolist(),planned_force_on_knife_N=f.tolist(),normal_N=fit.x.reshape(5,3)[:,0].tolist(),wrench_residual=equality(fit.x).tolist(),friction_assumption=1.1,force_safety_margin=inequality(fit.x).tolist(),joint_offset_unbounded_rad=offset.tolist(),joint_offset_actual_rad=(target-q).tolist(),offset_clipped=bool(np.max(abs(offset-bounded))>1e-8),motor_tau_nominal_Nm=motor_tau.tolist(),no_hardware_calibration=True)
+    audit=dict(method='Static nominal impedance equilibrium; does not measure or regulate contact force',args=vars(a),optimizer_success=bool(fit.success),message=fit.message,contact_points_knife_m=contact.tolist(),planned_force_on_knife_N=f.tolist(),normal_N=fit.x.reshape(count,3)[:,0].tolist(),active_fingers=[FINGERS[i] for i in active],wrench_residual=equality(fit.x).tolist(),friction_assumption=1.1,force_safety_margin=inequality(fit.x).tolist(),joint_offset_unbounded_rad=offset.tolist(),joint_offset_actual_rad=(target-q).tolist(),offset_clipped=bool(np.max(abs(offset-bounded))>1e-8),motor_tau_nominal_Nm=motor_tau.tolist(),no_hardware_calibration=True)
     plan['equilibrium_audit']=audit
     (a.output/'motor-plan.json').write_text(json.dumps(plan,default=str,indent=2));(a.output/'audit.json').write_text(json.dumps(audit,default=str,indent=2));print(json.dumps(audit,default=str));assert fit.success and np.linalg.norm(equality(fit.x))<1e-4
 if __name__=='__main__':main()

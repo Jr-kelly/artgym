@@ -1,0 +1,1438 @@
+{
+  "name": "knife_wuji_acquired_family_20261003",
+  "source": {
+    "wrist_quaternion_xyzw": [
+      -0.8243579268455505,
+      -0.49805352091789246,
+      -0.19673171639442444,
+      0.1835029572248459
+    ],
+    "source": "runs/robust-knife-family-20261003/demo/g2-functional-equilibrium-continuous-v11/trace.npz",
+    "trace_sha256": "3d537c9bff9d9731c563b154a75b2ea9eece7eeee16775ba479a3e95e7318f1c",
+    "time_s": 15.0,
+    "object_velocity": [
+      -0.0008528590551577508,
+      0.009450184181332588,
+      0.0006461088778451085,
+      2.0761711597442627,
+      -0.16229744255542755,
+      -0.2696564197540283
+    ],
+    "slider_from_lower_m": -1.3810720900231388e-09,
+    "scope": "Measured simulated functional acquisition; no hardware evidence; training cache zeroes velocity, continuous runner does not"
+  },
+  "source_seed_sha256": "787b7cea44baeca979d32d3b153ff1c5a0fe319e6c3b6677feabe2525bcc288d",
+  "geometry_source_manifest_sha256": "727f673da7f24ebd41cd5e9118202589b8256d50f6d051bad10a7c1efd12e3a8",
+  "entries": [
+    {
+      "instance": "000",
+      "split": "train",
+      "adaptation": [
+        {
+          "source": 0,
+          "kind": "original functional",
+          "thumb_ik_error_m": 0.0,
+          "contact_errors_m": [
+            1.3877787807814457e-17,
+            6.938893903907228e-18,
+            4.87890977618477e-19,
+            0.0,
+            1.3877787807814457e-17
+          ],
+          "max_q_change_rad": 0.0,
+          "max_target_change_rad": 0.0
+        },
+        {
+          "source": 1,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.4052814787081394e-09,
+          "contact_errors_m": [
+            0.0,
+            0.0,
+            1.0842021724855044e-19,
+            0.0,
+            6.938893903907228e-18
+          ],
+          "max_q_change_rad": 0.0,
+          "max_target_change_rad": 3.725290298461914e-09
+        },
+        {
+          "source": 2,
+          "kind": "original functional",
+          "thumb_ik_error_m": 2.374527869633935e-09,
+          "contact_errors_m": [
+            2.629935104383914e-12,
+            1.3877787807814457e-17,
+            3.469446951953614e-18,
+            3.469446951953614e-18,
+            6.938893903907228e-18
+          ],
+          "max_q_change_rad": 8.933996470394945e-08,
+          "max_target_change_rad": 8.940696716308594e-08
+        },
+        {
+          "source": 3,
+          "kind": "original functional",
+          "thumb_ik_error_m": 0.0,
+          "contact_errors_m": [
+            1.734723475976807e-17,
+            6.938893903907228e-18,
+            1.6365348541700844e-17,
+            2.5018537765542006e-17,
+            3.5688751564301963e-09
+          ],
+          "max_q_change_rad": 8.143668544519089e-05,
+          "max_target_change_rad": 8.144974708557129e-05
+        },
+        {
+          "source": 4,
+          "kind": "actual closed acquisition",
+          "thumb_ik_error_m": 0.0,
+          "contact_errors_m": [
+            3.469446951953614e-18,
+            0.0,
+            5.204170427930421e-18,
+            6.938893903907228e-18,
+            3.691399008711244e-06
+          ],
+          "max_q_change_rad": 0.1211281270472373,
+          "max_target_change_rad": 0.12112808227539062
+        }
+      ],
+      "pools": {
+        "train": {
+          "n": 96,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/000/train/valid_grasps.npy",
+          "sha256": "4ce87d14560804aaf1eb63628534ca063f4e37bd8367aae60c1820e148aea924"
+        },
+        "test": {
+          "n": 64,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/000/test/valid_grasps.npy",
+          "sha256": "dc386c36d65592f0202b4579de1dc272cc0bbf85715f04686feef17dd6c68e42"
+        }
+      }
+    },
+    {
+      "instance": "001",
+      "split": "train",
+      "adaptation": [
+        {
+          "source": 0,
+          "kind": "original functional",
+          "thumb_ik_error_m": 5.931152242824445e-10,
+          "contact_errors_m": [
+            1.82111096899086e-07,
+            4.783324084116885e-07,
+            4.146619383658214e-08,
+            7.037489778980995e-08,
+            5.65471375413114e-07
+          ],
+          "max_q_change_rad": 0.04599969434342488,
+          "max_target_change_rad": 0.04599964618682861
+        },
+        {
+          "source": 1,
+          "kind": "original functional",
+          "thumb_ik_error_m": 4.026521847382908e-08,
+          "contact_errors_m": [
+            3.8454832211547056e-08,
+            5.519084725843563e-07,
+            4.59759075226756e-08,
+            9.386101880821313e-08,
+            6.625217950977601e-07
+          ],
+          "max_q_change_rad": 0.04421986277200607,
+          "max_target_change_rad": 0.04421985149383545
+        },
+        {
+          "source": 2,
+          "kind": "original functional",
+          "thumb_ik_error_m": 6.918118947255453e-07,
+          "contact_errors_m": [
+            3.088330446485375e-07,
+            4.5301312898823167e-07,
+            2.435045977852884e-07,
+            4.17874379480994e-09,
+            3.2056267361870067e-07
+          ],
+          "max_q_change_rad": 0.04173765862906642,
+          "max_target_change_rad": 0.04173767566680908
+        },
+        {
+          "source": 3,
+          "kind": "original functional",
+          "thumb_ik_error_m": 4.212884220480161e-09,
+          "contact_errors_m": [
+            1.1096667981551782e-07,
+            1.2541008876303323e-07,
+            3.0123158302193736e-08,
+            4.303945260609444e-07,
+            3.900721882422389e-06
+          ],
+          "max_q_change_rad": 0.06708695118169464,
+          "max_target_change_rad": 0.06708694994449615
+        },
+        {
+          "source": 4,
+          "kind": "actual closed acquisition",
+          "thumb_ik_error_m": 3.43265656774356e-11,
+          "contact_errors_m": [
+            0.00014193845602143387,
+            4.0678915748703745e-07,
+            8.874329445900408e-08,
+            1.6796654271770062e-07,
+            4.900803628984439e-06
+          ],
+          "max_q_change_rad": 0.18806649064437753,
+          "max_target_change_rad": 0.1880664825439453
+        }
+      ],
+      "pools": {
+        "train": {
+          "n": 96,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/001/train/valid_grasps.npy",
+          "sha256": "7b81c4e9d9e483d4d9f27fce51af7fa54a7a83822c83f492536fad46f9dfba32"
+        },
+        "test": {
+          "n": 64,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/001/test/valid_grasps.npy",
+          "sha256": "d940e5ded529b849ede67386e76adc090ce7cea3f6f603a4060d81507fdd5f5c"
+        }
+      }
+    },
+    {
+      "instance": "002",
+      "split": "train",
+      "adaptation": [
+        {
+          "source": 0,
+          "kind": "original functional",
+          "thumb_ik_error_m": 4.5217594110134337e-07,
+          "contact_errors_m": [
+            5.875185756655103e-07,
+            4.5619830225733973e-07,
+            4.39947524178007e-08,
+            6.812334904036713e-08,
+            5.374323038004488e-07
+          ],
+          "max_q_change_rad": 0.04424354870493041,
+          "max_target_change_rad": 0.044243574142456055
+        },
+        {
+          "source": 1,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.4634266191828397e-07,
+          "contact_errors_m": [
+            4.3234167021846254e-07,
+            5.257818486588365e-07,
+            4.837696728545677e-08,
+            8.975447867154144e-08,
+            6.251264127802366e-07
+          ],
+          "max_q_change_rad": 0.04267307531290121,
+          "max_target_change_rad": 0.04267311096191406
+        },
+        {
+          "source": 2,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.2181694879595829e-06,
+          "contact_errors_m": [
+            8.030577640820263e-07,
+            4.111381366854443e-07,
+            2.442856945859276e-07,
+            9.12772350617639e-09,
+            2.98472351116513e-07
+          ],
+          "max_q_change_rad": 0.04475540316207094,
+          "max_target_change_rad": 0.044755399227142334
+        },
+        {
+          "source": 3,
+          "kind": "original functional",
+          "thumb_ik_error_m": 8.937870117947156e-07,
+          "contact_errors_m": [
+            1.167525017843602e-07,
+            1.2709259193364205e-07,
+            2.904335797949829e-08,
+            4.206897235617019e-07,
+            1.1721065871323517e-06
+          ],
+          "max_q_change_rad": 0.05995846293559759,
+          "max_target_change_rad": 0.059958457946777344
+        },
+        {
+          "source": 4,
+          "kind": "actual closed acquisition",
+          "thumb_ik_error_m": 6.304870279238689e-10,
+          "contact_errors_m": [
+            2.719847736805393e-06,
+            4.536189475969928e-07,
+            8.666387713687197e-08,
+            1.5697364282307344e-07,
+            2.2064699159573084e-06
+          ],
+          "max_q_change_rad": 0.14303146455746946,
+          "max_target_change_rad": 0.14303146302700043
+        }
+      ],
+      "pools": {
+        "train": {
+          "n": 96,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/002/train/valid_grasps.npy",
+          "sha256": "810959bc34a1f70cdcc46fe7ef868b653ef06d744f529fca0b88c7ce4cd875b6"
+        },
+        "test": {
+          "n": 64,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/002/test/valid_grasps.npy",
+          "sha256": "4c4fe819f2ffcbdc661b3cc1f59c4248c4dde36ee27b5b3ccb344c260cbad1db"
+        }
+      }
+    },
+    {
+      "instance": "003",
+      "split": "train",
+      "adaptation": [
+        {
+          "source": 0,
+          "kind": "original functional",
+          "thumb_ik_error_m": 3.241687007242336e-09,
+          "contact_errors_m": [
+            5.1133079005117145e-08,
+            1.476584339069125e-07,
+            3.436482755095878e-08,
+            2.1832826681112208e-08,
+            1.7436677905934486e-07
+          ],
+          "max_q_change_rad": 0.03492845445557635,
+          "max_target_change_rad": 0.03492844104766846
+        },
+        {
+          "source": 1,
+          "kind": "original functional",
+          "thumb_ik_error_m": 2.6957131693858857e-09,
+          "contact_errors_m": [
+            6.536076117259097e-09,
+            1.7031730949730105e-07,
+            3.782496873922928e-08,
+            2.9003837495829923e-08,
+            2.0378454574643753e-07
+          ],
+          "max_q_change_rad": 0.03367782439027622,
+          "max_target_change_rad": 0.03367781639099121
+        },
+        {
+          "source": 2,
+          "kind": "original functional",
+          "thumb_ik_error_m": 6.211228902804113e-07,
+          "contact_errors_m": [
+            8.919052671168392e-08,
+            3.266160385260499e-07,
+            7.65244893067955e-08,
+            1.6918303462949925e-09,
+            9.812499588542193e-08
+          ],
+          "max_q_change_rad": 0.03189533199169814,
+          "max_target_change_rad": 0.03189527988433838
+        },
+        {
+          "source": 3,
+          "kind": "original functional",
+          "thumb_ik_error_m": 3.771909396066785e-09,
+          "contact_errors_m": [
+            3.5515284700499796e-08,
+            3.954738329155447e-08,
+            2.2877665553412368e-08,
+            1.3397806501837824e-07,
+            3.536840773341494e-07
+          ],
+          "max_q_change_rad": 0.04746422626187374,
+          "max_target_change_rad": 0.04746425151824951
+        },
+        {
+          "source": 4,
+          "kind": "actual closed acquisition",
+          "thumb_ik_error_m": 2.8799251216366415e-06,
+          "contact_errors_m": [
+            1.4011147247091134e-05,
+            3.5255682388586485e-07,
+            2.7620792433476925e-08,
+            5.1485130522380964e-08,
+            2.8824279204918854e-06
+          ],
+          "max_q_change_rad": 0.08661383987593219,
+          "max_target_change_rad": 0.08661389350891113
+        }
+      ],
+      "pools": {
+        "train": {
+          "n": 96,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/003/train/valid_grasps.npy",
+          "sha256": "3bcf2b95c0f994a296e3a30995e1872a51dd0d02d981042bb034c94494113b75"
+        },
+        "test": {
+          "n": 64,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/003/test/valid_grasps.npy",
+          "sha256": "fa4d50d1bc39efb749d42573d77c485e00f5b24ae841e460b59da5bb37a7a837"
+        }
+      }
+    },
+    {
+      "instance": "004",
+      "split": "train",
+      "adaptation": [
+        {
+          "source": 0,
+          "kind": "original functional",
+          "thumb_ik_error_m": 6.175417581778284e-07,
+          "contact_errors_m": [
+            6.94950310037688e-08,
+            1.976584677106902e-07,
+            3.8107216094071976e-08,
+            2.9203692397698445e-08,
+            2.3345306055720736e-07
+          ],
+          "max_q_change_rad": 0.038571963222866046,
+          "max_target_change_rad": 0.038571953773498535
+        },
+        {
+          "source": 1,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.920360566933968e-07,
+          "contact_errors_m": [
+            9.845626565667956e-09,
+            2.2800193748486298e-07,
+            4.1928207444952866e-08,
+            3.8819398480905126e-08,
+            2.729434237241843e-07
+          ],
+          "max_q_change_rad": 0.03719556355775966,
+          "max_target_change_rad": 0.037195563316345215
+        },
+        {
+          "source": 2,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.6063434713686567e-06,
+          "contact_errors_m": [
+            1.2068098497530946e-07,
+            3.598134125660103e-07,
+            1.0216044442781062e-07,
+            2.1569643786250885e-09,
+            1.3152019433820257e-07
+          ],
+          "max_q_change_rad": 0.0353296140104884,
+          "max_target_change_rad": 0.035329580307006836
+        },
+        {
+          "source": 3,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.1801765877720327e-06,
+          "contact_errors_m": [
+            4.728098535969837e-08,
+            5.2772278619576874e-08,
+            2.52854831262114e-08,
+            1.791169996477286e-07,
+            1.0961307224102863e-06
+          ],
+          "max_q_change_rad": 0.05235894733047897,
+          "max_target_change_rad": 0.052358925342559814
+        },
+        {
+          "source": 4,
+          "kind": "actual closed acquisition",
+          "thumb_ik_error_m": 0.00030749431140769505,
+          "contact_errors_m": [
+            2.297807114652089e-05,
+            3.917147989939332e-07,
+            3.692750170088878e-08,
+            6.89933164433741e-08,
+            3.9898096825480046e-06
+          ],
+          "max_q_change_rad": 0.13563237926486593,
+          "max_target_change_rad": 0.13563239574432373
+        }
+      ],
+      "pools": {
+        "train": {
+          "n": 96,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/004/train/valid_grasps.npy",
+          "sha256": "3379e4f244cdee17cbbb4e392744d107f1eff37c737f6b4c27ebdf3fe11c4784"
+        },
+        "test": {
+          "n": 64,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/004/test/valid_grasps.npy",
+          "sha256": "52dde3b8ecc6acf7eb8344953e66cdf0953bbb62dd1589d8ed15d4fe91f70149"
+        }
+      }
+    },
+    {
+      "instance": "005",
+      "split": "train",
+      "adaptation": [
+        {
+          "source": 0,
+          "kind": "original functional",
+          "thumb_ik_error_m": 4.199698838177568e-08,
+          "contact_errors_m": [
+            5.002622122710615e-07,
+            3.8576239452799225e-07,
+            3.353706136743946e-08,
+            5.7534066492331725e-08,
+            4.545952593417015e-07
+          ],
+          "max_q_change_rad": 0.03459170053804794,
+          "max_target_change_rad": 0.0345916748046875
+        },
+        {
+          "source": 1,
+          "kind": "original functional",
+          "thumb_ik_error_m": 3.437208198244341e-08,
+          "contact_errors_m": [
+            3.677645399766721e-07,
+            4.446524695174172e-07,
+            3.691695817584193e-08,
+            7.588366152959816e-08,
+            5.29073813752613e-07
+          ],
+          "max_q_change_rad": 0.03289591897421662,
+          "max_target_change_rad": 0.03289592266082764
+        },
+        {
+          "source": 2,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.5480136281080356e-09,
+          "contact_errors_m": [
+            6.839959538057474e-07,
+            3.1921394980528046e-07,
+            2.057833599195553e-07,
+            7.2841368460218716e-09,
+            2.528529237928982e-07
+          ],
+          "max_q_change_rad": 0.0374810015588648,
+          "max_target_change_rad": 0.03748100996017456
+        },
+        {
+          "source": 3,
+          "kind": "original functional",
+          "thumb_ik_error_m": 4.592582526638511e-09,
+          "contact_errors_m": [
+            9.802571719067016e-08,
+            1.0697117225990026e-07,
+            2.2343083746175325e-08,
+            3.550443123543996e-07,
+            1.1749488322140387e-06
+          ],
+          "max_q_change_rad": 0.0615930811168639,
+          "max_target_change_rad": 0.061593085527420044
+        },
+        {
+          "source": 4,
+          "kind": "actual closed acquisition",
+          "thumb_ik_error_m": 2.3630827428975476e-10,
+          "contact_errors_m": [
+            2.65140924709887e-06,
+            3.439150520961376e-07,
+            7.314909501082727e-08,
+            1.3294583506246928e-07,
+            4.619974258800634e-06
+          ],
+          "max_q_change_rad": 0.17036318498004732,
+          "max_target_change_rad": 0.170363187789917
+        }
+      ],
+      "pools": {
+        "train": {
+          "n": 96,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/005/train/valid_grasps.npy",
+          "sha256": "74a161cb081e4d7e9ea2a8f7079265cf299fb5753ad98bd1ff802e6f56d8fb57"
+        },
+        "test": {
+          "n": 64,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/005/test/valid_grasps.npy",
+          "sha256": "f77fca1c4e4ed04271183f6f6da0dabede44c56dfd74a53b9fafdd8bfceca529"
+        }
+      }
+    },
+    {
+      "instance": "006",
+      "split": "train",
+      "adaptation": [
+        {
+          "source": 0,
+          "kind": "original functional",
+          "thumb_ik_error_m": 5.873028672482215e-07,
+          "contact_errors_m": [
+            1.1540563151731813e-08,
+            3.450655529982927e-08,
+            2.930836563841298e-08,
+            5.111177288355956e-09,
+            4.073334867185426e-08
+          ],
+          "max_q_change_rad": 0.03204671423077299,
+          "max_target_change_rad": 0.03204667568206787
+        },
+        {
+          "source": 1,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.895917642361187e-07,
+          "contact_errors_m": [
+            1.1008359219345136e-09,
+            3.979673369444111e-08,
+            3.246393753860174e-08,
+            6.780212419450283e-09,
+            4.756217726168014e-08
+          ],
+          "max_q_change_rad": 0.030823571056516563,
+          "max_target_change_rad": 0.030823588371276855
+        },
+        {
+          "source": 2,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.5219534041766754e-06,
+          "contact_errors_m": [
+            2.0356674211336322e-08,
+            3.1289870234702686e-07,
+            1.7992816921337095e-08,
+            4.422345526657328e-10,
+            2.2884759766090067e-08
+          ],
+          "max_q_change_rad": 0.02770570322861743,
+          "max_target_change_rad": 0.027705669403076172
+        },
+        {
+          "source": 3,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.094794569093481e-06,
+          "contact_errors_m": [
+            8.39389039044684e-09,
+            9.310281065265185e-09,
+            2.092468242141909e-08,
+            3.140231759209066e-08,
+            1.4868575581491865e-06
+          ],
+          "max_q_change_rad": 0.04451876951037759,
+          "max_target_change_rad": 0.04451876878738403
+        },
+        {
+          "source": 4,
+          "kind": "actual closed acquisition",
+          "thumb_ik_error_m": 0.0002751478388830586,
+          "contact_errors_m": [
+            1.610574320814707e-06,
+            2.8980562839614275e-07,
+            6.473168696305398e-09,
+            1.2002227016435932e-08,
+            4.3306110228931506e-06
+          ],
+          "max_q_change_rad": 0.15364643938478906,
+          "max_target_change_rad": 0.15364646911621094
+        }
+      ],
+      "pools": {
+        "train": {
+          "n": 96,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/006/train/valid_grasps.npy",
+          "sha256": "332c8734c81bb8a8e88b909434ab7c84b0f48ee88aec5f649283242bb77a490a"
+        },
+        "test": {
+          "n": 64,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/006/test/valid_grasps.npy",
+          "sha256": "f505b4fee592500f927b6d26cbca42cd5d80dabd47f242af5299acaf7ca91c82"
+        }
+      }
+    },
+    {
+      "instance": "007",
+      "split": "train",
+      "adaptation": [
+        {
+          "source": 0,
+          "kind": "original functional",
+          "thumb_ik_error_m": 5.736370828910257e-10,
+          "contact_errors_m": [
+            5.794896533441213e-08,
+            1.6639006777215902e-07,
+            3.4549674878732735e-08,
+            2.4595445402493545e-08,
+            1.965006244317883e-07
+          ],
+          "max_q_change_rad": 0.03801290716340722,
+          "max_target_change_rad": 0.03801286220550537
+        },
+        {
+          "source": 1,
+          "kind": "original functional",
+          "thumb_ik_error_m": 3.825878212975153e-09,
+          "contact_errors_m": [
+            7.710126126706863e-09,
+            1.9192720806912833e-07,
+            3.828344654411574e-08,
+            3.268140081479436e-08,
+            2.2968337273863497e-07
+          ],
+          "max_q_change_rad": 0.03655357500520107,
+          "max_target_change_rad": 0.03655362129211426
+        },
+        {
+          "source": 2,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.7025630905372396e-09,
+          "contact_errors_m": [
+            1.0090628624149669e-07,
+            3.725249379588279e-07,
+            8.61448860046989e-08,
+            1.8717437944902392e-09,
+            1.1062594547871122e-07
+          ],
+          "max_q_change_rad": 0.0327070120170434,
+          "max_target_change_rad": 0.03270697593688965
+        },
+        {
+          "source": 3,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.9729203667313127e-09,
+          "contact_errors_m": [
+            3.993929549975028e-08,
+            4.4510911032038573e-08,
+            2.484630323426271e-08,
+            1.5089956498034089e-07,
+            1.0676750392837492e-06
+          ],
+          "max_q_change_rad": 0.05292295861301988,
+          "max_target_change_rad": 0.052922964096069336
+        },
+        {
+          "source": 4,
+          "kind": "actual closed acquisition",
+          "thumb_ik_error_m": 6.458449364810074e-05,
+          "contact_errors_m": [
+            1.7086583488396877e-05,
+            3.404807598685469e-07,
+            3.1110101531882985e-08,
+            5.803986511971817e-08,
+            4.0099992776676995e-06
+          ],
+          "max_q_change_rad": 0.13665432568525837,
+          "max_target_change_rad": 0.1366543173789978
+        }
+      ],
+      "pools": {
+        "train": {
+          "n": 96,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/007/train/valid_grasps.npy",
+          "sha256": "c6d40261b49dc2852dc405bea7f9a303368f75066919d9ac60dcab20d4c2184c"
+        },
+        "test": {
+          "n": 64,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/007/test/valid_grasps.npy",
+          "sha256": "132fe1ebd94a30576386fa2380ed47178eb92095746bb909d4d4c9a5f8cb66c3"
+        }
+      }
+    },
+    {
+      "instance": "008",
+      "split": "train",
+      "adaptation": [
+        {
+          "source": 0,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.649274577093425e-08,
+          "contact_errors_m": [
+            8.097704253068295e-08,
+            6.052217990677041e-08,
+            1.4076884334772408e-09,
+            8.97917475812834e-09,
+            7.141537418157774e-08
+          ],
+          "max_q_change_rad": 0.005182844438889278,
+          "max_target_change_rad": 0.005182862281799316
+        },
+        {
+          "source": 1,
+          "kind": "original functional",
+          "thumb_ik_error_m": 2.5623347426576513e-09,
+          "contact_errors_m": [
+            5.932281145955987e-08,
+            6.979272413779903e-08,
+            1.5545291731303079e-09,
+            1.1894865360888944e-08,
+            8.332980055755799e-08
+          ],
+          "max_q_change_rad": 0.004450059164203823,
+          "max_target_change_rad": 0.004450082778930664
+        },
+        {
+          "source": 2,
+          "kind": "original functional",
+          "thumb_ik_error_m": 2.3486795606851544e-09,
+          "contact_errors_m": [
+            1.1097697098109052e-07,
+            1.4195086038244891e-08,
+            3.17212298285111e-08,
+            8.518524203912234e-10,
+            4.0005521776953416e-08
+          ],
+          "max_q_change_rad": 0.005634211755144003,
+          "max_target_change_rad": 0.005634188652038574
+        },
+        {
+          "source": 3,
+          "kind": "original functional",
+          "thumb_ik_error_m": 5.885603664945838e-07,
+          "contact_errors_m": [
+            1.4879614442584372e-08,
+            1.6430079036671287e-08,
+            9.680726900776852e-10,
+            5.521673688474128e-08,
+            1.4367767860201082e-06
+          ],
+          "max_q_change_rad": 0.0366003036275902,
+          "max_target_change_rad": 0.03660029172897339
+        },
+        {
+          "source": 4,
+          "kind": "actual closed acquisition",
+          "thumb_ik_error_m": 0.0013703227082024422,
+          "contact_errors_m": [
+            1.3230796355522776e-06,
+            1.4181893612526213e-08,
+            1.1380879213248579e-08,
+            2.1007613515544358e-08,
+            4.40385181323512e-06
+          ],
+          "max_q_change_rad": 0.15774499228347372,
+          "max_target_change_rad": 0.15774500370025635
+        }
+      ],
+      "pools": {
+        "train": {
+          "n": 96,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/008/train/valid_grasps.npy",
+          "sha256": "1c8ccedd332caa96506346b1de5a634d9d25dfda73d98bd47799ecedc9a884a4"
+        },
+        "test": {
+          "n": 64,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/008/test/valid_grasps.npy",
+          "sha256": "60555c8721188d2733865915ac0f2f9d55321b8658543d1a14933dbed227f079"
+        }
+      }
+    },
+    {
+      "instance": "009",
+      "split": "train",
+      "adaptation": [
+        {
+          "source": 0,
+          "kind": "original functional",
+          "thumb_ik_error_m": 4.620311054801872e-07,
+          "contact_errors_m": [
+            5.116708522747882e-07,
+            3.949172699068053e-07,
+            2.3616229912519478e-08,
+            5.890882444945993e-08,
+            4.6536511508785664e-07
+          ],
+          "max_q_change_rad": 0.03546039118178468,
+          "max_target_change_rad": 0.03546041250228882
+        },
+        {
+          "source": 1,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.5829701329823683e-07,
+          "contact_errors_m": [
+            3.7620114975572405e-07,
+            4.5519839677899884e-07,
+            2.6141740115005137e-08,
+            7.768627133781229e-08,
+            5.415682410008157e-07
+          ],
+          "max_q_change_rad": 0.030256127005210964,
+          "max_target_change_rad": 0.030256152153015137
+        },
+        {
+          "source": 2,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.3177531181367843e-06,
+          "contact_errors_m": [
+            6.995678656281873e-07,
+            2.4943517529336675e-07,
+            2.1077174785344113e-07,
+            7.514231215000496e-09,
+            2.587919318329332e-07
+          ],
+          "max_q_change_rad": 0.0384184258957293,
+          "max_target_change_rad": 0.03841841220855713
+        },
+        {
+          "source": 3,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.0667257292143228e-06,
+          "contact_errors_m": [
+            1.0044367275047365e-07,
+            1.0957489044299462e-07,
+            1.673301949353171e-08,
+            3.6356185244536643e-07,
+            1.1656538006432693e-06
+          ],
+          "max_q_change_rad": 0.062273791342038254,
+          "max_target_change_rad": 0.06227380037307739
+        },
+        {
+          "source": 4,
+          "kind": "actual closed acquisition",
+          "thumb_ik_error_m": 0.00048044055556879057,
+          "contact_errors_m": [
+            2.661698839052431e-06,
+            2.3435478317702323e-07,
+            7.490285326879422e-08,
+            1.360731809208863e-07,
+            4.625396462152989e-06
+          ],
+          "max_q_change_rad": 0.17069039289240595,
+          "max_target_change_rad": 0.1706904172897339
+        }
+      ],
+      "pools": {
+        "train": {
+          "n": 96,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/009/train/valid_grasps.npy",
+          "sha256": "ccaeee71f91cde7835661fee09340374fcc7fd882fcae08c8cfad7f65d58e05f"
+        },
+        "test": {
+          "n": 64,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/009/test/valid_grasps.npy",
+          "sha256": "f593659a6b330d0e8912a8ad2ee1528db4606f80804a4ff0558795c41de2d73b"
+        }
+      }
+    },
+    {
+      "instance": "010",
+      "split": "train",
+      "adaptation": [
+        {
+          "source": 0,
+          "kind": "original functional",
+          "thumb_ik_error_m": 7.224152831546531e-07,
+          "contact_errors_m": [
+            1.1123985480056232e-07,
+            3.0661732837607805e-07,
+            5.913170941014538e-10,
+            4.5227690907014533e-08,
+            3.622776109371128e-07
+          ],
+          "max_q_change_rad": 0.025025653280192683,
+          "max_target_change_rad": 0.025025665760040283
+        },
+        {
+          "source": 1,
+          "kind": "original functional",
+          "thumb_ik_error_m": 2.888387843778349e-09,
+          "contact_errors_m": [
+            1.8902877039963376e-08,
+            3.537308399737315e-07,
+            6.531266826179552e-10,
+            6.019934706249439e-08,
+            4.2391244087243875e-07
+          ],
+          "max_q_change_rad": 0.021612307880512382,
+          "max_target_change_rad": 0.02161228656768799
+        },
+        {
+          "source": 2,
+          "kind": "original functional",
+          "thumb_ik_error_m": 2.027385428980519e-06,
+          "contact_errors_m": [
+            1.912494605842842e-07,
+            5.984684638347137e-09,
+            1.575472274649182e-07,
+            3.0259071981988964e-09,
+            2.0459117483523084e-07
+          ],
+          "max_q_change_rad": 0.027292555556351794,
+          "max_target_change_rad": 0.02729254961013794
+        },
+        {
+          "source": 3,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.3183544841280038e-06,
+          "contact_errors_m": [
+            7.240090659528388e-08,
+            8.128212149196654e-08,
+            4.075493399358018e-10,
+            2.770849092355529e-07,
+            1.6054472879720178e-06
+          ],
+          "max_q_change_rad": 0.02761525505871365,
+          "max_target_change_rad": 0.027615249156951904
+        },
+        {
+          "source": 4,
+          "kind": "actual closed acquisition",
+          "thumb_ik_error_m": 0.0009740447438883176,
+          "contact_errors_m": [
+            5.3486741303923176e-05,
+            5.950365403130784e-09,
+            5.712878245660371e-08,
+            1.0727627095261316e-07,
+            4.109900258831836e-06
+          ],
+          "max_q_change_rad": 0.14179218170898533,
+          "max_target_change_rad": 0.1417921781539917
+        }
+      ],
+      "pools": {
+        "train": {
+          "n": 96,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/010/train/valid_grasps.npy",
+          "sha256": "99cacf04dfa64148dbd35deefd7912b80461b91afb63776289b573409b8dce52"
+        },
+        "test": {
+          "n": 64,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/010/test/valid_grasps.npy",
+          "sha256": "411b9cd0591d5e52d26350f7ec367adc4340a5e2578afaeb35c52dec16a2fa00"
+        }
+      }
+    },
+    {
+      "instance": "011",
+      "split": "train",
+      "adaptation": [
+        {
+          "source": 0,
+          "kind": "original functional",
+          "thumb_ik_error_m": 6.158001350462369e-07,
+          "contact_errors_m": [
+            1.4530352158708528e-07,
+            1.090708152621906e-07,
+            2.4169584665330444e-08,
+            1.619241272340269e-08,
+            1.2868055411112568e-07
+          ],
+          "max_q_change_rad": 0.026266921062592097,
+          "max_target_change_rad": 0.026266932487487793
+        },
+        {
+          "source": 1,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.3786646919984883e-07,
+          "contact_errors_m": [
+            1.0648210025194686e-07,
+            1.2577119649019294e-07,
+            2.675555422267831e-08,
+            2.1439926957497775e-08,
+            1.5008948271398034e-07
+          ],
+          "max_q_change_rad": 0.025269995893141273,
+          "max_target_change_rad": 0.02526998519897461
+        },
+        {
+          "source": 2,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.7174113609940793e-06,
+          "contact_errors_m": [
+            1.9900085972614442e-07,
+            2.555427636822936e-07,
+            5.731997707840896e-08,
+            1.6160839171472275e-09,
+            7.200584351352044e-08
+          ],
+          "max_q_change_rad": 0.022814531247584924,
+          "max_target_change_rad": 0.022814512252807617
+        },
+        {
+          "source": 3,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.0504875284298019e-06,
+          "contact_errors_m": [
+            2.6960350871856413e-08,
+            2.9691918445034435e-08,
+            1.7137325229210415e-08,
+            9.963580945325134e-08,
+            2.690337811208275e-07
+          ],
+          "max_q_change_rad": 0.036413503291552685,
+          "max_target_change_rad": 0.036413490772247314
+        },
+        {
+          "source": 4,
+          "kind": "actual closed acquisition",
+          "thumb_ik_error_m": 0.00013493506573051807,
+          "contact_errors_m": [
+            1.8123407305513347e-06,
+            2.397608912814699e-07,
+            2.053635648331334e-08,
+            3.781949513287771e-08,
+            3.1973817997404464e-06
+          ],
+          "max_q_change_rad": 0.09930615553943856,
+          "max_target_change_rad": 0.09930610656738281
+        }
+      ],
+      "pools": {
+        "train": {
+          "n": 96,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/011/train/valid_grasps.npy",
+          "sha256": "910b091d90710d4331a3b1ea73e8c2dec3cad97936739df93ec901074deb8052"
+        },
+        "test": {
+          "n": 64,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/011/test/valid_grasps.npy",
+          "sha256": "714c5355ae7345be696ce640651c12ff6d1cc44a5f293412a01120d951daf484"
+        }
+      }
+    },
+    {
+      "instance": "012",
+      "split": "heldout",
+      "adaptation": [
+        {
+          "source": 0,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.1266790895549042e-07,
+          "contact_errors_m": [
+            3.476359369903378e-07,
+            2.6481945254209795e-07,
+            3.384251778890002e-08,
+            3.9414995086935036e-08,
+            3.122316326817425e-07
+          ],
+          "max_q_change_rad": 0.037203644428664306,
+          "max_target_change_rad": 0.03720366954803467
+        },
+        {
+          "source": 1,
+          "kind": "original functional",
+          "thumb_ik_error_m": 4.7641298113565676e-08,
+          "contact_errors_m": [
+            2.5507241854201226e-07,
+            3.053014470857167e-07,
+            3.749746483376767e-08,
+            5.207697259505005e-08,
+            3.6373374194833905e-07
+          ],
+          "max_q_change_rad": 0.035776509810024226,
+          "max_target_change_rad": 0.035776495933532715
+        },
+        {
+          "source": 2,
+          "kind": "original functional",
+          "thumb_ik_error_m": 9.858236715238686e-08,
+          "contact_errors_m": [
+            4.755562296285502e-07,
+            3.64412270886388e-07,
+            1.4034328028629034e-07,
+            4.504978228932168e-09,
+            1.741251996426799e-07
+          ],
+          "max_q_change_rad": 0.03203144329111618,
+          "max_target_change_rad": 0.03203141689300537
+        },
+        {
+          "source": 3,
+          "kind": "original functional",
+          "thumb_ik_error_m": 4.316064332985173e-09,
+          "contact_errors_m": [
+            6.648203636955142e-08,
+            7.285650790598772e-08,
+            2.4313528257588328e-08,
+            2.4293126141773366e-07,
+            6.651605426351949e-07
+          ],
+          "max_q_change_rad": 0.051780723642657955,
+          "max_target_change_rad": 0.05178070068359375
+        },
+        {
+          "source": 4,
+          "kind": "actual closed acquisition",
+          "thumb_ik_error_m": 0.0007395275558958569,
+          "contact_errors_m": [
+            2.456342693597923e-06,
+            3.336649624866208e-07,
+            5.005892236465999e-08,
+            9.150984689219338e-08,
+            2.4156255084409764e-06
+          ],
+          "max_q_change_rad": 0.09710521884588677,
+          "max_target_change_rad": 0.09710521996021271
+        }
+      ],
+      "pools": {
+        "train": {
+          "n": 96,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/012/train/valid_grasps.npy",
+          "sha256": "43bb9bb13c4fe42c9f7f3de112ad8096fc6e480266f80f0c63d6fe519ba5b219"
+        },
+        "test": {
+          "n": 64,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/012/test/valid_grasps.npy",
+          "sha256": "a5ebca589241dd7c7021828a7b2d846018f5c7ee571409fc2a0432e977a0002d"
+        }
+      }
+    },
+    {
+      "instance": "013",
+      "split": "heldout",
+      "adaptation": [
+        {
+          "source": 0,
+          "kind": "original functional",
+          "thumb_ik_error_m": 3.188720467729812e-08,
+          "contact_errors_m": [
+            5.472342503890416e-08,
+            1.5755126312863162e-07,
+            1.3766297681419531e-08,
+            2.3292050748797795e-08,
+            1.8605653857369444e-07
+          ],
+          "max_q_change_rad": 0.01431974316410023,
+          "max_target_change_rad": 0.014319777488708496
+        },
+        {
+          "source": 1,
+          "kind": "original functional",
+          "thumb_ik_error_m": 6.771063712162992e-09,
+          "contact_errors_m": [
+            7.146335167224908e-09,
+            1.817301525738837e-07,
+            1.5183819029330512e-08,
+            3.094613820318716e-08,
+            2.1746135872404325e-07
+          ],
+          "max_q_change_rad": 0.013796986947519407,
+          "max_target_change_rad": 0.01379704475402832
+        },
+        {
+          "source": 2,
+          "kind": "original functional",
+          "thumb_ik_error_m": 1.3973897132812175e-07,
+          "contact_errors_m": [
+            9.536616317824083e-08,
+            1.3573799110152864e-07,
+            8.160779558186924e-08,
+            1.7877230609090015e-09,
+            1.0472569931824451e-07
+          ],
+          "max_q_change_rad": 0.014275886359530365,
+          "max_target_change_rad": 0.014275908470153809
+        },
+        {
+          "source": 3,
+          "kind": "original functional",
+          "thumb_ik_error_m": 2.1019377280155514e-09,
+          "contact_errors_m": [
+            3.785413665817795e-08,
+            4.2170213174376984e-08,
+            9.34322464767274e-09,
+            1.4291713025852714e-07,
+            3.7695906809515337e-07
+          ],
+          "max_q_change_rad": 0.019582317758298218,
+          "max_target_change_rad": 0.01958233118057251
+        },
+        {
+          "source": 4,
+          "kind": "actual closed acquisition",
+          "thumb_ik_error_m": 0.0003338806917436274,
+          "contact_errors_m": [
+            1.559571000151566e-05,
+            1.3966802154166134e-07,
+            2.9464024866904042e-08,
+            5.4946258232558677e-08,
+            3.368159922692064e-06
+          ],
+          "max_q_change_rad": 0.10656825852903129,
+          "max_target_change_rad": 0.10656821727752686
+        }
+      ],
+      "pools": {
+        "train": {
+          "n": 96,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/013/train/valid_grasps.npy",
+          "sha256": "3933e07adfd0aac789e1d0d88ee3dcc56bc33fb22b3ba8b3256f1bf0d860525e"
+        },
+        "test": {
+          "n": 64,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/013/test/valid_grasps.npy",
+          "sha256": "b7b11684a1c2bb7a1e25a7c3eb6a551394b7753440bb4c3f9d64df8f761c6f94"
+        }
+      }
+    },
+    {
+      "instance": "014",
+      "split": "heldout",
+      "adaptation": [
+        {
+          "source": 0,
+          "kind": "original functional",
+          "thumb_ik_error_m": 5.9507374731516366e-08,
+          "contact_errors_m": [
+            2.5245490368921332e-08,
+            7.455363329486548e-08,
+            2.4614100617795517e-08,
+            1.10413112439903e-08,
+            8.80155535134855e-08
+          ],
+          "max_q_change_rad": 0.025291649669663574,
+          "max_target_change_rad": 0.02529168128967285
+        },
+        {
+          "source": 1,
+          "kind": "original functional",
+          "thumb_ik_error_m": 7.82275921381504e-08,
+          "contact_errors_m": [
+            2.7019565330754043e-09,
+            8.598944375074034e-08,
+            2.7119166084474575e-08,
+            1.4649904222180097e-08,
+            1.02807195279164e-07
+          ],
+          "max_q_change_rad": 0.024377856036261303,
+          "max_target_change_rad": 0.024377822875976562
+        },
+        {
+          "source": 2,
+          "kind": "original functional",
+          "thumb_ik_error_m": 5.4578734009584135e-08,
+          "contact_errors_m": [
+            4.4348676875749e-08,
+            2.3801853339274018e-07,
+            3.8790465240822403e-08,
+            9.183046007624357e-10,
+            4.945081260075305e-08
+          ],
+          "max_q_change_rad": 0.022911272394503968,
+          "max_target_change_rad": 0.02291131019592285
+        },
+        {
+          "source": 3,
+          "kind": "original functional",
+          "thumb_ik_error_m": 4.268795179576335e-09,
+          "contact_errors_m": [
+            1.807198610029869e-08,
+            2.006221054394178e-08,
+            1.6533097726361743e-08,
+            6.777498340404658e-08,
+            6.687526134810787e-07
+          ],
+          "max_q_change_rad": 0.03446876969462931,
+          "max_target_change_rad": 0.034468770027160645
+        },
+        {
+          "source": 4,
+          "kind": "actual closed acquisition",
+          "thumb_ik_error_m": 0.0017751144170335708,
+          "contact_errors_m": [
+            4.78400432032236e-06,
+            2.512150810196589e-07,
+            1.3971356486714597e-08,
+            2.5953212846731187e-08,
+            3.924768965157322e-06
+          ],
+          "max_q_change_rad": 0.1323765025686936,
+          "max_target_change_rad": 0.1323765516281128
+        }
+      ],
+      "pools": {
+        "train": {
+          "n": 96,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/014/train/valid_grasps.npy",
+          "sha256": "16fb0a43ed9a186a02f4e8dc15991ec6eee7d685a0d10e6ee4f225f60777d00b"
+        },
+        "test": {
+          "n": 64,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/014/test/valid_grasps.npy",
+          "sha256": "f17177def31e4e665f261f1977395bfb8723c1f256d421d93b48d123955908a8"
+        }
+      }
+    },
+    {
+      "instance": "015",
+      "split": "heldout",
+      "adaptation": [
+        {
+          "source": 0,
+          "kind": "original functional",
+          "thumb_ik_error_m": 5.436835170952442e-09,
+          "contact_errors_m": [
+            3.3124454470915787e-09,
+            9.9805792677032e-09,
+            3.102736793491461e-08,
+            1.4788913114638478e-09,
+            1.1780069573191527e-08
+          ],
+          "max_q_change_rad": 0.03165356771271166,
+          "max_target_change_rad": 0.031653523445129395
+        },
+        {
+          "source": 1,
+          "kind": "original functional",
+          "thumb_ik_error_m": 7.907555523144625e-09,
+          "contact_errors_m": [
+            2.9214669729098324e-10,
+            1.1510363327717109e-08,
+            3.416302317780769e-08,
+            1.961218753571412e-09,
+            1.3752931886511886e-08
+          ],
+          "max_q_change_rad": 0.030516720171140488,
+          "max_target_change_rad": 0.030516743659973145
+        },
+        {
+          "source": 2,
+          "kind": "original functional",
+          "thumb_ik_error_m": 2.480992634854703e-08,
+          "contact_errors_m": [
+            5.857977091421643e-09,
+            2.96637839489137e-07,
+            5.211147178147404e-09,
+            1.3106321289463756e-10,
+            6.6091396777394825e-09
+          ],
+          "max_q_change_rad": 0.028826162442865844,
+          "max_target_change_rad": 0.028826117515563965
+        },
+        {
+          "source": 3,
+          "kind": "original functional",
+          "thumb_ik_error_m": 3.984378651987984e-08,
+          "contact_errors_m": [
+            2.4358150475037625e-09,
+            2.697061616332642e-09,
+            2.0717795771982392e-08,
+            9.088542550299382e-09,
+            2.428334157784012e-08
+          ],
+          "max_q_change_rad": 0.043056078150946475,
+          "max_target_change_rad": 0.04305607080459595
+        },
+        {
+          "source": 4,
+          "kind": "actual closed acquisition",
+          "thumb_ik_error_m": 0.00039572938238194663,
+          "contact_errors_m": [
+            3.749717648904277e-07,
+            3.177576192652641e-07,
+            1.8734420199329942e-09,
+            3.469645555164174e-09,
+            3.5451551991603774e-06
+          ],
+          "max_q_change_rad": 0.11440217938566533,
+          "max_target_change_rad": 0.114402174949646
+        }
+      ],
+      "pools": {
+        "train": {
+          "n": 96,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/015/train/valid_grasps.npy",
+          "sha256": "6fec5a7f3d81d6d71d4e62d77b697e894bf1f28097b6086a1c664f6d11ad9fd5"
+        },
+        "test": {
+          "n": 64,
+          "path": "caches/initial_grasp/wuji/knife_wuji_acquired_family_20261003/015/test/valid_grasps.npy",
+          "sha256": "f59e480ff20a3aec1510d4f380e34de848ab6143d788cc9badeeb5309e92a310"
+        }
+      }
+    }
+  ],
+  "selection": "All four old functional sources plus actual closed source; no policy filtering; all initialization failures counted",
+  "scope": "Static presetheld manipulation proxy; actual50-frame hold before actor; continuous acquisition must be tested separately"
+}
