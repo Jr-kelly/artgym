@@ -1,14 +1,14 @@
 {
   "start_utc": "2026-10-02T06:19:52.569245+00:00",
   "base_sha": "89689142c9f0e52fb679ce710f9c95a55b8a6643",
-  "phase": "Prepared branch and evidence public; H200 execution blocked by SSH transport",
+  "phase": "Local zero-change and discarded optimizer/resume verified; SSH transport blocked; formal H200 trial pending",
   "historical_gpu_hours": 40.43593221975697,
   "max_gpu_hours": 64,
   "reserved_final_gpu_hours": 6,
   "max_concurrent_gpus": 8,
-  "new_gpu_hours": 0.039454927178028606,
-  "cumulative_gpu_hours": 40.475387146935,
-  "remaining_gpu_hours": 23.524612853065,
+  "new_gpu_hours": 0.05318054523306071,
+  "cumulative_gpu_hours": 40.48911276499003,
+  "remaining_gpu_hours": 23.510887235009967,
   "models": {
     "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
     "runs/unified-student-20261001/SA-real-51200/step_051200.pth": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9"
@@ -21,30 +21,16 @@
   "optimizer_updates": 0,
   "final_opened": false,
   "closed_historical_final_sets": true,
-  "next": "Restore provided endpoint connectivity; inventory/reconcile actual remote jobs/devices/cost, then same-H200 precheck/disposable matched updates and formal3200-update C/G window. Goal unfinished; do not rerun completed preparation or historical finals",
+  "next": "Upload two unique additive assets; formal study remains SSH-blocked",
   "last_event": {
-    "utc": "2026-10-02T07:07:59.259334+00:00",
-    "event": "preparation_release_published_and_server_digests_verified",
-    "evidence": "research/width-student-distillation-20261002/preparation-release-index.json",
-    "state_updates": {
-      "delivery": {
-        "release_id": 401601529,
-        "tag": "wuji-width-student-distillation-20261002-preparation-v1",
-        "draft": false,
-        "published": true,
-        "release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-width-student-distillation-20261002-preparation-v1",
-        "assets": 2,
-        "digests_verified": true,
-        "prepared_packet_restored_files": 161,
-        "scientific_training_complete": false
-      },
-      "blocked_goal_turns": 1
-    },
-    "phase": "Prepared branch and evidence public; H200 execution blocked by SSH transport",
-    "next": "Restore provided endpoint connectivity; inventory/reconcile actual remote jobs/devices/cost, then same-H200 precheck/disposable matched updates and formal3200-update C/G window. Goal unfinished; do not rerun completed preparation or historical finals"
+    "utc": "2026-10-02T07:33:20.704876+00:00",
+    "event": "additive_local_precheck_packet_restore_verified",
+    "evidence": "research/width-student-distillation-20261002/LOCAL_PRECHECK_DELIVERY.json",
+    "restored_files": 71,
+    "next": "Upload two unique additive assets; formal study remains SSH-blocked"
   },
   "active_gpu_elapsed_hours": 0,
-  "remaining_including_active": 23.524612853065,
+  "remaining_including_active": 23.510887235009967,
   "fresh_data_generated": true,
   "static_validation_complete": false,
   "training_pools_ready": true,
@@ -63,5 +49,10 @@
     "prepared_packet_restored_files": 161,
     "scientific_training_complete": false
   },
-  "blocked_goal_turns": 1
+  "blocked_goal_turns": 2,
+  "local_zero_change_path_verified": true,
+  "disposable_optimizer_precheck_registered": true,
+  "disposable_optimizer_updates": 34,
+  "disposable_interactions": 34816,
+  "local_disposable_optimizer_precheck_complete": true
 }

@@ -34,6 +34,7 @@ def main():
     p.add_argument('--reserved-phase',choices=['confirm','final','delivery'])
     p.add_argument('--remote-root',default='/tmp/artgym-width-20261002')
     p.add_argument('--runtime',default='/tmp/wuji-student-runtime/bin/python')
+    p.add_argument('--disposable-precheck',action='store_true',help='Local bounded optimizer smoke only; never a scientific candidate')
     p.add_argument('command',nargs=argparse.REMAINDER)
     a=p.parse_args(); command=a.command[1:] if a.command[:1]==['--'] else a.command
     assert a.seconds>0 and command and '/' not in a.name
@@ -51,7 +52,20 @@ def main():
         if not a.local:
             assert state.get('remote_inventory_verified') and not state.get('remote_additional_consumption_unknown')
         else:
-            assert 'scripts.static_wuji_geometry' in command or 'scripts.precheck_wuji_width_environment' in command or '--video' in command, 'Local GPU is preparation/rendering only'
+            disposable=False
+            if a.disposable_precheck:
+                assert 'scripts.train_wuji_unified_student' in command and '--width-arm' in command
+                def value(flag):return command[command.index(flag)+1]
+                assert value('--updates') in ['51216','51217']
+                assert 'precheck' in Path(value('--output')).parts
+                if value('--updates')=='51216':
+                    assert value('--resume')=='runs/unified-student-20261001/SA-real-51200/step_051200.pth'
+                    assert value('--fresh-optimization-seed')=='2026100215'
+                else:
+                    assert 'precheck' in Path(value('--resume')).parts and Path(value('--resume')).name=='step_051216.pth'
+                    assert '--fresh-optimization-seed' not in command
+                disposable=True
+            assert disposable or 'scripts.static_wuji_geometry' in command or 'scripts.precheck_wuji_width_environment' in command or 'scripts.precheck_wuji_width_zero_change' in command or '--video' in command, 'Local GPU is preparation/rendering only'
         active=[json.loads(p.read_text()) for p in jobs.glob('*/identity.json') if not (p.parent/'result.json').exists()]
         assert len(active)<8 and not any(j['gpu']==a.gpu and j.get('local')==a.local for j in active)
         completed=state['historical_gpu_hours']+sum(json.loads(p.read_text())['gpu_hours'] for p in jobs.glob('*/result.json'))
@@ -69,7 +83,8 @@ def main():
         out=jobs/a.name;out.mkdir(exist_ok=False)
         identity=dict(name=a.name,gpu=a.gpu,gpu_uuid=device[1].strip(),gpu_count=1,device=device[2].strip(),
                       local=a.local,seconds=a.seconds,start_utc=utc(),local_pid=os.getpid(),command=command,
-                      reserved_phase=a.reserved_phase,source_sha256=source_hash(R),registered_models=state['models'])
+                      reserved_phase=a.reserved_phase,source_sha256=source_hash(R),registered_models=state['models'],
+                      disposable_precheck=a.disposable_precheck,scientific_candidate=not a.disposable_precheck)
         (out/'identity.json').write_text(json.dumps(identity,indent=2)+'\n')
     started=time.monotonic();code=1;failure=None
     record('job_started',**identity,next='Inspect this finite job; no duplicate launch')
@@ -80,6 +95,11 @@ def main():
                 shutil.copytree(R/folder,pin/folder,ignore=shutil.ignore_patterns('__pycache__'))
             for folder in ['width-student-distillation-20261002','multigrasp-20260928/data']:
                 shutil.copytree(R/'research'/folder,pin/'research'/folder)
+            if 'scripts.precheck_wuji_width_zero_change' in command:
+                # The original task checks actual grasp hemisphere identity.
+                # No final states are loaded by this compatibility cache copy.
+                target=pin/'caches/initial_grasp/wuji/knife_wuji_bridge3_20260922/000'
+                assert target.exists()
             target=pin/'research/geometry-generalization-20261002';target.mkdir(parents=True)
             shutil.copy2(R/'research/geometry-generalization-20261002/BASELINE_PHYSICS.json',target)
             (pin/'runs').symlink_to(R/'runs',target_is_directory=True)

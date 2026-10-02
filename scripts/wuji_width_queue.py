@@ -20,8 +20,11 @@ def build(a):
     assets=json.loads((D/'ASSETS.json').read_text());tasks=[]
     labels=['baseline','W110','W120']+(['W115','W115_T110'] if a.phase=='final' else [])
     models=[]
+    discarded=D/'DISPOSABLE_OPTIMIZER_AUDIT.json'
+    discarded_hashes={x['checkpoint_sha256'] for x in json.loads(discarded.read_text())['arms']} if discarded.exists() else set()
     for spec in a.models:
         role,name=spec.split('=',1);path=R/name;digest=sha(path)
+        assert digest not in discarded_hashes, 'Discarded optimizer prechecks are ineligible for scientific evaluation'
         if role!='teacher' and digest!='16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9':
             ready=json.loads(path.with_suffix('.ready.json').read_text());assert ready['sha256']==digest
         models.append((role,name,digest))

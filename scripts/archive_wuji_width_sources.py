@@ -11,7 +11,10 @@ from scripts.record_wuji_width_goal import R,D,record
 
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True)
+    p.add_argument('--jobs',nargs='+',help='Archive only these actual job pins')
+    p.add_argument('--receipt',type=Path,default=D/'SOURCE_PINS.json');a=p.parse_args()
+    assert not a.receipt.exists(), 'Use a new receipt; existing evidence is immutable'
     base='89689142c9f0e52fb679ce710f9c95a55b8a6643'
     tree=subprocess.check_output(['git','ls-tree','-rz',base,'scripts','isaacgymenvs','rl_games'],cwd=R)
     objects={}
@@ -26,7 +29,12 @@ def main():
         base_hash[name]=hashlib.sha256(body).hexdigest();offset=end+size+2
     assert not a.output.exists();a.output.mkdir(parents=True);(a.output/'blobs').mkdir()
     entries=[]
-    for receipt in sorted((R/'runs/width-student-distillation-20261002/jobs').glob('*/identity.json')):
+    receipts=sorted((R/'runs/width-student-distillation-20261002/jobs').glob('*/identity.json'))
+    if a.jobs:
+        assert len(set(a.jobs))==len(a.jobs)
+        receipts=[x for x in receipts if x.parent.name in a.jobs]
+        assert {x.parent.name for x in receipts}==set(a.jobs), 'Missing requested job'
+    for receipt in receipts:
         identity=json.loads(receipt.read_text());pin=Path('/tmp/artgym-width-local-pins')/identity['name']
         assert identity['local'] and source_hash(pin)==identity['source_sha256']
         files=[]
@@ -44,8 +52,9 @@ def main():
     archive=a.output.with_suffix('.tar.gz')
     with tarfile.open(archive,'w:gz') as tf:tf.add(a.output,arcname=a.output.name)
     report=dict(path=str(archive.resolve().relative_to(R)),sha256=sha(archive),jobs=len(entries),blobs=len(list((a.output/'blobs').iterdir())))
-    (D/'SOURCE_PINS.json').write_text(json.dumps(report,indent=2)+'\n')
-    record('actual_job_source_overrides_archived',evidence='research/width-student-distillation-20261002/SOURCE_PINS.json',
+    a.receipt.parent.mkdir(parents=True,exist_ok=True)
+    a.receipt.write_text(json.dumps(report,indent=2)+'\n')
+    record('actual_job_source_overrides_archived',evidence=str(a.receipt.resolve().relative_to(R)),
            next='Upload preparation packet and actual pins; no H200 training or final result exists yet')
 
 
