@@ -1,0 +1,189 @@
+{
+  "zero_path_max_abs": {
+    "q": 0.0,
+    "target": 0.0,
+    "slider": 0.0,
+    "object_pos": 0.0,
+    "object_rot": 0.0,
+    "action": 0.0
+  },
+  "results": {
+    "pilot-native": {
+      "K20": 0,
+      "S5": 0,
+      "n": 4,
+      "by_source": {
+        "0": {
+          "n": 2,
+          "K20": 0,
+          "ordered": 0,
+          "stable": 0
+        },
+        "3": {
+          "n": 2,
+          "K20": 0,
+          "ordered": 0,
+          "stable": 0
+        }
+      },
+      "mean_normal_net_proxy_N": 0.40980701560277755,
+      "contact_fraction": 0.9586846828460693,
+      "mean_resistance_N": 0.0
+    },
+    "pilot-zero": {
+      "K20": 0,
+      "S5": 0,
+      "n": 4,
+      "by_source": {
+        "0": {
+          "n": 2,
+          "K20": 0,
+          "ordered": 0,
+          "stable": 0
+        },
+        "3": {
+          "n": 2,
+          "K20": 0,
+          "ordered": 0,
+          "stable": 0
+        }
+      },
+      "mean_normal_net_proxy_N": 0.4181961054008019,
+      "contact_fraction": 0.9688026905059814,
+      "mean_resistance_N": 0.0
+    },
+    "pilot-high": {
+      "K20": 0,
+      "S5": 0,
+      "n": 4,
+      "by_source": {
+        "0": {
+          "n": 2,
+          "K20": 0,
+          "ordered": 0,
+          "stable": 0
+        },
+        "3": {
+          "n": 2,
+          "K20": 0,
+          "ordered": 0,
+          "stable": 0
+        }
+      },
+      "mean_normal_net_proxy_N": 0.3451211095050835,
+      "contact_fraction": 0.915517270565033,
+      "mean_resistance_N": 0.0
+    },
+    "operability-C": {
+      "K20": 0,
+      "S5": 0,
+      "n": 16,
+      "by_source": {
+        "0": {
+          "n": 8,
+          "K20": 0,
+          "ordered": 0,
+          "stable": 0
+        },
+        "3": {
+          "n": 8,
+          "K20": 0,
+          "ordered": 3,
+          "stable": 0
+        }
+      },
+      "mean_normal_net_proxy_N": 0.23128953206455544,
+      "contact_fraction": 0.9261375069618225,
+      "mean_resistance_N": 0.0
+    },
+    "pilot-load-low": {
+      "K20": 0,
+      "S5": 0,
+      "n": 4,
+      "by_source": {
+        "0": {
+          "n": 2,
+          "K20": 0,
+          "ordered": 0,
+          "stable": 0
+        },
+        "3": {
+          "n": 2,
+          "K20": 0,
+          "ordered": 0,
+          "stable": 0
+        }
+      },
+      "mean_normal_net_proxy_N": 0.4317670611860673,
+      "contact_fraction": 0.9732235074043274,
+      "mean_resistance_N": 0.02482486388180405
+    },
+    "pilot-load-high": {
+      "K20": 0,
+      "S5": 0,
+      "n": 4,
+      "by_source": {
+        "0": {
+          "n": 2,
+          "K20": 0,
+          "ordered": 0,
+          "stable": 0
+        },
+        "3": {
+          "n": 2,
+          "K20": 0,
+          "ordered": 0,
+          "stable": 0
+        }
+      },
+      "mean_normal_net_proxy_N": 0.36748695372901696,
+      "contact_fraction": 0.9238964915275574,
+      "mean_resistance_N": 0.08131093531847
+    },
+    "operability-T": {
+      "K20": 7,
+      "S5": 0,
+      "n": 16,
+      "by_source": {
+        "0": {
+          "n": 8,
+          "K20": 0,
+          "ordered": 0,
+          "stable": 0
+        },
+        "3": {
+          "n": 8,
+          "K20": 7,
+          "ordered": 7,
+          "stable": 8
+        }
+      },
+      "mean_normal_net_proxy_N": 0.22788678717528182,
+      "contact_fraction": 0.9510022401809692,
+      "mean_resistance_N": 0.0
+    },
+    "pilot-low": {
+      "K20": 0,
+      "S5": 0,
+      "n": 4,
+      "by_source": {
+        "0": {
+          "n": 2,
+          "K20": 0,
+          "ordered": 0,
+          "stable": 0
+        },
+        "3": {
+          "n": 2,
+          "K20": 0,
+          "ordered": 0,
+          "stable": 0
+        }
+      },
+      "mean_normal_net_proxy_N": 0.42102590014306845,
+      "contact_fraction": 0.95822674036026,
+      "mean_resistance_N": 0.0
+    }
+  },
+  "diagnostic_correction": "Pilot saved normal/slip projections mixed hand/world axes. Correct force projection recomputed from raw contacts and recorded object quaternion plus fixed hand-base rotation; original scalar slip summary excluded. No policy/physics change."
+}

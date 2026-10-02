@@ -1,0 +1,96 @@
+{
+  "tasks": [
+    {
+      "name": "confirm-constant-r0-p0",
+      "states": "runs/real-knife-press-resistance-20261002/static/confirm-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/confirm-constant-r0-p0",
+      "args": [
+        "--press-mm",
+        "0",
+        "--resistance-n",
+        "0",
+        "--profile",
+        "constant",
+        "--profile-seed",
+        "2026100243"
+      ]
+    },
+    {
+      "name": "confirm-constant-r0-p0.5",
+      "states": "runs/real-knife-press-resistance-20261002/static/confirm-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/confirm-constant-r0-p0.5",
+      "args": [
+        "--press-mm",
+        "0.5",
+        "--resistance-n",
+        "0",
+        "--profile",
+        "constant",
+        "--profile-seed",
+        "2026100243"
+      ]
+    },
+    {
+      "name": "confirm-constant-r0.05-p0",
+      "states": "runs/real-knife-press-resistance-20261002/static/confirm-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/confirm-constant-r0.05-p0",
+      "args": [
+        "--press-mm",
+        "0",
+        "--resistance-n",
+        "0.05",
+        "--profile",
+        "constant",
+        "--profile-seed",
+        "2026100243"
+      ]
+    },
+    {
+      "name": "confirm-constant-r0.05-p0.5",
+      "states": "runs/real-knife-press-resistance-20261002/static/confirm-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/confirm-constant-r0.05-p0.5",
+      "args": [
+        "--press-mm",
+        "0.5",
+        "--resistance-n",
+        "0.05",
+        "--profile",
+        "constant",
+        "--profile-seed",
+        "2026100243"
+      ]
+    },
+    {
+      "name": "confirm-variable-r0.05-p0",
+      "states": "runs/real-knife-press-resistance-20261002/static/confirm-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/confirm-variable-r0.05-p0",
+      "args": [
+        "--press-mm",
+        "0",
+        "--resistance-n",
+        "0.05",
+        "--profile",
+        "variable",
+        "--profile-seed",
+        "2026100243"
+      ]
+    },
+    {
+      "name": "confirm-variable-r0.05-p0.5",
+      "states": "runs/real-knife-press-resistance-20261002/static/confirm-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/confirm-variable-r0.05-p0.5",
+      "args": [
+        "--press-mm",
+        "0.5",
+        "--resistance-n",
+        "0.05",
+        "--profile",
+        "variable",
+        "--profile-seed",
+        "2026100243"
+      ]
+    }
+  ],
+  "reserved_phase": "confirm",
+  "decision": "Close independentconfirmation; reportnegative result without training or retuning"
+}

@@ -423,6 +423,8 @@ class VecTask(Env):
         for i in range(self.control_freq_inv):
             if self.force_render:
                 self.render()
+            if hasattr(self, 'press_physics_substep'):
+                self.press_physics_substep(i)
             self.gym.simulate(self.sim)
 
         # to fix!

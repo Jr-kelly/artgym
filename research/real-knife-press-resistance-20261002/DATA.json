@@ -1,0 +1,50 @@
+{
+  "entries": [
+    {
+      "split": "pilot",
+      "seed": 2026100230,
+      "attempts_per_source": 8,
+      "sources": [
+        0,
+        3
+      ],
+      "take_per_source": 2,
+      "path": "research/real-knife-press-resistance-20261002/data/real/pilot-attempts.npy",
+      "sha256": "c948d50ffc7cb658f65a7213a9a078c066f9c82e7586b7cbaf225bbed020a3e8"
+    },
+    {
+      "split": "dev",
+      "seed": 2026100231,
+      "attempts_per_source": 24,
+      "sources": [
+        0,
+        3
+      ],
+      "take_per_source": 8,
+      "path": "research/real-knife-press-resistance-20261002/data/real/dev-attempts.npy",
+      "sha256": "76202c5b50f53182603dc9647d355142ebba561a3800f7043d5e3e3d07eb79e6"
+    },
+    {
+      "split": "confirm",
+      "seed": 2026100232,
+      "attempts_per_source": 48,
+      "sources": [
+        0,
+        3
+      ],
+      "take_per_source": 16,
+      "path": "research/real-knife-press-resistance-20261002/data/real/confirm-attempts.npy",
+      "sha256": "7af7a64c06704f73caa865c504e0fd66823e1cdbf48da372ef7ad1e0b6fbdacb"
+    }
+  ],
+  "old_final_access": false,
+  "sources": [
+    0,
+    3
+  ],
+  "fallback_order": [
+    1,
+    2
+  ],
+  "rule": "First static-valid fixed order, never policy filter; only0and3 initially"
+}

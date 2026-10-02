@@ -1,0 +1,149 @@
+{
+  "tasks": [
+    {
+      "name": "dev-p0-r0.05",
+      "states": "runs/real-knife-press-resistance-20261002/static/dev-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/dev-p0-r0.05",
+      "args": [
+        "--press-mm",
+        "0",
+        "--resistance-n",
+        "0.05"
+      ]
+    },
+    {
+      "name": "dev-p0-r0.2",
+      "states": "runs/real-knife-press-resistance-20261002/static/dev-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/dev-p0-r0.2",
+      "args": [
+        "--press-mm",
+        "0",
+        "--resistance-n",
+        "0.2"
+      ]
+    },
+    {
+      "name": "dev-p0.5-r0",
+      "states": "runs/real-knife-press-resistance-20261002/static/dev-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/dev-p0.5-r0",
+      "args": [
+        "--press-mm",
+        "0.5",
+        "--resistance-n",
+        "0"
+      ]
+    },
+    {
+      "name": "dev-p0.5-r0.05",
+      "states": "runs/real-knife-press-resistance-20261002/static/dev-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/dev-p0.5-r0.05",
+      "args": [
+        "--press-mm",
+        "0.5",
+        "--resistance-n",
+        "0.05"
+      ]
+    },
+    {
+      "name": "dev-p0.5-r0.2",
+      "states": "runs/real-knife-press-resistance-20261002/static/dev-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/dev-p0.5-r0.2",
+      "args": [
+        "--press-mm",
+        "0.5",
+        "--resistance-n",
+        "0.2"
+      ]
+    },
+    {
+      "name": "dev-p1.5-r0",
+      "states": "runs/real-knife-press-resistance-20261002/static/dev-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/dev-p1.5-r0",
+      "args": [
+        "--press-mm",
+        "1.5",
+        "--resistance-n",
+        "0"
+      ]
+    },
+    {
+      "name": "dev-p1.5-r0.05",
+      "states": "runs/real-knife-press-resistance-20261002/static/dev-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/dev-p1.5-r0.05",
+      "args": [
+        "--press-mm",
+        "1.5",
+        "--resistance-n",
+        "0.05"
+      ]
+    },
+    {
+      "name": "dev-p1.5-r0.2",
+      "states": "runs/real-knife-press-resistance-20261002/static/dev-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/dev-p1.5-r0.2",
+      "args": [
+        "--press-mm",
+        "1.5",
+        "--resistance-n",
+        "0.2"
+      ]
+    },
+    {
+      "name": "dev-variable-p0",
+      "states": "runs/real-knife-press-resistance-20261002/static/dev-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/dev-variable-p0",
+      "args": [
+        "--press-mm",
+        "0",
+        "--resistance-n",
+        ".05",
+        "--profile",
+        "variable",
+        "--profile-seed",
+        "2026100233"
+      ]
+    },
+    {
+      "name": "dev-variable-p0.5",
+      "states": "runs/real-knife-press-resistance-20261002/static/dev-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/dev-variable-p0.5",
+      "args": [
+        "--press-mm",
+        "0.5",
+        "--resistance-n",
+        ".05",
+        "--profile",
+        "variable",
+        "--profile-seed",
+        "2026100233"
+      ]
+    },
+    {
+      "name": "dev-teacher-r.05",
+      "states": "runs/real-knife-press-resistance-20261002/static/dev-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/dev-teacher-r.05",
+      "args": [
+        "--model",
+        "teacher",
+        "--resistance-n",
+        ".05"
+      ]
+    }
+  ],
+  "reused_zero_control": "runs/real-knife-press-resistance-20261002/eval/operability-C",
+  "press_mm": [
+    0,
+    0.5,
+    1.5
+  ],
+  "resistance_N": [
+    0,
+    0.05,
+    0.2
+  ],
+  "variable_peak_N": 0.05,
+  "variable_press_mm": 0.5,
+  "independent_confirm_profile_seed": 2026100243,
+  "pilot_basis": "Zero path matches original; high1.5mm reduced contact proxy, low.5mm nearly unchanged; bracket0.05/0.2N produced measurable opposed effort. Student failure atzero, teacher source3 feasible.",
+  "decision": "Decide ifteacherlabelssupport a boundedpair or pressmechanismnegative suffices; freezeone candidate before32stateconfirmation"
+}

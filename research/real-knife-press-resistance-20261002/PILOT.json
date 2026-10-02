@@ -1,0 +1,78 @@
+{
+  "tasks": [
+    {
+      "name": "operability-C",
+      "states": "runs/real-knife-press-resistance-20261002/static/dev-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/operability-C",
+      "args": [
+        "--model",
+        "student"
+      ]
+    },
+    {
+      "name": "operability-T",
+      "states": "runs/real-knife-press-resistance-20261002/static/dev-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/operability-T",
+      "args": [
+        "--model",
+        "teacher"
+      ]
+    },
+    {
+      "name": "pilot-zero",
+      "states": "runs/real-knife-press-resistance-20261002/static/pilot-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/pilot-zero",
+      "args": []
+    },
+    {
+      "name": "pilot-native",
+      "states": "runs/real-knife-press-resistance-20261002/static/pilot-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/pilot-native",
+      "args": [
+        "--disable-press-path"
+      ]
+    },
+    {
+      "name": "pilot-low",
+      "states": "runs/real-knife-press-resistance-20261002/static/pilot-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/pilot-low",
+      "args": [
+        "--press-mm",
+        ".5"
+      ]
+    },
+    {
+      "name": "pilot-high",
+      "states": "runs/real-knife-press-resistance-20261002/static/pilot-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/pilot-high",
+      "args": [
+        "--press-mm",
+        "1.5"
+      ]
+    },
+    {
+      "name": "pilot-load-low",
+      "states": "runs/real-knife-press-resistance-20261002/static/pilot-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/pilot-load-low",
+      "args": [
+        "--press-mm",
+        "1.5",
+        "--resistance-n",
+        ".05"
+      ]
+    },
+    {
+      "name": "pilot-load-high",
+      "states": "runs/real-knife-press-resistance-20261002/static/pilot-repaired/valid-states.npy",
+      "output": "runs/real-knife-press-resistance-20261002/eval/pilot-load-high",
+      "args": [
+        "--press-mm",
+        "1.5",
+        "--resistance-n",
+        ".2"
+      ]
+    }
+  ],
+  "decision": "Select fixed3press/3resistance levels using independentpilot only; dev operability determines whether actor contact is viable",
+  "not_main_results": true
+}

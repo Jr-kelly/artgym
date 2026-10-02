@@ -1,0 +1,31 @@
+{
+  "utc": "2026-10-02T13:29:22.468902+00:00",
+  "candidate": {
+    "model": "C3200",
+    "press_mm": 0.5
+  },
+  "baseline": {
+    "model": "C3200",
+    "press_mm": 0
+  },
+  "model_sha256": "b537578fc1123a6c3bad0358d8aa122b0c9c97bd970f98984960f685fa787a2f",
+  "source_sha256": "c18ba3c2589d7b166db3f97e03d3b17d8c8e3d14c3d8b20894d73a4d7d6ee8ee",
+  "states": "runs/real-knife-press-resistance-20261002/static/confirm-repaired/valid-states.npy",
+  "states_sha256": "3022ac3464c229aee92d77251302fb3f3cc277db0dec532712a6aa89755661c7",
+  "selection_sha256": "56fdb8f70144080cf5aad7346faf667f1492f94b097a364777d03e826686d86c",
+  "total_independent_states": 32,
+  "sources": [
+    0,
+    3
+  ],
+  "constant_load_N": [
+    0,
+    0.05
+  ],
+  "variable_peak_N": 0.05,
+  "variable_seed": 2026100243,
+  "selection": "Fixedlow.5mm as least intrusive tested alternative; no student benefit observed. Confirmnegative outcome, not a claimed successful deployment candidate.",
+  "training_decision": "No training: press manipulation did not consistently increase contact proxy or K20, all student dev runs unstable; loadedteacher only2/16. Sufficient to prioritize contact/holding rather than distill uncertain loaded labels.",
+  "optimizer_updates": 0,
+  "expansion": "No expansion beyond32; uncertainty about small effects will not change next action"
+}

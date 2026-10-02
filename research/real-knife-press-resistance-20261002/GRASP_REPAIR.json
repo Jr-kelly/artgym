@@ -1,0 +1,69 @@
+{
+  "reason": "Initial size adaptation left finger-mesh penetration and zero accepted independent pilot rows",
+  "reports": [
+    {
+      "source": 0,
+      "before_depth_m": 0.001993792678228296,
+      "after_depth_m": 0.000650061875229411,
+      "contact_shift_m": [
+        0.0,
+        0.0,
+        4.479367927982855e-06,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": 3,
+      "before_depth_m": 0.002184165254829888,
+      "after_depth_m": 0.0006507016477345501,
+      "contact_shift_m": [
+        0.0,
+        0.0,
+        1.2429141642596077e-05,
+        0.0,
+        5.9228485408382214e-05
+      ]
+    }
+  ],
+  "entries": [
+    {
+      "split": "pilot",
+      "seed": 2026100240,
+      "sources": [
+        0,
+        3
+      ],
+      "attempts_per_source": 16,
+      "take": 2,
+      "path": "research/real-knife-press-resistance-20261002/data/real/pilot-repaired-attempts.npy",
+      "sha256": "234e2a92d6e51cc708e4ccce51d867e53c0e9d515b463a23c0c1a092da7d3bd1"
+    },
+    {
+      "split": "dev",
+      "seed": 2026100241,
+      "sources": [
+        0,
+        3
+      ],
+      "attempts_per_source": 48,
+      "take": 8,
+      "path": "research/real-knife-press-resistance-20261002/data/real/dev-repaired-attempts.npy",
+      "sha256": "26c4153a2ff38af2f485ab935860ccb671126363c2f7369bda85b9ea0ea5d76c"
+    },
+    {
+      "split": "confirm",
+      "seed": 2026100242,
+      "sources": [
+        0,
+        3
+      ],
+      "attempts_per_source": 96,
+      "take": 16,
+      "path": "research/real-knife-press-resistance-20261002/data/real/confirm-repaired-attempts.npy",
+      "sha256": "c93d5063c14ff4029dc265455fa91bf8d705cf1881d7470f9c7fc085892665f4"
+    }
+  ],
+  "policy_results_used": false,
+  "static_thresholds_unchanged": true
+}
