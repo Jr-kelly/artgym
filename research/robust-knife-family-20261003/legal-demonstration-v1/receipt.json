@@ -1,0 +1,71 @@
+{
+  "source_demo": "runs/robust-knife-family-20261003/demo/g2-under-support-linear-thumb-loaded-v28",
+  "source_trace_sha256": "733a9cc33a07e2f8fda9d0146053b48f034077dbcf6f7a0b7676bca494308c9f",
+  "prior_calibration": {
+    "object_in_wrist": [
+      [
+        0.8477604801025596,
+        0.5219417388488373,
+        -0.09422839075209755,
+        0.057194446051041514
+      ],
+      [
+        -0.07081017071068943,
+        0.28745449216646257,
+        0.9551731961572436,
+        -0.0018515212162362737
+      ],
+      [
+        0.5256311331154203,
+        -0.8030857589204117,
+        0.28065134191559804,
+        0.12013185563807749
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "slider_in_wrist": [
+      [
+        0.8477604801025596,
+        0.5219417388488373,
+        -0.09422839075209755,
+        0.06318673751600933
+      ],
+      [
+        -0.07081017071068943,
+        0.28745449216646257,
+        0.9551731961572436,
+        -0.020757104536874363
+      ],
+      [
+        0.5256311331154203,
+        -0.8030857589204117,
+        0.28065134191559804,
+        0.10792037297050561
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "source_trace": "runs/robust-knife-family-20261003/demo/g2-under-support-static-preload-v25/trace.npz",
+    "source_trace_sha256": "cdac0e995264e1cd1efc0b5267c4d85c29a8127425300cb338e4dfe823f7e1a0",
+    "source_time_s": 15.0,
+    "scope": "Fixed once-loaded simulated prior calibration from earlier separate acquisition; no current episode truth/perception claim"
+  },
+  "interface_checkpoint_sha256": "6d4a2d4d22afd249a3f62b2de8607604879fcbf08c3db86f41a003264783cef2",
+  "teacher_sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+  "student_sha256": "bbf61592721300b1cf053de8246898a69989ed102b7a034da6fb47cc9a541dcd",
+  "frames": 600,
+  "public_dim": 154,
+  "max_reconstructed_motor_target_error_rad": 1.1920928955078125e-07,
+  "split": "first actual cycle16-26 for fitting; second26-36 offline repeat-cycle validation, not independent physics or geometry",
+  "live_truth_columns_read": false,
+  "scope": "Legal deployable features replayed from actual script, body rotation~31deg unresolved in source; learned behavior bootstrap evidence only"
+}

@@ -1,0 +1,64 @@
+{
+  "scope": "Actual continuous G2+Wuji physics, scripted acquisition and scheduled calibrated rolling-thumb controller; learned actor not executed",
+  "report": {
+    "start": "Knife at configured tabletop edge with COM on table; open hand outside edge, lateral acquisition then vertical lift",
+    "methods": "Motor-only scripted continuous-IK approach/close/lift; finite-torque gravity-compensated arm/hand; offline-calibrated scheduled thumb IK with static joint preload after16s with once-loaded relative-grip calibration estimate",
+    "lifted_clear": true,
+    "operation_stays_clear": true,
+    "meaningful_extension": true,
+    "retraction_after31s": true,
+    "full_success": true,
+    "minimum_hold_height_m": 0.8557220101356506,
+    "max_object_height_m": 0.8567288517951965,
+    "wall_seconds": 49.48357744095847,
+    "positive_load_power_max_W": 0.0,
+    "weight_sha256": {
+      "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth": "bbf61592721300b1cf053de8246898a69989ed102b7a034da6fb47cc9a541dcd",
+      "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8"
+    },
+    "scope": "Continuous physics attempt, no stage state writes. Meaningful25mm extension and8mm return are predeclared demo diagnostics; inherited40mm command unchanged. No preciseS5claim.",
+    "operation_evaluated": true,
+    "endpoints_mean_last03s_m": [
+      0.03438528888444933,
+      7.905893855624728e-08,
+      0.03436376968036509,
+      5.21540641784668e-08
+    ],
+    "diagnostic": "Scheduled four5s stages; final0.3s mean >25mm extend and <8mm return on both cycles; no truth-triggered switching",
+    "operation_body_max_drift_m": 0.0013301888247951865,
+    "operation_body_max_rotation_rad": 0.10336602869013155,
+    "operation_body_stable": true,
+    "slider_before_handover_m": 7.450580596923828e-09,
+    "slider_closed_at_handover": true,
+    "loaded_weight_use": "Interface initialization only; learned actor never called",
+    "residual_checkpoint": "None",
+    "thumb_script": "research/robust-knife-family-20261003/functional-side-edge-under-support-v6/continuous-thumb-v2.json",
+    "thumb_script_scope": "Known 40mm schedule+offline geometric trajectory and joint preload, not constant force or live state feedback",
+    "thumb_action_gain": 1.0,
+    "support_action_gain": 1.0,
+    "added_load_N": 0.05,
+    "passive_startup_detent_amplitude_N": 0.05,
+    "variable_load": true,
+    "load_scope": "Engineering added load plus original passive friction/damping; no measured real total-resistance ceiling. Groove is finite passive potential; positive descent power is stored energy.",
+    "operation_thumb_slider_contact_fraction": 1.0,
+    "operation_body_contact_fraction": [
+      0.0,
+      1.0,
+      1.0,
+      0.0,
+      1.0
+    ],
+    "contact_scope": "30Hz solver-contact diagnostics; current truth never fed to actor. Positive motor preload does not establish constant pressure.",
+    "operation_thumb_slider_contact_maintained": true,
+    "extension_endpoint_condition_met": true,
+    "first_failure": "none"
+  },
+  "evidence": {
+    "runs/robust-knife-family-20261003/demo/g2-under-support-continuous-thumb-loaded-v30/report.json": "03ecea1198cbe59d0d48c102e0ce88836be177709a84e6229e9ede3433c642e0",
+    "runs/robust-knife-family-20261003/demo/g2-under-support-continuous-thumb-loaded-v30/trace.npz": "fe2899db233bef82a68a84a5fed1317a5c0858fe39044153ea1b45e4037367c5",
+    "runs/robust-knife-family-20261003/demo/g2-under-support-continuous-thumb-loaded-v30/continuous.mp4": "830777dd5192c31a0452f70bd62c2c033487153290ea6187041fd0c040075d7e",
+    "runs/robust-knife-family-20261003/demo/g2-under-support-continuous-thumb-loaded-v30/hand-closeup.mp4": "b70fab456c8b83aad116263f955460c7c7137d25df2eac77a28fe0cbff342dd2",
+    "research/robust-knife-family-20261003/functional-side-edge-under-support-v6/continuous-thumb-v2.json": "cb74e925648f54ed6d18cfccb178657df9d646b399a0e1f54d435303b8d578ef"
+  },
+  "generalization": "Not yet tested; one nominal episode with two loaded cycles is not reliability evidence"
+}

@@ -25,6 +25,9 @@ class WujiRobustFamily(WujiBridge3Hemisphere):
         self.calibration_angle=torch.zeros((n,4),device=device);self.delay=torch.zeros(n,device=device,dtype=torch.bool)
         self.delayed_action=torch.zeros((n,20),device=device);self.delay_probability=float(cfg['env'].get('robustDelayProbability',.15))
         self.load_max=float(cfg['env'].get('robustLoadMaxN',.10));self.detent_max=float(cfg['env'].get('robustDetentMaxN',.10))
+        self.load_profile=cfg['env'].get('robustLoadProfile','sinusoidal');self.load_frequency=float(cfg['env'].get('robustLoadFrequency',1.7))
+        assert self.load_profile in ['sinusoidal','triangular','pulse','constant','mixed'] and self.load_frequency>0
+        self.load_profile_index=torch.zeros(n,device=device,dtype=torch.long)
         self.randomization_scale=float(cfg['env'].get('robustRandomizationScale',1.))
         self.wrist_nominal=torch.tensor(cfg['env'].get('robustWristNominalQuaternion',[0.,0.,0.,1.]),device=device)
         self.wrist_nominal=self.wrist_nominal/self.wrist_nominal.norm()
@@ -81,6 +84,7 @@ class WujiRobustFamily(WujiBridge3Hemisphere):
             n=len(ids);d=self.device;s=self.randomization_scale
             self.load_amplitude[ids]=torch.rand(n,device=d)*self.load_max*s
             self.load_phase[ids]=torch.rand(n,device=d)*6.283185
+            if self.load_profile=='mixed':self.load_profile_index[ids]=torch.randint(4,(n,),device=d)
             self.detent_amplitude[ids]=torch.rand(n,device=d)*self.detent_max*s
             self.detent_center[ids]=torch.rand(n,device=d)*.025+.006
             self.measurement_noise[ids]=torch.randn((n,20),device=d)*(.002*s)
@@ -155,7 +159,13 @@ class WujiRobustFamily(WujiBridge3Hemisphere):
         self.gym.refresh_dof_state_tensor(self.sim);self.gym.refresh_jacobian_tensors(self.sim)
         v=self.obj_dof_state_vel[:,0];q=self.obj_dof_state[:,0,0]-self.init_obj_dof_pos[:,0]
         t=self.progress_buf.float()*self.dt*self.control_freq_inv+substep*self.dt
-        amplitude=self.load_amplitude*(.25+.75*torch.sin(1.7*t+self.load_phase).square())
+        phase=self.load_frequency*t+self.load_phase
+        sine=.25+.75*torch.sin(phase).square()
+        triangular=.25+.75*(2*torch.remainder(phase/(2*np.pi),1)-1).abs()
+        pulse=torch.where(torch.sin(phase)>.5,torch.ones_like(phase),torch.full_like(phase,.25))
+        if self.load_profile=='mixed':factor=torch.where(self.load_profile_index==0,sine,torch.where(self.load_profile_index==1,triangular,torch.where(self.load_profile_index==2,pulse,torch.ones_like(phase))))
+        else:factor={'sinusoidal':sine,'triangular':triangular,'pulse':pulse,'constant':torch.ones_like(phase)}[self.load_profile]
+        amplitude=self.load_amplitude*factor
         run_force=-amplitude*torch.tanh(v/.002)
         # Smooth finite potential wells: nonzero breakaway force near a groove shoulder.
         # Independent passive potential stores energy, so instantaneous positive power on descent is physical.

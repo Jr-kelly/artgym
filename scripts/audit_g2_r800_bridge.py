@@ -45,7 +45,12 @@ def main():
         if a.checkpoint:
             saved=torch.load(a.checkpoint,map_location=env.device);model=ResidualActorCritic().to(env.device);model.load_state_dict(saved['model']);model.eval()
             public=torch.cat([expected_obs[:,:111],env.known_controller.observed_targets()[:1],action,gravity],-1)
-            with torch.no_grad():action=(action+torch.tensor(saved['action_scale'],device=env.device)*torch.tanh(model.actor(public))).clamp(-1,1)
+            base=action if saved.get("action_base_mode","r800")=="r800" else torch.zeros_like(action)
+            if saved.get('action_base_mode')=='geometric':
+                from scripts.wuji_scheduled_thumb_reference import ScheduledThumbReference
+                reference=ScheduledThumbReference(saved['thumb_reference'],1,env.device)
+                base=reference.action(env.known_controller.initial[:1],env.known_controller.issued[:1],public[:,95])
+            with torch.no_grad():action=(base+torch.tensor(saved['action_scale'],device=env.device)*torch.tanh(model.actor(public))).clamp(-1,1)
         target,bridged_action=bridge.command(q,goal,wrist_gravity=gravity[0].cpu().numpy())
         if a.checkpoint:publicerror=float(np.max(np.abs(bridge.last_public_features-public.cpu().numpy()[0])))
         known=env.known_controller;previous=known.issued.clone();init=known.initial.clone()

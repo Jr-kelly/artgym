@@ -3,7 +3,9 @@
 本轮从 `1c45ef574d068d56e800cf22c51e1fc8f2c0fe2b` 接续，实验副本单独工作。
 真实刀柄主体输入为135×16×12mm（不含滑块），无按下解锁。主体/滑块质量、摩擦、阻力和执行器模型仍是仿真工程假设。
 
-当前完整demo未完成。正确新刀惯性下，G2连续取刀/保持可重复；功能抓姿可在接管前保持滑块闭合（v11）。C100残差候选接管后保持离桌，但刀身转动约1.27rad，拇指失去滑块接触，滑块随后被动打开，两次缩回均失败（v14/v15）。这不是持续压紧推进的成功。实际闭合取刀抓姿的E/F100配对开发诊断为26/192与28/192，对应R800为15/192；仅预置持刀子模块。新的长边支撑布局v18实际拿起并闭合保持，但带阻力v19在接管前丢失拇指滑块接触，接管后掉刀。预置持刀开发评估C100为38/192，配对R800为16/192；独立几何尚未开启，不是完整demo成功率。
+当前中心条件完整仿真demo已完成：v30从桌边拿取135×16×12mm刀，保持闭合，再连续两轮伸出/保持/缩回；变化新增负载和被动起动幅度各0.05N，原有25mm/8mm、10mm/.25rad与持续接触诊断均通过。拇指路径使用离线校准的连续滚动接触几何与原始有限增益电机目标；不是恒力控制，也不是学习策略成功。v31新增三角形变化负载/起动各0.10N并降低摩擦、v32附近联合几何变化同样通过。v33将同一参考接入合法2076/154维策略接口，以零学习修正再次通过中心条件。完整必要泛化和独立检查尚未完成。
+
+原始R800、普通残差和离线行为克隆在实际接管仍存在掉刀、转动或缩回失败。O1离线动作拟合误差小，但v29实际运行刀身转动2.56rad且未缩回，不能当作完成demo的学习权重。C100、E/F、G/H、I/J、K/L、M/N均保留为正常联合随机化/机制对照与失败证据；预置持刀检查与完整G2流程分开记录。旧固定材料点IK在27mm附近跳变约.928rad；新的41点连续滚动路径每1mm关节变化≤.04rad，实际最大刀身转动约.103rad。
 
 ## 恢复运行
 
@@ -138,3 +140,42 @@ python -m scripts.train_wuji_robust_residual \
 150个真实仿真接管前样本提供三种取刀腕姿态和腕坐标中的相对物体速度。它们与功能抓姿池独立混合，25%清零、其余按实测样本幅度0.5–1.0缩放，是工程扰动包络；代理手仍固定，未精确复现实际腕加速度或手指初速度。连续G2入口保留完整真实物理状态。`initial-snapshot.npz`及`initial-materials.json`在任何策略动作前保存完整初态；8例新开发对照所有已保存初态字段逐位一致，初始保持8/8有效，但R800/F100的操作均未完成。
 
 新资产恢复包`under-family-v1-assets-caches.tar.gz` SHA256 `5d2cdc194023949614c3873936783d92c1b0de10a0ca1652cc1f4b665e79a3f8`。实际命令与权重哈希以每个jobs身份文件、开发报告及最终freeze为准；上列500仅原计划绝对更新数，是否延长由行为检查决定。
+
+
+## 已完成的中心连续流程与同一参考的联合适配
+
+恢复v30的脚本/几何控制成功例：
+
+```bash
+python -m scripts.run_g2_robust_demo \
+  --output runs/robust-knife-family-20261003/demo/recovered-rolling \
+  --video --seconds 36 --dx=-.1985 --dy=.05 --yaw=0 \
+  --grasp-plan research/robust-knife-family-20261003/functional-side-edge-under-support-equilibrium-v6/motor-plan.json \
+  --table-calibration research/robust-knife-family-20261003/functional-side-edge-under-support-v6/localization.json \
+  --acquisition-path research/robust-knife-family-20261003/functional-side-edge-under-support-lateral-v3/acquisition-path.json \
+  --handover-calibration research/robust-knife-family-20261003/handover-from-v25-v1.json \
+  --thumb-script research/robust-knife-family-20261003/functional-side-edge-under-support-v6/continuous-thumb-v2.json \
+  --load .05 --detent .05 --variable-load
+```
+
+v33使用同一运动参考的checkpoint接口，将上述`--thumb-script`替换为`--residual-checkpoint runs/robust-knife-family-20261003/train/geometric-reference-P0/geometric_reference.pth`。P0 SHA256 `39acf6ad7fb9b675e95c71bc0b02213db7a7ebba940f60ecc76915216afcea5b`，actor末层严格为0，继承父模型critic/隐藏层，不含新增拟合。冻结R800提供合法历史特征，几何参考负责原始目标，学习残差承担后续修正；不能将P0算作学习成功。`scheduled-reference-v30-equivalence-v1.json`验证600实际目标误差≤0.66µrad，`checks/geometric-reference-P0-bridge-v2/report.json`验证合法观察和电机接口。
+
+参考在每次公开任务命令改变时启动四秒quintic轨迹，随后保持；仅读取已知任务、初始已发电机目标、当前已发目标与内部时钟。不同资产使用同一路径和同一checkpoint，`--knife-asset`只改变物理资产，actor仍使用登记的名义几何与固定离线校准。不会读取资产ID、当前物体/滑块/接触真值。
+
+```bash
+python -m scripts.train_wuji_robust_residual \
+  --output runs/robust-knife-family-20261003/train/recovered-geometric-P \
+  --envs 2048 --updates 300 --seed 2026100354 \
+  --resume runs/robust-knife-family-20261003/train/geometric-reference-P0/geometric_reference.pth \
+  --base-mode geometric \
+  --thumb-reference research/robust-knife-family-20261003/functional-side-edge-under-support-v6/continuous-thumb-v2.json \
+  --object knife_wuji_dense_under_20261003 --randomization-scale 1. \
+  --load-max .1 --detent-max .1 --support-residual-scale .25 --thumb-residual-scale .25 \
+  --rotation-cost 4. --actual-hold-history 50 \
+  --handover-profiles research/robust-knife-family-20261003/handover-dynamics-profiles-v1.json \
+  --contact-progress-reward 0
+```
+
+Q1仅将最后的reward系数改为4，其他初始checkpoint、种子、分布与交互预算一致；还未证明机制优势。154维可部署actor特征保持不变。几何参考每步根据已发目标计算动作，拇指学习修正不是无界积累；所有最终动作/电机目标保留原始限制。`--load-profile triangular|pulse|constant|sinusoidal|mixed`与`--load-frequency`用于登记的新阻力条件，默认sinusoidal/1.7保持旧模型。mixed为每回合固定类别，profile和阻力均不输入actor。
+
+连续runner新增物理几何、摩擦、变化负载、关节观测噪声/偏置的显式参数。脚本或零残差模式对观测噪声通过不等于学得噪声鲁棒性。初始校准是仿真离线理想先验，未接真实视觉或触觉。`--load .1`是工程新增量，不是实物总阻力上限。独立资产012–015保持关闭，后续候选冻结后才检查。

@@ -31,7 +31,7 @@ class G2R800Policy(FrozenPolicy):
         self.last_encoder_input = None; self.last_observation = None
         assert 0<=thumb_action_gain<=1 and 0<=support_action_gain<=1
         self.thumb_action_gain=thumb_action_gain;self.support_action_gain=support_action_gain
-        self.residual=None;self.last_public_features=None
+        self.residual=None;self.last_public_features=None;self.thumb_reference=None
         if residual_checkpoint is not None:
             from scripts.wuji_robust_learning import ResidualActorCritic
             saved=torch.load(residual_checkpoint,map_location='cpu')
@@ -40,6 +40,10 @@ class G2R800Policy(FrozenPolicy):
             assert saved['teacher_sha256']==hashlib.sha256(Path(teacher).read_bytes()).hexdigest()
             self.residual=ResidualActorCritic().to(self.player.device);self.residual.load_state_dict(saved['model']);self.residual.eval()
             self.residual_scale=torch.tensor(saved['action_scale'],device=self.player.device)
+            self.action_base_mode=saved.get('action_base_mode','r800')
+            if self.action_base_mode=='geometric':
+                from scripts.wuji_scheduled_thumb_reference import ScheduledThumbReference
+                self.thumb_reference=ScheduledThumbReference(saved['thumb_reference'],1,self.player.device)
 
     def takeover_estimate(self, q, target, object_local_estimate, slider_local_estimate):
         assert len(self.history) == 50, 'Collect 50 measured control frames before handover'
@@ -48,6 +52,7 @@ class G2R800Policy(FrozenPolicy):
         self.last_action = np.zeros(20, dtype=np.float32)
         self.known.reset(torch.tensor([0], device=self.player.device), self.tensor(target))
         reset_player_rnn_state(self.player)
+        if self.thumb_reference is not None:self.thumb_reference.reset(torch.tensor([0],device=self.player.device))
 
     def tensor(self, value):
         return torch.as_tensor(value, dtype=torch.float32, device=self.player.device).reshape(1,-1)
@@ -76,7 +81,9 @@ class G2R800Policy(FrozenPolicy):
                 assert wrist_gravity is not None, 'Residual gravity comes from measured G2 arm FK'
                 public=torch.cat([obs[:,:111],self.known.observed_targets(),action,self.tensor(wrist_gravity)],-1)
                 self.last_public_features=public.detach().cpu().numpy()[0]
-                action=(action+self.residual_scale*torch.tanh(self.residual.actor(public))).clamp(-1,1)
+                base=action if self.action_base_mode=="r800" else torch.zeros_like(action)
+                if self.thumb_reference is not None:base=self.thumb_reference.action(self.known.initial,self.known.issued,self.tensor([goal]))
+                action=(base+self.residual_scale*torch.tanh(self.residual.actor(public))).clamp(-1,1)
             action=action.clone();action[:,:16]*=self.support_action_gain;action[:,16:]*=self.thumb_action_gain
             target = self.known.step(action)
         self.last_action = action[0].cpu().numpy()

@@ -10,13 +10,17 @@ import torch,numpy as np
 from isaacgymenvs.utils.torch_jit_utils import quat_mul,quat_conjugate
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);p.add_argument('--checkpoint',type=Path);p.add_argument('--envs',type=int,default=96);p.add_argument('--seed',type=int,default=2026100311);p.add_argument('--load-max',type=float,default=.1);p.add_argument('--detent-max',type=float,default=.1);p.add_argument('--randomization-scale',type=float,default=.5);p.add_argument('--heldout',action='store_true');p.add_argument('--wrist-nominal',type=Path);p.add_argument('--wrist-probability',type=float,default=.5);p.add_argument('--object',default='knife_wuji_robust_family_20261003');p.add_argument('--thumb-slider-diagnostic',action='store_true');p.add_argument('--handover-profiles',type=Path);a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
+    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);p.add_argument('--checkpoint',type=Path);p.add_argument('--envs',type=int,default=96);p.add_argument('--seed',type=int,default=2026100311);p.add_argument('--load-max',type=float,default=.1);p.add_argument('--detent-max',type=float,default=.1);p.add_argument('--randomization-scale',type=float,default=.5);p.add_argument('--heldout',action='store_true');p.add_argument('--wrist-nominal',type=Path);p.add_argument('--wrist-probability',type=float,default=.5);p.add_argument('--object',default='knife_wuji_robust_family_20261003');p.add_argument('--thumb-slider-diagnostic',action='store_true');p.add_argument('--handover-profiles',type=Path);p.add_argument('--load-profile',choices=['sinusoidal','triangular','pulse','constant','mixed'],default='sinusoidal');p.add_argument('--load-frequency',type=float,default=1.7);a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
     instances=['012','013','014','015'] if a.heldout else None
     wrist=json.loads(a.wrist_nominal.read_text())['wrist_quaternion_xyzw'] if a.wrist_nominal else None
-    system=LearningSystem(a.envs,a.seed,a.randomization_scale,a.load_max,a.detent_max,instances=instances,wrist_nominal=wrist,wrist_probability=a.wrist_probability,object_name=a.object,history_hold_frames=0,thumb_slider_reward=1. if a.thumb_slider_diagnostic else 0.,handover_profiles=a.handover_profiles);env=system.env;model=ResidualActorCritic().to(env.device)
+    system=LearningSystem(a.envs,a.seed,a.randomization_scale,a.load_max,a.detent_max,instances=instances,wrist_nominal=wrist,wrist_probability=a.wrist_probability,object_name=a.object,history_hold_frames=0,thumb_slider_reward=1. if a.thumb_slider_diagnostic else 0.,handover_profiles=a.handover_profiles,load_profile=a.load_profile,load_frequency=a.load_frequency);env=system.env;model=ResidualActorCritic().to(env.device)
     if a.checkpoint:
         saved=torch.load(a.checkpoint,map_location=env.device);model.load_state_dict(saved['model']);model.eval()
         system.scale=torch.tensor(saved['action_scale'],device=env.device)
+        system.base_mode=saved.get('action_base_mode','r800')
+        if system.base_mode=='geometric':
+            from scripts.wuji_scheduled_thumb_reference import ScheduledThumbReference
+            system.reference_spec=saved['thumb_reference'];system.reference=ScheduledThumbReference(system.reference_spec,a.envs,env.device,float(env.dt*env.control_freq_inv))
     # Fresh test pools replace train sampling once, before this diagnostic episode.
     for instance_index in range(len(env.instance_id_list)):
         env._ensure_grasp_split_loaded(instance_index,'test')

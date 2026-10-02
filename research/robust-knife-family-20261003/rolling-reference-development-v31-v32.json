@@ -1,0 +1,55 @@
+{
+  "scope": "Developmental controller checks, not independent validation; same path/motor plan/prior calibration unchanged for both",
+  "results": [
+    {
+      "full_success": true,
+      "physical_asset": "assets/objects/knife_wuji_real_size_20261002/000/mobility.urdf",
+      "physical_asset_sha256": "d73aaecc9892fbdfd75a755389311936cf8b1f0d8361cfc66ea94ab5f391cb97",
+      "physical_dimensions_WTL_m": [
+        0.016,
+        0.012,
+        0.135
+      ],
+      "operation_body_max_rotation_rad": 0.10645218778448848,
+      "operation_body_max_drift_m": 0.001417070860043168,
+      "endpoints_mean_last03s_m": [
+        0.03529526117361254,
+        4.609011941485935e-06,
+        0.036397735950433545,
+        0.00017529850204785666
+      ],
+      "operation_thumb_slider_contact_fraction": 1.0,
+      "hand_friction": 0.8,
+      "knife_friction": 2.4,
+      "load_profile": "triangular",
+      "load_frequency_rad_s": 2.9,
+      "added_load_N": 0.1,
+      "passive_startup_detent_amplitude_N": 0.1
+    },
+    {
+      "full_success": true,
+      "physical_asset": "assets/objects/knife_wuji_dense_under_20261003/t0219/mobility.urdf",
+      "physical_asset_sha256": "1cf977dd1fbdfc8210c3c373e107b3177f9ccc74c3b5bd3da7274ec9f0eb8498",
+      "physical_dimensions_WTL_m": [
+        0.01602400930181569,
+        0.01178833497210874,
+        0.13375863676686506
+      ],
+      "operation_body_max_rotation_rad": 0.10963290528205308,
+      "operation_body_max_drift_m": 0.0016873938729986548,
+      "endpoints_mean_last03s_m": [
+        0.03470494815458854,
+        3.845244646072388e-05,
+        0.037356279893881746,
+        0.0008519544369644589
+      ],
+      "operation_thumb_slider_contact_fraction": 1.0,
+      "hand_friction": 0.8,
+      "knife_friction": 2.4,
+      "load_profile": "triangular",
+      "load_frequency_rad_s": 2.9,
+      "added_load_N": 0.1,
+      "passive_startup_detent_amplitude_N": 0.1
+    }
+  ]
+}

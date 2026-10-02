@@ -25,9 +25,10 @@ class ResidualActorCritic(nn.Module):
         return Normal(self.actor(public),self.logstd.clamp(-3.5,-.4).exp()),self.critic(critic).squeeze(-1)
 
 class LearningSystem:
-    def __init__(self,n,seed=2026100307,randomization_scale=.5,loadmax=.1,detentmax=.1,delay=.15,instances=None,support_scale=.25,rotation_cost=0.,wrist_nominal=None,wrist_probability=0.,object_name='knife_wuji_robust_family_20261003',history_hold_frames=50,thumb_slider_reward=0.,thumb_scale=.75,contact_progress_reward=0.,handover_profiles=None):
+    def __init__(self,n,seed=2026100307,randomization_scale=.5,loadmax=.1,detentmax=.1,delay=.15,instances=None,support_scale=.25,rotation_cost=0.,wrist_nominal=None,wrist_probability=0.,object_name='knife_wuji_robust_family_20261003',history_hold_frames=50,thumb_slider_reward=0.,thumb_scale=.75,contact_progress_reward=0.,handover_profiles=None,base_mode="r800",thumb_reference=None,load_profile="sinusoidal",load_frequency=1.7):
         isaacgym_task_map['wuji_robust_family']=WujiRobustFamily
         overrides=[f'object={object_name}','hand=wuji_paper_official_actuator',f'task.env.robustRandomizationScale={randomization_scale}',f'task.env.robustLoadMaxN={loadmax}',f'task.env.robustDetentMaxN={detentmax}',f'task.env.robustDelayProbability={delay}']
+        overrides+=['+task.env.robustLoadProfile='+load_profile,f'+task.env.robustLoadFrequency={load_frequency}']
         if handover_profiles is not None:overrides+=['+task.env.robustHandoverProfileFile='+str(handover_profiles)]
         if instances is not None:overrides+=['object.asset.instance_id_list='+str(instances).replace(' ','')]
         if wrist_nominal is not None:
@@ -53,6 +54,15 @@ class LearningSystem:
         self.actual_history_count=torch.zeros(n,device=self.env.device,dtype=torch.long)
         self.policy_active=torch.zeros(n,device=self.env.device,dtype=torch.bool)
         self.transition_reward=None;self.transition_peak=None;self.transition_contact=None;self.transition_fall=None
+        assert base_mode in ["r800","zero","geometric"]
+        self.base_mode=base_mode
+        self.reference_spec=None;self.reference=None
+        if base_mode=='geometric':
+            import json
+            from scripts.wuji_scheduled_thumb_reference import ScheduledThumbReference
+            assert thumb_reference is not None
+            self.reference_spec=json.loads(Path(thumb_reference).read_text()) if isinstance(thumb_reference,(str,Path)) else thumb_reference
+            self.reference=ScheduledThumbReference(self.reference_spec,n,self.env.device,float(self.env.dt*self.env.control_freq_inv))
         self.thumb_slider_reward=thumb_slider_reward
         self.contact_progress_reward=contact_progress_reward
         self.previous_goal_error=None
@@ -140,7 +150,12 @@ class LearningSystem:
         return self._features
 
     def step(self,residual):
-        action=(self.base_action+self.scale*torch.tanh(residual)).clamp(-1,1)
+        base=self.base_action if self.base_mode=="r800" else torch.zeros_like(self.base_action)
+        if self.reference is not None:
+            warm=(~self.policy_active).nonzero(as_tuple=False).squeeze(-1)
+            self.reference.reset(warm)
+            base=self.reference.action(self.env.known_controller.initial,self.env.known_controller.issued,self.obs[:,95])
+        action=(base+self.scale*torch.tanh(residual)).clamp(-1,1)
         action=torch.where(self.policy_active[:,None],action,torch.zeros_like(action))
         executed=self.env.delayed(action)
         goal=self.env.goal_obj_dof_pos.clone();origin=self.env.init_obj_dof_pos.clone()
@@ -153,6 +168,7 @@ class LearningSystem:
         self.current_contact+=self.transition_contact;self.current_steps+=1
         ids=done.bool().nonzero().squeeze(-1)
         self.actual_history_count+=1;self.actual_history_count[ids]=0
+        if self.reference is not None:self.reference.reset(ids)
         for i in ids.tolist():
             self.stats.append(dict(episode=self.episodes,env=i,instance=self.env.instance_id_list[i%len(self.env.instance_id_list)],return_sum=float(self.current_return[i]),peak_extension_m=float(self.current_peak[i]),thumb_contact_fraction=float(self.current_contact[i]/self.current_steps[i]),steps=int(self.current_steps[i]),fall=bool(self.transition_fall[i]),scope='training behavior, not independent validation'))
             self.episodes+=1
