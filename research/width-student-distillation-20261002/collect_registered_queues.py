@@ -16,7 +16,7 @@ def collect(queues,manifest,output):
     paths=[t['output'] for t in tasks if not (R/t['output']/'geometry-receipt.json').exists()]
     record('completed_queue_raw_fetch_started',evidence=str(manifest.relative_to(R)),tasks=len(tasks),missing_local=len(paths),next='Read only completed samebackend outputs; no new policy runs')
     if paths:
-        subprocess.run(['rsync','-aR','-e',shlex.join(ssh[:-1]),*['wangjiarui@10.13.160.5:/tmp/artgym-width-20261002/./'+p for p in paths],str(R)+'/'],check=True,timeout=300,env=host_tool_environment())
+        subprocess.run(['rsync','-aR','-e',shlex.join(ssh[:-1]),*['wangjiarui@10.13.160.5:/tmp/artgym-width-20261002/./'+p for p in paths],str(R)+'/'],check=True,timeout=1200,env=host_tool_environment())
     teacher=json.loads((D/'STATE.json').read_text())['models']['runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth']
     m=dict(teacher_sha256=teacher,historical_final_access=False,runs=[])
     for t in tasks:

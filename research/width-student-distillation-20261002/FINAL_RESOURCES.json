@@ -1,0 +1,273 @@
+{
+  "known_new_gpu_hours": 9.063149986780063,
+  "unreconciled_gpu_hours_charge": 1.4000000000000001,
+  "unreconciled_remote_jobs": [
+    "final-W120-G_endpoint-F-23b6d935b9ac",
+    "final-baseline-P-F-3e67e82c8036",
+    "final-baseline-teacher-F-6b637b48308c",
+    "final-W120-teacher-F-18b0abc6d11d",
+    "final-W120-C-F-6e0b89a2f949",
+    "final-W120-G-F-97e271dc828b",
+    "final-W120-C_endpoint-F-3005c0892388",
+    "final-W120-P-F-d9c3f3b7ae4d"
+  ],
+  "budget_not_actual_until_receipts_reconciled": true,
+  "utc": "2026-10-02T10:21:20.699382+00:00",
+  "historical_gpu_hours": 40.43593221975697,
+  "new_gpu_hours": 10.463149986780069,
+  "cumulative_gpu_hours": 50.89908220653704,
+  "remaining_gpu_hours": 13.100917793462962,
+  "max_gpu_hours": 64,
+  "peak_combined_gpus": 8,
+  "completed_jobs": 247,
+  "accounted_jobs": 255,
+  "unreconciled_jobs": 8,
+  "known_cumulative_gpu_hours": 49.49908220653703,
+  "categories": {
+    "evaluation_confirm": {
+      "jobs": 54,
+      "gpu_hours": 2.014059619053603,
+      "failed_jobs": 0
+    },
+    "evaluation_dev": {
+      "jobs": 144,
+      "gpu_hours": 4.423562564074074,
+      "failed_jobs": 18
+    },
+    "precheck": {
+      "jobs": 9,
+      "gpu_hours": 0.050621329207820566,
+      "failed_jobs": 1
+    },
+    "static_data": {
+      "jobs": 16,
+      "gpu_hours": 0.10079581412198928,
+      "failed_jobs": 2
+    },
+    "rendered_video": {
+      "jobs": 12,
+      "gpu_hours": 0.35918248007452347,
+      "failed_jobs": 0
+    },
+    "evaluation_final": {
+      "jobs": 8,
+      "gpu_hours": 1.4000000000000001,
+      "failed_jobs": 8
+    },
+    "discarded_updates": {
+      "jobs": 8,
+      "gpu_hours": 0.03994827836861886,
+      "failed_jobs": 0
+    },
+    "formal_training": {
+      "jobs": 4,
+      "gpu_hours": 2.074979901879431,
+      "failed_jobs": 0
+    }
+  },
+  "devices": {
+    "NVIDIA H200": {
+      "jobs": 226,
+      "gpu_hours": 10.050786961472483
+    },
+    "NVIDIA GeForce RTX 4090": {
+      "jobs": 29,
+      "gpu_hours": 0.41236302530758406
+    }
+  },
+  "failed_jobs": [
+    {
+      "name": "dev-baseline-P-S2-bc76c671e5a1",
+      "exit_code": 1,
+      "gpu_hours": 0.004955072271663488,
+      "category": "evaluation_dev"
+    },
+    {
+      "name": "dev-baseline-teacher-S2-f0ff4f94239a",
+      "exit_code": 1,
+      "gpu_hours": 0.004462202079432447,
+      "category": "evaluation_dev"
+    },
+    {
+      "name": "final-W120-G_endpoint-F-23b6d935b9ac",
+      "exit_code": 255,
+      "gpu_hours": 0.175,
+      "category": "evaluation_final"
+    },
+    {
+      "name": "dev-W120-teacher-F-6106aa7f0793",
+      "exit_code": 1,
+      "gpu_hours": 0.00502643870833304,
+      "category": "evaluation_dev"
+    },
+    {
+      "name": "dev-W110-P-S5-658116908971",
+      "exit_code": 1,
+      "gpu_hours": 0.004776076174716259,
+      "category": "evaluation_dev"
+    },
+    {
+      "name": "final-baseline-P-F-3e67e82c8036",
+      "exit_code": 255,
+      "gpu_hours": 0.175,
+      "category": "evaluation_final"
+    },
+    {
+      "name": "dev-W110-teacher-S2-b615795bf6d4",
+      "exit_code": 1,
+      "gpu_hours": 0.004196374534448195,
+      "category": "evaluation_dev"
+    },
+    {
+      "name": "dev-W120-P-F-f3027e5e14cd",
+      "exit_code": 1,
+      "gpu_hours": 0.0047343088711042786,
+      "category": "evaluation_dev"
+    },
+    {
+      "name": "static-final-baseline-h200-17314",
+      "exit_code": 1,
+      "gpu_hours": 0.005856918043347024,
+      "category": "static_data"
+    },
+    {
+      "name": "final-baseline-teacher-F-6b637b48308c",
+      "exit_code": 255,
+      "gpu_hours": 0.175,
+      "category": "evaluation_final"
+    },
+    {
+      "name": "static-confirm-baseline-h200-17314",
+      "exit_code": 1,
+      "gpu_hours": 0.005488319341966416,
+      "category": "static_data"
+    },
+    {
+      "name": "dev-baseline-teacher-F-833357c091ac",
+      "exit_code": 1,
+      "gpu_hours": 0.004522197066107765,
+      "category": "evaluation_dev"
+    },
+    {
+      "name": "dev-baseline-P-F-eeb69a04ecc5",
+      "exit_code": 1,
+      "gpu_hours": 0.004084205356129031,
+      "category": "evaluation_dev"
+    },
+    {
+      "name": "final-W120-teacher-F-18b0abc6d11d",
+      "exit_code": 255,
+      "gpu_hours": 0.175,
+      "category": "evaluation_final"
+    },
+    {
+      "name": "final-W120-C-F-6e0b89a2f949",
+      "exit_code": 255,
+      "gpu_hours": 0.175,
+      "category": "evaluation_final"
+    },
+    {
+      "name": "dev-W120-teacher-S5-86768b51a7f1",
+      "exit_code": 1,
+      "gpu_hours": 0.004423784707226635,
+      "category": "evaluation_dev"
+    },
+    {
+      "name": "final-W120-G-F-97e271dc828b",
+      "exit_code": 255,
+      "gpu_hours": 0.175,
+      "category": "evaluation_final"
+    },
+    {
+      "name": "dev-W110-teacher-S5-a2d8ae43aa8f",
+      "exit_code": 1,
+      "gpu_hours": 0.004173525819432042,
+      "category": "evaluation_dev"
+    },
+    {
+      "name": "dev-W120-P-S5-f69334757d99",
+      "exit_code": 1,
+      "gpu_hours": 0.004993922191659092,
+      "category": "evaluation_dev"
+    },
+    {
+      "name": "dev-baseline-teacher-S5-dd16389fe40b",
+      "exit_code": 1,
+      "gpu_hours": 0.004436576184719646,
+      "category": "evaluation_dev"
+    },
+    {
+      "name": "dev-W110-teacher-F-1da49b22d809",
+      "exit_code": 1,
+      "gpu_hours": 0.005019832073335743,
+      "category": "evaluation_dev"
+    },
+    {
+      "name": "dev-W110-P-S2-1e723ba275f0",
+      "exit_code": 1,
+      "gpu_hours": 0.005103707995278657,
+      "category": "evaluation_dev"
+    },
+    {
+      "name": "dev-W120-P-S2-250611da72e6",
+      "exit_code": 1,
+      "gpu_hours": 0.005042481953633897,
+      "category": "evaluation_dev"
+    },
+    {
+      "name": "multiasset-reset-step-rtx4090",
+      "exit_code": -11,
+      "gpu_hours": 0.0010801696719459465,
+      "category": "precheck"
+    },
+    {
+      "name": "dev-W120-teacher-S2-dd7d8c420130",
+      "exit_code": 1,
+      "gpu_hours": 0.0038124685980599478,
+      "category": "evaluation_dev"
+    },
+    {
+      "name": "final-W120-C_endpoint-F-3005c0892388",
+      "exit_code": 255,
+      "gpu_hours": 0.175,
+      "category": "evaluation_final"
+    },
+    {
+      "name": "final-W120-P-F-d9c3f3b7ae4d",
+      "exit_code": 255,
+      "gpu_hours": 0.175,
+      "category": "evaluation_final"
+    },
+    {
+      "name": "dev-baseline-P-S5-beb2c6ee8907",
+      "exit_code": 1,
+      "gpu_hours": 0.004811268618860696,
+      "category": "evaluation_dev"
+    },
+    {
+      "name": "dev-W110-P-F-607a1d8eb058",
+      "exit_code": 1,
+      "gpu_hours": 0.004644971465847144,
+      "category": "evaluation_dev"
+    }
+  ],
+  "formal_updates": 12800,
+  "formal_transitions": 13107200,
+  "discarded_updates": 68,
+  "discarded_transitions": 69632,
+  "wall_seconds_since_goal_start": 14488.130171,
+  "gpu_job_span_seconds": 13308.880469,
+  "utilization": {
+    "first_observed_utc": "2026-10-02T08:20:33.165700+00:00",
+    "last_observed_utc": "2026-10-02T10:09:33.950365+00:00",
+    "valid_samples": 212,
+    "covered_seconds": 6540.784664999999,
+    "observed_time_weighted_whole_machine_mean_pct": 43.249356142731244,
+    "four_hour_window_end_utc": "2026-10-02T10:09:33.950365+00:00",
+    "last_four_hours_observed_seconds": 6540.784664999999,
+    "last_four_hours_unobserved_assumed_zero_estimate_pct": 19.644772599270837,
+    "method": "30s NVML snapshots, trapezoidal estimate only for adjacent gaps<=90s; unobserved gaps countzero in four-hour estimate. This is not the Ska service utilization telemetry or a continuous measurement certificate.",
+    "threshold_pct": 26,
+    "target_pct": 40
+  }
+}

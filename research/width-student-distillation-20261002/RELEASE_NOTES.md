@@ -1,0 +1,19 @@
+# Wuji宽度student：两优化随机流训练/独立确认，final中断待续
+
+本版本交付实际完成的训练、开发、确认、视频与原始证据，**不是完整Goal最终结果**。最终矩阵冻结后8个运行中SSH同时被remotehost关闭（2026-10-02约10:10UTC），17314端点两次重连认证前超时。0个最终任务计入有效统计，8个execution收据待对账、82个未启动；未见W115/组合几何的policy结果仍缺失。端点恢复后按同一freeze续接，不重训或重选模型。
+
+C/G各3200更新的配对试验完成两组新优化seed（均从同一SA51200完整恢复），共12,800真实Adam更新、13,107,200新transition，12个完整encoder/Adam/RNGcheckpoint；不是从零独立训练。所有126dev+54confirmation任务的原始轨迹已独立复算（29,880相关episode，不能算作29,880独立初态）。
+
+confirmation的W120来源3F联合成功：P0/61、同800更新C3/61、G56/61；固定3200终点C53/61、G55/61。加宽训练加速早期学习，C后来追上；G3200 baseline来源1为39/64、P61/64，出现确认遗忘。第二seed的3200新dev W120来源3为C29/G21（各32），baseline来源1为C29/G15（各32），也不支持盲目延长G。严格S2/S5精度没有同等提升。主候选在final前按baseline保留优先冻结为C3200，仍保留早期和固定终点对照。
+
+[完整当前报告](https://github.com/Jr-kelly/artgym/blob/feat/wuji-width-student-distillation-20261002/research/width-student-distillation-20261002/FINAL_REPORT.md) · [恢复/续接命令](https://github.com/Jr-kelly/artgym/blob/feat/wuji-width-student-distillation-20261002/research/width-student-distillation-20261002/REPRODUCE.md)
+
+[W120六模型40秒对比](https://github.com/Jr-kelly/artgym/releases/download/wuji-width-student-distillation-20261002-v1/W120-six-model-comparison.mp4) · [baseline对比](https://github.com/Jr-kelly/artgym/releases/download/wuji-width-student-distillation-20261002-v1/baseline-six-model-comparison.mp4) · [学习曲线](https://github.com/Jr-kelly/artgym/releases/download/wuji-width-student-distillation-20261002-v1/two-seed-dev-learning.png)
+
+12段预登记首新dev来源3状态的RTX4090单环境真实渲染，全部失败保留，与H200主统计分开。短片结束后仅保持末帧，显著红字ENDED；主C3200的W120单状态演示也失败于23.7s，未选成功状态替换。没有真机或sim2real认证。
+
+23个资产共约7.19GB：两个配对窗口的全部模型/optimizer/RNG，分几何rawdev/confirmation、六个H200seen静态cohort、全部分析CSV/JSON与图、12段视频/独立sourceoverrides、255份实际作业账本/失败及中断收据。所有服务器SHA256已逐一核对；主checkpoint/newcohort关键64文件恢复和实际Adam54400/RNG验证通过。父模型和新初态资产复用[旧几何父模型包](https://github.com/Jr-kelly/artgym/releases/download/wuji-geometry-generalization-20261002-v1/geometry-frozen-parent-models.tar.gz)及[准备版本](https://github.com/Jr-kelly/artgym/releases/tag/wuji-width-student-distillation-20261002-preparation-v1)，旧Release全部保留，旧final数组关闭。
+
+已确认原累计40.43593222+本轮9.06314999=49.49908221GPUh；8个远端未知作业暂按600+30秒计1.4GPUh，账本暂计50.89908221/64，保守剩余13.10091779。不是精确远端最终实耗。NVML实际109分钟均值43.25%，未观测时段按0的四小时估计19.64%，未证实达到26%门槛；无法确认是否因利用率停机。本轮本地GPU/监控已清理，ToDesk及其他任务保留，远端未知终止状态待恢复对账。
+
+当前唯一必要下一步是恢复授权H200连接并完成冻结final；研究后续首要问题是严格定时到位精度保留，先作单变量失败时序/同incomingRNN执行目标误差诊断。

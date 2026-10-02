@@ -1,40 +1,85 @@
-Current authorized port is17314 (user updated the connection after the documented33024 timeout). Existing remote runtime `/home/wangjiarui/artgym-runtime/bin/python` was verified and reused. Current source contract permits only the updated authorized endpoint. Set authentication privately as before. Same-H200 zero-change/disposable/fresh teacher checks passed; resume current active receipts, not a duplicate formal trial. Current parent/teacher dev queue is v7; v6 failed the missing constructor fallback dependency and is preserved.
+# Restore completed science and resume the frozen final
 
-# Resume the prepared width experiment
+Current authorized endpoint `ssh -p 17314 wangjiarui@10.13.160.5` connected and ran the two paired experiments, but all eight final SSH sessions closed at about2026-10-02T10:10UTC; a10:12:42UTC reconnect timed out before authentication. This endpoint is currently unavailable. Authentication stays in the operator's private environment. Do not probe historical ports or serialize private SSH arguments.
 
-This is a prepared, unfinished experiment. H200 training and final policy evaluation have not run. The static preparation packet is separate from the prior closed geometry/student final datasets. Never substitute historical finals for new training or selection data.
+Two optimization streams are complete: C1/G1 seed2026100215 and C2/G2 seed2026100216, each arm51200→54400, saving52000/52800/54400,12,800total updates. All126dev and54confirmation runs are independently rescored. Final is **opened, frozen and unfinished**:8unknown execution receipts,82pending tasks,0counted final runs. The native Goal is not complete. Never rerun training or choose models based on a final retry.
 
-Clone `feat/wuji-width-student-distillation-20261002`. Download `width-prepared-data-and-static-evidence-v1.tar.gz` from the independent preparation Release `wuji-width-student-distillation-20261002-preparation-v1` (SHA256 `e5d3676ea821ab46ed532607c4c8f640fb8931ff5bc9184d4c69d63120c563ac`). Restore it with `python3 -m scripts.restore_wuji_unified PACKET.tar.gz --output .`. Its161files were hash-verified in a fresh restore. The separate job-source-overrides archive preserves the exact versions that actually ran; reconstruct overrides over public base8968914 and verify its manifest. Reuse `geometry-frozen-parent-models.tar.gz` from the preserved [geometry Release](https://github.com/Jr-kelly/artgym/releases/tag/wuji-geometry-generalization-20261002-v1), SHA256 `5c5a1a91db8807473beccdc3f1f990036d4f5f036ef153b222e3c3825bb3e612`. The exact model hashes are in STATE and PARENT_AUDIT. Restore only required models; do not load old final arrays. Licensed IsaacGym/TacSL and a compatible configured runtime are not redistributed.
+## Minimal restore
 
-Authentication must remain in the operator's private environment. Set `WUJI_WIDTH_SSH_ARGV` to the JSON array for the provided SSH endpoint using existing authentication. Never add its value to Git, reports or stdout. The controller verifies the currently authorized username/endpoint/port and does not probe other hosts.
+Clone the published branch `feat/wuji-width-student-distillation-20261002`. A licensed, configured IsaacGym/TacSL runtime is required and is not redistributed. The actual H200 runtime was Python3.8.20/PyTorch2.1.0+cu118, NumPy1.23.5, IsaacGym-TacSL, driver570.133.20. Existing runtime `/home/wangjiarui/artgym-runtime/bin/python` was reused. Import IsaacGym before Torch in physical commands; CPU-only checkpoint audits need no Gym import.
+
+Restore `width-prepared-data-and-static-evidence-v1.tar.gz` from preserved preparation Release `wuji-width-student-distillation-20261002-preparation-v1`, SHAe5d3676ea821ab46ed532607c4c8f640fb8931ff5bc9184d4c69d63120c563ac. It contains new split states, assets, caches, accepted training/dev/unseen-static pools and sampler manifests. Restore `geometry-frozen-parent-models.tar.gz` from the old geometry Release, SHA5c5a1a91db8807473beccdc3f1f990036d4f5f036ef153b222e3c3825bb3e612; use only its two frozen parent files. Do not load any old final array.
+
+From this research Release restore both `width-pair1-full-checkpoints-v1.tar.gz` and `width-pair2-full-checkpoints-v1.tar.gz`, plus `width-new-h200-static-and-video-states-v1.tar.gz`. The latter contains the accepted v2 H200seen confirmation/final pools; use STATIC_ACCEPTANCE_MANIFEST.json rather than historical incomplete static folders. Model/data packet receipts and the server digest index identify exact archives.
 
 ```bash
-python3 -m scripts.inventory_wuji_width_remote \
-  --output research/width-student-distillation-20261002/remote-inventory-restored.json
+python3 -m scripts.restore_wuji_unified PACKET.tar.gz --output RESTORE_ROOT
 ```
 
-Read the returned remote AGENTS, active identities/executions, device inventory and runtime facts before launch. Reconcile changed cumulative cost or interrupted jobs first. If a new machine lacks the old runtime, restore only compatible required dependencies. Local scientific commands used Python3.8/PyTorch2.1+cu118/IsaacGym TacSL; a remote runtime is still unverified. Import IsaacGym before Torch. Transfer current `scripts`, `isaacgymenvs`, `rl_games`, assets/caches, this research directory and required `research/multigrasp-20260928/data/candidates.npy` into `/tmp/artgym-width-20261002/source`; include the unchanged baseline physics JSON under its old research path. Place frozen parents under `/tmp/artgym-width-20261002/runs` at their original relative paths. Source pins link to this shared runs directory. Do not overwrite an existing width workspace/job; inspect and resume it.
+This command checks every member SHA and refuses conflicting content. The critical firstpair models+H200states restore verified64files, actual mainC Adam54400/RNG and474W120final states; see CRITICAL_RESTORE_AUDIT.json. Additional large raw packets are optional for recomputing published results, not prerequisites for model inference.
 
-Prechecks are separate finite processes, each bound to an actually idle GPU. Launcher options precede the job name:
+Parents remain:
+
+- Teacher `runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth`, SHA2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8.
+- P `runs/unified-student-20261001/SA-real-51200/step_051200.pth`, SHA16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9.
+- MainC `runs/width-student-distillation-20261002/C1-window1-h200-17314/step_054400.pth`, SHAb537578fc1123a6c3bad0358d8aa122b0c9c97bd970f98984960f685fa787a2f.
+
+All six final model paths and all five cohort/asset/source hashes are immutable in final-freeze.json. Do not replace the mainC or G800 with a more favorable later model.
+
+## Recompute completed statistics
+
+Use the configured CPU environment with `PYTHONPATH=.:rl_games`, `CUDA_VISIBLE_DEVICES=''`, OMP/MKLthreads2. Restore the geometry-partitioned firstpair dev/confirmation and secondpair dev archives plus `width-completed-analysis-v1.tar.gz`.
 
 ```bash
-python3 -m scripts.wuji_width_jobs --gpu 0 --seconds 180 h200-C-input \
-  -- PYTHON -m scripts.precheck_wuji_width_environment --backend H200 --arm C \
-  --actor-parity --output runs/width-student-distillation-20261002/precheck/h200-C
+python -m scripts.analyze_wuji_width \
+  --manifest research/width-student-distillation-20261002/COMPLETE_CONFIRM_MANIFEST.json \
+  --output NEW_CONFIRM_ANALYSIS
 ```
 
-Run corresponding G input check on another idle H200. Check zero-change C versus the original baseline path with identical registered reset states/public inputs. Use only fresh dev for tiny baseline/W120 teacher from-reset behavior checks. Neither local input checks nor historical two-second interventions satisfy these actual H200 prechecks.
-
-For each arm use a disposable clean-parent training process with endpoint51216, save51216 and fresh optimization seed2026100215. This performs16 real Adam updates/16384 transitions. Verify only the student changed, actor/teacher/normalizers remained frozen, teacher fraction0, executed-target/RNN assertions passed, restored Adam parameters were correct, and optimizer/RNG can resume the discarded copy. The disposable file is never a formal starting candidate. Measure complete loop wall time from learning/complete receipts, including teacher labels, physics and backward; separately account initialization/save/launcher allocation. Register the first matched-window endpoint/timeout and costs before starting formal training. Reduce both arms equally only if measured costs cannot fit both arms, dev and6GPUh reserve.
-
-Formal C and G both reload untouched SA51200. Each has its own output directory. Example C (G changes `--width-arm`, manifest and output only):
+Other exact manifests are WINDOW1_COMPLETE_DEV_MANIFEST.json and REPEAT52000/52800/54400_DEV_MANIFEST.json. Each repeat checkpoint gets its own analysis: rolesC/G must not pool checkpoints. Source states are reused across models/protocols; bootstrap/Wilson episode intervals do not certify optimization-seed reproducibility. Analysis verifies source/model/cohort/selection/trace receipts and recalculates drift/rotation, phases, F cycles and S2/S5 strict endpoints.
 
 ```bash
-python3 -m scripts.wuji_width_jobs --gpu 0 --seconds REGISTERED_TIMEOUT C1-window1 \
-  -- PYTHON -m scripts.train_wuji_unified_student \
+python research/width-student-distillation-20261002/audit_full_checkpoints.py \
+  --pair 1 --output NEW_PAIR1_AUDIT.json
+```
+
+Repeat withpair2 only if verifying restored copies. It reads actual Adam steps, moments, LR, frozen hashes, counters, RNG and geometry/source sampling; no GPU optimization or old recovery reruns.
+
+## Recover the interrupted final without duplicating work
+
+First recover the authorized endpoint or receive a new explicitly authorized endpoint. Re-inventory live GPUs/runtime/user tasks. Check the8names in STATE.unreconciled_remote_jobs and their surviving remote `runs/width-student-distillation-20261002/jobs/NAME/execution.json` receipts. A transport failure is not evidence the child stopped. Each has a finite600s timeout plus30s termination grace. The current ledger charges1.4GPUh across8unknown jobs pending reconciliation; never erase those charges just because SSH failed.
+
+If a job really finished, retrieve its exact output/receipt, verify frozen hashes and only then mark its queue task complete. If it terminated incompletely, preserve old output/identity/log and register a bounded retry in a new output directory with the identical scientific identity, model, cohort, batch size, source assets and protocol. Count exactly one completed result per scientific identity. Do not simply reset all90tasks to pending or overwrite old results. Preserve final_opened=true and final-freeze.json byte-for-byte.
+
+If the instance and/tmp are gone, restore prepared files/parents/checkpoints/assets/caches into a new independent source/runs staging layout. SourceA02749e10 exactly matches firstpair optimization; sourceBdba402c2 exactly matches secondpair and confirmation/final, and differs only in staticconstructor and queue mapping. All actual training/task/controller/evaluator files match. Recreate the exact sourceB for final. Any necessary new-endpoint launcher routing change must be documented separately without changing scientific inference files or frozen model/data/thresholds. Do not reuse discarded precheck checkpoints.
+
+Only launch on verified idle H200 devices, atmost8GPUs acrossallmachines. No further training is allowed now final is open. Completed12videos require no new GPUrender. Use surviving complete tasks and claim only still-missing identities from a newly versioned finite queue. Read current STATE and receipts before launching; remaining budget is conservatively13.10091779GPUh pending those8receipts, original cumulativecap64unchanged. Use finite timeouts based on actual512batch throughput, with no batch/shard change after final opening.
+
+A direct scientific evaluation example, after restoring the unchanged freeze and runtime:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 python -m scripts.evaluate_wuji_geometry \
+  --research-dir research/width-student-distillation-20261002 \
+  --label W120 \
+  --states runs/width-student-distillation-20261002/static/W120-final-v2/valid-states.npy \
+  --model student --protocol F \
+  --student-checkpoint runs/width-student-distillation-20261002/C1-window1-h200-17314/step_054400.pth \
+  --output NEW_UNIQUE_FROZEN_FINAL_OUTPUT
+```
+
+For actual Goal execution use the finite launcher/receipts and account allocation rather than the unbounded shell example. JSONauthenticationargv is injected only privately as WUJI_WIDTH_SSH_ARGV. The checked-in dispatcher currently validates the user-authorized17314endpoint.
+
+Once all90registered final identities finish, run collect_registered_queues.py with the reconciled versioned queue, independently rescore, update final_evaluation_complete=true, then make_research_figures.py --final and write_final_report.py. Do not invoke the latter while final is incomplete. Regenerate the exact resource table after receipt reconciliation. Restore/upload only new completed evidence assets; preserve all old Release assets. Publish final results without changing candidate selection or training.
+
+## Historical training command (reproduction only, not an authorized restart)
+
+Each formal job used the existing trainer, not a separate system:
+
+```bash
+python -m scripts.train_wuji_unified_student \
   --teacher runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth \
   --resume runs/unified-student-20261001/SA-real-51200/step_051200.pth \
-  --output runs/width-student-distillation-20261002/C1-window1 \
+  --output NEW_REPRODUCTION_DIRECTORY \
   --kind SC --controller-mode real --envs 256 --rollout-steps 4 \
   --width-arm C \
   --width-training-manifest research/width-student-distillation-20261002/data/C-training.json \
@@ -43,36 +88,4 @@ python3 -m scripts.wuji_width_jobs --gpu 0 --seconds REGISTERED_TIMEOUT C1-windo
   --lr .0003 --warm-updates 400 --target-loss-weight 25 --target-loss-scale .04
 ```
 
-For an authorized later window resume each arm's own atomic checkpoint, use a new output/job directory and **omit** `--fresh-optimization-seed`. Restore its own sampler counters/RNG, absolute step and Adam. Episode reset is explicit; no PhysX bitwise continuation claim. Never pass `--updates 3200` as an added budget.
-
-The finite dev queue builder validates atomic published checkpoint hashes and fixed cohort/batch identities. Rebuild a new queue version if source changes before launch; retain previous versions as unexecuted records. Prior prepared queues can contain an earlier source digest and must not be run unchanged after code edits.
-
-```bash
-python3 -m scripts.wuji_width_queue build --phase dev \
-  --models P=runs/unified-student-20261001/SA-real-51200/step_051200.pth \
-    teacher=runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth \
-  --output research/width-student-distillation-20261002/queues/dev-current-source.json
-python3 -m scripts.wuji_width_queue run \
-  --queue research/width-student-distillation-20261002/queues/dev-current-source.json \
-  --gpus VERIFIED_IDLE_GPU_INDICES
-```
-
-Run C/G training on two devices and P/teacher/checkpoint dev on the remaining verified idle devices, up to8 total including local rendering. GPU numbering is logical until inventory. No DDP/env expansion; no user-job preemption. Queue completion does not authorize crossing a training-window boundary: apply GOAL section6 behavioral and budget rules first. Prioritize W120source3 F joint success, baseline preservation and widthsource2 regression; assess adjacent saved checkpoints. Do not use loss as behavior evidence.
-
-After selecting on new dev/eligible confirmation, write `final-freeze.json` with registered `state_sha256` and `model_sha256` lists, chosen G and equal-update C, teacher/P, selection rule and immutable source/asset/plan hashes. Opening final before this fails the evaluator guard. The final matrix and counts must also be frozen before policy access. Retain one final opening; do not choose another model or repair data afterward.
-
-`analyze_wuji_width --manifest RUN_MANIFEST --output NEW_ANALYSIS` independently reuses the original trace scorer, validates each model/cohort/selection/trace SHA and duplicate identities, computes functional/holding/joint Wilson intervals and paired four cells, and splits F first/last20seconds. Its required run manifest supplies `teacher_sha256`, `historical_final_access:false`, and each completed run's directory, selection path/SHA, model role/SHA, geometry, protocol, state SHA and trace SHA. Do not create a success report for an empty queue. Rows of multiple protocols/checkpoints are correlated episodes, not new independent initial states.
-
-Videos remain pending until actual C/G candidates exist. Use first accepted new-dev source3 states for baseline/W120, same initial state for P/C/G/teacher, retain failures and label all results. RTX4090 videos are separate rendered resimulations, never H200 statistics or hardware validation. Reuse the existing renderer/package/temporal reset-step interface; preserve known H200-to-CPU parity limitations.
-
-All own jobs have timeout, immutable pin, source/model/asset/cohort identities and start/end GPU allocation receipts. New executions save surviving runner/child PID receipts. Lost SSH transport sets unknown status and conservatively reserves the whole timeout; reconcile actual remote receipt before more launches. No owned process or monitor is currently active. ToDesk and unrelated jobs remain intact.
-
-Local follow-up evidence is additive: `width-local-precheck-and-disposable-updates-v1.tar.gz` restores only the new fixed-state traces, four discarded checkpoints, six job receipts and immutable audits. It has the standard release-manifest format and must pass the same restore command in a fresh directory. `width-local-precheck-job-source-overrides-v1.tar.gz` separately preserves the exact source pins for these six jobs; its receipt is SOURCE_PINS_LOCAL_PRECHECK.json. It does not replace the original preparation packet/source-pins archive. Discarded checkpoints are not research candidates.
-
-Zero-change precheck: generate a new fixed fixture with `precheck_wuji_width_zero_change fixture --output NEW_FIXTURE`; launch `capture --path original` and `capture --path multiasset` in **separate** finite processes, passing identical `--fixture`, `--backend H200`, and distinct `--output` paths. Invoke `compare --original ORIGINAL_OUTPUT --multiasset MULTIASSET_OUTPUT --output NEW_AUDIT`. Bind each capture to a verified idle H200 through the launcher. The published RTX fixture is256 fresh accepted baseline training states; do not substitute oldfinal states. A4090 numerical pass does not replace this H200 check.
-
-The local launcher permits only explicitly bounded `--local --disposable-precheck` width optimizer checks, endpoint51216 from the common parent/fresh seed2026100215, or51217 from its own discarded51216 checkpoint without a fresh seed. Formal local optimization remains disabled. The actual local checks passed34 updates and own-checkpoint resume. Avoid repeating them onRTX; measure H200 full-loop throughput in the required same-backend precheck before registering the formal budget. Four discarded weights must never enter a formal dev/final queue or become a training starting point.
-
-Current prepared finite queue is `queues/parent-teacher-dev-source-v5.json`; v1-v4 are retained unexecuted and have earlier source digests. Source changes require a new version. All currently owned jobs have finished; recheck live receipts and allocation independently on the remote before assuming idle GPUs.
-
-Follow-up packet SHA256: `0ed35dc8798ecfa21c67055ff6397e305bd6e5128db0e7dfd00e8a5ee2b32b3f` (71files). Follow-up source-pins archive SHA256: `ff7e6693a2bf4a93cd296bdd965f4779ad7433735142c7636b908853d93780f5`. Server digests were verified; original two preparation assets remain unchanged.
+G changes only arm/manifest/output; seed2026100216 identifies the secondcleanparent pair. Own-checkpoint continuation omits freshseed and resets the simulator episode explicitly; it is not bitwise PhysX continuation. No main continuation beyond54400 occurred. No DDP/env×8/LR/loss/horizon change.
