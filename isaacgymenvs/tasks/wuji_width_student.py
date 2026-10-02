@@ -7,17 +7,17 @@ import numpy as np
 import torch
 from .wuji_geometry import WujiGeometry
 from .wuji_variable_timed_acquisition import WujiVariableTimedAcquisition
-from scripts.wuji_width_contract import ROUND, sha, slots
+from scripts.wuji_width_contract import ROUND, sha, slots, real_size_slots
 
 
 class WujiWidthStudent(WujiGeometry):
     def __init__(self, cfg, *args, **kwargs):
         root = Path(__file__).resolve().parents[2]
-        self.width_slots = slots(cfg['env']['widthArm'])
+        self.width_slots = (real_size_slots if cfg['env'].get('realSizeAdaptation',False) else slots)(cfg['env']['widthArm'])
         assert int(cfg['env']['numEnvs']) == 256
         manifest_path = root / cfg['env']['widthTrainingManifest']
         self.width_manifest = json.loads(manifest_path.read_text())
-        assert self.width_manifest['round'] == ROUND
+        assert self.width_manifest['round'] == ('real-size-student-adaptation-20261002' if cfg['env'].get('realSizeAdaptation',False) else ROUND)
         assert self.width_manifest['statically_validated'] is True
         assert self.width_manifest['arm'] == cfg['env']['widthArm']
         assert self.width_manifest['slots'] == self.width_slots

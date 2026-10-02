@@ -1,0 +1,29 @@
+{
+  "utc": "2026-10-02T16:01:12.472649+00:00",
+  "selected": "R800",
+  "same_budget_control": "C800",
+  "models": {
+    "parent": {
+      "path": "runs/width-student-distillation-20261002/C1-window1-h200-17314/step_054400.pth",
+      "sha256": "b537578fc1123a6c3bad0358d8aa122b0c9c97bd970f98984960f685fa787a2f"
+    },
+    "C800": {
+      "path": "runs/real-size-student-adaptation-20261002/train/C800/step_055200.pth",
+      "sha256": "3fe5b2ea2cddc2f0e895cea8288d177675ce636940290a44c2327b89b5f198de"
+    },
+    "R800": {
+      "path": "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth",
+      "sha256": "bbf61592721300b1cf053de8246898a69989ed102b7a034da6fb47cc9a541dcd"
+    }
+  },
+  "asset_manifest_sha256": "3b88f1326734f090fb7104275e0d67e9b4e541383be63d86358de026073a5e85",
+  "source_sha256": "03a9d0e43948c53aa2b44d3a4b9a3f42795cd5131587246948c116aa2c4d82b6",
+  "states": "runs/real-size-student-adaptation-20261002/static/confirm/valid-states.npy",
+  "states_sha256": "d925cedd1c8f8b4c75b387369ba59f8b959987d0c2022d4aa6a3669888eaf479",
+  "n": 32,
+  "source": 3,
+  "protocol": "20s fixed5s directions, K20 ordered2mm3points and full10mm/.25rad stability; S5same trace9points",
+  "reason": "R80013/16K20 and14/16stable, teacher12/16and14/16; C8000/16. Evidence enough; no need train another window. R original-sizeS5cost11/16vsparent13/16 disclosed.",
+  "new_training_updates": 1600,
+  "second_window": false
+}

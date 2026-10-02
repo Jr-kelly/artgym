@@ -1,0 +1,24 @@
+{
+  "gpus": [
+    2
+  ],
+  "tasks": [
+    {
+      "name": "dev-baseline-parent",
+      "seconds": 240,
+      "output": "runs/real-size-student-adaptation-20261002/dev/baseline-parent",
+      "command": [
+        "scripts.evaluate_wuji_real_size",
+        "--states",
+        "runs/real-size-student-adaptation-20261002/static/retention/valid-states.npy",
+        "--object",
+        "knife_wuji_width_baseline_20261002",
+        "--geometry-round",
+        "width-student-distillation-20261002",
+        "--output",
+        "runs/real-size-student-adaptation-20261002/dev/baseline-parent"
+      ]
+    }
+  ],
+  "decision": "Keep parent retention comparator while formal training runs"
+}

@@ -1,0 +1,65 @@
+{
+  "tasks": [
+    {
+      "name": "static-dev",
+      "output": "runs/real-size-student-adaptation-20261002/static/dev",
+      "seconds": 240,
+      "command": [
+        "scripts.static_wuji_press",
+        "--label",
+        "real",
+        "--split",
+        "dev-attempts",
+        "--take",
+        "16",
+        "--sources",
+        "3",
+        "--research-dir",
+        "research/real-size-student-adaptation-20261002",
+        "--output",
+        "runs/real-size-student-adaptation-20261002/static/dev"
+      ]
+    },
+    {
+      "name": "static-train",
+      "output": "runs/real-size-student-adaptation-20261002/static/train",
+      "seconds": 400,
+      "command": [
+        "scripts.static_wuji_press",
+        "--label",
+        "real",
+        "--split",
+        "train-attempts",
+        "--take",
+        "256",
+        "--sources",
+        "3",
+        "--research-dir",
+        "research/real-size-student-adaptation-20261002",
+        "--output",
+        "runs/real-size-student-adaptation-20261002/static/train"
+      ]
+    },
+    {
+      "name": "static-confirm",
+      "output": "runs/real-size-student-adaptation-20261002/static/confirm",
+      "seconds": 240,
+      "command": [
+        "scripts.static_wuji_press",
+        "--label",
+        "real",
+        "--split",
+        "confirm-attempts",
+        "--take",
+        "32",
+        "--sources",
+        "3",
+        "--research-dir",
+        "research/real-size-student-adaptation-20261002",
+        "--output",
+        "runs/real-size-student-adaptation-20261002/static/confirm"
+      ]
+    }
+  ],
+  "decision": "Inspect static acceptance then evaluate new dev teacher/parent; no confirmation policy access"
+}

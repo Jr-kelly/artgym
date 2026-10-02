@@ -40,7 +40,7 @@ def interface_check(player,env,obs,encoder):
 def main():
  p=argparse.ArgumentParser();p.add_argument('--teacher',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
  p.add_argument('--kind',choices=['C0','C1','S0','SC'],required=True);p.add_argument('--updates',type=int,default=3200);p.add_argument('--envs',type=int,default=256);p.add_argument('--rollout-steps',type=int,default=4);p.add_argument('--seed',type=int,default=61001);p.add_argument('--resume',type=Path);p.add_argument('--warm-updates',type=int,default=400);p.add_argument('--save-at',type=int,nargs='+',default=[16,400,800,1600,3200,6400,12800]);p.add_argument('--lr',type=float,default=.0003);p.add_argument('--controller-mode',choices=['real','masked'],default='real');p.add_argument('--target-loss-weight',type=float,default=0.);p.add_argument('--target-loss-scale',type=float,default=.04)
- p.add_argument('--width-arm',choices=['C','G']);p.add_argument('--width-training-manifest',type=Path);p.add_argument('--fresh-optimization-seed',type=int)
+ p.add_argument('--real-size-adaptation',action='store_true');p.add_argument('--width-arm',choices=['C','G']);p.add_argument('--width-training-manifest',type=Path);p.add_argument('--fresh-optimization-seed',type=int)
  a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
  assert a.envs%4==0
  assert a.target_loss_weight>=0 and a.target_loss_scale>0
@@ -52,6 +52,9 @@ def main():
   assert a.resume and a.width_training_manifest
   task='wuji_width_student';overrides[0]='object=knife_wuji_width_train_20261002'
   overrides+=['task.env.widthArm='+a.width_arm,'task.env.widthTrainingManifest='+str(a.width_training_manifest)]
+  if a.real_size_adaptation:
+   overrides[0]='object=knife_wuji_real_size_train_20261002'
+   overrides+=['+task.env.realSizeAdaptation=True']
  cfg=configuration(task,a.envs,overrides,train='wujiAcquisitionSAPG',seed=a.seed)
  (a.output/'config.yaml').write_text(OmegaConf.to_yaml(cfg,resolve=True))
  env,player=make_player(cfg,a.teacher);net=player.model.a2c_network
@@ -101,8 +104,8 @@ def main():
   if a.fresh_optimization_seed is not None:
    # The checkpoint RNG must be restored first. This is a new experiment,
    # explicitly reseeded once; continuations of this experiment never reseed.
-   assert start_update==51200
-   assert hashlib.sha256(a.resume.read_bytes()).hexdigest()=='16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9'
+   assert start_update==(54400 if a.real_size_adaptation else 51200)
+   assert hashlib.sha256(a.resume.read_bytes()).hexdigest()==('b537578fc1123a6c3bad0358d8aa122b0c9c97bd970f98984960f685fa787a2f' if a.real_size_adaptation else '16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9')
    seed=a.fresh_optimization_seed
    torch.manual_seed(seed);torch.cuda.manual_seed_all(seed);np.random.seed(seed);random.seed(seed)
    torch.save(rng(),a.output/'fresh-optimization-rng.pth')

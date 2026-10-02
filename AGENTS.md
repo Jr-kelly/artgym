@@ -1,3 +1,2 @@
-# Wuji real knife press experiment
-
-Read WUJI_GOAL_HANDOFF.md and research/real-knife-press-resistance-20261002/{GOAL.md,STATE.json,HANDOFF.md}. No subagents. New goal supersedes completed width followup. Keep old finals closed, preserve original workspaces and user processes. Use scripts.record_wuji_press_goal for actual experiments/changes/findings. Historical cumulative54.640988924736625GPUh; round cap4.5,total64, reserve6beforefreeze. Useful work only. No hardware. No extra broad audits or scans.
+# Wuji real-size student adaptation
+Read WUJI_GOAL_HANDOFF.md and research/real-size-student-adaptation-20261002/{GOAL.md,STATE.json,HANDOFF.md}. No subagents. Keep old results/finals and workspaces unchanged. Use scripts.record_wuji_real_size_goal. Historical55.37347835334391GPUh; beforefreeze2.5, after1,total3.5 and cumulative64, reserve6beforefreeze. Only useful work. Authorized33024 has4H200 observed at start; no hardware.

@@ -1,0 +1,26 @@
+{
+  "reserved_phase": "confirm",
+  "tasks": [
+    {
+      "name": "static-diagnostic",
+      "seconds": 240,
+      "output": "runs/real-size-student-adaptation-20261002/static/diagnostic",
+      "command": [
+        "scripts.static_wuji_press",
+        "--label",
+        "real",
+        "--split",
+        "diagnostic-attempts",
+        "--take",
+        "4",
+        "--sources",
+        "3",
+        "--research-dir",
+        "research/real-size-student-adaptation-20261002",
+        "--output",
+        "runs/real-size-student-adaptation-20261002/static/diagnostic"
+      ]
+    }
+  ],
+  "decision": "Only4 fresh states: R zero load,0.05N cap,and same cap plus0.5mm bias; diagnostic only"
+}

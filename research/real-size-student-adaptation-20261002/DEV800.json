@@ -1,0 +1,69 @@
+{
+  "tasks": [
+    {
+      "name": "dev-real-C800",
+      "output": "runs/real-size-student-adaptation-20261002/dev/real-C800",
+      "seconds": 240,
+      "command": [
+        "scripts.evaluate_wuji_real_size",
+        "--student-checkpoint",
+        "runs/real-size-student-adaptation-20261002/train/C800/step_055200.pth",
+        "--states",
+        "runs/real-size-student-adaptation-20261002/static/dev/valid-states.npy",
+        "--output",
+        "runs/real-size-student-adaptation-20261002/dev/real-C800"
+      ]
+    },
+    {
+      "name": "dev-baseline-C800",
+      "output": "runs/real-size-student-adaptation-20261002/dev/baseline-C800",
+      "seconds": 240,
+      "command": [
+        "scripts.evaluate_wuji_real_size",
+        "--student-checkpoint",
+        "runs/real-size-student-adaptation-20261002/train/C800/step_055200.pth",
+        "--states",
+        "runs/real-size-student-adaptation-20261002/static/retention/valid-states.npy",
+        "--output",
+        "runs/real-size-student-adaptation-20261002/dev/baseline-C800",
+        "--object",
+        "knife_wuji_width_baseline_20261002",
+        "--geometry-round",
+        "width-student-distillation-20261002"
+      ]
+    },
+    {
+      "name": "dev-real-R800",
+      "output": "runs/real-size-student-adaptation-20261002/dev/real-R800",
+      "seconds": 240,
+      "command": [
+        "scripts.evaluate_wuji_real_size",
+        "--student-checkpoint",
+        "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth",
+        "--states",
+        "runs/real-size-student-adaptation-20261002/static/dev/valid-states.npy",
+        "--output",
+        "runs/real-size-student-adaptation-20261002/dev/real-R800"
+      ]
+    },
+    {
+      "name": "dev-baseline-R800",
+      "output": "runs/real-size-student-adaptation-20261002/dev/baseline-R800",
+      "seconds": 240,
+      "command": [
+        "scripts.evaluate_wuji_real_size",
+        "--student-checkpoint",
+        "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth",
+        "--states",
+        "runs/real-size-student-adaptation-20261002/static/retention/valid-states.npy",
+        "--output",
+        "runs/real-size-student-adaptation-20261002/dev/baseline-R800",
+        "--object",
+        "knife_wuji_width_baseline_20261002",
+        "--geometry-round",
+        "width-student-distillation-20261002"
+      ]
+    }
+  ],
+  "decision": "Choose stop or one further matched800 only from dev behavior and retention cost"
+}

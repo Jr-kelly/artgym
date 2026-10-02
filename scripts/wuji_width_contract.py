@@ -29,3 +29,14 @@ def slots(arm):
 
 def canonical_hash(value):
     return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+
+
+def real_size_slots(arm):
+    assert arm in ('C','G')
+    rows=[]
+    for source in range(4):
+        for _ in range(16):
+            rows.append(dict(slot=len(rows),group=0,source=source,instance=0,geometry='baseline'))
+    for _ in range(192):
+        rows.append(dict(slot=len(rows),group=1,source=3,instance=1 if arm=='G' else 0,geometry='real' if arm=='G' else 'baseline'))
+    return rows

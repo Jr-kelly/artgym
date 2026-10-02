@@ -1,0 +1,31 @@
+{
+  "gpus": [
+    2
+  ],
+  "tasks": [
+    {
+      "name": "static-retention",
+      "seconds": 240,
+      "output": "runs/real-size-student-adaptation-20261002/static/retention",
+      "command": [
+        "scripts.static_wuji_press",
+        "--label",
+        "baseline",
+        "--split",
+        "retention-attempts",
+        "--take",
+        "4",
+        "--sources",
+        "0",
+        "1",
+        "2",
+        "3",
+        "--research-dir",
+        "research/real-size-student-adaptation-20261002",
+        "--output",
+        "runs/real-size-student-adaptation-20261002/static/retention"
+      ]
+    }
+  ],
+  "decision": "Reuse first4 accepted/source as small paired retention dev"
+}

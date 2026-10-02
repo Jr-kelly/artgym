@@ -1,0 +1,60 @@
+{
+  "reserved_phase": "confirm",
+  "tasks": [
+    {
+      "name": "diagnostic-zero",
+      "seconds": 240,
+      "output": "runs/real-size-student-adaptation-20261002/diagnostic/zero",
+      "command": [
+        "scripts.evaluate_wuji_real_size",
+        "--student-checkpoint",
+        "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth",
+        "--states",
+        "runs/real-size-student-adaptation-20261002/static/diagnostic/valid-states.npy",
+        "--resistance-n",
+        "0",
+        "--press-mm",
+        "0",
+        "--output",
+        "runs/real-size-student-adaptation-20261002/diagnostic/zero"
+      ]
+    },
+    {
+      "name": "diagnostic-load",
+      "seconds": 240,
+      "output": "runs/real-size-student-adaptation-20261002/diagnostic/load",
+      "command": [
+        "scripts.evaluate_wuji_real_size",
+        "--student-checkpoint",
+        "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth",
+        "--states",
+        "runs/real-size-student-adaptation-20261002/static/diagnostic/valid-states.npy",
+        "--resistance-n",
+        "0.05",
+        "--press-mm",
+        "0",
+        "--output",
+        "runs/real-size-student-adaptation-20261002/diagnostic/load"
+      ]
+    },
+    {
+      "name": "diagnostic-load-press",
+      "seconds": 240,
+      "output": "runs/real-size-student-adaptation-20261002/diagnostic/load-press",
+      "command": [
+        "scripts.evaluate_wuji_real_size",
+        "--student-checkpoint",
+        "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth",
+        "--states",
+        "runs/real-size-student-adaptation-20261002/static/diagnostic/valid-states.npy",
+        "--resistance-n",
+        "0.05",
+        "--press-mm",
+        "0.5",
+        "--output",
+        "runs/real-size-student-adaptation-20261002/diagnostic/load-press"
+      ]
+    }
+  ],
+  "decision": "Diagnostic only, no retuning or expansion. Complete report/video/release."
+}

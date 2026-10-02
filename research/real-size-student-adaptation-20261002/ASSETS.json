@@ -1,0 +1,108 @@
+{
+  "real": {
+    "object": "knife_wuji_real_size_20261002",
+    "parameters": {
+      "id": "000",
+      "split": "train",
+      "geometry_profile": "nt_a300gr",
+      "handle_size": [
+        0.016,
+        0.012,
+        0.135
+      ],
+      "masses": [
+        0.029,
+        0.006
+      ],
+      "total_size_lwt": [
+        0.135,
+        0.016,
+        0.015
+      ],
+      "slider_size": [
+        0.01,
+        0.003,
+        0.03
+      ],
+      "joint_lower": -0.03267458688196273,
+      "joint_upper": 0.017325413118037272,
+      "slider_origin": [
+        0.0,
+        0.0075,
+        0.010624586881962734
+      ],
+      "slider_initial_center": [
+        0.0,
+        0.0075,
+        -0.022049999999999997
+      ],
+      "urdf_sha256": "d73aaecc9892fbdfd75a755389311936cf8b1f0d8361cfc66ea94ab5f391cb97",
+      "round": "real-size-student-adaptation-20261002",
+      "label": "real",
+      "approximation": "Photos and16 temporal video samples viewed. Central raised shoulder with lower end contact strips replaces long flat roof. Body135x16x12mm user-confirmed; slider10x3x30mm, axial position,50mm rail travel,mass/inertia remain estimates. Central body box retained; end rounding not at grasp contact. PhysX convex hull approximation."
+    },
+    "files": {
+      "assets/objects/knife_wuji_real_size_20261002/lbx.json": "3cf80e5a9174a8493be83d9bf1b7174d6f9c776de2cc63fad54fe6cfb36795e2",
+      "assets/objects/knife_wuji_real_size_20261002/000/slider-shoulder.obj": "6bcb93ed47518ebd2afc75b36827edeb5f7646fe3cb8302345be8a2507870f7b",
+      "assets/objects/knife_wuji_real_size_20261002/000/mobility.urdf": "d73aaecc9892fbdfd75a755389311936cf8b1f0d8361cfc66ea94ab5f391cb97",
+      "assets/objects/knife_wuji_real_size_20261002/000/parameters.json": "78a4b75c0a6bf94ee065d33186e7f144785773415606f98e4f48d247c81852dd",
+      "isaacgymenvs/cfg/object/knife_wuji_real_size_20261002.yaml": "6bc22c004ecd12f19e1e86c6b2952a537b387916bf0bcc60b25a73b44efbd66b"
+    }
+  },
+  "baseline": {
+    "object": "knife_wuji_width_baseline_20261002",
+    "dimensions_mm_LWT": [
+      147,
+      19,
+      8
+    ],
+    "parameters": {
+      "id": "000",
+      "split": "train",
+      "geometry_profile": "nt_a300gr",
+      "handle_size": [
+        0.019,
+        0.008,
+        0.147
+      ],
+      "masses": [
+        0.029,
+        0.006
+      ],
+      "total_size_lwt": [
+        0.147,
+        0.019,
+        0.011
+      ],
+      "slider_size": [
+        0.01,
+        0.003,
+        0.03
+      ],
+      "joint_lower": -0.03267458688196273,
+      "joint_upper": 0.017325413118037272,
+      "slider_origin": [
+        0.0,
+        0.0055,
+        0.010624586881962734
+      ],
+      "slider_initial_center": [
+        0.0,
+        0.0055,
+        -0.022049999999999997
+      ],
+      "urdf_sha256": "5229c66b183cc6da04190bf2d6cfbd035fadd227340dc8f26602b207171b461c",
+      "round": "width-student-distillation-20261002",
+      "label": "baseline",
+      "mass_inertia_mode": "measured baseline effective inertia frozen after load",
+      "axes": "URDF W/T/L; policy W/L/T",
+      "thickness_coupling": "jointY half-thickness difference; longitudinal origin fixed"
+    },
+    "files": {
+      "assets/objects/knife_wuji_width_baseline_20261002/lbx.json": "f4319b29fa2970cd72ab1f17d8284e962c712d31fe58928514676b8985e8f535",
+      "assets/objects/knife_wuji_width_baseline_20261002/000/mobility.urdf": "5229c66b183cc6da04190bf2d6cfbd035fadd227340dc8f26602b207171b461c",
+      "assets/objects/knife_wuji_width_baseline_20261002/000/parameters.json": "13fd792e8eb8ea7d4d47afe0dbd94b374a596a1916a2d34494e1c51a0b10b006",
+      "isaacgymenvs/cfg/object/knife_wuji_width_baseline_20261002.yaml": "29bc8aa1cdf17426b1a6f9f9da39a3150dc4cddc59d6e8ab7178313393eb76d9"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "reserved_phase": "confirm",
+  "tasks": [
+    {
+      "name": "confirm-parent",
+      "output": "runs/real-size-student-adaptation-20261002/confirm/parent",
+      "seconds": 240,
+      "command": [
+        "scripts.evaluate_wuji_real_size",
+        "--states",
+        "runs/real-size-student-adaptation-20261002/static/confirm/valid-states.npy",
+        "--student-checkpoint",
+        "runs/width-student-distillation-20261002/C1-window1-h200-17314/step_054400.pth",
+        "--output",
+        "runs/real-size-student-adaptation-20261002/confirm/parent"
+      ]
+    },
+    {
+      "name": "confirm-C800",
+      "output": "runs/real-size-student-adaptation-20261002/confirm/C800",
+      "seconds": 240,
+      "command": [
+        "scripts.evaluate_wuji_real_size",
+        "--states",
+        "runs/real-size-student-adaptation-20261002/static/confirm/valid-states.npy",
+        "--student-checkpoint",
+        "runs/real-size-student-adaptation-20261002/train/C800/step_055200.pth",
+        "--output",
+        "runs/real-size-student-adaptation-20261002/confirm/C800"
+      ]
+    },
+    {
+      "name": "confirm-R800",
+      "output": "runs/real-size-student-adaptation-20261002/confirm/R800",
+      "seconds": 240,
+      "command": [
+        "scripts.evaluate_wuji_real_size",
+        "--states",
+        "runs/real-size-student-adaptation-20261002/static/confirm/valid-states.npy",
+        "--student-checkpoint",
+        "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth",
+        "--output",
+        "runs/real-size-student-adaptation-20261002/confirm/R800"
+      ]
+    }
+  ],
+  "decision": "Close32state confirmation; if basic success recovered, only tiny new-state load/press diagnostic then deliver"
+}

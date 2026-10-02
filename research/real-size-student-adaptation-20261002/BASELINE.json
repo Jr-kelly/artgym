@@ -1,0 +1,31 @@
+{
+  "tasks": [
+    {
+      "name": "baseline-teacher",
+      "output": "runs/real-size-student-adaptation-20261002/baseline/teacher",
+      "command": [
+        "scripts.evaluate_wuji_real_size",
+        "--states",
+        "runs/real-size-student-adaptation-20261002/static/dev/valid-states.npy",
+        "--model",
+        "teacher",
+        "--output",
+        "runs/real-size-student-adaptation-20261002/baseline/teacher"
+      ]
+    },
+    {
+      "name": "baseline-student",
+      "output": "runs/real-size-student-adaptation-20261002/baseline/student",
+      "command": [
+        "scripts.evaluate_wuji_real_size",
+        "--states",
+        "runs/real-size-student-adaptation-20261002/static/dev/valid-states.npy",
+        "--model",
+        "student",
+        "--output",
+        "runs/real-size-student-adaptation-20261002/baseline/student"
+      ]
+    }
+  ],
+  "decision": "If teacher has usable stable open-close trajectories and student lags, run registered equal800-update pair"
+}

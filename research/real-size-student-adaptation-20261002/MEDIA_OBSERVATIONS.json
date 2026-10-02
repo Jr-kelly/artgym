@@ -1,0 +1,36 @@
+{
+  "media": [
+    {
+      "path": "research/real-size-student-adaptation-20261002/media/media-0.jpg",
+      "sha256": "0b04a4baab54cc7147f8f1e0c523a32e3c4c03642403f2d775a744978f9114b4",
+      "original_filename": "6d2ee53638375f4546f11d6188e94d89.jpg"
+    },
+    {
+      "path": "research/real-size-student-adaptation-20261002/media/media-1.jpg",
+      "sha256": "79676dda879caa33c6a8979f6ecacdd9b4e622cd6a63aa8314284f016f62a989",
+      "original_filename": "186debe7261d0712822ab93dd35b84b7.jpg"
+    },
+    {
+      "path": "research/real-size-student-adaptation-20261002/media/media-3.mp4",
+      "sha256": "b51e23bad9fc59d07caaec3ec2a31f630cded93367451af1934c1c84928007a3",
+      "original_filename": "950bf928a717ca235e9d23c269fad871.mp4"
+    }
+  ],
+  "viewed": "Both full photos and16 frames distributed across277 frames/30fps=9.233s",
+  "observations": [
+    "Front: elongated recessed axial slider, ribbed contact strips, raised central thumb feature",
+    "Side: local raised shoulder with lower long strips; body midsection approximately constant thickness",
+    "Video: repeated axial extension/retraction with thumb while other fingers support body; contact pressure not measured"
+  ],
+  "change": "Upper contact roof changed from21mm flat span to8mm raised central shoulder with lower axial ends, PhysX convex hull approximation. No body, nominal jointorigin/travel, masses, inertia, actuator or friction changes.",
+  "unknown": "Only body135x16x12mm user-confirmed. Slider10x3x30mm and50mm travel remain estimated; no force/torque calibration.",
+  "teacher_retested_after_shape": true,
+  "dev_teacher": {
+    "K20": 12,
+    "stable": 14,
+    "S5": 1,
+    "n": 16
+  },
+  "source3_recipe": "Prior geometry-only repaired seed; no new policy-based grasp changes",
+  "scope": "Image-informed approximate simulation, not real robot transfer"
+}
