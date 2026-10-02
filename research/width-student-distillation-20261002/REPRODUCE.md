@@ -51,7 +51,7 @@ PROVIDER_KILL_RECONCILIATION.json and PRE_RECONCILIATION_RECEIPTS.json preserve 
 
 SourceA02749e10 exactly matches firstpair optimization; sourceBdba402c2 exactly matches secondpair and confirmation/final. The only A/B changes are the static constructor and queue mapping; trainer/task/controller/evaluator match. Frozen source SHA is a1739e7c66f61705b0b1d1edbf78c33924fb455d20471a9d35767afa38cd795e.
 
-All final raw archives will be partitioned by geometry/protocol, preserving full original simulation batches, for publication in `wuji-width-student-distillation-20261002-final-v2`. Model, training/dev/confirmation and video assets remain in v1. Restore the15 `width-final-GEOMETRY-PROTOCOL-raw-v2.tar.gz` packets, then recompute with FINAL_MANIFEST.json:
+All final raw archives are partitioned by geometry/protocol, preserving full original simulation batches, published in `wuji-width-student-distillation-20261002-final-v2`. Model, training/dev/confirmation and video assets remain in v1. Restore the15 `width-final-GEOMETRY-PROTOCOL-raw-v2.tar.gz` packets, then recompute with FINAL_MANIFEST.json:
 
 ```bash
 python -m scripts.analyze_wuji_width \
@@ -75,7 +75,13 @@ CUDA_VISIBLE_DEVICES=0 python -m scripts.evaluate_wuji_geometry \
 
 For actual Goal execution use the finite launcher/receipts and account allocation rather than the unbounded shell example. JSONauthenticationargv is injected only privately as WUJI_WIDTH_SSH_ARGV. The checked-in dispatcher currently validates the user-authorized17314endpoint.
 
-Once all90registered final identities finish, run collect_registered_queues.py with the reconciled versioned queue, independently rescore, update final_evaluation_complete=true, then make_research_figures.py --final and write_final_report.py. Do not invoke the latter while final is incomplete. Regenerate the exact resource table after receipt reconciliation. Restore/upload only new completed evidence assets; preserve all old Release assets. Publish final results without changing candidate selection or training.
+All90registered final identities completed and were independently rescored:360cells,35280episode records and1960unique initial states. FINAL_COMPLETION_AUDIT.json verifies exact unchanged source/model/freeze hashes, no missing or duplicate counted identity, eight bounded retries and no optimization after final opened. FINAL_GPU_CLOSURE.json verifies all8GPUs empty after completion. The owned monitor was stopped with PID/start-time verification; no further GPU job is required.
+
+Final conservative cumulative charge is54.64098892/64GPUh, remaining9.35901108. This includes1.4GPUh timeout upper bounds for8provider-killed runs; the exact stop clock is unrecoverable. Other new work totals12.80505670measuredGPUh. Official kill utilization was19.9461% over4hours. The local48.53% is a141.7-minute coverage mean across observation windows; the last4h estimate with unobserved periods zero is28.66%, not a provider telemetry certificate.
+
+Figures are in `runs/width-student-distillation-20261002/figures/final-v2`. The v1 figures and assets remain unchanged. The first new raw packet restore actually verified42files; all15new raw packets have server SHA checks. Publication indexes identify canonical asset URLs.
+
+No further work is pending within this frozen experiment. A separate next round should first address preservation of strict S2/S5 endpoint precision; no automatic extra width training is authorized by these final results.
 
 ## Historical training command (reproduction only, not an authorized restart)
 

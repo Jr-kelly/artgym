@@ -1,29 +1,25 @@
 {
-  "known_new_gpu_hours": 9.063149986780063,
-  "unreconciled_gpu_hours_charge": 1.4000000000000001,
-  "unreconciled_remote_jobs": [
-    "final-W120-G_endpoint-F-23b6d935b9ac",
-    "final-baseline-P-F-3e67e82c8036",
-    "final-baseline-teacher-F-6b637b48308c",
-    "final-W120-teacher-F-18b0abc6d11d",
-    "final-W120-C-F-6e0b89a2f949",
-    "final-W120-G-F-97e271dc828b",
-    "final-W120-C_endpoint-F-3005c0892388",
-    "final-W120-P-F-d9c3f3b7ae4d"
-  ],
-  "budget_not_actual_until_receipts_reconciled": true,
-  "utc": "2026-10-02T10:21:20.699382+00:00",
+  "known_new_gpu_hours": 14.205056704979654,
+  "unreconciled_gpu_hours_charge": 0,
+  "unreconciled_remote_jobs": [],
+  "budget_not_actual_until_receipts_reconciled": false,
+  "utc": "2026-10-02T11:44:58.877708+00:00",
   "historical_gpu_hours": 40.43593221975697,
-  "new_gpu_hours": 10.463149986780069,
-  "cumulative_gpu_hours": 50.89908220653704,
-  "remaining_gpu_hours": 13.100917793462962,
+  "new_gpu_hours": 14.205056704979654,
+  "cumulative_gpu_hours": 54.640988924736625,
+  "remaining_gpu_hours": 9.359011075263375,
   "max_gpu_hours": 64,
   "peak_combined_gpus": 8,
-  "completed_jobs": 247,
-  "accounted_jobs": 255,
-  "unreconciled_jobs": 8,
-  "known_cumulative_gpu_hours": 49.49908220653703,
+  "completed_jobs": 345,
+  "accounted_jobs": 345,
+  "unreconciled_jobs": 0,
+  "known_cumulative_gpu_hours": 54.640988924736625,
   "categories": {
+    "evaluation_final": {
+      "jobs": 98,
+      "gpu_hours": 5.141906718199573,
+      "failed_jobs": 8
+    },
     "evaluation_confirm": {
       "jobs": 54,
       "gpu_hours": 2.014059619053603,
@@ -49,11 +45,6 @@
       "gpu_hours": 0.35918248007452347,
       "failed_jobs": 0
     },
-    "evaluation_final": {
-      "jobs": 8,
-      "gpu_hours": 1.4000000000000001,
-      "failed_jobs": 8
-    },
     "discarded_updates": {
       "jobs": 8,
       "gpu_hours": 0.03994827836861886,
@@ -67,8 +58,8 @@
   },
   "devices": {
     "NVIDIA H200": {
-      "jobs": 226,
-      "gpu_hours": 10.050786961472483
+      "jobs": 316,
+      "gpu_hours": 13.79269367967207
     },
     "NVIDIA GeForce RTX 4090": {
       "jobs": 29,
@@ -255,19 +246,37 @@
   "formal_transitions": 13107200,
   "discarded_updates": 68,
   "discarded_transitions": 69632,
-  "wall_seconds_since_goal_start": 14488.130171,
-  "gpu_job_span_seconds": 13308.880469,
+  "wall_seconds_since_goal_start": 19506.308509,
+  "gpu_job_span_seconds": 18785.60492,
   "utilization": {
     "first_observed_utc": "2026-10-02T08:20:33.165700+00:00",
-    "last_observed_utc": "2026-10-02T10:09:33.950365+00:00",
-    "valid_samples": 212,
-    "covered_seconds": 6540.784664999999,
-    "observed_time_weighted_whole_machine_mean_pct": 43.249356142731244,
-    "four_hour_window_end_utc": "2026-10-02T10:09:33.950365+00:00",
-    "last_four_hours_observed_seconds": 6540.784664999999,
-    "last_four_hours_unobserved_assumed_zero_estimate_pct": 19.644772599270837,
+    "last_observed_utc": "2026-10-02T11:43:43.302368+00:00",
+    "valid_samples": 276,
+    "covered_seconds": 8503.892120000002,
+    "observed_time_weighted_whole_machine_mean_pct": 48.52740909791197,
+    "four_hour_window_end_utc": "2026-10-02T11:43:43.302368+00:00",
+    "last_four_hours_observed_seconds": 8503.892120000002,
+    "last_four_hours_unobserved_assumed_zero_estimate_pct": 28.657767488315972,
     "method": "30s NVML snapshots, trapezoidal estimate only for adjacent gaps<=90s; unobserved gaps countzero in four-hour estimate. This is not the Ska service utilization telemetry or a continuous measurement certificate.",
     "threshold_pct": 26,
     "target_pct": 40
-  }
+  },
+  "provider_kill": {
+    "utc": "2026-10-02T11:11:01.486400+00:00",
+    "inventory": "d-20261002060051-v57f2\n2026-10-02T11:11:01Z\n0, GPU-692f28cc-b6cc-d61d-6320-38b536415f9c, NVIDIA H200, 0 %, 0 MiB\n1, GPU-a7f3e397-aa6d-cc23-4c54-98c3586fd06d, NVIDIA H200, 0 %, 0 MiB\n2, GPU-743f31ae-a54e-0d2a-386e-600e6362e4d8, NVIDIA H200, 0 %, 0 MiB\n3, GPU-a380226c-6bd4-d44c-349b-7ba8c9d12c93, NVIDIA H200, 0 %, 0 MiB\n4, GPU-7c4c2443-64fd-71c4-7111-95a1c6a92792, NVIDIA H200, 0 %, 0 MiB\n5, GPU-7e9050f1-d8e1-cce1-bbf2-604781548882, NVIDIA H200, 0 %, 0 MiB\n6, GPU-0ac81095-c9da-a4a0-86f4-7b4bafe84e45, NVIDIA H200, 0 %, 0 MiB\n7, GPU-134cf522-3da9-8c29-0c07-e73b92c7f77f, NVIDIA H200, 0 %, 0 MiB\nTEMP_DIRECTORY_ABSENT\n",
+    "provider_kill_local": "2026-10-02T18:10:00+08:00",
+    "provider_kill_utc": "2026-10-02T10:10:00+00:00",
+    "provider_running_seconds": 14411,
+    "provider_window_hours": 4,
+    "provider_average_utilization_pct": 19.9461,
+    "threshold_pct": 26,
+    "rule": "3 H100/H200\u5f00\u53d1\u673a",
+    "source": "User supplied resource kill notification",
+    "old_remote_outputs": "Temporary directory absent after restart; no original final output recoverable",
+    "accounting": "Retain conservative 600+30 seconds charge for each interrupted job; do not claim precise GPU stop clock from notification alone"
+  },
+  "conservative_killed_job_charge_gpu_hours": 1.4000000000000001,
+  "budget_includes_conservative_upper_bounds": true,
+  "actual_measured_completed_gpu_hours_excluding_killed": 12.805056704979652,
+  "accounting_note": "Eight provider-killed jobs retain original timeout upper bounds; cumulative GPU hours are conservative charged totals, not exact measured actual consumption for those eight jobs."
 }

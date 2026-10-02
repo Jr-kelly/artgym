@@ -15,7 +15,9 @@ def cell(report,g,role,protocol,source):
     return next(c for c in report['cells'] if (c['geometry'],c['model'],c['protocol'],c['source'])==(g,role,protocol,source))
 
 def main(final):
-    out=R/'runs/width-student-distillation-20261002/figures';out.mkdir(exist_ok=True)
+    out=R/'runs/width-student-distillation-20261002/figures'
+    if final:out=out/'final-v2'
+    out.mkdir(parents=True,exist_ok=True)
     plt.rcParams.update({'font.size':10,'axes.spines.top':False,'axes.spines.right':False,'figure.dpi':160})
     one=json.loads((BASE/'window1-complete-dev-v1/report.json').read_text())
     repeats={step:json.loads((BASE/('repeat%d-dev-v1'%step)/'report.json').read_text()) for step in [52000,52800,54400]}

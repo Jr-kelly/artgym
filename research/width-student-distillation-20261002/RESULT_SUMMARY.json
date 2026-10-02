@@ -1,0 +1,1328 @@
+{
+  "selected_main": "C_endpoint",
+  "final_freeze_sha256": "eb6a5105f913c25a4e4658ca65778cc4b5d6aaf1b41388890773286a275f84f6",
+  "final_manifest_sha256": "cd64cbb12bc6447d3333649c05d43b8cb26e9c7da5246808040a4a1a4a92037a",
+  "primary": {
+    "P": {
+      "geometry": "W120",
+      "model": "P",
+      "protocol": "F",
+      "source": 3,
+      "n": 90,
+      "success": {
+        "k": 42,
+        "n": 90,
+        "rate": 0.4666666666666667,
+        "wilson95": [
+          0.3670842495769778,
+          0.5689781254606437
+        ]
+      },
+      "body_stable": {
+        "k": 5,
+        "n": 90,
+        "rate": 0.05555555555555555,
+        "wilson95": [
+          0.023960971616962493,
+          0.1235373622179927
+        ]
+      },
+      "joint_success": {
+        "k": 5,
+        "n": 90,
+        "rate": 0.05555555555555555,
+        "wilson95": [
+          0.023960971616962493,
+          0.1235373622179927
+        ]
+      }
+    },
+    "C": {
+      "geometry": "W120",
+      "model": "C",
+      "protocol": "F",
+      "source": 3,
+      "n": 90,
+      "success": {
+        "k": 13,
+        "n": 90,
+        "rate": 0.14444444444444443,
+        "wilson95": [
+          0.08639988786660903,
+          0.23159877920135508
+        ]
+      },
+      "body_stable": {
+        "k": 3,
+        "n": 90,
+        "rate": 0.03333333333333333,
+        "wilson95": [
+          0.011400390222806575,
+          0.09347286030389639
+        ]
+      },
+      "joint_success": {
+        "k": 3,
+        "n": 90,
+        "rate": 0.03333333333333333,
+        "wilson95": [
+          0.011400390222806575,
+          0.09347286030389639
+        ]
+      }
+    },
+    "G": {
+      "geometry": "W120",
+      "model": "G",
+      "protocol": "F",
+      "source": 3,
+      "n": 90,
+      "success": {
+        "k": 88,
+        "n": 90,
+        "rate": 0.9777777777777777,
+        "wilson95": [
+          0.9225547331137485,
+          0.9938845580136746
+        ]
+      },
+      "body_stable": {
+        "k": 78,
+        "n": 90,
+        "rate": 0.8666666666666667,
+        "wilson95": [
+          0.7812606949930263,
+          0.9220531795931357
+        ]
+      },
+      "joint_success": {
+        "k": 78,
+        "n": 90,
+        "rate": 0.8666666666666667,
+        "wilson95": [
+          0.7812606949930263,
+          0.9220531795931357
+        ]
+      }
+    },
+    "C_endpoint": {
+      "geometry": "W120",
+      "model": "C_endpoint",
+      "protocol": "F",
+      "source": 3,
+      "n": 90,
+      "success": {
+        "k": 88,
+        "n": 90,
+        "rate": 0.9777777777777777,
+        "wilson95": [
+          0.9225547331137485,
+          0.9938845580136746
+        ]
+      },
+      "body_stable": {
+        "k": 72,
+        "n": 90,
+        "rate": 0.8,
+        "wilson95": [
+          0.7058626364885774,
+          0.8695759881728278
+        ]
+      },
+      "joint_success": {
+        "k": 72,
+        "n": 90,
+        "rate": 0.8,
+        "wilson95": [
+          0.7058626364885774,
+          0.8695759881728278
+        ]
+      }
+    },
+    "G_endpoint": {
+      "geometry": "W120",
+      "model": "G_endpoint",
+      "protocol": "F",
+      "source": 3,
+      "n": 90,
+      "success": {
+        "k": 88,
+        "n": 90,
+        "rate": 0.9777777777777777,
+        "wilson95": [
+          0.9225547331137485,
+          0.9938845580136746
+        ]
+      },
+      "body_stable": {
+        "k": 81,
+        "n": 90,
+        "rate": 0.9,
+        "wilson95": [
+          0.8207582512456661,
+          0.9464932483028741
+        ]
+      },
+      "joint_success": {
+        "k": 81,
+        "n": 90,
+        "rate": 0.9,
+        "wilson95": [
+          0.8207582512456661,
+          0.9464932483028741
+        ]
+      }
+    },
+    "teacher": {
+      "geometry": "W120",
+      "model": "teacher",
+      "protocol": "F",
+      "source": 3,
+      "n": 90,
+      "success": {
+        "k": 88,
+        "n": 90,
+        "rate": 0.9777777777777777,
+        "wilson95": [
+          0.9225547331137485,
+          0.9938845580136746
+        ]
+      },
+      "body_stable": {
+        "k": 84,
+        "n": 90,
+        "rate": 0.9333333333333333,
+        "wilson95": [
+          0.8620990522567472,
+          0.9690900722541714
+        ]
+      },
+      "joint_success": {
+        "k": 84,
+        "n": 90,
+        "rate": 0.9333333333333333,
+        "wilson95": [
+          0.8620990522567472,
+          0.9690900722541714
+        ]
+      }
+    }
+  },
+  "baseline_F": {
+    "P": [
+      {
+        "geometry": "baseline",
+        "model": "P",
+        "protocol": "F",
+        "source": 0,
+        "n": 128,
+        "success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "body_stable": {
+          "k": 127,
+          "n": 128,
+          "rate": 0.9921875,
+          "wilson95": [
+            0.957073740561141,
+            0.9986195681071258
+          ]
+        },
+        "joint_success": {
+          "k": 127,
+          "n": 128,
+          "rate": 0.9921875,
+          "wilson95": [
+            0.957073740561141,
+            0.9986195681071258
+          ]
+        }
+      },
+      {
+        "geometry": "baseline",
+        "model": "P",
+        "protocol": "F",
+        "source": 1,
+        "n": 128,
+        "success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "body_stable": {
+          "k": 107,
+          "n": 128,
+          "rate": 0.8359375,
+          "wilson95": [
+            0.762181923962932,
+            0.8901166835408055
+          ]
+        },
+        "joint_success": {
+          "k": 107,
+          "n": 128,
+          "rate": 0.8359375,
+          "wilson95": [
+            0.762181923962932,
+            0.8901166835408055
+          ]
+        }
+      },
+      {
+        "geometry": "baseline",
+        "model": "P",
+        "protocol": "F",
+        "source": 2,
+        "n": 128,
+        "success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "body_stable": {
+          "k": 126,
+          "n": 128,
+          "rate": 0.984375,
+          "wilson95": [
+            0.9448190233201845,
+            0.9957045502898558
+          ]
+        },
+        "joint_success": {
+          "k": 126,
+          "n": 128,
+          "rate": 0.984375,
+          "wilson95": [
+            0.9448190233201845,
+            0.9957045502898558
+          ]
+        }
+      },
+      {
+        "geometry": "baseline",
+        "model": "P",
+        "protocol": "F",
+        "source": 3,
+        "n": 128,
+        "success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "body_stable": {
+          "k": 116,
+          "n": 128,
+          "rate": 0.90625,
+          "wilson95": [
+            0.8432700274269236,
+            0.9455561956008522
+          ]
+        },
+        "joint_success": {
+          "k": 116,
+          "n": 128,
+          "rate": 0.90625,
+          "wilson95": [
+            0.8432700274269236,
+            0.9455561956008522
+          ]
+        }
+      }
+    ],
+    "C": [
+      {
+        "geometry": "baseline",
+        "model": "C",
+        "protocol": "F",
+        "source": 0,
+        "n": 128,
+        "success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "body_stable": {
+          "k": 118,
+          "n": 128,
+          "rate": 0.921875,
+          "wilson95": [
+            0.8621530681952115,
+            0.9570126249490171
+          ]
+        },
+        "joint_success": {
+          "k": 118,
+          "n": 128,
+          "rate": 0.921875,
+          "wilson95": [
+            0.8621530681952115,
+            0.9570126249490171
+          ]
+        }
+      },
+      {
+        "geometry": "baseline",
+        "model": "C",
+        "protocol": "F",
+        "source": 1,
+        "n": 128,
+        "success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "body_stable": {
+          "k": 93,
+          "n": 128,
+          "rate": 0.7265625,
+          "wilson95": [
+            0.6435923144931491,
+            0.7963300021954182
+          ]
+        },
+        "joint_success": {
+          "k": 93,
+          "n": 128,
+          "rate": 0.7265625,
+          "wilson95": [
+            0.6435923144931491,
+            0.7963300021954182
+          ]
+        }
+      },
+      {
+        "geometry": "baseline",
+        "model": "C",
+        "protocol": "F",
+        "source": 2,
+        "n": 128,
+        "success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "body_stable": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "joint_success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        }
+      },
+      {
+        "geometry": "baseline",
+        "model": "C",
+        "protocol": "F",
+        "source": 3,
+        "n": 128,
+        "success": {
+          "k": 127,
+          "n": 128,
+          "rate": 0.9921875,
+          "wilson95": [
+            0.957073740561141,
+            0.9986195681071258
+          ]
+        },
+        "body_stable": {
+          "k": 119,
+          "n": 128,
+          "rate": 0.9296875,
+          "wilson95": [
+            0.8717651965063957,
+            0.9625702316960594
+          ]
+        },
+        "joint_success": {
+          "k": 119,
+          "n": 128,
+          "rate": 0.9296875,
+          "wilson95": [
+            0.8717651965063957,
+            0.9625702316960594
+          ]
+        }
+      }
+    ],
+    "G": [
+      {
+        "geometry": "baseline",
+        "model": "G",
+        "protocol": "F",
+        "source": 0,
+        "n": 128,
+        "success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "body_stable": {
+          "k": 125,
+          "n": 128,
+          "rate": 0.9765625,
+          "wilson95": [
+            0.9333562549485696,
+            0.9919975836032443
+          ]
+        },
+        "joint_success": {
+          "k": 125,
+          "n": 128,
+          "rate": 0.9765625,
+          "wilson95": [
+            0.9333562549485696,
+            0.9919975836032443
+          ]
+        }
+      },
+      {
+        "geometry": "baseline",
+        "model": "G",
+        "protocol": "F",
+        "source": 1,
+        "n": 128,
+        "success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "body_stable": {
+          "k": 117,
+          "n": 128,
+          "rate": 0.9140625,
+          "wilson95": [
+            0.8526590894573891,
+            0.951336868628613
+          ]
+        },
+        "joint_success": {
+          "k": 117,
+          "n": 128,
+          "rate": 0.9140625,
+          "wilson95": [
+            0.8526590894573891,
+            0.951336868628613
+          ]
+        }
+      },
+      {
+        "geometry": "baseline",
+        "model": "G",
+        "protocol": "F",
+        "source": 2,
+        "n": 128,
+        "success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "body_stable": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "joint_success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        }
+      },
+      {
+        "geometry": "baseline",
+        "model": "G",
+        "protocol": "F",
+        "source": 3,
+        "n": 128,
+        "success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "body_stable": {
+          "k": 117,
+          "n": 128,
+          "rate": 0.9140625,
+          "wilson95": [
+            0.8526590894573891,
+            0.951336868628613
+          ]
+        },
+        "joint_success": {
+          "k": 117,
+          "n": 128,
+          "rate": 0.9140625,
+          "wilson95": [
+            0.8526590894573891,
+            0.951336868628613
+          ]
+        }
+      }
+    ],
+    "C_endpoint": [
+      {
+        "geometry": "baseline",
+        "model": "C_endpoint",
+        "protocol": "F",
+        "source": 0,
+        "n": 128,
+        "success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "body_stable": {
+          "k": 125,
+          "n": 128,
+          "rate": 0.9765625,
+          "wilson95": [
+            0.9333562549485696,
+            0.9919975836032443
+          ]
+        },
+        "joint_success": {
+          "k": 125,
+          "n": 128,
+          "rate": 0.9765625,
+          "wilson95": [
+            0.9333562549485696,
+            0.9919975836032443
+          ]
+        }
+      },
+      {
+        "geometry": "baseline",
+        "model": "C_endpoint",
+        "protocol": "F",
+        "source": 1,
+        "n": 128,
+        "success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "body_stable": {
+          "k": 119,
+          "n": 128,
+          "rate": 0.9296875,
+          "wilson95": [
+            0.8717651965063957,
+            0.9625702316960594
+          ]
+        },
+        "joint_success": {
+          "k": 119,
+          "n": 128,
+          "rate": 0.9296875,
+          "wilson95": [
+            0.8717651965063957,
+            0.9625702316960594
+          ]
+        }
+      },
+      {
+        "geometry": "baseline",
+        "model": "C_endpoint",
+        "protocol": "F",
+        "source": 2,
+        "n": 128,
+        "success": {
+          "k": 127,
+          "n": 128,
+          "rate": 0.9921875,
+          "wilson95": [
+            0.957073740561141,
+            0.9986195681071258
+          ]
+        },
+        "body_stable": {
+          "k": 127,
+          "n": 128,
+          "rate": 0.9921875,
+          "wilson95": [
+            0.957073740561141,
+            0.9986195681071258
+          ]
+        },
+        "joint_success": {
+          "k": 127,
+          "n": 128,
+          "rate": 0.9921875,
+          "wilson95": [
+            0.957073740561141,
+            0.9986195681071258
+          ]
+        }
+      },
+      {
+        "geometry": "baseline",
+        "model": "C_endpoint",
+        "protocol": "F",
+        "source": 3,
+        "n": 128,
+        "success": {
+          "k": 127,
+          "n": 128,
+          "rate": 0.9921875,
+          "wilson95": [
+            0.957073740561141,
+            0.9986195681071258
+          ]
+        },
+        "body_stable": {
+          "k": 116,
+          "n": 128,
+          "rate": 0.90625,
+          "wilson95": [
+            0.8432700274269236,
+            0.9455561956008522
+          ]
+        },
+        "joint_success": {
+          "k": 116,
+          "n": 128,
+          "rate": 0.90625,
+          "wilson95": [
+            0.8432700274269236,
+            0.9455561956008522
+          ]
+        }
+      }
+    ],
+    "G_endpoint": [
+      {
+        "geometry": "baseline",
+        "model": "G_endpoint",
+        "protocol": "F",
+        "source": 0,
+        "n": 128,
+        "success": {
+          "k": 127,
+          "n": 128,
+          "rate": 0.9921875,
+          "wilson95": [
+            0.957073740561141,
+            0.9986195681071258
+          ]
+        },
+        "body_stable": {
+          "k": 122,
+          "n": 128,
+          "rate": 0.953125,
+          "wilson95": [
+            0.9015024775490588,
+            0.9783421558280758
+          ]
+        },
+        "joint_success": {
+          "k": 122,
+          "n": 128,
+          "rate": 0.953125,
+          "wilson95": [
+            0.9015024775490588,
+            0.9783421558280758
+          ]
+        }
+      },
+      {
+        "geometry": "baseline",
+        "model": "G_endpoint",
+        "protocol": "F",
+        "source": 1,
+        "n": 128,
+        "success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "body_stable": {
+          "k": 50,
+          "n": 128,
+          "rate": 0.390625,
+          "wilson95": [
+            0.31047019100495976,
+            0.47715351817986995
+          ]
+        },
+        "joint_success": {
+          "k": 50,
+          "n": 128,
+          "rate": 0.390625,
+          "wilson95": [
+            0.31047019100495976,
+            0.47715351817986995
+          ]
+        }
+      },
+      {
+        "geometry": "baseline",
+        "model": "G_endpoint",
+        "protocol": "F",
+        "source": 2,
+        "n": 128,
+        "success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "body_stable": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "joint_success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        }
+      },
+      {
+        "geometry": "baseline",
+        "model": "G_endpoint",
+        "protocol": "F",
+        "source": 3,
+        "n": 128,
+        "success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "body_stable": {
+          "k": 117,
+          "n": 128,
+          "rate": 0.9140625,
+          "wilson95": [
+            0.8526590894573891,
+            0.951336868628613
+          ]
+        },
+        "joint_success": {
+          "k": 117,
+          "n": 128,
+          "rate": 0.9140625,
+          "wilson95": [
+            0.8526590894573891,
+            0.951336868628613
+          ]
+        }
+      }
+    ],
+    "teacher": [
+      {
+        "geometry": "baseline",
+        "model": "teacher",
+        "protocol": "F",
+        "source": 0,
+        "n": 128,
+        "success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "body_stable": {
+          "k": 125,
+          "n": 128,
+          "rate": 0.9765625,
+          "wilson95": [
+            0.9333562549485696,
+            0.9919975836032443
+          ]
+        },
+        "joint_success": {
+          "k": 125,
+          "n": 128,
+          "rate": 0.9765625,
+          "wilson95": [
+            0.9333562549485696,
+            0.9919975836032443
+          ]
+        }
+      },
+      {
+        "geometry": "baseline",
+        "model": "teacher",
+        "protocol": "F",
+        "source": 1,
+        "n": 128,
+        "success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "body_stable": {
+          "k": 116,
+          "n": 128,
+          "rate": 0.90625,
+          "wilson95": [
+            0.8432700274269236,
+            0.9455561956008522
+          ]
+        },
+        "joint_success": {
+          "k": 116,
+          "n": 128,
+          "rate": 0.90625,
+          "wilson95": [
+            0.8432700274269236,
+            0.9455561956008522
+          ]
+        }
+      },
+      {
+        "geometry": "baseline",
+        "model": "teacher",
+        "protocol": "F",
+        "source": 2,
+        "n": 128,
+        "success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "body_stable": {
+          "k": 102,
+          "n": 128,
+          "rate": 0.796875,
+          "wilson95": [
+            0.7190073141485295,
+            0.8574426180640758
+          ]
+        },
+        "joint_success": {
+          "k": 102,
+          "n": 128,
+          "rate": 0.796875,
+          "wilson95": [
+            0.7190073141485295,
+            0.8574426180640758
+          ]
+        }
+      },
+      {
+        "geometry": "baseline",
+        "model": "teacher",
+        "protocol": "F",
+        "source": 3,
+        "n": 128,
+        "success": {
+          "k": 128,
+          "n": 128,
+          "rate": 1.0,
+          "wilson95": [
+            0.9708630437264931,
+            1.0
+          ]
+        },
+        "body_stable": {
+          "k": 125,
+          "n": 128,
+          "rate": 0.9765625,
+          "wilson95": [
+            0.9333562549485696,
+            0.9919975836032443
+          ]
+        },
+        "joint_success": {
+          "k": 125,
+          "n": 128,
+          "rate": 0.9765625,
+          "wilson95": [
+            0.9333562549485696,
+            0.9919975836032443
+          ]
+        }
+      }
+    ]
+  },
+  "formal_updates": 12800,
+  "formal_transitions": 13107200,
+  "resources": {
+    "known_new_gpu_hours": 14.205056704979654,
+    "unreconciled_gpu_hours_charge": 0,
+    "unreconciled_remote_jobs": [],
+    "budget_not_actual_until_receipts_reconciled": false,
+    "utc": "2026-10-02T11:44:58.877708+00:00",
+    "historical_gpu_hours": 40.43593221975697,
+    "new_gpu_hours": 14.205056704979654,
+    "cumulative_gpu_hours": 54.640988924736625,
+    "remaining_gpu_hours": 9.359011075263375,
+    "max_gpu_hours": 64,
+    "peak_combined_gpus": 8,
+    "completed_jobs": 345,
+    "accounted_jobs": 345,
+    "unreconciled_jobs": 0,
+    "known_cumulative_gpu_hours": 54.640988924736625,
+    "categories": {
+      "evaluation_final": {
+        "jobs": 98,
+        "gpu_hours": 5.141906718199573,
+        "failed_jobs": 8
+      },
+      "evaluation_confirm": {
+        "jobs": 54,
+        "gpu_hours": 2.014059619053603,
+        "failed_jobs": 0
+      },
+      "evaluation_dev": {
+        "jobs": 144,
+        "gpu_hours": 4.423562564074074,
+        "failed_jobs": 18
+      },
+      "precheck": {
+        "jobs": 9,
+        "gpu_hours": 0.050621329207820566,
+        "failed_jobs": 1
+      },
+      "static_data": {
+        "jobs": 16,
+        "gpu_hours": 0.10079581412198928,
+        "failed_jobs": 2
+      },
+      "rendered_video": {
+        "jobs": 12,
+        "gpu_hours": 0.35918248007452347,
+        "failed_jobs": 0
+      },
+      "discarded_updates": {
+        "jobs": 8,
+        "gpu_hours": 0.03994827836861886,
+        "failed_jobs": 0
+      },
+      "formal_training": {
+        "jobs": 4,
+        "gpu_hours": 2.074979901879431,
+        "failed_jobs": 0
+      }
+    },
+    "devices": {
+      "NVIDIA H200": {
+        "jobs": 316,
+        "gpu_hours": 13.79269367967207
+      },
+      "NVIDIA GeForce RTX 4090": {
+        "jobs": 29,
+        "gpu_hours": 0.41236302530758406
+      }
+    },
+    "failed_jobs": [
+      {
+        "name": "dev-baseline-P-S2-bc76c671e5a1",
+        "exit_code": 1,
+        "gpu_hours": 0.004955072271663488,
+        "category": "evaluation_dev"
+      },
+      {
+        "name": "dev-baseline-teacher-S2-f0ff4f94239a",
+        "exit_code": 1,
+        "gpu_hours": 0.004462202079432447,
+        "category": "evaluation_dev"
+      },
+      {
+        "name": "final-W120-G_endpoint-F-23b6d935b9ac",
+        "exit_code": 255,
+        "gpu_hours": 0.175,
+        "category": "evaluation_final"
+      },
+      {
+        "name": "dev-W120-teacher-F-6106aa7f0793",
+        "exit_code": 1,
+        "gpu_hours": 0.00502643870833304,
+        "category": "evaluation_dev"
+      },
+      {
+        "name": "dev-W110-P-S5-658116908971",
+        "exit_code": 1,
+        "gpu_hours": 0.004776076174716259,
+        "category": "evaluation_dev"
+      },
+      {
+        "name": "final-baseline-P-F-3e67e82c8036",
+        "exit_code": 255,
+        "gpu_hours": 0.175,
+        "category": "evaluation_final"
+      },
+      {
+        "name": "dev-W110-teacher-S2-b615795bf6d4",
+        "exit_code": 1,
+        "gpu_hours": 0.004196374534448195,
+        "category": "evaluation_dev"
+      },
+      {
+        "name": "dev-W120-P-F-f3027e5e14cd",
+        "exit_code": 1,
+        "gpu_hours": 0.0047343088711042786,
+        "category": "evaluation_dev"
+      },
+      {
+        "name": "static-final-baseline-h200-17314",
+        "exit_code": 1,
+        "gpu_hours": 0.005856918043347024,
+        "category": "static_data"
+      },
+      {
+        "name": "final-baseline-teacher-F-6b637b48308c",
+        "exit_code": 255,
+        "gpu_hours": 0.175,
+        "category": "evaluation_final"
+      },
+      {
+        "name": "static-confirm-baseline-h200-17314",
+        "exit_code": 1,
+        "gpu_hours": 0.005488319341966416,
+        "category": "static_data"
+      },
+      {
+        "name": "dev-baseline-teacher-F-833357c091ac",
+        "exit_code": 1,
+        "gpu_hours": 0.004522197066107765,
+        "category": "evaluation_dev"
+      },
+      {
+        "name": "dev-baseline-P-F-eeb69a04ecc5",
+        "exit_code": 1,
+        "gpu_hours": 0.004084205356129031,
+        "category": "evaluation_dev"
+      },
+      {
+        "name": "final-W120-teacher-F-18b0abc6d11d",
+        "exit_code": 255,
+        "gpu_hours": 0.175,
+        "category": "evaluation_final"
+      },
+      {
+        "name": "final-W120-C-F-6e0b89a2f949",
+        "exit_code": 255,
+        "gpu_hours": 0.175,
+        "category": "evaluation_final"
+      },
+      {
+        "name": "dev-W120-teacher-S5-86768b51a7f1",
+        "exit_code": 1,
+        "gpu_hours": 0.004423784707226635,
+        "category": "evaluation_dev"
+      },
+      {
+        "name": "final-W120-G-F-97e271dc828b",
+        "exit_code": 255,
+        "gpu_hours": 0.175,
+        "category": "evaluation_final"
+      },
+      {
+        "name": "dev-W110-teacher-S5-a2d8ae43aa8f",
+        "exit_code": 1,
+        "gpu_hours": 0.004173525819432042,
+        "category": "evaluation_dev"
+      },
+      {
+        "name": "dev-W120-P-S5-f69334757d99",
+        "exit_code": 1,
+        "gpu_hours": 0.004993922191659092,
+        "category": "evaluation_dev"
+      },
+      {
+        "name": "dev-baseline-teacher-S5-dd16389fe40b",
+        "exit_code": 1,
+        "gpu_hours": 0.004436576184719646,
+        "category": "evaluation_dev"
+      },
+      {
+        "name": "dev-W110-teacher-F-1da49b22d809",
+        "exit_code": 1,
+        "gpu_hours": 0.005019832073335743,
+        "category": "evaluation_dev"
+      },
+      {
+        "name": "dev-W110-P-S2-1e723ba275f0",
+        "exit_code": 1,
+        "gpu_hours": 0.005103707995278657,
+        "category": "evaluation_dev"
+      },
+      {
+        "name": "dev-W120-P-S2-250611da72e6",
+        "exit_code": 1,
+        "gpu_hours": 0.005042481953633897,
+        "category": "evaluation_dev"
+      },
+      {
+        "name": "multiasset-reset-step-rtx4090",
+        "exit_code": -11,
+        "gpu_hours": 0.0010801696719459465,
+        "category": "precheck"
+      },
+      {
+        "name": "dev-W120-teacher-S2-dd7d8c420130",
+        "exit_code": 1,
+        "gpu_hours": 0.0038124685980599478,
+        "category": "evaluation_dev"
+      },
+      {
+        "name": "final-W120-C_endpoint-F-3005c0892388",
+        "exit_code": 255,
+        "gpu_hours": 0.175,
+        "category": "evaluation_final"
+      },
+      {
+        "name": "final-W120-P-F-d9c3f3b7ae4d",
+        "exit_code": 255,
+        "gpu_hours": 0.175,
+        "category": "evaluation_final"
+      },
+      {
+        "name": "dev-baseline-P-S5-beb2c6ee8907",
+        "exit_code": 1,
+        "gpu_hours": 0.004811268618860696,
+        "category": "evaluation_dev"
+      },
+      {
+        "name": "dev-W110-P-F-607a1d8eb058",
+        "exit_code": 1,
+        "gpu_hours": 0.004644971465847144,
+        "category": "evaluation_dev"
+      }
+    ],
+    "formal_updates": 12800,
+    "formal_transitions": 13107200,
+    "discarded_updates": 68,
+    "discarded_transitions": 69632,
+    "wall_seconds_since_goal_start": 19506.308509,
+    "gpu_job_span_seconds": 18785.60492,
+    "utilization": {
+      "first_observed_utc": "2026-10-02T08:20:33.165700+00:00",
+      "last_observed_utc": "2026-10-02T11:43:43.302368+00:00",
+      "valid_samples": 276,
+      "covered_seconds": 8503.892120000002,
+      "observed_time_weighted_whole_machine_mean_pct": 48.52740909791197,
+      "four_hour_window_end_utc": "2026-10-02T11:43:43.302368+00:00",
+      "last_four_hours_observed_seconds": 8503.892120000002,
+      "last_four_hours_unobserved_assumed_zero_estimate_pct": 28.657767488315972,
+      "method": "30s NVML snapshots, trapezoidal estimate only for adjacent gaps<=90s; unobserved gaps countzero in four-hour estimate. This is not the Ska service utilization telemetry or a continuous measurement certificate.",
+      "threshold_pct": 26,
+      "target_pct": 40
+    },
+    "provider_kill": {
+      "utc": "2026-10-02T11:11:01.486400+00:00",
+      "inventory": "d-20261002060051-v57f2\n2026-10-02T11:11:01Z\n0, GPU-692f28cc-b6cc-d61d-6320-38b536415f9c, NVIDIA H200, 0 %, 0 MiB\n1, GPU-a7f3e397-aa6d-cc23-4c54-98c3586fd06d, NVIDIA H200, 0 %, 0 MiB\n2, GPU-743f31ae-a54e-0d2a-386e-600e6362e4d8, NVIDIA H200, 0 %, 0 MiB\n3, GPU-a380226c-6bd4-d44c-349b-7ba8c9d12c93, NVIDIA H200, 0 %, 0 MiB\n4, GPU-7c4c2443-64fd-71c4-7111-95a1c6a92792, NVIDIA H200, 0 %, 0 MiB\n5, GPU-7e9050f1-d8e1-cce1-bbf2-604781548882, NVIDIA H200, 0 %, 0 MiB\n6, GPU-0ac81095-c9da-a4a0-86f4-7b4bafe84e45, NVIDIA H200, 0 %, 0 MiB\n7, GPU-134cf522-3da9-8c29-0c07-e73b92c7f77f, NVIDIA H200, 0 %, 0 MiB\nTEMP_DIRECTORY_ABSENT\n",
+      "provider_kill_local": "2026-10-02T18:10:00+08:00",
+      "provider_kill_utc": "2026-10-02T10:10:00+00:00",
+      "provider_running_seconds": 14411,
+      "provider_window_hours": 4,
+      "provider_average_utilization_pct": 19.9461,
+      "threshold_pct": 26,
+      "rule": "3 H100/H200\u5f00\u53d1\u673a",
+      "source": "User supplied resource kill notification",
+      "old_remote_outputs": "Temporary directory absent after restart; no original final output recoverable",
+      "accounting": "Retain conservative 600+30 seconds charge for each interrupted job; do not claim precise GPU stop clock from notification alone"
+    },
+    "conservative_killed_job_charge_gpu_hours": 1.4000000000000001,
+    "budget_includes_conservative_upper_bounds": true,
+    "actual_measured_completed_gpu_hours_excluding_killed": 12.805056704979652,
+    "accounting_note": "Eight provider-killed jobs retain original timeout upper bounds; cumulative GPU hours are conservative charged totals, not exact measured actual consumption for those eight jobs."
+  },
+  "second_pair_final_tested": false,
+  "second_pair_dev_repeated": true,
+  "next": "Strict timed endpoint precision preservation before more width distillation"
+}
