@@ -26,11 +26,17 @@ def main():
  seed=np.load(R/'research/robust-knife-family-20261003/data/repaired-seeds.npy')[1];relative=transform(seed[40:43],seed[43:47]);closed=seed[20:40].copy();opened=np.clip(closed*.30,policy.fk.lower,policy.fk.upper);opened[16:]=np.clip(closed[16:]-[.35,0,.25,0],policy.fk.lower[16:],policy.fk.upper[16:])
  if a.grasp_plan:
   plan=json.loads(a.grasp_plan.read_text());relative=np.linalg.inv(np.asarray(plan['wrist_in_knife']));closed=np.asarray(plan['close_q']);opened=np.asarray(plan['open_q'])
+ operating_closed=np.asarray(plan.get('post_lift_close_q',closed)) if a.grasp_plan else closed.copy()
+ post_lift_interval=plan.get('post_lift_preload_seconds') if a.grasp_plan else None
+ lift_preload_height=plan.get('lift_preload_height_m') if a.grasp_plan else None
+ if lift_preload_height:assert a.acquisition_path and not post_lift_interval and 0<=lift_preload_height[0]<lift_preload_height[1]<=.10
+ if post_lift_interval:
+  assert a.acquisition_path and 12<=post_lift_interval[0]<post_lift_interval[1]<=16-50/30,'Post-lift preload must leave50 real constant-target frames before policy takeover'
  thumb_script=None
  if a.thumb_script:
   assert a.grasp_plan and not a.residual_checkpoint
   thumb_script=json.loads(a.thumb_script.read_text());script_shifts=np.array([r['shift_m'] for r in thumb_script['rows']]);script_q=np.array([r['q_thumb'] for r in thumb_script['rows']]);assert np.isclose(script_shifts[0],0) and np.isclose(script_shifts[-1],.04)
-  script_preload=closed[16:]-np.asarray(plan['touch_q'])[16:];script_travel_seconds=float(thumb_script.get('travel_seconds',3.));assert 0<script_travel_seconds<5.
+  script_preload=operating_closed[16:]-np.asarray(plan['touch_q'])[16:];script_travel_seconds=float(thumb_script.get('travel_seconds',3.));assert 0<script_travel_seconds<5.
  policy_relative=relative.copy();policy_slider_estimate=None;handover_calibration=None
  if a.handover_calibration:
   handover_calibration=json.loads(a.handover_calibration.read_text());policy_relative=np.asarray(handover_calibration['object_in_wrist']);policy_slider_estimate=np.asarray(handover_calibration['slider_in_wrist']);assert policy_relative.shape==(4,4) and policy_slider_estimate.shape==(4,4)
@@ -41,6 +47,14 @@ def main():
    if u<=last['fraction']:
     alpha=smooth((u-first['fraction'])/(last['fraction']-first['fraction']));return np.asarray(first['q'])*(1-alpha)+np.asarray(last['q'])*alpha
   return closed
+ def hold_motor(t,aq=None):
+  if lift_preload_height:
+   height=kin.forward(aq)[:3,3][2]-grasp[2,3]
+   first,last=lift_preload_height;alpha=np.clip((height-first)/(last-first),0.,1.)
+   return closed+alpha*(operating_closed-closed)
+  if not post_lift_interval:return closed
+  first,last=post_lift_interval
+  return closed+smooth((t-first)/(last-first))*(operating_closed-closed)
  knife0=transform([.50+a.dx,-.30+a.dy,a.table_height+float(knife_parameters['handle_size'][1])/2+.0001],(Rotation.from_euler('z',a.yaw,degrees=True)*Rotation.from_euler('x',90,degrees=True)).as_quat());
  if a.slider_face=='down':knife0=knife0@transform(quaternion=Rotation.from_euler('z',180,degrees=True).as_quat())
  # Model envelope placement occurs only before the episode starts.
@@ -120,15 +134,15 @@ def main():
     if t<2:aq=qabove;hq=opened
     elif t<5:aq=acquisition_motor(approach_path,smooth((t-2)/3)) if a.acquisition_path else path_motor(1-smooth((t-2)/3)) if a.cartesian_path else qabove+smooth((t-2)/3)*(qgrasp-qabove);hq=opened
     elif t<8:aq=qgrasp;hq=close_motor((t-5)/3)
-    elif t<12:aq=acquisition_motor(lift_path,smooth((t-8)/4)) if a.acquisition_path else path_motor(smooth((t-8)/4)) if a.cartesian_path else qgrasp+smooth((t-8)/4)*(qlift-qgrasp);hq=closed
-    elif t<16 or a.grasp_only:aq=qlift;hq=closed
+    elif t<12:aq=acquisition_motor(lift_path,smooth((t-8)/4)) if a.acquisition_path else path_motor(smooth((t-8)/4)) if a.cartesian_path else qgrasp+smooth((t-8)/4)*(qlift-qgrasp);hq=hold_motor(t,aq) if lift_preload_height else closed
+    elif t<16 or a.grasp_only:aq=qlift;hq=hold_motor(t,aq)
     else:
      aq=qlift
      if not taken:
       slider_est=policy_slider_estimate if policy_slider_estimate is not None else policy_relative@transform([0,.0075,.010624586881962734+lower]);policy.takeover_estimate(q,target[hand].numpy(),policy_relative,slider_est);taken=True;operation_reference=rb[oid].numpy().copy()
      if thumb_script is not None:
       phase=int((t-16)/5);fraction=smooth(min(1.,((t-16)%5)/script_travel_seconds));shift=.04*(fraction if phase%2==0 else 1-fraction)
-      desired=closed.copy();desired[16:]=np.array([np.interp(shift,script_shifts,script_q[:,n]) for n in range(4)])+script_preload
+      desired=operating_closed.copy();desired[16:]=np.array([np.interp(shift,script_shifts,script_q[:,n]) for n in range(4)])+script_preload
       hq,act=policy.scripted_target(desired)
      else:
       hq,act=policy.command(q,.04 if int((t-16)/5)%2==0 else 0.,wrist_gravity=kin.forward(dof[arm,0].numpy())[:3,:3].T@np.array([0.,0.,-1.]))
@@ -150,6 +164,7 @@ def main():
   closed_ok=all(x is not None and x<.008 for x in [endpoints[1],endpoints[3]])
   report=dict(start='Knife resting on table; hand initially open at planned clearance (11.5cm for registered Cartesian path,16cm otherwise)',methods=('Motor-only scripted continuous-IK approach/close/lift' if a.cartesian_path or a.acquisition_path else 'Motor-only scripted joint-space approach/close/lift')+'; finite-torque gravity-compensated arm/hand; '+('pickup-only diagnostic' if a.grasp_only else ('offline-calibrated scheduled thumb IK with static joint preload' if thumb_script is not None else 'Scheduled calibrated rolling-thumb reference plus learned bounded residual using R800 legal features' if a.residual_checkpoint and policy.action_base_mode=='geometric' else 'R800 legal features plus learned bounded direct action' if a.residual_checkpoint and policy.action_base_mode=='zero' else 'R800+bounded residual' if a.residual_checkpoint else 'R800')+' after16s with once-loaded relative-grip calibration estimate'),lifted_clear=bool((h[held]>a.table_height+.03).all()) if held.any() else False,operation_stays_clear=bool((h[opmask]>a.table_height+.03).all()) if opmask.any() else False,meaningful_extension=opened_ok,retraction_after31s=closed_ok,full_success=False,minimum_hold_height_m=float(h[held].min()) if held.any() else None,max_object_height_m=float(h.max()),wall_seconds=time.monotonic()-started,positive_load_power_max_W=max_positive_power,weight_sha256={str(x.relative_to(R)):hashlib.sha256(x.read_bytes()).hexdigest() for x in [R/'runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth',R/'runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth']+([R/a.residual_checkpoint] if a.residual_checkpoint else [])},scope='Continuous physics attempt, no stage state writes. Meaningful25mm extension and8mm return are predeclared demo diagnostics; inherited40mm command unchanged. No preciseS5claim.')
   if a.acquisition_path:report['start']='Knife at configured tabletop edge with COM on table; open hand outside edge, lateral acquisition then vertical lift'
+  report['staged_preload']=dict(seconds=post_lift_interval,issued_arm_lift_height_interval_m=lift_preload_height,scope='Known motor targets coupled to issued-arm FK lift height or postlift clock; no live object/slider/contact, physical-state write or force regulation. Final full lift leaves≥50 actual constant-target frames before takeover') if post_lift_interval or lift_preload_height else None
   report.update(operation_evaluated=not a.grasp_only and a.seconds>=36,endpoints_mean_last03s_m=endpoints,diagnostic='Scheduled four5s stages; final0.3s mean >25mm extend and <8mm return on both cycles; no truth-triggered switching')
   if held.any() and opmask.any():
    handover_i=np.flatnonzero(held)[-1];op=trace['object'][opmask];origin=trace['object'][handover_i];drift=np.linalg.norm(op[:,:3]-origin[:3],axis=-1);rot=(Rotation.from_quat(origin[3:7]).inv()*Rotation.from_quat(op[:,3:7])).magnitude()
@@ -160,6 +175,15 @@ def main():
    report.update(operation_thumb_slider_contact_fraction=float((trace['finger_slider_contacts'][opmask,0]>0).mean()),operation_body_contact_fraction=(trace['finger_body_contacts'][opmask]>0).mean(0).tolist(),contact_scope='30Hz solver-contact diagnostics; current truth never fed to actor. Positive motor preload does not establish constant pressure.')
    report['operation_thumb_slider_contact_maintained']=report['operation_thumb_slider_contact_fraction']>=.90
   else:report['operation_thumb_slider_contact_maintained']=False
+  if held.any() and opmask.any() and not a.grasp_only:
+   operation_times=trace['time'][opmask]
+   def onset(mask):
+    ids=np.flatnonzero(mask);return float(operation_times[ids[0]]) if len(ids) else None
+   lost=trace['finger_slider_contacts'][opmask,0]==0
+   continuous_loss=np.convolve(lost.astype(int),np.ones(10,dtype=int),mode='valid')>=10 if len(lost)>=10 else np.zeros(0,dtype=bool)
+   first_loss=np.flatnonzero(continuous_loss)
+   report['failure_onsets_s']=dict(body_stability=onset((drift>=.01)|(rot>=.25)),height=onset(h[opmask]<=a.table_height+.03),sustained_thumb_slider_contact_loss=float(operation_times[first_loss[0]]) if len(first_loss) else None)
+   report['failure_onsets_scope']='Evaluation only: first stability/height breach, and first10 consecutive30Hz samples without thumb-slider contact. Legacy first_failure lists failed conditions by priority, not chronological onset. No control or completion-gate change.'
   report['extension_endpoint_condition_met']=opened_ok
   report['meaningful_extension']=opened_ok and report['operation_body_stable'] and report['operation_thumb_slider_contact_maintained']
   report['full_success']=report['operation_thumb_slider_contact_maintained'] and report['operation_body_stable'] and report['slider_closed_at_handover'] and report['operation_evaluated'] and report['lifted_clear'] and report['operation_stays_clear'] and opened_ok and closed_ok

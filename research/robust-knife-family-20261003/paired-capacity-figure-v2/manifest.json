@@ -1,0 +1,45 @@
+{
+  "scope": "Paired developmental actual TABLE chains. Evaluation-only simulated normal solver contacts; not hardware force, tangential force or constant-pressure regulation. Same P50/reference, sensor seed and materials; added running/startup terms differ.",
+  "sources": [
+    {
+      "trial": "runs/robust-knife-family-20261003/demo/g2-learned-heavy-pulse-v38",
+      "report_sha256": "82980385491d8342d76705af37886bb7df149d0e278861cb96cc5703e6a15bb4",
+      "trace_sha256": "21d54e6e5573df165caccd3ff881b1742077db1d660d1c10ae4114c3e93f3c6a",
+      "contact_schema": {
+        "sample_hz": 30,
+        "scope": "Evaluation-only solver contacts; no policy/controller input",
+        "magnitude": "RigidContact.lambda documented as contact force magnitude by installed IsaacGym Preview4; simulated solver quantity, not a measured hardware force",
+        "normal": "World direction body0 to body1",
+        "digits": [
+          "thumb",
+          "index",
+          "middle",
+          "ring",
+          "pinky"
+        ],
+        "force_note": "Normal solver contribution only; friction direction/total tangential force not inferred; position-target preload is not constant force"
+      },
+      "full_success": true
+    },
+    {
+      "trial": "runs/robust-knife-family-20261003/demo/g2-learned-capacity-pulse-v39",
+      "report_sha256": "6a223db4587b045435560be0eb276dd456d23272f14b660fdff0303c67f9442a",
+      "trace_sha256": "572ec298d2221627088dbdf69eaae252a4886817d2a62f52318c8bd4c42f6c6b",
+      "contact_schema": {
+        "sample_hz": 30,
+        "scope": "Evaluation-only solver contacts; no policy/controller input",
+        "magnitude": "RigidContact.lambda documented as contact force magnitude by installed IsaacGym Preview4; simulated solver quantity, not a measured hardware force",
+        "normal": "World direction body0 to body1",
+        "digits": [
+          "thumb",
+          "index",
+          "middle",
+          "ring",
+          "pinky"
+        ],
+        "force_note": "Normal solver contribution only; friction direction/total tangential force not inferred; position-target preload is not constant force"
+      },
+      "full_success": false
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "rows": [
+    {
+      "name": "direct-G2-R400-512-v15",
+      "completed": 347,
+      "checkpoint_sha256": "295d4cbf1f7b624b6ea498eefde36f914ccd44123d7e2810c2f86fbbda1631ef",
+      "n": 512,
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-R400-512-v15/report.json",
+      "pickup_valid": 471,
+      "fall": 119,
+      "severe_rotation_over_half_rad": 96,
+      "failure_counts": {
+        "body unstable/drop": 124,
+        "pickup/hold": 41
+      }
+    },
+    {
+      "name": "direct-G2-S400-512-v16",
+      "completed": 352,
+      "checkpoint_sha256": "8a9593e7893d69593aec01ee3fb803248302fe67677ddd0a9f94d915f9427a9d",
+      "n": 512,
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-S400-512-v16/report.json",
+      "pickup_valid": 470,
+      "fall": 130,
+      "severe_rotation_over_half_rad": 104,
+      "failure_counts": {
+        "body unstable/drop": 118,
+        "pickup/hold": 42
+      }
+    }
+  ],
+  "initial_snapshot_exact_equal": {
+    "root": true,
+    "dof": true,
+    "materials": true,
+    "observation_bias": true,
+    "delay": true,
+    "cal_object": true,
+    "cal_slider": true,
+    "load_amplitude": true,
+    "detent_amplitude": true,
+    "load_phase": true
+  },
+  "saved_comparison": {
+    "P50": 352,
+    "P200": 359,
+    "Q200": 350
+  },
+  "scope": "Frozen training-distribution development; same initial sampling, GPU PhysX prefix numerical differences prevent attribution of small count changes; independent012\u2013015 untouched",
+  "conclusion": "No substantive larger-residual learning/contact advantage; stop R/S and redirect to coordinated pressure/grasp mechanics."
+}

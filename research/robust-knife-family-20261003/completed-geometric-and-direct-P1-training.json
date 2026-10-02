@@ -1,0 +1,62 @@
+{
+  "geometric-P1": {
+    "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000300.pth",
+    "sha256": "44bb206a489da7f63ee1923e5131a646aa717b38ad5875eee299367c3c37dc71",
+    "training_receipt": {
+      "utc": "2026-10-02T23:11:32.639303+00:00",
+      "update": 300,
+      "transitions": 19660800,
+      "episodes": 52900,
+      "reward": 0.6269294023513794,
+      "loss": 84.95633494853973,
+      "kl": 0.008785199753901907,
+      "policy_active_fraction": 0.884552001953125,
+      "actual_hold_history_frames": 50,
+      "wall_seconds": 3152.441121129028,
+      "peak_extension_mean_m": 0.023646579662454315,
+      "contact_mean": 0.9598935848334804,
+      "fall_fraction": 0.4140625,
+      "scope": "Training fitting/behavior only"
+    }
+  },
+  "geometric-Q1": {
+    "checkpoint": "runs/robust-knife-family-20261003/train/geometric-Q1/update_000300.pth",
+    "sha256": "0261cd89af5112a156c514604d5fbcaeb11bc7e9e4d567373b46484cf7662d4a",
+    "training_receipt": {
+      "utc": "2026-10-02T23:11:36.363337+00:00",
+      "update": 300,
+      "transitions": 19660800,
+      "episodes": 52711,
+      "reward": 0.8267456889152527,
+      "loss": 102.13916647434235,
+      "kl": 0.005720838636534609,
+      "policy_active_fraction": 0.876220703125,
+      "actual_hold_history_frames": 50,
+      "wall_seconds": 3156.038909933006,
+      "peak_extension_mean_m": 0.022191378549905494,
+      "contact_mean": 0.9462208324111998,
+      "fall_fraction": 0.453125,
+      "scope": "Training fitting/behavior only"
+    }
+  },
+  "direct-G2-P1": {
+    "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-P1/update_000200.pth",
+    "sha256": "eaf2520407661600cbae0d9a561dded2e3730093f2401e29591fc04211e0e882",
+    "training_receipt": {
+      "utc": "2026-10-02T23:12:45.996766+00:00",
+      "update": 200,
+      "transitions": 4915200,
+      "episodes": 4759,
+      "reward": 0.015364156104624271,
+      "loss": 60.51366579532623,
+      "kl": 0.002138166530585295,
+      "policy_active_fraction": 0.14691162109375,
+      "actual_hold_history_frames": 50,
+      "wall_seconds": 652.5755904070102,
+      "peak_extension_mean_m": 0.018833352194633335,
+      "contact_mean": 0.6351370607735589,
+      "fall_fraction": 0.8203125,
+      "scope": "Training fitting/behavior only"
+    }
+  }
+}

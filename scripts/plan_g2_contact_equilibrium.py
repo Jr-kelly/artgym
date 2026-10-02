@@ -12,7 +12,7 @@ from scripts.g2_contact_geometry import DigitGeometry
 from scripts.wuji_kinematics import FINGERS
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--plan',type=Path,required=True);p.add_argument('--calibration',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--thumb-normal',type=float,default=1.5);p.add_argument('--joint-offset-limit',type=float,default=.20);p.add_argument('--friction',type=float,default=1.1);p.add_argument('--closed-slider-passive-limit',action='store_true',help='At lower mechanical stop, forbid unsupported positive thumb axial force that would pre-open a passive slider');a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
+    p=argparse.ArgumentParser();p.add_argument('--plan',type=Path,required=True);p.add_argument('--calibration',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--thumb-normal',type=float,default=1.5);p.add_argument('--joint-offset-limit',type=float,default=.20);p.add_argument('--friction',type=float,default=1.1);p.add_argument('--closed-slider-passive-limit',action='store_true',help='At lower mechanical stop, forbid unsupported positive thumb axial force that would pre-open a passive slider');p.add_argument('--table-margin',type=float,help='Optional nominal loaded motor-target/table separation in metres; independent swept-path audit still required');a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
     plan=json.loads(a.plan.read_text());g=DigitGeometry();h=g.w;q=np.asarray(plan['touch_q']);wrist=np.asarray(plan['wrist_in_knife']);normal=np.asarray(plan['contact_normals']);world=np.asarray(json.loads(a.calibration.read_text())['object_world_matrix'])
     def points(q):
         frames=h.forward(q);out=[]
@@ -41,12 +41,23 @@ def main():
     def forces(x):return -normal*x[:,0:1]+t1*x[:,1:2]+t2*x[:,2:3]
     def equality(flat):
         f=forces(flat.reshape(count,3));return np.r_[f.sum(0)+gravity,np.cross(contact-com,f).sum(0)*100]
+    def target_table_gaps(offset):
+        target=q+offset;frames=h.forward(target);wrist_world=world@wrist;gaps=[]
+        for name,meshes in g.meshes.items():
+            mat=wrist_world@frames[name]
+            for vertices,normals in meshes:
+                v=vertices@mat[:3,:3].T+mat[:3,3];axes=np.r_[np.eye(3),normals@mat[:3,:3].T]
+                proj=(v-np.array([.6,-.25,.725]))@axes.T;radius=abs(axes)@np.array([.3,.4,.025])
+                gaps.append(float(np.maximum(proj.min(0)-radius,-radius-proj.max(0)).max()))
+        return np.array(gaps)
     def inequality(flat):
         x=flat.reshape(count,3);offset=np.einsum('fij,fi->j',jac,forces(x))/kp
         constraints=np.r_[a.friction*x[:,0]-np.linalg.norm(x[:,1:],axis=1),offset-lower_offset,upper_offset-offset]
         if a.closed_slider_passive_limit:
             assert 0 in active
             constraints=np.r_[constraints,slider_axial_upper-forces(x)[active.index(0),2]]
+        if a.table_margin is not None:
+            constraints=np.r_[constraints,(target_table_gaps(offset)-a.table_margin)*100]
         return constraints
     seed=np.c_[preferred,-(t1@gravity)/count,-(t2@gravity)/count]
     fit=minimize(lambda x:float(((x.reshape(count,3)[:,0]-preferred)**2).sum()+.3*(x.reshape(count,3)[:,1:]**2).sum()),seed.ravel(),method='SLSQP',bounds=[b for _ in range(count) for b in [(0.08,3.),(-2.,2.),(-2.,2.)]],constraints=[dict(type='eq',fun=equality),dict(type='ineq',fun=inequality)],options=dict(maxiter=300,ftol=1e-12))
@@ -74,5 +85,6 @@ def main():
     audit=dict(method='Static nominal impedance equilibrium; does not measure or regulate contact force',args=vars(a),optimizer_success=bool(fit.success),message=fit.message,contact_points_knife_m=contact.tolist(),planned_force_on_knife_N=f.tolist(),normal_N=fit.x.reshape(count,3)[:,0].tolist(),active_fingers=[FINGERS[i] for i in active],wrench_residual=equality(fit.x).tolist(),friction_assumption=a.friction,force_safety_margin=inequality(fit.x).tolist(),joint_offset_unbounded_rad=offset.tolist(),joint_offset_actual_rad=(target-q).tolist(),offset_clipped=bool(np.max(abs(offset-bounded))>1e-8),motor_tau_nominal_Nm=motor_tau.tolist(),no_hardware_calibration=True)
     plan['equilibrium_audit']=audit
     audit.update(linear_feasible_seed=linear_seed,closed_slider_positive_axial_force_upper_N=slider_axial_upper if a.closed_slider_passive_limit else None)
+    if a.table_margin is not None:audit['nominal_loaded_target_minimum_table_gap_m']=float(target_table_gaps(target-q).min())
     (a.output/'motor-plan.json').write_text(json.dumps(plan,default=str,indent=2));(a.output/'audit.json').write_text(json.dumps(audit,default=str,indent=2));print(json.dumps(audit,default=str));assert fit.success and np.linalg.norm(equality(fit.x))<1e-4
 if __name__=='__main__':main()

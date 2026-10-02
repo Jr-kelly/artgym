@@ -1,0 +1,23 @@
+{
+  "args": {
+    "plan": "research/robust-knife-family-20261003/pressure-headroom-lift-coupled-v1/motor-plan.json",
+    "acquisition_path": "research/robust-knife-family-20261003/pressure-headroom-lateral-v1/acquisition-path.json",
+    "output": "research/robust-knife-family-20261003/pressure-headroom-ring-parked-v1",
+    "digit": "ring"
+  },
+  "rows": [
+    {
+      "success": true,
+      "message": "Optimization terminated successfully",
+      "minimum_constraint_m": 6.530962836509557e-17,
+      "q": [
+        -0.1403999769799767,
+        -0.199438209047614,
+        0.11302440361931303,
+        0.7065530208424166
+      ]
+    }
+  ],
+  "passed": true,
+  "scope": "Offline inactive-digit geometry only,31 lift knots; independent full-mesh selected-path audit and physics required. Active contacts unchanged."
+}

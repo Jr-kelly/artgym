@@ -11,7 +11,7 @@ from scipy.optimize import minimize
 from scripts.g2_contact_geometry import DigitGeometry
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--plan',type=Path,required=True);p.add_argument('--knife-spec',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--joint-step',type=float,default=.04);a=p.parse_args();a.output.parent.mkdir(parents=True,exist_ok=True)
+ p=argparse.ArgumentParser();p.add_argument('--plan',type=Path,required=True);p.add_argument('--knife-spec',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--joint-step',type=float,default=.04);p.add_argument('--thumb-base-margin',type=float,default=.08,help='Geometric reserve for original thumb base-joint limit; no motor-limit change');a=p.parse_args();a.output.parent.mkdir(parents=True,exist_ok=True)
  if a.output.exists():raise FileExistsError(a.output)
  j=json.loads(a.plan.read_text());g=DigitGeometry(knife_spec=a.knife_spec);h=g.w;w=np.array(j['wrist_in_knife']);q0=np.array(j['touch_q']);n=np.array(j['contact_normals'][0]);end=np.array(j['stroke_endpoint']['thumb_q']);v=np.concatenate([v for v,_ in g.meshes['hand_r_thumb_pad_link']]);rows=[];previous=q0[16:].copy()
  fixed=h.forward(q0);others=[]
@@ -38,8 +38,22 @@ def main():
   return point,facing,knife,selfgap
  def evaluate(x,shift):return sample(tuple(x),float(shift))
  start=evaluate(previous,0.)[0]
+ base_lower=h.lower[16:]+.08;base_upper=h.upper[16:]-.08
+ base_lower[0]=h.lower[16]+a.thumb_base_margin;base_upper[0]=h.upper[16]-a.thumb_base_margin
+ if a.thumb_base_margin>.08:
+  old=previous.copy()
+  def initial_constraints(x):
+   point,facing,knife,selfgap=evaluate(x,0.)
+   return np.r_[(.0001-np.linalg.norm(point-start))*1000,facing-.25,(knife-.000005)*1000,(selfgap-.000015)*1000]
+  initial=minimize(lambda x:float(np.sum(((evaluate(x,0.)[0]-start)*250)**2)+.05*np.sum((x-old)**2)),np.clip(old,base_lower,base_upper),method='SLSQP',bounds=list(zip(base_lower,base_upper)),constraints=[dict(type='ineq',fun=initial_constraints)],options=dict(maxiter=160,ftol=1e-11))
+  initial_audit=dict(old_thumb_q=old.tolist(),candidate_thumb_q=initial.x.tolist(),requested_base_margin_rad=a.thumb_base_margin,optimizer_success=bool(initial.success),minimum_constraint=float(initial_constraints(initial.x).min()),message=initial.message,scope='Geometry-only pressure-headroom hypothesis; no force or physics evidence')
+  a.output.with_suffix('.initial-audit.json').write_text(json.dumps(initial_audit,indent=2));print(json.dumps(initial_audit),flush=True)
+  assert initial_constraints(initial.x).min()>=-1e-4,'Rejected initial posture; do not execute'
+  previous=initial.x;q0[16:]=previous;j['touch_q']=q0.tolist()
+  a.output.with_suffix('.plan.json').write_text(json.dumps(j,indent=2))
+  start=evaluate(previous,0.)[0]
  for shift in np.linspace(0,.04,41):
-  desired=start+np.array([0.,0.,shift]);reference=q0[16:]*(1-shift/.04)+end*(shift/.04);prior=previous.copy();lo=np.maximum(h.lower[16:]+.08,prior-a.joint_step);hi=np.minimum(h.upper[16:]-.08,prior+a.joint_step)
+  desired=start+np.array([0.,0.,shift]);reference=q0[16:]*(1-shift/.04)+end*(shift/.04);prior=previous.copy();lo=np.maximum(base_lower,prior-a.joint_step);hi=np.minimum(base_upper,prior+a.joint_step)
   def objective(x):
    point,*_=evaluate(x,shift);return float(((point-desired)*250)**2@np.ones(3)+.05*np.sum((x-reference)**2))
   def constraints(x):

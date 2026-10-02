@@ -1,0 +1,38 @@
+{
+  "scope": "Paired frozen DEVELOPMENT on all512 training geometries, seed0356/joint randomization1; not independent confirmation",
+  "initial_conditions_all_fields_equal": {
+    "direct-G2-parent512-v12": true,
+    "direct-G2-P200-512-v13": true,
+    "direct-G2-Q200-512-v14": true
+  },
+  "results": {
+    "direct-G2-parent512-v12": {
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714",
+      "attempts": 512,
+      "complete": 352,
+      "pickup_valid": 473,
+      "fall": 122,
+      "rotations_above_half_rad": 101,
+      "thumb_contact_fraction_below90": 131
+    },
+    "direct-G2-P200-512-v13": {
+      "sha256": "eaf2520407661600cbae0d9a561dded2e3730093f2401e29591fc04211e0e882",
+      "attempts": 512,
+      "complete": 359,
+      "pickup_valid": 471,
+      "fall": 125,
+      "rotations_above_half_rad": 98,
+      "thumb_contact_fraction_below90": 131
+    },
+    "direct-G2-Q200-512-v14": {
+      "sha256": "2d680a6db36e3746d61f9d72003f4e617ade47f4e4601291594fe6e1bb36a1f3",
+      "attempts": 512,
+      "complete": 350,
+      "pickup_valid": 473,
+      "fall": 128,
+      "rotations_above_half_rad": 98,
+      "thumb_contact_fraction_below90": 135
+    }
+  },
+  "conclusion": "352/359/350 full completions; each122\u2013128 drops and98\u2013101 severe rotations. No substantive normal/contact-progress learning advantage. Continuous contact/support fragility is real. GPUPhysX trajectories differ slightly during scripted prefix even with identical initial snapshots, so small count differences are not attributed to learning."
+}

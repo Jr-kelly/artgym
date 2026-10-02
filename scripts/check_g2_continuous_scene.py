@@ -19,6 +19,7 @@ def main():
     a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False);torch.set_num_threads(4)
     saved=torch.load(a.checkpoint,map_location='cuda') if a.checkpoint else None
     scene=G2ContinuousScene(a.envs,a.seed,a.randomization_scale,instances=['000'] if a.nominal else None,reference_spec=saved.get('thumb_reference') if saved else None)
+    np.savez_compressed(a.output/'initial-snapshot.npz',root=scene.root.cpu().numpy(),dof=scene.dof.cpu().numpy(),materials=scene.material_tensor.cpu().numpy(),observation_bias=scene.observation_bias.cpu().numpy(),delay=scene.delay.cpu().numpy(),cal_object=scene.cal_object.cpu().numpy(),cal_slider=scene.cal_slider.cpu().numpy(),load_amplitude=scene.load_amplitude.cpu().numpy(),detent_amplitude=scene.detent_amplitude.cpu().numpy(),load_phase=scene.load_phase.cpu().numpy())
     model=ResidualActorCritic().to(scene.device)
     if saved:model.load_state_dict(saved['model']);model.eval()
     scale=torch.tensor(saved['action_scale'],device=scene.device) if saved else .25
