@@ -3,7 +3,7 @@
 本轮从 `1c45ef574d068d56e800cf22c51e1fc8f2c0fe2b` 接续，实验副本单独工作。
 真实刀柄主体输入为135×16×12mm（不含滑块），无按下解锁。主体/滑块质量、摩擦、阻力和执行器模型仍是仿真工程假设。
 
-当前完整demo未完成。正确新刀惯性下，G2连续取刀/保持可重复；功能抓姿可在接管前保持滑块闭合（v11）。C100残差候选接管后保持离桌，但刀身转动约1.27rad，拇指失去滑块接触，滑块随后被动打开，两次缩回均失败（v14/v15）。这不是持续压紧推进的成功。已开始实际闭合取刀抓姿的E/F训练，并检查另一种支撑布局。预置持刀开发评估C100为38/192，配对R800为16/192；独立几何尚未开启，不是完整demo成功率。
+当前完整demo未完成。正确新刀惯性下，G2连续取刀/保持可重复；功能抓姿可在接管前保持滑块闭合（v11）。C100残差候选接管后保持离桌，但刀身转动约1.27rad，拇指失去滑块接触，滑块随后被动打开，两次缩回均失败（v14/v15）。这不是持续压紧推进的成功。实际闭合取刀抓姿的E/F100配对开发诊断为26/192与28/192，对应R800为15/192；仅预置持刀子模块。新的长边支撑布局v18实际拿起并闭合保持，但带阻力v19在接管前丢失拇指滑块接触，接管后掉刀。预置持刀开发评估C100为38/192，配对R800为16/192；独立几何尚未开启，不是完整demo成功率。
 
 ## 恢复运行
 
@@ -79,3 +79,35 @@ python -m scripts.evaluate_wuji_robust_residual   --output runs/robust-knife-fam
 主要连续runner输出 `continuous.mp4`、`hand-closeup.mp4`、`trace.npz`、`plan.json`、`physics.json`、`report.json`。净接触力仅是诊断，不能冒充拇指与滑块接触对力。平衡计划中的牛顿数不是实测力或恒力闭环。0.10N是新增诊断负载上限的一种配置，不是实物阻力上界。
 
 本轮接续状态以 `STATE.json`、`HANDOFF.md`、`DECISIONS.jsonl`为准；PID和利用率必须重新核实。本轮不向真机发动作，最低12小时工作尚未完成。
+
+## 密集几何与接触位置机制（进行中）
+
+12个尺寸是早期诊断队列。当前训练采用512个联合均匀采样几何：W14–18、T10–14、L130–140mm，滑块轴向±5mm、横向±1mm；每个仿真slot的碰撞形状固定，运行期按回合连续随机化接触、起动/变化阻力、关节与校准误差、延迟。4个独立几何保留，不用于选模。
+
+```bash
+python -m scripts.prepare_wuji_dense_family --count 512 --seed 2026100330
+python -m scripts.train_wuji_robust_residual \
+  --output runs/robust-knife-family-20261003/train/recovered-dense-pressure \
+  --envs 2048 --updates 900 --seed 2026100334 \
+  --resume runs/robust-knife-family-20261003/train/acquired-F1/update_000100.pth \
+  --object knife_wuji_dense_acquired_20261003 --randomization-scale 1. \
+  --load-max .1 --detent-max .1 --support-residual-scale 1. --rotation-cost 4. \
+  --actual-hold-history 50 \
+  --wrist-nominal research/robust-knife-family-20261003/acquired-family-v1/wrist.json \
+  --wrist-probability 1. --thumb-slider-reward 1.5
+```
+
+G3与H3使用相同父模型、几何、种子和交互预算，唯一区别是上述reward系数0与1.5；机制比较必须与这个正常适配强基线配对。F100 SHA256为`6d4a2d4d22afd249a3f62b2de8607604879fcbf08c3db86f41a003264783cef2`。G1/H1的检查点恢复失败和G2/H2的同步检查失败已保留，成功启动的是G3/H3。
+
+Release几何恢复包`dense-family-v1-assets-caches.tar.gz` SHA256 `4179c0f63cb634c0f9ac742bfbc933881b7a0b86ff314052e026ae2b1f69b9a1`。从仓库根目录解压，或用上面的生成命令重建。单个对象的质量/惯性采用明确的恒定密度工程假设。
+
+新的实际长边取刀抓姿可按固定接管前15秒帧生成密集训练代理：
+
+```bash
+python -m scripts.prepare_wuji_acquisition_transfer \
+  --trace runs/robust-knife-family-20261003/demo/g2-side-edge-pressure-headroom-v18/trace.npz \
+  --name knife_wuji_dense_longside_20261003 \
+  --output research/robust-knife-family-20261003/longside-family-v1 --seed 2026100341
+```
+
+保留此前抓姿占50%，新实际长边抓姿占50%，不按策略成功筛选。静态缓存清零初速度的局限仍适用；连续G2流程从不在接管时重置物体或速度。

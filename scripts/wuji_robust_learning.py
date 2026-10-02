@@ -97,7 +97,7 @@ class LearningSystem:
         slider=env.rigid_body_states[:,env.object_link1_rb_handle]
         vertices=quat_apply(pad[:,None,3:7].expand(-1,count,-1).reshape(-1,4),self.thumb_vertices[None].expand(n,-1,-1).reshape(-1,3)).reshape(n,count,3)+pad[:,None,:3]
         local=quat_apply(quat_conjugate(slider[:,3:7])[:,None].expand(-1,count,-1).reshape(-1,4),(vertices-slider[:,None,:3]).reshape(-1,3)).reshape(n,count,3)
-        outside=(local.abs()-env.instance_link1_bbx[:,None]/2).clamp_min(0)
+        outside=(local.abs()-env.instance_link1_bbx[env.env2instance][:,None]/2).clamp_min(0)
         distance=outside.norm(dim=-1).amin(-1)
         return torch.exp(-(distance/.003).square())*env.contact_info[:,0].float()
 

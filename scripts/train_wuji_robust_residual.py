@@ -19,7 +19,9 @@ def main():
     system=LearningSystem(a.envs,a.seed,a.randomization_scale,a.load_max,a.detent_max,support_scale=a.support_residual_scale,rotation_cost=a.rotation_cost,wrist_nominal=wrist,wrist_probability=a.wrist_probability,object_name=a.object,history_hold_frames=a.actual_hold_history,thumb_slider_reward=a.thumb_slider_reward);device=system.env.device
     model=ResidualActorCritic().to(device);opt=torch.optim.Adam(model.parameters(),lr=3e-4,eps=1e-5);start=0
     if a.resume:
-        saved=torch.load(a.resume,map_location=device);model.load_state_dict(saved['model']);opt.load_state_dict(saved['optimizer']);start=saved['updates'];torch.set_rng_state(saved['rng_cpu']);torch.cuda.set_rng_state_all(saved['rng_cuda']);np.random.set_state(saved['rng_numpy'])
+        saved=torch.load(a.resume,map_location=device);model.load_state_dict(saved['model']);opt.load_state_dict(saved['optimizer']);start=saved['updates']
+        # map_location moves serialized RNG buffers too; generator APIs require CPU bytes.
+        torch.set_rng_state(saved['rng_cpu'].cpu());torch.cuda.set_rng_state_all([state.cpu() for state in saved['rng_cuda']]);np.random.set_state(saved['rng_numpy'])
     (a.output/'config.yaml').write_text(OmegaConf.to_yaml(system.cfg,resolve=True));(a.output/'args.json').write_text(json.dumps(vars(a),default=str,indent=2))
     basehash=tensor_hash(system.player.model.state_dict());begin=time.monotonic();stopping=[False]
     for sig in [signal.SIGTERM,signal.SIGINT]:signal.signal(sig,lambda *_:stopping.__setitem__(0,True))
