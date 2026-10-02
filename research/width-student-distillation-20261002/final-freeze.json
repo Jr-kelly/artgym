@@ -1,0 +1,140 @@
+{
+  "utc": "2026-10-02T09:32:37.027364+00:00",
+  "selected_main": "C_endpoint",
+  "models": {
+    "P": {
+      "path": "runs/unified-student-20261001/SA-real-51200/step_051200.pth",
+      "sha256": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9"
+    },
+    "teacher": {
+      "path": "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
+      "sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8"
+    },
+    "C": {
+      "path": "runs/width-student-distillation-20261002/C1-window1-h200-17314/step_052000.pth",
+      "sha256": "0a242f4caae4d9dd4714966c82a3b23b54b6d00d7c20b53c1f66948ed64e96c2"
+    },
+    "G": {
+      "path": "runs/width-student-distillation-20261002/G1-window1-h200-17314/step_052000.pth",
+      "sha256": "1ad5045b7df6cfb58a72ce2daf336dbe088529f79327235f0adb964acdf95b31"
+    },
+    "C_endpoint": {
+      "path": "runs/width-student-distillation-20261002/C1-window1-h200-17314/step_054400.pth",
+      "sha256": "b537578fc1123a6c3bad0358d8aa122b0c9c97bd970f98984960f685fa787a2f"
+    },
+    "G_endpoint": {
+      "path": "runs/width-student-distillation-20261002/G1-window1-h200-17314/step_054400.pth",
+      "sha256": "f2b86a7c41b97f464df4e60a7bcf01dc3512e9da6bd3316af0704f8ef6861f57"
+    }
+  },
+  "model_sha256": [
+    "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9",
+    "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+    "0a242f4caae4d9dd4714966c82a3b23b54b6d00d7c20b53c1f66948ed64e96c2",
+    "1ad5045b7df6cfb58a72ce2daf336dbe088529f79327235f0adb964acdf95b31",
+    "b537578fc1123a6c3bad0358d8aa122b0c9c97bd970f98984960f685fa787a2f",
+    "f2b86a7c41b97f464df4e60a7bcf01dc3512e9da6bd3316af0704f8ef6861f57"
+  ],
+  "cohorts": [
+    {
+      "geometry": "baseline",
+      "states": "runs/width-student-distillation-20261002/static/baseline-final-v2/valid-states.npy",
+      "states_sha256": "979b350c16cb0e32adfe3a14eff8ac30d046913ed8c6f9a0b5d1d63722325554",
+      "selection": "runs/width-student-distillation-20261002/static/baseline-final-v2/selection.json",
+      "selection_sha256": "e3c32d0a0f3249aab4b284aee5a7c5af676692824fbe488dabdb23e359380a20",
+      "source_counts": {
+        "0": 128,
+        "1": 128,
+        "2": 128,
+        "3": 128
+      },
+      "total": 512,
+      "asset_sha256": "aef357c6fa07c71b4f19a62f1feed29ce5fd672b0d04176155ced82aeac811fe"
+    },
+    {
+      "geometry": "W110",
+      "states": "runs/width-student-distillation-20261002/static/W110-final-v2/valid-states.npy",
+      "states_sha256": "6b23e89387dabc4cd82369104ad17b72d447755811f122c6c0d52debcb29f250",
+      "selection": "runs/width-student-distillation-20261002/static/W110-final-v2/selection.json",
+      "selection_sha256": "d6008abb1a65c7f1a4a57e0e869669858a88f088fa3844af81c0459052397d3b",
+      "source_counts": {
+        "0": 128,
+        "1": 128,
+        "2": 128,
+        "3": 93
+      },
+      "total": 477,
+      "asset_sha256": "526bd199915f3c712cb2bfbedb70374a92d17033ff31e3a787ed28f225800227"
+    },
+    {
+      "geometry": "W120",
+      "states": "runs/width-student-distillation-20261002/static/W120-final-v2/valid-states.npy",
+      "states_sha256": "77b3fa86015858f9e7f2e3931b9ca7ede3973b3b63790036e0d2ab6f6a136c74",
+      "selection": "runs/width-student-distillation-20261002/static/W120-final-v2/selection.json",
+      "selection_sha256": "041884bb003c32ae51c9a70e6f2e91540f3fad02d81db8fa1e7e61a91fa4cde7",
+      "source_counts": {
+        "0": 128,
+        "1": 128,
+        "2": 128,
+        "3": 90
+      },
+      "total": 474,
+      "asset_sha256": "c839dc80c90cfbbbb58dac29b9d1149e5f24635a19f211729785fad9b005f816"
+    },
+    {
+      "geometry": "W115",
+      "states": "runs/width-student-distillation-20261002/static/W115-final/valid-states.npy",
+      "states_sha256": "2d1a5cc1ec89f80ecd6c18b01e673214e93f81278975c995cf079f7c0bfe11c6",
+      "selection": "runs/width-student-distillation-20261002/static/W115-final/selection.json",
+      "selection_sha256": "80eacc8d80d1f5a8a38841038f5f505faeed1f18e938f0a88a72455d4c6bee37",
+      "source_counts": {
+        "0": 64,
+        "1": 64,
+        "2": 64,
+        "3": 59
+      },
+      "total": 251,
+      "asset_sha256": "3f8654733ae71237a4bc5b5bb8a69040cf302c811c59c7d8dcc3a562f96576cf"
+    },
+    {
+      "geometry": "W115_T110",
+      "states": "runs/width-student-distillation-20261002/static/W115_T110-final/valid-states.npy",
+      "states_sha256": "37e5eacaa05e737ef9a65a28719b03e6f3246b7beb80daf4746d97e87ae0117f",
+      "selection": "runs/width-student-distillation-20261002/static/W115_T110-final/selection.json",
+      "selection_sha256": "b1af0d9de796ec15bf7c2ac96a6bcbe5f685f64cd4bdf29140ac4480ace0aa2a",
+      "source_counts": {
+        "0": 64,
+        "1": 64,
+        "2": 64,
+        "3": 54
+      },
+      "total": 246,
+      "asset_sha256": "988acad4b92b4da593f2fb666fc9d94db847715bfe9decb37e13c99998c44949"
+    }
+  ],
+  "state_sha256": [
+    "979b350c16cb0e32adfe3a14eff8ac30d046913ed8c6f9a0b5d1d63722325554",
+    "6b23e89387dabc4cd82369104ad17b72d447755811f122c6c0d52debcb29f250",
+    "77b3fa86015858f9e7f2e3931b9ca7ede3973b3b63790036e0d2ab6f6a136c74",
+    "2d1a5cc1ec89f80ecd6c18b01e673214e93f81278975c995cf079f7c0bfe11c6",
+    "37e5eacaa05e737ef9a65a28719b03e6f3246b7beb80daf4746d97e87ae0117f"
+  ],
+  "source_sha256": "a1739e7c66f61705b0b1d1edbf78c33924fb455d20471a9d35767afa38cd795e",
+  "protocols": [
+    "F",
+    "S2",
+    "S5"
+  ],
+  "selection_priority": "Baseline preservation first, then W120source3 Fjoint/function, W110 and other sources; earlier checkpoint only on tied behavior.",
+  "selection_evidence": "COMPLETE_CONFIRM_MANIFEST.json; analysis/complete-confirm-v1; all72 firstpair dev runs",
+  "selection_reason": "C3200 baseline F64/63/64/63 versusP64/61/64/57 andG80062/60/64/58, W120source3joint53/61 versusG80056/61 with paired difference95[-.0328,.1475]. C3200 also preserves baseline S2/S5 better thanG800. Choose C3200 for broad retained behavior; show large early G800 benefit against its matched C800, plus G3200confirmedforgetting.",
+  "second_seed_scope": "Registered cleanparent repeat is validation of firstpair trends only, not added to candidate selection or frozen final matrix. No optimization after final opening.",
+  "final_policy_results_unread": true,
+  "historical_final_access": false,
+  "static_filter_only": true,
+  "unique_initial_states": 1960,
+  "evaluation_tasks": 90,
+  "episodes": 35280,
+  "batch_locked_per_geometry": true,
+  "no_padding": true
+}

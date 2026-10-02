@@ -1,0 +1,29 @@
+{
+  "utc": "2026-10-02T09:22:45.079034+00:00",
+  "parent": "runs/unified-student-20261001/SA-real-51200/step_051200.pth",
+  "parent_sha256": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9",
+  "arms": [
+    "C2",
+    "G2"
+  ],
+  "new_optimization_seed": 2026100216,
+  "absolute_start": 51200,
+  "absolute_endpoint": 54400,
+  "save_at": [
+    52000,
+    52800,
+    54400
+  ],
+  "added_updates_per_arm": 3200,
+  "added_transitions_per_arm": 3276800,
+  "source_sha256": "a1739e7c66f61705b0b1d1edbf78c33924fb455d20471a9d35767afa38cd795e",
+  "timeout_seconds_per_arm": 3000,
+  "expected_train_gpu_hours": 1.05,
+  "expected_repeat_dev_gpu_hours": 2.7,
+  "remaining_gpu_hours": 18.42261254708849,
+  "reserved_final_gpu_hours": 6,
+  "reason": "New independent confirmation reverses earlyG baseline1 concern: G80060/64 versusP61/64, W120source3G56/61 versusC3/61 andP0/61. This clear first-pair benefit plus sufficient budget satisfies the second-random-stream replication condition. Stop at same3200 endpoint; no extra main windows or hyperparameter changes.",
+  "supersedes": "No-repeat provisional development-only decision; changed before final opening on new confirmation evidence",
+  "scope": "Second matched seed repeats all three dev checkpoints; maincandidate confirmation and frozen final remain firstpair sixmodels unless prefinal evidence requires documented change",
+  "final_closed": true
+}

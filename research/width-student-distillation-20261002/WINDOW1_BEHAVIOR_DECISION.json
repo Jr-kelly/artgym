@@ -1,0 +1,61 @@
+{
+  "utc": "2026-10-02T09:01:19.149210+00:00",
+  "decision": "Stop further main training; confirm earlier G800/equal-updateC and retain full endpoint comparisons",
+  "rule": "Prioritize per-source baseline preservation before W120source3 joint success; keep matched-update control and all fixed endpoint evidence",
+  "candidate_G": {
+    "path": "runs/width-student-distillation-20261002/G1-window1-h200-17314/step_052000.pth",
+    "sha256": "1ad5045b7df6cfb58a72ce2daf336dbe088529f79327235f0adb964acdf95b31",
+    "added_updates": 800
+  },
+  "matched_C": {
+    "path": "runs/width-student-distillation-20261002/C1-window1-h200-17314/step_052000.pth",
+    "sha256": "0a242f4caae4d9dd4714966c82a3b23b54b6d00d7c20b53c1f66948ed64e96c2",
+    "added_updates": 800
+  },
+  "fixed_endpoints": {
+    "C": "runs/width-student-distillation-20261002/C1-window1-h200-17314/step_054400.pth",
+    "G": "runs/width-student-distillation-20261002/G1-window1-h200-17314/step_054400.pth"
+  },
+  "evidence": "runs/width-student-distillation-20261002/analysis/window1-complete-dev-v1/report.json",
+  "findings": {
+    "G800_W120source3_joint": [
+      29,
+      32
+    ],
+    "C800_W120source3_joint": [
+      1,
+      32
+    ],
+    "P_W120source3_joint": [
+      1,
+      32
+    ],
+    "G3200_W120source3_joint": [
+      32,
+      32
+    ],
+    "C3200_W120source3_joint": [
+      30,
+      32
+    ],
+    "G3200_baseline_source1_joint": [
+      13,
+      32
+    ],
+    "C3200_baseline_source1_joint": [
+      26,
+      32
+    ],
+    "P_baseline_source1_joint": [
+      26,
+      32
+    ]
+  },
+  "confirmation_pending": true,
+  "final_unopened": true,
+  "second_optimization_stream_not_started": true,
+  "repeat_reason": "Large late baseline-source1 forgetting and near-caught-up baseline-only C at fixed endpoint; useful next evidence is independent preservation and final tradeoff, not more optimization",
+  "cumulative_gpu_hours": 44.242423700052015,
+  "remaining_gpu_hours": 19.757576299947985,
+  "reserved_final_gpu_hours": 6
+}
