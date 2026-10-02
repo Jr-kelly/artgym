@@ -3,7 +3,7 @@
 本轮从 `1c45ef574d068d56e800cf22c51e1fc8f2c0fe2b` 接续，实验副本单独工作。
 真实刀柄主体输入为135×16×12mm（不含滑块），无按下解锁。主体/滑块质量、摩擦、阻力和执行器模型仍是仿真工程假设。
 
-当前中心条件完整仿真demo已完成：v30从桌边拿取135×16×12mm刀，保持闭合，再连续两轮伸出/保持/缩回；变化新增负载和被动起动幅度各0.05N，原有25mm/8mm、10mm/.25rad与持续接触诊断均通过。拇指路径使用离线校准的连续滚动接触几何与原始有限增益电机目标；不是恒力控制，也不是学习策略成功。v31新增三角形变化负载/起动各0.10N并降低摩擦、v32附近联合几何变化同样通过。v33将同一参考接入合法2076/154维策略接口，以零学习修正再次通过中心条件。完整必要泛化和独立检查尚未完成。
+当前中心条件完整仿真demo已完成：v30从桌边拿取135×16×12mm刀，保持闭合，再连续两轮伸出/保持/缩回；变化新增负载和被动起动幅度各0.05N，原有25mm/8mm、10mm/.25rad与持续接触诊断均通过。拇指路径使用离线校准的连续滚动接触几何与原始有限增益电机目标；不是恒力控制，也不是学习策略成功。v31新增三角形变化负载/起动各0.10N并降低摩擦、v32附近联合几何变化同样通过。v33将同一参考接入合法2076/154维策略接口，以零学习修正再次通过中心条件。v34–v36还通过了尺寸两端和小幅摆放联合变化（均开发检查）。v37接入真正训练过的P50残差，在中心条件完整连续成功；参考控制仍承担主体运动，不据此宣称学习收益。完整必要泛化和独立检查尚未完成。
 
 原始R800、普通残差和离线行为克隆在实际接管仍存在掉刀、转动或缩回失败。O1离线动作拟合误差小，但v29实际运行刀身转动2.56rad且未缩回，不能当作完成demo的学习权重。C100、E/F、G/H、I/J、K/L、M/N均保留为正常联合随机化/机制对照与失败证据；预置持刀检查与完整G2流程分开记录。旧固定材料点IK在27mm附近跳变约.928rad；新的41点连续滚动路径每1mm关节变化≤.04rad，实际最大刀身转动约.103rad。
 
@@ -179,3 +179,27 @@ python -m scripts.train_wuji_robust_residual \
 Q1仅将最后的reward系数改为4，其他初始checkpoint、种子、分布与交互预算一致；还未证明机制优势。154维可部署actor特征保持不变。几何参考每步根据已发目标计算动作，拇指学习修正不是无界积累；所有最终动作/电机目标保留原始限制。`--load-profile triangular|pulse|constant|sinusoidal|mixed`与`--load-frequency`用于登记的新阻力条件，默认sinusoidal/1.7保持旧模型。mixed为每回合固定类别，profile和阻力均不输入actor。
 
 连续runner新增物理几何、摩擦、变化负载、关节观测噪声/偏置的显式参数。脚本或零残差模式对观测噪声通过不等于学得噪声鲁棒性。初始校准是仿真离线理想先验，未接真实视觉或触觉。`--load .1`是工程新增量，不是实物总阻力上限。独立资产012–015保持关闭，后续候选冻结后才检查。
+
+## 实际 G2 完整场景训练
+
+`G2ContinuousScene`使用完整27自由度G2+Wuji机器人、桌面和被动刀；前16秒连续接近、闭合、抬起、保持，后20秒由同一参考加有界残差操作。不会在接管时重置位姿或速度。512个训练几何重复到1024个环境，逐回合随机化真实摆放、摩擦、负载、初始校准、关节偏置/噪声与一控制步延迟。只有新训练回合开始时重置，掉刀的回合计失败。actor始终接收实际关节/FK、实采50帧历史、已发目标及固定名义几何/一次离线校准。
+
+批量场景桥接先用非零P50权重与独立单G2入口比较：2076编码/134个测量与已知字段误差1.8e-7，最终电机目标误差2.4e-7rad。相同模型和相同输入在batch1下输出完全相同；冻结actor原始20维均值因batch8计算核差异约2.5e-4，原严格154维门槛仍记失败。补充的deployable门槛检查已知/测量字段、相同输入模型语义以及最终电机目标，不能称全部154维逐位一致。证据`checks/direct-G2-learned-P50-v8/bridge-parity.json`。八个名义完整物理回合全部完成，属于开发兼容检查。
+
+```bash
+python -m scripts.check_g2_continuous_scene \
+  --output runs/robust-knife-family-20261003/checks/recovered-direct-bridge \
+  --envs 8 --nominal --compatibility-gate deployable \
+  --checkpoint runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth
+python -m scripts.train_wuji_robust_residual \
+  --output runs/robust-knife-family-20261003/train/recovered-direct-G2-P \
+  --scene g2 --envs 1024 --updates 200 --seed 2026100357 \
+  --resume runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth \
+  --base-mode geometric \
+  --thumb-reference research/robust-knife-family-20261003/functional-side-edge-under-support-v6/continuous-thumb-v2.json \
+  --randomization-scale 1 --load-max .1 --detent-max .1 \
+  --support-residual-scale .25 --thumb-residual-scale .25 \
+  --rotation-cost 4 --actual-hold-history 50 --contact-progress-reward 0
+```
+
+这是从P50再训练150个更新的计划，不是已完成训练结论。实际G2训练固定sinusoidal/1.7工程负载，新的其他profile接口目前属于代理环境和完整单G2runner；不能把未传入实际训练的profile算作已覆盖。直接场景的接触奖励/训练诊断是网格近邻加净接触代理，部署runner另有接触对记录。

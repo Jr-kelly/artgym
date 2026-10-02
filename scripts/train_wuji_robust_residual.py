@@ -16,11 +16,18 @@ def main():
     p.add_argument('--thumb-residual-scale',type=float,default=.75);p.add_argument('--contact-progress-reward',type=float,default=0.)
     p.add_argument('--handover-profiles',type=Path)
     p.add_argument('--base-mode',choices=['r800','zero','geometric'],default='r800')
-    p.add_argument('--thumb-reference',type=Path)
+    p.add_argument('--thumb-reference',type=Path);p.add_argument('--scene',choices=['proxy','g2'],default='proxy')
     p.add_argument('--load-profile',choices=['sinusoidal','triangular','pulse','constant','mixed'],default='sinusoidal');p.add_argument('--load-frequency',type=float,default=1.7);a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
     torch.set_num_threads(4);torch.manual_seed(a.seed);np.random.seed(a.seed)
     wrist=json.loads(a.wrist_nominal.read_text())['wrist_quaternion_xyzw'] if a.wrist_nominal else None
-    system=LearningSystem(a.envs,a.seed,a.randomization_scale,a.load_max,a.detent_max,support_scale=a.support_residual_scale,rotation_cost=a.rotation_cost,wrist_nominal=wrist,wrist_probability=a.wrist_probability,object_name=a.object,history_hold_frames=a.actual_hold_history,thumb_slider_reward=a.thumb_slider_reward,thumb_scale=a.thumb_residual_scale,contact_progress_reward=a.contact_progress_reward,handover_profiles=a.handover_profiles,base_mode=a.base_mode,thumb_reference=a.thumb_reference,load_profile=a.load_profile,load_frequency=a.load_frequency);device=system.env.device
+    if a.scene=='g2':
+        from scripts.g2_continuous_scene import G2ContinuousScene
+        assert a.base_mode=='geometric' and a.actual_hold_history==50 and a.thumb_reference is not None
+        system=G2ContinuousScene(a.envs,a.seed,a.randomization_scale,load_max=a.load_max,detent_max=a.detent_max,contact_progress_reward=a.contact_progress_reward,reference_spec=json.loads(a.thumb_reference.read_text()),support_scale=a.support_residual_scale,thumb_scale=a.thumb_residual_scale)
+        (a.output/'scene.json').write_text(json.dumps(dict(platform='G2+Wuji v1',scope='Actual continuous tabletop acquisition and operation; resets only at new episode boundaries',prefix_control_frames=480,actual_history_frames=50,physics_hz=240,control_hz=30,geometry_slots=system.instances,policy_geometry_estimate='Same nominal geometry and fixed v25 prior for every instance',load_profile='sinusoidal1.7 with per-episode phase/amplitude/startup/groove',actor_inputs='154 measured/known public features,2076 frozenR800 encoder; no live object/slider/contact or assetID',critic='181 public+truth/contact/load, reward-only thumb proximity/contact proxy',joint_noise_std_rad=.002*a.randomization_scale,joint_bias_bound_rad=.006*a.randomization_scale,calibration_translation_bound_m=.001*a.randomization_scale,calibration_angle_bound_deg=1.5*a.randomization_scale,delay_probability=.15*a.randomization_scale,pickup_xy_error_bound_m=.001*a.randomization_scale,pickup_yaw_error_bound_deg=1.5*a.randomization_scale,friction_assumption={'hand':[.65,1.15],'knife':[1.8,3.4]},effort='Original gains and total motor torque clipped to G2/Wuji URDF limits'),indent=2))
+    else:
+        system=LearningSystem(a.envs,a.seed,a.randomization_scale,a.load_max,a.detent_max,support_scale=a.support_residual_scale,rotation_cost=a.rotation_cost,wrist_nominal=wrist,wrist_probability=a.wrist_probability,object_name=a.object,history_hold_frames=a.actual_hold_history,thumb_slider_reward=a.thumb_slider_reward,thumb_scale=a.thumb_residual_scale,contact_progress_reward=a.contact_progress_reward,handover_profiles=a.handover_profiles,base_mode=a.base_mode,thumb_reference=a.thumb_reference,load_profile=a.load_profile,load_frequency=a.load_frequency)
+    device=system.env.device
     model=ResidualActorCritic().to(device);opt=torch.optim.Adam(model.parameters(),lr=3e-4,eps=1e-5);start=0
     if a.resume:
         saved=torch.load(a.resume,map_location=device);model.load_state_dict(saved['model']);opt.load_state_dict(saved['optimizer']);start=saved['updates']
@@ -59,6 +66,8 @@ def main():
                 if np.mean(kls[-max(1,len(px)//a.minibatch):])>.03:break
             recent=system.stats[-min(128,len(system.stats)):]
             row=dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),update=u,transitions=system.transitions,episodes=system.episodes,reward=float(r.mean()),loss=float(np.mean(losses)),kl=float(np.mean(kls)),policy_active_fraction=float(eligible.float().mean()),actual_hold_history_frames=a.actual_hold_history,wall_seconds=time.monotonic()-begin,peak_extension_mean_m=float(np.mean([e['peak_extension_m'] for e in recent])) if recent else None,contact_mean=float(np.mean([e['thumb_contact_fraction'] for e in recent])) if recent else None,fall_fraction=float(np.mean([e['fall'] for e in recent])) if recent else None,scope='Training fitting/behavior only')
+            if a.scene=='g2':
+                row.update(recent_episode_count=len(recent),recent_complete_fraction=float(np.mean([e['operation_complete'] for e in recent])) if recent else None,recent_pickup_valid_fraction=float(np.mean([e['pickup_valid'] for e in recent])) if recent else None,all_complete_count=sum(e['operation_complete'] for e in system.stats),all_pickup_valid_count=sum(e['pickup_valid'] for e in system.stats),failure_counts={name:sum(e['failure']==name for e in recent) for name in ['pickup/hold','body unstable/drop','extension','retraction','thumb-contact']},behavior_scope='Training samples, last128 episodes may mix early failures and complete36s trajectories; never independent validation')
             with (a.output/'learning.jsonl').open('a') as f:f.write(json.dumps(row)+'\n')
             print(json.dumps(row),flush=True);last=u
             if u%50==0 or u==a.updates or stopping[0]:save(u)

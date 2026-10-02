@@ -1,0 +1,33 @@
+{
+  "source_report": "runs/robust-knife-family-20261003/checks/direct-G2-joint-P50-v9/report.json",
+  "checkpoint_sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714",
+  "scope": "Frozen DEVELOPMENT actual continuous TABLE chain, first8 training geometry instances; seed2026100356 and joint engineering randomization1.0. Not independent confirmation.",
+  "completed": 7,
+  "attempts": 8,
+  "all_pickup_valid": true,
+  "all_no_drop": true,
+  "failure": [
+    {
+      "episode": 6,
+      "env": 6,
+      "instance": "t0006",
+      "control_steps": 1080,
+      "pickup_valid": true,
+      "fall": false,
+      "operation_complete": false,
+      "endpoints_m": [
+        0.03762481361627579,
+        0.004504972603172064,
+        0.03844860568642616,
+        0.005117645487189293
+      ],
+      "peak_extension_m": 0.03864407539367676,
+      "max_body_drift_m": 0.003395404666662216,
+      "max_body_rotation_rad": 0.302931547164917,
+      "thumb_contact_fraction": 1.0,
+      "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+      "failure": "body unstable/drop"
+    }
+  ],
+  "conclusion": "7/8 full diagnostics pass; eighth remains held and extends/retracts both cycles but rotates0.303rad above fixed0.25rad threshold. No reclassification or tiny-threshold optimization. Actual pipeline much stronger than proxy-presets, warrants training on actual handover distribution."
+}
