@@ -18,6 +18,8 @@ def build(a):
     assert a.phase in ('dev','confirm','final')
     if a.phase=='final':assert state.get('candidate_frozen')
     assets=json.loads((D/'ASSETS.json').read_text());tasks=[]
+    accepted_manifest=D/'STATIC_ACCEPTANCE_MANIFEST.json'
+    accepted=json.loads(accepted_manifest.read_text()) if accepted_manifest.exists() else {}
     labels=['baseline','W110','W120']+(['W115','W115_T110'] if a.phase=='final' else [])
     models=[]
     discarded=D/'DISPOSABLE_OPTIMIZER_AUDIT.json'
@@ -30,6 +32,7 @@ def build(a):
         models.append((role,name,digest))
     for label in labels:
         directory=R/'runs'/ROUND/'static'/(label+'-'+a.phase)
+        if label in accepted.get(a.phase,{}):directory=R/accepted[a.phase][label]
         states=directory/'valid-states.npy';selection=directory/'selection.json'
         selected=json.loads(selection.read_text());assert selected['no_policy_filter']
         if not selected['selected_attempt_rows']:continue

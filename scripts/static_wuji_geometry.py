@@ -30,6 +30,7 @@ def main():
   reach=np.asarray([grasp[i//n]['thumb_reach_valid'] for i in range(len(states))],dtype=bool)
  geo=geo&reach
  cfg=configuration('wuji_geometry',len(states),overrides,train='wujiAcquisitionSAPG',seed=2026100209)
+ cfg.task.env.trainingStates=str(path.relative_to(root))
  (a.output/'config.yaml').write_text(OmegaConf.to_yaml(cfg,resolve=True));env=make_env(cfg)
  assert bool(env.instance_grasp_state_pose_is_local.all()), 'New cache must use hand_base poses'
  frames=[]

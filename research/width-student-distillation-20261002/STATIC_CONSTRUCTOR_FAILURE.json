@@ -1,0 +1,23 @@
+{
+  "utc": "2026-10-02T08:24:57.765778+00:00",
+  "failed_jobs": [
+    {
+      "job": "static-confirm-baseline-h200-17314",
+      "exit_code": 1,
+      "gpu_hours": 0.005488319341966416,
+      "stdout": "runs/width-student-distillation-20261002/jobs/static-confirm-baseline-h200-17314/stdout.log"
+    },
+    {
+      "job": "static-final-baseline-h200-17314",
+      "exit_code": 1,
+      "gpu_hours": 0.005856918043347024,
+      "stdout": "runs/width-student-distillation-20261002/jobs/static-final-baseline-h200-17314/stdout.log"
+    }
+  ],
+  "reason": "Static constructor also depended on untransferred historical small.npy before installing fresh fixed states",
+  "remaining_static_jobs_not_launched": true,
+  "partial_directories_preserved": true,
+  "planned_fix": "Set static constructor trainingStates to its own registered attempt path; launch distinct v2 output names after active checkpoint queue completes",
+  "formal_training_affected": false,
+  "parent_dev_rescore_complete": true
+}
