@@ -6,7 +6,7 @@
 {
   "start_utc": "2026-10-02T06:19:52.569245+00:00",
   "base_sha": "89689142c9f0e52fb679ce710f9c95a55b8a6643",
-  "phase": "Prepared and verified locally; blocked before H200 precheck and paired optimization",
+  "phase": "Prepared branch and evidence public; H200 execution blocked by SSH transport",
   "historical_gpu_hours": 40.43593221975697,
   "max_gpu_hours": 64,
   "reserved_final_gpu_hours": 6,
@@ -26,12 +26,27 @@
   "optimizer_updates": 0,
   "final_opened": false,
   "closed_historical_final_sets": true,
-  "next": "Publish independent preparation branch/Release with explicit unfinished H200 status",
+  "next": "Restore provided endpoint connectivity; inventory/reconcile actual remote jobs/devices/cost, then same-H200 precheck/disposable matched updates and formal3200-update C/G window. Goal unfinished; do not rerun completed preparation or historical finals",
   "last_event": {
-    "utc": "2026-10-02T07:00:15.286312+00:00",
-    "event": "prepared_packet_critical_restore_verified",
-    "evidence": "research/width-student-distillation-20261002/PREPARATION_RESTORE.json",
-    "next": "Publish independent preparation branch/Release with explicit unfinished H200 status"
+    "utc": "2026-10-02T07:07:59.259334+00:00",
+    "event": "preparation_release_published_and_server_digests_verified",
+    "evidence": "research/width-student-distillation-20261002/preparation-release-index.json",
+    "state_updates": {
+      "delivery": {
+        "release_id": 401601529,
+        "tag": "wuji-width-student-distillation-20261002-preparation-v1",
+        "draft": false,
+        "published": true,
+        "release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-width-student-distillation-20261002-preparation-v1",
+        "assets": 2,
+        "digests_verified": true,
+        "prepared_packet_restored_files": 161,
+        "scientific_training_complete": false
+      },
+      "blocked_goal_turns": 1
+    },
+    "phase": "Prepared branch and evidence public; H200 execution blocked by SSH transport",
+    "next": "Restore provided endpoint connectivity; inventory/reconcile actual remote jobs/devices/cost, then same-H200 precheck/disposable matched updates and formal3200-update C/G window. Goal unfinished; do not rerun completed preparation or historical finals"
   },
   "active_gpu_elapsed_hours": 0,
   "remaining_including_active": 23.524612853065,
@@ -41,6 +56,18 @@
   "local_multiasset_reset_step_verified": true,
   "h200_precheck_complete": false,
   "local_preparation_complete": true,
-  "heldout_static_checks_complete": true
+  "heldout_static_checks_complete": true,
+  "delivery": {
+    "release_id": 401601529,
+    "tag": "wuji-width-student-distillation-20261002-preparation-v1",
+    "draft": false,
+    "published": true,
+    "release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-width-student-distillation-20261002-preparation-v1",
+    "assets": 2,
+    "digests_verified": true,
+    "prepared_packet_restored_files": 161,
+    "scientific_training_complete": false
+  },
+  "blocked_goal_turns": 1
 }
 ```
