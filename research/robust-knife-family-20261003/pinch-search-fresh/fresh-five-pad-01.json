@@ -1,0 +1,249 @@
+{
+  "name": "fresh-five-pad-01",
+  "kind": "geometric_touch_only",
+  "validation": "No physics execution; accepted only requests further exact collision/path checks",
+  "initial_flex": 0.45,
+  "initial_pitch_rad": -0.3,
+  "initial_thumb": [
+    1.49269234,
+    0.1443374,
+    -0.38077782,
+    -0.40536288
+  ],
+  "wrist_in_knife": [
+    [
+      -0.329462884697697,
+      -0.2834561341230579,
+      0.9006146943253164,
+      -0.14058013528790064
+    ],
+    [
+      0.9352990960637494,
+      0.03245690635447648,
+      0.35236649973036605,
+      -0.020000000000000004
+    ],
+    [
+      -0.12911161260322535,
+      0.9584357929761951,
+      0.2544229200231122,
+      -0.006520791517794738
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "touch_q": [
+    -0.0753959058022456,
+    -0.35183449525962346,
+    -0.19503806727020906,
+    1.5460317378530062,
+    0.01189101345328078,
+    -0.35496258670465797,
+    -0.29914601231076027,
+    1.5594997966663726,
+    0.022393734899201073,
+    -0.33706914887605854,
+    -0.413109271899019,
+    1.5582900300412161,
+    0.004960006686911512,
+    -0.2300815391341037,
+    -0.31737962071363457,
+    1.5483999285427086,
+    1.5882999256401553,
+    0.9173992700665926,
+    0.6341718704156362,
+    0.14390551271947502
+  ],
+  "joint_names": [
+    "hand_r_index_joint1",
+    "hand_r_index_joint2",
+    "hand_r_index_joint3",
+    "hand_r_index_joint4",
+    "hand_r_middle_joint1",
+    "hand_r_middle_joint2",
+    "hand_r_middle_joint3",
+    "hand_r_middle_joint4",
+    "hand_r_pinky_joint1",
+    "hand_r_pinky_joint2",
+    "hand_r_pinky_joint3",
+    "hand_r_pinky_joint4",
+    "hand_r_ring_joint1",
+    "hand_r_ring_joint2",
+    "hand_r_ring_joint3",
+    "hand_r_ring_joint4",
+    "hand_r_thumb_joint1",
+    "hand_r_thumb_joint2",
+    "hand_r_thumb_joint3",
+    "hand_r_thumb_joint4"
+  ],
+  "contact_targets": [
+    [
+      -0.008,
+      -0.001,
+      0.004685268405873232
+    ],
+    [
+      0.008,
+      -0.001,
+      0.051595425906043685
+    ],
+    [
+      0.008,
+      -0.001,
+      0.01912861740338004
+    ],
+    [
+      0.008,
+      -0.001,
+      -0.0009475618097063407
+    ],
+    [
+      0.008,
+      -0.001,
+      -0.04017531890240242
+    ]
+  ],
+  "contact_normals": [
+    [
+      -1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ]
+  ],
+  "contact_points": [
+    [
+      -0.021592310257917975,
+      0.012566437380472547,
+      0.004685268405873232
+    ],
+    [
+      0.004886931549462864,
+      0.02417605162439866,
+      0.051595425906043685
+    ],
+    [
+      0.009689324822914786,
+      0.022430838413089127,
+      0.01912861740338004
+    ],
+    [
+      0.010474481506990726,
+      0.02329325859875394,
+      -0.0009475618097063407
+    ],
+    [
+      0.002571527751004073,
+      0.0262209094873534,
+      -0.04017531890240242
+    ]
+  ],
+  "contact_errors_m": [
+    0.019204143337982694,
+    0.025367790021444837,
+    0.02349165824495174,
+    0.024418957227415983,
+    0.027756913089837736
+  ],
+  "pad_facing_cosines": [
+    -0.465172618159246,
+    0.9894237884523964,
+    0.9974244405225283,
+    0.9971768071696339,
+    0.957614000599104
+  ],
+  "min_convex_separating_gap_m": -0.003977202792759867,
+  "min_table_clearance_m": -0.055402132299969375,
+  "length_contact_spacing_m": [
+    0.03246680850266365,
+    0.02007617921308638,
+    0.039227757092696075
+  ],
+  "joint_margin_min_rad": 0.015000000956710835,
+  "geometric_pass": false,
+  "stages": [
+    {
+      "collision_weight": 100,
+      "cost": 138.72480083385594,
+      "nfev": 42,
+      "message": "`ftol` termination condition is satisfied."
+    },
+    {
+      "collision_weight": 500,
+      "cost": 173.33930926309023,
+      "nfev": 42,
+      "message": "`xtol` termination condition is satisfied."
+    }
+  ],
+  "seconds": 6.125136852264404,
+  "active_fingers": [
+    "thumb",
+    "index",
+    "middle",
+    "ring",
+    "pinky"
+  ],
+  "excluded_fingers": [],
+  "thumb_palm_constraint": false,
+  "balance_long_axis_requested": true,
+  "thumb_to_four_pad_centroid_z_m": -0.0027150222434555085,
+  "balanced_margin_requested": false,
+  "self_collision_pairs_constrained": [],
+  "required_long_spacing_m": 0.012,
+  "knife_spec": "research/robust-knife-family-20261003/real-knife-asset-spec.json",
+  "planning_object_world": [
+    [
+      1.0000000000000002,
+      0.0,
+      0.0,
+      0.5
+    ],
+    [
+      0.0,
+      0.0,
+      -1.0000000000000002,
+      -0.3
+    ],
+    [
+      0.0,
+      1.0000000000000002,
+      0.0,
+      0.7561
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "planning_pose_status": "Provisional table envelope placement at supplied orientation; actual settling on new geometry unmeasured",
+  "planning_localization_source": "research/robust-knife-family-20261003/table-localization-configured.json",
+  "planning_localization_method": "unspecified",
+  "use_recorded_table_pose": false,
+  "planning_slider_m": null,
+  "constraint_change": "New explicitly parameterized measured-envelope asset, actual three convex components; baseline asset unchanged"
+}

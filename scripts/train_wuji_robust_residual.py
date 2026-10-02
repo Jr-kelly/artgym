@@ -1,0 +1,60 @@
+"""PPO pilot for meaningful load/contact behavior; resumable model/Adam/RNG.
+Base R800 encoder, teacher actor and normalizer remain unchanged.
+"""
+import argparse,datetime,hashlib,json,signal,time
+from pathlib import Path
+from scripts.wuji_robust_learning import LearningSystem,ResidualActorCritic,TEACHER,R800
+import torch,numpy as np
+from omegaconf import OmegaConf
+from scripts.wuji_student_interface import tensor_hash
+
+def main():
+    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);p.add_argument('--envs',type=int,default=512);p.add_argument('--updates',type=int,default=400);p.add_argument('--horizon',type=int,default=32);p.add_argument('--seed',type=int,default=2026100307);p.add_argument('--randomization-scale',type=float,default=.5);p.add_argument('--load-max',type=float,default=.1);p.add_argument('--detent-max',type=float,default=.1);p.add_argument('--epochs',type=int,default=4);p.add_argument('--minibatch',type=int,default=4096);p.add_argument('--resume',type=Path)
+    p.add_argument('--support-residual-scale',type=float,default=.25);p.add_argument('--rotation-cost',type=float,default=0.);p.add_argument('--wrist-nominal',type=Path);p.add_argument('--wrist-probability',type=float,default=.5)
+    a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
+    torch.set_num_threads(4);torch.manual_seed(a.seed);np.random.seed(a.seed)
+    wrist=json.loads(a.wrist_nominal.read_text())['wrist_quaternion_xyzw'] if a.wrist_nominal else None
+    system=LearningSystem(a.envs,a.seed,a.randomization_scale,a.load_max,a.detent_max,support_scale=a.support_residual_scale,rotation_cost=a.rotation_cost,wrist_nominal=wrist,wrist_probability=a.wrist_probability);device=system.env.device
+    model=ResidualActorCritic().to(device);opt=torch.optim.Adam(model.parameters(),lr=3e-4,eps=1e-5);start=0
+    if a.resume:
+        saved=torch.load(a.resume,map_location=device);model.load_state_dict(saved['model']);opt.load_state_dict(saved['optimizer']);start=saved['updates'];torch.set_rng_state(saved['rng_cpu']);torch.cuda.set_rng_state_all(saved['rng_cuda']);np.random.set_state(saved['rng_numpy'])
+    (a.output/'config.yaml').write_text(OmegaConf.to_yaml(system.cfg,resolve=True));(a.output/'args.json').write_text(json.dumps(vars(a),default=str,indent=2))
+    basehash=tensor_hash(system.player.model.state_dict());begin=time.monotonic();stopping=[False]
+    for sig in [signal.SIGTERM,signal.SIGINT]:signal.signal(sig,lambda *_:stopping.__setitem__(0,True))
+    def save(u):
+        assert tensor_hash(system.player.model.state_dict())==basehash
+        payload=dict(format='wuji-r800-residual-ppo-v1',model=model.state_dict(),optimizer=opt.state_dict(),updates=u,transitions=system.transitions,args=vars(a),actor_inputs='111 legal public+20 issued+20 frozen base action+3 wrist gravity; no current truth',critic_inputs='actor features+21 truth+5 contact+1 load',action_scale=system.scale.tolist(),teacher_sha256=hashlib.sha256(TEACHER.read_bytes()).hexdigest(),student_sha256=hashlib.sha256(R800.read_bytes()).hexdigest(),base_tensor_hash=basehash,rng_cpu=torch.get_rng_state(),rng_cuda=torch.cuda.get_rng_state_all(),rng_numpy=np.random.get_state(),resume='Optimizer/RNG restored; new physics episodes, no bitwise solver continuation')
+        f=a.output/f'update_{u:06d}.pth';tmp=f.with_suffix('.tmp');torch.save(payload,tmp);tmp.replace(f);f.with_suffix('.sha256').write_text(hashlib.sha256(f.read_bytes()).hexdigest()+'\n')
+    last=start
+    try:
+        for u in range(start+1,a.updates+1):
+            public=[];critic=[];actions=[];logs=[];values=[];rewards=[];dones=[]
+            for step in range(a.horizon):
+                x,c=system.features()
+                with torch.no_grad():dist,value=model(x,c);action=dist.sample();log=dist.log_prob(action).sum(-1)
+                reward,done=system.step(action)
+                public.append(x);critic.append(c);actions.append(action);logs.append(log);values.append(value);rewards.append(reward);dones.append(done)
+            with torch.no_grad():
+                # Bootstrap without advancing frozen actor RNN a second time.
+                next_public,next_critic=system.features();_,nv=model(next_public,next_critic)
+            v=torch.stack(values);r=torch.stack(rewards);d=torch.stack(dones);adv=torch.zeros_like(r);gae=torch.zeros(a.envs,device=device)
+            for t in reversed(range(a.horizon)):
+                nextv=nv if t==a.horizon-1 else v[t+1];live=(~d[t]).float();delta=r[t]+.995*nextv*live-v[t];gae=delta+.995*.95*live*gae;adv[t]=gae
+            returns=(adv+v).flatten();advantages=adv.flatten();advantages=(advantages-advantages.mean())/(advantages.std()+1e-8)
+            px=torch.stack(public).flatten(0,1);cx=torch.stack(critic).flatten(0,1);ac=torch.stack(actions).flatten(0,1);lp=torch.stack(logs).flatten();losses=[];kls=[]
+            for epoch in range(a.epochs):
+                for ids in torch.randperm(len(px),device=device).split(a.minibatch):
+                    dist,value=model(px[ids],cx[ids]);newlog=dist.log_prob(ac[ids]).sum(-1);ratio=(newlog-lp[ids]).exp();piloss=-torch.minimum(ratio*advantages[ids],ratio.clamp(.8,1.2)*advantages[ids]).mean();vloss=.5*(value-returns[ids]).square().mean();loss=piloss+.5*vloss-.001*dist.entropy().sum(-1).mean()
+                    opt.zero_grad(set_to_none=True);loss.backward();torch.nn.utils.clip_grad_norm_(model.parameters(),1.);opt.step();losses.append(float(loss));kls.append(float(((ratio-1)-(newlog-lp[ids])).mean()))
+                if np.mean(kls[-max(1,len(px)//a.minibatch):])>.03:break
+            recent=system.stats[-min(128,len(system.stats)):]
+            row=dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),update=u,transitions=system.transitions,episodes=system.episodes,reward=float(r.mean()),loss=float(np.mean(losses)),kl=float(np.mean(kls)),wall_seconds=time.monotonic()-begin,peak_extension_mean_m=float(np.mean([e['peak_extension_m'] for e in recent])) if recent else None,contact_mean=float(np.mean([e['thumb_contact_fraction'] for e in recent])) if recent else None,fall_fraction=float(np.mean([e['fall'] for e in recent])) if recent else None,scope='Training fitting/behavior only')
+            with (a.output/'learning.jsonl').open('a') as f:f.write(json.dumps(row)+'\n')
+            print(json.dumps(row),flush=True);last=u
+            if u%50==0 or u==a.updates or stopping[0]:save(u)
+            if stopping[0]:break
+        (a.output/'training-episodes.jsonl').write_text(''.join(json.dumps(s)+'\n' for s in system.stats));(a.output/'complete.json').write_text(json.dumps(row,indent=2))
+    finally:
+        if last>start and not (a.output/f'update_{last:06d}.pth').exists():save(last)
+        system.close()
+if __name__=='__main__':main()

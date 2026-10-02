@@ -1,0 +1,15 @@
+{
+  "priority": "Continuous G2 tabletop pickup first; loaded manipulation adaptation proceeds concurrently",
+  "started_utc": "2026-10-02T18:53:50+00:00",
+  "minimum_useful_hours": 12,
+  "expected_earliest_completion_utc": "2026-10-03T06:53:50+00:00",
+  "cap_gpu_hours": null,
+  "queue": [
+    "Inspect calibrated pickupv3 and actual contact gaps; repair pickup/handover without physics state writes",
+    "Inspect pilotA2/B2 behavior at50/100 updates; compare fixedR800 same conditions; extend only meaningful contact/load/stability progress",
+    "Integrate effective controller with acquired G2 state; no forced180flip or longholding",
+    "Expand useful joint randomization incl actual wrist/grasp states, separate static invalidity from operationfailures",
+    "Freeze effective candidate/code/config; independent unseen geometry/loadprofile/initialstate repeats,continuous+failure videos",
+    "Package code,weights,configs,commands,resourceledger,clear incomplete/demo labels; publish newGitHubRelease; verify recoverability/serverSHA/video download"
+  ]
+}

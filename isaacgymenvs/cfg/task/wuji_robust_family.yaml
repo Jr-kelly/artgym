@@ -1,0 +1,14 @@
+defaults:
+  - wuji_acquisition_bridge3_hemisphere
+  - _self_
+name: wuji_robust_family
+env:
+  episodeLength: 600
+  trainingCommandDurationsSec: [5.0, 5.0]
+  enableStudentEncoderObs: true
+  proprioHistoryLen: 50
+  studentInitObsDim: 55
+  robustLoadMaxN: 0.10
+  robustDetentMaxN: 0.10
+  robustRandomizationScale: 0.5
+  robustDelayProbability: 0.15

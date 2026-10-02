@@ -1,0 +1,37 @@
+{
+  "version": "real135x16x12-20261003",
+  "asset_urdf": "assets/objects/knife_wuji_real_size_20261002/000/mobility.urdf",
+  "file_sha256": {
+    "slider-shoulder.obj": "6bcb93ed47518ebd2afc75b36827edeb5f7646fe3cb8302345be8a2507870f7b",
+    "mobility.urdf": "d73aaecc9892fbdfd75a755389311936cf8b1f0d8361cfc66ea94ab5f391cb97",
+    "parameters.json": "78a4b75c0a6bf94ee065d33186e7f144785773415606f98e4f48d247c81852dd"
+  },
+  "planning": {
+    "side_half_width_m": 0.008,
+    "side_contact_y_interval_m": [
+      -0.004,
+      0.004
+    ],
+    "side_flat_z_interval_m": [
+      -0.06,
+      0.06
+    ]
+  },
+  "measurement": {
+    "handle_lwt_mm": [
+      135,
+      16,
+      12
+    ],
+    "thickness_excludes_slider": true,
+    "unlock_required": false
+  },
+  "unmeasured": [
+    "slider geometry",
+    "rail travel",
+    "mass",
+    "inertia",
+    "friction",
+    "resistance"
+  ]
+}
