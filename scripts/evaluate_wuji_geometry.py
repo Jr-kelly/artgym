@@ -20,6 +20,9 @@ def main():
  teacher='runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth';student=a.student_checkpoint
  factory=evaluator.make_player;capture={};receipt={}
  def make_player(cfg,checkpoint):
+  # The constructor needs a reset pool before fixed evaluation is installed.
+  # Use this registered cohort rather than an unrelated historical fallback.
+  cfg.task.env.trainingStates=a.states
   env,player=factory(cfg,checkpoint);player.model.eval()
   for v in player.model.parameters():v.requires_grad_(False)
   assert env.object_cfg['asset']['asset_root']=='assets/objects/'+entry['object']

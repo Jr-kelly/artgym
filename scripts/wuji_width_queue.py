@@ -47,6 +47,11 @@ def build(a):
                 tasks.append(dict(key=key,name=name,role=role,geometry=label,phase=a.phase,identity=identity,
                                   command=command,output=output,selection=str(selection.relative_to(R)),seconds=a.seconds,status='pending'))
     assert tasks
+    # Obtain the primary width and preservation signals before secondary
+    # protocols; this ordering changes no episodes or comparison identities.
+    tasks.sort(key=lambda t:(t['identity']['protocol']!='F',
+        {'W120':0,'baseline':1,'W110':2}.get(t['geometry'],3),
+        {'teacher':0,'P':1,'G':2,'C':3}.get(t['role'],4),t['key']))
     a.output.parent.mkdir(parents=True,exist_ok=True)
     assert not a.output.exists(), 'Queue is immutable; resume it rather than regenerate'
     a.output.write_text(json.dumps(dict(round=ROUND,historical_final_access=False,tasks=tasks),indent=2)+'\n')
@@ -57,7 +62,7 @@ def build(a):
 def run(a):
     state=json.loads((D/'STATE.json').read_text());assert state['remote_inventory_verified']
     assert not state['remote_additional_consumption_unknown']
-    ssh=json.loads(os.environ['WUJI_WIDTH_SSH_ARGV']);assert 'wangjiarui@10.13.160.5' in ssh and '33024' in ssh
+    ssh=json.loads(os.environ['WUJI_WIDTH_SSH_ARGV']);assert 'wangjiarui@10.13.160.5' in ssh and '17314' in ssh
     inventory=subprocess.check_output(ssh+['nvidia-smi --query-gpu=index,name,memory.used --format=csv,noheader,nounits'],text=True,timeout=25,env=host_tool_environment())
     devices={int(r.split(',')[0]):r.split(',') for r in inventory.strip().splitlines()}
     assert len(a.gpus)<=8 and len(set(a.gpus))==len(a.gpus)
@@ -67,10 +72,12 @@ def run(a):
         queue=json.loads(a.queue.read_text());assert queue['round']==ROUND
         assert not any(t['status']=='running' for t in queue['tasks']), 'Reconcile recorded jobs before recovery; never duplicate'
         active={};pending=[t for t in queue['tasks'] if t['status']=='pending']
+        failure_seen=any(t['status']=='failed' for t in queue['tasks'])
         def save():
             tmp=a.queue.with_suffix('.tmp');tmp.write_text(json.dumps(queue,indent=2)+'\n');tmp.replace(a.queue)
         while pending or active:
             for gpu in a.gpus:
+                if failure_seen:break
                 if gpu in active or not pending:continue
                 task=pending.pop(0)
                 assert task['identity']['source_sha256']==source_hash(R), 'Source changed; retain queue and preregister a new version'
@@ -83,9 +90,13 @@ def run(a):
                 code=child.poll()
                 if code is not None:
                     task.update(status='complete' if code==0 else 'failed',exit_code=code);del active[gpu];save()
+                    if code:failure_seen=True
+            if failure_seen and not active:break
             if active:time.sleep(3)
         record('finite_evaluation_queue_finished',evidence=str(a.queue),completed=sum(t['status']=='complete' for t in queue['tasks']),
-               failed=sum(t['status']=='failed' for t in queue['tasks']),next='Audit coverage and independently rescore; no retry or next training window without evidence')
+               failed=sum(t['status']=='failed' for t in queue['tasks']),
+               pending=sum(t['status']=='pending' for t in queue['tasks']),
+               next='Inspect first failure before launching further tasks' if failure_seen else 'Audit coverage and independently rescore; no retry or next training window without evidence')
 
 
 def main():

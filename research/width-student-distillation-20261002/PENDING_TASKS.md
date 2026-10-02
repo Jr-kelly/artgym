@@ -1,3 +1,11 @@
+# Current execution after endpoint update
+
+Authorized endpoint is wangjiarui@10.13.160.5:17314. Eight H200 and compatible existing runtime verified. Prior SSH block is historical. Formal C1/G1 first matched window now running from untouched51200 to54400; same-H200 prechecks and fresh teacher from-reset compatibility passed.
+
+Next: collect atomic52000/52800/54400 snapshots, run source-matched finite development queues alongside training, compare G/equal-updateC/P by primary W120source3 joint behavior and preservation. Stop at54400 unless Goal section6 permits a subsequent matched window. Confirmation/final/analysis/videos remain required and candidate-dependent. Preserve6GPUh and cumulative64GPUh cap.
+
+Historical preconnection pending list retained below for provenance:
+
 # Pending execution
 
 Hard blocker: provided SSH endpoint TCP connection times out before authentication. No remote GPU inventory or new remote-cost reconciliation exists. Do not infer current PID/utilization from old documents.

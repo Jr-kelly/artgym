@@ -18,7 +18,7 @@ out=dict(hostname=platform.node(),utc=command(['date','-u','+%FT%TZ'])['stdout']
  cpu_count=os.cpu_count(),memory=pathlib.Path('/proc/meminfo').read_text(),disk_tmp=dict(zip(['total','used','free'],shutil.disk_usage('/tmp'))),
  gpu=command(['nvidia-smi','--query-gpu=index,uuid,name,utilization.gpu,memory.used,driver_version','--format=csv,noheader,nounits']),
  compute=command(['nvidia-smi','--query-compute-apps=pid,process_name','--format=csv,noheader']),
- runtime_path='/tmp/wuji-student-runtime/bin/python')
+ runtime_path='/home/wangjiarui/artgym-runtime/bin/python')
 for label,root in [('geometry','/tmp/artgym-geometry-20261002'),('width','/tmp/artgym-width-20261002')]:
  root=pathlib.Path(root);d=root/'research'/('geometry-generalization-20261002' if label=='geometry' else 'width-student-distillation-20261002')
  if (d/'STATE.json').exists():out[label+'_state']=json.loads((d/'STATE.json').read_text())
@@ -40,7 +40,7 @@ print(json.dumps(out))
 def main():
     p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);a=p.parse_args()
     ssh=json.loads(os.environ['WUJI_WIDTH_SSH_ARGV'])
-    assert ssh[0]=='ssh' and 'wangjiarui@10.13.160.5' in ssh and '33024' in ssh
+    assert ssh[0]=='ssh' and 'wangjiarui@10.13.160.5' in ssh and '17314' in ssh
     import shlex
     now=datetime.datetime.now(datetime.timezone.utc).isoformat()
     try:

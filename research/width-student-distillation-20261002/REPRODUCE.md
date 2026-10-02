@@ -1,3 +1,5 @@
+Current authorized port is17314 (user updated the connection after the documented33024 timeout). Existing remote runtime `/home/wangjiarui/artgym-runtime/bin/python` was verified and reused. Current source contract permits only the updated authorized endpoint. Set authentication privately as before. Same-H200 zero-change/disposable/fresh teacher checks passed; resume current active receipts, not a duplicate formal trial. Current parent/teacher dev queue is v7; v6 failed the missing constructor fallback dependency and is preserved.
+
 # Resume the prepared width experiment
 
 This is a prepared, unfinished experiment. H200 training and final policy evaluation have not run. The static preparation packet is separate from the prior closed geometry/student final datasets. Never substitute historical finals for new training or selection data.

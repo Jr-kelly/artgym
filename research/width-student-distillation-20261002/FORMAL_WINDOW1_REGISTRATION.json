@@ -1,0 +1,45 @@
+{
+  "utc": "2026-10-02T08:08:22.243272+00:00",
+  "window": 1,
+  "arms": [
+    "C1",
+    "G1"
+  ],
+  "parent_sha256": "16202c4ee4c60d37391108ebb9318fd9d4e1eb4cecbaef21965d5249f1328bf9",
+  "absolute_start": 51200,
+  "absolute_endpoint": 54400,
+  "save_at": [
+    52000,
+    52800,
+    54400
+  ],
+  "added_updates_per_arm": 3200,
+  "added_interactions_per_arm": 3276800,
+  "optimization_seed": 2026100215,
+  "envs": 256,
+  "rollout_steps": 4,
+  "timeout_seconds_per_arm": 4200,
+  "measured_max_h200_full_loop_seconds_per_update": 0.6236808658759401,
+  "estimated_training_seconds": 1995.7787708030082,
+  "first_paired_conclusion_eta_minutes": [
+    40,
+    55
+  ],
+  "final_delivery_eta_minutes_if_one_window_suffices": [
+    80,
+    120
+  ],
+  "eta_conditional_on_behavior_rule": true,
+  "cumulative_before_launch": 40.89478192418034,
+  "remaining_before_launch": 23.105218075819657,
+  "reserved_final_gpu_hours": 6,
+  "formal_timeout_upper_bound_gpu_hours": 2.3333333333333335,
+  "planned_first_window_dev_upper_bound_gpu_hours": 9.0,
+  "source_sha256": "225473d1931b25a84183347b61c3bd7ac910c100cf531573d498217a3b75e7fa",
+  "required_technical_checks_passed": true,
+  "fresh_teacher_from_reset_compatible": true,
+  "selection_primary": "W120 source3 F joint success; functional separately; baseline and width source2 preservation",
+  "same_backend": "H200",
+  "no_historical_final_access": true,
+  "discarded_checkpoint_start_forbidden": true
+}

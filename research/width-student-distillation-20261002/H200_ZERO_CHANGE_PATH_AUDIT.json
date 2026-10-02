@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "backend": "H200",
+  "device": "NVIDIA H200",
+  "differences": {
+    "public": 0.0,
+    "x": 0.0,
+    "action": 0.0,
+    "target": 0.0,
+    "rnn": 0.0,
+    "incoming": 0.0
+  },
+  "tolerances": {
+    "public": 2e-06,
+    "x": 2e-06,
+    "action": 2e-05,
+    "target": 2e-06,
+    "rnn": 0.0002,
+    "incoming": 0.0002
+  },
+  "original": "runs/width-student-distillation-20261002/precheck/zero-change-original-h200-17314",
+  "multiasset": "runs/width-student-distillation-20261002/precheck/zero-change-multiassetC-h200-17314",
+  "fixture_sha256": "c48034fb371d3cbbfaace6647fd12294e4dec59a0c949f9e1e893074d9a07b41",
+  "scope": "Original vs zero-change multiassetC path on same device; no H200 certification from local preparation"
+}

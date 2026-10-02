@@ -33,7 +33,7 @@ def main():
     p.add_argument('--seconds',type=int,required=True);p.add_argument('--local',action='store_true')
     p.add_argument('--reserved-phase',choices=['confirm','final','delivery'])
     p.add_argument('--remote-root',default='/tmp/artgym-width-20261002')
-    p.add_argument('--runtime',default='/tmp/wuji-student-runtime/bin/python')
+    p.add_argument('--runtime',default='/home/wangjiarui/artgym-runtime/bin/python')
     p.add_argument('--disposable-precheck',action='store_true',help='Local bounded optimizer smoke only; never a scientific candidate')
     p.add_argument('command',nargs=argparse.REMAINDER)
     a=p.parse_args(); command=a.command[1:] if a.command[:1]==['--'] else a.command
@@ -41,7 +41,7 @@ def main():
     # Operator supplies an existing SSH argv in private environment. It is never
     # serialized, echoed or included in a public receipt.
     ssh=[] if a.local else json.loads(os.environ['WUJI_WIDTH_SSH_ARGV'])
-    assert a.local or (ssh[0]=='ssh' and 'wangjiarui@10.13.160.5' in ssh and '33024' in ssh)
+    assert a.local or (ssh[0]=='ssh' and 'wangjiarui@10.13.160.5' in ssh and '17314' in ssh)
     state=json.loads((D/'STATE.json').read_text()); jobs=R/'runs/width-student-distillation-20261002/jobs'
     jobs.mkdir(parents=True,exist_ok=True)
     def host(shell):
