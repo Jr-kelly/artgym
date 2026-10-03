@@ -41,7 +41,7 @@ def main():
                 weight=R/checkpoint;assert weight.is_file(),weight;files.append(weight)
                 if weight.with_suffix('.sha256').exists():files.append(weight.with_suffix('.sha256'))
     elif a.group=='demos':
-        endings=['v37','v38','v39','v45','v46','v50','v55','v56','v58','v59','v60','v61','v62','v63','v64']
+        endings=['v37','v38','v39','v45','v46','v50','v55','v56','v58','v59','v60','v61','v62','v63','v64','v65']
         for folder in (base/'demo').iterdir():
             if folder.is_dir() and any(folder.name.endswith(e) for e in endings) and (folder/'report.json').exists(): files.extend(f for f in folder.iterdir() if f.is_file())
         folder=base/'checks/batch-video-full-v49';files.extend(f for f in folder.iterdir() if f.is_file())

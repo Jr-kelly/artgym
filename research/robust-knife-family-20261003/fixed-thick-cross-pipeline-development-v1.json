@@ -1,0 +1,64 @@
+{
+  "native_evidence": "runs/robust-knife-family-20261003/demo/g2-native-thick-pipeline-compat-v65",
+  "batch_evidence": "runs/robust-knife-family-20261003/checks/thick-pipeline-compat-v61",
+  "shared_condition": {
+    "instance": "t0053",
+    "takeover_seconds": 16,
+    "profile": "sinusoidal",
+    "frequency_rad_s": 1.7,
+    "phase_rad": 0.4,
+    "run_startup_amplitudes_N": [
+      0.05,
+      0.05
+    ],
+    "materials": [
+      1,
+      3
+    ],
+    "sensor_noise_bias": [
+      0,
+      0
+    ]
+  },
+  "prefix_max_target_difference_rad": 4.76837158203125e-07,
+  "prefix_max_measured_q_difference_rad": 0.07932806015014648,
+  "native": {
+    "full_success": false,
+    "endpoints_m": [
+      0.036448966841109924,
+      0.0007236517137951321,
+      0.03722843439835641,
+      0.0019150163150495952
+    ],
+    "max_rotation_rad": 0.31006346044608357,
+    "thumb_contact_fraction": 1.0,
+    "failure_onsets_s": {
+      "body_stability": 22.633333333333333,
+      "height": null,
+      "sustained_thumb_slider_contact_loss": null
+    }
+  },
+  "batch": {
+    "episode": 0,
+    "env": 0,
+    "instance": "t0053",
+    "control_steps": 1080,
+    "pickup_valid": true,
+    "fall": false,
+    "operation_complete": false,
+    "endpoints_m": [
+      0.03624684363603592,
+      0.0010975184850394726,
+      0.037027209997177124,
+      0.0019898784812539816
+    ],
+    "peak_extension_m": 0.03730516880750656,
+    "max_body_drift_m": 0.002991120330989361,
+    "max_body_rotation_rad": 0.37058621644973755,
+    "thumb_contact_fraction": 1.0,
+    "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+    "failure": "body unstable/drop"
+  },
+  "bridge_deployable_passed": true,
+  "scope": "Two implementations and GPU/runtime hosts, not isolated pipeline-causality experiment. BothactualTABLE workflows completeextend/return but failoriginalbodyrotationlimit. Sameprefixcommands; numericcontacttrajectoriesdiffer. No generalization/real-capacity extrapolation."
+}

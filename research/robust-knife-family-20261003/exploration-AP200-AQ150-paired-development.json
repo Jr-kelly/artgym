@@ -1,0 +1,56 @@
+{
+  "scope": "Development only:150 newupdates each, same512 unfiltered initial cases and original criteria; exploration is not physical gain or constant force.",
+  "results": {
+    "AP200": {
+      "evidence": "runs/robust-knife-family-20261003/checks/AP200-exploration-lift8-joint-v62",
+      "n": 512,
+      "complete": 347,
+      "top_thickness_n": 128,
+      "top_thickness_complete": 4,
+      "failures": {
+        "pickup/hold": 46,
+        "body unstable/drop": 119
+      },
+      "initial_fields_equal": {
+        "root": true,
+        "dof": true,
+        "materials": true,
+        "observation_bias": true,
+        "delay": true,
+        "cal_object": true,
+        "cal_slider": true,
+        "load_amplitude": true,
+        "detent_amplitude": true,
+        "load_phase": true,
+        "load_profile_ids": true,
+        "load_frequencies": true
+      }
+    },
+    "AQ150": {
+      "evidence": "runs/robust-knife-family-20261003/checks/AQ150-exploration-lift8-joint-v63",
+      "n": 512,
+      "complete": 348,
+      "top_thickness_n": 128,
+      "top_thickness_complete": 4,
+      "failures": {
+        "pickup/hold": 42,
+        "body unstable/drop": 122
+      },
+      "initial_fields_equal": {
+        "root": true,
+        "dof": true,
+        "materials": true,
+        "observation_bias": true,
+        "delay": true,
+        "cal_object": true,
+        "cal_slider": true,
+        "load_amplitude": true,
+        "detent_amplitude": true,
+        "load_phase": true,
+        "load_profile_ids": true,
+        "load_frequencies": true
+      }
+    }
+  },
+  "conclusion": "No substantive resolution of thick-body support/rotation failure; retain P50 and stop this finite exploration hypothesis rather than optimize small development counts."
+}
