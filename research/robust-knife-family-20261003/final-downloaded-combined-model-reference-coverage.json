@@ -1,0 +1,706 @@
+{
+  "reports": 127,
+  "reports_with_verified_checkpoint_reference": 113,
+  "supplied_checkpoint_paths": 83,
+  "verified_references": [
+    {
+      "report": "runs/robust-knife-family-20261003/checks/closing-context-AT-final-development-v1/report.json",
+      "report_archive": "closing-context-adaptation-evidence.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/closing-context-AT-v1/update_000350.pth",
+      "sha256": "4b5ffbf8b3d4f431b159929843d9872010578a6d55f1dbba8fbf9949f8037b57"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/closing-context-AU-final-development-v1/report.json",
+      "report_archive": "closing-context-adaptation-evidence.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/closing-context-AU-v1/update_000350.pth",
+      "sha256": "9892757927353a38b67cc296d161786af9ca1f56d00ecd0a4c2916f93266c3f6"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/closing-context-initial-development-v1/report.json",
+      "report_archive": "closing-context-adaptation-evidence.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/closing-context-P50-v1/context_initial.pth",
+      "sha256": "9ee7b71a31e9c7b57b374bad0efc4ed783ac45ae85e6e68d9ef6ef8ed4fabaad"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/batch-video-full-v49/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/demo/g2-P50-half-step-capacity-v45/report.json",
+      "report_archive": "continuous-demos-and-failures.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/demo/g2-P50-half-step-heavy-success-check-v46/report.json",
+      "report_archive": "continuous-demos-and-failures.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/demo/g2-P50-slider-contact-failure-v56/report.json",
+      "report_archive": "continuous-demos-and-failures.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/demo/g2-P50-slider-contact-success-v55/report.json",
+      "report_archive": "continuous-demos-and-failures.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/demo/g2-geometric-learned-P50-loaded-v37/report.json",
+      "report_archive": "continuous-demos-and-failures.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/demo/g2-learned-capacity-pulse-v39/report.json",
+      "report_archive": "continuous-demos-and-failures.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/demo/g2-learned-heavy-pulse-v38/report.json",
+      "report_archive": "continuous-demos-and-failures.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/demo/g2-learned-lift8-heavy-v63/report.json",
+      "report_archive": "continuous-demos-and-failures.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/demo/g2-learned-thick-heavy-v64/report.json",
+      "report_archive": "continuous-demos-and-failures.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/demo/g2-native-thick-pipeline-compat-v65/report.json",
+      "report_archive": "continuous-demos-and-failures.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/deploy/P50-offline-v1/report.json",
+      "report_archive": "continuous-demos-and-failures.tar.gz",
+      "checkpoint_paths_matching_reported_sha256": [
+        "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+      ],
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/delivery-restored-independent-capacity-breadth-v1/report.json",
+      "report_archive": "final-downloaded-recovery-evidence.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/delivery-restored-independent-capacity-v1/report.json",
+      "report_archive": "final-downloaded-recovery-evidence.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/delivery-restored-independent-core-breadth-v1/report.json",
+      "report_archive": "final-downloaded-recovery-evidence.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/delivery-restored-independent-core-v1/report.json",
+      "report_archive": "final-downloaded-recovery-evidence.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/delivery-restored-independent-fresh-capacity-v1/report.json",
+      "report_archive": "final-downloaded-recovery-evidence.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/delivery-restored-independent-fresh-core-v1/report.json",
+      "report_archive": "final-downloaded-recovery-evidence.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/delivery-restored-independent-height-sensitivity-v1/report.json",
+      "report_archive": "final-downloaded-recovery-evidence.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/demo/final-downloaded-P50-failure-v69/report.json",
+      "report_archive": "final-downloaded-recovery-evidence.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/demo/final-downloaded-P50-heavy-v68/report.json",
+      "report_archive": "final-downloaded-recovery-evidence.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/deploy/final-downloaded-P50-failure-offline-v4/report.json",
+      "report_archive": "final-downloaded-recovery-evidence.tar.gz",
+      "checkpoint_paths_matching_reported_sha256": [
+        "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+      ],
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/deploy/final-downloaded-P50-offline-v3/report.json",
+      "report_archive": "final-downloaded-recovery-evidence.tar.gz",
+      "checkpoint_paths_matching_reported_sha256": [
+        "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+      ],
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AC200-nominal-v33/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AC1/update_000200.pth",
+      "sha256": "e780b1e036c45e3bddc253dd75f352ad97d1d757bcda8c88cb0b0fbfdf8cf9c7"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AD200-nominal-v35/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AD1/update_000200.pth",
+      "sha256": "c8f5a14f30df8ee51fbbb1ce8f1fbd99ec025dd56cf97cd30ea5458688b04b56"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AE200-joint-v34/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AE1/update_000200.pth",
+      "sha256": "825e23a1bdb4be64357c9f35d3e7c31f84befc6cdb39666476ebc201fbec807d"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AF200-joint-v36/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AF1/update_000200.pth",
+      "sha256": "ab8fe4157f098401a76787421ff441d186971cfb834d6c8fe8d4359184ea3bf8"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AH200-joint-v39/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AH1/update_000200.pth",
+      "sha256": "dca2e32d6a6b0b9a170c8baec2a1f0930c112808d6c196731b51404605b72dbe"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AI200-joint-v44/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AI1/update_000200.pth",
+      "sha256": "18e6a1f6861fc998160af7fa80330b60a53c19b22b412fd76f9058cca6d1733a"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AK200-joint-v52/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AK1/update_000200.pth",
+      "sha256": "59886d7e8bf0ade034800875a2be213e42f1d1fee2c2c3cd4af1570f6d9eb45a"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AL200-lift8-joint-v53/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AL1/update_000200.pth",
+      "sha256": "51e20a7610bd8424a11bfcd1a118fe41e09fc3737d56a3824f00946d63badab3"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AM150-lift8-joint-v54/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AM1/update_000150.pth",
+      "sha256": "c6b5d91a7abbef4f2977e4eba1bacfe36a962907d163c59c7282bcbcf1c15692"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AN200-corrected-lift8-joint-v57/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AN1/update_000200.pth",
+      "sha256": "7b7388d209aeef2953a4ee6cd4865f7597da7c4dc8da11c8c6db1cecde4ce25e"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AO150-corrected-lift8-joint-v58/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AO1/update_000150.pth",
+      "sha256": "fda8aa0e6626fbba46493b01f676bdaa45ff2deae717e184ffecdfb7ae6d00f8"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AP200-exploration-lift8-joint-v62/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AP1/update_000200.pth",
+      "sha256": "90481906d73baf9b660ca6f486b6ce28091e525d3268abba362e620bebaa12bc"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AQ150-exploration-lift8-joint-v63/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AQ1/update_000150.pth",
+      "sha256": "40eb0d83d7530cd86726966818c79dbe7906e2c90bd041926265da75cffcc13d"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/P0-lift8-joint-v55/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-reference-P0/geometric_reference.pth",
+      "sha256": "39acf6ad7fb9b675e95c71bc0b02213db7a7ebba940f60ecc76915216afcea5b"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/P50-early512-v40/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/P50-lift8-joint512-v51/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/P50-lift8-reward-transition-v56/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/batch-video-precheck-v48/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-AA200-mixed512-v32/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AA1/update_000200.pth",
+      "sha256": "c86be687ca5f1ce81eea873fb40b71fa81f66647838b453d8f000eee5a746112"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-AB200-mixed512-v33/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AB1/update_000200.pth",
+      "sha256": "4fed82df27adf9b9ee803d7c825466691bf0f10e00278412bff5acb24b425a13"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-P100-joint-v10/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-P1/update_000100.pth",
+      "sha256": "62136c06dcbfe4de2092ec1d80757658be71392f7b42dc32b692aee55e6daacd"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-P200-512-v13/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-P1/update_000200.pth",
+      "sha256": "eaf2520407661600cbae0d9a561dded2e3730093f2401e29591fc04211e0e882"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-P50-mixed512-v21/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-P50-mixed512-v28/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-Q100-joint-v11/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-Q1/update_000100.pth",
+      "sha256": "36cf866017f07ce8eb8acf79c14f06e5969a92e84a047b669bc8e895071dfc1f"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-Q200-512-v14/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-Q1/update_000200.pth",
+      "sha256": "2d680a6db36e3746d61f9d72003f4e617ade47f4e4601291594fe6e1bb36a1f3"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-R400-512-v15/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-R1/update_000400.pth",
+      "sha256": "295d4cbf1f7b624b6ea498eefde36f914ccd44123d7e2810c2f86fbbda1631ef"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-S400-512-v16/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-S1/update_000400.pth",
+      "sha256": "8a9593e7893d69593aec01ee3fb803248302fe67677ddd0a9f94d915f9427a9d"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-U300-mixed512-v19/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-U1/update_000300.pth",
+      "sha256": "9f9b8ed153a69956f3847cbf97cb129aad9f51a748cf451ae8ff7c26ae77542f"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-V200-nominal-bridge-v18/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-V1/update_000200.pth",
+      "sha256": "e93361f201cbd98d54f05e6007e3c5b07addd905a97f3593a9e8069377ea154d"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-V300-mixed512-v20/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-V1/update_000300.pth",
+      "sha256": "bdfa8ca7ca469514fa7d4232d6d7964cbe7b388a00fd5e8dbd2e9c087348354b"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-W200-mixed512-v25/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-W1/update_000200.pth",
+      "sha256": "bc4f86d3035b5528f1d6d330273840bb6158adef6b52d4ef00753481271ed877"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-X200-mixed512-v27/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-X1/update_000200.pth",
+      "sha256": "c72174a2cfa0ce122908e1a51163ae0baf6185b1441fc1ca339ca2ae16ebdf92"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-Y200-mixed512-v29/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-Y1/update_000200.pth",
+      "sha256": "668b73f5207651eaabc947751821e08bc5a681546597dff89c60859e28fcf83f"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-Z200-mixed512-v30/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-Z1/update_000200.pth",
+      "sha256": "7c457015e76a946b3dfa72b7d8257f5e98054b1b7817d1f88285bdc9619c317f"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-early-hold-bridge-v17/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-joint-P50-v9/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-learned-P50-v8/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-nominal-v2/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-reference-P0/geometric_reference.pth",
+      "sha256": "39acf6ad7fb9b675e95c71bc0b02213db7a7ebba940f60ecc76915216afcea5b"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-parent512-v12/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/exploration-P0-interface-v60/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/exploration-P0-v1/exploration_adapted.pth",
+      "sha256": "be20e88c4257481c09f4867ecfd5c0add005c7b9e217cdeaffc9a9ea70640376"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/exploration-P50-interface-v59/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/exploration-P50-v1/exploration_adapted.pth",
+      "sha256": "8fb7974134887bf1fa0c7bfe7b121e8b204a05ed582afb085411c30eb3e9b2dd"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/exploratory-fresh-conditional-capacity-v1/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/exploratory-fresh-conditional-core-v1/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/frozen-capacity-replication-v1/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/frozen-core-replication-v1/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/frozen-restored-highload-recovery-v1/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/frozen-source-highload-recovery-v1/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/highload-AR-final-development-v1/report.json",
+      "report_archive": "highload-paired-development-evidence.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/restored-G2-load-reference-AR1/update_000350.pth",
+      "sha256": "bdd2d555f2dde8991cf71ed19d6e5eb417b0a9889be42d9507e3b85ff362d1c2"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/highload-AS-final-development-v1/report.json",
+      "report_archive": "highload-paired-development-evidence.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/restored-G2-load-direction-AS1/update_000350.pth",
+      "sha256": "ca00f6bbe2fa248f0c8116ccca7cd11d51fa5585dea87fa1eaa198509141266a"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/highload-matched-reference-development-v1/report.json",
+      "report_archive": "highload-paired-development-evidence.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/load-scale-P50-v1/matched_reference.pth",
+      "sha256": "805940916fec7ac9248ec04d18aa165cc21f99e6c013a759131b87d869ec714a"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/history-P50-bridge-v24/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/history-P50-v1/history_adapted.pth",
+      "sha256": "868f4605183ebbadac2c9e5f593c8c4c44b5d821b335fc74631e0f05c32efa09"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/joint-component-all-P0-v1/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-reference-P0/geometric_reference.pth",
+      "sha256": "39acf6ad7fb9b675e95c71bc0b02213db7a7ebba940f60ecc76915216afcea5b"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/joint-component-all-P50-v1/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/joint-component-calibration-v1/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/joint-component-latency-v1/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/joint-component-material-v1/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/joint-component-placement-v1/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/joint-component-sensor-v1/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/lift8-interface-v50/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/middle-P0-v5-nominal-v42/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/middle-P0-v5/reference_adapted.pth",
+      "sha256": "74d1b5f24f87276ded5c43b4cd79af57f38a710553cf51e6176d2711f1065bb8"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/middle-P50-bridge-v38/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/middle-P50-v1/reference_adapted.pth",
+      "sha256": "f5230d073a288320d7088f70f9591905a769c49a02a06778b127d6a59f7b385b"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/middle-P50-v5-bridge-v41/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/middle-P50-v5/reference_adapted.pth",
+      "sha256": "a5816600e19b4d5d25bf60cabafff832eacb40b965da2b3cf894a38acd0ab6d8"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/ppo-gradient-diagnostic-v1/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/ppo-gradient-diagnostic-v3/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/pressure-P50-nominal-v32/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/pressure-P50-v1/reference_adapted.pth",
+      "sha256": "16f3674048510dfcf3c27fe7156ecc9cd8ae4dc7c04d2f87e0021e25497af80e"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/support-P50-nominal-bridge-v31/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/support-P50-v1/support_adapted.pth",
+      "sha256": "79db3a5b998017484d62b73204fae1ada30693033a3b0b6c48dd42b3b6f278c7"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/temporal-P50-bridge-v45/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/temporal-support-P50-v1/support_adapted.pth",
+      "sha256": "1a172f7ce5e21a1d50bf825b40455a7eaece15d8e17751680749504c4d74b20c"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/thick-pipeline-compat-v61/report.json",
+      "report_archive": "frozen-development-evidence-final.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/independent-capacity-breadth-v1/report.json",
+      "report_archive": "independent-validation-all332.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/independent-capacity-v1/report.json",
+      "report_archive": "independent-validation-all332.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/independent-core-breadth-v1/report.json",
+      "report_archive": "independent-validation-all332.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/independent-core-v1/report.json",
+      "report_archive": "independent-validation-all332.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/independent-fresh-capacity-v1/report.json",
+      "report_archive": "independent-validation-all332.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/independent-fresh-core-v1/report.json",
+      "report_archive": "independent-validation-all332.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/independent-height-sensitivity-v1/report.json",
+      "report_archive": "independent-validation-all332.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/estimator/temporal-capacity-fresh-v1/report.json",
+      "report_archive": "legal-support-estimator-data.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/history-P50-v1/history_adapted.pth",
+      "sha256": "868f4605183ebbadac2c9e5f593c8c4c44b5d821b335fc74631e0f05c32efa09"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/estimator/temporal-capacity-train-v1/report.json",
+      "report_archive": "legal-support-estimator-data.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/history-P50-v1/history_adapted.pth",
+      "sha256": "868f4605183ebbadac2c9e5f593c8c4c44b5d821b335fc74631e0f05c32efa09"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/estimator/head-measured-capacity-v2/report.json",
+      "report_archive": "models-and-recovery-final.tar.gz",
+      "checkpoint_paths_matching_reported_sha256": [
+        "runs/robust-knife-family-20261003/estimator/head-measured-capacity-v2/best.pth"
+      ],
+      "sha256": "4c0713998d9ddf2456889f2c52b9821d1dea645b97b8f2804ec680b0f4ade0de"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/estimator/head-temporal-capacity-v1/report.json",
+      "report_archive": "models-and-recovery-final.tar.gz",
+      "checkpoint_paths_matching_reported_sha256": [
+        "runs/robust-knife-family-20261003/estimator/head-temporal-capacity-v1/best.pth"
+      ],
+      "sha256": "6e5ad34128377ebdc5a24fc6db2c5791a7edc8f74a5ade98393b9165078ab3df"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/demo/restored-P50-heavy-v66/report.json",
+      "report_archive": "restoration-execution-evidence.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/deploy/restored-P50-offline-v2/report.json",
+      "report_archive": "restoration-execution-evidence.tar.gz",
+      "checkpoint_paths_matching_reported_sha256": [
+        "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+      ],
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/demo/material-sensitivity-P50-low-pair-v67/report.json",
+      "report_archive": "secondary-context-and-material-evidence.tar.gz",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/estimator/context-prefix16-fresh-v1/report.json",
+      "report_archive": "secondary-context-and-material-evidence.tar.gz",
+      "checkpoint_paths_matching_reported_sha256": [
+        "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+      ],
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/estimator/context-prefix16-train-v1/report.json",
+      "report_archive": "secondary-context-and-material-evidence.tar.gz",
+      "checkpoint_paths_matching_reported_sha256": [
+        "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+      ],
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/estimator/context-prefix8-fresh-v1/report.json",
+      "report_archive": "secondary-context-and-material-evidence.tar.gz",
+      "checkpoint_paths_matching_reported_sha256": [
+        "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+      ],
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/estimator/context-prefix8-train-v1/report.json",
+      "report_archive": "secondary-context-and-material-evidence.tar.gz",
+      "checkpoint_paths_matching_reported_sha256": [
+        "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+      ],
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    }
+  ],
+  "scope": "Actual archived report bytes and manifest-backed supplied model hashes across all final archives. Trained serialization/loading and actual resume execution separately audited. Does not claim every historical source/debug file is an evaluated candidate or all optional development trajectories are public."
+}

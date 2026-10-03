@@ -1,0 +1,44 @@
+{
+  "results": [
+    {
+      "name": "final-downloaded-P50-heavy-v68",
+      "trace_sha256": "938a3f5c7ec93decbf45131750929bd23eca941578d547492ac5a654d192f240",
+      "full_success": true,
+      "operation_samples": 601,
+      "thumb_slider_fraction": 1.0,
+      "thumb_body_fraction": 0.0,
+      "max_authored_joint_force_abs_N": 0.4587832000113316,
+      "max_thumb_lag_rad": 0.14226984977722168,
+      "max_thumb_applied_effort_fraction": 0.1762017257248807,
+      "thumb_any_joint_at_effort_ceiling_fraction": 0.0,
+      "body_rotation_rad": 0.14655471137565637,
+      "body_drift_mm": 1.4815056324005127,
+      "failure_onsets_s": {
+        "body_stability": null,
+        "height": null,
+        "sustained_thumb_slider_contact_loss": null
+      }
+    },
+    {
+      "name": "final-downloaded-P50-failure-v69",
+      "trace_sha256": "937e8efaaaf2e0ba735d24c5b33cf43affa70177181b69ca6fdf6d98d3ff5797",
+      "full_success": false,
+      "operation_samples": 601,
+      "thumb_slider_fraction": 0.1048252911813644,
+      "thumb_body_fraction": 0.9101497504159733,
+      "max_authored_joint_force_abs_N": 0.9639436354712225,
+      "max_thumb_lag_rad": 0.16555732488632202,
+      "max_thumb_applied_effort_fraction": 0.21829224370615766,
+      "thumb_any_joint_at_effort_ceiling_fraction": 0.0,
+      "body_rotation_rad": 0.7403832398208255,
+      "body_drift_mm": 10.475154876708984,
+      "failure_onsets_s": {
+        "body_stability": 23.966666666666665,
+        "height": null,
+        "sustained_thumb_slider_contact_loss": 18.2
+      }
+    }
+  ],
+  "scope": "Retrospective visualization of two fixed actual GitHubdownloaded emptyrestore native36s runs. No new episodes, candidate scores, hardware or causal force claim. qlag uses physical poststep DOF vs actualissued targets; not measured pressure. Force is lastsubstep authored passive slider joint actuation at30Hz snapshots, excludes engine material friction and hand traction.",
+  "reference": "Original runner held12\u201316s lastsample reference and same bodycriteria reused; goal40mm not moved; mechanical50mm approximate, not measuredrealtravel."
+}

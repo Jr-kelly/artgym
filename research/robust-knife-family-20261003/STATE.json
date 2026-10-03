@@ -13,14 +13,37 @@
   "remote_additional_consumption_unknown": false,
   "goal_complete": false,
   "last_event": {
-    "utc": "2026-10-03T06:30:25.125838+00:00",
-    "event": "final_downloaded_recovery_execution_evidence_package_completed",
-    "evidence": "runs/robust-knife-family-20261003/delivery/final-downloaded-recovery-evidence.tar.gz.manifest.json",
-    "archive_sha256": "f99a4a556e595468eafcaa3a95c82a5f5c5d545e5bb830e4150f68b347419bf9",
-    "next": "Upload and realdownload verify every new archive entry before final Release publication"
+    "utc": "2026-10-03T06:44:59.214420+00:00",
+    "event": "final_payload_new_assets_uploaded_and_actual_download_verified",
+    "evidence": "research/robust-knife-family-20261003/downloaded-payload-batch-064459.json",
+    "config": {
+      "results": [
+        {
+          "name": "CONTACT-BEHAVIOR.md",
+          "sha256": "1cc76de24c4b9bd169ae76d4df09153a177a33a7e35b0489229e0bd0d78db10e",
+          "bytes": 2749
+        },
+        {
+          "name": "contact-behavior.png",
+          "sha256": "35b7d91383630302353bf2be123c82c6605fbebb2c7b67c48a002edf494a839f",
+          "bytes": 495240
+        },
+        {
+          "name": "contact-behavior.pdf",
+          "sha256": "c5d39281a4007783b7255bf1c092aa1496c81c935f1f5472cee1ed342f998b47",
+          "bytes": 85898
+        },
+        {
+          "name": "contact-behavior-data.json",
+          "sha256": "dfd8fe91972195e626b275b1cc5211dd1402d55ac0fa0b989cb5244ac9723afa",
+          "bytes": 2116
+        }
+      ]
+    },
+    "next": "Execute actual restored code or final publication checks"
   },
   "phase": "Useful physics/training closed; final downloaded merged recovery and Release publication",
-  "next": "Upload and realdownload verify every new archive entry before final Release publication",
+  "next": "Execute actual restored code or final publication checks",
   "active_jobs": [],
   "new_gpu_hours": 28.397893061783932,
   "cumulative_gpu_hours": 84.51588114111176,
@@ -33,8 +56,8 @@
   "latest_round_resume_utc": "2026-10-02T18:53:50+00:00",
   "pickup_first_success": "g2-sidepinch-equilibrium-v7",
   "github_branch": "feat/wuji-robust-knife-family-20261003",
-  "github_commit": "0f209522ad59ae8834746ea4ada38afbdff7102c",
-  "local_scientific_commit": "9cea116a478cfe30983de9e8ded84e00b6654592",
+  "github_commit": "77f108e02e865df45249d78d447b757fb13d3dd5",
+  "local_scientific_commit": "01a3f4d7d53be1fb8f89c98b30362b011e77043d",
   "full_demo_success": true,
   "actual_history_training_audit_passed": true,
   "dense_geometry_train_count": 512,

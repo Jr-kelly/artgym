@@ -1,0 +1,130 @@
+{
+  "utc": "2026-10-03T06:34:48.891676+00:00",
+  "scope": "Completion audit against original attachment/request. Capability gaps are stated, not converted to pass; attachment explicitly permits honest unresolved boundaries after useful attempts. No final goalcomplete claim before time/resource/publishedRelease gates.",
+  "requirements": [
+    {
+      "requirement": "Read full attached Goal and embedded photos/video; apply latestG2 constraints",
+      "status": "verified",
+      "evidence": [
+        "GOAL.md",
+        "media/manifest.json",
+        "DECISIONS.jsonl:latest_g2_attachment_resumed"
+      ],
+      "limits": "20 frames reviewed spanning full9.26s; personal media excluded from public assets."
+    },
+    {
+      "requirement": "G2+Wuji v1; body135×16×12mm excluding slider; no unlock DOF",
+      "status": "verified",
+      "evidence": [
+        "assets/robots/g2_wuji/g2_wuji.urdf",
+        "assets/objects/knife_wuji_real_size_20261002/000/parameters.json",
+        "runs/robust-knife-family-20261003/demo/final-downloaded-P50-heavy-v68/physics.json",
+        "CONTACT_MODEL.md"
+      ]
+    },
+    {
+      "requirement": "G2 name mappings,newasset,R8002076 format/teacher/normalizer,coordinates/actualhistory,handgravity,originalactuators",
+      "status": "verified",
+      "evidence": [
+        "ACTOR-CONTROL.md",
+        "runs/robust-knife-family-20261003/checks/g2-r800-bridge-v1/report.json",
+        "final-downloaded-native-and-policy-recovery.json",
+        "final-downloaded-failure-native-and-policy-recovery.json",
+        "closing-frozen-runtime-and-primary-input-identity-audit.json"
+      ]
+    },
+    {
+      "requirement": "Continuous TABLEpickup→hold→extend→hold→return, actualgravity/collision/finite motors, no stage state reset or slider aid",
+      "status": "verified_at_stated_initial_scope",
+      "evidence": [
+        "runs/robust-knife-family-20261003/demo/final-downloaded-P50-heavy-v68/report.json",
+        "runs/robust-knife-family-20261003/demo/final-downloaded-P50-heavy-v68/trace.npz",
+        "final-downloaded-native-video-review.json",
+        "FINAL-REPORT.md"
+      ],
+      "limits": "Fixed longside TABLEedge with COMinside,~6.5mm side overhang; script/IKpickup+geometricreference+learned bounded residual. Arbitrarytablecenter andend-to-end learnedpickup not claimed."
+    },
+    {
+      "requirement": "Persistent thumb effectivecontact+tangentialadvance+grip support under startup/variable resistance; no constantforce or real.1N cap claim",
+      "status": "useful_nominal_success_and_failures_verified",
+      "evidence": [
+        "runs/robust-knife-family-20261003/demo/final-downloaded-P50-heavy-v68/knife-contact-pairs.jsonl",
+        "runs/robust-knife-family-20261003/demo/final-downloaded-P50-failure-v69/report.json",
+        "CONTACT_MODEL.md",
+        "FINAL-REPORT.md"
+      ],
+      "limits": ".2/.2N engineering amplitude succeeds withactualslidercontact; .5/.5N fails. Added force is not measured realtotalresistance; lambda/positionbias not constantforce."
+    },
+    {
+      "requirement": "Same-policy joint geometry/slider/load/contact/initialmeasurement/noise/delay training and independent necessary generalization checks",
+      "status": "training_and_checks_completed_capability_limits_disclosed",
+      "evidence": [
+        "dense-family-v1/manifest.json",
+        "family-manifest.json",
+        "independent-validation.json",
+        "independent-asset-training-disjointness-and-byte-audit.json",
+        "freeze.json",
+        "FINAL-REPORT.md"
+      ],
+      "limits": "132 disjointbodygeometries+2heightvariants,332fullattempts,204pass. Thick13–14mm/raisedslider/highload support unresolved; no allrange success. Four originalfunctional proxy sources plusactualacquiredsource inearlytraining; primarycontinuous topology fixed."
+    },
+    {
+      "requirement": "Target common failures with meaningful training/control mechanisms; stop score-decimal/seed grids; distinguish evidence roles",
+      "status": "completed_with_negative_results_preserved",
+      "evidence": [
+        "corrected-lift8-AN200-AO150-paired-development.json",
+        "coupled-reference-middle-regulation-paired-v61-v62.json",
+        "restored-highload-paired-development-summary.json",
+        "closing-context-paired-development-summary.json",
+        "RESEARCH-NOTES.md"
+      ],
+      "limits": "Various support/reward/earlytakeover/cachedclosingcontext mechanisms tried. No demonstrated thick-support/learning advantage; source/geometry,trainfit,primaryindependent,postprimaryresearch,native/offline andhardware roles separate."
+    },
+    {
+      "requirement": "At least12h useful autonomous work, no GPUhourcap/no dummyload/currentauthorized4H200/rollingwholemean>27%",
+      "status": "await_final_time_and_resource_audit",
+      "evidence": [
+        "STATE.json",
+        "WORK_QUEUE.json",
+        "resources.jsonl",
+        "DECISIONS.jsonl"
+      ],
+      "minimum_utc": "2026-10-03T06:53:50+00:00",
+      "limits": "Conservative minimum from currentG2nativegoalstart, notearlierFranka journal. Currentmonitor bounds gaps as0; no GPUwork after useful jobs finish."
+    },
+    {
+      "requirement": "Recoverable code,weights/Adam/RNG,configs,commands,continuousvideos and representative failures",
+      "status": "verified_downloaded_and_executed",
+      "evidence": [
+        "RESTORE.md",
+        "REPRODUCE.md",
+        "CLOSING-CONTEXT-REPRODUCE.md",
+        "final-downloaded-all17-merged-restore-audit.json",
+        "final-downloaded-context-resumed-final-state-audit.json",
+        "final-downloaded-fixed-validation-comparison.json",
+        "delivered-video-full-decode-audit.json"
+      ],
+      "limits": "Default5 actualdownloadedarchives emptyrestored locally/remotely,all17 mergedrestored separately; actual native success/failure+1200offlineframes;155DAdam/RNGresumednormally34updates. H200headless185/332 vs original4090graphics204/332 retained; not bitwise crossGPU/PhysXresume promise."
+    },
+    {
+      "requirement": "New GitHub Release published, exact source/model/artifact hashes and final tag verified",
+      "status": "await_final_manifest_and_publication",
+      "evidence": [
+        "github-commit-map.json"
+      ],
+      "tag": "wuji-g2-continuous-knife-robust-20261003-v1"
+    },
+    {
+      "requirement": "Truthful outcome-first Chinese report, concrete remainingblockers, minimalhardwareinputs/actions/researchlines; no robot commands or subagents; preserve original/userwork",
+      "status": "content_verified_publication_pending",
+      "evidence": [
+        "FINAL-REPORT.md",
+        "RELEASE-NOTES.md",
+        "ACTOR-CONTROL.md",
+        "RESEARCH-NOTES.md",
+        "git status protecteduntrackeduserFranka files"
+      ],
+      "limits": "Onlyfile simulation/offline deployment preparation, SDKmapping/force/resistance realcalibration pending; no hardwaretransport in executedcommands. SourceGitexcludesuntrackedhumanmedia andFranka."
+    }
+  ]
+}

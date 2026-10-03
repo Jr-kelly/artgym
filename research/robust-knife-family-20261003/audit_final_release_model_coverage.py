@@ -16,7 +16,7 @@ for item in archives:
    data=tar.extractfile(member).read();assert hashlib.sha256(data).hexdigest()==wanted[member.name]['sha256'];j=json.loads(data);reports[member.name]=j;origins[member.name]=item['name']
 refs=[]
 for path,j in reports.items():
- args=j.get('args',{});args=args if isinstance(args,dict) else {};checkpoint=args.get('checkpoint',j.get('residual_checkpoint'))
+ args=j.get('args',{});args=args if isinstance(args,dict) else {};checkpoint=args.get('checkpoint',j.get('residual_checkpoint'));checkpoint=None if checkpoint in [None,'None',''] else checkpoint
  if checkpoint:
   assert checkpoint in checkpoint_variants,(path,checkpoint)
   expected=j.get('checkpoint_sha256',j.get('weight_sha256',{}).get(checkpoint));assert expected in checkpoint_variants[checkpoint],(path,checkpoint,expected,checkpoint_variants[checkpoint]);refs.append({'report':path,'report_archive':origins[path],'checkpoint':checkpoint,'sha256':expected})
