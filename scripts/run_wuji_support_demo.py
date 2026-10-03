@@ -19,6 +19,7 @@ def main():
     p.add_argument('--video',action='store_true')
     p.add_argument('--pressure-config',type=pathlib.Path)
     p.add_argument('--stroke-support',action='store_true',help='Development candidate, not established improvement')
+    p.add_argument('--support-layout',choices=['original','brace','staged'],default='original',help='Public-estimate contact planning: original or experimental postlift brace/withdraw-cross-recontact. Label planning fallbacks; never uses physicalasset ID.')
     p.add_argument('--load',type=float,default=.5);p.add_argument('--detent',type=float,default=.5)
     p.add_argument('--load-profile',choices=['constant','sinusoidal','triangular','pulse'],default='pulse')
     p.add_argument('--load-frequency',type=float,default=2.9)
@@ -32,6 +33,20 @@ def main():
                  json.loads((D/'coordinated-preload-moderate-v6.json').read_text()),
                  json.loads((OLD/'functional-side-edge-under-support-v6/continuous-thumb-v2.json').read_text()))
     motor,support,reference,audit=values
+    if a.support_layout!='original':
+        from scripts.plan_wuji_braced_support import plan,staged_transfer
+        original_support=support
+        transfer_audit=dict(requested=a.support_layout,brace_fallback=False,staged_fallback=False,
+            scope='Shared rule based only on public-estimate IK/static planning; every physicalattempt retained, no currenttruth or physicalasset selection')
+        try:
+            support,reference=plan(motor,support,reference,output/'brace-plan',OLD/'functional-side-edge-under-support-v6/localization.json')
+            if a.support_layout=='staged':
+                try:support=staged_transfer(motor,original_support,support)
+                except (AssertionError,ValueError) as error:
+                    transfer_audit.update(staged_fallback=True,staged_failure=str(error))
+        except (AssertionError,ValueError) as error:
+            transfer_audit.update(brace_fallback=True,brace_failure=str(error))
+        (output/'support-transfer-audit.json').write_text(json.dumps(transfer_audit,indent=2))
     if a.stroke_support:
         from scripts.plan_wuji_stroke_support import adapt_stroke_support
         reference,stroke_audit=adapt_stroke_support(motor,reference)

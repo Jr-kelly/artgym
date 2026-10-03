@@ -31,10 +31,13 @@ class G2R800Policy(FrozenPolicy):
         self.last_encoder_input = None; self.last_observation = None
         assert 0<=thumb_action_gain<=1 and 0<=support_action_gain<=1
         self.thumb_action_gain=thumb_action_gain;self.support_action_gain=support_action_gain
+        self.support_command_period=1;self.held_support_logits=None;self.support_takeover_frame=0
         self.residual=None;self.last_public_features=None;self.thumb_reference=None;self.history_features=False;self.support_estimator=None;self.action_parameterization='incremental';self.pressure_adapter=None;self.proprioceptive_pressure_spec=None
         if residual_checkpoint is not None:
             from scripts.wuji_robust_learning import ResidualActorCritic
             saved=torch.load(residual_checkpoint,map_location='cpu')
+            self.support_command_period=saved.get('support_command_period',1)
+            assert self.support_command_period in [1,5]
             self.proprioceptive_pressure_spec=saved.get('proprioceptive_pressure_spec')
             assert saved['format']=='wuji-r800-residual-ppo-v1'
             assert saved['student_sha256']==hashlib.sha256(Path(student).read_bytes()).hexdigest()
@@ -64,6 +67,7 @@ class G2R800Policy(FrozenPolicy):
                 self.thumb_reference=ScheduledThumbReference(reference_spec,1,self.player.device)
 
     def takeover_estimate(self, q, target, object_local_estimate, slider_local_estimate,clock_s=0.):
+        self.held_support_logits=None;self.support_takeover_frame=round(clock_s*30)
         assert len(self.history) == 50, 'Collect 50 measured control frames before handover'
         self.init = np.r_[self.normalized(q), pose(object_local_estimate),
                           pose(slider_local_estimate), self.tips(q), self.geometry].astype(np.float32)
@@ -116,11 +120,17 @@ class G2R800Policy(FrozenPolicy):
                 self.last_public_features=public.detach().cpu().numpy()[0]
                 base=action if self.action_base_mode=="r800" else torch.zeros_like(action)
                 if self.thumb_reference is not None:base=self.thumb_reference.action(self.known.initial,self.known.issued,self.tensor([goal]),measured_q=self.tensor(q),clock_s=clock_s)
+                mean=self.residual.actor_logits(public)
+                if self.support_command_period>1:
+                    assert clock_s is not None and self.action_parameterization=='bounded-motor-offset'
+                    if self.held_support_logits is None or (round(clock_s*30)-self.support_takeover_frame)%self.support_command_period==0:
+                        self.held_support_logits=mean[:,:16].clone()
+                    mean=mean.clone();mean[:,:16]=self.held_support_logits
                 if self.action_parameterization=='bounded-motor-offset':
                     assert self.thumb_reference is not None
                     from scripts.wuji_bounded_motor_residual import bounded_motor_residual_action
-                    action=bounded_motor_residual_action(self.thumb_reference.last_target,self.known,self.residual.actor_logits(public),self.residual_scale)
-                else:action=(base+self.residual_scale*torch.tanh(self.residual.actor_logits(public))).clamp(-1,1)
+                    action=bounded_motor_residual_action(self.thumb_reference.last_target,self.known,mean,self.residual_scale)
+                else:action=(base+self.residual_scale*torch.tanh(mean)).clamp(-1,1)
             action=action.clone();action[:,:16]*=self.support_action_gain;action[:,16:]*=self.thumb_action_gain
             if self.pressure_adapter is not None:
                 proposed=self.known.initial+.04*action;proposed[:,16:]=self.known.issued[:,16:]+.025*action[:,16:]

@@ -1,0 +1,23 @@
+{
+  "scope": "Checkpointdistribution and actualcommand diagnostics, not physicalcausal proof; motor bound unchanged.",
+  "cases": [
+    {
+      "path": "runs/support-pressure-20261003/train/joint-noisier-continuation-v31/update_000750.pth",
+      "support_logit_std_min": 0.05035827308893204,
+      "support_logit_std_max": 0.055670708417892456,
+      "support_logit_std_mean": 0.052745986729860306,
+      "local_motor_perturbation_std_upper_rad": 0.0013917677570134401,
+      "motor_offset_bound_rad": 0.025,
+      "measured_joint_noise_std_rad": 0.002
+    },
+    {
+      "path": "runs/support-pressure-20261003/train/stronger-support-ordinary-staged-support-v89/update_000900.pth",
+      "support_logit_std_min": 0.049460869282484055,
+      "support_logit_std_max": 0.057403456419706345,
+      "support_logit_std_mean": 0.053105417639017105,
+      "local_motor_perturbation_std_upper_rad": 0.0014350864803418517,
+      "motor_offset_bound_rad": 0.025,
+      "measured_joint_noise_std_rad": 0.002
+    }
+  ]
+}

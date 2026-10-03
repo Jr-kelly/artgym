@@ -12,6 +12,8 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);p.add_argument('--envs',type=int,default=512);p.add_argument('--updates',type=int,default=400);p.add_argument('--horizon',type=int,default=32);p.add_argument('--seed',type=int,default=2026100307);p.add_argument('--randomization-scale',type=float,default=.5);p.add_argument('--load-max',type=float,default=.1);p.add_argument('--detent-max',type=float,default=.1);p.add_argument('--epochs',type=int,default=4);p.add_argument('--minibatch',type=int,default=4096);p.add_argument('--resume',type=Path)
     p.add_argument('--support-residual-scale',type=float,default=.25);p.add_argument('--rotation-cost',type=float,default=0.);p.add_argument('--wrist-nominal',type=Path);p.add_argument('--wrist-probability',type=float,default=.5)
     p.add_argument('--resample-initial-estimates',action='store_true',help='At episode reset only, draw another labelled noisy initial observation from same-geometry synthetic sensor bank; no actor asset ID')
+    p.add_argument('--support-command-period',type=int,choices=[1,5],default=1,help='Support decisions every1or5 known30Hz frames; thumb remains30Hz, jointdecision PPO log/KL masks excludeheld coordinates')
+    p.add_argument('--reset-support-logstd',type=float,help='Explicit exploration curriculum: reset first16 logstd and their Adam moments only; preserve thumbvariance/means and allothermodel/Adam/RNG')
     p.add_argument('--freeze-thumb-prior',action='store_true',help='Preserve resumed deterministic thumb actor mapping on the same legal features; learn support outputs and exploration variance. Not constant physicalforce.')
     p.add_argument('--stable-progress-reward',action='store_true',help='Trainingrewardonly: remove primary reach bonus during operation outside original10mm/.25rad instantaneous body stability conditions; no actor/physics/criteria change')
     p.add_argument('--override-initial-estimate-scene',type=Path,help='Explicit curriculum change on resume: replace saved synthetic initial-observation bank while retaining model/Adam/RNG. Normal resume keeps saved scene; new physical episodes only.')
@@ -76,20 +78,33 @@ def main():
     if a.freeze_thumb_prior:
         assert a.resume and a.scene=='g2' and a.action_parameterization=='bounded-motor-offset'
         model.freeze_thumb_actor()
+    if a.support_command_period>1 or a.reset_support_logstd is not None:
+        assert a.scene=='g2' and a.action_parameterization=='bounded-motor-offset'
+    if a.reset_support_logstd is not None:
+        assert a.resume and -3.5<=a.reset_support_logstd<=-.4
+        with torch.no_grad():model.logstd[:16].fill_(a.reset_support_logstd)
+        for key in ['exp_avg','exp_avg_sq']:
+            if key in opt.state[model.logstd]:opt.state[model.logstd][key][:16].zero_()
+    from scripts.wuji_support_command_sampling import SupportCommandSampler,log_prob as decision_log_prob,entropy as decision_entropy
+    sampler=SupportCommandSampler(a.envs,device,a.support_command_period,getattr(system,'takeover_frame',0))
     (a.output/'config.yaml').write_text(OmegaConf.to_yaml(system.cfg,resolve=True));(a.output/'args.json').write_text(json.dumps(vars(a),default=str,indent=2))
     basehash=tensor_hash(system.player.model.state_dict());begin=time.monotonic();stopping=[False]
     for sig in [signal.SIGTERM,signal.SIGINT]:signal.signal(sig,lambda *_:stopping.__setitem__(0,True))
     def save(u):
         assert tensor_hash(system.player.model.state_dict())==basehash
-        payload=dict(frozen_thumb_actor=model.frozen_thumb_actor is not None,frozen_thumb_scope='Deterministic thumb mean from a frozen legal-input actor; support outputs and exploration variance remain trainable; not measuredforce control',format='wuji-r800-residual-ppo-v1',model=model.state_dict(),optimizer=opt.state_dict(),updates=u,transitions=system.transitions,args=vars(a),actor_inputs='111 legal public+20 issued+20 frozen base action+3 wrist gravity'+('+16 frozen legal history latent' if a.history_features else '')+(';8 frozen legal-input support estimates' if support_spec else '')+'; no current truth',critic_inputs='actor features+21 truth+5 contact+1 load',history_features=a.history_features,scene_spec=system.scene_spec if a.scene=='g2' else None,support_estimator_spec=system.support_estimator_spec if a.scene=='g2' else None,public_dim=getattr(system,'public_dim',154),proprioceptive_pressure_spec=system.proprioceptive_pressure_spec if a.scene=='g2' else None,action_scale=system.scale.tolist(),action_parameterization=a.action_parameterization,resistance_integration=a.resistance_integration,action_scale_units='radians about scheduled motor reference' if a.action_parameterization=='bounded-motor-offset' else 'normalized original incremental action',action_base_mode=system.base_mode,thumb_reference=system.reference_spec,teacher_sha256=hashlib.sha256(TEACHER.read_bytes()).hexdigest(),student_sha256=hashlib.sha256(R800.read_bytes()).hexdigest(),base_tensor_hash=basehash,rng_cpu=torch.get_rng_state(),rng_cuda=torch.cuda.get_rng_state_all(),rng_numpy=np.random.get_state(),resume='Optimizer/RNG restored; new physics episodes, no bitwise solver continuation')
+        payload=dict(support_command_period=a.support_command_period,support_decision_scope='Support heldbetween knownclock decisions; thumb30Hz; actualcommandhistory continuous; joint-event masked PPO/entropy/KL',frozen_thumb_actor=model.frozen_thumb_actor is not None,frozen_thumb_scope='Deterministic thumb mean from a frozen legal-input actor; support outputs and exploration variance remain trainable; not measuredforce control',format='wuji-r800-residual-ppo-v1',model=model.state_dict(),optimizer=opt.state_dict(),updates=u,transitions=system.transitions,args=vars(a),actor_inputs='111 legal public+20 issued+20 frozen base action+3 wrist gravity'+('+16 frozen legal history latent' if a.history_features else '')+(';8 frozen legal-input support estimates' if support_spec else '')+'; no current truth',critic_inputs='actor features+21 truth+5 contact+1 load',history_features=a.history_features,scene_spec=system.scene_spec if a.scene=='g2' else None,support_estimator_spec=system.support_estimator_spec if a.scene=='g2' else None,public_dim=getattr(system,'public_dim',154),proprioceptive_pressure_spec=system.proprioceptive_pressure_spec if a.scene=='g2' else None,action_scale=system.scale.tolist(),action_parameterization=a.action_parameterization,resistance_integration=a.resistance_integration,action_scale_units='radians about scheduled motor reference' if a.action_parameterization=='bounded-motor-offset' else 'normalized original incremental action',action_base_mode=system.base_mode,thumb_reference=system.reference_spec,teacher_sha256=hashlib.sha256(TEACHER.read_bytes()).hexdigest(),student_sha256=hashlib.sha256(R800.read_bytes()).hexdigest(),base_tensor_hash=basehash,rng_cpu=torch.get_rng_state(),rng_cuda=torch.cuda.get_rng_state_all(),rng_numpy=np.random.get_state(),resume='Optimizer/RNG restored; new physics episodes, no bitwise solver continuation')
         f=a.output/f'update_{u:06d}.pth';tmp=f.with_suffix('.tmp');torch.save(payload,tmp);tmp.replace(f);f.with_suffix('.sha256').write_text(hashlib.sha256(f.read_bytes()).hexdigest()+'\n')
     last=start
     try:
         for u in range(start+1,a.updates+1):
-            public=[];critic=[];actions=[];logs=[];values=[];rewards=[];dones=[];active=[];old_means=[];old_scales=[]
+            public=[];critic=[];actions=[];logs=[];values=[];rewards=[];dones=[];active=[];old_means=[];old_scales=[];joint_events=[]
             for step in range(a.horizon):
                 x,c=system.features()
-                with torch.no_grad():dist,value=model(x,c);action=dist.sample();log=dist.log_prob(action).sum(-1)
+                with torch.no_grad():
+                    dist,value=model(x,c)
+                    clock=system.age if a.scene=='g2' else torch.zeros(a.envs,device=device,dtype=torch.long)
+                    action,event=sampler.sample(dist,clock);log=decision_log_prob(dist,action,event)
+                joint_events.append(event)
                 active.append(system.policy_active.clone())
                 if a.bounded_actor_update:old_means.append(dist.mean.detach().clone());old_scales.append(dist.scale.detach().clone())
                 reward,done=system.step(action)
@@ -101,21 +116,21 @@ def main():
             for t in reversed(range(a.horizon)):
                 nextv=nv if t==a.horizon-1 else v[t+1];live=(~d[t]).float();delta=r[t]+.995*nextv*live-v[t];gae=delta+.995*.95*live*gae;adv[t]=gae
             returns=(adv+v).flatten();advantages=adv.flatten();advantages=(advantages-advantages.mean())/(advantages.std()+1e-8)
-            px=torch.stack(public).flatten(0,1);cx=torch.stack(critic).flatten(0,1);ac=torch.stack(actions).flatten(0,1);lp=torch.stack(logs).flatten();eligible=torch.stack(active).flatten();losses=[];kls=[];active_kls=[];bounded_updates=[]
+            px=torch.stack(public).flatten(0,1);cx=torch.stack(critic).flatten(0,1);ac=torch.stack(actions).flatten(0,1);lp=torch.stack(logs).flatten();eligible=torch.stack(active).flatten();events=torch.stack(joint_events).flatten(0,1);losses=[];kls=[];active_kls=[];bounded_updates=[]
             if a.bounded_actor_update:
                 from scripts.wuji_bounded_actor_update import bounded_step
                 old_mean=torch.stack(old_means).flatten(0,1);old_scale=torch.stack(old_scales).flatten(0,1)
             for epoch in range(a.epochs):
                 for ids in torch.randperm(len(px),device=device).split(a.minibatch):
-                    dist,value=model(px[ids],cx[ids]);newlog=dist.log_prob(ac[ids]).sum(-1);ratio=(newlog-lp[ids]).exp();mask=eligible[ids].float();denom=mask.sum().clamp_min(1)
-                    piloss=-(torch.minimum(ratio*advantages[ids],ratio.clamp(.8,1.2)*advantages[ids])*mask).sum()/denom;vloss=.5*(value-returns[ids]).square().mean();loss=piloss+.5*vloss-.001*(dist.entropy().sum(-1)*mask).sum()/denom
+                    dist,value=model(px[ids],cx[ids]);newlog=decision_log_prob(dist,ac[ids],events[ids]);ratio=(newlog-lp[ids]).exp();mask=eligible[ids].float();denom=mask.sum().clamp_min(1)
+                    piloss=-(torch.minimum(ratio*advantages[ids],ratio.clamp(.8,1.2)*advantages[ids])*mask).sum()/denom;vloss=.5*(value-returns[ids]).square().mean();loss=piloss+.5*vloss-.001*(decision_entropy(dist,events[ids])*mask).sum()/denom
                     opt.zero_grad(set_to_none=True);loss.backward()
-                    if a.bounded_actor_update:bounded_updates.append(bounded_step(model,opt,px,old_mean,old_scale,eligible))
+                    if a.bounded_actor_update:bounded_updates.append(bounded_step(model,opt,px,old_mean,old_scale,eligible,joint_events=events))
                     else:torch.nn.utils.clip_grad_norm_(model.parameters(),1.);opt.step()
                     losses.append(float(loss));divergence=(ratio-1)-(newlog-lp[ids]);kls.append(float(divergence.mean()));active_kls.append(float((divergence*mask).sum()/denom))
                 if np.mean((active_kls if a.active_kl_stop else kls)[-max(1,len(px)//a.minibatch):])>.03:break
             recent=system.stats[-min(128,len(system.stats)):]
-            row=dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),update=u,transitions=system.transitions,episodes=system.episodes,reward=float(r.mean()),loss=float(np.mean(losses)),kl=float(np.mean(kls)),active_sample_kl=float(np.mean(active_kls)),epoch_stop_kl_scope='active residual-control samples' if a.active_kl_stop else 'legacy all samples including scripted prefix',policy_active_fraction=float(eligible.float().mean()),actual_hold_history_frames=a.actual_hold_history,wall_seconds=time.monotonic()-begin,peak_extension_mean_m=float(np.mean([e['peak_extension_m'] for e in recent])) if recent else None,contact_mean=float(np.mean([e['thumb_contact_fraction'] for e in recent])) if recent else None,fall_fraction=float(np.mean([e['fall'] for e in recent])) if recent else None,scope='Training fitting/behavior only')
+            row=dict(support_command_period=a.support_command_period,support_decision_fraction=float(events[eligible,:16].float().mean()) if eligible.any() else 0.,support_logit_std_mean=float(model.logstd[:16].clamp(-3.5,-.4).exp().mean()),utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),update=u,transitions=system.transitions,episodes=system.episodes,reward=float(r.mean()),loss=float(np.mean(losses)),kl=float(np.mean(kls)),active_sample_kl=float(np.mean(active_kls)),epoch_stop_kl_scope='active residual-control samples' if a.active_kl_stop else 'legacy all samples including scripted prefix',policy_active_fraction=float(eligible.float().mean()),actual_hold_history_frames=a.actual_hold_history,wall_seconds=time.monotonic()-begin,peak_extension_mean_m=float(np.mean([e['peak_extension_m'] for e in recent])) if recent else None,contact_mean=float(np.mean([e['thumb_contact_fraction'] for e in recent])) if recent else None,fall_fraction=float(np.mean([e['fall'] for e in recent])) if recent else None,scope='Training fitting/behavior only')
             if a.bounded_actor_update:
                 row.update(analytic_active_rollout_kl=bounded_updates[-1]['analytic_active_rollout_kl'],actor_step_fraction_mean=float(np.mean([b['step_fraction'] for b in bounded_updates])),rejected_actor_updates=sum(not b['accepted'] for b in bounded_updates),actor_bound_scope='All active samples in current rollout; not a bound on future episodes')
             if a.scene=='g2':

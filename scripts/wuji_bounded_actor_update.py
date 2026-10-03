@@ -9,7 +9,7 @@ import copy
 import torch
 
 
-def rollout_kl(model, public, old_mean, old_scale, active, chunk=4096):
+def rollout_kl(model, public, old_mean, old_scale, active, chunk=4096,joint_events=None):
     total = torch.zeros((), device=public.device)
     count = active.sum()
     if not count:
@@ -24,11 +24,12 @@ def rollout_kl(model, public, old_mean, old_scale, active, chunk=4096):
             previous_mean = old_mean[first:first+chunk][selected]
             previous_scale = old_scale[first:first+chunk][selected]
             kl = torch.log(scale/previous_scale) + (previous_scale.square() + (previous_mean-mean).square())/(2*scale.square()) - .5
+            if joint_events is not None:kl=kl*joint_events[first:first+chunk][selected]
             total += kl.sum()
     return float(total/count)
 
 
-def bounded_step(model, optimizer, public, old_mean, old_scale, active, maximum_kl=.03):
+def bounded_step(model, optimizer, public, old_mean, old_scale, active, maximum_kl=.03,joint_events=None):
     actor = list(model.actor.parameters()) + [model.logstd]
     critic = list(model.critic.parameters())
     if not active.any():
@@ -50,7 +51,7 @@ def bounded_step(model, optimizer, public, old_mean, old_scale, active, maximum_
         with torch.no_grad():
             for p, before, after in zip(actor, previous, proposed):
                 p.copy_(before + factor*(after-before))
-        divergence = rollout_kl(model, public, old_mean, old_scale, active)
+        divergence = rollout_kl(model, public, old_mean, old_scale, active,joint_events=joint_events)
         if divergence <= maximum_kl and torch.isfinite(torch.tensor(divergence)):
             return dict(accepted=True, step_fraction=factor, analytic_active_rollout_kl=divergence, backtracks=trial)
         factor *= .5
@@ -58,4 +59,4 @@ def bounded_step(model, optimizer, public, old_mean, old_scale, active, maximum_
         for p, before, state in zip(actor, previous, previous_state):
             p.copy_(before)
             optimizer.state[p] = state
-    return dict(accepted=False, step_fraction=0., analytic_active_rollout_kl=rollout_kl(model, public, old_mean, old_scale, active), backtracks=11)
+    return dict(accepted=False, step_fraction=0., analytic_active_rollout_kl=rollout_kl(model, public, old_mean, old_scale, active,joint_events=joint_events), backtracks=11)

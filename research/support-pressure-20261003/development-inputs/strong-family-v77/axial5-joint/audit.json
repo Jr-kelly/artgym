@@ -1,0 +1,35 @@
+{
+  "input": {
+    "handle_size_WTL_m": [
+      0.017403215733166746,
+      0.013965486823328217,
+      0.13812891388669413
+    ],
+    "slider_contact_shift_m": [
+      -0.0006101550456959274,
+      0.0007935277925849054,
+      0.005367575145415131
+    ],
+    "initial_object_center_shift_knife_m": [
+      0,
+      0.0009827434116641085,
+      0
+    ],
+    "uncertainty_m": 0.0006,
+    "source": "New synthetic onceinitial development observation; known training geometry, not finalheldout. Same common IK from noisy estimates, no physicalID planner/actor."
+  },
+  "planned_thumb_contact_bias_knife_m": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "contact_errors_m": {
+    "thumb": 1.1604169342054702e-06,
+    "index": 1.765242507777398e-07,
+    "middle": 1.3949947465843605e-08,
+    "pinky": 2.742944108947832e-07
+  },
+  "trajectory_max_error_m": 1.5228841432542147e-06,
+  "no_physical_asset_read": true,
+  "scope": "Estimated initial geometry adaptation, original nominal joint-preload offsets retained; not force regulation, collision/contact feasibility unproven"
+}

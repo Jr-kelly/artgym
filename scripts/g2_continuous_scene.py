@@ -87,6 +87,15 @@ class G2ContinuousScene:
             self.bridge.geometry=self.tensor([row['estimate']['handle_size_WTL_m']+[.01,.003,.03] for row in self.estimated_plans])
         self.opened_batch=self.opened.expand(n,-1);self.closed_batch=self.closed.expand(n,-1)
         self.close_waypoint_tensors=[self.tensor([row['motor_plan']['close_waypoints'][i]['q'] for row in self.estimated_plans]) if self.estimated_plans else self.tensor(way['q']).expand(n,-1) for i,way in enumerate(self.plan['close_waypoints'])]
+        self.support_waypoint_q=None
+        if self.estimated_plans and any(row.get('support_motor_waypoints') for row in self.estimated_plans):
+            recipe=next(row['support_motor_waypoints'] for row in self.estimated_plans if row.get('support_motor_waypoints'))
+            self.support_waypoint_times=[r['time_s'] for r in recipe]
+            assert self.support_waypoint_times[-1]<=14.2 and self.takeover_frame==480
+            self.support_waypoint_enabled=torch.tensor([bool(row.get('support_motor_waypoints')) for row in self.estimated_plans],device=self.device)
+            self.support_waypoint_q=self.tensor([[r['q'] for r in row['support_motor_waypoints']] if row.get('support_motor_waypoints') else [row['motor_plan']['close_q']]*len(recipe) for row in self.estimated_plans])
+            for row in self.estimated_plans:
+                if row.get('support_motor_waypoints'):assert [r['time_s'] for r in row['support_motor_waypoints']]==self.support_waypoint_times
         self.cal_prior={}
         for key in ['object_in_wrist','slider_in_wrist']:
             mat=np.asarray(self.calibration[key]);positions=np.tile(mat[:3,3],(n,1));rotations=np.tile(Rotation.from_matrix(mat[:3,:3]).as_quat(),(n,1))
@@ -112,6 +121,8 @@ class G2ContinuousScene:
                 thumb_q=self.reference.q.clone(),preload=self.reference.preload_delta.clone(),geometry=self.bridge.geometry.clone(),
                 waypoints=[value.clone() for value in self.close_waypoint_tensors],
                 calibration={key:(p.clone(),q.clone()) for key,(p,q) in self.cal_prior.items()})
+            if self.support_waypoint_q is not None:
+                self.estimate_bank.update(support_waypoint_q=self.support_waypoint_q.clone(),support_waypoint_enabled=self.support_waypoint_enabled.clone())
             self.scene_spec=dict(self.scene_spec,resample_initial_estimates=True,
                 initial_estimate_sampling_scope='At newphysicalepisode only, resample one of four labelled noisy initial observations for that geometry; common IK outputs, no physicalID/currenttruth actor input. Finite observation bank, not connected realvision.')
         self.middle_support=None
@@ -276,6 +287,9 @@ class G2ContinuousScene:
             self.reference.q[ids]=self.estimate_bank['thumb_q'][selected]
             self.reference.preload_delta[ids]=self.estimate_bank['preload'][selected]
             self.bridge.geometry[ids]=self.estimate_bank['geometry'][selected]
+            if self.support_waypoint_q is not None:
+                self.support_waypoint_q[ids]=self.estimate_bank['support_waypoint_q'][selected]
+                self.support_waypoint_enabled[ids]=self.estimate_bank['support_waypoint_enabled'][selected]
             for current,bank in zip(self.close_waypoint_tensors,self.estimate_bank['waypoints']):current[ids]=bank[selected]
             for key,(position,rotation) in self.cal_prior.items():
                 bank_position,bank_rotation=self.estimate_bank['calibration'][key]
@@ -359,6 +373,13 @@ class G2ContinuousScene:
             closed_values[selected]=first_q*(1-alpha)+last_q*alpha
         hq[closing]=closed_values;hq[t>=8]=self.closed_batch[t>=8]
         if self.reference.preload_schedule:hq[t>=8]+=self.reference.preload(t)[t>=8]
+        if self.support_waypoint_q is not None:
+            selected=(t>=self.support_waypoint_times[0])&self.support_waypoint_enabled
+            for i,(first,last) in enumerate(zip(self.support_waypoint_times[:-1],self.support_waypoint_times[1:])):
+                ids=selected&(t>=first)&(t<last)
+                alpha=smooth((t[ids]-first)/(last-first)).unsqueeze(-1)
+                hq[ids]=self.support_waypoint_q[ids,i]*(1-alpha)+self.support_waypoint_q[ids,i+1]*alpha
+            ids=selected&(t>=self.support_waypoint_times[-1]);hq[ids]=self.support_waypoint_q[ids,-1]
         if self.middle_support is not None:hq=self.middle_support.command(t,self._measurement,hq)
         return aq,hq
 
