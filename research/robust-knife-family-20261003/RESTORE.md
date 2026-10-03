@@ -44,3 +44,7 @@ python3 restore_wuji_robust_delivery.py --artifacts ARTIFACTS --destination NEW_
 传输和GitHub工具应使用系统环境；仿真所需 `LD_LIBRARY_PATH` 只赋给仿真Python子进程。把该变量传给系统SSH可能触发OpenSSL版本不匹配，已保存失败回执并用干净环境恢复文件传输。
 
 全部17个最终归档已通过实际下载后的 `--all` 合并空目录恢复，主1258运行文件、冻结输入/权重以及155维入口/head仍精确一致。组合归档中的127份实际报告已检查，113份有权重引用，均有对应交付模型哈希；共有83个checkpoint路径。早期脚本诊断中的字符串 `None` 表示无残差权重，不是缺文件。主推理默认只需5个归档，其他数据与视频按需下载。
+
+源码及证据归档中的报告/续接文档均是打包时快照。当前结果以 Release 直接附件 `FINAL-REPORT.md`、`FINAL-RESOURCE-AUDIT.json` 为准，后续发布回执及续接状态在交付分支最新 `WUJI_GOAL_HANDOFF.md`。源码归档的旧 PID/未发布状态不可作为当前事实。
+
+原独立与恢复复跑的逐案例配对（同 env/实例/种子，332例）见最终Git树 `final-downloaded-paired-episode-agreement.json`，原始两组报告在对应独立验证与下载恢复归档中。部分逐回合 `scope` 字符串继承共享训练采集器模板；实际实验角色以顶层检查报告、冻结预登记和执行回执为准，原始字段保留。

@@ -1,0 +1,2469 @@
+{
+  "utc": "2026-10-03T06:48:38.871162+00:00",
+  "n": 332,
+  "outcomes": {
+    "fail -> fail": 125,
+    "pass -> pass": 182,
+    "pass -> fail": 22,
+    "fail -> pass": 3
+  },
+  "same_binary_outcome": 307,
+  "failure_category_transitions": [
+    {
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop",
+      "count": 73
+    },
+    {
+      "original": "body unstable/drop",
+      "recovered": "pass",
+      "count": 2
+    },
+    {
+      "original": "body unstable/drop",
+      "recovered": "pickup/hold",
+      "count": 8
+    },
+    {
+      "original": "pass",
+      "recovered": "body unstable/drop",
+      "count": 21
+    },
+    {
+      "original": "pass",
+      "recovered": "pass",
+      "count": 182
+    },
+    {
+      "original": "pass",
+      "recovered": "pickup/hold",
+      "count": 1
+    },
+    {
+      "original": "pickup/hold",
+      "recovered": "body unstable/drop",
+      "count": 9
+    },
+    {
+      "original": "pickup/hold",
+      "recovered": "pass",
+      "count": 1
+    },
+    {
+      "original": "pickup/hold",
+      "recovered": "pickup/hold",
+      "count": 34
+    },
+    {
+      "original": "retraction",
+      "recovered": "retraction",
+      "count": 1
+    }
+  ],
+  "groups": [
+    {
+      "group": "independent-core-v1",
+      "n": 8,
+      "outcomes": {
+        "fail -> fail": 2,
+        "pass -> pass": 6
+      },
+      "original_report_sha256": "ba5678be84f3bc12e97dbf718663bcd3d3139de16c9da2ef67f0abeece9236d4",
+      "recovered_report_sha256": "b404d89e05cb0012ab43ff5a38a253851d8d09c33cb5b0188bbfce4e735580fd"
+    },
+    {
+      "group": "independent-capacity-v1",
+      "n": 4,
+      "outcomes": {
+        "pass -> fail": 1,
+        "pass -> pass": 3
+      },
+      "original_report_sha256": "989de652051a125d3e1b84215acf8178bea0bd0111af982b0d9604b597ed5dc4",
+      "recovered_report_sha256": "a9030cec2d3822622db9d6f4d90ea4b0002fe7478c2a9486d9c8e795791a67d7"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "n": 64,
+      "outcomes": {
+        "pass -> fail": 4,
+        "pass -> pass": 37,
+        "fail -> fail": 22,
+        "fail -> pass": 1
+      },
+      "original_report_sha256": "1bb08ded2d917f3b9332b06c8d2b803da85a59d76afc42f60d7f370eb46003ec",
+      "recovered_report_sha256": "0d141022124161e8ee16130c90fc77b1c271dbd9126680b07fb54b4bf80cc301"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "n": 32,
+      "outcomes": {
+        "fail -> fail": 11,
+        "pass -> pass": 21
+      },
+      "original_report_sha256": "a104cc31b2d8950c552852284cbf3cf746bfe5fa281f8053cd7e064791a7032b",
+      "recovered_report_sha256": "d24738f1ea04aced71a0fdd0f76e913c7e165124e059b9879e4833ddc7bec60a"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "n": 32,
+      "outcomes": {
+        "pass -> pass": 8,
+        "fail -> fail": 14,
+        "pass -> fail": 10
+      },
+      "original_report_sha256": "df8edf4f1319388d5f79dc195431a3639ce6dc92c22dc677cd303ac99ea9de2e",
+      "recovered_report_sha256": "998dd2ff39f77be3d33b99896526f085e6c09f74c7e7a9f4c7be90f9e0d7dd51"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "n": 128,
+      "outcomes": {
+        "pass -> pass": 75,
+        "fail -> fail": 49,
+        "pass -> fail": 3,
+        "fail -> pass": 1
+      },
+      "original_report_sha256": "7a2e72a88e65ec967ace43c45d95ef256858d1ac20332ddd4cc255b08a37ae45",
+      "recovered_report_sha256": "ad4e17fb002ca59d6504e746551d41f56f896c021a7321125f99bf9f49cf1c86"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "n": 64,
+      "outcomes": {
+        "pass -> pass": 32,
+        "pass -> fail": 4,
+        "fail -> fail": 27,
+        "fail -> pass": 1
+      },
+      "original_report_sha256": "1f5969e1a998b43f0643c9d1c721963c2dc62f7be218bc4f09d4b84da4d9b446",
+      "recovered_report_sha256": "a67e58f670471fa1b87dc464d6dd28645184d47b0c44db9908144b1942fb9060"
+    }
+  ],
+  "cases": [
+    {
+      "group": "independent-core-v1",
+      "env": 0,
+      "instance": "012",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-v1",
+      "env": 1,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-v1",
+      "env": 2,
+      "instance": "014",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-v1",
+      "env": 3,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-v1",
+      "env": 4,
+      "instance": "012",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-v1",
+      "env": 5,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-v1",
+      "env": 6,
+      "instance": "014",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-v1",
+      "env": 7,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-v1",
+      "env": 0,
+      "instance": "012",
+      "original": "pass",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-capacity-v1",
+      "env": 1,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-v1",
+      "env": 2,
+      "instance": "014",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-v1",
+      "env": 3,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 0,
+      "instance": "012",
+      "original": "pass",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 1,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 2,
+      "instance": "014",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 3,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 4,
+      "instance": "012",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 5,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 6,
+      "instance": "014",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 7,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 8,
+      "instance": "012",
+      "original": "pass",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 9,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 10,
+      "instance": "014",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 11,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 12,
+      "instance": "012",
+      "original": "pass",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 13,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 14,
+      "instance": "014",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 15,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 16,
+      "instance": "012",
+      "original": "pickup/hold",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 17,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 18,
+      "instance": "014",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 19,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 20,
+      "instance": "012",
+      "original": "pickup/hold",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 21,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 22,
+      "instance": "014",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 23,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 24,
+      "instance": "012",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 25,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 26,
+      "instance": "014",
+      "original": "pass",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 27,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 28,
+      "instance": "012",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 29,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 30,
+      "instance": "014",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 31,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 32,
+      "instance": "012",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 33,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 34,
+      "instance": "014",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 35,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 36,
+      "instance": "012",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 37,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 38,
+      "instance": "014",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 39,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 40,
+      "instance": "012",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 41,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 42,
+      "instance": "014",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 43,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 44,
+      "instance": "012",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 45,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 46,
+      "instance": "014",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 47,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 48,
+      "instance": "012",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 49,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 50,
+      "instance": "014",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 51,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 52,
+      "instance": "012",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 53,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 54,
+      "instance": "014",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 55,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 56,
+      "instance": "012",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 57,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 58,
+      "instance": "014",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 59,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 60,
+      "instance": "012",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 61,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 62,
+      "instance": "014",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-core-breadth-v1",
+      "env": 63,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 0,
+      "instance": "012",
+      "original": "pickup/hold",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 1,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 2,
+      "instance": "014",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 3,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 4,
+      "instance": "012",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 5,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 6,
+      "instance": "014",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 7,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 8,
+      "instance": "012",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 9,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 10,
+      "instance": "014",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 11,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 12,
+      "instance": "012",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 13,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 14,
+      "instance": "014",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 15,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 16,
+      "instance": "012",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 17,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 18,
+      "instance": "014",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 19,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 20,
+      "instance": "012",
+      "original": "pickup/hold",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 21,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 22,
+      "instance": "014",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 23,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 24,
+      "instance": "012",
+      "original": "body unstable/drop",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 25,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 26,
+      "instance": "014",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 27,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 28,
+      "instance": "012",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 29,
+      "instance": "013",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 30,
+      "instance": "014",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-capacity-breadth-v1",
+      "env": 31,
+      "instance": "015",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 0,
+      "instance": "sensitivity-height-minus1",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 1,
+      "instance": "sensitivity-height-plus1",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 2,
+      "instance": "sensitivity-height-minus1",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 3,
+      "instance": "sensitivity-height-plus1",
+      "original": "pass",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 4,
+      "instance": "sensitivity-height-minus1",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 5,
+      "instance": "sensitivity-height-plus1",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 6,
+      "instance": "sensitivity-height-minus1",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 7,
+      "instance": "sensitivity-height-plus1",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 8,
+      "instance": "sensitivity-height-minus1",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 9,
+      "instance": "sensitivity-height-plus1",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 10,
+      "instance": "sensitivity-height-minus1",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 11,
+      "instance": "sensitivity-height-plus1",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 12,
+      "instance": "sensitivity-height-minus1",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 13,
+      "instance": "sensitivity-height-plus1",
+      "original": "pass",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 14,
+      "instance": "sensitivity-height-minus1",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 15,
+      "instance": "sensitivity-height-plus1",
+      "original": "pass",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 16,
+      "instance": "sensitivity-height-minus1",
+      "original": "pass",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 17,
+      "instance": "sensitivity-height-plus1",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 18,
+      "instance": "sensitivity-height-minus1",
+      "original": "pass",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 19,
+      "instance": "sensitivity-height-plus1",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 20,
+      "instance": "sensitivity-height-minus1",
+      "original": "pass",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 21,
+      "instance": "sensitivity-height-plus1",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 22,
+      "instance": "sensitivity-height-minus1",
+      "original": "pass",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 23,
+      "instance": "sensitivity-height-plus1",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 24,
+      "instance": "sensitivity-height-minus1",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 25,
+      "instance": "sensitivity-height-plus1",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 26,
+      "instance": "sensitivity-height-minus1",
+      "original": "pass",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 27,
+      "instance": "sensitivity-height-plus1",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 28,
+      "instance": "sensitivity-height-minus1",
+      "original": "pass",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 29,
+      "instance": "sensitivity-height-plus1",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 30,
+      "instance": "sensitivity-height-minus1",
+      "original": "pass",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-height-sensitivity-v1",
+      "env": 31,
+      "instance": "sensitivity-height-plus1",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 0,
+      "instance": "h0000",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 1,
+      "instance": "h0001",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 2,
+      "instance": "h0002",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 3,
+      "instance": "h0003",
+      "original": "body unstable/drop",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 4,
+      "instance": "h0004",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 5,
+      "instance": "h0005",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 6,
+      "instance": "h0006",
+      "original": "pass",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 7,
+      "instance": "h0007",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 8,
+      "instance": "h0008",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 9,
+      "instance": "h0009",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 10,
+      "instance": "h0010",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 11,
+      "instance": "h0011",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 12,
+      "instance": "h0012",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 13,
+      "instance": "h0013",
+      "original": "body unstable/drop",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 14,
+      "instance": "h0014",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 15,
+      "instance": "h0015",
+      "original": "pass",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 16,
+      "instance": "h0016",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 17,
+      "instance": "h0017",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 18,
+      "instance": "h0018",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 19,
+      "instance": "h0019",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 20,
+      "instance": "h0020",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 21,
+      "instance": "h0021",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 22,
+      "instance": "h0022",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 23,
+      "instance": "h0023",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 24,
+      "instance": "h0024",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 25,
+      "instance": "h0025",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 26,
+      "instance": "h0026",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 27,
+      "instance": "h0027",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 28,
+      "instance": "h0028",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 29,
+      "instance": "h0029",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 30,
+      "instance": "h0030",
+      "original": "body unstable/drop",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 31,
+      "instance": "h0031",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 32,
+      "instance": "h0032",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 33,
+      "instance": "h0033",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 34,
+      "instance": "h0034",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 35,
+      "instance": "h0035",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 36,
+      "instance": "h0036",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 37,
+      "instance": "h0037",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 38,
+      "instance": "h0038",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 39,
+      "instance": "h0039",
+      "original": "pickup/hold",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 40,
+      "instance": "h0040",
+      "original": "body unstable/drop",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 41,
+      "instance": "h0041",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 42,
+      "instance": "h0042",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 43,
+      "instance": "h0043",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 44,
+      "instance": "h0044",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 45,
+      "instance": "h0045",
+      "original": "body unstable/drop",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 46,
+      "instance": "h0046",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 47,
+      "instance": "h0047",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 48,
+      "instance": "h0048",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 49,
+      "instance": "h0049",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 50,
+      "instance": "h0050",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 51,
+      "instance": "h0051",
+      "original": "pickup/hold",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 52,
+      "instance": "h0052",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 53,
+      "instance": "h0053",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 54,
+      "instance": "h0054",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 55,
+      "instance": "h0055",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 56,
+      "instance": "h0056",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 57,
+      "instance": "h0057",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 58,
+      "instance": "h0058",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 59,
+      "instance": "h0059",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 60,
+      "instance": "h0060",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 61,
+      "instance": "h0061",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 62,
+      "instance": "h0062",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 63,
+      "instance": "h0063",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 64,
+      "instance": "h0064",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 65,
+      "instance": "h0065",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 66,
+      "instance": "h0066",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 67,
+      "instance": "h0067",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 68,
+      "instance": "h0068",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 69,
+      "instance": "h0069",
+      "original": "pass",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 70,
+      "instance": "h0070",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 71,
+      "instance": "h0071",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 72,
+      "instance": "h0072",
+      "original": "body unstable/drop",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 73,
+      "instance": "h0073",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 74,
+      "instance": "h0074",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 75,
+      "instance": "h0075",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 76,
+      "instance": "h0076",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 77,
+      "instance": "h0077",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 78,
+      "instance": "h0078",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 79,
+      "instance": "h0079",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 80,
+      "instance": "h0080",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 81,
+      "instance": "h0081",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 82,
+      "instance": "h0082",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 83,
+      "instance": "h0083",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 84,
+      "instance": "h0084",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 85,
+      "instance": "h0085",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 86,
+      "instance": "h0086",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 87,
+      "instance": "h0087",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 88,
+      "instance": "h0088",
+      "original": "pickup/hold",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 89,
+      "instance": "h0089",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 90,
+      "instance": "h0090",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 91,
+      "instance": "h0091",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 92,
+      "instance": "h0092",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 93,
+      "instance": "h0093",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 94,
+      "instance": "h0094",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 95,
+      "instance": "h0095",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 96,
+      "instance": "h0096",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 97,
+      "instance": "h0097",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 98,
+      "instance": "h0098",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 99,
+      "instance": "h0099",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 100,
+      "instance": "h0100",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 101,
+      "instance": "h0101",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 102,
+      "instance": "h0102",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 103,
+      "instance": "h0103",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 104,
+      "instance": "h0104",
+      "original": "pickup/hold",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 105,
+      "instance": "h0105",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 106,
+      "instance": "h0106",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 107,
+      "instance": "h0107",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 108,
+      "instance": "h0108",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 109,
+      "instance": "h0109",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 110,
+      "instance": "h0110",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 111,
+      "instance": "h0111",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 112,
+      "instance": "h0112",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 113,
+      "instance": "h0113",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 114,
+      "instance": "h0114",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 115,
+      "instance": "h0115",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 116,
+      "instance": "h0116",
+      "original": "body unstable/drop",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 117,
+      "instance": "h0117",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 118,
+      "instance": "h0118",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 119,
+      "instance": "h0119",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 120,
+      "instance": "h0120",
+      "original": "body unstable/drop",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 121,
+      "instance": "h0121",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 122,
+      "instance": "h0122",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 123,
+      "instance": "h0123",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 124,
+      "instance": "h0124",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 125,
+      "instance": "h0125",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 126,
+      "instance": "h0126",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-core-v1",
+      "env": 127,
+      "instance": "h0127",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 0,
+      "instance": "h0000",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 1,
+      "instance": "h0001",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 2,
+      "instance": "h0002",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 3,
+      "instance": "h0003",
+      "original": "pass",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 4,
+      "instance": "h0004",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 5,
+      "instance": "h0005",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 6,
+      "instance": "h0006",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 7,
+      "instance": "h0007",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 8,
+      "instance": "h0008",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 9,
+      "instance": "h0009",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 10,
+      "instance": "h0010",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 11,
+      "instance": "h0011",
+      "original": "retraction",
+      "recovered": "retraction"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 12,
+      "instance": "h0012",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 13,
+      "instance": "h0013",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 14,
+      "instance": "h0014",
+      "original": "pass",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 15,
+      "instance": "h0015",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 16,
+      "instance": "h0016",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 17,
+      "instance": "h0017",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 18,
+      "instance": "h0018",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 19,
+      "instance": "h0019",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 20,
+      "instance": "h0020",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 21,
+      "instance": "h0021",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 22,
+      "instance": "h0022",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 23,
+      "instance": "h0023",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 24,
+      "instance": "h0024",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 25,
+      "instance": "h0025",
+      "original": "body unstable/drop",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 26,
+      "instance": "h0026",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 27,
+      "instance": "h0027",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 28,
+      "instance": "h0028",
+      "original": "pickup/hold",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 29,
+      "instance": "h0029",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 30,
+      "instance": "h0030",
+      "original": "pickup/hold",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 31,
+      "instance": "h0031",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 32,
+      "instance": "h0032",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 33,
+      "instance": "h0033",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 34,
+      "instance": "h0034",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 35,
+      "instance": "h0035",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 36,
+      "instance": "h0036",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 37,
+      "instance": "h0037",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 38,
+      "instance": "h0038",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 39,
+      "instance": "h0039",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 40,
+      "instance": "h0040",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 41,
+      "instance": "h0041",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 42,
+      "instance": "h0042",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 43,
+      "instance": "h0043",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 44,
+      "instance": "h0044",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 45,
+      "instance": "h0045",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 46,
+      "instance": "h0046",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 47,
+      "instance": "h0047",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 48,
+      "instance": "h0048",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 49,
+      "instance": "h0049",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 50,
+      "instance": "h0050",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 51,
+      "instance": "h0051",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 52,
+      "instance": "h0052",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 53,
+      "instance": "h0053",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 54,
+      "instance": "h0054",
+      "original": "pass",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 55,
+      "instance": "h0055",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 56,
+      "instance": "h0056",
+      "original": "pickup/hold",
+      "recovered": "pickup/hold"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 57,
+      "instance": "h0057",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 58,
+      "instance": "h0058",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 59,
+      "instance": "h0059",
+      "original": "pass",
+      "recovered": "pass"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 60,
+      "instance": "h0060",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 61,
+      "instance": "h0061",
+      "original": "body unstable/drop",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 62,
+      "instance": "h0062",
+      "original": "pass",
+      "recovered": "body unstable/drop"
+    },
+    {
+      "group": "independent-fresh-capacity-v1",
+      "env": 63,
+      "instance": "h0063",
+      "original": "pass",
+      "recovered": "pass"
+    }
+  ],
+  "scope": "Paired repetition of same fixed full36s conditions, not added independent samples. GPU and graphics/physics pipeline co-vary. No controller/criteria change or causal inference. Some per-episode scope strings are inherited shared training-collector template; top-level check report, original freeze/registration and this paired role define actual validation/recovery status."
+}
