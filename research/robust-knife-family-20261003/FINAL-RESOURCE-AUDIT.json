@@ -1,0 +1,41 @@
+{
+  "utc": "2026-10-03T06:53:50.069184+00:00",
+  "round_start_utc": "2026-10-02T18:53:50+00:00",
+  "round_elapsed_hours": 12.000019217777778,
+  "minimum_12h_met": true,
+  "useful_work_scope": "Actual G2 compatibility, pickup/operation implementation, paired RL, frozen validation, failed attempts, actual archive downloads and executed recovery, contact diagnosis and GitHub delivery; no padding jobs. GPU training closed before delivery work.",
+  "remote_current_gpu_lines": [
+    "0, NVIDIA H200, 0, 0",
+    "1, NVIDIA H200, 0, 0",
+    "2, NVIDIA H200, 0, 0",
+    "3, NVIDIA H200, 0, 0"
+  ],
+  "remote_current_compute_processes": [],
+  "rolling4h_conservative_lower_bound_percent": 34.370734662281144,
+  "rolling4h_observed_seconds": 14196.272065877914,
+  "rolling4h_missing_seconds_treated_as_zero": 203.72793412208557,
+  "max_sample_gap_seconds": 192.08894515037537,
+  "first_full4h_evidence": "resources-first-full4h.json",
+  "exact_round_first4h": {
+    "round_start_utc": "2026-10-02T18:53:50+00:00",
+    "round_first4h_end_utc": "2026-10-02T22:53:50+00:00",
+    "first4h_conservative_lower_bound_percent": 62.962135678281385,
+    "covered_seconds": 13593.54097700119,
+    "missing_seconds_treated_as_zero": 806.4590229988098,
+    "scope": "Exact first4h from current goal start. Same whole4GPU timeweighted samples. Startup unsampledtime and any interval>45s treatedas0. Historical resources-first-full4h is a separate later monitor-start window."
+  },
+  "registered_jobs": 285,
+  "process_exit_codes": {
+    "0": 254,
+    "1": 31
+  },
+  "all_jobs_have_final_results": true,
+  "remote_status_unknown": false,
+  "new_registered_job_allocated_gpu_hours": 28.397893061783932,
+  "gpu_hours_scope": "Wrapper allocation walltime only; direct native simulations excluded. Not an exhaustive GPU utilization integral and not task success counts. No GPU hour cap.",
+  "frozen_runtime_file_count": 1258,
+  "frozen_runtime_inputs_base_and_primary_exact": true,
+  "primary_weights_sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714",
+  "no_real_robot_actions": true,
+  "historical_missing_child_receipts": "historical-missing-child-receipt-explanations.json"
+}

@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-03T06:34:48.891676+00:00",
+  "utc": "2026-10-03T06:53:51.047674+00:00",
   "scope": "Completion audit against original attachment/request. Capability gaps are stated, not converted to pass; attachment explicitly permits honest unresolved boundaries after useful attempts. No final goalcomplete claim before time/resource/publishedRelease gates.",
   "requirements": [
     {
@@ -82,12 +82,14 @@
     },
     {
       "requirement": "At least12h useful autonomous work, no GPUhourcap/no dummyload/currentauthorized4H200/rollingwholemean>27%",
-      "status": "await_final_time_and_resource_audit",
+      "status": "verified",
       "evidence": [
         "STATE.json",
         "WORK_QUEUE.json",
         "resources.jsonl",
-        "DECISIONS.jsonl"
+        "DECISIONS.jsonl",
+        "FINAL-RESOURCE-AUDIT.json",
+        "round-start-first4h-conservative-resource-audit.json"
       ],
       "minimum_utc": "2026-10-03T06:53:50+00:00",
       "limits": "Conservative minimum from currentG2nativegoalstart, notearlierFranka journal. Currentmonitor bounds gaps as0; no GPUwork after useful jobs finish."
