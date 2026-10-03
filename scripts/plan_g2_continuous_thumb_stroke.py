@@ -45,7 +45,7 @@ def main():
      selfgap=min(selfgap,gap)
   return point,facing,knife,selfgap
  def evaluate(x,shift):return sample(tuple(x),float(shift))
- start=evaluate(previous,0.)[0]
+ start=evaluate(previous,0.)[0].copy()
  patch_x_center=float(g.knife_geometry.joint_xyz[0])
  assert not a.contact_patch or np.allclose(abs(n),[0,1,0]),'Patch mode currently uses authored y-normal slider top'
  base_lower=h.lower[16:]+a.joint_margin;base_upper=h.upper[16:]-a.joint_margin
@@ -55,7 +55,11 @@ def main():
   if a.refine_initial_contact:
    assert a.contact_patch,'Surface refinement uses declared finite contactpatch'
    slider_parts=[part for part in parts[0.] if part['link']=='link_1']
-   start[1]=max(start[1],max(float(part['vertices'][:,1].max()) for part in slider_parts)+.00005)
+   pad_frame=w@h.forward(q0)['hand_r_thumb_pad_link']
+   pad_vertices=v@pad_frame[:3,:3].T+pad_frame[:3,3]
+   # Lift the lowest collision vertex above the slider top. The soft
+   # contact centroid can already be above it while the hull intersects.
+   start[1]+=max(0.,max(float(part['vertices'][:,1].max()) for part in slider_parts)+.00005-float(pad_vertices[:,1].min()))
    start[0]=np.clip(start[0],patch_x_center-.0045,patch_x_center+.0045)
   def initial_constraints(x):
    point,facing,knife,selfgap=evaluate(x,0.)
@@ -63,12 +67,12 @@ def main():
    if a.contact_patch:contact=np.array([.0045-abs(point[0]-patch_x_center),.00015-abs(point[1]-start[1]),.0005-abs(point[2]-start[2])])
    return np.r_[contact*1000,facing-a.facing_floor,(knife-.000005)*1000,(selfgap-.000015)*1000]
   initial=minimize(lambda x:float(np.sum(((evaluate(x,0.)[0]-start)*250)**2)+.05*np.sum((x-old)**2)),np.clip(old,base_lower,base_upper),method='SLSQP',bounds=list(zip(base_lower,base_upper)),constraints=[dict(type='ineq',fun=initial_constraints)],options=dict(maxiter=160,ftol=1e-11))
-  initial_audit=dict(old_thumb_q=old.tolist(),candidate_thumb_q=initial.x.tolist(),requested_base_margin_rad=a.thumb_base_margin,optimizer_success=bool(initial.success),minimum_constraint=float(initial_constraints(initial.x).min()),message=initial.message,scope='Geometry-only pressure-headroom hypothesis; no force or physics evidence')
+  initial_audit=dict(old_thumb_q=old.tolist(),candidate_thumb_q=initial.x.tolist(),requested_base_margin_rad=a.thumb_base_margin,optimizer_success=bool(initial.success),minimum_constraint=float(initial_constraints(initial.x).min()),initial_constraint_values=initial_constraints(old).tolist(),final_constraint_values=initial_constraints(initial.x).tolist(),constraint_order=['patch_lateral_mm','patch_normal_mm','patch_axial_mm','facing_cosine_margin','knife_separation_mm','self_separation_mm'] if a.contact_patch else ['point_error_mm','facing_cosine_margin','knife_separation_mm','self_separation_mm'],message=initial.message,scope='Geometry-only pressure-headroom hypothesis; no force or physics evidence')
   a.output.with_suffix('.initial-audit.json').write_text(json.dumps(initial_audit,indent=2));print(json.dumps(initial_audit),flush=True)
   assert initial_constraints(initial.x).min()>=-1e-4,'Rejected initial posture; do not execute'
   previous=initial.x;q0[16:]=previous;j['touch_q']=q0.tolist()
   a.output.with_suffix('.plan.json').write_text(json.dumps(j,indent=2))
-  start=evaluate(previous,0.)[0]
+  start=evaluate(previous,0.)[0].copy()
  motor_anchor=json.loads(a.motor_anchor_plan.read_text()) if a.motor_anchor_plan else None
  motor_geometry=DigitGeometry(max_face_axes=10000,knife_spec=a.knife_spec) if motor_anchor else None
  anchor_offset=np.array(motor_anchor['close_q'])[16:]-q0[16:] if motor_anchor else None

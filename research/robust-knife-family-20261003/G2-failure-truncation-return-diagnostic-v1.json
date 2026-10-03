@@ -1,0 +1,39 @@
+{
+  "rows": [
+    {
+      "time_s": 17.5,
+      "continuing_actual_failed_path_optimistic_discounted_return_upper": -90.44523430321183,
+      "hypothetical_immediate_drop_terminal_reward": -8.0,
+      "truncation_can_look_better": true,
+      "remaining_steps": 556,
+      "proposed_discounted_absorbing_failure_penalty": -195.67851960698252
+    },
+    {
+      "time_s": 18.0,
+      "continuing_actual_failed_path_optimistic_discounted_return_upper": -87.25527187987426,
+      "hypothetical_immediate_drop_terminal_reward": -8.0,
+      "truncation_can_look_better": true,
+      "remaining_steps": 541,
+      "proposed_discounted_absorbing_failure_penalty": -194.71637279035502
+    },
+    {
+      "time_s": 19.0,
+      "continuing_actual_failed_path_optimistic_discounted_return_upper": -63.87428665977284,
+      "hypothetical_immediate_drop_terminal_reward": -8.0,
+      "truncation_can_look_better": true,
+      "remaining_steps": 511,
+      "proposed_discounted_absorbing_failure_penalty": -192.56081906841686
+    },
+    {
+      "time_s": 20.0,
+      "continuing_actual_failed_path_optimistic_discounted_return_upper": -45.12178411843539,
+      "hypothetical_immediate_drop_terminal_reward": -8.0,
+      "truncation_can_look_better": true,
+      "remaining_steps": 481,
+      "proposed_discounted_absorbing_failure_penalty": -190.05548047410676
+    }
+  ],
+  "actual_first_drop_time_s": 24.233333333333334,
+  "reward_bounds": "Originaltask/pose/action terms; contact/support andprogress rewards given maximumpossible+.25+.4+.5 each frame, making continuedreturn optimistic",
+  "scope": "Counterfactualreward/truncation diagnostic onretained actualfailure. It does not prove learned intenttodrop or a futurepolicy improvement. Completion/failurecriteria unchanged."
+}

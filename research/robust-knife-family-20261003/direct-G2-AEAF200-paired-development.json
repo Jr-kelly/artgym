@@ -1,0 +1,108 @@
+{
+  "seed": 2026100363,
+  "results": {
+    "P50": {
+      "completed": 349,
+      "n": 512,
+      "failures": {
+        "pickup/hold": 35,
+        "body unstable/drop": 128
+      },
+      "checkpoint_sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714",
+      "evidence": "runs/robust-knife-family-20261003/checks/direct-G2-P50-mixed512-v28/report.json"
+    },
+    "AA200": {
+      "completed": 201,
+      "n": 512,
+      "failures": {
+        "body unstable/drop": 266,
+        "pickup/hold": 42,
+        "extension": 1,
+        "retraction": 2
+      },
+      "checkpoint_sha256": "c86be687ca5f1ce81eea873fb40b71fa81f66647838b453d8f000eee5a746112",
+      "evidence": "runs/robust-knife-family-20261003/checks/direct-G2-AA200-mixed512-v32/report.json"
+    },
+    "AE200": {
+      "completed": 344,
+      "n": 512,
+      "failures": {
+        "pickup/hold": 36,
+        "body unstable/drop": 131,
+        "extension": 1
+      },
+      "checkpoint_sha256": "825e23a1bdb4be64357c9f35d3e7c31f84befc6cdb39666476ebc201fbec807d",
+      "evidence": "runs/robust-knife-family-20261003/checks/AE200-joint-v34/report.json"
+    },
+    "AF200": {
+      "completed": 342,
+      "n": 512,
+      "failures": {
+        "pickup/hold": 39,
+        "body unstable/drop": 131
+      },
+      "checkpoint_sha256": "ab8fe4157f098401a76787421ff441d186971cfb834d6c8fe8d4359184ea3bf8",
+      "evidence": "runs/robust-knife-family-20261003/checks/AF200-joint-v36/report.json"
+    }
+  },
+  "initial_fields_exactly_equal": {
+    "P50": {
+      "root": true,
+      "dof": true,
+      "materials": true,
+      "observation_bias": true,
+      "delay": true,
+      "cal_object": true,
+      "cal_slider": true,
+      "load_amplitude": true,
+      "detent_amplitude": true,
+      "load_phase": true,
+      "load_profile_ids": true,
+      "load_frequencies": true
+    },
+    "AA200": {
+      "root": true,
+      "dof": true,
+      "materials": true,
+      "observation_bias": true,
+      "delay": true,
+      "cal_object": true,
+      "cal_slider": true,
+      "load_amplitude": true,
+      "detent_amplitude": true,
+      "load_phase": true,
+      "load_profile_ids": true,
+      "load_frequencies": true
+    },
+    "AE200": {
+      "root": true,
+      "dof": true,
+      "materials": true,
+      "observation_bias": true,
+      "delay": true,
+      "cal_object": true,
+      "cal_slider": true,
+      "load_amplitude": true,
+      "detent_amplitude": true,
+      "load_phase": true,
+      "load_profile_ids": true,
+      "load_frequencies": true
+    },
+    "AF200": {
+      "root": true,
+      "dof": true,
+      "materials": true,
+      "observation_bias": true,
+      "delay": true,
+      "cal_object": true,
+      "cal_slider": true,
+      "load_amplitude": true,
+      "detent_amplitude": true,
+      "load_phase": true,
+      "load_profile_ids": true,
+      "load_frequencies": true
+    }
+  },
+  "scope": "Actualsame512initialjointdevelopmentstates; noindependentheldouts opened",
+  "conclusion": "Boundedactor preservesmostparentbehavior versusrewardalonecollapse; absorbingfailurevariant addsnobroadgain. Neither exceedsretainedP50; no minorcountoptimization."
+}

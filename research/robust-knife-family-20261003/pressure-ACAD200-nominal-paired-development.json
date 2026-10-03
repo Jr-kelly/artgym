@@ -1,0 +1,52 @@
+{
+  "results": {
+    "AC200-nominal-v33": {
+      "completed": 0,
+      "n": 8,
+      "failures": [
+        "body unstable/drop",
+        "body unstable/drop",
+        "body unstable/drop",
+        "body unstable/drop",
+        "body unstable/drop",
+        "body unstable/drop",
+        "body unstable/drop",
+        "body unstable/drop"
+      ],
+      "checkpoint_sha256": "e780b1e036c45e3bddc253dd75f352ad97d1d757bcda8c88cb0b0fbfdf8cf9c7",
+      "evidence": "runs/robust-knife-family-20261003/checks/AC200-nominal-v33/report.json"
+    },
+    "AD200-nominal-v35": {
+      "completed": 0,
+      "n": 8,
+      "failures": [
+        "body unstable/drop",
+        "body unstable/drop",
+        "body unstable/drop",
+        "body unstable/drop",
+        "body unstable/drop",
+        "body unstable/drop",
+        "body unstable/drop",
+        "body unstable/drop"
+      ],
+      "checkpoint_sha256": "c8f5a14f30df8ee51fbbb1ce8f1fbd99ec025dd56cf97cd30ea5458688b04b56",
+      "evidence": "runs/robust-knife-family-20261003/checks/AD200-nominal-v35/report.json"
+    }
+  },
+  "initial_fields_exactly_equal": {
+    "root": true,
+    "dof": true,
+    "materials": true,
+    "observation_bias": true,
+    "delay": true,
+    "cal_object": true,
+    "cal_slider": true,
+    "load_amplitude": true,
+    "detent_amplitude": true,
+    "load_phase": true,
+    "load_profile_ids": true,
+    "load_frequencies": true
+  },
+  "scope": "8actualnominaldevelopmentepisodes each, samefixedpressuregripv7; noindependentgenclaim",
+  "conclusion": "Bothallbodyunstable despite differingactorupdates. Newstaticgrip mechanicaloperation remainsblocked; no actorupdateadvantageclaim."
+}

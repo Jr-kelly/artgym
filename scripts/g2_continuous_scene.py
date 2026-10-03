@@ -33,7 +33,7 @@ def gym_transform(position,quaternion=(0,0,0,1)):
 class G2ContinuousScene:
     def __init__(self,n=8,seed=2026100356,randomization_scale=0.,instances=None,
                  load_max=.1,detent_max=.1,contact_progress_reward=0.,reference_spec=None,
-                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None):
+                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False):
         self.n=n;self.device='cuda:0';self.seed=seed
         self.history_features=history_features;self.public_dim=(170 if history_features else 154)+(8 if support_estimator_spec else 0)
         self.support_estimator_spec=support_estimator_spec;self.support_estimator=None
@@ -51,6 +51,8 @@ class G2ContinuousScene:
         self.scale=self.tensor([support_scale]*16+[thumb_scale]*4);self.base_mode='geometric';self.env=self
         self.contact_progress_reward=contact_progress_reward
         self.functional_thumb_reward=functional_thumb_reward
+        self.absorbing_failure_penalty=absorbing_failure_penalty
+        self.strong_slider_contact_reward=strong_slider_contact_reward
         self.cfg=configuration('wuji_geometry',n,['object=knife_wuji_real_size_20261002','hand=wuji_paper_official_actuator','+task.env.geometryRound=real-size-student-adaptation-20261002'],train='wujiAcquisitionSAPG',seed=seed)
         self.bridge=BatchedG2R800(self.cfg,TEACHER,R800,n)
         self.player=self.bridge.player
@@ -64,6 +66,13 @@ class G2ContinuousScene:
         self.reference_spec=reference_spec or json.loads((D/'functional-side-edge-under-support-v6/continuous-thumb-v2.json').read_text())
         self.reference=ScheduledThumbReference(self.reference_spec,n,self.device)
         self.closed=self.tensor(self.plan['close_q']);self.opened=self.tensor(self.plan['open_q'])
+        self.middle_support=None
+        if scene_spec and scene_spec.get('middle_deflection_support'):
+            from scripts.g2_middle_deflection_support import BatchedMiddleDeflectionSupport
+            assert self.takeover_frame==480,'Finite postliftsearch needs50constanttargetframes before16s takeover'
+            support_spec=scene_spec['middle_deflection_support']
+            assert abs(float(self.closed[7])-support_spec['motor_upper_rad'])<1e-6
+            self.middle_support=BatchedMiddleDeflectionSupport(support_spec,n,self.device)
         self.approach=self.tensor(self.acquisition['approach_q']);self.lift=self.tensor(self.acquisition['lift_q'])
         self.age=torch.zeros(n,device=self.device,dtype=torch.long)
         self.last_action=torch.zeros((n,20),device=self.device)
@@ -200,6 +209,7 @@ class G2ContinuousScene:
         k=len(ids);s=self.randomization_scale
         self.age[ids]=0;self.last_action[ids]=0;self.delayed_action[ids]=0
         self.reference.reset(ids)
+        if self.middle_support is not None:self.middle_support.reset(ids)
         self.observation_bias[ids]=(torch.rand((k,20),device=self.device)-.5)*.012*s
         self.delay[ids]=torch.rand(k,device=self.device)<.15*s
         self.load_amplitude[ids]=torch.rand(k,device=self.device)*self.load_max*s if s else .05
@@ -261,6 +271,7 @@ class G2ContinuousScene:
             alpha=smooth((u[selected]-first['fraction'])/(last['fraction']-first['fraction'])).unsqueeze(-1)
             closed_values[selected]=self.tensor(first['q'])*(1-alpha)+self.tensor(last['q'])*alpha
         hq[closing]=closed_values;hq[t>=8]=self.closed
+        if self.middle_support is not None:hq=self.middle_support.command(t,self._measurement,hq)
         return aq,hq
 
     def features(self):
@@ -361,11 +372,12 @@ class G2ContinuousScene:
         drift=(obj[:,:3]-self.reference_pose[:,:3]).norm(dim=-1)
         rotation=2*torch.asin(quat_mul(obj[:,3:7],quat_conjugate(self.reference_pose[:,3:7]))[:,:3].norm(dim=-1).clamp(0,1))
         contact=(self.contact[:,self.pad_indices].norm(dim=-1)>.01).float();proximity=self.thumb_proximity()
-        thumb_reward=proximity if self.functional_thumb_reward else contact[:,0]
+        reward_proximity=proximity*(self.contact[:,self.slider_index].norm(dim=-1)>.01).float() if self.strong_slider_contact_reward else proximity
+        thumb_reward=reward_proximity if self.functional_thumb_reward or self.strong_slider_contact_reward else contact[:,0]
         reward=2*torch.exp(-(error/.012).square())+.25*thumb_reward+.1*contact[:,1:].sum(-1)-40*drift.clamp(0,.10)-4*rotation.clamp(0,1.5)-.02*executed.square().mean(-1)
         if self.contact_progress_reward:
             gate=torch.exp(-(drift/.01).square()-(rotation/.25).square())
-            reward+=self.contact_progress_reward*proximity*gate*((previous_error-error)/.002).clamp(-1,1)
+            reward+=self.contact_progress_reward*reward_proximity*gate*((previous_error-error)/.002).clamp(-1,1)
         reward=torch.where(active,reward,torch.zeros_like(reward))
         self.peak[operation_active]=torch.maximum(self.peak[operation_active],travel[operation_active])
         self.max_drift[operation_active]=torch.maximum(self.max_drift[operation_active],drift[operation_active])
@@ -373,7 +385,13 @@ class G2ContinuousScene:
         self.contact_steps[operation_active]+=(proximity[operation_active]>.5).float();self.operation_steps[operation_active]+=1
         dropped=active&(height<.78)
         self.fell|=dropped
-        reward=torch.where(dropped,torch.full_like(reward,-8.),reward)
+        failure_reward=torch.full_like(reward,-8.)
+        if self.absorbing_failure_penalty:
+            # Equivalent discounted future reward -1 per remaining control
+            # frame in an absorbing failed state, without simulating dead time.
+            remaining=(1080-oldage-1).clamp_min(0).float()
+            failure_reward-=.995*(1.-torch.pow(.995,remaining))/.005
+        reward=torch.where(dropped,failure_reward,reward)
         phase=((oldage-480).clamp_min(0)//150).clamp(0,3)
         sample=operation_active&(((oldage-480)%150)>=141)&(oldage<1080)
         sampled=sample.nonzero(as_tuple=False).flatten()

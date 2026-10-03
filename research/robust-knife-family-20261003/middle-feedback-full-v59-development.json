@@ -1,0 +1,30 @@
+{
+  "full_success": false,
+  "lifted_clear": true,
+  "operation_body_stable": false,
+  "operation_body_max_rotation_rad": 3.09351577488753,
+  "operation_body_max_drift_m": 0.09688634425401688,
+  "operation_thumb_slider_contact_fraction": 0.31114808652246256,
+  "operation_body_contact_fraction": [
+    0.0,
+    0.3194675540765391,
+    0.30615640599001664,
+    0.30948419301164726,
+    0.3194675540765391
+  ],
+  "endpoints_mean_last03s_m": [
+    0.021031537507143285,
+    0.02100820518616173,
+    0.02103380010359817,
+    0.021008190491961107
+  ],
+  "first_failure": "holding after handover",
+  "controller": {
+    "state": "holding",
+    "target_rad": 0.8576925283691361,
+    "filtered_measured_minus_target_rad": 0.02213855175184969,
+    "scope": "Measuredjoint/knowncommand loadproxy only; actualknifecontact andsupport judgedseparately. Originalgains/effort/limits, no currentobject/contact truth, no constantforce claim."
+  },
+  "scope": "Full36s actualcontinuousscript using sameauditedv7thumbpath asfailedv50, newlylegalpostliftfeedback. No learnedactor executed.",
+  "report": "runs/robust-knife-family-20261003/demo/g2-proprio-middle-full-v59/report.json"
+}

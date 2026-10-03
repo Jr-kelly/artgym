@@ -1,0 +1,64 @@
+{
+  "report": "runs/robust-knife-family-20261003/checks/friction-mixing-v1/report.json",
+  "report_sha256": "64918ef4372292d28200552bb2a5ee820d6d265c49afc4703bc2f0ad18e58617",
+  "trace_sha256": "f2c2cc31cf117656621f2015e24a3b4ed88637888dfdc11d082288af9d332444",
+  "conclusion": "Five actual engine cuboidramp cases consistentwith arithmeticaverage materialcombination plusonsetthreshold offset. Not realfriction or exactstatic calibration.",
+  "rows": [
+    {
+      "table_friction": 0.8,
+      "block_friction": 0.8,
+      "onset_time_s": 5.3,
+      "force_over_mg_at_sliding_onset": 0.8239583333333333,
+      "predicted_average": 0.8,
+      "predicted_minimum": 0.8,
+      "predicted_maximum": 0.8,
+      "settled_normal_contact_N": 0.34335005283355713,
+      "mass_kg": 0.035
+    },
+    {
+      "table_friction": 0.8,
+      "block_friction": 2.4,
+      "onset_time_s": 8.5,
+      "force_over_mg_at_sliding_onset": 1.6239583333333334,
+      "predicted_average": 1.6,
+      "predicted_minimum": 0.8,
+      "predicted_maximum": 2.4,
+      "settled_normal_contact_N": 0.3433500826358795,
+      "mass_kg": 0.035
+    },
+    {
+      "table_friction": 2.4,
+      "block_friction": 0.8,
+      "onset_time_s": 8.5,
+      "force_over_mg_at_sliding_onset": 1.6239583333333334,
+      "predicted_average": 1.6,
+      "predicted_minimum": 0.8,
+      "predicted_maximum": 2.4,
+      "settled_normal_contact_N": 0.34335002303123474,
+      "mass_kg": 0.035
+    },
+    {
+      "table_friction": 2.4,
+      "block_friction": 2.4,
+      "onset_time_s": 11.7,
+      "force_over_mg_at_sliding_onset": 2.423958333333333,
+      "predicted_average": 2.4,
+      "predicted_minimum": 2.4,
+      "predicted_maximum": 2.4,
+      "settled_normal_contact_N": 0.34334808588027954,
+      "mass_kg": 0.035
+    },
+    {
+      "table_friction": 0.65,
+      "block_friction": 3.4,
+      "onset_time_s": 10.2,
+      "force_over_mg_at_sliding_onset": 2.048958333333333,
+      "predicted_average": 2.025,
+      "predicted_minimum": 0.65,
+      "predicted_maximum": 3.4,
+      "settled_normal_contact_N": 0.34334596991539,
+      "mass_kg": 0.035
+    }
+  ],
+  "scope": "Engine material mixing/sliding-onset diagnostic with a wide flat cuboid andslowforce ramp; not realfriction measurement, knife operation, model learning or exactstaticfriction calibration. No robottransport."
+}

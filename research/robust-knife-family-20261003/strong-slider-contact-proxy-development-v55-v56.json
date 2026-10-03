@@ -1,0 +1,45 @@
+{
+  "reports": [
+    {
+      "demo": "g2-P50-slider-contact-success-v55",
+      "trace_sha256": "7e020907349b8f6262a9d97500d7c3c5274831365705e5b8adbbb002149d069b",
+      "n": 601,
+      "exact_positive_pair_frames": 601,
+      "body_only_frames": 0,
+      "legacy_proxy": {
+        "positive_fraction": 1.0,
+        "accuracy_vs_positive_exact_thumb_slider_pair": 1.0,
+        "false_positive_body_only": null,
+        "recall_on_positive_pair": 1.0
+      },
+      "thumb_plus_slider_netcontact_proxy": {
+        "positive_fraction": 1.0,
+        "accuracy_vs_positive_exact_thumb_slider_pair": 1.0,
+        "false_positive_body_only": null,
+        "recall_on_positive_pair": 1.0
+      },
+      "actual_full_success": true
+    },
+    {
+      "demo": "g2-P50-slider-contact-failure-v56",
+      "trace_sha256": "ae6b129798665678dc6e9009ccbf13c683c0f8ab09a0f2a49137471eb1f9d8ad",
+      "n": 601,
+      "exact_positive_pair_frames": 63,
+      "body_only_frames": 538,
+      "legacy_proxy": {
+        "positive_fraction": 0.1314475873544093,
+        "accuracy_vs_positive_exact_thumb_slider_pair": 0.9733777038269551,
+        "false_positive_body_only": 0.02973977695167286,
+        "recall_on_positive_pair": 1.0
+      },
+      "thumb_plus_slider_netcontact_proxy": {
+        "positive_fraction": 0.1048252911813644,
+        "accuracy_vs_positive_exact_thumb_slider_pair": 1.0,
+        "false_positive_body_only": 0.0,
+        "recall_on_positive_pair": 1.0
+      },
+      "actual_full_success": false
+    }
+  ],
+  "scope": "Two actualcomplete36s P50condition repeats; inference untouched. Proxyuses truth-only rewardlabels/netcontact. Exactpositivepair comparison retrospective, nothardwarecontact sensor or broadindependent claim. Existing completioncriteria andoldscores untouched."
+}
