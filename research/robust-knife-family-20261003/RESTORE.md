@@ -1,10 +1,10 @@
 # G2 + Wuji v1 本轮恢复与复现
 
-最终候选、Release URL和哈希以同目录 `freeze.json`、`release-manifest.json` 为准。恢复到空目录，不覆盖原研究工作树。源码包仅含Git跟踪内容；用户的Franka修改和附件中的个人照片/视频不属于公开资产。
+最终候选、Release URL和哈希以源码内 `freeze.json` 与单独Release资产 `release-manifest.json` 为准。恢复到空目录，不覆盖原研究工作树。源码包仅含Git跟踪内容；用户的Franka修改和附件中的个人照片/视频不属于公开资产。
 
 ## 环境
 
-实际验证运行时为Python 3.8、PyTorch 2.1.0+cu118、CUDA支持的Isaac Gym Preview 4和NVIDIA GPU。Isaac Gym是单独安装的依赖；本Release不重新分发该SDK。确切Python包记录见 `runtime-local-pip-freeze.txt` 和 `runtime-remote-pip-freeze.txt`。这两份是实跑环境记录，不应混合安装。首次运行需要可用C++编译器和Ninja构建GymTorch扩展；将当前Python环境的bin目录放在PATH前端。
+实际验证运行时为Python 3.8、PyTorch 2.1.0+cu118、CUDA支持的Isaac Gym Preview 4和NVIDIA GPU。Isaac Gym是单独安装的依赖；本Release不重新分发该SDK。确切Python包记录见 `runtime-local-pip-freeze.txt` 和 `runtime-remote-pip-freeze.txt`。这两份是实跑环境记录，不应混合安装。首次运行需要可用C++编译器和Ninja构建GymTorch扩展；将当前Python环境的bin目录放在PATH前端。中文续接文档建议设置 `PYTHONUTF8=1`，避免C/ASCII locale读取失败。
 
 ## 恢复文件
 
@@ -14,7 +14,7 @@ R800是2076维SC-real编码器适配权重，必须同时保留指定teacher及�
 
 ## 完整仿真
 
-完整命令见 `REPRODUCE.md`，最终冻结入口将追加在其末尾。连续runner从刀柄重心仍在桌面边缘内侧开始，约6.5mm侧边悬出以便手指从下方支撑；它不涵盖任意桌面中央摆放。0–8秒脚本接近/闭合，8–12秒抬升，12–16秒持稳，16–36秒同一物理回合完成两轮伸出、保持、缩回和保持。候选实际接管时刻以冻结配置为准。两类完整入口都只在初始回合设置物理状态，阶段之间不附着、不重置、不直接驱动滑块。
+完整命令见 `REPRODUCE.md`，全部332回合的固定命令另见 `frozen-validation-commands.sh`。连续runner从刀柄重心仍在桌面边缘内侧开始，约6.5mm侧边悬出以便手指从下方支撑；它不涵盖任意桌面中央摆放。0–8秒脚本接近/闭合，8–12秒抬升，12–16秒持稳，16–36秒同一物理回合完成两轮伸出、保持、缩回和保持。候选实际接管时刻以冻结配置为准。两类完整入口都只在初始回合设置物理状态，阶段之间不附着、不重置、不直接驱动滑块。
 
 工程新增运行与起动幅值不等于实物总阻力；0.1N不是真实上限。未充分测量的滑块尺寸、质量/惯量、卡槽阻力和材料仍是近似。独立验证包保留全部初态、全部回合及实际视频。开发512几何、联合训练拟合、最终独立组合、脚本分支和部署离线回放分别报告。
 

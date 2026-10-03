@@ -1,0 +1,316 @@
+{
+  "model_archive_sha256": "d77aa5c8aef9acfdcf59afa543bc13a43d2e2f1daa82456ba63f9daf4a9062a2",
+  "files": 366,
+  "evaluated_checkpoint_references": [
+    {
+      "report": "runs/robust-knife-family-20261003/checks/independent-height-sensitivity-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AD200-nominal-v35/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AD1/update_000200.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/independent-capacity-breadth-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/middle-P50-bridge-v38/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/middle-P50-v1/reference_adapted.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/independent-core-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/frozen-core-replication-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/P50-lift8-reward-transition-v56/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/highload-matched-reference-development-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/load-scale-P50-v1/matched_reference.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-X200-mixed512-v27/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-X1/update_000200.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/independent-fresh-capacity-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-AB200-mixed512-v33/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AB1/update_000200.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-Q100-joint-v11/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-Q1/update_000100.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-AA200-mixed512-v32/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AA1/update_000200.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/P0-lift8-joint-v55/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-reference-P0/geometric_reference.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AE200-joint-v34/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AE1/update_000200.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AC200-nominal-v33/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AC1/update_000200.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/highload-AR-final-development-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/restored-G2-load-reference-AR1/update_000350.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-S400-512-v16/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-S1/update_000400.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/exploration-P50-interface-v59/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/exploration-P50-v1/exploration_adapted.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/joint-component-placement-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-R400-512-v15/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-R1/update_000400.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-W200-mixed512-v25/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-W1/update_000200.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-U300-mixed512-v19/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-U1/update_000300.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AH200-joint-v39/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AH1/update_000200.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/temporal-P50-bridge-v45/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/temporal-support-P50-v1/support_adapted.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/independent-core-breadth-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/joint-component-all-P50-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-learned-P50-v8/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AO150-corrected-lift8-joint-v58/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AO1/update_000150.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-nominal-v2/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-reference-P0/geometric_reference.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AM150-lift8-joint-v54/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AM1/update_000150.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AP200-exploration-lift8-joint-v62/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AP1/update_000200.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/batch-video-precheck-v48/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/frozen-source-highload-recovery-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/middle-P50-v5-bridge-v41/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/middle-P50-v5/reference_adapted.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/independent-fresh-core-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/middle-P0-v5-nominal-v42/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/middle-P0-v5/reference_adapted.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/joint-component-calibration-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/pressure-P50-nominal-v32/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/pressure-P50-v1/reference_adapted.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/history-P50-bridge-v24/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/history-P50-v1/history_adapted.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-Q200-512-v14/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-Q1/update_000200.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AN200-corrected-lift8-joint-v57/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AN1/update_000200.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/ppo-gradient-diagnostic-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/support-P50-nominal-bridge-v31/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/support-P50-v1/support_adapted.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-Y200-mixed512-v29/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-Y1/update_000200.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/joint-component-material-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-early-hold-bridge-v17/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/exploration-P0-interface-v60/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/exploration-P0-v1/exploration_adapted.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/lift8-interface-v50/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/batch-video-full-v49/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/thick-pipeline-compat-v61/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/exploratory-fresh-conditional-capacity-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-V200-nominal-bridge-v18/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-V1/update_000200.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-Z200-mixed512-v30/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-Z1/update_000200.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-parent512-v12/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/P50-early512-v40/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/joint-component-sensor-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/highload-AS-final-development-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/restored-G2-load-direction-AS1/update_000350.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/joint-component-latency-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AI200-joint-v44/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AI1/update_000200.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-P50-mixed512-v28/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-P50-mixed512-v21/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/ppo-gradient-diagnostic-v3/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/joint-component-all-P0-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-reference-P0/geometric_reference.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/frozen-capacity-replication-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/independent-capacity-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-joint-P50-v9/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AF200-joint-v36/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AF1/update_000200.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-P200-512-v13/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-P1/update_000200.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/P50-lift8-joint512-v51/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/frozen-restored-highload-recovery-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AK200-joint-v52/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AK1/update_000200.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AL200-lift8-joint-v53/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AL1/update_000200.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-P100-joint-v10/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-P1/update_000100.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/AQ150-exploration-lift8-joint-v63/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-AQ1/update_000150.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/exploratory-fresh-conditional-core-v1/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth"
+    },
+    {
+      "report": "runs/robust-knife-family-20261003/checks/direct-G2-V300-mixed512-v20/report.json",
+      "checkpoint": "runs/robust-knife-family-20261003/train/direct-G2-V1/update_000300.pth"
+    }
+  ],
+  "required_highload_final_and_scale_reference_present": true,
+  "scope": "All actual evaluated checkpointpaths and every closed trainingfinal included; modelarchive separate from source/environment installation."
+}

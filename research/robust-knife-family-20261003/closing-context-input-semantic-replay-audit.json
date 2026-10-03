@@ -1,0 +1,23 @@
+{
+  "results": [
+    {
+      "split": "train",
+      "actuallegal_context_input_max_diff": 4.172325134277344e-07,
+      "T_prediction_max_diff_mm": 1.3418625494310277e-05,
+      "shape": [
+        512,
+        194
+      ]
+    },
+    {
+      "split": "fresh",
+      "actuallegal_context_input_max_diff": 3.5762786865234375e-07,
+      "T_prediction_max_diff_mm": 1.2220945578178544e-05,
+      "shape": [
+        512,
+        194
+      ]
+    }
+  ],
+  "scope": "Localpreparation only: replayactualsavedmeasuredinputs and onceknowncalibration; no physics/training/hardware. Newcached194input reproduces previouslyfit dataset columns."
+}

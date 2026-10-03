@@ -1,0 +1,994 @@
+{
+  "utc": "2026-10-03T05:44:49.000983+00:00",
+  "archive_sha256": "d77aa5c8aef9acfdcf59afa543bc13a43d2e2f1daa82456ba63f9daf4a9062a2",
+  "downloaded_directory": "/tmp/wuji-release-download-verification-20261003",
+  "restored_empty_directory": "/tmp/wuji-final-downloaded-weights-20261003",
+  "every_manifest_entry_verified": 366,
+  "serialized_checkpoints": [
+    {
+      "path": "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
+      "format": null,
+      "updates": null,
+      "transitions": null,
+      "has_model": true,
+      "optimizer_nonempty": false,
+      "rng_keys_present": []
+    },
+    {
+      "path": "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth",
+      "format": "wuji-unified-student-v1",
+      "updates": null,
+      "transitions": null,
+      "has_model": false,
+      "optimizer_nonempty": true,
+      "rng_keys_present": []
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/estimator/head-measured-capacity-v2/best.pth",
+      "format": "g2-legal-support-estimator-v1",
+      "updates": null,
+      "transitions": null,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/estimator/head-temporal-capacity-v1/best.pth",
+      "format": "g2-legal-temporal-support-estimator-v1",
+      "updates": null,
+      "transitions": null,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/acquired-E1/update_000103.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 103,
+      "transitions": 6750208,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/acquired-F1/update_000101.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 101,
+      "transitions": 6619136,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AA1/update_000200.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 200,
+      "transitions": 9830400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AA1/update_000272.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 272,
+      "transitions": 14548992,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AB1/update_000200.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 200,
+      "transitions": 9830400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AB1/update_000269.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 269,
+      "transitions": 14352384,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AC1/update_000200.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 200,
+      "transitions": 9830400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AC1/update_000211.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 211,
+      "transitions": 10551296,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AD1/update_000200.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 200,
+      "transitions": 9830400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AD1/update_000206.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 206,
+      "transitions": 10223616,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AE1/update_000200.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 200,
+      "transitions": 9830400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AE1/update_000263.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 263,
+      "transitions": 13959168,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AF1/update_000200.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 200,
+      "transitions": 9830400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AF1/update_000299.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 299,
+      "transitions": 16318464,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AH1/update_000200.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 200,
+      "transitions": 9830400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AH1/update_000242.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 242,
+      "transitions": 12582912,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AI1/update_000200.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 200,
+      "transitions": 9830400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AI1/update_000333.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 333,
+      "transitions": 18546688,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AJ1/update_000178.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 178,
+      "transitions": 8388608,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AK1/update_000200.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 200,
+      "transitions": 9830400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AK1/update_000252.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 252,
+      "transitions": 13238272,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AL1/update_000200.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 200,
+      "transitions": 9830400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AL1/update_000321.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 321,
+      "transitions": 17760256,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AM1/update_000150.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 150,
+      "transitions": 9830400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AM1/update_000271.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 271,
+      "transitions": 17760256,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AN1/update_000200.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 200,
+      "transitions": 9830400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AO1/update_000150.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 150,
+      "transitions": 9830400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AP1/update_000200.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 200,
+      "transitions": 9830400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AP1/update_000309.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 309,
+      "transitions": 16973824,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AQ1/update_000150.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 150,
+      "transitions": 9830400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-AQ1/update_000260.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 260,
+      "transitions": 17039360,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-P1/update_000100.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 100,
+      "transitions": 1638400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-P1/update_000200.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 200,
+      "transitions": 4915200,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-Q1/update_000100.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 100,
+      "transitions": 1638400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-Q1/update_000200.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 200,
+      "transitions": 4915200,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-R1/update_000400.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 400,
+      "transitions": 13107200,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-R1/update_000549.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 549,
+      "transitions": 22872064,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-S1/update_000400.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 400,
+      "transitions": 13107200,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-S1/update_000551.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 551,
+      "transitions": 23003136,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-U1/update_000300.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 300,
+      "transitions": 16384000,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-U1/update_000509.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 509,
+      "transitions": 30081024,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-V1/update_000200.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 200,
+      "transitions": 9830400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-V1/update_000300.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 300,
+      "transitions": 16384000,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-V1/update_000508.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 508,
+      "transitions": 30015488,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-W1/update_000200.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 200,
+      "transitions": 9830400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-W1/update_000350.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 350,
+      "transitions": 19660800,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-X1/update_000200.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 200,
+      "transitions": 9830400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-X1/update_000350.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 350,
+      "transitions": 19660800,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-Y1/update_000200.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 200,
+      "transitions": 9830400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-Y1/update_000302.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 302,
+      "transitions": 16515072,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-Z1/update_000200.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 200,
+      "transitions": 9830400,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-Z1/update_000289.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 289,
+      "transitions": 15663104,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/exploration-P0-v1/exploration_adapted.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 0,
+      "transitions": 0,
+      "has_model": true,
+      "optimizer_nonempty": false,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ],
+      "scope": "Deliberately untrained zero-output reference; emptyAdam state expected, nottrainedrecoverycheckpoint"
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/exploration-P50-v1/exploration_adapted.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 50,
+      "transitions": 3276800,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 50,
+      "transitions": 3276800,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/geometric-P1/update_000300.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 300,
+      "transitions": 19660800,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/geometric-Q1/update_000300.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 300,
+      "transitions": 19660800,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/geometric-reference-P0/geometric_reference.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 0,
+      "transitions": 0,
+      "has_model": true,
+      "optimizer_nonempty": false,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ],
+      "scope": "Deliberately untrained zero-output reference; emptyAdam state expected, nottrainedrecoverycheckpoint"
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/history-P50-v1/history_adapted.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 50,
+      "transitions": 3276800,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/load-scale-P50-v1/matched_reference.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 50,
+      "transitions": 3276800,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/longside-I1/update_000260.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 260,
+      "transitions": 10485760,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/longside-J1/update_000256.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 256,
+      "transitions": 10223616,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/middle-P0-v5/reference_adapted.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 0,
+      "transitions": 0,
+      "has_model": true,
+      "optimizer_nonempty": false,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ],
+      "scope": "Deliberately untrained zero-output reference; emptyAdam state expected, nottrainedrecoverycheckpoint"
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/middle-P50-v1/reference_adapted.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 50,
+      "transitions": 3276800,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/middle-P50-v5/reference_adapted.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 50,
+      "transitions": 3276800,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/pilot-A2/update_000400.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 400,
+      "transitions": 13107200,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/pilot-B2/update_000400.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 400,
+      "transitions": 13107200,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/pressure-P50-v1/reference_adapted.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 50,
+      "transitions": 3276800,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/restored-G2-load-direction-AS1/update_000350.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 350,
+      "transitions": 19660800,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/restored-G2-load-reference-AR1/update_000350.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 350,
+      "transitions": 19660800,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/support-P50-v1/support_adapted.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 50,
+      "transitions": 3276800,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    },
+    {
+      "path": "runs/robust-knife-family-20261003/train/temporal-support-P50-v1/support_adapted.pth",
+      "format": "wuji-r800-residual-ppo-v1",
+      "updates": 50,
+      "transitions": 3276800,
+      "has_model": true,
+      "optimizer_nonempty": true,
+      "rng_keys_present": [
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy"
+      ]
+    }
+  ],
+  "scope": "ActualGitHubdownloaded modelbytes restore/deserializes; every actuallytrainedresidual retainsAdam/RNG. Three updates0 references correctlyretain emptyAdam. Noactualtrainingresume/nativephysics/hardware claim fromfiles-onlyaudit.",
+  "inspection_correction": "Initialscript mistakenly requirednonemptyAdam onuntrainedP0 references, failedafterall366fileentries matched. Noarchive/extraction defect; correctedrole-basedinspection only."
+}
