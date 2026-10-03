@@ -253,3 +253,18 @@ python -m scripts.check_g2_continuous_scene --output runs/robust-knife-family-20
 ```
 
 半步长v45仍失败，刀身先失稳、随后丢滑块接触，与240Hz压力容量失败的次序不同。被动力乘离散位移加势能差是积分求积诊断，正残差本身不能证明净物理能量注入或实物容量上界；原始报告保留，后续runner已明确该限制。
+
+## 完整策略离线回放及新握持开发（02:13 UTC）
+
+```bash
+python -m scripts.replay_g2_continuous_policy \
+  --demo runs/robust-knife-family-20261003/demo/g2-learned-heavy-pulse-v38 \
+  --checkpoint runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth \
+  --output runs/robust-knife-family-20261003/deploy/replayed-P50
+```
+
+该入口只输出文件，600帧实际测量/已发命令回放的电机目标完全一致；当前物体/滑块/接触真值不进入推理。输出`report.json`包含URDF关节名、仿真索引、原始限位及2076输入布局。仿真索引不是已标定的硬件SDK索引，未接硬件传输。
+
+`pressure-aware-measured-operation-v1/continuous-thumb-patch-v7.json`是通过独立密集电机检查的完整40mm新几何路径，`scene-spec.json`嵌入同一名义握持、取刀和离线标定，所有物理资产共享。v50实际操作失败，不能替换前面的P50成功入口。`adapt_wuji_reference_checkpoint`可用`--motor-audit`与`--scene-spec`保存零新更新的适配权重；新物理轨迹与训练仍需独立检验。
+
+训练可选`--bounded-actor-update`分别裁剪actor/critic，按全部当前活跃rollout的解析Gaussian KL≤0.03缩小每个actor提案；拒绝时恢复actor与Adam，critic正常更新。它是有限当前样本的更新约束，不是未来轨迹保证。AC/AD/AE拟合尚未形成行为改善结论。

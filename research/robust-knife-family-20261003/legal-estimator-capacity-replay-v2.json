@@ -1,0 +1,45 @@
+{
+  "estimator_sha256": "718d43f4ea461952894c2fbe2ed28639c2206b22250cc1d9dcd0de97df54fb0d",
+  "interface_checkpoint_sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714",
+  "reports": [
+    {
+      "demo": "runs/robust-knife-family-20261003/demo/g2-learned-heavy-pulse-v38",
+      "trace_sha256": "21d54e6e5573df165caccd3ff881b1742077db1d660d1c10ae4114c3e93f3c6a",
+      "max_reconstructed_motor_target_error_rad": 1.1920928955078125e-07,
+      "progress_mae_mm": 0.8078859760887942,
+      "progress_mae_exact_slider_contact_mm": 0.8078859760887942,
+      "progress_mae_without_slider_contact_mm": null,
+      "exact_slider_pair_positive_count": 600,
+      "head_proxy_positive_fraction": 1.0,
+      "proxy_vs_exact_pair_accuracy": 1.0,
+      "wrong_body_contact_count": 0,
+      "proxy_false_positive_fraction_on_wrong_body": null,
+      "first_actual_no_slider_time_s": null,
+      "first_head_proxy_absent_time_s": null,
+      "scope": "Offline legal observedq/action/issuedtarget/armFK replay; exact simulator pair-contact labels evaluated afterwards. A trained proximity/netcontact proxy is not an exact pair orforce sensor; no fresh physics or independent geometry claim.",
+      "slider_lower_m": -0.03267458688196273,
+      "progress_label": "CorrectedoriginalURDFlower subtraction; relative travel as in estimatortraining",
+      "revision": "V1progressMAEusedabsoluteq erroneously; estimatorfeatures/predictions, contactlabels andmotorreconstruction unchanged"
+    },
+    {
+      "demo": "runs/robust-knife-family-20261003/demo/g2-learned-capacity-pulse-v39",
+      "trace_sha256": "572ec298d2221627088dbdf69eaae252a4886817d2a62f52318c8bd4c42f6c6b",
+      "max_reconstructed_motor_target_error_rad": 4.76837158203125e-07,
+      "progress_mae_mm": 28.083746179332696,
+      "progress_mae_exact_slider_contact_mm": 1.3146070983412896,
+      "progress_mae_without_slider_contact_mm": 31.22425970280096,
+      "exact_slider_pair_positive_count": 63,
+      "head_proxy_positive_fraction": 0.7116666666666667,
+      "proxy_vs_exact_pair_accuracy": 0.3933333333333333,
+      "wrong_body_contact_count": 537,
+      "proxy_false_positive_fraction_on_wrong_body": 0.6778398510242085,
+      "first_actual_no_slider_time_s": 17.433333333333334,
+      "first_head_proxy_absent_time_s": 23.066666666666666,
+      "scope": "Offline legal observedq/action/issuedtarget/armFK replay; exact simulator pair-contact labels evaluated afterwards. A trained proximity/netcontact proxy is not an exact pair orforce sensor; no fresh physics or independent geometry claim.",
+      "slider_lower_m": -0.03267458688196273,
+      "progress_label": "CorrectedoriginalURDFlower subtraction; relative travel as in estimatortraining",
+      "revision": "V1progressMAEusedabsoluteq erroneously; estimatorfeatures/predictions, contactlabels andmotorreconstruction unchanged"
+    }
+  ],
+  "supersedes": "runs/robust-knife-family-20261003/estimator/capacity-offline-v1/report.json"
+}

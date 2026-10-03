@@ -33,9 +33,13 @@ def gym_transform(position,quaternion=(0,0,0,1)):
 class G2ContinuousScene:
     def __init__(self,n=8,seed=2026100356,randomization_scale=0.,instances=None,
                  load_max=.1,detent_max=.1,contact_progress_reward=0.,reference_spec=None,
-                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False):
+                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None):
         self.n=n;self.device='cuda:0';self.seed=seed
-        self.history_features=history_features;self.public_dim=170 if history_features else 154
+        self.history_features=history_features;self.public_dim=(170 if history_features else 154)+(8 if support_estimator_spec else 0)
+        self.support_estimator_spec=support_estimator_spec;self.support_estimator=None
+        if support_estimator_spec:
+            from scripts.g2_legal_support_estimator import LegalSupportEstimator
+            self.support_estimator=LegalSupportEstimator(support_estimator_spec,self.device)
         # Use float32 convolution rather than TF32 for deployment/batch parity.
         torch.backends.cudnn.allow_tf32=False
         torch.manual_seed(seed);self.rng=np.random.default_rng(seed)
@@ -46,12 +50,17 @@ class G2ContinuousScene:
         assert load_profile in ['constant','sinusoidal','triangular','pulse','mixed'] and load_frequency>0
         self.scale=self.tensor([support_scale]*16+[thumb_scale]*4);self.base_mode='geometric';self.env=self
         self.contact_progress_reward=contact_progress_reward
+        self.functional_thumb_reward=functional_thumb_reward
         self.cfg=configuration('wuji_geometry',n,['object=knife_wuji_real_size_20261002','hand=wuji_paper_official_actuator','+task.env.geometryRound=real-size-student-adaptation-20261002'],train='wujiAcquisitionSAPG',seed=seed)
         self.bridge=BatchedG2R800(self.cfg,TEACHER,R800,n)
         self.player=self.bridge.player
-        self.plan=json.loads((D/'functional-side-edge-under-support-equilibrium-v6/motor-plan.json').read_text())
-        self.acquisition=json.loads((D/'functional-side-edge-under-support-lateral-v3/acquisition-path.json').read_text())
-        self.calibration=json.loads((D/'handover-from-v25-v1.json').read_text())
+        self.scene_spec=scene_spec
+        self.plan=scene_spec['plan'] if scene_spec else json.loads((D/'functional-side-edge-under-support-equilibrium-v6/motor-plan.json').read_text())
+        self.acquisition=scene_spec['acquisition'] if scene_spec else json.loads((D/'functional-side-edge-under-support-lateral-v3/acquisition-path.json').read_text())
+        self.calibration=scene_spec['calibration'] if scene_spec else json.loads((D/'handover-from-v25-v1.json').read_text())
+        if scene_spec:
+            assert scene_spec['scope']=='Fixed nominal scene shared across all physical assets; no asset-specific actor input'
+            assert len(self.plan['close_q'])==20 and len(self.plan['open_q'])==20
         self.reference_spec=reference_spec or json.loads((D/'functional-side-edge-under-support-v6/continuous-thumb-v2.json').read_text())
         self.reference=ScheduledThumbReference(self.reference_spec,n,self.device)
         self.closed=self.tensor(self.plan['close_q']);self.opened=self.tensor(self.plan['open_q'])
@@ -277,6 +286,10 @@ class G2ContinuousScene:
                 from scripts.wuji_student_interface import legal_history_latent
                 latent[ids]=legal_history_latent(self.player.model.a2c_network.priv_encoder,self.bridge.last_encoder_input[ids])
             public=torch.cat([public,latent],-1)
+        if self.support_estimator is not None:
+            estimate=q.new_zeros((self.n,8));ids=self.policy_active.nonzero(as_tuple=False).flatten()
+            if len(ids):estimate[ids]=self.support_estimator(public[ids],self.player.model.a2c_network.priv_encoder,self.bridge.last_encoder_input[ids])
+            public=torch.cat([public,estimate],-1)
         wrist=self.rb[:,self.wrist_index];inverse=quat_conjugate(wrist[:,3:7]);obj=self.rb[:,self.object_index];slider=self.rb[:,self.slider_index]
         relative_object=torch.cat([quat_apply(inverse,obj[:,:3]-wrist[:,:3]),quat_mul(inverse,obj[:,3:7])],-1)
         relative_slider=torch.cat([quat_apply(inverse,slider[:,:3]-wrist[:,:3]),quat_mul(inverse,slider[:,3:7])],-1)
@@ -348,7 +361,8 @@ class G2ContinuousScene:
         drift=(obj[:,:3]-self.reference_pose[:,:3]).norm(dim=-1)
         rotation=2*torch.asin(quat_mul(obj[:,3:7],quat_conjugate(self.reference_pose[:,3:7]))[:,:3].norm(dim=-1).clamp(0,1))
         contact=(self.contact[:,self.pad_indices].norm(dim=-1)>.01).float();proximity=self.thumb_proximity()
-        reward=2*torch.exp(-(error/.012).square())+.25*contact[:,0]+.1*contact[:,1:].sum(-1)-40*drift.clamp(0,.10)-4*rotation.clamp(0,1.5)-.02*executed.square().mean(-1)
+        thumb_reward=proximity if self.functional_thumb_reward else contact[:,0]
+        reward=2*torch.exp(-(error/.012).square())+.25*thumb_reward+.1*contact[:,1:].sum(-1)-40*drift.clamp(0,.10)-4*rotation.clamp(0,1.5)-.02*executed.square().mean(-1)
         if self.contact_progress_reward:
             gate=torch.exp(-(drift/.01).square()-(rotation/.25).square())
             reward+=self.contact_progress_reward*proximity*gate*((previous_error-error)/.002).clamp(-1,1)

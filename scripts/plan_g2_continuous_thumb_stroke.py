@@ -9,13 +9,16 @@ from functools import lru_cache
 from pathlib import Path
 import numpy as np
 from scipy.optimize import minimize
+from scipy.spatial import ConvexHull
 from scripts.g2_contact_geometry import DigitGeometry
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--plan',type=Path,required=True);p.add_argument('--knife-spec',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--joint-step',type=float,default=.04);p.add_argument('--motor-anchor-plan',type=Path,help='Certified acquisition motor plan; constrain actualinitial+reference-offset targets to originallimits andthumb selfclearance');p.add_argument('--facing-floor',type=float,default=.25,help='Geometric padnormal cosine floor; may use independently observed successful contactorientation, never change physicalcollisions');p.add_argument('--refine-initial-contact',action='store_true',help='Refine loaded measured q to a geometry-only zero-force slider-top touch before path fitting; no physical state or runtime target jump');p.add_argument('--contact-patch',action='store_true',help='Use authored slider top lateral interval with0.5mm inset,0.15mm normal and0.5mm axial centroid tolerance; preserve all collision/limits/40mm command');p.add_argument('--joint-margin',type=float,default=.08,help='Offline thumb engineering reserve within unchanged URDF limits; minimum .005rad, original default .08');p.add_argument('--thumb-base-margin',type=float,default=.08,help='Geometric reserve for original thumb base-joint limit; no motor-limit change');a=p.parse_args();a.output.parent.mkdir(parents=True,exist_ok=True)
+ p=argparse.ArgumentParser();p.add_argument('--plan',type=Path,required=True);p.add_argument('--knife-spec',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--joint-step',type=float,default=.04);p.add_argument('--motor-anchor-plan',type=Path,help='Certified acquisition motor plan; constrain actualinitial+reference-offset targets to originallimits andthumb selfclearance');p.add_argument('--facing-mode',choices=['nominal-x','supporting-hull'],default='nominal-x',help='Supporting-hull checks outward normals ofactualpadfacets within0.4mm ofthecontactsupportplane; no physical geometry changes');p.add_argument('--facing-floor',type=float,default=.25,help='Geometric padnormal cosine floor; may use independently observed successful contactorientation, never change physicalcollisions');p.add_argument('--refine-initial-contact',action='store_true',help='Refine loaded measured q to a geometry-only zero-force slider-top touch before path fitting; no physical state or runtime target jump');p.add_argument('--contact-patch',action='store_true',help='Use authored slider top lateral interval with0.5mm inset,0.15mm normal and0.5mm axial centroid tolerance; preserve all collision/limits/40mm command');p.add_argument('--joint-margin',type=float,default=.08,help='Offline thumb engineering reserve within unchanged URDF limits; minimum .005rad, original default .08');p.add_argument('--thumb-base-margin',type=float,default=.08,help='Geometric reserve for original thumb base-joint limit; no motor-limit change');a=p.parse_args();a.output.parent.mkdir(parents=True,exist_ok=True)
  if a.output.exists():raise FileExistsError(a.output)
  assert .005<=a.joint_margin<=.20 and .005<=a.thumb_base_margin<=.30
  j=json.loads(a.plan.read_text());g=DigitGeometry(knife_spec=a.knife_spec);h=g.w;w=np.array(j['wrist_in_knife']);q0=np.array(j['touch_q']);n=np.array(j['contact_normals'][0]);end=np.array(j['stroke_endpoint']['thumb_q']);v=np.concatenate([v for v,_ in g.meshes['hand_r_thumb_pad_link']]);rows=[];previous=q0[16:].copy()
+ assert a.facing_mode!='supporting-hull' or len(g.meshes['hand_r_thumb_pad_link'])==1
+ pad_hull=ConvexHull(v);pad_facet_centers=v[pad_hull.simplices].mean(1);pad_facet_normals=pad_hull.equations[:,:3]
  fixed=h.forward(q0);others=[]
  for link,meshes in g.meshes.items():
   if any('_'+f+'_' in link for f in ['index','middle','ring','pinky']):
@@ -26,6 +29,9 @@ def main():
  @lru_cache(maxsize=2048)
  def sample(values,shift):
   q=q0.copy();q[16:]=values;frames=h.forward(q);t=w@frames['hand_r_thumb_pad_link'];points=v@t[:3,:3].T+t[:3,3];proj=points@n;weight=np.exp(-(proj-proj.min())/.0002);weight/=weight.sum();point=weight@points;facing=float(t[:3,0]@(-n));knife=np.inf;selfgap=np.inf
+  if a.facing_mode=='supporting-hull':
+   facet_projection=(pad_facet_centers@t[:3,:3].T+t[:3,3])@n;supporting=facet_projection<=proj.min()+.0004
+   facing=float((pad_facet_normals@t[:3,:3].T@(-n))[supporting].max()) if supporting.any() else -1.
   for link,meshes in g.meshes.items():
    if '_thumb_' not in link:continue
    for vertices,axes in meshes:
@@ -68,7 +74,7 @@ def main():
  anchor_offset=np.array(motor_anchor['close_q'])[16:]-q0[16:] if motor_anchor else None
  def motor_self_constraints(x):
   full=np.array(motor_anchor['close_q']);full[16:]=x+anchor_offset
-  return np.array([r['gap_lower_bound_m']-.000015 for r in motor_geometry.self_gaps(full,'thumb')+motor_geometry.pair_gaps(full,[('hand_r_thumb_pad_link','hand_r_base_link'),('hand_r_thumb_link4','hand_r_base_link')])])*1000
+  return np.array([r['gap_lower_bound_m']-.000015 for r in motor_geometry.self_gaps(full,'thumb',certify_clearance_m=.000015)+motor_geometry.pair_gaps(full,[('hand_r_thumb_pad_link','hand_r_base_link'),('hand_r_thumb_link4','hand_r_base_link')])])*1000
  for shift in np.linspace(0,.04,41):
   desired=start+np.array([0.,0.,shift]);reference=q0[16:]*(1-shift/.04)+end*(shift/.04);prior=previous.copy();lo=np.maximum(base_lower,prior-a.joint_step);hi=np.minimum(base_upper,prior+a.joint_step)
   if motor_anchor:
@@ -85,5 +91,5 @@ def main():
   with a.output.with_suffix('.knots.jsonl').open('a') as stream:stream.write(json.dumps(rows[-1])+'\n')
   if len(rows)%5==0:print(json.dumps(dict(knots=len(rows),shift_m=float(shift),feasible=ok)),flush=True)
   if not ok:break
- result=dict(source=str(a.plan),scope='Offline continuous rolling-pad IK hypothesis; measured pressure, servo tracking and physics remain unverified',rows=rows,joint_step_rad=a.joint_step,motor_anchor_plan=str(a.motor_anchor_plan) if a.motor_anchor_plan else None,final_motor_limits_and_self_constrained=bool(motor_anchor),pad_facing_floor=a.facing_floor,known_motor_anchor=bool(j.get('offline_measured_operation_only')),initial_surface_refined=a.refine_initial_contact,contact_patch_mode=a.contact_patch,contact_patch_scope='Authored nominal10mm slider top,0.5mm lateral inset; centroid normal tolerance0.15mm,axial0.5mm. Still original40mm command and allcollisions/limits; not real contact calibration' if a.contact_patch else 'Original100um fixed centroid',engineering_joint_margin_rad=a.joint_margin,engineering_thumb_base_margin_rad=a.thumb_base_margin,all_feasible=bool(len(rows)==41 and all(r['feasible'] for r in rows)),target_travel_m=.04,travel_seconds=4.,hold_seconds=1.);a.output.write_text(json.dumps(result,indent=2));print(json.dumps(dict(all_feasible=result['all_feasible'],knots=len(rows),last=rows[-1])));assert result['all_feasible'],'Do not execute an incomplete/rejected trajectory'
+ result=dict(source=str(a.plan),scope='Offline continuous rolling-pad IK hypothesis; measured pressure, servo tracking and physics remain unverified',rows=rows,joint_step_rad=a.joint_step,motor_anchor_plan=str(a.motor_anchor_plan) if a.motor_anchor_plan else None,final_motor_limits_and_self_constrained=bool(motor_anchor),pad_facing_floor=a.facing_floor,facing_mode=a.facing_mode,facing_scope='Actualsupportingcollisionhullfacetnormal within0.4mmcontactplane' if a.facing_mode=='supporting-hull' else 'Nominalpadlocal+xaxisheuristic',known_motor_anchor=bool(j.get('offline_measured_operation_only')),initial_surface_refined=a.refine_initial_contact,contact_patch_mode=a.contact_patch,contact_patch_scope='Authored nominal10mm slider top,0.5mm lateral inset; centroid normal tolerance0.15mm,axial0.5mm. Still original40mm command and allcollisions/limits; not real contact calibration' if a.contact_patch else 'Original100um fixed centroid',engineering_joint_margin_rad=a.joint_margin,engineering_thumb_base_margin_rad=a.thumb_base_margin,all_feasible=bool(len(rows)==41 and all(r['feasible'] for r in rows)),target_travel_m=.04,travel_seconds=4.,hold_seconds=1.);a.output.write_text(json.dumps(result,indent=2));print(json.dumps(dict(all_feasible=result['all_feasible'],knots=len(rows),last=rows[-1])));assert result['all_feasible'],'Do not execute an incomplete/rejected trajectory'
 if __name__=='__main__':main()

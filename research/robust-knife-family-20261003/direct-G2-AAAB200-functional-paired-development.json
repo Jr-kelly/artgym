@@ -1,0 +1,62 @@
+{
+  "seed": 2026100363,
+  "envs": 512,
+  "results": {
+    "parent": {
+      "completed": 349,
+      "pickup": 477,
+      "fall": 119,
+      "failures": {
+        "pickup/hold": 35,
+        "body unstable/drop": 128,
+        "extension": 0,
+        "retraction": 0,
+        "thumb-contact": 0
+      },
+      "checkpoint_sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    "functional_reward": {
+      "completed": 201,
+      "pickup": 470,
+      "fall": 164,
+      "failures": {
+        "pickup/hold": 42,
+        "body unstable/drop": 266,
+        "extension": 1,
+        "retraction": 2,
+        "thumb-contact": 0
+      },
+      "checkpoint_sha256": "c86be687ca5f1ce81eea873fb40b71fa81f66647838b453d8f000eee5a746112"
+    },
+    "functional_reward_estimates": {
+      "completed": 344,
+      "pickup": 466,
+      "fall": 128,
+      "failures": {
+        "pickup/hold": 46,
+        "body unstable/drop": 122,
+        "extension": 0,
+        "retraction": 0,
+        "thumb-contact": 0
+      },
+      "checkpoint_sha256": "4fed82df27adf9b9ee803d7c825466691bf0f10e00278412bff5acb24b425a13"
+    }
+  },
+  "initial_fields_exactly_equal": {
+    "root": true,
+    "dof": true,
+    "materials": true,
+    "observation_bias": true,
+    "delay": true,
+    "cal_object": true,
+    "cal_slider": true,
+    "load_amplitude": true,
+    "detent_amplitude": true,
+    "load_phase": true,
+    "load_profile_ids": true,
+    "load_frequencies": true
+  },
+  "scope": "Actual continuousG2 development,notindependent",
+  "conclusion": "Functionalproximityreward alone degradesbroadbody/contactcontrol; estimated8channels preventmostofthisdegradationbutdo notimproveoverparent. No scientificmechanismadvantageclaimed. Retireboth andretainexactcheckpoints.",
+  "limitation": "Rewardlabelstill proximity/netthumbforceproxy; highloadCPUreplay showswrongbodycontactfalsepositives. ApproximateKL fitofAA unstable."
+}

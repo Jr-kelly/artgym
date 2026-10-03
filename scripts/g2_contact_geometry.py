@@ -70,7 +70,7 @@ class DigitGeometry:
     def minimum_gap(self,q,wrist_in_object,slider,finger='thumb'):
         return min(v['gap_lower_bound_m'] for v in self.gaps(q,wrist_in_object,slider,finger))
 
-    def self_gaps(self,q,finger):
+    def self_gaps(self,q,finger,certify_clearance_m=None):
         """Conservative face-axis gaps to other digits; exclude shared palm.
 
         Positive certifies separation. Negative requires an exact convex
@@ -88,6 +88,14 @@ class DigitGeometry:
                 if '_'+finger+'_' in b:continue
                 for va,na in ma:
                     for vb,nb in mb:
+                        if certify_clearance_m is not None:
+                            ca,cb=va.mean(0),vb.mean(0)
+                            sphere=float(np.linalg.norm(ca-cb)-np.linalg.norm(va-ca,axis=1).max()-np.linalg.norm(vb-cb,axis=1).max())
+                            if sphere>certify_clearance_m:
+                                # Enclosing spheres certify Euclidean separation;
+                                # all potentially close pairs retain full face SAT.
+                                result.append(dict(moving_link=a,other_link=b,gap_lower_bound_m=sphere,certificate='enclosing spheres'))
+                                continue
                         axes=np.r_[na,nb];pa=va@axes.T;pb=vb@axes.T
                         gap=np.maximum(pa.min(0)-pb.max(0),pb.min(0)-pa.max(0)).max()
                         result.append(dict(moving_link=a,other_link=b,gap_lower_bound_m=float(gap)))

@@ -1,0 +1,99 @@
+{
+  "report": {
+    "start": "Knife at configured tabletop edge with COM on table; open hand outside edge, lateral acquisition then vertical lift",
+    "methods": "Motor-only scripted continuous-IK approach/close/lift; finite-torque gravity-compensated arm/hand; offline-calibrated scheduled thumb IK with static joint preload after16s with once-loaded relative-grip calibration estimate",
+    "lifted_clear": true,
+    "operation_stays_clear": false,
+    "meaningful_extension": false,
+    "retraction_after31s": true,
+    "full_success": false,
+    "minimum_hold_height_m": 0.8540164232254028,
+    "max_object_height_m": 0.8564251065254211,
+    "wall_seconds": 46.85543791705277,
+    "positive_load_power_max_W": 0.0,
+    "weight_sha256": {
+      "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth": "bbf61592721300b1cf053de8246898a69989ed102b7a034da6fb47cc9a541dcd",
+      "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8"
+    },
+    "scope": "Continuous physics attempt, no stage state writes. Meaningful25mm extension and8mm return are predeclared demo diagnostics; inherited40mm command unchanged. No preciseS5claim.",
+    "integration_diagnostics": {
+      "physics_hz": 240,
+      "motor_pd_hz": 240,
+      "policy_history_hz": 30,
+      "passive_groove_work_J": 0.0004061414681080448,
+      "passive_startup_work_J": 0.0012223109382899185,
+      "total_passive_discrete_work_plus_potential_change_J": 0.0016284532370868024,
+      "maximum_positive_passive_discrete_energy_residual_J": 0.0016284532370868024,
+      "groove_potential_depth_J": 0.00030000000000000003,
+      "scope": "Evaluation-only sum of held passive force times actual substep displacement plus analytical potential change; zero for exact conservative integration. Positive residual measures held-force quadrature inconsistency; it does not by itself prove net physical energy injection or actuator work. Original passive profiles and motors unchanged."
+    },
+    "learned_takeover_seconds": null,
+    "known_task_schedule_seconds": [
+      16,
+      21,
+      26,
+      31,
+      36
+    ],
+    "learned_hold_scope": "If takeover<16, same legal residual commands closed during12\u201316 and keeps actual history/motor/RNN state into operation; no phase state reset or force regulation",
+    "staged_preload": null,
+    "operation_evaluated": true,
+    "endpoints_mean_last03s_m": [
+      0.021076199184689257,
+      3.2443139288160537e-06,
+      7.23525881767273e-05,
+      3.253006272845798e-06
+    ],
+    "diagnostic": "Scheduled four5s stages; final0.3s mean >25mm extend and <8mm return on both cycles; no truth-triggered switching",
+    "operation_body_max_drift_m": 0.10273896902799606,
+    "operation_body_max_rotation_rad": 2.9851109679289327,
+    "operation_body_stable": false,
+    "slider_before_handover_m": 0.0,
+    "slider_closed_at_handover": true,
+    "physical_asset": "assets/objects/knife_wuji_real_size_20261002/000/mobility.urdf",
+    "physical_asset_sha256": "d73aaecc9892fbdfd75a755389311936cf8b1f0d8361cfc66ea94ab5f391cb97",
+    "physical_dimensions_WTL_m": [
+      0.016,
+      0.012,
+      0.135
+    ],
+    "policy_geometry_estimate_scope": "Unchanged nominal geometry and once-loaded prior calibration; physical asset identity never given to actor",
+    "hand_friction": 0.8,
+    "knife_friction": 2.4,
+    "load_profile": "pulse",
+    "load_frequency_rad_s": 2.9,
+    "observation_noise_std_rad": 0.002,
+    "observation_bias_bound_rad": 0.006,
+    "seed": 2026100358,
+    "loaded_weight_use": "Interface initialization only; learned actor never called",
+    "residual_checkpoint": "None",
+    "thumb_script": "research/robust-knife-family-20261003/pressure-aware-measured-operation-v1/continuous-thumb-patch-v7.json",
+    "thumb_script_scope": "Known 40mm schedule+offline geometric trajectory and joint preload, not constant force or live state feedback",
+    "thumb_action_gain": 1.0,
+    "support_action_gain": 1.0,
+    "added_load_N": 0.2,
+    "passive_startup_detent_amplitude_N": 0.2,
+    "variable_load": false,
+    "load_scope": "Engineering added load plus original passive friction/damping; no measured real total-resistance ceiling. Groove is finite passive potential; positive descent power is stored energy.",
+    "operation_thumb_slider_contact_fraction": 0.39267886855241263,
+    "operation_body_contact_fraction": [
+      0.0,
+      0.4059900166389351,
+      0.1048252911813644,
+      0.3860232945091514,
+      0.40099833610648916
+    ],
+    "contact_scope": "30Hz solver-contact diagnostics; current truth never fed to actor. Positive motor preload does not establish constant pressure.",
+    "operation_thumb_slider_contact_maintained": false,
+    "failure_onsets_s": {
+      "body_stability": 17.5,
+      "height": 24.233333333333334,
+      "sustained_thumb_slider_contact_loss": 24.03333333333333
+    },
+    "failure_onsets_scope": "Evaluation only: first stability/height breach, and first10 consecutive30Hz samples without thumb-slider contact. Legacy first_failure lists failed conditions by priority, not chronological onset. No control or completion-gate change.",
+    "extension_endpoint_condition_met": false,
+    "first_failure": "holding after handover"
+  },
+  "review_frames": "/tmp/wuji-v50-{continuous,hand-closeup}-review.jpg",
+  "scope": "Geometricdense motor audit and actualpickup passed; supportunstable duringoperation before sustainedslidercontactloss; no full demo or learning claim"
+}

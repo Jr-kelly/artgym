@@ -31,7 +31,7 @@ class G2R800Policy(FrozenPolicy):
         self.last_encoder_input = None; self.last_observation = None
         assert 0<=thumb_action_gain<=1 and 0<=support_action_gain<=1
         self.thumb_action_gain=thumb_action_gain;self.support_action_gain=support_action_gain
-        self.residual=None;self.last_public_features=None;self.thumb_reference=None;self.history_features=False
+        self.residual=None;self.last_public_features=None;self.thumb_reference=None;self.history_features=False;self.support_estimator=None
         if residual_checkpoint is not None:
             from scripts.wuji_robust_learning import ResidualActorCritic
             saved=torch.load(residual_checkpoint,map_location='cpu')
@@ -39,7 +39,10 @@ class G2R800Policy(FrozenPolicy):
             assert saved['student_sha256']==hashlib.sha256(Path(student).read_bytes()).hexdigest()
             assert saved['teacher_sha256']==hashlib.sha256(Path(teacher).read_bytes()).hexdigest()
             self.history_features=saved.get('history_features',False)
-            dim=170 if self.history_features else 154
+            if saved.get('support_estimator_spec'):
+                from scripts.g2_legal_support_estimator import LegalSupportEstimator
+                self.support_estimator=LegalSupportEstimator(saved['support_estimator_spec'],self.player.device)
+            dim=(170 if self.history_features else 154)+(8 if self.support_estimator is not None else 0)
             self.residual=ResidualActorCritic(dim,dim+27).to(self.player.device);self.residual.load_state_dict(saved['model']);self.residual.eval()
             self.residual_scale=torch.tensor(saved['action_scale'],device=self.player.device)
             self.action_base_mode=saved.get('action_base_mode','r800')
@@ -87,6 +90,8 @@ class G2R800Policy(FrozenPolicy):
                     latent=legal_history_latent(self.player.model.a2c_network.priv_encoder,encoder_input)
                     assert latent.shape==(1,16)
                     public=torch.cat([public,latent],-1)
+                if self.support_estimator is not None:
+                    public=torch.cat([public,self.support_estimator(public,self.player.model.a2c_network.priv_encoder,encoder_input)],-1)
                 self.last_public_features=public.detach().cpu().numpy()[0]
                 base=action if self.action_base_mode=="r800" else torch.zeros_like(action)
                 if self.thumb_reference is not None:base=self.thumb_reference.action(self.known.initial,self.known.issued,self.tensor([goal]))

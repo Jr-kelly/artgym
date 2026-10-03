@@ -1,0 +1,61 @@
+{
+  "seed": 2026100363,
+  "envs": 512,
+  "results": {
+    "parent": {
+      "completed": 349,
+      "pickup": 477,
+      "fall": 119,
+      "failures": {
+        "pickup/hold": 35,
+        "body unstable/drop": 128,
+        "extension": 0,
+        "retraction": 0,
+        "thumb-contact": 0
+      },
+      "checkpoint_sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    "active_KL_original": {
+      "completed": 344,
+      "pickup": 474,
+      "fall": 130,
+      "failures": {
+        "pickup/hold": 38,
+        "body unstable/drop": 130,
+        "extension": 0,
+        "retraction": 0,
+        "thumb-contact": 0
+      },
+      "checkpoint_sha256": "668b73f5207651eaabc947751821e08bc5a681546597dff89c60859e28fcf83f"
+    },
+    "active_KL_history": {
+      "completed": 346,
+      "pickup": 478,
+      "fall": 121,
+      "failures": {
+        "pickup/hold": 34,
+        "body unstable/drop": 132,
+        "extension": 0,
+        "retraction": 0,
+        "thumb-contact": 0
+      },
+      "checkpoint_sha256": "7c457015e76a946b3dfa72b7d8257f5e98054b1b7817d1f88285bdc9619c317f"
+    }
+  },
+  "initial_fields_exactly_equal": {
+    "root": true,
+    "dof": true,
+    "materials": true,
+    "observation_bias": true,
+    "delay": true,
+    "cal_object": true,
+    "cal_slider": true,
+    "load_amplitude": true,
+    "detent_amplitude": true,
+    "load_phase": true,
+    "load_profile_ids": true,
+    "load_frequencies": true
+  },
+  "scope": "Actual continuousG2 development,notindependent",
+  "conclusion": "Opt-in active-only KL stop did not resolve broadsupport/contact behavior. No prolonged runs justified by completion-count differences. Retain checkpoints and move to grounded estimator/functionality experiment."
+}

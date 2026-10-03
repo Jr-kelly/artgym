@@ -65,7 +65,7 @@ def main():
                     assert 'precheck' in Path(value('--resume')).parts and Path(value('--resume')).name=='step_051216.pth'
                     assert '--fresh-optimization-seed' not in command
                 disposable=True
-            assert disposable or 'scripts.static_wuji_geometry' in command or 'scripts.precheck_wuji_width_environment' in command or 'scripts.precheck_wuji_width_zero_change' in command or 'scripts.audit_g2_r800_bridge' in command or 'scripts.prepare_g2_legal_demonstration' in command or '--video' in command, 'Local GPU is preparation/rendering only'
+            assert disposable or 'scripts.static_wuji_geometry' in command or 'scripts.precheck_wuji_width_environment' in command or 'scripts.precheck_wuji_width_zero_change' in command or 'scripts.audit_g2_r800_bridge' in command or 'scripts.prepare_g2_legal_demonstration' in command or 'scripts.replay_g2_support_estimator' in command or 'scripts.replay_g2_continuous_policy' in command or '--video' in command, 'Local GPU is preparation/rendering only'
         active=[json.loads(p.read_text()) for p in jobs.glob('*/identity.json') if not (p.parent/'result.json').exists()]
         assert len(active)<8 and not any(j['gpu']==a.gpu and j.get('local')==a.local for j in active)
         completed=state['historical_gpu_hours']+sum(json.loads(p.read_text())['gpu_hours'] for p in jobs.glob('*/result.json'))
