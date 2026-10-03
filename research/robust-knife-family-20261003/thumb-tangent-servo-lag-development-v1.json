@@ -1,0 +1,95 @@
+{
+  "results": {
+    "success": {
+      "evidence": "runs/robust-knife-family-20261003/demo/g2-P50-slider-contact-success-v55",
+      "held_offset_rad": [
+        -0.08845150074741165,
+        -0.09877718243589831,
+        -0.10446547918192628,
+        -0.056656467919417405
+      ],
+      "lag_mm_by_scope": {
+        "first_extension_16_21": {
+          "n": 150,
+          "quantiles_mm": [
+            -0.05712628698229186,
+            1.579855518904674,
+            3.4505924461158686,
+            3.744175550624573,
+            4.280413674894022,
+            4.52810460842445
+          ]
+        },
+        "before_known_failure_contact_loss_16_17p433": {
+          "n": 43,
+          "quantiles_mm": [
+            -0.05712628698229186,
+            0.5106629993135491,
+            1.4737114887429221,
+            1.6342378023243846,
+            1.784928595019773,
+            1.8479994821328576
+          ]
+        },
+        "operation": {
+          "n": 601,
+          "quantiles_mm": [
+            -1.4662196853586182,
+            1.1740520781102575,
+            2.8325867263812947,
+            3.4414299703972655,
+            4.602986659341398,
+            5.34091405988978
+          ]
+        }
+      },
+      "scope": "Onlymeasuredq+actualissuedtargets+nominalofflinecurve+knownclock; contactloss timestamp label usedonlyfordevelopmentcomparison"
+    },
+    "failure": {
+      "evidence": "runs/robust-knife-family-20261003/demo/g2-P50-slider-contact-failure-v56",
+      "held_offset_rad": [
+        -0.03578830323001661,
+        -0.09749298069467974,
+        -0.0450907843577075,
+        -0.02225872815138914
+      ],
+      "lag_mm_by_scope": {
+        "first_extension_16_21": {
+          "n": 150,
+          "quantiles_mm": [
+            -0.08134053629357944,
+            3.9948905437768336,
+            8.863020032959351,
+            9.700643699855448,
+            10.316037766763689,
+            10.386983217369693
+          ]
+        },
+        "before_known_failure_contact_loss_16_17p433": {
+          "n": 43,
+          "quantiles_mm": [
+            -0.08134053629357944,
+            0.5021200992924556,
+            1.6968753408439652,
+            2.173165599473919,
+            2.2413617171774645,
+            2.2514278788676023
+          ]
+        },
+        "operation": {
+          "n": 601,
+          "quantiles_mm": [
+            -13.844545548730723,
+            1.1628584084156854,
+            8.665000164379281,
+            9.689185111006564,
+            12.750888217533824,
+            13.471173256160451
+          ]
+        }
+      },
+      "scope": "Onlymeasuredq+actualissuedtargets+nominalofflinecurve+knownclock; contactloss timestamp label usedonlyfordevelopmentcomparison"
+    }
+  },
+  "scope": "Engineeringjointspacepath-projection trackinglag, notsliderprogress/contactownership/force; initialdeflection offsetfromactual14.3-16shold."
+}

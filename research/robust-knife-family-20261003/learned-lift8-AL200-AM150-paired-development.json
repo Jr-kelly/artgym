@@ -1,0 +1,104 @@
+{
+  "takeover_seconds": 8,
+  "scope": "Same512fixeddevelopmentconditions; allinitialfieldscompared; top128thicknesspredeclared; noindependentheldouts",
+  "results": {
+    "P50": {
+      "all": {
+        "n": 512,
+        "complete": 345,
+        "failures": {
+          "pickup/hold": 41,
+          "body unstable/drop": 126
+        }
+      },
+      "top_thickness_quartile": {
+        "n": 128,
+        "complete": 4,
+        "failures": {
+          "pickup/hold": 31,
+          "body unstable/drop": 93
+        }
+      }
+    },
+    "AL200": {
+      "all": {
+        "n": 512,
+        "complete": 350,
+        "failures": {
+          "pickup/hold": 39,
+          "body unstable/drop": 123
+        }
+      },
+      "top_thickness_quartile": {
+        "n": 128,
+        "complete": 4,
+        "failures": {
+          "pickup/hold": 30,
+          "body unstable/drop": 94
+        }
+      }
+    },
+    "AM150": {
+      "all": {
+        "n": 512,
+        "complete": 343,
+        "failures": {
+          "pickup/hold": 43,
+          "body unstable/drop": 126
+        }
+      },
+      "top_thickness_quartile": {
+        "n": 128,
+        "complete": 4,
+        "failures": {
+          "pickup/hold": 34,
+          "body unstable/drop": 90
+        }
+      }
+    }
+  },
+  "initial_fields_equal": {
+    "P50": {
+      "root": true,
+      "dof": true,
+      "materials": true,
+      "observation_bias": true,
+      "delay": true,
+      "cal_object": true,
+      "cal_slider": true,
+      "load_amplitude": true,
+      "detent_amplitude": true,
+      "load_phase": true,
+      "load_profile_ids": true,
+      "load_frequencies": true
+    },
+    "AL200": {
+      "root": true,
+      "dof": true,
+      "materials": true,
+      "observation_bias": true,
+      "delay": true,
+      "cal_object": true,
+      "cal_slider": true,
+      "load_amplitude": true,
+      "detent_amplitude": true,
+      "load_phase": true,
+      "load_profile_ids": true,
+      "load_frequencies": true
+    },
+    "AM150": {
+      "root": true,
+      "dof": true,
+      "materials": true,
+      "observation_bias": true,
+      "delay": true,
+      "cal_object": true,
+      "cal_slider": true,
+      "load_amplitude": true,
+      "detent_amplitude": true,
+      "load_phase": true,
+      "load_profile_ids": true,
+      "load_frequencies": true
+    }
+  }
+}

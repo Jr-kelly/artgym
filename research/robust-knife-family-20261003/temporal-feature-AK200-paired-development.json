@@ -1,0 +1,39 @@
+{
+  "results": {
+    "P50": {
+      "completed": 349,
+      "n": 512,
+      "failures": {
+        "pickup/hold": 35,
+        "body unstable/drop": 128
+      },
+      "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+    },
+    "AK200": {
+      "completed": 344,
+      "n": 512,
+      "failures": {
+        "body unstable/drop": 125,
+        "pickup/hold": 41,
+        "extension": 2
+      },
+      "sha256": "59886d7e8bf0ade034800875a2be213e42f1d1fee2c2c3cd4af1570f6d9eb45a"
+    }
+  },
+  "all_initial_fields_equal": {
+    "root": true,
+    "dof": true,
+    "materials": true,
+    "observation_bias": true,
+    "delay": true,
+    "cal_object": true,
+    "cal_slider": true,
+    "load_amplitude": true,
+    "detent_amplitude": true,
+    "load_phase": true,
+    "load_profile_ids": true,
+    "load_frequencies": true
+  },
+  "scope": "Actual512jointdevelopmentconditions; combinedCNNfeature+strongreward, notisolatedcausalheadablation; no independentheldouts",
+  "conclusion": "AK200344 vsP50349; no broadgain. Retirefinitepilot and preserveAdam/RNG."
+}

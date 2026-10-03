@@ -1,0 +1,92 @@
+{
+  "scope": "Finiteleave-one-out512developmentdiagnostics; remaininginitialfieldsverified; noactorinput/training/independentcasechanges",
+  "results": {
+    "baseline": {
+      "evidence": "runs/robust-knife-family-20261003/checks/P50-lift8-reward-transition-v56",
+      "n": 512,
+      "complete": 341,
+      "top_thickness_n": 128,
+      "top_thickness_complete": 4,
+      "failures": {
+        "pickup/hold": 38,
+        "body unstable/drop": 133
+      },
+      "changed_initial_fields": []
+    },
+    "calibration": {
+      "evidence": "runs/robust-knife-family-20261003/checks/joint-component-calibration-v1",
+      "n": 512,
+      "complete": 341,
+      "top_thickness_n": 128,
+      "top_thickness_complete": 0,
+      "failures": {
+        "body unstable/drop": 133,
+        "pickup/hold": 37,
+        "extension": 1
+      },
+      "changed_initial_fields": [
+        "cal_object",
+        "cal_slider"
+      ]
+    },
+    "placement": {
+      "evidence": "runs/robust-knife-family-20261003/checks/joint-component-placement-v1",
+      "n": 512,
+      "complete": 376,
+      "top_thickness_n": 128,
+      "top_thickness_complete": 3,
+      "failures": {
+        "pickup/hold": 31,
+        "body unstable/drop": 104,
+        "retraction": 1
+      },
+      "changed_initial_fields": [
+        "root"
+      ]
+    },
+    "sensor": {
+      "evidence": "runs/robust-knife-family-20261003/checks/joint-component-sensor-v1",
+      "n": 512,
+      "complete": 339,
+      "top_thickness_n": 128,
+      "top_thickness_complete": 3,
+      "failures": {
+        "body unstable/drop": 135,
+        "pickup/hold": 37,
+        "extension": 1
+      },
+      "changed_initial_fields": [
+        "observation_bias"
+      ]
+    },
+    "latency": {
+      "evidence": "runs/robust-knife-family-20261003/checks/joint-component-latency-v1",
+      "n": 512,
+      "complete": 347,
+      "top_thickness_n": 128,
+      "top_thickness_complete": 4,
+      "failures": {
+        "pickup/hold": 45,
+        "body unstable/drop": 120
+      },
+      "changed_initial_fields": [
+        "delay"
+      ]
+    },
+    "material": {
+      "evidence": "runs/robust-knife-family-20261003/checks/joint-component-material-v1",
+      "n": 512,
+      "complete": 347,
+      "top_thickness_n": 128,
+      "top_thickness_complete": 2,
+      "failures": {
+        "body unstable/drop": 124,
+        "pickup/hold": 41
+      },
+      "changed_initial_fields": [
+        "materials"
+      ]
+    }
+  },
+  "conclusion": "Removingplacementhelpsaggregatebutdoesnotresolvethicksubset. Otherisolatedremovalresultsnotproofarandomizationisbeneficial/harmful; conditioninteractionsandGPUcontactrepeatdifferencesremain."
+}

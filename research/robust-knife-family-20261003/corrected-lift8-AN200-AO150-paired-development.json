@@ -1,0 +1,56 @@
+{
+  "scope": "Rewardreferencecorrected150newupdates; completefixed512developmentepisodes; originalcriteriaandindependentclosurepreserved",
+  "results": {
+    "AN200": {
+      "evidence": "runs/robust-knife-family-20261003/checks/AN200-corrected-lift8-joint-v57",
+      "n": 512,
+      "complete": 345,
+      "top_thickness_n": 128,
+      "top_thickness_complete": 3,
+      "failures": {
+        "pickup/hold": 43,
+        "body unstable/drop": 124
+      },
+      "initial_fields_equal": {
+        "root": true,
+        "dof": true,
+        "materials": true,
+        "observation_bias": true,
+        "delay": true,
+        "cal_object": true,
+        "cal_slider": true,
+        "load_amplitude": true,
+        "detent_amplitude": true,
+        "load_phase": true,
+        "load_profile_ids": true,
+        "load_frequencies": true
+      }
+    },
+    "AO150": {
+      "evidence": "runs/robust-knife-family-20261003/checks/AO150-corrected-lift8-joint-v58",
+      "n": 512,
+      "complete": 343,
+      "top_thickness_n": 128,
+      "top_thickness_complete": 4,
+      "failures": {
+        "pickup/hold": 40,
+        "body unstable/drop": 129
+      },
+      "initial_fields_equal": {
+        "root": true,
+        "dof": true,
+        "materials": true,
+        "observation_bias": true,
+        "delay": true,
+        "cal_object": true,
+        "cal_slider": true,
+        "load_amplitude": true,
+        "detent_amplitude": true,
+        "load_phase": true,
+        "load_profile_ids": true,
+        "load_frequencies": true
+      }
+    }
+  },
+  "conclusion": "Necessaryrewardbugfixdoesnotestablishbroadbehaviorgain; thickjointsubsetstillonly3/128and4/128."
+}

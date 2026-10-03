@@ -1,0 +1,36 @@
+{
+  "output": "continuous-demo-success-and-failure-v2.mp4",
+  "sha256": "264dc25f0352416256d23a0e066d2aea11dc928ab2d38f1a6a9b1fd4a068ea27",
+  "fps": 30,
+  "frames": 2160,
+  "duration_seconds": 72.0,
+  "chapters": [
+    {
+      "source": "runs/robust-knife-family-20261003/demo/g2-learned-heavy-pulse-v38",
+      "label": "工程带阻力成功",
+      "begin_frame": 0,
+      "frames": 1080,
+      "source_full_success": true,
+      "sources": {
+        "continuous.mp4": "e384f7660935dd48828db5af7ba170c1a258b2bd7939550f0616f9cfb0f09557",
+        "hand-closeup.mp4": "01b3a1ac35342abc027855576111b0050b4da546e446be9f93b9b56953be18f5",
+        "trace.npz": "21d54e6e5573df165caccd3ff881b1742077db1d660d1c10ae4114c3e93f3c6a",
+        "report.json": "82980385491d8342d76705af37886bb7df149d0e278861cb96cc5703e6a15bb4"
+      }
+    },
+    {
+      "source": "runs/robust-knife-family-20261003/demo/g2-learned-capacity-pulse-v39",
+      "label": "较大工程阻力失败",
+      "begin_frame": 1080,
+      "frames": 1080,
+      "source_full_success": false,
+      "sources": {
+        "continuous.mp4": "d7954af9c8298ef0379233c2bd981dc9a8c8b9a2d92040fe8c567be2f4165eec",
+        "hand-closeup.mp4": "3aa8221d5bbd62cf3db7d9857772a7e515a886f23d6eb1aac75e6a4daabadae0",
+        "trace.npz": "572ec298d2221627088dbdf69eaae252a4886817d2a62f52318c8bd4c42f6c6b",
+        "report.json": "6a223db4587b045435560be0eb276dd456d23272f14b660fdff0303c67f9442a"
+      }
+    }
+  ],
+  "scope": "Full actual recorded episodes composed with synchronized whole/close views. Clock captions use fixed schedule; numerical/contact captions use saved evaluation-only traces. No re-simulation or actor-input change. No human attachment media."
+}

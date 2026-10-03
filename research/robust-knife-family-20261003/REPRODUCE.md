@@ -268,3 +268,37 @@ python -m scripts.replay_g2_continuous_policy \
 `pressure-aware-measured-operation-v1/continuous-thumb-patch-v7.json`是通过独立密集电机检查的完整40mm新几何路径，`scene-spec.json`嵌入同一名义握持、取刀和离线标定，所有物理资产共享。v50实际操作失败，不能替换前面的P50成功入口。`adapt_wuji_reference_checkpoint`可用`--motor-audit`与`--scene-spec`保存零新更新的适配权重；新物理轨迹与训练仍需独立检验。
 
 训练可选`--bounded-actor-update`分别裁剪actor/critic，按全部当前活跃rollout的解析Gaussian KL≤0.03缩小每个actor提案；拒绝时恢复actor与Adam，critic正常更新。它是有限当前样本的更新约束，不是未来轨迹保证。AC/AD/AE拟合尚未形成行为改善结论。
+
+
+## 当前连续训练与实际批量录像
+
+主线优先使用上文P50 v38复现命令及`ACTOR-CONTROL.md`。新握持参考/中指反馈仍是失败开发分支，不替代成功主线。当前直接连续训练可以从真实抬刀阶段8秒接管；操作仍16秒开始，8–12秒的物体相对腕保持只用于训练奖励，输入维度与控制器不变。`--takeover-seconds`必须与相应训练/冻结配置保持一致，不能根据验证结果挑时序。
+
+```bash
+python -m scripts.train_wuji_robust_residual \
+  --output runs/robust-knife-family-20261003/train/recovered-lift \
+  --resume runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth \
+  --envs 2048 --updates 350 --horizon 32 --epochs 4 --minibatch 4096 \
+  --scene g2 --base-mode geometric --actual-hold-history 50 \
+  --takeover-seconds 8 --randomization-scale 1 --load-profile mixed \
+  --load-max .2 --detent-max .2 --seed 2026100392 \
+  --support-residual-scale .75 --thumb-residual-scale .75 \
+  --contact-progress-reward .5 --functional-thumb-reward \
+  --strong-slider-contact-reward --active-kl-stop --bounded-actor-update \
+  --absorbing-failure-penalty \
+  --thumb-reference research/robust-knife-family-20261003/functional-side-edge-under-support-v6/continuous-thumb-v2.json
+```
+
+`350`为绝对更新数，P50起点50；开发检查点200对应150次新增更新。训练先恢复Adam/RNG，重新开始物理回合，不宣称求解器逐位恢复。AL为此配置；AM使用P0零输出参考起点0，相应检查点150，其他物理分布一致。训练最近128回合可能偏向最早结束的失败，应使用登记的冻结完整开发集。
+
+```bash
+python -m scripts.check_g2_continuous_scene \
+  --output runs/robust-knife-family-20261003/checks/recovered-nominal-video \
+  --envs 4 --nominal --seed 2026100391 --takeover-seconds 16 \
+  --checkpoint runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth \
+  --compatibility-gate deployable --video --video-envs 0 1 2 3
+```
+
+每个环境输出全景、手部近景两个原生相机视频、实际控制步时间表和相机/物理资产对应元数据。录制的是同一次36秒评估，不是后选成功再重演。标称检查在零随机化下沿用工程0.05 N运行/起动和材料1/3，不能将`--load-max`参数解释为此零随机化时实际负载，也不能与单机0.2 N条件混称相同。
+
+独立验证按`independent-validation-plan-v1.json`执行，在单一候选和源代码冻结前不打开012–015。全部回合、初态和失败保留。GitHub中间提交与最终Release各有不同身份；本节仍是进行中的恢复命令，最终冻结哈希和交付清单在完成后追加。

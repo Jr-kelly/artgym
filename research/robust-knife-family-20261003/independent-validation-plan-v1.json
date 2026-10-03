@@ -41,5 +41,140 @@
     "actual continuous video for representative success and representative failures, including all stages",
     "separate exact-contact-pair solver diagnostics in single-G2 renderer from batched proximity/net-contact proxy"
   ],
-  "limits": "Representative independent challenge, not statistically reliable full-range robustness; all511+ training geometry checks remain developmental."
+  "limits": "Representative independent challenge, not statistically reliable full-range robustness; all511+ training geometry checks remain developmental.",
+  "additional_frozen_challenge": {
+    "preregistered_before_candidate_freeze": true,
+    "core": {
+      "envs": 64,
+      "instances": "012-015 each16repetitions",
+      "seed": 2026100393,
+      "randomization_scale": 1,
+      "load_profile": "triangular",
+      "load_frequency_rad_s": 2.9,
+      "run_startup_max_N": [
+        0.1,
+        0.1
+      ]
+    },
+    "engineering_capacity": {
+      "envs": 32,
+      "instances": "012-015 each8repetitions",
+      "seed": 2026100394,
+      "randomization_scale": 1,
+      "load_profile": "pulse",
+      "load_frequency_rad_s": 2.9,
+      "run_startup_max_N": [
+        0.2,
+        0.2
+      ]
+    },
+    "height_sensitivity": {
+      "envs": 32,
+      "instances": "nominalbody sliderheight -1/+1mm, each16repetitions",
+      "seed": 2026100395,
+      "randomization_scale": 1,
+      "load_profile": "triangular",
+      "load_frequency_rad_s": 2.9,
+      "run_startup_max_N": [
+        0.1,
+        0.1
+      ]
+    },
+    "scope": "Preserveoriginal8+4 exactcases andaddfixedbreadthwithoutmodelselection. Sameonefrozencheckpoint/controller; allcasesunfiltered. Repeatedconditionsover4independentgeometriesdonotestablishfullrange/statisticalgeometrycoverage. Nativevideoenv0-3 selectedbeforeoutcomes."
+  },
+  "fresh_geometry_challenge": {
+    "preregistered_before_candidate_freeze": true,
+    "geometry_count": 128,
+    "generation_seed": 2026100397,
+    "distribution": "Uniform W14-18,T10-14,L130-140mm; slideraxial±5/lateral±1mm; sameauthoredconstantdensity/shouldermesh as training",
+    "core": {
+      "envs": 128,
+      "instances": "h0000-h0127 eachonce",
+      "seed": 2026100396,
+      "randomization_scale": 1,
+      "load_profile": "triangular",
+      "load_frequency_rad_s": 2.9,
+      "run_startup_max_N": [
+        0.1,
+        0.1
+      ]
+    },
+    "engineering_capacity": {
+      "envs": 64,
+      "instances": "h0000-h0063 eachonce, first64selectedbeforeoutcomes",
+      "seed": 2026100398,
+      "randomization_scale": 1,
+      "load_profile": "pulse",
+      "load_frequency_rad_s": 2.9,
+      "run_startup_max_N": [
+        0.2,
+        0.2
+      ]
+    },
+    "scope": "Retainoriginal140andadd192actualepisodes, total332. Onefrozencandidate/controller throughout. Freshgeometriesneverusedfortrainingormodelselection. Allcaseskept; no staticperassetIK/initialposeadaptation oractorgeometryID."
+  },
+  "preselected_video_indices": {
+    "original_core8": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "original_capacity4": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "core_breadth64": [
+      0,
+      1,
+      2,
+      3,
+      32,
+      33,
+      34,
+      35
+    ],
+    "capacity_breadth32": [
+      0,
+      1,
+      2,
+      3,
+      16,
+      17,
+      18,
+      19
+    ],
+    "height32": [
+      0,
+      1,
+      2,
+      3,
+      16,
+      17,
+      18,
+      19
+    ],
+    "fresh_core128": [
+      0,
+      1,
+      2,
+      3,
+      64,
+      65,
+      66,
+      67
+    ],
+    "fresh_capacity64": [
+      0,
+      1,
+      2,
+      3,
+      32,
+      33,
+      34,
+      35
+    ]
+  }
 }

@@ -1,0 +1,26 @@
+{
+  "sources": [
+    {
+      "trial": "runs/robust-knife-family-20261003/demo/g2-proprio-middle-v5-full-v60",
+      "report_sha256": "2da7f1a1c4763fa3e93581b96ac58c807bbb89a6c784aa092c008eb7d441e5dd",
+      "trace_sha256": "2f0aa1359e21a725bbaf4743c78ba8bd20100d09734c85406b53970997a05f33",
+      "maximum_rotation_rad": 0.34749708158791415,
+      "scope": "Script developmental TABLE, all fail original body-stability criterion; v61-v62 same coupled reference"
+    },
+    {
+      "trial": "runs/robust-knife-family-20261003/demo/g2-coupled-lag-regulated-full-v61",
+      "report_sha256": "ae8c4fd43016b565e2d1e1209d1eba25f240b8aa96b2092f726ec3c4af397fa9",
+      "trace_sha256": "b2b85cfee3ba9f6cad9eaa373674f58bc07d7b548850d1fff1f24e9db53b7bba",
+      "maximum_rotation_rad": 0.48668490998203323,
+      "scope": "Script developmental TABLE, all fail original body-stability criterion; v61-v62 same coupled reference"
+    },
+    {
+      "trial": "runs/robust-knife-family-20261003/demo/g2-coupled-static-middle-full-v62",
+      "report_sha256": "b91e0dcf0b59c79893dea2b2f7502a505ce473a769751c582a7bafb9bda3ca7d",
+      "trace_sha256": "ce9e79252857ab09a424405ccbe80d491cf883e449f4f6c91edf20cece15a9c5",
+      "maximum_rotation_rad": 0.36645279104470413,
+      "scope": "Script developmental TABLE, all fail original body-stability criterion; v61-v62 same coupled reference"
+    }
+  ],
+  "scope": "Actual solver-contact evaluation, not physical sensor/force calibration. v60-v61 changes both reference and feedback; only v61-v62 is the matched operation-feedback contrast. Endpoints alone do not make a complete demo."
+}

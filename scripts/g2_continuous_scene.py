@@ -33,8 +33,10 @@ def gym_transform(position,quaternion=(0,0,0,1)):
 class G2ContinuousScene:
     def __init__(self,n=8,seed=2026100356,randomization_scale=0.,instances=None,
                  load_max=.1,detent_max=.1,contact_progress_reward=0.,reference_spec=None,
-                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False,graphics=False):
+                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False,graphics=False,disabled_perturbations=()):
         self.n=n;self.device='cuda:0';self.seed=seed
+        self.disabled_perturbations=set(disabled_perturbations)
+        assert self.disabled_perturbations <= {'calibration','placement','sensor','latency','material'}
         self.history_features=history_features;self.public_dim=(170 if history_features else 154)+(8 if support_estimator_spec else 0)
         self.support_estimator_spec=support_estimator_spec;self.support_estimator=None
         if support_estimator_spec:
@@ -213,11 +215,14 @@ class G2ContinuousScene:
         if self.middle_support is not None:self.middle_support.reset(ids)
         self.observation_bias[ids]=(torch.rand((k,20),device=self.device)-.5)*.012*s
         self.delay[ids]=torch.rand(k,device=self.device)<.15*s
+        if 'sensor' in self.disabled_perturbations:self.observation_bias[ids]=0
+        if 'latency' in self.disabled_perturbations:self.delay[ids]=False
         self.load_amplitude[ids]=torch.rand(k,device=self.device)*self.load_max*s if s else .05
         self.detent_amplitude[ids]=torch.rand(k,device=self.device)*self.detent_max*s if s else .05
         self.load_phase[ids]=torch.rand(k,device=self.device)*2*np.pi if s else .4
         translation=(torch.rand((k,3),device=self.device)-.5)*.002*s
         angle=(torch.rand((k,3),device=self.device)-.5)*np.deg2rad(3)*s
+        if 'calibration' in self.disabled_perturbations:translation.zero_();angle.zero_()
         norm=angle.norm(dim=-1,keepdim=True)
         delta=torch.cat([angle*.5*torch.sinc(norm/(2*np.pi)),torch.cos(norm*.5)],-1)
         for key,dest in [('object_in_wrist',self.cal_object),('slider_in_wrist',self.cal_slider)]:
@@ -231,6 +236,7 @@ class G2ContinuousScene:
         self.root[ids,0,:]=0.;self.root[ids,0,6]=1.
         shift=(torch.rand((k,2),device=self.device)-.5)*.002*s
         yaw=(torch.rand(k,device=self.device)-.5)*np.deg2rad(3)*s
+        if 'placement' in self.disabled_perturbations:shift.zero_();yaw.zero_()
         quaternion=quat_mul(torch.stack([torch.zeros_like(yaw),torch.zeros_like(yaw),torch.sin(yaw/2),torch.cos(yaw/2)],-1),self.tensor([np.sqrt(.5),0.,0.,np.sqrt(.5)])[None].expand(k,-1))
         thickness=self.tensor([self.asset_records[i]['handle_size'][1] for i in ids.tolist()])
         self.root[ids,2,:]=0.;self.root[ids,2,:3]=torch.stack([.3015+shift[:,0],-.25+shift[:,1],.75+thickness/2+.0001],-1)
@@ -241,6 +247,7 @@ class G2ContinuousScene:
         if s:
             for i in ids.tolist():
                 hand_friction=float(self.rng.uniform(.65,1.15));knife_friction=float(self.rng.uniform(1.8,3.4))
+                if 'material' in self.disabled_perturbations:hand_friction=1.;knife_friction=3.
                 for actor,value in [(self.robots[i],hand_friction),(self.knives[i],knife_friction)]:
                     shapes=self.gym.get_actor_rigid_shape_properties(self.envs[i],actor)
                     for shape in shapes:shape.friction=value
@@ -278,7 +285,10 @@ class G2ContinuousScene:
     def features(self):
         if self._features is not None:return self._features
         self.refresh();q=self.dof[:,self.hand_ids,0].clone()
-        if self.randomization_scale:q=q+self.observation_bias+torch.randn_like(q)*(.002*self.randomization_scale)
+        if self.randomization_scale:
+            noise=torch.randn_like(q)*(.002*self.randomization_scale)
+            if 'sensor' in self.disabled_perturbations:noise.zero_()
+            q=q+self.observation_bias+noise
         self._measurement=q;self.bridge.record(q,self.last_action)
         ready=(self.age==self.takeover_frame).nonzero(as_tuple=False).flatten()
         if len(ready):
@@ -287,6 +297,12 @@ class G2ContinuousScene:
             wrist=self.rb[ready,self.wrist_index]; obj=self.rb[ready,self.object_index]
             inverse=quat_conjugate(wrist[:,3:7])
             self.pickup_reference_in_wrist[ready]=torch.cat([quat_apply(inverse,obj[:,:3]-wrist[:,:3]),quat_mul(inverse,obj[:,3:7])],-1)
+        # Reward-only reference transition after an early learned lift. The
+        # intended arm lift must not be penalized against the original table
+        # pose during 12--16s hold. No actor state or physical state is reset.
+        if self.takeover_frame < 360:
+            hold_ready=(self.age==360).nonzero(as_tuple=False).flatten()
+            self.reference_pose[hold_ready]=self.rb[hold_ready,self.object_index,:7]
         operation_ready=(self.age==480).nonzero(as_tuple=False).flatten()
         if len(operation_ready):
             self.reference_pose[operation_ready]=self.last_held_pose[operation_ready]

@@ -1,0 +1,47 @@
+{
+  "scope": "Developmentonly; allfiveperturbationsremovedtogether, geometryandrandomloadprofile/amplitudesretained; P0haszeroresidualmeans",
+  "results": {
+    "P50": {
+      "evidence": "runs/robust-knife-family-20261003/checks/joint-component-all-P50-v1",
+      "n": 512,
+      "complete": 377,
+      "top_thickness_n": 128,
+      "top_thickness_complete": 5,
+      "failures": {
+        "pickup/hold": 33,
+        "retraction": 1,
+        "body unstable/drop": 101
+      },
+      "changed_initial_fields": [
+        "root",
+        "materials",
+        "observation_bias",
+        "delay",
+        "cal_object",
+        "cal_slider"
+      ],
+      "load_profile_and_amplitude_exact_equal": true
+    },
+    "P0": {
+      "evidence": "runs/robust-knife-family-20261003/checks/joint-component-all-P0-v1",
+      "n": 512,
+      "complete": 370,
+      "top_thickness_n": 128,
+      "top_thickness_complete": 5,
+      "failures": {
+        "pickup/hold": 23,
+        "retraction": 1,
+        "body unstable/drop": 118
+      },
+      "changed_initial_fields": [
+        "root",
+        "materials",
+        "observation_bias",
+        "delay",
+        "cal_object",
+        "cal_slider"
+      ],
+      "load_profile_and_amplitude_exact_equal": true
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "P50": {
+    "evidence": "runs/robust-knife-family-20261003/checks/exploration-P50-interface-v59",
+    "n": 8,
+    "complete": 8,
+    "bridge": {
+      "scope": "Same actual measured frames/calibration/issued commands, independent single-G2 and batched bridge; no current truth supplied",
+      "actual_history_frames": 50,
+      "max_encoder_error": 1.341104507446289e-07,
+      "max_public_error": 0.00022023916244506836,
+      "max_raw_base_action_error": 0.00022023916244506836,
+      "model_tensor_hash_equal": true,
+      "same_packet_different_model_error": 0.0,
+      "same_model_batch_kernel_error": 0.00022101402282714844,
+      "same_batch_size_observation_roundoff_error": 9.462237358093262e-07,
+      "max_motor_target_error_rad": 1.1920928955078125e-07,
+      "strict_raw154_passed": false,
+      "max_history_latent_error": null,
+      "max_support_estimate_error": null,
+      "history_latent_from_same_legal2076_packet": false,
+      "max_measured_known_input_error": 1.7881393432617188e-07,
+      "deployable_passed": true,
+      "selected_gate": "deployable",
+      "numerical_scope": "Raw frozen actor means remain reported separately: same packet and model differ with batch kernels. Original strict gate retained, never reclassified. Deployable gate checks measured/known fields, same-packet model semantics and issued motor targets under the supplied residual checkpoint.",
+      "passed": true
+    },
+    "intervention": {
+      "parent": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+      "parent_sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714",
+      "logstd": -1.5,
+      "changed_model_parameters": [
+        "logstd"
+      ],
+      "optimizer_scope": "Fresh logstd moments only; all actor/critic means and other Adam states retained",
+      "rng_scope": "Original CPU/CUDA/NumPy sampling state retained",
+      "new_training_updates": 0,
+      "scope": "Training exploration change only; deterministic policy is exactly the parent. Physical motor gains, increments, effort/limits and observations unchanged.",
+      "sha256": "8fb7974134887bf1fa0c7bfe7b121e8b204a05ed582afb085411c30eb3e9b2dd"
+    },
+    "mean_parameters_exact_equal": true,
+    "rng_exact_equal": true,
+    "scope": "Deterministicunchangedmeanpreparationcheck; nolearningorindependentclaim"
+  },
+  "P0": {
+    "evidence": "runs/robust-knife-family-20261003/checks/exploration-P0-interface-v60",
+    "n": 8,
+    "complete": 8,
+    "bridge": {
+      "scope": "Same actual measured frames/calibration/issued commands, independent single-G2 and batched bridge; no current truth supplied",
+      "actual_history_frames": 50,
+      "max_encoder_error": 1.341104507446289e-07,
+      "max_public_error": 0.00022023916244506836,
+      "max_raw_base_action_error": 0.00022023916244506836,
+      "model_tensor_hash_equal": true,
+      "same_packet_different_model_error": 0.0,
+      "same_model_batch_kernel_error": 0.00022101402282714844,
+      "same_batch_size_observation_roundoff_error": 9.462237358093262e-07,
+      "max_motor_target_error_rad": 0.0,
+      "strict_raw154_passed": false,
+      "max_history_latent_error": null,
+      "max_support_estimate_error": null,
+      "history_latent_from_same_legal2076_packet": false,
+      "max_measured_known_input_error": 1.7881393432617188e-07,
+      "deployable_passed": true,
+      "selected_gate": "deployable",
+      "numerical_scope": "Raw frozen actor means remain reported separately: same packet and model differ with batch kernels. Original strict gate retained, never reclassified. Deployable gate checks measured/known fields, same-packet model semantics and issued motor targets under the supplied residual checkpoint.",
+      "passed": true
+    },
+    "intervention": {
+      "parent": "runs/robust-knife-family-20261003/train/geometric-reference-P0/geometric_reference.pth",
+      "parent_sha256": "39acf6ad7fb9b675e95c71bc0b02213db7a7ebba940f60ecc76915216afcea5b",
+      "logstd": -1.5,
+      "changed_model_parameters": [
+        "logstd"
+      ],
+      "optimizer_scope": "Fresh logstd moments only; all actor/critic means and other Adam states retained",
+      "rng_scope": "Original CPU/CUDA/NumPy sampling state retained",
+      "new_training_updates": 0,
+      "scope": "Training exploration change only; deterministic policy is exactly the parent. Physical motor gains, increments, effort/limits and observations unchanged.",
+      "sha256": "be20e88c4257481c09f4867ecfd5c0add005c7b9e217cdeaffc9a9ea70640376"
+    },
+    "mean_parameters_exact_equal": true,
+    "rng_exact_equal": true,
+    "scope": "Deterministicunchangedmeanpreparationcheck; nolearningorindependentclaim"
+  }
+}
