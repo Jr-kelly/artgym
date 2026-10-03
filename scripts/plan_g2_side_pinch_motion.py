@@ -80,7 +80,7 @@ def main():
         axes={n:v@frames[n][:3,:3].T for n,v in normals_local.items()}
         points=[];facing=[];gap=[];height=[]
         for finger,normal in zip(FINGERS,normals):
-            n='hand_r_%s_pad_link'%finger;v=vs[n];project=v@normal
+            n=original.get('contact_link_by_finger',{}).get(finger,'hand_r_%s_pad_link'%finger);v=vs[n];project=v@normal
             weights=np.exp(-(project-project.min())/.0002);weights/=weights.sum()
             points.append(weights@v);facing.append(frames[n][:3,0]@(-normal))
         for n,v in vs.items():

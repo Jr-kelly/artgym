@@ -68,6 +68,8 @@ class G2ContinuousScene:
         self.bridge=BatchedG2R800(self.cfg,TEACHER,R800,n)
         self.player=self.bridge.player
         self.scene_spec=scene_spec
+        self.held_diagnostic=bool(scene_spec and scene_spec.get('held_diagnostic',False))
+        if self.held_diagnostic:assert takeover_seconds==16 and not resample_initial_estimates
         self.plan=scene_spec['plan'] if scene_spec else json.loads((D/'functional-side-edge-under-support-equilibrium-v6/motor-plan.json').read_text())
         self.acquisition=scene_spec['acquisition'] if scene_spec else json.loads((D/'functional-side-edge-under-support-lateral-v3/acquisition-path.json').read_text())
         self.calibration=scene_spec['calibration'] if scene_spec else json.loads((D/'handover-from-v25-v1.json').read_text())
@@ -330,8 +332,10 @@ class G2ContinuousScene:
             self.pressure_adapter.reset(ids,normal)
         self.target[ids,:]=0.;self.target[ids[:,None],self.arm_ids]=self.approach[0]
         self.target[ids[:,None],self.hand_ids]=self.opened_batch[ids]
+        if self.held_diagnostic:self.target[ids[:,None],self.hand_ids]=self.closed_batch[ids]
         self.command_target[ids]=self.target[ids];self.delayed_target[ids]=self.target[ids]
         self.dof[ids,:,:]=0.;self.dof[ids,:27,0]=self.target[ids];self.dof[ids,27,0]=self.lower[ids]
+        if self.held_diagnostic:self.dof[ids[:,None],self.hand_ids,0]=self.tensor(self.plan['touch_q'])
         # Installed Preview4 tensors use environment-local coordinates, verified
         # against refreshed native roots. Adding env origins double-translates.
         self.root[ids,0,:]=0.;self.root[ids,0,6]=1.
@@ -341,6 +345,7 @@ class G2ContinuousScene:
         quaternion=quat_mul(torch.stack([torch.zeros_like(yaw),torch.zeros_like(yaw),torch.sin(yaw/2),torch.cos(yaw/2)],-1),self.tensor([np.sqrt(.5),0.,0.,np.sqrt(.5)])[None].expand(k,-1))
         thickness=self.tensor([self.asset_records[i]['handle_size'][1] for i in ids.tolist()])
         self.root[ids,2,:]=0.;self.root[ids,2,:3]=torch.stack([.3015+shift[:,0],-.25+shift[:,1],.75+thickness/2+.0001],-1)
+        if self.held_diagnostic:self.root[ids,2,2]+=.16
         self.root[ids,2,3:7]=quaternion
         actor_ids=torch.stack([ids*3,ids*3+2],-1).flatten().to(torch.int32)
         self.gym.set_actor_root_state_tensor_indexed(self.sim,gymtorch.unwrap_tensor(self.root.view(-1,13)),gymtorch.unwrap_tensor(actor_ids),len(actor_ids))
@@ -369,6 +374,7 @@ class G2ContinuousScene:
         return path[index]*(1.-alpha)+path[index+1]*alpha
 
     def prefix_targets(self):
+        if self.held_diagnostic:return self.approach[0].expand(self.n,-1).clone(),self.closed_batch.clone()
         t=self.age.float()/30;aq=self.approach[0].expand(self.n,-1).clone()
         approach=(t>=2)&(t<5);aq[approach]=self.path_targets(self.approach,smooth((t[approach]-2)/3))
         aq[t>=5]=self.approach[-1]
@@ -593,6 +599,8 @@ class G2ContinuousScene:
             success=bool(finished[i]) and pickup and stable and extend and retract and fraction>=.9
             self.stats.append(dict(episode=self.episodes,env=i,instance=self.instances[i%len(self.instances)],control_steps=int(self.age[i]),pickup_valid=pickup,fall=bool(self.fell[i]),operation_complete=success,endpoints_m=ends,peak_extension_m=float(self.peak[i]),max_body_drift_m=float(self.max_drift[i]),max_body_rotation_rad=float(self.max_rotation[i]),thumb_contact_fraction=fraction,scope='Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation',failure=None if success else 'pickup/hold' if not pickup else 'body unstable/drop' if not stable else 'extension' if not extend else 'retraction' if not retract else 'thumb-contact'))
             self.episodes+=1
+            if self.held_diagnostic:
+                row=self.stats[-1];row['held_submodule_legacy_criteria_met']=row['operation_complete'];row['operation_complete']=False;row['held_diagnostic']=True;row['continuous_pickup_demo_pass']=False;row['scope']='Held-only newgrasp adaptation episode; reset only at episode start, originalgravity/contact/motors; never continuouspickup/generalization validation'
         self.last_diagnostics=dict(slider=travel.detach().clone(),height=height.detach().clone(),rotation=rotation.detach().clone(),drift=drift.detach().clone(),proximity=proximity.detach().clone(),action=executed.detach().clone(),q=self.dof[:,self.hand_ids,0].detach().clone(),arm_q=self.dof[:,self.arm_ids,0].detach().clone(),target=self.target.detach().clone(),issued_target=self.command_target.detach().clone() if self.resistance_integration=='solver-brake' else self.target.detach().clone(),object=obj.detach().clone(),wrist=self.rb[:,self.wrist_index].detach().clone(),load=self.load_force.detach().clone(),age=oldage.detach().clone())
         self._features=None;self._measurement=None
         reset_ids=(done if reset_finished else done&~finished).nonzero(as_tuple=False).flatten()

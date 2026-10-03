@@ -19,7 +19,7 @@ LEGAL_FIELDS = {'clock_s', 'hand_measured_q', 'arm_measured_q', 'issued_hand_tar
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--input', type=Path, required=True)
+    p.add_argument('--prewarm-iterations',type=int,default=0);p.add_argument('--input', type=Path, required=True)
     p.add_argument('--estimate', type=Path, required=True)
     p.add_argument('--calibration', type=Path, required=True)
     p.add_argument('--reference', type=Path, required=True)
@@ -61,7 +61,7 @@ def main():
         policy.support_load_features.reset(__import__('torch').tensor([0],device=policy.player.device),policy.tensor(obj[:3,1]))
     kin = G2Kinematics()
     taken = False
-    targets, actions, errors = [], [], []
+    targets, actions, errors = [], [], [];warmup=None
     for i, t in enumerate(times):
         q = samples['hand_measured_q'][i]
         if policy.support_load_features is not None:
@@ -73,6 +73,9 @@ def main():
         if not taken:
             assert i > 0 and len(policy.history) == 50
             policy.takeover_estimate(q, samples['issued_hand_target'][i-1], obj, slider, clock_s=float(t))
+            if a.prewarm_iterations:
+                gravity=kin.forward(samples['arm_measured_q'][i])[:3,:3].T@np.array([0.,0.,-1.])
+                warmup=policy.prewarm(q,0.,gravity,a.prewarm_iterations,clock_s=float(t))
             taken = True
         goal = .04 if t>=16-1e-7 and int(round((t-16)*30))//150 % 2 == 0 else 0.
         gravity = kin.forward(samples['arm_measured_q'][i])[:3, :3].T @ np.array([0., 0., -1.])
@@ -86,7 +89,7 @@ def main():
     assert taken and len(targets) > 0
     np.savez_compressed(a.output/'commands.npz', targets=targets, actions=actions)
     report = dict(scope='Offline inference only; no physics scene, robot SDK, or current object/contact/load input',
-        physics_performance_claim=False, real_robot_ran=False,learned_takeover_seconds=a.takeover_seconds,support_latch_after_preparation=policy.support_latch_after_preparation, control_hz=30, r800_input_dim=2076,
+        prewarm=warmup,physics_performance_claim=False, real_robot_ran=False,learned_takeover_seconds=a.takeover_seconds,support_latch_after_preparation=policy.support_latch_after_preparation, control_hz=30, r800_input_dim=2076,
         residual_input_dim=(170 if policy.history_features else 154)+(9 if policy.support_load_features is not None else 0)+(8 if policy.support_estimator is not None else 0), support_load_feature_spec=policy.support_load_feature_spec, support_estimator_metadata={k:v for k,v in policy.support_estimator.spec.items() if k not in ['model','input_mean','input_std','history_mean','history_std']} if policy.support_estimator is not None else None,support_delta_coordinates={k:v for k,v in policy.support_delta_coordinates.spec.items() if k!='reference_actor_state'} if policy.support_delta_coordinates is not None else None, command_frames=len(targets),
         max_target_difference_from_recorded_rad=max(errors),
         hand_joint_names=policy.fk.names, arm_joint_names=kin.names,

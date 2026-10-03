@@ -111,6 +111,45 @@ class G2R800Policy(FrozenPolicy):
                          self.player.intr_reward_coef_embd[:1]], dim=1)
         return obs, encoder_input
 
+    def prewarm(self, q, goal, wrist_gravity, iterations=8, clock_s=16.):
+        """Warm full inference on isolated control state after real history.
+
+        Computed warmup targets are discarded; RNN, reference, known targets,
+        action memory and real measured history are restored before takeover.
+        Covers the adopted154-dimensional bridge, not unused observer heads.
+        """
+        from isaacgymenvs.deploy.student_policy_runtime import clone_states
+        import copy,time
+        assert self.init is not None and len(self.history)==50 and iterations>=1
+        assert not self.history_features and self.support_estimator is None and self.support_load_features is None
+        assert self.pressure_adapter is None and self.support_delta_coordinates is None
+        states=clone_states(self.player.states);network=self.player.model.a2c_network
+        old_override=getattr(network,'actor_encoder_obs_override',None)
+        issued=self.known.issued.clone();initial=self.known.initial.clone()
+        history=np.asarray(self.history).copy();reference=copy.deepcopy(self.thumb_reference)
+        fields=['last_action','last_raw_action','last_encoder_input','last_observation','last_public_features','held_support_logits']
+        saved={name:copy.deepcopy(getattr(self,name)) for name in fields}
+        def restore():
+            self.player.states=clone_states(states)
+            self.known.issued=issued.clone();self.known.initial=initial.clone()
+            self.thumb_reference=copy.deepcopy(reference)
+            for name,value in saved.items():setattr(self,name,copy.deepcopy(value))
+            network.actor_encoder_obs_override=old_override
+        if torch.cuda.is_available():torch.cuda.synchronize()
+        begin=time.perf_counter()
+        try:
+            with torch.no_grad():
+                for _ in range(iterations):
+                    restore();self.command(q,goal,wrist_gravity=wrist_gravity,clock_s=clock_s)
+            if torch.cuda.is_available():torch.cuda.synchronize()
+        finally:restore()
+        assert torch.equal(issued,self.known.issued) and torch.equal(initial,self.known.initial)
+        assert np.array_equal(history,np.asarray(self.history)) and np.array_equal(saved['last_action'],self.last_action)
+        return dict(iterations=iterations,wall_ms=(time.perf_counter()-begin)*1000,
+                    measured_history_frames=50,commands_issued=0,discarded_computed_targets=iterations,
+                    rnn_state_restored=True,reference_and_command_state_restored=True,
+                    scope='Full model/control warmup with isolated state; no synthetic measured history or issued motor command, not hardware latency verification')
+
     def command(self, q, goal,wrist_gravity=None,clock_s=None,diagnostic_motor_offset=None):
         obs, encoder_input = self.inputs(q, goal)
         self.last_encoder_input = encoder_input.detach().cpu().numpy()[0]
