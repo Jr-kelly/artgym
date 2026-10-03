@@ -1,0 +1,69 @@
+{
+  "utc": "2026-10-03T18:03:53.697034+00:00",
+  "entries": [
+    {
+      "label": "nominal",
+      "report": "runs/support-pressure-20261003/demo/nominal-opposite-edge-support-v147/report.json",
+      "full_success": false,
+      "rotation_rad": 0.41765099840217434,
+      "pair_pressure": {
+        "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+        "physics_hz": 240,
+        "substeps_per_simulate": 1,
+        "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+        "finger_order": [
+          "thumb",
+          "index",
+          "middle",
+          "ring",
+          "pinky"
+        ],
+        "static_thumb_pressure_mean_N": 1.0244285273381977,
+        "operation_thumb_pressure_mean_N": 1.0550755542681762,
+        "operation_thumb_pressure_5th_percentile_N": 0.903059644716488,
+        "operation_thumb_contact_substep_fraction": 1.0,
+        "operation_ring_underside_support_mean_N": 0.0,
+        "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+      },
+      "endpoints_m": [
+        0.03786300102041827,
+        0.005713648887144195,
+        0.0366368620759911,
+        0.005364117523034413
+      ]
+    },
+    {
+      "label": "raised1",
+      "report": "runs/support-pressure-20261003/demo/raised1-opposite-edge-support-v147/report.json",
+      "full_success": false,
+      "rotation_rad": 0.3300556732880087,
+      "pair_pressure": {
+        "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+        "physics_hz": 240,
+        "substeps_per_simulate": 1,
+        "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+        "finger_order": [
+          "thumb",
+          "index",
+          "middle",
+          "ring",
+          "pinky"
+        ],
+        "static_thumb_pressure_mean_N": 1.1124214155660477,
+        "operation_thumb_pressure_mean_N": 1.1457311384706943,
+        "operation_thumb_pressure_5th_percentile_N": 0.9924879188938391,
+        "operation_thumb_contact_substep_fraction": 1.0,
+        "operation_ring_underside_support_mean_N": 0.0,
+        "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+      },
+      "endpoints_m": [
+        0.037996105280601315,
+        0.005012813334663709,
+        0.03783138862086667,
+        0.00573440579076608
+      ]
+    }
+  ],
+  "scope": "Two known matcheddevelopmentcases only; largeroppositeedge forcelever, not independentresulttuning or newfrozenpolicy",
+  "decision": "BothbodyFAIL, raisedregresses; stopcandidate withouttraining, do notextendlateralgeometrysweep."
+}

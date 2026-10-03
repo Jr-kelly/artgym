@@ -50,7 +50,7 @@ def main():
         files.extend(f for f in (B/'figures').rglob('*') if f.is_file())
         files.extend(f for f in (B/'browsable-report-final').rglob('*') if f.is_file())
     else:
-        for root in [B/'demo',B/'jobs',B/'resources']:
+        for root in [B/'demo',B/'jobs',B/'resources',B/'calibration']:
             files.extend(f for f in root.rglob('*') if f.is_file() and f.suffix in ['.npz','.json','.jsonl','.log'])
         for folder in B.iterdir():
             if folder.is_dir() and ('contract' in folder.name or 'replay' in folder.name or folder.name.startswith('independent-') or folder.name.startswith('restored-')):

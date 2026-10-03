@@ -42,7 +42,7 @@ python -m scripts.run_wuji_support_demo \
   --output runs/support-pressure-20261003/recovered-continuous
 ```
 
-已记录的配对连续成功例是 `demo/raised1-staged-support-film-v97`；厚14 mm、原承托的成功例是 `demo/thick14-strong750-necessary-family-film-v80`。完整原始命令以相应 `jobs/*/identity.json` 为准；一次实际恢复启动结果见最终交付回执，不以开发成功视频代替恢复验证。困难名义条件仍因刀身旋转失败，不能用凸起成功例宣称整个目标族完成。
+已记录的配对连续成功例是 `demo/raised1-staged-support-film-v97`；厚14 mm、原承托的成功例是 `demo/thick14-strong750-necessary-family-film-v80`。完整原始命令以相应 `jobs/*/identity.json` 为准；已从GitHub草稿下载核心包、复用两份旧归档，在一个新目录实际完成本命令的36秒连续流程并通过；回执actual-restored-startup-v145-results.json。这只是该开发条件的恢复验证。困难名义条件仍因刀身旋转失败，不能用凸起成功例宣称整个目标族完成。
 
 本地渲染时增加 `--video`，生成未经阶段拼接的 `continuous.mp4` 和 `hand-closeup.mp4`；字幕用 `scripts/annotate_wuji_pressure_video.py`。仿真报告包含两轮端点、刀身漂移/旋转和每个实际240 Hz子步接触对法向贡献汇总。求解器阻力容量、模型估计力与实际接触法向力分别标注；尚未完整恢复切向摩擦合力。
 
@@ -84,3 +84,39 @@ python -m scripts.resume_wuji_support_training \
 ```
 
 去掉 `--print-only` 才实际启动；更新数是绝对750→800，保存的模型、Adam、RNG和时钟/GAE恢复。新物理episode不是PhysX中途状态。该命令只是恢复入口，**本轮无证据支持按原机制继续长训**。最后四个坐标候选保留相同恢复方式及其checkpoint内固定先验，但不是最终采用策略。
+
+
+新合法输入导出入口（仿真记录到离线重放）：
+
+```bash
+python -m scripts.export_wuji_support_replay \
+  --episode runs/support-pressure-20261003/restored-continuous-startup-v145/continuous \
+  --estimate runs/support-pressure-20261003/offline-input-load163-v119-retry1/estimate.json \
+  --output runs/support-pressure-20261003/new-legal-replay-input
+```
+
+它根据physics.json中的真实关节名称核对20/7映射，只导出关节测量、已发目标和30 Hz指令时钟；没有运行中的刀体/接触/阻力输入。旧trace的臂关节是周期结束采样，不能在运动期间宣称逐位输入等价。162维估计器接口的零扩展克隆已重放600个实际恢复回合目标，最大差异约0.95微弧度；这个克隆未进行新的策略训练，不能当作162维行为成功。
+
+
+观察器补充包是未采用路线，恢复时加 `--learning`。为了交付完整训练输入而不重复存储相邻50帧历史，两个数据文件按环境重排压缩，使用以下命令恢复原始样本/字段顺序：
+
+```bash
+python -m scripts.repack_wuji_observer_data --mode unpack \
+  --input runs/support-pressure-20261003/observer-data-packed-v155/fit.npz \
+  --output runs/support-pressure-20261003/observer-data-fit-v148/data.npz
+python -m scripts.repack_wuji_observer_data --mode unpack \
+  --input runs/support-pressure-20261003/observer-data-packed-v155/fresh.npz \
+  --output runs/support-pressure-20261003/observer-data-fresh-v148/data.npz
+```
+
+一次fit数据往返已恢复相同原始NPZ SHA256；没有量化、删样本或改标签。辅助头 `observer-head-v149/best.pth` 是20 epoch开发选择，含模型/Adam/RNG，训练曾跑80 epoch；三份策略800权重均完整保存其恢复状态。拟合误差、开发配对和四个冻结独立结果分开解释，不能按真实资产ID在线挑权重。
+
+## 最终交付分组与层次
+
+新 Release 为 `wuji-g2-support-pressure-20261003-v1`。`release-manifest.json` 记录每个归档与旧依赖的字节数、SHA256和恢复分组；同名 `.manifest.json` 逐文件核验。默认依次恢复旧源码、两份指定旧权重、本轮 source/runtime，再覆盖 `support-final-records.tar.gz` 中最终源码增量与结果文档。后者必须最后应用，不能只使用较早打包的核心文档。`--learning` 再恢复完整训练状态，包括未采用观察器；`--media` 恢复视频。所有数据包角色明确，不把估计器拟合、恢复运行或开发展示称为独立验证。
+
+`support-observer-recovery.tar.gz` 是本轮未采用候选：含三组750→800完整模型/Adam/RNG、冻结历史观察器及两份无损重排数据。原始812 MB数据重排后约147 MB，未量化或删样；先用上文命令还原行序再复训。默认恢复仍运行750/staged，不能因为新包存在就自动切换到162维候选。
+
+HTML 直接内嵌七条完整视频，七条原始全景 MP4 为独立 Release 资产；近景和所有原始视频在 `support-movies.tar.gz`。失败和逐帧数据在 `support-evidence.tar.gz`。归档 STATE 是打包时的快照，公开发布与最终结束回执在分支最新 HANDOFF，不能把快照中的 PID 当成活跃事实。
+
+新增162维观察器/冻结拇指完整800状态在同一恢复目录实际续到805；跨过16秒控制接管并执行有效残差优化，冻结拇指与观察器字节未改变，Adam/RNG保留。证据 `actual-observer-fullstate-resume-v158-results.json`。这仅验证恢复功能，重启物理训练样本存在大量失败，不采用805或将其称为新性能。

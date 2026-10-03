@@ -78,7 +78,7 @@ def main():
         gravity = kin.forward(samples['arm_measured_q'][i])[:3, :3].T @ np.array([0., 0., -1.])
         target, action = policy.command(q, goal, wrist_gravity=gravity, clock_s=float(t))
         assert policy.last_encoder_input.shape == (2076,)
-        assert policy.last_public_features.shape == ((170 if policy.history_features else 154)+(9 if policy.support_load_features is not None else 0),)
+        assert policy.last_public_features.shape == ((170 if policy.history_features else 154)+(9 if policy.support_load_features is not None else 0)+(8 if policy.support_estimator is not None else 0),)
         assert np.isfinite(target).all() and np.isfinite(policy.last_encoder_input).all()
         assert np.all(target >= policy.fk.lower-1e-6) and np.all(target <= policy.fk.upper+1e-6)
         targets.append(target); actions.append(action)
@@ -87,7 +87,7 @@ def main():
     np.savez_compressed(a.output/'commands.npz', targets=targets, actions=actions)
     report = dict(scope='Offline inference only; no physics scene, robot SDK, or current object/contact/load input',
         physics_performance_claim=False, real_robot_ran=False,learned_takeover_seconds=a.takeover_seconds,support_latch_after_preparation=policy.support_latch_after_preparation, control_hz=30, r800_input_dim=2076,
-        residual_input_dim=(170 if policy.history_features else 154)+(9 if policy.support_load_features is not None else 0), support_load_feature_spec=policy.support_load_feature_spec,support_delta_coordinates={k:v for k,v in policy.support_delta_coordinates.spec.items() if k!='reference_actor_state'} if policy.support_delta_coordinates is not None else None, command_frames=len(targets),
+        residual_input_dim=(170 if policy.history_features else 154)+(9 if policy.support_load_features is not None else 0)+(8 if policy.support_estimator is not None else 0), support_load_feature_spec=policy.support_load_feature_spec, support_estimator_metadata={k:v for k,v in policy.support_estimator.spec.items() if k not in ['model','input_mean','input_std','history_mean','history_std']} if policy.support_estimator is not None else None,support_delta_coordinates={k:v for k,v in policy.support_delta_coordinates.spec.items() if k!='reference_actor_state'} if policy.support_delta_coordinates is not None else None, command_frames=len(targets),
         max_target_difference_from_recorded_rad=max(errors),
         hand_joint_names=policy.fk.names, arm_joint_names=kin.names,
         input_sha256=hashlib.sha256(a.input.read_bytes()).hexdigest(),
