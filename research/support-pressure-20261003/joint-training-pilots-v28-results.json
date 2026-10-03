@@ -1,0 +1,1835 @@
+[
+  {
+    "variant": "base",
+    "final": {
+      "utc": "2026-10-03T09:06:48.339286+00:00",
+      "update": 150,
+      "transitions": 1228800,
+      "episodes": 1162,
+      "reward": 0.13581547141075134,
+      "loss": 52.34670972824097,
+      "kl": 0.01667772454675287,
+      "active_sample_kl": 0.017439719405956566,
+      "epoch_stop_kl_scope": "active residual-control samples",
+      "policy_active_fraction": 0.1781005859375,
+      "actual_hold_history_frames": 50,
+      "wall_seconds": 497.0311785330414,
+      "peak_extension_mean_m": 0.028379107679938897,
+      "contact_mean": 0.8645171285606921,
+      "fall_fraction": 0.25,
+      "scope": "Training fitting/behavior only",
+      "analytic_active_rollout_kl": 0.025481615215539932,
+      "actor_step_fraction_mean": 1.0,
+      "rejected_actor_updates": 0,
+      "actor_bound_scope": "All active samples in current rollout; not a bound on future episodes",
+      "recent_episode_count": 128,
+      "recent_complete_fraction": 0.53125,
+      "recent_pickup_valid_fraction": 0.875,
+      "all_complete_count": 570,
+      "all_pickup_valid_count": 987,
+      "failure_counts": {
+        "pickup/hold": 16,
+        "body unstable/drop": 38,
+        "extension": 0,
+        "retraction": 6,
+        "thumb-contact": 0
+      },
+      "behavior_scope": "Training samples, last128 episodes may mix early failures and complete36s trajectories; never independent validation"
+    },
+    "geometry_training_counts": {
+      "s0017": {
+        "attempts": 36,
+        "complete": 0,
+        "pickup/hold": 35,
+        "body unstable/drop": 1
+      },
+      "s0029": {
+        "attempts": 20,
+        "complete": 9,
+        "pickup/hold": 8,
+        "body unstable/drop": 3,
+        "None": 9
+      },
+      "s0034": {
+        "attempts": 21,
+        "complete": 1,
+        "pickup/hold": 5,
+        "body unstable/drop": 15,
+        "None": 1
+      },
+      "s0035": {
+        "attempts": 16,
+        "complete": 0,
+        "pickup/hold": 1,
+        "retraction": 4,
+        "body unstable/drop": 11
+      },
+      "s0041": {
+        "attempts": 25,
+        "complete": 0,
+        "pickup/hold": 5,
+        "body unstable/drop": 20
+      },
+      "s0051": {
+        "attempts": 33,
+        "complete": 0,
+        "pickup/hold": 25,
+        "body unstable/drop": 8
+      },
+      "s0005": {
+        "attempts": 27,
+        "complete": 2,
+        "pickup/hold": 12,
+        "body unstable/drop": 13,
+        "None": 2
+      },
+      "s0007": {
+        "attempts": 16,
+        "complete": 15,
+        "pickup/hold": 1,
+        "None": 15
+      },
+      "s0009": {
+        "attempts": 26,
+        "complete": 4,
+        "pickup/hold": 15,
+        "None": 4,
+        "body unstable/drop": 7
+      },
+      "s0020": {
+        "attempts": 19,
+        "complete": 5,
+        "pickup/hold": 6,
+        "body unstable/drop": 7,
+        "None": 5,
+        "retraction": 1
+      },
+      "s0022": {
+        "attempts": 17,
+        "complete": 13,
+        "pickup/hold": 1,
+        "None": 13,
+        "retraction": 1,
+        "body unstable/drop": 2
+      },
+      "s0028": {
+        "attempts": 26,
+        "complete": 2,
+        "pickup/hold": 14,
+        "body unstable/drop": 10,
+        "None": 2
+      },
+      "s0030": {
+        "attempts": 27,
+        "complete": 2,
+        "pickup/hold": 13,
+        "body unstable/drop": 11,
+        "None": 2,
+        "retraction": 1
+      },
+      "s0038": {
+        "attempts": 24,
+        "complete": 0,
+        "pickup/hold": 3,
+        "body unstable/drop": 21
+      },
+      "s0040": {
+        "attempts": 16,
+        "complete": 3,
+        "pickup/hold": 1,
+        "body unstable/drop": 11,
+        "None": 3,
+        "retraction": 1
+      },
+      "s0016": {
+        "attempts": 16,
+        "complete": 11,
+        "pickup/hold": 1,
+        "body unstable/drop": 4,
+        "None": 11
+      },
+      "s0057": {
+        "attempts": 26,
+        "complete": 2,
+        "pickup/hold": 12,
+        "body unstable/drop": 12,
+        "None": 2
+      },
+      "s0018": {
+        "attempts": 17,
+        "complete": 0,
+        "pickup/hold": 2,
+        "body unstable/drop": 14,
+        "retraction": 1
+      },
+      "s0024": {
+        "attempts": 16,
+        "complete": 11,
+        "pickup/hold": 1,
+        "None": 11,
+        "retraction": 2,
+        "body unstable/drop": 2
+      },
+      "s0050": {
+        "attempts": 16,
+        "complete": 1,
+        "pickup/hold": 1,
+        "body unstable/drop": 13,
+        "retraction": 1,
+        "None": 1
+      },
+      "s0053": {
+        "attempts": 16,
+        "complete": 11,
+        "pickup/hold": 1,
+        "body unstable/drop": 4,
+        "None": 11
+      },
+      "s0061": {
+        "attempts": 17,
+        "complete": 4,
+        "pickup/hold": 1,
+        "body unstable/drop": 11,
+        "None": 4,
+        "retraction": 1
+      },
+      "s0021": {
+        "attempts": 18,
+        "complete": 0,
+        "body unstable/drop": 16,
+        "pickup/hold": 1,
+        "retraction": 1
+      },
+      "s0062": {
+        "attempts": 22,
+        "complete": 2,
+        "body unstable/drop": 13,
+        "pickup/hold": 7,
+        "None": 2
+      },
+      "s0003": {
+        "attempts": 19,
+        "complete": 4,
+        "body unstable/drop": 15,
+        "None": 4
+      },
+      "s0044": {
+        "attempts": 18,
+        "complete": 9,
+        "body unstable/drop": 8,
+        "None": 9,
+        "retraction": 1
+      },
+      "s0032": {
+        "attempts": 19,
+        "complete": 10,
+        "body unstable/drop": 8,
+        "None": 10,
+        "pickup/hold": 1
+      },
+      "s0039": {
+        "attempts": 16,
+        "complete": 13,
+        "body unstable/drop": 3,
+        "None": 13
+      },
+      "s0025": {
+        "attempts": 16,
+        "complete": 13,
+        "body unstable/drop": 3,
+        "None": 13
+      },
+      "s0047": {
+        "attempts": 16,
+        "complete": 14,
+        "body unstable/drop": 2,
+        "None": 14
+      },
+      "s0011": {
+        "attempts": 16,
+        "complete": 4,
+        "body unstable/drop": 11,
+        "None": 4,
+        "retraction": 1
+      },
+      "s0000": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "body unstable/drop": 2
+      },
+      "s0001": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "body unstable/drop": 2
+      },
+      "s0002": {
+        "attempts": 16,
+        "complete": 14,
+        "body unstable/drop": 1,
+        "None": 14,
+        "retraction": 1
+      },
+      "s0004": {
+        "attempts": 16,
+        "complete": 10,
+        "None": 10,
+        "body unstable/drop": 5,
+        "retraction": 1
+      },
+      "s0006": {
+        "attempts": 16,
+        "complete": 13,
+        "None": 13,
+        "retraction": 3
+      },
+      "s0008": {
+        "attempts": 16,
+        "complete": 15,
+        "None": 15,
+        "retraction": 1
+      },
+      "s0010": {
+        "attempts": 16,
+        "complete": 15,
+        "None": 15,
+        "body unstable/drop": 1
+      },
+      "s0012": {
+        "attempts": 16,
+        "complete": 13,
+        "body unstable/drop": 3,
+        "None": 13
+      },
+      "s0013": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "body unstable/drop": 1,
+        "pickup/hold": 1
+      },
+      "s0014": {
+        "attempts": 16,
+        "complete": 16,
+        "None": 16
+      },
+      "s0015": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "pickup/hold": 1,
+        "body unstable/drop": 1
+      },
+      "s0019": {
+        "attempts": 16,
+        "complete": 13,
+        "None": 13,
+        "body unstable/drop": 3
+      },
+      "s0023": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "body unstable/drop": 2
+      },
+      "s0026": {
+        "attempts": 16,
+        "complete": 16,
+        "None": 16
+      },
+      "s0027": {
+        "attempts": 17,
+        "complete": 0,
+        "body unstable/drop": 16,
+        "retraction": 1
+      },
+      "s0031": {
+        "attempts": 16,
+        "complete": 12,
+        "None": 12,
+        "body unstable/drop": 4
+      },
+      "s0033": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "body unstable/drop": 2
+      },
+      "s0036": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "body unstable/drop": 2
+      },
+      "s0037": {
+        "attempts": 16,
+        "complete": 15,
+        "None": 15,
+        "body unstable/drop": 1
+      },
+      "s0042": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "body unstable/drop": 2
+      },
+      "s0043": {
+        "attempts": 16,
+        "complete": 14,
+        "retraction": 1,
+        "None": 14,
+        "body unstable/drop": 1
+      },
+      "s0045": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "body unstable/drop": 2
+      },
+      "s0046": {
+        "attempts": 16,
+        "complete": 10,
+        "None": 10,
+        "body unstable/drop": 6
+      },
+      "s0048": {
+        "attempts": 16,
+        "complete": 15,
+        "None": 15,
+        "body unstable/drop": 1
+      },
+      "s0049": {
+        "attempts": 16,
+        "complete": 15,
+        "None": 15,
+        "retraction": 1
+      },
+      "s0052": {
+        "attempts": 16,
+        "complete": 11,
+        "body unstable/drop": 5,
+        "None": 11
+      },
+      "s0054": {
+        "attempts": 16,
+        "complete": 15,
+        "None": 15,
+        "body unstable/drop": 1
+      },
+      "s0055": {
+        "attempts": 16,
+        "complete": 1,
+        "body unstable/drop": 14,
+        "None": 1,
+        "retraction": 1
+      },
+      "s0056": {
+        "attempts": 16,
+        "complete": 8,
+        "None": 8,
+        "retraction": 1,
+        "body unstable/drop": 7
+      },
+      "s0058": {
+        "attempts": 16,
+        "complete": 15,
+        "None": 15,
+        "body unstable/drop": 1
+      },
+      "s0059": {
+        "attempts": 16,
+        "complete": 16,
+        "None": 16
+      },
+      "s0060": {
+        "attempts": 16,
+        "complete": 4,
+        "body unstable/drop": 12,
+        "None": 4
+      },
+      "s0063": {
+        "attempts": 16,
+        "complete": 3,
+        "retraction": 1,
+        "None": 3,
+        "body unstable/drop": 12
+      }
+    },
+    "weights": {
+      "runs/support-pressure-20261003/train/joint-base-v28/update_000150.pth": "e945f024b6426e88a592d7252fec587858c6fed1bde7c1676d105c3888702067",
+      "runs/support-pressure-20261003/train/joint-base-v28/update_000100.pth": "74f60617af8c9441b87b1dfffc739753b6371b8b491af80e14e578c5545ccdd3",
+      "runs/support-pressure-20261003/train/joint-base-v28/update_000050.pth": "47609862f060eff5093fad7c22164cffe9006186803fb937ceab03e89faa28d8"
+    }
+  },
+  {
+    "variant": "noisier",
+    "final": {
+      "utc": "2026-10-03T09:06:48.807043+00:00",
+      "update": 150,
+      "transitions": 1228800,
+      "episodes": 1132,
+      "reward": 0.03199510648846626,
+      "loss": 88.82915496826172,
+      "kl": 0.017581300751771778,
+      "active_sample_kl": 0.019706930965185165,
+      "epoch_stop_kl_scope": "active residual-control samples",
+      "policy_active_fraction": 0.165771484375,
+      "actual_hold_history_frames": 50,
+      "wall_seconds": 497.4596157479682,
+      "peak_extension_mean_m": 0.029862543306080624,
+      "contact_mean": 0.9106783480383456,
+      "fall_fraction": 0.2109375,
+      "scope": "Training fitting/behavior only",
+      "analytic_active_rollout_kl": 0.023894552141427994,
+      "actor_step_fraction_mean": 0.8125,
+      "rejected_actor_updates": 0,
+      "actor_bound_scope": "All active samples in current rollout; not a bound on future episodes",
+      "recent_episode_count": 128,
+      "recent_complete_fraction": 0.46875,
+      "recent_pickup_valid_fraction": 0.921875,
+      "all_complete_count": 541,
+      "all_pickup_valid_count": 1001,
+      "failure_counts": {
+        "pickup/hold": 10,
+        "body unstable/drop": 54,
+        "extension": 0,
+        "retraction": 4,
+        "thumb-contact": 0
+      },
+      "behavior_scope": "Training samples, last128 episodes may mix early failures and complete36s trajectories; never independent validation"
+    },
+    "geometry_training_counts": {
+      "s0034": {
+        "attempts": 29,
+        "complete": 4,
+        "pickup/hold": 20,
+        "None": 4,
+        "body unstable/drop": 5
+      },
+      "s0045": {
+        "attempts": 16,
+        "complete": 9,
+        "pickup/hold": 1,
+        "body unstable/drop": 6,
+        "None": 9
+      },
+      "s0051": {
+        "attempts": 30,
+        "complete": 3,
+        "pickup/hold": 25,
+        "None": 3,
+        "body unstable/drop": 2
+      },
+      "s0057": {
+        "attempts": 27,
+        "complete": 0,
+        "pickup/hold": 16,
+        "body unstable/drop": 10,
+        "extension": 1
+      },
+      "s0017": {
+        "attempts": 25,
+        "complete": 1,
+        "pickup/hold": 15,
+        "body unstable/drop": 9,
+        "None": 1
+      },
+      "s0020": {
+        "attempts": 17,
+        "complete": 5,
+        "pickup/hold": 2,
+        "None": 5,
+        "body unstable/drop": 10
+      },
+      "s0040": {
+        "attempts": 16,
+        "complete": 3,
+        "pickup/hold": 1,
+        "body unstable/drop": 11,
+        "None": 3,
+        "retraction": 1
+      },
+      "s0005": {
+        "attempts": 23,
+        "complete": 3,
+        "pickup/hold": 7,
+        "body unstable/drop": 13,
+        "None": 3
+      },
+      "s0009": {
+        "attempts": 23,
+        "complete": 2,
+        "pickup/hold": 12,
+        "body unstable/drop": 9,
+        "None": 2
+      },
+      "s0029": {
+        "attempts": 16,
+        "complete": 11,
+        "pickup/hold": 1,
+        "body unstable/drop": 4,
+        "None": 11
+      },
+      "s0032": {
+        "attempts": 18,
+        "complete": 10,
+        "pickup/hold": 3,
+        "None": 10,
+        "body unstable/drop": 5
+      },
+      "s0061": {
+        "attempts": 17,
+        "complete": 1,
+        "pickup/hold": 1,
+        "body unstable/drop": 15,
+        "None": 1
+      },
+      "s0018": {
+        "attempts": 17,
+        "complete": 0,
+        "body unstable/drop": 17
+      },
+      "s0030": {
+        "attempts": 21,
+        "complete": 2,
+        "body unstable/drop": 13,
+        "None": 2,
+        "pickup/hold": 6
+      },
+      "s0038": {
+        "attempts": 22,
+        "complete": 0,
+        "body unstable/drop": 22
+      },
+      "s0027": {
+        "attempts": 17,
+        "complete": 2,
+        "body unstable/drop": 14,
+        "None": 2,
+        "retraction": 1
+      },
+      "s0046": {
+        "attempts": 17,
+        "complete": 7,
+        "body unstable/drop": 9,
+        "None": 7,
+        "pickup/hold": 1
+      },
+      "s0028": {
+        "attempts": 21,
+        "complete": 4,
+        "body unstable/drop": 16,
+        "None": 4,
+        "pickup/hold": 1
+      },
+      "s0062": {
+        "attempts": 19,
+        "complete": 0,
+        "body unstable/drop": 14,
+        "pickup/hold": 5
+      },
+      "s0041": {
+        "attempts": 25,
+        "complete": 0,
+        "body unstable/drop": 19,
+        "pickup/hold": 6
+      },
+      "s0044": {
+        "attempts": 18,
+        "complete": 10,
+        "body unstable/drop": 7,
+        "None": 10,
+        "retraction": 1
+      },
+      "s0003": {
+        "attempts": 20,
+        "complete": 3,
+        "body unstable/drop": 17,
+        "None": 3
+      },
+      "s0000": {
+        "attempts": 16,
+        "complete": 15,
+        "None": 15,
+        "body unstable/drop": 1
+      },
+      "s0001": {
+        "attempts": 16,
+        "complete": 12,
+        "None": 12,
+        "body unstable/drop": 4
+      },
+      "s0002": {
+        "attempts": 16,
+        "complete": 14,
+        "body unstable/drop": 2,
+        "None": 14
+      },
+      "s0004": {
+        "attempts": 16,
+        "complete": 10,
+        "None": 10,
+        "body unstable/drop": 6
+      },
+      "s0006": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "retraction": 1,
+        "body unstable/drop": 1
+      },
+      "s0007": {
+        "attempts": 16,
+        "complete": 16,
+        "None": 16
+      },
+      "s0008": {
+        "attempts": 16,
+        "complete": 16,
+        "None": 16
+      },
+      "s0010": {
+        "attempts": 16,
+        "complete": 15,
+        "body unstable/drop": 1,
+        "None": 15
+      },
+      "s0011": {
+        "attempts": 16,
+        "complete": 5,
+        "body unstable/drop": 11,
+        "None": 5
+      },
+      "s0012": {
+        "attempts": 16,
+        "complete": 12,
+        "body unstable/drop": 4,
+        "None": 12
+      },
+      "s0013": {
+        "attempts": 18,
+        "complete": 14,
+        "None": 14,
+        "pickup/hold": 3,
+        "body unstable/drop": 1
+      },
+      "s0014": {
+        "attempts": 16,
+        "complete": 13,
+        "None": 13,
+        "body unstable/drop": 2,
+        "retraction": 1
+      },
+      "s0015": {
+        "attempts": 16,
+        "complete": 13,
+        "None": 13,
+        "body unstable/drop": 2,
+        "retraction": 1
+      },
+      "s0016": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "body unstable/drop": 2
+      },
+      "s0019": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "body unstable/drop": 2
+      },
+      "s0021": {
+        "attempts": 18,
+        "complete": 1,
+        "body unstable/drop": 12,
+        "None": 1,
+        "pickup/hold": 2,
+        "retraction": 3
+      },
+      "s0022": {
+        "attempts": 16,
+        "complete": 11,
+        "None": 11,
+        "body unstable/drop": 4,
+        "retraction": 1
+      },
+      "s0023": {
+        "attempts": 16,
+        "complete": 13,
+        "retraction": 1,
+        "None": 13,
+        "body unstable/drop": 2
+      },
+      "s0024": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "body unstable/drop": 2
+      },
+      "s0025": {
+        "attempts": 16,
+        "complete": 13,
+        "None": 13,
+        "body unstable/drop": 3
+      },
+      "s0026": {
+        "attempts": 16,
+        "complete": 16,
+        "None": 16
+      },
+      "s0031": {
+        "attempts": 16,
+        "complete": 13,
+        "None": 13,
+        "body unstable/drop": 3
+      },
+      "s0033": {
+        "attempts": 16,
+        "complete": 10,
+        "body unstable/drop": 6,
+        "None": 10
+      },
+      "s0035": {
+        "attempts": 16,
+        "complete": 0,
+        "retraction": 4,
+        "body unstable/drop": 12
+      },
+      "s0036": {
+        "attempts": 16,
+        "complete": 10,
+        "None": 10,
+        "body unstable/drop": 5,
+        "retraction": 1
+      },
+      "s0037": {
+        "attempts": 16,
+        "complete": 12,
+        "body unstable/drop": 4,
+        "None": 12
+      },
+      "s0039": {
+        "attempts": 18,
+        "complete": 12,
+        "None": 12,
+        "pickup/hold": 3,
+        "body unstable/drop": 3
+      },
+      "s0042": {
+        "attempts": 16,
+        "complete": 14,
+        "retraction": 2,
+        "None": 14
+      },
+      "s0043": {
+        "attempts": 16,
+        "complete": 11,
+        "None": 11,
+        "body unstable/drop": 5
+      },
+      "s0047": {
+        "attempts": 16,
+        "complete": 15,
+        "None": 15,
+        "body unstable/drop": 1
+      },
+      "s0048": {
+        "attempts": 16,
+        "complete": 11,
+        "None": 11,
+        "body unstable/drop": 5
+      },
+      "s0049": {
+        "attempts": 16,
+        "complete": 15,
+        "None": 15,
+        "retraction": 1
+      },
+      "s0050": {
+        "attempts": 16,
+        "complete": 0,
+        "body unstable/drop": 14,
+        "retraction": 2
+      },
+      "s0052": {
+        "attempts": 16,
+        "complete": 11,
+        "body unstable/drop": 4,
+        "None": 11,
+        "retraction": 1
+      },
+      "s0053": {
+        "attempts": 16,
+        "complete": 11,
+        "None": 11,
+        "body unstable/drop": 5
+      },
+      "s0054": {
+        "attempts": 16,
+        "complete": 7,
+        "None": 7,
+        "body unstable/drop": 9
+      },
+      "s0055": {
+        "attempts": 16,
+        "complete": 0,
+        "body unstable/drop": 16
+      },
+      "s0056": {
+        "attempts": 16,
+        "complete": 9,
+        "None": 9,
+        "retraction": 1,
+        "body unstable/drop": 6
+      },
+      "s0058": {
+        "attempts": 16,
+        "complete": 13,
+        "None": 13,
+        "body unstable/drop": 2,
+        "retraction": 1
+      },
+      "s0059": {
+        "attempts": 16,
+        "complete": 16,
+        "None": 16
+      },
+      "s0060": {
+        "attempts": 16,
+        "complete": 3,
+        "body unstable/drop": 13,
+        "None": 3
+      },
+      "s0063": {
+        "attempts": 16,
+        "complete": 3,
+        "retraction": 1,
+        "None": 3,
+        "body unstable/drop": 12
+      }
+    },
+    "weights": {
+      "runs/support-pressure-20261003/train/joint-noisier-v28/update_000150.pth": "e8a21c1708d9d4f791b6a65fb9e28daa11a6d4056f8426ba233a926eb773a2a0",
+      "runs/support-pressure-20261003/train/joint-noisier-v28/update_000100.pth": "a5d28326309120e50bb0c2767825b5bf937818415cbfc4d727aa98384c80068a",
+      "runs/support-pressure-20261003/train/joint-noisier-v28/update_000050.pth": "b942de0617fe03aef745691646661b334728e7ea5bf06fb6b6cc1a46bcd46cef"
+    }
+  },
+  {
+    "variant": "history",
+    "final": {
+      "utc": "2026-10-03T09:06:58.440576+00:00",
+      "update": 150,
+      "transitions": 1228800,
+      "episodes": 1133,
+      "reward": 0.029174132272601128,
+      "loss": 184.72461605072021,
+      "kl": 0.013382374891079962,
+      "active_sample_kl": 0.019754260400077328,
+      "epoch_stop_kl_scope": "active residual-control samples",
+      "policy_active_fraction": 0.14697265625,
+      "actual_hold_history_frames": 50,
+      "wall_seconds": 507.1247071669786,
+      "peak_extension_mean_m": 0.029770737775834277,
+      "contact_mean": 0.8548649519216269,
+      "fall_fraction": 0.2109375,
+      "scope": "Training fitting/behavior only",
+      "analytic_active_rollout_kl": 0.02879064902663231,
+      "actor_step_fraction_mean": 0.9375,
+      "rejected_actor_updates": 0,
+      "actor_bound_scope": "All active samples in current rollout; not a bound on future episodes",
+      "recent_episode_count": 128,
+      "recent_complete_fraction": 0.5390625,
+      "recent_pickup_valid_fraction": 0.8671875,
+      "all_complete_count": 582,
+      "all_pickup_valid_count": 998,
+      "failure_counts": {
+        "pickup/hold": 17,
+        "body unstable/drop": 42,
+        "extension": 0,
+        "retraction": 0,
+        "thumb-contact": 0
+      },
+      "behavior_scope": "Training samples, last128 episodes may mix early failures and complete36s trajectories; never independent validation"
+    },
+    "geometry_training_counts": {
+      "s0034": {
+        "attempts": 25,
+        "complete": 5,
+        "pickup/hold": 12,
+        "body unstable/drop": 8,
+        "None": 5
+      },
+      "s0045": {
+        "attempts": 16,
+        "complete": 11,
+        "pickup/hold": 1,
+        "body unstable/drop": 3,
+        "None": 11,
+        "retraction": 1
+      },
+      "s0046": {
+        "attempts": 18,
+        "complete": 9,
+        "pickup/hold": 1,
+        "body unstable/drop": 8,
+        "None": 9
+      },
+      "s0051": {
+        "attempts": 31,
+        "complete": 1,
+        "pickup/hold": 27,
+        "body unstable/drop": 3,
+        "None": 1
+      },
+      "s0057": {
+        "attempts": 32,
+        "complete": 0,
+        "pickup/hold": 26,
+        "body unstable/drop": 6
+      },
+      "s0017": {
+        "attempts": 26,
+        "complete": 1,
+        "pickup/hold": 13,
+        "body unstable/drop": 12,
+        "None": 1
+      },
+      "s0020": {
+        "attempts": 17,
+        "complete": 2,
+        "pickup/hold": 1,
+        "None": 2,
+        "body unstable/drop": 14
+      },
+      "s0040": {
+        "attempts": 16,
+        "complete": 7,
+        "pickup/hold": 1,
+        "body unstable/drop": 7,
+        "retraction": 1,
+        "None": 7
+      },
+      "s0005": {
+        "attempts": 24,
+        "complete": 2,
+        "pickup/hold": 10,
+        "None": 2,
+        "body unstable/drop": 12
+      },
+      "s0028": {
+        "attempts": 19,
+        "complete": 5,
+        "pickup/hold": 2,
+        "body unstable/drop": 12,
+        "None": 5
+      },
+      "s0009": {
+        "attempts": 22,
+        "complete": 1,
+        "pickup/hold": 9,
+        "body unstable/drop": 11,
+        "None": 1,
+        "extension": 1
+      },
+      "s0029": {
+        "attempts": 18,
+        "complete": 9,
+        "pickup/hold": 4,
+        "body unstable/drop": 5,
+        "None": 9
+      },
+      "s0032": {
+        "attempts": 21,
+        "complete": 7,
+        "pickup/hold": 6,
+        "None": 7,
+        "extension": 1,
+        "body unstable/drop": 7
+      },
+      "s0041": {
+        "attempts": 25,
+        "complete": 0,
+        "pickup/hold": 4,
+        "body unstable/drop": 21
+      },
+      "s0061": {
+        "attempts": 17,
+        "complete": 3,
+        "pickup/hold": 1,
+        "body unstable/drop": 12,
+        "None": 3,
+        "retraction": 1
+      },
+      "s0062": {
+        "attempts": 19,
+        "complete": 1,
+        "pickup/hold": 4,
+        "body unstable/drop": 14,
+        "None": 1
+      },
+      "s0027": {
+        "attempts": 16,
+        "complete": 0,
+        "body unstable/drop": 16
+      },
+      "s0030": {
+        "attempts": 22,
+        "complete": 3,
+        "body unstable/drop": 11,
+        "None": 3,
+        "pickup/hold": 8
+      },
+      "s0038": {
+        "attempts": 23,
+        "complete": 0,
+        "body unstable/drop": 21,
+        "extension": 1,
+        "pickup/hold": 1
+      },
+      "s0003": {
+        "attempts": 18,
+        "complete": 5,
+        "body unstable/drop": 13,
+        "None": 5
+      },
+      "s0018": {
+        "attempts": 17,
+        "complete": 1,
+        "body unstable/drop": 15,
+        "None": 1,
+        "retraction": 1
+      },
+      "s0021": {
+        "attempts": 16,
+        "complete": 4,
+        "body unstable/drop": 12,
+        "None": 4
+      },
+      "s0000": {
+        "attempts": 16,
+        "complete": 15,
+        "None": 15,
+        "retraction": 1
+      },
+      "s0001": {
+        "attempts": 16,
+        "complete": 16,
+        "None": 16
+      },
+      "s0002": {
+        "attempts": 16,
+        "complete": 15,
+        "body unstable/drop": 1,
+        "None": 15
+      },
+      "s0004": {
+        "attempts": 16,
+        "complete": 7,
+        "None": 7,
+        "body unstable/drop": 7,
+        "retraction": 2
+      },
+      "s0006": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "body unstable/drop": 2
+      },
+      "s0007": {
+        "attempts": 16,
+        "complete": 16,
+        "None": 16
+      },
+      "s0008": {
+        "attempts": 16,
+        "complete": 16,
+        "None": 16
+      },
+      "s0010": {
+        "attempts": 16,
+        "complete": 13,
+        "body unstable/drop": 2,
+        "None": 13,
+        "retraction": 1
+      },
+      "s0011": {
+        "attempts": 16,
+        "complete": 3,
+        "body unstable/drop": 13,
+        "None": 3
+      },
+      "s0012": {
+        "attempts": 16,
+        "complete": 16,
+        "None": 16
+      },
+      "s0013": {
+        "attempts": 16,
+        "complete": 13,
+        "None": 13,
+        "body unstable/drop": 3
+      },
+      "s0014": {
+        "attempts": 16,
+        "complete": 15,
+        "None": 15,
+        "retraction": 1
+      },
+      "s0015": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "body unstable/drop": 2
+      },
+      "s0016": {
+        "attempts": 16,
+        "complete": 13,
+        "None": 13,
+        "body unstable/drop": 3
+      },
+      "s0019": {
+        "attempts": 16,
+        "complete": 11,
+        "None": 11,
+        "body unstable/drop": 5
+      },
+      "s0022": {
+        "attempts": 16,
+        "complete": 9,
+        "None": 9,
+        "body unstable/drop": 6,
+        "retraction": 1
+      },
+      "s0023": {
+        "attempts": 16,
+        "complete": 14,
+        "body unstable/drop": 1,
+        "None": 14,
+        "retraction": 1
+      },
+      "s0024": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "body unstable/drop": 2
+      },
+      "s0025": {
+        "attempts": 17,
+        "complete": 12,
+        "None": 12,
+        "body unstable/drop": 3,
+        "retraction": 1,
+        "pickup/hold": 1
+      },
+      "s0026": {
+        "attempts": 16,
+        "complete": 16,
+        "None": 16
+      },
+      "s0031": {
+        "attempts": 16,
+        "complete": 15,
+        "None": 15,
+        "body unstable/drop": 1
+      },
+      "s0033": {
+        "attempts": 16,
+        "complete": 12,
+        "None": 12,
+        "body unstable/drop": 4
+      },
+      "s0035": {
+        "attempts": 16,
+        "complete": 1,
+        "retraction": 3,
+        "body unstable/drop": 12,
+        "None": 1
+      },
+      "s0036": {
+        "attempts": 16,
+        "complete": 12,
+        "None": 12,
+        "body unstable/drop": 3,
+        "retraction": 1
+      },
+      "s0037": {
+        "attempts": 16,
+        "complete": 16,
+        "None": 16
+      },
+      "s0039": {
+        "attempts": 17,
+        "complete": 13,
+        "None": 13,
+        "body unstable/drop": 2,
+        "pickup/hold": 2
+      },
+      "s0042": {
+        "attempts": 16,
+        "complete": 13,
+        "retraction": 1,
+        "None": 13,
+        "body unstable/drop": 2
+      },
+      "s0043": {
+        "attempts": 16,
+        "complete": 12,
+        "retraction": 1,
+        "None": 12,
+        "body unstable/drop": 3
+      },
+      "s0044": {
+        "attempts": 17,
+        "complete": 11,
+        "None": 11,
+        "body unstable/drop": 6
+      },
+      "s0047": {
+        "attempts": 16,
+        "complete": 15,
+        "None": 15,
+        "pickup/hold": 1
+      },
+      "s0048": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "body unstable/drop": 2
+      },
+      "s0049": {
+        "attempts": 16,
+        "complete": 15,
+        "None": 15,
+        "retraction": 1
+      },
+      "s0050": {
+        "attempts": 16,
+        "complete": 1,
+        "body unstable/drop": 14,
+        "None": 1,
+        "retraction": 1
+      },
+      "s0052": {
+        "attempts": 16,
+        "complete": 12,
+        "body unstable/drop": 4,
+        "None": 12
+      },
+      "s0053": {
+        "attempts": 16,
+        "complete": 15,
+        "None": 15,
+        "body unstable/drop": 1
+      },
+      "s0054": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "body unstable/drop": 2
+      },
+      "s0055": {
+        "attempts": 16,
+        "complete": 0,
+        "body unstable/drop": 16
+      },
+      "s0056": {
+        "attempts": 16,
+        "complete": 12,
+        "None": 12,
+        "body unstable/drop": 3,
+        "retraction": 1
+      },
+      "s0058": {
+        "attempts": 16,
+        "complete": 15,
+        "None": 15,
+        "body unstable/drop": 1
+      },
+      "s0059": {
+        "attempts": 16,
+        "complete": 15,
+        "None": 15,
+        "body unstable/drop": 1
+      },
+      "s0060": {
+        "attempts": 16,
+        "complete": 5,
+        "body unstable/drop": 10,
+        "None": 5,
+        "retraction": 1
+      },
+      "s0063": {
+        "attempts": 16,
+        "complete": 5,
+        "None": 5,
+        "body unstable/drop": 10,
+        "retraction": 1
+      }
+    },
+    "weights": {
+      "runs/support-pressure-20261003/train/joint-history-v28/update_000150.pth": "d9554a2e3784564501fc5d3637d8179f43c0d3a4838b744edba1a0f0f9edcad4",
+      "runs/support-pressure-20261003/train/joint-history-v28/update_000100.pth": "49432431ebcd694f71c4413fe663deffc8d17373defb35f1f5671fd32f73c57d",
+      "runs/support-pressure-20261003/train/joint-history-v28/update_000050.pth": "db51bc7891f3d86e5b9c1dc51df8ca0e0b52a3f5da7d5398af17dcdbc5cad106"
+    }
+  },
+  {
+    "variant": "early",
+    "final": {
+      "utc": "2026-10-03T09:06:55.045199+00:00",
+      "update": 150,
+      "transitions": 1228800,
+      "episodes": 1187,
+      "reward": 1.8039696216583252,
+      "loss": 92.96545696258545,
+      "kl": 0.00941099674673751,
+      "active_sample_kl": 0.009495885926298797,
+      "epoch_stop_kl_scope": "active residual-control samples",
+      "policy_active_fraction": 0.8795166015625,
+      "actual_hold_history_frames": 50,
+      "wall_seconds": 503.7469673359883,
+      "peak_extension_mean_m": 0.027789297702838667,
+      "contact_mean": 0.8351027881726623,
+      "fall_fraction": 0.2734375,
+      "scope": "Training fitting/behavior only",
+      "analytic_active_rollout_kl": 0.00975694227963686,
+      "actor_step_fraction_mean": 1.0,
+      "rejected_actor_updates": 0,
+      "actor_bound_scope": "All active samples in current rollout; not a bound on future episodes",
+      "recent_episode_count": 128,
+      "recent_complete_fraction": 0.46875,
+      "recent_pickup_valid_fraction": 0.84375,
+      "all_complete_count": 580,
+      "all_pickup_valid_count": 1012,
+      "failure_counts": {
+        "pickup/hold": 20,
+        "body unstable/drop": 46,
+        "extension": 0,
+        "retraction": 2,
+        "thumb-contact": 0
+      },
+      "behavior_scope": "Training samples, last128 episodes may mix early failures and complete36s trajectories; never independent validation"
+    },
+    "geometry_training_counts": {
+      "s0034": {
+        "attempts": 31,
+        "complete": 5,
+        "pickup/hold": 20,
+        "None": 5,
+        "body unstable/drop": 6
+      },
+      "s0045": {
+        "attempts": 17,
+        "complete": 12,
+        "pickup/hold": 1,
+        "body unstable/drop": 3,
+        "None": 12,
+        "retraction": 1
+      },
+      "s0046": {
+        "attempts": 18,
+        "complete": 8,
+        "pickup/hold": 1,
+        "body unstable/drop": 9,
+        "None": 8
+      },
+      "s0051": {
+        "attempts": 40,
+        "complete": 2,
+        "pickup/hold": 34,
+        "body unstable/drop": 4,
+        "None": 2
+      },
+      "s0057": {
+        "attempts": 40,
+        "complete": 0,
+        "pickup/hold": 30,
+        "body unstable/drop": 10
+      },
+      "s0017": {
+        "attempts": 33,
+        "complete": 1,
+        "pickup/hold": 23,
+        "body unstable/drop": 9,
+        "None": 1
+      },
+      "s0020": {
+        "attempts": 18,
+        "complete": 3,
+        "pickup/hold": 3,
+        "body unstable/drop": 12,
+        "None": 3
+      },
+      "s0040": {
+        "attempts": 17,
+        "complete": 2,
+        "pickup/hold": 1,
+        "body unstable/drop": 14,
+        "None": 2
+      },
+      "s0005": {
+        "attempts": 27,
+        "complete": 4,
+        "pickup/hold": 11,
+        "body unstable/drop": 12,
+        "None": 4
+      },
+      "s0028": {
+        "attempts": 21,
+        "complete": 6,
+        "pickup/hold": 3,
+        "body unstable/drop": 12,
+        "None": 6
+      },
+      "s0009": {
+        "attempts": 27,
+        "complete": 3,
+        "pickup/hold": 14,
+        "body unstable/drop": 10,
+        "None": 3
+      },
+      "s0018": {
+        "attempts": 18,
+        "complete": 0,
+        "pickup/hold": 2,
+        "body unstable/drop": 14,
+        "retraction": 2
+      },
+      "s0029": {
+        "attempts": 19,
+        "complete": 10,
+        "pickup/hold": 4,
+        "body unstable/drop": 5,
+        "None": 10
+      },
+      "s0061": {
+        "attempts": 17,
+        "complete": 1,
+        "pickup/hold": 1,
+        "body unstable/drop": 15,
+        "None": 1
+      },
+      "s0062": {
+        "attempts": 18,
+        "complete": 2,
+        "pickup/hold": 3,
+        "body unstable/drop": 13,
+        "None": 2
+      },
+      "s0027": {
+        "attempts": 17,
+        "complete": 1,
+        "body unstable/drop": 14,
+        "retraction": 2,
+        "None": 1
+      },
+      "s0038": {
+        "attempts": 25,
+        "complete": 0,
+        "body unstable/drop": 22,
+        "pickup/hold": 3
+      },
+      "s0030": {
+        "attempts": 24,
+        "complete": 2,
+        "body unstable/drop": 12,
+        "pickup/hold": 9,
+        "None": 2,
+        "retraction": 1
+      },
+      "s0044": {
+        "attempts": 17,
+        "complete": 14,
+        "body unstable/drop": 3,
+        "None": 14
+      },
+      "s0041": {
+        "attempts": 24,
+        "complete": 0,
+        "body unstable/drop": 21,
+        "pickup/hold": 3
+      },
+      "s0032": {
+        "attempts": 20,
+        "complete": 11,
+        "body unstable/drop": 7,
+        "None": 11,
+        "pickup/hold": 2
+      },
+      "s0003": {
+        "attempts": 20,
+        "complete": 3,
+        "body unstable/drop": 17,
+        "None": 3
+      },
+      "s0000": {
+        "attempts": 16,
+        "complete": 15,
+        "None": 15,
+        "body unstable/drop": 1
+      },
+      "s0001": {
+        "attempts": 16,
+        "complete": 16,
+        "None": 16
+      },
+      "s0002": {
+        "attempts": 16,
+        "complete": 13,
+        "body unstable/drop": 3,
+        "None": 13
+      },
+      "s0004": {
+        "attempts": 16,
+        "complete": 11,
+        "None": 11,
+        "body unstable/drop": 4,
+        "retraction": 1
+      },
+      "s0006": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "retraction": 1,
+        "body unstable/drop": 1
+      },
+      "s0007": {
+        "attempts": 16,
+        "complete": 16,
+        "None": 16
+      },
+      "s0008": {
+        "attempts": 16,
+        "complete": 16,
+        "None": 16
+      },
+      "s0010": {
+        "attempts": 16,
+        "complete": 15,
+        "retraction": 1,
+        "None": 15
+      },
+      "s0011": {
+        "attempts": 16,
+        "complete": 5,
+        "body unstable/drop": 11,
+        "None": 5
+      },
+      "s0012": {
+        "attempts": 16,
+        "complete": 16,
+        "None": 16
+      },
+      "s0013": {
+        "attempts": 17,
+        "complete": 14,
+        "None": 14,
+        "body unstable/drop": 2,
+        "pickup/hold": 1
+      },
+      "s0014": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "body unstable/drop": 2
+      },
+      "s0015": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "body unstable/drop": 2
+      },
+      "s0016": {
+        "attempts": 16,
+        "complete": 8,
+        "None": 8,
+        "body unstable/drop": 6,
+        "retraction": 2
+      },
+      "s0019": {
+        "attempts": 16,
+        "complete": 12,
+        "None": 12,
+        "body unstable/drop": 3,
+        "retraction": 1
+      },
+      "s0021": {
+        "attempts": 16,
+        "complete": 1,
+        "body unstable/drop": 15,
+        "None": 1
+      },
+      "s0022": {
+        "attempts": 16,
+        "complete": 9,
+        "None": 9,
+        "retraction": 3,
+        "body unstable/drop": 4
+      },
+      "s0023": {
+        "attempts": 16,
+        "complete": 13,
+        "retraction": 1,
+        "None": 13,
+        "body unstable/drop": 2
+      },
+      "s0024": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "body unstable/drop": 2
+      },
+      "s0025": {
+        "attempts": 17,
+        "complete": 16,
+        "None": 16,
+        "pickup/hold": 1
+      },
+      "s0026": {
+        "attempts": 16,
+        "complete": 16,
+        "None": 16
+      },
+      "s0031": {
+        "attempts": 16,
+        "complete": 15,
+        "None": 15,
+        "body unstable/drop": 1
+      },
+      "s0033": {
+        "attempts": 16,
+        "complete": 12,
+        "body unstable/drop": 4,
+        "None": 12
+      },
+      "s0035": {
+        "attempts": 16,
+        "complete": 0,
+        "retraction": 5,
+        "body unstable/drop": 11
+      },
+      "s0036": {
+        "attempts": 16,
+        "complete": 12,
+        "body unstable/drop": 4,
+        "None": 12
+      },
+      "s0037": {
+        "attempts": 18,
+        "complete": 13,
+        "None": 13,
+        "body unstable/drop": 4,
+        "pickup/hold": 1
+      },
+      "s0039": {
+        "attempts": 17,
+        "complete": 14,
+        "None": 14,
+        "pickup/hold": 2,
+        "body unstable/drop": 1
+      },
+      "s0042": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "retraction": 1,
+        "body unstable/drop": 1
+      },
+      "s0043": {
+        "attempts": 16,
+        "complete": 14,
+        "retraction": 1,
+        "None": 14,
+        "body unstable/drop": 1
+      },
+      "s0047": {
+        "attempts": 18,
+        "complete": 13,
+        "None": 13,
+        "body unstable/drop": 3,
+        "pickup/hold": 2
+      },
+      "s0048": {
+        "attempts": 16,
+        "complete": 12,
+        "None": 12,
+        "retraction": 2,
+        "body unstable/drop": 2
+      },
+      "s0049": {
+        "attempts": 16,
+        "complete": 14,
+        "None": 14,
+        "retraction": 2
+      },
+      "s0050": {
+        "attempts": 16,
+        "complete": 1,
+        "body unstable/drop": 12,
+        "retraction": 3,
+        "None": 1
+      },
+      "s0052": {
+        "attempts": 16,
+        "complete": 13,
+        "None": 13,
+        "body unstable/drop": 3
+      },
+      "s0053": {
+        "attempts": 16,
+        "complete": 12,
+        "None": 12,
+        "retraction": 1,
+        "body unstable/drop": 3
+      },
+      "s0054": {
+        "attempts": 16,
+        "complete": 10,
+        "None": 10,
+        "body unstable/drop": 5,
+        "retraction": 1
+      },
+      "s0055": {
+        "attempts": 16,
+        "complete": 0,
+        "body unstable/drop": 16
+      },
+      "s0056": {
+        "attempts": 16,
+        "complete": 11,
+        "None": 11,
+        "retraction": 1,
+        "body unstable/drop": 4
+      },
+      "s0058": {
+        "attempts": 16,
+        "complete": 16,
+        "None": 16
+      },
+      "s0059": {
+        "attempts": 16,
+        "complete": 16,
+        "None": 16
+      },
+      "s0060": {
+        "attempts": 16,
+        "complete": 4,
+        "body unstable/drop": 12,
+        "None": 4
+      },
+      "s0063": {
+        "attempts": 16,
+        "complete": 6,
+        "retraction": 1,
+        "None": 6,
+        "body unstable/drop": 9
+      }
+    },
+    "weights": {
+      "runs/support-pressure-20261003/train/joint-early-v28/update_000150.pth": "f9760946e2ad5f88dc97a1df278fefb3857133f274edea276ba1106777d14005",
+      "runs/support-pressure-20261003/train/joint-early-v28/update_000100.pth": "f0eec19b5849dc221031fcd1c649c07753b563d22a130c90bf5655e3d2a95576",
+      "runs/support-pressure-20261003/train/joint-early-v28/update_000050.pth": "5a662651bd434ef587af486f32394eb04f117d24a80cde2e2f816465215217fb"
+    }
+  }
+]

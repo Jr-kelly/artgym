@@ -33,7 +33,7 @@ def gym_transform(position,quaternion=(0,0,0,1)):
 class G2ContinuousScene:
     def __init__(self,n=8,seed=2026100356,randomization_scale=0.,instances=None,
                  load_max=.1,detent_max=.1,contact_progress_reward=0.,reference_spec=None,
-                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False,graphics=False,disabled_perturbations=(),action_parameterization='incremental',resistance_integration='legacy-explicit',load_min=0.,detent_min=0.,asset_registry=None):
+                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False,graphics=False,disabled_perturbations=(),action_parameterization='incremental',resistance_integration='legacy-explicit',load_min=0.,detent_min=0.,asset_registry=None,proprioceptive_pressure_spec=None):
         self.n=n;self.device='cuda:0';self.seed=seed
         self.disabled_perturbations=set(disabled_perturbations)
         assert self.disabled_perturbations <= {'calibration','placement','sensor','latency','material'}
@@ -116,6 +116,13 @@ class G2ContinuousScene:
         self.detent_amplitude=torch.zeros_like(self.load_amplitude)
         self.load_force=torch.zeros_like(self.load_amplitude)
         self.cal_object=torch.zeros((n,7),device=self.device);self.cal_slider=self.cal_object.clone()
+        self.proprioceptive_pressure_spec=proprioceptive_pressure_spec or (scene_spec.get('proprioceptive_pressure_spec') if scene_spec else None)
+        self.pressure_adapter=None
+        if self.proprioceptive_pressure_spec:
+            assert self.takeover_frame==480 and self.resistance_integration=='solver-brake'
+            from scripts.wuji_joint_deflection_pressure import BatchedJointDeflectionPressure
+            self.pressure_adapter=BatchedJointDeflectionPressure(self.proprioceptive_pressure_spec,n,self.device,np.asarray(self.cfg.hand.dof_props.stiffness))
+            if self.scene_spec:self.scene_spec=dict(self.scene_spec,proprioceptive_pressure_spec=self.proprioceptive_pressure_spec)
         self.actual_materials={};self.transitions=0;self.episodes=0;self.stats=[]
         self._features=None;self._measurement=None
         self.gym=gymapi.acquire_gym();sp=gymapi.SimParams();sp.dt=1/240;sp.substeps=1
@@ -266,6 +273,9 @@ class G2ContinuousScene:
         for key,dest in [('object_in_wrist',self.cal_object),('slider_in_wrist',self.cal_slider)]:
             position,rotation=self.cal_prior[key]
             dest[ids]=torch.cat([position[ids]+translation,quat_mul(delta,rotation[ids])],-1)
+        if self.pressure_adapter is not None:
+            normal=quat_apply(self.cal_object[ids,3:7],self.tensor([0,1,0])[None].expand(k,-1))
+            self.pressure_adapter.reset(ids,normal)
         self.target[ids,:]=0.;self.target[ids[:,None],self.arm_ids]=self.approach[0]
         self.target[ids[:,None],self.hand_ids]=self.opened_batch[ids]
         self.command_target[ids]=self.target[ids];self.delayed_target[ids]=self.target[ids]
@@ -335,6 +345,7 @@ class G2ContinuousScene:
         if len(ready):
             initial_targets=self.command_target if self.resistance_integration=='solver-brake' else self.target
             self.bridge.takeover(ready,q[ready],initial_targets[ready][:,self.hand_ids],self.cal_object[ready],self.cal_slider[ready])
+            if self.pressure_adapter is not None:self.pressure_adapter.handover_anchor(ready)
             self.reference.reset(ready,clock_s=self.takeover_frame/30)
             self.reference_pose[ready]=self.rb[ready,self.object_index,:7]
             wrist=self.rb[ready,self.wrist_index]; obj=self.rb[ready,self.object_index]
@@ -401,10 +412,23 @@ class G2ContinuousScene:
         if self.resistance_integration=='solver-brake':executed=proposed
         aq,hq=self.prefix_targets()
         ids=active.nonzero(as_tuple=False).flatten()
+        pressure_desired=None
+        if self.pressure_adapter is not None:
+            pressure_desired=hq.clone()
+            proposed_targets=self.bridge.known.initial+.04*executed
+            proposed_targets[:,16:]=self.bridge.known.issued[:,16:]+.025*executed[:,16:]
+            pressure_desired[ids]=proposed_targets[ids]
+            adjusted=self.pressure_adapter.command(self._measurement,self.command_target[:,self.hand_ids],pressure_desired,self.age.float()/30)
+            hq[~active]=adjusted[~active]
+            converted=(adjusted-self.bridge.known.initial)/.04
+            converted[:,16:]=(adjusted[:,16:]-self.bridge.known.issued[:,16:])/.025
+            executed=torch.where(active[:,None],converted.clamp(-1,1),torch.zeros_like(executed))
         if len(ids):
             # Update the same independent issued-target memory used by deployment.
             predicted=self.bridge.known.step(executed)
             hq[ids]=predicted[ids]
+            if self.pressure_adapter is not None:
+                self.pressure_adapter.offset[ids]=predicted[ids,16:]-pressure_desired[ids,16:]+self.pressure_adapter.anchor[ids]
         self.target[:,self.arm_ids]=aq;self.target[:,self.hand_ids]=hq
         self.target=torch.minimum(torch.maximum(self.target,self.limitlow),self.limithi)
         self.bridge.known.issued[~active]=self.target[~active][:,self.hand_ids]

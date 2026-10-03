@@ -20,60 +20,26 @@
   "no_subagents": true,
   "no_real_robot_commands": true,
   "last_event": {
-    "utc": "2026-10-03T08:58:41.364298+00:00",
-    "event": "joint_family_parallel_learning_pilots_started",
-    "evidence": "research/support-pressure-20261003/run_joint_training_v28.py",
-    "config": {
-      "verified_launch_utc": "2026-10-03T08:58:15Z",
-      "gpu_to_launcher_pid": {
-        "0": 6759,
-        "1": 6760,
-        "2": 6761,
-        "3": 6762
-      },
-      "variants": [
-        "base noise.5 takeover16",
-        "noise1 takeover16",
-        "noise1+legal16Dhistory takeover16",
-        "noise1 takeover8"
-      ],
-      "envs_each": 256,
-      "updates_each": 150,
-      "physical_train_assets": 64,
-      "initialize_checkpoint_sha256": "e6494d85cdb7a010b125cd6b8079dd0ebae6e27cd91b5e171f7c2e9a92b40b6d",
-      "action_units": "boundedmotorposition radians",
-      "history_weight_initialization": "Preserve original154public and27critic truth columns; extra16legalhistory input weights zero at initialization, original model head retained"
-    },
-    "next": "Inspect substantivecontact/holding/fullcompletion onbroadjointtypes atcheckpoint50/100; extendusefulruns only",
-    "state_updates": {
-      "active_remote_training_jobs": [
-        "joint-base-v28",
-        "joint-noisier-v28",
-        "joint-history-v28",
-        "joint-early-v28"
-      ],
-      "active_remote_training_launcher_pids": [
-        6759,
-        6760,
-        6761,
-        6762
-      ]
-    }
+    "utc": "2026-10-03T09:27:08.657311+00:00",
+    "event": "portable_initial_estimate_continuous_entrypoint_added",
+    "evidence": "scripts/run_wuji_support_demo.py",
+    "conclusion": "Uses same commonplanner and actualcontinuous runner, explicitseparation of noisyinitial observation fromphysicalasset. CLIhelp verified; fullrestoredexecution pendingfinalcandidate, no hardwareSDK invented.",
+    "next": "Closeactiveexperimentpairs, execute two boundedknownstroke trials and preserve newsource/configsnapshot"
   },
-  "next": "Inspect substantivecontact/holding/fullcompletion onbroadjointtypes atcheckpoint50/100; extendusefulruns only",
+  "next": "Closeactiveexperimentpairs, execute two boundedknownstroke trials and preserve newsource/configsnapshot",
   "active_remote_launcher_pid": null,
   "active_local_training_pid": null,
   "remote_connection_status": "Persistent home SSH verified 2026-10-03 08:33 UTC; four H200 available",
   "active_local_video_launcher_pid": null,
   "github_branch": "feat/wuji-support-pressure-20261003",
-  "github_commit": "4ab264225fc44cd7d63e313f0ec0349ba9309e80",
-  "local_scientific_commit": "67253037e6f3ee3f66f38028a57878e4a3574915",
+  "github_commit": "dd8762112a603e39b6f736dc2915ffcdb74b8ee6",
+  "local_scientific_commit": "e3c7ed19231d6255a0fb7ff30b2ec36d3656e56f",
   "remote_root": "/home/wangjiarui/artgym-support-pressure-20261003",
   "active_remote_training_jobs": [
-    "joint-base-v28",
-    "joint-noisier-v28",
-    "joint-history-v28",
-    "joint-early-v28"
+    "joint-base-continuation-v31",
+    "joint-noisier-continuation-v31",
+    "joint-looser-v34",
+    "joint-pressure-v34"
   ],
   "active_remote_demo_launcher_pid": null,
   "active_remote_variant_launcher_pid": null,
@@ -86,9 +52,9 @@
   "active_remote_pressure_tier_launcher_pid": null,
   "active_remote_resource_sampler_pid": 6329,
   "active_remote_training_launcher_pids": [
-    6759,
-    6760,
-    6761,
-    6762
+    7704,
+    7705,
+    8220,
+    8221
   ]
 }

@@ -31,6 +31,9 @@ class ScheduledThumbReference:
         self.preload_anchor=torch.zeros((n,20),device=device)
         self.preload_delta=None
         if self.preload_schedule:self.preload_delta=torch.tensor(self.preload_schedule['delta_q'],device=device)
+        self.stroke_support=None
+        if 'support_offset_rad' in rows[0]:
+            self.stroke_support=torch.tensor([r['support_offset_rad'] for r in rows],device=device)
 
     def reset(self, ids, clock_s=0.):
         self.age[ids] = 0
@@ -70,6 +73,15 @@ class ScheduledThumbReference:
         desired_q = initial[:,16:]+first*(1.-alpha)+last*alpha-zero
         self.last_target = initial.clone()
         self.last_target[:,16:] = desired_q
+        if self.stroke_support is not None:
+            if self.stroke_support.ndim==3:
+                ids=torch.arange(len(initial),device=initial.device)
+                support_first,support_last=self.stroke_support[ids,index],self.stroke_support[ids,index+1]
+                support_zero=self.stroke_support[:,0]
+            else:
+                support_first,support_last=self.stroke_support[index],self.stroke_support[index+1]
+                support_zero=self.stroke_support[0]
+            self.last_target[:,:16]+=support_first*(1.-alpha)+support_last*alpha-support_zero
         if self.preload_schedule:
             assert clock_s is not None, 'Preload transition requires the known episode clock'
             self.last_target+=self.preload(clock_s)-self.preload_anchor

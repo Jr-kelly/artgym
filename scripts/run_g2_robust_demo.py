@@ -69,11 +69,14 @@ def main():
   initial_delta=center_delta+np.asarray(initial_estimate['slider_contact_shift_m'])+np.array([0,(initial_estimate['handle_size_WTL_m'][1]-.012)/2,0])
   policy_slider_estimate=policy_slider_estimate.copy();policy_slider_estimate[:3,3]+=policy_relative[:3,:3]@initial_delta
  pressure_spec=None
- if a.proprioceptive_pressure_config:
+ if a.proprioceptive_pressure_config or policy.proprioceptive_pressure_spec:
   assert a.takeover_seconds==16 and a.handover_calibration and a.residual_checkpoint and not a.thumb_script
   from scripts.wuji_proprioceptive_pressure import ProprioceptivePressure,CoordinatedProprioceptivePressure
-  pressure_spec=json.loads(a.proprioceptive_pressure_config.read_text());assert pressure_spec['prefix_freeze_s']<=16-50/30
+  pressure_spec=json.loads(a.proprioceptive_pressure_config.read_text()) if a.proprioceptive_pressure_config else policy.proprioceptive_pressure_spec;assert pressure_spec['prefix_freeze_s']<=16-50/30
   adapter=CoordinatedProprioceptivePressure if pressure_spec.get('coordinate_support') else ProprioceptivePressure
+  if pressure_spec.get('model_implementation')=='analytic-torch-v1':
+   from scripts.wuji_joint_deflection_pressure import NativeJointDeflectionPressure
+   adapter=NativeJointDeflectionPressure
   policy.pressure_adapter=adapter(pressure_spec,policy_relative[:3,1],np.array(cfg.hand.dof_props.stiffness))
  def close_motor(u):
   if not a.grasp_plan or 'close_waypoints' not in plan:return opened+smooth(u)*(closed-opened)

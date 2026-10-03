@@ -31,10 +31,11 @@ class G2R800Policy(FrozenPolicy):
         self.last_encoder_input = None; self.last_observation = None
         assert 0<=thumb_action_gain<=1 and 0<=support_action_gain<=1
         self.thumb_action_gain=thumb_action_gain;self.support_action_gain=support_action_gain
-        self.residual=None;self.last_public_features=None;self.thumb_reference=None;self.history_features=False;self.support_estimator=None;self.action_parameterization='incremental';self.pressure_adapter=None
+        self.residual=None;self.last_public_features=None;self.thumb_reference=None;self.history_features=False;self.support_estimator=None;self.action_parameterization='incremental';self.pressure_adapter=None;self.proprioceptive_pressure_spec=None
         if residual_checkpoint is not None:
             from scripts.wuji_robust_learning import ResidualActorCritic
             saved=torch.load(residual_checkpoint,map_location='cpu')
+            self.proprioceptive_pressure_spec=saved.get('proprioceptive_pressure_spec')
             assert saved['format']=='wuji-r800-residual-ppo-v1'
             assert saved['student_sha256']==hashlib.sha256(Path(student).read_bytes()).hexdigest()
             assert saved['teacher_sha256']==hashlib.sha256(Path(teacher).read_bytes()).hexdigest()
@@ -113,6 +114,8 @@ class G2R800Policy(FrozenPolicy):
                 desired=self.pressure_adapter.command(q,self.known.issued[0].cpu().numpy(),proposed[0].cpu().numpy(),clock_s)
                 action=(self.tensor(desired)-self.known.initial)/.04;action[:,16:]=(self.tensor(desired)[:,16:]-self.known.issued[:,16:])/.025;action=action.clamp(-1,1)
             target = self.known.step(action)
+            if self.pressure_adapter is not None and hasattr(self.pressure_adapter,'commit_issued'):
+                self.pressure_adapter.commit_issued(target[0].cpu().numpy(),proposed[0].cpu().numpy())
         self.last_action = action[0].cpu().numpy()
         self.last_raw_action = raw_action[0].cpu().numpy()
         return target[0].cpu().numpy(), self.last_action.copy()
