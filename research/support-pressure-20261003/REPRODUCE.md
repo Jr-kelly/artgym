@@ -120,3 +120,5 @@ python -m scripts.repack_wuji_observer_data --mode unpack \
 HTML 直接内嵌七条完整视频，七条原始全景 MP4 为独立 Release 资产；近景和所有原始视频在 `support-movies.tar.gz`。失败和逐帧数据在 `support-evidence.tar.gz`。归档 STATE 是打包时的快照，公开发布与最终结束回执在分支最新 HANDOFF，不能把快照中的 PID 当成活跃事实。
 
 新增162维观察器/冻结拇指完整800状态在同一恢复目录实际续到805；跨过16秒控制接管并执行有效残差优化，冻结拇指与观察器字节未改变，Adam/RNG保留。证据 `actual-observer-fullstate-resume-v158-results.json`。这仅验证恢复功能，重启物理训练样本存在大量失败，不采用805或将其称为新性能。
+
+最终公开包的附加恢复证据：`actual-final-overlay-command-recovery-v163-results.json` 记录GitHub下载后恢复162维候选的600帧重放，目标差异约4.7微弧度；`actual-fresh-observer-data-restoration-v165-results.json` 记录第二份数据还原的原始SHA256。主冻结750的单次4090计算时序在 `profile_frozen_replay_v166.py`，600帧重放差异约0.95微弧度，稳态中位2.47 ms，首帧370 ms；不包含SDK、测量或电机通信耗时。辅助检查源文件与最终公开发布/资源回执归入单独的 `support-publication-receipts.tar.gz`，不替换冻结策略。

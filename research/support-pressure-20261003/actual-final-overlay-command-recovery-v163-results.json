@@ -1,0 +1,105 @@
+{
+  "restoration": {
+    "utc": "2026-10-03T19:15:24.998073+00:00",
+    "verified": [
+      {
+        "name": "support-observer-recovery.tar.gz",
+        "bytes": 189776655,
+        "sha256": "7cfcb0f131730666b67188fec9e642303966ad9802b9b6b656cb866f31c28152",
+        "members_verified": 40
+      },
+      {
+        "name": "support-final-records.tar.gz",
+        "bytes": 36520735,
+        "sha256": "b4830af9718b573fe6055878d0dd264ae99759676a1a2cb41914f4ce4a73f51b",
+        "members_verified": 3220
+      }
+    ],
+    "command": [
+      "/home/agiuser/miniconda3/envs/artgym/bin/python",
+      "-m",
+      "scripts.replay_wuji_support_commands",
+      "--input",
+      "runs/support-pressure-20261003/final-overlay-replay-input-v163/legal-measurements.npz",
+      "--estimate",
+      "runs/support-pressure-20261003/final-overlay-replay-input-v163/estimate.json",
+      "--calibration",
+      "research/robust-knife-family-20261003/handover-from-v25-v1.json",
+      "--reference",
+      "runs/support-pressure-20261003/staged-brace-config-v86/nominal/reference.json",
+      "--checkpoint",
+      "runs/support-pressure-20261003/train/strong750-observer162frozen-support-observer-v150-retry1/update_000800.pth",
+      "--takeover-seconds",
+      "16",
+      "--output",
+      "runs/support-pressure-20261003/final-overlay-observer162-replay-v163"
+    ],
+    "scope": "GitHubdownloaded newoptionalhead/fullstate package then finalsource overlay verifiedin existing single restoredproject; actualofflinelegal-input replay only. Earlier36s restoredphysics result retained; no newcandidate or hardware",
+    "exit_code": 0
+  },
+  "replay": {
+    "scope": "Offline inference only; no physics scene, robot SDK, or current object/contact/load input",
+    "physics_performance_claim": false,
+    "real_robot_ran": false,
+    "learned_takeover_seconds": 16.0,
+    "support_latch_after_preparation": false,
+    "control_hz": 30,
+    "r800_input_dim": 2076,
+    "residual_input_dim": 162,
+    "support_load_feature_spec": null,
+    "support_estimator_metadata": {
+      "format": "g2-legal-temporal-support-estimator-v1",
+      "input_dim": 134,
+      "label_scales": {
+        "progress_m": 0.04,
+        "position_m": 0.01,
+        "rotation_rad": 0.25
+      },
+      "data_sha256": "27c1e00d943ed5ff546e2c99bce8fe870940e764889f2ae0439908dbdd8625b0",
+      "source_checkpoint_sha256": "f5f6e6926f0564eae122e7cd9b0842d6ed9b476e5be646e57ff53e34287fa99b",
+      "source_checkpoint": "runs/support-pressure-20261003/observer-head-v149/best.pth",
+      "runtime_scope": "Original134 measured/knownchannels; optionalfrozenSC16 orsamelegal50x40history. Estimated8 outputs, no truth/asset/material inputs."
+    },
+    "support_delta_coordinates": null,
+    "command_frames": 600,
+    "max_target_difference_from_recorded_rad": 4.708766937255859e-06,
+    "hand_joint_names": [
+      "hand_r_index_joint1",
+      "hand_r_index_joint2",
+      "hand_r_index_joint3",
+      "hand_r_index_joint4",
+      "hand_r_middle_joint1",
+      "hand_r_middle_joint2",
+      "hand_r_middle_joint3",
+      "hand_r_middle_joint4",
+      "hand_r_pinky_joint1",
+      "hand_r_pinky_joint2",
+      "hand_r_pinky_joint3",
+      "hand_r_pinky_joint4",
+      "hand_r_ring_joint1",
+      "hand_r_ring_joint2",
+      "hand_r_ring_joint3",
+      "hand_r_ring_joint4",
+      "hand_r_thumb_joint1",
+      "hand_r_thumb_joint2",
+      "hand_r_thumb_joint3",
+      "hand_r_thumb_joint4"
+    ],
+    "arm_joint_names": [
+      "idx61_arm_r_joint1",
+      "idx62_arm_r_joint2",
+      "idx63_arm_r_joint3",
+      "idx64_arm_r_joint4",
+      "idx65_arm_r_joint5",
+      "idx66_arm_r_joint6",
+      "idx67_arm_r_joint7"
+    ],
+    "input_sha256": "7cb6a7143fac2bca586cea8a1e4961852cc80f85ebc8ca853bc57bf7b91182b2",
+    "checkpoint_sha256": "a57ac270d215e3fad91b83126e61be8078fe36602342d748cff12f7fa93d6471",
+    "remaining_hardware_requirements": [
+      "Actual G2/Wuji SDK joint-name and unit mapping",
+      "Measured joint timestamps and bounded position-target interface",
+      "Measured initial geometry/grip calibration; effort/gravity implementation verification"
+    ]
+  }
+}

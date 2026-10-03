@@ -25,25 +25,28 @@
   "no_subagents": true,
   "no_real_robot_commands": true,
   "last_event": {
-    "utc": "2026-10-03T19:03:34.247847+00:00",
-    "event": "support_delivery_package_closed",
+    "utc": "2026-10-03T19:27:25.647777+00:00",
+    "event": "final_publication_receipt_assets_and_release_notes_verified",
     "config": {
-      "group": "evidence",
-      "files": 2128,
-      "bytes": 274797157
+      "assets": 32,
+      "tag": "wuji-g2-support-pressure-20261003-v1",
+      "immutable_tag_commit": "4a5c1d813325951fe74f792042ba23690d9c2442"
     },
-    "evidence": "runs/support-pressure-20261003/delivery/support-evidence.tar.gz.manifest.json",
-    "sha256": "df149652e8d5ddd54820d8d2711738c5188f7bf6381b041c3e68a69f6b8868c5",
-    "next": "Representative restore/startup and authorized newRelease publication"
+    "next": "Finalpersistentsource/endinghandoff snapshot; no pendingexperiments orhardwareactions",
+    "state_updates": {
+      "release_assets_verified": 32,
+      "public_download_verification_complete": true,
+      "all_experiments_closed": true
+    }
   },
-  "next": "Representative restore/startup and authorized newRelease publication",
+  "next": "Finalpersistentsource/endinghandoff snapshot; no pendingexperiments orhardwareactions",
   "active_remote_launcher_pid": null,
   "active_local_training_pid": null,
   "remote_connection_status": "Persistent home SSH verified 2026-10-03 08:33 UTC; four H200 available",
   "active_local_video_launcher_pid": null,
   "github_branch": "feat/wuji-support-pressure-20261003",
-  "github_commit": "7514c02f7fab43efbc638a76e65c92eb86f218a9",
-  "local_scientific_commit": "a172d87190b1178f680e60394f19eb1c12a60401",
+  "github_commit": "4a5c1d813325951fe74f792042ba23690d9c2442",
+  "local_scientific_commit": "abf6ad32d7a344990044be654af8782c92139768",
   "remote_root": "/home/wangjiarui/artgym-support-pressure-20261003",
   "active_remote_training_jobs": [],
   "active_remote_demo_launcher_pid": null,
@@ -55,11 +58,11 @@
   "active_remote_estimate_launcher_pid": null,
   "active_remote_joint_estimate_launcher_pid": null,
   "active_remote_pressure_tier_launcher_pid": null,
-  "active_remote_resource_sampler_pid": 476,
+  "active_remote_resource_sampler_pid": null,
   "active_remote_training_launcher_pids": [],
   "remote_jobs_status_utc": "2026-10-03T12:17:00Z",
   "active_remote_jobs": null,
-  "remote_process_verification_utc": "2026-10-03T18:54:32Z",
+  "remote_process_verification_utc": "2026-10-03T19:21:39.769443+00:00",
   "active_remote_native_launcher_pids": [],
   "candidate_frozen": true,
   "training_closed": true,
@@ -73,6 +76,11 @@
   "frozen_candidate_training_closed": true,
   "active_remote_observer_training_launchers": null,
   "active_remote_observer_native_launchers": null,
-  "observer_route_adopted": false
+  "observer_route_adopted": false,
+  "release_public": true,
+  "release_url": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-g2-support-pressure-20261003-v1",
+  "release_assets_verified": 32,
+  "public_download_verification_complete": true,
+  "all_experiments_closed": true
 }
 ```
