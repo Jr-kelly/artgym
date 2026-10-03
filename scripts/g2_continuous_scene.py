@@ -33,7 +33,7 @@ def gym_transform(position,quaternion=(0,0,0,1)):
 class G2ContinuousScene:
     def __init__(self,n=8,seed=2026100356,randomization_scale=0.,instances=None,
                  load_max=.1,detent_max=.1,contact_progress_reward=0.,reference_spec=None,
-                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False,graphics=False,disabled_perturbations=(),action_parameterization='incremental'):
+                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False,graphics=False,disabled_perturbations=(),action_parameterization='incremental',resistance_integration='legacy-explicit',load_min=0.,detent_min=0.):
         self.n=n;self.device='cuda:0';self.seed=seed
         self.disabled_perturbations=set(disabled_perturbations)
         assert self.disabled_perturbations <= {'calibration','placement','sensor','latency','material'}
@@ -46,6 +46,10 @@ class G2ContinuousScene:
         torch.backends.cudnn.allow_tf32=False
         torch.manual_seed(seed);self.rng=np.random.default_rng(seed)
         self.randomization_scale=randomization_scale;self.load_max=load_max;self.detent_max=detent_max
+        assert resistance_integration in ['legacy-explicit','solver-brake']
+        assert 0<=load_min<=load_max and 0<=detent_min<=detent_max
+        self.resistance_integration=resistance_integration;self.load_min=load_min;self.detent_min=detent_min
+        self.slider_drive_properties=[]
         assert 8<=takeover_seconds<=16 and abs(takeover_seconds*30-round(takeover_seconds*30))<1e-6
         self.takeover_frame=round(takeover_seconds*30)
         self.load_profile=load_profile;self.load_frequency=load_frequency
@@ -158,7 +162,11 @@ class G2ContinuousScene:
             self.gym.set_actor_rigid_shape_properties(env,knife,shapes)
             op=self.gym.get_actor_dof_properties(env,knife);self.lower.append(float(op['lower'][0]))
             op['driveMode'][:]=gymapi.DOF_MODE_EFFORT;op['stiffness'][:]=0;op['damping'][:]=.3;op['friction'][:]=.001;op['armature'][:]=.001
+            if self.resistance_integration=='solver-brake':
+                op['driveMode'][:]=gymapi.DOF_MODE_VEL;op['damping'][:]=250.;op['effort'][:]=max(load_max,1e-8)
             self.gym.set_actor_dof_properties(env,knife,op)
+            if self.resistance_integration=='solver-brake':self.gym.set_actor_dof_velocity_targets(env,knife,np.zeros(1,dtype=np.float32))
+            self.slider_drive_properties.append(op.copy())
             initial_state=np.zeros(27,dtype=gymapi.DofState.dtype)
             initial_state['pos'][self.arm]=np.asarray(self.acquisition['approach_q'][0])
             initial_state['pos'][self.hand]=np.asarray(self.plan['open_q'])
@@ -185,6 +193,7 @@ class G2ContinuousScene:
         self.masses=self.tensor([b.mass for b in masses][1:]);assert self.jac.shape[1]==len(self.masses)
         self.origins=self.tensor(self.origins);self.lower=self.tensor(self.lower)
         self.target=torch.zeros((n,27),device=self.device);self.forces=torch.zeros((n,28),device=self.device)
+        self.command_target=self.target.clone();self.delayed_target=self.target.clone()
         self.hand_ids=torch.tensor(self.hand,device=self.device);self.arm_ids=torch.tensor(self.arm,device=self.device)
         self.object_index=self.robot_body_count+1;self.slider_index=self.robot_body_count+2
         self.reference_pose=torch.zeros((n,7),device=self.device)
@@ -221,6 +230,10 @@ class G2ContinuousScene:
         if 'latency' in self.disabled_perturbations:self.delay[ids]=False
         self.load_amplitude[ids]=torch.rand(k,device=self.device)*self.load_max*s if s else .05
         self.detent_amplitude[ids]=torch.rand(k,device=self.device)*self.detent_max*s if s else .05
+        if self.resistance_integration=='solver-brake':
+            # Load ranges are independent of the geometric/noise curriculum.
+            self.load_amplitude[ids]=self.load_min+torch.rand(k,device=self.device)*(self.load_max-self.load_min)
+            self.detent_amplitude[ids]=self.detent_min+torch.rand(k,device=self.device)*(self.detent_max-self.detent_min)
         self.load_phase[ids]=torch.rand(k,device=self.device)*2*np.pi if s else .4
         translation=(torch.rand((k,3),device=self.device)-.5)*.002*s
         angle=(torch.rand((k,3),device=self.device)-.5)*np.deg2rad(3)*s
@@ -232,6 +245,7 @@ class G2ContinuousScene:
             dest[ids]=torch.cat([position[None]+translation,quat_mul(delta,rotation[None].expand(k,-1))],-1)
         self.target[ids,:]=0.;self.target[ids[:,None],self.arm_ids]=self.approach[0]
         self.target[ids[:,None],self.hand_ids]=self.opened
+        self.command_target[ids]=self.target[ids];self.delayed_target[ids]=self.target[ids]
         self.dof[ids,:,:]=0.;self.dof[ids,:27,0]=self.target[ids];self.dof[ids,27,0]=self.lower[ids]
         # Installed Preview4 tensors use environment-local coordinates, verified
         # against refreshed native roots. Adding env origins double-translates.
@@ -281,6 +295,7 @@ class G2ContinuousScene:
             alpha=smooth((u[selected]-first['fraction'])/(last['fraction']-first['fraction'])).unsqueeze(-1)
             closed_values[selected]=self.tensor(first['q'])*(1-alpha)+self.tensor(last['q'])*alpha
         hq[closing]=closed_values;hq[t>=8]=self.closed
+        if self.reference.preload_schedule:hq[t>=8]+=self.reference.preload(t)[t>=8]
         if self.middle_support is not None:hq=self.middle_support.command(t,self._measurement,hq)
         return aq,hq
 
@@ -294,7 +309,9 @@ class G2ContinuousScene:
         self._measurement=q;self.bridge.record(q,self.last_action)
         ready=(self.age==self.takeover_frame).nonzero(as_tuple=False).flatten()
         if len(ready):
-            self.bridge.takeover(ready,q[ready],self.target[ready][:,self.hand_ids],self.cal_object[ready],self.cal_slider[ready])
+            initial_targets=self.command_target if self.resistance_integration=='solver-brake' else self.target
+            self.bridge.takeover(ready,q[ready],initial_targets[ready][:,self.hand_ids],self.cal_object[ready],self.cal_slider[ready])
+            self.reference.reset(ready,clock_s=self.takeover_frame/30)
             self.reference_pose[ready]=self.rb[ready,self.object_index,:7]
             wrist=self.rb[ready,self.wrist_index]; obj=self.rb[ready,self.object_index]
             inverse=quat_conjugate(wrist[:,3:7])
@@ -349,7 +366,7 @@ class G2ContinuousScene:
         self.features()
         if action_scale is None:action_scale=self.scale
         active=self.policy_active.clone();oldage=self.age.clone();operation_active=oldage>=480
-        base=self.reference.action(self.bridge.known.initial,self.bridge.known.issued,self.goal)
+        base=self.reference.action(self.bridge.known.initial,self.bridge.known.issued,self.goal,measured_q=self._measurement,clock_s=self.age.float()/30)
         if self.action_parameterization=='bounded-motor-offset':
             from scripts.wuji_bounded_motor_residual import bounded_motor_residual_action
             proposed=bounded_motor_residual_action(self.reference.last_target,self.bridge.known,residual,action_scale)
@@ -357,6 +374,7 @@ class G2ContinuousScene:
         proposed=torch.where(active[:,None],proposed,torch.zeros_like(proposed))
         executed=torch.where(self.delay[:,None],self.delayed_action,proposed)
         self.delayed_action=proposed.detach().clone();executed=torch.where(active[:,None],executed,torch.zeros_like(executed))
+        if self.resistance_integration=='solver-brake':executed=proposed
         aq,hq=self.prefix_targets()
         ids=active.nonzero(as_tuple=False).flatten()
         if len(ids):
@@ -366,6 +384,12 @@ class G2ContinuousScene:
         self.target[:,self.arm_ids]=aq;self.target[:,self.hand_ids]=hq
         self.target=torch.minimum(torch.maximum(self.target,self.limitlow),self.limithi)
         self.bridge.known.issued[~active]=self.target[~active][:,self.hand_ids]
+        if self.resistance_integration=='solver-brake':
+            # Record commands when issued. Unknown physical latency delays
+            # their application, never improves the actor's command memory.
+            self.command_target=self.target.clone()
+            self.target=torch.where(self.delay[:,None],self.delayed_target,self.command_target)
+            self.delayed_target=self.command_target.clone()
         self.last_action=executed.detach().clone();self.bridge.last_action=self.last_action.clone()
         previous_error=(self.dof[:,27,0]-self.lower-self.goal).abs()
         for substep in range(8):
@@ -387,6 +411,12 @@ class G2ContinuousScene:
             x=(q-.021)/.0015
             groove=-self.detent_amplitude*np.pi*.5*torch.sin(np.pi*x)*(x.abs()<1).float()
             self.load_force=run+start+groove;self.forces[:,27]=self.load_force
+            if self.resistance_integration=='solver-brake':
+                from scripts.wuji_passive_solver_brake import brake_capacity_numpy
+                capacity=brake_capacity_numpy(q.detach().cpu().numpy(),t.detach().cpu().numpy(),self.load_amplitude.cpu().numpy(),self.detent_amplitude.cpu().numpy(),self.load_frequencies.cpu().numpy(),self.load_phase.cpu().numpy(),self.load_profile_ids.cpu().numpy())
+                for i,value in enumerate(capacity):
+                    properties=self.slider_drive_properties[i];properties['effort'][:]=max(float(value),1e-8);self.gym.set_actor_dof_properties(self.envs[i],self.knives[i],properties)
+                self.load_force=q.new_tensor(capacity);self.forces[:,27]=0.
             self.gym.set_dof_actuation_force_tensor(self.sim,gymtorch.unwrap_tensor(self.forces.flatten()))
             self.gym.simulate(self.sim);self.gym.fetch_results(self.sim,True)
         self.refresh();obj=self.rb[:,self.object_index];height=obj[:,2]-self.origins[:,2]
@@ -444,7 +474,7 @@ class G2ContinuousScene:
             success=bool(finished[i]) and pickup and stable and extend and retract and fraction>=.9
             self.stats.append(dict(episode=self.episodes,env=i,instance=self.instances[i%len(self.instances)],control_steps=int(self.age[i]),pickup_valid=pickup,fall=bool(self.fell[i]),operation_complete=success,endpoints_m=ends,peak_extension_m=float(self.peak[i]),max_body_drift_m=float(self.max_drift[i]),max_body_rotation_rad=float(self.max_rotation[i]),thumb_contact_fraction=fraction,scope='Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation',failure=None if success else 'pickup/hold' if not pickup else 'body unstable/drop' if not stable else 'extension' if not extend else 'retraction' if not retract else 'thumb-contact'))
             self.episodes+=1
-        self.last_diagnostics=dict(slider=travel.detach().clone(),height=height.detach().clone(),rotation=rotation.detach().clone(),drift=drift.detach().clone(),proximity=proximity.detach().clone(),action=executed.detach().clone(),q=self.dof[:,self.hand_ids,0].detach().clone(),arm_q=self.dof[:,self.arm_ids,0].detach().clone(),target=self.target.detach().clone(),object=obj.detach().clone(),wrist=self.rb[:,self.wrist_index].detach().clone(),load=self.load_force.detach().clone(),age=oldage.detach().clone())
+        self.last_diagnostics=dict(slider=travel.detach().clone(),height=height.detach().clone(),rotation=rotation.detach().clone(),drift=drift.detach().clone(),proximity=proximity.detach().clone(),action=executed.detach().clone(),q=self.dof[:,self.hand_ids,0].detach().clone(),arm_q=self.dof[:,self.arm_ids,0].detach().clone(),target=self.target.detach().clone(),issued_target=self.command_target.detach().clone() if self.resistance_integration=='solver-brake' else self.target.detach().clone(),object=obj.detach().clone(),wrist=self.rb[:,self.wrist_index].detach().clone(),load=self.load_force.detach().clone(),age=oldage.detach().clone())
         self._features=None;self._measurement=None
         reset_ids=(done if reset_finished else done&~finished).nonzero(as_tuple=False).flatten()
         if len(reset_ids):self.reset(reset_ids)

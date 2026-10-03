@@ -23,19 +23,38 @@ class ScheduledThumbReference:
         self.previous_goal = torch.full((n,), float('nan'), device=device)
         self.start = torch.zeros(n, device=device)
         self.desired = torch.zeros(n, device=device)
+        self.pacing = specification.get('joint_lag_pacing')
+        self.static_joint_lag = torch.zeros((n,4),device=device)
+        self.last_progress_lag_m = torch.zeros(n,device=device)
+        self.last_pacing_rate = torch.ones(n,device=device)
+        self.preload_schedule=specification.get('support_preload_schedule')
+        self.preload_anchor=torch.zeros((n,20),device=device)
+        self.preload_delta=None
+        if self.preload_schedule:self.preload_delta=torch.tensor(self.preload_schedule['delta_q'],device=device)
 
-    def reset(self, ids):
+    def reset(self, ids, clock_s=0.):
         self.age[ids] = 0
         self.previous_goal[ids] = float('nan')
         self.start[ids] = 0
         self.desired[ids] = 0
+        if self.preload_schedule:self.preload_anchor[ids]=self.preload(clock_s)
 
-    def action(self, initial, issued, goal):
+    def preload(self,clock_s):
+        first,last=self.preload_schedule['seconds']
+        t=torch.as_tensor(clock_s,device=self.age.device,dtype=self.age.dtype)
+        u=((t-first)/(last-first)).clamp(0.,1.)
+        fraction=u*u*u*(10.-15.*u+6.*u*u)
+        return fraction[...,None]*self.preload_delta
+
+    def action(self, initial, issued, goal, measured_q=None,clock_s=None):
         goal = goal.reshape(-1).clamp(0., .04)
         changed = torch.isnan(self.previous_goal) | ((goal-self.previous_goal).abs() > 1e-6)
         self.start[changed] = self.desired[changed]
         self.age[changed] = 0
         self.previous_goal[:] = goal
+        if self.pacing:
+            assert measured_q is not None, 'Pacing requires legal measured joints'
+            self.static_joint_lag[changed] = (issued[:,16:]-measured_q[:,16:])[changed]
         u = (self.age*self.dt/self.duration).clamp(0., 1.)
         fraction = u*u*u*(10.-15.*u+6.*u*u)
         self.desired[:] = self.start+(goal-self.start)*fraction
@@ -45,7 +64,22 @@ class ScheduledThumbReference:
         desired_q = initial[:,16:]+self.q[index]*(1.-alpha)+self.q[index+1]*alpha-self.q[0]
         self.last_target = initial.clone()
         self.last_target[:,16:] = desired_q
-        action = torch.zeros_like(initial)
-        action[:,16:] = (desired_q-issued[:,16:])/.025
-        self.age += 1
+        if self.preload_schedule:
+            assert clock_s is not None, 'Preload transition requires the known episode clock'
+            self.last_target+=self.preload(clock_s)-self.preload_anchor
+        action = (self.last_target-initial)/.04
+        action[:,16:] = (self.last_target[:,16:]-issued[:,16:])/.025
+        rate = torch.ones_like(self.age)
+        if self.pacing:
+            tangent=(self.q[index+1]-self.q[index])/(self.shifts[index+1]-self.shifts[index])[:,None]
+            excess=issued[:,16:]-measured_q[:,16:]-self.static_joint_lag
+            lag=(excess*tangent).sum(-1)/tangent.square().sum(-1).clamp_min(1e-6)
+            # Estimate of joint tracking along the nominal trajectory, not
+            # slider travel, contact state or force. Reversals use the new
+            # task direction; a small minimum rate keeps finite progress.
+            direction=torch.sign(goal-self.start)
+            self.last_progress_lag_m=lag*direction
+            rate=(1-self.last_progress_lag_m.clamp_min(0)/float(self.pacing['lag_scale_m'])).clamp(float(self.pacing['minimum_rate']),1.)
+        self.last_pacing_rate=rate
+        self.age += rate
         return action.clamp(-1., 1.)

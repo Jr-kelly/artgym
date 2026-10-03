@@ -1,6 +1,5 @@
 """GitHub Git Data transport fallback for this explicitly authorized delivery.
-Never force-updates a branch. Native git pack-objects is failing to read config
-in this session; API blobs/tree preserve every staged byte and record commit mapping.
+Never force-updates a branch. Repository origin points to the local recovery clone; API blobs/tree preserve every staged byte and record commit mapping.
 """
 import argparse,base64,json,subprocess
 from concurrent.futures import ThreadPoolExecutor
@@ -26,7 +25,7 @@ def main():
         path=name.decode();metadata=git('ls-tree','HEAD','--',path).decode().split();mode,kind,expected=metadata[:3];assert kind=='blob'
         body=git('show','HEAD:'+path);actual=api('git/blobs',dict(encoding='base64',content=base64.b64encode(body).decode()))['sha'];assert actual==expected
         return dict(path=path,mode=mode,type='blob',sha=actual)
-    record('github_snapshot_api_upload_started',local_commit=sha,local_tree=tree,parent=parent,remote_parent=remote_parent,files=len(names),reason='Native git pack-objects returns EPERM reading repository config; read-only remote/API access succeeds',next='Verify server tree matches exact local tree, then non-force branch update')
+    record('github_snapshot_api_upload_started',local_commit=sha,local_tree=tree,parent=parent,remote_parent=remote_parent,files=len(names),reason='Repository origin is local recovery clone; use authorizedGitHub GitData API exact-tree transport',next='Verify server tree matches exact local tree, then non-force branch update')
     with ThreadPoolExecutor(max_workers=4) as pool:entries=list(pool.map(blob,names))
     newtree=api('git/trees',dict(base_tree=git('rev-parse',parent+'^{tree}').decode().strip(),tree=entries))['sha'];assert newtree==tree
     author=git('show','-s','--format=%an%n%ae%n%aI%n%cn%n%ce%n%cI','HEAD').decode().strip().splitlines();message=git('show','-s','--format=%B','HEAD').decode().rstrip('\n')

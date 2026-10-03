@@ -1,0 +1,18 @@
+"""Three fixed full loaded episodes on one training-machine GPU; no score sweep."""
+import pathlib,subprocess,datetime,json,hashlib,os,time
+R=pathlib.Path(__file__).resolve().parents[2];D=R/'research/support-pressure-20261003';out=R/'runs/support-pressure-20261003';py='/home/wangjiarui/artgym-runtime/bin/python';env=dict(os.environ,PATH='/home/wangjiarui/artgym-runtime/bin:/usr/bin:/bin',PYTHONUTF8='1',PYTHONNOUSERSITE='1',PYTHONPATH='.:rl_games',CUDA_VISIBLE_DEVICES='3',LD_LIBRARY_PATH='/home/wangjiarui/artgym-runtime/lib',TORCH_EXTENSIONS_DIR='/tmp/wuji-width-torch-extensions',OMP_NUM_THREADS='4',MKL_NUM_THREADS='4',MAX_JOBS='2',PYTHONUNBUFFERED='1');weight=R/'runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth';sha=hashlib.sha256(weight.read_bytes()).hexdigest()
+common=['--seconds','36','--dx=-.1985','--dy=.05','--yaw=0','--slider-face','up','--grasp-plan','research/robust-knife-family-20261003/functional-side-edge-under-support-equilibrium-v6/motor-plan.json','--table-calibration','research/robust-knife-family-20261003/functional-side-edge-under-support-v6/localization.json','--acquisition-path','research/robust-knife-family-20261003/functional-side-edge-under-support-lateral-v3/acquisition-path.json','--handover-calibration','research/robust-knife-family-20261003/handover-from-v25-v1.json','--residual-checkpoint','runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth','--load','.5','--detent','.5','--load-profile','pulse','--load-frequency','2.9','--hand-friction','.8','--knife-friction','2.4','--observation-noise','.002','--observation-bias','.006','--seed','2026100358','--pair-force-measurement','--resistance-integration','solver-brake']
+for label,spec in [('learned-early-nominal','four-finger-baseline-v1.json'),('learned-late-nominal','four-finger-baseline-v1.json'),('learned-early-thick','four-finger-baseline-v1.json'),('learned-late-thick','four-finger-baseline-v1.json')]:
+ job=out/'jobs'/(label+'-v13');job.mkdir(parents=True,exist_ok=False);output='runs/support-pressure-20261003/demo/'+label+'-v13';cmd=[py,'-m','scripts.run_g2_robust_demo','--output',output,'--support-pressure-config','research/support-pressure-20261003/'+spec,*common];
+ if True:cmd[cmd.index('--load')+1]='.2';cmd[cmd.index('--detent')+1]='.2'
+ takeover=8 if 'early' in label else 16
+ cmd[cmd.index('--residual-checkpoint')+1]='runs/support-pressure-20261003/train/passive-offset-takeover%d-v10/update_000050.pth'%takeover
+ sha=hashlib.sha256((R/cmd[cmd.index('--residual-checkpoint')+1]).read_bytes()).hexdigest()
+ cmd+=['--takeover-seconds',str(takeover)]
+ if takeover==8:
+  index=cmd.index('--support-pressure-config');del cmd[index:index+2]
+ if 'thick' in label:cmd+=['--knife-asset','assets/objects/knife_wuji_dense_under_20261003/t0087/mobility.urdf']
+ start=datetime.datetime.now(datetime.timezone.utc);j={'start_utc':start.isoformat(),'command':cmd,'gpu':3,'checkpoint_sha256':sha,'output':output,'config':spec,'pid':os.getpid(),'source_sha256':{str(x):hashlib.sha256((R/x).read_bytes()).hexdigest() for x in ['scripts/run_g2_robust_demo.py','scripts/g2_r800_policy.py','scripts/wuji_scheduled_thumb_reference.py']}};(job/'identity.json').write_text(json.dumps(j,indent=2));t=time.monotonic()
+ with (job/'output.log').open('w') as f:p=subprocess.run(cmd,cwd=R,env=env,stdout=f,stderr=subprocess.STDOUT)
+ j.update(end_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),exit_code=p.returncode,wall_seconds=time.monotonic()-t);(job/'result.json').write_text(json.dumps(j,indent=2));print(json.dumps(j),flush=True)
+ if p.returncode:break

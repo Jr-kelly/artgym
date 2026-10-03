@@ -16,25 +16,33 @@
   "no_subagents": true,
   "no_real_robot_commands": true,
   "last_event": {
-    "utc": "2026-10-03T07:53:25.416522+00:00",
-    "event": "local_pressure_video_job_started",
-    "evidence": "research/support-pressure-20261003/run_local_pressure_film_v7.py",
-    "config": {
-      "pid": 249530,
-      "machine": "local4090",
-      "load": 0.2,
-      "detent": 0.2,
-      "method": "legacyP50 fourfinger measured baseline",
-      "new_measurement": "normalforces/underside moments/total addedload work"
+    "utc": "2026-10-03T08:19:39.786512+00:00",
+    "event": "coordinated_ring_passive_load_comparison_closed",
+    "evidence": "runs/support-pressure-20261003/demo/solver-ring-heavy-v11/report.json",
+    "conclusion": {
+      "success": true,
+      "ring_actual_support_mean_N": 0.014913377154962291,
+      "ring_contact_fraction": 0.28286189683860236,
+      "ring_normal_moment_knife_mean_Nm": [
+        0.0003468370707705111,
+        -1.6204433157211277e-05,
+        -6.73740996885942e-05
+      ],
+      "ring_normal_moment_mean_norm_Nm": 0.000355638861399795,
+      "body_maxrotation": 0.19959855683442929,
+      "thumb_actual_normalmean_N": 1.0675007034062993
     },
-    "next": "Visualize genuinecontinuous tablepickup/40mm operation and distinguish static vs moving pressure; trainingpilot remains active",
-    "state_updates": {
-      "active_local_video_launcher_pid": 249530
-    }
+    "next": "Retain better-established fourfingercoordinatedbaseline: intermittent small ringunderreaction hasnotshown substantivebenefit, no hard fifthfinger requirement"
   },
-  "next": "Visualize genuinecontinuous tablepickup/40mm operation and distinguish static vs moving pressure; trainingpilot remains active",
-  "active_remote_launcher_pid": 217670,
-  "active_local_training_pid": 246027,
-  "remote_connection_status": "SSH connection timedout; v6 state unknown",
-  "active_local_video_launcher_pid": 249530
+  "next": "Retain better-established fourfingercoordinatedbaseline: intermittent small ringunderreaction hasnotshown substantivebenefit, no hard fifthfinger requirement",
+  "active_remote_launcher_pid": null,
+  "active_local_training_pid": null,
+  "remote_connection_status": "SSH recovered; /tmp experiment lost; persistent recovery underway",
+  "active_local_video_launcher_pid": null,
+  "github_branch": "feat/wuji-support-pressure-20261003",
+  "github_commit": "49e3eda701d2b7f57a91038ea7d7c3a7bfa32ba8",
+  "local_scientific_commit": "4b2a8063a0d5f47a09c0f70a13d7c82264277cd0",
+  "remote_root": "/home/wangjiarui/artgym-support-pressure-20261003",
+  "active_remote_training_jobs": [],
+  "active_remote_demo_launcher_pid": 2370
 }
