@@ -11,7 +11,7 @@ from scipy.optimize import least_squares
 from scripts.g2_contact_geometry import DigitGeometry
 
 
-def plan(motor,support,reference,output,calibration):
+def plan(motor,support,reference,output,calibration,brace_x_m=(.002,.001)):
     output=pathlib.Path(output);output.mkdir(parents=True,exist_ok=False)
     assert motor['initial_geometry_estimate']['source']
     g=DigitGeometry();h=g.w;wrist=np.asarray(motor['wrist_in_knife'])
@@ -23,7 +23,7 @@ def plan(motor,support,reference,output,calibration):
         normal=normals[['thumb','index','middle','ring','pinky'].index(finger)]
         p=v@normal;weights=np.exp(-(p-p.min())/.0002);weights/=weights.sum()
         return weights@v,frame[:3,0]
-    for finger,x in [('index',.002),('middle',.001)]:
+    for finger,x in zip(['index','middle'],brace_x_m):
         original,axis=point(touch,finger);desired=original.copy();desired[0]=x
         ids=[h.names.index('hand_r_'+finger+'_joint'+str(i)) for i in range(1,5)]
         seed=touch.copy()
@@ -77,7 +77,8 @@ def staged_transfer(motor,original_support,braced_support):
         normal=normals[['thumb','index','middle','ring','pinky'].index(finger)]
         weights=np.exp(-(v@normal-(v@normal).min())/.0002);weights/=weights.sum()
         return weights@v,frame[:3,0]
-    for finger,new_x,times in [('index',.002,[12.5,12.9,13.2]),('middle',.001,[13.5,13.9,14.2])]:
+    target_x={row['finger']:row['target_m'][0] for row in braced_support['support_brace_audit']}
+    for finger,new_x,times in [('index',target_x['index'],[12.5,12.9,13.2]),('middle',target_x['middle'],[13.5,13.9,14.2])]:
         original,axis=point(touch,finger);ids=[h.names.index('hand_r_'+finger+'_joint'+str(i)) for i in range(1,5)]
         for x,time_s in zip([original[0],new_x],times[:2]):
             desired=original.copy();desired[0]=x;desired[1]-=.002

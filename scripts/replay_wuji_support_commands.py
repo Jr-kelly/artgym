@@ -54,11 +54,17 @@ def main():
         geometry=estimate['handle_size_WTL_m']+[.01, .003, .03],
         residual_checkpoint=a.checkpoint, thumb_reference_override=a.reference)
     assert policy.pressure_adapter is None, 'This minimal replay covers the selected controller without an extra pressure adapter'
+    if policy.support_load_features is not None:
+        assert times[0]<=14.1+1e-7, 'Loadfeatures require57 legalprefixframes from14.1s for52frame calibration and5frame causalvelocity filter'
+        policy.support_load_features.reset(__import__('torch').tensor([0],device=policy.player.device),policy.tensor(obj[:3,1]))
     kin = G2Kinematics()
     taken = False
     targets, actions, errors = [], [], []
     for i, t in enumerate(times):
         q = samples['hand_measured_q'][i]
+        if policy.support_load_features is not None:
+            previous=samples['issued_hand_target'][max(0,i-1)]
+            policy.support_load_features.observe(policy.tensor(q),policy.tensor(previous),__import__('torch').tensor([round(float(t)*30)],device=policy.player.device))
         policy.record(q, policy.last_action if taken else np.zeros(20))
         if t < 16-1e-7:
             continue
@@ -70,7 +76,7 @@ def main():
         gravity = kin.forward(samples['arm_measured_q'][i])[:3, :3].T @ np.array([0., 0., -1.])
         target, action = policy.command(q, goal, wrist_gravity=gravity, clock_s=float(t))
         assert policy.last_encoder_input.shape == (2076,)
-        assert policy.last_public_features.shape == ((170 if policy.history_features else 154),)
+        assert policy.last_public_features.shape == ((170 if policy.history_features else 154)+(9 if policy.support_load_features is not None else 0),)
         assert np.isfinite(target).all() and np.isfinite(policy.last_encoder_input).all()
         assert np.all(target >= policy.fk.lower-1e-6) and np.all(target <= policy.fk.upper+1e-6)
         targets.append(target); actions.append(action)
@@ -79,7 +85,7 @@ def main():
     np.savez_compressed(a.output/'commands.npz', targets=targets, actions=actions)
     report = dict(scope='Offline inference only; no physics scene, robot SDK, or current object/contact/load input',
         physics_performance_claim=False, real_robot_ran=False, control_hz=30, r800_input_dim=2076,
-        residual_input_dim=170 if policy.history_features else 154, command_frames=len(targets),
+        residual_input_dim=(170 if policy.history_features else 154)+(9 if policy.support_load_features is not None else 0), support_load_feature_spec=policy.support_load_feature_spec, command_frames=len(targets),
         max_target_difference_from_recorded_rad=max(errors),
         hand_joint_names=policy.fk.names, arm_joint_names=kin.names,
         input_sha256=hashlib.sha256(a.input.read_bytes()).hexdigest(),

@@ -68,6 +68,8 @@ def main():
  if initial_estimate and policy_slider_estimate is not None:
   initial_delta=center_delta+np.asarray(initial_estimate['slider_contact_shift_m'])+np.array([0,(initial_estimate['handle_size_WTL_m'][1]-.012)/2,0])
   policy_slider_estimate=policy_slider_estimate.copy();policy_slider_estimate[:3,3]+=policy_relative[:3,:3]@initial_delta
+ if policy.support_load_features is not None:
+  policy.support_load_features.reset(torch.tensor([0],device=policy.player.device),policy.tensor(policy_relative[:3,1]))
  pressure_spec=None
  if a.proprioceptive_pressure_config or policy.proprioceptive_pressure_spec:
   assert a.takeover_seconds==16 and a.handover_calibration and a.residual_checkpoint and not a.thumb_script
@@ -80,7 +82,10 @@ def main():
   if pressure_spec.get('control')=='index-support-retention':
    from scripts.wuji_index_support_retention import IndexSupportRetention
    adapter=IndexSupportRetention
-  policy.pressure_adapter=adapter(pressure_spec,policy_relative[:3,1],np.array(cfg.hand.dof_props.stiffness))
+  if pressure_spec.get('control')=='support-load-share':
+   from scripts.wuji_support_load_share import SupportLoadShare
+   policy.pressure_adapter=SupportLoadShare(pressure_spec,policy_relative[:3,1],np.array(cfg.hand.dof_props.stiffness),np.array(cfg.hand.dof_props.damping))
+  else:policy.pressure_adapter=adapter(pressure_spec,policy_relative[:3,1],np.array(cfg.hand.dof_props.stiffness))
  truth_body_diagnostic=None
  if a.truth_body_roll_diagnostic:
   assert a.takeover_seconds==16 and a.residual_checkpoint and not a.thumb_script and pressure_spec is None
@@ -221,6 +226,8 @@ def main():
    if step%(a.physics_hz//30)==0:
     previously_issued_target=target.clone()
     q=dof[hand,0].numpy().copy()+sensor_bias+rng.normal(0.,a.observation_noise,20);act=np.zeros(20,dtype=np.float32);policy.record(q,policy.last_action if taken else act)
+    if policy.support_load_features is not None:
+     policy.support_load_features.observe(policy.tensor(q),policy.tensor(previously_issued_target[hand].numpy()),torch.tensor([round(t*30)],device=policy.player.device))
     if t<2:aq=qabove;hq=opened
     elif t<5:aq=acquisition_motor(approach_path,smooth((t-2)/3)) if a.acquisition_path else path_motor(1-smooth((t-2)/3)) if a.cartesian_path else qabove+smooth((t-2)/3)*(qgrasp-qabove);hq=opened
     elif t<8:aq=qgrasp;hq=close_motor((t-5)/3)
@@ -273,6 +280,9 @@ def main():
    if step%(a.physics_hz//30)==a.physics_hz//30-1:
     gym.refresh_dof_state_tensor(sim);gym.refresh_rigid_body_state_tensor(sim);gym.refresh_net_contact_force_tensor(sim);row=dict(observed_q=q.copy(),desired_script_shift_m=shift if taken and thumb_script is not None else np.nan,time=t+1/a.physics_hz,q=dof[hand,0].numpy().copy(),arm_q=dof[arm,0].numpy().copy(),target=target.numpy().copy(),applied_target=physical_target.numpy().copy(),action=act.copy(),raw_base_action=policy.last_raw_action.copy() if taken else np.zeros(20,dtype=np.float32),object=rb[oid].numpy().copy(),wrist=rb[wrist].numpy().copy(),slider=float(dof[sid,0]),slider_velocity=float(dof[sid,1]),load=load,dissipative_load=run_load,passive_groove_load=start_load+groove_load,torque=force[:27].numpy().copy(),hand_contact=contact[:len(rbnames)].numpy().copy(),knife_contact=contact[[oid,oid+1]].numpy().copy(),pad_poses=rb[[rbnames.index('hand_r_'+finger+'_pad_link') for finger in ['thumb','index','middle','ring','pinky']]].numpy().copy(),estimated_thumb_pressure_N=policy.pressure_adapter.last_estimate if policy.pressure_adapter is not None else np.nan,proprioceptive_thumb_offset_rad=policy.pressure_adapter.offset.copy() if policy.pressure_adapter is not None else np.zeros(4),solver_brake_capacity_N=brake_capacity,scheduled_progress_lag_m=float(policy.thumb_reference.last_progress_lag_m[0]) if taken and policy.thumb_reference is not None else np.nan,scheduled_pacing_rate=float(policy.thumb_reference.last_pacing_rate[0]) if taken and policy.thumb_reference is not None else np.nan,middle_support_target_rad=middle_support.target if middle_support else np.nan,middle_support_filtered_lag_rad=middle_support.lag if middle_support else np.nan,middle_support_state=middle_support.state if middle_support else 'disabled',middle_regulated_target_rad=middle_regulator.target if middle_regulator else np.nan,middle_regulated_lag_rad=middle_regulator.lag if middle_regulator else np.nan,phase=0 if t<5 else 1 if t<8 else 2 if t<12 else 3 if t<16 else 4);rows.append(row)
     row.update(pair_diagnostics(t+1/a.physics_hz))
+    row['legal_support_load_features']=policy.support_load_features.features()[0].cpu().numpy().copy() if policy.support_load_features is not None else np.zeros(9)
+    row['estimated_support_normal_proxy_N']=getattr(policy.pressure_adapter,'last_support_proxy',np.full(3,np.nan)).copy()
+    row['support_load_offset_rad']=getattr(policy.pressure_adapter,'motor_offset',np.zeros(20)).copy()
     row['estimated_index_support_proxy_N']=getattr(policy.pressure_adapter,'last_index_estimate',np.nan)
     row['index_support_motor_offset_rad']=getattr(policy.pressure_adapter,'index_offset',np.zeros(4)).copy()
     row['index_support_reference_proxy_N']=getattr(policy.pressure_adapter,'baseline_index_estimate',np.nan)
@@ -299,6 +309,7 @@ def main():
    report['integration_diagnostics']=dict(physics_hz=a.physics_hz,motor_pd_hz=240,policy_history_hz=30,brake_capacity_max_N=float(trace['solver_brake_capacity_N'].max()),brake_capacity_operation_min_N=float(trace['solver_brake_capacity_N'][opmask].min()),scope='Passive nativezero-velocity jointbrake with250 damping and calibratedNewtonforcecap; physics-only time/position modulatescap. Replaces explicit regularizedfriction and conservativepotential by dissipative startup/groove barriers. No positivevelocity/positiontarget, nohanddrive/rail/criteriachange. Actualbrakeforce incontactdemo unavailable; cap isverifiedfixtureparameter, notmeasuredworldtraction or realresistance.',calibration='runs/support-pressure-20261003/calibration/solver-brake-v3/calibration.json')
   report['thumb_reference_override']=str(a.thumb_reference_override) if a.thumb_reference_override else None
   report['learned_action_parameterization']=policy.action_parameterization
+  report['support_load_feature_spec']=policy.support_load_feature_spec
   report['support_command_period_frames']=policy.support_command_period
   report['support_decision_scope']='Knownclock supportresidual held between decisions; thumb30Hz; oneactual issuedhistory update each30Hz'
   report['learned_takeover_seconds']=a.takeover_seconds if a.residual_checkpoint else None

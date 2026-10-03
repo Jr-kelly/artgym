@@ -33,11 +33,13 @@ def gym_transform(position,quaternion=(0,0,0,1)):
 class G2ContinuousScene:
     def __init__(self,n=8,seed=2026100356,randomization_scale=0.,instances=None,
                  load_max=.1,detent_max=.1,contact_progress_reward=0.,reference_spec=None,
-                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False,graphics=False,disabled_perturbations=(),action_parameterization='incremental',resistance_integration='legacy-explicit',load_min=0.,detent_min=0.,asset_registry=None,proprioceptive_pressure_spec=None,resample_initial_estimates=False,stable_progress_reward=False):
+                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False,graphics=False,disabled_perturbations=(),action_parameterization='incremental',resistance_integration='legacy-explicit',load_min=0.,detent_min=0.,asset_registry=None,proprioceptive_pressure_spec=None,resample_initial_estimates=False,stable_progress_reward=False,support_load_feature_spec=None):
         self.n=n;self.device='cuda:0';self.seed=seed
         self.disabled_perturbations=set(disabled_perturbations)
         assert self.disabled_perturbations <= {'calibration','placement','sensor','latency','material'}
         self.history_features=history_features;self.public_dim=(170 if history_features else 154)+(8 if support_estimator_spec else 0)
+        self.support_load_feature_spec=support_load_feature_spec;self.support_load_features=None
+        self.public_dim+=9 if support_load_feature_spec else 0
         self.support_estimator_spec=support_estimator_spec;self.support_estimator=None
         if support_estimator_spec:
             from scripts.g2_legal_support_estimator import LegalSupportEstimator
@@ -146,6 +148,10 @@ class G2ContinuousScene:
         self.load_force=torch.zeros_like(self.load_amplitude)
         self.cal_object=torch.zeros((n,7),device=self.device);self.cal_slider=self.cal_object.clone()
         self.proprioceptive_pressure_spec=proprioceptive_pressure_spec or (scene_spec.get('proprioceptive_pressure_spec') if scene_spec else None)
+        if support_load_feature_spec:
+            assert not history_features and support_estimator_spec is None and takeover_seconds==16
+            from scripts.wuji_support_load_features import SupportLoadFeatures
+            self.support_load_features=SupportLoadFeatures(n,self.device,np.asarray(self.cfg.hand.dof_props.stiffness),np.asarray(self.cfg.hand.dof_props.damping))
         self.pressure_adapter=None
         if self.proprioceptive_pressure_spec:
             assert self.takeover_frame==480 and self.resistance_integration=='solver-brake'
@@ -316,6 +322,9 @@ class G2ContinuousScene:
         for key,dest in [('object_in_wrist',self.cal_object),('slider_in_wrist',self.cal_slider)]:
             position,rotation=self.cal_prior[key]
             dest[ids]=torch.cat([position[ids]+translation,quat_mul(delta,rotation[ids])],-1)
+        if self.support_load_features is not None:
+            normal=quat_apply(self.cal_object[ids,3:7],self.tensor([0,1,0])[None].expand(k,-1))
+            self.support_load_features.reset(ids,normal)
         if self.pressure_adapter is not None:
             normal=quat_apply(self.cal_object[ids,3:7],self.tensor([0,1,0])[None].expand(k,-1))
             self.pressure_adapter.reset(ids,normal)
@@ -391,6 +400,8 @@ class G2ContinuousScene:
             if 'sensor' in self.disabled_perturbations:noise.zero_()
             q=q+self.observation_bias+noise
         self._measurement=q;self.bridge.record(q,self.last_action)
+        if self.support_load_features is not None:
+            self.support_load_features.observe(q,self.command_target[:,self.hand_ids],self.age)
         ready=(self.age==self.takeover_frame).nonzero(as_tuple=False).flatten()
         if len(ready):
             initial_targets=self.command_target if self.resistance_integration=='solver-brake' else self.target
@@ -426,6 +437,7 @@ class G2ContinuousScene:
             if len(ids):estimate[ids]=self.support_estimator(public[ids],self.player.model.a2c_network.priv_encoder,self.bridge.last_encoder_input[ids])
             public=torch.cat([public,estimate],-1)
         wrist=self.rb[:,self.wrist_index];inverse=quat_conjugate(wrist[:,3:7]);obj=self.rb[:,self.object_index];slider=self.rb[:,self.slider_index]
+        if self.support_load_features is not None:public=torch.cat([public,self.support_load_features.features()],-1)
         relative_object=torch.cat([quat_apply(inverse,obj[:,:3]-wrist[:,:3]),quat_mul(inverse,obj[:,3:7])],-1)
         relative_slider=torch.cat([quat_apply(inverse,slider[:,:3]-wrist[:,:3]),quat_mul(inverse,slider[:,3:7])],-1)
         travel=self.dof[:,27,0]-self.lower

@@ -18,59 +18,41 @@
   "baseline_github_commit": "6afe8270735abf91b86b001803150e542d720111",
   "baseline_release": "wuji-g2-continuous-knife-robust-20261003-v1",
   "goal_complete": false,
-  "phase": "Support decision timescale and exploration short pilots",
+  "phase": "Short matched legal support-load representation training",
   "private_media_root": "/tmp/wuji-support-pressure-attachment-20261003",
   "remote_gpu_count_verified": 4,
   "remote_gpu_inventory_utc": "2026-10-03T07:29:00+00:00",
   "no_subagents": true,
   "no_real_robot_commands": true,
   "last_event": {
-    "utc": "2026-10-03T13:57:39.328247+00:00",
-    "event": "support_timescale_v94_processes_verified",
-    "evidence": "research/support-pressure-20261003/actual-rolling4h-resource-summary-v95.json",
-    "config": {
-      "verified_utc": "2026-10-03T13:57:15Z",
-      "launcher_pids": [
-        24410,
-        24411,
-        24412
-      ],
-      "gpu_util_percent": [
-        76,
-        75,
-        76,
-        0
-      ]
-    },
-    "conclusion": "Threeusefulpilot jobs running; currentwholemachine56.75%; rolling4h sampling summary recorded separately",
-    "next": "Publish current recoverable science snapshot while pilots run; native smallmatched tests next",
-    "state_updates": {
-      "active_remote_training_launcher_pids": [
-        24410,
-        24411,
-        24412
-      ],
-      "remote_process_verification_utc": "2026-10-03T13:57:15Z",
-      "active_remote_training_jobs": [
-        "wide30-v94",
-        "slow6-v94",
-        "wide6-v94"
-      ]
-    }
+    "utc": "2026-10-03T14:51:49.042790+00:00",
+    "event": "rolling4h_utilization_v108_recorded",
+    "evidence": "research/support-pressure-20261003/actual-rolling4h-resource-summary-v108.json",
+    "conclusion": "Currentweighted4h actualsample summary computed with restartgap explicit, no inventedutilization; usefuljobs only",
+    "next": "Continue substantive training/comparisons and deliver recoverable snapshots"
   },
-  "next": "Publish current recoverable science snapshot while pilots run; native smallmatched tests next",
+  "next": "Continue substantive training/comparisons and deliver recoverable snapshots",
   "active_remote_launcher_pid": null,
   "active_local_training_pid": null,
   "remote_connection_status": "Persistent home SSH verified 2026-10-03 08:33 UTC; four H200 available",
   "active_local_video_launcher_pid": null,
   "github_branch": "feat/wuji-support-pressure-20261003",
-  "github_commit": "b0a08924c36a07c42df8a2470e61b50da8d53e0f",
-  "local_scientific_commit": "eac81f2da20ead1620f928c8c6e2181d9062f492",
+  "github_commit": "da3148f1271aa08d5e944db99a8418aa344dae4e",
+  "local_scientific_commit": "c82eeb841dc0c3da578e7553832b91339231aaa8",
   "remote_root": "/home/wangjiarui/artgym-support-pressure-20261003",
   "active_remote_training_jobs": [
-    "wide30-v94",
-    "slow6-v94",
-    "wide6-v94"
+    {
+      "pid": 3049,
+      "variant": "baseline154-v107"
+    },
+    {
+      "pid": 3050,
+      "variant": "load163-v107"
+    },
+    {
+      "pid": 3510,
+      "variant": "load163wide-v107"
+    }
   ],
   "active_remote_demo_launcher_pid": null,
   "active_remote_variant_launcher_pid": null,
@@ -81,15 +63,11 @@
   "active_remote_estimate_launcher_pid": null,
   "active_remote_joint_estimate_launcher_pid": null,
   "active_remote_pressure_tier_launcher_pid": null,
-  "active_remote_resource_sampler_pid": 6329,
-  "active_remote_training_launcher_pids": [
-    24410,
-    24411,
-    24412
-  ],
+  "active_remote_resource_sampler_pid": 476,
+  "active_remote_training_launcher_pids": [],
   "remote_jobs_status_utc": "2026-10-03T12:17:00Z",
   "active_remote_jobs": null,
-  "remote_process_verification_utc": "2026-10-03T13:57:15Z",
+  "remote_process_verification_utc": "2026-10-03T14:43:57Z",
   "active_remote_native_launcher_pids": []
 }
 ```

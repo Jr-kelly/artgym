@@ -1,0 +1,101 @@
+{
+  "scope": "Developmentevaluationtruth labels only, noactor fittedor onlineforcefeedback; single-normal/PD model engineeringassumptions",
+  "cases": [
+    {
+      "trace": "nominal-staged-transfer-v87",
+      "statistics": [
+        {
+          "finger": "index",
+          "MAE_N": 0.012057420487914637,
+          "correlation": 0.9970064922826652,
+          "negative_proxy_fraction": 0.0,
+          "unexplained_torque_fraction_mean": 0.2900617235609565,
+          "actual_mean_N": 0.3866197326182031,
+          "proxy_mean_N": 0.38132904754428487
+        },
+        {
+          "finger": "middle",
+          "MAE_N": 0.028784124968770662,
+          "correlation": 0.7971520034442143,
+          "negative_proxy_fraction": 0.0,
+          "unexplained_torque_fraction_mean": 0.23685574649871083,
+          "actual_mean_N": 0.5306694115796333,
+          "proxy_mean_N": 0.5491433332503685
+        },
+        {
+          "finger": "pinky",
+          "MAE_N": 0.031176094495500295,
+          "correlation": 0.9762918329974742,
+          "negative_proxy_fraction": 0.0,
+          "unexplained_torque_fraction_mean": 0.28976177465969355,
+          "actual_mean_N": 0.39003792294048695,
+          "proxy_mean_N": 0.40530015174859224
+        }
+      ]
+    },
+    {
+      "trace": "raised1-staged-transfer-v87",
+      "statistics": [
+        {
+          "finger": "index",
+          "MAE_N": 0.021830003918054668,
+          "correlation": 0.9954384842815079,
+          "negative_proxy_fraction": 0.0,
+          "unexplained_torque_fraction_mean": 0.286599415801397,
+          "actual_mean_N": 0.3768619037275385,
+          "proxy_mean_N": 0.36585322816348415
+        },
+        {
+          "finger": "middle",
+          "MAE_N": 0.015865200152655058,
+          "correlation": 0.9112609422548678,
+          "negative_proxy_fraction": 0.0,
+          "unexplained_torque_fraction_mean": 0.19451768306535674,
+          "actual_mean_N": 0.5461364828773311,
+          "proxy_mean_N": 0.5414122158180709
+        },
+        {
+          "finger": "pinky",
+          "MAE_N": 0.02994807172778555,
+          "correlation": 0.9835625791959582,
+          "negative_proxy_fraction": 0.0,
+          "unexplained_torque_fraction_mean": 0.2493952384555735,
+          "actual_mean_N": 0.4744263188732123,
+          "proxy_mean_N": 0.48422851917224813
+        }
+      ]
+    },
+    {
+      "trace": "nominal-index-retention-v44",
+      "statistics": [
+        {
+          "finger": "index",
+          "MAE_N": 0.0852475531671708,
+          "correlation": 0.628367904872256,
+          "negative_proxy_fraction": 0.26146788990825687,
+          "unexplained_torque_fraction_mean": 0.7524542316790808,
+          "actual_mean_N": 0.025193297213847148,
+          "proxy_mean_N": -9.337433424166166e-05
+        },
+        {
+          "finger": "middle",
+          "MAE_N": 0.3193233942762977,
+          "correlation": 0.6403562321508596,
+          "negative_proxy_fraction": 0.12385321100917432,
+          "unexplained_torque_fraction_mean": 0.34087229849403816,
+          "actual_mean_N": 0.36781398405672455,
+          "proxy_mean_N": 0.6814770774096307
+        },
+        {
+          "finger": "pinky",
+          "MAE_N": 0.05632353112104353,
+          "correlation": 0.8811643813930256,
+          "negative_proxy_fraction": 0.07339449541284404,
+          "unexplained_torque_fraction_mean": 0.6169003166061937,
+          "actual_mean_N": 0.11415717613569883,
+          "proxy_mean_N": 0.1652738857041143
+        }
+      ]
+    }
+  ]
+}

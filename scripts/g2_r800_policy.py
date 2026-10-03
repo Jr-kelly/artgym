@@ -31,6 +31,7 @@ class G2R800Policy(FrozenPolicy):
         self.last_encoder_input = None; self.last_observation = None
         assert 0<=thumb_action_gain<=1 and 0<=support_action_gain<=1
         self.thumb_action_gain=thumb_action_gain;self.support_action_gain=support_action_gain
+        self.support_load_features=None;self.support_load_feature_spec=None
         self.support_command_period=1;self.held_support_logits=None;self.support_takeover_frame=0
         self.residual=None;self.last_public_features=None;self.thumb_reference=None;self.history_features=False;self.support_estimator=None;self.action_parameterization='incremental';self.pressure_adapter=None;self.proprioceptive_pressure_spec=None
         if residual_checkpoint is not None:
@@ -42,11 +43,17 @@ class G2R800Policy(FrozenPolicy):
             assert saved['format']=='wuji-r800-residual-ppo-v1'
             assert saved['student_sha256']==hashlib.sha256(Path(student).read_bytes()).hexdigest()
             assert saved['teacher_sha256']==hashlib.sha256(Path(teacher).read_bytes()).hexdigest()
+            self.support_load_feature_spec=saved.get('support_load_feature_spec')
+            if self.support_load_feature_spec:
+                from scripts.wuji_support_load_features import SupportLoadFeatures
+                self.support_load_features=SupportLoadFeatures(1,self.player.device,np.asarray(cfg.hand.dof_props.stiffness),np.asarray(cfg.hand.dof_props.damping))
             self.history_features=saved.get('history_features',False)
             if saved.get('support_estimator_spec'):
                 from scripts.g2_legal_support_estimator import LegalSupportEstimator
                 self.support_estimator=LegalSupportEstimator(saved['support_estimator_spec'],self.player.device)
             dim=(170 if self.history_features else 154)+(8 if self.support_estimator is not None else 0)
+            dim+=9 if self.support_load_features is not None else 0
+            assert saved.get('public_dim',dim)==dim
             self.residual=ResidualActorCritic(dim,dim+27).to(self.player.device)
             if saved.get('frozen_thumb_actor',False):self.residual.freeze_thumb_actor()
             self.residual.load_state_dict(saved['model']);self.residual.eval()
@@ -117,6 +124,7 @@ class G2R800Policy(FrozenPolicy):
                     public=torch.cat([public,latent],-1)
                 if self.support_estimator is not None:
                     public=torch.cat([public,self.support_estimator(public,self.player.model.a2c_network.priv_encoder,encoder_input)],-1)
+                if self.support_load_features is not None:public=torch.cat([public,self.support_load_features.features()],-1)
                 self.last_public_features=public.detach().cpu().numpy()[0]
                 base=action if self.action_base_mode=="r800" else torch.zeros_like(action)
                 if self.thumb_reference is not None:base=self.thumb_reference.action(self.known.initial,self.known.issued,self.tensor([goal]),measured_q=self.tensor(q),clock_s=clock_s)

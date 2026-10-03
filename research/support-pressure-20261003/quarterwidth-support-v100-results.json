@@ -1,0 +1,1031 @@
+{
+  "scope": "Targeted continuousphysical development comparisons; existingbaselines reused, originalcriteria, not newindependentvalidation",
+  "cases": [
+    {
+      "name": "nominal-quarterwidth-support-v100",
+      "report": {
+        "start": "Knife at configured tabletop edge with COM on table; open hand outside edge, lateral acquisition then vertical lift",
+        "methods": "Motor-only scripted continuous-IK approach/close/lift; finite-torque gravity-compensated arm/hand; Scheduled calibrated rolling-thumb reference plus learned bounded residual using R800 legal features after16s with once-loaded relative-grip calibration estimate",
+        "lifted_clear": true,
+        "operation_stays_clear": true,
+        "meaningful_extension": false,
+        "retraction_after31s": true,
+        "full_success": false,
+        "minimum_hold_height_m": 0.8536049127578735,
+        "max_object_height_m": 0.8583321571350098,
+        "wall_seconds": 54.45553670299705,
+        "positive_load_power_max_W": 0.0,
+        "weight_sha256": {
+          "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth": "bbf61592721300b1cf053de8246898a69989ed102b7a034da6fb47cc9a541dcd",
+          "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+          "runs/support-pressure-20261003/train/joint-noisier-continuation-v31/update_000750.pth": "11f87269e7910380c6dab1fa8dcc26e53e40da0bd905a1ae40e7ffcf812b1a1d"
+        },
+        "scope": "Continuous physics attempt, no stage state writes. Meaningful25mm extension and8mm return are predeclared demo diagnostics; inherited40mm command unchanged. No preciseS5claim.",
+        "integration_diagnostics": {
+          "physics_hz": 240,
+          "motor_pd_hz": 240,
+          "policy_history_hz": 30,
+          "brake_capacity_max_N": 1.2850825739865364,
+          "brake_capacity_operation_min_N": 0.125,
+          "scope": "Passive nativezero-velocity jointbrake with250 damping and calibratedNewtonforcecap; physics-only time/position modulatescap. Replaces explicit regularizedfriction and conservativepotential by dissipative startup/groove barriers. No positivevelocity/positiontarget, nohanddrive/rail/criteriachange. Actualbrakeforce incontactdemo unavailable; cap isverifiedfixtureparameter, notmeasuredworldtraction or realresistance.",
+          "calibration": "runs/support-pressure-20261003/calibration/solver-brake-v3/calibration.json"
+        },
+        "resistance_integration": "solver-brake",
+        "trace_load_fields_scope": "In solver-brake mode, load=0 is externaljointforce; dissipative_load/passive_groove_load are counterfactual legacy explicit model values, not applied brake force. Only solver_brake_capacity_N is the calibrated native force-cap parameter; actual brakeforce remains unavailable.",
+        "thumb_reference_override": "runs/support-pressure-20261003/quarterwidth-support-config-v99/nominal/reference.json",
+        "learned_action_parameterization": "bounded-motor-offset",
+        "support_command_period_frames": 1,
+        "support_decision_scope": "Knownclock supportresidual held between decisions; thumb30Hz; oneactual issuedhistory update each30Hz",
+        "learned_takeover_seconds": 16.0,
+        "known_task_schedule_seconds": [
+          16,
+          21,
+          26,
+          31,
+          36
+        ],
+        "learned_hold_scope": "If takeover<16, same legal residual commands closed during8\u201316 and keeps actual history/motor/RNN state into operation; no phase state reset or force regulation",
+        "middle_deflection_support": null,
+        "middle_load_lag_regulation": null,
+        "staged_preload": null,
+        "operation_evaluated": true,
+        "endpoints_mean_last03s_m": [
+          0.037346916997598276,
+          0.005516844077242745,
+          0.03602303179084427,
+          0.005733644175860617
+        ],
+        "diagnostic": "Scheduled four5s stages; final0.3s mean >25mm extend and <8mm return on both cycles; no truth-triggered switching",
+        "operation_body_max_drift_m": 0.004940949846059084,
+        "operation_body_max_rotation_rad": 0.3627649642668684,
+        "operation_body_stable": false,
+        "slider_before_handover_m": 0.0021194741129875183,
+        "slider_closed_at_handover": true,
+        "physical_asset": "assets/objects/knife_wuji_support_train_20261003/s0000/mobility.urdf",
+        "physical_asset_sha256": "8b7c53eeb9e4baf32d30aa19d42bdef644259a6b31da4b8d73de8d1c0bd50939",
+        "physical_dimensions_WTL_m": [
+          0.016,
+          0.012,
+          0.135
+        ],
+        "initial_geometry_estimate": {
+          "handle_size_WTL_m": [
+            0.01645193848872836,
+            0.011533191954387954,
+            0.13407302147640143
+          ],
+          "slider_contact_shift_m": [
+            7.363049197100374e-05,
+            -0.0005280130339026145,
+            0.00013575756045497434
+          ],
+          "initial_object_center_shift_knife_m": [
+            0,
+            -0.00023340402280602312,
+            0
+          ],
+          "uncertainty_m": 0.0006,
+          "source": "New synthetic onceinitial development observation; known training geometry, not finalheldout. Same common IK from noisy estimates, no physicalID planner/actor."
+        },
+        "policy_geometry_estimate_scope": "Explicit initial noisy geometry estimate, common offline IK adaptation and once-loaded prior; no physicalasset ID or runtime object/contact input",
+        "hand_friction": 0.65,
+        "knife_friction": 1.8,
+        "load_profile": "pulse",
+        "load_frequency_rad_s": 2.9,
+        "observation_noise_std_rad": 0.002,
+        "observation_bias_bound_rad": 0.006,
+        "seed": 2026100358,
+        "loaded_weight_use": "Frozen R800 and optional residual actor executed after50 actual history frames",
+        "residual_checkpoint": "runs/support-pressure-20261003/train/joint-noisier-continuation-v31/update_000750.pth",
+        "thumb_script": "None",
+        "thumb_script_scope": null,
+        "thumb_action_gain": 1.0,
+        "support_action_gain": 1.0,
+        "added_load_N": 0.5,
+        "passive_startup_detent_amplitude_N": 0.5,
+        "variable_load": false,
+        "load_scope": "Calibrated passive zero-velocity solverbrake capacity with dissipative startup/groove; no realtotalresistance or instantaneousfrictionmeasurement claim.",
+        "operation_thumb_slider_contact_fraction": 1.0,
+        "operation_body_contact_fraction": [
+          0.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "contact_scope": "30Hz solver-contact diagnostics; current truth never fed to actor. Positive motor preload does not establish constant pressure.",
+        "operation_thumb_slider_contact_maintained": true,
+        "failure_onsets_s": {
+          "body_stability": 17.633333333333333,
+          "height": null,
+          "sustained_thumb_slider_contact_loss": null
+        },
+        "failure_onsets_scope": "Evaluation only: first stability/height breach, and first10 consecutive30Hz samples without thumb-slider contact. Legacy first_failure lists failed conditions by priority, not chronological onset. No control or completion-gate change.",
+        "extension_endpoint_condition_met": true,
+        "pair_pressure": {
+          "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+          "physics_hz": 240,
+          "substeps_per_simulate": 1,
+          "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+          "finger_order": [
+            "thumb",
+            "index",
+            "middle",
+            "ring",
+            "pinky"
+          ],
+          "static_thumb_pressure_mean_N": 0.9867642021478015,
+          "operation_thumb_pressure_mean_N": 1.061939007644236,
+          "operation_thumb_pressure_5th_percentile_N": 0.933294164836358,
+          "operation_thumb_contact_substep_fraction": 1.0,
+          "operation_ring_underside_support_mean_N": 0.0,
+          "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+        },
+        "actuation_delay_frames": 0,
+        "actuation_delay_scope": "Physical appliedtarget delayed; public knownmemory/history trackissued target without observing private appliedtarget",
+        "support_pressure_spec": {
+          "post_lift_target_q": [
+            0.5487852052268906,
+            0.15202901048257805,
+            0.36605042651296604,
+            1.5690748653957465,
+            0.7543799049403447,
+            -0.16845061076583542,
+            0.6405340483713808,
+            1.478274033715324,
+            0.4509741284805401,
+            -0.33552703878628504,
+            0.9386856368542383,
+            1.5127622480348129,
+            0.031040931092790894,
+            -0.08473187021821657,
+            0.3007913807409291,
+            0.6308374884982267,
+            1.6031999415832048,
+            0.10162101313504063,
+            0.7861281088531527,
+            -0.07960539349740203
+          ],
+          "ring_target_q": null,
+          "thumb_preload_delta_q": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "transition_seconds": [
+            12,
+            14
+          ],
+          "nominal_wrench_preload_scale": 1.25,
+          "scope": "Sequential index/middle withdraw2mm, cross underbody, recontact using publicestimate only. Lasttarget14.2s leaves50actualconstant-target frames before16s; samegravity/motors/fullcollisions. IK is not contact/collision certification.",
+          "post_lift_target_q_unclipped": [
+            0.30801316246644994,
+            0.1739844398381667,
+            0.8660784266125945,
+            1.5642558430266142,
+            0.45785348943787396,
+            -0.2204551584901962,
+            1.2030324332061413,
+            1.1541333432566228,
+            0.45548609326116,
+            -0.3240131116290565,
+            0.9015837585929558,
+            1.5034577379538634,
+            0.031040931092790894,
+            -0.08473187021821657,
+            0.3007913807409291,
+            0.6308374884982267,
+            1.6220499415833045,
+            0.07785297697422942,
+            0.8483420858949375,
+            -0.08910266109418644
+          ],
+          "original_limit_clipped_indices": [
+            16
+          ],
+          "support_brace_audit": [
+            {
+              "finger": "index",
+              "original_m": [
+                -0.006257950629865036,
+                -0.006218493959796522,
+                0.03872642100637506
+              ],
+              "target_m": [
+                0.00411298462218209,
+                -0.006218493959796522,
+                0.03872642100637506
+              ],
+              "planned_m": [
+                0.0041045392220118,
+                -0.006213224114965552,
+                0.03872274402813112
+              ],
+              "error_m": 1.0612078853138323e-05,
+              "joint_change_rad": [
+                0.2614091044189598,
+                -0.03309413626352985,
+                -0.49984043728684524,
+                0.025791661238175445
+              ]
+            },
+            {
+              "finger": "middle",
+              "original_m": [
+                -0.0062258033571148605,
+                -0.006214221382276345,
+                0.000990531385118527
+              ],
+              "target_m": [
+                0.003290387697745672,
+                -0.006214221382276345,
+                0.000990531385118527
+              ],
+              "planned_m": [
+                0.0032903348971648236,
+                -0.006214254528828936,
+                0.0009903141806459617
+              ],
+              "error_m": 2.2597428656589976e-07,
+              "joint_change_rad": [
+                0.2745442121315444,
+                0.04844664202734303,
+                -0.6046284617695528,
+                0.3347674485374672
+              ]
+            }
+          ],
+          "motor_waypoints": [
+            {
+              "time_s": 12.0,
+              "q": [
+                0.2937940427639681,
+                0.16704036153159582,
+                0.8774262578870007,
+                1.5525729860965116,
+                0.4337964436147119,
+                -0.22353482812382908,
+                1.1990308763876107,
+                1.1424651960727576,
+                0.42100612101553003,
+                -0.31773212251307115,
+                0.9023265556607257,
+                1.4971096170488518,
+                0.031040931092790894,
+                -0.08473187021821657,
+                0.3007913807409291,
+                0.6308374884982267,
+                1.6031999415832048,
+                0.06880409787706422,
+                0.7919701049295821,
+                -0.08752793636157555
+              ]
+            },
+            {
+              "time_s": 12.2,
+              "q": [
+                0.30227329426665345,
+                0.1703485842375678,
+                0.8828856180268114,
+                1.5533641816305859,
+                0.45263508496276206,
+                -0.2219537231257548,
+                1.213915797300139,
+                1.1483822886703363,
+                0.4482859780563522,
+                -0.3200600000925735,
+                0.9177507704208646,
+                1.494421886088085,
+                0.031040931092790894,
+                -0.08473187021821657,
+                0.3007913807409291,
+                0.6308374884982267,
+                1.6031999415832048,
+                0.09153423872054524,
+                0.8182148050435477,
+                -0.07550381969831674
+              ]
+            },
+            {
+              "time_s": 12.5,
+              "q": [
+                0.25848772223928607,
+                0.12911902459337582,
+                0.8100498517727173,
+                1.5751998653508335,
+                0.45263508496276206,
+                -0.2219537231257548,
+                1.213915797300139,
+                1.1483822886703363,
+                0.4482859780563522,
+                -0.3200600000925735,
+                0.9177507704208646,
+                1.494421886088085,
+                0.031040931092790894,
+                -0.08473187021821657,
+                0.3007913807409291,
+                0.6308374884982267,
+                1.6031999415832048,
+                0.09153423872054524,
+                0.8182148050435477,
+                -0.07550381969831674
+              ]
+            },
+            {
+              "time_s": 12.9,
+              "q": [
+                0.5117175963823385,
+                0.10469492134881765,
+                0.33039955002552013,
+                1.5751998653562749,
+                0.45263508496276206,
+                -0.2219537231257548,
+                1.213915797300139,
+                1.1483822886703363,
+                0.4482859780563522,
+                -0.3200600000925735,
+                0.9177507704208646,
+                1.494421886088085,
+                0.031040931092790894,
+                -0.08473187021821657,
+                0.3007913807409291,
+                0.6308374884982267,
+                1.6031999415832048,
+                0.09153423872054524,
+                0.8182148050435477,
+                -0.07550381969831674
+              ]
+            },
+            {
+              "time_s": 13.2,
+              "q": [
+                0.5487852052268906,
+                0.15202901048257805,
+                0.36605042651296604,
+                1.5690748653957465,
+                0.45263508496276206,
+                -0.2219537231257548,
+                1.213915797300139,
+                1.1483822886703363,
+                0.4482859780563522,
+                -0.3200600000925735,
+                0.9177507704208646,
+                1.494421886088085,
+                0.031040931092790894,
+                -0.08473187021821657,
+                0.3007913807409291,
+                0.6308374884982267,
+                1.6031999415832048,
+                0.09153423872054524,
+                0.8182148050435477,
+                -0.07550381969831674
+              ]
+            },
+            {
+              "time_s": 13.5,
+              "q": [
+                0.5487852052268906,
+                0.15202901048257805,
+                0.36605042651296604,
+                1.5690748653957465,
+                0.3430115036050847,
+                -0.23752307989490912,
+                1.1001230236070862,
+                1.1735947958047017,
+                0.4482859780563522,
+                -0.3200600000925735,
+                0.9177507704208646,
+                1.494421886088085,
+                0.031040931092790894,
+                -0.08473187021821657,
+                0.3007913807409291,
+                0.6308374884982267,
+                1.6031999415832048,
+                0.09153423872054524,
+                0.8182148050435477,
+                -0.07550381969831674
+              ]
+            },
+            {
+              "time_s": 13.9,
+              "q": [
+                0.5487852052268906,
+                0.15202901048257805,
+                0.36605042651296604,
+                1.5690748653957465,
+                0.6357168971439038,
+                -0.187044410502512,
+                0.46188019327336405,
+                1.5245309488159837,
+                0.4482859780563522,
+                -0.3200600000925735,
+                0.9177507704208646,
+                1.494421886088085,
+                0.031040931092790894,
+                -0.08473187021821657,
+                0.3007913807409291,
+                0.6308374884982267,
+                1.6031999415832048,
+                0.09153423872054524,
+                0.8182148050435477,
+                -0.07550381969831674
+              ]
+            },
+            {
+              "time_s": 14.2,
+              "q": [
+                0.5487852052268906,
+                0.15202901048257805,
+                0.36605042651296604,
+                1.5690748653957465,
+                0.7543799049403447,
+                -0.16845061076583542,
+                0.6405340483713808,
+                1.478274033715324,
+                0.4509741284805401,
+                -0.33552703878628504,
+                0.9386856368542383,
+                1.5127622480348129,
+                0.031040931092790894,
+                -0.08473187021821657,
+                0.3007913807409291,
+                0.6308374884982267,
+                1.6031999415832048,
+                0.10162101313504063,
+                0.7861281088531527,
+                -0.07960539349740203
+              ]
+            }
+          ],
+          "staged_transfer_audit": [
+            {
+              "finger": "index",
+              "time_s": 12.5,
+              "target_m": [
+                -0.006257950629865036,
+                -0.008218493959796522,
+                0.03872642100637506
+              ],
+              "IK_error_m": 1.0244179218195128e-06
+            },
+            {
+              "finger": "index",
+              "time_s": 12.9,
+              "target_m": [
+                0.00411298462218209,
+                -0.008218493959796522,
+                0.03872642100637506
+              ],
+              "IK_error_m": 1.253896216739479e-05
+            },
+            {
+              "finger": "middle",
+              "time_s": 13.5,
+              "target_m": [
+                -0.0062258033571148605,
+                -0.008214221382276345,
+                0.000990531385118527
+              ],
+              "IK_error_m": 7.617689200014643e-08
+            },
+            {
+              "finger": "middle",
+              "time_s": 13.9,
+              "target_m": [
+                0.003290387697745672,
+                -0.008214221382276345,
+                0.000990531385118527
+              ],
+              "IK_error_m": 1.2490810390041818e-07
+            }
+          ]
+        },
+        "proprioceptive_pressure_spec": null,
+        "measured_hold_reference_audit": null,
+        "pressure_feedback_scope": null,
+        "support_residual_scale_override_rad": null,
+        "wrist_roll_reference_degrees": 0.0,
+        "wrist_roll_scope": null,
+        "frozen_thumb_actor": false,
+        "frozen_thumb_scope": null,
+        "truth_body_roll_diagnostic": false,
+        "first_failure": "body stability after handover"
+      },
+      "trace_sha256": "a360f803b5440d22eb298b8a1d789037e23f5c45a448a0ec730ada200cba8bd5"
+    },
+    {
+      "name": "raised1-quarterwidth-support-v100",
+      "report": {
+        "start": "Knife at configured tabletop edge with COM on table; open hand outside edge, lateral acquisition then vertical lift",
+        "methods": "Motor-only scripted continuous-IK approach/close/lift; finite-torque gravity-compensated arm/hand; Scheduled calibrated rolling-thumb reference plus learned bounded residual using R800 legal features after16s with once-loaded relative-grip calibration estimate",
+        "lifted_clear": true,
+        "operation_stays_clear": true,
+        "meaningful_extension": false,
+        "retraction_after31s": true,
+        "full_success": false,
+        "minimum_hold_height_m": 0.8531426191329956,
+        "max_object_height_m": 0.8582890033721924,
+        "wall_seconds": 52.874054836982395,
+        "positive_load_power_max_W": 0.0,
+        "weight_sha256": {
+          "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth": "bbf61592721300b1cf053de8246898a69989ed102b7a034da6fb47cc9a541dcd",
+          "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+          "runs/support-pressure-20261003/train/joint-noisier-continuation-v31/update_000750.pth": "11f87269e7910380c6dab1fa8dcc26e53e40da0bd905a1ae40e7ffcf812b1a1d"
+        },
+        "scope": "Continuous physics attempt, no stage state writes. Meaningful25mm extension and8mm return are predeclared demo diagnostics; inherited40mm command unchanged. No preciseS5claim.",
+        "integration_diagnostics": {
+          "physics_hz": 240,
+          "motor_pd_hz": 240,
+          "policy_history_hz": 30,
+          "brake_capacity_max_N": 1.2850586441421252,
+          "brake_capacity_operation_min_N": 0.125,
+          "scope": "Passive nativezero-velocity jointbrake with250 damping and calibratedNewtonforcecap; physics-only time/position modulatescap. Replaces explicit regularizedfriction and conservativepotential by dissipative startup/groove barriers. No positivevelocity/positiontarget, nohanddrive/rail/criteriachange. Actualbrakeforce incontactdemo unavailable; cap isverifiedfixtureparameter, notmeasuredworldtraction or realresistance.",
+          "calibration": "runs/support-pressure-20261003/calibration/solver-brake-v3/calibration.json"
+        },
+        "resistance_integration": "solver-brake",
+        "trace_load_fields_scope": "In solver-brake mode, load=0 is externaljointforce; dissipative_load/passive_groove_load are counterfactual legacy explicit model values, not applied brake force. Only solver_brake_capacity_N is the calibrated native force-cap parameter; actual brakeforce remains unavailable.",
+        "thumb_reference_override": "runs/support-pressure-20261003/quarterwidth-support-config-v99/raised1/reference.json",
+        "learned_action_parameterization": "bounded-motor-offset",
+        "support_command_period_frames": 1,
+        "support_decision_scope": "Knownclock supportresidual held between decisions; thumb30Hz; oneactual issuedhistory update each30Hz",
+        "learned_takeover_seconds": 16.0,
+        "known_task_schedule_seconds": [
+          16,
+          21,
+          26,
+          31,
+          36
+        ],
+        "learned_hold_scope": "If takeover<16, same legal residual commands closed during8\u201316 and keeps actual history/motor/RNN state into operation; no phase state reset or force regulation",
+        "middle_deflection_support": null,
+        "middle_load_lag_regulation": null,
+        "staged_preload": null,
+        "operation_evaluated": true,
+        "endpoints_mean_last03s_m": [
+          0.037849055447926126,
+          0.0051180362287494875,
+          0.03761371970176697,
+          0.005956235238247448
+        ],
+        "diagnostic": "Scheduled four5s stages; final0.3s mean >25mm extend and <8mm return on both cycles; no truth-triggered switching",
+        "operation_body_max_drift_m": 0.004421977326273918,
+        "operation_body_max_rotation_rad": 0.302625924093608,
+        "operation_body_stable": false,
+        "slider_before_handover_m": 0.0005764849483966827,
+        "slider_closed_at_handover": true,
+        "physical_asset": "assets/objects/knife_wuji_support_train_20261003/s0002/mobility.urdf",
+        "physical_asset_sha256": "699ffa9167044995704dc2d02fc1f63213063648292e81a1b94c2e0c90fb7929",
+        "physical_dimensions_WTL_m": [
+          0.016,
+          0.012,
+          0.135
+        ],
+        "initial_geometry_estimate": {
+          "handle_size_WTL_m": [
+            0.016052826117256468,
+            0.012197888596571293,
+            0.13395896411052652
+          ],
+          "slider_contact_shift_m": [
+            0.0004147552239358844,
+            0.0008559057856784742,
+            -0.0005205651514817531
+          ],
+          "initial_object_center_shift_knife_m": [
+            0,
+            9.89442982856463e-05,
+            0
+          ],
+          "uncertainty_m": 0.0006,
+          "source": "New synthetic onceinitial development observation; known training geometry, not finalheldout. Same common IK from noisy estimates, no physicalID planner/actor."
+        },
+        "policy_geometry_estimate_scope": "Explicit initial noisy geometry estimate, common offline IK adaptation and once-loaded prior; no physicalasset ID or runtime object/contact input",
+        "hand_friction": 0.65,
+        "knife_friction": 1.8,
+        "load_profile": "pulse",
+        "load_frequency_rad_s": 2.9,
+        "observation_noise_std_rad": 0.002,
+        "observation_bias_bound_rad": 0.006,
+        "seed": 2026100358,
+        "loaded_weight_use": "Frozen R800 and optional residual actor executed after50 actual history frames",
+        "residual_checkpoint": "runs/support-pressure-20261003/train/joint-noisier-continuation-v31/update_000750.pth",
+        "thumb_script": "None",
+        "thumb_script_scope": null,
+        "thumb_action_gain": 1.0,
+        "support_action_gain": 1.0,
+        "added_load_N": 0.5,
+        "passive_startup_detent_amplitude_N": 0.5,
+        "variable_load": false,
+        "load_scope": "Calibrated passive zero-velocity solverbrake capacity with dissipative startup/groove; no realtotalresistance or instantaneousfrictionmeasurement claim.",
+        "operation_thumb_slider_contact_fraction": 1.0,
+        "operation_body_contact_fraction": [
+          0.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "contact_scope": "30Hz solver-contact diagnostics; current truth never fed to actor. Positive motor preload does not establish constant pressure.",
+        "operation_thumb_slider_contact_maintained": true,
+        "failure_onsets_s": {
+          "body_stability": 17.833333333333332,
+          "height": null,
+          "sustained_thumb_slider_contact_loss": null
+        },
+        "failure_onsets_scope": "Evaluation only: first stability/height breach, and first10 consecutive30Hz samples without thumb-slider contact. Legacy first_failure lists failed conditions by priority, not chronological onset. No control or completion-gate change.",
+        "extension_endpoint_condition_met": true,
+        "pair_pressure": {
+          "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+          "physics_hz": 240,
+          "substeps_per_simulate": 1,
+          "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+          "finger_order": [
+            "thumb",
+            "index",
+            "middle",
+            "ring",
+            "pinky"
+          ],
+          "static_thumb_pressure_mean_N": 1.0833325682952974,
+          "operation_thumb_pressure_mean_N": 1.1221711605167082,
+          "operation_thumb_pressure_5th_percentile_N": 0.9702990952353239,
+          "operation_thumb_contact_substep_fraction": 1.0,
+          "operation_ring_underside_support_mean_N": 0.0,
+          "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+        },
+        "actuation_delay_frames": 0,
+        "actuation_delay_scope": "Physical appliedtarget delayed; public knownmemory/history trackissued target without observing private appliedtarget",
+        "support_pressure_spec": {
+          "post_lift_target_q": [
+            0.5485098854580994,
+            0.1533994904171801,
+            0.3730510524084681,
+            1.5690748653562752,
+            0.7496204360050225,
+            -0.1693416291335101,
+            0.6470028748077172,
+            1.473730235940293,
+            0.4683341263853009,
+            -0.3347552075813636,
+            0.9360794171311609,
+            1.517853518529703,
+            0.031040931092790894,
+            -0.08473187021821657,
+            0.3007913807409291,
+            0.6308374884982267,
+            1.6031999415832048,
+            0.07901774829688804,
+            0.8068536593826205,
+            -0.07090847975786382
+          ],
+          "ring_target_q": null,
+          "thumb_preload_delta_q": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "transition_seconds": [
+            12,
+            14
+          ],
+          "nominal_wrench_preload_scale": 1.25,
+          "scope": "Sequential index/middle withdraw2mm, cross underbody, recontact using publicestimate only. Lasttarget14.2s leaves50actualconstant-target frames before16s; samegravity/motors/fullcollisions. IK is not contact/collision certification.",
+          "post_lift_target_q_unclipped": [
+            0.30801316246644994,
+            0.1739844398381667,
+            0.8660784266125945,
+            1.5642558430266142,
+            0.45785348943787396,
+            -0.2204551584901962,
+            1.2030324332061413,
+            1.1541333432566228,
+            0.45548609326116,
+            -0.3240131116290565,
+            0.9015837585929558,
+            1.5034577379538634,
+            0.031040931092790894,
+            -0.08473187021821657,
+            0.3007913807409291,
+            0.6308374884982267,
+            1.6220499415833045,
+            0.07785297697422942,
+            0.8483420858949375,
+            -0.08910266109418644
+          ],
+          "original_limit_clipped_indices": [
+            16
+          ],
+          "support_brace_audit": [
+            {
+              "finger": "index",
+              "original_m": [
+                -0.006058394508222595,
+                -0.00621849177427322,
+                0.03869347900002087
+              ],
+              "target_m": [
+                0.004013206529314117,
+                -0.00621849177427322,
+                0.03869347900002087
+              ],
+              "planned_m": [
+                0.004004933815464185,
+                -0.006213298145409584,
+                0.038689862556159395
+              ],
+              "error_m": 1.0415864890599942e-05,
+              "joint_change_rad": [
+                0.2536580839153353,
+                -0.03216172386918502,
+                -0.4846131760823736,
+                0.021338223423920777
+              ]
+            },
+            {
+              "finger": "middle",
+              "original_m": [
+                -0.006026247986246342,
+                -0.006214222003953384,
+                0.0009896830719374656
+              ],
+              "target_m": [
+                0.003210565223451294,
+                -0.006214222003953384,
+                0.0009896830719374656
+              ],
+              "planned_m": [
+                0.0032105143541390673,
+                -0.006214254111283499,
+                0.0009894723643391271
+              ],
+              "error_m": 2.1912612708455838e-07,
+              "joint_change_rad": [
+                0.26665922876245957,
+                0.0468810732285074,
+                -0.587432306796075,
+                0.3252953230138447
+              ]
+            }
+          ],
+          "motor_waypoints": [
+            {
+              "time_s": 12.0,
+              "q": [
+                0.29893237175455706,
+                0.165897623543569,
+                0.8679111779813933,
+                1.5570264240686509,
+                0.4384138097792243,
+                -0.22233864571443462,
+                1.1894286685869415,
+                1.1475384996742086,
+                0.42638481758828595,
+                -0.31554141496773225,
+                0.8919704102831868,
+                1.5023682181426816,
+                0.031040931092790894,
+                -0.08473187021821657,
+                0.3007913807409291,
+                0.6308374884982267,
+                1.6031999415832048,
+                0.03917378560190873,
+                0.8031838163995216,
+                -0.08222618815938165
+              ]
+            },
+            {
+              "time_s": 12.2,
+              "q": [
+                0.3074116232572424,
+                0.1692058462495409,
+                0.873370538121204,
+                1.5578176196027251,
+                0.4572524511272744,
+                -0.22075754071636033,
+                1.2043135894994694,
+                1.1534555922717873,
+                0.4536646746291082,
+                -0.3178692925472346,
+                0.9073946250433259,
+                1.4996804871819147,
+                0.031040931092790894,
+                -0.08473187021821657,
+                0.3007913807409291,
+                0.6308374884982267,
+                1.6031999415832048,
+                0.061903926445389744,
+                0.8294285165134875,
+                -0.07020207149612284
+              ]
+            },
+            {
+              "time_s": 12.5,
+              "q": [
+                0.2633214011621029,
+                0.1278777688598337,
+                0.8020150757854713,
+                1.5751998574066597,
+                0.4572524511272744,
+                -0.22075754071636033,
+                1.2043135894994694,
+                1.1534555922717873,
+                0.4536646746291082,
+                -0.3178692925472346,
+                0.9073946250433259,
+                1.4996804871819147,
+                0.031040931092790894,
+                -0.08473187021821657,
+                0.3007913807409291,
+                0.6308374884982267,
+                1.6031999415832048,
+                0.061903926445389744,
+                0.8294285165134875,
+                -0.07020207149612284
+              ]
+            },
+            {
+              "time_s": 12.9,
+              "q": [
+                0.5090444788955394,
+                0.10444018693200416,
+                0.3362067726171845,
+                1.5751998653562749,
+                0.4572524511272744,
+                -0.22075754071636033,
+                1.2043135894994694,
+                1.1534555922717873,
+                0.4536646746291082,
+                -0.3178692925472346,
+                0.9073946250433259,
+                1.4996804871819147,
+                0.031040931092790894,
+                -0.08473187021821657,
+                0.3007913807409291,
+                0.6308374884982267,
+                1.6031999415832048,
+                0.061903926445389744,
+                0.8294285165134875,
+                -0.07020207149612284
+              ]
+            },
+            {
+              "time_s": 13.2,
+              "q": [
+                0.5485098854580994,
+                0.1533994904171801,
+                0.3730510524084681,
+                1.5690748653562752,
+                0.4572524511272744,
+                -0.22075754071636033,
+                1.2043135894994694,
+                1.1534555922717873,
+                0.4536646746291082,
+                -0.3178692925472346,
+                0.9073946250433259,
+                1.4996804871819147,
+                0.031040931092790894,
+                -0.08473187021821657,
+                0.3007913807409291,
+                0.6308374884982267,
+                1.6031999415832048,
+                0.061903926445389744,
+                0.8294285165134875,
+                -0.07020207149612284
+              ]
+            },
+            {
+              "time_s": 13.5,
+              "q": [
+                0.5485098854580994,
+                0.1533994904171801,
+                0.3730510524084681,
+                1.5690748653562752,
+                0.3478088217823154,
+                -0.23628090483236455,
+                1.0903522913179635,
+                1.1786721080327356,
+                0.4536646746291082,
+                -0.3178692925472346,
+                0.9073946250433259,
+                1.4996804871819147,
+                0.031040931092790894,
+                -0.08473187021821657,
+                0.3007913807409291,
+                0.6308374884982267,
+                1.6031999415832048,
+                0.061903926445389744,
+                0.8294285165134875,
+                -0.07020207149612284
+              ]
+            },
+            {
+              "time_s": 13.9,
+              "q": [
+                0.5485098854580994,
+                0.1533994904171801,
+                0.3730510524084681,
+                1.5690748653562752,
+                0.6319988737148703,
+                -0.1874362706475388,
+                0.4705203935267362,
+                1.5195252962937047,
+                0.4536646746291082,
+                -0.3178692925472346,
+                0.9073946250433259,
+                1.4996804871819147,
+                0.031040931092790894,
+                -0.08473187021821657,
+                0.3007913807409291,
+                0.6308374884982267,
+                1.6031999415832048,
+                0.061903926445389744,
+                0.8294285165134875,
+                -0.07020207149612284
+              ]
+            },
+            {
+              "time_s": 14.2,
+              "q": [
+                0.5485098854580994,
+                0.1533994904171801,
+                0.3730510524084681,
+                1.5690748653562752,
+                0.7496204360050225,
+                -0.1693416291335101,
+                0.6470028748077172,
+                1.473730235940293,
+                0.4683341263853009,
+                -0.3347552075813636,
+                0.9360794171311609,
+                1.517853518529703,
+                0.031040931092790894,
+                -0.08473187021821657,
+                0.3007913807409291,
+                0.6308374884982267,
+                1.6031999415832048,
+                0.07901774829688804,
+                0.8068536593826205,
+                -0.07090847975786382
+              ]
+            }
+          ],
+          "staged_transfer_audit": [
+            {
+              "finger": "index",
+              "time_s": 12.5,
+              "target_m": [
+                -0.006058394508222595,
+                -0.00821849177427322,
+                0.03869347900002087
+              ],
+              "IK_error_m": 1.1650443806001702e-06
+            },
+            {
+              "finger": "index",
+              "time_s": 12.9,
+              "target_m": [
+                0.004013206529314117,
+                -0.00821849177427322,
+                0.03869347900002087
+              ],
+              "IK_error_m": 1.232367176783546e-05
+            },
+            {
+              "finger": "middle",
+              "time_s": 13.5,
+              "target_m": [
+                -0.006026247986246342,
+                -0.008214222003953383,
+                0.0009896830719374656
+              ],
+              "IK_error_m": 7.677762992407789e-08
+            },
+            {
+              "finger": "middle",
+              "time_s": 13.9,
+              "target_m": [
+                0.003210565223451294,
+                -0.008214222003953383,
+                0.0009896830719374656
+              ],
+              "IK_error_m": 1.1835505381836897e-07
+            }
+          ]
+        },
+        "proprioceptive_pressure_spec": null,
+        "measured_hold_reference_audit": null,
+        "pressure_feedback_scope": null,
+        "support_residual_scale_override_rad": null,
+        "wrist_roll_reference_degrees": 0.0,
+        "wrist_roll_scope": null,
+        "frozen_thumb_actor": false,
+        "frozen_thumb_scope": null,
+        "truth_body_roll_diagnostic": false,
+        "first_failure": "body stability after handover"
+      },
+      "trace_sha256": "9eeb173a33cced3739297d7f0aa027571c70c6e9b5135be3e0fd1310fee9a23d"
+    }
+  ]
+}
