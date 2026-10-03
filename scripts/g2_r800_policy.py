@@ -31,7 +31,7 @@ class G2R800Policy(FrozenPolicy):
         self.last_encoder_input = None; self.last_observation = None
         assert 0<=thumb_action_gain<=1 and 0<=support_action_gain<=1
         self.thumb_action_gain=thumb_action_gain;self.support_action_gain=support_action_gain
-        self.residual=None;self.last_public_features=None;self.thumb_reference=None;self.history_features=False;self.support_estimator=None
+        self.residual=None;self.last_public_features=None;self.thumb_reference=None;self.history_features=False;self.support_estimator=None;self.action_parameterization='incremental'
         if residual_checkpoint is not None:
             from scripts.wuji_robust_learning import ResidualActorCritic
             saved=torch.load(residual_checkpoint,map_location='cpu')
@@ -45,6 +45,8 @@ class G2R800Policy(FrozenPolicy):
             dim=(170 if self.history_features else 154)+(8 if self.support_estimator is not None else 0)
             self.residual=ResidualActorCritic(dim,dim+27).to(self.player.device);self.residual.load_state_dict(saved['model']);self.residual.eval()
             self.residual_scale=torch.tensor(saved['action_scale'],device=self.player.device)
+            self.action_parameterization=saved.get('action_parameterization','incremental')
+            assert self.action_parameterization in ['incremental','bounded-motor-offset']
             self.action_base_mode=saved.get('action_base_mode','r800')
             if self.action_base_mode=='geometric':
                 from scripts.wuji_scheduled_thumb_reference import ScheduledThumbReference
@@ -95,7 +97,11 @@ class G2R800Policy(FrozenPolicy):
                 self.last_public_features=public.detach().cpu().numpy()[0]
                 base=action if self.action_base_mode=="r800" else torch.zeros_like(action)
                 if self.thumb_reference is not None:base=self.thumb_reference.action(self.known.initial,self.known.issued,self.tensor([goal]))
-                action=(base+self.residual_scale*torch.tanh(self.residual.actor(public))).clamp(-1,1)
+                if self.action_parameterization=='bounded-motor-offset':
+                    assert self.thumb_reference is not None
+                    from scripts.wuji_bounded_motor_residual import bounded_motor_residual_action
+                    action=bounded_motor_residual_action(self.thumb_reference.last_target,self.known,self.residual.actor(public),self.residual_scale)
+                else:action=(base+self.residual_scale*torch.tanh(self.residual.actor(public))).clamp(-1,1)
             action=action.clone();action[:,:16]*=self.support_action_gain;action[:,16:]*=self.thumb_action_gain
             target = self.known.step(action)
         self.last_action = action[0].cpu().numpy()

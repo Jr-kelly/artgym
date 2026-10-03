@@ -43,6 +43,8 @@ class ScheduledThumbReference:
         index = index.clamp(0, len(self.shifts)-2)
         alpha = ((self.desired-self.shifts[index])/(self.shifts[index+1]-self.shifts[index])).unsqueeze(-1)
         desired_q = initial[:,16:]+self.q[index]*(1.-alpha)+self.q[index+1]*alpha-self.q[0]
+        self.last_target = initial.clone()
+        self.last_target[:,16:] = desired_q
         action = torch.zeros_like(initial)
         action[:,16:] = (desired_q-issued[:,16:])/.025
         self.age += 1

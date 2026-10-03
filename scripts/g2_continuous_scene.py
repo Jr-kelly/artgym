@@ -33,7 +33,7 @@ def gym_transform(position,quaternion=(0,0,0,1)):
 class G2ContinuousScene:
     def __init__(self,n=8,seed=2026100356,randomization_scale=0.,instances=None,
                  load_max=.1,detent_max=.1,contact_progress_reward=0.,reference_spec=None,
-                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False,graphics=False,disabled_perturbations=()):
+                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False,graphics=False,disabled_perturbations=(),action_parameterization='incremental'):
         self.n=n;self.device='cuda:0';self.seed=seed
         self.disabled_perturbations=set(disabled_perturbations)
         assert self.disabled_perturbations <= {'calibration','placement','sensor','latency','material'}
@@ -51,6 +51,8 @@ class G2ContinuousScene:
         self.load_profile=load_profile;self.load_frequency=load_frequency
         assert load_profile in ['constant','sinusoidal','triangular','pulse','mixed'] and load_frequency>0
         self.scale=self.tensor([support_scale]*16+[thumb_scale]*4);self.base_mode='geometric';self.env=self
+        assert action_parameterization in ['incremental','bounded-motor-offset']
+        self.action_parameterization=action_parameterization
         self.contact_progress_reward=contact_progress_reward
         self.functional_thumb_reward=functional_thumb_reward
         self.absorbing_failure_penalty=absorbing_failure_penalty
@@ -348,7 +350,10 @@ class G2ContinuousScene:
         if action_scale is None:action_scale=self.scale
         active=self.policy_active.clone();oldage=self.age.clone();operation_active=oldage>=480
         base=self.reference.action(self.bridge.known.initial,self.bridge.known.issued,self.goal)
-        proposed=(base+action_scale*torch.tanh(residual)).clamp(-1,1)
+        if self.action_parameterization=='bounded-motor-offset':
+            from scripts.wuji_bounded_motor_residual import bounded_motor_residual_action
+            proposed=bounded_motor_residual_action(self.reference.last_target,self.bridge.known,residual,action_scale)
+        else:proposed=(base+action_scale*torch.tanh(residual)).clamp(-1,1)
         proposed=torch.where(active[:,None],proposed,torch.zeros_like(proposed))
         executed=torch.where(self.delay[:,None],self.delayed_action,proposed)
         self.delayed_action=proposed.detach().clone();executed=torch.where(active[:,None],executed,torch.zeros_like(executed))

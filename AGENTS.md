@@ -1,3 +1,8 @@
-# Wuji G2 continuous pickup/manipulation goal
+# Wuji 承托与持续按压当前轮
 
-Read WUJI_GOAL_HANDOFF.md and research/robust-knife-family-20261003/{GOAL.md,STATE.json,HANDOFF.md,DECISIONS.jsonl}. Latest attached goal is authoritative: G2 + Wuji v1, real handle135x16x12mm excluding slider protrusion; no unlocking DOF. First priority continuous table pickup, stable grip, extend40mm command, hold, retract, hold. No GPU-hour cap or reserve; minimum12hours useful autonomous work. Joint randomization must enter training and independently check representative held-out combinations. Passive load0–.10N is initial additional range, not real resistance ceiling. No subagents, no real hardware actions, no filler load. Whole-machine rolling4h GPU utilization must exceed27%; aim>40%. Preserve old finals/releases, other user processes and ToDesk. Update scripts.record_wuji_robust_goal at experiment start/end, changes, findings, failures; include timestamp, evidence, configuration, weight hashes and next step. Historical PIDs/utilization need reverification. G2 seven arm joints and twenty hand joints map by name. R800 is SC-real encoder paired with teacher/normalizer;2076 input and issued-target history semantics must match. Enable gravity on arm, hand and knife. Never manufacture success via object resets/constraints/slider actuation.
+先读 WUJI_GOAL_HANDOFF.md 和 research/support-pressure-20261003/GOAL.md。
+实际实验副本为 /data/research/artgym-experiments-20260921/support-pressure-20261003。
+本轮最新用户附件明确取消 GPU 小时上限与利用率指标，覆盖旧轮26/27/40%要求。仅运行有用工作，禁止子代理、填充负载和自动真机动作，保留ToDesk及其他用户进程。
+每项实验开始/结束、配置/机器/进程变更、结论与失败均更新当前续接文档和 /data/research/artgym-experiments-20260921/runs/wuji-goal/journal/events.jsonl；证据含时间、路径、配置、必要权重哈希和下一步。
+旧冻结结果与旧Release不变；runs旧目录为只读使用的基线引用，新输出只能在 runs/support-pressure-20261003。
+资产/规划、训练拟合、独立验证、脚本demo、测量/估计压力及硬件结果分开。当前可部署控制不读当前接触/物体/滑块真值，不假设硬件力传感或电流接口。
