@@ -33,7 +33,7 @@ def gym_transform(position,quaternion=(0,0,0,1)):
 class G2ContinuousScene:
     def __init__(self,n=8,seed=2026100356,randomization_scale=0.,instances=None,
                  load_max=.1,detent_max=.1,contact_progress_reward=0.,reference_spec=None,
-                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False,graphics=False,disabled_perturbations=(),action_parameterization='incremental',resistance_integration='legacy-explicit',load_min=0.,detent_min=0.,asset_registry=None,proprioceptive_pressure_spec=None,resample_initial_estimates=False,stable_progress_reward=False,support_load_feature_spec=None):
+                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False,graphics=False,disabled_perturbations=(),action_parameterization='incremental',resistance_integration='legacy-explicit',load_min=0.,detent_min=0.,asset_registry=None,proprioceptive_pressure_spec=None,resample_initial_estimates=False,stable_progress_reward=False,support_load_feature_spec=None,known_support_span=.04):
         self.n=n;self.device='cuda:0';self.seed=seed
         self.disabled_perturbations=set(disabled_perturbations)
         assert self.disabled_perturbations <= {'calibration','placement','sensor','latency','material'}
@@ -66,6 +66,11 @@ class G2ContinuousScene:
         self.strong_slider_contact_reward=strong_slider_contact_reward
         self.cfg=configuration('wuji_geometry',n,['object=knife_wuji_real_size_20261002','hand=wuji_paper_official_actuator','+task.env.geometryRound=real-size-student-adaptation-20261002'],train='wujiAcquisitionSAPG',seed=seed)
         self.bridge=BatchedG2R800(self.cfg,TEACHER,R800,n)
+        assert .04<=known_support_span<=.20
+        self.known_controller_spec=dict(support_span_rad=float(known_support_span),support_step_rad=.025 if known_support_span>.04 else None,scope='Explicitsoftware motor-offset span; originalURDFlimits/PD/torque/gravity intact. Larger supporttargets rate-limited; actualissued actionhistory retained, notconstantforce')
+        self.bridge.known.configure_support(known_support_span,self.known_controller_spec['support_step_rad']);self.bridge.single.known.configure_support(known_support_span,self.known_controller_spec['support_step_rad'])
+        self.cfg.task.env.supportActionSpan=known_support_span
+        if known_support_span>.04:assert action_parameterization=='bounded-motor-offset' and support_estimator_spec is None and support_load_feature_spec is None and proprioceptive_pressure_spec is None
         self.player=self.bridge.player
         self.scene_spec=scene_spec
         self.held_diagnostic=bool(scene_spec and scene_spec.get('held_diagnostic',False))
@@ -496,6 +501,7 @@ class G2ContinuousScene:
             # Update the same independent issued-target memory used by deployment.
             predicted=self.bridge.known.step(executed)
             hq[ids]=predicted[ids]
+            if self.bridge.known.support_step is not None:executed[ids]=self.bridge.known.last_executed_action[ids]
             if self.pressure_adapter is not None:
                 self.pressure_adapter.offset[ids]=predicted[ids,16:]-pressure_desired[ids,16:]+self.pressure_adapter.anchor[ids]
         self.target[:,self.arm_ids]=aq;self.target[:,self.hand_ids]=hq

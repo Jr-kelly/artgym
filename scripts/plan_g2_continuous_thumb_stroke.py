@@ -50,8 +50,9 @@ def main():
  assert not a.contact_patch or np.allclose(abs(n),[0,1,0]),'Patch mode currently uses authored y-normal slider top'
  base_lower=h.lower[16:]+a.joint_margin;base_upper=h.upper[16:]-a.joint_margin
  base_lower[0]=h.lower[16]+a.thumb_base_margin;base_upper[0]=h.upper[16]-a.thumb_base_margin
- if a.thumb_base_margin>.08 or a.refine_initial_contact:
+ if a.thumb_base_margin>.08 or a.refine_initial_contact or j.get('operating_contact_point_knife_m'):
   old=previous.copy()
+  if j.get('operating_contact_point_knife_m'):start=np.array(j['operating_contact_point_knife_m'])
   if a.refine_initial_contact:
    assert a.contact_patch,'Surface refinement uses declared finite contactpatch'
    slider_parts=[part for part in parts[0.] if part['link']=='link_1']
@@ -97,7 +98,7 @@ def main():
    contact=(.0001-np.linalg.norm(point-desired))*np.ones(1)
    if a.contact_patch:contact=np.array([.0045-abs(point[0]-patch_x_center),.00015-abs(point[1]-desired[1]),.0005-abs(point[2]-desired[2])])
    return np.r_[contact*1000,facing-a.facing_floor,(knife-.000005)*1000,(selfgap-.000015)*1000,motor_self_constraints(x) if motor_anchor else []]
-  fit=SimpleNamespace(x=q0[16:].copy(),success=True,message='Fixed initialknownmotor anchor, geometry checked') if motor_anchor and shift==0 else minimize(objective,np.clip(reference,lo,hi),method='SLSQP',bounds=list(zip(lo,hi)),constraints=[dict(type='ineq',fun=constraints)],options=dict(maxiter=160,ftol=1e-11));point,facing,knife,selfgap=evaluate(fit.x,shift);ok=bool(constraints(fit.x).min()>=-1e-4);rows.append(dict(shift_m=float(shift),q_thumb=fit.x.tolist(),point_error_m=float(np.linalg.norm(point-desired)),pad_facing_cosine=facing,minimum_knife_gap_m=knife,minimum_self_gap_m=selfgap,maximum_joint_step_rad=float(abs(fit.x-prior).max()),feasible=ok,optimizer_success=bool(fit.success),message=fit.message));previous=fit.x
+  fit=SimpleNamespace(x=q0[16:].copy(),success=True,message='Fixed initialknownmotor anchor, geometry checked') if motor_anchor and shift==0 else minimize(objective,np.clip(reference,lo,hi),method='SLSQP',bounds=list(zip(lo,hi)),constraints=[dict(type='ineq',fun=constraints)],options=dict(maxiter=160,ftol=1e-11));point,facing,knife,selfgap=evaluate(fit.x,shift);ok=bool(constraints(fit.x).min()>=-1e-4);rows.append(dict(shift_m=float(shift),q_thumb=fit.x.tolist(),point_error_m=float(np.linalg.norm(point-desired)),pad_facing_cosine=facing,minimum_knife_gap_m=knife,minimum_self_gap_m=selfgap,maximum_joint_step_rad=float(abs(fit.x-prior).max()),constraint_values=constraints(fit.x).tolist(),contact_point_knife_m=point.tolist(),feasible=ok,optimizer_success=bool(fit.success),message=fit.message));previous=fit.x
   with a.output.with_suffix('.knots.jsonl').open('a') as stream:stream.write(json.dumps(rows[-1])+'\n')
   if len(rows)%5==0:print(json.dumps(dict(knots=len(rows),shift_m=float(shift),feasible=ok)),flush=True)
   if not ok:break

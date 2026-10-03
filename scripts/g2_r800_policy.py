@@ -64,6 +64,12 @@ class G2R800Policy(FrozenPolicy):
             self.residual_scale=torch.tensor(saved['action_scale'],device=self.player.device)
             self.action_parameterization=saved.get('action_parameterization','incremental')
             assert self.action_parameterization in ['incremental','bounded-motor-offset']
+            controller=saved.get('known_controller_spec',{})
+            self.known.configure_support(controller.get('support_span_rad',.04),controller.get('support_step_rad'))
+            if self.known.support_span>.04:
+                assert self.action_parameterization=='bounded-motor-offset' and saved.get('action_base_mode')=='geometric'
+                assert self.pressure_adapter is None and self.support_delta_coordinates is None and self.proprioceptive_pressure_spec is None
+                cfg.task.env.supportActionSpan=self.known.support_span
             if support_residual_scale_override is not None:
                 assert self.action_parameterization=='bounded-motor-offset'
                 assert 0<support_residual_scale_override<=float(cfg.task.env.supportActionSpan)
@@ -126,12 +132,14 @@ class G2R800Policy(FrozenPolicy):
         states=clone_states(self.player.states);network=self.player.model.a2c_network
         old_override=getattr(network,'actor_encoder_obs_override',None)
         issued=self.known.issued.clone();initial=self.known.initial.clone()
+        executed=self.known.last_executed_action.clone()
         history=np.asarray(self.history).copy();reference=copy.deepcopy(self.thumb_reference)
         fields=['last_action','last_raw_action','last_encoder_input','last_observation','last_public_features','held_support_logits']
         saved={name:copy.deepcopy(getattr(self,name)) for name in fields}
         def restore():
             self.player.states=clone_states(states)
             self.known.issued=issued.clone();self.known.initial=initial.clone()
+            self.known.last_executed_action=executed.clone()
             self.thumb_reference=copy.deepcopy(reference)
             for name,value in saved.items():setattr(self,name,copy.deepcopy(value))
             network.actor_encoder_obs_override=old_override
@@ -144,6 +152,7 @@ class G2R800Policy(FrozenPolicy):
             if torch.cuda.is_available():torch.cuda.synchronize()
         finally:restore()
         assert torch.equal(issued,self.known.issued) and torch.equal(initial,self.known.initial)
+        assert torch.equal(executed,self.known.last_executed_action)
         assert np.array_equal(history,np.asarray(self.history)) and np.array_equal(saved['last_action'],self.last_action)
         return dict(iterations=iterations,wall_ms=(time.perf_counter()-begin)*1000,
                     measured_history_frames=50,commands_issued=0,discarded_computed_targets=iterations,
@@ -197,6 +206,7 @@ class G2R800Policy(FrozenPolicy):
                 action=action.clone();action[:,:16]+=self.tensor(offset)[:,:16]/.04
                 action=action.clamp(-1,1)
             target = self.known.step(action)
+            if self.known.support_step is not None:action=self.known.last_executed_action.clone()
             if self.pressure_adapter is not None and hasattr(self.pressure_adapter,'commit_issued'):
                 self.pressure_adapter.commit_issued(target[0].cpu().numpy(),proposed[0].cpu().numpy())
         self.last_action = action[0].cpu().numpy()
@@ -209,10 +219,11 @@ class G2R800Policy(FrozenPolicy):
         Offline geometry and scheduled command only; no force/slider feedback.
         """
         desired=self.tensor(target)
-        action=(desired-self.known.initial)/.04
+        action=(desired-self.known.initial)/self.known.support_span
         action[:,16:]=(desired[:,16:]-self.known.issued[:,16:])/.025
         action=action.clamp(-1,1)
         with torch.no_grad():issued=self.known.step(action)
+        if self.known.support_step is not None:action=self.known.last_executed_action.clone()
         self.last_action=action[0].cpu().numpy()
         self.last_raw_action=np.zeros(20,dtype=np.float32)
         return issued[0].cpu().numpy(),self.last_action.copy()

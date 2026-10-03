@@ -60,7 +60,7 @@ def main():
   assert not post_lift_interval or a.takeover_seconds>=post_lift_interval[-1]+2/30,'Learned preparation must not interrupt planned postlift transfer'
  if lift_preload_height:assert a.acquisition_path and not post_lift_interval and 0<=lift_preload_height[0]<lift_preload_height[1]<=.10
  if post_lift_interval:
-  assert a.acquisition_path and 12<=post_lift_interval[0]<post_lift_interval[1]<=16-50/30,'Post-lift preload must leave50 real constant-target frames before policy takeover'
+  assert (a.acquisition_path or a.held_diagnostic) and 12<=post_lift_interval[0]<post_lift_interval[1]<=16-50/30,'Post-lift preload must leave50 real constant-target frames before policy takeover'
  middle_support=None;middle_regulator=None
  if a.middle_load_lag_regulation:assert a.middle_deflection_support and a.thumb_script and not a.residual_checkpoint
  if a.middle_deflection_support:
@@ -137,7 +137,8 @@ def main():
    first,last=support_spec['transition_seconds'];return closed+smooth((t-first)/(last-first))*(operating_closed-closed)
   if not post_lift_interval:return closed
   first,last=post_lift_interval
-  return closed+smooth((t-first)/(last-first))*(operating_closed-closed)
+  alpha=smooth((t-first)/(last-first));bump=np.asarray(plan.get('post_lift_preparation_joint_bump_rad',[0.]*20))
+  return closed+alpha*(operating_closed-closed)+np.sin(np.pi*alpha)*bump
  knife0=transform([.50+a.dx,-.30+a.dy,a.table_height+float(knife_parameters['handle_size'][1])/2+.0001],(Rotation.from_euler('z',a.yaw,degrees=True)*Rotation.from_euler('x',90,degrees=True)).as_quat());
  if a.slider_face=='down':knife0=knife0@transform(quaternion=Rotation.from_euler('z',180,degrees=True).as_quat())
  # Model envelope placement occurs only before the episode starts.
@@ -253,7 +254,7 @@ def main():
     q=dof[hand,0].numpy().copy()+sensor_bias+rng.normal(0.,a.observation_noise,20);act=np.zeros(20,dtype=np.float32);policy.record(q,policy.last_action if taken else act)
     if policy.support_load_features is not None:
      policy.support_load_features.observe(policy.tensor(q),policy.tensor(previously_issued_target[hand].numpy()),torch.tensor([round(t*30)],device=policy.player.device))
-    if a.held_diagnostic and t<16:aq=qlift;hq=closed
+    if a.held_diagnostic and t<16:aq=qlift;hq=hold_motor(t,aq)
     elif t<2:aq=qabove;hq=opened
     elif t<5:aq=acquisition_motor(approach_path,smooth((t-2)/3)) if a.acquisition_path else path_motor(1-smooth((t-2)/3)) if a.cartesian_path else qabove+smooth((t-2)/3)*(qgrasp-qabove);hq=opened
     elif t<8:aq=qgrasp;hq=close_motor((t-5)/3)

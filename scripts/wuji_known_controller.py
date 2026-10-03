@@ -7,17 +7,26 @@ class KnownWujiController:
   self.lower=lower.clone();self.upper=upper.clone()
   self.initial=torch.zeros((n,20),device=lower.device,dtype=lower.dtype)
   self.issued=self.initial.clone()
+  self.support_span=.04;self.support_step=None
+  self.last_executed_action=self.initial.clone()
+ def configure_support(self,span=.04,step=None):
+  assert .04<=span<=.20 and (step is None or 0<step<=.025)
+  self.support_span=float(span);self.support_step=step
  def reset(self,ids,initial_command):
   # Supplied by the initialization command, never inferred from measured q.
   self.initial[ids]=initial_command;self.issued[ids]=initial_command
+  self.last_executed_action[ids]=0
  def step(self,action):
-  target=self.initial+.04*action
+  previous=self.issued.clone();target=self.initial+self.support_span*action
   target[:,16:]=self.issued[:,16:]+.025*action[:,16:]
+  if self.support_step is not None:target[:,:16]=torch.minimum(torch.maximum(target[:,:16],previous[:,:16]-self.support_step),previous[:,:16]+self.support_step)
   target=tensor_clamp(target,self.lower,self.upper)
   # Preserve the actual original controller's normalized-command round trip.
   normalized=unscale(target,self.lower,self.upper)
   desired=scale(normalized,self.lower,self.upper)
   self.issued=tensor_clamp(desired,self.lower,self.upper)
+  self.last_executed_action=(self.issued-self.initial)/self.support_span
+  self.last_executed_action[:,16:]=(self.issued[:,16:]-previous[:,16:])/.025
   return self.issued
  def observed_targets(self):return unscale(self.issued,self.lower,self.upper)
 
