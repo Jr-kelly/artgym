@@ -1,0 +1,55 @@
+{
+  "source_report_sha256": "c12ba488ffd7566a31880aae9420f02b499d505737641b9b7c23b828da080456",
+  "fresh_core_thickness_bins": [
+    {
+      "thickness_bin_mm": [
+        10,
+        11
+      ],
+      "n": 26,
+      "complete": 22
+    },
+    {
+      "thickness_bin_mm": [
+        11,
+        12
+      ],
+      "n": 36,
+      "complete": 34
+    },
+    {
+      "thickness_bin_mm": [
+        12,
+        13
+      ],
+      "n": 34,
+      "complete": 21
+    },
+    {
+      "thickness_bin_mm": [
+        13,
+        14
+      ],
+      "n": 32,
+      "complete": 1
+    }
+  ],
+  "height_sensitivity": {
+    "sensitivity-height-minus1": {
+      "n": 16,
+      "complete": 15,
+      "failures": {
+        "body unstable/drop": 1
+      }
+    },
+    "sensitivity-height-plus1": {
+      "n": 16,
+      "complete": 3,
+      "failures": {
+        "body unstable/drop": 5,
+        "pickup/hold": 8
+      }
+    }
+  },
+  "scope": "Descriptive frozen outcomes; no fitting/modelselection or causal/statisticalrealreliability claim"
+}

@@ -1,0 +1,108 @@
+{
+  "scope": "Three fixed512 training-family development checks seed0403,maxrun/detent.5/.5,mixedomega1.7,16s takeover. Matched initial serialized residualscale.75; P50 actor tensor mean/Adam/RNG unchanged. AR/AS same parent/seed/rebuilt physics and300newupdates each, directionalcontactreward0 vs.5. Notprimary independent score/modelpromotion/bitwisecontact orlearninggain proof.",
+  "results": [
+    {
+      "name": "highload-matched-reference-development-v1",
+      "checkpoint_sha256": "805940916fec7ac9248ec04d18aa165cc21f99e6c013a759131b87d869ec714a",
+      "complete": 178,
+      "n": 512,
+      "T13_14_complete": 1,
+      "T13_14_n": 112,
+      "failure_counts": {
+        "pickup/hold": 41,
+        "body unstable/drop": 286,
+        "extension": 3,
+        "retraction": 4
+      },
+      "initial_fields_exact_equal_to_reference": {
+        "root": true,
+        "dof": true,
+        "materials": true,
+        "observation_bias": true,
+        "delay": true,
+        "cal_object": true,
+        "cal_slider": true,
+        "load_amplitude": true,
+        "detent_amplitude": true,
+        "load_phase": true,
+        "load_profile_ids": true,
+        "load_frequencies": true
+      },
+      "prefix_issuedtarget_max_diff_rad": 0.0,
+      "prefix_actualq_max_diff_rad": 0.0,
+      "body_first_rotation_or_drift_breach_during_operation_count": 303,
+      "body_first_breach_median_time_s": 20.366666666666667,
+      "report_sha256": "fadaccbcf9424086ff96490ac810255480ef52ceab5efb2962b5783b7b056432",
+      "trace_sha256": "5d8ec17e27b8738570f908e2cdc579bb0cfc4cf47840964b96eaeaa2d7a799b8"
+    },
+    {
+      "name": "highload-AR-final-development-v1",
+      "checkpoint_sha256": "bdd2d555f2dde8991cf71ed19d6e5eb417b0a9889be42d9507e3b85ff362d1c2",
+      "complete": 181,
+      "n": 512,
+      "T13_14_complete": 0,
+      "T13_14_n": 112,
+      "failure_counts": {
+        "pickup/hold": 44,
+        "body unstable/drop": 280,
+        "extension": 6,
+        "retraction": 1
+      },
+      "initial_fields_exact_equal_to_reference": {
+        "root": true,
+        "dof": true,
+        "materials": true,
+        "observation_bias": true,
+        "delay": true,
+        "cal_object": true,
+        "cal_slider": true,
+        "load_amplitude": true,
+        "detent_amplitude": true,
+        "load_phase": true,
+        "load_profile_ids": true,
+        "load_frequencies": true
+      },
+      "prefix_issuedtarget_max_diff_rad": 0.0,
+      "prefix_actualq_max_diff_rad": 0.4809139370918274,
+      "body_first_rotation_or_drift_breach_during_operation_count": 298,
+      "body_first_breach_median_time_s": 21.53333333333333,
+      "report_sha256": "2c2b40cd5a4eddea5bd589618797aced8730b729b55973ae6619f327d53ce303",
+      "trace_sha256": "6fa10acf5fc657af52a4c045b032baa7f6edeb0b031be2398abbac5dd2884b84"
+    },
+    {
+      "name": "highload-AS-final-development-v1",
+      "checkpoint_sha256": "ca00f6bbe2fa248f0c8116ccca7cd11d51fa5585dea87fa1eaa198509141266a",
+      "complete": 183,
+      "n": 512,
+      "T13_14_complete": 0,
+      "T13_14_n": 112,
+      "failure_counts": {
+        "retraction": 6,
+        "pickup/hold": 48,
+        "body unstable/drop": 272,
+        "extension": 3
+      },
+      "initial_fields_exact_equal_to_reference": {
+        "root": true,
+        "dof": true,
+        "materials": true,
+        "observation_bias": true,
+        "delay": true,
+        "cal_object": true,
+        "cal_slider": true,
+        "load_amplitude": true,
+        "detent_amplitude": true,
+        "load_phase": true,
+        "load_profile_ids": true,
+        "load_frequencies": true
+      },
+      "prefix_issuedtarget_max_diff_rad": 0.0,
+      "prefix_actualq_max_diff_rad": 0.3672294020652771,
+      "body_first_rotation_or_drift_breach_during_operation_count": 295,
+      "body_first_breach_median_time_s": 19.9,
+      "report_sha256": "3bea98f04ae61bb0a4842a98e72ef7304571c7d2d1debe797edd73eab41b197d",
+      "trace_sha256": "70891388e92e5d6117787693459520e3255c054dc660e4f462a92e0a17653655"
+    }
+  ],
+  "conclusion": "Reference178, AR181, AS183 of512; none resolveshighloadbodyinstability/thick-support deficiency. Counts differ too little amid numericalcontact variation to establish directionalreward advantage. Preserve actual final350 weights/Adam/RNG and allchecks, retain primary frozenP50."
+}

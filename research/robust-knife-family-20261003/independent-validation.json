@@ -1,0 +1,3481 @@
+{
+  "freeze_sha256": "a76bad463a34428548d4fb1f5d9f772a1ff0361aaac076ab1bca83936abd9d74",
+  "policy": {
+    "checkpoint_path": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+    "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714",
+    "takeover_seconds": 16.0,
+    "actor": "P50 bounded learned residual hybrid with geometric thumb reference; nominal prior same across all assets; scriptedTABLEpickup prefix, not end-to-end learned"
+  },
+  "conditions": {
+    "independent-core-v1": {
+      "evidence": "runs/robust-knife-family-20261003/checks/independent-core-v1",
+      "n": 8,
+      "complete": 6,
+      "failures": {
+        "body unstable/drop": 2
+      },
+      "per_instance": {
+        "012": {
+          "n": 2,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 2
+          }
+        },
+        "013": {
+          "n": 2,
+          "complete": 2,
+          "failures": {}
+        },
+        "014": {
+          "n": 2,
+          "complete": 2,
+          "failures": {}
+        },
+        "015": {
+          "n": 2,
+          "complete": 2,
+          "failures": {}
+        }
+      },
+      "pickup_valid": 8,
+      "recorded_added_load_abs_peak_N": 0.16903439164161682,
+      "actual_initial_run_amplitude_range_N": [
+        0.0001339761511189863,
+        0.0814465805888176
+      ],
+      "actual_initial_startup_amplitude_range_N": [
+        0.007088256534188986,
+        0.08748077601194382
+      ],
+      "actual_material_ranges": {
+        "hand": [
+          0.7385060787200928,
+          1.0943795442581177
+        ],
+        "knife": [
+          1.8271331787109375,
+          3.344898223876953
+        ]
+      },
+      "one_step_latency_cases": 1,
+      "videos": [
+        "env0000-continuous.mp4",
+        "env0000-hand-closeup.mp4",
+        "env0001-continuous.mp4",
+        "env0001-hand-closeup.mp4",
+        "env0002-continuous.mp4",
+        "env0002-hand-closeup.mp4",
+        "env0003-continuous.mp4",
+        "env0003-hand-closeup.mp4"
+      ],
+      "load_peak_scope": "30Hz recorded last-substep engineering added force, not an exhaustive substep maximum or measured real total resistance",
+      "report_sha256": "ba5678be84f3bc12e97dbf718663bcd3d3139de16c9da2ef67f0abeece9236d4",
+      "initial_snapshot_sha256": "69ee91b479c263f289caa109d3d58debaaaa9ea91c8c969ce377c9af963e1af1",
+      "trace_sha256": "5593a52860fe6982239b13cbf2759bd5b1a4875a43637edce694f98be99be946"
+    },
+    "independent-capacity-v1": {
+      "evidence": "runs/robust-knife-family-20261003/checks/independent-capacity-v1",
+      "n": 4,
+      "complete": 4,
+      "failures": {},
+      "per_instance": {
+        "012": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "013": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "014": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "015": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        }
+      },
+      "pickup_valid": 4,
+      "recorded_added_load_abs_peak_N": 0.17767411470413208,
+      "actual_initial_run_amplitude_range_N": [
+        0.02453407645225525,
+        0.10037499666213989
+      ],
+      "actual_initial_startup_amplitude_range_N": [
+        0.005172604229301214,
+        0.07831063121557236
+      ],
+      "actual_material_ranges": {
+        "hand": [
+          0.702252209186554,
+          0.9962019920349121
+        ],
+        "knife": [
+          2.055854558944702,
+          2.934758424758911
+        ]
+      },
+      "one_step_latency_cases": 0,
+      "videos": [
+        "env0000-continuous.mp4",
+        "env0000-hand-closeup.mp4",
+        "env0001-continuous.mp4",
+        "env0001-hand-closeup.mp4",
+        "env0002-continuous.mp4",
+        "env0002-hand-closeup.mp4",
+        "env0003-continuous.mp4",
+        "env0003-hand-closeup.mp4"
+      ],
+      "load_peak_scope": "30Hz recorded last-substep engineering added force, not an exhaustive substep maximum or measured real total resistance",
+      "report_sha256": "989de652051a125d3e1b84215acf8178bea0bd0111af982b0d9604b597ed5dc4",
+      "initial_snapshot_sha256": "b75c6349af0a61bd91b5270fa2ac4804b73227c852b2936d78b5fece5561ca57",
+      "trace_sha256": "dbb9a0f21a13239931040704a86d1bd026df09e620983fab6d082ebf75b870a0"
+    },
+    "independent-core-breadth-v1": {
+      "evidence": "runs/robust-knife-family-20261003/checks/independent-core-breadth-v1",
+      "n": 64,
+      "complete": 41,
+      "failures": {
+        "body unstable/drop": 17,
+        "pickup/hold": 6
+      },
+      "per_instance": {
+        "012": {
+          "n": 16,
+          "complete": 3,
+          "failures": {
+            "body unstable/drop": 7,
+            "pickup/hold": 6
+          }
+        },
+        "013": {
+          "n": 16,
+          "complete": 16,
+          "failures": {}
+        },
+        "014": {
+          "n": 16,
+          "complete": 6,
+          "failures": {
+            "body unstable/drop": 10
+          }
+        },
+        "015": {
+          "n": 16,
+          "complete": 16,
+          "failures": {}
+        }
+      },
+      "pickup_valid": 58,
+      "recorded_added_load_abs_peak_N": 0.22313405573368073,
+      "actual_initial_run_amplitude_range_N": [
+        0.0010041301138699055,
+        0.09756467491388321
+      ],
+      "actual_initial_startup_amplitude_range_N": [
+        0.0004971878952346742,
+        0.09939739108085632
+      ],
+      "actual_material_ranges": {
+        "hand": [
+          0.6604676246643066,
+          1.145729422569275
+        ],
+        "knife": [
+          1.8745218515396118,
+          3.3830974102020264
+        ]
+      },
+      "one_step_latency_cases": 12,
+      "videos": [
+        "env0000-continuous.mp4",
+        "env0000-hand-closeup.mp4",
+        "env0001-continuous.mp4",
+        "env0001-hand-closeup.mp4",
+        "env0002-continuous.mp4",
+        "env0002-hand-closeup.mp4",
+        "env0003-continuous.mp4",
+        "env0003-hand-closeup.mp4",
+        "env0032-continuous.mp4",
+        "env0032-hand-closeup.mp4",
+        "env0033-continuous.mp4",
+        "env0033-hand-closeup.mp4",
+        "env0034-continuous.mp4",
+        "env0034-hand-closeup.mp4",
+        "env0035-continuous.mp4",
+        "env0035-hand-closeup.mp4"
+      ],
+      "load_peak_scope": "30Hz recorded last-substep engineering added force, not an exhaustive substep maximum or measured real total resistance",
+      "report_sha256": "1bb08ded2d917f3b9332b06c8d2b803da85a59d76afc42f60d7f370eb46003ec",
+      "initial_snapshot_sha256": "ebf3af5e28fc6f08adcfcec6ab66d2c4b262b2ef4e48155e0b32d77061b3dd30",
+      "trace_sha256": "92adb89be79f21cc5b636d95d209bd39f516a677240f8a1233df0c07db00ee14"
+    },
+    "independent-capacity-breadth-v1": {
+      "evidence": "runs/robust-knife-family-20261003/checks/independent-capacity-breadth-v1",
+      "n": 32,
+      "complete": 21,
+      "failures": {
+        "pickup/hold": 4,
+        "body unstable/drop": 7
+      },
+      "per_instance": {
+        "012": {
+          "n": 8,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 4,
+            "body unstable/drop": 4
+          }
+        },
+        "013": {
+          "n": 8,
+          "complete": 8,
+          "failures": {}
+        },
+        "014": {
+          "n": 8,
+          "complete": 5,
+          "failures": {
+            "body unstable/drop": 3
+          }
+        },
+        "015": {
+          "n": 8,
+          "complete": 8,
+          "failures": {}
+        }
+      },
+      "pickup_valid": 28,
+      "recorded_added_load_abs_peak_N": 0.46437323093414307,
+      "actual_initial_run_amplitude_range_N": [
+        0.0019400258315727115,
+        0.18582618236541748
+      ],
+      "actual_initial_startup_amplitude_range_N": [
+        0.01490455400198698,
+        0.19666746258735657
+      ],
+      "actual_material_ranges": {
+        "hand": [
+          0.6587243676185608,
+          1.1038297414779663
+        ],
+        "knife": [
+          1.8548334836959839,
+          3.311835527420044
+        ]
+      },
+      "one_step_latency_cases": 2,
+      "videos": [
+        "env0000-continuous.mp4",
+        "env0000-hand-closeup.mp4",
+        "env0001-continuous.mp4",
+        "env0001-hand-closeup.mp4",
+        "env0002-continuous.mp4",
+        "env0002-hand-closeup.mp4",
+        "env0003-continuous.mp4",
+        "env0003-hand-closeup.mp4",
+        "env0016-continuous.mp4",
+        "env0016-hand-closeup.mp4",
+        "env0017-continuous.mp4",
+        "env0017-hand-closeup.mp4",
+        "env0018-continuous.mp4",
+        "env0018-hand-closeup.mp4",
+        "env0019-continuous.mp4",
+        "env0019-hand-closeup.mp4"
+      ],
+      "load_peak_scope": "30Hz recorded last-substep engineering added force, not an exhaustive substep maximum or measured real total resistance",
+      "report_sha256": "a104cc31b2d8950c552852284cbf3cf746bfe5fa281f8053cd7e064791a7032b",
+      "initial_snapshot_sha256": "666eb9d2233a0181a20e5727a6a57bd89cafe9fff0bdbfff65e864ac6499a838",
+      "trace_sha256": "cf313a654c362a2882fa18ca06f6bade43a003aa9a39f6de8446ce39689bcb98"
+    },
+    "independent-height-sensitivity-v1": {
+      "evidence": "runs/robust-knife-family-20261003/checks/independent-height-sensitivity-v1",
+      "n": 32,
+      "complete": 18,
+      "failures": {
+        "body unstable/drop": 6,
+        "pickup/hold": 8
+      },
+      "per_instance": {
+        "sensitivity-height-minus1": {
+          "n": 16,
+          "complete": 15,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "sensitivity-height-plus1": {
+          "n": 16,
+          "complete": 3,
+          "failures": {
+            "body unstable/drop": 5,
+            "pickup/hold": 8
+          }
+        }
+      },
+      "pickup_valid": 24,
+      "recorded_added_load_abs_peak_N": 0.20482021570205688,
+      "actual_initial_run_amplitude_range_N": [
+        0.00023860261717345566,
+        0.09965553134679794
+      ],
+      "actual_initial_startup_amplitude_range_N": [
+        0.0024239439517259598,
+        0.09745067358016968
+      ],
+      "actual_material_ranges": {
+        "hand": [
+          0.6609071493148804,
+          1.141997218132019
+        ],
+        "knife": [
+          1.803604006767273,
+          3.2922377586364746
+        ]
+      },
+      "one_step_latency_cases": 4,
+      "videos": [
+        "env0000-continuous.mp4",
+        "env0000-hand-closeup.mp4",
+        "env0001-continuous.mp4",
+        "env0001-hand-closeup.mp4",
+        "env0002-continuous.mp4",
+        "env0002-hand-closeup.mp4",
+        "env0003-continuous.mp4",
+        "env0003-hand-closeup.mp4",
+        "env0016-continuous.mp4",
+        "env0016-hand-closeup.mp4",
+        "env0017-continuous.mp4",
+        "env0017-hand-closeup.mp4",
+        "env0018-continuous.mp4",
+        "env0018-hand-closeup.mp4",
+        "env0019-continuous.mp4",
+        "env0019-hand-closeup.mp4"
+      ],
+      "load_peak_scope": "30Hz recorded last-substep engineering added force, not an exhaustive substep maximum or measured real total resistance",
+      "report_sha256": "df8edf4f1319388d5f79dc195431a3639ce6dc92c22dc677cd303ac99ea9de2e",
+      "initial_snapshot_sha256": "395e7792a96ab055a434c1d41f1c94758979ad73ab3e8be73dec3ba7ef3c0547",
+      "trace_sha256": "3a4b4ed479a544f046a1ad29a4dab190fb05931b40df96e00d32b3052f8f3b25"
+    },
+    "independent-fresh-core-v1": {
+      "evidence": "runs/robust-knife-family-20261003/checks/independent-fresh-core-v1",
+      "n": 128,
+      "complete": 78,
+      "failures": {
+        "body unstable/drop": 33,
+        "pickup/hold": 17
+      },
+      "per_instance": {
+        "h0000": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0001": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0002": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0003": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0004": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0005": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0006": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0007": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0008": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0009": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0010": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0011": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0012": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0013": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0014": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0015": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0016": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0017": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0018": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0019": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0020": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0021": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0022": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0023": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0024": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0025": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0026": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0027": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0028": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0029": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0030": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0031": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0032": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0033": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0034": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0035": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0036": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0037": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0038": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0039": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0040": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0041": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0042": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0043": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0044": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0045": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0046": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0047": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0048": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0049": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0050": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0051": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0052": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0053": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0054": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0055": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0056": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0057": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0058": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0059": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0060": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0061": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0062": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0063": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0064": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0065": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0066": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0067": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0068": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0069": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0070": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0071": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0072": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0073": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0074": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0075": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0076": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0077": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0078": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0079": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0080": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0081": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0082": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0083": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0084": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0085": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0086": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0087": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0088": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0089": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0090": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0091": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0092": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0093": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0094": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0095": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0096": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0097": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0098": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0099": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0100": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0101": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0102": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0103": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0104": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0105": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0106": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0107": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0108": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0109": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0110": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0111": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0112": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0113": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0114": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0115": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0116": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0117": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0118": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0119": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0120": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0121": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0122": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0123": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0124": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0125": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0126": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0127": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        }
+      },
+      "pickup_valid": 111,
+      "recorded_added_load_abs_peak_N": 0.22183258831501007,
+      "actual_initial_run_amplitude_range_N": [
+        0.0006356158410198987,
+        0.09928379207849503
+      ],
+      "actual_initial_startup_amplitude_range_N": [
+        0.0002465625002514571,
+        0.09956058114767075
+      ],
+      "actual_material_ranges": {
+        "hand": [
+          0.6618055105209351,
+          1.1486718654632568
+        ],
+        "knife": [
+          1.8106329441070557,
+          3.397310495376587
+        ]
+      },
+      "one_step_latency_cases": 9,
+      "videos": [
+        "env0000-continuous.mp4",
+        "env0000-hand-closeup.mp4",
+        "env0001-continuous.mp4",
+        "env0001-hand-closeup.mp4",
+        "env0002-continuous.mp4",
+        "env0002-hand-closeup.mp4",
+        "env0003-continuous.mp4",
+        "env0003-hand-closeup.mp4",
+        "env0064-continuous.mp4",
+        "env0064-hand-closeup.mp4",
+        "env0065-continuous.mp4",
+        "env0065-hand-closeup.mp4",
+        "env0066-continuous.mp4",
+        "env0066-hand-closeup.mp4",
+        "env0067-continuous.mp4",
+        "env0067-hand-closeup.mp4"
+      ],
+      "load_peak_scope": "30Hz recorded last-substep engineering added force, not an exhaustive substep maximum or measured real total resistance",
+      "report_sha256": "7a2e72a88e65ec967ace43c45d95ef256858d1ac20332ddd4cc255b08a37ae45",
+      "initial_snapshot_sha256": "ac93258fe3e9e94793f9ae9386fb06001f1a6b6264241709a3223470d35242f9",
+      "trace_sha256": "fc6e053eeb008c277db6f4291f02f3ae62496e4b947eef9a30387208fbabcb73"
+    },
+    "independent-fresh-capacity-v1": {
+      "evidence": "runs/robust-knife-family-20261003/checks/independent-fresh-capacity-v1",
+      "n": 64,
+      "complete": 36,
+      "failures": {
+        "body unstable/drop": 18,
+        "pickup/hold": 9,
+        "retraction": 1
+      },
+      "per_instance": {
+        "h0000": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0001": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0002": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0003": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0004": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0005": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0006": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0007": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0008": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0009": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0010": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0011": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "retraction": 1
+          }
+        },
+        "h0012": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0013": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0014": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0015": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0016": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0017": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0018": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0019": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0020": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0021": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0022": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0023": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0024": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0025": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0026": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0027": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0028": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0029": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0030": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0031": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0032": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0033": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0034": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0035": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0036": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0037": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0038": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0039": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0040": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0041": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0042": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0043": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0044": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0045": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0046": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0047": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0048": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0049": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0050": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0051": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0052": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0053": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0054": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0055": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0056": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "pickup/hold": 1
+          }
+        },
+        "h0057": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0058": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0059": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0060": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0061": {
+          "n": 1,
+          "complete": 0,
+          "failures": {
+            "body unstable/drop": 1
+          }
+        },
+        "h0062": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        },
+        "h0063": {
+          "n": 1,
+          "complete": 1,
+          "failures": {}
+        }
+      },
+      "pickup_valid": 55,
+      "recorded_added_load_abs_peak_N": 0.4507995545864105,
+      "actual_initial_run_amplitude_range_N": [
+        0.0011593627277761698,
+        0.194612517952919
+      ],
+      "actual_initial_startup_amplitude_range_N": [
+        0.0005249870009720325,
+        0.19955666363239288
+      ],
+      "actual_material_ranges": {
+        "hand": [
+          0.6575843691825867,
+          1.1415643692016602
+        ],
+        "knife": [
+          1.8201345205307007,
+          3.391216993331909
+        ]
+      },
+      "one_step_latency_cases": 8,
+      "videos": [
+        "env0000-continuous.mp4",
+        "env0000-hand-closeup.mp4",
+        "env0001-continuous.mp4",
+        "env0001-hand-closeup.mp4",
+        "env0002-continuous.mp4",
+        "env0002-hand-closeup.mp4",
+        "env0003-continuous.mp4",
+        "env0003-hand-closeup.mp4",
+        "env0032-continuous.mp4",
+        "env0032-hand-closeup.mp4",
+        "env0033-continuous.mp4",
+        "env0033-hand-closeup.mp4",
+        "env0034-continuous.mp4",
+        "env0034-hand-closeup.mp4",
+        "env0035-continuous.mp4",
+        "env0035-hand-closeup.mp4"
+      ],
+      "load_peak_scope": "30Hz recorded last-substep engineering added force, not an exhaustive substep maximum or measured real total resistance",
+      "report_sha256": "1f5969e1a998b43f0643c9d1c721963c2dc62f7be218bc4f09d4b84da4d9b446",
+      "initial_snapshot_sha256": "69c9eecea8fdc8088398637cb45b6bc4367bcd8c0cefe335116c8817ecb0dd9f",
+      "trace_sha256": "0752c2b55bef89e3648d0b4d36f10f0180ae8af802c66a60da4b7575e570087b"
+    }
+  },
+  "total": 332,
+  "complete": 204,
+  "scope": "All332 preregistered actual36s TABLE episodes. Same frozen candidate and nominal prior; no training/selection/filtering. Batched contact uses proximity/net-contact proxy, not exact pair force or real robot evidence.",
+  "failures": {
+    "body unstable/drop": 83,
+    "pickup/hold": 44,
+    "retraction": 1
+  },
+  "physical_geometries": {
+    "012": {
+      "handle_size_WTL_m": [
+        0.014376181823314859,
+        0.013149090744272852,
+        0.1393501566502658
+      ],
+      "slider_origin_m": [
+        0.0008811532735894417,
+        0.00825181009196216,
+        0.012358393661627273
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "5e66a51b7c4bff05d15a13c497a94c0006762e18b2a7f7c9f3e9c39b722aacb1"
+    },
+    "013": {
+      "handle_size_WTL_m": [
+        0.016639118647856756,
+        0.01133098389035897,
+        0.13617395011251493
+      ],
+      "slider_origin_m": [
+        0.0002765696280858361,
+        0.006861531762716588,
+        0.010367702540639918
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "2dbe4d57c9b14e6196fe5fc0aa5005ab13f6b5403f4c103042602a56d2c4334e"
+    },
+    "014": {
+      "handle_size_WTL_m": [
+        0.017134123588643746,
+        0.011682112270587588,
+        0.13411591182788005
+      ],
+      "slider_origin_m": [
+        0.0008547702468424108,
+        0.006929196167416462,
+        0.01360942577398367
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "69edd00c72d045a31bd0b614c7b90561a24567b99f9891bfc527b612ee44299f"
+    },
+    "015": {
+      "handle_size_WTL_m": [
+        0.01742325519580748,
+        0.011957304970403102,
+        0.13553803631816422
+      ],
+      "slider_origin_m": [
+        0.0004834138407725846,
+        0.007306084303554344,
+        0.010885142494691778
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "2133a7e4ab4aca00a24e9326fde1e6d28ed4435c991bda4264d8b2fbaa1d5d81"
+    },
+    "sensitivity-height-minus1": {
+      "handle_size_WTL_m": [
+        0.016,
+        0.012,
+        0.135
+      ],
+      "slider_origin_m": [
+        0.0,
+        0.0065,
+        0.010624586881962734
+      ],
+      "slider_height_offset_m": -0.001,
+      "urdf_sha256": "32c99a92b31d67605ac39fef50f7cce034460a4cba6bbe9909264f828d1fdcd2"
+    },
+    "sensitivity-height-plus1": {
+      "handle_size_WTL_m": [
+        0.016,
+        0.012,
+        0.135
+      ],
+      "slider_origin_m": [
+        0.0,
+        0.0085,
+        0.010624586881962734
+      ],
+      "slider_height_offset_m": 0.001,
+      "urdf_sha256": "540863ba3c1e09cdf483dea4c6929c3f67555669a4457e92c64e80723535100d"
+    },
+    "h0000": {
+      "handle_size_WTL_m": [
+        0.01653335126625937,
+        0.012027314836622557,
+        0.13166399482352717
+      ],
+      "slider_origin_m": [
+        -0.000654368107158098,
+        0.007513657418311278,
+        0.006820054028704143
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "673c05001b527578f62286afef05fd71ddb97b590e79e2b296e5befa3711b6a5"
+    },
+    "h0001": {
+      "handle_size_WTL_m": [
+        0.017766568085523085,
+        0.010416220191301619,
+        0.13225646786367115
+      ],
+      "slider_origin_m": [
+        -0.0006144676694548137,
+        0.006708110095650809,
+        0.006031783454747104
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "2147ac3701391c0857e3cf16db9276d1a70ffb7584c6fef52f52cdcb164de512"
+    },
+    "h0002": {
+      "handle_size_WTL_m": [
+        0.01497480721114605,
+        0.012019780617796457,
+        0.13700316429664738
+      ],
+      "slider_origin_m": [
+        -0.00018868297420322408,
+        0.007509890308898228,
+        0.010024620996747892
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "f552d734b559ff73525938d908b583aa9aa6e65aebdc37619ad8e96a135fed5b"
+    },
+    "h0003": {
+      "handle_size_WTL_m": [
+        0.015053257281031343,
+        0.01296165860798339,
+        0.13514535065796546
+      ],
+      "slider_origin_m": [
+        -8.86838716126397e-06,
+        0.007980829303991695,
+        0.006859806059174317
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "a509788882c69b99ed8f041a5c9c11b902a10c37738424bb874db0c130e793e8"
+    },
+    "h0004": {
+      "handle_size_WTL_m": [
+        0.015126289316162892,
+        0.013687518765981965,
+        0.13602723336094869
+      ],
+      "slider_origin_m": [
+        0.00024888584230244926,
+        0.008343759382990982,
+        0.01470354233075366
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "f02a8d7c7d025fb54bd753034735daf37b24da34b2d072a85ada5dda1b4db3ae"
+    },
+    "h0005": {
+      "handle_size_WTL_m": [
+        0.014559099963085003,
+        0.012965223894501988,
+        0.13627526691312647
+      ],
+      "slider_origin_m": [
+        -0.0003468141460761931,
+        0.007982611947250993,
+        0.010350927050102945
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "28f222c37b869d00915f118a1e7351b7d9a547b52fda7a1e5e8afc46f5587ac0"
+    },
+    "h0006": {
+      "handle_size_WTL_m": [
+        0.015296762587303867,
+        0.012457364004606838,
+        0.13841678325555504
+      ],
+      "slider_origin_m": [
+        -0.0009922656537553968,
+        0.0077286820023034185,
+        0.007741728086872433
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "c466f05c0c0958a079aede944181bb7c2363be04f1b6cc83061cd14501343516"
+    },
+    "h0007": {
+      "handle_size_WTL_m": [
+        0.014268828363174451,
+        0.010414449360181838,
+        0.13484084580953604
+      ],
+      "slider_origin_m": [
+        -4.655624452641204e-05,
+        0.006707224680090919,
+        0.013496635660055215
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "9e950d7862c3fef33efe8c04df8f33fdace92e78b70d68c93b2fdd61e207822d"
+    },
+    "h0008": {
+      "handle_size_WTL_m": [
+        0.016148353939386552,
+        0.011122330504167841,
+        0.1335283988172173
+      ],
+      "slider_origin_m": [
+        0.0009638457126809863,
+        0.00706116525208392,
+        0.007712277099041924
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "57df8f7ad36e54a9adcb77eab0f2e1e6e2f3ff1c3ded7c9d48f083dbcdabc2e0"
+    },
+    "h0009": {
+      "handle_size_WTL_m": [
+        0.014280532272061792,
+        0.011175584416218643,
+        0.13256362098700342
+      ],
+      "slider_origin_m": [
+        -0.0006136845929344569,
+        0.007087792208109321,
+        0.010067226753894928
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "8791facb717e7a6d5b3bede3a1675eeb6182e2dc5ef5ef43f4046c959e7735fb"
+    },
+    "h0010": {
+      "handle_size_WTL_m": [
+        0.01675333444579126,
+        0.013425241241687614,
+        0.1376663131931934
+      ],
+      "slider_origin_m": [
+        0.0005428642718320398,
+        0.008212620620843807,
+        0.010721903605337119
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "5332037be9997d466a63de51c70d5a370dd10b85978107ce9e289a395805f8ea"
+    },
+    "h0011": {
+      "handle_size_WTL_m": [
+        0.017314304879937892,
+        0.01341977525790889,
+        0.13528913054523362
+      ],
+      "slider_origin_m": [
+        -0.0006325036708097088,
+        0.008209887628954445,
+        0.007947413914194863
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "1c91cda84bd8ca5e6c7af3ef096d36e8447fcd35c5237c222a1f17e42d81697b"
+    },
+    "h0012": {
+      "handle_size_WTL_m": [
+        0.014653458849836203,
+        0.010173747538527646,
+        0.13180268845505644
+      ],
+      "slider_origin_m": [
+        0.0007546181671412619,
+        0.006586873769263823,
+        0.0066980231660469765
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "e007756f597fa7861f9145813650dffdaa1b47a9a1d3cafaf65904f08fbc7c14"
+    },
+    "h0013": {
+      "handle_size_WTL_m": [
+        0.01714962113579174,
+        0.01355804181267831,
+        0.1319205107097199
+      ],
+      "slider_origin_m": [
+        8.405714518058631e-05,
+        0.008279020906339155,
+        0.013937260231810137
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "890635f3c0015222d1edca3570cbdbe2f839fd7f3d4eb2c5e9b771a2443d6f28"
+    },
+    "h0014": {
+      "handle_size_WTL_m": [
+        0.014560276151404915,
+        0.012928957550588274,
+        0.13796584555045377
+      ],
+      "slider_origin_m": [
+        0.0002850819165072906,
+        0.007964478775294137,
+        0.009349830698593974
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "f975c76eccbe9ccc5e9273317d76dc17105929e434bdbb0af09e67ae6eb2f2fb"
+    },
+    "h0015": {
+      "handle_size_WTL_m": [
+        0.017353208384836713,
+        0.01300137541687758,
+        0.13057110459684465
+      ],
+      "slider_origin_m": [
+        0.000770882552649201,
+        0.00800068770843879,
+        0.0117646981054184
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "58eeb4fa455567c0bcee480c55343e7146f5675b7947ecdb4faf638049ce3a4c"
+    },
+    "h0016": {
+      "handle_size_WTL_m": [
+        0.01496697417296316,
+        0.011748856068010087,
+        0.13333804371139574
+      ],
+      "slider_origin_m": [
+        -0.0004547580925954455,
+        0.007374428034005043,
+        0.007569782845866242
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "21efaeca4b172ffc7a654a7faf04fecb77d91a51a9614a87d6e9053eae6ac625"
+    },
+    "h0017": {
+      "handle_size_WTL_m": [
+        0.016717337057331663,
+        0.010800098518282527,
+        0.13681087901543204
+      ],
+      "slider_origin_m": [
+        0.000378507791013767,
+        0.006900049259141263,
+        0.015257891283683902
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "11e484771e3fab9d83bcb2c3ace2a117a890ca8fb793e1414b9b4b9627bb0a4b"
+    },
+    "h0018": {
+      "handle_size_WTL_m": [
+        0.017150249820603005,
+        0.013761050932714718,
+        0.13067384280028344
+      ],
+      "slider_origin_m": [
+        -0.0005036520028203686,
+        0.008380525466357359,
+        0.010223280161592239
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "04a0b04b851f57853dc5964946756a8cfbc10278a1a8bf9ee1d61b34bd0c5e9c"
+    },
+    "h0019": {
+      "handle_size_WTL_m": [
+        0.014069110621858495,
+        0.013516128579467619,
+        0.13020612010207816
+      ],
+      "slider_origin_m": [
+        -9.472608343114345e-05,
+        0.008258064289733809,
+        0.00751469706128836
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "2627e5a3702fdede177c0246d49f4225781d260f6ef7fcb8957cd83bc67fe838"
+    },
+    "h0020": {
+      "handle_size_WTL_m": [
+        0.015033227138738265,
+        0.01185615433880803,
+        0.1364227140484107
+      ],
+      "slider_origin_m": [
+        -5.640363644681973e-06,
+        0.007428077169404014,
+        0.009198132908655537
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "48dce3a72dd5bf8b9a51580f15f13ef6375eefe50fb03c9e78bd33fc1c7a1683"
+    },
+    "h0021": {
+      "handle_size_WTL_m": [
+        0.014651055653697339,
+        0.010249319463721707,
+        0.13715020264326153
+      ],
+      "slider_origin_m": [
+        0.00011910975412529742,
+        0.006624659731860853,
+        0.013896965569725202
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "e35f1dae26f018f39539fb41d1541d78ed101655cd9e18bb77e5e9daef58d0dc"
+    },
+    "h0022": {
+      "handle_size_WTL_m": [
+        0.01712001876895605,
+        0.012220937105038174,
+        0.13514501134739482
+      ],
+      "slider_origin_m": [
+        -0.0004664295347473888,
+        0.0076104685525190865,
+        0.006391561777253
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "f0424882b307b2c3ea68f0d5bffe9d70d5b73e70548d641a8055b4db4bd70e05"
+    },
+    "h0023": {
+      "handle_size_WTL_m": [
+        0.01703404656198338,
+        0.010924806610560155,
+        0.13890363794316887
+      ],
+      "slider_origin_m": [
+        0.0008692504680239809,
+        0.006962403305280077,
+        0.009320070451850782
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "bc24cb5ed1cca4882efd89ec1ca8ff3474d6257ac0c7e10d7b188c3286ed8264"
+    },
+    "h0024": {
+      "handle_size_WTL_m": [
+        0.015693490222763853,
+        0.012055029483158196,
+        0.1384813848065008
+      ],
+      "slider_origin_m": [
+        -0.0001459257678920855,
+        0.0075275147415790975,
+        0.01541363091241938
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "ecde07dcc022ed9b0a17cb17fed6b1e2bfc1c9e7f59efe147637b439e3c42b29"
+    },
+    "h0025": {
+      "handle_size_WTL_m": [
+        0.014373911455438372,
+        0.011661380351474581,
+        0.13160829954686917
+      ],
+      "slider_origin_m": [
+        -3.092022834486931e-05,
+        0.00733069017573729,
+        0.009319097100598847
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "aef6ea0713bcc9442f9d4a7b86e287cc10ffad7c8fd6d41136245474c8d6a972"
+    },
+    "h0026": {
+      "handle_size_WTL_m": [
+        0.017277802754190715,
+        0.011936550138607008,
+        0.13971056042261162
+      ],
+      "slider_origin_m": [
+        0.00010064271388884362,
+        0.007468275069303504,
+        0.01529636050333525
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "dbbb2d9c767f51e6a92c4fd968ac69e82d58f4c0c45284f88bf1839153b70db3"
+    },
+    "h0027": {
+      "handle_size_WTL_m": [
+        0.014133409309694646,
+        0.011942352472438383,
+        0.13628051538424246
+      ],
+      "slider_origin_m": [
+        0.0007810416520778638,
+        0.007471176236219191,
+        0.008435508996230166
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "0a461df6e3e1945f92013baebe3d2f1e161678b25c813454b201c7502ae8bfa9"
+    },
+    "h0028": {
+      "handle_size_WTL_m": [
+        0.014991350684888247,
+        0.01274084749756746,
+        0.1326087549131765
+      ],
+      "slider_origin_m": [
+        0.0009836606991168628,
+        0.00787042374878373,
+        0.012891968240793708
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "c878e517116f118330f3354d4c5ebfa63593c2957472ef0b789aa2f8586d090a"
+    },
+    "h0029": {
+      "handle_size_WTL_m": [
+        0.014610992546302012,
+        0.01072308902489029,
+        0.1385430560755348
+      ],
+      "slider_origin_m": [
+        0.00012581923371190996,
+        0.006861544512445144,
+        0.0069716276420196295
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "2f9c0c3be5150a0dd393903eec127429f1d89bb76d62e9e4b2b0fca041359deb"
+    },
+    "h0030": {
+      "handle_size_WTL_m": [
+        0.01525593204260297,
+        0.012778677074140918,
+        0.13182775295087254
+      ],
+      "slider_origin_m": [
+        0.000489958754529522,
+        0.007889338537070458,
+        0.011757904909629576
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "568097ed42fa8708e5cb2ab5915055a5fdbad98ecc0a115d02f623ea71f3f5e6"
+    },
+    "h0031": {
+      "handle_size_WTL_m": [
+        0.017469785440135135,
+        0.01208541281459647,
+        0.13646171919429956
+      ],
+      "slider_origin_m": [
+        0.00018847355301902053,
+        0.007542706407298235,
+        0.011092273490346652
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "6cbe39b1751a922eebb6496de75e277f107bbca93ef2577b3c9f35df8ea3bd6f"
+    },
+    "h0032": {
+      "handle_size_WTL_m": [
+        0.01706165098862868,
+        0.012635082720563403,
+        0.13951946663652445
+      ],
+      "slider_origin_m": [
+        -0.0005832457413332064,
+        0.007817541360281701,
+        0.011591935591335176
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "6a6e24acb76eadf6857fd0631319ddf66cff90c65a1ff2ebee80d9516fda91be"
+    },
+    "h0033": {
+      "handle_size_WTL_m": [
+        0.014575041302813342,
+        0.010177670868135893,
+        0.13795700819963866
+      ],
+      "slider_origin_m": [
+        -0.0006375349731078978,
+        0.006588835434067946,
+        0.008251865531849709
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "4c48b51e234e1d1cf6f8f50922060880804824f182e0ea0b4a47a33220fb5251"
+    },
+    "h0034": {
+      "handle_size_WTL_m": [
+        0.015635352600414723,
+        0.011306387897790322,
+        0.13262127231583687
+      ],
+      "slider_origin_m": [
+        0.000756065806191092,
+        0.007153193948895161,
+        0.006655105523185843
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "0306ed37b0fc632c3682c5126202171162f612255936c55f65e10ad9c1c70d6d"
+    },
+    "h0035": {
+      "handle_size_WTL_m": [
+        0.01673663691899719,
+        0.013445439036435266,
+        0.13868071776298563
+      ],
+      "slider_origin_m": [
+        0.0008044580748882866,
+        0.008222719518217632,
+        0.011842641002487409
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "b27fa0d4cfb7b4733ed6e5e13ca357215325a475ef6a406852b5d5e9e5ad8075"
+    },
+    "h0036": {
+      "handle_size_WTL_m": [
+        0.017495436857897912,
+        0.01003345995067587,
+        0.1327084746403855
+      ],
+      "slider_origin_m": [
+        -0.0008700381954453247,
+        0.006516729975337934,
+        0.014036336651209853
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "337033e369da19c9d25a08942961002a72a2d956795364987646f814e2424d23"
+    },
+    "h0037": {
+      "handle_size_WTL_m": [
+        0.015426146202591771,
+        0.010218076023463194,
+        0.13670704155101962
+      ],
+      "slider_origin_m": [
+        0.0005471627740903341,
+        0.006609038011731597,
+        0.011302180553712422
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "a3a12711cd41b7a82b5b64e318b63f2933aab60e2a69637ed50b1db32102cf73"
+    },
+    "h0038": {
+      "handle_size_WTL_m": [
+        0.01688577086892007,
+        0.011543494974915643,
+        0.1338758629026744
+      ],
+      "slider_origin_m": [
+        -0.0009967698586078734,
+        0.007271747487457821,
+        0.012988382850706963
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "caeb9569df6099d9850b0d499eda5823f5fbbf0847c7b81600006f29438524e9"
+    },
+    "h0039": {
+      "handle_size_WTL_m": [
+        0.014608215240259131,
+        0.01307661088623933,
+        0.13412998654438432
+      ],
+      "slider_origin_m": [
+        0.00013601313038280843,
+        0.008038305443119665,
+        0.010474074792250028
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "da407b4d24578526d68819214614a20db7a72a1e1d799766bd009c615f2c9e75"
+    },
+    "h0040": {
+      "handle_size_WTL_m": [
+        0.016292015031440867,
+        0.012885126168850517,
+        0.13726268998862484
+      ],
+      "slider_origin_m": [
+        0.0009879642885589398,
+        0.007942563084425258,
+        0.015470439027571031
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "da6b483dd5e95fe2c9327ac497864a07d9c77246c07a443173ef8f2554618651"
+    },
+    "h0041": {
+      "handle_size_WTL_m": [
+        0.016427166908367975,
+        0.012105442887437898,
+        0.13144029995440046
+      ],
+      "slider_origin_m": [
+        3.5279777047238876e-05,
+        0.007552721443718949,
+        0.007122941580497793
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "7d4f40575a2624aed6347ea029e602362ad14b7e86e88419217de659b7eb71c7"
+    },
+    "h0042": {
+      "handle_size_WTL_m": [
+        0.01648941036053753,
+        0.013992359160842602,
+        0.1341906006769719
+      ],
+      "slider_origin_m": [
+        -0.0004335450698438175,
+        0.0084961795804213,
+        0.0057293891268893945
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "3e4e6e8d275867b7ed892615b9ab084a9c0cfdb01ad185af4284c29432def4aa"
+    },
+    "h0043": {
+      "handle_size_WTL_m": [
+        0.016210824242317137,
+        0.012336945246927496,
+        0.13024265591195544
+      ],
+      "slider_origin_m": [
+        -0.0004843481141298474,
+        0.007668472623463748,
+        0.012720520221820807
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "9efb9a0bfabe95dc3f88b82181d916e5bb6ed9464db32c326bcbb0ba775e4651"
+    },
+    "h0044": {
+      "handle_size_WTL_m": [
+        0.016640500843515694,
+        0.012167309025419815,
+        0.13576618106220537
+      ],
+      "slider_origin_m": [
+        0.0005440068563482175,
+        0.007583654512709907,
+        0.006356765888852428
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "d847e5d5a5f48d88241108f4f516b4b552a8f33d4a46223c0cb21999f6aadc96"
+    },
+    "h0045": {
+      "handle_size_WTL_m": [
+        0.01547491049641191,
+        0.013837168494776161,
+        0.13761378851891964
+      ],
+      "slider_origin_m": [
+        0.0004619465530945094,
+        0.00841858424738808,
+        0.008263656464665786
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "a2f39828120e3f59740fdadf1dad8bc346aa473e560162c8ac75c54a2dc9337c"
+    },
+    "h0046": {
+      "handle_size_WTL_m": [
+        0.017482291871313255,
+        0.012261187024806696,
+        0.13462846754635066
+      ],
+      "slider_origin_m": [
+        0.00022360267989481714,
+        0.007630593512403348,
+        0.006774663624471018
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "65c1771408de0032db18044ff022848c57b917303db8a00588e915742c9b5d9e"
+    },
+    "h0047": {
+      "handle_size_WTL_m": [
+        0.015494692161536656,
+        0.013944311754612639,
+        0.13191649234814162
+      ],
+      "slider_origin_m": [
+        0.0005412169100382411,
+        0.00847215587730632,
+        0.01504286014053366
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "19ad14cea0f437f48b6905d7f40aa7aa6f35fbbad52544f0b2fe3dcdcebbcc42"
+    },
+    "h0048": {
+      "handle_size_WTL_m": [
+        0.016347833479911818,
+        0.010197688766657055,
+        0.13489761400462608
+      ],
+      "slider_origin_m": [
+        -0.0008512896630236593,
+        0.006598844383328527,
+        0.009965439761530052
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "1a9cc38ce856cbab770a0c552625a6dce44a9f15b6bd08bb2dafa5b15a6526c9"
+    },
+    "h0049": {
+      "handle_size_WTL_m": [
+        0.015515296300337569,
+        0.010418399235804201,
+        0.13855071992424242
+      ],
+      "slider_origin_m": [
+        -3.364764386470779e-05,
+        0.0067091996179021,
+        0.007532697422042761
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "2e821cac3b0724d0a13595934f855011330e790e665782b3067dcdf041c3ac56"
+    },
+    "h0050": {
+      "handle_size_WTL_m": [
+        0.01671861701326359,
+        0.012102924898238129,
+        0.13557865341391173
+      ],
+      "slider_origin_m": [
+        -0.000976385086944948,
+        0.007551462449119064,
+        0.009353049176074092
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "e6e0c5449dd79102e2e7c6888bcdc26d1b7ed5a3cf36c933cd92ab677e55475c"
+    },
+    "h0051": {
+      "handle_size_WTL_m": [
+        0.017961333626214732,
+        0.012892839980223517,
+        0.1315181407522936
+      ],
+      "slider_origin_m": [
+        0.0003207934637255577,
+        0.007946419990111758,
+        0.012074780419071
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "29090bf3163d46fcb32c4f2746b13c208f3ad5df01ca55d2092923c5f252d542"
+    },
+    "h0052": {
+      "handle_size_WTL_m": [
+        0.01538463206757451,
+        0.013790194451498296,
+        0.13605522098148734
+      ],
+      "slider_origin_m": [
+        0.0005881425035611848,
+        0.008395097225749147,
+        0.009695287105151901
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "dff8a7e87216ee91d89ce284acd946b3e690b5ef2917d53bac047938f89afdc2"
+    },
+    "h0053": {
+      "handle_size_WTL_m": [
+        0.015516891106441803,
+        0.012921076563032338,
+        0.13870009522237173
+      ],
+      "slider_origin_m": [
+        -1.37341103305618e-05,
+        0.007960538281516168,
+        0.014176587547342051
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "d3aa6358febd14e1448ae49d64c56a48390b441ff439205e92a08ae5ffd3f231"
+    },
+    "h0054": {
+      "handle_size_WTL_m": [
+        0.014709317474027999,
+        0.01060092785225992,
+        0.13632129804810794
+      ],
+      "slider_origin_m": [
+        0.0006111212577406273,
+        0.00680046392612996,
+        0.009958085811349039
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "d05f09d4ba35292b3f576a118c688e1aa37d224143d88371b579102379895e11"
+    },
+    "h0055": {
+      "handle_size_WTL_m": [
+        0.01733113590584572,
+        0.012286665460483973,
+        0.1373285066741296
+      ],
+      "slider_origin_m": [
+        -0.0006039359310628912,
+        0.007643332730241986,
+        0.009933453596945033
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "e6d6efebc3590d71bf89acdba7f9012bcf053bda828dd7369e25734e6ae3853e"
+    },
+    "h0056": {
+      "handle_size_WTL_m": [
+        0.014014078019727063,
+        0.01382427631703671,
+        0.1302653536028188
+      ],
+      "slider_origin_m": [
+        0.0002877023547740965,
+        0.008412138158518354,
+        0.011112243108662464
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "17f1cea0fd2ce462b8ce9b519d87f4eec96bfcd5dd8b0082fdf7616d4d998f38"
+    },
+    "h0057": {
+      "handle_size_WTL_m": [
+        0.01717684219050829,
+        0.013094174434245024,
+        0.13826892049409603
+      ],
+      "slider_origin_m": [
+        0.0003234928876878827,
+        0.008047087217122512,
+        0.00620003664802803
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "785d075858252436353bf8d5cb38fd0cf0ad4ed126f5992c17eda87273780215"
+    },
+    "h0058": {
+      "handle_size_WTL_m": [
+        0.01607640332709951,
+        0.010832135898186247,
+        0.13563828526466715
+      ],
+      "slider_origin_m": [
+        6.196071359245879e-05,
+        0.006916067949093123,
+        0.00914140570644311
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "c4b9bff6dfe5a0821b71f39ce40b2fb35c86ce9c3bdf95aabce788f651ecdb26"
+    },
+    "h0059": {
+      "handle_size_WTL_m": [
+        0.01732943426839755,
+        0.01271505366690899,
+        0.13784932722674462
+      ],
+      "slider_origin_m": [
+        0.00043401925353583437,
+        0.007857526833454495,
+        0.008213878950798394
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "71a14ba9c102644fa0def9a42dc437f69b4b4c88129addacff2f886817f447ed"
+    },
+    "h0060": {
+      "handle_size_WTL_m": [
+        0.017005900779761524,
+        0.013528064848090585,
+        0.1360170935164249
+      ],
+      "slider_origin_m": [
+        -0.00038950721290252394,
+        0.008264032424045293,
+        0.01312003534775871
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "c5f81cc0514cfcf51d76aa69801c622c449f3be04b0d5c173b33007755b65ac2"
+    },
+    "h0061": {
+      "handle_size_WTL_m": [
+        0.01789795753183977,
+        0.013611019425915648,
+        0.13671188819469104
+      ],
+      "slider_origin_m": [
+        -0.0004229213879014395,
+        0.008305509712957824,
+        0.005763105007535643
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "283cfcf0b1c5afd874d94452620fb50ab686298a31f28abdfcc8093f37425794"
+    },
+    "h0062": {
+      "handle_size_WTL_m": [
+        0.014148400305078787,
+        0.011218769088149255,
+        0.13356425593805313
+      ],
+      "slider_origin_m": [
+        -0.0007957638959905509,
+        0.007109384544074627,
+        0.015014308633466783
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "295ffa80e31da8936cb384f1d29a67d568826f4f6434461b05b95fc936aa64f9"
+    },
+    "h0063": {
+      "handle_size_WTL_m": [
+        0.01465457948590276,
+        0.01230211189341016,
+        0.1304512581137346
+      ],
+      "slider_origin_m": [
+        -0.0005319415323691792,
+        0.007651055946705079,
+        0.010463331057761484
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "9b390859d888f71391171401e8c1ce58031fe7775b5017ffa1222aa8b101dd78"
+    },
+    "h0064": {
+      "handle_size_WTL_m": [
+        0.016524365164677465,
+        0.01113946110478145,
+        0.136908517998657
+      ],
+      "slider_origin_m": [
+        -0.0007174672911714223,
+        0.007069730552390725,
+        0.012364272584655212
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "e483ff628e2376b7798021a0ee9aa6e67ef9ced7078d821cd4f8c107b07211e0"
+    },
+    "h0065": {
+      "handle_size_WTL_m": [
+        0.0162852348227998,
+        0.012020569005270008,
+        0.13812009584213805
+      ],
+      "slider_origin_m": [
+        -0.00024212146162029872,
+        0.007510284502635004,
+        0.013327008224530854
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "aab280962c239c74c396334cb418275658a142be598069ee53da3d692bc73cc3"
+    },
+    "h0066": {
+      "handle_size_WTL_m": [
+        0.017372312772277094,
+        0.011992599762527603,
+        0.13413128898810384
+      ],
+      "slider_origin_m": [
+        -0.00017641646231940312,
+        0.007496299881263801,
+        0.015371907944618617
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "1a0a7c72539591dbcefc18447f0d38c26ebbd32be31712a06063a44cb1c04f8d"
+    },
+    "h0067": {
+      "handle_size_WTL_m": [
+        0.01780658791063849,
+        0.01158929436938566,
+        0.13584222337005833
+      ],
+      "slider_origin_m": [
+        0.000578129583567322,
+        0.007294647184692829,
+        0.006876152269459151
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "a332f97c983bfe7bb49da71a0c68e3abcea5ff7eda8e74babd181bc55a85f8c2"
+    },
+    "h0068": {
+      "handle_size_WTL_m": [
+        0.016563297955429303,
+        0.010568497063620435,
+        0.13628685413314334
+      ],
+      "slider_origin_m": [
+        0.0008729578759032227,
+        0.006784248531810217,
+        0.015609120002073006
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "bfc4061b280953009c94b3ce4d7024385b8de81b1541f02a7babf63c8e670aa9"
+    },
+    "h0069": {
+      "handle_size_WTL_m": [
+        0.01733018843585925,
+        0.01261573593660676,
+        0.13576702131223892
+      ],
+      "slider_origin_m": [
+        0.0003430700802785783,
+        0.00780786796830338,
+        0.01388045103537909
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "d49c79de83156cc28025edbb2497be7e32dffbefa761b35fcaa24cd4b1e4ca65"
+    },
+    "h0070": {
+      "handle_size_WTL_m": [
+        0.015803002722072475,
+        0.012740989920182046,
+        0.137545125888886
+      ],
+      "slider_origin_m": [
+        8.137947718417555e-05,
+        0.007870494960091023,
+        0.010701676811231638
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "2b01163ade22fee345ec75405c493cb624427e0bb7e10c766f10e27383d8d362"
+    },
+    "h0071": {
+      "handle_size_WTL_m": [
+        0.017781854614471872,
+        0.011923205610044814,
+        0.13939451174313988
+      ],
+      "slider_origin_m": [
+        0.0007759028687825188,
+        0.007461602805022407,
+        0.013713427163487307
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "12a9a67c9a661a444eeb1aa73e7ad0cfe9b776d87a7dc3525b676bcaece4c1cb"
+    },
+    "h0072": {
+      "handle_size_WTL_m": [
+        0.014872055010363669,
+        0.013683497575111912,
+        0.1344348105739664
+      ],
+      "slider_origin_m": [
+        -0.0006703203684712295,
+        0.008341748787555956,
+        0.005986770326580703
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "a8c456f550e6b0e6345db18aed9c487cc8c8a4af609c07ecbd6dd977276cf078"
+    },
+    "h0073": {
+      "handle_size_WTL_m": [
+        0.016710522633235688,
+        0.013842242332035558,
+        0.13673451091812466
+      ],
+      "slider_origin_m": [
+        -0.0006320411984158574,
+        0.00842112116601778,
+        0.012701767244302081
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "d1f02ed321d4859b53e8bbf51709392aa15dc30150c5ca7753201c76edcf9129"
+    },
+    "h0074": {
+      "handle_size_WTL_m": [
+        0.014068963072975279,
+        0.01319039172937514,
+        0.13052655474368846
+      ],
+      "slider_origin_m": [
+        0.0004115115410308714,
+        0.00809519586468757,
+        0.01367526686453431
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "7a56f4621697f703db69f4ed47f124642176687ee5c7edd766c460913c761f0a"
+    },
+    "h0075": {
+      "handle_size_WTL_m": [
+        0.01493063315360685,
+        0.011447426085862392,
+        0.13266019983815083
+      ],
+      "slider_origin_m": [
+        0.0007802538414207023,
+        0.007223713042931196,
+        0.014964773568130509
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "108d9d67b87ecf4fd14a2c6a77a637d3299cd22b82c936b5f8b4a16f331aa2ac"
+    },
+    "h0076": {
+      "handle_size_WTL_m": [
+        0.015865745331360533,
+        0.010992897287788291,
+        0.13172052424570369
+      ],
+      "slider_origin_m": [
+        -0.0009055811866015142,
+        0.006996448643894145,
+        0.012050041833232463
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "8be2c88287852217986925719c6e007cc521a26706ae7f7afac52c20b64e4304"
+    },
+    "h0077": {
+      "handle_size_WTL_m": [
+        0.014574718212233218,
+        0.011097568895958115,
+        0.13728313185160335
+      ],
+      "slider_origin_m": [
+        1.3103694265847272e-05,
+        0.007048784447979057,
+        0.0077198669199623
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "c3f65a68efaddfb1425ad50ef064fc48cbd50762b6d3f45af877ff1fbeb68d5c"
+    },
+    "h0078": {
+      "handle_size_WTL_m": [
+        0.014444750154425893,
+        0.013454080479570798,
+        0.13858624022049426
+      ],
+      "slider_origin_m": [
+        -0.0006804043593716533,
+        0.008227040239785398,
+        0.011665621322207454
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "b0e09cbca76c3d6770b53ba06076d9ce9ad77dfd90b011eafabda555482449db"
+    },
+    "h0079": {
+      "handle_size_WTL_m": [
+        0.01587826914095456,
+        0.011072628933311101,
+        0.13518026274540054
+      ],
+      "slider_origin_m": [
+        4.677084145274734e-05,
+        0.00703631446665555,
+        0.013524307576603504
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "4cc7efce4f10070862ddd2ea0e128b7c8f051457a28a1ff962f11d5743c70e19"
+    },
+    "h0080": {
+      "handle_size_WTL_m": [
+        0.014347115020894965,
+        0.010840900155770421,
+        0.1322607221508378
+      ],
+      "slider_origin_m": [
+        -2.7365934762821516e-07,
+        0.00692045007788521,
+        0.012526887906462465
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "9bf0ec3d07adbd197a8622bde8309a34cf9f4ad7283cc2cab04f6e6ed854baaa"
+    },
+    "h0081": {
+      "handle_size_WTL_m": [
+        0.014324763125477568,
+        0.013282773079887112,
+        0.13710201318597692
+      ],
+      "slider_origin_m": [
+        0.00011302111275243699,
+        0.008141386539943556,
+        0.008214523874464384
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "5dc16eb429ecf5a2379ce395e957f3aba2a6d5413cf38ea6ed8e69005551f639"
+    },
+    "h0082": {
+      "handle_size_WTL_m": [
+        0.017114028943859563,
+        0.011996262261340252,
+        0.13128231213943578
+      ],
+      "slider_origin_m": [
+        0.0005202360827537779,
+        0.007498131130670126,
+        0.00998123881834333
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "7afdc77075829a4b4acee4ed6adcde0d0c1256f2f5ac5e1c3c8c3de5c110e046"
+    },
+    "h0083": {
+      "handle_size_WTL_m": [
+        0.016419541969917042,
+        0.013329526841897563,
+        0.13022324914887753
+      ],
+      "slider_origin_m": [
+        0.0005738651990571206,
+        0.008164763420948781,
+        0.011420139370962704
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "32845521318fd91bcfd1810b910ee7c69f9bf775b52a16c953de7f7aaff59521"
+    },
+    "h0084": {
+      "handle_size_WTL_m": [
+        0.016559282592608044,
+        0.011112703632683574,
+        0.13654768582496574
+      ],
+      "slider_origin_m": [
+        -0.00013142103514159477,
+        0.0070563518163417865,
+        0.014662370032393138
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "0ddd6bd814a6b52eee271aa0c14b8a68e2c78f10e77eccb72ad77d67c79fc931"
+    },
+    "h0085": {
+      "handle_size_WTL_m": [
+        0.014275209188537303,
+        0.010507491177103144,
+        0.13536886192505182
+      ],
+      "slider_origin_m": [
+        0.0003886117618742443,
+        0.006753745588551571,
+        0.010848041299743191
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "b6495daef4c60a2bb30a92448f2d81d6102ba43f541b80a29a6dca5daaf7153b"
+    },
+    "h0086": {
+      "handle_size_WTL_m": [
+        0.015080274149052341,
+        0.01271377381937526,
+        0.13754826279473545
+      ],
+      "slider_origin_m": [
+        0.0007447446942686711,
+        0.00785688690968763,
+        0.009532752079308413
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "55e163a554bb651e0b9a4e463602ad05f700e2a169220f095903805b4a103341"
+    },
+    "h0087": {
+      "handle_size_WTL_m": [
+        0.01587706345743111,
+        0.013958131985682774,
+        0.1346160424843653
+      ],
+      "slider_origin_m": [
+        0.0004538017221560986,
+        0.008479065992841386,
+        0.008500418279382312
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "ba7bc660ec7abd8ea5f3ab7b1a227a23c25dc2016231709492594f0043a902d4"
+    },
+    "h0088": {
+      "handle_size_WTL_m": [
+        0.015455019536266837,
+        0.013061189354466627,
+        0.13606353717037128
+      ],
+      "slider_origin_m": [
+        0.0009760889697945276,
+        0.008030594677233313,
+        0.012596853692324522
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "452908274a20d9ccc94e7bb23b45e3325d83bbd4209477c26bd59e1d4e9ebbee"
+    },
+    "h0089": {
+      "handle_size_WTL_m": [
+        0.017276800501935752,
+        0.011735833075523233,
+        0.1324960082440306
+      ],
+      "slider_origin_m": [
+        0.0009635970884659065,
+        0.007367916537761616,
+        0.010291718007103856
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "8c241063250488a236448a6cc9749d33085e08a33673dc1426f1f029d37e59b9"
+    },
+    "h0090": {
+      "handle_size_WTL_m": [
+        0.017987269039498772,
+        0.010002597828970693,
+        0.1342251480324505
+      ],
+      "slider_origin_m": [
+        -0.00017181814266443302,
+        0.006501298914485346,
+        0.01404820731134749
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "bf4c550e8ba53d645289d6bc8d40d7e5089b3b1e844ddea90783ea8e850611c7"
+    },
+    "h0091": {
+      "handle_size_WTL_m": [
+        0.0165380335894146,
+        0.013551410952578679,
+        0.13434870173816832
+      ],
+      "slider_origin_m": [
+        0.0005967470225161204,
+        0.008275705476289339,
+        0.01557910958266483
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "de8ebd49a1478081dfe18daa88a19004425c158c66d385971f09fdfc21898537"
+    },
+    "h0092": {
+      "handle_size_WTL_m": [
+        0.015370290823288509,
+        0.010182036746133001,
+        0.13404488402921386
+      ],
+      "slider_origin_m": [
+        -0.00040515875187398806,
+        0.0065910183730665,
+        0.010117885864793535
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "411e3ac7721d5a16405ab0ed73065255cfbd71bfa13aed9c284e4b672ca6dd5e"
+    },
+    "h0093": {
+      "handle_size_WTL_m": [
+        0.017406146167611623,
+        0.011339734641001208,
+        0.13176793424922964
+      ],
+      "slider_origin_m": [
+        0.0004406099434262527,
+        0.007169867320500603,
+        0.009931315076030124
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "c740def8f949ad7cb2c39bf940d46d85e4d51bd58bb138a50d1cfdb04e1f0d14"
+    },
+    "h0094": {
+      "handle_size_WTL_m": [
+        0.01732394255685219,
+        0.011021524715932056,
+        0.1336891596617133
+      ],
+      "slider_origin_m": [
+        -0.0009156476170467467,
+        0.007010762357966028,
+        0.007164624512803705
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "d6243b2e41e663bdc226d5e256f56e1b86f4aa458bc31e28fcb9482147e3fdad"
+    },
+    "h0095": {
+      "handle_size_WTL_m": [
+        0.017526144876003315,
+        0.01271868854556316,
+        0.13111276745477163
+      ],
+      "slider_origin_m": [
+        0.0009868234048245232,
+        0.00785934427278158,
+        0.009667241523712362
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "68d0fa6b79a6e979c57ecc2d2b1f6f289852ef7e35706511134722311c6ecfde"
+    },
+    "h0096": {
+      "handle_size_WTL_m": [
+        0.01756101470638851,
+        0.012605280848869888,
+        0.13363571099399854
+      ],
+      "slider_origin_m": [
+        -6.618895135832514e-05,
+        0.007802640424434943,
+        0.012484301708419023
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "a31ea24ecf6530cd5de78559bcc5037a08e793c0c787e8eda14bc0a1c4f93e64"
+    },
+    "h0097": {
+      "handle_size_WTL_m": [
+        0.016253102258155946,
+        0.010104123689089434,
+        0.13222792482580392
+      ],
+      "slider_origin_m": [
+        -0.0006949302919198983,
+        0.006552061844544717,
+        0.011104415838959901
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "f2b59096017534b36314ac946ab8115ce804180c170a306f6e508c269c88764c"
+    },
+    "h0098": {
+      "handle_size_WTL_m": [
+        0.016564936395372855,
+        0.011930047667490543,
+        0.1349086359066834
+      ],
+      "slider_origin_m": [
+        -3.347784036727909e-05,
+        0.007465023833745271,
+        0.009790312116956603
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "21d7e84476cb34d7de99da739867e2436647c32deb9aff3db6055c192b4310c7"
+    },
+    "h0099": {
+      "handle_size_WTL_m": [
+        0.015570746439462269,
+        0.011516459733886396,
+        0.13528465547861473
+      ],
+      "slider_origin_m": [
+        -0.00020686211231111455,
+        0.0072582298669431975,
+        0.009337508785870908
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "cd59995651238e6a763faa26b2aa70e7956156b1e3a3b0e7001a873a39233769"
+    },
+    "h0100": {
+      "handle_size_WTL_m": [
+        0.017761644950684646,
+        0.011939266719555338,
+        0.13464295436492557
+      ],
+      "slider_origin_m": [
+        0.0009553568641143717,
+        0.007469633359777668,
+        0.011428220665616377
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "31da7ab02bfb6bd14c44daa1c5c5ddd220016aaf15ff1683df4d71d2af7ed1e1"
+    },
+    "h0101": {
+      "handle_size_WTL_m": [
+        0.016456165575228998,
+        0.012453068102284415,
+        0.13288200136498965
+      ],
+      "slider_origin_m": [
+        0.0009736901856063256,
+        0.007726534051142207,
+        0.008567792130278614
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "65600e965e40c05c76d34c250dcebdcac63bc09e3d75553cb6892876f855626e"
+    },
+    "h0102": {
+      "handle_size_WTL_m": [
+        0.016511870269660563,
+        0.011731073396427986,
+        0.13359512859250475
+      ],
+      "slider_origin_m": [
+        0.00030778104828041203,
+        0.0073655366982139925,
+        0.01131211091109393
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "c6b32e5800fe4a5f8abd457c3f08f169cb4a0a66afd9c0006363103cca4972c6"
+    },
+    "h0103": {
+      "handle_size_WTL_m": [
+        0.0179584374640616,
+        0.01112007498726316,
+        0.13544808774751935
+      ],
+      "slider_origin_m": [
+        -0.0007467879009640766,
+        0.00706003749363158,
+        0.01179393795982027
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "ab7df8f4c34a4ab37f1784001ecca0b13daa2bdb861905adbaf3e9a425ba6b2c"
+    },
+    "h0104": {
+      "handle_size_WTL_m": [
+        0.014490463551277071,
+        0.013538219525130284,
+        0.13484327823846215
+      ],
+      "slider_origin_m": [
+        -0.0009072255302175228,
+        0.008269109762565141,
+        0.014704966152339106
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "e80c682509d5e7a3f14e6e86f9fac0d0d0f907a32805ee24ddb6ff5dbe26711a"
+    },
+    "h0105": {
+      "handle_size_WTL_m": [
+        0.01607800970953464,
+        0.01114802344547742,
+        0.1374102231472301
+      ],
+      "slider_origin_m": [
+        0.0006560736291870849,
+        0.00707401172273871,
+        0.015475181688851421
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "0cf34d52b0249656695d9773660b9364b6b19e17e055decf287007016dda1f07"
+    },
+    "h0106": {
+      "handle_size_WTL_m": [
+        0.015995615064712063,
+        0.012145033118261872,
+        0.13933860481196797
+      ],
+      "slider_origin_m": [
+        -9.145998505664444e-05,
+        0.007572516559130936,
+        0.015466907037116829
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "a79a59d74d10fa152418ef4a8759eca0b4db910c26b8cd8876e1c02a1ae3e24e"
+    },
+    "h0107": {
+      "handle_size_WTL_m": [
+        0.016527691320798843,
+        0.011130819264822307,
+        0.13494510187742417
+      ],
+      "slider_origin_m": [
+        0.0006746458671290426,
+        0.007065409632411153,
+        0.008928670743757725
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "aeeef46d2a73422b151c7632922a8c698214800b0259ce27dce7fe43031a9432"
+    },
+    "h0108": {
+      "handle_size_WTL_m": [
+        0.01606057759584355,
+        0.010136218017982576,
+        0.1349849624947314
+      ],
+      "slider_origin_m": [
+        -0.00019775309491128288,
+        0.006568109008991288,
+        0.011838531920264472
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "918cdea3297cab0c323281298d914a8efd2897230ab184fe2d4ef39aec1a544b"
+    },
+    "h0109": {
+      "handle_size_WTL_m": [
+        0.015110169894022727,
+        0.011207517875714274,
+        0.13236877387583232
+      ],
+      "slider_origin_m": [
+        -0.0007124713858872845,
+        0.0071037589378571365,
+        0.012346622801980293
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "e80d7dc65baf8e2d3fb8dabb3ee783c1c38cd0d46244b6940030392cf084abaa"
+    },
+    "h0110": {
+      "handle_size_WTL_m": [
+        0.014150202730347438,
+        0.012835093082108893,
+        0.13188787981239714
+      ],
+      "slider_origin_m": [
+        -0.0006615424000766792,
+        0.007917546541054445,
+        0.009280767650817704
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "ffe6c328844c74bedba0b5f1b07bb0cf43544335684559ea85254b6ac9916b20"
+    },
+    "h0111": {
+      "handle_size_WTL_m": [
+        0.015005351800621094,
+        0.013669956501845104,
+        0.13836361025377883
+      ],
+      "slider_origin_m": [
+        0.00041712119857018884,
+        0.008334978250922552,
+        0.014588334402744312
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "13d864066d3540704bf7e327e4f68e9a9703378068833f19a7bc3f2376a16f2a"
+    },
+    "h0112": {
+      "handle_size_WTL_m": [
+        0.014748255930092631,
+        0.013672276224538258,
+        0.13966417476603926
+      ],
+      "slider_origin_m": [
+        -0.0004570950852553651,
+        0.008336138112269128,
+        0.01544810323256705
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "6c6a2c7a376a1d40f91569b05479b33db0f34eafa97a4e2064917d1533861dad"
+    },
+    "h0113": {
+      "handle_size_WTL_m": [
+        0.015082508048086906,
+        0.010423271846293852,
+        0.13935146719723088
+      ],
+      "slider_origin_m": [
+        -2.790762408968984e-06,
+        0.006711635923146926,
+        0.008697798646128336
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "ad4d21a8dfd08cbabf6292e3e5dd3d59e48369ecf1d235b28a11ca02387d7bae"
+    },
+    "h0114": {
+      "handle_size_WTL_m": [
+        0.017122225829021318,
+        0.012942202846046065,
+        0.13209887443767956
+      ],
+      "slider_origin_m": [
+        -0.00015516648860623076,
+        0.007971101423023031,
+        0.0105480308761778
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "b2255ecc3d3a174951f55ec7b4c665bcbec53d321ba453d051ec62a9fa70146c"
+    },
+    "h0115": {
+      "handle_size_WTL_m": [
+        0.015285638996830895,
+        0.013189483808331412,
+        0.13363027210854173
+      ],
+      "slider_origin_m": [
+        4.2884900805567486e-05,
+        0.008094741904165707,
+        0.013732537556324805
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "f735fb3868f4e89969e3bf4cad02817e008a05eca562c6a55d200baa6b65b87a"
+    },
+    "h0116": {
+      "handle_size_WTL_m": [
+        0.014149695255952222,
+        0.013733048077046641,
+        0.1369008227397208
+      ],
+      "slider_origin_m": [
+        0.0006082029564292092,
+        0.00836652403852332,
+        0.013007032838992405
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "e8de67fdd1b5e7698b6fbe3485e9a4f26119ce56117dc87e5263321908a16210"
+    },
+    "h0117": {
+      "handle_size_WTL_m": [
+        0.015912861756769304,
+        0.01183895748696015,
+        0.1350040017531076
+      ],
+      "slider_origin_m": [
+        -2.1384885883374847e-05,
+        0.0074194787434800746,
+        0.0059617670076010315
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "560ae59278baf655c992af1c362e49086fb909f21c80c32e7660bcd1bcc87a6b"
+    },
+    "h0118": {
+      "handle_size_WTL_m": [
+        0.014976437294238854,
+        0.011819310618886716,
+        0.13007043138928867
+      ],
+      "slider_origin_m": [
+        -0.0006412741557407068,
+        0.0074096553094433575,
+        0.010459262035884275
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "ffb9ea3de99eb3c4d94bebbd2e1dfcda842b3b8f7eac6f8122eedd7ae5022e66"
+    },
+    "h0119": {
+      "handle_size_WTL_m": [
+        0.014937941364646788,
+        0.011720513294490722,
+        0.13855314539012015
+      ],
+      "slider_origin_m": [
+        0.0006945659211873979,
+        0.0073602566472453605,
+        0.014615791218207469
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "0ae9578dbc424abdddf3492a6bac33ffd176a22036f32d36737d9f1bc5eccca6"
+    },
+    "h0120": {
+      "handle_size_WTL_m": [
+        0.014025883791519615,
+        0.012977259995192983,
+        0.1375735561533251
+      ],
+      "slider_origin_m": [
+        0.00024561270411311534,
+        0.007988629997596492,
+        0.011606403031422425
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "6e7b77dc26a710026cbe37c0eb785ac43302d6d33fee0c84ff6fb4c0932488cd"
+    },
+    "h0121": {
+      "handle_size_WTL_m": [
+        0.01730157210459766,
+        0.013600431278880862,
+        0.13378930611014
+      ],
+      "slider_origin_m": [
+        0.0009998718779025586,
+        0.00830021563944043,
+        0.006983127155281479
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "a7be75ca400690e713a9fd811157a59160f641437c1222549bc3bc1ac8c507c4"
+    },
+    "h0122": {
+      "handle_size_WTL_m": [
+        0.015335280138274527,
+        0.011265175255782358,
+        0.13116038942941965
+      ],
+      "slider_origin_m": [
+        -0.0005660677745414533,
+        0.007132587627891178,
+        0.0077587835391775325
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "54eb90b2083187faea5a4b7019018a3a2c0e11283d701f55005d77986fe6fbb2"
+    },
+    "h0123": {
+      "handle_size_WTL_m": [
+        0.015272641050606939,
+        0.011958131300352129,
+        0.13631403178553184
+      ],
+      "slider_origin_m": [
+        0.0004210300555321637,
+        0.007479065650176064,
+        0.015362299686814403
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "000694a51184255022f4b3321745074fcf029520ea0bbad6774a48f7ed32ca2f"
+    },
+    "h0124": {
+      "handle_size_WTL_m": [
+        0.01589323788768704,
+        0.011680985295379287,
+        0.13500326173778682
+      ],
+      "slider_origin_m": [
+        1.558784337525403e-05,
+        0.007340492647689643,
+        0.013588117619488228
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "9d0acea845bd44e17297d93721339cc9a9ffe7bf81cb43a2264282166ed186a7"
+    },
+    "h0125": {
+      "handle_size_WTL_m": [
+        0.017338130420347875,
+        0.010712766390675591,
+        0.13989255584663166
+      ],
+      "slider_origin_m": [
+        -0.00032114296348035665,
+        0.006856383195337795,
+        0.006985848518715894
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "ba13bd3d93b01982f63fd397c97e4179a0fbb75e7a166731e996574126985713"
+    },
+    "h0126": {
+      "handle_size_WTL_m": [
+        0.017807697918469284,
+        0.010475810015069621,
+        0.13688174777640796
+      ],
+      "slider_origin_m": [
+        0.00045489806219907924,
+        0.00673790500753481,
+        0.012967249897983753
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "83550bf1636aac1d7d98afa326c385bb2d8913a824b6eefab6f9849111a185b4"
+    },
+    "h0127": {
+      "handle_size_WTL_m": [
+        0.014425061672821283,
+        0.010500083590597346,
+        0.13640021345224168
+      ],
+      "slider_origin_m": [
+        0.0009599115876511356,
+        0.006750041795298672,
+        0.01057710129137146
+      ],
+      "slider_height_offset_m": null,
+      "urdf_sha256": "ade4773356e8a10caffe3021b1782429f035cc34ccc204a94021baf08142108c"
+    }
+  },
+  "unique_physical_asset_count": 134,
+  "limits": "Four earlier heldouts repeated plus128 fresh sampled bodies and2 nominal-body height variants. Nearby engineering range only; no cross-model/category/real reliability claim. Repeated seeds are not new objects. Failure-priority labels are not chronological onsets. No claim of learned advantage from small development-count differences."
+}

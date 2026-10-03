@@ -1,0 +1,23 @@
+{
+  "scope": "Actual source-versus-archive restoration compatibility, separate developmental research afterprimaryfreeze; no candidatechanges orheldoutselection. Both use sameP50/checkpoint/controller, same4096 geometryslots and seed before any actions; compare actual full TABLE contacts/commands/outcomes, not just filehashes.",
+  "source_root": "/tmp/artgym-robust-20261003/pins/frozen-source-highload-recovery-v1",
+  "restored_root": "/tmp/wuji-release-restore-remote-20261003",
+  "envs_each": 4096,
+  "geometry": "512 registeredtraining physicalassets each8 repeats, no independenth or012-015",
+  "seed_both": 2026100404,
+  "randomization_scale": 1,
+  "load_profile": "mixed",
+  "load_frequency_rad_s": 2.9,
+  "run_startup_max_N": [
+    0.5,
+    0.5
+  ],
+  "takeover_seconds": 16,
+  "checkpoint": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+  "diagnostic_gate": "off after documentedprefreezebridge audit",
+  "criteria": "Originalfull36s criteria, allcasesretained; numericalcontact may vary across physicalGPUs despite equalinitialsnapshots; no exactbitwisephysicsclaim",
+  "outputs": [
+    "frozen-source-highload-recovery-v1",
+    "frozen-restored-highload-recovery-v1"
+  ]
+}

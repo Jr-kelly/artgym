@@ -1,0 +1,3415 @@
+{
+  "scope": "Post-freeze evaluation-only chronologicalbreaches from all332 retained1080frame traces; cannot feed actor or tune frozen candidate. Failurelabelspriority are preserved separately.",
+  "conditions": {
+    "independent-core-v1": {
+      "n": 8,
+      "phase_counts": {
+        "second extension": 1,
+        "complete": 6,
+        "first extension": 1
+      },
+      "body_onset_median_s": 23.083333333333336,
+      "trace_sha256": "5593a52860fe6982239b13cbf2759bd5b1a4875a43637edce694f98be99be946"
+    },
+    "independent-capacity-v1": {
+      "n": 4,
+      "phase_counts": {
+        "complete": 4
+      },
+      "body_onset_median_s": null,
+      "trace_sha256": "dbb9a0f21a13239931040704a86d1bd026df09e620983fab6d082ebf75b870a0"
+    },
+    "independent-core-breadth-v1": {
+      "n": 64,
+      "phase_counts": {
+        "complete": 41,
+        "second extension": 3,
+        "pickup / hold": 6,
+        "first extension": 14
+      },
+      "body_onset_median_s": 17.966666666666665,
+      "trace_sha256": "92adb89be79f21cc5b636d95d209bd39f516a677240f8a1233df0c07db00ee14"
+    },
+    "independent-capacity-breadth-v1": {
+      "n": 32,
+      "phase_counts": {
+        "pickup / hold": 4,
+        "complete": 21,
+        "second extension": 2,
+        "first extension": 4,
+        "first return": 1
+      },
+      "body_onset_median_s": 17.9,
+      "trace_sha256": "cf313a654c362a2882fa18ca06f6bade43a003aa9a39f6de8446ce39689bcb98"
+    },
+    "independent-height-sensitivity-v1": {
+      "n": 32,
+      "phase_counts": {
+        "complete": 18,
+        "first extension": 3,
+        "first return": 2,
+        "second return": 1,
+        "pickup / hold": 8
+      },
+      "body_onset_median_s": 16.033333333333335,
+      "trace_sha256": "3a4b4ed479a544f046a1ad29a4dab190fb05931b40df96e00d32b3052f8f3b25"
+    },
+    "independent-fresh-core-v1": {
+      "n": 128,
+      "phase_counts": {
+        "complete": 78,
+        "first extension": 28,
+        "second extension": 1,
+        "pickup / hold": 17,
+        "second return": 1,
+        "first return": 3
+      },
+      "body_onset_median_s": 17.8,
+      "trace_sha256": "fc6e053eeb008c277db6f4291f02f3ae62496e4b947eef9a30387208fbabcb73"
+    },
+    "independent-fresh-capacity-v1": {
+      "n": 64,
+      "phase_counts": {
+        "complete": 36,
+        "second return": 1,
+        "second extension": 4,
+        "pickup / hold": 9,
+        "retraction": 1,
+        "first extension": 13
+      },
+      "body_onset_median_s": 17.9,
+      "trace_sha256": "0752c2b55bef89e3648d0b4d36f10f0180ae8af802c66a60da4b7575e570087b"
+    }
+  },
+  "failure_stages": {
+    "second extension": 11,
+    "complete": 204,
+    "first extension": 63,
+    "pickup / hold": 44,
+    "first return": 6,
+    "second return": 3,
+    "retraction": 1
+  },
+  "all_cases": [
+    {
+      "condition": "independent-core-v1",
+      "env": 0,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 28.233333333333334,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "second extension"
+    },
+    {
+      "condition": "independent-core-v1",
+      "env": 1,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-v1",
+      "env": 2,
+      "instance": "014",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-v1",
+      "env": 3,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-v1",
+      "env": 4,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.933333333333334,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-core-v1",
+      "env": 5,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-v1",
+      "env": 6,
+      "instance": "014",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-v1",
+      "env": 7,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-v1",
+      "env": 0,
+      "instance": "012",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-v1",
+      "env": 1,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-v1",
+      "env": 2,
+      "instance": "014",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-v1",
+      "env": 3,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 0,
+      "instance": "012",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 1,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 2,
+      "instance": "014",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 3,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 4,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 28.333333333333332,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "second extension"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 5,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 6,
+      "instance": "014",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 7,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 8,
+      "instance": "012",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 9,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 10,
+      "instance": "014",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 11,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 12,
+      "instance": "012",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 13,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 14,
+      "instance": "014",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 15,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 16,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 17,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 18,
+      "instance": "014",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 19.533333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.133333333333333,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 19,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 20,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 21,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 22,
+      "instance": "014",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 29.833333333333332,
+      "first_10_consecutive_thumb_proxy_loss_s": 33.06666666666667,
+      "phase_category": "second extension"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 23,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 24,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 25,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 26,
+      "instance": "014",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 27,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 28,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 29,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 30,
+      "instance": "014",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 19.133333333333333,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.0,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 31,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 32,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 33,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 34,
+      "instance": "014",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 35,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 36,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.966666666666665,
+      "first_10_consecutive_thumb_proxy_loss_s": 18.966666666666665,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 37,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 38,
+      "instance": "014",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 19.466666666666665,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.0,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 39,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 40,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.8,
+      "first_10_consecutive_thumb_proxy_loss_s": 19.066666666666666,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 41,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 42,
+      "instance": "014",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 29.466666666666665,
+      "first_10_consecutive_thumb_proxy_loss_s": 33.166666666666664,
+      "phase_category": "second extension"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 43,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 44,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.7,
+      "first_10_consecutive_thumb_proxy_loss_s": 18.866666666666667,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 45,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 46,
+      "instance": "014",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 19.4,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.1,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 47,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 48,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.766666666666666,
+      "first_10_consecutive_thumb_proxy_loss_s": 22.666666666666668,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 49,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 50,
+      "instance": "014",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 19.366666666666667,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.033333333333335,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 51,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 52,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 16.933333333333334,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.9,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 53,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 54,
+      "instance": "014",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 19.6,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.033333333333335,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 55,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 56,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.766666666666666,
+      "first_10_consecutive_thumb_proxy_loss_s": 18.6,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 57,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 58,
+      "instance": "014",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 19.333333333333332,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.1,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 59,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 60,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 61,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 62,
+      "instance": "014",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 19.833333333333332,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.0,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-core-breadth-v1",
+      "env": 63,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 0,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 17.8,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 1,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 2,
+      "instance": "014",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 3,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 4,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 5,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 6,
+      "instance": "014",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 7,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 8,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 27.2,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "second extension"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 9,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 10,
+      "instance": "014",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 11,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 12,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 23.8,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.433333333333334,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 13,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 14,
+      "instance": "014",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 15,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 16,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.733333333333334,
+      "first_10_consecutive_thumb_proxy_loss_s": 18.6,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 17,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 18,
+      "instance": "014",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 29.833333333333332,
+      "first_10_consecutive_thumb_proxy_loss_s": 33.166666666666664,
+      "phase_category": "second extension"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 19,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 20,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 21,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 22,
+      "instance": "014",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 19.433333333333334,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.133333333333333,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 23,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 24,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.766666666666666,
+      "first_10_consecutive_thumb_proxy_loss_s": 18.266666666666666,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 25,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 26,
+      "instance": "014",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 24.133333333333333,
+      "first_10_consecutive_thumb_proxy_loss_s": 34.1,
+      "phase_category": "first return"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 27,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 28,
+      "instance": "012",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.9,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.766666666666666,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 29,
+      "instance": "013",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 30,
+      "instance": "014",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-capacity-breadth-v1",
+      "env": 31,
+      "instance": "015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 0,
+      "instance": "sensitivity-height-minus1",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 1,
+      "instance": "sensitivity-height-plus1",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 18.366666666666667,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 2,
+      "instance": "sensitivity-height-minus1",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 3,
+      "instance": "sensitivity-height-plus1",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 4,
+      "instance": "sensitivity-height-minus1",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 5,
+      "instance": "sensitivity-height-plus1",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 22.666666666666668,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "first return"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 6,
+      "instance": "sensitivity-height-minus1",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 7,
+      "instance": "sensitivity-height-plus1",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 33.1,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "second return"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 8,
+      "instance": "sensitivity-height-minus1",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 9,
+      "instance": "sensitivity-height-plus1",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 18.533333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 10,
+      "instance": "sensitivity-height-minus1",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 11,
+      "instance": "sensitivity-height-plus1",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.966666666666665,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 12,
+      "instance": "sensitivity-height-minus1",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 13,
+      "instance": "sensitivity-height-plus1",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 14,
+      "instance": "sensitivity-height-minus1",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 15,
+      "instance": "sensitivity-height-plus1",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 16,
+      "instance": "sensitivity-height-minus1",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 17,
+      "instance": "sensitivity-height-plus1",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 18,
+      "instance": "sensitivity-height-minus1",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 19,
+      "instance": "sensitivity-height-plus1",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 20,
+      "instance": "sensitivity-height-minus1",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 21,
+      "instance": "sensitivity-height-plus1",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 22,
+      "instance": "sensitivity-height-minus1",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 23,
+      "instance": "sensitivity-height-plus1",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 24,
+      "instance": "sensitivity-height-minus1",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 22.933333333333334,
+      "first_10_consecutive_thumb_proxy_loss_s": 22.9,
+      "phase_category": "first return"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 25,
+      "instance": "sensitivity-height-plus1",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 26,
+      "instance": "sensitivity-height-minus1",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 27,
+      "instance": "sensitivity-height-plus1",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 28,
+      "instance": "sensitivity-height-minus1",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 29,
+      "instance": "sensitivity-height-plus1",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 30,
+      "instance": "sensitivity-height-minus1",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-height-sensitivity-v1",
+      "env": 31,
+      "instance": "sensitivity-height-plus1",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 0,
+      "instance": "h0000",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 1,
+      "instance": "h0001",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 2,
+      "instance": "h0002",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 3,
+      "instance": "h0003",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 18.233333333333334,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.166666666666668,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 4,
+      "instance": "h0004",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 28.4,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "second extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 5,
+      "instance": "h0005",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.733333333333334,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 6,
+      "instance": "h0006",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 7,
+      "instance": "h0007",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 8,
+      "instance": "h0008",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 9,
+      "instance": "h0009",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 10,
+      "instance": "h0010",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.8,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 11,
+      "instance": "h0011",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 32.53333333333333,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "second return"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 12,
+      "instance": "h0012",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 13,
+      "instance": "h0013",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.466666666666665,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 14,
+      "instance": "h0014",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 25.266666666666666,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "first return"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 15,
+      "instance": "h0015",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 16,
+      "instance": "h0016",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 17,
+      "instance": "h0017",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 18,
+      "instance": "h0018",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 18.5,
+      "first_10_consecutive_thumb_proxy_loss_s": 21.666666666666668,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 19,
+      "instance": "h0019",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 20,
+      "instance": "h0020",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 21,
+      "instance": "h0021",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 22,
+      "instance": "h0022",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 23,
+      "instance": "h0023",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 24,
+      "instance": "h0024",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 25,
+      "instance": "h0025",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 26,
+      "instance": "h0026",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 27,
+      "instance": "h0027",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 28,
+      "instance": "h0028",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 29,
+      "instance": "h0029",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 30,
+      "instance": "h0030",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 21.633333333333333,
+      "first_10_consecutive_thumb_proxy_loss_s": 22.5,
+      "phase_category": "first return"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 31,
+      "instance": "h0031",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 32,
+      "instance": "h0032",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 33,
+      "instance": "h0033",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 34,
+      "instance": "h0034",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 35,
+      "instance": "h0035",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 19.733333333333334,
+      "first_10_consecutive_thumb_proxy_loss_s": 29.4,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 36,
+      "instance": "h0036",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 37,
+      "instance": "h0037",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 38,
+      "instance": "h0038",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 39,
+      "instance": "h0039",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 40,
+      "instance": "h0040",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.3,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.733333333333334,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 41,
+      "instance": "h0041",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 42,
+      "instance": "h0042",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 18.4,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.833333333333332,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 43,
+      "instance": "h0043",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 44,
+      "instance": "h0044",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 45,
+      "instance": "h0045",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.366666666666667,
+      "first_10_consecutive_thumb_proxy_loss_s": 25.166666666666668,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 46,
+      "instance": "h0046",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 47,
+      "instance": "h0047",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.866666666666667,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.566666666666666,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 48,
+      "instance": "h0048",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 49,
+      "instance": "h0049",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 50,
+      "instance": "h0050",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 51,
+      "instance": "h0051",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 52,
+      "instance": "h0052",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.966666666666665,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.666666666666668,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 53,
+      "instance": "h0053",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 54,
+      "instance": "h0054",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 55,
+      "instance": "h0055",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 56,
+      "instance": "h0056",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 57,
+      "instance": "h0057",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 18.333333333333332,
+      "first_10_consecutive_thumb_proxy_loss_s": 24.966666666666665,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 58,
+      "instance": "h0058",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 59,
+      "instance": "h0059",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 24.566666666666666,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "first return"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 60,
+      "instance": "h0060",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 18.533333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 30.966666666666665,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 61,
+      "instance": "h0061",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 18.6,
+      "first_10_consecutive_thumb_proxy_loss_s": 24.966666666666665,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 62,
+      "instance": "h0062",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 63,
+      "instance": "h0063",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 64,
+      "instance": "h0064",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 65,
+      "instance": "h0065",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 66,
+      "instance": "h0066",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 67,
+      "instance": "h0067",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 68,
+      "instance": "h0068",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 69,
+      "instance": "h0069",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 70,
+      "instance": "h0070",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 71,
+      "instance": "h0071",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 72,
+      "instance": "h0072",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.8,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.433333333333334,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 73,
+      "instance": "h0073",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 16.4,
+      "first_10_consecutive_thumb_proxy_loss_s": 20.066666666666666,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 74,
+      "instance": "h0074",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 75,
+      "instance": "h0075",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 76,
+      "instance": "h0076",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 77,
+      "instance": "h0077",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 19.633333333333333,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 78,
+      "instance": "h0078",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 79,
+      "instance": "h0079",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 80,
+      "instance": "h0080",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 81,
+      "instance": "h0081",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.433333333333334,
+      "first_10_consecutive_thumb_proxy_loss_s": 17.6,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 82,
+      "instance": "h0082",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 83,
+      "instance": "h0083",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 18.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 20.066666666666666,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 84,
+      "instance": "h0084",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 85,
+      "instance": "h0085",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 86,
+      "instance": "h0086",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 87,
+      "instance": "h0087",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 18.3,
+      "first_10_consecutive_thumb_proxy_loss_s": 24.3,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 88,
+      "instance": "h0088",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 89,
+      "instance": "h0089",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 90,
+      "instance": "h0090",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 91,
+      "instance": "h0091",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 18.5,
+      "first_10_consecutive_thumb_proxy_loss_s": 24.566666666666666,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 92,
+      "instance": "h0092",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 93,
+      "instance": "h0093",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 94,
+      "instance": "h0094",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 95,
+      "instance": "h0095",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 96,
+      "instance": "h0096",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 97,
+      "instance": "h0097",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 19.866666666666667,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 98,
+      "instance": "h0098",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 99,
+      "instance": "h0099",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 100,
+      "instance": "h0100",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 101,
+      "instance": "h0101",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 102,
+      "instance": "h0102",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 103,
+      "instance": "h0103",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 104,
+      "instance": "h0104",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 105,
+      "instance": "h0105",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 106,
+      "instance": "h0106",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 107,
+      "instance": "h0107",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 108,
+      "instance": "h0108",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 109,
+      "instance": "h0109",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 110,
+      "instance": "h0110",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 111,
+      "instance": "h0111",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.933333333333334,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.966666666666665,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 112,
+      "instance": "h0112",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 113,
+      "instance": "h0113",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 114,
+      "instance": "h0114",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 18.533333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.966666666666665,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 115,
+      "instance": "h0115",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 19.666666666666668,
+      "first_10_consecutive_thumb_proxy_loss_s": 21.7,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 116,
+      "instance": "h0116",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 16.133333333333333,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.1,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 117,
+      "instance": "h0117",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 118,
+      "instance": "h0118",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 119,
+      "instance": "h0119",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 120,
+      "instance": "h0120",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 18.133333333333333,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.566666666666666,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 121,
+      "instance": "h0121",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 18.533333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.333333333333332,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 122,
+      "instance": "h0122",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 123,
+      "instance": "h0123",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 124,
+      "instance": "h0124",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 125,
+      "instance": "h0125",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 126,
+      "instance": "h0126",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-core-v1",
+      "env": 127,
+      "instance": "h0127",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 0,
+      "instance": "h0000",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 1,
+      "instance": "h0001",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 2,
+      "instance": "h0002",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 3,
+      "instance": "h0003",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 4,
+      "instance": "h0004",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 34.6,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "second return"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 5,
+      "instance": "h0005",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 27.733333333333334,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "second extension"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 6,
+      "instance": "h0006",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 7,
+      "instance": "h0007",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 8,
+      "instance": "h0008",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 9,
+      "instance": "h0009",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 10,
+      "instance": "h0010",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 28.266666666666666,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "second extension"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 11,
+      "instance": "h0011",
+      "complete": false,
+      "failure_priority_label": "retraction",
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "retraction"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 12,
+      "instance": "h0012",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 13,
+      "instance": "h0013",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 28.233333333333334,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "second extension"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 14,
+      "instance": "h0014",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 15,
+      "instance": "h0015",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 28.333333333333332,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "second extension"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 16,
+      "instance": "h0016",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 17,
+      "instance": "h0017",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 18,
+      "instance": "h0018",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 18.166666666666668,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.733333333333334,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 19,
+      "instance": "h0019",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 20,
+      "instance": "h0020",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 21,
+      "instance": "h0021",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 22,
+      "instance": "h0022",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 23,
+      "instance": "h0023",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 24,
+      "instance": "h0024",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 25,
+      "instance": "h0025",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 20.333333333333332,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 26,
+      "instance": "h0026",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 27,
+      "instance": "h0027",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 28,
+      "instance": "h0028",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 29,
+      "instance": "h0029",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 30,
+      "instance": "h0030",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 31,
+      "instance": "h0031",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 32,
+      "instance": "h0032",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 33,
+      "instance": "h0033",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 19.533333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 34,
+      "instance": "h0034",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 35,
+      "instance": "h0035",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 18.733333333333334,
+      "first_10_consecutive_thumb_proxy_loss_s": 30.366666666666667,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 36,
+      "instance": "h0036",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 37,
+      "instance": "h0037",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 38,
+      "instance": "h0038",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 39,
+      "instance": "h0039",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 40,
+      "instance": "h0040",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 41,
+      "instance": "h0041",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 42,
+      "instance": "h0042",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.666666666666668,
+      "first_10_consecutive_thumb_proxy_loss_s": 24.333333333333332,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 43,
+      "instance": "h0043",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 44,
+      "instance": "h0044",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 45,
+      "instance": "h0045",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.633333333333333,
+      "first_10_consecutive_thumb_proxy_loss_s": 18.966666666666665,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 46,
+      "instance": "h0046",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 47,
+      "instance": "h0047",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.366666666666667,
+      "first_10_consecutive_thumb_proxy_loss_s": 19.166666666666668,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 48,
+      "instance": "h0048",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 49,
+      "instance": "h0049",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 50,
+      "instance": "h0050",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 51,
+      "instance": "h0051",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 18.6,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.666666666666668,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 52,
+      "instance": "h0052",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.9,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.766666666666666,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 53,
+      "instance": "h0053",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 17.8,
+      "first_10_consecutive_thumb_proxy_loss_s": 18.5,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 54,
+      "instance": "h0054",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 55,
+      "instance": "h0055",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 56,
+      "instance": "h0056",
+      "complete": false,
+      "failure_priority_label": "pickup/hold",
+      "first_operation_body_breach_s": 16.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 16.033333333333335,
+      "phase_category": "pickup / hold"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 57,
+      "instance": "h0057",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 18.7,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 58,
+      "instance": "h0058",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 59,
+      "instance": "h0059",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 60,
+      "instance": "h0060",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 18.033333333333335,
+      "first_10_consecutive_thumb_proxy_loss_s": 23.666666666666668,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 61,
+      "instance": "h0061",
+      "complete": false,
+      "failure_priority_label": "body unstable/drop",
+      "first_operation_body_breach_s": 19.3,
+      "first_10_consecutive_thumb_proxy_loss_s": 34.03333333333333,
+      "phase_category": "first extension"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 62,
+      "instance": "h0062",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    },
+    {
+      "condition": "independent-fresh-capacity-v1",
+      "env": 63,
+      "instance": "h0063",
+      "complete": true,
+      "failure_priority_label": null,
+      "first_operation_body_breach_s": null,
+      "first_10_consecutive_thumb_proxy_loss_s": null,
+      "phase_category": "complete"
+    }
+  ]
+}

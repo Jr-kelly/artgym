@@ -1,0 +1,8 @@
+{
+  "installed_primary_source": "/home/agiuser/miniconda3/envs/artgym/opt/IsaacGym_Preview_TacSL_Package/isaacgym/docs/api/python/struct_py.html",
+  "source_sha256": "062a147239e058d620e1c7adb776e548c02a50940846b51fc20d5e3b88ccaaad",
+  "normal_documentation": "Contact normal from body0->body1 in world space",
+  "schema_matches_installed_documentation": true,
+  "interpretation": "Retain documented vector convention and original scalar records. Do not equate vector lambda*normal with a verified net signed force/wrench on the knife; friction vectors/contactpoints and physical sign calibration are absent from scalar pairfile. No controller ever reads these diagnostics.",
+  "evidence_example": "Native retained TABLEcontact has knife link_0/body0, table/body1 and+z normal. This is a reason to validate physical force-sign usage before any signed wrench inference; not evidence to silently reverse normals or change physics."
+}

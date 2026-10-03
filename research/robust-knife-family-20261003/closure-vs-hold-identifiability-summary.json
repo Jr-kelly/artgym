@@ -1,0 +1,176 @@
+{
+  "scope": "Prospectively fixed geometry-supervision holdout within training-family, not independent whole-policy validation or new actor. All cases retained. Current truth not feature. Earlier measured closing50-frame history may carry useful thickness information; supervised shape-label error is not force or causal identification.",
+  "prefix_comparisons": {
+    "train": {
+      "initial_fields_exact_equal": {
+        "root": true,
+        "dof": true,
+        "materials": true,
+        "observation_bias": true,
+        "delay": true,
+        "cal_object": false,
+        "cal_slider": true,
+        "load_amplitude": true,
+        "detent_amplitude": true,
+        "load_phase": true
+      },
+      "target_prefix_max_abs_diff_rad": 0.0,
+      "actual_q_prefix_max_abs_diff_rad": 0.2248784899711609,
+      "data_sha256": {
+        "8": "b6f62e524e5585fb048b6430129a902abc7866230d17238e085dba27bfa5a193",
+        "16": "fff471d28402fcef6f45d2acb4b98c95b1c907ff66a99f79e6399fb5c5907815"
+      },
+      "cal_object_shape": [
+        512,
+        7
+      ],
+      "cal_object_translation_max_diff_m": 0.0,
+      "cal_object_quaternion_max_diff_dimensionless": 1.1920928955078125e-07
+    },
+    "fresh": {
+      "initial_fields_exact_equal": {
+        "root": true,
+        "dof": true,
+        "materials": true,
+        "observation_bias": true,
+        "delay": true,
+        "cal_object": false,
+        "cal_slider": true,
+        "load_amplitude": true,
+        "detent_amplitude": true,
+        "load_phase": true
+      },
+      "target_prefix_max_abs_diff_rad": 0.0,
+      "actual_q_prefix_max_abs_diff_rad": 0.15512514114379883,
+      "data_sha256": {
+        "8": "d44693f1af178e4984e6533d30832dd95b7c366f5b61c8c9ccec814f42a6d999",
+        "16": "daaa11ceff957a85c673e2d0f1821feeeaa4f37ebabbf93a23871ab2f1a1e185"
+      },
+      "cal_object_shape": [
+        512,
+        7
+      ],
+      "cal_object_translation_max_diff_m": 0.0,
+      "cal_object_quaternion_max_diff_dimensionless": 1.1920928955078125e-07
+    }
+  },
+  "times": {
+    "8": {
+      "constant_mean": {
+        "n": 103,
+        "mae_mm": {
+          "W_mm": 1.0004282588355442,
+          "T_mm": 1.0251086062838801,
+          "L_mm": 2.2239115976555324,
+          "slider_joint_origin_x_mm": 0.5538725944973301,
+          "slider_joint_origin_z_mm": 2.417350838227574
+        },
+        "T_p90_abs_error_mm": 1.783106164264212,
+        "T_error_gt1mm_count": 53,
+        "T_mae_pickup_valid_mm": null,
+        "T_mae_pickup_invalid_mm": null
+      },
+      "current_q_targets": {
+        "n": 103,
+        "mae_mm": {
+          "W_mm": 1.0176694958105348,
+          "T_mm": 0.6176686537062042,
+          "L_mm": 2.331774325234402,
+          "slider_joint_origin_x_mm": 0.5641650329911746,
+          "slider_joint_origin_z_mm": 2.179505372170485
+        },
+        "T_p90_abs_error_mm": 1.1241230901105002,
+        "T_error_gt1mm_count": 14,
+        "T_mae_pickup_valid_mm": null,
+        "T_mae_pickup_invalid_mm": null
+      },
+      "public134": {
+        "n": 103,
+        "mae_mm": {
+          "W_mm": 1.0134737749792255,
+          "T_mm": 0.6159633589422178,
+          "L_mm": 2.3584056418676056,
+          "slider_joint_origin_x_mm": 0.566365893288449,
+          "slider_joint_origin_z_mm": 2.1938717592999786
+        },
+        "T_p90_abs_error_mm": 1.107331041378607,
+        "T_error_gt1mm_count": 17,
+        "T_mae_pickup_valid_mm": null,
+        "T_mae_pickup_invalid_mm": null
+      },
+      "public134_history_stats": {
+        "n": 103,
+        "mae_mm": {
+          "W_mm": 1.06693588658438,
+          "T_mm": 0.4779096709540138,
+          "L_mm": 2.3185512003900075,
+          "slider_joint_origin_x_mm": 0.5659597337751014,
+          "slider_joint_origin_z_mm": 2.174452127719513
+        },
+        "T_p90_abs_error_mm": 0.9094940139243285,
+        "T_error_gt1mm_count": 8,
+        "T_mae_pickup_valid_mm": null,
+        "T_mae_pickup_invalid_mm": null
+      }
+    },
+    "16": {
+      "constant_mean": {
+        "n": 103,
+        "mae_mm": {
+          "W_mm": 1.0004282588355442,
+          "T_mm": 1.0251086062838801,
+          "L_mm": 2.2239115976555324,
+          "slider_joint_origin_x_mm": 0.5538725944973301,
+          "slider_joint_origin_z_mm": 2.417350838227574
+        },
+        "T_p90_abs_error_mm": 1.783106164264212,
+        "T_error_gt1mm_count": 53,
+        "T_mae_pickup_valid_mm": 0.9882716777459309,
+        "T_mae_pickup_invalid_mm": 1.5303007690900352
+      },
+      "current_q_targets": {
+        "n": 103,
+        "mae_mm": {
+          "W_mm": 0.9041021933701279,
+          "T_mm": 0.8542147071486299,
+          "L_mm": 2.2525975250088535,
+          "slider_joint_origin_x_mm": 0.550406099998416,
+          "slider_joint_origin_z_mm": 2.260003171984376
+        },
+        "T_p90_abs_error_mm": 1.5277709818183427,
+        "T_error_gt1mm_count": 40,
+        "T_mae_pickup_valid_mm": 0.8171070841275947,
+        "T_mae_pickup_invalid_mm": 1.363119251437111
+      },
+      "public134": {
+        "n": 103,
+        "mae_mm": {
+          "W_mm": 0.8960662001037559,
+          "T_mm": 0.8503040814747841,
+          "L_mm": 2.2931736214089318,
+          "slider_joint_origin_x_mm": 0.5503332776083342,
+          "slider_joint_origin_z_mm": 2.2564866788200213
+        },
+        "T_p90_abs_error_mm": 1.5411460297547885,
+        "T_error_gt1mm_count": 39,
+        "T_mae_pickup_valid_mm": 0.812753017352974,
+        "T_mae_pickup_invalid_mm": 1.3652901037167535
+      },
+      "public134_history_stats": {
+        "n": 103,
+        "mae_mm": {
+          "W_mm": 0.9096171952673411,
+          "T_mm": 0.8638330638122874,
+          "L_mm": 2.318339153465741,
+          "slider_joint_origin_x_mm": 0.5494172604585957,
+          "slider_joint_origin_z_mm": 2.2192287147922105
+        },
+        "T_p90_abs_error_mm": 1.574421116905825,
+        "T_error_gt1mm_count": 37,
+        "T_mae_pickup_valid_mm": 0.8312014395292898,
+        "T_mae_pickup_invalid_mm": 1.3113524825505356
+      }
+    }
+  },
+  "limitation": "Initial physicalroot/dof/material/sensor/load fields andcalibrationtranslation exact equal; only knowncalibrationquaternions differ atfloat roundoff \u22641.1921e-7 dimensionless. Actualq prefix diverges across sequential GPU contactreplays despite identical issuedtarget prefix. No evidence of changed calibrationposition or takeover-dependent constructorcalibration. Therefore outcome suggests useful earlyhistory signal, not isolated causal proof, force or whole-policy validation."
+}

@@ -1,0 +1,255 @@
+{
+  "scope": "Exploratory pre-operation geometry identifiability on512 RLtraining-family bodies. Geometry supervision heldout103 groups, not independent whole-policy/generalization/force evidence. All initial episodes included, no success filtering. At8 pickup metric N/A; at16 held metric allowed. Fresh perturbations for same training-family bodies, no h or012\u2013015. Not deployed, no primary P50 change.",
+  "labels": [
+    "W_mm",
+    "T_mm",
+    "L_mm",
+    "slider_joint_origin_x_mm",
+    "slider_joint_origin_z_mm"
+  ],
+  "fit_n": 409,
+  "geometry_supervision_heldout_n": 103,
+  "packet_time_s": 8,
+  "train_data_sha256": "b6f62e524e5585fb048b6430129a902abc7866230d17238e085dba27bfa5a193",
+  "fresh_data_sha256": "d44693f1af178e4984e6533d30832dd95b7c366f5b61c8c9ccec814f42a6d999",
+  "fixed_ridge_lambda": 10,
+  "models": {
+    "constant_mean": {
+      "input_dim": 0,
+      "fit_train": {
+        "n": 409,
+        "mae_mm": {
+          "W_mm": 1.0319965759144434,
+          "T_mm": 1.0031362068278455,
+          "L_mm": 2.407149484701527,
+          "slider_joint_origin_x_mm": 0.5126940044335393,
+          "slider_joint_origin_z_mm": 2.3283613577403277
+        },
+        "T_p90_abs_error_mm": 1.776174438717588,
+        "T_error_gt1mm_count": 200,
+        "T_mae_pickup_valid_mm": null,
+        "T_mae_pickup_invalid_mm": null
+      },
+      "geometry_heldout_original_errors": {
+        "n": 103,
+        "mae_mm": {
+          "W_mm": 1.0004282588355442,
+          "T_mm": 1.0251086062838801,
+          "L_mm": 2.2239115976555324,
+          "slider_joint_origin_x_mm": 0.5538725944973301,
+          "slider_joint_origin_z_mm": 2.417350838227574
+        },
+        "T_p90_abs_error_mm": 1.783106164264212,
+        "T_error_gt1mm_count": 53,
+        "T_mae_pickup_valid_mm": null,
+        "T_mae_pickup_invalid_mm": null
+      },
+      "geometry_heldout_fresh_errors": {
+        "n": 103,
+        "mae_mm": {
+          "W_mm": 1.0004282588355442,
+          "T_mm": 1.0251086062838801,
+          "L_mm": 2.2239115976555324,
+          "slider_joint_origin_x_mm": 0.5538725944973301,
+          "slider_joint_origin_z_mm": 2.417350838227574
+        },
+        "T_p90_abs_error_mm": 1.783106164264212,
+        "T_error_gt1mm_count": 53,
+        "T_mae_pickup_valid_mm": null,
+        "T_mae_pickup_invalid_mm": null
+      },
+      "seen_geometry_fresh_errors": {
+        "n": 409,
+        "mae_mm": {
+          "W_mm": 1.0319965759144434,
+          "T_mm": 1.0031362068278455,
+          "L_mm": 2.407149484701527,
+          "slider_joint_origin_x_mm": 0.5126940044335393,
+          "slider_joint_origin_z_mm": 2.3283613577403277
+        },
+        "T_p90_abs_error_mm": 1.776174438717588,
+        "T_error_gt1mm_count": 200,
+        "T_mae_pickup_valid_mm": null,
+        "T_mae_pickup_invalid_mm": null
+      }
+    },
+    "current_q_targets": {
+      "input_dim": 40,
+      "fit_train": {
+        "n": 409,
+        "mae_mm": {
+          "W_mm": 0.9836660857126595,
+          "T_mm": 0.5781393692446466,
+          "L_mm": 2.3851054129073415,
+          "slider_joint_origin_x_mm": 0.5037180009193183,
+          "slider_joint_origin_z_mm": 2.0629033886981674
+        },
+        "T_p90_abs_error_mm": 1.1748168235208027,
+        "T_error_gt1mm_count": 60,
+        "T_mae_pickup_valid_mm": null,
+        "T_mae_pickup_invalid_mm": null
+      },
+      "geometry_heldout_original_errors": {
+        "n": 103,
+        "mae_mm": {
+          "W_mm": 1.0005482521046714,
+          "T_mm": 0.6460938317048521,
+          "L_mm": 2.268770531413685,
+          "slider_joint_origin_x_mm": 0.5545219373530718,
+          "slider_joint_origin_z_mm": 2.1849185498111137
+        },
+        "T_p90_abs_error_mm": 1.2720816395324455,
+        "T_error_gt1mm_count": 22,
+        "T_mae_pickup_valid_mm": null,
+        "T_mae_pickup_invalid_mm": null
+      },
+      "geometry_heldout_fresh_errors": {
+        "n": 103,
+        "mae_mm": {
+          "W_mm": 1.0176694958105348,
+          "T_mm": 0.6176686537062042,
+          "L_mm": 2.331774325234402,
+          "slider_joint_origin_x_mm": 0.5641650329911746,
+          "slider_joint_origin_z_mm": 2.179505372170485
+        },
+        "T_p90_abs_error_mm": 1.1241230901105002,
+        "T_error_gt1mm_count": 14,
+        "T_mae_pickup_valid_mm": null,
+        "T_mae_pickup_invalid_mm": null
+      },
+      "seen_geometry_fresh_errors": {
+        "n": 409,
+        "mae_mm": {
+          "W_mm": 1.0266772768499521,
+          "T_mm": 0.6214850325135054,
+          "L_mm": 2.434458410281133,
+          "slider_joint_origin_x_mm": 0.5199982323816126,
+          "slider_joint_origin_z_mm": 2.142421488330497
+        },
+        "T_p90_abs_error_mm": 1.2697660241253064,
+        "T_error_gt1mm_count": 82,
+        "T_mae_pickup_valid_mm": null,
+        "T_mae_pickup_invalid_mm": null
+      }
+    },
+    "public134": {
+      "input_dim": 134,
+      "fit_train": {
+        "n": 409,
+        "mae_mm": {
+          "W_mm": 0.9808402787373538,
+          "T_mm": 0.5708823933128854,
+          "L_mm": 2.3815522002962095,
+          "slider_joint_origin_x_mm": 0.5002000635225063,
+          "slider_joint_origin_z_mm": 2.056518013198632
+        },
+        "T_p90_abs_error_mm": 1.153194195343452,
+        "T_error_gt1mm_count": 54,
+        "T_mae_pickup_valid_mm": null,
+        "T_mae_pickup_invalid_mm": null
+      },
+      "geometry_heldout_original_errors": {
+        "n": 103,
+        "mae_mm": {
+          "W_mm": 1.0100103769988797,
+          "T_mm": 0.6444975498425511,
+          "L_mm": 2.2715659400317314,
+          "slider_joint_origin_x_mm": 0.5592628540418797,
+          "slider_joint_origin_z_mm": 2.1777203122240305
+        },
+        "T_p90_abs_error_mm": 1.2419753818715473,
+        "T_error_gt1mm_count": 23,
+        "T_mae_pickup_valid_mm": null,
+        "T_mae_pickup_invalid_mm": null
+      },
+      "geometry_heldout_fresh_errors": {
+        "n": 103,
+        "mae_mm": {
+          "W_mm": 1.0134737749792255,
+          "T_mm": 0.6159633589422178,
+          "L_mm": 2.3584056418676056,
+          "slider_joint_origin_x_mm": 0.566365893288449,
+          "slider_joint_origin_z_mm": 2.1938717592999786
+        },
+        "T_p90_abs_error_mm": 1.107331041378607,
+        "T_error_gt1mm_count": 17,
+        "T_mae_pickup_valid_mm": null,
+        "T_mae_pickup_invalid_mm": null
+      },
+      "seen_geometry_fresh_errors": {
+        "n": 409,
+        "mae_mm": {
+          "W_mm": 1.0342957028410793,
+          "T_mm": 0.6207057329851655,
+          "L_mm": 2.4525748524143833,
+          "slider_joint_origin_x_mm": 0.5224963656251684,
+          "slider_joint_origin_z_mm": 2.151085504883552
+        },
+        "T_p90_abs_error_mm": 1.23943115935003,
+        "T_error_gt1mm_count": 82,
+        "T_mae_pickup_valid_mm": null,
+        "T_mae_pickup_invalid_mm": null
+      }
+    },
+    "public134_history_stats": {
+      "input_dim": 194,
+      "fit_train": {
+        "n": 409,
+        "mae_mm": {
+          "W_mm": 0.915010137416186,
+          "T_mm": 0.4405199798588471,
+          "L_mm": 2.262028484092635,
+          "slider_joint_origin_x_mm": 0.48526524169286256,
+          "slider_joint_origin_z_mm": 1.9176135170799893
+        },
+        "T_p90_abs_error_mm": 0.8482275988142439,
+        "T_error_gt1mm_count": 30,
+        "T_mae_pickup_valid_mm": null,
+        "T_mae_pickup_invalid_mm": null
+      },
+      "geometry_heldout_original_errors": {
+        "n": 103,
+        "mae_mm": {
+          "W_mm": 1.0170446269173452,
+          "T_mm": 0.47241225836143347,
+          "L_mm": 2.2229294179926504,
+          "slider_joint_origin_x_mm": 0.5470439584619925,
+          "slider_joint_origin_z_mm": 2.2025279696152884
+        },
+        "T_p90_abs_error_mm": 0.885772117943063,
+        "T_error_gt1mm_count": 6,
+        "T_mae_pickup_valid_mm": null,
+        "T_mae_pickup_invalid_mm": null
+      },
+      "geometry_heldout_fresh_errors": {
+        "n": 103,
+        "mae_mm": {
+          "W_mm": 1.06693588658438,
+          "T_mm": 0.4779096709540138,
+          "L_mm": 2.3185512003900075,
+          "slider_joint_origin_x_mm": 0.5659597337751014,
+          "slider_joint_origin_z_mm": 2.174452127719513
+        },
+        "T_p90_abs_error_mm": 0.9094940139243285,
+        "T_error_gt1mm_count": 8,
+        "T_mae_pickup_valid_mm": null,
+        "T_mae_pickup_invalid_mm": null
+      },
+      "seen_geometry_fresh_errors": {
+        "n": 409,
+        "mae_mm": {
+          "W_mm": 1.0117995371059316,
+          "T_mm": 0.4842629882412034,
+          "L_mm": 2.474132529379233,
+          "slider_joint_origin_x_mm": 0.5183741112920637,
+          "slider_joint_origin_z_mm": 2.0999102780160706
+        },
+        "T_p90_abs_error_mm": 0.9492506980046898,
+        "T_error_gt1mm_count": 33,
+        "T_mae_pickup_valid_mm": null,
+        "T_mae_pickup_invalid_mm": null
+      }
+    }
+  },
+  "model_sha256": "55574f5a321c3b3dda1ffd971263baf2aea808d18b25cd444561862994b28168"
+}

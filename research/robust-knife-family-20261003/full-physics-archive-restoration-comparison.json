@@ -1,0 +1,50 @@
+{
+  "scope": "Same4096 traininggeometry slots/seed/config, originalsource versus archive-restoredsource on distinct H200 devices; actual36s noresets. Numericalcontactreproducibility, not independentgeneralization orcode-causality isolation.",
+  "initial_fields_equal": {
+    "root": true,
+    "dof": true,
+    "materials": true,
+    "observation_bias": true,
+    "delay": true,
+    "cal_object": true,
+    "cal_slider": true,
+    "load_amplitude": true,
+    "detent_amplitude": true,
+    "load_phase": true,
+    "load_profile_ids": true,
+    "load_frequencies": true
+  },
+  "results": [
+    {
+      "name": "frozen-source-highload-recovery-v1",
+      "n": 4096,
+      "complete": 1294,
+      "checkpoint_sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714",
+      "failures": {
+        "body unstable/drop": 2409,
+        "pickup/hold": 358,
+        "retraction": 14,
+        "extension": 21
+      },
+      "trace_sha256": "3aed3a6e6cf0308235ce6386612ee1df754b5764238f5651b33b128527797ce5",
+      "report_sha256": "8ee72be8970c8d34a103f7b7f26ea75db4941e9d2c335db6982c1ef3d19ac0f6"
+    },
+    {
+      "name": "frozen-restored-highload-recovery-v1",
+      "n": 4096,
+      "complete": 1266,
+      "checkpoint_sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714",
+      "failures": {
+        "body unstable/drop": 2452,
+        "pickup/hold": 338,
+        "retraction": 18,
+        "extension": 22
+      },
+      "trace_sha256": "abc743f7d3217d5bc9b880ab069fcfbc3f9467ba65b0866974c3a6692cb9ace1",
+      "report_sha256": "b45285e9043abc9c1abb554f96cb545e5a2dadead33b3d5655cf8a829620398d"
+    }
+  ],
+  "prefix_motor_target_max_difference_rad": 0.0,
+  "prefix_actual_q_max_difference_rad": 0.4095407724380493,
+  "conclusion": "Actual restored physics executes sameinitialstates/prefixcommands andsamepolicy; different contacttrajectories on distinctGPUs are retained. Highstress fragility remains, no bitwisePhysX or smallcountlearninggain claim."
+}

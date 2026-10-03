@@ -26,7 +26,7 @@ R800是2076维SC-real编码器适配权重，必须同时保留指定teacher及�
 
 ## 清单验证与空目录恢复
 
-将Release文件放到同一个ARTIFACTS目录，源码归档名为 `wuji-g2-source.tar.gz`，权重为 `models-and-recovery.tar.gz`。使用源码包中的恢复脚本，或者从Release直接下载同一脚本，执行：
+将Release文件放到同一个ARTIFACTS目录，源码归档名为 `wuji-g2-source-final.tar.gz`，权重为 `models-and-recovery-final.tar.gz`。使用源码包中的恢复脚本，或者从Release直接下载同一脚本，执行：
 
 ```bash
 python3 restore_wuji_robust_delivery.py --artifacts ARTIFACTS --verify-only

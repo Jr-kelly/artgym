@@ -1,0 +1,25 @@
+{
+  "scope": "Exploratory CPU identifiability diagnostic from existing training-family data, not deployedhead or newprimarypolicy. Registered afterprimary332; no h/012\u2013015 used forfit. No newphysics/GPU load forpadding.",
+  "data": [
+    "temporal-capacity-train-v1/data.npz",
+    "temporal-capacity-fresh-v1/data.npz"
+  ],
+  "packet_time_s": 16,
+  "selection": "Exactlyfirstlegal2076packet atoperationstart fromeach512 actualepisode, includingpickup failures; holdinghistory50 measuredq/action rows. No outcome-filteredfit.",
+  "groups": "Sameexisting estimatorasset split:group%5==0 gives103 supervisedheldoutgeometrygroups; remaining409 fit. Second512 includesfreshperturbations forsame512 traininggeometries. Not independentwhole-policy validation.",
+  "targets_training_labels_only": [
+    "bodyW_mm",
+    "bodyT_mm",
+    "bodyL_mm",
+    "slider_joint_origin_x_mm",
+    "slider_joint_origin_z_mm"
+  ],
+  "predictors": [
+    "constanttrainingmean",
+    "current measured20q +20 knownissuedtargets",
+    "134 measured/knownfeatures",
+    "134 measured/knownfeatures +holdinghistory q mean/std andfirst-to-lastchange"
+  ],
+  "algorithm": "Standardizedridge, fixedlambda10, fitmeans/scales on409 groups only; nohyperparameterscan ordependentpolicytuning",
+  "hypothesis": "Initialholdingproprioception may encodebodythickness despitecurrentfriction/calibration/sensorerrors; test before proposing geometry-conditioned reference, not labelfeedingorassetID actorinput."
+}
