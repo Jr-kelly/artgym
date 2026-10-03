@@ -34,3 +34,11 @@ python3 restore_wuji_robust_delivery.py --artifacts ARTIFACTS --destination NEW_
 ```
 
 默认恢复源码、权重、当前under几何、高度和新128个独立几何。`--all`同时恢复可选证据归档。每个原始回合和训练分支的语义由其report/identity决定；“包含于归档”不使训练资产成为独立验证。
+
+## 最终下载后的执行核验
+
+源码归档对应本地 `feb2118176893b1acf025abc1c9ad6b7b8a2cdcc`、GitHub `2e75dd3a5668ad1b18c73b9a8d6913ae5c2f28ea`，树 `0443626c55873dff9657a7ffa53eed659382c7ea`。最终交付分支/标签可以包含此后新增的下载核验、恢复重执行、比较/打包入口和报告；原1258运行文件及闭合上下文actor入口不变。后续核验入口随 `final-downloaded-recovery-evidence.tar.gz` 和最终Git树提供。主推理仍是154维P50；155维开发原型使用单独入口与head。
+
+在实际GitHub下载的空目录恢复中，原生桌面连续demo再次成功（v68），600帧完整策略离线回放电机目标误差0。七组固定332条件的H200无图形恢复重执行与原4090录像验证另行报告，不能替代原204/332。另对实际下载的两个155维末次Adam/RNG执行有限34更新恢复，跨越完整36秒物理回合，只核验可恢复执行，不形成新候选分数。
+
+传输和GitHub工具应使用系统环境；仿真所需 `LD_LIBRARY_PATH` 只赋给仿真Python子进程。把该变量传给系统SSH可能触发OpenSSL版本不匹配，已保存失败回执并用干净环境恢复文件传输。

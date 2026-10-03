@@ -1,0 +1,47 @@
+{
+  "results": [
+    {
+      "name": "AT",
+      "sha256": "4b5ffbf8b3d4f431b159929843d9872010578a6d55f1dbba8fbf9949f8037b57",
+      "updates": 350,
+      "format": "wuji-r800-residual-context-development-v1",
+      "context_spec": {
+        "conditioning": "estimated",
+        "head_path": "research/robust-knife-family-20261003/closing-hold-identifiability-8s-v1/ridge-models.npz",
+        "head_sha256": "55574f5a321c3b3dda1ffd971263baf2aea808d18b25cd444561862994b28168",
+        "public_dim": 155,
+        "critic_dim": 182,
+        "actor_layout": "Original154 +cachedclosingnormalizedTestimate1",
+        "critic_layout": "Original181 +samecachedcontext1",
+        "capture_age_frames": 240,
+        "capture_policy_active": false,
+        "fit_scope": "Frozen ridge10 on409 trainingfamily bodylabels;103 geometry-supervision heldout. Labelsneveractorinput. Earlyactualcontext before16s takeover.",
+        "runtime_inputs": "50actualmeasurednormalizedq, currentmeasuredq/FK, knownnominalgeometry/calibration, knownissuedtargets/previousactions, measuredarmFKgravity; no object/slider/contact/material/assetID",
+        "prototype_scope": "Separatepaireddevelopmentonly, not originalP50/nativeG2R800Policy/hardware or332primaryindependent candidate"
+      },
+      "optimizer_state_entries": 13
+    },
+    {
+      "name": "AU",
+      "sha256": "9892757927353a38b67cc296d161786af9ca1f56d00ecd0a4c2916f93266c3f6",
+      "updates": 350,
+      "format": "wuji-r800-residual-context-development-v1",
+      "context_spec": {
+        "conditioning": "constant",
+        "head_path": "research/robust-knife-family-20261003/closing-hold-identifiability-8s-v1/ridge-models.npz",
+        "head_sha256": "55574f5a321c3b3dda1ffd971263baf2aea808d18b25cd444561862994b28168",
+        "public_dim": 155,
+        "critic_dim": 182,
+        "actor_layout": "Original154 +cachedclosingnormalizedTestimate1",
+        "critic_layout": "Original181 +samecachedcontext1",
+        "capture_age_frames": 240,
+        "capture_policy_active": false,
+        "fit_scope": "Frozen ridge10 on409 trainingfamily bodylabels;103 geometry-supervision heldout. Labelsneveractorinput. Earlyactualcontext before16s takeover.",
+        "runtime_inputs": "50actualmeasurednormalizedq, currentmeasuredq/FK, knownnominalgeometry/calibration, knownissuedtargets/previousactions, measuredarmFKgravity; no object/slider/contact/material/assetID",
+        "prototype_scope": "Separatepaireddevelopmentonly, not originalP50/nativeG2R800Policy/hardware or332primaryindependent candidate"
+      },
+      "optimizer_state_entries": 13
+    }
+  ],
+  "new_transitions_each": 19660800
+}

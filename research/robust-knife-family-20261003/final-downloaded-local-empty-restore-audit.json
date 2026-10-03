@@ -1,0 +1,42 @@
+{
+  "utc": "2026-10-03T06:14:52.880834+00:00",
+  "destination": "/tmp/wuji-final-release-restore-local-20261003",
+  "released_runtime_files_verified": 1258,
+  "primary_checkpoint_sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714",
+  "all_frozen_inputs_baseweights_verified": true,
+  "restore_receipt": {
+    "utc": "2026-10-03T06:14:52.797983+00:00",
+    "manifest_sha256": "e3ad601daef080e449ffa53d463456309832947ee41cb03f120af3d7cadc093b",
+    "verified": [
+      {
+        "name": "wuji-g2-source-final.tar.gz",
+        "bytes": 146182310,
+        "sha256": "48ced1cd9718348822f0e4606afdbc754658335848d2f14b89951c77701449b3"
+      },
+      {
+        "name": "models-and-recovery-final.tar.gz",
+        "bytes": 259473332,
+        "sha256": "d77aa5c8aef9acfdcf59afa543bc13a43d2e2f1daa82456ba63f9daf4a9062a2"
+      },
+      {
+        "name": "under-family-v1-assets-caches.tar.gz",
+        "bytes": 17065547,
+        "sha256": "5d2cdc194023949614c3873936783d92c1b0de10a0ca1652cc1f4b665e79a3f8"
+      },
+      {
+        "name": "height-sensitivity-assets-v1.tar.gz",
+        "bytes": 2258,
+        "sha256": "1bfe2bcf6f7efa68fb4032a98ba6b189cef19c2cc4a82549b310f843106a4938"
+      },
+      {
+        "name": "fresh-validation-assets-v1.tar.gz",
+        "bytes": 71999,
+        "sha256": "3a959e29e2303d0d23ce9080d461ca50f06fd576f3f861f124bf0e76dea189b5"
+      }
+    ],
+    "destination": "/tmp/wuji-final-release-restore-local-20261003",
+    "verify_only": false,
+    "scope": "Artifact bytes verified and portable source/model/asset paths restored. This does not install Isaac Gym, execute physics, restore exact PhysX state, or connect hardware."
+  },
+  "scope": "Actualdownloadeddefault5 archives emptyrestore; allfrozen runtime/weights/inputs exact. No physicalexecution orhardware claim fromthisaudit."
+}

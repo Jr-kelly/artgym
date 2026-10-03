@@ -12,8 +12,10 @@
 - `independent-validation-all332.tar.gz`：全部独立初态、轨迹、结果及96条预选实际视频；失败不筛除。
 - `continuous-demos-and-failures.tar.gz`、`restoration-execution-evidence.tar.gz`：完整连续成功、代表性失败与实际空目录恢复运行证据。
 - `frozen-development-evidence-final.tar.gz`、`highload-paired-development-evidence.tar.gz`、`secondary-context-and-material-evidence.tar.gz`：单独的开发/机制研究，不是主独立成绩。
+- `closing-context-adaptation-evidence.tar.gz`：单独155维闭合测量上下文原型，有限配对训练的两组末次权重、Adam/RNG与三组完整开发轨迹；未解决厚刀柄支撑，不替换主P50。
+- `final-downloaded-recovery-evidence.tar.gz`：实际下载最终文件、空目录恢复后的完整连续仿真、600帧策略回放及全部七组固定332条件重执行；恢复重复与原独立成绩明确分开。
 - `release-manifest.json`、`SHA256SUMS`与 `restore_wuji_robust_delivery.py`：下载校验及空目录恢复入口。环境需要Python3.8、PyTorch2.1.0+cu118、IsaacGym Preview4/TacSL；SDK不随包分发，精确依赖及运行命令见RESTORE.md/REPRODUCE.md。
 
 已在空目录恢复核对1258个冻结运行文件，连续仿真v66成功，600帧完整策略离线回放电机目标误差0；训练恢复保留Adam/RNG，但重建物理回合，不宣称PhysX状态逐位恢复。
 
-未下发真机动作。真实SDK映射/单位/方向、压紧与接触材料、双向起动和沿程变化阻力仍需实物校准；桌面中央任意摆放取刀尚未实现。较早闭合历史的尺寸辨识是离线科研线索，尚未进入actor或构成真机/算法优势。
+未下发真机动作。真实SDK映射/单位/方向、压紧与接触材料、双向起动和沿程变化阻力仍需实物校准；桌面中央任意摆放取刀尚未实现。较早闭合历史的尺寸辨识已接入单独155维开发原型做有限配对训练；它不替换原冻结P50，尚不构成真机或算法优势。

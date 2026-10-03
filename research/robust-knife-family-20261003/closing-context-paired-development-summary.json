@@ -1,0 +1,110 @@
+{
+  "scope": "Registeredcachedclosingcontext155D prototype pairednew300updates vsconstantnominal andzero-column P50baseline. Fixedseed0503 full36s512 trainingfamilydevelopmentcases; not originalfrozen332/independentwholepolicy validation orhardware. Allattempts/criteria retained, nointermediate selection.",
+  "results": [
+    {
+      "name": "closing-context-initial-development-v1",
+      "conditioning": "estimated",
+      "completed": 347,
+      "n": 512,
+      "T13_14_complete": 4,
+      "T13_14_n": 112,
+      "failure_counts": {
+        "body unstable/drop": 118,
+        "pickup/hold": 46,
+        "extension": 1
+      },
+      "initial_fields_exact_equal_to_baseline": {
+        "root": true,
+        "dof": true,
+        "materials": true,
+        "observation_bias": true,
+        "delay": true,
+        "cal_object": true,
+        "cal_slider": true,
+        "load_amplitude": true,
+        "detent_amplitude": true,
+        "load_phase": true,
+        "load_profile_ids": true,
+        "load_frequencies": true
+      },
+      "prefix_issuedtarget_max_diff_rad": 0.0,
+      "prefix_actualq_max_diff_rad": 0.0,
+      "actual8s_context_captured": 512,
+      "actor_context_input_column_norm": 0.0,
+      "checkpoint_sha256": "9ee7b71a31e9c7b57b374bad0efc4ed783ac45ae85e6e68d9ef6ef8ed4fabaad",
+      "trace_sha256": "f8398416b2acc2334c510a1d5b4d580fd99ebe4fde779dd62c7bf5bc0092b8e5",
+      "body_first_rotation_or_drift_breach_count": 119,
+      "body_first_breach_median_time_s": 18.6
+    },
+    {
+      "name": "closing-context-AT-final-development-v1",
+      "conditioning": "estimated",
+      "completed": 350,
+      "n": 512,
+      "T13_14_complete": 4,
+      "T13_14_n": 112,
+      "failure_counts": {
+        "body unstable/drop": 114,
+        "pickup/hold": 48
+      },
+      "initial_fields_exact_equal_to_baseline": {
+        "root": true,
+        "dof": true,
+        "materials": true,
+        "observation_bias": true,
+        "delay": true,
+        "cal_object": true,
+        "cal_slider": true,
+        "load_amplitude": true,
+        "detent_amplitude": true,
+        "load_phase": true,
+        "load_profile_ids": true,
+        "load_frequencies": true
+      },
+      "prefix_issuedtarget_max_diff_rad": 0.0,
+      "prefix_actualq_max_diff_rad": 0.20902526378631592,
+      "actual8s_context_captured": 512,
+      "actor_context_input_column_norm": 0.5144141316413879,
+      "checkpoint_sha256": "4b5ffbf8b3d4f431b159929843d9872010578a6d55f1dbba8fbf9949f8037b57",
+      "trace_sha256": "b47ba4fd6b9fb4ebc2954702c0c8bec4d0a8de42a8acddcc643bf95d8e097735",
+      "body_first_rotation_or_drift_breach_count": 115,
+      "body_first_breach_median_time_s": 18.466666666666665
+    },
+    {
+      "name": "closing-context-AU-final-development-v1",
+      "conditioning": "constant",
+      "completed": 350,
+      "n": 512,
+      "T13_14_complete": 5,
+      "T13_14_n": 112,
+      "failure_counts": {
+        "body unstable/drop": 115,
+        "pickup/hold": 47
+      },
+      "initial_fields_exact_equal_to_baseline": {
+        "root": true,
+        "dof": true,
+        "materials": true,
+        "observation_bias": true,
+        "delay": true,
+        "cal_object": true,
+        "cal_slider": true,
+        "load_amplitude": true,
+        "detent_amplitude": true,
+        "load_phase": true,
+        "load_profile_ids": true,
+        "load_frequencies": true
+      },
+      "prefix_issuedtarget_max_diff_rad": 0.0,
+      "prefix_actualq_max_diff_rad": 0.17891263961791992,
+      "actual8s_context_captured": 512,
+      "actor_context_input_column_norm": 0.0,
+      "checkpoint_sha256": "9892757927353a38b67cc296d161786af9ca1f56d00ecd0a4c2916f93266c3f6",
+      "trace_sha256": "79560b1279087a6383ed44e92c11cd9867e19908f92741f02878c6450f9b9ea0",
+      "body_first_rotation_or_drift_breach_count": 116,
+      "body_first_breach_median_time_s": 18.5
+    }
+  ],
+  "comparison_limitations": "Contextprovided toactorandcritic, notactoronly causal isolation. GPUcontactreplays notbitwiseequal despiteexactinitialfields/issuedprefix. Priorgeometry-supervision heldout groups participated inRLtraining. Noforce/hardware claim fromcachedshapeproxy.",
+  "decision": "Preserveallresults/models; originalP50 and332primary outcomes remainfinalindependentreference. Interpretcountchanges withthick-support behavior, notfewcasesasalgorithmadvantage."
+}
