@@ -33,7 +33,7 @@ def gym_transform(position,quaternion=(0,0,0,1)):
 class G2ContinuousScene:
     def __init__(self,n=8,seed=2026100356,randomization_scale=0.,instances=None,
                  load_max=.1,detent_max=.1,contact_progress_reward=0.,reference_spec=None,
-                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False,graphics=False,disabled_perturbations=(),action_parameterization='incremental',resistance_integration='legacy-explicit',load_min=0.,detent_min=0.,asset_registry=None,proprioceptive_pressure_spec=None):
+                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False,graphics=False,disabled_perturbations=(),action_parameterization='incremental',resistance_integration='legacy-explicit',load_min=0.,detent_min=0.,asset_registry=None,proprioceptive_pressure_spec=None,resample_initial_estimates=False):
         self.n=n;self.device='cuda:0';self.seed=seed
         self.disabled_perturbations=set(disabled_perturbations)
         assert self.disabled_perturbations <= {'calibration','placement','sensor','latency','material'}
@@ -96,6 +96,23 @@ class G2ContinuousScene:
                     if key=='slider_in_wrist':shift=shift+np.asarray(estimate['slider_contact_shift_m'])+np.array([0,(estimate['handle_size_WTL_m'][1]-.012)/2,0])
                     positions[i]+=object_rotation@shift
             self.cal_prior[key]=(self.tensor(positions),self.tensor(rotations))
+        self.estimate_bank=None
+        self.initial_observation_indices=torch.arange(n,device=self.device)
+        self.resample_initial_estimates=resample_initial_estimates or bool(scene_spec and scene_spec.get('resample_initial_estimates'))
+        if self.resample_initial_estimates:
+            assert self.estimated_plans and instances and len(instances)==n
+            # The simulator groups synthetic sensor samples for the same
+            # physical geometry. The planner has already consumed only each
+            # noisy observation; this grouping never enters actor/controller.
+            groups={name:[i for i,value in enumerate(instances) if value==name] for name in set(instances)}
+            counts={len(values) for values in groups.values()};assert len(counts)==1 and min(counts)>1
+            self.estimate_choices=torch.tensor([groups[name] for name in instances],device=self.device,dtype=torch.long)
+            self.estimate_bank=dict(closed=self.closed.clone(),opened=self.opened.clone(),
+                thumb_q=self.reference.q.clone(),preload=self.reference.preload_delta.clone(),geometry=self.bridge.geometry.clone(),
+                waypoints=[value.clone() for value in self.close_waypoint_tensors],
+                calibration={key:(p.clone(),q.clone()) for key,(p,q) in self.cal_prior.items()})
+            self.scene_spec=dict(self.scene_spec,resample_initial_estimates=True,
+                initial_estimate_sampling_scope='At newphysicalepisode only, resample one of four labelled noisy initial observations for that geometry; common IK outputs, no physicalID/currenttruth actor input. Finite observation bank, not connected realvision.')
         self.middle_support=None
         if scene_spec and scene_spec.get('middle_deflection_support'):
             assert not self.estimated_plans
@@ -251,6 +268,17 @@ class G2ContinuousScene:
     def reset(self,ids):
         if not len(ids):return
         k=len(ids);s=self.randomization_scale
+        if self.estimate_bank is not None:
+            choices=torch.randint(self.estimate_choices.shape[1],(k,),device=self.device)
+            selected=self.estimate_choices[ids,choices];self.initial_observation_indices[ids]=selected
+            self.closed[ids]=self.estimate_bank['closed'][selected];self.opened[ids]=self.estimate_bank['opened'][selected]
+            self.reference.q[ids]=self.estimate_bank['thumb_q'][selected]
+            self.reference.preload_delta[ids]=self.estimate_bank['preload'][selected]
+            self.bridge.geometry[ids]=self.estimate_bank['geometry'][selected]
+            for current,bank in zip(self.close_waypoint_tensors,self.estimate_bank['waypoints']):current[ids]=bank[selected]
+            for key,(position,rotation) in self.cal_prior.items():
+                bank_position,bank_rotation=self.estimate_bank['calibration'][key]
+                position[ids]=bank_position[selected];rotation[ids]=bank_rotation[selected]
         self.age[ids]=0;self.last_action[ids]=0;self.delayed_action[ids]=0
         self.reference.reset(ids)
         if self.middle_support is not None:self.middle_support.reset(ids)

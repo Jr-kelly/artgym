@@ -64,6 +64,13 @@ class G2R800Policy(FrozenPolicy):
         self.last_action = np.zeros(20, dtype=np.float32)
         self.known.reset(torch.tensor([0], device=self.player.device), self.tensor(target))
         if self.pressure_adapter is not None:self.pressure_adapter.handover_anchor()
+        if self.thumb_reference is not None and self.thumb_reference.measured_hold_reference:
+            from scripts.wuji_measured_hold_reference import measured_hold_path
+            mean=np.asarray(self.history)[:,:20].mean(0)
+            measured=(mean+1)*.5*(self.fk.upper-self.fk.lower)+self.fk.lower
+            path,self.measured_hold_reference_audit=measured_hold_path(measured,
+                object_local_estimate[:3,1],object_local_estimate[:3,2],self.thumb_reference.shifts.cpu().numpy())
+            self.thumb_reference.q=torch.as_tensor(path,dtype=torch.float32,device=self.player.device)
         reset_player_rnn_state(self.player)
         if self.thumb_reference is not None:self.thumb_reference.reset(torch.tensor([0],device=self.player.device),clock_s=clock_s)
 

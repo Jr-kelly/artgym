@@ -1,0 +1,422 @@
+{
+  "scope": "Two native development attempts; no independentvalidation",
+  "attempts": [
+    {
+      "case": "nominal",
+      "report": {
+        "start": "Knife at configured tabletop edge with COM on table; open hand outside edge, lateral acquisition then vertical lift",
+        "methods": "Motor-only scripted continuous-IK approach/close/lift; finite-torque gravity-compensated arm/hand; Scheduled calibrated rolling-thumb reference plus learned bounded residual using R800 legal features after16s with once-loaded relative-grip calibration estimate",
+        "lifted_clear": true,
+        "operation_stays_clear": true,
+        "meaningful_extension": false,
+        "retraction_after31s": true,
+        "full_success": false,
+        "minimum_hold_height_m": 0.8556168079376221,
+        "max_object_height_m": 0.8581023812294006,
+        "wall_seconds": 57.80188450985588,
+        "positive_load_power_max_W": 0.0,
+        "weight_sha256": {
+          "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth": "bbf61592721300b1cf053de8246898a69989ed102b7a034da6fb47cc9a541dcd",
+          "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+          "runs/support-pressure-20261003/train/estimated-offset-takeover16-v23/update_000100.pth": "e6494d85cdb7a010b125cd6b8079dd0ebae6e27cd91b5e171f7c2e9a92b40b6d"
+        },
+        "scope": "Continuous physics attempt, no stage state writes. Meaningful25mm extension and8mm return are predeclared demo diagnostics; inherited40mm command unchanged. No preciseS5claim.",
+        "integration_diagnostics": {
+          "physics_hz": 240,
+          "motor_pd_hz": 240,
+          "policy_history_hz": 30,
+          "brake_capacity_max_N": 1.1664843721447495,
+          "brake_capacity_operation_min_N": 0.125,
+          "scope": "Passive nativezero-velocity jointbrake with250 damping and calibratedNewtonforcecap; physics-only time/position modulatescap. Replaces explicit regularizedfriction and conservativepotential by dissipative startup/groove barriers. No positivevelocity/positiontarget, nohanddrive/rail/criteriachange. Actualbrakeforce incontactdemo unavailable; cap isverifiedfixtureparameter, notmeasuredworldtraction or realresistance.",
+          "calibration": "runs/support-pressure-20261003/calibration/solver-brake-v3/calibration.json"
+        },
+        "resistance_integration": "solver-brake",
+        "trace_load_fields_scope": "In solver-brake mode, load=0 is externaljointforce; dissipative_load/passive_groove_load are counterfactual legacy explicit model values, not applied brake force. Only solver_brake_capacity_N is the calibrated native force-cap parameter; actual brakeforce remains unavailable.",
+        "thumb_reference_override": "runs/support-pressure-20261003/pressure-config-v35/nominal/reference.json",
+        "learned_action_parameterization": "bounded-motor-offset",
+        "learned_takeover_seconds": 16.0,
+        "known_task_schedule_seconds": [
+          16,
+          21,
+          26,
+          31,
+          36
+        ],
+        "learned_hold_scope": "If takeover<16, same legal residual commands closed during8\u201316 and keeps actual history/motor/RNN state into operation; no phase state reset or force regulation",
+        "middle_deflection_support": null,
+        "middle_load_lag_regulation": null,
+        "staged_preload": null,
+        "operation_evaluated": true,
+        "endpoints_mean_last03s_m": [
+          0.02455058807714118,
+          0.0,
+          0.0035878614419036442,
+          0.0
+        ],
+        "diagnostic": "Scheduled four5s stages; final0.3s mean >25mm extend and <8mm return on both cycles; no truth-triggered switching",
+        "operation_body_max_drift_m": 0.007462694309651852,
+        "operation_body_max_rotation_rad": 0.5977204207922456,
+        "operation_body_stable": false,
+        "slider_before_handover_m": 0.0014941580593585968,
+        "slider_closed_at_handover": true,
+        "physical_asset": "assets/objects/knife_wuji_support_train_20261003/s0000/mobility.urdf",
+        "physical_asset_sha256": "8b7c53eeb9e4baf32d30aa19d42bdef644259a6b31da4b8d73de8d1c0bd50939",
+        "physical_dimensions_WTL_m": [
+          0.016,
+          0.012,
+          0.135
+        ],
+        "initial_geometry_estimate": {
+          "handle_size_WTL_m": [
+            0.01645193848872836,
+            0.011533191954387954,
+            0.13407302147640143
+          ],
+          "slider_contact_shift_m": [
+            7.363049197100374e-05,
+            -0.0005280130339026145,
+            0.00013575756045497434
+          ],
+          "initial_object_center_shift_knife_m": [
+            0,
+            -0.00023340402280602312,
+            0
+          ],
+          "uncertainty_m": 0.0006,
+          "source": "New synthetic onceinitial development observation; known training geometry, not finalheldout. Same common IK from noisy estimates, no physicalID planner/actor."
+        },
+        "policy_geometry_estimate_scope": "Explicit initial noisy geometry estimate, common offline IK adaptation and once-loaded prior; no physicalasset ID or runtime object/contact input",
+        "hand_friction": 0.65,
+        "knife_friction": 1.8,
+        "load_profile": "pulse",
+        "load_frequency_rad_s": 2.9,
+        "observation_noise_std_rad": 0.002,
+        "observation_bias_bound_rad": 0.006,
+        "seed": 2026100358,
+        "loaded_weight_use": "Frozen R800 and optional residual actor executed after50 actual history frames",
+        "residual_checkpoint": "runs/support-pressure-20261003/train/estimated-offset-takeover16-v23/update_000100.pth",
+        "thumb_script": "None",
+        "thumb_script_scope": null,
+        "thumb_action_gain": 1.0,
+        "support_action_gain": 1.0,
+        "added_load_N": 0.5,
+        "passive_startup_detent_amplitude_N": 0.5,
+        "variable_load": false,
+        "load_scope": "Calibrated passive zero-velocity solverbrake capacity with dissipative startup/groove; no realtotalresistance or instantaneousfrictionmeasurement claim.",
+        "operation_thumb_slider_contact_fraction": 0.930116472545757,
+        "operation_body_contact_fraction": [
+          0.20465890183028287,
+          1.0,
+          0.3410981697171381,
+          0.0,
+          1.0
+        ],
+        "contact_scope": "30Hz solver-contact diagnostics; current truth never fed to actor. Positive motor preload does not establish constant pressure.",
+        "operation_thumb_slider_contact_maintained": true,
+        "failure_onsets_s": {
+          "body_stability": 17.566666666666666,
+          "height": null,
+          "sustained_thumb_slider_contact_loss": 32.0
+        },
+        "failure_onsets_scope": "Evaluation only: first stability/height breach, and first10 consecutive30Hz samples without thumb-slider contact. Legacy first_failure lists failed conditions by priority, not chronological onset. No control or completion-gate change.",
+        "extension_endpoint_condition_met": false,
+        "pair_pressure": {
+          "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+          "physics_hz": 240,
+          "substeps_per_simulate": 1,
+          "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+          "finger_order": [
+            "thumb",
+            "index",
+            "middle",
+            "ring",
+            "pinky"
+          ],
+          "static_thumb_pressure_mean_N": 0.7871428521882053,
+          "operation_thumb_pressure_mean_N": 0.6446552399074956,
+          "operation_thumb_pressure_5th_percentile_N": 0.0,
+          "operation_thumb_contact_substep_fraction": 0.9309484193011647,
+          "operation_ring_underside_support_mean_N": 0.0,
+          "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+        },
+        "actuation_delay_frames": 0,
+        "actuation_delay_scope": "Physical appliedtarget delayed; public knownmemory/history trackissued target without observing private appliedtarget",
+        "support_pressure_spec": {
+          "post_lift_target_q": [
+            0.5076147866031749,
+            0.16810201903632493,
+            0.49912830805117053,
+            1.569074865356324,
+            0.41009540018349355,
+            -0.2351201276927469,
+            1.1897706221521653,
+            1.134947058758056,
+            0.4518572817573269,
+            -0.3306972551035914,
+            0.9210492238473664,
+            1.4964150538403937,
+            0.031040931092790894,
+            -0.08473187021821657,
+            0.3007913807409291,
+            0.6308374884982267,
+            1.6031999415832048,
+            0.08203837593618231,
+            0.7974265691186364,
+            -0.08244231056331848
+          ],
+          "ring_target_q": null,
+          "thumb_preload_delta_q": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "transition_seconds": [
+            12,
+            14
+          ],
+          "scope": "Initialestimatedcontact geometry withindex opposite-side underside support; fixednominalstaticwrench motorpreload, not trueforce feedback. Originalpickup preserved; actualcollision/contact rollout needed.",
+          "support_layout_audit": {
+            "finger": "index",
+            "original_contact_m": [
+              -0.006257950629865036,
+              -0.006218493959796522,
+              0.03872642100637506
+            ],
+            "desired_contact_m": [
+              0.0017420493701349642,
+              -0.006218493959796522,
+              0.03872642100637506
+            ],
+            "achieved_contact_m": [
+              0.0017366679883881178,
+              -0.006214679350900043,
+              0.038723745754990956
+            ],
+            "IK_error_m": 7.118109335106109e-06,
+            "scope": "Deliberate offlinepostlift crossing of initialunder-supportline toward opposite side; initialnoisyestimate only, originalfullcollisions preserved, actualphysics unverified"
+          }
+        },
+        "proprioceptive_pressure_spec": null,
+        "pressure_feedback_scope": null,
+        "first_failure": "body stability after handover"
+      },
+      "operation_actual_underside_normal_N": [
+        0.0,
+        0.5121649847763963,
+        0.0,
+        0.0,
+        0.5220166607849498
+      ]
+    },
+    {
+      "case": "raised1",
+      "report": {
+        "start": "Knife at configured tabletop edge with COM on table; open hand outside edge, lateral acquisition then vertical lift",
+        "methods": "Motor-only scripted continuous-IK approach/close/lift; finite-torque gravity-compensated arm/hand; Scheduled calibrated rolling-thumb reference plus learned bounded residual using R800 legal features after16s with once-loaded relative-grip calibration estimate",
+        "lifted_clear": true,
+        "operation_stays_clear": true,
+        "meaningful_extension": false,
+        "retraction_after31s": true,
+        "full_success": false,
+        "minimum_hold_height_m": 0.855817973613739,
+        "max_object_height_m": 0.8587032556533813,
+        "wall_seconds": 46.989518605871126,
+        "positive_load_power_max_W": 0.0,
+        "weight_sha256": {
+          "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth": "bbf61592721300b1cf053de8246898a69989ed102b7a034da6fb47cc9a541dcd",
+          "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+          "runs/support-pressure-20261003/train/estimated-offset-takeover16-v23/update_000100.pth": "e6494d85cdb7a010b125cd6b8079dd0ebae6e27cd91b5e171f7c2e9a92b40b6d"
+        },
+        "scope": "Continuous physics attempt, no stage state writes. Meaningful25mm extension and8mm return are predeclared demo diagnostics; inherited40mm command unchanged. No preciseS5claim.",
+        "integration_diagnostics": {
+          "physics_hz": 240,
+          "motor_pd_hz": 240,
+          "policy_history_hz": 30,
+          "brake_capacity_max_N": 0.9999783911298668,
+          "brake_capacity_operation_min_N": 0.125,
+          "scope": "Passive nativezero-velocity jointbrake with250 damping and calibratedNewtonforcecap; physics-only time/position modulatescap. Replaces explicit regularizedfriction and conservativepotential by dissipative startup/groove barriers. No positivevelocity/positiontarget, nohanddrive/rail/criteriachange. Actualbrakeforce incontactdemo unavailable; cap isverifiedfixtureparameter, notmeasuredworldtraction or realresistance.",
+          "calibration": "runs/support-pressure-20261003/calibration/solver-brake-v3/calibration.json"
+        },
+        "resistance_integration": "solver-brake",
+        "trace_load_fields_scope": "In solver-brake mode, load=0 is externaljointforce; dissipative_load/passive_groove_load are counterfactual legacy explicit model values, not applied brake force. Only solver_brake_capacity_N is the calibrated native force-cap parameter; actual brakeforce remains unavailable.",
+        "thumb_reference_override": "runs/support-pressure-20261003/pressure-config-v35/raised1/reference.json",
+        "learned_action_parameterization": "bounded-motor-offset",
+        "learned_takeover_seconds": 16.0,
+        "known_task_schedule_seconds": [
+          16,
+          21,
+          26,
+          31,
+          36
+        ],
+        "learned_hold_scope": "If takeover<16, same legal residual commands closed during8\u201316 and keeps actual history/motor/RNN state into operation; no phase state reset or force regulation",
+        "middle_deflection_support": null,
+        "middle_load_lag_regulation": null,
+        "staged_preload": null,
+        "operation_evaluated": true,
+        "endpoints_mean_last03s_m": [
+          0.03279646522585406,
+          0.003208343560496966,
+          0.03128381030789266,
+          0.002697457042005327
+        ],
+        "diagnostic": "Scheduled four5s stages; final0.3s mean >25mm extend and <8mm return on both cycles; no truth-triggered switching",
+        "operation_body_max_drift_m": 0.004473358392715454,
+        "operation_body_max_rotation_rad": 0.325110059506283,
+        "operation_body_stable": false,
+        "slider_before_handover_m": 0.0008245036005973816,
+        "slider_closed_at_handover": true,
+        "physical_asset": "assets/objects/knife_wuji_support_train_20261003/s0002/mobility.urdf",
+        "physical_asset_sha256": "699ffa9167044995704dc2d02fc1f63213063648292e81a1b94c2e0c90fb7929",
+        "physical_dimensions_WTL_m": [
+          0.016,
+          0.012,
+          0.135
+        ],
+        "initial_geometry_estimate": {
+          "handle_size_WTL_m": [
+            0.016052826117256468,
+            0.012197888596571293,
+            0.13395896411052652
+          ],
+          "slider_contact_shift_m": [
+            0.0004147552239358844,
+            0.0008559057856784742,
+            -0.0005205651514817531
+          ],
+          "initial_object_center_shift_knife_m": [
+            0,
+            9.89442982856463e-05,
+            0
+          ],
+          "uncertainty_m": 0.0006,
+          "source": "New synthetic onceinitial development observation; known training geometry, not finalheldout. Same common IK from noisy estimates, no physicalID planner/actor."
+        },
+        "policy_geometry_estimate_scope": "Explicit initial noisy geometry estimate, common offline IK adaptation and once-loaded prior; no physicalasset ID or runtime object/contact input",
+        "hand_friction": 0.65,
+        "knife_friction": 1.8,
+        "load_profile": "pulse",
+        "load_frequency_rad_s": 2.9,
+        "observation_noise_std_rad": 0.002,
+        "observation_bias_bound_rad": 0.006,
+        "seed": 2026100358,
+        "loaded_weight_use": "Frozen R800 and optional residual actor executed after50 actual history frames",
+        "residual_checkpoint": "runs/support-pressure-20261003/train/estimated-offset-takeover16-v23/update_000100.pth",
+        "thumb_script": "None",
+        "thumb_script_scope": null,
+        "thumb_action_gain": 1.0,
+        "support_action_gain": 1.0,
+        "added_load_N": 0.5,
+        "passive_startup_detent_amplitude_N": 0.5,
+        "variable_load": false,
+        "load_scope": "Calibrated passive zero-velocity solverbrake capacity with dissipative startup/groove; no realtotalresistance or instantaneousfrictionmeasurement claim.",
+        "operation_thumb_slider_contact_fraction": 0.9983361064891847,
+        "operation_body_contact_fraction": [
+          0.0,
+          1.0,
+          0.9966722129783694,
+          0.0,
+          1.0
+        ],
+        "contact_scope": "30Hz solver-contact diagnostics; current truth never fed to actor. Positive motor preload does not establish constant pressure.",
+        "operation_thumb_slider_contact_maintained": true,
+        "failure_onsets_s": {
+          "body_stability": 17.7,
+          "height": null,
+          "sustained_thumb_slider_contact_loss": null
+        },
+        "failure_onsets_scope": "Evaluation only: first stability/height breach, and first10 consecutive30Hz samples without thumb-slider contact. Legacy first_failure lists failed conditions by priority, not chronological onset. No control or completion-gate change.",
+        "extension_endpoint_condition_met": true,
+        "pair_pressure": {
+          "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+          "physics_hz": 240,
+          "substeps_per_simulate": 1,
+          "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+          "finger_order": [
+            "thumb",
+            "index",
+            "middle",
+            "ring",
+            "pinky"
+          ],
+          "static_thumb_pressure_mean_N": 0.8773371174144232,
+          "operation_thumb_pressure_mean_N": 0.905579497253329,
+          "operation_thumb_pressure_5th_percentile_N": 0.7131048654602653,
+          "operation_thumb_contact_substep_fraction": 0.9997920133111481,
+          "operation_ring_underside_support_mean_N": 0.0,
+          "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+        },
+        "actuation_delay_frames": 0,
+        "actuation_delay_scope": "Physical appliedtarget delayed; public knownmemory/history trackissued target without observing private appliedtarget",
+        "support_pressure_spec": {
+          "post_lift_target_q": [
+            0.5098535420116315,
+            0.165555475228017,
+            0.4880033263065525,
+            1.5690748653562934,
+            0.42726007480140965,
+            -0.23259317277628325,
+            1.1917392525992359,
+            1.1434502900169132,
+            0.4661645832399619,
+            -0.3292761441597881,
+            0.9180651641425743,
+            1.5028505283419662,
+            0.031040931092790894,
+            -0.08473187021821657,
+            0.3007913807409291,
+            0.6308374884982267,
+            1.6031999415832048,
+            0.06054209931941173,
+            0.8163899154028154,
+            -0.07414875908104449
+          ],
+          "ring_target_q": null,
+          "thumb_preload_delta_q": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "transition_seconds": [
+            12,
+            14
+          ],
+          "scope": "Initialestimatedcontact geometry withindex opposite-side underside support; fixednominalstaticwrench motorpreload, not trueforce feedback. Originalpickup preserved; actualcollision/contact rollout needed.",
+          "support_layout_audit": {
+            "finger": "index",
+            "original_contact_m": [
+              -0.006058394508222595,
+              -0.00621849177427322,
+              0.03869347900002087
+            ],
+            "desired_contact_m": [
+              0.0019416054917774051,
+              -0.00621849177427322,
+              0.03869347900002087
+            ],
+            "achieved_contact_m": [
+              0.001936023431701212,
+              -0.006214573807085503,
+              0.03869073887985244
+            ],
+            "IK_error_m": 7.349702042645445e-06,
+            "scope": "Deliberate offlinepostlift crossing of initialunder-supportline toward opposite side; initialnoisyestimate only, originalfullcollisions preserved, actualphysics unverified"
+          }
+        },
+        "proprioceptive_pressure_spec": null,
+        "pressure_feedback_scope": null,
+        "first_failure": "body stability after handover"
+      },
+      "operation_actual_underside_normal_N": [
+        0.0,
+        0.4916899018805851,
+        0.27983957470264353,
+        0.0,
+        0.4981801566322104
+      ]
+    }
+  ],
+  "decision": "Indexcontactretained but newgeometry changesload sharing; bothfullattemptsfail. No unchangedlongtraining."
+}

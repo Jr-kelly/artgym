@@ -19,6 +19,7 @@ class ScheduledThumbReference:
             self.q = torch.tensor([r['q_thumb'] for r in rows], device=device)
         self.duration = float(specification.get('travel_seconds', 4.))
         self.dt = control_dt
+        self.measured_hold_reference=bool(specification.get('calibrate_from_measured_hold'))
         self.age = torch.zeros(n, device=device)
         self.previous_goal = torch.full((n,), float('nan'), device=device)
         self.start = torch.zeros(n, device=device)

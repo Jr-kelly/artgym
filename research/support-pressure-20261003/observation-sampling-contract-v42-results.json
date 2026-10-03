@@ -1,0 +1,263 @@
+{
+  "passed": true,
+  "checked_new_episode_starts": 8,
+  "observed_bank_indices": [
+    0,
+    2,
+    3
+  ],
+  "snapshots": [
+    {
+      "global_frame": 0,
+      "env": 0,
+      "sample": 0,
+      "estimated_size_WTL_m": [
+        0.016001952812075615,
+        0.01244647428393364,
+        0.13606688380241394
+      ]
+    },
+    {
+      "global_frame": 0,
+      "env": 1,
+      "sample": 3,
+      "estimated_size_WTL_m": [
+        0.01573525182902813,
+        0.01185067743062973,
+        0.13474272191524506
+      ]
+    },
+    {
+      "global_frame": 0,
+      "env": 2,
+      "sample": 2,
+      "estimated_size_WTL_m": [
+        0.016400841996073723,
+        0.011566187255084515,
+        0.1349509209394455
+      ]
+    },
+    {
+      "global_frame": 0,
+      "env": 3,
+      "sample": 3,
+      "estimated_size_WTL_m": [
+        0.01573525182902813,
+        0.01185067743062973,
+        0.13474272191524506
+      ]
+    },
+    {
+      "global_frame": 1080,
+      "env": 0,
+      "sample": 3,
+      "estimated_size_WTL_m": [
+        0.01573525182902813,
+        0.01185067743062973,
+        0.13474272191524506
+      ]
+    },
+    {
+      "global_frame": 1080,
+      "env": 1,
+      "sample": 2,
+      "estimated_size_WTL_m": [
+        0.016400841996073723,
+        0.011566187255084515,
+        0.1349509209394455
+      ]
+    },
+    {
+      "global_frame": 1080,
+      "env": 2,
+      "sample": 3,
+      "estimated_size_WTL_m": [
+        0.01573525182902813,
+        0.01185067743062973,
+        0.13474272191524506
+      ]
+    },
+    {
+      "global_frame": 1080,
+      "env": 3,
+      "sample": 0,
+      "estimated_size_WTL_m": [
+        0.016001952812075615,
+        0.01244647428393364,
+        0.13606688380241394
+      ]
+    }
+  ],
+  "actual_training_episodes": [
+    {
+      "episode": 0,
+      "env": 0,
+      "instance": "s0000",
+      "control_steps": 1080,
+      "pickup_valid": true,
+      "fall": false,
+      "operation_complete": true,
+      "endpoints_m": [
+        0.03356708213686943,
+        0.004383797757327557,
+        0.03545404598116875,
+        0.005385485477745533
+      ],
+      "peak_extension_m": 0.03590640425682068,
+      "max_body_drift_m": 0.002253451384603977,
+      "max_body_rotation_rad": 0.21017535030841827,
+      "thumb_contact_fraction": 1.0,
+      "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+      "failure": null
+    },
+    {
+      "episode": 1,
+      "env": 1,
+      "instance": "s0000",
+      "control_steps": 1080,
+      "pickup_valid": true,
+      "fall": false,
+      "operation_complete": true,
+      "endpoints_m": [
+        0.030239440500736237,
+        0.007414488587528467,
+        0.03008163347840309,
+        0.0074524544179439545
+      ],
+      "peak_extension_m": 0.031124014407396317,
+      "max_body_drift_m": 0.002492237137630582,
+      "max_body_rotation_rad": 0.22338630259037018,
+      "thumb_contact_fraction": 1.0,
+      "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+      "failure": null
+    },
+    {
+      "episode": 2,
+      "env": 2,
+      "instance": "s0000",
+      "control_steps": 1080,
+      "pickup_valid": true,
+      "fall": false,
+      "operation_complete": true,
+      "endpoints_m": [
+        0.033793170005083084,
+        0.0031529469415545464,
+        0.03316950425505638,
+        0.0026437181513756514
+      ],
+      "peak_extension_m": 0.03390796110033989,
+      "max_body_drift_m": 0.0018768145237118006,
+      "max_body_rotation_rad": 0.11900440603494644,
+      "thumb_contact_fraction": 1.0,
+      "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+      "failure": null
+    },
+    {
+      "episode": 3,
+      "env": 3,
+      "instance": "s0000",
+      "control_steps": 1080,
+      "pickup_valid": true,
+      "fall": false,
+      "operation_complete": true,
+      "endpoints_m": [
+        0.03352974355220795,
+        0.0035423298832029104,
+        0.03342767804861069,
+        0.0031856584828346968
+      ],
+      "peak_extension_m": 0.034402791410684586,
+      "max_body_drift_m": 0.0020187110640108585,
+      "max_body_rotation_rad": 0.19655346870422363,
+      "thumb_contact_fraction": 1.0,
+      "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+      "failure": null
+    },
+    {
+      "episode": 4,
+      "env": 0,
+      "instance": "s0000",
+      "control_steps": 1080,
+      "pickup_valid": true,
+      "fall": false,
+      "operation_complete": true,
+      "endpoints_m": [
+        0.032732073217630386,
+        0.0034679777454584837,
+        0.032789766788482666,
+        0.003695371327921748
+      ],
+      "peak_extension_m": 0.03310820087790489,
+      "max_body_drift_m": 0.001876823022030294,
+      "max_body_rotation_rad": 0.1173601746559143,
+      "thumb_contact_fraction": 1.0,
+      "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+      "failure": null
+    },
+    {
+      "episode": 5,
+      "env": 1,
+      "instance": "s0000",
+      "control_steps": 1080,
+      "pickup_valid": true,
+      "fall": false,
+      "operation_complete": true,
+      "endpoints_m": [
+        0.030240800231695175,
+        0.007479346357285976,
+        0.030510883778333664,
+        0.007908463478088379
+      ],
+      "peak_extension_m": 0.03123955987393856,
+      "max_body_drift_m": 0.0018619460752233863,
+      "max_body_rotation_rad": 0.21064996719360352,
+      "thumb_contact_fraction": 1.0,
+      "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+      "failure": null
+    },
+    {
+      "episode": 6,
+      "env": 2,
+      "instance": "s0000",
+      "control_steps": 1080,
+      "pickup_valid": true,
+      "fall": false,
+      "operation_complete": true,
+      "endpoints_m": [
+        0.03367290273308754,
+        0.0036840499378740788,
+        0.03402290493249893,
+        0.0035957202780991793
+      ],
+      "peak_extension_m": 0.03428075462579727,
+      "max_body_drift_m": 0.002290745498612523,
+      "max_body_rotation_rad": 0.19594691693782806,
+      "thumb_contact_fraction": 1.0,
+      "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+      "failure": null
+    },
+    {
+      "episode": 7,
+      "env": 3,
+      "instance": "s0000",
+      "control_steps": 1080,
+      "pickup_valid": true,
+      "fall": false,
+      "operation_complete": true,
+      "endpoints_m": [
+        0.034695953130722046,
+        0.0031141359359025955,
+        0.03498398885130882,
+        0.0033704163506627083
+      ],
+      "peak_extension_m": 0.03514636680483818,
+      "max_body_drift_m": 0.00226973881945014,
+      "max_body_rotation_rad": 0.1525002121925354,
+      "thumb_contact_fraction": 1.0,
+      "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+      "failure": null
+    }
+  ],
+  "wall_seconds": 122.07258618809283,
+  "scope": "Physical observation/plan/history coupling check only; net-contact training proxy, not native pair force or frozen generalization"
+}

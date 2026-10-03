@@ -13,33 +13,37 @@
   "baseline_github_commit": "6afe8270735abf91b86b001803150e542d720111",
   "baseline_release": "wuji-g2-continuous-knife-robust-20261003-v1",
   "goal_complete": false,
-  "phase": "First contact-force calibration and actual control modification",
+  "phase": "Continue strongest loaded-operation policy to retain stable support; matched legal-history pilot",
   "private_media_root": "/tmp/wuji-support-pressure-attachment-20261003",
   "remote_gpu_count_verified": 4,
   "remote_gpu_inventory_utc": "2026-10-03T07:29:00+00:00",
   "no_subagents": true,
   "no_real_robot_commands": true,
   "last_event": {
-    "utc": "2026-10-03T09:27:08.657311+00:00",
-    "event": "portable_initial_estimate_continuous_entrypoint_added",
-    "evidence": "scripts/run_wuji_support_demo.py",
-    "conclusion": "Uses same commonplanner and actualcontinuous runner, explicitseparation of noisyinitial observation fromphysicalasset. CLIhelp verified; fullrestoredexecution pendingfinalcandidate, no hardwareSDK invented.",
-    "next": "Closeactiveexperimentpairs, execute two boundedknownstroke trials and preserve newsource/configsnapshot"
+    "utc": "2026-10-03T11:05:26.958598+00:00",
+    "event": "recoverable_development_inputs_v54_saved",
+    "evidence": "research/support-pressure-20261003/development-inputs",
+    "config": {
+      "JSON_count": 34,
+      "restore": "cp -a research/support-pressure-20261003/development-inputs/runs/. runs/"
+    },
+    "conclusion": "Exact publicestimated plans/support/references for native paired positive and negative candidates saved with source; raw simulatortruth/video/weights remain Release evidence, not source assets.",
+    "next": "Commit and publish interim recoverable snapshot while useful trainings continue"
   },
-  "next": "Closeactiveexperimentpairs, execute two boundedknownstroke trials and preserve newsource/configsnapshot",
+  "next": "Commit and publish interim recoverable snapshot while useful trainings continue",
   "active_remote_launcher_pid": null,
   "active_local_training_pid": null,
   "remote_connection_status": "Persistent home SSH verified 2026-10-03 08:33 UTC; four H200 available",
   "active_local_video_launcher_pid": null,
   "github_branch": "feat/wuji-support-pressure-20261003",
-  "github_commit": "dd8762112a603e39b6f736dc2915ffcdb74b8ee6",
-  "local_scientific_commit": "e3c7ed19231d6255a0fb7ff30b2ec36d3656e56f",
+  "github_commit": "e90f7fe2bd3aaa3967ecde1b543df7b45d3af56a",
+  "local_scientific_commit": "9a1cece7e4e6da14fdae010ddc7c138e847b115f",
   "remote_root": "/home/wangjiarui/artgym-support-pressure-20261003",
   "active_remote_training_jobs": [
-    "joint-base-continuation-v31",
-    "joint-noisier-continuation-v31",
-    "joint-looser-v34",
-    "joint-pressure-v34"
+    "joint-resampled-ordinary-v47",
+    "joint-resampled-absorbing-v47",
+    "joint-wider-ordinary-v47",
+    "joint-wider-absorbing-v47"
   ],
   "active_remote_demo_launcher_pid": null,
   "active_remote_variant_launcher_pid": null,
@@ -52,9 +56,37 @@
   "active_remote_pressure_tier_launcher_pid": null,
   "active_remote_resource_sampler_pid": 6329,
   "active_remote_training_launcher_pids": [
-    7704,
-    7705,
-    8220,
-    8221
-  ]
+    11609,
+    11610,
+    11611,
+    11612
+  ],
+  "remote_jobs_status_utc": "2026-10-03T10:15:19Z",
+  "active_remote_jobs": [
+    {
+      "gpu": 0,
+      "launcher_pid": 12788,
+      "child_pid": 12792,
+      "variant": "ordinary"
+    },
+    {
+      "gpu": 1,
+      "launcher_pid": 12789,
+      "child_pid": 12793,
+      "variant": "absorbing"
+    },
+    {
+      "gpu": 2,
+      "launcher_pid": 12790,
+      "child_pid": 12794,
+      "variant": "fresh154"
+    },
+    {
+      "gpu": 3,
+      "launcher_pid": 12791,
+      "child_pid": 12803,
+      "variant": "history170"
+    }
+  ],
+  "remote_process_verification_utc": "2026-10-03T10:51:00+00:00"
 }
