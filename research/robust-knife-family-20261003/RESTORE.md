@@ -8,7 +8,7 @@
 
 ## 恢复文件
 
-下载本轮Release的 `release-manifest.json`、源码归档、权重与训练恢复归档，以及 `under-family-v1-assets-caches.tar.gz` 和 `height-sensitivity-assets-v1.tar.gz`。源码、权重、生成资产分别解压到同一个新的根目录，保留归档内的相对路径。其他数据、视频和工作回执包用于审阅与继续研究，推理无需一次解压全部训练数据。每个包的外部manifest列出精确文件路径、大小与SHA256；最终清单列出归档SHA256。先核对归档哈希，再运行。
+下载本轮Release的 `release-manifest.json`、源码归档、权重与训练恢复归档，以及 `under-family-v1-assets-caches.tar.gz` 、`height-sensitivity-assets-v1.tar.gz` 和 `fresh-validation-assets-v1.tar.gz`。源码、权重、生成资产分别解压到同一个新的根目录，保留归档内的相对路径。其他数据、视频和工作回执包用于审阅与继续研究，推理无需一次解压全部训练数据。每个包的外部manifest列出精确文件路径、大小与SHA256；最终清单列出归档SHA256。先核对归档哈希，再运行。
 
 R800是2076维SC-real编码器适配权重，必须同时保留指定teacher及其normalizer；不能把它当作独立actor。主候选还需P50残差权重和冻结的拇指几何参考。所有控制维度、坐标、递推和实际观测来源见 `ACTOR-CONTROL.md`。手20维按URDF关节名映射到G2机器人27维，手重力开启、原PD与总力矩限制保留。
 
@@ -23,3 +23,14 @@ R800是2076维SC-real编码器适配权重，必须同时保留指定teacher及�
 训练恢复归档保存各已完成分支的实际末次checkpoint、Adam、CPU/CUDA/NumPy随机数状态和配置。`--updates`是绝对更新数。恢复优化状态后重新建立物理回合，不宣称PhysX/RNN物理状态逐位恢复。按实际末次记录继续；中间检查点与最终恢复点不同。
 
 `replay_g2_continuous_policy`只对保存的关节/已发命令轨迹产生离线指令文件，已验证600帧完整操作的电机目标一致。它不连接硬件。真机需要另行标定SDK关节索引、方向和单位，校准有效力矩/压力含义，测量实物滑块阻力并完成现场验证；本轮没有下发真机动作。
+
+## 清单验证与空目录恢复
+
+将Release文件放到同一个ARTIFACTS目录，源码归档名为 `wuji-g2-source.tar.gz`，权重为 `models-and-recovery.tar.gz`。使用源码包中的恢复脚本，或者从Release直接下载同一脚本，执行：
+
+```bash
+python3 restore_wuji_robust_delivery.py --artifacts ARTIFACTS --verify-only
+python3 restore_wuji_robust_delivery.py --artifacts ARTIFACTS --destination NEW_EMPTY_ROOT
+```
+
+默认恢复源码、权重、当前under几何、高度和新128个独立几何。`--all`同时恢复可选证据归档。每个原始回合和训练分支的语义由其report/identity决定；“包含于归档”不使训练资产成为独立验证。
