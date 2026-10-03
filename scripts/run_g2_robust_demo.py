@@ -39,7 +39,7 @@ def main():
   assert a.grasp_plan and not a.residual_checkpoint
   thumb_script=json.loads(a.thumb_script.read_text());script_shifts=np.array([r['shift_m'] for r in thumb_script['rows']]);script_q=np.array([r['q_thumb_preloaded'] if thumb_script.get('posture_preload') else r['q_thumb'] for r in thumb_script['rows']]);assert np.isclose(script_shifts[0],0) and np.isclose(script_shifts[-1],.04)
   if thumb_script.get('posture_preload'):assert thumb_script['motor_geometry_passed'],'Rejected nominal motor geometry'
-  script_preload=operating_closed[16:]-(script_q[0] if thumb_script.get('posture_preload') else np.asarray(plan['touch_q'])[16:]);script_travel_seconds=float(thumb_script.get('travel_seconds',3.));assert 0<script_travel_seconds<5.
+  script_preload=operating_closed[16:]-(script_q[0] if thumb_script.get('posture_preload') or thumb_script.get('known_motor_anchor') else np.asarray(plan['touch_q'])[16:]);script_travel_seconds=float(thumb_script.get('travel_seconds',3.));assert 0<script_travel_seconds<5.
  policy_relative=relative.copy();policy_slider_estimate=None;handover_calibration=None
  if a.handover_calibration:
   handover_calibration=json.loads(a.handover_calibration.read_text());policy_relative=np.asarray(handover_calibration['object_in_wrist']);policy_slider_estimate=np.asarray(handover_calibration['slider_in_wrist']);assert policy_relative.shape==(4,4) and policy_slider_estimate.shape==(4,4)

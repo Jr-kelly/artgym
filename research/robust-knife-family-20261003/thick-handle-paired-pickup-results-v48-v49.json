@@ -1,0 +1,107 @@
+{
+  "rows": [
+    {
+      "trial": "g2-pressure-aware-thick-pickup-v48",
+      "pickup_valid": true,
+      "held_height_min_m": 0.8545133471488953,
+      "thumb_slider_contact_fraction": 1.0,
+      "thumb_slider_normal_solver_mean_N": 0.9228279655568363,
+      "relative_pose_error_from_own_nominal_prior_m": 0.0008140789557049901,
+      "relative_orientation_error_from_own_nominal_prior_rad": 0.06425449644486021,
+      "actual_object_in_wrist": [
+        [
+          0.8609894139879795,
+          0.5050940544001304,
+          -0.05980990896392979,
+          0.045705579504509486
+        ],
+        [
+          -0.08880856198453625,
+          0.2650762876342651,
+          0.9601289502208935,
+          -0.0025326876141343324
+        ],
+        [
+          0.5008096128459139,
+          -0.8213492301960684,
+          0.2730845541905497,
+          0.12754608454385546
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "slider_closed_at_handover": true,
+      "slider_before_handover_m": 0.00033118948340415955
+    },
+    {
+      "trial": "g2-v6-thick-pickup-v49",
+      "pickup_valid": true,
+      "held_height_min_m": 0.8558341264724731,
+      "thumb_slider_contact_fraction": 1.0,
+      "thumb_slider_normal_solver_mean_N": 0.7487772079415558,
+      "relative_pose_error_from_own_nominal_prior_m": 0.0010275605282017832,
+      "relative_orientation_error_from_own_nominal_prior_rad": 0.03093125666533034,
+      "actual_object_in_wrist": [
+        [
+          0.857963513460046,
+          0.5088646874667323,
+          -0.07039417178061433,
+          0.058152395649823774
+        ],
+        [
+          -0.09179756707086391,
+          0.28669283352568015,
+          0.9536144010473455,
+          -0.002106732043174575
+        ],
+        [
+          0.5054421987242103,
+          -0.8117043483032486,
+          0.29268453101323005,
+          0.12040218994800633
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "slider_closed_at_handover": true,
+      "slider_before_handover_m": 0.0010573379695415497
+    }
+  ],
+  "paired_inputs": {
+    "instance": "t0053",
+    "physical_dimensions_WTL_mm": [
+      15.247747777207564,
+      13.455034217387452,
+      136.15258187575574
+    ],
+    "asset": "assets/objects/knife_wuji_dense_under_20261003/t0053/mobility.urdf",
+    "selection": "Nearest training-only geometry to135x16x13.5mm andnominal slideroffset, normalizedgeometry distance; no outcome-based selection",
+    "score": 0.3519157026204153,
+    "phase": "TABLEpickup\u219216shold only",
+    "placement_dx_m": -0.1975,
+    "placement_dy_m": 0.051,
+    "yaw_deg": 1.5,
+    "hand_friction": 0.8,
+    "knife_friction": 2.4,
+    "load_run_startup_N": [
+      0.2,
+      0.2
+    ],
+    "seed": 2026100358,
+    "methods": [
+      "existingv6staticgrip",
+      "newpressure-aware-ringparkedstaticgrip"
+    ],
+    "scope": "Paired targeted developmental support diagnosis, notfulloperation orindependentgeneralization"
+  },
+  "scope": "Same13.455mm developmentalasset/material/placement/engineeredload; differentcertifiedgrips, eachcomparedwithitsown once-calibratednominalprior. Pickup only,no learnedactor/fulloperation or independentclaim",
+  "conclusion": "Both gripssuccessfully pickup andhold inthischosen thick condition; no pickupadvantage established. Compare actualrelativeorientation errors to identifyoperation-calibration/supportgap."
+}

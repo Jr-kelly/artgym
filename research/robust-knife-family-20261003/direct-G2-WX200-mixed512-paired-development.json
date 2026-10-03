@@ -1,0 +1,97 @@
+{
+  "seed": 2026100363,
+  "summary": {
+    "parent": {
+      "completed": 349,
+      "n": 512,
+      "checkpoint_sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714",
+      "pickup_and_hold": null
+    },
+    "without_direct_history": {
+      "completed": 341,
+      "n": 512,
+      "checkpoint_sha256": "bc4f86d3035b5528f1d6d330273840bb6158adef6b52d4ef00753481271ed877",
+      "pickup_and_hold": null
+    },
+    "with_direct_history": {
+      "completed": 347,
+      "n": 512,
+      "checkpoint_sha256": "c72174a2cfa0ce122908e1a51163ae0baf6185b1441fc1ca339ca2ae16ebdf92",
+      "pickup_and_hold": null
+    }
+  },
+  "initial_fields_exactly_equal": {
+    "root": true,
+    "dof": true,
+    "materials": true,
+    "observation_bias": true,
+    "delay": true,
+    "cal_object": true,
+    "cal_slider": true,
+    "load_amplitude": true,
+    "detent_amplitude": true,
+    "load_phase": true,
+    "load_profile_ids": true,
+    "load_frequencies": true
+  },
+  "scope": "Paired actual512 training-family development; no independent assets",
+  "conclusion": "Direct frozen16D history exposure alone did not improve broad complete-chain behavior. Small completion-count differences do not establish improvement.",
+  "recovery": {
+    "direct-G2-W1": {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-W1/update_000350.pth",
+      "sha256": "92f28e5b47ea098caef721cf016d6fb000c284f4abc5d9fc138e44a3e04c8e0c",
+      "checkpoint_keys": [
+        "format",
+        "model",
+        "optimizer",
+        "updates",
+        "transitions",
+        "args",
+        "actor_inputs",
+        "critic_inputs",
+        "history_features",
+        "public_dim",
+        "action_scale",
+        "action_base_mode",
+        "thumb_reference",
+        "teacher_sha256",
+        "student_sha256",
+        "base_tensor_hash",
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy",
+        "resume"
+      ],
+      "new_updates": 300,
+      "new_transitions": 19660800
+    },
+    "direct-G2-X1": {
+      "path": "runs/robust-knife-family-20261003/train/direct-G2-X1/update_000350.pth",
+      "sha256": "7a716a2906d399d9945fc9a0d627fe11dc5853b1590c389d90d2810e34dbe44b",
+      "checkpoint_keys": [
+        "format",
+        "model",
+        "optimizer",
+        "updates",
+        "transitions",
+        "args",
+        "actor_inputs",
+        "critic_inputs",
+        "history_features",
+        "public_dim",
+        "action_scale",
+        "action_base_mode",
+        "thumb_reference",
+        "teacher_sha256",
+        "student_sha256",
+        "base_tensor_hash",
+        "rng_cpu",
+        "rng_cuda",
+        "rng_numpy",
+        "resume"
+      ],
+      "new_updates": 300,
+      "new_transitions": 19660800
+    }
+  }
+}

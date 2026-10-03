@@ -1,0 +1,23 @@
+{
+  "args": {
+    "plan": "research/robust-knife-family-20261003/pressure-aware-equilibrium-v1/motor-plan.json",
+    "acquisition_path": "research/robust-knife-family-20261003/pressure-aware-lateral-v1/acquisition-path.json",
+    "output": "research/robust-knife-family-20261003/pressure-aware-ring-parked-v1",
+    "digit": "ring"
+  },
+  "rows": [
+    {
+      "success": true,
+      "message": "Optimization terminated successfully",
+      "minimum_constraint_m": 2.783440578718599e-12,
+      "q": [
+        0.01680120876097754,
+        -0.35499999237217694,
+        1.4138330427492605,
+        1.0609518402894342
+      ]
+    }
+  ],
+  "passed": true,
+  "scope": "Offline inactive-digit geometry only,31 lift knots; independent full-mesh selected-path audit and physics required. Active contacts unchanged."
+}

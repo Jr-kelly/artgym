@@ -16,11 +16,23 @@
 
 权重由本轮最终Release提供；目前也可按上一轮Release及其freeze.json按需恢复。设置 `PYTHONPATH=.:rl_games`、`LD_LIBRARY_PATH=<artgym-environment>/lib`、`PYTHONNOUSERSITE=1`。仿真模块必须先导入Isaac Gym再导入torch。
 
-连续取刀—接管尝试，输出目录必须不存在：
+当前保留的学习混合控制完整成功例v38（桌边摆放，输出目录必须不存在）：
 
 ```bash
-python -m scripts.run_g2_robust_demo   --output runs/robust-knife-family-20261003/demo/recovered-continuous   --video --seconds 36 --dx=-.10 --dy=.05 --yaw=45 --slider-face down   --grasp-plan research/robust-knife-family-20261003/pinch-equilibrium-bounded-v2/motor-plan.json   --table-calibration research/robust-knife-family-20261003/g2-cartesian-calibration-v1.json   --cartesian-path research/robust-knife-family-20261003/g2-cartesian-path-v1.json
+python -m scripts.run_g2_robust_demo \
+  --output runs/robust-knife-family-20261003/demo/recovered-P50-heavy-pulse \
+  --video --seconds 36 --dx=-.1985 --dy=.05 --yaw=0 --slider-face up \
+  --grasp-plan research/robust-knife-family-20261003/functional-side-edge-under-support-equilibrium-v6/motor-plan.json \
+  --table-calibration research/robust-knife-family-20261003/functional-side-edge-under-support-v6/localization.json \
+  --acquisition-path research/robust-knife-family-20261003/functional-side-edge-under-support-lateral-v3/acquisition-path.json \
+  --handover-calibration research/robust-knife-family-20261003/handover-from-v25-v1.json \
+  --residual-checkpoint runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth \
+  --load .2 --detent .2 --load-profile pulse --load-frequency 2.9 \
+  --hand-friction .8 --knife-friction 2.4 \
+  --observation-noise .002 --observation-bias .006 --seed 2026100358
 ```
+
+P50权重SHA256：`73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714`。增加`--physics-hz 480`复现v46半步长验证；两者均实际连续成功。`2.9`是rad/s角频率。新增负载和起动幅度各0.2N，瞬时总新增力还包括被动势阱，不能将0.2N解释为实物总阻力或承载上界。将同一配置两项幅度改为0.5N复现v39高负载失败；其失败次序随物理步长改变，见v45。
 
 最新带阻力接触诊断失败例（需要C100权重，SHA256见report与开发配对文件）：
 
