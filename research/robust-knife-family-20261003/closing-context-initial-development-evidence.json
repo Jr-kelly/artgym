@@ -1,0 +1,21 @@
+{
+  "completed": 347,
+  "n": 512,
+  "report": "runs/robust-knife-family-20261003/checks/closing-context-initial-development-v1/report.json",
+  "context_spec": {
+    "conditioning": "estimated",
+    "head_path": "research/robust-knife-family-20261003/closing-hold-identifiability-8s-v1/ridge-models.npz",
+    "head_sha256": "55574f5a321c3b3dda1ffd971263baf2aea808d18b25cd444561862994b28168",
+    "public_dim": 155,
+    "critic_dim": 182,
+    "actor_layout": "Original154 +cachedclosingnormalizedTestimate1",
+    "critic_layout": "Original181 +samecachedcontext1",
+    "capture_age_frames": 240,
+    "capture_policy_active": false,
+    "fit_scope": "Frozen ridge10 on409 trainingfamily bodylabels;103 geometry-supervision heldout. Labelsneveractorinput. Earlyactualcontext before16s takeover.",
+    "runtime_inputs": "50actualmeasurednormalizedq, currentmeasuredq/FK, knownnominalgeometry/calibration, knownissuedtargets/previousactions, measuredarmFKgravity; no object/slider/contact/material/assetID",
+    "prototype_scope": "Separatepaireddevelopmentonly, not originalP50/nativeG2R800Policy/hardware or332primaryindependent candidate"
+  },
+  "actual8s_capture_count": 512,
+  "scope": "Untrainedzero-column extension of sameP50; fixedseed0503 developmentbaseline only. Allcaptureincluded, noactorchangebeforetraining ornewindependent result."
+}

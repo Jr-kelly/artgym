@@ -1,0 +1,68 @@
+{
+  "utc": "2026-10-03T05:48:59.296467+00:00",
+  "inputs": [
+    {
+      "path": "research/robust-knife-family-20261003/functional-side-edge-under-support-equilibrium-v6/motor-plan.json",
+      "expected_sha256": "fc769af851167f077c7d910f450826fb250eeed42830f2bc3e56505569c10704",
+      "actual_sha256": "fc769af851167f077c7d910f450826fb250eeed42830f2bc3e56505569c10704",
+      "role": "frozen_inputs_sha256"
+    },
+    {
+      "path": "research/robust-knife-family-20261003/functional-side-edge-under-support-lateral-v3/acquisition-path.json",
+      "expected_sha256": "cb5753cb29bca34503fd06faa3ed093b26ebc350318514299105c263a7b7a8fc",
+      "actual_sha256": "cb5753cb29bca34503fd06faa3ed093b26ebc350318514299105c263a7b7a8fc",
+      "role": "frozen_inputs_sha256"
+    },
+    {
+      "path": "research/robust-knife-family-20261003/handover-from-v25-v1.json",
+      "expected_sha256": "87d301748af0986bf3f543a72fa3d06df440e29c7c53039beb6849331dd57c21",
+      "actual_sha256": "87d301748af0986bf3f543a72fa3d06df440e29c7c53039beb6849331dd57c21",
+      "role": "frozen_inputs_sha256"
+    },
+    {
+      "path": "research/robust-knife-family-20261003/functional-side-edge-under-support-v6/continuous-thumb-v2.json",
+      "expected_sha256": "cb74e925648f54ed6d18cfccb178657df9d646b399a0e1f54d435303b8d578ef",
+      "actual_sha256": "cb74e925648f54ed6d18cfccb178657df9d646b399a0e1f54d435303b8d578ef",
+      "role": "frozen_inputs_sha256"
+    },
+    {
+      "path": "research/robust-knife-family-20261003/independent-validation-plan-v1.json",
+      "expected_sha256": "5e661d22f57fe40fc676ac818c6dacaf82d83887114183783f68da899adeca73",
+      "actual_sha256": "5e661d22f57fe40fc676ac818c6dacaf82d83887114183783f68da899adeca73",
+      "role": "frozen_inputs_sha256"
+    },
+    {
+      "path": "research/robust-knife-family-20261003/fresh-validation-assets-v1.json",
+      "expected_sha256": "6503970d39995641676916cbbbf444c70d5d90ff49f43cc5be203a9b40d5046f",
+      "actual_sha256": "6503970d39995641676916cbbbf444c70d5d90ff49f43cc5be203a9b40d5046f",
+      "role": "frozen_inputs_sha256"
+    },
+    {
+      "path": "research/robust-knife-family-20261003/height-sensitivity-assets-v1.json",
+      "expected_sha256": "cfd0122c0ae3444344fc795343df1c311664ae49fcdcb8c942eaef11a07e168c",
+      "actual_sha256": "cfd0122c0ae3444344fc795343df1c311664ae49fcdcb8c942eaef11a07e168c",
+      "role": "frozen_inputs_sha256"
+    },
+    {
+      "path": "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth",
+      "expected_sha256": "bbf61592721300b1cf053de8246898a69989ed102b7a034da6fb47cc9a541dcd",
+      "actual_sha256": "bbf61592721300b1cf053de8246898a69989ed102b7a034da6fb47cc9a541dcd",
+      "role": "base_weights_sha256"
+    },
+    {
+      "path": "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
+      "expected_sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+      "actual_sha256": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+      "role": "base_weights_sha256"
+    }
+  ],
+  "runtime_file_count": 1258,
+  "runtime_files_unchanged": true,
+  "primary_candidate": {
+    "checkpoint_path": "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
+    "sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714",
+    "takeover_seconds": 16.0,
+    "actor": "P50 bounded learned residual hybrid with geometric thumb reference; nominal prior same across all assets; scriptedTABLEpickup prefix, not end-to-end learned"
+  },
+  "scope": "All originallyfrozencontrollerinputs/baseweights remainexact throughnewseparateDprototype; noprimary333rd episode or actor replacement"
+}
