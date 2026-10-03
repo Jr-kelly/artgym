@@ -12,7 +12,7 @@ def digest(p):
     return h.hexdigest()
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--group',required=True,choices=['source','runtime','learning','movies','evidence']);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--group',required=True,choices=['source','runtime','learning','movies','evidence']);p.add_argument('--output',type=Path,required=True);a=p.parse_args();a.output=a.output.resolve()
     assert (D/'freeze.json').exists(),'Freeze candidate before final packaging'
     files=[]
     if a.group=='source':
