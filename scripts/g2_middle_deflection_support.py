@@ -88,3 +88,28 @@ class BatchedMiddleDeflectionSupport:
         held=paused&(self.confirm_positive>=s['consecutive_contact_proxy_frames']);self.state[held]=3
         retry=paused&~held&(self.confirm_frames>=s['filter_frames']+s['consecutive_contact_proxy_frames']);self.state[retry]=1
         output=nominal.clone();output[active,7]=self.target[active];return output
+
+
+class MiddleLoadLagRegulator:
+    """Finite motor adjustment using a load proxy, never measured force.
+
+    Runtime inputs are observed joint position and the previously issued target.
+    The existing finite controller supplies the anchor; support adjustments stay
+    within its original +/-0.04rad command span and certified held corridor.
+    """
+    def __init__(self, specification, initial_target):
+        self.spec=specification;self.anchor=float(initial_target);self.target=self.anchor
+        self.lower=max(specification['motor_lower_rad'],self.anchor-.04)
+        self.upper=min(specification['motor_upper_rad'],self.anchor+.04,specification.get('operation_motor_upper_rad',self.anchor+.04))
+        self.values=deque(maxlen=specification['filter_frames']);self.lag=0.;self.saturated_frames=0
+
+    def command(self, measured, issued_target, nominal):
+        self.values.append(float(measured[7])-float(issued_target[7]));self.lag=float(np.mean(self.values))
+        if len(self.values)==self.values.maxlen:
+            if self.lag>.028:self.target=min(self.upper,self.target+.001)
+            elif self.lag<.018:self.target=max(self.lower,self.target-.001)
+        self.saturated_frames+=int(self.target<=self.lower+1e-8 or self.target>=self.upper-1e-8)
+        result=nominal.copy();result[7]=self.target;return result
+
+    def report(self):
+        return dict(anchor_rad=self.anchor,target_rad=self.target,bounds_rad=[self.lower,self.upper],filtered_observed_minus_issued_rad=self.lag,lag_band_rad=[.018,.028],maximum_motor_step_rad=.001,saturated_control_frames=self.saturated_frames,scope='Proprioceptive loadproxy deadband, not exact contactownership or constant/measured force. Originallimits/gains/gravity; no object/slider/contacttruth.')

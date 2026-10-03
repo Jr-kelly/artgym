@@ -1,0 +1,40 @@
+{
+  "operation_evaluated": true,
+  "endpoints_mean_last03s_m": [
+    0.030189314236243565,
+    0.0005412081049548255,
+    0.03003983272032605,
+    0.00017289030883047316
+  ],
+  "operation_body_max_drift_m": 0.003915142267942429,
+  "operation_body_max_rotation_rad": 0.48668490998203323,
+  "operation_body_stable": false,
+  "operation_thumb_slider_contact_fraction": 0.9983361064891847,
+  "operation_body_contact_fraction": [
+    0.0,
+    0.9966722129783694,
+    0.9667221297836939,
+    0.9916805324459235,
+    1.0
+  ],
+  "first_failure": "body stability after handover",
+  "middle_load_lag_regulation": {
+    "anchor_rad": 0.8576925283691361,
+    "target_rad": 0.8976925283691362,
+    "bounds_rad": [
+      0.8176925283691361,
+      0.8976925283691362
+    ],
+    "filtered_observed_minus_issued_rad": 0.04459283356469124,
+    "lag_band_rad": [
+      0.018,
+      0.028
+    ],
+    "maximum_motor_step_rad": 0.001,
+    "saturated_control_frames": 451,
+    "scope": "Proprioceptive loadproxy deadband, not exact contactownership or constant/measured force. Originallimits/gains/gravity; no object/slider/contacttruth."
+  },
+  "evidence": "runs/robust-knife-family-20261003/demo/g2-coupled-lag-regulated-full-v61",
+  "scope": "Scriptcoupledreference+proprioceptivemiddlelagregulation; actualcontinuousTABLEphysics; nolearnedactor/independentgen/constantforceclaim",
+  "conclusion": "Twoextensionsandreturns+effectivecontact maintained, bodyrotation.4867radfailsoriginal.25; regulator hitupperbound451frames. Do not tuneendpointorpressuremicrogrid."
+}

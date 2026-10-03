@@ -1,0 +1,42 @@
+{
+  "evidence": "runs/robust-knife-family-20261003/train/direct-G2-AJ1",
+  "final_update": 178,
+  "sha256": "37f259d8ab0d8627c12e6f4d7850bd6d26d7385b5c782720afc582ee23a492d2",
+  "Adam_and_rng_recovery_verified": true,
+  "training": {
+    "utc": "2026-10-03T03:16:51.288550+00:00",
+    "update": 178,
+    "transitions": 8388608,
+    "episodes": 16298,
+    "reward": -0.0895022600889206,
+    "loss": 17.026994183659554,
+    "kl": 0.022711743406489404,
+    "active_sample_kl": 0.027239157770137273,
+    "epoch_stop_kl_scope": "active residual-control samples",
+    "policy_active_fraction": 0.005859375,
+    "actual_hold_history_frames": 50,
+    "wall_seconds": 721.2748338319943,
+    "peak_extension_mean_m": 0.0028567126573761925,
+    "contact_mean": 0.1978344550007023,
+    "fall_fraction": 0.9921875,
+    "scope": "Training fitting/behavior only",
+    "analytic_active_rollout_kl": 0.02963324449956417,
+    "actor_step_fraction_mean": 0.3473358154296875,
+    "rejected_actor_updates": 3,
+    "actor_bound_scope": "All active samples in current rollout; not a bound on future episodes",
+    "recent_episode_count": 128,
+    "recent_complete_fraction": 0.0,
+    "recent_pickup_valid_fraction": 0.265625,
+    "all_complete_count": 1,
+    "all_pickup_valid_count": 474,
+    "failure_counts": {
+      "pickup/hold": 94,
+      "body unstable/drop": 34,
+      "extension": 0,
+      "retraction": 0,
+      "thumb-contact": 0
+    },
+    "behavior_scope": "Training samples, last128 episodes may mix early failures and complete36s trajectories; never independent validation"
+  },
+  "scope": "Trainingfitting; retiredbefore200 becausephysicalprefixblocked; no200frozenevaluation"
+}

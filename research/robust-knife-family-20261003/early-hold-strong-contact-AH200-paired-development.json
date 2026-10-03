@@ -1,0 +1,84 @@
+{
+  "results": {
+    "P50_early": {
+      "completed": 344,
+      "n": 512,
+      "failures": {
+        "pickup/hold": 41,
+        "body unstable/drop": 127
+      },
+      "checkpoint_sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714",
+      "takeover_seconds": 12.0,
+      "evidence": "runs/robust-knife-family-20261003/checks/P50-early512-v40/report.json"
+    },
+    "AH200": {
+      "completed": 339,
+      "n": 512,
+      "failures": {
+        "pickup/hold": 34,
+        "body unstable/drop": 138,
+        "extension": 1
+      },
+      "checkpoint_sha256": "dca2e32d6a6b0b9a170c8baec2a1f0930c112808d6c196731b51404605b72dbe",
+      "takeover_seconds": 12.0,
+      "evidence": "runs/robust-knife-family-20261003/checks/AH200-joint-v39/report.json"
+    },
+    "P50_late": {
+      "completed": 349,
+      "n": 512,
+      "failures": {
+        "pickup/hold": 35,
+        "body unstable/drop": 128
+      },
+      "checkpoint_sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714",
+      "takeover_seconds": 16.0,
+      "evidence": "runs/robust-knife-family-20261003/checks/direct-G2-P50-mixed512-v28/report.json"
+    }
+  },
+  "initial_fields_exactly_equal": {
+    "P50_early": {
+      "root": true,
+      "dof": true,
+      "materials": true,
+      "observation_bias": true,
+      "delay": true,
+      "cal_object": true,
+      "cal_slider": true,
+      "load_amplitude": true,
+      "detent_amplitude": true,
+      "load_phase": true,
+      "load_profile_ids": true,
+      "load_frequencies": true
+    },
+    "AH200": {
+      "root": true,
+      "dof": true,
+      "materials": true,
+      "observation_bias": true,
+      "delay": true,
+      "cal_object": true,
+      "cal_slider": true,
+      "load_amplitude": true,
+      "detent_amplitude": true,
+      "load_phase": true,
+      "load_profile_ids": true,
+      "load_frequencies": true
+    },
+    "P50_late": {
+      "root": true,
+      "dof": true,
+      "materials": true,
+      "observation_bias": true,
+      "delay": true,
+      "cal_object": true,
+      "cal_slider": true,
+      "load_amplitude": true,
+      "detent_amplitude": true,
+      "load_phase": true,
+      "load_profile_ids": true,
+      "load_frequencies": true
+    }
+  },
+  "scope": "Actualall512jointdevelopmentconditions, identicalphysicsinitialization; early12separatefromlate16timing. No independentheldouts.",
+  "conclusion": "AH200339 vsP50early344 andlate349; no broadcapabilitygain. Retirecombinedpilot, keepthickcurriculumandnewphysicalsupport/referencebranch."
+}

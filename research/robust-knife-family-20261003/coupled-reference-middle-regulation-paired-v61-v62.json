@@ -1,0 +1,32 @@
+{
+  "results": {
+    "regulated": {
+      "endpoints_mean_last03s_m": [
+        0.030189314236243565,
+        0.0005412081049548255,
+        0.03003983272032605,
+        0.00017289030883047316
+      ],
+      "operation_body_max_rotation_rad": 0.48668490998203323,
+      "operation_body_max_drift_m": 0.003915142267942429,
+      "operation_thumb_slider_contact_fraction": 0.9983361064891847,
+      "first_failure": "body stability after handover",
+      "evidence": "runs/robust-knife-family-20261003/demo/g2-coupled-lag-regulated-full-v61"
+    },
+    "static": {
+      "endpoints_mean_last03s_m": [
+        0.028678788234376244,
+        4.859434233771431e-07,
+        0.029723640583041642,
+        0.000555969774723053
+      ],
+      "operation_body_max_rotation_rad": 0.36645279104470413,
+      "operation_body_max_drift_m": 0.002695511095225811,
+      "operation_thumb_slider_contact_fraction": 1.0,
+      "first_failure": "body stability after handover",
+      "evidence": "runs/robust-knife-family-20261003/demo/g2-coupled-static-middle-full-v62"
+    }
+  },
+  "scope": "Samecoupled40mmreference/nominalphysicalconditions. BothscriptTABLEruns, nolearner/independentvalidation.",
+  "conclusion": "Static.3665radandregulated.4867radbothfailoriginal.25. Operationlagregulationdidnotresolvebodystability; no pressure/endpointfinegrid. RetainP50primary."
+}

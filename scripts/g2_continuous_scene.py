@@ -33,7 +33,7 @@ def gym_transform(position,quaternion=(0,0,0,1)):
 class G2ContinuousScene:
     def __init__(self,n=8,seed=2026100356,randomization_scale=0.,instances=None,
                  load_max=.1,detent_max=.1,contact_progress_reward=0.,reference_spec=None,
-                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False):
+                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False,graphics=False):
         self.n=n;self.device='cuda:0';self.seed=seed
         self.history_features=history_features;self.public_dim=(170 if history_features else 154)+(8 if support_estimator_spec else 0)
         self.support_estimator_spec=support_estimator_spec;self.support_estimator=None
@@ -44,7 +44,7 @@ class G2ContinuousScene:
         torch.backends.cudnn.allow_tf32=False
         torch.manual_seed(seed);self.rng=np.random.default_rng(seed)
         self.randomization_scale=randomization_scale;self.load_max=load_max;self.detent_max=detent_max
-        assert 12<=takeover_seconds<=16 and abs(takeover_seconds*30-round(takeover_seconds*30))<1e-6
+        assert 8<=takeover_seconds<=16 and abs(takeover_seconds*30-round(takeover_seconds*30))<1e-6
         self.takeover_frame=round(takeover_seconds*30)
         self.load_profile=load_profile;self.load_frequency=load_frequency
         assert load_profile in ['constant','sinusoidal','triangular','pulse','mixed'] and load_frequency>0
@@ -93,7 +93,7 @@ class G2ContinuousScene:
         sp.physx.num_position_iterations=8;sp.physx.num_velocity_iterations=2
         sp.physx.contact_offset=.001;sp.physx.rest_offset=0;sp.physx.max_depenetration_velocity=1.
         sp.physx.num_threads=4
-        self.sim=self.gym.create_sim(0,-1,gymapi.SIM_PHYSX,sp);assert self.sim
+        self.sim=self.gym.create_sim(0,0 if graphics else -1,gymapi.SIM_PHYSX,sp);assert self.sim
         plane=gymapi.PlaneParams();plane.normal=gymapi.Vec3(0,0,1);self.gym.add_ground(self.sim,plane)
         opt=gymapi.AssetOptions();opt.fix_base_link=True;opt.disable_gravity=False
         opt.collapse_fixed_joints=False;opt.thickness=.001;opt.use_physx_armature=True
@@ -184,6 +184,7 @@ class G2ContinuousScene:
         self.hand_ids=torch.tensor(self.hand,device=self.device);self.arm_ids=torch.tensor(self.arm,device=self.device)
         self.object_index=self.robot_body_count+1;self.slider_index=self.robot_body_count+2
         self.reference_pose=torch.zeros((n,7),device=self.device)
+        self.pickup_reference_in_wrist=self.reference_pose.clone()
         self.peak=torch.zeros(n,device=self.device);self.max_drift=self.peak.clone();self.max_rotation=self.peak.clone()
         self.min_hold_height=torch.full((n,),float('inf'),device=self.device)
         self.endpoints=torch.zeros((n,4),device=self.device);self.contact_steps=self.peak.clone();self.operation_steps=self.peak.clone()
@@ -282,7 +283,10 @@ class G2ContinuousScene:
         ready=(self.age==self.takeover_frame).nonzero(as_tuple=False).flatten()
         if len(ready):
             self.bridge.takeover(ready,q[ready],self.target[ready][:,self.hand_ids],self.cal_object[ready],self.cal_slider[ready])
-            self.reference_pose[ready]=self.last_held_pose[ready]
+            self.reference_pose[ready]=self.rb[ready,self.object_index,:7]
+            wrist=self.rb[ready,self.wrist_index]; obj=self.rb[ready,self.object_index]
+            inverse=quat_conjugate(wrist[:,3:7])
+            self.pickup_reference_in_wrist[ready]=torch.cat([quat_apply(inverse,obj[:,:3]-wrist[:,:3]),quat_mul(inverse,obj[:,3:7])],-1)
         operation_ready=(self.age==480).nonzero(as_tuple=False).flatten()
         if len(operation_ready):
             self.reference_pose[operation_ready]=self.last_held_pose[operation_ready]
@@ -378,12 +382,23 @@ class G2ContinuousScene:
         if self.contact_progress_reward:
             gate=torch.exp(-(drift/.01).square()-(rotation/.25).square())
             reward+=self.contact_progress_reward*reward_proximity*gate*((previous_error-error)/.002).clamp(-1,1)
+        # During the actual 8--12s lift, reward physical object retention
+        # relative to the wrist. These simulator states are critic/reward only;
+        # actor still sees exactly measured/known public features.
+        pickup_active=active&(oldage<360)
+        if bool(pickup_active.any()):
+            wrist=self.rb[:,self.wrist_index]; inverse=quat_conjugate(wrist[:,3:7])
+            relative=torch.cat([quat_apply(inverse,obj[:,:3]-wrist[:,:3]),quat_mul(inverse,obj[:,3:7])],-1)
+            pd=(relative[:,:3]-self.pickup_reference_in_wrist[:,:3]).norm(dim=-1)
+            pr=2*torch.asin(quat_mul(relative[:,3:7],quat_conjugate(self.pickup_reference_in_wrist[:,3:7]))[:,:3].norm(dim=-1).clamp(0,1))
+            pickup_reward=2*torch.exp(-(pd/.012).square())+.1*contact[:,1:].sum(-1)-40*pd.clamp(0,.1)-4*pr.clamp(0,1.5)-.02*executed.square().mean(-1)
+            reward=torch.where(pickup_active,pickup_reward,reward)
         reward=torch.where(active,reward,torch.zeros_like(reward))
         self.peak[operation_active]=torch.maximum(self.peak[operation_active],travel[operation_active])
         self.max_drift[operation_active]=torch.maximum(self.max_drift[operation_active],drift[operation_active])
         self.max_rotation[operation_active]=torch.maximum(self.max_rotation[operation_active],rotation[operation_active])
         self.contact_steps[operation_active]+=(proximity[operation_active]>.5).float();self.operation_steps[operation_active]+=1
-        dropped=active&(height<.78)
+        dropped=active&(oldage>=360)&(height<.78)
         self.fell|=dropped
         failure_reward=torch.full_like(reward,-8.)
         if self.absorbing_failure_penalty:

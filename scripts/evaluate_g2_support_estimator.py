@@ -28,8 +28,21 @@ def onset_metrics(pred,label,groups,times):
 def main():
     p=argparse.ArgumentParser();p.add_argument('--data',type=Path,required=True);p.add_argument('--checkpoints',type=Path,nargs='+',required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args();assert not a.output.exists();torch.set_num_threads(4);torch.backends.cuda.matmul.allow_tf32=False;data=np.load(a.data);x=torch.tensor(data['features'],device='cuda');y=torch.tensor(data['labels'],device='cuda');groups=data['groups'];rows=[]
     for path in a.checkpoints:
-        saved=torch.load(path,map_location='cuda');model=SupportEstimator(saved['input_dim']).cuda();model.load_state_dict(saved['model']);model.eval()
-        with torch.no_grad():pred=model(((x[:,:saved['input_dim']]-saved['input_mean'])/saved['input_std']).clamp(-20,20))
+        saved=torch.load(path,map_location='cuda')
+        temporal=saved['format']=='g2-legal-temporal-support-estimator-v1'
+        if temporal:
+            from scripts.train_g2_temporal_support_estimator import TemporalSupportEstimator
+            model=TemporalSupportEstimator().cuda()
+        else:model=SupportEstimator(saved['input_dim']).cuda()
+        model.load_state_dict(saved['model']);model.eval()
+        with torch.no_grad():
+            normalized=((x[:,:saved['input_dim']]-saved['input_mean'])/saved['input_std']).clamp(-20,20)
+            if temporal:
+                torch.backends.cudnn.allow_tf32=False
+                history=torch.tensor(data['packets'][:,:2000].reshape(-1,50,40),device='cuda')
+                history=((history-saved['history_mean'])/saved['history_std']).clamp(-20,20)
+                pred=torch.cat([model(normalized[ids],history[ids]) for ids in torch.arange(len(x),device='cuda').split(2048)])
+            else:pred=model(normalized)
         masks={'all_fresh_perturbations':np.ones(len(groups),bool),'assets_used_for_estimator_fitting':np.isin(groups,saved['train_groups']),'assets_reserved_from_estimator_fitting':np.isin(groups,saved['validation_groups'])}
         rows.append(dict(checkpoint=str(path),checkpoint_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),input_dim=saved['input_dim'],metrics={k:metrics(pred[m],y[m]) for k,m in masks.items()},contact_loss_onsets=onset_metrics(pred,y,groups,data['times'])))
     report=dict(data=str(a.data),data_sha256=hashlib.sha256(a.data.read_bytes()).hexdigest(),rows=rows,scope='Frozen estimator on fresh512 training-family chains; no estimator updates or sample filtering. All are RL-training assets, not final independent policy validation.')

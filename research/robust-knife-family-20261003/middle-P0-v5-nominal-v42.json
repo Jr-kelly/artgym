@@ -1,0 +1,38 @@
+{
+  "completed": 0,
+  "n": 8,
+  "pickup_valid": 6,
+  "failures": [
+    "body unstable/drop",
+    "body unstable/drop",
+    "pickup/hold",
+    "body unstable/drop",
+    "body unstable/drop",
+    "pickup/hold",
+    "body unstable/drop",
+    "body unstable/drop"
+  ],
+  "checkpoint_sha256": "74d1b5f24f87276ded5c43b4cd79af57f38a710553cf51e6176d2711f1065bb8",
+  "bridge": {
+    "scope": "Same actual measured frames/calibration/issued commands, independent single-G2 and batched bridge; no current truth supplied",
+    "actual_history_frames": 50,
+    "max_encoder_error": 1.7881393432617188e-07,
+    "max_public_error": 0.00019431114196777344,
+    "max_raw_base_action_error": 0.00019431114196777344,
+    "model_tensor_hash_equal": true,
+    "same_packet_different_model_error": 0.0,
+    "same_model_batch_kernel_error": 0.00019401311874389648,
+    "same_batch_size_observation_roundoff_error": 5.21540641784668e-07,
+    "max_motor_target_error_rad": 0.0,
+    "strict_raw154_passed": false,
+    "max_history_latent_error": null,
+    "max_support_estimate_error": null,
+    "history_latent_from_same_legal2076_packet": false,
+    "max_measured_known_input_error": 5.364418029785156e-07,
+    "deployable_passed": true,
+    "selected_gate": "deployable",
+    "numerical_scope": "Raw frozen actor means remain reported separately: same packet and model differ with batch kernels. Original strict gate retained, never reclassified. Deployable gate checks measured/known fields, same-packet model semantics and issued motor targets under the supplied residual checkpoint.",
+    "passed": true
+  },
+  "scope": "Nominalactual8developmentonly; zeroresidualcomparison alsofails, nolearnedresidualonlycausalclaim"
+}
