@@ -11,16 +11,29 @@
   },
   "remote_inventory_verified": true,
   "remote_additional_consumption_unknown": false,
-  "goal_complete": false,
+  "goal_complete": true,
   "last_event": {
-    "utc": "2026-10-03T06:53:51.048052+00:00",
-    "event": "final_report_and_resource_delivery_files_closed",
-    "evidence": "research/robust-knife-family-20261003/FINAL-REPORT.md",
-    "phase": "All implementation/experiments/recovery and12h/resource gates complete; authorized newRelease publication",
-    "next": "Publish exact finalGit tree, upload finaldocs/manifest/checksums, verifyactualdownloads/tag and publicRelease"
+    "utc": "2026-10-03T06:54:52.383169+00:00",
+    "event": "published_round_delivery_closed_and_readonly_monitor_stopped",
+    "evidence": "research/robust-knife-family-20261003/github-final-release-publication-verification.json",
+    "config": {
+      "monitor_pid": 3871557,
+      "monitor_stopped": true,
+      "pid_checked_utc": "2026-10-03T06:54:52.383136+00:00"
+    },
+    "phase": "Current round completed and new Release published; capability gaps disclosed",
+    "conclusion": "Actual continuousTABLEedge hybrid demo, required jointtraining and allindependentchecks attempted/completed; thick/raisedslider/highload and crosspipelineportability remain. >=12h usefulwork, utilizationfloors, actualrestoration andnewRelease verified. No realrobot commands orsubagents.",
+    "next": "Persist finalpublicationreceipt snapshot; close native goal. Futurework requires a new user instruction, no automatic robot actions.",
+    "state_updates": {
+      "goal_complete": true,
+      "release_published": true,
+      "necessary_generalization_resolved": false,
+      "gpu_work_closed": true,
+      "final_resource_monitor_stopped": true
+    }
   },
-  "phase": "All implementation/experiments/recovery and12h/resource gates complete; authorized newRelease publication",
-  "next": "Publish exact finalGit tree, upload finaldocs/manifest/checksums, verifyactualdownloads/tag and publicRelease",
+  "phase": "Current round completed and new Release published; capability gaps disclosed",
+  "next": "Persist finalpublicationreceipt snapshot; close native goal. Futurework requires a new user instruction, no automatic robot actions.",
   "active_jobs": [],
   "new_gpu_hours": 28.397893061783932,
   "cumulative_gpu_hours": 84.51588114111176,
@@ -33,8 +46,8 @@
   "latest_round_resume_utc": "2026-10-02T18:53:50+00:00",
   "pickup_first_success": "g2-sidepinch-equilibrium-v7",
   "github_branch": "feat/wuji-robust-knife-family-20261003",
-  "github_commit": "e222fd695960c5aa3f448ddfbd2ec1d2b6736c6a",
-  "local_scientific_commit": "4e64c62d710d399cce8c77d4a2cd3520d838d333",
+  "github_commit": "f7d8eb2fd3ca0ddd998d48fdf039f850940f41bf",
+  "local_scientific_commit": "0fb810a53ce87c24d57b4aaf5e63d6767aecd778",
   "full_demo_success": true,
   "actual_history_training_audit_passed": true,
   "dense_geometry_train_count": 512,
@@ -54,5 +67,9 @@
   "restored_fixed_validation_completed": 185,
   "necessary_generalization_resolved": false,
   "minimum_12h_verified": true,
-  "final_resource_verified": true
+  "final_resource_verified": true,
+  "release_published": true,
+  "release_url": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-g2-continuous-knife-robust-20261003-v1",
+  "release_tag_commit": "f7d8eb2fd3ca0ddd998d48fdf039f850940f41bf",
+  "final_resource_monitor_stopped": true
 }

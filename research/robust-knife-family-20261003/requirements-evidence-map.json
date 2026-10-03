@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-03T06:53:51.047674+00:00",
+  "utc": "2026-10-03T06:54:52.382708+00:00",
   "scope": "Completion audit against original attachment/request. Capability gaps are stated, not converted to pass; attachment explicitly permits honest unresolved boundaries after useful attempts. No final goalcomplete claim before time/resource/publishedRelease gates.",
   "requirements": [
     {
@@ -110,15 +110,18 @@
     },
     {
       "requirement": "New GitHub Release published, exact source/model/artifact hashes and final tag verified",
-      "status": "await_final_manifest_and_publication",
+      "status": "verified_published",
       "evidence": [
-        "github-commit-map.json"
+        "github-commit-map.json",
+        "github-final-flat-payload-verification.json",
+        "github-final-release-publication-verification.json"
       ],
-      "tag": "wuji-g2-continuous-knife-robust-20261003-v1"
+      "tag": "wuji-g2-continuous-knife-robust-20261003-v1",
+      "release_url": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-g2-continuous-knife-robust-20261003-v1"
     },
     {
       "requirement": "Truthful outcome-first Chinese report, concrete remainingblockers, minimalhardwareinputs/actions/researchlines; no robot commands or subagents; preserve original/userwork",
-      "status": "content_verified_publication_pending",
+      "status": "verified_published",
       "evidence": [
         "FINAL-REPORT.md",
         "RELEASE-NOTES.md",
@@ -128,5 +131,7 @@
       ],
       "limits": "Onlyfile simulation/offline deployment preparation, SDKmapping/force/resistance realcalibration pending; no hardwaretransport in executedcommands. SourceGitexcludesuntrackedhumanmedia andFranka."
     }
-  ]
+  ],
+  "all_execution_delivery_requirements_complete": true,
+  "necessary_generalization_resolved": false
 }

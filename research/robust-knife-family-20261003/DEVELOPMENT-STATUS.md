@@ -1,3 +1,9 @@
+# Published final delivery
+
+https://github.com/Jr-kelly/artgym/releases/tag/wuji-g2-continuous-knife-robust-20261003-v1
+
+48 assets and exact final tag/tree verified, anonymouspublicmanifest download matches. Currentround >=12h, first4h floor62.96%, finalresource floor>27%; all useful GPU work closed. Nominalcomplete TABLEedge hybrid demo done; necessary generalization remains unresolved. Primary204/332 and recovered185/332 retain separate roles. No hardware actions.
+
 # Final delivery preparation at 2026-10-03T06:53:50.069184+00:00
 
 All useful compute and recovery checks closed. Actual currentround >=12h verified, conservative first4h and finalrolling4h floors >27%. OriginalP50 independent204/332, H200headless recovery185/332; thick/raisedslider/highload unresolved. New48asset Release publication remains until exacttarget/tag/payload checks finish. No robot actions.
