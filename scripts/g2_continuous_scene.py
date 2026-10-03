@@ -58,7 +58,7 @@ class G2ContinuousScene:
         assert load_profile in ['constant','sinusoidal','triangular','pulse','mixed'] and load_frequency>0
         self.scale=self.tensor([support_scale]*16+[thumb_scale]*4);self.base_mode='geometric';self.env=self
         assert action_parameterization in ['incremental','bounded-motor-offset']
-        self.action_parameterization=action_parameterization
+        self.action_parameterization=action_parameterization;self.support_delta_coordinates=None
         self.contact_progress_reward=contact_progress_reward
         self.functional_thumb_reward=functional_thumb_reward
         self.stable_progress_reward=stable_progress_reward
@@ -407,6 +407,7 @@ class G2ContinuousScene:
             initial_targets=self.command_target if self.resistance_integration=='solver-brake' else self.target
             self.bridge.takeover(ready,q[ready],initial_targets[ready][:,self.hand_ids],self.cal_object[ready],self.cal_slider[ready])
             if self.pressure_adapter is not None:self.pressure_adapter.handover_anchor(ready)
+            if self.support_delta_coordinates is not None:self.support_delta_coordinates.reset(ready,self.bridge.known.initial[ready],self.cal_object[ready,3:7])
             self.reference.reset(ready,clock_s=self.takeover_frame/30)
             self.reference_pose[ready]=self.rb[ready,self.object_index,:7]
             wrist=self.rb[ready,self.wrist_index]; obj=self.rb[ready,self.object_index]
@@ -466,7 +467,7 @@ class G2ContinuousScene:
         base=self.reference.action(self.bridge.known.initial,self.bridge.known.issued,self.goal,measured_q=self._measurement,clock_s=self.age.float()/30)
         if self.action_parameterization=='bounded-motor-offset':
             from scripts.wuji_bounded_motor_residual import bounded_motor_residual_action
-            proposed=bounded_motor_residual_action(self.reference.last_target,self.bridge.known,residual,action_scale)
+            proposed=self.support_delta_coordinates.action(self.reference.last_target,self.bridge.known,residual,action_scale,self._features[0]) if self.support_delta_coordinates is not None else bounded_motor_residual_action(self.reference.last_target,self.bridge.known,residual,action_scale)
         else:proposed=(base+action_scale*torch.tanh(residual)).clamp(-1,1)
         proposed=torch.where(active[:,None],proposed,torch.zeros_like(proposed))
         executed=torch.where(self.delay[:,None],self.delayed_action,proposed)

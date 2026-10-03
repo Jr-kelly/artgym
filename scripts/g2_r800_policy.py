@@ -31,7 +31,7 @@ class G2R800Policy(FrozenPolicy):
         self.last_encoder_input = None; self.last_observation = None
         assert 0<=thumb_action_gain<=1 and 0<=support_action_gain<=1
         self.thumb_action_gain=thumb_action_gain;self.support_action_gain=support_action_gain
-        self.support_load_features=None;self.support_load_feature_spec=None
+        self.support_load_features=None;self.support_load_feature_spec=None;self.support_delta_coordinates=None
         self.support_latch_after_preparation=False;self.support_command_period=1;self.held_support_logits=None;self.support_takeover_frame=0
         self.residual=None;self.last_public_features=None;self.thumb_reference=None;self.history_features=False;self.support_estimator=None;self.action_parameterization='incremental';self.pressure_adapter=None;self.proprioceptive_pressure_spec=None
         if residual_checkpoint is not None:
@@ -40,6 +40,9 @@ class G2R800Policy(FrozenPolicy):
             self.support_command_period=saved.get('support_command_period',1)
             self.support_latch_after_preparation=saved.get('support_latch_after_preparation',False)
             assert self.support_command_period in [1,5]
+            if saved.get('support_delta_spec') is not None:
+                from scripts.wuji_support_delta_coordinates import SupportDeltaCoordinates
+                self.support_delta_coordinates=SupportDeltaCoordinates(saved['support_delta_spec'],1,self.player.device)
             self.proprioceptive_pressure_spec=saved.get('proprioceptive_pressure_spec')
             assert saved['format']=='wuji-r800-residual-ppo-v1'
             assert saved['student_sha256']==hashlib.sha256(Path(student).read_bytes()).hexdigest()
@@ -81,6 +84,7 @@ class G2R800Policy(FrozenPolicy):
                           pose(slider_local_estimate), self.tips(q), self.geometry].astype(np.float32)
         self.last_action = np.zeros(20, dtype=np.float32)
         self.known.reset(torch.tensor([0], device=self.player.device), self.tensor(target))
+        if self.support_delta_coordinates is not None:self.support_delta_coordinates.reset(torch.tensor([0],device=self.player.device),self.tensor(target),self.tensor(pose(object_local_estimate)[3:7]))
         if self.pressure_adapter is not None:self.pressure_adapter.handover_anchor()
         if self.thumb_reference is not None and self.thumb_reference.measured_hold_reference:
             from scripts.wuji_measured_hold_reference import measured_hold_path
@@ -138,7 +142,7 @@ class G2R800Policy(FrozenPolicy):
                 if self.action_parameterization=='bounded-motor-offset':
                     assert self.thumb_reference is not None
                     from scripts.wuji_bounded_motor_residual import bounded_motor_residual_action
-                    action=bounded_motor_residual_action(self.thumb_reference.last_target,self.known,mean,self.residual_scale)
+                    action=self.support_delta_coordinates.action(self.thumb_reference.last_target,self.known,mean,self.residual_scale,public) if self.support_delta_coordinates is not None else bounded_motor_residual_action(self.thumb_reference.last_target,self.known,mean,self.residual_scale)
                 else:action=(base+self.residual_scale*torch.tanh(mean)).clamp(-1,1)
             action=action.clone();action[:,:16]*=self.support_action_gain;action[:,16:]*=self.thumb_action_gain
             if self.pressure_adapter is not None:

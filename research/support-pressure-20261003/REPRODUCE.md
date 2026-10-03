@@ -4,7 +4,7 @@
 
 ## 环境与已有依赖
 
-需要现有 ArtGym Python 环境、Isaac Gym Preview4、匹配的 PyTorch/CUDA，以及 GPU。当前开发机为 `ssh -p 33024 wangjiarui@10.13.160.5`，四张 H200；本地 RTX4090 用于实际连续视频。H200 当前无图形模式可运行，视频渲染会在进入物理前崩溃，不能把这个问题记成控制失败。
+需要现有 ArtGym Python 环境、Isaac Gym Preview4、匹配的 PyTorch/CUDA，以及 GPU。已授权开发机当前有四张 H200；本地 RTX4090 用于实际连续视频。H200 当前无图形模式可运行，视频渲染会在进入物理前崩溃，不能把这个问题记成控制失败。
 
 从仓库根目录运行，设置 `PYTHONPATH=.:rl_games`、`PYTHONNOUSERSITE=1`、`PYTHONUTF8=1`、`LD_LIBRARY_PATH=<Python环境>/lib`。仿真模块先导入 Isaac Gym 再导入 torch。SSH、gh、rsync 使用系统库环境；可复用 `scripts/host_tool_environment.py`。
 
@@ -42,7 +42,7 @@ python -m scripts.run_wuji_support_demo \
   --output runs/support-pressure-20261003/recovered-continuous
 ```
 
-已记录的配对连续成功例是 `demo/raised1-staged-support-film-v97`；厚14 mm、原承托的成功例是 `demo/thick14-strong750-film-v80`。完整原始命令以相应 `jobs/*/identity.json` 为准；入口重建规划仍需一次实际恢复启动确认。困难名义条件仍因刀身旋转失败，不能用凸起成功例宣称整个目标族完成。
+已记录的配对连续成功例是 `demo/raised1-staged-support-film-v97`；厚14 mm、原承托的成功例是 `demo/thick14-strong750-necessary-family-film-v80`。完整原始命令以相应 `jobs/*/identity.json` 为准；入口重建规划仍需一次实际恢复启动确认。困难名义条件仍因刀身旋转失败，不能用凸起成功例宣称整个目标族完成。
 
 本地渲染时增加 `--video`，生成未经阶段拼接的 `continuous.mp4` 和 `hand-closeup.mp4`；字幕用 `scripts/annotate_wuji_pressure_video.py`。仿真报告包含两轮端点、刀身漂移/旋转和每个实际240 Hz子步接触对法向贡献汇总。求解器阻力容量、模型估计力与实际接触法向力分别标注；尚未完整恢复切向摩擦合力。
 

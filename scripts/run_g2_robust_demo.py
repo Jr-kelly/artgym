@@ -323,6 +323,7 @@ def main():
   report['support_decision_scope']='Knownclock supportresidual held between decisions; thumb30Hz; oneactual issuedhistory update each30Hz'
   report['learned_takeover_seconds']=a.takeover_seconds if a.residual_checkpoint else None
   report['support_latch_after_preparation']=policy.support_latch_after_preparation
+  report['support_delta_coordinates']={k:v for k,v in policy.support_delta_coordinates.spec.items() if k!='reference_actor_state'} if policy.support_delta_coordinates is not None else None
   report['known_task_schedule_seconds']=[16,21,26,31,36]
   report['learned_hold_scope']='If takeover<16, same legal residual commands closed during8–16 and keeps actual history/motor/RNN state into operation; no phase state reset or force regulation'
   report['middle_deflection_support']=middle_support.report() if middle_support else None
