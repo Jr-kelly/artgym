@@ -31,14 +31,16 @@ class G2R800Policy(FrozenPolicy):
         self.last_encoder_input = None; self.last_observation = None
         assert 0<=thumb_action_gain<=1 and 0<=support_action_gain<=1
         self.thumb_action_gain=thumb_action_gain;self.support_action_gain=support_action_gain
-        self.residual=None;self.last_public_features=None;self.thumb_reference=None
+        self.residual=None;self.last_public_features=None;self.thumb_reference=None;self.history_features=False
         if residual_checkpoint is not None:
             from scripts.wuji_robust_learning import ResidualActorCritic
             saved=torch.load(residual_checkpoint,map_location='cpu')
             assert saved['format']=='wuji-r800-residual-ppo-v1'
             assert saved['student_sha256']==hashlib.sha256(Path(student).read_bytes()).hexdigest()
             assert saved['teacher_sha256']==hashlib.sha256(Path(teacher).read_bytes()).hexdigest()
-            self.residual=ResidualActorCritic().to(self.player.device);self.residual.load_state_dict(saved['model']);self.residual.eval()
+            self.history_features=saved.get('history_features',False)
+            dim=170 if self.history_features else 154
+            self.residual=ResidualActorCritic(dim,dim+27).to(self.player.device);self.residual.load_state_dict(saved['model']);self.residual.eval()
             self.residual_scale=torch.tensor(saved['action_scale'],device=self.player.device)
             self.action_base_mode=saved.get('action_base_mode','r800')
             if self.action_base_mode=='geometric':
@@ -80,6 +82,11 @@ class G2R800Policy(FrozenPolicy):
             if self.residual is not None:
                 assert wrist_gravity is not None, 'Residual gravity comes from measured G2 arm FK'
                 public=torch.cat([obs[:,:111],self.known.observed_targets(),action,self.tensor(wrist_gravity)],-1)
+                if self.history_features:
+                    from scripts.wuji_student_interface import legal_history_latent
+                    latent=legal_history_latent(self.player.model.a2c_network.priv_encoder,encoder_input)
+                    assert latent.shape==(1,16)
+                    public=torch.cat([public,latent],-1)
                 self.last_public_features=public.detach().cpu().numpy()[0]
                 base=action if self.action_base_mode=="r800" else torch.zeros_like(action)
                 if self.thumb_reference is not None:base=self.thumb_reference.action(self.known.initial,self.known.issued,self.tensor([goal]))

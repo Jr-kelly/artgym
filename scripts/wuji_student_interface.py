@@ -47,6 +47,23 @@ def tensor_hash(mapping):
  for k,v in sorted(mapping.items()):h.update(k.encode());h.update(v.detach().cpu().numpy().tobytes())
  return h.hexdigest()
 
+def legal_history_latent(encoder,packet):
+ """Float32 SC encoding of the existing legal2076 packet, without RNN steps.
+
+ Reduced-precision batch GEMMs can change the exposed latent enough to fail
+ the original input parity tolerance. Scope precision changes to this extra
+ deterministic encoder call; keep the inherited frozen actor path unchanged.
+ """
+ assert packet.shape[1]==2076
+ matmul=torch.backends.cuda.matmul.allow_tf32;conv=torch.backends.cudnn.allow_tf32
+ try:
+  torch.backends.cuda.matmul.allow_tf32=False;torch.backends.cudnn.allow_tf32=False
+  with torch.no_grad():latent=encoder(packet)
+  assert latent.shape==(len(packet),16)
+  return latent
+ finally:
+  torch.backends.cuda.matmul.allow_tf32=matmul;torch.backends.cudnn.allow_tf32=conv
+
 def install_legal_public(env):
  """Replace current rigidbody tip truth with URDF FK, without changing physics."""
  assert env.policy_obs_dim==111 and env.privileged_obs_dim==21

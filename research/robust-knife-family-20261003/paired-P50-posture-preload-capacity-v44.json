@@ -1,0 +1,60 @@
+{
+  "reports": [
+    "runs/robust-knife-family-20261003/demo/g2-learned-capacity-pulse-v39/report.json",
+    "runs/robust-knife-family-20261003/demo/g2-posture-preload-P50-capacity-v44/report.json"
+  ],
+  "prefix_max_absolute_difference": {
+    "q": 0.0,
+    "arm_q": 0.0,
+    "object": 0.0,
+    "target": 0.0,
+    "slider": 0.0
+  },
+  "rows": [
+    {
+      "full_success": false,
+      "endpoints_mean_last03s_m": [
+        0.04817083146837023,
+        0.04959094234638744,
+        0.04999984842207697,
+        0.049956736258334584
+      ],
+      "operation_body_max_rotation_rad": 0.7403832398208255,
+      "operation_body_max_drift_m": 0.010475154966115952,
+      "operation_thumb_slider_contact_fraction": 0.1048252911813644,
+      "operation_body_contact_fraction": [
+        0.9101497504159733,
+        0.9750415973377704,
+        1.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "full_success": false,
+      "endpoints_mean_last03s_m": [
+        0.04987687348491616,
+        0.049721797100371785,
+        0.048881667045255504,
+        0.04983083262211747
+      ],
+      "operation_body_max_rotation_rad": 0.8637326541974882,
+      "operation_body_max_drift_m": 0.008315058425068855,
+      "operation_thumb_slider_contact_fraction": 0.11980033277870217,
+      "operation_body_contact_fraction": [
+        0.913477537437604,
+        1.0,
+        1.0,
+        0.0,
+        1.0
+      ]
+    }
+  ],
+  "candidate_failure_onsets_s": {
+    "body_stability": 23.4,
+    "height": null,
+    "sustained_thumb_slider_contact_loss": 18.466666666666665
+  },
+  "scope": "Same exact learned model, matched actualTABLE prior control, reference-only developmental comparison; no new learning/independent inference",
+  "conclusion": "Posture-aware thumb-only impedance reference did not solve heavy pulse capacity. Before further force/control redesign, inspect narrow passive-groove timestep sensitivity and support coordination."
+}

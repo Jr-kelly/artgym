@@ -1,0 +1,304 @@
+{
+  "source": "runs/robust-knife-family-20261003/checks/direct-G2-P50-mixed512-v21/report.json",
+  "source_sha256": "d4004befa32b19a86a81131ffad473fcbcd1c1208557678579d78d11df15ae68",
+  "failure_group_geometry_medians": {
+    "None": {
+      "n": 347,
+      "median_W_T_L_sliderlateral_slideraxial_mm": [
+        16.087870742938062,
+        11.376629090728892,
+        135.4053673500272,
+        0.015106913901048562,
+        -21.995637001022665
+      ]
+    },
+    "body unstable/drop": {
+      "n": 112,
+      "median_W_T_L_sliderlateral_slideraxial_mm": [
+        16.456852882397165,
+        13.26133440026137,
+        135.51193714001752,
+        0.16838745335510052,
+        -21.454177893547804
+      ]
+    },
+    "pickup/hold": {
+      "n": 53,
+      "median_W_T_L_sliderlateral_slideraxial_mm": [
+        15.436361128144046,
+        13.280889626033613,
+        135.97179754151546,
+        -0.500453220125926,
+        -21.795220636796206
+      ]
+    }
+  },
+  "one_dimensional_development_bins": [
+    {
+      "feature": "width",
+      "quartiles": [
+        {
+          "range_mm": [
+            14.0,
+            14.905786452930839
+          ],
+          "n": 128,
+          "failures": {
+            "None": 83,
+            "body unstable/drop": 24,
+            "pickup/hold": 21
+          }
+        },
+        {
+          "range_mm": [
+            14.905786452930839,
+            16.07442727696891
+          ],
+          "n": 128,
+          "failures": {
+            "pickup/hold": 17,
+            "body unstable/drop": 21,
+            "None": 90
+          }
+        },
+        {
+          "range_mm": [
+            16.07442727696891,
+            17.021431654824678
+          ],
+          "n": 128,
+          "failures": {
+            "None": 89,
+            "body unstable/drop": 30,
+            "pickup/hold": 9
+          }
+        },
+        {
+          "range_mm": [
+            17.021431654824678,
+            18.0
+          ],
+          "n": 128,
+          "failures": {
+            "None": 85,
+            "pickup/hold": 6,
+            "body unstable/drop": 37
+          }
+        }
+      ]
+    },
+    {
+      "feature": "thickness",
+      "quartiles": [
+        {
+          "range_mm": [
+            10.0,
+            10.867951363494814
+          ],
+          "n": 128,
+          "failures": {
+            "None": 113,
+            "body unstable/drop": 13,
+            "pickup/hold": 2
+          }
+        },
+        {
+          "range_mm": [
+            10.867951363494814,
+            11.827325799317986
+          ],
+          "n": 128,
+          "failures": {
+            "None": 122,
+            "pickup/hold": 5,
+            "body unstable/drop": 1
+          }
+        },
+        {
+          "range_mm": [
+            11.827325799317986,
+            12.841252047027067
+          ],
+          "n": 128,
+          "failures": {
+            "pickup/hold": 6,
+            "body unstable/drop": 14,
+            "None": 108
+          }
+        },
+        {
+          "range_mm": [
+            12.841252047027067,
+            14.0
+          ],
+          "n": 128,
+          "failures": {
+            "None": 4,
+            "pickup/hold": 40,
+            "body unstable/drop": 84
+          }
+        }
+      ]
+    },
+    {
+      "feature": "length",
+      "quartiles": [
+        {
+          "range_mm": [
+            130.0,
+            133.03137699371456
+          ],
+          "n": 128,
+          "failures": {
+            "None": 94,
+            "body unstable/drop": 22,
+            "pickup/hold": 12
+          }
+        },
+        {
+          "range_mm": [
+            133.03137699371456,
+            135.49707944676004
+          ],
+          "n": 128,
+          "failures": {
+            "pickup/hold": 10,
+            "None": 84,
+            "body unstable/drop": 34
+          }
+        },
+        {
+          "range_mm": [
+            135.49707944676004,
+            137.69946319569783
+          ],
+          "n": 128,
+          "failures": {
+            "pickup/hold": 14,
+            "body unstable/drop": 31,
+            "None": 83
+          }
+        },
+        {
+          "range_mm": [
+            137.69946319569783,
+            140.0
+          ],
+          "n": 128,
+          "failures": {
+            "None": 86,
+            "body unstable/drop": 25,
+            "pickup/hold": 17
+          }
+        }
+      ]
+    },
+    {
+      "feature": "slider_lateral",
+      "quartiles": [
+        {
+          "range_mm": [
+            -0.9967097824146467,
+            -0.5451467118862149
+          ],
+          "n": 128,
+          "failures": {
+            "None": 79,
+            "body unstable/drop": 25,
+            "pickup/hold": 24
+          }
+        },
+        {
+          "range_mm": [
+            -0.5451467118862149,
+            -0.02465201485851509
+          ],
+          "n": 128,
+          "failures": {
+            "body unstable/drop": 24,
+            "None": 89,
+            "pickup/hold": 15
+          }
+        },
+        {
+          "range_mm": [
+            -0.02465201485851509,
+            0.5048845336168468
+          ],
+          "n": 128,
+          "failures": {
+            "pickup/hold": 5,
+            "None": 95,
+            "body unstable/drop": 28
+          }
+        },
+        {
+          "range_mm": [
+            0.5048845336168468,
+            0.997028881876724
+          ],
+          "n": 128,
+          "failures": {
+            "pickup/hold": 9,
+            "None": 84,
+            "body unstable/drop": 35
+          }
+        }
+      ]
+    },
+    {
+      "feature": "slider_axial",
+      "quartiles": [
+        {
+          "range_mm": [
+            -27.049517595958445,
+            -24.333782277377523
+          ],
+          "n": 128,
+          "failures": {
+            "None": 86,
+            "body unstable/drop": 27,
+            "pickup/hold": 15
+          }
+        },
+        {
+          "range_mm": [
+            -24.333782277377523,
+            -21.92504718291865
+          ],
+          "n": 128,
+          "failures": {
+            "pickup/hold": 11,
+            "None": 90,
+            "body unstable/drop": 27
+          }
+        },
+        {
+          "range_mm": [
+            -21.92504718291865,
+            -19.761120117795162
+          ],
+          "n": 128,
+          "failures": {
+            "None": 96,
+            "body unstable/drop": 20,
+            "pickup/hold": 12
+          }
+        },
+        {
+          "range_mm": [
+            -19.761120117795162,
+            -17.085400576431702
+          ],
+          "n": 128,
+          "failures": {
+            "None": 75,
+            "pickup/hold": 15,
+            "body unstable/drop": 38
+          }
+        }
+      ]
+    }
+  ],
+  "scope": "Diagnostic grouping of same512 joint randomization development. Dimensions confounded with other random parameters; no causal or independent claim."
+}

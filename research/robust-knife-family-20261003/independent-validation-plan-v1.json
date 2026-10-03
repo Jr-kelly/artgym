@@ -1,0 +1,45 @@
+{
+  "status": "Preregistered; closed heldout assets remain unexecuted until candidate/controller/weight freeze",
+  "platform": "G2+Wuji v1",
+  "start": "Actual tabletop open-hand episode; uninterrupted physical acquisition/hold/operation",
+  "heldout_instances": [
+    "012",
+    "013",
+    "014",
+    "015"
+  ],
+  "candidate": "Select/freeze once using developmental behavior before opening heldout results; identical checkpoint and controller for all heldout conditions, nominal known geometry and once-loaded calibration; no asset-ID input",
+  "core": {
+    "instances": "4 heldouts repeated twice",
+    "seed": 2026100368,
+    "randomization_scale": 1,
+    "load_profile": "triangular",
+    "load_frequency_rad_s": 2.9,
+    "engineering_run_startup_amplitude_max_N": [
+      0.1,
+      0.1
+    ],
+    "scope": "Joint physical geometry + slider location + friction + placement/calibration errors + joint sensor noise/bias + one-control-step latency. 8 actual36s episodes; no outcome-based filtering."
+  },
+  "engineering_capacity": {
+    "instances": "4 heldouts",
+    "seed": 2026100369,
+    "randomization_scale": 1,
+    "load_profile": "pulse",
+    "load_frequency_rad_s": 2.9,
+    "engineering_run_startup_amplitude_max_N": [
+      0.2,
+      0.2
+    ],
+    "scope": "4 further actualTABLE episodes. Separate engineering added-load amplitudes from actual summed force and real unmeasured total resistance."
+  },
+  "sensitivity": "Use predefined height-offset heldout assets if present; explicitly state actual offsets after freeze rather than silently declaring ±1mm coverage. Any absent case requires a declared separate sensitivity condition.",
+  "validity": "Only predeclared physical geometry/task-validity rejection permitted; record rejected, pickup, handover, contact, load, return and body-stability failures. No post-success selection.",
+  "evidence": [
+    "hash frozen code/config/checkpoint/R800/teacher/reference",
+    "initial snapshots and all episodes/traces",
+    "actual continuous video for representative success and representative failures, including all stages",
+    "separate exact-contact-pair solver diagnostics in single-G2 renderer from batched proximity/net-contact proxy"
+  ],
+  "limits": "Representative independent challenge, not statistically reliable full-range robustness; all511+ training geometry checks remain developmental."
+}

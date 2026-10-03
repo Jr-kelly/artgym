@@ -216,3 +216,28 @@ R1/S1从P200继续实际G2联合适配，2048环境，seed2026100359，绝对upd
 新全手抓姿保留0.2rad拇指base几何余量，但初版v40实际取刀失败。补充完整抬升检查发现闲置无名指会扫入桌面边缘；原闭合位置和抬升终点检查漏掉此段，因而不能把v40失败单独归因为压紧不足。6mm抬升耦合压紧路径被拒绝，未运行。闲置手指停车、完整121点抬升证书及可选桌面约束静态力求解已实现；桌面约束静态力求解未找到可行解，输出保留但未执行。新几何/目标须分别通过路径检查、实际取刀、带阻力伸缩，不能以静态预测1.1N算作实测压力或成功。
 
 所有启动、终止、源码pin、配置、权重及证据见DECISIONS.jsonl、STATE.json和jobs/*/{identity,execution,result}.json。阶段完成时恢复checkpoint包含Adam/RNG；中间检查不等于最终独立验证。个人照片/操作视频仅本地用于需求理解，其原文件不进入公开交付。
+
+
+## 提前持稳接管与实际G2混合阻力训练
+
+`--takeover-seconds 12`让同一个学习残差在机械臂完成抬升后接管12–16秒持稳，期间任务命令仍为缩回0，16秒开始原40mm/0两轮指令。接管使用之前实际采集50帧，之后历史、电机目标和RNN连续保留，16秒没有物理状态重置。原16秒默认保持。v17八个名义实际完整回合完成，并通过测量/已知字段与电机目标接口检查（2.4e-7rad）；原始154维严格门槛仍失败，仅batch核差异记录。v43单G2 P50提前接管名义完整demo完成，拇指滑块接触100%、刀身旋转0.105rad。它是接口/名义行为证据，不是机制学习优势。
+
+实际场景现可使用`--load-profile mixed`：每回合固定选择constant/sinusoidal/triangular/pulse之一，相位、幅值与起动/局部卡槽随机化；mixed角频率1.3–2.3 rad/s。profile、频率和阻力不送入actor。先前日志个别frequency_hz字段误用了单位；实现中的sin(w*t)使w单位为rad/s，后续配置明确记录。
+
+U1/V1共用P50、seed2026100360、2048实际G2环境、随机化1、普通奖励、支撑/拇指残差0.75、load/detent幅值上限0.2/0.2N、mixed profile。唯一机制差异是接管16s或12s；计划绝对update1050（新增1000），以冻结行为检查决定是否继续。两组保存完整模型/Adam/RNG，原Kp/关节/总力矩限制和真实重力不变。训练拟合与独立验证分开；独立组合预先记录于`independent-validation-plan-v1.json`，尚未执行。
+
+原R1/S1在512开发检查和较大阻力容量下均无明确改善，已正常停机并恢复最终checkpoint549/551（各约2290万新增实际交互），哈希和恢复状态见`completed-direct-RS-training.json`。不得把计划1200写成已完成。收拢闲置无名指的v42几何合格但实际取刀仍失败；受载目标与桌面约束的联合抓姿求解进行中。姿态相关Jacobian预载是独立控制假设；未通过手指间隙检查的目标不执行，不能以名义力模型冒充实测恒力。
+
+
+## 合法历史编码的直接残差输入（开发候选）
+
+U/V混合扰动512开发回合完成339/348，原P50为347；全部登记初态字段逐位一致。主要失败仍为取刀/持稳与刀身失稳，未显示机制优势，已正常停止于509/508更新。完整Adam/RNG恢复见`completed-direct-UV-training.json`。
+
+新`--history-features`只为实际G2残差追加既有SC的16维编码，输入仍是实际50×40关节/动作历史、固定初始估计55、已发目标20、已知任务1。没有当前物体、滑块、接触或负载ID。actor170、critic197，冻结encoder不训练；额外编码调用局部关闭TF32，避免批量核差异破坏新增字段的一致性，继承的冻结actor调用保持原实现。`expand_wuji_history_checkpoint`用零列扩展actor/critic及Adam矩，原随机数状态保留，新增训练为0；CPU首层检查误差0。必须通过实际桥接再训练，不把这一步称作进度估计已经有效。
+
+```bash
+python -m scripts.expand_wuji_history_checkpoint --checkpoint runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth --output runs/robust-knife-family-20261003/train/recovered-history-P50/history_adapted.pth
+python -m scripts.check_g2_continuous_scene --output runs/robust-knife-family-20261003/checks/recovered-history-bridge --envs 8 --nominal --checkpoint runs/robust-knife-family-20261003/train/recovered-history-P50/history_adapted.pth --compatibility-gate deployable
+```
+
+半步长v45仍失败，刀身先失稳、随后丢滑块接触，与240Hz压力容量失败的次序不同。被动力乘离散位移加势能差是积分求积诊断，正残差本身不能证明净物理能量注入或实物容量上界；原始报告保留，后续runner已明确该限制。

@@ -1,0 +1,60 @@
+{
+  "rows": [
+    {
+      "name": "direct-G2-P50-mixed512-v21",
+      "completed": 347,
+      "n": 512,
+      "checkpoint_sha256": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714",
+      "failures": {
+        "pickup/hold": 53,
+        "null": 347,
+        "body unstable/drop": 112
+      },
+      "pickup_valid": 459,
+      "fall": 126
+    },
+    {
+      "name": "direct-G2-U300-mixed512-v19",
+      "completed": 339,
+      "n": 512,
+      "checkpoint_sha256": "9f9b8ed153a69956f3847cbf97cb129aad9f51a748cf451ae8ff7c26ae77542f",
+      "failures": {
+        "pickup/hold": 55,
+        "null": 339,
+        "body unstable/drop": 116,
+        "extension": 2
+      },
+      "pickup_valid": 457,
+      "fall": 128
+    },
+    {
+      "name": "direct-G2-V300-mixed512-v20",
+      "completed": 348,
+      "n": 512,
+      "checkpoint_sha256": "bdfa8ca7ca469514fa7d4232d6d7964cbe7b388a00fd5e8dbd2e9c087348354b",
+      "failures": {
+        "pickup/hold": 52,
+        "null": 348,
+        "body unstable/drop": 112
+      },
+      "pickup_valid": 460,
+      "fall": 131
+    }
+  ],
+  "initial_fields_exactly_equal": {
+    "root": true,
+    "dof": true,
+    "materials": true,
+    "observation_bias": true,
+    "delay": true,
+    "cal_object": true,
+    "cal_slider": true,
+    "load_amplitude": true,
+    "detent_amplitude": true,
+    "load_phase": true,
+    "load_profile_ids": true,
+    "load_frequencies": true
+  },
+  "scope": "Frozen development:512 joint-randomized actual tabletop episodes per candidate, not independent validation",
+  "conclusion": "No material advantage of mixed-resistance-only or earlier learned hold; residual support/contact failure persists. Retire U/V and preserve recovery; next legally expose existing frozen16D history encoder to residual."
+}

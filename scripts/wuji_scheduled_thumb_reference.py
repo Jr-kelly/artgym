@@ -12,7 +12,11 @@ class ScheduledThumbReference:
         assert specification['all_feasible']
         rows = specification['rows']
         self.shifts = torch.tensor([r['shift_m'] for r in rows], device=device)
-        self.q = torch.tensor([r['q_thumb'] for r in rows], device=device)
+        if specification.get('posture_preload'):
+            assert specification['motor_geometry_passed'],'Rejected nominal motor geometry'
+            self.q = torch.tensor([r['q_thumb_preloaded'] for r in rows], device=device)
+        else:
+            self.q = torch.tensor([r['q_thumb'] for r in rows], device=device)
         self.duration = float(specification.get('travel_seconds', 4.))
         self.dt = control_dt
         self.age = torch.zeros(n, device=device)

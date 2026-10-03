@@ -1,0 +1,22 @@
+{
+  "full_success": false,
+  "operation_thumb_slider_contact_fraction": 0.5490848585690515,
+  "operation_body_max_rotation_rad": 2.953651402160079,
+  "failure_onsets_s": {
+    "body_stability": 23.633333333333336,
+    "height": 34.0,
+    "sustained_thumb_slider_contact_loss": 24.0
+  },
+  "integration_diagnostics": {
+    "physics_hz": 480,
+    "motor_pd_hz": 240,
+    "policy_history_hz": 30,
+    "passive_groove_work_J": 0.03027939824869355,
+    "passive_startup_work_J": -7.810160918359905e-05,
+    "total_passive_discrete_work_plus_potential_change_J": 0.03147453618424512,
+    "maximum_positive_passive_discrete_energy_residual_J": 0.03149449085405235,
+    "groove_potential_depth_J": 0.00075,
+    "scope": "Evaluation-only sum of held passive force times actual substep displacement plus analytical potential change; zero for exact conservative integration. Positive residual indicates discretization work, not actuator work. Original passive profiles and motors unchanged."
+  },
+  "scope": "480Hz passive/contact integration development, unchanged240Hz motors and30Hz policy; quadrature residual is not proof of net physical energy creation"
+}

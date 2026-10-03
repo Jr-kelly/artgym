@@ -1,0 +1,21 @@
+{
+  "full_success": true,
+  "methods": "Motor-only scripted continuous-IK approach/close/lift; finite-torque gravity-compensated arm/hand; Scheduled calibrated rolling-thumb reference plus learned bounded residual using R800 legal features from12s; operation starts16s with once-loaded relative-grip calibration estimate",
+  "endpoints_mean_last03s_m": [
+    0.03441438636380351,
+    1.655684577094184e-08,
+    0.03482829577599963,
+    1.7343295945061578e-07
+  ],
+  "operation_body_max_drift_m": 0.0013603069819509983,
+  "operation_body_max_rotation_rad": 0.10530425896541849,
+  "operation_thumb_slider_contact_fraction": 1.0,
+  "learned_takeover_seconds": 12.0,
+  "weight_sha256": {
+    "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth": "bbf61592721300b1cf053de8246898a69989ed102b7a034da6fb47cc9a541dcd",
+    "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+    "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth": "73ccd0bd130364468d4ba02140f102384206ef9916a9d1633472590acac41714"
+  },
+  "report": "runs/robust-knife-family-20261003/demo/g2-early-hold-P50-nominal-v43/report.json",
+  "scope": "Nominal actual TABLE bridge development; trained P50 with common geometric reference, learner starts12s, no state/history reset at16. Not proof of earlier-hold learning or independent generalization."
+}

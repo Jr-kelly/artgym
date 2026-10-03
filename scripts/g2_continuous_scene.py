@@ -33,12 +33,17 @@ def gym_transform(position,quaternion=(0,0,0,1)):
 class G2ContinuousScene:
     def __init__(self,n=8,seed=2026100356,randomization_scale=0.,instances=None,
                  load_max=.1,detent_max=.1,contact_progress_reward=0.,reference_spec=None,
-                 support_scale=.25,thumb_scale=.25):
+                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False):
         self.n=n;self.device='cuda:0';self.seed=seed
+        self.history_features=history_features;self.public_dim=170 if history_features else 154
         # Use float32 convolution rather than TF32 for deployment/batch parity.
         torch.backends.cudnn.allow_tf32=False
         torch.manual_seed(seed);self.rng=np.random.default_rng(seed)
         self.randomization_scale=randomization_scale;self.load_max=load_max;self.detent_max=detent_max
+        assert 12<=takeover_seconds<=16 and abs(takeover_seconds*30-round(takeover_seconds*30))<1e-6
+        self.takeover_frame=round(takeover_seconds*30)
+        self.load_profile=load_profile;self.load_frequency=load_frequency
+        assert load_profile in ['constant','sinusoidal','triangular','pulse','mixed'] and load_frequency>0
         self.scale=self.tensor([support_scale]*16+[thumb_scale]*4);self.base_mode='geometric';self.env=self
         self.contact_progress_reward=contact_progress_reward
         self.cfg=configuration('wuji_geometry',n,['object=knife_wuji_real_size_20261002','hand=wuji_paper_official_actuator','+task.env.geometryRound=real-size-student-adaptation-20261002'],train='wujiAcquisitionSAPG',seed=seed)
@@ -57,6 +62,8 @@ class G2ContinuousScene:
         self.delay=torch.zeros(n,device=self.device,dtype=torch.bool)
         self.delayed_action=torch.zeros_like(self.last_action)
         self.load_amplitude=torch.zeros(n,device=self.device);self.load_phase=torch.zeros_like(self.load_amplitude)
+        self.load_profile_ids=torch.full((n,),['constant','sinusoidal','triangular','pulse','mixed'].index(load_profile),device=self.device,dtype=torch.long)
+        self.load_frequencies=torch.full((n,),float(load_frequency),device=self.device)
         self.detent_amplitude=torch.zeros_like(self.load_amplitude)
         self.load_force=torch.zeros_like(self.load_amplitude)
         self.cal_object=torch.zeros((n,7),device=self.device);self.cal_slider=self.cal_object.clone()
@@ -220,6 +227,9 @@ class G2ContinuousScene:
                     self.gym.set_actor_rigid_shape_properties(self.envs[i],actor,shapes)
                 self.material_tensor[i]=self.tensor([hand_friction,knife_friction])
                 self.actual_materials[str(i)]={'hand':hand_friction,'knife':knife_friction}
+        if self.load_profile=='mixed':
+            self.load_profile_ids[ids]=torch.randint(0,4,(k,),device=self.device)
+            self.load_frequencies[ids]=1.3+torch.rand(k,device=self.device)
         self.bridge.reset(ids,self.opened[None].expand(k,-1),self.opened[None].expand(k,-1),self.cal_object[ids],self.cal_slider[ids])
         self.peak[ids]=0.;self.max_drift[ids]=0.;self.max_rotation[ids]=0.;self.min_hold_height[ids]=float('inf')
         self.endpoints[ids]=0.;self.contact_steps[ids]=0.;self.operation_steps[ids]=0.;self.closed_at_handover[ids]=False
@@ -249,15 +259,24 @@ class G2ContinuousScene:
         self.refresh();q=self.dof[:,self.hand_ids,0].clone()
         if self.randomization_scale:q=q+self.observation_bias+torch.randn_like(q)*(.002*self.randomization_scale)
         self._measurement=q;self.bridge.record(q,self.last_action)
-        ready=(self.age==480).nonzero(as_tuple=False).flatten()
+        ready=(self.age==self.takeover_frame).nonzero(as_tuple=False).flatten()
         if len(ready):
             self.bridge.takeover(ready,q[ready],self.target[ready][:,self.hand_ids],self.cal_object[ready],self.cal_slider[ready])
             self.reference_pose[ready]=self.last_held_pose[ready]
-            self.closed_at_handover[ready]=(self.dof[ready,27,0]-self.lower[ready]).abs()<.008
-        self.policy_active=self.age>=480
+        operation_ready=(self.age==480).nonzero(as_tuple=False).flatten()
+        if len(operation_ready):
+            self.reference_pose[operation_ready]=self.last_held_pose[operation_ready]
+            self.closed_at_handover[operation_ready]=(self.dof[operation_ready,27,0]-self.lower[operation_ready]).abs()<.008
+        self.policy_active=self.age>=self.takeover_frame
         phase=((self.age-480).clamp_min(0)//150)%2
-        self.goal=torch.where(self.policy_active&(phase==0),torch.full_like(self.load_amplitude,.04),torch.zeros_like(self.load_amplitude))
+        self.goal=torch.where((self.age>=480)&(phase==0),torch.full_like(self.load_amplitude,.04),torch.zeros_like(self.load_amplitude))
         public=self.bridge.features(q,self.goal,self.dof[:,self.arm_ids,0],self.policy_active)
+        if self.history_features:
+            latent=q.new_zeros((self.n,16));ids=self.policy_active.nonzero(as_tuple=False).flatten()
+            if len(ids):
+                from scripts.wuji_student_interface import legal_history_latent
+                latent[ids]=legal_history_latent(self.player.model.a2c_network.priv_encoder,self.bridge.last_encoder_input[ids])
+            public=torch.cat([public,latent],-1)
         wrist=self.rb[:,self.wrist_index];inverse=quat_conjugate(wrist[:,3:7]);obj=self.rb[:,self.object_index];slider=self.rb[:,self.slider_index]
         relative_object=torch.cat([quat_apply(inverse,obj[:,:3]-wrist[:,:3]),quat_mul(inverse,obj[:,3:7])],-1)
         relative_slider=torch.cat([quat_apply(inverse,slider[:,:3]-wrist[:,:3]),quat_mul(inverse,slider[:,3:7])],-1)
@@ -267,7 +286,7 @@ class G2ContinuousScene:
         assert truth.shape==(self.n,21)
         contact=(self.contact[:,self.pad_indices].norm(dim=-1)>.01).float()
         critic=torch.cat([public,truth,contact,self.load_force[:,None]],-1)
-        assert critic.shape==(self.n,181)
+        assert public.shape==(self.n,self.public_dim) and critic.shape==(self.n,self.public_dim+27)
         self._features=(public.detach(),critic.detach())
         return self._features
 
@@ -283,7 +302,7 @@ class G2ContinuousScene:
     def step(self,residual,action_scale=None,reset_failed=True,reset_finished=True):
         self.features()
         if action_scale is None:action_scale=self.scale
-        active=self.policy_active.clone();oldage=self.age.clone()
+        active=self.policy_active.clone();oldage=self.age.clone();operation_active=oldage>=480
         base=self.reference.action(self.bridge.known.initial,self.bridge.known.issued,self.goal)
         proposed=(base+action_scale*torch.tanh(residual)).clamp(-1,1)
         proposed=torch.where(active[:,None],proposed,torch.zeros_like(proposed))
@@ -306,7 +325,14 @@ class G2ContinuousScene:
             torque=self.kp*(self.target-self.dof[:,:27,0])-self.kd*self.dof[:,:27,1]+gravity
             self.forces[:,:27]=torch.maximum(torch.minimum(torque,self.effort),-self.effort)
             v=self.dof[:,27,1];q=self.dof[:,27,0]-self.lower;t=oldage.float()/30+substep/240
-            amplitude=self.load_amplitude*(.25+.75*torch.sin(1.7*t+self.load_phase).square())
+            angle=self.load_frequencies*t+self.load_phase
+            factor=.25+.75*torch.sin(angle).square()
+            factor=torch.where(self.load_profile_ids==0,torch.ones_like(factor),factor)
+            triangle=.25+.75*(2*torch.remainder(angle/(2*np.pi),1)-1).abs()
+            factor=torch.where(self.load_profile_ids==2,triangle,factor)
+            pulse=torch.where(torch.sin(angle)>.5,torch.ones_like(factor),torch.full_like(factor,.25))
+            factor=torch.where(self.load_profile_ids==3,pulse,factor)
+            amplitude=self.load_amplitude*factor
             run=-amplitude*torch.tanh(v/.002)
             start=-self.detent_amplitude*torch.sin((q/.004).clamp(0,1)*np.pi)*((q>=0)&(q<=.004)).float()
             x=(q-.021)/.0015
@@ -327,15 +353,15 @@ class G2ContinuousScene:
             gate=torch.exp(-(drift/.01).square()-(rotation/.25).square())
             reward+=self.contact_progress_reward*proximity*gate*((previous_error-error)/.002).clamp(-1,1)
         reward=torch.where(active,reward,torch.zeros_like(reward))
-        self.peak[active]=torch.maximum(self.peak[active],travel[active])
-        self.max_drift[active]=torch.maximum(self.max_drift[active],drift[active])
-        self.max_rotation[active]=torch.maximum(self.max_rotation[active],rotation[active])
-        self.contact_steps[active]+=(proximity[active]>.5).float();self.operation_steps[active]+=1
+        self.peak[operation_active]=torch.maximum(self.peak[operation_active],travel[operation_active])
+        self.max_drift[operation_active]=torch.maximum(self.max_drift[operation_active],drift[operation_active])
+        self.max_rotation[operation_active]=torch.maximum(self.max_rotation[operation_active],rotation[operation_active])
+        self.contact_steps[operation_active]+=(proximity[operation_active]>.5).float();self.operation_steps[operation_active]+=1
         dropped=active&(height<.78)
         self.fell|=dropped
         reward=torch.where(dropped,torch.full_like(reward,-8.),reward)
         phase=((oldage-480).clamp_min(0)//150).clamp(0,3)
-        sample=active&(((oldage-480)%150)>=141)&(oldage<1080)
+        sample=operation_active&(((oldage-480)%150)>=141)&(oldage<1080)
         sampled=sample.nonzero(as_tuple=False).flatten()
         if len(sampled):self.endpoints[sampled,phase[sampled]]+=travel[sampled]/9
         self.age+=1;self.transitions+=self.n
