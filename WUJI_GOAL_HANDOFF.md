@@ -18,42 +18,32 @@
   "baseline_github_commit": "6afe8270735abf91b86b001803150e542d720111",
   "baseline_release": "wuji-g2-continuous-knife-robust-20261003-v1",
   "goal_complete": false,
-  "phase": "Short matched legal support-load representation training",
+  "phase": "One legal estimated normalmoment-coordination physical pilot",
   "private_media_root": "/tmp/wuji-support-pressure-attachment-20261003",
   "remote_gpu_count_verified": 4,
   "remote_gpu_inventory_utc": "2026-10-03T07:29:00+00:00",
   "no_subagents": true,
   "no_real_robot_commands": true,
   "last_event": {
-    "utc": "2026-10-03T14:51:49.042790+00:00",
-    "event": "rolling4h_utilization_v108_recorded",
-    "evidence": "research/support-pressure-20261003/actual-rolling4h-resource-summary-v108.json",
-    "conclusion": "Currentweighted4h actualsample summary computed with restartgap explicit, no inventedutilization; usefuljobs only",
-    "next": "Continue substantive training/comparisons and deliver recoverable snapshots"
+    "utc": "2026-10-03T16:06:13.822785+00:00",
+    "event": "preparation_bridge_v117_verified_and_reproduce_v121_written",
+    "evidence": [
+      "runs/support-pressure-20261003/preparation-bridge-contract-v117/report.json",
+      "research/support-pressure-20261003/REPRODUCE.md"
+    ],
+    "conclusion": "Fouractualprefixes contractpass, commanderror1.5635e-6rad, supportlatchedtargets29frames unchangedwithin2e-7rad, actualhistory510; incompleteoperationnotfullsuccess. Restoreguide distinguishes baseline dependencies/fullstates/learnedpilot/physicalcases/legaloffline/hardwareunknowns.",
+    "next": "Publish recoverable source/result snapshot while pairedtraining remainsrunning"
   },
-  "next": "Continue substantive training/comparisons and deliver recoverable snapshots",
+  "next": "Publish recoverable source/result snapshot while pairedtraining remainsrunning",
   "active_remote_launcher_pid": null,
   "active_local_training_pid": null,
   "remote_connection_status": "Persistent home SSH verified 2026-10-03 08:33 UTC; four H200 available",
   "active_local_video_launcher_pid": null,
   "github_branch": "feat/wuji-support-pressure-20261003",
-  "github_commit": "da3148f1271aa08d5e944db99a8418aa344dae4e",
-  "local_scientific_commit": "c82eeb841dc0c3da578e7553832b91339231aaa8",
+  "github_commit": "b2a217d83a40a71cbba179c0006e9a9b49472a5a",
+  "local_scientific_commit": "916613c7e41e32f87bdb036b04bbb3595deffb5a",
   "remote_root": "/home/wangjiarui/artgym-support-pressure-20261003",
-  "active_remote_training_jobs": [
-    {
-      "pid": 3049,
-      "variant": "baseline154-v107"
-    },
-    {
-      "pid": 3050,
-      "variant": "load163-v107"
-    },
-    {
-      "pid": 3510,
-      "variant": "load163wide-v107"
-    }
-  ],
+  "active_remote_training_jobs": [],
   "active_remote_demo_launcher_pid": null,
   "active_remote_variant_launcher_pid": null,
   "active_remote_learned_check_launcher_pid": null,
@@ -64,10 +54,14 @@
   "active_remote_joint_estimate_launcher_pid": null,
   "active_remote_pressure_tier_launcher_pid": null,
   "active_remote_resource_sampler_pid": 476,
-  "active_remote_training_launcher_pids": [],
+  "active_remote_training_launcher_pids": [
+    7118,
+    7119,
+    7120
+  ],
   "remote_jobs_status_utc": "2026-10-03T12:17:00Z",
   "active_remote_jobs": null,
-  "remote_process_verification_utc": "2026-10-03T14:43:57Z",
+  "remote_process_verification_utc": "2026-10-03T15:47:30Z",
   "active_remote_native_launcher_pids": []
 }
 ```

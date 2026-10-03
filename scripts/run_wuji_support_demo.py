@@ -17,6 +17,7 @@ def main():
     p.add_argument('--knife-asset',type=pathlib.Path,required=True)
     p.add_argument('--output',type=pathlib.Path,required=True)
     p.add_argument('--video',action='store_true')
+    p.add_argument('--takeover-seconds',type=float,default=16.,help='Actual known-clock preparation after completedtransfer; loadedoperation still16s')
     p.add_argument('--pressure-config',type=pathlib.Path)
     p.add_argument('--stroke-support',action='store_true',help='Development candidate, not established improvement')
     p.add_argument('--support-layout',choices=['original','brace','staged'],default='original',help='Public-estimate contact planning: original or experimental postlift brace/withdraw-cross-recontact. Label planning fallbacks; never uses physicalasset ID.')
@@ -56,7 +57,7 @@ def main():
     cmd=[sys.executable,'-m','scripts.run_g2_robust_demo','--output',str(output/'continuous'),
          '--grasp-plan',str(output/'motor-plan.json'),'--support-pressure-config',str(output/'support.json'),
          '--thumb-reference-override',str(output/'reference.json'),'--knife-asset',str(a.knife_asset.resolve()),
-         '--residual-checkpoint',str(a.checkpoint.resolve()),'--seconds','36','--dx=-.1985','--dy=.05','--yaw=0',
+         '--residual-checkpoint',str(a.checkpoint.resolve()),'--takeover-seconds',str(a.takeover_seconds),'--seconds','36','--dx=-.1985','--dy=.05','--yaw=0',
          '--slider-face','up','--table-calibration',str(OLD/'functional-side-edge-under-support-v6/localization.json'),
          '--acquisition-path',str(OLD/'functional-side-edge-under-support-lateral-v3/acquisition-path.json'),
          '--handover-calibration',str(OLD/'handover-from-v25-v1.json'),

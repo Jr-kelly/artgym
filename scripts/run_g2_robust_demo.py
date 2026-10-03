@@ -32,7 +32,9 @@ def main():
  support_spec=json.loads(a.support_pressure_config.read_text()) if a.support_pressure_config else None
  if support_spec:
   assert a.grasp_plan
-  if a.takeover_seconds<16:assert policy.thumb_reference is not None and policy.thumb_reference.preload_schedule is not None
+  if a.takeover_seconds<16:
+   completed=max(support_spec["transition_seconds"][-1],support_spec.get("motor_waypoints",[dict(time_s=0)])[-1]["time_s"])
+   assert a.takeover_seconds>=completed+2/30,"Learned preparation must follow the complete planned support transfer"
   first,last=support_spec['transition_seconds'];assert 12<=first<last<=16-50/30
   operating_closed=np.array(support_spec.get('post_lift_target_q',closed),dtype=float)
   assert operating_closed.shape==(20,)
@@ -42,7 +44,9 @@ def main():
  post_lift_interval=plan.get('post_lift_preload_seconds') if a.grasp_plan else None
  lift_preload_height=plan.get('lift_preload_height_m') if a.grasp_plan else None
  assert 8<=a.takeover_seconds<=16 and abs(a.takeover_seconds*30-round(a.takeover_seconds*30))<1e-6
- if a.takeover_seconds<16:assert a.residual_checkpoint and not a.thumb_script and not post_lift_interval and not lift_preload_height,'Earlier learned lift/hold only supports the fixed valid original motor prefix'
+ if a.takeover_seconds<16:
+  assert a.residual_checkpoint and not a.thumb_script and not lift_preload_height
+  assert not post_lift_interval or a.takeover_seconds>=post_lift_interval[-1]+2/30,'Learned preparation must not interrupt planned postlift transfer'
  if lift_preload_height:assert a.acquisition_path and not post_lift_interval and 0<=lift_preload_height[0]<lift_preload_height[1]<=.10
  if post_lift_interval:
   assert a.acquisition_path and 12<=post_lift_interval[0]<post_lift_interval[1]<=16-50/30,'Post-lift preload must leave50 real constant-target frames before policy takeover'
@@ -82,7 +86,10 @@ def main():
   if pressure_spec.get('control')=='index-support-retention':
    from scripts.wuji_index_support_retention import IndexSupportRetention
    adapter=IndexSupportRetention
-  if pressure_spec.get('control')=='support-load-share':
+  if pressure_spec.get('control')=='support-moment-retention':
+   from scripts.wuji_support_moment_retention import SupportMomentRetention
+   policy.pressure_adapter=SupportMomentRetention(pressure_spec,policy_relative[:3,1],np.array(cfg.hand.dof_props.stiffness),np.array(cfg.hand.dof_props.damping),policy_relative)
+  elif pressure_spec.get('control')=='support-load-share':
    from scripts.wuji_support_load_share import SupportLoadShare
    policy.pressure_adapter=SupportLoadShare(pressure_spec,policy_relative[:3,1],np.array(cfg.hand.dof_props.stiffness),np.array(cfg.hand.dof_props.damping))
   else:policy.pressure_adapter=adapter(pressure_spec,policy_relative[:3,1],np.array(cfg.hand.dof_props.stiffness))
@@ -281,6 +288,8 @@ def main():
     gym.refresh_dof_state_tensor(sim);gym.refresh_rigid_body_state_tensor(sim);gym.refresh_net_contact_force_tensor(sim);row=dict(observed_q=q.copy(),desired_script_shift_m=shift if taken and thumb_script is not None else np.nan,time=t+1/a.physics_hz,q=dof[hand,0].numpy().copy(),arm_q=dof[arm,0].numpy().copy(),target=target.numpy().copy(),applied_target=physical_target.numpy().copy(),action=act.copy(),raw_base_action=policy.last_raw_action.copy() if taken else np.zeros(20,dtype=np.float32),object=rb[oid].numpy().copy(),wrist=rb[wrist].numpy().copy(),slider=float(dof[sid,0]),slider_velocity=float(dof[sid,1]),load=load,dissipative_load=run_load,passive_groove_load=start_load+groove_load,torque=force[:27].numpy().copy(),hand_contact=contact[:len(rbnames)].numpy().copy(),knife_contact=contact[[oid,oid+1]].numpy().copy(),pad_poses=rb[[rbnames.index('hand_r_'+finger+'_pad_link') for finger in ['thumb','index','middle','ring','pinky']]].numpy().copy(),estimated_thumb_pressure_N=policy.pressure_adapter.last_estimate if policy.pressure_adapter is not None else np.nan,proprioceptive_thumb_offset_rad=policy.pressure_adapter.offset.copy() if policy.pressure_adapter is not None else np.zeros(4),solver_brake_capacity_N=brake_capacity,scheduled_progress_lag_m=float(policy.thumb_reference.last_progress_lag_m[0]) if taken and policy.thumb_reference is not None else np.nan,scheduled_pacing_rate=float(policy.thumb_reference.last_pacing_rate[0]) if taken and policy.thumb_reference is not None else np.nan,middle_support_target_rad=middle_support.target if middle_support else np.nan,middle_support_filtered_lag_rad=middle_support.lag if middle_support else np.nan,middle_support_state=middle_support.state if middle_support else 'disabled',middle_regulated_target_rad=middle_regulator.target if middle_regulator else np.nan,middle_regulated_lag_rad=middle_regulator.lag if middle_regulator else np.nan,phase=0 if t<5 else 1 if t<8 else 2 if t<12 else 3 if t<16 else 4);rows.append(row)
     row.update(pair_diagnostics(t+1/a.physics_hz))
     row['legal_support_load_features']=policy.support_load_features.features()[0].cpu().numpy().copy() if policy.support_load_features is not None else np.zeros(9)
+    row['estimated_contact_normal_moment_proxy_Nm']=getattr(policy.pressure_adapter,'estimated_moment_Nm',np.nan)
+    row['estimated_contact_moment_error_proxy_Nm']=getattr(policy.pressure_adapter,'moment_error_Nm',np.nan)
     row['estimated_support_normal_proxy_N']=getattr(policy.pressure_adapter,'last_support_proxy',np.full(3,np.nan)).copy()
     row['support_load_offset_rad']=getattr(policy.pressure_adapter,'motor_offset',np.zeros(20)).copy()
     row['estimated_index_support_proxy_N']=getattr(policy.pressure_adapter,'last_index_estimate',np.nan)
@@ -313,11 +322,12 @@ def main():
   report['support_command_period_frames']=policy.support_command_period
   report['support_decision_scope']='Knownclock supportresidual held between decisions; thumb30Hz; oneactual issuedhistory update each30Hz'
   report['learned_takeover_seconds']=a.takeover_seconds if a.residual_checkpoint else None
+  report['support_latch_after_preparation']=policy.support_latch_after_preparation
   report['known_task_schedule_seconds']=[16,21,26,31,36]
   report['learned_hold_scope']='If takeover<16, same legal residual commands closed during8–16 and keeps actual history/motor/RNN state into operation; no phase state reset or force regulation'
   report['middle_deflection_support']=middle_support.report() if middle_support else None
   report['middle_load_lag_regulation']=middle_regulator.report() if middle_regulator else None
-  report['staged_preload']=dict(seconds=post_lift_interval,issued_arm_lift_height_interval_m=lift_preload_height,scope='Known motor targets coupled to issued-arm FK lift height or postlift clock; no live object/slider/contact, physical-state write or force regulation. Final full lift leaves≥50 actual constant-target frames before takeover') if post_lift_interval or lift_preload_height else None
+  report['staged_preload']=dict(seconds=post_lift_interval,issued_arm_lift_height_interval_m=lift_preload_height,scope=('Known motor targets; no live object/slider/contact or physical-state write. Learned preparation follows completed transfer; actual issued-command history continues' if a.takeover_seconds<16 else 'Known motor targets; final full lift leaves≥50 actual constant-target frames before takeover')) if post_lift_interval or lift_preload_height else None
   report.update(operation_evaluated=not a.grasp_only and a.seconds>=36,endpoints_mean_last03s_m=endpoints,diagnostic='Scheduled four5s stages; final0.3s mean >25mm extend and <8mm return on both cycles; no truth-triggered switching')
   if held.any() and opmask.any():
    handover_i=np.flatnonzero(held)[-1];op=trace['object'][opmask];origin=trace['object'][handover_i];drift=np.linalg.norm(op[:,:3]-origin[:3],axis=-1);rot=(Rotation.from_quat(origin[3:7]).inv()*Rotation.from_quat(op[:,3:7])).magnitude()

@@ -32,12 +32,13 @@ class G2R800Policy(FrozenPolicy):
         assert 0<=thumb_action_gain<=1 and 0<=support_action_gain<=1
         self.thumb_action_gain=thumb_action_gain;self.support_action_gain=support_action_gain
         self.support_load_features=None;self.support_load_feature_spec=None
-        self.support_command_period=1;self.held_support_logits=None;self.support_takeover_frame=0
+        self.support_latch_after_preparation=False;self.support_command_period=1;self.held_support_logits=None;self.support_takeover_frame=0
         self.residual=None;self.last_public_features=None;self.thumb_reference=None;self.history_features=False;self.support_estimator=None;self.action_parameterization='incremental';self.pressure_adapter=None;self.proprioceptive_pressure_spec=None
         if residual_checkpoint is not None:
             from scripts.wuji_robust_learning import ResidualActorCritic
             saved=torch.load(residual_checkpoint,map_location='cpu')
             self.support_command_period=saved.get('support_command_period',1)
+            self.support_latch_after_preparation=saved.get('support_latch_after_preparation',False)
             assert self.support_command_period in [1,5]
             self.proprioceptive_pressure_spec=saved.get('proprioceptive_pressure_spec')
             assert saved['format']=='wuji-r800-residual-ppo-v1'
@@ -129,9 +130,9 @@ class G2R800Policy(FrozenPolicy):
                 base=action if self.action_base_mode=="r800" else torch.zeros_like(action)
                 if self.thumb_reference is not None:base=self.thumb_reference.action(self.known.initial,self.known.issued,self.tensor([goal]),measured_q=self.tensor(q),clock_s=clock_s)
                 mean=self.residual.actor_logits(public)
-                if self.support_command_period>1:
+                if self.support_command_period>1 or self.support_latch_after_preparation:
                     assert clock_s is not None and self.action_parameterization=='bounded-motor-offset'
-                    if self.held_support_logits is None or (round(clock_s*30)-self.support_takeover_frame)%self.support_command_period==0:
+                    if self.held_support_logits is None or ((round(clock_s*30)-self.support_takeover_frame)%self.support_command_period==0 and (not self.support_latch_after_preparation or round(clock_s*30)<=480)):
                         self.held_support_logits=mean[:,:16].clone()
                     mean=mean.clone();mean[:,:16]=self.held_support_logits
                 if self.action_parameterization=='bounded-motor-offset':

@@ -93,7 +93,7 @@ class G2ContinuousScene:
         if self.estimated_plans and any(row.get('support_motor_waypoints') for row in self.estimated_plans):
             recipe=next(row['support_motor_waypoints'] for row in self.estimated_plans if row.get('support_motor_waypoints'))
             self.support_waypoint_times=[r['time_s'] for r in recipe]
-            assert self.support_waypoint_times[-1]<=14.2 and self.takeover_frame==480
+            assert self.support_waypoint_times[-1]<=14.2 and self.takeover_frame>=round(self.support_waypoint_times[-1]*30)+2
             self.support_waypoint_enabled=torch.tensor([bool(row.get('support_motor_waypoints')) for row in self.estimated_plans],device=self.device)
             self.support_waypoint_q=self.tensor([[r['q'] for r in row['support_motor_waypoints']] if row.get('support_motor_waypoints') else [row['motor_plan']['close_q']]*len(recipe) for row in self.estimated_plans])
             for row in self.estimated_plans:

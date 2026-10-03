@@ -25,6 +25,7 @@ def main():
     p.add_argument('--reference', type=Path, required=True)
     p.add_argument('--checkpoint', type=Path, required=True)
     p.add_argument('--output', type=Path, required=True)
+    p.add_argument('--takeover-seconds',type=float,default=16.,help='Known learnedpreparation clock, operation still16s; requires preceding50 actualmeasured/issuedframes')
     a = p.parse_args()
     a.output.mkdir(parents=True, exist_ok=False)
     with np.load(a.input) as data:
@@ -32,6 +33,7 @@ def main():
         samples = {k: data[k].copy() for k in LEGAL_FIELDS}
     times = samples['clock_s']
     n = len(times)
+    assert 8<=a.takeover_seconds<=16 and times[0]<=a.takeover_seconds-50/30+1e-7
     assert n >= 50 and np.allclose(np.diff(times), 1/30, atol=1e-7)
     for k, width in [('hand_measured_q', 20), ('arm_measured_q', 7), ('issued_hand_target', 20)]:
         assert samples[k].shape == (n, width) and np.isfinite(samples[k]).all()
@@ -66,13 +68,13 @@ def main():
             previous=samples['issued_hand_target'][max(0,i-1)]
             policy.support_load_features.observe(policy.tensor(q),policy.tensor(previous),__import__('torch').tensor([round(float(t)*30)],device=policy.player.device))
         policy.record(q, policy.last_action if taken else np.zeros(20))
-        if t < 16-1e-7:
+        if t < a.takeover_seconds-1e-7:
             continue
         if not taken:
             assert i > 0 and len(policy.history) == 50
             policy.takeover_estimate(q, samples['issued_hand_target'][i-1], obj, slider, clock_s=float(t))
             taken = True
-        goal = .04 if int(round((t-16)*30))//150 % 2 == 0 else 0.
+        goal = .04 if t>=16-1e-7 and int(round((t-16)*30))//150 % 2 == 0 else 0.
         gravity = kin.forward(samples['arm_measured_q'][i])[:3, :3].T @ np.array([0., 0., -1.])
         target, action = policy.command(q, goal, wrist_gravity=gravity, clock_s=float(t))
         assert policy.last_encoder_input.shape == (2076,)
@@ -84,7 +86,7 @@ def main():
     assert taken and len(targets) > 0
     np.savez_compressed(a.output/'commands.npz', targets=targets, actions=actions)
     report = dict(scope='Offline inference only; no physics scene, robot SDK, or current object/contact/load input',
-        physics_performance_claim=False, real_robot_ran=False, control_hz=30, r800_input_dim=2076,
+        physics_performance_claim=False, real_robot_ran=False,learned_takeover_seconds=a.takeover_seconds,support_latch_after_preparation=policy.support_latch_after_preparation, control_hz=30, r800_input_dim=2076,
         residual_input_dim=(170 if policy.history_features else 154)+(9 if policy.support_load_features is not None else 0), support_load_feature_spec=policy.support_load_feature_spec, command_frames=len(targets),
         max_target_difference_from_recorded_rad=max(errors),
         hand_joint_names=policy.fk.names, arm_joint_names=kin.names,

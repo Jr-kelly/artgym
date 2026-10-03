@@ -8,14 +8,15 @@ import torch
 
 
 class SupportCommandSampler:
-    def __init__(self,n,device,period=1,takeover_frame=480):
+    def __init__(self,n,device,period=1,takeover_frame=480,latch_after_preparation=False):
         assert period in [1,5]
-        self.period=period;self.takeover_frame=takeover_frame
+        self.period=period;self.takeover_frame=takeover_frame;self.latch_after_preparation=latch_after_preparation
         self.held=torch.zeros((n,16),device=device)
 
     def sample(self,distribution,clock_frames):
         action=distribution.sample()
         event=(clock_frames-self.takeover_frame)%self.period==0
+        if self.latch_after_preparation:event=event & (clock_frames<=480)
         self.held[event]=action[event,:16]
         action[:,:16]=self.held
         mask=torch.ones_like(action,dtype=torch.bool);mask[:,:16]=event[:,None]
