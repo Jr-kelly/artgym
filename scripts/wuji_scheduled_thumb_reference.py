@@ -37,7 +37,9 @@ class ScheduledThumbReference:
         self.previous_goal[ids] = float('nan')
         self.start[ids] = 0
         self.desired[ids] = 0
-        if self.preload_schedule:self.preload_anchor[ids]=self.preload(clock_s)
+        if self.preload_schedule:
+            value=self.preload(clock_s)
+            self.preload_anchor[ids]=value[ids] if value.ndim==2 else value
 
     def preload(self,clock_s):
         first,last=self.preload_schedule['seconds']
@@ -61,7 +63,11 @@ class ScheduledThumbReference:
         index = torch.searchsorted(self.shifts, self.desired.contiguous(), right=True)-1
         index = index.clamp(0, len(self.shifts)-2)
         alpha = ((self.desired-self.shifts[index])/(self.shifts[index+1]-self.shifts[index])).unsqueeze(-1)
-        desired_q = initial[:,16:]+self.q[index]*(1.-alpha)+self.q[index+1]*alpha-self.q[0]
+        if self.q.ndim==3:
+            ids=torch.arange(len(initial),device=initial.device)
+            first,last,zero=self.q[ids,index],self.q[ids,index+1],self.q[:,0]
+        else:first,last,zero=self.q[index],self.q[index+1],self.q[0]
+        desired_q = initial[:,16:]+first*(1.-alpha)+last*alpha-zero
         self.last_target = initial.clone()
         self.last_target[:,16:] = desired_q
         if self.preload_schedule:
@@ -71,7 +77,7 @@ class ScheduledThumbReference:
         action[:,16:] = (self.last_target[:,16:]-issued[:,16:])/.025
         rate = torch.ones_like(self.age)
         if self.pacing:
-            tangent=(self.q[index+1]-self.q[index])/(self.shifts[index+1]-self.shifts[index])[:,None]
+            tangent=(last-first)/(self.shifts[index+1]-self.shifts[index])[:,None]
             excess=issued[:,16:]-measured_q[:,16:]-self.static_joint_lag
             lag=(excess*tangent).sum(-1)/tangent.square().sum(-1).clamp_min(1e-6)
             # Estimate of joint tracking along the nominal trajectory, not

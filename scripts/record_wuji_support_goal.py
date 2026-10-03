@@ -14,7 +14,7 @@ def record(event, **details):
         for key in ['phase','next']:
             if key in details: state[key]=details[key]
         (D/'STATE.json').write_text(json.dumps(state, ensure_ascii=False, indent=2)+'\n')
-        text='# Wuji 承托与持续按压当前轮\n\n实际副本 `'+str(R)+'`。先读 research/support-pressure-20261003/GOAL.md 和 STATE.json。禁止子代理、自动真机动作；本轮无GPU小时上限或利用率指标。旧冻结结果不改。\n\n```json\n'+json.dumps(state,ensure_ascii=False,indent=2)+'\n```\n'
+        text='# Wuji 承托与持续按压当前轮\n\n实际副本 `'+str(R)+'`。先读 research/support-pressure-20261003/GOAL.md 和 STATE.json。禁止子代理、自动真机动作；本轮无GPU小时上限；利用率按STATE中的最新用户规则。旧冻结结果不改。\n\n```json\n'+json.dumps(state,ensure_ascii=False,indent=2)+'\n```\n'
         for p in [D/'HANDOFF.md',R/'WUJI_GOAL_HANDOFF.md']:p.write_text(text)
         marker='<!-- WUJI_SUPPORT_PRESSURE_HISTORY -->'
         for p in [R.parent/'WUJI_GOAL_HANDOFF.md',Path('/data/research/artgym/WUJI_GOAL_HANDOFF.md')]:

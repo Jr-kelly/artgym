@@ -33,7 +33,7 @@ def gym_transform(position,quaternion=(0,0,0,1)):
 class G2ContinuousScene:
     def __init__(self,n=8,seed=2026100356,randomization_scale=0.,instances=None,
                  load_max=.1,detent_max=.1,contact_progress_reward=0.,reference_spec=None,
-                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False,graphics=False,disabled_perturbations=(),action_parameterization='incremental',resistance_integration='legacy-explicit',load_min=0.,detent_min=0.):
+                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False,graphics=False,disabled_perturbations=(),action_parameterization='incremental',resistance_integration='legacy-explicit',load_min=0.,detent_min=0.,asset_registry=None):
         self.n=n;self.device='cuda:0';self.seed=seed
         self.disabled_perturbations=set(disabled_perturbations)
         assert self.disabled_perturbations <= {'calibration','placement','sensor','latency','material'}
@@ -69,13 +69,36 @@ class G2ContinuousScene:
         self.acquisition=scene_spec['acquisition'] if scene_spec else json.loads((D/'functional-side-edge-under-support-lateral-v3/acquisition-path.json').read_text())
         self.calibration=scene_spec['calibration'] if scene_spec else json.loads((D/'handover-from-v25-v1.json').read_text())
         if scene_spec:
-            assert scene_spec['scope']=='Fixed nominal scene shared across all physical assets; no asset-specific actor input'
+            assert scene_spec['scope'] in ['Fixed nominal scene shared across all physical assets; no asset-specific actor input','Initial noisy estimate guided common motor planning; no runtime object/contact truth or assetID actor input']
             assert len(self.plan['close_q'])==20 and len(self.plan['open_q'])==20
         self.reference_spec=reference_spec or json.loads((D/'functional-side-edge-under-support-v6/continuous-thumb-v2.json').read_text())
         self.reference=ScheduledThumbReference(self.reference_spec,n,self.device)
         self.closed=self.tensor(self.plan['close_q']);self.opened=self.tensor(self.plan['open_q'])
+        self.estimated_plans=scene_spec.get('initial_estimated_plans') if scene_spec else None
+        if self.estimated_plans:
+            assert len(self.estimated_plans)==n
+            for row in self.estimated_plans:assert row['estimate']['source'] and row['estimate']['uncertainty_m']>0
+            self.closed=self.tensor([row['motor_plan']['close_q'] for row in self.estimated_plans])
+            self.opened=self.tensor([row['motor_plan']['open_q'] for row in self.estimated_plans])
+            self.reference.q=self.tensor([[r['q_thumb'] for r in row['thumb_reference']['rows']] for row in self.estimated_plans])
+            self.reference.preload_schedule={'seconds':[12,14]}
+            self.reference.preload_delta=self.tensor([np.asarray(row['support_target_q'])-np.asarray(row['motor_plan']['close_q']) for row in self.estimated_plans])
+            self.bridge.geometry=self.tensor([row['estimate']['handle_size_WTL_m']+[.01,.003,.03] for row in self.estimated_plans])
+        self.opened_batch=self.opened.expand(n,-1);self.closed_batch=self.closed.expand(n,-1)
+        self.close_waypoint_tensors=[self.tensor([row['motor_plan']['close_waypoints'][i]['q'] for row in self.estimated_plans]) if self.estimated_plans else self.tensor(way['q']).expand(n,-1) for i,way in enumerate(self.plan['close_waypoints'])]
+        self.cal_prior={}
+        for key in ['object_in_wrist','slider_in_wrist']:
+            mat=np.asarray(self.calibration[key]);positions=np.tile(mat[:3,3],(n,1));rotations=np.tile(Rotation.from_matrix(mat[:3,:3]).as_quat(),(n,1))
+            if self.estimated_plans:
+                object_rotation=np.asarray(self.calibration['object_in_wrist'])[:3,:3]
+                for i,row in enumerate(self.estimated_plans):
+                    estimate=row['estimate'];shift=np.asarray(estimate.get('initial_object_center_shift_knife_m',[0,0,0]))
+                    if key=='slider_in_wrist':shift=shift+np.asarray(estimate['slider_contact_shift_m'])+np.array([0,(estimate['handle_size_WTL_m'][1]-.012)/2,0])
+                    positions[i]+=object_rotation@shift
+            self.cal_prior[key]=(self.tensor(positions),self.tensor(rotations))
         self.middle_support=None
         if scene_spec and scene_spec.get('middle_deflection_support'):
+            assert not self.estimated_plans
             from scripts.g2_middle_deflection_support import BatchedMiddleDeflectionSupport
             assert self.takeover_frame==480,'Finite postliftsearch needs50constanttargetframes before16s takeover'
             support_spec=scene_spec['middle_deflection_support']
@@ -145,7 +168,7 @@ class G2ContinuousScene:
             self.gym.set_actor_rigid_shape_properties(env,robot,shapes)
             self.gym.create_actor(env,table_asset,gym_transform([.60,-.25,.725]),'table',i,0)
             sid=self.instances[i%len(self.instances)]
-            directory=R/'assets/objects'/('knife_wuji_real_size_20261002' if sid=='000' else 'knife_wuji_dense_under_20261003')/sid
+            directory=R/asset_registry[sid] if asset_registry is not None else R/'assets/objects'/('knife_wuji_real_size_20261002' if sid=='000' else 'knife_wuji_dense_under_20261003')/sid
             parameters=json.loads((directory/'parameters.json').read_text())
             if sid not in assets:
                 opt=gymapi.AssetOptions();opt.fix_base_link=False;opt.disable_gravity=False
@@ -169,7 +192,7 @@ class G2ContinuousScene:
             self.slider_drive_properties.append(op.copy())
             initial_state=np.zeros(27,dtype=gymapi.DofState.dtype)
             initial_state['pos'][self.arm]=np.asarray(self.acquisition['approach_q'][0])
-            initial_state['pos'][self.hand]=np.asarray(self.plan['open_q'])
+            initial_state['pos'][self.hand]=self.opened_batch[i].cpu().numpy()
             self.gym.set_actor_dof_states(env,robot,initial_state,gymapi.STATE_ALL)
             slider_state=np.zeros(1,dtype=gymapi.DofState.dtype);slider_state['pos'][0]=self.lower[-1]
             self.gym.set_actor_dof_states(env,knife,slider_state,gymapi.STATE_ALL)
@@ -241,10 +264,10 @@ class G2ContinuousScene:
         norm=angle.norm(dim=-1,keepdim=True)
         delta=torch.cat([angle*.5*torch.sinc(norm/(2*np.pi)),torch.cos(norm*.5)],-1)
         for key,dest in [('object_in_wrist',self.cal_object),('slider_in_wrist',self.cal_slider)]:
-            mat=np.array(self.calibration[key]);position=self.tensor(mat[:3,3]);rotation=self.tensor(Rotation.from_matrix(mat[:3,:3]).as_quat())
-            dest[ids]=torch.cat([position[None]+translation,quat_mul(delta,rotation[None].expand(k,-1))],-1)
+            position,rotation=self.cal_prior[key]
+            dest[ids]=torch.cat([position[ids]+translation,quat_mul(delta,rotation[ids])],-1)
         self.target[ids,:]=0.;self.target[ids[:,None],self.arm_ids]=self.approach[0]
-        self.target[ids[:,None],self.hand_ids]=self.opened
+        self.target[ids[:,None],self.hand_ids]=self.opened_batch[ids]
         self.command_target[ids]=self.target[ids];self.delayed_target[ids]=self.target[ids]
         self.dof[ids,:,:]=0.;self.dof[ids,:27,0]=self.target[ids];self.dof[ids,27,0]=self.lower[ids]
         # Installed Preview4 tensors use environment-local coordinates, verified
@@ -273,7 +296,7 @@ class G2ContinuousScene:
         if self.load_profile=='mixed':
             self.load_profile_ids[ids]=torch.randint(0,4,(k,),device=self.device)
             self.load_frequencies[ids]=1.3+torch.rand(k,device=self.device)
-        self.bridge.reset(ids,self.opened[None].expand(k,-1),self.opened[None].expand(k,-1),self.cal_object[ids],self.cal_slider[ids])
+        self.bridge.reset(ids,self.opened_batch[ids],self.opened_batch[ids],self.cal_object[ids],self.cal_slider[ids])
         self.peak[ids]=0.;self.max_drift[ids]=0.;self.max_rotation[ids]=0.;self.min_hold_height[ids]=float('inf')
         self.endpoints[ids]=0.;self.contact_steps[ids]=0.;self.operation_steps[ids]=0.;self.closed_at_handover[ids]=False
         self.fell[ids]=False
@@ -290,11 +313,12 @@ class G2ContinuousScene:
         lift=(t>=8)&(t<12);aq[lift]=self.path_targets(self.lift,smooth((t[lift]-8)/4));aq[t>=12]=self.lift[-1]
         hq=self.opened.expand(self.n,-1).clone();closing=(t>=5)&(t<8);u=(t[closing]-5)/3
         way=self.plan['close_waypoints'];closed_values=hq[closing].clone()
-        for first,last in zip(way[:-1],way[1:]):
+        for waypoint_index,(first,last) in enumerate(zip(way[:-1],way[1:])):
             selected=(u>=first['fraction'])&(u<=last['fraction'])
             alpha=smooth((u[selected]-first['fraction'])/(last['fraction']-first['fraction'])).unsqueeze(-1)
-            closed_values[selected]=self.tensor(first['q'])*(1-alpha)+self.tensor(last['q'])*alpha
-        hq[closing]=closed_values;hq[t>=8]=self.closed
+            first_q=self.close_waypoint_tensors[waypoint_index][closing][selected];last_q=self.close_waypoint_tensors[waypoint_index+1][closing][selected]
+            closed_values[selected]=first_q*(1-alpha)+last_q*alpha
+        hq[closing]=closed_values;hq[t>=8]=self.closed_batch[t>=8]
         if self.reference.preload_schedule:hq[t>=8]+=self.reference.preload(t)[t>=8]
         if self.middle_support is not None:hq=self.middle_support.command(t,self._measurement,hq)
         return aq,hq

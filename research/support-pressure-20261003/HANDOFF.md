@@ -1,6 +1,6 @@
 # Wuji 承托与持续按压当前轮
 
-实际副本 `/data/research/artgym-experiments-20260921/support-pressure-20261003`。先读 research/support-pressure-20261003/GOAL.md 和 STATE.json。禁止子代理、自动真机动作；本轮无GPU小时上限或利用率指标。旧冻结结果不改。
+实际副本 `/data/research/artgym-experiments-20260921/support-pressure-20261003`。先读 research/support-pressure-20261003/GOAL.md 和 STATE.json。禁止子代理、自动真机动作；本轮无GPU小时上限；利用率按STATE中的最新用户规则。旧冻结结果不改。
 
 ```json
 {
@@ -8,7 +8,11 @@
   "minimum_work_hours": 12,
   "minimum_finish_utc": "2026-10-03T19:27:51+00:00",
   "gpu_hour_cap": null,
-  "gpu_utilization_requirement": null,
+  "gpu_utilization_requirement": {
+    "whole_machine_4h_floor_percent": 26,
+    "running_target_above_percent": 40,
+    "source": "Latest direct user-provided AGENTS.md"
+  },
   "platform": "G2+Wuji v1",
   "baseline_local_commit": "995f5acd72f4038b1b3ca3be921248620975d54a",
   "baseline_github_commit": "6afe8270735abf91b86b001803150e542d720111",
@@ -21,34 +25,76 @@
   "no_subagents": true,
   "no_real_robot_commands": true,
   "last_event": {
-    "utc": "2026-10-03T08:19:39.786512+00:00",
-    "event": "coordinated_ring_passive_load_comparison_closed",
-    "evidence": "runs/support-pressure-20261003/demo/solver-ring-heavy-v11/report.json",
-    "conclusion": {
-      "success": true,
-      "ring_actual_support_mean_N": 0.014913377154962291,
-      "ring_contact_fraction": 0.28286189683860236,
-      "ring_normal_moment_knife_mean_Nm": [
-        0.0003468370707705111,
-        -1.6204433157211277e-05,
-        -6.73740996885942e-05
+    "utc": "2026-10-03T08:58:41.364298+00:00",
+    "event": "joint_family_parallel_learning_pilots_started",
+    "evidence": "research/support-pressure-20261003/run_joint_training_v28.py",
+    "config": {
+      "verified_launch_utc": "2026-10-03T08:58:15Z",
+      "gpu_to_launcher_pid": {
+        "0": 6759,
+        "1": 6760,
+        "2": 6761,
+        "3": 6762
+      },
+      "variants": [
+        "base noise.5 takeover16",
+        "noise1 takeover16",
+        "noise1+legal16Dhistory takeover16",
+        "noise1 takeover8"
       ],
-      "ring_normal_moment_mean_norm_Nm": 0.000355638861399795,
-      "body_maxrotation": 0.19959855683442929,
-      "thumb_actual_normalmean_N": 1.0675007034062993
+      "envs_each": 256,
+      "updates_each": 150,
+      "physical_train_assets": 64,
+      "initialize_checkpoint_sha256": "e6494d85cdb7a010b125cd6b8079dd0ebae6e27cd91b5e171f7c2e9a92b40b6d",
+      "action_units": "boundedmotorposition radians",
+      "history_weight_initialization": "Preserve original154public and27critic truth columns; extra16legalhistory input weights zero at initialization, original model head retained"
     },
-    "next": "Retain better-established fourfingercoordinatedbaseline: intermittent small ringunderreaction hasnotshown substantivebenefit, no hard fifthfinger requirement"
+    "next": "Inspect substantivecontact/holding/fullcompletion onbroadjointtypes atcheckpoint50/100; extendusefulruns only",
+    "state_updates": {
+      "active_remote_training_jobs": [
+        "joint-base-v28",
+        "joint-noisier-v28",
+        "joint-history-v28",
+        "joint-early-v28"
+      ],
+      "active_remote_training_launcher_pids": [
+        6759,
+        6760,
+        6761,
+        6762
+      ]
+    }
   },
-  "next": "Retain better-established fourfingercoordinatedbaseline: intermittent small ringunderreaction hasnotshown substantivebenefit, no hard fifthfinger requirement",
+  "next": "Inspect substantivecontact/holding/fullcompletion onbroadjointtypes atcheckpoint50/100; extendusefulruns only",
   "active_remote_launcher_pid": null,
   "active_local_training_pid": null,
-  "remote_connection_status": "SSH recovered; /tmp experiment lost; persistent recovery underway",
+  "remote_connection_status": "Persistent home SSH verified 2026-10-03 08:33 UTC; four H200 available",
   "active_local_video_launcher_pid": null,
   "github_branch": "feat/wuji-support-pressure-20261003",
-  "github_commit": "49e3eda701d2b7f57a91038ea7d7c3a7bfa32ba8",
-  "local_scientific_commit": "4b2a8063a0d5f47a09c0f70a13d7c82264277cd0",
+  "github_commit": "4ab264225fc44cd7d63e313f0ec0349ba9309e80",
+  "local_scientific_commit": "67253037e6f3ee3f66f38028a57878e4a3574915",
   "remote_root": "/home/wangjiarui/artgym-support-pressure-20261003",
-  "active_remote_training_jobs": [],
-  "active_remote_demo_launcher_pid": 2370
+  "active_remote_training_jobs": [
+    "joint-base-v28",
+    "joint-noisier-v28",
+    "joint-history-v28",
+    "joint-early-v28"
+  ],
+  "active_remote_demo_launcher_pid": null,
+  "active_remote_variant_launcher_pid": null,
+  "active_remote_learned_check_launcher_pid": null,
+  "active_remote_inward_launcher_pid": null,
+  "active_remote_training_launcher_pid": null,
+  "active_remote_cooperative_launcher_pid": null,
+  "active_remote_estimate_launcher_pid": null,
+  "active_remote_joint_estimate_launcher_pid": null,
+  "active_remote_pressure_tier_launcher_pid": null,
+  "active_remote_resource_sampler_pid": 6329,
+  "active_remote_training_launcher_pids": [
+    6759,
+    6760,
+    6761,
+    6762
+  ]
 }
 ```
