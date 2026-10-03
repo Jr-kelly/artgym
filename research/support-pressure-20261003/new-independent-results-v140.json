@@ -1,0 +1,182 @@
+{
+  "utc": "2026-10-03T17:35:08.983324+00:00",
+  "freeze": "research/support-pressure-20261003/freeze.json",
+  "entries": [
+    {
+      "label": "highload0p6-new-joint",
+      "report": "runs/support-pressure-20261003/independent-checks-v134-retry1/highload0p6-new-joint/continuous/report.json",
+      "weight_sha256": "11f87269e7910380c6dab1fa8dcc26e53e40da0bd905a1ae40e7ffcf812b1a1d",
+      "full_success": false,
+      "body_rotation_rad": 0.3009477684222269,
+      "endpoints_m": [
+        0.03727394639928308,
+        0.008851606605781449,
+        0.03733858486844434,
+        0.010069245679510964
+      ],
+      "failure_onsets_s": {
+        "body_stability": 18.566666666666666,
+        "height": null,
+        "sustained_thumb_slider_contact_loss": null
+      },
+      "pair_pressure": {
+        "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+        "physics_hz": 240,
+        "substeps_per_simulate": 1,
+        "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+        "finger_order": [
+          "thumb",
+          "index",
+          "middle",
+          "ring",
+          "pinky"
+        ],
+        "static_thumb_pressure_mean_N": 1.4400007258016492,
+        "operation_thumb_pressure_mean_N": 1.4708096634180967,
+        "operation_thumb_pressure_5th_percentile_N": 1.2354173807569078,
+        "operation_thumb_contact_substep_fraction": 1.0,
+        "operation_ring_underside_support_mean_N": 0.0,
+        "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+      },
+      "transfer_audit": {
+        "requested": "staged",
+        "brace_fallback": false,
+        "staged_fallback": false,
+        "scope": "Shared rule based only on public-estimate IK/static planning; every physicalattempt retained, no currenttruth or physicalasset selection"
+      }
+    },
+    {
+      "label": "nominal-new-observation",
+      "report": "runs/support-pressure-20261003/independent-checks-v134-retry1/nominal-new-observation/continuous/report.json",
+      "weight_sha256": "11f87269e7910380c6dab1fa8dcc26e53e40da0bd905a1ae40e7ffcf812b1a1d",
+      "full_success": false,
+      "body_rotation_rad": 0.2698339126300327,
+      "endpoints_m": [
+        0.036675669408092894,
+        0.0038283877074718475,
+        0.03726558780504598,
+        0.00622233148250315
+      ],
+      "failure_onsets_s": {
+        "body_stability": 28.4,
+        "height": null,
+        "sustained_thumb_slider_contact_loss": null
+      },
+      "pair_pressure": {
+        "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+        "physics_hz": 240,
+        "substeps_per_simulate": 1,
+        "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+        "finger_order": [
+          "thumb",
+          "index",
+          "middle",
+          "ring",
+          "pinky"
+        ],
+        "static_thumb_pressure_mean_N": 0.7800701976804053,
+        "operation_thumb_pressure_mean_N": 0.777918176491367,
+        "operation_thumb_pressure_5th_percentile_N": 0.6751220705399561,
+        "operation_thumb_contact_substep_fraction": 1.0,
+        "operation_ring_underside_support_mean_N": 0.0,
+        "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+      },
+      "transfer_audit": {
+        "requested": "staged",
+        "brace_fallback": false,
+        "staged_fallback": false,
+        "scope": "Shared rule based only on public-estimate IK/static planning; every physicalattempt retained, no currenttruth or physicalasset selection"
+      }
+    },
+    {
+      "label": "raised0p7-new-joint",
+      "report": "runs/support-pressure-20261003/independent-checks-v134-retry1/raised0p7-new-joint/continuous/report.json",
+      "weight_sha256": "11f87269e7910380c6dab1fa8dcc26e53e40da0bd905a1ae40e7ffcf812b1a1d",
+      "full_success": false,
+      "body_rotation_rad": 0.2655122417251063,
+      "endpoints_m": [
+        0.03934665588248107,
+        0.004264881834387779,
+        0.03881304788713654,
+        0.004317504457301564
+      ],
+      "failure_onsets_s": {
+        "body_stability": 28.4,
+        "height": null,
+        "sustained_thumb_slider_contact_loss": null
+      },
+      "pair_pressure": {
+        "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+        "physics_hz": 240,
+        "substeps_per_simulate": 1,
+        "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+        "finger_order": [
+          "thumb",
+          "index",
+          "middle",
+          "ring",
+          "pinky"
+        ],
+        "static_thumb_pressure_mean_N": 0.8683167540419678,
+        "operation_thumb_pressure_mean_N": 0.8714176184381432,
+        "operation_thumb_pressure_5th_percentile_N": 0.797098025676444,
+        "operation_thumb_contact_substep_fraction": 1.0,
+        "operation_ring_underside_support_mean_N": 0.0,
+        "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+      },
+      "transfer_audit": {
+        "requested": "staged",
+        "brace_fallback": false,
+        "staged_fallback": false,
+        "scope": "Shared rule based only on public-estimate IK/static planning; every physicalattempt retained, no currenttruth or physicalasset selection"
+      }
+    },
+    {
+      "label": "thick13p6-new-joint",
+      "report": "runs/support-pressure-20261003/independent-checks-v134-retry1/thick13p6-new-joint/continuous/report.json",
+      "weight_sha256": "11f87269e7910380c6dab1fa8dcc26e53e40da0bd905a1ae40e7ffcf812b1a1d",
+      "full_success": false,
+      "body_rotation_rad": 0.25118287549490287,
+      "endpoints_m": [
+        0.03960849670693278,
+        0.004863384697172377,
+        0.04027058127232724,
+        0.004859657544228766
+      ],
+      "failure_onsets_s": {
+        "body_stability": 31.133333333333333,
+        "height": null,
+        "sustained_thumb_slider_contact_loss": null
+      },
+      "pair_pressure": {
+        "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+        "physics_hz": 240,
+        "substeps_per_simulate": 1,
+        "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+        "finger_order": [
+          "thumb",
+          "index",
+          "middle",
+          "ring",
+          "pinky"
+        ],
+        "static_thumb_pressure_mean_N": 1.433395681807032,
+        "operation_thumb_pressure_mean_N": 1.4263750077266477,
+        "operation_thumb_pressure_5th_percentile_N": 1.2155756239809665,
+        "operation_thumb_contact_substep_fraction": 1.0,
+        "operation_ring_underside_support_mean_N": 0.0,
+        "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+      },
+      "transfer_audit": {
+        "requested": "staged",
+        "brace_fallback": false,
+        "staged_fallback": false,
+        "scope": "Shared rule based only on public-estimate IK/static planning; every physicalattempt retained, no currenttruth or physicalasset selection"
+      }
+    }
+  ],
+  "successes": 0,
+  "physical_attempts": 4,
+  "startup_failed_attempts": 4,
+  "scope": "Fournew frozenindependentconditions, aftersharedassetpath repair; allphysicalplanning/pickup/operation outcomesretained. No tuning/selection afterresults; notfullfamily rate, nohardware."
+}

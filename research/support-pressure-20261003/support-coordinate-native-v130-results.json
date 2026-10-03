@@ -1,0 +1,263 @@
+{
+  "utc": "2026-10-03T17:27:14.255436+00:00",
+  "entries": [
+    {
+      "name": "nominal-joint-support-coordinates-v130",
+      "report": "runs/support-pressure-20261003/demo/nominal-joint-support-coordinates-v130/report.json",
+      "weight_sha256": "0db0c4ecad432e6bdbe06309725e2145d468888c716216445e11d1a19453fd11",
+      "full_success": false,
+      "body_rotation_rad": 0.3729444290889253,
+      "endpoints_m": [
+        0.03648632966602842,
+        0.006112821400165558,
+        0.03522000347988473,
+        0.005787490556637446
+      ],
+      "pair_pressure": {
+        "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+        "physics_hz": 240,
+        "substeps_per_simulate": 1,
+        "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+        "finger_order": [
+          "thumb",
+          "index",
+          "middle",
+          "ring",
+          "pinky"
+        ],
+        "static_thumb_pressure_mean_N": 0.9470943897336268,
+        "operation_thumb_pressure_mean_N": 1.0134689412331213,
+        "operation_thumb_pressure_5th_percentile_N": 0.7968154294151513,
+        "operation_thumb_contact_substep_fraction": 1.0,
+        "operation_ring_underside_support_mean_N": 0.0,
+        "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+      }
+    },
+    {
+      "name": "raised1-joint-support-coordinates-v130",
+      "report": "runs/support-pressure-20261003/demo/raised1-joint-support-coordinates-v130/report.json",
+      "weight_sha256": "0db0c4ecad432e6bdbe06309725e2145d468888c716216445e11d1a19453fd11",
+      "full_success": true,
+      "body_rotation_rad": 0.23861905327020264,
+      "endpoints_m": [
+        0.03632015952219566,
+        0.004031497157282299,
+        0.03539342158991429,
+        0.0037518905268775094
+      ],
+      "pair_pressure": {
+        "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+        "physics_hz": 240,
+        "substeps_per_simulate": 1,
+        "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+        "finger_order": [
+          "thumb",
+          "index",
+          "middle",
+          "ring",
+          "pinky"
+        ],
+        "static_thumb_pressure_mean_N": 1.039884155149785,
+        "operation_thumb_pressure_mean_N": 1.0355996267400343,
+        "operation_thumb_pressure_5th_percentile_N": 0.8859727331633538,
+        "operation_thumb_contact_substep_fraction": 1.0,
+        "operation_ring_underside_support_mean_N": 0.0,
+        "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+      }
+    },
+    {
+      "name": "nominal-jointfrozen-support-coordinates-v130",
+      "report": "runs/support-pressure-20261003/demo/nominal-jointfrozen-support-coordinates-v130/report.json",
+      "weight_sha256": "6b1c9540237e069845df1a990d6cc332360b73a5c7a9c0b5fd61abe754c1918e",
+      "full_success": false,
+      "body_rotation_rad": 0.4328289663999649,
+      "endpoints_m": [
+        0.03439136523391224,
+        0.004494583441151513,
+        0.03385212950201498,
+        0.003453858196735382
+      ],
+      "pair_pressure": {
+        "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+        "physics_hz": 240,
+        "substeps_per_simulate": 1,
+        "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+        "finger_order": [
+          "thumb",
+          "index",
+          "middle",
+          "ring",
+          "pinky"
+        ],
+        "static_thumb_pressure_mean_N": 0.9421782231476736,
+        "operation_thumb_pressure_mean_N": 1.0457195145567613,
+        "operation_thumb_pressure_5th_percentile_N": 0.7984681869872141,
+        "operation_thumb_contact_substep_fraction": 0.9995840266222962,
+        "operation_ring_underside_support_mean_N": 0.0,
+        "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+      }
+    },
+    {
+      "name": "raised1-jointfrozen-support-coordinates-v130",
+      "report": "runs/support-pressure-20261003/demo/raised1-jointfrozen-support-coordinates-v130/report.json",
+      "weight_sha256": "6b1c9540237e069845df1a990d6cc332360b73a5c7a9c0b5fd61abe754c1918e",
+      "full_success": true,
+      "body_rotation_rad": 0.24979022147823715,
+      "endpoints_m": [
+        0.03680604458269146,
+        0.004562367788619465,
+        0.03679962254439791,
+        0.005191800494988759
+      ],
+      "pair_pressure": {
+        "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+        "physics_hz": 240,
+        "substeps_per_simulate": 1,
+        "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+        "finger_order": [
+          "thumb",
+          "index",
+          "middle",
+          "ring",
+          "pinky"
+        ],
+        "static_thumb_pressure_mean_N": 1.0360435537696049,
+        "operation_thumb_pressure_mean_N": 1.0576700043405993,
+        "operation_thumb_pressure_5th_percentile_N": 0.9201415910869247,
+        "operation_thumb_contact_substep_fraction": 1.0,
+        "operation_ring_underside_support_mean_N": 0.0,
+        "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+      }
+    },
+    {
+      "name": "nominal-normal-support-coordinates-v130",
+      "report": "runs/support-pressure-20261003/demo/nominal-normal-support-coordinates-v130/report.json",
+      "weight_sha256": "741a3e43f4dc5a5b112581ee37a5f1b92fdcabb9f2d5bebbb436068b7318bacb",
+      "full_success": false,
+      "body_rotation_rad": 0.32568940511222977,
+      "endpoints_m": [
+        0.03496238736746212,
+        0.004236990585923195,
+        0.03418315355924682,
+        0.0036471502648459542
+      ],
+      "pair_pressure": {
+        "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+        "physics_hz": 240,
+        "substeps_per_simulate": 1,
+        "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+        "finger_order": [
+          "thumb",
+          "index",
+          "middle",
+          "ring",
+          "pinky"
+        ],
+        "static_thumb_pressure_mean_N": 0.9320733437378412,
+        "operation_thumb_pressure_mean_N": 1.00510162263787,
+        "operation_thumb_pressure_5th_percentile_N": 0.805446148364006,
+        "operation_thumb_contact_substep_fraction": 0.9997920133111481,
+        "operation_ring_underside_support_mean_N": 0.0,
+        "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+      }
+    },
+    {
+      "name": "raised1-normal-support-coordinates-v130",
+      "report": "runs/support-pressure-20261003/demo/raised1-normal-support-coordinates-v130/report.json",
+      "weight_sha256": "741a3e43f4dc5a5b112581ee37a5f1b92fdcabb9f2d5bebbb436068b7318bacb",
+      "full_success": false,
+      "body_rotation_rad": 0.2538223878210365,
+      "endpoints_m": [
+        0.035638313843972154,
+        0.0038371249619457456,
+        0.03575503482069406,
+        0.004633070073193974
+      ],
+      "pair_pressure": {
+        "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+        "physics_hz": 240,
+        "substeps_per_simulate": 1,
+        "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+        "finger_order": [
+          "thumb",
+          "index",
+          "middle",
+          "ring",
+          "pinky"
+        ],
+        "static_thumb_pressure_mean_N": 1.0287141176948207,
+        "operation_thumb_pressure_mean_N": 1.030009562711508,
+        "operation_thumb_pressure_5th_percentile_N": 0.8741009418605661,
+        "operation_thumb_contact_substep_fraction": 1.0,
+        "operation_ring_underside_support_mean_N": 0.0,
+        "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+      }
+    },
+    {
+      "name": "nominal-normalfrozen-support-coordinates-v130",
+      "report": "runs/support-pressure-20261003/demo/nominal-normalfrozen-support-coordinates-v130/report.json",
+      "weight_sha256": "54acf628f3698904d9ea5a6741097972084b7dd2e4dc5c591df549604062e6ce",
+      "full_success": false,
+      "body_rotation_rad": 0.44365495470537175,
+      "endpoints_m": [
+        0.033533136036971375,
+        0.004220064936412705,
+        0.03288218357192818,
+        0.003342877659532759
+      ],
+      "pair_pressure": {
+        "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+        "physics_hz": 240,
+        "substeps_per_simulate": 1,
+        "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+        "finger_order": [
+          "thumb",
+          "index",
+          "middle",
+          "ring",
+          "pinky"
+        ],
+        "static_thumb_pressure_mean_N": 0.9384041294486634,
+        "operation_thumb_pressure_mean_N": 1.0405366130676705,
+        "operation_thumb_pressure_5th_percentile_N": 0.8077549511205709,
+        "operation_thumb_contact_substep_fraction": 0.9997920133111481,
+        "operation_ring_underside_support_mean_N": 0.0,
+        "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+      }
+    },
+    {
+      "name": "raised1-normalfrozen-support-coordinates-v130",
+      "report": "runs/support-pressure-20261003/demo/raised1-normalfrozen-support-coordinates-v130/report.json",
+      "weight_sha256": "54acf628f3698904d9ea5a6741097972084b7dd2e4dc5c591df549604062e6ce",
+      "full_success": false,
+      "body_rotation_rad": 0.2626835394946539,
+      "endpoints_m": [
+        0.03631440508696768,
+        0.004339936499794324,
+        0.03601506696496573,
+        0.004331601783633232
+      ],
+      "pair_pressure": {
+        "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+        "physics_hz": 240,
+        "substeps_per_simulate": 1,
+        "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+        "finger_order": [
+          "thumb",
+          "index",
+          "middle",
+          "ring",
+          "pinky"
+        ],
+        "static_thumb_pressure_mean_N": 1.0314696037741524,
+        "operation_thumb_pressure_mean_N": 1.0468365688762749,
+        "operation_thumb_pressure_5th_percentile_N": 0.9047290857140134,
+        "operation_thumb_contact_substep_fraction": 1.0,
+        "operation_ring_underside_support_mean_N": 0.0,
+        "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+      }
+    }
+  ],
+  "scope": "8 matched development continuous episodes; not independent or hardware validation",
+  "conclusion": "No substantial nominal repair. Retain inherited750/stagedsupport; stop coordinate and quietpreparation extension, no threshold optimization."
+}

@@ -166,7 +166,7 @@ def main():
   for n in range(idx.start,idx.start+idx.count):shapes[n].filter=mask;shapes[n].friction=a.hand_friction
  gym.set_actor_rigid_shape_properties(env,robot,shapes)
  opt=gymapi.AssetOptions();opt.fix_base_link=True;tableasset=gym.create_box(sim,.60,.80,.05,opt);table=gym.create_actor(env,tableasset,gt(transform([.60,-.25,a.table_height-.025])),'table',0,0)
- opt=gymapi.AssetOptions();opt.fix_base_link=False;opt.disable_gravity=False;opt.override_com=False;opt.override_inertia=False;opt.thickness=.001;opt.density=1000;knifeasset=gym.load_asset(sim,str(R),str(a.knife_asset),opt);knife=gym.create_actor(env,knifeasset,gt(knife0),'knife',0,0);bodies=gym.get_actor_rigid_body_properties(env,knife);knife_xml=ET.parse(knife_path)
+ opt=gymapi.AssetOptions();opt.fix_base_link=False;opt.disable_gravity=False;opt.override_com=False;opt.override_inertia=False;opt.thickness=.001;opt.density=1000;knifeasset=gym.load_asset(sim,str(knife_path.resolve().parent),knife_path.name,opt);knife=gym.create_actor(env,knifeasset,gt(knife0),'knife',0,0);bodies=gym.get_actor_rigid_body_properties(env,knife);knife_xml=ET.parse(knife_path)
  for b,name in zip(bodies,['link_0','link_1']):
   node=knife_xml.find(f"./link[@name='{name}']/inertial");b.mass=float(node.find('mass').get('value'));v=node.find('inertia');b.inertia.x.x=float(v.get('ixx'));b.inertia.y.y=float(v.get('iyy'));b.inertia.z.z=float(v.get('izz'))
  gym.set_actor_rigid_body_properties(env,knife,bodies,False);shapes=gym.get_actor_rigid_shape_properties(env,knife)
