@@ -1,5 +1,6 @@
 """Deployable residual actions around frozen R800; truth enters critic/reward only."""
 from scripts.wuji_goal_common import configuration,make_player
+import copy
 import torch,numpy as np
 from torch import nn
 from torch.distributions import Normal
@@ -21,8 +22,22 @@ class ResidualActorCritic(nn.Module):
         self.actor=mlp(public_dim,20);self.critic=mlp(critic_dim,1)
         nn.init.zeros_(self.actor[-1].weight);nn.init.zeros_(self.actor[-1].bias)
         self.logstd=nn.Parameter(torch.full((20,),-1.6))
+        self.frozen_thumb_actor=None
+    def freeze_thumb_actor(self):
+        """Keep the learned deterministic thumb mapping; support remains trainable.
+
+        Both networks read the same legal observation. This preserves an action
+        prior, not contact force or a fixed physical thumb trajectory.
+        """
+        if self.frozen_thumb_actor is None:
+            self.frozen_thumb_actor=copy.deepcopy(self.actor).requires_grad_(False)
+    def actor_logits(self,public):
+        mean=self.actor(public)
+        if self.frozen_thumb_actor is not None:
+            mean=torch.cat([mean[:,:16],self.frozen_thumb_actor(public)[:,16:]],-1)
+        return mean
     def forward(self,public,critic):
-        return Normal(self.actor(public),self.logstd.clamp(-3.5,-.4).exp()),self.critic(critic).squeeze(-1)
+        return Normal(self.actor_logits(public),self.logstd.clamp(-3.5,-.4).exp()),self.critic(critic).squeeze(-1)
 
 class LearningSystem:
     def __init__(self,n,seed=2026100307,randomization_scale=.5,loadmax=.1,detentmax=.1,delay=.15,instances=None,support_scale=.25,rotation_cost=0.,wrist_nominal=None,wrist_probability=0.,object_name='knife_wuji_robust_family_20261003',history_hold_frames=50,thumb_slider_reward=0.,thumb_scale=.75,contact_progress_reward=0.,handover_profiles=None,base_mode="r800",thumb_reference=None,load_profile="sinusoidal",load_frequency=1.7):

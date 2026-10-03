@@ -15,7 +15,7 @@ from scripts.wuji_quaternion_hemisphere import align_quaternion_hemisphere
 from isaacgymenvs.deploy.student_policy_runtime import reset_player_rnn_state
 
 class G2R800Policy(FrozenPolicy):
-    def __init__(self, cfg, teacher, student, geometry=None,thumb_action_gain=1.,support_action_gain=1.,residual_checkpoint=None,thumb_reference_override=None):
+    def __init__(self, cfg, teacher, student, geometry=None,thumb_action_gain=1.,support_action_gain=1.,residual_checkpoint=None,thumb_reference_override=None,support_residual_scale_override=None):
         super().__init__(cfg, teacher, None, geometry=geometry or [.016,.012,.135,.01,.003,.03])
         artifact = torch.load(student, map_location='cpu')
         assert artifact['format'] == 'wuji-unified-student-v1'
@@ -44,10 +44,16 @@ class G2R800Policy(FrozenPolicy):
                 from scripts.g2_legal_support_estimator import LegalSupportEstimator
                 self.support_estimator=LegalSupportEstimator(saved['support_estimator_spec'],self.player.device)
             dim=(170 if self.history_features else 154)+(8 if self.support_estimator is not None else 0)
-            self.residual=ResidualActorCritic(dim,dim+27).to(self.player.device);self.residual.load_state_dict(saved['model']);self.residual.eval()
+            self.residual=ResidualActorCritic(dim,dim+27).to(self.player.device)
+            if saved.get('frozen_thumb_actor',False):self.residual.freeze_thumb_actor()
+            self.residual.load_state_dict(saved['model']);self.residual.eval()
             self.residual_scale=torch.tensor(saved['action_scale'],device=self.player.device)
             self.action_parameterization=saved.get('action_parameterization','incremental')
             assert self.action_parameterization in ['incremental','bounded-motor-offset']
+            if support_residual_scale_override is not None:
+                assert self.action_parameterization=='bounded-motor-offset'
+                assert 0<support_residual_scale_override<=float(cfg.task.env.supportActionSpan)
+                self.residual_scale[:16]=float(support_residual_scale_override)
             self.action_base_mode=saved.get('action_base_mode','r800')
             if self.action_base_mode=='geometric':
                 from scripts.wuji_scheduled_thumb_reference import ScheduledThumbReference
@@ -89,7 +95,7 @@ class G2R800Policy(FrozenPolicy):
                          self.player.intr_reward_coef_embd[:1]], dim=1)
         return obs, encoder_input
 
-    def command(self, q, goal,wrist_gravity=None,clock_s=None):
+    def command(self, q, goal,wrist_gravity=None,clock_s=None,diagnostic_motor_offset=None):
         obs, encoder_input = self.inputs(q, goal)
         self.last_encoder_input = encoder_input.detach().cpu().numpy()[0]
         self.last_observation = obs.detach().cpu().numpy()[0]
@@ -113,13 +119,21 @@ class G2R800Policy(FrozenPolicy):
                 if self.action_parameterization=='bounded-motor-offset':
                     assert self.thumb_reference is not None
                     from scripts.wuji_bounded_motor_residual import bounded_motor_residual_action
-                    action=bounded_motor_residual_action(self.thumb_reference.last_target,self.known,self.residual.actor(public),self.residual_scale)
-                else:action=(base+self.residual_scale*torch.tanh(self.residual.actor(public))).clamp(-1,1)
+                    action=bounded_motor_residual_action(self.thumb_reference.last_target,self.known,self.residual.actor_logits(public),self.residual_scale)
+                else:action=(base+self.residual_scale*torch.tanh(self.residual.actor_logits(public))).clamp(-1,1)
             action=action.clone();action[:,:16]*=self.support_action_gain;action[:,16:]*=self.thumb_action_gain
             if self.pressure_adapter is not None:
                 proposed=self.known.initial+.04*action;proposed[:,16:]=self.known.issued[:,16:]+.025*action[:,16:]
                 desired=self.pressure_adapter.command(q,self.known.issued[0].cpu().numpy(),proposed[0].cpu().numpy(),clock_s)
                 action=(self.tensor(desired)-self.known.initial)/.04;action[:,16:]=(self.tensor(desired)[:,16:]-self.known.issued[:,16:])/.025;action=action.clamp(-1,1)
+            if diagnostic_motor_offset is not None:
+                # Explicit single native truth diagnostic, never actor inputs.
+                # Preserve original support span and one issued-memory update.
+                offset=np.asarray(diagnostic_motor_offset,dtype=float)
+                assert offset.shape==(20,) and np.isfinite(offset).all()
+                assert np.max(np.abs(offset))<=.040001 and np.all(offset[12:]==0)
+                action=action.clone();action[:,:16]+=self.tensor(offset)[:,:16]/.04
+                action=action.clamp(-1,1)
             target = self.known.step(action)
             if self.pressure_adapter is not None and hasattr(self.pressure_adapter,'commit_issued'):
                 self.pressure_adapter.commit_issued(target[0].cpu().numpy(),proposed[0].cpu().numpy())

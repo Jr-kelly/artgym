@@ -5,14 +5,17 @@ from pathlib import Path
 def data(path,mime):return 'data:'+mime+';base64,'+base64.b64encode(path.read_bytes()).decode()
 def main():
     p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);p.add_argument('--stage',default='阶段报告：工作进行中，尚未冻结候选');a=p.parse_args()
-    root=Path(__file__).resolve().parents[1];base=root/'runs/support-pressure-20261003';episodes=['estimated-raised-heavy-delayed-film-v24','coordinated-passive-loaded-film-v14','nominal-stroke-support-v36'];blocks=[]
-    labels={'estimated-raised-heavy-delayed-film-v24':'滑块抬高 1 mm、带阻力、33 ms 执行延迟','coordinated-passive-loaded-film-v14':'协调四指承托的名义带阻力基线','nominal-stroke-support-v36':'代表性失败：较大初始估计误差下的行程支撑分配候选'}
+    root=Path(__file__).resolve().parents[1];base=root/'runs/support-pressure-20261003';episodes=['estimated-raised-heavy-delayed-film-v24','coordinated-passive-loaded-film-v14','nominal-noisier750-loaded-progress-film-v58','nominal-stroke-support-v36'];blocks=[]
+    labels={'estimated-raised-heavy-delayed-film-v24':'滑块抬高 1 mm、带阻力、33 ms 执行延迟','coordinated-passive-loaded-film-v14':'协调四指承托的名义带阻力基线','nominal-noisier750-loaded-progress-film-v58':'联合训练的实质进展与剩余失败：持续压紧并推进，刀身仍越界','nominal-stroke-support-v36':'代表性失败：较大初始估计误差下的行程支撑分配候选'}
     for name in episodes:
         folder=base/'demo'/name;r=json.loads((folder/'report.json').read_text());pressure=r['pair_pressure'];ends=r['endpoints_mean_last03s_m'];label=labels[name]
         body=f'<section><h2>{html.escape(label)}</h2><video controls preload="metadata" poster="{data(folder/"key-0599.jpg","image/jpeg")}"><source src="{data(folder/"pressure-annotated.mp4","video/mp4")}" type="video/mp4"></video>'
         body+=f'<p>完整连续流程：{"通过" if r["full_success"] else "未通过"}。静止压紧 {pressure["static_thumb_pressure_mean_N"]:.3f} N，操作均值 {pressure["operation_thumb_pressure_mean_N"]:.3f} N、5%分位 {pressure["operation_thumb_pressure_5th_percentile_N"]:.3f} N；物理子步接触比例 {pressure["operation_thumb_contact_substep_fraction"]:.4f}。刀身最大转角 {r["operation_body_max_rotation_rad"]:.3f} rad。</p>'
         if not r['full_success']:
-            body+='<p>候选已停止：刀身约17.33秒失稳、20.2秒滑落。视频保留完整36秒，滑落后的导轨读数不计作完成伸缩。该候选只用已知行程分配有界电机目标，没有使用接触真值或力传感器。</p>'
+            onsets=r['failure_onsets_s'];height=onsets.get('height')
+            body+=f'<p>本回合记为失败：刀身稳定判据首次越界约{onsets["body_stability"]:.2f}秒，'+(f'{height:.2f}秒跌落到高度阈值以下。跌落后的导轨读数不计作完成伸缩。' if height is not None else '刀身仍被持住，但转动超过原任务判据。')+'视频保留完整36秒，没有使用接触真值或力传感器控制。</p>'
+            if name=='nominal-noisier750-loaded-progress-film-v58':
+                body+='<p>这是新的同一联合权重：早期基线在该估计误差下约20–21 mm停止；联合策略现在保持正确滑块接触、食指承托并推过槽位，但完整demo仍未通过。不能把这一回合列为成功或独立泛化。</p>'
         body+=f'<p>两轮端点（伸出／缩回）：{ends[0]*1000:.1f}／{ends[1]*1000:.1f} mm，{ends[2]*1000:.1f}／{ends[3]*1000:.1f} mm。外部指令40 mm，原判据为伸出&gt;25 mm、缩回&lt;8 mm、刀身转角&lt;0.25 rad、平移&lt;10 mm；没有放宽。</p>'
         body+=f'<p><a href="../demo/{name}/continuous.mp4">原始全景 MP4</a> · <a href="../demo/{name}/hand-closeup.mp4">原始手部近景 MP4</a> · <a href="../demo/{name}/report.json">完整记录</a></p><details><summary>关键帧与力来源</summary><img src="{data(folder/"keyframes.jpg","image/jpeg")}" alt="同一连续仿真的八个时间点，包含全景、手部近景和测量字幕"><p>同一实际 episode 的双视角逐帧同步，未拼接阶段。法向力来自原生接触对，240 Hz物理步、八步均值；制动容量是校准参数，不是实测导轨力。字幕使用真值仅作评估，控制器不读取运行中的物体、滑块或接触真值。</p></details></section>'
         blocks.append(body)

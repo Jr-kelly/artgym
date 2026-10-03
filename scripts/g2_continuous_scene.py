@@ -33,7 +33,7 @@ def gym_transform(position,quaternion=(0,0,0,1)):
 class G2ContinuousScene:
     def __init__(self,n=8,seed=2026100356,randomization_scale=0.,instances=None,
                  load_max=.1,detent_max=.1,contact_progress_reward=0.,reference_spec=None,
-                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False,graphics=False,disabled_perturbations=(),action_parameterization='incremental',resistance_integration='legacy-explicit',load_min=0.,detent_min=0.,asset_registry=None,proprioceptive_pressure_spec=None,resample_initial_estimates=False):
+                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False,graphics=False,disabled_perturbations=(),action_parameterization='incremental',resistance_integration='legacy-explicit',load_min=0.,detent_min=0.,asset_registry=None,proprioceptive_pressure_spec=None,resample_initial_estimates=False,stable_progress_reward=False):
         self.n=n;self.device='cuda:0';self.seed=seed
         self.disabled_perturbations=set(disabled_perturbations)
         assert self.disabled_perturbations <= {'calibration','placement','sensor','latency','material'}
@@ -59,6 +59,7 @@ class G2ContinuousScene:
         self.action_parameterization=action_parameterization
         self.contact_progress_reward=contact_progress_reward
         self.functional_thumb_reward=functional_thumb_reward
+        self.stable_progress_reward=stable_progress_reward
         self.absorbing_failure_penalty=absorbing_failure_penalty
         self.strong_slider_contact_reward=strong_slider_contact_reward
         self.cfg=configuration('wuji_geometry',n,['object=knife_wuji_real_size_20261002','hand=wuji_paper_official_actuator','+task.env.geometryRound=real-size-student-adaptation-20261002'],train='wujiAcquisitionSAPG',seed=seed)
@@ -505,7 +506,15 @@ class G2ContinuousScene:
         contact=(self.contact[:,self.pad_indices].norm(dim=-1)>.01).float();proximity=self.thumb_proximity()
         reward_proximity=proximity*(self.contact[:,self.slider_index].norm(dim=-1)>.01).float() if self.strong_slider_contact_reward else proximity
         thumb_reward=reward_proximity if self.functional_thumb_reward or self.strong_slider_contact_reward else contact[:,0]
-        reward=2*torch.exp(-(error/.012).square())+.25*thumb_reward+.1*contact[:,1:].sum(-1)-40*drift.clamp(0,.10)-4*rotation.clamp(0,1.5)-.02*executed.square().mean(-1)
+        progress_reward=2*torch.exp(-(error/.012).square())
+        if self.stable_progress_reward:
+            # The original demo rejects >10mm drift or >.25rad rotation.
+            # Do not pay the primary reach bonus while operation violates
+            # those same instantaneous conditions. Truth is reward-only;
+            # leave physics, actor inputs, termination and full criteria alone.
+            unstable_operation=operation_active&((drift>=.01)|(rotation>=.25))
+            progress_reward=torch.where(unstable_operation,torch.zeros_like(progress_reward),progress_reward)
+        reward=progress_reward+.25*thumb_reward+.1*contact[:,1:].sum(-1)-40*drift.clamp(0,.10)-4*rotation.clamp(0,1.5)-.02*executed.square().mean(-1)
         if self.contact_progress_reward:
             gate=torch.exp(-(drift/.01).square()-(rotation/.25).square())
             reward+=self.contact_progress_reward*reward_proximity*gate*((previous_error-error)/.002).clamp(-1,1)

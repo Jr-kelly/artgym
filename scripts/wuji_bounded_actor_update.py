@@ -20,7 +20,7 @@ def rollout_kl(model, public, old_mean, old_scale, active, chunk=4096):
             selected = active[first:first+chunk]
             if not selected.any():
                 continue
-            mean = model.actor(public[first:first+chunk][selected])
+            mean = model.actor_logits(public[first:first+chunk][selected])
             previous_mean = old_mean[first:first+chunk][selected]
             previous_scale = old_scale[first:first+chunk][selected]
             kl = torch.log(scale/previous_scale) + (previous_scale.square() + (previous_mean-mean).square())/(2*scale.square()) - .5

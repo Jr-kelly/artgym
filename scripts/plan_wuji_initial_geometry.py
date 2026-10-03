@@ -10,7 +10,7 @@ import numpy as np
 from scipy.optimize import least_squares
 from scripts.g2_contact_geometry import DigitGeometry
 
-def adapt(estimate,plan,support,reference):
+def adapt(estimate,plan,support,reference,thumb_contact_bias_m=None):
     assert estimate['source'] and estimate['uncertainty_m']>0
     size=np.asarray(estimate['handle_size_WTL_m'],dtype=float)
     assert size.shape==(3,) and np.all(size>0)
@@ -36,7 +36,9 @@ def adapt(estimate,plan,support,reference):
         result=q.copy();result[ids]=fit.x
         return result,float(np.linalg.norm(surface(result,finger)[0]-target))
     touch=np.asarray(plan['touch_q']);q=touch.copy();errors={}
-    thumb_shift=center_delta+delta+np.array([0,(size[1]-base[1])/2,0])
+    bias=np.zeros(3) if thumb_contact_bias_m is None else np.asarray(thumb_contact_bias_m,dtype=float)
+    assert bias.shape==(3,) and np.isfinite(bias).all()
+    thumb_shift=center_delta+delta+np.array([0,(size[1]-base[1])/2,0])+bias
     q,errors['thumb']=solve(q,'thumb',thumb_shift)
     for f in ['index','middle','pinky']:
         point,_=surface(touch,f)
@@ -45,6 +47,7 @@ def adapt(estimate,plan,support,reference):
     close=np.clip(q+np.asarray(plan['close_q'])-touch,h.lower+1e-4,h.upper-1e-4)
     opened=np.clip(np.asarray(plan['open_q'])+q-touch,h.lower+1e-4,h.upper-1e-4)
     result=copy.deepcopy(plan);result.update(touch_q=q.tolist(),close_q=close.tolist(),open_q=opened.tolist(),close_waypoints=[{'fraction':0.,'q':opened.tolist()},{'fraction':2/3,'q':q.tolist()},{'fraction':1.,'q':close.tolist()}],initial_geometry_estimate=estimate)
+    if thumb_contact_bias_m is not None:result['planned_thumb_contact_bias_knife_m']=bias.tolist()
     pressure=copy.deepcopy(support)
     pressure['post_lift_target_q']=np.clip(q+np.asarray(support['post_lift_target_q'])-touch,h.lower+1e-4,h.upper-1e-4).tolist()
     ref=copy.deepcopy(reference);trajectory_errors=[]
@@ -55,9 +58,10 @@ def adapt(estimate,plan,support,reference):
         row['point_error_m']=error;row['feasible']=error<.00025
     ref.pop('support_preload_schedule',None)
     ref['initial_geometry_estimate']=estimate
+    if thumb_contact_bias_m is not None:ref['planned_thumb_contact_bias_knife_m']=bias.tolist()
     ref['all_feasible']=all(row['feasible'] for row in ref['rows'])
     ref['all_feasible_scope']='IK accuracy and original joint limits only; original nominal collision certificates not reused. Full physical rollout required.'
-    audit=dict(input=estimate,contact_errors_m=errors,trajectory_max_error_m=max(trajectory_errors),no_physical_asset_read=True,scope='Estimated initial geometry adaptation, original nominal joint-preload offsets retained; not force regulation, collision/contact feasibility unproven')
+    audit=dict(input=estimate,planned_thumb_contact_bias_knife_m=bias.tolist(),contact_errors_m=errors,trajectory_max_error_m=max(trajectory_errors),no_physical_asset_read=True,scope='Estimated initial geometry adaptation, original nominal joint-preload offsets retained; not force regulation, collision/contact feasibility unproven')
     return result,pressure,ref,audit
 
 def main():
