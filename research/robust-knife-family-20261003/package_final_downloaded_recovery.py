@@ -9,9 +9,12 @@ for row in resume['results']:
  folder=R/row['output'];assert json.loads((folder/'complete.json').read_text())['update']==384
  files.extend(p for p in folder.iterdir() if p.is_file())
  job=base/'jobs'/row['name'];assert json.loads((job/'result.json').read_text())['exit_code']==0;files.extend(p for p in job.iterdir() if p.is_file())
+for label in ['AT','AU']:
+ folder=base/'train'/('delivery-restored-context-'+label+'-v1');assert (folder/'update_000369.pth').is_file();files.extend(p for p in folder.iterdir() if p.is_file())
+ job=base/'jobs'/('release-recovery-context-'+label+'-resume-v1');assert json.loads((job/'result.json').read_text())['exit_code']==1;files.extend(p for p in job.iterdir() if p.is_file())
 for folder in [base/'demo/final-downloaded-P50-heavy-v68',base/'deploy/final-downloaded-P50-offline-v3',base/'demo/final-downloaded-P50-failure-v69',base/'deploy/final-downloaded-P50-failure-offline-v4']:
  assert (folder/'report.json').is_file();files.extend(p for p in folder.rglob('*') if p.is_file())
-files.extend(p for p in D.glob('final-downloaded-*') if p.is_file());files.extend([D/n for n in ['restore_final_downloaded_default.py','run_final_downloaded_native_recovery.py','run_final_downloaded_validation_recovery.py','analyze_final_downloaded_recovery.py','package_final_downloaded_recovery.py','run_final_downloaded_context_resume.py','run_final_downloaded_failure_recovery.py']]);files=sorted(set(files));out=base/'delivery/final-downloaded-recovery-evidence.tar.gz';assert not out.exists()
+files.extend(p for p in D.glob('final-downloaded-*') if p.is_file());files.extend([D/n for n in ['restore_final_downloaded_default.py','run_final_downloaded_native_recovery.py','run_final_downloaded_validation_recovery.py','analyze_final_downloaded_recovery.py','package_final_downloaded_recovery.py','run_final_downloaded_context_resume.py','run_final_downloaded_failure_recovery.py','audit_final_release_model_coverage.py','run_final_downloaded_context_resume_v2.py']]);files=sorted(set(files));out=base/'delivery/final-downloaded-recovery-evidence.tar.gz';assert not out.exists()
 def sha(p):
  h=hashlib.sha256()
  with p.open('rb') as f:

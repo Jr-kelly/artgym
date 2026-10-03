@@ -13,129 +13,19 @@
   "remote_additional_consumption_unknown": false,
   "goal_complete": false,
   "last_event": {
-    "utc": "2026-10-03T06:19:22.914710+00:00",
-    "event": "final_downloaded_failure_native_full_demo_started",
-    "config": {
-      "root": "/tmp/wuji-final-release-restore-local-20261003",
-      "command": [
-        "/home/agiuser/miniconda3/envs/artgym/bin/python",
-        "-m",
-        "scripts.run_g2_robust_demo",
-        "--output",
-        "runs/robust-knife-family-20261003/demo/final-downloaded-P50-failure-v69",
-        "--video",
-        "--seconds",
-        "36",
-        "--dx=-.1985",
-        "--dy=.05",
-        "--yaw=0",
-        "--slider-face",
-        "up",
-        "--grasp-plan",
-        "research/robust-knife-family-20261003/functional-side-edge-under-support-equilibrium-v6/motor-plan.json",
-        "--table-calibration",
-        "research/robust-knife-family-20261003/functional-side-edge-under-support-v6/localization.json",
-        "--acquisition-path",
-        "research/robust-knife-family-20261003/functional-side-edge-under-support-lateral-v3/acquisition-path.json",
-        "--handover-calibration",
-        "research/robust-knife-family-20261003/handover-from-v25-v1.json",
-        "--residual-checkpoint",
-        "runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth",
-        "--load",
-        ".5",
-        "--detent",
-        ".5",
-        "--load-profile",
-        "pulse",
-        "--load-frequency",
-        "2.9",
-        "--hand-friction",
-        ".8",
-        "--knife-friction",
-        "2.4",
-        "--observation-noise",
-        ".002",
-        "--observation-bias",
-        ".006",
-        "--seed",
-        "2026100358"
-      ],
-      "parent_process": 3840276
-    },
-    "next": "Execute actual36s TABLEworkflow from actualGitHubdownloaded independently extracted source/models/assets; compare legalmotor replay"
+    "utc": "2026-10-03T06:30:25.125838+00:00",
+    "event": "final_downloaded_recovery_execution_evidence_package_completed",
+    "evidence": "runs/robust-knife-family-20261003/delivery/final-downloaded-recovery-evidence.tar.gz.manifest.json",
+    "archive_sha256": "f99a4a556e595468eafcaa3a95c82a5f5c5d545e5bb830e4150f68b347419bf9",
+    "next": "Upload and realdownload verify every new archive entry before final Release publication"
   },
-  "phase": "All finite research closed; actual downloaded final recovery and GitHub publication",
-  "next": "Execute actual36s TABLEworkflow from actualGitHubdownloaded independently extracted source/models/assets; compare legalmotor replay",
-  "active_jobs": [
-    {
-      "name": "release-recovery-independent-fresh-core-v1",
-      "gpu": 3,
-      "gpu_uuid": "GPU-a380226c-6bd4-d44c-349b-7ba8c9d12c93",
-      "gpu_count": 1,
-      "device": "NVIDIA H200",
-      "local": false,
-      "seconds": 1800,
-      "start_utc": "2026-10-03T06:18:32.016934+00:00",
-      "local_pid": 3839688,
-      "command": [
-        "bash",
-        "-c",
-        "cd /tmp/wuji-final-release-restore-remote-20261003 && exec /home/wangjiarui/artgym-runtime/bin/python -m scripts.check_g2_continuous_scene --output runs/robust-knife-family-20261003/checks/delivery-restored-independent-fresh-core-v1 --envs 128 --seed 2026100396 --randomization-scale 1.0 --load-profile triangular --load-frequency 2.9 --load-max 0.1 --detent-max 0.1 --checkpoint runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth --takeover-seconds 16.0 --compatibility-gate off --steps 1080 --instances h0000 h0001 h0002 h0003 h0004 h0005 h0006 h0007 h0008 h0009 h0010 h0011 h0012 h0013 h0014 h0015 h0016 h0017 h0018 h0019 h0020 h0021 h0022 h0023 h0024 h0025 h0026 h0027 h0028 h0029 h0030 h0031 h0032 h0033 h0034 h0035 h0036 h0037 h0038 h0039 h0040 h0041 h0042 h0043 h0044 h0045 h0046 h0047 h0048 h0049 h0050 h0051 h0052 h0053 h0054 h0055 h0056 h0057 h0058 h0059 h0060 h0061 h0062 h0063 h0064 h0065 h0066 h0067 h0068 h0069 h0070 h0071 h0072 h0073 h0074 h0075 h0076 h0077 h0078 h0079 h0080 h0081 h0082 h0083 h0084 h0085 h0086 h0087 h0088 h0089 h0090 h0091 h0092 h0093 h0094 h0095 h0096 h0097 h0098 h0099 h0100 h0101 h0102 h0103 h0104 h0105 h0106 h0107 h0108 h0109 h0110 h0111 h0112 h0113 h0114 h0115 h0116 h0117 h0118 h0119 h0120 h0121 h0122 h0123 h0124 h0125 h0126 h0127"
-      ],
-      "reserved_phase": null,
-      "source_sha256": "d5403334015a5608967b6603568f79729f4b23ad3b03e58a71c11559a49dbbd4",
-      "registered_models": {
-        "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth": "bbf61592721300b1cf053de8246898a69989ed102b7a034da6fb47cc9a541dcd",
-        "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8"
-      },
-      "disposable_precheck": false,
-      "scientific_candidate": true,
-      "pin": "/tmp/artgym-robust-20261003/pins/release-recovery-independent-fresh-core-v1",
-      "runtime": "/home/wangjiarui/artgym-runtime/bin/python",
-      "executed_command": [
-        "bash",
-        "-c",
-        "cd /tmp/wuji-final-release-restore-remote-20261003 && exec /home/wangjiarui/artgym-runtime/bin/python -m scripts.check_g2_continuous_scene --output runs/robust-knife-family-20261003/checks/delivery-restored-independent-fresh-core-v1 --envs 128 --seed 2026100396 --randomization-scale 1.0 --load-profile triangular --load-frequency 2.9 --load-max 0.1 --detent-max 0.1 --checkpoint runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth --takeover-seconds 16.0 --compatibility-gate off --steps 1080 --instances h0000 h0001 h0002 h0003 h0004 h0005 h0006 h0007 h0008 h0009 h0010 h0011 h0012 h0013 h0014 h0015 h0016 h0017 h0018 h0019 h0020 h0021 h0022 h0023 h0024 h0025 h0026 h0027 h0028 h0029 h0030 h0031 h0032 h0033 h0034 h0035 h0036 h0037 h0038 h0039 h0040 h0041 h0042 h0043 h0044 h0045 h0046 h0047 h0048 h0049 h0050 h0051 h0052 h0053 h0054 h0055 h0056 h0057 h0058 h0059 h0060 h0061 h0062 h0063 h0064 h0065 h0066 h0067 h0068 h0069 h0070 h0071 h0072 h0073 h0074 h0075 h0076 h0077 h0078 h0079 h0080 h0081 h0082 h0083 h0084 h0085 h0086 h0087 h0088 h0089 h0090 h0091 h0092 h0093 h0094 h0095 h0096 h0097 h0098 h0099 h0100 h0101 h0102 h0103 h0104 h0105 h0106 h0107 h0108 h0109 h0110 h0111 h0112 h0113 h0114 h0115 h0116 h0117 h0118 h0119 h0120 h0121 h0122 h0123 h0124 h0125 h0126 h0127"
-      ],
-      "pinned_source_verified": true
-    },
-    {
-      "name": "release-recovery-independent-height-sensitivity-v1",
-      "gpu": 1,
-      "gpu_uuid": "GPU-a7f3e397-aa6d-cc23-4c54-98c3586fd06d",
-      "gpu_count": 1,
-      "device": "NVIDIA H200",
-      "local": false,
-      "seconds": 1800,
-      "start_utc": "2026-10-03T06:18:34.709257+00:00",
-      "local_pid": 3839718,
-      "command": [
-        "bash",
-        "-c",
-        "cd /tmp/wuji-final-release-restore-remote-20261003 && exec /home/wangjiarui/artgym-runtime/bin/python -m scripts.check_g2_continuous_scene --output runs/robust-knife-family-20261003/checks/delivery-restored-independent-height-sensitivity-v1 --envs 32 --seed 2026100395 --randomization-scale 1.0 --load-profile triangular --load-frequency 2.9 --load-max 0.1 --detent-max 0.1 --checkpoint runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth --takeover-seconds 16.0 --compatibility-gate off --steps 1080 --instances sensitivity-height-minus1 sensitivity-height-plus1"
-      ],
-      "reserved_phase": null,
-      "source_sha256": "d5403334015a5608967b6603568f79729f4b23ad3b03e58a71c11559a49dbbd4",
-      "registered_models": {
-        "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth": "bbf61592721300b1cf053de8246898a69989ed102b7a034da6fb47cc9a541dcd",
-        "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8"
-      },
-      "disposable_precheck": false,
-      "scientific_candidate": true,
-      "pin": "/tmp/artgym-robust-20261003/pins/release-recovery-independent-height-sensitivity-v1",
-      "runtime": "/home/wangjiarui/artgym-runtime/bin/python",
-      "executed_command": [
-        "bash",
-        "-c",
-        "cd /tmp/wuji-final-release-restore-remote-20261003 && exec /home/wangjiarui/artgym-runtime/bin/python -m scripts.check_g2_continuous_scene --output runs/robust-knife-family-20261003/checks/delivery-restored-independent-height-sensitivity-v1 --envs 32 --seed 2026100395 --randomization-scale 1.0 --load-profile triangular --load-frequency 2.9 --load-max 0.1 --detent-max 0.1 --checkpoint runs/robust-knife-family-20261003/train/geometric-P1/update_000050.pth --takeover-seconds 16.0 --compatibility-gate off --steps 1080 --instances sensitivity-height-minus1 sensitivity-height-plus1"
-      ],
-      "pinned_source_verified": true
-    }
-  ],
-  "new_gpu_hours": 28.143582175257563,
-  "cumulative_gpu_hours": 84.2615702545854,
+  "phase": "Useful physics/training closed; final downloaded merged recovery and Release publication",
+  "next": "Upload and realdownload verify every new archive entry before final Release publication",
+  "active_jobs": [],
+  "new_gpu_hours": 28.397893061783932,
+  "cumulative_gpu_hours": 84.51588114111176,
   "remaining_gpu_hours": null,
-  "active_gpu_elapsed_hours": 0.027528674722222223,
+  "active_gpu_elapsed_hours": 0,
   "remaining_including_active": null,
   "platform": "G2+Wuji v1",
   "utilization_4h_floor_percent": 27,
@@ -143,8 +33,8 @@
   "latest_round_resume_utc": "2026-10-02T18:53:50+00:00",
   "pickup_first_success": "g2-sidepinch-equilibrium-v7",
   "github_branch": "feat/wuji-robust-knife-family-20261003",
-  "github_commit": "2e75dd3a5668ad1b18c73b9a8d6913ae5c2f28ea",
-  "local_scientific_commit": "feb2118176893b1acf025abc1c9ad6b7b8a2cdcc",
+  "github_commit": "0f209522ad59ae8834746ea4ada38afbdff7102c",
+  "local_scientific_commit": "9cea116a478cfe30983de9e8ded84e00b6654592",
   "full_demo_success": true,
   "actual_history_training_audit_passed": true,
   "dense_geometry_train_count": 512,
@@ -158,5 +48,5 @@
   "training_closed": true,
   "confirmation_closed": true,
   "primary_validation_complete": true,
-  "gpu_work_closed": false
+  "gpu_work_closed": true
 }

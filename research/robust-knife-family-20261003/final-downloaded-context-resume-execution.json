@@ -1,0 +1,87 @@
+{
+  "results": [
+    {
+      "name": "release-recovery-context-AT-resume-v2",
+      "gpu": 0,
+      "output": "runs/robust-knife-family-20261003/train/delivery-restored-context-AT-v2",
+      "complete": {
+        "utc": "2026-10-03T06:29:58.231660+00:00",
+        "update": 384,
+        "transitions": 2228224,
+        "episodes": 2140,
+        "reward": 1.2000828981399536,
+        "loss": 519.3680949211121,
+        "kl": 0.008932826598993415,
+        "active_sample_kl": 0.007427568487693596,
+        "epoch_stop_kl_scope": "active residual-control samples",
+        "policy_active_fraction": 0.59466552734375,
+        "actual_hold_history_frames": 50,
+        "wall_seconds": 164.89165347401286,
+        "peak_extension_mean_m": 0.03543225985777099,
+        "contact_mean": 0.9695209198398516,
+        "fall_fraction": 0.0078125,
+        "scope": "Training fitting/behavior only",
+        "analytic_active_rollout_kl": 0.005863671191036701,
+        "actor_step_fraction_mean": 1.0,
+        "rejected_actor_updates": 0,
+        "actor_bound_scope": "All active samples in current rollout; not a bound on future episodes",
+        "recent_episode_count": 128,
+        "recent_complete_fraction": 0.9140625,
+        "recent_pickup_valid_fraction": 1.0,
+        "all_complete_count": 1363,
+        "all_pickup_valid_count": 1873,
+        "failure_counts": {
+          "pickup/hold": 0,
+          "body unstable/drop": 11,
+          "extension": 0,
+          "retraction": 0,
+          "thumb-contact": 0
+        },
+        "behavior_scope": "Training samples, last128 episodes may mix early failures and complete36s trajectories; never independent validation"
+      },
+      "input_checkpoint": "runs/robust-knife-family-20261003/train/closing-context-AT-v1/update_000350.pth"
+    },
+    {
+      "name": "release-recovery-context-AU-resume-v2",
+      "gpu": 2,
+      "output": "runs/robust-knife-family-20261003/train/delivery-restored-context-AU-v2",
+      "complete": {
+        "utc": "2026-10-03T06:29:58.988664+00:00",
+        "update": 384,
+        "transitions": 2228224,
+        "episodes": 2141,
+        "reward": 1.199934482574463,
+        "loss": 658.586841583252,
+        "kl": 0.007523616323624083,
+        "active_sample_kl": 0.007449745771495559,
+        "epoch_stop_kl_scope": "active residual-control samples",
+        "policy_active_fraction": 0.59393310546875,
+        "actual_hold_history_frames": 50,
+        "wall_seconds": 165.45133677503327,
+        "peak_extension_mean_m": 0.03525261810864322,
+        "contact_mean": 0.985221353941597,
+        "fall_fraction": 0.0078125,
+        "scope": "Training fitting/behavior only",
+        "analytic_active_rollout_kl": 0.006217368878424168,
+        "actor_step_fraction_mean": 1.0,
+        "rejected_actor_updates": 0,
+        "actor_bound_scope": "All active samples in current rollout; not a bound on future episodes",
+        "recent_episode_count": 128,
+        "recent_complete_fraction": 0.921875,
+        "recent_pickup_valid_fraction": 0.9921875,
+        "all_complete_count": 1375,
+        "all_pickup_valid_count": 1878,
+        "failure_counts": {
+          "pickup/hold": 1,
+          "body unstable/drop": 9,
+          "extension": 0,
+          "retraction": 0,
+          "thumb-contact": 0
+        },
+        "behavior_scope": "Training samples, last128 episodes may mix early failures and complete36s trajectories; never independent validation"
+      },
+      "input_checkpoint": "runs/robust-knife-family-20261003/train/closing-context-AU-v1/update_000350.pth"
+    }
+  ],
+  "scope": "Finite actual downloaded Adam/RNG checkpoint execution test; 34newupdates each gives1088 controlframes, beyond full36s firstepisode. No new candidate validation/promotion or primary score."
+}
