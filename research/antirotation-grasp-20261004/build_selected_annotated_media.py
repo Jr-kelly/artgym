@@ -1,0 +1,8 @@
+"""Three retained development videos plus previous official contact-shape reference."""
+import subprocess,json
+from pathlib import Path
+from scripts.record_wuji_antirotation_goal import record
+B=Path('runs/antirotation-grasp-20261004');O=B/'presentation';O.mkdir(exist_ok=False);PY='/home/agiuser/miniconda3/envs/artgym/bin/python';cases=[('v17-annotated','Nominal functional development .2/.2',B/'continuous/actual-table-projected-grasp-frozen750-load2-v17'),('v18-annotated','Nominal .5/.5 failure: held/contact, return insufficient',B/'continuous/actual-table-projected-grasp-frozen750-load5-v18'),('height4-annotated','Raised4mm + axial/lateral change functional development',B/'height-development-four-v1/case01'),('previous-grasp-annotated','Previous official grasp .5/.5; different observation/material, shape comparison only',Path('runs/support-pressure-20261003/demo/nominal-frozen-staged-support-film-v138'))]
+for name,title,trial in cases:
+    cmd=[PY,'-m','scripts.annotate_wuji_antirotation_video','--trial',str(trial),'--output',str(O/(name+'.mp4')),'--title',title];subprocess.run([PY,'-m','scripts.run_wuji_antirotation_job','--name','annotated-'+name+'-v1','--']+cmd,check=True);record('antirotation_annotated_continuous_video_created',config=json.loads((O/(name+'.json')).read_text()),evidence=str(O/(name+'.mp4')),next='Embedvideos/keyframes into browsablereport andretainrawfullMP4; nofairablation claimed forold/newconditions')
+record('selected_annotated_media_completed',evidence=str(O),state_updates={'annotated_media_pipeline_pid':None},next='Finalizebrowsablereport after frozenjointconditions, publishHTML andstandaloneMP4/newRelease')

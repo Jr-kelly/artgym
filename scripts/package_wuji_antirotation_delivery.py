@@ -31,10 +31,11 @@ def main():
   for collection in ['height-development-four-v1','fresh-joint-validation4-v1']:
    for folder in (B/collection).glob('case*'):
     files.extend(f for f in folder.iterdir() if f.is_file() and (f.suffix in ['.mp4','.png'] or f.name in ['report.json','functional-evaluation.json','physics.json','plan.json']))
+  if (B/'presentation').exists():files.extend(f for f in (B/'presentation').iterdir() if f.is_file() and f.suffix in ['.mp4','.png','.json','.html'])
   for figure in ['actual-development-v3','contact-signatures-v1']:
    if (B/'figures'/figure).exists():files.extend(f for f in (B/'figures'/figure).rglob('*') if f.is_file())
  else:
-  files.extend(f for f in B.rglob('*') if f.is_file() and f.suffix in ['.npz','.json','.jsonl','.log','.yaml','.patch'] and 'delivery' not in f.relative_to(B).parts)
+  files.extend(f for f in B.rglob('*') if f.is_file() and f.suffix in ['.npz','.json','.jsonl','.log','.yaml','.patch','.csv','.txt'] and 'delivery' not in f.relative_to(B).parts)
   files.extend(f for f in D.rglob('*') if f.is_file() and f.suffix in ['.md','.json','.jsonl','.py','.sh'] and f.name!='github-commit-map.json' and '__pycache__' not in f.parts)
  files=sorted(set(files));assert files and all(f.is_file() and R in f.parents for f in files)
  a.output.parent.mkdir(parents=True,exist_ok=True);record('antirotation_delivery_archive_started',config={'group':a.group,'files':len(files)},evidence=str(a.output.relative_to(R)),next='Exact selected bytes and SHA256 manifest; representative restore before final publication')
