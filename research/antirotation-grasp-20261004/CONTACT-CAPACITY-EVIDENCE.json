@@ -1,0 +1,156 @@
+{
+  "generated_utc": "2026-10-04T06:14:00.071190+00:00",
+  "rows": [
+    {
+      "trial": "actual-table-projected-grasp-frozen750-load2-v17",
+      "run_start_capacity_parameters_N": [
+        0.2,
+        0.2
+      ],
+      "actual_configured_solver_capacity_minmax_operation_N": [
+        0.2,
+        0.5141590785660743
+      ],
+      "thumb_pair_normal_mean_operation_N": 0.7690848609673545,
+      "thumb_exact_contact_fraction": 0.9991680532445923,
+      "index_body_exact_contact_substep_fraction_by_phase": [
+        {
+          "interval_s": [
+            14,
+            16
+          ],
+          "fraction": 1.0
+        },
+        {
+          "interval_s": [
+            16,
+            21
+          ],
+          "fraction": 0.9991666666666666
+        },
+        {
+          "interval_s": [
+            21,
+            26
+          ],
+          "fraction": 0.9983333333333333
+        },
+        {
+          "interval_s": [
+            26,
+            31
+          ],
+          "fraction": 0.9991666666666666
+        },
+        {
+          "interval_s": [
+            31,
+            36
+          ],
+          "fraction": 0.37333333333333335
+        }
+      ]
+    },
+    {
+      "trial": "actual-table-projected-grasp-frozen750-load5-v18",
+      "run_start_capacity_parameters_N": [
+        0.5,
+        0.5
+      ],
+      "actual_configured_solver_capacity_minmax_operation_N": [
+        0.5,
+        1.2853897362533928
+      ],
+      "thumb_pair_normal_mean_operation_N": 0.7415312243875707,
+      "thumb_exact_contact_fraction": 1.0,
+      "index_body_exact_contact_substep_fraction_by_phase": [
+        {
+          "interval_s": [
+            14,
+            16
+          ],
+          "fraction": 1.0
+        },
+        {
+          "interval_s": [
+            16,
+            21
+          ],
+          "fraction": 0.9991666666666666
+        },
+        {
+          "interval_s": [
+            21,
+            26
+          ],
+          "fraction": 0.9633333333333334
+        },
+        {
+          "interval_s": [
+            26,
+            31
+          ],
+          "fraction": 1.0
+        },
+        {
+          "interval_s": [
+            31,
+            36
+          ],
+          "fraction": 0.7325
+        }
+      ]
+    },
+    {
+      "trial": "actual-table-thin-allcontact-frozen750-load2-v24",
+      "run_start_capacity_parameters_N": [
+        0.2,
+        0.2
+      ],
+      "actual_configured_solver_capacity_minmax_operation_N": [
+        0.2,
+        0.5141441788117967
+      ],
+      "thumb_pair_normal_mean_operation_N": 0.6171556737308221,
+      "thumb_exact_contact_fraction": 1.0,
+      "index_body_exact_contact_substep_fraction_by_phase": [
+        {
+          "interval_s": [
+            14,
+            16
+          ],
+          "fraction": 1.0
+        },
+        {
+          "interval_s": [
+            16,
+            21
+          ],
+          "fraction": 0.6141666666666666
+        },
+        {
+          "interval_s": [
+            21,
+            26
+          ],
+          "fraction": 0.0033333333333333335
+        },
+        {
+          "interval_s": [
+            26,
+            31
+          ],
+          "fraction": 0.0
+        },
+        {
+          "interval_s": [
+            31,
+            36
+          ],
+          "fraction": 0.0
+        }
+      ]
+    }
+  ],
+  "scope": "Existingphysicaltrace evaluation: solver_brake_capacity_N is native constraint forcecap parameter only, not instantaneousappliedbrakeforce or frictionaltraction. Start/groove modulation canraise capabove basevalue. ThumbpairNORMAL separatelymeasuredincalibratedsimulation, notrealforce/no actorforceinput. No realcutterresistance ceiling inferred."
+}

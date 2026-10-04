@@ -23,16 +23,23 @@ def main():
     if frozen.exists():files.extend([frozen,frozen.with_suffix('.sha256')])
    files.extend(f for f in folder.iterdir() if f.is_file() and f.suffix in ['.json','.jsonl','.yaml'])
   files.extend(f for f in (B/'jobs').rglob('*') if f.is_file() and f.name in ['identity.json','result.json'])
+  resumed=B/'newprefix-recovery-v1/resumed'
+  if resumed.exists():files.extend(f for f in resumed.iterdir() if f.is_file() and f.suffix in ['.pth','.sha256','.json','.jsonl','.yaml'])
+  if (B/'newprefix-recovery-v1/resume-receipt.json').exists():files.append(B/'newprefix-recovery-v1/resume-receipt.json')
  elif a.group=='movies':
   for name in ['actual-table-projected-grasp-frozen750-load2-v17','actual-table-projected-grasp-frozen750-load5-v18','actual-table-projected-size08-frozen750-load2-v19','actual-table-projected-retain750-frozen50-load5-v21','actual-table-continuous-prepared-frozen750-load5-v23','actual-table-thin-allcontact-frozen750-load2-v24','actual-table-thin-threegeo-frozen50-load2-v25','actual-table-thin-index-retention-frozen750-load2-v26','actual-table-thin-moment-retention-frozen750-load2-v27','actual-table-nominal-table-prior-range04-frozen50-load2-v32','actual-table-thin-table-prior-range04-frozen50-load2-v33','actual-table-nominal-table-prior-range12-frozen50-load2-v34','actual-table-thin-table-prior-range12-frozen50-load2-v35']:
    folder=B/'continuous'/name
    if not folder.exists():continue
    files.extend(f for f in folder.iterdir() if f.is_file() and (f.suffix in ['.mp4','.png'] or f.name in ['report.json','functional-evaluation.json','physics.json','plan.json']))
-  for collection in ['height-development-four-v1','fresh-joint-validation4-v1']:
-   for folder in (B/collection).glob('case*'):
+  for name in ['actual-table-postlift-ring-brace-frozen750-load5-v36','actual-table-ring-tracking-acquisition-frozen750-load5-v37']:
+   folder=B/'continuous'/name
+   if folder.exists():files.extend(f for f in folder.iterdir() if f.is_file() and (f.suffix in ['.mp4','.png'] or f.name in ['report.json','functional-evaluation.json','physics.json','plan.json']))
+  for collection in ['height-development-four-v1','fresh-joint-validation4-v1','necessary24-frozen25-development-v1']:
+   for folder in (B/collection).iterdir() if (B/collection).exists() else []:
+    if not folder.is_dir():continue
     files.extend(f for f in folder.iterdir() if f.is_file() and (f.suffix in ['.mp4','.png'] or f.name in ['report.json','functional-evaluation.json','physics.json','plan.json']))
-  if (B/'presentation').exists():files.extend(f for f in (B/'presentation').iterdir() if f.is_file() and f.suffix in ['.mp4','.png','.json','.html'])
-  for figure in ['actual-development-v3','contact-signatures-v1']:
+  if (B/'presentation').exists():files.extend(f for f in (B/'presentation').iterdir() if f.is_file() and 'preview' not in f.name and f.suffix in ['.mp4','.png','.json','.html'])
+  for figure in ['actual-development-v3','contact-signatures-v1','loaded-return-evidence-v1']:
    if (B/'figures'/figure).exists():files.extend(f for f in (B/'figures'/figure).rglob('*') if f.is_file())
  else:
   files.extend(f for f in B.rglob('*') if f.is_file() and f.suffix in ['.npz','.json','.jsonl','.log','.yaml','.patch','.csv','.txt'] and 'delivery' not in f.relative_to(B).parts)

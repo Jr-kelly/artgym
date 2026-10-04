@@ -1,0 +1,113 @@
+{
+  "generated_utc": "2026-10-04T06:04:24.383484+00:00",
+  "rows": [
+    {
+      "case": 0,
+      "physical_dimensions_WTL_m": [
+        0.016,
+        0.012,
+        0.135
+      ],
+      "physical_slider_size_WTL_m": [
+        0.01,
+        0.002,
+        0.03
+      ],
+      "physical_asset": "assets/objects/knife_wuji_antirotation_height_20261004/b0000/mobility.urdf",
+      "functional_pass": false,
+      "thumb_contact_substep_fraction": 0.8153078202995009,
+      "endpoints_mm": {
+        "extend1": 22.017815166232303,
+        "return1": 1.6058501946601411,
+        "extend2": 2.9055462377938768,
+        "return2": 2.093397562471344
+      },
+      "failed_checks": [
+        "endpoints",
+        "bounded_return_drift",
+        "thumb_contact"
+      ],
+      "scope": "First known train-morphology development observation, unchanged750/.2/.2; no validation reuse/outcome filtering"
+    },
+    {
+      "case": 1,
+      "physical_dimensions_WTL_m": [
+        0.016,
+        0.012,
+        0.135
+      ],
+      "physical_slider_size_WTL_m": [
+        0.01,
+        0.004,
+        0.03
+      ],
+      "physical_asset": "assets/objects/knife_wuji_antirotation_height_20261004/b0001/mobility.urdf",
+      "functional_pass": true,
+      "thumb_contact_substep_fraction": 1.0,
+      "endpoints_mm": {
+        "extend1": 36.16405163620146,
+        "return1": 6.787310835984661,
+        "extend2": 31.54256050901966,
+        "return2": 3.8682087483677408
+      },
+      "failed_checks": [],
+      "scope": "First known train-morphology development observation, unchanged750/.2/.2; no validation reuse/outcome filtering"
+    },
+    {
+      "case": 2,
+      "physical_dimensions_WTL_m": [
+        0.014,
+        0.01,
+        0.13
+      ],
+      "physical_slider_size_WTL_m": [
+        0.01,
+        0.004,
+        0.03
+      ],
+      "physical_asset": "assets/objects/knife_wuji_antirotation_height_20261004/b0002/mobility.urdf",
+      "functional_pass": false,
+      "thumb_contact_substep_fraction": 1.0,
+      "endpoints_mm": {
+        "extend1": 27.508873275560454,
+        "return1": 9.37525324251981,
+        "extend2": 25.57270626266034,
+        "return2": 11.526606527236416
+      },
+      "failed_checks": [
+        "relative_envelope",
+        "endpoints",
+        "bounded_return_drift"
+      ],
+      "scope": "First known train-morphology development observation, unchanged750/.2/.2; no validation reuse/outcome filtering"
+    },
+    {
+      "case": 3,
+      "physical_dimensions_WTL_m": [
+        0.018,
+        0.014,
+        0.14
+      ],
+      "physical_slider_size_WTL_m": [
+        0.01,
+        0.002,
+        0.03
+      ],
+      "physical_asset": "assets/objects/knife_wuji_antirotation_height_20261004/b0003/mobility.urdf",
+      "functional_pass": false,
+      "thumb_contact_substep_fraction": 1.0,
+      "endpoints_mm": {
+        "extend1": 22.141820767042354,
+        "return1": 1.3851882117661973,
+        "extend2": 17.066123445597604,
+        "return2": -1.3810720900231388e-06
+      },
+      "failed_checks": [
+        "endpoints"
+      ],
+      "scope": "First known train-morphology development observation, unchanged750/.2/.2; no validation reuse/outcome filtering"
+    }
+  ],
+  "criterion_declared_utc": "2026-10-03T20:22:00+00:00",
+  "necessary_generalization_resolved": false
+}

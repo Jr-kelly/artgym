@@ -1,6 +1,6 @@
 # 本轮连续仿真复现
 
-当前可运行的完整桌面流程为 V17：实际桌缘取刀、持稳、两次带阻力伸出—保持—缩回—保持。冻结750未重新训练；新抓姿适配和完整拇指 motor 轨迹形成了有效接触。40mm指令对应实测32.21/26.44mm伸出、6.49/1.99mm回程。通过本轮预先声明的功能规则；旧0.25rad规则仍失败，不代表实物40mm行程/完全收起、必要泛化或真机完成。
+当前可运行的完整桌面流程为 V17：实际桌缘取刀、持稳、两次带阻力伸出—保持—缩回—保持。冻结750未重新训练；新抓姿适配和完整拇指 motor 轨迹形成了有效接触。40mm指令对应实测32.21/26.44mm伸出、回缩末端位置距仿真导轨下限6.49/1.99mm。通过本轮预先声明的功能规则；旧0.25rad规则仍失败，不代表实物40mm行程/完全收起、必要泛化或真机完成。
 
 在仓库根目录，解压本轮 runtime 依赖包，使用既有 Isaac Gym Python3.8 环境运行：
 
@@ -30,10 +30,28 @@ python -m scripts.run_wuji_antirotation_delivery_demo --case higher-load-failure
 python -m scripts.run_wuji_antirotation_delivery_demo --case thin-failure --output runs/antirotation-grasp-20261004/my-thin
 ```
 
-入口清楚标注原结果的开发/失败角色，保持原指令，自动运行新旧评分。`--show-command`只打印参数，不运行物理。原始权重/轨迹哈希见本目录`DEMO-COMMANDS.json`；新机器结果必须以新输出实际视频/评分为准。高度成功例实测36.16/31.54mm伸出、6.79/3.87mm回缩，属于同一750加初始估计统一适配的已知高度开发例，不能推广为全尺寸泛化。
+入口清楚标注原结果的开发/失败角色，保持原指令，自动运行新旧评分。`--show-command`只打印参数，不运行物理。原始权重/轨迹哈希见本目录`DEMO-COMMANDS.json`；新机器结果必须以新输出实际视频/评分为准。高度成功例实测36.16/31.54mm伸出、回缩末端位置距仿真导轨下限6.79/3.87mm，属于同一750加初始估计统一适配的已知高度开发例，不能推广为全尺寸泛化。
 
 本轮冻结新5秒接管训练权重与模型/Adam/RNG另外放在learning包；750最强开发例仍使用runtime的原权重。若恢复本轮早期负训练且配置引用旧dense软链接资产，使用`--training-asset-registry research/antirotation-grasp-20261004/PHYSICAL-TRAIN-GEOMETRY.json`替代八个实际使用训练资产，字节相同的可移植副本已随源码保留。对于新的严格16场景与24必要形态配置，使用其自身registry，保持帧/场景/采样配对一致，不用替代registry改变原形态。
 
 完整24初始估计/12物理形态配置：`runs/antirotation-grasp-20261004/complete-necessary-geometry24-v1/{scene24.json,registry.json,schedule1536.json}`；每个形态两次独立带噪声初始估计，重采样只在新回合。该配置本轮尚未训练，不包含能通过高度全范围的权重。它是继续有意义几何训练的准备，不是泛化成果。
 
 可浏览报告及四个带力字幕双视角MP4单独公开；movies包同时保留原全景/手部近景，未剪切、不拼阶段。字幕使用评估真值，并明确法向贡献不含摩擦牵引力、容量不等于实物阻力。旧轮V138参数与本轮不匹配，仅作接触形态对照。
+
+
+新5秒接管和有限无名指关节滞后搜索的代表性失败也使用统一入口，不改变原判据：
+
+```bash
+python -m scripts.run_wuji_antirotation_delivery_demo --case newprefix-thin-failure --output runs/antirotation-grasp-20261004/my-newprefix-thin-failure
+python -m scripts.run_wuji_antirotation_delivery_demo --case ring-tracking-failure --output runs/antirotation-grasp-20261004/my-ring-failure
+```
+
+第一条额外解压learning包中的冻结50；第二条仍为runtime原750。滞后搜索是有限位置目标调整，不是测得接触力或恒力。
+
+新5秒接管实验权重的模型/Adam/RNG恢复入口（已实际执行range04的50→51一次更新，51不用于晋升）：
+
+```bash
+python -m scripts.resume_wuji_antirotation_training --range 04 --updates 51 --output runs/antirotation-grasp-20261004/my-resume04
+```
+
+同样可用`--range 12`查看对应命令，只有range04本轮作过实际恢复检查。入口默认只再执行一个真实训练更新，开始新物理回合；不是建议延长已失败的训练路线。没有默认无限续训、SDK或机器人动作。

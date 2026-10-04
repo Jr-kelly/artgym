@@ -53,8 +53,11 @@ def main():
 
         if a.training_geometry_schedule:
             schedule=json.loads(a.training_geometry_schedule.read_text());training_instances=schedule['instances']
-            manifest=json.loads((Path('research/robust-knife-family-20261003')/'dense-family-v1/manifest.json').read_text())
-            allowed=set(asset_registry) if asset_registry is not None else {r['instance'] for r in manifest['entries'] if r['split']=='train'}
+            if asset_registry is not None:
+                allowed=set(asset_registry)
+            else:
+                manifest=json.loads((Path('research/robust-knife-family-20261003')/'dense-family-v1/manifest.json').read_text())
+                allowed={r['instance'] for r in manifest['entries'] if r['split']=='train'}
             assert len(training_instances)==a.envs and set(training_instances)<=allowed
         scene_spec=torch.load(a.resume,map_location='cpu').get('scene_spec') if a.resume else json.loads(a.initial_estimate_scene.read_text()) if a.initial_estimate_scene else None
         if a.override_initial_estimate_scene:
