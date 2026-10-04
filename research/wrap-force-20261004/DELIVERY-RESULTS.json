@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-04T22:34:19.564218+00:00",
+  "generated_utc": "2026-10-04T22:53:24.683897+00:00",
   "release_tag": "wuji-g2-wrap-force-20261005-v1",
   "demo_status": "完整连续仿真已做成：G2＋Wuji从原桌角拿刀、持稳、两轮40 mm伸缩命令与保持；默认V12名义功能通过，无夹具、换握、定时位置锁存或中途重置。真机未运行。",
   "generalization_status": "同S120及统一一次带误差估计规则，012–015四个留出几何有实际连续通过记录；降低指节摩擦的一个假设条件也通过；额外薄刀130×14×10 mm与滑块轴向＋5 mm在同权重、同一次估计及匹配预成形规则下实际通过。未证明覆盖全部130–140×14–18×10–14 mm范围、全部滑块±5/±1/±1 mm组合或联合必要泛化。",
@@ -842,7 +842,7 @@
     }
   ],
   "flags": {
-    "delivery_complete": false,
+    "delivery_complete": true,
     "functional_demo_ready": true,
     "necessary_generalization_resolved": false,
     "hardware_ready": false,
@@ -852,8 +852,8 @@
   },
   "work_and_resources": {
     "round_start_utc": "2026-10-04T10:51:40.525679+00:00",
-    "generated_utc": "2026-10-04T22:34:19.564218+00:00",
-    "elapsed_hours": 11.71084403861111,
+    "generated_utc": "2026-10-04T22:53:24.683897+00:00",
+    "elapsed_hours": 12.028932838333333,
     "minimum_work_hours": 12,
     "minimum_finish_utc": "2026-10-04T22:51:40.525679+00:00",
     "no_subagents": true,
@@ -862,36 +862,36 @@
     "gpu_hour_cap": null,
     "local_snapshot": {
       "pid": 3068820,
-      "heartbeat": "2026-10-04T22:34:19.106383+00:00",
+      "heartbeat": "2026-10-04T22:53:24.679218+00:00",
       "session": "pid:[4026531836]",
       "current": [
         {
           "index": 0,
-          "utilization": 22.0,
-          "memory_used_mb": 799.0,
+          "utilization": 24.0,
+          "memory_used_mb": 807.0,
           "memory_total_mb": 24564.0
         }
       ],
       "windows": {
         "60": {
-          "mean_percent": 23.666666666666668,
+          "mean_percent": 25.0,
           "samples": 6,
-          "covered_seconds": 50.27264189720154
+          "covered_seconds": 50.224188566207886
         },
         "300": {
-          "mean_percent": 24.166666666666668,
+          "mean_percent": 27.033333333333335,
           "samples": 30,
-          "covered_seconds": 291.40936517715454
+          "covered_seconds": 291.3552975654602
         },
         "900": {
-          "mean_percent": 29.288888888888888,
+          "mean_percent": 26.566666666666666,
           "samples": 90,
-          "covered_seconds": 894.5911619663239
+          "covered_seconds": 894.2325074672699
         },
         "14400": {
-          "mean_percent": 29.026536312849164,
+          "mean_percent": 29.383379888268156,
           "samples": 1432,
-          "covered_seconds": 14390.220259189606
+          "covered_seconds": 14390.29524064064
         }
       },
       "provider_minimum_percent": 26.0,
@@ -901,7 +901,7 @@
     },
     "development_last_fetched_snapshot": {
       "pid": 593,
-      "heartbeat": "2026-10-04T21:51:58.440447+00:00",
+      "heartbeat": "2026-10-04T22:49:51.959361+00:00",
       "session": "pid:[4026551244]",
       "current": [
         {
@@ -933,22 +933,22 @@
         "60": {
           "mean_percent": 0.0,
           "samples": 6,
-          "covered_seconds": 50.50996541976929
+          "covered_seconds": 50.48087549209595
         },
         "300": {
           "mean_percent": 0.0,
           "samples": 30,
-          "covered_seconds": 292.80651903152466
+          "covered_seconds": 292.8092448711395
         },
         "900": {
           "mean_percent": 0.0,
           "samples": 90,
-          "covered_seconds": 898.5806775093079
+          "covered_seconds": 898.448183298111
         },
         "14400": {
-          "mean_percent": 6.169149868536372,
-          "samples": 1141,
-          "covered_seconds": 11529.75402545929
+          "mean_percent": 4.625614035087719,
+          "samples": 1425,
+          "covered_seconds": 14394.81775689125
         }
       },
       "provider_minimum_percent": 26.0,
@@ -956,7 +956,7 @@
       "alert": "low_utilization",
       "note": "Local 10s samples approximate provider accounting; rolling windows cover only samples since this resource restart"
     },
-    "remote_rule_status": "Remote whole-machine26% floor /40% target not demonstrated; sampling low and SSH unavailable15:00–18:34UTC, interruption cause unknown. Fresh timestamps/partial coverage retained, no hidden occupancy."
+    "remote_rule_status": "Latest approximate full4h development whole-machine sampling ~4.63% missed26%floor/40%target; local~29.12% exceeded26% butmissed40%. SSH unavailable15:00–18:34UTC; interruption cause unknown. Exact timestamped windows below, no hidden/filler occupancy."
   },
   "evidence": {
     "selected": "FROZEN-WRAP-CONTINUOUS-CANDIDATE-V12.json",

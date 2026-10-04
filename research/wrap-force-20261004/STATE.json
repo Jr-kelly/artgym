@@ -2,7 +2,7 @@
   "round_start_utc": "2026-10-04T10:51:40.525679+00:00",
   "minimum_work_hours": 12,
   "minimum_finish_utc": "2026-10-04T22:51:40.525679+00:00",
-  "phase": "Continuous source2 functional grip adaptation and corrected geometry observation",
+  "phase": "Current 12h wrap-force round delivered to GitHub; unresolved scientific/hardware work explicit",
   "baseline_release": "wuji-g2-antirotation-grasp-20261004-v1",
   "baseline_local_commit": "29825ad91b7075b080f96e65370f49a0201c614b",
   "baseline_github_commit": "b892d8909efb9da33407b02e6ffd229f7d6f00b4",
@@ -10,7 +10,7 @@
   "gpu_hour_cap": null,
   "no_subagents": true,
   "no_real_robot_commands": true,
-  "delivery_complete": false,
+  "delivery_complete": true,
   "functional_demo_ready": true,
   "necessary_generalization_resolved": false,
   "hardware_ready": false,
@@ -24,19 +24,30 @@
     "name": "NVIDIA H200",
     "initially_idle": true
   },
-  "next": "Publishverifiedcurrentroundscienceafter12h, thenupdatecompletedpublicreceipt",
+  "next": "ResumefromnewformalRelease andthishandoff. Needactual knife dualdirection resistance/effectivefullyclosed travel andSDK units/joint/timestamp mapping; do not repeat failedsame-configurationtraining. Continue simulation only with a concrete support/bidirectionalcontact improvement. Reverify any datedPIDs/resources beforeuse.",
   "last_event": {
-    "utc": "2026-10-04T22:44:57.495638+00:00",
-    "event": "public_resource_statement_updated",
-    "evidence": "research/wrap-force-20261004/FINAL-REPORT.md",
-    "conclusion": "Explicitlatestapprox4h development4.63% missesfloor; local29.12%misses40target. Oldpartialstatusnotcurrentfact; snapshotPIDscopeexplicit.",
-    "next": "Publishverifiedcurrentroundscienceafter12h, thenupdatecompletedpublicreceipt"
+    "utc": "2026-10-04T22:56:13.539947+00:00",
+    "event": "current_round_delivery_handoff_completed",
+    "evidence": [
+      "research/wrap-force-20261004/FINAL-REPORT.md",
+      "research/wrap-force-20261004/PUBLIC-DELIVERY-RECEIPT.json",
+      "research/wrap-force-20261004/PUBLIC-DELIVERY-ASSET-VERIFICATION.json",
+      "research/wrap-force-20261004/PUBLIC-RELEASE-ARTIFACTS.json"
+    ],
+    "config": {
+      "selected_weight_sha256": "ad16a153c27eb01567c14422ca8ed23e5bebfc6e1c901683031f245631944d2a",
+      "formal_tag_github_commit": "c5d0e2f0d38af8f1d5165b4e5f4e874777054959",
+      "minimum_12h_fulfilled": true
+    },
+    "conclusion": "32publicassets verified, newformalRelease accessible, allfinitejobsclosed. Strongestactualcontinuoussolution retained; no claims oforiginalaxialB, necessaryjointgeneralization, hardware/realrobot orgoalcompletion. Currenthandoffindependentofchat; archivedSTATEprepublication snapshot clearlylabelled.",
+    "phase": "Current 12h wrap-force round delivered to GitHub; unresolved scientific/hardware work explicit",
+    "next": "ResumefromnewformalRelease andthishandoff. Needactual knife dualdirection resistance/effectivefullyclosed travel andSDK units/joint/timestamp mapping; do not repeat failedsame-configurationtraining. Continue simulation only with a concrete support/bidirectionalcontact improvement. Reverify any datedPIDs/resources beforeuse."
   },
   "baseline_functional_demo_ready": true,
   "local_resource_monitor_pid": 3068820,
   "github_branch": "feat/wuji-wrap-force-20261004",
-  "github_commit": "1302a4be79f2b92802ea0510fad8fd5a6bfca1c5",
-  "local_scientific_commit": "4a7fe7d91a0c0736e2e36944809557072982ed0e",
+  "github_commit": "c5d0e2f0d38af8f1d5165b4e5f4e874777054959",
+  "local_scientific_commit": "e27f6b5b5c8dd7e3b399e4c94c69ccfbeb9945f7",
   "multigrasp_comparison_required_before_long_training": true,
   "multigrasp_comparison_completed": true,
   "geometry_split_preserved": {
@@ -55,5 +66,6 @@
   "development_training_launch_confirmed": false,
   "geometry_held_submodule_pass": true,
   "promising_continuous_candidate": "continuous-thumb25 update50; functional allchecks exceptfinalsettling",
-  "diagnostic_axial_force_measured": true
+  "diagnostic_axial_force_measured": true,
+  "github_release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-g2-wrap-force-20261005-v1"
 }

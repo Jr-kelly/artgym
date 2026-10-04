@@ -79,3 +79,5 @@ Release附件包含带视频／关键帧的自包含HTML、三条完整MP4、同
 交付完成单独记账：`delivery_complete` 不代表 `goal_complete`。`functional_demo_ready=true`；`necessary_generalization_resolved=false`、`axial_force_measurement_resolved=false`、`hardware_ready=false`、`real_robot_ran=false`、`goal_complete=false`。
 
 补充控制历史诊断：V42只把上一帧实际已发目标／动作接回离线状态，600个当前目标预测最大差1.19e−7 rad；当前／未来目标没有作为本帧参考输入。旧固定测量、自由演进内部命令记忆的0.01543 rad差异仍保留。两者是不同离线条件，不是自主闭环等价或SDK证明，默认物理控制器未改变。见LEGAL-ISSUED-HISTORY-REPLAY-V42.json。
+
+正式发布回执：https://github.com/Jr-kelly/artgym/releases/tag/wuji-g2-wrap-force-20261005-v1，发布确认UTC 2026-10-04T22:52:34.523835+00:00；当前轮累计推进 12.015 小时。正式交付完成，目标／必要泛化／原刀测力／硬件仍未完成。
