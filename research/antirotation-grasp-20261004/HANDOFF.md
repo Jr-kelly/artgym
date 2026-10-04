@@ -7,7 +7,7 @@
   "round_start_utc": "2026-10-03T20:03:23+00:00",
   "minimum_work_hours": 12,
   "earliest_12h_utc": "2026-10-04T08:03:23+00:00",
-  "phase": "First actual table pickup plus two-cycle functional demo passed using frozen750 and new actual contact topology; challenge load/geometry, complete delivery",
+  "phase": "Functional nominal demo retained; thin actual pickup repaired, necessary common geometry curriculum and strict bank preparation active",
   "baseline_local_commit": "b75e12effbfb5a9ce740411b5ec699db60338b3e",
   "baseline_github_commit": "d0d6ce01d5550ec5b512fdc4e510c5546569d8b4",
   "baseline_release": "wuji-g2-support-pressure-20261003-v1",
@@ -25,47 +25,72 @@
   "goal_complete": false,
   "active_jobs": [
     {
-      "name": "actual-projected-realnominal-retain750-v4",
+      "name": "three-geometry-frozen750-population-causal-v7",
       "machine": "local",
-      "pid": 1151666,
+      "pid": 1205118,
       "gpu": 0,
-      "start_utc": "2026-10-04T01:50:32.543555+00:00"
+      "start_utc": "2026-10-04T03:06:37.785921+00:00"
     },
     {
-      "name": "thin-table-motor-projection-complete-v4",
+      "name": "common-bank16-obs08-thumbdense-v1",
       "machine": "local",
-      "pid": 1161150,
+      "pid": 1206021,
       "gpu": 0,
-      "start_utc": "2026-10-04T02:03:57.910524+00:00"
+      "start_utc": "2026-10-04T03:08:07.098060+00:00"
     }
   ],
   "no_subagents": true,
   "remote_root": "/home/wangjiarui/artgym-antirotation-grasp-20261004",
   "private_attachment_media": "/tmp/wuji-antirotation-attachment-20261004",
-  "next": "Dense full actual open/close approach audit before physical thin-geometry run",
+  "next": "Inspect actual result and persist conclusion; no simulation/hardware success inferred from process startup",
   "last_event": {
-    "utc": "2026-10-04T02:04:47.433549+00:00",
-    "event": "thin_touch_close_projection_rejected_by_complete_acquisition",
-    "config": {
-      "touch_close_and_transfer_dense_passed": true,
-      "complete_acquisition_passed": false,
-      "minimum_actual_command_table_gap_m": -0.00012439858896201583,
-      "change": "Extend same bounded original pinky/table optimization to original open target and open-to-touch segment; acceptance unchanged"
+    "utc": "2026-10-04T03:08:07.098270+00:00",
+    "event": "antirotation_job_started",
+    "active_job": {
+      "name": "common-bank16-obs08-thumbdense-v1",
+      "machine": "local",
+      "pid": 1206021,
+      "gpu": 0,
+      "start_utc": "2026-10-04T03:08:07.098060+00:00"
     },
-    "evidence": "runs/antirotation-grasp-20261004/initial-geometry-v3/thin-projected04-reserve/acquisition-audit.json",
-    "next": "Dense full actual open/close approach audit before physical thin-geometry run"
+    "config": {
+      "command": [
+        "/home/agiuser/miniconda3/envs/artgym/bin/python",
+        "-m",
+        "scripts.audit_g2_anchored_thumb_motor",
+        "--reference",
+        "runs/antirotation-grasp-20261004/common-geometry-bank16-v1/observation-08/reference.json",
+        "--motor-plan",
+        "runs/antirotation-grasp-20261004/common-geometry-bank16-v1/observation-08/motor-plan.json",
+        "--knife-spec",
+        "research/robust-knife-family-20261003/real-knife-asset-spec.json",
+        "--samples",
+        "161",
+        "--output",
+        "runs/antirotation-grasp-20261004/common-geometry-bank16-v1/observation-08/motor-audit.json"
+      ],
+      "pid": 1206021,
+      "launcher_pid": 1206020,
+      "gpu": 0,
+      "start_utc": "2026-10-04T03:08:07.098060+00:00"
+    },
+    "evidence": "runs/antirotation-grasp-20261004/jobs/common-bank16-obs08-thumbdense-v1",
+    "next": "Inspect actual result and persist conclusion; no simulation/hardware success inferred from process startup"
   },
   "resource_monitor_pid": 502,
   "resource_monitor_start_utc": "2026-10-03T20:15:18.833167+00:00",
   "held_bidirectional_development_ready": true,
   "github_branch": "feat/wuji-antirotation-grasp-20261004",
-  "github_commit": "f1ca1446dadece78d6e5fd14974ab357222bfd13",
-  "local_scientific_commit": "c78dfa5e13f20d68a31e86d03ecbbbc3f705cf83",
+  "github_commit": "ad9544ec918ddcb5363abead78c3d55fc8e2de12",
+  "local_scientific_commit": "801f042188190b0262ca8fcea81adc525e8fff1d",
   "actual_table_integration_pipeline_pid": null,
   "lower_side_direct_pipeline_pid": null,
   "local_coordinate_comparison_pipeline_pid": null,
   "projected_noisy_nominal_pipeline_pid": null,
   "contact_normal_pipeline_pid": null,
-  "functional_demo_scope": "Nominal/noisy initial estimate development case .2/.2 only; actual32/26mm extensions for40mmcommand, necessarygen unresolved"
+  "functional_demo_scope": "Nominal/noisy initial estimate development case .2/.2 only; actual32/26mm extensions for40mmcommand, necessarygen unresolved",
+  "common_geometry_bank16_pipeline_pid": 1180631,
+  "local_resource_monitor_pid": 1174078,
+  "three_geometry_curriculum_pipeline_pid": 1183167
 }
 ```

@@ -1,0 +1,220 @@
+{
+  "args": {
+    "postlift_regrasp": "runs/antirotation-grasp-20261004/bidirectional-motor-preload-v2/continuous-flow/postlift-path.json",
+    "measured_resistance_profile": null,
+    "held_diagnostic": false,
+    "wrist_roll_reference_degrees": 0.0,
+    "output": "runs/antirotation-grasp-20261004/continuous/actual-table-continuous-prepared-frozen750-load5-v23",
+    "support_residual_scale_override": null,
+    "truth_body_roll_diagnostic": false,
+    "video": true,
+    "middle_load_lag_regulation": false,
+    "middle_deflection_support": null,
+    "contact_import_audit": false,
+    "collision_geometry_video": false,
+    "seconds": 36.0,
+    "table_height": 0.75,
+    "dx": -0.1985,
+    "dy": 0.05,
+    "yaw": 0,
+    "close_height": 0,
+    "load": 0.5,
+    "grasp_plan": "runs/antirotation-grasp-20261004/bidirectional-motor-preload-v2/continuous-flow/motor-plan.json",
+    "slider_face": "up",
+    "arm_seed": null,
+    "grasp_only": false,
+    "handover_calibration": null,
+    "table_calibration": "runs/antirotation-grasp-20261004/pickup-plans-v1/opposed/localization.json",
+    "cartesian_path": null,
+    "acquisition_path": "runs/antirotation-grasp-20261004/pickup-plans-v1/opposed/lateral-acquisition/acquisition-path.json",
+    "thumb_action_gain": 1.0,
+    "support_action_gain": 1.0,
+    "residual_checkpoint": "runs/support-pressure-20261003/train/joint-noisier-continuation-v31/update_000750.pth",
+    "detent": 0.5,
+    "variable_load": false,
+    "thumb_script": null,
+    "knife_asset": "assets/objects/knife_wuji_real_size_20261002/000/mobility.urdf",
+    "hand_friction": 0.8,
+    "knife_friction": 1.8,
+    "load_profile": null,
+    "load_frequency": 1.7,
+    "observation_noise": 0.0,
+    "observation_bias": 0.0,
+    "seed": 2026100301,
+    "physics_hz": 240,
+    "takeover_seconds": 16.0,
+    "pair_force_measurement": true,
+    "support_pressure_config": null,
+    "resistance_integration": "solver-brake",
+    "thumb_reference_override": "runs/antirotation-grasp-20261004/bidirectional-motor-preload-v2/continuous-flow/reference.json",
+    "actuation_delay_frames": 0,
+    "proprioceptive_pressure_config": null
+  },
+  "arm_above": [
+    -2.2991396191330975,
+    -1.4878595297672272,
+    1.0915467994132853,
+    -1.6706872325241218,
+    1.6041883566510464,
+    -1.011629312418702,
+    -0.4365296464915986
+  ],
+  "arm_grasp": [
+    -2.1172686603332114,
+    -1.5209293060282978,
+    1.132562522174685,
+    -1.657937090771893,
+    1.4167563812052415,
+    -0.9532611013959065,
+    -0.7279865509319874
+  ],
+  "arm_lift": [
+    -2.2384866839062756,
+    -1.556635707911132,
+    1.137695702387311,
+    -2.062653921398441,
+    0.9899729251409928,
+    -0.8156807142179842,
+    -1.171565591156008
+  ],
+  "ik": [
+    {
+      "position_m": 8.064305285615737e-11,
+      "rotation_rad": 3.8500828751320854e-10
+    },
+    {
+      "position_m": 5.804703021720878e-11,
+      "rotation_rad": 2.485273528885187e-10
+    },
+    {
+      "position_m": 2.8004849616070854e-11,
+      "rotation_rad": 7.599217790860924e-11
+    }
+  ],
+  "platform": "G2+Wuji v1",
+  "object_initial": [
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.3015
+    ],
+    [
+      0.0,
+      2.220446049250313e-16,
+      -1.0,
+      -0.25
+    ],
+    [
+      0.0,
+      1.0,
+      2.220446049250313e-16,
+      0.7561
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "relative_grasp": [
+    [
+      0.8427852783238641,
+      0.49710659461312395,
+      0.20639284927707663,
+      0.05934667845312431
+    ],
+    [
+      -0.3953564097807677,
+      0.3115206345037534,
+      0.864088076253596,
+      -0.01359760444824731
+    ],
+    [
+      0.36524824966839814,
+      -0.8098394457363275,
+      0.45907928317846075,
+      0.1206220698254674
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "policy_relative_estimate": [
+    [
+      0.8550571476751325,
+      0.43605890180979756,
+      0.2805885036171289,
+      0.060733909530214375
+    ],
+    [
+      -0.3935875522780178,
+      0.19349979117568683,
+      0.8986916431717632,
+      -0.013769811145968444
+    ],
+    [
+      0.33758867413090865,
+      -0.8788688553859435,
+      0.33708073533077537,
+      0.11868435894225132
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "handover_calibration": null,
+  "open_q": [
+    0.3845492498689356,
+    0.3282160950432129,
+    1.4192116885576915,
+    -0.45595332831635677,
+    0.5285892179077726,
+    -0.23267959646174335,
+    0.5669735981461355,
+    1.4961730104865842,
+    0.051355443249146274,
+    -0.1860650221100197,
+    1.2007217697468917,
+    1.3227868928440807,
+    0.31808382831272164,
+    -0.12788512697937873,
+    0.9052560058277472,
+    1.4044466284895658,
+    1.473024399021119,
+    -0.11057194944496815,
+    1.0671587072869473,
+    -0.2951368128763754
+  ],
+  "close_q": [
+    0.46637432404090845,
+    0.2814692819883563,
+    1.2821023039542085,
+    -0.37294310976549977,
+    0.6558326072079218,
+    -0.1986921748085086,
+    0.8277696186973034,
+    1.4037731848385735,
+    0.14144649309205892,
+    -0.19931441606629793,
+    1.4263283750223987,
+    1.0970694135023842,
+    0.31808382831272164,
+    -0.12788512697937873,
+    0.9052560058277472,
+    1.4044466284895658,
+    1.5591972159852525,
+    0.041088576927901854,
+    1.0406339928370496,
+    -0.2586374752727248
+  ],
+  "schedule": "0-2settle,2-5approach,5-8close,8-12lift,12-16hold/history,16-36 selected controller external5sopen/close",
+  "handover": "Once-loaded offline hand-object geometry estimate; no live object truth fed to policy. Measured q/FK, actual command history; no state reset."
+}

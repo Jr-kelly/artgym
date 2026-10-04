@@ -1,0 +1,55 @@
+{
+  "criterion": {
+    "version": 1,
+    "declared_utc": "2026-10-03T20:22:00+00:00",
+    "scope": "Functional two-cycle behavior, separately from unchanged historical 0.25rad world-pose regression; diagnostic held resets never qualify as pickup demos.",
+    "endpoint": {
+      "extension_min_m": 0.025,
+      "retraction_max_m": 0.008,
+      "command_travel_m": 0.04
+    },
+    "grip": {
+      "minimum_height_above_table_m": 0.03,
+      "relative_translation_envelope_m": 0.015,
+      "relative_rotation_envelope_rad": 0.6,
+      "cycle_return_translation_increment_max_m": 0.005,
+      "cycle_return_rotation_increment_max_rad": 0.1,
+      "final_hold_translation_speed_max_m_s": 0.003,
+      "final_hold_rotation_speed_max_rad_s": 0.06
+    },
+    "contact": {
+      "thumb_slider_substep_fraction_min": 0.9,
+      "maximum_contiguous_zero_contact_s": 0.5
+    },
+    "rationale": "15mm and 0.6rad are broad escape envelopes, not precision targets. Return-to-return drift <=5mm/0.10rad and last-second settling distinguish progressive slip from bounded new seating; both meaningful endpoints and sustained slider contact remain mandatory. World-pose legacy score is reported unchanged; active wrist motion is shown separately."
+  },
+  "trace_sha256": "41dd2bee30e722db43da025cbf352f22044264d462b437d139742bedd187ee32",
+  "checks": {
+    "two_cycles": true,
+    "clear": true,
+    "relative_envelope": true,
+    "endpoints": false,
+    "bounded_return_drift": true,
+    "final_settling": true,
+    "thumb_contact": true
+  },
+  "functional_behavior_pass": false,
+  "continuous_pickup_demo_pass": false,
+  "held_diagnostic": false,
+  "legacy_full_success": false,
+  "slider_endpoints_m": {
+    "extend1": 0.025805836093691303,
+    "return1": 0.0067318189116987726,
+    "extend2": 0.022266823814329817,
+    "return2": 0.006504685168233826
+  },
+  "relative_max_rotation_rad": 0.49656162330904663,
+  "relative_max_translation_m": 0.00816937474565126,
+  "active_wrist_max_rotation_rad": 0.0002478916538198743,
+  "return_to_return_rotation_rad": 0.038582612941301477,
+  "return_to_return_translation_m": 0.00035149178621699635,
+  "final_hold_translation_speed_m_s": 0.00013621247814779998,
+  "final_hold_rotation_speed_rad_s": 0.009855613900406665,
+  "thumb_contact_substep_fraction": 1.0,
+  "longest_zero_thumb_contact_s": 0.0
+}
