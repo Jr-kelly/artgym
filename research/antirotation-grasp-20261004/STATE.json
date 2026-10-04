@@ -2,7 +2,7 @@
   "round_start_utc": "2026-10-03T20:03:23+00:00",
   "minimum_work_hours": 12,
   "earliest_12h_utc": "2026-10-04T08:03:23+00:00",
-  "phase": "Functional nominal demo retained; thin actual pickup repaired, necessary common geometry curriculum and strict bank preparation active",
+  "phase": "Full functional nominal V17 retained; common geometry through learned acquisition and necessary height preparation active",
   "baseline_local_commit": "b75e12effbfb5a9ce740411b5ec699db60338b3e",
   "baseline_github_commit": "d0d6ce01d5550ec5b512fdc4e510c5546569d8b4",
   "baseline_release": "wuji-g2-support-pressure-20261003-v1",
@@ -20,98 +20,119 @@
   "goal_complete": false,
   "active_jobs": [
     {
-      "name": "height-b0000-obs0-thumbplan-v1",
+      "name": "strict16-table-prior-closure-longhorizon-range04-reset750-v8",
       "machine": "local",
-      "pid": 1254867,
+      "pid": 1285622,
       "gpu": 0,
-      "source_commit": "0e6ef3943e00423230694612e5e0bf48ac3327b6",
-      "source_patch_sha256": "979f42a53cdb45b520766a21f53c0e210d028c549fbf0adb7fb9252e896046fc",
+      "source_commit": "c810a636dfa155e2a9a25d6b283cd91154d19a60",
+      "source_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "source_sha256": {
-        "scripts/g2_continuous_scene.py": "545c8574c8b5e30749736d6b26220033ce0d00bd2681f5420367159efd238df4",
-        "scripts/g2_r800_policy.py": "87bdfde7633e22e2e80d3441d8f3ea82b1a42b198af5e026a74c7be9ed9c15e5",
+        "scripts/wuji_initial_table_prior.py": "8c4f1a32ad2840c1e35fdd1f876402e443455ea1fc426356927d872754e506ae",
+        "scripts/g2_continuous_scene.py": "7f6f214326a976815e796a93118277e79d0fbb3b4e6b88be285245b6b2f7094d",
+        "scripts/g2_r800_policy.py": "de6a473fac5bb15f9e6f22c2ad4aa4e5b3c23399b263075621586fb0ebf0aa9a",
         "scripts/g2_batched_r800.py": "b4a476316840ed2b8008a1016baaab0a581989ffc1ad9ff12a26dfc96f7440f3",
         "scripts/wuji_known_controller.py": "3e4870ee35719db2f2dc8760d6b5c58a757c5b4ba944f27d2cb2e15533df4ad6",
         "scripts/wuji_bounded_motor_residual.py": "39ad6c94a39f5dd8d71a2e7a50d65eb973fe65078861913828f7913e77873635",
-        "scripts/run_g2_robust_demo.py": "118c81d2f7f9402d4e90f361bfe2573640f7e4f5be84bbff35ab11199684da48",
-        "scripts/train_wuji_robust_residual.py": "caa6b2efcf6b4fb9477c57df0539ee0947653e9cd80a98222e24432c49c3d307",
-        "scripts/plan_g2_direct_thumb_motor_stroke.py": "282c422310ea085f8a7ec9bda81edb5c5186b39d288857946f9d6b7d3cd5a484"
+        "scripts/run_g2_robust_demo.py": "c39e8b535c7395708059b7fbc163467736d769cf2c2c159f17b5a3d3e6bdd3ef",
+        "scripts/train_wuji_robust_residual.py": "059fa9f79fd29b75783c6e145d8cec89d1c317313fc4e032e174d04b8bd301f9"
       },
-      "input_sha256": {},
-      "start_utc": "2026-10-04T04:17:02.855105+00:00"
+      "input_sha256": {
+        "/data/research/artgym-experiments-20260921/antirotation-grasp-20261004/runs/antirotation-grasp-20261004/initial-geometry-v2/projected-00/reference-v1.json": "6008235b6499118f4a7a5841f9a0f5288d992418d182faf826f24f265236438c",
+        "/data/research/artgym-experiments-20260921/antirotation-grasp-20261004/runs/antirotation-grasp-20261004/strict-geometry-table-prior-prefix-v2/scene16.json": "0c300bf407d987b6b11da38b4f2d3cec204afc494eeb37acd363650904fac766",
+        "/data/research/artgym-experiments-20260921/antirotation-grasp-20261004/runs/antirotation-grasp-20261004/strict-geometry-learned-prefix-v1/schedule1024.json": "f4d62ab5ca19e92b9034f66d626edd7e3cfcd05ee95d264c0c2d9e0e454e9d93",
+        "/data/research/artgym-experiments-20260921/antirotation-grasp-20261004/runs/support-pressure-20261003/train/joint-noisier-continuation-v31/update_000750.pth": "11f87269e7910380c6dab1fa8dcc26e53e40da0bd905a1ae40e7ffcf812b1a1d",
+        "/data/research/artgym-experiments-20260921/antirotation-grasp-20261004/runs/antirotation-grasp-20261004/strict-geometry-learned-prefix-v1/registry.json": "d00ecf6113fd9f92cd2735f673b36d6db78925a7163ab5c6b8a2e764ff8fa09c"
+      },
+      "start_utc": "2026-10-04T04:57:21.711422+00:00"
+    },
+    {
+      "name": "strict16-table-prior-closure-longhorizon-range12-reset750-v9",
+      "machine": "local",
+      "pid": 1285623,
+      "gpu": 0,
+      "source_commit": "c810a636dfa155e2a9a25d6b283cd91154d19a60",
+      "source_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_sha256": {
+        "scripts/wuji_initial_table_prior.py": "8c4f1a32ad2840c1e35fdd1f876402e443455ea1fc426356927d872754e506ae",
+        "scripts/g2_continuous_scene.py": "7f6f214326a976815e796a93118277e79d0fbb3b4e6b88be285245b6b2f7094d",
+        "scripts/g2_r800_policy.py": "de6a473fac5bb15f9e6f22c2ad4aa4e5b3c23399b263075621586fb0ebf0aa9a",
+        "scripts/g2_batched_r800.py": "b4a476316840ed2b8008a1016baaab0a581989ffc1ad9ff12a26dfc96f7440f3",
+        "scripts/wuji_known_controller.py": "3e4870ee35719db2f2dc8760d6b5c58a757c5b4ba944f27d2cb2e15533df4ad6",
+        "scripts/wuji_bounded_motor_residual.py": "39ad6c94a39f5dd8d71a2e7a50d65eb973fe65078861913828f7913e77873635",
+        "scripts/run_g2_robust_demo.py": "c39e8b535c7395708059b7fbc163467736d769cf2c2c159f17b5a3d3e6bdd3ef",
+        "scripts/train_wuji_robust_residual.py": "059fa9f79fd29b75783c6e145d8cec89d1c317313fc4e032e174d04b8bd301f9"
+      },
+      "input_sha256": {
+        "/data/research/artgym-experiments-20260921/antirotation-grasp-20261004/runs/antirotation-grasp-20261004/initial-geometry-v2/projected-00/reference-v1.json": "6008235b6499118f4a7a5841f9a0f5288d992418d182faf826f24f265236438c",
+        "/data/research/artgym-experiments-20260921/antirotation-grasp-20261004/runs/antirotation-grasp-20261004/strict-geometry-table-prior-prefix-v2/scene16.json": "0c300bf407d987b6b11da38b4f2d3cec204afc494eeb37acd363650904fac766",
+        "/data/research/artgym-experiments-20260921/antirotation-grasp-20261004/runs/antirotation-grasp-20261004/strict-geometry-learned-prefix-v1/schedule1024.json": "f4d62ab5ca19e92b9034f66d626edd7e3cfcd05ee95d264c0c2d9e0e454e9d93",
+        "/data/research/artgym-experiments-20260921/antirotation-grasp-20261004/runs/support-pressure-20261003/train/joint-noisier-continuation-v31/update_000750.pth": "11f87269e7910380c6dab1fa8dcc26e53e40da0bd905a1ae40e7ffcf812b1a1d",
+        "/data/research/artgym-experiments-20260921/antirotation-grasp-20261004/runs/antirotation-grasp-20261004/strict-geometry-learned-prefix-v1/registry.json": "d00ecf6113fd9f92cd2735f673b36d6db78925a7163ab5c6b8a2e764ff8fa09c"
+      },
+      "start_utc": "2026-10-04T04:57:21.727518+00:00"
+    },
+    {
+      "name": "height-b0003-obs1-thumbdense-v1",
+      "machine": "local",
+      "pid": 1301778,
+      "gpu": 0,
+      "source_commit": "c810a636dfa155e2a9a25d6b283cd91154d19a60",
+      "source_patch_sha256": "6a994e7baf47dfa79e0f02741a08fd379c2d82dd847d3d3acf8c6beebcbdb941",
+      "source_sha256": {
+        "scripts/wuji_initial_table_prior.py": "8c4f1a32ad2840c1e35fdd1f876402e443455ea1fc426356927d872754e506ae",
+        "scripts/g2_continuous_scene.py": "7f6f214326a976815e796a93118277e79d0fbb3b4e6b88be285245b6b2f7094d",
+        "scripts/g2_r800_policy.py": "de6a473fac5bb15f9e6f22c2ad4aa4e5b3c23399b263075621586fb0ebf0aa9a",
+        "scripts/g2_batched_r800.py": "b4a476316840ed2b8008a1016baaab0a581989ffc1ad9ff12a26dfc96f7440f3",
+        "scripts/wuji_known_controller.py": "3e4870ee35719db2f2dc8760d6b5c58a757c5b4ba944f27d2cb2e15533df4ad6",
+        "scripts/wuji_bounded_motor_residual.py": "39ad6c94a39f5dd8d71a2e7a50d65eb973fe65078861913828f7913e77873635",
+        "scripts/run_g2_robust_demo.py": "c39e8b535c7395708059b7fbc163467736d769cf2c2c159f17b5a3d3e6bdd3ef",
+        "scripts/train_wuji_robust_residual.py": "059fa9f79fd29b75783c6e145d8cec89d1c317313fc4e032e174d04b8bd301f9",
+        "scripts/audit_g2_anchored_thumb_motor.py": "ab5d6e03d9a2bd1b95fc4457f10e1299a0ae1f198f3ac8d14080eb29e22fa244"
+      },
+      "input_sha256": {
+        "/data/research/artgym-experiments-20260921/antirotation-grasp-20261004/runs/antirotation-grasp-20261004/height-geometry-bank8-v1/b0003-observation1/reference.json": "75ad5a3b5af52dab6610b7c4d623ddd6bcafaa215de6915105801c7f760e1ab3"
+      },
+      "start_utc": "2026-10-04T05:21:06.226506+00:00"
     }
   ],
   "no_subagents": true,
   "remote_root": "/home/wangjiarui/artgym-antirotation-grasp-20261004",
   "private_attachment_media": "/tmp/wuji-antirotation-attachment-20261004",
-  "next": "Inspect actual result and persist conclusion; no simulation/hardware success inferred from process startup",
+  "next": "Common joint-reserve repair then candidate freeze before fourfirstphysicalrollouts",
   "last_event": {
-    "utc": "2026-10-04T04:17:02.855357+00:00",
-    "event": "antirotation_job_started",
-    "active_job": {
-      "name": "height-b0000-obs0-thumbplan-v1",
-      "machine": "local",
-      "pid": 1254867,
-      "gpu": 0,
-      "source_commit": "0e6ef3943e00423230694612e5e0bf48ac3327b6",
-      "source_patch_sha256": "979f42a53cdb45b520766a21f53c0e210d028c549fbf0adb7fb9252e896046fc",
-      "source_sha256": {
-        "scripts/g2_continuous_scene.py": "545c8574c8b5e30749736d6b26220033ce0d00bd2681f5420367159efd238df4",
-        "scripts/g2_r800_policy.py": "87bdfde7633e22e2e80d3441d8f3ea82b1a42b198af5e026a74c7be9ed9c15e5",
-        "scripts/g2_batched_r800.py": "b4a476316840ed2b8008a1016baaab0a581989ffc1ad9ff12a26dfc96f7440f3",
-        "scripts/wuji_known_controller.py": "3e4870ee35719db2f2dc8760d6b5c58a757c5b4ba944f27d2cb2e15533df4ad6",
-        "scripts/wuji_bounded_motor_residual.py": "39ad6c94a39f5dd8d71a2e7a50d65eb973fe65078861913828f7913e77873635",
-        "scripts/run_g2_robust_demo.py": "118c81d2f7f9402d4e90f361bfe2573640f7e4f5be84bbff35ab11199684da48",
-        "scripts/train_wuji_robust_residual.py": "caa6b2efcf6b4fb9477c57df0539ee0947653e9cd80a98222e24432c49c3d307",
-        "scripts/plan_g2_direct_thumb_motor_stroke.py": "282c422310ea085f8a7ec9bda81edb5c5186b39d288857946f9d6b7d3cd5a484"
-      },
-      "input_sha256": {},
-      "start_utc": "2026-10-04T04:17:02.855105+00:00"
-    },
+    "utc": "2026-10-04T05:21:51.666902+00:00",
+    "event": "fresh_geometry_preparation_observed_closed",
     "config": {
-      "command": [
-        "/home/agiuser/miniconda3/envs/artgym/bin/python",
-        "-m",
-        "scripts.plan_g2_direct_thumb_motor_stroke",
-        "--plan",
-        "runs/antirotation-grasp-20261004/height-geometry-bank8-v1/b0000-observation0/operating-plan.json",
-        "--output",
-        "runs/antirotation-grasp-20261004/height-geometry-bank8-v1/b0000-observation0/reference.json"
-      ],
-      "pid": 1254867,
-      "launcher_pid": 1254844,
-      "gpu": 0,
-      "source_commit": "0e6ef3943e00423230694612e5e0bf48ac3327b6",
-      "source_patch_sha256": "979f42a53cdb45b520766a21f53c0e210d028c549fbf0adb7fb9252e896046fc",
-      "source_sha256": {
-        "scripts/g2_continuous_scene.py": "545c8574c8b5e30749736d6b26220033ce0d00bd2681f5420367159efd238df4",
-        "scripts/g2_r800_policy.py": "87bdfde7633e22e2e80d3441d8f3ea82b1a42b198af5e026a74c7be9ed9c15e5",
-        "scripts/g2_batched_r800.py": "b4a476316840ed2b8008a1016baaab0a581989ffc1ad9ff12a26dfc96f7440f3",
-        "scripts/wuji_known_controller.py": "3e4870ee35719db2f2dc8760d6b5c58a757c5b4ba944f27d2cb2e15533df4ad6",
-        "scripts/wuji_bounded_motor_residual.py": "39ad6c94a39f5dd8d71a2e7a50d65eb973fe65078861913828f7913e77873635",
-        "scripts/run_g2_robust_demo.py": "118c81d2f7f9402d4e90f361bfe2573640f7e4f5be84bbff35ab11199684da48",
-        "scripts/train_wuji_robust_residual.py": "caa6b2efcf6b4fb9477c57df0539ee0947653e9cd80a98222e24432c49c3d307",
-        "scripts/plan_g2_direct_thumb_motor_stroke.py": "282c422310ea085f8a7ec9bda81edb5c5186b39d288857946f9d6b7d3cd5a484"
-      },
-      "input_sha256": {},
-      "start_utc": "2026-10-04T04:17:02.855105+00:00"
+      "observed_utc": "2026-10-04T05:23Z",
+      "pid": 1265614,
+      "scope": "Preparation ended, four original draws retained; behavior unopened, no successclaim"
     },
-    "evidence": "runs/antirotation-grasp-20261004/jobs/height-b0000-obs0-thumbplan-v1",
-    "next": "Inspect actual result and persist conclusion; no simulation/hardware success inferred from process startup"
+    "evidence": "runs/antirotation-grasp-20261004/fresh-joint-challenges4-v1/manifest.json",
+    "state_updates": {
+      "fresh_joint_challenges_pipeline_pid": null
+    },
+    "next": "Common joint-reserve repair then candidate freeze before fourfirstphysicalrollouts"
   },
   "resource_monitor_pid": 502,
   "resource_monitor_start_utc": "2026-10-03T20:15:18.833167+00:00",
   "held_bidirectional_development_ready": true,
   "github_branch": "feat/wuji-antirotation-grasp-20261004",
-  "github_commit": "8d416667873bbd455556791d381c8f2ea59a422d",
-  "local_scientific_commit": "0e6ef3943e00423230694612e5e0bf48ac3327b6",
+  "github_commit": "f93f12705f008c83063fe4ec079cd5d62ace3bc1",
+  "local_scientific_commit": "c810a636dfa155e2a9a25d6b283cd91154d19a60",
   "actual_table_integration_pipeline_pid": null,
   "lower_side_direct_pipeline_pid": null,
   "local_coordinate_comparison_pipeline_pid": null,
   "projected_noisy_nominal_pipeline_pid": null,
   "contact_normal_pipeline_pid": null,
   "functional_demo_scope": "Nominal/noisy initial estimate development case .2/.2 only; actual32/26mm extensions for40mmcommand, necessarygen unresolved",
-  "common_geometry_bank16_pipeline_pid": 1180631,
+  "common_geometry_bank16_pipeline_pid": null,
   "local_resource_monitor_pid": 1174078,
   "three_geometry_curriculum_pipeline_pid": null,
-  "height_geometry_bank_pipeline_pid": 1252046
+  "height_geometry_bank_pipeline_pid": 1252046,
+  "strict_geometry_learned_prefix_pipeline_pid": null,
+  "fresh_joint_challenges_pipeline_pid": null,
+  "joint_reserve_repair_pipeline_pid": 1275000,
+  "larger_support_newprefix_pipeline_pid": null,
+  "correct_table_prior_prefix_pair_pipeline_pid": 1283870,
+  "fresh_joint_validation_pipeline_pid": 1301102
 }

@@ -24,13 +24,13 @@ def main():
    files.extend(f for f in folder.iterdir() if f.is_file() and f.suffix in ['.json','.jsonl','.yaml'])
   files.extend(f for f in (B/'jobs').rglob('*') if f.is_file() and f.name in ['identity.json','result.json'])
  elif a.group=='movies':
-  for name in ['actual-table-projected-grasp-frozen750-load2-v17','actual-table-projected-grasp-frozen750-load5-v18','actual-table-projected-size08-frozen750-load2-v19','actual-table-projected-retain750-frozen50-load5-v21','actual-table-continuous-prepared-frozen750-load5-v23','actual-table-thin-allcontact-frozen750-load2-v24','actual-table-thin-threegeo-frozen50-load2-v25']:
+  for name in ['actual-table-projected-grasp-frozen750-load2-v17','actual-table-projected-grasp-frozen750-load5-v18','actual-table-projected-size08-frozen750-load2-v19','actual-table-projected-retain750-frozen50-load5-v21','actual-table-continuous-prepared-frozen750-load5-v23','actual-table-thin-allcontact-frozen750-load2-v24','actual-table-thin-threegeo-frozen50-load2-v25','actual-table-thin-index-retention-frozen750-load2-v26','actual-table-thin-moment-retention-frozen750-load2-v27','actual-table-nominal-table-prior-range04-frozen50-load2-v32','actual-table-thin-table-prior-range04-frozen50-load2-v33','actual-table-nominal-table-prior-range12-frozen50-load2-v34','actual-table-thin-table-prior-range12-frozen50-load2-v35']:
    folder=B/'continuous'/name
    if not folder.exists():continue
    files.extend(f for f in folder.iterdir() if f.is_file() and (f.suffix in ['.mp4','.png'] or f.name in ['report.json','functional-evaluation.json','physics.json','plan.json']))
   if (B/'figures/actual-development-v3').exists():files.extend(f for f in (B/'figures/actual-development-v3').rglob('*') if f.is_file())
  else:
-  files.extend(f for f in B.rglob('*') if f.is_file() and f.suffix in ['.npz','.json','.jsonl','.log','.yaml'] and 'delivery' not in f.relative_to(B).parts)
+  files.extend(f for f in B.rglob('*') if f.is_file() and f.suffix in ['.npz','.json','.jsonl','.log','.yaml','.patch'] and 'delivery' not in f.relative_to(B).parts)
   files.extend(f for f in D.rglob('*') if f.is_file() and f.suffix in ['.md','.json','.jsonl','.py','.sh'] and f.name!='github-commit-map.json' and '__pycache__' not in f.parts)
  files=sorted(set(files));assert files and all(f.is_file() and R in f.parents for f in files)
  a.output.parent.mkdir(parents=True,exist_ok=True);record('antirotation_delivery_archive_started',config={'group':a.group,'files':len(files)},evidence=str(a.output.relative_to(R)),next='Exact selected bytes and SHA256 manifest; representative restore before final publication')

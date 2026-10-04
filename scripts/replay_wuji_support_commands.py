@@ -22,6 +22,7 @@ def main():
     p.add_argument('--prewarm-iterations',type=int,default=0);p.add_argument('--input', type=Path, required=True)
     p.add_argument('--estimate', type=Path, required=True)
     p.add_argument('--calibration', type=Path, required=True)
+    p.add_argument('--motor-prefix-plan',type=Path,help='Once-known closure/lift/transfer plan for learned acquisition; future recorded targets never used as reference')
     p.add_argument('--reference', type=Path, required=True)
     p.add_argument('--checkpoint', type=Path, required=True)
     p.add_argument('--output', type=Path, required=True)
@@ -33,7 +34,7 @@ def main():
         samples = {k: data[k].copy() for k in LEGAL_FIELDS}
     times = samples['clock_s']
     n = len(times)
-    assert 8<=a.takeover_seconds<=16 and times[0]<=a.takeover_seconds-50/30+1e-7
+    assert 5<=a.takeover_seconds<=16 and times[0]<=a.takeover_seconds-50/30+1e-7
     assert n >= 50 and np.allclose(np.diff(times), 1/30, atol=1e-7)
     for k, width in [('hand_measured_q', 20), ('arm_measured_q', 7), ('issued_hand_target', 20)]:
         assert samples[k].shape == (n, width) and np.isfinite(samples[k]).all()
@@ -53,12 +54,18 @@ def main():
     teacher = R/'runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth'
     student = R/'runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth'
     policy = G2R800Policy(cfg, teacher, student,
-        geometry=estimate['handle_size_WTL_m']+[.01, .003, .03],
+        geometry=estimate['handle_size_WTL_m']+estimate.get('slider_size_WTL_m',[.01, .003, .03]),
         residual_checkpoint=a.checkpoint, thumb_reference_override=a.reference)
     assert policy.pressure_adapter is None, 'This minimal replay covers the selected controller without an extra pressure adapter'
     if policy.support_load_features is not None:
         assert times[0]<=14.1+1e-7, 'Loadfeatures require57 legalprefixframes from14.1s for52frame calibration and5frame causalvelocity filter'
         policy.support_load_features.reset(__import__('torch').tensor([0],device=policy.player.device),policy.tensor(obj[:3,1]))
+    plan=json.loads(a.motor_prefix_plan.read_text()) if a.motor_prefix_plan else None
+    assert (5 if policy.learned_acquisition_prefix else 8)<=a.takeover_seconds<=16
+    if policy.learned_acquisition_prefix and a.takeover_seconds<16:
+        assert plan is not None, 'Learned acquisition requires its once-known motor plan'
+        assert not plan.get('lift_preload_height_m'), 'Measured-height variant needs a separate replay adapter'
+    from scripts.wuji_known_acquisition_prefix import hand_reference
     kin = G2Kinematics()
     taken = False
     targets, actions, errors = [], [], [];warmup=None
@@ -72,14 +79,18 @@ def main():
             continue
         if not taken:
             assert i > 0 and len(policy.history) == 50
+            if policy.table_initial_prior_from_measured_arm:
+                assert plan is not None
+                from scripts.wuji_initial_table_prior import measured_arm_relative
+                obj,slider=measured_arm_relative(plan,estimate,kin.forward(samples['arm_measured_q'][i]))
             policy.takeover_estimate(q, samples['issued_hand_target'][i-1], obj, slider, clock_s=float(t))
             if a.prewarm_iterations:
                 gravity=kin.forward(samples['arm_measured_q'][i])[:3,:3].T@np.array([0.,0.,-1.])
-                warmup=policy.prewarm(q,0.,gravity,a.prewarm_iterations,clock_s=float(t))
+                warmup=policy.prewarm(q,0.,gravity,a.prewarm_iterations,clock_s=float(t),known_prefix_target=hand_reference(plan,float(t)) if policy.learned_acquisition_prefix and t<16 else None)
             taken = True
         goal = .04 if t>=16-1e-7 and int(round((t-16)*30))//150 % 2 == 0 else 0.
         gravity = kin.forward(samples['arm_measured_q'][i])[:3, :3].T @ np.array([0., 0., -1.])
-        target, action = policy.command(q, goal, wrist_gravity=gravity, clock_s=float(t))
+        target, action = policy.command(q, goal, wrist_gravity=gravity, clock_s=float(t),known_prefix_target=hand_reference(plan,float(t)) if policy.learned_acquisition_prefix and t<16 else None)
         assert policy.last_encoder_input.shape == (2076,)
         assert policy.last_public_features.shape == ((170 if policy.history_features else 154)+(9 if policy.support_load_features is not None else 0)+(8 if policy.support_estimator is not None else 0),)
         assert np.isfinite(target).all() and np.isfinite(policy.last_encoder_input).all()
@@ -89,7 +100,7 @@ def main():
     assert taken and len(targets) > 0
     np.savez_compressed(a.output/'commands.npz', targets=targets, actions=actions)
     report = dict(scope='Offline inference only; no physics scene, robot SDK, or current object/contact/load input',
-        prewarm=warmup,physics_performance_claim=False, real_robot_ran=False,learned_takeover_seconds=a.takeover_seconds,support_latch_after_preparation=policy.support_latch_after_preparation, control_hz=30, r800_input_dim=2076,
+        known_prefix_plan_sha256=hashlib.sha256(a.motor_prefix_plan.read_bytes()).hexdigest() if a.motor_prefix_plan else None,initial_pose_prior_scope='Known table plus once-estimated geometry transformed by measured arm FK' if policy.table_initial_prior_from_measured_arm else 'Once loaded held prior',prewarm=warmup,physics_performance_claim=False, real_robot_ran=False,learned_takeover_seconds=a.takeover_seconds,support_latch_after_preparation=policy.support_latch_after_preparation, control_hz=30, r800_input_dim=2076,
         residual_input_dim=(170 if policy.history_features else 154)+(9 if policy.support_load_features is not None else 0)+(8 if policy.support_estimator is not None else 0), support_load_feature_spec=policy.support_load_feature_spec, support_estimator_metadata={k:v for k,v in policy.support_estimator.spec.items() if k not in ['model','input_mean','input_std','history_mean','history_std']} if policy.support_estimator is not None else None,support_delta_coordinates={k:v for k,v in policy.support_delta_coordinates.spec.items() if k!='reference_actor_state'} if policy.support_delta_coordinates is not None else None, command_frames=len(targets),
         max_target_difference_from_recorded_rad=max(errors),
         hand_joint_names=policy.fk.names, arm_joint_names=kin.names,
