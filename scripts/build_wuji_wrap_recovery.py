@@ -104,6 +104,16 @@ def main():
         folder = R/B/'batch'/name
         if folder.exists():
             runtime += [str(p.relative_to(R)) for p in folder.glob('*.json')]
+    # Preserve saved failed pilots as explicitly unselected recovery states.
+    runtime += [str(B/'remote'),
+        str(B/'batch/continuous-source2-pressure-v1/nominal-registry.json'),
+        str(B/'batch/continuous-source2-pressure-v1/nominal-schedule.json')]
+    for name,step in [('corner-thumb-head-nominal-recovery-v21',12),
+                      ('corner-functional-load-pilot-v13r1',44)]:
+        folder=B/'train'/name
+        learning.append(str(folder/('update_%06d.pth'%step)))
+        learning += [str(p.relative_to(R)) for p in (R/folder).iterdir()
+                     if p.is_file() and p.suffix in {'.json','.jsonl','.yaml'}]
     packets = [write_packet(a.output, 'wrap-runtime', runtime),
                write_packet(a.output, 'wrap-learning-state', learning)]
     (a.output/'packets.json').write_text(json.dumps(dict(packets=packets,

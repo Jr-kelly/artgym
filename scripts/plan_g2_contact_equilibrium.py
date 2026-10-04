@@ -12,7 +12,7 @@ from scripts.g2_contact_geometry import DigitGeometry
 from scripts.wuji_kinematics import FINGERS
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--include-wrap-regions',action='store_true',help='Use distinct original authored joint regions alongside distal pads, shared per-finger normal budget and same motor limits; no collision/contact duplication');p.add_argument('--closed-slider-brake-capacity',type=float,default=0.,help='Explicit nominal passive zero-velocity rail capacity at closed endpoint, not positive drive; default retains old unbraked bound');p.add_argument('--plan',type=Path,required=True);p.add_argument('--calibration',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--thumb-normal',type=float,default=1.5);p.add_argument('--joint-offset-limit',type=float,default=.20);p.add_argument('--friction',type=float,default=1.1);p.add_argument('--closed-slider-passive-limit',action='store_true',help='At lower mechanical stop, forbid unsupported positive thumb axial force that would pre-open a passive slider');p.add_argument('--table-margin',type=float,help='Optional nominal loaded motor-target/table separation in metres; independent swept-path audit still required');a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
+    p=argparse.ArgumentParser();p.add_argument('--table-y',type=float,default=-.25,help='Known table centre matching actual scene; default preserves old placement');p.add_argument('--include-wrap-regions',action='store_true',help='Use distinct original authored joint regions alongside distal pads, shared per-finger normal budget and same motor limits; no collision/contact duplication');p.add_argument('--closed-slider-brake-capacity',type=float,default=0.,help='Explicit nominal passive zero-velocity rail capacity at closed endpoint, not positive drive; default retains old unbraked bound');p.add_argument('--plan',type=Path,required=True);p.add_argument('--calibration',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--thumb-normal',type=float,default=1.5);p.add_argument('--joint-offset-limit',type=float,default=.20);p.add_argument('--friction',type=float,default=1.1);p.add_argument('--closed-slider-passive-limit',action='store_true',help='At lower mechanical stop, forbid unsupported positive thumb axial force that would pre-open a passive slider');p.add_argument('--table-margin',type=float,help='Optional nominal loaded motor-target/table separation in metres; independent swept-path audit still required');a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
     plan=json.loads(a.plan.read_text());g=DigitGeometry();h=g.w;q=np.asarray(plan['touch_q']);wrist=np.asarray(plan['wrist_in_knife']);normal=np.asarray(plan['contact_normals']);world=np.asarray(json.loads(a.calibration.read_text())['object_world_matrix'])
     def points(q):
         frames=h.forward(q);out=[]
@@ -79,7 +79,7 @@ def main():
             mat=wrist_world@frames[name]
             for vertices,normals in meshes:
                 v=vertices@mat[:3,:3].T+mat[:3,3];axes=np.r_[np.eye(3),normals@mat[:3,:3].T]
-                proj=(v-np.array([.6,-.25,.725]))@axes.T;radius=abs(axes)@np.array([.3,.4,.025])
+                proj=(v-np.array([.6,a.table_y,.725]))@axes.T;radius=abs(axes)@np.array([.3,.4,.025])
                 gaps.append(float(np.maximum(proj.min(0)-radius,-radius-proj.max(0)).max()))
         return np.array(gaps)
     def inequality(flat):

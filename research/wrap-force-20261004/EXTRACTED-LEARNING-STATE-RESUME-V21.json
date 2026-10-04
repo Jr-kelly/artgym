@@ -1,0 +1,43 @@
+{
+  "checkpoint": "/tmp/wuji-wrap-recovered-v20/runs/recovered-wrap/learning-resume121/update_000121.pth",
+  "checkpoint_sha256": "c4edfdd92738e8fb54ee096b9ab01b4ff8cea06086f99176bc6aa193d163eae4",
+  "result": {
+    "support_command_period": 1,
+    "support_decision_fraction": 0.0,
+    "support_logit_std_mean": 0.05324075371026993,
+    "utc": "2026-10-04T20:28:56.290273+00:00",
+    "update": 121,
+    "transitions": 8192,
+    "episodes": 0,
+    "reward": 0.0,
+    "loss": 38.300960063934326,
+    "kl": -3.0340743251144886e-09,
+    "active_sample_kl": 0.0,
+    "epoch_stop_kl_scope": "active residual-control samples",
+    "policy_active_fraction": 0.0,
+    "actual_hold_history_frames": 50,
+    "wall_seconds": 9.750596000114456,
+    "peak_extension_mean_m": null,
+    "contact_mean": null,
+    "fall_fraction": null,
+    "scope": "Training fitting/behavior only",
+    "analytic_active_rollout_kl": 0.0,
+    "actor_step_fraction_mean": 0.0,
+    "rejected_actor_updates": 8,
+    "actor_bound_scope": "All active samples in current rollout; not a bound on future episodes",
+    "recent_episode_count": 0,
+    "recent_complete_fraction": null,
+    "recent_pickup_valid_fraction": null,
+    "all_complete_count": 0,
+    "all_pickup_valid_count": 0,
+    "failure_counts": {
+      "pickup/hold": 0,
+      "body unstable/drop": 0,
+      "extension": 0,
+      "retraction": 0,
+      "thumb-contact": 0
+    },
+    "behavior_scope": "Training samples, last128 episodes may mix early failures and complete36s trajectories; never independent validation"
+  },
+  "scope": "Actualextractedassets/model/Adam/RNG oneupdateresume; physicalprefixonly, no actoractive samples andno behavioral improvement/promotion claim. Addedsource resumehelper explicitlyrecorded; selectedS120 unchanged."
+}

@@ -19,6 +19,16 @@ export PYTHONPATH="$PWD:$PWD/rl_games:${PYTHONPATH:-}"
 
 实际体根位置 x=.3035 m、y=−.6295 m、yaw45°，已知桌中心 y=−.23 m；没有刀身固定装置。29 g 主体与6 g滑块的组合重心位于桌内。位置偏置及 .8 N 压力代理属于有限 PD 电机目标/模型，不是恒力控制；实际法向压力由独立物理记录报告。旧冻结 localization 的文字不能替代上述实际数值。
 
+## 恢复选定学习状态
+
+```bash
+"$PYTHON" -m scripts.resume_wuji_wrap_learning \
+  --checkpoint runs/wrap-force-20261004/train/paired-held-single1-pilot-v1r1/update_000120.pth \
+  --updates 121 --output runs/recovered-wrap/learning-resume121
+```
+
+实际空目录恢复已经完成一次更新、保存模型/Adam/RNG；该更新处于取刀前缀，尚无有效 actor 操作样本，不是能力提升。物理回合重新开始，不宣称逐位续接 PhysX 状态。失败候选的保存状态只用于复现分析，不默认继续训练。
+
 ## 带误差的一次尺寸估计
 
 ```bash

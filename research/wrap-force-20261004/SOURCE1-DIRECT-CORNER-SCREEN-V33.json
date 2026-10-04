@@ -1,0 +1,22 @@
+{
+  "scope": "Bounded rematching of existing source1 feasible held diagnostic to corrected COM-inside corner. No pool expansion; no new physical trial accepted.",
+  "source_plan": "runs/wrap-force-20261004/comparison/four-sources-v1/source1/negative-tangent-prepare-v4/motor-plan.json",
+  "attempts": [
+    {
+      "name": "v33",
+      "outcome": "G2 IK position residual6.54mm,not executed"
+    },
+    {
+      "name": "v33r1",
+      "outcome": "20mm table-end inset reachable; original open thumb intersects knife1.80mm; not executed"
+    },
+    {
+      "name": "v33r2",
+      "outcome": "Extra0.45rad thumb opening clears knife3.56mm, but actual lateral open-hand path intersects table; not executed"
+    }
+  ],
+  "limitation": "These particular certified acquisition paths failed; existing held feasibility is retained and mechanical impossibility is not inferred.",
+  "administrative_failure": "Closure audit invoked before checking prerequisite acquisition output; missingfile failure only, no physics or evidence overwrite. Preserved job receipt.",
+  "selected_changed": false,
+  "next": "Keep stronger existing V12 continuous solution and recoverable actual new-grip negatives; future alternate approach must be rematched and collision-certified before physics"
+}
