@@ -33,10 +33,13 @@ class G2R800Policy(FrozenPolicy):
         self.thumb_action_gain=thumb_action_gain;self.support_action_gain=support_action_gain
         self.support_load_features=None;self.support_load_feature_spec=None;self.support_delta_coordinates=None
         self.support_latch_after_preparation=False;self.support_command_period=1;self.held_support_logits=None;self.support_takeover_frame=0
-        self.residual=None;self.last_public_features=None;self.thumb_reference=None;self.history_features=False;self.support_estimator=None;self.action_parameterization='incremental';self.pressure_adapter=None;self.proprioceptive_pressure_spec=None
+        self.residual=None;self.last_public_features=None;self.thumb_reference=None;self.history_features=False;self.support_estimator=None;self.action_parameterization='incremental';self.pressure_adapter=None;self.proprioceptive_pressure_spec=None;self.scheduled_support_anchor=False;self.learned_acquisition_prefix=False;self.operation_anchor_started=False
         if residual_checkpoint is not None:
             from scripts.wuji_robust_learning import ResidualActorCritic
             saved=torch.load(residual_checkpoint,map_location='cpu')
+            self.scheduled_support_anchor=bool((saved.get('scene_spec') or {}).get('scheduled_support_anchor',False))
+            self.learned_acquisition_prefix=bool((saved.get('scene_spec') or {}).get('learned_acquisition_prefix',False))
+            if self.learned_acquisition_prefix:assert self.scheduled_support_anchor
             self.support_command_period=saved.get('support_command_period',1)
             self.support_latch_after_preparation=saved.get('support_latch_after_preparation',False)
             assert self.support_command_period in [1,5]
@@ -134,13 +137,15 @@ class G2R800Policy(FrozenPolicy):
         old_override=getattr(network,'actor_encoder_obs_override',None)
         issued=self.known.issued.clone();initial=self.known.initial.clone()
         executed=self.known.last_executed_action.clone()
+        support_anchor=None if self.known.support_anchor is None else self.known.support_anchor.clone()
         history=np.asarray(self.history).copy();reference=copy.deepcopy(self.thumb_reference)
-        fields=['last_action','last_raw_action','last_encoder_input','last_observation','last_public_features','held_support_logits']
+        fields=['last_action','last_raw_action','last_encoder_input','last_observation','last_public_features','held_support_logits','operation_anchor_started']
         saved={name:copy.deepcopy(getattr(self,name)) for name in fields}
         def restore():
             self.player.states=clone_states(states)
             self.known.issued=issued.clone();self.known.initial=initial.clone()
             self.known.last_executed_action=executed.clone()
+            self.known.support_anchor=None if support_anchor is None else support_anchor.clone()
             self.thumb_reference=copy.deepcopy(reference)
             for name,value in saved.items():setattr(self,name,copy.deepcopy(value))
             network.actor_encoder_obs_override=old_override
@@ -160,7 +165,11 @@ class G2R800Policy(FrozenPolicy):
                     rnn_state_restored=True,reference_and_command_state_restored=True,
                     scope='Full model/control warmup with isolated state; no synthetic measured history or issued motor command, not hardware latency verification')
 
-    def command(self, q, goal,wrist_gravity=None,clock_s=None,diagnostic_motor_offset=None):
+    def command(self, q, goal,wrist_gravity=None,clock_s=None,diagnostic_motor_offset=None,known_prefix_target=None):
+        if self.learned_acquisition_prefix and clock_s>=16 and not self.operation_anchor_started:
+            self.known.initial=self.known.issued.clone()
+            self.thumb_reference.reset(torch.tensor([0],device=self.player.device),clock_s=16.)
+            self.operation_anchor_started=True
         obs, encoder_input = self.inputs(q, goal)
         self.last_encoder_input = encoder_input.detach().cpu().numpy()[0]
         self.last_observation = obs.detach().cpu().numpy()[0]
@@ -182,6 +191,12 @@ class G2R800Policy(FrozenPolicy):
                 self.last_public_features=public.detach().cpu().numpy()[0]
                 base=action if self.action_base_mode=="r800" else torch.zeros_like(action)
                 if self.thumb_reference is not None:base=self.thumb_reference.action(self.known.initial,self.known.issued,self.tensor([goal]),measured_q=self.tensor(q),clock_s=clock_s)
+                if self.learned_acquisition_prefix and clock_s<16:
+                    assert known_prefix_target is not None
+                    self.thumb_reference.last_target=self.tensor(known_prefix_target).clone()
+                if self.scheduled_support_anchor:
+                    assert self.thumb_reference is not None and self.action_parameterization=='bounded-motor-offset' and self.support_delta_coordinates is None and self.pressure_adapter is None
+                    self.known.support_anchor=self.thumb_reference.last_target.clone()
                 mean=self.residual.actor_logits(public)
                 if self.support_command_period>1 or self.support_latch_after_preparation:
                     assert clock_s is not None and self.action_parameterization=='bounded-motor-offset'

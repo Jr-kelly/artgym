@@ -5,6 +5,8 @@ set -euo pipefail
 # Set WUJI_PYTHON to the activated compatible interpreter if needed.
 wuji_python="${WUJI_PYTHON:-python}"
 export PYTHONPATH=".:rl_games${PYTHONPATH:+:$PYTHONPATH}"
+wuji_bin_dir="$(dirname "$(command -v "$wuji_python")")"
+export PATH="$wuji_bin_dir:$PATH"
 export PYTHONNOUSERSITE=1
 export OMP_NUM_THREADS=4
 export MKL_NUM_THREADS=4

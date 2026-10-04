@@ -1,0 +1,9 @@
+"""Qualify fullplannedclosure learnedprefix with zero boundedresidual before fitting."""
+import subprocess,json
+from pathlib import Path
+from scripts.record_wuji_antirotation_goal import record
+B=Path('runs/antirotation-grasp-20261004');C=B/'three-geometry-curriculum-v1';O=B/'learned-acquisition-prefix-v1';O.mkdir(exist_ok=False);PY='/home/agiuser/miniconda3/envs/artgym/bin/python';scene=json.loads((C/'scene4.json').read_text());scene.update(scheduled_support_anchor=True,learned_acquisition_prefix=True);(O/'scene4.json').write_text(json.dumps(scene,indent=2));name='known-prefix-zero-residual-actual8-v16';out=O/name
+args=['-m','scripts.probe_wuji_antirotation_module','--scene',str(O/'scene4.json'),'--reference',str(B/'initial-geometry-v2/projected-00/reference-v1.json'),'--asset-registry',str(C/'registry.json'),'--geometry-schedule',str(C/'schedule8.json'),'--envs','8','--takeover-seconds','5','--output',str(out)]
+record('known_acquisition_prefix_physical_qualification_started',config={'takeover_s':5,'scope':'Actualfull motorclosure5--8/lift8--12/supporttransition12--14 maintained as known reference. Policyresidual zero for qualification. Actor154/2076 unchanged, 50 actualhistory before5, no physical/history/RNN resetat16, only knownoperationmotoranchor.'},evidence=str(out),next='Check originalknownprefix exactsupport reachability and actualgrasp/twocycles before commongeometrytraining')
+subprocess.run([PY,'-m','scripts.run_wuji_antirotation_job','--name',name,'--',PY]+args,check=True)
+e=json.loads((out/'report.json').read_text())['episodes'];summary={'n':len(e),'pickup':sum(v['pickup_valid'] for v in e),'fall':sum(v['fall'] for v in e)};(out/'summary.json').write_text(json.dumps(summary,indent=2)+'\n');record('known_acquisition_prefix_physical_qualification_closed',config=summary,evidence=str(out),next='Strictgeometrybank common actualqualification and capped newclosure/support curriculum; no unchanged16s training extension')

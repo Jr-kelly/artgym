@@ -18,6 +18,10 @@ collision simplification, reduced gravity or increased actuator limits is used.
 |V17|Frozen750, projected noisy nominal/lower index|.2/.2|32.21/26.44|6.49/1.99|All predeclared functional checks pass|
 |V18|Same V17 actor and geometry|.5/.5|23.73/22.69|16.86/12.12|Continuous contact/holding; inadequate traction/return|
 |V19|Same actor, noisy140x18x14mm estimate|.2/.2|28.94/21.47|4.17/2.75|Second extension and progressive return slip fail|
+|V21|Retained750 nominal50 fit|.5/.5|24.55/23.60|18.83/15.26|No return improvement; fit stopped|
+|V23|Prepared continuous wristroll plus frozen750|.5/.5|22.63/20.56|20.56/20.56|Drops first return|
+|V24|Thin original full-acquisition geometry repaired, frozen750|.2/.2|25.32/21.96|5.61/6.28|No fall/contact retained; second extension fails|
+|V25|Same thin path, three-geometry fitted50|.2/.2|25.81/22.27|6.73/6.50|No meaningful improvement; safely stopped at54|
 |V14|Projected nominal scripted motor reference|.5/.5|24.20/20.47|20.47/20.47|Knife dropped during first return|
 |V20|Scripted continuous negative6mm tangential preparation plus known wrist roll|.2/.2|31.64/22.36|2.49/~0|Improved reversal, insufficient second extension/support displacement|
 
@@ -49,6 +53,12 @@ preparation checks, not successful physical generalization.
 
 Two reset-head new-mechanics training pilots closed without functional behavior
 improvement; their frozen evaluations and optimizer/RNG checkpoints are retained.
-The current50-update retained750 nominal curriculum is explicitly training
-fitting. No success rate from training or development is labeled independent
+The nominal50 and three-geometry54 pilots are closed negative training
+fitting results. No success rate from training or development is labeled independent
 validation, and no hardware result is claimed.
+
+Isolated source/dependency recovery completed the full V17 run with identical
+trace SHA. A large frozen-policy population probe reproduces training-scene
+pathology before optimization; further unchanged PPO is suspended while checking
+physical batch validity. This recovery/diagnosis is separate from necessary
+generalization and from real hardware.

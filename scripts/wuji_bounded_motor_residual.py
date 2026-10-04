@@ -11,6 +11,7 @@ import torch
 def bounded_motor_residual_action(reference_target, known, residual, scale):
     desired = reference_target + scale * torch.tanh(residual)
     desired = torch.maximum(torch.minimum(desired, known.upper), known.lower)
-    action = (desired - known.initial) / known.support_span
+    anchor = known.initial if known.support_anchor is None else known.support_anchor
+    action = (desired - anchor) / known.support_span
     action[:, 16:] = (desired[:, 16:] - known.issued[:, 16:]) / .025
     return action.clamp(-1., 1.)

@@ -33,7 +33,11 @@ def gym_transform(position,quaternion=(0,0,0,1)):
 class G2ContinuousScene:
     def __init__(self,n=8,seed=2026100356,randomization_scale=0.,instances=None,
                  load_max=.1,detent_max=.1,contact_progress_reward=0.,reference_spec=None,
-                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False,graphics=False,disabled_perturbations=(),action_parameterization='incremental',resistance_integration='legacy-explicit',load_min=0.,detent_min=0.,asset_registry=None,proprioceptive_pressure_spec=None,resample_initial_estimates=False,stable_progress_reward=False,support_load_feature_spec=None,known_support_span=.04):
+                 support_scale=.25,thumb_scale=.25,takeover_seconds=16.,load_profile='sinusoidal',load_frequency=1.7,history_features=False,support_estimator_spec=None,functional_thumb_reward=False,scene_spec=None,absorbing_failure_penalty=False,strong_slider_contact_reward=False,graphics=False,disabled_perturbations=(),action_parameterization='incremental',resistance_integration='legacy-explicit',load_min=0.,detent_min=0.,asset_registry=None,proprioceptive_pressure_spec=None,resample_initial_estimates=False,stable_progress_reward=False,support_load_feature_spec=None,known_support_span=.04,physx_contact_pairs=None,compact_isolated_layout=False,physx_buffer_multiplier=None,aggregate_environment=False,env_spacing=3.):
+        compact_isolated_layout=bool(compact_isolated_layout or (scene_spec or {}).get('compact_isolated_layout',False))
+        aggregate_environment=bool(aggregate_environment or (scene_spec or {}).get('aggregate_environment',False))
+        self.compact_isolated_layout=compact_isolated_layout
+        self.aggregate_environment=aggregate_environment
         self.n=n;self.device='cuda:0';self.seed=seed
         self.disabled_perturbations=set(disabled_perturbations)
         assert self.disabled_perturbations <= {'calibration','placement','sensor','latency','material'}
@@ -52,7 +56,8 @@ class G2ContinuousScene:
         assert 0<=load_min<=load_max and 0<=detent_min<=detent_max
         self.resistance_integration=resistance_integration;self.load_min=load_min;self.detent_min=detent_min
         self.slider_drive_properties=[]
-        assert 8<=takeover_seconds<=16 and abs(takeover_seconds*30-round(takeover_seconds*30))<1e-6
+        self.learned_acquisition_prefix=bool(scene_spec and scene_spec.get('learned_acquisition_prefix',False))
+        assert (5 if self.learned_acquisition_prefix else 8)<=takeover_seconds<=16 and abs(takeover_seconds*30-round(takeover_seconds*30))<1e-6
         self.takeover_frame=round(takeover_seconds*30)
         self.load_profile=load_profile;self.load_frequency=load_frequency
         assert load_profile in ['constant','sinusoidal','triangular','pulse','mixed'] and load_frequency>0
@@ -72,7 +77,11 @@ class G2ContinuousScene:
         self.cfg.task.env.supportActionSpan=known_support_span
         if known_support_span>.04:assert action_parameterization=='bounded-motor-offset' and support_estimator_spec is None and support_load_feature_spec is None and proprioceptive_pressure_spec is None
         self.player=self.bridge.player
-        self.scene_spec=scene_spec
+        self.scheduled_support_anchor=bool(scene_spec and scene_spec.get('scheduled_support_anchor',False))
+        if self.learned_acquisition_prefix:assert self.scheduled_support_anchor and takeover_seconds<=8
+        if self.scheduled_support_anchor:
+            assert action_parameterization=='bounded-motor-offset' and not support_estimator_spec and not support_load_feature_spec and not proprioceptive_pressure_spec
+        self.scene_spec=dict(scene_spec,compact_isolated_layout=compact_isolated_layout,aggregate_environment=aggregate_environment) if scene_spec and (compact_isolated_layout or aggregate_environment) else scene_spec
         self.held_diagnostic=bool(scene_spec and scene_spec.get('held_diagnostic',False))
         if self.held_diagnostic:assert takeover_seconds==16 and not resample_initial_estimates
         self.plan=scene_spec['plan'] if scene_spec else json.loads((D/'functional-side-edge-under-support-equilibrium-v6/motor-plan.json').read_text())
@@ -97,7 +106,7 @@ class G2ContinuousScene:
             self.reference.q=self.tensor([[r['q_thumb'] for r in row['thumb_reference']['rows']] for row in self.estimated_plans])
             self.reference.preload_schedule={'seconds':[12,14]}
             self.reference.preload_delta=self.tensor([np.asarray(row['support_target_q'])-np.asarray(row['motor_plan']['close_q']) for row in self.estimated_plans])
-            self.bridge.geometry=self.tensor([row['estimate']['handle_size_WTL_m']+[.01,.003,.03] for row in self.estimated_plans])
+            self.bridge.geometry=self.tensor([row['estimate']['handle_size_WTL_m']+row['estimate'].get('slider_size_WTL_m',[.01,.003,.03]) for row in self.estimated_plans])
         self.opened_batch=self.opened.expand(n,-1);self.closed_batch=self.closed.expand(n,-1)
         self.close_waypoint_tensors=[self.tensor([row['motor_plan']['close_waypoints'][i]['q'] for row in self.estimated_plans]) if self.estimated_plans else self.tensor(way['q']).expand(n,-1) for i,way in enumerate(self.plan['close_waypoints'])]
         self.support_waypoint_q=None
@@ -177,6 +186,13 @@ class G2ContinuousScene:
         sp.physx.num_position_iterations=8;sp.physx.num_velocity_iterations=2
         sp.physx.contact_offset=.001;sp.physx.rest_offset=0;sp.physx.max_depenetration_velocity=1.
         sp.physx.num_threads=4
+        if physx_buffer_multiplier is not None:
+            assert physx_buffer_multiplier>=1
+            sp.physx.default_buffer_size_multiplier=float(physx_buffer_multiplier)
+        if physx_contact_pairs is not None:
+            assert physx_contact_pairs>=1048576
+            sp.physx.max_gpu_contact_pairs=int(physx_contact_pairs)
+        print(json.dumps(dict(physx_max_gpu_contact_pairs=int(sp.physx.max_gpu_contact_pairs),physx_buffer_multiplier=float(sp.physx.default_buffer_size_multiplier))),flush=True)
         self.sim=self.gym.create_sim(0,0 if graphics else -1,gymapi.SIM_PHYSX,sp);assert self.sim
         plane=gymapi.PlaneParams();plane.normal=gymapi.Vec3(0,0,1);self.gym.add_ground(self.sim,plane)
         opt=gymapi.AssetOptions();opt.fix_base_link=True;opt.disable_gravity=False
@@ -188,7 +204,13 @@ class G2ContinuousScene:
         self.envs=[];self.robots=[];self.knives=[];self.origins=[];self.asset_records=[];self.layout=[]
         assets={};self.lower=[]
         for i in range(n):
-            env=self.gym.create_env(self.sim,gymapi.Vec3(-1.5,-1.5,0),gymapi.Vec3(1.5,1.5,2),int(np.ceil(np.sqrt(n))))
+            # Environment bounds position independent collision groups; they are not walls.
+            # Optional overlapping origins avoid large-world float precision.
+            assert .8<=env_spacing<=3.
+            bounds=(gymapi.Vec3(0,0,0),gymapi.Vec3(0,0,0)) if compact_isolated_layout else (gymapi.Vec3(-env_spacing/2,-env_spacing/2,0),gymapi.Vec3(env_spacing/2,env_spacing/2,2))
+            env=self.gym.create_env(self.sim,*bounds,int(np.ceil(np.sqrt(n))))
+            if aggregate_environment:
+                self.gym.begin_aggregate(env,self.gym.get_asset_rigid_body_count(robot_asset)+3,self.gym.get_asset_rigid_shape_count(robot_asset)+32,True)
             robot=self.gym.create_actor(env,robot_asset,gymapi.Transform(),'robot',i,0)
             names=self.gym.get_actor_dof_names(env,robot)
             if i==0:
@@ -249,6 +271,7 @@ class G2ContinuousScene:
             self.gym.set_actor_dof_states(env,robot,initial_state,gymapi.STATE_ALL)
             slider_state=np.zeros(1,dtype=gymapi.DofState.dtype);slider_state['pos'][0]=self.lower[-1]
             self.gym.set_actor_dof_states(env,knife,slider_state,gymapi.STATE_ALL)
+            if aggregate_environment:self.gym.end_aggregate(env)
             origin=self.gym.get_env_origin(env);self.origins.append([origin.x,origin.y,origin.z])
             self.layout.append(dict(env=i,origin=[origin.x,origin.y,origin.z],robot_actor=self.gym.get_actor_index(env,robot,gymapi.DOMAIN_SIM),knife_actor=self.gym.get_actor_index(env,knife,gymapi.DOMAIN_SIM),robot_dof_start=self.gym.get_actor_dof_index(env,robot,0,gymapi.DOMAIN_SIM),knife_dof=self.gym.get_actor_dof_index(env,knife,0,gymapi.DOMAIN_SIM),robot_rb_start=self.gym.get_actor_rigid_body_index(env,robot,0,gymapi.DOMAIN_SIM),knife_rb_start=self.gym.get_actor_rigid_body_index(env,knife,0,gymapi.DOMAIN_SIM)))
             self.envs.append(env);self.robots.append(robot);self.knives.append(knife);self.asset_records.append(parameters)
@@ -436,6 +459,10 @@ class G2ContinuousScene:
             self.reference_pose[hold_ready]=self.rb[hold_ready,self.object_index,:7]
         operation_ready=(self.age==480).nonzero(as_tuple=False).flatten()
         if len(operation_ready):
+            if self.learned_acquisition_prefix:
+                # Software operation anchor only: no physical/history/RNN reset.
+                self.bridge.known.initial[operation_ready]=self.command_target[operation_ready][:,self.hand_ids]
+                self.reference.reset(operation_ready,clock_s=16.)
             self.reference_pose[operation_ready]=self.last_held_pose[operation_ready]
             self.closed_at_handover[operation_ready]=(self.dof[operation_ready,27,0]-self.lower[operation_ready]).abs()<.008
         self.policy_active=self.age>=self.takeover_frame
@@ -480,6 +507,13 @@ class G2ContinuousScene:
         if action_scale is None:action_scale=self.scale
         active=self.policy_active.clone();oldage=self.age.clone();operation_active=oldage>=480
         base=self.reference.action(self.bridge.known.initial,self.bridge.known.issued,self.goal,measured_q=self._measurement,clock_s=self.age.float()/30)
+        if self.learned_acquisition_prefix:
+            prefix_ids=(self.age<480)&active
+            _,prefix_hand=self.prefix_targets()
+            self.reference.last_target[prefix_ids]=prefix_hand[prefix_ids]
+        if self.scheduled_support_anchor:
+            assert self.support_delta_coordinates is None
+            self.bridge.known.support_anchor=self.reference.last_target.clone()
         if self.action_parameterization=='bounded-motor-offset':
             from scripts.wuji_bounded_motor_residual import bounded_motor_residual_action
             proposed=self.support_delta_coordinates.action(self.reference.last_target,self.bridge.known,residual,action_scale,self._features[0]) if self.support_delta_coordinates is not None else bounded_motor_residual_action(self.reference.last_target,self.bridge.known,residual,action_scale)
@@ -612,6 +646,7 @@ class G2ContinuousScene:
             if self.held_diagnostic:
                 row=self.stats[-1];row['held_submodule_legacy_criteria_met']=row['operation_complete'];row['operation_complete']=False;row['held_diagnostic']=True;row['continuous_pickup_demo_pass']=False;row['scope']='Held-only newgrasp adaptation episode; reset only at episode start, originalgravity/contact/motors; never continuouspickup/generalization validation'
         self.last_diagnostics=dict(slider=travel.detach().clone(),height=height.detach().clone(),rotation=rotation.detach().clone(),drift=drift.detach().clone(),proximity=proximity.detach().clone(),action=executed.detach().clone(),q=self.dof[:,self.hand_ids,0].detach().clone(),arm_q=self.dof[:,self.arm_ids,0].detach().clone(),target=self.target.detach().clone(),issued_target=self.command_target.detach().clone() if self.resistance_integration=='solver-brake' else self.target.detach().clone(),object=obj.detach().clone(),wrist=self.rb[:,self.wrist_index].detach().clone(),load=self.load_force.detach().clone(),age=oldage.detach().clone())
+        if self.scheduled_support_anchor:self.last_diagnostics['known_scheduled_support_reference']=self.bridge.known.support_anchor.detach().clone()
         self._features=None;self._measurement=None
         reset_ids=(done if reset_finished else done&~finished).nonzero(as_tuple=False).flatten()
         if len(reset_ids):self.reset(reset_ids)

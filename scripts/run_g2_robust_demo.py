@@ -19,6 +19,7 @@ def gt(t):
 
 def main():
  p=argparse.ArgumentParser();p.add_argument('--postlift-regrasp',type=Path,help='Once-loaded known-clock arm/hand motor path after actual pickup, ending before50 constant historyframes; no object-truth trigger/state reset');p.add_argument('--measured-resistance-profile',type=Path,help='Explicit once-loaded fitted bidirectional passive brake-capacity file, physics only; no actor/profile-ID input, reject positions outside measured support');p.add_argument('--held-diagnostic',action='store_true',help='Explicit submodule only: initialize a free-floating knife and closed hand at lifted nominal pose before first simulation; original gravity/contact/limits, no later state writes; never a continuous pickup success');p.add_argument('--wrist-roll-reference-degrees',type=float,default=0.,help='Development motor-only wrist reference: bounded +/-4deg about estimatedknife longaxis, ramps16--18s afteractualpickup; no liveobject/contactinput');p.add_argument('--output',type=Path,required=True);p.add_argument('--support-residual-scale-override',type=float,help='Explicit bounded-offset checkpoint support amplitude inradians, atmost original.04span; originalmotor/effortlimits unchanged');p.add_argument('--truth-body-roll-diagnostic',action='store_true',help='ONE explicitly non-deployable body-orientation truth diagnostic, bounded originalsupportcommands; never counted as deployable demo');p.add_argument('--video',action='store_true');p.add_argument('--middle-load-lag-regulation',action='store_true',help='Scriptoperationonly: boundedmiddlemotor adaptation frommeasuredjoint-minusactualissuedtarget, notforcefeedback');p.add_argument('--middle-deflection-support',type=Path,help='Certifiedpostliftproprioceptive supportsearch; measuredq/knownmotortargetonly; endsbefore50realholdframes');p.add_argument('--contact-import-audit',action='store_true',help='Evaluation-only nativecollision shapeproperties andall contactcandidates, includingzero-normal-force records');p.add_argument('--collision-geometry-video',action='store_true',help='Render importedcollision geometry for actualcontact diagnostics; physics unchanged');p.add_argument('--seconds',type=float,default=36);p.add_argument('--table-height',type=float,default=.75);p.add_argument('--dx',type=float,default=0);p.add_argument('--dy',type=float,default=0);p.add_argument('--yaw',type=float,default=0);p.add_argument('--close-height',type=float,default=0);p.add_argument('--load',type=float,default=0);p.add_argument('--grasp-plan',type=Path);p.add_argument('--slider-face',choices=['up','down'],default='up');p.add_argument('--arm-seed',type=Path);p.add_argument('--grasp-only',action='store_true');p.add_argument('--handover-calibration',type=Path,help='Fixed prior/offline hand-object calibration, loaded once before episode; no live object or slider truth');p.add_argument('--table-calibration',type=Path);p.add_argument('--cartesian-path',type=Path);p.add_argument('--acquisition-path',type=Path);p.add_argument('--thumb-action-gain',type=float,default=1.);p.add_argument('--support-action-gain',type=float,default=1.);p.add_argument('--residual-checkpoint',type=Path);p.add_argument('--detent',type=float,default=0.);p.add_argument('--variable-load',action='store_true');p.add_argument('--thumb-script',type=Path,help='Offline calibrated thumb joint path with scheduled commands and original legal action memory; no live slider/contact feedback');p.add_argument('--knife-asset',type=Path,default=Path('assets/objects/knife_wuji_real_size_20261002/000/mobility.urdf'),help='Physical asset only; policy keeps nominal calibrated geometry, no asset ID input');p.add_argument('--hand-friction',type=float,default=1.);p.add_argument('--knife-friction',type=float,default=3.);p.add_argument('--load-profile',choices=['constant','sinusoidal','triangular','pulse']);p.add_argument('--load-frequency',type=float,default=1.7);p.add_argument('--observation-noise',type=float,default=0.);p.add_argument('--observation-bias',type=float,default=0.);p.add_argument('--seed',type=int,default=2026100301);p.add_argument('--physics-hz',type=int,choices=[240,480,960],default=240,help='Passive resistance/contact integration rate; original motor PD remains240Hz and legal policy/history30Hz');p.add_argument('--takeover-seconds',type=float,default=16.,help='Learned residual begins at8–16s during lift or hold; operation remains16–36s, no history/physical reset');p.add_argument('--pair-force-measurement',action='store_true',help='Evaluation only: calibrated pair forces every physical step, 30Hz averages');p.add_argument('--support-pressure-config',type=Path,help='Nominal motor support/preload transition; measured/known inputs only');p.add_argument('--resistance-integration',choices=['legacy-explicit','solver-brake'],default='legacy-explicit',help='Calibrated passive zero-velocity railbrake; finitecapacity, no commanded slider motion');p.add_argument('--thumb-reference-override',type=Path,help='Fixed nominal scheduled reference/pacing specification; same frozen actor, explicit development modification');p.add_argument('--actuation-delay-frames',type=int,choices=[0,1],default=0,help='Unknown physical target delay in30Hz frames; legal history retains the actually issued command');p.add_argument('--proprioceptive-pressure-config',type=Path,help='Bounded motoradjustment fromestimated normaljointdeflection; noforcesensor/contact input');a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
+ learned_prefix=bool(a.residual_checkpoint and (torch.load(a.residual_checkpoint,map_location='cpu').get('scene_spec') or {}).get('learned_acquisition_prefix',False))
  resistance_profile=json.loads(a.measured_resistance_profile.read_text()) if a.measured_resistance_profile else None
  if resistance_profile:
   assert a.resistance_integration=='solver-brake' and resistance_profile['format']=='wuji-passive-resistance-profile-v1'
@@ -54,10 +55,10 @@ def main():
   assert np.all(operating_closed>=policy.fk.lower) and np.all(operating_closed<=policy.fk.upper)
  post_lift_interval=plan.get('post_lift_preload_seconds') if a.grasp_plan else None
  lift_preload_height=plan.get('lift_preload_height_m') if a.grasp_plan else None
- assert 8<=a.takeover_seconds<=16 and abs(a.takeover_seconds*30-round(a.takeover_seconds*30))<1e-6
+ assert (5 if learned_prefix else 8)<=a.takeover_seconds<=16 and abs(a.takeover_seconds*30-round(a.takeover_seconds*30))<1e-6
  if a.takeover_seconds<16:
   assert a.residual_checkpoint and not a.thumb_script and not lift_preload_height
-  assert not post_lift_interval or a.takeover_seconds>=post_lift_interval[-1]+2/30,'Learned preparation must not interrupt planned postlift transfer'
+  assert learned_prefix or not post_lift_interval or a.takeover_seconds>=post_lift_interval[-1]+2/30,'Learned preparation must not interrupt planned postlift transfer'
  if lift_preload_height:assert a.acquisition_path and not post_lift_interval and 0<=lift_preload_height[0]<lift_preload_height[1]<=.10
  if post_lift_interval:
   assert (a.acquisition_path or a.held_diagnostic) and 12<=post_lift_interval[0]<post_lift_interval[1]<=16-50/30,'Post-lift preload must leave50 real constant-target frames before policy takeover'
@@ -257,13 +258,18 @@ def main():
     if a.held_diagnostic and t<16:aq=qlift;hq=hold_motor(t,aq)
     elif t<2:aq=qabove;hq=opened
     elif t<5:aq=acquisition_motor(approach_path,smooth((t-2)/3)) if a.acquisition_path else path_motor(1-smooth((t-2)/3)) if a.cartesian_path else qabove+smooth((t-2)/3)*(qgrasp-qabove);hq=opened
-    elif t<8:aq=qgrasp;hq=close_motor((t-5)/3)
+    elif t<8:
+     aq=qgrasp;hq=close_motor((t-5)/3)
+     if learned_prefix and not a.grasp_only and t>=a.takeover_seconds:
+      if not taken:
+       slider_est=policy_slider_estimate if policy_slider_estimate is not None else policy_relative@transform([0,.0075,.010624586881962734+lower]);policy.takeover_estimate(q,target[hand].numpy(),policy_relative,slider_est,clock_s=t);taken=True
+      hq,act=policy.command(q,0.,wrist_gravity=kin.forward(dof[arm,0].numpy())[:3,:3].T@np.array([0.,0.,-1.]),clock_s=t,known_prefix_target=hq)
     elif t<12:
      aq=acquisition_motor(lift_path,smooth((t-8)/4)) if a.acquisition_path else path_motor(smooth((t-8)/4)) if a.cartesian_path else qgrasp+smooth((t-8)/4)*(qlift-qgrasp);hq=hold_motor(t,aq) if lift_preload_height else closed
      if not a.grasp_only and t>=a.takeover_seconds:
       if not taken:
        slider_est=policy_slider_estimate if policy_slider_estimate is not None else policy_relative@transform([0,.0075,.010624586881962734+lower]);policy.takeover_estimate(q,target[hand].numpy(),policy_relative,slider_est,clock_s=t);taken=True
-      hq,act=policy.command(q,0.,wrist_gravity=kin.forward(dof[arm,0].numpy())[:3,:3].T@np.array([0.,0.,-1.]),clock_s=t)
+      hq,act=policy.command(q,0.,wrist_gravity=kin.forward(dof[arm,0].numpy())[:3,:3].T@np.array([0.,0.,-1.]),clock_s=t,known_prefix_target=hq if learned_prefix else None)
     elif t<16 or a.grasp_only:
      aq=qlift;hq=hold_motor(t,aq)
      if middle_support:
@@ -271,7 +277,7 @@ def main():
      if not a.grasp_only and t>=a.takeover_seconds:
       if not taken:
        slider_est=policy_slider_estimate if policy_slider_estimate is not None else policy_relative@transform([0,.0075,.010624586881962734+lower]);policy.takeover_estimate(q,target[hand].numpy(),policy_relative,slider_est,clock_s=t);taken=True
-      hq,act=policy.command(q,0.,wrist_gravity=kin.forward(dof[arm,0].numpy())[:3,:3].T@np.array([0.,0.,-1.]),clock_s=t)
+      hq,act=policy.command(q,0.,wrist_gravity=kin.forward(dof[arm,0].numpy())[:3,:3].T@np.array([0.,0.,-1.]),clock_s=t,known_prefix_target=hq if learned_prefix else None)
     else:
      aq=qlift
      if not taken:

@@ -1,4 +1,8 @@
-# 当前开发进展（2026-10-04 00:07 UTC）
+# 当前开发进展（滚动追加）
+
+当前已保留 V17 名义刀连续功能演示，并在隔离源代码/依赖恢复中复现同一轨迹。必要泛化、高阻力双向操作与真机仍未解决。下文按时间保留过程记录，早期“未完成”是当时状态。
+
+## 2026-10-04 00:07 UTC 历史记录
 
 完整连续 demo、必要泛化尚未完成，未执行真机动作。本轮当前最强新成果是改变取刀预成形后，实际桌面侧向接近、闭合、抬起、保持成功；不是理想持刀 reset。
 
@@ -64,3 +68,21 @@ Thin geometry original open/touch/close conflicts were localized to pinky and mi
 Same frozen750 matched8-environment nominal/thin/thick actual physical compatibility completes all pickups with no fall. A new three-geometry curriculum starts .1--.35 running/start passive capacities, mixed material/sensor/delay perturbations, original .04supportspan/.025support/.12thumb, retain750head, capped100 and actual frozen50 thin check. No unchanged extension of negative nominal.2--.6 fit. Scene/templates and physical schedules remain separate; actor154/no live object/contact/assetID.
 
 Strict common necessary geometry bank16 preparation runs CPU pipeline1180631, started02:29Z; uses16 pre-existing noisy observations across8 train geometries, common self/table/fullstroke planner and original dense gates. Invalid targets excluded with evidence, no collision relaxation. Local utilization monitor1174078 heartbeat02:21Z; current metrics/PIDs must be rechecked, remoteSSH again timedout02:00Z/currentGPU unverified. GPU work is only actual useful training/probes, no filler. Continue until at least08:03:23Z unless actual documented external impossibility under Goal rules.
+
+
+## 2026-10-04T03:28Z update
+Three-geometry retained750 curriculum safely closed at update54 after frozen50 V25 actual thin trial remained below second-extension criterion (25.81/22.27mm, returns6.73/6.50mm). No unchanged extension. Small frozen750 deterministic/explorative probes8 each and two-reset16 physical episodes have no falls. A4096-environment frozen750 mixed-noise probe reproduces pathology before learning:2753pickup-valid/3418falls. This is batch validity evidence, not independent generalization. Causal zero-noise original and .5noise larger contact-buffer probes are underway; no cause inferred yet.
+
+Independent recovery worktree/source+runtime dependencies verifies every archive member SHA. First startup failed because Ninja was absent from PATH when using absolute Python; RUN-V17 repaired to prepend interpreter bin. Second isolated actual36s V17 reproduces functional pass and exact trace SHA03be21a7f371fbf6d67b9d2fca2786e82ba391e8ea1f2bcaa29c59f081768eae. Scope is recovery in same installed IsaacGym runtime, not hardware/generalization. Runtime archive v1 must be superseded by corrected entry archive before Release.
+
+Common original-geometry bank16 preparation PID1180631 remains useful CPU work; first8 train sensor observations pass actual acquisition, transfer, fullstroke geometry gates. Preparation is not behavior success. Local monitor1174078 latest approx1h samplemean49.16%; nofull4hcoverage guarantee. Only useful computations, no concealed occupancy.
+
+
+## 2026-10-04T04:18Z update
+V26 existing index-retention proxy improves return endpoints but fails second extension/cumulative rotation; V27 existing support-normal-moment redistribution drops first return. Both saved, no gain sweep/unchanged continuation.
+
+Largebatch frozen policy pathology persists at zero noise, largercontactbuffer and separated1m grid. Coincident4096/512/128 layouts explicitly rejected for PhysX broadphase capacitywarnings; valid finite64 has52pickups/43falls. These do not prove a single numericalcause or repair mechanical robustness. Stop layout/resource sweeps, no additionalPPO on an assumed repairedbatch. Optional diagnosticflags preserve originaldefaultphysics.
+
+A concrete earlysupport compatibility issue was repaired: fixed supportspan clips planned postlift transition when policy takes over at8s. Sameactual8 trajectories, supporttargeterror18--38mrad old versus0.06mrad withknownscheduledreference; nofallsboth, no functionalgenclaim. New5s learned-acquisition prefix keeps fullplannedclosure/lift/transfer and appliesboundedresiduals aroundknownmotorreference. At16 onlysoftwareknownoperationreference changes; no physics/history/RNNreset. Zeroresidual actual8 qualification completesallpickup/nofall. Original16s default unchanged.
+
+Newnecessaryheight bank pipeline1252046 adds four physicalvariants/two noisyobservations each: raisedslider2--4mm, nominalaxial +/-5mm/lateral +/-1mm, thinhigh/thicklow. Originalslider meshscaledY withdeclaredestimateddensity mass/inertia; no physicalID enters commonplanner/actor. Originaldensegates, rejectionsevidencepreserved. Mainbank16 had14passed at04:15Z. Latestremote03:34SSHtimeout, currentremoteGPUunknown. Futurejob identities nowincludeexactsourcecommit/scriptpatch/sourcefilesSHA +weight/configinputSHA. Work continues untilatleast08:03:23Z, onlyusefulcomputations.

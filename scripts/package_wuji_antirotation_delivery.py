@@ -1,5 +1,5 @@
 """Exact-byte current-round Release archives, excluding private attachment media."""
-import argparse,json,hashlib,tarfile,subprocess
+import argparse,json,hashlib,tarfile,subprocess,tempfile,shutil
 from pathlib import Path
 from scripts.record_wuji_antirotation_goal import R,D,record
 B=R/'runs/antirotation-grasp-20261004'
@@ -34,9 +34,13 @@ def main():
   files.extend(f for f in D.rglob('*') if f.is_file() and f.suffix in ['.md','.json','.jsonl','.py','.sh'] and f.name!='github-commit-map.json' and '__pycache__' not in f.parts)
  files=sorted(set(files));assert files and all(f.is_file() and R in f.parents for f in files)
  a.output.parent.mkdir(parents=True,exist_ok=True);record('antirotation_delivery_archive_started',config={'group':a.group,'files':len(files)},evidence=str(a.output.relative_to(R)),next='Exact selected bytes and SHA256 manifest; representative restore before final publication')
- entries=[dict(path=str(f.relative_to(R)),bytes=f.stat().st_size,sha256=digest(f)) for f in files]
- with tarfile.open(a.output,'w:gz',compresslevel=1,dereference=True) as tar:
-  for f in files:tar.add(f,arcname=str(f.relative_to(R)),recursive=False)
+ with tempfile.TemporaryDirectory(prefix='wuji-archive-snapshot-',dir=str(a.output.parent)) as temporary:
+  snapshots=[]
+  for f in files:
+   target=Path(temporary)/f.relative_to(R);target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(f,target);snapshots.append((f,target))
+  entries=[dict(path=str(f.relative_to(R)),bytes=snapshot.stat().st_size,sha256=digest(snapshot)) for f,snapshot in snapshots]
+  with tarfile.open(a.output,'w:gz',compresslevel=1,dereference=True) as tar:
+   for f,snapshot in snapshots:tar.add(snapshot,arcname=str(f.relative_to(R)),recursive=False)
  receipt=dict(group=a.group,archive=a.output.name,bytes=a.output.stat().st_size,sha256=digest(a.output),source_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip(),files=entries,scope='Exact archived bytes; code obtained from matching GitHub tag/commit, scientific role separately reported. Private attachment photo/video not included. Learning resume restores model/Adam/RNG with new physical episodes, not bitwise solver state.')
  manifest=a.output.with_suffix(a.output.suffix+'.manifest.json');manifest.write_text(json.dumps(receipt,indent=2));record('antirotation_delivery_archive_completed',config={k:v for k,v in receipt.items() if k!='files'},evidence=str(manifest.relative_to(R)),next='Verify representative extraction/dependency hashes; no success inferred from archive creation');print(json.dumps({k:v for k,v in receipt.items() if k!='files'}))
 if __name__=='__main__':main()
