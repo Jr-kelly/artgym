@@ -1,60 +1,53 @@
-# 恢复与运行（当前候选，持续更新）
+# 恢复与运行
 
-本轮实验副本：`/data/research/artgym-experiments-20260921/wrap-force-20261004`。代码分支 `feat/wuji-wrap-force-20261004`；最终归档和 Release 清单将在交付时补齐。不能仅凭下载代码宣称恢复了权重和资产。
+默认入口已切换到新包覆抓姿：真实桌角取刀、持稳、两轮 40 mm 伸缩命令；没有换握或定时位置锁存。冻结文件是 `FROZEN-WRAP-CONTINUOUS-CANDIDATE-V12.json`。当前选定 S120 权重 SHA256 为 `ad16a153c27eb01567c14422ca8ed23e5bebfc6e1c901683031f245631944d2a`，训练初始化来自 750；后续失败试训不能自动替代。
 
-## 已冻结的连续仿真候选
+## 环境与恢复
 
-在仓库根目录、现有 Isaac Gym Preview 4 / Python 3.8 环境运行：
+Python 3.8、授权安装的 Isaac Gym Preview 4、PyTorch 2.1.0/cu118；依赖版本见 `runtime-pip-freeze.txt`。恢复包保留仓库相对路径。Isaac Gym SDK 本身不再分发，必须使用已有授权安装；不能用 PyPI 同名包替换。
+
+解包代码/资产/配置和学习状态到同一空目录，校验恢复清单后，在该目录执行。将下面的 PYTHON 改为已有 Isaac Gym 环境的 Python：
 
 ```bash
-/home/agiuser/miniconda3/envs/artgym/bin/python -m scripts.run_wuji_wrap_selected --output runs/wrap-force-recovery/nominal
+export PYTHON=/home/agiuser/miniconda3/envs/artgym/bin/python
+export LD_LIBRARY_PATH="$(dirname "$(dirname "$PYTHON")")/lib:${LD_LIBRARY_PATH:-}"
+export PYTHONPATH="$PWD:$PWD/rl_games:${PYTHONPATH:-}"
+"$PYTHON" -m scripts.run_wuji_wrap_selected --output runs/recovered-wrap/nominal
 ```
 
-该入口执行真实桌缘取刀、固定支撑换握、两轮 40 mm 命令、定时位置保持、功能评估及物理接触分析。输出 `simulation/continuous.mp4`、`hand-closeup.mp4`、`trace.npz`、全物理步接触记录和评估。保持有限 PD、重力、被动导轨、原力矩/速度约束；没有真机连接。位置保持不等于恒力，功能端点通过不等于实际完整 40 mm 或完全收刀。
+输出 `simulation/{continuous.mp4,hand-closeup.mp4,trace.npz,report.json,functional-evaluation.json}`，完整接触记录及选择/实际命令。此入口只有仿真，不连接机器人。
 
-冻结配置见 `FROZEN-CONTINUOUS-CANDIDATE-V10.json`，选定 actor 为 `runs/wrap-force-20261004/train/continuous-source2-pressure-thumb25-v2-localr1/update_000050.pth`，SHA256 `2fa454dfeb7d40f22a5bdf33e740e7fd3c41a6cc906b233fabb06cd90c161948`。较晚的更新不自动取代它。
+实际体根位置 x=.3035 m、y=−.6295 m、yaw45°，已知桌中心 y=−.23 m；没有刀身固定装置。29 g 主体与6 g滑块的组合重心位于桌内。位置偏置及 .8 N 压力代理属于有限 PD 电机目标/模型，不是恒力控制；实际法向压力由独立物理记录报告。旧冻结 localization 的文字不能替代上述实际数值。
 
-必要桥接依赖：
-
-| 文件 | SHA256 | 作用 |
-|---|---|---|
-| `runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth` | `2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8` | 原 teacher / normalizer |
-| `runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth` | `bbf61592721300b1cf053de8246898a69989ed102b7a034da6fb47cc9a541dcd` | 2076 维 R800 编码器 |
-| `research/robust-knife-family-20261003/data/repaired-seeds.npy` | 随恢复清单给出 | 既有初始化依赖，实际取刀使用明确 motor plan |
-
-必须恢复 G2/Wuji 原资产、Hydra 配置和上述路径；保留基线 [antirotation Release](https://github.com/Jr-kelly/artgym/releases/tag/wuji-g2-antirotation-grasp-20261004-v1) 的依赖说明，不重新下载全仓历史。Isaac Gym 安装来自已授权环境，不能用 PyPI 的同名包替换。
-
-## 一次初始估计的尺寸适配
+## 带误差的一次尺寸估计
 
 ```bash
-/home/agiuser/miniconda3/envs/artgym/bin/python -m scripts.run_wuji_wrap_selected \
+"$PYTHON" -m scripts.run_wuji_wrap_selected \
   --initial-estimate runs/wrap-force-20261004/validation/geometry-inputs-corrected-v3/015/once-estimate.json \
   --knife-asset runs/wrap-force-20261004/validation/geometry-assets-v3/015/mobility.urdf \
-  --output runs/wrap-force-recovery/estimated-geometry
+  --output runs/recovered-wrap/geometry015
 ```
 
-初始估计是带误差的尺寸/滑块观测，规划器不读取资产 ID、当前物体或接触真值。物理资产只交给模拟器。入口先重算接近、闭合、换握、全行程的原几何/关节检查，失败则不执行。015 已有完整连续通过记录；012–014 的其他准备与失败必须按各自证据阅读，不能从持刀 reset 通过推断连续泛化。000–011 训练、012–015 留出划分保留。
+统一规则：所有尺寸使用体根 x=.306 m；一次带误差的尺寸/滑块估计驱动接近、闭合、全40 mm参考的重新规划和原约束认证。物理资产只交给模拟器。缓存与 G2 映射、控制历史和手部重力均保持原实现。012–015 在该规则下均有实际连续通过记录，见 `DIRECT-CORNER-ONCE-ESTIMATE-CONTINUOUS-V14.json`。000–011 训练、012–015 留出及原抓姿划分不变。尺寸通过不等于阻力/观测噪声联合泛化已完成；.35/.5 N 与噪声挑战存在失败。
 
-## 可校准的轴向测力诊断
+早期 source2 方案可显式执行 `--preset source2`；它有换握及已知时钟的位置保持，见 V10 冻结文件，不是默认包覆方案。
 
-直接完整接触力通道当前仍不可用。串联弹性 cap/carrier 是修改滑块动力学的独立诊断，不是原任务直接 B 通道，也不是真机测力。动基座校准见 `runs/wrap-force-20261004/measurement/serial-moving-base-v6/report.json`，最大残差 0.001575 N。
+## 轴向测量
 
-运行命令保存在各实验 `jobs/<name>/identity.json` 的 `command` 中。选择已完成、接触有效的诊断：`measurement/source2-pressure-series-v5` 和 `measurement/index-wrap-pressure080-series-v8`。它们使用不同明确的布局/压力档位，不能将二者合写成相同条件的重复。
+原刀完整接触切向力和导轨真实反力尚无通过校准的通道。串联弹性 cap/carrier 是修改动力学的独立诊断，不能当作原刀或真机测量。动基座校准最大残差 .001575 N，校准原始数据随证据包给出。用世界加速度、质量、重力及实际施加弹簧力反算轴向力，并筛除非拇指接触、地面和端挡；缺项为 null。
 
 ```bash
-/home/agiuser/miniconda3/envs/artgym/bin/python -m scripts.analyze_wuji_serial_axial_force \
+"$PYTHON" -m scripts.analyze_wuji_serial_axial_force \
   --trial runs/wrap-force-20261004/measurement/index-wrap-pressure080-series-v8 \
   --calibration runs/wrap-force-20261004/measurement/serial-moving-base-v6/report.json
-/home/agiuser/miniconda3/envs/artgym/bin/python -m scripts.plot_wuji_serial_axial_measurement \
+"$PYTHON" -m scripts.plot_wuji_serial_axial_measurement \
   --trial runs/wrap-force-20261004/measurement/index-wrap-pressure080-series-v8
 ```
 
-B 读数按 cap 世界加速度、质量、重力与实际施加的串联弹簧力反算，并对非拇指接触、端挡、地面接触作有效性标记。每步 960 Hz 原始数据、起动/中段/端部窗口、速度/位置与压力对齐；缺项保留 null。容量不能填充为力值，单次瞬时峰值不能称为重复起动力或持续能力。
+该样本是持刀诊断，不是取刀演示；配对 old/new 两种布局使用相同权重及压力档、各自匹配参考。实际 ±.20 N 中段推/拉读数属于修改装置 B 通道；法向压力 A、已知阻力容量、外加负载 D 都不能替代 B。起动窗口的瞬时峰值不能称为可重复起动力或持续能力。guide-reaction calibration 的失败记录必须保留，不对失败公式发布有效 C 反力值。
 
-## 离线控制和真机接入点
+## 离线与真机准备
 
-`offline/frozen-v10-legal-export-v1` 仅有 `clock_s, hand_measured_q, arm_measured_q, issued_hand_target` 四个字段；`offline/frozen-v10-replay-holds-v1` 有 600 帧控制结果及预热/延迟记录。重放器支持同样的合法压力估计和定时位置保持，不连接 SDK。与已发目标的最大差异 0.000975 rad，不能声称位级一致。
+`offline/frozen-v12-legal-export-v1` 只含 clock_s、hand_measured_q、arm_measured_q、issued_hand_target。重放 r1 的600帧计算中位3.24 ms、p95 5.54 ms，但与记录目标最大差异 .01543 rad；这是离线计算，不是 SDK 实时/逐位一致证明。预热不发硬件命令。
 
-本地低负载一次记录中计算中位 3.13 ms、p95 5.42 ms；同时训练时另一次记录超过 30 Hz 帧预算。两者都是离线计算，不能宣称真实硬件实时性能。
-
-Wuji 原生关节块顺序为 index、middle、pinky、ring、thumb，每指四关节；G2 为 idx61–idx67。实际 SDK 必须按名称核实顺序、单位、符号、时间戳、位置接口和 effort 含义。实物双向起动/沿程阻力、有效行程、完全收刀位置仍未测得。复用基线 REAL-MEASUREMENT.md / HARDWARE-PREPARATION.md；本轮不发送机器人动作。
+Wuji 原生块顺序 index、middle、pinky、ring、thumb，各4关节；G2右臂 idx61–idx67。真实 SDK 尚需核实名称、顺序、单位、符号、时间戳、位置接口和 effort 含义。实物轴向双向起动/沿程阻力、完全收刀位置及有效行程仍需测量。`REAL-MEASUREMENT.md` 与 `HARDWARE-PREPARATION.md` 提供离线测量/接入准备。本轮没有自动真机动作。

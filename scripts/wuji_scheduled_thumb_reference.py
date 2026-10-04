@@ -18,6 +18,19 @@ class ScheduledThumbReference:
         else:
             self.q = torch.tensor([r['q_thumb'] for r in rows], device=device)
         self.duration = float(specification.get('travel_seconds', 4.))
+        self.reverse_q=None
+        if specification.get('reverse_rows'):
+            assert specification['reverse_motor_preload']['all_feasible']
+            assert not specification.get('posture_preload')
+            assert len(specification['reverse_rows'])==len(rows)
+            reverse_shifts=torch.tensor([r['shift_m'] for r in specification['reverse_rows']],device=device)
+            assert torch.allclose(reverse_shifts,self.shifts)
+            self.reverse_q=torch.tensor([r['q_thumb'] for r in specification['reverse_rows']],device=device)
+            self.direction_blend_seconds=float(specification['reverse_motor_preload']['direction_blend_seconds'])
+            assert self.direction_blend_seconds>=.5
+        self.direction_weight=torch.zeros(n,device=device)
+        self.direction_start=self.direction_weight.clone()
+        self.direction_goal=self.direction_weight.clone()
         self.dt = control_dt
         self.measured_hold_reference=bool(specification.get('calibrate_from_measured_hold'))
         self.age = torch.zeros(n, device=device)
@@ -41,6 +54,9 @@ class ScheduledThumbReference:
         self.previous_goal[ids] = float('nan')
         self.start[ids] = 0
         self.desired[ids] = 0
+        self.direction_weight[ids]=0
+        self.direction_start[ids]=0
+        self.direction_goal[ids]=0
         if self.preload_schedule:
             value=self.preload(clock_s)
             self.preload_anchor[ids]=value[ids] if value.ndim==2 else value
@@ -57,6 +73,9 @@ class ScheduledThumbReference:
         changed = torch.isnan(self.previous_goal) | ((goal-self.previous_goal).abs() > 1e-6)
         self.start[changed] = self.desired[changed]
         self.age[changed] = 0
+        if self.reverse_q is not None:
+            self.direction_start[changed]=self.direction_weight[changed]
+            self.direction_goal[changed]=(goal[changed]<self.start[changed]).float()
         self.previous_goal[:] = goal
         if self.pacing:
             assert measured_q is not None, 'Pacing requires legal measured joints'
@@ -72,6 +91,12 @@ class ScheduledThumbReference:
             first,last,zero=self.q[ids,index],self.q[ids,index+1],self.q[:,0]
         else:first,last,zero=self.q[index],self.q[index+1],self.q[0]
         desired_q = initial[:,16:]+first*(1.-alpha)+last*alpha-zero
+        if self.reverse_q is not None:
+            reverse=self.reverse_q[index]*(1.-alpha)+self.reverse_q[index+1]*alpha
+            u_direction=(self.age*self.dt/self.direction_blend_seconds).clamp(0.,1.)
+            blend=u_direction*u_direction*u_direction*(10.-15.*u_direction+6.*u_direction*u_direction)
+            self.direction_weight=self.direction_start+(self.direction_goal-self.direction_start)*blend
+            desired_q+=self.direction_weight[:,None]*(reverse-(first*(1.-alpha)+last*alpha))
         self.last_target = initial.clone()
         self.last_target[:,16:] = desired_q
         if self.stroke_support is not None:

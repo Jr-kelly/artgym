@@ -40,6 +40,7 @@ class G2ContinuousScene:
         self.aggregate_environment=aggregate_environment
         self.scheduled_target_holds=bool((scene_spec or {}).get('scheduled_target_holds',False))
         self.functional_hold_reward=bool((scene_spec or {}).get('functional_hold_reward',False))
+        self.functional_operation_reward=bool((scene_spec or {}).get('functional_operation_reward',False))
         self.n=n;self.device='cuda:0';self.seed=seed
         self.disabled_perturbations=set(disabled_perturbations)
         assert self.disabled_perturbations <= {'calibration','placement','sensor','latency','material'}
@@ -84,6 +85,9 @@ class G2ContinuousScene:
         if self.scheduled_support_anchor:
             assert action_parameterization=='bounded-motor-offset' and not support_estimator_spec and not support_load_feature_spec and not proprioceptive_pressure_spec
         self.scene_spec=dict(scene_spec,compact_isolated_layout=compact_isolated_layout,aggregate_environment=aggregate_environment) if scene_spec and (compact_isolated_layout or aggregate_environment) else scene_spec
+        placement=(scene_spec or {}).get('initial_tabletop_placement',{})
+        self.table_y=float(placement.get('table_y_m',-.25));self.knife_root_xy=np.asarray(placement.get('body_root_xy_m',[.3015,-.25]),dtype=float);self.knife_initial_yaw=float(placement.get('yaw_degrees',0.))
+        assert self.knife_root_xy.shape==(2,)
         self.nominal_hand_friction=float((scene_spec or {}).get('nominal_hand_friction',1.));self.nominal_knife_friction=float((scene_spec or {}).get('nominal_knife_friction',3.))
         self.held_diagnostic=bool(scene_spec and scene_spec.get('held_diagnostic',False))
         if self.held_diagnostic:assert takeover_seconds==16 and not resample_initial_estimates
@@ -263,7 +267,7 @@ class G2ContinuousScene:
                     if name.endswith(('link1','link2')):mask|=1<<(16+digit)
                 for k in range(index.start,index.start+index.count):shapes[k].filter=mask;shapes[k].friction=self.nominal_hand_friction
             self.gym.set_actor_rigid_shape_properties(env,robot,shapes)
-            self.gym.create_actor(env,table_asset,gym_transform([.60,-.25,.725]),'table',i,0)
+            self.gym.create_actor(env,table_asset,gym_transform([.60,self.table_y,.725]),'table',i,0)
             sid=self.instances[i%len(self.instances)]
             directory=R/asset_registry[sid] if asset_registry is not None else R/'assets/objects'/('knife_wuji_real_size_20261002' if sid=='000' else 'knife_wuji_dense_under_20261003')/sid
             parameters=json.loads((directory/'parameters.json').read_text())
@@ -271,7 +275,7 @@ class G2ContinuousScene:
                 opt=gymapi.AssetOptions();opt.fix_base_link=False;opt.disable_gravity=False
                 opt.override_com=False;opt.override_inertia=False;opt.thickness=.001;opt.density=1000
                 assets[sid]=self.gym.load_asset(self.sim,str(R),str((directory/'mobility.urdf').relative_to(R)),opt)
-            knife=self.gym.create_actor(env,assets[sid],gym_transform([.3015,-.25,.75+parameters['handle_size'][1]/2+.0001],Rotation.from_euler('x',90,degrees=True).as_quat()),'knife',i,0)
+            knife=self.gym.create_actor(env,assets[sid],gym_transform([*self.knife_root_xy,.75+parameters['handle_size'][1]/2+.0001],(Rotation.from_euler('z',self.knife_initial_yaw,degrees=True)*Rotation.from_euler('x',90,degrees=True)).as_quat()),'knife',i,0)
             bodies=self.gym.get_actor_rigid_body_properties(env,knife);xml=ET.parse(directory/'mobility.urdf')
             for body,name in zip(bodies,['link_0','link_1']):
                 node=xml.find(f"./link[@name='{name}']/inertial");body.mass=float(node.find('mass').get('value'));v=node.find('inertia')
@@ -319,6 +323,7 @@ class G2ContinuousScene:
         self.object_index=self.robot_body_count+1;self.slider_index=self.robot_body_count+2
         self.reference_pose=torch.zeros((n,7),device=self.device)
         self.pickup_reference_in_wrist=self.reference_pose.clone()
+        self.first_return_in_wrist=self.reference_pose.clone()
         self.peak=torch.zeros(n,device=self.device);self.max_drift=self.peak.clone();self.max_rotation=self.peak.clone()
         self.min_hold_height=torch.full((n,),float('inf'),device=self.device)
         self.endpoints=torch.zeros((n,4),device=self.device);self.contact_steps=self.peak.clone();self.operation_steps=self.peak.clone()
@@ -399,9 +404,10 @@ class G2ContinuousScene:
         shift=(torch.rand((k,2),device=self.device)-.5)*.002*s
         yaw=(torch.rand(k,device=self.device)-.5)*np.deg2rad(3)*s
         if 'placement' in self.disabled_perturbations:shift.zero_();yaw.zero_()
+        yaw=yaw+np.deg2rad(self.knife_initial_yaw)
         quaternion=quat_mul(torch.stack([torch.zeros_like(yaw),torch.zeros_like(yaw),torch.sin(yaw/2),torch.cos(yaw/2)],-1),self.tensor([np.sqrt(.5),0.,0.,np.sqrt(.5)])[None].expand(k,-1))
         thickness=self.tensor([self.asset_records[i]['handle_size'][1] for i in ids.tolist()])
-        self.root[ids,2,:]=0.;self.root[ids,2,:3]=torch.stack([.3015+shift[:,0],-.25+shift[:,1],.75+thickness/2+.0001],-1)
+        self.root[ids,2,:]=0.;self.root[ids,2,:3]=torch.stack([float(self.knife_root_xy[0])+shift[:,0],float(self.knife_root_xy[1])+shift[:,1],.75+thickness/2+.0001],-1)
         if self.held_diagnostic:self.root[ids,2,2]+=.16
         self.root[ids,2,3:7]=quaternion
         actor_ids=torch.stack([ids*3,ids*3+2],-1).flatten().to(torch.int32)
@@ -424,6 +430,7 @@ class G2ContinuousScene:
         self.peak[ids]=0.;self.max_drift[ids]=0.;self.max_rotation[ids]=0.;self.min_hold_height[ids]=float('inf')
         self.endpoints[ids]=0.;self.contact_steps[ids]=0.;self.operation_steps[ids]=0.;self.closed_at_handover[ids]=False
         self.fell[ids]=False
+        self.first_return_in_wrist[ids]=0.
         self._features=None;self._measurement=None
 
     def path_targets(self,path,u):
@@ -660,6 +667,26 @@ class G2ContinuousScene:
             unstable_operation=operation_active&((drift>=.01)|(rotation>=.25))
             progress_reward=torch.where(unstable_operation,torch.zeros_like(progress_reward),progress_reward)
         reward=progress_reward+.25*thumb_reward+.1*contact[:,1:].sum(-1)-40*drift.clamp(0,.10)-4*rotation.clamp(0,1.5)-.02*executed.square().mean(-1)
+        if self.functional_operation_reward:
+            # Reward-only adaptation to the already frozen functional task.
+            # Bounded seating inside its broad envelope is not penalized as
+            # a zero-angle task. Still retain full40mm progress, sustained
+            # support, bounded return-to-return drift and scheduled settling.
+            # Truth is confined to reward; physics and evaluation are intact.
+            functional=progress_reward+.25*thumb_reward+.1*contact[:,1:].sum(-1)
+            functional-=40*(drift-.015).clamp(0,.1)+4*(rotation-.6).clamp(0,1.5)
+            functional-=.02*executed.square().mean(-1)
+            wrist=self.rb[:,self.wrist_index];inverse=quat_conjugate(wrist[:,3:7])
+            relative=torch.cat([quat_apply(inverse,obj[:,:3]-wrist[:,:3]),quat_mul(inverse,obj[:,3:7])],-1)
+            first_return=oldage==779
+            self.first_return_in_wrist[first_return]=relative[first_return].detach()
+            second_return=operation_active&(oldage>=930)
+            if bool(second_return.any()):
+                ids=second_return.nonzero(as_tuple=False).flatten()
+                pr=2*torch.asin(quat_mul(relative[ids,3:7],quat_conjugate(self.first_return_in_wrist[ids,3:7]))[:,:3].norm(dim=-1).clamp(0,1))
+                pd=(relative[ids,:3]-self.first_return_in_wrist[ids,:3]).norm(dim=-1)
+                functional[ids]-=.2*(pr/.1).square().clamp(max=5)+.2*(pd/.005).square().clamp(max=5)
+            reward=torch.where(operation_active,functional,reward)
         if self.functional_hold_reward:
             # The last second of each five-second segment is the scheduled
             # hold. Penalize relative motion, not a particular seating angle.

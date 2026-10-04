@@ -30,7 +30,11 @@ def rollout_kl(model, public, old_mean, old_scale, active, chunk=4096,joint_even
 
 
 def bounded_step(model, optimizer, public, old_mean, old_scale, active, maximum_kl=.03,joint_events=None):
-    actor = list(model.actor.parameters()) + [model.logstd]
+    # Frozen hidden layers are absent from a thumb-head-only optimizer.
+    # Accessing optimizer.state[p] for them would create unmapped state keys
+    # and make the otherwise valid learned checkpoint impossible to save.
+    actor = [p for p in list(model.actor.parameters()) + [model.logstd]
+             if p.requires_grad]
     critic = list(model.critic.parameters())
     if not active.any():
         # Scripted-prefix batches offer no actor objective. Do not let inherited

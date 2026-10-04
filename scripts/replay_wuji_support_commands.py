@@ -44,9 +44,9 @@ def main():
     calibration = json.loads(a.calibration.read_text())
     obj = np.asarray(calibration['object_in_wrist'], dtype=float)
     slider = np.asarray(calibration['slider_in_wrist'], dtype=float)
-    center = np.asarray(estimate.get('initial_object_center_shift_knife_m', [0, 0, 0]))
+    center = np.asarray(estimate.get('initial_object_center_shift_knife_m', [0, 0, 0]),dtype=float)
     obj[:3, 3] += obj[:3, :3] @ center
-    shift = center + np.asarray(estimate['slider_contact_shift_m'])
+    shift = center + np.asarray(estimate['slider_contact_shift_m'],dtype=float)
     shift += np.array([0, (estimate['handle_size_WTL_m'][1]-.012)/2, 0])
     slider[:3, 3] += obj[:3, :3] @ shift
     cfg = configuration('wuji_geometry', 1,

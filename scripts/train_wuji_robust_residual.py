@@ -18,8 +18,10 @@ def main():
     p.add_argument('--gae-lambda',type=float,default=.95,help='Explicit temporal credit horizon; identical across paired preparation pilots')
     p.add_argument('--support-latch-after-preparation',action='store_true',default=None,help='Support motor residual decision stops after known16s; thumb remains30Hz, actual history continues. Position retention is not constant force.')
     p.add_argument('--support-command-period',type=int,choices=[1,5],default=None,help='Default restores savedperiod onresume, otherwise1. Support decisions every1or5 known30Hz frames; thumb remains30Hz, jointdecision PPO log/KL masks excludeheld coordinates')
-    p.add_argument('--reset-support-logstd',type=float,help='Explicit exploration curriculum: reset first16 logstd and their Adam moments only; preserve thumbvariance/means and allothermodel/Adam/RNG')
+    p.add_argument('--reset-thumb-logstd',type=float,help='Explicit fresh or resumed exploration curriculum; resets thumb logstd and corresponding Adam moments only');p.add_argument('--reset-support-logstd',type=float,help='Explicit exploration curriculum: reset first16 logstd and their Adam moments only; preserve thumbvariance/means and allothermodel/Adam/RNG')
     p.add_argument('--freeze-thumb-prior',action='store_true',help='Preserve resumed deterministic thumb actor mapping on the same legal features; learn support outputs and exploration variance. Not constant physicalforce.')
+    p.add_argument('--thumb-head-only',action='store_true',help='Freeze actor hidden layers and support output rows/variance; adapt only four thumb output rows/variance plus critic. Same legal inputs and native checkpoint format.')
+    p.add_argument('--thumb-head-learning-rate',type=float,default=3e-5)
     p.add_argument('--stable-progress-reward',action='store_true',help='Trainingrewardonly: remove primary reach bonus during operation outside original10mm/.25rad instantaneous body stability conditions; no actor/physics/criteria change')
     p.add_argument('--override-initial-estimate-scene',type=Path,help='Explicit curriculum change on resume: replace saved synthetic initial-observation bank while retaining model/Adam/RNG. Normal resume keeps saved scene; new physical episodes only.')
     p.add_argument('--proprioceptive-pressure-config',type=Path,help='Legal FK/joint-issuedtarget pressureproxy, shared analytic native/batch controller; no force/contact truth');p.add_argument('--training-asset-registry',type=Path,help='Registered train-only physical assets; IDs select simulator loading, never actor/controller');p.add_argument('--initial-estimate-scene',type=Path,help='Transparent noisy once-initial observations and common IK motor plans, actor-visible estimated geometry only; no live truth');p.add_argument('--training-geometry-schedule',type=Path,help='ActualG2 physicalsampling only: registeredtraining IDs perenv, never actorinputs or heldout assets');p.add_argument('--object',default='knife_wuji_robust_family_20261003');p.add_argument('--actual-hold-history',type=int,choices=[0,50],default=50)
@@ -69,7 +71,14 @@ def main():
         assert not a.stable_progress_reward and not a.strong_slider_contact_reward and not a.absorbing_failure_penalty and not a.functional_thumb_reward and not a.history_features and support_spec is None,'History/support features currently audited only for actual G2'
         system=LearningSystem(a.envs,a.seed,a.randomization_scale,a.load_max,a.detent_max,support_scale=a.support_residual_scale,rotation_cost=a.rotation_cost,wrist_nominal=wrist,wrist_probability=a.wrist_probability,object_name=a.object,history_hold_frames=a.actual_hold_history,thumb_slider_reward=a.thumb_slider_reward,thumb_scale=a.thumb_residual_scale,contact_progress_reward=a.contact_progress_reward,handover_profiles=a.handover_profiles,base_mode=a.base_mode,thumb_reference=a.thumb_reference,load_profile=a.load_profile,load_frequency=a.load_frequency)
     device=system.env.device
-    model=ResidualActorCritic(getattr(system,'public_dim',154),getattr(system,'public_dim',154)+27).to(device);opt=torch.optim.Adam(model.parameters(),lr=3e-4,eps=1e-5);start=0
+    model=ResidualActorCritic(getattr(system,'public_dim',154),getattr(system,'public_dim',154)+27).to(device)
+    if a.thumb_head_only:
+        assert a.scene=='g2' and a.action_parameterization=='bounded-motor-offset'
+        assert not a.freeze_thumb_prior and not a.support_delta_coordinates and not a.reset_residual_head
+        from scripts.wuji_thumb_head_training import optimizer
+        opt=optimizer(model,a.thumb_head_learning_rate)
+    else:opt=torch.optim.Adam(model.parameters(),lr=3e-4,eps=1e-5)
+    start=0
     if a.initialize_model_from:
         assert not a.resume
         initial=torch.load(a.initialize_model_from,map_location=device)
@@ -93,6 +102,7 @@ def main():
         torch.nn.init.zeros_(model.actor[-1].weight);torch.nn.init.zeros_(model.actor[-1].bias)
     if a.resume:
         saved=torch.load(a.resume,map_location=device);assert saved.get('action_parameterization','incremental')==a.action_parameterization
+        assert bool(saved.get('args',{}).get('thumb_head_only',False))==a.thumb_head_only,'Resume must preserve the selected optimizer/frozen mapping'
         if saved.get('frozen_thumb_actor',False):model.freeze_thumb_actor()
         model.load_state_dict(saved['model']);opt.load_state_dict(saved['optimizer']);start=saved['updates']
         # map_location moves serialized RNG buffers too; generator APIs require CPU bytes.
@@ -129,12 +139,22 @@ def main():
         with torch.no_grad():model.logstd[:16].fill_(a.reset_support_logstd)
         for key in ['exp_avg','exp_avg_sq']:
             if key in opt.state[model.logstd]:opt.state[model.logstd][key][:16].zero_()
+    if a.reset_thumb_logstd is not None:
+        assert (a.resume or a.initialize_model_from) and a.scene=='g2' and a.action_parameterization=='bounded-motor-offset'
+        assert -3.5<=a.reset_thumb_logstd<=-.4
+        with torch.no_grad():model.logstd[16:].fill_(a.reset_thumb_logstd)
+        for key in ['exp_avg','exp_avg_sq']:
+            if key in opt.state[model.logstd]:opt.state[model.logstd][key][16:].zero_()
     from scripts.wuji_support_command_sampling import SupportCommandSampler,log_prob as decision_log_prob,entropy as decision_entropy
     sampler=SupportCommandSampler(a.envs,device,a.support_command_period,getattr(system,'takeover_frame',0),a.support_latch_after_preparation)
     (a.output/'config.yaml').write_text(OmegaConf.to_yaml(system.cfg,resolve=True));(a.output/'args.json').write_text(json.dumps(vars(a),default=str,indent=2))
+    if a.thumb_head_only:
+        from scripts.wuji_thumb_head_training import support_snapshot,check_support_unchanged
+        fixed_support=support_snapshot(model)
     basehash=tensor_hash(system.player.model.state_dict());begin=time.monotonic();stopping=[False]
     for sig in [signal.SIGTERM,signal.SIGINT]:signal.signal(sig,lambda *_:stopping.__setitem__(0,True))
     def save(u):
+        if a.thumb_head_only:check_support_unchanged(model,fixed_support)
         assert tensor_hash(system.player.model.state_dict())==basehash
         payload=dict(known_controller_spec=system.known_controller_spec if a.scene=='g2' else None,support_delta_spec=delta_spec,support_latch_after_preparation=a.support_latch_after_preparation,support_load_feature_spec=load_feature_spec,support_command_period=a.support_command_period,support_decision_scope='Support heldbetween knownclock decisions; thumb30Hz; actualcommandhistory continuous; joint-event masked PPO/entropy/KL',frozen_thumb_actor=model.frozen_thumb_actor is not None,frozen_thumb_scope='Deterministic thumb mean from a frozen legal-input actor; support outputs and exploration variance remain trainable; not measuredforce control',format='wuji-r800-residual-ppo-v1',model=model.state_dict(),optimizer=opt.state_dict(),updates=u,transitions=system.transitions,args=vars(a),actor_inputs=('9 legal model supportfeatures; ' if load_feature_spec else '')+'111 legal public+20 issued+20 frozen base action+3 wrist gravity'+('+16 frozen legal history latent' if a.history_features else '')+(';8 frozen legal-input support estimates' if support_spec else '')+'; no current truth',critic_inputs='actor features+21 truth+5 contact+1 load',history_features=a.history_features,scene_spec=system.scene_spec if a.scene=='g2' else None,support_estimator_spec=system.support_estimator_spec if a.scene=='g2' else None,public_dim=getattr(system,'public_dim',154),proprioceptive_pressure_spec=system.proprioceptive_pressure_spec if a.scene=='g2' else None,action_scale=system.scale.tolist(),action_parameterization=a.action_parameterization,resistance_integration=a.resistance_integration,action_scale_units='radians about scheduled motor reference' if a.action_parameterization=='bounded-motor-offset' else 'normalized original incremental action',action_base_mode=system.base_mode,thumb_reference=system.reference_spec,teacher_sha256=hashlib.sha256(TEACHER.read_bytes()).hexdigest(),student_sha256=hashlib.sha256(R800.read_bytes()).hexdigest(),base_tensor_hash=basehash,rng_cpu=torch.get_rng_state(),rng_cuda=torch.cuda.get_rng_state_all(),rng_numpy=np.random.get_state(),rng_scene_numpy=system.rng.bit_generator.state if a.scene=='g2' else None,resume='Optimizer/RNG restored; new physics episodes, no bitwise solver continuation')
         f=a.output/f'update_{u:06d}.pth';tmp=f.with_suffix('.tmp');torch.save(payload,tmp);tmp.replace(f);f.with_suffix('.sha256').write_text(hashlib.sha256(f.read_bytes()).hexdigest()+'\n')
