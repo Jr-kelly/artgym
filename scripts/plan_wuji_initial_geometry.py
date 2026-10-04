@@ -10,7 +10,7 @@ import numpy as np
 from scipy.optimize import least_squares
 from scripts.g2_contact_geometry import DigitGeometry
 
-def adapt(estimate,plan,support,reference,thumb_contact_bias_m=None,support_surface_scaling=False,support_fingers=('index','middle','pinky')):
+def adapt(estimate,plan,support,reference,thumb_contact_bias_m=None,support_surface_scaling=False,support_fingers=('index','middle','pinky'),geometry=None):
     assert estimate['source'] and estimate['uncertainty_m']>0
     size=np.asarray(estimate['handle_size_WTL_m'],dtype=float)
     assert size.shape==(3,) and np.all(size>0)
@@ -18,7 +18,7 @@ def adapt(estimate,plan,support,reference,thumb_contact_bias_m=None,support_surf
     assert delta.shape==(3,)
     center_delta=np.asarray(estimate.get('initial_object_center_shift_knife_m',[0,0,0]),dtype=float)
     assert center_delta.shape==(3,)
-    base=np.array([.016,.012,.135]);g=DigitGeometry();h=g.w
+    base=np.array([.016,.012,.135]);g=DigitGeometry() if geometry is None else geometry;h=g.w
     wrist=np.asarray(plan['wrist_in_knife']);normals=np.asarray(plan['contact_normals'])
     def surface(q,finger):
         i=['thumb','index','middle','ring','pinky'].index(finger)

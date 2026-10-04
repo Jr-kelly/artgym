@@ -1,0 +1,49 @@
+{
+  "scope": "Four retained012-015 holdout geometries; no grasp-pool expansion or fitting.\n\nSimulator identities remain external. Common planner consumes only labelled\nnoisy initial dimensional/slider observations; plan accuracy is not a contact\nor physical success certificate. Original source2 initial motor layout retained.\n",
+  "geometry_split": {
+    "train": "000\u2013011",
+    "heldout": "012\u2013015"
+  },
+  "entries": [
+    {
+      "instance": "012",
+      "split": "heldout",
+      "asset": "assets/objects/knife_wuji_acquired_family_20261003/012/mobility.urdf",
+      "asset_sha256": "5e66a51b7c4bff05d15a13c497a94c0006762e18b2a7f7c9f3e9c39b722aacb1",
+      "scene": "runs/wrap-force-20261004/validation/geometry-inputs-corrected-v3/012/scene.json",
+      "planner_accuracy_passed": true,
+      "motor_collision_certified": false,
+      "physical_evaluated": false
+    },
+    {
+      "instance": "013",
+      "split": "heldout",
+      "asset": "assets/objects/knife_wuji_acquired_family_20261003/013/mobility.urdf",
+      "asset_sha256": "2dbe4d57c9b14e6196fe5fc0aa5005ab13f6b5403f4c103042602a56d2c4334e",
+      "scene": "runs/wrap-force-20261004/validation/geometry-inputs-corrected-v3/013/scene.json",
+      "planner_accuracy_passed": true,
+      "motor_collision_certified": false,
+      "physical_evaluated": false
+    },
+    {
+      "instance": "014",
+      "split": "heldout",
+      "asset": "assets/objects/knife_wuji_acquired_family_20261003/014/mobility.urdf",
+      "asset_sha256": "69edd00c72d045a31bd0b614c7b90561a24567b99f9891bfc527b612ee44299f",
+      "scene": "runs/wrap-force-20261004/validation/geometry-inputs-corrected-v3/014/scene.json",
+      "planner_accuracy_passed": true,
+      "motor_collision_certified": false,
+      "physical_evaluated": false
+    },
+    {
+      "instance": "015",
+      "split": "heldout",
+      "asset": "assets/objects/knife_wuji_acquired_family_20261003/015/mobility.urdf",
+      "asset_sha256": "2133a7e4ab4aca00a24e9326fde1e6d28ed4435c991bda4264d8b2fbaa1d5d81",
+      "scene": "runs/wrap-force-20261004/validation/geometry-inputs-corrected-v3/015/scene.json",
+      "planner_accuracy_passed": true,
+      "motor_collision_certified": false,
+      "physical_evaluated": false
+    }
+  ]
+}

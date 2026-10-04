@@ -53,6 +53,7 @@ class CoordinatedProprioceptivePressure(ProprioceptivePressure):
         geometry=DigitGeometry()
         self.support_vertices={f:np.concatenate([v for v,_ in geometry.meshes['hand_r_'+f+'_pad_link']]) for f in ['index','middle','pinky']}
         self.support_offset=np.zeros(20);self.support_anchor=np.zeros(20)
+        self.support_ids=np.array([self.h.names.index('hand_r_'+finger+'_joint'+str(j)) for finger in ['index','middle','pinky'] for j in range(1,5)])
 
     def model(self,q,issued):
         self.current_jac=super().model(q,issued)
@@ -95,7 +96,7 @@ class CoordinatedProprioceptivePressure(ProprioceptivePressure):
                 self.support_offset[ids]+=jac.T@force/self.all_kp[ids]
             bound=float(self.spec['maximum_support_joint_offset_rad'])
             self.support_offset=np.clip(self.support_offset,-bound,bound)
-        target[:12]+=self.support_offset[:12]-self.support_anchor[:12]
+        target[self.support_ids]+=self.support_offset[self.support_ids]-self.support_anchor[self.support_ids]
         target=np.clip(target,self.h.lower,self.h.upper)
-        self.support_offset[:12]=target[:12]-np.asarray(desired)[:12]+self.support_anchor[:12]
+        self.support_offset[self.support_ids]=target[self.support_ids]-np.asarray(desired)[self.support_ids]+self.support_anchor[self.support_ids]
         return target

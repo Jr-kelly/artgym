@@ -5,7 +5,7 @@ physics scene or connecting to hardware. The input NPZ has a deliberately small
 allowlist; contact, current object pose, slider state and load are not accepted.
 It does not establish SDK compatibility or real motor performance.
 """
-import argparse, hashlib, json
+import argparse, hashlib, json, time
 from pathlib import Path
 import isaacgym  # The installed IsaacGym package must precede torch.
 import numpy as np
@@ -23,6 +23,8 @@ def main():
     p.add_argument('--estimate', type=Path, required=True)
     p.add_argument('--calibration', type=Path, required=True)
     p.add_argument('--motor-prefix-plan',type=Path,help='Once-known closure/lift/transfer plan for learned acquisition; future recorded targets never used as reference')
+    p.add_argument('--postlift-regrasp',type=Path,help='Known motor/arm transfer plus fixed initial operation prior; never live object/contact')
+    p.add_argument('--proprioceptive-pressure-config',type=Path,help='Same legal joint/issued-history pressure proxy; requires complete prefix from before8s')
     p.add_argument('--reference', type=Path, required=True)
     p.add_argument('--checkpoint', type=Path, required=True)
     p.add_argument('--output', type=Path, required=True)
@@ -56,7 +58,16 @@ def main():
     policy = G2R800Policy(cfg, teacher, student,
         geometry=estimate['handle_size_WTL_m']+estimate.get('slider_size_WTL_m',[.01, .003, .03]),
         residual_checkpoint=a.checkpoint, thumb_reference_override=a.reference)
-    assert policy.pressure_adapter is None, 'This minimal replay covers the selected controller without an extra pressure adapter'
+    pressure_spec=json.loads(a.proprioceptive_pressure_config.read_text()) if a.proprioceptive_pressure_config else policy.proprioceptive_pressure_spec
+    regrasp=json.loads(a.postlift_regrasp.read_text()) if a.postlift_regrasp else None
+    if pressure_spec:
+        assert times[0]<8 and a.takeover_seconds==16 and a.motor_prefix_plan
+        assert not pressure_spec.get('coordinate_support'), 'Selected thumb-only controller replay'
+        if pressure_spec.get('model_implementation')=='analytic-torch-v1':
+            from scripts.wuji_joint_deflection_pressure import NativeJointDeflectionPressure as Adapter
+        else:
+            from scripts.wuji_proprioceptive_pressure import ProprioceptivePressure as Adapter
+        policy.pressure_adapter=Adapter(pressure_spec,obj[:3,1],np.array(cfg.hand.dof_props.stiffness))
     if policy.support_load_features is not None:
         assert times[0]<=14.1+1e-7, 'Loadfeatures require57 legalprefixframes from14.1s for52frame calibration and5frame causalvelocity filter'
         policy.support_load_features.reset(__import__('torch').tensor([0],device=policy.player.device),policy.tensor(obj[:3,1]))
@@ -68,14 +79,23 @@ def main():
     from scripts.wuji_known_acquisition_prefix import hand_reference
     kin = G2Kinematics()
     taken = False
-    targets, actions, errors = [], [], [];warmup=None
+    targets, actions, errors = [], [], [];warmup=None;latencies=[]
     for i, t in enumerate(times):
         q = samples['hand_measured_q'][i]
         if policy.support_load_features is not None:
             previous=samples['issued_hand_target'][max(0,i-1)]
             policy.support_load_features.observe(policy.tensor(q),policy.tensor(previous),__import__('torch').tensor([round(float(t)*30)],device=policy.player.device))
         policy.record(q, policy.last_action if taken else np.zeros(20))
+        if pressure_spec and regrasp and pressure_spec.get('transfer_normal_from_known_arm_fk'):
+            axis=np.asarray(regrasp['expected_knife_world'])[:3,1]
+            policy.pressure_adapter.normal=kin.forward(samples['arm_measured_q'][i])[:3,:3].T@axis
         if t < a.takeover_seconds-1e-7:
+            if pressure_spec and t>=8:
+                assert i>0
+                desired=hand_reference(plan,float(t))
+                if regrasp and t>=regrasp['times_s'][0]:
+                    values=np.asarray(regrasp['hand_q']);desired=np.array([np.interp(t,regrasp['times_s'],values[:,j]) for j in range(20)])
+                policy.pressure_adapter.command(q,samples['issued_hand_target'][i-1],desired,float(t))
             continue
         if not taken:
             assert i > 0 and len(policy.history) == 50
@@ -90,7 +110,9 @@ def main():
             taken = True
         goal = .04 if t>=16-1e-7 and int(round((t-16)*30))//150 % 2 == 0 else 0.
         gravity = kin.forward(samples['arm_measured_q'][i])[:3, :3].T @ np.array([0., 0., -1.])
+        begin=time.perf_counter()
         target, action = policy.command(q, goal, wrist_gravity=gravity, clock_s=float(t),known_prefix_target=hand_reference(plan,float(t)) if policy.learned_acquisition_prefix and t<16 else None)
+        latencies.append((time.perf_counter()-begin)*1000)
         assert policy.last_encoder_input.shape == (2076,)
         assert policy.last_public_features.shape == ((170 if policy.history_features else 154)+(9 if policy.support_load_features is not None else 0)+(8 if policy.support_estimator is not None else 0),)
         assert np.isfinite(target).all() and np.isfinite(policy.last_encoder_input).all()
@@ -101,6 +123,8 @@ def main():
     np.savez_compressed(a.output/'commands.npz', targets=targets, actions=actions)
     report = dict(scope='Offline inference only; no physics scene, robot SDK, or current object/contact/load input',
         known_prefix_plan_sha256=hashlib.sha256(a.motor_prefix_plan.read_bytes()).hexdigest() if a.motor_prefix_plan else None,initial_pose_prior_scope='Known table plus once-estimated geometry transformed by measured arm FK' if policy.table_initial_prior_from_measured_arm else 'Once loaded held prior',prewarm=warmup,physics_performance_claim=False, real_robot_ran=False,learned_takeover_seconds=a.takeover_seconds,support_latch_after_preparation=policy.support_latch_after_preparation, control_hz=30, r800_input_dim=2076,
+        pressure_spec=pressure_spec,postlift_regrasp_sha256=hashlib.sha256(a.postlift_regrasp.read_bytes()).hexdigest() if a.postlift_regrasp else None,
+        inference_command_latency_ms=dict(first=latencies[0],median=float(np.median(latencies)),p95=float(np.percentile(latencies,95)),maximum=max(latencies),frames_above_33_333ms=sum(x>1000/30 for x in latencies),scope='Recorded legal-input offline command computation under current machine load; excludes SDK, physical motors and measurement acquisition'),
         residual_input_dim=(170 if policy.history_features else 154)+(9 if policy.support_load_features is not None else 0)+(8 if policy.support_estimator is not None else 0), support_load_feature_spec=policy.support_load_feature_spec, support_estimator_metadata={k:v for k,v in policy.support_estimator.spec.items() if k not in ['model','input_mean','input_std','history_mean','history_std']} if policy.support_estimator is not None else None,support_delta_coordinates={k:v for k,v in policy.support_delta_coordinates.spec.items() if k!='reference_actor_state'} if policy.support_delta_coordinates is not None else None, command_frames=len(targets),
         max_target_difference_from_recorded_rad=max(errors),
         hand_joint_names=policy.fk.names, arm_joint_names=kin.names,

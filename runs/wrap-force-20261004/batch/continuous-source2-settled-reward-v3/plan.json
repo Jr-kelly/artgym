@@ -1,0 +1,12 @@
+{
+  "initialize_sha256": "2fa454dfeb7d40f22a5bdf33e740e7fd3c41a6cc906b233fabb06cd90c161948",
+  "envs": 64,
+  "maximum_updates": 320,
+  "horizon": 128,
+  "new_objectives": [
+    "existing absorbingfailure penalty",
+    "boundedrelativevelocity holdcost"
+  ],
+  "stop_rule": "Nativechecks at50/150; do not extend without behaviorimprovement",
+  "scope": "Newobjective onpromisingcontinuous50actor, not unchangedextension; nominal000 only explicitregistry/schedule; no heldoutfitting"
+}

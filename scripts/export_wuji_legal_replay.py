@@ -13,9 +13,13 @@ def main():
     p.add_argument('--motor-plan',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--takeover-seconds',type=float,default=5.)
+    p.add_argument('--prefix-start-seconds',type=float,help='Include earlier measured/issued prefix for stateful legal pressure adapters; no object/contact fields')
     a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
     t=np.load(a.trial/'trace.npz');physics=json.loads((a.trial/'physics.json').read_text())
     start=round(a.takeover_seconds*30)-50
+    if a.prefix_start_seconds is not None:
+        start=round(a.prefix_start_seconds*30)
+        assert start<=round(a.takeover_seconds*30)-50
     assert start>=1 and abs(a.takeover_seconds*30-round(a.takeover_seconds*30))<1e-7
     clock=np.arange(len(t['time']))/30.
     # Native trace time/arm_q are frame end; observed_q is precommand.

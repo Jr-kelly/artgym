@@ -1,0 +1,44 @@
+[
+  {
+    "name": "source2-fixed-pressure-load050-v8",
+    "checks": {
+      "two_cycles": true,
+      "clear": true,
+      "relative_envelope": true,
+      "endpoints": false,
+      "bounded_return_drift": true,
+      "final_settling": true,
+      "thumb_contact": true
+    },
+    "functional_behavior_pass": false,
+    "slider_endpoints_m": {
+      "extend1": 0.022519465551790907,
+      "return1": 0.007078462761906101,
+      "extend2": 0.020024971586731388,
+      "return2": 0.0070055253031525155
+    },
+    "return_to_return_rotation_rad": 0.0017942298316876643,
+    "thumb_contact_substep_fraction": 1.0
+  },
+  {
+    "name": "source2-fixed-pressure-additional005-v8",
+    "checks": {
+      "two_cycles": true,
+      "clear": true,
+      "relative_envelope": true,
+      "endpoints": false,
+      "bounded_return_drift": true,
+      "final_settling": true,
+      "thumb_contact": true
+    },
+    "functional_behavior_pass": false,
+    "slider_endpoints_m": {
+      "extend1": 0.03198328973803216,
+      "return1": 0.007605079111722424,
+      "extend2": 0.03279631330724003,
+      "return2": 0.00801116369393201
+    },
+    "return_to_return_rotation_rad": 0.026204877849907507,
+    "thumb_contact_substep_fraction": 0.9997920133111481
+  }
+]

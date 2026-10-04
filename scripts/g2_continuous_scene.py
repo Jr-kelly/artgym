@@ -38,6 +38,7 @@ class G2ContinuousScene:
         aggregate_environment=bool(aggregate_environment or (scene_spec or {}).get('aggregate_environment',False))
         self.compact_isolated_layout=compact_isolated_layout
         self.aggregate_environment=aggregate_environment
+        self.functional_hold_reward=bool((scene_spec or {}).get('functional_hold_reward',False))
         self.n=n;self.device='cuda:0';self.seed=seed
         self.disabled_perturbations=set(disabled_perturbations)
         assert self.disabled_perturbations <= {'calibration','placement','sensor','latency','material'}
@@ -648,6 +649,17 @@ class G2ContinuousScene:
             unstable_operation=operation_active&((drift>=.01)|(rotation>=.25))
             progress_reward=torch.where(unstable_operation,torch.zeros_like(progress_reward),progress_reward)
         reward=progress_reward+.25*thumb_reward+.1*contact[:,1:].sum(-1)-40*drift.clamp(0,.10)-4*rotation.clamp(0,1.5)-.02*executed.square().mean(-1)
+        if self.functional_hold_reward:
+            # The last second of each five-second segment is the scheduled
+            # hold. Penalize relative motion, not a particular seating angle.
+            # Simulator velocities are reward/critic only; actor fields and
+            # the independently frozen functional evaluation stay unchanged.
+            wrist=self.rb[:,self.wrist_index]
+            relative_v=obj[:,7:10]-wrist[:,7:10]-torch.cross(wrist[:,10:13],obj[:,:3]-wrist[:,:3],dim=-1)
+            relative_omega=obj[:,10:13]-wrist[:,10:13]
+            holding=operation_active&(((oldage-480)%150)>=120)
+            motion_cost=.2*(relative_v.norm(dim=-1)/.003).square().clamp(max=5)+.2*(relative_omega.norm(dim=-1)/.06).square().clamp(max=5)
+            reward-=torch.where(holding,motion_cost,torch.zeros_like(motion_cost))
         if self.contact_progress_reward:
             gate=torch.exp(-(drift/.01).square()-(rotation/.25).square())
             reward+=self.contact_progress_reward*reward_proximity*gate*((previous_error-error)/.002).clamp(-1,1)

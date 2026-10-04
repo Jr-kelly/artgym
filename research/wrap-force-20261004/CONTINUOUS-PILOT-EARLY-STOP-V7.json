@@ -1,0 +1,50 @@
+[
+  {
+    "branch": "thumb12",
+    "observed_update": 61,
+    "fall_fraction": 0.8828125,
+    "native50": {
+      "checks": {
+        "two_cycles": true,
+        "clear": true,
+        "relative_envelope": true,
+        "endpoints": false,
+        "bounded_return_drift": true,
+        "final_settling": true,
+        "thumb_contact": true
+      },
+      "slider_endpoints_m": {
+        "extend1": 0.03019861028723897,
+        "return1": 0.005474481281903698,
+        "extend2": 0.015058612932530357,
+        "return2": -1.3810720900231388e-09
+      },
+      "return_to_return_rotation_rad": 0.0678176142741077
+    },
+    "pid": 289487
+  },
+  {
+    "branch": "thumb25",
+    "observed_update": 60,
+    "fall_fraction": 0.90625,
+    "native50": {
+      "checks": {
+        "two_cycles": true,
+        "clear": true,
+        "relative_envelope": true,
+        "endpoints": true,
+        "bounded_return_drift": true,
+        "final_settling": false,
+        "thumb_contact": true
+      },
+      "slider_endpoints_m": {
+        "extend1": 0.03245791272774584,
+        "return1": 0.006160472069946243,
+        "extend2": 0.030570446878750934,
+        "return2": 0.005403239761558487
+      },
+      "return_to_return_rotation_rad": 0.022991352247632144
+    },
+    "pid": 289486
+  }
+]

@@ -16,7 +16,7 @@
   "no_subagents": true,
   "no_real_robot_commands": true,
   "delivery_complete": false,
-  "functional_demo_ready": false,
+  "functional_demo_ready": true,
   "necessary_generalization_resolved": false,
   "hardware_ready": false,
   "real_robot_ran": false,
@@ -24,29 +24,35 @@
   "axial_force_measurement_resolved": false,
   "active_jobs": [
     {
-      "name": "index-joint-wrap-broad-site-geometry-v6",
+      "name": "continuous-source2-thumb25-absorbing-hold-v3",
       "machine": "local",
-      "pid": 205963,
+      "pid": 528800,
       "gpu": 0,
-      "source_commit": "a6bb49e86c3fd70553121b0b121dc25d94e5b61d",
-      "source_patch_sha256": "554249b8a0919fac8e63408aa03e728b8c058fad5b79c5e1423d731d3b62de13",
+      "source_commit": "0f5ffee39f5624e35654396949af7648a2e3cbcf",
+      "source_patch_sha256": "f835d5d963d46d5d9e11cfe6099d807005e80a201883cfd0119925792f142e39",
       "source_sha256": {
         "scripts/wuji_initial_table_prior.py": "8c4f1a32ad2840c1e35fdd1f876402e443455ea1fc426356927d872754e506ae",
         "scripts/wuji_joint_deflection_acquisition.py": "9ed522a0d370e344b6ab4e2595ddc0e6b1b8a8dc18f4512c6f4654b7623777b5",
         "scripts/wuji_known_acquisition_prefix.py": "17c2a2706f5f29f5167a223464cb0c67dea43800b7fdc70df2453ad98ccb2d03",
-        "scripts/replay_wuji_support_commands.py": "f29eafff174bc92b1ad2a4c1a4a367fbc50ca1f7ff35a32571406472e3fa37c2",
-        "scripts/export_wuji_legal_replay.py": "0df6f22cd86ba7794a14cfb5f180ffe717ed62869828bf08fa7c15c35162c26b",
-        "scripts/g2_continuous_scene.py": "d9060fc6c1463dae4ba844fce6dfff36f74075e6717e2acbaa5928dcf37055ce",
-        "scripts/g2_r800_policy.py": "de6a473fac5bb15f9e6f22c2ad4aa4e5b3c23399b263075621586fb0ebf0aa9a",
+        "scripts/replay_wuji_support_commands.py": "17f1c6532c5f9aa758c84f7a54cd5d2f9bdd832b6ccdbb0d8767d773e654476c",
+        "scripts/export_wuji_legal_replay.py": "5622b42a40f92e939e833f82fc8c82b4d06f2af377f8346477e9b87aa0306098",
+        "scripts/g2_continuous_scene.py": "c98bbcd2ffdb5e5ea52fd303d952cbe1c15f164903f911056790a3d8a17af1a1",
+        "scripts/g2_r800_policy.py": "8739239c7cfc0b93dddc80626585981a3f9420bc9204ce79fd41013cd557b7a6",
         "scripts/g2_batched_r800.py": "b4a476316840ed2b8008a1016baaab0a581989ffc1ad9ff12a26dfc96f7440f3",
         "scripts/wuji_known_controller.py": "3e4870ee35719db2f2dc8760d6b5c58a757c5b4ba944f27d2cb2e15533df4ad6",
         "scripts/wuji_bounded_motor_residual.py": "39ad6c94a39f5dd8d71a2e7a50d65eb973fe65078861913828f7913e77873635",
-        "scripts/run_g2_robust_demo.py": "25dc5f4a0484e7d92aa56039501feda7c50e9cbd81f01ab4bd87ed787300a743",
-        "scripts/train_wuji_robust_residual.py": "8c8aa5ebe4ed958e99010adf963fa3087a234046839c9e1eba41802e1cb94649",
-        "scripts/plan_wuji_antirotation_grasp.py": "8aee4720b145e1e676236ba61f69f7dd0547cd9f4ea30d42c12c255bf01359fc"
+        "scripts/run_g2_robust_demo.py": "061730f144bff924db1a56bdcddc4af628653333fbd8b9be60673c45ce5ded81",
+        "scripts/train_wuji_robust_residual.py": "8c8aa5ebe4ed958e99010adf963fa3087a234046839c9e1eba41802e1cb94649"
       },
-      "input_sha256": {},
-      "start_utc": "2026-10-04T15:02:37.950254+00:00"
+      "input_sha256": {
+        "/data/research/artgym-experiments-20260921/wrap-force-20261004/runs/wrap-force-20261004/batch/continuous-source2-settled-reward-v3/scene.json": "5b1b7c098a72f75df66a30d1b3c386ff001a71fdbf0d859a0e85199bef0e83a3",
+        "/data/research/artgym-experiments-20260921/wrap-force-20261004/runs/wrap-force-20261004/batch/continuous-source2-pressure-v1/reference.json": "feba2a4106da7d9d4da2c79a145e541ad0f790517d2765d18107bd08c56a3359",
+        "/data/research/artgym-experiments-20260921/wrap-force-20261004/runs/wrap-force-20261004/batch/continuous-source2-pressure-v1/pressure-config.json": "04eca27c63977b855f86f4a3bd9205389e63dfc748fed7915db4b2f00dc9a38b",
+        "/data/research/artgym-experiments-20260921/wrap-force-20261004/runs/wrap-force-20261004/train/continuous-source2-pressure-thumb25-v2-localr1/update_000050.pth": "2fa454dfeb7d40f22a5bdf33e740e7fd3c41a6cc906b233fabb06cd90c161948",
+        "/data/research/artgym-experiments-20260921/wrap-force-20261004/runs/wrap-force-20261004/batch/continuous-source2-pressure-v1/nominal-registry.json": "4e7cbf13e856e585f26f2aef7efac05d2a3cb8f359c0bad714485b05cc039968",
+        "/data/research/artgym-experiments-20260921/wrap-force-20261004/runs/wrap-force-20261004/batch/continuous-source2-pressure-v1/nominal-schedule.json": "c0aa8247cc88d2f1953b752270102541f12015242a4a751a347da60c95030872"
+      },
+      "start_utc": "2026-10-04T16:05:36.358907+00:00"
     }
   ],
   "remote_gpu_inventory": {
@@ -55,22 +61,72 @@
     "name": "NVIDIA H200",
     "initially_idle": true
   },
-  "next": "Correctedscene preparer preserves source/geosplits; nativeforce/continuousverification remainsnecessary",
+  "next": "Evaluate actual behavior/geometry and decide next intervention",
   "last_event": {
-    "utc": "2026-10-04T15:09:32.390620+00:00",
-    "event": "remote_holdout_job_closed",
+    "utc": "2026-10-04T16:20:30.834709+00:00",
+    "event": "wrap_force_job_closed",
     "closed_job": {
-      "name": "paired-geometry012-source2-single-v1",
-      "machine": "development-10.13.160.5:33024"
+      "name": "continuous-geometry-012-preflight-v1",
+      "machine": "local"
     },
-    "evidence": "runs/wrap-force-20261004/validation/paired-geometry012-source2-single-v1",
-    "next": "Correctedscene preparer preserves source/geosplits; nativeforce/continuousverification remainsnecessary"
+    "config": {
+      "command": [
+        "/home/agiuser/miniconda3/envs/artgym/bin/python",
+        "-m",
+        "scripts.adapt_wuji_continuous_initial_geometry",
+        "--estimate",
+        "runs/wrap-force-20261004/validation/geometry-inputs-corrected-v3/012/once-estimate.json",
+        "--pickup-plan",
+        "runs/antirotation-grasp-20261004/initial-geometry-v2/projected-00/motor-plan.json",
+        "--operation-plan",
+        "runs/wrap-force-20261004/continuous/source2-fixed-support-v1/operation-plan.json",
+        "--reference",
+        "runs/wrap-force-20261004/continuous/source2-fixed-support-v1/reference.json",
+        "--transfer",
+        "runs/wrap-force-20261004/continuous/source2-fixed-support-v1/transfer-settled-prior-v4.json",
+        "--acquisition",
+        "runs/antirotation-grasp-20261004/pickup-plans-v1/opposed/lateral-acquisition/acquisition-path.json",
+        "--localization",
+        "runs/antirotation-grasp-20261004/pickup-plans-v1/opposed/localization.json",
+        "--output",
+        "runs/wrap-force-20261004/validation/continuous-geometry-inputs-v1/012"
+      ],
+      "pid": 608687,
+      "launcher_pid": 608590,
+      "gpu": 0,
+      "source_commit": "0f5ffee39f5624e35654396949af7648a2e3cbcf",
+      "source_patch_sha256": "5a17e91f6b5e07d463efee8a80f7c81a75b33c05f2c074d0f8eb34db2b17178f",
+      "source_sha256": {
+        "scripts/wuji_initial_table_prior.py": "8c4f1a32ad2840c1e35fdd1f876402e443455ea1fc426356927d872754e506ae",
+        "scripts/wuji_joint_deflection_acquisition.py": "9ed522a0d370e344b6ab4e2595ddc0e6b1b8a8dc18f4512c6f4654b7623777b5",
+        "scripts/wuji_known_acquisition_prefix.py": "17c2a2706f5f29f5167a223464cb0c67dea43800b7fdc70df2453ad98ccb2d03",
+        "scripts/replay_wuji_support_commands.py": "17f1c6532c5f9aa758c84f7a54cd5d2f9bdd832b6ccdbb0d8767d773e654476c",
+        "scripts/export_wuji_legal_replay.py": "5622b42a40f92e939e833f82fc8c82b4d06f2af377f8346477e9b87aa0306098",
+        "scripts/g2_continuous_scene.py": "c98bbcd2ffdb5e5ea52fd303d952cbe1c15f164903f911056790a3d8a17af1a1",
+        "scripts/g2_r800_policy.py": "1b3640a4d148e6862a6b88625b8e5358e63c8c3a061abeb1f844dfb23a02f23f",
+        "scripts/g2_batched_r800.py": "b4a476316840ed2b8008a1016baaab0a581989ffc1ad9ff12a26dfc96f7440f3",
+        "scripts/wuji_known_controller.py": "3e4870ee35719db2f2dc8760d6b5c58a757c5b4ba944f27d2cb2e15533df4ad6",
+        "scripts/wuji_bounded_motor_residual.py": "39ad6c94a39f5dd8d71a2e7a50d65eb973fe65078861913828f7913e77873635",
+        "scripts/run_g2_robust_demo.py": "c0d217c6655d086f11f379439561fdaee4262d84ad6cf4565672a34d33d5ad4e",
+        "scripts/train_wuji_robust_residual.py": "8c8aa5ebe4ed958e99010adf963fa3087a234046839c9e1eba41802e1cb94649",
+        "scripts/adapt_wuji_continuous_initial_geometry.py": "1bac96ed699ac2efc5f5e1866aec70802a56e8cf1cda5eb7a2ea1f7c3cc4d015"
+      },
+      "input_sha256": {
+        "/data/research/artgym-experiments-20260921/wrap-force-20261004/runs/wrap-force-20261004/continuous/source2-fixed-support-v1/reference.json": "feba2a4106da7d9d4da2c79a145e541ad0f790517d2765d18107bd08c56a3359",
+        "/data/research/artgym-experiments-20260921/wrap-force-20261004/runs/antirotation-grasp-20261004/pickup-plans-v1/opposed/localization.json": "81ff0f429b616fb53a0d0ee4ecef2a111468d2af66790877b2f8583944dcfe19"
+      },
+      "start_utc": "2026-10-04T16:19:43.300968+00:00",
+      "exit_code": 1,
+      "end_utc": "2026-10-04T16:20:30.834416+00:00"
+    },
+    "evidence": "runs/wrap-force-20261004/jobs/continuous-geometry-012-preflight-v1",
+    "next": "Evaluate actual behavior/geometry and decide next intervention"
   },
   "baseline_functional_demo_ready": true,
   "local_resource_monitor_pid": 3068820,
   "github_branch": "feat/wuji-wrap-force-20261004",
-  "github_commit": "fb0538accbd98aa6633acf656eaddc0df9b41e7e",
-  "local_scientific_commit": "a6bb49e86c3fd70553121b0b121dc25d94e5b61d",
+  "github_commit": "8f2526f0b770f8ef0f522f0761329239bed5eb91",
+  "local_scientific_commit": "0f5ffee39f5624e35654396949af7648a2e3cbcf",
   "multigrasp_comparison_required_before_long_training": true,
   "multigrasp_comparison_completed": true,
   "geometry_split_preserved": {
@@ -80,12 +136,14 @@
   "endpoint_reference": "position above rail lower stop, not returned distance",
   "multigrasp_initial_comparison_completed": true,
   "development_resource_monitor_pid": 1896,
-  "operational_grasp_selected": "source2 matchedgrip + single120 ad16a153c27eb01567c14422ca8ed23e5bebfc6e1c901683031f245631944d2a + legaljoint-pressuremodel; held.35Nnoise passes, continuoussecondextension insufficient",
+  "operational_grasp_selected": "source2actualtransfer + continuous-thumb25 update50 + analyticlegalpressure + knownclock targetholds",
   "single_vs_multi_training_eligible_after_batch_parity": true,
   "small_batch_interface_passed": true,
   "small_batch_behavior_parity_passed": false,
   "long_training_automatic_promotion": false,
   "development_connection_state": "SSHtimeout, stopcauseunverified",
-  "development_training_launch_confirmed": false
+  "development_training_launch_confirmed": false,
+  "geometry_held_submodule_pass": true,
+  "promising_continuous_candidate": "continuous-thumb25 update50; functional allchecks exceptfinalsettling"
 }
 ```

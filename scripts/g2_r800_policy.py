@@ -133,7 +133,8 @@ class G2R800Policy(FrozenPolicy):
         import copy,time
         assert self.init is not None and len(self.history)==50 and iterations>=1
         assert not self.history_features and self.support_estimator is None and self.support_load_features is None
-        assert self.pressure_adapter is None and self.support_delta_coordinates is None
+        assert self.support_delta_coordinates is None
+        pressure=copy.deepcopy(self.pressure_adapter)
         states=clone_states(self.player.states);network=self.player.model.a2c_network
         old_override=getattr(network,'actor_encoder_obs_override',None)
         issued=self.known.issued.clone();initial=self.known.initial.clone()
@@ -148,6 +149,7 @@ class G2R800Policy(FrozenPolicy):
             self.known.last_executed_action=executed.clone()
             self.known.support_anchor=None if support_anchor is None else support_anchor.clone()
             self.thumb_reference=copy.deepcopy(reference)
+            self.pressure_adapter=copy.deepcopy(pressure)
             for name,value in saved.items():setattr(self,name,copy.deepcopy(value))
             network.actor_encoder_obs_override=old_override
         if torch.cuda.is_available():torch.cuda.synchronize()
@@ -166,7 +168,7 @@ class G2R800Policy(FrozenPolicy):
                     rnn_state_restored=True,reference_and_command_state_restored=True,
                     scope='Full model/control warmup with isolated state; no synthetic measured history or issued motor command, not hardware latency verification')
 
-    def command(self, q, goal,wrist_gravity=None,clock_s=None,diagnostic_motor_offset=None,known_prefix_target=None):
+    def command(self, q, goal,wrist_gravity=None,clock_s=None,diagnostic_motor_offset=None,known_prefix_target=None,issued_target_hold=False):
         if self.learned_acquisition_prefix and clock_s>=16 and not self.operation_anchor_started:
             self.known.initial=self.known.issued.clone()
             self.thumb_reference.reset(torch.tensor([0],device=self.player.device),clock_s=16.)
@@ -210,7 +212,7 @@ class G2R800Policy(FrozenPolicy):
                     action=self.support_delta_coordinates.action(self.thumb_reference.last_target,self.known,mean,self.residual_scale,public) if self.support_delta_coordinates is not None else bounded_motor_residual_action(self.thumb_reference.last_target,self.known,mean,self.residual_scale)
                 else:action=(base+self.residual_scale*torch.tanh(mean)).clamp(-1,1)
             action=action.clone();action[:,:16]*=self.support_action_gain;action[:,16:]*=self.thumb_action_gain
-            if self.pressure_adapter is not None:
+            if self.pressure_adapter is not None and not issued_target_hold:
                 proposed=self.known.initial+.04*action;proposed[:,16:]=self.known.issued[:,16:]+.025*action[:,16:]
                 desired=self.pressure_adapter.command(q,self.known.issued[0].cpu().numpy(),proposed[0].cpu().numpy(),clock_s)
                 action=(self.tensor(desired)-self.known.initial)/.04;action[:,16:]=(self.tensor(desired)[:,16:]-self.known.issued[:,16:])/.025;action=action.clamp(-1,1)
@@ -222,9 +224,17 @@ class G2R800Policy(FrozenPolicy):
                 assert np.max(np.abs(offset))<=.040001 and np.all(offset[12:]==0)
                 action=action.clone();action[:,:16]+=self.tensor(offset)[:,:16]/.04
                 action=action.clamp(-1,1)
+            if issued_target_hold:
+                # Keep finite-PD position targets after the complete scheduled
+                # stroke. The actor/RNN/reference and measured history still
+                # advance; record the equivalent actually issued action once.
+                # This is a known-clock position hold, not constant force.
+                anchor=self.known.initial if self.known.support_anchor is None else self.known.support_anchor
+                action=(self.known.issued-anchor)/self.known.support_span
+                action[:,16:]=0.
             target = self.known.step(action)
             if self.known.support_step is not None:action=self.known.last_executed_action.clone()
-            if self.pressure_adapter is not None and hasattr(self.pressure_adapter,'commit_issued'):
+            if self.pressure_adapter is not None and not issued_target_hold and hasattr(self.pressure_adapter,'commit_issued'):
                 self.pressure_adapter.commit_issued(target[0].cpu().numpy(),proposed[0].cpu().numpy())
         self.last_action = action[0].cpu().numpy()
         self.last_raw_action = raw_action[0].cpu().numpy()
