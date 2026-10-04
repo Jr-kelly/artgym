@@ -33,10 +33,22 @@
 正在检验实际侧面接触从靠中心高度移到靠刀底高度，增加长轴滚转力臂（1 mm到4.5 mm），方向仍纯侧向；目标0.8 N仅名义有限PD假设，其他承托和拇指目标保持，原碰撞/重力/力矩保留。几何/目标通过，实际12–14秒接触形成与两轮物理运行排队，不以几何通过宣称成功。当前12小时最早点仍2026-10-04 08:03 UTC，工作继续。
 
 
-2026-10-04T00:38Z continuation:
+2026-10-04T00:36Z continuation:
 - V12 rebuilt direct40mm motor path using the preceding V11 nominal settled frame, then passed independent161 original self/limit samples. Fresh actual table pickup/2cycles: extend29.42/21.81mm, return4.31/2.73mm, exact thumb substepcontact100%, relative max0.403rad, returnincrement0.181rad. Full demo remains false; no current truth enters controller. Videos and raw traces at runs/antirotation-grasp-20261004/continuous/actual-table-lower-side-calibrated-direct-2cycles-v12.
 - New complete motor reference + actual lower lateral index12--14s transition were integrated into batched G2 prefix. Eight actual pickup nominal compatibility episodes all held the knife/full-or-nearly-fullcontact; different material baseline1/3 versus native.8/1.8, so no exact numerical parity claim.
 - New contact-normal coordinates use initial known issued FK/estimated knife frame and explicit index side/middle+pinky bottom directions, no frozen support prior. Offline original FK inward direction, orthonormality, bounded targets/rate/history passed (controller-compatibility-v2/contact-normal.json). No policy performance evidence yet.
 - Remote SSH failed twice with connection timeout around00:32Z; remote GPU/monitor current state unverified, no remote training running claim. Local4090 new actual-lower-side-fullmotor-joint-reset750-v2 pilot launched:4096env100updates, actor16s, unchanged original physical actuators/rail/criterion, new mechanical scene/fullpath. Actual instantaneous local utilization71--75% at00:35--00:37Z; cannot claim remote four-hour utilization.
 - Two-stage common noisy initial observation IK generation started (32 observations/eight train geometries): separate actual pickup and lifted operation, preserve underside/ thumb targets across transition, adapt index side normal. Geometry certificates and actual contact not yet validated. Do not count as necessary generalization resolved.
 - Next: review new pilot frozen50 behavior; compare contact-normal only on new actual mechanics if warranted; check representative initial-estimate geometry and actual pickup; publish source snapshot and eventually complete new Release. No automatic hardware motion.
+
+## 2026-10-04T01:56Z continuation
+
+V17 actual continuous tabletop pickup plus two loaded cycles passed the predeclared functional criterion using unchanged frozen750 on projected noisy nominal geometry. External command40mm; observed extensions32.21/26.44mm, returns6.49/1.99mm, pair thumb contact99.92%, return slip0.09546rad. This is a development simulation example, not literal40mm physical travel, independent generalization or hardware. Legacy0.25rad condition still false. Evidence runs/antirotation-grasp-20261004/continuous/actual-table-projected-grasp-frozen750-load2-v17.
+
+Same frozen actor at.5/.5 holds the knife/contact but insufficient travel/return (V18); thick140x18x14mm case fails second extension/slip (V19). Original thin130x14x10mm geometry is rejected before physics for pinky/table hull conflict; bounded original-mesh motor projection now in progress. No collision, torque or pressure physics is relaxed.
+
+Continuous one-path reverse motor preparation V20 improved actual returns to2.49/~0mm but lost second extension22.36mm. Separate forward/return joint blending failed85/405 original self-geometry samples and was rejected before physics. The main controller remains the original single-path implementation.
+
+Two new-mechanics reset-head pilots closed without useful full-flow improvement (joint56updates and contact-normal50). A qualified nominal curriculum now retains the already functional frozen750 outputs,4096envs/50updates, original.04rad support span/.025support/.12thumb, new projected contact topology, random mixed nonzero resistance/material/sensor/delay. This is training fitting, not geometry generalization. Start01:50:32Z local child1151666; PID/GPU must be freshly checked when handing over. Batch compatibility first completed8 actual pickups/two cycles with matching actor input.
+
+Remote SSH availability and current GPU state remain unverified after connection timeouts; no hidden/filler workload. Continue useful implementation/training/delivery until at least08:03:23Z. New GitHub Release still pending; latest published snapshot predates these results.

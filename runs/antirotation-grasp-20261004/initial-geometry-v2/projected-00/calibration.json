@@ -1,0 +1,74 @@
+{
+  "object_in_wrist": [
+    [
+      0.8550571476751325,
+      0.43605890180979756,
+      0.2805885036171289,
+      0.060733909530214375
+    ],
+    [
+      -0.3935875522780178,
+      0.19349979117568683,
+      0.8986916431717632,
+      -0.013769811145968444
+    ],
+    [
+      0.33758867413090865,
+      -0.8788688553859435,
+      0.33708073533077537,
+      0.11868435894225132
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "slider_in_wrist": [
+    [
+      0.8550571476751325,
+      0.43605890180979756,
+      0.2805885036171289,
+      0.05838818705418953
+    ],
+    [
+      -0.3935875522780178,
+      0.19349979117568683,
+      0.8986916431717632,
+      -0.03070270219438878
+    ],
+    [
+      0.33758867413090865,
+      -0.8788688553859435,
+      0.33708073533077537,
+      0.10535809428901668
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "scope": "Previous nominal once-loaded prior plus labelled noisy initial observation; no current object/slider/contact truth",
+  "initial_geometry_estimate": {
+    "handle_size_WTL_m": [
+      0.015858434466550258,
+      0.011880314519587907,
+      0.13549447793348435
+    ],
+    "slider_contact_shift_m": [
+      0.00016005235574778642,
+      -2.7502346151403787e-05,
+      -0.000249448271960827
+    ],
+    "initial_object_center_shift_knife_m": [
+      0,
+      -5.9842740206046685e-05,
+      0
+    ],
+    "uncertainty_m": 0.00025,
+    "source": "Synthetic noisy initial observation only; W/T +/-0.25mm,L +/-0.5mm,sliderXYZ +/-0.25mm. Physical metadata used only by simulated sensor generator; no physical-ID planner/actor input and no connected real vision."
+  }
+}

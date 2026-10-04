@@ -85,6 +85,10 @@ class G2ContinuousScene:
         self.reference=ScheduledThumbReference(self.reference_spec,n,self.device)
         self.closed=self.tensor(self.plan['close_q']);self.opened=self.tensor(self.plan['open_q'])
         self.estimated_plans=scene_spec.get('initial_estimated_plans') if scene_spec else None
+        if self.estimated_plans and scene_spec.get('repeat_initial_estimate_templates',False):
+            assert n%len(self.estimated_plans)==0
+            self.estimated_plans=self.estimated_plans*(n//len(self.estimated_plans))
+
         if self.estimated_plans:
             assert len(self.estimated_plans)==n
             for row in self.estimated_plans:assert row['estimate']['source'] and row['estimate']['uncertainty_m']>0
