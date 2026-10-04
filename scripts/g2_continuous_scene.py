@@ -128,6 +128,17 @@ class G2ContinuousScene:
                     if key=='slider_in_wrist':shift=shift+np.asarray(estimate['slider_contact_shift_m'])+np.array([0,(estimate['handle_size_WTL_m'][1]-.012)/2,0])
                     positions[i]+=object_rotation@shift
             self.cal_prior[key]=(self.tensor(positions),self.tensor(rotations))
+        self.table_initial_prior_from_measured_arm=bool(scene_spec and scene_spec.get('table_initial_prior_from_measured_arm',False))
+        self.table_object_world=None;self.table_slider_world=None
+        if self.table_initial_prior_from_measured_arm:
+            assert self.learned_acquisition_prefix and self.takeover_frame<=240
+            from scripts.wuji_initial_table_prior import known_world_poses
+            object_poses=[];slider_poses=[]
+            for i in range(n):
+                row=self.estimated_plans[i] if self.estimated_plans else {'motor_plan':self.plan,'estimate':None}
+                obj,slid=known_world_poses(row['motor_plan'],row['estimate'])
+                object_poses.append(np.r_[obj[:3,3],Rotation.from_matrix(obj[:3,:3]).as_quat()]);slider_poses.append(np.r_[slid[:3,3],Rotation.from_matrix(slid[:3,:3]).as_quat()])
+            self.table_object_world=self.tensor(np.asarray(object_poses));self.table_slider_world=self.tensor(np.asarray(slider_poses))
         self.estimate_bank=None
         self.initial_observation_indices=torch.arange(n,device=self.device)
         self.resample_initial_estimates=resample_initial_estimates or bool(scene_spec and scene_spec.get('resample_initial_estimates'))
@@ -143,6 +154,7 @@ class G2ContinuousScene:
                 thumb_q=self.reference.q.clone(),preload=self.reference.preload_delta.clone(),geometry=self.bridge.geometry.clone(),
                 waypoints=[value.clone() for value in self.close_waypoint_tensors],
                 calibration={key:(p.clone(),q.clone()) for key,(p,q) in self.cal_prior.items()})
+            if self.table_initial_prior_from_measured_arm:self.estimate_bank.update(table_object_world=self.table_object_world.clone(),table_slider_world=self.table_slider_world.clone())
             if self.support_waypoint_q is not None:
                 self.estimate_bank.update(support_waypoint_q=self.support_waypoint_q.clone(),support_waypoint_enabled=self.support_waypoint_enabled.clone())
             self.scene_spec=dict(self.scene_spec,resample_initial_estimates=True,
@@ -323,6 +335,8 @@ class G2ContinuousScene:
         if self.estimate_bank is not None:
             choices=torch.randint(self.estimate_choices.shape[1],(k,),device=self.device)
             selected=self.estimate_choices[ids,choices];self.initial_observation_indices[ids]=selected
+            if self.table_initial_prior_from_measured_arm:
+                self.table_object_world[ids]=self.estimate_bank['table_object_world'][selected];self.table_slider_world[ids]=self.estimate_bank['table_slider_world'][selected]
             self.closed[ids]=self.estimate_bank['closed'][selected];self.opened[ids]=self.estimate_bank['opened'][selected]
             self.reference.q[ids]=self.estimate_bank['thumb_q'][selected]
             self.reference.preload_delta[ids]=self.estimate_bank['preload'][selected]
@@ -442,6 +456,15 @@ class G2ContinuousScene:
             self.support_load_features.observe(q,self.command_target[:,self.hand_ids],self.age)
         ready=(self.age==self.takeover_frame).nonzero(as_tuple=False).flatten()
         if len(ready):
+            if self.table_initial_prior_from_measured_arm:
+                position,rotation=self.bridge.arm_fk(self.dof[ready][:,self.arm_ids,0])
+                inverse=quat_conjugate(rotation)
+                for key,dest,world in [('object_in_wrist',self.cal_object,self.table_object_world),('slider_in_wrist',self.cal_slider,self.table_slider_world)]:
+                    prior_p,prior_q=self.cal_prior[key]
+                    noise_p=dest[ready,:3]-prior_p[ready];noise_q=quat_mul(dest[ready,3:7],quat_conjugate(prior_q[ready]))
+                    local_p=quat_apply(inverse,world[ready,:3]-position)
+                    local_q=quat_mul(inverse,world[ready,3:7])
+                    dest[ready]=torch.cat([local_p+noise_p,quat_mul(noise_q,local_q)],-1)
             initial_targets=self.command_target if self.resistance_integration=='solver-brake' else self.target
             self.bridge.takeover(ready,q[ready],initial_targets[ready][:,self.hand_ids],self.cal_object[ready],self.cal_slider[ready])
             if self.pressure_adapter is not None:self.pressure_adapter.handover_anchor(ready)
@@ -647,6 +670,8 @@ class G2ContinuousScene:
                 row=self.stats[-1];row['held_submodule_legacy_criteria_met']=row['operation_complete'];row['operation_complete']=False;row['held_diagnostic']=True;row['continuous_pickup_demo_pass']=False;row['scope']='Held-only newgrasp adaptation episode; reset only at episode start, originalgravity/contact/motors; never continuouspickup/generalization validation'
         self.last_diagnostics=dict(slider=travel.detach().clone(),height=height.detach().clone(),rotation=rotation.detach().clone(),drift=drift.detach().clone(),proximity=proximity.detach().clone(),action=executed.detach().clone(),q=self.dof[:,self.hand_ids,0].detach().clone(),arm_q=self.dof[:,self.arm_ids,0].detach().clone(),target=self.target.detach().clone(),issued_target=self.command_target.detach().clone() if self.resistance_integration=='solver-brake' else self.target.detach().clone(),object=obj.detach().clone(),wrist=self.rb[:,self.wrist_index].detach().clone(),load=self.load_force.detach().clone(),age=oldage.detach().clone())
         if self.scheduled_support_anchor:self.last_diagnostics['known_scheduled_support_reference']=self.bridge.known.support_anchor.detach().clone()
+        if self.table_initial_prior_from_measured_arm:
+            self.last_diagnostics['initial_object_estimate']=self.cal_object.detach().clone();self.last_diagnostics['initial_slider_estimate']=self.cal_slider.detach().clone()
         self._features=None;self._measurement=None
         reset_ids=(done if reset_finished else done&~finished).nonzero(as_tuple=False).flatten()
         if len(reset_ids):self.reset(reset_ids)

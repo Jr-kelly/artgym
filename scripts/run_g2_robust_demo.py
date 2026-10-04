@@ -87,6 +87,11 @@ def main():
  if initial_estimate and policy_slider_estimate is not None:
   initial_delta=center_delta+np.asarray(initial_estimate['slider_contact_shift_m'])+np.array([0,(initial_estimate['handle_size_WTL_m'][1]-.012)/2,0])
   policy_slider_estimate=policy_slider_estimate.copy();policy_slider_estimate[:3,3]+=policy_relative[:3,:3]@initial_delta
+ def initial_takeover_priors():
+  if policy.table_initial_prior_from_measured_arm:
+   from scripts.wuji_initial_table_prior import measured_arm_relative
+   return measured_arm_relative(plan,initial_estimate,kin.forward(dof[arm,0].numpy()))
+  return policy_relative,(policy_slider_estimate if policy_slider_estimate is not None else policy_relative@transform([0,.0075,.010624586881962734+lower]))
  if policy.support_load_features is not None:
   policy.support_load_features.reset(torch.tensor([0],device=policy.player.device),policy.tensor(policy_relative[:3,1]))
  pressure_spec=None
@@ -262,13 +267,13 @@ def main():
      aq=qgrasp;hq=close_motor((t-5)/3)
      if learned_prefix and not a.grasp_only and t>=a.takeover_seconds:
       if not taken:
-       slider_est=policy_slider_estimate if policy_slider_estimate is not None else policy_relative@transform([0,.0075,.010624586881962734+lower]);policy.takeover_estimate(q,target[hand].numpy(),policy_relative,slider_est,clock_s=t);taken=True
+       object_est,slider_est=initial_takeover_priors();policy.takeover_estimate(q,target[hand].numpy(),object_est,slider_est,clock_s=t);taken=True
       hq,act=policy.command(q,0.,wrist_gravity=kin.forward(dof[arm,0].numpy())[:3,:3].T@np.array([0.,0.,-1.]),clock_s=t,known_prefix_target=hq)
     elif t<12:
      aq=acquisition_motor(lift_path,smooth((t-8)/4)) if a.acquisition_path else path_motor(smooth((t-8)/4)) if a.cartesian_path else qgrasp+smooth((t-8)/4)*(qlift-qgrasp);hq=hold_motor(t,aq) if lift_preload_height else closed
      if not a.grasp_only and t>=a.takeover_seconds:
       if not taken:
-       slider_est=policy_slider_estimate if policy_slider_estimate is not None else policy_relative@transform([0,.0075,.010624586881962734+lower]);policy.takeover_estimate(q,target[hand].numpy(),policy_relative,slider_est,clock_s=t);taken=True
+       object_est,slider_est=initial_takeover_priors();policy.takeover_estimate(q,target[hand].numpy(),object_est,slider_est,clock_s=t);taken=True
       hq,act=policy.command(q,0.,wrist_gravity=kin.forward(dof[arm,0].numpy())[:3,:3].T@np.array([0.,0.,-1.]),clock_s=t,known_prefix_target=hq if learned_prefix else None)
     elif t<16 or a.grasp_only:
      aq=qlift;hq=hold_motor(t,aq)
@@ -276,12 +281,12 @@ def main():
       hq=middle_support.command(t,q,hq);operating_closed[7]=middle_support.target
      if not a.grasp_only and t>=a.takeover_seconds:
       if not taken:
-       slider_est=policy_slider_estimate if policy_slider_estimate is not None else policy_relative@transform([0,.0075,.010624586881962734+lower]);policy.takeover_estimate(q,target[hand].numpy(),policy_relative,slider_est,clock_s=t);taken=True
+       object_est,slider_est=initial_takeover_priors();policy.takeover_estimate(q,target[hand].numpy(),object_est,slider_est,clock_s=t);taken=True
       hq,act=policy.command(q,0.,wrist_gravity=kin.forward(dof[arm,0].numpy())[:3,:3].T@np.array([0.,0.,-1.]),clock_s=t,known_prefix_target=hq if learned_prefix else None)
     else:
      aq=qlift
      if not taken:
-      slider_est=policy_slider_estimate if policy_slider_estimate is not None else policy_relative@transform([0,.0075,.010624586881962734+lower]);policy.takeover_estimate(q,target[hand].numpy(),policy_relative,slider_est,clock_s=t);taken=True;operation_reference=rb[oid].numpy().copy()
+      object_est,slider_est=initial_takeover_priors();policy.takeover_estimate(q,target[hand].numpy(),object_est,slider_est,clock_s=t);taken=True;operation_reference=rb[oid].numpy().copy()
      if operation_reference is None:operation_reference=rb[oid].numpy().copy()
      if thumb_script is not None:
       phase=int((t-16)/5);fraction=smooth(min(1.,((t-16)%5)/script_travel_seconds));shift=.04*(fraction if phase%2==0 else 1-fraction)
@@ -369,7 +374,7 @@ def main():
    handover_i=np.flatnonzero(held)[-1];op=trace['object'][opmask];origin=trace['object'][handover_i];drift=np.linalg.norm(op[:,:3]-origin[:3],axis=-1);rot=(Rotation.from_quat(origin[3:7]).inv()*Rotation.from_quat(op[:,3:7])).magnitude()
    report.update(operation_body_max_drift_m=float(drift.max()),operation_body_max_rotation_rad=float(rot.max()),operation_body_stable=bool((drift<.01).all() and (rot<.25).all()),slider_before_handover_m=float(trace['slider'][handover_i]-lower),slider_closed_at_handover=bool(abs(float(trace['slider'][handover_i]-lower))<.008))
   else:report.update(operation_body_stable=False,slider_closed_at_handover=False)
-  report.update(physical_asset=str(a.knife_asset),physical_asset_sha256=hashlib.sha256(knife_path.read_bytes()).hexdigest(),physical_dimensions_WTL_m=knife_parameters['handle_size'],physical_slider_size_WTL_m=knife_parameters['slider_size'],initial_geometry_estimate=initial_estimate,policy_geometry_estimate_scope=('Explicit initial noisy geometry estimate, common offline IK adaptation and once-loaded prior; no physicalasset ID or runtime object/contact input' if initial_estimate else 'Unchanged nominal geometry and once-loaded prior calibration; physical asset identity never given to actor'),hand_friction=a.hand_friction,knife_friction=a.knife_friction,load_profile=load_profile,load_frequency_rad_s=a.load_frequency,observation_noise_std_rad=a.observation_noise,observation_bias_bound_rad=a.observation_bias,seed=a.seed,loaded_weight_use='Interface initialization only; learned actor never called' if a.grasp_only or thumb_script is not None else 'Frozen R800 and optional residual actor executed after50 actual history frames',residual_checkpoint=str(a.residual_checkpoint),thumb_script=str(a.thumb_script),thumb_script_scope='Known 40mm schedule+offline geometric trajectory and joint preload, not constant force or live state feedback' if thumb_script is not None else None,thumb_action_gain=a.thumb_action_gain,support_action_gain=a.support_action_gain,added_load_N=a.load,passive_startup_detent_amplitude_N=a.detent,variable_load=a.variable_load,load_scope='Calibrated passive zero-velocity solverbrake capacity with dissipative startup/groove; no realtotalresistance or instantaneousfrictionmeasurement claim.' if a.resistance_integration=='solver-brake' else 'Engineering added load plus original passive friction/damping; no measured real total-resistance ceiling. Groove is finite passive potential; positive descent power is stored energy.')
+  report.update(physical_asset=str(a.knife_asset),physical_asset_sha256=hashlib.sha256(knife_path.read_bytes()).hexdigest(),physical_dimensions_WTL_m=knife_parameters['handle_size'],physical_slider_size_WTL_m=knife_parameters['slider_size'],initial_geometry_estimate=initial_estimate,policy_geometry_estimate_scope=('Explicit initial noisy geometry estimate, common offline IK adaptation and once-loaded prior; no physicalasset ID or runtime object/contact input' if initial_estimate else 'Unchanged nominal geometry and once-loaded prior calibration; physical asset identity never given to actor'),hand_friction=a.hand_friction,knife_friction=a.knife_friction,load_profile=load_profile,load_frequency_rad_s=a.load_frequency,observation_noise_std_rad=a.observation_noise,observation_bias_bound_rad=a.observation_bias,seed=a.seed,initial_pose_prior_scope=('Once known tabletop+initialgeometry estimate transformedby measuredG2armFK atclosure takeover; no currentobject/slidertruth' if policy.table_initial_prior_from_measured_arm else 'Once loaded nominal heldprior'),loaded_weight_use='Interface initialization only; learned actor never called' if a.grasp_only or thumb_script is not None else 'Frozen R800 and optional residual actor executed after50 actual history frames',residual_checkpoint=str(a.residual_checkpoint),thumb_script=str(a.thumb_script),thumb_script_scope='Known 40mm schedule+offline geometric trajectory and joint preload, not constant force or live state feedback' if thumb_script is not None else None,thumb_action_gain=a.thumb_action_gain,support_action_gain=a.support_action_gain,added_load_N=a.load,passive_startup_detent_amplitude_N=a.detent,variable_load=a.variable_load,load_scope='Calibrated passive zero-velocity solverbrake capacity with dissipative startup/groove; no realtotalresistance or instantaneousfrictionmeasurement claim.' if a.resistance_integration=='solver-brake' else 'Engineering added load plus original passive friction/damping; no measured real total-resistance ceiling. Groove is finite passive potential; positive descent power is stored energy.')
   if opmask.any():
    report.update(operation_thumb_slider_contact_fraction=float((trace['finger_slider_contacts'][opmask,0]>0).mean()),operation_body_contact_fraction=(trace['finger_body_contacts'][opmask]>0).mean(0).tolist(),contact_scope='30Hz solver-contact diagnostics; current truth never fed to actor. Positive motor preload does not establish constant pressure.')
    report['operation_thumb_slider_contact_maintained']=report['operation_thumb_slider_contact_fraction']>=.90

@@ -33,12 +33,13 @@ class G2R800Policy(FrozenPolicy):
         self.thumb_action_gain=thumb_action_gain;self.support_action_gain=support_action_gain
         self.support_load_features=None;self.support_load_feature_spec=None;self.support_delta_coordinates=None
         self.support_latch_after_preparation=False;self.support_command_period=1;self.held_support_logits=None;self.support_takeover_frame=0
-        self.residual=None;self.last_public_features=None;self.thumb_reference=None;self.history_features=False;self.support_estimator=None;self.action_parameterization='incremental';self.pressure_adapter=None;self.proprioceptive_pressure_spec=None;self.scheduled_support_anchor=False;self.learned_acquisition_prefix=False;self.operation_anchor_started=False
+        self.residual=None;self.last_public_features=None;self.thumb_reference=None;self.history_features=False;self.support_estimator=None;self.action_parameterization='incremental';self.pressure_adapter=None;self.proprioceptive_pressure_spec=None;self.scheduled_support_anchor=False;self.learned_acquisition_prefix=False;self.operation_anchor_started=False;self.table_initial_prior_from_measured_arm=False
         if residual_checkpoint is not None:
             from scripts.wuji_robust_learning import ResidualActorCritic
             saved=torch.load(residual_checkpoint,map_location='cpu')
             self.scheduled_support_anchor=bool((saved.get('scene_spec') or {}).get('scheduled_support_anchor',False))
             self.learned_acquisition_prefix=bool((saved.get('scene_spec') or {}).get('learned_acquisition_prefix',False))
+            self.table_initial_prior_from_measured_arm=bool((saved.get('scene_spec') or {}).get('table_initial_prior_from_measured_arm',False))
             if self.learned_acquisition_prefix:assert self.scheduled_support_anchor
             self.support_command_period=saved.get('support_command_period',1)
             self.support_latch_after_preparation=saved.get('support_latch_after_preparation',False)
@@ -121,7 +122,7 @@ class G2R800Policy(FrozenPolicy):
                          self.player.intr_reward_coef_embd[:1]], dim=1)
         return obs, encoder_input
 
-    def prewarm(self, q, goal, wrist_gravity, iterations=8, clock_s=16.):
+    def prewarm(self, q, goal, wrist_gravity, iterations=8, clock_s=16., known_prefix_target=None):
         """Warm full inference on isolated control state after real history.
 
         Computed warmup targets are discarded; RNN, reference, known targets,
@@ -154,7 +155,7 @@ class G2R800Policy(FrozenPolicy):
         try:
             with torch.no_grad():
                 for _ in range(iterations):
-                    restore();self.command(q,goal,wrist_gravity=wrist_gravity,clock_s=clock_s)
+                    restore();self.command(q,goal,wrist_gravity=wrist_gravity,clock_s=clock_s,known_prefix_target=(self.known.issued[0].cpu().numpy() if known_prefix_target is None and self.learned_acquisition_prefix and clock_s<16 else known_prefix_target))
             if torch.cuda.is_available():torch.cuda.synchronize()
         finally:restore()
         assert torch.equal(issued,self.known.issued) and torch.equal(initial,self.known.initial)
