@@ -37,7 +37,7 @@ def main():
              '--reference',cmd[cmd.index('--thumb-reference-override')+1],
              '--localization',cmd[cmd.index('--table-calibration')+1],'--output',str(prepared)])
         run(['scripts.plan_g2_functional_acquisition_path','--plan',str(prepared/'motor-plan.json'),
-             '--localization',str(prepared/'localization.json'),'--table-y','-.23','--output',str(prepared/'acquisition')])
+             '--localization',str(prepared/'localization.json'),'--knife-spec',str(prepared/'estimated-collision/spec.json'),'--table-y','-.23','--output',str(prepared/'acquisition')])
         run(['scripts.audit_wuji_actual_acquisition_motor','--plan',str(prepared/'motor-plan.json'),
              '--acquisition',str(prepared/'acquisition/acquisition-path.json'),'--table-y','-.23',
              '--output',str(prepared/'closure-audit.json')])

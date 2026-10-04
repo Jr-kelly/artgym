@@ -65,6 +65,7 @@ def main():
         'research/robust-knife-family-20261003/real-knife-asset-spec.json',
         str(B/'planning'), str(B/'comparison/pressure080-paired-v3/config.json'),
         str(B/'validation/geometry-assets-v3'),
+        str(B/'validation/boundary-assets-v35'),
         str(B/'validation/geometry-inputs-corrected-v3'),
         str(B/'measurement/serial-asset-v4'),
         str(B/'measurement/serial-moving-base-v6/report.json')]

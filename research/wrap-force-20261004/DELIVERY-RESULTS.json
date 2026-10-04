@@ -1,19 +1,19 @@
 {
-  "generated_utc": "2026-10-04T21:58:56.937966+00:00",
+  "generated_utc": "2026-10-04T22:24:25.098078+00:00",
   "release_tag": "wuji-g2-wrap-force-20261005-v1",
   "demo_status": "完整连续仿真已做成：G2＋Wuji从原桌角拿刀、持稳、两轮40 mm伸缩命令与保持；默认V12名义功能通过，无夹具、换握、定时位置锁存或中途重置。真机未运行。",
-  "generalization_status": "同S120及统一一次带误差估计规则，012–015四个留出几何有实际连续通过记录；降低指节摩擦的一个假设条件也通过。未证明覆盖全部130–140×14–18×10–14 mm范围、全部滑块±5/±1/±1 mm组合或联合必要泛化。",
+  "generalization_status": "同S120及统一一次带误差估计规则，012–015四个留出几何有实际连续通过记录；降低指节摩擦的一个假设条件也通过；额外薄刀130×14×10 mm与滑块轴向＋5 mm在同权重、同一次估计及匹配预成形规则下实际通过。未证明覆盖全部130–140×14–18×10–14 mm范围、全部滑块±5/±1/±1 mm组合或联合必要泛化。",
   "remaining_blockers": "0.35/0.5 N基础制动容量存在第二轮伸出及回缩不足；联合观测扰动／延迟／负载仍有失败。原刀总轴向力B及真实导轨反力C未校准；实物阻力、有效行程和SDK单位／接口缺失。新宽面拇指候选虽能形成长行程和多段真实承托，仍有跨轮转动／高负载失联，未替换默认。",
   "force_scope": {
     "A 法向压力": "默认V12原刀实际拇指—滑块法向均值约0.747 N；0.8 N是关节偏差模型的目标档位，不是恒力或测量值。提高到约1 N实际法向力没有改善高阻力双向操作。",
-    "B 实际轴向推拉力": "原刀完整接触对力通道未完成。经过动基座校准的修改串联装置中，包覆布局两次记录的四段有效运动中值约+0.200/−0.202 N，有效归因比例>99.7%。质量、世界加速度、重力及实际弹簧力已计入；装置改变动力学，不能冒称原刀或真机测量。瞬时起动前峰值约0.75/0.86 N只是两次瞬态，不是可重复起动力上限。",
+    "B 实际轴向推拉力": "原刀完整接触对力通道未完成。经过动基座校准的修改串联装置中，包覆布局两次记录的四段有效运动中值约+0.200/−0.202 N，四段运动中段的有效归因比例>99.7%，不包含所有起动、端挡或其他试验。质量、世界加速度、重力及实际弹簧力已计入；装置改变动力学，不能冒称原刀或真机测量。瞬时起动前峰值约0.75/0.86 N只是两次瞬态，不是可重复起动力上限。",
     "C 导轨实际反力与配置容量": "真实导轨反力尚未通过校准。原刀名义沿程配置容量约0.20–0.514 N、0.5档约0.50–1.285 N；是被动制动的有限容量，不是每刻实际反力或实物阻力上限。失败C校准残差约0.09 N，未输出有效C曲线。",
     "D 完整任务负载能力": "仅报告已测试配置：默认0.2基础容量profile完整通过，0.35/0.5已有失败；不是连续单调最大负载区间。已知平衡轴向附加载荷0.025/0.05/0.10 N使第二轮伸出不足，未建立正附加负载的完整任务下界，不把基础容量相加称推力。"
   },
   "grasp_comparison": "192缓存条目来自四个原始来源的各48附近扰动。四来源先与当前及包覆候选匹配G2映射、初始估计、闭合／取刀路径和双向参考；部分子场景可行、接回取刀失败，不作机械不可行结论。原source2与包覆布局在同S120/.8模型档、原刀及匹配参考的持刀对照中，第二轮伸出21.71→33.42 mm；这是抓姿和必要控制适配的共同收益，非纯几何独立归因。两布局均已有原食指link4真实接触，不能说首次启用指节。新布局另有中指、小指指腹承托；掌面未证明必要贡献。",
   "training_selection": "同750初始化、64环境×120更新×128步的单／多抓姿短训在共同012–015持刀留出条件均通过，未显示多抓姿分布扩展收益。选单抓姿S120，SHA256 ad16a153c27eb01567c14422ca8ed23e5bebfc6e1c901683031f245631944d2a。连续及拇指头短训未改善、及时停训，失败44/12状态保留且不替换默认；修复冻结参数Adam保存问题。训练拟合、冻结评估、独立恢复、脚本取刀与真机分别标记。",
   "recovery_status": "代码／资产／配置、teacher＋2076维R800＋154维残差及模型／Adam／RNG可恢复。V20包在空目录独立解包，实际默认连续回合通过；学习状态实际恢复并保存更新121，该更新处于前缀、没有操作能力提升证据。最终包另给内容清单，SDK不分发。",
-  "hardware_status": "Wuji原生块index/middle/pinky/ring/thumb各4关节，G2右臂idx61–idx67。离线600帧推理中位3.24ms、p95 5.54ms，与记录目标最大差0.01543rad，未证明SDK或逐位重放一致。首次真机仍需实际双向阻力／完全收刀／有效行程、一次刀位标定和SDK名称、单位、符号、有限位置接口及时间戳。本轮未连接动作传输。",
+  "hardware_status": "补充V42基于上一帧实际已发目标/动作的600次因果单步预测与记录最大差1.19e-7rad；当前/未来目标不输入当前预测，原自由记忆差异仍保留，未改变原物理控制器。Wuji原生块index/middle/pinky/ring/thumb各4关节，G2右臂idx61–idx67。离线600帧推理中位3.24ms、p95 5.54ms，与记录目标最大差0.01543rad，未证明SDK或逐位重放一致。首次真机仍需实际双向阻力／完全收刀／有效行程、一次刀位标定和SDK名称、单位、符号、有限位置接口及时间戳。本轮未连接动作传输。",
   "continuous_trials": [
     {
       "label": "主刀，基础容量0.2 N",
@@ -689,6 +689,156 @@
         "calibration": "runs/support-pressure-20261003/calibration/solver-brake-v3/calibration.json"
       },
       "actual_thumb_normal_mean_N": 0.7453353401318261
+    },
+    {
+      "label": "薄刀130×14×10 mm，修正估计碰撞代理",
+      "trial": "runs/wrap-force-20261004/validation/thin-boundary-continuous-v36/simulation",
+      "evaluation": {
+        "criterion": {
+          "version": 1,
+          "declared_utc": "2026-10-03T20:22:00+00:00",
+          "scope": "Functional two-cycle behavior, separately from unchanged historical 0.25rad world-pose regression; diagnostic held resets never qualify as pickup demos.",
+          "endpoint": {
+            "extension_min_m": 0.025,
+            "retraction_max_m": 0.008,
+            "command_travel_m": 0.04
+          },
+          "grip": {
+            "minimum_height_above_table_m": 0.03,
+            "relative_translation_envelope_m": 0.015,
+            "relative_rotation_envelope_rad": 0.6,
+            "cycle_return_translation_increment_max_m": 0.005,
+            "cycle_return_rotation_increment_max_rad": 0.1,
+            "final_hold_translation_speed_max_m_s": 0.003,
+            "final_hold_rotation_speed_max_rad_s": 0.06
+          },
+          "contact": {
+            "thumb_slider_substep_fraction_min": 0.9,
+            "maximum_contiguous_zero_contact_s": 0.5
+          },
+          "rationale": "15mm and 0.6rad are broad escape envelopes, not precision targets. Return-to-return drift <=5mm/0.10rad and last-second settling distinguish progressive slip from bounded new seating; both meaningful endpoints and sustained slider contact remain mandatory. World-pose legacy score is reported unchanged; active wrist motion is shown separately."
+        },
+        "trace_sha256": "f4de06e0dc45dca240490f8a1b1e06eedc1c3be2eca87c9ad5f1492cabab2c90",
+        "checks": {
+          "two_cycles": true,
+          "clear": true,
+          "relative_envelope": true,
+          "endpoints": true,
+          "bounded_return_drift": true,
+          "final_settling": true,
+          "thumb_contact": true
+        },
+        "functional_behavior_pass": true,
+        "continuous_pickup_demo_pass": true,
+        "held_diagnostic": false,
+        "measurement_diagnostic": false,
+        "legacy_full_success": false,
+        "slider_endpoints_m": {
+          "extend1": 0.0342215622817959,
+          "return1": 0.003983603340652897,
+          "extend2": 0.03269270249119943,
+          "return2": 0.002064064626661255
+        },
+        "relative_max_rotation_rad": 0.3179190027444433,
+        "relative_max_translation_m": 0.002752302692172622,
+        "active_wrist_max_rotation_rad": 0.0003073017559152729,
+        "return_to_return_rotation_rad": 0.013979796177703004,
+        "return_to_return_translation_m": 0.00039273302214968615,
+        "final_hold_translation_speed_m_s": 0.0005346773594112041,
+        "final_hold_rotation_speed_rad_s": 0.018065580662607654,
+        "thumb_contact_substep_fraction": 1.0,
+        "longest_zero_thumb_contact_s": 0.0
+      },
+      "physical_dimensions_WTL_m": [
+        0.014,
+        0.01,
+        0.13
+      ],
+      "brake_capacity_parameter": {
+        "physics_hz": 240,
+        "motor_pd_hz": 240,
+        "policy_history_hz": 30,
+        "brake_capacity_max_N": 0.5141466856913071,
+        "brake_capacity_operation_min_N": 0.2,
+        "scope": "Passive nativezero-velocity jointbrake with250 damping and calibratedNewtonforcecap; physics-only time/position modulatescap. Replaces explicit regularizedfriction and conservativepotential by dissipative startup/groove barriers. No positivevelocity/positiontarget, nohanddrive/rail/criteriachange. Actualbrakeforce incontactdemo unavailable; cap isverifiedfixtureparameter, notmeasuredworldtraction or realresistance.",
+        "calibration": "runs/support-pressure-20261003/calibration/solver-brake-v3/calibration.json"
+      },
+      "actual_thumb_normal_mean_N": 0.7809017172865955
+    },
+    {
+      "label": "主刀，滑块轴向＋5 mm，匹配预成形",
+      "trial": "runs/wrap-force-20261004/validation/axial-plus5-boundary-continuous-v38/simulation",
+      "evaluation": {
+        "criterion": {
+          "version": 1,
+          "declared_utc": "2026-10-03T20:22:00+00:00",
+          "scope": "Functional two-cycle behavior, separately from unchanged historical 0.25rad world-pose regression; diagnostic held resets never qualify as pickup demos.",
+          "endpoint": {
+            "extension_min_m": 0.025,
+            "retraction_max_m": 0.008,
+            "command_travel_m": 0.04
+          },
+          "grip": {
+            "minimum_height_above_table_m": 0.03,
+            "relative_translation_envelope_m": 0.015,
+            "relative_rotation_envelope_rad": 0.6,
+            "cycle_return_translation_increment_max_m": 0.005,
+            "cycle_return_rotation_increment_max_rad": 0.1,
+            "final_hold_translation_speed_max_m_s": 0.003,
+            "final_hold_rotation_speed_max_rad_s": 0.06
+          },
+          "contact": {
+            "thumb_slider_substep_fraction_min": 0.9,
+            "maximum_contiguous_zero_contact_s": 0.5
+          },
+          "rationale": "15mm and 0.6rad are broad escape envelopes, not precision targets. Return-to-return drift <=5mm/0.10rad and last-second settling distinguish progressive slip from bounded new seating; both meaningful endpoints and sustained slider contact remain mandatory. World-pose legacy score is reported unchanged; active wrist motion is shown separately."
+        },
+        "trace_sha256": "886f9df5be37b6bbf9f5fc44d65a3b6b49ce51229a8a5ddfa126b26fdef885ab",
+        "checks": {
+          "two_cycles": true,
+          "clear": true,
+          "relative_envelope": true,
+          "endpoints": true,
+          "bounded_return_drift": true,
+          "final_settling": true,
+          "thumb_contact": true
+        },
+        "functional_behavior_pass": true,
+        "continuous_pickup_demo_pass": true,
+        "held_diagnostic": false,
+        "measurement_diagnostic": false,
+        "legacy_full_success": true,
+        "slider_endpoints_m": {
+          "extend1": 0.03262214271625924,
+          "return1": 0.0053535630154284974,
+          "extend2": 0.031085901618548795,
+          "return2": 0.004498997253445103
+        },
+        "relative_max_rotation_rad": 0.23689123427705006,
+        "relative_max_translation_m": 0.0027360107085708453,
+        "active_wrist_max_rotation_rad": 0.00030149537496673825,
+        "return_to_return_rotation_rad": 0.011577988509227415,
+        "return_to_return_translation_m": 0.00015922182253265676,
+        "final_hold_translation_speed_m_s": 0.00012748611498719525,
+        "final_hold_rotation_speed_rad_s": 0.009058789922196506,
+        "thumb_contact_substep_fraction": 1.0,
+        "longest_zero_thumb_contact_s": 0.0
+      },
+      "physical_dimensions_WTL_m": [
+        0.016,
+        0.012,
+        0.135
+      ],
+      "brake_capacity_parameter": {
+        "physics_hz": 240,
+        "motor_pd_hz": 240,
+        "policy_history_hz": 30,
+        "brake_capacity_max_N": 0.5140527441103623,
+        "brake_capacity_operation_min_N": 0.2,
+        "scope": "Passive nativezero-velocity jointbrake with250 damping and calibratedNewtonforcecap; physics-only time/position modulatescap. Replaces explicit regularizedfriction and conservativepotential by dissipative startup/groove barriers. No positivevelocity/positiontarget, nohanddrive/rail/criteriachange. Actualbrakeforce incontactdemo unavailable; cap isverifiedfixtureparameter, notmeasuredworldtraction or realresistance.",
+        "calibration": "runs/support-pressure-20261003/calibration/solver-brake-v3/calibration.json"
+      },
+      "actual_thumb_normal_mean_N": 0.7383148954469945
     }
   ],
   "flags": {
@@ -702,8 +852,8 @@
   },
   "work_and_resources": {
     "round_start_utc": "2026-10-04T10:51:40.525679+00:00",
-    "generated_utc": "2026-10-04T21:58:56.937966+00:00",
-    "elapsed_hours": 11.121225635277778,
+    "generated_utc": "2026-10-04T22:24:25.098078+00:00",
+    "elapsed_hours": 11.545714555277778,
     "minimum_work_hours": 12,
     "minimum_finish_utc": "2026-10-04T22:51:40.525679+00:00",
     "no_subagents": true,
@@ -712,36 +862,36 @@
     "gpu_hour_cap": null,
     "local_snapshot": {
       "pid": 3068820,
-      "heartbeat": "2026-10-04T21:58:48.715766+00:00",
+      "heartbeat": "2026-10-04T22:24:15.791828+00:00",
       "session": "pid:[4026531836]",
       "current": [
         {
           "index": 0,
-          "utilization": 35.0,
+          "utilization": 31.0,
           "memory_used_mb": 799.0,
           "memory_total_mb": 24564.0
         }
       ],
       "windows": {
         "60": {
-          "mean_percent": 26.666666666666668,
+          "mean_percent": 24.666666666666668,
           "samples": 6,
-          "covered_seconds": 50.2716429233551
+          "covered_seconds": 50.22645831108093
         },
         "300": {
-          "mean_percent": 25.966666666666665,
+          "mean_percent": 29.166666666666668,
           "samples": 30,
-          "covered_seconds": 291.3671700954437
+          "covered_seconds": 291.2766969203949
         },
         "900": {
-          "mean_percent": 26.166666666666668,
+          "mean_percent": 32.46666666666667,
           "samples": 90,
-          "covered_seconds": 894.8060555458069
+          "covered_seconds": 893.9561061859131
         },
         "14400": {
-          "mean_percent": 30.357990230286113,
+          "mean_percent": 30.090718771807396,
           "samples": 1433,
-          "covered_seconds": 14398.509113788605
+          "covered_seconds": 14399.57850766182
         }
       },
       "provider_minimum_percent": 26.0,
@@ -815,6 +965,9 @@
     "new_grip_negative": "WIDE-FACE-PHYSICAL-COMPARISON-V24-V27.json",
     "reverse_and_support": "WIDE-FACE-REVERSE-AND-SUPPORT-V29-V30.json",
     "material": "PROXIMAL-MATERIAL-SENSITIVITY-V28.json",
+    "boundary": "BOUNDARY-GEOMETRY-CONTINUOUS-V36-V38.json",
+    "final_only_hold": "FINAL-ONLY-HOLD-COMPARISON-V39.json",
+    "legal_history": "LEGAL-ISSUED-HISTORY-REPLAY-V42.json",
     "actual_recovery": "EXTRACTED-RUNTIME-CONTINUOUS-RECOVERY-V20.json",
     "actual_learning_resume": "EXTRACTED-LEARNING-STATE-RESUME-V21.json"
   }

@@ -9,6 +9,7 @@ import numpy as np
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--include-issued-action-history',action='store_true',help='Include the actual outgoing action packet, a legal recorded command history; no truth inputs')
     p.add_argument('--trial',type=Path,required=True)
     p.add_argument('--motor-plan',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True)
@@ -24,13 +25,15 @@ def main():
     clock=np.arange(len(t['time']))/30.
     # Native trace time/arm_q are frame end; observed_q is precommand.
     arm=np.roll(t['arm_q'],1,axis=0)
-    np.savez_compressed(a.output/'legal-input.npz',clock_s=clock[start:],
+    extra={'issued_action':t['action'][start:]} if a.include_issued_action_history else {}
+    np.savez_compressed(a.output/'legal-input.npz',**extra,clock_s=clock[start:],
         hand_measured_q=t['observed_q'][start:],arm_measured_q=arm[start:],
         issued_hand_target=t['target'][start:,physics['hand_indices']])
     plan=json.loads(a.motor_plan.read_text());estimate=plan['initial_geometry_estimate']
     (a.output/'estimate.json').write_text(json.dumps(estimate,indent=2))
     (a.output/'motor-plan.json').write_text(json.dumps(plan,indent=2))
     receipt=dict(scope='Recorded simulation measured/issued arrays only; no hardware data or current object/contact/load replay input',
+        issued_action_history=a.include_issued_action_history,
         control_clock='Frame beginning; arm_q preceding completed row; observed_q already precommand',
         learned_takeover_seconds=a.takeover_seconds,control_frames=len(clock[start:]),
         trace_sha256=hashlib.sha256((a.trial/'trace.npz').read_bytes()).hexdigest(),

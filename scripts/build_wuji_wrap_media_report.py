@@ -38,6 +38,7 @@ def main():
                        (B/'figures/paired-series-repeat-v26/paired-series-repeat.png','每抓姿两次独立串联装置测量：无效B缺测区间不填零'),
                        (B/'figures/recorded-wrap-geometry-v32/recorded-wrap-geometry.png','原碰撞几何与同步真实法向接触：不是实际接触面积或全接触力'),
                        (B/'media/paired-original-wrap-held-v31-frame780.png','原／新布局近景关键帧：两条独立持刀诊断'),
+                       (B/'figures/wide-face-contact-moments-v37/support-moments.png','新宽面抓姿：真实承托迁移和法向力矩；缺摩擦项，不能当总力矩或因果证明'),
                        (B/'figures/directional-tracking-v22/directional-tracking.png','两轮切向目标追踪与实际接触')]:
         panels.append('<article><h3>'+title+'</h3><img loading="lazy" alt="'+html.escape(title)+'" src="'+uri(path,'image/png')+'"></article>')
     release='https://github.com/Jr-kelly/artgym/releases/tag/wuji-g2-wrap-force-20261005-v1'

@@ -40,6 +40,8 @@ export PYTHONPATH="$PWD:$PWD/rl_games:${PYTHONPATH:-}"
 
 统一规则：所有尺寸使用体根 x=.306 m；一次带误差的尺寸/滑块估计驱动接近、闭合、全40 mm参考的重新规划和原约束认证。物理资产只交给模拟器。缓存与 G2 映射、控制历史和手部重力均保持原实现。012–015 在该规则下均有实际连续通过记录，见 `DIRECT-CORNER-ONCE-ESTIMATE-CONTINUOUS-V14.json`。000–011 训练、012–015 留出及原抓姿划分不变。尺寸通过不等于阻力/观测噪声联合泛化已完成；.35/.5 N 与噪声挑战存在失败。
 
+末轮初始估计入口还会构建仅用于规划的碰撞代理，并用同一有界规则匹配拇指打开预成形；不把手指目标适配到薄刀后仍用名义刀碰撞几何否定它。实际薄刀130×14×10 mm及滑块轴向＋5 mm连续通过，证据见BOUNDARY-GEOMETRY-CONTINUOUS-V36-V38.json。额外资产在validation/boundary-assets-v35，命令同上替换estimate与knife-asset即可。
+
 早期 source2 方案可显式执行 `--preset source2`；它有换握及已知时钟的位置保持，见 V10 冻结文件，不是默认包覆方案。
 
 ## 轴向测量
@@ -61,3 +63,5 @@ export PYTHONPATH="$PWD:$PWD/rl_games:${PYTHONPATH:-}"
 `offline/frozen-v12-legal-export-v1` 只含 clock_s、hand_measured_q、arm_measured_q、issued_hand_target。重放 r1 的600帧计算中位3.24 ms、p95 5.54 ms，但与记录目标最大差异 .01543 rad；这是离线计算，不是 SDK 实时/逐位一致证明。预热不发硬件命令。
 
 Wuji 原生块顺序 index、middle、pinky、ring、thumb，各4关节；G2右臂 idx61–idx67。真实 SDK 尚需核实名称、顺序、单位、符号、时间戳、位置接口和 effort 含义。实物轴向双向起动/沿程阻力、完全收刀位置及有效行程仍需测量。`REAL-MEASUREMENT.md` 与 `HARDWARE-PREPARATION.md` 提供离线测量/接入准备。本轮没有自动真机动作。
+
+补充控制历史诊断：V42只把上一帧实际已发目标／动作接回离线状态，600个当前目标预测最大差1.19e−7 rad；当前／未来目标没有作为本帧参考输入。旧固定测量、自由演进内部命令记忆的0.01543 rad差异仍保留。两者是不同离线条件，不是自主闭环等价或SDK证明，默认物理控制器未改变。见LEGAL-ISSUED-HISTORY-REPLAY-V42.json。

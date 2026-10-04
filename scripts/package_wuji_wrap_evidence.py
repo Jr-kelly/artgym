@@ -12,7 +12,7 @@ def main():
     paths += [B/'validation'/('wrap-direct-corner-geometry'+sid+'-v14') for sid in ['012','013','014','015']]
     # A modest number of causal intervention traces, not every historical run.
     for pattern in ['remote-multiregion*v17','remote-reverse*v19','remote-corner-*v20',
-                    '*v21','*v22','*v23','*v24r2','*v27','*v28','*v29r1','*v30']:
+                    '*v21','*v22','*v23','*v24r2','*v27','*v28','*v29r1','*v30','*final-only*v39']:
         paths += [p.relative_to(R) for p in (R/B/'validation').glob(pattern)]
     paths += [B/'measurement'/name for name in [
         'index-wrap-pressure080-series-v8','source2-pressure080-series-v8',
@@ -32,7 +32,7 @@ def main():
               B/'comparison/index-wrap-v8-pressure080-v3',
               Path('research/wrap-force-20261004/events.jsonl'),
               Path('research/wrap-force-20261004/events-remote.jsonl'),
-              B/'figures',B/'offline/frozen-v12-legal-export-v1',B/'offline/frozen-v12-replay-v1r1',B/'remote']
+              B/'figures',B/'offline/frozen-v12-legal-export-v1',B/'offline/frozen-v12-replay-v1r1',B/'offline/frozen-v12-legal-action-export-v42',B/'offline/frozen-v12-recorded-issued-replay-v42',B/'remote']
     # Persist both successes and selected failures' actual command/source hashes.
     allowed={str(p) for p in paths}
     for folder in (R/B/'jobs').iterdir():
@@ -42,6 +42,8 @@ def main():
         if '--output' in command and command[command.index('--output')+1] in allowed:
             paths.append(folder.relative_to(R))
     paths += [p.relative_to(R) for p in (R/B/'jobs').glob('source1-matched-direct-corner*')]
+    paths += [B/'validation/boundary-assets-v35',B/'validation/thin-boundary-continuous-v35',B/'validation/thin-boundary-continuous-v36',B/'validation/axial-plus5-boundary-continuous-v36',B/'validation/axial-plus5-boundary-continuous-v38']
+    paths += [p.relative_to(R) for p in (R/B/'jobs').glob('*boundary*')]
     paths += [B/'planning/source1-direct-corner-v33r1',B/'planning/source1-direct-corner-v33r2']
     paths += [B/'jobs/corner-thumb-head-only-v20',B/'jobs/corner-thumb-head-nominal-recovery-v21']
     for name in ['corner-thumb-head-only-v20','corner-thumb-head-nominal-recovery-v21','corner-functional-load-pilot-v13r1']:

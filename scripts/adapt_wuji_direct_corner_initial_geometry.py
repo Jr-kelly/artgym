@@ -23,6 +23,8 @@ def main():
     assert .0035 <= a.body_root_inset <= .01
     a.output.mkdir(parents=True, exist_ok=False)
     estimate=json.loads(a.estimate.read_text())
+    from scripts.wuji_once_estimated_collision_geometry import build
+    proxy=build(estimate,a.output/'estimated-collision')
     plan=json.loads(a.plan.read_text())
     reference=json.loads(a.reference.read_text())
     loc=json.loads(a.localization.read_text())
@@ -34,6 +36,8 @@ def main():
     # path's certificate. Full motion and whole-hand geometry are recertified.
     new['close_q']=np.clip(new['close_q'],g.w.lower+.005,g.w.upper-.005).tolist()
     new['close_waypoints'][-1]['q']=new['close_q']
+    from scripts.wuji_once_estimated_collision_geometry import rematch_open_preform
+    new=rematch_open_preform(new,proxy)
     world=np.asarray(loc['object_world_matrix'])
     world[0,3]=.3+a.body_root_inset
     world[2,3]=.7501+estimate['handle_size_WTL_m'][1]/2
@@ -57,7 +61,7 @@ def main():
     cal=dict(object_in_wrist=relative.tolist(),slider_in_wrist=(relative@cap).tolist(),
              initial_geometry_estimate=estimate,scope='Once noisy dimensional prior; never live object or slider truth')
     audit.update(scope=__doc__,body_root_inset_m=a.body_root_inset,
-                 arm_ik=error,original_mesh_acquisition_and_full40_motor_certificate_pending=True)
+                 arm_ik=error,original_mesh_acquisition_and_full40_motor_certificate_pending=True,once_estimated_collision_spec=str(proxy))
     for name,value in [('motor-plan.json',new),('reference.json',ref),
                        ('localization.json',loc),('calibration.json',cal),('adaptation-audit.json',audit)]:
         (a.output/name).write_text(json.dumps(value,indent=2)+'\n')

@@ -31,59 +31,53 @@
   },
   "next": "Evaluate actual behavior/geometry and decide next intervention",
   "last_event": {
-    "utc": "2026-10-04T22:00:59.381006+00:00",
+    "utc": "2026-10-04T22:30:48.595339+00:00",
     "event": "wrap_force_job_closed",
     "closed_job": {
-      "name": "thin-boundary-continuous-v35",
+      "name": "final-public-evidence-packet-v44",
       "machine": "local"
     },
     "config": {
       "command": [
         "/home/agiuser/miniconda3/envs/artgym/bin/python",
         "-m",
-        "scripts.run_wuji_wrap_selected",
-        "--initial-estimate",
-        "runs/wrap-force-20261004/validation/boundary-assets-v35/thin130x14x10/once-estimate.json",
-        "--knife-asset",
-        "runs/wrap-force-20261004/validation/boundary-assets-v35/thin130x14x10/mobility.urdf",
+        "scripts.package_wuji_wrap_evidence",
         "--output",
-        "runs/wrap-force-20261004/validation/thin-boundary-continuous-v35"
+        "runs/wrap-force-20261004/release/evidence-v44"
       ],
-      "pid": 1645451,
-      "launcher_pid": 1645389,
+      "pid": 1666925,
+      "launcher_pid": 1666890,
       "gpu": 0,
-      "source_commit": "7469d9dcd3993887c3902f5cdbd9ca64769bfb29",
-      "source_patch_sha256": "80497b2808fa6e3218084d0797dc72ec38b8b9b76030b2c5479ec0445ac74503",
+      "source_commit": "24d9375e6885299641743f6b226d3cf056581911",
+      "source_patch_sha256": "48389204300070bfc861da703815e85e9d4b386306f102f79a97379d1ede898e",
       "source_sha256": {
         "scripts/wuji_initial_table_prior.py": "8c4f1a32ad2840c1e35fdd1f876402e443455ea1fc426356927d872754e506ae",
         "scripts/wuji_joint_deflection_acquisition.py": "9ed522a0d370e344b6ab4e2595ddc0e6b1b8a8dc18f4512c6f4654b7623777b5",
         "scripts/wuji_known_acquisition_prefix.py": "17c2a2706f5f29f5167a223464cb0c67dea43800b7fdc70df2453ad98ccb2d03",
-        "scripts/replay_wuji_support_commands.py": "a5e2ac7b59e7d30de2f01412609dba536177947c42d0b6a7d748e4052fb07cba",
-        "scripts/export_wuji_legal_replay.py": "5622b42a40f92e939e833f82fc8c82b4d06f2af377f8346477e9b87aa0306098",
+        "scripts/replay_wuji_support_commands.py": "6a63bac5f651825e6079376b50d7ca5dc73f659e4f8a1efe60349c1fa5cd5e0f",
+        "scripts/export_wuji_legal_replay.py": "c843a6167bdd4267b18bea08ebc78795ef6dd87763037b0aac1e3523ab51aeea",
         "scripts/g2_continuous_scene.py": "36fd4ab8e371f30b60af625b3d825499b409971afadbd95772e230f69fab3067",
         "scripts/g2_r800_policy.py": "1b3640a4d148e6862a6b88625b8e5358e63c8c3a061abeb1f844dfb23a02f23f",
         "scripts/g2_batched_r800.py": "b4a476316840ed2b8008a1016baaab0a581989ffc1ad9ff12a26dfc96f7440f3",
         "scripts/wuji_known_controller.py": "3e4870ee35719db2f2dc8760d6b5c58a757c5b4ba944f27d2cb2e15533df4ad6",
         "scripts/wuji_bounded_motor_residual.py": "39ad6c94a39f5dd8d71a2e7a50d65eb973fe65078861913828f7913e77873635",
-        "scripts/run_g2_robust_demo.py": "f7839889d23f1493ea0376b589d4435cd96f6fe204f5f5bee224a9a7ac6d059f",
+        "scripts/run_g2_robust_demo.py": "10fbaff1a3ac33d77eee24f07486a41f38865df257db0f5cc16aed5fc6cc9e4c",
         "scripts/train_wuji_robust_residual.py": "db86ec09169eacc0c367b32a9687f7fe9d9c7af02626b5abc0e2da80fd900076",
-        "scripts/run_wuji_wrap_selected.py": "f0028de564130c653e8c246919b5b816950c948ee558d90911626f59ff053dcc"
+        "scripts/package_wuji_wrap_evidence.py": "c7c85572ed1acee1bfe1db836843e58a0f40e7f7630e3e49483245ebb0ebce6e"
       },
-      "input_sha256": {
-        "/data/research/artgym-experiments-20260921/wrap-force-20261004/runs/wrap-force-20261004/validation/boundary-assets-v35/thin130x14x10/mobility.urdf": "4d0169d9909203a4afcd60626cfddd1ac05c668e729a2e8ad7eafe3d33d2fb8f"
-      },
-      "start_utc": "2026-10-04T22:00:52.310322+00:00",
-      "exit_code": 1,
-      "end_utc": "2026-10-04T22:00:59.380798+00:00"
+      "input_sha256": {},
+      "start_utc": "2026-10-04T22:29:23.230846+00:00",
+      "exit_code": 0,
+      "end_utc": "2026-10-04T22:30:48.595127+00:00"
     },
-    "evidence": "runs/wrap-force-20261004/jobs/thin-boundary-continuous-v35",
+    "evidence": "runs/wrap-force-20261004/jobs/final-public-evidence-packet-v44",
     "next": "Evaluate actual behavior/geometry and decide next intervention"
   },
   "baseline_functional_demo_ready": true,
   "local_resource_monitor_pid": 3068820,
   "github_branch": "feat/wuji-wrap-force-20261004",
-  "github_commit": "cfa8fa218692f049a5b31a43d40befadc8e2f734",
-  "local_scientific_commit": "7469d9dcd3993887c3902f5cdbd9ca64769bfb29",
+  "github_commit": "774c26303c0c3efa539803fbbee8f732a3c26d9e",
+  "local_scientific_commit": "24d9375e6885299641743f6b226d3cf056581911",
   "multigrasp_comparison_required_before_long_training": true,
   "multigrasp_comparison_completed": true,
   "geometry_split_preserved": {

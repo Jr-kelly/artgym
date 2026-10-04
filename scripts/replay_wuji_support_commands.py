@@ -19,7 +19,7 @@ LEGAL_FIELDS = {'clock_s', 'hand_measured_q', 'arm_measured_q', 'issued_hand_tar
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--scheduled-target-holds',action='store_true',help='Knownclock finitePD issuedposition holds after complete reference; never forcefeedback');p.add_argument('--prewarm-iterations',type=int,default=0);p.add_argument('--input', type=Path, required=True)
+    p.add_argument('--recorded-issued-history',action='store_true',help='Causal one-step offline diagnostic: previous actual outgoing target/action only, scored before current outgoing target is read. Not autonomous closed-loop or hardware proof');p.add_argument('--scheduled-target-holds',action='store_true',help='Knownclock finitePD issuedposition holds after complete reference; never forcefeedback');p.add_argument('--prewarm-iterations',type=int,default=0);p.add_argument('--input', type=Path, required=True)
     p.add_argument('--estimate', type=Path, required=True)
     p.add_argument('--calibration', type=Path, required=True)
     p.add_argument('--motor-prefix-plan',type=Path,help='Once-known closure/lift/transfer plan for learned acquisition; future recorded targets never used as reference')
@@ -32,14 +32,16 @@ def main():
     a = p.parse_args()
     a.output.mkdir(parents=True, exist_ok=False)
     with np.load(a.input) as data:
-        assert set(data.files) == LEGAL_FIELDS, 'Supply only measured/issued legal arrays'
-        samples = {k: data[k].copy() for k in LEGAL_FIELDS}
+        accepted_fields=LEGAL_FIELDS|({'issued_action'} if a.recorded_issued_history else set())
+        assert set(data.files) == accepted_fields, 'Supply only measured/issued legal arrays'
+        samples = {k: data[k].copy() for k in accepted_fields}
     times = samples['clock_s']
     n = len(times)
     assert 5<=a.takeover_seconds<=16 and times[0]<=a.takeover_seconds-50/30+1e-7
     assert n >= 50 and np.allclose(np.diff(times), 1/30, atol=1e-7)
     for k, width in [('hand_measured_q', 20), ('arm_measured_q', 7), ('issued_hand_target', 20)]:
         assert samples[k].shape == (n, width) and np.isfinite(samples[k]).all()
+    if a.recorded_issued_history:assert samples['issued_action'].shape==(n,20) and np.isfinite(samples['issued_action']).all()
     estimate = json.loads(a.estimate.read_text())
     calibration = json.loads(a.calibration.read_text())
     obj = np.asarray(calibration['object_in_wrist'], dtype=float)
@@ -83,6 +85,17 @@ def main():
     targets, actions, errors = [], [], [];warmup=None;latencies=[]
     for i, t in enumerate(times):
         q = samples['hand_measured_q'][i]
+        if a.recorded_issued_history and taken:
+            # Only previously issued packets; no current/future motor target is
+            # used to propose the current command. Reconcile stored position
+            # and pressure-offset memory to the actual preceding packet.
+            previous=samples['issued_hand_target'][i-1]
+            if pressure_spec:
+                assert hasattr(policy.pressure_adapter,'model')
+                correction=previous[16:]-targets[-1][16:]
+                policy.pressure_adapter.model.offset[0]+=__import__('torch').as_tensor(correction,dtype=__import__('torch').float32)
+            policy.known.issued=policy.tensor(previous).clone()
+            policy.last_action=samples['issued_action'][i-1].copy()
         if policy.support_load_features is not None:
             previous=samples['issued_hand_target'][max(0,i-1)]
             policy.support_load_features.observe(policy.tensor(q),policy.tensor(previous),__import__('torch').tensor([round(float(t)*30)],device=policy.player.device))
@@ -123,6 +136,7 @@ def main():
     assert taken and len(targets) > 0
     np.savez_compressed(a.output/'commands.npz', targets=targets, actions=actions)
     report = dict(scope='Offline inference only; no physics scene, robot SDK, or current object/contact/load input',
+        recorded_issued_history=a.recorded_issued_history,replay_scope=('Causal one-step predictions conditioned on previous actual issued target/action; not free-running control or physical performance' if a.recorded_issued_history else 'Free-running model/control memory with fixed recorded measured inputs; no simulated response to replayed targets'),
         known_prefix_plan_sha256=hashlib.sha256(a.motor_prefix_plan.read_bytes()).hexdigest() if a.motor_prefix_plan else None,initial_pose_prior_scope='Known table plus once-estimated geometry transformed by measured arm FK' if policy.table_initial_prior_from_measured_arm else 'Once loaded held prior',prewarm=warmup,physics_performance_claim=False, real_robot_ran=False,learned_takeover_seconds=a.takeover_seconds,support_latch_after_preparation=policy.support_latch_after_preparation, control_hz=30, r800_input_dim=2076,
         scheduled_target_holds=a.scheduled_target_holds,scheduled_target_hold_scope='Knowncommandclock positionhold; network/reference/measuredhistory continue; not constantforce' if a.scheduled_target_holds else None,pressure_spec=pressure_spec,postlift_regrasp_sha256=hashlib.sha256(a.postlift_regrasp.read_bytes()).hexdigest() if a.postlift_regrasp else None,
         inference_command_latency_ms=dict(first=latencies[0],median=float(np.median(latencies)),p95=float(np.percentile(latencies,95)),maximum=max(latencies),frames_above_33_333ms=sum(x>1000/30 for x in latencies),scope='Recorded legal-input offline command computation under current machine load; excludes SDK, physical motors and measurement acquisition'),
