@@ -23,7 +23,7 @@ def main():
    scene.step(residual,scale,reset_failed=False,reset_finished=False)
    f={k:v.cpu().numpy().copy() for k,v in scene.last_diagnostics.items()};f['motor_target']=scene.command_target[:,scene.hand_ids].cpu().numpy().copy();f['arm_q']=scene.dof[:,scene.arm_ids,0].cpu().numpy().copy();f['hand_q']=scene.dof[:,scene.hand_ids,0].cpu().numpy().copy();f['object_state']=scene.rb[:,scene.object_index].cpu().numpy().copy();f['wrist_state']=scene.rb[:,scene.wrist_index].cpu().numpy().copy();frames.append(f)
    if step%150==0:print(json.dumps(dict(step=step,height=f['height'].tolist(),slider=f['slider'].tolist())),flush=True)
-  np.savez_compressed(a.output/'trace.npz',**{k:np.stack([f[k] for f in frames]) for k in frames[0]});result=dict(scope=__doc__,n=a.envs,scene=str(a.scene),checkpoint_sha256=hashlib.sha256(a.checkpoint.read_bytes()).hexdigest(),wall_seconds=time.monotonic()-start,episodes=scene.stats,held_diagnostic=True,continuous_pickup_demo_pass=False,full_functional_pair_force_validation=False);(a.output/'report.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
+  np.savez_compressed(a.output/'trace.npz',**{k:np.stack([f[k] for f in frames]) for k in frames[0]});result=dict(scope=__doc__,n=a.envs,scene=str(a.scene),checkpoint_sha256=hashlib.sha256(a.checkpoint.read_bytes()).hexdigest(),wall_seconds=time.monotonic()-start,episodes=scene.stats,held_diagnostic=scene.held_diagnostic,continuous_pickup_demo_pass=False,full_functional_pair_force_validation=False);(a.output/'report.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
  finally:scene.close()
 
 if __name__=='__main__':main()

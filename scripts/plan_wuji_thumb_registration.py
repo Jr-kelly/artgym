@@ -1,4 +1,4 @@
-"""Register each selected grip's thumb motor contact to the actual closed cap centre.
+"""Register each selected grip's thumb motor contact to the selected point on the actual closed cap face.
 
 This is an offline geometry/preload hypothesis, not constant force. Body support
 targets and original joint/torque limits remain. Actual contacts decide validity.
@@ -11,8 +11,8 @@ from scipy.spatial import ConvexHull
 from scripts.g2_contact_geometry import DigitGeometry
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--plan',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--virtual-inset',type=float,default=.0022);a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False);assert 0<=a.virtual_inset<=.004
- plan=json.loads(a.plan.read_text());g=DigitGeometry();h=g.w;w=np.asarray(plan['wrist_in_knife']);full=np.asarray(plan['close_q']);v=np.concatenate([v for v,_ in g.meshes['hand_r_thumb_pad_link']]);hull=ConvexHull(v);centers=v[hull.simplices].mean(1);normals=hull.equations[:,:3];target=np.array([0.,.0092-a.virtual_inset,-.02205])
+ p=argparse.ArgumentParser();p.add_argument('--plan',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--virtual-inset',type=float,default=.0022);p.add_argument('--axial-site',type=float,default=-.02205,help='Offline chosen closedcap face location, within30mm cap length with2mm edge margin; no live slider measurement');a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False);assert 0<=a.virtual_inset<=.004
+ plan=json.loads(a.plan.read_text());g=DigitGeometry();h=g.w;w=np.asarray(plan['wrist_in_knife']);full=np.asarray(plan['close_q']);v=np.concatenate([v for v,_ in g.meshes['hand_r_thumb_pad_link']]);hull=ConvexHull(v);centers=v[hull.simplices].mean(1);normals=hull.equations[:,:3];assert -.03505<=a.axial_site<=-.00905;target=np.array([0.,.0092-a.virtual_inset,a.axial_site])
  def sample(x):
   q=full.copy();q[16:]=x;m=w@h.forward(q)['hand_r_thumb_pad_link'];vv=v@m[:3,:3].T+m[:3,3];pr=vv[:,1];weight=np.exp(-(pr-pr.min())/.0002);point=weight@vv/weight.sum();fc=centers@m[:3,:3].T+m[:3,3];support=fc[:,1]<=pr.min()+.0004;facing=float((normals@m[:3,:3].T@[0,-1,0])[support].max()) if support.any() else -1.;gaps=g.self_gaps(q,'thumb',certify_clearance_m=.0001)+g.pair_gaps(q,[('hand_r_thumb_pad_link','hand_r_base_link'),('hand_r_thumb_link4','hand_r_base_link')]);return point,facing,min(z['gap_lower_bound_m'] for z in gaps)
  def cons(x):

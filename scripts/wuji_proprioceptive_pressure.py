@@ -27,7 +27,12 @@ class ProprioceptivePressure:
         if 8<=clock_s<float(self.spec['prefix_freeze_s']) or clock_s>=16:
             error=float(self.spec['preferred_estimated_pressure_N'])-self.last_estimate
             if abs(error)>float(self.spec['deadband_N']):
-                self.offset+=float(self.spec['gain_per_frame'])*(jac.T@(-self.normal*error))/self.kp
+                correction=(jac.T@(-self.normal*error))/self.kp
+                if self.spec.get('normal_correction_coordinates')=='cartesian-normal':
+                    compliance=(jac/self.kp[None])@jac.T
+                    normal_displacement=-self.normal*float(self.normal@compliance@self.normal)*error
+                    correction=(jac.T@np.linalg.solve(compliance+np.eye(3)*1e-9,normal_displacement))/self.kp
+                self.offset+=float(self.spec['gain_per_frame'])*correction
                 bound=float(self.spec['maximum_joint_offset_rad']);self.offset=np.clip(self.offset,-bound,bound)
         base=np.asarray(desired);target=base.copy();target[16:]+=self.offset-self.anchor
         target=np.clip(target,self.h.lower,self.h.upper)

@@ -106,7 +106,7 @@ def main():
   policy.support_load_features.reset(torch.tensor([0],device=policy.player.device),policy.tensor(policy_relative[:3,1]))
  pressure_spec=None
  if a.proprioceptive_pressure_config or policy.proprioceptive_pressure_spec:
-  assert a.takeover_seconds==16 and a.handover_calibration and a.residual_checkpoint and not a.thumb_script
+  assert a.takeover_seconds==16 and (a.handover_calibration or regrasp) and a.residual_checkpoint and not a.thumb_script
   from scripts.wuji_proprioceptive_pressure import ProprioceptivePressure,CoordinatedProprioceptivePressure
   pressure_spec=json.loads(a.proprioceptive_pressure_config.read_text()) if a.proprioceptive_pressure_config else policy.proprioceptive_pressure_spec;assert pressure_spec['prefix_freeze_s']<=16-50/30
   adapter=CoordinatedProprioceptivePressure if pressure_spec.get('coordinate_support') else ProprioceptivePressure
@@ -279,6 +279,9 @@ def main():
    if step%(a.physics_hz//30)==0:
     previously_issued_target=target.clone()
     q=dof[hand,0].numpy().copy()+sensor_bias+rng.normal(0.,a.observation_noise,20);act=np.zeros(20,dtype=np.float32);policy.record(q,policy.last_action if taken else act)
+    if regrasp and pressure_spec is not None and pressure_spec.get('transfer_normal_from_known_arm_fk',False):
+     assert (isinstance(policy.pressure_adapter,ProprioceptivePressure) or pressure_spec.get('model_implementation')=='analytic-torch-v1') and not pressure_spec.get('coordinate_support')
+     fixed_knife_axis=np.asarray(regrasp['expected_knife_world'])[:3,1];measured_wrist=kin.forward(dof[arm,0].numpy());policy.pressure_adapter.normal=measured_wrist[:3,:3].T@fixed_knife_axis
     if policy.support_load_features is not None:
      policy.support_load_features.observe(policy.tensor(q),policy.tensor(previously_issued_target[hand].numpy()),torch.tensor([round(t*30)],device=policy.player.device))
     if a.held_diagnostic and t<16:aq=qlift;hq=hold_motor(t,aq)
@@ -440,7 +443,7 @@ def main():
   report['meaningful_extension']=opened_ok and report['operation_body_stable'] and report['operation_thumb_slider_contact_maintained']
   report['full_success']=report['operation_thumb_slider_contact_maintained'] and report['operation_body_stable'] and report['slider_closed_at_handover'] and report['operation_evaluated'] and report['lifted_clear'] and report['operation_stays_clear'] and opened_ok and closed_ok
   if force_meter:
-   report['pair_pressure']=dict(calibration='research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md',physics_hz=a.physics_hz,substeps_per_simulate=1,sample_scope='Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.',finger_order=['thumb','index','middle','ring','pinky'],static_thumb_pressure_mean_N=float(trace['pair_slider_pressure_mean_N'][(trace['time']>=14)&(trace['time']<16),0].mean()),operation_thumb_pressure_mean_N=float(trace['pair_slider_pressure_mean_N'][opmask,0].mean()),operation_thumb_pressure_5th_percentile_N=float(np.quantile(trace['pair_slider_pressure_mean_N'][opmask,0],.05)),operation_thumb_contact_substep_fraction=float(trace['pair_slider_contact_substep_fraction'][opmask,0].mean()),operation_ring_underside_support_mean_N=float(trace['pair_underside_support_mean_N'][opmask,3].mean()),tangential_force_scope='Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed')
+   report['pair_pressure']=dict(calibration='research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md',physics_hz=a.physics_hz,substeps_per_simulate=1,sample_scope=f'Every actualphysicalstep at{a.physics_hz}Hz, arithmeticmean/min/max over{a.physics_hz//30}steps per30Hz policyframe; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.',finger_order=['thumb','index','middle','ring','pinky'],static_thumb_pressure_mean_N=float(trace['pair_slider_pressure_mean_N'][(trace['time']>=14)&(trace['time']<16),0].mean()),operation_thumb_pressure_mean_N=float(trace['pair_slider_pressure_mean_N'][opmask,0].mean()),operation_thumb_pressure_5th_percentile_N=float(np.quantile(trace['pair_slider_pressure_mean_N'][opmask,0],.05)),operation_thumb_contact_substep_fraction=float(trace['pair_slider_contact_substep_fraction'][opmask,0].mean()),operation_ring_underside_support_mean_N=float(trace['pair_underside_support_mean_N'][opmask,3].mean()),tangential_force_scope='Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed')
   report['fitted_resistance_profile']=resistance_profile
   report['fitted_resistance_profile_sha256']=hashlib.sha256(a.measured_resistance_profile.read_bytes()).hexdigest() if a.measured_resistance_profile else None
   report['postlift_regrasp']=regrasp

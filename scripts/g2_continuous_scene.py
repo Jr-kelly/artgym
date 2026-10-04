@@ -87,6 +87,11 @@ class G2ContinuousScene:
         if self.held_diagnostic:assert takeover_seconds==16 and not resample_initial_estimates
         self.plan=scene_spec['plan'] if scene_spec else json.loads((D/'functional-side-edge-under-support-equilibrium-v6/motor-plan.json').read_text())
         self.acquisition=scene_spec['acquisition'] if scene_spec else json.loads((D/'functional-side-edge-under-support-lateral-v3/acquisition-path.json').read_text())
+        self.postlift_regrasp=(scene_spec or {}).get('postlift_regrasp')
+        if self.postlift_regrasp:
+            assert not self.held_diagnostic and self.postlift_regrasp['preflight_passed']
+            self.regrasp_times=self.postlift_regrasp['times_s'];self.regrasp_arm=self.tensor(self.postlift_regrasp['arm_q'])
+            assert self.regrasp_times[-1]<=16-50/30
         self.calibration=scene_spec['calibration'] if scene_spec else json.loads((D/'handover-from-v25-v1.json').read_text())
         if scene_spec:
             assert scene_spec['scope'] in ['Fixed nominal scene shared across all physical assets; no asset-specific actor input','Initial noisy estimate guided common motor planning; no runtime object/contact truth or assetID actor input']
@@ -450,10 +455,17 @@ class G2ContinuousScene:
             selected=(t>=self.support_waypoint_times[0])&self.support_waypoint_enabled
             for i,(first,last) in enumerate(zip(self.support_waypoint_times[:-1],self.support_waypoint_times[1:])):
                 ids=selected&(t>=first)&(t<last)
-                alpha=smooth((t[ids]-first)/(last-first)).unsqueeze(-1)
+                alpha=((t[ids]-first)/(last-first))
+                if not (self.scene_spec or {}).get('support_waypoint_interpolation')=='linear':alpha=smooth(alpha)
+                alpha=alpha.unsqueeze(-1)
                 hq[ids]=self.support_waypoint_q[ids,i]*(1-alpha)+self.support_waypoint_q[ids,i+1]*alpha
             ids=selected&(t>=self.support_waypoint_times[-1]);hq[ids]=self.support_waypoint_q[ids,-1]
         if self.middle_support is not None:hq=self.middle_support.command(t,self._measurement,hq)
+        if self.postlift_regrasp:
+            selected=t>=self.regrasp_times[0]
+            for i,(first,last) in enumerate(zip(self.regrasp_times[:-1],self.regrasp_times[1:])):
+                ids=selected&(t>=first)&(t<last);alpha=((t[ids]-first)/(last-first)).unsqueeze(-1);aq[ids]=self.regrasp_arm[i]*(1-alpha)+self.regrasp_arm[i+1]*alpha
+            aq[t>=self.regrasp_times[-1]]=self.regrasp_arm[-1]
         return aq,hq
 
     def features(self):
@@ -565,6 +577,8 @@ class G2ContinuousScene:
             proposed_targets=self.bridge.known.initial+.04*executed
             proposed_targets[:,16:]=self.bridge.known.issued[:,16:]+.025*executed[:,16:]
             pressure_desired[ids]=proposed_targets[ids]
+            if self.postlift_regrasp and self.proprioceptive_pressure_spec.get('transfer_normal_from_known_arm_fk',False):
+                _,rotation=self.bridge.arm_fk(self.dof[:,self.arm_ids,0]);axis=self.tensor(np.asarray(self.postlift_regrasp['expected_knife_world'])[:3,1])[None].expand(self.n,-1);self.pressure_adapter.normal=quat_apply(quat_conjugate(rotation),axis)
             adjusted=self.pressure_adapter.command(self._measurement,self.command_target[:,self.hand_ids],pressure_desired,self.age.float()/30)
             hq[~active]=adjusted[~active]
             converted=(adjusted-self.bridge.known.initial)/.04

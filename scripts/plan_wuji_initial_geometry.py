@@ -10,7 +10,7 @@ import numpy as np
 from scipy.optimize import least_squares
 from scripts.g2_contact_geometry import DigitGeometry
 
-def adapt(estimate,plan,support,reference,thumb_contact_bias_m=None,support_surface_scaling=False):
+def adapt(estimate,plan,support,reference,thumb_contact_bias_m=None,support_surface_scaling=False,support_fingers=('index','middle','pinky')):
     assert estimate['source'] and estimate['uncertainty_m']>0
     size=np.asarray(estimate['handle_size_WTL_m'],dtype=float)
     assert size.shape==(3,) and np.all(size>0)
@@ -40,7 +40,8 @@ def adapt(estimate,plan,support,reference,thumb_contact_bias_m=None,support_surf
     assert bias.shape==(3,) and np.isfinite(bias).all()
     thumb_shift=center_delta+delta+np.array([0,(size[1]-base[1])/2,0])+bias
     q,errors['thumb']=solve(q,'thumb',thumb_shift)
-    for f in ['index','middle','pinky']:
+    for f in support_fingers:
+        assert f in ['index','middle','ring','pinky']
         point,_=surface(touch,f)
         shift=center_delta+np.array([np.sign(point[0])*(size[0]-base[0])/2,-(size[1]-base[1])/2,point[2]*(size[2]/base[2]-1)])
         if support_surface_scaling:

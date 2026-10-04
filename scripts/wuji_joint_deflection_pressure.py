@@ -58,7 +58,14 @@ class BatchedJointDeflectionPressure:
         update=((time>=8)&(time<float(self.spec['prefix_freeze_s'])))|(time>=16)
         error=float(self.spec['preferred_estimated_pressure_N'])-self.last_estimate
         error=torch.where(update&(error.abs()>float(self.spec['deadband_N'])),error,torch.zeros_like(error))
-        correction=float(self.spec['gain_per_frame'])*(jac.transpose(-1,-2)@(-self.normal*error[:,None])[:,:,None]).squeeze(-1)/self.kp
+        correction=(jac.transpose(-1,-2)@(-self.normal*error[:,None])[:,:,None]).squeeze(-1)/self.kp
+        if self.spec.get('normal_correction_coordinates')=='cartesian-normal':
+            compliance=(jac/self.kp[None,None])@jac.transpose(-1,-2)
+            scalar=(self.normal[:,:,None].transpose(-1,-2)@compliance@self.normal[:,:,None]).reshape(-1)
+            delta=-self.normal*(scalar*error)[:,None]
+            force=torch.linalg.solve(compliance+torch.eye(3,device=q.device,dtype=q.dtype)[None]*1e-9,delta[:,:,None])
+            correction=(jac.transpose(-1,-2)@force).squeeze(-1)/self.kp
+        correction*=float(self.spec['gain_per_frame'])
         bound=float(self.spec['maximum_joint_offset_rad']);self.offset=(self.offset+correction).clamp(-bound,bound)
         target=desired.clone();target[:,16:]+=self.offset-self.anchor
         target=torch.minimum(torch.maximum(target,self.lower),self.upper)
@@ -70,6 +77,10 @@ class NativeJointDeflectionPressure:
     def __init__(self,spec,normal_wrist,kp):
         self.model=BatchedJointDeflectionPressure(spec,1,'cpu',kp)
         self.model.reset(torch.tensor([0]),torch.as_tensor(normal_wrist,dtype=torch.float32).reshape(1,3))
+    @property
+    def normal(self):return self.model.normal[0].numpy().copy()
+    @normal.setter
+    def normal(self,value):self.model.normal[0]=torch.as_tensor(value,dtype=torch.float32)
     @property
     def offset(self):return self.model.offset[0].numpy().copy()
     @property
