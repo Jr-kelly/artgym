@@ -7,7 +7,7 @@
   "round_start_utc": "2026-10-03T20:03:23+00:00",
   "minimum_work_hours": 12,
   "earliest_12h_utc": "2026-10-04T08:03:23+00:00",
-  "phase": "Low-load held bidirectional behavior achieved; continuous pickup/preform and high-load retraction unresolved",
+  "phase": "Actual first loaded cycle established; learning coordinated lower lateral support on complete motor path, necessary noisy geometry pending",
   "baseline_local_commit": "b75e12effbfb5a9ce740411b5ec699db60338b3e",
   "baseline_github_commit": "d0d6ce01d5550ec5b512fdc4e510c5546569d8b4",
   "baseline_release": "wuji-g2-support-pressure-20261003-v1",
@@ -25,26 +25,31 @@
   "goal_complete": false,
   "active_jobs": [
     {
-      "name": "geometry-retained-pickup-opposed-index-v1-retry1",
+      "name": "actual-lower-side-fullmotor-joint-reset750-v2",
       "machine": "local",
-      "pid": 985285,
+      "pid": 1099230,
       "gpu": 0,
-      "start_utc": "2026-10-03T21:50:06.731461+00:00"
+      "start_utc": "2026-10-04T00:33:30.489733+00:00"
     }
   ],
   "no_subagents": true,
   "remote_root": "/home/wangjiarui/artgym-antirotation-grasp-20261004",
   "private_attachment_media": "/tmp/wuji-antirotation-attachment-20261004",
-  "next": "Commit explicitnewround source/docs, continue mechanicalgrasp entrywork",
+  "next": "Newmechanics pilot50 frozen behavior, representative common initial geometry checks, GitHub recoverable snapshot",
   "last_event": {
-    "utc": "2026-10-03T21:51:35.798920+00:00",
-    "event": "recoverable_source_snapshot_prepared",
+    "utc": "2026-10-04T00:36:09.917456+00:00",
+    "event": "new_fullmotor_support_learning_and_geometry_progress_recorded",
+    "phase": "Actual first loaded cycle established; learning coordinated lower lateral support on complete motor path, necessary noisy geometry pending",
     "evidence": "research/antirotation-grasp-20261004/PROGRESS.md",
-    "conclusion": "Code and honest development outcomes prepared for interim localcommit; no newRelease/fullcontinuous/gen claim.",
-    "next": "Commit explicitnewround source/docs, continue mechanicalgrasp entrywork"
+    "next": "Newmechanics pilot50 frozen behavior, representative common initial geometry checks, GitHub recoverable snapshot"
   },
   "resource_monitor_pid": 502,
   "resource_monitor_start_utc": "2026-10-03T20:15:18.833167+00:00",
-  "held_bidirectional_development_ready": true
+  "held_bidirectional_development_ready": true,
+  "github_branch": "feat/wuji-antirotation-grasp-20261004",
+  "github_commit": "a529c81573e00e96a8d893a57d5141c42fc34ebf",
+  "local_scientific_commit": "0f6d53ef7eda0a81cdec0d2240e666ab1fd2bda1",
+  "actual_table_integration_pipeline_pid": null,
+  "lower_side_direct_pipeline_pid": null
 }
 ```

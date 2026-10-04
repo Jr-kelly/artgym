@@ -13,7 +13,7 @@ def main():
    first,last=j['lift_preload_height_m'];height=first+(last-first)*u
    q=np.array(j['close_q'])*(1-u)+np.array(j['post_lift_close_q'])*u;current=w.copy();current[2,3]+=height;current[0,3]-=a.outward_per_height*height
   elif j.get('post_lift_preload_seconds'):
-   q=np.array(j['close_q'])*(1-u)+np.array(j['post_lift_close_q'])*u+np.sin(np.pi*u)*np.array(j.get('post_lift_preparation_joint_bump_rad',[0.]*20));current=w.copy();current[2,3]+=.16
+   q=np.array(j['close_q'])*(1-u)+np.array(j['post_lift_close_q'])*u+np.sin(np.pi*u)*np.array(j.get('post_lift_preparation_joint_bump_rad',[0.]*20));current=w.copy();current[2,3]+=j.get('post_lift_hand_height_m',.16)
   else:q=np.array(j['touch_q'])*(1-u)+np.array(j['close_q'])*u;current=w
   assert np.all(q>=g.w.lower+.005-1e-7) and np.all(q<=g.w.upper-.005+1e-7),'Original motor limits violated'
   frames=g.w.forward(q);bad=[]

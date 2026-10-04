@@ -1,0 +1,37 @@
+{
+  "all_feasible": false,
+  "known_motor_anchor": true,
+  "rows": [
+    {
+      "shift_m": 0.0,
+      "q_thumb": [
+        1.5538921750068333,
+        0.044345321176409706,
+        1.0531761988622,
+        -0.2623695225106397
+      ],
+      "point_motor_nominal_knife_m": [
+        -0.008610400067397321,
+        0.00247642266998205,
+        -0.025935672089589877
+      ],
+      "nominal_normal_relief_m": 0.0,
+      "facing": 0.9997086709561263,
+      "minimum_motor_self_gap_m": 1.5000000111994871e-05,
+      "maximum_joint_step_rad": 0.0,
+      "feasible": false,
+      "optimizer_success": true,
+      "message": "Known issued initial target retained"
+    }
+  ],
+  "travel_seconds": 4.0,
+  "source_plan_sha256": "a39e12c85977bba597ab9d68856fd3e1c30848c6dfb474f38ec10611ef3b099c",
+  "nominal_motor_start_point_m": [
+    -0.008610400067397321,
+    0.00247642266998205,
+    -0.025935672089589877
+  ],
+  "maximum_normal_relief_m": 0.0055,
+  "scope": "Known motor-point tangential stroke, with bounded normal relief.\n\nVirtual position targets may compress the knife, as finite PD preload does.\nOriginal physical collision, gravity and torque limits remain active in rollout.\nNo motor-point depth is presented as measured or constant pressure.\n",
+  "motor_target_scope": "Direct full40mm tangential virtualmotor trajectory; bounded normalrelief is not a force controller. No knife-target separation certificate, because virtualPDpreload may overlapobject; actualoriginalcollision/PD physics decides contact. Independent originalself/limit denseaudit required."
+}

@@ -1,0 +1,345 @@
+{
+  "scope": "Newactualcontinuouspilot fitting andfrozennominaldevelopment checks; never independentgen orrealrobot",
+  "rows": [
+    {
+      "variant": "span04-reset750",
+      "checkpoint_sha256": {
+        "50": "cb59efaab0f32ac566bd80cfd4a209987cc01b00f45b3bd5dcccbf6787c83179",
+        "100": "6d2da744d0a6ebf8c4c08bbc68f58826714d6ed8cfc6378268164a88294fd27b"
+      },
+      "final_update": 100,
+      "training_transitions": 26214400,
+      "training_episodes": 40146,
+      "training_full_complete_count": 0,
+      "frozen50_functional": {
+        "criterion": {
+          "version": 1,
+          "declared_utc": "2026-10-03T20:22:00+00:00",
+          "scope": "Functional two-cycle behavior, separately from unchanged historical 0.25rad world-pose regression; diagnostic held resets never qualify as pickup demos.",
+          "endpoint": {
+            "extension_min_m": 0.025,
+            "retraction_max_m": 0.008,
+            "command_travel_m": 0.04
+          },
+          "grip": {
+            "minimum_height_above_table_m": 0.03,
+            "relative_translation_envelope_m": 0.015,
+            "relative_rotation_envelope_rad": 0.6,
+            "cycle_return_translation_increment_max_m": 0.005,
+            "cycle_return_rotation_increment_max_rad": 0.1,
+            "final_hold_translation_speed_max_m_s": 0.003,
+            "final_hold_rotation_speed_max_rad_s": 0.06
+          },
+          "contact": {
+            "thumb_slider_substep_fraction_min": 0.9,
+            "maximum_contiguous_zero_contact_s": 0.5
+          },
+          "rationale": "15mm and 0.6rad are broad escape envelopes, not precision targets. Return-to-return drift <=5mm/0.10rad and last-second settling distinguish progressive slip from bounded new seating; both meaningful endpoints and sustained slider contact remain mandatory. World-pose legacy score is reported unchanged; active wrist motion is shown separately."
+        },
+        "trace_sha256": "8736328b1ed12eccea129bc24f29ff45e32992d6a5057280887163986baf1995",
+        "checks": {
+          "two_cycles": true,
+          "clear": true,
+          "relative_envelope": true,
+          "endpoints": false,
+          "bounded_return_drift": true,
+          "final_settling": true,
+          "thumb_contact": true
+        },
+        "functional_behavior_pass": false,
+        "continuous_pickup_demo_pass": false,
+        "held_diagnostic": false,
+        "legacy_full_success": false,
+        "slider_endpoints_m": {
+          "extend1": 0.0210285401130888,
+          "return1": 0.008653679412868931,
+          "extend2": 0.020878973432895853,
+          "return2": 0.008151193630960896
+        },
+        "relative_max_rotation_rad": 0.2378868760369861,
+        "relative_max_translation_m": 0.004283122522652925,
+        "active_wrist_max_rotation_rad": 0.00020832470076645408,
+        "return_to_return_rotation_rad": 0.04935531825581936,
+        "return_to_return_translation_m": 0.0006929097795478092,
+        "final_hold_translation_speed_m_s": 0.00014650087851886853,
+        "final_hold_rotation_speed_rad_s": 0.009138251179601136,
+        "thumb_contact_substep_fraction": 1.0,
+        "longest_zero_thumb_contact_s": 0.0
+      },
+      "frozen50_pressure": {
+        "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+        "physics_hz": 240,
+        "substeps_per_simulate": 1,
+        "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+        "finger_order": [
+          "thumb",
+          "index",
+          "middle",
+          "ring",
+          "pinky"
+        ],
+        "static_thumb_pressure_mean_N": 0.7933597111556803,
+        "operation_thumb_pressure_mean_N": 0.8021829513651594,
+        "operation_thumb_pressure_5th_percentile_N": 0.5972325798920809,
+        "operation_thumb_contact_substep_fraction": 1.0,
+        "operation_ring_underside_support_mean_N": 0.0,
+        "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+      }
+    },
+    {
+      "variant": "span12-reset750",
+      "checkpoint_sha256": {
+        "50": "cdd580a4245fcf09d18f97bc82a2bccd0eca57ad63c9f9708b9b83de6722c4d3",
+        "100": "d892dd2e1057371202c6c033bc6e6d74bd9fa454e4111e4eeea2cb658d486762"
+      },
+      "final_update": 100,
+      "training_transitions": 26214400,
+      "training_episodes": 42944,
+      "training_full_complete_count": 0,
+      "frozen50_functional": {
+        "criterion": {
+          "version": 1,
+          "declared_utc": "2026-10-03T20:22:00+00:00",
+          "scope": "Functional two-cycle behavior, separately from unchanged historical 0.25rad world-pose regression; diagnostic held resets never qualify as pickup demos.",
+          "endpoint": {
+            "extension_min_m": 0.025,
+            "retraction_max_m": 0.008,
+            "command_travel_m": 0.04
+          },
+          "grip": {
+            "minimum_height_above_table_m": 0.03,
+            "relative_translation_envelope_m": 0.015,
+            "relative_rotation_envelope_rad": 0.6,
+            "cycle_return_translation_increment_max_m": 0.005,
+            "cycle_return_rotation_increment_max_rad": 0.1,
+            "final_hold_translation_speed_max_m_s": 0.003,
+            "final_hold_rotation_speed_max_rad_s": 0.06
+          },
+          "contact": {
+            "thumb_slider_substep_fraction_min": 0.9,
+            "maximum_contiguous_zero_contact_s": 0.5
+          },
+          "rationale": "15mm and 0.6rad are broad escape envelopes, not precision targets. Return-to-return drift <=5mm/0.10rad and last-second settling distinguish progressive slip from bounded new seating; both meaningful endpoints and sustained slider contact remain mandatory. World-pose legacy score is reported unchanged; active wrist motion is shown separately."
+        },
+        "trace_sha256": "fa3c2779f68e0c5034df3785f6f4b776f5d2a54ff9bb67fa6e2d4879c74ddad5",
+        "checks": {
+          "two_cycles": true,
+          "clear": true,
+          "relative_envelope": true,
+          "endpoints": false,
+          "bounded_return_drift": true,
+          "final_settling": true,
+          "thumb_contact": true
+        },
+        "functional_behavior_pass": false,
+        "continuous_pickup_demo_pass": false,
+        "held_diagnostic": false,
+        "legacy_full_success": false,
+        "slider_endpoints_m": {
+          "extend1": 0.020963583157477095,
+          "return1": 0.008588983227578117,
+          "extend2": 0.020795722507950976,
+          "return2": 0.007915863317516758
+        },
+        "relative_max_rotation_rad": 0.2481811128115497,
+        "relative_max_translation_m": 0.004281172762950745,
+        "active_wrist_max_rotation_rad": 0.0002092290975364633,
+        "return_to_return_rotation_rad": 0.05445917017098947,
+        "return_to_return_translation_m": 0.0007845509029882988,
+        "final_hold_translation_speed_m_s": 0.00013235657535075988,
+        "final_hold_rotation_speed_rad_s": 0.004294550302189511,
+        "thumb_contact_substep_fraction": 1.0,
+        "longest_zero_thumb_contact_s": 0.0
+      },
+      "frozen50_pressure": {
+        "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+        "physics_hz": 240,
+        "substeps_per_simulate": 1,
+        "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+        "finger_order": [
+          "thumb",
+          "index",
+          "middle",
+          "ring",
+          "pinky"
+        ],
+        "static_thumb_pressure_mean_N": 0.8000327363427897,
+        "operation_thumb_pressure_mean_N": 0.7942385333727462,
+        "operation_thumb_pressure_5th_percentile_N": 0.5907993585285567,
+        "operation_thumb_contact_substep_fraction": 1.0,
+        "operation_ring_underside_support_mean_N": 0.0,
+        "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+      }
+    },
+    {
+      "variant": "span12-retain750",
+      "checkpoint_sha256": {
+        "50": "075928c5a257632529d6f74eb84451f54fea1f3551f73a0b53052ded42c0185d",
+        "100": "1582fea895a632f0672814acf5e962435a7e7646e6c1659c790212443887edf3"
+      },
+      "final_update": 100,
+      "training_transitions": 26214400,
+      "training_episodes": 42559,
+      "training_full_complete_count": 0,
+      "frozen50_functional": {
+        "criterion": {
+          "version": 1,
+          "declared_utc": "2026-10-03T20:22:00+00:00",
+          "scope": "Functional two-cycle behavior, separately from unchanged historical 0.25rad world-pose regression; diagnostic held resets never qualify as pickup demos.",
+          "endpoint": {
+            "extension_min_m": 0.025,
+            "retraction_max_m": 0.008,
+            "command_travel_m": 0.04
+          },
+          "grip": {
+            "minimum_height_above_table_m": 0.03,
+            "relative_translation_envelope_m": 0.015,
+            "relative_rotation_envelope_rad": 0.6,
+            "cycle_return_translation_increment_max_m": 0.005,
+            "cycle_return_rotation_increment_max_rad": 0.1,
+            "final_hold_translation_speed_max_m_s": 0.003,
+            "final_hold_rotation_speed_max_rad_s": 0.06
+          },
+          "contact": {
+            "thumb_slider_substep_fraction_min": 0.9,
+            "maximum_contiguous_zero_contact_s": 0.5
+          },
+          "rationale": "15mm and 0.6rad are broad escape envelopes, not precision targets. Return-to-return drift <=5mm/0.10rad and last-second settling distinguish progressive slip from bounded new seating; both meaningful endpoints and sustained slider contact remain mandatory. World-pose legacy score is reported unchanged; active wrist motion is shown separately."
+        },
+        "trace_sha256": "6cab8787d8d9e21e8a7bb0b85fa9db560d0e60878223ec6b53f335ec06bb1675",
+        "checks": {
+          "two_cycles": true,
+          "clear": true,
+          "relative_envelope": true,
+          "endpoints": false,
+          "bounded_return_drift": true,
+          "final_settling": true,
+          "thumb_contact": true
+        },
+        "functional_behavior_pass": false,
+        "continuous_pickup_demo_pass": false,
+        "held_diagnostic": false,
+        "legacy_full_success": false,
+        "slider_endpoints_m": {
+          "extend1": 0.02078842978653045,
+          "return1": 0.005498433967200234,
+          "extend2": 0.02071399150144787,
+          "return2": 0.005857385245231106
+        },
+        "relative_max_rotation_rad": 0.24319482573034715,
+        "relative_max_translation_m": 0.004540650680931919,
+        "active_wrist_max_rotation_rad": 0.0002559781317625746,
+        "return_to_return_rotation_rad": 0.03552235114431451,
+        "return_to_return_translation_m": 0.0006334458970712432,
+        "final_hold_translation_speed_m_s": 0.0006273662740645928,
+        "final_hold_rotation_speed_rad_s": 0.05464893313433667,
+        "thumb_contact_substep_fraction": 1.0,
+        "longest_zero_thumb_contact_s": 0.0
+      },
+      "frozen50_pressure": {
+        "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+        "physics_hz": 240,
+        "substeps_per_simulate": 1,
+        "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+        "finger_order": [
+          "thumb",
+          "index",
+          "middle",
+          "ring",
+          "pinky"
+        ],
+        "static_thumb_pressure_mean_N": 0.9139900600179375,
+        "operation_thumb_pressure_mean_N": 0.8874594223130587,
+        "operation_thumb_pressure_5th_percentile_N": 0.7063736511156296,
+        "operation_thumb_contact_substep_fraction": 1.0,
+        "operation_ring_underside_support_mean_N": 0.0,
+        "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+      }
+    },
+    {
+      "variant": "span12-fresh",
+      "checkpoint_sha256": {
+        "50": "6b8cca2194a016364a5cd9f6cd540bb349f6e76b5046f427505f1d46bcceca8f",
+        "100": "b32bacb409679b94d6fceec6597b5c00f16cbee5dc07c767e710e405b325f8bf"
+      },
+      "final_update": 100,
+      "training_transitions": 26214400,
+      "training_episodes": 52928,
+      "training_full_complete_count": 0,
+      "frozen50_functional": {
+        "criterion": {
+          "version": 1,
+          "declared_utc": "2026-10-03T20:22:00+00:00",
+          "scope": "Functional two-cycle behavior, separately from unchanged historical 0.25rad world-pose regression; diagnostic held resets never qualify as pickup demos.",
+          "endpoint": {
+            "extension_min_m": 0.025,
+            "retraction_max_m": 0.008,
+            "command_travel_m": 0.04
+          },
+          "grip": {
+            "minimum_height_above_table_m": 0.03,
+            "relative_translation_envelope_m": 0.015,
+            "relative_rotation_envelope_rad": 0.6,
+            "cycle_return_translation_increment_max_m": 0.005,
+            "cycle_return_rotation_increment_max_rad": 0.1,
+            "final_hold_translation_speed_max_m_s": 0.003,
+            "final_hold_rotation_speed_max_rad_s": 0.06
+          },
+          "contact": {
+            "thumb_slider_substep_fraction_min": 0.9,
+            "maximum_contiguous_zero_contact_s": 0.5
+          },
+          "rationale": "15mm and 0.6rad are broad escape envelopes, not precision targets. Return-to-return drift <=5mm/0.10rad and last-second settling distinguish progressive slip from bounded new seating; both meaningful endpoints and sustained slider contact remain mandatory. World-pose legacy score is reported unchanged; active wrist motion is shown separately."
+        },
+        "trace_sha256": "235e30ff294f81c47ff2c3f0c3928e1489837a5169dc2e88f2c339aa63914787",
+        "checks": {
+          "two_cycles": true,
+          "clear": true,
+          "relative_envelope": true,
+          "endpoints": false,
+          "bounded_return_drift": true,
+          "final_settling": true,
+          "thumb_contact": true
+        },
+        "functional_behavior_pass": false,
+        "continuous_pickup_demo_pass": false,
+        "held_diagnostic": false,
+        "legacy_full_success": false,
+        "slider_endpoints_m": {
+          "extend1": 0.02122647037458153,
+          "return1": 0.007840383348134472,
+          "extend2": 0.020956654583183243,
+          "return2": 0.007894826603201344
+        },
+        "relative_max_rotation_rad": 0.2809940197519891,
+        "relative_max_translation_m": 0.004493748498346027,
+        "active_wrist_max_rotation_rad": 0.00022807382135238102,
+        "return_to_return_rotation_rad": 0.026553506805896847,
+        "return_to_return_translation_m": 0.0005028339799448285,
+        "final_hold_translation_speed_m_s": 0.0001581377349067778,
+        "final_hold_rotation_speed_rad_s": 0.0071473080575461395,
+        "thumb_contact_substep_fraction": 1.0,
+        "longest_zero_thumb_contact_s": 0.0
+      },
+      "frozen50_pressure": {
+        "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+        "physics_hz": 240,
+        "substeps_per_simulate": 1,
+        "sample_scope": "Every actualphysicalstep, arithmeticmean/min/max over8substeps at240Hz; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+        "finger_order": [
+          "thumb",
+          "index",
+          "middle",
+          "ring",
+          "pinky"
+        ],
+        "static_thumb_pressure_mean_N": 0.8899795679203086,
+        "operation_thumb_pressure_mean_N": 0.7880358864869321,
+        "operation_thumb_pressure_5th_percentile_N": 0.6259639314025296,
+        "operation_thumb_contact_substep_fraction": 1.0,
+        "operation_ring_underside_support_mean_N": 0.0,
+        "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+"""Generate explicit simulated initial observations, then common two-stage IK."""
+import json,numpy as np
+from pathlib import Path
+from scripts.adapt_wuji_two_stage_initial_geometry import adapt_two_stage
+from scripts.record_wuji_antirotation_goal import record
+B=Path('runs/antirotation-grasp-20261004');D=Path('research/antirotation-grasp-20261004');out=B/'initial-geometry-v2';out.mkdir(parents=True,exist_ok=False);scene=json.loads((D/'actual-table-lower-side-scene-v2.json').read_text());op=json.loads((B/'continuous-plans-v6/lower-side-calibrated/settled-operation-grasp.json').read_text());ref=json.loads((B/'continuous-plans-v6/lower-side-calibrated/reference-v1.json').read_text());rng=np.random.default_rng(2026100481);records=[];instances=[]
+for sid in ['t0000','t0001','t0002','t0003','t0005','t0007','t0009','t0011']:
+ # Simulator sensor generation only; these private data never enter planner.
+ truth=json.loads((Path('assets/objects/knife_wuji_dense_under_20261003')/sid/'parameters.json').read_text())
+ for sample in range(4):
+  size=np.array(truth['handle_size'])+rng.uniform(-1,1,3)*[.00025,.00025,.0005];delta=np.array(truth['slider_origin'])-[0,.0075,.010624586881962734];delta[1]-=(truth['handle_size'][1]-.012)/2;delta+=rng.uniform(-.00025,.00025,3)
+  estimate=dict(handle_size_WTL_m=size.tolist(),slider_contact_shift_m=delta.tolist(),initial_object_center_shift_knife_m=[0,float((size[1]-.012)/2),0],uncertainty_m=.00025,source='Synthetic noisy initial observation only; W/T +/-0.25mm,L +/-0.5mm,sliderXYZ +/-0.25mm. Physical metadata used only by simulated sensor generator; no physical-ID planner/actor input and no connected real vision.')
+  row=adapt_two_stage(estimate,scene['plan'],op,ref);records.append(row);instances.append(sid);(out/('observation-%02d.json'%(len(records)-1))).write_text(json.dumps(row,indent=2));print(json.dumps({'observations':len(records),'pickup_errors_m':row['audit']['pickup']['contact_errors_m'],'operation_errors_m':row['audit']['operation']['contact_errors_m'],'thumb_path_max_error_m':row['audit']['operation']['trajectory_max_error_m']}),flush=True)
+scene.update(scope='Initial noisy estimate guided common motor planning; no runtime object/contact truth or assetID actor input',initial_estimated_plans=records,observation_seed=2026100481);(out/'scene32.json').write_text(json.dumps(scene,indent=2));(out/'schedule32.json').write_text(json.dumps({'instances':instances,'scope':'Train-only physical loading; four noisy observations per geometry, identity excluded from planner/actor'},indent=2));record('two_stage_noisy_initial_geometry_targets_prepared',evidence=str(out),config={'observations':32,'physical_train_geometries':8,'collision_scope':'IK targets only; no nominal collision certificate reused'},next='Check representative adapted original self/table paths; reject impossible geometry before training; evaluate actual pickup/contact')

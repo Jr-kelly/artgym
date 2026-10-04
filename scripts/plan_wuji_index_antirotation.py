@@ -10,9 +10,10 @@ from scipy.spatial import ConvexHull
 from scripts.g2_contact_geometry import DigitGeometry
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--plan',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
+ p=argparse.ArgumentParser();p.add_argument('--side-contact-y',type=float,default=-.001,help='Sideface contact height, within original12mm body; does not add bottom normal');p.add_argument('--side-only',action='store_true',help='Only the focused lateral contact candidate');p.add_argument('--plan',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args();assert -.0055<=a.side_contact_y<=.0055;a.output.mkdir(parents=True,exist_ok=False)
  j=json.loads(a.plan.read_text());g=DigitGeometry(max_face_axes=10000,knife_spec='research/robust-knife-family-20261003/real-knife-asset-spec.json');h=g.w;w=np.array(j['wrist_in_knife']);q0=np.array(j['touch_q']);v=np.concatenate([v for v,_ in g.meshes['hand_r_index_pad_link']]);hull=ConvexHull(v);centers=v[hull.simplices].mean(1);normals=hull.equations[:,:3];rng=np.random.default_rng(2026100451);results=[]
- for name,n,target in [('left-corner',np.array([-1.,-1.,0])/np.sqrt(2),np.array([-.0082,-.0062,.035])),('left-side',np.array([-1.,0.,0]),np.array([-.0082,-.001,.035]))]:
+ candidates=[('left-corner',np.array([-1.,-1.,0])/np.sqrt(2),np.array([-.0082,-.0062,.035])),('left-side',np.array([-1.,0.,0]),np.array([-.0082,a.side_contact_y,.035]))]
+ for name,n,target in (candidates[1:] if a.side_only else candidates):
   def sample(x):
    q=q0.copy();q[:4]=x;mat=w@h.forward(q)['hand_r_index_pad_link'];vertices=v@mat[:3,:3].T+mat[:3,3];pr=vertices@n;weight=np.exp(-(pr-pr.min())/.0002);point=weight@vertices/weight.sum();fc=centers@mat[:3,:3].T+mat[:3,3];support=fc@n<=pr.min()+.0004;facing=float((normals@mat[:3,:3].T@(-n))[support].max()) if support.any() else -1.;knife=g.minimum_gap(q,w,j['planning_slider_m'],'index');selfgap=min(r['gap_lower_bound_m'] for r in g.self_gaps(q,'index',certify_clearance_m=.000015));return point,facing,knife,selfgap
   def errors(x):

@@ -10,7 +10,7 @@ import numpy as np
 from scipy.optimize import least_squares
 from scripts.g2_contact_geometry import DigitGeometry
 
-def adapt(estimate,plan,support,reference,thumb_contact_bias_m=None):
+def adapt(estimate,plan,support,reference,thumb_contact_bias_m=None,support_surface_scaling=False):
     assert estimate['source'] and estimate['uncertainty_m']>0
     size=np.asarray(estimate['handle_size_WTL_m'],dtype=float)
     assert size.shape==(3,) and np.all(size>0)
@@ -43,6 +43,14 @@ def adapt(estimate,plan,support,reference,thumb_contact_bias_m=None):
     for f in ['index','middle','pinky']:
         point,_=surface(touch,f)
         shift=center_delta+np.array([np.sign(point[0])*(size[0]-base[0])/2,-(size[1]-base[1])/2,point[2]*(size[2]/base[2]-1)])
+        if support_surface_scaling:
+            # Side contacts follow the side face; tangential coordinates scale
+            # with body dimensions. Do not move a side-only index contact to
+            # the bottom face when thickness changes.
+            normal=normals[['thumb','index','middle','ring','pinky'].index(f)]
+            shift=center_delta+point*(size/base-1)
+            for axis in [0,1]:
+                if abs(normal[axis])>.5:shift[axis]=center_delta[axis]+np.sign(point[axis])*(size[axis]-base[axis])/2
         q,errors[f]=solve(q,f,shift)
     close=np.clip(q+np.asarray(plan['close_q'])-touch,h.lower+1e-4,h.upper-1e-4)
     opened=np.clip(np.asarray(plan['open_q'])+q-touch,h.lower+1e-4,h.upper-1e-4)
@@ -53,6 +61,8 @@ def adapt(estimate,plan,support,reference,thumb_contact_bias_m=None):
     ref=copy.deepcopy(reference);trajectory_errors=[]
     for row in ref['rows']:
         nominal=touch.copy();nominal[16:]=row['q_thumb'];adapted,error=solve(nominal,'thumb',thumb_shift)
+        if ref.get('posture_preload'):
+            row['q_thumb_preloaded']=(adapted[16:]+np.asarray(row['q_thumb_preloaded'])-np.asarray(row['q_thumb'])).tolist()
         row['q_thumb']=adapted[16:].tolist();trajectory_errors.append(error)
         for key in ['minimum_knife_gap_m','minimum_self_gap_m','pad_facing_cosine','maximum_joint_step_rad','message','optimizer_success']:row.pop(key,None)
         row['point_error_m']=error;row['feasible']=error<.00025
@@ -61,12 +71,16 @@ def adapt(estimate,plan,support,reference,thumb_contact_bias_m=None):
     if thumb_contact_bias_m is not None:ref['planned_thumb_contact_bias_knife_m']=bias.tolist()
     ref['all_feasible']=all(row['feasible'] for row in ref['rows'])
     ref['all_feasible_scope']='IK accuracy and original joint limits only; original nominal collision certificates not reused. Full physical rollout required.'
+    if ref.get('posture_preload'):
+        # The nominal certificate cannot authorize the changed motor path.
+        ref['motor_geometry_passed']=False
     audit=dict(input=estimate,planned_thumb_contact_bias_knife_m=bias.tolist(),contact_errors_m=errors,trajectory_max_error_m=max(trajectory_errors),no_physical_asset_read=True,scope='Estimated initial geometry adaptation, original nominal joint-preload offsets retained; not force regulation, collision/contact feasibility unproven')
+    audit['support_surface_scaling']=support_surface_scaling
     return result,pressure,ref,audit
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--estimate',type=Path,required=True);p.add_argument('--plan',type=Path,required=True);p.add_argument('--support',type=Path,required=True);p.add_argument('--reference',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
-    values=adapt(*[json.loads(x.read_text()) for x in [a.estimate,a.plan,a.support,a.reference]])
+    p=argparse.ArgumentParser();p.add_argument('--support-surface-scaling',action='store_true',help='Follow actual side/bottom contact normals when adapting support dimensions');p.add_argument('--estimate',type=Path,required=True);p.add_argument('--plan',type=Path,required=True);p.add_argument('--support',type=Path,required=True);p.add_argument('--reference',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+    values=adapt(*[json.loads(x.read_text()) for x in [a.estimate,a.plan,a.support,a.reference]],support_surface_scaling=a.support_surface_scaling)
     a.output.mkdir(parents=True,exist_ok=False)
     for name,value in zip(['motor-plan.json','support.json','reference.json','audit.json'],values):(a.output/name).write_text(json.dumps(value,indent=2))
     print(json.dumps(values[-1],indent=2))

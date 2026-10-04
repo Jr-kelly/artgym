@@ -14,7 +14,7 @@ def main():
     p.add_argument('--resample-initial-estimates',action='store_true',help='At episode reset only, draw another labelled noisy initial observation from same-geometry synthetic sensor bank; no actor asset ID')
     p.add_argument('--fresh-sampling-seed',type=int,help='Explicit matched freshoptimizer pilot samplingstream reset after differing inputlayer initialization; requires initialize-model-from')
     p.add_argument('--support-load-features',action='store_true',help='Append9 legal PD/FK/history model features: threeestimatednormal loads, settledreferences, torque residuals; no trueforce/contact input')
-    p.add_argument('--support-delta-coordinates',choices=['joint','normal'],help='Matched bounded correction around frozen750 support actor; normal uses fixed initial estimatedFK basis, no forcefeedback')
+    p.add_argument('--support-delta-coordinates',choices=['joint','normal','contact-normal'],help='Joint/normal retain frozen support prior; contact-normal uses initial estimated contact directions without frozen prior, no force feedback')
     p.add_argument('--gae-lambda',type=float,default=.95,help='Explicit temporal credit horizon; identical across paired preparation pilots')
     p.add_argument('--support-latch-after-preparation',action='store_true',default=None,help='Support motor residual decision stops after known16s; thumb remains30Hz, actual history continues. Position retention is not constant force.')
     p.add_argument('--support-command-period',type=int,choices=[1,5],default=None,help='Default restores savedperiod onresume, otherwise1. Support decisions every1or5 known30Hz frames; thumb remains30Hz, jointdecision PPO log/KL masks excludeheld coordinates')
@@ -101,6 +101,14 @@ def main():
     if a.support_delta_coordinates is not None:
         assert a.initialize_model_from and not a.resume and a.scene=="g2" and a.action_parameterization=="bounded-motor-offset" and not a.support_load_features and not a.history_features
         delta_spec=dict(mode=a.support_delta_coordinates,reference_actor_state={k:v.detach().cpu().clone() for k,v in model.actor.state_dict().items()},reference_weight_sha256=hashlib.sha256(a.initialize_model_from.read_bytes()).hexdigest(),scope="Fixed legal-input support actor plus boundedlearnedcorrection; initialestimatednormal/FK coordinatebasis, original.04rad supportspan and limits. No forcefeedback.")
+        if a.support_delta_coordinates=='contact-normal':
+            normals=system.scene_spec.get('support_contact_normals_knife')
+            assert normals is not None and set(normals)=={'index','middle','pinky'}, 'Contact-normal requires explicit initial model contact directions'
+            for normal in normals.values():
+                assert abs(np.linalg.norm(normal)-1)<1e-6 and abs(normal[2])<1e-6
+            delta_spec.update(reference_actor_state=None,controller_span_rad=system.bridge.known.support_span,contact_normals_knife=normals,scope='Bounded correction in fixed initial estimated contact-normal/FK basis, no frozen support actor prior; original physical actuator limits and actual issued action history; no force feedback or current object truth')
+        else:
+            assert system.bridge.known.support_span==.04, 'Legacy support-prior coordinates require original span'
         with torch.no_grad():model.actor[-1].weight[:16].zero_();model.actor[-1].bias[:16].zero_()
     if delta_spec is not None:
         from scripts.wuji_support_delta_coordinates import SupportDeltaCoordinates

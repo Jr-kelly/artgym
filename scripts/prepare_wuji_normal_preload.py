@@ -12,7 +12,7 @@ from scripts.g2_contact_geometry import DigitGeometry
 from scripts.wuji_kinematics import FINGERS
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--retain-support-target-from',type=Path,help='Keep original finite supportmotor targets while recomputing thumb normalpreload; no forceclaim');p.add_argument('--plan',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--project-thumb-self',action='store_true');p.add_argument('--project-active-self',action='store_true',help='Project all requested nonzero nominalfingerloads within originalselfgeometry; forces remain unmeasured');p.add_argument('--normal-preferences',type=float,nargs=5,default=[.9,.4,.55,0.,.5]);a=p.parse_args();assert not a.output.exists();j=json.loads(a.plan.read_text());g=DigitGeometry(max_face_axes=10000,knife_spec='research/robust-knife-family-20261003/real-knife-asset-spec.json');h=g.w;q=np.array(j['touch_q']);w=np.array(j['wrist_in_knife']);normal=np.array(j['contact_normals']);kp=np.array(OmegaConf.load('isaacgymenvs/cfg/hand/wuji_paper_official_actuator.yaml').dof_props.stiffness)
+ p=argparse.ArgumentParser();p.add_argument('--retain-thumb-target',action='store_true',help='Retain supplied known thumb target for index-only insertion, requires zero thumb preference');p.add_argument('--retain-support-target-from',type=Path,help='Keep original finite supportmotor targets while recomputing thumb normalpreload; no forceclaim');p.add_argument('--plan',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--project-thumb-self',action='store_true');p.add_argument('--project-active-self',action='store_true',help='Project all requested nonzero nominalfingerloads within originalselfgeometry; forces remain unmeasured');p.add_argument('--normal-preferences',type=float,nargs=5,default=[.9,.4,.55,0.,.5]);a=p.parse_args();assert not a.output.exists();j=json.loads(a.plan.read_text());g=DigitGeometry(max_face_axes=10000,knife_spec='research/robust-knife-family-20261003/real-knife-asset-spec.json');h=g.w;q=np.array(j['touch_q']);w=np.array(j['wrist_in_knife']);normal=np.array(j['contact_normals']);kp=np.array(OmegaConf.load('isaacgymenvs/cfg/hand/wuji_paper_official_actuator.yaml').dof_props.stiffness)
  def points(q):
   frames=h.forward(q);out=[]
   for f,n in zip(FINGERS,normal):
@@ -27,6 +27,9 @@ def main():
   retained=np.array(json.loads(a.retain_support_target_from.read_text())['close_q'])
   for f,start in [('index',0),('middle',4),('pinky',8),('ring',12)]:
    if preference[FINGERS.index(f)]==0:target[start:start+4]=retained[start:start+4]
+ if a.retain_thumb_target:
+  assert a.retain_support_target_from and preference[0]==0 and not a.project_thumb_self
+  target[16:]=retained[16:]
  projection=None
  if a.project_thumb_self:
   nominal=target.copy();force_map=np.linalg.pinv(jac[0,:,16:].T)

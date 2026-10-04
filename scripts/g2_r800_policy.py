@@ -68,7 +68,8 @@ class G2R800Policy(FrozenPolicy):
             self.known.configure_support(controller.get('support_span_rad',.04),controller.get('support_step_rad'))
             if self.known.support_span>.04:
                 assert self.action_parameterization=='bounded-motor-offset' and saved.get('action_base_mode')=='geometric'
-                assert self.pressure_adapter is None and self.support_delta_coordinates is None and self.proprioceptive_pressure_spec is None
+                assert self.pressure_adapter is None and self.proprioceptive_pressure_spec is None
+                assert self.support_delta_coordinates is None or self.support_delta_coordinates.spec.get('controller_span_rad',.04)==self.known.support_span
                 cfg.task.env.supportActionSpan=self.known.support_span
             if support_residual_scale_override is not None:
                 assert self.action_parameterization=='bounded-motor-offset'
