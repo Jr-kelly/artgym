@@ -18,7 +18,7 @@ bash research/antirotation-grasp-20261004/RUN-V17.sh runs/antirotation-grasp-202
 
 同一初始估计只能应用一次：传入 nominal-calibration.json 后由运行器处理计划中的 initial_geometry_estimate；不得先手工修正该 calibration 再让运行器重复修正。旧回程分支的关节线性混合因原始自碰撞已拒绝，当前控制器使用单条连续参考路径。
 
-续接先读 WUJI_GOAL_HANDOFF.md 和本目录STATE/PROGRESS；PID和利用率都须重新核验。最终Release尚在整理，已推送代码快照不等同于整个研究目标完成。
+续接先读 WUJI_GOAL_HANDOFF.md 和本目录STATE/PROGRESS；PID和利用率都须重新核验。正式交付以同名Release及DELIVERY-RECEIPT.json为准；代码和交付完成不等同于整个研究目标完成。
 
 
 新增统一入口（从本轮Release源码启动，先在仓库根解压 runtime-v2 与 evidence 配置包，激活已有合法Isaac Gym环境）：
@@ -36,7 +36,7 @@ python -m scripts.run_wuji_antirotation_delivery_demo --case thin-failure --outp
 
 完整24初始估计/12物理形态配置：`runs/antirotation-grasp-20261004/complete-necessary-geometry24-v1/{scene24.json,registry.json,schedule1536.json}`；每个形态两次独立带噪声初始估计，重采样只在新回合。该配置本轮尚未训练，不包含能通过高度全范围的权重。它是继续有意义几何训练的准备，不是泛化成果。
 
-可浏览报告及四个带力字幕双视角MP4单独公开；movies包同时保留原全景/手部近景，未剪切、不拼阶段。字幕使用评估真值，并明确法向贡献不含摩擦牵引力、容量不等于实物阻力。旧轮V138参数与本轮不匹配，仅作接触形态对照。
+可浏览报告及六个带力字幕双视角MP4随正式Release公开；movies包同时保留原全景/手部近景，未剪切、不拼阶段。字幕使用评估真值，并明确法向贡献不含摩擦牵引力、容量不等于实物阻力。旧轮V138参数与本轮不匹配，仅作接触形态对照。
 
 
 新5秒接管和有限无名指关节滞后搜索的代表性失败也使用统一入口，不改变原判据：
@@ -55,3 +55,22 @@ python -m scripts.resume_wuji_antirotation_training --range 04 --updates 51 --ou
 ```
 
 同样可用`--range 12`查看对应命令，只有range04本轮作过实际恢复检查。入口默认只再执行一个真实训练更新，开始新物理回合；不是建议延长已失败的训练路线。没有默认无限续训、SDK或机器人动作。
+
+
+最新必要24模板/12形态的冻结25对照：`--candidate necessary24-frozen-thumb`或`necessary24-joint`可打印对应恢复命令。默认只再做25→26一个更新；这两个候选没有逐一实际恢复测试，实际恢复证据仍是前述range04的50→51。
+
+```bash
+python -m scripts.resume_wuji_antirotation_training --candidate necessary24-frozen-thumb --output runs/antirotation-grasp-20261004/my-necessary-recovery --show-command
+```
+
+learning包另保存`runs/antirotation-grasp-20261004/necessary24-preserved-thumb-v1/training-source/`，是本次远端真实传输的649c723源脚本字节及清单（约5MB），不是全仓历史审计。当前Tag会有新增展示/恢复脚本，科学控制核心按job身份里的SHA恢复；若需完整原训练脚本版本，在新的隔离克隆中使用该快照。物理资产与24场景/schedule/registry分别来自当前源码和evidence配置包。
+
+
+必要24形态新25更新的代表性失败：
+
+```bash
+python -m scripts.run_wuji_antirotation_delivery_demo --case necessary24-support-failure --output runs/antirotation-grasp-20261004/my-necessary-support-failure
+python -m scripts.run_wuji_antirotation_delivery_demo --case necessary24-joint-thin-failure --output runs/antirotation-grasp-20261004/my-necessary-joint-thin-failure
+```
+
+解压learning中的对应25权重；两组均未达完整名义/薄/高度门槛，已停止，不替换原750。三条件逐项命令和原始视频在jobs/necessary24-frozen25-*及necessary24-frozen25-development-v1；这些是已知训练形态的冻结开发，不是此前四个新联合条件的独立结果。

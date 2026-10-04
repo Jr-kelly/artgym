@@ -5,17 +5,24 @@ R=Path(__file__).resolve().parents[1]
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--range',choices=['04','12'],default='04')
+    p.add_argument('--candidate',choices=['range04','range12','necessary24-frozen-thumb','necessary24-joint'],help='Explicit retained experiment; new necessary24 defaults to one update25->26')
     p.add_argument('--output',type=Path,required=True)
-    p.add_argument('--updates',type=int,default=51,help='Total updates including retained50; original candidates were negative and are not promoted by recovery')
+    p.add_argument('--updates',type=int,help='Total updates including retained checkpoint; default one material recovery update, never automatic candidate promotion')
     p.add_argument('--show-command',action='store_true');a=p.parse_args()
-    name='strict16-table-prior-closure-longhorizon-range'+a.range+'-reset750-'+('v8' if a.range=='04' else 'v9')
+    candidate=a.candidate or 'range'+a.range
+    necessary=candidate.startswith('necessary24-');start=25 if necessary else 50
+    if necessary:name='necessary24-retained750-'+candidate[len('necessary24-'):]+'-frozen25-v3'
+    else:
+        selected=candidate[-2:];name='strict16-table-prior-closure-longhorizon-range'+selected+'-reset750-'+('v8' if selected=='04' else 'v9')
     identity=R/'runs/antirotation-grasp-20261004/jobs'/name/'identity.json'
     cmd=json.loads(identity.read_text())['command'];cmd[0]=sys.executable
-    assert cmd[1:3]==['-m','scripts.train_wuji_robust_residual'] and a.updates>50
-    cmd[cmd.index('--output')+1]=str(a.output.resolve());cmd[cmd.index('--updates')+1]=str(a.updates)
-    i=cmd.index('--initialize-model-from');del cmd[i:i+2];cmd.remove('--reset-residual-head')
-    checkpoint=Path('runs/antirotation-grasp-20261004/train')/name/'update_000050.pth';cmd+=['--resume',str(checkpoint)]
-    print(json.dumps({'command':cmd,'scope':'Experimental negative50 candidate. Model/Adam/CPU-CUDA-NumPy/per-scene RNG restored; new physical episodes, no bitwise solver-state or behavior success claim.'}),flush=True)
+    total=a.updates if a.updates is not None else start+1
+    assert cmd[1:3]==['-m','scripts.train_wuji_robust_residual'] and total>start
+    cmd[cmd.index('--output')+1]=str(a.output.resolve());cmd[cmd.index('--updates')+1]=str(total)
+    i=cmd.index('--initialize-model-from');del cmd[i:i+2]
+    if '--reset-residual-head' in cmd:cmd.remove('--reset-residual-head')
+    checkpoint=Path('runs/antirotation-grasp-20261004/train')/name/('update_%06d.pth'%start);cmd+=['--resume',str(checkpoint)]
+    print(json.dumps({'candidate':candidate,'command':cmd,'scope':'Experimental checkpoint recovery only. Model/Adam/CPU-CUDA-NumPy/per-scene RNG restored; new physical episodes, no bitwise solver-state or behavior success claim. Recovery alone never promotes a candidate.'}),flush=True)
     if a.show_command:return
     assert not a.output.exists(),'Choose a new output; retain original evidence'
     assert (R/checkpoint).is_file(),'Extract learning archive at repository root'

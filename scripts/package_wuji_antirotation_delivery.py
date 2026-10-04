@@ -26,6 +26,8 @@ def main():
   resumed=B/'newprefix-recovery-v1/resumed'
   if resumed.exists():files.extend(f for f in resumed.iterdir() if f.is_file() and f.suffix in ['.pth','.sha256','.json','.jsonl','.yaml'])
   if (B/'newprefix-recovery-v1/resume-receipt.json').exists():files.append(B/'newprefix-recovery-v1/resume-receipt.json')
+  source=B/'necessary24-preserved-thumb-v1/training-source'
+  if source.exists():files.extend(f for f in source.rglob('*') if f.is_file() and f.suffix in ['.py','.json'])
  elif a.group=='movies':
   for name in ['actual-table-projected-grasp-frozen750-load2-v17','actual-table-projected-grasp-frozen750-load5-v18','actual-table-projected-size08-frozen750-load2-v19','actual-table-projected-retain750-frozen50-load5-v21','actual-table-continuous-prepared-frozen750-load5-v23','actual-table-thin-allcontact-frozen750-load2-v24','actual-table-thin-threegeo-frozen50-load2-v25','actual-table-thin-index-retention-frozen750-load2-v26','actual-table-thin-moment-retention-frozen750-load2-v27','actual-table-nominal-table-prior-range04-frozen50-load2-v32','actual-table-thin-table-prior-range04-frozen50-load2-v33','actual-table-nominal-table-prior-range12-frozen50-load2-v34','actual-table-thin-table-prior-range12-frozen50-load2-v35']:
    folder=B/'continuous'/name
