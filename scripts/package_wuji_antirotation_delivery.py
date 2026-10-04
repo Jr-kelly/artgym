@@ -28,7 +28,11 @@ def main():
    folder=B/'continuous'/name
    if not folder.exists():continue
    files.extend(f for f in folder.iterdir() if f.is_file() and (f.suffix in ['.mp4','.png'] or f.name in ['report.json','functional-evaluation.json','physics.json','plan.json']))
-  if (B/'figures/actual-development-v3').exists():files.extend(f for f in (B/'figures/actual-development-v3').rglob('*') if f.is_file())
+  for collection in ['height-development-four-v1','fresh-joint-validation4-v1']:
+   for folder in (B/collection).glob('case*'):
+    files.extend(f for f in folder.iterdir() if f.is_file() and (f.suffix in ['.mp4','.png'] or f.name in ['report.json','functional-evaluation.json','physics.json','plan.json']))
+  for figure in ['actual-development-v3','contact-signatures-v1']:
+   if (B/'figures'/figure).exists():files.extend(f for f in (B/'figures'/figure).rglob('*') if f.is_file())
  else:
   files.extend(f for f in B.rglob('*') if f.is_file() and f.suffix in ['.npz','.json','.jsonl','.log','.yaml','.patch'] and 'delivery' not in f.relative_to(B).parts)
   files.extend(f for f in D.rglob('*') if f.is_file() and f.suffix in ['.md','.json','.jsonl','.py','.sh'] and f.name!='github-commit-map.json' and '__pycache__' not in f.parts)

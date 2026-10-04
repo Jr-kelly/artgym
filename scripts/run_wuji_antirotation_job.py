@@ -8,7 +8,7 @@ def main():
  env=os.environ.copy();env.update(PATH='/home/agiuser/miniconda3/envs/artgym/bin:/usr/bin:/bin',LD_LIBRARY_PATH='/home/agiuser/miniconda3/envs/artgym/lib',PYTHONPATH=str(R)+':'+str(R/'rl_games'),PYTHONNOUSERSITE='1',CUDA_VISIBLE_DEVICES=str(a.gpu),OMP_NUM_THREADS='4',MKL_NUM_THREADS='4',MAX_JOBS='2',TORCH_EXTENSIONS_DIR='/tmp/wuji-width-torch-extensions',PYTHONUNBUFFERED='1')
  source_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip()
  patch=subprocess.check_output(['git','diff','HEAD','--','scripts'],cwd=R);(d/'source.patch').write_bytes(patch)
- source_files=['scripts/wuji_initial_table_prior.py','scripts/g2_continuous_scene.py','scripts/g2_r800_policy.py','scripts/g2_batched_r800.py','scripts/wuji_known_controller.py','scripts/wuji_bounded_motor_residual.py','scripts/run_g2_robust_demo.py','scripts/train_wuji_robust_residual.py']
+ source_files=['scripts/wuji_initial_table_prior.py','scripts/wuji_known_acquisition_prefix.py','scripts/replay_wuji_support_commands.py','scripts/export_wuji_legal_replay.py','scripts/g2_continuous_scene.py','scripts/g2_r800_policy.py','scripts/g2_batched_r800.py','scripts/wuji_known_controller.py','scripts/wuji_bounded_motor_residual.py','scripts/run_g2_robust_demo.py','scripts/train_wuji_robust_residual.py']
  if '-m' in cmd:source_files.append(cmd[cmd.index('-m')+1].replace('.','/')+'.py')
  source_sha256={path:hashlib.sha256((R/path).read_bytes()).hexdigest() for path in source_files if (R/path).is_file()}
  input_sha256={}

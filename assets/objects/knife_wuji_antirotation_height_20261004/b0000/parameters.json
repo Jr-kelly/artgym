@@ -1,0 +1,43 @@
+{
+  "id": "b0000",
+  "split": "train-height",
+  "geometry_profile": "nt_a300gr",
+  "handle_size": [
+    0.016,
+    0.012,
+    0.135
+  ],
+  "masses": [
+    0.029,
+    0.004
+  ],
+  "total_size_lwt": [
+    0.135,
+    0.016,
+    0.015
+  ],
+  "slider_size": [
+    0.01,
+    0.002,
+    0.03
+  ],
+  "joint_lower": -0.03267458688196273,
+  "joint_upper": 0.017325413118037272,
+  "slider_origin": [
+    -0.001,
+    0.006999999999999999,
+    0.015624586881962735
+  ],
+  "slider_initial_center": [
+    -0.001,
+    0.006999999999999999,
+    -0.017049999999999996
+  ],
+  "urdf_sha256": "374fffee22c451c03607568ebe52a163ec8d86e64ff1f76eb8bd1a3d8116a689",
+  "round": "robust-knife-family-20261003",
+  "label": "real",
+  "approximation": "Photos and16 temporal video samples viewed. Central raised shoulder with lower end contact strips replaces long flat roof. Body135x16x12mm user-confirmed; slider10x3x30mm, axial position,50mm rail travel,mass/inertia remain estimates. Central body box retained; end rounding not at grasp contact. PhysX convex hull approximation.",
+  "generation_seed": 2026100330,
+  "mass_inertia_mode": "Constant handle density relative to nominal .029kg; .006kg slider; authored cuboid diagonal inertia, engineering assumptions",
+  "scope": "Originalslider mesh Y scaling2--4mm plus authored mass/inertia scaling, declared engineering morphology challenge; not measuredreal mass/inertia. Physicalmetadata only sensor generator/simulator, no controllerID."
+}

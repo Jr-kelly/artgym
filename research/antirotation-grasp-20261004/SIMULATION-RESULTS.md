@@ -62,3 +62,8 @@ trace SHA. A large frozen-policy population probe reproduces training-scene
 pathology before optimization; further unchanged PPO is suspended while checking
 physical batch validity. This recovery/diagnosis is separate from necessary
 generalization and from real hardware.
+
+
+V26 薄刀柄加入既有食指承托保持控制：伸出24.69/21.42mm、回缩1.80/2.77mm，第二伸出和循环转动漂移失败。V27 加入既有法向力矩分配控制：第一伸出29.53mm，第一次回缩即掉落，接触覆盖约37.5%。这两条负结果说明改善回缩端点本身不足以保持完整功能抓姿；不据此断言单一因果，也不延长或微调同一失败方案。
+
+2026-10-04T05:30Z，必要高度/偏置范围已完成原始几何检查准备。四个滑块高度2–4mm变体、每个两次带噪声初始估计，以及四个预先登记的新联合条件均保留完整检查与拒绝记录。关节投影的快速路径原来只检查自碰撞而遗漏既有5mrad关节余量，修复后重新准备两项原拒绝目标；物理关节、碰撞和评估条件没有放宽。该准备尚不证明高度泛化。
