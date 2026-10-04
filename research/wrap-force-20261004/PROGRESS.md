@@ -1,15 +1,15 @@
-# Wrap-force current round
+# 当前轮进展（2026-10-04，续接事实）
 
-Start 2026-10-04T10:51:40Z, minimum useful-work lower bound 2026-10-04T22:51:40Z (Oct5 06:51 Shanghai). No GPU-hour cap, subagents, filler/covert work or real robot actions.
+本轮开始UTC10:51:40，至少12小时有效推进要求仍有效，尚未交付新Release。
 
-Native rigid force sensor API returns zero actor sensors even for articulated fixture; prior unavailable friction/DOF channels not repeated. Separate series-elastic diagnostic asset splits original slider mass/inertia, preserves collision cap, adds axial compliance. Known signed ±.15/.30/.60N and three axis angles at960Hz pass after rejected unstable240Hz configurations. This is altered-device measurement, not direct original-scene/hardware force.
+四个原始来源各选训练记录0/48/96/144，并与当前布局和指腹候选作小规模比较；192条不是192种独立抓姿。原G2/Wuji映射经native逐link核对，最大位置差1.34µm。为各来源准备匹配的初始估计与完整40mm双向参考。000–011训练/012–015留出及原抓姿划分保留。
 
-Original36s continuous nominal baseline retains exactly V17 trace hash and functional pass; actual240Hz by-link contacts show only index/middle/pinky distal pads and secondreturn index coverage37%. Full videos and raw physicalsteps retained.
+来源1负向6mm电机点预备路径+750在持刀诊断中通过冻结功能判据：伸出36.50/36.99mm，缩回剩余2.43/6.25mm；跨轮转动.0284rad。四指实际远端承托稳定，尚无新增指节/掌面接触收益证明。法向操作均值1.34N不是轴向力。
 
-Front-pad authored front facing .65/.74/.66 geometric candidate passed originalcollision/limits and40mm endpoints, first static impedance .8N nominal gives actual thumbnormal .470N. First held scripted cycle loses body support near17.9s; no demo/training gain claimed. Static held actual pose differs unloaded plan by11.75mm/.103rad. Corrected fixed-centroid reference forceslarge normalrelief; not accepted. Planning bounded2mm lateralrolling and tighter2mmnormalrelief rather thanrelaxing thresholds.
+实际取刀后逐指转换v1已真实执行并保存36秒视频；取刀成功，换握后中指/小指承托丢失，17.67秒掉刀，不能算完整demo。保留原承托位置的另一转换路径通过原速度、自碰撞与桌面检查，准备新匹配参考后验证。
 
-Two extra-middle/pinky underside regions fail geometry; cross-face middleproximal+distal-under also fails. No longtraining. Third palm+middleproximal candidate changes longitudinalregime while keepingfull40mm andoriginalgeometry. Plans are hypotheses, actualcontact mustconfirm.
+原场景完整轴向通道不可用。隔离串联弹性诊断已通过双向、转动基座校准（最大残差.00158N），明确改变滑块动力学。已测部分有效片段，不冒称原场景/真机测力，也不把缺失信号填0；选定来源1的诊断测量正在运行。额外平衡载荷夹具已核验符号与单位，不等于接触测力。
 
-Preliminary known additional.10N slip-gated diagnostic failed firstreturn and only60%loadedcoverage, not fullconstantloadcapacity. New constant-countercommand .05N diagnostic failed secondextension24.62mm; fixedcriterion unchanged and no decimaltuning. Known dynamometerforce alwayscountercommand, balancedbody/sliderforces/moments. Can do positivework duringwrongdirectionmotion, which moves awayfromgoal; native railbrake remainsunchangedpassive. No capacity/pressure substitutedfor measuredtraction.
+短程适配对照：单来源1与来源1+2，均750初始化、64场景、120更新×128步，预算各983040转移，负载/起动容量.2–.35N，随机强度.25。只作持刀模块适配，未解必要几何泛化。原始两个launcher在物理开始前因预建目录冲突失败，日志保留；r1修正后已运行。人口8场景的初始化、154/2076接口已核对；不同人口后接触轨迹仍敏感，不据此认定成功。
 
-See STATE/HANDOFF/events for live jobs and paths; all timestamps/PIDs require fresh verification.
+所有工作在独立实验副本，事件/权重哈希/运行命令持续归档。当前不存在真机动作。最终选择须经共同留出与实际连续流程评估，不自动延长旧失败训练。

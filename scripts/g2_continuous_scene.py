@@ -82,6 +82,7 @@ class G2ContinuousScene:
         if self.scheduled_support_anchor:
             assert action_parameterization=='bounded-motor-offset' and not support_estimator_spec and not support_load_feature_spec and not proprioceptive_pressure_spec
         self.scene_spec=dict(scene_spec,compact_isolated_layout=compact_isolated_layout,aggregate_environment=aggregate_environment) if scene_spec and (compact_isolated_layout or aggregate_environment) else scene_spec
+        self.nominal_hand_friction=float((scene_spec or {}).get('nominal_hand_friction',1.));self.nominal_knife_friction=float((scene_spec or {}).get('nominal_knife_friction',3.))
         self.held_diagnostic=bool(scene_spec and scene_spec.get('held_diagnostic',False))
         if self.held_diagnostic:assert takeover_seconds==16 and not resample_initial_estimates
         self.plan=scene_spec['plan'] if scene_spec else json.loads((D/'functional-side-edge-under-support-equilibrium-v6/motor-plan.json').read_text())
@@ -122,8 +123,8 @@ class G2ContinuousScene:
         for key in ['object_in_wrist','slider_in_wrist']:
             mat=np.asarray(self.calibration[key]);positions=np.tile(mat[:3,3],(n,1));rotations=np.tile(Rotation.from_matrix(mat[:3,:3]).as_quat(),(n,1))
             if self.estimated_plans:
-                object_rotation=np.asarray(self.calibration['object_in_wrist'])[:3,:3]
                 for i,row in enumerate(self.estimated_plans):
+                    row_cal=row.get('calibration',self.calibration);mat=np.asarray(row_cal[key]);positions[i]=mat[:3,3];rotations[i]=Rotation.from_matrix(mat[:3,:3]).as_quat();object_rotation=np.asarray(row_cal['object_in_wrist'])[:3,:3]
                     estimate=row['estimate'];shift=np.asarray(estimate.get('initial_object_center_shift_knife_m',[0,0,0]))
                     if key=='slider_in_wrist':shift=shift+np.asarray(estimate['slider_contact_shift_m'])+np.array([0,(estimate['handle_size_WTL_m'][1]-.012)/2,0])
                     positions[i]+=object_rotation@shift
@@ -168,6 +169,8 @@ class G2ContinuousScene:
             assert abs(float(self.closed[7])-support_spec['motor_upper_rad'])<1e-6
             self.middle_support=BatchedMiddleDeflectionSupport(support_spec,n,self.device)
         self.approach=self.tensor(self.acquisition['approach_q']);self.lift=self.tensor(self.acquisition['lift_q'])
+        templates=self.estimated_plans or [{'motor_plan':self.plan} for _ in range(n)]
+        self.held_arm_batch=self.tensor([r.get('held_arm_q',self.acquisition['approach_q'][0]) for r in templates]);self.held_touch_batch=self.tensor([r['motor_plan']['touch_q'] for r in templates])
         self.age=torch.zeros(n,device=self.device,dtype=torch.long)
         self.last_action=torch.zeros((n,20),device=self.device)
         self.observation_bias=torch.zeros_like(self.last_action)
@@ -251,7 +254,7 @@ class G2ContinuousScene:
                 else:
                     digit=next(j for j,d in enumerate(digits) if '_'+d+'_' in name);mask=1<<(8+digit)
                     if name.endswith(('link1','link2')):mask|=1<<(16+digit)
-                for k in range(index.start,index.start+index.count):shapes[k].filter=mask;shapes[k].friction=1.
+                for k in range(index.start,index.start+index.count):shapes[k].filter=mask;shapes[k].friction=self.nominal_hand_friction
             self.gym.set_actor_rigid_shape_properties(env,robot,shapes)
             self.gym.create_actor(env,table_asset,gym_transform([.60,-.25,.725]),'table',i,0)
             sid=self.instances[i%len(self.instances)]
@@ -268,7 +271,7 @@ class G2ContinuousScene:
                 body.inertia.x.x=float(v.get('ixx'));body.inertia.y.y=float(v.get('iyy'));body.inertia.z.z=float(v.get('izz'))
             self.gym.set_actor_rigid_body_properties(env,knife,bodies,False)
             shapes=self.gym.get_actor_rigid_shape_properties(env,knife)
-            for shape in shapes:shape.friction=3.;shape.filter=1
+            for shape in shapes:shape.friction=self.nominal_knife_friction;shape.filter=1
             self.gym.set_actor_rigid_shape_properties(env,knife,shapes)
             op=self.gym.get_actor_dof_properties(env,knife);self.lower.append(float(op['lower'][0]))
             op['driveMode'][:]=gymapi.DOF_MODE_EFFORT;op['stiffness'][:]=0;op['damping'][:]=.3;op['friction'][:]=.001;op['armature'][:]=.001
@@ -315,7 +318,7 @@ class G2ContinuousScene:
         self.closed_at_handover=torch.zeros(n,device=self.device,dtype=torch.bool)
         self.fell=torch.zeros(n,device=self.device,dtype=torch.bool)
         self.last_held_pose=self.reference_pose.clone()
-        self.material_tensor=torch.tensor([[1.,3.] for _ in range(n)],device=self.device)
+        self.material_tensor=torch.tensor([[self.nominal_hand_friction,self.nominal_knife_friction] for _ in range(n)],device=self.device)
         self.mass_tensor=self.tensor([p['masses'] for p in self.asset_records])
         self.slider_half=self.tensor([p['slider_size'] for p in self.asset_records])/2
         from scripts.g2_contact_geometry import DigitGeometry
@@ -378,10 +381,11 @@ class G2ContinuousScene:
             self.pressure_adapter.reset(ids,normal)
         self.target[ids,:]=0.;self.target[ids[:,None],self.arm_ids]=self.approach[0]
         self.target[ids[:,None],self.hand_ids]=self.opened_batch[ids]
-        if self.held_diagnostic:self.target[ids[:,None],self.hand_ids]=self.closed_batch[ids]
+        if self.held_diagnostic:
+            self.target[ids[:,None],self.hand_ids]=self.closed_batch[ids];self.target[ids[:,None],self.arm_ids]=self.held_arm_batch[ids]
         self.command_target[ids]=self.target[ids];self.delayed_target[ids]=self.target[ids]
         self.dof[ids,:,:]=0.;self.dof[ids,:27,0]=self.target[ids];self.dof[ids,27,0]=self.lower[ids]
-        if self.held_diagnostic:self.dof[ids[:,None],self.hand_ids,0]=self.tensor(self.plan['touch_q'])
+        if self.held_diagnostic:self.dof[ids[:,None],self.hand_ids,0]=self.held_touch_batch[ids]
         # Installed Preview4 tensors use environment-local coordinates, verified
         # against refreshed native roots. Adding env origins double-translates.
         self.root[ids,0,:]=0.;self.root[ids,0,6]=1.
@@ -399,7 +403,7 @@ class G2ContinuousScene:
         if s:
             for i in ids.tolist():
                 hand_friction=float(self.rng.uniform(.65,1.15));knife_friction=float(self.rng.uniform(1.8,3.4))
-                if 'material' in self.disabled_perturbations:hand_friction=1.;knife_friction=3.
+                if 'material' in self.disabled_perturbations:hand_friction=self.nominal_hand_friction;knife_friction=self.nominal_knife_friction
                 for actor,value in [(self.robots[i],hand_friction),(self.knives[i],knife_friction)]:
                     shapes=self.gym.get_actor_rigid_shape_properties(self.envs[i],actor)
                     for shape in shapes:shape.friction=value
@@ -420,7 +424,15 @@ class G2ContinuousScene:
         return path[index]*(1.-alpha)+path[index+1]*alpha
 
     def prefix_targets(self):
-        if self.held_diagnostic:return self.approach[0].expand(self.n,-1).clone(),self.closed_batch.clone()
+        if self.held_diagnostic:
+            t=self.age.float()/30;hq=self.closed_batch.clone()
+            if self.reference.preload_schedule:hq+=self.reference.preload(t)
+            if self.support_waypoint_q is not None:
+                selected=(t>=self.support_waypoint_times[0])&self.support_waypoint_enabled
+                for i,(first,last) in enumerate(zip(self.support_waypoint_times[:-1],self.support_waypoint_times[1:])):
+                    ids=selected&(t>=first)&(t<last);alpha=((t[ids]-first)/(last-first)).unsqueeze(-1);hq[ids]=self.support_waypoint_q[ids,i]*(1-alpha)+self.support_waypoint_q[ids,i+1]*alpha
+                ids=selected&(t>=self.support_waypoint_times[-1]);hq[ids]=self.support_waypoint_q[ids,-1]
+            return self.held_arm_batch.clone(),hq
         t=self.age.float()/30;aq=self.approach[0].expand(self.n,-1).clone()
         approach=(t>=2)&(t<5);aq[approach]=self.path_targets(self.approach,smooth((t[approach]-2)/3))
         aq[t>=5]=self.approach[-1]

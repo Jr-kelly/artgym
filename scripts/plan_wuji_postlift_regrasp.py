@@ -14,7 +14,7 @@ from scripts.g2_contact_geometry import DigitGeometry
 from scripts.wuji_kinematics import FINGERS
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--pickup-plan',type=Path,required=True);p.add_argument('--acquisition',type=Path,required=True);p.add_argument('--calibration',type=Path,required=True);p.add_argument('--operation-plan',type=Path,required=True);p.add_argument('--staged-contact-gait',action='store_true',help='Move index then middle then pinky nominal contact sites while other sites remain fixed; originalIK/motorlimits/selfchecks');p.add_argument('--fixed-support-sites',action='store_true',help='Keep middle/pinky nominal contact points fixed during wrist transfer; requires contact-preserving-ik');p.add_argument('--contact-preserving-ik',action='store_true',help='Track nominal authored-mesh contact-point paths during wrist motion, rather than joint interpolation; actual contact remains unverified');p.add_argument('--output',type=Path,required=True);p.add_argument('--start',type=float,default=12);p.add_argument('--end',type=float,default=14.2);a=p.parse_args();assert 12<=a.start<a.end<=16-50/30 and not a.output.exists()
+ p=argparse.ArgumentParser();p.add_argument('--pickup-plan',type=Path,required=True);p.add_argument('--acquisition',type=Path,required=True);p.add_argument('--calibration',type=Path,required=True);p.add_argument('--operation-plan',type=Path,required=True);p.add_argument('--resolve-ring-pinky',action='store_true',help='Track ring after pinky and penalize their actual collision-hull overlap during IK; final full-mesh preflight unchanged');p.add_argument('--staged-contact-gait',action='store_true',help='Move index then middle then pinky nominal contact sites while other sites remain fixed; originalIK/motorlimits/selfchecks');p.add_argument('--fixed-support-sites',action='store_true',help='Keep middle/pinky nominal contact points fixed during wrist transfer; requires contact-preserving-ik');p.add_argument('--contact-preserving-ik',action='store_true',help='Track nominal authored-mesh contact-point paths during wrist motion, rather than joint interpolation; actual contact remains unverified');p.add_argument('--output',type=Path,required=True);p.add_argument('--start',type=float,default=12);p.add_argument('--end',type=float,default=14.2);a=p.parse_args();assert 12<=a.start<a.end<=16-50/30 and not a.output.exists()
  old=json.loads(a.pickup_plan.read_text());new=json.loads(a.operation_plan.read_text());cal=json.loads(a.calibration.read_text());acq=json.loads(a.acquisition.read_text());k=G2Kinematics();g=DigitGeometry(max_face_axes=10000,knife_spec='research/robust-knife-family-20261003/real-knife-asset-spec.json');arm0=np.array(acq['lift_q'][-1]);expected_knife=k.forward(arm0)@np.array(cal['object_in_wrist']);desired=expected_knife@np.array(new['wrist_in_knife']);path,arm_audit=plan_translation(k,arm0,desired,a.end-a.start,1/30,ArmTableCollision(.75))
  arm=np.array([arm0]+path);u=np.linspace(0,1,len(arm));fraction=u*u*u*(10-15*u+6*u*u);q0=np.array(old['close_q']);q1=np.array(new['close_q']);hand=q0[None]+fraction[:,None]*(q1-q0)[None]
  contact_audits=[]
@@ -30,16 +30,22 @@ def main():
   assert not a.fixed_support_sites or a.contact_preserving_ik
   if a.fixed_support_sites:
    for f in ['middle','pinky']:endpoint1[FINGERS.index(f)]=endpoint0[FINGERS.index(f)]
-  tracking=['thumb','index','middle','pinky'] if a.staged_contact_gait else ['thumb','middle','pinky'];active=[FINGERS.index(f) for f in tracking];previous=q0.copy()
+  tracking=['thumb','index','middle','pinky','ring'] if a.resolve_ring_pinky else ['thumb','index','middle','pinky'] if a.staged_contact_gait else ['thumb','middle','pinky'];active=[FINGERS.index(f) for f in tracking];previous=q0.copy()
   for i,(aq,alpha) in enumerate(zip(arm,fraction)):
    wrist=world_to_knife@k.forward(aq);progress=np.full(5,alpha)
    if a.staged_contact_gait:
-    for f,first,last in [('index',0.,.35),('middle',.35,.70),('pinky',.70,1.)]:
+    for f,first,last in ([('index',0.,.3),('middle',.3,.6),('pinky',.6,.8),('ring',.8,1.)] if a.resolve_ring_pinky else [('index',0.,.35),('middle',.35,.70),('pinky',.70,1.)]):
      v=np.clip((alpha-first)/(last-first),0,1);progress[FINGERS.index(f)]=v*v*v*(10-15*v+6*v*v)
    progress=progress[:,None];normals=normal0*(1-progress)+normal1*progress;normals/=np.maximum(np.linalg.norm(normals,axis=1)[:,None],1e-8);target=endpoint0*(1-progress)+endpoint1*progress;prior=hand[i].copy()
-   def residual(q):return np.r_[((points(q,wrist,normals)-target)[active]*1000).ravel(),.03*(q-prior),.02*(q-previous)]
+   def residual(q):
+    value=np.r_[((points(q,wrist,normals)-target)[active]*1000).ravel(),.03*(q-prior),.02*(q-previous)]
+    if a.resolve_ring_pinky:
+     pairs=[('hand_r_ring_'+x,'hand_r_pinky_'+y) for x in ['link3','link4','pad_link'] for y in ['link3','link4','pad_link']]
+     gaps=np.array([z['gap_lower_bound_m'] for z in g.pair_gaps(q,pairs)]);value=np.r_[value,np.minimum(gaps-.0001,0)*3000]
+    return value
    fit=least_squares(residual,previous,bounds=(g.w.lower+.005,g.w.upper-.005),max_nfev=100,diff_step=1e-5);hand[i]=fit.x;previous=fit.x
    contact_audits.append(dict(frame=i,max_active_point_error_m=float(np.linalg.norm(points(fit.x,wrist,normals)-target,axis=1)[active].max()),scope='Nominal motor surface points; not measured contact/force'))
+ hand[0]=q0
  root=Path(__file__).resolve().parents[1];xml=ET.parse(root/g.w.config['asset']);velocity={j.get('name'):float(j.find('limit').get('velocity')) for j in xml.findall('joint') if j.get('type')=='revolute'};v=np.array([velocity[name] for name in g.w.names]);maximum_rates=np.max(abs(np.diff(hand,axis=0)),axis=0)*30;rate_ok=bool(np.all(maximum_rates<v))
  rows=[]
  for i in np.unique(np.linspace(0,len(arm)-1,11).astype(int)):

@@ -136,6 +136,8 @@ def main():
     alpha=smooth((u-first['fraction'])/(last['fraction']-first['fraction']));return np.asarray(first['q'])*(1-alpha)+np.asarray(last['q'])*alpha
   return closed
  def hold_motor(t,aq=None):
+  if plan.get('post_lift_thumb_motor_waypoints') and t>=plan['post_lift_thumb_motor_waypoints'][0]['time_s']:
+   rows=plan['post_lift_thumb_motor_waypoints'];value=closed.copy();times=[r['time_s'] for r in rows];value[16:]=[np.interp(t,times,[r['q_thumb'][i] for r in rows]) for i in range(4)];return value
   if regrasp and t>=regrasp_times[0]:return np.array([np.interp(t,regrasp_times,regrasp_hand[:,i]) for i in range(20)])
   if support_spec and support_spec.get('motor_waypoints'):
    rows=support_spec['motor_waypoints']
