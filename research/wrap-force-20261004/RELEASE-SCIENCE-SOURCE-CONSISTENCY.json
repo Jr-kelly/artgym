@@ -1,0 +1,56 @@
+{
+  "source_local_commit": "4a7fe7d91a0c0736e2e36944809557072982ed0e",
+  "source_github_commit": "1302a4be79f2b92802ea0510fad8fd5a6bfca1c5",
+  "runtime_archive_sha256": "3641e30850d88a41a5db4c385ff06d50ca321bc1f47e6527cd23fdcbd1a43fab",
+  "selected_modules": [
+    {
+      "path": "scripts/run_g2_robust_demo.py",
+      "sha256": "10fbaff1a3ac33d77eee24f07486a41f38865df257db0f5cc16aed5fc6cc9e4c"
+    },
+    {
+      "path": "scripts/run_wuji_wrap_selected.py",
+      "sha256": "7d005f9b8bfab9e387780af67e6857abec2d637a462a19b9f7c72524a6facdca"
+    },
+    {
+      "path": "scripts/g2_r800_policy.py",
+      "sha256": "1b3640a4d148e6862a6b88625b8e5358e63c8c3a061abeb1f844dfb23a02f23f"
+    },
+    {
+      "path": "scripts/g2_kinematics.py",
+      "sha256": "d9cc522f16fb300ee5f1c562770606b237b4e78fbad1fde93136856ee2b78746"
+    },
+    {
+      "path": "scripts/wuji_known_controller.py",
+      "sha256": "3e4870ee35719db2f2dc8760d6b5c58a757c5b4ba944f27d2cb2e15533df4ad6"
+    },
+    {
+      "path": "scripts/wuji_once_estimated_collision_geometry.py",
+      "sha256": "c71e3242c9ab0c6b4ac7fb4e6febdbddf296196c2dcc8aeb003737728eed4d1e"
+    },
+    {
+      "path": "scripts/adapt_wuji_direct_corner_initial_geometry.py",
+      "sha256": "1d2e348176450a1f647dc95742e2ac2736c7adff96bc722668e9606f490a57e2"
+    },
+    {
+      "path": "scripts/plan_g2_functional_acquisition_path.py",
+      "sha256": "abfe3172cfa010894c7a12fd7cd41f2eca081b4031c94bd59bf9d00797906931"
+    },
+    {
+      "path": "scripts/audit_wuji_actual_acquisition_motor.py",
+      "sha256": "2a4bb38ee4632d1caf9ca931def30ce80b90e7ca6fd5d963de7201c9a9887c2a"
+    },
+    {
+      "path": "scripts/audit_g2_anchored_thumb_motor.py",
+      "sha256": "ab5d6e03d9a2bd1b95fc4457f10e1299a0ae1f198f3ac8d14080eb29e22fa244"
+    },
+    {
+      "path": "scripts/replay_wuji_support_commands.py",
+      "sha256": "6a63bac5f651825e6079376b50d7ca5dc73f659e4f8a1efe60349c1fa5cd5e0f"
+    },
+    {
+      "path": "scripts/export_wuji_legal_replay.py",
+      "sha256": "c843a6167bdd4267b18bea08ebc78795ef6dd87763037b0aac1e3523ab51aeea"
+    }
+  ],
+  "scope": "Only changed/relevant controller,estimate,collision,replay modules; metadata snapshots deliberately predating publication. Not full-history or crossGPUaudit."
+}

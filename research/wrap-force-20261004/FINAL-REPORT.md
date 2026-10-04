@@ -72,9 +72,9 @@ V20恢复包曾在空目录独立解包，用已有授权SDK实际运行默认�
 
 ## 可浏览证据与状态
 
-Release附件包含带视频／关键帧的自包含HTML、三条完整MP4、同步曲线、原始测力／代表性失败证据、恢复包、选定及未选学习状态和配置。用户原始两张照片与手动视频仍保留在开发文件系统，不公开上传。机器日志与实验续接文档保留每次PID、配置、源码及权重哈希和下一步；历史PID不当当前事实。
+Release附件包含带视频／关键帧的自包含HTML、三条完整MP4、同步曲线、原始测力／代表性失败证据、恢复包、选定及未选学习状态和配置。用户原始两张照片与手动视频仍保留在开发文件系统，不公开上传。归档中的STATE是制作时的快照；正式发布完成以独立PUBLIC-DELIVERY-RECEIPT.json和最新独立DELIVERY-RESULTS.json为准，不能把快照PID视为当前进程。机器日志与实验续接文档保留每次PID、配置、源码及权重哈希和下一步；历史PID不当当前事实。
 
-资源监控显示本地曾有完整四小时窗口超过目标，后续降至约31%；开发机中断后部分采样约6%，**不能宣称开发机满足26%门槛或40%目标，也不能保证不被刹停**。SSH中断原因未知。未运行隐藏或填充负载；无GPU小时上限。最终时间与利用率以 `DELIVERY-RESULTS.json` 的带时间记录为准，至少12小时工作完成后才发布本轮正式Release。
+资源监控显示本地曾有完整四小时窗口超过目标；22:43 UTC近四小时采样本地约29.12%、开发机整机约4.63%。本地超过26%但未达40%，开发机未满足26%或40%，**不能保证不被刹停**。SSH中断原因未知。未运行隐藏或填充负载；无GPU小时上限。最终时间与利用率以 `DELIVERY-RESULTS.json` 的带时间记录为准，至少12小时工作完成后才发布本轮正式Release。
 
 交付完成单独记账：`delivery_complete` 不代表 `goal_complete`。`functional_demo_ready=true`；`necessary_generalization_resolved=false`、`axial_force_measurement_resolved=false`、`hardware_ready=false`、`real_robot_ran=false`、`goal_complete=false`。
 

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-04T22:24:25.098078+00:00",
+  "generated_utc": "2026-10-04T22:34:19.564218+00:00",
   "release_tag": "wuji-g2-wrap-force-20261005-v1",
   "demo_status": "完整连续仿真已做成：G2＋Wuji从原桌角拿刀、持稳、两轮40 mm伸缩命令与保持；默认V12名义功能通过，无夹具、换握、定时位置锁存或中途重置。真机未运行。",
   "generalization_status": "同S120及统一一次带误差估计规则，012–015四个留出几何有实际连续通过记录；降低指节摩擦的一个假设条件也通过；额外薄刀130×14×10 mm与滑块轴向＋5 mm在同权重、同一次估计及匹配预成形规则下实际通过。未证明覆盖全部130–140×14–18×10–14 mm范围、全部滑块±5/±1/±1 mm组合或联合必要泛化。",
@@ -12,7 +12,7 @@
   },
   "grasp_comparison": "192缓存条目来自四个原始来源的各48附近扰动。四来源先与当前及包覆候选匹配G2映射、初始估计、闭合／取刀路径和双向参考；部分子场景可行、接回取刀失败，不作机械不可行结论。原source2与包覆布局在同S120/.8模型档、原刀及匹配参考的持刀对照中，第二轮伸出21.71→33.42 mm；这是抓姿和必要控制适配的共同收益，非纯几何独立归因。两布局均已有原食指link4真实接触，不能说首次启用指节。新布局另有中指、小指指腹承托；掌面未证明必要贡献。",
   "training_selection": "同750初始化、64环境×120更新×128步的单／多抓姿短训在共同012–015持刀留出条件均通过，未显示多抓姿分布扩展收益。选单抓姿S120，SHA256 ad16a153c27eb01567c14422ca8ed23e5bebfc6e1c901683031f245631944d2a。连续及拇指头短训未改善、及时停训，失败44/12状态保留且不替换默认；修复冻结参数Adam保存问题。训练拟合、冻结评估、独立恢复、脚本取刀与真机分别标记。",
-  "recovery_status": "代码／资产／配置、teacher＋2076维R800＋154维残差及模型／Adam／RNG可恢复。V20包在空目录独立解包，实际默认连续回合通过；学习状态实际恢复并保存更新121，该更新处于前缀、没有操作能力提升证据。最终包另给内容清单，SDK不分发。",
+  "recovery_status": "代码／资产／配置、teacher＋2076维R800＋154维残差及模型／Adam／RNG可恢复。V20包在空目录独立解包，实际默认连续回合通过；学习状态实际恢复并保存更新121，该更新处于前缀、没有操作能力提升证据。最终V43包在另一空目录无实验软链恢复新版一次估计＋5 mm完整连续通过，2151运行文件与32学习文件校验；SDK不分发。",
   "hardware_status": "补充V42基于上一帧实际已发目标/动作的600次因果单步预测与记录最大差1.19e-7rad；当前/未来目标不输入当前预测，原自由记忆差异仍保留，未改变原物理控制器。Wuji原生块index/middle/pinky/ring/thumb各4关节，G2右臂idx61–idx67。离线600帧推理中位3.24ms、p95 5.54ms，与记录目标最大差0.01543rad，未证明SDK或逐位重放一致。首次真机仍需实际双向阻力／完全收刀／有效行程、一次刀位标定和SDK名称、单位、符号、有限位置接口及时间戳。本轮未连接动作传输。",
   "continuous_trials": [
     {
@@ -852,8 +852,8 @@
   },
   "work_and_resources": {
     "round_start_utc": "2026-10-04T10:51:40.525679+00:00",
-    "generated_utc": "2026-10-04T22:24:25.098078+00:00",
-    "elapsed_hours": 11.545714555277778,
+    "generated_utc": "2026-10-04T22:34:19.564218+00:00",
+    "elapsed_hours": 11.71084403861111,
     "minimum_work_hours": 12,
     "minimum_finish_utc": "2026-10-04T22:51:40.525679+00:00",
     "no_subagents": true,
@@ -862,36 +862,36 @@
     "gpu_hour_cap": null,
     "local_snapshot": {
       "pid": 3068820,
-      "heartbeat": "2026-10-04T22:24:15.791828+00:00",
+      "heartbeat": "2026-10-04T22:34:19.106383+00:00",
       "session": "pid:[4026531836]",
       "current": [
         {
           "index": 0,
-          "utilization": 31.0,
+          "utilization": 22.0,
           "memory_used_mb": 799.0,
           "memory_total_mb": 24564.0
         }
       ],
       "windows": {
         "60": {
-          "mean_percent": 24.666666666666668,
+          "mean_percent": 23.666666666666668,
           "samples": 6,
-          "covered_seconds": 50.22645831108093
+          "covered_seconds": 50.27264189720154
         },
         "300": {
-          "mean_percent": 29.166666666666668,
+          "mean_percent": 24.166666666666668,
           "samples": 30,
-          "covered_seconds": 291.2766969203949
+          "covered_seconds": 291.40936517715454
         },
         "900": {
-          "mean_percent": 32.46666666666667,
+          "mean_percent": 29.288888888888888,
           "samples": 90,
-          "covered_seconds": 893.9561061859131
+          "covered_seconds": 894.5911619663239
         },
         "14400": {
-          "mean_percent": 30.090718771807396,
-          "samples": 1433,
-          "covered_seconds": 14399.57850766182
+          "mean_percent": 29.026536312849164,
+          "samples": 1432,
+          "covered_seconds": 14390.220259189606
         }
       },
       "provider_minimum_percent": 26.0,
@@ -969,6 +969,7 @@
     "final_only_hold": "FINAL-ONLY-HOLD-COMPARISON-V39.json",
     "legal_history": "LEGAL-ISSUED-HISTORY-REPLAY-V42.json",
     "actual_recovery": "EXTRACTED-RUNTIME-CONTINUOUS-RECOVERY-V20.json",
-    "actual_learning_resume": "EXTRACTED-LEARNING-STATE-RESUME-V21.json"
+    "actual_learning_resume": "EXTRACTED-LEARNING-STATE-RESUME-V21.json",
+    "final_actual_restore": "EXTRACTED-FINAL-ESTIMATE-RESTORE-V43.json"
   }
 }

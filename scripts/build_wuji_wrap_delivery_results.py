@@ -49,7 +49,7 @@ def main():
             inventory='Local4090＋authorized SSH4H200, not8GPUs',gpu_hour_cap=None,
             local_snapshot=json.loads((B/'resources/local-20261004/status.json').read_text()),
             development_last_fetched_snapshot=json.loads((B/'resources/development-reconnected-v15/status.json').read_text()),
-            remote_rule_status='Remote whole-machine26% floor /40% target not demonstrated; sampling low and SSH unavailable15:00–18:34UTC, interruption cause unknown. Fresh timestamps/partial coverage retained, no hidden occupancy.'),
+            remote_rule_status='Latest approximate full4h development whole-machine sampling ~4.63% missed26%floor/40%target; local~29.12% exceeded26% butmissed40%. SSH unavailable15:00–18:34UTC; interruption cause unknown. Exact timestamped windows below, no hidden/filler occupancy.'),
         evidence=dict(selected='FROZEN-WRAP-CONTINUOUS-CANDIDATE-V12.json',
             independent_geometry='DIRECT-CORNER-ONCE-ESTIMATE-CONTINUOUS-V14.json',
             actual_force_repeat='PAIRED-SERIAL-INDEPENDENT-REPEAT-V26.json',
