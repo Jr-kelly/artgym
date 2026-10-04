@@ -1,4 +1,5 @@
 """Upload named evidence assets to the user-authorized ArtGym release, verifying SHA256."""
+import mimetypes
 import argparse
 import hashlib
 import json
@@ -25,12 +26,13 @@ def main():
     for asset in args.assets:
         assert asset.is_file()
         digest = hashlib.sha256(asset.read_bytes()).hexdigest()
+        content_type = mimetypes.guess_type(asset.name)[0] or 'application/octet-stream'
         with tempfile.TemporaryDirectory(prefix='artgym-release-') as temporary:
             response = Path(temporary) / 'response.json'
             uploaded = subprocess.run([
                 'curl', '-4', '--silent', '--show-error', '--fail-with-body', '--http1.1',
                 '--connect-timeout', '8', '--max-time', str(args.max_time), '--config', '-',
-                '--header', 'Content-Type: application/octet-stream',
+                '--header', 'Content-Type: ' + content_type,
                 '--data-binary', '@' + str(asset.resolve()), '-o', str(response),
                 f'https://uploads.github.com/repos/Jr-kelly/artgym/releases/{args.release_id}/assets?name=' + quote(asset.name),
             ], input='header = "Authorization: Bearer ' + token + '"\n', text=True, env=host_tool_environment())
@@ -41,7 +43,7 @@ def main():
             result = json.loads(response.read_text())
         assert result['digest'] == 'sha256:' + digest
         records.append(dict(name=asset.name, sha256=digest, asset_id=result['id'],
-                            url=result['browser_download_url'], digest_verified=True))
+                            url=result['browser_download_url'], content_type=result['content_type'], digest_verified=True))
         print(json.dumps(records[-1]), flush=True)
         # Partial progress is recoverable without overwriting public assets.
         pending = args.verification.with_suffix('.pending.json')

@@ -19,3 +19,21 @@ bash research/antirotation-grasp-20261004/RUN-V17.sh runs/antirotation-grasp-202
 同一初始估计只能应用一次：传入 nominal-calibration.json 后由运行器处理计划中的 initial_geometry_estimate；不得先手工修正该 calibration 再让运行器重复修正。旧回程分支的关节线性混合因原始自碰撞已拒绝，当前控制器使用单条连续参考路径。
 
 续接先读 WUJI_GOAL_HANDOFF.md 和本目录STATE/PROGRESS；PID和利用率都须重新核验。最终Release尚在整理，已推送代码快照不等同于整个研究目标完成。
+
+
+新增统一入口（从本轮Release源码启动，先在仓库根解压 runtime-v2 与 evidence 配置包，激活已有合法Isaac Gym环境）：
+
+```bash
+python -m scripts.run_wuji_antirotation_delivery_demo --case nominal --output runs/antirotation-grasp-20261004/my-nominal
+python -m scripts.run_wuji_antirotation_delivery_demo --case height4 --output runs/antirotation-grasp-20261004/my-height4
+python -m scripts.run_wuji_antirotation_delivery_demo --case higher-load-failure --output runs/antirotation-grasp-20261004/my-high-load
+python -m scripts.run_wuji_antirotation_delivery_demo --case thin-failure --output runs/antirotation-grasp-20261004/my-thin
+```
+
+入口清楚标注原结果的开发/失败角色，保持原指令，自动运行新旧评分。`--show-command`只打印参数，不运行物理。原始权重/轨迹哈希见本目录`DEMO-COMMANDS.json`；新机器结果必须以新输出实际视频/评分为准。高度成功例实测36.16/31.54mm伸出、6.79/3.87mm回缩，属于同一750加初始估计统一适配的已知高度开发例，不能推广为全尺寸泛化。
+
+本轮冻结新5秒接管训练权重与模型/Adam/RNG另外放在learning包；750最强开发例仍使用runtime的原权重。若恢复本轮早期负训练且配置引用旧dense软链接资产，使用`--training-asset-registry research/antirotation-grasp-20261004/PHYSICAL-TRAIN-GEOMETRY.json`替代八个实际使用训练资产，字节相同的可移植副本已随源码保留。对于新的严格16场景与24必要形态配置，使用其自身registry，保持帧/场景/采样配对一致，不用替代registry改变原形态。
+
+完整24初始估计/12物理形态配置：`runs/antirotation-grasp-20261004/complete-necessary-geometry24-v1/{scene24.json,registry.json,schedule1536.json}`；每个形态两次独立带噪声初始估计，重采样只在新回合。该配置本轮尚未训练，不包含能通过高度全范围的权重。它是继续有意义几何训练的准备，不是泛化成果。
+
+可浏览报告及四个带力字幕双视角MP4单独公开；movies包同时保留原全景/手部近景，未剪切、不拼阶段。字幕使用评估真值，并明确法向贡献不含摩擦牵引力、容量不等于实物阻力。旧轮V138参数与本轮不匹配，仅作接触形态对照。
