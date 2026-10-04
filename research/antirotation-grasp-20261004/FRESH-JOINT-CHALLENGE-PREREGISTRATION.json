@@ -1,0 +1,45 @@
+{
+  "seed": 2026100467,
+  "count": 4,
+  "conditions": [
+    {
+      "load": 0.2,
+      "detent": 0.2,
+      "profile": "constant",
+      "frequency": 1.7,
+      "delay": 0,
+      "noise": 0.001,
+      "bias": 0.001
+    },
+    {
+      "load": 0.5,
+      "detent": 0.5,
+      "profile": "triangular",
+      "frequency": 1.7,
+      "delay": 1,
+      "noise": 0.001,
+      "bias": 0.001
+    },
+    {
+      "load": 0.35,
+      "detent": 0.4,
+      "profile": "pulse",
+      "frequency": 1.9,
+      "delay": 0,
+      "noise": 0.001,
+      "bias": 0.0012
+    },
+    {
+      "load": 0.6,
+      "detent": 0.5,
+      "profile": "sinusoidal",
+      "frequency": 1.5,
+      "delay": 1,
+      "noise": 0.001,
+      "bias": 0.001
+    }
+  ],
+  "scope": "Fresh current-round joint morphology/load/sensor/delay challenge, originalmeshmorphology, not unseenmodel/category/realhardware. Exactly four draws, no reroll/repeat-to-pass. Commonplanner fixed beforebehavior; actor chosen/frozen fromdevelopment only before openingchallenge rollouts. Planning failures counted, no targetrelaxation.",
+  "actor_selection": "Select a new jointlytrained actor only after actual nominal+thin development functionalcriteria bothpass; otherwise retain unchanged750. No candidate selected by thesechallenge results.",
+  "criterion": "Unchanged predeclared functional-criterion-v1 and separate originallegacy0.25rad"
+}
