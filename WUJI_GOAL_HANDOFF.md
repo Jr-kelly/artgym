@@ -7,7 +7,7 @@
   "round_start_utc": "2026-10-03T20:03:23+00:00",
   "minimum_work_hours": 12,
   "earliest_12h_utc": "2026-10-04T08:03:23+00:00",
-  "phase": "Scientific experiments closed; strongest750 development retained, full necessary generalization unresolved; final Release packaging",
+  "phase": "New official Release delivered and public downloads verified; research blockers remain explicit",
   "baseline_local_commit": "b75e12effbfb5a9ce740411b5ec699db60338b3e",
   "baseline_github_commit": "d0d6ce01d5550ec5b512fdc4e510c5546569d8b4",
   "baseline_release": "wuji-g2-support-pressure-20261003-v1",
@@ -17,7 +17,7 @@
     "running_target_above_percent": 40,
     "source": "CurrentAGENTS.md; usefulcomputationonly, no concealed/filler jobs"
   },
-  "delivery_complete": false,
+  "delivery_complete": true,
   "functional_demo_ready": true,
   "necessary_generalization_resolved": false,
   "hardware_ready": false,
@@ -27,40 +27,42 @@
   "no_subagents": true,
   "remote_root": "/home/wangjiarui/artgym-antirotation-grasp-20261004",
   "private_attachment_media": "/tmp/wuji-antirotation-attachment-20261004",
-  "next": "Publishfinalrecoverable source andimmutablepackages/report; actualpublicassetdownloadcheck andreceipt finishdelivery",
+  "next": "Future work must redesign contact/support for loaded return and generalization using preserved failures; do not repeat rejected training, change thresholds, or send robot actions automatically",
   "last_event": {
-    "utc": "2026-10-04T08:26:56.049200+00:00",
-    "event": "scientific_delivery_ready_for_packaging",
+    "utc": "2026-10-04T08:48:10.299196+00:00",
+    "event": "antirotation_verified_delivery_complete",
+    "evidence": "/data/research/artgym-experiments-20260921/antirotation-grasp-20261004/research/antirotation-grasp-20261004/DELIVERY-RECEIPT.json",
     "config": {
-      "strongest_actor_sha256": "11f87269e7910380c6dab1fa8dcc26e53e40da0bd905a1ae40e7ffcf812b1a1d",
-      "known_functional_examples": [
-        "V17",
-        "heightb1"
-      ],
-      "original750_first_joint_checks": "0/4",
-      "newnecessary24development": "Bothnominal/thinfail; support-onlyheightpassesoldsuccessfulcondition; no overallgain, stop25",
-      "minimum12h_verified": true,
-      "new_real_robot_actions": 0
+      "release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-g2-antirotation-grasp-20261004-v1",
+      "assets_verified": 16,
+      "public_downloads_verified": 3,
+      "elapsed_hours": 12.746471785,
+      "scientific_goal_complete": false
     },
-    "evidence": "research/antirotation-grasp-20261004/FINAL-REPORT.md",
+    "phase": "New official Release delivered and public downloads verified; research blockers remain explicit",
     "state_updates": {
+      "delivery_complete": true,
       "delivery_ready": true,
-      "delivery_complete": false,
+      "release_url": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-g2-antirotation-grasp-20261004-v1",
+      "release_tag_commit": "59eb7833c565b857a28f5016a7b11dc8e2eb013e",
+      "scientific_release_local_commit": "5450e0f93dd26462c66679607c9481e54cade71e",
       "functional_demo_ready": true,
       "necessary_generalization_resolved": false,
       "hardware_ready": false,
       "real_robot_ran": false,
       "goal_complete": false,
-      "necessary24_frozen_development_pipeline_pid": null
+      "active_jobs": [],
+      "local_resource_monitor_pid": null,
+      "remote_necessary24_monitor_pid": null
     },
-    "next": "Publishfinalrecoverable source andimmutablepackages/report; actualpublicassetdownloadcheck andreceipt finishdelivery"
+    "next": "Future work must redesign contact/support for loaded return and generalization using preserved failures; do not repeat rejected training, change thresholds, or send robot actions automatically"
   },
   "resource_monitor_pid": null,
   "resource_monitor_start_utc": "2026-10-03T20:15:18.833167+00:00",
   "held_bidirectional_development_ready": true,
   "github_branch": "feat/wuji-antirotation-grasp-20261004",
-  "github_commit": "789a7ccea2310e2e2b77606e818d5b68284a136a",
-  "local_scientific_commit": "f5bd411049cbe90d4bdd232a9d758d9b762a5697",
+  "github_commit": "59eb7833c565b857a28f5016a7b11dc8e2eb013e",
+  "local_scientific_commit": "5450e0f93dd26462c66679607c9481e54cade71e",
   "actual_table_integration_pipeline_pid": null,
   "lower_side_direct_pipeline_pid": null,
   "local_coordinate_comparison_pipeline_pid": null,
@@ -68,7 +70,7 @@
   "contact_normal_pipeline_pid": null,
   "functional_demo_scope": "Actual continuous simulation only, predeclaredfunctionalendpoints; no measured40mmfulltravel, necessarygeneralization or realrobot readiness claim",
   "common_geometry_bank16_pipeline_pid": null,
-  "local_resource_monitor_pid": 1174078,
+  "local_resource_monitor_pid": null,
   "three_geometry_curriculum_pipeline_pid": null,
   "height_geometry_bank_pipeline_pid": null,
   "strict_geometry_learned_prefix_pipeline_pid": null,
@@ -100,10 +102,13 @@
   ],
   "remote_current_experiment_root": "/home/wangjiarui/artgym-antirotation-necessary24-20261004",
   "remote_necessary24_launchers": [],
-  "remote_necessary24_monitor_pid": 925,
+  "remote_necessary24_monitor_pid": null,
   "necessary24_frozen_development_pipeline_pid": null,
   "minimum_work_hours_elapsed_verified_utc": "2026-10-04T08:06:15.614914+00:00",
   "minimum_work_hours_met": true,
-  "delivery_ready": true
+  "delivery_ready": true,
+  "release_url": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-g2-antirotation-grasp-20261004-v1",
+  "release_tag_commit": "59eb7833c565b857a28f5016a7b11dc8e2eb013e",
+  "scientific_release_local_commit": "5450e0f93dd26462c66679607c9481e54cade71e"
 }
 ```

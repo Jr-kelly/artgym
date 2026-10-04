@@ -126,3 +126,9 @@ UserreprovidedSSH andfresh4H200instance reconnects07:09Z, allinitialidle, persis
 Startupv1failedbeforephysics becauseexplicittrainregistrystillreadunrelatedlegacydensemanifest; fixconditionsmanifestonlyifregistryabsent. Startupv2failedbeforephysics becausecopyomittedunchangedinitialgraspseedcache; copiedexistingcache. Failurespreserved. Actualv3 trainingstarts07:24:11Z, GPU0child1869/launcher1867 andGPU1child1870/launcher1868, source649c723e1efa0c26efcad2b305c82137ea79b858; alltransferredscript/inputSHA verified,weight750verified. Monitor925/newnamespace, oldPID502notcurrent andnotkilled. Latestwholemachineminute35.54%, startup-inclusiveobservedmean8.58% over595s at07:26:55Z, target>40notyetmet/no4hguarantee. Nohidden/filler programs; oldremotejobswerenotresumed.
 
 NewGitHubRelease402870383 remainsdraft while25pilots/finalreport/workdurationpending. Immutable runtimev2+sixactualannotatedvideos saved/uploadedwithserverSHAchecks; notpublishedcompletion. Earliest12h08:03:23Z remains; functionaldevelopmentdemo=true, fullnecessarygen/hardware/realrobot/goalcomplete=false.
+
+## Final public delivery 2026-10-04T08:48:10.298426+00:00
+
+Release: https://github.com/Jr-kelly/artgym/releases/tag/wuji-g2-antirotation-grasp-20261004-v1
+
+16 assets server SHA-verified; report, continuous failure video and new learning archive public-download SHA verified. Final receipt contains resource observations and unresolved blockers. Delivery complete; complete scientific/real demo goal remains unresolved. Tag remains immutable at 59eb7833; post-publication receipt/handoff are appended on the branch.
