@@ -1,0 +1,783 @@
+{
+  "scope": "Common initial-estimate adaptation of actual pickup and postlift motor path.\n\nNo physical asset ID, current object state, contacts or force is read. This\nretains known arm poses up to estimated table-height change and adapts each\nhand waypoint to the same noisy dimensional/slider observation. Passing the\nmotor checks does not establish contact retention or successful operation.\n",
+  "coarse_slider_placement": true,
+  "coarse_wrist_shift_world_m": [
+    0.00042665036870824914,
+    0.0004080630117556554,
+    -0.0007859355784509286
+  ],
+  "known_initial_body_shift_world_m": [
+    -0.0010000000000000009,
+    0.0,
+    -0.0004383738210935956
+  ],
+  "table_edge_inset_m": 0.0005,
+  "no_physical_asset_read": true,
+  "estimate": {
+    "source": "Labelled synthetic noisy onceinitial dimensional/slider observation, heldout runtime; no asset ID supplied to planner",
+    "uncertainty_m": 0.00025,
+    "handle_size_WTL_m": [
+      0.016519967984141168,
+      0.011123252357812809,
+      0.13652666229715157
+    ],
+    "slider_size_WTL_m": [
+      0.01,
+      0.0023920796350742086,
+      0.03
+    ],
+    "slider_contact_shift_m": [
+      0.00042665036870824914,
+      -0.0003475617573573329,
+      -0.00040806301175565554
+    ]
+  },
+  "preflight_passed": false,
+  "hand_rate_ok": true,
+  "hand_geometry_ok": false,
+  "arm_ik_ok": true,
+  "arm_rate_ok": true,
+  "arm_swept_table_recertified": true,
+  "arm_table_collisions": [],
+  "pickup": {
+    "input": {
+      "source": "Labelled synthetic noisy onceinitial dimensional/slider observation, heldout runtime; no asset ID supplied to planner",
+      "uncertainty_m": 0.00025,
+      "handle_size_WTL_m": [
+        0.016519967984141168,
+        0.011123252357812809,
+        0.13652666229715157
+      ],
+      "slider_size_WTL_m": [
+        0.01,
+        0.0023920796350742086,
+        0.03
+      ],
+      "slider_contact_shift_m": [
+        0.00042665036870824914,
+        -0.0003475617573573329,
+        -0.00040806301175565554
+      ],
+      "initial_object_center_shift_knife_m": [
+        -0.00042665036870824914,
+        0.0007859355784509285,
+        0.00040806301175565554
+      ]
+    },
+    "planned_thumb_contact_bias_knife_m": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "contact_errors_m": {
+      "thumb": 0.0,
+      "index": 3.4530073870561786e-07,
+      "middle": 2.3588159062567731e-07,
+      "pinky": 4.943903250608266e-08
+    },
+    "trajectory_max_error_m": 0.0,
+    "no_physical_asset_read": true,
+    "scope": "Estimated initial geometry adaptation, original nominal joint-preload offsets retained; not force regulation, collision/contact feasibility unproven",
+    "support_surface_scaling": true
+  },
+  "operation": {
+    "input": {
+      "source": "Labelled synthetic noisy onceinitial dimensional/slider observation, heldout runtime; no asset ID supplied to planner",
+      "uncertainty_m": 0.00025,
+      "handle_size_WTL_m": [
+        0.016519967984141168,
+        0.011123252357812809,
+        0.13652666229715157
+      ],
+      "slider_size_WTL_m": [
+        0.01,
+        0.0023920796350742086,
+        0.03
+      ],
+      "slider_contact_shift_m": [
+        0.00042665036870824914,
+        -0.0003475617573573329,
+        -0.00040806301175565554
+      ],
+      "initial_object_center_shift_knife_m": [
+        -0.00040714623957964247,
+        0.0007302381257781784,
+        0.0005169380150589677
+      ]
+    },
+    "planned_thumb_contact_bias_knife_m": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "contact_errors_m": {
+      "thumb": 3.9023711323137666e-08,
+      "index": 6.37543777007414e-07,
+      "middle": 6.783873830781136e-07,
+      "pinky": 1.9272822673960413e-07
+    },
+    "trajectory_max_error_m": 4.183478270651985e-08,
+    "no_physical_asset_read": true,
+    "scope": "Estimated initial geometry adaptation, original nominal joint-preload offsets retained; not force regulation, collision/contact feasibility unproven",
+    "support_surface_scaling": true
+  },
+  "waypoint_errors": [
+    {
+      "thumb": 2.6159035139057138e-08,
+      "index": 4.173172533296501e-07,
+      "middle": 2.095219634036942e-07,
+      "pinky": 1.25089628300957e-07
+    },
+    {
+      "thumb": 2.615959946331597e-08,
+      "index": 4.1732416628242795e-07,
+      "middle": 2.0952326585391567e-07,
+      "pinky": 1.2508688562192951e-07
+    },
+    {
+      "thumb": 2.616341414065832e-08,
+      "index": 4.173734546878115e-07,
+      "middle": 2.095330015644925e-07,
+      "pinky": 1.250677161693568e-07
+    },
+    {
+      "thumb": 2.6173557203933073e-08,
+      "index": 4.17513048286084e-07,
+      "middle": 2.095624127117278e-07,
+      "pinky": 1.2501479971591216e-07
+    },
+    {
+      "thumb": 2.619274699065787e-08,
+      "index": 4.177911101238616e-07,
+      "middle": 2.0962373803186988e-07,
+      "pinky": 1.2491134781498303e-07
+    },
+    {
+      "thumb": 2.6223447532418437e-08,
+      "index": 4.182524132694058e-07,
+      "middle": 2.097288242265285e-07,
+      "pinky": 1.2474177522821336e-07
+    },
+    {
+      "thumb": 2.6267829808219068e-08,
+      "index": 4.1893672650074624e-07,
+      "middle": 2.0988896797957652e-07,
+      "pinky": 1.2449198296544864e-07
+    },
+    {
+      "thumb": 2.6327745617026607e-08,
+      "index": 4.198792496639361e-07,
+      "middle": 2.1011507278265264e-07,
+      "pinky": 1.2414920368474533e-07
+    },
+    {
+      "thumb": 2.640477809475484e-08,
+      "index": 4.2110980397684495e-07,
+      "middle": 2.1041791712195574e-07,
+      "pinky": 1.2370207541977538e-07
+    },
+    {
+      "thumb": 2.6500186470504533e-08,
+      "index": 4.2265376915782564e-07,
+      "middle": 2.1080847226929119e-07,
+      "pinky": 1.2314040984396918e-07
+    },
+    {
+      "thumb": 2.6615022053596848e-08,
+      "index": 4.2453213285992363e-07,
+      "middle": 2.1129822569752865e-07,
+      "pinky": 1.224553325430205e-07
+    },
+    {
+      "thumb": 2.6749958370781163e-08,
+      "index": 4.2675981870501037e-07,
+      "middle": 2.1189951054368502e-07,
+      "pinky": 1.2163902808546294e-07
+    },
+    {
+      "thumb": 2.6905477185347278e-08,
+      "index": 4.2934555410159957e-07,
+      "middle": 2.1262581815228182e-07,
+      "pinky": 1.206849560179679e-07
+    },
+    {
+      "thumb": 2.7081793765034812e-08,
+      "index": 4.3230617864535196e-07,
+      "middle": 2.1349211057172942e-07,
+      "pinky": 1.1958773748535726e-07
+    },
+    {
+      "thumb": 2.7278826643670454e-08,
+      "index": 4.356274323294881e-07,
+      "middle": 2.1451512058587405e-07,
+      "pinky": 1.1834330080109584e-07
+    },
+    {
+      "thumb": 2.749629178133669e-08,
+      "index": 4.3931005717880895e-07,
+      "middle": 2.1571357715971462e-07,
+      "pinky": 1.1694887593618937e-07
+    },
+    {
+      "thumb": 2.7733673159441423e-08,
+      "index": 4.433472325706356e-07,
+      "middle": 2.1710847464761906e-07,
+      "pinky": 1.1540308828503051e-07
+    },
+    {
+      "thumb": 2.7990280432120156e-08,
+      "index": 4.4771923477816204e-07,
+      "middle": 2.18723324858825e-07,
+      "pinky": 1.1370617782048703e-07
+    },
+    {
+      "thumb": 2.826520208137377e-08,
+      "index": 4.524053860620053e-07,
+      "middle": 2.20584218694317e-07,
+      "pinky": 1.1185982714787442e-07
+    },
+    {
+      "thumb": 2.8557423971583886e-08,
+      "index": 4.573764870050576e-07,
+      "middle": 2.2272009993329186e-07,
+      "pinky": 1.0986736359239516e-07
+    },
+    {
+      "thumb": 2.8865666246623884e-08,
+      "index": 4.6260321476374016e-07,
+      "middle": 2.2516294002127226e-07,
+      "pinky": 1.0773374770199774e-07
+    },
+    {
+      "thumb": 2.9188619214246428e-08,
+      "index": 4.6803764090408153e-07,
+      "middle": 2.279479548063361e-07,
+      "pinky": 1.0546552776096445e-07
+    },
+    {
+      "thumb": 2.952488948282124e-08,
+      "index": 4.736323236735434e-07,
+      "middle": 2.3111414288675408e-07,
+      "pinky": 1.030707961574066e-07
+    },
+    {
+      "thumb": 2.987293911455091e-08,
+      "index": 4.793334867199776e-07,
+      "middle": 2.3470553372238507e-07,
+      "pinky": 1.0055915243486964e-07
+    },
+    {
+      "thumb": 3.0231118963456507e-08,
+      "index": 4.850746605410063e-07,
+      "middle": 2.387725743699414e-07,
+      "pinky": 9.794154622515778e-08
+    },
+    {
+      "thumb": 3.0597846834636995e-08,
+      "index": 4.907877303450011e-07,
+      "middle": 2.433773123139368e-07,
+      "pinky": 9.523013802369692e-08
+    },
+    {
+      "thumb": 3.0971354888700914e-08,
+      "index": 4.963865541075688e-07,
+      "middle": 2.4860232798737245e-07,
+      "pinky": 9.24381907438556e-08
+    },
+    {
+      "thumb": 3.134984406871634e-08,
+      "index": 5.018115417905174e-07,
+      "middle": 2.5457443010975124e-07,
+      "pinky": 8.957986160480361e-08
+    },
+    {
+      "thumb": 3.173164890417049e-08,
+      "index": 5.069552085397699e-07,
+      "middle": 2.615550103222561e-07,
+      "pinky": 8.667002198498753e-08
+    },
+    {
+      "thumb": 3.211498131455503e-08,
+      "index": 5.117395799127954e-07,
+      "middle": 2.703148454997866e-07,
+      "pinky": 8.372410320415002e-08
+    },
+    {
+      "thumb": 3.2498074889501486e-08,
+      "index": 5.160838183112172e-07,
+      "middle": 2.8893715731870594e-07,
+      "pinky": 8.075784640661108e-08
+    },
+    {
+      "thumb": 3.2879270983424614e-08,
+      "index": 5.199216421462161e-07,
+      "middle": 3.0410472906382725e-07,
+      "pinky": 7.778781140759663e-08
+    },
+    {
+      "thumb": 3.325690972403941e-08,
+      "index": 5.232024920931109e-07,
+      "middle": 3.102937113593237e-07,
+      "pinky": 7.482787323874974e-08
+    },
+    {
+      "thumb": 3.3629369872532435e-08,
+      "index": 5.259062256686801e-07,
+      "middle": 3.1550653921186045e-07,
+      "pinky": 7.18949395047187e-08
+    },
+    {
+      "thumb": 3.399506810815956e-08,
+      "index": 5.280672566694634e-07,
+      "middle": 3.21158753376465e-07,
+      "pinky": 6.900366249758853e-08
+    },
+    {
+      "thumb": 3.4352806608104674e-08,
+      "index": 5.297485432419444e-07,
+      "middle": 3.275932718158601e-07,
+      "pinky": 6.616800498097472e-08
+    },
+    {
+      "thumb": 3.4701115540871454e-08,
+      "index": 5.310827344368859e-07,
+      "middle": 3.350565532804514e-07,
+      "pinky": 6.340101538669737e-08
+    },
+    {
+      "thumb": 3.503889797171785e-08,
+      "index": 5.322513717834113e-07,
+      "middle": 3.4383363746184205e-07,
+      "pinky": 6.071455722278084e-08
+    },
+    {
+      "thumb": 3.536502198307545e-08,
+      "index": 5.334766934048617e-07,
+      "middle": 3.5446066530909915e-07,
+      "pinky": 5.8119144829733105e-08
+    },
+    {
+      "thumb": 3.567865331018453e-08,
+      "index": 5.350006840053489e-07,
+      "middle": 3.6765872600704767e-07,
+      "pinky": 5.562183259431829e-08
+    },
+    {
+      "thumb": 3.597890900563828e-08,
+      "index": 5.370566938046626e-07,
+      "middle": 3.840905596908617e-07,
+      "pinky": 5.323483834447138e-08
+    },
+    {
+      "thumb": 3.626529726103456e-08,
+      "index": 5.398399342760675e-07,
+      "middle": 4.034076889229374e-07,
+      "pinky": 5.096162478229066e-08
+    },
+    {
+      "thumb": 3.6537116217676154e-08,
+      "index": 5.434815761701089e-07,
+      "middle": 4.241913560701863e-07,
+      "pinky": 4.880693487102407e-08
+    },
+    {
+      "thumb": 3.679405740526934e-08,
+      "index": 5.480334571678093e-07,
+      "middle": 5.158485634233328e-06,
+      "pinky": 4.677407697277164e-08
+    },
+    {
+      "thumb": 3.703588789234489e-08,
+      "index": 5.534759871991932e-07,
+      "middle": 8.794264270761227e-06,
+      "pinky": 4.486489634047608e-08
+    },
+    {
+      "thumb": 3.7262332063580675e-08,
+      "index": 5.596925497407431e-07,
+      "middle": 8.22012136512208e-06,
+      "pinky": 4.3080365355480934e-08
+    },
+    {
+      "thumb": 3.7473476831978294e-08,
+      "index": 5.665301332130908e-07,
+      "middle": 7.484105923188292e-06,
+      "pinky": 4.142037081243466e-08
+    },
+    {
+      "thumb": 3.766917691636076e-08,
+      "index": 5.737877835693983e-07,
+      "middle": 6.780130910662456e-06,
+      "pinky": 3.9883759091050305e-08
+    },
+    {
+      "thumb": 3.7849696160443115e-08,
+      "index": 5.812811894914408e-07,
+      "middle": 6.188517095481933e-06,
+      "pinky": 3.8468635365400985e-08
+    },
+    {
+      "thumb": 3.801517433732414e-08,
+      "index": 5.887948284196263e-07,
+      "middle": 5.7218216842924825e-06,
+      "pinky": 3.717281316276336e-08
+    },
+    {
+      "thumb": 3.816603690487476e-08,
+      "index": 5.961548196187398e-07,
+      "middle": 5.365348089751102e-06,
+      "pinky": 3.5993372866892266e-08
+    },
+    {
+      "thumb": 3.8302518305317665e-08,
+      "index": 6.032102736196652e-07,
+      "middle": 5.098052259338314e-06,
+      "pinky": 3.49267965026622e-08
+    },
+    {
+      "thumb": 3.842496128682276e-08,
+      "index": 6.098423100458384e-07,
+      "middle": 4.900386127244166e-06,
+      "pinky": 3.418259446626598e-08
+    },
+    {
+      "thumb": 3.853389708862495e-08,
+      "index": 6.15963042444524e-07,
+      "middle": 4.75621967006956e-06,
+      "pinky": 3.3821208701156294e-08
+    },
+    {
+      "thumb": 3.862977320399804e-08,
+      "index": 6.215137799037072e-07,
+      "middle": 4.6530059804407784e-06,
+      "pinky": 3.350124248401554e-08
+    },
+    {
+      "thumb": 3.8713219440559714e-08,
+      "index": 6.264606181725161e-07,
+      "middle": 4.5805808505895786e-06,
+      "pinky": 3.3221681570137525e-08
+    },
+    {
+      "thumb": 3.878484821997784e-08,
+      "index": 6.307904290471016e-07,
+      "middle": 4.531228874835827e-06,
+      "pinky": 3.298100168985596e-08
+    },
+    {
+      "thumb": 3.8845143802429784e-08,
+      "index": 6.345070064739541e-07,
+      "middle": 4.498670406985297e-06,
+      "pinky": 3.277751197555649e-08
+    },
+    {
+      "thumb": 3.8894936864682544e-08,
+      "index": 6.376277912213521e-07,
+      "middle": 4.478072129573955e-06,
+      "pinky": 3.260930706760328e-08
+    },
+    {
+      "thumb": 3.893489689376828e-08,
+      "index": 6.401811600118656e-07,
+      "middle": 4.465663728564813e-06,
+      "pinky": 3.247404880931103e-08
+    },
+    {
+      "thumb": 3.896600193631538e-08,
+      "index": 6.422048861586395e-07,
+      "middle": 4.458600693834895e-06,
+      "pinky": 3.2369134108804525e-08
+    },
+    {
+      "thumb": 3.898905090761678e-08,
+      "index": 6.437448191470674e-07,
+      "middle": 4.454827656923409e-06,
+      "pinky": 3.2291539457926477e-08
+    },
+    {
+      "thumb": 3.9005149684147534e-08,
+      "index": 6.448544680044195e-07,
+      "middle": 4.452944069394234e-06,
+      "pinky": 3.2237813842257955e-08
+    },
+    {
+      "thumb": 3.9015316767526865e-08,
+      "index": 6.455951292514362e-07,
+      "middle": 4.45206980260071e-06,
+      "pinky": 3.22042096400299e-08
+    },
+    {
+      "thumb": 3.902092557373096e-08,
+      "index": 6.460356885552242e-07,
+      "middle": 4.451701453917735e-06,
+      "pinky": 3.218640765664513e-08
+    },
+    {
+      "thumb": 3.90231843104546e-08,
+      "index": 6.462531532684801e-07,
+      "middle": 4.451577757751545e-06,
+      "pinky": 3.217969063536466e-08
+    },
+    {
+      "thumb": 3.9023555478220184e-08,
+      "index": 6.46333057331338e-07,
+      "middle": 4.451562132583786e-06,
+      "pinky": 3.217869843439066e-08
+    }
+  ],
+  "geometry": [
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0013558212667231229,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0013558212667231229,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0013558212667231229,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0013558212667231229,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0013558212667231229,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0013558212667231229,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0013558212667231229,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0013558212667231229,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0013558212667231229,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0013558212667231229,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0013558212667231229,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0013558212667231229,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0013558212667231229,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0013558212667231229,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_thumb_pad_link",
+          "other_link": "hand_r_pinky_pad_link",
+          "gap_lower_bound_m": -0.0009814026747593518
+        },
+        {
+          "moving_link": "hand_r_pinky_pad_link",
+          "other_link": "hand_r_thumb_pad_link",
+          "gap_lower_bound_m": -0.0009814026747593518
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.057835794084791683,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_thumb_pad_link",
+          "other_link": "hand_r_pinky_pad_link",
+          "gap_lower_bound_m": -0.0009814026747593518
+        },
+        {
+          "moving_link": "hand_r_pinky_pad_link",
+          "other_link": "hand_r_thumb_pad_link",
+          "gap_lower_bound_m": -0.0009814026747593518
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.059601638484675715,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_thumb_pad_link",
+          "other_link": "hand_r_pinky_pad_link",
+          "gap_lower_bound_m": -0.0002482726191642415
+        },
+        {
+          "moving_link": "hand_r_pinky_pad_link",
+          "other_link": "hand_r_thumb_pad_link",
+          "gap_lower_bound_m": -0.0002482726191642415
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.05946151127523016,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_thumb_pad_link",
+          "other_link": "hand_r_pinky_pad_link",
+          "gap_lower_bound_m": -0.00018931874028803308
+        },
+        {
+          "moving_link": "hand_r_pinky_pad_link",
+          "other_link": "hand_r_thumb_pad_link",
+          "gap_lower_bound_m": -0.00018931874028803308
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.058747916676404575,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_thumb_pad_link",
+          "other_link": "hand_r_pinky_pad_link",
+          "gap_lower_bound_m": -4.593328862456669e-05
+        },
+        {
+          "moving_link": "hand_r_pinky_pad_link",
+          "other_link": "hand_r_thumb_pad_link",
+          "gap_lower_bound_m": -4.593328862456669e-05
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.05888043067367201,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.059472670480221444,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.060226216216623406,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06111015764585439,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06089137362812358,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.061680657135531114,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.0637286775858488,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06517456051782314,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.0658960067595287,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06643308703165798,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06677316792009505,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_pinky_link3",
+          "gap_lower_bound_m": -5.889869469809933e-05
+        },
+        {
+          "moving_link": "hand_r_pinky_link3",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -5.889869469809933e-05
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06685461282964775,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_pinky_link3",
+          "gap_lower_bound_m": -0.00024284615913286803
+        },
+        {
+          "moving_link": "hand_r_pinky_link3",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -0.00024284615913286803
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.0667364495418483,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_pinky_link3",
+          "gap_lower_bound_m": -0.0002854952299880843
+        },
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_pinky_link4",
+          "gap_lower_bound_m": -3.216539772001037e-05
+        },
+        {
+          "moving_link": "hand_r_pinky_link3",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -0.0002854952299880843
+        },
+        {
+          "moving_link": "hand_r_pinky_link4",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -3.216539772001037e-05
+        }
+      ]
+    }
+  ]
+}

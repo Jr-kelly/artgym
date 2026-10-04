@@ -13,8 +13,8 @@ from scripts.g2_cartesian_acquisition import plan_translation
 from scripts.wuji_kinematics import FINGERS
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--plan',type=Path,required=True);p.add_argument('--localization',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--outward',type=float,default=.08);p.add_argument('--lift',type=float,default=.10);p.add_argument('--extract-outward',type=float,default=0.,help='Known motor-only outward extraction before full vertical lift; actual free-knife contact unproven');a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
-    j=json.loads(a.plan.read_text());loc=json.loads(a.localization.read_text());world=np.asarray(loc['object_world_matrix']);w=np.asarray(j['wrist_in_knife']);goal=world@w;k=G2Kinematics();table=ArmTableCollision(.75);g=DigitGeometry(knife_spec='research/robust-knife-family-20261003/real-knife-asset-spec.json');openq=np.asarray(j['open_q']);qgrasp,e=k.solve(goal,np.asarray(loc['grasp_q']));assert e['position_m']<.001
+    p=argparse.ArgumentParser();p.add_argument('--table-y',type=float,default=-.25,help='Known table placement in world metres; same original box/dynamics');p.add_argument('--plan',type=Path,required=True);p.add_argument('--localization',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--outward',type=float,default=.08);p.add_argument('--lift',type=float,default=.10);p.add_argument('--extract-outward',type=float,default=0.,help='Known motor-only outward extraction before full vertical lift; actual free-knife contact unproven');a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
+    j=json.loads(a.plan.read_text());loc=json.loads(a.localization.read_text());world=np.asarray(loc['object_world_matrix']);w=np.asarray(j['wrist_in_knife']);goal=world@w;k=G2Kinematics();table=ArmTableCollision(.75,table_y=a.table_y);g=DigitGeometry(knife_spec='research/robust-knife-family-20261003/real-knife-asset-spec.json');openq=np.asarray(j['open_q']);qgrasp,e=k.solve(goal,np.asarray(loc['grasp_q']));assert e['position_m']<.001
     outside=goal.copy();outside[0,3]-=a.outward
     # Follow the near branch outward before planning its reverse approach.
     reverse,rd=plan_translation(k,qgrasp,outside,3.,1/30,table);start=reverse[-1];approach,ad=plan_translation(k,start,goal,3.,1/30,table)
@@ -32,7 +32,7 @@ def main():
         for name,meshes in g.meshes.items():
             mat=wrist@frames[name]
             for v,n in meshes:
-                v=v@mat[:3,:3].T+mat[:3,3];axes=np.r_[np.eye(3),n@mat[:3,:3].T];pv=(v-np.array([.60,-.25,.725]))@axes.T;radius=abs(axes)@np.array([.30,.40,.025]);tablegaps.append(np.maximum(pv.min(0)-radius,-radius-pv.max(0)).max())
+                v=v@mat[:3,:3].T+mat[:3,3];axes=np.r_[np.eye(3),n@mat[:3,:3].T];pv=(v-np.array([.60,a.table_y,.725]))@axes.T;radius=abs(axes)@np.array([.30,.40,.025]);tablegaps.append(np.maximum(pv.min(0)-radius,-radius-pv.max(0)).max())
         row=dict(frame=i,knife_gap_m=knife_gap,table_gap_m=float(min(tablegaps)));rows.append(row)
     assert min(r['knife_gap_m'] for r in rows)>0, 'Open-hand lateral approach intersects knife'
     assert min(r['table_gap_m'] for r in rows)>.0003, 'Lateral approach intersects actual table'

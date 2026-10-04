@@ -1,0 +1,718 @@
+{
+  "scope": "Common initial-estimate adaptation of actual pickup and postlift motor path.\n\nNo physical asset ID, current object state, contacts or force is read. This\nretains known arm poses up to estimated table-height change and adapts each\nhand waypoint to the same noisy dimensional/slider observation. Passing the\nmotor checks does not establish contact retention or successful operation.\n",
+  "no_physical_asset_read": true,
+  "estimate": {
+    "source": "Labelled synthetic noisy onceinitial dimensional/slider observation, heldout runtime; no asset ID supplied to planner",
+    "uncertainty_m": 0.00025,
+    "handle_size_WTL_m": [
+      0.016519967984141168,
+      0.011123252357812809,
+      0.13652666229715157
+    ],
+    "slider_size_WTL_m": [
+      0.01,
+      0.0023920796350742086,
+      0.03
+    ],
+    "slider_contact_shift_m": [
+      0.00042665036870824914,
+      -0.0003475617573573329,
+      -0.00040806301175565554
+    ]
+  },
+  "preflight_passed": false,
+  "hand_rate_ok": true,
+  "hand_geometry_ok": false,
+  "arm_ik_ok": true,
+  "arm_rate_ok": true,
+  "arm_swept_table_recertified": true,
+  "arm_table_collisions": [],
+  "pickup": {
+    "input": {
+      "source": "Labelled synthetic noisy onceinitial dimensional/slider observation, heldout runtime; no asset ID supplied to planner",
+      "uncertainty_m": 0.00025,
+      "handle_size_WTL_m": [
+        0.016519967984141168,
+        0.011123252357812809,
+        0.13652666229715157
+      ],
+      "slider_size_WTL_m": [
+        0.01,
+        0.0023920796350742086,
+        0.03
+      ],
+      "slider_contact_shift_m": [
+        0.00042665036870824914,
+        -0.0003475617573573329,
+        -0.00040806301175565554
+      ]
+    },
+    "planned_thumb_contact_bias_knife_m": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "contact_errors_m": {
+      "thumb": 1.076743072781858e-07,
+      "index": 1.4323686069834414e-07,
+      "middle": 6.413988042188528e-08,
+      "pinky": 8.754881029338589e-08
+    },
+    "trajectory_max_error_m": 5.0997689220596e-07,
+    "no_physical_asset_read": true,
+    "scope": "Estimated initial geometry adaptation, original nominal joint-preload offsets retained; not force regulation, collision/contact feasibility unproven",
+    "support_surface_scaling": true
+  },
+  "operation": {
+    "input": {
+      "source": "Labelled synthetic noisy onceinitial dimensional/slider observation, heldout runtime; no asset ID supplied to planner",
+      "uncertainty_m": 0.00025,
+      "handle_size_WTL_m": [
+        0.016519967984141168,
+        0.011123252357812809,
+        0.13652666229715157
+      ],
+      "slider_size_WTL_m": [
+        0.01,
+        0.0023920796350742086,
+        0.03
+      ],
+      "slider_contact_shift_m": [
+        0.00042665036870824914,
+        -0.0003475617573573329,
+        -0.00040806301175565554
+      ]
+    },
+    "planned_thumb_contact_bias_knife_m": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "contact_errors_m": {
+      "thumb": 3.7443172377662413e-07,
+      "index": 2.6084620113567265e-07,
+      "middle": 2.1381571954774225e-07,
+      "pinky": 2.3238730334568372e-07
+    },
+    "trajectory_max_error_m": 6.177122004122202e-07,
+    "no_physical_asset_read": true,
+    "scope": "Estimated initial geometry adaptation, original nominal joint-preload offsets retained; not force regulation, collision/contact feasibility unproven",
+    "support_surface_scaling": true
+  },
+  "waypoint_errors": [
+    {
+      "thumb": 1.776497343229463e-07,
+      "index": 1.7956071706089932e-07,
+      "middle": 2.7650215905698706e-08,
+      "pinky": 4.500774035452164e-08
+    },
+    {
+      "thumb": 1.7765431501394819e-07,
+      "index": 1.7956305252302094e-07,
+      "middle": 2.765061383625236e-08,
+      "pinky": 4.5007434991122814e-08
+    },
+    {
+      "thumb": 1.776858238564167e-07,
+      "index": 1.795800890221818e-07,
+      "middle": 2.765338724771054e-08,
+      "pinky": 4.5004961510780834e-08
+    },
+    {
+      "thumb": 1.7776879608967115e-07,
+      "index": 1.7962937257773052e-07,
+      "middle": 2.766093258171368e-08,
+      "pinky": 4.499678427197062e-08
+    },
+    {
+      "thumb": 1.7792562081237196e-07,
+      "index": 1.797290635618964e-07,
+      "middle": 2.767549308436827e-08,
+      "pinky": 4.497899256565294e-08
+    },
+    {
+      "thumb": 1.78176346054998e-07,
+      "index": 1.7989594462788897e-07,
+      "middle": 2.7699090661832473e-08,
+      "pinky": 4.4947971692994554e-08
+    },
+    {
+      "thumb": 1.7853904113200789e-07,
+      "index": 1.8014499875736071e-07,
+      "middle": 2.773350547629127e-08,
+      "pinky": 4.490072525242363e-08
+    },
+    {
+      "thumb": 1.7902999030829953e-07,
+      "index": 1.804892231058302e-07,
+      "middle": 2.7780236898865944e-08,
+      "pinky": 4.483498900646653e-08
+    },
+    {
+      "thumb": 1.7966353191545379e-07,
+      "index": 1.8093958495620113e-07,
+      "middle": 2.7840536266336658e-08,
+      "pinky": 4.4749360823629104e-08
+    },
+    {
+      "thumb": 1.804526095724565e-07,
+      "index": 1.8150492571163344e-07,
+      "middle": 2.7915418143837484e-08,
+      "pinky": 4.464333990733827e-08
+    },
+    {
+      "thumb": 1.814086233303196e-07,
+      "index": 1.821921388359097e-07,
+      "middle": 2.800565867375864e-08,
+      "pinky": 4.45173354461119e-08
+    },
+    {
+      "thumb": 1.8257784701879858e-07,
+      "index": 1.8300582429144772e-07,
+      "middle": 2.8111848874471374e-08,
+      "pinky": 4.437265619289464e-08
+    },
+    {
+      "thumb": 1.8387338680828724e-07,
+      "index": 1.8394864070247025e-07,
+      "middle": 2.8234402994618107e-08,
+      "pinky": 4.421144746269007e-08
+    },
+    {
+      "thumb": 1.8537782207293295e-07,
+      "index": 1.850209686263154e-07,
+      "middle": 2.837363167389897e-08,
+      "pinky": 4.403659978142793e-08
+    },
+    {
+      "thumb": 1.8708925364158532e-07,
+      "index": 1.8622104987691185e-07,
+      "middle": 2.8529747835806704e-08,
+      "pinky": 4.385159637495131e-08
+    },
+    {
+      "thumb": 1.8900957484373363e-07,
+      "index": 1.8754496769699505e-07,
+      "middle": 2.8702926043185636e-08,
+      "pinky": 4.366035768190616e-08
+    },
+    {
+      "thumb": 1.9114238184430287e-07,
+      "index": 1.8898636247839985e-07,
+      "middle": 2.8893364167229486e-08,
+      "pinky": 4.3466997465975863e-08
+    },
+    {
+      "thumb": 1.9349189157479288e-07,
+      "index": 1.9053656909733283e-07,
+      "middle": 2.910129611801397e-08,
+      "pinky": 4.327479241135461e-08
+    },
+    {
+      "thumb": 1.960615418519451e-07,
+      "index": 1.9218438651816276e-07,
+      "middle": 2.9327048002451155e-08,
+      "pinky": 4.308951919669491e-08
+    },
+    {
+      "thumb": 1.9885412802822386e-07,
+      "index": 1.9391630251753915e-07,
+      "middle": 2.9571063037316428e-08,
+      "pinky": 4.291400020850186e-08
+    },
+    {
+      "thumb": 2.0187164856268241e-07,
+      "index": 1.9571610386937205e-07,
+      "middle": 2.983394067620451e-08,
+      "pinky": 4.275107490826656e-08
+    },
+    {
+      "thumb": 2.051152800001367e-07,
+      "index": 1.9756476759557193e-07,
+      "middle": 3.0116445700449895e-08,
+      "pinky": 4.2603199089803335e-08
+    },
+    {
+      "thumb": 2.0858515903088698e-07,
+      "index": 1.9944268830048073e-07,
+      "middle": 3.0419544181807725e-08,
+      "pinky": 4.2471602650754784e-08
+    },
+    {
+      "thumb": 2.1228074032452098e-07,
+      "index": 2.0132148404302474e-07,
+      "middle": 3.074447419639697e-08,
+      "pinky": 4.235715519298558e-08
+    },
+    {
+      "thumb": 2.1620057071372216e-07,
+      "index": 2.0317561854944805e-07,
+      "middle": 3.109298187823055e-08,
+      "pinky": 4.225940724475239e-08
+    },
+    {
+      "thumb": 2.20341946414568e-07,
+      "index": 2.04975220690825e-07,
+      "middle": 3.1466239320789865e-08,
+      "pinky": 4.217728701352263e-08
+    },
+    {
+      "thumb": 2.2468185935124685e-07,
+      "index": 2.0668811207032117e-07,
+      "middle": 3.187557469749833e-08,
+      "pinky": 4.210903874423801e-08
+    },
+    {
+      "thumb": 2.2923739141640128e-07,
+      "index": 2.0828063164802028e-07,
+      "middle": 3.2319000285221444e-08,
+      "pinky": 4.2052258073506394e-08
+    },
+    {
+      "thumb": 2.3398982338393183e-07,
+      "index": 2.0971872680522752e-07,
+      "middle": 3.281347364607496e-08,
+      "pinky": 4.2004279286096015e-08
+    },
+    {
+      "thumb": 2.389278734778462e-07,
+      "index": 2.1096975126045671e-07,
+      "middle": 3.3420974148441436e-08,
+      "pinky": 4.196197088145482e-08
+    },
+    {
+      "thumb": 2.4403836576730375e-07,
+      "index": 2.1200486712906015e-07,
+      "middle": 3.429122121329917e-08,
+      "pinky": 4.1922372830347645e-08
+    },
+    {
+      "thumb": 2.4930585187989956e-07,
+      "index": 2.1280245372779742e-07,
+      "middle": 3.4055045696532835e-08,
+      "pinky": 4.1883188283631966e-08
+    },
+    {
+      "thumb": 2.5471315805218814e-07,
+      "index": 2.1335206067106354e-07,
+      "middle": 3.4203480972810126e-08,
+      "pinky": 4.184056037221032e-08
+    },
+    {
+      "thumb": 2.6024134303398916e-07,
+      "index": 2.1365868912020968e-07,
+      "middle": 3.4355012379059595e-08,
+      "pinky": 4.179340005400476e-08
+    },
+    {
+      "thumb": 2.6586974868395943e-07,
+      "index": 2.137468803997968e-07,
+      "middle": 3.450254448678419e-08,
+      "pinky": 4.174001441402764e-08
+    },
+    {
+      "thumb": 2.715763291261446e-07,
+      "index": 2.1366343190984412e-07,
+      "middle": 3.4652612568722036e-08,
+      "pinky": 4.1679345826616654e-08
+    },
+    {
+      "thumb": 2.7733789991788346e-07,
+      "index": 2.1347767208422782e-07,
+      "middle": 3.480126318091789e-08,
+      "pinky": 4.161093100618871e-08
+    },
+    {
+      "thumb": 2.83130301745186e-07,
+      "index": 2.1327809366593514e-07,
+      "middle": 3.4931683042198645e-08,
+      "pinky": 4.153485977202297e-08
+    },
+    {
+      "thumb": 2.889286564905816e-07,
+      "index": 2.1316545044256948e-07,
+      "middle": 3.504815039587161e-08,
+      "pinky": 4.145189233809981e-08
+    },
+    {
+      "thumb": 2.9470751256726993e-07,
+      "index": 2.132422058106001e-07,
+      "middle": 3.5177867151754303e-08,
+      "pinky": 4.136305843328739e-08
+    },
+    {
+      "thumb": 3.004412731817617e-07,
+      "index": 2.1360078953573808e-07,
+      "middle": 3.533598392109806e-08,
+      "pinky": 4.1269715197221567e-08
+    },
+    {
+      "thumb": 3.061041323354553e-07,
+      "index": 2.1431219424406204e-07,
+      "middle": 3.5556518157634027e-08,
+      "pinky": 4.1171360899686673e-08
+    },
+    {
+      "thumb": 3.116704691560574e-07,
+      "index": 2.154180581610202e-07,
+      "middle": 3.585420698455135e-08,
+      "pinky": 4.1072185033522985e-08
+    },
+    {
+      "thumb": 3.171149003325008e-07,
+      "index": 2.1692682765056022e-07,
+      "middle": 3.621597019543826e-08,
+      "pinky": 4.097267337696828e-08
+    },
+    {
+      "thumb": 3.224126910016957e-07,
+      "index": 2.1881507404622515e-07,
+      "middle": 3.630610007774647e-08,
+      "pinky": 4.087422761170009e-08
+    },
+    {
+      "thumb": 3.2753965556867404e-07,
+      "index": 2.21032601852189e-07,
+      "middle": 3.592127399990341e-08,
+      "pinky": 4.077812825252196e-08
+    },
+    {
+      "thumb": 3.324725330964668e-07,
+      "index": 2.2351039374222338e-07,
+      "middle": 3.54751624139316e-08,
+      "pinky": 4.0685490050737036e-08
+    },
+    {
+      "thumb": 3.371895293325714e-07,
+      "index": 2.2616927171396412e-07,
+      "middle": 3.500334537566722e-08,
+      "pinky": 4.0597128104809346e-08
+    },
+    {
+      "thumb": 3.416698269369959e-07,
+      "index": 2.2892777152620306e-07,
+      "middle": 3.452082572781315e-08,
+      "pinky": 4.051361786665911e-08
+    },
+    {
+      "thumb": 3.4589462077804176e-07,
+      "index": 2.317087770269245e-07,
+      "middle": 3.403927871628403e-08,
+      "pinky": 4.0435524055584273e-08
+    },
+    {
+      "thumb": 3.498468327926968e-07,
+      "index": 2.3444384614449956e-07,
+      "middle": 3.356735085041289e-08,
+      "pinky": 4.036268179094676e-08
+    },
+    {
+      "thumb": 3.5351204720086874e-07,
+      "index": 2.370757020326796e-07,
+      "middle": 3.3112238370870175e-08,
+      "pinky": 6.252388096393678e-08
+    },
+    {
+      "thumb": 3.5687782140518307e-07,
+      "index": 2.395593134998473e-07,
+      "middle": 3.268022259969851e-08,
+      "pinky": 1.5248912953466512e-07
+    },
+    {
+      "thumb": 3.5993518703627725e-07,
+      "index": 2.418609471089682e-07,
+      "middle": 3.2281894352487616e-08,
+      "pinky": 1.5370884711504496e-07
+    },
+    {
+      "thumb": 3.62678274290416e-07,
+      "index": 2.4395754553883017e-07,
+      "middle": 3.19066814138788e-08,
+      "pinky": 1.5478832463008172e-07
+    },
+    {
+      "thumb": 3.651045588904256e-07,
+      "index": 2.4583503154045695e-07,
+      "middle": 3.157209884603821e-08,
+      "pinky": 1.5573148807232277e-07
+    },
+    {
+      "thumb": 3.6721556832921613e-07,
+      "index": 2.4748690750565506e-07,
+      "middle": 3.127824622735742e-08,
+      "pinky": 1.5654315427767747e-07
+    },
+    {
+      "thumb": 3.690169564116264e-07,
+      "index": 2.48912866871022e-07,
+      "middle": 3.102532287876322e-08,
+      "pinky": 1.5722905759013315e-07
+    },
+    {
+      "thumb": 3.7051837063320184e-07,
+      "index": 2.501176757396232e-07,
+      "middle": 3.081299375090698e-08,
+      "pinky": 1.577958500288839e-07
+    },
+    {
+      "thumb": 3.717340940685329e-07,
+      "index": 2.511103526863446e-07,
+      "middle": 3.0640153293094557e-08,
+      "pinky": 1.5825166933935769e-07
+    },
+    {
+      "thumb": 3.7268313586042837e-07,
+      "index": 2.5190353229768e-07,
+      "middle": 3.049397877633156e-08,
+      "pinky": 1.586051183227825e-07
+    },
+    {
+      "thumb": 3.7338898593788703e-07,
+      "index": 2.525131635200686e-07,
+      "middle": 3.0391462743427185e-08,
+      "pinky": 1.5886648484940612e-07
+    },
+    {
+      "thumb": 3.7387999150365614e-07,
+      "index": 2.5295824748497586e-07,
+      "middle": 3.032011742002737e-08,
+      "pinky": 1.5904727221552043e-07
+    },
+    {
+      "thumb": 3.741894000333679e-07,
+      "index": 2.5326088392777716e-07,
+      "middle": 3.027529244093552e-08,
+      "pinky": 1.5916039996858924e-07
+    },
+    {
+      "thumb": 3.7435495876035903e-07,
+      "index": 2.5344620609431716e-07,
+      "middle": 3.025150010211752e-08,
+      "pinky": 1.5922030736852984e-07
+    },
+    {
+      "thumb": 3.744195448571507e-07,
+      "index": 2.5354251433376216e-07,
+      "middle": 3.024245711078881e-08,
+      "pinky": 1.5924301271954762e-07
+    },
+    {
+      "thumb": 3.744305355404412e-07,
+      "index": 2.535814524060023e-07,
+      "middle": 3.0241132883679604e-08,
+      "pinky": 1.5924638668743645e-07
+    }
+  ],
+  "geometry": [
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0006473919352923962,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0007317120875887095,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.00071189645536468,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0007009826081679216,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0006989453614058561,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0006887958142697825,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0005913583146419099,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0005913583146419099,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0005169531094330049,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0004643738983046708,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0004357398212257446,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.00044136433119917884,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0004808059681362109,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0005529552651180603,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_thumb_pad_link",
+          "other_link": "hand_r_pinky_pad_link",
+          "gap_lower_bound_m": -0.0011669558568136312
+        },
+        {
+          "moving_link": "hand_r_pinky_pad_link",
+          "other_link": "hand_r_thumb_pad_link",
+          "gap_lower_bound_m": -0.0011669558568136312
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.05850104182397722,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_thumb_pad_link",
+          "other_link": "hand_r_pinky_pad_link",
+          "gap_lower_bound_m": -0.0011669558568136312
+        },
+        {
+          "moving_link": "hand_r_pinky_pad_link",
+          "other_link": "hand_r_thumb_pad_link",
+          "gap_lower_bound_m": -0.0011669558568136312
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.060263919790662215,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_thumb_pad_link",
+          "other_link": "hand_r_pinky_pad_link",
+          "gap_lower_bound_m": -0.00022732633174385453
+        },
+        {
+          "moving_link": "hand_r_pinky_pad_link",
+          "other_link": "hand_r_thumb_pad_link",
+          "gap_lower_bound_m": -0.00022732633174385453
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.060247446037264306,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_thumb_pad_link",
+          "other_link": "hand_r_pinky_pad_link",
+          "gap_lower_bound_m": -0.0001696333642867004
+        },
+        {
+          "moving_link": "hand_r_pinky_pad_link",
+          "other_link": "hand_r_thumb_pad_link",
+          "gap_lower_bound_m": -0.0001696333642867004
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.05953385500418575,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_thumb_pad_link",
+          "other_link": "hand_r_pinky_pad_link",
+          "gap_lower_bound_m": -2.9207845384210396e-05
+        },
+        {
+          "moving_link": "hand_r_pinky_pad_link",
+          "other_link": "hand_r_thumb_pad_link",
+          "gap_lower_bound_m": -2.9207845384210396e-05
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.05966635968935221,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.060258605833329225,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06101214426392878,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06189609249327834,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06131788651546918,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.062156811758654534,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06446632893904214,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06596048984043038,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06668194184051016,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06721902383955472,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06755910348916197,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06754475346064476,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06742692773900132,
+      "uncertified_self_pairs": []
+    }
+  ]
+}

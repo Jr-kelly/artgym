@@ -19,7 +19,7 @@ LEGAL_FIELDS = {'clock_s', 'hand_measured_q', 'arm_measured_q', 'issued_hand_tar
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--prewarm-iterations',type=int,default=0);p.add_argument('--input', type=Path, required=True)
+    p.add_argument('--scheduled-target-holds',action='store_true',help='Knownclock finitePD issuedposition holds after complete reference; never forcefeedback');p.add_argument('--prewarm-iterations',type=int,default=0);p.add_argument('--input', type=Path, required=True)
     p.add_argument('--estimate', type=Path, required=True)
     p.add_argument('--calibration', type=Path, required=True)
     p.add_argument('--motor-prefix-plan',type=Path,help='Once-known closure/lift/transfer plan for learned acquisition; future recorded targets never used as reference')
@@ -77,6 +77,7 @@ def main():
         assert plan is not None, 'Learned acquisition requires its once-known motor plan'
         assert not plan.get('lift_preload_height_m'), 'Measured-height variant needs a separate replay adapter'
     from scripts.wuji_known_acquisition_prefix import hand_reference
+    if a.scheduled_target_holds:assert policy.thumb_reference is not None and not policy.thumb_reference.pacing and policy.thumb_reference.duration<5
     kin = G2Kinematics()
     taken = False
     targets, actions, errors = [], [], [];warmup=None;latencies=[]
@@ -111,7 +112,7 @@ def main():
         goal = .04 if t>=16-1e-7 and int(round((t-16)*30))//150 % 2 == 0 else 0.
         gravity = kin.forward(samples['arm_measured_q'][i])[:3, :3].T @ np.array([0., 0., -1.])
         begin=time.perf_counter()
-        target, action = policy.command(q, goal, wrist_gravity=gravity, clock_s=float(t),known_prefix_target=hand_reference(plan,float(t)) if policy.learned_acquisition_prefix and t<16 else None)
+        target, action = policy.command(q, goal, wrist_gravity=gravity, clock_s=float(t),issued_target_hold=a.scheduled_target_holds and t>=16 and ((float(t)-16)%5)>=policy.thumb_reference.duration+1/30-1e-7,known_prefix_target=hand_reference(plan,float(t)) if policy.learned_acquisition_prefix and t<16 else None)
         latencies.append((time.perf_counter()-begin)*1000)
         assert policy.last_encoder_input.shape == (2076,)
         assert policy.last_public_features.shape == ((170 if policy.history_features else 154)+(9 if policy.support_load_features is not None else 0)+(8 if policy.support_estimator is not None else 0),)
@@ -123,7 +124,7 @@ def main():
     np.savez_compressed(a.output/'commands.npz', targets=targets, actions=actions)
     report = dict(scope='Offline inference only; no physics scene, robot SDK, or current object/contact/load input',
         known_prefix_plan_sha256=hashlib.sha256(a.motor_prefix_plan.read_bytes()).hexdigest() if a.motor_prefix_plan else None,initial_pose_prior_scope='Known table plus once-estimated geometry transformed by measured arm FK' if policy.table_initial_prior_from_measured_arm else 'Once loaded held prior',prewarm=warmup,physics_performance_claim=False, real_robot_ran=False,learned_takeover_seconds=a.takeover_seconds,support_latch_after_preparation=policy.support_latch_after_preparation, control_hz=30, r800_input_dim=2076,
-        pressure_spec=pressure_spec,postlift_regrasp_sha256=hashlib.sha256(a.postlift_regrasp.read_bytes()).hexdigest() if a.postlift_regrasp else None,
+        scheduled_target_holds=a.scheduled_target_holds,scheduled_target_hold_scope='Knowncommandclock positionhold; network/reference/measuredhistory continue; not constantforce' if a.scheduled_target_holds else None,pressure_spec=pressure_spec,postlift_regrasp_sha256=hashlib.sha256(a.postlift_regrasp.read_bytes()).hexdigest() if a.postlift_regrasp else None,
         inference_command_latency_ms=dict(first=latencies[0],median=float(np.median(latencies)),p95=float(np.percentile(latencies,95)),maximum=max(latencies),frames_above_33_333ms=sum(x>1000/30 for x in latencies),scope='Recorded legal-input offline command computation under current machine load; excludes SDK, physical motors and measurement acquisition'),
         residual_input_dim=(170 if policy.history_features else 154)+(9 if policy.support_load_features is not None else 0)+(8 if policy.support_estimator is not None else 0), support_load_feature_spec=policy.support_load_feature_spec, support_estimator_metadata={k:v for k,v in policy.support_estimator.spec.items() if k not in ['model','input_mean','input_std','history_mean','history_std']} if policy.support_estimator is not None else None,support_delta_coordinates={k:v for k,v in policy.support_delta_coordinates.spec.items() if k!='reference_actor_state'} if policy.support_delta_coordinates is not None else None, command_frames=len(targets),
         max_target_difference_from_recorded_rad=max(errors),

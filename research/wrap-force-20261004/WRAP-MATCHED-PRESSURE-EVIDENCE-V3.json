@@ -1,0 +1,536 @@
+{
+  "source2-original-pressure080-v3": {
+    "evaluation": {
+      "criterion": {
+        "version": 1,
+        "declared_utc": "2026-10-03T20:22:00+00:00",
+        "scope": "Functional two-cycle behavior, separately from unchanged historical 0.25rad world-pose regression; diagnostic held resets never qualify as pickup demos.",
+        "endpoint": {
+          "extension_min_m": 0.025,
+          "retraction_max_m": 0.008,
+          "command_travel_m": 0.04
+        },
+        "grip": {
+          "minimum_height_above_table_m": 0.03,
+          "relative_translation_envelope_m": 0.015,
+          "relative_rotation_envelope_rad": 0.6,
+          "cycle_return_translation_increment_max_m": 0.005,
+          "cycle_return_rotation_increment_max_rad": 0.1,
+          "final_hold_translation_speed_max_m_s": 0.003,
+          "final_hold_rotation_speed_max_rad_s": 0.06
+        },
+        "contact": {
+          "thumb_slider_substep_fraction_min": 0.9,
+          "maximum_contiguous_zero_contact_s": 0.5
+        },
+        "rationale": "15mm and 0.6rad are broad escape envelopes, not precision targets. Return-to-return drift <=5mm/0.10rad and last-second settling distinguish progressive slip from bounded new seating; both meaningful endpoints and sustained slider contact remain mandatory. World-pose legacy score is reported unchanged; active wrist motion is shown separately."
+      },
+      "trace_sha256": "740abcaf3e846d8570fc989830b7e35194940b0780cc237d0c6f61c6d516fdb0",
+      "checks": {
+        "two_cycles": true,
+        "clear": true,
+        "relative_envelope": true,
+        "endpoints": false,
+        "bounded_return_drift": true,
+        "final_settling": true,
+        "thumb_contact": true
+      },
+      "functional_behavior_pass": false,
+      "continuous_pickup_demo_pass": false,
+      "held_diagnostic": true,
+      "measurement_diagnostic": false,
+      "legacy_full_success": false,
+      "slider_endpoints_m": {
+        "extend1": 0.03037823028125347,
+        "return1": 0.004240529161957218,
+        "extend2": 0.021714197021988346,
+        "return2": 0.0029211514788541337
+      },
+      "relative_max_rotation_rad": 0.36282322466491906,
+      "relative_max_translation_m": 0.0032760541583774345,
+      "active_wrist_max_rotation_rad": 0.00014456190357167297,
+      "return_to_return_rotation_rad": 0.05250732048657461,
+      "return_to_return_translation_m": 0.00031482125271953374,
+      "final_hold_translation_speed_m_s": 6.733346105578022e-05,
+      "final_hold_rotation_speed_rad_s": 0.0007387442823394743,
+      "thumb_contact_substep_fraction": 0.9983361064891847,
+      "longest_zero_thumb_contact_s": 0.0
+    },
+    "actual_thumb_normal_measurement": {
+      "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+      "physics_hz": 240,
+      "substeps_per_simulate": 1,
+      "sample_scope": "Every actualphysicalstep at240Hz, arithmeticmean/min/max over8steps per30Hz policyframe; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+      "finger_order": [
+        "thumb",
+        "index",
+        "middle",
+        "ring",
+        "pinky"
+      ],
+      "static_thumb_pressure_mean_N": 0.7296107176272605,
+      "operation_thumb_pressure_mean_N": 0.7581196123822367,
+      "operation_thumb_pressure_5th_percentile_N": 0.643613600309098,
+      "operation_thumb_contact_substep_fraction": 0.9983361064891847,
+      "operation_ring_underside_support_mean_N": 0.21238624796801045,
+      "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+    },
+    "index_contact_distribution": [
+      {
+        "phase": "initial_hold",
+        "link": "hand_r_index_link4",
+        "contact_fraction": 1.0,
+        "normal_magnitude_mean_N": 0.2348722114324725,
+        "underside_normal_mean_N": 0.23432181654764392,
+        "normal_moment_mean_Nm": [
+          -0.011294402597119781,
+          0.0007744182744076258,
+          -0.0003321260670358616
+        ],
+        "contact_force_weighted_position_knife_m": [
+          -0.001828094951044425,
+          -0.006001072661438441,
+          0.04817417616553191
+        ],
+        "contact_axial_position_range_m": [
+          0.045460801571607555,
+          0.04842599108815192
+        ],
+        "longest_zero_contact_seconds": 0.0
+      },
+      {
+        "phase": "extend1",
+        "link": "hand_r_index_link4",
+        "contact_fraction": 0.99,
+        "normal_magnitude_mean_N": 0.41782110802929917,
+        "underside_normal_mean_N": 0.4079139760912765,
+        "normal_moment_mean_Nm": [
+          -0.018820017897616708,
+          0.003799961807995096,
+          -0.002575151395908003
+        ],
+        "contact_force_weighted_position_knife_m": [
+          -0.007556024340636551,
+          -0.006003967401359482,
+          0.04625507473180588
+        ],
+        "contact_axial_position_range_m": [
+          0.04546092823147777,
+          0.04844762012362483
+        ],
+        "longest_zero_contact_seconds": 0.05
+      },
+      {
+        "phase": "extend1",
+        "link": "hand_r_index_pad_link",
+        "contact_fraction": 0.07083333333333333,
+        "normal_magnitude_mean_N": 0.006218461283812454,
+        "underside_normal_mean_N": 0.006218437939078877,
+        "normal_moment_mean_Nm": [
+          -0.0002937519055504509,
+          -9.609002052688185e-08,
+          2.610999864441513e-05
+        ],
+        "contact_force_weighted_position_knife_m": [
+          0.004201419850230146,
+          -0.005995871967993364,
+          0.04724640641074933
+        ],
+        "contact_axial_position_range_m": [
+          0.04723751544952391,
+          0.04725268110632895
+        ],
+        "longest_zero_contact_seconds": 4.55
+      },
+      {
+        "phase": "return1",
+        "link": "hand_r_index_link4",
+        "contact_fraction": 0.44083333333333335,
+        "normal_magnitude_mean_N": 0.2045753038305217,
+        "underside_normal_mean_N": 0.20246989056513384,
+        "normal_moment_mean_Nm": [
+          -0.009384281481361638,
+          0.0011373150352442245,
+          -0.0012422479852176897
+        ],
+        "contact_force_weighted_position_knife_m": [
+          -0.006903000639668691,
+          -0.006010093054951707,
+          0.04651203535118113
+        ],
+        "contact_axial_position_range_m": [
+          0.04611897841095927,
+          0.04851672053337096
+        ],
+        "longest_zero_contact_seconds": 2.7958333333333334
+      },
+      {
+        "phase": "return1",
+        "link": "hand_r_index_pad_link",
+        "contact_fraction": 0.56,
+        "normal_magnitude_mean_N": 0.15158670139925864,
+        "underside_normal_mean_N": 0.15158485947146885,
+        "normal_moment_mean_Nm": [
+          -0.007174389467870122,
+          1.6667870763648696e-06,
+          0.000635248827390605
+        ],
+        "contact_force_weighted_position_knife_m": [
+          0.004188840525016466,
+          -0.006002274026379066,
+          0.047323690455386466
+        ],
+        "contact_axial_position_range_m": [
+          0.047283083200454726,
+          0.04734375327825549
+        ],
+        "longest_zero_contact_seconds": 2.2
+      },
+      {
+        "phase": "extend2",
+        "link": "hand_r_index_link4",
+        "contact_fraction": 0.865,
+        "normal_magnitude_mean_N": 0.37353008120762143,
+        "underside_normal_mean_N": 0.3523558240855284,
+        "normal_moment_mean_Nm": [
+          -0.016233757318535647,
+          0.0053358282748470955,
+          -0.0020454256132702115
+        ],
+        "contact_force_weighted_position_knife_m": [
+          -0.007806458414534297,
+          -0.0060027321550504805,
+          0.046172350153373974
+        ],
+        "contact_axial_position_range_m": [
+          0.04550679773092268,
+          0.04854209721088411
+        ],
+        "longest_zero_contact_seconds": 0.675
+      },
+      {
+        "phase": "extend2",
+        "link": "hand_r_index_pad_link",
+        "contact_fraction": 0.14083333333333334,
+        "normal_magnitude_mean_N": 0.03510294313620155,
+        "underside_normal_mean_N": 0.03510250203157932,
+        "normal_moment_mean_Nm": [
+          -0.0016620658854439015,
+          4.025898744405841e-06,
+          0.000147444933083184
+        ],
+        "contact_force_weighted_position_knife_m": [
+          0.004186368749941391,
+          -0.006000364010882822,
+          0.04735451731122163
+        ],
+        "contact_axial_position_range_m": [
+          0.047341916710138286,
+          0.047367457300424555
+        ],
+        "longest_zero_contact_seconds": 4.270833333333333
+      },
+      {
+        "phase": "return2",
+        "link": "hand_r_index_link4",
+        "contact_fraction": 0.9958368026644463,
+        "normal_magnitude_mean_N": 0.29387379305200106,
+        "underside_normal_mean_N": 0.2826523574902755,
+        "normal_moment_mean_Nm": [
+          -0.013059276133876486,
+          0.00331810471641611,
+          -0.001613950609375489
+        ],
+        "contact_force_weighted_position_knife_m": [
+          -0.007280746490829934,
+          -0.006006529319570915,
+          0.046269829635649413
+        ],
+        "contact_axial_position_range_m": [
+          0.044037654995918246,
+          0.04854689165949824
+        ],
+        "longest_zero_contact_seconds": 0.008328059950041627
+      },
+      {
+        "phase": "return2",
+        "link": "hand_r_index_pad_link",
+        "contact_fraction": 0.24229808492922564,
+        "normal_magnitude_mean_N": 0.03382906214420146,
+        "underside_normal_mean_N": 0.033829028347881096,
+        "normal_moment_mean_Nm": [
+          -0.001601141314125611,
+          -6.777137393292592e-07,
+          0.00014548616270321224
+        ],
+        "contact_force_weighted_position_knife_m": [
+          0.0043032104376083645,
+          -0.005999859680228459,
+          0.0473308420795758
+        ],
+        "contact_axial_position_range_m": [
+          0.047307081520557376,
+          0.047333706170320525
+        ],
+        "longest_zero_contact_seconds": 3.789267277268941
+      }
+    ],
+    "scope": "Matchednominalgeometry, physicalfriction/load/task/controller/actor; pressureproxy.8 tier yields comparable measured.758/.745N. Helddiagnostics only."
+  },
+  "index-wrap-v8-pressure080-v3": {
+    "evaluation": {
+      "criterion": {
+        "version": 1,
+        "declared_utc": "2026-10-03T20:22:00+00:00",
+        "scope": "Functional two-cycle behavior, separately from unchanged historical 0.25rad world-pose regression; diagnostic held resets never qualify as pickup demos.",
+        "endpoint": {
+          "extension_min_m": 0.025,
+          "retraction_max_m": 0.008,
+          "command_travel_m": 0.04
+        },
+        "grip": {
+          "minimum_height_above_table_m": 0.03,
+          "relative_translation_envelope_m": 0.015,
+          "relative_rotation_envelope_rad": 0.6,
+          "cycle_return_translation_increment_max_m": 0.005,
+          "cycle_return_rotation_increment_max_rad": 0.1,
+          "final_hold_translation_speed_max_m_s": 0.003,
+          "final_hold_rotation_speed_max_rad_s": 0.06
+        },
+        "contact": {
+          "thumb_slider_substep_fraction_min": 0.9,
+          "maximum_contiguous_zero_contact_s": 0.5
+        },
+        "rationale": "15mm and 0.6rad are broad escape envelopes, not precision targets. Return-to-return drift <=5mm/0.10rad and last-second settling distinguish progressive slip from bounded new seating; both meaningful endpoints and sustained slider contact remain mandatory. World-pose legacy score is reported unchanged; active wrist motion is shown separately."
+      },
+      "trace_sha256": "d94c5247151e7304b346cced472d9be67cda780dcb8a57794e402134a40f4e37",
+      "checks": {
+        "two_cycles": true,
+        "clear": true,
+        "relative_envelope": true,
+        "endpoints": true,
+        "bounded_return_drift": true,
+        "final_settling": true,
+        "thumb_contact": true
+      },
+      "functional_behavior_pass": true,
+      "continuous_pickup_demo_pass": false,
+      "held_diagnostic": true,
+      "measurement_diagnostic": false,
+      "legacy_full_success": false,
+      "slider_endpoints_m": {
+        "extend1": 0.03420453991702305,
+        "return1": 0.004224445221093609,
+        "extend2": 0.03342015408406512,
+        "return2": 0.0039563398036036035
+      },
+      "relative_max_rotation_rad": 0.3329831612332823,
+      "relative_max_translation_m": 0.0027117625309199395,
+      "active_wrist_max_rotation_rad": 0.0002335727365697467,
+      "return_to_return_rotation_rad": 0.025290102968089936,
+      "return_to_return_translation_m": 0.0004501242539501473,
+      "final_hold_translation_speed_m_s": 0.00020312148716581424,
+      "final_hold_rotation_speed_rad_s": 0.03405582897195588,
+      "thumb_contact_substep_fraction": 1.0,
+      "longest_zero_thumb_contact_s": 0.0
+    },
+    "actual_thumb_normal_measurement": {
+      "calibration": "research/support-pressure-20261003/PAIR-FORCE-SEMANTICS.md",
+      "physics_hz": 240,
+      "substeps_per_simulate": 1,
+      "sample_scope": "Every actualphysicalstep at240Hz, arithmeticmean/min/max over8steps per30Hz policyframe; Newtonlambda not dividedbydt; onlynormalcontribution. No forcefeedback to control.",
+      "finger_order": [
+        "thumb",
+        "index",
+        "middle",
+        "ring",
+        "pinky"
+      ],
+      "static_thumb_pressure_mean_N": 0.7183837057823993,
+      "operation_thumb_pressure_mean_N": 0.7452080241527017,
+      "operation_thumb_pressure_5th_percentile_N": 0.7094338512213205,
+      "operation_thumb_contact_substep_fraction": 1.0,
+      "operation_ring_underside_support_mean_N": 0.004943609338446618,
+      "tangential_force_scope": "Axial component of measured pairnormalforces only; frictionaltraction is not reconstructed"
+    },
+    "index_contact_distribution": [
+      {
+        "phase": "initial_hold",
+        "link": "hand_r_index_link4",
+        "contact_fraction": 1.0,
+        "normal_magnitude_mean_N": 0.21308726671462258,
+        "underside_normal_mean_N": 0.21307318783578222,
+        "normal_moment_mean_Nm": [
+          -0.009446241188033696,
+          -6.680567440458372e-07,
+          -0.00170791822956289
+        ],
+        "contact_force_weighted_position_knife_m": [
+          -0.008002988679960982,
+          -0.005996595620259145,
+          0.04426568322492464
+        ],
+        "contact_axial_position_range_m": [
+          0.04426544904708859,
+          0.04426585137844086
+        ],
+        "longest_zero_contact_seconds": 0.0
+      },
+      {
+        "phase": "extend1",
+        "link": "hand_r_index_link4",
+        "contact_fraction": 1.0,
+        "normal_magnitude_mean_N": 0.3769956595390492,
+        "underside_normal_mean_N": 0.3710048942376286,
+        "normal_moment_mean_Nm": [
+          -0.016389085441462784,
+          0.0025472120155596682,
+          -0.0025797355811174186
+        ],
+        "contact_force_weighted_position_knife_m": [
+          -0.007910454605592076,
+          -0.006002738065393155,
+          0.04431040641391665
+        ],
+        "contact_axial_position_range_m": [
+          0.044249564409255995,
+          0.04577439650893215
+        ],
+        "longest_zero_contact_seconds": 0.0
+      },
+      {
+        "phase": "return1",
+        "link": "hand_r_index_link4",
+        "contact_fraction": 0.4675,
+        "normal_magnitude_mean_N": 0.20375145486977697,
+        "underside_normal_mean_N": 0.20270508884706132,
+        "normal_moment_mean_Nm": [
+          -0.00898376539868198,
+          0.0007427421458016831,
+          -0.0014350992308793302
+        ],
+        "contact_force_weighted_position_knife_m": [
+          -0.007604378628257798,
+          -0.0060119641265655496,
+          0.04445905654281953
+        ],
+        "contact_axial_position_range_m": [
+          0.04428591951727869,
+          0.04584171995520592
+        ],
+        "longest_zero_contact_seconds": 2.6625
+      },
+      {
+        "phase": "return1",
+        "link": "hand_r_index_pad_link",
+        "contact_fraction": 0.5341666666666667,
+        "normal_magnitude_mean_N": 0.12856500293011777,
+        "underside_normal_mean_N": 0.12856335382504983,
+        "normal_moment_mean_Nm": [
+          -0.0057532414578058315,
+          -2.4343846551930793e-06,
+          0.00017975652920265418
+        ],
+        "contact_force_weighted_position_knife_m": [
+          0.0014006637781702796,
+          -0.006001404714309603,
+          0.044747621006935655
+        ],
+        "contact_axial_position_range_m": [
+          0.04466452822089193,
+          0.044774468988180174
+        ],
+        "longest_zero_contact_seconds": 2.3291666666666666
+      },
+      {
+        "phase": "extend2",
+        "link": "hand_r_index_link4",
+        "contact_fraction": 0.8833333333333333,
+        "normal_magnitude_mean_N": 0.3585597177230132,
+        "underside_normal_mean_N": 0.35110867059897255,
+        "normal_moment_mean_Nm": [
+          -0.015546938037843828,
+          0.0028262463500730367,
+          -0.002369468596985054
+        ],
+        "contact_force_weighted_position_knife_m": [
+          -0.007873671576474768,
+          -0.006003672206056569,
+          0.04446860346448001
+        ],
+        "contact_axial_position_range_m": [
+          0.0443987548351288,
+          0.045928768813610084
+        ],
+        "longest_zero_contact_seconds": 0.5833333333333334
+      },
+      {
+        "phase": "extend2",
+        "link": "hand_r_index_pad_link",
+        "contact_fraction": 0.13,
+        "normal_magnitude_mean_N": 0.025795723495151225,
+        "underside_normal_mean_N": 0.02579542242164008,
+        "normal_moment_mean_Nm": [
+          -0.0011548318077151257,
+          1.0936479701746948e-06,
+          3.785335053021118e-05
+        ],
+        "contact_force_weighted_position_knife_m": [
+          0.0014620666370470032,
+          -0.005996153722453971,
+          0.04477819203160365
+        ],
+        "contact_axial_position_range_m": [
+          0.04476880654692649,
+          0.04480062797665596
+        ],
+        "longest_zero_contact_seconds": 4.35
+      },
+      {
+        "phase": "return2",
+        "link": "hand_r_index_link4",
+        "contact_fraction": 0.4746044962531224,
+        "normal_magnitude_mean_N": 0.2070172280104184,
+        "underside_normal_mean_N": 0.20552468004383598,
+        "normal_moment_mean_Nm": [
+          -0.0091192167586595,
+          0.0009423706494630952,
+          -0.0014598980711543331
+        ],
+        "contact_force_weighted_position_knife_m": [
+          -0.007757121311241775,
+          -0.006011338142842205,
+          0.04454875778303242
+        ],
+        "contact_axial_position_range_m": [
+          0.044440720230340944,
+          0.046049352735281
+        ],
+        "longest_zero_contact_seconds": 2.0820149875104073
+      },
+      {
+        "phase": "return2",
+        "link": "hand_r_index_pad_link",
+        "contact_fraction": 0.5278934221482098,
+        "normal_magnitude_mean_N": 0.12285765201833523,
+        "underside_normal_mean_N": 0.1228558044218661,
+        "normal_moment_mean_Nm": [
+          -0.005521546363357128,
+          -4.705348119239872e-06,
+          0.0001839269831699952
+        ],
+        "contact_force_weighted_position_knife_m": [
+          0.0015020652951783454,
+          -0.00600127268041331,
+          0.04493869186540902
+        ],
+        "contact_axial_position_range_m": [
+          0.044870518147945404,
+          0.04496692866086956
+        ],
+        "longest_zero_contact_seconds": 2.3485129059117393
+      }
+    ],
+    "scope": "Matchednominalgeometry, physicalfriction/load/task/controller/actor; pressureproxy.8 tier yields comparable measured.758/.745N. Helddiagnostics only."
+  }
+}

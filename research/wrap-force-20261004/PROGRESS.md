@@ -39,3 +39,7 @@ UTC16:13后更新：新的连续候选v10首次通过全部冻结功能判据。
 修正后的共同012–015持刀对照中，single120与multi120均通过，未显示多来源训练明确优势；两者使用相同750初始化和预算、共同dense训练日程及共同几何适配/压力模型。随后把同一一次估计机制扩展到真实取刀和完整换握路径，并重新检查臂、手的原速度、自碰撞和桌面约束，准备冻结v10的连续几何留出验证。
 
 离线接口已加入所选状态化压力模型和实际已知换握参考。600帧无预热回放与原生已发目标完全一致；带隔离预热最大差8.79e-6rad。当前并行训练负载下计算中位约53ms、95分位约72ms，不能承诺30Hz实时性或SDK兼容。真机接入仍沿用上一轮列出的实际SDK、时间戳/单位/关节名、执行器响应、初始刀位和实物阻力测量缺项；未连接硬件或自动发送动作。
+
+### 17:12 UTC native/batch distinction and actual pickup checks
+
+Frozen V10 fullcontinuous geometry015 passes (30.48/28.69mm extends;5.55/2.21mmremainingreturns), using sameweight/noisyinitialgeometryadaptation and originalmotorreserve. Planning012–014 remains blocked by selfclearance. Newwrap heldpass does not survive fixed-contact actualtransfer: index_link4 contact absent and extension18.51/16.05mm, relativeangle.8157rad fail; staged contactsite migration being checked. Absorbing/settling training gracefullysaved151 without native.35 improvement; no unchangedlongextension. Lowerthumbstd and knownhold smallbatch stillshowbody instability, do not claimPhysX fault or randomexplorationsolecause.

@@ -38,6 +38,7 @@ class G2ContinuousScene:
         aggregate_environment=bool(aggregate_environment or (scene_spec or {}).get('aggregate_environment',False))
         self.compact_isolated_layout=compact_isolated_layout
         self.aggregate_environment=aggregate_environment
+        self.scheduled_target_holds=bool((scene_spec or {}).get('scheduled_target_holds',False))
         self.functional_hold_reward=bool((scene_spec or {}).get('functional_hold_reward',False))
         self.n=n;self.device='cuda:0';self.seed=seed
         self.disabled_perturbations=set(disabled_perturbations)
@@ -554,6 +555,8 @@ class G2ContinuousScene:
         self.features()
         if action_scale is None:action_scale=self.scale
         active=self.policy_active.clone();oldage=self.age.clone();operation_active=oldage>=480
+        holding=active&(oldage>=480)&(((oldage-480)%150).float()/30>=self.reference.duration+1/30-1e-7) if self.scheduled_target_holds else torch.zeros_like(active)
+        if self.scheduled_target_holds:assert not self.reference.pacing and self.reference.duration<5
         base=self.reference.action(self.bridge.known.initial,self.bridge.known.issued,self.goal,measured_q=self._measurement,clock_s=self.age.float()/30)
         if self.learned_acquisition_prefix:
             prefix_ids=(self.age<480)&active
@@ -580,18 +583,26 @@ class G2ContinuousScene:
             pressure_desired[ids]=proposed_targets[ids]
             if self.postlift_regrasp and self.proprioceptive_pressure_spec.get('transfer_normal_from_known_arm_fk',False):
                 _,rotation=self.bridge.arm_fk(self.dof[:,self.arm_ids,0]);axis=self.tensor(np.asarray(self.postlift_regrasp['expected_knife_world'])[:3,1])[None].expand(self.n,-1);self.pressure_adapter.normal=quat_apply(quat_conjugate(rotation),axis)
+            pressure_offset_before=self.pressure_adapter.offset.clone()
             adjusted=self.pressure_adapter.command(self._measurement,self.command_target[:,self.hand_ids],pressure_desired,self.age.float()/30)
+            self.pressure_adapter.offset[holding]=pressure_offset_before[holding]
             hq[~active]=adjusted[~active]
             converted=(adjusted-self.bridge.known.initial)/.04
             converted[:,16:]=(adjusted[:,16:]-self.bridge.known.issued[:,16:])/.025
             executed=torch.where(active[:,None],converted.clamp(-1,1),torch.zeros_like(executed))
+        if holding.any():
+            anchor=self.bridge.known.initial if self.bridge.known.support_anchor is None else self.bridge.known.support_anchor
+            held_action=(self.bridge.known.issued-anchor)/self.bridge.known.support_span
+            held_action[:,16:]=0.
+            executed[holding]=held_action[holding]
         if len(ids):
             # Update the same independent issued-target memory used by deployment.
             predicted=self.bridge.known.step(executed)
             hq[ids]=predicted[ids]
             if self.bridge.known.support_step is not None:executed[ids]=self.bridge.known.last_executed_action[ids]
             if self.pressure_adapter is not None:
-                self.pressure_adapter.offset[ids]=predicted[ids,16:]-pressure_desired[ids,16:]+self.pressure_adapter.anchor[ids]
+                pressure_commit=ids[~holding[ids]]
+                self.pressure_adapter.offset[pressure_commit]=predicted[pressure_commit,16:]-pressure_desired[pressure_commit,16:]+self.pressure_adapter.anchor[pressure_commit]
         self.target[:,self.arm_ids]=aq;self.target[:,self.hand_ids]=hq
         self.target=torch.minimum(torch.maximum(self.target,self.limitlow),self.limithi)
         self.bridge.known.issued[~active]=self.target[~active][:,self.hand_ids]

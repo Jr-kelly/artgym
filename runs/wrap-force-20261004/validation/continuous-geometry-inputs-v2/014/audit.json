@@ -1,0 +1,1497 @@
+{
+  "scope": "Common initial-estimate adaptation of actual pickup and postlift motor path.\n\nNo physical asset ID, current object state, contacts or force is read. This\nretains known arm poses up to estimated table-height change and adapts each\nhand waypoint to the same noisy dimensional/slider observation. Passing the\nmotor checks does not establish contact retention or successful operation.\n",
+  "coarse_slider_placement": true,
+  "coarse_wrist_shift_world_m": [
+    0.0008581636790151643,
+    -0.0027919778211706148,
+    -0.00044469289914280286
+  ],
+  "known_initial_body_shift_world_m": [
+    -0.0010000000000000009,
+    0.0,
+    -0.0002203952881591918
+  ],
+  "table_edge_inset_m": 0.0005,
+  "no_physical_asset_read": true,
+  "estimate": {
+    "source": "Labelled synthetic noisy onceinitial dimensional/slider observation, heldout runtime; no asset ID supplied to planner",
+    "uncertainty_m": 0.00025,
+    "handle_size_WTL_m": [
+      0.016992364756708282,
+      0.011559209423681617,
+      0.13457992096972038
+    ],
+    "slider_size_WTL_m": [
+      0.01,
+      0.002176280064245336,
+      0.03
+    ],
+    "slider_contact_shift_m": [
+      0.0008581636790151643,
+      -0.00022429761098361167,
+      0.0027919778211706148
+    ]
+  },
+  "preflight_passed": false,
+  "hand_rate_ok": true,
+  "hand_geometry_ok": false,
+  "arm_ik_ok": true,
+  "arm_rate_ok": true,
+  "arm_swept_table_recertified": true,
+  "arm_table_collisions": [],
+  "pickup": {
+    "input": {
+      "source": "Labelled synthetic noisy onceinitial dimensional/slider observation, heldout runtime; no asset ID supplied to planner",
+      "uncertainty_m": 0.00025,
+      "handle_size_WTL_m": [
+        0.016992364756708282,
+        0.011559209423681617,
+        0.13457992096972038
+      ],
+      "slider_size_WTL_m": [
+        0.01,
+        0.002176280064245336,
+        0.03
+      ],
+      "slider_contact_shift_m": [
+        0.0008581636790151643,
+        -0.00022429761098361167,
+        0.0027919778211706148
+      ],
+      "initial_object_center_shift_knife_m": [
+        -0.0008581636790151643,
+        0.00044469289914280346,
+        -0.0027919778211706148
+      ]
+    },
+    "planned_thumb_contact_bias_knife_m": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "contact_errors_m": {
+      "thumb": 0.0,
+      "index": 4.639086398923899e-07,
+      "middle": 6.114961212981128e-07,
+      "pinky": 6.306666119310058e-07
+    },
+    "trajectory_max_error_m": 0.0,
+    "no_physical_asset_read": true,
+    "scope": "Estimated initial geometry adaptation, original nominal joint-preload offsets retained; not force regulation, collision/contact feasibility unproven",
+    "support_surface_scaling": true
+  },
+  "operation": {
+    "input": {
+      "source": "Labelled synthetic noisy onceinitial dimensional/slider observation, heldout runtime; no asset ID supplied to planner",
+      "uncertainty_m": 0.00025,
+      "handle_size_WTL_m": [
+        0.016992364756708282,
+        0.011559209423681617,
+        0.13457992096972038
+      ],
+      "slider_size_WTL_m": [
+        0.01,
+        0.002176280064245336,
+        0.03
+      ],
+      "slider_contact_shift_m": [
+        0.0008581636790151643,
+        -0.00022429761098361167,
+        0.0027919778211706148
+      ],
+      "initial_object_center_shift_knife_m": [
+        -0.0008207371776456257,
+        0.0008738380221952077,
+        -0.0027003952348931704
+      ]
+    },
+    "planned_thumb_contact_bias_knife_m": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "contact_errors_m": {
+      "thumb": 3.190852642423391e-08,
+      "index": 4.260603472930658e-07,
+      "middle": 1.1483440325537706e-06,
+      "pinky": 0.0009345034536883719
+    },
+    "trajectory_max_error_m": 4.366598728023009e-08,
+    "no_physical_asset_read": true,
+    "scope": "Estimated initial geometry adaptation, original nominal joint-preload offsets retained; not force regulation, collision/contact feasibility unproven",
+    "support_surface_scaling": true
+  },
+  "waypoint_errors": [
+    {
+      "thumb": 2.2298639661388055e-08,
+      "index": 2.2942615639173417e-07,
+      "middle": 6.646185483895839e-07,
+      "pinky": 8.532514751463608e-07
+    },
+    {
+      "thumb": 2.229813307891089e-08,
+      "index": 2.293732857574125e-07,
+      "middle": 6.646272172647124e-07,
+      "pinky": 8.53219992456582e-07
+    },
+    {
+      "thumb": 2.2294744285775473e-08,
+      "index": 2.289978345284875e-07,
+      "middle": 6.646909467166276e-07,
+      "pinky": 8.530021472661175e-07
+    },
+    {
+      "thumb": 2.228604356790505e-08,
+      "index": 2.2799941103294607e-07,
+      "middle": 6.648798399250723e-07,
+      "pinky": 8.524026875100725e-07
+    },
+    {
+      "thumb": 2.2269892574201086e-08,
+      "index": 2.260005868050367e-07,
+      "middle": 6.652684179500358e-07,
+      "pinky": 8.512353080904207e-07
+    },
+    {
+      "thumb": 2.2244291781389036e-08,
+      "index": 2.2292071318270782e-07,
+      "middle": 6.659284062281966e-07,
+      "pinky": 8.493304258280312e-07
+    },
+    {
+      "thumb": 2.2207306338137508e-08,
+      "index": 2.1891849537200154e-07,
+      "middle": 6.669274281886025e-07,
+      "pinky": 8.465397627681671e-07
+    },
+    {
+      "thumb": 2.2156957775060105e-08,
+      "index": 2.1456244954107713e-07,
+      "middle": 6.683296777784975e-07,
+      "pinky": 8.427375214617285e-07
+    },
+    {
+      "thumb": 2.209115418185284e-08,
+      "index": 2.110178917945708e-07,
+      "middle": 6.701972024951235e-07,
+      "pinky": 8.37821687006807e-07
+    },
+    {
+      "thumb": 2.200764185976387e-08,
+      "index": 2.101154701134062e-07,
+      "middle": 6.725801045795257e-07,
+      "pinky": 8.317143314188808e-07
+    },
+    {
+      "thumb": 2.1903940915015748e-08,
+      "index": 2.1390291507218303e-07,
+      "middle": 6.755641491494192e-07,
+      "pinky": 8.243613166703701e-07
+    },
+    {
+      "thumb": 2.177728491583036e-08,
+      "index": 2.161633423413691e-07,
+      "middle": 6.792005993847403e-07,
+      "pinky": 8.157333806130358e-07
+    },
+    {
+      "thumb": 2.1624623624605006e-08,
+      "index": 2.187805820408526e-07,
+      "middle": 6.83555771714551e-07,
+      "pinky": 8.058252082296867e-07
+    },
+    {
+      "thumb": 2.1442588739460405e-08,
+      "index": 2.2176339585575509e-07,
+      "middle": 6.887006224552369e-07,
+      "pinky": 7.946552180668805e-07
+    },
+    {
+      "thumb": 2.122748707846492e-08,
+      "index": 2.251183576585674e-07,
+      "middle": 6.947101809978439e-07,
+      "pinky": 7.822646711611631e-07
+    },
+    {
+      "thumb": 2.0975336571291783e-08,
+      "index": 2.2884506909280553e-07,
+      "middle": 7.016699515096187e-07,
+      "pinky": 7.687162811873236e-07
+    },
+    {
+      "thumb": 2.068189939485086e-08,
+      "index": 2.329396560359555e-07,
+      "middle": 7.096712525873527e-07,
+      "pinky": 7.540925797741138e-07
+    },
+    {
+      "thumb": 2.0342674323673276e-08,
+      "index": 2.3738860678825895e-07,
+      "middle": 7.188140308084053e-07,
+      "pinky": 7.38493294648062e-07
+    },
+    {
+      "thumb": 1.9953041123264125e-08,
+      "index": 2.421798542756881e-07,
+      "middle": 7.292083736404795e-07,
+      "pinky": 7.22033739506654e-07
+    },
+    {
+      "thumb": 1.9508287423188666e-08,
+      "index": 2.4728928379177234e-07,
+      "middle": 7.4097554709369e-07,
+      "pinky": 7.048413953075189e-07
+    },
+    {
+      "thumb": 1.9003713670523368e-08,
+      "index": 2.526853928340695e-07,
+      "middle": 7.54250014083266e-07,
+      "pinky": 6.870524012675523e-07
+    },
+    {
+      "thumb": 1.8434721039873612e-08,
+      "index": 2.5832850633389143e-07,
+      "middle": 7.691813699437715e-07,
+      "pinky": 6.688092061178408e-07
+    },
+    {
+      "thumb": 1.779692439244631e-08,
+      "index": 2.6417059661261966e-07,
+      "middle": 7.859382992419672e-07,
+      "pinky": 6.502556850463555e-07
+    },
+    {
+      "thumb": 1.708628358515049e-08,
+      "index": 2.70153330448335e-07,
+      "middle": 8.047166728729696e-07,
+      "pinky": 6.315352798442777e-07
+    },
+    {
+      "thumb": 1.6299170008116128e-08,
+      "index": 2.762045335607215e-07,
+      "middle": 8.257489152457455e-07,
+      "pinky": 6.12786693478752e-07
+    },
+    {
+      "thumb": 1.543253782562144e-08,
+      "index": 2.8224671275174477e-07,
+      "middle": 8.493329857071176e-07,
+      "pinky": 5.941213695870301e-07
+    },
+    {
+      "thumb": 1.4484032602385369e-08,
+      "index": 2.88190806014958e-07,
+      "middle": 8.758829956120155e-07,
+      "pinky": 5.757059338323787e-07
+    },
+    {
+      "thumb": 1.3452034960414645e-08,
+      "index": 2.9393942097008133e-07,
+      "middle": 9.061003846286759e-07,
+      "pinky": 5.576266893129219e-07
+    },
+    {
+      "thumb": 1.2335859123810649e-08,
+      "index": 2.993939352484998e-07,
+      "middle": 9.413128774366549e-07,
+      "pinky": 5.399820855756879e-07
+    },
+    {
+      "thumb": 1.1135763422676055e-08,
+      "index": 3.0445759781155887e-07,
+      "middle": 9.857448521845626e-07,
+      "pinky": 5.22857176319585e-07
+    },
+    {
+      "thumb": 9.853023891126953e-09,
+      "index": 3.0904500327337264e-07,
+      "middle": 1.0889019793111846e-06,
+      "pinky": 5.063238895273569e-07
+    },
+    {
+      "thumb": 8.490083784994989e-09,
+      "index": 3.130938982797847e-07,
+      "middle": 1.1460584227320868e-06,
+      "pinky": 4.904462911921579e-07
+    },
+    {
+      "thumb": 7.05050262320313e-09,
+      "index": 3.165743101799337e-07,
+      "middle": 1.1727400001897644e-06,
+      "pinky": 4.752555498567288e-07
+    },
+    {
+      "thumb": 5.53922417473046e-09,
+      "index": 3.195045643568433e-07,
+      "middle": 1.1960685632267298e-06,
+      "pinky": 4.6079805005194934e-07
+    },
+    {
+      "thumb": 3.9629505425391944e-09,
+      "index": 3.2195914092130875e-07,
+      "middle": 1.2212423339335914e-06,
+      "pinky": 4.470959420592206e-07
+    },
+    {
+      "thumb": 2.3330003746195517e-09,
+      "index": 3.24070995316825e-07,
+      "middle": 1.2495637287330407e-06,
+      "pinky": 4.341628975356623e-07
+    },
+    {
+      "thumb": 7.094323222636426e-10,
+      "index": 3.2602236926683075e-07,
+      "middle": 1.2819671223300878e-06,
+      "pinky": 4.2200472850674815e-07
+    },
+    {
+      "thumb": 1.1866249167781474e-09,
+      "index": 3.280424399703023e-07,
+      "middle": 1.319923564671674e-06,
+      "pinky": 4.106199732491788e-07
+    },
+    {
+      "thumb": 2.927931316183282e-09,
+      "index": 3.3036766588240273e-07,
+      "middle": 1.366116498282139e-06,
+      "pinky": 4.0000080404509597e-07
+    },
+    {
+      "thumb": 4.720887333777726e-09,
+      "index": 3.332230489673024e-07,
+      "middle": 1.4251804417873957e-06,
+      "pinky": 3.9013362711471874e-07
+    },
+    {
+      "thumb": 6.534369490396983e-09,
+      "index": 3.3679281910743093e-07,
+      "middle": 1.5021627943902206e-06,
+      "pinky": 3.810004841864036e-07
+    },
+    {
+      "thumb": 8.354518583665924e-09,
+      "index": 3.411939228357491e-07,
+      "middle": 7.903716657689312e-06,
+      "pinky": 3.725790627593199e-07
+    },
+    {
+      "thumb": 1.016961003633198e-08,
+      "index": 3.4648578762426343e-07,
+      "middle": 1.3706252033058991e-05,
+      "pinky": 3.648438235206915e-07
+    },
+    {
+      "thumb": 1.1968069816899491e-08,
+      "index": 3.526146898103817e-07,
+      "middle": 1.8192153879686115e-05,
+      "pinky": 3.577662900835471e-07
+    },
+    {
+      "thumb": 1.373857536095189e-08,
+      "index": 3.5948381426925076e-07,
+      "middle": 1.98883423557484e-05,
+      "pinky": 3.5131585037764454e-07
+    },
+    {
+      "thumb": 1.5470034303457276e-08,
+      "index": 3.6693676544523624e-07,
+      "middle": 1.8954092797446795e-05,
+      "pinky": 3.454601710238685e-07
+    },
+    {
+      "thumb": 1.715165049938629e-08,
+      "index": 3.747837034516292e-07,
+      "middle": 1.8483263111528684e-05,
+      "pinky": 3.4016603520949594e-07
+    },
+    {
+      "thumb": 1.877308116652675e-08,
+      "index": 3.82822770867106e-07,
+      "middle": 1.8583037732137667e-05,
+      "pinky": 3.3539878481474626e-07
+    },
+    {
+      "thumb": 2.032452288099081e-08,
+      "index": 3.9085489054871974e-07,
+      "middle": 1.943601529037396e-05,
+      "pinky": 3.311238273450349e-07
+    },
+    {
+      "thumb": 2.1796788729295823e-08,
+      "index": 3.987019715998506e-07,
+      "middle": 2.142666794177114e-05,
+      "pinky": 3.2730804082583586e-07
+    },
+    {
+      "thumb": 2.3181777699866515e-08,
+      "index": 4.0621874475615885e-07,
+      "middle": 2.553272497956607e-05,
+      "pinky": 3.239173661619006e-07
+    },
+    {
+      "thumb": 2.447234885846585e-08,
+      "index": 4.13273693993513e-07,
+      "middle": 3.485607937312297e-05,
+      "pinky": 3.2091879998359994e-07
+    },
+    {
+      "thumb": 2.5662286771636636e-08,
+      "index": 4.197957790325541e-07,
+      "middle": 6.021445875665289e-05,
+      "pinky": 3.1998941717432123e-07
+    },
+    {
+      "thumb": 2.6746668187949055e-08,
+      "index": 4.25724909820996e-07,
+      "middle": 0.00011055028141071494,
+      "pinky": 3.2164089863275647e-07
+    },
+    {
+      "thumb": 2.772220557326217e-08,
+      "index": 4.310281912031212e-07,
+      "middle": 0.00016588901370213918,
+      "pinky": 3.2314540794716886e-07
+    },
+    {
+      "thumb": 2.858685194670177e-08,
+      "index": 4.3570042932806876e-07,
+      "middle": 0.00021585539978893661,
+      "pinky": 3.2449343895847325e-07
+    },
+    {
+      "thumb": 2.9340282851630682e-08,
+      "index": 4.39719862842293e-07,
+      "middle": 0.0002589069880486446,
+      "pinky": 3.2567875076492523e-07
+    },
+    {
+      "thumb": 2.998372705342287e-08,
+      "index": 4.4313663326996623e-07,
+      "middle": 0.00029509440442317716,
+      "pinky": 3.266989141811645e-07
+    },
+    {
+      "thumb": 3.052016964559778e-08,
+      "index": 4.459668982879602e-07,
+      "middle": 0.0003248056646123169,
+      "pinky": 3.27554864760221e-07
+    },
+    {
+      "thumb": 3.0954379269167555e-08,
+      "index": 4.4825888773708845e-07,
+      "middle": 0.0003485387262552462,
+      "pinky": 3.282514083244546e-07
+    },
+    {
+      "thumb": 3.129294863265014e-08,
+      "index": 4.5003124284778407e-07,
+      "middle": 0.00036685402205089324,
+      "pinky": 3.2879689586638907e-07
+    },
+    {
+      "thumb": 3.154405188413756e-08,
+      "index": 6.51755651237598e-07,
+      "middle": 0.0003803387734828189,
+      "pinky": 3.2920323544307334e-07
+    },
+    {
+      "thumb": 3.1718211703274923e-08,
+      "index": 6.526577827068618e-07,
+      "middle": 0.0003896380645671439,
+      "pinky": 3.2948575547007706e-07
+    },
+    {
+      "thumb": 3.182698463823494e-08,
+      "index": 6.532351058610264e-07,
+      "middle": 0.00039544468908471865,
+      "pinky": 3.2966318042143076e-07
+    },
+    {
+      "thumb": 3.188440840277347e-08,
+      "index": 6.535549900200568e-07,
+      "middle": 0.00039851559913135716,
+      "pinky": 3.297573096673974e-07
+    },
+    {
+      "thumb": 3.19059135131317e-08,
+      "index": 6.53691478553145e-07,
+      "middle": 0.0003996796445965482,
+      "pinky": 3.297930815061085e-07
+    },
+    {
+      "thumb": 3.190875908082248e-08,
+      "index": 6.537260445346434e-07,
+      "middle": 0.0003998513318735135,
+      "pinky": 3.297982749217509e-07
+    }
+  ],
+  "geometry": [
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0009243110986939529,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -0.001707769076782155
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0011603704965927365
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -0.00025193525963557173
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.002270430218733223
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.001278177776195516
+        },
+        {
+          "moving_link": "hand_r_middle_pad_link",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0011479453526035376
+        },
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.001707769076782155
+        },
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.00025193525963557173
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0011603704965927365
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.002270430218733223
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.001278177776195516
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_pad_link",
+          "gap_lower_bound_m": -0.0011479453526035376
+        }
+      ]
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0009243110986939529,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -0.0014914276183298977
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0010390208550618528
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -0.00010695575002729607
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0020868531056133163
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0011581917339101092
+        },
+        {
+          "moving_link": "hand_r_middle_pad_link",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0009417841049973869
+        },
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0014914276183298977
+        },
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.00010695575002729607
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0010390208550618528
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0020868531056133163
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0011581917339101092
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_pad_link",
+          "gap_lower_bound_m": -0.0009417841049973869
+        }
+      ]
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0009243110986939529,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -0.0012655650864754672
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0009177320154355323
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0019049537140066498
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.001038601452901869
+        },
+        {
+          "moving_link": "hand_r_middle_pad_link",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0007381234330217888
+        },
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0012655650864754672
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0009177320154355323
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0019049537140066498
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.001038601452901869
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_pad_link",
+          "gap_lower_bound_m": -0.0007381234330217888
+        }
+      ]
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0009243110986939529,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -0.0010399194043939023
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0007569919329315951
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0017139631690919616
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0009144069758722298
+        },
+        {
+          "moving_link": "hand_r_middle_pad_link",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.000536647725787414
+        },
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0010399194043939023
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0007569919329315951
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0017139631690919616
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0009144069758722298
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_pad_link",
+          "gap_lower_bound_m": -0.000536647725787414
+        }
+      ]
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0009243110986939529,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -0.0008279001210867564
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0005537368991182044
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0015183636601300496
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0007880385385199799
+        },
+        {
+          "moving_link": "hand_r_middle_pad_link",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0003275672959309611
+        },
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0008279001210867564
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0005537368991182044
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0015183636601300496
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0007880385385199799
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_pad_link",
+          "gap_lower_bound_m": -0.0003275672959309611
+        }
+      ]
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0009243110986939529,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -0.0006197054510862915
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0003481178786593868
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0013254219915518686
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0006620222391919145
+        },
+        {
+          "moving_link": "hand_r_middle_pad_link",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.00010847092558220403
+        },
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0006197054510862915
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0003481178786593868
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0013254219915518686
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0006620222391919145
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_pad_link",
+          "gap_lower_bound_m": -0.00010847092558220403
+        }
+      ]
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0009243110986939529,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -0.0004049741537306747
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0001402475696060286
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0011342653414675198
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0005197253660656209
+        },
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0004049741537306747
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0001402475696060286
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0011342653414675198
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0005197253660656209
+        }
+      ]
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0009243110986939529,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -0.0004049741537306747
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0001402475696060286
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0011342653414675198
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0005197253660656209
+        },
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0004049741537306747
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0001402475696060286
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0011342653414675198
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0005197253660656209
+        }
+      ]
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0009243110986939529,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -0.00013521082748499738
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.00015547690243693582
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0010406908917579248
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0006148843294262497
+        },
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.00013521082748499738
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.00015547690243693582
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0010406908917579248
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0006148843294262497
+        }
+      ]
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0009243110986939529,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.00012875339033919034
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0009356422142208498
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.000698770634825048
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.00012875339033919034
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0009356422142208498
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.000698770634825048
+        }
+      ]
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0009243110986939529,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -9.193614244469919e-05
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0008372190057268879
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0007370364645613477
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -9.193614244469919e-05
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0008372190057268879
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0007370364645613477
+        }
+      ]
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0009243110986939529,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -3.097861543117919e-05
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0007482322839961024
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.000748232283747801
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -3.097861543117919e-05
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0007482322839961024
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.000748232283747801
+        }
+      ]
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0009243110986939529,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.00025279898638347516
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0006330428350587863
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.00025279898638347516
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0006330428350587863
+        }
+      ]
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0009243110986939529,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0005126504834872432
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0005126504834872432
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.05832916046659274,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0005126504834872432
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0005126504834872432
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.060080209330988996,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0004385308687295045
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0005662027677195702
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0010705797205879004
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0004385308687295045
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0005662027677195702
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0010705797205879004
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06002072715451303,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0012807609574335722
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0014434455648128612
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0020597056708471576
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0012807609574335722
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0014434455648128612
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0020597056708471576
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.05930713628144293,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -0.0001377756741132094
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.001994774146671062
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.002093919970005541
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0029580935026676525
+        },
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0001377756741132094
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.001994774146671062
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.002093919970005541
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0029580935026676525
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.05943965268275788,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -0.0003341560729734419
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0017636318511441151
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.001780820047246938
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0028976871567194876
+        },
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0003341560729734419
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0017636318511441151
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.001780820047246938
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0028976871567194876
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06003189037845482,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -0.00019549774447221585
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0008462278106908597
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0006822583048090858
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0023036264269634867
+        },
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.00019549774447221585
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0008462278106908597
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0006822583048090858
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0023036264269634867
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06078543482010592,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0005262083793695638
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0014412694192251418
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0005262083793695638
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0014412694192251418
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06166937364173777,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0002292293440173017
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -7.386151158282443e-05
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0002292293440173017
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -7.386151158282443e-05
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06118424148764334,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06201621519525183,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06423969156046574,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06573377575515851,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06645522762696335,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06699230511105628,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06733239058138987,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06735524012092417,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06723841759157546,
+      "uncertified_self_pairs": []
+    }
+  ]
+}

@@ -1,0 +1,500 @@
+{
+  "source2-stochastic-oldstd-n8-v1": {
+    "finalheight": [
+      0.7585852146148682,
+      0.8416609168052673,
+      0.8554341197013855,
+      0.7579999566078186,
+      0.7580000162124634,
+      0.8552525043487549,
+      0.8426650762557983,
+      0.8531970977783203
+    ],
+    "endpoints_m": {
+      "extend1": [
+        0.03268132731318474,
+        0.03539805859327316,
+        0.020943358540534973,
+        0.03345804661512375,
+        0.019798479974269867,
+        0.03551793843507767,
+        0.03429565578699112,
+        0.02034657448530197
+      ],
+      "return1": [
+        0.00793495774269104,
+        0.008775264024734497,
+        0.0,
+        0.007641468197107315,
+        0.0,
+        0.008563878014683723,
+        0.009352916851639748,
+        0.0
+      ],
+      "extend2": [
+        0.03399734944105148,
+        0.03383566439151764,
+        0.020445222035050392,
+        0.039115261286497116,
+        0.04035748913884163,
+        0.03087296150624752,
+        0.018126435577869415,
+        0.022353295236825943
+      ],
+      "return2": [
+        0.0074111297726631165,
+        0.02360432595014572,
+        0.0,
+        0.04488804563879967,
+        0.03801468759775162,
+        0.014201473444700241,
+        0.0,
+        0.011061467230319977
+      ]
+    },
+    "min_operation_height": [
+      0.7585851550102234,
+      0.8387711048126221,
+      0.855323076248169,
+      0.7579999566078186,
+      0.7579999566078186,
+      0.8509809374809265,
+      0.8369470834732056,
+      0.8526003360748291
+    ],
+    "report": {
+      "scope": "One matched n=1/n=8 physical comparison before adapting or expanding training.\n\nNative single-run evaluation remains authoritative for frozen functional\ncriteria and pair contact forces. Batch contact proxies are reported as proxies.\n",
+      "n": 8,
+      "stochastic": true,
+      "thumb_logit_std_override": null,
+      "seed": 2026100481,
+      "randomization_scale": 0.0,
+      "load": 0.2,
+      "scene": "runs/wrap-force-20261004/batch/continuous-source2-settled-reward-v3/scene.json",
+      "checkpoint_sha256": "2fa454dfeb7d40f22a5bdf33e740e7fd3c41a6cc906b233fabb06cd90c161948",
+      "wall_seconds": 198.34828060795553,
+      "episodes": [
+        {
+          "episode": 0,
+          "env": 0,
+          "instance": "000",
+          "control_steps": 1080,
+          "pickup_valid": true,
+          "fall": true,
+          "operation_complete": false,
+          "endpoints_m": [
+            0.03259558603167534,
+            0.007989614270627499,
+            0.032998621463775635,
+            0.007411111146211624
+          ],
+          "peak_extension_m": 0.03474239632487297,
+          "max_body_drift_m": 0.10411272943019867,
+          "max_body_rotation_rad": 3.093899726867676,
+          "thumb_contact_fraction": 0.8899999856948853,
+          "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+          "failure": "body unstable/drop"
+        },
+        {
+          "episode": 1,
+          "env": 1,
+          "instance": "000",
+          "control_steps": 1080,
+          "pickup_valid": true,
+          "fall": false,
+          "operation_complete": false,
+          "endpoints_m": [
+            0.03533703833818436,
+            0.00889092031866312,
+            0.0314427949488163,
+            0.023588214069604874
+          ],
+          "peak_extension_m": 0.05000000074505806,
+          "max_body_drift_m": 0.018406953662633896,
+          "max_body_rotation_rad": 1.8401970863342285,
+          "thumb_contact_fraction": 0.9850000143051147,
+          "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+          "failure": "body unstable/drop"
+        },
+        {
+          "episode": 2,
+          "env": 2,
+          "instance": "000",
+          "control_steps": 1080,
+          "pickup_valid": true,
+          "fall": false,
+          "operation_complete": false,
+          "endpoints_m": [
+            0.020842963829636574,
+            6.2088170160734535e-09,
+            0.020418744534254074,
+            0.0
+          ],
+          "peak_extension_m": 0.02130262181162834,
+          "max_body_drift_m": 0.006179265212267637,
+          "max_body_rotation_rad": 0.6680920720100403,
+          "thumb_contact_fraction": 1.0,
+          "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+          "failure": "body unstable/drop"
+        },
+        {
+          "episode": 3,
+          "env": 3,
+          "instance": "000",
+          "control_steps": 1080,
+          "pickup_valid": true,
+          "fall": true,
+          "operation_complete": false,
+          "endpoints_m": [
+            0.0334041528403759,
+            0.007683048490434885,
+            0.038784366101026535,
+            0.04488804563879967
+          ],
+          "peak_extension_m": 0.045449383556842804,
+          "max_body_drift_m": 0.12776294350624084,
+          "max_body_rotation_rad": 3.080568790435791,
+          "thumb_contact_fraction": 0.7233333587646484,
+          "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+          "failure": "body unstable/drop"
+        },
+        {
+          "episode": 4,
+          "env": 4,
+          "instance": "000",
+          "control_steps": 1080,
+          "pickup_valid": true,
+          "fall": true,
+          "operation_complete": false,
+          "endpoints_m": [
+            0.019736463204026222,
+            0.0,
+            0.036486297845840454,
+            0.03801468387246132
+          ],
+          "peak_extension_m": 0.043137602508068085,
+          "max_body_drift_m": 0.12327272444963455,
+          "max_body_rotation_rad": 2.90081524848938,
+          "thumb_contact_fraction": 0.7883333563804626,
+          "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+          "failure": "body unstable/drop"
+        },
+        {
+          "episode": 5,
+          "env": 5,
+          "instance": "000",
+          "control_steps": 1080,
+          "pickup_valid": true,
+          "fall": false,
+          "operation_complete": false,
+          "endpoints_m": [
+            0.035424575209617615,
+            0.008695012889802456,
+            0.030608201399445534,
+            0.011369165033102036
+          ],
+          "peak_extension_m": 0.05000000074505806,
+          "max_body_drift_m": 0.02477302774786949,
+          "max_body_rotation_rad": 1.8076844215393066,
+          "thumb_contact_fraction": 0.9983333349227905,
+          "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+          "failure": "body unstable/drop"
+        },
+        {
+          "episode": 6,
+          "env": 6,
+          "instance": "000",
+          "control_steps": 1080,
+          "pickup_valid": true,
+          "fall": false,
+          "operation_complete": false,
+          "endpoints_m": [
+            0.03326130658388138,
+            0.009401649236679077,
+            0.019930139183998108,
+            1.825392246246338e-07
+          ],
+          "peak_extension_m": 0.04754592478275299,
+          "max_body_drift_m": 0.020204972475767136,
+          "max_body_rotation_rad": 1.2870981693267822,
+          "thumb_contact_fraction": 1.0,
+          "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+          "failure": "body unstable/drop"
+        },
+        {
+          "episode": 7,
+          "env": 7,
+          "instance": "000",
+          "control_steps": 1080,
+          "pickup_valid": true,
+          "fall": false,
+          "operation_complete": false,
+          "endpoints_m": [
+            0.020327098667621613,
+            2.60356415537899e-07,
+            0.022216254845261574,
+            0.011135222390294075
+          ],
+          "peak_extension_m": 0.02688721939921379,
+          "max_body_drift_m": 0.007016862742602825,
+          "max_body_rotation_rad": 0.7253733277320862,
+          "thumb_contact_fraction": 0.996666669845581,
+          "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+          "failure": "body unstable/drop"
+        }
+      ],
+      "held_diagnostic": false,
+      "continuous_pickup_demo_pass": false,
+      "full_functional_pair_force_validation": false
+    }
+  },
+  "source2-stochastic-thumbstd004-n8-v1": {
+    "finalheight": [
+      0.8559011816978455,
+      0.8529140949249268,
+      0.855110228061676,
+      0.8434712886810303,
+      0.852043092250824,
+      0.7580000162124634,
+      0.7784186601638794,
+      0.8521220088005066
+    ],
+    "endpoints_m": {
+      "extend1": [
+        0.030511893332004547,
+        0.03316540643572807,
+        0.03187238425016403,
+        0.033317774534225464,
+        0.018283003941178322,
+        0.03384372964501381,
+        0.03532438725233078,
+        0.020749077200889587
+      ],
+      "return1": [
+        0.005310064181685448,
+        0.0079288799315691,
+        0.003018498420715332,
+        0.008404277265071869,
+        2.2351741790771484e-08,
+        0.00912446528673172,
+        0.009072506800293922,
+        0.0
+      ],
+      "extend2": [
+        0.020607158541679382,
+        0.02186804637312889,
+        0.033398669213056564,
+        0.0335364006459713,
+        0.030197730287909508,
+        0.04036060720682144,
+        0.01960751786828041,
+        0.02229040116071701
+      ],
+      "return2": [
+        0.0,
+        0.010734373703598976,
+        0.006758570671081543,
+        0.021569395437836647,
+        0.009296013042330742,
+        0.04854584485292435,
+        0.0014373864978551865,
+        0.00207638181746006
+      ]
+    },
+    "min_operation_height": [
+      0.8543580770492554,
+      0.8518713712692261,
+      0.8549863696098328,
+      0.8356691002845764,
+      0.8519026041030884,
+      0.7579998970031738,
+      0.7784186601638794,
+      0.8520658612251282
+    ],
+    "report": {
+      "scope": "One matched n=1/n=8 physical comparison before adapting or expanding training.\n\nNative single-run evaluation remains authoritative for frozen functional\ncriteria and pair contact forces. Batch contact proxies are reported as proxies.\n",
+      "n": 8,
+      "stochastic": true,
+      "thumb_logit_std_override": 0.04,
+      "seed": 2026100481,
+      "randomization_scale": 0.0,
+      "load": 0.2,
+      "scene": "runs/wrap-force-20261004/batch/continuous-source2-settled-reward-v3/scene.json",
+      "checkpoint_sha256": "2fa454dfeb7d40f22a5bdf33e740e7fd3c41a6cc906b233fabb06cd90c161948",
+      "wall_seconds": 199.70495041296817,
+      "episodes": [
+        {
+          "episode": 0,
+          "env": 0,
+          "instance": "000",
+          "control_steps": 1080,
+          "pickup_valid": true,
+          "fall": false,
+          "operation_complete": false,
+          "endpoints_m": [
+            0.030433611944317818,
+            0.00540147302672267,
+            0.02054716646671295,
+            0.0
+          ],
+          "peak_extension_m": 0.030835386365652084,
+          "max_body_drift_m": 0.0062502590008080006,
+          "max_body_rotation_rad": 0.7482972145080566,
+          "thumb_contact_fraction": 0.9950000047683716,
+          "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+          "failure": "body unstable/drop"
+        },
+        {
+          "episode": 1,
+          "env": 1,
+          "instance": "000",
+          "control_steps": 1080,
+          "pickup_valid": true,
+          "fall": false,
+          "operation_complete": false,
+          "endpoints_m": [
+            0.03309890255331993,
+            0.008093999698758125,
+            0.02179926633834839,
+            0.010802080854773521
+          ],
+          "peak_extension_m": 0.033213164657354355,
+          "max_body_drift_m": 0.007370887789875269,
+          "max_body_rotation_rad": 0.8562566041946411,
+          "thumb_contact_fraction": 1.0,
+          "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+          "failure": "body unstable/drop"
+        },
+        {
+          "episode": 2,
+          "env": 2,
+          "instance": "000",
+          "control_steps": 1080,
+          "pickup_valid": true,
+          "fall": false,
+          "operation_complete": false,
+          "endpoints_m": [
+            0.031814634799957275,
+            0.0031344681046903133,
+            0.033319711685180664,
+            0.006830743048340082
+          ],
+          "peak_extension_m": 0.0336599126458168,
+          "max_body_drift_m": 0.006415980402380228,
+          "max_body_rotation_rad": 0.6470792293548584,
+          "thumb_contact_fraction": 1.0,
+          "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+          "failure": "body unstable/drop"
+        },
+        {
+          "episode": 3,
+          "env": 3,
+          "instance": "000",
+          "control_steps": 1080,
+          "pickup_valid": true,
+          "fall": false,
+          "operation_complete": false,
+          "endpoints_m": [
+            0.03316112235188484,
+            0.00844674464315176,
+            0.03120874986052513,
+            0.02155359648168087
+          ],
+          "peak_extension_m": 0.05000000074505806,
+          "max_body_drift_m": 0.02124132215976715,
+          "max_body_rotation_rad": 1.8681299686431885,
+          "thumb_contact_fraction": 0.9666666388511658,
+          "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+          "failure": "body unstable/drop"
+        },
+        {
+          "episode": 4,
+          "env": 4,
+          "instance": "000",
+          "control_steps": 1080,
+          "pickup_valid": true,
+          "fall": false,
+          "operation_complete": false,
+          "endpoints_m": [
+            0.0182269886136055,
+            2.4835269396561444e-09,
+            0.028695974498987198,
+            0.009346289560198784
+          ],
+          "peak_extension_m": 0.03097100369632244,
+          "max_body_drift_m": 0.006178916897624731,
+          "max_body_rotation_rad": 0.846339225769043,
+          "thumb_contact_fraction": 1.0,
+          "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+          "failure": "body unstable/drop"
+        },
+        {
+          "episode": 5,
+          "env": 5,
+          "instance": "000",
+          "control_steps": 1080,
+          "pickup_valid": true,
+          "fall": true,
+          "operation_complete": false,
+          "endpoints_m": [
+            0.03369664028286934,
+            0.009250201284885406,
+            0.038606077432632446,
+            0.04854585975408554
+          ],
+          "peak_extension_m": 0.04854649305343628,
+          "max_body_drift_m": 0.12563686072826385,
+          "max_body_rotation_rad": 2.847339153289795,
+          "thumb_contact_fraction": 0.75,
+          "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+          "failure": "body unstable/drop"
+        },
+        {
+          "episode": 6,
+          "env": 6,
+          "instance": "000",
+          "control_steps": 1080,
+          "pickup_valid": true,
+          "fall": true,
+          "operation_complete": false,
+          "endpoints_m": [
+            0.03522687405347824,
+            0.00911601260304451,
+            0.020410830155014992,
+            0.0005737731116823852
+          ],
+          "peak_extension_m": 0.04041643068194389,
+          "max_body_drift_m": 0.08763494342565536,
+          "max_body_rotation_rad": 2.085104465484619,
+          "thumb_contact_fraction": 0.9800000190734863,
+          "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+          "failure": "body unstable/drop"
+        },
+        {
+          "episode": 7,
+          "env": 7,
+          "instance": "000",
+          "control_steps": 1080,
+          "pickup_valid": true,
+          "fall": false,
+          "operation_complete": false,
+          "endpoints_m": [
+            0.020704029127955437,
+            0.0,
+            0.022150587290525436,
+            0.002091625239700079
+          ],
+          "peak_extension_m": 0.023292724043130875,
+          "max_body_drift_m": 0.006295289844274521,
+          "max_body_rotation_rad": 0.7641999125480652,
+          "thumb_contact_fraction": 1.0,
+          "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+          "failure": "body unstable/drop"
+        }
+      ],
+      "held_diagnostic": false,
+      "continuous_pickup_demo_pass": false,
+      "full_functional_pair_force_validation": false
+    }
+  }
+}

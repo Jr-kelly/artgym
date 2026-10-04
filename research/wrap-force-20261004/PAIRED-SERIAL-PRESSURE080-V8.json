@@ -1,0 +1,764 @@
+{
+  "source2-pressure080-series-v8": {
+    "trial": "runs/wrap-force-20261004/measurement/source2-pressure080-series-v8",
+    "position_sampling_scope": "Full physics-rate measured rail coordinates",
+    "clock_window_scope": "startup/mid/nearend refer to command clock windows, not detected breakaway. Instant peaks are not sustained force capacity.",
+    "kind": "modified-series-elastic-diagnostic",
+    "original_task_direct_axial_measurement_completed": false,
+    "hardware_measurement_completed": false,
+    "calibration": "runs/wrap-force-20261004/measurement/serial-moving-base-v6/report.json",
+    "calibration_sha256": "bf1996d77214af879cc67de728db08cde2946269d6d5270731595662ee0efe61",
+    "calibration_max_moving_fixture_residual_N": 0.0015751596049183858,
+    "equation": "F_external_cap dot rail = m_cap * a_cap_world dot rail - m_cap * g_world dot rail - F_series_actually_applied; worldacceleration includesmovingbase. Attribution tothumb only if solecap-contactdigit and noendstop/ground.",
+    "attribution_scope": "Currentdata: exactallcapcontactpartnerswhenavailable, otherwiseallhand/cappairsplusconservativeclearanceguard. Guard isbodyworldheight>.80m with tabletop.75m and cap<40mm envelope. Originalwithinobjectselfcollisionfilter1 matches successfulmovingcalibration.",
+    "rows": [
+      {
+        "phase": "extend1",
+        "part": "startup",
+        "window_s": [
+          16,
+          16.5
+        ],
+        "valid_fraction": 1.0,
+        "valid_samples": 480,
+        "pressure_normal_mean_N": 0.6550554566265284,
+        "rail_guide_position_minmax_mm": [
+          0.14836713671684265,
+          0.2639852464199066
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          0.14778305001073022,
+          0.2813681749103125
+        ],
+        "velocity_minmax_mm_s": [
+          -2.046336652711034,
+          1.4561570715159178
+        ],
+        "axial_signed_median_N": 0.06334972233663681,
+        "axial_signed_minmax_N": [
+          -0.011116406828344786,
+          0.10449207825656423
+        ],
+        "sustained_moving_directional_median_N": 0.010848840652361205,
+        "loaded_moving_samples": 6,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "extend1",
+        "part": "mid",
+        "window_s": [
+          16.5,
+          19.5
+        ],
+        "valid_fraction": 0.9993055555555556,
+        "valid_samples": 2878,
+        "pressure_normal_mean_N": 0.8694873723322168,
+        "rail_guide_position_minmax_mm": [
+          0.2643465995788574,
+          20.188807509839535
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          0.2817854456225177,
+          20.25295133353211
+        ],
+        "velocity_minmax_mm_s": [
+          -2.549022901803255,
+          42.4184575676918
+        ],
+        "axial_signed_median_N": 0.2042901210662149,
+        "axial_signed_minmax_N": [
+          -0.11338451955727419,
+          0.7218621481267138
+        ],
+        "sustained_moving_directional_median_N": 0.20179381789092593,
+        "loaded_moving_samples": 1689,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "extend1",
+        "part": "nearend",
+        "window_s": [
+          19.5,
+          21
+        ],
+        "valid_fraction": 0.9979166666666667,
+        "valid_samples": 1437,
+        "pressure_normal_mean_N": 0.8961996660921416,
+        "rail_guide_position_minmax_mm": [
+          20.190132781863213,
+          22.790132090449333
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          20.254494265827816,
+          22.829030469438294
+        ],
+        "velocity_minmax_mm_s": [
+          -3.652201732620597,
+          114.27216231822968
+        ],
+        "axial_signed_median_N": 0.25333260121354606,
+        "axial_signed_minmax_N": [
+          -0.2450514007474411,
+          1.0767438003019199
+        ],
+        "sustained_moving_directional_median_N": 0.20898480726355922,
+        "loaded_moving_samples": 205,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "return1",
+        "part": "startup",
+        "window_s": [
+          21,
+          21.5
+        ],
+        "valid_fraction": 1.0,
+        "valid_samples": 480,
+        "pressure_normal_mean_N": 0.8879909624997586,
+        "rail_guide_position_minmax_mm": [
+          22.790939547121525,
+          23.102497681975365
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          22.829994428320788,
+          23.12822433304973
+        ],
+        "velocity_minmax_mm_s": [
+          -1.5506302006542683,
+          4.505275748670101
+        ],
+        "axial_signed_median_N": 0.15307287023011432,
+        "axial_signed_minmax_N": [
+          0.10878850472859097,
+          0.20018279675590864
+        ],
+        "sustained_moving_directional_median_N": -0.14809961264026877,
+        "loaded_moving_samples": 21,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "return1",
+        "part": "mid",
+        "window_s": [
+          21.5,
+          24.5
+        ],
+        "valid_fraction": 0.9972222222222222,
+        "valid_samples": 2872,
+        "pressure_normal_mean_N": 0.7611688711944112,
+        "rail_guide_position_minmax_mm": [
+          3.021683543920517,
+          23.23625050485134
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          2.98829127495992,
+          23.23978671529403
+        ],
+        "velocity_minmax_mm_s": [
+          -108.90095680952072,
+          6.265929900109768
+        ],
+        "axial_signed_median_N": -0.1946243795001369,
+        "axial_signed_minmax_N": [
+          -1.1592943102665942,
+          0.3937097737330052
+        ],
+        "sustained_moving_directional_median_N": 0.20147282357572122,
+        "loaded_moving_samples": 1397,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "return1",
+        "part": "nearend",
+        "window_s": [
+          24.5,
+          26
+        ],
+        "valid_fraction": 0.9965277777777778,
+        "valid_samples": 1435,
+        "pressure_normal_mean_N": 0.6084500272384666,
+        "rail_guide_position_minmax_mm": [
+          2.3327674716711044,
+          3.0206777155399323
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          2.315214860573178,
+          3.0120398268991266
+        ],
+        "velocity_minmax_mm_s": [
+          -2.7391184121370316,
+          4.050503484904766
+        ],
+        "axial_signed_median_N": -0.10592768794187327,
+        "axial_signed_minmax_N": [
+          -0.5203642513772081,
+          0.040876468107856445
+        ],
+        "sustained_moving_directional_median_N": 0.1516670624871228,
+        "loaded_moving_samples": 6,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "extend2",
+        "part": "startup",
+        "window_s": [
+          26,
+          26.5
+        ],
+        "valid_fraction": 1.0,
+        "valid_samples": 480,
+        "pressure_normal_mean_N": 0.6174866558622426,
+        "rail_guide_position_minmax_mm": [
+          2.2184252738952637,
+          2.3324303328990936
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          2.2098744284448912,
+          2.3184140172816115
+        ],
+        "velocity_minmax_mm_s": [
+          -0.9231716394424438,
+          2.6811384595930576
+        ],
+        "axial_signed_median_N": -0.049605187418002294,
+        "axial_signed_minmax_N": [
+          -0.08479104158508632,
+          -0.021231741881600326
+        ],
+        "sustained_moving_directional_median_N": -0.053252507500179756,
+        "loaded_moving_samples": 26,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "extend2",
+        "part": "mid",
+        "window_s": [
+          26.5,
+          29.5
+        ],
+        "valid_fraction": 1.0,
+        "valid_samples": 2880,
+        "pressure_normal_mean_N": 0.8520943985044019,
+        "rail_guide_position_minmax_mm": [
+          2.1781492978334427,
+          20.315399393439293
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          2.1758804095952655,
+          20.387375217978843
+        ],
+        "velocity_minmax_mm_s": [
+          -3.500049002468586,
+          35.95368564128876
+        ],
+        "axial_signed_median_N": 0.20269016257129252,
+        "axial_signed_minmax_N": [
+          -0.062253308210868094,
+          0.41393813136199265
+        ],
+        "sustained_moving_directional_median_N": 0.2011194372853711,
+        "loaded_moving_samples": 1499,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "extend2",
+        "part": "nearend",
+        "window_s": [
+          29.5,
+          31
+        ],
+        "valid_fraction": 1.0,
+        "valid_samples": 1440,
+        "pressure_normal_mean_N": 0.9029137153834198,
+        "rail_guide_position_minmax_mm": [
+          20.316900685429573,
+          22.191190160810947
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          20.38843897753395,
+          22.236978664295748
+        ],
+        "velocity_minmax_mm_s": [
+          -2.901526866480708,
+          11.017147451639175
+        ],
+        "axial_signed_median_N": 0.2474731239969722,
+        "axial_signed_minmax_N": [
+          0.1926910569131996,
+          0.3605588602941794
+        ],
+        "sustained_moving_directional_median_N": 0.24012631448559912,
+        "loaded_moving_samples": 92,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "return2",
+        "part": "startup",
+        "window_s": [
+          31,
+          31.5
+        ],
+        "valid_fraction": 1.0,
+        "valid_samples": 480,
+        "pressure_normal_mean_N": 0.8975329318329645,
+        "rail_guide_position_minmax_mm": [
+          22.19212893396616,
+          22.545456886291504
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          22.23731420963304,
+          22.57391174134682
+        ],
+        "velocity_minmax_mm_s": [
+          -2.7237460017204285,
+          2.634560689330101
+        ],
+        "axial_signed_median_N": 0.17448910950797228,
+        "axial_signed_minmax_N": [
+          0.11715747700079623,
+          0.23117670854170932
+        ],
+        "sustained_moving_directional_median_N": -0.17059636177813706,
+        "loaded_moving_samples": 82,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "return2",
+        "part": "mid",
+        "window_s": [
+          31.5,
+          34.5
+        ],
+        "valid_fraction": 0.5177083333333333,
+        "valid_samples": 1491,
+        "pressure_normal_mean_N": 0.8372823846250311,
+        "rail_guide_position_minmax_mm": [
+          2.581607550382614,
+          22.711003199219704
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          2.9214972455520183,
+          22.71512169545531
+        ],
+        "velocity_minmax_mm_s": [
+          -945.8879232406616,
+          648.5942006111145
+        ],
+        "axial_signed_median_N": -0.12573071983495784,
+        "axial_signed_minmax_N": [
+          -4.440953283625165,
+          2.637485704820736
+        ],
+        "sustained_moving_directional_median_N": 0.213607232170116,
+        "loaded_moving_samples": 321,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "return2",
+        "part": "nearend",
+        "window_s": [
+          34.5,
+          36
+        ],
+        "valid_fraction": 0.0,
+        "valid_samples": 0,
+        "pressure_normal_mean_N": null,
+        "rail_guide_position_minmax_mm": null,
+        "diagnostic_cap_axial_position_minmax_mm": null,
+        "velocity_minmax_mm_s": null,
+        "axial_signed_median_N": null,
+        "axial_signed_minmax_N": null,
+        "sustained_moving_directional_median_N": null,
+        "loaded_moving_samples": 0,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      }
+    ]
+  },
+  "index-wrap-pressure080-series-v8": {
+    "trial": "runs/wrap-force-20261004/measurement/index-wrap-pressure080-series-v8",
+    "position_sampling_scope": "Full physics-rate measured rail coordinates",
+    "clock_window_scope": "startup/mid/nearend refer to command clock windows, not detected breakaway. Instant peaks are not sustained force capacity.",
+    "kind": "modified-series-elastic-diagnostic",
+    "original_task_direct_axial_measurement_completed": false,
+    "hardware_measurement_completed": false,
+    "calibration": "runs/wrap-force-20261004/measurement/serial-moving-base-v6/report.json",
+    "calibration_sha256": "bf1996d77214af879cc67de728db08cde2946269d6d5270731595662ee0efe61",
+    "calibration_max_moving_fixture_residual_N": 0.0015751596049183858,
+    "equation": "F_external_cap dot rail = m_cap * a_cap_world dot rail - m_cap * g_world dot rail - F_series_actually_applied; worldacceleration includesmovingbase. Attribution tothumb only if solecap-contactdigit and noendstop/ground.",
+    "attribution_scope": "Currentdata: exactallcapcontactpartnerswhenavailable, otherwiseallhand/cappairsplusconservativeclearanceguard. Guard isbodyworldheight>.80m with tabletop.75m and cap<40mm envelope. Originalwithinobjectselfcollisionfilter1 matches successfulmovingcalibration.",
+    "rows": [
+      {
+        "phase": "extend1",
+        "part": "startup",
+        "window_s": [
+          16,
+          16.5
+        ],
+        "valid_fraction": 1.0,
+        "valid_samples": 480,
+        "pressure_normal_mean_N": 0.7078837810701233,
+        "rail_guide_position_minmax_mm": [
+          0.634949654340744,
+          0.7110647857189178
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          0.6351325006335173,
+          0.7254355305121862
+        ],
+        "velocity_minmax_mm_s": [
+          -1.3439316535368562,
+          0.3486518980935216
+        ],
+        "axial_signed_median_N": 0.03612867193340433,
+        "axial_signed_minmax_N": [
+          0.001403750068086429,
+          0.07957854569472192
+        ],
+        "sustained_moving_directional_median_N": null,
+        "loaded_moving_samples": 0,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "extend1",
+        "part": "mid",
+        "window_s": [
+          16.5,
+          19.5
+        ],
+        "valid_fraction": 0.9996527777777777,
+        "valid_samples": 2879,
+        "pressure_normal_mean_N": 0.7599656167628054,
+        "rail_guide_position_minmax_mm": [
+          0.7113702595233917,
+          22.307956591248512
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          0.7259881722347927,
+          22.375928252586164
+        ],
+        "velocity_minmax_mm_s": [
+          -5.698160734027624,
+          51.505763083696365
+        ],
+        "axial_signed_median_N": 0.2364431453888322,
+        "axial_signed_minmax_N": [
+          -0.030219305004340002,
+          0.7521941270013098
+        ],
+        "sustained_moving_directional_median_N": 0.2008069870831003,
+        "loaded_moving_samples": 1091,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "extend1",
+        "part": "nearend",
+        "window_s": [
+          19.5,
+          21
+        ],
+        "valid_fraction": 1.0,
+        "valid_samples": 1440,
+        "pressure_normal_mean_N": 0.7238056525944273,
+        "rail_guide_position_minmax_mm": [
+          22.33440987765789,
+          33.302262891083956
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          22.397653723601252,
+          33.33403400029056
+        ],
+        "velocity_minmax_mm_s": [
+          -0.43366930913180113,
+          113.11075836420059
+        ],
+        "axial_signed_median_N": 0.17324211585590832,
+        "axial_signed_minmax_N": [
+          0.059384442308446805,
+          0.3419343747836917
+        ],
+        "sustained_moving_directional_median_N": 0.1965232859473136,
+        "loaded_moving_samples": 145,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "return1",
+        "part": "startup",
+        "window_s": [
+          21,
+          21.5
+        ],
+        "valid_fraction": 1.0,
+        "valid_samples": 480,
+        "pressure_normal_mean_N": 0.7409791290660287,
+        "rail_guide_position_minmax_mm": [
+          33.30293099861592,
+          33.54269691044465
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          33.33437512264936,
+          33.56495693515171
+        ],
+        "velocity_minmax_mm_s": [
+          -0.5350362625904381,
+          0.32569415634498
+        ],
+        "axial_signed_median_N": 0.10837797292211551,
+        "axial_signed_minmax_N": [
+          0.09912803956265745,
+          0.16415276240808166
+        ],
+        "sustained_moving_directional_median_N": null,
+        "loaded_moving_samples": 0,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "return1",
+        "part": "mid",
+        "window_s": [
+          21.5,
+          24.5
+        ],
+        "valid_fraction": 0.9972222222222222,
+        "valid_samples": 2872,
+        "pressure_normal_mean_N": 0.7494597998245869,
+        "rail_guide_position_minmax_mm": [
+          8.034314960241318,
+          33.660020446404815
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          7.994898060132982,
+          33.66259865219945
+        ],
+        "velocity_minmax_mm_s": [
+          -129.63493168354034,
+          205.6802660226822
+        ],
+        "axial_signed_median_N": -0.19966255227467836,
+        "axial_signed_minmax_N": [
+          -1.239879246481254,
+          0.2659039103685328
+        ],
+        "sustained_moving_directional_median_N": 0.20240994990767194,
+        "loaded_moving_samples": 1340,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "return1",
+        "part": "nearend",
+        "window_s": [
+          24.5,
+          26
+        ],
+        "valid_fraction": 1.0,
+        "valid_samples": 1440,
+        "pressure_normal_mean_N": 0.7120828980796091,
+        "rail_guide_position_minmax_mm": [
+          6.893457844853401,
+          8.032731711864471
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          6.862534417450661,
+          7.9933786546462215
+        ],
+        "velocity_minmax_mm_s": [
+          -1.4081900008022785,
+          0.0015446275938302279
+        ],
+        "axial_signed_median_N": -0.1742318225885204,
+        "axial_signed_minmax_N": [
+          -0.20097635377394737,
+          -0.14710559728771597
+        ],
+        "sustained_moving_directional_median_N": 0.20000068206293567,
+        "loaded_moving_samples": 15,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "extend2",
+        "part": "startup",
+        "window_s": [
+          26,
+          26.5
+        ],
+        "valid_fraction": 1.0,
+        "valid_samples": 480,
+        "pressure_normal_mean_N": 0.7197547754985897,
+        "rail_guide_position_minmax_mm": [
+          6.630163639783859,
+          6.89280778169632
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          6.607318946407759,
+          6.861602363642305
+        ],
+        "velocity_minmax_mm_s": [
+          -0.6326569127850235,
+          -0.17301364277955145
+        ],
+        "axial_signed_median_N": -0.12926154481961202,
+        "axial_signed_minmax_N": [
+          -0.18005889305756428,
+          -0.09096132400074343
+        ],
+        "sustained_moving_directional_median_N": null,
+        "loaded_moving_samples": 0,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "extend2",
+        "part": "mid",
+        "window_s": [
+          26.5,
+          29.5
+        ],
+        "valid_fraction": 0.9989583333333333,
+        "valid_samples": 2877,
+        "pressure_normal_mean_N": 0.7701244317554863,
+        "rail_guide_position_minmax_mm": [
+          6.419740617275238,
+          32.61920141449082
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          6.4113878879652475,
+          32.65895849108347
+        ],
+        "velocity_minmax_mm_s": [
+          -3.376725595444441,
+          111.29467934370041
+        ],
+        "axial_signed_median_N": 0.19713674455891161,
+        "axial_signed_minmax_N": [
+          -0.126359594452158,
+          0.605036577433008
+        ],
+        "sustained_moving_directional_median_N": 0.19955415186043501,
+        "loaded_moving_samples": 1068,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "extend2",
+        "part": "nearend",
+        "window_s": [
+          29.5,
+          31
+        ],
+        "valid_fraction": 1.0,
+        "valid_samples": 1440,
+        "pressure_normal_mean_N": 0.7642118849532514,
+        "rail_guide_position_minmax_mm": [
+          32.62673128847382,
+          34.32642878033221
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          32.66628552955808,
+          34.361796318989946
+        ],
+        "velocity_minmax_mm_s": [
+          -0.4861499182879925,
+          6.4253779128193855
+        ],
+        "axial_signed_median_N": 0.18828362614565575,
+        "axial_signed_minmax_N": [
+          0.16525723668298967,
+          0.2063182852510368
+        ],
+        "sustained_moving_directional_median_N": 0.19595573286740742,
+        "loaded_moving_samples": 128,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "return2",
+        "part": "startup",
+        "window_s": [
+          31,
+          31.5
+        ],
+        "valid_fraction": 1.0,
+        "valid_samples": 480,
+        "pressure_normal_mean_N": 0.7864689424849313,
+        "rail_guide_position_minmax_mm": [
+          34.327182453125715,
+          34.58354726899415
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          34.36324255017098,
+          34.60610478032322
+        ],
+        "velocity_minmax_mm_s": [
+          -0.49374165246263146,
+          -0.07385270146187395
+        ],
+        "axial_signed_median_N": 0.11750806198861657,
+        "axial_signed_minmax_N": [
+          0.10426792126167594,
+          0.18039555686980846
+        ],
+        "sustained_moving_directional_median_N": null,
+        "loaded_moving_samples": 0,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "return2",
+        "part": "mid",
+        "window_s": [
+          31.5,
+          34.5
+        ],
+        "valid_fraction": 0.9972222222222222,
+        "valid_samples": 2872,
+        "pressure_normal_mean_N": 0.7543142704825178,
+        "rail_guide_position_minmax_mm": [
+          0.0,
+          34.70837767235935
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          -0.12401888670865446,
+          34.71111896124057
+        ],
+        "velocity_minmax_mm_s": [
+          -886.9627118110657,
+          558.1695437431335
+        ],
+        "axial_signed_median_N": -0.2035991750983308,
+        "axial_signed_minmax_N": [
+          -3.081323149775548,
+          1.7548816623676076
+        ],
+        "sustained_moving_directional_median_N": 0.20315187718111632,
+        "loaded_moving_samples": 818,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      },
+      {
+        "phase": "return2",
+        "part": "nearend",
+        "window_s": [
+          34.5,
+          36
+        ],
+        "valid_fraction": 1.0,
+        "valid_samples": 1440,
+        "pressure_normal_mean_N": 0.7088141975115605,
+        "rail_guide_position_minmax_mm": [
+          0.0,
+          3.725290298461914e-06
+        ],
+        "diagnostic_cap_axial_position_minmax_mm": [
+          -0.0678442302159965,
+          -0.04920443825540133
+        ],
+        "velocity_minmax_mm_s": [
+          -2.0261488389223814,
+          0.8967338944785297
+        ],
+        "axial_signed_median_N": -0.25273702042145063,
+        "axial_signed_minmax_N": [
+          -0.34019776544783986,
+          -0.24622450228556333
+        ],
+        "sustained_moving_directional_median_N": 0.25188857654102365,
+        "loaded_moving_samples": 11,
+        "peak_scope": "Maximuminstantaneous samples mayinclude collisionimpulse/nearstall; not sustainedcapacity or realforce."
+      }
+    ]
+  }
+}

@@ -1,0 +1,1079 @@
+{
+  "scope": "Common initial-estimate adaptation of actual pickup and postlift motor path.\n\nNo physical asset ID, current object state, contacts or force is read. This\nretains known arm poses up to estimated table-height change and adapts each\nhand waypoint to the same noisy dimensional/slider observation. Passing the\nmotor checks does not establish contact retention or successful operation.\n",
+  "coarse_slider_placement": true,
+  "coarse_wrist_shift_world_m": [
+    0.0009858235262676,
+    -0.0017012103074253132,
+    0.000999577028231874
+  ],
+  "known_initial_body_shift_world_m": [
+    -0.0010000000000000009,
+    0.0,
+    0.0006427439776148479
+  ],
+  "table_edge_inset_m": 0.0005,
+  "no_physical_asset_read": true,
+  "estimate": {
+    "source": "Labelled synthetic noisy onceinitial dimensional/slider observation, heldout runtime; no asset ID supplied to planner",
+    "uncertainty_m": 0.00025,
+    "handle_size_WTL_m": [
+      0.014377701697208286,
+      0.013285487955229696,
+      0.13904157002491102
+    ],
+    "slider_size_WTL_m": [
+      0.01,
+      0.0033545294396514704,
+      0.03
+    ],
+    "slider_contact_shift_m": [
+      0.0009858235262676,
+      0.00035683305061702574,
+      0.0017012103074253134
+    ]
+  },
+  "preflight_passed": false,
+  "hand_rate_ok": true,
+  "hand_geometry_ok": false,
+  "arm_ik_ok": true,
+  "arm_rate_ok": false,
+  "arm_swept_table_recertified": true,
+  "arm_table_collisions": [],
+  "pickup": {
+    "input": {
+      "source": "Labelled synthetic noisy onceinitial dimensional/slider observation, heldout runtime; no asset ID supplied to planner",
+      "uncertainty_m": 0.00025,
+      "handle_size_WTL_m": [
+        0.014377701697208286,
+        0.013285487955229696,
+        0.13904157002491102
+      ],
+      "slider_size_WTL_m": [
+        0.01,
+        0.0033545294396514704,
+        0.03
+      ],
+      "slider_contact_shift_m": [
+        0.0009858235262676,
+        0.00035683305061702574,
+        0.0017012103074253134
+      ],
+      "initial_object_center_shift_knife_m": [
+        -0.0009858235262676,
+        -0.0009995770282318736,
+        -0.0017012103074253134
+      ]
+    },
+    "planned_thumb_contact_bias_knife_m": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "contact_errors_m": {
+      "thumb": 0.0,
+      "index": 3.284376177633994e-08,
+      "middle": 3.6573729712850674e-07,
+      "pinky": 5.330010404568879e-07
+    },
+    "trajectory_max_error_m": 0.0,
+    "no_physical_asset_read": true,
+    "scope": "Estimated initial geometry adaptation, original nominal joint-preload offsets retained; not force regulation, collision/contact feasibility unproven",
+    "support_surface_scaling": true
+  },
+  "operation": {
+    "input": {
+      "source": "Labelled synthetic noisy onceinitial dimensional/slider observation, heldout runtime; no asset ID supplied to planner",
+      "uncertainty_m": 0.00025,
+      "handle_size_WTL_m": [
+        0.014377701697208286,
+        0.013285487955229696,
+        0.13904157002491102
+      ],
+      "slider_size_WTL_m": [
+        0.01,
+        0.0033545294396514704,
+        0.03
+      ],
+      "slider_contact_shift_m": [
+        0.0009858235262676,
+        0.00035683305061702574,
+        0.0017012103074253134
+      ],
+      "initial_object_center_shift_knife_m": [
+        -0.0009997168585124823,
+        -0.0007099576888564291,
+        -0.0018334789481314602
+      ]
+    },
+    "planned_thumb_contact_bias_knife_m": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "contact_errors_m": {
+      "thumb": 4.738435077757386e-08,
+      "index": 8.94353866877362e-08,
+      "middle": 6.03345425318089e-07,
+      "pinky": 0.0010729473512691198
+    },
+    "trajectory_max_error_m": 5.39323669344601e-08,
+    "no_physical_asset_read": true,
+    "scope": "Estimated initial geometry adaptation, original nominal joint-preload offsets retained; not force regulation, collision/contact feasibility unproven",
+    "support_surface_scaling": true
+  },
+  "waypoint_errors": [
+    {
+      "thumb": 5.225549770841269e-08,
+      "index": 5.004886540121842e-08,
+      "middle": 4.013859200609881e-07,
+      "pinky": 9.277540479965488e-07
+    },
+    {
+      "thumb": 5.225620648693685e-08,
+      "index": 5.0050918616849073e-08,
+      "middle": 4.013901605012828e-07,
+      "pinky": 9.277245277624658e-07
+    },
+    {
+      "thumb": 5.2260618314886025e-08,
+      "index": 5.0065952245945814e-08,
+      "middle": 4.014215582720212e-07,
+      "pinky": 9.27517952475204e-07
+    },
+    {
+      "thumb": 5.22726809150697e-08,
+      "index": 5.010970087984762e-08,
+      "middle": 4.015153336277137e-07,
+      "pinky": 9.269482674615375e-07
+    },
+    {
+      "thumb": 5.229550751347448e-08,
+      "index": 5.019860987379732e-08,
+      "middle": 4.0170923750808816e-07,
+      "pinky": 9.258360388971248e-07
+    },
+    {
+      "thumb": 5.233216930245837e-08,
+      "index": 5.03482380694465e-08,
+      "middle": 4.020396821402085e-07,
+      "pinky": 9.240179250746868e-07
+    },
+    {
+      "thumb": 5.23852597663885e-08,
+      "index": 5.0572662840095586e-08,
+      "middle": 4.025411383645629e-07,
+      "pinky": 9.213501309381686e-07
+    },
+    {
+      "thumb": 5.245685731406788e-08,
+      "index": 5.088484633726984e-08,
+      "middle": 4.0324646244065533e-07,
+      "pinky": 9.177093543645421e-07
+    },
+    {
+      "thumb": 5.254837639556812e-08,
+      "index": 5.129642196058466e-08,
+      "middle": 4.0418755795936985e-07,
+      "pinky": 9.129941632612117e-07
+    },
+    {
+      "thumb": 5.266118929578487e-08,
+      "index": 5.181788760540986e-08,
+      "middle": 4.053961489493745e-07,
+      "pinky": 9.07124528636561e-07
+    },
+    {
+      "thumb": 5.2795817699156377e-08,
+      "index": 5.2458861271578277e-08,
+      "middle": 4.069045106116553e-07,
+      "pinky": 9.000425920427538e-07
+    },
+    {
+      "thumb": 5.295234222082238e-08,
+      "index": 5.3227942455502165e-08,
+      "middle": 4.0874625004639565e-07,
+      "pinky": 8.917123694245663e-07
+    },
+    {
+      "thumb": 5.3130381321726756e-08,
+      "index": 5.413305274223297e-08,
+      "middle": 4.109570052133203e-07,
+      "pinky": 8.821195819137652e-07
+    },
+    {
+      "thumb": 5.332902574240593e-08,
+      "index": 5.518129558486094e-08,
+      "middle": 4.135751168821928e-07,
+      "pinky": 8.712711146643019e-07
+    },
+    {
+      "thumb": 5.3546717758204465e-08,
+      "index": 5.637912859296411e-08,
+      "middle": 4.166422590740091e-07,
+      "pinky": 8.59194958401568e-07
+    },
+    {
+      "thumb": 5.378154158510879e-08,
+      "index": 5.77323247120653e-08,
+      "middle": 4.202040934081728e-07,
+      "pinky": 8.459381648885428e-07
+    },
+    {
+      "thumb": 5.4030686367141205e-08,
+      "index": 5.924583284465505e-08,
+      "middle": 4.24310802090722e-07,
+      "pinky": 8.315410357144931e-07
+    },
+    {
+      "thumb": 5.429125111873008e-08,
+      "index": 6.09238434350698e-08,
+      "middle": 4.2901768232629464e-07,
+      "pinky": 8.161466672343951e-07
+    },
+    {
+      "thumb": 5.455888987168711e-08,
+      "index": 6.27697655849297e-08,
+      "middle": 4.3438570162147515e-07,
+      "pinky": 7.998157159582402e-07
+    },
+    {
+      "thumb": 5.478597731081482e-08,
+      "index": 6.478565736748897e-08,
+      "middle": 4.404821689847888e-07,
+      "pinky": 7.826591707068093e-07
+    },
+    {
+      "thumb": 5.504369282496256e-08,
+      "index": 6.697186691740124e-08,
+      "middle": 4.473816228848452e-07,
+      "pinky": 7.647977779291008e-07
+    },
+    {
+      "thumb": 5.529483869549448e-08,
+      "index": 6.93275542141221e-08,
+      "middle": 4.551667443766107e-07,
+      "pinky": 7.463598583238256e-07
+    },
+    {
+      "thumb": 5.5535039439550016e-08,
+      "index": 7.184958427718552e-08,
+      "middle": 4.6393041644408325e-07,
+      "pinky": 7.274786614550575e-07
+    },
+    {
+      "thumb": 5.5759920090334415e-08,
+      "index": 7.453233014971505e-08,
+      "middle": 4.737796867679593e-07,
+      "pinky": 7.082880283574254e-07
+    },
+    {
+      "thumb": 5.596518404348633e-08,
+      "index": 7.736727491788589e-08,
+      "middle": 4.848405560067681e-07,
+      "pinky": 6.889211777583748e-07
+    },
+    {
+      "thumb": 5.6146711141426494e-08,
+      "index": 8.034268463999591e-08,
+      "middle": 4.972730912288211e-07,
+      "pinky": 6.695072363346477e-07
+    },
+    {
+      "thumb": 5.630062016949205e-08,
+      "index": 8.344341444086582e-08,
+      "middle": 5.112978512530236e-07,
+      "pinky": 6.501694647466354e-07
+    },
+    {
+      "thumb": 5.642331761120787e-08,
+      "index": 8.665100049549029e-08,
+      "middle": 5.272705782304523e-07,
+      "pinky": 6.310228035928169e-07
+    },
+    {
+      "thumb": 5.651165963982397e-08,
+      "index": 8.994404008461514e-08,
+      "middle": 5.459057565372759e-07,
+      "pinky": 6.121728498149794e-07
+    },
+    {
+      "thumb": 5.656288469764635e-08,
+      "index": 9.329951917533093e-08,
+      "middle": 5.69418319639141e-07,
+      "pinky": 5.937148067856501e-07
+    },
+    {
+      "thumb": 5.657478465634253e-08,
+      "index": 9.669455774668996e-08,
+      "middle": 6.23811610353337e-07,
+      "pinky": 5.757326704940236e-07
+    },
+    {
+      "thumb": 5.6545666886698304e-08,
+      "index": 1.0010909336510144e-07,
+      "middle": 6.601793457748438e-07,
+      "pinky": 5.583051230226654e-07
+    },
+    {
+      "thumb": 5.647447358751892e-08,
+      "index": 1.0352956425996878e-07,
+      "middle": 6.757335819461588e-07,
+      "pinky": 5.414778963505832e-07
+    },
+    {
+      "thumb": 5.636070384961883e-08,
+      "index": 1.0695306614552785e-07,
+      "middle": 6.890362107776501e-07,
+      "pinky": 5.253147844701151e-07
+    },
+    {
+      "thumb": 5.6204537605434237e-08,
+      "index": 1.1039141717888576e-07,
+      "middle": 7.033749447654625e-07,
+      "pinky": 5.098350952346565e-07
+    },
+    {
+      "thumb": 5.6006795020530865e-08,
+      "index": 1.1387425281725679e-07,
+      "middle": 7.195228454296293e-07,
+      "pinky": 4.951130977619166e-07
+    },
+    {
+      "thumb": 5.576883709073703e-08,
+      "index": 1.1744988472180977e-07,
+      "middle": 7.380048968264394e-07,
+      "pinky": 4.811455401224262e-07
+    },
+    {
+      "thumb": 5.5492714510842216e-08,
+      "index": 1.2118304658865573e-07,
+      "middle": 7.596965882108027e-07,
+      "pinky": 4.6794695182743425e-07
+    },
+    {
+      "thumb": 5.518098009726496e-08,
+      "index": 1.2514898562325635e-07,
+      "middle": 7.859754462874592e-07,
+      "pinky": 4.555244109821109e-07
+    },
+    {
+      "thumb": 5.483664947255947e-08,
+      "index": 1.294244628860714e-07,
+      "middle": 8.192560206632935e-07,
+      "pinky": 4.4387788535183835e-07
+    },
+    {
+      "thumb": 5.446343108266453e-08,
+      "index": 1.3407833484846492e-07,
+      "middle": 8.620574212190707e-07,
+      "pinky": 4.330016483287561e-07
+    },
+    {
+      "thumb": 5.40651580138772e-08,
+      "index": 1.3915357689919866e-07,
+      "middle": 9.139927153803917e-07,
+      "pinky": 4.228842146288164e-07
+    },
+    {
+      "thumb": 5.364630081259597e-08,
+      "index": 1.4467347111491032e-07,
+      "middle": 9.708711918265831e-07,
+      "pinky": 4.1350938289016443e-07
+    },
+    {
+      "thumb": 5.321132904038948e-08,
+      "index": 1.5062215474733152e-07,
+      "middle": 1.6296656844270637e-06,
+      "pinky": 4.0485674767111865e-07
+    },
+    {
+      "thumb": 5.2765139493909244e-08,
+      "index": 1.5695193900944024e-07,
+      "middle": 5.533861802395491e-06,
+      "pinky": 3.9690219398975586e-07
+    },
+    {
+      "thumb": 5.2312602385488035e-08,
+      "index": 1.6358529135285899e-07,
+      "middle": 5.4920923246829525e-06,
+      "pinky": 3.8961886365995674e-07
+    },
+    {
+      "thumb": 5.185874620609259e-08,
+      "index": 1.7042311705718326e-07,
+      "middle": 5.171868388489711e-06,
+      "pinky": 3.8297769729847796e-07
+    },
+    {
+      "thumb": 5.140850789340703e-08,
+      "index": 1.773528262669088e-07,
+      "middle": 4.7407961094886895e-06,
+      "pinky": 3.769472428547593e-07
+    },
+    {
+      "thumb": 5.0966807654128146e-08,
+      "index": 1.8425782001330685e-07,
+      "middle": 4.321533478260591e-06,
+      "pinky": 3.714951378719207e-07
+    },
+    {
+      "thumb": 5.0538111368186936e-08,
+      "index": 1.9102553371388263e-07,
+      "middle": 3.964715283937804e-06,
+      "pinky": 3.665894389624323e-07
+    },
+    {
+      "thumb": 5.012688062185585e-08,
+      "index": 1.9755357999094483e-07,
+      "middle": 3.6787661062182667e-06,
+      "pinky": 3.621969481586053e-07
+    },
+    {
+      "thumb": 4.9737042419160174e-08,
+      "index": 2.0375379023568244e-07,
+      "middle": 3.4558181970701316e-06,
+      "pinky": 3.582842979551962e-07
+    },
+    {
+      "thumb": 4.937211854371095e-08,
+      "index": 2.0955425424680432e-07,
+      "middle": 3.2842313003257764e-06,
+      "pinky": 3.566544904312963e-07
+    },
+    {
+      "thumb": 4.903522218971995e-08,
+      "index": 2.1489960112461592e-07,
+      "middle": 3.153143220067399e-06,
+      "pinky": 3.578559535765513e-07
+    },
+    {
+      "thumb": 4.872874707360384e-08,
+      "index": 2.1975047348327485e-07,
+      "middle": 3.0535592065665904e-06,
+      "pinky": 3.5895895557806034e-07
+    },
+    {
+      "thumb": 4.8454482445870275e-08,
+      "index": 2.240822287389742e-07,
+      "middle": 2.9783942166924968e-06,
+      "pinky": 3.5995355869738063e-07
+    },
+    {
+      "thumb": 4.821365004844572e-08,
+      "index": 2.2788351129344332e-07,
+      "middle": 2.922070525502965e-06,
+      "pinky": 3.6083282921558675e-07
+    },
+    {
+      "thumb": 4.8006665885833426e-08,
+      "index": 2.311668756509034e-07,
+      "middle": 2.8802610295441244e-06,
+      "pinky": 3.6159274743699114e-07
+    },
+    {
+      "thumb": 4.783321922289027e-08,
+      "index": 1.431758211155932e-07,
+      "middle": 2.849583502587866e-06,
+      "pinky": 3.6221685989775647e-07
+    },
+    {
+      "thumb": 4.769238840134555e-08,
+      "index": 1.4079473134222753e-07,
+      "middle": 2.827417919065997e-06,
+      "pinky": 3.62740067761828e-07
+    },
+    {
+      "thumb": 4.7582451817800276e-08,
+      "index": 1.3889978871671286e-07,
+      "middle": 2.8117367333219757e-06,
+      "pinky": 3.631507575223307e-07
+    },
+    {
+      "thumb": 4.750085281351841e-08,
+      "index": 1.3745955793545204e-07,
+      "middle": 2.800981739441756e-06,
+      "pinky": 3.634569995106541e-07
+    },
+    {
+      "thumb": 4.744445199046371e-08,
+      "index": 1.364299372316925e-07,
+      "middle": 2.793959938741428e-06,
+      "pinky": 3.6367040661094487e-07
+    },
+    {
+      "thumb": 4.740939521623465e-08,
+      "index": 1.3575495560965004e-07,
+      "middle": 2.7897387332017145e-06,
+      "pinky": 3.6380429022454204e-07
+    },
+    {
+      "thumb": 4.739117689800471e-08,
+      "index": 1.3536749956156496e-07,
+      "middle": 2.7875570337748624e-06,
+      "pinky": 3.638755218056741e-07
+    },
+    {
+      "thumb": 4.738465130679914e-08,
+      "index": 1.3519004649338538e-07,
+      "middle": 2.786739895293657e-06,
+      "pinky": 3.63902583596786e-07
+    },
+    {
+      "thumb": 4.73840659382036e-08,
+      "index": 1.351351328085015e-07,
+      "middle": 2.7866194225121365e-06,
+      "pinky": 3.6390647095752055e-07
+    }
+  ],
+  "geometry": [
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0007967069238041247,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -0.0007561694846336328
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.00016659379890629836
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.001106342589688853
+        },
+        {
+          "moving_link": "hand_r_middle_pad_link",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.00026031529529849454
+        },
+        {
+          "moving_link": "hand_r_middle_pad_link",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -9.764485060205497e-05
+        },
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0007561694846336328
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.00016659379890629836
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.001106342589688853
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_pad_link",
+          "gap_lower_bound_m": -0.00026031529529849454
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_pad_link",
+          "gap_lower_bound_m": -9.764485060205497e-05
+        }
+      ]
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0007967069238041247,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -0.0005876505777917158
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -5.302464919787822e-05
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0009328000378665338
+        },
+        {
+          "moving_link": "hand_r_middle_pad_link",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -8.99193926475958e-05
+        },
+        {
+          "moving_link": "hand_r_middle_pad_link",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": 1.3665914495510079e-05
+        },
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0005876505777917158
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -5.302464919787822e-05
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0009328000378665338
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_pad_link",
+          "gap_lower_bound_m": -8.99193926475958e-05
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_pad_link",
+          "gap_lower_bound_m": 1.3665914495510079e-05
+        }
+      ]
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0007967069238041247,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -0.00040678435748269133
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0007591627403457368
+        },
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.00040678435748269133
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0007591627403457368
+        }
+      ]
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0007967069238041247,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -0.00022320252418017196
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0005893401344594235
+        },
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.00022320252418017196
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0005893401344594235
+        }
+      ]
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0007838180940680228,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link3",
+          "gap_lower_bound_m": -3.227576059304689e-05
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0004175809861072105
+        },
+        {
+          "moving_link": "hand_r_ring_link3",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -3.227576059304689e-05
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0004175809861072105
+        }
+      ]
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0006470845561784566,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.00024627530945676296
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.00024627530945676296
+        }
+      ]
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0005192176752705779,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -7.5424578643523e-05
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -7.5424578643523e-05
+        }
+      ]
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0005192176752705779,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -7.5424578643523e-05
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -7.5424578643523e-05
+        }
+      ]
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.0003883187056754056,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.00028615124621289567,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.00021908056693731304,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.00018675534117496007,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.00018878413886752599,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "closure",
+      "minimum_table_gap_m": 0.00022473593843463924,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06056022875749445,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06231513200106428,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06232809834033206,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0004942927012413986
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0006662872291079633
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0008702873530445875
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0004942927012413986
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0006662872291079633
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0008702873530445875
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06161447603943062,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.001249484896208887
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0014349566883035299
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0017554935312157766
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.001249484896208887
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0014349566883035299
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0017554935312157766
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06174702996442329,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.0011313778411412845
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0011740264176719473
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.001724458330416588
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0011313778411412845
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.0011740264176719473
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.001724458330416588
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06233914948440147,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_link4",
+          "gap_lower_bound_m": -0.00028992542411199543
+        },
+        {
+          "moving_link": "hand_r_middle_link3",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.00013935585995913935
+        },
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.0011148473066702937
+        },
+        {
+          "moving_link": "hand_r_ring_link4",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.00028992542411199543
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link3",
+          "gap_lower_bound_m": -0.00013935585995913935
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.0011148473066702937
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06309279366544987,
+      "uncertified_self_pairs": [
+        {
+          "moving_link": "hand_r_middle_link4",
+          "other_link": "hand_r_ring_pad_link",
+          "gap_lower_bound_m": -0.000297018937840475
+        },
+        {
+          "moving_link": "hand_r_ring_pad_link",
+          "other_link": "hand_r_middle_link4",
+          "gap_lower_bound_m": -0.000297018937840475
+        }
+      ]
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06397673546162622,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06316367559727673,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06405749252848397,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06653485629798939,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06804061879261739,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06876229275224036,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06929899052103342,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06963930609471372,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.06960996432899104,
+      "uncertified_self_pairs": []
+    },
+    {
+      "phase": "transfer",
+      "minimum_table_gap_m": 0.069492360233389,
+      "uncertified_self_pairs": []
+    }
+  ],
+  "ring_parking_audit": {
+    "scope": "Park the optional ring across an estimated pickup/transfer motor trajectory.\n\nUses authored meshes and known planned joint/arm poses only. Changes no active\nfinger contact target, physical object, actuator or online policy input. Parking\nis an initial known motor-plan choice, not an episode-internal state reset.\n",
+    "optimizer_success": true,
+    "message": "Rechecked existing park with full hand/table meshes",
+    "park_q_rad": [
+      0.2716957220723544,
+      -0.1430172251296149,
+      0.896261355428029,
+      1.405631075731386
+    ],
+    "minimum_constraint_margin_m": -7.010833767370252e-14,
+    "ring_support_claimed": false,
+    "preflight_passed": false,
+    "original_estimate": {
+      "source": "Labelled synthetic noisy onceinitial dimensional/slider observation, heldout runtime; no asset ID supplied to planner",
+      "uncertainty_m": 0.00025,
+      "handle_size_WTL_m": [
+        0.014377701697208286,
+        0.013285487955229696,
+        0.13904157002491102
+      ],
+      "slider_size_WTL_m": [
+        0.01,
+        0.0033545294396514704,
+        0.03
+      ],
+      "slider_contact_shift_m": [
+        0.0009858235262676,
+        0.00035683305061702574,
+        0.0017012103074253134
+      ]
+    },
+    "samples": 31,
+    "non_ring_failures": [
+      {
+        "phase": "closure",
+        "minimum_table_gap_m": 0.00028615124621289567,
+        "uncertified_self_pairs": []
+      },
+      {
+        "phase": "closure",
+        "minimum_table_gap_m": 0.00021908056693731304,
+        "uncertified_self_pairs": []
+      },
+      {
+        "phase": "closure",
+        "minimum_table_gap_m": 0.00018675534117496007,
+        "uncertified_self_pairs": []
+      },
+      {
+        "phase": "closure",
+        "minimum_table_gap_m": 0.00018878413886752599,
+        "uncertified_self_pairs": []
+      },
+      {
+        "phase": "closure",
+        "minimum_table_gap_m": 0.00022473593843463924,
+        "uncertified_self_pairs": []
+      }
+    ]
+  }
+}

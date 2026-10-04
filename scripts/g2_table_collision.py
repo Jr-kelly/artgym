@@ -13,9 +13,9 @@ from scripts.g2_kinematics import G2Kinematics, ROOT
 
 
 class ArmTableCollision:
-    def __init__(self, table_height=.8, margin=.002):
+    def __init__(self, table_height=.8, margin=.002, table_y=-.25):
         self.k = G2Kinematics()
-        self.center = np.array([.60, -.25, table_height-.025])
+        self.center = np.array([.60, table_y, table_height-.025])
         self.half = np.array([.30, .40, .025]) + margin
         path = ROOT/'assets/robots/g2_wuji/g2_wuji.urdf'
         self.meshes = []
