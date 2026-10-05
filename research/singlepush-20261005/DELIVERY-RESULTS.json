@@ -1,0 +1,1352 @@
+{
+  "extension_demo_ready": true,
+  "force_margin_evidence": {
+    "demonstrated_capacity_lower_bound_N": 1.25,
+    "baseline_lower_bound_N": 1.0,
+    "lower_bound_improvement_fraction": 0.25,
+    "reference75gf_N": 0.73549875,
+    "improvement1N_mm": 4.987940192222595,
+    "1p5N_H200_pass": false,
+    "scope": "Calibrated passive model capacity and complete task travel; not measured robot thrust or max force ceiling"
+  },
+  "necessary_generalization_status": "2/3 new frozen joint conditions pass; near-small actual35mm endpoint self collision rejected; development small/middle now pass; large still loses cap contact",
+  "axial_force_measurement_status": "No trustworthy total native tangential channel. Actual total axial contact force is missing/null, not zero.",
+  "hardware_check_status": "Specific offline combined normal/axial/gravity/dynamics and position/velocity checks done; nonmoving measurement entry executed with no SDK/device; actual limits/stiffness/force unverified",
+  "real_robot_ran": false,
+  "hardware_verified": false,
+  "source_training": "Reused prior actor, no new fitting/training; legacy128env warning retained, capability comes from native complete rollouts",
+  "trials": [
+    {
+      "label": "baseline reference",
+      "trial": "runs/singlepush-20261005/baseline/nominal-reference-v1/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": true,
+          "hold_above_threshold": true,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": true,
+        "active_forward_m": 0.027667499027302256,
+        "prepush_slider_m": 4.497368718148209e-05,
+        "relative_episode_initial_extension_m": 0.027712472714483738,
+        "hold_range_m": 3.726780414581299e-05,
+        "hold_min_active_m": 0.02764599758302211,
+        "effective_cap_contact_fraction": 1.0,
+        "longest_cap_contact_loss_s": 0.0,
+        "body_max_translation_m": 0.003443214576691389,
+        "body_max_rotation_rad": 0.27328330678371326,
+        "cap_normal_mean_N": 1.1517342782364588,
+        "cap_normal_p05_N": 0.8604426980018616,
+        "cap_normal_peak_N": 1.458246111869812,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 0.73549875,
+        "brake_capacity_max_N": 0.73549875,
+        "thumb_torque_limit_fraction_max": [
+          0.03318965290736987,
+          0.30377483943728123,
+          0.09236614251097501,
+          0.06963383592948177
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.03281605490348285,
+          0.29801870191891544,
+          0.08972035777939243,
+          0.0666480715125826
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "29e17120f1388b91963873f2110aa6a2b97fad85ba5ca75849feaf82bcf5de23",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      }
+    },
+    {
+      "label": "baseline 1.0N",
+      "trial": "runs/singlepush-20261005/development/baseline-load-1.0-v1/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": true,
+          "hold_above_threshold": true,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": true,
+        "active_forward_m": 0.023301528501178836,
+        "prepush_slider_m": 4.958015415468253e-05,
+        "relative_episode_initial_extension_m": 0.02335110865533352,
+        "hold_range_m": 3.819912672042847e-05,
+        "hold_min_active_m": 0.02328241217401228,
+        "effective_cap_contact_fraction": 1.0,
+        "longest_cap_contact_loss_s": 0.0,
+        "body_max_translation_m": 0.0037176308687776327,
+        "body_max_rotation_rad": 0.2719595719052435,
+        "cap_normal_mean_N": 1.1298065119416145,
+        "cap_normal_p05_N": 0.8402341604232788,
+        "cap_normal_peak_N": 1.407326579093933,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 1.0,
+        "brake_capacity_max_N": 1.0,
+        "thumb_torque_limit_fraction_max": [
+          0.06180296822297225,
+          0.3371076409611672,
+          0.09555796440990377,
+          0.06942551276795064
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.060367827736684296,
+          0.32780734335080397,
+          0.09044026812933766,
+          0.06599344308289197
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "e54c4b1b2db69733b11f8de45eb458d47f15aaf09eb6e5df2abb5b516c60a1e2",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      }
+    },
+    {
+      "label": "baseline 1.25N",
+      "trial": "runs/singlepush-20261005/development/baseline-load-1.25-v1/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": false,
+          "hold_above_threshold": false,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": false,
+        "active_forward_m": 0.019159281360771274,
+        "prepush_slider_m": 4.958015415468253e-05,
+        "relative_episode_initial_extension_m": 0.019208861514925957,
+        "hold_range_m": 4.494376480579376e-05,
+        "hold_min_active_m": 0.019136678161885357,
+        "effective_cap_contact_fraction": 1.0,
+        "longest_cap_contact_loss_s": 0.0,
+        "body_max_translation_m": 0.0043642884120345116,
+        "body_max_rotation_rad": 0.2719595719052435,
+        "cap_normal_mean_N": 1.148579195422611,
+        "cap_normal_p05_N": 0.8402341604232788,
+        "cap_normal_peak_N": 1.4366192817687988,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 1.25,
+        "brake_capacity_max_N": 1.25,
+        "thumb_torque_limit_fraction_max": [
+          0.10813958030269975,
+          0.35626257755583596,
+          0.1530007054373609,
+          0.10402632963176164
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.10616317655272142,
+          0.347286823658215,
+          0.14990456114424497,
+          0.09997118736576394
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "cb6a1a5054641d140481912f31d1f3fa2bbd7745b096edf45fd495a143262d57",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      }
+    },
+    {
+      "label": "baseline 1.5N",
+      "trial": "runs/singlepush-20261005/development/baseline-load-1.5-v1/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": false,
+          "hold_above_threshold": false,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": false,
+        "active_forward_m": 0.011176896481629228,
+        "prepush_slider_m": 4.958015415468253e-05,
+        "relative_episode_initial_extension_m": 0.01122647663578391,
+        "hold_range_m": 5.291122943162918e-05,
+        "hold_min_active_m": 0.011150493952300167,
+        "effective_cap_contact_fraction": 1.0,
+        "longest_cap_contact_loss_s": 0.0,
+        "body_max_translation_m": 0.005484593566507101,
+        "body_max_rotation_rad": 0.2719595719052435,
+        "cap_normal_mean_N": 1.1896525415902768,
+        "cap_normal_p05_N": 0.8402341604232788,
+        "cap_normal_peak_N": 1.653315246105194,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 1.5,
+        "brake_capacity_max_N": 1.5,
+        "thumb_torque_limit_fraction_max": [
+          0.13182763212178947,
+          0.37418602540523704,
+          0.19774173620936256,
+          0.13337667578432336
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.1312975899145513,
+          0.36888496982646146,
+          0.19593514806528792,
+          0.1327695016667883
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "448702f50aa94edb767adc6770721fdc09b3ad9c9615c603f9cc6c62992c64d2",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      }
+    },
+    {
+      "label": "final reference 4090",
+      "trial": "runs/singlepush-20261005/final/local-reference-video-v1/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": true,
+          "hold_above_threshold": true,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": true,
+        "active_forward_m": 0.029469868048181525,
+        "prepush_slider_m": 4.497368718148209e-05,
+        "relative_episode_initial_extension_m": 0.029514841735363007,
+        "hold_range_m": 2.7064234018325806e-05,
+        "hold_min_active_m": 0.029456304266204825,
+        "effective_cap_contact_fraction": 1.0,
+        "longest_cap_contact_loss_s": 0.0,
+        "body_max_translation_m": 0.003701701294630766,
+        "body_max_rotation_rad": 0.3116005768117888,
+        "cap_normal_mean_N": 1.1672548800350588,
+        "cap_normal_p05_N": 0.8568834066390991,
+        "cap_normal_peak_N": 1.5483828783035278,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 0.73549875,
+        "brake_capacity_max_N": 0.73549875,
+        "thumb_torque_limit_fraction_max": [
+          0.0403989411071429,
+          0.35614708393835404,
+          0.14143348218182666,
+          0.09275350068176874
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.0387525711364773,
+          0.3452363483640177,
+          0.12793597457457898,
+          0.0708513879650383
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "e5e2a9e86eb3a14e0b63f488b8e4ab89804ab2d0d089abe8fc19e123997b7b6f",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      }
+    },
+    {
+      "label": "final 1.0N H200",
+      "trial": "runs/singlepush-20261005/development/path-drive-load-1.0-v1/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": true,
+          "hold_above_threshold": true,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": true,
+        "active_forward_m": 0.02828946869340143,
+        "prepush_slider_m": 4.958015415468253e-05,
+        "relative_episode_initial_extension_m": 0.028339048847556114,
+        "hold_range_m": 3.241002559661865e-05,
+        "hold_min_active_m": 0.028273263680603122,
+        "effective_cap_contact_fraction": 1.0,
+        "longest_cap_contact_loss_s": 0.0,
+        "body_max_translation_m": 0.004804764408618212,
+        "body_max_rotation_rad": 0.31851229337039344,
+        "cap_normal_mean_N": 1.153935718922757,
+        "cap_normal_p05_N": 0.8363983631134033,
+        "cap_normal_peak_N": 1.808567393105477,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 1.0,
+        "brake_capacity_max_N": 1.0,
+        "thumb_torque_limit_fraction_max": [
+          0.1117789011069635,
+          0.3936075664728571,
+          0.1712139213146107,
+          0.11426082270449789
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.09943292746970181,
+          0.3654146332827485,
+          0.14732508381508228,
+          0.09779765298585069
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "8994d6791cc5b91f4a345ad9769005bee1f569cc74f990a10bd429088a3b3e00",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      }
+    },
+    {
+      "label": "final 1.25N H200",
+      "trial": "runs/singlepush-20261005/development/path-drive-load-1.25-v1/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": true,
+          "hold_above_threshold": true,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": true,
+        "active_forward_m": 0.024903478766646003,
+        "prepush_slider_m": 4.958015415468253e-05,
+        "relative_episode_initial_extension_m": 0.024953058920800686,
+        "hold_range_m": 3.1925737857818604e-05,
+        "hold_min_active_m": 0.02488751682903967,
+        "effective_cap_contact_fraction": 1.0,
+        "longest_cap_contact_loss_s": 0.0,
+        "body_max_translation_m": 0.005686306860297918,
+        "body_max_rotation_rad": 0.31851229337039344,
+        "cap_normal_mean_N": 1.0562131755247848,
+        "cap_normal_p05_N": 0.8361958861351013,
+        "cap_normal_peak_N": 1.789580225944519,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 1.25,
+        "brake_capacity_max_N": 1.25,
+        "thumb_torque_limit_fraction_max": [
+          0.13885013910093516,
+          0.4253911580941433,
+          0.2119766855241065,
+          0.13862778725566993
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.13219525769536872,
+          0.3885147562776781,
+          0.19814184973600163,
+          0.133529011739334
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "6ace46b7536651f584d2c3649ef836e8663da410d9c32d9da04044e79bbebfee",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      }
+    },
+    {
+      "label": "final 1.25N 4090",
+      "trial": "runs/singlepush-20261005/final/local-125-video-v1/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": true,
+          "hold_above_threshold": true,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": true,
+        "active_forward_m": 0.02436626224880456,
+        "prepush_slider_m": 4.497368718148209e-05,
+        "relative_episode_initial_extension_m": 0.024411235935986042,
+        "hold_range_m": 3.330409526824951e-05,
+        "hold_min_active_m": 0.02434960926984786,
+        "effective_cap_contact_fraction": 1.0,
+        "longest_cap_contact_loss_s": 0.0,
+        "body_max_translation_m": 0.005767983850091696,
+        "body_max_rotation_rad": 0.3430084706808669,
+        "cap_normal_mean_N": 1.016675989192831,
+        "cap_normal_p05_N": 0.7719808742403984,
+        "cap_normal_peak_N": 1.8465182781219482,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 1.25,
+        "brake_capacity_max_N": 1.25,
+        "thumb_torque_limit_fraction_max": [
+          0.14008340935090047,
+          0.4278257257642014,
+          0.21757636095030888,
+          0.14078206076770824
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.13295773726735596,
+          0.40222235470808454,
+          0.20246348229074407,
+          0.13555567882962136
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "d7ed4f78dbced95a8ddc0d0e36ddf8522767821ac6f8a428d82ea8b3cd7db3c8",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      }
+    },
+    {
+      "label": "final 1.5N H200",
+      "trial": "runs/singlepush-20261005/development/path-drive-load-1.5-v1/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": false,
+          "hold_above_threshold": false,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": false,
+        "active_forward_m": 0.019874335932399845,
+        "prepush_slider_m": 4.958015415468253e-05,
+        "relative_episode_initial_extension_m": 0.019923916086554527,
+        "hold_range_m": 4.560314118862152e-05,
+        "hold_min_active_m": 0.019851959976222133,
+        "effective_cap_contact_fraction": 1.0,
+        "longest_cap_contact_loss_s": 0.0,
+        "body_max_translation_m": 0.006309953052550554,
+        "body_max_rotation_rad": 0.31851229337039344,
+        "cap_normal_mean_N": 1.1430456008362666,
+        "cap_normal_p05_N": 0.8361958861351013,
+        "cap_normal_peak_N": 1.7718228101730347,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 1.5,
+        "brake_capacity_max_N": 1.5,
+        "thumb_torque_limit_fraction_max": [
+          0.16698819749032578,
+          0.43818040557887705,
+          0.27098885301630904,
+          0.18191901127341895
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.16412392451068997,
+          0.40734815808147784,
+          0.26605414582964027,
+          0.17814627926218138
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "cf60cdcd243f4687a8512ac3c838c1a7f7fad3e04a2e83ee55ec6756d4b5d89e",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      }
+    },
+    {
+      "label": "final1.5N4090",
+      "trial": "runs/singlepush-20261005/final/local-150-video-v1/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": false,
+          "hold_above_threshold": false,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": false,
+        "active_forward_m": 0.01854519347762107,
+        "prepush_slider_m": 4.497368718148209e-05,
+        "relative_episode_initial_extension_m": 0.01859016716480255,
+        "hold_range_m": 4.2285770177841187e-05,
+        "hold_min_active_m": 0.01852402637814521,
+        "effective_cap_contact_fraction": 1.0,
+        "longest_cap_contact_loss_s": 0.0,
+        "body_max_translation_m": 0.006307173520326614,
+        "body_max_rotation_rad": 0.3116005768117888,
+        "cap_normal_mean_N": 1.0741002525407808,
+        "cap_normal_p05_N": 0.8568444848060608,
+        "cap_normal_peak_N": 1.8032177686691284,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 1.5,
+        "brake_capacity_max_N": 1.5,
+        "thumb_torque_limit_fraction_max": [
+          0.16522154632952465,
+          0.4370250495544941,
+          0.26018817529763255,
+          0.17337788218967087
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.16025402396623528,
+          0.40534414613899694,
+          0.24834889536464988,
+          0.16844287480354675
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "b6f60b65627383d4db537b73190bc56c2a39b3a95698eaa1d41edcaf890a9d82",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      }
+    }
+  ],
+  "frozen_joint_cases": [
+    {
+      "case": "near-small",
+      "split": "new-frozen-joint-validation",
+      "started_utc": "2026-10-05T15:14:44.765463+00:00",
+      "selection_sha256": "af0d9f511e6f48e31168da7b0783c970be368b064168c5cd9afc63011d365886",
+      "scope": "New frozen joint validation; same actor/controller and estimate-only adaptation.",
+      "real_robot_ran": false,
+      "preparation": {
+        "passed": false,
+        "scope": "Common initial-estimate-only preparation; no physical asset or load ID input.\nEvery failed geometry gate is retained. Does not execute a physical rollout.\n",
+        "failure_type": "CalledProcessError",
+        "failure": "Command '['/home/agiuser/miniconda3/envs/artgym/bin/python', '-m', 'scripts.audit_g2_anchored_thumb_motor', '--reference', 'runs/singlepush-20261005/frozen/near-small/preparation/operation/reference.json', '--motor-plan', 'runs/singlepush-20261005/frozen/near-small/preparation/operation/actual-transfer-motor-plan.json', '--knife-spec', 'runs/singlepush-20261005/frozen/near-small/preparation/operation/estimated-collision/spec.json', '--samples', '81', '--output', 'runs/singlepush-20261005/frozen/near-small/preparation/operation/actual-transfer-stroke-audit.json']' returned non-zero exit status 1.",
+        "commands": [
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.adapt_wuji_direct_corner_initial_geometry",
+            "--estimate",
+            "assets/objects/knife_wuji_singlepush_20261005/frozen-v1/near-small/noisy-once-estimate.json",
+            "--plan",
+            "runs/wrap-force-20261004/planning/source-bounded-index-wrap-v8/direct-corner-v6/motor-plan.json",
+            "--reference",
+            "runs/traction-20261005/configs/cartesian-tracking10-v12.json",
+            "--localization",
+            "runs/wrap-force-20261004/planning/source-bounded-index-wrap-v8/direct-corner-v6/localization.json",
+            "--output",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup",
+            "--body-root-inset",
+            "0.01",
+            "--grip-tail-shift-m",
+            "0.006",
+            "--preserve-middle-axis",
+            "--thumb-lateral-bias-m",
+            "0.0025",
+            "--thumb-face-toward-cap"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.plan_g2_functional_acquisition_path",
+            "--plan",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/motor-plan.json",
+            "--localization",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/localization.json",
+            "--knife-spec",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/estimated-collision/spec.json",
+            "--table-y",
+            "-0.23",
+            "--output",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/acquisition"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.audit_wuji_actual_acquisition_motor",
+            "--plan",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/motor-plan.json",
+            "--acquisition",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/acquisition/acquisition-path.json",
+            "--table-y",
+            "-0.23",
+            "--output",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/closure-audit.json"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.audit_g2_anchored_thumb_motor",
+            "--reference",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/reference.json",
+            "--motor-plan",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/motor-plan.json",
+            "--knife-spec",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/estimated-collision/spec.json",
+            "--samples",
+            "81",
+            "--output",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/full-stroke-audit.json"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.plan_wuji_newknife_contact_pose",
+            "--stroke-m",
+            "0.035",
+            "--base",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup",
+            "--initialize",
+            "runs/newknife-20261005/planning/center-tail-support-v1",
+            "--fixed-wrist-from-initialize",
+            "--smooth",
+            "--small-wrist",
+            "--minimum-front-cosine",
+            "0.5",
+            "--middle-support-crosswidth-fraction",
+            "0.22",
+            "--pinky-support-crosswidth-fraction",
+            "0",
+            "--sites",
+            "12",
+            "--output",
+            "runs/singlepush-20261005/frozen/near-small/preparation/planning"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.prepare_wuji_newknife_joint_pose",
+            "--stroke-m",
+            "0.035",
+            "--pose",
+            "runs/singlepush-20261005/frozen/near-small/preparation/planning",
+            "--base",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup",
+            "--continuous",
+            "--lifted-operation",
+            "--thumb-preload-normal-m",
+            "0.0003",
+            "--preserve-authored-normal",
+            "--output",
+            "runs/singlepush-20261005/frozen/near-small/preparation/reference"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.prepare_wuji_newknife_support_preload",
+            "--base",
+            "runs/singlepush-20261005/frozen/near-small/preparation/reference",
+            "--actuator-spec",
+            "runs/newknife-20261005/configs/actuator-preload-model.json",
+            "--output",
+            "runs/singlepush-20261005/frozen/near-small/preparation/operation"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.plan_wuji_postlift_regrasp",
+            "--knife-spec",
+            "runs/singlepush-20261005/frozen/near-small/preparation/operation/estimated-collision/spec.json",
+            "--table-y",
+            "-0.23",
+            "--pickup-plan",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/motor-plan.json",
+            "--acquisition",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/acquisition/acquisition-path.json",
+            "--calibration",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/calibration.json",
+            "--operation-plan",
+            "runs/singlepush-20261005/frozen/near-small/preparation/operation/motor-plan.json",
+            "--contact-preserving-ik",
+            "--reachable-pinky-path",
+            "--output",
+            "runs/singlepush-20261005/frozen/near-small/preparation/operation/postlift-transfer.json"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.audit_g2_anchored_thumb_motor",
+            "--reference",
+            "runs/singlepush-20261005/frozen/near-small/preparation/operation/reference.json",
+            "--motor-plan",
+            "runs/singlepush-20261005/frozen/near-small/preparation/operation/actual-transfer-motor-plan.json",
+            "--knife-spec",
+            "runs/singlepush-20261005/frozen/near-small/preparation/operation/estimated-collision/spec.json",
+            "--samples",
+            "81",
+            "--output",
+            "runs/singlepush-20261005/frozen/near-small/preparation/operation/actual-transfer-stroke-audit.json"
+          ]
+        ]
+      },
+      "preparation_exit_code": 0,
+      "pass_all": false,
+      "evaluation": null,
+      "failure": "Actual required postlift path preparation rejected; no physical execution",
+      "finished_utc": "2026-10-05T15:14:44.766170+00:00"
+    },
+    {
+      "case": "near-large",
+      "split": "new-frozen-joint-validation",
+      "started_utc": "2026-10-05T15:15:34.665723+00:00",
+      "selection_sha256": "af0d9f511e6f48e31168da7b0783c970be368b064168c5cd9afc63011d365886",
+      "scope": "New frozen joint validation; same actor/controller and estimate-only adaptation.",
+      "real_robot_ran": false,
+      "preparation": {
+        "passed": true,
+        "scope": "Common initial-estimate-only preparation; no physical asset or load ID input.\nEvery failed geometry gate is retained. Does not execute a physical rollout.\n",
+        "recipe_sha256": "e72c43824fdd40cc00732ebfe28b2982743e82b07f33d92918e33d1e8f98e7aa",
+        "estimate_sha256": "8937d7724d023a9a185c2f1122b154dfbfdbbbc86c82f54ea10fa97b583555dd",
+        "prepared": "runs/singlepush-20261005/frozen/near-large/preparation/pickup",
+        "operation_prepared": "runs/singlepush-20261005/frozen/near-large/preparation/operation",
+        "operation_geometry_sha256": {
+          "postlift-transfer.json": "420659ea67fbeef04fa3c30b1cd998fbc2ad124ccf1e7cd3ff41d73a2d31d926",
+          "reference.json": "ac21e1339b6a9afda35545fa71a6af92f484bb37e8c98b68e8de7c2eac0be3c0"
+        }
+      },
+      "preparation_exit_code": 0,
+      "command": [
+        "/home/wangjiarui/artgym-runtime/bin/python",
+        "-m",
+        "scripts.run_wuji_singlepush",
+        "--output",
+        "runs/singlepush-20261005/frozen/near-large/validation-v1/physical",
+        "--prepared",
+        "runs/singlepush-20261005/frozen/near-large/preparation/pickup",
+        "--operation-prepared",
+        "runs/singlepush-20261005/frozen/near-large/preparation/operation",
+        "--asset",
+        "assets/objects/knife_wuji_singlepush_20261005/frozen-v1/near-large/mobility.urdf",
+        "--resistance",
+        "assets/objects/knife_wuji_singlepush_20261005/frozen-v1/near-large/resistance.json",
+        "--pressure",
+        "runs/newknife-20261005/configs/pressure120.json",
+        "--stroke-m",
+        "0.035",
+        "--checkpoint",
+        "runs/newknife-20261005/train/center-tail-constant-motor-v1/update_000100.pth",
+        "--reference-control-config",
+        "runs/singlepush-20261005/configs/reference-path-drive.json",
+        "--no-video",
+        "--hand-friction",
+        ".75",
+        "--knife-friction",
+        "1.7"
+      ],
+      "physical_exit_code": 0,
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": true,
+          "hold_above_threshold": true,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": true,
+        "active_forward_m": 0.028531303640193073,
+        "prepush_slider_m": 3.9939757698448375e-05,
+        "relative_episode_initial_extension_m": 0.02857124339789152,
+        "hold_range_m": 2.2644177079200745e-05,
+        "hold_min_active_m": 0.028519983414298622,
+        "effective_cap_contact_fraction": 1.0,
+        "longest_cap_contact_loss_s": 0.0,
+        "body_max_translation_m": 0.005016641691327095,
+        "body_max_rotation_rad": 0.30274999174904277,
+        "cap_normal_mean_N": 1.1151285671508153,
+        "cap_normal_p05_N": 0.8702120780944824,
+        "cap_normal_peak_N": 1.8042402267456055,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 0.8288332468761426,
+        "brake_capacity_max_N": 1.0079976106879347,
+        "thumb_torque_limit_fraction_max": [
+          0.11021031288890876,
+          0.39940656363418425,
+          0.16783099084667794,
+          0.12215447957033496
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.0997492340729446,
+          0.3777969065903996,
+          0.16040487747820587,
+          0.10589476069881576
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "189cb6701040e4d26859e1c781fabea5e85a0c6ffc712b0cd50ca3c0b3f231d2",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      },
+      "pass_all": true,
+      "finished_utc": "2026-10-05T15:16:30.418853+00:00"
+    },
+    {
+      "case": "shift-delay",
+      "split": "new-frozen-joint-validation",
+      "started_utc": "2026-10-05T15:15:34.699844+00:00",
+      "selection_sha256": "af0d9f511e6f48e31168da7b0783c970be368b064168c5cd9afc63011d365886",
+      "scope": "New frozen joint validation; same actor/controller and estimate-only adaptation.",
+      "real_robot_ran": false,
+      "preparation": {
+        "passed": true,
+        "scope": "Common initial-estimate-only preparation; no physical asset or load ID input.\nEvery failed geometry gate is retained. Does not execute a physical rollout.\n",
+        "recipe_sha256": "e72c43824fdd40cc00732ebfe28b2982743e82b07f33d92918e33d1e8f98e7aa",
+        "estimate_sha256": "8386c681e4a372f5e5408bf72cf56c365057a9d2b6bd4284cb681029f8aed761",
+        "prepared": "runs/singlepush-20261005/frozen/shift-delay/preparation/pickup",
+        "operation_prepared": "runs/singlepush-20261005/frozen/shift-delay/preparation/operation",
+        "operation_geometry_sha256": {
+          "postlift-transfer.json": "80609a6a38dd7641f6618c1cca511d1a7d9c5c72bbcdd314286febcf8c3d30ed",
+          "reference.json": "59948a54b8709a2c581f8b7c4d5375389791e57ec33178302e473ff6c80a7538"
+        }
+      },
+      "preparation_exit_code": 0,
+      "command": [
+        "/home/wangjiarui/artgym-runtime/bin/python",
+        "-m",
+        "scripts.run_wuji_singlepush",
+        "--output",
+        "runs/singlepush-20261005/frozen/shift-delay/validation-v1/physical",
+        "--prepared",
+        "runs/singlepush-20261005/frozen/shift-delay/preparation/pickup",
+        "--operation-prepared",
+        "runs/singlepush-20261005/frozen/shift-delay/preparation/operation",
+        "--asset",
+        "assets/objects/knife_wuji_singlepush_20261005/frozen-v1/shift-delay/mobility.urdf",
+        "--resistance",
+        "assets/objects/knife_wuji_singlepush_20261005/frozen-v1/shift-delay/resistance.json",
+        "--pressure",
+        "runs/newknife-20261005/configs/pressure120.json",
+        "--stroke-m",
+        "0.035",
+        "--checkpoint",
+        "runs/newknife-20261005/train/center-tail-constant-motor-v1/update_000100.pth",
+        "--reference-control-config",
+        "runs/singlepush-20261005/configs/reference-path-drive.json",
+        "--no-video",
+        "--actuation-delay-frames",
+        "1",
+        "--observation-noise",
+        ".001",
+        "--observation-bias",
+        ".0005"
+      ],
+      "physical_exit_code": 0,
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": true,
+          "hold_above_threshold": true,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": true,
+        "active_forward_m": 0.03120348634547554,
+        "prepush_slider_m": 4.32987289968878e-05,
+        "relative_episode_initial_extension_m": 0.031246785074472427,
+        "hold_range_m": 2.5870278477668762e-05,
+        "hold_min_active_m": 0.031190304405754432,
+        "effective_cap_contact_fraction": 1.0,
+        "longest_cap_contact_loss_s": 0.0,
+        "body_max_translation_m": 0.004773334600031376,
+        "body_max_rotation_rad": 0.3686686522142443,
+        "cap_normal_mean_N": 1.0291313726697255,
+        "cap_normal_p05_N": 0.8131319284439087,
+        "cap_normal_peak_N": 1.8407444953918457,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 0.7822641116350211,
+        "brake_capacity_max_N": 0.951996775053723,
+        "thumb_torque_limit_fraction_max": [
+          0.10780106588154192,
+          0.37678552397890314,
+          0.17740490762779995,
+          0.11669558419100447
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.09819341493180711,
+          0.3579357830295827,
+          0.15801931057822974,
+          0.10645786194114427
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "53fa306789f817fab3a2207fd85100187385e13f1a61e9294fcf19697747c35f",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      },
+      "pass_all": true,
+      "finished_utc": "2026-10-05T15:16:29.659846+00:00"
+    }
+  ],
+  "development_geometry": [
+    {
+      "case": "geometry-small28-v2",
+      "trial": "runs/singlepush-20261005/development/geometry-small28-v2/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": false,
+          "hold_above_threshold": false,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": false,
+        "active_forward_m": 0.019125078033539467,
+        "prepush_slider_m": 8.127170440275222e-05,
+        "relative_episode_initial_extension_m": 0.01920634973794222,
+        "hold_range_m": 2.1049752831459045e-05,
+        "hold_min_active_m": 0.019114538255962543,
+        "effective_cap_contact_fraction": 1.0,
+        "longest_cap_contact_loss_s": 0.0,
+        "body_max_translation_m": 0.004709911998361349,
+        "body_max_rotation_rad": 0.12082335496127786,
+        "cap_normal_mean_N": 1.2362360626516966,
+        "cap_normal_p05_N": 0.7635525763034821,
+        "cap_normal_peak_N": 1.4664340019226074,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 0.55,
+        "brake_capacity_max_N": 0.55,
+        "thumb_torque_limit_fraction_max": [
+          0.02498406501203975,
+          0.25059310748365754,
+          0.08426208750106746,
+          0.07056005782219119
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.01966055233169369,
+          0.24714145424552927,
+          0.07832255827356163,
+          0.06782484963580973
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "bd2cf7b01dd656ccaf3f868dc6f79767fef11c0ac4ffbfc01f41e43968dbe75a",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      }
+    },
+    {
+      "case": "geometry-large-support0-v3",
+      "trial": "runs/singlepush-20261005/development/geometry-large-support0-v3/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": false,
+          "hold_above_threshold": false,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": false,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": false,
+        "active_forward_m": 1.882872311398387e-06,
+        "prepush_slider_m": 3.6772900784853846e-05,
+        "relative_episode_initial_extension_m": 3.865577309625223e-05,
+        "hold_range_m": 3.6003984860144556e-07,
+        "hold_min_active_m": 1.7028505681082606e-06,
+        "effective_cap_contact_fraction": 0.22900763358778625,
+        "longest_cap_contact_loss_s": 4.616666666666666,
+        "body_max_translation_m": 0.008899099193513393,
+        "body_max_rotation_rad": 0.5214792401335154,
+        "cap_normal_mean_N": 0.23851917612209328,
+        "cap_normal_p05_N": 0.0,
+        "cap_normal_peak_N": 2.2945072650909424,
+        "fixed_body_normal_mean_N": 0.002236853508993862,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 0.95,
+        "brake_capacity_max_N": 0.95,
+        "thumb_torque_limit_fraction_max": [
+          0.16378762752425238,
+          0.2661487262498974,
+          0.2588048061609985,
+          0.1877330907597471
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.11082946250118737,
+          0.2088336278228148,
+          0.1946617026122966,
+          0.15226484967235207
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "affba345650b2658604e7582ad27bd50a43db41e9bb0d519f7befbbd29dedde7",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      }
+    },
+    {
+      "case": "geometry-small-low-path35-v4",
+      "trial": "runs/singlepush-20261005/development/geometry-small-low-path35-v4/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": true,
+          "hold_above_threshold": true,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": true,
+        "active_forward_m": 0.03047164777672151,
+        "prepush_slider_m": 8.251269900938496e-05,
+        "relative_episode_initial_extension_m": 0.030554160475730896,
+        "hold_range_m": 2.1515414118766785e-05,
+        "hold_min_active_m": 0.030460889138339553,
+        "effective_cap_contact_fraction": 1.0,
+        "longest_cap_contact_loss_s": 0.0,
+        "body_max_translation_m": 0.005177180748432875,
+        "body_max_rotation_rad": 0.12864713839455075,
+        "cap_normal_mean_N": 1.245958063272064,
+        "cap_normal_p05_N": 0.7444702386856079,
+        "cap_normal_peak_N": 1.564640998840332,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 0.55,
+        "brake_capacity_max_N": 0.55,
+        "thumb_torque_limit_fraction_max": [
+          0.02487974516805076,
+          0.25785585766763913,
+          0.0924436869512399,
+          0.06156197162668611
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.01833362056783332,
+          0.2435109975744591,
+          0.08445428129760696,
+          0.05947270671580531
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "76122bba277e028d09c91f618ca436aac3083157a6607af8ecb1f73cfc2f7c31",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      }
+    },
+    {
+      "case": "geometry-large28-v2",
+      "trial": "runs/singlepush-20261005/development/geometry-large28-v2/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": false,
+          "hold_above_threshold": false,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": false,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": false,
+        "active_forward_m": -2.376568863837747e-05,
+        "prepush_slider_m": 3.6772900784853846e-05,
+        "relative_episode_initial_extension_m": 1.3007212146476377e-05,
+        "hold_range_m": 3.135119186481461e-08,
+        "hold_min_active_m": -2.378131466684863e-05,
+        "effective_cap_contact_fraction": 0.18945176960444135,
+        "longest_cap_contact_loss_s": 4.85,
+        "body_max_translation_m": 0.009301511570811272,
+        "body_max_rotation_rad": 0.5273615000449349,
+        "cap_normal_mean_N": 0.17868856861308413,
+        "cap_normal_p05_N": 0.0,
+        "cap_normal_peak_N": 2.1741483211517334,
+        "fixed_body_normal_mean_N": 0.0003779209882995575,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 0.95,
+        "brake_capacity_max_N": 0.95,
+        "thumb_torque_limit_fraction_max": [
+          0.14901770486904484,
+          0.22300290332970793,
+          0.2143900539804015,
+          0.15788332603670416
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.09044925428256097,
+          0.19573068273906777,
+          0.1765795032956979,
+          0.1412498663920035
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "e0afde99d3d0efb24efd717c143cbe168abdb1cb39bef6cba724c153e25b01b9",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      }
+    },
+    {
+      "case": "geometry-middle28-v2",
+      "trial": "runs/singlepush-20261005/development/geometry-middle28-v2/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": false,
+          "hold_above_threshold": false,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": false,
+        "active_forward_m": 0.015314825548557565,
+        "prepush_slider_m": 7.656475645489991e-05,
+        "relative_episode_initial_extension_m": 0.015391390305012465,
+        "hold_range_m": 3.095436841249466e-05,
+        "hold_min_active_m": 0.015299326943932101,
+        "effective_cap_contact_fraction": 1.0,
+        "longest_cap_contact_loss_s": 0.0,
+        "body_max_translation_m": 0.0032029966823756695,
+        "body_max_rotation_rad": 0.2876879504305135,
+        "cap_normal_mean_N": 1.0964054580122533,
+        "cap_normal_p05_N": 0.813169538974762,
+        "cap_normal_peak_N": 1.3212285041809082,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 0.7544195934474444,
+        "brake_capacity_max_N": 0.9183996666117636,
+        "thumb_torque_limit_fraction_max": [
+          0.025385416512561928,
+          0.31999499259420355,
+          0.10775915786027541,
+          0.0774423161114952
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.02156401712281335,
+          0.30870943632187153,
+          0.10115246034105031,
+          0.07429769394374365
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "634f2eebce335210a6aa8454b99370d137f02abfc1d36cd5fd6ab210ed15a676",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      }
+    },
+    {
+      "case": "geometry-middle-variable-path35-v4",
+      "trial": "runs/singlepush-20261005/development/geometry-middle-variable-path35-v4/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": true,
+          "hold_above_threshold": true,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": true,
+        "active_forward_m": 0.02573118614964187,
+        "prepush_slider_m": 7.654842920601368e-05,
+        "relative_episode_initial_extension_m": 0.025807734578847885,
+        "hold_range_m": 3.0236318707466125e-05,
+        "hold_min_active_m": 0.02571602421812713,
+        "effective_cap_contact_fraction": 1.0,
+        "longest_cap_contact_loss_s": 0.0,
+        "body_max_translation_m": 0.0055548581294715405,
+        "body_max_rotation_rad": 0.3407596145076592,
+        "cap_normal_mean_N": 1.1492297265482132,
+        "cap_normal_p05_N": 0.8100285530090332,
+        "cap_normal_peak_N": 1.7341701984405518,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 0.7554500127207447,
+        "brake_capacity_max_N": 0.9183994497011986,
+        "thumb_torque_limit_fraction_max": [
+          0.08244887532715112,
+          0.41738081328079335,
+          0.15824481099440466,
+          0.12098351269709907
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.07573834886162424,
+          0.35107831013069707,
+          0.13248138104714433,
+          0.08442734978274045
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "6542ea34239a2a429134d8a5134a45016b3704225a339eebc53c51811d64957c",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      }
+    }
+  ],
+  "calibrations": [
+    {
+      "scope": "Minimal known-force fixture for increased capacities, never a task aid.",
+      "rows": [
+        {
+          "capacity_N": 0.73549875,
+          "below_force_N": 0.6987238124999999,
+          "below_displacement_m": 5.589816737483488e-06,
+          "above_force_N": 0.7369987499999999,
+          "above_displacement_m": 0.00255248392932117,
+          "threshold_response_passed": true
+        },
+        {
+          "capacity_N": 1.0,
+          "below_force_N": 0.95,
+          "below_displacement_m": 7.603631729580229e-06,
+          "above_force_N": 1.0015,
+          "above_displacement_m": 0.0025526287499815226,
+          "threshold_response_passed": true
+        },
+        {
+          "capacity_N": 1.5,
+          "below_force_N": 1.4249999999999998,
+          "below_displacement_m": 1.1402476047805976e-05,
+          "above_force_N": 1.5015,
+          "above_displacement_m": 0.0025526287499815226,
+          "threshold_response_passed": true
+        }
+      ],
+      "all_passed": true
+    },
+    {
+      "scope": "Minimal known-force fixture for increased capacities, never a task aid.",
+      "rows": [
+        {
+          "capacity_N": 1.25,
+          "below_force_N": 1.1875,
+          "below_displacement_m": 9.496972779743373e-06,
+          "above_force_N": 1.2515,
+          "above_displacement_m": 0.00255248392932117,
+          "threshold_response_passed": true
+        }
+      ],
+      "all_passed": true
+    }
+  ]
+}

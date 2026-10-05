@@ -1,0 +1,266 @@
+[
+  {
+    "name": "baseline",
+    "title": "\u539f\u57fa\u7ebf \u00b7 0.7355 N",
+    "evaluation": {
+      "version": "wuji-extension-only-v1",
+      "checks": {
+        "continuous_pickup": true,
+        "complete_duration": true,
+        "active_forward": true,
+        "hold_above_threshold": true,
+        "hold_stable": true,
+        "clear": true,
+        "body_supported": true,
+        "effective_cap_contact": true,
+        "no_endstop": true,
+        "extension_only_schedule": true
+      },
+      "pass_all": true,
+      "active_forward_m": 0.027667499027302256,
+      "prepush_slider_m": 4.497368718148209e-05,
+      "relative_episode_initial_extension_m": 0.027712472714483738,
+      "hold_range_m": 3.726780414581299e-05,
+      "hold_min_active_m": 0.02764599758302211,
+      "effective_cap_contact_fraction": 1.0,
+      "longest_cap_contact_loss_s": 0.0,
+      "body_max_translation_m": 0.003443214576691389,
+      "body_max_rotation_rad": 0.27328330678371326,
+      "cap_normal_mean_N": 1.1517342782364588,
+      "cap_normal_p05_N": 0.8604426980018616,
+      "cap_normal_peak_N": 1.458246111869812,
+      "fixed_body_normal_mean_N": 0.0,
+      "actual_total_axial_contact_force_N": null,
+      "brake_capacity_min_N": 0.73549875,
+      "brake_capacity_max_N": 0.73549875,
+      "thumb_torque_limit_fraction_max": [
+        0.03318965290736987,
+        0.30377483943728123,
+        0.09236614251097501,
+        0.06963383592948177
+      ],
+      "thumb_torque_limit_fraction_p95": [
+        0.03281605490348285,
+        0.29801870191891544,
+        0.08972035777939243,
+        0.0666480715125826
+      ],
+      "thumb_limit_saturation_fraction": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "trace_sha256": "29e17120f1388b91963873f2110aa6a2b97fad85ba5ca75849feaf82bcf5de23",
+      "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+    },
+    "frames": 660,
+    "fps": 30,
+    "duration_s": 22.0,
+    "source_trial": "runs/singlepush-20261005/baseline/nominal-reference-v1/simulation",
+    "videos": {
+      "singlepush-baseline.mp4": "59f1914795481d865150e1c3304890f4e968858a21932971e400eda82da19334",
+      "baseline-continuous.mp4": "ba939188a74673f833c09cdb7ee3cbc81ae44b287530f8fae8680eb57fc5107e",
+      "baseline-closeup.mp4": "b2896db850391e4cda617cf601312a5e9ec44b862631d709fabe444f62e2ae09"
+    },
+    "weight_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e"
+  },
+  {
+    "name": "reference",
+    "title": "\u6700\u7ec8 \u00b7 0.7355 N",
+    "evaluation": {
+      "version": "wuji-extension-only-v1",
+      "checks": {
+        "continuous_pickup": true,
+        "complete_duration": true,
+        "active_forward": true,
+        "hold_above_threshold": true,
+        "hold_stable": true,
+        "clear": true,
+        "body_supported": true,
+        "effective_cap_contact": true,
+        "no_endstop": true,
+        "extension_only_schedule": true
+      },
+      "pass_all": true,
+      "active_forward_m": 0.029469868048181525,
+      "prepush_slider_m": 4.497368718148209e-05,
+      "relative_episode_initial_extension_m": 0.029514841735363007,
+      "hold_range_m": 2.7064234018325806e-05,
+      "hold_min_active_m": 0.029456304266204825,
+      "effective_cap_contact_fraction": 1.0,
+      "longest_cap_contact_loss_s": 0.0,
+      "body_max_translation_m": 0.003701701294630766,
+      "body_max_rotation_rad": 0.3116005768117888,
+      "cap_normal_mean_N": 1.1672548800350588,
+      "cap_normal_p05_N": 0.8568834066390991,
+      "cap_normal_peak_N": 1.5483828783035278,
+      "fixed_body_normal_mean_N": 0.0,
+      "actual_total_axial_contact_force_N": null,
+      "brake_capacity_min_N": 0.73549875,
+      "brake_capacity_max_N": 0.73549875,
+      "thumb_torque_limit_fraction_max": [
+        0.0403989411071429,
+        0.35614708393835404,
+        0.14143348218182666,
+        0.09275350068176874
+      ],
+      "thumb_torque_limit_fraction_p95": [
+        0.0387525711364773,
+        0.3452363483640177,
+        0.12793597457457898,
+        0.0708513879650383
+      ],
+      "thumb_limit_saturation_fraction": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "trace_sha256": "e5e2a9e86eb3a14e0b63f488b8e4ab89804ab2d0d089abe8fc19e123997b7b6f",
+      "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+    },
+    "frames": 660,
+    "fps": 30,
+    "duration_s": 22.0,
+    "source_trial": "runs/singlepush-20261005/final/local-reference-video-v1/simulation",
+    "videos": {
+      "singlepush-reference.mp4": "2b7199d9869c7c19bbefeecbcb84839a4705342496b94e1c4feba14f4c9729dc",
+      "reference-continuous.mp4": "3a396a01ec75cbf02ddef33921af50eb8a68cfce172d037ad98ae5681d759ade",
+      "reference-closeup.mp4": "ee9389195a88b8df766147c447bec59e74c8b1a3a00f9558faa4d09efa0cfdaa"
+    },
+    "weight_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e"
+  },
+  {
+    "name": "load125",
+    "title": "\u6700\u7ec8 \u00b7 1.25 N",
+    "evaluation": {
+      "version": "wuji-extension-only-v1",
+      "checks": {
+        "continuous_pickup": true,
+        "complete_duration": true,
+        "active_forward": true,
+        "hold_above_threshold": true,
+        "hold_stable": true,
+        "clear": true,
+        "body_supported": true,
+        "effective_cap_contact": true,
+        "no_endstop": true,
+        "extension_only_schedule": true
+      },
+      "pass_all": true,
+      "active_forward_m": 0.02436626224880456,
+      "prepush_slider_m": 4.497368718148209e-05,
+      "relative_episode_initial_extension_m": 0.024411235935986042,
+      "hold_range_m": 3.330409526824951e-05,
+      "hold_min_active_m": 0.02434960926984786,
+      "effective_cap_contact_fraction": 1.0,
+      "longest_cap_contact_loss_s": 0.0,
+      "body_max_translation_m": 0.005767983850091696,
+      "body_max_rotation_rad": 0.3430084706808669,
+      "cap_normal_mean_N": 1.016675989192831,
+      "cap_normal_p05_N": 0.7719808742403984,
+      "cap_normal_peak_N": 1.8465182781219482,
+      "fixed_body_normal_mean_N": 0.0,
+      "actual_total_axial_contact_force_N": null,
+      "brake_capacity_min_N": 1.25,
+      "brake_capacity_max_N": 1.25,
+      "thumb_torque_limit_fraction_max": [
+        0.14008340935090047,
+        0.4278257257642014,
+        0.21757636095030888,
+        0.14078206076770824
+      ],
+      "thumb_torque_limit_fraction_p95": [
+        0.13295773726735596,
+        0.40222235470808454,
+        0.20246348229074407,
+        0.13555567882962136
+      ],
+      "thumb_limit_saturation_fraction": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "trace_sha256": "d7ed4f78dbced95a8ddc0d0e36ddf8522767821ac6f8a428d82ea8b3cd7db3c8",
+      "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+    },
+    "frames": 660,
+    "fps": 30,
+    "duration_s": 22.0,
+    "source_trial": "runs/singlepush-20261005/final/local-125-video-v1/simulation",
+    "videos": {
+      "singlepush-load125.mp4": "979f25264cec8bb0cdeab2536379653d9d6b56579864f274be4166906dc1601d",
+      "load125-continuous.mp4": "ad7e59094a7a01db4eaefe72c615c2bb87556fcb82f29c107792dcddda11dd84",
+      "load125-closeup.mp4": "561d9bec7d3848ab3c108b2a96cef57a5317aff9d495effa39afb5f3fcc1d6b6"
+    },
+    "weight_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e"
+  },
+  {
+    "name": "load150-failed",
+    "title": "\u6700\u7ec8 \u00b7 1.5 N \u00b7 \u5931\u8d25",
+    "evaluation": {
+      "version": "wuji-extension-only-v1",
+      "checks": {
+        "continuous_pickup": true,
+        "complete_duration": true,
+        "active_forward": false,
+        "hold_above_threshold": false,
+        "hold_stable": true,
+        "clear": true,
+        "body_supported": true,
+        "effective_cap_contact": true,
+        "no_endstop": true,
+        "extension_only_schedule": true
+      },
+      "pass_all": false,
+      "active_forward_m": 0.01854519347762107,
+      "prepush_slider_m": 4.497368718148209e-05,
+      "relative_episode_initial_extension_m": 0.01859016716480255,
+      "hold_range_m": 4.2285770177841187e-05,
+      "hold_min_active_m": 0.01852402637814521,
+      "effective_cap_contact_fraction": 1.0,
+      "longest_cap_contact_loss_s": 0.0,
+      "body_max_translation_m": 0.006307173520326614,
+      "body_max_rotation_rad": 0.3116005768117888,
+      "cap_normal_mean_N": 1.0741002525407808,
+      "cap_normal_p05_N": 0.8568444848060608,
+      "cap_normal_peak_N": 1.8032177686691284,
+      "fixed_body_normal_mean_N": 0.0,
+      "actual_total_axial_contact_force_N": null,
+      "brake_capacity_min_N": 1.5,
+      "brake_capacity_max_N": 1.5,
+      "thumb_torque_limit_fraction_max": [
+        0.16522154632952465,
+        0.4370250495544941,
+        0.26018817529763255,
+        0.17337788218967087
+      ],
+      "thumb_torque_limit_fraction_p95": [
+        0.16025402396623528,
+        0.40534414613899694,
+        0.24834889536464988,
+        0.16844287480354675
+      ],
+      "thumb_limit_saturation_fraction": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "trace_sha256": "b6f60b65627383d4db537b73190bc56c2a39b3a95698eaa1d41edcaf890a9d82",
+      "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+    },
+    "frames": 660,
+    "fps": 30,
+    "duration_s": 22.0,
+    "source_trial": "runs/singlepush-20261005/final/local-150-video-v1/simulation",
+    "videos": {
+      "singlepush-load150-failed.mp4": "bb326fc377bc84a0980a9b8299bd79f07505fbb25f2d7bc2cecbda5f03cae4ba",
+      "load150-failed-continuous.mp4": "095017a1f85b19f633af1e3353d40a701d8b63702f57e4bc4d1d318e5084defb",
+      "load150-failed-closeup.mp4": "48aeb47141761e108fe9059c2631ad651ea4117ef2e82bec4454fa473f81e2a7"
+    },
+    "weight_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e"
+  }
+]

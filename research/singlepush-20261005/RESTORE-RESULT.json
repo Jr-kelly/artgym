@@ -1,0 +1,81 @@
+{
+  "packets": [
+    {
+      "name": "wrap-runtime.tar.gz",
+      "sha256": "3641e30850d88a41a5db4c385ff06d50ca321bc1f47e6527cd23fdcbd1a43fab"
+    },
+    {
+      "name": "wrap-learning-state.tar.gz",
+      "sha256": "519d9dc52d7cb1091da79901268933e8ccabfa908425bd1b1ccdc98ec84039b4"
+    },
+    {
+      "name": "singlepush-overlay.tar.gz",
+      "sha256": "972336ac1d8f66a3509c726e45b3da2db36a68c877a58c108979c8cb5d46cf85"
+    }
+  ],
+  "verified_files": 1481,
+  "real_robot_ran": false,
+  "scope": "Restore a singlepush overlay on the two immutable wrap dependencies.\nA separately installed licensed Isaac Gym runtime is required. Simulation only.\n",
+  "command": [
+    "/home/agiuser/miniconda3/envs/artgym/bin/python",
+    "-m",
+    "scripts.run_wuji_singlepush_selected",
+    "--no-video",
+    "--output",
+    "runs/singlepush-restored"
+  ],
+  "exit_code": 0,
+  "evaluation": {
+    "version": "wuji-extension-only-v1",
+    "checks": {
+      "continuous_pickup": true,
+      "complete_duration": true,
+      "active_forward": true,
+      "hold_above_threshold": true,
+      "hold_stable": true,
+      "clear": true,
+      "body_supported": true,
+      "effective_cap_contact": true,
+      "no_endstop": true,
+      "extension_only_schedule": true
+    },
+    "pass_all": true,
+    "active_forward_m": 0.029469868048181525,
+    "prepush_slider_m": 4.497368718148209e-05,
+    "relative_episode_initial_extension_m": 0.029514841735363007,
+    "hold_range_m": 2.7064234018325806e-05,
+    "hold_min_active_m": 0.029456304266204825,
+    "effective_cap_contact_fraction": 1.0,
+    "longest_cap_contact_loss_s": 0.0,
+    "body_max_translation_m": 0.003701701294630766,
+    "body_max_rotation_rad": 0.3116005768117888,
+    "cap_normal_mean_N": 1.1672548800350588,
+    "cap_normal_p05_N": 0.8568834066390991,
+    "cap_normal_peak_N": 1.5483828783035278,
+    "fixed_body_normal_mean_N": 0.0,
+    "actual_total_axial_contact_force_N": null,
+    "brake_capacity_min_N": 0.73549875,
+    "brake_capacity_max_N": 0.73549875,
+    "thumb_torque_limit_fraction_max": [
+      0.0403989411071429,
+      0.35614708393835404,
+      0.14143348218182666,
+      0.09275350068176874
+    ],
+    "thumb_torque_limit_fraction_p95": [
+      0.0387525711364773,
+      0.3452363483640177,
+      0.12793597457457898,
+      0.0708513879650383
+    ],
+    "thumb_limit_saturation_fraction": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "trace_sha256": "e5e2a9e86eb3a14e0b63f488b8e4ab89804ab2d0d089abe8fc19e123997b7b6f",
+    "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+  },
+  "task_passed": true
+}

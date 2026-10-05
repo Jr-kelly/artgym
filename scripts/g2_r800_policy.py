@@ -221,6 +221,8 @@ class G2R800Policy(FrozenPolicy):
             if self.pressure_adapter is not None and not issued_target_hold:
                 anchor=self.known.initial if self.known.support_anchor is None else self.known.support_anchor
                 proposed=anchor+self.known.support_span*action;proposed[:,16:]=self.known.issued[:,16:]+.025*action[:,16:]
+                if hasattr(self.pressure_adapter,'axial_motor_bias'):
+                    proposed[:,16:]+=self.tensor(self.pressure_adapter.axial_motor_bias(q,self.known.issued[0].cpu().numpy(),clock_s))
                 desired=self.pressure_adapter.command(q,self.known.issued[0].cpu().numpy(),proposed[0].cpu().numpy(),clock_s)
                 action=(self.tensor(desired)-anchor)/self.known.support_span;action[:,16:]=(self.tensor(desired)[:,16:]-self.known.issued[:,16:])/.025;action=action.clamp(-1,1)
             if diagnostic_motor_offset is not None:

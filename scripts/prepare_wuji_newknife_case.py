@@ -5,7 +5,7 @@ import argparse,hashlib,json,shutil,subprocess,sys
 from pathlib import Path
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--estimate',type=Path,required=True);p.add_argument('--recipe',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args();assert not a.output.exists();a.output.mkdir(parents=True);recipe=json.loads(a.recipe.read_text());commands=[]
+ p=argparse.ArgumentParser();p.add_argument("--postlift-only-stroke",action="store_true",help="Pickup posture only holds0; certify the actual fullstroke after the separately certified transfer");p.add_argument("--stroke-m",type=float,default=.035);p.add_argument('--estimate',type=Path,required=True);p.add_argument('--recipe',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args();assert not a.output.exists();a.output.mkdir(parents=True);recipe=json.loads(a.recipe.read_text());commands=[]
  def run(module,**kw):
   cmd=[sys.executable,'-m','scripts.'+module]
   for key,value in kw.items():
@@ -17,12 +17,12 @@ def main():
  pickup=a.output/'pickup';planning=a.output/'planning';refprep=a.output/'reference';operation=a.output/'operation'
  try:
   run('adapt_wuji_direct_corner_initial_geometry',estimate=a.estimate,plan=recipe['baseline_plan'],reference=recipe['baseline_reference'],localization=recipe['baseline_localization'],output=pickup,body_root_inset=.01,grip_tail_shift_m=.006,preserve_middle_axis=True,thumb_lateral_bias_m=.0025,thumb_face_toward_cap=True)
-  ref=json.loads((pickup/'reference.json').read_text());ref['command_travel_m']=.035;(pickup/'reference.json').write_text(json.dumps(ref,indent=2))
+  ref=json.loads((pickup/'reference.json').read_text());ref['command_travel_m']=0. if a.postlift_only_stroke else a.stroke_m;(pickup/'reference.json').write_text(json.dumps(ref,indent=2))
   run('plan_g2_functional_acquisition_path',plan=pickup/'motor-plan.json',localization=pickup/'localization.json',knife_spec=pickup/'estimated-collision/spec.json',table_y=-.23,output=pickup/'acquisition')
   run('audit_wuji_actual_acquisition_motor',plan=pickup/'motor-plan.json',acquisition=pickup/'acquisition/acquisition-path.json',table_y=-.23,output=pickup/'closure-audit.json')
   run('audit_g2_anchored_thumb_motor',reference=pickup/'reference.json',motor_plan=pickup/'motor-plan.json',knife_spec=pickup/'estimated-collision/spec.json',samples=81,output=pickup/'full-stroke-audit.json')
-  run('plan_wuji_newknife_contact_pose',base=pickup,initialize=recipe['nominal_operation_seed'],fixed_wrist_from_initialize=True,smooth=True,small_wrist=True,minimum_front_cosine=.5,middle_support_crosswidth_fraction=.22,pinky_support_crosswidth_fraction=0,sites=12,output=planning)
-  run('prepare_wuji_newknife_joint_pose',pose=planning,base=pickup,continuous=True,lifted_operation=True,thumb_preload_normal_m=.0003,preserve_authored_normal=True,output=refprep)
+  run('plan_wuji_newknife_contact_pose',stroke_m=a.stroke_m,base=pickup,initialize=recipe['nominal_operation_seed'],fixed_wrist_from_initialize=True,smooth=True,small_wrist=True,minimum_front_cosine=.5,middle_support_crosswidth_fraction=.22,pinky_support_crosswidth_fraction=0,sites=12,output=planning)
+  run('prepare_wuji_newknife_joint_pose',stroke_m=a.stroke_m,pose=planning,base=pickup,continuous=True,lifted_operation=True,thumb_preload_normal_m=.0003,preserve_authored_normal=True,output=refprep)
   run('prepare_wuji_newknife_support_preload',base=refprep,actuator_spec=recipe['actuator_spec'],output=operation)
   run('plan_wuji_postlift_regrasp',knife_spec=operation/'estimated-collision/spec.json',table_y=-.23,pickup_plan=pickup/'motor-plan.json',acquisition=pickup/'acquisition/acquisition-path.json',calibration=pickup/'calibration.json',operation_plan=operation/'motor-plan.json',contact_preserving_ik=True,reachable_pinky_path=True,output=operation/'postlift-transfer.json')
   transfer=json.loads((operation/'postlift-transfer.json').read_text());assert transfer['preflight_passed'] and max(r['max_active_point_error_m'] for r in transfer['contact_point_tracking'])<.001

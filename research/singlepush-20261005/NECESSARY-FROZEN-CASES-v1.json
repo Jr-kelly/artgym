@@ -1,0 +1,104 @@
+{
+  "declared_utc": "2026-10-05T15:11:18.141994+00:00",
+  "seed": 2026100581,
+  "scope": "Predeclare new unused joint conditions, before final controller selection/physics.",
+  "entries": [
+    {
+      "name": "near-small",
+      "asset_directory": "assets/objects/knife_wuji_singlepush_20261005/frozen-v1/near-small",
+      "initial_estimate": "assets/objects/knife_wuji_singlepush_20261005/frozen-v1/near-small/noisy-once-estimate.json",
+      "physical_parameters": {
+        "length": 0.142,
+        "width": 0.0185,
+        "thickness": 0.0075,
+        "slider_length": 0.031,
+        "slider_width": 0.0065,
+        "protrusion": 0.0017,
+        "proximal": 0.0285,
+        "mass": 0.052
+      },
+      "reference_N": 0.65,
+      "kind": "constant",
+      "native_options": [
+        "--observation-noise",
+        ".001"
+      ],
+      "hashes": {
+        "resistance.json": "564a7c5e1f41226a87090ac3b6eb9ba424b0f5876762e6e403885014f0d2a6d2",
+        "mobility.urdf": "aeafd8a0065770d70e080f34fa2955d6cec9f1f60bc6e4703daa1c09517de06b",
+        "spec.json": "b92b7a1e0929ab49a8aaf931b525bef0cb708578c33d47ad144d333f9affa6ba",
+        "noisy-once-estimate.json": "bb9fa937d91f2f4fd06b6fbc6a6549ae07b481687c2d5da23425d5df47bd8578",
+        "slider-cap.obj": "46c2ddf468701eec936de7929acc66e1baa8a471e75aea0411df4a5b11558201",
+        "once-estimate.json": "f65e35d6a2adf420a95e1a76b1e7c300ae0fe1a110129d6fd039119891984c3a",
+        "parameters.json": "8f7dde10e07030652d5afa8f639ff6ba31d8a8bb5cdd56b5fdaa6fa2030a49cc"
+      }
+    },
+    {
+      "name": "near-large",
+      "asset_directory": "assets/objects/knife_wuji_singlepush_20261005/frozen-v1/near-large",
+      "initial_estimate": "assets/objects/knife_wuji_singlepush_20261005/frozen-v1/near-large/noisy-once-estimate.json",
+      "physical_parameters": {
+        "length": 0.147,
+        "width": 0.0196,
+        "thickness": 0.0087,
+        "slider_length": 0.0332,
+        "slider_width": 0.0076,
+        "protrusion": 0.0023,
+        "proximal": 0.033,
+        "mass": 0.058
+      },
+      "reference_N": 0.9,
+      "kind": "variable",
+      "native_options": [
+        "--hand-friction",
+        ".75",
+        "--knife-friction",
+        "1.7"
+      ],
+      "hashes": {
+        "resistance.json": "a8b28fc2aa7b21bf2e2b74a732c1c7b8b276315d51abc40d089c0df181cda43a",
+        "mobility.urdf": "09e0616271f2777204a95f291ec6fa3000c19683a11efa8e0aa09310e5138451",
+        "spec.json": "522efa5f1995e057ffd04ac2f2c3b88926a1ab7d08e0d943cf831c1d2f787ce1",
+        "noisy-once-estimate.json": "8937d7724d023a9a185c2f1122b154dfbfdbbbc86c82f54ea10fa97b583555dd",
+        "slider-cap.obj": "df6820528756d42c84e1878cb4ae22135df1275fe2667d705e8e745a244c9e2e",
+        "once-estimate.json": "9e26b21588b6bda67b1b9856820ae3e92f8e891136731907d5d85cef8eee41b0",
+        "parameters.json": "fa2edbda3f3100fde18767645f4b39f01d7185724ae6807f09d61b4bf2e7e4c7"
+      }
+    },
+    {
+      "name": "shift-delay",
+      "asset_directory": "assets/objects/knife_wuji_singlepush_20261005/frozen-v1/shift-delay",
+      "initial_estimate": "assets/objects/knife_wuji_singlepush_20261005/frozen-v1/shift-delay/noisy-once-estimate.json",
+      "physical_parameters": {
+        "length": 0.1445,
+        "width": 0.0192,
+        "thickness": 0.0081,
+        "slider_length": 0.0323,
+        "slider_width": 0.0071,
+        "protrusion": 0.0021,
+        "proximal": 0.0308,
+        "mass": 0.056
+      },
+      "reference_N": 0.85,
+      "kind": "variable",
+      "native_options": [
+        "--actuation-delay-frames",
+        "1",
+        "--observation-noise",
+        ".001",
+        "--observation-bias",
+        ".0005"
+      ],
+      "hashes": {
+        "resistance.json": "2d34093d2fa00bc33bcffa7252b2ce331b7c78efc008d615c6cde4bdc691f301",
+        "mobility.urdf": "d0fd35e1c81688291e9450b1b3dd7ec55298b14aced9afc6a48dfc1da6a693ce",
+        "spec.json": "9c6c071a3b552717c4396f7333b2f5504113bbdfee3da7990aecc36988379c05",
+        "noisy-once-estimate.json": "8386c681e4a372f5e5408bf72cf56c365057a9d2b6bd4284cb681029f8aed761",
+        "slider-cap.obj": "43b4731d6a2814d1e8f27806fce3552a08b5137ce92cc75804233ce03eba5c4d",
+        "once-estimate.json": "52afa55639560e61dced9f8a158a52ae363bcef22051817493d23e934315f2ad",
+        "parameters.json": "02b8f9541fd33080634e9cda3c8429fcaf4ee833bf23cc4c0ec19a0380dc459c"
+      }
+    }
+  ],
+  "execution_gate": "Freeze final actor/controller before physics; common initial-estimate adaptation only; never retune after outcomes"
+}

@@ -11,12 +11,12 @@ from scripts.wuji_once_estimated_collision_geometry import build,rematch_open_pr
 from scripts.wuji_traction_axial_geometry import attach_axial_jacobians
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--preserve-authored-normal',action='store_true',help='Refine interpolated smooth pose without replacing its authored pad orientation');p.add_argument('--thumb-preload-normal-m',type=float);p.add_argument('--continuous',action='store_true');p.add_argument('--lifted-operation',action='store_true');p.add_argument('--pose',type=Path,required=True);p.add_argument('--base',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
+ p=argparse.ArgumentParser();p.add_argument("--stroke-m",type=float,default=.035);p.add_argument('--preserve-authored-normal',action='store_true',help='Refine interpolated smooth pose without replacing its authored pad orientation');p.add_argument('--thumb-preload-normal-m',type=float);p.add_argument('--continuous',action='store_true');p.add_argument('--lifted-operation',action='store_true');p.add_argument('--pose',type=Path,required=True);p.add_argument('--base',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
  plan=json.loads((a.pose/'motor-plan.json').read_text());pose=json.loads((a.pose/'contact-pose.json').read_text());estimate=plan['initial_geometry_estimate'];spec=build(estimate,a.output/'estimated-collision');g=DigitGeometry();h=g.w;w=np.array(plan['wrist_in_knife']);touch=np.array(plan['touch_q']);vertices=np.concatenate([v for v,_ in g.meshes['hand_r_thumb_pad_link']]);size=estimate['handle_size_WTL_m'];cap=estimate['slider_size_WTL_m'];target0=np.array([0,size[1]/2+cap[1]+.00015,-.02205+estimate['slider_contact_shift_m'][2]])
  def point(x):
   q=touch.copy();q[16:]=x;m=w@h.forward(q)['hand_r_thumb_pad_link'];v=vertices@m[:3,:3].T+m[:3,3];z=v[:,1];weight=np.exp(-(z-z.min())/.0002);return weight@v/weight.sum(),m[:3,0]
  ref=json.loads((a.base/'reference.json').read_text());ref['rows']=[];start=touch[16:].copy()
- for shift in np.linspace(0,.035,36):
+ for shift in np.linspace(0,a.stroke_m,36):
   target=target0+[0,0,shift];prior=np.array([np.interp(shift,[r['shift_m'] for r in pose['rows']],[r['thumb_q'][i] for r in pose['rows']]) for i in range(4)]);start=prior.copy() if not a.continuous or shift==0 else start
   normal_target=point(prior)[1] if a.preserve_authored_normal else np.array([0,-1,0])
   if a.preserve_authored_normal:start=prior.copy()
@@ -32,7 +32,7 @@ def main():
     if re<error:start=retry.x;pos,n=rp,rn;error=re
     if error<.00025:break
   ref['rows'].append(dict(shift_m=float(shift),q_thumb=start.tolist(),point_error_m=error,point_initial_estimate_m=pos.tolist(),authored_front_cosine=float(-n[1]),feasible=error<.00025))
- ref.update(command_travel_m=.035,all_feasible=all(r['feasible'] for r in ref['rows']),all_feasible_scope='Dense initial-estimate IK only; original-limit and geometry certificates pending',posture_preload=False,known_motor_anchor=True)
+ ref.update(command_travel_m=a.stroke_m,all_feasible=all(r['feasible'] for r in ref['rows']),all_feasible_scope='Dense initial-estimate IK only; original-limit and geometry certificates pending',posture_preload=False,known_motor_anchor=True)
  # Starting pose is refined by the same solve; retain previous finite preload.
  preload=np.array(plan['close_q'])-touch;opening=np.array(plan['open_q'])-touch;touch[16:]=ref['rows'][0]['q_thumb'];plan['touch_q']=touch.tolist()
  if a.thumb_preload_normal_m is not None:

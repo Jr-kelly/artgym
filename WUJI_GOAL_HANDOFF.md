@@ -1,3 +1,40 @@
+# Wuji 单次伸出 >20mm 当前Goal
+
+先读 `/data/research/artgym-experiments-20260921/singlepush-20261005/research/singlepush-20261005/CONTINUATION.md`。旧双循环不再是本轮要求。
+
+```json
+{
+  "started_utc": "2026-10-05T14:51:31.280510+00:00",
+  "local_root": "/data/research/artgym-experiments-20260921/singlepush-20261005",
+  "baseline_local_commit": "0fb3073",
+  "baseline_github_commit": "2e0fd042eae31eff0088958277282afee379cd0a",
+  "phase": "Final implementation/validation/video complete; publishing reproducible GitHub delivery",
+  "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
+  "extension_demo_ready": true,
+  "force_margin_evidence": "Original1.25N fails19.16mm; path-feedback1.25N passes24.90mm with continuous cap contact; demonstrated lower bound improved25% from1N to1.25N,1.5N remains19.87mm fail",
+  "necessary_generalization_status": "Two NEW frozen joint passes (near-large28.53mm, shift-delay31.20mm), near-small35mm final-point selfcollision certificate rejected. Development small30.47mm/middle25.73mm pass; large cap contact failure retained.",
+  "axial_force_measurement_status": "unavailable native total tangential channel; normal solver contribution only",
+  "hardware_check_status": "Final actual trajectory offline composite check done: normalp05/mean/peak + axial.7355/1/1.25/1.5N + thumb gravity/dynamics within URDF effort, max44.24%; thumb4 reaches position bound; actual hardware stiffness/limits/forces unread; nonmoving measurement entry verified",
+  "real_robot_ran": false,
+  "delivery_complete": false,
+  "active_jobs": [],
+  "next": "Commit reviewed public files and publish exact source tree",
+  "last_event": {
+    "utc": "2026-10-05T15:26:24.432173+00:00",
+    "event": "publication_staging_ignore_rule_corrected",
+    "evidence": "research/singlepush-20261005/events.jsonl",
+    "config": {
+      "failure": "Global JSON ignore prevented first commit; empty-tree publication attempt rejected422, no branch published",
+      "action": "Whitelist public JSON/JSONL only; explicitly ignore private Goal"
+    },
+    "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
+    "next": "Commit reviewed public files and publish exact source tree"
+  },
+  "reproducible_restore_passed": true
+}
+```
+
+<!-- WUJI_SINGLEPUSH_HISTORY -->
 # Wuji 高阻力双向操作当前轮
 
 实际副本 `/data/research/artgym-experiments-20260921/highload-20261005`。先读 research/highload-20261005/{GOAL.md,STATE.json}。禁止子代理、真机动作、隐蔽或填充占卡；旧冻结结果不改。PID需重新核验。

@@ -25,6 +25,7 @@ class BatchedJointDeflectionPressure:
         self.vertices=torch.as_tensor(vertices,device=device,dtype=torch.float32)
         self.offset=torch.zeros((n,4),device=device);self.anchor=self.offset.clone()
         self.normal=torch.zeros((n,3),device=device);self.normal[:,1]=1.
+        self.axial=torch.zeros((n,3),device=device);self.axial[:,2]=1.
         self.last_estimate=torch.full((n,),float('nan'),device=device)
 
     def reset(self,ids,normal):
@@ -56,7 +57,8 @@ class BatchedJointDeflectionPressure:
     def command(self,q,issued,desired,clock_s):
         jac=self.model(q,issued);time=torch.as_tensor(clock_s,device=q.device,dtype=q.dtype).expand(len(q))
         update=((time>=8)&(time<float(self.spec['prefix_freeze_s'])))|((time>=16)&bool(self.spec.get('operation_updates',True)))
-        error=float(self.spec['preferred_estimated_pressure_N'])-self.last_estimate
+        preferred=torch.where(time>=16,float(self.spec.get('operation_preferred_estimated_pressure_N',self.spec['preferred_estimated_pressure_N'])),float(self.spec['preferred_estimated_pressure_N']))
+        error=preferred-self.last_estimate
         error=torch.where(update&(error.abs()>float(self.spec['deadband_N'])),error,torch.zeros_like(error))
         correction=(jac.transpose(-1,-2)@(-self.normal*error[:,None])[:,:,None]).squeeze(-1)/self.kp
         if self.spec.get('normal_correction_coordinates')=='cartesian-normal' or self.spec.get('operation_normal_correction_coordinates')=='cartesian-normal':
@@ -67,8 +69,15 @@ class BatchedJointDeflectionPressure:
             normal_correction=(jac.transpose(-1,-2)@force).squeeze(-1)/self.kp
             use_normal=torch.ones_like(time,dtype=torch.bool) if self.spec.get('normal_correction_coordinates')=='cartesian-normal' else time>=16
             correction=torch.where(use_normal[:,None],normal_correction,correction)
+        if self.spec.get('preserve_axial_pressure_step'):
+            # Remove the legal FK first-order axial component of pressure
+            # adjustment, retaining the issued forward reference separately.
+            axial_jac=(self.axial[:,:,None].transpose(-1,-2)@jac).squeeze(1)
+            projected=correction-axial_jac*(axial_jac*correction).sum(-1,keepdim=True)/axial_jac.square().sum(-1,keepdim=True).clamp_min(1e-10)
+            correction=torch.where((time>=16)[:,None],projected,correction)
         correction*=float(self.spec['gain_per_frame'])
-        bound=float(self.spec['maximum_joint_offset_rad']);self.offset=(self.offset+correction).clamp(-bound,bound)
+        bound=torch.where(time>=16,float(self.spec.get('operation_maximum_joint_offset_rad',self.spec['maximum_joint_offset_rad'])),float(self.spec['maximum_joint_offset_rad']))[:,None]
+        self.offset=torch.minimum(torch.maximum(self.offset+correction,-bound),bound)
         target=desired.clone();target[:,16:]+=self.offset-self.anchor
         target=torch.minimum(torch.maximum(target,self.lower),self.upper)
         self.offset=target[:,16:]-desired[:,16:]+self.anchor
@@ -88,6 +97,21 @@ class NativeJointDeflectionPressure:
     @property
     def last_estimate(self):return float(self.model.last_estimate[0])
     def handover_anchor(self):self.model.handover_anchor(torch.tensor([0]))
+    def axial_motor_bias(self,q,issued,clock_s):
+        force=float(self.model.spec.get('axial_motor_preload_N',0.))
+        if not force or clock_s<16:return np.zeros(4)
+        values=[torch.as_tensor(v,dtype=torch.float32).reshape(1,20) for v in [q,issued]]
+        with torch.no_grad():
+            jac=self.model.model(*values)
+            tau=(jac.transpose(-1,-2)@(self.model.axial*force)[:,:,None]).squeeze(-1)
+            if self.model.spec.get('axial_motor_coordinates')=='cartesian-axial':
+                compliance=(jac/self.model.kp[None,None])@jac.transpose(-1,-2)
+                amount=(self.model.axial[:,:,None].transpose(-1,-2)@compliance@self.model.axial[:,:,None]).reshape(-1)
+                delta=self.model.axial*(amount*force)[:,None]
+                wrench=torch.linalg.solve(compliance+torch.eye(3)[None]*1e-9,delta[:,:,None])
+                tau=(jac.transpose(-1,-2)@wrench).squeeze(-1)
+            u=np.clip((clock_s-16)/float(self.model.spec.get('axial_motor_ramp_seconds',1.)),0,1);blend=u**3*(10-15*u+6*u*u)
+            return (blend*(tau/self.model.kp).clamp(-float(self.model.spec.get('axial_motor_max_joint_rad',.12)),float(self.model.spec.get('axial_motor_max_joint_rad',.12))))[0].numpy().copy()
     def commit_issued(self,issued,baseline):
         self.model.offset[0]=torch.as_tensor(np.asarray(issued)[16:]-np.asarray(baseline)[16:],dtype=torch.float32)+self.model.anchor[0]
     def command(self,q,issued,desired,clock_s):

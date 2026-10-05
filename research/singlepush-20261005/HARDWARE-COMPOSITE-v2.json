@@ -1,0 +1,418 @@
+{
+  "model": "G2 right7DOF + Wuji v1 right20DOF",
+  "asset": "assets/robots/g2_wuji/g2_wuji.urdf",
+  "thumb_effort_Nm": [
+    0.44519999623298645,
+    0.42590001225471497,
+    0.18880000710487366,
+    0.1467999964952469
+  ],
+  "actuator_profile": "wuji_paper_official_actuator: pinned official MJCF sensitivity, explicitly NOT hardware calibration",
+  "load_rows": [
+    {
+      "assumed_axial_load_N": 0.73549875,
+      "normal_scenario": "p05",
+      "assumed_normal_N": 0.8604426980018616,
+      "combined_abs_torque_max_Nm": [
+        0.0329295191500494,
+        0.09926277862999455,
+        0.02852350241569599,
+        0.014121832790338936
+      ],
+      "fraction_of_urdf_effort_max": [
+        0.07396567706352002,
+        0.2330659210468141,
+        0.15107786727916753,
+        0.0961977733480135
+      ],
+      "tightest_joint": "hand_r_thumb_joint2",
+      "within_model_limits": true
+    },
+    {
+      "assumed_axial_load_N": 1.0,
+      "normal_scenario": "p05",
+      "assumed_normal_N": 0.8604426980018616,
+      "combined_abs_torque_max_Nm": [
+        0.0510254423568886,
+        0.10801708514660736,
+        0.03814051492581878,
+        0.018965926779687836
+      ],
+      "fraction_of_urdf_effort_max": [
+        0.11461240518561339,
+        0.2536207608324894,
+        0.20201543162354166,
+        0.12919568959459696
+      ],
+      "tightest_joint": "hand_r_thumb_joint2",
+      "within_model_limits": true
+    },
+    {
+      "assumed_axial_load_N": 1.5,
+      "normal_scenario": "p05",
+      "assumed_normal_N": 0.8604426980018616,
+      "combined_abs_torque_max_Nm": [
+        0.08523307503695952,
+        0.12460043753947732,
+        0.05632399375783161,
+        0.028850782977198192
+      ],
+      "fraction_of_urdf_effort_max": [
+        0.19144895722854974,
+        0.2925579571595749,
+        0.2983262268975713,
+        0.19653122388277663
+      ],
+      "tightest_joint": "hand_r_thumb_joint3",
+      "within_model_limits": true
+    },
+    {
+      "assumed_axial_load_N": 0.73549875,
+      "normal_scenario": "mean",
+      "assumed_normal_N": 1.1517342782364588,
+      "combined_abs_torque_max_Nm": [
+        0.03102326968717786,
+        0.11775786472506003,
+        0.030130353966114548,
+        0.014755633566912977
+      ],
+      "fraction_of_urdf_effort_max": [
+        0.06968389476567394,
+        0.27649180872677087,
+        0.15958873322169895,
+        0.10051521743320163
+      ],
+      "tightest_joint": "hand_r_thumb_joint2",
+      "within_model_limits": true
+    },
+    {
+      "assumed_axial_load_N": 1.0,
+      "normal_scenario": "mean",
+      "assumed_normal_N": 1.1517342782364588,
+      "combined_abs_torque_max_Nm": [
+        0.04911919289401707,
+        0.12636279532966485,
+        0.03969045008209817,
+        0.019599727556261878
+      ],
+      "fraction_of_urdf_effort_max": [
+        0.11033062288776734,
+        0.29669591851077937,
+        0.21022483362540936,
+        0.13351313367978507
+      ],
+      "tightest_joint": "hand_r_thumb_joint2",
+      "within_model_limits": true
+    },
+    {
+      "assumed_axial_load_N": 1.5,
+      "normal_scenario": "mean",
+      "assumed_normal_N": 1.1517342782364588,
+      "combined_abs_torque_max_Nm": [
+        0.08332682557408798,
+        0.14294542762184864,
+        0.05787392891411099,
+        0.028756761765644442
+      ],
+      "fraction_of_urdf_effort_max": [
+        0.18716717493070364,
+        0.3356314240638206,
+        0.30653562889943897,
+        0.195890752399136
+      ],
+      "tightest_joint": "hand_r_thumb_joint2",
+      "within_model_limits": true
+    },
+    {
+      "assumed_axial_load_N": 0.73549875,
+      "normal_scenario": "peak",
+      "assumed_normal_N": 1.458246111869812,
+      "combined_abs_torque_max_Nm": [
+        0.02901741693387554,
+        0.13721933610586567,
+        0.031821164990239334,
+        0.015422551017906563
+      ],
+      "fraction_of_urdf_effort_max": [
+        0.06517838539848024,
+        0.32218673904099326,
+        0.16854429974975307,
+        0.10505825194897683
+      ],
+      "tightest_joint": "hand_r_thumb_joint2",
+      "within_model_limits": true
+    },
+    {
+      "assumed_axial_load_N": 1.0,
+      "normal_scenario": "peak",
+      "assumed_normal_N": 1.458246111869812,
+      "combined_abs_torque_max_Nm": [
+        0.047113340140714735,
+        0.1458242667104705,
+        0.04135349107245716,
+        0.02026664500725546
+      ],
+      "fraction_of_urdf_effort_max": [
+        0.10582511352057361,
+        0.3423908488250017,
+        0.21903331311574756,
+        0.13805616819556024
+      ],
+      "tightest_joint": "hand_r_thumb_joint2",
+      "within_model_limits": true
+    },
+    {
+      "assumed_axial_load_N": 1.5,
+      "normal_scenario": "peak",
+      "assumed_normal_N": 1.458246111869812,
+      "combined_abs_torque_max_Nm": [
+        0.08132097282078564,
+        0.1622489603350316,
+        0.059504849610072685,
+        0.02942367921663803
+      ],
+      "fraction_of_urdf_effort_max": [
+        0.1826616655635099,
+        0.3809555192921585,
+        0.31517397971822764,
+        0.20043378691491123
+      ],
+      "tightest_joint": "hand_r_thumb_joint2",
+      "within_model_limits": true
+    }
+  ],
+  "gravity_torque_abs_max_Nm": [
+    0.012336213534626791,
+    0.02070605033335995,
+    0.0037210280381024595,
+    0.0012190481322286934
+  ],
+  "dynamic_torque_abs_max_Nm": [
+    0.00017777484243590734,
+    5.8929656286765544e-05,
+    7.503990458520462e-05,
+    2.0411024181319522e-05
+  ],
+  "measured_joint_min_margin_rad": -2.8941278262806236e-08,
+  "commanded_joint_min_margin_rad": -3.3811997868227195e-08,
+  "measured_velocity_limit_fraction_max": 0.04258306745829045,
+  "measurement_pose_samples": [
+    {
+      "time_s": 16.0,
+      "hand_measured_rad": [
+        0.18578465282917023,
+        0.2721094787120819,
+        1.0885512828826904,
+        0.2100709080696106,
+        0.5437523126602173,
+        0.17600218951702118,
+        0.6899493932723999,
+        0.615153968334198,
+        0.6166325211524963,
+        -0.27208811044692993,
+        0.38638824224472046,
+        1.1011638641357422,
+        0.15852515399456024,
+        -0.13182102143764496,
+        1.5218086242675781,
+        -0.10961117595434189,
+        1.569701075553894,
+        0.09611457586288452,
+        0.49106743931770325,
+        -0.2376990169286728
+      ],
+      "hand_commanded_rad": [
+        0.21255533397197723,
+        0.3124559819698334,
+        1.1386154890060425,
+        0.2362791746854782,
+        0.6281312108039856,
+        0.1959461122751236,
+        0.7266948223114014,
+        0.6085025668144226,
+        0.8033570647239685,
+        -0.3453618884086609,
+        0.5373453497886658,
+        1.155298113822937,
+        0.1585138589143753,
+        -0.13180339336395264,
+        1.521803379058838,
+        -0.10961233824491501,
+        1.6032999753952026,
+        0.2210308164358139,
+        0.539289653301239,
+        -0.20276319980621338
+      ],
+      "arm_measured_rad": [
+        -1.0275009870529175,
+        -0.10791594535112381,
+        -0.44430306553840637,
+        -1.0773354768753052,
+        2.3293309211730957,
+        -0.006013905163854361,
+        0.6231533885002136
+      ],
+      "normal_force_N": null,
+      "axial_force_N": null,
+      "hardware_effort_A": null
+    },
+    {
+      "time_s": 18.0,
+      "hand_measured_rad": [
+        0.16420890390872955,
+        0.3014640510082245,
+        1.0913268327713013,
+        0.22123181819915771,
+        0.5739476084709167,
+        0.18991635739803314,
+        0.6431654095649719,
+        0.6360046863555908,
+        0.5428148508071899,
+        -0.24947522580623627,
+        0.35544654726982117,
+        1.1408041715621948,
+        0.1574886590242386,
+        -0.13042020797729492,
+        1.5486801862716675,
+        -0.0779092013835907,
+        1.5652353763580322,
+        0.14707490801811218,
+        0.5809824466705322,
+        -0.40272071957588196
+      ],
+      "hand_commanded_rad": [
+        0.25255531072616577,
+        0.3398858308792114,
+        1.150971531867981,
+        0.22304272651672363,
+        0.6482043266296387,
+        0.19676707684993744,
+        0.6866948008537292,
+        0.6295627951622009,
+        0.7633570432662964,
+        -0.323524534702301,
+        0.49734529852867126,
+        1.1534651517868042,
+        0.15935035049915314,
+        -0.1308029443025589,
+        1.5486998558044434,
+        -0.08083848655223846,
+        1.601625680923462,
+        0.36837756633758545,
+        0.6648638248443604,
+        -0.3452606201171875
+      ],
+      "arm_measured_rad": [
+        -1.0275707244873047,
+        -0.10793440043926239,
+        -0.4443643391132355,
+        -1.0773594379425049,
+        2.329315423965454,
+        -0.005988083314150572,
+        0.6231641173362732
+      ],
+      "normal_force_N": null,
+      "axial_force_N": null,
+      "hardware_effort_A": null
+    },
+    {
+      "time_s": 20.1,
+      "hand_measured_rad": [
+        0.14672818779945374,
+        0.2610117197036743,
+        1.066529631614685,
+        0.18757520616054535,
+        0.5576347708702087,
+        0.17250865697860718,
+        0.6065079569816589,
+        0.6116632223129272,
+        0.63270103931427,
+        -0.24169015884399414,
+        0.41056814789772034,
+        1.1311043500900269,
+        0.15024051070213318,
+        -0.12671524286270142,
+        1.5486998558044434,
+        -0.0696328803896904,
+        1.233826756477356,
+        0.2760196626186371,
+        0.4055997133255005,
+        -0.09479984641075134
+      ],
+      "hand_commanded_rad": [
+        0.25255531072616577,
+        0.3327178359031677,
+        1.1504249572753906,
+        0.21099962294101715,
+        0.6639174222946167,
+        0.19818830490112305,
+        0.6866948008537292,
+        0.6331856846809387,
+        0.7633570432662964,
+        -0.3310101628303528,
+        0.4973451793193817,
+        1.149693489074707,
+        0.150204598903656,
+        -0.12669914960861206,
+        1.5486996173858643,
+        -0.06963557004928589,
+        1.2314465045928955,
+        0.433912068605423,
+        0.40272054076194763,
+        -0.09439319372177124
+      ],
+      "arm_measured_rad": [
+        -1.0274933576583862,
+        -0.10799424350261688,
+        -0.44429680705070496,
+        -1.0773847103118896,
+        2.3293230533599854,
+        -0.005976484157145023,
+        0.6231585144996643
+      ],
+      "normal_force_N": null,
+      "axial_force_N": null,
+      "hardware_effort_A": null
+    }
+  ],
+  "sdk_position_units": "rad",
+  "sdk_effort_units": "A filtered drive quantity; NOT Nm or contact force",
+  "sdk_default_effort_limit_A": 1.5,
+  "sdk_actual_device_effort_limits": null,
+  "sdk_finger_order": [
+    "thumb",
+    "index",
+    "middle",
+    "ring",
+    "pinky"
+  ],
+  "runtime_hand_order": [
+    "hand_r_index_joint1",
+    "hand_r_index_joint2",
+    "hand_r_index_joint3",
+    "hand_r_index_joint4",
+    "hand_r_middle_joint1",
+    "hand_r_middle_joint2",
+    "hand_r_middle_joint3",
+    "hand_r_middle_joint4",
+    "hand_r_pinky_joint1",
+    "hand_r_pinky_joint2",
+    "hand_r_pinky_joint3",
+    "hand_r_pinky_joint4",
+    "hand_r_ring_joint1",
+    "hand_r_ring_joint2",
+    "hand_r_ring_joint3",
+    "hand_r_ring_joint4",
+    "hand_r_thumb_joint1",
+    "hand_r_thumb_joint2",
+    "hand_r_thumb_joint3",
+    "hand_r_thumb_joint4"
+  ],
+  "real_robot_ran": false,
+  "hardware_verified": false,
+  "sources": [
+    "https://docs.wuji.tech/docs/zh/wuji-hand/v1/overview/",
+    "https://docs.wuji.tech/docs/zh/wujihandpy/latest/api-reference/"
+  ],
+  "scope": "Offline sampled trajectory load model: combined normal + axial + thumb gravity/inertial terms. Actual body pose used evaluation-only. Contact point, sustained normal and inertial discretization assumptions limit precision; no hardware stiffness/current-to-torque calibration or whole-hand capacity claim."
+}
