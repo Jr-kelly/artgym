@@ -1,0 +1,34 @@
+{
+  "local_root": "/data/research/artgym-experiments-20260921/flat-table-20261006",
+  "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
+  "flat_table_pickup": false,
+  "continuous_pickup_to_extension": false,
+  "vision_validated": false,
+  "real_robot_ran": false,
+  "active_jobs": [],
+  "next": "Deliver concrete failed alternative and videos; later change hand entry topology with partially folded ring/pinky, not more distance/pad sweeps.",
+  "last_event": {
+    "utc": "2026-10-05T18:44:38.184006+00:00",
+    "event": "physical_development_conclusion_and_concrete_delivery",
+    "evidence": [
+      "research/flat-table-20261006/FINAL-REPORT.md",
+      "research/flat-table-20261006/results.json",
+      "research/flat-table-20261006/video-manifest.json"
+    ],
+    "config": {
+      "physical_attempts": 14,
+      "new_behavior": "full-table robot side push71-78mm, safe withdrawal, pose-conditioned acquisition/transfer motor planning",
+      "failure": "functional ring/pinky table entry; no actual pickup",
+      "remote_observed_mean_percent": 47.870879120879124,
+      "remote_observed_seconds": 910.8087668418884,
+      "four_hour_compliance": false
+    },
+    "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
+    "next": "Deliver concrete failed alternative and videos; later change hand entry topology with partially folded ring/pinky, not more distance/pad sweeps."
+  },
+  "remote_root": "/home/wangjiarui/artgym-newknife-20261005",
+  "placement_generalization": "not reached",
+  "geometry_load_generalization": "not reached",
+  "pose_source": "sim_oracle",
+  "delivery_complete": false
+}
