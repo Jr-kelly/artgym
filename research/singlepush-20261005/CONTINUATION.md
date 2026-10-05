@@ -29,3 +29,7 @@ HARDWARE-FINAL-COMPOSITE.json基于最终1.25N轨迹，全合成最坏情景44.2
 当前任务只剩交付复现：从两个既有wrap归档加singlepush小覆盖包恢复一次22秒仿真，生成可浏览视频report.zip，发布授权新分支feat/wuji-singlepush-20261005与Release wuji-g2-singlepush-20261005-v1，验证服务器SHA和一次公开下载。源GOAL.private.md始终排除。当前源码尚未提交；不要发布整份私人Goal。
 
 最终待发布覆盖包为release/final-v2/singlepush-overlay.tar.gz，SHA256 972336ac1d8f66a3509c726e45b3da2db36a68c877a58c108979c8cb5d46cf85。restore-gate-v2从空目录1481文件校验并运行22秒，通过29.4699mm，原最终视频trace SHA完全一致。初版restore metadata沿用旧文件名的错误已修，最终覆盖包含修复。没有遗留实验GPU作业；发布代码/包/视频并验证公开下载后关闭交付状态。
+
+## 已公开交付
+
+GitHub Release https://github.com/Jr-kelly/artgym/releases/tag/wuji-g2-singlepush-20261005-v1，科学源码tagcommit 7205de11688b6e678a45839a79a92f6148a4c866；26项资产服务器SHA全部匹配，匿名下载覆盖包和视频report.zip通过SHA，zip内12段完整视频逐项匹配manifest。最终小覆盖包972336ac1d8f66a3509c726e45b3da2db36a68c877a58c108979c8cb5d46cf85已空目录实际复现29.47mm且trace相同。状态delivery_complete=true；不会把部分泛化/轴向缺测/真机未运行写为成功。resource-closeout记录时间下本地和远端无compute进程。下一有价值工作是真机同姿态分轴持续测力和驱动校准，不继续重复调参。最终分支收尾receipt提交待完成。

@@ -3,7 +3,7 @@
   "local_root": "/data/research/artgym-experiments-20260921/singlepush-20261005",
   "baseline_local_commit": "0fb3073",
   "baseline_github_commit": "2e0fd042eae31eff0088958277282afee379cd0a",
-  "phase": "Final implementation/validation/video complete; publishing reproducible GitHub delivery",
+  "phase": "Implementation, validation, complete videos and reproducible delivery complete; actual hardware/full-range gaps explicitly retained",
   "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
   "extension_demo_ready": true,
   "force_margin_evidence": "Original1.25N fails19.16mm; path-feedback1.25N passes24.90mm with continuous cap contact; demonstrated lower bound improved25% from1N to1.25N,1.5N remains19.87mm fail",
@@ -11,19 +11,26 @@
   "axial_force_measurement_status": "unavailable native total tangential channel; normal solver contribution only",
   "hardware_check_status": "Final actual trajectory offline composite check done: normalp05/mean/peak + axial.7355/1/1.25/1.5N + thumb gravity/dynamics within URDF effort, max44.24%; thumb4 reaches position bound; actual hardware stiffness/limits/forces unread; nonmoving measurement entry verified",
   "real_robot_ran": false,
-  "delivery_complete": false,
+  "delivery_complete": true,
   "active_jobs": [],
-  "next": "Commit reviewed public files and publish exact source tree",
+  "next": "If continuing toward real demo, measure actual limits/stiffness and sustained normal/axial output at start/middle/end of the same grasp; do not restart successful simulation or sweep gains",
   "last_event": {
-    "utc": "2026-10-05T15:26:24.432173+00:00",
-    "event": "publication_staging_ignore_rule_corrected",
-    "evidence": "research/singlepush-20261005/events.jsonl",
+    "utc": "2026-10-05T15:31:25.300577+00:00",
+    "event": "anonymous_public_downloads_and_all_12_uncut_videos_verified",
+    "evidence": "research/singlepush-20261005/PUBLIC-DOWNLOAD-VERIFICATION.json",
     "config": {
-      "failure": "Global JSON ignore prevented first commit; empty-tree publication attempt rejected422, no branch published",
-      "action": "Whitelist public JSON/JSONL only; explicitly ignore private Goal"
+      "downloads": 2,
+      "bundle_videos": 12,
+      "server_assets_digest_verified": 26,
+      "source_tag": "7205de11688b6e678a45839a79a92f6148a4c866"
     },
     "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
-    "next": "Commit reviewed public files and publish exact source tree"
+    "next": "If continuing toward real demo, measure actual limits/stiffness and sustained normal/axial output at start/middle/end of the same grasp; do not restart successful simulation or sweep gains"
   },
-  "reproducible_restore_passed": true
+  "reproducible_restore_passed": true,
+  "github_branch": "feat/wuji-singlepush-20261005",
+  "github_commit": "7205de11688b6e678a45839a79a92f6148a4c866",
+  "github_release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-g2-singlepush-20261005-v1",
+  "release_source_commit": "7205de11688b6e678a45839a79a92f6148a4c866",
+  "goal_simulation_and_delivery_complete": true
 }
