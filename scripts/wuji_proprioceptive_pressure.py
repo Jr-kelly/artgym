@@ -24,11 +24,11 @@ class ProprioceptivePressure:
     def handover_anchor(self):self.anchor=self.offset.copy()
     def command(self,q,issued,desired,clock_s):
         jac=self.model(q,issued)
-        if 8<=clock_s<float(self.spec['prefix_freeze_s']) or clock_s>=16:
+        if 8<=clock_s<float(self.spec['prefix_freeze_s']) or (clock_s>=16 and self.spec.get('operation_updates',True)):
             error=float(self.spec['preferred_estimated_pressure_N'])-self.last_estimate
             if abs(error)>float(self.spec['deadband_N']):
                 correction=(jac.T@(-self.normal*error))/self.kp
-                if self.spec.get('normal_correction_coordinates')=='cartesian-normal':
+                if self.spec.get('normal_correction_coordinates')=='cartesian-normal' or (clock_s>=16 and self.spec.get('operation_normal_correction_coordinates')=='cartesian-normal'):
                     compliance=(jac/self.kp[None])@jac.T
                     normal_displacement=-self.normal*float(self.normal@compliance@self.normal)*error
                     correction=(jac.T@np.linalg.solve(compliance+np.eye(3)*1e-9,normal_displacement))/self.kp

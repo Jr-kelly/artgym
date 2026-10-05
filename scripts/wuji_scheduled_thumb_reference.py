@@ -154,6 +154,15 @@ class ScheduledThumbReference:
             # targets, and retain the initial static deflection as the zero.
             assert measured_q is not None
             fresh=~self.tracking_initialized
+            if self.tangent_tracking.get('deflection_reference_update'):
+                mode=self.tangent_tracking['deflection_reference_update']
+                assert mode in ['reversal','extension']
+                update=changed & ~first_command
+                if mode=='extension':update &= goal>self.start
+                # Re-estimate the reference's static joint error from current
+                # legal measurements at a task event. This does not reset
+                # observed history, issued commands, physics or the 40mm path.
+                fresh=fresh | update
             self.tracking_anchor[fresh]=(desired_q-measured_q[:,16:])[fresh]
             self.tracking_initialized[:]=True
             tangent=(last-first)/(self.shifts[index+1]-self.shifts[index])[:,None]
@@ -167,9 +176,21 @@ class ScheduledThumbReference:
                 jac=self.axial_jacobian[index]*(1-alpha)+self.axial_jacobian[index+1]*alpha
                 distance=(error*jac).sum(-1)
             distance=distance.clamp(-float(self.tangent_tracking['max_distance_m']),float(self.tangent_tracking['max_distance_m']))
-            correction=float(self.tangent_tracking['gain'])*distance[:,None]*tangent
+            gain=torch.full_like(distance,float(self.tangent_tracking['gain']))
+            if self.tangent_tracking.get('phase_gain_ramp_s'):
+                # Known elapsed stroke time only; preserve the full nominal
+                # reference and endpoint gain, without live task-state input.
+                begin,end=self.tangent_tracking['phase_gain_ramp_s']
+                phase=((self.age*self.dt-float(begin))/(float(end)-float(begin))).clamp(0,1)
+                phase=phase**3*(10-15*phase+6*phase**2)
+                gain*=phase
+            correction=gain[:,None]*distance[:,None]*tangent
             bound=float(self.tangent_tracking['max_joint_rad'])
-            self.last_tangent_correction=correction.clamp(-bound,bound)
+            correction=correction.clamp(-bound,bound)
+            if self.tangent_tracking.get('filter_seconds'):
+                factor=self.dt/(float(self.tangent_tracking['filter_seconds'])+self.dt)
+                self.last_tangent_correction+=(correction-self.last_tangent_correction)*factor
+            else:self.last_tangent_correction=correction
             desired_q=desired_q+self.last_tangent_correction
         self.last_target = initial.clone()
         self.last_target[:,16:] = desired_q

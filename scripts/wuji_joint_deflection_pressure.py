@@ -55,16 +55,18 @@ class BatchedJointDeflectionPressure:
 
     def command(self,q,issued,desired,clock_s):
         jac=self.model(q,issued);time=torch.as_tensor(clock_s,device=q.device,dtype=q.dtype).expand(len(q))
-        update=((time>=8)&(time<float(self.spec['prefix_freeze_s'])))|(time>=16)
+        update=((time>=8)&(time<float(self.spec['prefix_freeze_s'])))|((time>=16)&bool(self.spec.get('operation_updates',True)))
         error=float(self.spec['preferred_estimated_pressure_N'])-self.last_estimate
         error=torch.where(update&(error.abs()>float(self.spec['deadband_N'])),error,torch.zeros_like(error))
         correction=(jac.transpose(-1,-2)@(-self.normal*error[:,None])[:,:,None]).squeeze(-1)/self.kp
-        if self.spec.get('normal_correction_coordinates')=='cartesian-normal':
+        if self.spec.get('normal_correction_coordinates')=='cartesian-normal' or self.spec.get('operation_normal_correction_coordinates')=='cartesian-normal':
             compliance=(jac/self.kp[None,None])@jac.transpose(-1,-2)
             scalar=(self.normal[:,:,None].transpose(-1,-2)@compliance@self.normal[:,:,None]).reshape(-1)
             delta=-self.normal*(scalar*error)[:,None]
             force=torch.linalg.solve(compliance+torch.eye(3,device=q.device,dtype=q.dtype)[None]*1e-9,delta[:,:,None])
-            correction=(jac.transpose(-1,-2)@force).squeeze(-1)/self.kp
+            normal_correction=(jac.transpose(-1,-2)@force).squeeze(-1)/self.kp
+            use_normal=torch.ones_like(time,dtype=torch.bool) if self.spec.get('normal_correction_coordinates')=='cartesian-normal' else time>=16
+            correction=torch.where(use_normal[:,None],normal_correction,correction)
         correction*=float(self.spec['gain_per_frame'])
         bound=float(self.spec['maximum_joint_offset_rad']);self.offset=(self.offset+correction).clamp(-bound,bound)
         target=desired.clone();target[:,16:]+=self.offset-self.anchor

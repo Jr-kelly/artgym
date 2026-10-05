@@ -27,6 +27,12 @@ def evaluate(trial,table_height=.75):
  plan=json.loads((trial/'plan.json').read_text());asset=Path(report.get('physical_asset','assets/objects/knife_wuji_real_size_20261002/000/mobility.urdf'))
  import xml.etree.ElementTree as ET
  if not asset.is_absolute():asset=Path(__file__).resolve().parents[1]/asset
+ # Portability only: remote absolute paths retain their repository-relative suffix.
+ if not asset.exists():
+  for marker in ['/runs/','/assets/']:
+   if marker in str(asset):
+    local=Path(__file__).resolve().parents[1]/(marker.strip('/')+'/'+str(asset).split(marker,1)[1])
+    if local.exists():asset=local;break
  lower=float(ET.parse(asset).find('.//joint[@type="prismatic"]/limit').get('lower'))
  ends={};indices={}
  for label,at in [('extend1',21),('return1',26),('extend2',31),('return2',36)]:
