@@ -1,0 +1,48 @@
+{
+  "reason": "Continuous cap contact and uptake exist but forwardstroke lacks30mm; train thumb coordination about existing certified motor reference",
+  "frozen_support": "S120 hidden actor layers and first16 output rows fixed, exact equality checked at checkpoint",
+  "initial_thumb_head": "zero4rows, matches development thumb residual override0",
+  "public_dim": 154,
+  "history_dim": 2076,
+  "action_scale_rad": {
+    "support": 0.25,
+    "thumb": 0.15
+  },
+  "original_actuator_limits": true,
+  "planned_experiments": [
+    {
+      "profile": "constant",
+      "seed": 2026100511
+    },
+    {
+      "profile": "constant",
+      "seed": 2026100512
+    },
+    {
+      "profile": "variable",
+      "seed": 2026100511
+    },
+    {
+      "profile": "variable",
+      "seed": 2026100512
+    }
+  ],
+  "envs": 128,
+  "updates": 100,
+  "horizon": 64,
+  "learning_rate": 3e-05,
+  "randomization_scale": 0.15,
+  "pressure_proxy_target_N": 1.2,
+  "training_assets": [
+    "newknife-nominal"
+  ],
+  "heldouts_consumed": false,
+  "gate": "Start after native/n1/n8/remote32 physics and layout sanity; reject errors, no blind resume",
+  "selection": "Frozen native full36s development replays; training rewards or batch oldcompletion flags not success",
+  "stop": "No continuation past100 updates until native evidence supports it",
+  "fixed_material_friction": {
+    "hand": 0.8,
+    "knife": 1.8,
+    "reason": "Do not let inherited broad material randomization raise friction and mask traction failure"
+  }
+}

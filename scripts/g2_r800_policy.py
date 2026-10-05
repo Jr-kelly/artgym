@@ -90,6 +90,9 @@ class G2R800Policy(FrozenPolicy):
                     import json
                     reference_spec=json.loads(Path(thumb_reference_override).read_text())
                 self.thumb_reference=ScheduledThumbReference(reference_spec,1,self.player.device)
+                if reference_spec.get('support_reference_anchor'):
+                    assert self.action_parameterization=='bounded-motor-offset' and self.support_delta_coordinates is None
+                    self.scheduled_support_anchor=True
 
     def takeover_estimate(self, q, target, object_local_estimate, slider_local_estimate,clock_s=0.):
         self.held_support_logits=None;self.support_takeover_frame=round(clock_s*30)
@@ -201,7 +204,7 @@ class G2R800Policy(FrozenPolicy):
                     assert known_prefix_target is not None
                     self.thumb_reference.last_target=self.tensor(known_prefix_target).clone()
                 if self.scheduled_support_anchor:
-                    assert self.thumb_reference is not None and self.action_parameterization=='bounded-motor-offset' and self.support_delta_coordinates is None and self.pressure_adapter is None
+                    assert self.thumb_reference is not None and self.action_parameterization=='bounded-motor-offset' and self.support_delta_coordinates is None
                     self.known.support_anchor=self.thumb_reference.last_target.clone()
                 mean=self.residual.actor_logits(public)
                 if self.support_command_period>1 or self.support_latch_after_preparation:
@@ -216,9 +219,10 @@ class G2R800Policy(FrozenPolicy):
                 else:action=(base+self.residual_scale*torch.tanh(mean)).clamp(-1,1)
             action=action.clone();action[:,:16]*=self.support_action_gain;action[:,16:]*=self.thumb_action_gain
             if self.pressure_adapter is not None and not issued_target_hold:
-                proposed=self.known.initial+.04*action;proposed[:,16:]=self.known.issued[:,16:]+.025*action[:,16:]
+                anchor=self.known.initial if self.known.support_anchor is None else self.known.support_anchor
+                proposed=anchor+self.known.support_span*action;proposed[:,16:]=self.known.issued[:,16:]+.025*action[:,16:]
                 desired=self.pressure_adapter.command(q,self.known.issued[0].cpu().numpy(),proposed[0].cpu().numpy(),clock_s)
-                action=(self.tensor(desired)-self.known.initial)/.04;action[:,16:]=(self.tensor(desired)[:,16:]-self.known.issued[:,16:])/.025;action=action.clamp(-1,1)
+                action=(self.tensor(desired)-anchor)/self.known.support_span;action[:,16:]=(self.tensor(desired)[:,16:]-self.known.issued[:,16:])/.025;action=action.clamp(-1,1)
             if diagnostic_motor_offset is not None:
                 # Explicit single native truth diagnostic, never actor inputs.
                 # Preserve original support span and one issued-memory update.

@@ -1,0 +1,76 @@
+{
+  "object_in_wrist": [
+    [
+      0.9061292642598376,
+      0.36152633270384804,
+      -0.21960980673374214,
+      0.05340578949354233
+    ],
+    [
+      0.08711529941186884,
+      0.34854862955797133,
+      0.9332335063860708,
+      0.008972178942824281
+    ],
+    [
+      0.41393318429464615,
+      -0.8647615645916316,
+      0.2843356385413687,
+      0.1291186688691609
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "slider_in_wrist": [
+    [
+      0.9061292642598376,
+      0.36152633270384804,
+      -0.21960980673374214,
+      0.0609596332273002
+    ],
+    [
+      0.08711529941186884,
+      0.34854862955797133,
+      0.9332335063860708,
+      -0.008991505151303796
+    ],
+    [
+      0.41393318429464615,
+      -0.8647615645916316,
+      0.2843356385413687,
+      0.11636335630488648
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "initial_geometry_estimate": {
+    "source": "Synthetic initial dimensional observation centered at user supplied values; uncertainty is assumed, not sensor calibration",
+    "uncertainty_m": 0.0003,
+    "handle_size_WTL_m": [
+      0.019,
+      0.008,
+      0.144
+    ],
+    "slider_size_WTL_m": [
+      0.007,
+      0.002,
+      0.032
+    ],
+    "slider_contact_shift_m": [
+      0,
+      -0.001,
+      -0.003949999999999995
+    ],
+    "initial_slider_q_m": 0.0,
+    "newknife_contact_geometry": true
+  },
+  "scope": "Once-estimated prior, actor applies dimension delta once; no running physical truth"
+}

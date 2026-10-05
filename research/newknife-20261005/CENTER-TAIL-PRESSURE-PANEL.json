@@ -1,0 +1,122 @@
+[
+  {
+    "trial": "runs/newknife-20261005/development/center-tail-pressure-variable-offset20",
+    "forward_mm": [
+      33.18528921590769,
+      -3.743682987987995
+    ],
+    "endpoints_mm": [
+      33.301081508398056,
+      13.502717018127441,
+      9.759034030139446,
+      9.760205633938313
+    ],
+    "checks": {
+      "two_cycles": true,
+      "clear": true,
+      "relative_envelope": true,
+      "bounded_return_drift": false,
+      "final_settling": true,
+      "thumb_contact": false,
+      "holds": false,
+      "continuous_pickup": true,
+      "forward_travel": false,
+      "extension_position": false,
+      "return_residual": false,
+      "no_endstop": true,
+      "complete_duration": true,
+      "effective_cap_contact": false
+    },
+    "pass_all": false
+  },
+  {
+    "trial": "runs/newknife-20261005/development/center-tail-pressure-variable-offset20-normal",
+    "forward_mm": [
+      6.518196754768724,
+      0.106757041066885
+    ],
+    "endpoints_mm": [
+      6.633989047259092,
+      10.197419673204422,
+      10.304176714271307,
+      12.93655950576067
+    ],
+    "checks": {
+      "two_cycles": true,
+      "clear": true,
+      "relative_envelope": true,
+      "bounded_return_drift": true,
+      "final_settling": true,
+      "thumb_contact": true,
+      "holds": true,
+      "continuous_pickup": true,
+      "forward_travel": false,
+      "extension_position": false,
+      "return_residual": false,
+      "no_endstop": true,
+      "complete_duration": true,
+      "effective_cap_contact": true
+    },
+    "pass_all": false
+  },
+  {
+    "trial": "runs/newknife-20261005/development/center-tail-pressure-constant-offset20",
+    "forward_mm": [
+      32.3167341593944,
+      -4.641805775463581
+    ],
+    "endpoints_mm": [
+      32.434068620204926,
+      13.878816738724709,
+      9.237010963261127,
+      9.238134138286114
+    ],
+    "checks": {
+      "two_cycles": true,
+      "clear": true,
+      "relative_envelope": true,
+      "bounded_return_drift": false,
+      "final_settling": true,
+      "thumb_contact": false,
+      "holds": true,
+      "continuous_pickup": true,
+      "forward_travel": false,
+      "extension_position": false,
+      "return_residual": false,
+      "no_endstop": true,
+      "complete_duration": true,
+      "effective_cap_contact": false
+    },
+    "pass_all": false
+  },
+  {
+    "trial": "runs/newknife-20261005/development/center-tail-pressure-constant-offset20-normal",
+    "forward_mm": [
+      7.375975914328592,
+      1.5591084957122803
+    ],
+    "endpoints_mm": [
+      7.493310375139117,
+      9.02473647147417,
+      10.583844967186451,
+      12.34909612685442
+    ],
+    "checks": {
+      "two_cycles": true,
+      "clear": true,
+      "relative_envelope": true,
+      "bounded_return_drift": true,
+      "final_settling": true,
+      "thumb_contact": true,
+      "holds": true,
+      "continuous_pickup": true,
+      "forward_travel": false,
+      "extension_position": false,
+      "return_residual": false,
+      "no_endstop": true,
+      "complete_duration": true,
+      "effective_cap_contact": true
+    },
+    "pass_all": false
+  }
+]

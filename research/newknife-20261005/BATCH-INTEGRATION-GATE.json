@@ -1,0 +1,52 @@
+{
+  "scope": "Engineering integration gate only; not exact numerical equivalence or task success",
+  "n1": {
+    "episode": 0,
+    "env": 0,
+    "instance": "newknife-nominal",
+    "control_steps": 1080,
+    "pickup_valid": true,
+    "fall": false,
+    "operation_complete": false,
+    "endpoints_m": [
+      0.0037513484712690115,
+      -0.0015580917242914438,
+      0.02078815922141075,
+      0.0017689329106360674
+    ],
+    "peak_extension_m": 0.0271212887018919,
+    "max_body_drift_m": 0.004988324828445911,
+    "max_body_rotation_rad": 0.5455213785171509,
+    "thumb_contact_fraction": 1.0,
+    "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+    "failure": "body unstable/drop"
+  },
+  "n8": {
+    "episode": 0,
+    "env": 0,
+    "instance": "newknife-nominal",
+    "control_steps": 1080,
+    "pickup_valid": true,
+    "fall": false,
+    "operation_complete": false,
+    "endpoints_m": [
+      0.01135578379034996,
+      0.003296496346592903,
+      0.03857126459479332,
+      0.012447534129023552
+    ],
+    "peak_extension_m": 0.03857150301337242,
+    "max_body_drift_m": 0.00586556876078248,
+    "max_body_rotation_rad": 0.7242001891136169,
+    "thumb_contact_fraction": 0.996666669845581,
+    "scope": "Actual G2 continuous training episode; proximity/net-contact proxy, not exact contact pair or independent validation",
+    "failure": "body unstable/drop"
+  },
+  "n8_identical_instances": true,
+  "native_prefix_max_q_difference_rad": 0.00217,
+  "native_prefix_max_command_difference_rad": 0.00114,
+  "all_pickups_retained": true,
+  "operation_numerical_sensitivity": true,
+  "training_allowed_after_remote_runtime_check": true,
+  "new_functional_demo_ready": false
+}

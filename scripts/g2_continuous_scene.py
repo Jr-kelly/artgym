@@ -41,8 +41,11 @@ class G2ContinuousScene:
         self.scheduled_target_holds=bool((scene_spec or {}).get('scheduled_target_holds',False))
         self.functional_hold_reward=bool((scene_spec or {}).get('functional_hold_reward',False))
         self.functional_operation_reward=bool((scene_spec or {}).get('functional_operation_reward',False))
+        self.newknife_resistance=(scene_spec or {}).get('newknife_resistance')
+        self.task_stroke=float((scene_spec or {}).get('task_stroke_m',.04))
+        if self.newknife_resistance:assert resistance_integration=='solver-brake' and load_max==0 and detent_max==0
         self.n=n;self.device='cuda:0';self.seed=seed
-        self.disabled_perturbations=set(disabled_perturbations)
+        self.disabled_perturbations=set(disabled_perturbations)|set((scene_spec or {}).get("disabled_perturbations",[]))
         assert self.disabled_perturbations <= {'calibration','placement','sensor','latency','material'}
         self.history_features=history_features;self.public_dim=(170 if history_features else 154)+(8 if support_estimator_spec else 0)
         self.support_load_feature_spec=support_load_feature_spec;self.support_load_features=None
@@ -138,6 +141,7 @@ class G2ContinuousScene:
                     row_cal=row.get('calibration',self.calibration);mat=np.asarray(row_cal[key]);positions[i]=mat[:3,3];rotations[i]=Rotation.from_matrix(mat[:3,:3]).as_quat();object_rotation=np.asarray(row_cal['object_in_wrist'])[:3,:3]
                     estimate=row['estimate'];shift=np.asarray(estimate.get('initial_object_center_shift_knife_m',[0,0,0]))
                     if key=='slider_in_wrist':shift=shift+np.asarray(estimate['slider_contact_shift_m'])+np.array([0,(estimate['handle_size_WTL_m'][1]-.012)/2,0])
+                    if key=='slider_in_wrist' and estimate.get('newknife_contact_geometry'):shift[1]-=(estimate['slider_size_WTL_m'][1]-.003)/2
                     positions[i]+=object_rotation@shift
             self.cal_prior[key]=(self.tensor(positions),self.tensor(rotations))
         self.table_initial_prior_from_measured_arm=bool(scene_spec and scene_spec.get('table_initial_prior_from_measured_arm',False))
@@ -228,7 +232,7 @@ class G2ContinuousScene:
         table_asset=self.gym.create_box(self.sim,.60,.80,.05,opt)
         self.instances=instances or [f't{i:04d}' for i in range(min(n,512))]
         self.envs=[];self.robots=[];self.knives=[];self.origins=[];self.asset_records=[];self.layout=[]
-        assets={};self.lower=[]
+        assets={};self.lower=[];initial_slider=[]
         for i in range(n):
             # Environment bounds position independent collision groups; they are not walls.
             # Optional overlapping origins avoid large-world float precision.
@@ -271,6 +275,7 @@ class G2ContinuousScene:
             sid=self.instances[i%len(self.instances)]
             directory=R/asset_registry[sid] if asset_registry is not None else R/'assets/objects'/('knife_wuji_real_size_20261002' if sid=='000' else 'knife_wuji_dense_under_20261003')/sid
             parameters=json.loads((directory/'parameters.json').read_text())
+            if 'masses' not in parameters:parameters['masses']=[parameters['body_mass_kg'],parameters['moving_mass_kg']]
             if sid not in assets:
                 opt=gymapi.AssetOptions();opt.fix_base_link=False;opt.disable_gravity=False
                 opt.override_com=False;opt.override_inertia=False;opt.thickness=.001;opt.density=1000
@@ -284,10 +289,11 @@ class G2ContinuousScene:
             shapes=self.gym.get_actor_rigid_shape_properties(env,knife)
             for shape in shapes:shape.friction=self.nominal_knife_friction;shape.filter=1
             self.gym.set_actor_rigid_shape_properties(env,knife,shapes)
-            op=self.gym.get_actor_dof_properties(env,knife);self.lower.append(float(op['lower'][0]))
+            op=self.gym.get_actor_dof_properties(env,knife);self.lower.append(float(op['lower'][0]));initial_slider.append(float(parameters.get('initial_slider_q_m',op['lower'][0])))
             op['driveMode'][:]=gymapi.DOF_MODE_EFFORT;op['stiffness'][:]=0;op['damping'][:]=.3;op['friction'][:]=.001;op['armature'][:]=.001
             if self.resistance_integration=='solver-brake':
-                op['driveMode'][:]=gymapi.DOF_MODE_VEL;op['damping'][:]=250.;op['effort'][:]=max(load_max,1e-8)
+                op['driveMode'][:]=gymapi.DOF_MODE_VEL;op['damping'][:]=25000. if self.newknife_resistance else 250.;op['effort'][:]=max(load_max,1e-8)
+                if self.newknife_resistance:op['friction'][:]=0.
             self.gym.set_actor_dof_properties(env,knife,op)
             if self.resistance_integration=='solver-brake':self.gym.set_actor_dof_velocity_targets(env,knife,np.zeros(1,dtype=np.float32))
             self.slider_drive_properties.append(op.copy())
@@ -295,7 +301,7 @@ class G2ContinuousScene:
             initial_state['pos'][self.arm]=np.asarray(self.acquisition['approach_q'][0])
             initial_state['pos'][self.hand]=self.opened_batch[i].cpu().numpy()
             self.gym.set_actor_dof_states(env,robot,initial_state,gymapi.STATE_ALL)
-            slider_state=np.zeros(1,dtype=gymapi.DofState.dtype);slider_state['pos'][0]=self.lower[-1]
+            slider_state=np.zeros(1,dtype=gymapi.DofState.dtype);slider_state['pos'][0]=initial_slider[-1]
             self.gym.set_actor_dof_states(env,knife,slider_state,gymapi.STATE_ALL)
             if aggregate_environment:self.gym.end_aggregate(env)
             origin=self.gym.get_env_origin(env);self.origins.append([origin.x,origin.y,origin.z])
@@ -316,7 +322,7 @@ class G2ContinuousScene:
         self.jac=gymtorch.wrap_tensor(self.gym.acquire_jacobian_tensor(self.sim,'robot'))
         masses=self.gym.get_actor_rigid_body_properties(self.envs[0],self.robots[0])
         self.masses=self.tensor([b.mass for b in masses][1:]);assert self.jac.shape[1]==len(self.masses)
-        self.origins=self.tensor(self.origins);self.lower=self.tensor(self.lower)
+        self.origins=self.tensor(self.origins);self.lower=self.tensor(self.lower);self.initial_slider=self.tensor(initial_slider);self.slider_previous_q=self.initial_slider.clone()
         self.target=torch.zeros((n,27),device=self.device);self.forces=torch.zeros((n,28),device=self.device)
         self.command_target=self.target.clone();self.delayed_target=self.target.clone()
         self.hand_ids=torch.tensor(self.hand,device=self.device);self.arm_ids=torch.tensor(self.arm,device=self.device)
@@ -396,7 +402,7 @@ class G2ContinuousScene:
         if self.held_diagnostic:
             self.target[ids[:,None],self.hand_ids]=self.closed_batch[ids];self.target[ids[:,None],self.arm_ids]=self.held_arm_batch[ids]
         self.command_target[ids]=self.target[ids];self.delayed_target[ids]=self.target[ids]
-        self.dof[ids,:,:]=0.;self.dof[ids,:27,0]=self.target[ids];self.dof[ids,27,0]=self.lower[ids]
+        self.dof[ids,:,:]=0.;self.dof[ids,:27,0]=self.target[ids];self.dof[ids,27,0]=self.initial_slider[ids];self.slider_previous_q[ids]=self.initial_slider[ids]
         if self.held_diagnostic:self.dof[ids[:,None],self.hand_ids,0]=self.held_touch_batch[ids]
         # Installed Preview4 tensors use environment-local coordinates, verified
         # against refreshed native roots. Adding env origins double-translates.
@@ -520,10 +526,10 @@ class G2ContinuousScene:
                 self.bridge.known.initial[operation_ready]=self.command_target[operation_ready][:,self.hand_ids]
                 self.reference.reset(operation_ready,clock_s=16.)
             self.reference_pose[operation_ready]=self.last_held_pose[operation_ready]
-            self.closed_at_handover[operation_ready]=(self.dof[operation_ready,27,0]-self.lower[operation_ready]).abs()<.008
+            self.closed_at_handover[operation_ready]=(self.dof[operation_ready,27,0]-self.initial_slider[operation_ready]).abs()<.008
         self.policy_active=self.age>=self.takeover_frame
         phase=((self.age-480).clamp_min(0)//150)%2
-        self.goal=torch.where((self.age>=480)&(phase==0),torch.full_like(self.load_amplitude,.04),torch.zeros_like(self.load_amplitude))
+        self.goal=torch.where((self.age>=480)&(phase==0),torch.full_like(self.load_amplitude,self.task_stroke),torch.zeros_like(self.load_amplitude))
         public=self.bridge.features(q,self.goal,self.dof[:,self.arm_ids,0],self.policy_active)
         if self.history_features:
             latent=q.new_zeros((self.n,16));ids=self.policy_active.nonzero(as_tuple=False).flatten()
@@ -539,7 +545,7 @@ class G2ContinuousScene:
         if self.support_load_features is not None:public=torch.cat([public,self.support_load_features.features()],-1)
         relative_object=torch.cat([quat_apply(inverse,obj[:,:3]-wrist[:,:3]),quat_mul(inverse,obj[:,3:7])],-1)
         relative_slider=torch.cat([quat_apply(inverse,slider[:,:3]-wrist[:,:3]),quat_mul(inverse,slider[:,3:7])],-1)
-        travel=self.dof[:,27,0]-self.lower
+        travel=self.dof[:,27,0]-self.initial_slider
         passive=self.tensor([.3,.001])[None].expand(self.n,-1)
         truth=torch.cat([relative_object,relative_slider,self.mass_tensor,self.material_tensor[:,1:2],passive,travel[:,None],self.dof[:,27,1:2]],-1)
         assert truth.shape==(self.n,21)
@@ -620,13 +626,13 @@ class G2ContinuousScene:
             self.target=torch.where(self.delay[:,None],self.delayed_target,self.command_target)
             self.delayed_target=self.command_target.clone()
         self.last_action=executed.detach().clone();self.bridge.last_action=self.last_action.clone()
-        previous_error=(self.dof[:,27,0]-self.lower-self.goal).abs()
+        previous_error=(self.dof[:,27,0]-self.initial_slider-self.goal).abs()
         for substep in range(8):
             self.refresh()
             gravity=(self.jac[:,:,2,:]*self.masses[None,:,None]*9.81).sum(1)
             torque=self.kp*(self.target-self.dof[:,:27,0])-self.kd*self.dof[:,:27,1]+gravity
             self.forces[:,:27]=torch.maximum(torch.minimum(torque,self.effort),-self.effort)
-            v=self.dof[:,27,1];q=self.dof[:,27,0]-self.lower;t=oldage.float()/30+substep/240
+            v=self.dof[:,27,1];q=self.dof[:,27,0]-self.initial_slider;t=oldage.float()/30+substep/240
             angle=self.load_frequencies*t+self.load_phase
             factor=.25+.75*torch.sin(angle).square()
             factor=torch.where(self.load_profile_ids==0,torch.ones_like(factor),factor)
@@ -643,6 +649,10 @@ class G2ContinuousScene:
             if self.resistance_integration=='solver-brake':
                 from scripts.wuji_passive_solver_brake import brake_capacity_numpy
                 capacity=brake_capacity_numpy(q.detach().cpu().numpy(),t.detach().cpu().numpy(),self.load_amplitude.cpu().numpy(),self.detent_amplitude.cpu().numpy(),self.load_frequencies.cpu().numpy(),self.load_phase.cpu().numpy(),self.load_profile_ids.cpu().numpy())
+                if self.newknife_resistance:
+                    from scripts.wuji_newknife_resistance import capacity as new_capacity
+                    actual_q=self.dof[:,27,0].clone();actual_v=(actual_q-self.slider_previous_q)*240;self.slider_previous_q=actual_q
+                    capacity=np.array([new_capacity(self.newknife_resistance,float(qi),float(vi)) for qi,vi in zip(q.detach().cpu(),actual_v.detach().cpu())])
                 for i,value in enumerate(capacity):
                     properties=self.slider_drive_properties[i];properties['effort'][:]=max(float(value),1e-8);self.gym.set_actor_dof_properties(self.envs[i],self.knives[i],properties)
                 self.load_force=q.new_tensor(capacity);self.forces[:,27]=0.
@@ -652,7 +662,7 @@ class G2ContinuousScene:
         time_after=(oldage.float()+1)/30;held=(time_after>=12)&(time_after<16)
         self.min_hold_height[held]=torch.minimum(self.min_hold_height[held],height[held])
         self.last_held_pose[held]=obj[held,:7]
-        travel=self.dof[:,27,0]-self.lower;error=(travel-self.goal).abs()
+        travel=self.dof[:,27,0]-self.initial_slider;error=(travel-self.goal).abs()
         drift=(obj[:,:3]-self.reference_pose[:,:3]).norm(dim=-1)
         rotation=2*torch.asin(quat_mul(obj[:,3:7],quat_conjugate(self.reference_pose[:,3:7]))[:,:3].norm(dim=-1).clamp(0,1))
         contact=(self.contact[:,self.pad_indices].norm(dim=-1)>.01).float();proximity=self.thumb_proximity()

@@ -9,7 +9,7 @@ from omegaconf import OmegaConf
 from scripts.wuji_student_interface import tensor_hash
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--aggregate-environment',action='store_true',help='Standard perenvironment PhysX aggregate with selfcollision enabled and original actor/shape filters');p.add_argument('--compact-isolated-layout',action='store_true',help='Use same-origin independent collision groups only at validated finite population; fixes numerical coordinate extent without changing within-scene physics');p.add_argument('--known-support-span',type=float,default=None,help='Explicitsoftware supportmotor span .04--.20rad, largermode .025rad/frame, samephysicalactuatorlimits');p.add_argument('--reset-residual-head',action='store_true',help='Newmechanism initialization: retainloadedactorbackbone/critic, zeroresidualhead around physicallyvalidated commonreference');p.add_argument('--output',type=Path,required=True);p.add_argument('--envs',type=int,default=512);p.add_argument('--updates',type=int,default=400);p.add_argument('--horizon',type=int,default=32);p.add_argument('--seed',type=int,default=2026100307);p.add_argument('--randomization-scale',type=float,default=.5);p.add_argument('--load-max',type=float,default=.1);p.add_argument('--detent-max',type=float,default=.1);p.add_argument('--epochs',type=int,default=4);p.add_argument('--minibatch',type=int,default=4096);p.add_argument('--resume',type=Path)
+    p=argparse.ArgumentParser();p.add_argument('--reset-thumb-head',action='store_true',help='Initialize only four thumb output rows to zero around the certified reference; retain support S120 mapping');p.add_argument('--aggregate-environment',action='store_true',help='Standard perenvironment PhysX aggregate with selfcollision enabled and original actor/shape filters');p.add_argument('--compact-isolated-layout',action='store_true',help='Use same-origin independent collision groups only at validated finite population; fixes numerical coordinate extent without changing within-scene physics');p.add_argument('--known-support-span',type=float,default=None,help='Explicitsoftware supportmotor span .04--.20rad, largermode .025rad/frame, samephysicalactuatorlimits');p.add_argument('--reset-residual-head',action='store_true',help='Newmechanism initialization: retainloadedactorbackbone/critic, zeroresidualhead around physicallyvalidated commonreference');p.add_argument('--output',type=Path,required=True);p.add_argument('--envs',type=int,default=512);p.add_argument('--updates',type=int,default=400);p.add_argument('--horizon',type=int,default=32);p.add_argument('--seed',type=int,default=2026100307);p.add_argument('--randomization-scale',type=float,default=.5);p.add_argument('--load-max',type=float,default=.1);p.add_argument('--detent-max',type=float,default=.1);p.add_argument('--epochs',type=int,default=4);p.add_argument('--minibatch',type=int,default=4096);p.add_argument('--resume',type=Path)
     p.add_argument('--support-residual-scale',type=float,default=.25);p.add_argument('--rotation-cost',type=float,default=0.);p.add_argument('--wrist-nominal',type=Path);p.add_argument('--wrist-probability',type=float,default=.5)
     p.add_argument('--resample-initial-estimates',action='store_true',help='At episode reset only, draw another labelled noisy initial observation from same-geometry synthetic sensor bank; no actor asset ID')
     p.add_argument('--fresh-sampling-seed',type=int,help='Explicit matched freshoptimizer pilot samplingstream reset after differing inputlayer initialization; requires initialize-model-from')
@@ -22,6 +22,7 @@ def main():
     p.add_argument('--freeze-thumb-prior',action='store_true',help='Preserve resumed deterministic thumb actor mapping on the same legal features; learn support outputs and exploration variance. Not constant physicalforce.')
     p.add_argument('--thumb-head-only',action='store_true',help='Freeze actor hidden layers and support output rows/variance; adapt only four thumb output rows/variance plus critic. Same legal inputs and native checkpoint format.')
     p.add_argument('--thumb-head-learning-rate',type=float,default=3e-5)
+    p.add_argument('--motor-head-only',action='store_true',help='Freeze actor hidden layers; adapt all20 motor output rows/variance plus critic with the bounded head optimizer')
     p.add_argument('--stable-progress-reward',action='store_true',help='Trainingrewardonly: remove primary reach bonus during operation outside original10mm/.25rad instantaneous body stability conditions; no actor/physics/criteria change')
     p.add_argument('--override-initial-estimate-scene',type=Path,help='Explicit curriculum change on resume: replace saved synthetic initial-observation bank while retaining model/Adam/RNG. Normal resume keeps saved scene; new physical episodes only.')
     p.add_argument('--proprioceptive-pressure-config',type=Path,help='Legal FK/joint-issuedtarget pressureproxy, shared analytic native/batch controller; no force/contact truth');p.add_argument('--training-asset-registry',type=Path,help='Registered train-only physical assets; IDs select simulator loading, never actor/controller');p.add_argument('--initial-estimate-scene',type=Path,help='Transparent noisy once-initial observations and common IK motor plans, actor-visible estimated geometry only; no live truth');p.add_argument('--training-geometry-schedule',type=Path,help='ActualG2 physicalsampling only: registeredtraining IDs perenv, never actorinputs or heldout assets');p.add_argument('--object',default='knife_wuji_robust_family_20261003');p.add_argument('--actual-hold-history',type=int,choices=[0,50],default=50)
@@ -72,11 +73,12 @@ def main():
         system=LearningSystem(a.envs,a.seed,a.randomization_scale,a.load_max,a.detent_max,support_scale=a.support_residual_scale,rotation_cost=a.rotation_cost,wrist_nominal=wrist,wrist_probability=a.wrist_probability,object_name=a.object,history_hold_frames=a.actual_hold_history,thumb_slider_reward=a.thumb_slider_reward,thumb_scale=a.thumb_residual_scale,contact_progress_reward=a.contact_progress_reward,handover_profiles=a.handover_profiles,base_mode=a.base_mode,thumb_reference=a.thumb_reference,load_profile=a.load_profile,load_frequency=a.load_frequency)
     device=system.env.device
     model=ResidualActorCritic(getattr(system,'public_dim',154),getattr(system,'public_dim',154)+27).to(device)
-    if a.thumb_head_only:
+    assert not (a.thumb_head_only and a.motor_head_only)
+    if a.thumb_head_only or a.motor_head_only:
         assert a.scene=='g2' and a.action_parameterization=='bounded-motor-offset'
         assert not a.freeze_thumb_prior and not a.support_delta_coordinates and not a.reset_residual_head
         from scripts.wuji_thumb_head_training import optimizer
-        opt=optimizer(model,a.thumb_head_learning_rate)
+        opt=optimizer(model,a.thumb_head_learning_rate,train_support=a.motor_head_only)
     else:opt=torch.optim.Adam(model.parameters(),lr=3e-4,eps=1e-5)
     start=0
     if a.initialize_model_from:
@@ -97,12 +99,16 @@ def main():
         model.load_state_dict(weights)
         if a.action_parameterization=='bounded-motor-offset' and initial.get('action_parameterization','incremental')!='bounded-motor-offset':
             torch.nn.init.zeros_(model.actor[-1].weight);torch.nn.init.zeros_(model.actor[-1].bias)
+    if a.reset_thumb_head:
+        assert a.initialize_model_from and not a.resume and (a.thumb_head_only or a.motor_head_only) and not a.reset_residual_head and model.frozen_thumb_actor is None
+        with torch.no_grad():model.actor[-1].weight[16:].zero_();model.actor[-1].bias[16:].zero_()
     if a.reset_residual_head:
         assert a.initialize_model_from and not a.resume and a.action_parameterization=='bounded-motor-offset' and model.frozen_thumb_actor is None
         torch.nn.init.zeros_(model.actor[-1].weight);torch.nn.init.zeros_(model.actor[-1].bias)
     if a.resume:
         saved=torch.load(a.resume,map_location=device);assert saved.get('action_parameterization','incremental')==a.action_parameterization
         assert bool(saved.get('args',{}).get('thumb_head_only',False))==a.thumb_head_only,'Resume must preserve the selected optimizer/frozen mapping'
+        assert bool(saved.get('args',{}).get('motor_head_only',False))==a.motor_head_only,'Resume must preserve motor head scope'
         if saved.get('frozen_thumb_actor',False):model.freeze_thumb_actor()
         model.load_state_dict(saved['model']);opt.load_state_dict(saved['optimizer']);start=saved['updates']
         # map_location moves serialized RNG buffers too; generator APIs require CPU bytes.

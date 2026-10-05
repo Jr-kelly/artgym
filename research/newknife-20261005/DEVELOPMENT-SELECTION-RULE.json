@@ -1,0 +1,17 @@
+{
+  "candidate_set": "Fourpredeclared100update thumb pilots plus frozen no-thumb-residual S120 baseline",
+  "development_profiles": [
+    "constant reference .73549875N",
+    "variable forwardrunningmean .73549875N"
+  ],
+  "gate": "Each native replay is full36s continuous; pair contact/holds/body criteria unchanged",
+  "ranking": [
+    "both profiles pass all",
+    "both profiles satisfy continuous_pickup, clear, complete_duration, effective_cap_contact, no_endstop",
+    "number of all declared checks passed across both profiles",
+    "minimum actual forward displacement across four strokes, clipped to30mm",
+    "lower maximum return residual"
+  ],
+  "no_cherry_pick": "Evaluate all four final checkpoints on both profiles. If none passes, preserve strongest failure and all-negative results.",
+  "heldout_gate": "Freeze one controller/hash/config before heldout execution; heldout outcomes never used for tuning"
+}

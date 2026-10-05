@@ -1,0 +1,1504 @@
+{
+  "rule": "FINAL-DEVELOPMENT-SELECTION-RULE.json",
+  "pairs": [
+    {
+      "name": "faithful-center-tail-constant-motor-v1",
+      "trials": [
+        "runs/newknife-20261005/development/faithful-center-tail-constant-motor-v1/constant/simulation",
+        "runs/newknife-20261005/development/faithful-center-tail-constant-motor-v1/variable/simulation"
+      ],
+      "checkpoint": "runs/newknife-20261005/train/center-tail-constant-motor-v1/update_000100.pth",
+      "score": [
+        0,
+        1,
+        22,
+        0.01832964178174734,
+        -0.02766941487789154,
+        0
+      ],
+      "evaluations": [
+        {
+          "effective_cap_contact_fraction": 1.0,
+          "effective_cap_longest_loss_s": 0.0,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": true,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": false,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.027317814528942108,
+            0.018364890478551388,
+            0.03718324936926365,
+            0.02766941487789154
+          ],
+          "forward_displacement_m": [
+            0.027273483188764658,
+            0.01881835889071226
+          ],
+          "retract_displacement_m": [
+            -0.00895292405039072,
+            -0.009513834491372108
+          ],
+          "forward_start_m": [
+            4.433134017745033e-05,
+            0.018364890478551388
+          ],
+          "hold_slider_ranges_m": [
+            2.7218833565711975e-05,
+            2.228468656539917e-05,
+            0.0011692531406879425,
+            7.66068696975708e-05
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "endpoints": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.4848971964333075,
+          "thumb_contact_fraction": 1.0,
+          "trace_sha256": "806e18b4271888e2c6c2cc561f327d5228726d6f28e6844c697ece42a60ac6d8",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        },
+        {
+          "effective_cap_contact_fraction": 1.0,
+          "effective_cap_longest_loss_s": 0.0,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": true,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": false,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.026822476647794247,
+            0.015844625420868397,
+            0.03417426720261574,
+            0.024818667210638523
+          ],
+          "forward_displacement_m": [
+            0.026778145307616796,
+            0.01832964178174734
+          ],
+          "retract_displacement_m": [
+            -0.01097785122692585,
+            -0.009355599991977215
+          ],
+          "forward_start_m": [
+            4.433134017745033e-05,
+            0.015844625420868397
+          ],
+          "hold_slider_ranges_m": [
+            2.7647241950035095e-05,
+            1.7819926142692566e-05,
+            0.00016597658395767212,
+            1.827441155910492e-05
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "endpoints": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.48143994344630575,
+          "thumb_contact_fraction": 1.0,
+          "trace_sha256": "5c72c058d7a6b6e69e3edb1dd9dbf09d36d5de945e4e14be05b8d447b99f1d48",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        }
+      ]
+    },
+    {
+      "name": "faithful-center-tail-variable-thumb-v1",
+      "trials": [
+        "runs/newknife-20261005/development/faithful-center-tail-variable-thumb-v1/constant/simulation",
+        "runs/newknife-20261005/development/faithful-center-tail-variable-thumb-v1/variable/simulation"
+      ],
+      "checkpoint": "runs/newknife-20261005/train/center-tail-variable-thumb-v1/update_000100.pth",
+      "score": [
+        0,
+        1,
+        22,
+        0.018199783749878407,
+        -0.026190686970949173,
+        0
+      ],
+      "evaluations": [
+        {
+          "effective_cap_contact_fraction": 1.0,
+          "effective_cap_longest_loss_s": 0.0,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": true,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": false,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.026490374468266964,
+            0.01775506790727377,
+            0.0375212486833334,
+            0.026190686970949173
+          ],
+          "forward_displacement_m": [
+            0.026446043128089514,
+            0.019766180776059628
+          ],
+          "retract_displacement_m": [
+            -0.008735306560993195,
+            -0.011330561712384224
+          ],
+          "forward_start_m": [
+            4.433134017745033e-05,
+            0.01775506790727377
+          ],
+          "hold_slider_ranges_m": [
+            3.6580488085746765e-05,
+            1.7056241631507874e-05,
+            0.0013615153729915619,
+            2.0328909158706665e-05
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "endpoints": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.4576813652510516,
+          "thumb_contact_fraction": 1.0,
+          "trace_sha256": "7e01337493f15ffc70ac8b8f16477a26ee5b0be1499fd624c1957c733b37f8e9",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        },
+        {
+          "effective_cap_contact_fraction": 1.0,
+          "effective_cap_longest_loss_s": 0.0,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": true,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": false,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.025530509650707245,
+            0.015741477720439434,
+            0.03394126147031784,
+            0.024480328895151615
+          ],
+          "forward_displacement_m": [
+            0.025486178310529795,
+            0.018199783749878407
+          ],
+          "retract_displacement_m": [
+            -0.00978903193026781,
+            -0.009460932575166225
+          ],
+          "forward_start_m": [
+            4.433134017745033e-05,
+            0.015741477720439434
+          ],
+          "hold_slider_ranges_m": [
+            2.9228627681732178e-05,
+            1.7348676919937134e-05,
+            8.094683289527893e-05,
+            1.757778227329254e-05
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "endpoints": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.4771253632940755,
+          "thumb_contact_fraction": 1.0,
+          "trace_sha256": "0c9640c2340d2ad9987994dd37adf02155222234f5a6f5f7fb9756d9ffa78b28",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        }
+      ]
+    },
+    {
+      "name": "center-tail-v2-learned",
+      "trials": [
+        "runs/newknife-20261005/development/center-tail-v2-constant-learned/simulation",
+        "runs/newknife-20261005/development/center-tail-v2-variable-learned/simulation"
+      ],
+      "checkpoint": null,
+      "score": [
+        0,
+        1,
+        22,
+        0.017845433205366135,
+        -0.029815377667546272,
+        1
+      ],
+      "evaluations": [
+        {
+          "effective_cap_contact_fraction": 1.0,
+          "effective_cap_longest_loss_s": 0.0,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": true,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": false,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.02832106314599514,
+            0.02024576161056757,
+            0.03864819370210171,
+            0.029815377667546272
+          ],
+          "forward_displacement_m": [
+            0.02827673180581769,
+            0.018402432091534138
+          ],
+          "retract_displacement_m": [
+            -0.00807530153542757,
+            -0.008832816034555435
+          ],
+          "forward_start_m": [
+            4.433134017745033e-05,
+            0.02024576161056757
+          ],
+          "hold_slider_ranges_m": [
+            3.058090806007385e-05,
+            1.5897676348686218e-05,
+            0.0019841641187667847,
+            4.7245994210243225e-05
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "endpoints": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.49270413010364283,
+          "thumb_contact_fraction": 1.0,
+          "trace_sha256": "4798c10f6c02f8bcb0ce804ff28baf091019fd17a7320f11ea769d9142851f5a",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        },
+        {
+          "effective_cap_contact_fraction": 1.0,
+          "effective_cap_longest_loss_s": 0.0,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": true,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": false,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.02743553463369608,
+            0.01879599131643772,
+            0.036641424521803856,
+            0.027962736785411835
+          ],
+          "forward_displacement_m": [
+            0.02739120329351863,
+            0.017845433205366135
+          ],
+          "retract_displacement_m": [
+            -0.008639543317258358,
+            -0.008678687736392021
+          ],
+          "forward_start_m": [
+            4.433134017745033e-05,
+            0.01879599131643772
+          ],
+          "hold_slider_ranges_m": [
+            2.9578804969787598e-05,
+            1.626834273338318e-05,
+            0.0008486136794090271,
+            1.5662983059883118e-05
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "endpoints": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.4875126659481468,
+          "thumb_contact_fraction": 1.0,
+          "trace_sha256": "de1c37f406ef718c4fa2b56d73ac3540bf47c737362afe068161bd729f0d3db5",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        }
+      ]
+    },
+    {
+      "name": "common-initial-geometry-v2",
+      "trials": [
+        "runs/newknife-20261005/continuous/common-recipe-nominal-v2/simulation",
+        "runs/newknife-20261005/continuous/common-recipe-nominal-variable-v2/simulation"
+      ],
+      "checkpoint": null,
+      "score": [
+        0,
+        1,
+        22,
+        0.01765477377921343,
+        -0.031193818897008896,
+        1
+      ],
+      "evaluations": [
+        {
+          "effective_cap_contact_fraction": 1.0,
+          "effective_cap_longest_loss_s": 0.0,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": true,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": false,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.027645306661725044,
+            0.019032081589102745,
+            0.03720465488731861,
+            0.031193818897008896
+          ],
+          "forward_displacement_m": [
+            0.027604668624917394,
+            0.018172573298215866
+          ],
+          "retract_displacement_m": [
+            -0.0086132250726223,
+            -0.006010835990309715
+          ],
+          "forward_start_m": [
+            4.063803680764977e-05,
+            0.019032081589102745
+          ],
+          "hold_slider_ranges_m": [
+            2.7336180210113525e-05,
+            1.4077872037887573e-05,
+            0.0017565451562404633,
+            1.5091150999069214e-05
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "endpoints": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.498952298562727,
+          "thumb_contact_fraction": 1.0,
+          "trace_sha256": "d2ce2e3391378153d177cf8a7d8bbad65425f6e5b5b4a684e648f213b56da63f",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        },
+        {
+          "effective_cap_contact_fraction": 1.0,
+          "effective_cap_longest_loss_s": 0.0,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": true,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": false,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.027683467604219913,
+            0.017880174331367016,
+            0.035534948110580444,
+            0.02564991917461157
+          ],
+          "forward_displacement_m": [
+            0.027642829567412264,
+            0.01765477377921343
+          ],
+          "retract_displacement_m": [
+            -0.009803293272852898,
+            -0.009885028935968876
+          ],
+          "forward_start_m": [
+            4.063803680764977e-05,
+            0.017880174331367016
+          ],
+          "hold_slider_ranges_m": [
+            2.6948750019073486e-05,
+            1.455657184123993e-05,
+            0.00045643746852874756,
+            1.4375895261764526e-05
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "endpoints": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.4943245566680354,
+          "thumb_contact_fraction": 1.0,
+          "trace_sha256": "b1819f261f2a3d1a8a443abf3e550f8d7872580e19e1bc0edf9e7d7d1428cb2c",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        }
+      ]
+    },
+    {
+      "name": "faithful-center-tail-variable-motor-v1",
+      "trials": [
+        "runs/newknife-20261005/development/faithful-center-tail-variable-motor-v1/constant/simulation",
+        "runs/newknife-20261005/development/faithful-center-tail-variable-motor-v1/variable/simulation"
+      ],
+      "checkpoint": "runs/newknife-20261005/train/center-tail-variable-motor-v1/update_000100.pth",
+      "score": [
+        0,
+        1,
+        22,
+        0.017420041374862194,
+        -0.026697568595409393,
+        0
+      ],
+      "evaluations": [
+        {
+          "effective_cap_contact_fraction": 1.0,
+          "effective_cap_longest_loss_s": 0.0,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": true,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": false,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.027676614932715893,
+            0.018462996929883957,
+            0.03804675675928593,
+            0.026697568595409393
+          ],
+          "forward_displacement_m": [
+            0.027632283592538442,
+            0.01958375982940197
+          ],
+          "retract_displacement_m": [
+            -0.009213618002831936,
+            -0.011349188163876534
+          ],
+          "forward_start_m": [
+            4.433134017745033e-05,
+            0.018462996929883957
+          ],
+          "hold_slider_ranges_m": [
+            2.7220696210861206e-05,
+            2.471543848514557e-05,
+            0.001465238630771637,
+            2.0578503608703613e-05
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "endpoints": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.4760678205607323,
+          "thumb_contact_fraction": 1.0,
+          "trace_sha256": "0b28cbaae63aa2499bfeb4c1b6be69da6214343282687435859fdc3e1b54bb4d",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        },
+        {
+          "effective_cap_contact_fraction": 1.0,
+          "effective_cap_longest_loss_s": 0.0,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": true,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": false,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.027167528867721558,
+            0.016163096763193607,
+            0.0335831381380558,
+            0.02326959650963545
+          ],
+          "forward_displacement_m": [
+            0.027123197527544107,
+            0.017420041374862194
+          ],
+          "retract_displacement_m": [
+            -0.01100443210452795,
+            -0.010313541628420353
+          ],
+          "forward_start_m": [
+            4.433134017745033e-05,
+            0.016163096763193607
+          ],
+          "hold_slider_ranges_m": [
+            2.794899046421051e-05,
+            2.071075141429901e-05,
+            0.00015246868133544922,
+            7.273256778717041e-05
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "endpoints": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.4855922267546359,
+          "thumb_contact_fraction": 1.0,
+          "trace_sha256": "ecf2fd5df46334537c886a4b711d99dc1f6cd413ad00b4f4ce1a746ae8993628",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        }
+      ]
+    },
+    {
+      "name": "center-tail-v2-geometric",
+      "trials": [
+        "runs/newknife-20261005/development/center-tail-v2-constant-geometric/simulation",
+        "runs/newknife-20261005/development/center-tail-v2-variable-geometric/simulation"
+      ],
+      "checkpoint": null,
+      "score": [
+        0,
+        1,
+        22,
+        0.01710597053170204,
+        -0.03240724094212055,
+        1
+      ],
+      "evaluations": [
+        {
+          "effective_cap_contact_fraction": 1.0,
+          "effective_cap_longest_loss_s": 0.0,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": true,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": false,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.028565633110702038,
+            0.020215626806020737,
+            0.03810831345617771,
+            0.03240724094212055
+          ],
+          "forward_displacement_m": [
+            0.028521301770524587,
+            0.017892686650156975
+          ],
+          "retract_displacement_m": [
+            -0.008350006304681301,
+            -0.005701072514057159
+          ],
+          "forward_start_m": [
+            4.433134017745033e-05,
+            0.020215626806020737
+          ],
+          "hold_slider_ranges_m": [
+            2.79303640127182e-05,
+            1.4003366231918335e-05,
+            0.0016385801136493683,
+            1.4856457710266113e-05
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "endpoints": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.49392609392355463,
+          "thumb_contact_fraction": 1.0,
+          "trace_sha256": "abdc5d1dc21140d68009bfb3bf0a3f511987703c519aa6223d928b732990613f",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        },
+        {
+          "effective_cap_contact_fraction": 1.0,
+          "effective_cap_longest_loss_s": 0.0,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": true,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": false,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.02759511210024357,
+            0.018837831914424896,
+            0.03594380244612694,
+            0.027709209360182285
+          ],
+          "forward_displacement_m": [
+            0.027550780760066118,
+            0.01710597053170204
+          ],
+          "retract_displacement_m": [
+            -0.008757280185818672,
+            -0.008234593085944653
+          ],
+          "forward_start_m": [
+            4.433134017745033e-05,
+            0.018837831914424896
+          ],
+          "hold_slider_ranges_m": [
+            2.8856098651885986e-05,
+            1.4221295714378357e-05,
+            0.0006192363798618317,
+            1.5731900930404663e-05
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "endpoints": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.4841852209320442,
+          "thumb_contact_fraction": 1.0,
+          "trace_sha256": "d27c8818ffa9efc73730c2fb6260ee874587cde65e16668c5b30ebf401adee17",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        }
+      ]
+    },
+    {
+      "name": "faithful-final-thumb-constant-2026100512-v1",
+      "trials": [
+        "runs/newknife-20261005/development/faithful-final-thumb-constant-2026100512-v1/constant/simulation",
+        "runs/newknife-20261005/development/faithful-final-thumb-constant-2026100512-v1/variable/simulation"
+      ],
+      "checkpoint": "runs/newknife-20261005/train/thumb-constant-2026100512-v1/update_000100.pth",
+      "score": [
+        0,
+        1,
+        22,
+        0.008460972880129702,
+        -0.0031449890229851007,
+        0
+      ],
+      "evaluations": [
+        {
+          "effective_cap_contact_fraction": 0.9968756509060612,
+          "effective_cap_longest_loss_s": 0.008333333333333333,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": true,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": true,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.010302097536623478,
+            0.00036509572237264365,
+            0.008826068602502346,
+            0.0016588897560723126
+          ],
+          "forward_displacement_m": [
+            0.010297080130158065,
+            0.008460972880129702
+          ],
+          "retract_displacement_m": [
+            -0.009937001814250834,
+            -0.0071671788464300334
+          ],
+          "forward_start_m": [
+            5.0174064654129324e-06,
+            0.00036509572237264365
+          ],
+          "hold_slider_ranges_m": [
+            5.033239722251892e-05,
+            9.115959983319044e-06,
+            0.0005230465903878212,
+            1.630594488233328e-05
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": false,
+            "endpoints": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.6970393561386705,
+          "thumb_contact_fraction": 0.9968801996672213,
+          "trace_sha256": "2e75c2801a0c9060f1eb2395a6153725fa783d8f6f9d38acf836517059908117",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        },
+        {
+          "effective_cap_contact_fraction": 0.9983336804832327,
+          "effective_cap_longest_loss_s": 0.004166666666666667,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": true,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": true,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.011324750259518623,
+            0.0014504750724881887,
+            0.010260266717523336,
+            0.0031449890229851007
+          ],
+          "forward_displacement_m": [
+            0.01131973285305321,
+            0.008809791645035148
+          ],
+          "retract_displacement_m": [
+            -0.009874275187030435,
+            -0.007115277694538236
+          ],
+          "forward_start_m": [
+            5.0174064654129324e-06,
+            0.0014504750724881887
+          ],
+          "hold_slider_ranges_m": [
+            2.7691945433616638e-05,
+            9.779236279428005e-06,
+            0.00026997271925210953,
+            1.631723716855049e-05
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": false,
+            "endpoints": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.6992866748953547,
+          "thumb_contact_fraction": 0.9983361064891847,
+          "trace_sha256": "9c33da15d6dba3fb563829dc325bef6817fa8e7844e5709e8cd20fffaf810a99",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        }
+      ]
+    },
+    {
+      "name": "faithful-center-tail-constant-thumb-v1",
+      "trials": [
+        "runs/newknife-20261005/development/faithful-center-tail-constant-thumb-v1/constant/simulation",
+        "runs/newknife-20261005/development/faithful-center-tail-constant-thumb-v1/variable/simulation"
+      ],
+      "checkpoint": "runs/newknife-20261005/train/center-tail-constant-thumb-v1/update_000100.pth",
+      "score": [
+        0,
+        1,
+        21,
+        0.018900838680565357,
+        -0.024303527548909187,
+        0
+      ],
+      "evaluations": [
+        {
+          "effective_cap_contact_fraction": 1.0,
+          "effective_cap_longest_loss_s": 0.0,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": false,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": false,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.02547955047339201,
+            0.017053821124136448,
+            0.03682144172489643,
+            0.024303527548909187
+          ],
+          "forward_displacement_m": [
+            0.02543521913321456,
+            0.019767620600759983
+          ],
+          "retract_displacement_m": [
+            -0.008425729349255562,
+            -0.012517914175987244
+          ],
+          "forward_start_m": [
+            4.433134017745033e-05,
+            0.017053821124136448
+          ],
+          "hold_slider_ranges_m": [
+            5.776062607765198e-05,
+            2.0217150449752808e-05,
+            0.0023332424461841583,
+            2.4273991584777832e-05
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "endpoints": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.42549455445436607,
+          "thumb_contact_fraction": 1.0,
+          "trace_sha256": "a30017ec2e1363877fe61b724a963605b9de7a4d77f6b41bdc97d2d45f793435",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        },
+        {
+          "effective_cap_contact_fraction": 1.0,
+          "effective_cap_longest_loss_s": 0.0,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": true,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": false,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.024882790632545948,
+            0.015073332004249096,
+            0.03397417068481445,
+            0.02230177354067564
+          ],
+          "forward_displacement_m": [
+            0.024838459292368498,
+            0.018900838680565357
+          ],
+          "retract_displacement_m": [
+            -0.009809458628296852,
+            -0.011672397144138813
+          ],
+          "forward_start_m": [
+            4.433134017745033e-05,
+            0.015073332004249096
+          ],
+          "hold_slider_ranges_m": [
+            2.9249116778373718e-05,
+            2.0232051610946655e-05,
+            0.0004319213330745697,
+            1.545064151287079e-05
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": true,
+            "endpoints": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.48063773179835995,
+          "thumb_contact_fraction": 1.0,
+          "trace_sha256": "64646785bbdf1ca5cf30f4a35ff2cec14f6903a64e4a86548dfc23124733c5bb",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        }
+      ]
+    },
+    {
+      "name": "faithful-final-thumb-variable-2026100512-v1",
+      "trials": [
+        "runs/newknife-20261005/development/faithful-final-thumb-variable-2026100512-v1/constant/simulation",
+        "runs/newknife-20261005/development/faithful-final-thumb-variable-2026100512-v1/variable/simulation"
+      ],
+      "checkpoint": "runs/newknife-20261005/train/thumb-variable-2026100512-v1/update_000100.pth",
+      "score": [
+        0,
+        1,
+        20,
+        0.009396109358249305,
+        -0.011431454680860043,
+        0
+      ],
+      "evaluations": [
+        {
+          "effective_cap_contact_fraction": 0.9941678816913143,
+          "effective_cap_longest_loss_s": 0.008333333333333333,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": true,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": true,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.009401126764714718,
+            0.0005929479957558215,
+            0.010257553774863482,
+            0.00033724050445016474
+          ],
+          "forward_displacement_m": [
+            0.009396109358249305,
+            0.00966460577910766
+          ],
+          "retract_displacement_m": [
+            -0.008808178768958896,
+            -0.009920313270413317
+          ],
+          "forward_start_m": [
+            5.0174064654129324e-06,
+            0.0005929479957558215
+          ],
+          "hold_slider_ranges_m": [
+            4.365667700767517e-05,
+            4.1056773625314236e-06,
+            4.0879473090171814e-05,
+            8.999690180644393e-06
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": false,
+            "endpoints": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.713033415547439,
+          "thumb_contact_fraction": 0.9941763727121464,
+          "trace_sha256": "a09fa6f280a06f75f7c41e033adf7603a3085e0fe94696b989d6b015f5232c48",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        },
+        {
+          "effective_cap_contact_fraction": 0.9927098521141429,
+          "effective_cap_longest_loss_s": 0.008333333333333333,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": false,
+            "bounded_return_drift": false,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": true,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": false,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.010423873085528612,
+            0.0042613164987415075,
+            0.033290255814790726,
+            0.011431454680860043
+          ],
+          "forward_displacement_m": [
+            0.0104188556790632,
+            0.029028939316049218
+          ],
+          "retract_displacement_m": [
+            -0.006162556586787105,
+            -0.021858801133930683
+          ],
+          "forward_start_m": [
+            5.0174064654129324e-06,
+            0.0042613164987415075
+          ],
+          "hold_slider_ranges_m": [
+            2.8450973331928253e-05,
+            7.82078132033348e-06,
+            1.2226402759552002e-05,
+            1.9466504454612732e-05
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": false,
+            "endpoints": false,
+            "bounded_return_drift": false,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.7141508428846773,
+          "thumb_contact_fraction": 0.992720465890183,
+          "trace_sha256": "8b337c3a7bd63e993eca2dfc9f7c16d729ac85aa805ef843395af65ce2cea555",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        }
+      ]
+    },
+    {
+      "name": "faithful-final-thumb-constant-2026100511-v1",
+      "trials": [
+        "runs/newknife-20261005/development/faithful-final-thumb-constant-2026100511-v1/constant/simulation",
+        "runs/newknife-20261005/development/faithful-final-thumb-constant-2026100511-v1/variable/simulation"
+      ],
+      "checkpoint": "runs/newknife-20261005/train/thumb-constant-2026100511-v1/update_000100.pth",
+      "score": [
+        0,
+        1,
+        19,
+        0.00954564344215214,
+        -0.010542626492679119,
+        0
+      ],
+      "evaluations": [
+        {
+          "effective_cap_contact_fraction": 0.9952093313892939,
+          "effective_cap_longest_loss_s": 0.004166666666666667,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": false,
+            "bounded_return_drift": false,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": true,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": false,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.009550660848617554,
+            0.001712470781058073,
+            0.02783599030226469,
+            0.010542626492679119
+          ],
+          "forward_displacement_m": [
+            0.00954564344215214,
+            0.026123519521206617
+          ],
+          "retract_displacement_m": [
+            -0.00783819006755948,
+            -0.01729336380958557
+          ],
+          "forward_start_m": [
+            5.0174064654129324e-06,
+            0.001712470781058073
+          ],
+          "hold_slider_ranges_m": [
+            2.8833746910095215e-05,
+            8.442089892923832e-06,
+            0.0005297008901834488,
+            1.600664108991623e-05
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": false,
+            "endpoints": false,
+            "bounded_return_drift": false,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.6949420870200044,
+          "thumb_contact_fraction": 0.995216306156406,
+          "trace_sha256": "9cb4140cc39afe30a1527cb0f754cd361ca1fd469010bc1b1d826da8036c06ff",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        },
+        {
+          "effective_cap_contact_fraction": 0.9968756509060612,
+          "effective_cap_longest_loss_s": 0.004166666666666667,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": true,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": false,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.010157736018300056,
+            0.0027329797158017755,
+            0.01294424757361412,
+            0.0057144733145833015
+          ],
+          "forward_displacement_m": [
+            0.010152718611834644,
+            0.010211267857812345
+          ],
+          "retract_displacement_m": [
+            -0.007424756302498281,
+            -0.007229774259030819
+          ],
+          "forward_start_m": [
+            5.0174064654129324e-06,
+            0.0027329797158017755
+          ],
+          "hold_slider_ranges_m": [
+            2.77617946267128e-05,
+            7.60774128139019e-06,
+            2.5363638997077942e-05,
+            2.5609508156776428e-05
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": false,
+            "endpoints": false,
+            "bounded_return_drift": true,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.6948985667549455,
+          "thumb_contact_fraction": 0.9968801996672213,
+          "trace_sha256": "c4d60869060e94c03bd35eee249015b6d2fb32f5ba648c3147bb3bf04b11dcf0",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        }
+      ]
+    },
+    {
+      "name": "faithful-final-thumb-variable-2026100511-v1",
+      "trials": [
+        "runs/newknife-20261005/development/faithful-final-thumb-variable-2026100511-v1/constant/simulation",
+        "runs/newknife-20261005/development/faithful-final-thumb-variable-2026100511-v1/variable/simulation"
+      ],
+      "checkpoint": "runs/newknife-20261005/train/thumb-variable-2026100511-v1/update_000100.pth",
+      "score": [
+        0,
+        1,
+        18,
+        0.010094114673165677,
+        -0.011089305859059095,
+        0
+      ],
+      "evaluations": [
+        {
+          "effective_cap_contact_fraction": 0.9981253905436367,
+          "effective_cap_longest_loss_s": 0.004166666666666667,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": false,
+            "bounded_return_drift": false,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": true,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": false,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.01009913207963109,
+            0.0023319844622164965,
+            0.03026173822581768,
+            0.011089305859059095
+          ],
+          "forward_displacement_m": [
+            0.010094114673165677,
+            0.027929753763601184
+          ],
+          "retract_displacement_m": [
+            -0.007767147617414594,
+            -0.019172432366758585
+          ],
+          "forward_start_m": [
+            5.0174064654129324e-06,
+            0.0023319844622164965
+          ],
+          "hold_slider_ranges_m": [
+            2.8809532523155212e-05,
+            8.038477972149849e-06,
+            0.00020173192024230957,
+            0.0002362830564379692
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": false,
+            "endpoints": false,
+            "bounded_return_drift": false,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.6975664788018671,
+          "thumb_contact_fraction": 0.9981281198003328,
+          "trace_sha256": "97801cc9f479f03e1880dfdd2e1ba0308ea43b59e668b450f2ab907538c68f4f",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        },
+        {
+          "effective_cap_contact_fraction": 0.9964590710268694,
+          "effective_cap_longest_loss_s": 0.004166666666666667,
+          "version": "newknife-functional-v1",
+          "checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": false,
+            "bounded_return_drift": false,
+            "final_settling": true,
+            "thumb_contact": true,
+            "holds": true,
+            "continuous_pickup": true,
+            "forward_travel": false,
+            "extension_position": false,
+            "return_residual": false,
+            "no_endstop": true,
+            "complete_duration": true,
+            "effective_cap_contact": true
+          },
+          "pass_all": false,
+          "endpoints_relative_initial_m": [
+            0.011226645205169916,
+            0.003626073244959116,
+            0.0156632112339139,
+            0.0069661245215684175
+          ],
+          "forward_displacement_m": [
+            0.011221627798704503,
+            0.012037137988954782
+          ],
+          "retract_displacement_m": [
+            -0.0076005719602108,
+            -0.008697086712345481
+          ],
+          "forward_start_m": [
+            5.0174064654129324e-06,
+            0.003626073244959116
+          ],
+          "hold_slider_ranges_m": [
+            2.750381827354431e-05,
+            7.71600753068924e-06,
+            2.6706606149673462e-05,
+            1.6621313989162445e-05
+          ],
+          "old_checks": {
+            "two_cycles": true,
+            "clear": true,
+            "relative_envelope": false,
+            "endpoints": false,
+            "bounded_return_drift": false,
+            "final_settling": true,
+            "thumb_contact": true
+          },
+          "old_rotation_rad": 0.6978122971396503,
+          "thumb_contact_fraction": 0.9964642262895175,
+          "trace_sha256": "5262e2fc5883b798f253be41caae84a2917e6640494d33efc524be9ba9f46cfe",
+          "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+        }
+      ]
+    }
+  ],
+  "selected": "faithful-center-tail-constant-motor-v1",
+  "functional_demo_ready": false,
+  "training_warning": "New fitting scene logs reported foundLostAggregatePairsCapacity overflow; training samples may miss interactions. Native one-env replays have no such warning; selection uses native only."
+}

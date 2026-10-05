@@ -1,0 +1,42 @@
+{
+  "handle_size": [
+    0.019,
+    0.008,
+    0.144
+  ],
+  "slider_size": [
+    0.007,
+    0.002,
+    0.032
+  ],
+  "initial_slider_q_m": 0.0,
+  "total_mass_kg": 0.055,
+  "estimated_com_local_m": {
+    "link_0": [
+      0.0,
+      -0.0008023715415019764,
+      -0.011233201581027665
+    ],
+    "link_1": [
+      3.0378291030005414e-20,
+      -0.0012213054549015763,
+      0.010664969150915674
+    ]
+  },
+  "body_mass_kg": 0.044000000000000004,
+  "moving_mass_kg": 0.011000000000000001,
+  "slider_initial_center_tail_m": 0.046,
+  "slider_origin_m": [
+    0,
+    0.005,
+    -0.025999999999999995
+  ],
+  "task_command_m": 0.035,
+  "assumptions": {
+    "body_thickness": "Derived nominal total10mm minus protrusion2mm",
+    "mass_split": "80/20 percent engineering estimate; uniform-volume part COM, compound-box inertia approximation",
+    "collision": "2mm floor,2.5mm side rails,rear cap,0.5mm chamfer and internal blade carrier are photo-informed engineering assumptions",
+    "joint_limits": "-10 to55mm relative initial; unmeasured, targets not endstops"
+  },
+  "model_route": "Parameterized URDF; no existing Hunyuan workflow found, simple measured contact geometry more direct"
+}

@@ -1,0 +1,25 @@
+{
+  "version": "newknife-functional-v1",
+  "declared_before_candidate": true,
+  "command_m": 0.035,
+  "extension_position_m": [
+    0.03,
+    0.04
+  ],
+  "each_forward_displacement_min_m": 0.03,
+  "return_absolute_residual_max_m": 0.005,
+  "reference": "q_slider minus initial before episode, not rail lower",
+  "operation_start_s": 16,
+  "segment_end_s": [
+    21,
+    26,
+    31,
+    36
+  ],
+  "holds_s": 1,
+  "old_functional_criterion": "Unchanged historical comparison; report individual rotation/contact/drift checks",
+  "initial_state_only": true,
+  "endpoint_stop_margin_m": 0.002,
+  "scope": "No hardware or fully hidden blade claim",
+  "each_hold_slider_range_max_m": 0.002
+}

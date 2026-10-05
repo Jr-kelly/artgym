@@ -1,0 +1,42 @@
+{
+  "handle_size": [
+    0.018,
+    0.007,
+    0.14
+  ],
+  "slider_size": [
+    0.006,
+    0.0015,
+    0.03
+  ],
+  "initial_slider_q_m": 0.0,
+  "total_mass_kg": 0.05,
+  "estimated_com_local_m": {
+    "link_0": [
+      0.0,
+      -0.000757847533632287,
+      -0.0087152466367713
+    ],
+    "link_1": [
+      0.0,
+      -0.0013853599703117269,
+      0.013471053933696187
+    ]
+  },
+  "body_mass_kg": 0.04000000000000001,
+  "moving_mass_kg": 0.010000000000000002,
+  "slider_initial_center_tail_m": 0.04,
+  "slider_origin_m": [
+    0,
+    0.00425,
+    -0.030000000000000006
+  ],
+  "task_command_m": 0.035,
+  "assumptions": {
+    "body_thickness": "Explicit nearby synthetic body thickness; not a second measured knife",
+    "mass_split": "80/20 percent engineering estimate; uniform-volume part COM, compound-box inertia approximation",
+    "collision": "2mm floor,2.5mm side rails,rear cap,0.5mm chamfer and internal blade carrier are photo-informed engineering assumptions",
+    "joint_limits": "-10 to55mm relative initial; unmeasured, targets not endstops"
+  },
+  "model_route": "Parameterized URDF; no existing Hunyuan workflow found, simple measured contact geometry more direct"
+}

@@ -1,0 +1,287 @@
+{
+  "cases": [
+    {
+      "case": "small-low",
+      "split": "frozen-heldout",
+      "started_utc": "2026-10-05T13:50:38.175474+00:00",
+      "scope": "One predeclared frozen nearby joint condition, with common initial adaptation.\nAssets/load are simulator inputs only. Actor weights and recipe stay frozen.\n",
+      "selection_sha256": "6f916b61a3f32a9cc5d3f999136a25b822d6e4a15af399e304348672aa9eeeb1",
+      "checkpoint": "runs/newknife-20261005/train/center-tail-constant-motor-v1/update_000100.pth",
+      "recipe_sha256": "e72c43824fdd40cc00732ebfe28b2982743e82b07f33d92918e33d1e8f98e7aa",
+      "real_robot_ran": false,
+      "preparation_exit_code": 1,
+      "pass_all": false,
+      "failure": "Original geometry/actuator preparation gate rejected; not physically executed",
+      "preparation": {
+        "passed": false,
+        "scope": "Common initial-estimate-only preparation; no physical asset or load ID input.\nEvery failed geometry gate is retained. Does not execute a physical rollout.\n",
+        "failure_type": "CalledProcessError",
+        "failure": "Command '['/home/agiuser/miniconda3/envs/artgym/bin/python', '-m', 'scripts.audit_g2_anchored_thumb_motor', '--reference', 'runs/newknife-20261005/validation/frozen-small-low-v1/preparation/pickup/reference.json', '--motor-plan', 'runs/newknife-20261005/validation/frozen-small-low-v1/preparation/pickup/motor-plan.json', '--knife-spec', 'runs/newknife-20261005/validation/frozen-small-low-v1/preparation/pickup/estimated-collision/spec.json', '--samples', '81', '--output', 'runs/newknife-20261005/validation/frozen-small-low-v1/preparation/pickup/full-stroke-audit.json']' returned non-zero exit status 1.",
+        "commands": [
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.adapt_wuji_direct_corner_initial_geometry",
+            "--estimate",
+            "assets/objects/knife_wuji_newknife_20261005/heldout-v1/small-low/noisy-once-estimate.json",
+            "--plan",
+            "runs/wrap-force-20261004/planning/source-bounded-index-wrap-v8/direct-corner-v6/motor-plan.json",
+            "--reference",
+            "runs/traction-20261005/configs/cartesian-tracking10-v12.json",
+            "--localization",
+            "runs/wrap-force-20261004/planning/source-bounded-index-wrap-v8/direct-corner-v6/localization.json",
+            "--output",
+            "runs/newknife-20261005/validation/frozen-small-low-v1/preparation/pickup",
+            "--body-root-inset",
+            "0.01",
+            "--grip-tail-shift-m",
+            "0.006",
+            "--preserve-middle-axis",
+            "--thumb-lateral-bias-m",
+            "0.0025",
+            "--thumb-face-toward-cap"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.plan_g2_functional_acquisition_path",
+            "--plan",
+            "runs/newknife-20261005/validation/frozen-small-low-v1/preparation/pickup/motor-plan.json",
+            "--localization",
+            "runs/newknife-20261005/validation/frozen-small-low-v1/preparation/pickup/localization.json",
+            "--knife-spec",
+            "runs/newknife-20261005/validation/frozen-small-low-v1/preparation/pickup/estimated-collision/spec.json",
+            "--table-y",
+            "-0.23",
+            "--output",
+            "runs/newknife-20261005/validation/frozen-small-low-v1/preparation/pickup/acquisition"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.audit_wuji_actual_acquisition_motor",
+            "--plan",
+            "runs/newknife-20261005/validation/frozen-small-low-v1/preparation/pickup/motor-plan.json",
+            "--acquisition",
+            "runs/newknife-20261005/validation/frozen-small-low-v1/preparation/pickup/acquisition/acquisition-path.json",
+            "--table-y",
+            "-0.23",
+            "--output",
+            "runs/newknife-20261005/validation/frozen-small-low-v1/preparation/pickup/closure-audit.json"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.audit_g2_anchored_thumb_motor",
+            "--reference",
+            "runs/newknife-20261005/validation/frozen-small-low-v1/preparation/pickup/reference.json",
+            "--motor-plan",
+            "runs/newknife-20261005/validation/frozen-small-low-v1/preparation/pickup/motor-plan.json",
+            "--knife-spec",
+            "runs/newknife-20261005/validation/frozen-small-low-v1/preparation/pickup/estimated-collision/spec.json",
+            "--samples",
+            "81",
+            "--output",
+            "runs/newknife-20261005/validation/frozen-small-low-v1/preparation/pickup/full-stroke-audit.json"
+          ]
+        ]
+      },
+      "finished_utc": "2026-10-05T13:52:23.416247+00:00"
+    },
+    {
+      "case": "large-high",
+      "split": "frozen-heldout",
+      "started_utc": "2026-10-05T13:50:39.387576+00:00",
+      "scope": "One predeclared frozen nearby joint condition, with common initial adaptation.\nAssets/load are simulator inputs only. Actor weights and recipe stay frozen.\n",
+      "selection_sha256": "6f916b61a3f32a9cc5d3f999136a25b822d6e4a15af399e304348672aa9eeeb1",
+      "checkpoint": "runs/newknife-20261005/train/center-tail-constant-motor-v1/update_000100.pth",
+      "recipe_sha256": "e72c43824fdd40cc00732ebfe28b2982743e82b07f33d92918e33d1e8f98e7aa",
+      "real_robot_ran": false,
+      "preparation_exit_code": 0,
+      "command": [
+        "/home/agiuser/miniconda3/envs/artgym/bin/python",
+        "-m",
+        "scripts.run_wuji_newknife",
+        "--prepared",
+        "runs/newknife-20261005/validation/frozen-large-high-v1/preparation/pickup",
+        "--operation-prepared",
+        "runs/newknife-20261005/validation/frozen-large-high-v1/preparation/operation",
+        "--asset",
+        "assets/objects/knife_wuji_newknife_20261005/heldout-v1/large-high/mobility.urdf",
+        "--resistance",
+        "assets/objects/knife_wuji_newknife_20261005/heldout-v1/large-high/resistance.json",
+        "--pressure",
+        "runs/newknife-20261005/configs/pressure120.json",
+        "--no-video",
+        "--output",
+        "runs/newknife-20261005/validation/frozen-large-high-v1/physical",
+        "--scheduled-target-holds",
+        "--checkpoint",
+        "runs/newknife-20261005/train/center-tail-constant-motor-v1/update_000100.pth"
+      ],
+      "physical_exit_code": 0,
+      "evaluation": {
+        "effective_cap_contact_fraction": 0.057071443449281396,
+        "effective_cap_longest_loss_s": 18.858333333333334,
+        "version": "newknife-functional-v1",
+        "checks": {
+          "two_cycles": true,
+          "clear": true,
+          "relative_envelope": false,
+          "bounded_return_drift": true,
+          "final_settling": true,
+          "thumb_contact": false,
+          "holds": true,
+          "continuous_pickup": true,
+          "forward_travel": false,
+          "extension_position": false,
+          "return_residual": true,
+          "no_endstop": true,
+          "complete_duration": true,
+          "effective_cap_contact": false
+        },
+        "pass_all": false,
+        "endpoints_relative_initial_m": [
+          3.8863976442371495e-05,
+          3.896095040545333e-05,
+          3.918964466720354e-05,
+          3.936016400984954e-05
+        ],
+        "forward_displacement_m": [
+          2.5701501726871356e-06,
+          2.2869426175020635e-07
+        ],
+        "retract_displacement_m": [
+          9.69739630818367e-08,
+          1.7051934264600277e-07
+        ],
+        "forward_start_m": [
+          3.629382626968436e-05,
+          3.896095040545333e-05
+        ],
+        "hold_slider_ranges_m": [
+          4.3462932808324695e-08,
+          6.032860255800188e-08,
+          4.3146428652107716e-08,
+          3.01588443107903e-08
+        ],
+        "old_checks": {
+          "two_cycles": true,
+          "clear": true,
+          "relative_envelope": false,
+          "endpoints": false,
+          "bounded_return_drift": true,
+          "final_settling": true,
+          "thumb_contact": false
+        },
+        "old_rotation_rad": 0.6295329261374774,
+        "thumb_contact_fraction": 0.058444259567387684,
+        "trace_sha256": "41c9c317f52193cf9b88fba8318f9a656d5b6ed2c68433fda71bded184231c15",
+        "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+      },
+      "pass_all": false,
+      "failure": "Frozen full-task checks failed",
+      "finished_utc": "2026-10-05T13:54:43.809022+00:00"
+    },
+    {
+      "case": "middle-variable",
+      "split": "frozen-heldout",
+      "started_utc": "2026-10-05T13:50:40.599554+00:00",
+      "scope": "One predeclared frozen nearby joint condition, with common initial adaptation.\nAssets/load are simulator inputs only. Actor weights and recipe stay frozen.\n",
+      "selection_sha256": "6f916b61a3f32a9cc5d3f999136a25b822d6e4a15af399e304348672aa9eeeb1",
+      "checkpoint": "runs/newknife-20261005/train/center-tail-constant-motor-v1/update_000100.pth",
+      "recipe_sha256": "e72c43824fdd40cc00732ebfe28b2982743e82b07f33d92918e33d1e8f98e7aa",
+      "real_robot_ran": false,
+      "preparation_exit_code": 0,
+      "command": [
+        "/home/agiuser/miniconda3/envs/artgym/bin/python",
+        "-m",
+        "scripts.run_wuji_newknife",
+        "--prepared",
+        "runs/newknife-20261005/validation/frozen-middle-variable-v1/preparation/pickup",
+        "--operation-prepared",
+        "runs/newknife-20261005/validation/frozen-middle-variable-v1/preparation/operation",
+        "--asset",
+        "assets/objects/knife_wuji_newknife_20261005/heldout-v1/middle-variable/mobility.urdf",
+        "--resistance",
+        "assets/objects/knife_wuji_newknife_20261005/heldout-v1/middle-variable/resistance.json",
+        "--pressure",
+        "runs/newknife-20261005/configs/pressure120.json",
+        "--no-video",
+        "--output",
+        "runs/newknife-20261005/validation/frozen-middle-variable-v1/physical",
+        "--scheduled-target-holds",
+        "--checkpoint",
+        "runs/newknife-20261005/train/center-tail-constant-motor-v1/update_000100.pth"
+      ],
+      "physical_exit_code": 0,
+      "evaluation": {
+        "effective_cap_contact_fraction": 1.0,
+        "effective_cap_longest_loss_s": 0.0,
+        "version": "newknife-functional-v1",
+        "checks": {
+          "two_cycles": true,
+          "clear": true,
+          "relative_envelope": true,
+          "bounded_return_drift": true,
+          "final_settling": true,
+          "thumb_contact": true,
+          "holds": true,
+          "continuous_pickup": true,
+          "forward_travel": false,
+          "extension_position": false,
+          "return_residual": false,
+          "no_endstop": true,
+          "complete_duration": true,
+          "effective_cap_contact": true
+        },
+        "pass_all": false,
+        "endpoints_relative_initial_m": [
+          0.02675811666995287,
+          0.01957364846020937,
+          0.03626752085983753,
+          0.026390315964818
+        ],
+        "forward_displacement_m": [
+          0.02669292959399172,
+          0.016693872399628162
+        ],
+        "retract_displacement_m": [
+          -0.0071844682097435,
+          -0.009877204895019531
+        ],
+        "forward_start_m": [
+          6.518707596114837e-05,
+          0.01957364846020937
+        ],
+        "hold_slider_ranges_m": [
+          3.0096620321273804e-05,
+          2.2705644369125366e-05,
+          0.00039270147681236267,
+          2.2990629076957703e-05
+        ],
+        "old_checks": {
+          "two_cycles": true,
+          "clear": true,
+          "relative_envelope": true,
+          "endpoints": false,
+          "bounded_return_drift": true,
+          "final_settling": true,
+          "thumb_contact": true
+        },
+        "old_rotation_rad": 0.4384722578482074,
+        "thumb_contact_fraction": 1.0,
+        "trace_sha256": "63ad79c74d4ce7b7849ed1ba23bd014906207e773fcfcbfed11d0b1f0f7c2f11",
+        "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+      },
+      "pass_all": false,
+      "failure": "Frozen full-task checks failed",
+      "finished_utc": "2026-10-05T13:54:50.383449+00:00"
+    }
+  ],
+  "full_passes": 0,
+  "geometry_rejected": 1,
+  "physical_completed": 2,
+  "weights_and_recipe_unchanged": true,
+  "continuous_range_generalization_proven": false
+}

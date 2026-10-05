@@ -1,0 +1,105 @@
+{
+  "scope": "Predeclare three local-neighbor heldouts, never added to training registry.\nAssets and noisy once-estimates only; no physics or success evidence generated.\n",
+  "seed": 2026100521,
+  "entries": [
+    {
+      "name": "small-low",
+      "split": "heldout",
+      "asset_directory": "assets/objects/knife_wuji_newknife_20261005/heldout-v1/small-low",
+      "physical_parameters": {
+        "length": 0.14,
+        "width": 0.018,
+        "thickness": 0.007,
+        "slider_length": 0.03,
+        "slider_width": 0.006,
+        "protrusion": 0.0015,
+        "proximal": 0.025,
+        "mass": 0.05
+      },
+      "profile": {
+        "kind": "constant",
+        "reference_N": 0.55,
+        "damping_Ns_m": 25000,
+        "reference_statistic": "constant capacity",
+        "scope": "Predeclared necessary-neighbor engineering sensitivity, no measured curve"
+      },
+      "initial_estimate": "assets/objects/knife_wuji_newknife_20261005/heldout-v1/small-low/noisy-once-estimate.json",
+      "hashes": {
+        "resistance.json": "0a2f3cf6b88adbac075a2c51d06620b1d9a855f82c98d738504274ea4faa6e46",
+        "mobility.urdf": "ab5bb7591e8126bb0e2296165989442a4320b5b81518aa37bf06637ef41e5db5",
+        "spec.json": "f0c82fd6abc8aa65c6987be18ce6ad8f330bd74019ea5d1ff7221cc87ec4d819",
+        "noisy-once-estimate.json": "5571a4a3e5ea2f12ccf88951d0cc064133705524c4a8176d5bdd4b3e1d1d4f77",
+        "slider-cap.obj": "3cce3e91d93867c848b58fc39d6ac56dcdf7eb7dc43806b396631170fb782bc3",
+        "once-estimate.json": "0344c5d9a0d2bff8ad7b9151258119f5a4b4d7c92253517785b7507351149304",
+        "parameters.json": "aaf534240b954199cc9b3e6e82276bf738643850ca2b7561d32a9a57df052069"
+      }
+    },
+    {
+      "name": "large-high",
+      "split": "heldout",
+      "asset_directory": "assets/objects/knife_wuji_newknife_20261005/heldout-v1/large-high",
+      "physical_parameters": {
+        "length": 0.148,
+        "width": 0.02,
+        "thickness": 0.009,
+        "slider_length": 0.034,
+        "slider_width": 0.008,
+        "protrusion": 0.0025,
+        "proximal": 0.035,
+        "mass": 0.06
+      },
+      "profile": {
+        "kind": "constant",
+        "reference_N": 0.95,
+        "damping_Ns_m": 25000,
+        "reference_statistic": "constant capacity",
+        "scope": "Predeclared necessary-neighbor engineering sensitivity, no measured curve"
+      },
+      "initial_estimate": "assets/objects/knife_wuji_newknife_20261005/heldout-v1/large-high/noisy-once-estimate.json",
+      "hashes": {
+        "resistance.json": "81e11d8a9042d64c3bf36f26b937865a9f7aad51bf75ae050fb67da7acdbc897",
+        "mobility.urdf": "0bf0b6946f07f9434411863673e52e57bb286950f7ea9dbf8b1d90b3a9d8d04d",
+        "spec.json": "ec3a2384dc5554171dd0a2a97c41ecab81e518ec43cccf9be193f099142077dd",
+        "noisy-once-estimate.json": "2b1fa95e283fd65eea27830a8f7b7c40c876a0c152d85b9e94e3bfb711d76b10",
+        "slider-cap.obj": "1b6f47de0d975b308e17e2fd54d631614be4081624dffeddf5b64442284dcb63",
+        "once-estimate.json": "ebcb16cb6a5192545a9830b904b07fc746289401f05ecbb29b4c3b64eb7bb739",
+        "parameters.json": "b075f0edfba81625f9ada974f814f8b656ca5bfb3f37001c5f4ef7bd3270b017"
+      }
+    },
+    {
+      "name": "middle-variable",
+      "split": "heldout",
+      "asset_directory": "assets/objects/knife_wuji_newknife_20261005/heldout-v1/middle-variable",
+      "physical_parameters": {
+        "length": 0.146,
+        "width": 0.0188,
+        "thickness": 0.0085,
+        "slider_length": 0.031,
+        "slider_width": 0.0068,
+        "protrusion": 0.0018,
+        "proximal": 0.028,
+        "mass": 0.053
+      },
+      "profile": {
+        "kind": "variable",
+        "reference_N": 0.82,
+        "damping_Ns_m": 25000,
+        "reference_statistic": "mean forward running capacity; directional/startup/spatial assumptions retained",
+        "scope": "Predeclared necessary-neighbor engineering sensitivity, no measured curve"
+      },
+      "initial_estimate": "assets/objects/knife_wuji_newknife_20261005/heldout-v1/middle-variable/noisy-once-estimate.json",
+      "hashes": {
+        "resistance.json": "78eb13a34ff8574b5adf7517b4d3f7fe93d9d1f48e5fff4e62901099789d05c2",
+        "mobility.urdf": "b1af50ae34b8561fabfa26d2edc3e985298c95b3c05d2888d2e7f2c66c9800d6",
+        "spec.json": "bade62260812e2c3b0d1dd13d338cb5568815f7ff45006eb3f19b95822717230",
+        "noisy-once-estimate.json": "066b40f2360d4c9acc2e31f80365955c1f98b48154c0f1433611bf9afd10ebce",
+        "slider-cap.obj": "048c6d90d686a008ad6c44fef11ef4b792c69ac8771865901989707dd3943cd2",
+        "once-estimate.json": "2d18feff0cd51539b8392563a4efe2226fb996753fec0bec746b45b2d3c09da9",
+        "parameters.json": "c59e32d3552e3b22b77310455610a0e2140b130210e9f7ef327989fac038438f"
+      }
+    }
+  ],
+  "execution_gate": "Only after candidate selection frozen; do not retune on these outcomes",
+  "actor_asset_id_input": false,
+  "training_registry": "runs/newknife-20261005/batch/config/registry.json"
+}

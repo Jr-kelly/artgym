@@ -10,7 +10,7 @@ import numpy as np
 from scipy.optimize import least_squares
 from scripts.g2_contact_geometry import DigitGeometry
 
-def adapt(estimate,plan,support,reference,thumb_contact_bias_m=None,support_surface_scaling=False,support_fingers=('index','middle','pinky'),geometry=None):
+def adapt(estimate,plan,support,reference,thumb_contact_bias_m=None,support_surface_scaling=False,support_fingers=('index','middle','pinky'),geometry=None,support_contact_bias_m=None,thumb_normal_target=None):
     assert estimate['source'] and estimate['uncertainty_m']>0
     size=np.asarray(estimate['handle_size_WTL_m'],dtype=float)
     assert size.shape==(3,) and np.all(size>0)
@@ -28,6 +28,7 @@ def adapt(estimate,plan,support,reference,thumb_contact_bias_m=None,support_surf
         return weights@v,m[:3,0]
     def solve(q,finger,shift):
         origin,normal=surface(q,finger);target=origin+shift
+        if finger=='thumb' and thumb_normal_target is not None:normal=np.asarray(thumb_normal_target)
         ids=[h.names.index('hand_r_'+finger+'_joint'+str(j)) for j in range(1,5)];start=q.copy()
         def residual(x):
             v=start.copy();v[ids]=x;p,n=surface(v,finger)
@@ -52,6 +53,7 @@ def adapt(estimate,plan,support,reference,thumb_contact_bias_m=None,support_surf
             shift=center_delta+point*(size/base-1)
             for axis in [0,1]:
                 if abs(normal[axis])>.5:shift[axis]=center_delta[axis]+np.sign(point[axis])*(size[axis]-base[axis])/2
+        if support_contact_bias_m and f in support_contact_bias_m:shift+=np.asarray(support_contact_bias_m[f])
         q,errors[f]=solve(q,f,shift)
     close=np.clip(q+np.asarray(plan['close_q'])-touch,h.lower+1e-4,h.upper-1e-4)
     opened=np.clip(np.asarray(plan['open_q'])+q-touch,h.lower+1e-4,h.upper-1e-4)
@@ -65,7 +67,7 @@ def adapt(estimate,plan,support,reference,thumb_contact_bias_m=None,support_surf
         if ref.get('posture_preload'):
             row['q_thumb_preloaded']=(adapted[16:]+np.asarray(row['q_thumb_preloaded'])-np.asarray(row['q_thumb'])).tolist()
         row['q_thumb']=adapted[16:].tolist();trajectory_errors.append(error)
-        for key in ['minimum_knife_gap_m','minimum_self_gap_m','pad_facing_cosine','maximum_joint_step_rad','message','optimizer_success']:row.pop(key,None)
+        for key in ['minimum_knife_gap_m','minimum_self_gap_m','pad_facing_cosine','maximum_joint_step_rad','message','optimizer_success','point_motor_nominal_knife_m','facing','minimum_motor_self_gap_m','nominal_normal_relief_m']:row.pop(key,None)
         row['point_error_m']=error;row['feasible']=error<.00025
     ref.pop('support_preload_schedule',None)
     ref['initial_geometry_estimate']=estimate

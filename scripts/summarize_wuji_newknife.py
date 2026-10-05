@@ -1,0 +1,14 @@
+"""Collect immutable newknife measurements, training, and native results by evidence type."""
+import argparse,json,hashlib,subprocess
+from pathlib import Path
+R=Path(__file__).resolve().parents[1];D=R/'research/newknife-20261005';B=R/'runs/newknife-20261005'
+def load(p):return json.loads(p.read_text())
+def main():
+ p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);a=p.parse_args();rows=[]
+ for group,pattern in [('native_development','continuous/*/simulation/newknife-evaluation.json'),('development','development/**/simulation/newknife-evaluation.json'),('frozen_heldout','validation/**/simulation/newknife-evaluation.json')]:
+  for path in sorted(B.glob(pattern)):
+   e=load(path);trial=path.parent;kind=('diagnostic_not_countable' if (trial.parent/'DIAGNOSTIC-SCOPE.json').exists() else 'trained_native_development' if any(part.startswith('faithful-') for part in trial.parts) else 'native_development') if group=='development' else group;report=load(trial/'report.json');cmdpath=trial.parent/'command.json';cmd=load(cmdpath) if cmdpath.exists() else [];checkpoint=trial.parent/'checkpoint-provenance.json';provenance=load(checkpoint) if checkpoint.exists() else {}
+   rows.append(dict(name=str(trial.relative_to(B)),evidence_type=kind,unmatched_hold_protocol=('seed11-u50-v1' in str(trial)),evaluation=e,checkpoint=provenance,controller=dict(residual_checkpoint=report.get('residual_checkpoint'),thumb_residual_scale=report.get('thumb_residual_scale_override_rad'),scheduled_target_holds='--scheduled-target-holds' in cmd,postlift_transfer='--postlift-regrasp' in cmd),raw_videos=[str(v.relative_to(R)) for v in trial.glob('*.mp4')],evidence=str(path.relative_to(R))))
+ result=dict(scope=__doc__,source_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip(),asset=load(R/'assets/objects/knife_wuji_newknife_20261005/nominal-v5/parameters.json'),reference_resistance=load(D/'RESISTANCE-CALIBRATION.json'),task_criterion=load(D/'TASK-CRITERION-v1.json'),training=load(D/'THUMB-TRAINING-RESULTS.json') if (D/'THUMB-TRAINING-RESULTS.json').exists() else None,trials=rows,counts=dict(complete_native_trials=len(rows),native_passes=sum(r['evaluation']['pass_all'] and r['evidence_type']!='diagnostic_not_countable' and not r['unmatched_hold_protocol'] for r in rows),diagnostic_trials=sum(r['evidence_type']=='diagnostic_not_countable' for r in rows),heldout_trials=sum(r['evidence_type']=='frozen_heldout' for r in rows)),real_robot_ran=False,real_force_curve_measured=False,measurement_scope='75gf userreference plus isolatedsimulation calibration; assumed variablecurve',private_inputs_published=False)
+ a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(result,indent=2));print(json.dumps(result['counts']))
+if __name__=='__main__':main()

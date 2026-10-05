@@ -8,7 +8,13 @@ from pathlib import Path
 import numpy as np
 
 def build(estimate,output):
- output=Path(output);output.mkdir(parents=True,exist_ok=False)
+ output=Path(output)
+ if estimate.get('newknife_contact_geometry'):
+  from scripts.build_wuji_newknife import build as build_new
+  w,t,l=estimate['handle_size_WTL_m'];sw,sp,sl=estimate['slider_size_WTL_m'];z=-.02205+estimate['slider_contact_shift_m'][2]
+  build_new(output,length=l,width=w,thickness=t,slider_length=sl,slider_width=sw,protrusion=sp,proximal=z+l/2-sl/2)
+  return output/'spec.json'
+ output.mkdir(parents=True,exist_ok=False)
  source=Path('assets/objects/knife_wuji_real_size_20261002/000');tree=ET.parse(source/'mobility.urdf');size=np.asarray(estimate['handle_size_WTL_m']);slider=np.asarray(estimate['slider_size_WTL_m']);delta=np.asarray(estimate['slider_contact_shift_m']);origin=np.array([0,.0075,.010624586881962734])+delta;origin[1]+=(size[1]-.012)/2
  shutil.copy2(source/'slider-shoulder.obj',output/'slider-shoulder.obj')
  for box in tree.findall("./link[@name='link_0']/visual/geometry/box")+tree.findall("./link[@name='link_0']/collision/geometry/box"):box.set('size',' '.join(map(str,size)))
@@ -27,7 +33,7 @@ def rematch_open_preform(plan,spec):
  from scripts.g2_contact_geometry import DigitGeometry
  g=DigitGeometry(knife_spec=spec);w=np.asarray(plan['wrist_in_knife']);start=np.asarray(plan['open_q']);rows=[]
  for extra in [0.,.15,.30]:
-  q=start.copy();q[16]-=extra;gap=g.minimum_gap(q,w,g.knife_geometry.lower,'thumb');margin=float(np.minimum(q-g.w.lower,g.w.upper-q).min());pairs=g.self_gaps(q,'thumb')+g.pair_gaps(q,[('hand_r_thumb_pad_link','hand_r_base_link'),('hand_r_thumb_link4','hand_r_base_link')]);selfgap=min(r['gap_lower_bound_m'] for r in pairs);accepted=gap>=.001 and margin>=.005 and selfgap>=.000015
+  q=start.copy();q[16]-=extra;gap=g.minimum_gap(q,w,g.knife_geometry.spec.get('initial_slider_q_m',g.knife_geometry.lower),'thumb');margin=float(np.minimum(q-g.w.lower,g.w.upper-q).min());pairs=g.self_gaps(q,'thumb')+g.pair_gaps(q,[('hand_r_thumb_pad_link','hand_r_base_link'),('hand_r_thumb_link4','hand_r_base_link')]);selfgap=min(r['gap_lower_bound_m'] for r in pairs);accepted=gap>=.001 and margin>=.005 and selfgap>=.000015
   rows.append(dict(extra_thumb_open_rad=extra,once_estimated_knife_gap_m=float(gap),original_limit_margin_rad=margin,original_self_gap_m=float(selfgap),accepted=bool(accepted)))
   if accepted:
    plan['open_q']=q.tolist();plan['close_waypoints'][0]['q']=q.tolist();plan['once_estimated_open_preform']=dict(selected_extra_thumb_open_rad=extra,screen=rows,scope='Common bounded estimate-only preform rule; no reference/close targets changed. Full approach/closure certificate pending');return plan

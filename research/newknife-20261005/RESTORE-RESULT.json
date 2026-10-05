@@ -1,0 +1,87 @@
+{
+  "packets": [
+    {
+      "name": "wrap-runtime.tar.gz",
+      "sha256": "3641e30850d88a41a5db4c385ff06d50ca321bc1f47e6527cd23fdcbd1a43fab"
+    },
+    {
+      "name": "wrap-learning-state.tar.gz",
+      "sha256": "519d9dc52d7cb1091da79901268933e8ccabfa908425bd1b1ccdc98ec84039b4"
+    },
+    {
+      "name": "newknife-overlay.tar.gz",
+      "sha256": "668378ef9ae0f8e89571dfed9ffe36dfcd3f26c336fbb01c32270f89d95fd9be"
+    }
+  ],
+  "verified_files": 1137,
+  "real_robot_ran": false,
+  "scope": "Restore a newknife overlay on the two immutable wrap dependencies.\nA separately installed licensed Isaac Gym runtime is required. Simulation only.\n",
+  "command": [
+    "/home/agiuser/miniconda3/envs/artgym/bin/python",
+    "-m",
+    "scripts.run_wuji_newknife_selected",
+    "--no-video",
+    "--output",
+    "runs/newknife-restored"
+  ],
+  "exit_code": 0,
+  "evaluation": {
+    "effective_cap_contact_fraction": 1.0,
+    "effective_cap_longest_loss_s": 0.0,
+    "version": "newknife-functional-v1",
+    "checks": {
+      "two_cycles": true,
+      "clear": true,
+      "relative_envelope": true,
+      "bounded_return_drift": true,
+      "final_settling": true,
+      "thumb_contact": true,
+      "holds": true,
+      "continuous_pickup": true,
+      "forward_travel": false,
+      "extension_position": false,
+      "return_residual": false,
+      "no_endstop": true,
+      "complete_duration": true,
+      "effective_cap_contact": true
+    },
+    "pass_all": false,
+    "endpoints_relative_initial_m": [
+      0.027664131484925747,
+      0.01818359736353159,
+      0.037863340228796005,
+      0.028298648074269295
+    ],
+    "forward_displacement_m": [
+      0.02762370471828035,
+      0.019679742865264416
+    ],
+    "retract_displacement_m": [
+      -0.009480534121394157,
+      -0.00956469215452671
+    ],
+    "forward_start_m": [
+      4.042676664539613e-05,
+      0.01818359736353159
+    ],
+    "hold_slider_ranges_m": [
+      6.46691769361496e-05,
+      2.7339905500411987e-05,
+      0.0012641549110412598,
+      3.750436007976532e-05
+    ],
+    "old_checks": {
+      "two_cycles": true,
+      "clear": true,
+      "relative_envelope": true,
+      "endpoints": false,
+      "bounded_return_drift": true,
+      "final_settling": true,
+      "thumb_contact": true
+    },
+    "old_rotation_rad": 0.49059282131866466,
+    "thumb_contact_fraction": 1.0,
+    "trace_sha256": "a764498475ddc539a4853b43f24225db2e938b5d6e0011259fd973e413d98a45",
+    "scope": "Simulation only; return to task initial, not proven hidden blade; legacy lower-stop score reported separately"
+  }
+}

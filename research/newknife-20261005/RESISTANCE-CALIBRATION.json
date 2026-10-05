@@ -1,0 +1,35 @@
+{
+  "user_evidence": {
+    "mass_equivalent_gf": 75,
+    "converted_N": 0.73549875,
+    "not_measured": [
+      "fulltravel_curve",
+      "startup_vs_running",
+      "return_direction",
+      "normal_pressure_effect"
+    ]
+  },
+  "model": {
+    "reference": "constantcapacity0.73549875N,zero-velocitynativebrake,damping25000Ns/m",
+    "variable": "reference is forward running mean; +/-8% sinusoidal position variation; return factor0.90; near-rest1.12reference; all curve shapes are assumptions",
+    "running_range_N": [
+      0.608992965,
+      0.79433865
+    ],
+    "startup_N": 0.8237586
+  },
+  "isolated_evidence": {
+    "reference": "runs/newknife-20261005/calibration/reference-v2/summary.json",
+    "low_speed": "runs/newknife-20261005/calibration/profiles-v1/summary.json:constant cases only",
+    "variable": "runs/newknife-20261005/calibration/profiles-v3/summary.json",
+    "rejected": "profiles-v1/v2 variable tests hit endstops; no sustainedforce inference from their endstop portions",
+    "near_threshold_motion": "known0.7365N ->15.074mm in0.6s in each direction;0.735N remains bounded creep~0.029mm/s"
+  },
+  "channels": {
+    "normal_A": "Only later actual handcontact diagnostics",
+    "axial_B": null,
+    "rail_C": null,
+    "robot_axis_force_measured": false
+  },
+  "scope": "Fixture calibration of passivecapacity in simulation, not realknife curve fit or successful robot task"
+}

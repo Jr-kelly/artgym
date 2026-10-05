@@ -1,0 +1,50 @@
+{
+  "object": [
+    0.31,
+    -0.6295,
+    0.7541,
+    0.6532814824381882,
+    0.2705980500730985,
+    0.27059805007309856,
+    0.6532814824381884
+  ],
+  "object_world_matrix": [
+    [
+      0.7071067811865475,
+      -1.5700924586837752e-16,
+      0.7071067811865476,
+      0.31
+    ],
+    [
+      0.7071067811865476,
+      1.570092458683775e-16,
+      -0.7071067811865475,
+      -0.6295
+    ],
+    [
+      0.0,
+      1.0,
+      2.220446049250313e-16,
+      0.7541
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "grasp_q": [
+    -1.2733178613892855,
+    -0.5360403125621638,
+    -0.4464844706487833,
+    -0.4121265451025881,
+    2.6663058274919638,
+    0.4188198055959574,
+    0.8152620900426989
+  ],
+  "source": "Known permissible tabletop corner placement and noisy initial dimensional observation",
+  "scope": "Once-estimate adaptation of the direct wrap/corner pickup, without transfer.\n\nThe input is a labelled noisy initial observation. It does not read an asset\nID, physical geometry, contact, force, or a running object's state. Original\nmeshes and actuator limits must be screened separately before execution.\nPad IK preserves nominal preload; physical joint/pad support is not assumed.\n",
+  "table_y_m": -0.23,
+  "initial_body_root_inset_m": 0.01
+}

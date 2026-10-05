@@ -1,0 +1,47 @@
+{
+  "input": {
+    "source": "Synthetic initial dimensional observation centered at user supplied values; uncertainty is assumed, not sensor calibration",
+    "uncertainty_m": 0.0003,
+    "handle_size_WTL_m": [
+      0.019,
+      0.008,
+      0.144
+    ],
+    "slider_size_WTL_m": [
+      0.007,
+      0.002,
+      0.032
+    ],
+    "slider_contact_shift_m": [
+      0,
+      -0.001,
+      -0.003949999999999995
+    ],
+    "initial_slider_q_m": 0.0,
+    "newknife_contact_geometry": true
+  },
+  "planned_thumb_contact_bias_knife_m": [
+    0.0025,
+    0.0,
+    0.006
+  ],
+  "contact_errors_m": {
+    "thumb": 6.508444735430391e-05,
+    "index": 8.234081835159053e-05,
+    "middle": 3.2063967850021553e-06,
+    "pinky": 0.0033019496040240506
+  },
+  "trajectory_max_error_m": 8.040940226988575e-05,
+  "no_physical_asset_read": true,
+  "scope": "Once-estimate adaptation of the direct wrap/corner pickup, without transfer.\n\nThe input is a labelled noisy initial observation. It does not read an asset\nID, physical geometry, contact, force, or a running object's state. Original\nmeshes and actuator limits must be screened separately before execution.\nPad IK preserves nominal preload; physical joint/pad support is not assumed.\n",
+  "support_surface_scaling": true,
+  "grip_tail_shift_m": 0.006,
+  "body_root_inset_m": 0.01,
+  "arm_ik": {
+    "residual": 9.18454789670194e-09,
+    "position_m": 2.029622452657307e-09,
+    "rotation_rad": 4.2948857099486846e-09
+  },
+  "original_mesh_acquisition_and_full40_motor_certificate_pending": true,
+  "once_estimated_collision_spec": "runs/newknife-20261005/preparation/capfront-v2/estimated-collision/spec.json"
+}

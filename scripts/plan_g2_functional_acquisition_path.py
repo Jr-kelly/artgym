@@ -26,9 +26,9 @@ def main():
         lifted[0,3]-=a.extract_outward;second,sd=plan_translation(k,first[-1],lifted,2.,1/30,table)
         lift=first+second;ld=dict(extraction=fd,vertical=sd,scope='Two known motor-only segments; no object state assignment/contact trigger')
     else:lift,ld=plan_translation(k,approach[-1],lifted,4.,1/30,table)
-    rows=[];frames=g.w.forward(openq);parts=g.knife_geometry.collision_parts(-.03267458688196273)
+    rows=[];frames=g.w.forward(openq);initial_slider=g.knife_geometry.spec.get('initial_slider_q_m',-.03267458688196273);parts=g.knife_geometry.collision_parts(initial_slider)
     for i,qarm in enumerate([start]+approach):
-        wrist=k.forward(qarm);wo=np.linalg.inv(world)@wrist;knife_gap=min(g.minimum_gap(openq,wo,-.03267458688196273,f) for f in FINGERS);tablegaps=[]
+        wrist=k.forward(qarm);wo=np.linalg.inv(world)@wrist;knife_gap=min(g.minimum_gap(openq,wo,initial_slider,f) for f in FINGERS);tablegaps=[]
         for name,meshes in g.meshes.items():
             mat=wrist@frames[name]
             for v,n in meshes:

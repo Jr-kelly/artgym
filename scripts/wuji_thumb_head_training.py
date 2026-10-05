@@ -2,12 +2,13 @@
 import torch
 
 
-def optimizer(model, thumb_learning_rate=3e-5):
+def optimizer(model, thumb_learning_rate=3e-5, train_support=False):
     assert 1e-6<=thumb_learning_rate<=3e-4
     for layer in list(model.actor.children())[:-1]:
         for parameter in layer.parameters():parameter.requires_grad_(False)
     for parameter in [model.actor[-1].weight,model.actor[-1].bias,model.logstd]:
-        mask=torch.zeros_like(parameter);mask[16:]=1
+        mask=torch.ones_like(parameter) if train_support else torch.zeros_like(parameter)
+        mask[16:]=1
         parameter.register_hook(lambda gradient,mask=mask:gradient*mask)
     return torch.optim.Adam([
         dict(params=list(model.actor[-1].parameters())+[model.logstd],lr=thumb_learning_rate),

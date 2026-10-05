@@ -1,0 +1,55 @@
+{
+  "functional_demo_ready": false,
+  "delivery_complete": false,
+  "summary": "新刀资产与0.7355N参考阻力完成；连续取刀与保持实现。最终录像两轮实际前移27.62/19.68mm，回收残差18.18/28.30mm，功能任务未通过。三个冻结泛化0/3通过。",
+  "trials": [
+    {
+      "label": "标称恒阻力（最终录像）",
+      "role": "冻结后同机复验",
+      "trial": "runs/newknife-20261005/continuous/frozen-selected-constant-video-v1/simulation"
+    },
+    {
+      "label": "标称变化阻力",
+      "role": "冻结前开发选型",
+      "trial": "runs/newknife-20261005/development/faithful-center-tail-constant-motor-v1/variable/simulation"
+    },
+    {
+      "label": "small-low",
+      "role": "冻结必要泛化",
+      "trial": "runs/newknife-20261005/validation/frozen-small-low-v1/physical/simulation",
+      "failure": "Original geometry/actuator preparation gate rejected; not physically executed"
+    },
+    {
+      "label": "large-high",
+      "role": "冻结必要泛化",
+      "trial": "runs/newknife-20261005/validation/frozen-large-high-v1/physical/simulation",
+      "failure": "Frozen full-task checks failed"
+    },
+    {
+      "label": "middle-variable",
+      "role": "冻结必要泛化",
+      "trial": "runs/newknife-20261005/validation/frozen-middle-variable-v1/physical/simulation",
+      "failure": "Frozen full-task checks failed"
+    }
+  ],
+  "videos": {
+    "selected-synchronized.mp4": "runs/newknife-20261005/videos/selected-synchronized.mp4",
+    "selected-full-scene.mp4": "runs/newknife-20261005/continuous/frozen-selected-constant-video-v1/simulation/continuous.mp4",
+    "selected-closeup.mp4": "runs/newknife-20261005/continuous/frozen-selected-constant-video-v1/simulation/hand-closeup.mp4"
+  },
+  "conclusions": [
+    "冻结constant-motor100权重SHA256 6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e；统一一次初始几何适配，不按资产/负载选择权重。",
+    "离线接触诊断：回程真实滑块法向力均值约0.807/0.740N，接触持续，但拇指pad中心相对刀身实际轴向回程仅约9.94/13.35mm。三个压力偏移关节在0.1rad软件边界约85–91%时间；这不是硬件绝对不可行证明。",
+    "已否决扩大压力边界、失效姿态路径、动态支撑命令碰撞方案；未扩大原执行器能力或放宽功能判据。",
+    "两轮有限训练（各四组128env×100update，共6553600transition）及所有失败保留；新抓姿训练存在GPU broadphase容量警告，拟合可能漏交互。8个选型单env原生回放无该警告，但0/8全通过。",
+    "空目录恢复校验1137个文件，真实36秒运行退出码0，与最终视频轨迹SHA相同；动作评分仍false。",
+    "泛化：small-low几何限位/间隙拒绝，large-high持续操作接触失败，middle-variable前移/回收失败。不能宣称覆盖完整连续范围。",
+    "下一项可改变决策的工作：在既有标称失败上建立保持轴向回程的法向/轴向解耦动作表示，并先修复批量场景碰撞容量、验证单env一致性再训练。当前冻结泛化结果不用于调参。",
+    "没有真实机器人执行；实刀轴向力曲线、B/C力通道、SDK动作映射与硬件验收仍缺。"
+  ],
+  "real_robot_ran": false,
+  "necessary_generalization_resolved": false,
+  "axial_force_measurement_resolved": false,
+  "hardware_ready": false,
+  "goal_complete": false
+}
