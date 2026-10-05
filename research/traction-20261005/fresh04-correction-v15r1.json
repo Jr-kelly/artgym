@@ -1,0 +1,32 @@
+{
+  "name": "fresh04-v15r1",
+  "gpu": 3,
+  "command": [
+    "/home/wangjiarui/artgym-runtime/bin/python",
+    "-m",
+    "scripts.run_wuji_traction_selected",
+    "--no-video",
+    "--output",
+    "runs/traction-20261005/validation/fresh04-v15r1",
+    "--initial-estimate",
+    "runs/traction-20261005/validation/fresh-inputs-v15/fresh04/once-estimate.json",
+    "--knife-asset",
+    "runs/traction-20261005/validation/fresh-inputs-v15/fresh04/mobility.urdf",
+    "--load",
+    "0.2",
+    "--detent",
+    "0.2",
+    "--hand-friction",
+    "0.75",
+    "--actuation-delay-frames",
+    "0",
+    "--observation-noise",
+    "0.0003",
+    "--observation-bias",
+    ".0002",
+    "--load-profile",
+    "sinusoidal",
+    "--seed",
+    "2026100518"
+  ]
+}

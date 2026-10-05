@@ -38,6 +38,9 @@ def main():
     new['close_waypoints'][-1]['q']=new['close_q']
     from scripts.wuji_once_estimated_collision_geometry import rematch_open_preform
     new=rematch_open_preform(new,proxy)
+    if 'axial_jacobian_m_per_rad' in ref['rows'][0]:
+        from scripts.wuji_traction_axial_geometry import attach_axial_jacobians
+        ref=attach_axial_jacobians(new,ref)
     world=np.asarray(loc['object_world_matrix'])
     world[0,3]=.3+a.body_root_inset
     world[2,3]=.7501+estimate['handle_size_WTL_m'][1]/2

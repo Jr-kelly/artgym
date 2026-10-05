@@ -15,7 +15,7 @@ from scripts.wuji_quaternion_hemisphere import align_quaternion_hemisphere
 from isaacgymenvs.deploy.student_policy_runtime import reset_player_rnn_state
 
 class G2R800Policy(FrozenPolicy):
-    def __init__(self, cfg, teacher, student, geometry=None,thumb_action_gain=1.,support_action_gain=1.,residual_checkpoint=None,thumb_reference_override=None,support_residual_scale_override=None):
+    def __init__(self, cfg, teacher, student, geometry=None,thumb_action_gain=1.,support_action_gain=1.,residual_checkpoint=None,thumb_reference_override=None,support_residual_scale_override=None,thumb_residual_scale_override=None):
         super().__init__(cfg, teacher, None, geometry=geometry or [.016,.012,.135,.01,.003,.03])
         artifact = torch.load(student, map_location='cpu')
         assert artifact['format'] == 'wuji-unified-student-v1'
@@ -77,8 +77,11 @@ class G2R800Policy(FrozenPolicy):
                 cfg.task.env.supportActionSpan=self.known.support_span
             if support_residual_scale_override is not None:
                 assert self.action_parameterization=='bounded-motor-offset'
-                assert 0<support_residual_scale_override<=float(cfg.task.env.supportActionSpan)
+                assert 0<=support_residual_scale_override<=float(cfg.task.env.supportActionSpan)
                 self.residual_scale[:16]=float(support_residual_scale_override)
+            if thumb_residual_scale_override is not None:
+                assert self.action_parameterization=='bounded-motor-offset' and 0<=thumb_residual_scale_override<=.2
+                self.residual_scale[16:]=float(thumb_residual_scale_override)
             self.action_base_mode=saved.get('action_base_mode','r800')
             if self.action_base_mode=='geometric':
                 from scripts.wuji_scheduled_thumb_reference import ScheduledThumbReference

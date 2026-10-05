@@ -16,12 +16,22 @@ def run(args):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--output',type=Path,required=True)
+    p.add_argument('--selection',type=Path,help='Explicit frozen command manifest; original default selection unchanged')
+    p.add_argument('--load',type=float,help='Simulator brake capacity only; never a policy input')
+    p.add_argument('--detent',type=float,help='Simulator start/groove capacity only')
+    p.add_argument('--no-video',action='store_true')
+    for name in ['hand-friction','knife-friction','observation-noise','observation-bias']:
+        p.add_argument('--'+name,type=float,help='Explicit frozen-policy validation condition')
+    p.add_argument('--actuation-delay-frames',type=int,choices=[0,1])
+    p.add_argument('--load-profile',choices=['constant','sinusoidal','triangular','pulse'])
+    p.add_argument('--seed',type=int)
     p.add_argument('--preset',choices=['wrap','source2'],default='wrap',
                    help='Frozen wrap corner pickup (default) or earlier source2 scheduled-hold fallback')
     p.add_argument('--initial-estimate',type=Path)
     p.add_argument('--knife-asset',type=Path,help='Physical simulator asset only')
     a=p.parse_args();out=a.output.resolve();assert not out.exists()
     freeze='FROZEN-WRAP-CONTINUOUS-CANDIDATE-V12.json' if a.preset=='wrap' else 'FROZEN-CONTINUOUS-CANDIDATE-V10.json'
+    if a.selection:freeze=str(a.selection.resolve())
     frozen=json.loads((R/'research/wrap-force-20261004'/freeze).read_text())
     cmd=frozen['command'] if isinstance(frozen['command'],list) else json.loads((R/frozen['command']).read_text())
     if isinstance(cmd,dict):cmd=cmd['command']
@@ -30,6 +40,18 @@ def main():
     expected=frozen.get('checkpoint_sha256',frozen.get('weight_sha256'))
     if expected:assert hashlib.sha256(weight.read_bytes()).hexdigest()==expected
     cmd[cmd.index('--output')+1]=str(out/'simulation')
+    for flag,value in [('--load',a.load),('--detent',a.detent)]:
+        if value is not None:
+            assert value>=0
+            cmd[cmd.index(flag)+1]=str(value)
+    if a.no_video and '--video' in cmd:cmd.remove('--video')
+    for name in ['hand-friction','knife-friction','observation-noise','observation-bias',
+                 'actuation-delay-frames','load-profile','seed']:
+        value=getattr(a,name.replace('-','_'))
+        if value is not None:
+            flag='--'+name
+            if flag in cmd:cmd[cmd.index(flag)+1]=str(value)
+            else:cmd += [flag,str(value)]
     if a.initial_estimate and a.preset=='wrap':
         prepared=out/'initial-preparation'
         run(['scripts.adapt_wuji_direct_corner_initial_geometry','--estimate',str(a.initial_estimate.resolve()),
@@ -43,7 +65,7 @@ def main():
              '--output',str(prepared/'closure-audit.json')])
         run(['scripts.audit_g2_anchored_thumb_motor','--reference',str(prepared/'reference.json'),
              '--motor-plan',str(prepared/'motor-plan.json'),'--knife-spec',
-             'research/robust-knife-family-20261003/real-knife-asset-spec.json',
+             str(prepared/'estimated-collision/spec.json'),
              '--samples','81','--output',str(prepared/'full-stroke-audit.json')])
         for flag,name in [('--grasp-plan','motor-plan.json'),('--thumb-reference-override','reference.json'),
                           ('--acquisition-path','acquisition/acquisition-path.json'),

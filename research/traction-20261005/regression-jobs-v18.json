@@ -1,0 +1,82 @@
+[
+  {
+    "name": "regression-thin130x14x10-020-v18",
+    "gpu": 0,
+    "command": [
+      "/home/wangjiarui/artgym-runtime/bin/python",
+      "-m",
+      "scripts.run_wuji_traction_selected",
+      "--no-video",
+      "--load",
+      ".2",
+      "--detent",
+      ".2",
+      "--initial-estimate",
+      "runs/traction-20261005/validation/regression-inputs-v18/thin130x14x10/once-estimate.json",
+      "--knife-asset",
+      "runs/traction-20261005/validation/regression-inputs-v18/thin130x14x10/mobility.urdf",
+      "--output",
+      "runs/traction-20261005/validation/regression-thin130x14x10-020-v18"
+    ]
+  },
+  {
+    "name": "regression-nominal-axial-plus5mm-020-v18",
+    "gpu": 1,
+    "command": [
+      "/home/wangjiarui/artgym-runtime/bin/python",
+      "-m",
+      "scripts.run_wuji_traction_selected",
+      "--no-video",
+      "--load",
+      ".2",
+      "--detent",
+      ".2",
+      "--initial-estimate",
+      "runs/traction-20261005/validation/regression-inputs-v18/nominal-axial-plus5mm/once-estimate.json",
+      "--knife-asset",
+      "runs/traction-20261005/validation/regression-inputs-v18/nominal-axial-plus5mm/mobility.urdf",
+      "--output",
+      "runs/traction-20261005/validation/regression-nominal-axial-plus5mm-020-v18"
+    ]
+  },
+  {
+    "name": "regression-012-020-v18",
+    "gpu": 2,
+    "command": [
+      "/home/wangjiarui/artgym-runtime/bin/python",
+      "-m",
+      "scripts.run_wuji_traction_selected",
+      "--no-video",
+      "--load",
+      ".2",
+      "--detent",
+      ".2",
+      "--initial-estimate",
+      "runs/traction-20261005/validation/regression-inputs-v18/012/once-estimate.json",
+      "--knife-asset",
+      "runs/traction-20261005/validation/regression-inputs-v18/012/mobility.urdf",
+      "--output",
+      "runs/traction-20261005/validation/regression-012-020-v18"
+    ]
+  },
+  {
+    "name": "regression-015-020-v18",
+    "gpu": 3,
+    "command": [
+      "/home/wangjiarui/artgym-runtime/bin/python",
+      "-m",
+      "scripts.run_wuji_traction_selected",
+      "--no-video",
+      "--load",
+      ".2",
+      "--detent",
+      ".2",
+      "--initial-estimate",
+      "runs/traction-20261005/validation/regression-inputs-v18/015/once-estimate.json",
+      "--knife-asset",
+      "runs/traction-20261005/validation/regression-inputs-v18/015/mobility.urdf",
+      "--output",
+      "runs/traction-20261005/validation/regression-015-020-v18"
+    ]
+  }
+]
