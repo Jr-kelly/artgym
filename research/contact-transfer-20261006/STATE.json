@@ -4,25 +4,30 @@
   "baseline_local_commit": "df7a3240c92b2d2c771d3981b4be1d012190f4c9",
   "baseline_github_commit": "cae68dbda71dcb31954d34bd669394e445a2ccc4",
   "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
-  "phase": "Implementation and validation complete; packaging fresh videos and reproducible delivery",
+  "phase": "Implemented, independently verified and publicly delivered; upper geometry coordination and real calibration remain",
   "real_robot_ran": false,
-  "delivery_complete": false,
-  "next": "Publish exact source branch/tag and verify fresh Release/video downloads; no remaining useful jobs launched",
+  "delivery_complete": true,
+  "next": "This delivery complete. Next useful work: real G2/right-Wuji connection, calibrated axes/limits/current/timing and same-grasp two-axis sustained force; upper-geometry coordinated support intervention/targeted training if continuing simulation. No gain sweeps, repeated package restore, subagents or automatic robot motion.",
   "last_event": {
-    "utc": "2026-10-05T16:45:44.432060+00:00",
-    "event": "isolated_small_overlay_representative_restore_passed",
+    "utc": "2026-10-05T16:54:35.325560+00:00",
+    "event": "final_delivery_resource_and_continuation_closeout",
     "evidence": [
-      "research/contact-transfer-20261006/RESTORE-VERIFICATION.json"
+      "research/contact-transfer-20261006/RESOURCE-CLOSEOUT.json",
+      "research/contact-transfer-20261006/PUBLIC-DELIVERY-RECEIPT.json",
+      "research/contact-transfer-20261006/PUBLIC-DOWNLOAD-VERIFICATION.json"
     ],
     "config": {
-      "overlay_sha256": "b7f27569368055ae3b8596acb10c80789ffb055ed59c125db1733275e5b09adb",
-      "verified_files": 2360,
-      "active_forward_mm": 24.36626224880456,
-      "trace_sha256": "d7ed4f78dbced95a8ddc0d0e36ddf8522767821ac6f8a428d82ea8b3cd7db3c8",
-      "exact_match": true
+      "public_assets": 37,
+      "new_uncut_videos": 24,
+      "simulated_robot_runs": 8,
+      "real_robot_ran": false,
+      "task_jobs_active": 0,
+      "near_small_corrected_measured_path_pass": true,
+      "frozen_new_task_passes": 1,
+      "frozen_new_task_total": 2
     },
     "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
-    "next": "Publish exact source branch/tag and verify fresh Release/video downloads; no remaining useful jobs launched"
+    "next": "This delivery complete. Next useful work: real G2/right-Wuji connection, calibrated axes/limits/current/timing and same-grasp two-axis sustained force; upper-geometry coordinated support intervention/targeted training if continuing simulation. No gain sweeps, repeated package restore, subagents or automatic robot motion."
   },
   "mapping_verified": true,
   "hardware_load_model_status": "Independent virtual work and signed contributions verified; corrected worst38.79% URDF model, not hardware reserve",
@@ -34,5 +39,10 @@
   "minimum_gpu_utilization_requirement": null,
   "gpu_hour_cap": null,
   "reproducible_restore_passed": true,
-  "active_jobs": []
+  "active_jobs": [],
+  "github_branch": "feat/wuji-contact-transfer-20261006",
+  "github_commit": "3b0ffc4eae9bce257af6e03cd20265763ad0fc34",
+  "github_release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-g2-contact-transfer-20261006-v1",
+  "release_source_commit": "3b0ffc4eae9bce257af6e03cd20265763ad0fc34",
+  "goal_simulation_and_delivery_complete": true
 }
