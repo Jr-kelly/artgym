@@ -1,0 +1,154 @@
+[
+  {
+    "name": "nominal125",
+    "kind": "retained_baseline",
+    "label": "Retained nominal1.25N regression",
+    "task_pass": true,
+    "hardware_ready": false,
+    "uncut": true,
+    "frames": 660,
+    "fps": 30,
+    "duration_s": 22,
+    "source_trial": "runs/contact-transfer-20261006/regression/nominal-125-video-v1/simulation",
+    "videos": {
+      "nominal125-synchronized.mp4": "979f25264cec8bb0cdeab2536379653d9d6b56579864f274be4166906dc1601d",
+      "nominal125-continuous.mp4": "ad7e59094a7a01db4eaefe72c615c2bb87556fcb82f29c107792dcddda11dd84",
+      "nominal125-closeup.mp4": "561d9bec7d3848ab3c108b2a96cef57a5317aff9d495effa39afb5f3fcc1d6b6"
+    },
+    "source_trace_sha256": "d7ed4f78dbced95a8ddc0d0e36ddf8522767821ac6f8a428d82ea8b3cd7db3c8",
+    "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e"
+  },
+  {
+    "name": "near-small-prefix",
+    "kind": "development",
+    "label": "Near-small34mm nominal prefix",
+    "task_pass": true,
+    "hardware_ready": false,
+    "uncut": true,
+    "frames": 660,
+    "fps": 30,
+    "duration_s": 22,
+    "source_trial": "runs/contact-transfer-20261006/development/near-small-prefix-physical-v1/simulation",
+    "videos": {
+      "near-small-prefix-synchronized.mp4": "c5c81cdf6192e2e26d6a35c41a907905344c920cc4bc2fb606e836870056b46e",
+      "near-small-prefix-continuous.mp4": "0db640f22f966d47419243bffc6c5ebe7e9acec6d4c2bba7ee558c555ac02cfd",
+      "near-small-prefix-closeup.mp4": "4cf83a5752811bbb2ad066c279052f9ea39525c640aa43d0ff9800430323d73c"
+    },
+    "source_trace_sha256": "8cc39d2f21b2ceeb357a5513ee95b5cbc1a38147345fac5380a7cd4d4bbe12ad",
+    "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e"
+  },
+  {
+    "name": "near-small-guard",
+    "kind": "development_rejected",
+    "label": "Near-small actual-target clearance guard",
+    "task_pass": false,
+    "hardware_ready": false,
+    "uncut": true,
+    "frames": 660,
+    "fps": 30,
+    "duration_s": 22,
+    "source_trial": "runs/contact-transfer-20261006/development/near-small-guarded-v2/simulation",
+    "videos": {
+      "near-small-guard-synchronized.mp4": "e18c2b55849fa3e911e9d602d1e2709432b24d2131c9f4702d1dac089d1de6f0",
+      "near-small-guard-continuous.mp4": "885d44036323f1f3c33c7c1e0007bdd4831bbad599251472c3c84c1395a7542d",
+      "near-small-guard-closeup.mp4": "73f9749a0dbb43b25900b68186292565434d2744add1be6976aab6465da93912"
+    },
+    "source_trace_sha256": "a81a17d52c80362a374bfbfa18250c446265833bb0e693f5eb6c4ce240b85331",
+    "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e"
+  },
+  {
+    "name": "large-baseline",
+    "kind": "development_baseline",
+    "label": "Large original28mm",
+    "task_pass": false,
+    "hardware_ready": false,
+    "uncut": true,
+    "frames": 660,
+    "fps": 30,
+    "duration_s": 22,
+    "source_trial": "runs/contact-transfer-20261006/development/large-baseline-video-v1/simulation",
+    "videos": {
+      "large-baseline-synchronized.mp4": "11eefec58b0d8536aed8487022a0fe3d22d8b8c3b146f2d4833465a5ab60dc86",
+      "large-baseline-continuous.mp4": "4a69ee7ca0507ceb51405552b12d9cbc5dd548eb9d4cfa1e17bda0ca9cf264d9",
+      "large-baseline-closeup.mp4": "f7d40f2346428b06d237c697dc6d8edcaaa915b5f92ed06207ecbaab39efb6f3"
+    },
+    "source_trace_sha256": "96cf8d82c5ee4239fc3716df8e4eecf6a002c9eadc2056a6078238128e1039eb",
+    "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e"
+  },
+  {
+    "name": "large-normal-diagnostic",
+    "kind": "diagnostic_only",
+    "label": "Large full-normal35mm; rate-limited diagnostic, not certified promotion",
+    "task_pass": false,
+    "hardware_ready": false,
+    "uncut": true,
+    "frames": 660,
+    "fps": 30,
+    "duration_s": 22,
+    "source_trial": "runs/contact-transfer-20261006/development/large-fixed-normal35-physical-v1/simulation",
+    "videos": {
+      "large-normal-diagnostic-synchronized.mp4": "25575dcae0b1dac5af295c8c80e8235490ae1c9a6eccfd61b932133d0a894065",
+      "large-normal-diagnostic-continuous.mp4": "eccf80f489c945e0aa847be78f3371c391b54f35186b36562d9da71c472c02e3",
+      "large-normal-diagnostic-closeup.mp4": "8f08c0f366515c2108d6dc3426d44acd13b9fa9d298338ed87e10d87f92a6540"
+    },
+    "source_trace_sha256": "f45866f8f6a9d6fd8c072b57fec126ebd413a5cc0915af8c6ec08bcf6267db8b",
+    "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e"
+  },
+  {
+    "name": "large-center",
+    "kind": "development_rejected",
+    "label": "Large estimate-driven .2cap-width contact bias",
+    "task_pass": false,
+    "hardware_ready": false,
+    "uncut": true,
+    "frames": 660,
+    "fps": 30,
+    "duration_s": 22,
+    "source_trial": "runs/contact-transfer-20261006/development/large-centered35-physical-v1/simulation",
+    "videos": {
+      "large-center-synchronized.mp4": "bd8a4601dfbf8bbebc7ea26092209bcd61eb3a6f0277185cdec8afecaa836807",
+      "large-center-continuous.mp4": "9549bf969607c62f34fa5d73ff5e192384c25a9e4bb3c5be45017bb874df55fb",
+      "large-center-closeup.mp4": "a187f90b54c02fec132280f151edca37a6f509fd8061e5a25e0b02521aef2f9d"
+    },
+    "source_trace_sha256": "b60615494e227e5dad39130ce6e1d86646b37a1ea9884a9838cf8916e5f589a2",
+    "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e"
+  },
+  {
+    "name": "frozen-mid",
+    "kind": "frozen_validation",
+    "label": "NEW mid geometry +1.25N +delay/noise",
+    "task_pass": true,
+    "hardware_ready": false,
+    "uncut": true,
+    "frames": 660,
+    "fps": 30,
+    "duration_s": 22,
+    "source_trial": "runs/contact-transfer-20261006/frozen/mid-high-delay/physical-v1/simulation",
+    "videos": {
+      "frozen-mid-synchronized.mp4": "a4e377adbb60d931c16d4dfcc849be611e200755d123d02bc133f94e33952f6f",
+      "frozen-mid-continuous.mp4": "68314f2becd9a7eb28f0dd48dd34004da168eecbd491da77432aa437a97208c7",
+      "frozen-mid-closeup.mp4": "d7cb3e4087d0f318bd90931b75a281f8b308a31bb1e10a9ab0c9b0e2b036e463"
+    },
+    "source_trace_sha256": "8c96365ba434f2e5784bae0457836e8a8f19e790d2b191b50da108bdd1ec6e37",
+    "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e"
+  },
+  {
+    "name": "frozen-upper",
+    "kind": "frozen_validation",
+    "label": "NEW upper geometry +variable .93N +friction/noise",
+    "task_pass": false,
+    "hardware_ready": false,
+    "uncut": true,
+    "frames": 660,
+    "fps": 30,
+    "duration_s": 22,
+    "source_trial": "runs/contact-transfer-20261006/frozen/upper-geometry-friction/physical-v1/simulation",
+    "videos": {
+      "frozen-upper-synchronized.mp4": "ec657542a9a60868b69dc385dca8c458803c9a2d5fa014cff8894a3adf4e4687",
+      "frozen-upper-continuous.mp4": "41c62858b29e3003b565920cd56d9e46dd696056fabb72a2f94243db8daa51b7",
+      "frozen-upper-closeup.mp4": "33609704129d91d9d1a678d7a208db0255cce90f1d89b948ca0eacff364f6a5f"
+    },
+    "source_trace_sha256": "a83dc7479674c6ea51af54770f67f278fb453f96a46ee7556fca6dfb946fe014",
+    "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e"
+  }
+]

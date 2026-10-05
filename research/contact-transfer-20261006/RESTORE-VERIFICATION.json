@@ -1,0 +1,64 @@
+{
+  "overlay_sha256": "b7f27569368055ae3b8596acb10c80789ffb055ed59c125db1733275e5b09adb",
+  "verified_overlay_files": 2360,
+  "baseline_source": "/data/research/artgym-experiments-20260921/singlepush-20261005/runs/singlepush-20261005/release/restore-gate-v2",
+  "baseline_is_previously_verified": true,
+  "real_robot_ran": false,
+  "exit_code": 0,
+  "evaluation": {
+    "version": "wuji-extension-only-v1",
+    "checks": {
+      "continuous_pickup": true,
+      "complete_duration": true,
+      "active_forward": true,
+      "hold_above_threshold": true,
+      "hold_stable": true,
+      "clear": true,
+      "body_supported": true,
+      "effective_cap_contact": true,
+      "no_endstop": true,
+      "extension_only_schedule": true
+    },
+    "pass_all": true,
+    "active_forward_m": 0.02436626224880456,
+    "prepush_slider_m": 4.497368718148209e-05,
+    "relative_episode_initial_extension_m": 0.024411235935986042,
+    "hold_range_m": 3.330409526824951e-05,
+    "hold_min_active_m": 0.02434960926984786,
+    "effective_cap_contact_fraction": 1.0,
+    "longest_cap_contact_loss_s": 0.0,
+    "body_max_translation_m": 0.005767983850091696,
+    "body_max_rotation_rad": 0.3430084706808669,
+    "cap_normal_mean_N": 1.016675989192831,
+    "cap_normal_p05_N": 0.7719808742403984,
+    "cap_normal_peak_N": 1.8465182781219482,
+    "fixed_body_normal_mean_N": 0.0,
+    "actual_total_axial_contact_force_N": null,
+    "brake_capacity_min_N": 1.25,
+    "brake_capacity_max_N": 1.25,
+    "thumb_torque_limit_fraction_max": [
+      0.14008340935090047,
+      0.4278257257642014,
+      0.21757636095030888,
+      0.14078206076770824
+    ],
+    "thumb_torque_limit_fraction_p95": [
+      0.13295773726735596,
+      0.40222235470808454,
+      0.20246348229074407,
+      0.13555567882962136
+    ],
+    "thumb_limit_saturation_fraction": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "trace_sha256": "d7ed4f78dbced95a8ddc0d0e36ddf8522767821ac6f8a428d82ea8b3cd7db3c8",
+    "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+  },
+  "trace_exactly_matches_baseline": true,
+  "isolated_pythonpath": true,
+  "restored_root": "runs/contact-transfer-20261006/restored-verification-v2",
+  "earlier_v1_not_counted_independent": true
+}

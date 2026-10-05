@@ -1,0 +1,65 @@
+{
+  "utc": "2026-10-05T16:18:52Z",
+  "movement_commands_sent": 0,
+  "real_robot_ran": false,
+  "usb_inventory": [
+    {
+      "idVendor": "1d6b",
+      "idProduct": "0002",
+      "wuji_vid_pid_match": false
+    },
+    {
+      "idVendor": "1d6b",
+      "idProduct": "0002",
+      "wuji_vid_pid_match": false
+    },
+    {
+      "idVendor": "25a7",
+      "idProduct": "fa65",
+      "wuji_vid_pid_match": false
+    },
+    {
+      "idVendor": "10d7",
+      "idProduct": "b012",
+      "wuji_vid_pid_match": false
+    },
+    {
+      "idVendor": "1d6b",
+      "idProduct": "0003",
+      "wuji_vid_pid_match": false
+    },
+    {
+      "idVendor": "046d",
+      "idProduct": "c31c",
+      "wuji_vid_pid_match": false
+    },
+    {
+      "idVendor": "1d6b",
+      "idProduct": "0003",
+      "wuji_vid_pid_match": false
+    }
+  ],
+  "device_connected": false,
+  "mode": "read_only_sdk",
+  "sdk_version": "1.8.0",
+  "hand_signature": "(serial_number: 'Optional[str]' = None, *, side: 'Optional[str]' = None, usb_pid: 'SupportsIndex' = 8192, usb_vid: 'SupportsIndex' = 1155, mask: 'Optional[Annotated[numpy.typing.ArrayLike, numpy.bool_]]' = None) -> 'None'",
+  "sdk_read_methods": {
+    "read_joint_actual_position": "read_joint_actual_position(self: wujihandpy._core.Hand, timeout: typing.SupportsFloat | typing.SupportsIndex = 0.5) -> numpy.typing.NDArray[numpy.float64]\n",
+    "read_joint_lower_limit": "read_joint_lower_limit(self: wujihandpy._core.Hand, timeout: typing.SupportsFloat | typing.SupportsIndex = 0.5) -> numpy.typing.NDArray[numpy.float64]\n",
+    "read_joint_upper_limit": "read_joint_upper_limit(self: wujihandpy._core.Hand, timeout: typing.SupportsFloat | typing.SupportsIndex = 0.5) -> numpy.typing.NDArray[numpy.float64]\n",
+    "read_joint_effort_limit": "read_joint_effort_limit(self: wujihandpy._core.Hand, timeout: typing.SupportsFloat | typing.SupportsIndex = 0.5) -> numpy.typing.NDArray[numpy.float64]\n",
+    "read_system_time": "read_system_time(self: wujihandpy._core.Hand, timeout: typing.SupportsFloat | typing.SupportsIndex = 0.5) -> numpy.uint32\n"
+  },
+  "sdk_realtime_methods": {
+    "get_joint_actual_position": "get_joint_actual_position(self: wujihandpy._core.IController) -> numpy.typing.NDArray[numpy.float64]\n",
+    "get_joint_actual_effort": "get_joint_actual_effort(self: wujihandpy._core.IController) -> numpy.typing.NDArray[numpy.float64]\n",
+    "set_joint_target_position": "set_joint_target_position(self: wujihandpy._core.IController, value_array: typing.Annotated[numpy.typing.ArrayLike, numpy.float64]) -> None\n"
+  },
+  "sdk_public_usb_enumerator_available": false,
+  "position_unit": "rad",
+  "effort_unit": "A filtered drive quantity; not Nm or contact force",
+  "connection_status": "No connection attempted: USB inventory retained, no exact device serial provided",
+  "samples_written": 0,
+  "device_axes_zero_limits_verified": false,
+  "actual_effort_A": null
+}

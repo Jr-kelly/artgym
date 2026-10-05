@@ -1,0 +1,50 @@
+{
+  "source": "saved_simulation_replay",
+  "records": 181,
+  "hardware_calibration_performed": false,
+  "effort_to_force_calibrated": false,
+  "position_response": [
+    {
+      "joint": "hand_r_thumb_joint1",
+      "sample_dt_s": 0.03333333333333499,
+      "descriptive_increment_delay_s": 0.06666666666666998,
+      "increment_gain": 0.7356634362626813,
+      "fit_mse_rad2": 3.1459557144897986e-06,
+      "tracking_error_mean_rad": -0.04291006478156833,
+      "tracking_error_max_rad": 0.11814820766448975,
+      "scope": "Local recorded motion correlation, not firmware Kp or stiffness. Slow correlated trajectory and contacts prevent causal actuator identification."
+    },
+    {
+      "joint": "hand_r_thumb_joint2",
+      "sample_dt_s": 0.03333333333333499,
+      "descriptive_increment_delay_s": 0.06666666666666998,
+      "increment_gain": 0.3289628638826904,
+      "fit_mse_rad2": 2.3584850084317337e-06,
+      "tracking_error_mean_rad": 0.15113352551973985,
+      "tracking_error_max_rad": 0.2910785526037216,
+      "scope": "Local recorded motion correlation, not firmware Kp or stiffness. Slow correlated trajectory and contacts prevent causal actuator identification."
+    },
+    {
+      "joint": "hand_r_thumb_joint3",
+      "sample_dt_s": 0.03333333333333499,
+      "descriptive_increment_delay_s": 0.0,
+      "increment_gain": 0.556225859516645,
+      "fit_mse_rad2": 5.588656552601384e-06,
+      "tracking_error_mean_rad": -0.04239607836989408,
+      "tracking_error_max_rad": 0.1499490737915039,
+      "scope": "Local recorded motion correlation, not firmware Kp or stiffness. Slow correlated trajectory and contacts prevent causal actuator identification."
+    },
+    {
+      "joint": "hand_r_thumb_joint4",
+      "sample_dt_s": 0.03333333333333499,
+      "descriptive_increment_delay_s": 0.03333333333333499,
+      "increment_gain": 1.135315468792386,
+      "fit_mse_rad2": 7.29183365986374e-06,
+      "tracking_error_mean_rad": -0.026726714542485486,
+      "tracking_error_max_rad": 0.08310514315962791,
+      "scope": "Local recorded motion correlation, not firmware Kp or stiffness. Slow correlated trajectory and contacts prevent causal actuator identification."
+    }
+  ],
+  "external_force": [],
+  "next_hardware_measurements": "Actual right hand limits/axis/zero and firmware timing; simultaneous same-grasp start/middle/end independently aligned normal and axial samples >=1s; known .7355/1.0/1.25N rail loads and slip/displacement. No device data here means no calibration."
+}

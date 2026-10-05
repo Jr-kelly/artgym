@@ -1,0 +1,136 @@
+{
+  "single_hinge_static": {
+    "external_generalized_Nm": -0.12499999999997917,
+    "motor_required_Nm": 0.12499999999997917,
+    "old_plus_formula_Nm": -0.12499999999997917,
+    "passed": true
+  },
+  "trajectory_checks": [
+    {
+      "time_s": 16.0,
+      "world_external_on_hand_N": [
+        -0.8725062405568048,
+        0.9279221614259411,
+        0.9868249031744494
+      ],
+      "knife_external_on_hand_N": [
+        0.0,
+        1.016675989192831,
+        -1.25
+      ],
+      "analytic_minus_finite_difference_max_m_per_rad": 5.828262872320522e-11,
+      "virtual_work_world_J_per_rad": 0.03263086965294339,
+      "virtual_work_knife_J_per_rad": 0.032630869652943394,
+      "signed_external_generalized_Nm": [
+        0.05759355391079872,
+        -0.1054867024080617,
+        0.032170586925774305,
+        0.016312964346572825
+      ],
+      "required_motor_contact_compensation_Nm": [
+        -0.05759355391079872,
+        0.1054867024080617,
+        -0.032170586925774305,
+        -0.016312964346572825
+      ],
+      "raw_sim_motor_Nm": [
+        0.0008184034377336502,
+        0.06457218527793884,
+        0.007355846464633942,
+        0.00567738339304924
+      ],
+      "same_sign_contact_compensation_vs_raw": [
+        false,
+        true,
+        false,
+        false
+      ],
+      "scope": "Raw actual motor includes gravity, PD tracking, multiple contacts and transients. Force vector and marker assumed; total axial force missing. No numerical equality imposed."
+    },
+    {
+      "time_s": 18.0,
+      "world_external_on_hand_N": [
+        -1.1314543041969902,
+        0.7786862208483346,
+        0.8423710548067671
+      ],
+      "knife_external_on_hand_N": [
+        0.0,
+        1.016675989192831,
+        -1.25
+      ],
+      "analytic_minus_finite_difference_max_m_per_rad": 1.1561481503066795e-10,
+      "virtual_work_world_J_per_rad": 0.03265818896939975,
+      "virtual_work_knife_J_per_rad": 0.03265818896939975,
+      "signed_external_generalized_Nm": [
+        0.07870157477081959,
+        -0.07874739084800728,
+        0.05387639682001392,
+        0.026419620929007036
+      ],
+      "required_motor_contact_compensation_Nm": [
+        -0.07870157477081959,
+        0.07874739084800728,
+        -0.05387639682001392,
+        -0.026419620929007036
+      ],
+      "raw_sim_motor_Nm": [
+        -0.007080144248902798,
+        0.17840813100337982,
+        0.016747554764151573,
+        0.00905646476894617
+      ],
+      "same_sign_contact_compensation_vs_raw": [
+        true,
+        true,
+        false,
+        false
+      ],
+      "scope": "Raw actual motor includes gravity, PD tracking, multiple contacts and transients. Force vector and marker assumed; total axial force missing. No numerical equality imposed."
+    },
+    {
+      "time_s": 20.1,
+      "world_external_on_hand_N": [
+        -0.6513066579147403,
+        1.0487029470499587,
+        1.0354476487036344
+      ],
+      "knife_external_on_hand_N": [
+        0.0,
+        1.016675989192831,
+        -1.25
+      ],
+      "analytic_minus_finite_difference_max_m_per_rad": 5.92148084038735e-11,
+      "virtual_work_world_J_per_rad": 0.030504806197166216,
+      "virtual_work_knife_J_per_rad": 0.030504806197166223,
+      "signed_external_generalized_Nm": [
+        0.04826547277861237,
+        -0.0970124582159329,
+        0.036774279862788965,
+        0.02048730456695273
+      ],
+      "required_motor_contact_compensation_Nm": [
+        -0.04826547277861237,
+        0.0970124582159329,
+        -0.036774279862788965,
+        -0.02048730456695273
+      ],
+      "raw_sim_motor_Nm": [
+        -0.04763709381222725,
+        0.03660578280687332,
+        -0.03323737904429436,
+        -0.017525477334856987
+      ],
+      "same_sign_contact_compensation_vs_raw": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "scope": "Raw actual motor includes gravity, PD tracking, multiple contacts and transients. Force vector and marker assumed; total axial force missing. No numerical equality imposed."
+    }
+  ],
+  "equation": "tau_motor=M*qdd+C+g-J.T*F_external",
+  "independent_virtual_work_pass": true,
+  "real_hardware_calibrated": false
+}

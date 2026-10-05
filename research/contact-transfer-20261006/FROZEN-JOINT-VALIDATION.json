@@ -1,0 +1,89 @@
+{
+  "frozen_utc": "2026-10-05T16:31:14.476543+00:00",
+  "entries": [
+    {
+      "name": "upper-geometry-friction",
+      "asset_directory": "assets/objects/knife_wuji_contact_transfer_20261006/frozen-v1/upper-geometry-friction",
+      "physical_parameters": {
+        "length": 0.1475,
+        "width": 0.01975,
+        "thickness": 0.0088,
+        "slider_length": 0.0336,
+        "slider_width": 0.0078,
+        "protrusion": 0.0024,
+        "proximal": 0.034,
+        "mass": 0.059
+      },
+      "initial_estimate": "assets/objects/knife_wuji_contact_transfer_20261006/frozen-v1/upper-geometry-friction/noisy-once-estimate.json",
+      "reference_N": 0.93,
+      "kind": "variable",
+      "native_options": [
+        "--hand-friction",
+        ".75",
+        "--knife-friction",
+        "1.7",
+        "--observation-noise",
+        ".001"
+      ],
+      "hashes": {
+        "resistance.json": "aff227d0d4c77dc26e99241932a54ed5fb93ff717f28264222b529ec2ca8666e",
+        "mobility.urdf": "7a7201b0582ced3ad92e9e8ff70ed1dcbc9c7e6d2c4c887149cdfac8f01d1745",
+        "spec.json": "3b089465bf232fd5dfb473e4e2355f0db72f4214880a7b8a1991d7d5369a6e30",
+        "noisy-once-estimate.json": "c823f64527c73b7dcc44a31aeb13d6ce01b16a0de14821335991fbdadb05701d",
+        "slider-cap.obj": "532e2f75d87606c9b7b5b3fa548caf6629ba06564cddbf0546c0a709ff22548b",
+        "once-estimate.json": "94c243352bda333f8ba11330fdd6356209112a63a6760c80f4567cef6a6b3856",
+        "parameters.json": "9d28ce873f0fd840fcf48188d1830109a2e49abc269ce3183641a5b1d49a4b86"
+      }
+    },
+    {
+      "name": "mid-high-delay",
+      "asset_directory": "assets/objects/knife_wuji_contact_transfer_20261006/frozen-v1/mid-high-delay",
+      "physical_parameters": {
+        "length": 0.1455,
+        "width": 0.0193,
+        "thickness": 0.0082,
+        "slider_length": 0.0324,
+        "slider_width": 0.0072,
+        "protrusion": 0.0021,
+        "proximal": 0.0315,
+        "mass": 0.056
+      },
+      "initial_estimate": "assets/objects/knife_wuji_contact_transfer_20261006/frozen-v1/mid-high-delay/noisy-once-estimate.json",
+      "reference_N": 1.25,
+      "kind": "constant",
+      "native_options": [
+        "--actuation-delay-frames",
+        "1",
+        "--observation-noise",
+        ".001",
+        "--observation-bias",
+        ".0005"
+      ],
+      "hashes": {
+        "resistance.json": "cf149a9c3e06c40e06578b55087416d49f2be4b1c0092115640c20b98c051704",
+        "mobility.urdf": "20f5eb45fa2a613af27d9d71b3a94e1c1ba8d102b191f67918090fb05a67223c",
+        "spec.json": "c96ecc8d0c0874ee2f22ac52f39c73bcc66c63c7d74549455ec00d9dc5423c35",
+        "noisy-once-estimate.json": "4816f1947003c8d710b355d14627c0ae2a0c0b98a65eb8a24e1317d2f5b21ff5",
+        "slider-cap.obj": "4bca450dde744a61e36b31cdec1e609caa571b936f54cd196ee54348d2dbd30d",
+        "once-estimate.json": "b07b844f235e52db0760f80c64e7b1127528db902192aa26e59f9856e8bfc402",
+        "parameters.json": "da3c930617b79923d00496216b10e7efe371e45f552ea180d19fba79c8898038"
+      }
+    }
+  ],
+  "candidate": "Retained singlepush actor/control plus estimate-only longest geometrically certified prefix; final-target guard retained as development diagnostic, not promoted because14.56mm fails",
+  "actor_unchanged": true,
+  "hardware_ready": false,
+  "required_sha256": {
+    "scripts/select_wuji_feasible_prefix.py": "97e7308d263d1a0d7385783525547405b213a509261b7fa659d8f86060ba55d7",
+    "scripts/prepare_wuji_newknife_case.py": "c9f95b0786edc2a4ed96f4679f8baa0f89694bafdaad7b07f2e98c964a2711aa",
+    "scripts/run_wuji_singlepush.py": "4eacac64e7df96938115d5d73fa4972e95ba43f92e283d5b3a9c30ceedace9f1",
+    "scripts/g2_r800_policy.py": "ef73c34172bc9ba789ee2380bfd7c1792a9070128cf3f3fe4345dc02454c419a",
+    "scripts/wuji_scheduled_thumb_reference.py": "d226d8689421c2009a57ddeb9fcf350240a2b4558f3a368c21b465de0c950013",
+    "scripts/wuji_joint_deflection_pressure.py": "4ee38960a58ca0623188f883abe2d1e81656af237ff1138035fef4d95fad8ee8",
+    "runs/singlepush-20261005/configs/reference-path-drive.json": "5efee1c0fd805810d14d05a11d595c5f377cf7f8a7a1d9be86a375f0e46acb3a",
+    "runs/newknife-20261005/configs/pressure120.json": "d8dd5ca33833b0731f49c51b16785e5151058003c138ee667a33e01927c00176",
+    "runs/newknife-20261005/train/center-tail-constant-motor-v1/update_000100.pth": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e"
+  },
+  "scope": "Declare two unused joint conditions and freeze baseline+prefix candidate.\nNo controller retuning is permitted after their physical outcomes.\n",
+  "execution_rule": "Physical simulation only; audit actual compensated targets afterward and report deployment gap separately. Never promote uncertified hardware targets."
+}

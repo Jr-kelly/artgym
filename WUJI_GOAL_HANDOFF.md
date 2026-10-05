@@ -1,5 +1,51 @@
 # Wuji 单次伸出 >20mm 当前Goal
 
+先读 `/data/research/artgym-experiments-20260921/contact-transfer-20261006/research/contact-transfer-20261006/CONTINUATION.md`。保留 singlepush 1.25 N 基线；映射、力矩、接触适配和部署准备。
+
+```json
+{
+  "started_utc": "2026-10-05T16:15:13.199645+00:00",
+  "local_root": "/data/research/artgym-experiments-20260921/contact-transfer-20261006",
+  "baseline_local_commit": "df7a3240c92b2d2c771d3981b4be1d012190f4c9",
+  "baseline_github_commit": "cae68dbda71dcb31954d34bd669394e445a2ccc4",
+  "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
+  "phase": "Implementation and validation complete; packaging fresh videos and reproducible delivery",
+  "real_robot_ran": false,
+  "delivery_complete": false,
+  "next": "Publish exact source branch/tag and verify fresh Release/video downloads; no remaining useful jobs launched",
+  "last_event": {
+    "utc": "2026-10-05T16:45:44.432060+00:00",
+    "event": "isolated_small_overlay_representative_restore_passed",
+    "evidence": [
+      "research/contact-transfer-20261006/RESTORE-VERIFICATION.json"
+    ],
+    "config": {
+      "overlay_sha256": "b7f27569368055ae3b8596acb10c80789ffb055ed59c125db1733275e5b09adb",
+      "verified_files": 2360,
+      "active_forward_mm": 24.36626224880456,
+      "trace_sha256": "d7ed4f78dbced95a8ddc0d0e36ddf8522767821ac6f8a428d82ea8b3cd7db3c8",
+      "exact_match": true
+    },
+    "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
+    "next": "Publish exact source branch/tag and verify fresh Release/video downloads; no remaining useful jobs launched"
+  },
+  "mapping_verified": true,
+  "hardware_load_model_status": "Independent virtual work and signed contributions verified; corrected worst38.79% URDF model, not hardware reserve",
+  "device_interface_verified": "InstalledSDK1.8, actual signatures and HandAPI fixture passed; no device connection",
+  "necessary_generalization_status": "Near-small34mm physically29.71mm; actual corrected pose20s11.8mm clear. Target-only projection is conservative ablation, not mandatory new task constraint. NEW mid1.25N+delay22.12mm passes; NEW upper3.49mm fails.",
+  "extension_demo_ready": true,
+  "force_margin_evidence": "Retained1.25N baseline exactly reproduces24.366mm; no newly validated higher capacity",
+  "axial_force_measurement_status": "Native total axial contact force unavailable/null",
+  "minimum_gpu_utilization_requirement": null,
+  "gpu_hour_cap": null,
+  "reproducible_restore_passed": true,
+  "active_jobs": []
+}
+```
+
+<!-- WUJI_CONTACT_TRANSFER_HISTORY -->
+# Wuji 单次伸出 >20mm 当前Goal
+
 先读 `/data/research/artgym-experiments-20260921/singlepush-20261005/research/singlepush-20261005/CONTINUATION.md`。旧双循环不再是本轮要求。
 
 ```json

@@ -1,0 +1,1331 @@
+{
+  "utc": "2026-10-05T16:42:09.062119+00:00",
+  "trials": [
+    {
+      "name": "nominal125",
+      "label": "Retained nominal1.25N regression",
+      "kind": "retained_baseline",
+      "trial": "runs/contact-transfer-20261006/regression/nominal-125-video-v1/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": true,
+          "hold_above_threshold": true,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": true,
+        "active_forward_m": 0.02436626224880456,
+        "prepush_slider_m": 4.497368718148209e-05,
+        "relative_episode_initial_extension_m": 0.024411235935986042,
+        "hold_range_m": 3.330409526824951e-05,
+        "hold_min_active_m": 0.02434960926984786,
+        "effective_cap_contact_fraction": 1.0,
+        "longest_cap_contact_loss_s": 0.0,
+        "body_max_translation_m": 0.005767983850091696,
+        "body_max_rotation_rad": 0.3430084706808669,
+        "cap_normal_mean_N": 1.016675989192831,
+        "cap_normal_p05_N": 0.7719808742403984,
+        "cap_normal_peak_N": 1.8465182781219482,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 1.25,
+        "brake_capacity_max_N": 1.25,
+        "thumb_torque_limit_fraction_max": [
+          0.14008340935090047,
+          0.4278257257642014,
+          0.21757636095030888,
+          0.14078206076770824
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.13295773726735596,
+          0.40222235470808454,
+          0.20246348229074407,
+          0.13555567882962136
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "d7ed4f78dbced95a8ddc0d0e36ddf8522767821ac6f8a428d82ea8b3cd7db3c8",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      },
+      "physical_parameters": {
+        "handle_size": [
+          0.019,
+          0.008,
+          0.144
+        ],
+        "slider_size": [
+          0.007,
+          0.002,
+          0.032
+        ],
+        "initial_slider_q_m": 0.0,
+        "total_mass_kg": 0.055,
+        "estimated_com_local_m": {
+          "link_0": [
+            0.0,
+            -0.0008023715415019764,
+            -0.011233201581027665
+          ],
+          "link_1": [
+            3.0378291030005414e-20,
+            -0.0012213054549015763,
+            0.010664969150915674
+          ]
+        },
+        "body_mass_kg": 0.044000000000000004,
+        "moving_mass_kg": 0.011000000000000001,
+        "slider_initial_center_tail_m": 0.046,
+        "slider_origin_m": [
+          0,
+          0.005,
+          -0.025999999999999995
+        ],
+        "task_command_m": 0.035,
+        "assumptions": {
+          "body_thickness": "Derived total10mm minus protrusion2mm",
+          "mass_split": "80/20 percent engineering estimate; uniform-volume part COM, compound-box inertia approximation",
+          "collision": "2mm floor,2.5mm side rails,rear cap,0.5mm chamfer and internal blade carrier are photo-informed engineering assumptions",
+          "joint_limits": "-10 to55mm relative initial; unmeasured, targets not endstops"
+        },
+        "model_route": "Parameterized URDF; no existing Hunyuan workflow found, simple measured contact geometry more direct"
+      },
+      "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
+      "hardware_ready": false,
+      "scope": "Complete original physical simulation task. Task pass does not prove corrected-target clearance, firmware calibration or real demo."
+    },
+    {
+      "name": "near-small-prefix",
+      "label": "Near-small34mm nominal prefix",
+      "kind": "development",
+      "trial": "runs/contact-transfer-20261006/development/near-small-prefix-physical-v1/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": true,
+          "hold_above_threshold": true,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": true,
+        "active_forward_m": 0.029712978765019216,
+        "prepush_slider_m": 5.429422890301794e-05,
+        "relative_episode_initial_extension_m": 0.029767272993922234,
+        "hold_range_m": 4.2401254177093506e-05,
+        "hold_min_active_m": 0.029695980265387334,
+        "effective_cap_contact_fraction": 1.0,
+        "longest_cap_contact_loss_s": 0.0,
+        "body_max_translation_m": 0.0037009436637163162,
+        "body_max_rotation_rad": 0.10477086922344463,
+        "cap_normal_mean_N": 1.1874557719569159,
+        "cap_normal_p05_N": 0.8048881627619267,
+        "cap_normal_peak_N": 1.4335070848464966,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 0.65,
+        "brake_capacity_max_N": 0.65,
+        "thumb_torque_limit_fraction_max": [
+          0.026627456089269873,
+          0.31183290715103873,
+          0.13049339218765613,
+          0.09244063211782962
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.023632256140921876,
+          0.3037795627448729,
+          0.11908589469393979,
+          0.08391754582335566
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "8cc39d2f21b2ceeb357a5513ee95b5cbc1a38147345fac5380a7cd4d4bbe12ad",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      },
+      "physical_parameters": {
+        "handle_size": [
+          0.0185,
+          0.0075,
+          0.142
+        ],
+        "slider_size": [
+          0.0065,
+          0.0017,
+          0.031
+        ],
+        "initial_slider_q_m": 0.0,
+        "total_mass_kg": 0.052,
+        "estimated_com_local_m": {
+          "link_0": [
+            0.0,
+            -0.0007707525867008189,
+            -0.010212471773785854
+          ],
+          "link_1": [
+            -5.19870274702046e-20,
+            -0.0013081334286767748,
+            0.012167461816069095
+          ]
+        },
+        "body_mass_kg": 0.0416,
+        "moving_mass_kg": 0.0104,
+        "slider_initial_center_tail_m": 0.044,
+        "slider_origin_m": [
+          0,
+          0.0046,
+          -0.026999999999999996
+        ],
+        "task_command_m": 0.035,
+        "assumptions": {
+          "body_thickness": "Explicit nearby synthetic body thickness; not a second measured knife",
+          "mass_split": "80/20 percent engineering estimate; uniform-volume part COM, compound-box inertia approximation",
+          "collision": "2mm floor,2.5mm side rails,rear cap,0.5mm chamfer and internal blade carrier are photo-informed engineering assumptions",
+          "joint_limits": "-10 to55mm relative initial; unmeasured, targets not endstops"
+        },
+        "model_route": "Parameterized URDF; no existing Hunyuan workflow found, simple measured contact geometry more direct"
+      },
+      "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
+      "hardware_ready": false,
+      "scope": "Complete original physical simulation task. Task pass does not prove corrected-target clearance, firmware calibration or real demo."
+    },
+    {
+      "name": "near-small-guard",
+      "label": "Near-small actual-target clearance guard",
+      "kind": "development_rejected",
+      "trial": "runs/contact-transfer-20261006/development/near-small-guarded-v2/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": false,
+          "hold_above_threshold": false,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": false,
+        "active_forward_m": 0.014557454283931293,
+        "prepush_slider_m": 5.429422890301794e-05,
+        "relative_episode_initial_extension_m": 0.01461174851283431,
+        "hold_range_m": 0.00011438969522714615,
+        "hold_min_active_m": 0.01448663511837367,
+        "effective_cap_contact_fraction": 1.0,
+        "longest_cap_contact_loss_s": 0.0,
+        "body_max_translation_m": 0.0026802057400345802,
+        "body_max_rotation_rad": 0.1794744744618215,
+        "cap_normal_mean_N": 1.0453218804031874,
+        "cap_normal_p05_N": 0.8461150527000427,
+        "cap_normal_peak_N": 1.3001049906015396,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 0.65,
+        "brake_capacity_max_N": 0.65,
+        "thumb_torque_limit_fraction_max": [
+          0.07641171266089287,
+          0.28408984276843763,
+          0.1052154535769652,
+          0.07721279711347853
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.07360269982802078,
+          0.28047577772408366,
+          0.10223008141811063,
+          0.07488264447097374
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "a81a17d52c80362a374bfbfa18250c446265833bb0e693f5eb6c4ce240b85331",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      },
+      "physical_parameters": {
+        "handle_size": [
+          0.0185,
+          0.0075,
+          0.142
+        ],
+        "slider_size": [
+          0.0065,
+          0.0017,
+          0.031
+        ],
+        "initial_slider_q_m": 0.0,
+        "total_mass_kg": 0.052,
+        "estimated_com_local_m": {
+          "link_0": [
+            0.0,
+            -0.0007707525867008189,
+            -0.010212471773785854
+          ],
+          "link_1": [
+            -5.19870274702046e-20,
+            -0.0013081334286767748,
+            0.012167461816069095
+          ]
+        },
+        "body_mass_kg": 0.0416,
+        "moving_mass_kg": 0.0104,
+        "slider_initial_center_tail_m": 0.044,
+        "slider_origin_m": [
+          0,
+          0.0046,
+          -0.026999999999999996
+        ],
+        "task_command_m": 0.035,
+        "assumptions": {
+          "body_thickness": "Explicit nearby synthetic body thickness; not a second measured knife",
+          "mass_split": "80/20 percent engineering estimate; uniform-volume part COM, compound-box inertia approximation",
+          "collision": "2mm floor,2.5mm side rails,rear cap,0.5mm chamfer and internal blade carrier are photo-informed engineering assumptions",
+          "joint_limits": "-10 to55mm relative initial; unmeasured, targets not endstops"
+        },
+        "model_route": "Parameterized URDF; no existing Hunyuan workflow found, simple measured contact geometry more direct"
+      },
+      "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
+      "hardware_ready": false,
+      "scope": "Complete original physical simulation task. Task pass does not prove corrected-target clearance, firmware calibration or real demo."
+    },
+    {
+      "name": "large-baseline",
+      "label": "Large original28mm",
+      "kind": "development_baseline",
+      "trial": "runs/contact-transfer-20261006/development/large-baseline-video-v1/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": false,
+          "hold_above_threshold": false,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": false,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": false,
+        "active_forward_m": 2.2471267584478483e-06,
+        "prepush_slider_m": 4.1016945033334196e-05,
+        "relative_episode_initial_extension_m": 4.3264071791782044e-05,
+        "hold_range_m": 5.445326678454876e-08,
+        "hold_min_active_m": 2.220051101176068e-06,
+        "effective_cap_contact_fraction": 0.1852879944482998,
+        "longest_cap_contact_loss_s": 4.891666666666667,
+        "body_max_translation_m": 0.009288177825510502,
+        "body_max_rotation_rad": 0.543970185583877,
+        "cap_normal_mean_N": 0.17498079036400602,
+        "cap_normal_p05_N": 0.0,
+        "cap_normal_peak_N": 1.9785630702972412,
+        "fixed_body_normal_mean_N": 0.000842873830125925,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 0.95,
+        "brake_capacity_max_N": 0.95,
+        "thumb_torque_limit_fraction_max": [
+          0.137175490561828,
+          0.22440670533341198,
+          0.20470066898950084,
+          0.1444981648123281
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.08312361979332103,
+          0.20603926657039517,
+          0.17473351152637923,
+          0.12881612606139056
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "96cf8d82c5ee4239fc3716df8e4eecf6a002c9eadc2056a6078238128e1039eb",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      },
+      "physical_parameters": {
+        "handle_size": [
+          0.02,
+          0.009,
+          0.148
+        ],
+        "slider_size": [
+          0.008,
+          0.0025,
+          0.034
+        ],
+        "initial_slider_q_m": 0.0,
+        "total_mass_kg": 0.06,
+        "estimated_com_local_m": {
+          "link_0": [
+            0.0,
+            -0.0008290422245108138,
+            -0.013679196704428425
+          ],
+          "link_1": [
+            0.0,
+            -0.0010585823194209146,
+            0.008385954104420142
+          ]
+        },
+        "body_mass_kg": 0.048,
+        "moving_mass_kg": 0.012,
+        "slider_initial_center_tail_m": 0.052000000000000005,
+        "slider_origin_m": [
+          0,
+          0.00575,
+          -0.021999999999999992
+        ],
+        "task_command_m": 0.035,
+        "assumptions": {
+          "body_thickness": "Explicit nearby synthetic body thickness; not a second measured knife",
+          "mass_split": "80/20 percent engineering estimate; uniform-volume part COM, compound-box inertia approximation",
+          "collision": "2mm floor,2.5mm side rails,rear cap,0.5mm chamfer and internal blade carrier are photo-informed engineering assumptions",
+          "joint_limits": "-10 to55mm relative initial; unmeasured, targets not endstops"
+        },
+        "model_route": "Parameterized URDF; no existing Hunyuan workflow found, simple measured contact geometry more direct"
+      },
+      "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
+      "hardware_ready": false,
+      "scope": "Complete original physical simulation task. Task pass does not prove corrected-target clearance, firmware calibration or real demo."
+    },
+    {
+      "name": "large-normal-diagnostic",
+      "label": "Large full-normal35mm; rate-limited diagnostic, not certified promotion",
+      "kind": "diagnostic_only",
+      "trial": "runs/contact-transfer-20261006/development/large-fixed-normal35-physical-v1/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": true,
+          "hold_above_threshold": true,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": false,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": false,
+        "active_forward_m": 0.03240814117452828,
+        "prepush_slider_m": 7.124001422198489e-05,
+        "relative_episode_initial_extension_m": 0.03247938118875027,
+        "hold_range_m": 1.2550503015518188e-05,
+        "hold_min_active_m": 0.03240186964831082,
+        "effective_cap_contact_fraction": 1.0,
+        "longest_cap_contact_loss_s": 0.0,
+        "body_max_translation_m": 0.007008105516433716,
+        "body_max_rotation_rad": 0.615412383408868,
+        "cap_normal_mean_N": 1.4436453457382565,
+        "cap_normal_p05_N": 0.6509503778070211,
+        "cap_normal_peak_N": 2.010892152786255,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 0.95,
+        "brake_capacity_max_N": 0.95,
+        "thumb_torque_limit_fraction_max": [
+          0.1346122197020263,
+          0.43733958685263485,
+          0.29583176337083195,
+          0.20596832376448004
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.12111081195731842,
+          0.410444863500959,
+          0.26611900297344454,
+          0.18314743085399185
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "f45866f8f6a9d6fd8c072b57fec126ebd413a5cc0915af8c6ec08bcf6267db8b",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      },
+      "physical_parameters": {
+        "handle_size": [
+          0.02,
+          0.009,
+          0.148
+        ],
+        "slider_size": [
+          0.008,
+          0.0025,
+          0.034
+        ],
+        "initial_slider_q_m": 0.0,
+        "total_mass_kg": 0.06,
+        "estimated_com_local_m": {
+          "link_0": [
+            0.0,
+            -0.0008290422245108138,
+            -0.013679196704428425
+          ],
+          "link_1": [
+            0.0,
+            -0.0010585823194209146,
+            0.008385954104420142
+          ]
+        },
+        "body_mass_kg": 0.048,
+        "moving_mass_kg": 0.012,
+        "slider_initial_center_tail_m": 0.052000000000000005,
+        "slider_origin_m": [
+          0,
+          0.00575,
+          -0.021999999999999992
+        ],
+        "task_command_m": 0.035,
+        "assumptions": {
+          "body_thickness": "Explicit nearby synthetic body thickness; not a second measured knife",
+          "mass_split": "80/20 percent engineering estimate; uniform-volume part COM, compound-box inertia approximation",
+          "collision": "2mm floor,2.5mm side rails,rear cap,0.5mm chamfer and internal blade carrier are photo-informed engineering assumptions",
+          "joint_limits": "-10 to55mm relative initial; unmeasured, targets not endstops"
+        },
+        "model_route": "Parameterized URDF; no existing Hunyuan workflow found, simple measured contact geometry more direct"
+      },
+      "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
+      "hardware_ready": false,
+      "scope": "Complete original physical simulation task. Task pass does not prove corrected-target clearance, firmware calibration or real demo."
+    },
+    {
+      "name": "large-center",
+      "label": "Large estimate-driven .2cap-width contact bias",
+      "kind": "development_rejected",
+      "trial": "runs/contact-transfer-20261006/development/large-centered35-physical-v1/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": false,
+          "hold_above_threshold": false,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": false,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": false,
+        "active_forward_m": 0.0165301030210685,
+        "prepush_slider_m": 7.306321640498936e-05,
+        "relative_episode_initial_extension_m": 0.016603166237473488,
+        "hold_range_m": 3.4071505069732666e-05,
+        "hold_min_active_m": 0.01651309893350117,
+        "effective_cap_contact_fraction": 0.9993060374739764,
+        "longest_cap_contact_loss_s": 0.004166666666666667,
+        "body_max_translation_m": 0.016597412526607513,
+        "body_max_rotation_rad": 0.9991966640027786,
+        "cap_normal_mean_N": 1.0372151304697224,
+        "cap_normal_p05_N": 0.41059964895248413,
+        "cap_normal_peak_N": 6.7514824867248535,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 0.95,
+        "brake_capacity_max_N": 0.95,
+        "thumb_torque_limit_fraction_max": [
+          0.2682747079295399,
+          0.811288187329598,
+          0.4602037591650425,
+          0.3244248308977006
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.19397221917452787,
+          0.7289400135037615,
+          0.408526013180266,
+          0.29627386710823367
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "b60615494e227e5dad39130ce6e1d86646b37a1ea9884a9838cf8916e5f589a2",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      },
+      "physical_parameters": {
+        "handle_size": [
+          0.02,
+          0.009,
+          0.148
+        ],
+        "slider_size": [
+          0.008,
+          0.0025,
+          0.034
+        ],
+        "initial_slider_q_m": 0.0,
+        "total_mass_kg": 0.06,
+        "estimated_com_local_m": {
+          "link_0": [
+            0.0,
+            -0.0008290422245108138,
+            -0.013679196704428425
+          ],
+          "link_1": [
+            0.0,
+            -0.0010585823194209146,
+            0.008385954104420142
+          ]
+        },
+        "body_mass_kg": 0.048,
+        "moving_mass_kg": 0.012,
+        "slider_initial_center_tail_m": 0.052000000000000005,
+        "slider_origin_m": [
+          0,
+          0.00575,
+          -0.021999999999999992
+        ],
+        "task_command_m": 0.035,
+        "assumptions": {
+          "body_thickness": "Explicit nearby synthetic body thickness; not a second measured knife",
+          "mass_split": "80/20 percent engineering estimate; uniform-volume part COM, compound-box inertia approximation",
+          "collision": "2mm floor,2.5mm side rails,rear cap,0.5mm chamfer and internal blade carrier are photo-informed engineering assumptions",
+          "joint_limits": "-10 to55mm relative initial; unmeasured, targets not endstops"
+        },
+        "model_route": "Parameterized URDF; no existing Hunyuan workflow found, simple measured contact geometry more direct"
+      },
+      "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
+      "hardware_ready": false,
+      "scope": "Complete original physical simulation task. Task pass does not prove corrected-target clearance, firmware calibration or real demo."
+    },
+    {
+      "name": "frozen-mid",
+      "label": "NEW mid geometry +1.25N +delay/noise",
+      "kind": "frozen_validation",
+      "trial": "runs/contact-transfer-20261006/frozen/mid-high-delay/physical-v1/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": true,
+          "hold_above_threshold": true,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": true,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": true,
+        "active_forward_m": 0.02212348200919223,
+        "prepush_slider_m": 4.141132740187459e-05,
+        "relative_episode_initial_extension_m": 0.022164893336594105,
+        "hold_range_m": 3.287382423877716e-05,
+        "hold_min_active_m": 0.022107249988039257,
+        "effective_cap_contact_fraction": 0.9993060374739764,
+        "longest_cap_contact_loss_s": 0.004166666666666667,
+        "body_max_translation_m": 0.005850919522345066,
+        "body_max_rotation_rad": 0.2836319274658535,
+        "cap_normal_mean_N": 1.0474576844421086,
+        "cap_normal_p05_N": 0.8189958333969116,
+        "cap_normal_peak_N": 1.7557329535484314,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 1.25,
+        "brake_capacity_max_N": 1.25,
+        "thumb_torque_limit_fraction_max": [
+          0.13471663995815358,
+          0.40777878378398236,
+          0.21708439771134588,
+          0.14273362569926593
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.11920072205699218,
+          0.3645786078390252,
+          0.20148030560638805,
+          0.13630567266309845
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "8c96365ba434f2e5784bae0457836e8a8f19e790d2b191b50da108bdd1ec6e37",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      },
+      "physical_parameters": {
+        "handle_size": [
+          0.0193,
+          0.0082,
+          0.1455
+        ],
+        "slider_size": [
+          0.0072,
+          0.0021,
+          0.0324
+        ],
+        "initial_slider_q_m": 0.0,
+        "total_mass_kg": 0.056,
+        "estimated_com_local_m": {
+          "link_0": [
+            0.0,
+            -0.0008071214940509031,
+            -0.011905042037250818
+          ],
+          "link_1": [
+            1.158315532648629e-19,
+            -0.0011879911380436778,
+            0.010166305446973892
+          ]
+        },
+        "body_mass_kg": 0.044800000000000006,
+        "moving_mass_kg": 0.011200000000000002,
+        "slider_initial_center_tail_m": 0.0477,
+        "slider_origin_m": [
+          0,
+          0.00515,
+          -0.025049999999999996
+        ],
+        "task_command_m": 0.035,
+        "assumptions": {
+          "body_thickness": "Explicit nearby synthetic body thickness; not a second measured knife",
+          "mass_split": "80/20 percent engineering estimate; uniform-volume part COM, compound-box inertia approximation",
+          "collision": "2mm floor,2.5mm side rails,rear cap,0.5mm chamfer and internal blade carrier are photo-informed engineering assumptions",
+          "joint_limits": "-10 to55mm relative initial; unmeasured, targets not endstops"
+        },
+        "model_route": "Parameterized URDF; no existing Hunyuan workflow found, simple measured contact geometry more direct"
+      },
+      "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
+      "hardware_ready": false,
+      "scope": "Complete original physical simulation task. Task pass does not prove corrected-target clearance, firmware calibration or real demo."
+    },
+    {
+      "name": "frozen-upper",
+      "label": "NEW upper geometry +variable .93N +friction/noise",
+      "kind": "frozen_validation",
+      "trial": "runs/contact-transfer-20261006/frozen/upper-geometry-friction/physical-v1/simulation",
+      "evaluation": {
+        "version": "wuji-extension-only-v1",
+        "checks": {
+          "continuous_pickup": true,
+          "complete_duration": true,
+          "active_forward": false,
+          "hold_above_threshold": false,
+          "hold_stable": true,
+          "clear": true,
+          "body_supported": false,
+          "effective_cap_contact": true,
+          "no_endstop": true,
+          "extension_only_schedule": true
+        },
+        "pass_all": false,
+        "active_forward_m": 0.003487646441499237,
+        "prepush_slider_m": 4.0723498386796564e-05,
+        "relative_episode_initial_extension_m": 0.0035283699398860335,
+        "hold_range_m": 1.108786091208458e-05,
+        "hold_min_active_m": 0.0034817661871784367,
+        "effective_cap_contact_fraction": 0.9979181124219292,
+        "longest_cap_contact_loss_s": 0.004166666666666667,
+        "body_max_translation_m": 0.00593390641734004,
+        "body_max_rotation_rad": 0.6309084510451471,
+        "cap_normal_mean_N": 1.1280025140682695,
+        "cap_normal_p05_N": 0.7260031700134277,
+        "cap_normal_peak_N": 3.8379424773156643,
+        "fixed_body_normal_mean_N": 0.0,
+        "actual_total_axial_contact_force_N": null,
+        "brake_capacity_min_N": 0.9401065676820017,
+        "brake_capacity_max_N": 1.0415999994813385,
+        "thumb_torque_limit_fraction_max": [
+          0.08564556269054459,
+          0.3802695756083638,
+          0.19276440917766272,
+          0.1531667988112771
+        ],
+        "thumb_torque_limit_fraction_p95": [
+          0.07785986488676556,
+          0.34289012403965535,
+          0.17171683548597752,
+          0.13456578695338342
+        ],
+        "thumb_limit_saturation_fraction": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "trace_sha256": "a83dc7479674c6ea51af54770f67f278fb453f96a46ee7556fca6dfb946fe014",
+        "scope": "Original continuous physical task, extension-only. A=normal solver measurement, B=axial total missing, C=brake model and demonstrated task, D=clipped simulation torque. No hardware force claim."
+      },
+      "physical_parameters": {
+        "handle_size": [
+          0.01975,
+          0.0088,
+          0.1475
+        ],
+        "slider_size": [
+          0.0078,
+          0.0024,
+          0.0336
+        ],
+        "initial_slider_q_m": 0.0,
+        "total_mass_kg": 0.059,
+        "estimated_com_local_m": {
+          "link_0": [
+            0.0,
+            -0.0008244803695150113,
+            -0.013191685912240184
+          ],
+          "link_1": [
+            0.0,
+            -0.0010901351551394576,
+            0.008799499406256002
+          ]
+        },
+        "body_mass_kg": 0.0472,
+        "moving_mass_kg": 0.0118,
+        "slider_initial_center_tail_m": 0.0508,
+        "slider_origin_m": [
+          0,
+          0.0056,
+          -0.022949999999999995
+        ],
+        "task_command_m": 0.035,
+        "assumptions": {
+          "body_thickness": "Explicit nearby synthetic body thickness; not a second measured knife",
+          "mass_split": "80/20 percent engineering estimate; uniform-volume part COM, compound-box inertia approximation",
+          "collision": "2mm floor,2.5mm side rails,rear cap,0.5mm chamfer and internal blade carrier are photo-informed engineering assumptions",
+          "joint_limits": "-10 to55mm relative initial; unmeasured, targets not endstops"
+        },
+        "model_route": "Parameterized URDF; no existing Hunyuan workflow found, simple measured contact geometry more direct"
+      },
+      "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
+      "hardware_ready": false,
+      "scope": "Complete original physical simulation task. Task pass does not prove corrected-target clearance, firmware calibration or real demo."
+    }
+  ],
+  "preparation_rejections": [
+    {
+      "directory": "runs/contact-transfer-20261006/preparation/large-adaptive35-v4",
+      "result": {
+        "passed": false,
+        "error": "Command '['/home/agiuser/miniconda3/envs/artgym/bin/python', '-m', 'scripts.prepare_wuji_contact_support_preload', '--preload-aware-reserve', '--base', 'runs/contact-transfer-20261006/preparation/large-adaptive35-v4/reference', '--actuator-spec', 'runs/newknife-20261005/configs/actuator-preload-model.json', '--output', 'runs/contact-transfer-20261006/preparation/large-adaptive35-v4/operation']' returned non-zero exit status 1."
+      }
+    },
+    {
+      "directory": "runs/contact-transfer-20261006/preparation/large-adaptive35-v6",
+      "result": {
+        "passed": false,
+        "error": "Command '['/home/agiuser/miniconda3/envs/artgym/bin/python', '-m', 'scripts.plan_wuji_contact_transfer_regrasp', '--resolve-index-middle', '--knife-spec', 'runs/contact-transfer-20261006/preparation/large-adaptive35-v6/operation/estimated-collision/spec.json', '--table-y', '-0.23', '--pickup-plan', 'runs/contact-transfer-20261006/preparation/large-adaptive35-v6/pickup/motor-plan.json', '--acquisition', 'runs/contact-transfer-20261006/preparation/large-adaptive35-v6/pickup/acquisition/acquisition-path.json', '--calibration', 'runs/contact-transfer-20261006/preparation/large-adaptive35-v6/pickup/calibration.json', '--operation-plan', 'runs/contact-transfer-20261006/preparation/large-adaptive35-v6/operation/motor-plan.json', '--contact-preserving-ik', '--reachable-pinky-path', '--output', 'runs/contact-transfer-20261006/preparation/large-adaptive35-v6/operation/postlift-transfer.json']' returned non-zero exit status 1."
+      }
+    },
+    {
+      "directory": "runs/contact-transfer-20261006/preparation/near-small-prefix-v1",
+      "result": {
+        "passed": false,
+        "scope": "Common initial-estimate-only preparation; no physical asset or load ID input.\nEvery failed geometry gate is retained. Does not execute a physical rollout.\n",
+        "failure_type": "CalledProcessError",
+        "failure": "Command '['/home/agiuser/miniconda3/envs/artgym/bin/python', '-m', 'scripts.audit_g2_anchored_thumb_motor', '--reference', 'runs/singlepush-20261005/frozen/near-small/preparation/operation/reference.json', '--motor-plan', 'runs/singlepush-20261005/frozen/near-small/preparation/operation/actual-transfer-motor-plan.json', '--knife-spec', 'runs/singlepush-20261005/frozen/near-small/preparation/operation/estimated-collision/spec.json', '--samples', '81', '--output', 'runs/singlepush-20261005/frozen/near-small/preparation/operation/actual-transfer-stroke-audit.json']' returned non-zero exit status 1.",
+        "commands": [
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.adapt_wuji_direct_corner_initial_geometry",
+            "--estimate",
+            "assets/objects/knife_wuji_singlepush_20261005/frozen-v1/near-small/noisy-once-estimate.json",
+            "--plan",
+            "runs/wrap-force-20261004/planning/source-bounded-index-wrap-v8/direct-corner-v6/motor-plan.json",
+            "--reference",
+            "runs/traction-20261005/configs/cartesian-tracking10-v12.json",
+            "--localization",
+            "runs/wrap-force-20261004/planning/source-bounded-index-wrap-v8/direct-corner-v6/localization.json",
+            "--output",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup",
+            "--body-root-inset",
+            "0.01",
+            "--grip-tail-shift-m",
+            "0.006",
+            "--preserve-middle-axis",
+            "--thumb-lateral-bias-m",
+            "0.0025",
+            "--thumb-face-toward-cap"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.plan_g2_functional_acquisition_path",
+            "--plan",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/motor-plan.json",
+            "--localization",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/localization.json",
+            "--knife-spec",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/estimated-collision/spec.json",
+            "--table-y",
+            "-0.23",
+            "--output",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/acquisition"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.audit_wuji_actual_acquisition_motor",
+            "--plan",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/motor-plan.json",
+            "--acquisition",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/acquisition/acquisition-path.json",
+            "--table-y",
+            "-0.23",
+            "--output",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/closure-audit.json"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.audit_g2_anchored_thumb_motor",
+            "--reference",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/reference.json",
+            "--motor-plan",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/motor-plan.json",
+            "--knife-spec",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/estimated-collision/spec.json",
+            "--samples",
+            "81",
+            "--output",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/full-stroke-audit.json"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.plan_wuji_newknife_contact_pose",
+            "--stroke-m",
+            "0.035",
+            "--base",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup",
+            "--initialize",
+            "runs/newknife-20261005/planning/center-tail-support-v1",
+            "--fixed-wrist-from-initialize",
+            "--smooth",
+            "--small-wrist",
+            "--minimum-front-cosine",
+            "0.5",
+            "--middle-support-crosswidth-fraction",
+            "0.22",
+            "--pinky-support-crosswidth-fraction",
+            "0",
+            "--sites",
+            "12",
+            "--output",
+            "runs/singlepush-20261005/frozen/near-small/preparation/planning"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.prepare_wuji_newknife_joint_pose",
+            "--stroke-m",
+            "0.035",
+            "--pose",
+            "runs/singlepush-20261005/frozen/near-small/preparation/planning",
+            "--base",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup",
+            "--continuous",
+            "--lifted-operation",
+            "--thumb-preload-normal-m",
+            "0.0003",
+            "--preserve-authored-normal",
+            "--output",
+            "runs/singlepush-20261005/frozen/near-small/preparation/reference"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.prepare_wuji_newknife_support_preload",
+            "--base",
+            "runs/singlepush-20261005/frozen/near-small/preparation/reference",
+            "--actuator-spec",
+            "runs/newknife-20261005/configs/actuator-preload-model.json",
+            "--output",
+            "runs/singlepush-20261005/frozen/near-small/preparation/operation"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.plan_wuji_postlift_regrasp",
+            "--knife-spec",
+            "runs/singlepush-20261005/frozen/near-small/preparation/operation/estimated-collision/spec.json",
+            "--table-y",
+            "-0.23",
+            "--pickup-plan",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/motor-plan.json",
+            "--acquisition",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/acquisition/acquisition-path.json",
+            "--calibration",
+            "runs/singlepush-20261005/frozen/near-small/preparation/pickup/calibration.json",
+            "--operation-plan",
+            "runs/singlepush-20261005/frozen/near-small/preparation/operation/motor-plan.json",
+            "--contact-preserving-ik",
+            "--reachable-pinky-path",
+            "--output",
+            "runs/singlepush-20261005/frozen/near-small/preparation/operation/postlift-transfer.json"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.audit_g2_anchored_thumb_motor",
+            "--reference",
+            "runs/singlepush-20261005/frozen/near-small/preparation/operation/reference.json",
+            "--motor-plan",
+            "runs/singlepush-20261005/frozen/near-small/preparation/operation/actual-transfer-motor-plan.json",
+            "--knife-spec",
+            "runs/singlepush-20261005/frozen/near-small/preparation/operation/estimated-collision/spec.json",
+            "--samples",
+            "81",
+            "--output",
+            "runs/singlepush-20261005/frozen/near-small/preparation/operation/actual-transfer-stroke-audit.json"
+          ]
+        ]
+      }
+    },
+    {
+      "directory": "runs/contact-transfer-20261006/preparation/large-adaptive35-v1",
+      "result": {
+        "passed": false,
+        "scope": "Common initial-estimate-only preparation; no physical asset or load ID input.\nEvery failed geometry gate is retained. Does not execute a physical rollout.\n",
+        "failure_type": "CalledProcessError",
+        "failure": "Command '['/home/agiuser/miniconda3/envs/artgym/bin/python', '-m', 'scripts.prepare_wuji_newknife_support_preload', '--base', 'runs/contact-transfer-20261006/preparation/large-adaptive35-v1/reference', '--actuator-spec', 'runs/newknife-20261005/configs/actuator-preload-model.json', '--output', 'runs/contact-transfer-20261006/preparation/large-adaptive35-v1/operation']' returned non-zero exit status 1.",
+        "commands": [
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.adapt_wuji_direct_corner_initial_geometry",
+            "--estimate",
+            "assets/objects/knife_wuji_newknife_20261005/heldout-v1/large-high/noisy-once-estimate.json",
+            "--plan",
+            "runs/wrap-force-20261004/planning/source-bounded-index-wrap-v8/direct-corner-v6/motor-plan.json",
+            "--reference",
+            "runs/traction-20261005/configs/cartesian-tracking10-v12.json",
+            "--localization",
+            "runs/wrap-force-20261004/planning/source-bounded-index-wrap-v8/direct-corner-v6/localization.json",
+            "--output",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v1/pickup",
+            "--body-root-inset",
+            "0.01",
+            "--grip-tail-shift-m",
+            "0.006",
+            "--preserve-middle-axis",
+            "--thumb-lateral-bias-m",
+            "0.0025",
+            "--thumb-face-toward-cap"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.plan_g2_functional_acquisition_path",
+            "--plan",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v1/pickup/motor-plan.json",
+            "--localization",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v1/pickup/localization.json",
+            "--knife-spec",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v1/pickup/estimated-collision/spec.json",
+            "--table-y",
+            "-0.23",
+            "--output",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v1/pickup/acquisition"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.audit_wuji_actual_acquisition_motor",
+            "--plan",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v1/pickup/motor-plan.json",
+            "--acquisition",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v1/pickup/acquisition/acquisition-path.json",
+            "--table-y",
+            "-0.23",
+            "--output",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v1/pickup/closure-audit.json"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.audit_g2_anchored_thumb_motor",
+            "--reference",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v1/pickup/reference.json",
+            "--motor-plan",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v1/pickup/motor-plan.json",
+            "--knife-spec",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v1/pickup/estimated-collision/spec.json",
+            "--samples",
+            "81",
+            "--output",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v1/pickup/full-stroke-audit.json"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.plan_wuji_contact_transfer_pose",
+            "--stroke-m",
+            "0.035",
+            "--base",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v1/pickup",
+            "--initialize",
+            "runs/newknife-20261005/planning/center-tail-support-v1",
+            "--align-full-normal",
+            "--smooth",
+            "--small-wrist",
+            "--minimum-front-cosine",
+            "0.5",
+            "--middle-support-crosswidth-fraction",
+            "0.22",
+            "--pinky-support-crosswidth-fraction",
+            "0",
+            "--sites",
+            "12",
+            "--output",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v1/planning"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.prepare_wuji_newknife_joint_pose",
+            "--stroke-m",
+            "0.035",
+            "--pose",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v1/planning",
+            "--base",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v1/pickup",
+            "--continuous",
+            "--lifted-operation",
+            "--thumb-preload-normal-m",
+            "0.0003",
+            "--preserve-authored-normal",
+            "--output",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v1/reference"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.prepare_wuji_newknife_support_preload",
+            "--base",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v1/reference",
+            "--actuator-spec",
+            "runs/newknife-20261005/configs/actuator-preload-model.json",
+            "--output",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v1/operation"
+          ]
+        ]
+      }
+    },
+    {
+      "directory": "runs/contact-transfer-20261006/preparation/near-small-support-pair-v4",
+      "result": {
+        "passed": false,
+        "error": "Command '['/home/agiuser/miniconda3/envs/artgym/bin/python', '-m', 'scripts.prepare_wuji_contact_support_preload', '--preload-aware-reserve', '--base', 'runs/contact-transfer-20261006/preparation/near-small-support-pair-v4/reference', '--actuator-spec', 'runs/newknife-20261005/configs/actuator-preload-model.json', '--output', 'runs/contact-transfer-20261006/preparation/near-small-support-pair-v4/operation']' returned non-zero exit status 1."
+      }
+    },
+    {
+      "directory": "runs/contact-transfer-20261006/preparation/large-fixed-normal-prefix-v8",
+      "result": {
+        "passed": false,
+        "error": ""
+      }
+    },
+    {
+      "directory": "runs/contact-transfer-20261006/preparation/large-adaptive35-v5",
+      "result": {
+        "passed": false,
+        "error": "Command '['/home/agiuser/miniconda3/envs/artgym/bin/python', '-m', 'scripts.plan_wuji_postlift_regrasp', '--knife-spec', 'runs/contact-transfer-20261006/preparation/large-adaptive35-v5/operation/estimated-collision/spec.json', '--table-y', '-0.23', '--pickup-plan', 'runs/contact-transfer-20261006/preparation/large-adaptive35-v5/pickup/motor-plan.json', '--acquisition', 'runs/contact-transfer-20261006/preparation/large-adaptive35-v5/pickup/acquisition/acquisition-path.json', '--calibration', 'runs/contact-transfer-20261006/preparation/large-adaptive35-v5/pickup/calibration.json', '--operation-plan', 'runs/contact-transfer-20261006/preparation/large-adaptive35-v5/operation/motor-plan.json', '--contact-preserving-ik', '--reachable-pinky-path', '--output', 'runs/contact-transfer-20261006/preparation/large-adaptive35-v5/operation/postlift-transfer.json']' returned non-zero exit status 1."
+      }
+    },
+    {
+      "directory": "runs/contact-transfer-20261006/preparation/large-adaptive35-v2",
+      "result": {
+        "passed": false,
+        "scope": "Common initial-estimate-only preparation; no physical asset or load ID input.\nEvery failed geometry gate is retained. Does not execute a physical rollout.\n",
+        "failure_type": "CalledProcessError",
+        "failure": "Command '['/home/agiuser/miniconda3/envs/artgym/bin/python', '-m', 'scripts.prepare_wuji_newknife_support_preload', '--base', 'runs/contact-transfer-20261006/preparation/large-adaptive35-v2/reference', '--actuator-spec', 'runs/newknife-20261005/configs/actuator-preload-model.json', '--output', 'runs/contact-transfer-20261006/preparation/large-adaptive35-v2/operation']' returned non-zero exit status 1.",
+        "commands": [
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.adapt_wuji_direct_corner_initial_geometry",
+            "--estimate",
+            "assets/objects/knife_wuji_newknife_20261005/heldout-v1/large-high/noisy-once-estimate.json",
+            "--plan",
+            "runs/wrap-force-20261004/planning/source-bounded-index-wrap-v8/direct-corner-v6/motor-plan.json",
+            "--reference",
+            "runs/traction-20261005/configs/cartesian-tracking10-v12.json",
+            "--localization",
+            "runs/wrap-force-20261004/planning/source-bounded-index-wrap-v8/direct-corner-v6/localization.json",
+            "--output",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v2/pickup",
+            "--body-root-inset",
+            "0.01",
+            "--grip-tail-shift-m",
+            "0.006",
+            "--preserve-middle-axis",
+            "--thumb-lateral-bias-m",
+            "0.0025",
+            "--thumb-face-toward-cap"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.plan_g2_functional_acquisition_path",
+            "--plan",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v2/pickup/motor-plan.json",
+            "--localization",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v2/pickup/localization.json",
+            "--knife-spec",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v2/pickup/estimated-collision/spec.json",
+            "--table-y",
+            "-0.23",
+            "--output",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v2/pickup/acquisition"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.audit_wuji_actual_acquisition_motor",
+            "--plan",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v2/pickup/motor-plan.json",
+            "--acquisition",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v2/pickup/acquisition/acquisition-path.json",
+            "--table-y",
+            "-0.23",
+            "--output",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v2/pickup/closure-audit.json"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.audit_g2_anchored_thumb_motor",
+            "--reference",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v2/pickup/reference.json",
+            "--motor-plan",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v2/pickup/motor-plan.json",
+            "--knife-spec",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v2/pickup/estimated-collision/spec.json",
+            "--samples",
+            "81",
+            "--output",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v2/pickup/full-stroke-audit.json"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.plan_wuji_contact_transfer_pose",
+            "--stroke-m",
+            "0.035",
+            "--base",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v2/pickup",
+            "--initialize",
+            "runs/newknife-20261005/planning/center-tail-support-v1",
+            "--align-full-normal",
+            "--smooth",
+            "--small-wrist",
+            "--minimum-front-cosine",
+            "0.5",
+            "--middle-support-crosswidth-fraction",
+            "0.22",
+            "--pinky-support-crosswidth-fraction",
+            "0",
+            "--sites",
+            "12",
+            "--output",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v2/planning"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.prepare_wuji_newknife_joint_pose",
+            "--stroke-m",
+            "0.035",
+            "--pose",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v2/planning",
+            "--base",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v2/pickup",
+            "--continuous",
+            "--lifted-operation",
+            "--thumb-preload-normal-m",
+            "0.0003",
+            "--preserve-authored-normal",
+            "--output",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v2/reference"
+          ],
+          [
+            "/home/agiuser/miniconda3/envs/artgym/bin/python",
+            "-m",
+            "scripts.prepare_wuji_newknife_support_preload",
+            "--base",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v2/reference",
+            "--actuator-spec",
+            "runs/newknife-20261005/configs/actuator-preload-model.json",
+            "--output",
+            "runs/contact-transfer-20261006/preparation/large-adaptive35-v2/operation"
+          ]
+        ]
+      }
+    },
+    {
+      "directory": "runs/contact-transfer-20261006/preparation/large-continuous35-v11",
+      "result": {
+        "passed": false,
+        "error": ""
+      }
+    },
+    {
+      "directory": "runs/contact-transfer-20261006/preparation/large-continuous35-v10",
+      "result": {
+        "passed": false,
+        "error": ""
+      }
+    },
+    {
+      "directory": "runs/contact-transfer-20261006/preparation/large-fixed-normal35-v7",
+      "result": {
+        "passed": false,
+        "error": ""
+      }
+    },
+    {
+      "directory": "runs/contact-transfer-20261006/preparation/near-small-support-clearance-v3",
+      "result": {
+        "passed": false,
+        "error": "Command '['/home/agiuser/miniconda3/envs/artgym/bin/python', '-m', 'scripts.plan_wuji_contact_transfer_regrasp', '--knife-spec', 'runs/contact-transfer-20261006/preparation/near-small-support-clearance-v3/operation/estimated-collision/spec.json', '--table-y', '-0.23', '--pickup-plan', 'runs/contact-transfer-20261006/preparation/near-small-support-clearance-v3/pickup/motor-plan.json', '--acquisition', 'runs/contact-transfer-20261006/preparation/near-small-support-clearance-v3/pickup/acquisition/acquisition-path.json', '--calibration', 'runs/contact-transfer-20261006/preparation/near-small-support-clearance-v3/pickup/calibration.json', '--operation-plan', 'runs/contact-transfer-20261006/preparation/near-small-support-clearance-v3/operation/motor-plan.json', '--contact-preserving-ik', '--reachable-pinky-path', '--output', 'runs/contact-transfer-20261006/preparation/near-small-support-clearance-v3/operation/postlift-transfer.json']' returned non-zero exit status 1."
+      }
+    }
+  ],
+  "mapping_verified": true,
+  "device_interface_verified": "SDK1.8 signatures/import and HandAPI fixture; no completed device connection",
+  "hardware_load_model_status": "Signed virtual work and coordinate check passed; external on-hand reaction must be subtracted from inertia+gravity compensation; revised worst38.79% model only",
+  "axial_force_measurement_status": "Actual total axial contact missing/null; no fake zero",
+  "extension_demo_ready": true,
+  "force_margin_evidence": "Retained1.25N nominal exact24.366mm and NEW mid-high-delay22.123mm; no newly demonstrated capacity beyond1.25N",
+  "necessary_generalization_status": "One of two NEW joint conditions passes physical criterion. Near-small29.71mm physical task and sampled measured-path clearance>=11.78mm pass; target overlap is impedance setpoint information, strict guard14.56mm is not a hard geometric capacity limit. Large contact recovery .999\u20131 fraction but support/rotation remains deficient.",
+  "real_robot_ran": false,
+  "new_training": false,
+  "hunyuan_used": false,
+  "source_asset_vs_model_vs_physics_vs_hardware_separate": true
+}

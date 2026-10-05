@@ -1,0 +1,38 @@
+{
+  "rows": [
+    {
+      "case": "near-small",
+      "time_s": 20.1,
+      "source": "actual_simulation_encoder_q",
+      "worst_pair": {
+        "moving_link": "hand_r_thumb_pad_link",
+        "other_link": "hand_r_middle_pad_link",
+        "gap_lower_bound_m": 0.011815429881956122
+      },
+      "convex_hull_intersection": false
+    },
+    {
+      "case": "nominal125",
+      "time_s": 20.1,
+      "source": "actual_simulation_encoder_q",
+      "worst_pair": {
+        "moving_link": "hand_r_thumb_pad_link",
+        "other_link": "hand_r_middle_pad_link",
+        "gap_lower_bound_m": 0.01578831819870434
+      },
+      "convex_hull_intersection": false
+    },
+    {
+      "case": "frozen-mid",
+      "time_s": 20.1,
+      "source": "actual_simulation_encoder_q",
+      "worst_pair": {
+        "moving_link": "hand_r_thumb_pad_link",
+        "other_link": "hand_r_middle_pad_link",
+        "gap_lower_bound_m": 0.016258813086488022
+      },
+      "convex_hull_intersection": false
+    }
+  ],
+  "scope": "Independent actual measured joint hull check; does not assume target intersections equal physical pose intersections. Convex hulls may be conservative relative to original nonconvex surfaces."
+}
