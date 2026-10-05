@@ -102,3 +102,17 @@ prepare_wuji_newknife_case.py是统一initialestimate-only接续adapter，全程
 ## 冻结与泛化启动
 
 FINAL-DEVELOPMENT-RANKING.json根据声明规则选constant-motor100，SHA6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e；constant27.273/18.818，variable26.778/18.330mm，22/28checks、0fullpass。新128env训练出现foundLostAggregatePairsCapacity overflow，因此拟合有漏交互限制，8native单env日志无该警告，选型只用native。FROZEN-CANDIDATE.json已落盘，三个heldout分别session47071/21852/5674，完整36s constant录像26875，PID须核验。freeze后不再调权重/recipe/控制。
+
+## 已完成验证与正在发布
+
+三冻结案例0/3：small-low原motor限位/间隙拒绝、未物理运行；large-high完整36s但推动近0且有效接触/姿态失败；middle-variable完整36s前移26.693/16.694mm、回收失败。FROZEN-HELDOUT-RESULTS.json。最终录像36s1080帧SHA479f960a6addc241a1ee594ca298d79f900339ad7a155fd08fb53edb7ee30c26，前移27.624/19.680mm、四端点27.664/18.184/37.863/28.299mm，11/14checks，functionalfalse。空目录newknife-empty-restore-20261005-v1校验1137文件、退出码0、轨迹SHA与录像一致。源码local0551582 / publicfd4fe7beab9b41c0c70fc733e88a7fd385bd8739，分支feat/wuji-newknife-20261005。release/public-v1已准备，session44398上传中。13:57UTC停止本轮拥有的local3896002与remote1512监控；未动旧用户monitor3068820或用户训练。观测不足4小时，不声明完整4h合规。所有GPU实验已结束，只做发布与核验。
+
+## 正式Release已发布
+
+https://github.com/Jr-kelly/artgym/releases/tag/wuji-g2-newknife-20261005-v1 ，28资产；所有科学文件服务器SHA通过。草稿清单自引用导致旧SHA不一致，被发布门槛拦截；仅修复draft checksum，不改科学数据/视频。PUBLIC-DELIVERY-RECEIPT.json和FINAL-DELIVERY-STATUS.json将delivery标为true，但functional/hardware/goal仍false。session73234匿名下载原视频、同步视频、overlay、状态、manifest及checksum核验中。源码0551582/publicfd4fe7be为Release源树，后续commit只收发布receipt与续接。
+
+## 公网与恢复验证已完成
+
+ANONYMOUS-PUBLIC-VERIFICATION.json：7关键资产无认证公网下载SHA通过（overlay、3视频、finalstatus、manifest、checksum）。最终公网overlay已在另一个全空目录newknife-public-restore-20261005-v1恢复；所有1071冻结运行依赖与此前实际完整36s执行的恢复目录一致。PUBLIC-RECOVERY-VERIFICATION.json保存逐文件复核；这是结构恢复与相同runtime证明，不伪称第二次物理轨迹。上传公开receipt与两验证JSON后共31资产。
+
+本轮具体实现/资产/标定/完整视频/训练与冻结失败/复现交付完成，但功能Goal未完成，所有functional、hardware、generalizationpass仍false。后续不要盲目续训/扫压力：先在既有标称开发失效上验证法向和轴向动作解耦能否保持实际回程，再修batch碰撞容量并核验native一致性。若改controller，现三frozen案例不可再用于独立泛化选择，必须新声明未消费条件。旧用户训练/旧目录保持；本轮无GPU任务或监控。

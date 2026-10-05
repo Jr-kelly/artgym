@@ -1,0 +1,97 @@
+{
+  "utc": "2026-10-05T13:56:41.886765+00:00",
+  "machines": {
+    "local": {
+      "heartbeat": "2026-10-05T13:56:34.989250+00:00",
+      "pid": 3896002,
+      "current": [
+        {
+          "index": 0,
+          "utilization": 41.0,
+          "memory_used_mb": 820.0,
+          "memory_total_mb": 24564.0
+        }
+      ],
+      "windows": {
+        "60": {
+          "mean_percent": 34.833333333333336,
+          "samples": 6,
+          "covered_seconds": 50.26788306236267
+        },
+        "300": {
+          "mean_percent": 63.46666666666667,
+          "samples": 30,
+          "covered_seconds": 291.7984948158264
+        },
+        "900": {
+          "mean_percent": 48.111111111111114,
+          "samples": 90,
+          "covered_seconds": 895.9674212932587
+        },
+        "14400": {
+          "mean_percent": 40.492829204693614,
+          "samples": 767,
+          "covered_seconds": 7704.200221538544
+        }
+      },
+      "full_four_hour_observation": false
+    },
+    "remote": {
+      "heartbeat": "2026-10-05T13:56:17.481652+00:00",
+      "pid": 1512,
+      "current": [
+        {
+          "index": 0,
+          "utilization": 0.0,
+          "memory_used_mb": 0.0,
+          "memory_total_mb": 143771.0
+        },
+        {
+          "index": 1,
+          "utilization": 0.0,
+          "memory_used_mb": 0.0,
+          "memory_total_mb": 143771.0
+        },
+        {
+          "index": 2,
+          "utilization": 0.0,
+          "memory_used_mb": 0.0,
+          "memory_total_mb": 143771.0
+        },
+        {
+          "index": 3,
+          "utilization": 0.0,
+          "memory_used_mb": 0.0,
+          "memory_total_mb": 143771.0
+        }
+      ],
+      "windows": {
+        "60": {
+          "mean_percent": 0.0,
+          "samples": 6,
+          "covered_seconds": 50.49013876914978
+        },
+        "300": {
+          "mean_percent": 0.0,
+          "samples": 30,
+          "covered_seconds": 292.80671405792236
+        },
+        "900": {
+          "mean_percent": 29.55056179775281,
+          "samples": 89,
+          "covered_seconds": 890.8504004478455
+        },
+        "14400": {
+          "mean_percent": 30.0663357400722,
+          "samples": 554,
+          "covered_seconds": 5594.241764783859
+        }
+      },
+      "full_four_hour_observation": false
+    }
+  },
+  "remote_compute_completed": true,
+  "no_filler_computation": true,
+  "four_hour_compliance_claim": false,
+  "scope": "Observed whole-machine averages; each observation shorter than4h. GPU fitting was useful bounded work but broadphase warning limits physical fitting claims. Remote four GPUs reverified idle at13:57UTC; local finaljobs finished, existing user tasks preserved."
+}
