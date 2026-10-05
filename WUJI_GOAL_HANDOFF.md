@@ -5,7 +5,7 @@
 ```json
 {
   "round_start_utc": "2026-10-05T09:46:38.983466+00:00",
-  "phase": "Read complete new Goal; continue endpoint-capable .5 candidate",
+  "phase": "Stage delivered: joint-condition travel improvement and full-task load bound; highload sustainability and hardware Goal unresolved",
   "local_root": "/data/research/artgym-experiments-20260921/highload-20261005",
   "remote_root": "/home/wangjiarui/artgym-highload-20261005",
   "baseline_local_commit": "5214b24d87744acc66d540d53f84eec3db3a7779",
@@ -16,15 +16,38 @@
   "gpu_hour_cap": null,
   "no_subagents": true,
   "real_robot_ran": false,
-  "delivery_complete": false,
+  "delivery_complete": true,
   "goal_complete": false,
   "active_jobs": [],
-  "next": "Publish complete source metadata before creating Release",
+  "next": "本轮交付完成，无本轮计算在运行。继续时先读FINAL-REPORT与PUBLIC-DELIVERY-RECEIPT，保留V13基线、tracking1工程候选与.20+.05N能力证据；勿重跑已否决时序/重锚/支撑展开/压力方向消融。fresh01–04是开发，unseen05/06已消费为验证，不再称全新。高阻重复后承托/落座协调仍失效；下一项工作须有新机制或原刀阻力/有效闭合行程/SDK输入。原刀B/C与真机仍未完成，不自动发机器人指令。",
   "last_event": {
-    "utc": "2026-10-05T10:24:09.241872+00:00",
-    "event": "metadata_tracking_fixed",
-    "conclusion": "Repository-wide *.json ignore excluded new freeze/evidence metadata from initial source commit. Added whitelist only for new research directory; runnable tested overlay already contained these files.",
-    "next": "Publish complete source metadata before creating Release"
+    "utc": "2026-10-05T10:27:25.836936+00:00",
+    "event": "final_delivery_handoff",
+    "evidence": [
+      "research/highload-20261005/PUBLIC-DELIVERY-RECEIPT.json",
+      "research/highload-20261005/FINAL-REPORT.md",
+      "research/highload-20261005/REPRODUCE.md"
+    ],
+    "phase": "Stage delivered: joint-condition travel improvement and full-task load bound; highload sustainability and hardware Goal unresolved",
+    "conclusion": "22 assets server SHA verified,3 anonymous downloads match,1069-file empty-directory capacity restore exact.31 new physical trials,6 full raw videos. Source and reusable negative interventions published; no new training or robot commands. Remote18.04% below26%, observed33min only.",
+    "state_updates": {
+      "delivery_complete": true,
+      "functional_demo_ready": true,
+      "new_candidate_original_score_pass": false,
+      "necessary_generalization_resolved": false,
+      "axial_force_measurement_resolved": false,
+      "hardware_ready": false,
+      "real_robot_ran": false,
+      "goal_complete": false,
+      "github_release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-g2-highload-20261005-v1",
+      "resource_monitors_stopped": true,
+      "active_jobs": [],
+      "active_remote_launchers": [],
+      "resource_four_hour_compliance_claim": false,
+      "remote_observed_mean_percent": 18.043367346938776,
+      "remote_observed_minutes": 33.026437334219615
+    },
+    "next": "本轮交付完成，无本轮计算在运行。继续时先读FINAL-REPORT与PUBLIC-DELIVERY-RECEIPT，保留V13基线、tracking1工程候选与.20+.05N能力证据；勿重跑已否决时序/重锚/支撑展开/压力方向消融。fresh01–04是开发，unseen05/06已消费为验证，不再称全新。高阻重复后承托/落座协调仍失效；下一项工作须有新机制或原刀阻力/有效闭合行程/SDK输入。原刀B/C与真机仍未完成，不自动发机器人指令。"
   },
   "local_resource_monitor_pid": null,
   "resource_monitors_stopped": true,
@@ -36,6 +59,11 @@
   "axial_force_measurement_resolved": false,
   "active_remote_launchers": [],
   "github_branch": "feat/wuji-highload-20261005",
-  "github_commit": "bfa949c4142f7e3ec4728c63370ce052a58495c8"
+  "github_commit": "8b3c5be732f63225157298ae9d559651ea7cbcc9",
+  "hardware_ready": false,
+  "github_release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-g2-highload-20261005-v1",
+  "resource_four_hour_compliance_claim": false,
+  "remote_observed_mean_percent": 18.043367346938776,
+  "remote_observed_minutes": 33.026437334219615
 }
 ```
