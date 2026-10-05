@@ -1,0 +1,98 @@
+{
+  "local": {
+    "pid": 2850078,
+    "heartbeat": "2026-10-05T10:22:45.345120+00:00",
+    "session": "pid:[4026531836]",
+    "current": [
+      {
+        "index": 0,
+        "utilization": 49.0,
+        "memory_used_mb": 810.0,
+        "memory_total_mb": 24564.0
+      }
+    ],
+    "windows": {
+      "60": {
+        "mean_percent": 50.833333333333336,
+        "samples": 6,
+        "covered_seconds": 50.21627473831177
+      },
+      "300": {
+        "mean_percent": 44.93333333333333,
+        "samples": 30,
+        "covered_seconds": 291.4561138153076
+      },
+      "900": {
+        "mean_percent": 37.31111111111111,
+        "samples": 90,
+        "covered_seconds": 895.0095269680023
+      },
+      "14400": {
+        "mean_percent": 36.08530805687204,
+        "samples": 211,
+        "covered_seconds": 2111.759678840637
+      }
+    },
+    "provider_minimum_percent": 26.0,
+    "operational_target_percent": 40.0,
+    "alert": null,
+    "note": "Local 10s samples approximate provider accounting; rolling windows cover only samples since this resource restart"
+  },
+  "development": {
+    "pid": 10556,
+    "heartbeat": "2026-10-05T10:21:05.233454+00:00",
+    "session": "pid:[4026551245]",
+    "current": [
+      {
+        "index": 0,
+        "utilization": 0.0,
+        "memory_used_mb": 0.0,
+        "memory_total_mb": 143771.0
+      },
+      {
+        "index": 1,
+        "utilization": 0.0,
+        "memory_used_mb": 0.0,
+        "memory_total_mb": 143771.0
+      },
+      {
+        "index": 2,
+        "utilization": 0.0,
+        "memory_used_mb": 0.0,
+        "memory_total_mb": 143771.0
+      },
+      {
+        "index": 3,
+        "utilization": 0.0,
+        "memory_used_mb": 0.0,
+        "memory_total_mb": 143771.0
+      }
+    ],
+    "windows": {
+      "60": {
+        "mean_percent": 6.166666666666667,
+        "samples": 6,
+        "covered_seconds": 50.48092818260193
+      },
+      "300": {
+        "mean_percent": 15.9,
+        "samples": 30,
+        "covered_seconds": 298.0244541168213
+      },
+      "900": {
+        "mean_percent": 16.334269662921347,
+        "samples": 89,
+        "covered_seconds": 898.360853433609
+      },
+      "14400": {
+        "mean_percent": 18.043367346938776,
+        "samples": 196,
+        "covered_seconds": 1981.5862400531769
+      }
+    },
+    "provider_minimum_percent": 26.0,
+    "operational_target_percent": 40.0,
+    "alert": "low_utilization",
+    "note": "Local 10s samples approximate provider accounting; rolling windows cover only samples since this resource restart"
+  }
+}

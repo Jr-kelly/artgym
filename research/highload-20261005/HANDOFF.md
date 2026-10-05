@@ -19,13 +19,12 @@
   "delivery_complete": false,
   "goal_complete": false,
   "active_jobs": [],
-  "next": "Commit code and exact-tree branch; upload and verify22 Release assets",
+  "next": "Publish complete source metadata before creating Release",
   "last_event": {
-    "utc": "2026-10-05T10:23:41.972488+00:00",
-    "event": "delivery_artifacts_prepared",
-    "evidence": "research/highload-20261005/RELEASE-ASSETS.json",
-    "conclusion": "Publish byte-identical tested runtime-v11 overlay, not metadata-repacked v12 overlay. Final evidence packet contains31 new physical trajectories and negative/preprocessing receipts;6 raw full videos plus2 paired views. No private media.",
-    "next": "Commit code and exact-tree branch; upload and verify22 Release assets"
+    "utc": "2026-10-05T10:24:09.241872+00:00",
+    "event": "metadata_tracking_fixed",
+    "conclusion": "Repository-wide *.json ignore excluded new freeze/evidence metadata from initial source commit. Added whitelist only for new research directory; runnable tested overlay already contained these files.",
+    "next": "Publish complete source metadata before creating Release"
   },
   "local_resource_monitor_pid": null,
   "resource_monitors_stopped": true,
@@ -35,6 +34,8 @@
   "functional_demo_ready": true,
   "necessary_generalization_resolved": false,
   "axial_force_measurement_resolved": false,
-  "active_remote_launchers": []
+  "active_remote_launchers": [],
+  "github_branch": "feat/wuji-highload-20261005",
+  "github_commit": "bfa949c4142f7e3ec4728c63370ce052a58495c8"
 }
 ```

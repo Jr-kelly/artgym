@@ -1,0 +1,120 @@
+[
+  {
+    "path": "runs/highload-20261005/continuous/support2-main050-v6",
+    "result": {
+      "criterion": {
+        "version": 1,
+        "declared_utc": "2026-10-03T20:22:00+00:00",
+        "scope": "Functional two-cycle behavior, separately from unchanged historical 0.25rad world-pose regression; diagnostic held resets never qualify as pickup demos.",
+        "endpoint": {
+          "extension_min_m": 0.025,
+          "retraction_max_m": 0.008,
+          "command_travel_m": 0.04
+        },
+        "grip": {
+          "minimum_height_above_table_m": 0.03,
+          "relative_translation_envelope_m": 0.015,
+          "relative_rotation_envelope_rad": 0.6,
+          "cycle_return_translation_increment_max_m": 0.005,
+          "cycle_return_rotation_increment_max_rad": 0.1,
+          "final_hold_translation_speed_max_m_s": 0.003,
+          "final_hold_rotation_speed_max_rad_s": 0.06
+        },
+        "contact": {
+          "thumb_slider_substep_fraction_min": 0.9,
+          "maximum_contiguous_zero_contact_s": 0.5
+        },
+        "rationale": "15mm and 0.6rad are broad escape envelopes, not precision targets. Return-to-return drift <=5mm/0.10rad and last-second settling distinguish progressive slip from bounded new seating; both meaningful endpoints and sustained slider contact remain mandatory. World-pose legacy score is reported unchanged; active wrist motion is shown separately."
+      },
+      "trace_sha256": "62137a1dcf105457e0b0dfb6db70c168d50340a341707d3a22a964b894e8111c",
+      "checks": {
+        "two_cycles": true,
+        "clear": true,
+        "relative_envelope": false,
+        "endpoints": false,
+        "bounded_return_drift": true,
+        "final_settling": true,
+        "thumb_contact": false
+      },
+      "functional_behavior_pass": false,
+      "continuous_pickup_demo_pass": false,
+      "held_diagnostic": false,
+      "measurement_diagnostic": false,
+      "legacy_full_success": false,
+      "slider_endpoints_m": {
+        "extend1": 0.030110694018271877,
+        "return1": 0.004973227639761879,
+        "extend2": 0.03545196693584801,
+        "return2": 0.01921359684046836
+      },
+      "relative_max_rotation_rad": 1.6438080058683777,
+      "relative_max_translation_m": 0.013248564991148844,
+      "active_wrist_max_rotation_rad": 0.000523357025097044,
+      "return_to_return_rotation_rad": 0.007401445977535634,
+      "return_to_return_translation_m": 0.00013621059652708288,
+      "final_hold_translation_speed_m_s": 0.00015389130110020032,
+      "final_hold_rotation_speed_rad_s": 0.007929847108550752,
+      "thumb_contact_substep_fraction": 0.8235294117647058,
+      "longest_zero_thumb_contact_s": 3.1333333333333333
+    }
+  },
+  {
+    "path": "runs/highload-20261005/continuous/support2-main035-v6",
+    "result": {
+      "criterion": {
+        "version": 1,
+        "declared_utc": "2026-10-03T20:22:00+00:00",
+        "scope": "Functional two-cycle behavior, separately from unchanged historical 0.25rad world-pose regression; diagnostic held resets never qualify as pickup demos.",
+        "endpoint": {
+          "extension_min_m": 0.025,
+          "retraction_max_m": 0.008,
+          "command_travel_m": 0.04
+        },
+        "grip": {
+          "minimum_height_above_table_m": 0.03,
+          "relative_translation_envelope_m": 0.015,
+          "relative_rotation_envelope_rad": 0.6,
+          "cycle_return_translation_increment_max_m": 0.005,
+          "cycle_return_rotation_increment_max_rad": 0.1,
+          "final_hold_translation_speed_max_m_s": 0.003,
+          "final_hold_rotation_speed_max_rad_s": 0.06
+        },
+        "contact": {
+          "thumb_slider_substep_fraction_min": 0.9,
+          "maximum_contiguous_zero_contact_s": 0.5
+        },
+        "rationale": "15mm and 0.6rad are broad escape envelopes, not precision targets. Return-to-return drift <=5mm/0.10rad and last-second settling distinguish progressive slip from bounded new seating; both meaningful endpoints and sustained slider contact remain mandatory. World-pose legacy score is reported unchanged; active wrist motion is shown separately."
+      },
+      "trace_sha256": "a413c90b8e817dc0dff1033771cc41177b0b24c009fcbc6467e08a12291e2dd3",
+      "checks": {
+        "two_cycles": true,
+        "clear": true,
+        "relative_envelope": false,
+        "endpoints": false,
+        "bounded_return_drift": false,
+        "final_settling": false,
+        "thumb_contact": true
+      },
+      "functional_behavior_pass": false,
+      "continuous_pickup_demo_pass": false,
+      "held_diagnostic": false,
+      "measurement_diagnostic": false,
+      "legacy_full_success": false,
+      "slider_endpoints_m": {
+        "extend1": 0.03449180688903214,
+        "return1": 0.003556587283578827,
+        "extend2": 0.03686090117980273,
+        "return2": 0.015086027343836739
+      },
+      "relative_max_rotation_rad": 0.7075611454088222,
+      "relative_max_translation_m": 0.0066251634100705035,
+      "active_wrist_max_rotation_rad": 0.0004279116744524626,
+      "return_to_return_rotation_rad": 0.1545510101173802,
+      "return_to_return_translation_m": 0.001028400042376487,
+      "final_hold_translation_speed_m_s": 0.000773332831394038,
+      "final_hold_rotation_speed_rad_s": 0.11035248527513403,
+      "thumb_contact_substep_fraction": 0.997712146422629,
+      "longest_zero_thumb_contact_s": 0.0
+    }
+  }
+]

@@ -1,0 +1,497 @@
+[
+  {
+    "trial": "runs/highload-20261005/capacity/tracking1-load050-added0.05-v1",
+    "cycles": [
+      {
+        "cycle": 1,
+        "peak_time_s": 18.166666666666668,
+        "peak_rotation_rad": 0.7394016485325496,
+        "peak_rotvec": [
+          0.04165375083116573,
+          -0.025238637613542506,
+          0.7377958891629578
+        ],
+        "time_above_original_envelope_s": 0.5333333333333333,
+        "axis_tilt_at_peak_rad": 0.0476060259859487,
+        "maximum_axis_tilt_rad": 0.0894359479577715,
+        "thumb_contact_at_peak": 1.0,
+        "body_contact_fraction_at_peak": [
+          0.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "normal_moments_at_peak": [
+          [
+            -0.011428751740608112,
+            7.857604057894849e-05,
+            -0.0007669325163161277
+          ],
+          [
+            -0.011061992739108628,
+            0.011494971878798317,
+            -0.000443823374925091
+          ],
+          [
+            -0.004109539471749728,
+            0.0027996248656752512,
+            -0.00113403498286814
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.021028819276226247,
+            -0.00670127653786062,
+            -0.0022029992642222814
+          ]
+        ],
+        "return_rotation_rad": 0.039861651202401524,
+        "stages": [
+          {
+            "window_s": [
+              16,
+              21
+            ],
+            "median_endpoint_mm": 28.79640112359555,
+            "actual_signed_travel_mm": 28.314634691923857,
+            "peak_angle_rad": 0.7394016485325496,
+            "thumb_contact_fraction": 1.0,
+            "minimum_slider_distance_from_either_stop_mm": 1.286576052275612
+          },
+          {
+            "window_s": [
+              21,
+              26
+            ],
+            "median_endpoint_mm": 5.721117851403667,
+            "actual_signed_travel_mm": -24.598201271146536,
+            "peak_angle_rad": 0.3591815630997682,
+            "thumb_contact_fraction": 0.9942052980132451,
+            "minimum_slider_distance_from_either_stop_mm": 5.026191954580261
+          }
+        ]
+      },
+      {
+        "cycle": 2,
+        "peak_time_s": 28.0,
+        "peak_rotation_rad": 0.7336135797908646,
+        "peak_rotvec": [
+          0.03436659587328578,
+          -0.018855233854545635,
+          0.7325655613649469
+        ],
+        "time_above_original_envelope_s": 0.6333333333333333,
+        "axis_tilt_at_peak_rad": 0.0383284850732845,
+        "maximum_axis_tilt_rad": 0.09067105366054598,
+        "thumb_contact_at_peak": 1.0,
+        "body_contact_fraction_at_peak": [
+          0.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "normal_moments_at_peak": [
+          [
+            -0.012355872219978681,
+            0.00025886957380684384,
+            -0.001132413870106497
+          ],
+          [
+            -0.010695713681069894,
+            0.010985521878336202,
+            -0.0004412821230642663
+          ],
+          [
+            -0.00423842475847989,
+            0.0028379408959054407,
+            -0.0012155412727856195
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.023504174699061058,
+            -0.006012203433397241,
+            -0.0026037351060528196
+          ]
+        ],
+        "return_rotation_rad": 0.021442795648322594,
+        "stages": [
+          {
+            "window_s": [
+              26,
+              31
+            ],
+            "median_endpoint_mm": 30.800264868498907,
+            "actual_signed_travel_mm": 26.478290208615363,
+            "peak_angle_rad": 0.7336135797908646,
+            "thumb_contact_fraction": 1.0,
+            "minimum_slider_distance_from_either_stop_mm": 4.599230845538093
+          },
+          {
+            "window_s": [
+              31,
+              36
+            ],
+            "median_endpoint_mm": 10.09433950957389,
+            "actual_signed_travel_mm": -21.9296250725165,
+            "peak_angle_rad": 0.3586082920560163,
+            "thumb_contact_fraction": 0.9908940397350994,
+            "minimum_slider_distance_from_either_stop_mm": 9.574857090679123
+          }
+        ]
+      }
+    ],
+    "scope": "Evaluation-only transient rotation, all recorded cycles and known-load work.\n\nOriginal functional criterion is calculated separately without modification.\nThis report never upgrades a criterion failure or equates axial test load to B.\n",
+    "B_original_axial_N": null,
+    "C_original_rail_N": null,
+    "known_test_load": {
+      "samples": 4801,
+      "active_fraction": 0.9997917100604041,
+      "applied_abs_N": [
+        0.0,
+        0.05
+      ],
+      "work_J": -0.005066037562210113,
+      "positive_wrong_direction_work_J": 9.112396219279609e-05,
+      "scope": "Balanced opposing test load, not measured total axial traction; positive work occurs only in wrong-direction motion. Does not certify complete task unless all original checks pass."
+    }
+  },
+  {
+    "trial": "runs/highload-20261005/capacity/tracking1-load050-added0.10-v1",
+    "cycles": [
+      {
+        "cycle": 1,
+        "peak_time_s": 18.166666666666668,
+        "peak_rotation_rad": 0.7775421359027557,
+        "peak_rotvec": [
+          0.040873426079898655,
+          -0.02633265796230789,
+          0.7760204425589255
+        ],
+        "time_above_original_envelope_s": 0.7,
+        "axis_tilt_at_peak_rad": 0.04741031904845829,
+        "maximum_axis_tilt_rad": 0.08888769138986947,
+        "thumb_contact_at_peak": 1.0,
+        "body_contact_fraction_at_peak": [
+          0.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "normal_moments_at_peak": [
+          [
+            -0.011337713493800855,
+            4.988625011664506e-05,
+            -0.0014645329572547557
+          ],
+          [
+            -0.010296306323037767,
+            0.011600305189203238,
+            -0.0002903594896906034
+          ],
+          [
+            -0.004003146636850369,
+            0.002987080905962944,
+            -0.0009897676111583985
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.019693839271267,
+            -0.007189765485833754,
+            -0.0019663592651172398
+          ]
+        ],
+        "return_rotation_rad": 0.31727989602854884,
+        "stages": [
+          {
+            "window_s": [
+              16,
+              21
+            ],
+            "median_endpoint_mm": 22.84700005975099,
+            "actual_signed_travel_mm": 22.418578155338764,
+            "peak_angle_rad": 0.7775421359027557,
+            "thumb_contact_fraction": 1.0,
+            "minimum_slider_distance_from_either_stop_mm": 1.2206421392831346
+          },
+          {
+            "window_s": [
+              21,
+              26
+            ],
+            "median_endpoint_mm": -1.3810720900231388e-06,
+            "actual_signed_travel_mm": -23.728338070213795,
+            "peak_angle_rad": 0.4239931482831575,
+            "thumb_contact_fraction": 0.9925496688741722,
+            "minimum_slider_distance_from_either_stop_mm": -1.3810720900231388e-06
+          }
+        ]
+      },
+      {
+        "cycle": 2,
+        "peak_time_s": 31.0,
+        "peak_rotation_rad": 1.0307292819454172,
+        "peak_rotvec": [
+          0.03334252694909036,
+          -0.037281587645965904,
+          1.0295150371796233
+        ],
+        "time_above_original_envelope_s": 4.233333333333333,
+        "axis_tilt_at_peak_rad": 0.047836119041028295,
+        "maximum_axis_tilt_rad": 0.06121322716640811,
+        "thumb_contact_at_peak": 1.0,
+        "body_contact_fraction_at_peak": [
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "normal_moments_at_peak": [
+          [
+            -0.012563849189812244,
+            0.0015091696314546322,
+            -0.002688862197023064
+          ],
+          [
+            -0.00956432178894307,
+            0.02182877109826793,
+            0.001203758702804566
+          ],
+          [
+            -0.003625737851580152,
+            0.005006889321465723,
+            7.845639749611271e-05
+          ],
+          [
+            0.0011894828640523257,
+            -0.0024678496478596035,
+            0.00024221604006080717
+          ],
+          [
+            0.0308076789509442,
+            -0.021606857725163995,
+            -0.001986700380282754
+          ]
+        ],
+        "return_rotation_rad": 0.3679123231733577,
+        "stages": [
+          {
+            "window_s": [
+              26,
+              31
+            ],
+            "median_endpoint_mm": 4.363531728354408,
+            "actual_signed_travel_mm": 5.046915262937546,
+            "peak_angle_rad": 1.0307292819454172,
+            "thumb_contact_fraction": 0.9991721854304636,
+            "minimum_slider_distance_from_either_stop_mm": -1.3810720900231388e-06
+          },
+          {
+            "window_s": [
+              31,
+              36
+            ],
+            "median_endpoint_mm": -1.3810720900231388e-06,
+            "actual_signed_travel_mm": -5.046915262937546,
+            "peak_angle_rad": 1.0307292819454172,
+            "thumb_contact_fraction": 0.9950331125827815,
+            "minimum_slider_distance_from_either_stop_mm": -1.3810720900231388e-06
+          }
+        ]
+      }
+    ],
+    "scope": "Evaluation-only transient rotation, all recorded cycles and known-load work.\n\nOriginal functional criterion is calculated separately without modification.\nThis report never upgrades a criterion failure or equates axial test load to B.\n",
+    "B_original_axial_N": null,
+    "C_original_rail_N": null,
+    "known_test_load": {
+      "samples": 4801,
+      "active_fraction": 0.9997917100604041,
+      "applied_abs_N": [
+        0.0,
+        0.1
+      ],
+      "work_J": -0.005624074675142775,
+      "positive_wrong_direction_work_J": 0.0007355526089668285,
+      "scope": "Balanced opposing test load, not measured total axial traction; positive work occurs only in wrong-direction motion. Does not certify complete task unless all original checks pass."
+    }
+  },
+  {
+    "trial": "runs/highload-20261005/capacity/tracking1-load020-added0.05-video-v3",
+    "cycles": [
+      {
+        "cycle": 1,
+        "peak_time_s": 18.7,
+        "peak_rotation_rad": 0.30695028444974637,
+        "peak_rotvec": [
+          0.07157348290421306,
+          -0.017198458966255704,
+          0.2979931654886175
+        ],
+        "time_above_original_envelope_s": 0.0,
+        "axis_tilt_at_peak_rad": 0.07333859947257058,
+        "maximum_axis_tilt_rad": 0.08753853416628488,
+        "thumb_contact_at_peak": 1.0,
+        "body_contact_fraction_at_peak": [
+          0.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "normal_moments_at_peak": [
+          [
+            0.0006535010265396425,
+            -1.1916996702075013e-06,
+            -0.0007785094217143192
+          ],
+          [
+            -0.019924514341002283,
+            0.007710769767765703,
+            -0.0025707043416158325
+          ],
+          [
+            -0.005354457784934757,
+            0.0008273838991447254,
+            -0.002643643427339226
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.01616282287711194,
+            -0.0004361349149653277,
+            -0.0014197337168099296
+          ]
+        ],
+        "return_rotation_rad": 0.036653559237815526,
+        "stages": [
+          {
+            "window_s": [
+              16,
+              21
+            ],
+            "median_endpoint_mm": 34.21530717013882,
+            "actual_signed_travel_mm": 33.212347771041095,
+            "peak_angle_rad": 0.30695028444974637,
+            "thumb_contact_fraction": 0.9991721854304636,
+            "minimum_slider_distance_from_either_stop_mm": 1.280325015154793
+          },
+          {
+            "window_s": [
+              21,
+              26
+            ],
+            "median_endpoint_mm": 0.592744459477379,
+            "actual_signed_travel_mm": -34.316888893954456,
+            "peak_angle_rad": 0.16760045834020867,
+            "thumb_contact_fraction": 1.0,
+            "minimum_slider_distance_from_either_stop_mm": 0.19856404241652692
+          }
+        ]
+      },
+      {
+        "cycle": 2,
+        "peak_time_s": 27.833333333333332,
+        "peak_rotation_rad": 0.5740111205116454,
+        "peak_rotvec": [
+          0.030442889999635528,
+          -0.01315420347320356,
+          0.5730523220880361
+        ],
+        "time_above_original_envelope_s": 0.0,
+        "axis_tilt_at_peak_rad": 0.03271131347784115,
+        "maximum_axis_tilt_rad": 0.08899258605865534,
+        "thumb_contact_at_peak": 1.0,
+        "body_contact_fraction_at_peak": [
+          0.0,
+          1.0,
+          1.0,
+          0.125,
+          1.0
+        ],
+        "normal_moments_at_peak": [
+          [
+            -0.012905717600390235,
+            0.0012674989795960754,
+            -0.00016389115166453216
+          ],
+          [
+            -0.012806747868436668,
+            0.009319660632112288,
+            -0.0010597570527823969
+          ],
+          [
+            -0.0048342388060743716,
+            0.0021968921712681444,
+            -0.0018235854720441201
+          ],
+          [
+            0.00035586013475178373,
+            -0.00026878969906629353,
+            -5.49833762070895e-05
+          ],
+          [
+            0.024478938843221176,
+            -0.002391501574761504,
+            -0.003110459283165959
+          ]
+        ],
+        "return_rotation_rad": 0.03178311996231872,
+        "stages": [
+          {
+            "window_s": [
+              26,
+              31
+            ],
+            "median_endpoint_mm": 34.41544478254871,
+            "actual_signed_travel_mm": 34.51740276068449,
+            "peak_angle_rad": 0.5740111205116454,
+            "thumb_contact_fraction": 1.0,
+            "minimum_slider_distance_from_either_stop_mm": -1.3810720900231388e-06
+          },
+          {
+            "window_s": [
+              31,
+              36
+            ],
+            "median_endpoint_mm": 1.3905507671508333,
+            "actual_signed_travel_mm": -33.73499866575003,
+            "peak_angle_rad": 0.12800790440591112,
+            "thumb_contact_fraction": 1.0,
+            "minimum_slider_distance_from_either_stop_mm": 0.9809681373509904
+          }
+        ]
+      }
+    ],
+    "scope": "Evaluation-only transient rotation, all recorded cycles and known-load work.\n\nOriginal functional criterion is calculated separately without modification.\nThis report never upgrades a criterion failure or equates axial test load to B.\n",
+    "B_original_axial_N": null,
+    "C_original_rail_N": null,
+    "known_test_load": {
+      "samples": 4801,
+      "active_fraction": 0.9997917100604041,
+      "applied_abs_N": [
+        0.0,
+        0.05
+      ],
+      "work_J": -0.006789081904571482,
+      "positive_wrong_direction_work_J": 0.00011627085623331367,
+      "scope": "Balanced opposing test load, not measured total axial traction; positive work occurs only in wrong-direction motion. Does not certify complete task unless all original checks pass."
+    }
+  }
+]
