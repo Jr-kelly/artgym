@@ -5,7 +5,7 @@
 ```json
 {
   "round_start_utc": "2026-10-05T08:09:55.058672+00:00",
-  "phase": "Validated runnable improvement; final source and evidence publication",
+  "phase": "Stage delivery complete; runnable .35 improvement with explicit unresolved limits",
   "local_root": "/data/research/artgym-experiments-20260921/traction-20261005",
   "remote_root": "/home/wangjiarui/artgym-traction-20261005",
   "baseline_local_commit": "c392ce17603b047ab5333af93588fd8e85fc27dc",
@@ -15,29 +15,24 @@
   "gpu_hour_cap": null,
   "no_subagents": true,
   "real_robot_ran": false,
-  "delivery_complete": false,
+  "delivery_complete": true,
   "goal_complete": false,
   "active_jobs": [],
-  "next": "Publish prepared source and Release; retain unresolved scope",
+  "next": "No owned simulation processes remain. Next research: support/axial coordination at high load; reserve new joint conditions. Hardware awaits actual SDK/knife measurements.",
   "last_event": {
-    "utc": "2026-10-05T09:21:35.790419+00:00",
-    "event": "final_validation_closed",
-    "evidence": [
-      "research/traction-20261005/DELIVERY-RESULTS.json",
-      "research/traction-20261005/RESTORE-FINAL-EQUIVALENCE.json",
-      "research/traction-20261005/REMOTE-RECEIPTS-IMPORTED.json"
-    ],
-    "conclusion": "22 preserved comparisons. Selected .35 local/remote/restore pass; nominal and four development geometry regressions pass; fresh joint1/4 passes. Highload .5 and necessary generalization still fail.",
-    "phase": "Validated runnable improvement; final source and evidence publication",
-    "state_updates": {
-      "functional_demo_ready": true,
-      "necessary_generalization_resolved": false,
-      "axial_force_measurement_resolved": false,
-      "hardware_ready": false,
-      "real_robot_ran": false,
-      "goal_complete": false
+    "utc": "2026-10-05T09:29:52.470557+00:00",
+    "event": "final_public_verification_completed",
+    "evidence": "research/traction-20261005/FINAL-PUBLIC-VERIFICATION.json",
+    "config": {
+      "publicly_downloaded_receipt": true,
+      "release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-g2-traction-20261005-v1",
+      "published_at": "2026-10-05T09:28:38Z",
+      "assets_verified": 24,
+      "all_server_sha256_match": true,
+      "tag_commit": "59ff7bb04b5a130a0ca965f181e3a70f7c17ad6e"
     },
-    "next": "Publish prepared source and Release; retain unresolved scope"
+    "phase": "Stage delivery complete; runnable .35 improvement with explicit unresolved limits",
+    "next": "No owned simulation processes remain. Next research: support/axial coordination at high load; reserve new joint conditions. Hardware awaits actual SDK/knife measurements."
   },
   "active_remote_launchers": [],
   "remote_resource_monitor_pid": null,
@@ -46,6 +41,9 @@
   "functional_demo_ready": true,
   "necessary_generalization_resolved": false,
   "axial_force_measurement_resolved": false,
-  "hardware_ready": false
+  "hardware_ready": false,
+  "github_branch": "feat/wuji-traction-20261005",
+  "github_commit": "59ff7bb04b5a130a0ca965f181e3a70f7c17ad6e",
+  "github_release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-g2-traction-20261005-v1"
 }
 ```
