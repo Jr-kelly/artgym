@@ -3,9 +3,10 @@
   "selected_runtime_unchanged": true,
   "changed_existing_scripts": [
     "scripts/analyze_wuji_traction.py",
+    "scripts/package_wuji_traction.py",
     "scripts/prepare_wuji_traction_validation.py"
   ],
-  "scope": "Only offline analysis path relocation and fresh validation setup magnitude correction differ; selected simulation entry, all control code, frozen manifest and references unchanged. Additional reporting/publication scripts and documents do not execute inside simulation.",
+  "scope": "Existing changes only: offline analysis relocation, fresh validation magnitude setup and evidence packaging. Additional report/publication modules and documents never execute in selected simulation. All selected simulation/control source, frozen manifest and references remain identical to actual restored run.",
   "unchanged_files": [
     {
       "path": "research/traction-20261005/FROZEN-CANDIDATE-V13.json",
@@ -1810,10 +1811,6 @@
     {
       "path": "scripts/package_wuji_timed_student200.py",
       "sha256": "2ae9aff42adb3ce8d3d46cb0321deae23f154f6aaee1f27bb3a39cb719ca7170"
-    },
-    {
-      "path": "scripts/package_wuji_traction.py",
-      "sha256": "b31b458b45f7789196c2f1f50647a9e8c13ae68dc769062ebcacd3f17cc15da8"
     },
     {
       "path": "scripts/package_wuji_unified_completed.py",
