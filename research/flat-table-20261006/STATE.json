@@ -6,24 +6,26 @@
   "vision_validated": false,
   "real_robot_ran": false,
   "active_jobs": [],
-  "next": "Preserve native19.724mmtable-supported stroke; develop different actual opposing grip before airheld operation, no rejected path repeats.",
+  "next": "Changed opposing grip/acquisition required forairheldcontinuation; preserve19mmactualentry, do notrepeatfailedpaths.",
   "last_event": {
-    "utc": "2026-10-06T09:46:19.989356+00:00",
-    "event": "functional_inverse_round_physical_results_saved",
+    "utc": "2026-10-06T09:47:58.737193+00:00",
+    "event": "final_actual_progress_publication_verified",
     "evidence": [
-      "runs/flat-table-20261006/development/actual-active12mm-continued-native-20261006/simulation/native-segment-summary.json",
-      "runs/flat-table-20261006/development/actual-active19mm-complete-native-20261006/simulation/native-segment-summary.json",
-      "runs/flat-table-20261006/development/continuous-corner-bilateral-release-native-20261006/simulation/native-segment-summary.json"
+      "research/flat-table-20261006/FINAL-SUPPLEMENT-ARTIFACTS.json"
     ],
     "config": {
-      "new_actual": "Nativeactive11.89mm thencontinuedstable19.724mm; indexsurfacehandofflink4topad, thumbactualslidercontact.",
-      "incomplete": "Airheldopposition not established; >20mmpeak24.852dropsbeforehold; fullcontinuousAtoB/gennotpassed.",
-      "rejected": "Middlefloor3.77mm+selfgap-3.16mm; middlesidegap-7.12mm; indexunder3.3mm/negativeclearance. No knowingly invalidphysical.",
-      "release_result": "Bothsurfacesnormalwithdraw still ejects; stopcaprelease.",
-      "next_requires": "Changed opposing-grip topology or learned joint arm/hand grasp acquisition that preserves finite-PD support; do not repeat this round paths."
+      "github_commit": "84e8b01",
+      "release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-flat-table-progress-20261006-v2",
+      "server_digests_match": true,
+      "assets": {
+        "wuji-functional-inverse-final-supplement-20261006.tar.gz": "625400abfe4ace2c879c3751140dceb2a8f7317be31fea448e3ec211e4b4014c",
+        "wuji-actual-stable19mm-20261006.mp4": "48758f914d3648f8c2d7d9e5c2db413415958e8bd25399f85e2ac425c6d0c591"
+      },
+      "new_behavior": "Table-supported actualstable19.724mmslider",
+      "full_goal_complete": false
     },
     "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
-    "next": "Preserve native19.724mmtable-supported stroke; develop different actual opposing grip before airheld operation, no rejected path repeats."
+    "next": "Changed opposing grip/acquisition required forairheldcontinuation; preserve19mmactualentry, do notrepeatfailedpaths."
   },
   "remote_root": "/home/wangjiarui/artgym-newknife-20261005",
   "placement_generalization": "not reached",
@@ -35,8 +37,8 @@
   "goal_status": "active",
   "github_release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-flat-table-progress-20261006-v2",
   "github_progress_source_commit": "cc44ca8d0fafdca76a1c8db1a5c087561e7c3b8e",
-  "github_commit": "deadce7",
-  "all_saved_progress_published": false,
+  "github_commit": "84e8b01",
+  "all_saved_progress_published": true,
   "execution_priority": "Fastest reproducible continuous demo; uncertainty-driven minimal experiments; reuse actual A state/history; no homogeneous failures or premature matrices",
   "execution_limitation_scope": "Blocked content may not be reproduced/worked around; specific rejected operation and trigger absent from original notice. No blanket simulation prohibition established.",
   "recorded_actual_hold_1s": true
