@@ -7,37 +7,48 @@
   "local_root": "/data/research/artgym-experiments-20260921/flat-table-20261006",
   "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
   "flat_table_pickup": true,
-  "continuous_pickup_to_extension": false,
+  "continuous_pickup_to_extension": true,
   "vision_validated": false,
   "real_robot_ran": false,
-  "active_jobs": [],
-  "next": "All saved progress now public; retain full Goal incomplete/blocked. Publication receipt final Git push pending.",
+  "active_jobs": [
+    "mid-geometry"
+  ],
+  "next": "Read actual connected result; no seed/repeated success sweep",
   "last_event": {
-    "utc": "2026-10-06T06:54:34.870577+00:00",
-    "event": "anonymous_progress_download_verified",
+    "utc": "2026-10-06T10:53:14.702831+00:00",
+    "event": "flat_connected_case_started",
     "evidence": [
-      "research/flat-table-20261006/PUBLIC-DELIVERY-v2.json"
+      "runs/flat-table-20261006/validation/connected-mid-geometry-v1/command.json"
     ],
     "config": {
-      "public": true,
-      "anonymous_checks": {
-        "selected-pickup-v123-continuous.mp4": "223e68ab5d3489261c46f6fd090c8828de13e4151474e63726666b49eb9ba38c",
-        "SHA256SUMS": "34da6f2f3d79e205937239c4b34be387412c7d0c62506253f29b5ea79c146d23"
+      "case": "mid-geometry",
+      "uncertainty": "Does connected fullflat controller retain actual behavior under this representative changed condition?",
+      "decision": "Pass preserves necessary local capability; fail identifies specific next adaptation",
+      "changes": {
+        "geometry": "Existing mid-high-delay:145.5x19.3x8.2mm,32.4x7.2x2.1mm slider,56g",
+        "resistance_capacity_N": 1.25,
+        "delay_frames": 1,
+        "controller": "Same A prefix and actor; existing estimate-generated B geometry configuration"
       }
     },
     "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
-    "next": "All saved progress now public; retain full Goal incomplete/blocked. Publication receipt final Git push pending."
+    "next": "Read actual connected result; no seed/repeated success sweep"
   },
   "remote_root": "/home/wangjiarui/artgym-newknife-20261005",
-  "placement_generalization": "not reached",
-  "geometry_load_generalization": "not reached",
+  "placement_generalization": "pending",
+  "geometry_load_generalization": "pending",
   "pose_source": "sim_oracle explicit pose interface and development prior contacts",
   "delivery_complete": false,
   "local_resource_monitor_pid": null,
   "resource_four_hour_compliance_claim": false,
-  "goal_status": "blocked",
+  "goal_status": "active",
   "github_release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-flat-table-progress-20261006-v2",
-  "github_progress_source_commit": "cc44ca8d0fafdca76a1c8db1a5c087561e7c3b8e"
+  "github_progress_source_commit": "cc44ca8d0fafdca76a1c8db1a5c087561e7c3b8e",
+  "github_commit": "84e8b01",
+  "all_saved_progress_published": false,
+  "execution_priority": "Fastest reproducible continuous demo; uncertainty-driven minimal experiments; reuse actual A state/history; no homogeneous failures or premature matrices",
+  "execution_limitation_scope": "Blocked content may not be reproduced/worked around; specific rejected operation and trigger absent from original notice. No blanket simulation prohibition established.",
+  "recorded_actual_hold_1s": true
 }
 ```
 
