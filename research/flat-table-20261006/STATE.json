@@ -6,23 +6,22 @@
   "vision_validated": false,
   "real_robot_ran": false,
   "active_jobs": [],
-  "next": "Package complete existing evidence and dependencies; fast-forward GitHub branch from remote head; upload new Release assets and verify SHA256.",
+  "next": "All saved progress now public; retain full Goal incomplete/blocked. Publication receipt final Git push pending.",
   "last_event": {
-    "utc": "2026-10-06T06:49:21.415476+00:00",
-    "event": "all_progress_publication_started",
+    "utc": "2026-10-06T06:54:34.870577+00:00",
+    "event": "anonymous_progress_download_verified",
     "evidence": [
-      "delivery/flat-table-20261006",
-      "research/flat-table-20261006",
-      "runs/flat-table-20261006"
+      "research/flat-table-20261006/PUBLIC-DELIVERY-v2.json"
     ],
     "config": {
-      "user_authorization": "上传所有进展",
-      "branch_remote_before": "74066ae73162531190e20f9422db1314a49d73c2",
-      "private_media_excluded": true,
-      "publish_scope": "existing source, simulation evidence and reproduction only; no new blocked experiments"
+      "public": true,
+      "anonymous_checks": {
+        "selected-pickup-v123-continuous.mp4": "223e68ab5d3489261c46f6fd090c8828de13e4151474e63726666b49eb9ba38c",
+        "SHA256SUMS": "34da6f2f3d79e205937239c4b34be387412c7d0c62506253f29b5ea79c146d23"
+      }
     },
     "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
-    "next": "Package complete existing evidence and dependencies; fast-forward GitHub branch from remote head; upload new Release assets and verify SHA256."
+    "next": "All saved progress now public; retain full Goal incomplete/blocked. Publication receipt final Git push pending."
   },
   "remote_root": "/home/wangjiarui/artgym-newknife-20261005",
   "placement_generalization": "not reached",
@@ -31,5 +30,7 @@
   "delivery_complete": false,
   "local_resource_monitor_pid": null,
   "resource_four_hour_compliance_claim": false,
-  "goal_status": "blocked"
+  "goal_status": "blocked",
+  "github_release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-flat-table-progress-20261006-v2",
+  "github_progress_source_commit": "cc44ca8d0fafdca76a1c8db1a5c087561e7c3b8e"
 }
