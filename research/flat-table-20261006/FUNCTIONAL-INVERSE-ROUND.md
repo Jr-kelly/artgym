@@ -17,3 +17,5 @@ Latest materialfeedback roofsliderpaced12s retains actualindex/table andsliderto
 Newphysicalmilestone: one32episode6sloadcoordinationbatch selects11.786mmdevelopmentcandidate; nativeactual-slider-coordination-selected7s confirms actualslider11.802mm (~11.89mmactiveincrease), index/thumb/table everyframe210, rootdrift7.35mm. Uses actualnewthumbmaterialpoint(.007962,.004516,-.006344) for continuedstroke nowactive; noidealreset. SearchterminalphysicslogencodingerrorfixedUTF8, no searchrerun. Not>20mmorairheldorcompleteA→B.
 
 Actualcontinuedmaterialfeedback reaches stable19.724mmslider whileindexcontacttransferslink4topad, alltableheld12s. Removingearlycontrollerzcap reaches24.852mmpeakbutdropsbeforehold; notsuccess. Stable19.72mmactualentrynowused for newmiddleflooropposition, indexpad/thumbmaterialpreserved. Goalstillrequiresairheldactive>20mmandcontinuouswholeflatproofandlocalgeneralization.
+
+Finalphysicalboundary: stabletable-supported19.724mm. Peak24.852mm failedgrip/hold. Middlefloor/side/indexunderopposition paths reject; capbilateralrelease drops. FullA→B andnecessarygeneralization unresolved. Allphysicsandsearchterminal.
