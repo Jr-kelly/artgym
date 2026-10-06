@@ -1,0 +1,10 @@
+"""Fixed actual successful capclamp; free middle pushes rear slider axial end, not underside support."""
+import json,numpy as np,time
+from pathlib import Path
+from scipy.optimize import least_squares
+from scripts.g2_kinematics import G2Kinematics,transform
+from scripts.g2_contact_geometry import DigitGeometry
+p=Path('runs/flat-table-20261006/preparation/middle-slider-end-20261006');p.mkdir();sp=p/'asset-spec.json';sp.write_text(json.dumps(dict(asset_urdf='assets/objects/knife_wuji_newknife_20261005/nominal-v5/mobility.urdf',file_sha256={})));g=DigitGeometry(max_face_axes=12,knife_spec=sp);s=np.load('runs/flat-table-20261006/recorded-handoff-v123-46s/takeover.npz');q=s['robot_q'][7:].astype(float);L=np.linalg.inv(transform(s['object_state'][:3],s['object_state'][3:7]))@G2Kinematics().forward(s['robot_q'][:7]);name='hand_r_middle_pad_link';V=np.concatenate([v for v,_ in g.meshes[name]]);T=L@g.w.forward(q)[name];P=V@T[:3,:3].T+T[:3,3];desired=np.array([0,.005,-.043]);material=V[np.argmin(np.linalg.norm(P-desired,axis=1))];x0=np.r_[q[4:8],0.,.005];lo=np.r_[g.w.lower[4:8]+.001,-.003,.0045];hi=np.r_[g.w.upper[4:8]-.001,.003,.006]
+def r(x):
+ qq=q.copy();qq[4:8]=x[:4];T=L@g.w.forward(qq)[name];point=T[:3,:3]@material+T[:3,3];rr=list((point-[x[4],x[5],-.043])*200);rr.extend(min(0,v['gap_lower_bound_m']-.0002)*150 for v in g.self_gaps(qq,'middle',certify_clearance_m=.0002));rr.extend(min(0,v['gap_lower_bound_m']-.0002)*80 for v in g.gaps(qq,L,0.,'middle') if v['hand_link']!=name);rr.extend((x-x0)*.003);return rr
+b=time.time();f=least_squares(r,np.clip(x0,lo+1e-7,hi-1e-7),bounds=(lo,hi),max_nfev=100);qq=q.copy();qq[4:8]=f.x[:4];T=L@g.w.forward(qq)[name];point=T[:3,:3]@material+T[:3,3];o=dict(hand_q=qq.tolist(),point=point.tolist(),target=[float(f.x[4]),float(f.x[5]),-.043],material_point=material.tolist(),error_m=float(np.linalg.norm(point-[f.x[4],f.x[5],-.043])),selfgap_m=min(v['gap_lower_bound_m'] for v in g.self_gaps(qq,'middle')),elapsed_s=time.time()-b,scope=__doc__);(p/'candidate.json').write_text(json.dumps(o,indent=2));print(json.dumps(o),flush=True)
