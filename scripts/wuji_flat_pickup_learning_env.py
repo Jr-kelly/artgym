@@ -10,11 +10,11 @@ from isaacgymenvs.utils.torch_jit_utils import quat_apply,quat_mul,quat_conjugat
 import numpy as np,torch
 class FlatPickupLearning(G2ContinuousScene):
  def __init__(self,n=8,seed=76,data='runs/flat-table-20261006/learning/real-prefix-v76'):
-  self.data=Path(data);self.handoff_mode=(self.data/"handoff.json").exists();self.ready=False
-  super().__init__(n=n,seed=seed,randomization_scale=0.,instances=['newknife-nominal']*n,load_max=0.,detent_max=0.,scene_spec=json.load(open(self.data/'scene.json')),reference_spec=json.load(open('runs/newknife-20261005/preparation/center-tail-support-v2/reference.json')),asset_registry={'newknife-nominal':'assets/objects/knife_wuji_newknife_20261005/nominal-v5'},resistance_integration='solver-brake',compact_isolated_layout=True)
+  self.data=Path(data);learning_scene=json.load(open(self.data/'scene.json'));learning_asset=learning_scene.get('learning_asset_directory','assets/objects/knife_wuji_newknife_20261005/nominal-v5');self.handoff_mode=(self.data/"handoff.json").exists();self.ready=False
+  super().__init__(n=n,seed=seed,randomization_scale=0.,instances=['newknife-nominal']*n,load_max=0.,detent_max=0.,scene_spec=learning_scene,reference_spec=json.load(open('runs/newknife-20261005/preparation/center-tail-support-v2/reference.json')),asset_registry={'newknife-nominal':learning_asset},resistance_integration='solver-brake',compact_isolated_layout=True)
   self.prefix=self.tensor(np.load(self.data/'prefix.npz')['targets']);self.path=self.tensor(np.load(self.data/'learn-path.npz')['targets']);self.steps=len(self.path);self.offset=torch.zeros(n,27,device=self.device);self.last=torch.zeros_like(self.offset);self.span=self.tensor([.12]*7+[.60]*20);self.slew=self.tensor([.006]*7+[.025]*20)
   for i,props in enumerate(self.slider_drive_properties):
-   props['effort'][:]=.73549875;self.gym.set_actor_dof_properties(self.envs[i],self.knives[i],props)
+   props['effort'][:]=learning_scene.get('newknife_resistance',{}).get('reference_N',.73549875);self.gym.set_actor_dof_properties(self.envs[i],self.knives[i],props)
   self.ready=True;self.reset(torch.arange(n,device=self.device))
  def servo(self,motor):
   self.target=torch.minimum(torch.maximum(motor,self.limitlow),self.limithi);self.command_target=self.target.clone()

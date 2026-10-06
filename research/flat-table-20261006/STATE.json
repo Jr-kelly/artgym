@@ -6,32 +6,29 @@
   "vision_validated": false,
   "real_robot_ran": false,
   "active_jobs": [
-    "mid-geometry"
+    "continuous-mid-servo-v5"
   ],
-  "next": "Read actual connected result; no seed/repeated success sweep",
+  "next": "Read wholegeometry/table/nonthumbsupport/activepushhold",
   "last_event": {
-    "utc": "2026-10-06T10:53:14.702831+00:00",
-    "event": "flat_connected_case_started",
+    "utc": "2026-10-06T11:10:29.321381+00:00",
+    "event": "continuous_mid_servo_v5_started",
     "evidence": [
-      "runs/flat-table-20261006/validation/connected-mid-geometry-v1/command.json"
+      "runs/flat-table-20261006/development/continuous-mid-servo-v5/command.json"
     ],
     "config": {
-      "case": "mid-geometry",
-      "uncertainty": "Does connected fullflat controller retain actual behavior under this representative changed condition?",
-      "decision": "Pass preserves necessary local capability; fail identifies specific next adaptation",
-      "changes": {
-        "geometry": "Existing mid-high-delay:145.5x19.3x8.2mm,32.4x7.2x2.1mm slider,56g",
-        "resistance_capacity_N": 1.25,
-        "delay_frames": 1,
-        "controller": "Same A prefix and actor; existing estimate-generated B geometry configuration"
-      }
+      "uncertainty": "Actualinitialrelation loadedtransport andboundedlatecorrection retains shortpass from realfullflat?",
+      "decision": "Pass completes representativegeometry/loadcheck; failurefixfirstdivergence",
+      "prefix_s": 82,
+      "load_N": 1.25,
+      "delay_frames": 1,
+      "controller": "OldBunchanged actor plus actualposeadaptA"
     },
     "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
-    "next": "Read actual connected result; no seed/repeated success sweep"
+    "next": "Read wholegeometry/table/nonthumbsupport/activepushhold"
   },
   "remote_root": "/home/wangjiarui/artgym-newknife-20261005",
-  "placement_generalization": "pending",
-  "geometry_load_generalization": "pending",
+  "placement_generalization": "Positive x/y1mm, yaw0.5deg with estimateX1mm passes27.46mm; opposite pending",
+  "geometry_load_generalization": "Nominal1.25N passes25.46mm; mid145.5mm(+delay/noise) Aplacesyaw60deg and Bgrasp IK12.6mm unreachable; failure retained",
   "pose_source": "sim_oracle explicit pose interface and development prior contacts",
   "delivery_complete": false,
   "local_resource_monitor_pid": null,
@@ -39,7 +36,7 @@
   "goal_status": "active",
   "github_release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-flat-table-progress-20261006-v2",
   "github_progress_source_commit": "cc44ca8d0fafdca76a1c8db1a5c087561e7c3b8e",
-  "github_commit": "84e8b01",
+  "github_commit": "85605ce136f490274e18b704e49e0909a201a30b",
   "all_saved_progress_published": false,
   "execution_priority": "Fastest reproducible continuous demo; uncertainty-driven minimal experiments; reuse actual A state/history; no homogeneous failures or premature matrices",
   "execution_limitation_scope": "Blocked content may not be reproduced/worked around; specific rejected operation and trigger absent from original notice. No blanket simulation prohibition established.",
