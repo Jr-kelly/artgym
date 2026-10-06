@@ -7,3 +7,7 @@ One continuous72.1s validation from original flat start retains clamp through64s
 Restore entries contain actual object13state, robot positions, slider, issued motor targets/history; robotvelocity finite-difference, PhysX warmstart absent. Development only, not exact resume equivalence. Actor unchanged 6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e. Original finitePD, gravity/effort/friction/resistance retained. No realrobot/realvision. Filter originalnotice preserved; no blanket experimentban established.
 
 Reproduce from experimentroot after source runs/contact-transfer-20261006/env.sh. Run scripts/run_wuji_saved_command.py with pertrial command.json; necessary short actualstate entries and motorpaths are in progress archive. Existing A-only entry remains python -m scripts.run_wuji_flat_table_pickup_selected --output <fresh>.
+
+Active topstroke native9s: rootdrift.336mm, slidertravel.0448mm, indexall270frames, thumb ends bodyrail. No>20mm. Newrearfaceaxialnormal approach planning; wholepadsideclearance andloadedoffset retained. GitHublatestdeadce7; topstroke evidencearchive uploaded originalReleasev2.
+
+Rearface approach native15s fails at4.3s before rearfacecontact; indexpointgait rotates indexsurface and ejection. New index-face-retained path now planning; no gain/seed scan. Rearface failurearchive uploadedReleasev2.

@@ -6,27 +6,23 @@
   "vision_validated": false,
   "real_robot_ran": false,
   "active_jobs": [
-    "slider-endpush-planner"
+    "thumb-margin-planner"
   ],
-  "next": "Continue new endfacepush; sync newresult after milestone.",
+  "next": "Free actual thumbjoint1 travel via wristpose, retainindexsurface.",
   "last_event": {
-    "utc": "2026-10-06T09:21:41.861832+00:00",
-    "event": "functional_inverse_actual_slider_progress_published",
+    "utc": "2026-10-06T09:31:32.290014+00:00",
+    "event": "slider_paced_pressure_thumb_bound_diagnosed",
     "evidence": [
-      "research/flat-table-20261006/FUNCTIONAL-INVERSE-ARTIFACTS.json"
+      "runs/flat-table-20261006/development/actual-slider-paced-pressure-native-20261006/simulation/native-segment-summary.json"
     ],
     "config": {
-      "github_commit": "84f9b75",
-      "release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-flat-table-progress-20261006-v2",
-      "assets_sha256": {
-        "wuji-functional-inverse-progress-20261006.tar.gz": "edbd8e529968f6bc5cce489be7935f34431fbc2461d0e746b4cdb52bc9fe7271",
-        "wuji-actual-slider-contact-20261006.mp4": "478741c0844134be79580f14661406925838a463ac42ce814e0d6142a6258a29"
-      },
-      "server_digest_matches": true,
-      "published_through": "actual slider contact; topstroke/newendpush laterprogress pending"
+      "result": "Index/table12s drift.550mm, actualslidertopcontact, travel.123mm. pressure.118N, thumbjoint1targetat1.6033upperbound.",
+      "uncertainty": "Jointwrist posture keepingindexsurface frees thumbjoint1 margin while slidercontact remains reachable?",
+      "decision": "Feasible->native posturethenfeedback; unreachable->stop this grasp posture.",
+      "no_more_pressure_gain_scan": true
     },
     "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
-    "next": "Continue new endfacepush; sync newresult after milestone."
+    "next": "Free actual thumbjoint1 travel via wristpose, retainindexsurface."
   },
   "remote_root": "/home/wangjiarui/artgym-newknife-20261005",
   "placement_generalization": "not reached",
@@ -38,7 +34,7 @@
   "goal_status": "active",
   "github_release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-flat-table-progress-20261006-v2",
   "github_progress_source_commit": "cc44ca8d0fafdca76a1c8db1a5c087561e7c3b8e",
-  "github_commit": "84f9b75",
+  "github_commit": "deadce7",
   "all_saved_progress_published": false,
   "execution_priority": "Fastest reproducible continuous demo; uncertainty-driven minimal experiments; reuse actual A state/history; no homogeneous failures or premature matrices",
   "execution_limitation_scope": "Blocked content may not be reproduced/worked around; specific rejected operation and trigger absent from original notice. No blanket simulation prohibition established.",

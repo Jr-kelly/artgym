@@ -46,6 +46,9 @@ def main():
  prefix_duration=flat_prefix['duration_s'] if flat_prefix else 0.
  recorded_handoff=np.load(a.recorded_handoff/'takeover.npz') if a.recorded_handoff else None
  recorded_support=json.loads(a.recorded_support_command.read_text()) if a.recorded_support_command else None
+ if recorded_support and 'thumb_material_servo' in recorded_support:
+  from scripts.wuji_kinematics import WujiKinematics
+  recorded_thumb_kin=WujiKinematics()
  recorded_servo_relative=None
  recorded_servo_initial=None
  if recorded_support:assert recorded_handoff is not None
@@ -484,7 +487,17 @@ def main():
     if recorded_handoff is not None:
      aq=recorded_handoff['issued_target'][:7].copy();hq=recorded_handoff['issued_target'][7:].copy()
      if recorded_support:
-      if a.recorded_planar_servo:
+      if 'thumb_material_servo' in recorded_support:
+       cfg=recorded_support['thumb_material_servo'];actual_object=transform(rb[oid,:3].numpy(),rb[oid,3:7].numpy());actual_arm=dof[arm,0].numpy().copy();actual_hand=dof[hand,0].numpy().copy();relative=np.linalg.inv(actual_object)@kin.forward(actual_arm);material=np.array(cfg['material_point']);desired=np.array(cfg['rearface_target']);desired[2]+=cfg.get('stroke_m',.03)*smooth(np.clip((t-cfg.get('push_start_s',3.))/cfg.get('push_duration_s',6.),0,1))
+       if cfg.get('slider_paced_roof',False):
+        desired=np.array([cfg.get('roof_x_m',0.),cfg.get('roof_y_m',.0045),-.026+float(dof[sid,0])+cfg.get('lead_m',.004)*smooth(np.clip((t-1.)/2.,0,1))]);desired[2]=min(desired[2],cfg.get('final_material_z_m',.004))
+       def point(h):
+        T=relative@recorded_thumb_kin.forward(h)['hand_r_thumb_pad_link'];return T[:3,:3]@material+T[:3,3]
+       current=point(actual_hand);J=np.zeros((3,4))
+       for j in range(4):
+        hh=actual_hand.copy();hh[16+j]+=1e-5;J[:,j]=(point(hh)-current)/1e-5
+       error=desired-current;delta=J.T@np.linalg.solve(J@J.T+np.eye(3)*1e-5,error);delta=np.clip(delta,-.025,.025);hq=recorded_handoff['issued_target'][7:].copy();hq[16:]=previously_issued_target[hand].numpy()[16:]+delta
+      elif a.recorded_planar_servo:
        actual_object=transform(rb[oid,:3].numpy(),rb[oid,3:7].numpy());actual_arm=dof[arm,0].numpy().copy()
        if recorded_servo_relative is None:
         recorded_servo_relative=np.linalg.inv(actual_object)@kin.forward(actual_arm);recorded_servo_initial=actual_object[:3,3].copy()

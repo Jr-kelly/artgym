@@ -3,16 +3,18 @@ import json,time,argparse
 from pathlib import Path
 import numpy as np
 from scipy.optimize import least_squares
+from scipy.spatial.transform import Rotation
 from scripts.g2_kinematics import G2Kinematics,transform
 from scripts.g2_contact_geometry import DigitGeometry
 from scripts.record_wuji_flat_table_event import record
 
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--actual-correction',action='store_true');ap.add_argument('--rail-clear',action='store_true');ap.add_argument('--stroke',action='store_true');ap.add_argument('--endpush',action='store_true');a=ap.parse_args()
+ ap=argparse.ArgumentParser();ap.add_argument('--actual-correction',action='store_true');ap.add_argument('--rail-clear',action='store_true');ap.add_argument('--stroke',action='store_true');ap.add_argument('--endpush',action='store_true');ap.add_argument('--retain-index-face',action='store_true');ap.add_argument('--thumb-margin',action='store_true');a=ap.parse_args()
+ if a.thumb_margin:a.stroke=True;a.retain_index_face=True
  if a.endpush:a.stroke=True
  if a.stroke:a.rail_clear=True
  if a.rail_clear:a.actual_correction=True
- p=Path('runs/flat-table-20261006/preparation/'+('actual-slider-endpush-20261006' if a.endpush else 'actual-slider-stroke-20261006' if a.stroke else 'actual-thumb-rail-clear-r1-20261006' if a.rail_clear else 'actual-loaded-thumb-correction-20261006' if a.actual_correction else 'actual-dual-support-thumb-20261006'));p.mkdir(exist_ok=False)
+ p=Path('runs/flat-table-20261006/preparation/'+('actual-slider-thumb-margin-20261006' if a.thumb_margin else 'actual-slider-endpush-face-20261006' if a.retain_index_face else 'actual-slider-endpush-20261006' if a.endpush else 'actual-slider-stroke-20261006' if a.stroke else 'actual-thumb-rail-clear-r1-20261006' if a.rail_clear else 'actual-loaded-thumb-correction-20261006' if a.actual_correction else 'actual-dual-support-thumb-20261006'));p.mkdir(exist_ok=False)
  sp=p/'asset-spec.json';sp.write_text(json.dumps(dict(asset_urdf='assets/objects/knife_wuji_newknife_20261005/nominal-v5/mobility.urdf',file_sha256={})))
  g=DigitGeometry(max_face_axes=6,knife_spec=sp);k=G2Kinematics();source=Path('runs/flat-table-20261006/'+('recorded-actual-slider-contact-8p9s' if a.stroke else 'recorded-loaded-correction-8p9s' if a.rail_clear else 'recorded-dual-thumb-9s' if a.actual_correction else 'recorded-new-dual-support-1s'));s=np.load(source/'takeover.npz')
  O=transform(s['object_state'][:3],s['object_state'][3:7]);q0=s['robot_q'].astype(float);offset=s['issued_target']-q0
@@ -26,19 +28,23 @@ def main():
  if a.rail_clear:targets[-1][0]=-.0015
  if a.stroke:
   c=next(c for c in json.load(open(source/'native-contacts.json'))['contacts'] if c['hand_link']=='hand_r_thumb_pad_link' and c['knife_link']=='link_1');materials[-1]=np.array(c['position_hand_link_m']);targets[-1]=np.array(c['position_knife_m'])+[0,0,.030]
+ if a.thumb_margin:targets[-1]=np.array(c['position_knife_m']);targets[-1][0]=0.;targets[-1][1]=.005
  V={n:np.concatenate([v for v,_ in meshes]) for n,meshes in g.meshes.items()};inv=np.linalg.inv(O)
  def state(x):
   q=q0.copy();q[ids]=x;W=k.forward(q[:7]);F=g.w.forward(q[7:]);L=inv@W
   pts=[(L@F[n])[:3,:3]@m+(L@F[n])[:3,3] for n,m in zip(names,materials)]
   return q,W,F,L,pts
  _,_,_,_,start=state(x0);rows=[];diagnostics=[];x=np.clip(x0,lo+1e-7,hi-1e-7);b=time.time()
- for u in np.linspace(0,1,13 if a.endpush else 9 if a.stroke else 7 if a.actual_correction else 13):
+ _,_,f0,l0,_=state(x0);index_rotation=(l0@f0[names[0]])[:3,:3]
+ for u in np.linspace(0,1,7 if a.retain_index_face else 13 if a.endpush else 9 if a.stroke else 7 if a.actual_correction else 13):
   thumb=(1-u)*start[-1]+u*(targets[-1]+[0,-.0003 if a.actual_correction else .0002,0])
   if a.endpush:
    key_u=[0,.25,.5,.65,1.];key_points=[start[-1],np.array([0,.015,-.046+float(s['slider_q'])]),np.array([0,.005,-.044+float(s['slider_q'])]),np.array([0,.005,-.0418+float(s['slider_q'])]),np.array([0,.005,-.0118+float(s['slider_q'])])];thumb=np.array([np.interp(u,key_u,[p[j] for p in key_points]) for j in range(3)])
   def residual(z):
    q,W,F,L,pts=state(z);r=[]
    for point,t in zip(pts,targets[:-1]+[thumb]):r.extend((point-t)*400)
+   if a.retain_index_face:r.extend(Rotation.from_matrix(index_rotation.T@(L@F[names[0]])[:3,:3]).as_rotvec()*12)
+   if a.thumb_margin:r.append((q[23]-(q0[23]*(1-u)+1.05*u))*4)
    for n,v in V.items():
     T=W@F[n];P=v@T[:3,:3].T+T[:3,3];inside=(P[:,0]>=.3)&(P[:,0]<=.9)&(P[:,1]>=-.63)&(P[:,1]<=.17)
     r.append(max(0,.7501-P[inside,2].min())*200 if inside.any() else 0.)
