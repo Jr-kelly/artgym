@@ -6,35 +6,63 @@
   "vision_validated": false,
   "real_robot_ran": false,
   "active_jobs": [],
-  "next": "Maincontinuousgoal achieved withboundedpositivepose/loadchecks; negativepose/mid generalizedrelease unresolved. Noownedexperiment running. Resume only changedactual release/support mechanism from preserved states.",
+  "next": "Verify newblob hashes and nonforcebranchupdate thenReleaseupload",
   "last_event": {
-    "utc": "2026-10-06T11:24:49.031943+00:00",
-    "event": "connected_increment_public_digests_verified",
+    "utc": "2026-10-06T13:49:05.834666+00:00",
+    "event": "final_source_publication_started",
     "evidence": [
-      "research/flat-table-20261006/CONNECTED-PUBLIC-FINAL-RECEIPT.json"
+      "scripts/check_wuji_action_quality.py",
+      "scripts/plot_wuji_action_geometry.py",
+      "scripts/prepare_wuji_relaxed_prefix.py",
+      "scripts/record_wuji_flat_table_event.py",
+      "scripts/run_g2_flat_table_demo.py",
+      "scripts/run_wuji_flat_connected.py",
+      "scripts/run_wuji_quality_connected.py",
+      "scripts/wuji_prefix_pose_adaptation.py",
+      "research/flat-table-20261006/action-quality-20261006/REPORT.md",
+      "research/flat-table-20261006/action-quality-20261006/REPRODUCE.md",
+      "research/flat-table-20261006/action-quality-20261006/FINAL-RESULTS.json",
+      "research/flat-table-20261006/action-quality-20261006/FINAL-SHARED-FREEZE.json",
+      "research/flat-table-20261006/action-quality-20261006/FINAL-NOMINAL-ACTION-CHECK.json",
+      "research/flat-table-20261006/action-quality-20261006/postpush-adaptation.json",
+      "research/flat-table-20261006/action-quality-20261006/dependency-manifest.json",
+      "research/flat-table-20261006/action-quality-20261006/archive-files.json",
+      "research/flat-table-20261006/CONNECTED-EXISTING-B-ROUND.md",
+      "research/flat-table-20261006/CONTINUATION.md",
+      "research/flat-table-20261006/STATE.json"
     ],
     "config": {
-      "server_verified_assets": 7,
-      "github_commit": "b61158c56c86d885a6aa4f29c769bee8cbcebfb9",
-      "new_files": 1661
+      "github_parent": "d1679fab9d95c5359f8f69da907056881da6738f",
+      "files": 19,
+      "branch": "feat/wuji-flat-table-20261006"
     },
     "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
-    "next": "Maincontinuousgoal achieved withboundedpositivepose/loadchecks; negativepose/mid generalizedrelease unresolved. Noownedexperiment running. Resume only changedactual release/support mechanism from preserved states."
+    "source_sha256": {
+      "scripts/run_g2_flat_table_demo.py": "9fead9036f7377cb88a78d0f454004916acfbaefb1c745da9ac687559347124f",
+      "scripts/run_wuji_flat_connected.py": "ce46b2900dc8d76e320e5198c4725ae150fc7f34e74737a318af7df05e4079fe",
+      "scripts/prepare_wuji_relaxed_prefix.py": "bf1cb36e0e81a073f0ef02c0d9bb8a1086a54f783f7c88cbaf3d6b00feee3e10",
+      "scripts/wuji_prefix_pose_adaptation.py": "b631fa93639741aea4f167d2bd6724b9e70abfc56833f24e8467fa9d2196a058"
+    },
+    "next": "Verify newblob hashes and nonforcebranchupdate thenReleaseupload"
   },
   "remote_root": "/home/wangjiarui/artgym-newknife-20261005",
-  "placement_generalization": "Positive1mm/0.5deg+estimate1mmpass; negative counterpart fails A release/placement; boundedlocal not symmetric",
-  "geometry_load_generalization": "Nominal1.25N pass25.46mm; mid shortB24.05mm pass butfullA releasefails, notpromoted",
+  "placement_generalization": "Sharedrule positive29.805mm/negative30.402mm repaired; knownconditions consumedlocalregression, notunseen",
+  "geometry_load_generalization": "Finalsharedrule nominal1.25N22.497mm andmidjointcondition21.319mm, no percase pressureselection",
   "pose_source": "sim_oracle explicit pose interface and development prior contacts",
-  "delivery_complete": true,
+  "delivery_complete": false,
   "local_resource_monitor_pid": null,
   "resource_four_hour_compliance_claim": false,
   "goal_status": "active",
   "github_release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-flat-table-progress-20261006-v2",
   "github_progress_source_commit": "cc44ca8d0fafdca76a1c8db1a5c087561e7c3b8e",
   "github_commit": "b61158c56c86d885a6aa4f29c769bee8cbcebfb9",
-  "all_saved_progress_published": true,
+  "all_saved_progress_published": false,
   "execution_priority": "Fastest reproducible continuous demo; uncertainty-driven minimal experiments; reuse actual A state/history; no homogeneous failures or premature matrices",
   "execution_limitation_scope": "Blocked content may not be reproduced/worked around; specific rejected operation and trigger absent from original notice. No blanket simulation prohibition established.",
   "recorded_actual_hold_1s": true,
-  "generalization_complete": false
+  "generalization_complete": true,
+  "action_quality_accepted": true,
+  "action_quality_scope": "Internal simulation checks with disclosedvisualsampling/exclusions; externaluser/hardwareacceptancefalse",
+  "necessary_generalization_resolved": true,
+  "goal_complete": false
 }

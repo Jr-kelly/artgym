@@ -1,0 +1,21 @@
+{
+  "utc": "2026-10-06T13:26:05.348268+00:00",
+  "scope": "Finalsharedcontroller beforecomplete5localregressions; allpreviouscases consumeddevelopment, notunseen",
+  "files": {
+    "scripts/run_g2_flat_table_demo.py": "9fead9036f7377cb88a78d0f454004916acfbaefb1c745da9ac687559347124f",
+    "scripts/run_wuji_flat_connected.py": "ce46b2900dc8d76e320e5198c4725ae150fc7f34e74737a318af7df05e4079fe",
+    "scripts/run_wuji_quality_connected.py": "09e4d27ae665081ef9a1e1c9f8a5cfe58d893406ef15a4733a1a20ae0131937a",
+    "scripts/prepare_wuji_relaxed_prefix.py": "bf1cb36e0e81a073f0ef02c0d9bb8a1086a54f783f7c88cbaf3d6b00feee3e10",
+    "scripts/wuji_prefix_pose_adaptation.py": "b631fa93639741aea4f167d2bd6724b9e70abfc56833f24e8467fa9d2196a058",
+    "scripts/check_wuji_action_quality.py": "15aefb34c4970bc66276e8ebef13a7919bf36701d45182b6c4a98856e5ece752",
+    "research/flat-table-20261006/action-quality-20261006/postpush-adaptation.json": "1ffbbc58dd0ddb85c69f02e89e4fd0a8e784176357bb35aed1f99e51615c5f0d",
+    "runs/flat-table-20261006/development/quality-operation-normal125-short-v1/pressure.json": "3f5d6f83b56b1fac175daa0b97ad5a37fbc3edeced4a30f7edd316550bdf7b0b",
+    "assets/robots/g2_wuji/g2_wuji.urdf": "9abbb4937cfb7bb26286bb5ae253ddf69336860bd58dbe873e8a6cda0181ae01",
+    "assets/hands/wuji_artbot/right.urdf": "37b9991fe2ebb0584b9e0ef24af6fb1d66b94e0771c139361d8672248f1e10a7",
+    "runs/newknife-20261005/train/center-tail-constant-motor-v1/update_000100.pth": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e"
+  },
+  "entry": "python -m scripts.run_wuji_quality_connected --output <fresh> --case <case>",
+  "pose_source": "sim_oracle18s independentofsimestimate76s; norealvision",
+  "pressure": "1.2estimatedprefix/1.4estimatedoperation; original.1radoffset/gain/physicaleffort",
+  "percase_motor_tuning": false
+}
