@@ -7,7 +7,7 @@ class LoadedTablePoseTransport:
  def command(self,t,obj,aq,issued):
   if self.initial is None:
    self.initial=obj.copy();self.relative=np.linalg.inv(obj)@self.k.forward(aq);self.load=issued-aq
-   self.goal=transform([.31,-.6285,.7541],(Rotation.from_euler('z',50,degrees=True)*Rotation.from_euler('x',90,degrees=True)).as_quat());self.rot=Slerp([0,1],Rotation.from_matrix([obj[:3,:3],self.goal[:3,:3]]));self.seed=aq.copy()
+   self.goal=transform([.31,-.620,.7541],(Rotation.from_euler('z',50,degrees=True)*Rotation.from_euler('x',90,degrees=True)).as_quat());self.rot=Slerp([0,1],Rotation.from_matrix([obj[:3,:3],self.goal[:3,:3]]));self.seed=aq.copy()
   u=np.clip((t-1.)/14.,0,1);u=u*u*(3-2*u);desired=self.initial.copy();desired[:3,3]=self.initial[:3,3]*(1-u)+self.goal[:3,3]*u;desired[:3,:3]=self.rot(u).as_matrix()
   # Track actual current knife error through wrist motion, retaining original measured grip relation.
   correction=desired@self.relative

@@ -4,10 +4,17 @@ from pathlib import Path
 from scripts.record_wuji_flat_table_event import record
 ROOT=Path(__file__).resolve().parents[1]
 def main():
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,required=True);p.add_argument('--case',choices=['nominal','placement-error','placement-error-opposite','load125','mid-geometry'],default='nominal');p.add_argument('--no-video',action='store_true');a=p.parse_args();assert not a.output.exists();a.output.mkdir(parents=True)
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,required=True);p.add_argument('--case',choices=['nominal','placement-error','placement-error-opposite','load125','mid-geometry'],default='nominal');p.add_argument('--no-video',action='store_true');p.add_argument('--adaptive-table-transport',action='store_true',help='Use generic measured-initial-grip loaded transport and bounded late pose correction');a=p.parse_args();assert not a.output.exists();a.output.mkdir(parents=True)
  c=json.load(open(ROOT/'runs/flat-table-20261006/development/continuous-existing-B-v1-20261006/command.json'));c[0]=sys.executable;c[c.index('--output')+1]=str(a.output/'simulation')
  if a.no_video:c.remove('--video')
  prefix=json.load(open(ROOT/c[c.index('--flat-table-prefix')+1]));changes={}
+ if a.adaptive_table_transport:
+  saved=json.load(open(ROOT/'runs/flat-table-20261006/development/continuous-mid-servo-v5/command.json'));c=saved;c[0]=sys.executable;c[c.index('--output')+1]=str(a.output/'simulation');prefix=json.load(open(ROOT/c[c.index('--flat-table-prefix')+1]))
+  nominal=json.load(open(ROOT/'runs/flat-table-20261006/development/continuous-existing-B-v1-20261006/command.json'))
+  for flag in ['--grasp-plan','--table-calibration','--acquisition-path','--thumb-reference-override','--postlift-regrasp','--knife-asset','--newknife-resistance']:c[c.index(flag)+1]=nominal[nominal.index(flag)+1]
+  for flag in ['--actuation-delay-frames','--observation-noise','--observation-bias']:
+   i=c.index(flag);del c[i:i+2]
+  if a.no_video and '--video' in c:c.remove('--video')
  if a.case.startswith('placement-error'):
   sign=1 if a.case=='placement-error' else -1;prefix['physical_initial_xy']=[.37+sign*.001,-.5695+sign*.001];prefix['physical_initial_yaw_deg']=45+sign*.5;c+=['--pose-estimate-bias-m',str(sign*.001)];changes=dict(initial_xy_offset_m=[sign*.001,sign*.001],initial_yaw_offset_deg=sign*.5,postplacement_estimate_bias_x_m=sign*.001,controller='Same motor prefix and B; no percase tuning')
  elif a.case=='load125':c[c.index('--newknife-resistance')+1]='runs/singlepush-20261005/configs/resistance-1.25.json';changes=dict(resistance_capacity_N=1.25,controller='Unchanged nominal A and B')

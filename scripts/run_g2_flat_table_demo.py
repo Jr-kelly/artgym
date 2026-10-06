@@ -58,7 +58,7 @@ def main():
   prefix_duration=a.recorded_b_start_s or 0.
   (a.output/'recorded-initialization.json').write_text(json.dumps(dict(source=str(a.recorded_handoff),scope='Development only; actual positions/object velocity/slider/issued targets; robot velocity finite-difference estimate; solver cache absent; no full restore equivalence'),indent=2))
  pose_updated=False;pose_update_diagnostics=None;pose_bridge_start=None
- loaded_table_transport=None
+ loaded_table_transport=None;adaptive_exit=None
  if a.loaded_table_pose_transport:
   from scripts.wuji_loaded_table_pose_transport import LoadedTablePoseTransport
   loaded_table_transport=LoadedTablePoseTransport()
@@ -518,6 +518,17 @@ def main():
     transport_t=t if recorded_handoff is not None else elapsed-36.
     if loaded_table_transport and 0<=transport_t<24:
      aq=loaded_table_transport.command(transport_t,transform(rb[oid,:3].numpy(),rb[oid,3:7].numpy()),dof[arm,0].numpy().copy(),previously_issued_target[arm].numpy().copy())
+    if loaded_table_transport and recorded_handoff is None and 60<=elapsed<82:
+     if adaptive_exit is None:
+      adaptive_exit=dict(arm=previously_issued_target[arm].numpy().copy(),hand=previously_issued_target[hand].numpy().copy(),wrist=kin.forward(dof[arm,0].numpy().copy()),seed=dof[arm,0].numpy().copy())
+      release_rows=json.loads(Path('runs/flat-table-20261006/development/b-compatible-clamp-release-native-20261006/support.json').read_text())['rows'];adaptive_exit['delta']=np.array(release_rows[-1]['hand_q'])-np.array(release_rows[0]['hand_q'])
+     exit_t=elapsed-60
+     if exit_t<5:
+      aq=adaptive_exit['arm'];hq=adaptive_exit['hand']+smooth(np.clip(exit_t/3.,0,1))*adaptive_exit['delta']
+     elif exit_t<12:
+      exit_w=adaptive_exit['wrist'].copy();exit_w[0,3]-=.1*min((exit_t-5)/3,1);exit_w[2,3]+=.18*np.clip((exit_t-8)/3,0,1);aq,exit_ik=kin.solve_near(exit_w,adaptive_exit['seed']);adaptive_exit['seed']=aq.copy();hq=adaptive_exit['hand']+adaptive_exit['delta'];adaptive_exit['end_arm']=aq.copy()
+     else:
+      bridge_u=smooth(np.clip((exit_t-12)/8,0,1));bridge_row=flat_prefix['rows'][-1];aq=(1-bridge_u)*adaptive_exit['end_arm']+bridge_u*np.array(bridge_row['arm_q']);hq=(1-bridge_u)*(adaptive_exit['hand']+adaptive_exit['delta'])+bridge_u*np.array(bridge_row['hand_q'])
     target[arm]=torch.tensor(aq,dtype=torch.float32);target[hand]=torch.tensor(hq,dtype=torch.float32);target=torch.minimum(torch.maximum(target,limitlow),limithi)
     physical_target=previously_issued_target if a.actuation_delay_frames else target.clone()
     # During scripted history settling, actions are the actual equivalent support/target commands (constant targets ->0).
@@ -574,6 +585,7 @@ def main():
     if writer:
      close_aim=rb[oid,:3].numpy()+np.array([0.,0.,.055]);gym.set_camera_location(closecam,env,gymapi.Vec3(*(close_aim+np.array([.40,-.18,.30]))),gymapi.Vec3(*close_aim));gym.step_graphics(sim);gym.render_all_camera_sensors(sim);im=np.asarray(gym.get_camera_image(sim,env,cam,gymapi.IMAGE_COLOR),dtype=np.uint8).reshape(720,960,4)[...,:3];writer.append_data(im);im2=np.asarray(gym.get_camera_image(sim,env,closecam,gymapi.IMAGE_COLOR),dtype=np.uint8).reshape(720,960,4)[...,:3];closewriter.append_data(im2)
    if step%1200==0:print(json.dumps(dict(t=t,object_height=float(rb[oid,2]),slider=float(dof[sid,0]),arm_tracking_max=float(abs(target[arm]-dof[arm,0]).max()))),flush=True)
+  if loaded_table_transport:(a.output/'loaded-table-pose-records.json').write_text(json.dumps(dict(source='sim_oracle30Hz',records=loaded_table_transport.records,physical_state_resets=0),indent=2))
   if pickup_policy:(a.output/'pickup-policy-records.json').write_text(json.dumps(dict(source='sim_oracle30Hz',records=pickup_policy.records,physical_state_resets=0),indent=2))
   if dual_push:(a.output/'dual-push-pose-records.json').write_text(json.dumps(dict(source='sim_oracle30Hz',records=dual_push.records,physical_state_resets=0),indent=2))
   trace={k:np.asarray([x[k] for x in rows]) for k in rows[0]};np.savez_compressed(a.output/'trace.npz',**trace);h=trace['object'][:,2];held=(trace['time']>=12)&(trace['time']<16);opmask=trace['time']>=16

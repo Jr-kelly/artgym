@@ -5,30 +5,33 @@
   "continuous_pickup_to_extension": true,
   "vision_validated": false,
   "real_robot_ran": false,
-  "active_jobs": [
-    "continuous-mid-servo-v5"
-  ],
-  "next": "Read wholegeometry/table/nonthumbsupport/activepushhold",
+  "active_jobs": [],
+  "next": "Publish finalincrement evidence and honest localboundaries; originalGoal generalizedrange incomplete",
   "last_event": {
-    "utc": "2026-10-06T11:10:29.321381+00:00",
-    "event": "continuous_mid_servo_v5_started",
+    "utc": "2026-10-06T11:22:57.437835+00:00",
+    "event": "connected_round_physical_work_finished",
     "evidence": [
-      "runs/flat-table-20261006/development/continuous-mid-servo-v5/command.json"
+      "research/flat-table-20261006/CONNECTED-EXISTING-B-ROUND.md"
     ],
     "config": {
-      "uncertainty": "Actualinitialrelation loadedtransport andboundedlatecorrection retains shortpass from realfullflat?",
-      "decision": "Pass completes representativegeometry/loadcheck; failurefixfirstdivergence",
-      "prefix_s": 82,
-      "load_N": 1.25,
-      "delay_frames": 1,
-      "controller": "OldBunchanged actor plus actualposeadaptA"
+      "new_fullflow": true,
+      "nominal_active_mm": 29.05,
+      "positive_pose_active_mm": 27.46,
+      "load125_active_mm": 25.46,
+      "necessary_local_checks_performed": true,
+      "generalization_failures": [
+        "negative1mm/0.5deg",
+        "midgeometry/1.25N/delay/noise"
+      ],
+      "new_mid_short_B_active_mm": 24.05,
+      "promoted_mid": false
     },
     "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
-    "next": "Read wholegeometry/table/nonthumbsupport/activepushhold"
+    "next": "Publish finalincrement evidence and honest localboundaries; originalGoal generalizedrange incomplete"
   },
   "remote_root": "/home/wangjiarui/artgym-newknife-20261005",
-  "placement_generalization": "Positive x/y1mm, yaw0.5deg with estimateX1mm passes27.46mm; opposite pending",
-  "geometry_load_generalization": "Nominal1.25N passes25.46mm; mid145.5mm(+delay/noise) Aplacesyaw60deg and Bgrasp IK12.6mm unreachable; failure retained",
+  "placement_generalization": "Positive1mm/0.5deg+estimate1mmpass; negative counterpart fails A release/placement; boundedlocal not symmetric",
+  "geometry_load_generalization": "Nominal1.25N pass25.46mm; mid shortB24.05mm pass butfullA releasefails, notpromoted",
   "pose_source": "sim_oracle explicit pose interface and development prior contacts",
   "delivery_complete": false,
   "local_resource_monitor_pid": null,
