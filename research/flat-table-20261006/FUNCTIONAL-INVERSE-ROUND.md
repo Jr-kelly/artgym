@@ -11,3 +11,7 @@ Reproduce from experimentroot after source runs/contact-transfer-20261006/env.sh
 Active topstroke native9s: rootdrift.336mm, slidertravel.0448mm, indexall270frames, thumb ends bodyrail. No>20mm. Newrearfaceaxialnormal approach planning; wholepadsideclearance andloadedoffset retained. GitHublatestdeadce7; topstroke evidencearchive uploaded originalReleasev2.
 
 Rearface approach native15s fails at4.3s before rearfacecontact; indexpointgait rotates indexsurface and ejection. New index-face-retained path now planning; no gain/seed scan. Rearface failurearchive uploadedReleasev2.
+
+Latest materialfeedback roofsliderpaced12s retains actualindex/table andslidertopcontact, drift.550mm, but travel.123mm. Normalpressure.118N andthumbjoint1issuedtarget1.6033radatupperbound. No extra gain scan. Newjointwrist/thumb-marginposture plan freesq1to1.05rad, retainingactualindexsurface+sliderpoint; currentlyplanning. Feedbacksourceedcac50and3nativefeedbackevidencearchive publishedReleasev2. Fullgoalnotcomplete.
+
+Newphysicalmilestone: one32episode6sloadcoordinationbatch selects11.786mmdevelopmentcandidate; nativeactual-slider-coordination-selected7s confirms actualslider11.802mm (~11.89mmactiveincrease), index/thumb/table everyframe210, rootdrift7.35mm. Uses actualnewthumbmaterialpoint(.007962,.004516,-.006344) for continuedstroke nowactive; noidealreset. SearchterminalphysicslogencodingerrorfixedUTF8, no searchrerun. Not>20mmorairheldorcompleteA→B.

@@ -6,23 +6,23 @@
   "vision_validated": false,
   "real_robot_ran": false,
   "active_jobs": [
-    "thumb-margin-planner"
+    "actual-active12mm-continued-native"
   ],
-  "next": "Free actual thumbjoint1 travel via wristpose, retainindexsurface.",
+  "next": "Continuefromreal12mmend, noidealreset.",
   "last_event": {
-    "utc": "2026-10-06T09:31:32.290014+00:00",
-    "event": "slider_paced_pressure_thumb_bound_diagnosed",
+    "utc": "2026-10-06T09:36:36.817080+00:00",
+    "event": "actual_12mm_slider_candidate_continued",
     "evidence": [
-      "runs/flat-table-20261006/development/actual-slider-paced-pressure-native-20261006/simulation/native-segment-summary.json"
+      "runs/flat-table-20261006/development/actual-slider-coordination-selected-native-20261006/simulation/native-segment-summary.json",
+      "runs/flat-table-20261006/development/actual-active12mm-continued-native-20261006/command.json"
     ],
     "config": {
-      "result": "Index/table12s drift.550mm, actualslidertopcontact, travel.123mm. pressure.118N, thumbjoint1targetat1.6033upperbound.",
-      "uncertainty": "Jointwrist posture keepingindexsurface frees thumbjoint1 margin while slidercontact remains reachable?",
-      "decision": "Feasible->native posturethenfeedback; unreachable->stop this grasp posture.",
-      "no_more_pressure_gain_scan": true
+      "new_behavior": "Native11.802mmslider position, ~11.89mmactiveincrease, allindexthumbtable210frames.",
+      "uncertainty": "Actualnew slidingmaterial permits continuedstroke beyond20mm withoutregrasp?",
+      "decision": ">20mm->opposedsupport; stall->jointcontactstroke, no furthersearch."
     },
     "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
-    "next": "Free actual thumbjoint1 travel via wristpose, retainindexsurface."
+    "next": "Continuefromreal12mmend, noidealreset."
   },
   "remote_root": "/home/wangjiarui/artgym-newknife-20261005",
   "placement_generalization": "not reached",

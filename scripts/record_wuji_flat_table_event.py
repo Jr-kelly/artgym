@@ -10,5 +10,5 @@ def record(event,evidence,config=None,updates=None,next_step=None):
   with p.open('a') as f:f.write(json.dumps(e,ensure_ascii=False)+'\n')
  marker='<!-- WUJI_FLAT_TABLE_HISTORY -->\n';header='# Wuji 完整平放桌面取刀 → 连续推动当前 Goal\n\n先读 `'+str(D/'CONTINUATION.md')+'`。\n\n```json\n'+json.dumps(s,ensure_ascii=False,indent=2)+'\n```\n\n'+marker
  for p in [R/'WUJI_GOAL_HANDOFF.md',Path('/data/research/artgym/WUJI_GOAL_HANDOFF.md'),Path('/data/research/artgym-experiments-20260921/WUJI_GOAL_HANDOFF.md')]:
-  old=p.read_text() if p.exists() else '';p.write_text(header+old.split(marker,1)[-1])
+  old=p.read_text(encoding='utf-8') if p.exists() else '';p.write_text(header+old.split(marker,1)[-1],encoding='utf-8')
  return e
