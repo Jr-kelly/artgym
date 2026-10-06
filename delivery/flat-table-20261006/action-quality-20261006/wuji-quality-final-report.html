@@ -1,0 +1,55 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Wuji G2 最终连续仿真与动作检查</title><style>body{font:16px/1.7 system-ui;max-width:1200px;margin:auto;padding:24px;background:#f7f7f7;color:#222}video{width:100%;background:#111}table{border-collapse:collapse;width:100%}td,th{border:1px solid #ccc;padding:8px;text-align:left}pre{white-space:pre-wrap;font:14px/1.65 system-ui;background:white;padding:20px}a{color:#175dbc}</style><h1>Wuji＋G2：完整平放取刀 → 离桌推动 → 保持</h1><p>同一episode、98秒、30 fps，无阶段重置或剪辑。左全景、右近景。内部仿真动作检查通过；用户视频验收与真机验证未宣称通过。</p><video controls preload="metadata" src="https://github.com/Jr-kelly/artgym/releases/download/wuji-flat-table-progress-20261006-v2/wuji-quality-final-synchronized.mp4"></video><p><a href="https://github.com/Jr-kelly/artgym/releases/download/wuji-flat-table-progress-20261006-v2/wuji-quality-final-wide.mp4">原始全景MP4</a> · <a href="https://github.com/Jr-kelly/artgym/releases/download/wuji-flat-table-progress-20261006-v2/wuji-quality-final-close.mp4">原始近景MP4</a></p><table><tr><th>工况</th><th>主动mm</th><th>保持最低mm</th><th>整刀离桌mm</th></tr><tr><td>标称0.7355 N</td><td>29.848</td><td>29.835</td><td>87.02</td></tr><tr><td>x/y各−1 mm、yaw−0.5°，B估计x−1 mm</td><td>30.402</td><td>30.388</td><td>87.46</td></tr><tr><td>x/y各+1 mm、yaw+0.5°，B估计x+1 mm</td><td>29.805</td><td>29.791</td><td>87.57</td></tr><tr><td>标称尺寸、1.25 N</td><td>22.497</td><td>22.478</td><td>86.02</td></tr><tr><td>145.5×19.3×8.2 mm主体、56 g，32.4×7.2×2.1 mm滑块；1.25 N＋1帧延迟＋噪声/偏差</td><td>21.319</td><td>21.294</td><td>87.56</td></tr></table><h2>原始近景</h2><video controls preload="none" src="https://github.com/Jr-kelly/artgym/releases/download/wuji-flat-table-progress-20261006-v2/wuji-quality-final-close.mp4"></video><h2>原始全景</h2><video controls preload="none" src="https://github.com/Jr-kelly/artgym/releases/download/wuji-flat-table-progress-20261006-v2/wuji-quality-final-wide.mp4"></video><h2>实际状态两侧几何视图</h2><img style="width:100%" src="https://github.com/Jr-kelly/artgym/releases/download/wuji-flat-table-progress-20261006-v2/wuji-quality-final-two-views.png" alt="同一保存实际状态的两侧碰撞几何重建"><h2>检查、修改与边界</h2><pre># Wuji＋G2：异常手姿修复与完整连续仿真
+
+本轮完成了完整平放取刀、桌面辅助调整、再次取起、独立离桌推动和保持，并修复已知负向摆放及代表性联合工况失败。最终结果来自同一套控制规则的五项新连续运行。内部仿真动作/几何/接触检查通过；用户视频验收和真机可行性未宣称通过。
+
+[完整同步远近视频](https://github.com/Jr-kelly/artgym/releases/download/wuji-flat-table-progress-20261006-v2/wuji-quality-final-synchronized.mp4) · [原始全景](https://github.com/Jr-kelly/artgym/releases/download/wuji-flat-table-progress-20261006-v2/wuji-quality-final-wide.mp4) · [原始近景](https://github.com/Jr-kelly/artgym/releases/download/wuji-flat-table-progress-20261006-v2/wuji-quality-final-close.mp4) · [可下载的内嵌视频报告](https://github.com/Jr-kelly/artgym/releases/download/wuji-flat-table-progress-20261006-v2/wuji-quality-final-report.html)
+
+每个MP4为同一标称episode的2940帧、30 fps、98秒；并排视频逐帧横向合成，没有剪掉阶段、变速或拼接episode。左右分别为全景和近景。视频约0–18秒桌面推移，26–60秒接近/夹持/搬运，60–76秒放下/释放/横向退出，76–92秒再抓取/调整/抬升，92–97秒主动推动，97–98秒保持。允许放下再抓，全过程仅初始化时写物理状态，阶段间重置0次。
+
+## 异常定位和修改
+
+- 原轨迹初始中指/拇指非相邻碰撞凸包相交，交集内切球半径最高8.493 mm。命名实际关节FK与保存指腹位置一致约1.6 μm；没有关节顺序/轴向错误的证据。后续闲置无名指/小指被推到约1.45 rad折叠，推动时无名指没有刀接触，属于无功能的目标握姿选择。没有为了画面修改轴、限位或隐藏手指。
+- 取物前非工作中指/无名指/小指停放为[0.6,0,0.9,0.4] rad，拇指初段为[0.8,0.3,0.7,0.1]；中指/拇指12–18秒接回有效轨迹，无名指/小指66–70秒接回；推动换握后将无接触无名指第三关节缓和到1.1 rad。有效食指、中指和小指承托保留。近景自动容纳整手和刀，修正旧近景抬手时裁切。
+- 负向摆放组合在旧固定夹持/搬运中发展到yaw约71.42°。利用一次18秒实际刀姿变换夹持接近路径，并在搬运中逐渐回到共同固定放下位置；同一配置用于所有工况，没有逐例手修。短段保留3指接触并恢复到约49.32°，随后完整运行验证。
+- 修姿后的1.25 N运行曾只有18.029 mm：19–20秒实际拇指接触质心轴向移动6.16 mm，而滑块仅0.74 mm，证明有切向滑移；“接触在侧边”没有被证实。实测50q参考重锚未修复，停止该支线。根据新旧实际法向差，操作段关节偏转估计法向参考统一从1.2改为1.4 N，取物前段仍1.2；原增益、0.1 rad偏置上限及物理力矩保留。短段22.925 mm后才跑最终五项完整验证。1.4是估计参考，不是实测恒力。
+
+没有修改质量、重力、摩擦、滑块阻力、原关节范围、增益、碰撞过滤或努力限幅；原actor不变，本轮没有新训练。旧配置的数值只留作诊断对照，不能计入最终配置通过证据。
+
+## 最终同规则局部结果
+
+| 工况 | 离桌主动位移mm | 最后约1秒最低主动位移mm | 推动段整刀最小离桌mm |
+|---|---:|---:|---:|
+| 标称0.7355 N | 29.848 | 29.835 | 87.02 |
+| x/y各−1 mm、yaw−0.5°，B估计x−1 mm | 30.402 | 30.388 | 87.46 |
+| x/y各+1 mm、yaw+0.5°，B估计x+1 mm | 29.805 | 29.791 | 87.57 |
+| 标称尺寸、1.25 N | 22.497 | 22.478 | 86.02 |
+| 145.5×19.3×8.2 mm主体、56 g，32.4×7.2×2.1 mm滑块；1.25 N＋1帧延迟＋噪声/偏差 | 21.319 | 21.294 | 87.56 |
+
+所有工况在推动/保持段的1441个240 Hz物理记录中，都有实际拇指-滑块接触和非拇指承托，桌接触记录0。标称实际法向平均1.293 N；1.25 N工况平均1.248 N，最大拇指力矩约限幅44.24%，没有饱和。该法向不能代替轴向总推力，后者缺测。
+
+这五项是已消费条件的局部回归；源/控制配置在最终运行前冻结，但没有独立未见样本或成功率统计。mid使用原有按估计几何生成的B路径，A、actor、自动姿态适配及操作压力规则相同；不称所有工况完全相同的电机序列。
+
+## 动作检查方式与盲区
+
+标称人工检查覆盖全98秒、每秒1个近景帧，另有48个换姿/操作加密帧；6个同一实际状态用两侧碰撞几何重建消除遮挡。工具只提供抽帧，未宣称完整连续播放；局部工况各查看16个重点帧。标称全部2940个保存实际30 Hz状态检查关节命名FK、原限位及受影响非相邻实体；其余各225帧，包含初段逐帧和2 Hz全时轴。物理接触日志以240 Hz检查推动/保持。
+
+标称初始深重叠消除；23帧约13.967–14.800秒拇指/中指指腹有交集内切球最大0.318 mm，保留并披露，不是穿透深度或硬件容差。没有18秒后的深干涉。几何检查排除了直接相邻连杆/固定指腹和近掌装配壳体，不等于全模型碰撞认证；原同指及装配过滤没有改动。最大实际关节数值越界24.4 μrad。
+
+推动段G2最小关节余量约0.585 rad；拇指第4关节在视频约93.3–93.8秒短时接近原下限，保持末态已回到−0.0594 rad（原下限−0.4699），不是持续卡在限位保持。其他拇指关节最小余量约0.0144 rad；部分目标被原限幅裁剪，不宣称全程所有关节都有充足余量。标称实际拇指力矩最高35.21%原限幅。
+
+## 复现和边界
+
+这是脚本/IK与既有actor组合的仿真控制。18秒适配使用sim_oracle，76秒使用已有sim_estimate接口（摆放工况B估计x±1 mm；与18秒真值适配独立）。真实视觉、真实硬件速度/控制器/接触和完整轴向推力尚未验证，URDF范围不能代替真机验收。1.25 N是仿真制动容量，不是新刀完整实测阻力曲线。联合工况未拆分成各因素因果或广泛泛化能力。
+
+使用本分支加必要增量包，在仓库根目录解包；详见[REPRODUCE.md](REPRODUCE.md)。
+
+```bash
+source runs/contact-transfer-20261006/env.sh
+python -m scripts.run_wuji_quality_connected --output runs/review-nominal-fresh --case nominal
+```
+
+原权重SHA256：`6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e`。
+标称trace SHA256：`8ac7ceb05f09fcf3f24dcdddfdc37b7d3c0f045e429183be3986ed9cdb0e386a`。
+
+证据：FINAL-SHARED-FREEZE.json、FINAL-RESULTS.json、FINAL-NOMINAL-ACTION-CHECK.json、final-*-audit.json、final-*-native-contact-summary.json，以及每项完整trace、native接触日志和精确command。旧98秒文件保留为诊断，不再作为当前已验收demo。私人Goal/照片/历史媒体没有发布。运行资源只有有用实验；没有四小时利用率合规声明。
+</pre></html>
