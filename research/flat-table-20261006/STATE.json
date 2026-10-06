@@ -6,23 +6,24 @@
   "vision_validated": false,
   "real_robot_ran": false,
   "active_jobs": [
-    "loaded-thumb-correction-planner"
+    "actual-slider-stroke-planner"
   ],
-  "next": "Correct current thumb error from actual pose and loaded commands.",
+  "next": "Native active stroke while retaining actual indexcontact and thumbmaterial; no idealreset.",
   "last_event": {
-    "utc": "2026-10-06T09:13:35.470331+00:00",
-    "event": "actual_loaded_thumb_correction_started",
+    "utc": "2026-10-06T09:18:15.553779+00:00",
+    "event": "actual_thumb_slider_contact_acquired",
     "evidence": [
-      "runs/flat-table-20261006/recorded-dual-thumb-9s/manifest.json"
+      "runs/flat-table-20261006/development/actual-thumb-railclear-native-20261006/simulation/native-segment-summary.json"
     ],
     "config": {
-      "uncertainty": "Actual contact correction with measured thumb deflection restores slider instead of side rail?",
-      "decision": "Feasible -> native no-lift correction, slider -> push.",
-      "input_actual_elapsed_s": 8.9,
-      "extraction_zero_continuation_rejected": "offline input validator; corrected to existing .1s window, no simulator retry"
+      "new_behavior": "Actualthumb link1 acquired after wholepadrailclear; index continuous9s, rootdrift.391mm.",
+      "slider_contact_frames": 59,
+      "slider_contact_first_s": 3.566666666666667,
+      "slider_contact_last_s": 9.0,
+      "decision": "Immediately plan active slider stroke from currentactualmaterials, no lift until opposedsupport."
     },
     "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
-    "next": "Correct current thumb error from actual pose and loaded commands."
+    "next": "Native active stroke while retaining actual indexcontact and thumbmaterial; no idealreset."
   },
   "remote_root": "/home/wangjiarui/artgym-newknife-20261005",
   "placement_generalization": "not reached",
