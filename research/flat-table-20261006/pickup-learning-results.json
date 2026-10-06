@@ -1,0 +1,57 @@
+{
+  "training": [
+    {
+      "job": "local27motor-v78",
+      "rounds": 10,
+      "episodes": 640,
+      "held_training_candidates": 0,
+      "maximum_stochastic_bottom_clearance_m": 0.007864248007535934,
+      "last_failures": 18
+    },
+    {
+      "job": "remote-hand-v80r1",
+      "rounds": 4,
+      "episodes": 256,
+      "held_training_candidates": 0,
+      "maximum_stochastic_bottom_clearance_m": 0.002000060398131609,
+      "last_failures": 3
+    },
+    {
+      "job": "remote27motor-v81r1",
+      "rounds": 4,
+      "episodes": 256,
+      "held_training_candidates": 0,
+      "maximum_stochastic_bottom_clearance_m": 0.001999910920858383,
+      "last_failures": 20
+    }
+  ],
+  "native": [
+    {
+      "trial": "pickup-policy-v82",
+      "whole_pickup": false,
+      "continuous_success": false,
+      "maximum_bottom_clearance_m": 1.2474023784209143e-05,
+      "active_forward_m": 9.96988092083484e-09,
+      "native_table_contact_records": 2320,
+      "trace_sha256": "29552fb66e59f9a862d6c03179df7ee8596eff85bb906d95aac64b4aeee856fe"
+    },
+    {
+      "trial": "pickup-policy-v84",
+      "whole_pickup": false,
+      "continuous_success": false,
+      "maximum_bottom_clearance_m": 9.218787319598479e-06,
+      "active_forward_m": -5.602487362921238e-10,
+      "native_table_contact_records": 1122,
+      "trace_sha256": "1de5b31a25094db5d18536449f1522479190c08bff2d1e93f4552ce2a9996d70"
+    },
+    {
+      "trial": "pickup-policy-v85",
+      "whole_pickup": false,
+      "continuous_success": false,
+      "maximum_bottom_clearance_m": 1.2725662307869895e-05,
+      "active_forward_m": 1.3983481039758772e-08,
+      "native_table_contact_records": 2344,
+      "trace_sha256": "da05cb1d7e37c4c7aff4816aaa3b01db6ea519c335dec7c4778b475f2bb1de31"
+    }
+  ]
+}

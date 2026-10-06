@@ -1,3 +1,46 @@
+# Wuji 完整平放桌面取刀 → 连续推动当前 Goal
+
+先读 `/data/research/artgym-experiments-20260921/flat-table-20261006/research/flat-table-20261006/CONTINUATION.md`。
+
+```json
+{
+  "local_root": "/data/research/artgym-experiments-20260921/flat-table-20261006",
+  "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
+  "flat_table_pickup": true,
+  "continuous_pickup_to_extension": false,
+  "vision_validated": false,
+  "real_robot_ran": false,
+  "active_jobs": [],
+  "next": "Package complete existing evidence and dependencies; fast-forward GitHub branch from remote head; upload new Release assets and verify SHA256.",
+  "last_event": {
+    "utc": "2026-10-06T06:49:21.415476+00:00",
+    "event": "all_progress_publication_started",
+    "evidence": [
+      "delivery/flat-table-20261006",
+      "research/flat-table-20261006",
+      "runs/flat-table-20261006"
+    ],
+    "config": {
+      "user_authorization": "上传所有进展",
+      "branch_remote_before": "74066ae73162531190e20f9422db1314a49d73c2",
+      "private_media_excluded": true,
+      "publish_scope": "existing source, simulation evidence and reproduction only; no new blocked experiments"
+    },
+    "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
+    "next": "Package complete existing evidence and dependencies; fast-forward GitHub branch from remote head; upload new Release assets and verify SHA256."
+  },
+  "remote_root": "/home/wangjiarui/artgym-newknife-20261005",
+  "placement_generalization": "not reached",
+  "geometry_load_generalization": "not reached",
+  "pose_source": "sim_oracle explicit pose interface and development prior contacts",
+  "delivery_complete": false,
+  "local_resource_monitor_pid": null,
+  "resource_four_hour_compliance_claim": false,
+  "goal_status": "blocked"
+}
+```
+
+<!-- WUJI_FLAT_TABLE_HISTORY -->
 # Wuji 单次伸出 >20mm 当前Goal
 
 先读 `/data/research/artgym-experiments-20260921/contact-transfer-20261006/research/contact-transfer-20261006/CONTINUATION.md`。保留 singlepush 1.25 N 基线；映射、力矩、接触适配和部署准备。
@@ -12,27 +55,23 @@
   "phase": "Implemented, independently verified and publicly delivered; upper geometry coordination and real calibration remain",
   "real_robot_ran": false,
   "delivery_complete": true,
-  "next": "This delivery complete. Next useful work: real G2/right-Wuji connection, calibrated axes/limits/current/timing and same-grasp two-axis sustained force; upper-geometry coordinated support intervention/targeted training if continuing simulation. No gain sweeps, repeated package restore, subagents or automatic robot motion.",
+  "next": "本轮交付已完成，无本轮计算任务。真机续接须核实 G2 右臂及 Wuji 一代右手连接、轴向/零点/限位/电流及控制响应，并开展同握姿法向与轴向分离测力、有效推力保持至少 1 秒。若继续仿真，针对大尺寸支撑与滚转协调选择新机制或有依据的专项训练；不重复成功测试或增益扫描，不把阻抗目标当作实际握姿。",
   "last_event": {
-    "utc": "2026-10-05T16:54:35.325560+00:00",
-    "event": "final_delivery_resource_and_continuation_closeout",
+    "utc": "2026-10-05T16:57:31.979026+00:00",
+    "event": "final_public_source_head_and_handoff_verified",
     "evidence": [
-      "research/contact-transfer-20261006/RESOURCE-CLOSEOUT.json",
       "research/contact-transfer-20261006/PUBLIC-DELIVERY-RECEIPT.json",
       "research/contact-transfer-20261006/PUBLIC-DOWNLOAD-VERIFICATION.json"
     ],
     "config": {
-      "public_assets": 37,
-      "new_uncut_videos": 24,
-      "simulated_robot_runs": 8,
-      "real_robot_ran": false,
-      "task_jobs_active": 0,
-      "near_small_corrected_measured_path_pass": true,
-      "frozen_new_task_passes": 1,
-      "frozen_new_task_total": 2
+      "final_branch_github_commit": "d2124cb0d98db5c4c97a71d8492733c7cb4642c0",
+      "release_source_tag_commit": "3b0ffc4eae9bce257af6e03cd20265763ad0fc34",
+      "server_digest_verified_assets": 37,
+      "complete_videos": 24,
+      "anonymous_downloads_verified": 2
     },
     "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
-    "next": "This delivery complete. Next useful work: real G2/right-Wuji connection, calibrated axes/limits/current/timing and same-grasp two-axis sustained force; upper-geometry coordinated support intervention/targeted training if continuing simulation. No gain sweeps, repeated package restore, subagents or automatic robot motion."
+    "next": "本轮交付已完成，无本轮计算任务。真机续接须核实 G2 右臂及 Wuji 一代右手连接、轴向/零点/限位/电流及控制响应，并开展同握姿法向与轴向分离测力、有效推力保持至少 1 秒。若继续仿真，针对大尺寸支撑与滚转协调选择新机制或有依据的专项训练；不重复成功测试或增益扫描，不把阻抗目标当作实际握姿。"
   },
   "mapping_verified": true,
   "hardware_load_model_status": "Independent virtual work and signed contributions verified; corrected worst38.79% URDF model, not hardware reserve",
@@ -46,7 +85,7 @@
   "reproducible_restore_passed": true,
   "active_jobs": [],
   "github_branch": "feat/wuji-contact-transfer-20261006",
-  "github_commit": "3b0ffc4eae9bce257af6e03cd20265763ad0fc34",
+  "github_commit": "d2124cb0d98db5c4c97a71d8492733c7cb4642c0",
   "github_release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-g2-contact-transfer-20261006-v1",
   "release_source_commit": "3b0ffc4eae9bce257af6e03cd20265763ad0fc34",
   "goal_simulation_and_delivery_complete": true

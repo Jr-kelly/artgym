@@ -1,0 +1,28 @@
+"""Two real opposing cap faces at actual v97 supported edge pose; actual arm and full hand/table geometry."""
+import json,time,numpy as np
+from pathlib import Path
+from scipy.optimize import least_squares
+from scripts.g2_contact_geometry import DigitGeometry
+from scripts.g2_kinematics import G2Kinematics
+out=Path('runs/flat-table-20261006/preparation/slider-pinch-held-v138');out.mkdir(exist_ok=False);sp=out/'asset-spec.json';sp.write_text(json.dumps(dict(asset_urdf='assets/objects/knife_wuji_newknife_20261005/nominal-v5/mobility.urdf',file_sha256={})))
+g=DigitGeometry(max_face_axes=12,knife_spec=sp);k=G2Kinematics();from scripts.g2_kinematics import transform
+z=np.load('runs/flat-table-20261006/development/selected-pickup-v123/simulation/trace.npz');ii=np.argmin(abs(z['time']+1));O=transform(z['object'][ii,:3],z['object'][ii,3:7]);p=json.load(open('runs/flat-table-20261006/preparation/edge-recenter-v99/motor-plan.json'));q=np.array(p['close_q']);q[8:16]=[1.45,q[9],1.45,1.45,1.45,q[13],1.45,1.45];aq,e=k.solve(O@np.array(p['wrist_in_knife']));x0=np.r_[aq,q];lo=np.r_[k.lower+.01,g.w.lower+.01];hi=np.r_[k.upper-.01,g.w.upper-.01];V={n:np.concatenate([v for v,_ in m]) for n,m in g.meshes.items()};names=['hand_r_index_pad_link','hand_r_thumb_pad_link'];targets=np.array([[0,-.0044,-.026],[0,.00615,-.026]]);normals=np.array([[0,-1,0],[0,1,0]])
+# Select immutable mesh material vertices facing the desired cap surface in starting posture.
+F=g.w.forward(q);L=np.array(p['wrist_in_knife']);materials=[];localnormals=[]
+for n,N in zip(names,normals):
+ T=L@F[n];P=V[n]@T[:3,:3].T+T[:3,3];proj=P@N;w=np.exp(-(proj-proj.min())/.00025);materials.append(w@V[n]/w.sum());localnormals.append(T[:3,:3].T@N)
+def res(x):
+ W=k.forward(x[:7]);F=g.w.forward(x[7:]);L=np.linalg.inv(O)@W;r=[]
+ for n,m,N,ln,t in zip(names,materials,normals,localnormals,targets):
+  T=L@F[n];r.extend((T[:3,:3]@m+T[:3,3]-t)*220);r.extend((T[:3,:3]@ln-N)*2)
+ for n,v in V.items():
+  T=W@F[n];P=v@T[:3,:3].T+T[:3,3];inside=(P[:,0]>=.2995)&(P[:,0]<=.9005)&(P[:,1]>=-.6305)&(P[:,1]<=.1705);r.append(max(0,.7505-P[inside,2].min())*250 if inside.any() else 0.)
+ for f in ['index','middle','pinky','ring','thumb']:
+  r.extend(min(0,z['gap_lower_bound_m']-.0005)*80 for z in g.gaps(x[7:],L,0.,f) if z['hand_link'] not in names)
+ r.extend(min(0,z['gap_lower_bound_m']-.0001)*80 for z in g.self_gaps(x[7:],'thumb',certify_clearance_m=.0001));r.extend((x-x0)*.003);return np.array(r)
+b=time.time();fit=least_squares(res,np.clip(x0,lo+1e-7,hi-1e-7),bounds=(lo,hi),max_nfev=100,diff_step=1e-5);x=fit.x;W=k.forward(x[:7]);F=g.w.forward(x[7:]);L=np.linalg.inv(O)@W;errs=[];ns=[];bad=0
+for n,m,t,ln,N in zip(names,materials,targets,localnormals,normals):
+ T=L@F[n];errs.append(float(np.linalg.norm(T[:3,:3]@m+T[:3,3]-t)));ns.append(float(np.linalg.norm(T[:3,:3]@ln-N)))
+for n,v in V.items():
+ T=W@F[n];P=v@T[:3,:3].T+T[:3,3];inside=(P[:,0]>=.3)&(P[:,0]<=.9)&(P[:,1]>=-.63)&(P[:,1]<=.17);bad+=int(sum(inside&(P[:,2]<.75)))
+r=dict(arm_q=x[:7].tolist(),hand_q=x[7:].tolist(),object_world=O.tolist(),wrist_in_knife=L.tolist(),active_links=names,material_points=[m.tolist() for m in materials],local_normals=[n.tolist() for n in localnormals],targets=targets.tolist(),contact_errors_m=errs,normal_errors=ns,table_intersect_vertices=bad,elapsed_s=time.time()-b,scope=__doc__);(out/'candidate.json').write_text(json.dumps(r,indent=2));print(json.dumps({k:v for k,v in r.items() if k in ['contact_errors_m','normal_errors','table_intersect_vertices','elapsed_s']}),flush=True)

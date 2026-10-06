@@ -1,0 +1,39 @@
+{
+  "pid": 3398088,
+  "heartbeat": "2026-10-05T19:04:43.957826+00:00",
+  "session": "pid:[4026531836]",
+  "current": [
+    {
+      "index": 0,
+      "utilization": 24.0,
+      "memory_used_mb": 838.0,
+      "memory_total_mb": 24564.0
+    }
+  ],
+  "windows": {
+    "60": {
+      "mean_percent": 34.0,
+      "samples": 6,
+      "covered_seconds": 50.25907301902771
+    },
+    "300": {
+      "mean_percent": 50.266666666666666,
+      "samples": 30,
+      "covered_seconds": 291.33145785331726
+    },
+    "900": {
+      "mean_percent": 51.0625,
+      "samples": 32,
+      "covered_seconds": 311.4385042190552
+    },
+    "14400": {
+      "mean_percent": 51.0625,
+      "samples": 32,
+      "covered_seconds": 311.4385042190552
+    }
+  },
+  "provider_minimum_percent": 26.0,
+  "operational_target_percent": 40.0,
+  "alert": null,
+  "note": "Local 10s samples approximate provider accounting; rolling windows cover only samples since this resource restart"
+}

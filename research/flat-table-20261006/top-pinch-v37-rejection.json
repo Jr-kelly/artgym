@@ -1,0 +1,38 @@
+{
+  "contact_error_m": 0.005654199602089054,
+  "plane_violation_m": 0.0026790727493662546,
+  "thumb_uncertified_pairs": [
+    {
+      "moving_link": "hand_r_thumb_link4",
+      "other_link": "hand_r_index_link3",
+      "gap_lower_bound_m": -0.0009661412112062159
+    },
+    {
+      "moving_link": "hand_r_thumb_link4",
+      "other_link": "hand_r_middle_pad_link",
+      "gap_lower_bound_m": -0.00279644072915438
+    },
+    {
+      "moving_link": "hand_r_thumb_link4",
+      "other_link": "hand_r_ring_link3",
+      "gap_lower_bound_m": -0.0019966473205579593
+    },
+    {
+      "moving_link": "hand_r_thumb_pad_link",
+      "other_link": "hand_r_middle_link4",
+      "gap_lower_bound_m": -0.00011710396472443957
+    },
+    {
+      "moving_link": "hand_r_thumb_pad_link",
+      "other_link": "hand_r_middle_pad_link",
+      "gap_lower_bound_m": -0.0024625178696037944
+    }
+  ],
+  "inactive_knife_gaps": {
+    "middle": 0.0010422229118442214,
+    "ring": 0.00374285036295631,
+    "pinky": 0.03857429530900372
+  },
+  "accepted": false,
+  "reason": "Contact error and tabletop plane violation; no physical execution"
+}

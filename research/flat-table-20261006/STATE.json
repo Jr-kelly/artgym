@@ -1,34 +1,35 @@
 {
   "local_root": "/data/research/artgym-experiments-20260921/flat-table-20261006",
   "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
-  "flat_table_pickup": false,
+  "flat_table_pickup": true,
   "continuous_pickup_to_extension": false,
   "vision_validated": false,
   "real_robot_ran": false,
   "active_jobs": [],
-  "next": "Deliver concrete failed alternative and videos; later change hand entry topology with partially folded ring/pinky, not more distance/pad sweeps.",
+  "next": "Package complete existing evidence and dependencies; fast-forward GitHub branch from remote head; upload new Release assets and verify SHA256.",
   "last_event": {
-    "utc": "2026-10-05T18:44:38.184006+00:00",
-    "event": "physical_development_conclusion_and_concrete_delivery",
+    "utc": "2026-10-06T06:49:21.415476+00:00",
+    "event": "all_progress_publication_started",
     "evidence": [
-      "research/flat-table-20261006/FINAL-REPORT.md",
-      "research/flat-table-20261006/results.json",
-      "research/flat-table-20261006/video-manifest.json"
+      "delivery/flat-table-20261006",
+      "research/flat-table-20261006",
+      "runs/flat-table-20261006"
     ],
     "config": {
-      "physical_attempts": 14,
-      "new_behavior": "full-table robot side push71-78mm, safe withdrawal, pose-conditioned acquisition/transfer motor planning",
-      "failure": "functional ring/pinky table entry; no actual pickup",
-      "remote_observed_mean_percent": 47.870879120879124,
-      "remote_observed_seconds": 910.8087668418884,
-      "four_hour_compliance": false
+      "user_authorization": "上传所有进展",
+      "branch_remote_before": "74066ae73162531190e20f9422db1314a49d73c2",
+      "private_media_excluded": true,
+      "publish_scope": "existing source, simulation evidence and reproduction only; no new blocked experiments"
     },
     "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
-    "next": "Deliver concrete failed alternative and videos; later change hand entry topology with partially folded ring/pinky, not more distance/pad sweeps."
+    "next": "Package complete existing evidence and dependencies; fast-forward GitHub branch from remote head; upload new Release assets and verify SHA256."
   },
   "remote_root": "/home/wangjiarui/artgym-newknife-20261005",
   "placement_generalization": "not reached",
   "geometry_load_generalization": "not reached",
-  "pose_source": "sim_oracle",
-  "delivery_complete": false
+  "pose_source": "sim_oracle explicit pose interface and development prior contacts",
+  "delivery_complete": false,
+  "local_resource_monitor_pid": null,
+  "resource_four_hour_compliance_claim": false,
+  "goal_status": "blocked"
 }

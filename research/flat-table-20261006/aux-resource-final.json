@@ -1,0 +1,57 @@
+{
+  "pid": 4212,
+  "heartbeat": "2026-10-05T20:08:10.365405+00:00",
+  "session": "pid:[4026551244]",
+  "current": [
+    {
+      "index": 0,
+      "utilization": 0.0,
+      "memory_used_mb": 0.0,
+      "memory_total_mb": 143771.0
+    },
+    {
+      "index": 1,
+      "utilization": 0.0,
+      "memory_used_mb": 0.0,
+      "memory_total_mb": 143771.0
+    },
+    {
+      "index": 2,
+      "utilization": 0.0,
+      "memory_used_mb": 0.0,
+      "memory_total_mb": 143771.0
+    },
+    {
+      "index": 3,
+      "utilization": 0.0,
+      "memory_used_mb": 0.0,
+      "memory_total_mb": 143771.0
+    }
+  ],
+  "windows": {
+    "60": {
+      "mean_percent": 2.6666666666666665,
+      "samples": 6,
+      "covered_seconds": 50.448065757751465
+    },
+    "300": {
+      "mean_percent": 32.016666666666666,
+      "samples": 30,
+      "covered_seconds": 293.3613648414612
+    },
+    "900": {
+      "mean_percent": 44.73314606741573,
+      "samples": 89,
+      "covered_seconds": 890.5212228298187
+    },
+    "14400": {
+      "mean_percent": 47.734299516908216,
+      "samples": 207,
+      "covered_seconds": 2084.955797433853
+    }
+  },
+  "provider_minimum_percent": 26.0,
+  "operational_target_percent": 40.0,
+  "alert": null,
+  "note": "Local 10s samples approximate provider accounting; rolling windows cover only samples since this resource restart"
+}

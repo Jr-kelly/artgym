@@ -3,10 +3,10 @@ import numpy as np
 from scripts.g2_kinematics import G2Kinematics
 from scripts.g2_table_collision import ArmTableCollision
 
-def adapt(estimated_world, nominal_world, acquisition, regrasp, seed, table_y=-.23):
+def adapt(estimated_world, nominal_world, acquisition, regrasp, seed, table_y=-.23, extra_lift_m=0.):
  k=G2Kinematics();delta=estimated_world@np.linalg.inv(nominal_world)
  goal=delta@np.asarray(acquisition['grasp_wrist_world']);start=goal.copy();start[0,3]-=.09
- lifted=delta@np.asarray(acquisition['lift_wrist_world'])
+ lifted=delta@np.asarray(acquisition['lift_wrist_world']);lifted[2,3]+=extra_lift_m
  q=np.asarray(seed).copy();parts={};errors=[];collisions=[]
  table=ArmTableCollision(.75,margin=0.,table_y=table_y)
  def segment(a,b,n):
@@ -22,8 +22,8 @@ def adapt(estimated_world, nominal_world, acquisition, regrasp, seed, table_y=-.
  if regrasp:
   rr=[]
   for old in regrasp['arm_q']:
-   target=delta@k.forward(old);q,e=k.solve_near(target,q);rr.append(q.copy());errors.append(e)
-  parts['regrasp_arm']=np.asarray(rr);parts['expected_knife_world']=(delta@np.asarray(regrasp['expected_knife_world'])).tolist()
+   target=delta@k.forward(old);target[2,3]+=extra_lift_m;q,e=k.solve_near(target,q);rr.append(q.copy());errors.append(e)
+  parts['regrasp_arm']=np.asarray(rr);expected=delta@np.asarray(regrasp['expected_knife_world']);expected[2,3]+=extra_lift_m;parts['expected_knife_world']=expected.tolist()
  for name in ['approach','lift','regrasp_arm']:
   for i,qi in enumerate(parts.get(name,[])):
    if i%10==0:collisions.extend(dict(part=name,frame=i,**c) for c in table.collisions(qi))

@@ -1,0 +1,10 @@
+"""Explicit prefix held-object evaluation; native support plus whole imported knife bounds."""
+import argparse,json,numpy as np,hashlib
+from pathlib import Path
+from scripts.g2_kinematics import transform
+from scripts.g2_knife_geometry import KnifeGeometry
+p=argparse.ArgumentParser();p.add_argument('--trial',type=Path,required=True);p.add_argument('--prefix-duration',type=float,required=True);p.add_argument('--hold-start',type=float,required=True);p.add_argument('--hold-end',type=float,required=True);p.add_argument('--spec',type=Path,default=Path('runs/flat-table-20261006/preparation/supported-cap-clamp-v101/asset-spec.json'));a=p.parse_args();z=np.load(a.trial/'trace.npz');g=KnifeGeometry(a.spec);t=z['time']+a.prefix_duration;mask=(t>=a.hold_start-1e-6)&(t<a.hold_end-.05);clear=[]
+for i in np.flatnonzero(mask):
+ O=transform(z['object'][i,:3],z['object'][i,3:7]);V=np.concatenate([c['vertices'] for c in g.collision_parts(float(z['slider'][i]))]);clear.append(float((V@O[:3,:3].T+O[:3,3])[:,2].min()-.75))
+contacts=[json.loads(l) for l in (a.trial/'knife-contact-pairs.jsonl').open()];contacts=[c for c in contacts if a.hold_start<=c['time_s']+a.prefix_duration<a.hold_end-.05];table=sum('table' in [c['body0'],c['body1']] for c in contacts);finger_counts=z['finger_body_contacts'][mask];held_fingers=bool((finger_counts.sum(1)>0).all()) if len(finger_counts) else False
+r=dict(version='prefix-wholeknife-hold-v1',hold_elapsed_s=[a.hold_start,a.hold_end],duration_s=float(t[mask][-1]-t[mask][0]) if mask.any() else 0,min_whole_clearance_m=min(clear) if clear else None,table_support_records=table,held_finger_contacts_every_frame=held_fingers,whole_pickup=bool(clear and min(clear)>.02 and not table and held_fingers),continuous_pickup_to_extension=False,trace_sha256=hashlib.sha256((a.trial/'trace.npz').read_bytes()).hexdigest(),scope='Explicit native held-object stage; B not evaluated. Full initial flat physical replay preserved. Material collision extent, no rootheight-only acceptance.');(a.trial/'prefix-hold-evaluation.json').write_text(json.dumps(r,indent=2));print(json.dumps(r))
