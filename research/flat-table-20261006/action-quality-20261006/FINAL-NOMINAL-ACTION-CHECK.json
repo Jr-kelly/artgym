@@ -3,7 +3,7 @@
   "external_user_acceptance": false,
   "real_robot_ran": false,
   "trace_sha256": "8ac7ceb05f09fcf3f24dcdddfdc37b7d3c0f045e429183be3986ed9cdb0e386a",
-  "visual_check": "Inspected all98 nearframes at1Hz across video0–97s, plus48 extra transition/operationframes and6 actualstate geometry reconstructions in2views. Tools do not play video continuously; between visual samples is a blindspot. Actualgeometry all2940 saved30Hzstates checked.",
+  "visual_check": "Inspected98 unique nearframes at1Hz acrossvideo0–97s. Reviewed48cells in3prioritypanels, ofwhich8 areadditional uniquehalfsecond/endframes; total106unique nearframes. Sixactualstates reconstructed in2views. NOTcontinuousplayback; betweenvisualsamples isblindspot. Geometrychecksall2940saved30Hzstates.",
   "geometry_check": {
     "trace_sha256": "8ac7ceb05f09fcf3f24dcdddfdc37b7d3c0f045e429183be3986ed9cdb0e386a",
     "joint_names": [
@@ -154,5 +154,13 @@
     17.8
   ],
   "active_thumb_joint4_near_limit_saved_frames": 15,
-  "active_thumb_joint4_scope": "Transient aroundvideo93.3–93.8s, notsustained hold: atstage22s actualq4−.0594 vsoriginal lower−.4699. Otherthumb operationminimumoriginalmargin.0144rad; pressuretargets mayclip, actualeffortverified."
+  "active_thumb_joint4_scope": "Transient aroundvideo93.3–93.8s, notsustained hold: atstage22s actualq4−.0594 vsoriginal lower−.4699. Otherthumb operationminimumoriginalmargin.0144rad; pressuretargets mayclip, actualeffortverified.",
+  "visual_sample_counts": {
+    "full_timeaxis_unique_frames": 98,
+    "priority_panel_cells": 48,
+    "additional_unique_priority_frames": 8,
+    "total_unique_near_frames": 106,
+    "geometry_reconstruction_states": 6,
+    "views_each": 2
+  }
 }
