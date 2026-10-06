@@ -6,23 +6,22 @@
   "vision_validated": false,
   "real_robot_ran": false,
   "active_jobs": [
-    "actual-active12mm-continued-native"
+    "middle-side-planner"
   ],
-  "next": "Continuefromreal12mmend, noidealreset.",
+  "next": "Distinctsideopposition, not invalidfloorphysical.",
   "last_event": {
-    "utc": "2026-10-06T09:36:36.817080+00:00",
-    "event": "actual_12mm_slider_candidate_continued",
+    "utc": "2026-10-06T09:41:34.777649+00:00",
+    "event": "active19mm_floor_middle_rejected_side_topology_started",
     "evidence": [
-      "runs/flat-table-20261006/development/actual-slider-coordination-selected-native-20261006/simulation/native-segment-summary.json",
-      "runs/flat-table-20261006/development/actual-active12mm-continued-native-20261006/command.json"
+      "runs/flat-table-20261006/preparation/active19mm-middle-opposition-20261006/path.json"
     ],
     "config": {
-      "new_behavior": "Native11.802mmslider position, ~11.89mmactiveincrease, allindexthumbtable210frames.",
-      "uncertainty": "Actualnew slidingmaterial permits continuedstroke beyond20mm withoutregrasp?",
-      "decision": ">20mm->opposedsupport; stall->jointcontactstroke, no furthersearch."
+      "result": "Floor middle point3.77mm/selfcertificate-3.16mm, no native run.",
+      "uncertainty": "Middle sideopposition at actual19mmgrip avoids underfloor palm/indexinterference?",
+      "decision": "Reachable->native; infeasible->new functional pickup clamp instead."
     },
     "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
-    "next": "Continuefromreal12mmend, noidealreset."
+    "next": "Distinctsideopposition, not invalidfloorphysical."
   },
   "remote_root": "/home/wangjiarui/artgym-newknife-20261005",
   "placement_generalization": "not reached",
