@@ -1,0 +1,28 @@
+{
+  "candidate": "D698",
+  "grasp_end": "D695@2.4 actual696",
+  "control": "697 centroidRinglive plus55mmwristlift; otherowncarriercommands held",
+  "result": "Failedloadedbearing; ultimatelyallcarriercontactlost, noGoalliftpass",
+  "minimum_actual_margin_rad": 0.030772532983351253,
+  "self_frames": 41,
+  "saved_frames": 135,
+  "native_obstacle_rows": 80,
+  "whole_knife_clearance_max_m": 2.0838979448267736e-05,
+  "whole_knife_clearance_final_m": -3.329369884230715e-07,
+  "evidence": "Ringfirstintermittentloss beforeprimaryM/Thumb. Extremumcentroidpositionerror stays~.1mm whilephysicalbearingfails; precontactnormal~.055N islight. LaterRingIKbranchchanges unsupportedaftertool slips",
+  "decision": "Sameactual696 andlift; actualbearing-patch rollingwitness replaceswholepadcentroid; nonintegratingknownweight/loadJacobian support, boundedposture. No furtherstaticgainoffsetscan oroldRingidealstate",
+  "goal_complete": false,
+  "first_material_link_absence_s": {
+    "hand_r_ring_pad_link": 0.3875,
+    "hand_r_middle_pad_link": 1.6416666666666666,
+    "hand_r_thumb_link4": 1.8708333333333333,
+    "hand_r_index_link4": 2.8666666666666667
+  },
+  "first_digit_body_contact_absence_s": {
+    "ring": 0.3875,
+    "middle": 1.6416666666666666,
+    "thumb": 3.791666666666667,
+    "index": 2.8666666666666667
+  },
+  "contact_scope_correction": "Thumbheel->Thumbpad migration is valid; firstfullThumbabsence3.7917s, notheelabsence1.8708. Ringtruefirstabsence.3875 unchanged."
+}

@@ -60,10 +60,6 @@ def main():
  recorded_support=json.loads(a.recorded_support_command.read_text()) if a.recorded_support_command else None
  recorded_material_carrier=None
  recorded_live_ring=None
- recorded_primary_patch=None
- if recorded_support and 'direct_primary_patch' in recorded_support:
-  from scripts.wuji_direct_primary_patch import DirectPrimaryPatch
-  recorded_primary_patch=DirectPrimaryPatch(recorded_support['direct_primary_patch'],a.output)
  if recorded_support and 'direct_live_ring' in recorded_support:
   from scripts.wuji_direct_live_ring import DirectLiveRing
   recorded_live_ring=DirectLiveRing(recorded_support['direct_live_ring'],a.output)
@@ -586,8 +582,6 @@ def main():
        rr=recorded_support['rows'];tt=np.array([r['time_s'] for r in rr]);aq=np.array([np.interp(t+(a.recorded_b_start_s or 0.),tt,[r['arm_q'][j] for r in rr]) for j in range(7)]);hq=np.array([np.interp(t+(a.recorded_b_start_s or 0.),tt,[r['hand_q'][j] for r in rr]) for j in range(20)])
       else:
        u=smooth(np.clip((t-recorded_support['start_s'])/recorded_support['ramp_s'],0,1));hq+=np.array(recorded_support['hand_delta'])*u
-    if recorded_primary_patch:
-     hq=recorded_primary_patch.correct(t,transform(rb[oid,:3].numpy(),rb[oid,3:7].numpy()),dof[arm,0].numpy().copy(),dof[hand,0].numpy().copy(),previously_issued_target[hand].numpy().copy(),hq,float(dof[sid,0]))
     if recorded_grip_roll_servo:
      hq=recorded_grip_roll_servo.correct(t,transform(rb[oid,:3].numpy(),rb[oid,3:7].numpy()),dof[arm,0].numpy().copy(),dof[hand,0].numpy().copy(),previously_issued_target[hand].numpy().copy(),hq)
     if recorded_joint_path_tracking:

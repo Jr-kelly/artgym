@@ -41,38 +41,11 @@ class DirectLiveRing:
             self.initial_wrist = self.k.forward(issued_arm)
             self.initial_ring_actual = hand[12:16].astype(float).copy()
             self.initial_ring_deformation = self.initial[12:16]-self.initial_ring_actual
-            self.initial_object_reference = O.copy()
-            self.acquired_wrist_in_knife = np.linalg.inv(O)@self.initial_wrist
         lift_ik=None
-        wrist_goal=None
         if self.s.get('initial_world_lift_m'):
             goal=self.initial_wrist.copy()
-            lift_progress=smooth(t/self.s.get('initial_world_lift_duration_s',1.2))
-            if self.s.get('wrist_grip_rotation_follow'):
-                # Follow orientation while keeping a planned body centre.
-                # Do not chase live body translation (the old position-follow
-                # family diverged). This lets the wrist cooperate with contact
-                # rolling rather than making a single finger undo knife tilt.
-                cfg=self.s['wrist_grip_rotation_follow']
-                reference=self.initial_object_reference.copy()
-                reference[:3,:3]=O[:3,:3]
-                reference[2,3]+=float(self.s['initial_world_lift_m'])*lift_progress
-                minimum_relative_z=min(float((part['vertices']@O[:3,:3].T)[:,2].min())
-                    for part in self.g.knife_geometry.collision_parts(slider))
-                frames=self.g.w.forward(hand.astype(float))
-                for name,parts in self.g.meshes.items():
-                    T=self.acquired_wrist_in_knife@frames[name]
-                    for vertices,_ in parts:
-                        relative=vertices@T[:3,:3].T+T[:3,3]
-                        minimum_relative_z=min(minimum_relative_z,float((relative@O[:3,:3].T)[:,2].min()))
-                necessary_z=.75+float(cfg['whole_hand_knife_clearance_m'])-minimum_relative_z
-                reference[2,3]=max(reference[2,3],self.initial_object_reference[2,3]+
-                    (necessary_z-self.initial_object_reference[2,3])*lift_progress)
-                goal=reference@self.acquired_wrist_in_knife
-            else:
-                goal[2,3]+=float(self.s['initial_world_lift_m'])*lift_progress
+            goal[2,3]+=float(self.s['initial_world_lift_m'])*smooth(t/self.s.get('initial_world_lift_duration_s',1.2))
             self.arm,lift_ik=self.k.solve_near(goal,self.arm.astype(float),max_step=.1,minimum_margin=.05)
-            wrist_goal=goal.tolist()
         delay=float(self.s.get('acquisition_delay_s',0.))
         if t<delay:
             with self.log.open('a') as f:
@@ -195,8 +168,6 @@ class DirectLiveRing:
                 issued_ring_q=command[12:16].tolist(),
                 initial_world_lift_m=self.s.get('initial_world_lift_m',0.),
                 lift_ik=lift_ik,
-                wrist_goal_world=wrist_goal,
-                wrist_grip_rotation_follow=self.s.get('wrist_grip_rotation_follow'),
                 scope='Live sim_oracle object pose and measured FK; ring-only motor update. '
                       'Other carrier motor history retained; no native contact input or physical state writes.'))+'\n')
         return self.arm.copy(), command

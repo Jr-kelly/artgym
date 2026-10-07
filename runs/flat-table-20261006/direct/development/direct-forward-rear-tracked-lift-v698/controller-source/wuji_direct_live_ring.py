@@ -2,7 +2,7 @@
 import json
 from pathlib import Path
 import numpy as np
-from scipy.optimize import least_squares, linprog
+from scipy.optimize import least_squares
 from scripts.g2_kinematics import G2Kinematics
 from scripts.g2_contact_geometry import DigitGeometry
 from scripts.wuji_direct_pickup import smooth
@@ -39,40 +39,11 @@ class DirectLiveRing:
             self.arm = issued_arm.copy()
             self.initial = issued_hand.copy()
             self.initial_wrist = self.k.forward(issued_arm)
-            self.initial_ring_actual = hand[12:16].astype(float).copy()
-            self.initial_ring_deformation = self.initial[12:16]-self.initial_ring_actual
-            self.initial_object_reference = O.copy()
-            self.acquired_wrist_in_knife = np.linalg.inv(O)@self.initial_wrist
         lift_ik=None
-        wrist_goal=None
         if self.s.get('initial_world_lift_m'):
             goal=self.initial_wrist.copy()
-            lift_progress=smooth(t/self.s.get('initial_world_lift_duration_s',1.2))
-            if self.s.get('wrist_grip_rotation_follow'):
-                # Follow orientation while keeping a planned body centre.
-                # Do not chase live body translation (the old position-follow
-                # family diverged). This lets the wrist cooperate with contact
-                # rolling rather than making a single finger undo knife tilt.
-                cfg=self.s['wrist_grip_rotation_follow']
-                reference=self.initial_object_reference.copy()
-                reference[:3,:3]=O[:3,:3]
-                reference[2,3]+=float(self.s['initial_world_lift_m'])*lift_progress
-                minimum_relative_z=min(float((part['vertices']@O[:3,:3].T)[:,2].min())
-                    for part in self.g.knife_geometry.collision_parts(slider))
-                frames=self.g.w.forward(hand.astype(float))
-                for name,parts in self.g.meshes.items():
-                    T=self.acquired_wrist_in_knife@frames[name]
-                    for vertices,_ in parts:
-                        relative=vertices@T[:3,:3].T+T[:3,3]
-                        minimum_relative_z=min(minimum_relative_z,float((relative@O[:3,:3].T)[:,2].min()))
-                necessary_z=.75+float(cfg['whole_hand_knife_clearance_m'])-minimum_relative_z
-                reference[2,3]=max(reference[2,3],self.initial_object_reference[2,3]+
-                    (necessary_z-self.initial_object_reference[2,3])*lift_progress)
-                goal=reference@self.acquired_wrist_in_knife
-            else:
-                goal[2,3]+=float(self.s['initial_world_lift_m'])*lift_progress
+            goal[2,3]+=float(self.s['initial_world_lift_m'])*smooth(t/self.s.get('initial_world_lift_duration_s',1.2))
             self.arm,lift_ik=self.k.solve_near(goal,self.arm.astype(float),max_step=.1,minimum_margin=.05)
-            wrist_goal=goal.tolist()
         delay=float(self.s.get('acquisition_delay_s',0.))
         if t<delay:
             with self.log.open('a') as f:
@@ -82,39 +53,12 @@ class DirectLiveRing:
         L = np.linalg.inv(O) @ W
         q = hand.astype(float)
         target = np.array(self.s['target_knife_m'])
-        patch = self.s.get('bearing_patch_tracking')
-        material = None
-        patch_status = None
-        if patch:
-            # Find a real hull point inside the knife's side footprint. A
-            # whole-pad extreme centroid can stay close while the contact
-            # edge leaves the knife. This witness is refreshed from FK and
-            # geometry, so it can roll; native contacts never enter the loop.
-            T=L@self.g.w.forward(q)[self.name]
-            vertices=self.V@T[:3,:3].T+T[:3,3]
-            band=patch['side_y_interval_m'];axial=patch['axial_interval_m']
-            A=np.array([vertices[:,1],-vertices[:,1],vertices[:,2],-vertices[:,2]])
-            b=np.array([band[1],-band[0],axial[1],-axial[0]])
-            witness=linprog(vertices[:,0],A_ub=A,b_ub=b,
-                A_eq=np.ones((1,len(vertices))),b_eq=[1.],bounds=(0,None),method='highs')
-            if witness.success:
-                material=witness.x@self.V
-                actual_witness=witness.x@vertices
-                target[0]=patch['side_x_m']
-                target[1]=actual_witness[1]
-                patch_status='rolling hull witness in actual side footprint'
-            else:
-                material=np.array(patch['initial_material_point'])
-                target[:2]=[patch['side_x_m'],patch['initial_point_knife_m'][1]]
-                patch_status='no footprint witness; initial material fallback, bounded posture'
 
         def decode(x):
             h = q.copy()
             h[12:16] = x
             F = self.g.w.forward(h)
             T = L @ F[self.name]
-            if material is not None:
-                return h,F,T[:3,:3]@material+T[:3,3]
             v = self.V @ T[:3, :3].T + T[:3, 3]
             depth = v @ self.inward
             weights = np.exp((depth-depth.max())/.00025)
@@ -151,33 +95,12 @@ class DirectLiveRing:
         margin=float(self.s.get('joint_margin_rad',.04))
         lo = self.g.w.lower[12:16]+margin
         hi = self.g.w.upper[12:16]-margin
-        if patch:
-            envelope=float(patch['posture_envelope_rad'])
-            lo=np.maximum(lo,self.initial_ring_actual-envelope)
-            hi=np.minimum(hi,self.initial_ring_actual+envelope)
-            lo=np.maximum(lo,self.seed-.08);hi=np.minimum(hi,self.seed+.08)
         fit = least_squares(residual, np.clip(self.seed, lo+1e-6, hi-1e-6),
                             bounds=(lo, hi), max_nfev=20, diff_step=1e-5)
         self.seed = fit.x
-        bearing_force=None;load_offset=None
-        if patch:
-            h,F,P=decode(self.seed);J=np.empty((3,4))
-            for j in range(4):
-                x=self.seed.copy();x[j]+=1e-5
-                J[:,j]=(decode(x)[2]-P)/1e-5
-            up=float(patch['mass_kg'])*9.81*float(patch['world_up_fraction'])
-            normal=up/float(patch['friction_reference'])*float(patch['normal_reserve_factor'])
-            bearing_force=self.inward*normal+O[:3,:3].T@np.array([0.,0.,up])
-            kp=np.asarray(patch['original_ring_kp'])
-            planned_offset=np.clip(J.T@bearing_force/kp,-.10,.10)
-            load_blend=smooth(t/float(patch['load_ramp_s']))
-            load_offset=(1-load_blend)*self.initial_ring_deformation+load_blend*planned_offset
         u = smooth((t-delay)/self.s['acquisition_s'])
         command = self.initial.copy()
-        goal=self.seed if load_offset is None else self.seed+load_offset
-        command[12:16] = (1-u)*self.initial[12:16]+u*goal
-        if patch:
-            command[12:16]=np.clip(command[12:16],self.g.w.lower[12:16]+margin,self.g.w.upper[12:16]-margin)
+        command[12:16] = (1-u)*self.initial[12:16]+u*self.seed
         # Motor slew only; the physical velocity, torque and collision limits remain unchanged.
         command[12:16] = np.clip(command[12:16], issued_hand[12:16]-.10, issued_hand[12:16]+.10)
         _, _, P = decode(self.seed)
@@ -186,17 +109,11 @@ class DirectLiveRing:
             f.write(json.dumps(dict(time_s=float(t),material_link=self.name,target_knife_m=target.tolist(),
                 planned_point_knife_m=P.tolist(), endpoint_error_m=float(np.linalg.norm(P-target)),
                 actual_support_point_knife_m=actual_P.tolist(),
-                bearing_patch_status=patch_status,
-                bearing_material_point=(None if material is None else material.tolist()),
-                requested_bearing_force_knife_N=(None if bearing_force is None else bearing_force.tolist()),
-                bearing_motor_offset_rad=(None if load_offset is None else load_offset.tolist()),
                 transverse_surface_error_m=float(np.linalg.norm((P-target)[:2])),
                 support_inward_normal_knife=self.inward.tolist(),
                 issued_ring_q=command[12:16].tolist(),
                 initial_world_lift_m=self.s.get('initial_world_lift_m',0.),
                 lift_ik=lift_ik,
-                wrist_goal_world=wrist_goal,
-                wrist_grip_rotation_follow=self.s.get('wrist_grip_rotation_follow'),
                 scope='Live sim_oracle object pose and measured FK; ring-only motor update. '
                       'Other carrier motor history retained; no native contact input or physical state writes.'))+'\n')
         return self.arm.copy(), command
