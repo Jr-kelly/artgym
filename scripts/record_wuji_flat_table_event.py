@@ -28,6 +28,7 @@ def _record(event,evidence,config=None,updates=None,next_step=None):
  source_files.append('prepare_wuji_functional_table_pickup.py')
  source_files.append('wuji_direct_pickup_bearing.py')
  source_files.append('wuji_direct_primary_patch.py')
+ source_files.extend(['plan_wuji_functional_initial_thumb.py','plan_wuji_functional_opposed_grip.py','plan_wuji_functional_side_rolling_grip.py'])
  source_files.append('prepare_wuji_forward_initial_pinch.py')
  source_files.extend(['plan_wuji_safe_ring_acquisition.py','prepare_wuji_pinky_first_rear.py','prepare_wuji_rear_floor_arc.py'])
  source_files.extend(['wuji_direct_joint_path_tracking.py','time_wuji_free_thumb_path.py','prepare_wuji_base_first_thumb_path.py'])

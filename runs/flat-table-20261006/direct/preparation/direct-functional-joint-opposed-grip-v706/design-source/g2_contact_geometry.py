@@ -38,7 +38,7 @@ class DigitGeometry:
                     normals=normals[np.linspace(0,len(normals)-1,max_face_axes,dtype=int)]
                 self.meshes.setdefault(name,[]).append((v[hull.vertices],normals))
 
-    def gaps(self,q,wrist_in_object,slider,finger='thumb',frames=None,knife_parts=None,certify_clearance_m=None):
+    def gaps(self,q,wrist_in_object,slider,finger='thumb',frames=None,knife_parts=None):
         frames=self.w.forward(q) if frames is None else frames;results=[]
         if self.knife_geometry is not None:
             for link,meshes in self.meshes.items():
@@ -47,15 +47,6 @@ class DigitGeometry:
                 for vertices,normals in meshes:
                     v=vertices@frame[:3,:3].T+frame[:3,3]
                     for part in (self.knife_geometry.collision_parts(slider) if knife_parts is None else knife_parts):
-                        if certify_clearance_m is not None:
-                            # Knife face planes give an inexpensive exact
-                            # positive certificate for distant hand parts.
-                            # Failed certificates still use every hand face.
-                            probe=part['normals'];a=v@probe.T;b=part['vertices']@probe.T
-                            face_gap=float(np.maximum(a.min(0)-b.max(0),b.min(0)-a.max(0)).max())
-                            if face_gap>certify_clearance_m:
-                                results.append(dict(hand_link=link,knife_link=part['link'],knife_component=part['index'],gap_lower_bound_m=face_gap,certificate='knife face planes'))
-                                continue
                         axes=np.r_[normals@frame[:3,:3].T,part['normals']];a=v@axes.T;b=part['vertices']@axes.T
                         gap=np.maximum(a.min(0)-b.max(0),b.min(0)-a.max(0)).max()
                         results.append(dict(hand_link=link,knife_link=part['link'],knife_component=part['index'],gap_lower_bound_m=float(gap)))

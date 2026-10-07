@@ -38,7 +38,7 @@ class DigitGeometry:
                     normals=normals[np.linspace(0,len(normals)-1,max_face_axes,dtype=int)]
                 self.meshes.setdefault(name,[]).append((v[hull.vertices],normals))
 
-    def gaps(self,q,wrist_in_object,slider,finger='thumb',frames=None,knife_parts=None,certify_clearance_m=None):
+    def gaps(self,q,wrist_in_object,slider,finger='thumb',frames=None,knife_parts=None):
         frames=self.w.forward(q) if frames is None else frames;results=[]
         if self.knife_geometry is not None:
             for link,meshes in self.meshes.items():
@@ -47,15 +47,6 @@ class DigitGeometry:
                 for vertices,normals in meshes:
                     v=vertices@frame[:3,:3].T+frame[:3,3]
                     for part in (self.knife_geometry.collision_parts(slider) if knife_parts is None else knife_parts):
-                        if certify_clearance_m is not None:
-                            # Knife face planes give an inexpensive exact
-                            # positive certificate for distant hand parts.
-                            # Failed certificates still use every hand face.
-                            probe=part['normals'];a=v@probe.T;b=part['vertices']@probe.T
-                            face_gap=float(np.maximum(a.min(0)-b.max(0),b.min(0)-a.max(0)).max())
-                            if face_gap>certify_clearance_m:
-                                results.append(dict(hand_link=link,knife_link=part['link'],knife_component=part['index'],gap_lower_bound_m=face_gap,certificate='knife face planes'))
-                                continue
                         axes=np.r_[normals@frame[:3,:3].T,part['normals']];a=v@axes.T;b=part['vertices']@axes.T
                         gap=np.maximum(a.min(0)-b.max(0),b.min(0)-a.max(0)).max()
                         results.append(dict(hand_link=link,knife_link=part['link'],knife_component=part['index'],gap_lower_bound_m=float(gap)))
@@ -134,17 +125,6 @@ class DigitGeometry:
                         box_gap=float(np.maximum(va.min(0)-vb.max(0),vb.min(0)-va.max(0)).max())
                         if box_gap>certify_clearance_m:
                             results.append(dict(link_a=a,link_b=b,gap_lower_bound_m=box_gap,certificate='world axes'))
-                            continue
-                        # Any original face plane can certify separation. Try
-                        # a small subset before projecting every curved hull
-                        # face; if it cannot certify the requested clearance,
-                        # retain the complete original calculation below.
-                        sa=na[np.linspace(0,len(na)-1,min(12,len(na)),dtype=int)]
-                        sb=nb[np.linspace(0,len(nb)-1,min(12,len(nb)),dtype=int)]
-                        probe=np.r_[sa,sb];pa=va@probe.T;pb=vb@probe.T
-                        face_gap=float(np.maximum(pa.min(0)-pb.max(0),pb.min(0)-pa.max(0)).max())
-                        if face_gap>certify_clearance_m:
-                            results.append(dict(link_a=a,link_b=b,gap_lower_bound_m=face_gap,certificate='original face subset'))
                             continue
                     axes=np.r_[na,nb];pa=va@axes.T;pb=vb@axes.T
                     gap=np.maximum(pa.min(0)-pb.max(0),pb.min(0)-pa.max(0)).max()

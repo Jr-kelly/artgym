@@ -30,9 +30,6 @@ class DirectRoute:
             prior=np.load(Path(stage['source'])/'takeover.npz')
             refO=transform(prior['object_state'][:3],prior['object_state'][3:7])
             motion=json.loads(Path(stage['motor']).read_text())
-            required=motion.get('required_actual_source')
-            if required is not None and Path(required).resolve()!=Path(stage['source']).resolve():
-                raise ValueError('Stage motor prior and declared actual source disagree')
             self.runtime=dict(motion=motion, liveO=O.copy(), correction=O@np.linalg.inv(refO),
                 live_arm=issued_arm.copy(), live_hand=issued_hand.copy(), seed=issued_arm.astype(float).copy(),
                 hand_offset=issued_hand-prior['issued_target'][7:])
@@ -42,9 +39,6 @@ class DirectRoute:
             if 'direct_joint_path_tracking' in motion:
                 from scripts.wuji_direct_joint_path_tracking import DirectJointPathTracking
                 self.runtime['joint_path_tracking']=DirectJointPathTracking(motion['direct_joint_path_tracking'],self.output)
-            if 'direct_primary_patch' in motion:
-                from scripts.wuji_direct_primary_patch import DirectPrimaryPatch
-                self.runtime['primary_patch']=DirectPrimaryPatch(motion['direct_primary_patch'],self.output)
             if 'direct_material_carriers' in motion:
                 from scripts.wuji_direct_material_carrier import DirectMaterialCarrierGroup
                 self.runtime['material_carrier']=DirectMaterialCarrierGroup(motion['direct_material_carriers'],self.output)
@@ -90,8 +84,6 @@ class DirectRoute:
             hand_offset[decay_indices]*=1-smooth(age/stage['hand_offset_decay_s'])
         if 'servo' in state:
             aq,hq=state['servo'].command(age,O,arm,hand,issued_arm,issued_hand,slider)
-            if 'primary_patch' in state:
-                hq=state['primary_patch'].correct(age,O,arm,hand,issued_hand,hq,slider)
             if 'material_carrier' in state:
                 hq=state['material_carrier'].correct(age,O,arm,hand,issued_hand,hq,slider)
             if 'idle_middle_clearance' in state:
@@ -105,8 +97,6 @@ class DirectRoute:
             # different recorded wrist/knife relation at the stage boundary.
             aq=state['live_arm'].copy()
             hq=refhand+hand_offset
-            if 'primary_patch' in state:
-                hq=state['primary_patch'].correct(age,O,arm,hand,issued_hand,hq,slider)
             if 'joint_path_tracking' in state:
                 hq=state['joint_path_tracking'].correct(age,hand,hq)
             if 'pressure_servo' in state:
@@ -152,8 +142,6 @@ class DirectRoute:
         hq=refhand+hand_offset
         if stage.get('hold_acquired_hand_targets',False):
             hq=state['live_hand'].copy()
-        if 'primary_patch' in state:
-            hq=state['primary_patch'].correct(age,O,arm,hand,issued_hand,hq,slider)
         if 'grip_roll_servo' in state:
             hq=state['grip_roll_servo'].correct(age,O,arm,hand,issued_hand,hq)
         if 'pressure_servo' in state:
