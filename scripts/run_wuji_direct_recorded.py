@@ -10,7 +10,7 @@ if required is not None and Path(required).resolve()!=a.source.resolve():
  raise ValueError('Motor controller requires a different actual grasp source')
 runtime=a.output/'controller-source';runtime.mkdir()
 source_hashes={}
-for name in ['run_g2_flat_table_demo.py','g2_contact_geometry.py','g2_kinematics.py','wuji_direct_route.py','wuji_direct_pickup.py','wuji_direct_live_ring.py','wuji_direct_grip_roll_servo.py','wuji_direct_primary_patch.py']:
+for name in ['run_g2_flat_table_demo.py','g2_contact_geometry.py','g2_kinematics.py','wuji_direct_route.py','wuji_direct_pickup.py','wuji_direct_live_ring.py','wuji_direct_grip_roll_servo.py','wuji_direct_primary_patch.py','wuji_retained_push_skill.py','g2_r800_policy.py','wuji_joint_deflection_pressure.py','wuji_scheduled_thumb_reference.py','wuji_known_controller.py']:
  source=Path(__file__).resolve().parent/name
  shutil.copyfile(source,runtime/name)
  source_hashes[str(source)]=hashlib.sha256(source.read_bytes()).hexdigest()

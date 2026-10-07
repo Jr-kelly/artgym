@@ -107,6 +107,11 @@ def main():
  recorded_servo_relative=None
  recorded_servo_initial=None
  if recorded_support:assert recorded_handoff is not None
+ retained_push_skill=None
+ regrasp_reference_policy=None
+ if recorded_support and 'regrasp_policy' in recorded_support:
+  from scripts.wuji_regrasp_reference_policy import RegraspReferencePolicy
+  regrasp_reference_policy=RegraspReferencePolicy(recorded_support['regrasp_policy'],a.output)
  if recorded_handoff is not None:
   assert (a.grasp_only and a.seconds<=30 and not a.postpush_pose_update) or (a.recorded_b_start_s is not None and a.seconds<=24 and a.postpush_pose_update)
   prefix_duration=a.recorded_b_start_s or 0.
@@ -146,6 +151,9 @@ def main():
   loaded_thumb_servo=PairedVectorLoadServo(np.asarray(cfg.hand.dof_props.stiffness))
  if dual_push:dual_push.kp=np.asarray(cfg.hand.dof_props.stiffness,dtype=float)
  policy=G2R800Policy(cfg,R/'runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth',R/'runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth',geometry=estimated_geometry,thumb_action_gain=a.thumb_action_gain,support_action_gain=a.support_action_gain,residual_checkpoint=a.residual_checkpoint,thumb_reference_override=a.thumb_reference_override,support_residual_scale_override=a.support_residual_scale_override,thumb_residual_scale_override=a.thumb_residual_scale_override);kin=G2Kinematics()
+ if recorded_support and 'retained_push_skill' in recorded_support:
+  from scripts.wuji_retained_push_skill import RetainedPushSkill
+  retained_push_skill=RetainedPushSkill(cfg,recorded_support['retained_push_skill'],a.output)
  seed=np.load(R/'research/robust-knife-family-20261003/data/repaired-seeds.npy')[1];relative=transform(seed[40:43],seed[43:47]);closed=seed[20:40].copy();opened=np.clip(closed*.30,policy.fk.lower,policy.fk.upper);opened[16:]=np.clip(closed[16:]-[.35,0,.25,0],policy.fk.lower[16:],policy.fk.upper[16:])
  if a.grasp_plan:
   plan=json.loads(a.grasp_plan.read_text());relative=np.linalg.inv(np.asarray(plan['wrist_in_knife']));closed=np.asarray(plan['close_q']);opened=np.asarray(plan['open_q'])
@@ -602,6 +610,10 @@ def main():
     elapsed=step/a.physics_hz
     if direct_pickup:
      aq,hq=direct_pickup.command(elapsed,transform(rb[oid,:3].numpy(),rb[oid,3:7].numpy()),dof[arm,0].numpy().copy(),dof[hand,0].numpy().copy(),previously_issued_target[arm].numpy().copy(),previously_issued_target[hand].numpy().copy(),float(dof[sid,0]))
+    if regrasp_reference_policy and (retained_push_skill is None or elapsed<retained_push_skill.start):
+     aq,hq=regrasp_reference_policy.command(transform(rb[oid,:3].numpy(),rb[oid,3:7].numpy()),dof[:27,0].numpy().copy(),dof[:27,1].numpy().copy(),previously_issued_target[:27].numpy().copy(),contact[:len(rbnames)].numpy().copy(),rbnames)
+    if retained_push_skill and elapsed>=retained_push_skill.start:
+     aq,hq=retained_push_skill.command(elapsed,transform(rb[oid,:3].numpy(),rb[oid,3:7].numpy()),dof[arm,0].numpy().copy(),dof[hand,0].numpy().copy(),previously_issued_target[arm].numpy().copy(),previously_issued_target[hand].numpy().copy(),float(dof[sid,0]))
     if prefix_pose_adapter and ((recorded_handoff is None and t<0) or (recorded_handoff is not None and a.grasp_only)):
      adaptation_elapsed=elapsed if recorded_handoff is None else t+float(json.loads((a.recorded_handoff/"manifest.json").read_text())["takeover_elapsed_s"])
      aq=prefix_pose_adapter.command(adaptation_elapsed,aq,transform(rb[oid,:3].numpy(),rb[oid,3:7].numpy()),a.pose_estimate_bias_m)

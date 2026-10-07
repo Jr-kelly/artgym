@@ -1,0 +1,145 @@
+{
+  "candidate": "D709",
+  "source": "runs/flat-table-20261006/direct/preparation/direct-functional-clear-side-pickup-v708/candidate.json",
+  "wrist_in_knife": [
+    [
+      0.17107117104005312,
+      -0.9697080655400202,
+      0.17435860192608024,
+      -0.01568135666152442
+    ],
+    [
+      0.9846100218815173,
+      0.17468073742425194,
+      0.005453877831248566,
+      -0.05843847275677377
+    ],
+    [
+      -0.035745758482140955,
+      0.1707422255903675,
+      0.9846671179393496,
+      -0.12055882532442451
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "table_object_world": [
+    [
+      2.220446049250313e-16,
+      2.220446049250313e-16,
+      1.0,
+      0.45
+    ],
+    [
+      -1.0,
+      4.930380657631324e-32,
+      2.220446049250313e-16,
+      -0.4
+    ],
+    [
+      0.0,
+      -1.0,
+      2.220446049250313e-16,
+      0.7561
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "table_yaw_degrees": -90,
+  "hand_q": [
+    0.21515220761063134,
+    0.22334874270751232,
+    1.3856495969951719,
+    0.17599268522564018,
+    0.4515367350397676,
+    0.06343508210769791,
+    1.0808473984112683,
+    1.2302745704974969,
+    0.19997237881867852,
+    -0.0005489312348373269,
+    0.2000610530376289,
+    0.3000104427337659,
+    1.2784031553469362,
+    -0.03544564949482662,
+    1.157086679599103,
+    0.7602883962523663,
+    0.8909592613385351,
+    0.4126414448849319,
+    0.3803910644964568,
+    0.30557023271743194
+  ],
+  "contacts": [
+    {
+      "link": "hand_r_index_pad_link",
+      "point": [
+        -0.009499999721221621,
+        -0.0038669398042044016,
+        0.018889243384959693
+      ],
+      "material": [
+        -0.0005780355590265919,
+        -0.006175624194362264,
+        -0.005782078753475128
+      ],
+      "inward_knife": [
+        1.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "link": "hand_r_middle_pad_link",
+      "point": [
+        0.004231098862223947,
+        -0.00400000114028107,
+        -0.0027533248759221652
+      ],
+      "material": [
+        -0.00786604919088572,
+        -0.00014360141933332502,
+        -0.0011719202110125988
+      ],
+      "inward_knife": [
+        0.0,
+        1.0,
+        0.0
+      ]
+    },
+    {
+      "link": "hand_r_ring_link4",
+      "point": [
+        0.009900446467879163,
+        -0.0039745503615363645,
+        -0.05176094394793691
+      ],
+      "material": [
+        0.0011950124718949273,
+        0.007596904340037285,
+        0.011633441870478267
+      ],
+      "inward_knife": [
+        -1.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "table_clearance_m": 0.0005871929215447436,
+  "self": [],
+  "normal_surface_errors_m": {
+    "hand_r_index_pad_link": 2.7877837885381673e-10,
+    "hand_r_middle_pad_link": 1.1402810700875121e-09,
+    "hand_r_ring_link4": 0.000400446467879163
+  },
+  "geometry_permits_native": true,
+  "elapsed_s": 8.639447689056396,
+  "scope": "Clear and execute one changed longitudinal opposing-side tabletop layout.\n\nD708 is a geometric prior, with palm .249mm below the table. The wrist\nreference rises 2mm and the fingers refit; the object is never moved. Its same-wrist cap endpoint is blocked, so initial\nand operating grips are not frozen together. This prepares only fresh pickup;\nany following wrist/finger adjustment must consume that pickup's actual state.\n"
+}
