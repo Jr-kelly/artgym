@@ -27,6 +27,14 @@ class DirectPrimaryPatch:
         self.pairs = [p for p in checker.pairs
                       if any(any('_'+d+'_' in n for d in self.digits) for n in p)]
         self.vertices = {n: np.concatenate([v for v, _ in self.g.meshes[n]]) for n in self.names}
+        # Fixed distal pad and link4 are one bearing region. Express both
+        # hulls in link4 coordinates so rolling can change the active link.
+        for n, c in spec['materials'].items():
+            if c.get('fixed_pad_union'):
+                F = self.g.w.forward(np.zeros(20))
+                P = np.linalg.inv(F[n]) @ F[c['fixed_pad_union']]
+                V = np.concatenate([v for v, _ in self.g.meshes[c['fixed_pad_union']]])
+                self.vertices[n] = np.r_[self.vertices[n], V @ P[:3, :3].T + P[:3, 3]]
         self.initial = None
         self.log = Path(output)/'direct-primary-patch.jsonl'
 
@@ -39,7 +47,7 @@ class DirectPrimaryPatch:
             self.deformation = issued.astype(float)-q
             self.seed = q[self.ids].copy()
         F = self.g.w.forward(q)
-        targets, materials, status = {}, {}, {}
+        targets, materials, status, normals, loads = {}, {}, {}, {}, {}
         for n in self.names:
             c = self.s['materials'][n]
             T = L@F[n]
@@ -47,8 +55,20 @@ class DirectPrimaryPatch:
             band, axial = c['side_y_interval_m'], c['axial_interval_m']
             A = np.array([V[:, 1], -V[:, 1], V[:, 2], -V[:, 2]])
             b = np.array([band[1], -band[0], axial[1], -axial[0]])
-            sign = float(np.sign(c['side_x_m']))
-            fit = linprog(sign*V[:, 0], A_ub=A, b_ub=b,
+            rolling = c.get('rolling_support')
+            if rolling:
+                knots = rolling['knots']
+                tt = [r['time_s'] for r in knots]
+                nref = np.array([np.interp(t, tt, [r['normal_knife'][j] for r in knots]) for j in range(3)])
+                nref /= np.linalg.norm(nref)
+                normals[n] = nref
+                loads[n] = float(np.interp(t, tt, [r['reference_normal_N'] for r in knots]))
+                A = np.r_[A, V[:, 0][None], -V[:, 0][None]]
+                b = np.r_[b, .0105, .0105]
+                objective = -V @ nref
+            else:
+                objective = float(np.sign(c['side_x_m'])) * V[:, 0]
+            fit = linprog(objective, A_ub=A, b_ub=b,
                           A_eq=np.ones((1, len(V))), b_eq=[1.],
                           bounds=(0, None), method='highs')
             if fit.success:
@@ -61,7 +81,11 @@ class DirectPrimaryPatch:
                 targets[n][1] = np.clip(targets[n][1], *band)
                 targets[n][2] = np.clip(targets[n][2], *axial)
                 status[n] = 'no side-face witness; bounded acquired-material approach'
-            targets[n][0] = c['side_x_m']
+            if rolling:
+                corner = np.array([.0095, -.004, targets[n][2]])
+                targets[n] += normals[n] * (normals[n] @ (corner-targets[n]))
+            else:
+                targets[n][0] = c['side_x_m']
 
         def decode(x):
             h = q.copy()
@@ -79,11 +103,21 @@ class DirectPrimaryPatch:
             r = []
             for n in self.names:
                 d = points[n]-targets[n]
-                r.extend(d*np.array([700., 250., 40.]))
+                if n in normals:
+                    # The support plane and body footprint define a rolling
+                    # domain; no fixed material or axial site is required.
+                    p = points[n]
+                    r.extend([float(normals[n]@d)*700,
+                              max(abs(p[0])-.0095, 0)*900,
+                              max(abs(p[1])-.004, 0)*900,
+                              max(p[2]-self.s['materials'][n]['axial_interval_m'][1], 0)*700,
+                              max(self.s['materials'][n]['axial_interval_m'][0]-p[2], 0)*700])
+                else:
+                    r.extend(d*np.array([700., 250., 40.]))
             r.extend(min(0., a['gap_lower_bound_m']-.00015)*600
                      for a in self.self_geometry.pair_gaps(h, self.pairs, certify_clearance_m=.00015))
             for digit in self.digits:
-                for a in self.g.gaps(h, L, slider, digit, frames=frames, knife_parts=knife_parts):
+                for a in self.g.gaps(h, L, slider, digit, frames=frames, knife_parts=knife_parts, certify_clearance_m=.0001):
                     bearing = a['knife_link']=='link_0' and (a['hand_link'].endswith('link4') or a['hand_link'].endswith('pad_link'))
                     allow = .0004 if bearing else -.0001
                     r.append(min(0., a['gap_lower_bound_m']+allow)*600)
@@ -108,6 +142,20 @@ class DirectPrimaryPatch:
         command[self.ids] = np.clip(self.seed+self.deformation[self.ids],
                                    self.g.w.lower[self.ids]+.001,
                                    self.g.w.upper[self.ids]-.001)
+        for n, normal in normals.items():
+            digit = n.split('_')[2]
+            ids = np.arange(DIGITS.index(digit)*4, DIGITS.index(digit)*4+4)
+            h, _, p = decode(self.seed)
+            J = np.empty((3, 4))
+            for j in range(4):
+                hh = h.copy(); hh[ids[j]] += 1e-5
+                T = L @ self.g.w.forward(hh)[n]
+                J[:, j] = (T[:3, :3]@materials[n]+T[:3, 3]-p[n])/1e-5
+            kp = np.asarray(self.s['materials'][n]['rolling_support']['original_kp'])
+            offset = J.T @ (normal*loads[n]) / kp
+            u = np.clip(t/.3, 0., 1.); u = u*u*(3-2*u)
+            offset = (1-u)*self.deformation[ids] + u*offset
+            command[ids] = h[ids] + offset
         command[self.ids] = np.clip(command[self.ids], issued[self.ids]-.06, issued[self.ids]+.06)
         if t==0:
             command[self.ids] = issued[self.ids]
@@ -116,6 +164,9 @@ class DirectPrimaryPatch:
         rows = {n:dict(status=status[n], target_knife_m=targets[n].tolist(),
                       planned_point_knife_m=planned[n].tolist(), actual_point_knife_m=actual[n].tolist(),
                       material_point=materials[n].tolist()) for n in self.names}
+        for n in normals:
+            rows[n]['reference_normal_knife'] = normals[n].tolist()
+            rows[n]['reference_normal_N'] = loads[n]
         with self.log.open('a') as f:
             f.write(json.dumps(dict(time_s=float(t), carriers=rows,
                                    acquired_deformation_rad=self.deformation[self.ids].tolist(),

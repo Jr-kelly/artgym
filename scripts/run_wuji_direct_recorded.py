@@ -10,7 +10,7 @@ if required is not None and Path(required).resolve()!=a.source.resolve():
  raise ValueError('Motor controller requires a different actual grasp source')
 runtime=a.output/'controller-source';runtime.mkdir()
 source_hashes={}
-for name in ['run_g2_flat_table_demo.py','g2_contact_geometry.py','g2_kinematics.py','wuji_direct_route.py','wuji_direct_pickup.py','wuji_direct_live_ring.py','wuji_direct_grip_roll_servo.py','wuji_direct_primary_patch.py','wuji_retained_push_skill.py','g2_r800_policy.py','wuji_joint_deflection_pressure.py','wuji_scheduled_thumb_reference.py','wuji_known_controller.py']:
+for name in ['run_g2_flat_table_demo.py','g2_contact_geometry.py','g2_kinematics.py','wuji_direct_route.py','wuji_direct_pickup.py','wuji_direct_live_ring.py','wuji_direct_grip_roll_servo.py','wuji_direct_primary_patch.py','wuji_retained_push_skill.py','g2_r800_policy.py','wuji_joint_deflection_pressure.py','wuji_scheduled_thumb_reference.py','wuji_known_controller.py','wuji_regrasp_reference_policy.py','wuji_regrasp_learning.py','train_wuji_regrasp.py']:
  source=Path(__file__).resolve().parent/name
  shutil.copyfile(source,runtime/name)
  source_hashes[str(source)]=hashlib.sha256(source.read_bytes()).hexdigest()
@@ -19,6 +19,6 @@ c=json.load(open('runs/flat-table-20261006/direct/development/center-load-feedba
 i=c.index('--flat-table-prefix');del c[i:i+2]
 c[c.index('--seconds')+1]=str(a.seconds);c[c.index('--output')+1]=str(a.output/'simulation');c+=['--recorded-handoff',str(a.source),'--recorded-support-command',str(a.motor),'--close-camera-direction']+[str(x) for x in a.close_camera_direction]
 if a.support_camera_direction:c+=['--support-camera-direction']+[str(x) for x in a.support_camera_direction]
-(a.output/'command.json').write_text(json.dumps(c,indent=2));record('direct_recorded_native_start',[str(a.output/'command.json'),str(a.motor)],config={'uncertainty':a.uncertainty,'decision':a.decision,'seconds':a.seconds,'scope':'Short actualstate development; missing exactrobotvelocity/contactcache; no final acceptance'},updates={'active_jobs':[str(a.output)]},next_step=a.decision)
+(a.output/'command.json').write_text(json.dumps(c,indent=2));record('direct_recorded_native_start',[str(a.output/'command.json'),str(a.motor)],config={'uncertainty':a.uncertainty,'decision':a.decision,'seconds':a.seconds,'scope':'Short actualstate development; missing exactrobotvelocity/contactcache; no final acceptance'},updates={'add_active_jobs':[str(a.output)]},next_step=a.decision)
 try:subprocess.run(c,check=True)
-finally:record('direct_recorded_native_terminal',[str(a.output/'simulation')],updates={'active_jobs':[]},next_step='Read actual contacts and first divergence, advance changed mechanism without fullpickup rerun')
+finally:record('direct_recorded_native_terminal',[str(a.output/'simulation')],updates={'remove_active_jobs':[str(a.output)]},next_step='Read actual contacts and first divergence, advance changed mechanism without fullpickup rerun')

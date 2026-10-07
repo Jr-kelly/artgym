@@ -10,7 +10,10 @@ def record(event,evidence,config=None,updates=None,next_step=None):
   return _record(event,evidence,config,updates,next_step)
 def _record(event,evidence,config=None,updates=None,next_step=None):
  p=D/'STATE.json';s=json.loads(p.read_text()) if p.exists() else dict(local_root=str(R),actor_sha256='6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e',flat_table_pickup=False,continuous_pickup_to_extension=False,vision_validated=False,real_robot_ran=False,active_jobs=[])
- s.update(updates or {})
+ u=dict(updates or {})
+ add=u.pop('add_active_jobs',[]);remove=set(u.pop('remove_active_jobs',[]))
+ s.update(u)
+ if add or remove:s['active_jobs']=list(dict.fromkeys([x for x in s.get('active_jobs',[]) if x not in remove]+list(add)))
  if next_step:s['next']=next_step
  source_files=['run_g2_flat_table_demo.py','run_wuji_flat_connected.py','prepare_wuji_relaxed_prefix.py','wuji_prefix_pose_adaptation.py','wuji_direct_pickup.py','wuji_direct_route.py','g2_kinematics.py','g2_contact_geometry.py','wuji_direct_pressure_path_servo.py','wuji_direct_grip_roll_servo.py','wuji_direct_live_ring.py','wuji_direct_thumb_servo.py','run_wuji_direct_connected.py','run_wuji_direct_recorded.py','prepare_wuji_direct_actual_approach.py','plan_wuji_direct_back_support.py']
  source_files.append('wuji_direct_material_carrier.py')
@@ -31,6 +34,8 @@ def _record(event,evidence,config=None,updates=None,next_step=None):
  source_files.extend(['plan_wuji_functional_initial_thumb.py','plan_wuji_functional_opposed_grip.py','plan_wuji_functional_side_rolling_grip.py'])
  source_files.extend(['prepare_wuji_functional_side_pickup.py','prepare_wuji_functional_side_palm_clearance.py','replay_wuji_retained_push.py','wuji_retained_push_skill.py','prepare_wuji_retained_entry_transition.py'])
  source_files.extend(['wuji_regrasp_learning.py','train_wuji_regrasp.py'])
+ source_files.extend(['wuji_regrasp_reference_policy.py','prepare_wuji_retained_ring_entry.py','prepare_wuji_retained_ring_transition.py'])
+ source_files.extend(['check_wuji_transition_reference.py','prepare_wuji_ownactual_ring_tail.py'])
  source_files.append('prepare_wuji_forward_initial_pinch.py')
  source_files.extend(['plan_wuji_safe_ring_acquisition.py','prepare_wuji_pinky_first_rear.py','prepare_wuji_rear_floor_arc.py'])
  source_files.extend(['wuji_direct_joint_path_tracking.py','time_wuji_free_thumb_path.py','prepare_wuji_base_first_thumb_path.py'])
