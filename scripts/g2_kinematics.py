@@ -73,15 +73,16 @@ class G2Kinematics:
         return best[1],dict(residual=best[0],position_m=float(np.linalg.norm(self.forward(best[1])[:3,3]-target[:3,3])),
                             rotation_rad=float(np.linalg.norm(Rotation.from_matrix(target[:3,:3].T@self.forward(best[1])[:3,:3]).as_rotvec())))
 
-    def solve_near(self,target,seed,max_step=.45):
+    def solve_near(self,target,seed,max_step=.45,minimum_margin=0.,
+                   position_weight=4.,rotation_weight=1.,posture_weight=.003):
         """Continuous IK: never restart on another arm branch mid-motion."""
         seed=np.asarray(seed,dtype=float)
         def residual(q):
             t=self.forward(q)
-            return np.r_[(t[:3,3]-target[:3,3])*4,
-                Rotation.from_matrix(target[:3,:3].T@t[:3,:3]).as_rotvec(),
-                (q-seed)*.003]
-        lo=np.maximum(self.lower,seed-max_step);hi=np.minimum(self.upper,seed+max_step)
+            return np.r_[(t[:3,3]-target[:3,3])*position_weight,
+                Rotation.from_matrix(target[:3,:3].T@t[:3,:3]).as_rotvec()*rotation_weight,
+                (q-seed)*posture_weight]
+        lo=np.maximum(self.lower+minimum_margin,seed-max_step);hi=np.minimum(self.upper-minimum_margin,seed+max_step)
         result=least_squares(residual,np.clip(seed,lo+1e-8,hi-1e-8),bounds=(lo,hi),max_nfev=180)
         q=result.x;t=self.forward(q)
         return q,dict(position_m=float(np.linalg.norm(t[:3,3]-target[:3,3])),

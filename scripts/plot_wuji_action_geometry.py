@@ -10,8 +10,8 @@ from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 from scripts.g2_contact_geometry import DigitGeometry
 from scripts.g2_kinematics import transform
 
-def plot(trial,output,clocks):
-    z=np.load(trial/'trace.npz');g=DigitGeometry(knife_spec=trial/'evaluated-geometry.json')
+def plot(trial,output,clocks,knife_spec=None):
+    z=np.load(trial/'trace.npz');g=DigitGeometry(knife_spec=knife_spec or trial/'evaluated-geometry.json')
     colors=dict(index='#4082c4',middle='#ddad36',thumb='#d5584c',ring='#65a174',pinky='#9266aa')
     fig=plt.figure(figsize=(4*len(clocks),8))
     for col,t in enumerate(clocks):
@@ -31,4 +31,4 @@ def plot(trial,output,clocks):
     fig.tight_layout(rect=(0,0,1,.94));fig.savefig(output,dpi=130);plt.close(fig)
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--trial',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--elapsed',type=float,nargs='+',required=True);a=p.parse_args();plot(a.trial,a.output,a.elapsed)
+    p=argparse.ArgumentParser();p.add_argument('--trial',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--elapsed',type=float,nargs='+',required=True);p.add_argument('--knife-spec',type=Path);a=p.parse_args();plot(a.trial,a.output,a.elapsed,a.knife_spec)

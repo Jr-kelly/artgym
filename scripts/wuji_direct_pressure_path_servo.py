@@ -1,0 +1,118 @@
+"""Bounded normal deflection correction on an acquired pad stroke prior.
+
+Inputs are measured joints, issued motor history and explicit object pose.
+The force proxy assumes pad-only contact; it is not a force measurement.
+Native contact/force logs remain evaluation-only.
+"""
+import json
+from pathlib import Path
+import numpy as np
+from scripts.g2_kinematics import G2Kinematics, transform
+from scipy.spatial.transform import Rotation
+from scripts.wuji_kinematics import WujiKinematics
+from scripts.wuji_direct_pickup import smooth
+
+
+class DirectPressurePathServo:
+    def __init__(self, motion, output):
+        self.s = motion['direct_pressure_path_servo']
+        rows = motion['rows']
+        self.times = np.array([row['time_s'] for row in rows])
+        self.arms = np.array([row['arm_q'] for row in rows])
+        self.hands = np.array([row['hand_q'] for row in rows])
+        self.k = G2Kinematics()
+        self.h = WujiKinematics()
+        self.material = np.array(self.s['material_point'])
+        self.ids = np.array(self.s.get('digit_indices',[16,17,18,19]),dtype=int)
+        self.material_link = self.s.get('material_link','hand_r_thumb_pad_link')
+        self.normal_direction = np.array(self.s.get('normal_direction',[0.,-1.,0.]))
+        self.kp = np.array(self.s.get('digit_kp',self.s.get('thumb_kp')))
+        self.effort = np.array(self.s.get('digit_effort',self.s.get('thumb_effort')))
+        self.correction = np.zeros(4)
+        self.log = Path(output) / 'direct-pressure-path-servo.jsonl'
+        self.relative_wrist=motion.get('object_relative_wrist_path')
+        self.wrist_alignment=None
+        self.support_preload=None
+        if 'support_preload_servo' in motion:
+            from scripts.wuji_direct_grip_roll_servo import DirectGripRollServo
+            self.support_preload=DirectGripRollServo(motion['support_preload_servo'],output)
+
+    def command(self, t, O, arm, hand, issued_arm, issued_hand, slider):
+        reference_arm = np.array([np.interp(t, self.times, self.arms[:,j])
+                                  for j in range(7)])
+        reference_hand = np.array([np.interp(t, self.times, self.hands[:,j])
+                                   for j in range(20)])
+        return self.correct(t,O,arm,hand,issued_arm,issued_hand,slider,
+                            reference_arm,reference_hand)
+
+    def correct(self,t,O,arm,hand,issued_arm,issued_hand,slider,
+                reference_arm,reference_hand):
+        wrist_tracking=None
+        if self.relative_wrist:
+            # The development path is certified in knife coordinates. Follow
+            # the estimated current knife pose instead of spending its stroke
+            # on the observed body drift. This sets motor targets only.
+            ref=np.array([np.interp(t,self.times,self.arms[:,j]) for j in range(7)])
+            expected=np.array(self.relative_wrist['expected_object_world'])
+            goal=O@np.linalg.inv(expected)@self.k.forward(ref)
+            if self.wrist_alignment is None:
+                self.wrist_alignment=self.k.forward(issued_arm)@np.linalg.inv(goal)
+            u=1-smooth(t/self.relative_wrist.get('alignment_decay_s',1.))
+            A=transform(self.wrist_alignment[:3,3]*u,Rotation.from_rotvec(Rotation.from_matrix(self.wrist_alignment[:3,:3]).as_rotvec()*u).as_quat())
+            reference_arm,wrist_tracking=self.k.solve_near(A@goal,issued_arm.astype(float),max_step=.06,minimum_margin=.06)
+        L = np.linalg.inv(O) @ self.k.forward(arm)
+        q = hand.astype(float)
+
+        def point(q):
+            T = L @ self.h.forward(q)[self.material_link]
+            return T[:3,:3] @ self.material + T[:3,3]
+
+        P = point(q)
+        J = np.empty((3,4))
+        for j in range(4):
+            perturbed = q.copy()
+            perturbed[self.ids[j]] += 1e-5
+            J[:,j] = (point(perturbed)-P)/1e-5
+        tau = np.clip(self.kp*(issued_hand[self.ids]-q[self.ids]),
+                      -self.effort, self.effort)
+        force_proxy = np.linalg.solve(J @ J.T + np.eye(3)*1e-7, J @ tau)
+        normal_proxy = float(self.normal_direction @ force_proxy)
+        error = self.s['normal_reference_N'] - normal_proxy
+        desired_force = self.normal_direction * self.s['normal_reference_N']
+        desired_force[2] += self.s.get('axial_reference_N',0.) * smooth((t-.5)/1.5)
+        if self.s.get('full_wrench_tracking'):
+            delta = J.T @ (desired_force-force_proxy) / self.kp * self.s['gain']
+        else:
+            delta = J.T @ self.normal_direction / self.kp * error * self.s['gain']
+        delta *= smooth((t-self.s.get('activation_start_s',.1))/
+                        self.s.get('activation_ramp_s',.4))
+        delta = np.clip(delta, -self.s['max_step_rad'], self.s['max_step_rad'])
+        self.correction = np.clip(self.correction+delta,
+                                  -self.s['max_correction_rad'],
+                                  self.s['max_correction_rad'])
+        command = reference_hand.copy()
+        upper = self.h.upper[self.ids].copy()-.02
+        if self.ids[0] == 16:
+            upper[0] = min(upper[0],self.s.get('thumb1_target_upper_rad',upper[0]))
+        command[self.ids] = np.clip(reference_hand[self.ids]+self.correction,
+                                    self.h.lower[self.ids]+.02, upper)
+        # Avoid integration beyond a clamped target; preserve original limits.
+        self.correction = command[self.ids] - reference_hand[self.ids]
+        if self.support_preload is not None:
+            command=self.support_preload.correct(t,O,arm,hand,issued_hand,command)
+        with self.log.open('a') as f:
+            f.write(json.dumps(dict(time_s=float(t),
+                pose_source='sim_oracle explicit pose, measured joints and motor history',
+                material_point_knife_m=P.tolist(), slider_m=float(slider),
+                normal_joint_deflection_proxy_N=normal_proxy,
+                joint_deflection_wrench_proxy_N=force_proxy.tolist(),
+                desired_wrench_reference_N=desired_force.tolist(),
+                normal_reference_N=self.s['normal_reference_N'],
+                correction_rad=self.correction.tolist(),
+                material_link=self.material_link,
+                object_relative_wrist_ik=wrist_tracking,
+                issued_digit_q=command[self.ids].tolist(),
+                issued_thumb_q=command[16:].tolist(),
+                scope='No nativecontact/force input; proxy assumes pad-only contact. '
+                      'Original finite PD, effort, gravity and joint limits unchanged'))+'\n')
+        return reference_arm, command

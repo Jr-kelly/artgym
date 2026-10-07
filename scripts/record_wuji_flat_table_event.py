@@ -12,7 +12,9 @@ def _record(event,evidence,config=None,updates=None,next_step=None):
  p=D/'STATE.json';s=json.loads(p.read_text()) if p.exists() else dict(local_root=str(R),actor_sha256='6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e',flat_table_pickup=False,continuous_pickup_to_extension=False,vision_validated=False,real_robot_ran=False,active_jobs=[])
  s.update(updates or {})
  if next_step:s['next']=next_step
- e=dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),event=event,evidence=evidence,config=config or {},actor_sha256=s['actor_sha256'],source_sha256={str(f.relative_to(R)):hashlib.sha256(f.read_bytes()).hexdigest() for f in [R/'scripts/run_g2_flat_table_demo.py',R/'scripts/run_wuji_flat_connected.py',R/'scripts/prepare_wuji_relaxed_prefix.py',R/'scripts/wuji_prefix_pose_adaptation.py'] if f.exists()},next=s.get('next'));s['last_event']=e;_write(p,json.dumps(s,ensure_ascii=False,indent=2))
+ source_files=['run_g2_flat_table_demo.py','run_wuji_flat_connected.py','prepare_wuji_relaxed_prefix.py','wuji_prefix_pose_adaptation.py','wuji_direct_pickup.py','wuji_direct_route.py','g2_kinematics.py','g2_contact_geometry.py','wuji_direct_pressure_path_servo.py','wuji_direct_grip_roll_servo.py','wuji_direct_live_ring.py','wuji_direct_thumb_servo.py','run_wuji_direct_connected.py','run_wuji_direct_recorded.py','prepare_wuji_direct_actual_approach.py','plan_wuji_direct_back_support.py']
+ source_files.append('wuji_direct_material_carrier.py')
+ e=dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),event=event,evidence=evidence,config=config or {},actor_sha256=s['actor_sha256'],source_sha256={str(f.relative_to(R)):hashlib.sha256(f.read_bytes()).hexdigest() for f in [R/'scripts'/name for name in source_files] if f.exists()},next=s.get('next'));s['last_event']=e;_write(p,json.dumps(s,ensure_ascii=False,indent=2))
  journals=[D/'events.jsonl']
  if R==MIRROR_ROOT:journals.append(Path('/data/research/artgym-experiments-20260921/runs/wuji-goal/journal/events.jsonl'))
  for p in journals:

@@ -38,15 +38,15 @@ class DigitGeometry:
                     normals=normals[np.linspace(0,len(normals)-1,max_face_axes,dtype=int)]
                 self.meshes.setdefault(name,[]).append((v[hull.vertices],normals))
 
-    def gaps(self,q,wrist_in_object,slider,finger='thumb'):
-        frames=self.w.forward(q);results=[]
+    def gaps(self,q,wrist_in_object,slider,finger='thumb',frames=None,knife_parts=None):
+        frames=self.w.forward(q) if frames is None else frames;results=[]
         if self.knife_geometry is not None:
             for link,meshes in self.meshes.items():
                 if '_'+finger+'_' not in link:continue
                 frame=wrist_in_object@frames[link]
                 for vertices,normals in meshes:
                     v=vertices@frame[:3,:3].T+frame[:3,3]
-                    for part in self.knife_geometry.collision_parts(slider):
+                    for part in (self.knife_geometry.collision_parts(slider) if knife_parts is None else knife_parts):
                         axes=np.r_[normals@frame[:3,:3].T,part['normals']];a=v@axes.T;b=part['vertices']@axes.T
                         gap=np.maximum(a.min(0)-b.max(0),b.min(0)-a.max(0)).max()
                         results.append(dict(hand_link=link,knife_link=part['link'],knife_component=part['index'],gap_lower_bound_m=float(gap)))
@@ -70,28 +70,35 @@ class DigitGeometry:
     def minimum_gap(self,q,wrist_in_object,slider,finger='thumb'):
         return min(v['gap_lower_bound_m'] for v in self.gaps(q,wrist_in_object,slider,finger))
 
-    def self_gaps(self,q,finger,certify_clearance_m=None):
+    def self_gaps(self,q,finger,certify_clearance_m=None,frames=None,transformed=None,enclosing_spheres=None,pair_clearances=None):
         """Conservative face-axis gaps to other digits; exclude shared palm.
 
         Positive certifies separation. Negative requires an exact convex
         intersection check before calling it an intersection.
         """
-        frames=self.w.forward(q);transformed={}
-        for name,meshes in self.meshes.items():
-            if not any('_'+f+'_' in name for f in ['thumb','index','middle','ring','pinky']):continue
-            frame=frames[name]
-            transformed[name]=[(v@frame[:3,:3].T+frame[:3,3],n@frame[:3,:3].T) for v,n in meshes]
+        frames=self.w.forward(q) if frames is None else frames
+        if transformed is None:
+            transformed={}
+            for name,meshes in self.meshes.items():
+                if not any('_'+f+'_' in name for f in ['thumb','index','middle','ring','pinky']):continue
+                frame=frames[name]
+                transformed[name]=[(v@frame[:3,:3].T+frame[:3,3],n@frame[:3,:3].T) for v,n in meshes]
         result=[]
         for a,ma in transformed.items():
             if '_'+finger+'_' not in a:continue
             for b,mb in transformed.items():
                 if '_'+finger+'_' in b:continue
-                for va,na in ma:
-                    for vb,nb in mb:
+                for ia,(va,na) in enumerate(ma):
+                    for ib,(vb,nb) in enumerate(mb):
                         if certify_clearance_m is not None:
-                            ca,cb=va.mean(0),vb.mean(0)
-                            sphere=float(np.linalg.norm(ca-cb)-np.linalg.norm(va-ca,axis=1).max()-np.linalg.norm(vb-cb,axis=1).max())
-                            if sphere>certify_clearance_m:
+                            if enclosing_spheres is None:
+                                ca,cb=va.mean(0),vb.mean(0)
+                                ra,rb=np.linalg.norm(va-ca,axis=1).max(),np.linalg.norm(vb-cb,axis=1).max()
+                            else:
+                                ca,ra=enclosing_spheres[a,ia];cb,rb=enclosing_spheres[b,ib]
+                            sphere=float(np.linalg.norm(ca-cb)-ra-rb)
+                            required_clearance=(pair_clearances or {}).get(tuple(sorted((a,b))),certify_clearance_m)
+                            if sphere>required_clearance:
                                 # Enclosing spheres certify Euclidean separation;
                                 # all potentially close pairs retain full face SAT.
                                 result.append(dict(moving_link=a,other_link=b,gap_lower_bound_m=sphere,certificate='enclosing spheres'))
