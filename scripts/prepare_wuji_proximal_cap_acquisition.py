@@ -60,7 +60,8 @@ def main():
             point_error_m=float(np.linalg.norm(P-target)),step_rad=float(abs(q[16:]-previous).max())))
     velocity=np.gradient(np.array([r['planned_hand_q'][16:] for r in D]),np.array([r['time_s'] for r in D]),axis=0)
     for i,r in enumerate(rows):
-        if i:r['hand_q'][16:]=(np.array(r['hand_q'][16:])+np.clip(kd/kp*velocity[i],-.07,.07)).tolist()
+        if i:r['hand_q'][16:]=np.clip(np.array(r['hand_q'][16:])+np.clip(kd/kp*velocity[i],-.07,.07),
+                                     g.w.lower[16:]+.035,g.w.upper[16:]-.035).tolist()
     guard=[]
     for t in np.arange(0,7.0001,1/30):
         h=np.array([np.interp(t,[r['time_s'] for r in D],[r['planned_hand_q'][j] for r in D]) for j in range(20)])
@@ -72,7 +73,8 @@ def main():
     summary=dict(self_frames=sum(bool(r['self']) for r in guard),max_point_error_m=max(r['point_error_m'] for r in D),
         min_body_gap_m=min(r['min_body_gap_m'] for r in guard),min_housing_cap_gap_m=min(r['min_housing_cap_gap_m'] for r in guard),
         min_planned_margin_rad=min(r['min_margin_rad'] for r in guard),source_jump_rad=float(abs(np.r_[rows[0]['arm_q'],rows[0]['hand_q']]-s['issued_target']).max()),
-        nonthumb_motor_constant=all(np.array_equal(r['hand_q'][:16],s['issued_target'][7:][:16]) for r in rows),elapsed_s=time.time()-started)
+        nonthumb_motor_max_delta_rad=max(float(np.max(abs(np.asarray(r['hand_q'][:16])-s['issued_target'][7:][:16]))) for r in rows),
+        nonthumb_motor_constant=all(np.allclose(r['hand_q'][:16],s['issued_target'][7:][:16],rtol=0,atol=1e-7) for r in rows),elapsed_s=time.time()-started)
     summary['permits_native']=summary['self_frames']==0 and summary['max_point_error_m']<.0008 and summary['min_body_gap_m']>.0001 and summary['min_housing_cap_gap_m']>.0001 and summary['source_jump_rad']<1e-6
     servo=json.loads(Path('runs/flat-table-20261006/direct/preparation/current-C560-acquired-pressure-continuity-v621/motor.json').read_text())['direct_pressure_path_servo']
     servo.update(material_point=m.tolist(),normal_direction=[0,-1,0],normal_reference_N=.85,retain_acquired_wrench=False,full_wrench_tracking=False,

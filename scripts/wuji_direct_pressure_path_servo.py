@@ -40,6 +40,10 @@ class DirectPressurePathServo:
             from scripts.wuji_direct_material_carrier import DirectMaterialCarrierGroup
             self.reaction_carriers=DirectMaterialCarrierGroup(motion['reaction_material_carriers'],output)
         self.pair_clearance=None
+        self.relative_thumb=None
+        if 'relative_thumb_acquisition_path' in motion:
+            from scripts.wuji_direct_relative_thumb_path import DirectRelativeThumbPath
+            self.relative_thumb=DirectRelativeThumbPath(motion['relative_thumb_acquisition_path'],output)
         if 'rolling_pair_clearance' in self.s:
             from scripts.wuji_direct_rolling_pair_clearance import DirectRollingPairClearance
             self.pair_clearance=DirectRollingPairClearance(self.s['rolling_pair_clearance'],output)
@@ -58,6 +62,8 @@ class DirectPressurePathServo:
     def correct(self,t,O,arm,hand,issued_arm,issued_hand,slider,
                 reference_arm,reference_hand):
         wrist_tracking=None
+        if self.relative_thumb is not None:
+            reference_hand=self.relative_thumb.correct(t,O,arm,hand,issued_hand,reference_hand,slider)
         if self.relative_wrist:
             # The development path is certified in knife coordinates. Follow
             # the estimated current knife pose instead of spending its stroke
@@ -140,18 +146,21 @@ class DirectPressurePathServo:
             error = (np.maximum(self.h.lower[self.ids]+reserve-q[self.ids], 0.)-
                      np.maximum(q[self.ids]-self.h.upper[self.ids]+reserve, 0.))
             posture_delta = tangent @ error*self.s['gain']
+            posture_delta*=smooth((t-self.s.get('posture_activation_start_s',0.))/
+                                  self.s.get('posture_activation_ramp_s',.3))
             posture_delta = np.clip(posture_delta, -self.s['max_step_rad'],
                                     self.s['max_step_rad'])
             bound = self.s.get('max_posture_correction_rad', .12)
             self.posture_correction = np.clip(self.posture_correction+posture_delta,
                                               -bound, bound)
         command = reference_hand.copy()
-        upper = self.h.upper[self.ids].copy()-.02
+        motor_margin=self.s.get('motor_margin_rad',.02)
+        upper = self.h.upper[self.ids].copy()-motor_margin
         if self.ids[0] == 16:
             upper[0] = min(upper[0],self.s.get('thumb1_target_upper_rad',upper[0]))
         command[self.ids] = np.clip(reference_hand[self.ids]+self.correction+
                                     self.posture_correction,
-                                    self.h.lower[self.ids]+.02, upper)
+                                    self.h.lower[self.ids]+motor_margin, upper)
         # Avoid integration beyond a clamped target; preserve original limits.
         self.correction = (command[self.ids] - reference_hand[self.ids]-
                            self.posture_correction)

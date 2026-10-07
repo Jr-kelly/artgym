@@ -19,6 +19,7 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--source',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--start-z',type=float,default=-.036)
+    p.add_argument('--start-current-point',action='store_true')
     p.add_argument('--stroke',type=float,default=.022);a=p.parse_args()
     a.output.mkdir(parents=True,exist_ok=False);s=np.load(a.source/'takeover.npz')
     trial,native,end=source_contacts(a.source)
@@ -28,6 +29,7 @@ def main():
     cs=[v for r in native for v in r['contacts'] if v['hand_link']==name and v['knife_link']=='link_1']
     m=np.mean([v['position_hand_link_m'] for v in cs],0)
     T=L@g.w.forward(q0)[name];P0=T[:3,:3]@m+T[:3,3]
+    if a.start_current_point:a.start_z=float(P0[2])
     n=np.sum([v['force_normal_contribution_knife_N'] for v in cs],0);n/=np.linalg.norm(n);local=T[:3,:3].T@n
     e=record('proximal_cap_capacity_start',[str(a.output)],config=dict(candidate='C560-R11',source=str(a.source),
         thumb_start_z_m=a.start_z,stroke_m=a.stroke,unchanged_support_layout='actual Ipad/Mpad/M4/Ring4',
