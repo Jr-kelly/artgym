@@ -6,7 +6,6 @@ from scipy.optimize import least_squares
 from scripts.g2_kinematics import G2Kinematics
 from scripts.g2_contact_geometry import DigitGeometry
 from scripts.wuji_direct_pickup import smooth
-from scripts.check_wuji_action_quality import HandIntersection, DIGITS
 
 
 class DirectLiveRing:
@@ -14,15 +13,7 @@ class DirectLiveRing:
         self.s = spec
         self.k = G2Kinematics()
         self.g = DigitGeometry(max_face_axes=10, knife_spec=Path(spec['knife_spec']))
-        checker = HandIntersection()
-        self.self_geometry = checker.g
-        # Use the affected pairs already inspected in actual-state quality
-        # checks. Palm mounts are excluded there; distant pairs use a positive
-        # separation certificate, and near pairs keep all collision faces.
-        self.self_pairs = [pair for pair in checker.pairs
-            if any('_ring_' in name for name in pair)
-            and all(any('_'+digit+'_' in name for digit in DIGITS) for name in pair)
-            and not all('_ring_' in name for name in pair)]
+        self.self_geometry = DigitGeometry()
         self.arm = None
         self.initial = None
         self.seed = np.array(spec['endpoint_ring_q'])
@@ -83,7 +74,7 @@ class DirectLiveRing:
                 allow = self.s.get('support_preload_m', .0008) if a['knife_link']=='link_0' and a['hand_link'] in ['hand_r_ring_pad_link','hand_r_ring_link4'] else -.0001
                 r.append(min(0., a['gap_lower_bound_m']+allow)*400)
             r.extend(min(0., a['gap_lower_bound_m']-.0002)*200
-                     for a in self.self_geometry.pair_gaps(h, self.self_pairs, certify_clearance_m=.0002))
+                     for a in self.self_geometry.self_gaps(h, 'ring', certify_clearance_m=.0002))
             for n, parts in self.g.meshes.items():
                 if '_ring_' not in n:
                     continue

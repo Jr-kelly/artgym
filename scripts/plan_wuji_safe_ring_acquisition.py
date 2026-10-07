@@ -42,7 +42,8 @@ def main():
         lo=np.maximum(g.w.lower[ids]+.035,previous-.18);hi=np.minimum(g.w.upper[ids]-.035,previous+.18)
         def residual(x):
             h=q.copy();h[ids]=x;F=g.w.forward(h);r=list((x-prior)*.07)
-            r.extend(min(0.,v['gap_lower_bound_m']-.0001)*800 for v in pair_geometry.pair_gaps(h,pairs))
+            r.extend(min(0.,v['gap_lower_bound_m']-.0001)*800
+                     for v in pair_geometry.pair_gaps(h,pairs,certify_clearance_m=.0001))
             for finger in ['ring','pinky']:
                 for gap in g.gaps(h,L,float(s['slider_q']),finger,frames=F):
                     allowed=gap['knife_link']=='link_0' and gap['hand_link'] in ['hand_r_ring_link4','hand_r_ring_pad_link']

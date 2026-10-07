@@ -28,6 +28,7 @@ def _record(event,evidence,config=None,updates=None,next_step=None):
  source_files.append('prepare_wuji_functional_table_pickup.py')
  source_files.append('wuji_direct_pickup_bearing.py')
  source_files.append('prepare_wuji_forward_initial_pinch.py')
+ source_files.extend(['plan_wuji_safe_ring_acquisition.py','prepare_wuji_pinky_first_rear.py','prepare_wuji_rear_floor_arc.py'])
  source_files.extend(['wuji_direct_joint_path_tracking.py','time_wuji_free_thumb_path.py','prepare_wuji_base_first_thumb_path.py'])
  source_files.extend(['prepare_wuji_acquired_thumb_stroke.py','prepare_wuji_direct_sliding_stroke.py','prepare_wuji_loaded_coordinated_motor.py','plan_wuji_direct_coordinated_stroke.py'])
  e=dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),event=event,evidence=evidence,config=config or {},actor_sha256=s['actor_sha256'],source_sha256={str(f.relative_to(R)):hashlib.sha256(f.read_bytes()).hexdigest() for f in [R/'scripts'/name for name in source_files] if f.exists()},next=s.get('next'));s['last_event']=e;_write(p,json.dumps(s,ensure_ascii=False,indent=2))
