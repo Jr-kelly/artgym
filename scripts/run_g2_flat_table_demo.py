@@ -59,6 +59,10 @@ def main():
  recorded_handoff=np.load(a.recorded_handoff/'takeover.npz') if a.recorded_handoff else None
  recorded_support=json.loads(a.recorded_support_command.read_text()) if a.recorded_support_command else None
  recorded_material_carrier=None
+ recorded_grip_roll_servo=None
+ if recorded_support and 'direct_grip_roll_servo' in recorded_support:
+  from scripts.wuji_direct_grip_roll_servo import DirectGripRollServo
+  recorded_grip_roll_servo=DirectGripRollServo(recorded_support['direct_grip_roll_servo'],a.output)
  recorded_joint_path_tracking=None
  if recorded_support and 'direct_joint_path_tracking' in recorded_support:
   from scripts.wuji_direct_joint_path_tracking import DirectJointPathTracking
@@ -572,6 +576,8 @@ def main():
        rr=recorded_support['rows'];tt=np.array([r['time_s'] for r in rr]);aq=np.array([np.interp(t+(a.recorded_b_start_s or 0.),tt,[r['arm_q'][j] for r in rr]) for j in range(7)]);hq=np.array([np.interp(t+(a.recorded_b_start_s or 0.),tt,[r['hand_q'][j] for r in rr]) for j in range(20)])
       else:
        u=smooth(np.clip((t-recorded_support['start_s'])/recorded_support['ramp_s'],0,1));hq+=np.array(recorded_support['hand_delta'])*u
+    if recorded_grip_roll_servo:
+     hq=recorded_grip_roll_servo.correct(t,transform(rb[oid,:3].numpy(),rb[oid,3:7].numpy()),dof[arm,0].numpy().copy(),dof[hand,0].numpy().copy(),previously_issued_target[hand].numpy().copy(),hq)
     if recorded_joint_path_tracking:
      hq=recorded_joint_path_tracking.correct(t,dof[hand,0].numpy().copy(),hq)
     if recorded_material_carrier:

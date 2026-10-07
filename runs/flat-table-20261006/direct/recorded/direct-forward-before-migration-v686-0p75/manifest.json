@@ -1,0 +1,24 @@
+{
+  "source": "runs/flat-table-20261006/direct/development/direct-forward-real-feedback-lift-v684/simulation/trace.npz",
+  "source_sha256": "93b0f9154b0ffc69657042da18668c67c522d9291e39b98cb6df78ca068a1df7",
+  "takeover_index": 22,
+  "takeover_elapsed_s": 0.7666666666666666,
+  "available_continuation_s": 0.30000000000000004,
+  "frames": 10,
+  "pose_source": "recorded sim_oracle",
+  "exact_recorded_channels": [
+    "object pose and linear/angular velocity",
+    "robot positions",
+    "slider position and velocity",
+    "issued motor targets and full prior target history"
+  ],
+  "estimated_channels": [
+    "robot velocity: finite difference of recorded 30Hz positions"
+  ],
+  "missing_for_exact_simulator_resume": [
+    "raw robot velocities",
+    "PhysX solver/contact warm-start cache",
+    "internal controller state not recorded in trace"
+  ],
+  "scope": "Offline recorded actual-state development input; no simulator setters, no new task success, no exact restore claim"
+}

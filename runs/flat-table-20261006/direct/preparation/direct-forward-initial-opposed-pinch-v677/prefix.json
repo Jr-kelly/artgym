@@ -1,0 +1,252 @@
+{
+  "duration_s": 10.0,
+  "physical_initial_xy": [
+    0.45,
+    -0.4
+  ],
+  "physical_initial_yaw_deg": 0.0,
+  "physical_initial_object_world": [
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.45
+    ],
+    [
+      0.0,
+      2.220446049250313e-16,
+      1.0,
+      -0.4
+    ],
+    [
+      0.0,
+      -1.0,
+      2.220446049250313e-16,
+      0.7561
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "pose_source": "Explicit initialenvelope; oneactual poseobservation1s",
+  "direct_pickup": {
+    "duration_s": 6.0,
+    "initial_arm_q": [
+      -1.7005061486424342,
+      -0.541795852723433,
+      0.6839509999111351,
+      -1.2821352098057583,
+      -0.44386927521857594,
+      -0.13347898571136674,
+      -0.9881694483208832
+    ],
+    "wrist_in_knife": [
+      [
+        -0.07311351334981905,
+        -0.22837985108554215,
+        0.9708228766277562,
+        -0.1074708282756006
+      ],
+      [
+        0.9834796334775184,
+        -0.17813899976551215,
+        0.03216064827500992,
+        -0.06319992395349308
+      ],
+      [
+        0.16559657212808437,
+        0.9571359048644494,
+        0.23763130037673844,
+        -0.04537146827765799
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "open_q": [
+      0.6423191324397947,
+      -0.03820664149889907,
+      0.7793475202714185,
+      -0.4432999999070256,
+      0.6102971191766432,
+      -0.19731617464786824,
+      0.8505222826798058,
+      -0.3633999683164445,
+      0.2,
+      0.0,
+      0.2,
+      0.3,
+      0.2,
+      0.0,
+      0.2,
+      0.3,
+      1.5476798971217058,
+      0.22832705573455064,
+      -0.43919996354030777,
+      -0.4448999938004316
+    ],
+    "close_q": [
+      0.6395763552002665,
+      0.029217949333327446,
+      1.0492350412790399,
+      -0.379568404934667,
+      0.6715003883343407,
+      -0.17862728250070198,
+      1.1156841722332904,
+      -0.4490339498059926,
+      0.2,
+      0.0,
+      0.2,
+      0.3,
+      0.2,
+      0.0,
+      0.2,
+      0.3,
+      1.538021111245871,
+      0.3074240654325415,
+      -0.36178903501250226,
+      -0.42559396428308843
+    ],
+    "lift_m": 0.0,
+    "pose_bias_x_m": 0,
+    "material_points": {
+      "hand_r_index_pad_link": [
+        0.008827434016786224,
+        -0.0001959865178960275,
+        -0.014592836039457237
+      ],
+      "hand_r_middle_pad_link": [
+        0.008826346346278827,
+        -0.00020070671691009193,
+        -0.014599977676093839
+      ],
+      "hand_r_thumb_pad_link": [
+        0.01114448386231804,
+        2.6951181302129883e-06,
+        -0.011356196593412735
+      ]
+    },
+    "grip_normal_reference_N": {
+      "hand_r_index_pad_link": 0.7,
+      "hand_r_middle_pad_link": 0.7,
+      "hand_r_thumb_pad_link": 1.4
+    },
+    "hand_kp": [
+      0.37352218155860073,
+      0.45592448909027794,
+      0.24368366649522863,
+      0.18026971340925335,
+      0.3687093483646485,
+      0.4164253443634641,
+      0.22218607502059182,
+      0.19427606072023446,
+      0.3655325975433942,
+      0.41393113081120425,
+      0.22729367621965954,
+      0.1964723550341816,
+      0.35718151495111794,
+      0.42977315313086895,
+      0.24930151196247122,
+      0.2285032688178066,
+      0.40844710645048043,
+      0.6858601063643346,
+      0.2391112196099482,
+      0.20736128319711747
+    ],
+    "continuation_arm_command_margin_rad": 0.06,
+    "thumb_only_table_clearance_m": 0.0002,
+    "free_thumb_command_margin_rad": 0.025,
+    "loading_motor_prior": "runs/flat-table-20261006/direct/preparation/current-table-loaded-middle-clearance-v503/loading-motor.json",
+    "loading_motor_prior_until_s": 6.0,
+    "continuous_stages": [
+      {
+        "name": "loaded_translation_space",
+        "duration_s": 4,
+        "source": "runs/flat-table-20261006/direct/recorded/fresh-ringloaded-v156-12s",
+        "motor": "runs/flat-table-20261006/direct/preparation/early-load-retained-air-ring-fresh-v255/lift-motor.json",
+        "roll_free_position": false,
+        "preserve_actual_grip": true,
+        "world_translation_m": [
+          0,
+          0,
+          0.045
+        ],
+        "world_translation_duration_s": 3.0,
+        "hold_acquired_hand_targets": true
+      }
+    ],
+    "early_free_thumb_clearance_m": 0.0012,
+    "free_thumb_knife_clearance_m": 0.0008,
+    "knife_spec": "assets/objects/knife_wuji_newknife_20261005/nominal-v5/spec.json",
+    "loaded_middle_table_clearance_m": 0.0005,
+    "loaded_middle_table_guard_until_s": 6.2,
+    "grip_motor_margin_rad": 0.035
+  },
+  "rows": [
+    {
+      "time_s": 0.0,
+      "arm_q": [
+        -1.7005061486424342,
+        -0.541795852723433,
+        0.6839509999111351,
+        -1.2821352098057583,
+        -0.44386927521857594,
+        -0.13347898571136674,
+        -0.9881694483208832
+      ],
+      "hand_q": [
+        0.6423191324397947,
+        -0.03820664149889907,
+        0.7793475202714185,
+        -0.4432999999070256,
+        0.6102971191766432,
+        -0.19731617464786824,
+        0.8505222826798058,
+        -0.3633999683164445,
+        0.2,
+        0.0,
+        0.2,
+        0.3,
+        0.2,
+        0.0,
+        0.2,
+        0.3,
+        1.5476798971217058,
+        0.22832705573455064,
+        -0.43919996354030777,
+        -0.4448999938004316
+      ]
+    }
+  ],
+  "continuous_route_scope": "Freshoneepisode, everyreference ismotorprior adaptedto liveO andissuedhistory; no physicalstate writer beyond tabletopinit. v49preflightfailed historically; completeactual contact/action acceptance mandatory.",
+  "goal8_status": "D677 forwardinitialpinch candidate; no completeGoal or inheritanceofC560stablecap",
+  "route_revision": "Fresh candidate reused351prefix + acquiredload andclearance366/369/375/393/395/397/419 then492 worldreactionstroke. All stage references read-only motorpriors, no physicalstatereset.; finalworldreaction captures currentworld knife pose and follows collision-aware boundedjointfitbranch (497).",
+  "case_inputs": {
+    "physical_dx_m": 0,
+    "physical_dy_m": 0,
+    "physical_yaw_deg": 0,
+    "estimate_bias_x_m": 0,
+    "asset": "assets/objects/knife_wuji_newknife_20261005/nominal-v5/mobility.urdf",
+    "resistance": "research/newknife-20261005/resistance-constant.json"
+  },
+  "pending_action_quality_repairs": {
+    "early_thumb3_actual_margin_rad": 0.0168,
+    "scope": "Known early thumb3 narrow actualmargin remains; fullnativecheck required. Source Middle362 partial initialfreeclearance copied consistently into actualinit andopen."
+  },
+  "action_quality_repair_scope": "Freeopen andt0actualinitialhand consistent65mradmargin; earlythumb1p2mm scheduled; originalloadedtargets/physics unchanged; NOT nativeverified",
+  "scope": "Move the proven initial opposed pinch forward before loading or lifting.\n\nKeeps the actual geometry/motor repairs of C560 as read-only development\npriors, but alters the initial knife-relative grasp position. Only the first\nlift is connected here; later manipulation must be inferred from its own\nactual output, with no old functional or failed terminal state consumption.\n",
+  "candidate": "D677",
+  "lineage": {
+    "initial_geometry": "C560 tableopposedI/M+X, Thumbheel-X; axialgrasp movedbeforecontact",
+    "functional_guide": "D665frontMiddle/back opposedRingcorner22mm geometry; notactualoperatorstate",
+    "axial_shift_m": 0.02,
+    "lift": "Owncapturedwrist45mm lift, holdownissuedhandtargets; existingmeasuredjointloadcorrection only",
+    "future": "No oldRing/flip/Thumb stage connected; ownactualoutput controlsnext"
+  }
+}
