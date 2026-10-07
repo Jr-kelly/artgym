@@ -6,31 +6,24 @@
   "vision_validated": false,
   "real_robot_ran": false,
   "active_jobs": [],
-  "next": "Upload exactsource/evidence v5 ascheckpoint while617 pathcontinues; thennativecurrentreaction",
+  "next": "Eligible -> native7s, actualsupport/cap quality decides nextstroke; blocked -> specificgeometry first",
   "last_event": {
-    "utc": "2026-10-07T14:46:26.307224+00:00",
-    "event": "C560_incremental_github_checkpoint_prepared",
+    "utc": "2026-10-07T15:40:47.509058+00:00",
+    "event": "proximal_cap_acquisition_path_terminal",
     "evidence": [
-      "delivery/wuji-direct-progress-20261007/v5",
-      "delivery/wuji-direct-progress-20261007/v5/wuji-C560-R7-R8-incremental-evidence-20261007.tar.gz"
+      "runs/flat-table-20261006/direct/preparation/current-C560-proximal-cap-acquisition-v637/motor.json",
+      "runs/flat-table-20261006/direct/preparation/current-C560-proximal-cap-acquisition-v637/dense-guard.json"
     ],
     "config": {
-      "source_files": [
-        "scripts/wuji_direct_pressure_path_servo.py",
-        "scripts/wuji_direct_rolling_pair_clearance.py",
-        "scripts/wuji_direct_grip_roll_servo.py",
-        "scripts/wuji_direct_material_carrier.py",
-        "scripts/prepare_wuji_acquired_thumb_stroke.py",
-        "scripts/prepare_wuji_direct_sliding_stroke.py",
-        "scripts/prepare_wuji_loaded_coordinated_motor.py",
-        "scripts/plan_wuji_direct_coordinated_stroke.py",
-        "scripts/record_wuji_flat_table_event.py"
-      ],
-      "evidence_files": 162,
-      "goal_complete": false,
-      "candidate": "C560-R8",
-      "private_media_included": false,
-      "native_617_continues": true
+      "self_frames": 0,
+      "max_point_error_m": 0.00036634100511279735,
+      "min_body_gap_m": 0.0005402224426113572,
+      "min_housing_cap_gap_m": 0.0029770528195696994,
+      "min_planned_margin_rad": 0.03500000000000014,
+      "source_jump_rad": 4.8014764608694804e-08,
+      "nonthumb_motor_constant": false,
+      "elapsed_s": 32.43625783920288,
+      "permits_native": true
     },
     "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
     "source_sha256": {
@@ -52,6 +45,9 @@
       "scripts/plan_wuji_direct_back_support.py": "5936ea115c9fa88d03399bf1a2f3dd0851407c206e958b9adaf992047db4338c",
       "scripts/wuji_direct_material_carrier.py": "ac5f4e2fc6c89408b755dd2ea82f6b01d66f8ddae9c31a642a558714f035c786",
       "scripts/wuji_direct_rolling_pair_clearance.py": "794fb77bee71b92ca713c489820483227f569d857079ec641cd806ac8810749c",
+      "scripts/plan_wuji_forward_reaction_grip.py": "6d68a574ebf8b2452600e6a65d771e307f5fc11eaf68d6b011c113d9e3783d1f",
+      "scripts/prepare_wuji_forward_reaction_grip_path.py": "cf92de9175f3e7eab5f240e87fedda82fb16b4959a6850dac970168352d281af",
+      "scripts/plan_wuji_proximal_cap_stroke.py": "2ee94093dd997276793dbd9c4ee073ef03f3aedbdb2b4c227a01ec3104803816",
       "scripts/wuji_direct_joint_path_tracking.py": "5762bcf22c1cf64cdd2b6925c96ac7e9973ba94818d686188635ebf8cd1e1947",
       "scripts/time_wuji_free_thumb_path.py": "f91ca3e66aa206205796fcb36a6a9ddd866a7dd5a6872b7c7cced8b9066e6124",
       "scripts/prepare_wuji_base_first_thumb_path.py": "af61935195ec98b9035b5ddd357210ea6a908afcae2fb0ba93ab88e30d6af9b4",
@@ -60,7 +56,7 @@
       "scripts/prepare_wuji_loaded_coordinated_motor.py": "39283f4540fcd4e6f48f6a96bb4f63275c4c4e4d47891751d900a14c6aeb80a6",
       "scripts/plan_wuji_direct_coordinated_stroke.py": "4ff33c2d384788dcd7a58e2b87389831f90160f9cb70d617af1e49c9bf7bd1c9"
     },
-    "next": "Upload exactsource/evidence v5 ascheckpoint while617 pathcontinues; thennativecurrentreaction"
+    "next": "Eligible -> native7s, actualsupport/cap quality decides nextstroke; blocked -> specificgeometry first"
   },
   "remote_root": "/home/wangjiarui/artgym-newknife-20261005",
   "placement_generalization": "Sharedrule positive29.805mm/negative30.402mm repaired; knownconditions consumedlocalregression, notunseen",
@@ -70,9 +66,9 @@
   "local_resource_monitor_pid": null,
   "resource_four_hour_compliance_claim": false,
   "goal_status": "active",
-  "github_release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-direct-progress-20261007-v4",
+  "github_release": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-direct-progress-20261007-v5",
   "github_progress_source_commit": "c04cead0bf172135ececae5ea95058d28562d6c0",
-  "github_commit": "c04cead0bf172135ececae5ea95058d28562d6c0",
+  "github_commit": "5a730bafd01c5a18fe11ee52ddd548988ea0fb27",
   "all_saved_progress_published": false,
   "execution_priority": "Fastest reproducible continuous demo; uncertainty-driven minimal experiments; reuse actual A state/history; no homogeneous failures or premature matrices",
   "execution_limitation_scope": "Blocked content may not be reproduced/worked around; specific rejected operation and trigger absent from original notice. No blanket simulation prohibition established.",
