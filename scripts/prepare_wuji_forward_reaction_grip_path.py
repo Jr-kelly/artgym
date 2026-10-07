@@ -58,7 +58,7 @@ def main():
         'load_transport':a.load_transport,'endpoint':str(a.endpoint),
         'uncertainty':spec.get('uncertainty','Can small jointgrip adjustment continuously move Middle bearing ahead while real othercontacts remain loaded?'),
         'decision':'Denseplannedclear -> one native acquisition; actual loss repairs corresponding segment, no idealhandoff',
-        'scope':'Geometry and source acquiredtorque transport, no physicalreset'},next_step='Actual615 causal loadedpath thennative; no strokeuntil newbearingactual retained')
+        'scope':'Geometry and source acquiredtorque transport, no physicalreset'},next_step='Current '+str(source)+' causal loadedpath thennative; no strokeuntil newbearingactual retained')
     with Path('research/flat-table-20261006/CONTINUATION.md').open('a') as f:f.write('\n'+e['utc']+' '+json.dumps(e['config'])+'\n')
     started=time.time()
     for t in np.linspace(0,5,11):
@@ -92,6 +92,8 @@ def main():
                 for j,v in enumerate(g.self_gaps(q,finger,certify_clearance_m=.0002,frames=F,transformed=transformed,enclosing_spheres=spheres)):
                     threshold=min(.0002,acquired_self[finger][j]['gap_lower_bound_m']*(1-u)+.0002*u)
                     r.append(min(0.,v['gap_lower_bound_m']-threshold)*250)
+            r.extend(min(0.,v['gap_lower_bound_m']-.0002)*1000 for v in
+                     g.pair_gaps(q,[('hand_r_base_link','hand_r_thumb_link3')]))
             r.extend((x[:3]-end_pose[:3]*u)*3);r.extend((x[3:6]-end_pose[3:]*u)*.3)
             r.extend((x[6:]-((1-u)*q0[ids]+u*np.array(c['hand_q'])[ids]))*.02)
             return np.array(r)
@@ -133,7 +135,8 @@ def main():
     # Damping feedforward is bounded by the same existing motor-interface convention.
     v=np.gradient(np.array([d['planned_hand_q'] for d in D]),np.array([d['time_s'] for d in D]),axis=0)
     for i,row in enumerate(rows):
-        if i:row['hand_q']=(np.array(row['hand_q'])+np.clip(kd/kp*v[i],-.07,.07)).tolist()
+        if i:row['hand_q']=np.clip(np.array(row['hand_q'])+np.clip(kd/kp*v[i],-.07,.07),
+                                 g.w.lower+.035,g.w.upper-.035).tolist()
     guard=[]
     for t in np.arange(0,5.0001,1/30):
         q=np.array([np.interp(t,[d['time_s'] for d in D],[d['planned_hand_q'][j] for d in D]) for j in range(20)])

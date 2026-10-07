@@ -1,0 +1,25 @@
+{
+  "candidate": "C560-R12",
+  "targets": {
+    "hand_r_middle_pad_link": [
+      0.0025,
+      -0.004,
+      -0.004
+    ]
+  },
+  "exact_links": [
+    "hand_r_middle_pad_link",
+    "hand_r_thumb_pad_link"
+  ],
+  "additional_material_links": [
+    "hand_r_middle_link4"
+  ],
+  "axial_rolling_range_m": 0.008,
+  "axial_range_by_link_m": {
+    "hand_r_middle_link4": 0.02
+  },
+  "normal_weight": 0.15,
+  "support_layout": "actual642/643proximalcap and actualpureYRing; Middle pad forward reaction, Middle4 allowed20mm longitudinalrolling while transversebodybearing retained",
+  "uncertainty": "647 initially moves6.48mm then geometrytracking stalls asbodyrolls; can functionalproximalThumb grip enable frontMiddle lever using substantiallysmaller wrist/grip adjustment than624? Nativefirstfailure audit stillrequired; no predetermined force-only root",
+  "decision": "Clear frontbearing topology -> boundedmulti-bearing jointdeflection path plusactualrelativeThumb acquiredcap; blocked -> change initial/operationgrip ratherthan pressuregain"
+}

@@ -58,7 +58,8 @@ def main():
             if name in exact:r.extend(d*350)
             else:
                 r.extend(d[:2]*350);r.append(d[2]*10)
-                r.append(max(0.,abs(d[2])-rolling)*1000)
+                range_m=spec.get('axial_range_by_link_m',{}).get(name,rolling)
+                r.append(max(0.,abs(d[2])-range_m)*1000)
             local,normal=normals[name]
             r.extend((T[:3,:3]@local-normal)*spec.get('normal_weight',.3))
         transformed={n:[(v@F[n][:3,:3].T+F[n][:3,3],nn@F[n][:3,:3].T) for v,nn in meshes]
@@ -77,6 +78,11 @@ def main():
             r.extend(min(0.,gap['gap_lower_bound_m']-.0002)*250
                      for gap in g.self_gaps(q,finger,certify_clearance_m=.0002,frames=F,
                                            transformed=transformed,enclosing_spheres=spheres))
+        # self_gaps excludes the palm base; the actual quality checker does
+        # inspect this distal thumb pair. Enforce the same relevant geometry
+        # here after v648 exposed its otherwise missing base/Thumb3 collision.
+        r.extend(min(0.,v['gap_lower_bound_m']-.0002)*1000 for v in
+                 g.pair_gaps(q,[('hand_r_base_link','hand_r_thumb_link3')]))
         r.extend(x[:3]*3);r.extend(x[3:6]*.1);r.extend((x[6:]-q0[ids])*.015)
         return np.array(r)
 
@@ -99,7 +105,7 @@ def main():
            wrist_translation_delta_m=fit.x[:3].tolist(),wrist_rotation_delta_rad=fit.x[3:6].tolist(),
            minimum_hand_margin_rad=float(np.minimum(q-g.w.lower,g.w.upper-q).min()),
            elapsed_s=time.time()-started,nfev=fit.nfev,scope=__doc__,spec=spec)
-    r['permits_path']=not bad and all(errors[n]<.0005 for n in exact) and all(np.linalg.norm(np.array(actual_points[n])[:2]-targets[n][:2])<.0005 and abs(actual_points[n][2]-targets[n][2])<rolling+.0005 for n in names if n not in exact)
+    r['permits_path']=not bad and all(errors[n]<.0005 for n in exact) and all(np.linalg.norm(np.array(actual_points[n])[:2]-targets[n][:2])<.0005 and abs(actual_points[n][2]-targets[n][2])<spec.get('axial_range_by_link_m',{}).get(n,rolling)+.0005 for n in names if n not in exact)
     (a.output/'endpoint.json').write_text(json.dumps(r,indent=2));print(json.dumps(r),flush=True)
     e=record('current_forward_reaction_jointgrip_planning_terminal',[str(a.output/'endpoint.json')],config=r,
              next_step='Feasible -> causal movingbearing path and native; blocked -> layout/topology change with exact geometric bottleneck')

@@ -41,6 +41,14 @@ class DirectPressurePathServo:
             self.reaction_carriers=DirectMaterialCarrierGroup(motion['reaction_material_carriers'],output)
         self.pair_clearance=None
         self.relative_thumb=None
+        self.relative_carriers=None
+        self.normal_bearings=None
+        if 'normal_bearing_transport' in motion:
+            from scripts.wuji_direct_normal_bearing_transport import DirectNormalBearingTransport
+            self.normal_bearings=DirectNormalBearingTransport(motion['normal_bearing_transport'],output)
+        if 'relative_carrier_acquisition_path' in motion:
+            from scripts.wuji_direct_relative_carrier_path import DirectRelativeCarrierPath
+            self.relative_carriers=DirectRelativeCarrierPath(motion['relative_carrier_acquisition_path'],output)
         if 'relative_thumb_acquisition_path' in motion:
             from scripts.wuji_direct_relative_thumb_path import DirectRelativeThumbPath
             self.relative_thumb=DirectRelativeThumbPath(motion['relative_thumb_acquisition_path'],output)
@@ -62,6 +70,10 @@ class DirectPressurePathServo:
     def correct(self,t,O,arm,hand,issued_arm,issued_hand,slider,
                 reference_arm,reference_hand):
         wrist_tracking=None
+        if self.normal_bearings is not None:
+            reference_hand=self.normal_bearings.correct(t,O,arm,hand,issued_hand,reference_hand)
+        if self.relative_carriers is not None:
+            reference_hand=self.relative_carriers.correct(t,O,arm,hand,issued_hand,reference_hand,slider)
         if self.relative_thumb is not None:
             reference_hand=self.relative_thumb.correct(t,O,arm,hand,issued_hand,reference_hand,slider)
         if self.relative_wrist:

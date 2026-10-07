@@ -12,6 +12,10 @@ class DirectPickup:
  def __init__(self,spec,output):
   self.s=spec;self.output=Path(output);self.k=G2Kinematics();self.arm=np.array(spec['initial_arm_q']);self.rows=None
   self.pressure_offset=np.zeros(20)
+  self.pickup_bearing=None
+  if spec.get('pickup_bearing_tracking'):
+   from scripts.wuji_direct_pickup_bearing import DirectPickupBearing
+   self.pickup_bearing=DirectPickupBearing(spec['pickup_bearing_tracking'],output)
   if spec.get('loading_motor_prior'):
    prior=json.loads(Path(spec['loading_motor_prior']).read_text());self.loading_times=np.array([r['elapsed_s'] for r in prior['rows']]);self.loading_hands=np.array([r['hand_q'] for r in prior['rows']])
   if spec.get('pregrasp_thumb_mesh_clearance_m') is not None or spec.get('thumb_only_table_clearance_m') is not None or spec.get('early_ring_q') is not None or spec.get('loaded_middle_table_clearance_m') is not None:
@@ -66,13 +70,14 @@ class DirectPickup:
   if self.s.get('loading_motor_prior') and elapsed>=prior_until and not hasattr(self,'loading_prior_transferred'):
    self.pressure_offset=np.clip(issued_hand-hq,-.1,.1);self.loading_prior_transferred=True
    (self.output/'direct-loading-history-transfer.json').write_text(json.dumps(dict(elapsed_s=float(elapsed),previously_issued=issued_hand.tolist(),base_reference=hq.tolist(),acquired_offset=self.pressure_offset.tolist(),scope='Motor preload history only; no physicalstate setter'),indent=2))
-  if self.s.get('grip_normal_reference_N') and elapsed>=4 and (not self.s.get('loading_motor_prior') or elapsed>=prior_until):
+  bearing_active=self.pickup_bearing is not None and elapsed>=self.s['pickup_bearing_tracking']['start_s']
+  if self.s.get('grip_normal_reference_N') and not bearing_active and elapsed>=4 and (not self.s.get('loading_motor_prior') or elapsed>=prior_until):
    kp=np.array(self.s['hand_kp']);W=self.k.forward(actual_arm);diag={}
    loaded=self.s.get('loaded_grip_material_points') is not None and elapsed>=self.s.get('loaded_middle_capture_s',5.5)
    materials=self.s['loaded_grip_material_points'] if loaded else self.s['material_points']
    references={name:(1.4 if '_thumb_' in name else .7) for name in materials} if loaded else self.s['grip_normal_reference_N']
    for name,preferred in references.items():
-    finger=name.split('_')[2];ids=[self.h.names.index('hand_r_'+finger+'_joint'+str(j)) for j in range(1,5)];m=np.array(materials[name]);d=np.array([1,0,0]) if finger=='thumb' else np.array([-1,0,0]);d=W[:3,:3].T@(actual_object if loaded else self.observed_object)[:3,:3]@d
+    finger=name.split('_')[2];ids=[self.h.names.index('hand_r_'+finger+'_joint'+str(j)) for j in range(1,5)];m=np.array(materials[name]);d=np.array(self.s.get('grip_force_directions_knife',{}).get(name,[1,0,0] if finger=='thumb' else [-1,0,0]));d=W[:3,:3].T@(actual_object if loaded else self.observed_object)[:3,:3]@d
     def point(q):
      T=self.h.forward(q)[name];return T[:3,:3]@m+T[:3,3]
     P=point(actual_hand);J=np.empty((3,4))
@@ -85,7 +90,8 @@ class DirectPickup:
      delta=J.T@vector_error/kp[ids]*.25 if np.linalg.norm(vector_error)>.12 else np.zeros(4)
     else:delta=(J.T@d)*error/kp[ids]*.25 if abs(error)>.12 else np.zeros(4)
     self.pressure_offset[ids]=np.clip(self.pressure_offset[ids]+delta,-.1,.1);diag[name]=dict(preferred_estimated_normal_N=float(preferred),joint_deflection_estimated_N=estimate,reference_world_up_N=float(support),joint_deflection_vector_proxy_handframe_N=force.tolist(),offset_rad=self.pressure_offset[ids].tolist())
-   hq=np.clip(hq+self.pressure_offset,self.h.lower,self.h.upper)
+   grip_margin=self.s.get('grip_motor_margin_rad',0.)
+   hq=np.clip(hq+self.pressure_offset,self.h.lower+grip_margin,self.h.upper-grip_margin)
    with self.pressure_log.open('a') as f:f.write(json.dumps(dict(elapsed_s=float(elapsed),joints_only_pressure_proxy=diag,scope='Boundedoriginal.1radoffset, nativeforcevaries; noactualcontact/forcefeedback. Normalorientationfromoneinitialpose+measuredarmFK.'))+'\n')
   if self.s.get('thumb_only_table_clearance_m') is not None and elapsed<5.:
    # Predict the next wrist target using the measured tracking transform.
@@ -162,6 +168,8 @@ class DirectPickup:
     if clear_ring(fit.x).min()<-1e-6:raise RuntimeError('Early ring cannot remain above table')
     hq[12:16]=fit.x
   hq=self.clear_loaded_middle(elapsed,actual_object,actual_arm,actual_hand,issued_arm,issued_hand,aq,hq)
+  if self.pickup_bearing is not None:
+   hq=self.pickup_bearing.correct(elapsed,actual_object,actual_arm,actual_hand,issued_hand,hq)
   return aq,hq
  def clear_loaded_middle(self,elapsed,O,arm,hand,issued_arm,issued_hand,aq,hq):
   """Project only the loaded Middle motor target above the real table.

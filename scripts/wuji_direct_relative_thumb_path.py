@@ -38,6 +38,12 @@ class DirectRelativeThumbPath:
         margin=self.s.get('planning_margin_rad',.04)
         lo=self.g.w.lower[16:]+margin;hi=self.g.w.upper[16:]-margin
         lo=np.maximum(lo,self.previous-.12);hi=np.minimum(hi,self.previous+.12)
+        if self.s.get('acquired_joint_deformation'):
+            # An already loaded cap does not need a second preload stacked on
+            # top of its captured motor deformation. Bound its null posture
+            # from the actual path entry as well as the contact point.
+            envelope=.12*smooth(t/.5)+1e-7
+            lo=np.maximum(lo,prior-envelope);hi=np.minimum(hi,prior+envelope)
         def point(h):
             T=L@self.g.w.forward(h)[name];return T[:3,:3]@self.m+T[:3,3]
         def residual(x):
@@ -57,6 +63,7 @@ class DirectRelativeThumbPath:
             force[2]=self.s['axial_reference_N']*smooth((t-self.s['stroke_start_s'])/self.s['axial_ramp_s'])
             if self.completed_at is not None:force[2]*=1-smooth((t-self.completed_at)/self.s['hold_ramp_s'])
         offset=self.source_deformation*(1-smooth(t/self.s['release_s']))+np.clip(J.T@force/self.kp,-.12,.12)
+        if self.s.get('acquired_joint_deformation'):offset=self.source_deformation.copy()
         lead=np.zeros(4)
         if t>self.last_time:lead=np.clip(self.kd/self.kp*(fit.x-self.previous)/(t-self.last_time),-.07,.07)
         command=reference.copy();command[16:]=np.clip(fit.x+offset+lead,self.g.w.lower[16:]+.035,self.g.w.upper[16:]-.035)

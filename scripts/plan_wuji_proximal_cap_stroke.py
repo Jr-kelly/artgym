@@ -20,6 +20,8 @@ def main():
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--start-z',type=float,default=-.036)
     p.add_argument('--start-current-point',action='store_true')
+    p.add_argument('--planned-endpoint',type=Path)
+    p.add_argument('--grip-axial-shift',type=float,default=0.,help='Joint initial/operating grip longitudinal redesign; geometry only')
     p.add_argument('--stroke',type=float,default=.022);a=p.parse_args()
     a.output.mkdir(parents=True,exist_ok=False);s=np.load(a.source/'takeover.npz')
     trial,native,end=source_contacts(a.source)
@@ -28,12 +30,21 @@ def main():
     O=transform(s['object_state'][:3],s['object_state'][3:7]);L=np.linalg.inv(O)@k.forward(s['robot_q'][:7]);name='hand_r_thumb_pad_link'
     cs=[v for r in native for v in r['contacts'] if v['hand_link']==name and v['knife_link']=='link_1']
     m=np.mean([v['position_hand_link_m'] for v in cs],0)
-    T=L@g.w.forward(q0)[name];P0=T[:3,:3]@m+T[:3,3]
-    if a.start_current_point:a.start_z=float(P0[2])
+    T=L@g.w.forward(q0)[name]
     n=np.sum([v['force_normal_contribution_knife_N'] for v in cs],0);n/=np.linalg.norm(n);local=T[:3,:3].T@n
-    e=record('proximal_cap_capacity_start',[str(a.output)],config=dict(candidate='C560-R11',source=str(a.source),
-        thumb_start_z_m=a.start_z,stroke_m=a.stroke,unchanged_support_layout='actual Ipad/Mpad/M4/Ring4',
-        uncertainty='Can a proximal cap contact leave22mm fixedwrist travel while current bearings straddle the loaded thumb better?',
+    if a.planned_endpoint:
+        endpoint=json.loads(a.planned_endpoint.read_text());assert endpoint['source']==str(a.source)
+        q0=np.asarray(endpoint['hand_q']);L=np.asarray(endpoint['wrist_in_knife']);m=np.asarray(endpoint['materials'][name])
+        T=L@g.w.forward(q0)[name];n=T[:3,:3]@local;n/=np.linalg.norm(n)
+    if a.grip_axial_shift:
+        L[2,3]+=a.grip_axial_shift
+        T=L@g.w.forward(q0)[name];n=T[:3,:3]@local;n/=np.linalg.norm(n)
+    P0=T[:3,:3]@m+T[:3,3]
+    if a.start_current_point:a.start_z=float(P0[2])
+    e=record('proximal_cap_capacity_start',[str(a.output)],config=dict(candidate='D662' if a.grip_axial_shift else 'C560-R11',source=str(a.source),grip_axial_shift_m=a.grip_axial_shift,
+        thumb_start_z_m=a.start_z,stroke_m=a.stroke,planned_endpoint=str(a.planned_endpoint) if a.planned_endpoint else None,
+        unchanged_support_layout='Forward-shifted entiregrip fromactual643, notactualstate' if a.grip_axial_shift else 'Planned layout only; no physicalpromotion' if a.planned_endpoint else 'actual Ipad/Mpad/M4/Ring4',
+        uncertainty='Can a15mmforward initial/operatinggrip redesign placeMiddleat-4mm beforelift while retaining22mm Thumbtravel?' if a.grip_axial_shift else 'Can a proximal cap contact leave22mm fixedwrist travel while current bearings straddle the loaded thumb better?',
         decision='Feasible -> short thumb release/reacquire without moving loadedMiddle; blocked -> minimum coordinatedgrip change, no native on infeasible geometry'),next_step='Proximal functional grip geometry, not fixed old Thumbmaterial requirement')
     with Path('research/flat-table-20261006/CONTINUATION.md').open('a') as f:f.write('\n'+e['utc']+' '+json.dumps(e['config'])+'\n')
     started=time.time();q=q0.copy();rows=[]
@@ -55,7 +66,9 @@ def main():
             min_body_gap_m=min(v['gap_lower_bound_m'] for v in gaps if v['knife_link']=='link_0'),
             min_housing_cap_gap_m=min(v['gap_lower_bound_m'] for v in gaps if v['knife_link']=='link_1' and v['hand_link']!=name)))
     r=dict(source=str(a.source),material_link=name,material_point=m.tolist(),material_normal_local=local.tolist(),
-        thumb_start_z_m=a.start_z,stroke_m=a.stroke,rows=rows,elapsed_s=time.time()-started,scope=__doc__)
+        thumb_start_z_m=a.start_z,stroke_m=a.stroke,rows=rows,elapsed_s=time.time()-started,scope=__doc__,
+        planned_endpoint=str(a.planned_endpoint) if a.planned_endpoint else None,actual_acquired_layout=a.planned_endpoint is None and not a.grip_axial_shift,grip_axial_shift_m=a.grip_axial_shift,wrist_in_knife=L.tolist(),
+        support_points={link:((L@g.w.forward(q0)[link])[:3,:3]@np.mean([v['position_hand_link_m'] for r in native for v in r['contacts'] if v['hand_link']==link],axis=0)+(L@g.w.forward(q0)[link])[:3,3]).tolist() for link in sorted(set(v['hand_link'] for r in native for v in r['contacts'] if '_thumb_' not in v['hand_link']))})
     r['permits_path']=all(v['point_error_m']<.0005 and not v['self_intersections'] and v['min_body_gap_m']>.0001 and v['min_housing_cap_gap_m']>.0001 for v in rows)
     (a.output/'geometry.json').write_text(json.dumps(r,indent=2))
     summary=dict(permits_path=r['permits_path'],max_point_error_m=max(v['point_error_m'] for v in rows),

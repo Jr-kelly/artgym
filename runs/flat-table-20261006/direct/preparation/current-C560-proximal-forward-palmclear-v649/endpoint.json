@@ -1,0 +1,195 @@
+{
+  "source": "runs/flat-table-20261006/direct/recorded/current-C560-actual-proximal-cap-v643-6p9",
+  "arm_q": [
+    -1.3456672251243402,
+    -0.6477690687619649,
+    0.5952824584555187,
+    -0.7559767487825808,
+    1.072258491202796,
+    -0.7697228126255281,
+    1.1733828818162286
+  ],
+  "hand_q": [
+    0.4437692738178335,
+    0.06370339629607735,
+    1.2678341569859002,
+    -0.4017993581275883,
+    0.9310743857349818,
+    -0.018693930209899925,
+    0.4115129328504461,
+    0.1500873961094193,
+    0.20011122524738312,
+    2.9135992008377798e-05,
+    0.20006105303764343,
+    0.30001044273376465,
+    0.7693495678590471,
+    0.026207214930552516,
+    1.50869993394635,
+    0.16367049861590433,
+    0.509173874439961,
+    0.44323862426642624,
+    1.5222999003231854,
+    -0.4298999722783665
+  ],
+  "wrist_in_knife": [
+    [
+      0.8226692104486679,
+      -0.4537624935759451,
+      -0.3425127291116419,
+      -0.0007514753950011999
+    ],
+    [
+      0.2587872031974991,
+      0.8353140859302246,
+      -0.4850562455094972,
+      0.03236461631666243
+    ],
+    [
+      0.5062060387243331,
+      0.3104029272901489,
+      0.8046151061773109,
+      -0.14375742184642198
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "materials": {
+    "hand_r_index_pad_link": [
+      0.005515825444540869,
+      -0.0001967781547060301,
+      -0.006632479608032833
+    ],
+    "hand_r_middle_pad_link": [
+      0.006384818341274302,
+      0.005502513735744432,
+      -0.01498964695690951
+    ],
+    "hand_r_ring_link4": [
+      0.001969459708331946,
+      0.007490093579269554,
+      0.011708049554598272
+    ],
+    "hand_r_thumb_pad_link": [
+      0.005053453434286174,
+      -0.0043672303405853955,
+      -0.0027354934208070596
+    ],
+    "hand_r_middle_link4": [
+      0.0060719042718600505,
+      0.006964494560060267,
+      0.0023591041611017638
+    ]
+  },
+  "targets": {
+    "hand_r_index_pad_link": [
+      -0.009502047639750941,
+      0.000940490471893673,
+      0.0033044963196704937
+    ],
+    "hand_r_middle_pad_link": [
+      0.0025,
+      -0.004,
+      -0.004
+    ],
+    "hand_r_ring_link4": [
+      0.00931318262624601,
+      -0.004000108244927024,
+      -0.04625348689608366
+    ],
+    "hand_r_thumb_pad_link": [
+      -0.003001306229740078,
+      0.005998725346138524,
+      -0.03345206663707207
+    ],
+    "hand_r_middle_link4": [
+      -0.004934048342502523,
+      -0.004003269910443473,
+      -0.024732321554935432
+    ]
+  },
+  "planned_points": {
+    "hand_r_index_pad_link": [
+      -0.009503239841983707,
+      0.000941115781821913,
+      0.0034656388355589745
+    ],
+    "hand_r_middle_pad_link": [
+      0.0024526422850553696,
+      -0.003993733135950722,
+      -0.004020341997929765
+    ],
+    "hand_r_ring_link4": [
+      0.009343096151316115,
+      -0.003997413269345173,
+      -0.041394816892997705
+    ],
+    "hand_r_thumb_pad_link": [
+      -0.0029963174180958466,
+      0.0060664129602279295,
+      -0.03344240925588707
+    ],
+    "hand_r_middle_link4": [
+      -0.004890945214594518,
+      -0.00407428818978715,
+      -0.009990517931731085
+    ]
+  },
+  "point_errors_m": {
+    "hand_r_index_pad_link": 0.0001611481392555913,
+    "hand_r_middle_pad_link": 5.1921321531366744e-05,
+    "hand_r_ring_link4": 0.004858762834381074,
+    "hand_r_thumb_pad_link": 6.855484194490104e-05,
+    "hand_r_middle_link4": 0.014742037699746843
+  },
+  "self_intersections": [],
+  "arm_ik": {
+    "position_m": 4.125876084645944e-06,
+    "rotation_rad": 1.4395338932525766e-05,
+    "max_joint_step_rad": 0.43583298080762267,
+    "joint_margin_rad": 0.242577141699862
+  },
+  "wrist_translation_delta_m": [
+    -0.01499987861847296,
+    -0.014999999999924657,
+    -0.0018723681591947226
+  ],
+  "wrist_rotation_delta_rad": [
+    -0.13184644641815396,
+    0.13963586592822433,
+    0.016068923898386323
+  ],
+  "minimum_hand_margin_rad": 0.04000001048797697,
+  "elapsed_s": 40.907204151153564,
+  "nfev": 100,
+  "scope": "Joint grip adjustment placing the Middle bearing ahead of the thumb.\n\nStarts from current measured contacts. Other bearings may roll longitudinally;\nthis is a geometric preparation, never a physical state or acceptance result.\n",
+  "spec": {
+    "candidate": "C560-R12",
+    "targets": {
+      "hand_r_middle_pad_link": [
+        0.0025,
+        -0.004,
+        -0.004
+      ]
+    },
+    "exact_links": [
+      "hand_r_middle_pad_link",
+      "hand_r_thumb_pad_link"
+    ],
+    "additional_material_links": [
+      "hand_r_middle_link4"
+    ],
+    "axial_rolling_range_m": 0.008,
+    "axial_range_by_link_m": {
+      "hand_r_middle_link4": 0.02
+    },
+    "normal_weight": 0.15,
+    "support_layout": "actual642/643proximalcap and actualpureYRing; Middle pad forward reaction, Middle4 allowed20mm longitudinalrolling while transversebodybearing retained",
+    "uncertainty": "647 initially moves6.48mm then geometrytracking stalls asbodyrolls; can functionalproximalThumb grip enable frontMiddle lever using substantiallysmaller wrist/grip adjustment than624? Nativefirstfailure audit stillrequired; no predetermined force-only root",
+    "decision": "Clear frontbearing topology -> boundedmulti-bearing jointdeflection path plusactualrelativeThumb acquiredcap; blocked -> change initial/operationgrip ratherthan pressuregain"
+  },
+  "permits_path": true
+}
