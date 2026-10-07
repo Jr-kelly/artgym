@@ -36,6 +36,9 @@ class DirectRoute:
             if 'direct_material_carrier' in motion:
                 from scripts.wuji_direct_material_carrier import DirectMaterialCarrier
                 self.runtime['material_carrier']=DirectMaterialCarrier(motion['direct_material_carrier'],self.output)
+            if 'direct_joint_path_tracking' in motion:
+                from scripts.wuji_direct_joint_path_tracking import DirectJointPathTracking
+                self.runtime['joint_path_tracking']=DirectJointPathTracking(motion['direct_joint_path_tracking'],self.output)
             if 'direct_material_carriers' in motion:
                 from scripts.wuji_direct_material_carrier import DirectMaterialCarrierGroup
                 self.runtime['material_carrier']=DirectMaterialCarrierGroup(motion['direct_material_carriers'],self.output)
@@ -94,6 +97,8 @@ class DirectRoute:
             # different recorded wrist/knife relation at the stage boundary.
             aq=state['live_arm'].copy()
             hq=refhand+hand_offset
+            if 'joint_path_tracking' in state:
+                hq=state['joint_path_tracking'].correct(age,hand,hq)
             if 'pressure_servo' in state:
                 aq,hq=state['pressure_servo'].correct(age,O,arm,hand,issued_arm,issued_hand,slider,aq,hq)
             return aq,hq

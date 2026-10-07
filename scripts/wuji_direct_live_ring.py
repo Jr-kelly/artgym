@@ -16,7 +16,9 @@ class DirectLiveRing:
         self.arm = None
         self.initial = None
         self.seed = np.array(spec['endpoint_ring_q'])
-        self.name = 'hand_r_ring_pad_link'
+        self.name = spec.get('material_link','hand_r_ring_pad_link')
+        if self.name not in ['hand_r_ring_pad_link','hand_r_ring_link4']:
+            raise ValueError('Ring acquisition material must belong to distal ring')
         self.V = np.concatenate([v for v, _ in self.g.meshes[self.name]])
         self.inward = np.array(spec.get('support_inward_normal_knife', [-1., 0., 0.]), dtype=float)
         self.inward /= np.linalg.norm(self.inward)
@@ -54,10 +56,21 @@ class DirectLiveRing:
 
         def residual(x):
             h, F, P = decode(x)
-            r = list((P-target)*300)
+            if self.s.get('support_axial_range_m'):
+                # A support patch may roll along the body. The transverse
+                # surface determines contact; its longitudinal site is an
+                # envelope, not an extra fixed-material requirement.
+                d=P-target
+                r=list(d[:2]*300)
+                r.append(d[2]*20)
+                r.append(max(0.,abs(d[2])-self.s['support_axial_range_m'])*400)
+            else:
+                r = list((P-target)*300)
             r.extend(((L @ F[self.name])[:3, 0]-self.inward)*self.s.get('normal_weight', .3))
             for a in self.g.gaps(h, L, slider, 'ring'):
-                allow = self.s.get('support_preload_m', .0008) if a['knife_link']=='link_0' and a['hand_link'] in [self.name, 'hand_r_ring_link4'] else -.0001
+                # The fixed distal pad and its mounting link form one valid
+                # bearing region, whichever material was selected for IK.
+                allow = self.s.get('support_preload_m', .0008) if a['knife_link']=='link_0' and a['hand_link'] in ['hand_r_ring_pad_link','hand_r_ring_link4'] else -.0001
                 r.append(min(0., a['gap_lower_bound_m']+allow)*400)
             r.extend(min(0., a['gap_lower_bound_m']-.0002)*200
                      for a in self.g.self_gaps(h, 'ring', certify_clearance_m=.0002))
@@ -69,8 +82,9 @@ class DirectLiveRing:
             r.extend((x-self.seed)*.005)
             return np.array(r)
 
-        lo = self.g.w.lower[12:16]+.04
-        hi = self.g.w.upper[12:16]-.04
+        margin=float(self.s.get('joint_margin_rad',.04))
+        lo = self.g.w.lower[12:16]+margin
+        hi = self.g.w.upper[12:16]-margin
         fit = least_squares(residual, np.clip(self.seed, lo+1e-6, hi-1e-6),
                             bounds=(lo, hi), max_nfev=20, diff_step=1e-5)
         self.seed = fit.x
@@ -81,8 +95,9 @@ class DirectLiveRing:
         command[12:16] = np.clip(command[12:16], issued_hand[12:16]-.10, issued_hand[12:16]+.10)
         _, _, P = decode(self.seed)
         with self.log.open('a') as f:
-            f.write(json.dumps(dict(time_s=float(t), target_knife_m=target.tolist(),
+            f.write(json.dumps(dict(time_s=float(t),material_link=self.name,target_knife_m=target.tolist(),
                 planned_point_knife_m=P.tolist(), endpoint_error_m=float(np.linalg.norm(P-target)),
+                transverse_surface_error_m=float(np.linalg.norm((P-target)[:2])),
                 support_inward_normal_knife=self.inward.tolist(),
                 issued_ring_q=command[12:16].tolist(),
                 initial_world_lift_m=self.s.get('initial_world_lift_m',0.),

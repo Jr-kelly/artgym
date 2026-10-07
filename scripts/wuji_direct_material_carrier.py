@@ -125,11 +125,18 @@ class DirectMaterialCarrier:
             for index in self.s.get('fixed_motor_joint_indices',[]):
                 measured_J[:,list(self.ids).index(index)]=0.
             error=target-point(q)
-            if position_servo.get('feedback_coordinates')=='fit_joint':
+            if position_servo.get('feedback_coordinates') in ['fit_joint','fit_joint_tangential']:
                 # A curled digit can be close to a point-Jacobian branch
                 # singularity. Follow the bounded collision-aware IK branch
                 # already chosen above instead of inverting that Jacobian.
                 delta=fit.x-q[self.ids]
+                if position_servo.get('feedback_coordinates')=='fit_joint_tangential':
+                    # Material tracking must not integrate away the loaded
+                    # side-normal deflection that supplies the clamp force.
+                    normal=np.asarray(self.s['contact_normal_knife'],dtype=float)
+                    normal=normal/np.linalg.norm(normal)
+                    normal_row=normal@measured_J
+                    delta-=normal_row*(normal_row@delta)/(normal_row@normal_row+1e-10)
             else:
                 delta=measured_J.T@np.linalg.solve(measured_J@measured_J.T+np.eye(3)*1e-7,error)
             delta*=position_servo['gain']*smooth(t/.3)

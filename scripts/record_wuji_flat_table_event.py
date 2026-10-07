@@ -14,6 +14,7 @@ def _record(event,evidence,config=None,updates=None,next_step=None):
  if next_step:s['next']=next_step
  source_files=['run_g2_flat_table_demo.py','run_wuji_flat_connected.py','prepare_wuji_relaxed_prefix.py','wuji_prefix_pose_adaptation.py','wuji_direct_pickup.py','wuji_direct_route.py','g2_kinematics.py','g2_contact_geometry.py','wuji_direct_pressure_path_servo.py','wuji_direct_grip_roll_servo.py','wuji_direct_live_ring.py','wuji_direct_thumb_servo.py','run_wuji_direct_connected.py','run_wuji_direct_recorded.py','prepare_wuji_direct_actual_approach.py','plan_wuji_direct_back_support.py']
  source_files.append('wuji_direct_material_carrier.py')
+ source_files.extend(['wuji_direct_joint_path_tracking.py','time_wuji_free_thumb_path.py','prepare_wuji_base_first_thumb_path.py'])
  e=dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),event=event,evidence=evidence,config=config or {},actor_sha256=s['actor_sha256'],source_sha256={str(f.relative_to(R)):hashlib.sha256(f.read_bytes()).hexdigest() for f in [R/'scripts'/name for name in source_files] if f.exists()},next=s.get('next'));s['last_event']=e;_write(p,json.dumps(s,ensure_ascii=False,indent=2))
  journals=[D/'events.jsonl']
  if R==MIRROR_ROOT:journals.append(Path('/data/research/artgym-experiments-20260921/runs/wuji-goal/journal/events.jsonl'))

@@ -29,6 +29,7 @@ class DirectPressurePathServo:
         self.kp = np.array(self.s.get('digit_kp',self.s.get('thumb_kp')))
         self.effort = np.array(self.s.get('digit_effort',self.s.get('thumb_effort')))
         self.correction = np.zeros(4)
+        self.acquired_wrench = None
         self.log = Path(output) / 'direct-pressure-path-servo.jsonl'
         self.relative_wrist=motion.get('object_relative_wrist_path')
         self.wrist_alignment=None
@@ -77,9 +78,30 @@ class DirectPressurePathServo:
                       -self.effort, self.effort)
         force_proxy = np.linalg.solve(J @ J.T + np.eye(3)*1e-7, J @ tau)
         normal_proxy = float(self.normal_direction @ force_proxy)
-        error = self.s['normal_reference_N'] - normal_proxy
-        desired_force = self.normal_direction * self.s['normal_reference_N']
-        desired_force[2] += self.s.get('axial_reference_N',0.) * smooth((t-.5)/1.5)
+        normal_reference = self.s['normal_reference_N']
+        desired_force = self.normal_direction * normal_reference
+        axial_blend = smooth((t-self.s.get('axial_activation_start_s',.5))/
+                             self.s.get('axial_activation_ramp_s',1.5))
+        if self.s.get('retain_acquired_wrench'):
+            # A new grasp may contact a different cap facet. Preserve its
+            # existing transverse preload instead of replacing it with the
+            # old grasp's nominal knife-Y force. Only the axial reference
+            # changes; the captured wrench remains a deflection proxy.
+            if self.acquired_wrench is None:
+                self.acquired_wrench = force_proxy.copy()
+            desired_force = self.acquired_wrench.copy()
+            if self.s.get('acquired_normal_reference_N') is not None:
+                normal_blend = smooth((t-self.s.get('normal_activation_start_s',.1))/
+                                      self.s.get('normal_activation_ramp_s',1.))
+                desired_force += self.normal_direction*(
+                    self.s['acquired_normal_reference_N']-
+                    float(self.normal_direction @ self.acquired_wrench))*normal_blend
+            normal_reference = float(self.normal_direction @ desired_force)
+            desired_force[2] += (self.s.get('axial_reference_N',0.)-
+                                desired_force[2])*axial_blend
+        else:
+            desired_force[2] += self.s.get('axial_reference_N',0.)*axial_blend
+        error = normal_reference - normal_proxy
         if self.s.get('full_wrench_tracking'):
             delta = J.T @ (desired_force-force_proxy) / self.kp * self.s['gain']
         else:
@@ -107,7 +129,9 @@ class DirectPressurePathServo:
                 normal_joint_deflection_proxy_N=normal_proxy,
                 joint_deflection_wrench_proxy_N=force_proxy.tolist(),
                 desired_wrench_reference_N=desired_force.tolist(),
-                normal_reference_N=self.s['normal_reference_N'],
+                normal_reference_N=normal_reference,
+                acquired_wrench_proxy_N=(None if self.acquired_wrench is None
+                                        else self.acquired_wrench.tolist()),
                 correction_rad=self.correction.tolist(),
                 material_link=self.material_link,
                 object_relative_wrist_ik=wrist_tracking,
