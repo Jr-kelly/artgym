@@ -29,11 +29,20 @@ class DirectPressurePathServo:
         self.kp = np.array(self.s.get('digit_kp',self.s.get('thumb_kp')))
         self.effort = np.array(self.s.get('digit_effort',self.s.get('thumb_effort')))
         self.correction = np.zeros(4)
+        self.posture_correction = np.zeros(4)
         self.acquired_wrench = None
         self.log = Path(output) / 'direct-pressure-path-servo.jsonl'
         self.relative_wrist=motion.get('object_relative_wrist_path')
         self.wrist_alignment=None
         self.support_preload=None
+        self.reaction_carriers=None
+        if 'reaction_material_carriers' in motion:
+            from scripts.wuji_direct_material_carrier import DirectMaterialCarrierGroup
+            self.reaction_carriers=DirectMaterialCarrierGroup(motion['reaction_material_carriers'],output)
+        self.pair_clearance=None
+        if 'rolling_pair_clearance' in self.s:
+            from scripts.wuji_direct_rolling_pair_clearance import DirectRollingPairClearance
+            self.pair_clearance=DirectRollingPairClearance(self.s['rolling_pair_clearance'],output)
         if 'support_preload_servo' in motion:
             from scripts.wuji_direct_grip_roll_servo import DirectGripRollServo
             self.support_preload=DirectGripRollServo(motion['support_preload_servo'],output)
@@ -101,6 +110,16 @@ class DirectPressurePathServo:
                                 desired_force[2])*axial_blend
         else:
             desired_force[2] += self.s.get('axial_reference_N',0.)*axial_blend
+        if self.s.get('force_reference_path'):
+            path = self.s['force_reference_path']
+            times = np.array([row['time_s'] for row in path])
+            forces = np.array([row['wrench_proxy_N'] for row in path])
+            desired_force = np.array([np.interp(t, times, forces[:, j])
+                                      for j in range(3)])
+            if self.acquired_wrench is None:
+                self.acquired_wrench = force_proxy.copy()
+            desired_force += (self.acquired_wrench-forces[0])*(1-smooth(t/1.))
+            normal_reference = float(self.normal_direction @ desired_force)
         error = normal_reference - normal_proxy
         if self.s.get('full_wrench_tracking'):
             delta = J.T @ (desired_force-force_proxy) / self.kp * self.s['gain']
@@ -112,16 +131,36 @@ class DirectPressurePathServo:
         self.correction = np.clip(self.correction+delta,
                                   -self.s['max_correction_rad'],
                                   self.s['max_correction_rad'])
+        reserve = self.s.get('material_nullspace_reserve_rad')
+        if reserve is not None:
+            # Redistribute a loaded thumb posture without moving its contact
+            # point to first order. This is measured-joint feedback, rather
+            # than another fixed force or target bias.
+            tangent = np.eye(4)-np.linalg.pinv(J, rcond=1e-5) @ J
+            error = (np.maximum(self.h.lower[self.ids]+reserve-q[self.ids], 0.)-
+                     np.maximum(q[self.ids]-self.h.upper[self.ids]+reserve, 0.))
+            posture_delta = tangent @ error*self.s['gain']
+            posture_delta = np.clip(posture_delta, -self.s['max_step_rad'],
+                                    self.s['max_step_rad'])
+            bound = self.s.get('max_posture_correction_rad', .12)
+            self.posture_correction = np.clip(self.posture_correction+posture_delta,
+                                              -bound, bound)
         command = reference_hand.copy()
         upper = self.h.upper[self.ids].copy()-.02
         if self.ids[0] == 16:
             upper[0] = min(upper[0],self.s.get('thumb1_target_upper_rad',upper[0]))
-        command[self.ids] = np.clip(reference_hand[self.ids]+self.correction,
+        command[self.ids] = np.clip(reference_hand[self.ids]+self.correction+
+                                    self.posture_correction,
                                     self.h.lower[self.ids]+.02, upper)
         # Avoid integration beyond a clamped target; preserve original limits.
-        self.correction = command[self.ids] - reference_hand[self.ids]
+        self.correction = (command[self.ids] - reference_hand[self.ids]-
+                           self.posture_correction)
         if self.support_preload is not None:
             command=self.support_preload.correct(t,O,arm,hand,issued_hand,command)
+        if self.reaction_carriers is not None:
+            command=self.reaction_carriers.correct(t,O,arm,hand,issued_hand,command,slider)
+        if self.pair_clearance is not None:
+            command=self.pair_clearance.correct(t,O,arm,hand,command)
         with self.log.open('a') as f:
             f.write(json.dumps(dict(time_s=float(t),
                 pose_source='sim_oracle explicit pose, measured joints and motor history',
@@ -133,6 +172,7 @@ class DirectPressurePathServo:
                 acquired_wrench_proxy_N=(None if self.acquired_wrench is None
                                         else self.acquired_wrench.tolist()),
                 correction_rad=self.correction.tolist(),
+                material_nullspace_posture_correction_rad=self.posture_correction.tolist(),
                 material_link=self.material_link,
                 object_relative_wrist_ik=wrist_tracking,
                 issued_digit_q=command[self.ids].tolist(),

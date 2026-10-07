@@ -21,6 +21,7 @@ class DirectGripRollServo:
         self.effort = np.array([float(joints[n].find('limit').get('effort')) for n in self.h.names])
         self.offset = np.zeros(20)
         self.references = None
+        self.wrench_references = []
         self.held_commands = {}
         self.log = Path(output) / 'direct-grip-roll-servo.jsonl'
 
@@ -62,8 +63,20 @@ class DirectGripRollServo:
             normal = float(direction @ proxy)
             if capture:
                 self.references.append(normal)
+                self.wrench_references.append(proxy.copy())
             desired = carrier.get('normal_reference_N',self.references[number])
             force_error=direction*(desired-normal)
+            desired_wrench = None
+            if carrier.get('retain_acquired_wrench'):
+                # During a push the carriers must provide an axial reaction,
+                # not merely retain a side normal. Start at the actually
+                # acquired deflection proxy and ramp the opposing increment
+                # together with the thumb; no native forces enter this loop.
+                desired_wrench = self.wrench_references[number].copy()
+                blend = smooth((t-carrier.get('axial_activation_start_s', 2.))/
+                               carrier.get('axial_activation_ramp_s', 1.5))
+                desired_wrench[2] += carrier.get('axial_reaction_increment_N', 0.) * blend
+                force_error = desired_wrench - proxy
             up_reference=carrier.get('world_up_reference_N')
             if up_reference is not None:
                 # Supply the known object weight through frictional support,
@@ -108,6 +121,9 @@ class DirectGripRollServo:
             observations.append(dict(material_link=name, point_knife_m=P.tolist(),
                 inward_deflection_proxy_N=normal, captured_reference_proxy_N=desired,
                 original_captured_proxy_N=self.references[number],
+                captured_wrench_proxy_N=self.wrench_references[number].tolist(),
+                desired_wrench_proxy_N=(None if desired_wrench is None else desired_wrench.tolist()),
+                actual_wrench_proxy_N=proxy.tolist(),
                 normal_direction_knife=direction.tolist(),
                 world_up_reference_proxy_N=up_reference,
                 loaded_joint_reserve_rad=reserve,

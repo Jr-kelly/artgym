@@ -149,7 +149,19 @@ def main():
         summary['acquired_root_release_development'] = True
         body_ok = (summary['body_gap_min_m'] >= rows[0]['body_gap_m']-.00005
                    and rows[-1]['body_gap_m']>.0001)
-    summary['geometry_permits_native'] = bool(summary['self_frames']==0 and body_ok and summary['housing_cap_gap_min_m']>.0001 and summary['max_thumb_error_m']<.0005 and summary['max_support_error_m']<.0008 and summary['source_jump_rad']<1e-6 and summary['minimum_hand_table_clearance_m']>.0002)
+    support_ok = summary['max_support_error_m']<.0008
+    if c.get('support_axial_range_m'):
+        # Contact may roll along the knife; do not reject valid migration as
+        # an error in a welded 3D material point. Transverse bearing geometry
+        # and the explicit axial envelope remain checked.
+        summary['support_axial_range_m'] = c['support_axial_range_m']
+        summary['max_support_transverse_error_m'] = max(
+            max(v.get('support_transverse_errors_m',v['support_errors_m']).values()) for v in D)
+        summary['max_support_axial_error_m'] = max(
+            max(v.get('support_axial_errors_m',v['support_errors_m']).values()) for v in D)
+        support_ok = (summary['max_support_transverse_error_m']<.0008 and
+                      summary['max_support_axial_error_m']<c['support_axial_range_m']+.0005)
+    summary['geometry_permits_native'] = bool(summary['self_frames']==0 and body_ok and summary['housing_cap_gap_min_m']>.0001 and summary['max_thumb_error_m']<.0005 and support_ok and summary['source_jump_rad']<1e-6 and summary['minimum_hand_table_clearance_m']>.0002)
     if c.get('selected_self_clearance'):
         # Allow the acquired entry only; check the requested reserve after
         # the explicit separation ramp, with a 0.5mm optimization residual.

@@ -90,7 +90,13 @@ class DirectMaterialCarrier:
 
         def residual(x):
             h = q.copy(); h[self.ids] = x
-            r = list((point(h)-target)*350)
+            delta = point(h)-target
+            rolling = self.s.get('axial_rolling_range_m')
+            if rolling is None:
+                r = list(delta*350)
+            else:
+                r = list(delta[:2]*350)
+                r.append(np.sign(delta[2])*max(0.,abs(delta[2])-rolling)*350)
             r.extend((x-prior)*.025)
             for part_index,gap in enumerate(self.g.gaps(h, L, slider, self.finger)):
                 threshold = (-.00015 if gap['hand_link']==self.name
