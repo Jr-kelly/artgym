@@ -34,10 +34,16 @@ def main():
     result=dict(entry,hand_q=q.tolist(),issued_hand_target=q.tolist(),reference_entry_source=str(a.entrance),actual_grasp_source=str(a.source),ring_contact_geometry=pt.tolist(),self_intersections=bad,
                 geometry_permits_native=abs(pt[1]+.004)<.0005 and abs(pt[0])<.0096 and -.068<pt[2]<-.033 and not bad,
                 elapsed_s=time.monotonic()-begin,scope=__doc__)
+    result['reference_active_push_m']=result.pop('active_push_m',result.get('reference_active_push_m'))
+    for key in ['finger_body_contacts','finger_slider_contacts']:
+        if key in result:result['reference_'+key]=result.pop(key)
+    result.update(candidate_active_push_m=None,candidate_physical_hold_validated=False,
+                  candidate_retained_skill_takeover_validated=False,
+                  result_scope='Modified geometric entry only; push displacement/contact flags belong to the source reference trajectory. New support layout has no measured push result.')
     # Load targets must be captured/validated at this episode's actual entry;
     # a fitting point alone is not evidence that 55g can be carried.
     (a.output/'entry.json').write_text(json.dumps(result,indent=2));summary={k:result[k] for k in ['ring_contact_geometry','self_intersections','geometry_permits_native','elapsed_s']}
-    record('retained_ring_entry_design_terminal',[str(a.output/'entry.json')],summary,next_step='Clear Ring entry -> joint contact-preserving transition/short policy then unchanged push; otherwise adapt wrist/support target')
+    record('retained_ring_entry_design_terminal',[str(a.output/'entry.json')],summary,next_step='Candidate must demonstrate physical holding and complete retained-skill takeover, including non-thumb outputs, before more conversion development; geometric clearance alone is insufficient')
     print(json.dumps(summary,indent=2))
 
 if __name__=='__main__':main()

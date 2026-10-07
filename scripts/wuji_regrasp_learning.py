@@ -12,6 +12,7 @@ from isaacgym import gymtorch
 import torch
 from isaacgymenvs.utils.torch_jit_utils import quat_apply,quat_mul,quat_conjugate
 from scipy.spatial.transform import Rotation
+from scripts.wuji_regrasp_contract import phase_increment, entry_progress_reward
 
 
 class RegraspLearning(G2ContinuousScene):
@@ -59,6 +60,13 @@ class RegraspLearning(G2ContinuousScene):
         # One real held-target frame updates native FK/contact tensors after
         # the new-episode setter. Refresh alone does not recompute body poses.
         self.servo(self.target)
+        self.previous_potential=torch.zeros(self.n,device=self.device)
+        self.best_entry_dwell=torch.zeros(self.n,device=self.device)
+        self.entry_awarded=torch.zeros(self.n,device=self.device,dtype=torch.bool)
+        self.held_frames=torch.zeros(self.n,device=self.device)
+        self.max_held_frames=torch.zeros(self.n,device=self.device)
+        self.pause_steps=torch.zeros(self.n,device=self.device)
+        self.previous_potential=self.entry_metrics()['potential']
         return self.observation()
 
     def relative(self):
@@ -91,11 +99,7 @@ class RegraspLearning(G2ContinuousScene):
             self.gym.simulate(self.sim);self.gym.fetch_results(self.sim,True)
         self.refresh()
 
-    def step(self,action):
-        action=action.detach().clamp(-1,1)
-        self.offset+=(action[:,:27]*self.span-self.offset).clamp(-self.slew,self.slew)
-        self.phase=(self.phase+1.+.75*action[:,27]).clamp(max=len(self.motor_reference)-1.0001)
-        self.servo(self.guide_targets()+self.offset);self.age+=1
+    def entry_metrics(self):
         rel=self.relative();pos=(rel[:,:3]-self.goal_relative[:3]).norm(dim=-1)
         dot=(rel[:,3:]*self.goal_relative[3:]).sum(-1).abs().clamp(max=1.)
         rot=2*torch.acos(dot);qerr=(self.dof[:,self.hand_ids,0]-self.goal_q).square().mean(-1).sqrt()
@@ -103,11 +107,38 @@ class RegraspLearning(G2ContinuousScene):
         Y=quat_apply(obj[:,3:7],self.tensor([0,1,0]).expand(self.n,-1));X=quat_apply(obj[:,3:7],self.tensor([1,0,0]).expand(self.n,-1))
         clear=obj[:,2]-.75-R[:,2].abs()*.072-Y[:,2].abs()*.004-X[:,2].abs()*.0095
         held=(clear>.025)&(obj[:,7:10].norm(dim=-1)<.3)
-        self.failed|=(clear<.01)|(~torch.isfinite(self.dof).all(-1).all(-1))
-        entry=held&(pos<.012)&(rot<.25)&(qerr<.20)
+        finite=torch.isfinite(self.dof).all(-1).all(-1)&torch.isfinite(rel).all(-1)
+        held=held&finite&~self.failed
+        error=pos/.025+rot/.6+qerr/.5
+        potential=torch.where(held,torch.exp(-error),torch.zeros_like(error))
+        return dict(position_m=pos,rotation_rad=rot,q_rms_rad=qerr,clearance_m=clear,
+                    held=held,finite=finite,error=error,potential=potential)
+
+    def step(self,action):
+        action=action.detach().clamp(-1,1)
+        self.offset+=(action[:,:27]*self.span-self.offset).clamp(-self.slew,self.slew)
+        advance=phase_increment(action[:,27])
+        self.pause_steps+=(advance==0).float()
+        self.phase=(self.phase+advance).clamp(max=len(self.motor_reference)-1.0001)
+        self.servo(self.guide_targets()+self.offset);self.age+=1
+        m=self.entry_metrics();held=m['held']
+        self.failed|=(m['clearance_m']<.01)|~m['finite']
+        held=held&~self.failed
+        entry=held&(m['position_m']<.012)&(m['rotation_rad']<.25)&(m['q_rms_rad']<.20)
         self.entry_frames=torch.where(entry,self.entry_frames+1,torch.zeros_like(self.entry_frames))
-        error=pos/.025+rot/.6+qerr/.5;self.best_entry_error=torch.minimum(self.best_entry_error,error)
-        reward=4*held.float()+12*torch.exp(-error)+2*(self.phase/(len(self.motor_reference)-1))+.1*self.entry_frames.clamp(max=30)
+        dwell=self.entry_frames.clamp(max=30)
+        new_dwell=(dwell-self.best_entry_dwell).clamp(min=0)
+        self.best_entry_dwell=torch.maximum(self.best_entry_dwell,dwell)
+        first_entry=(self.entry_frames>=30)&~self.entry_awarded
+        self.entry_awarded|=first_entry
+        self.held_frames=torch.where(held,self.held_frames+1,torch.zeros_like(self.held_frames))
+        self.max_held_frames=torch.maximum(self.max_held_frames,self.held_frames)
+        self.best_entry_error=torch.minimum(self.best_entry_error,torch.where(held,m['error'],torch.full_like(m['error'],float('inf'))))
+        potential=torch.where(held,m['potential'],torch.zeros_like(m['potential']))
+        reward=entry_progress_reward(self.previous_potential,potential,new_dwell,first_entry.float(),held.float())
+        self.previous_potential=potential
         reward-=.08*action[:,:27].square().mean(-1)+.03*(action[:,:27]-self.last).square().mean(-1)
         reward=torch.where(self.failed,torch.full_like(reward,-12),reward);self.last=action[:,:27].clone()
-        return self.observation(),reward,self.age>=self.steps,{'position_m':pos,'rotation_rad':rot,'q_rms_rad':qerr,'clearance_m':clear,'entry_frames':self.entry_frames,'failed':self.failed}
+        return self.observation(),reward,self.age>=self.steps,dict(m,entry_frames=self.entry_frames,failed=self.failed,
+            phase_increment=advance,max_held_frames=self.max_held_frames,best_entry_dwell=self.best_entry_dwell,
+            scope='Entry proximity and stable carrying proxies; load transfer and retained-skill takeover unverified')

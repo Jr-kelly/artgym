@@ -34,6 +34,7 @@ def _record(event,evidence,config=None,updates=None,next_step=None):
  source_files.extend(['plan_wuji_functional_initial_thumb.py','plan_wuji_functional_opposed_grip.py','plan_wuji_functional_side_rolling_grip.py'])
  source_files.extend(['prepare_wuji_functional_side_pickup.py','prepare_wuji_functional_side_palm_clearance.py','replay_wuji_retained_push.py','wuji_retained_push_skill.py','prepare_wuji_retained_entry_transition.py'])
  source_files.extend(['wuji_regrasp_learning.py','train_wuji_regrasp.py'])
+ source_files.append('wuji_regrasp_contract.py')
  source_files.extend(['wuji_regrasp_reference_policy.py','prepare_wuji_retained_ring_entry.py','prepare_wuji_retained_ring_transition.py'])
  source_files.extend(['check_wuji_transition_reference.py','prepare_wuji_ownactual_ring_tail.py'])
  source_files.append('prepare_wuji_forward_initial_pinch.py')

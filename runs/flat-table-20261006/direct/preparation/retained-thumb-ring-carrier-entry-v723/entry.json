@@ -99,22 +99,7 @@
     0.49106743931770325,
     -0.2376990169286728
   ],
-  "finger_body_contacts": [
-    0,
-    1,
-    1,
-    0,
-    1
-  ],
-  "finger_slider_contacts": [
-    1,
-    0,
-    0,
-    0,
-    0
-  ],
   "slider_q_m": 4.66929268441163e-05,
-  "active_push_m": 0.024313205714861397,
   "scope": "Keep the acquired ring as a carrier at the retained thumb-path entrance.\n\nThis changes the transition target/support layout, not the retained push\nweights or reference. Operating capability must be checked physically.\n",
   "reference_entry_source": "runs/flat-table-20261006/direct/preparation/retained-push-call-path-v711/actual-entrance.json",
   "actual_grasp_source": "runs/flat-table-20261006/direct/recorded/current-C560-no-extra-load-flip-v565-6p1",
@@ -125,5 +110,25 @@
   ],
   "self_intersections": [],
   "geometry_permits_native": true,
-  "elapsed_s": 58.32073874305934
+  "elapsed_s": 58.32073874305934,
+  "reference_active_push_m": 0.024313205714861397,
+  "reference_finger_body_contacts": [
+    0,
+    1,
+    1,
+    0,
+    1
+  ],
+  "reference_finger_slider_contacts": [
+    1,
+    0,
+    0,
+    0,
+    0
+  ],
+  "candidate_active_push_m": null,
+  "candidate_physical_hold_validated": false,
+  "candidate_retained_skill_takeover_validated": false,
+  "result_scope": "Modified geometric entry only; inherited displacement/contact flags are source reference measurements. Candidate has no actual push result.",
+  "provenance_correction_original_sha256": "1124cb8fa1a12105e1cee6e9bb94ef42c54cd84f792844fc08dd6bb969afaaaa"
 }
