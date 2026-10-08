@@ -41,9 +41,9 @@ def main():
     record('direct_fresh_connected_start',[str(a.output/'command.json'),str(a.output/'prefix.json')],
         config=dict(uncertainty=a.uncertainty,decision=a.decision,seconds=prefix['duration_s'],
             case=prefix['case_inputs'],scope='One fresh episode; no recorded initializer. Prior motor trajectories adapt to current stage observations.'),
-        updates={'active_jobs':[str(a.output)]},next_step=a.decision)
+        updates={'add_active_jobs':[str(a.output)]},next_step=a.decision)
     try:subprocess.run(cmd,check=True)
-    finally:record('direct_fresh_connected_terminal',[str(a.output/'simulation')],updates={'active_jobs':[]},
+    finally:record('direct_fresh_connected_terminal',[str(a.output/'simulation')],updates={'remove_active_jobs':[str(a.output)]},
         next_step='Inspect fullactual stage transitions/contact and video; nominal numerical pass alone is not action acceptance')
 
 if __name__=='__main__':main()

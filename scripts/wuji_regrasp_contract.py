@@ -29,3 +29,11 @@ def entry_progress_reward(previous_potential, potential, new_hold_frames,
     """
     return (12. * (potential-previous_potential) + .2 * new_hold_frames
             + 6. * first_entry - .05 - .5 * (1. - held))
+
+
+def frame_window(elapsed, start, end=None, hz=30):
+    """Half-open control-frame interval, immune to float ULP boundaries."""
+    import math
+    current=round(elapsed*hz);first=round(start*hz)
+    last=round(end*hz) if end is not None and math.isfinite(end) else float('inf')
+    return first<=current<last

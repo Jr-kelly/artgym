@@ -110,6 +110,9 @@ class G2R800Policy(FrozenPolicy):
             path,self.measured_hold_reference_audit=measured_hold_path(measured,
                 object_local_estimate[:3,1],object_local_estimate[:3,2],self.thumb_reference.shifts.cpu().numpy())
             self.thumb_reference.q=torch.as_tensor(path,dtype=torch.float32,device=self.player.device)
+            self.thumb_reference.axial_jacobian=torch.as_tensor(
+                [r['axial_jacobian_m_per_rad'] for r in self.measured_hold_reference_audit['rows']],
+                dtype=torch.float32,device=self.player.device)
         reset_player_rnn_state(self.player)
         if self.thumb_reference is not None:self.thumb_reference.reset(torch.tensor([0],device=self.player.device),clock_s=clock_s)
 

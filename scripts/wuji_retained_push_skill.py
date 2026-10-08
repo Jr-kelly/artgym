@@ -19,6 +19,8 @@ class RetainedPushSkill:
     def __init__(self,cfg,spec,output):
         self.spec=spec;self.output=Path(output);self.start=float(spec['start_s'])
         self.settle=float(spec.get('preparation_seconds',4.))
+        self.stroke=float(spec.get('task_stroke_m',.035))
+        assert .020<self.stroke<=.035
         assert self.settle>=4.,'Retain pressure preparation plus 50 actual frozen history frames'
         checkpoint=Path('runs/newknife-20261005/train/center-tail-constant-motor-v1/update_000100.pth')
         assert hashlib.sha256(checkpoint.read_bytes()).hexdigest()==ACTOR_SHA
@@ -26,7 +28,19 @@ class RetainedPushSkill:
                                 'runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth',
                                 geometry=[.019,.008,.144,.007,.002,.032],residual_checkpoint=checkpoint,
                                 thumb_reference_override='runs/contact-transfer-20261006/regression/nominal-125-video-v1/reference-control.json')
+        if spec.get('entry_reference_adaptation')=='measured-hold':
+            import torch
+            reference=self.policy.thumb_reference
+            mask=reference.shifts<=self.stroke+1e-7
+            assert int(mask.sum())>=3
+            reference.shifts=reference.shifts[mask]
+            reference.q=reference.q[mask]
+            if reference.axial_jacobian is not None:reference.axial_jacobian=reference.axial_jacobian[mask]
+            reference.measured_hold_reference=True
         self.pressure=json.loads(Path('runs/newknife-20261005/configs/pressure120.json').read_text())
+        if spec.get('entry_pressure_coordinates') is not None:
+            assert spec['entry_pressure_coordinates']=='cartesian-normal'
+            self.pressure['normal_correction_coordinates']='cartesian-normal'
         self.kin=G2Kinematics();self.knife=KnifeGeometry(spec['knife_spec'])
         self.entered=False;self.taken=False;self.previous_issued=None;self.anchor=None
         self.stream=(self.output/'retained-push-call.jsonl').open('w',buffering=1)
@@ -63,6 +77,10 @@ class RetainedPushSkill:
             cap=object_world.copy();cap[:3,:3]=object_world[:3,:3]@self.knife.joint_r
             cap[:3,3]=object_world[:3,3]+object_world[:3,:3]@(self.knife.joint_xyz+self.knife.joint_r@self.knife.axis*slider)
             self.policy.takeover_estimate(q,issued_hand,relative,np.linalg.inv(W)@cap,clock_s=16.)
+            if hasattr(self.policy,'measured_hold_reference_audit'):
+                (self.output/'retained-entry-reference-adaptation.json').write_text(json.dumps(
+                    dict(audit=self.policy.measured_hold_reference_audit,requested_stroke_m=self.stroke,
+                         scope='Once-calibrated measured50-frame FK and current episode sim_oracle initial knife axes; original actor, control history, pressure/path feedback and nonthumb outputs retained'),indent=2))
             self.taken=True;self.push_slider_start=float(slider)
             receipt={'time_s':t,'object_in_wrist':relative.tolist(),'hand_q':np.asarray(q).tolist(),
                      'issued_hand_target':np.asarray(issued_hand).tolist(),'slider_start_m':float(slider),
@@ -70,7 +88,7 @@ class RetainedPushSkill:
                      'scope':'Current episode sim_oracle pose and current measured history; no recorded success-state assignment'}
             (self.output/'retained-push-entry.json').write_text(json.dumps(receipt,indent=2))
         clock=16.+elapsed-self.settle
-        hand,action=self.policy.command(q,.035,wrist_gravity=self.kin.forward(arm_q)[:3,:3].T@np.array([0.,0.,-1.]),clock_s=clock,
+        hand,action=self.policy.command(q,self.stroke,wrist_gravity=self.kin.forward(arm_q)[:3,:3].T@np.array([0.,0.,-1.]),clock_s=clock,
                                          issued_target_hold=clock-16>=self.policy.thumb_reference.duration+1/30-1e-7)
         self.stream.write(json.dumps({'time_s':t,'phase':'retained-push','original_clock_s':clock,
                                      'history_frames':len(self.policy.history),'slider_delta_m':float(slider)-self.push_slider_start,

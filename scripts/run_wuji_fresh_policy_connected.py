@@ -1,0 +1,25 @@
+"""A fresh table episode with live transition and original complete B."""
+import argparse,json,subprocess,sys,hashlib,shutil
+import numpy as np
+from pathlib import Path
+from scripts.record_wuji_flat_table_event import record
+
+def main():
+ p=argparse.ArgumentParser();p.add_argument('--checkpoint',type=Path,required=True);p.add_argument('--transition-seconds',type=float,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--decision',required=True);p.add_argument('--action-noise',type=Path);p.add_argument('--entry-probe-frames',type=int,default=3);p.add_argument('--motor-preamble',type=Path);p.add_argument('--B-stroke-m',dest='B_stroke_m',type=float,default=.03);p.add_argument('--cap-contact-pivot-degrees',type=float);p.add_argument('--cap-contact-pivot-seconds',type=float,default=6.);a=p.parse_args();assert .020<a.B_stroke_m<=.035;a.output.mkdir(parents=True,exist_ok=False);root=Path('runs/flat-table-20261006/direct');prefix=json.loads((root/'preparation/current-C560-fresh-no-extra-ring-v743/prefix.json').read_text());start=len(np.load(root/'development/current-C560-fresh-no-extra-ring-v743/simulation/trace.npz')['applied_target'])/30;preamble_seconds=0.;pivot_seconds=a.cap_contact_pivot_seconds if a.cap_contact_pivot_degrees is not None else 0.
+ if a.motor_preamble:
+  motors=np.load(a.motor_preamble);assert motors.ndim==2 and motors.shape[1]==27;preamble_seconds=len(motors)/30
+  if len(motors):
+   new_start=(round(start*30)+len(motors))/30;prefix['motor_reference_preamble']=dict(start_s=start,end_s=new_start,path=str(a.motor_preamble));start=new_start
+ prefix['regrasp_policy']=dict(checkpoint=str(a.checkpoint),start_s=start,end_s=start+a.transition_seconds,state_ready_takeover=not bool(pivot_seconds),entry_probe_dwell_frames=a.entry_probe_frames);prefix['regrasp_policy'].update(action_noise=str(a.action_noise)) if a.action_noise else None;prefix['development_abort_min_knife_height']=dict(after_elapsed_s=start-preamble_seconds,minimum_whole_clearance_m=.002);prefix['retained_push_skill']=dict(start_s=start+a.transition_seconds+pivot_seconds,preparation_seconds=4.,knife_spec='assets/objects/knife_wuji_newknife_20261005/nominal-v5/spec.json',entry_reference_adaptation='measured-hold',entry_pressure_coordinates='cartesian-normal',task_stroke_m=a.B_stroke_m)
+ if pivot_seconds:
+  assert pivot_seconds>0 and abs(a.cap_contact_pivot_degrees)<=45
+  prefix['cap_contact_pivot']=dict(start_s=start+a.transition_seconds,end_s=start+a.transition_seconds+pivot_seconds,angle_deg=a.cap_contact_pivot_degrees,thumb_joint3_reserve_rad=.15,entry_tail_distance_m=.003)
+ (a.output/'prefix.json').write_text(json.dumps(prefix,indent=2));cmd=json.loads((root/'development/current-C560-fresh-no-extra-ring-v743/command.json').read_text());cmd[0]=sys.executable
+ for flag,val in [('--flat-table-prefix',str(a.output/'prefix.json')),('--seconds',str(start+a.transition_seconds+pivot_seconds+10.-float(prefix['duration_s']))),('--output',str(a.output/'simulation'))]:cmd[cmd.index(flag)+1]=val
+ cmd+=['--support-camera-direction','-.6','.4','.3'];(a.output/'command.json').write_text(json.dumps(cmd,indent=2));runtime=a.output/'controller-source';runtime.mkdir();hashes={}
+ for name in ['run_g2_flat_table_demo.py','wuji_cap_contact_pivot.py','wuji_regrasp_reference_policy.py','train_wuji_fresh_regrasp.py','wuji_fresh_checkpoint_migration.py','wuji_fresh_free_migration.py','wuji_pose_motion.py','wuji_fresh_pose_migration.py','wuji_motor_reference_preamble.py','wuji_fresh_prefix_learning.py','wuji_retained_push_skill.py','wuji_measured_hold_reference.py','g2_r800_policy.py','wuji_joint_deflection_pressure.py','wuji_scheduled_thumb_reference.py','wuji_known_controller.py','wuji_direct_pickup.py','wuji_regrasp_contract.py','wuji_functional_entry_affordance.py','g2_contact_geometry.py','check_wuji_action_quality.py','wuji_kinematics.py','g2_kinematics.py','g2_knife_geometry.py']:
+  source=Path('scripts')/name;shutil.copyfile(source,runtime/name);hashes[str(source)]=hashlib.sha256(source.read_bytes()).hexdigest()
+ cfg=dict(checkpoint=str(a.checkpoint),checkpoint_sha256=hashlib.sha256(a.checkpoint.read_bytes()).hexdigest(),source_sha256=hashes,transition_seconds=a.transition_seconds,original_B_goal_stroke_m=a.B_stroke_m,cap_contact_pivot=prefix.get('cap_contact_pivot'),motor_preamble=str(a.motor_preamble) if a.motor_preamble else None,preamble_seconds=preamble_seconds,uncertainty='Meantransition physicallyacquires B-capable range afterfresh743; actualphysics contacts/geometry/B/video decides, no stage reset',decision=a.decision,scope=__doc__);(runtime/'manifest.json').write_text(json.dumps(cfg,indent=2));record('fresh_live_transition_fullB_started',[str(a.output)],cfg,updates={'add_active_jobs':[str(a.output)]},next_step=a.decision)
+ try:subprocess.run(cmd,check=True)
+ finally:record('fresh_live_transition_fullB_terminal',[str(a.output/'simulation')],updates={'remove_active_jobs':[str(a.output)]},next_step='Read actualnative contacts,fullB stroke/hold and allframeshandgeometry, inspectpairedtimeline before acceptance')
+if __name__=='__main__':main()

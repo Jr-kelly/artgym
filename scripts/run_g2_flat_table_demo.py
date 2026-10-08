@@ -12,6 +12,8 @@ from omegaconf import OmegaConf
 from scripts.wuji_goal_common import configuration
 from scripts.g2_kinematics import G2Kinematics,transform
 from scripts.g2_r800_policy import G2R800Policy
+from scripts.wuji_regrasp_contract import frame_window
+from isaacgymenvs.utils.torch_jit_utils import quat_mul,quat_conjugate
 R=Path(__file__).resolve().parents[1]
 def smooth(x):x=np.clip(x,0,1);return x*x*x*(10-15*x+6*x*x)
 def gt(t):
@@ -109,13 +111,27 @@ def main():
  if recorded_support:assert recorded_handoff is not None
  retained_push_skill=None
  regrasp_reference_policy=None
- if recorded_support and 'regrasp_policy' in recorded_support:
+ motor_reference_preamble=None
+ # Both development restores and fresh table episodes use the same live
+ # controller calls. A fresh episode reads no saved physical state here.
+ live_skill_spec=recorded_support if recorded_support is not None else (flat_prefix or {})
+ contact_contour_course=None
+ cap_contact_pivot=None
+ if live_skill_spec.get('motor_reference_preamble'):
+  from scripts.wuji_motor_reference_preamble import MotorReferencePreamble
+  motor_reference_preamble=MotorReferencePreamble(live_skill_spec['motor_reference_preamble'],a.output)
+ regrasp_start=float(live_skill_spec.get('regrasp_policy',{}).get('start_s',0.))
+ regrasp_end=float(live_skill_spec.get('regrasp_policy',{}).get('end_s',float('inf')))
+ assert regrasp_end>=regrasp_start
+ if 'regrasp_policy' in live_skill_spec:
   from scripts.wuji_regrasp_reference_policy import RegraspReferencePolicy
-  regrasp_reference_policy=RegraspReferencePolicy(recorded_support['regrasp_policy'],a.output)
+  regrasp_reference_policy=RegraspReferencePolicy(live_skill_spec['regrasp_policy'],a.output)
  if recorded_handoff is not None:
   assert (a.grasp_only and a.seconds<=30 and not a.postpush_pose_update) or (a.recorded_b_start_s is not None and a.seconds<=24 and a.postpush_pose_update)
   prefix_duration=a.recorded_b_start_s or 0.
-  (a.output/'recorded-initialization.json').write_text(json.dumps(dict(source=str(a.recorded_handoff),scope='Development only; actual positions/object velocity/slider/issued targets; robot velocity finite-difference estimate; solver cache absent; no full restore equivalence'),indent=2))
+  source_manifest=json.loads((a.recorded_handoff/'manifest.json').read_text())
+  initializer_category=source_manifest.get('initializer_category','recorded-actual')
+  (a.output/'recorded-initialization.json').write_text(json.dumps(dict(source=str(a.recorded_handoff),initializer_category=initializer_category,scope=source_manifest.get('scope') if initializer_category=='ideal-diagnostic' else 'Development only; actual positions/object velocity/slider/issued targets; robot velocity finite-difference estimate; solver cache absent; no full restore equivalence'),indent=2))
  pose_updated=False;pose_update_diagnostics=None;pose_bridge_start=None
  loaded_table_transport=None;adaptive_exit=None
  if a.loaded_table_pose_transport:
@@ -151,9 +167,15 @@ def main():
   loaded_thumb_servo=PairedVectorLoadServo(np.asarray(cfg.hand.dof_props.stiffness))
  if dual_push:dual_push.kp=np.asarray(cfg.hand.dof_props.stiffness,dtype=float)
  policy=G2R800Policy(cfg,R/'runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth',R/'runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth',geometry=estimated_geometry,thumb_action_gain=a.thumb_action_gain,support_action_gain=a.support_action_gain,residual_checkpoint=a.residual_checkpoint,thumb_reference_override=a.thumb_reference_override,support_residual_scale_override=a.support_residual_scale_override,thumb_residual_scale_override=a.thumb_residual_scale_override);kin=G2Kinematics()
- if recorded_support and 'retained_push_skill' in recorded_support:
+ if 'contact_contour_course' in live_skill_spec:
+  from scripts.wuji_contact_contour_course import ContactContourCourse
+  contact_contour_course=ContactContourCourse(cfg,live_skill_spec['contact_contour_course'],a.output)
+ if 'retained_push_skill' in live_skill_spec:
   from scripts.wuji_retained_push_skill import RetainedPushSkill
-  retained_push_skill=RetainedPushSkill(cfg,recorded_support['retained_push_skill'],a.output)
+  retained_push_skill=RetainedPushSkill(cfg,live_skill_spec['retained_push_skill'],a.output)
+ if 'cap_contact_pivot' in live_skill_spec:
+  from scripts.wuji_cap_contact_pivot import CapContactPivot
+  cap_contact_pivot=CapContactPivot(cfg,live_skill_spec['cap_contact_pivot'],a.output)
  seed=np.load(R/'research/robust-knife-family-20261003/data/repaired-seeds.npy')[1];relative=transform(seed[40:43],seed[43:47]);closed=seed[20:40].copy();opened=np.clip(closed*.30,policy.fk.lower,policy.fk.upper);opened[16:]=np.clip(closed[16:]-[.35,0,.25,0],policy.fk.lower[16:],policy.fk.upper[16:])
  if a.grasp_plan:
   plan=json.loads(a.grasp_plan.read_text());relative=np.linalg.inv(np.asarray(plan['wrist_in_knife']));closed=np.asarray(plan['close_q']);opened=np.asarray(plan['open_q'])
@@ -610,9 +632,19 @@ def main():
     elapsed=step/a.physics_hz
     if direct_pickup:
      aq,hq=direct_pickup.command(elapsed,transform(rb[oid,:3].numpy(),rb[oid,3:7].numpy()),dof[arm,0].numpy().copy(),dof[hand,0].numpy().copy(),previously_issued_target[arm].numpy().copy(),previously_issued_target[hand].numpy().copy(),float(dof[sid,0]))
-    if regrasp_reference_policy and (retained_push_skill is None or elapsed<retained_push_skill.start):
-     aq,hq=regrasp_reference_policy.command(transform(rb[oid,:3].numpy(),rb[oid,3:7].numpy()),dof[:27,0].numpy().copy(),dof[:27,1].numpy().copy(),previously_issued_target[:27].numpy().copy(),contact[:len(rbnames)].numpy().copy(),rbnames)
-    if retained_push_skill and elapsed>=retained_push_skill.start:
+    if motor_reference_preamble and motor_reference_preamble.active(elapsed):
+     aq,hq=motor_reference_preamble.command(elapsed,previously_issued_target[:27].numpy().copy())
+    if regrasp_reference_policy and frame_window(elapsed,regrasp_start,regrasp_end) and (retained_push_skill is None or not frame_window(elapsed,retained_push_skill.start)):
+     aq,hq=regrasp_reference_policy.command(transform(rb[oid,:3].numpy(),rb[oid,3:7].numpy()),dof[:27,0].numpy().copy(),dof[:27,1].numpy().copy(),previously_issued_target[:27].numpy().copy(),contact[:len(rbnames)].numpy().copy(),rbnames,object_velocity=rb[oid,7:13].numpy().copy(),slider=float(dof[sid,0]),slider_velocity=float(dof[sid,1]),relative_orientation_xyzw=quat_mul(quat_conjugate(rb[wrist,3:7].reshape(1,4)),rb[oid,3:7].reshape(1,4))[0].numpy().copy())
+     if retained_push_skill and regrasp_reference_policy.spec.get('state_ready_takeover') and regrasp_reference_policy.entry_ready and not getattr(retained_push_skill,'state_triggered',False):
+      retained_push_skill.state_triggered=True
+      retained_push_skill.start=elapsed
+      (a.output/'live-state-handoff-request.json').write_text(json.dumps({'time_s':elapsed,'fullB_start_s':retained_push_skill.start,'scope':'Functional measuredrange triggered; no object/joint/velocity/history assignment; actualfullB verifies capacity'},indent=2))
+    if contact_contour_course and contact_contour_course.start<=elapsed<contact_contour_course.end and (retained_push_skill is None or elapsed<retained_push_skill.start):
+     aq,hq=contact_contour_course.command(elapsed,transform(rb[oid,:3].numpy(),rb[oid,3:7].numpy()),dof[arm,0].numpy().copy(),dof[hand,0].numpy().copy(),previously_issued_target[arm].numpy().copy(),previously_issued_target[hand].numpy().copy())
+    if cap_contact_pivot and frame_window(elapsed,cap_contact_pivot.start,cap_contact_pivot.end):
+     aq,hq=cap_contact_pivot.command(elapsed,transform(rb[oid,:3].numpy(),rb[oid,3:7].numpy()),dof[:27,0].numpy().copy(),previously_issued_target[:27].numpy().copy(),float(dof[sid,0]))
+    if retained_push_skill and frame_window(elapsed,retained_push_skill.start):
      aq,hq=retained_push_skill.command(elapsed,transform(rb[oid,:3].numpy(),rb[oid,3:7].numpy()),dof[arm,0].numpy().copy(),dof[hand,0].numpy().copy(),previously_issued_target[arm].numpy().copy(),previously_issued_target[hand].numpy().copy(),float(dof[sid,0]))
     if prefix_pose_adapter and ((recorded_handoff is None and t<0) or (recorded_handoff is not None and a.grasp_only)):
      adaptation_elapsed=elapsed if recorded_handoff is None else t+float(json.loads((a.recorded_handoff/"manifest.json").read_text())["takeover_elapsed_s"])
@@ -702,8 +734,13 @@ def main():
      (a.output/'development-early-stop.json').write_text(json.dumps(development_early_stop,indent=2));print(json.dumps(development_early_stop),flush=True);break
    if fresh_development_abort and step%(a.physics_hz//30)==a.physics_hz//30-1:
     elapsed=t+prefix_duration+1/a.physics_hz
-    if elapsed>=fresh_development_abort['after_elapsed_s'] and float(rb[oid,2])<fresh_development_abort['minimum_z_m']:
-     development_early_stop=dict(time_s=float(t+1/a.physics_hz),elapsed_s=float(elapsed),knife_z_m=float(rb[oid,2]),threshold=fresh_development_abort,scope='Development-only cutoff of failed fresh lift, trace/native/bothvideos retained; no success claim or physical intervention')
+    actual_clearance=None
+    if 'minimum_whole_clearance_m' in fresh_development_abort:
+     assert retained_push_skill is not None
+     vertices=np.concatenate([p['vertices'] for p in retained_push_skill.knife.collision_parts(float(dof[sid,0]))]);O=transform(rb[oid,:3].numpy(),rb[oid,3:7].numpy());actual_clearance=float((vertices@O[:3,:3].T+O[:3,3])[:,2].min()-a.table_height);failed_carry=actual_clearance<fresh_development_abort['minimum_whole_clearance_m']
+    else:failed_carry=float(rb[oid,2])<fresh_development_abort['minimum_z_m']
+    if elapsed>=fresh_development_abort['after_elapsed_s'] and failed_carry:
+     development_early_stop=dict(time_s=float(t+1/a.physics_hz),elapsed_s=float(elapsed),knife_z_m=float(rb[oid,2]),whole_collision_clearance_m=actual_clearance,threshold=fresh_development_abort,scope='Development-only cutoff of failed fresh lift, trace/native/bothvideos retained; no success claim or physical intervention')
      (a.output/'development-early-stop.json').write_text(json.dumps(development_early_stop,indent=2));print(json.dumps(development_early_stop),flush=True);break
    if step%1200==0:print(json.dumps(dict(t=t,object_height=float(rb[oid,2]),slider=float(dof[sid,0]),arm_tracking_max=float(abs(target[arm]-dof[arm,0]).max()))),flush=True)
   if prefix_pose_adapter:(a.output/'prefix-pose-adaptation.json').write_text(json.dumps(dict(first=prefix_pose_adapter.first if prefix_pose_adapter.delta is not None else None,records=prefix_pose_adapter.records,physical_state_resets=0),indent=2))

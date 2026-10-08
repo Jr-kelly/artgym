@@ -131,9 +131,13 @@ class DirectRoute:
                 # never repositioned or constrained in physics.
                 axis=state['liveO'][:3,:3]@np.array(stage['world_rotation_axis_knife'])
                 axis=axis/np.linalg.norm(axis)
-                angle=np.deg2rad(stage['world_rotation_degrees'])*smooth(age/stage['world_rotation_duration_s'])
+                fraction=smooth(age/stage['world_rotation_duration_s'])
+                if stage.get('world_rotation_fraction_rows'):
+                    timetable=np.array(stage['world_rotation_fraction_rows'])
+                    fraction=float(np.interp(age,timetable[:,0],timetable[:,1]))
+                angle=np.deg2rad(stage['world_rotation_degrees'])*fraction
                 R=Rotation.from_rotvec(axis*angle).as_matrix()
-                pivot=state['liveO'][:3,3]
+                pivot=state['live_wrist'][:3,3] if stage.get('world_rotation_pivot')=='wrist' else state['liveO'][:3,3]
                 goal[:3,3]=pivot+R@(goal[:3,3]-pivot)
                 goal[:3,:3]=R@goal[:3,:3]
             goal[:3,3]+=np.array(stage['world_translation_m'])*smooth((age-stage.get('world_translation_start_delay_s',0.))/stage['world_translation_duration_s'])

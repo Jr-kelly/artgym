@@ -33,6 +33,10 @@ class HandIntersection:
                 if 'base' in a+b and ('link1' in a+b or 'link2' in a+b):
                     continue
                 self.pairs.append((a,b))
+        self.component_keys=[(name,i) for name,parts in self.parts.items() for i in range(len(parts))]
+        lookup={key:i for i,key in enumerate(self.component_keys)}
+        self.component_pairs=[(a,ia,b,ib) for a,b in self.pairs for ia in range(len(self.parts[a])) for ib in range(len(self.parts[b]))]
+        self.component_indices=np.array([(lookup[(a,ia)],lookup[(b,ib)]) for a,ia,b,ib in self.component_pairs])
 
     def inspect(self,q):
         frames = self.g.w.forward(q)
@@ -42,21 +46,21 @@ class HandIntersection:
             world[n] = []
             for v,h in parts:
                 normal = h[:,:3]@R.T
-                world[n].append((v@R.T+t, np.c_[normal,h[:,3]-normal@t]))
+                vertices=v@R.T+t
+                world[n].append((vertices,np.c_[normal,h[:,3]-normal@t],vertices.min(0),vertices.max(0)))
         bad=[]
-        for a,b in self.pairs:
-            for va,ha in world[a]:
-                for vb,hb in world[b]:
-                    if np.any(va.max(0)<vb.min(0)) or np.any(vb.max(0)<va.min(0)):
-                        continue
-                    axes=np.r_[ha[:,:3],hb[:,:3]]
-                    pa,pb=va@axes.T,vb@axes.T
-                    if np.maximum(pa.min(0)-pb.max(0),pb.min(0)-pa.max(0)).max()>=0:
-                        continue
-                    h=np.r_[ha,hb]
-                    result=linprog([0,0,0,-1],A_ub=np.c_[h[:,:3],np.ones(len(h))],b_ub=-h[:,3],bounds=[(None,None)]*4,method='highs')
-                    if result.success and result.x[3]>.0002:
-                        bad.append(dict(pair=[a,b],intersection_inscribed_radius_m=float(result.x[3])))
+        lower=np.array([world[name][i][2] for name,i in self.component_keys]);upper=np.array([world[name][i][3] for name,i in self.component_keys]);left,right=self.component_indices.T
+        possible=np.all((upper[left]>=lower[right])&(upper[right]>=lower[left]),axis=1)
+        for index in np.flatnonzero(possible):
+            a,ia,b,ib=self.component_pairs[index];va,ha,_,_=world[a][ia];vb,hb,_,_=world[b][ib]
+            axes=np.r_[ha[:,:3],hb[:,:3]]
+            pa,pb=va@axes.T,vb@axes.T
+            if np.maximum(pa.min(0)-pb.max(0),pb.min(0)-pa.max(0)).max()>=0:
+                continue
+            h=np.r_[ha,hb]
+            result=linprog([0,0,0,-1],A_ub=np.c_[h[:,:3],np.ones(len(h))],b_ub=-h[:,3],bounds=[(None,None)]*4,method='highs')
+            if result.success and result.x[3]>.0002:
+                bad.append(dict(pair=[a,b],intersection_inscribed_radius_m=float(result.x[3])))
         return bad
 
 def run(trial,output,stride=15):

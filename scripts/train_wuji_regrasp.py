@@ -18,7 +18,11 @@ class RegraspActor(nn.Module):
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--source',required=True);p.add_argument('--reference',required=True);p.add_argument('--output',type=Path,required=True)
-    p.add_argument('--envs',type=int,default=32);p.add_argument('--rounds',type=int,default=50);p.add_argument('--interface-only',action='store_true');a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
+    p.add_argument('--envs',type=int,default=32);p.add_argument('--rounds',type=int,default=50);p.add_argument('--interface-only',action='store_true')
+    p.add_argument('--physx-buffer-multiplier',type=float,default=16.,help='Simulation memory capacity only; sufficient broadphase buffers are required for overlapping isolated environments')
+    p.add_argument('--resume',type=Path,help='Continue a v2 policy with the identical actual source and reference; never reinterpret a v1 checkpoint')
+    p.add_argument('--motor-exploration-std',type=float,help='Motor action sampling deviation only; all 27 motor spans and phase exploration remain available')
+    a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
     torch.set_num_threads(1);torch.manual_seed(20261008717);stop=[False];signal.signal(signal.SIGTERM,lambda *_:stop.__setitem__(0,True))
     cfg={k:str(v) if isinstance(v,Path) else v for k,v in vars(a).items()};cfg.update(action='27 arm/hand motor offsets + pausable phase pacing',
         phase_semantics=PAUSE_TIMING,reward_version=REWARD_VERSION,action_period_frames=5,episode_steps=240,
@@ -28,7 +32,7 @@ def main():
     (a.output/'config.json').write_text(json.dumps(cfg,indent=2));record('contact_changing_short_regrasp_started',[str(a.output/'config.json')],cfg,updates={'add_active_jobs':[str(a.output)]},next_step='Verify all actions and pause execute; train only toward an independently usable retained-skill entrance')
     e=None
     try:
-        e=RegraspLearning(a.envs,a.source,a.reference);obs=e.observation();assert obs.shape==(a.envs,149),obs.shape
+        e=RegraspLearning(a.envs,a.source,a.reference,physx_buffer_multiplier=a.physx_buffer_multiplier);obs=e.observation();assert obs.shape==(a.envs,149),obs.shape
         baseline=e.command_target.clone();acts=torch.zeros((a.envs,28),device=e.device)
         for i in range(min(a.envs,28)):acts[i,i]=.3
         _,_,_,info=e.step(acts)
@@ -46,7 +50,22 @@ def main():
         (a.output/'interface.json').write_text(json.dumps(report,indent=2));print(json.dumps(report),flush=True)
         if a.interface_only:return
         assert report['all27_motor_offsets_execute'] and report['phase_action_executes'] and report['phase_pause_executes'] and report['motor_offsets_execute_while_paused'] and report['environments_with_contacts']==a.envs and report['environments_with_knife_contact']==a.envs
-        model=RegraspActor().cuda();opt=torch.optim.Adam(model.parameters(),lr=3e-4);log=(a.output/'learning.jsonl').open('w',buffering=1);begin=time.monotonic()
+        model=RegraspActor().cuda();opt=torch.optim.Adam(model.parameters(),lr=3e-4)
+        previous_round=0
+        if a.resume:
+            saved=torch.load(a.resume,map_location='cpu')
+            assert saved['format']=='wuji-regrasp-reference-ppo-v2'
+            for key in ['phase_semantics','reward_version','source_sha256','reference_sha256']:
+                assert saved['config'][key]==cfg[key],('Resume contract mismatch',key)
+            assert np.allclose(saved['motor_span'],e.span.cpu().numpy()) and np.allclose(saved['motor_slew'],e.slew.cpu().numpy())
+            model.load_state_dict(saved['model']);opt.load_state_dict(saved['optimizer']);previous_round=saved.get('cumulative_round',saved['round'])
+            cfg.update(resume_sha256=hashlib.sha256(a.resume.read_bytes()).hexdigest(),resume_round=previous_round)
+        if a.motor_exploration_std is not None:
+            assert .083<=a.motor_exploration_std<=1.
+            with torch.no_grad():model.logstd[:27].fill_(float(np.log(a.motor_exploration_std)))
+            opt.state.pop(model.logstd,None)
+        (a.output/'config.json').write_text(json.dumps(cfg,indent=2))
+        log=(a.output/'learning.jsonl').open('w',buffering=1);begin=time.monotonic()
         for it in range(1,a.rounds+1):
             if stop[0]:break
             obs=e.reset(torch.arange(e.n,device=e.device));batch=[];total=torch.zeros(e.n,device=e.device)
@@ -65,7 +84,7 @@ def main():
                     loss=-torch.minimum(ratio*ad[ix],ratio.clamp(.8,1.2)*ad[ix]).mean()+.5*(v-rt[ix]).square().mean()-.001*dist.entropy().sum(-1).mean()
                     opt.zero_grad();loss.backward();nn.utils.clip_grad_norm_(model.parameters(),1);opt.step()
             errors=e.best_entry_error[torch.isfinite(e.best_entry_error)]
-            row={'round':it,'elapsed_s':time.monotonic()-begin,'mean_return':float(total.mean()),'surviving':int((~e.failed).sum()),
+            row={'round':it,'cumulative_round':previous_round+it,'elapsed_s':time.monotonic()-begin,'mean_return':float(total.mean()),'surviving':int((~e.failed).sum()),
                  'best_entry_error_min':float(errors.min()) if len(errors) else None,
                  'best_entry_error_median':float(errors.median()) if len(errors) else None,
                  'max_continuous_held_s':float(e.max_held_frames.max()/30),
@@ -75,9 +94,11 @@ def main():
                  'pause_steps_fraction':float(e.pause_steps.sum()/(e.n*e.steps)),
                  'phase_fraction_mean':float((e.phase/(len(e.motor_reference)-1)).mean()),
                  'motor_offset_abs_mean_rad':float(e.offset.abs().mean()),
+                 'motor_action_std_mean':float(model.logstd[:27].clamp(-2.5,-.1).exp().mean()),
+                 'phase_action_std':float(model.logstd[27].clamp(-2.5,-.1).exp()),
                  'scope':'Training carrying/proximity proxies only; transferred load, hand geometry, retained-skill takeover and full episode not accepted'}
             log.write(json.dumps(row)+'\n');print(json.dumps(row),flush=True)
-            if it%10==0 or it==a.rounds or stop[0]:torch.save({'format':'wuji-regrasp-reference-ppo-v2','model':model.state_dict(),'optimizer':opt.state_dict(),'round':it,'config':cfg,'motor_span':e.span.cpu().tolist(),'motor_slew':e.slew.cpu().tolist()},a.output/('round_%03d.pth'%it))
+            if it%10==0 or it==a.rounds or stop[0]:torch.save({'format':'wuji-regrasp-reference-ppo-v2','model':model.state_dict(),'optimizer':opt.state_dict(),'round':it,'cumulative_round':previous_round+it,'config':cfg,'motor_span':e.span.cpu().tolist(),'motor_slew':e.slew.cpu().tolist()},a.output/('round_%03d.pth'%it))
         log.close()
     finally:
         if e is not None:e.close()

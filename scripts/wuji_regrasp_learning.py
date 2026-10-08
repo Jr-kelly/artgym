@@ -16,7 +16,9 @@ from scripts.wuji_regrasp_contract import phase_increment, entry_progress_reward
 
 
 class RegraspLearning(G2ContinuousScene):
-    def __init__(self,n,source,reference,seed=20261008717):
+    def __init__(self,n,source,reference,seed=20261008717,physx_buffer_multiplier=None,clear_contact_cache_on_reset=False,safe_reset_order=False):
+        self.safe_reset_order=safe_reset_order
+        self.clear_contact_cache_on_reset=clear_contact_cache_on_reset
         self.ready=False;self.recorded=np.load(Path(source)/'takeover.npz')
         self.recipe=json.loads(Path(reference).read_text())
         scene=json.loads(Path('runs/flat-table-20261006/learning/real-prefix-v76/scene.json').read_text())
@@ -26,7 +28,8 @@ class RegraspLearning(G2ContinuousScene):
         super().__init__(n=n,seed=seed,randomization_scale=0.,instances=['newknife']*n,load_max=0.,detent_max=0.,
                          scene_spec=scene,reference_spec=json.loads(Path('runs/newknife-20261005/preparation/center-tail-support-v2/reference.json').read_text()),
                          asset_registry={'newknife':'assets/objects/knife_wuji_newknife_20261005/nominal-v5'},
-                         resistance_integration='solver-brake',compact_isolated_layout=True)
+                         resistance_integration='solver-brake',compact_isolated_layout=True,
+                         physx_buffer_multiplier=physx_buffer_multiplier)
         assert self.newknife_resistance['kind']=='constant'
         for i,props in enumerate(self.slider_drive_properties):
             props['effort'][:]=float(self.newknife_resistance['reference_N'])
@@ -37,11 +40,29 @@ class RegraspLearning(G2ContinuousScene):
         self.offset=torch.zeros((n,27),device=self.device);self.last=self.offset.clone()
         self.span=self.tensor([.20]*7+[.60]*20);self.slew=self.tensor([.006]*7+[.025]*20)
         self.phase=torch.zeros(n,device=self.device);self.steps=240
+        from scripts.wuji_robot_gravity import RobotGravity
+        self.reset_gravity=RobotGravity(names=self.gym.get_actor_dof_names(self.envs[0],self.robots[0]))
         self.ready=True;self.reset(torch.arange(n,device=self.device),perturb=False)
 
-    def reset(self,ids,perturb=True):
+    def reset(self,ids,perturb=True,physical_offsets=None):
         if not self.ready:return super().reset(ids)
         assert len(ids)==self.n
+        if self.clear_contact_cache_on_reset:
+            # Planning/training episode INITIALIZATION ONLY. Separate bodies
+            # and open the hand for two real steps to retire prior contacts.
+            # No such setters occur in the native continuous demo.
+            self.root[ids,0,:]=0.;self.root[ids,0,6]=1.
+            self.root[ids,2,:]=self.tensor(self.recorded['object_state'])
+            self.root[ids,2,2]+=10.;self.root[ids,2,7:]=0.
+            self.dof[ids,:27,0]=self.tensor(self.recorded['robot_q'])
+            self.dof[ids,7:27,0]=self.tensor([.2,0.,.2,.3]*5)
+            self.dof[ids,:27,1]=0.;self.forces[:]=0.
+            actor_ids=torch.stack([ids*3,ids*3+2],-1).flatten().to(torch.int32)
+            self.gym.set_actor_root_state_tensor_indexed(self.sim,gymtorch.unwrap_tensor(self.root.view(-1,13)),gymtorch.unwrap_tensor(actor_ids),len(actor_ids))
+            self.gym.set_dof_state_tensor_indexed(self.sim,gymtorch.unwrap_tensor(self.dof.view(-1,2)),gymtorch.unwrap_tensor(actor_ids),len(actor_ids))
+            self.gym.set_dof_actuation_force_tensor(self.sim,gymtorch.unwrap_tensor(self.forces.flatten()))
+            for _ in range(2):self.gym.simulate(self.sim);self.gym.fetch_results(self.sim,True)
+            self.refresh()
         z=self.recorded;k=len(ids)
         self.target[ids]=self.tensor(z['issued_target'][:27]);self.command_target[ids]=self.target[ids]
         self.dof[ids,:27,0]=self.tensor(z['robot_q']);self.dof[ids,:27,1]=self.tensor(z['estimated_robot_velocity'])
@@ -51,15 +72,35 @@ class RegraspLearning(G2ContinuousScene):
             # Mild physical pose variation, never a changed contact asset.
             self.root[ids,2,:3]+=(torch.rand((k,3),device=self.device)-.5)*.0006
             self.dof[ids,:27,0]+=(torch.rand((k,27),device=self.device)-.5)*.002
+        if physical_offsets is not None:
+            assert not perturb
+            obj,joints=physical_offsets
+            assert obj.shape==(k,3) and joints.shape==(k,27)
+            assert torch.isfinite(obj).all() and torch.isfinite(joints).all()
+            assert obj.abs().max()<=.000301 and joints.abs().max()<=.001001
+            self.root[ids,2,:3]+=obj
+            self.dof[ids,:27,0]+=joints
         actor_ids=torch.stack([ids*3,ids*3+2],-1).flatten().to(torch.int32)
         self.gym.set_actor_root_state_tensor_indexed(self.sim,gymtorch.unwrap_tensor(self.root.view(-1,13)),gymtorch.unwrap_tensor(actor_ids),len(actor_ids))
         self.gym.set_dof_state_tensor_indexed(self.sim,gymtorch.unwrap_tensor(self.dof.view(-1,2)),gymtorch.unwrap_tensor(actor_ids),len(actor_ids))
         self.age[ids]=0;self.phase[ids]=0;self.offset[ids]=0;self.last[ids]=0
         self.failed=torch.zeros(self.n,device=self.device,dtype=torch.bool);self.entry_frames=torch.zeros(self.n,device=self.device)
-        self.best_entry_error=torch.full((self.n,),float('inf'),device=self.device);self.refresh()
+        self.best_entry_error=torch.full((self.n,),float('inf'),device=self.device)
         # One real held-target frame updates native FK/contact tensors after
         # the new-episode setter. Refresh alone does not recompute body poses.
-        self.servo(self.target)
+        if self.safe_reset_order:
+            # Setter buffers must not be refreshed before simulate consumes
+            # them. Native Jacobians still describe the previous state here.
+            initial_q=self.dof[:,:27,0].clone()
+            values=initial_q.cpu().numpy();unique,inverse=np.unique(values,axis=0,return_inverse=True)
+            gravity=self.tensor(np.array([self.reset_gravity(q) for q in unique])[inverse])
+            torque=self.kp*(self.target-initial_q)-self.kd*self.dof[:,:27,1]+gravity
+            self.forces[:,:27]=torch.maximum(torch.minimum(torque,self.effort),-self.effort);self.forces[:,27]=0.
+            self.gym.set_dof_actuation_force_tensor(self.sim,gymtorch.unwrap_tensor(self.forces.flatten()))
+            self.gym.simulate(self.sim);self.gym.fetch_results(self.sim,True);self.refresh()
+            self.servo(self.target,substeps=7)
+        else:
+            self.refresh();self.servo(self.target)
         self.previous_potential=torch.zeros(self.n,device=self.device)
         self.best_entry_dwell=torch.zeros(self.n,device=self.device)
         self.entry_awarded=torch.zeros(self.n,device=self.device,dtype=torch.bool)
@@ -89,9 +130,9 @@ class RegraspLearning(G2ContinuousScene):
                           goal[:,:3]*10,goal[:,3:],self.goal_q.expand(self.n,-1),
                           (self.phase/(len(self.motor_reference)-1))[:,None],self.age[:,None]/self.steps,self.contact_features()],-1)
 
-    def servo(self,motor):
+    def servo(self,motor,substeps=8):
         self.target=torch.minimum(torch.maximum(motor,self.limitlow),self.limithi);self.command_target=self.target.clone()
-        for _ in range(8):
+        for _ in range(substeps):
             self.refresh();gravity=(self.jac[:,:,2,:]*self.masses[None,:,None]*9.81).sum(1)
             torque=self.kp*(self.target-self.dof[:,:27,0])-self.kd*self.dof[:,:27,1]+gravity
             self.forces[:,:27]=torch.maximum(torch.minimum(torque,self.effort),-self.effort);self.forces[:,27]=0.
