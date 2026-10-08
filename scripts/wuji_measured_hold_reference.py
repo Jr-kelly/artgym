@@ -56,7 +56,7 @@ def measured_hold_path(measured_q,normal_wrist,rail_wrist,shifts):
         rows.append(chosen[16:].tolist());audit.append(dict(shift_m=float(shift),FK_position_error_m=error,axial_jacobian_m_per_rad=jacobian))
         seed=chosen
     if max(row['FK_position_error_m'] for row in audit)>.00025:
-        raise ValueError('Measured-hold thumb IK cannot preserve full40mm requested path: '+str(audit[-1]))
+        raise ValueError('Measured-hold thumb IK cannot preserve requested path: '+str(audit[-1]))
     return np.asarray(rows),dict(source='Mean50 actual measured joint frames during settledhold; FK plus explicitly onceestimatednormal/rail direction, no trueobject/contact input',
         measured_mean_q_rad=np.asarray(measured_q).tolist(),initial_pad_point_wrist_m=origin.tolist(),
         normal_wrist=normal.tolist(),rail_direction_wrist=rail.tolist(),rows=audit,

@@ -11,7 +11,7 @@ from scripts.wuji_retained_push_skill import RetainedPushSkill
 from scripts.record_wuji_flat_table_event import record
 
 def probe(e,chosen,output):
- output=Path(output);output.mkdir(parents=True,exist_ok=False);closed_slider_q=float(e.initial_slider[chosen]);spec=dict(start_s=0.,preparation_seconds=4.,knife_spec='assets/objects/knife_wuji_newknife_20261005/nominal-v5/spec.json',entry_reference_adaptation='measured-hold',entry_pressure_coordinates='cartesian-normal',task_stroke_m=.03)
+ output=Path(output);output.mkdir(parents=True,exist_ok=False);closed_slider_q=float(e.initial_slider[chosen]);spec=dict(start_s=0.,preparation_seconds=4.,knife_spec='assets/objects/knife_wuji_newknife_20261005/nominal-v5/spec.json',entry_reference_adaptation='measured-hold',entry_pressure_coordinates='cartesian-normal',task_stroke_m=getattr(e,'task_stroke_m',.03))
  source=Path(__file__);shutil.copyfile(source,output/'executed-capacity-probe-source.py');(output/'executed-source.json').write_text(json.dumps({'source_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'selected_original_closed_slider_q_m':closed_slider_q},indent=2))
  record('fresh_learning_candidate_sameepisode_fullB_started',[str(output)],{'chosen_env':chosen,'representation':'FreshA actualphysics -> policyrealtransfer -> fullB noreset','scope':__doc__},next_step='Measure actualBstroke/held1s andactualhandgeometry; functionalproxy is only trigger')
  skill=RetainedPushSkill(e.cfg,spec,output);motors=e.command_target.clone();states=[];reason=None;minclear=float('inf');run=[]

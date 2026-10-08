@@ -214,4 +214,65 @@ class RegraspContract(unittest.TestCase):
             self.assertFalse(frame_window(t,start,end));self.assertTrue(frame_window(t,end))
 
 
+    def test_requested_stroke_affordance_preserves_proven_intrinsic_entry(self):
+        from scripts.wuji_functional_entry_affordance import FunctionalEntryAffordance
+        # Actual v773 frame119 prior, kept as literals so tests do not require
+        # private experiment archives. Geometry eligibility is not B capacity.
+        hand=np.array([.45570478,.21069989,1.16497922,-.12001695,.64480835,.02697206,.95944393,.16999261,.48987892,-.15042721,.43367308,.70587170,.54201061,-.10060841,1.17749429,.05307832,1.24302959,.06012377,.62375128,.53748560])
+        X=np.array([[.8865466356,-.2321408555,.4001820661,-.1000210806],[.4476928563,.2123830167,-.8685991945,.0761129116],[.1166454857,.9492123458,.2922152516,-.0724434161],[0,0,0,1]])
+        default=FunctionalEntryAffordance().assess_relative(X,hand,0.)
+        self.assertTrue(default['reference_eligible'])
+        self.assertEqual(default['requested_stroke_m'],.03)
+        self.assertLess(default['reference_FK_error_m'],.00025)
+        self.assertEqual(default['reference_FK_error_m'],default['full30mm_FK_error_m'])
+        from scripts.wuji_measured_hold_reference import measured_hold_path
+        calls=[]
+        def capture(q,normal,rail,shifts):
+            calls.append(shifts.copy());return measured_hold_path(q,normal,rail,shifts)
+        with patch('scripts.wuji_functional_entry_affordance.measured_hold_path',side_effect=capture):
+            shorter=FunctionalEntryAffordance(.027).assess_relative(X,hand,0.)
+        self.assertEqual(calls[0][-1],.027)
+        self.assertTrue(shorter['reference_eligible'])
+        self.assertNotIn('full30mm_FK_error_m',shorter)
+        self.assertEqual(shorter['requested_stroke_m'],.027)
+        with self.assertRaises(ValueError):FunctionalEntryAffordance(.020)
+
+
+    def test_whole_wrist_rotation_feedback_keeps_world_support_height(self):
+        class Box:pass
+        p=Box();p.ready=True;p.start=0.;p.spec={'preload_release_basis':'normal-turn','preparation_pressure_feedback':False,'object_pose_feedback_components':'rotation'}
+        p.initial_object=np.eye(4);p.initial_object[2,3]=1.;p.initial_arm=np.zeros(7);p.initial_arm_measured=np.zeros(7);p.initial_hand=np.zeros(20);p.old_thumb_preload=np.zeros(4);p.body_wrist_anchor=np.eye(4)
+        p.arms=np.zeros((2,7));p.hands=np.zeros((2,20));p.normals=np.array([[-1.,0,0],[-1.,0,0]]);p.times=np.array([0.,1.]);p.wrist_rows=np.array([np.eye(4),np.eye(4)]);p.knife_rotation=np.eye(3);p.stream=io.StringIO()
+        p.pressure=Box();p.pressure.model=Box();p.pressure.model.model=lambda *args:None;p.pressure.last_estimate=0.;p.pressure.commit_issued=lambda *args:None
+        p.hand=Box();p.hand.lower=np.ones(20)*-2;p.hand.upper=np.ones(20)*2
+        p.kin=Box();p.kin.forward=lambda q:np.eye(4);targets=[]
+        def solve(goal,arm,**kwargs):targets.append(goal.copy());return arm.copy(),{}
+        p.kin.solve_near=solve
+        command=method('scripts/wuji_contact_contour_course.py','ContactContourCourse','command')
+        O=np.eye(4);O[:3,:3]=Rotation.from_euler('z',.2).as_matrix();O[2,3]=.94
+        args=(p,.5,O,np.zeros(7),np.zeros(20),np.zeros(7),np.zeros(20))
+        command(*args)
+        self.assertEqual(targets[-1][2,3],1.)
+        np.testing.assert_allclose(targets[-1][:3,:3],O[:3,:3])
+        del p.spec['object_pose_feedback_components']
+        command(*args)
+        self.assertEqual(targets[-1][2,3],.94)
+
+
+    def test_149_guided_incremental_native_matches_training_motor_step(self):
+        class Box:pass
+        p=Box();p.guided_incremental=True;p.incremental=False;p.warmed=True;p.correction=np.ones(27)*.1;p.spec={}
+        p.kin=Box();p.kin.forward=lambda q:np.eye(4);p.goal=np.array([0,0,0,0,0,0,1.]);p.goal_q=np.zeros(20);p.motor=np.zeros((2,27));p.phase=0.;p.tick=1;p.episode_steps=240;p.action_period=5;p.action=np.zeros(28);p.action[0]=.3;p.action[26]=.4;p.action[27]=-.75;p.span=np.ones(27)*.6;p.slew=np.r_[np.ones(7)*.006,np.ones(20)*.025];p.offset=np.zeros(27);p.timing='pause-linear-v2';p.stream=io.StringIO()
+        issued=np.ones(27)*.1;command=method('scripts/wuji_regrasp_reference_policy.py','RegraspReferencePolicy','command')
+        arm,hand=command(p,np.eye(4),np.zeros(27),np.zeros(27),issued,np.zeros((0,3)),[])
+        e=Box();e.guided_incremental=True;e.failed=torch.zeros(1,dtype=torch.bool);e.offset=torch.zeros((1,27));e.span=torch.tensor(p.span,dtype=torch.float32);e.slew=torch.tensor(p.slew,dtype=torch.float32);e.phase=torch.zeros(1);e.motor_reference=torch.zeros((2,27));e.command_target=torch.tensor(issued[None],dtype=torch.float32);e.guide_targets=lambda:torch.ones((1,27))*.1;e.servo=lambda q:setattr(e,'command_target',q.clone());e.age=torch.zeros(1);e.hbad=torch.zeros(1,dtype=torch.bool);e.previous_potential=torch.ones(1)*.5;e.best_rotation=torch.ones(1)*float('inf');e.best_bearing=torch.zeros(1);e.safe_steps=torch.zeros(1);e.observation=lambda:torch.zeros((1,149))
+        e.metrics=lambda:dict(held=torch.ones(1,dtype=torch.bool),clearance_m=torch.ones(1)*.1,finite=torch.ones(1,dtype=torch.bool),potential=torch.ones(1)*.5,rotation_rad=torch.ones(1)*.1,ring_back_component_N=torch.ones(1)*.2)
+        step=method('scripts/train_wuji_acquired_rolling.py','AcquiredRolling','step');step(e,torch.tensor(p.action[None],dtype=torch.float32))
+        np.testing.assert_allclose(e.command_target.numpy()[0],np.r_[arm,hand],atol=1e-7)
+        np.testing.assert_allclose(e.offset.numpy()[0],p.offset,atol=1e-7)
+        self.assertEqual(float(e.phase[0]),p.phase)
+        self.assertAlmostEqual(arm[0],.1018)
+        self.assertAlmostEqual(hand[-1],.11)
+
+
 if __name__=='__main__':unittest.main()

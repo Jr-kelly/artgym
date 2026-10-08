@@ -16,7 +16,9 @@ from scripts.wuji_regrasp_contract import phase_increment,entry_progress_reward
 from scripts.wuji_pose_motion import PoseMotion
 
 class FreshPrefixRegrasp(RegraspLearning):
- def __init__(self,n,source,reference,prefix_trace,prefix_spec,steps=900,functional_workspace=False,linear_potential=False,failure_penalty=12.,self_bad_penalty=.5,task_geometry=False,free_motor=False,workspace_query_distance_m=.004,workspace_cadence_frames=15,pose_motion_observation=False,fail_on_self_contact=False,functional_contact_reward=False):
+ def __init__(self,n,source,reference,prefix_trace,prefix_spec,steps=900,functional_workspace=False,linear_potential=False,failure_penalty=12.,self_bad_penalty=.5,task_geometry=False,free_motor=False,workspace_query_distance_m=.004,workspace_cadence_frames=15,pose_motion_observation=False,fail_on_self_contact=False,functional_contact_reward=False,task_stroke_m=.03):
+  self.task_stroke_m=float(task_stroke_m)
+  assert .020<self.task_stroke_m<=.035
   self.functional_contact_reward=functional_contact_reward
   assert not functional_contact_reward or fail_on_self_contact
   self.fail_on_self_contact=fail_on_self_contact
@@ -33,7 +35,7 @@ class FreshPrefixRegrasp(RegraspLearning):
   super().__init__(n,source,reference,physx_buffer_multiplier=16,safe_reset_order=True)
   if functional_workspace:
    from scripts.wuji_functional_entry_affordance import FunctionalEntryAffordance
-   self.affordance=FunctionalEntryAffordance()
+   self.affordance=FunctionalEntryAffordance(self.task_stroke_m)
   self.prefix_motor=self.tensor(self.prefix_numpy);self.span[7:]=1.2;self.span[:7]=.6 if free_motor else .2;self.steps=steps;self.fresh_ready=True;self.motor_anchor=torch.zeros((n,27),device=self.device);self.reset(torch.arange(n,device=self.device),perturb=False)
  def reset(self,ids,perturb=False,physical_offsets=None):
   if not self.fresh_ready:return super().reset(ids,perturb=False)
@@ -69,7 +71,7 @@ class FreshPrefixRegrasp(RegraspLearning):
   if self.pose_motion_observation and self.fresh_ready:m['held']=m['finite']&~self.failed&(m['clearance_m']>.025)&(self.object_motion()[:,:3].norm(dim=-1)<.3)
   if self.functional_workspace and self.fresh_ready:
    if self.affordance_cache is None:
-    self.affordance_cache={'path_error':torch.full((self.n,),.03,device=self.device),'tail_distance':torch.full((self.n,),.04,device=self.device),'self_bad':torch.zeros(self.n,device=self.device,dtype=torch.bool),'eligible':torch.zeros(self.n,device=self.device,dtype=torch.bool),'checked_age':-1,'full_path_queries':0,'best_safe_path_error':torch.full((self.n,),float('inf'),device=self.device)}
+    self.affordance_cache={'path_error':torch.full((self.n,),self.task_stroke_m,device=self.device),'tail_distance':torch.full((self.n,),.04,device=self.device),'self_bad':torch.zeros(self.n,device=self.device,dtype=torch.bool),'eligible':torch.zeros(self.n,device=self.device,dtype=torch.bool),'checked_age':-1,'full_path_queries':0,'best_safe_path_error':torch.full((self.n,),float('inf'),device=self.device)}
    c=self.affordance_cache;age=int(self.age[0]);pad=self.rb[:,self.pad_indices[0]];o=self.rb[:,self.object_index];count=len(self.thumb_vertices);world=quat_apply(pad[:,None,3:7].expand(-1,count,-1).reshape(-1,4),self.thumb_vertices[None].expand(self.n,-1,-1).reshape(-1,3)).reshape(self.n,count,3)+pad[:,None,:3];local=quat_apply(quat_conjugate(o[:,3:7])[:,None].expand(-1,count,-1).reshape(-1,4),(world-o[:,None,:3]).reshape(-1,3)).reshape(self.n,count,3);weights=torch.softmax(-local[:,:,1]/.0002,-1);foot=(weights[:,:,None]*local).sum(1);center_z=-.026+self.dof[:,27,0];clamped=foot.clone();clamped[:,0]=clamped[:,0].clamp(-.0035,.0035);clamped[:,1]=.006;clamped[:,2]=torch.minimum(torch.maximum(clamped[:,2],center_z-.016),center_z-.008);tail_distance=(foot-clamped).norm(dim=-1);c['tail_distance']=tail_distance;c['foot_delta']=foot-clamped
    if age%15==0 and c['checked_age']!=age:
     from scripts.g2_kinematics import transform
@@ -78,13 +80,13 @@ class FreshPrefixRegrasp(RegraspLearning):
      values=self.dof[i,:27,0].cpu().numpy().astype(float)
      if distance[i]<self.workspace_query_distance_m and age%self.workspace_cadence_frames==0:
       c['full_path_queries']+=1
-      pose=o[i,:7].cpu().numpy();a=self.affordance.assess(values,transform(pose[:3],pose[3:7]),float(self.dof[i,27,0]));c['path_error'][i]=min(.04,a['full30mm_FK_error_m']);c['self_bad'][i]=bool(a['self_intersections']);c['eligible'][i]=a['reference_eligible']
-      if not a['self_intersections']:c['best_safe_path_error'][i]=min(float(c['best_safe_path_error'][i]),a['full30mm_FK_error_m'])
+      pose=o[i,:7].cpu().numpy();a=self.affordance.assess(values,transform(pose[:3],pose[3:7]),float(self.dof[i,27,0]));c['path_error'][i]=min(.04,a['reference_FK_error_m']);c['self_bad'][i]=bool(a['self_intersections']);c['eligible'][i]=a['reference_eligible']
+      if not a['self_intersections']:c['best_safe_path_error'][i]=min(float(c['best_safe_path_error'][i]),a['reference_FK_error_m'])
      else:
       c['self_bad'][i]=bool(self.affordance.H.inspect(values[7:]))
       if distance[i]>=self.workspace_query_distance_m:c['eligible'][i]=False
     c['checked_age']=age
-   m.update(full30mm_FK_error_m=c['path_error'],tail_roof_distance_m=tail_distance,reference_eligible=c['eligible']&~c['self_bad'])
+   m.update(reference_FK_error_m=c['path_error'],tail_roof_distance_m=tail_distance,reference_eligible=c['eligible']&~c['self_bad'])
    m['error']=tail_distance/(.006 if self.functional_contact_reward else .018)+.6*(c['path_error']/.01).clamp(max=3)+.03*m['rotation_rad']/.6+.03*m['position_m']/.025+self.self_bad_penalty*c['self_bad'].float()
    if self.task_geometry:
     o=self.rb[:,self.object_index];delta=(self.dof[:,27,0]-self.stage_slider_start).abs();thumb=self.dof[:,23:27,0];reserve=torch.minimum(thumb-self.limitlow[23:27],self.limithi[23:27]-thumb).amin(-1)

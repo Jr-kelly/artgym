@@ -14,6 +14,7 @@ class RegraspReferencePolicy:
         self.spec=spec;self.output=Path(output);self.kin=G2Kinematics();self.phase=0.
         checkpoint=Path(spec['checkpoint']);saved=torch.load(checkpoint,map_location='cpu')
         assert saved['format'] in ['wuji-regrasp-reference-ppo-v1','wuji-regrasp-reference-ppo-v2','wuji-regrasp-fresh-ppo-v3','wuji-regrasp-fresh-ppo-v6','wuji-regrasp-fresh-free-v7','wuji-regrasp-fresh-free-v8','wuji-regrasp-fresh-free-v9','wuji-regrasp-fresh-free-v10']
+        self.guided_incremental=saved['config'].get('motor_action_semantics')=='guided-incremental-v1'
         self.pose_motion_observation=saved['format'] in ['wuji-regrasp-fresh-free-v8','wuji-regrasp-fresh-free-v9','wuji-regrasp-fresh-free-v10'];self.pose_motion=PoseMotion();self.free_motor=saved['format'] in ['wuji-regrasp-fresh-free-v7','wuji-regrasp-fresh-free-v8','wuji-regrasp-fresh-free-v9','wuji-regrasp-fresh-free-v10'];self.incremental=saved['format'] in ['wuji-regrasp-fresh-ppo-v3','wuji-regrasp-fresh-ppo-v6','wuji-regrasp-fresh-free-v7','wuji-regrasp-fresh-free-v8','wuji-regrasp-fresh-free-v9','wuji-regrasp-fresh-free-v10'];self.task_geometry=saved['format'] in ['wuji-regrasp-fresh-ppo-v6','wuji-regrasp-fresh-free-v7','wuji-regrasp-fresh-free-v8','wuji-regrasp-fresh-free-v9','wuji-regrasp-fresh-free-v10'];self.action_dim=27 if self.free_motor else 28
         expected='free-motor-hold-v8' if self.pose_motion_observation else 'free-motor-hold-v7' if self.free_motor else PAUSE_TIMING if self.incremental or saved['format'].endswith('v2') else LEGACY_TIMING
         self.timing=saved['config'].get('phase_semantics',expected)
@@ -36,13 +37,15 @@ class RegraspReferencePolicy:
         self.motor=np.asarray([r['arm_q']+r['hand_q'] for r in recipe['rows']])
         L=np.asarray(recipe['target_object_in_wrist']);self.goal=np.r_[L[:3,3],Rotation.from_matrix(L[:3,:3]).as_quat()]
         self.goal_q=np.asarray(recipe['target_hand_q']);self.tick=0;self.action=np.zeros(self.action_dim);self.correction=None;self.warmed=False;self.entry_dwell=0;self.entry_ready=False;self.slider_start=None
-        self.affordance=None;self.affordance_cache=None;self.task_feature_cache=dict(path_error=.03,self_bad=False,eligible=False)
+        self.task_stroke_m=float(spec.get('task_stroke_m',saved['config'].get('task_stroke_m',.03)))
+        if abs(self.task_stroke_m-float(saved['config'].get('task_stroke_m',.03)))>1e-12:raise ValueError('Checkpoint workspace stroke differs from online B request; use a matching checkpoint or an explicit geometric transition')
+        self.affordance=None;self.affordance_cache=None;self.task_feature_cache=dict(path_error=self.task_stroke_m,self_bad=False,eligible=False)
         self.workspace_query_distance_m=float(saved['config'].get('workspace_query_distance_m',.004));self.workspace_cadence_frames=int(saved['config'].get('workspace_cadence_frames',15))
         if saved['config'].get('functional_workspace'):
             from scripts.wuji_functional_entry_affordance import FunctionalEntryAffordance
-            self.affordance=FunctionalEntryAffordance()
+            self.affordance=FunctionalEntryAffordance(self.task_stroke_m)
         self.noise_tape=np.load(spec['action_noise']) if spec.get('action_noise') else None
-        if self.noise_tape is not None:assert self.incremental and self.noise_tape.ndim==2 and self.noise_tape.shape[1]==self.action_dim
+        if self.noise_tape is not None:assert (self.incremental or self.guided_incremental) and self.noise_tape.ndim==2 and self.noise_tape.shape[1]==self.action_dim
         self.stream=(self.output/'regrasp-policy-call.jsonl').open('w',buffering=1)
         (self.output/'regrasp-policy-source.json').write_text(json.dumps({'checkpoint':str(checkpoint),'sha256':hashlib.sha256(checkpoint.read_bytes()).hexdigest(),
             'training_round':saved['round'],'phase_semantics':self.timing,'action_period_frames':self.action_period,
@@ -56,7 +59,7 @@ class RegraspReferencePolicy:
             self.warmed=True
             return issued[:7].copy(),issued[7:].copy()
         if self.correction is None:
-            self.correction=(issued-self.motor[0]) if incremental else self.kin.forward(q[:7])@np.linalg.inv(self.kin.forward(self.motor[0,:7]))
+            self.correction=(issued-self.motor[0]) if incremental or getattr(self,'guided_incremental',False) else self.kin.forward(q[:7])@np.linalg.inv(self.kin.forward(self.motor[0,:7]))
         W=self.kin.forward(q[:7]);L=np.linalg.inv(W)@O;rel=np.r_[L[:3,3],Rotation.from_matrix(L[:3,:3]).as_quat()]
         # Preserve the actual raw quaternion product used by training.
         # Matrix->quaternion reconstruction can choose the opposite sign.
@@ -83,7 +86,7 @@ class RegraspReferencePolicy:
                     if distance>=radius:self.task_feature_cache['eligible']=False;self.affordance_cache=None
                 if self.tick%cadence==0 and distance<radius:
                     self.affordance_cache=self.affordance.assess(q.astype(float),O,slider)
-                    self.task_feature_cache=dict(path_error=min(.04,self.affordance_cache['full30mm_FK_error_m']),self_bad=bool(self.affordance_cache['self_intersections']),eligible=self.affordance_cache['reference_eligible'])
+                    self.task_feature_cache=dict(path_error=min(.04,self.affordance_cache['reference_FK_error_m']),self_bad=bool(self.affordance_cache['self_intersections']),eligible=self.affordance_cache['reference_eligible'])
                 entry=entry and self.affordance_cache is not None and self.affordance_cache['reference_eligible'] and not self.task_feature_cache['self_bad']
             if getattr(self,'task_geometry',False):
                 body_local=(world-O[:3,3])@O[:3,:3];weights=np.exp(-(body_local[:,1]-body_local[:,1].min())/.0002);foot=weights@body_local/weights.sum();center_z=-.026+slider;clamped=np.clip(foot,[-.0035,.006,center_z-.016],[.0035,.006,center_z-.008]);delta=foot-clamped;cache=self.task_feature_cache
@@ -105,7 +108,7 @@ class RegraspReferencePolicy:
                 if index>=len(self.noise_tape):raise RuntimeError('Frozencandidate noise exhausted before verifiedB handoff; reject rather than inventcontinuation')
                 self.action+=self.noise_tape[index]
             self.action=self.action.clip(-1,1)
-        if incremental:self.offset=np.clip(self.offset+self.action[:27]*self.slew,-self.span,self.span)
+        if incremental or getattr(self,'guided_incremental',False):self.offset=np.clip(self.offset+self.action[:27]*self.slew,-self.span,self.span)
         else:self.offset+=np.clip(self.action[:27]*self.span-self.offset,-self.slew,self.slew)
         advance=0. if getattr(self,'free_motor',False) else float(phase_increment(np.asarray(self.action[27]),self.timing))
         self.phase=min(len(self.motor)-1.0001,self.phase+advance);i=int(self.phase);a=self.phase-i
@@ -114,6 +117,8 @@ class RegraspReferencePolicy:
         # this episode's actual object state and all velocities/history.
         if incremental:
             guide=target+self.correction;target=np.clip(issued+np.clip(guide+self.offset-issued,-self.slew,self.slew),self.low,self.high);self.offset=target-guide;ik={'scope':'All27 jointanchor motor commands, original bounds and totalslew; no IK follower'}
+        elif getattr(self,'guided_incremental',False):
+            guide=target+self.correction;target=issued+np.clip(guide+self.offset-issued,-self.slew,self.slew);ik={'scope':'149-observation reference guided incremental motor commands; original total slew'}
         else:
             adapted,ik=self.kin.solve_near(self.correction@self.kin.forward(target[:7]),q[:7],max_step=.12)
             target[:7]=adapted;target+=self.offset

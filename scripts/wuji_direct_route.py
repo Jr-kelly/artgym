@@ -36,6 +36,11 @@ class DirectRoute:
             self.runtime=dict(motion=motion, liveO=O.copy(), correction=O@np.linalg.inv(refO),
                 live_arm=issued_arm.copy(), live_hand=issued_hand.copy(), seed=issued_arm.astype(float).copy(),
                 hand_offset=issued_hand-prior['issued_target'][7:])
+            if stage.get('whole_grip_gravity_transport'):
+                from scripts.wuji_whole_grip_gravity_transport import WholeGripGravityTransport
+                self.runtime['gravity_transport']=WholeGripGravityTransport(stage['whole_grip_gravity_transport'],self.output)
+                self.runtime['captured_L']=np.linalg.inv(O)@self.k.forward(arm)
+                self.runtime['captured_hand']=hand.astype(float).copy()
             if 'direct_material_carrier' in motion:
                 from scripts.wuji_direct_material_carrier import DirectMaterialCarrier
                 self.runtime['material_carrier']=DirectMaterialCarrier(motion['direct_material_carrier'],self.output)
@@ -156,6 +161,13 @@ class DirectRoute:
         hq=refhand+hand_offset
         if stage.get('hold_acquired_hand_targets',False):
             hq=state['live_hand'].copy()
+        if 'gravity_transport' in state:
+            if stage.get('gravity_rotation_fraction_rows'):
+                timetable=np.array(stage['gravity_rotation_fraction_rows'])
+                fraction=float(np.interp(age,timetable[:,0],timetable[:,1]))
+                axis=state['liveO'][:3,:3]@np.array(stage['gravity_rotation_axis_knife'])
+                R=Rotation.from_rotvec(axis*np.deg2rad(stage['gravity_rotation_degrees'])*fraction).as_matrix()
+            hq=state['gravity_transport'].command(R,state['captured_L'],state['captured_hand'],state['live_hand'],state['liveO'][:3,:3])
         if 'primary_patch' in state:
             hq=state['primary_patch'].correct(age,O,arm,hand,issued_hand,hq,slider)
         if 'grip_roll_servo' in state:

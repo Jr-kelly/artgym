@@ -1,0 +1,19 @@
+"""New balanced table pickup followed by a free-wrist full-arm half-turn.
+
+Reference tuple is read only for motor adaptation, never simulator init. Coupled
+gravity preload uses captured current geometry and a planned rotation only.
+"""
+import argparse,json,subprocess,shutil,sys
+from pathlib import Path
+import numpy as np
+from scripts.record_wuji_flat_table_event import record
+
+def main():
+ p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False);gpath=Path('runs/flat-table-20261006/direct/preparation/balanced-pad-wholearm-free-wrist-widthflip-v876/result.json');geometry=json.loads(gpath.read_text());assert geometry['geometry_permits_native'];src=Path(geometry['source']);z=np.load(src/'trace.npz');i=geometry['source_frame'];prior=a.output/'read-only-motor-prior';prior.mkdir();np.savez_compressed(prior/'takeover.npz',robot_q=np.r_[z['arm_q'][i],z['q'][i]],issued_target=z['applied_target'][i],object_state=z['object'][i],slider_q=z['slider'][i]);(prior/'manifest.json').write_text(json.dumps(dict(role='Read-only motor reference, notphysicalinitialization orstatewriter',source=str(src/'trace.npz'),frame=i),indent=2));motor=a.output/'widthflip-motor.json';motor.write_text(json.dumps(dict(rows=geometry['rows'],required_actual_source=str(prior),scope=__doc__),indent=2));basepath=Path('runs/flat-table-20261006/direct/development/balanced-flexed-pad-fresh-lift-v868');base=json.loads((basepath/'prefix.json').read_text());s=base['direct_pickup'];first=s['continuous_stages'][0];first.update(duration_s=6.,world_translation_m=[0,0,.15],world_translation_duration_s=5.);duration=geometry['rows'][-1]['time_s'];gravity=json.loads(Path('runs/flat-table-20261006/direct/preparation/balanced-wholegrip-widthaxis-negative-gravity-v874/result.json').read_text());stage=dict(name='wholearm_free_wrist_widthflip',duration_s=duration+2.,source=str(prior),motor=str(motor),preserve_actual_grip=True,hold_acquired_hand_targets=True,roll_free_position=False,whole_grip_gravity_transport=dict(hand_kp=s['hand_kp'],contact_material_points=gravity['contact_material_points']),gravity_rotation_fraction_rows=[[r['time_s'],r['angle_deg']/180]for r in geometry['rows']],gravity_rotation_axis_knife=[-1,0,0],gravity_rotation_degrees=180.);s['continuous_stages']=[first,stage];base['duration_s']=12+duration+2.;base['development_abort_min_knife_height']=dict(after_elapsed_s=12.,minimum_z_m=.78);base['scope']=__doc__;prefix=a.output/'prefix.json';prefix.write_text(json.dumps(base,indent=2));cmd=json.loads((basepath/'command.json').read_text());cmd[0]=sys.executable
+ for flag,value in [('--flat-table-prefix',str(prefix)),('--output',str(a.output/'simulation'))]:cmd[cmd.index(flag)+1]=value
+ (a.output/'command.json').write_text(json.dumps(cmd,indent=2));runtime=a.output/'controller-source';runtime.mkdir()
+ for name in ['prepare_wuji_free_wrist_fresh_widthflip.py','wuji_direct_route.py','wuji_direct_pickup.py','wuji_whole_grip_gravity_transport.py','run_g2_flat_table_demo.py']:shutil.copyfile(Path('scripts')/name,runtime/name)
+ record('wholearm_free_wrist_widthflip_actual_fresh_started_v877',[str(a.output/'command.json'),str(gpath)],dict(total_seconds=base['duration_s'],wholearm_rotation_s=duration,scope=__doc__,initialization='Onlyfreshflat table, no stage setters',captured_gravity_max_motor_delta_rad=gravity['max_motor_delta_rad']),updates={'add_active_jobs':[str(a.output)]},next_step='Actualfresh47s widthflip, allH/carry/O determinesownentry and originalfullB; no geometrysuccessclaim')
+ try:subprocess.run(cmd,check=True)
+ finally:record('wholearm_free_wrist_widthflip_actual_terminal_v877',[str(a.output/'simulation')],updates={'remove_active_jobs':[str(a.output)]},next_step='Assessactualearliestfailure orcapentry; fullB onlywhenactualcarriedentry, nostaticforcegrid')
+if __name__=='__main__':main()
