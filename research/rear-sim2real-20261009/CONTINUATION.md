@@ -1,3 +1,5 @@
+离线交付已完成，公开Release：https://github.com/Jr-kelly/artgym/releases/tag/wuji-rear-sim2real-20261009-v2。本轮默认v7，真机未运行。
+
 # 当前接续：rear-sim2real v2（短试推与现场响应诊断）
 
 沿用当前同一独立副本 `/data/research/artgym-experiments-20260921/rear-sim2real-20261009`，分支 `feat/wuji-rear-sim2real-20261009`，未回退旧12c2894外部审查提交。先读 `v2/REPORT.md`、`FIRST-HARDWARE-SESSION.md`、`v2/STATE.json`，当前默认 `bundle-deploy-v7.json`；v6与v1 Release是历史固定证据，恢复旧源码再用旧pin，不可把旧哈希硬套新源码。
@@ -10,7 +12,7 @@ v2只新增3条物理仿真：标称短试推4.5145mm（误差−0.4855mm、末1
 
 下一步仅需现场的真实响应数据、尺测短推／保持、近景接触与侧面滚转视频、固件限位和原始时间戳。按guide从discover/read开始，现场首次使能与明确运动授权后检查20关节、hold、response、analysis、临时补偿profile、probe；短推失败不继续fullpush。位置日志无法辨识真实力、全部K、摩擦或纯USB时延，不宣称sim2real解决。不默认增压、训练或追加同质实验。
 
-v2公开增量依赖v1已验证根；旧模型／资产复用，当前343个依赖哈希在v2/DEPENDENCIES，实际冻结sha 47709399dd02874cebdd7766f263738bb1b9a315d4bd00fe1d5c2e41f4badef2。新v2同步／Release回执随后记录在v2目录，v1旧回执保留。私人附件未复制到公开材料。
+v2公开增量依赖v1已验证根；旧模型／资产复用，当前343个依赖哈希在v2/DEPENDENCIES，实际冻结sha 47709399dd02874cebdd7766f263738bb1b9a315d4bd00fe1d5c2e41f4badef2。v2同步／Release／完整公开下载哈希回执均在v2目录；v1旧回执保留。私人附件未复制到公开材料。
 
 本轮实验进程已结束（UTC 2026-10-08T20:35:21.312542+00:00）；上述PID和GPU单次11%是开始时快照，不作为当前或四小时合规事实，接手要重查。用户monitor和原视频server继续保留，无填充计算。
 
