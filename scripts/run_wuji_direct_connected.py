@@ -32,7 +32,7 @@ def main():
     (a.output/'prefix.json').write_text(json.dumps(prefix,indent=2))
     cmd=json.loads(Path('runs/flat-table-20261006/direct/development/center-load-feedback-v8/command.json').read_text());cmd[0]=sys.executable
     for key,value in [('--output',str(a.output/'simulation')),('--flat-table-prefix',str(a.output/'prefix.json')),
-                      ('--knife-asset',str(a.knife_asset)),('--newknife-resistance',str(a.resistance))]:
+                      ('--task-stroke-m',str(prefix.get('retained_push_skill',{}).get('task_stroke_m',.035 if 'retained_push_skill'in prefix else .03))),('--knife-asset',str(a.knife_asset)),('--newknife-resistance',str(a.resistance))]:
         cmd[cmd.index(key)+1]=value
     cmd += ['--close-camera-direction']+[str(x) for x in a.close_camera_direction]
     if a.support_camera_direction:

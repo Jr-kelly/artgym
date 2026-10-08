@@ -257,6 +257,15 @@ class RegraspContract(unittest.TestCase):
         del p.spec['object_pose_feedback_components']
         command(*args)
         self.assertEqual(targets[-1][2,3],.94)
+        p.spec['object_pose_feedback_components']='world-stabilized'
+        command(*args)
+        self.assertAlmostEqual(targets[-1][2,3],1.0125)
+        np.testing.assert_allclose(targets[-1][:3,:3],Rotation.from_euler('z',-.1).as_matrix(),atol=1e-12)
+        p.spec['pose_error_phase_governor']=True
+        command(*args)
+        self.assertEqual(p.governed_age,0.)
+        command(p,.6,p.initial_object.copy(),np.zeros(7),np.zeros(20),np.zeros(7),np.zeros(20))
+        self.assertAlmostEqual(p.governed_age,.1)
 
 
     def test_149_guided_incremental_native_matches_training_motor_step(self):

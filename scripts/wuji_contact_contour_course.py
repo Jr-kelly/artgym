@@ -1,6 +1,7 @@
 """Coupled motor course with a rotating whole-pad pressure coordinate.
 
-One initial knife-axis estimate, measured joints and issued motor history only.
+Default uses one initial knife-axis estimate and joint/motor history. Explicit
+whole-object feedback modes use simulator pose and are simulation-oracle only.
 The pressure estimate is a single-pad deflection proxy, not measured force.
 All original physical limits, finite torque, contact and gravity remain active.
 """
@@ -20,6 +21,8 @@ class ContactContourCourse:
   age=t-self.start;assert age>=-1e-7
   if not self.ready:
    self.ready=True;self.initial_object=O.copy();self.initial_arm=np.asarray(issued_arm).copy();self.initial_hand=np.asarray(issued_hand).copy();self.initial_q=np.asarray(q).copy();self.knife_rotation=O[:3,:3].copy();self.initial_arm_measured=np.asarray(arm).copy();self.body_wrist_anchor=np.linalg.inv(O)@self.kin.forward(arm)@np.linalg.inv(self.wrist_rows[0]) if self.wrist_rows is not None else None;self.old_thumb_preload=self.initial_hand[16:]-self.initial_q[16:];spec=json.loads(Path('runs/newknife-20261005/configs/pressure120.json').read_text());spec['normal_correction_coordinates']='cartesian-normal';spec['prefix_freeze_s']=1e9;self.pressure=NativeJointDeflectionPressure(spec,np.array([0,1.,0]),self.kp)
+  if self.spec.get('pose_error_phase_governor'):
+   delta=max(0.,t-getattr(self,'last_course_clock',t));self.last_course_clock=t;translation_error=float(np.linalg.norm(O[:3,3]-self.initial_object[:3,3]));rotation_error=float(Rotation.from_matrix(O[:3,:3]@self.initial_object[:3,:3].T).magnitude());self.governed_age=getattr(self,'governed_age',0.)+(delta if translation_error<.004 and rotation_error<.08 else 0.);age=self.governed_age
   arm_ref=np.array([np.interp(age,self.times,self.arms[:,j]) for j in range(7)]);hand_ref=np.array([np.interp(age,self.times,self.hands[:,j]) for j in range(20)]);normal=np.array([np.interp(age,self.times,self.normals[:,j]) for j in range(3)]);normal/=np.linalg.norm(normal)
   if self.spec.get('knife_pose_coordinates')=='live-sim-oracle':self.knife_rotation=O[:3,:3].copy()
   self.pressure.normal=self.kin.forward(arm)[:3,:3].T@self.knife_rotation@normal
@@ -40,7 +43,9 @@ class ContactContourCourse:
    ix=int(np.clip(np.searchsorted(self.times,age,side='right')-1,0,len(self.times)-2));f=np.clip((age-self.times[ix])/(self.times[ix+1]-self.times[ix]),0,1);A=self.wrist_rows[ix];B=self.wrist_rows[ix+1];X=np.eye(4);X[:3,3]=A[:3,3]*(1-f)+B[:3,3]*f;X[:3,:3]=A[:3,:3]@Rotation.from_rotvec(Rotation.from_matrix(A[:3,:3].T@B[:3,:3]).as_rotvec()*f).as_matrix()
    feedback_object=O.copy()
    if self.spec.get('object_pose_feedback_components')=='rotation':feedback_object[:3,3]=self.initial_object[:3,3]
+   if self.spec.get('object_pose_feedback_components')=='world-stabilized':
+    error_rotation=Rotation.from_matrix(O[:3,:3]@self.initial_object[:3,:3].T).as_rotvec();error_rotation*=min(1.,.25/max(1e-12,np.linalg.norm(error_rotation)));feedback_object=self.initial_object.copy();feedback_object[:3,3]-=.5*np.clip(O[:3,3]-self.initial_object[:3,3],-.025,.025);feedback_object[:3,:3]=Rotation.from_rotvec(-.5*error_rotation).as_matrix()@self.initial_object[:3,:3]
    arm_ref,ik=self.kin.solve_near(feedback_object@self.body_wrist_anchor@X,arm,max_step=.08,minimum_margin=.01);arm=arm_ref+self.initial_arm-self.initial_arm_measured
   else:arm=arm_ref+self.initial_arm-self.arms[0]
   arm=issued_arm+np.clip(arm-issued_arm,-.006,.006);hand=issued_hand+np.clip(hand-issued_hand,-.025,.025);hand=np.clip(hand,self.hand.lower,self.hand.upper);self.pressure.commit_issued(hand,desired)
-  self.stream.write(json.dumps({'time_s':float(t),'course_age_s':float(age),'normal_outward_knife':normal.tolist(),'old_side_preload_remaining':float(1-u),'preload_release_basis':self.spec.get('preload_release_basis','elapsed'),'knife_pose_coordinates':self.spec.get('knife_pose_coordinates','once-initial'),'whole_wrist_pose_feedback':self.wrist_rows is not None,'preparation_pressure_feedback':self.spec.get('preparation_pressure_feedback',True),'wrist_pose_ik':ik,'estimated_normal_pressure_N':self.pressure.last_estimate,'motor_thumb_q':hand[16:].tolist(),'scope':'All27 coupledknownmotorcourse, onceestimatedknifeaxes, measuredjoints/issuedhistory; no contacttruth/statewrites/constantforceclaim'})+'\n');return arm,hand
+  self.stream.write(json.dumps({'time_s':float(t),'course_age_s':float(age),'normal_outward_knife':normal.tolist(),'old_side_preload_remaining':float(1-u),'preload_release_basis':self.spec.get('preload_release_basis','elapsed'),'knife_pose_coordinates':self.spec.get('knife_pose_coordinates','once-initial'),'whole_wrist_pose_feedback':self.wrist_rows is not None,'object_pose_feedback_components':self.spec.get('object_pose_feedback_components'),'pose_error_phase_governor':self.spec.get('pose_error_phase_governor',False),'preparation_pressure_feedback':self.spec.get('preparation_pressure_feedback',True),'wrist_pose_ik':ik,'estimated_normal_pressure_N':self.pressure.last_estimate,'motor_thumb_q':hand[16:].tolist(),'scope':'All27 coupledknownmotorcourse, onceestimatedknifeaxes, measuredjoints/issuedhistory; no contacttruth/statewrites/constantforceclaim'})+'\n');return arm,hand

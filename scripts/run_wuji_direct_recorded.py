@@ -19,6 +19,7 @@ for name in ['run_g2_flat_table_demo.py','g2_contact_geometry.py','g2_kinematics
 (runtime/'manifest.json').write_text(json.dumps(dict(source_sha256=source_hashes,actual_source=str(a.source),motor_sha256=hashlib.sha256(a.motor.read_bytes()).hexdigest(),scope='Controller source snapshot only; actual-state development still lacks exact robot velocity/contact cache'),indent=2))
 c=json.load(open('runs/flat-table-20261006/direct/development/center-load-feedback-v8/command.json'));c[0]=sys.executable
 i=c.index('--flat-table-prefix');del c[i:i+2]
+requested_stroke=float(motor_metadata.get('retained_push_skill',{}).get('task_stroke_m',.035 if 'retained_push_skill'in motor_metadata else .03));assert .020<requested_stroke<=.035;c[c.index('--task-stroke-m')+1]=str(requested_stroke)
 c[c.index('--seconds')+1]=str(a.seconds);c[c.index('--output')+1]=str(a.output/'simulation');c+=['--recorded-handoff',str(a.source),'--recorded-support-command',str(a.motor),'--close-camera-direction']+[str(x) for x in a.close_camera_direction]
 if a.support_camera_direction:c+=['--support-camera-direction']+[str(x) for x in a.support_camera_direction]
 (a.output/'command.json').write_text(json.dumps(c,indent=2));record('direct_recorded_native_start',[str(a.output/'command.json'),str(a.motor)],config={'uncertainty':a.uncertainty,'decision':a.decision,'seconds':a.seconds,'scope':source_manifest['scope'] if ideal else 'Short actualstate development; missing exactrobotvelocity/contactcache; no final acceptance'},updates={'add_active_jobs':[str(a.output)]},next_step=a.decision)
