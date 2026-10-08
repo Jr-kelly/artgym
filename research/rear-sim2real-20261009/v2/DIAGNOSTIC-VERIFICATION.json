@@ -1,0 +1,188 @@
+{
+  "checks": {
+    "known_shift_0": true,
+    "known_shift_1": true,
+    "no_excitation_not_estimated": true,
+    "closed_loop_not_identified": true,
+    "prefix_clock_exact": true,
+    "endpoint_frozen": true,
+    "braking_rate_continuity": true,
+    "physical_recorded_prefix_same_commands": true
+  },
+  "passed": true,
+  "algorithm_signals_scope": "30Hz rich synthetic signals with static95mrad offset and zero/one additional frame; not physical simulations",
+  "signal_lag_examples": [
+    {
+      "status": "coarse_position_lag_supported",
+      "reasons": [],
+      "sampling_period_ms": 33.333333333333215,
+      "window_s": [
+        1.3333333333333333,
+        5.966666666666667
+      ],
+      "estimate_samples": 0,
+      "estimate_ms": 0.0,
+      "resolution_ms": 33.333333333333215,
+      "credible_sampling_bin_ms": [
+        0,
+        33.333333333333215
+      ],
+      "bin_scope": "Conservative one-sampling-period neighborhood, not statistical or system identification confidence interval",
+      "descriptive_best_fit": {
+        "lag_samples": 0,
+        "lag_ms": 0.0,
+        "shape_fit_rmse_rad": 6.32632245318061e-18,
+        "amplitude_gain": 0.9999999999999994
+      },
+      "candidates": [
+        {
+          "lag_samples": -2,
+          "lag_ms": -66.66666666666643,
+          "shape_fit_rmse_rad": 0.00582818608757797,
+          "amplitude_gain": 0.6361647037176165
+        },
+        {
+          "lag_samples": -1,
+          "lag_ms": -33.333333333333215,
+          "shape_fit_rmse_rad": 0.0032587793664360823,
+          "amplitude_gain": 0.9058410642018093
+        },
+        {
+          "lag_samples": 0,
+          "lag_ms": 0.0,
+          "shape_fit_rmse_rad": 6.32632245318061e-18,
+          "amplitude_gain": 0.9999999999999994
+        },
+        {
+          "lag_samples": 1,
+          "lag_ms": 33.333333333333215,
+          "shape_fit_rmse_rad": 0.003058437288869421,
+          "amplitude_gain": 0.9005766267240791
+        },
+        {
+          "lag_samples": 2,
+          "lag_ms": 66.66666666666643,
+          "shape_fit_rmse_rad": 0.005544120212614797,
+          "amplitude_gain": 0.6187757050165147
+        },
+        {
+          "lag_samples": 3,
+          "lag_ms": 99.99999999999964,
+          "shape_fit_rmse_rad": 0.006738660117426089,
+          "amplitude_gain": 0.2174013108281495
+        },
+        {
+          "lag_samples": 4,
+          "lag_ms": 133.33333333333286,
+          "shape_fit_rmse_rad": 0.007075688320089476,
+          "amplitude_gain": -0.1826926645350443
+        },
+        {
+          "lag_samples": 5,
+          "lag_ms": 166.66666666666606,
+          "shape_fit_rmse_rad": 0.006369845565383171,
+          "amplitude_gain": -0.501869449025496
+        },
+        {
+          "lag_samples": 6,
+          "lag_ms": 199.9999999999993,
+          "shape_fit_rmse_rad": 0.004599135055957663,
+          "amplitude_gain": -0.793115059121666
+        }
+      ],
+      "scope": "Integer sample shift, no interpolation or sub-sample millisecond precision; amplitude gain is not stiffness"
+    },
+    {
+      "status": "coarse_position_lag_supported",
+      "reasons": [],
+      "sampling_period_ms": 33.333333333333215,
+      "window_s": [
+        1.3333333333333333,
+        5.966666666666667
+      ],
+      "estimate_samples": 1,
+      "estimate_ms": 33.333333333333215,
+      "resolution_ms": 33.333333333333215,
+      "credible_sampling_bin_ms": [
+        0,
+        66.66666666666643
+      ],
+      "bin_scope": "Conservative one-sampling-period neighborhood, not statistical or system identification confidence interval",
+      "descriptive_best_fit": {
+        "lag_samples": 1,
+        "lag_ms": 33.333333333333215,
+        "shape_fit_rmse_rad": 4.477950394502301e-18,
+        "amplitude_gain": 0.9999999999999998
+      },
+      "candidates": [
+        {
+          "lag_samples": -2,
+          "lag_ms": -66.66666666666643,
+          "shape_fit_rmse_rad": 0.007201943204361838,
+          "amplitude_gain": 0.2649344222193727
+        },
+        {
+          "lag_samples": -1,
+          "lag_ms": -33.333333333333215,
+          "shape_fit_rmse_rad": 0.005812722991062587,
+          "amplitude_gain": 0.6299861526398843
+        },
+        {
+          "lag_samples": 0,
+          "lag_ms": 0.0,
+          "shape_fit_rmse_rad": 0.0031469545823232916,
+          "amplitude_gain": 0.889214770871745
+        },
+        {
+          "lag_samples": 1,
+          "lag_ms": 33.333333333333215,
+          "shape_fit_rmse_rad": 4.477950394502301e-18,
+          "amplitude_gain": 0.9999999999999998
+        },
+        {
+          "lag_samples": 2,
+          "lag_ms": 66.66666666666643,
+          "shape_fit_rmse_rad": 0.0031113783719342483,
+          "amplitude_gain": 0.898290143781207
+        },
+        {
+          "lag_samples": 3,
+          "lag_ms": 99.99999999999964,
+          "shape_fit_rmse_rad": 0.005479169173881496,
+          "amplitude_gain": 0.6069853890375706
+        },
+        {
+          "lag_samples": 4,
+          "lag_ms": 133.33333333333286,
+          "shape_fit_rmse_rad": 0.006989990805019332,
+          "amplitude_gain": 0.2179708586353964
+        },
+        {
+          "lag_samples": 5,
+          "lag_ms": 166.66666666666606,
+          "shape_fit_rmse_rad": 0.007380277531472467,
+          "amplitude_gain": -0.17069989729822302
+        },
+        {
+          "lag_samples": 6,
+          "lag_ms": 199.9999999999993,
+          "shape_fit_rmse_rad": 0.006289645595825478,
+          "amplitude_gain": -0.5171077885258497
+        }
+      ],
+      "scope": "Integer sample shift, no interpolation or sub-sample millisecond precision; amplitude gain is not stiffness"
+    }
+  ],
+  "physics_command_prefix_max_error_rad": 0.0,
+  "probe": {
+    "request_m": 0.005,
+    "full_prefix_until_m": 0.004,
+    "unchanged_full_goal": true,
+    "brake_start_s": 1.0397957069203603,
+    "reference_endpoint_s": 1.1369339384318433,
+    "brake_duration_s": 0.19427646302296608,
+    "hold_start_s": 1.2340721699433264,
+    "scope": "Known reference clock only; does not read actual slider, contact or pose"
+  },
+  "real_robot_ran": false
+}

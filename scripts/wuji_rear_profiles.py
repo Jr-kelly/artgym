@@ -5,7 +5,7 @@ import numpy as np
 
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def main():
-    p=argparse.ArgumentParser();p.add_argument('mode',choices=['device-template','confirm-device','confirm-response']);p.add_argument('--bundle',type=Path,default=Path('research/rear-sim2real-20261009/bundle-deploy-v6.json'));p.add_argument('--output',type=Path,required=True);p.add_argument('--device-profile',type=Path);p.add_argument('--evidence',type=Path,nargs='+');p.add_argument('--operator-confirmed',action='store_true');p.add_argument('--normal-force-calibrated',action='store_true');a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('mode',choices=['device-template','confirm-device','confirm-response']);p.add_argument('--bundle',type=Path,default=Path('research/rear-sim2real-20261009/bundle-deploy-v7.json'));p.add_argument('--output',type=Path,required=True);p.add_argument('--device-profile',type=Path);p.add_argument('--evidence',type=Path,nargs='+');p.add_argument('--operator-confirmed',action='store_true');p.add_argument('--normal-force-calibrated',action='store_true');a=p.parse_args()
     if a.output.exists():raise FileExistsError(a.output)
     s=json.loads(a.bundle.read_text());utc=datetime.datetime.now(datetime.timezone.utc).isoformat()
     if a.mode=='device-template':
@@ -33,16 +33,18 @@ def main():
         else:
             if any(r['mode']!='response' for r in data):raise ValueError('Use actual loaded response logs')
             if any(r['loop_ms']['max'] is None or r['loop_ms']['max']>1000/30 for r in data):raise ValueError('Complete read/write/ack/log cycle exceeded 33.33ms')
-            ranges=[]
+            ranges=[];analyses=[]
             for folder in a.evidence:
                 rows=[json.loads(l) for l in (folder/'control.jsonl').read_text().splitlines() if json.loads(l)['phase']=='loaded_local_response']
                 if len(rows)<30:raise ValueError('At least one second of local loaded response required')
                 q=np.array([r['encoder_model_rad'] for r in rows]);u=np.array([r['issued_target_rad'] for r in rows]);span=np.ptp(u,axis=0);j=int(span.argmax());measured=float(np.ptp(q[:,j]))
                 if span[j]<.003 or measured<.0005:raise ValueError('No measurable local response; inspect direction, preload and firmware')
                 if max(r['loop_ms'] for r in rows)>1000/30:raise ValueError('Loaded 30Hz response timing failed')
+                from scripts.analyze_wuji_rear_response import load
+                analysis,_,_,_,_=load(folder,j);analyses.append(analysis)
                 ranges.append(dict(joint=s['runtime_joint_names'][j],issued_range_rad=float(span[j]),encoder_range_rad=measured,scope='Local position response; no stiffness/force identification'))
             if not fixture and a.device_profile is None:raise ValueError('Verified device profile required')
-            value=dict(format='wuji-local-response-v1',bundle_sha256=sha(a.bundle),device_calibration_sha256=sha(a.device_profile) if a.device_profile else None,source='sdk_fixture_no_device' if fixture else 'hardware_local_response',position_response_verified=True,pressure_compensation_enabled=True,normal_force_calibrated=a.normal_force_calibrated and not fixture,nominal_pressure_stiffness_status='Original effective simulated model remains a working hypothesis; local functional response checked, not identified physical stiffness',local_response=ranges,evidence=[str(x) for x in a.evidence],operator_confirmed=True,verified_utc=utc)
+            value=dict(format='wuji-local-response-v2',bundle_sha256=sha(a.bundle),device_calibration_sha256=sha(a.device_profile) if a.device_profile else None,source='sdk_fixture_no_device' if fixture else 'hardware_local_response',position_response_recorded=True,bounded_probe_permitted=True,full_action_reliability='not_established',response_analysis=analyses,pressure_compensation_enabled=True,normal_force_calibrated=a.normal_force_calibrated and not fixture,nominal_pressure_stiffness_status='Original effective simulated model remains a working hypothesis; local functional response checked, not identified physical stiffness',local_response=ranges,evidence=[str(x) for x in a.evidence],operator_confirmed=True,verified_utc=utc)
             if a.normal_force_calibrated:raise ValueError('Separate aligned force evidence import is not implemented; cannot mark force calibrated from position logs')
     a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(value,indent=2));print(str(a.output))
 if __name__=='__main__':main()

@@ -1,0 +1,62 @@
+{
+  "cases": {
+    "fixture-response-timed": {
+      "samples": 360,
+      "timing_join_complete": true,
+      "full_cycle_p95_ms": 1.90674535,
+      "full_cycle_max_ms": 3.56249,
+      "controller": {
+        "measured_history_frames": 50,
+        "warmup": null,
+        "inference_ms_p50": null,
+        "inference_ms_p95": null,
+        "inference_ms_max": null,
+        "pressure_proxy_enabled": false,
+        "probe": null,
+        "control_hz": 30,
+        "normalization": "Pinned model limits; separately intersect device limits for sending",
+        "inputs": "Encoder q, FK, actual issued commands/actions history, fixed initial estimate and known wrist gravity only"
+      }
+    },
+    "fixture-probe-timed": {
+      "samples": 470,
+      "timing_join_complete": true,
+      "full_cycle_p95_ms": 6.7285753999999995,
+      "full_cycle_max_ms": 12.766772,
+      "controller": {
+        "measured_history_frames": 50,
+        "warmup": {
+          "iterations": 8,
+          "wall_ms": 504.824462113902,
+          "measured_history_frames": 50,
+          "commands_issued": 0,
+          "discarded_computed_targets": 8,
+          "rnn_state_restored": true,
+          "reference_and_command_state_restored": true,
+          "scope": "Full model/control warmup with isolated state; no synthetic measured history or issued motor command, not hardware latency verification"
+        },
+        "inference_ms_p50": 4.2793480679392815,
+        "inference_ms_p95": 5.644254223443566,
+        "inference_ms_max": 10.644668014720082,
+        "pressure_proxy_enabled": true,
+        "probe": {
+          "request_m": 0.005,
+          "full_prefix_until_m": 0.004,
+          "unchanged_full_goal": true,
+          "brake_start_s": 1.0397957069203603,
+          "reference_endpoint_s": 1.1369339384318433,
+          "brake_duration_s": 0.19427646302296608,
+          "hold_start_s": 1.2340721699433264,
+          "scope": "Known reference clock only; does not read actual slider, contact or pose"
+        },
+        "control_hz": 30,
+        "normalization": "Pinned model limits; separately intersect device limits for sending",
+        "inputs": "Encoder q, FK, actual issued commands/actions history, fixed initial estimate and known wrist gravity only"
+      }
+    }
+  },
+  "scope": "SDK-shaped no-device fixtures; no USB physical lag or contact success",
+  "real_robot_ran": false,
+  "final_read_envelope_samples_verified": 30,
+  "bundle_sha256": "47709399dd02874cebdd7766f263738bb1b9a315d4bd00fe1d5c2e41f4badef2"
+}

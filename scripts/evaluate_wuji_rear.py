@@ -11,3 +11,17 @@ def evaluate(t,spec,push_start):
     opids=np.flatnonzero(op);first_lost=np.flatnonzero(lost)
     checks=dict(actual_model_limits=bool(legal.all()),active_over20mm=bool((disp[hold]>.020).all()),hold_1s_range_under2mm=bool(np.ptp(t['slider'][hold])<=.002),independent_hold_established=bool(t['support'][settle].mean()>=.95),no_tray_after_release=bool(not t['traycontact'][time>spec['release_seconds']+.05].any()),body_drift_under30mm=bool(drift[op].max()<.030),body_rotation_under06rad=bool(rotation[op].max()<.6),no_drop=bool((t['object'][time>=push_start,2]>.65).all()),thumb_contact_over90pct=bool(t['thumb'][op].mean()>=.9))
     return dict(passed=all(checks.values()),checks=checks,active_displacement_mm=float(disp[hold].mean()*1000),min_hold_displacement_mm=float(disp[hold].min()*1000),hold_range_mm=float(np.ptp(t['slider'][hold])*1000),body_max_drift_mm=float(drift[op].max()*1000),body_max_rotation_rad=float(rotation[op].max()),thumb_contact_fraction=float(t['thumb'][op].mean()),support_contact_fraction=float(t['support'][op].mean()),actual_joint_min_margin_rad=float(margin.min()),actual_joint_limit_violation=bool(not legal.all()),joint_near_boundary_fraction=(margin<.005).mean(0).tolist(),motor_torque_saturated_fraction=t['saturated'][op].mean(0).tolist(),first_failure_s=dict(loss_non_thumb_support=first((time>=spec['release_seconds']+.5)&~t['support']),sustained_thumb_loss=float(time[opids[first_lost[0]]]) if len(first_lost) else None,actual_limit=first(~legal),drift=first(op&(drift>=.030)),rotation=first(op&(rotation>=.6)),drop=first((time>=spec['release_seconds'])&(t['object'][:,2]<.65))),active_reference_time_s=float(time[start]),hold_duration_s=float(time[-1]-time[np.flatnonzero(hold)[0]]+1/30),normal_force_scope='30Hz sampled simulated normal solver contribution N; axial friction force unavailable',inference_truth_inputs=False,initialization='Open hand, physical placement tray, approach3s, remove tray,2s actual free holding/history,6s push/hold; no snapshot state restore')
+
+
+def evaluate_diagnostic(t,spec,push_start,operation):
+    r=evaluate(t,spec,push_start);checks=r['checks'];checks.pop('active_over20mm')
+    checks['independent_support_over95pct']=r['support_contact_fraction']>=.95
+    steps=np.max(np.abs(np.diff(t['target'],axis=0)),axis=0)
+    checks['issued_step_under025rad']=bool(steps.max()<=.025001)
+    if operation=='probe':
+        d=r['active_displacement_mm']
+        checks.update(real_active_progress_min1mm=r['min_hold_displacement_mm']>=1.,request_error_under3mm=abs(d-5)<=3)
+        r.update(request_mm=5.,request_error_mm=d-5.,acceptance='Predeclared v2/ACCEPTANCE.json, bounded diagnostic only; not full task pass')
+    else:r['acceptance']='Physical loaded single-joint response sample; no slider task success claim'
+    r.update(passed=all(checks.values()),operation=operation,max_issued_step_rad=float(steps.max()))
+    return r

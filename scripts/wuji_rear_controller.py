@@ -15,7 +15,7 @@ def load_bundle(path):
         if hashlib.sha256((ROOT/p).read_bytes()).hexdigest()!=sha:raise ValueError('Pinned dependency changed: '+p)
     return s
 class RearController:
-    def __init__(self,spec,pressure_enabled=True,estimate_delta_m=None):
+    def __init__(self,spec,pressure_enabled=True,estimate_delta_m=None,operation="push"):
         self.spec=spec
         cfg=configuration('wuji_geometry',1,['object=knife_wuji_real_size_20261002','hand=wuji_paper_official_actuator','+task.env.geometryRound=real-size-student-adaptation-20261002'],train='wujiAcquisitionSAPG',seed=2026100301)
         self.cfg=cfg;self.policy=G2R800Policy(cfg,ROOT/spec['teacher'],ROOT/spec['student'],geometry=spec['geometry_estimate'],residual_checkpoint=ROOT/spec['residual'],thumb_reference_override=ROOT/spec['reference'])
@@ -27,6 +27,10 @@ class RearController:
             self.policy.pressure_adapter.model.axial[0]=torch.as_tensor(self.object_est[:3,2],dtype=torch.float32)
         self.lower=np.asarray(spec['model_lower_rad']);self.upper=np.asarray(spec['model_upper_rad'])
         self.issued=None;self.last_action=np.zeros(20,dtype=np.float32);self.taken=False;self.pending=None;self.warmup=None
+        self.operation=operation;self.probe=None
+        if operation=="probe":
+            from scripts.wuji_rear_diagnostics import ShortProbe
+            self.probe=ShortProbe(spec["stroke_m"],self.policy.thumb_reference.duration)
         self.latencies=[];self.gravity=np.asarray(spec['wrist_world'])[:3,:3].T@np.array([0,0,-1.])
     def observe(self,q):
         q=np.asarray(q,dtype=np.float64)
@@ -47,7 +51,11 @@ class RearController:
         if not self.taken:self.takeover(q)
         previous=self.issued.copy();begin=time.perf_counter()
         ref=self.policy.thumb_reference
-        complete=(float(ref.age[0])*ref.dt>=ref.duration+1/30-1e-7) if ref.pacing else elapsed_s>=ref.duration+1/30-1e-7
+        if self.probe:
+            virtual=self.probe.clock(elapsed_s)
+            if not torch.isnan(ref.previous_goal).any():ref.age[:]=virtual/ref.dt
+            complete=elapsed_s>=self.probe.finish+ref.dt-1e-7
+        else:complete=(float(ref.age[0])*ref.dt>=ref.duration+1/30-1e-7) if ref.pacing else elapsed_s>=ref.duration+1/30-1e-7
         target,_=self.policy.command(q,self.spec['stroke_m'],wrist_gravity=self.gravity,clock_s=16.+elapsed_s,issued_target_hold=complete)
         if torch.cuda.is_available():torch.cuda.synchronize()
         self.latencies.append((time.perf_counter()-begin)*1000)
@@ -81,4 +89,4 @@ class RearController:
         self.issued=sent;self.pending=None
     def summary(self):
         a=np.asarray(self.latencies)
-        return dict(measured_history_frames=len(self.policy.history),warmup=self.warmup,inference_ms_p50=float(np.median(a)) if len(a) else None,inference_ms_p95=float(np.quantile(a,.95)) if len(a) else None,inference_ms_max=float(a.max()) if len(a) else None,pressure_proxy_enabled=self.policy.pressure_adapter is not None,control_hz=30,normalization='Pinned model limits; separately intersect device limits for sending',inputs='Encoder q, FK, actual issued commands/actions history, fixed initial estimate and known wrist gravity only')
+        return dict(measured_history_frames=len(self.policy.history),warmup=self.warmup,inference_ms_p50=float(np.median(a)) if len(a) else None,inference_ms_p95=float(np.quantile(a,.95)) if len(a) else None,inference_ms_max=float(a.max()) if len(a) else None,pressure_proxy_enabled=self.policy.pressure_adapter is not None,probe=None if self.probe is None else self.probe.metadata(),control_hz=30,normalization='Pinned model limits; separately intersect device limits for sending',inputs='Encoder q, FK, actual issued commands/actions history, fixed initial estimate and known wrist gravity only')

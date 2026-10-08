@@ -39,13 +39,13 @@ class SDKBackend:
         return v
     def request(self,op,**kwargs):self.f.write(json.dumps(dict(op=op,**kwargs))+'\n');self.f.flush();return self.receive()
     def read(self):
-        r=self.request('read');v=r['data'];q=self.to_model(v['measured']['values'])
+        begin=time.monotonic_ns();r=self.request('read');end=time.monotonic_ns();self.last_read_timing=dict(host_request_start_ns=begin,host_ack_ns=end,host_ipc_roundtrip_ms=(end-begin)/1e6,sdk_operation_ms=r.get('sdk_operation_ns',0)/1e6);v=r['data'];q=self.to_model(v['measured']['values'])
         if not np.isfinite(q).all():raise ValueError('Nonfinite device readings')
         if np.any(np.asarray(v['error_codes'])!=0):raise RuntimeError('Device reports joint errors')
         return q,v
     def write(self,model):
         if np.any(model<self.lower) or np.any(model>self.upper):raise ValueError('Device limits')
-        r=self.request('write',target_rad=self.to_device(model).tolist())
+        begin=time.monotonic_ns();r=self.request('write',target_rad=self.to_device(model).tolist());end=time.monotonic_ns();self.last_write_timing=dict(host_request_start_ns=begin,host_ack_ns=end,host_ipc_roundtrip_ms=(end-begin)/1e6,sdk_operation_ms=r.get('sdk_operation_ns',0)/1e6)
         return self.to_model(r['data']['issued_target_rad']),r
     def stop(self):return self.request('stop')
     def close(self):

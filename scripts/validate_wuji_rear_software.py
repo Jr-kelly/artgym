@@ -7,7 +7,7 @@ from scripts.wuji_rear_controller import RearController,load_bundle,ROOT
 from scripts.wuji_rear_sdk_backend import SDKBackend
 from isaacgymenvs.deploy.wuji.joint_mapping import WujiJointMapping
 from scripts.record_wuji_rear_event import record
-D=ROOT/'research/rear-sim2real-20261009';bundle=D/'bundle-deploy-v6.json';s=load_bundle(bundle);e={}
+D=ROOT/'research/rear-sim2real-20261009';bundle=D/'bundle-deploy-v7.json';s=load_bundle(bundle);e={}
 m=WujiJointMapping(s['runtime_joint_names']);v=np.arange(20)*.03;e['twenty_joint_mapping_roundtrip']=bool(np.array_equal(m.to_runtime(m.to_sdk(v)),v))
 b=SDKBackend(bundle,'/data/research/artgym-experiments-20260921/contact-transfer-sdk310-venv/bin/python',fixture=True)
 try:
@@ -33,4 +33,4 @@ saved=c.issued.copy();c.taken=False;c.issued=c.upper+.1;approach=c.constrain(c.u
 import inspect
 allowed=set(inspect.signature(c.propose_push).parameters);e['legal_input_signature']=allowed=={'q','elapsed_s'}
 result=dict(checks=e,passed=all(e.values()),source='offline_code_and_sdk_shaped_fixture',real_device_connected=False,real_robot_ran=False,bundle_sha256=hashlib.sha256(bundle.read_bytes()).hexdigest(),scope='Fixture mapping and position transport only; fixture does not simulate contact or prove hardware latency')
-(D/'SOFTWARE-VERIFICATION.json').write_text(json.dumps(result,indent=2));record('rear_software_contract_verification',[D/'SOFTWARE-VERIFICATION.json'],result);print(json.dumps(result));assert result['passed']
+(D/'v2/SOFTWARE-VERIFICATION.json').write_text(json.dumps(result,indent=2));record('rear_software_contract_verification',[D/'v2/SOFTWARE-VERIFICATION.json'],result);print(json.dumps(result));assert result['passed']

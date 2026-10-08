@@ -1,0 +1,114 @@
+{
+  "joint_index": 17,
+  "joint_name": "thumb_joint2",
+  "phase": "loaded_local_response",
+  "source": "physical_simulation",
+  "raw_log": "runs/rear-sim2real-20261009/v2/response-nominal/commands.jsonl",
+  "raw_log_sha256": "355272df9a858c1f8d2cf6ea731b03f00de9eb9d3f0c4a6dfa7d1e404535d568",
+  "samples": 120,
+  "issued_amplitude_rad": 0.010000000000000009,
+  "encoder_amplitude_rad": 0.001933947205543518,
+  "static_loaded_deflection_target_minus_encoder_rad": 0.09532502293586731,
+  "recovery_static_bias_change_rad": 5.8978796005249023e-05,
+  "dynamic_following_rmse_rad": 0.004081816066488684,
+  "dynamic_following_p95_abs_rad": 0.008023105192688828,
+  "lag": {
+    "status": "unable_to_reliably_estimate",
+    "reasons": [
+      "Only one slow excursion; no independent temporal features/repetition to establish lag repeatability under loaded contact"
+    ],
+    "sampling_period_ms": 33.333333333333215,
+    "window_s": [
+      6.666666666666667,
+      10.633333333333333
+    ],
+    "estimate_samples": null,
+    "estimate_ms": null,
+    "resolution_ms": 33.333333333333215,
+    "credible_sampling_bin_ms": null,
+    "bin_scope": "Conservative one-sampling-period neighborhood, not statistical or system identification confidence interval",
+    "descriptive_best_fit": {
+      "lag_samples": 0,
+      "lag_ms": 0.0,
+      "shape_fit_rmse_rad": 2.4637272581724148e-05,
+      "amplitude_gain": 0.18783660729294271
+    },
+    "candidates": [
+      {
+        "lag_samples": -2,
+        "lag_ms": -66.66666666666643,
+        "shape_fit_rmse_rad": 0.00014796902054905616,
+        "amplitude_gain": 0.18493177246636958
+      },
+      {
+        "lag_samples": -1,
+        "lag_ms": -33.333333333333215,
+        "shape_fit_rmse_rad": 8.333425759725035e-05,
+        "amplitude_gain": 0.1871683196349432
+      },
+      {
+        "lag_samples": 0,
+        "lag_ms": 0.0,
+        "shape_fit_rmse_rad": 2.4637272581724148e-05,
+        "amplitude_gain": 0.18783660729294271
+      },
+      {
+        "lag_samples": 1,
+        "lag_ms": 33.333333333333215,
+        "shape_fit_rmse_rad": 5.876433994994935e-05,
+        "amplitude_gain": 0.18722365097196622
+      },
+      {
+        "lag_samples": 2,
+        "lag_ms": 66.66666666666643,
+        "shape_fit_rmse_rad": 0.00012479063166264672,
+        "amplitude_gain": 0.18575580737065392
+      },
+      {
+        "lag_samples": 3,
+        "lag_ms": 99.99999999999964,
+        "shape_fit_rmse_rad": 0.00019051523977190143,
+        "amplitude_gain": 0.18281852413217498
+      },
+      {
+        "lag_samples": 4,
+        "lag_ms": 133.33333333333286,
+        "shape_fit_rmse_rad": 0.00025404401242000115,
+        "amplitude_gain": 0.1783542107927332
+      },
+      {
+        "lag_samples": 5,
+        "lag_ms": 166.66666666666606,
+        "shape_fit_rmse_rad": 0.0003150362569511593,
+        "amplitude_gain": 0.17253076115133964
+      },
+      {
+        "lag_samples": 6,
+        "lag_ms": 199.9999999999993,
+        "shape_fit_rmse_rad": 0.0003730257526133297,
+        "amplitude_gain": 0.1653673766603993
+      }
+    ],
+    "scope": "Integer sample shift, no interpolation or sub-sample millisecond precision; amplitude gain is not stiffness"
+  },
+  "contact_diagnostic": {
+    "thumb_fraction": 1.0,
+    "support_fraction": 1.0
+  },
+  "normal_force_calibrated": false,
+  "physical_stiffness_identified": false,
+  "timing_scope": "Host IPC includes scheduling+process transport+SDK call; SDK call is not an isolated USB RTT. Mechanical follow lag separately estimated at sample resolution. Legacy sim loop_ms excludes physical stepping/USB.",
+  "timing": {
+    "complete_ms": {
+      "p50": 0.22325292229652405,
+      "p95": 0.325874553527683,
+      "max": 1.5560928732156754
+    },
+    "compute_ms": null,
+    "read_ipc_ms": null,
+    "write_ipc_ms": null,
+    "read_sdk_ms": null,
+    "write_sdk_ms": null,
+    "record_ms": null
+  }
+}

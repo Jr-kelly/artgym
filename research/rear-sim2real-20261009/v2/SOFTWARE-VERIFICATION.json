@@ -1,0 +1,24 @@
+{
+  "checks": {
+    "twenty_joint_mapping_roundtrip": true,
+    "readonly_refuses_writes": true,
+    "fixture_written_targets_readback": true,
+    "axis_zero_roundtrip": true,
+    "explicit_stop_worker_ack": true,
+    "warmup_zero_commands_and_real_history_unchanged": true,
+    "sent_target_memory_exact": true,
+    "action_history_filtered_target": true,
+    "next_history_uses_committed_action": true,
+    "current_pose_approach_no_jump": true,
+    "legal_input_signature": true
+  },
+  "passed": true,
+  "source": "offline_code_and_sdk_shaped_fixture",
+  "real_device_connected": false,
+  "real_robot_ran": false,
+  "bundle_sha256": "7b7e6c80eff3406c270c42f614d8f034e9bfcc3e9f3c3c4a810df8f66c56bc34",
+  "scope": "Fixture mapping and position transport only; fixture does not simulate contact or prove hardware latency",
+  "final_bundle_sha256": "47709399dd02874cebdd7766f263738bb1b9a315d4bd00fe1d5c2e41f4badef2",
+  "unchanged_controller_sha256": "f796e7a2ea0b182e2f345fc813e92023a33ad2286fce09926d03229bad5dc67a",
+  "note": "Verification performed on identical controller and mapping files; final updates concern diagnostic estimator and read timestamp envelope only"
+}

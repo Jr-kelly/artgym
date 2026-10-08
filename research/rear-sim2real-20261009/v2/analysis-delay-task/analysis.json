@@ -1,0 +1,128 @@
+{
+  "joint_index": 17,
+  "joint_name": "thumb_joint2",
+  "phase": "push_hold",
+  "source": "physical_simulation",
+  "raw_log": "runs/rear-sim2real-20261009/development/delay-only/commands.jsonl",
+  "raw_log_sha256": "66b87195d23f1634aef5ec5363d7725cdab9db6fc16062ca3826b67b6fdede8b",
+  "samples": 180,
+  "issued_amplitude_rad": 0.6937191789233267,
+  "encoder_amplitude_rad": 0.6206271052360535,
+  "static_loaded_deflection_target_minus_encoder_rad": 0.09553582966327667,
+  "recovery_static_bias_change_rad": 0.046944424510002136,
+  "dynamic_following_rmse_rad": 0.10148962067632758,
+  "dynamic_following_p95_abs_rad": 0.2581371158361434,
+  "lag": {
+    "status": "unable_to_reliably_estimate",
+    "reasons": [
+      "Simulation shows changing/lost contact in analysis window",
+      "Closed-loop task: feedback and changing contact confound mechanical lag; not a single-joint identification excitation",
+      "Several integer-sample lags fit within residual/noise tolerance: [-2, -1, 0, 1, 2, 3, 4, 5, 6]",
+      "Best fit implies encoder leads command: waveform/contact/alignment cannot support causal lag",
+      "Waveform mismatch too large for a scalar delayed position response"
+    ],
+    "sampling_period_ms": 33.333333333333215,
+    "window_s": [
+      5.0,
+      10.966666666666667
+    ],
+    "estimate_samples": null,
+    "estimate_ms": null,
+    "resolution_ms": 33.333333333333215,
+    "credible_sampling_bin_ms": null,
+    "bin_scope": "Conservative one-sampling-period neighborhood, not statistical or system identification confidence interval",
+    "descriptive_best_fit": {
+      "lag_samples": -2,
+      "lag_ms": -66.66666666666643,
+      "shape_fit_rmse_rad": 0.08241898152878749,
+      "amplitude_gain": 1.0443389407305994
+    },
+    "candidates": [
+      {
+        "lag_samples": -2,
+        "lag_ms": -66.66666666666643,
+        "shape_fit_rmse_rad": 0.08241898152878749,
+        "amplitude_gain": 1.0443389407305994
+      },
+      {
+        "lag_samples": -1,
+        "lag_ms": -33.333333333333215,
+        "shape_fit_rmse_rad": 0.08260861462103918,
+        "amplitude_gain": 1.0232211555350734
+      },
+      {
+        "lag_samples": 0,
+        "lag_ms": 0.0,
+        "shape_fit_rmse_rad": 0.08282236029958645,
+        "amplitude_gain": 1.0013069566648805
+      },
+      {
+        "lag_samples": 1,
+        "lag_ms": 33.333333333333215,
+        "shape_fit_rmse_rad": 0.08307041332667069,
+        "amplitude_gain": 0.978602906175411
+      },
+      {
+        "lag_samples": 2,
+        "lag_ms": 66.66666666666643,
+        "shape_fit_rmse_rad": 0.08338202005643688,
+        "amplitude_gain": 0.955144252598665
+      },
+      {
+        "lag_samples": 3,
+        "lag_ms": 99.99999999999964,
+        "shape_fit_rmse_rad": 0.08378569007080244,
+        "amplitude_gain": 0.9307455975186325
+      },
+      {
+        "lag_samples": 4,
+        "lag_ms": 133.33333333333286,
+        "shape_fit_rmse_rad": 0.08428528099946833,
+        "amplitude_gain": 0.9052793844330864
+      },
+      {
+        "lag_samples": 5,
+        "lag_ms": 166.66666666666606,
+        "shape_fit_rmse_rad": 0.08486086834784194,
+        "amplitude_gain": 0.8788943496780686
+      },
+      {
+        "lag_samples": 6,
+        "lag_ms": 199.9999999999993,
+        "shape_fit_rmse_rad": 0.08547218851555534,
+        "amplitude_gain": 0.8517180093758778
+      }
+    ],
+    "scope": "Integer sample shift, no interpolation or sub-sample millisecond precision; amplitude gain is not stiffness"
+  },
+  "contact_diagnostic": {
+    "thumb_fraction": 0.19889502762430938,
+    "support_fraction": 1.0
+  },
+  "normal_force_calibrated": false,
+  "physical_stiffness_identified": false,
+  "timing_scope": "Host IPC includes scheduling+process transport+SDK call; SDK call is not an isolated USB RTT. Mechanical follow lag separately estimated at sample resolution. Legacy sim loop_ms excludes physical stepping/USB.",
+  "timing": {
+    "complete_ms": {
+      "p50": 5.526725086383522,
+      "p95": 8.683295885566613,
+      "max": 11.26677286811173
+    },
+    "compute_ms": null,
+    "read_ipc_ms": null,
+    "write_ipc_ms": null,
+    "read_sdk_ms": null,
+    "write_sdk_ms": null,
+    "record_ms": null
+  },
+  "reference_comparison": {
+    "raw_log": "runs/rear-sim2real-20261009/development/startup-reserve-v3/commands.jsonl",
+    "source": "physical_simulation",
+    "matched_local_excitation": false,
+    "issued_amplitude_difference_rad": 0.33460126865740414,
+    "encoder_amplitude_difference_rad": 0.3934936821460724,
+    "static_deflection_difference_rad": 0.00017949938774108887,
+    "dynamic_rmse_difference_rad": 0.003617479092266937,
+    "scope": "Phase-aligned descriptive differences; changed contact or unmatched waveform prevents causal actuator attribution"
+  }
+}
