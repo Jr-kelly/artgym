@@ -60,6 +60,10 @@ def main():
  prefix_duration=flat_prefix['duration_s'] if flat_prefix else 0.
  recorded_handoff=np.load(a.recorded_handoff/'takeover.npz') if a.recorded_handoff else None
  recorded_support=json.loads(a.recorded_support_command.read_text()) if a.recorded_support_command else None
+ cooperative_bearing_feedback=None
+ if recorded_support and 'cooperative_bearing_feedback' in recorded_support:
+  from scripts.wuji_cooperative_bearing_feedback import CooperativeBearingFeedback
+  cooperative_bearing_feedback=CooperativeBearingFeedback(recorded_support['cooperative_bearing_feedback'],a.output)
  recorded_material_carrier=None
  recorded_live_ring=None
  recorded_primary_patch=None
@@ -590,7 +594,9 @@ def main():
     if recorded_handoff is not None and (a.recorded_b_start_s is None or t<0):
      aq=recorded_handoff['issued_target'][:7].copy();hq=recorded_handoff['issued_target'][7:].copy()
      if recorded_support:
-      if direct_thumb_servo:
+      if cooperative_bearing_feedback:
+       aq,hq=cooperative_bearing_feedback.command(t,transform(rb[oid,:3].numpy(),rb[oid,3:7].numpy()),dof[arm,0].numpy().copy(),dof[hand,0].numpy().copy(),previously_issued_target[arm].numpy().copy(),previously_issued_target[hand].numpy().copy(),float(dof[sid,0]),getattr(force_meter,'last_contacts',[]))
+      elif direct_thumb_servo:
        aq,hq=direct_thumb_servo.command(t,transform(rb[oid,:3].numpy(),rb[oid,3:7].numpy()),dof[arm,0].numpy().copy(),dof[hand,0].numpy().copy(),previously_issued_target[arm].numpy().copy(),previously_issued_target[hand].numpy().copy(),float(dof[sid,0]))
       elif recorded_live_ring:
        aq,hq=recorded_live_ring.command(t,transform(rb[oid,:3].numpy(),rb[oid,3:7].numpy()),dof[arm,0].numpy().copy(),dof[hand,0].numpy().copy(),previously_issued_target[arm].numpy().copy(),previously_issued_target[hand].numpy().copy(),float(dof[sid,0]))
