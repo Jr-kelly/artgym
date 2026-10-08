@@ -1,0 +1,276 @@
+{
+  "format": "wuji-rear-bundle-v1",
+  "control_hz": 30,
+  "history_frames": 50,
+  "issued_limit_reserve_rad": 0.015,
+  "stroke_m": 0.035,
+  "prepare_seconds": 3.0,
+  "release_seconds": 3.0,
+  "settle_seconds": 2.0,
+  "push_seconds": 6.0,
+  "reference": "research/rear-sim2real-20261009/reference-support-v5.json",
+  "pressure": "runs/newknife-20261005/configs/pressure120.json",
+  "teacher": "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth",
+  "student": "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth",
+  "residual": "runs/newknife-20261005/train/center-tail-constant-motor-v1/update_000100.pth",
+  "asset": "assets/objects/knife_wuji_newknife_20261005/nominal-v5/mobility.urdf",
+  "resistance": "runs/singlepush-20261005/configs/resistance-0.73549875.json",
+  "runtime_joint_names": [
+    "hand_r_index_joint1",
+    "hand_r_index_joint2",
+    "hand_r_index_joint3",
+    "hand_r_index_joint4",
+    "hand_r_middle_joint1",
+    "hand_r_middle_joint2",
+    "hand_r_middle_joint3",
+    "hand_r_middle_joint4",
+    "hand_r_pinky_joint1",
+    "hand_r_pinky_joint2",
+    "hand_r_pinky_joint3",
+    "hand_r_pinky_joint4",
+    "hand_r_ring_joint1",
+    "hand_r_ring_joint2",
+    "hand_r_ring_joint3",
+    "hand_r_ring_joint4",
+    "hand_r_thumb_joint1",
+    "hand_r_thumb_joint2",
+    "hand_r_thumb_joint3",
+    "hand_r_thumb_joint4"
+  ],
+  "model_lower_rad": [
+    -0.1584999963573698,
+    -0.36999999433208364,
+    -0.47769995986959657,
+    -0.46829999990702564,
+    -0.16439998008108817,
+    -0.36999999433208364,
+    -0.47389996188918976,
+    -0.46839996831644454,
+    -0.16259998278981722,
+    -0.36999999433208364,
+    -0.4767999778687179,
+    -0.46829999990702564,
+    -0.15539997697997668,
+    -0.36999999433208364,
+    -0.4764999727719205,
+    -0.47769995986959657,
+    0.047499995561031176,
+    -0.1386999845414975,
+    -0.4641999635403078,
+    -0.4698999938004316
+  ],
+  "model_upper_rad": [
+    1.5603998785314452,
+    0.36999999433208364,
+    1.5484998095165352,
+    1.575299865356275,
+    1.551599862183442,
+    0.36999999433208364,
+    1.5511999885457666,
+    1.5744998517648152,
+    1.5584999794097827,
+    0.36999999433208364,
+    1.548999951169252,
+    1.573499967933545,
+    1.5584999794097827,
+    0.36999999433208364,
+    1.5486999460724546,
+    1.5633999294994194,
+    1.6032999415832048,
+    0.9323999284588873,
+    1.5622999108111624,
+    1.5567999505279306
+  ],
+  "open_q_rad": [
+    0.18618561327457428,
+    0.2719435393810272,
+    0.8883759379386902,
+    0.20991802215576172,
+    0.5433422923088074,
+    0.17708519101142883,
+    0.48994988203048706,
+    0.615382730960846,
+    0.6166466474533081,
+    -0.2723686099052429,
+    0.18643255531787872,
+    1.1012574434280396,
+    0.158559650182724,
+    -0.1318262666463852,
+    1.3217949867248535,
+    -0.10961269587278366,
+    1.4698830842971802,
+    0.09592991322278976,
+    0.29108870029449463,
+    -0.2376524955034256
+  ],
+  "hold_target_rad": [
+    0.21255533397197723,
+    0.3124559819698334,
+    1.1386154890060425,
+    0.2362791746854782,
+    0.6281312108039856,
+    0.1959461122751236,
+    0.7266948223114014,
+    0.6085025668144226,
+    0.8033570647239685,
+    -0.3453618884086609,
+    0.5373453497886658,
+    1.155298113822937,
+    0.1585138589143753,
+    -0.13180339336395264,
+    1.521803379058838,
+    -0.10961233824491501,
+    1.6032999753952026,
+    0.2210308164358139,
+    0.539289653301239,
+    -0.20276319980621338
+  ],
+  "arm_q_rad": [
+    -1.0264006853103638,
+    -0.10624225437641144,
+    -0.4433218836784363,
+    -1.0770643949508667,
+    2.329686403274536,
+    -0.006318016443401575,
+    0.623924732208252
+  ],
+  "wrist_world": [
+    [
+      0.48571028117896825,
+      0.723072800713052,
+      0.4911733376579295,
+      0.21335485577583313
+    ],
+    [
+      0.7960391812819616,
+      -0.598027596549573,
+      0.093191285156312,
+      -0.6777697801589966
+    ],
+    [
+      0.3611192941688267,
+      0.345729256260045,
+      -0.8660624323597487,
+      0.9424139857292175
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "placement_object_in_wrist": [
+    [
+      0.9031731142341392,
+      0.34363924644046173,
+      -0.2572749385976769,
+      0.05596301139063553
+    ],
+    [
+      0.14485388852201858,
+      0.3202045551041646,
+      0.9362085205073677,
+      0.0097370406618007
+    ],
+    [
+      0.40409859775141177,
+      -0.8828256403143125,
+      0.23942266412970822,
+      0.12907726252102392
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "object_initial_estimate": [
+    [
+      0.9061292642598376,
+      0.36152633270384804,
+      -0.21960980673374214,
+      0.05340578949354233
+    ],
+    [
+      0.08711529941186884,
+      0.34854862955797133,
+      0.9332335063860708,
+      0.008972178942824281
+    ],
+    [
+      0.41393318429464615,
+      -0.8647615645916316,
+      0.2843356385413687,
+      0.1291186688691609
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "slider_initial_estimate": [
+    [
+      0.9061292642598376,
+      0.36152633270384804,
+      -0.21960980673374214,
+      0.06092327613213886
+    ],
+    [
+      0.08711529941186884,
+      0.34854862955797133,
+      0.9332335063860708,
+      -0.013549149075423697
+    ],
+    [
+      0.41393318429464615,
+      -0.8647615645916316,
+      0.2843356385413687,
+      0.11740213444412717
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "geometry_estimate": [
+    0.019,
+    0.008,
+    0.144,
+    0.007,
+    0.002,
+    0.032
+  ],
+  "placement_slider_q_m": 4.2814728658413514e-05,
+  "initialization_scope": "Selected contact geometry from prior measured pose; NO saved velocities, targets/history/RNN/contact caches restored. Empty hand approaches, explicit manual-placement support withdrawn; free gravity settling and fifty new encoder frames.",
+  "firmware_axes_zeros_verified": false,
+  "real_robot_ran": false,
+  "required_sha256": {
+    "runs/artmanip-recovery-20260930/aggregation1-pair6400/aggregate/E/epoch_006100.pth": "2857950cc37f519bf5248fd46377475582993417fa194e89097804e5bc94aff8",
+    "runs/real-size-student-adaptation-20261002/train/R800/step_055200.pth": "bbf61592721300b1cf053de8246898a69989ed102b7a034da6fb47cc9a541dcd",
+    "runs/newknife-20261005/train/center-tail-constant-motor-v1/update_000100.pth": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
+    "runs/newknife-20261005/configs/pressure120.json": "d8dd5ca33833b0731f49c51b16785e5151058003c138ee667a33e01927c00176",
+    "assets/objects/knife_wuji_newknife_20261005/nominal-v5/mobility.urdf": "d98b24d9dc73acff8da38fb08312f4e74393ffa986a59bd2ca9de199f3cd280a",
+    "runs/singlepush-20261005/configs/resistance-0.73549875.json": "27710c6433e8188172aae41255eba3eea5716450843b77c2a08432e655003dc2",
+    "scripts/g2_r800_policy.py": "ef73c34172bc9ba789ee2380bfd7c1792a9070128cf3f3fe4345dc02454c419a",
+    "scripts/wuji_joint_deflection_pressure.py": "4ee38960a58ca0623188f883abe2d1e81656af237ff1138035fef4d95fad8ee8",
+    "scripts/wuji_scheduled_thumb_reference.py": "d226d8689421c2009a57ddeb9fcf350240a2b4558f3a368c21b465de0c950013",
+    "scripts/wuji_known_controller.py": "3e4870ee35719db2f2dc8760d6b5c58a757c5b4ba944f27d2cb2e15533df4ad6",
+    "scripts/g2_frozen_policy.py": "01e6e0bbb228ddb258ea4549352a1b420a249f6f5cf73b0c6ecb9c870044091f",
+    "scripts/wuji_student_interface.py": "00cb60d67e9adbe057ec2dcc1dc0af06488586d6ce4f548e8529dc55464ef2f4",
+    "scripts/wuji_bounded_motor_residual.py": "39ad6c94a39f5dd8d71a2e7a50d65eb973fe65078861913828f7913e77873635",
+    "assets/hands/wuji_artbot/hand_config.yaml": "fceea13cc92ad3d871e7605db82039771f941b5bb9cea661b27cd4fac5402b87",
+    "isaacgymenvs/cfg/hand/wuji_paper_official_actuator.yaml": "4f567fce5a24902d5c34adf8c5ab352601a738d7644f58b91296ee6201ae6223",
+    "isaacgymenvs/cfg/task/wuji_geometry.yaml": "4200611758c14178066c3a65be0c8f8a457ed3db69c3bde15ec8b6cef786594e",
+    "isaacgymenvs/cfg/train/wujiAcquisitionSAPG.yaml": "a6e775bbd22727907b385d0a5ea991fcaab41a48ee5363ccb4fe7fb25dbe0c74",
+    "caches/initial_grasp/wuji/knife_wuji_demo_aligned/000/train/valid_grasps.npy": "056fd45a2c7cb454a9c8c3f4a9811e384e49d4b07e6b240edc8268d975c487c5",
+    "runs/contact-transfer-20261006/regression/nominal-125-video-v1/simulation/trace.npz": "d7ed4f78dbced95a8ddc0d0e36ddf8522767821ac6f8a428d82ea8b3cd7db3c8",
+    "research/rear-sim2real-20261009/reference-support-v5.json": "e4d88c369310b0e0bdeeeeea19c09bfcb758de59d9db060d076131e5c5b96fb4"
+  },
+  "variant": "v5 feedback support retention; original pressure/tangent reference, no pacing"
+}

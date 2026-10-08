@@ -1,0 +1,21 @@
+{
+  "checks": {
+    "twenty_joint_mapping_roundtrip": true,
+    "readonly_refuses_writes": true,
+    "fixture_written_targets_readback": true,
+    "axis_zero_roundtrip": true,
+    "explicit_stop_worker_ack": true,
+    "warmup_zero_commands_and_real_history_unchanged": true,
+    "sent_target_memory_exact": true,
+    "action_history_filtered_target": true,
+    "next_history_uses_committed_action": true,
+    "current_pose_approach_no_jump": true,
+    "legal_input_signature": true
+  },
+  "passed": true,
+  "source": "offline_code_and_sdk_shaped_fixture",
+  "real_device_connected": false,
+  "real_robot_ran": false,
+  "bundle_sha256": "de6678bb63dcb3a36072f86fd4bc49ae0269eec687a88791a92d69f96341c47d",
+  "scope": "Fixture mapping and position transport only; fixture does not simulate contact or prove hardware latency"
+}

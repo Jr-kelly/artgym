@@ -1,0 +1,40 @@
+{
+  "bundle_sha256": "de6678bb63dcb3a36072f86fd4bc49ae0269eec687a88791a92d69f96341c47d",
+  "invalid_dependency_refused_before_sdk_connection": true,
+  "probe_fixture": {
+    "source": "sdk_fixture_no_device",
+    "real_robot_ran": false,
+    "mode": "probe",
+    "samples": 470,
+    "stop_reason": null,
+    "loop_ms": {
+      "p50": 1.29825493786484,
+      "p95": 9.434910560958082,
+      "max": 14.037898974493146,
+      "over33ms": 0
+    },
+    "controller": {
+      "measured_history_frames": 50,
+      "warmup": {
+        "iterations": 8,
+        "wall_ms": 471.6627758461982,
+        "measured_history_frames": 50,
+        "commands_issued": 0,
+        "discarded_computed_targets": 8,
+        "rnn_state_restored": true,
+        "reference_and_command_state_restored": true,
+        "scope": "Full model/control warmup with isolated state; no synthetic measured history or issued motor command, not hardware latency verification"
+      },
+      "inference_ms_p50": 6.015087477862835,
+      "inference_ms_p95": 9.56079144962131,
+      "inference_ms_max": 12.503973906859756,
+      "pressure_proxy_enabled": true,
+      "control_hz": 30,
+      "normalization": "Pinned model limits; separately intersect device limits for sending",
+      "inputs": "Encoder q, FK, actual issued commands/actions history, fixed initial estimate and known wrist gravity only"
+    },
+    "completion_scope": "Hardware functional completion requires ruler/video; no slider truth input or automatic success claim"
+  },
+  "scope": "No physical hardware, dynamics or actual force verified",
+  "real_robot_ran": false
+}

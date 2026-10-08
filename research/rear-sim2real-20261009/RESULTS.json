@@ -1,0 +1,517 @@
+{
+  "scope": "Source/model fit unchanged. Short-checks are frozen synthetic engineering sensitivities of v3. Failed v4/v5 corrections are development, not independently unseen successes. Final v6 has real postwarm history and shared SDK core. All are simulation; hardware false.",
+  "runs": [
+    {
+      "case": "development/delay-only",
+      "passed": false,
+      "active_displacement_mm": -1.6327894101719251,
+      "body_max_rotation_rad": 3.092849434294854,
+      "actual_joint_min_margin_rad": -1.5302128741900844e-07,
+      "first_failure_s": {
+        "loss_non_thumb_support": null,
+        "sustained_thumb_loss": 6.233333333333333,
+        "actual_limit": 9.266666666666666,
+        "drift": null,
+        "rotation": 5.866666666666666,
+        "drop": null
+      },
+      "checks": {
+        "actual_model_limits": false,
+        "active_over20mm": false,
+        "hold_1s_range_under2mm": true,
+        "independent_hold_established": true,
+        "no_tray_after_release": true,
+        "body_drift_under30mm": true,
+        "body_rotation_under06rad": false,
+        "no_drop": true,
+        "thumb_contact_over90pct": false
+      },
+      "source": "runs/rear-sim2real-20261009/development/delay-only/result.json"
+    },
+    {
+      "case": "development/paced-model-error-v4",
+      "passed": false,
+      "active_displacement_mm": -0.7891809388726665,
+      "body_max_rotation_rad": 2.997333086755842,
+      "actual_joint_min_margin_rad": -3.3811997868227195e-08,
+      "first_failure_s": {
+        "loss_non_thumb_support": null,
+        "sustained_thumb_loss": 6.066666666666666,
+        "actual_limit": null,
+        "drift": null,
+        "rotation": 5.833333333333333,
+        "drop": null
+      },
+      "checks": {
+        "actual_model_limits": true,
+        "active_over20mm": false,
+        "hold_1s_range_under2mm": true,
+        "independent_hold_established": true,
+        "no_tray_after_release": true,
+        "body_drift_under30mm": true,
+        "body_rotation_under06rad": false,
+        "no_drop": true,
+        "thumb_contact_over90pct": false
+      },
+      "source": "runs/rear-sim2real-20261009/development/paced-model-error-v4/result.json"
+    },
+    {
+      "case": "development/paced-nominal-v4",
+      "passed": true,
+      "active_displacement_mm": 32.36448969642703,
+      "body_max_rotation_rad": 0.40115630614466846,
+      "actual_joint_min_margin_rad": 0.01448699918066998,
+      "first_failure_s": {
+        "loss_non_thumb_support": null,
+        "sustained_thumb_loss": null,
+        "actual_limit": null,
+        "drift": null,
+        "rotation": null,
+        "drop": null
+      },
+      "checks": {
+        "actual_model_limits": true,
+        "active_over20mm": true,
+        "hold_1s_range_under2mm": true,
+        "independent_hold_established": true,
+        "no_tray_after_release": true,
+        "body_drift_under30mm": true,
+        "body_rotation_under06rad": true,
+        "no_drop": true,
+        "thumb_contact_over90pct": true
+      },
+      "source": "runs/rear-sim2real-20261009/development/paced-nominal-v4/result.json"
+    },
+    {
+      "case": "development/response-low-only",
+      "passed": false,
+      "active_displacement_mm": 1.5243824842224467,
+      "body_max_rotation_rad": 0.933562216683437,
+      "actual_joint_min_margin_rad": 0.014796347287054257,
+      "first_failure_s": {
+        "loss_non_thumb_support": null,
+        "sustained_thumb_loss": 7.8,
+        "actual_limit": null,
+        "drift": null,
+        "rotation": 5.833333333333333,
+        "drop": null
+      },
+      "checks": {
+        "actual_model_limits": true,
+        "active_over20mm": false,
+        "hold_1s_range_under2mm": true,
+        "independent_hold_established": true,
+        "no_tray_after_release": true,
+        "body_drift_under30mm": true,
+        "body_rotation_under06rad": false,
+        "no_drop": true,
+        "thumb_contact_over90pct": false
+      },
+      "source": "runs/rear-sim2real-20261009/development/response-low-only/result.json"
+    },
+    {
+      "case": "development/startup-reserve-v3",
+      "passed": true,
+      "active_displacement_mm": 31.92583736463642,
+      "body_max_rotation_rad": 0.4059395329219986,
+      "actual_joint_min_margin_rad": 0.01438185658728619,
+      "first_failure_s": {
+        "loss_non_thumb_support": null,
+        "sustained_thumb_loss": null,
+        "actual_limit": null,
+        "drift": null,
+        "rotation": null,
+        "drop": null
+      },
+      "checks": {
+        "actual_model_limits": true,
+        "active_over20mm": true,
+        "hold_1s_range_under2mm": true,
+        "independent_hold_established": true,
+        "no_tray_after_release": true,
+        "body_drift_under30mm": true,
+        "body_rotation_under06rad": true,
+        "no_drop": true,
+        "thumb_contact_over90pct": true
+      },
+      "source": "runs/rear-sim2real-20261009/development/startup-reserve-v3/result.json"
+    },
+    {
+      "case": "development/startup-v2",
+      "passed": true,
+      "active_displacement_mm": 32.16935666087891,
+      "body_max_rotation_rad": 0.40046365509265375,
+      "actual_joint_min_margin_rad": -1.4815056781358749e-07,
+      "first_failure_s": {
+        "loss_non_thumb_support": null,
+        "sustained_thumb_loss": null,
+        "actual_limit": 6.533333333333333,
+        "drift": null,
+        "rotation": null,
+        "drop": null
+      },
+      "checks": {
+        "active_over20mm": true,
+        "hold_1s_range_under2mm": true,
+        "independent_hold_established": true,
+        "no_tray_after_release": true,
+        "body_drift_under30mm": true,
+        "body_rotation_under06rad": true,
+        "no_drop": true,
+        "thumb_contact_over90pct": true
+      },
+      "source": "runs/rear-sim2real-20261009/development/startup-v2/result.json"
+    },
+    {
+      "case": "development/support-model-error-v5",
+      "passed": false,
+      "active_displacement_mm": -0.8201162114170486,
+      "body_max_rotation_rad": 3.058579087264793,
+      "actual_joint_min_margin_rad": 0.014812440541143612,
+      "first_failure_s": {
+        "loss_non_thumb_support": null,
+        "sustained_thumb_loss": 6.133333333333333,
+        "actual_limit": null,
+        "drift": null,
+        "rotation": 5.8999999999999995,
+        "drop": null
+      },
+      "checks": {
+        "actual_model_limits": true,
+        "active_over20mm": false,
+        "hold_1s_range_under2mm": true,
+        "independent_hold_established": true,
+        "no_tray_after_release": true,
+        "body_drift_under30mm": true,
+        "body_rotation_under06rad": false,
+        "no_drop": true,
+        "thumb_contact_over90pct": false
+      },
+      "source": "runs/rear-sim2real-20261009/development/support-model-error-v5/result.json"
+    },
+    {
+      "case": "development/support-nominal-v5",
+      "passed": true,
+      "active_displacement_mm": 33.80774538914744,
+      "body_max_rotation_rad": 0.3495528314191267,
+      "actual_joint_min_margin_rad": 0.014486164715643124,
+      "first_failure_s": {
+        "loss_non_thumb_support": null,
+        "sustained_thumb_loss": null,
+        "actual_limit": null,
+        "drift": null,
+        "rotation": null,
+        "drop": null
+      },
+      "checks": {
+        "actual_model_limits": true,
+        "active_over20mm": true,
+        "hold_1s_range_under2mm": true,
+        "independent_hold_established": true,
+        "no_tray_after_release": true,
+        "body_drift_under30mm": true,
+        "body_rotation_under06rad": true,
+        "no_drop": true,
+        "thumb_contact_over90pct": true
+      },
+      "source": "runs/rear-sim2real-20261009/development/support-nominal-v5/result.json"
+    },
+    {
+      "case": "final/nominal-video-v6",
+      "passed": true,
+      "active_displacement_mm": 32.42004795902176,
+      "body_max_rotation_rad": 0.40503396011044646,
+      "actual_joint_min_margin_rad": 0.014406652119512753,
+      "first_failure_s": {
+        "loss_non_thumb_support": null,
+        "sustained_thumb_loss": null,
+        "actual_limit": null,
+        "drift": null,
+        "rotation": null,
+        "drop": null
+      },
+      "checks": {
+        "actual_model_limits": true,
+        "active_over20mm": true,
+        "hold_1s_range_under2mm": true,
+        "independent_hold_established": true,
+        "no_tray_after_release": true,
+        "body_drift_under30mm": true,
+        "body_rotation_under06rad": true,
+        "no_drop": true,
+        "thumb_contact_over90pct": true
+      },
+      "source": "runs/rear-sim2real-20261009/final/nominal-video-v6/result.json"
+    },
+    {
+      "case": "final/response-delay-v6",
+      "passed": false,
+      "active_displacement_mm": -1.1702014719870226,
+      "body_max_rotation_rad": 3.002976411634963,
+      "actual_joint_min_margin_rad": -3.3811997868227195e-08,
+      "first_failure_s": {
+        "loss_non_thumb_support": null,
+        "sustained_thumb_loss": 7.733333333333333,
+        "actual_limit": null,
+        "drift": null,
+        "rotation": 7.5,
+        "drop": null
+      },
+      "checks": {
+        "actual_model_limits": true,
+        "active_over20mm": false,
+        "hold_1s_range_under2mm": true,
+        "independent_hold_established": true,
+        "no_tray_after_release": true,
+        "body_drift_under30mm": true,
+        "body_rotation_under06rad": false,
+        "no_drop": true,
+        "thumb_contact_over90pct": false
+      },
+      "source": "runs/rear-sim2real-20261009/final/response-delay-v6/result.json"
+    },
+    {
+      "case": "final/startup125-v6",
+      "passed": true,
+      "active_displacement_mm": 28.44657954190024,
+      "body_max_rotation_rad": 0.46878636919137057,
+      "actual_joint_min_margin_rad": 0.014399857190008358,
+      "first_failure_s": {
+        "loss_non_thumb_support": null,
+        "sustained_thumb_loss": null,
+        "actual_limit": null,
+        "drift": null,
+        "rotation": null,
+        "drop": null
+      },
+      "checks": {
+        "actual_model_limits": true,
+        "active_over20mm": true,
+        "hold_1s_range_under2mm": true,
+        "independent_hold_established": true,
+        "no_tray_after_release": true,
+        "body_drift_under30mm": true,
+        "body_rotation_under06rad": true,
+        "no_drop": true,
+        "thumb_contact_over90pct": true
+      },
+      "source": "runs/rear-sim2real-20261009/final/startup125-v6/result.json"
+    },
+    {
+      "case": "short-checks/estimate-x1-zminus1",
+      "passed": true,
+      "active_displacement_mm": 32.162195137179005,
+      "body_max_rotation_rad": 0.40109829339083025,
+      "actual_joint_min_margin_rad": 0.014475793507452206,
+      "first_failure_s": {
+        "loss_non_thumb_support": null,
+        "sustained_thumb_loss": null,
+        "actual_limit": null,
+        "drift": null,
+        "rotation": null,
+        "drop": null
+      },
+      "checks": {
+        "actual_model_limits": true,
+        "active_over20mm": true,
+        "hold_1s_range_under2mm": true,
+        "independent_hold_established": true,
+        "no_tray_after_release": true,
+        "body_drift_under30mm": true,
+        "body_rotation_under06rad": true,
+        "no_drop": true,
+        "thumb_contact_over90pct": true
+      },
+      "source": "runs/rear-sim2real-20261009/short-checks/estimate-x1-zminus1/result.json"
+    },
+    {
+      "case": "short-checks/fixed-start-125",
+      "passed": true,
+      "active_displacement_mm": 27.970672981140407,
+      "body_max_rotation_rad": 0.4683140201453347,
+      "actual_joint_min_margin_rad": 0.014460177090521054,
+      "first_failure_s": {
+        "loss_non_thumb_support": null,
+        "sustained_thumb_loss": null,
+        "actual_limit": null,
+        "drift": null,
+        "rotation": null,
+        "drop": null
+      },
+      "checks": {
+        "actual_model_limits": true,
+        "active_over20mm": true,
+        "hold_1s_range_under2mm": true,
+        "independent_hold_established": true,
+        "no_tray_after_release": true,
+        "body_drift_under30mm": true,
+        "body_rotation_under06rad": true,
+        "no_drop": true,
+        "thumb_contact_over90pct": true
+      },
+      "source": "runs/rear-sim2real-20261009/short-checks/fixed-start-125/result.json"
+    },
+    {
+      "case": "short-checks/friction-peak",
+      "passed": true,
+      "active_displacement_mm": 33.16262225381515,
+      "body_max_rotation_rad": 0.3793253695002046,
+      "actual_joint_min_margin_rad": 0.014481515553350643,
+      "first_failure_s": {
+        "loss_non_thumb_support": null,
+        "sustained_thumb_loss": null,
+        "actual_limit": null,
+        "drift": null,
+        "rotation": null,
+        "drop": null
+      },
+      "checks": {
+        "actual_model_limits": true,
+        "active_over20mm": true,
+        "hold_1s_range_under2mm": true,
+        "independent_hold_established": true,
+        "no_tray_after_release": true,
+        "body_drift_under30mm": true,
+        "body_rotation_under06rad": true,
+        "no_drop": true,
+        "thumb_contact_over90pct": true
+      },
+      "source": "runs/rear-sim2real-20261009/short-checks/friction-peak/result.json"
+    },
+    {
+      "case": "short-checks/placement-roll2-slider1",
+      "passed": true,
+      "active_displacement_mm": 32.925655896354826,
+      "body_max_rotation_rad": 0.3929024413455298,
+      "actual_joint_min_margin_rad": 0.014498800900335507,
+      "first_failure_s": {
+        "loss_non_thumb_support": null,
+        "sustained_thumb_loss": null,
+        "actual_limit": null,
+        "drift": null,
+        "rotation": null,
+        "drop": null
+      },
+      "checks": {
+        "actual_model_limits": true,
+        "active_over20mm": true,
+        "hold_1s_range_under2mm": true,
+        "independent_hold_established": true,
+        "no_tray_after_release": true,
+        "body_drift_under30mm": true,
+        "body_rotation_under06rad": true,
+        "no_drop": true,
+        "thumb_contact_over90pct": true
+      },
+      "source": "runs/rear-sim2real-20261009/short-checks/placement-roll2-slider1/result.json"
+    },
+    {
+      "case": "short-checks/placement-x-minus05",
+      "passed": true,
+      "active_displacement_mm": 32.48305142927078,
+      "body_max_rotation_rad": 0.3895409156517318,
+      "actual_joint_min_margin_rad": 0.014490694668646054,
+      "first_failure_s": {
+        "loss_non_thumb_support": null,
+        "sustained_thumb_loss": null,
+        "actual_limit": null,
+        "drift": null,
+        "rotation": null,
+        "drop": null
+      },
+      "checks": {
+        "actual_model_limits": true,
+        "active_over20mm": true,
+        "hold_1s_range_under2mm": true,
+        "independent_hold_established": true,
+        "no_tray_after_release": true,
+        "body_drift_under30mm": true,
+        "body_rotation_under06rad": true,
+        "no_drop": true,
+        "thumb_contact_over90pct": true
+      },
+      "source": "runs/rear-sim2real-20261009/short-checks/placement-x-minus05/result.json"
+    },
+    {
+      "case": "short-checks/placement-x-plus05",
+      "passed": true,
+      "active_displacement_mm": 32.740881801028955,
+      "body_max_rotation_rad": 0.464725558107695,
+      "actual_joint_min_margin_rad": 0.014204353955145077,
+      "first_failure_s": {
+        "loss_non_thumb_support": null,
+        "sustained_thumb_loss": null,
+        "actual_limit": null,
+        "drift": null,
+        "rotation": null,
+        "drop": null
+      },
+      "checks": {
+        "actual_model_limits": true,
+        "active_over20mm": true,
+        "hold_1s_range_under2mm": true,
+        "independent_hold_established": true,
+        "no_tray_after_release": true,
+        "body_drift_under30mm": true,
+        "body_rotation_under06rad": true,
+        "no_drop": true,
+        "thumb_contact_over90pct": true
+      },
+      "source": "runs/rear-sim2real-20261009/short-checks/placement-x-plus05/result.json"
+    },
+    {
+      "case": "short-checks/placement-z-plus1",
+      "passed": true,
+      "active_displacement_mm": 32.91642478847456,
+      "body_max_rotation_rad": 0.3991867393768503,
+      "actual_joint_min_margin_rad": 0.014481515553350643,
+      "first_failure_s": {
+        "loss_non_thumb_support": null,
+        "sustained_thumb_loss": null,
+        "actual_limit": null,
+        "drift": null,
+        "rotation": null,
+        "drop": null
+      },
+      "checks": {
+        "actual_model_limits": true,
+        "active_over20mm": true,
+        "hold_1s_range_under2mm": true,
+        "independent_hold_established": true,
+        "no_tray_after_release": true,
+        "body_drift_under30mm": true,
+        "body_rotation_under06rad": true,
+        "no_drop": true,
+        "thumb_contact_over90pct": true
+      },
+      "source": "runs/rear-sim2real-20261009/short-checks/placement-z-plus1/result.json"
+    },
+    {
+      "case": "short-checks/response-low-delay",
+      "passed": false,
+      "active_displacement_mm": -1.3260024154019887,
+      "body_max_rotation_rad": 2.9799366795427975,
+      "actual_joint_min_margin_rad": -1.5302128741900844e-07,
+      "first_failure_s": {
+        "loss_non_thumb_support": null,
+        "sustained_thumb_loss": 6.066666666666666,
+        "actual_limit": 9.166666666666666,
+        "drift": null,
+        "rotation": 5.833333333333333,
+        "drop": null
+      },
+      "checks": {
+        "actual_model_limits": false,
+        "active_over20mm": false,
+        "hold_1s_range_under2mm": true,
+        "independent_hold_established": true,
+        "no_tray_after_release": true,
+        "body_drift_under30mm": true,
+        "body_rotation_under06rad": false,
+        "no_drop": true,
+        "thumb_contact_over90pct": false
+      },
+      "source": "runs/rear-sim2real-20261009/short-checks/response-low-delay/result.json"
+    }
+  ]
+}

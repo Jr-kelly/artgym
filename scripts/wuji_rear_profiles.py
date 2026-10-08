@@ -1,0 +1,48 @@
+"""Create local, evidence-linked device and position-response profiles; no calibration invented."""
+import argparse,json,hashlib,datetime
+from pathlib import Path
+import numpy as np
+
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def main():
+    p=argparse.ArgumentParser();p.add_argument('mode',choices=['device-template','confirm-device','confirm-response']);p.add_argument('--bundle',type=Path,default=Path('research/rear-sim2real-20261009/bundle-deploy-v6.json'));p.add_argument('--output',type=Path,required=True);p.add_argument('--device-profile',type=Path);p.add_argument('--evidence',type=Path,nargs='+');p.add_argument('--operator-confirmed',action='store_true');p.add_argument('--normal-force-calibrated',action='store_true');a=p.parse_args()
+    if a.output.exists():raise FileExistsError(a.output)
+    s=json.loads(a.bundle.read_text());utc=datetime.datetime.now(datetime.timezone.utc).isoformat()
+    if a.mode=='device-template':
+        value=dict(format='wuji-device-calibration-v1',runtime_joint_names=s['runtime_joint_names'],model_from_device_sign=[1]*20,device_zero_rad=[0.]*20,axes_zeros_limits_verified=False,source='provisional identity by name; physical axes/zeros NOT verified',notes='Use read + each named small joint check; edit signs/zeros only from local observations; preserve original model normalization.',created_utc=utc)
+    else:
+        if not a.operator_confirmed or not a.evidence:raise ValueError('Actual local evidence and operator observations required; elapsed time is not confirmation')
+        data=[json.loads((r/'summary.json').read_text()) for r in a.evidence];fixture=any(r['source']=='sdk_fixture_no_device' for r in data)
+        if a.mode=='confirm-device':
+            if a.device_profile is None:raise ValueError('Edited provisional device profile required')
+            value=json.loads(a.device_profile.read_text())
+            if fixture:raise ValueError('Fixture cannot verify hardware axes/zeros')
+            # The operator verifies sign/zero in each named joint; logs cover all twenty.
+            touched=set()
+            for folder in a.evidence:
+                rows=[json.loads(l) for l in (folder/'control.jsonl').read_text().splitlines()]
+                if not rows:continue
+                measured=np.array([r['encoder_model_rad'] for r in rows]);responded=set(np.flatnonzero(np.ptp(measured,axis=0)>.0005).tolist())
+                base=np.asarray(rows[0]['encoder_model_rad'])
+                for row in rows:
+                    if row['issued_target_rad'] is not None:touched.update(set(np.flatnonzero(abs(np.asarray(row['issued_target_rad'])-base)>.002).tolist()) & responded)
+            if len(touched)!=20:raise ValueError('Need small-action observations for all twenty joints before confirming model axes/zeros')
+            identities={json.loads((folder/'metadata.json').read_text())['device_identity_sha256'] for folder in a.evidence}
+            if len(identities)!=1 or None in identities:raise ValueError('Checks must use one identified real hand')
+            value.update(device_identity_sha256=next(iter(identities)),axes_zeros_limits_verified=True,source='hardware_named_joint_checks_operator_verified',evidence=[str(x) for x in a.evidence],verified_utc=utc)
+        else:
+            if any(r['mode']!='response' for r in data):raise ValueError('Use actual loaded response logs')
+            if any(r['loop_ms']['max'] is None or r['loop_ms']['max']>1000/30 for r in data):raise ValueError('Complete read/write/ack/log cycle exceeded 33.33ms')
+            ranges=[]
+            for folder in a.evidence:
+                rows=[json.loads(l) for l in (folder/'control.jsonl').read_text().splitlines() if json.loads(l)['phase']=='loaded_local_response']
+                if len(rows)<30:raise ValueError('At least one second of local loaded response required')
+                q=np.array([r['encoder_model_rad'] for r in rows]);u=np.array([r['issued_target_rad'] for r in rows]);span=np.ptp(u,axis=0);j=int(span.argmax());measured=float(np.ptp(q[:,j]))
+                if span[j]<.003 or measured<.0005:raise ValueError('No measurable local response; inspect direction, preload and firmware')
+                if max(r['loop_ms'] for r in rows)>1000/30:raise ValueError('Loaded 30Hz response timing failed')
+                ranges.append(dict(joint=s['runtime_joint_names'][j],issued_range_rad=float(span[j]),encoder_range_rad=measured,scope='Local position response; no stiffness/force identification'))
+            if not fixture and a.device_profile is None:raise ValueError('Verified device profile required')
+            value=dict(format='wuji-local-response-v1',bundle_sha256=sha(a.bundle),device_calibration_sha256=sha(a.device_profile) if a.device_profile else None,source='sdk_fixture_no_device' if fixture else 'hardware_local_response',position_response_verified=True,pressure_compensation_enabled=True,normal_force_calibrated=a.normal_force_calibrated and not fixture,nominal_pressure_stiffness_status='Original effective simulated model remains a working hypothesis; local functional response checked, not identified physical stiffness',local_response=ranges,evidence=[str(x) for x in a.evidence],operator_confirmed=True,verified_utc=utc)
+            if a.normal_force_calibrated:raise ValueError('Separate aligned force evidence import is not implemented; cannot mark force calibrated from position logs')
+    a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(value,indent=2));print(str(a.output))
+if __name__=='__main__':main()
