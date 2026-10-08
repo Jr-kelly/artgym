@@ -35,7 +35,10 @@ class AcquiredRolling(RegraspLearning):
   obj=self.rb[:,self.object_index];reaction=-self.contact[:,self.ring_ids].sum(1);body=quat_apply(quat_conjugate(obj[:,3:7]),reaction);back=(body*self.bearing_axis).sum(-1);m['ring_back_component_N']=back
   # The short curriculum asks for relative movement and a new back bearing,
   # not an exact finger target or a geometrical substitute for B capacity.
-  error=m['position_m']/.02+m['rotation_rad']/.3+2*((.12-back).clamp(min=0)/.12).clamp(max=2)+.05*m['q_rms_rad']/.5
+  minimum_back=float(self.recipe.get('minimum_new_bearing_proxy_N',.12));assert minimum_back>0
+  error=m['position_m']/.02+m['rotation_rad']/.3+2*((minimum_back-back).clamp(min=0)/minimum_back).clamp(max=2)+.05*m['q_rms_rad']/.5
+  if self.recipe.get('retain_initial_object_pose'):
+   delta=(obj[:,:3]-self.initial_object[:,:3]).norm(dim=-1);dot=(obj[:,3:7]*self.initial_object[:,3:7]).sum(-1).abs().clamp(max=1.);worldrot=2*torch.acos(dot);error+=delta/.01+worldrot/.2;m.update(object_world_translation_m=delta,object_world_rotation_rad=worldrot)
   if self.patch_vertices is not None:
    pad=self.rb[:,self.patch_index];rot=quat_mul(quat_conjugate(obj[:,3:7]),pad[:,3:7]);pos=quat_apply(quat_conjugate(obj[:,3:7]),pad[:,:3]-obj[:,:3]);nv=len(self.patch_vertices);vertices=quat_apply(rot[:,None,:].expand(-1,nv,-1).reshape(-1,4),self.patch_vertices[None].expand(self.n,-1,-1).reshape(-1,3)).reshape(self.n,nv,3)+pos[:,None,:];support_axis=int(self.recipe.get('patch_support_axis',1));weights=torch.softmax(vertices[:,:,support_axis]/.0002,1);foot=(weights[:,:,None]*vertices).sum(1);patch_error=(foot-self.tensor(self.back_patch_target)).norm(dim=-1);error+=2*patch_error/.01;m.update(ring_patch_position_knife_m=foot,ring_patch_error_m=patch_error,ring_patch_max_Y_m=vertices[:,:,1].max(1).values)
   held=m['held']&~self.hbad;potential=torch.where(held,(1-error/10).clamp(0,1),torch.zeros_like(error));m.update(held=held,potential=potential,error=error);return m

@@ -275,6 +275,7 @@ class RegraspContract(unittest.TestCase):
         issued=np.ones(27)*.1;command=method('scripts/wuji_regrasp_reference_policy.py','RegraspReferencePolicy','command')
         arm,hand=command(p,np.eye(4),np.zeros(27),np.zeros(27),issued,np.zeros((0,3)),[])
         e=Box();e.guided_incremental=True;e.failed=torch.zeros(1,dtype=torch.bool);e.offset=torch.zeros((1,27));e.span=torch.tensor(p.span,dtype=torch.float32);e.slew=torch.tensor(p.slew,dtype=torch.float32);e.phase=torch.zeros(1);e.motor_reference=torch.zeros((2,27));e.command_target=torch.tensor(issued[None],dtype=torch.float32);e.guide_targets=lambda:torch.ones((1,27))*.1;e.servo=lambda q:setattr(e,'command_target',q.clone());e.age=torch.zeros(1);e.hbad=torch.zeros(1,dtype=torch.bool);e.previous_potential=torch.ones(1)*.5;e.best_rotation=torch.ones(1)*float('inf');e.best_bearing=torch.zeros(1);e.safe_steps=torch.zeros(1);e.observation=lambda:torch.zeros((1,149))
+        e.recipe={}  # Real AcquiredRolling always owns its reference recipe.
         e.metrics=lambda:dict(held=torch.ones(1,dtype=torch.bool),clearance_m=torch.ones(1)*.1,finite=torch.ones(1,dtype=torch.bool),potential=torch.ones(1)*.5,rotation_rad=torch.ones(1)*.1,ring_back_component_N=torch.ones(1)*.2)
         step=method('scripts/train_wuji_acquired_rolling.py','AcquiredRolling','step');step(e,torch.tensor(p.action[None],dtype=torch.float32))
         np.testing.assert_allclose(e.command_target.numpy()[0],np.r_[arm,hand],atol=1e-7)

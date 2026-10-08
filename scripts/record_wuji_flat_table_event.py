@@ -47,6 +47,8 @@ def _record(event,evidence,config=None,updates=None,next_step=None):
  source_files.extend(['calibrate_wuji_actual_cap_gravity_wrench.py','prepare_wuji_coupled_loaded_cap_gravity_motor.py'])
  source_files.extend(['plan_wuji_coupled_actual_cap_Middle_bearing.py','prepare_wuji_coupled_Middle_bearing_motor.py'])
  source_files.extend(['wuji_cooperative_bearing_feedback.py','wuji_wrap_contact_measurement.py'])
+ source_files.extend(['prepare_wuji_idle_Middle_clearance.py','plan_wuji_actual_loaded_palm_backup.py'])
+ source_files.extend(['prepare_wuji_loaded_palm_capacity_probe.py','prepare_wuji_partial_flip_back_bearing.py','plan_wuji_loaded_four_contact_transfer.py','wuji_original_contact_surface.py','prepare_wuji_four_loaded_transfer_motor.py','run_wuji_fresh_partial_backed_conversion.py','prepare_wuji_loaded_Index_axial_support.py','prepare_wuji_supported_Index_unload.py'])
  source_files.append('wuji_regrasp_contract.py')
  source_files.extend(['wuji_regrasp_reference_policy.py','prepare_wuji_retained_ring_entry.py','prepare_wuji_retained_ring_transition.py'])
  source_files.extend(['check_wuji_transition_reference.py','prepare_wuji_ownactual_ring_tail.py'])

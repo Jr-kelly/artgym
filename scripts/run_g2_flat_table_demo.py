@@ -646,6 +646,10 @@ def main():
       retained_push_skill.state_triggered=True
       retained_push_skill.start=elapsed
       (a.output/'live-state-handoff-request.json').write_text(json.dumps({'time_s':elapsed,'fullB_start_s':retained_push_skill.start,'scope':'Functional measuredrange triggered; no object/joint/velocity/history assignment; actualfullB verifies capacity'},indent=2))
+    elif regrasp_reference_policy and regrasp_reference_policy.spec.get('hold_last_target_after_end') and frame_window(elapsed,regrasp_end) and (retained_push_skill is None or not frame_window(elapsed,retained_push_skill.start)):
+     # End a frozen short policy without assigning a saved endpoint or
+     # reverting its live motor targets to the pre-transition guide.
+     aq=previously_issued_target[arm].numpy().copy();hq=previously_issued_target[hand].numpy().copy()
     if contact_contour_course and contact_contour_course.start<=elapsed<contact_contour_course.end and (retained_push_skill is None or elapsed<retained_push_skill.start):
      aq,hq=contact_contour_course.command(elapsed,transform(rb[oid,:3].numpy(),rb[oid,3:7].numpy()),dof[arm,0].numpy().copy(),dof[hand,0].numpy().copy(),previously_issued_target[arm].numpy().copy(),previously_issued_target[hand].numpy().copy())
     if cap_contact_pivot and frame_window(elapsed,cap_contact_pivot.start,cap_contact_pivot.end):
