@@ -1,0 +1,848 @@
+{
+  "format": "wuji-rear-named-targets-v1",
+  "bundle_sha256": "e2453ccfcfe196b13e5f16e9e3af714798c948a27dd170e185ff7e4cfa7254cf",
+  "arm": [
+    {
+      "model_name": "idx61_arm_r_joint1",
+      "target_rad": -1.0264006853103638,
+      "target_degree": -58.808427357619195,
+      "model_lower_rad": -3.0717997235343044,
+      "model_upper_rad": 3.0717997235343044,
+      "sdk_name_or_id": null,
+      "hardware_sendable": false
+    },
+    {
+      "model_name": "idx62_arm_r_joint2",
+      "target_rad": -0.10624225437641144,
+      "target_degree": -6.087232781723675,
+      "model_lower_rad": -2.0594998357879417,
+      "model_upper_rad": 2.0594998357879417,
+      "sdk_name_or_id": null,
+      "hardware_sendable": false
+    },
+    {
+      "model_name": "idx63_arm_r_joint3",
+      "target_rad": -0.4433218836784363,
+      "target_degree": -25.400472900564015,
+      "model_lower_rad": -3.0717997235343044,
+      "model_upper_rad": 3.0717997235343044,
+      "sdk_name_or_id": null,
+      "hardware_sendable": false
+    },
+    {
+      "model_name": "idx64_arm_r_joint4",
+      "target_rad": -1.0770643949508667,
+      "target_degree": -61.71124409449627,
+      "model_lower_rad": -2.4958996599201577,
+      "model_upper_rad": 1.01229995432539,
+      "sdk_name_or_id": null,
+      "hardware_sendable": false
+    },
+    {
+      "model_name": "idx65_arm_r_joint5",
+      "target_rad": 2.329686403274536,
+      "target_degree": 133.4811984966436,
+      "model_lower_rad": -3.0717997235343044,
+      "model_upper_rad": 3.0717997235343044,
+      "sdk_name_or_id": null,
+      "hardware_sendable": false
+    },
+    {
+      "model_name": "idx66_arm_r_joint6",
+      "target_rad": -0.006318016443401575,
+      "target_degree": -0.3619956771011652,
+      "model_lower_rad": -1.01229995432539,
+      "model_upper_rad": 1.01229995432539,
+      "sdk_name_or_id": null,
+      "hardware_sendable": false
+    },
+    {
+      "model_name": "idx67_arm_r_joint7",
+      "target_rad": 0.623924732208252,
+      "target_degree": 35.748253889362935,
+      "model_lower_rad": -1.5358998617671522,
+      "model_upper_rad": 1.5358998617671522,
+      "sdk_name_or_id": null,
+      "hardware_sendable": false
+    }
+  ],
+  "hand": [
+    {
+      "model_name": "hand_r_index_joint1",
+      "model_index": 0,
+      "sdk_name": "hand_r_index_joint1",
+      "sdk_finger_index": 1,
+      "sdk_joint_index": 0,
+      "unit": "rad",
+      "sign": 1,
+      "device_zero_rad": 0,
+      "model_lower_rad": -0.1584999963573698,
+      "model_upper_rad": 1.5603998785314452,
+      "device_lower_rad": null,
+      "device_upper_rad": null,
+      "open_model_rad": 0.18618561327457428,
+      "hold_motor_model_rad": 0.21255533397197723,
+      "open_device_rad": 0.18618561327457428,
+      "hold_motor_device_rad": 0.21255533397197723,
+      "actual_q": null,
+      "axes_verified": false,
+      "absolute_zero_verified": false,
+      "nominal_reserved_hold_model_rad": 0.21255533397197723,
+      "nominal_hold_clip_rad": 0.0
+    },
+    {
+      "model_name": "hand_r_index_joint2",
+      "model_index": 1,
+      "sdk_name": "hand_r_index_joint2",
+      "sdk_finger_index": 1,
+      "sdk_joint_index": 1,
+      "unit": "rad",
+      "sign": 1,
+      "device_zero_rad": 0,
+      "model_lower_rad": -0.36999999433208364,
+      "model_upper_rad": 0.36999999433208364,
+      "device_lower_rad": null,
+      "device_upper_rad": null,
+      "open_model_rad": 0.2719435393810272,
+      "hold_motor_model_rad": 0.3124559819698334,
+      "open_device_rad": 0.2719435393810272,
+      "hold_motor_device_rad": 0.3124559819698334,
+      "actual_q": null,
+      "axes_verified": false,
+      "absolute_zero_verified": false,
+      "nominal_reserved_hold_model_rad": 0.3124559819698334,
+      "nominal_hold_clip_rad": 0.0
+    },
+    {
+      "model_name": "hand_r_index_joint3",
+      "model_index": 2,
+      "sdk_name": "hand_r_index_joint3",
+      "sdk_finger_index": 1,
+      "sdk_joint_index": 2,
+      "unit": "rad",
+      "sign": 1,
+      "device_zero_rad": 0,
+      "model_lower_rad": -0.47769995986959657,
+      "model_upper_rad": 1.5484998095165352,
+      "device_lower_rad": null,
+      "device_upper_rad": null,
+      "open_model_rad": 0.8883759379386902,
+      "hold_motor_model_rad": 1.1386154890060425,
+      "open_device_rad": 0.8883759379386902,
+      "hold_motor_device_rad": 1.1386154890060425,
+      "actual_q": null,
+      "axes_verified": false,
+      "absolute_zero_verified": false,
+      "nominal_reserved_hold_model_rad": 1.1386154890060425,
+      "nominal_hold_clip_rad": 0.0
+    },
+    {
+      "model_name": "hand_r_index_joint4",
+      "model_index": 3,
+      "sdk_name": "hand_r_index_joint4",
+      "sdk_finger_index": 1,
+      "sdk_joint_index": 3,
+      "unit": "rad",
+      "sign": 1,
+      "device_zero_rad": 0,
+      "model_lower_rad": -0.46829999990702564,
+      "model_upper_rad": 1.575299865356275,
+      "device_lower_rad": null,
+      "device_upper_rad": null,
+      "open_model_rad": 0.20991802215576172,
+      "hold_motor_model_rad": 0.2362791746854782,
+      "open_device_rad": 0.20991802215576172,
+      "hold_motor_device_rad": 0.2362791746854782,
+      "actual_q": null,
+      "axes_verified": false,
+      "absolute_zero_verified": false,
+      "nominal_reserved_hold_model_rad": 0.2362791746854782,
+      "nominal_hold_clip_rad": 0.0
+    },
+    {
+      "model_name": "hand_r_middle_joint1",
+      "model_index": 4,
+      "sdk_name": "hand_r_middle_joint1",
+      "sdk_finger_index": 2,
+      "sdk_joint_index": 0,
+      "unit": "rad",
+      "sign": 1,
+      "device_zero_rad": 0,
+      "model_lower_rad": -0.16439998008108817,
+      "model_upper_rad": 1.551599862183442,
+      "device_lower_rad": null,
+      "device_upper_rad": null,
+      "open_model_rad": 0.5433422923088074,
+      "hold_motor_model_rad": 0.6281312108039856,
+      "open_device_rad": 0.5433422923088074,
+      "hold_motor_device_rad": 0.6281312108039856,
+      "actual_q": null,
+      "axes_verified": false,
+      "absolute_zero_verified": false,
+      "nominal_reserved_hold_model_rad": 0.6281312108039856,
+      "nominal_hold_clip_rad": 0.0
+    },
+    {
+      "model_name": "hand_r_middle_joint2",
+      "model_index": 5,
+      "sdk_name": "hand_r_middle_joint2",
+      "sdk_finger_index": 2,
+      "sdk_joint_index": 1,
+      "unit": "rad",
+      "sign": 1,
+      "device_zero_rad": 0,
+      "model_lower_rad": -0.36999999433208364,
+      "model_upper_rad": 0.36999999433208364,
+      "device_lower_rad": null,
+      "device_upper_rad": null,
+      "open_model_rad": 0.17708519101142883,
+      "hold_motor_model_rad": 0.1959461122751236,
+      "open_device_rad": 0.17708519101142883,
+      "hold_motor_device_rad": 0.1959461122751236,
+      "actual_q": null,
+      "axes_verified": false,
+      "absolute_zero_verified": false,
+      "nominal_reserved_hold_model_rad": 0.1959461122751236,
+      "nominal_hold_clip_rad": 0.0
+    },
+    {
+      "model_name": "hand_r_middle_joint3",
+      "model_index": 6,
+      "sdk_name": "hand_r_middle_joint3",
+      "sdk_finger_index": 2,
+      "sdk_joint_index": 2,
+      "unit": "rad",
+      "sign": 1,
+      "device_zero_rad": 0,
+      "model_lower_rad": -0.47389996188918976,
+      "model_upper_rad": 1.5511999885457666,
+      "device_lower_rad": null,
+      "device_upper_rad": null,
+      "open_model_rad": 0.48994988203048706,
+      "hold_motor_model_rad": 0.7266948223114014,
+      "open_device_rad": 0.48994988203048706,
+      "hold_motor_device_rad": 0.7266948223114014,
+      "actual_q": null,
+      "axes_verified": false,
+      "absolute_zero_verified": false,
+      "nominal_reserved_hold_model_rad": 0.7266948223114014,
+      "nominal_hold_clip_rad": 0.0
+    },
+    {
+      "model_name": "hand_r_middle_joint4",
+      "model_index": 7,
+      "sdk_name": "hand_r_middle_joint4",
+      "sdk_finger_index": 2,
+      "sdk_joint_index": 3,
+      "unit": "rad",
+      "sign": 1,
+      "device_zero_rad": 0,
+      "model_lower_rad": -0.46839996831644454,
+      "model_upper_rad": 1.5744998517648152,
+      "device_lower_rad": null,
+      "device_upper_rad": null,
+      "open_model_rad": 0.615382730960846,
+      "hold_motor_model_rad": 0.6085025668144226,
+      "open_device_rad": 0.615382730960846,
+      "hold_motor_device_rad": 0.6085025668144226,
+      "actual_q": null,
+      "axes_verified": false,
+      "absolute_zero_verified": false,
+      "nominal_reserved_hold_model_rad": 0.6085025668144226,
+      "nominal_hold_clip_rad": 0.0
+    },
+    {
+      "model_name": "hand_r_pinky_joint1",
+      "model_index": 8,
+      "sdk_name": "hand_r_pinky_joint1",
+      "sdk_finger_index": 4,
+      "sdk_joint_index": 0,
+      "unit": "rad",
+      "sign": 1,
+      "device_zero_rad": 0,
+      "model_lower_rad": -0.16259998278981722,
+      "model_upper_rad": 1.5584999794097827,
+      "device_lower_rad": null,
+      "device_upper_rad": null,
+      "open_model_rad": 0.6166466474533081,
+      "hold_motor_model_rad": 0.8033570647239685,
+      "open_device_rad": 0.6166466474533081,
+      "hold_motor_device_rad": 0.8033570647239685,
+      "actual_q": null,
+      "axes_verified": false,
+      "absolute_zero_verified": false,
+      "nominal_reserved_hold_model_rad": 0.8033570647239685,
+      "nominal_hold_clip_rad": 0.0
+    },
+    {
+      "model_name": "hand_r_pinky_joint2",
+      "model_index": 9,
+      "sdk_name": "hand_r_pinky_joint2",
+      "sdk_finger_index": 4,
+      "sdk_joint_index": 1,
+      "unit": "rad",
+      "sign": 1,
+      "device_zero_rad": 0,
+      "model_lower_rad": -0.36999999433208364,
+      "model_upper_rad": 0.36999999433208364,
+      "device_lower_rad": null,
+      "device_upper_rad": null,
+      "open_model_rad": -0.2723686099052429,
+      "hold_motor_model_rad": -0.3453618884086609,
+      "open_device_rad": -0.2723686099052429,
+      "hold_motor_device_rad": -0.3453618884086609,
+      "actual_q": null,
+      "axes_verified": false,
+      "absolute_zero_verified": false,
+      "nominal_reserved_hold_model_rad": -0.3453618884086609,
+      "nominal_hold_clip_rad": 0.0
+    },
+    {
+      "model_name": "hand_r_pinky_joint3",
+      "model_index": 10,
+      "sdk_name": "hand_r_pinky_joint3",
+      "sdk_finger_index": 4,
+      "sdk_joint_index": 2,
+      "unit": "rad",
+      "sign": 1,
+      "device_zero_rad": 0,
+      "model_lower_rad": -0.4767999778687179,
+      "model_upper_rad": 1.548999951169252,
+      "device_lower_rad": null,
+      "device_upper_rad": null,
+      "open_model_rad": 0.18643255531787872,
+      "hold_motor_model_rad": 0.5373453497886658,
+      "open_device_rad": 0.18643255531787872,
+      "hold_motor_device_rad": 0.5373453497886658,
+      "actual_q": null,
+      "axes_verified": false,
+      "absolute_zero_verified": false,
+      "nominal_reserved_hold_model_rad": 0.5373453497886658,
+      "nominal_hold_clip_rad": 0.0
+    },
+    {
+      "model_name": "hand_r_pinky_joint4",
+      "model_index": 11,
+      "sdk_name": "hand_r_pinky_joint4",
+      "sdk_finger_index": 4,
+      "sdk_joint_index": 3,
+      "unit": "rad",
+      "sign": 1,
+      "device_zero_rad": 0,
+      "model_lower_rad": -0.46829999990702564,
+      "model_upper_rad": 1.573499967933545,
+      "device_lower_rad": null,
+      "device_upper_rad": null,
+      "open_model_rad": 1.1012574434280396,
+      "hold_motor_model_rad": 1.155298113822937,
+      "open_device_rad": 1.1012574434280396,
+      "hold_motor_device_rad": 1.155298113822937,
+      "actual_q": null,
+      "axes_verified": false,
+      "absolute_zero_verified": false,
+      "nominal_reserved_hold_model_rad": 1.155298113822937,
+      "nominal_hold_clip_rad": 0.0
+    },
+    {
+      "model_name": "hand_r_ring_joint1",
+      "model_index": 12,
+      "sdk_name": "hand_r_ring_joint1",
+      "sdk_finger_index": 3,
+      "sdk_joint_index": 0,
+      "unit": "rad",
+      "sign": 1,
+      "device_zero_rad": 0,
+      "model_lower_rad": -0.15539997697997668,
+      "model_upper_rad": 1.5584999794097827,
+      "device_lower_rad": null,
+      "device_upper_rad": null,
+      "open_model_rad": 0.158559650182724,
+      "hold_motor_model_rad": 0.1585138589143753,
+      "open_device_rad": 0.158559650182724,
+      "hold_motor_device_rad": 0.1585138589143753,
+      "actual_q": null,
+      "axes_verified": false,
+      "absolute_zero_verified": false,
+      "nominal_reserved_hold_model_rad": 0.1585138589143753,
+      "nominal_hold_clip_rad": 0.0
+    },
+    {
+      "model_name": "hand_r_ring_joint2",
+      "model_index": 13,
+      "sdk_name": "hand_r_ring_joint2",
+      "sdk_finger_index": 3,
+      "sdk_joint_index": 1,
+      "unit": "rad",
+      "sign": 1,
+      "device_zero_rad": 0,
+      "model_lower_rad": -0.36999999433208364,
+      "model_upper_rad": 0.36999999433208364,
+      "device_lower_rad": null,
+      "device_upper_rad": null,
+      "open_model_rad": -0.1318262666463852,
+      "hold_motor_model_rad": -0.13180339336395264,
+      "open_device_rad": -0.1318262666463852,
+      "hold_motor_device_rad": -0.13180339336395264,
+      "actual_q": null,
+      "axes_verified": false,
+      "absolute_zero_verified": false,
+      "nominal_reserved_hold_model_rad": -0.13180339336395264,
+      "nominal_hold_clip_rad": 0.0
+    },
+    {
+      "model_name": "hand_r_ring_joint3",
+      "model_index": 14,
+      "sdk_name": "hand_r_ring_joint3",
+      "sdk_finger_index": 3,
+      "sdk_joint_index": 2,
+      "unit": "rad",
+      "sign": 1,
+      "device_zero_rad": 0,
+      "model_lower_rad": -0.4764999727719205,
+      "model_upper_rad": 1.5486999460724546,
+      "device_lower_rad": null,
+      "device_upper_rad": null,
+      "open_model_rad": 1.3217949867248535,
+      "hold_motor_model_rad": 1.521803379058838,
+      "open_device_rad": 1.3217949867248535,
+      "hold_motor_device_rad": 1.521803379058838,
+      "actual_q": null,
+      "axes_verified": false,
+      "absolute_zero_verified": false,
+      "nominal_reserved_hold_model_rad": 1.521803379058838,
+      "nominal_hold_clip_rad": 0.0
+    },
+    {
+      "model_name": "hand_r_ring_joint4",
+      "model_index": 15,
+      "sdk_name": "hand_r_ring_joint4",
+      "sdk_finger_index": 3,
+      "sdk_joint_index": 3,
+      "unit": "rad",
+      "sign": 1,
+      "device_zero_rad": 0,
+      "model_lower_rad": -0.47769995986959657,
+      "model_upper_rad": 1.5633999294994194,
+      "device_lower_rad": null,
+      "device_upper_rad": null,
+      "open_model_rad": -0.10961269587278366,
+      "hold_motor_model_rad": -0.10961233824491501,
+      "open_device_rad": -0.10961269587278366,
+      "hold_motor_device_rad": -0.10961233824491501,
+      "actual_q": null,
+      "axes_verified": false,
+      "absolute_zero_verified": false,
+      "nominal_reserved_hold_model_rad": -0.10961233824491501,
+      "nominal_hold_clip_rad": 0.0
+    },
+    {
+      "model_name": "hand_r_thumb_joint1",
+      "model_index": 16,
+      "sdk_name": "hand_r_thumb_joint1",
+      "sdk_finger_index": 0,
+      "sdk_joint_index": 0,
+      "unit": "rad",
+      "sign": 1,
+      "device_zero_rad": 0,
+      "model_lower_rad": 0.047499995561031176,
+      "model_upper_rad": 1.6032999415832048,
+      "device_lower_rad": null,
+      "device_upper_rad": null,
+      "open_model_rad": 1.4698830842971802,
+      "hold_motor_model_rad": 1.6032999753952026,
+      "open_device_rad": 1.4698830842971802,
+      "hold_motor_device_rad": 1.6032999753952026,
+      "actual_q": null,
+      "axes_verified": false,
+      "absolute_zero_verified": false,
+      "nominal_reserved_hold_model_rad": 1.5882999415832049,
+      "nominal_hold_clip_rad": -0.01500003381199777
+    },
+    {
+      "model_name": "hand_r_thumb_joint2",
+      "model_index": 17,
+      "sdk_name": "hand_r_thumb_joint2",
+      "sdk_finger_index": 0,
+      "sdk_joint_index": 1,
+      "unit": "rad",
+      "sign": 1,
+      "device_zero_rad": 0,
+      "model_lower_rad": -0.1386999845414975,
+      "model_upper_rad": 0.9323999284588873,
+      "device_lower_rad": null,
+      "device_upper_rad": null,
+      "open_model_rad": 0.09592991322278976,
+      "hold_motor_model_rad": 0.2210308164358139,
+      "open_device_rad": 0.09592991322278976,
+      "hold_motor_device_rad": 0.2210308164358139,
+      "actual_q": null,
+      "axes_verified": false,
+      "absolute_zero_verified": false,
+      "nominal_reserved_hold_model_rad": 0.2210308164358139,
+      "nominal_hold_clip_rad": 0.0
+    },
+    {
+      "model_name": "hand_r_thumb_joint3",
+      "model_index": 18,
+      "sdk_name": "hand_r_thumb_joint3",
+      "sdk_finger_index": 0,
+      "sdk_joint_index": 2,
+      "unit": "rad",
+      "sign": 1,
+      "device_zero_rad": 0,
+      "model_lower_rad": -0.4641999635403078,
+      "model_upper_rad": 1.5622999108111624,
+      "device_lower_rad": null,
+      "device_upper_rad": null,
+      "open_model_rad": 0.29108870029449463,
+      "hold_motor_model_rad": 0.539289653301239,
+      "open_device_rad": 0.29108870029449463,
+      "hold_motor_device_rad": 0.539289653301239,
+      "actual_q": null,
+      "axes_verified": false,
+      "absolute_zero_verified": false,
+      "nominal_reserved_hold_model_rad": 0.539289653301239,
+      "nominal_hold_clip_rad": 0.0
+    },
+    {
+      "model_name": "hand_r_thumb_joint4",
+      "model_index": 19,
+      "sdk_name": "hand_r_thumb_joint4",
+      "sdk_finger_index": 0,
+      "sdk_joint_index": 3,
+      "unit": "rad",
+      "sign": 1,
+      "device_zero_rad": 0,
+      "model_lower_rad": -0.4698999938004316,
+      "model_upper_rad": 1.5567999505279306,
+      "device_lower_rad": null,
+      "device_upper_rad": null,
+      "open_model_rad": -0.2376524955034256,
+      "hold_motor_model_rad": -0.20276319980621338,
+      "open_device_rad": -0.2376524955034256,
+      "hold_motor_device_rad": -0.20276319980621338,
+      "actual_q": null,
+      "axes_verified": false,
+      "absolute_zero_verified": false,
+      "nominal_reserved_hold_model_rad": -0.20276319980621338,
+      "nominal_hold_clip_rad": 0.0
+    }
+  ],
+  "command_target_model_base_to_hand": [
+    [
+      0.48544257384899153,
+      0.7214955605733442,
+      0.4937506086758999,
+      0.21384874396853318
+    ],
+    [
+      0.7960177478256447,
+      -0.5982959072036977,
+      0.09163925234249433,
+      -0.6784762995583656
+    ],
+    [
+      0.3615262820894957,
+      0.3485486529829937,
+      -0.8647615763100753,
+      0.943322026421564
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "saved_policy_prior_wrist": [
+    [
+      0.48571028117896825,
+      0.723072800713052,
+      0.4911733376579295,
+      0.21335485577583313
+    ],
+    [
+      0.7960391812819616,
+      -0.598027596549573,
+      0.093191285156312,
+      -0.6777697801589966
+    ],
+    [
+      0.3611192941688267,
+      0.345729256260045,
+      -0.8660624323597487,
+      0.9424139857292175
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "prior_source": "Recorded finite-actuator simulation orientation; not command-target FK or hardware measurement",
+  "target_fk_vs_saved_prior": {
+    "position_delta_m": [
+      0.0004938881927000482,
+      -0.0007065193993690544,
+      0.0009080406923465123
+    ],
+    "rotation_delta_rad": 0.003277942813817856
+  },
+  "fixed_chain": [
+    {
+      "child_frame": "body_link1",
+      "parent_to_child": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.1019999981
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.1439999938
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "assumption": "Locked non-right-arm joints and mounting in supplied simulation URDF; physical value unverified"
+    },
+    {
+      "child_frame": "body_link2",
+      "parent_to_child": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.3600000143
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "assumption": "Locked non-right-arm joints and mounting in supplied simulation URDF; physical value unverified"
+    },
+    {
+      "child_frame": "body_link3",
+      "parent_to_child": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.3799999952
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "assumption": "Locked non-right-arm joints and mounting in supplied simulation URDF; physical value unverified"
+    },
+    {
+      "child_frame": "body_link4",
+      "parent_to_child": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "assumption": "Locked non-right-arm joints and mounting in supplied simulation URDF; physical value unverified"
+    },
+    {
+      "child_frame": "body_link5",
+      "parent_to_child": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.1490000039
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "assumption": "Locked non-right-arm joints and mounting in supplied simulation URDF; physical value unverified"
+    },
+    {
+      "child_frame": "arm_base_link",
+      "parent_to_child": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -2.0510354525882235e-10,
+          1.0,
+          0.0
+        ],
+        [
+          -0.0,
+          -1.0,
+          -2.0510354525882235e-10,
+          0.3084999919
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "assumption": "Locked non-right-arm joints and mounting in supplied simulation URDF; physical value unverified"
+    },
+    {
+      "child_frame": "arm_r_end_link",
+      "parent_to_child": [
+        [
+          -2.05103585463058e-10,
+          8.75897933186945e-08,
+          0.9999999999999962,
+          0.09000000358
+        ],
+        [
+          6.617444900424222e-24,
+          -0.9999999999999961,
+          8.75897933186945e-08,
+          0.0
+        ],
+        [
+          1.0,
+          1.7964979858667572e-17,
+          2.0510361607688917e-10,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "assumption": "Locked non-right-arm joints and mounting in supplied simulation URDF; physical value unverified"
+    },
+    {
+      "child_frame": "hand_r_base_link",
+      "parent_to_child": [
+        [
+          -2.0510354525882235e-10,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          -1.0,
+          -2.0510354525882235e-10,
+          -0.0,
+          0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          1.0,
+          0.03409999982
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "assumption": "Locked non-right-arm joints and mounting in supplied simulation URDF; physical value unverified"
+    }
+  ],
+  "command_target_gravity_in_hand": [
+    -0.3615262820894957,
+    -0.3485486529829937,
+    0.8647615763100753
+  ],
+  "policy_prior_gravity_in_hand": [
+    -0.3611192941688267,
+    -0.345729256260045,
+    0.8660624323597487
+  ],
+  "hardware_base_to_model_base": null,
+  "hardware_flange_to_hand": null,
+  "real_g2_state": null,
+  "scope": "Model targets, not measured pose. G2 numeric IDs are not SDK indices. Hand hold motor targets include preload; nominal reserve/clipping shown separately."
+}

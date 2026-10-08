@@ -1,0 +1,68 @@
+{
+  "root": "/data/research/wuji-rear-v3-deploy-check-20261009",
+  "resolved": {
+    "format": "wuji-rear-field-v1",
+    "bundle": "/data/research/wuji-rear-v3-deploy-check-20261009/research/rear-sim2real-20261009/bundle-deploy-v8.json",
+    "inference_python": "/home/agiuser/miniconda3/envs/artgym/bin/python",
+    "sdk_python": "/data/research/artgym-experiments-20260921/contact-transfer-sdk310-venv/bin/python",
+    "serial": null,
+    "calibration": null,
+    "initial_estimate": null,
+    "topology": "Wuji USB and both Python processes on the same field Linux PC; G2 controller on local manufacturer connection; no public-network policy stream",
+    "wuji": {
+      "position_mode_verified": false,
+      "position_mode_source": null,
+      "hardware_max_joint_speed_rad_s": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "speed_source": null
+    },
+    "g2": {
+      "status": "blocked",
+      "asset_model_clue": "G2_t2_crsB",
+      "exact_hardware_model": null,
+      "official_controller_example": null,
+      "field_pc": null,
+      "read_only_state_example": null,
+      "mounting_source": null
+    }
+  },
+  "inference": {
+    "ok": true,
+    "stdout": "Importing module 'gym_38' (/home/agiuser/miniconda3/envs/artgym/opt/IsaacGym_Preview_TacSL_Package/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)\nSetting GYM_USD_PLUG_INFO_PATH to /home/agiuser/miniconda3/envs/artgym/opt/IsaacGym_Preview_TacSL_Package/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json\nPyTorch version 2.1.0+cu118\nDevice count 1\n/home/agiuser/miniconda3/envs/artgym/opt/IsaacGym_Preview_TacSL_Package/isaacgym/python/isaacgym/_bindings/src/gymtorch\nninja: no work to do.\n{\"python\": \"3.8.20 | packaged by conda-forge | (default, Sep 30 2024, 17:52:49) \\n[GCC 13.3.0]\", \"executable\": \"/home/agiuser/miniconda3/envs/artgym/bin/python\", \"torch\": \"2.1.0+cu118\", \"cuda\": \"11.8\", \"gpu\": true, \"numpy\": \"1.23.5\", \"scipy\": \"1.10.1\", \"isaacgym\": \"/home/agiuser/miniconda3/envs/artgym/opt/IsaacGym_Preview_TacSL_Package/isaacgym/python/isaacgym/__init__.py\"}\n",
+    "stderr": "Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.\nPlease upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.\nUsers of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.\nSee the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.\nUsing /home/agiuser/.cache/torch_extensions/py38_cu118 as PyTorch extensions root...\nEmitting ninja build file /home/agiuser/.cache/torch_extensions/py38_cu118/gymtorch/build.ninja...\nBuilding extension module gymtorch...\nAllowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)\nLoading extension module gymtorch...\n"
+  },
+  "sdk": {
+    "ok": true,
+    "stdout": "{\"python\": \"3.10.12 (main, Jun 22 2026, 18:55:27) [GCC 11.4.0]\", \"executable\": \"/data/research/artgym-experiments-20260921/contact-transfer-sdk310-venv/bin/python\", \"sdk\": \"1.8.0\", \"numpy\": \"2.2.6\", \"usb\": [], \"mode_readback\": false, \"enable_readback\": false}\n[2026-10-09 05:46:28.162] [wuji] [info] SDK v1.8.0 initialized\n[2026-10-09 05:46:28.162] [wuji] [info] Log files can be found at /home/agiuser/.wuji/log/20261008_214628_1450493.log\n",
+    "stderr": ""
+  },
+  "dependencies": {
+    "ok": true,
+    "count": 500,
+    "missing_or_changed": [],
+    "bundle_sha256": "8b170dcab07ae0ce6be684171fe014460bbe8db2c3cd87c1b202fef5ecfe4a28"
+  },
+  "g2": "blocked_missing_exact_hardware_interface",
+  "real_robot_ran": false,
+  "usb_access": []
+}

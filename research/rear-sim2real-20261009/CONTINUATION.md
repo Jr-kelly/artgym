@@ -1,3 +1,16 @@
+# 当前接续：rear-sim2real v3（完整部署调用链）
+
+实际副本与分支不变。当前 bundle-deploy-v8.json，500个模型/资产/配置/框架源码哈希。先读 v3/REPORT.md、FIRST-HARDWARE-SESSION.md、v3/STATE.json。现场统一field.json与wuji_rear_field入口；一个当前包＋已有基础一次恢复，无需依次覆盖v1/v2。当前真机session明确拒绝G2缺项；没有空接口/mock到位证明。
+
+已实现连续Wuji连接／已发目标／response→后台分析→probe，probe后卸载并30mm复位再摆放／新历史进入fullpush；重启必须确认卸载，正常结束取刀后请求disable。绝对零位独立证据导入，小动作只验证轴；命名限位/速度不兼容拒绝，速度不足不放慢全段。真实SDK1.8.0无模式/使能读回，ACK不等于物理状态。G2_t2_crsB只是资产线索，本地G2A CoRobot应用对应SDK未安装，两者不能推断这台实机接口。
+
+仅新增1条共享RearSession物理全段：32.420mm、保持1.033秒、末1秒波动.0277mm，有限执行器/被动阻力/撤托、无刀状态恢复和真值控制。原一帧延迟等失败保留，无训练、无矩阵。开发机新绝对路径实际加载模型与SDK子进程，24软件检查通过，380合法输入指令0rad差；1174次组合fixture写入p95 6.761ms/max11.850ms，无超33ms，不代表现场时延。旧约64ms尖峰失败保留，GC暂缓后的改善只作关联证据。
+
+默认没有实验作业继续运行。需要现场的最少G2资料集中在指南末尾；所有实际设备零位/模式/速度/固件保持、时序、受载响应与>20mm/1秒仍待现场。real_robot_ran=false、hardware_deployment_complete=false。旧取物/换握用户修改和protected分支保留。发布回执见v3目录（完成后），最后应核对远端与本地相同tree和全部Release公开下载哈希。
+
+<!-- V3_REAR_HISTORY -->
+最终v2源码同步：local aabc3d139db917ffe8a8219c7ba10f6fd98c55dd ↔ GitHub 5d80eaf9f66fb38176aee04403136ecc1ba46d4b，相同tree 74938a1da588e96515c6a957609c40f8a2c82dc3；旧两个分支未改。原生goal complete范围是全部离线交付，真机未运动。
+
 离线交付已完成，公开Release：https://github.com/Jr-kelly/artgym/releases/tag/wuji-rear-sim2real-20261009-v2。本轮默认v7，真机未运行。
 
 # 当前接续：rear-sim2real v2（短试推与现场响应诊断）

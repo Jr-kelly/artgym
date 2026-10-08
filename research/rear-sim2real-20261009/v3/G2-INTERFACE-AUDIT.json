@@ -1,0 +1,40 @@
+{
+  "utc": "2026-10-08T21:30:41.518574+00:00",
+  "local_asset": "/data/research/ArtBot/G2_crsB_wuji/config.yaml",
+  "asset_model_clue": "G2_t2_crsB",
+  "local_application": "/data/research/wuji_demo/src/forge_universal/inferrer/corobot_sdk_controller.py",
+  "application_supported_model": "g2a",
+  "application_interfaces": [
+    "create_env(robot_type)",
+    "RemoteEnvClient.get_observation()",
+    "RemoteEnvClient.execute_action(action,sleep_time=...)"
+  ],
+  "package_importable_system_python": {
+    "corobot_client_cpp": false,
+    "agibotforge": false
+  },
+  "bounded_search_roots": [
+    "/data/research/ArtBot",
+    "/data/research/wuji_demo",
+    "/home/agiuser/miniconda3/envs",
+    "/opt",
+    "/home/agiuser/\u4e0b\u8f7d"
+  ],
+  "official_evidence": "https://github.com/AgibotTech/genie_sim/issues/145",
+  "conclusion": "Official simulation assets and local G2A app do not establish exact real G2 model SDK, single-right-arm schema, feedback frames, hold/stop/ownership. No G2 backend fabricated; no G2 commands issued.",
+  "minimum_missing": [
+    "Exact G2 hardware model and controller/software version",
+    "One current working official read-state + right-arm trajectory/hold example or SDK docs",
+    "Field PC OS/GPU/Python plus where G2 controller connects; named read-only arm/torso/frame state sample and mounting drawing"
+  ],
+  "real_robot_ran": false,
+  "final_bounded_hidden_directory_search": "No corobot/agibotforge installed SDK found even including ignored/hidden wuji_demo and ArtBot files; only application and unit-test source found",
+  "package_importable_inference_python": {
+    "corobot_client_cpp": false,
+    "agibotforge": false
+  },
+  "package_importable_sdk_python": {
+    "corobot_client_cpp": false,
+    "agibotforge": false
+  }
+}

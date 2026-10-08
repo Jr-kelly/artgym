@@ -10,6 +10,7 @@ from scipy.spatial.transform import Rotation
 from scripts.wuji_rear_controller import RearController,load_bundle,ROOT
 from scripts.g2_kinematics import G2Kinematics,transform
 from scripts.record_wuji_rear_event import record
+from scripts.wuji_rear_session import RearSession
 
 def gt(t):
     p=gymapi.Transform();p.p=gymapi.Vec3(*t[:3,3]);p.r=gymapi.Quat(*Rotation.from_matrix(t[:3,:3]).as_quat());return p
@@ -19,6 +20,7 @@ def main(a):
     out=a.output;out.mkdir(parents=True,exist_ok=False)
     spec=load_bundle(a.bundle);record('rear_sim_started',[out],dict(args=vars(a),bundle_sha256=hashlib.sha256(a.bundle.read_bytes()).hexdigest(),source_sha256={p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in ['scripts/run_wuji_rear_sim.py','scripts/wuji_rear_controller.py','scripts/wuji_rear_diagnostics.py']},initialization='Explicit physical placement tray; no loaded state/history restored'))
     c=RearController(spec,pressure_enabled=not a.pressure_off and a.operation!='response',estimate_delta_m=a.estimate_delta,operation=a.operation);cfg=c.cfg;kin=G2Kinematics()
+    session=RearSession(c);session.confirm_empty();session.begin_open();session.placed()
     wrist=kin.forward(np.array(spec['arm_q_rad']));rel=np.array(spec['placement_object_in_wrist']);object0=wrist@rel
     delta=object0[:3,:3]@np.asarray(a.pose_delta);object0[:3,3]+=delta
     object0[:3,:3]=object0[:3,:3]@Rotation.from_rotvec(np.radians(a.pose_rotation)).as_matrix()
@@ -77,20 +79,20 @@ def main(a):
         for step in range(round(total*240)):
             gym.refresh_dof_state_tensor(sim);gym.refresh_rigid_body_state_tensor(sim);gym.refresh_jacobian_tensors(sim);t=step/240
             if not released and t>=spec['release_seconds']:
-                roots=gym.get_actor_rigid_body_states(env,tray,gymapi.STATE_ALL);roots['pose']['p']['z'][:]=-1;gym.set_actor_rigid_body_states(env,tray,roots,gymapi.STATE_POS);released=True
+                roots=gym.get_actor_rigid_body_states(env,tray,gymapi.STATE_ALL);roots['pose']['p']['z'][:]=-1;gym.set_actor_rigid_body_states(env,tray,roots,gymapi.STATE_POS);released=True;session.unsupported()
             if step%8==0:
-                if a.operation=='response' and abs(t-push_start)<1e-6:c.response_anchor=c.issued.copy()
+                if a.operation=='response' and abs(t-push_start)<1e-6:c.response_anchor=c.issued.copy();session.response()
                 loop_begin=time.perf_counter();q=dof[hand,0].numpy().copy()+rng.normal(0,a.observation_noise,20);c.observe(q)
                 if t<spec['prepare_seconds']:
-                    raw=c.propose_hold(np.asarray(spec['open_q_rad'])+smooth(t/spec['prepare_seconds'])*(np.asarray(spec['hold_target_rad'])-np.asarray(spec['open_q_rad'])))
+                    raw=session.target('close',q,t)
                 elif t<push_start:
                     warm_at=spec['release_seconds']+spec.get('prewarm_after_release_seconds',spec['settle_seconds']-.1)
-                    if a.operation!='response' and t>=warm_at and not c.taken:c.takeover(q)
+                    if a.operation!='response' and t>=warm_at and not c.taken:session.prepare_push(a.operation);c.takeover(q)
                     raw=c.propose_hold(spec['hold_target_rad'])
                 elif a.operation=='response':
                     from scripts.wuji_rear_diagnostics import local_response_target
                     raw=c.propose_hold(local_response_target(c.response_anchor,a.joint,a.step_rad,t-push_start,a.response_seconds))
-                else:raw=c.propose_push(q,t-push_start)
+                else:raw=session.target('push',q,t-push_start)
                 sent=c.constrain(raw);c.commit(sent);target[hand]=torch.tensor(sent,dtype=torch.float32)
                 queue.append(target.clone());physical_target=queue[max(0,len(queue)-1-a.delay_frames)]
                 row=dict(time_s=t,phase='approach_placement' if t<3 else 'independent_hold_history' if t<push_start else 'loaded_local_response' if a.operation=='response' else 'probe_hold' if a.operation=='probe' else 'push_hold',measured_q_rad=q.tolist(),raw_target_rad=raw.tolist(),issued_target_rad=sent.tolist(),applied_delayed_target_rad=physical_target[hand].tolist(),executed_action=c.last_action.tolist(),history_frames=len(c.policy.history),loop_ms=(time.perf_counter()-loop_begin)*1000,pressure_proxy_N=c.policy.pressure_adapter.last_estimate if c.policy.pressure_adapter else None);commands.append(row);f.write(json.dumps(row)+'\n')
@@ -128,5 +130,5 @@ def main(a):
         gym.destroy_sim(sim)
 
 def parser():
-    p=argparse.ArgumentParser();p.add_argument('--operation',choices=['push','probe','response'],default='push');p.add_argument('--joint',type=int,default=17);p.add_argument('--step-rad',type=float,default=.01);p.add_argument('--response-seconds',type=float,default=2.);p.add_argument('--bundle',type=Path,default=Path('research/rear-sim2real-20261009/bundle-deploy-v7.json'));p.add_argument('--output',type=Path,required=True);p.add_argument('--video',action='store_true');p.add_argument('--load',type=float,default=.73549875);p.add_argument('--pose-delta',type=float,nargs=3,default=[0,0,0]);p.add_argument('--pose-rotation',type=float,nargs=3,default=[0,0,0]);p.add_argument('--estimate-delta',type=float,nargs=3,default=[0,0,0]);p.add_argument('--slider-delta',type=float,default=0.);p.add_argument('--stiffness-scale',type=float,default=1.);p.add_argument('--damping-scale',type=float,default=1.);p.add_argument('--joint-friction-scale',type=float,default=1.);p.add_argument('--delay-frames',type=int,default=0);p.add_argument('--hand-friction',type=float,default=.8);p.add_argument('--knife-friction',type=float,default=1.8);p.add_argument('--observation-noise',type=float,default=0.);p.add_argument('--local-peak',action='store_true');p.add_argument('--pressure-off',action='store_true');return p
+    p=argparse.ArgumentParser();p.add_argument('--operation',choices=['push','probe','response'],default='push');p.add_argument('--joint',type=int,default=17);p.add_argument('--step-rad',type=float,default=.01);p.add_argument('--response-seconds',type=float,default=2.);p.add_argument('--bundle',type=Path,default=Path('research/rear-sim2real-20261009/bundle-deploy-v8.json'));p.add_argument('--output',type=Path,required=True);p.add_argument('--video',action='store_true');p.add_argument('--load',type=float,default=.73549875);p.add_argument('--pose-delta',type=float,nargs=3,default=[0,0,0]);p.add_argument('--pose-rotation',type=float,nargs=3,default=[0,0,0]);p.add_argument('--estimate-delta',type=float,nargs=3,default=[0,0,0]);p.add_argument('--slider-delta',type=float,default=0.);p.add_argument('--stiffness-scale',type=float,default=1.);p.add_argument('--damping-scale',type=float,default=1.);p.add_argument('--joint-friction-scale',type=float,default=1.);p.add_argument('--delay-frames',type=int,default=0);p.add_argument('--hand-friction',type=float,default=.8);p.add_argument('--knife-friction',type=float,default=1.8);p.add_argument('--observation-noise',type=float,default=0.);p.add_argument('--local-peak',action='store_true');p.add_argument('--pressure-off',action='store_true');return p
 if __name__=='__main__':main(parser().parse_args())

@@ -6,7 +6,7 @@ import numpy as np
 from scripts.wuji_rear_controller import RearController,load_bundle,ROOT
 from scripts.run_wuji_rear_sim import smooth
 from scripts.record_wuji_rear_event import record
-s=load_bundle('research/rear-sim2real-20261009/bundle-deploy-v7.json');c=RearController(s);c.seed_issued(s['open_q_rad']);p=ROOT/'runs/rear-sim2real-20261009/final/nominal-video-v6';rows=[json.loads(l) for l in (p/'commands.jsonl').read_text().splitlines()];errors=[];push=s['release_seconds']+s['settle_seconds']
+s=load_bundle('research/rear-sim2real-20261009/bundle-deploy-v8.json');c=RearController(s);c.seed_issued(s['open_q_rad']);p=ROOT/'runs/rear-sim2real-20261009/final/nominal-video-v6';rows=[json.loads(l) for l in (p/'commands.jsonl').read_text().splitlines()];errors=[];push=s['release_seconds']+s['settle_seconds']
 for row in rows:
     q=np.array(row['measured_q_rad']);t=row['time_s'];c.observe(q)
     if t<s['prepare_seconds']:raw=c.propose_hold(np.array(s['open_q_rad'])+smooth(t/s['prepare_seconds'])*(np.array(s['hold_target_rad'])-np.array(s['open_q_rad'])))

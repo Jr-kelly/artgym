@@ -20,7 +20,7 @@ b=SDKBackend(bundle,'/data/research/artgym-experiments-20260921/contact-transfer
 try:
     sent,_=b.write(v);q,_=b.read();e['fixture_written_targets_readback']=bool(np.array_equal(q,v) and np.array_equal(sent,v))
     b.sign=np.array([-1,1]*10);b.zero=np.linspace(-.03,.02,20);e['axis_zero_roundtrip']=bool(np.allclose(b.to_model(b.to_device(v)),v))
-    e['explicit_stop_worker_ack']=b.stop()['disabled']
+    e['explicit_stop_worker_ack']=b.stop()['disable_write_ack']
 finally:b.close()
 c=RearController(s);trace=np.load(ROOT/'runs/rear-sim2real-20261009/final/nominal-video-v6/trace.npz');logs=[json.loads(l) for l in (ROOT/'runs/rear-sim2real-20261009/final/nominal-video-v6/commands.jsonl').read_text().splitlines()]
 rows=[r for r in logs if r['time_s']<6.6][-50:]

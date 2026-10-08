@@ -17,7 +17,7 @@ def main():
         if branch!=BRANCH:assert api('git/ref/heads/'+branch)['object']['sha']==expected,branch
     names=git('diff','--name-only','-z',parent,target).split(b'\0')[:-1]
     for n in names:
-        path=n.decode();assert path.startswith('research/rear-sim2real-20261009/') or (path.startswith('scripts/') and 'wuji_rear' in path),path
+        path=n.decode();assert path.startswith('research/rear-sim2real-20261009/') or (path.startswith('scripts/') and 'wuji_rear' in path) or path=='scripts/g2_local_python.sh',path
         assert not any('private' in part.lower() for part in Path(path).parts),path
         assert not path.endswith('.mp4'), 'Videos belong in Release assets'
     record('rear_source_publication_started',evidence=[str(mp)],config=dict(local_commit=target,remote_parent=remote,files=len(names)),next_step='Verify exact source tree and create only authorized new branch')

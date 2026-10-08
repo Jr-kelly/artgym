@@ -2,7 +2,7 @@
 Only explicit motion mode permits writes; no implicit enable, reset or limit writes.
 IPC uses a dedicated inherited socket, so SDK console output cannot become commands.
 """
-import argparse,json,socket,time
+import argparse,json,socket,time,gc
 from pathlib import Path
 import numpy as np
 from isaacgymenvs.deploy.wuji.sdk_hand_api import WujiSDKHandAPI
@@ -35,12 +35,13 @@ class FixtureHand:
 def serve(a):
     bundle=json.loads(Path(a.bundle).read_text());sock=socket.socket(fileno=a.fd);stream=sock.makefile('rw',encoding='utf-8',buffering=1)
     api=WujiSDKHandAPI(bundle['runtime_joint_names'],serial=a.serial,hand=FixtureHand(bundle['runtime_joint_names']) if a.fixture else None,motion_authorized=a.motion_authorized)
-    def reply(value):stream.write(json.dumps(value)+'\n');stream.flush()
+    position_writes=0
+    def reply(value):value['successful_position_writes']=position_writes;stream.write(json.dumps(value)+'\n');stream.flush()
     try:
         if not a.fixture:
             import wujihandpy
             if wujihandpy.__version__!='1.8.0':raise RuntimeError('Expected pinned SDK 1.8.0')
-        api.connect();reply(dict(ok=True,metadata=api.metadata,source='sdk_fixture_no_device' if a.fixture else 'hardware_sdk',sdk_version='1.8.0'))
+        api.connect();gc.collect();gc.disable();reply(dict(ok=True,metadata=api.metadata,source='sdk_fixture_no_device' if a.fixture else 'hardware_sdk',sdk_version='1.8.0',cyclic_gc_deferred=True))
         for line in stream:
             request=json.loads(line);op=request['op'];before=time.monotonic_ns()
             try:
@@ -49,10 +50,17 @@ def serve(a):
                     if a.fixture:value['source']='sdk_fixture_no_device'
                 elif op=='write':
                     # Commit only after successful direct SDK call.
-                    api.command_joint_targets(request['target_rad']);value=dict(issued_target_rad=api.last_target.tolist(),issued_ns=api.last_target_host_ns)
+                    api.command_joint_targets(request['target_rad']);position_writes+=1;value=dict(issued_target_rad=api.last_target.tolist(),issued_ns=api.last_target_host_ns)
+                elif op=='enable':
+                    if not a.motion_authorized:raise PermissionError('Motion authorization required')
+                    # Set current unloaded posture as target before enabling, avoiding stale firmware target.
+                    api.command_joint_targets(api.get_hand_joint_positions())
+                    position_writes+=1
+                    api.hand.write_joint_enabled(True)
+                    value=dict(enable_write_ack=True,enabled_readback=None,control_mode_readback=None,scope='Official 1.8.0 write acknowledged; no enable/mode readback API')
                 elif op=='stop':
                     if not a.motion_authorized:raise PermissionError('Motion authorization needed for firmware disable')
-                    api.hand.write_joint_enabled(False);reply(dict(ok=True,disabled=True));break
+                    api.hand.write_joint_enabled(False);reply(dict(ok=True,disable_write_ack=True,disabled_readback=None,scope='SDK disable request acknowledged, physical state unmeasured'));break
                 elif op=='close':reply(dict(ok=True,closed=True));break
                 else:raise ValueError('Unknown operation')
                 reply(dict(ok=True,data=value,sdk_operation_ns=time.monotonic_ns()-before))
