@@ -12,15 +12,15 @@ from scripts.record_wuji_flat_table_event import record
 from scripts.wuji_functional_entry_affordance import FunctionalEntryAffordance
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--geometry',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--version',default='v922');a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False);geo=json.loads(a.geometry.read_text());assert geo['passed']and not geo['endpoint_only'];src=Path(geo['source']);z=np.load(src/'takeover.npz');f=FunctionalEntryAffordance();g=f.g
+ p=argparse.ArgumentParser();p.add_argument('--geometry',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--version',default='v922');p.add_argument('--bearing-face',choices=['back','side-left'],default='back');a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False);geo=json.loads(a.geometry.read_text());assert geo['passed']and not geo.get('endpoint_only',False);src=Path(geo['source']);z=np.load(src/'takeover.npz');f=FunctionalEntryAffordance();g=f.g
  for n,meshes in g.meshes.items():g.meshes[n]=[(v,np.unique(N,axis=0))for v,N in meshes]
- digit=geo['digit'];ids=np.arange(12,16)if digit=='ring'else np.arange(8,12);moving=np.array(geo.get('moving_joint_indices',ids),dtype=int);checked_digits=['pinky','ring']if digit=='pinky'and 12 in moving else [digit];name='hand_r_'+digit+'_pad_link';V=np.concatenate([v for v,N in g.meshes[name]]);L=np.array(geo['rows'][0]['wrist_in_knife']);h0=z['robot_q'][7:].astype(float);issued=z['issued_target'].astype(float);kp=np.array(json.loads(Path('runs/flat-table-20261006/direct/development/balanced-pad-fresh-free-wrist-widthflip-v877/prefix.json').read_text())['direct_pickup']['hand_kp']);record('static_primary_new_bearing_motor_precheck_started_'+a.version,[str(a.geometry)],dict(scope=__doc__,new_digit=digit,original_new_bearing_motor_force_reference_N=.15),next_step='Dense nominal mesh/H then originaltarget/bounds check; oneactualnewbearing only ifpassed')
+ digit=geo['digit'];ids=np.arange(4,8)if digit=='middle'else np.arange(12,16)if digit=='ring'else np.arange(8,12);moving=np.array(geo.get('moving_joint_indices',ids),dtype=int);checked_digits=['pinky','ring']if digit=='pinky'and 12 in moving else [digit];name='hand_r_'+digit+'_pad_link';V=np.concatenate([v for v,N in g.meshes[name]]);axis=0 if a.bearing_face=='side-left'else 1;boundary=-.0095 if axis==0 else -.004;force=np.eye(3)[axis]*.15;tangent=[1,2]if axis==0 else [0,2];L=np.array(geo['rows'][0]['wrist_in_knife']);h0=z['robot_q'][7:].astype(float);issued=z['issued_target'].astype(float);kp=np.array(json.loads(Path('runs/flat-table-20261006/direct/development/balanced-pad-fresh-free-wrist-widthflip-v877/prefix.json').read_text())['direct_pickup']['hand_kp']);record('static_primary_new_bearing_motor_precheck_started_'+a.version,[str(a.geometry)],dict(scope=__doc__,new_digit=digit,original_new_bearing_motor_force_reference_N=.15,bearing_face=a.bearing_face),next_step='Dense nominal mesh/H then originaltarget/bounds check; oneactualnewbearing only ifpassed')
  def vertices(h):
   T=L@g.w.forward(h)[name];return V@T[:3,:3].T+T[:3,3]
  def foot(h):
-  P=vertices(h);w=np.exp((P[:,1]-P[:,1].max())/.0002);return w@P/w.sum()
+  P=vertices(h);w=np.exp((P[:,axis]-P[:,axis].max())/.0002);return w@P/w.sum()
  def close_residual(x):
-  h=last.copy();h[ids]=x;P=vertices(h);r=list((foot(h)[[0,2]]-foot(last)[[0,2]])*800);r.append((P[:,1].max()+.004)*1000);r.extend(min(0.,c['gap_lower_bound_m']+.0002)*1400 for c in g.gaps(h,L,float(z['slider_q']),digit,certify_clearance_m=.0002));r.extend(min(0.,c['gap_lower_bound_m']-.0002)*1400 for c in g.pair_gaps(h,f.H.pairs,certify_clearance_m=.0002));r.extend((x-last[ids])*.02);return np.array(r)
+  h=last.copy();h[ids]=x;P=vertices(h);r=list((foot(h)[tangent]-foot(last)[tangent])*800);r.append((P[:,axis].max()-boundary)*1000);r.extend(min(0.,c['gap_lower_bound_m']+.0002)*1400 for c in g.gaps(h,L,float(z['slider_q']),digit,certify_clearance_m=.0002));r.extend(min(0.,c['gap_lower_bound_m']-.0002)*1400 for c in g.pair_gaps(h,f.H.pairs,certify_clearance_m=.0002));r.extend((x-last[ids])*.02);return np.array(r)
  path=[np.array(r['hand_q'])for r in geo['rows']];last=path[-1];fit=least_squares(close_residual,last[ids],bounds=(g.w.lower[ids]+.015,g.w.upper[ids]-.015),max_nfev=60,diff_step=1e-5);closed=last.copy();closed[ids]=fit.x;path.append(closed);samples=[];failure=None
  for segment,(A,B)in enumerate(zip(path[:-1],path[1:])):
   count=max(2,int(math.ceil(abs(B-A).max()/.025))+1)
@@ -34,14 +34,14 @@ def main():
    motor=issued[7:].copy();motor[moving]=h[moving]+(issued[7:][moving]-h0[moving])*(1-min(index/4.,1.))
    if index==len(path)-1:
     # Closed contact base, before force preload; highest-Y original material vertex.
-    v=V[vertices(h)[:,1].argmax()];J=np.empty((3,4))
+    v=V[vertices(h)[:,axis].argmax()];J=np.empty((3,4))
     for j,c in enumerate(ids):
      up=h.copy();down=h.copy();up[c]+=1e-5;down[c]-=1e-5;A=L@g.w.forward(up)[name];B=L@g.w.forward(down)[name];J[:,j]=(A[:3,:3]@v+A[:3,3]-B[:3,:3]@v-B[:3,3])/2e-5
-    motor[ids]+=J.T@np.array([0.,.15,0.])/kp[ids]
+    motor[ids]+=J.T@force/kp[ids]
    if min(np.minimum(motor-g.w.lower,g.w.upper-motor))<=0:failure='Original motor joint limit';break
    frames=max(1,int(math.ceil(abs(motor-previous).max()/.012)));clock+=frames/30.;rows.append(dict(time_s=clock,arm_q=issued[:7].tolist(),hand_q=motor.tolist()));previous=motor
  passed=failure is None;audit=dict(passed=passed,failure=failure,samples=samples,closed_pad_bounds_knife_m=[vertices(closed).min(0).tolist(),vertices(closed).max(0).tolist()],new_digit=digit,original_new_bearing_motor_force_reference_N=.15,scope=__doc__);(a.output/'precheck.json').write_text(json.dumps(audit,indent=2))
  if passed:
-  rows.append(dict(rows[-1],time_s=clock+1.5));motor=dict(required_actual_source=str(src),rows=rows,development_abort_on_translation_m=.04,scope=__doc__,new_digit=digit);(a.output/'motor.json').write_text(json.dumps(motor,indent=2))
+  rows.append(dict(rows[-1],time_s=clock+1.5));motor=dict(required_actual_source=str(src),rows=rows,development_abort_on_translation_m=.04,scope=__doc__,new_digit=digit,bearing_face=a.bearing_face);(a.output/'motor.json').write_text(json.dumps(motor,indent=2))
  record('static_primary_new_bearing_motor_precheck_terminal_'+a.version,[str(a.output/'precheck.json')],dict(passed=passed,failure=failure,dense_samples=len(samples),seconds=clock+1.5,new_digit=digit),next_step='Ifpassed actualstable877 newPinky bearing shortnative, old3 exact targets retained; trueback/load+H beforefreshsameepisode');print(json.dumps(dict(passed=passed,failure=failure,dense_samples=len(samples),seconds=clock+1.5,closed_patch_max_Y_m=float(vertices(closed)[:,1].max()))))
 if __name__=='__main__':main()
