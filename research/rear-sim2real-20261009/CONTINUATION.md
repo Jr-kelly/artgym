@@ -13,3 +13,5 @@
 公开新增分支 `feat/wuji-rear-sim2real-20261009`，Release `wuji-rear-sim2real-20261009-v1`；实际commit／上传校验回执见 SOURCE-PUBLICATION、RELEASE-VERIFICATION。与已有contact-transfer、flat-table分支比较时不可混淆不同初始化与版本。归档分出运行增量、原始证据与本地可播放材料，旧权重复用；恢复核验不算新增物理成功。
 
 资源快照 UTC 2026-10-08T19:57:46.618805+00:00（上海+8）：本轮实验进程已结束；用户monitor97337/580871/760633/3132243、视频server4098仍保留。单次GPU读取14%，不据此声称4小时门槛满足；未运行填充作业。接手必须重新验证进程和利用率。之后无新证据时不要默认追加PPO或同质短仿真。
+
+离线交付已完成 UTC 2026-10-08T20:01:28.076514+00:00。初始发布源码 local c99d1d93db6127b229f70d6c770277f0d8854fe6 对应 GitHub ac0b0c9941d86e00589f83756ba444e8d1612046，完全相同 Git tree 851c8dd23805b45e5a5ddad25d1fa584bd6f6020；最终分支包含上传回执。Release已公开：https://github.com/Jr-kelly/artgym/releases/tag/wuji-rear-sim2real-20261009-v1，五个资产全部经服务器digest及不带凭据的完整公开下载SHA256双重校验。残余工作仅现场，未执行真机。
