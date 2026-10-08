@@ -1,3 +1,5 @@
+v3离线交付及公开下载已完成：https://github.com/Jr-kelly/artgym/releases/tag/wuji-rear-sim2real-20261009-v3。科学源码 local bb968a1cdb531c7ef7987f815e75b73241639dfb ↔ GitHub 5fdb08d21a1af1ce63c0d311e10e5b9cbeb90375，tree ec764dd962f91b130df2347371a665bf987c0688一致。最终分支还保存发布回执；G2接口与所有真机结果仍阻塞/未测。
+
 # 当前接续：rear-sim2real v3（完整部署调用链）
 
 实际副本与分支不变。当前 bundle-deploy-v8.json，500个模型/资产/配置/框架源码哈希。先读 v3/REPORT.md、FIRST-HARDWARE-SESSION.md、v3/STATE.json。现场统一field.json与wuji_rear_field入口；一个当前包＋已有基础一次恢复，无需依次覆盖v1/v2。当前真机session明确拒绝G2缺项；没有空接口/mock到位证明。

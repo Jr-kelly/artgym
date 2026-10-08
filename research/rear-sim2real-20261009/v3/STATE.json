@@ -1,13 +1,13 @@
 {
-  "updated_utc": "2026-10-08T21:51:00.602254+00:00",
+  "updated_utc": "2026-10-08T21:57:47.789516+00:00",
   "current_bundle": "research/rear-sim2real-20261009/bundle-deploy-v8.json",
   "bundle_sha256": "8b170dcab07ae0ce6be684171fe014460bbe8db2c3cd87c1b202fef5ecfe4a28",
   "required_dependencies": 500,
   "offline_implementation_verified": true,
-  "offline_delivery_complete": false,
-  "publication_pending": true,
+  "offline_delivery_complete": true,
+  "publication_pending": false,
   "hardware_deployment_complete": false,
-  "g2_integration": "blocked_missing_exact_model_matched_sdk_and_field_status",
+  "g2_integration": "blocked",
   "real_robot_ran": false,
   "training_started": false,
   "new_physics_runs": 1,
@@ -26,5 +26,27 @@
   },
   "active_experiment_jobs": [],
   "remaining": "Exact G2 model/controller example + field PC and named read-only state/mounting; actual Wuji zero/mode/speed/holding timing and loaded >20mm field test",
-  "completion_scope": "Current requested independent implementation and evidence; no real hardware interface/functionality claim"
+  "completion_scope": "Current requested independent implementation and evidence; no real hardware interface/functionality claim",
+  "source_publication": {
+    "local_commit": "bb968a1cdb531c7ef7987f815e75b73241639dfb",
+    "github_commit": "5fdb08d21a1af1ce63c0d311e10e5b9cbeb90375",
+    "tree": "ec764dd962f91b130df2347371a665bf987c0688",
+    "branch": "feat/wuji-rear-sim2real-20261009",
+    "protected_branch_heads_unchanged": true
+  },
+  "release_url": "https://github.com/Jr-kelly/artgym/releases/tag/wuji-rear-sim2real-20261009-v3",
+  "public_download_verified": true,
+  "resource_snapshot": {
+    "utc": "2026-10-08T21:56:57+00:00",
+    "protected_monitor_pids": [
+      97337,
+      580871,
+      760633,
+      3132243
+    ],
+    "protected_video_server_pid": 4098,
+    "gpu_utilization_percent": 6,
+    "scope": "Single local snapshot; no 4h utilization compliance claim"
+  },
+  "native_goal_status": "completion_pending_final_source_receipts"
 }
