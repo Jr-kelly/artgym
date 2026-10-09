@@ -2,6 +2,7 @@
 import contextlib
 import hashlib
 import json
+import select
 import socket
 import subprocess
 import time
@@ -67,9 +68,19 @@ class NetworkBackend:
         self.stream.write(json.dumps(dict(op=op, **kw))+'\n');self.stream.flush()
         return self.receive()
 
-    def prepare(self):
+    def prepare(self, on_wait=None):
         self.sock.settimeout(70)
-        try:self.g2_actual_state = self.request('prepare')['sample']
+        try:
+            if on_wait is None:
+                self.g2_actual_state = self.request('prepare')['sample']
+            else:
+                self.stream.write(json.dumps(dict(op='prepare'))+'\n');self.stream.flush()
+                deadline=time.monotonic()+70
+                while not select.select([self.sock],[],[],.02)[0]:
+                    on_wait()
+                    if time.monotonic()>deadline:raise TimeoutError('Arm initialization reply timed out')
+                on_wait()
+                self.g2_actual_state=self.receive()['sample']
         finally:self.sock.settimeout(.06)
         return self.g2_actual_state
 

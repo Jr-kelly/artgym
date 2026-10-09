@@ -2,7 +2,7 @@
 import argparse, csv, hashlib, json, os, subprocess, sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-BUNDLE='research/rear-sim2real-20261009/bundle-deploy-v10.json'
+BUNDLE='research/rear-sim2real-20261009/bundle-deploy-v11.json'
 def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 def read_config(path):
     c=json.loads(Path(path).read_text())

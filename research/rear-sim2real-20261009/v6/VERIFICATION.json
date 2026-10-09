@@ -1,0 +1,67 @@
+{
+  "utc": "2026-10-09T14:31:38.938472+00:00",
+  "passed": true,
+  "new_checks": 26,
+  "lifecycle": {
+    "checks": {
+      "one_readonly_capture_has_versions_state_and_timing": true,
+      "mode_without_authorization_never_posts": true,
+      "actual_mode_configure_and_start": true,
+      "repeat_mode_does_not_restart_running_executor": true,
+      "setup_activates_one_pinned_config_and_named_targets": true,
+      "serve_waits_without_robot_connection_or_action": true,
+      "second_session_same_operator_directory_rejected": true,
+      "start_without_empty_confirmation_rejected": true,
+      "bounded_actual_state_initialization_once": true,
+      "duplicate_start_never_initializes_again": true,
+      "wrong_phase_confirmation_rejected": true,
+      "active_session_blocks_mode_reconfiguration": true,
+      "duplicate_confirmation_cannot_advance_next_phase": true,
+      "paused_connection_reissues_real_preload_at_30hz": true,
+      "paused_confirmation_cannot_advance": true,
+      "loaded_reset_rejected_without_reset_rpc": true,
+      "resumed_session_retains_generation_and_actual_target_receipts": true,
+      "repeat_start_has_only_one_measured_arm_arrival": true,
+      "operator_stop_is_software_only": true,
+      "explicit_offline_run_cannot_be_hardware_result": true,
+      "failed_read_keeps_partial_capture_and_inventory": true
+    },
+    "passed": true,
+    "scope": "New launcher, real installed client HTTP/RPC, bounded initialization and operator lifecycle over explicit offline endpoint; no robot, GDT UI, new physics or full matrix",
+    "real_robot_ran": false,
+    "cycles": 395,
+    "loop_ms": {
+      "p50": 2.9067505000000002,
+      "p95": 4.7707137500000005,
+      "max": 8.082611,
+      "over33ms": 0
+    },
+    "reused": "Existing v5 380-frame parity, 1174-cycle full session and conditional 10ms physical evidence remain separate"
+  },
+  "final_launcher": {
+    "passed": true,
+    "checks": {
+      "stdlib_launcher_reuses_configured_private_python": true,
+      "final_504_pins_envcheck": true,
+      "forge_check_arguments_reach_actual_sdk": true,
+      "generated_site_launcher": true,
+      "collector_uses_same_config": true
+    },
+    "real_robot_ran": false,
+    "scope": "Final path/packaging additions and 4 empty-check point commands only; successful 395-cycle lifecycle evidence reused"
+  },
+  "final_bundle_sha256": "f41c949106e5fc172c714ebfae3c38ca3d298cc1c61ca215fd5eafd334d6a85a",
+  "lifecycle_bundle_at_run_sha256": "c9724f09925fedad30104b4144622600fd56dfea8156b0ddb49d8b5cd3ff10fc",
+  "final_added_after_lifecycle": "Stdlib config launcher and clearer prompt text only; 5 final path/SDK checks without re-running loaded session",
+  "control_contract_unchanged": true,
+  "policy_weights_unchanged": true,
+  "physics_runs": 0,
+  "training": false,
+  "hardware_deployment_complete": false,
+  "real_robot_ran": false,
+  "reused_evidence": [
+    "v5/VERIFICATION.json",
+    "v5/PACKAGE-CHECK.json"
+  ],
+  "test_harness_failure_preserved": "First focused run completed software stop but aggregator looked for timing in wrong JSONL; corrected aggregation and rechecked only new lifecycle"
+}

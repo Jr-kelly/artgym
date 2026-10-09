@@ -27,7 +27,7 @@ def verified_field_speed(field,spec):
     return v
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('mode',choices=['sim','discover','read','check','enable','hold','response','probe','push','session','stop']);p.add_argument('--bundle',type=Path,default=Path('research/rear-sim2real-20261009/bundle-deploy-v10.json'));p.add_argument('--output',type=Path);p.add_argument('--sdk-python',type=Path,default=Path(os.environ.get('WUJI_SDK_PYTHON',sys.executable)));p.add_argument('--serial');p.add_argument('--fixture',action='store_true');p.add_argument('--motion-authorized',action='store_true');p.add_argument('--calibration',type=Path);p.add_argument('--pressure-response',type=Path);p.add_argument('--seconds',type=float,default=6);p.add_argument('--response-seconds',type=float,default=2);p.add_argument('--joint',type=int,default=17);p.add_argument('--step-rad',type=float,default=.01);p.add_argument('--stop-file',type=Path);p.add_argument('--external-jsonl',type=Path);p.add_argument('--field-config',type=Path);p.add_argument('--empty-hand-confirmed',action='store_true');a,extra=p.parse_known_args()
+    p=argparse.ArgumentParser();p.add_argument('mode',choices=['sim','discover','read','check','enable','hold','response','probe','push','session','stop']);p.add_argument('--bundle',type=Path,default=Path('research/rear-sim2real-20261009/bundle-deploy-v11.json'));p.add_argument('--output',type=Path);p.add_argument('--sdk-python',type=Path,default=Path(os.environ.get('WUJI_SDK_PYTHON',sys.executable)));p.add_argument('--serial');p.add_argument('--fixture',action='store_true');p.add_argument('--motion-authorized',action='store_true');p.add_argument('--calibration',type=Path);p.add_argument('--pressure-response',type=Path);p.add_argument('--seconds',type=float,default=6);p.add_argument('--response-seconds',type=float,default=2);p.add_argument('--joint',type=int,default=17);p.add_argument('--step-rad',type=float,default=.01);p.add_argument('--stop-file',type=Path);p.add_argument('--external-jsonl',type=Path);p.add_argument('--field-config',type=Path);p.add_argument('--empty-hand-confirmed',action='store_true');p.add_argument('--control-dir',type=Path);a,extra=p.parse_known_args()
     if a.mode=='sim':
         from scripts.run_wuji_rear_sim import parser,main as sim
         sim(parser().parse_args(['--bundle',str(a.bundle),'--output',str(a.output)]+extra));return
@@ -62,7 +62,16 @@ def main():
         response=json.loads(a.pressure_response.read_text())
         if response.get('format')!='wuji-local-response-v2' or not response.get('position_response_recorded') or not response.get('bounded_probe_permitted') or not response.get('pressure_compensation_enabled') or response.get('bundle_sha256')!=hashlib.sha256(a.bundle.read_bytes()).hexdigest():raise ValueError('Invalid response/bundle binding')
         if not a.fixture and (response.get('source')!='hardware_local_response' or (not network and (not a.calibration or response.get('device_calibration_sha256')!=hashlib.sha256(a.calibration.read_bytes()).hexdigest()))):raise ValueError('Response/calibration/device source mismatch')
-    if a.output.exists():raise FileExistsError(a.output)
+    operator=None
+    if a.control_dir:
+        if not network or a.mode!='session':raise ValueError('Operator channel is for the unified continuous session only')
+        from scripts.wuji_rear_operator import OperatorControl
+        operator=OperatorControl(a.control_dir)
+        try:operator.wait_start()
+        except BaseException:operator.close();raise
+    if a.output.exists():
+        if operator:operator.close()
+        raise FileExistsError(a.output)
     a.output.mkdir(parents=True)
     (a.output/'bundle-at-run.json').write_bytes(bundle_bytes)
     from scripts.wuji_rear_sdk_backend import SDKBackend
@@ -82,11 +91,12 @@ def main():
             b=NetworkBackend(field,a.bundle,a.output,motion=motion,allow_replay=a.fixture)
             if a.mode in ['probe','push'] and (response.get('device_calibration_sha256')!=b.header['calibration_sha256'] or response.get('execution_profile_sha256')!=b.header['network_profile_sha256']):
                 raise ValueError('Response belongs to a different network calibration/profile; no arm approach sent')
-            if loaded:g2_last=b.prepare()
+            if loaded:g2_last=b.prepare(on_wait=operator.poll if operator else None)
         else:b=SDKBackend(a.bundle,a.sdk_python,a.serial,motion,a.fixture,a.calibration,a.output/'sdk-console.log',provisional_check=a.mode in ['check','stop','enable'])
     except BaseException:
         if b is not None:b.close()
         if g2:g2.close()
+        if operator:operator.close()
         raise
     controller=None;session=None;rows=[];stop_reason=None;stop_ack=None;analysis_process=None;events=[];gc_was_enabled=gc.isenabled()
     data_source=('offline_corobot_protocol_no_device' if a.fixture else 'hardware_corobot') if network else ('sdk_fixture_no_device' if a.fixture else 'hardware_sdk')
@@ -96,8 +106,16 @@ def main():
     scheduler=DeadlineLoop();force_tail=ExternalForceTail(a.external_jsonl) if a.external_jsonl else None
     def event(name,**kw):
         v=dict(host_monotonic_ns=time.monotonic_ns(),phase=name,state=None if session is None else session.state,**kw);events.append(v)
+        if operator:operator.update(phase=name,session_state=v['state'],placement_generation=None if session is None else session.generation)
         with (a.output/'session-events.jsonl').open('a') as ef:ef.write(json.dumps(v)+'\n')
     def cycle(raw=None,phase='read'):
+        if operator:
+            operator.poll()
+            while operator.state['paused']:
+                one_cycle(lambda q:controller.propose_hold(controller.issued),'operator_paused_hold')
+                operator.poll()
+        return one_cycle(raw,phase)
+    def one_cycle(raw=None,phase='read'):
         nonlocal consecutive_late,overruns,previous_full_ms,g2_last
         if a.stop_file and a.stop_file.exists():raise KeyboardInterrupt('Stop file before next command')
         scheduler.tick();begin_ns=time.monotonic_ns();begin=time.monotonic();q,telemetry=b.read();read_end_ns=time.monotonic_ns();sent=None;action=None;write_timing=None;compute_end_ns=read_end_ns
@@ -134,33 +152,39 @@ def main():
     def run_for(seconds,func=None,phase='read'):
         # Exact 30Hz logical frame clock, actual sampling logged; never catch up.
         for i in range(round(seconds*30)):cycle(func(i/30) if func else None,phase)
-    def operator_wait(prompt):
-        if a.fixture:event('fixture_operator_confirmation',prompt=prompt);return
-        print(prompt+' 输入 go；暂停期间维持最后成功下发目标。Ctrl+C 终止软件流；先托刀并按现场设备停止流程处理。',flush=True)
+    def operator_wait(prompt,gate):
+        if a.fixture and not operator:event('fixture_operator_confirmation',prompt=prompt);return
+        if operator:operator.gate(gate,prompt)
+        instruction=(' 在另一终端运行 next --gate '+gate if operator else ' 输入 go')
+        print(prompt+instruction+'；等待期间维持最后成功下发目标。Ctrl+C 终止软件流；先托刀并按现场设备停止流程处理。',flush=True)
         while True:
             cycle(lambda q:controller.propose_hold(controller.issued),'operator_hold')
+            if operator:
+                if operator.approved:
+                    operator.update(gate=None,prompt=None);return
+                continue
             if select.select([sys.stdin],[],[],0)[0]:
                 answer=sys.stdin.readline().strip().lower()
                 if answer=='go':return
                 if answer in ['stop','quit','']:raise KeyboardInterrupt('Operator stopped')
     def unload():
         session.wait_unload();event('waiting_unload')
-        operator_wait('托住并完全取下刀；如下一轮完整推动，把滑块近端复位至刀尾30mm。确认空手后继续')
+        operator_wait('托住并完全取下刀；如下一轮完整推动，把滑块近端复位至刀尾30mm。确认空手后继续','unload-'+str(session.generation))
         session.unloaded();event('unloaded_confirmed')
     def placement():
         session.begin_open();event('waiting_placement')
         initial=controller.issued.copy();opened=np.asarray(spec['open_q_rad'])
         run_for(3,lambda t:lambda q:controller.propose_hold(initial+smooth(t/3)*(opened-initial)),'empty_approach')
-        operator_wait('按图放刀，滑块近端距刀尾30mm；暂托刀尾并确认拇指落点')
+        operator_wait('按图放刀，滑块近端距刀尾30mm；暂托刀尾并确认拇指落点','place-'+str(session.generation))
         session.placed();event('closing')
         initial=controller.issued.copy()
         run_for(3,lambda t:lambda q:session.target('close',q,t,initial),'close_with_external_support')
-        operator_wait('缓慢撤去外部承托，确认刀无滚动或持续滑移')
+        operator_wait('缓慢撤去外部承托，确认刀无滚动或持续滑移','withdraw-'+str(session.generation))
         session.unsupported();event('loaded_hold')
         run_for(2,lambda t:lambda q:controller.propose_hold(controller.issued),'independent_hold_history')
     def push(operation):
         session.prepare_push(operation);event('prepare_'+operation)
-        operator_wait('确认真实位置响应已检查、无滚转滑移；准备'+('5mm有界诊断' if operation=='probe' else '完整35mm请求（实测需>20mm）'))
+        operator_wait('确认真实位置响应已检查、无滚转滑移；准备'+('5mm有界诊断' if operation=='probe' else '完整35mm请求（实测需>20mm）'),'prepare-'+operation+'-'+str(session.generation))
         # Clear old response/analysis history and collect actual new unsupported samples.
         controller.policy.history=[]
         run_for(50/30,lambda t:lambda q:controller.propose_hold(controller.issued),'fresh_pre_takeover_history')
@@ -172,7 +196,7 @@ def main():
         run_for(50/30,lambda t:lambda q:controller.propose_hold(controller.issued),'post_warm_real_history')
         run_for(spec['push_seconds'],lambda t:lambda q:session.target('push',q,t),'closed_loop_probe_and_hold' if operation=='probe' else 'closed_loop_push_and_hold')
         session.push_done();event('post_push_hold')
-        operator_wait('用尺和视频检查实际行程、侧面滚转和保持；若试推失败输入 stop；通过后 go。不会据fixture自动判定接触成功')
+        operator_wait('用尺和视频检查实际行程、侧面滚转和保持；若试推失败输入 stop；通过后 go。不会据fixture自动判定接触成功','result-'+operation+'-'+str(session.generation))
     try:
         if a.stop_file and a.stop_file.exists():raise KeyboardInterrupt('Stop file before initialization')
         if a.mode=='stop':stop_ack=b.stop();stop_reason='explicit disable request acknowledged';return
@@ -215,7 +239,7 @@ def main():
                 if analysis['issued_amplitude_rad']<.003 or analysis['encoder_amplitude_rad']<.0005:raise ValueError('No measurable loaded response; inspect mapping/mode/preload')
                 response_rows=[r for r in rows if r['phase']=='loaded_local_response']
                 if max(r['end_to_end_ms'] for r in response_rows)>1000/30:raise TimeoutError('Local response full loop timing failed')
-                operator_wait('检查响应图／方向／恢复偏置和接触视频；同意仅开启临时模型补偿做probe后输入 go（不是测力标定）')
+                operator_wait('检查响应图／方向／恢复偏置和接触视频；同意仅开启临时模型补偿做probe后输入 go（不是测力标定）','response-review-'+str(session.generation))
                 profile=dict(format='wuji-local-response-v2',bundle_sha256=hashlib.sha256(a.bundle.read_bytes()).hexdigest(),device_calibration_sha256=b.header.get('calibration_sha256'),source='offline_corobot_protocol_no_device' if a.fixture and network else 'sdk_fixture_no_device' if a.fixture else 'hardware_local_response',execution_profile_sha256=b.header.get('network_profile_sha256'),position_response_recorded=True,bounded_probe_permitted=True,pressure_compensation_enabled=True,normal_force_calibrated=False,full_action_reliability='not_established',response_analysis=[analysis])
                 (a.output/'response-verified.json').write_text(json.dumps(profile,indent=2))
                 push('probe');unload()
@@ -246,5 +270,6 @@ def main():
         try:b.close()
         finally:
             if g2:g2.close()
+            if operator:operator.close()
         print(json.dumps(summary),flush=True)
 if __name__=='__main__':main()

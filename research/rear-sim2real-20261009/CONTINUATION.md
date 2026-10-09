@@ -1,3 +1,10 @@
+# 当前 v6：现场操作入口
+
+当前bundle-deploy-v11.json；先读v6/REPORT.md和VERIFICATION.json。沿用v5统一网络point执行与原完整控制器；新增一次配置launcher、等待开始、命名确认门、同连接暂停保持、重复start不初始化、拒绝外部reset、明确软件stop非失能。
+
+本轮26项新增检查通过，395周期p95 4.771ms/max8.083ms/零>33ms；只读失败保留证据。既有380帧/1174周期/条件10ms物理复用，无新物理或训练。私有FIRST-FIELD-SESSION.md是唯一当前现场指南，完整正文交付用户；旧命令已移history。现场手驱动/PointAction语义与安装标定时钟仍需实际版本证据，不能将离线通过标成真机完成。
+
+<!-- V6_HISTORY -->
 # 当前 v5：统一 GDT / CoRobot 手臂执行
 
 新现场事实已覆盖v4直接USB/仅状态GDT架构。使用bundle-deploy-v10；先读v5/REPORT.md和VERIFICATION.json。一个CoRobot point请求同时下发固定右臂与20D手目标，原始RPC成功回执后才提交接口目标历史；底层插值后的电机目标未读回。主线不访问4090 Wuji USB，不启动PI0.5或训练。

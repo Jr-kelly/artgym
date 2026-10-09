@@ -4,7 +4,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def main():
- p=argparse.ArgumentParser();p.add_argument('--base',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--bundle',default='research/rear-sim2real-20261009/bundle-deploy-v8.json');p.add_argument('--revision',choices=['v3','v4','v5'],default='v3');a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True)
+ p=argparse.ArgumentParser();p.add_argument('--base',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--bundle',default='research/rear-sim2real-20261009/bundle-deploy-v8.json');p.add_argument('--revision',choices=['v3','v4','v5','v6'],default='v3');a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True)
  d=ROOT/'research/rear-sim2real-20261009';bundle=ROOT/a.bundle;s=json.loads(bundle.read_text());files=set()
  for n,h in s['required_sha256'].items():
   if sha(ROOT/n)!=h:raise ValueError('Current source does not match requested frozen bundle: '+n)
@@ -15,6 +15,7 @@ def main():
  # Current deployment code and one guide/audit. Historical pins/source remain in Git/old Releases.
  files.update(str(p.relative_to(ROOT)) for p in (ROOT/'scripts').glob('*wuji_rear*.py'))
  files.add('scripts/g2_local_python.sh')
+ files.add('research/rear-sim2real-20261009/v3/placement-ruler.png')
  files.add(str(bundle.relative_to(ROOT)))
  files.update('research/rear-sim2real-20261009/'+n for n in ['FIRST-HARDWARE-SESSION.md','REPRODUCE.md','RUNTIME-CONTRACT.json','MOUNTING.json'])
  # The checksum receipt is written after packaging; including a prior receipt
