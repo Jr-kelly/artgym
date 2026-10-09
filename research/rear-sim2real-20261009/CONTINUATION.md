@@ -1,3 +1,12 @@
+# 当前 v5：统一 GDT / CoRobot 手臂执行
+
+新现场事实已覆盖v4直接USB/仅状态GDT架构。使用bundle-deploy-v10；先读v5/REPORT.md和VERIFICATION.json。一个CoRobot point请求同时下发固定右臂与20D手目标，原始RPC成功回执后才提交接口目标历史；底层插值后的电机目标未读回。主线不访问4090 Wuji USB，不启动PI0.5或训练。
+
+实际Forge入口/网络映射/只读capture/绑定/会话已实现。20项针对性合同（含380帧真实编解码/RPC对齐），组合1174周期、p95 10.265ms/max14.439ms/零>33ms。仅新增1条假设10ms线性过渡的全段接触物理，32.209mm/保持1.033s；不能称实际GDT插值或真机成功。阶段/单写端/预热保活/卸载复位接续保留；已成功组合证据复用。
+
+现场仅剩执行组件/反馈实际名字单位和语义、插值频率/过期停止、同步时钟及安装标定对应。详细指南和原始私有资料在私有交付，未公开。real_robot_ran=false、hardware_deployment_complete=false。日志和3处handoff同步；没有本轮实验进程继续运行。不要按下面历史v4指令恢复USB主线。
+
+<!-- V5_HISTORY -->
 v4自研源码已同步：local 0e3912d5afa4017aecad17b4660403cf33a26780 ↔ GitHub 6de142585c08a4254f23d62cde14612afed3c4df，相同tree 78e63a8cdaca44644e473960da339813eb489606；旧两分支未改。私有交付包与现场指南留私有目录，未公开。完成范围是独立软件准备，hardware_deployment_complete=false；后续仅具体现场事实，不能默认重训。
 
 # 当前v4：制造商接口整合

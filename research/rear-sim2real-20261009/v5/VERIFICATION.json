@@ -1,0 +1,74 @@
+{
+  "utc": "2026-10-09T11:07:45.390630+00:00",
+  "format": "wuji-rear-unified-network-verification-v1",
+  "passed": true,
+  "checks": {
+    "actual_sdk_full_40_feedback_and_named_20_mapping": true,
+    "connect_read_never_resets_initializes_or_writes": true,
+    "read_only_cannot_write": true,
+    "actual_wire_and_receipt_define_history": true,
+    "one_absolute_point_right_arm_and_right_effector_only": true,
+    "encoder_is_separate_from_preloaded_target": true,
+    "rejected_action_does_not_commit": true,
+    "same_connection_maintains_actual_preload_during_warmup": true,
+    "old_clock_sample_rejected_before_history": true,
+    "loaded_mode_switch_invalidates_session": true,
+    "stop_does_not_forge_disable_ack": true,
+    "target_substitution_for_encoder_rejected": true,
+    "field_binding_has_no_usb_dependency": true,
+    "response_profile_mismatch_rejected_before_any_arm_or_hand_motion": true,
+    "combined_uses_unified_network_not_usb": true,
+    "response_probe_unload_30mm_replace_full_end": true,
+    "combined_has_no_legacy_usb_worker": true,
+    "every_issued_row_has_actual_rpc_sequence": true,
+    "380_legal_frames_real_network_command_parity": true,
+    "fixture_cannot_autoconfirm_hardware_before_connection": true
+  },
+  "protocol_scope": "Actual installed client serialization/RPC against explicit offline substitute; actual field executor not obtained",
+  "protocol_checks": 20,
+  "legal_input_parity": {
+    "frames": 380,
+    "maximum_sent_error_rad": 2.7755575615628914e-17,
+    "maximum_encoder_roundtrip_error_rad": 1.3877787807814457e-17,
+    "passed": true,
+    "scope": "Saved legal 380-frame encoder input through real SDK RPC, named permutations/sign/zero and accepted interface targets; not hardware/GDK processing or new contact physics",
+    "real_robot_ran": false,
+    "history_semantics": "rpc_accepted_point_target"
+  },
+  "continuous_session": {
+    "samples": 1174,
+    "successful_writes_including_arm_and_warmup": 1255,
+    "loop_ms": {
+      "p50": 3.600378,
+      "p95": 10.265147149999999,
+      "max": 14.439206,
+      "over33ms": 0
+    },
+    "source": "offline_corobot_protocol_no_device",
+    "history_semantics": "rpc_accepted_point_target",
+    "end_to_end_includes": "Read, inference, unified network point RPC and actual acceptance, control/timing record",
+    "physical_disabled_state_confirmed": false
+  },
+  "conditional_physics": {
+    "passed": true,
+    "active_displacement_mm": 32.20920140642369,
+    "hold_range_mm": 0.02864748239517212,
+    "hold_duration_s": 1.0333333333333334,
+    "point_interpolation_seconds": 0.01,
+    "scope": "One nominal full contact simulation with assumed 10ms linear ramp; not actual GDT interpolation",
+    "result": "runs/rear-sim2real-20261009/v5/point-ramp-nominal/result.json"
+  },
+  "bundle_final_sha256": "e4505ecdb29227306d1a9f914039cd1d98ebe4a9d955bb5135be437a6c6f5bb6",
+  "test_bundle_sha256": {
+    "protocol_release": "107f69c341c39be5d58b426f4e25ef3ba6c91f009e29fe5f4a18b4fcf626930a",
+    "parity": "d81bc80692ea9ae40a3194869367d4a41079aee2cf3990616445f80be3902791",
+    "session": "c408b4b09ea474d1e7827edeac8d9b575a5de2daa55c158e95f9913624a7fb4a",
+    "physics": "4c8ad3dcdb9006bb23ef54d7f8389713484e9252d44ccb89264a246ba2d45120",
+    "fixture_provenance_guard": "e4505ecdb29227306d1a9f914039cd1d98ebe4a9d955bb5135be437a6c6f5bb6"
+  },
+  "source_notes": "Intermediate bundle hashes preserved. Later changes add strict profile binding, validation and named export; core models/references/normalization remain unchanged. Combined success reused rather than repeated.",
+  "real_robot_ran": false,
+  "hardware_deployment_complete": false,
+  "training_started": false,
+  "new_physics_runs": 1
+}

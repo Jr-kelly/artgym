@@ -1,3 +1,10 @@
+# 当前v5网络通路
+
+先读v5/REPORT.md、VERIFICATION.json；当前bundle-deploy-v10及统一网络后端。复用原模型和合法380帧输入；制造商实际客户端/私有注册入口、集中field和现场命令随私有包。环境是原Isaac Gym/Torch Python3.8推理＋独立Python3.10 CoRobot；无PC USB发现前提，无PI0.5训练。本轮仅1条条件10ms过渡的标称物理，不重复矩阵。旧源代码／权重／旧失败／视频完整保留。
+
+自研包恢复时使用现有工具的 --bundle-path research/rear-sim2real-20261009/bundle-deploy-v10.json。现场从只读执行组件/状态capture开始，再绑定实际profile；未知名字/单位/clock/执行后处理不能靠offline fixture填写。下面旧指令属于对应版本历史，当前启动按私有v5指南。
+
+<!-- V5_REPRODUCTION -->
 # v4续接
 
 当前bundle-deploy-v9.json，控制核心/权重不变。公开部署包与私有制造商桥接包分开；私有协议源码不进入公开归档。包工具使用 `--bundle research/rear-sim2real-20261009/bundle-deploy-v9.json --revision v4`；恢复工具使用 `--bundle-path research/rear-sim2real-20261009/bundle-deploy-v9.json`。复用v3现场环境和旧权重，无需依次覆盖旧版本、重训或重做矩阵。当前交付只证明协议软件/离线会话，现场仍有明确待验项。

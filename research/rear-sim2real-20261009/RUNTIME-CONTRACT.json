@@ -8,5 +8,20 @@
   "sdk_python": "/data/research/artgym-experiments-20260921/contact-transfer-sdk310-venv/bin/python",
   "sdk_version": "1.8.0",
   "isaacgym": "Preview4 installed licensed runtime",
-  "normalization": "Teacher running statistics in exact checkpoint; model q ranges from pinned Wuji URDF; device limits separately intersect for send; signed zero mapping only at SDK boundary"
+  "normalization": "Unchanged checkpoint running statistics and model ranges; device limits separately intersect; named sign/zero conversion once at network boundary",
+  "sdk_fields_scope": "Historical direct-USB environment; current selected network path does not require this SDK or PC USB access",
+  "current_execution": {
+    "backend": "corobot-unified-v1",
+    "protocol": "CoRobot point RPC for arm and hand together",
+    "control_hz": 30,
+    "client_python": "3.10.12 independently installed; actual field version must be read",
+    "client_version": "0.2.2",
+    "numpy": "1.26.4",
+    "scipy": "1.15.2",
+    "websockets": "12.0",
+    "msgpack": "1.1.1",
+    "history": "Actual RPC-accepted interface target, distinct from encoder and lower-level motor target",
+    "clock": "Confirmed remote UNIX ns with measured synchronization bound; same-host monotonic only for explicit offline tests",
+    "firmware_interpolation": "Must be verified on the deployed execution component; request period does not prove physical frequency"
+  }
 }

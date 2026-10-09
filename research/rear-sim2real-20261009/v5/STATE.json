@@ -1,0 +1,19 @@
+{
+  "current": "v5-unified-network",
+  "bundle": "research/rear-sim2real-20261009/bundle-deploy-v10.json",
+  "selected_execution": "GDT remote_env / CoRobot execute_point_action for arm and hand",
+  "direct_pc_usb_required": false,
+  "gdt_status_only": false,
+  "software_implemented": true,
+  "hardware_deployment_complete": false,
+  "real_robot_ran": false,
+  "training_started": false,
+  "new_physics_runs": 1,
+  "active_jobs": [],
+  "actor_sha256": "6e89a2bb86ec4b94eba8db39bab54cc841594955bd971311353f5c7d2aaf6a9e",
+  "pending_external": [
+    "Installed hand encoder/action mapping and units/absolute semantics with origin evidence",
+    "Actual executor interpolation/clipping/frequency/lifetime/stop semantics; PolicyTaskServer client component if required",
+    "Actual state capture/endpoints, synchronized clock bound, G2/Wuji hardware/calibration/mount correspondence"
+  ]
+}
