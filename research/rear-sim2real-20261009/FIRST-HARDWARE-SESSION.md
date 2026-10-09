@@ -1,6 +1,6 @@
 # 当前现场入口 v6
 
-当前配置为bundle-deploy-v11.json，使用已有统一CoRobot point执行，不访问4090 Wuji USB。私有交付内FIRST-FIELD-SESSION.md是唯一当前现场操作指南，含部署、GDT连接、remote_env模式启动、命名阶段确认、暂停、卸载复位和退出。完整正文同时交付给用户，不能仅给远端机器路径。
+当前配置为bundle-deploy-v11.json，使用已有统一CoRobot point执行，不访问4090 Wuji USB。[FIRST-FIELD-SESSION.md](FIRST-FIELD-SESSION.md)提供完整公开脱敏操作指南；私有交付内同名文件保留真实现场信息，含部署、GDT连接、remote_env模式启动、命名阶段确认、暂停、卸载复位和退出。完整正文同时交付给用户，不能仅给远端机器路径。
 
 新增自研operator入口操作同一连续会话；重复start不初始化，外部reset拒绝，pause保留真实RPC接受目标，stop不宣称电机失能。没有PolicyTaskServer infer动作回执，故采用Forge已有controller/remote_env路径；详细厂商代码依据留在私有材料。
 
