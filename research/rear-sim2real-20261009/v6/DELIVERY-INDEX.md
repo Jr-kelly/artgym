@@ -8,3 +8,5 @@
 - [私有完整交付](https://github.com/Jr-kelly/artgym-wuji-private-delivery)：原现场指南、私有适配代码、实际依赖包、原摆刀材料和完整私有部署包；需要该仓库访问权限。
 
 私有源码、内部资料、厂商包不进入公开ArtGym仓库。当前公开包仍为已验证的固定v6归档，其哈希与PACKAGE-CHECK一致；不因补交Git文档改写旧运行证据。
+
+上传回执：[GIT-DELIVERY.json](GIT-DELIVERY.json)；[公开下载校验](GIT-DOWNLOAD-VERIFICATION.json)。私有185个文件的远端Git blob与本地完全一致，仓库private状态已确认。

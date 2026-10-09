@@ -1,3 +1,10 @@
+# v6 文件成果已上传Git
+
+用户本轮要求已执行：完整公开脱敏FIRST-FIELD-SESSION.md、自研部署包/恢复脚本/校验文件和交付索引已上传现有rear分支；四文件匿名下载SHA核验。私有完整原指南/适配/依赖/摆刀材料/原始日志在Jr-kelly/artgym-wuji-private-delivery，185文件Git树逐项核验、private状态确认。上传回执见v6/GIT-DELIVERY.json。
+
+控制实现、504项pin与既有证据均未改动；没有新实验/训练/真机运动。后续按现场指南取得实际执行组件与安装标定/时钟事实，不能因为文件已上传就标硬件部署完成。
+
+<!-- V6_GIT_DELIVERY_HISTORY -->
 # 当前 v6：现场操作入口
 
 当前bundle-deploy-v11.json；先读v6/REPORT.md和VERIFICATION.json。沿用v5统一网络point执行与原完整控制器；新增一次配置launcher、等待开始、命名确认门、同连接暂停保持、重复start不初始化、拒绝外部reset、明确软件stop非失能。
