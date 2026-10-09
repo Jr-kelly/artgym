@@ -1,4 +1,4 @@
-"""Wuji SDK entry and continuous loaded session. G2 hardware integration is blocked.
+"""Wuji SDK continuous session with optional verified local CoRobot arm guard.
 Read-only paths need SDK Python/numpy only; policy/simulation imports stay lazy.
 """
 import argparse,json,time,sys,select,os,subprocess,hashlib,gc
@@ -27,7 +27,7 @@ def verified_field_speed(field,spec):
     return v
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('mode',choices=['sim','discover','read','check','enable','hold','response','probe','push','session','stop']);p.add_argument('--bundle',type=Path,default=Path('research/rear-sim2real-20261009/bundle-deploy-v8.json'));p.add_argument('--output',type=Path);p.add_argument('--sdk-python',type=Path,default=Path(os.environ.get('WUJI_SDK_PYTHON',sys.executable)));p.add_argument('--serial');p.add_argument('--fixture',action='store_true');p.add_argument('--motion-authorized',action='store_true');p.add_argument('--calibration',type=Path);p.add_argument('--pressure-response',type=Path);p.add_argument('--seconds',type=float,default=6);p.add_argument('--response-seconds',type=float,default=2);p.add_argument('--joint',type=int,default=17);p.add_argument('--step-rad',type=float,default=.01);p.add_argument('--stop-file',type=Path);p.add_argument('--external-jsonl',type=Path);p.add_argument('--field-config',type=Path);p.add_argument('--empty-hand-confirmed',action='store_true');a,extra=p.parse_known_args()
+    p=argparse.ArgumentParser();p.add_argument('mode',choices=['sim','discover','read','check','enable','hold','response','probe','push','session','stop']);p.add_argument('--bundle',type=Path,default=Path('research/rear-sim2real-20261009/bundle-deploy-v9.json'));p.add_argument('--output',type=Path);p.add_argument('--sdk-python',type=Path,default=Path(os.environ.get('WUJI_SDK_PYTHON',sys.executable)));p.add_argument('--serial');p.add_argument('--fixture',action='store_true');p.add_argument('--motion-authorized',action='store_true');p.add_argument('--calibration',type=Path);p.add_argument('--pressure-response',type=Path);p.add_argument('--seconds',type=float,default=6);p.add_argument('--response-seconds',type=float,default=2);p.add_argument('--joint',type=int,default=17);p.add_argument('--step-rad',type=float,default=.01);p.add_argument('--stop-file',type=Path);p.add_argument('--external-jsonl',type=Path);p.add_argument('--field-config',type=Path);p.add_argument('--empty-hand-confirmed',action='store_true');a,extra=p.parse_known_args()
     if a.mode=='sim':
         from scripts.run_wuji_rear_sim import parser,main as sim
         sim(parser().parse_args(['--bundle',str(a.bundle),'--output',str(a.output)]+extra));return
@@ -44,10 +44,10 @@ def main():
     if a.field_config:
         from scripts.wuji_rear_field import read_config,estimates
         field=read_config(a.field_config)
-    if loaded and not a.fixture:
+    if loaded and (not a.fixture or (field and field.get('g2',{}).get('backend')=='corobot-local-v1')):
         from scripts.wuji_rear_field import require_g2
         require_g2(field)
-    if a.mode=='enable' and not a.fixture and not (field and field['wuji']['position_mode_verified'] and field['wuji']['position_mode_source']):raise ValueError('Use official firmware tool to confirm position mode first; no mode/enable readback in SDK 1.8.0. Record source in field config.')
+    if (a.mode=='enable' or loaded) and not a.fixture and not (field and field['wuji']['position_mode_verified'] and field['wuji']['position_mode_source']):raise ValueError('Use official firmware tool to confirm position mode first; no mode/enable readback in SDK 1.8.0. Record source in field config.')
     bundle_bytes=a.bundle.read_bytes();bundle_sha=hashlib.sha256(bundle_bytes).hexdigest();spec=json.loads(bundle_bytes);pressure=a.mode in ['probe','push','session'];device_speed=None
     if loaded:
         if spec.get('format')!='wuji-rear-bundle-v1':raise ValueError('Unknown bundle')
@@ -65,9 +65,21 @@ def main():
     (a.output/'bundle-at-run.json').write_bytes(bundle_bytes)
     from scripts.wuji_rear_sdk_backend import SDKBackend
     from scripts.wuji_rear_session import RearSession,DeadlineLoop,ExternalForceTail,smooth
-    b=SDKBackend(a.bundle,a.sdk_python,a.serial,motion,a.fixture,a.calibration,a.output/'sdk-console.log',provisional_check=a.mode in ['check','stop','enable'])
+    g2=None;g2_last=None
+    if loaded and (not a.fixture or (field and field.get('g2',{}).get('backend')=='corobot-local-v1')):
+        from scripts.wuji_rear_g2_guard import G2Guard
+        g2=G2Guard(field,a.bundle.resolve(),a.output.resolve(),allow_replay=a.fixture)
+        try:
+            g2.prepare();g2_last=g2.sample()
+        except BaseException:
+            g2.close();raise
+    try:
+        b=SDKBackend(a.bundle,a.sdk_python,a.serial,motion,a.fixture,a.calibration,a.output/'sdk-console.log',provisional_check=a.mode in ['check','stop','enable'])
+    except BaseException:
+        if g2:g2.close()
+        raise
     controller=None;session=None;rows=[];stop_reason=None;stop_ack=None;analysis_process=None;events=[];gc_was_enabled=gc.isenabled()
-    b.header.update(bundle_sha256=bundle_sha,g2_actual_state=None,g2_status='blocked_no_verified_backend',initial_estimate=spec.get('field_initial_estimate',dict(source='saved_simulation_prior_unmeasured_on_hardware')),enabled_readback=None,control_mode_readback=None,device_verified_speed_rad_s=None if device_speed is None else device_speed.tolist())
+    b.header.update(bundle_sha256=bundle_sha,g2_actual_state=g2_last,g2_status='corobot_measured_guard' if g2 else 'absent_fixture_or_hand_only',initial_estimate=spec.get('field_initial_estimate',dict(source='saved_simulation_prior_unmeasured_on_hardware')),enabled_readback=None,control_mode_readback=None,device_verified_speed_rad_s=None if device_speed is None else device_speed.tolist())
     (a.output/'metadata.json').write_text(json.dumps(b.header,indent=2))
     f=(a.output/'control.jsonl').open('w');tf=(a.output/'timing.jsonl').open('w');start=time.monotonic();previous_full_ms=None;consecutive_late=0;overruns=0
     scheduler=DeadlineLoop();force_tail=ExternalForceTail(a.external_jsonl) if a.external_jsonl else None
@@ -75,9 +87,10 @@ def main():
         v=dict(host_monotonic_ns=time.monotonic_ns(),phase=name,state=None if session is None else session.state,**kw);events.append(v)
         with (a.output/'session-events.jsonl').open('a') as ef:ef.write(json.dumps(v)+'\n')
     def cycle(raw=None,phase='read'):
-        nonlocal consecutive_late,overruns,previous_full_ms
+        nonlocal consecutive_late,overruns,previous_full_ms,g2_last
         if a.stop_file and a.stop_file.exists():raise KeyboardInterrupt('Stop file before next command')
         scheduler.tick();begin_ns=time.monotonic_ns();begin=time.monotonic();q,telemetry=b.read();read_end_ns=time.monotonic_ns();sent=None;action=None;write_timing=None;compute_end_ns=read_end_ns
+        if g2:g2_last=g2.sample()
         if controller:controller.observe(q)
         if raw is not None:
             wanted=np.asarray(raw(q) if callable(raw) else raw)
@@ -99,7 +112,8 @@ def main():
             if controller:controller.commit(sent);action=controller.last_action.copy()
         force_sample=force_tail.sample() if force_tail else None;duration=time.monotonic()-begin
         row=dict(cycle_id=len(rows),host_cycle_start_ns=begin_ns,host_read_sample_ns=(telemetry['host_before_ns']+telemetry['host_after_ns'])//2,host_read_window_ns=[telemetry['host_before_ns'],telemetry['host_after_ns']],read_timing=b.last_read_timing.copy(),write_timing=write_timing,host_compute_ms=(compute_end_ns-read_end_ns)/1e6,previous_cycle_end_to_end_ms=previous_full_ms,sample_gap_s=scheduler.last_gap,elapsed_s=time.monotonic()-start,phase=phase,session_state=None if session is None else session.state,placement_generation=None if session is None else session.generation,g2_actual_state=None,g2_state_source='absent_blocked',pressure_state='active_proxy_not_force' if controller and controller.taken and controller.policy.pressure_adapter is not None else 'armed_inactive' if pressure else 'disabled',initial_estimate_source=b.header['initial_estimate'],source='sdk_fixture_no_device' if a.fixture else 'hardware_sdk',encoder_model_rad=q.tolist(),device_telemetry=telemetry,external_force=force_sample,raw_target_rad=None if raw is None else wanted.tolist(),issued_target_rad=None if sent is None else sent.tolist(),target_change_rad=None if sent is None else (sent-wanted).tolist(),executed_action=None if action is None else action.tolist(),loop_ms=duration*1000)
-        rows.append(row);f.write(json.dumps(row)+'\n');f.flush();control_flush_ns=time.monotonic_ns();timing=dict(cycle_id=row['cycle_id'],host_cycle_start_ns=begin_ns,host_control_flush_ns=control_flush_ns,end_to_end_ms=(control_flush_ns-begin_ns)/1e6,record_ms=(control_flush_ns-begin_ns)/1e6-duration*1000,scope='Includes read/compute/write/ack/control flush; next row and summary include timing write')
+        row['g2_actual_state']=g2_last;row['g2_state_source']='corobot_remote_feedback' if g2 else 'absent_fixture_or_hand_only'
+        rows.append(row);f.write(json.dumps(row)+'\n');f.flush();control_flush_ns=time.monotonic_ns();timing=dict(cycle_id=row['cycle_id'],host_cycle_start_ns=begin_ns,host_control_flush_ns=control_flush_ns,end_to_end_ms=(control_flush_ns-begin_ns)/1e6,record_ms=(control_flush_ns-begin_ns)/1e6-duration*1000,scope='Includes G2 guard, read/compute/write/ack/control flush; next row and summary include timing write')
         tf.write(json.dumps(timing)+'\n');tf.flush();row['end_to_end_ms']=(time.monotonic_ns()-begin_ns)/1e6;previous_full_ms=row['end_to_end_ms']
         consecutive_late=consecutive_late+1 if previous_full_ms>1000/30 else 0;overruns+=previous_full_ms>1000/30
         if consecutive_late>=3:raise TimeoutError('Three full cycles exceed 33.33ms; no frequency reduction')
@@ -209,5 +223,10 @@ def main():
         if analysis_process and analysis_process.poll() is None:analysis_process.terminate()
         if gc_was_enabled:gc.enable()
         f.close();tf.close();ms=np.array([r.get('end_to_end_ms',r['loop_ms']) for r in rows]);summary=dict(source='sdk_fixture_no_device' if a.fixture else 'hardware_sdk',real_robot_ran=not a.fixture and b.successful_writes>0,mode=a.mode,samples=len(rows),successful_writes=b.successful_writes,stop_reason=stop_reason,stop_ack=stop_ack,physical_disabled_state_confirmed=False,g2_actual_state=None,g2_integration='blocked',loop_ms=dict(p50=float(np.median(ms)) if len(ms) else None,p95=float(np.quantile(ms,.95)) if len(ms) else None,max=float(ms.max()) if len(ms) else None,over33ms=int(overruns)),controller=None if controller is None else controller.summary(),completion_scope='Hardware success requires G2 integration, ruler/video >20mm and hold; fixture is software only')
-        (a.output/'summary.json').write_text(json.dumps(summary,indent=2));b.close();print(json.dumps(summary),flush=True)
+        summary['g2_actual_state']=g2_last;summary['g2_integration']='corobot_guard' if g2 else 'absent_fixture_or_hand_only';summary['g2_physical_stop_confirmed']=False
+        (a.output/'summary.json').write_text(json.dumps(summary,indent=2))
+        try:b.close()
+        finally:
+            if g2:g2.close()
+        print(json.dumps(summary),flush=True)
 if __name__=='__main__':main()

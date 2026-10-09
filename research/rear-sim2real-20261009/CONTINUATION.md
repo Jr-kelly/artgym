@@ -1,3 +1,16 @@
+# 当前v4：制造商接口整合
+
+软件实际克隆/包核查/实现/离线协议与组合会话已推进。当前bundle-deploy-v9.json；先读v4/REPORT.md和STATE.json。私有制造商源码、包、详细现场指南、原始日志留在独立私有交付；公开源码只有自研IPC/会话接入和脱敏结果。
+
+选择现场同机Wuji SDK 30Hz＋独立CoRobot右臂轨迹/point保持；GDT真实PolicyServer做状态查询，reset拒绝，受载期间不进入PolicyTaskServer。require_g2不再无条件阻塞，而是校验桥接pin、实际包和现场事实，再由真实反馈建立到位/保持；没有假ready或空接口。
+
+21项最终协议合同、1175帧组合fixture（p95 8.865ms/max13.632ms/零超33ms）与24项旧合同、380帧0rad差异通过。没有新增物理仿真，因为手核心、发令和归一化不变；v3物理成功与延迟/刚度失败均保留。real_robot_ran=false；硬件状态/控制权/安装/保持过期必须现场核实。
+
+集中待取得实际G2/Wuji/固件与标定安装对应、工具只读capture与网络配置、Wuji USB独占和右臂单写/point过期语义。不能默认启动训练或矩阵；也不能把状态RPC服务称为GDT动作部署完成。
+
+<!-- V4_HISTORY -->
+最终分支回执 local bc0fe328aef4be8b8b4583a5a7ded6b4ff8a091a ↔ GitHub b5c08cdab4b1a459d0932a5d6e7e6b4286598340，tree be46156b75e7d83f079f6fdf3bd43981d98d5e2e完全一致。原生goal complete仅表示本轮可独立完成的软件／必要仿真／包／发布完成；hardware_deployment_complete=false，G2真接口待最少现场资料。
+
 v3离线交付及公开下载已完成：https://github.com/Jr-kelly/artgym/releases/tag/wuji-rear-sim2real-20261009-v3。科学源码 local bb968a1cdb531c7ef7987f815e75b73241639dfb ↔ GitHub 5fdb08d21a1af1ce63c0d311e10e5b9cbeb90375，tree ec764dd962f91b130df2347371a665bf987c0688一致。最终分支还保存发布回执；G2接口与所有真机结果仍阻塞/未测。
 
 # 当前接续：rear-sim2real v3（完整部署调用链）

@@ -2,7 +2,7 @@
 import argparse, csv, hashlib, json, os, subprocess, sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-BUNDLE='research/rear-sim2real-20261009/bundle-deploy-v8.json'
+BUNDLE='research/rear-sim2real-20261009/bundle-deploy-v9.json'
 def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 def read_config(path):
     c=json.loads(Path(path).read_text())
@@ -16,8 +16,8 @@ def resolved(c):
         if c.get(k):c[k]=os.path.abspath(os.path.expandvars(os.path.expanduser(c[k])))
     return c
 def require_g2(c):
-    # There is no manufacturer-matched backend in this release. No flag can fake one.
-    raise RuntimeError('G2 integration blocked: supplied G2_t2_crsB simulation asset and local G2A CoRobot application are insufficient to establish exact hardware SDK, named feedback, trajectory/hold and mounting. Complete read/check/offline work; provide exact model and working official controller example.')
+    from scripts.wuji_rear_g2_guard import bridge_config
+    return bridge_config(c)
 def estimates(spec,c):
     import numpy as np
     e=c.get('initial_estimate')
@@ -36,7 +36,9 @@ def estimates(spec,c):
     return spec
 
 def envcheck(c):
-    c=resolved(c);out=dict(root=str(ROOT),resolved=c,inference=None,sdk=None,dependencies=None,g2='blocked_missing_exact_hardware_interface',real_robot_ran=False)
+    c=resolved(c);out=dict(root=str(ROOT),resolved=c,inference=None,sdk=None,dependencies=None,g2='field_bridge_or_facts_not_configured',real_robot_ran=False)
+    if c.get('g2',{}).get('backend')=='corobot-local-v1':
+        require_g2(c);out['g2']='private_bridge_pinned_awaiting_actual_connection_and_field_evidence'
     for key,code in [('sdk',"import json,sys,wujihandpy,numpy;from scripts.wuji_rear_sdk_worker import usb_inventory;print(json.dumps(dict(python=sys.version,executable=sys.executable,sdk=wujihandpy.__version__,numpy=numpy.__version__,usb=usb_inventory(),mode_readback=hasattr(wujihandpy.Hand,'read_joint_control_mode'),enable_readback=hasattr(wujihandpy.Hand,'read_joint_enabled'))))"),('inference',"import isaacgym;import json,sys,torch,numpy,scipy,hydra,omegaconf,gym;from scripts.wuji_rear_controller import RearController;print(json.dumps(dict(python=sys.version,executable=sys.executable,torch=torch.__version__,cuda=torch.version.cuda,gpu=torch.cuda.is_available(),numpy=numpy.__version__,scipy=scipy.__version__,isaacgym=isaacgym.__file__)))")]:
         exe=c.get(key+'_python')
         if not exe:out[key]=dict(ok=False,error='Set '+key+'_python in field config');continue

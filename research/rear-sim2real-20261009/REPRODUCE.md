@@ -1,3 +1,7 @@
+# v4续接
+
+当前bundle-deploy-v9.json，控制核心/权重不变。公开部署包与私有制造商桥接包分开；私有协议源码不进入公开归档。包工具使用 `--bundle research/rear-sim2real-20261009/bundle-deploy-v9.json --revision v4`；恢复工具使用 `--bundle-path research/rear-sim2real-20261009/bundle-deploy-v9.json`。复用v3现场环境和旧权重，无需依次覆盖旧版本、重训或重做矩阵。当前交付只证明协议软件/离线会话，现场仍有明确待验项。
+
 # 当前v3部署恢复与必要验证
 
 当前运行配置 `bundle-deploy-v8.json`，历史v6/v7及其证据保留在对应Git提交／旧Release；改过的源码不能使用旧pin。未训练、未重跑矩阵。实机G2接口仍阻塞，不能宣称整套可直接上机。
