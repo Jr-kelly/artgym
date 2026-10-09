@@ -1,3 +1,5 @@
+v4自研源码已同步：local 0e3912d5afa4017aecad17b4660403cf33a26780 ↔ GitHub 6de142585c08a4254f23d62cde14612afed3c4df，相同tree 78e63a8cdaca44644e473960da339813eb489606；旧两分支未改。私有交付包与现场指南留私有目录，未公开。完成范围是独立软件准备，hardware_deployment_complete=false；后续仅具体现场事实，不能默认重训。
+
 # 当前v4：制造商接口整合
 
 软件实际克隆/包核查/实现/离线协议与组合会话已推进。当前bundle-deploy-v9.json；先读v4/REPORT.md和STATE.json。私有制造商源码、包、详细现场指南、原始日志留在独立私有交付；公开源码只有自研IPC/会话接入和脱敏结果。
